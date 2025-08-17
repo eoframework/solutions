@@ -1,0 +1,16 @@
+---
+# Sample Ansible Playbook
+# Replace with actual configuration tasks for your solution
+
+- name: Sample Solution Deployment
+  hosts: all
+  become: true
+  vars:
+    solution_name: "sample-solution"
+    
+  tasks:
+    - name: Sample task - replace with actual tasks
+      debug:
+        msg: "Deploying {{ solution_name }}"
+    
+    # Add your configuration tasks here

@@ -1,0 +1,82 @@
+name: Bug Report
+description: Report an issue with an existing template
+title: "[BUG] [Provider/Category/Solution] Brief description"
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for reporting a bug! Please provide detailed information to help us resolve the issue.
+
+  - type: input
+    id: template_path
+    attributes:
+      label: Template Path
+      description: Which template has the issue?
+      placeholder: e.g., aws/cloud/ec2-compute
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Bug Description
+      description: Clear description of what the bug is
+      placeholder: Describe the issue...
+    validations:
+      required: true
+
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Steps to Reproduce
+      description: How can we reproduce this issue?
+      placeholder: |
+        1. Step one
+        2. Step two
+        3. Step three
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected Behavior
+      description: What should happen instead?
+      placeholder: Describe the expected behavior...
+    validations:
+      required: true
+
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment
+      description: Details about your environment
+      placeholder: |
+        - OS: [e.g. Windows 10, Ubuntu 20.04]
+        - Tool versions: [e.g. Terraform 1.0, Ansible 2.9]
+        - Provider CLI: [e.g. AWS CLI 2.0]
+    validations:
+      required: false
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: Error Logs
+      description: Include any relevant error messages or logs
+      placeholder: Paste error logs here...
+    validations:
+      required: false
+
+  - type: dropdown
+    id: severity
+    attributes:
+      label: Severity
+      description: How severe is this bug?
+      options:
+        - Critical (blocks deployment)
+        - High (major functionality broken)
+        - Medium (minor functionality broken)
+        - Low (cosmetic or documentation)
+    validations:
+      required: true

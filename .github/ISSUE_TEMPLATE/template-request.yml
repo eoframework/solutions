@@ -1,0 +1,99 @@
+name: New Template Request
+description: Request a new solution template
+title: "[REQUEST] New Template: [Provider] [Category] [Solution]"
+labels: ["enhancement", "new-template"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for requesting a new template! Please provide as much detail as possible.
+
+  - type: dropdown
+    id: provider
+    attributes:
+      label: Provider
+      description: Which technology provider is this for?
+      options:
+        - AWS
+        - Azure
+        - Google Cloud
+        - Microsoft
+        - IBM
+        - HashiCorp
+        - GitHub
+        - NVIDIA
+        - Dell
+        - Juniper
+        - Cisco
+        - Other (specify in description)
+    validations:
+      required: true
+
+  - type: dropdown
+    id: category
+    attributes:
+      label: Category
+      description: Which category does this solution belong to?
+      options:
+        - Cloud
+        - Network
+        - Cyber Security
+        - DevOps
+        - AI
+    validations:
+      required: true
+
+  - type: input
+    id: solution
+    attributes:
+      label: Solution Name
+      description: What is the name of the solution?
+      placeholder: e.g., EC2 Compute, IAM Identity
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Solution Description
+      description: Describe what this solution provides and its business value
+      placeholder: Detailed description of the solution...
+    validations:
+      required: true
+
+  - type: textarea
+    id: use_cases
+    attributes:
+      label: Use Cases
+      description: What are the primary use cases for this solution?
+      placeholder: List the main use cases...
+    validations:
+      required: true
+
+  - type: textarea
+    id: requirements
+    attributes:
+      label: Technical Requirements
+      description: What are the technical prerequisites and requirements?
+      placeholder: List technical requirements...
+    validations:
+      required: true
+
+  - type: input
+    id: priority
+    attributes:
+      label: Priority Level
+      description: How urgent is this request?
+      placeholder: High, Medium, Low
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: contribution
+    attributes:
+      label: Contribution
+      description: Are you willing to contribute to this template?
+      options:
+        - label: I can help create this template
+        - label: I can provide technical expertise
+        - label: I can review and test the template

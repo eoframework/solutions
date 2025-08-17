@@ -1,0 +1,55 @@
+name: License Validation
+on:
+  pull_request:
+    paths: ['**/*.py', '**/*.sh', '**/*.ps1', '**/*.tf', '**/*.yml', '**/*.yaml']
+  push:
+    branches: [main]
+
+jobs:
+  check-license:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Check license headers
+        run: |
+          # Check for BSL 1.1 license headers in code files
+          missing_license=()
+          
+          while IFS= read -r -d '' file; do
+            if [[ "$file" == *"_sample-template"* ]]; then
+              continue  # Skip sample template files
+            fi
+            
+            case "$file" in
+              *.py|*.sh|*.ps1|*.tf)
+                if ! head -20 "$file" | grep -q "Business Source License"; then
+                  missing_license+=("$file")
+                fi
+                ;;
+            esac
+          done < <(find . -type f \( -name "*.py" -o -name "*.sh" -o -name "*.ps1" -o -name "*.tf" \) -print0)
+          
+          if [ ${#missing_license[@]} -gt 0 ]; then
+            echo "❌ Files missing BSL 1.1 license header:"
+            printf '%s\n' "${missing_license[@]}"
+            echo "Please add the BSL 1.1 license header to these files."
+            exit 1
+          else
+            echo "✅ All code files have proper license headers"
+          fi
+      
+      - name: Validate LICENSE file
+        run: |
+          if [ ! -f LICENSE ]; then
+            echo "❌ LICENSE file not found"
+            exit 1
+          fi
+          
+          if ! grep -q "Business Source License 1.1" LICENSE; then
+            echo "❌ LICENSE file does not contain BSL 1.1 license"
+            exit 1
+          fi
+          
+          echo "✅ LICENSE file is valid"

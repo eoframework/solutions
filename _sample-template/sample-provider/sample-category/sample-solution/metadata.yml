@@ -1,0 +1,82 @@
+# EO Framework Template Metadata
+# Required fields for template registration
+
+provider: "Sample Provider"
+category: "Sample Category"
+solution_name: "Sample Solution"
+description: "Brief description of what this solution provides"
+version: "1.0.0"
+status: "Active"  # Active, Draft, Deprecated
+
+# Maintainer information
+maintainers:
+  - name: "Primary Maintainer"
+    email: "maintainer@company.com"
+    role: "Solution Architect"
+  - name: "Secondary Maintainer"
+    email: "backup@company.com"
+    role: "Technical Lead"
+
+# Classification tags
+tags:
+  - "infrastructure"
+  - "automation"
+  - "enterprise"
+
+# Technical requirements
+requirements:
+  prerequisites:
+    - "Access to provider console/CLI"
+    - "Administrative privileges"
+    - "Network connectivity"
+  tools:
+    - "Terraform >= 1.0"
+    - "Ansible >= 2.9"
+    - "Provider CLI tools"
+  skills:
+    - "Infrastructure management"
+    - "Automation experience"
+    - "Provider platform knowledge"
+
+# Business context
+business_value:
+  primary_benefits:
+    - "Reduced deployment time"
+    - "Standardized configurations"
+    - "Improved reliability"
+  target_audience:
+    - "Solution architects"
+    - "Infrastructure teams"
+    - "DevOps engineers"
+  use_cases:
+    - "Greenfield deployments"
+    - "Standardization initiatives"
+    - "Migration projects"
+
+# Template structure
+template_structure:
+  presales:
+    - "Requirements gathering tools"
+    - "Solution design templates"
+    - "Business case materials"
+    - "Presentation materials"
+  delivery:
+    - "Implementation guides"
+    - "Automation scripts"
+    - "Testing procedures"
+    - "Training materials"
+
+# Compliance and licensing
+compliance:
+  frameworks:
+    - "SOC 2"
+    - "ISO 27001"
+  data_classification: "Internal"
+  export_control: "None"
+
+# Change tracking
+changelog:
+  - version: "1.0.0"
+    date: "2024-01-01"
+    changes: "Initial template creation"
+    author: "Template Team"

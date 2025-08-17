@@ -1,0 +1,28 @@
+# Global reviewers
+* @eoframework/core-maintainers
+
+# Provider-specific reviewers
+/providers/aws/ @eoframework/provider-aws @eoframework/core-maintainers
+/providers/azure/ @eoframework/provider-azure @eoframework/core-maintainers  
+/providers/google/ @eoframework/provider-google @eoframework/core-maintainers
+/providers/microsoft/ @eoframework/provider-microsoft @eoframework/core-maintainers
+/providers/ibm/ @eoframework/provider-ibm @eoframework/core-maintainers
+/providers/hashicorp/ @eoframework/provider-hashicorp @eoframework/core-maintainers
+/providers/github/ @eoframework/provider-github @eoframework/core-maintainers
+/providers/nvidia/ @eoframework/provider-nvidia @eoframework/core-maintainers
+/providers/dell/ @eoframework/provider-dell @eoframework/core-maintainers
+/providers/juniper/ @eoframework/provider-juniper @eoframework/core-maintainers
+/providers/cisco/ @eoframework/provider-cisco @eoframework/core-maintainers
+
+# Category-specific reviewers (cross-provider)
+/providers/**/cloud/ @eoframework/category-cloud @eoframework/core-maintainers
+/providers/**/network/ @eoframework/category-network @eoframework/core-maintainers
+/providers/**/cyber-security/ @eoframework/category-cyber-security @eoframework/core-maintainers
+/providers/**/devops/ @eoframework/category-devops @eoframework/core-maintainers
+/providers/**/ai/ @eoframework/category-ai @eoframework/core-maintainers
+
+# Documentation and governance
+/docs/ @eoframework/core-maintainers
+/.github/ @eoframework/core-maintainers
+/scripts/ @eoframework/core-maintainers
+/LICENSE @eoframework/core-maintainers @eoframework/legal-team

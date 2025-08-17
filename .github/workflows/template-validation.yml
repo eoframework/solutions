@@ -1,0 +1,50 @@
+name: Template Validation
+on:
+  pull_request:
+    paths: ['providers/**/presales/**', 'providers/**/delivery/**', 'providers/**/metadata.yml', 'providers/**/README.md', '_sample-template/**']
+  push:
+    branches: [main]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+      
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pyyaml
+      
+      - name: Validate template structure
+        run: |
+          python scripts/validate-template.py --all
+      
+      - name: Check for secrets
+        run: |
+          # Basic secret scanning
+          if grep -r -i "password\|secret\|key\|token" . --exclude-dir=.git --exclude="*.md" --exclude="*.yml" | grep -v "# Sample\|# Add your\|# Replace"; then
+            echo "❌ Potential secrets found in templates"
+            exit 1
+          fi
+      
+      - name: Generate catalog
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        run: |
+          python scripts/generate-catalog.py
+          python scripts/sync-csv.py
+      
+      - name: Commit updated catalog
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add CATALOG.yml templates.csv
+          git diff --staged --quiet || git commit -m "Update catalog and CSV [skip ci]"
+          git push

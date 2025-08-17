@@ -1,0 +1,99 @@
+name: Auto Review Assignment
+on:
+  pull_request:
+    types: [opened, synchronize]
+
+jobs:
+  auto-assign:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Add provider labels
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const { context } = require('@actions/github');
+            const fs = require('fs');
+            
+            // Get changed files
+            const { data: files } = await github.rest.pulls.listFiles({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pull_number: context.issue.number,
+            });
+            
+            const labels = new Set();
+            
+            files.forEach(file => {
+              const path = file.filename;
+              
+              // Add provider labels
+              if (path.startsWith('providers/aws/')) labels.add('provider:aws');
+              if (path.startsWith('providers/azure/')) labels.add('provider:azure');
+              if (path.startsWith('providers/google/')) labels.add('provider:google');
+              if (path.startsWith('providers/microsoft/')) labels.add('provider:microsoft');
+              if (path.startsWith('providers/ibm/')) labels.add('provider:ibm');
+              if (path.startsWith('providers/hashicorp/')) labels.add('provider:hashicorp');
+              if (path.startsWith('providers/github/')) labels.add('provider:github');
+              if (path.startsWith('providers/nvidia/')) labels.add('provider:nvidia');
+              if (path.startsWith('providers/dell/')) labels.add('provider:dell');
+              if (path.startsWith('providers/juniper/')) labels.add('provider:juniper');
+              if (path.startsWith('providers/cisco/')) labels.add('provider:cisco');
+              
+              // Add category labels
+              if (path.includes('/cloud/')) labels.add('category:cloud');
+              if (path.includes('/network/')) labels.add('category:network');
+              if (path.includes('/cyber-security/')) labels.add('category:cyber-security');
+              if (path.includes('/devops/')) labels.add('category:devops');
+              if (path.includes('/ai/')) labels.add('category:ai');
+              
+              // Add type labels
+              if (path.includes('/presales/')) labels.add('type:presales');
+              if (path.includes('/delivery/')) labels.add('type:delivery');
+              if (path.includes('/scripts/')) labels.add('type:automation');
+              if (path.endsWith('metadata.yml')) labels.add('type:metadata');
+              if (path.endsWith('README.md')) labels.add('type:documentation');
+            });
+            
+            if (labels.size > 0) {
+              await github.rest.issues.addLabels({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: context.issue.number,
+                labels: Array.from(labels),
+              });
+            }
+      
+      - name: Request reviews
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const { context } = require('@actions/github');
+            
+            // Get changed files to determine reviewers
+            const { data: files } = await github.rest.pulls.listFiles({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pull_number: context.issue.number,
+            });
+            
+            const reviewers = new Set(['eoframework-team']);
+            
+            // Add specific reviewers based on changes
+            files.forEach(file => {
+              const path = file.filename;
+              
+              // Provider-specific reviewers
+              if (path.startsWith('providers/aws/')) reviewers.add('aws-reviewers');
+              if (path.startsWith('providers/azure/')) reviewers.add('azure-reviewers');
+              if (path.startsWith('providers/google/')) reviewers.add('google-reviewers');
+              
+              // Category-specific reviewers
+              if (path.includes('/cyber-security/')) reviewers.add('security-reviewers');
+              if (path.includes('/ai/')) reviewers.add('ai-reviewers');
+            });
+            
+            // Note: In a real implementation, you would use actual GitHub usernames
+            // This is a template showing the structure

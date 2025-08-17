@@ -1,0 +1,135 @@
+generated_at: '2025-08-17T14:27:49.099067'
+providers:
+  aws:
+    categories:
+      ai:
+        solutions: {}
+      cloud:
+        solutions: {}
+      cyber-security:
+        solutions: {}
+      devops:
+        solutions: {}
+      network:
+        solutions: {}
+  azure:
+    categories:
+      ai:
+        solutions: {}
+      cloud:
+        solutions: {}
+      cyber-security:
+        solutions: {}
+      devops:
+        solutions: {}
+      network:
+        solutions: {}
+  cisco:
+    categories:
+      ai:
+        solutions: {}
+      cloud:
+        solutions: {}
+      cyber-security:
+        solutions: {}
+      devops:
+        solutions: {}
+      network:
+        solutions: {}
+  dell:
+    categories:
+      ai:
+        solutions: {}
+      cloud:
+        solutions: {}
+      cyber-security:
+        solutions: {}
+      devops:
+        solutions: {}
+      network:
+        solutions: {}
+  github:
+    categories:
+      ai:
+        solutions: {}
+      cloud:
+        solutions: {}
+      cyber-security:
+        solutions: {}
+      devops:
+        solutions: {}
+      network:
+        solutions: {}
+  google:
+    categories:
+      ai:
+        solutions: {}
+      cloud:
+        solutions: {}
+      cyber-security:
+        solutions: {}
+      devops:
+        solutions: {}
+      network:
+        solutions: {}
+  hashicorp:
+    categories:
+      ai:
+        solutions: {}
+      cloud:
+        solutions: {}
+      cyber-security:
+        solutions: {}
+      devops:
+        solutions: {}
+      network:
+        solutions: {}
+  ibm:
+    categories:
+      ai:
+        solutions: {}
+      cloud:
+        solutions: {}
+      cyber-security:
+        solutions: {}
+      devops:
+        solutions: {}
+      network:
+        solutions: {}
+  juniper:
+    categories:
+      ai:
+        solutions: {}
+      cloud:
+        solutions: {}
+      cyber-security:
+        solutions: {}
+      devops:
+        solutions: {}
+      network:
+        solutions: {}
+  microsoft:
+    categories:
+      ai:
+        solutions: {}
+      cloud:
+        solutions: {}
+      cyber-security:
+        solutions: {}
+      devops:
+        solutions: {}
+      network:
+        solutions: {}
+  nvidia:
+    categories:
+      ai:
+        solutions: {}
+      cloud:
+        solutions: {}
+      cyber-security:
+        solutions: {}
+      devops:
+        solutions: {}
+      network:
+        solutions: {}
+version: '1.0'
