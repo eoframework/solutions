@@ -1,6 +1,6 @@
-# EO Framework Templates
+# EO Framework™ Templates
 
-Welcome to the EO Framework Templates repository - a comprehensive collection of pre-sales and delivery templates for enterprise technology solutions.
+Welcome to the EO Framework™ Templates repository - a comprehensive collection of pre-sales and delivery templates for enterprise technology solutions.
 
 ## Overview
 
@@ -82,7 +82,7 @@ This repository is licensed under the Business Source License 1.1 (BSL 1.1). See
 - 📖 Documentation: [docs/](docs/)
 - 🐛 Issues: [GitHub Issues](https://github.com/eoframework/templates/issues)
 - 💬 Discussions: [GitHub Discussions](https://github.com/eoframework/templates/discussions)
-- 🌐 Website: [EO Framework](https://eoframework.github.io)
+- 🌐 Website: [EO Framework™](https://eoframework.github.io)
 
 ## Community
 
@@ -90,4 +90,4 @@ Join our community and help build the future of exceptional outcomes through col
 
 ---
 
-© 2025 EO Framework. All rights reserved.
+© 2025 EO Framework™. All rights reserved.

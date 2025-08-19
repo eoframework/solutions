@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-EO Framework Catalog Generator
+EO Framework™ Catalog Generator
 Generates CATALOG.yml from all templates in the repository.
 """
 

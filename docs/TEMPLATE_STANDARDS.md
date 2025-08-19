@@ -1,4 +1,4 @@
-# EO Framework Template Standards
+# EO Framework™ Template Standards
 
 This document defines the required standards for all templates in the repository.
 

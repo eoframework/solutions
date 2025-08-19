@@ -47,7 +47,7 @@ This document outlines the review process for all template submissions.
 - Includes comprehensive materials
 
 ### 4. Core Team Approval (Required)
-**Final review by EO Framework maintainers:**
+**Final review by EO Framework™ maintainers:**
 - Framework alignment assessment
 - Community impact evaluation
 - Strategic fit analysis
@@ -55,7 +55,7 @@ This document outlines the review process for all template submissions.
 - Publication approval
 
 **Review criteria:**
-- Aligns with EO Framework principles
+- Aligns with EO Framework™ principles
 - Adds value to community
 - Meets quality standards
 - Ready for production use

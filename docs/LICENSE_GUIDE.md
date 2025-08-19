@@ -1,6 +1,6 @@
 # BSL 1.1 License Guide
 
-This guide explains the Business Source License 1.1 (BSL 1.1) used for the EO Framework Templates repository.
+This guide explains the Business Source License 1.1 (BSL 1.1) used for the EO Framework™ Templates repository.
 
 ## Overview
 
@@ -29,7 +29,7 @@ The Business Source License 1.1 is a source-available license that provides spec
 
 ## Additional Use Grant
 
-The EO Framework Templates repository includes the following Additional Use Grant:
+The EO Framework™ Templates repository includes the following Additional Use Grant:
 
 ```
 Additional Use Grant: You may use the Licensed Work in production 
@@ -60,7 +60,7 @@ All template files must include the BSL 1.1 header:
 
 ```
 /*
- * Copyright (c) 2024 EO Framework
+ * Copyright (c) 2024 EO Framework™
  *
  * Licensed under the Business Source License 1.1 (the "License");
  * you may not use this file except in compliance with the License.
@@ -174,4 +174,4 @@ After the Change Date (4 years from publication):
 - Training materials and resources
 - Professional services for large organizations
 
-This license balances community access with sustainable development, ensuring the EO Framework Templates remain valuable and available to the community while supporting continued innovation.
+This license balances community access with sustainable development, ensuring the EO Framework™ Templates remain valuable and available to the community while supporting continued innovation.

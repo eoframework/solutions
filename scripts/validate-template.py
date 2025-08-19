@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-EO Framework Template Validator
+EO Framework™ Template Validator
 Validates template structure and metadata compliance.
 """
 
@@ -172,7 +172,7 @@ class TemplateValidator:
         return success_count == total_count
 
 def main():
-    parser = argparse.ArgumentParser(description='Validate EO Framework templates')
+    parser = argparse.ArgumentParser(description='Validate EO Framework™ templates')
     parser.add_argument('--path', help='Specific template path to validate')
     parser.add_argument('--all', action='store_true', help='Validate all templates')
     

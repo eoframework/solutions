@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-EO Framework CSV Sync
+EO Framework™ CSV Sync
 Syncs repository templates with website CSV format.
 """
 

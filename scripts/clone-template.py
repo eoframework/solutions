@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-EO Framework Template Cloner
+EO Framework™ Template Cloner
 Creates a new solution template from the sample template.
 """
 
@@ -106,7 +106,7 @@ def clone_template(provider, category, solution, author_name, author_email):
     return target_path
 
 def main():
-    parser = argparse.ArgumentParser(description='Create a new EO Framework solution template')
+    parser = argparse.ArgumentParser(description='Create a new EO Framework™ solution template')
     parser.add_argument('--provider', required=True, help='Provider name (e.g., AWS, Microsoft)')
     parser.add_argument('--category', required=True, help='Category name (e.g., Cloud, DevOps)')
     parser.add_argument('--solution', required=True, help='Solution name (e.g., EC2 Compute)')

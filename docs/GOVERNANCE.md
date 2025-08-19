@@ -1,12 +1,12 @@
-# EO Framework Templates Governance
+# EO Framework™ Templates Governance
 
-This document outlines the governance structure and decision-making processes for the EO Framework Templates repository.
+This document outlines the governance structure and decision-making processes for the EO Framework™ Templates repository.
 
 ## Governance Structure
 
 ### Steering Committee
 **Role:** Strategic direction and final authority
-**Members:** EO Framework leadership team
+**Members:** EO Framework™ leadership team
 **Responsibilities:**
 - Repository vision and strategy
 - Major policy decisions
@@ -16,7 +16,7 @@ This document outlines the governance structure and decision-making processes fo
 
 ### Core Maintainers Team
 **Role:** Repository operations and quality assurance
-**Members:** Technical leads from the EO Framework team
+**Members:** Technical leads from the EO Framework™ team
 **Responsibilities:**
 - Repository maintenance
 - Quality standards enforcement

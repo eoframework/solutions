@@ -1,6 +1,6 @@
 # Sample Solution Template
 
-This is a template for creating new EO Framework solutions. Replace all placeholder content with your actual solution details.
+This is a template for creating new EO Framework™ solutions. Replace all placeholder content with your actual solution details.
 
 ## Solution Overview
 Brief description of what this solution provides and the business value it delivers.

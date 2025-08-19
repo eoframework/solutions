@@ -1,6 +1,6 @@
-# Contributing to EO Framework Templates
+# Contributing to EO Framework™ Templates
 
-Thank you for your interest in contributing to the EO Framework Templates repository!
+Thank you for your interest in contributing to the EO Framework™ Templates repository!
 
 ## Getting Started
 
@@ -15,7 +15,7 @@ Thank you for your interest in contributing to the EO Framework Templates reposi
 ## Prerequisites
 
 - Familiarity with the provider technology
-- Understanding of the EO Framework methodology
+- Understanding of the EO Framework™ methodology
 - Access to test the solution in a non-production environment
 
 ## Contribution Types
