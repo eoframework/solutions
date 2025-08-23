@@ -1,0 +1,413 @@
+---
+# GitHub Actions Enterprise CI/CD Platform Deployment Playbook
+# This Ansible playbook automates the deployment and configuration of
+# the GitHub Actions Enterprise CI/CD Platform
+
+- name: Deploy GitHub Actions Enterprise CI/CD Platform
+  hosts: localhost
+  gather_facts: yes
+  vars:
+    project_name: "github-actions-enterprise"
+    environment: "{{ env | default('dev') }}"
+    aws_region: "{{ region | default('us-east-1') }}"
+    github_organization: "{{ org_name }}"
+    
+    # GitHub Actions configuration
+    github_actions_config:
+      enabled: true
+      allowed_actions: "selected"
+      github_owned_allowed: true
+      verified_allowed: true
+      patterns_allowed:
+        - "actions/*"
+        - "azure/*"
+        - "aws-actions/*"
+    
+    # Runner configuration
+    runner_config:
+      min_capacity: "{{ min_runners | default(2) }}"
+      max_capacity: "{{ max_runners | default(10) }}"
+      desired_capacity: "{{ desired_runners | default(3) }}"
+      instance_type: "{{ runner_instance_type | default('t3.large') }}"
+      ami_id: "{{ runner_ami | default('ami-0abcdef1234567890') }}"
+    
+    # VPC configuration
+    vpc_config:
+      cidr_block: "10.0.0.0/16"
+      enable_dns_hostnames: true
+      enable_dns_support: true
+    
+    # Subnet configuration
+    subnet_config:
+      public_subnets:
+        - cidr: "10.0.1.0/24"
+          az: "{{ aws_region }}a"
+        - cidr: "10.0.2.0/24"
+          az: "{{ aws_region }}b"
+      private_subnets:
+        - cidr: "10.0.10.0/24"
+          az: "{{ aws_region }}a"
+        - cidr: "10.0.20.0/24"
+          az: "{{ aws_region }}b"
+
+  tasks:
+    - name: Check required variables
+      assert:
+        that:
+          - github_organization is defined
+          - github_token is defined
+        fail_msg: "Required variables github_organization and github_token must be defined"
+
+    - name: Install required packages
+      package:
+        name:
+          - python3-pip
+          - git
+          - curl
+          - awscli
+        state: present
+      become: yes
+
+    - name: Install Python dependencies
+      pip:
+        name:
+          - boto3
+          - botocore
+          - PyGithub
+          - requests
+          - pyyaml
+        state: present
+
+    - name: Install GitHub CLI
+      shell: |
+        curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | sudo dd of=/usr/share/keyrings/githubcli-archive-keyring.gpg
+        echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | sudo tee /etc/apt/sources.list.d/github-cli.list > /dev/null
+        sudo apt update && sudo apt install gh -y
+      args:
+        creates: /usr/bin/gh
+
+    - name: Install Terraform
+      unarchive:
+        src: "https://releases.hashicorp.com/terraform/1.6.0/terraform_1.6.0_linux_amd64.zip"
+        dest: /usr/local/bin
+        remote_src: yes
+        mode: '0755'
+        creates: /usr/local/bin/terraform
+      become: yes
+
+    - name: Create project directory
+      file:
+        path: "/opt/{{ project_name }}"
+        state: directory
+        mode: '0755'
+      become: yes
+
+    - name: Copy Terraform configuration
+      template:
+        src: "{{ item.src }}"
+        dest: "/opt/{{ project_name }}/{{ item.dest }}"
+        mode: '0644'
+      with_items:
+        - { src: "terraform/main.tf.j2", dest: "main.tf" }
+        - { src: "terraform/variables.tf.j2", dest: "variables.tf" }
+        - { src: "terraform/outputs.tf.j2", dest: "outputs.tf" }
+        - { src: "terraform/terraform.tfvars.j2", dest: "terraform.tfvars" }
+      become: yes
+
+    - name: Initialize Terraform
+      shell: terraform init
+      args:
+        chdir: "/opt/{{ project_name }}"
+      environment:
+        AWS_REGION: "{{ aws_region }}"
+
+    - name: Terraform plan
+      shell: terraform plan -out=tfplan
+      args:
+        chdir: "/opt/{{ project_name }}"
+      environment:
+        AWS_REGION: "{{ aws_region }}"
+      register: terraform_plan
+
+    - name: Display Terraform plan
+      debug:
+        var: terraform_plan.stdout_lines
+
+    - name: Apply Terraform configuration
+      shell: terraform apply -auto-approve tfplan
+      args:
+        chdir: "/opt/{{ project_name }}"
+      environment:
+        AWS_REGION: "{{ aws_region }}"
+      register: terraform_apply
+      when: auto_approve | default(false) | bool
+
+    - name: Get Terraform outputs
+      shell: terraform output -json
+      args:
+        chdir: "/opt/{{ project_name }}"
+      register: terraform_outputs
+      when: terraform_apply is succeeded
+
+    - name: Parse Terraform outputs
+      set_fact:
+        tf_outputs: "{{ terraform_outputs.stdout | from_json }}"
+      when: terraform_outputs is defined
+
+    - name: Configure GitHub organization
+      uri:
+        url: "https://api.github.com/orgs/{{ github_organization }}/actions/permissions"
+        method: PUT
+        headers:
+          Authorization: "token {{ github_token }}"
+          Accept: "application/vnd.github.v3+json"
+        body_format: json
+        body:
+          enabled: "{{ github_actions_config.enabled }}"
+          allowed_actions: "{{ github_actions_config.allowed_actions }}"
+          github_owned_allowed: "{{ github_actions_config.github_owned_allowed }}"
+          verified_allowed: "{{ github_actions_config.verified_allowed }}"
+        status_code: 204
+
+    - name: Configure workflow permissions
+      uri:
+        url: "https://api.github.com/orgs/{{ github_organization }}/actions/permissions/workflow"
+        method: PUT
+        headers:
+          Authorization: "token {{ github_token }}"
+          Accept: "application/vnd.github.v3+json"
+        body_format: json
+        body:
+          default_workflow_permissions: "read"
+          can_approve_pull_request_reviews: false
+        status_code: 204
+
+    - name: Create runner groups
+      uri:
+        url: "https://api.github.com/orgs/{{ github_organization }}/actions/runner-groups"
+        method: POST
+        headers:
+          Authorization: "token {{ github_token }}"
+          Accept: "application/vnd.github.v3+json"
+        body_format: json
+        body:
+          name: "{{ item.name }}"
+          visibility: "{{ item.visibility | default('all') }}"
+          allows_public_repositories: "{{ item.allows_public_repositories | default(false) }}"
+        status_code: 201
+      with_items:
+        - name: "default-runners"
+        - name: "production-runners"
+          visibility: "selected"
+        - name: "security-runners"
+          visibility: "selected"
+      ignore_errors: yes  # Groups might already exist
+
+    - name: Wait for infrastructure to be ready
+      pause:
+        minutes: 5
+      when: terraform_apply is succeeded
+
+    - name: Get runner registration token
+      uri:
+        url: "https://api.github.com/orgs/{{ github_organization }}/actions/runners/registration-token"
+        method: POST
+        headers:
+          Authorization: "token {{ github_token }}"
+          Accept: "application/vnd.github.v3+json"
+        status_code: 201
+      register: runner_token_response
+
+    - name: Set runner token fact
+      set_fact:
+        runner_token: "{{ runner_token_response.json.token }}"
+
+    - name: Create runner configuration script
+      template:
+        src: scripts/configure-runner.sh.j2
+        dest: "/opt/{{ project_name }}/configure-runner.sh"
+        mode: '0755'
+      become: yes
+
+    - name: Update Auto Scaling Group user data
+      shell: |
+        aws autoscaling update-auto-scaling-group \
+          --auto-scaling-group-name "{{ project_name }}-runners" \
+          --launch-template LaunchTemplateName="{{ project_name }}-runner-template",Version='$Latest'
+      environment:
+        AWS_REGION: "{{ aws_region }}"
+      when: tf_outputs is defined
+
+    - name: Create organization workflow templates repository
+      uri:
+        url: "https://api.github.com/orgs/{{ github_organization }}/repos"
+        method: POST
+        headers:
+          Authorization: "token {{ github_token }}"
+          Accept: "application/vnd.github.v3+json"
+        body_format: json
+        body:
+          name: ".github"
+          description: "Organization workflow templates and configuration"
+          private: false
+          has_issues: true
+          has_projects: true
+          has_wiki: true
+        status_code: 201
+      ignore_errors: yes  # Repository might already exist
+
+    - name: Clone .github repository
+      git:
+        repo: "https://{{ github_token }}@github.com/{{ github_organization }}/.github.git"
+        dest: "/tmp/.github-repo"
+        force: yes
+
+    - name: Create workflow templates directory
+      file:
+        path: "/tmp/.github-repo/workflow-templates"
+        state: directory
+
+    - name: Copy workflow templates
+      template:
+        src: "{{ item.src }}"
+        dest: "/tmp/.github-repo/workflow-templates/{{ item.dest }}"
+      with_items:
+        - { src: "workflows/ci-cd.yml.j2", dest: "ci-cd.yml" }
+        - { src: "workflows/security-scan.yml.j2", dest: "security-scan.yml" }
+        - { src: "workflows/deploy.yml.j2", dest: "deploy.yml" }
+
+    - name: Create workflow template properties
+      template:
+        src: "{{ item.src }}"
+        dest: "/tmp/.github-repo/workflow-templates/{{ item.dest }}"
+      with_items:
+        - { src: "workflows/ci-cd.properties.json.j2", dest: "ci-cd.properties.json" }
+        - { src: "workflows/security-scan.properties.json.j2", dest: "security-scan.properties.json" }
+        - { src: "workflows/deploy.properties.json.j2", dest: "deploy.properties.json" }
+
+    - name: Commit and push workflow templates
+      shell: |
+        cd /tmp/.github-repo
+        git config user.name "GitHub Actions Automation"
+        git config user.email "actions@{{ github_organization }}.com"
+        git add .
+        git commit -m "Add organization workflow templates" || exit 0
+        git push origin main
+      environment:
+        GITHUB_TOKEN: "{{ github_token }}"
+
+    - name: Configure organization secrets
+      uri:
+        url: "https://api.github.com/orgs/{{ github_organization }}/actions/secrets/{{ item.name }}"
+        method: PUT
+        headers:
+          Authorization: "token {{ github_token }}"
+          Accept: "application/vnd.github.v3+json"
+        body_format: json
+        body:
+          encrypted_value: "{{ item.value | b64encode }}"
+          visibility: "{{ item.visibility | default('all') }}"
+        status_code: [201, 204]
+      with_items:
+        - name: "AWS_ACCESS_KEY_ID"
+          value: "{{ aws_access_key_id }}"
+        - name: "AWS_SECRET_ACCESS_KEY"
+          value: "{{ aws_secret_access_key }}"
+        - name: "AWS_REGION"
+          value: "{{ aws_region }}"
+      when: aws_access_key_id is defined and aws_secret_access_key is defined
+      no_log: true
+
+    - name: Create CloudWatch dashboard
+      shell: |
+        aws cloudwatch put-dashboard \
+          --dashboard-name "{{ project_name }}-monitoring" \
+          --dashboard-body file:///opt/{{ project_name }}/dashboard.json
+      environment:
+        AWS_REGION: "{{ aws_region }}"
+
+    - name: Set up CloudWatch alarms
+      shell: |
+        aws cloudwatch put-metric-alarm \
+          --alarm-name "{{ project_name }}-runner-availability" \
+          --alarm-description "Monitor GitHub Actions runner availability" \
+          --metric-name HealthyHostCount \
+          --namespace AWS/ApplicationELB \
+          --statistic Average \
+          --period 300 \
+          --evaluation-periods 2 \
+          --threshold 1 \
+          --comparison-operator LessThanThreshold \
+          --alarm-actions "arn:aws:sns:{{ aws_region }}:{{ ansible_aws_account_id }}:{{ project_name }}-alerts"
+      environment:
+        AWS_REGION: "{{ aws_region }}"
+
+    - name: Validate deployment
+      uri:
+        url: "https://api.github.com/orgs/{{ github_organization }}/actions/runners"
+        method: GET
+        headers:
+          Authorization: "token {{ github_token }}"
+          Accept: "application/vnd.github.v3+json"
+        status_code: 200
+      register: runners_response
+
+    - name: Check runner status
+      debug:
+        msg: "Found {{ runners_response.json.total_count }} runners, {{ (runners_response.json.runners | selectattr('status', 'equalto', 'online') | list | length) }} online"
+
+    - name: Create deployment summary
+      template:
+        src: deployment-summary.md.j2
+        dest: "/opt/{{ project_name }}/deployment-summary.md"
+      vars:
+        deployment_time: "{{ ansible_date_time.iso8601 }}"
+        terraform_outputs: "{{ tf_outputs | default({}) }}"
+        runner_count: "{{ runners_response.json.total_count | default(0) }}"
+        online_runners: "{{ (runners_response.json.runners | selectattr('status', 'equalto', 'online') | list | length) | default(0) }}"
+
+    - name: Display deployment summary
+      debug:
+        msg: |
+          GitHub Actions Enterprise CI/CD Platform deployment completed!
+          
+          Organization: {{ github_organization }}
+          Environment: {{ environment }}
+          Region: {{ aws_region }}
+          
+          Runners deployed: {{ runners_response.json.total_count | default(0) }}
+          Online runners: {{ (runners_response.json.runners | selectattr('status', 'equalto', 'online') | list | length) | default(0) }}
+          
+          Next steps:
+          1. Test workflow execution with a sample repository
+          2. Configure additional organization secrets as needed
+          3. Set up monitoring alerts and notifications
+          4. Train development teams on the new platform
+          
+          Documentation available at: /opt/{{ project_name }}/deployment-summary.md
+
+# Cleanup tasks (run with --tags cleanup)
+- name: Cleanup deployment resources
+  block:
+    - name: Terraform destroy
+      shell: terraform destroy -auto-approve
+      args:
+        chdir: "/opt/{{ project_name }}"
+      environment:
+        AWS_REGION: "{{ aws_region }}"
+      when: cleanup_terraform | default(false) | bool
+
+    - name: Remove local files
+      file:
+        path: "/opt/{{ project_name }}"
+        state: absent
+      when: cleanup_files | default(false) | bool
+      become: yes
+
+    - name: Remove temporary files
+      file:
+        path: "/tmp/.github-repo"
+        state: absent
+
+  tags: cleanup
+  when: cleanup | default(false) | bool

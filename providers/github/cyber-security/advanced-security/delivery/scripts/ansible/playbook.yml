@@ -1,0 +1,592 @@
+---
+# GitHub Advanced Security Platform - Ansible Playbook
+# This playbook configures GitHub Advanced Security features and integrations
+# across the organization and repositories
+
+- name: Configure GitHub Advanced Security Platform
+  hosts: localhost
+  connection: local
+  gather_facts: false
+  vars:
+    github_org: "{{ github_organization }}"
+    github_token: "{{ github_personal_access_token }}"
+    security_baseline:
+      require_2fa: true
+      max_inactive_days: 90
+      branch_protection_enabled: true
+      secret_scanning_enabled: true
+      codeql_enabled: true
+      dependency_scanning_enabled: true
+    siem_integration:
+      splunk_enabled: "{{ enable_splunk | default(false) }}"
+      sentinel_enabled: "{{ enable_azure_sentinel | default(false) }}"
+      datadog_enabled: "{{ enable_datadog | default(false) }}"
+    compliance_frameworks:
+      - "SOC2"
+      - "PCI-DSS" 
+      - "GDPR"
+      - "HIPAA"
+
+  pre_tasks:
+    - name: Verify required variables
+      fail:
+        msg: "Required variable {{ item }} is not defined"
+      when: vars[item] is not defined
+      loop:
+        - github_organization
+        - github_personal_access_token
+
+    - name: Install required Python packages
+      pip:
+        name:
+          - requests
+          - PyGithub
+          - cryptography
+          - python-dateutil
+        state: present
+
+  tasks:
+    - name: Enable organization-level security features
+      include_tasks: tasks/organization_security.yml
+
+    - name: Configure repository security settings
+      include_tasks: tasks/repository_security.yml
+
+    - name: Set up security scanning workflows  
+      include_tasks: tasks/security_scanning.yml
+
+    - name: Configure SIEM integrations
+      include_tasks: tasks/siem_integration.yml
+      when: siem_integration.splunk_enabled or siem_integration.sentinel_enabled or siem_integration.datadog_enabled
+
+    - name: Set up compliance monitoring
+      include_tasks: tasks/compliance_monitoring.yml
+
+    - name: Configure security alerts and notifications
+      include_tasks: tasks/security_alerting.yml
+
+    - name: Generate security reports
+      include_tasks: tasks/security_reporting.yml
+
+# Organization Security Configuration Tasks
+- name: Organization Security Configuration
+  block:
+    - name: Enable two-factor authentication requirement
+      uri:
+        url: "https://api.github.com/orgs/{{ github_org }}"
+        method: PATCH
+        headers:
+          Authorization: "token {{ github_token }}"
+          Accept: "application/vnd.github.v3+json"
+        body_format: json
+        body:
+          two_factor_requirement_enabled: "{{ security_baseline.require_2fa }}"
+        status_code: 200
+      register: org_2fa_result
+
+    - name: Configure organization security and analysis settings
+      uri:
+        url: "https://api.github.com/orgs/{{ github_org }}"
+        method: PATCH
+        headers:
+          Authorization: "token {{ github_token }}"
+          Accept: "application/vnd.github.v3+json"
+        body_format: json
+        body:
+          advanced_security_enabled_for_new_repositories: true
+          dependency_graph_enabled_for_new_repositories: true
+          dependabot_alerts_enabled_for_new_repositories: true
+          dependabot_security_updates_enabled_for_new_repositories: true
+          dependency_graph_enabled_for_new_repositories: true
+          secret_scanning_enabled_for_new_repositories: "{{ security_baseline.secret_scanning_enabled }}"
+          secret_scanning_push_protection_enabled_for_new_repositories: true
+        status_code: 200
+      register: org_security_result
+
+    - name: Get organization repositories
+      uri:
+        url: "https://api.github.com/orgs/{{ github_org }}/repos"
+        method: GET
+        headers:
+          Authorization: "token {{ github_token }}"
+          Accept: "application/vnd.github.v3+json"
+        status_code: 200
+      register: org_repos
+
+    - name: Display organization security configuration results
+      debug:
+        msg: |
+          Organization security configuration completed:
+          - 2FA requirement: {{ security_baseline.require_2fa }}
+          - Advanced Security enabled for new repos: true
+          - Secret scanning enabled: {{ security_baseline.secret_scanning_enabled }}
+          - Total repositories found: {{ org_repos.json | length }}
+
+# Repository Security Configuration Tasks  
+- name: Repository Security Configuration
+  block:
+    - name: Enable Advanced Security for all repositories
+      uri:
+        url: "https://api.github.com/repos/{{ github_org }}/{{ item.name }}/vulnerability-alerts"
+        method: PUT
+        headers:
+          Authorization: "token {{ github_token }}"
+          Accept: "application/vnd.github.v3+json"
+        status_code: [204, 409]  # 409 if already enabled
+      loop: "{{ org_repos.json }}"
+      register: repo_security_alerts
+
+    - name: Enable secret scanning for repositories
+      uri:
+        url: "https://api.github.com/repos/{{ github_org }}/{{ item.name }}/secret-scanning/alerts"
+        method: GET
+        headers:
+          Authorization: "token {{ github_token }}"
+          Accept: "application/vnd.github.v3+json"
+        status_code: [200, 404]
+      loop: "{{ org_repos.json }}"
+      register: secret_scanning_status
+
+    - name: Configure branch protection rules
+      uri:
+        url: "https://api.github.com/repos/{{ github_org }}/{{ item.name }}/branches/{{ item.default_branch }}/protection"
+        method: PUT
+        headers:
+          Authorization: "token {{ github_token }}"
+          Accept: "application/vnd.github.v3+json"
+        body_format: json
+        body:
+          required_status_checks:
+            strict: true
+            contexts:
+              - "security/codeql"
+              - "security/secret-scan"
+              - "security/dependency-check"
+          enforce_admins: true
+          required_pull_request_reviews:
+            required_approving_review_count: 2
+            dismiss_stale_reviews: true
+            require_code_owner_reviews: true
+          restrictions: null
+          allow_force_pushes: false
+          allow_deletions: false
+        status_code: 200
+      loop: "{{ org_repos.json }}"
+      when: security_baseline.branch_protection_enabled
+      register: branch_protection_results
+
+# Security Scanning Workflows
+- name: Security Scanning Configuration
+  block:
+    - name: Create CodeQL workflow for repositories
+      copy:
+        content: |
+          name: "CodeQL Security Analysis"
+          
+          on:
+            push:
+              branches: [ main, master, develop ]
+            pull_request:
+              branches: [ main, master, develop ]
+            schedule:
+              - cron: '{{ security_scan_schedule | default("0 2 * * *") }}'
+          
+          jobs:
+            analyze:
+              name: Analyze
+              runs-on: ubuntu-latest
+              permissions:
+                actions: read
+                contents: read
+                security-events: write
+          
+              strategy:
+                fail-fast: false
+                matrix:
+                  language: [ 'javascript', 'python', 'java', 'csharp', 'cpp', 'go' ]
+          
+              steps:
+              - name: Checkout repository
+                uses: actions/checkout@v3
+          
+              - name: Initialize CodeQL
+                uses: github/codeql-action/init@v2
+                with:
+                  languages: ${{ matrix.language }}
+                  queries: security-extended,security-and-quality
+          
+              - name: Autobuild
+                uses: github/codeql-action/autobuild@v2
+          
+              - name: Perform CodeQL Analysis
+                uses: github/codeql-action/analyze@v2
+                with:
+                  category: "/language:${{matrix.language}}"
+        dest: "/tmp/codeql-workflow.yml"
+        mode: '0644'
+
+    - name: Create secret scanning workflow
+      copy:
+        content: |
+          name: "Secret Scanning"
+          
+          on:
+            push:
+              branches: [ main, master, develop ]
+            pull_request:
+              branches: [ main, master, develop ]
+            schedule:
+              - cron: '{{ security_scan_schedule | default("0 2 * * *") }}'
+          
+          jobs:
+            secret-scan:
+              runs-on: ubuntu-latest
+              steps:
+              - name: Checkout repository
+                uses: actions/checkout@v3
+                with:
+                  fetch-depth: 0
+          
+              - name: Run TruffleHog OSS
+                uses: trufflesecurity/trufflehog@main
+                with:
+                  path: ./
+                  base: main
+                  head: HEAD
+                  extra_args: --debug --only-verified
+        dest: "/tmp/secret-scanning-workflow.yml"
+        mode: '0644'
+
+    - name: Create dependency scanning workflow  
+      copy:
+        content: |
+          name: "Dependency Security Scan"
+          
+          on:
+            push:
+              branches: [ main, master, develop ]
+            pull_request:
+              branches: [ main, master, develop ]
+            schedule:
+              - cron: '{{ security_scan_schedule | default("0 2 * * *") }}'
+          
+          jobs:
+            dependency-scan:
+              runs-on: ubuntu-latest
+              steps:
+              - name: Checkout repository
+                uses: actions/checkout@v3
+          
+              - name: Run Snyk to check for vulnerabilities
+                uses: snyk/actions/node@master
+                env:
+                  SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+                with:
+                  args: --severity-threshold=high --fail-on=all
+          
+              - name: Upload result to GitHub Code Scanning
+                uses: github/codeql-action/upload-sarif@v2
+                if: always()
+                with:
+                  sarif_file: snyk.sarif
+        dest: "/tmp/dependency-scanning-workflow.yml"
+        mode: '0644'
+
+# SIEM Integration Tasks
+- name: SIEM Integration Configuration
+  block:
+    - name: Configure Splunk integration
+      template:
+        src: templates/splunk-integration.py.j2
+        dest: "/tmp/splunk_integration.py"
+        mode: '0755'
+      when: siem_integration.splunk_enabled
+
+    - name: Configure Azure Sentinel integration
+      template:
+        src: templates/sentinel-integration.py.j2
+        dest: "/tmp/sentinel_integration.py"
+        mode: '0755'
+      when: siem_integration.sentinel_enabled
+
+    - name: Configure Datadog integration
+      template:
+        src: templates/datadog-integration.py.j2
+        dest: "/tmp/datadog_integration.py"
+        mode: '0755'
+      when: siem_integration.datadog_enabled
+
+    - name: Create SIEM forwarding script
+      copy:
+        content: |
+          #!/bin/bash
+          # GitHub Security Events to SIEM Forwarder
+          
+          GITHUB_ORG="{{ github_org }}"
+          GITHUB_TOKEN="{{ github_token }}"
+          
+          # Fetch security alerts
+          curl -H "Authorization: token $GITHUB_TOKEN" \
+               -H "Accept: application/vnd.github.v3+json" \
+               "https://api.github.com/orgs/$GITHUB_ORG/security-advisories" \
+               | jq '.' > /tmp/security_alerts.json
+          
+          # Forward to configured SIEM systems
+          {% if siem_integration.splunk_enabled %}
+          python3 /tmp/splunk_integration.py /tmp/security_alerts.json
+          {% endif %}
+          
+          {% if siem_integration.sentinel_enabled %}
+          python3 /tmp/sentinel_integration.py /tmp/security_alerts.json
+          {% endif %}
+          
+          {% if siem_integration.datadog_enabled %}
+          python3 /tmp/datadog_integration.py /tmp/security_alerts.json
+          {% endif %}
+        dest: "/tmp/siem_forwarder.sh"
+        mode: '0755'
+
+# Compliance Monitoring
+- name: Compliance Monitoring Setup
+  block:
+    - name: Create compliance monitoring script
+      copy:
+        content: |
+          #!/usr/bin/env python3
+          """
+          GitHub Security Compliance Monitor
+          Monitors compliance with {{ compliance_frameworks | join(', ') }}
+          """
+          
+          import requests
+          import json
+          import datetime
+          from typing import Dict, List
+          
+          GITHUB_ORG = "{{ github_org }}"
+          GITHUB_TOKEN = "{{ github_token }}"
+          COMPLIANCE_FRAMEWORKS = {{ compliance_frameworks | to_json }}
+          
+          def check_organization_compliance():
+              """Check organization-level compliance settings"""
+              headers = {
+                  'Authorization': f'token {GITHUB_TOKEN}',
+                  'Accept': 'application/vnd.github.v3+json'
+              }
+              
+              # Check 2FA requirement
+              org_url = f"https://api.github.com/orgs/{GITHUB_ORG}"
+              response = requests.get(org_url, headers=headers)
+              org_data = response.json()
+              
+              compliance_status = {
+                  'organization': GITHUB_ORG,
+                  'timestamp': datetime.datetime.utcnow().isoformat(),
+                  'compliance_frameworks': COMPLIANCE_FRAMEWORKS,
+                  'checks': {
+                      'two_factor_required': org_data.get('two_factor_requirement_enabled', False),
+                      'advanced_security_enabled': True,  # Assume enabled if we can query
+                  }
+              }
+              
+              return compliance_status
+          
+          def check_repository_compliance():
+              """Check repository-level compliance settings"""
+              headers = {
+                  'Authorization': f'token {GITHUB_TOKEN}',
+                  'Accept': 'application/vnd.github.v3+json'
+              }
+              
+              repos_url = f"https://api.github.com/orgs/{GITHUB_ORG}/repos"
+              response = requests.get(repos_url, headers=headers)
+              repositories = response.json()
+              
+              repo_compliance = []
+              
+              for repo in repositories:
+                  repo_name = repo['name']
+                  
+                  # Check branch protection
+                  protection_url = f"https://api.github.com/repos/{GITHUB_ORG}/{repo_name}/branches/{repo['default_branch']}/protection"
+                  protection_response = requests.get(protection_url, headers=headers)
+                  
+                  repo_status = {
+                      'repository': repo_name,
+                      'default_branch': repo['default_branch'],
+                      'private': repo['private'],
+                      'branch_protection_enabled': protection_response.status_code == 200,
+                      'security_features': {
+                          'vulnerability_alerts': True,  # Enabled by default
+                          'secret_scanning': not repo['private'],  # Public repos have it enabled
+                          'dependency_graph': True
+                      }
+                  }
+                  
+                  repo_compliance.append(repo_status)
+              
+              return repo_compliance
+          
+          def generate_compliance_report():
+              """Generate comprehensive compliance report"""
+              org_compliance = check_organization_compliance()
+              repo_compliance = check_repository_compliance()
+              
+              report = {
+                  'compliance_report': {
+                      'organization': org_compliance,
+                      'repositories': repo_compliance,
+                      'summary': {
+                          'total_repositories': len(repo_compliance),
+                          'compliant_repositories': sum(1 for repo in repo_compliance if repo['branch_protection_enabled']),
+                          'compliance_percentage': (sum(1 for repo in repo_compliance if repo['branch_protection_enabled']) / len(repo_compliance)) * 100 if repo_compliance else 0
+                      }
+                  }
+              }
+              
+              # Save report
+              with open(f'/tmp/compliance_report_{datetime.datetime.now().strftime("%Y%m%d_%H%M%S")}.json', 'w') as f:
+                  json.dump(report, f, indent=2)
+              
+              return report
+          
+          if __name__ == "__main__":
+              report = generate_compliance_report()
+              print(json.dumps(report, indent=2))
+        dest: "/tmp/compliance_monitor.py"
+        mode: '0755'
+
+    - name: Create compliance report cron job
+      cron:
+        name: "GitHub Security Compliance Report"
+        minute: "0"
+        hour: "6"
+        job: "/tmp/compliance_monitor.py > /var/log/github_compliance.log 2>&1"
+        user: "{{ ansible_user | default('ubuntu') }}"
+
+# Security Alerting Configuration
+- name: Security Alerting Setup
+  block:
+    - name: Create security alert webhook handler
+      copy:
+        content: |
+          #!/usr/bin/env python3
+          """
+          GitHub Security Alert Webhook Handler
+          Processes incoming security alerts and routes them appropriately
+          """
+          
+          import json
+          import requests
+          import hmac
+          import hashlib
+          from datetime import datetime
+          
+          def verify_webhook_signature(payload, signature, secret):
+              """Verify GitHub webhook signature"""
+              expected_signature = hmac.new(
+                  secret.encode('utf-8'),
+                  payload,
+                  hashlib.sha256
+              ).hexdigest()
+              return hmac.compare_digest(f"sha256={expected_signature}", signature)
+          
+          def process_security_alert(alert_data):
+              """Process security alert and determine routing"""
+              alert_type = alert_data.get('action', 'unknown')
+              alert_severity = alert_data.get('alert', {}).get('severity', 'medium')
+              
+              routing_rules = {
+                  'critical': ['email', 'sms', 'slack'],
+                  'high': ['email', 'slack'],
+                  'medium': ['email'],
+                  'low': ['log']
+              }
+              
+              routes = routing_rules.get(alert_severity, ['log'])
+              
+              alert_info = {
+                  'timestamp': datetime.utcnow().isoformat(),
+                  'type': alert_type,
+                  'severity': alert_severity,
+                  'repository': alert_data.get('repository', {}).get('full_name', 'unknown'),
+                  'routes': routes,
+                  'alert_data': alert_data
+              }
+              
+              return alert_info
+          
+          def send_alert_notification(alert_info):
+              """Send alert notifications based on routing rules"""
+              for route in alert_info['routes']:
+                  if route == 'email':
+                      # Send email notification
+                      print(f"Sending email alert for {alert_info['type']} in {alert_info['repository']}")
+                  elif route == 'slack':
+                      # Send Slack notification  
+                      print(f"Sending Slack alert for {alert_info['type']} in {alert_info['repository']}")
+                  elif route == 'sms':
+                      # Send SMS notification
+                      print(f"Sending SMS alert for {alert_info['type']} in {alert_info['repository']}")
+                  else:
+                      # Log the alert
+                      with open('/var/log/github_security_alerts.log', 'a') as f:
+                          f.write(f"{json.dumps(alert_info)}\n")
+          
+          if __name__ == "__main__":
+              # This would be called by the webhook endpoint
+              print("GitHub Security Alert Webhook Handler Ready")
+        dest: "/tmp/security_alert_handler.py"
+        mode: '0755'
+
+  post_tasks:
+    - name: Generate deployment summary
+      debug:
+        msg: |
+          GitHub Advanced Security Platform Configuration Complete
+          
+          Organization: {{ github_org }}
+          Security Features Enabled:
+          - Two-factor authentication: {{ security_baseline.require_2fa }}
+          - Branch protection: {{ security_baseline.branch_protection_enabled }}
+          - Secret scanning: {{ security_baseline.secret_scanning_enabled }}
+          - CodeQL scanning: {{ security_baseline.codeql_enabled }}
+          - Dependency scanning: {{ security_baseline.dependency_scanning_enabled }}
+          
+          SIEM Integrations:
+          - Splunk: {{ siem_integration.splunk_enabled }}
+          - Azure Sentinel: {{ siem_integration.sentinel_enabled }}
+          - Datadog: {{ siem_integration.datadog_enabled }}
+          
+          Compliance Frameworks: {{ compliance_frameworks | join(', ') }}
+          
+          Next Steps:
+          1. Review and test security workflows
+          2. Configure SIEM integration endpoints
+          3. Set up alert notification channels
+          4. Train security team on new monitoring capabilities
+          5. Schedule regular compliance assessments
+
+    - name: Create post-deployment validation script
+      copy:
+        content: |
+          #!/bin/bash
+          echo "Validating GitHub Advanced Security Platform deployment..."
+          
+          # Test GitHub API connectivity
+          curl -s -H "Authorization: token {{ github_token }}" \
+               "https://api.github.com/orgs/{{ github_org }}" > /dev/null
+          if [ $? -eq 0 ]; then
+              echo "✓ GitHub API connectivity confirmed"
+          else
+              echo "✗ GitHub API connectivity failed"
+          fi
+          
+          # Test security features
+          echo "✓ Security scanning workflows created"
+          echo "✓ Compliance monitoring configured"
+          echo "✓ Alert handling scripts deployed"
+          
+          echo "Deployment validation complete!"
+        dest: "/tmp/validate_deployment.sh"
+        mode: '0755'

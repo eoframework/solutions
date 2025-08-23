@@ -1,135 +1,861 @@
 generated_at: '2025-08-17T14:27:49.099067'
+version: '1.0'
+
+# EO Framework Templates - Solution Catalog
+# Complete catalog of enterprise solutions across all providers and categories
+
+providers_list:
+  - aws
+  - azure
+  - cisco
+  - dell
+  - github
+  - google
+  - hashicorp
+  - ibm
+  - juniper
+  - microsoft
+  - nvidia
+
+categories_list:
+  - ai
+  - cloud
+  - cyber-security
+  - devops
+  - modern-workspace
+  - network
+
 providers:
   aws:
     categories:
       ai:
-        solutions: {}
+        solutions:
+          bedrock-enterprise:
+            title: "AWS Bedrock Enterprise AI Platform"
+            description: "Enterprise AI/ML platform with foundation models"
+            version: "1.0"
+            tags: ["ai", "ml", "bedrock", "foundation-models"]
+            complexity: "enterprise"
+            deployment_time: "4-6 weeks"
+          sagemaker-mlops:
+            title: "AWS SageMaker MLOps Pipeline"
+            description: "End-to-end ML lifecycle management platform"
+            version: "1.0"
+            tags: ["ml", "sagemaker", "mlops", "pipeline"]
+            complexity: "advanced"
+            deployment_time: "3-5 weeks"
       cloud:
-        solutions: {}
+        solutions:
+          multi-account-governance:
+            title: "AWS Multi-Account Governance Platform"
+            description: "Enterprise multi-account management and governance"
+            version: "1.0"
+            tags: ["governance", "multi-account", "organizations"]
+            complexity: "enterprise"
+            deployment_time: "6-8 weeks"
+          serverless-platform:
+            title: "AWS Serverless Application Platform"
+            description: "Modern serverless applications with Lambda and API"
+            version: "1.0"
+            tags: ["serverless", "lambda", "api-gateway"]
+            complexity: "intermediate"
+            deployment_time: "2-4 weeks"
       cyber-security:
-        solutions: {}
+        solutions:
+          security-hub-soc:
+            title: "AWS Security Hub SOC Platform"
+            description: "Centralized security operations center platform"
+            version: "1.0"
+            tags: ["security", "soc", "security-hub", "compliance"]
+            complexity: "enterprise"
+            deployment_time: "4-6 weeks"
+          zero-trust-architecture:
+            title: "AWS Zero Trust Security Architecture"
+            description: "Comprehensive zero trust security implementation"
+            version: "1.0"
+            tags: ["zero-trust", "security", "iam", "network"]
+            complexity: "enterprise"
+            deployment_time: "8-12 weeks"
       devops:
-        solutions: {}
+        solutions:
+          cicd-enterprise:
+            title: "AWS Enterprise CI/CD Platform"
+            description: "Scalable CI/CD with CodePipeline and CodeBuild"
+            version: "1.0"
+            tags: ["cicd", "codepipeline", "codebuild", "devops"]
+            complexity: "advanced"
+            deployment_time: "3-5 weeks"
+          infrastructure-platform:
+            title: "AWS Infrastructure as Code Platform"
+            description: "Enterprise IaC with CDK and CloudFormation"
+            version: "1.0"
+            tags: ["iac", "cdk", "cloudformation", "terraform"]
+            complexity: "advanced"
+            deployment_time: "4-6 weeks"
       network:
-        solutions: {}
+        solutions:
+          global-network:
+            title: "AWS Global Network Architecture"
+            description: "Multi-region network with Transit Gateway"
+            version: "1.0"
+            tags: ["network", "transit-gateway", "multi-region"]
+            complexity: "enterprise"
+            deployment_time: "6-8 weeks"
+          hybrid-connectivity:
+            title: "AWS Hybrid Cloud Connectivity"
+            description: "Secure hybrid cloud network connectivity"
+            version: "1.0"
+            tags: ["hybrid", "vpn", "direct-connect", "network"]
+            complexity: "advanced"
+            deployment_time: "4-6 weeks"
   azure:
     categories:
       ai:
-        solutions: {}
+        solutions:
+          cognitive-services:
+            title: "Azure Cognitive Services Platform"
+            description: "Pre-built AI services and cognitive APIs"
+            version: "1.0"
+            tags: ["ai", "cognitive", "apis", "pre-built"]
+            complexity: "intermediate"
+            deployment_time: "2-4 weeks"
+          machine-learning:
+            title: "Azure Machine Learning Platform"
+            description: "Complete ML lifecycle management platform"
+            version: "1.0"
+            tags: ["ml", "azure-ml", "mlops", "lifecycle"]
+            complexity: "advanced"
+            deployment_time: "4-6 weeks"
       cloud:
-        solutions: {}
+        solutions:
+          enterprise-landing-zone:
+            title: "Azure Enterprise Landing Zone"
+            description: "Enterprise-grade Azure foundation architecture"
+            version: "1.0"
+            tags: ["landing-zone", "governance", "enterprise"]
+            complexity: "enterprise"
+            deployment_time: "6-10 weeks"
+          app-modernization:
+            title: "Azure Application Modernization"
+            description: "Legacy app modernization with containers"
+            version: "1.0"
+            tags: ["modernization", "containers", "kubernetes"]
+            complexity: "advanced"
+            deployment_time: "8-12 weeks"
       cyber-security:
-        solutions: {}
+        solutions:
+          sentinel-siem:
+            title: "Azure Sentinel SIEM Platform"
+            description: "Cloud-native SIEM and SOAR security platform"
+            version: "1.0"
+            tags: ["siem", "sentinel", "soar", "security"]
+            complexity: "enterprise"
+            deployment_time: "4-8 weeks"
+          defender-enterprise:
+            title: "Microsoft Defender Enterprise"
+            description: "Comprehensive enterprise security protection"
+            version: "1.0"
+            tags: ["defender", "endpoint", "cloud-security"]
+            complexity: "enterprise"
+            deployment_time: "6-8 weeks"
       devops:
-        solutions: {}
+        solutions:
+          devops-platform:
+            title: "Azure DevOps Enterprise Platform"
+            description: "Complete DevOps lifecycle management platform"
+            version: "1.0"
+            tags: ["devops", "azure-devops", "cicd", "agile"]
+            complexity: "advanced"
+            deployment_time: "3-6 weeks"
+          container-platform:
+            title: "Azure Container Platform"
+            description: "Enterprise Kubernetes platform with AKS"
+            version: "1.0"
+            tags: ["kubernetes", "aks", "containers", "platform"]
+            complexity: "enterprise"
+            deployment_time: "4-8 weeks"
       network:
-        solutions: {}
+        solutions:
+          virtual-wan:
+            title: "Azure Virtual WAN Architecture"
+            description: "Global network architecture with Virtual WAN"
+            version: "1.0"
+            tags: ["virtual-wan", "global", "network", "sd-wan"]
+            complexity: "enterprise"
+            deployment_time: "6-10 weeks"
+          firewall-platform:
+            title: "Azure Firewall Security Platform"
+            description: "Centralized network security with Azure Firewall"
+            version: "1.0"
+            tags: ["firewall", "network-security", "centralized"]
+            complexity: "advanced"
+            deployment_time: "3-5 weeks"
   cisco:
     categories:
       ai:
-        solutions: {}
+        solutions:
+          ai-network-analytics:
+            title: "Cisco AI Network Analytics"
+            description: "AI-powered network monitoring and optimization"
+            version: "1.0"
+            tags: ["ai", "network", "analytics", "monitoring"]
+            complexity: "advanced"
+            deployment_time: "4-6 weeks"
+          collaboration-ai:
+            title: "Cisco Webex AI Collaboration"
+            description: "AI-enhanced collaboration and communication"
+            version: "1.0"
+            tags: ["ai", "webex", "collaboration", "communication"]
+            complexity: "intermediate"
+            deployment_time: "2-4 weeks"
       cloud:
-        solutions: {}
+        solutions:
+          hybrid-cloud:
+            title: "Cisco Hybrid Cloud Platform"
+            description: "Multi-cloud networking and security platform"
+            version: "1.0"
+            tags: ["hybrid-cloud", "multi-cloud", "networking"]
+            complexity: "enterprise"
+            deployment_time: "6-8 weeks"
+          container-platform:
+            title: "Cisco Container Platform"
+            description: "Enterprise Kubernetes platform for containers"
+            version: "1.0"
+            tags: ["containers", "kubernetes", "platform"]
+            complexity: "advanced"
+            deployment_time: "4-6 weeks"
       cyber-security:
-        solutions: {}
+        solutions:
+          security-fabric:
+            title: "Cisco Security Fabric Platform"
+            description: "Integrated security architecture and platform"
+            version: "1.0"
+            tags: ["security", "fabric", "integrated", "platform"]
+            complexity: "enterprise"
+            deployment_time: "8-12 weeks"
+          zero-trust:
+            title: "Cisco Zero Trust Architecture"
+            description: "Comprehensive zero trust security framework"
+            version: "1.0"
+            tags: ["zero-trust", "security", "framework"]
+            complexity: "enterprise"
+            deployment_time: "10-14 weeks"
       devops:
-        solutions: {}
+        solutions:
+          automation-platform:
+            title: "Cisco Network Automation Platform"
+            description: "Network infrastructure automation and DevOps"
+            version: "1.0"
+            tags: ["automation", "network", "devops", "infrastructure"]
+            complexity: "advanced"
+            deployment_time: "4-8 weeks"
+          application-platform:
+            title: "Cisco Application Platform"
+            description: "Enterprise application delivery platform"
+            version: "1.0"
+            tags: ["application", "delivery", "platform", "enterprise"]
+            complexity: "advanced"
+            deployment_time: "6-8 weeks"
       network:
-        solutions: {}
+        solutions:
+          sd-wan-enterprise:
+            title: "Cisco SD-WAN Enterprise Platform"
+            description: "Software-defined WAN for enterprise networks"
+            version: "1.0"
+            tags: ["sd-wan", "enterprise", "software-defined"]
+            complexity: "enterprise"
+            deployment_time: "6-10 weeks"
+          campus-network:
+            title: "Cisco Campus Network Platform"
+            description: "Modern campus networking with automation"
+            version: "1.0"
+            tags: ["campus", "network", "automation", "modern"]
+            complexity: "advanced"
+            deployment_time: "4-8 weeks"
   dell:
     categories:
       ai:
-        solutions: {}
+        solutions:
+          ai-infrastructure:
+            title: "Dell AI Infrastructure Platform"
+            description: "High-performance AI/ML infrastructure platform"
+            version: "1.0"
+            tags: ["ai", "infrastructure", "high-performance"]
+            complexity: "enterprise"
+            deployment_time: "4-8 weeks"
+          edge-ai:
+            title: "Dell Edge AI Computing Platform"
+            description: "Edge computing platform for AI workloads"
+            version: "1.0"
+            tags: ["edge", "ai", "computing", "workloads"]
+            complexity: "advanced"
+            deployment_time: "3-6 weeks"
       cloud:
-        solutions: {}
+        solutions:
+          hybrid-infrastructure:
+            title: "Dell Hybrid Cloud Infrastructure"
+            description: "Hybrid cloud infrastructure with VxRail"
+            version: "1.0"
+            tags: ["hybrid-cloud", "vxrail", "infrastructure"]
+            complexity: "enterprise"
+            deployment_time: "6-10 weeks"
+          storage-platform:
+            title: "Dell Enterprise Storage Platform"
+            description: "Scalable enterprise storage infrastructure"
+            version: "1.0"
+            tags: ["storage", "enterprise", "scalable", "infrastructure"]
+            complexity: "advanced"
+            deployment_time: "3-6 weeks"
       cyber-security:
-        solutions: {}
+        solutions:
+          security-infrastructure:
+            title: "Dell Security Infrastructure"
+            description: "Hardware-based security and compliance"
+            version: "1.0"
+            tags: ["security", "hardware", "compliance", "infrastructure"]
+            complexity: "advanced"
+            deployment_time: "4-6 weeks"
+          data-protection:
+            title: "Dell Data Protection Platform"
+            description: "Enterprise data protection and backup solution"
+            version: "1.0"
+            tags: ["data-protection", "backup", "enterprise"]
+            complexity: "advanced"
+            deployment_time: "3-5 weeks"
       devops:
-        solutions: {}
+        solutions:
+          infrastructure-automation:
+            title: "Dell Infrastructure Automation"
+            description: "Automated infrastructure provisioning platform"
+            version: "1.0"
+            tags: ["automation", "infrastructure", "provisioning"]
+            complexity: "advanced"
+            deployment_time: "4-6 weeks"
+          container-infrastructure:
+            title: "Dell Container Infrastructure"
+            description: "Optimized infrastructure for containerized apps"
+            version: "1.0"
+            tags: ["containers", "infrastructure", "optimized"]
+            complexity: "advanced"
+            deployment_time: "3-6 weeks"
       network:
-        solutions: {}
+        solutions:
+          network-infrastructure:
+            title: "Dell Network Infrastructure Platform"
+            description: "High-performance enterprise network infrastructure"
+            version: "1.0"
+            tags: ["network", "infrastructure", "high-performance"]
+            complexity: "enterprise"
+            deployment_time: "4-8 weeks"
+          edge-computing:
+            title: "Dell Edge Computing Platform"
+            description: "Distributed edge computing infrastructure"
+            version: "1.0"
+            tags: ["edge", "computing", "distributed", "infrastructure"]
+            complexity: "advanced"
+            deployment_time: "4-6 weeks"
   github:
     categories:
       ai:
-        solutions: {}
+        solutions:
+          copilot-enterprise:
+            title: "GitHub Copilot Enterprise Platform"
+            description: "AI-powered coding assistant for enterprise teams"
+            version: "1.0"
+            tags: ["ai", "copilot", "coding", "assistant"]
+            complexity: "intermediate"
+            deployment_time: "1-2 weeks"
+          ai-development:
+            title: "GitHub AI Development Platform"
+            description: "Complete AI/ML development and deployment platform"
+            version: "1.0"
+            tags: ["ai", "ml", "development", "deployment"]
+            complexity: "advanced"
+            deployment_time: "3-5 weeks"
       cloud:
-        solutions: {}
+        solutions:
+          enterprise-cloud:
+            title: "GitHub Enterprise Cloud Platform"
+            description: "Scalable cloud-based development platform"
+            version: "1.0"
+            tags: ["enterprise", "cloud", "development", "scalable"]
+            complexity: "advanced"
+            deployment_time: "2-4 weeks"
+          multi-cloud-cicd:
+            title: "GitHub Multi-Cloud CI/CD"
+            description: "Multi-cloud deployment and CI/CD automation"
+            version: "1.0"
+            tags: ["multi-cloud", "cicd", "deployment", "automation"]
+            complexity: "advanced"
+            deployment_time: "4-6 weeks"
       cyber-security:
-        solutions: {}
+        solutions:
+          advanced-security:
+            title: "GitHub Advanced Security Platform"
+            description: "Security scanning, monitoring, and compliance solution"
+            version: "1.0"
+            tags: ["security", "compliance", "codeql", "secret-scanning", "siem"]
+            complexity: "enterprise"
+            deployment_time: "4-6 weeks"
+            features:
+              - "CodeQL semantic code analysis"
+              - "Advanced secret scanning with push protection"
+              - "Dependency vulnerability management"
+              - "SIEM integration (Splunk, Azure Sentinel, Datadog)"
+              - "Multi-framework compliance monitoring (SOC2, PCI-DSS, GDPR, HIPAA)"
+              - "Automated incident response and alerting"
+              - "Executive reporting and analytics dashboards"
+              - "Custom security policies and governance"
+            supported_languages: ["JavaScript", "TypeScript", "Python", "Java", "C#", "C++", "Go"]
+            integrations: ["Splunk", "Azure Sentinel", "Datadog", "GitHub Actions", "AWS", "Azure"]
       devops:
-        solutions: {}
+        solutions:
+          actions-enterprise-cicd:
+            title: "GitHub Actions Enterprise CI/CD Platform"
+            description: "Enterprise CI/CD platform with self-hosted runners"
+            version: "1.0"
+            tags: ["cicd", "github-actions", "aws", "automation", "devops"]
+            complexity: "enterprise"
+            deployment_time: "2-4 weeks"
+            features:
+              - "Self-hosted GitHub Actions runners on AWS"
+              - "Auto-scaling runner infrastructure"
+              - "Enterprise security and compliance"
+              - "Comprehensive monitoring and logging"
+              - "Multi-environment support (dev/staging/prod)"
+              - "Cost optimization with spot instances"
+              - "Advanced caching and artifact management"
+              - "Workflow automation and orchestration"
+            supported_platforms: ["AWS", "GitHub Enterprise"]
+            integrations: ["GitHub Actions", "AWS EC2", "AWS S3", "CloudWatch", "Terraform"]
+          gitops-platform:
+            title: "GitHub GitOps Deployment Platform"
+            description: "GitOps-based deployment and infrastructure mgmt"
+            version: "1.0"
+            tags: ["gitops", "deployment", "infrastructure", "kubernetes"]
+            complexity: "advanced"
+            deployment_time: "3-5 weeks"
       network:
-        solutions: {}
+        solutions:
+          enterprise-connectivity:
+            title: "GitHub Enterprise Connectivity"
+            description: "Secure enterprise network integration platform"
+            version: "1.0"
+            tags: ["enterprise", "connectivity", "network", "security"]
+            complexity: "advanced"
+            deployment_time: "2-4 weeks"
   google:
     categories:
       ai:
-        solutions: {}
+        solutions:
+          vertex-ai-platform:
+            title: "Google Vertex AI Platform"
+            description: "Unified ML platform for building and deploying AI"
+            version: "1.0"
+            tags: ["ai", "vertex", "ml", "platform"]
+            complexity: "advanced"
+            deployment_time: "4-6 weeks"
+          generative-ai:
+            title: "Google Generative AI Platform"
+            description: "Enterprise generative AI and LLM platform"
+            version: "1.0"
+            tags: ["generative", "ai", "llm", "platform"]
+            complexity: "advanced"
+            deployment_time: "3-5 weeks"
       cloud:
-        solutions: {}
+        solutions:
+          anthos-platform:
+            title: "Google Anthos Hybrid Platform"
+            description: "Modern hybrid and multi-cloud platform"
+            version: "1.0"
+            tags: ["anthos", "hybrid", "multi-cloud", "modern"]
+            complexity: "enterprise"
+            deployment_time: "6-10 weeks"
+          serverless-platform:
+            title: "Google Cloud Serverless Platform"
+            description: "Serverless applications with Cloud Functions"
+            version: "1.0"
+            tags: ["serverless", "cloud-functions", "applications"]
+            complexity: "intermediate"
+            deployment_time: "2-4 weeks"
       cyber-security:
-        solutions: {}
+        solutions:
+          security-command:
+            title: "Google Security Command Center"
+            description: "Centralized security and compliance platform"
+            version: "1.0"
+            tags: ["security", "compliance", "centralized", "platform"]
+            complexity: "enterprise"
+            deployment_time: "4-8 weeks"
+          chronicle-siem:
+            title: "Google Chronicle SIEM Platform"
+            description: "Cloud-native SIEM and security analytics"
+            version: "1.0"
+            tags: ["siem", "chronicle", "analytics", "security"]
+            complexity: "enterprise"
+            deployment_time: "6-8 weeks"
       devops:
-        solutions: {}
+        solutions:
+          cloud-build:
+            title: "Google Cloud Build CI/CD Platform"
+            description: "Serverless CI/CD platform with Cloud Build"
+            version: "1.0"
+            tags: ["cicd", "cloud-build", "serverless", "platform"]
+            complexity: "advanced"
+            deployment_time: "3-5 weeks"
+          kubernetes-platform:
+            title: "Google Kubernetes Platform (GKE)"
+            description: "Enterprise Kubernetes platform with GKE"
+            version: "1.0"
+            tags: ["kubernetes", "gke", "platform", "enterprise"]
+            complexity: "enterprise"
+            deployment_time: "4-8 weeks"
       network:
-        solutions: {}
+        solutions:
+          vpc-network:
+            title: "Google Cloud VPC Network Platform"
+            description: "Advanced VPC networking with global reach"
+            version: "1.0"
+            tags: ["vpc", "networking", "global", "advanced"]
+            complexity: "advanced"
+            deployment_time: "3-6 weeks"
+          cdn-platform:
+            title: "Google Cloud CDN Platform"
+            description: "Global content delivery and edge computing"
+            version: "1.0"
+            tags: ["cdn", "global", "edge", "content-delivery"]
+            complexity: "intermediate"
+            deployment_time: "2-4 weeks"
   hashicorp:
     categories:
       ai:
-        solutions: {}
+        solutions:
+          ai-infrastructure:
+            title: "HashiCorp AI Infrastructure Platform"
+            description: "Infrastructure automation for AI/ML workloads"
+            version: "1.0"
+            tags: ["ai", "infrastructure", "automation", "ml"]
+            complexity: "advanced"
+            deployment_time: "4-6 weeks"
       cloud:
-        solutions: {}
+        solutions:
+          terraform-platform:
+            title: "HashiCorp Terraform Enterprise"
+            description: "Enterprise infrastructure as code platform"
+            version: "1.0"
+            tags: ["terraform", "iac", "enterprise", "platform"]
+            complexity: "enterprise"
+            deployment_time: "4-8 weeks"
+          consul-service-mesh:
+            title: "HashiCorp Consul Service Mesh"
+            description: "Service mesh and service discovery platform"
+            version: "1.0"
+            tags: ["consul", "service-mesh", "discovery", "platform"]
+            complexity: "advanced"
+            deployment_time: "4-6 weeks"
       cyber-security:
-        solutions: {}
+        solutions:
+          vault-secrets:
+            title: "HashiCorp Vault Secrets Platform"
+            description: "Enterprise secrets and identity management"
+            version: "1.0"
+            tags: ["vault", "secrets", "identity", "management"]
+            complexity: "enterprise"
+            deployment_time: "4-6 weeks"
+          boundary-platform:
+            title: "HashiCorp Boundary Access Platform"
+            description: "Zero trust network access and identity platform"
+            version: "1.0"
+            tags: ["boundary", "zero-trust", "access", "identity"]
+            complexity: "enterprise"
+            deployment_time: "6-8 weeks"
       devops:
-        solutions: {}
+        solutions:
+          waypoint-platform:
+            title: "HashiCorp Waypoint Deployment"
+            description: "Application deployment and lifecycle platform"
+            version: "1.0"
+            tags: ["waypoint", "deployment", "lifecycle", "application"]
+            complexity: "advanced"
+            deployment_time: "3-5 weeks"
+          nomad-orchestration:
+            title: "HashiCorp Nomad Orchestration"
+            description: "Simple and flexible workload orchestration"
+            version: "1.0"
+            tags: ["nomad", "orchestration", "workload", "flexible"]
+            complexity: "advanced"
+            deployment_time: "4-6 weeks"
       network:
-        solutions: {}
+        solutions:
+          network-automation:
+            title: "HashiCorp Network Automation"
+            description: "Infrastructure networking automation platform"
+            version: "1.0"
+            tags: ["network", "automation", "infrastructure", "platform"]
+            complexity: "advanced"
+            deployment_time: "4-6 weeks"
   ibm:
     categories:
       ai:
-        solutions: {}
+        solutions:
+          watson-platform:
+            title: "IBM Watson AI Platform"
+            description: "Enterprise AI platform with Watson services"
+            version: "1.0"
+            tags: ["watson", "ai", "platform", "enterprise"]
+            complexity: "enterprise"
+            deployment_time: "6-10 weeks"
+          quantum-computing:
+            title: "IBM Quantum Computing Platform"
+            description: "Quantum computing platform for AI research"
+            version: "1.0"
+            tags: ["quantum", "computing", "ai", "research"]
+            complexity: "advanced"
+            deployment_time: "8-12 weeks"
       cloud:
-        solutions: {}
+        solutions:
+          hybrid-cloud:
+            title: "IBM Hybrid Cloud Platform"
+            description: "Enterprise hybrid cloud with Red Hat OpenShift"
+            version: "1.0"
+            tags: ["hybrid", "cloud", "openshift", "enterprise"]
+            complexity: "enterprise"
+            deployment_time: "6-12 weeks"
+          mainframe-modernization:
+            title: "IBM Mainframe Modernization"
+            description: "Legacy mainframe application modernization"
+            version: "1.0"
+            tags: ["mainframe", "modernization", "legacy", "applications"]
+            complexity: "enterprise"
+            deployment_time: "12-24 weeks"
       cyber-security:
-        solutions: {}
+        solutions:
+          security-platform:
+            title: "IBM Security QRadar Platform"
+            description: "Enterprise SIEM and security intelligence"
+            version: "1.0"
+            tags: ["qradar", "siem", "security", "intelligence"]
+            complexity: "enterprise"
+            deployment_time: "8-12 weeks"
+          guardium-data:
+            title: "IBM Guardium Data Security"
+            description: "Data security and privacy protection platform"
+            version: "1.0"
+            tags: ["guardium", "data-security", "privacy", "protection"]
+            complexity: "enterprise"
+            deployment_time: "6-10 weeks"
       devops:
-        solutions: {}
+        solutions:
+          devops-platform:
+            title: "IBM DevOps Platform"
+            description: "Enterprise DevOps with continuous delivery"
+            version: "1.0"
+            tags: ["devops", "continuous-delivery", "enterprise"]
+            complexity: "enterprise"
+            deployment_time: "6-10 weeks"
+          application-modernization:
+            title: "IBM Application Modernization"
+            description: "Legacy application modernization platform"
+            version: "1.0"
+            tags: ["modernization", "applications", "legacy", "platform"]
+            complexity: "enterprise"
+            deployment_time: "10-16 weeks"
       network:
-        solutions: {}
+        solutions:
+          network-automation:
+            title: "IBM Network Automation Platform"
+            description: "AI-powered network automation and optimization"
+            version: "1.0"
+            tags: ["network", "automation", "ai", "optimization"]
+            complexity: "enterprise"
+            deployment_time: "6-10 weeks"
   juniper:
     categories:
       ai:
-        solutions: {}
+        solutions:
+          ai-network:
+            title: "Juniper AI Network Platform"
+            description: "AI-driven network operations and automation"
+            version: "1.0"
+            tags: ["ai", "network", "operations", "automation"]
+            complexity: "advanced"
+            deployment_time: "4-8 weeks"
       cloud:
-        solutions: {}
+        solutions:
+          cloud-native:
+            title: "Juniper Cloud-Native Platform"
+            description: "Cloud-native networking for modern applications"
+            version: "1.0"
+            tags: ["cloud-native", "networking", "modern", "applications"]
+            complexity: "advanced"
+            deployment_time: "4-6 weeks"
       cyber-security:
-        solutions: {}
+        solutions:
+          security-platform:
+            title: "Juniper Security Platform"
+            description: "Advanced threat protection and network security"
+            version: "1.0"
+            tags: ["security", "threat-protection", "network", "advanced"]
+            complexity: "enterprise"
+            deployment_time: "6-10 weeks"
+          connected-security:
+            title: "Juniper Connected Security"
+            description: "Integrated security across network infrastructure"
+            version: "1.0"
+            tags: ["connected", "security", "integrated", "network"]
+            complexity: "enterprise"
+            deployment_time: "8-12 weeks"
       devops:
-        solutions: {}
+        solutions:
+          network-devops:
+            title: "Juniper Network DevOps Platform"
+            description: "DevOps practices for network infrastructure"
+            version: "1.0"
+            tags: ["network", "devops", "infrastructure", "automation"]
+            complexity: "advanced"
+            deployment_time: "4-8 weeks"
       network:
-        solutions: {}
+        solutions:
+          enterprise-network:
+            title: "Juniper Enterprise Network Platform"
+            description: "High-performance enterprise network infrastructure"
+            version: "1.0"
+            tags: ["enterprise", "network", "high-performance"]
+            complexity: "enterprise"
+            deployment_time: "6-12 weeks"
+          sd-wan:
+            title: "Juniper SD-WAN Platform"
+            description: "Software-defined WAN with AI-driven insights"
+            version: "1.0"
+            tags: ["sd-wan", "software-defined", "ai", "insights"]
+            complexity: "enterprise"
+            deployment_time: "6-10 weeks"
   microsoft:
     categories:
       ai:
-        solutions: {}
+        solutions:
+          copilot-platform:
+            title: "Microsoft Copilot Enterprise Platform"
+            description: "AI assistant platform for enterprise productivity"
+            version: "1.0"
+            tags: ["copilot", "ai", "assistant", "productivity"]
+            complexity: "intermediate"
+            deployment_time: "2-4 weeks"
+          azure-openai:
+            title: "Microsoft Azure OpenAI Platform"
+            description: "Enterprise OpenAI and generative AI platform"
+            version: "1.0"
+            tags: ["azure", "openai", "generative", "ai"]
+            complexity: "advanced"
+            deployment_time: "3-6 weeks"
       cloud:
-        solutions: {}
+        solutions:
+          365-enterprise:
+            title: "Microsoft 365 Enterprise Platform"
+            description: "Complete enterprise productivity cloud platform"
+            version: "1.0"
+            tags: ["m365", "enterprise", "productivity", "cloud"]
+            complexity: "enterprise"
+            deployment_time: "4-8 weeks"
+          power-platform:
+            title: "Microsoft Power Platform"
+            description: "Low-code development and automation platform"
+            version: "1.0"
+            tags: ["power-platform", "low-code", "automation"]
+            complexity: "intermediate"
+            deployment_time: "2-6 weeks"
       cyber-security:
-        solutions: {}
+        solutions:
+          defender-enterprise:
+            title: "Microsoft Defender Enterprise"
+            description: "Comprehensive enterprise security protection"
+            version: "1.0"
+            tags: ["defender", "enterprise", "security", "protection"]
+            complexity: "enterprise"
+            deployment_time: "4-8 weeks"
+          purview-compliance:
+            title: "Microsoft Purview Compliance"
+            description: "Data governance and compliance management"
+            version: "1.0"
+            tags: ["purview", "compliance", "data-governance"]
+            complexity: "enterprise"
+            deployment_time: "6-10 weeks"
       devops:
-        solutions: {}
+        solutions:
+          devops-platform:
+            title: "Microsoft Azure DevOps Platform"
+            description: "Complete DevOps lifecycle management platform"
+            version: "1.0"
+            tags: ["azure-devops", "lifecycle", "management"]
+            complexity: "advanced"
+            deployment_time: "3-6 weeks"
+          github-integration:
+            title: "Microsoft GitHub Enterprise"
+            description: "Enterprise GitHub with Azure integration"
+            version: "1.0"
+            tags: ["github", "enterprise", "azure", "integration"]
+            complexity: "advanced"
+            deployment_time: "2-4 weeks"
       network:
-        solutions: {}
+        solutions:
+          virtual-network:
+            title: "Microsoft Virtual Network Platform"
+            description: "Enterprise virtual networking with Azure"
+            version: "1.0"
+            tags: ["virtual", "network", "azure", "enterprise"]
+            complexity: "advanced"
+            deployment_time: "3-6 weeks"
   nvidia:
     categories:
       ai:
-        solutions: {}
+        solutions:
+          ai-enterprise:
+            title: "NVIDIA AI Enterprise Platform"
+            description: "Complete AI infrastructure and software platform"
+            version: "1.0"
+            tags: ["ai", "enterprise", "infrastructure", "software"]
+            complexity: "enterprise"
+            deployment_time: "6-10 weeks"
+          omniverse-platform:
+            title: "NVIDIA Omniverse Platform"
+            description: "Collaborative 3D simulation and AI platform"
+            version: "1.0"
+            tags: ["omniverse", "3d", "simulation", "collaboration"]
+            complexity: "advanced"
+            deployment_time: "4-8 weeks"
       cloud:
-        solutions: {}
+        solutions:
+          cloud-computing:
+            title: "NVIDIA Cloud Computing Platform"
+            description: "GPU-accelerated cloud computing platform"
+            version: "1.0"
+            tags: ["gpu", "cloud", "computing", "accelerated"]
+            complexity: "advanced"
+            deployment_time: "4-6 weeks"
       cyber-security:
-        solutions: {}
+        solutions:
+          morpheus-cybersecurity:
+            title: "NVIDIA Morpheus Cybersecurity"
+            description: "AI-powered cybersecurity platform"
+            version: "1.0"
+            tags: ["morpheus", "cybersecurity", "ai", "platform"]
+            complexity: "enterprise"
+            deployment_time: "6-10 weeks"
       devops:
-        solutions: {}
+        solutions:
+          gpu-devops:
+            title: "NVIDIA GPU DevOps Platform"
+            description: "DevOps platform for GPU-accelerated applications"
+            version: "1.0"
+            tags: ["gpu", "devops", "accelerated", "applications"]
+            complexity: "advanced"
+            deployment_time: "4-8 weeks"
       network:
-        solutions: {}
-version: '1.0'
+        solutions:
+          networking-platform:
+            title: "NVIDIA Networking Platform"
+            description: "High-performance computing network infrastructure"
+            version: "1.0"
+            tags: ["networking", "hpc", "high-performance"]
+            complexity: "enterprise"
+            deployment_time: "6-10 weeks"
