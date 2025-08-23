@@ -107,7 +107,15 @@ providers:
             deployment_time: "3-6 weeks"
             repository: "https://github.com/eoframework/templates/tree/main/providers/azure/devops/enterprise-platform"
       modern-workspace:
-        solutions: {}
+        solutions:
+          virtual-desktop:
+            title: "Azure Virtual Desktop"
+            description: "Comprehensive desktop virtualization with Windows 11 multi-session support"
+            version: "1.0"
+            tags: ["virtual-desktop", "avd", "windows-11", "fslogix", "remote-work"]
+            complexity: "intermediate"
+            deployment_time: "2-4 weeks"
+            repository: "https://github.com/eoframework/templates/tree/main/providers/azure/modern-workspace/virtual-desktop"
       network:
         solutions:
           virtual-wan-global:
@@ -297,7 +305,15 @@ providers:
       devops:
         solutions: {}
       modern-workspace:
-        solutions: {}
+        solutions:
+          workspace:
+            title: "Google Workspace Enterprise Platform"
+            description: "Comprehensive cloud-based productivity and collaboration platform"
+            version: "1.0"
+            tags: ["workspace", "gmail", "collaboration", "productivity", "cloud-native"]
+            complexity: "intermediate"
+            deployment_time: "2-6 weeks"
+            repository: "https://github.com/eoframework/templates/tree/main/providers/google/modern-workspace/workspace"
       network:
         solutions: {}
   hashicorp:

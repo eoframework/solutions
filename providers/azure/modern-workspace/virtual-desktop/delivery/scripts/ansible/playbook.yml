@@ -1,0 +1,436 @@
+---
+# Azure Virtual Desktop Ansible Playbook
+# This playbook automates the deployment and configuration of Azure Virtual Desktop infrastructure
+
+- name: Deploy Azure Virtual Desktop Infrastructure
+  hosts: localhost
+  connection: local
+  gather_facts: no
+  vars:
+    # Default configuration - override in group_vars or host_vars
+    resource_group_name: "rg-avd-prod"
+    location: "eastus"
+    prefix: "avd-prod"
+    vnet_name: "vnet-avd-prod"
+    subnet_name: "snet-avd-hosts"
+    storage_account_name: "stavdprofilesprod"
+    host_pool_name: "hp-avd-prod"
+    workspace_name: "ws-avd-prod"
+    session_host_count: 3
+    session_host_vm_size: "Standard_D4s_v4"
+    admin_username: "avdadmin"
+    log_analytics_workspace_name: "law-avd-prod"
+    
+    # Common tags for all resources
+    common_tags:
+      Environment: "Production"
+      Project: "Azure Virtual Desktop"
+      ManagedBy: "Ansible"
+      CreatedDate: "{{ ansible_date_time.iso8601 }}"
+
+  tasks:
+    - name: Display deployment information
+      debug:
+        msg:
+          - "Starting Azure Virtual Desktop deployment"
+          - "Resource Group: {{ resource_group_name }}"
+          - "Location: {{ location }}"
+          - "Host Pool: {{ host_pool_name }}"
+          - "Session Hosts: {{ session_host_count }}"
+
+    - name: Create Resource Group
+      azure_rm_resourcegroup:
+        name: "{{ resource_group_name }}"
+        location: "{{ location }}"
+        tags: "{{ common_tags }}"
+      register: resource_group_result
+
+    - name: Create Virtual Network
+      azure_rm_virtualnetwork:
+        resource_group: "{{ resource_group_name }}"
+        name: "{{ vnet_name }}"
+        address_prefixes: "10.0.0.0/16"
+        tags: "{{ common_tags }}"
+      register: vnet_result
+
+    - name: Create Subnet for AVD Hosts
+      azure_rm_subnet:
+        resource_group: "{{ resource_group_name }}"
+        virtual_network: "{{ vnet_name }}"
+        name: "{{ subnet_name }}"
+        address_prefix: "10.0.1.0/24"
+      register: subnet_result
+
+    - name: Create Network Security Group
+      azure_rm_securitygroup:
+        resource_group: "{{ resource_group_name }}"
+        name: "nsg-{{ prefix }}-hosts"
+        location: "{{ location }}"
+        rules:
+          - name: Allow-AVD-Traffic
+            protocol: Tcp
+            destination_port_range: "443"
+            access: Allow
+            direction: Outbound
+            priority: 100
+            source_address_prefix: "VirtualNetwork"
+            destination_address_prefix: "WindowsVirtualDesktop"
+          - name: Allow-Azure-KMS
+            protocol: Tcp
+            destination_port_range: "1688"
+            access: Allow
+            direction: Outbound
+            priority: 110
+            source_address_prefix: "*"
+            destination_address_prefix: "23.102.135.246"
+        tags: "{{ common_tags }}"
+      register: nsg_result
+
+    - name: Associate NSG with Subnet
+      azure_rm_subnet:
+        resource_group: "{{ resource_group_name }}"
+        virtual_network: "{{ vnet_name }}"
+        name: "{{ subnet_name }}"
+        address_prefix: "10.0.1.0/24"
+        security_group: "{{ nsg_result.state.id }}"
+
+    - name: Create Storage Account for FSLogix Profiles
+      azure_rm_storageaccount:
+        resource_group: "{{ resource_group_name }}"
+        name: "{{ storage_account_name }}"
+        account_type: Premium_LRS
+        kind: FileStorage
+        location: "{{ location }}"
+        network_acls:
+          default_action: Deny
+          virtual_network_rules:
+            - id: "{{ subnet_result.state.id }}"
+              action: Allow
+        tags: "{{ common_tags }}"
+      register: storage_result
+
+    - name: Create File Share for Profiles
+      azure_rm_storageshare:
+        resource_group: "{{ resource_group_name }}"
+        account_name: "{{ storage_account_name }}"
+        name: "profiles"
+        quota: 1024
+
+    - name: Create Log Analytics Workspace
+      azure_rm_loganalyticsworkspace:
+        resource_group: "{{ resource_group_name }}"
+        name: "{{ log_analytics_workspace_name }}"
+        location: "{{ location }}"
+        sku: PerGB2018
+        retention_in_days: 30
+        tags: "{{ common_tags }}"
+      register: workspace_result
+
+    - name: Create AVD Host Pool
+      uri:
+        url: "https://management.azure.com/subscriptions/{{ azure_subscription_id }}/resourceGroups/{{ resource_group_name }}/providers/Microsoft.DesktopVirtualization/hostPools/{{ host_pool_name }}?api-version=2021-07-12"
+        method: PUT
+        headers:
+          Authorization: "Bearer {{ azure_access_token }}"
+          Content-Type: "application/json"
+        body_format: json
+        body:
+          location: "{{ location }}"
+          properties:
+            hostPoolType: "Pooled"
+            loadBalancerType: "BreadthFirst"
+            maxSessionLimit: 10
+            preferredAppGroupType: "Desktop"
+            startVMOnConnect: true
+          tags: "{{ common_tags }}"
+        status_code: [200, 201]
+      register: hostpool_result
+
+    - name: Generate Host Pool Registration Token
+      uri:
+        url: "https://management.azure.com/subscriptions/{{ azure_subscription_id }}/resourceGroups/{{ resource_group_name }}/providers/Microsoft.DesktopVirtualization/hostPools/{{ host_pool_name }}/retrieveRegistrationToken?api-version=2021-07-12"
+        method: POST
+        headers:
+          Authorization: "Bearer {{ azure_access_token }}"
+          Content-Type: "application/json"
+        body_format: json
+        body:
+          expirationTime: "{{ (ansible_date_time.epoch | int + 14400) | strftime('%Y-%m-%dT%H:%M:%S.000Z') }}"
+        status_code: 200
+      register: token_result
+
+    - name: Create AVD Workspace
+      uri:
+        url: "https://management.azure.com/subscriptions/{{ azure_subscription_id }}/resourceGroups/{{ resource_group_name }}/providers/Microsoft.DesktopVirtualization/workspaces/{{ workspace_name }}?api-version=2021-07-12"
+        method: PUT
+        headers:
+          Authorization: "Bearer {{ azure_access_token }}"
+          Content-Type: "application/json"
+        body_format: json
+        body:
+          location: "{{ location }}"
+          properties: {}
+          tags: "{{ common_tags }}"
+        status_code: [200, 201]
+      register: workspace_result
+
+    - name: Create Desktop Application Group
+      uri:
+        url: "https://management.azure.com/subscriptions/{{ azure_subscription_id }}/resourceGroups/{{ resource_group_name }}/providers/Microsoft.DesktopVirtualization/applicationGroups/{{ prefix }}-desktop-appgroup?api-version=2021-07-12"
+        method: PUT
+        headers:
+          Authorization: "Bearer {{ azure_access_token }}"
+          Content-Type: "application/json"
+        body_format: json
+        body:
+          location: "{{ location }}"
+          properties:
+            applicationGroupType: "Desktop"
+            hostPoolArmPath: "/subscriptions/{{ azure_subscription_id }}/resourceGroups/{{ resource_group_name }}/providers/Microsoft.DesktopVirtualization/hostPools/{{ host_pool_name }}"
+          tags: "{{ common_tags }}"
+        status_code: [200, 201]
+      register: appgroup_result
+
+    - name: Associate Application Group with Workspace
+      uri:
+        url: "https://management.azure.com/subscriptions/{{ azure_subscription_id }}/resourceGroups/{{ resource_group_name }}/providers/Microsoft.DesktopVirtualization/workspaces/{{ workspace_name }}?api-version=2021-07-12"
+        method: PATCH
+        headers:
+          Authorization: "Bearer {{ azure_access_token }}"
+          Content-Type: "application/json"
+        body_format: json
+        body:
+          properties:
+            applicationGroupReferences:
+              - "/subscriptions/{{ azure_subscription_id }}/resourceGroups/{{ resource_group_name }}/providers/Microsoft.DesktopVirtualization/applicationGroups/{{ prefix }}-desktop-appgroup"
+        status_code: 200
+
+    - name: Create Network Interfaces for Session Hosts
+      azure_rm_networkinterface:
+        resource_group: "{{ resource_group_name }}"
+        name: "nic-{{ prefix }}-sh-{{ '%02d' | format(item) }}"
+        virtual_network: "{{ vnet_name }}"
+        subnet: "{{ subnet_name }}"
+        location: "{{ location }}"
+        tags: "{{ common_tags }}"
+      loop: "{{ range(1, session_host_count + 1) | list }}"
+      register: nic_results
+
+    - name: Create Session Host Virtual Machines
+      azure_rm_virtualmachine:
+        resource_group: "{{ resource_group_name }}"
+        name: "vm-{{ prefix }}-sh-{{ '%02d' | format(item) }}"
+        vm_size: "{{ session_host_vm_size }}"
+        location: "{{ location }}"
+        admin_username: "{{ admin_username }}"
+        admin_password: "{{ admin_password | default(lookup('password', '/tmp/avd_admin_password chars=ascii_letters,digits length=16')) }}"
+        network_interfaces: "nic-{{ prefix }}-sh-{{ '%02d' | format(item) }}"
+        image:
+          publisher: "MicrosoftWindowsDesktop"
+          offer: "Windows-11"
+          sku: "win11-21h2-ent"
+          version: "latest"
+        os_disk_name: "vm-{{ prefix }}-sh-{{ '%02d' | format(item) }}-osdisk"
+        os_disk_caching: ReadWrite
+        managed_disk_type: Premium_LRS
+        tags: "{{ common_tags }}"
+      loop: "{{ range(1, session_host_count + 1) | list }}"
+      register: vm_results
+      async: 600
+      poll: 0
+
+    - name: Wait for VM Creation to Complete
+      async_status:
+        jid: "{{ item.ansible_job_id }}"
+      register: vm_creation_status
+      until: vm_creation_status.finished
+      retries: 60
+      delay: 10
+      loop: "{{ vm_results.results }}"
+
+    - name: Install AVD Agents on Session Hosts
+      azure_rm_virtualmachineextension:
+        resource_group: "{{ resource_group_name }}"
+        virtual_machine_name: "vm-{{ prefix }}-sh-{{ '%02d' | format(item) }}"
+        name: "AVDAgentBootLoader"
+        publisher: "Microsoft.Compute"
+        virtual_machine_extension_type: "CustomScriptExtension"
+        type_handler_version: "1.10"
+        settings:
+          fileUris:
+            - "https://query.prod.cms.rt.microsoft.com/cms/api/am/binary/RWrmXv"
+          commandToExecute: "powershell -ExecutionPolicy Unrestricted -Command \"Start-Process -FilePath 'msiexec.exe' -ArgumentList '/i RWrmXv /quiet /qn /norestart /passive' -Wait\""
+        auto_upgrade_minor_version: true
+      loop: "{{ range(1, session_host_count + 1) | list }}"
+
+    - name: Install AVD Agent on Session Hosts
+      azure_rm_virtualmachineextension:
+        resource_group: "{{ resource_group_name }}"
+        virtual_machine_name: "vm-{{ prefix }}-sh-{{ '%02d' | format(item) }}"
+        name: "AVDAgent"
+        publisher: "Microsoft.Compute"
+        virtual_machine_extension_type: "CustomScriptExtension"
+        type_handler_version: "1.10"
+        settings:
+          fileUris:
+            - "https://query.prod.cms.rt.microsoft.com/cms/api/am/binary/RWrxrH"
+          commandToExecute: "powershell -ExecutionPolicy Unrestricted -Command \"Start-Process -FilePath 'msiexec.exe' -ArgumentList '/i RWrxrH /quiet /qn /norestart /passive REGISTRATIONTOKEN={{ token_result.json.token }}' -Wait; Restart-Computer -Force\""
+        auto_upgrade_minor_version: true
+      loop: "{{ range(1, session_host_count + 1) | list }}"
+
+    - name: Configure FSLogix on Session Hosts
+      azure_rm_virtualmachineextension:
+        resource_group: "{{ resource_group_name }}"
+        virtual_machine_name: "vm-{{ prefix }}-sh-{{ '%02d' | format(item) }}"
+        name: "ConfigureFSLogix"
+        publisher: "Microsoft.Compute"
+        virtual_machine_extension_type: "CustomScriptExtension"
+        type_handler_version: "1.10"
+        settings:
+          commandToExecute: |
+            powershell -ExecutionPolicy Unrestricted -Command "
+            $regPath = 'HKLM:\SOFTWARE\FSLogix\Profiles'
+            New-Item -Path $regPath -Force | Out-Null
+            Set-ItemProperty -Path $regPath -Name 'Enabled' -Value 1
+            Set-ItemProperty -Path $regPath -Name 'VHDLocations' -Value '\\{{ storage_account_name }}.file.core.windows.net\profiles'
+            Set-ItemProperty -Path $regPath -Name 'SizeInMBs' -Value 10240
+            Set-ItemProperty -Path $regPath -Name 'IsDynamic' -Value 1
+            Set-ItemProperty -Path $regPath -Name 'VolumeType' -Value 'VHDX'
+            "
+        auto_upgrade_minor_version: true
+      loop: "{{ range(1, session_host_count + 1) | list }}"
+
+    - name: Configure Diagnostic Settings for Host Pool
+      uri:
+        url: "https://management.azure.com/subscriptions/{{ azure_subscription_id }}/resourceGroups/{{ resource_group_name }}/providers/Microsoft.DesktopVirtualization/hostPools/{{ host_pool_name }}/providers/Microsoft.Insights/diagnosticSettings/avd-diagnostics?api-version=2021-05-01-preview"
+        method: PUT
+        headers:
+          Authorization: "Bearer {{ azure_access_token }}"
+          Content-Type: "application/json"
+        body_format: json
+        body:
+          properties:
+            workspaceId: "{{ workspace_result.state.id }}"
+            logs:
+              - category: "Checkpoint"
+                enabled: true
+                retentionPolicy:
+                  enabled: true
+                  days: 30
+              - category: "Error"
+                enabled: true
+                retentionPolicy:
+                  enabled: true
+                  days: 30
+              - category: "Management"
+                enabled: true
+                retentionPolicy:
+                  enabled: true
+                  days: 30
+        status_code: [200, 201]
+
+    - name: Create Alert Rules for Monitoring
+      azure_rm_metricalert:
+        resource_group: "{{ resource_group_name }}"
+        name: "AVD-HighCPU-Alert"
+        location: "{{ location }}"
+        description: "Alert when session host CPU usage is high"
+        severity: 2
+        enabled: true
+        scopes:
+          - "/subscriptions/{{ azure_subscription_id }}/resourceGroups/{{ resource_group_name }}"
+        evaluation_frequency: "PT5M"
+        window_size: "PT15M"
+        criteria:
+          all_of:
+            - metric_name: "Percentage CPU"
+              metric_namespace: "Microsoft.Compute/virtualMachines"
+              operator: "GreaterThan"
+              threshold: 85
+              time_aggregation: "Average"
+        tags: "{{ common_tags }}"
+
+    - name: Display Deployment Summary
+      debug:
+        msg:
+          - "=========================================="
+          - "Azure Virtual Desktop Deployment Complete"
+          - "=========================================="
+          - "Resource Group: {{ resource_group_name }}"
+          - "Location: {{ location }}"
+          - "Host Pool: {{ host_pool_name }}"
+          - "Workspace: {{ workspace_name }}"
+          - "Session Hosts Created: {{ session_host_count }}"
+          - "Storage Account: {{ storage_account_name }}"
+          - "Web Client URL: https://rdweb.wvd.microsoft.com/arm/webclient"
+          - "=========================================="
+
+# Post-deployment configuration playbook
+- name: Post-Deployment Configuration
+  hosts: localhost
+  connection: local
+  gather_facts: no
+  tasks:
+    - name: Verify Session Host Registration
+      uri:
+        url: "https://management.azure.com/subscriptions/{{ azure_subscription_id }}/resourceGroups/{{ resource_group_name }}/providers/Microsoft.DesktopVirtualization/hostPools/{{ host_pool_name }}/sessionHosts?api-version=2021-07-12"
+        method: GET
+        headers:
+          Authorization: "Bearer {{ azure_access_token }}"
+        status_code: 200
+      register: session_hosts_status
+
+    - name: Display Session Host Status
+      debug:
+        msg:
+          - "Session Hosts Status:"
+          - "{{ session_hosts_status.json.value | selectattr('name', 'defined') | map(attribute='name') | list }}"
+
+    - name: Create Auto-Scaling Plan (Optional)
+      uri:
+        url: "https://management.azure.com/subscriptions/{{ azure_subscription_id }}/resourceGroups/{{ resource_group_name }}/providers/Microsoft.DesktopVirtualization/scalingPlans/sp-{{ prefix }}?api-version=2021-07-12"
+        method: PUT
+        headers:
+          Authorization: "Bearer {{ azure_access_token }}"
+          Content-Type: "application/json"
+        body_format: json
+        body:
+          location: "{{ location }}"
+          properties:
+            timeZone: "Eastern Standard Time"
+            hostPoolType: "Pooled"
+            schedules:
+              - name: "Weekday Schedule"
+                daysOfWeek:
+                  - "Monday"
+                  - "Tuesday" 
+                  - "Wednesday"
+                  - "Thursday"
+                  - "Friday"
+                rampUpStartTime: "07:00"
+                peakStartTime: "09:00"
+                rampDownStartTime: "17:00"
+                offPeakStartTime: "20:00"
+                rampUpCapacityThresholdPct: 60
+                rampUpMinimumHostsPct: 20
+                peakCapacityThresholdPct: 80
+                rampDownCapacityThresholdPct: 90
+                rampDownMinimumHostsPct: 10
+                offPeakCapacityThresholdPct: 90
+            hostPoolReferences:
+              - hostPoolArmPath: "/subscriptions/{{ azure_subscription_id }}/resourceGroups/{{ resource_group_name }}/providers/Microsoft.DesktopVirtualization/hostPools/{{ host_pool_name }}"
+                scalingPlanEnabled: true
+          tags: "{{ common_tags }}"
+        status_code: [200, 201]
+      when: enable_autoscaling | default(false) | bool
+
+    - name: Final Verification and Cleanup
+      debug:
+        msg:
+          - "Deployment verification completed"
+          - "AVD environment is ready for user assignment"
+          - "Next steps:"
+          - "1. Assign users to the desktop application group"
+          - "2. Configure conditional access policies"
+          - "3. Set up monitoring dashboards"
+          - "4. Test user connections"

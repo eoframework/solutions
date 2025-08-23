@@ -1,0 +1,46 @@
+name: azure-virtual-desktop
+title: Azure Virtual Desktop
+version: "1.0"
+provider: azure
+category: modern-workspace
+complexity: intermediate
+deployment_time: 2-4 weeks
+
+description: >
+  Comprehensive Azure Virtual Desktop solution providing secure, scalable desktop 
+  virtualization with Windows 11 multi-session support, FSLogix profiles, and 
+  centralized management through Azure.
+
+tags:
+  - virtual-desktop
+  - avd
+  - windows-11
+  - fslogix
+  - remote-work
+  - virtualization
+
+key_features:
+  - Windows 11 multi-session support
+  - Auto-scaling capabilities
+  - FSLogix profile management
+  - Azure AD integration
+  - Cost optimization
+  - Centralized management
+
+prerequisites:
+  - Azure subscription with Virtual Desktop Admin permissions
+  - Azure Active Directory tenant
+  - Virtual network configured
+  - Windows licensing compliance
+  - Storage infrastructure
+
+estimated_costs:
+  development: "$2,000 - $5,000"
+  infrastructure: "$500 - $2,000/month"
+  maintenance: "$200 - $500/month"
+
+target_audience:
+  - IT administrators
+  - Desktop administrators
+  - Azure architects
+  - Remote work enablement teams
