@@ -1,0 +1,58 @@
+name: IBM Ansible Automation Platform
+version: "2.4"
+provider: ibm
+category: devops
+subcategory: automation
+description: Enterprise automation platform for hybrid cloud infrastructure and application management
+tags:
+  - ansible
+  - automation
+  - devops
+  - infrastructure-as-code
+  - configuration-management
+  - compliance
+  - hybrid-cloud
+  - gitops
+  - rbac
+  - workflow-orchestration
+author: IBM Red Hat Services
+contact: redhat-services@ibm.com
+license: IBM Internal Use
+created_date: "2024-01-15"
+updated_date: "2024-01-15"
+dependencies:
+  - red-hat-openshift
+  - postgresql
+  - persistent-storage
+supported_platforms:
+  - red-hat-openshift
+  - aws-eks
+  - azure-aks
+  - google-gke
+  - vmware-tanzu
+deployment_types:
+  - standard
+  - high-availability
+  - hub-and-spoke
+  - air-gapped
+compliance_frameworks:
+  - soc2
+  - iso27001
+  - nist
+  - pci-dss
+  - hipaa
+  - gdpr
+integration_points:
+  - git-repositories
+  - ci-cd-pipelines
+  - monitoring-systems
+  - identity-providers
+  - cloud-providers
+  - ticketing-systems
+estimated_deployment_time: "4-8 hours"
+complexity_level: intermediate
+business_value:
+  cost_reduction: "30-50%"
+  deployment_acceleration: "60-80%"
+  operational_efficiency: "40-60%"
+  compliance_improvement: "70-90%"

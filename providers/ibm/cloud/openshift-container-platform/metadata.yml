@@ -1,0 +1,60 @@
+name: IBM OpenShift Container Platform
+version: "4.14"
+provider: ibm
+category: cloud
+subcategory: container-platform
+description: Enterprise Kubernetes platform with integrated developer tools and multi-cloud capabilities
+tags:
+  - openshift
+  - kubernetes
+  - containers
+  - cloud-native
+  - microservices
+  - devops
+  - ci-cd
+  - service-mesh
+  - hybrid-cloud
+  - developer-tools
+author: IBM Red Hat Services
+contact: redhat-services@ibm.com
+license: IBM Internal Use
+created_date: "2024-01-15"
+updated_date: "2024-01-15"
+dependencies:
+  - aws-account
+  - domain-name
+  - red-hat-subscription
+supported_platforms:
+  - aws
+  - azure
+  - gcp
+  - ibm-cloud
+  - vmware-vsphere
+  - bare-metal
+deployment_types:
+  - single-az
+  - multi-az
+  - private
+  - fips
+compliance_frameworks:
+  - soc2
+  - iso27001
+  - nist
+  - pci-dss
+  - hipaa
+  - gdpr
+  - fips-140-2
+integration_points:
+  - aws-services
+  - identity-providers
+  - monitoring-systems
+  - ci-cd-tools
+  - service-mesh
+  - storage-systems
+estimated_deployment_time: "2-4 hours"
+complexity_level: intermediate
+business_value:
+  developer_productivity: "40-60%"
+  deployment_speed: "70-90%"
+  operational_efficiency: "50-70%"
+  security_posture: "60-80%"

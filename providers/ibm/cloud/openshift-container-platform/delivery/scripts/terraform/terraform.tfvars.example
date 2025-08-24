@@ -1,0 +1,124 @@
+# IBM OpenShift Container Platform - Terraform Variables Example
+# Copy this file to terraform.tfvars and customize for your environment
+
+# Project Configuration
+project_name = "openshift-platform"
+environment = "prod"
+
+# AWS Configuration
+aws_region = "us-east-1"
+aws_profile = "default"
+
+# OpenShift Configuration
+openshift_version = "4.14.8"
+openshift_cluster_manager_token = "your-cluster-manager-token-here"  # REQUIRED
+rhcs_url = "https://api.openshift.com"
+
+# Deployment Type Configuration
+deployment_type = "multi-az"  # Options: single-az, multi-az, private, fips
+
+# Network Configuration
+vpc_cidr = "10.0.0.0/16"
+public_subnet_cidrs = [
+  "10.0.1.0/24",
+  "10.0.2.0/24", 
+  "10.0.3.0/24"
+]
+private_subnet_cidrs = [
+  "10.0.10.0/24",
+  "10.0.11.0/24",
+  "10.0.12.0/24"
+]
+allowed_cidr_blocks = [
+  "10.0.0.0/16",
+  "192.168.0.0/16"
+]
+
+# Machine Configuration
+compute_machine_type = "m5.2xlarge"
+compute_replicas = 3
+
+# Additional Machine Pool Configuration
+enable_additional_machine_pool = false
+additional_machine_type = "m5.xlarge" 
+additional_machine_replicas = 2
+
+# Auto-scaling Configuration
+enable_autoscaling = false
+min_replicas = 2
+max_replicas = 10
+
+# Identity Provider Configuration
+identity_provider_type = ""  # Options: "", "htpasswd", "openid", "ldap"
+identity_provider_name = "cluster-auth"
+
+# HTPasswd Identity Provider Configuration (if using htpasswd)
+htpasswd_users = {
+  # "admin" = "$2a$10$..."  # bcrypt hash of password
+}
+create_cluster_admin = true
+
+# OpenID Identity Provider Configuration (if using openid)
+openid_client_id = ""
+openid_client_secret = ""
+openid_issuer = ""
+
+# Storage Configuration
+create_s3_storage = true
+storage_class = "gp3-csi"
+
+# Load Balancer Configuration
+create_additional_alb = false
+
+# DNS Configuration
+manage_dns = false
+cluster_domain = "openshift.company.com"
+route53_zone_id = ""
+
+# Monitoring and Logging Configuration
+enable_cluster_monitoring = true
+enable_user_workload_monitoring = true
+monitoring_retention_days = 7
+
+# Security Configuration
+enable_fips = false
+enable_etcd_encryption = true
+kms_key_deletion_window = 7
+
+# Backup Configuration
+enable_cluster_backup = true
+backup_schedule = "0 2 * * *"
+backup_retention_days = 30
+
+# Compliance Configuration
+compliance_scanning = false
+compliance_profiles = [
+  "ocp4-cis",
+  "ocp4-pci-dss"
+]
+
+# Resource Limits
+cluster_resource_quota = {
+  requests_cpu      = "100m"
+  requests_memory   = "128Mi" 
+  limits_cpu        = "200m"
+  limits_memory     = "256Mi"
+  persistentvolumeclaims = 5
+}
+
+# Networking Configuration
+network_type = "OVNKubernetes"  # Options: OpenShiftSDN, OVNKubernetes
+service_cidr = "172.30.0.0/16"
+pod_cidr = "10.128.0.0/14"
+host_prefix = 23
+
+# Additional Configuration
+additional_trust_bundle = ""
+cluster_network_mtu = 1450
+disable_user_workload_monitoring = false
+
+# Proxy Configuration
+enable_proxy = false
+http_proxy = ""
+https_proxy = ""
+no_proxy = ""

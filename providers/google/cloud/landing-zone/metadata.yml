@@ -1,0 +1,50 @@
+name: google-cloud-landing-zone
+title: Google Cloud Enterprise Landing Zone
+version: "1.0"
+provider: google
+category: cloud
+complexity: enterprise
+deployment_time: 4-8 weeks
+
+description: >
+  Enterprise-grade Google Cloud Platform foundation architecture providing 
+  secure, scalable infrastructure with organizational hierarchy, network 
+  segmentation, centralized operations, and compliance frameworks.
+
+tags:
+  - landing-zone
+  - gcp
+  - enterprise-architecture
+  - vpc
+  - iam
+  - security
+  - compliance
+  - infrastructure-as-code
+
+key_features:
+  - Enterprise organization hierarchy and governance
+  - Hub-and-spoke VPC network architecture
+  - Centralized identity and access management
+  - Security operations and monitoring
+  - Compliance and audit frameworks
+  - Infrastructure automation with Terraform
+
+prerequisites:
+  - Google Cloud Organization setup with billing
+  - Super Admin or Organization Admin permissions
+  - Network architecture and security requirements defined
+  - Compliance and governance policies established
+  - Terraform and Google Cloud SDK installed
+
+estimated_costs:
+  implementation: "$25,000 - $75,000"
+  infrastructure: "$2,000 - $10,000/month"
+  operations: "$5,000 - $15,000/month"
+  compliance: "$1,000 - $5,000/month"
+
+target_audience:
+  - Cloud architects
+  - Platform engineering teams
+  - Security architects
+  - DevOps engineers
+  - IT operations teams

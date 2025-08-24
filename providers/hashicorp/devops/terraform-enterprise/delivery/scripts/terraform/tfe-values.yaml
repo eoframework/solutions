@@ -1,0 +1,405 @@
+# Terraform Enterprise Helm Chart Values
+# This file is templated by Terraform with dynamic values
+
+# Global configuration
+global:
+  domain: "${domain_name}"
+  enableMetrics: true
+  enableTracing: true
+
+# Terraform Enterprise application configuration
+tfe:
+  # Replica configuration
+  replicaCount: ${replica_count}
+
+  # Image configuration
+  image:
+    repository: hashicorp/terraform-enterprise
+    tag: "latest"
+    pullPolicy: Always
+
+  # Resource configuration
+  resources: ${jsonencode(resources)}
+
+  # Environment variables
+  env:
+    # Database configuration
+    - name: TFE_DATABASE_URL
+      valueFrom:
+        secretKeyRef:
+          name: ${database_secret}
+          key: url
+    
+    - name: TFE_DATABASE_HOST
+      valueFrom:
+        secretKeyRef:
+          name: ${database_secret}
+          key: host
+    
+    - name: TFE_DATABASE_NAME
+      valueFrom:
+        secretKeyRef:
+          name: ${database_secret}
+          key: database
+    
+    - name: TFE_DATABASE_USER
+      valueFrom:
+        secretKeyRef:
+          name: ${database_secret}
+          key: username
+    
+    - name: TFE_DATABASE_PASSWORD
+      valueFrom:
+        secretKeyRef:
+          name: ${database_secret}
+          key: password
+    
+    # Storage configuration
+    - name: TFE_OBJECT_STORAGE_TYPE
+      value: "s3"
+    
+    - name: TFE_OBJECT_STORAGE_S3_BUCKET
+      valueFrom:
+        secretKeyRef:
+          name: ${storage_secret}
+          key: bucket
+    
+    - name: TFE_OBJECT_STORAGE_S3_REGION
+      valueFrom:
+        secretKeyRef:
+          name: ${storage_secret}
+          key: region
+    
+    - name: TFE_OBJECT_STORAGE_S3_USE_INSTANCE_PROFILE
+      value: "true"
+    
+    # License configuration
+    - name: TFE_LICENSE
+      valueFrom:
+        secretKeyRef:
+          name: ${license_secret}
+          key: license
+    
+    # Application configuration
+    - name: TFE_HOSTNAME
+      value: "${domain_name}"
+    
+    - name: TFE_HTTP_PORT
+      value: "80"
+    
+    - name: TFE_HTTPS_PORT
+      value: "443"
+    
+    - name: TFE_ADMIN_TOKEN
+      valueFrom:
+        secretKeyRef:
+          name: tfe-admin-token
+          key: token
+          optional: true
+    
+    # Operational configuration
+    - name: TFE_OPERATIONAL_MODE
+      value: "active-active"
+    
+    - name: TFE_CAPACITY_CONCURRENCY
+      value: "10"
+    
+    - name: TFE_CAPACITY_CPU
+      value: "0"
+    
+    - name: TFE_CAPACITY_MEMORY
+      value: "2048"
+    
+    # Logging configuration
+    - name: TFE_LOG_LEVEL
+      value: "INFO"
+    
+    - name: TFE_LOG_FORWARDING_ENABLED
+      value: "true"
+    
+    # Security configuration
+    - name: TFE_TLS_ENFORCE
+      value: "true"
+    
+    - name: TFE_COOKIE_HASH_KEY
+      valueFrom:
+        secretKeyRef:
+          name: tfe-cookie-hash-key
+          key: key
+          optional: true
+    
+    # Metrics and monitoring
+    - name: TFE_METRICS_ENABLE
+      value: "true"
+    
+    - name: TFE_METRICS_HTTP_PORT
+      value: "9090"
+    
+    # Vault integration (if enabled)
+    - name: TFE_VAULT_ENABLED
+      value: "false"
+    
+    # Consul integration (if enabled) 
+    - name: TFE_CONSUL_ENABLED
+      value: "false"
+
+  # Liveness and readiness probes
+  livenessProbe:
+    httpGet:
+      path: /_health_check
+      port: 80
+    initialDelaySeconds: 300
+    periodSeconds: 30
+    timeoutSeconds: 10
+    failureThreshold: 3
+
+  readinessProbe:
+    httpGet:
+      path: /_health_check
+      port: 80
+    initialDelaySeconds: 30
+    periodSeconds: 10
+    timeoutSeconds: 5
+    failureThreshold: 3
+
+  # Security context
+  securityContext:
+    runAsNonRoot: true
+    runAsUser: 1000
+    runAsGroup: 1000
+    fsGroup: 1000
+    capabilities:
+      drop:
+        - ALL
+
+  # Node selection
+  nodeSelector:
+    workload: terraform-enterprise
+
+  # Tolerations for dedicated nodes
+  tolerations: []
+
+  # Affinity rules
+  affinity:
+    podAntiAffinity:
+      preferredDuringSchedulingIgnoredDuringExecution:
+        - weight: 100
+          podAffinityTerm:
+            labelSelector:
+              matchExpressions:
+                - key: app.kubernetes.io/name
+                  operator: In
+                  values:
+                    - terraform-enterprise
+            topologyKey: kubernetes.io/hostname
+
+# Service configuration
+service:
+  type: ClusterIP
+  port: 80
+  targetPort: 80
+  annotations:
+    service.beta.kubernetes.io/aws-load-balancer-type: "nlb"
+    service.beta.kubernetes.io/aws-load-balancer-internal: "true"
+
+# Ingress configuration
+ingress:
+  enabled: true
+  className: "${ingress_class}"
+  annotations:
+    kubernetes.io/ingress.class: "${ingress_class}"
+    alb.ingress.kubernetes.io/scheme: internet-facing
+    alb.ingress.kubernetes.io/target-type: ip
+    alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}, {"HTTPS": 443}]'
+    alb.ingress.kubernetes.io/certificate-arn: "" # Will be populated by Terraform
+    alb.ingress.kubernetes.io/ssl-redirect: "443"
+    alb.ingress.kubernetes.io/healthcheck-path: "/_health_check"
+    alb.ingress.kubernetes.io/healthcheck-interval-seconds: "30"
+    alb.ingress.kubernetes.io/healthcheck-timeout-seconds: "10"
+    alb.ingress.kubernetes.io/healthy-threshold-count: "2"
+    alb.ingress.kubernetes.io/unhealthy-threshold-count: "3"
+  hosts:
+    - host: "${domain_name}"
+      paths:
+        - path: /
+          pathType: Prefix
+  tls:
+    - secretName: tfe-tls
+      hosts:
+        - "${domain_name}"
+
+# Persistent storage configuration
+persistence:
+  enabled: true
+  storageClass: "${storage_class}"
+  accessModes:
+    - ReadWriteOnce
+  size: 100Gi
+  annotations: {}
+
+# PostgreSQL dependency (disabled as we use external RDS)
+postgresql:
+  enabled: false
+
+# Redis configuration (for session storage)
+redis:
+  enabled: true
+  architecture: standalone
+  auth:
+    enabled: true
+    password: "change-me-in-production"
+  master:
+    persistence:
+      enabled: true
+      size: 8Gi
+      storageClass: "${storage_class}"
+    resources:
+      requests:
+        memory: 256Mi
+        cpu: 100m
+      limits:
+        memory: 512Mi
+        cpu: 200m
+
+# Service account configuration
+serviceAccount:
+  create: true
+  annotations:
+    eks.amazonaws.com/role-arn: "" # Will be populated by Terraform
+  name: terraform-enterprise
+
+# Pod disruption budget
+podDisruptionBudget:
+  enabled: true
+  minAvailable: 1
+
+# Horizontal Pod Autoscaler
+autoscaling:
+  enabled: true
+  minReplicas: ${replica_count}
+  maxReplicas: $${replica_count * 3}
+  targetCPUUtilizationPercentage: 80
+  targetMemoryUtilizationPercentage: 80
+
+# Network policies
+networkPolicy:
+  enabled: true
+  ingress:
+    - from:
+        - namespaceSelector:
+            matchLabels:
+              name: ingress-nginx
+    - from:
+        - namespaceSelector:
+            matchLabels:
+              name: monitoring
+  egress:
+    - to: []
+      ports:
+        - protocol: TCP
+          port: 443
+        - protocol: TCP
+          port: 5432
+        - protocol: UDP
+          port: 53
+
+# Monitoring and observability
+monitoring:
+  enabled: true
+  serviceMonitor:
+    enabled: true
+    namespace: monitoring
+    interval: 30s
+    path: /metrics
+  prometheusRule:
+    enabled: true
+    namespace: monitoring
+    rules:
+      - alert: TerraformEnterpriseDown
+        expr: up{job="terraform-enterprise"} == 0
+        for: 5m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Terraform Enterprise is down"
+          description: "Terraform Enterprise has been down for more than 5 minutes."
+      
+      - alert: TerraformEnterpriseHighCPU
+        expr: rate(container_cpu_usage_seconds_total{pod=~"terraform-enterprise-.*"}[5m]) * 100 > 80
+        for: 10m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Terraform Enterprise high CPU usage"
+          description: "Terraform Enterprise CPU usage is above 80% for more than 10 minutes."
+      
+      - alert: TerraformEnterpriseHighMemory
+        expr: container_memory_usage_bytes{pod=~"terraform-enterprise-.*"} / container_spec_memory_limit_bytes{pod=~"terraform-enterprise-.*"} * 100 > 85
+        for: 10m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Terraform Enterprise high memory usage"
+          description: "Terraform Enterprise memory usage is above 85% for more than 10 minutes."
+
+# Backup configuration
+backup:
+  enabled: true
+  schedule: "0 2 * * *"  # Daily at 2 AM
+  retention: "30d"
+  destination:
+    s3:
+      bucket: "" # Will be populated by Terraform
+      region: "" # Will be populated by Terraform
+
+# Security policies
+podSecurityPolicy:
+  enabled: true
+  allowPrivilegeEscalation: false
+  requiredDropCapabilities:
+    - ALL
+  allowedCapabilities: []
+  runAsUser:
+    rule: MustRunAsNonRoot
+  seLinux:
+    rule: RunAsAny
+  fsGroup:
+    rule: RunAsAny
+
+# Additional configuration
+extraConfigMaps: []
+extraSecrets: []
+extraVolumes: []
+extraVolumeMounts: []
+
+# Init containers for database migration
+initContainers:
+  - name: database-migration
+    image: hashicorp/terraform-enterprise:latest
+    command:
+      - /bin/sh
+      - -c
+      - |
+        echo "Running database migrations..."
+        # Database migration commands would go here
+        echo "Database migration completed"
+    env:
+      - name: TFE_DATABASE_URL
+        valueFrom:
+          secretKeyRef:
+            name: ${database_secret}
+            key: url
+
+# Sidecar containers
+sidecars: []
+
+# Pod annotations
+podAnnotations:
+  prometheus.io/scrape: "true"
+  prometheus.io/port: "9090"
+  prometheus.io/path: "/metrics"
+
+# Pod labels
+podLabels:
+  app.kubernetes.io/name: terraform-enterprise
+  app.kubernetes.io/version: "latest"

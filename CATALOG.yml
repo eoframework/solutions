@@ -299,7 +299,15 @@ providers:
       ai:
         solutions: {}
       cloud:
-        solutions: {}
+        solutions:
+          landing-zone:
+            title: "Google Cloud Enterprise Landing Zone"
+            description: "Comprehensive enterprise cloud foundation with security, governance, and operational excellence"
+            version: "1.0"
+            tags: ["landing-zone", "gcp", "enterprise-architecture", "vpc", "iam", "security", "compliance"]
+            complexity: "enterprise"
+            deployment_time: "4-8 weeks"
+            repository: "https://github.com/eoframework/templates/tree/main/providers/google/cloud/landing-zone"
       cyber-security:
         solutions: {}
       devops:
@@ -321,11 +329,53 @@ providers:
       ai:
         solutions: {}
       cloud:
-        solutions: {}
+        solutions:
+          multi-cloud-platform:
+            title: "HashiCorp Multi-Cloud Infrastructure Management Platform"
+            description: "Enterprise multi-cloud infrastructure management platform using HashiCorp's complete product suite for unified cloud operations"
+            version: "1.0"
+            tags: ["multi-cloud", "terraform", "consul", "vault", "nomad", "boundary", "infrastructure-management", "hybrid-cloud", "service-mesh", "secrets-management"]
+            complexity: "enterprise"
+            deployment_time: "4-8 weeks"
+            repository: "https://github.com/eoframework/templates/tree/main/providers/hashicorp/cloud/multi-cloud-platform"
+            features:
+              - "Unified multi-cloud operations across AWS, Azure, and GCP"
+              - "HashiCorp Terraform Enterprise for infrastructure as code"
+              - "HashiCorp Consul for service discovery and service mesh"
+              - "HashiCorp Vault for secrets and identity management"
+              - "HashiCorp Nomad for workload orchestration"
+              - "HashiCorp Boundary for secure remote access"
+              - "Cross-cloud networking and VPN connectivity"
+              - "Zero-trust security architecture"
+              - "Policy as code with Sentinel"
+              - "Automated disaster recovery and backup"
+            supported_platforms: ["AWS", "Microsoft Azure", "Google Cloud Platform", "Kubernetes", "VMware vSphere"]
+            integrations: ["Multi-cloud APIs", "Kubernetes", "Identity Providers", "Monitoring Systems", "CI/CD Pipelines"]
       cyber-security:
         solutions: {}
       devops:
-        solutions: {}
+        solutions:
+          terraform-enterprise:
+            title: "HashiCorp Terraform Enterprise Platform"
+            description: "Enterprise-grade Terraform platform providing collaborative infrastructure as code, policy as code, and automated workflows"
+            version: "1.0"
+            tags: ["terraform", "infrastructure-as-code", "devops", "policy-as-code", "multi-cloud", "enterprise", "collaboration", "sentinel", "automation"]
+            complexity: "enterprise"
+            deployment_time: "2-4 weeks"
+            repository: "https://github.com/eoframework/templates/tree/main/providers/hashicorp/devops/terraform-enterprise"
+            features:
+              - "Collaborative infrastructure as code workflows"
+              - "Policy as code with Sentinel policy enforcement"
+              - "Multi-cloud support for AWS, Azure, GCP, and on-premises"
+              - "Private module registry for standardized components"
+              - "Enterprise security with SSO and RBAC"
+              - "Cost estimation and analysis before deployment"
+              - "VCS integration with GitHub, GitLab, and Bitbucket"
+              - "Full REST API for automation and integration"
+              - "Workspace management and team collaboration"
+              - "Comprehensive audit logging and compliance"
+            supported_platforms: ["AWS", "Microsoft Azure", "Google Cloud Platform", "VMware vSphere", "Kubernetes"]
+            integrations: ["Version Control Systems", "Identity Providers", "CI/CD Pipelines", "HashiCorp Vault", "Monitoring Systems"]
       modern-workspace:
         solutions: {}
       network:
@@ -335,11 +385,53 @@ providers:
       ai:
         solutions: {}
       cloud:
-        solutions: {}
+        solutions:
+          openshift-container-platform:
+            title: "IBM OpenShift Container Platform"
+            description: "Enterprise Kubernetes platform with integrated developer tools and multi-cloud capabilities"
+            version: "4.14"
+            tags: ["openshift", "kubernetes", "containers", "cloud-native", "microservices", "devops", "ci-cd", "service-mesh", "hybrid-cloud", "developer-tools"]
+            complexity: "intermediate"
+            deployment_time: "2-4 hours"
+            repository: "https://github.com/eoframework/templates/tree/main/providers/ibm/cloud/openshift-container-platform"
+            features:
+              - "Enterprise Kubernetes with Red Hat support"
+              - "Integrated developer tools and workflows"
+              - "Built-in security and compliance controls"
+              - "Multi-cloud and hybrid cloud capabilities"
+              - "Automated scaling and lifecycle management"
+              - "Service mesh and networking with Istio"
+              - "Monitoring and observability stack"
+              - "GitOps and CI/CD integration with Tekton"
+              - "Source-to-image (S2I) capabilities"
+              - "Built-in container image registry"
+            supported_platforms: ["AWS", "Microsoft Azure", "Google Cloud Platform", "IBM Cloud", "VMware vSphere", "Bare Metal"]
+            integrations: ["AWS Services", "Identity Providers", "Monitoring Systems", "CI/CD Tools", "Service Mesh", "Storage Systems"]
       cyber-security:
         solutions: {}
       devops:
-        solutions: {}
+        solutions:
+          ansible-automation-platform:
+            title: "IBM Ansible Automation Platform"
+            description: "Enterprise-grade automation capabilities for DevOps teams, enabling standardized, secure, and scalable infrastructure and application management"
+            version: "2.4"
+            tags: ["ansible", "automation", "devops", "infrastructure-as-code", "configuration-management", "compliance", "hybrid-cloud", "gitops", "rbac", "workflow-orchestration"]
+            complexity: "intermediate"
+            deployment_time: "4-8 hours"
+            repository: "https://github.com/eoframework/templates/tree/main/providers/ibm/devops/ansible-automation-platform"
+            features:
+              - "Automation Controller for centralized management"
+              - "Automation Hub for private content repository"
+              - "Event-Driven Ansible for reactive automation"
+              - "Decision Environment for policy-based governance"
+              - "Automation Mesh for distributed execution"
+              - "Role-based access control (RBAC)"
+              - "GitOps integration for Infrastructure as Code"
+              - "Multi-cloud and hybrid cloud automation"
+              - "Compliance and security policy enforcement"
+              - "Real-time monitoring and analytics"
+            supported_platforms: ["Red Hat OpenShift", "AWS EKS", "Azure AKS", "Google GKE", "VMware Tanzu"]
+            integrations: ["Git Repositories", "CI/CD Pipelines", "Monitoring Systems", "Identity Providers", "Cloud Providers", "Ticketing Systems"]
       modern-workspace:
         solutions: {}
       network:

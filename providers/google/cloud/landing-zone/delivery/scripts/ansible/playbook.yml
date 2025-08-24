@@ -1,0 +1,577 @@
+---
+# Google Cloud Landing Zone Ansible Playbook
+# This playbook automates the deployment and configuration of Google Cloud Landing Zone
+# infrastructure using Terraform and Google Cloud modules.
+
+- name: Deploy Google Cloud Landing Zone Infrastructure
+  hosts: localhost
+  gather_facts: no
+  vars:
+    # Default configuration variables
+    project_id: "{{ project_id | default('') }}"
+    organization_id: "{{ organization_id | default('') }}"
+    billing_account_id: "{{ billing_account_id | default('') }}"
+    region: "{{ region | default('us-central1') }}"
+    environment: "{{ environment | default('prod') }}"
+    config_file: "{{ config_file | default('terraform.tfvars') }}"
+    auto_approve: "{{ auto_approve | default(false) }}"
+    plan_only: "{{ plan_only | default(false) }}"
+    destroy_mode: "{{ destroy_mode | default(false) }}"
+    
+    # Directory paths
+    terraform_dir: "{{ playbook_dir }}/../terraform"
+    scripts_dir: "{{ playbook_dir }}"
+    log_dir: "{{ playbook_dir }}/logs"
+    
+    # Deployment tracking
+    deployment_id: "{{ ansible_date_time.iso8601_basic_short }}"
+    log_file: "{{ log_dir }}/ansible-deployment-{{ deployment_id }}.log"
+    
+    # Required Google Cloud APIs
+    required_apis:
+      - cloudresourcemanager.googleapis.com
+      - compute.googleapis.com
+      - iam.googleapis.com
+      - logging.googleapis.com
+      - monitoring.googleapis.com
+      - storage.googleapis.com
+      - cloudkms.googleapis.com
+      - dns.googleapis.com
+      - servicenetworking.googleapis.com
+      - cloudtrace.googleapis.com
+
+  tasks:
+    - name: Validate required variables
+      fail:
+        msg: "{{ item }} is required but not defined"
+      when: vars[item] == ''
+      loop:
+        - project_id
+        - organization_id
+        - billing_account_id
+
+    - name: Create log directory
+      file:
+        path: "{{ log_dir }}"
+        state: directory
+        mode: '0755'
+
+    - name: Log deployment start
+      lineinfile:
+        path: "{{ log_file }}"
+        line: "[{{ ansible_date_time.iso8601 }}] Starting Google Cloud Landing Zone deployment"
+        create: yes
+
+    - name: Check prerequisites
+      block:
+        - name: Check if gcloud CLI is installed
+          command: gcloud --version
+          register: gcloud_version_check
+          failed_when: gcloud_version_check.rc != 0
+
+        - name: Check if Terraform is installed
+          command: terraform --version
+          register: terraform_version_check
+          failed_when: terraform_version_check.rc != 0
+
+        - name: Check Google Cloud authentication
+          command: gcloud auth list --format="value(account)"
+          register: gcloud_auth_check
+          failed_when: gcloud_auth_check.stdout == ""
+
+        - name: Log prerequisites check success
+          lineinfile:
+            path: "{{ log_file }}"
+            line: "[{{ ansible_date_time.iso8601 }}] Prerequisites check passed"
+
+    - name: Validate Terraform configuration
+      block:
+        - name: Check if Terraform configuration file exists
+          stat:
+            path: "{{ terraform_dir }}/{{ config_file }}"
+          register: terraform_config_stat
+          failed_when: not terraform_config_stat.stat.exists
+
+        - name: Read Terraform configuration
+          slurp:
+            src: "{{ terraform_dir }}/{{ config_file }}"
+          register: terraform_config_content
+
+        - name: Validate required variables in configuration
+          fail:
+            msg: "Required variable '{{ item }}' not found in configuration file"
+          when: item not in (terraform_config_content.content | b64decode)
+          loop:
+            - project_id
+            - organization_id
+            - billing_account_id
+            - region
+
+        - name: Log configuration validation success
+          lineinfile:
+            path: "{{ log_file }}"
+            line: "[{{ ansible_date_time.iso8601 }}] Configuration validation passed"
+
+    - name: Setup Google Cloud project
+      block:
+        - name: Set active Google Cloud project
+          command: gcloud config set project {{ project_id }}
+
+        - name: Check if project exists
+          command: gcloud projects describe {{ project_id }}
+          register: project_check
+          failed_when: false
+
+        - name: Create Google Cloud project if it doesn't exist
+          command: gcloud projects create {{ project_id }} --organization={{ organization_id }}
+          when: project_check.rc != 0
+
+        - name: Link billing account to project
+          command: gcloud billing projects link {{ project_id }} --billing-account={{ billing_account_id }}
+          ignore_errors: yes
+
+        - name: Enable required Google Cloud APIs
+          command: gcloud services enable {{ item }} --project={{ project_id }}
+          loop: "{{ required_apis }}"
+          register: api_enable_results
+
+        - name: Wait for API enablement to propagate
+          pause:
+            seconds: 30
+
+        - name: Log project setup success
+          lineinfile:
+            path: "{{ log_file }}"
+            line: "[{{ ansible_date_time.iso8601 }}] Google Cloud project setup completed"
+
+    - name: Setup Terraform backend
+      block:
+        - name: Set Terraform state bucket name
+          set_fact:
+            terraform_state_bucket: "{{ project_id }}-terraform-state"
+
+        - name: Check if Terraform state bucket exists
+          command: gsutil ls -b gs://{{ terraform_state_bucket }}
+          register: bucket_check
+          failed_when: false
+
+        - name: Create Terraform state bucket
+          command: gsutil mb gs://{{ terraform_state_bucket }}
+          when: bucket_check.rc != 0
+
+        - name: Enable versioning on state bucket
+          command: gsutil versioning set on gs://{{ terraform_state_bucket }}
+          when: bucket_check.rc != 0
+
+        - name: Create lifecycle policy for state bucket
+          copy:
+            content: |
+              {
+                "lifecycle": {
+                  "rule": [
+                    {
+                      "action": {"type": "Delete"},
+                      "condition": {
+                        "age": 365,
+                        "isLive": false
+                      }
+                    }
+                  ]
+                }
+              }
+            dest: "{{ scripts_dir }}/lifecycle.json"
+          when: bucket_check.rc != 0
+
+        - name: Apply lifecycle policy to state bucket
+          command: gsutil lifecycle set {{ scripts_dir }}/lifecycle.json gs://{{ terraform_state_bucket }}
+          when: bucket_check.rc != 0
+
+        - name: Remove temporary lifecycle file
+          file:
+            path: "{{ scripts_dir }}/lifecycle.json"
+            state: absent
+
+        - name: Log Terraform backend setup success
+          lineinfile:
+            path: "{{ log_file }}"
+            line: "[{{ ansible_date_time.iso8601 }}] Terraform backend setup completed"
+
+    - name: Initialize Terraform
+      block:
+        - name: Initialize Terraform
+          command: terraform init
+          args:
+            chdir: "{{ terraform_dir }}"
+
+        - name: Set Terraform workspace name
+          set_fact:
+            terraform_workspace: "{{ environment }}-{{ region }}"
+
+        - name: List existing Terraform workspaces
+          command: terraform workspace list
+          args:
+            chdir: "{{ terraform_dir }}"
+          register: workspace_list
+
+        - name: Create Terraform workspace if it doesn't exist
+          command: terraform workspace new {{ terraform_workspace }}
+          args:
+            chdir: "{{ terraform_dir }}"
+          when: terraform_workspace not in workspace_list.stdout
+
+        - name: Select Terraform workspace
+          command: terraform workspace select {{ terraform_workspace }}
+          args:
+            chdir: "{{ terraform_dir }}"
+          when: terraform_workspace in workspace_list.stdout
+
+        - name: Validate Terraform configuration
+          command: terraform validate
+          args:
+            chdir: "{{ terraform_dir }}"
+
+        - name: Log Terraform initialization success
+          lineinfile:
+            path: "{{ log_file }}"
+            line: "[{{ ansible_date_time.iso8601 }}] Terraform initialization completed"
+
+    - name: Plan Terraform deployment
+      block:
+        - name: Set plan file name
+          set_fact:
+            plan_file: "tfplan-{{ deployment_id }}"
+
+        - name: Create Terraform plan
+          command: terraform plan -var-file={{ config_file }} -out={{ plan_file }}
+          args:
+            chdir: "{{ terraform_dir }}"
+          register: terraform_plan_result
+
+        - name: Log Terraform plan success
+          lineinfile:
+            path: "{{ log_file }}"
+            line: "[{{ ansible_date_time.iso8601 }}] Terraform plan created: {{ plan_file }}"
+
+        - name: Show plan summary
+          command: terraform show {{ plan_file }}
+          args:
+            chdir: "{{ terraform_dir }}"
+          register: plan_summary
+          when: not plan_only
+
+        - name: Display plan summary
+          debug:
+            var: plan_summary.stdout_lines
+          when: not plan_only
+
+    - name: Apply Terraform deployment
+      block:
+        - name: Apply Terraform changes (auto-approve)
+          command: terraform apply -auto-approve {{ plan_file }}
+          args:
+            chdir: "{{ terraform_dir }}"
+          when: auto_approve and not plan_only and not destroy_mode
+
+        - name: Apply Terraform changes (interactive)
+          command: terraform apply {{ plan_file }}
+          args:
+            chdir: "{{ terraform_dir }}"
+          when: not auto_approve and not plan_only and not destroy_mode
+
+        - name: Get Terraform outputs
+          command: terraform output -json
+          args:
+            chdir: "{{ terraform_dir }}"
+          register: terraform_outputs
+          failed_when: false
+          when: not plan_only and not destroy_mode
+
+        - name: Log Terraform apply success
+          lineinfile:
+            path: "{{ log_file }}"
+            line: "[{{ ansible_date_time.iso8601 }}] Terraform deployment completed successfully"
+          when: not plan_only and not destroy_mode
+
+      when: not destroy_mode
+
+    - name: Destroy Terraform infrastructure
+      block:
+        - name: Confirm destruction (interactive mode)
+          pause:
+            prompt: "WARNING: This will destroy all infrastructure! Type 'yes' to confirm"
+          register: destroy_confirmation
+          when: not auto_approve
+
+        - name: Fail if destruction not confirmed
+          fail:
+            msg: "Destruction cancelled by user"
+          when: not auto_approve and destroy_confirmation.user_input != "yes"
+
+        - name: Destroy Terraform infrastructure (auto-approve)
+          command: terraform destroy -var-file={{ config_file }} -auto-approve
+          args:
+            chdir: "{{ terraform_dir }}"
+          when: auto_approve
+
+        - name: Destroy Terraform infrastructure (interactive)
+          command: terraform destroy -var-file={{ config_file }}
+          args:
+            chdir: "{{ terraform_dir }}"
+          when: not auto_approve
+
+        - name: Log destruction success
+          lineinfile:
+            path: "{{ log_file }}"
+            line: "[{{ ansible_date_time.iso8601 }}] Infrastructure destroyed successfully"
+
+      when: destroy_mode
+
+    - name: Post-deployment validation
+      block:
+        - name: Validate VPC networks
+          command: gcloud compute networks list --format="value(name)" --filter="name:*vpc"
+          register: vpc_networks
+          failed_when: false
+
+        - name: Validate firewall rules
+          command: gcloud compute firewall-rules list --format="value(name)"
+          register: firewall_rules
+          failed_when: false
+
+        - name: Validate IAM policies
+          command: gcloud projects get-iam-policy {{ project_id }} --format=json
+          register: iam_policies
+          failed_when: false
+
+        - name: Log validation results
+          lineinfile:
+            path: "{{ log_file }}"
+            line: "[{{ ansible_date_time.iso8601 }}] Post-deployment validation completed"
+
+        - name: Display validation summary
+          debug:
+            msg:
+              - "VPC Networks: {{ vpc_networks.stdout_lines | length }}"
+              - "Firewall Rules: {{ firewall_rules.stdout_lines | length }}"
+              - "IAM Policies: Available"
+
+      when: not plan_only and not destroy_mode
+
+    - name: Generate deployment report
+      block:
+        - name: Create deployment report
+          copy:
+            content: |
+              {
+                "deployment_info": {
+                  "deployment_id": "{{ deployment_id }}",
+                  "timestamp": "{{ ansible_date_time.iso8601 }}",
+                  "project_id": "{{ project_id }}",
+                  "organization_id": "{{ organization_id }}",
+                  "region": "{{ region }}",
+                  "environment": "{{ environment }}",
+                  "config_file": "{{ config_file }}"
+                },
+                "execution_info": {
+                  "auto_approve": {{ auto_approve | lower }},
+                  "plan_only": {{ plan_only | lower }},
+                  "destroy_mode": {{ destroy_mode | lower }},
+                  "log_file": "{{ log_file }}"
+                },
+                "validation_results": {
+                  "vpc_networks_count": {{ vpc_networks.stdout_lines | length | default(0) }},
+                  "firewall_rules_count": {{ firewall_rules.stdout_lines | length | default(0) }}
+                }
+              }
+            dest: "{{ log_dir }}/deployment-report-{{ deployment_id }}.json"
+
+        - name: Log deployment completion
+          lineinfile:
+            path: "{{ log_file }}"
+            line: "[{{ ansible_date_time.iso8601 }}] Deployment report generated"
+
+    - name: Cleanup temporary files
+      file:
+        path: "{{ item }}"
+        state: absent
+      loop:
+        - "{{ scripts_dir }}/lifecycle.json"
+      ignore_errors: yes
+
+  handlers:
+    - name: Log error
+      lineinfile:
+        path: "{{ log_file }}"
+        line: "[{{ ansible_date_time.iso8601 }}] ERROR: {{ ansible_failed_result.msg | default('Unknown error') }}"
+
+# Additional playbook for configuration management
+- name: Configure Google Cloud Landing Zone Settings
+  hosts: localhost
+  gather_facts: no
+  vars:
+    project_id: "{{ project_id | default('') }}"
+    
+  tasks:
+    - name: Configure organization policies
+      block:
+        - name: Create organization policy for Shielded VM requirement
+          copy:
+            content: |
+              constraint: constraints/compute.requireShieldedVm
+              booleanPolicy:
+                enforced: true
+            dest: "{{ scripts_dir }}/shielded-vm-policy.yaml"
+
+        - name: Apply Shielded VM policy
+          command: >
+            gcloud resource-manager org-policies set-policy
+            {{ scripts_dir }}/shielded-vm-policy.yaml
+            --organization={{ organization_id }}
+          ignore_errors: yes
+
+        - name: Create organization policy for OS Login requirement
+          copy:
+            content: |
+              constraint: constraints/compute.requireOsLogin
+              booleanPolicy:
+                enforced: true
+            dest: "{{ scripts_dir }}/os-login-policy.yaml"
+
+        - name: Apply OS Login policy
+          command: >
+            gcloud resource-manager org-policies set-policy
+            {{ scripts_dir }}/os-login-policy.yaml
+            --organization={{ organization_id }}
+          ignore_errors: yes
+
+        - name: Remove temporary policy files
+          file:
+            path: "{{ item }}"
+            state: absent
+          loop:
+            - "{{ scripts_dir }}/shielded-vm-policy.yaml"
+            - "{{ scripts_dir }}/os-login-policy.yaml"
+
+      when: project_id != '' and organization_id != ''
+
+    - name: Configure monitoring and alerting
+      block:
+        - name: Create notification channel for email alerts
+          command: >
+            gcloud alpha monitoring channels create
+            --display-name="Landing Zone Email Alerts"
+            --type=email
+            --channel-labels=email_address=alerts@company.com
+            --project={{ project_id }}
+          register: notification_channel
+          ignore_errors: yes
+
+        - name: Create high CPU usage alert policy
+          copy:
+            content: |
+              displayName: "High CPU Usage Alert"
+              conditions:
+                - displayName: "CPU usage above 80%"
+                  conditionThreshold:
+                    filter: 'resource.type="gce_instance"'
+                    comparison: COMPARISON_GT
+                    thresholdValue: 0.8
+                    duration: 300s
+            dest: "{{ scripts_dir }}/cpu-alert-policy.yaml"
+
+        - name: Apply CPU alert policy
+          command: >
+            gcloud alpha monitoring policies create
+            --policy-from-file={{ scripts_dir }}/cpu-alert-policy.yaml
+            --project={{ project_id }}
+          ignore_errors: yes
+
+        - name: Remove temporary alert policy file
+          file:
+            path: "{{ scripts_dir }}/cpu-alert-policy.yaml"
+            state: absent
+
+      when: project_id != ''
+
+# Inventory and maintenance playbook
+- name: Maintain Google Cloud Landing Zone
+  hosts: localhost
+  gather_facts: no
+  vars:
+    project_id: "{{ project_id | default('') }}"
+    
+  tasks:
+    - name: Gather infrastructure inventory
+      block:
+        - name: List all VPC networks
+          command: gcloud compute networks list --format=json --project={{ project_id }}
+          register: vpc_inventory
+
+        - name: List all compute instances
+          command: gcloud compute instances list --format=json --project={{ project_id }}
+          register: compute_inventory
+
+        - name: List all storage buckets
+          command: gsutil ls -L -b gs://* | grep "^gs://"
+          register: storage_inventory
+          failed_when: false
+
+        - name: Create infrastructure inventory report
+          copy:
+            content: |
+              # Google Cloud Landing Zone Infrastructure Inventory
+              Generated: {{ ansible_date_time.iso8601 }}
+              Project: {{ project_id }}
+              
+              ## VPC Networks
+              {{ vpc_inventory.stdout | from_json | to_nice_yaml }}
+              
+              ## Compute Instances
+              {{ compute_inventory.stdout | from_json | to_nice_yaml }}
+              
+              ## Storage Buckets
+              {% for bucket in storage_inventory.stdout_lines %}
+              - {{ bucket }}
+              {% endfor %}
+            dest: "{{ log_dir }}/infrastructure-inventory-{{ ansible_date_time.epoch }}.yaml"
+
+      when: project_id != ''
+
+    - name: Perform security compliance check
+      block:
+        - name: Check for public IP addresses on compute instances
+          command: >
+            gcloud compute instances list
+            --filter="networkInterfaces.accessConfigs:*"
+            --format="value(name)"
+            --project={{ project_id }}
+          register: public_instances
+
+        - name: Check for publicly accessible storage buckets
+          command: gsutil iam get gs://{{ project_id }}-* | grep -i "allUsers\|allAuthenticatedUsers"
+          register: public_buckets
+          failed_when: false
+
+        - name: Generate security compliance report
+          copy:
+            content: |
+              # Security Compliance Report
+              Generated: {{ ansible_date_time.iso8601 }}
+              Project: {{ project_id }}
+              
+              ## Public IP Instances
+              {% for instance in public_instances.stdout_lines %}
+              - {{ instance }}
+              {% endfor %}
+              
+              ## Public Storage Buckets
+              {% if public_buckets.stdout_lines %}
+              {% for bucket in public_buckets.stdout_lines %}
+              - {{ bucket }}
+              {% endfor %}
+              {% else %}
+              No publicly accessible storage buckets found.
+              {% endif %}
+            dest: "{{ log_dir }}/security-compliance-{{ ansible_date_time.epoch }}.yaml"
+
+      when: project_id != ''

@@ -1,0 +1,406 @@
+---
+# HashiCorp Multi-Cloud Platform - Ansible Deployment Playbook
+# This playbook configures and deploys HashiCorp services across multiple cloud providers
+
+- name: HashiCorp Multi-Cloud Platform Deployment
+  hosts: localhost
+  gather_facts: true
+  vars:
+    # HashiCorp versions
+    terraform_version: "1.6.6"
+    consul_version: "1.16.1"
+    vault_version: "1.14.8"
+    nomad_version: "1.6.6"
+    boundary_version: "0.13.2"
+    
+    # Cloud provider configuration
+    cloud_providers:
+      - aws
+      - azure
+      - gcp
+    
+    # Kubernetes cluster configuration
+    k8s_clusters:
+      aws:
+        name: "hashicorp-aws-cluster"
+        region: "us-east-1"
+        node_count: 6
+        node_type: "m5.xlarge"
+      azure:
+        name: "hashicorp-azure-cluster"
+        region: "eastus2"
+        node_count: 6
+        node_type: "Standard_D4s_v3"
+      gcp:
+        name: "hashicorp-gcp-cluster"
+        region: "us-central1"
+        node_count: 6
+        node_type: "n1-standard-4"
+
+  tasks:
+    # Pre-deployment validation
+    - name: Validate prerequisites
+      block:
+        - name: Check required environment variables
+          fail:
+            msg: "{{ item }} environment variable is required"
+          when: lookup('env', item) == ""
+          loop:
+            - TERRAFORM_TOKEN
+            - CONSUL_ENCRYPTION_KEY
+            - VAULT_ROOT_TOKEN
+            - AWS_ACCESS_KEY_ID
+            - AZURE_CLIENT_ID
+            - GOOGLE_CREDENTIALS
+
+        - name: Verify cloud provider CLI tools
+          command: "{{ item }} --version"
+          register: cli_check
+          failed_when: cli_check.rc != 0
+          loop:
+            - aws
+            - az
+            - gcloud
+            - kubectl
+            - helm
+
+        - name: Create deployment directories
+          file:
+            path: "{{ item }}"
+            state: directory
+            mode: '0755'
+          loop:
+            - /opt/hashicorp
+            - /opt/hashicorp/terraform
+            - /opt/hashicorp/consul
+            - /opt/hashicorp/vault
+            - /opt/hashicorp/nomad
+            - /opt/hashicorp/boundary
+
+    # Infrastructure deployment
+    - name: Deploy infrastructure with Terraform
+      block:
+        - name: Initialize Terraform for each cloud provider
+          shell: |
+            cd terraform/{{ item }}
+            terraform init -backend-config="token={{ lookup('env', 'TERRAFORM_TOKEN') }}"
+          loop: "{{ cloud_providers }}"
+
+        - name: Plan Terraform deployment
+          shell: |
+            cd terraform/{{ item }}
+            terraform plan -var-file="terraform.tfvars" -out="{{ item }}.tfplan"
+          loop: "{{ cloud_providers }}"
+
+        - name: Apply Terraform deployment
+          shell: |
+            cd terraform/{{ item }}
+            terraform apply "{{ item }}.tfplan"
+          loop: "{{ cloud_providers }}"
+
+        - name: Extract infrastructure outputs
+          shell: |
+            cd terraform/{{ item }}
+            terraform output -json > ../outputs/{{ item }}_outputs.json
+          loop: "{{ cloud_providers }}"
+
+    # Kubernetes cluster configuration
+    - name: Configure Kubernetes clusters
+      block:
+        - name: Update kubeconfig for AWS
+          shell: |
+            aws eks update-kubeconfig --region {{ k8s_clusters.aws.region }} --name {{ k8s_clusters.aws.name }}
+            kubectl config rename-context arn:aws:eks:{{ k8s_clusters.aws.region }}:$(aws sts get-caller-identity --query Account --output text):cluster/{{ k8s_clusters.aws.name }} aws-prod
+
+        - name: Update kubeconfig for Azure
+          shell: |
+            az aks get-credentials --resource-group hashicorp-rg --name {{ k8s_clusters.azure.name }} --overwrite-existing
+            kubectl config rename-context {{ k8s_clusters.azure.name }} azure-prod
+
+        - name: Update kubeconfig for GCP
+          shell: |
+            gcloud container clusters get-credentials {{ k8s_clusters.gcp.name }} --region {{ k8s_clusters.gcp.region }}
+            kubectl config rename-context gke_$(gcloud config get-value project)_{{ k8s_clusters.gcp.region }}_{{ k8s_clusters.gcp.name }} gcp-prod
+
+        - name: Verify cluster connectivity
+          shell: kubectl --context={{ item }}-prod get nodes
+          loop: "{{ cloud_providers }}"
+
+        - name: Install cluster essentials
+          k8s:
+            context: "{{ item }}-prod"
+            definition:
+              apiVersion: v1
+              kind: Namespace
+              metadata:
+                name: hashicorp-system
+          loop: "{{ cloud_providers }}"
+
+    # Consul deployment and configuration
+    - name: Deploy Consul Enterprise
+      block:
+        - name: Add HashiCorp Helm repository
+          kubernetes.core.helm_repository:
+            name: hashicorp
+            repo_url: https://helm.releases.hashicorp.com
+
+        - name: Create Consul configuration
+          template:
+            src: consul-values.yaml.j2
+            dest: /tmp/consul-values-{{ item }}.yaml
+          vars:
+            cloud_provider: "{{ item }}"
+            consul_datacenter: "{{ item }}-dc"
+          loop: "{{ cloud_providers }}"
+
+        - name: Deploy Consul via Helm
+          kubernetes.core.helm:
+            name: consul
+            chart_ref: hashicorp/consul
+            release_namespace: hashicorp-system
+            create_namespace: true
+            values_files:
+              - "/tmp/consul-values-{{ item }}.yaml"
+            context: "{{ item }}-prod"
+          loop: "{{ cloud_providers }}"
+
+        - name: Wait for Consul to be ready
+          kubernetes.core.k8s_info:
+            api_version: apps/v1
+            kind: StatefulSet
+            name: consul-server
+            namespace: hashicorp-system
+            context: "{{ item }}-prod"
+            wait_condition:
+              type: Ready
+              status: "True"
+            wait_timeout: 600
+          loop: "{{ cloud_providers }}"
+
+    # Vault deployment and configuration
+    - name: Deploy Vault Enterprise
+      block:
+        - name: Create Vault configuration
+          template:
+            src: vault-values.yaml.j2
+            dest: /tmp/vault-values-{{ item }}.yaml
+          vars:
+            cloud_provider: "{{ item }}"
+          loop: "{{ cloud_providers }}"
+
+        - name: Deploy Vault via Helm
+          kubernetes.core.helm:
+            name: vault
+            chart_ref: hashicorp/vault
+            release_namespace: hashicorp-system
+            values_files:
+              - "/tmp/vault-values-{{ item }}.yaml"
+            context: "{{ item }}-prod"
+          loop: "{{ cloud_providers }}"
+
+        - name: Initialize Vault cluster (primary only)
+          shell: |
+            kubectl --context=aws-prod exec -n hashicorp-system vault-0 -- vault operator init -format=json
+          register: vault_init
+          when: inventory_hostname == groups['all'][0]
+
+        - name: Save Vault initialization data
+          copy:
+            content: "{{ vault_init.stdout }}"
+            dest: /opt/hashicorp/vault/vault-init.json
+            mode: '0600'
+          when: vault_init.stdout is defined
+
+        - name: Unseal Vault cluster
+          shell: |
+            kubectl --context={{ item }}-prod exec -n hashicorp-system vault-0 -- \
+              vault operator unseal {{ (vault_init.stdout | from_json).unseal_keys_b64[0] }}
+            kubectl --context={{ item }}-prod exec -n hashicorp-system vault-0 -- \
+              vault operator unseal {{ (vault_init.stdout | from_json).unseal_keys_b64[1] }}
+            kubectl --context={{ item }}-prod exec -n hashicorp-system vault-0 -- \
+              vault operator unseal {{ (vault_init.stdout | from_json).unseal_keys_b64[2] }}
+          loop: "{{ cloud_providers }}"
+          when: vault_init.stdout is defined
+
+    # Terraform Enterprise deployment
+    - name: Deploy Terraform Enterprise
+      block:
+        - name: Create TFE configuration
+          template:
+            src: tfe-values.yaml.j2
+            dest: /tmp/tfe-values-{{ item }}.yaml
+          vars:
+            cloud_provider: "{{ item }}"
+            tfe_hostname: "tfe-{{ item }}.company.com"
+          loop: "{{ cloud_providers }}"
+
+        - name: Deploy Terraform Enterprise
+          kubernetes.core.helm:
+            name: terraform-enterprise
+            chart_ref: hashicorp/terraform-enterprise
+            release_namespace: hashicorp-system
+            values_files:
+              - "/tmp/tfe-values-{{ item }}.yaml"
+            context: "{{ item }}-prod"
+          loop: "{{ cloud_providers }}"
+
+        - name: Wait for TFE to be ready
+          uri:
+            url: "https://tfe-{{ item }}.company.com/_health_check"
+            method: GET
+            status_code: 200
+          retries: 30
+          delay: 30
+          loop: "{{ cloud_providers }}"
+
+    # Nomad deployment
+    - name: Deploy Nomad Enterprise
+      block:
+        - name: Create Nomad configuration
+          template:
+            src: nomad-values.yaml.j2
+            dest: /tmp/nomad-values-{{ item }}.yaml
+          vars:
+            cloud_provider: "{{ item }}"
+            nomad_datacenter: "{{ item }}-nomad"
+          loop: "{{ cloud_providers }}"
+
+        - name: Deploy Nomad via Helm
+          kubernetes.core.helm:
+            name: nomad
+            chart_ref: hashicorp/nomad
+            release_namespace: hashicorp-system
+            values_files:
+              - "/tmp/nomad-values-{{ item }}.yaml"
+            context: "{{ item }}-prod"
+          loop: "{{ cloud_providers }}"
+
+        - name: Verify Nomad cluster
+          shell: |
+            kubectl --context={{ item }}-prod exec -n hashicorp-system nomad-server-0 -- \
+              nomad server members
+          loop: "{{ cloud_providers }}"
+
+    # Boundary deployment
+    - name: Deploy Boundary Enterprise
+      block:
+        - name: Create Boundary configuration
+          template:
+            src: boundary-values.yaml.j2
+            dest: /tmp/boundary-values-{{ item }}.yaml
+          vars:
+            cloud_provider: "{{ item }}"
+          loop: "{{ cloud_providers }}"
+
+        - name: Deploy Boundary via Helm
+          kubernetes.core.helm:
+            name: boundary
+            chart_ref: hashicorp/boundary
+            release_namespace: hashicorp-system
+            values_files:
+              - "/tmp/boundary-values-{{ item }}.yaml"
+            context: "{{ item }}-prod"
+          loop: "{{ cloud_providers }}"
+
+        - name: Initialize Boundary database
+          shell: |
+            kubectl --context=aws-prod exec -n hashicorp-system boundary-controller-0 -- \
+              boundary database init
+          run_once: true
+
+    # Post-deployment configuration
+    - name: Configure cross-cloud connectivity
+      block:
+        - name: Setup Consul mesh gateways
+          shell: |
+            kubectl --context={{ item }}-prod apply -f manifests/consul-mesh-gateway.yaml
+          loop: "{{ cloud_providers }}"
+
+        - name: Configure Vault secrets engines
+          shell: |
+            kubectl --context=aws-prod exec -n hashicorp-system vault-0 -- \
+              vault secrets enable -path=aws aws
+            kubectl --context=aws-prod exec -n hashicorp-system vault-0 -- \
+              vault secrets enable -path=azure azure
+            kubectl --context=aws-prod exec -n hashicorp-system vault-0 -- \
+              vault secrets enable -path=gcp gcp
+
+        - name: Setup initial policies and roles
+          shell: |
+            kubectl --context=aws-prod exec -n hashicorp-system vault-0 -- \
+              vault policy write admin-policy - <<EOF
+            path "*" {
+              capabilities = ["create", "read", "update", "delete", "list"]
+            }
+            EOF
+
+    # Validation and testing
+    - name: Perform post-deployment validation
+      block:
+        - name: Test Consul service discovery
+          shell: |
+            kubectl --context={{ item }}-prod exec -n hashicorp-system consul-server-0 -- \
+              consul catalog services
+          loop: "{{ cloud_providers }}"
+
+        - name: Test Vault functionality
+          shell: |
+            kubectl --context={{ item }}-prod exec -n hashicorp-system vault-0 -- \
+              vault kv put secret/test key=value
+            kubectl --context={{ item }}-prod exec -n hashicorp-system vault-0 -- \
+              vault kv get secret/test
+          loop: "{{ cloud_providers }}"
+
+        - name: Test Nomad job scheduling
+          shell: |
+            kubectl --context={{ item }}-prod exec -n hashicorp-system nomad-server-0 -- \
+              nomad job run /opt/nomad/jobs/test-job.hcl
+          loop: "{{ cloud_providers }}"
+
+        - name: Generate deployment summary
+          template:
+            src: deployment-summary.md.j2
+            dest: /opt/hashicorp/deployment-summary.md
+          vars:
+            deployment_date: "{{ ansible_date_time.iso8601 }}"
+            deployment_user: "{{ ansible_user }}"
+
+  handlers:
+    - name: Restart HashiCorp services
+      shell: |
+        kubectl --context={{ item }}-prod rollout restart deployment/{{ service }} -n hashicorp-system
+      vars:
+        service: "{{ ansible_service }}"
+      loop: "{{ cloud_providers }}"
+
+# Post-deployment reporting
+- name: Generate deployment report
+  hosts: localhost
+  tasks:
+    - name: Create deployment report
+      template:
+        src: deployment-report.html.j2
+        dest: /opt/hashicorp/deployment-report.html
+      vars:
+        deployment_status: "SUCCESS"
+        deployment_time: "{{ ansible_date_time.iso8601 }}"
+
+    - name: Display deployment summary
+      debug:
+        msg: |
+          HashiCorp Multi-Cloud Platform deployment completed successfully!
+          
+          Platform Components:
+          - Terraform Enterprise: https://tfe-aws.company.com
+          - Consul UI: https://consul-aws.company.com:8500
+          - Vault UI: https://vault-aws.company.com:8200
+          - Nomad UI: https://nomad-aws.company.com:4646
+          
+          Next Steps:
+          1. Configure initial users and teams
+          2. Create first Terraform workspaces
+          3. Setup monitoring and alerting
+          4. Begin application migration
+          
+          Documentation: /opt/hashicorp/deployment-summary.md
+          Support: platform-team@company.com

@@ -1,0 +1,220 @@
+# HashiCorp Terraform Enterprise Platform Configuration Example
+# Copy this file to terraform.tfvars and customize values for your environment
+
+# Project Configuration
+project_name = "tfe-platform"
+environment  = "prod"
+owner        = "platform-team"
+cost_center  = "engineering"
+
+# AWS Configuration
+aws_region              = "us-east-1"
+terraform_state_bucket  = "my-company-terraform-state"
+admin_role_name        = "OrganizationAccountAccessRole"
+
+# Network Configuration
+vpc_cidr = "10.0.0.0/16"
+
+# Public subnets for load balancers and NAT gateways
+public_subnet_cidrs = [
+  "10.0.1.0/24",  # us-east-1a
+  "10.0.2.0/24",  # us-east-1b
+  "10.0.3.0/24"   # us-east-1c
+]
+
+# Private subnets for EKS worker nodes
+private_subnet_cidrs = [
+  "10.0.10.0/24", # us-east-1a
+  "10.0.11.0/24", # us-east-1b
+  "10.0.12.0/24"  # us-east-1c
+]
+
+# Database subnets for RDS instances
+database_subnet_cidrs = [
+  "10.0.20.0/24", # us-east-1a
+  "10.0.21.0/24", # us-east-1b
+  "10.0.22.0/24"  # us-east-1c
+]
+
+# EKS Configuration
+kubernetes_version = "1.28"
+node_instance_types = ["t3.large", "t3.xlarge"]
+min_node_count     = 2
+max_node_count     = 10
+desired_node_count = 3
+node_disk_size     = 50
+ssh_key_name      = "my-keypair"  # Optional: for SSH access to nodes
+
+# Database Configuration
+postgres_version        = "14.9"
+db_instance_class      = "db.t3.large"
+db_allocated_storage   = 100
+db_max_allocated_storage = 1000
+database_name          = "terraform_enterprise"
+database_username      = "tfe_admin"
+db_backup_retention_days = 7
+db_backup_window       = "03:00-04:00"
+db_maintenance_window  = "Sun:04:00-Sun:05:00"
+
+# Domain and SSL Configuration
+domain_name       = "tfe.mycompany.com"
+create_dns_record = true  # Set to false if you manage DNS externally
+
+# Terraform Enterprise Configuration
+tfe_helm_chart_version  = "1.0.0"
+tfe_license_secret_name = "tfe-license"
+tfe_replica_count      = 2
+
+# Resource allocation for TFE pods
+tfe_resources = {
+  requests = {
+    cpu    = "1000m"
+    memory = "2Gi"
+  }
+  limits = {
+    cpu    = "2000m" 
+    memory = "4Gi"
+  }
+}
+
+storage_class  = "gp2"
+ingress_class = "alb"
+
+# Monitoring and Logging
+log_retention_days         = 30
+enable_deletion_protection = true
+
+# Backup and Recovery
+enable_backup           = true
+backup_schedule        = "0 2 * * *"  # Daily at 2 AM UTC
+backup_retention_days  = 30
+
+# Security Configuration
+enable_encryption   = true
+allowed_cidr_blocks = ["0.0.0.0/0"]  # Restrict this for production
+enable_waf         = true
+
+# High Availability Configuration
+enable_multi_az            = true
+enable_cross_region_backup = false
+backup_region             = "us-west-2"
+
+# Performance Configuration
+enable_performance_insights           = true
+performance_insights_retention_period = 7
+
+# Cost Optimization
+enable_spot_instances    = false  # Set to true for cost savings in non-prod
+spot_instance_types     = ["t3.large", "t3.xlarge", "m5.large", "m5.xlarge"]
+spot_allocation_strategy = "diversified"
+
+# Compliance and Governance
+compliance_mode = false  # Enable for additional security controls
+required_tags = {
+  "Compliance" = "Required"
+  "Backup"     = "Required" 
+  "Environment" = "Production"
+  "Project"    = "TerraformEnterprise"
+}
+
+# Integration Configuration
+enable_vault_integration  = false
+vault_address            = ""  # "https://vault.mycompany.com:8200"
+vault_namespace          = ""
+
+enable_consul_integration = false
+consul_address           = ""  # "consul.mycompany.com:8500"
+
+# Notification Configuration
+notification_email  = "platform-team@mycompany.com"
+slack_webhook_url   = ""  # Optional: Slack webhook for notifications
+
+# Advanced Configuration
+custom_user_data           = ""
+additional_security_groups = []
+
+node_labels = {
+  "workload" = "terraform-enterprise"
+  "tier"     = "platform"
+}
+
+node_taints = []  # Example: [{ key = "dedicated", value = "tfe", effect = "NoSchedule" }]
+
+# Example: Production Configuration with High Availability
+# Uncomment and adjust for production deployments
+
+# Project Configuration for Production
+# project_name = "tfe-prod"
+# environment  = "prod"
+# owner        = "platform-engineering"
+# cost_center  = "infrastructure"
+
+# Production Network Configuration
+# vpc_cidr = "10.100.0.0/16"
+# 
+# public_subnet_cidrs = [
+#   "10.100.1.0/24",
+#   "10.100.2.0/24", 
+#   "10.100.3.0/24"
+# ]
+#
+# private_subnet_cidrs = [
+#   "10.100.10.0/24",
+#   "10.100.11.0/24",
+#   "10.100.12.0/24"
+# ]
+#
+# database_subnet_cidrs = [
+#   "10.100.20.0/24",
+#   "10.100.21.0/24",
+#   "10.100.22.0/24"
+# ]
+
+# Production EKS Configuration
+# kubernetes_version = "1.28"
+# node_instance_types = ["m5.xlarge", "m5.2xlarge"]
+# min_node_count     = 3
+# max_node_count     = 20
+# desired_node_count = 6
+# node_disk_size     = 100
+
+# Production Database Configuration
+# postgres_version        = "14.9"
+# db_instance_class      = "db.r5.xlarge"
+# db_allocated_storage   = 500
+# db_max_allocated_storage = 5000
+# enable_multi_az        = true
+
+# Production Terraform Enterprise Configuration
+# tfe_replica_count = 3
+# tfe_resources = {
+#   requests = {
+#     cpu    = "2000m"
+#     memory = "4Gi"
+#   }
+#   limits = {
+#     cpu    = "4000m"
+#     memory = "8Gi"
+#   }
+# }
+
+# Production Security Configuration
+# enable_encryption = true
+# allowed_cidr_blocks = [
+#   "10.0.0.0/8",      # Internal corporate network
+#   "172.16.0.0/16"    # VPN network
+# ]
+# enable_waf = true
+# compliance_mode = true
+
+# Production Backup Configuration
+# enable_backup             = true
+# backup_schedule          = "0 1 * * *"  # Daily at 1 AM UTC
+# backup_retention_days    = 90
+# enable_cross_region_backup = true
+# backup_region            = "us-west-2"
+
+# Production Monitoring
+# log_retention_days = 90
+# enable_performance_insights = true
+# performance_insights_retention_period = 731  # ~2 years

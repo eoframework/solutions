@@ -1,0 +1,557 @@
+---
+# HashiCorp Terraform Enterprise - Ansible Deployment Playbook
+# This playbook deploys and configures Terraform Enterprise on AWS EKS
+
+- name: Deploy HashiCorp Terraform Enterprise Platform
+  hosts: localhost
+  gather_facts: true
+  vars:
+    # Default variables
+    project_name: "terraform-enterprise"
+    environment: "prod"
+    aws_region: "us-east-1"
+    kubernetes_version: "1.28"
+    terraform_version: "1.6.6"
+    
+    # TFE Configuration
+    tfe_hostname: "terraform.company.com"
+    tfe_version: "v202401-1"
+    tfe_replicas: 3
+    
+    # Database Configuration
+    postgres_version: "14.9"
+    db_instance_class: "db.r5.xlarge"
+    db_allocated_storage: 500
+    
+    # Networking
+    vpc_cidr: "10.0.0.0/16"
+    public_subnet_cidrs:
+      - "10.0.1.0/24"
+      - "10.0.2.0/24" 
+      - "10.0.3.0/24"
+    private_subnet_cidrs:
+      - "10.0.10.0/24"
+      - "10.0.11.0/24"
+      - "10.0.12.0/24"
+
+  tasks:
+    # Prerequisites and validation
+    - name: Validate prerequisites
+      block:
+        - name: Check required environment variables
+          fail:
+            msg: "{{ item }} environment variable is required"
+          when: lookup('env', item) == ""
+          loop:
+            - TFE_LICENSE
+            - TFE_ENCRYPTION_PASSWORD
+            - AWS_ACCESS_KEY_ID
+            - AWS_SECRET_ACCESS_KEY
+          tags: [prerequisite]
+
+        - name: Verify required CLI tools
+          command: "{{ item }} --version"
+          register: cli_check
+          failed_when: cli_check.rc != 0
+          loop:
+            - terraform
+            - kubectl
+            - helm
+            - aws
+          tags: [prerequisite]
+
+        - name: Check AWS credentials and permissions
+          command: aws sts get-caller-identity
+          register: aws_identity
+          changed_when: false
+          tags: [prerequisite]
+
+        - name: Display AWS account information
+          debug:
+            msg: "Deploying to AWS Account: {{ (aws_identity.stdout | from_json).Account }}"
+          tags: [prerequisite]
+
+    # Infrastructure deployment with Terraform
+    - name: Deploy infrastructure with Terraform
+      block:
+        - name: Create Terraform working directory
+          file:
+            path: /tmp/tfe-terraform
+            state: directory
+            mode: '0755'
+          tags: [infrastructure]
+
+        - name: Generate Terraform configuration
+          template:
+            src: main.tf.j2
+            dest: /tmp/tfe-terraform/main.tf
+          vars:
+            project_name: "{{ project_name }}"
+            environment: "{{ environment }}"
+            aws_region: "{{ aws_region }}"
+            vpc_cidr: "{{ vpc_cidr }}"
+            public_subnet_cidrs: "{{ public_subnet_cidrs }}"
+            private_subnet_cidrs: "{{ private_subnet_cidrs }}"
+          tags: [infrastructure]
+
+        - name: Generate Terraform variables file
+          template:
+            src: terraform.tfvars.j2
+            dest: /tmp/tfe-terraform/terraform.tfvars
+          vars:
+            project_name: "{{ project_name }}"
+            environment: "{{ environment }}"
+            kubernetes_version: "{{ kubernetes_version }}"
+            db_instance_class: "{{ db_instance_class }}"
+            db_allocated_storage: "{{ db_allocated_storage }}"
+          tags: [infrastructure]
+
+        - name: Initialize Terraform
+          command: terraform init
+          args:
+            chdir: /tmp/tfe-terraform
+          register: terraform_init
+          tags: [infrastructure]
+
+        - name: Plan Terraform deployment
+          command: terraform plan -var-file=terraform.tfvars -out=tfe.tfplan
+          args:
+            chdir: /tmp/tfe-terraform
+          register: terraform_plan
+          tags: [infrastructure]
+
+        - name: Apply Terraform deployment
+          command: terraform apply -auto-approve tfe.tfplan
+          args:
+            chdir: /tmp/tfe-terraform
+          register: terraform_apply
+          when: not ansible_check_mode
+          tags: [infrastructure]
+
+        - name: Extract Terraform outputs
+          command: terraform output -json
+          args:
+            chdir: /tmp/tfe-terraform
+          register: terraform_outputs
+          changed_when: false
+          tags: [infrastructure]
+
+        - name: Set infrastructure facts from Terraform outputs
+          set_fact:
+            cluster_name: "{{ (terraform_outputs.stdout | from_json).cluster_name.value }}"
+            cluster_endpoint: "{{ (terraform_outputs.stdout | from_json).cluster_endpoint.value }}"
+            database_endpoint: "{{ (terraform_outputs.stdout | from_json).database_endpoint.value }}"
+            s3_bucket: "{{ (terraform_outputs.stdout | from_json).s3_bucket.value }}"
+            load_balancer_dns: "{{ (terraform_outputs.stdout | from_json).load_balancer_dns.value }}"
+          tags: [infrastructure]
+
+    # Kubernetes configuration
+    - name: Configure Kubernetes access
+      block:
+        - name: Update kubeconfig for EKS cluster
+          command: aws eks update-kubeconfig --region {{ aws_region }} --name {{ cluster_name }}
+          tags: [kubernetes]
+
+        - name: Verify cluster connectivity
+          kubernetes.core.k8s_info:
+            api_version: v1
+            kind: Node
+          register: cluster_nodes
+          tags: [kubernetes]
+
+        - name: Display cluster information
+          debug:
+            msg: "Connected to EKS cluster with {{ cluster_nodes.resources | length }} nodes"
+          tags: [kubernetes]
+
+        - name: Create TFE namespace
+          kubernetes.core.k8s:
+            name: terraform-enterprise
+            api_version: v1
+            kind: Namespace
+            state: present
+          tags: [kubernetes]
+
+        - name: Add HashiCorp Helm repository
+          kubernetes.core.helm_repository:
+            name: hashicorp
+            repo_url: https://helm.releases.hashicorp.com
+          tags: [kubernetes]
+
+    # Database setup and configuration
+    - name: Configure database
+      block:
+        - name: Generate database password
+          set_fact:
+            db_password: "{{ lookup('password', '/tmp/tfe_db_password length=16 chars=ascii_letters,digits') }}"
+          tags: [database]
+
+        - name: Create database secret
+          kubernetes.core.k8s:
+            definition:
+              apiVersion: v1
+              kind: Secret
+              metadata:
+                name: tfe-database-credentials
+                namespace: terraform-enterprise
+              type: Opaque
+              stringData:
+                host: "{{ database_endpoint }}"
+                database: "terraform_enterprise"
+                username: "tfe"
+                password: "{{ db_password }}"
+                url: "postgresql://tfe:{{ db_password }}@{{ database_endpoint }}:5432/terraform_enterprise?sslmode=require"
+          tags: [database]
+
+        - name: Wait for database to be available
+          wait_for:
+            host: "{{ database_endpoint }}"
+            port: 5432
+            timeout: 300
+          tags: [database]
+
+    # TLS certificate configuration
+    - name: Configure TLS certificates
+      block:
+        - name: Create TLS certificate secret (placeholder)
+          kubernetes.core.k8s:
+            definition:
+              apiVersion: v1
+              kind: Secret
+              metadata:
+                name: tfe-tls-certificate
+                namespace: terraform-enterprise
+              type: kubernetes.io/tls
+              data:
+                tls.crt: "{{ 'dummy-cert-data' | b64encode }}"
+                tls.key: "{{ 'dummy-key-data' | b64encode }}"
+          tags: [tls]
+          # Note: In production, replace with actual certificate
+
+    # TFE License configuration
+    - name: Configure TFE license
+      block:
+        - name: Create TFE license secret
+          kubernetes.core.k8s:
+            definition:
+              apiVersion: v1
+              kind: Secret
+              metadata:
+                name: tfe-license
+                namespace: terraform-enterprise
+              type: Opaque
+              stringData:
+                license: "{{ lookup('env', 'TFE_LICENSE') }}"
+          tags: [license]
+
+    # Deploy Terraform Enterprise
+    - name: Deploy Terraform Enterprise application
+      block:
+        - name: Generate TFE Helm values
+          template:
+            src: tfe-values.yaml.j2
+            dest: /tmp/tfe-values.yaml
+          vars:
+            hostname: "{{ tfe_hostname }}"
+            replicas: "{{ tfe_replicas }}"
+            image_tag: "{{ tfe_version }}"
+            database_host: "{{ database_endpoint }}"
+            s3_bucket: "{{ s3_bucket }}"
+            aws_region: "{{ aws_region }}"
+          tags: [deploy-tfe]
+
+        - name: Deploy TFE with Helm
+          kubernetes.core.helm:
+            name: terraform-enterprise
+            chart_ref: hashicorp/terraform-enterprise
+            release_namespace: terraform-enterprise
+            create_namespace: false
+            values_files:
+              - /tmp/tfe-values.yaml
+            wait: true
+            wait_condition:
+              type: Ready
+              status: "True"
+            wait_timeout: 600
+          tags: [deploy-tfe]
+
+        - name: Wait for TFE pods to be ready
+          kubernetes.core.k8s_info:
+            api_version: v1
+            kind: Pod
+            namespace: terraform-enterprise
+            label_selectors:
+              - app.kubernetes.io/name=terraform-enterprise
+            wait: true
+            wait_condition:
+              type: Ready
+              status: "True"
+            wait_timeout: 900
+          tags: [deploy-tfe]
+
+    # Post-deployment configuration
+    - name: Configure TFE post-deployment
+      block:
+        - name: Create ingress for TFE
+          kubernetes.core.k8s:
+            definition:
+              apiVersion: networking.k8s.io/v1
+              kind: Ingress
+              metadata:
+                name: terraform-enterprise-ingress
+                namespace: terraform-enterprise
+                annotations:
+                  alb.ingress.kubernetes.io/scheme: internet-facing
+                  alb.ingress.kubernetes.io/target-type: ip
+                  alb.ingress.kubernetes.io/listen-ports: '[{"HTTPS": 443}]'
+                  alb.ingress.kubernetes.io/certificate-arn: "{{ acm_certificate_arn | default('') }}"
+                  alb.ingress.kubernetes.io/ssl-redirect: "443"
+              spec:
+                ingressClassName: alb
+                rules:
+                  - host: "{{ tfe_hostname }}"
+                    http:
+                      paths:
+                        - path: /
+                          pathType: Prefix
+                          backend:
+                            service:
+                              name: terraform-enterprise
+                              port:
+                                number: 80
+                tls:
+                  - hosts:
+                      - "{{ tfe_hostname }}"
+                    secretName: tfe-tls-certificate
+          tags: [configure]
+
+        - name: Create admin user configuration
+          kubernetes.core.k8s:
+            definition:
+              apiVersion: v1
+              kind: ConfigMap
+              metadata:
+                name: tfe-admin-config
+                namespace: terraform-enterprise
+              data:
+                admin-user.json: |
+                  {
+                    "username": "admin",
+                    "email": "admin@company.com",
+                    "password": "{{ lookup('env', 'TFE_ADMIN_PASSWORD') | default('changeme123!') }}"
+                  }
+          tags: [configure]
+
+    # Monitoring and observability
+    - name: Deploy monitoring stack
+      block:
+        - name: Create monitoring namespace
+          kubernetes.core.k8s:
+            name: monitoring
+            api_version: v1
+            kind: Namespace
+            state: present
+          tags: [monitoring]
+
+        - name: Deploy ServiceMonitor for TFE
+          kubernetes.core.k8s:
+            definition:
+              apiVersion: monitoring.coreos.com/v1
+              kind: ServiceMonitor
+              metadata:
+                name: terraform-enterprise-metrics
+                namespace: monitoring
+                labels:
+                  app: terraform-enterprise
+              spec:
+                selector:
+                  matchLabels:
+                    app.kubernetes.io/name: terraform-enterprise
+                endpoints:
+                  - port: http-metrics
+                    interval: 30s
+                    path: /metrics
+                namespaceSelector:
+                  matchNames:
+                    - terraform-enterprise
+          tags: [monitoring]
+
+        - name: Create Grafana dashboard ConfigMap
+          kubernetes.core.k8s:
+            definition:
+              apiVersion: v1
+              kind: ConfigMap
+              metadata:
+                name: tfe-grafana-dashboard
+                namespace: monitoring
+                labels:
+                  grafana_dashboard: "1"
+              data:
+                tfe-dashboard.json: |
+                  {
+                    "dashboard": {
+                      "title": "Terraform Enterprise",
+                      "panels": [
+                        {
+                          "title": "TFE Request Rate",
+                          "type": "graph",
+                          "targets": [
+                            {
+                              "expr": "rate(tfe_http_requests_total[5m])"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  }
+          tags: [monitoring]
+
+    # Backup configuration
+    - name: Configure backup system
+      block:
+        - name: Create backup CronJob
+          kubernetes.core.k8s:
+            definition:
+              apiVersion: batch/v1
+              kind: CronJob
+              metadata:
+                name: tfe-backup
+                namespace: terraform-enterprise
+              spec:
+                schedule: "0 2 * * *"  # Daily at 2 AM
+                jobTemplate:
+                  spec:
+                    template:
+                      spec:
+                        containers:
+                          - name: backup
+                            image: postgres:14-alpine
+                            env:
+                              - name: PGPASSWORD
+                                valueFrom:
+                                  secretKeyRef:
+                                    name: tfe-database-credentials
+                                    key: password
+                            command:
+                              - /bin/sh
+                              - -c
+                              - |
+                                pg_dump -h {{ database_endpoint }} \
+                                        -U tfe \
+                                        -d terraform_enterprise \
+                                        --no-password | \
+                                gzip > /tmp/tfe-backup-$(date +%Y%m%d).sql.gz
+                                
+                                aws s3 cp /tmp/tfe-backup-$(date +%Y%m%d).sql.gz \
+                                          s3://{{ s3_bucket }}/backups/
+                        restartPolicy: OnFailure
+          tags: [backup]
+
+    # Validation and testing
+    - name: Validate TFE deployment
+      block:
+        - name: Wait for TFE to be accessible
+          uri:
+            url: "https://{{ tfe_hostname }}/_health_check"
+            method: GET
+            status_code: 200
+            validate_certs: false
+          retries: 10
+          delay: 30
+          register: health_check
+          tags: [validate]
+
+        - name: Test TFE API endpoint
+          uri:
+            url: "https://{{ tfe_hostname }}/api/v2/ping"
+            method: GET
+            status_code: 200
+            validate_certs: false
+          retries: 5
+          delay: 10
+          tags: [validate]
+
+        - name: Create test organization (if admin token available)
+          uri:
+            url: "https://{{ tfe_hostname }}/api/v2/organizations"
+            method: POST
+            headers:
+              Authorization: "Bearer {{ lookup('env', 'TFE_TOKEN') }}"
+              Content-Type: "application/vnd.api+json"
+            body_format: json
+            body:
+              data:
+                type: organizations
+                attributes:
+                  name: "test-org"
+                  email: "admin@company.com"
+            status_code: [201, 422]  # 422 if org already exists
+            validate_certs: false
+          when: lookup('env', 'TFE_TOKEN') != ""
+          tags: [validate]
+
+        - name: Verify database connectivity from TFE
+          kubernetes.core.k8s_exec:
+            namespace: terraform-enterprise
+            pod: "{{ ansible_hostname }}"
+            command: |
+              psql postgresql://tfe:{{ db_password }}@{{ database_endpoint }}:5432/terraform_enterprise?sslmode=require -c "SELECT version();"
+          register: db_test
+          tags: [validate]
+
+        - name: Display validation results
+          debug:
+            msg: |
+              ✅ TFE Deployment Validation Complete!
+              
+              🌐 Web UI: https://{{ tfe_hostname }}
+              📊 Health Check: {{ health_check.status }} {{ health_check.msg }}
+              🗄️ Database: {{ 'Connected' if db_test.rc == 0 else 'Connection Failed' }}
+              ☁️ AWS Integration: S3 bucket {{ s3_bucket }}
+              🏗️ Infrastructure: EKS cluster {{ cluster_name }}
+              
+              Next Steps:
+              1. Complete initial admin setup at https://{{ tfe_hostname }}/admin/account/new
+              2. Configure authentication (SAML/OIDC)
+              3. Create first organization and workspace
+              4. Upload Terraform configurations
+          tags: [validate]
+
+  handlers:
+    - name: restart terraform-enterprise
+      kubernetes.core.k8s:
+        state: absent
+        api_version: v1
+        kind: Pod
+        namespace: terraform-enterprise
+        label_selectors:
+          - app.kubernetes.io/name=terraform-enterprise
+      listen: "restart tfe"
+
+# Cleanup tasks (run with --tags cleanup)
+- name: Cleanup TFE deployment
+  hosts: localhost
+  gather_facts: false
+  tasks:
+    - name: Remove TFE Helm release
+      kubernetes.core.helm:
+        name: terraform-enterprise
+        release_namespace: terraform-enterprise
+        state: absent
+      tags: [never, cleanup]
+
+    - name: Remove Terraform infrastructure
+      command: terraform destroy -auto-approve -var-file=terraform.tfvars
+      args:
+        chdir: /tmp/tfe-terraform
+      tags: [never, cleanup]
+
+    - name: Clean up temporary files
+      file:
+        path: "{{ item }}"
+        state: absent
+      loop:
+        - /tmp/tfe-terraform
+        - /tmp/tfe-values.yaml
+        - /tmp/tfe_db_password
+      tags: [never, cleanup]
