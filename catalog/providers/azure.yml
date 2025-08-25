@@ -1,0 +1,100 @@
+version: '2.0'
+provider: azure
+generated_at: '2025-08-24T19:23:46.620277'
+catalog_type: provider
+metadata:
+  provider_name: Microsoft Azure
+  total_solutions: 6
+  last_updated: '2025-08-24T19:23:46.620297'
+categories:
+  ai:
+    solutions:
+      document-intelligence:
+        title: Azure Document Intelligence Platform
+        description: AI-powered document analysis and extraction
+        version: '1.0'
+        tags:
+        - ai
+        - document
+        - intelligence
+        - extraction
+        complexity: intermediate
+        deployment_time: 2-4 weeks
+        repository: https://github.com/eoframework/templates/tree/main/providers/azure/ai/document-intelligence
+        solution_path: ../../providers/azure/ai/document-intelligence/
+  cloud:
+    solutions:
+      enterprise-landing-zone:
+        title: Azure Enterprise Landing Zone
+        description: Enterprise-grade Azure foundation architecture
+        version: '1.0'
+        tags:
+        - landing-zone
+        - governance
+        - enterprise
+        complexity: enterprise
+        deployment_time: 6-10 weeks
+        repository: https://github.com/eoframework/templates/tree/main/providers/azure/cloud/enterprise-landing-zone
+        solution_path: ../../providers/azure/cloud/enterprise-landing-zone/
+  cyber-security:
+    solutions:
+      sentinel-siem:
+        title: Azure Sentinel SIEM Platform
+        description: Cloud-native SIEM and SOAR security platform
+        version: '1.0'
+        tags:
+        - siem
+        - sentinel
+        - soar
+        - security
+        complexity: enterprise
+        deployment_time: 4-8 weeks
+        repository: https://github.com/eoframework/templates/tree/main/providers/azure/cyber-security/sentinel-siem
+        solution_path: ../../providers/azure/cyber-security/sentinel-siem/
+  devops:
+    solutions:
+      enterprise-platform:
+        title: Azure DevOps Enterprise Platform
+        description: Complete DevOps lifecycle management platform
+        version: '1.0'
+        tags:
+        - devops
+        - azure-devops
+        - cicd
+        - agile
+        complexity: advanced
+        deployment_time: 3-6 weeks
+        repository: https://github.com/eoframework/templates/tree/main/providers/azure/devops/enterprise-platform
+        solution_path: ../../providers/azure/devops/enterprise-platform/
+  modern-workspace:
+    solutions:
+      virtual-desktop:
+        title: Azure Virtual Desktop
+        description: Comprehensive desktop virtualization with Windows 11 multi-session
+          support
+        version: '1.0'
+        tags:
+        - virtual-desktop
+        - avd
+        - windows-11
+        - fslogix
+        - remote-work
+        complexity: intermediate
+        deployment_time: 2-4 weeks
+        repository: https://github.com/eoframework/templates/tree/main/providers/azure/modern-workspace/virtual-desktop
+        solution_path: ../../providers/azure/modern-workspace/virtual-desktop/
+  network:
+    solutions:
+      virtual-wan-global:
+        title: Azure Virtual WAN Global Architecture
+        description: Global network architecture with Virtual WAN
+        version: '1.0'
+        tags:
+        - virtual-wan
+        - global
+        - network
+        - sd-wan
+        complexity: enterprise
+        deployment_time: 6-10 weeks
+        repository: https://github.com/eoframework/templates/tree/main/providers/azure/network/virtual-wan-global
+        solution_path: ../../providers/azure/network/virtual-wan-global/

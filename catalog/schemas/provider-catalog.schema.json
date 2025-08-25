@@ -1,0 +1,84 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "title": "Provider Catalog Schema",
+  "required": [
+    "version",
+    "provider",
+    "catalog_type"
+  ],
+  "properties": {
+    "version": {
+      "type": "string",
+      "pattern": "^2\\.\\d+$"
+    },
+    "provider": {
+      "type": "string",
+      "pattern": "^[a-z]+$"
+    },
+    "catalog_type": {
+      "type": "string",
+      "enum": [
+        "provider"
+      ]
+    },
+    "generated_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "categories": {
+      "type": "object",
+      "patternProperties": {
+        "^[a-z-]+$": {
+          "type": "object",
+          "properties": {
+            "solutions": {
+              "type": "object",
+              "patternProperties": {
+                "^[a-z-]+$": {
+                  "type": "object",
+                  "required": [
+                    "title",
+                    "description"
+                  ],
+                  "properties": {
+                    "title": {
+                      "type": "string"
+                    },
+                    "description": {
+                      "type": "string"
+                    },
+                    "version": {
+                      "type": "string"
+                    },
+                    "complexity": {
+                      "type": "string",
+                      "enum": [
+                        "basic",
+                        "intermediate",
+                        "advanced",
+                        "enterprise"
+                      ]
+                    },
+                    "deployment_time": {
+                      "type": "string"
+                    },
+                    "tags": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "solution_path": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

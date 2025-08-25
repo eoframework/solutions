@@ -1,0 +1,102 @@
+version: '2.0'
+provider: ibm
+generated_at: '2025-08-24T19:23:46.681084'
+catalog_type: provider
+metadata:
+  provider_name: IBM
+  total_solutions: 2
+  last_updated: '2025-08-24T19:23:46.681103'
+categories:
+  cloud:
+    solutions:
+      openshift-container-platform:
+        title: IBM OpenShift Container Platform
+        description: Enterprise Kubernetes platform with integrated developer tools
+          and multi-cloud capabilities
+        version: '4.14'
+        tags:
+        - openshift
+        - kubernetes
+        - containers
+        - cloud-native
+        - microservices
+        - devops
+        - ci-cd
+        - service-mesh
+        - hybrid-cloud
+        - developer-tools
+        complexity: intermediate
+        deployment_time: 2-4 hours
+        repository: https://github.com/eoframework/templates/tree/main/providers/ibm/cloud/openshift-container-platform
+        features:
+        - Enterprise Kubernetes with Red Hat support
+        - Integrated developer tools and workflows
+        - Built-in security and compliance controls
+        - Multi-cloud and hybrid cloud capabilities
+        - Automated scaling and lifecycle management
+        - Service mesh and networking with Istio
+        - Monitoring and observability stack
+        - GitOps and CI/CD integration with Tekton
+        - Source-to-image (S2I) capabilities
+        - Built-in container image registry
+        supported_platforms:
+        - AWS
+        - Microsoft Azure
+        - Google Cloud Platform
+        - IBM Cloud
+        - VMware vSphere
+        - Bare Metal
+        integrations:
+        - AWS Services
+        - Identity Providers
+        - Monitoring Systems
+        - CI/CD Tools
+        - Service Mesh
+        - Storage Systems
+        solution_path: ../../providers/ibm/cloud/openshift-container-platform/
+  devops:
+    solutions:
+      ansible-automation-platform:
+        title: IBM Ansible Automation Platform
+        description: Enterprise-grade automation capabilities for DevOps teams, enabling
+          standardized, secure, and scalable infrastructure and application management
+        version: '2.4'
+        tags:
+        - ansible
+        - automation
+        - devops
+        - infrastructure-as-code
+        - configuration-management
+        - compliance
+        - hybrid-cloud
+        - gitops
+        - rbac
+        - workflow-orchestration
+        complexity: intermediate
+        deployment_time: 4-8 hours
+        repository: https://github.com/eoframework/templates/tree/main/providers/ibm/devops/ansible-automation-platform
+        features:
+        - Automation Controller for centralized management
+        - Automation Hub for private content repository
+        - Event-Driven Ansible for reactive automation
+        - Decision Environment for policy-based governance
+        - Automation Mesh for distributed execution
+        - Role-based access control (RBAC)
+        - GitOps integration for Infrastructure as Code
+        - Multi-cloud and hybrid cloud automation
+        - Compliance and security policy enforcement
+        - Real-time monitoring and analytics
+        supported_platforms:
+        - Red Hat OpenShift
+        - AWS EKS
+        - Azure AKS
+        - Google GKE
+        - VMware Tanzu
+        integrations:
+        - Git Repositories
+        - CI/CD Pipelines
+        - Monitoring Systems
+        - Identity Providers
+        - Cloud Providers
+        - Ticketing Systems
+        solution_path: ../../providers/ibm/devops/ansible-automation-platform/

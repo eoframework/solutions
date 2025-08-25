@@ -1,0 +1,970 @@
+generated_at: '2025-08-24T19:25:41.803725'
+version: '2.0'
+source: aggregated
+metadata:
+  total_providers: 11
+  total_categories: 6
+  total_solutions: 34
+  last_updated: '2025-08-24T19:23:46.769130'
+providers_list:
+- aws
+- azure
+- cisco
+- dell
+- github
+- google
+- hashicorp
+- ibm
+- juniper
+- microsoft
+- nvidia
+categories_list:
+- ai
+- cloud
+- cyber-security
+- devops
+- modern-workspace
+- network
+providers:
+  aws:
+    categories:
+      ai:
+        solutions:
+          intelligent-document-processing:
+            title: AWS Intelligent Document Processing
+            description: AI-powered document analysis and processing solution
+            version: '1.0'
+            tags:
+            - ai
+            - document-processing
+            - textract
+            - comprehend
+            complexity: enterprise
+            deployment_time: 4-6 weeks
+            repository: https://github.com/eoframework/templates/tree/main/providers/aws/ai/intelligent-document-processing
+            solution_path: ../../providers/aws/ai/intelligent-document-processing/
+      cloud:
+        solutions:
+          disaster-recovery-web-application:
+            title: AWS Disaster Recovery Web Application
+            description: Multi-region disaster recovery for web applications
+            version: '1.0'
+            tags:
+            - disaster-recovery
+            - multi-region
+            - web-app
+            complexity: advanced
+            deployment_time: 3-5 weeks
+            repository: https://github.com/eoframework/templates/tree/main/providers/aws/cloud/disaster-recovery-web-application
+            solution_path: ../../providers/aws/cloud/disaster-recovery-web-application/
+          onpremise-to-cloud-migration:
+            title: AWS On-Premise to Cloud Migration
+            description: Enterprise migration from on-premise to AWS cloud
+            version: '1.0'
+            tags:
+            - migration
+            - cloud
+            - enterprise
+            - assessment
+            complexity: enterprise
+            deployment_time: 8-12 weeks
+            repository: https://github.com/eoframework/templates/tree/main/providers/aws/cloud/onpremise-to-cloud-migration
+            solution_path: ../../providers/aws/cloud/onpremise-to-cloud-migration/
+  azure:
+    categories:
+      ai:
+        solutions:
+          document-intelligence:
+            title: Azure Document Intelligence Platform
+            description: AI-powered document analysis and extraction
+            version: '1.0'
+            tags:
+            - ai
+            - document
+            - intelligence
+            - extraction
+            complexity: intermediate
+            deployment_time: 2-4 weeks
+            repository: https://github.com/eoframework/templates/tree/main/providers/azure/ai/document-intelligence
+            solution_path: ../../providers/azure/ai/document-intelligence/
+      cloud:
+        solutions:
+          enterprise-landing-zone:
+            title: Azure Enterprise Landing Zone
+            description: Enterprise-grade Azure foundation architecture
+            version: '1.0'
+            tags:
+            - landing-zone
+            - governance
+            - enterprise
+            complexity: enterprise
+            deployment_time: 6-10 weeks
+            repository: https://github.com/eoframework/templates/tree/main/providers/azure/cloud/enterprise-landing-zone
+            solution_path: ../../providers/azure/cloud/enterprise-landing-zone/
+      cyber-security:
+        solutions:
+          sentinel-siem:
+            title: Azure Sentinel SIEM Platform
+            description: Cloud-native SIEM and SOAR security platform
+            version: '1.0'
+            tags:
+            - siem
+            - sentinel
+            - soar
+            - security
+            complexity: enterprise
+            deployment_time: 4-8 weeks
+            repository: https://github.com/eoframework/templates/tree/main/providers/azure/cyber-security/sentinel-siem
+            solution_path: ../../providers/azure/cyber-security/sentinel-siem/
+      devops:
+        solutions:
+          enterprise-platform:
+            title: Azure DevOps Enterprise Platform
+            description: Complete DevOps lifecycle management platform
+            version: '1.0'
+            tags:
+            - devops
+            - azure-devops
+            - cicd
+            - agile
+            complexity: advanced
+            deployment_time: 3-6 weeks
+            repository: https://github.com/eoframework/templates/tree/main/providers/azure/devops/enterprise-platform
+            solution_path: ../../providers/azure/devops/enterprise-platform/
+      modern-workspace:
+        solutions:
+          virtual-desktop:
+            title: Azure Virtual Desktop
+            description: Comprehensive desktop virtualization with Windows 11 multi-session
+              support
+            version: '1.0'
+            tags:
+            - virtual-desktop
+            - avd
+            - windows-11
+            - fslogix
+            - remote-work
+            complexity: intermediate
+            deployment_time: 2-4 weeks
+            repository: https://github.com/eoframework/templates/tree/main/providers/azure/modern-workspace/virtual-desktop
+            solution_path: ../../providers/azure/modern-workspace/virtual-desktop/
+      network:
+        solutions:
+          virtual-wan-global:
+            title: Azure Virtual WAN Global Architecture
+            description: Global network architecture with Virtual WAN
+            version: '1.0'
+            tags:
+            - virtual-wan
+            - global
+            - network
+            - sd-wan
+            complexity: enterprise
+            deployment_time: 6-10 weeks
+            repository: https://github.com/eoframework/templates/tree/main/providers/azure/network/virtual-wan-global
+            solution_path: ../../providers/azure/network/virtual-wan-global/
+  cisco:
+    categories:
+      ai:
+        solutions:
+          network-analytics:
+            title: Cisco AI Network Analytics
+            description: AI-powered network monitoring and optimization
+            version: '1.0'
+            tags:
+            - ai
+            - network
+            - analytics
+            - monitoring
+            complexity: advanced
+            deployment_time: 4-6 weeks
+            repository: https://github.com/eoframework/templates/tree/main/providers/cisco/ai/network-analytics
+            solution_path: ../../providers/cisco/ai/network-analytics/
+      cloud:
+        solutions:
+          hybrid-infrastructure:
+            title: Cisco Hybrid Cloud Infrastructure
+            description: Multi-cloud networking and security platform
+            version: '1.0'
+            tags:
+            - hybrid-cloud
+            - multi-cloud
+            - networking
+            complexity: enterprise
+            deployment_time: 6-8 weeks
+            repository: https://github.com/eoframework/templates/tree/main/providers/cisco/cloud/hybrid-infrastructure
+            solution_path: ../../providers/cisco/cloud/hybrid-infrastructure/
+      cyber-security:
+        solutions:
+          secure-access:
+            title: Cisco Secure Access Platform
+            description: Zero trust network access and security platform
+            version: '1.0'
+            tags:
+            - security
+            - access
+            - zero-trust
+            - platform
+            complexity: enterprise
+            deployment_time: 8-12 weeks
+            repository: https://github.com/eoframework/templates/tree/main/providers/cisco/cyber-security/secure-access
+            solution_path: ../../providers/cisco/cyber-security/secure-access/
+      devops:
+        solutions:
+          ci-cd-automation:
+            title: Cisco CI/CD Automation Platform
+            description: Network infrastructure automation and DevOps
+            version: '1.0'
+            tags:
+            - automation
+            - cicd
+            - devops
+            - infrastructure
+            complexity: advanced
+            deployment_time: 4-8 weeks
+            repository: https://github.com/eoframework/templates/tree/main/providers/cisco/devops/ci-cd-automation
+            solution_path: ../../providers/cisco/devops/ci-cd-automation/
+      network:
+        solutions:
+          sd-wan-enterprise:
+            title: Cisco SD-WAN Enterprise Platform
+            description: Software-defined WAN for enterprise networks
+            version: '1.0'
+            tags:
+            - sd-wan
+            - enterprise
+            - software-defined
+            complexity: enterprise
+            deployment_time: 6-10 weeks
+            repository: https://github.com/eoframework/templates/tree/main/providers/cisco/network/sd-wan-enterprise
+            solution_path: ../../providers/cisco/network/sd-wan-enterprise/
+  dell:
+    categories:
+      ai:
+        solutions:
+          precision-ai-workstation:
+            title: Dell Precision AI Workstation
+            description: High-performance AI/ML workstation platform
+            version: '1.0'
+            tags:
+            - ai
+            - workstation
+            - precision
+            - high-performance
+            complexity: enterprise
+            deployment_time: 4-8 weeks
+            repository: https://github.com/eoframework/templates/tree/main/providers/dell/ai/precision-ai-workstation
+            solution_path: ../../providers/dell/ai/precision-ai-workstation/
+      cloud:
+        solutions:
+          vxrail-hci:
+            title: Dell VxRail Hyper-Converged Infrastructure
+            description: Hyper-converged infrastructure with VxRail
+            version: '1.0'
+            tags:
+            - vxrail
+            - hci
+            - hyper-converged
+            complexity: enterprise
+            deployment_time: 6-10 weeks
+            repository: https://github.com/eoframework/templates/tree/main/providers/dell/cloud/vxrail-hci
+            solution_path: ../../providers/dell/cloud/vxrail-hci/
+          vxrail-hyperconverged:
+            title: Dell VxRail Hyperconverged Platform
+            description: Enterprise hyperconverged infrastructure solution
+            version: '1.0'
+            tags:
+            - vxrail
+            - hyperconverged
+            - enterprise
+            complexity: enterprise
+            deployment_time: 6-10 weeks
+            repository: https://github.com/eoframework/templates/tree/main/providers/dell/cloud/vxrail-hyperconverged
+            solution_path: ../../providers/dell/cloud/vxrail-hyperconverged/
+      cyber-security:
+        solutions:
+          safeid-authentication:
+            title: Dell SafeID Authentication Platform
+            description: Hardware-based security and authentication
+            version: '1.0'
+            tags:
+            - safeid
+            - authentication
+            - hardware
+            - security
+            complexity: advanced
+            deployment_time: 4-6 weeks
+            repository: https://github.com/eoframework/templates/tree/main/providers/dell/cyber-security/safeid-authentication
+            solution_path: ../../providers/dell/cyber-security/safeid-authentication/
+      devops:
+        solutions:
+          poweredge-ci-infrastructure:
+            title: Dell PowerEdge CI Infrastructure
+            description: CI/CD infrastructure with PowerEdge servers
+            version: '1.0'
+            tags:
+            - poweredge
+            - ci
+            - infrastructure
+            - servers
+            complexity: advanced
+            deployment_time: 4-6 weeks
+            repository: https://github.com/eoframework/templates/tree/main/providers/dell/devops/poweredge-ci-infrastructure
+            solution_path: ../../providers/dell/devops/poweredge-ci-infrastructure/
+      network:
+        solutions:
+          powerswitch-datacenter:
+            title: Dell PowerSwitch Datacenter Network
+            description: High-performance datacenter networking solution
+            version: '1.0'
+            tags:
+            - powerswitch
+            - datacenter
+            - network
+            complexity: enterprise
+            deployment_time: 4-8 weeks
+            repository: https://github.com/eoframework/templates/tree/main/providers/dell/network/powerswitch-datacenter
+            solution_path: ../../providers/dell/network/powerswitch-datacenter/
+  github:
+    categories:
+      cyber-security:
+        solutions:
+          advanced-security:
+            title: GitHub Advanced Security Platform
+            description: Security scanning, monitoring, and compliance solution
+            version: '1.0'
+            tags:
+            - security
+            - compliance
+            - codeql
+            - secret-scanning
+            - siem
+            complexity: enterprise
+            deployment_time: 4-6 weeks
+            repository: https://github.com/eoframework/templates/tree/main/providers/github/cyber-security/advanced-security
+            features:
+            - CodeQL semantic code analysis
+            - Advanced secret scanning with push protection
+            - Dependency vulnerability management
+            - SIEM integration (Splunk, Azure Sentinel, Datadog)
+            - Multi-framework compliance monitoring (SOC2, PCI-DSS, GDPR, HIPAA)
+            - Automated incident response and alerting
+            - Executive reporting and analytics dashboards
+            - Custom security policies and governance
+            supported_languages:
+            - JavaScript
+            - TypeScript
+            - Python
+            - Java
+            - C#
+            - C++
+            - Go
+            integrations:
+            - Splunk
+            - Azure Sentinel
+            - Datadog
+            - GitHub Actions
+            - AWS
+            - Azure
+            solution_path: ../../providers/github/cyber-security/advanced-security/
+      devops:
+        solutions:
+          actions-enterprise-cicd:
+            title: GitHub Actions Enterprise CI/CD Platform
+            description: Enterprise CI/CD platform with self-hosted runners
+            version: '1.0'
+            tags:
+            - cicd
+            - github-actions
+            - aws
+            - automation
+            - devops
+            complexity: enterprise
+            deployment_time: 2-4 weeks
+            repository: https://github.com/eoframework/templates/tree/main/providers/github/devops/actions-enterprise-cicd
+            features:
+            - Self-hosted GitHub Actions runners on AWS
+            - Auto-scaling runner infrastructure
+            - Enterprise security and compliance
+            - Comprehensive monitoring and logging
+            - Multi-environment support (dev/staging/prod)
+            - Cost optimization with spot instances
+            - Advanced caching and artifact management
+            - Workflow automation and orchestration
+            supported_platforms:
+            - AWS
+            - GitHub Enterprise
+            integrations:
+            - GitHub Actions
+            - AWS EC2
+            - AWS S3
+            - CloudWatch
+            - Terraform
+            solution_path: ../../providers/github/devops/actions-enterprise-cicd/
+  google:
+    categories:
+      cloud:
+        solutions:
+          landing-zone:
+            title: Google Cloud Enterprise Landing Zone
+            description: Comprehensive enterprise cloud foundation with security,
+              governance, and operational excellence
+            version: '1.0'
+            tags:
+            - landing-zone
+            - gcp
+            - enterprise-architecture
+            - vpc
+            - iam
+            - security
+            - compliance
+            complexity: enterprise
+            deployment_time: 4-8 weeks
+            repository: https://github.com/eoframework/templates/tree/main/providers/google/cloud/landing-zone
+            solution_path: ../../providers/google/cloud/landing-zone/
+      modern-workspace:
+        solutions:
+          workspace:
+            title: Google Workspace Enterprise Platform
+            description: Comprehensive cloud-based productivity and collaboration
+              platform
+            version: '1.0'
+            tags:
+            - workspace
+            - gmail
+            - collaboration
+            - productivity
+            - cloud-native
+            complexity: intermediate
+            deployment_time: 2-6 weeks
+            repository: https://github.com/eoframework/templates/tree/main/providers/google/modern-workspace/workspace
+            solution_path: ../../providers/google/modern-workspace/workspace/
+  hashicorp:
+    categories:
+      cloud:
+        solutions:
+          multi-cloud-platform:
+            title: HashiCorp Multi-Cloud Infrastructure Management Platform
+            description: Enterprise multi-cloud infrastructure management platform
+              using HashiCorp's complete product suite for unified cloud operations
+            version: '1.0'
+            tags:
+            - multi-cloud
+            - terraform
+            - consul
+            - vault
+            - nomad
+            - boundary
+            - infrastructure-management
+            - hybrid-cloud
+            - service-mesh
+            - secrets-management
+            complexity: enterprise
+            deployment_time: 4-8 weeks
+            repository: https://github.com/eoframework/templates/tree/main/providers/hashicorp/cloud/multi-cloud-platform
+            features:
+            - Unified multi-cloud operations across AWS, Azure, and GCP
+            - HashiCorp Terraform Enterprise for infrastructure as code
+            - HashiCorp Consul for service discovery and service mesh
+            - HashiCorp Vault for secrets and identity management
+            - HashiCorp Nomad for workload orchestration
+            - HashiCorp Boundary for secure remote access
+            - Cross-cloud networking and VPN connectivity
+            - Zero-trust security architecture
+            - Policy as code with Sentinel
+            - Automated disaster recovery and backup
+            supported_platforms:
+            - AWS
+            - Microsoft Azure
+            - Google Cloud Platform
+            - Kubernetes
+            - VMware vSphere
+            integrations:
+            - Multi-cloud APIs
+            - Kubernetes
+            - Identity Providers
+            - Monitoring Systems
+            - CI/CD Pipelines
+            solution_path: ../../providers/hashicorp/cloud/multi-cloud-platform/
+      devops:
+        solutions:
+          terraform-enterprise:
+            title: HashiCorp Terraform Enterprise Platform
+            description: Enterprise-grade Terraform platform providing collaborative
+              infrastructure as code, policy as code, and automated workflows
+            version: '1.0'
+            tags:
+            - terraform
+            - infrastructure-as-code
+            - devops
+            - policy-as-code
+            - multi-cloud
+            - enterprise
+            - collaboration
+            - sentinel
+            - automation
+            complexity: enterprise
+            deployment_time: 2-4 weeks
+            repository: https://github.com/eoframework/templates/tree/main/providers/hashicorp/devops/terraform-enterprise
+            features:
+            - Collaborative infrastructure as code workflows
+            - Policy as code with Sentinel policy enforcement
+            - Multi-cloud support for AWS, Azure, GCP, and on-premises
+            - Private module registry for standardized components
+            - Enterprise security with SSO and RBAC
+            - Cost estimation and analysis before deployment
+            - VCS integration with GitHub, GitLab, and Bitbucket
+            - Full REST API for automation and integration
+            - Workspace management and team collaboration
+            - Comprehensive audit logging and compliance
+            supported_platforms:
+            - AWS
+            - Microsoft Azure
+            - Google Cloud Platform
+            - VMware vSphere
+            - Kubernetes
+            integrations:
+            - Version Control Systems
+            - Identity Providers
+            - CI/CD Pipelines
+            - HashiCorp Vault
+            - Monitoring Systems
+            solution_path: ../../providers/hashicorp/devops/terraform-enterprise/
+  ibm:
+    categories:
+      cloud:
+        solutions:
+          openshift-container-platform:
+            title: IBM OpenShift Container Platform
+            description: Enterprise Kubernetes platform with integrated developer
+              tools and multi-cloud capabilities
+            version: '4.14'
+            tags:
+            - openshift
+            - kubernetes
+            - containers
+            - cloud-native
+            - microservices
+            - devops
+            - ci-cd
+            - service-mesh
+            - hybrid-cloud
+            - developer-tools
+            complexity: intermediate
+            deployment_time: 2-4 hours
+            repository: https://github.com/eoframework/templates/tree/main/providers/ibm/cloud/openshift-container-platform
+            features:
+            - Enterprise Kubernetes with Red Hat support
+            - Integrated developer tools and workflows
+            - Built-in security and compliance controls
+            - Multi-cloud and hybrid cloud capabilities
+            - Automated scaling and lifecycle management
+            - Service mesh and networking with Istio
+            - Monitoring and observability stack
+            - GitOps and CI/CD integration with Tekton
+            - Source-to-image (S2I) capabilities
+            - Built-in container image registry
+            supported_platforms:
+            - AWS
+            - Microsoft Azure
+            - Google Cloud Platform
+            - IBM Cloud
+            - VMware vSphere
+            - Bare Metal
+            integrations:
+            - AWS Services
+            - Identity Providers
+            - Monitoring Systems
+            - CI/CD Tools
+            - Service Mesh
+            - Storage Systems
+            solution_path: ../../providers/ibm/cloud/openshift-container-platform/
+      devops:
+        solutions:
+          ansible-automation-platform:
+            title: IBM Ansible Automation Platform
+            description: Enterprise-grade automation capabilities for DevOps teams,
+              enabling standardized, secure, and scalable infrastructure and application
+              management
+            version: '2.4'
+            tags:
+            - ansible
+            - automation
+            - devops
+            - infrastructure-as-code
+            - configuration-management
+            - compliance
+            - hybrid-cloud
+            - gitops
+            - rbac
+            - workflow-orchestration
+            complexity: intermediate
+            deployment_time: 4-8 hours
+            repository: https://github.com/eoframework/templates/tree/main/providers/ibm/devops/ansible-automation-platform
+            features:
+            - Automation Controller for centralized management
+            - Automation Hub for private content repository
+            - Event-Driven Ansible for reactive automation
+            - Decision Environment for policy-based governance
+            - Automation Mesh for distributed execution
+            - Role-based access control (RBAC)
+            - GitOps integration for Infrastructure as Code
+            - Multi-cloud and hybrid cloud automation
+            - Compliance and security policy enforcement
+            - Real-time monitoring and analytics
+            supported_platforms:
+            - Red Hat OpenShift
+            - AWS EKS
+            - Azure AKS
+            - Google GKE
+            - VMware Tanzu
+            integrations:
+            - Git Repositories
+            - CI/CD Pipelines
+            - Monitoring Systems
+            - Identity Providers
+            - Cloud Providers
+            - Ticketing Systems
+            solution_path: ../../providers/ibm/devops/ansible-automation-platform/
+  juniper:
+    categories:
+      cyber-security:
+        solutions:
+          srx-firewall-platform:
+            title: Juniper SRX Firewall Platform
+            description: Enterprise-grade next-generation firewall platform delivering
+              comprehensive network protection, advanced threat detection, and secure
+              connectivity
+            version: '2024.1'
+            tags:
+            - next-generation-firewall
+            - network-security
+            - threat-protection
+            - intrusion-prevention
+            - vpn-gateway
+            - enterprise-security
+            complexity: intermediate
+            deployment_time: 2-8 weeks
+            repository: https://github.com/eoframework/templates/tree/main/providers/juniper/cyber-security/srx-firewall-platform
+            features:
+            - Advanced threat protection with IDP signatures
+            - High-performance security processing with hardware acceleration
+            - Unified security management with Security Director
+            - VPN gateway and secure remote access capabilities
+            - Application visibility and control with advanced inspection
+            - High availability with active/passive clustering
+            - Compliance support for PCI DSS, HIPAA, and FISMA
+            - Zero-day protection through behavioral analysis
+            supported_platforms:
+            - SRX300 Series
+            - SRX1500 Series
+            - SRX4000 Series
+            - SRX5000 Series
+            integrations:
+            - SIEM Platforms
+            - Active Directory/LDAP
+            - RADIUS Authentication
+            - Network Management Systems
+            business_value:
+              threat_detection: 99.9% accuracy with advanced IDP
+              management_reduction: 60% reduction in security overhead
+              incident_response: 50% faster resolution times
+              system_availability: 99.99% uptime with failover
+            solution_path: ../../providers/juniper/cyber-security/srx-firewall-platform/
+      network:
+        solutions:
+          mist-ai-network:
+            title: Juniper Mist AI Network Platform
+            description: Cloud-native, AI-driven network infrastructure platform delivering
+              exceptional user experiences through proactive operations and predictive
+              intelligence
+            version: '2024.1'
+            tags:
+            - ai-networking
+            - cloud-native
+            - wireless-networking
+            - network-automation
+            - location-services
+            - enterprise-wifi
+            complexity: intermediate
+            deployment_time: 4-12 weeks
+            repository: https://github.com/eoframework/templates/tree/main/providers/juniper/network/mist-ai-network
+            features:
+            - AI-driven proactive network operations with 90% trouble ticket reduction
+            - Cloud-native microservices architecture with zero hardware controllers
+            - Marvis Virtual Network Assistant for natural language troubleshooting
+            - Real-time location services with 1-3 meter accuracy
+            - Sub-millisecond Wi-Fi roaming for seamless connectivity
+            - Automated RF optimization and interference mitigation
+            - Comprehensive API ecosystem for integration and automation
+            - 24/7 AI monitoring with predictive problem detection
+            supported_platforms:
+            - Juniper Access Points
+            - EX Series Switches
+            - Mist Cloud Platform
+            - Wi-Fi 6/6E
+            integrations:
+            - RADIUS/Active Directory
+            - SIEM Platforms
+            - ServiceNow ITSM
+            - Slack/Teams
+            - Cloud Identity Providers
+            business_value:
+              trouble_ticket_reduction: 90% reduction through proactive AI
+              incident_resolution: 75% faster MTTR
+              operational_expenses: 50% lower vs traditional solutions
+              network_availability: 99.9% with AI-driven optimization
+            solution_path: ../../providers/juniper/network/mist-ai-network/
+  microsoft:
+    categories:
+      cyber-security:
+        solutions:
+          cmmc-enclave:
+            title: Microsoft CMMC Enclave
+            description: CMMC Level 2 compliant Azure Government cloud environment
+              with automated data labeling and CUI protection for DoD contractors
+            version: '2.0'
+            tags:
+            - cmmc
+            - controlled-unclassified-information
+            - cui
+            - dod-contractors
+            - nist-800-171
+            - fedramp
+            - data-classification
+            - information-protection
+            - azure-government
+            - compliance
+            - zero-trust
+            - sentinel
+            - purview
+            - security-center
+            complexity: enterprise
+            deployment_time: 6-12 weeks
+            repository: https://github.com/eoframework/templates/tree/main/providers/microsoft/cyber-security/cmmc-enclave
+            features:
+            - CMMC Level 2 compliance with 110 NIST SP 800-171 controls
+            - Automated CUI data discovery and classification with Microsoft Purview
+            - Microsoft Information Protection (MIP) labels and encryption
+            - Azure Government cloud with FedRAMP High authorization
+            - Azure Sentinel SIEM with security orchestration
+            - Zero Trust architecture with conditional access
+            - Automated compliance monitoring and reporting
+            - Advanced threat protection and incident response
+            - Data loss prevention (DLP) policies for CUI
+            - Comprehensive audit trails and evidence collection
+            supported_platforms:
+            - Azure Government Cloud
+            - Azure Commercial Cloud
+            - Hybrid Azure Environment
+            integrations:
+            - Microsoft Purview
+            - Azure Sentinel
+            - Azure Security Center
+            - Microsoft Defender
+            - Azure Information Protection
+            - Microsoft Cloud App Security
+            compliance_frameworks:
+            - CMMC Level 2
+            - NIST SP 800-171
+            - FedRAMP High
+            - FISMA Moderate
+            - DoD SRG Level 2
+            - DFARS 252.204-7012
+            - ITAR
+            cui_categories:
+            - CUI Basic
+            - CUI Specified
+            - Export Controlled Technical Data
+            - Federal Tax Information
+            - ITAR
+            business_value:
+              compliance_achievement: 100% CMMC Level 2
+              contract_retention: $15M+ protected revenue
+              new_opportunities: $8M+ annual contract value
+              audit_efficiency: 85% faster compliance audits
+            solution_path: ../../providers/microsoft/cyber-security/cmmc-enclave/
+      modern-workspace:
+        solutions:
+          m365-deployment:
+            title: Microsoft 365 Enterprise Deployment
+            description: Comprehensive enterprise-grade Microsoft 365 deployment solution
+              with advanced security, compliance, and productivity features
+            version: '1.0'
+            tags:
+            - microsoft-365
+            - office-365
+            - azure-ad
+            - exchange-online
+            - sharepoint-online
+            - teams
+            - onedrive
+            - security
+            - compliance
+            - enterprise
+            - productivity
+            - collaboration
+            - zero-trust
+            - defender
+            - purview
+            - intune
+            - power-platform
+            - viva
+            complexity: enterprise
+            deployment_time: 12-16 weeks
+            repository: https://github.com/eoframework/templates/tree/main/providers/microsoft/modern-workspace/m365-deployment
+            features:
+            - Complete Microsoft 365 E5 suite deployment and configuration
+            - Azure Active Directory Premium P2 with advanced identity protection
+            - Exchange Online with advanced threat protection and DLP
+            - Microsoft Teams with enterprise voice and meeting features
+            - SharePoint Online with modern sites and information governance
+            - OneDrive for Business with advanced sharing and sync
+            - Microsoft Defender for Office 365 comprehensive protection
+            - Microsoft Purview for information governance and compliance
+            - Microsoft Intune for device and application management
+            - Power Platform integration for workflow automation
+            - Microsoft Viva suite for employee experience and analytics
+            - Zero Trust security architecture implementation
+            - Comprehensive migration tools and automation
+            - Advanced reporting and analytics dashboards
+            - Enterprise-grade support and training materials
+            supported_platforms:
+            - Microsoft 365 Cloud
+            - Azure Government Cloud
+            - Hybrid On-Premises Integration
+            integrations:
+            - Azure Active Directory
+            - Windows Server
+            - Exchange Server
+            - SharePoint Server
+            - Skype for Business
+            - Third-party SIEM
+            - Line-of-Business Applications
+            - HR Systems
+            - CRM Platforms
+            compliance_frameworks:
+            - GDPR
+            - HIPAA
+            - SOX
+            - PCI DSS
+            - ISO 27001
+            - NIST Cybersecurity Framework
+            - FISMA
+            - FedRAMP
+            - CCPA
+            - SOC 2
+            business_value:
+              productivity_improvement: 35% average collaboration efficiency gain
+              cost_reduction: 40% infrastructure cost savings
+              security_enhancement: 99.9% advanced threat protection coverage
+              roi_achievement: 350% return on investment over 3 years
+              user_satisfaction: 85% user adoption rate within 6 months
+            solution_path: ../../providers/microsoft/modern-workspace/m365-deployment/
+  nvidia:
+    categories:
+      ai:
+        solutions:
+          dgx-superpod:
+            title: NVIDIA DGX SuperPOD AI Infrastructure
+            description: Turnkey AI supercomputing infrastructure delivering exaFLOPS
+              performance for large-scale machine learning training and inference
+              workloads
+            version: '1.0'
+            tags:
+            - ai
+            - machine-learning
+            - hpc
+            - gpu-computing
+            - supercomputing
+            - nvidia
+            - dgx
+            - superpod
+            - enterprise-ai
+            complexity: enterprise
+            deployment_time: 12-16 weeks
+            repository: https://github.com/eoframework/templates/tree/main/providers/nvidia/ai/dgx-superpod
+            features:
+            - NVIDIA DGX H100 systems with 8x H100 GPUs per node
+            - Scalable from 20 to 140+ nodes (160-1,120 GPUs)
+            - Up to 2.4 exaFLOPS AI performance at full scale
+            - NVIDIA Quantum-2 InfiniBand 400Gb/s connectivity
+            - Pure Storage FlashBlade with >75GB/s bandwidth
+            - NVIDIA AI Enterprise production software suite
+            - Base Command Platform for unified cluster management
+            - Real-time performance monitoring and optimization
+            - Factory-validated configurations with performance guarantees
+            - Enterprise support with 24/7 monitoring
+            supported_platforms:
+            - NVIDIA Base Command Platform
+            - Kubernetes
+            - SLURM
+            - Red Hat OpenShift
+            integrations:
+            - TensorFlow/TensorFlow Extended
+            - PyTorch/PyTorch Lightning
+            - NVIDIA RAPIDS
+            - Hugging Face Transformers
+            - MLflow
+            - Jupyter
+            - NGC Catalog
+            business_value:
+              performance_improvement: 10x faster AI model training
+              gpu_utilization: 95%+ utilization vs 30-60% traditional
+              deployment_acceleration: 6+ months faster than DIY solutions
+              roi_achievement: 300-500% return on investment over 36 months
+            solution_path: ../../providers/nvidia/ai/dgx-superpod/
+      modern-workspace:
+        solutions:
+          omniverse-enterprise:
+            title: NVIDIA Omniverse Enterprise Collaboration Platform
+            description: Real-time collaborative 3D content creation and visualization
+              platform enabling global teams to work together seamlessly across different
+              applications and workflows
+            version: '1.0'
+            tags:
+            - collaboration
+            - 3d-content
+            - real-time
+            - usd
+            - rendering
+            - creative-workflows
+            - omniverse
+            - rtx
+            - enterprise-graphics
+            complexity: intermediate
+            deployment_time: 12-16 weeks
+            repository: https://github.com/eoframework/templates/tree/main/providers/nvidia/modern-workspace/omniverse-enterprise
+            features:
+            - Universal Scene Description (USD) foundation for seamless data exchange
+            - Real-time ray tracing with NVIDIA RTX technology
+            - Nucleus collaboration and versioning engine
+            - DCC connectors for Maya, 3ds Max, Blender, Unreal Engine
+            - Cloud-native containerized microservices architecture
+            - 'AI-powered tools: Audio2Face, Machinima for content creation'
+            - Enterprise security with SSO, RBAC, and audit logging
+            - Scalable architecture supporting 10-1000+ concurrent users
+            - Cross-platform compatibility (Windows, Linux, macOS)
+            - Professional services and training programs
+            supported_platforms:
+            - Windows Server
+            - Linux (Ubuntu/RHEL)
+            - Kubernetes
+            - AWS
+            - Azure
+            - Google Cloud
+            integrations:
+            - Autodesk Maya
+            - 3ds Max
+            - Blender
+            - Epic Unreal Engine
+            - SideFX Houdini
+            - Adobe Substance Suite
+            - Active Directory
+            - LDAP
+            business_value:
+              collaboration_efficiency: 50-70% reduction in review cycles
+              iteration_speed: 3-5x faster iterations on complex 3D projects
+              version_conflicts: '>90% elimination of file conflicts'
+              roi_achievement: 400-600% return on investment over 3 years
+            solution_path: ../../providers/nvidia/modern-workspace/omniverse-enterprise/

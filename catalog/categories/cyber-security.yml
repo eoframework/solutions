@@ -1,0 +1,46 @@
+version: '2.0'
+category: cyber-security
+generated_at: '2025-08-24T19:23:46.718918'
+catalog_type: category
+metadata:
+  category_name: Cyber Security
+  description: Security, compliance, and threat protection solutions
+  total_solutions: 6
+  last_updated: '2025-08-24T19:23:46.718920'
+providers:
+  azure:
+    solutions:
+    - name: sentinel-siem
+      title: Azure Sentinel SIEM Platform
+      provider_catalog: ../providers/azure.yml
+      solution_path: ../../providers/azure/cyber-security/sentinel-siem/
+  cisco:
+    solutions:
+    - name: secure-access
+      title: Cisco Secure Access Platform
+      provider_catalog: ../providers/cisco.yml
+      solution_path: ../../providers/cisco/cyber-security/secure-access/
+  dell:
+    solutions:
+    - name: safeid-authentication
+      title: Dell SafeID Authentication Platform
+      provider_catalog: ../providers/dell.yml
+      solution_path: ../../providers/dell/cyber-security/safeid-authentication/
+  github:
+    solutions:
+    - name: advanced-security
+      title: GitHub Advanced Security Platform
+      provider_catalog: ../providers/github.yml
+      solution_path: ../../providers/github/cyber-security/advanced-security/
+  juniper:
+    solutions:
+    - name: srx-firewall-platform
+      title: Juniper SRX Firewall Platform
+      provider_catalog: ../providers/juniper.yml
+      solution_path: ../../providers/juniper/cyber-security/srx-firewall-platform/
+  microsoft:
+    solutions:
+    - name: cmmc-enclave
+      title: Microsoft CMMC Enclave
+      provider_catalog: ../providers/microsoft.yml
+      solution_path: ../../providers/microsoft/cyber-security/cmmc-enclave/

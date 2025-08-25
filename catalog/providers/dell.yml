@@ -1,0 +1,94 @@
+version: '2.0'
+provider: dell
+generated_at: '2025-08-24T19:23:46.646203'
+catalog_type: provider
+metadata:
+  provider_name: Dell Technologies
+  total_solutions: 6
+  last_updated: '2025-08-24T19:23:46.646232'
+categories:
+  ai:
+    solutions:
+      precision-ai-workstation:
+        title: Dell Precision AI Workstation
+        description: High-performance AI/ML workstation platform
+        version: '1.0'
+        tags:
+        - ai
+        - workstation
+        - precision
+        - high-performance
+        complexity: enterprise
+        deployment_time: 4-8 weeks
+        repository: https://github.com/eoframework/templates/tree/main/providers/dell/ai/precision-ai-workstation
+        solution_path: ../../providers/dell/ai/precision-ai-workstation/
+  cloud:
+    solutions:
+      vxrail-hci:
+        title: Dell VxRail Hyper-Converged Infrastructure
+        description: Hyper-converged infrastructure with VxRail
+        version: '1.0'
+        tags:
+        - vxrail
+        - hci
+        - hyper-converged
+        complexity: enterprise
+        deployment_time: 6-10 weeks
+        repository: https://github.com/eoframework/templates/tree/main/providers/dell/cloud/vxrail-hci
+        solution_path: ../../providers/dell/cloud/vxrail-hci/
+      vxrail-hyperconverged:
+        title: Dell VxRail Hyperconverged Platform
+        description: Enterprise hyperconverged infrastructure solution
+        version: '1.0'
+        tags:
+        - vxrail
+        - hyperconverged
+        - enterprise
+        complexity: enterprise
+        deployment_time: 6-10 weeks
+        repository: https://github.com/eoframework/templates/tree/main/providers/dell/cloud/vxrail-hyperconverged
+        solution_path: ../../providers/dell/cloud/vxrail-hyperconverged/
+  cyber-security:
+    solutions:
+      safeid-authentication:
+        title: Dell SafeID Authentication Platform
+        description: Hardware-based security and authentication
+        version: '1.0'
+        tags:
+        - safeid
+        - authentication
+        - hardware
+        - security
+        complexity: advanced
+        deployment_time: 4-6 weeks
+        repository: https://github.com/eoframework/templates/tree/main/providers/dell/cyber-security/safeid-authentication
+        solution_path: ../../providers/dell/cyber-security/safeid-authentication/
+  devops:
+    solutions:
+      poweredge-ci-infrastructure:
+        title: Dell PowerEdge CI Infrastructure
+        description: CI/CD infrastructure with PowerEdge servers
+        version: '1.0'
+        tags:
+        - poweredge
+        - ci
+        - infrastructure
+        - servers
+        complexity: advanced
+        deployment_time: 4-6 weeks
+        repository: https://github.com/eoframework/templates/tree/main/providers/dell/devops/poweredge-ci-infrastructure
+        solution_path: ../../providers/dell/devops/poweredge-ci-infrastructure/
+  network:
+    solutions:
+      powerswitch-datacenter:
+        title: Dell PowerSwitch Datacenter Network
+        description: High-performance datacenter networking solution
+        version: '1.0'
+        tags:
+        - powerswitch
+        - datacenter
+        - network
+        complexity: enterprise
+        deployment_time: 4-8 weeks
+        repository: https://github.com/eoframework/templates/tree/main/providers/dell/network/powerswitch-datacenter
+        solution_path: ../../providers/dell/network/powerswitch-datacenter/

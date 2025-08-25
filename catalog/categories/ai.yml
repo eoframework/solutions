@@ -1,0 +1,40 @@
+version: '2.0'
+category: ai
+generated_at: '2025-08-24T19:23:46.718882'
+catalog_type: category
+metadata:
+  category_name: Artificial Intelligence
+  description: Artificial Intelligence and Machine Learning solutions
+  total_solutions: 5
+  last_updated: '2025-08-24T19:23:46.718897'
+providers:
+  aws:
+    solutions:
+    - name: intelligent-document-processing
+      title: AWS Intelligent Document Processing
+      provider_catalog: ../providers/aws.yml
+      solution_path: ../../providers/aws/ai/intelligent-document-processing/
+  azure:
+    solutions:
+    - name: document-intelligence
+      title: Azure Document Intelligence Platform
+      provider_catalog: ../providers/azure.yml
+      solution_path: ../../providers/azure/ai/document-intelligence/
+  cisco:
+    solutions:
+    - name: network-analytics
+      title: Cisco AI Network Analytics
+      provider_catalog: ../providers/cisco.yml
+      solution_path: ../../providers/cisco/ai/network-analytics/
+  dell:
+    solutions:
+    - name: precision-ai-workstation
+      title: Dell Precision AI Workstation
+      provider_catalog: ../providers/dell.yml
+      solution_path: ../../providers/dell/ai/precision-ai-workstation/
+  nvidia:
+    solutions:
+    - name: dgx-superpod
+      title: NVIDIA DGX SuperPOD AI Infrastructure
+      provider_catalog: ../providers/nvidia.yml
+      solution_path: ../../providers/nvidia/ai/dgx-superpod/

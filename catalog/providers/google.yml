@@ -1,0 +1,44 @@
+version: '2.0'
+provider: google
+generated_at: '2025-08-24T19:23:46.664713'
+catalog_type: provider
+metadata:
+  provider_name: Google Cloud
+  total_solutions: 2
+  last_updated: '2025-08-24T19:23:46.664735'
+categories:
+  cloud:
+    solutions:
+      landing-zone:
+        title: Google Cloud Enterprise Landing Zone
+        description: Comprehensive enterprise cloud foundation with security, governance,
+          and operational excellence
+        version: '1.0'
+        tags:
+        - landing-zone
+        - gcp
+        - enterprise-architecture
+        - vpc
+        - iam
+        - security
+        - compliance
+        complexity: enterprise
+        deployment_time: 4-8 weeks
+        repository: https://github.com/eoframework/templates/tree/main/providers/google/cloud/landing-zone
+        solution_path: ../../providers/google/cloud/landing-zone/
+  modern-workspace:
+    solutions:
+      workspace:
+        title: Google Workspace Enterprise Platform
+        description: Comprehensive cloud-based productivity and collaboration platform
+        version: '1.0'
+        tags:
+        - workspace
+        - gmail
+        - collaboration
+        - productivity
+        - cloud-native
+        complexity: intermediate
+        deployment_time: 2-6 weeks
+        repository: https://github.com/eoframework/templates/tree/main/providers/google/modern-workspace/workspace
+        solution_path: ../../providers/google/modern-workspace/workspace/

@@ -1,0 +1,34 @@
+version: '2.0'
+category: modern-workspace
+generated_at: '2025-08-24T19:23:46.718927'
+catalog_type: category
+metadata:
+  category_name: Modern Workspace
+  description: Digital workplace and collaboration solutions
+  total_solutions: 4
+  last_updated: '2025-08-24T19:23:46.718929'
+providers:
+  azure:
+    solutions:
+    - name: virtual-desktop
+      title: Azure Virtual Desktop
+      provider_catalog: ../providers/azure.yml
+      solution_path: ../../providers/azure/modern-workspace/virtual-desktop/
+  google:
+    solutions:
+    - name: workspace
+      title: Google Workspace Enterprise Platform
+      provider_catalog: ../providers/google.yml
+      solution_path: ../../providers/google/modern-workspace/workspace/
+  microsoft:
+    solutions:
+    - name: m365-deployment
+      title: Microsoft 365 Enterprise Deployment
+      provider_catalog: ../providers/microsoft.yml
+      solution_path: ../../providers/microsoft/modern-workspace/m365-deployment/
+  nvidia:
+    solutions:
+    - name: omniverse-enterprise
+      title: NVIDIA Omniverse Enterprise Collaboration Platform
+      provider_catalog: ../providers/nvidia.yml
+      solution_path: ../../providers/nvidia/modern-workspace/omniverse-enterprise/

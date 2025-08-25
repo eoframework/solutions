@@ -1,0 +1,113 @@
+version: '2.0'
+provider: nvidia
+generated_at: '2025-08-24T19:23:46.709531'
+catalog_type: provider
+metadata:
+  provider_name: NVIDIA
+  total_solutions: 2
+  last_updated: '2025-08-24T19:23:46.709553'
+categories:
+  ai:
+    solutions:
+      dgx-superpod:
+        title: NVIDIA DGX SuperPOD AI Infrastructure
+        description: Turnkey AI supercomputing infrastructure delivering exaFLOPS
+          performance for large-scale machine learning training and inference workloads
+        version: '1.0'
+        tags:
+        - ai
+        - machine-learning
+        - hpc
+        - gpu-computing
+        - supercomputing
+        - nvidia
+        - dgx
+        - superpod
+        - enterprise-ai
+        complexity: enterprise
+        deployment_time: 12-16 weeks
+        repository: https://github.com/eoframework/templates/tree/main/providers/nvidia/ai/dgx-superpod
+        features:
+        - NVIDIA DGX H100 systems with 8x H100 GPUs per node
+        - Scalable from 20 to 140+ nodes (160-1,120 GPUs)
+        - Up to 2.4 exaFLOPS AI performance at full scale
+        - NVIDIA Quantum-2 InfiniBand 400Gb/s connectivity
+        - Pure Storage FlashBlade with >75GB/s bandwidth
+        - NVIDIA AI Enterprise production software suite
+        - Base Command Platform for unified cluster management
+        - Real-time performance monitoring and optimization
+        - Factory-validated configurations with performance guarantees
+        - Enterprise support with 24/7 monitoring
+        supported_platforms:
+        - NVIDIA Base Command Platform
+        - Kubernetes
+        - SLURM
+        - Red Hat OpenShift
+        integrations:
+        - TensorFlow/TensorFlow Extended
+        - PyTorch/PyTorch Lightning
+        - NVIDIA RAPIDS
+        - Hugging Face Transformers
+        - MLflow
+        - Jupyter
+        - NGC Catalog
+        business_value:
+          performance_improvement: 10x faster AI model training
+          gpu_utilization: 95%+ utilization vs 30-60% traditional
+          deployment_acceleration: 6+ months faster than DIY solutions
+          roi_achievement: 300-500% return on investment over 36 months
+        solution_path: ../../providers/nvidia/ai/dgx-superpod/
+  modern-workspace:
+    solutions:
+      omniverse-enterprise:
+        title: NVIDIA Omniverse Enterprise Collaboration Platform
+        description: Real-time collaborative 3D content creation and visualization
+          platform enabling global teams to work together seamlessly across different
+          applications and workflows
+        version: '1.0'
+        tags:
+        - collaboration
+        - 3d-content
+        - real-time
+        - usd
+        - rendering
+        - creative-workflows
+        - omniverse
+        - rtx
+        - enterprise-graphics
+        complexity: intermediate
+        deployment_time: 12-16 weeks
+        repository: https://github.com/eoframework/templates/tree/main/providers/nvidia/modern-workspace/omniverse-enterprise
+        features:
+        - Universal Scene Description (USD) foundation for seamless data exchange
+        - Real-time ray tracing with NVIDIA RTX technology
+        - Nucleus collaboration and versioning engine
+        - DCC connectors for Maya, 3ds Max, Blender, Unreal Engine
+        - Cloud-native containerized microservices architecture
+        - 'AI-powered tools: Audio2Face, Machinima for content creation'
+        - Enterprise security with SSO, RBAC, and audit logging
+        - Scalable architecture supporting 10-1000+ concurrent users
+        - Cross-platform compatibility (Windows, Linux, macOS)
+        - Professional services and training programs
+        supported_platforms:
+        - Windows Server
+        - Linux (Ubuntu/RHEL)
+        - Kubernetes
+        - AWS
+        - Azure
+        - Google Cloud
+        integrations:
+        - Autodesk Maya
+        - 3ds Max
+        - Blender
+        - Epic Unreal Engine
+        - SideFX Houdini
+        - Adobe Substance Suite
+        - Active Directory
+        - LDAP
+        business_value:
+          collaboration_efficiency: 50-70% reduction in review cycles
+          iteration_speed: 3-5x faster iterations on complex 3D projects
+          version_conflicts: '>90% elimination of file conflicts'
+          roi_achievement: 400-600% return on investment over 3 years
+        solution_path: ../../providers/nvidia/modern-workspace/omniverse-enterprise/
