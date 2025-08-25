@@ -1,0 +1,93 @@
+name: Microsoft CMMC Enclave
+version: "2.0"
+provider: microsoft
+category: cyber-security
+subcategory: compliance-framework
+description: CMMC Level 2 compliant Azure Government cloud environment with automated data labeling and CUI protection for DoD contractors
+tags:
+  - cmmc
+  - controlled-unclassified-information
+  - cui
+  - dod-contractors
+  - nist-800-171
+  - fedramp
+  - data-classification
+  - information-protection
+  - azure-government
+  - compliance
+  - zero-trust
+  - sentinel
+  - purview
+  - security-center
+author: Microsoft Federal Services
+contact: azuregov-support@microsoft.com
+license: Microsoft Enterprise Agreement
+created_date: "2024-01-15"
+updated_date: "2024-01-15"
+dependencies:
+  - azure-government-subscription
+  - azure-ad-premium-p2
+  - microsoft-365-e5-government
+  - cmmc-assessment-scope
+supported_platforms:
+  - azure-government-cloud
+  - azure-commercial-cloud
+  - hybrid-azure-environment
+deployment_types:
+  - cmmc-level-2-basic
+  - cmmc-level-2-enhanced
+  - multi-tenant-isolated
+  - air-gapped-government
+compliance_frameworks:
+  - cmmc-level-2
+  - nist-sp-800-171
+  - fedramp-high
+  - fisma-moderate
+  - dod-srg-level-2
+  - dfars-252-204-7012
+  - itar
+integration_points:
+  - microsoft-purview
+  - azure-sentinel
+  - azure-security-center
+  - microsoft-defender
+  - azure-information-protection
+  - microsoft-cloud-app-security
+estimated_deployment_time: "6-12 weeks"
+complexity_level: enterprise
+business_value:
+  compliance_achievement: "100% CMMC Level 2"
+  security_posture: "90-95% improvement"
+  audit_readiness: "95-99% reduction in prep time"
+  risk_reduction: "80-90% CUI data exposure risk"
+cui_categories:
+  - cui-basic
+  - cui-specified
+  - dib-sector-specific
+  - export-controlled-technical-data
+  - federal-tax-information
+  - itar-controlled
+sensitivity_labels:
+  - public
+  - internal
+  - general
+  - confidential
+  - highly-confidential
+  - cui
+  - cui-specified
+cmmc_practices:
+  access_control: 22
+  audit_accountability: 9
+  configuration_management: 7
+  identification_authentication: 12
+  incident_response: 6
+  maintenance: 6
+  media_protection: 8
+  personnel_security: 2
+  physical_protection: 6
+  recovery: 5
+  risk_assessment: 3
+  security_assessment: 7
+  situational_awareness: 4
+  system_communications_protection: 13
+  system_information_integrity: 16

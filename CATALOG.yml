@@ -443,13 +443,61 @@ providers:
       cloud:
         solutions: {}
       cyber-security:
-        solutions: {}
+        solutions:
+          srx-firewall-platform:
+            title: "Juniper SRX Firewall Platform"
+            description: "Enterprise-grade next-generation firewall platform delivering comprehensive network protection, advanced threat detection, and secure connectivity"
+            version: "2024.1"
+            tags: ["next-generation-firewall", "network-security", "threat-protection", "intrusion-prevention", "vpn-gateway", "enterprise-security"]
+            complexity: "intermediate"
+            deployment_time: "2-8 weeks"
+            repository: "https://github.com/eoframework/templates/tree/main/providers/juniper/cyber-security/srx-firewall-platform"
+            features:
+              - "Advanced threat protection with IDP signatures"
+              - "High-performance security processing with hardware acceleration"
+              - "Unified security management with Security Director"
+              - "VPN gateway and secure remote access capabilities"
+              - "Application visibility and control with advanced inspection"
+              - "High availability with active/passive clustering"
+              - "Compliance support for PCI DSS, HIPAA, and FISMA"
+              - "Zero-day protection through behavioral analysis"
+            supported_platforms: ["SRX300 Series", "SRX1500 Series", "SRX4000 Series", "SRX5000 Series"]
+            integrations: ["SIEM Platforms", "Active Directory/LDAP", "RADIUS Authentication", "Network Management Systems"]
+            business_value:
+              threat_detection: "99.9% accuracy with advanced IDP"
+              management_reduction: "60% reduction in security overhead"
+              incident_response: "50% faster resolution times"
+              system_availability: "99.99% uptime with failover"
       devops:
         solutions: {}
       modern-workspace:
         solutions: {}
       network:
-        solutions: {}
+        solutions:
+          mist-ai-network:
+            title: "Juniper Mist AI Network Platform"
+            description: "Cloud-native, AI-driven network infrastructure platform delivering exceptional user experiences through proactive operations and predictive intelligence"
+            version: "2024.1"
+            tags: ["ai-networking", "cloud-native", "wireless-networking", "network-automation", "location-services", "enterprise-wifi"]
+            complexity: "intermediate"
+            deployment_time: "4-12 weeks"
+            repository: "https://github.com/eoframework/templates/tree/main/providers/juniper/network/mist-ai-network"
+            features:
+              - "AI-driven proactive network operations with 90% trouble ticket reduction"
+              - "Cloud-native microservices architecture with zero hardware controllers"
+              - "Marvis Virtual Network Assistant for natural language troubleshooting"
+              - "Real-time location services with 1-3 meter accuracy"
+              - "Sub-millisecond Wi-Fi roaming for seamless connectivity"
+              - "Automated RF optimization and interference mitigation"
+              - "Comprehensive API ecosystem for integration and automation"
+              - "24/7 AI monitoring with predictive problem detection"
+            supported_platforms: ["Juniper Access Points", "EX Series Switches", "Mist Cloud Platform", "Wi-Fi 6/6E"]
+            integrations: ["RADIUS/Active Directory", "SIEM Platforms", "ServiceNow ITSM", "Slack/Teams", "Cloud Identity Providers"]
+            business_value:
+              trouble_ticket_reduction: "90% reduction through proactive AI"
+              incident_resolution: "75% faster MTTR"
+              operational_expenses: "50% lower vs traditional solutions"
+              network_availability: "99.9% with AI-driven optimization"
   microsoft:
     categories:
       ai:
@@ -457,17 +505,104 @@ providers:
       cloud:
         solutions: {}
       cyber-security:
-        solutions: {}
+        solutions:
+          cmmc-enclave:
+            title: "Microsoft CMMC Enclave"
+            description: "CMMC Level 2 compliant Azure Government cloud environment with automated data labeling and CUI protection for DoD contractors"
+            version: "2.0"
+            tags: ["cmmc", "controlled-unclassified-information", "cui", "dod-contractors", "nist-800-171", "fedramp", "data-classification", "information-protection", "azure-government", "compliance", "zero-trust", "sentinel", "purview", "security-center"]
+            complexity: "enterprise"
+            deployment_time: "6-12 weeks"
+            repository: "https://github.com/eoframework/templates/tree/main/providers/microsoft/cyber-security/cmmc-enclave"
+            features:
+              - "CMMC Level 2 compliance with 110 NIST SP 800-171 controls"
+              - "Automated CUI data discovery and classification with Microsoft Purview"
+              - "Microsoft Information Protection (MIP) labels and encryption"
+              - "Azure Government cloud with FedRAMP High authorization"
+              - "Azure Sentinel SIEM with security orchestration"
+              - "Zero Trust architecture with conditional access"
+              - "Automated compliance monitoring and reporting"
+              - "Advanced threat protection and incident response"
+              - "Data loss prevention (DLP) policies for CUI"
+              - "Comprehensive audit trails and evidence collection"
+            supported_platforms: ["Azure Government Cloud", "Azure Commercial Cloud", "Hybrid Azure Environment"]
+            integrations: ["Microsoft Purview", "Azure Sentinel", "Azure Security Center", "Microsoft Defender", "Azure Information Protection", "Microsoft Cloud App Security"]
+            compliance_frameworks: ["CMMC Level 2", "NIST SP 800-171", "FedRAMP High", "FISMA Moderate", "DoD SRG Level 2", "DFARS 252.204-7012", "ITAR"]
+            cui_categories: ["CUI Basic", "CUI Specified", "Export Controlled Technical Data", "Federal Tax Information", "ITAR"]
+            business_value:
+              compliance_achievement: "100% CMMC Level 2"
+              contract_retention: "$15M+ protected revenue"
+              new_opportunities: "$8M+ annual contract value"
+              audit_efficiency: "85% faster compliance audits"
       devops:
         solutions: {}
       modern-workspace:
-        solutions: {}
+        solutions:
+          m365-deployment:
+            title: "Microsoft 365 Enterprise Deployment"
+            description: "Comprehensive enterprise-grade Microsoft 365 deployment solution with advanced security, compliance, and productivity features"
+            version: "1.0"
+            tags: ["microsoft-365", "office-365", "azure-ad", "exchange-online", "sharepoint-online", "teams", "onedrive", "security", "compliance", "enterprise", "productivity", "collaboration", "zero-trust", "defender", "purview", "intune", "power-platform", "viva"]
+            complexity: "enterprise"
+            deployment_time: "12-16 weeks"
+            repository: "https://github.com/eoframework/templates/tree/main/providers/microsoft/modern-workspace/m365-deployment"
+            features:
+              - "Complete Microsoft 365 E5 suite deployment and configuration"
+              - "Azure Active Directory Premium P2 with advanced identity protection"
+              - "Exchange Online with advanced threat protection and DLP"
+              - "Microsoft Teams with enterprise voice and meeting features"
+              - "SharePoint Online with modern sites and information governance"
+              - "OneDrive for Business with advanced sharing and sync"
+              - "Microsoft Defender for Office 365 comprehensive protection"
+              - "Microsoft Purview for information governance and compliance"
+              - "Microsoft Intune for device and application management"
+              - "Power Platform integration for workflow automation"
+              - "Microsoft Viva suite for employee experience and analytics"
+              - "Zero Trust security architecture implementation"
+              - "Comprehensive migration tools and automation"
+              - "Advanced reporting and analytics dashboards"
+              - "Enterprise-grade support and training materials"
+            supported_platforms: ["Microsoft 365 Cloud", "Azure Government Cloud", "Hybrid On-Premises Integration"]
+            integrations: ["Azure Active Directory", "Windows Server", "Exchange Server", "SharePoint Server", "Skype for Business", "Third-party SIEM", "Line-of-Business Applications", "HR Systems", "CRM Platforms"]
+            compliance_frameworks: ["GDPR", "HIPAA", "SOX", "PCI DSS", "ISO 27001", "NIST Cybersecurity Framework", "FISMA", "FedRAMP", "CCPA", "SOC 2"]
+            business_value:
+              productivity_improvement: "35% average collaboration efficiency gain"
+              cost_reduction: "40% infrastructure cost savings"
+              security_enhancement: "99.9% advanced threat protection coverage"
+              roi_achievement: "350% return on investment over 3 years"
+              user_satisfaction: "85% user adoption rate within 6 months"
       network:
         solutions: {}
   nvidia:
     categories:
       ai:
-        solutions: {}
+        solutions:
+          dgx-superpod:
+            title: "NVIDIA DGX SuperPOD AI Infrastructure"
+            description: "Turnkey AI supercomputing infrastructure delivering exaFLOPS performance for large-scale machine learning training and inference workloads"
+            version: "1.0"
+            tags: ["ai", "machine-learning", "hpc", "gpu-computing", "supercomputing", "nvidia", "dgx", "superpod", "enterprise-ai"]
+            complexity: "enterprise"
+            deployment_time: "12-16 weeks"
+            repository: "https://github.com/eoframework/templates/tree/main/providers/nvidia/ai/dgx-superpod"
+            features:
+              - "NVIDIA DGX H100 systems with 8x H100 GPUs per node"
+              - "Scalable from 20 to 140+ nodes (160-1,120 GPUs)"
+              - "Up to 2.4 exaFLOPS AI performance at full scale"
+              - "NVIDIA Quantum-2 InfiniBand 400Gb/s connectivity"
+              - "Pure Storage FlashBlade with >75GB/s bandwidth"
+              - "NVIDIA AI Enterprise production software suite"
+              - "Base Command Platform for unified cluster management"
+              - "Real-time performance monitoring and optimization"
+              - "Factory-validated configurations with performance guarantees"
+              - "Enterprise support with 24/7 monitoring"
+            supported_platforms: ["NVIDIA Base Command Platform", "Kubernetes", "SLURM", "Red Hat OpenShift"]
+            integrations: ["TensorFlow/TensorFlow Extended", "PyTorch/PyTorch Lightning", "NVIDIA RAPIDS", "Hugging Face Transformers", "MLflow", "Jupyter", "NGC Catalog"]
+            business_value:
+              performance_improvement: "10x faster AI model training"
+              gpu_utilization: "95%+ utilization vs 30-60% traditional"
+              deployment_acceleration: "6+ months faster than DIY solutions"
+              roi_achievement: "300-500% return on investment over 36 months"
       cloud:
         solutions: {}
       cyber-security:
@@ -475,6 +610,32 @@ providers:
       devops:
         solutions: {}
       modern-workspace:
-        solutions: {}
+        solutions:
+          omniverse-enterprise:
+            title: "NVIDIA Omniverse Enterprise Collaboration Platform"
+            description: "Real-time collaborative 3D content creation and visualization platform enabling global teams to work together seamlessly across different applications and workflows"
+            version: "1.0"
+            tags: ["collaboration", "3d-content", "real-time", "usd", "rendering", "creative-workflows", "omniverse", "rtx", "enterprise-graphics"]
+            complexity: "intermediate"
+            deployment_time: "12-16 weeks"
+            repository: "https://github.com/eoframework/templates/tree/main/providers/nvidia/modern-workspace/omniverse-enterprise"
+            features:
+              - "Universal Scene Description (USD) foundation for seamless data exchange"
+              - "Real-time ray tracing with NVIDIA RTX technology"
+              - "Nucleus collaboration and versioning engine"
+              - "DCC connectors for Maya, 3ds Max, Blender, Unreal Engine"
+              - "Cloud-native containerized microservices architecture"
+              - "AI-powered tools: Audio2Face, Machinima for content creation"
+              - "Enterprise security with SSO, RBAC, and audit logging"
+              - "Scalable architecture supporting 10-1000+ concurrent users"
+              - "Cross-platform compatibility (Windows, Linux, macOS)"
+              - "Professional services and training programs"
+            supported_platforms: ["Windows Server", "Linux (Ubuntu/RHEL)", "Kubernetes", "AWS", "Azure", "Google Cloud"]
+            integrations: ["Autodesk Maya", "3ds Max", "Blender", "Epic Unreal Engine", "SideFX Houdini", "Adobe Substance Suite", "Active Directory", "LDAP"]
+            business_value:
+              collaboration_efficiency: "50-70% reduction in review cycles"
+              iteration_speed: "3-5x faster iterations on complex 3D projects"
+              version_conflicts: ">90% elimination of file conflicts"
+              roi_achievement: "400-600% return on investment over 3 years"
       network:
         solutions: {}
