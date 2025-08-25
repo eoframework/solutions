@@ -278,7 +278,7 @@ class CatalogGenerator:
         # Generate and write master catalog
         print("\n📝 Writing master catalog:")
         master_catalog = self.generate_master_catalog()
-        master_file = self.catalog_dir / 'CATALOG.yml'
+        master_file = self.catalog_dir / 'catalog.yml'
         
         with open(master_file, 'w') as f:
             yaml.dump(master_catalog, f, default_flow_style=False, indent=2, sort_keys=False)

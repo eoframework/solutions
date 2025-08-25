@@ -1,34 +1,40 @@
-# EO Framework Templates Catalog System
+# EO Framework™ Templates Catalog System
 
-This directory contains the distributed catalog system for the EO Framework Templates repository. The catalog provides a scalable, maintainable approach to indexing and discovering enterprise solutions across multiple providers and categories.
+This directory contains the distributed catalog system for the EO Framework™ Templates repository. The catalog provides a scalable, maintainable approach to indexing and discovering enterprise solutions across multiple providers and categories.
 
 ## Architecture Overview
 
 ```
 catalog/
-├── CATALOG.yml              # Master catalog (index + metadata)
-├── providers/               # Provider-specific catalogs
-│   ├── aws.yml
-│   ├── azure.yml
-│   ├── cisco.yml
-│   └── [other providers].yml
-├── categories/              # Category-specific catalogs
-│   ├── ai.yml
-│   ├── cloud.yml
-│   ├── cyber-security.yml
-│   └── [other categories].yml
-├── schemas/                 # JSON validation schemas
-│   ├── master-catalog.schema.json
-│   ├── provider-catalog.schema.json
-│   └── category-catalog.schema.json
-├── tools/                   # Catalog management utilities
-│   ├── aggregator.py        # Combine catalogs for search
-│   ├── validator.py         # Schema validation
-│   ├── migrator.py          # Migration utilities
-│   └── generator.py         # Auto-generate from metadata
-├── solutions.json           # JSON export for API consumption
-├── UNIFIED_CATALOG.yml      # Backward compatibility format
-└── validation-report.json   # Latest validation results
+├── catalog.yml              # 📋 Master catalog index with statistics and references
+├── providers/               # 🏢 Provider-specific solution catalogs (11 files)
+│   ├── aws.yml              #    Amazon Web Services solutions catalog
+│   ├── azure.yml            #    Microsoft Azure solutions catalog  
+│   ├── cisco.yml            #    Cisco Systems solutions catalog
+│   ├── dell.yml             #    Dell Technologies solutions catalog
+│   ├── github.yml           #    GitHub solutions catalog
+│   ├── google.yml           #    Google Cloud solutions catalog
+│   ├── hashicorp.yml        #    HashiCorp solutions catalog
+│   ├── ibm.yml              #    IBM solutions catalog
+│   ├── juniper.yml          #    Juniper Networks solutions catalog
+│   ├── microsoft.yml        #    Microsoft 365 solutions catalog
+│   └── nvidia.yml           #    NVIDIA solutions catalog
+├── categories/              # 📂 Category-based solution indexes (6 files)
+│   ├── ai.yml               #    Artificial Intelligence solutions across all providers
+│   ├── cloud.yml            #    Cloud infrastructure solutions across all providers
+│   ├── cyber-security.yml   #    Security and compliance solutions across all providers
+│   ├── devops.yml           #    DevOps automation solutions across all providers
+│   ├── modern-workspace.yml #    Digital workplace solutions across all providers
+│   └── network.yml          #    Network infrastructure solutions across all providers
+├── schemas/                 # 🔍 JSON validation schemas for catalog consistency
+│   ├── master-catalog.schema.json    # Schema for master catalog validation
+│   └── provider-catalog.schema.json  # Schema for provider catalog validation
+├── tools/                   # 🛠️ Catalog management and discovery utilities
+│   ├── aggregator.py        #    Combines distributed catalogs for unified search
+│   ├── validator.py         #    Validates all catalogs against JSON schemas
+│   └── generator.py         #    Auto-generates catalogs from solution metadata
+├── solutions.json           # 📊 API-friendly JSON export for external integrations
+└── validation-report.json   # ✅ Latest validation results and schema compliance status
 ```
 
 ## Key Benefits
@@ -91,17 +97,16 @@ python3 catalog/tools/generator.py
 ### Aggregating for API Consumption
 
 ```bash
-# Generate unified formats
+# Generate API exports
 python3 catalog/tools/aggregator.py
 
 # Outputs:
 # - catalog/solutions.json (API format)
-# - catalog/UNIFIED_CATALOG.yml (backward compatibility)
 ```
 
 ## Catalog File Formats
 
-### Master Catalog (`CATALOG.yml`)
+### Master Catalog (`catalog.yml`)
 
 ```yaml
 version: '2.0'
@@ -268,6 +273,3 @@ jobs:
 - **Dependency Mapping**: Solution interdependencies
 - **Version Management**: Solution version tracking
 
-## Migration Notes
-
-This catalog system was migrated from the original single `CATALOG.yml` file to provide better scalability and maintainability. The original file is preserved for reference, and backward compatibility is maintained through the generated `UNIFIED_CATALOG.yml` file.

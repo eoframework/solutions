@@ -10,34 +10,83 @@ The EO Framework™ is a community-driven standard that accelerates technology s
 
 ```
 templates/
-├── .github/                    # GitHub workflows and configuration
-├── docs/                       # Repository documentation and governance
-├── scripts/                    # Repository utilities and automation
-├── _sample-template/           # Template for creating new solutions
-└── providers/                  # All technology provider solutions
-    ├── aws/                    # Amazon Web Services solutions
-    ├── azure/                  # Microsoft Azure solutions
-    ├── google/                 # Google Cloud solutions
-    ├── microsoft/              # Microsoft 365 solutions
-    ├── ibm/                    # IBM solutions
-    ├── hashicorp/              # HashiCorp solutions
-    ├── github/                 # GitHub solutions
-    ├── nvidia/                 # NVIDIA solutions
-    ├── dell/                   # Dell Technologies solutions
-    ├── juniper/                # Juniper Networks solutions
-    └── cisco/                  # Cisco solutions
+├── .github/                    # 🔧 GitHub Actions workflows and issue templates
+│   ├── workflows/              # CI/CD pipelines for template validation
+│   └── ISSUE_TEMPLATE/         # Standardized issue and PR templates
+├── docs/                       # 📚 Repository governance and standards documentation
+│   ├── contributing.md         # Contributor guidelines and submission process
+│   ├── template-standards.md   # Quality standards and formatting requirements
+│   ├── review-process.md       # Multi-stage review workflow documentation
+│   ├── governance.md           # Repository governance and decision-making
+│   └── license-guide.md        # BSL 1.1 license usage guidelines
+├── scripts/                    # 🛠️ Repository management utilities
+│   ├── clone-template.py       # Tool for creating new solution templates
+│   └── validate-template.py    # Structure and metadata validation tool
+├── catalog/                    # 📊 Distributed solution discovery system
+│   ├── catalog.yml             # Master index with metadata and quick stats
+│   ├── providers/              # Provider-specific solution catalogs (11 files)
+│   ├── categories/             # Category-based solution catalogs (6 files)
+│   ├── schemas/                # JSON schemas for catalog validation
+│   ├── tools/                  # Catalog management and search utilities
+│   ├── solutions.json          # API-friendly JSON export for integrations
+│   └── validation-report.json  # Latest catalog validation results
+├── _sample-template/           # 📋 Reference template for creating new solutions
+│   └── sample-provider/        # Complete example solution structure
+│       └── sample-category/    # Shows proper organization and file naming
+│           └── sample-solution/ # Includes all required folders and files
+└── providers/                  # 📦 Complete enterprise solution libraries
+    ├── aws/                    # Amazon Web Services (3 solutions)
+    ├── azure/                  # Microsoft Azure (6 solutions)
+    ├── cisco/                  # Cisco Systems (5 solutions)
+    ├── dell/                   # Dell Technologies (6 solutions)
+    ├── github/                 # GitHub (2 solutions)
+    ├── google/                 # Google Cloud (2 solutions)
+    ├── hashicorp/              # HashiCorp (2 solutions)
+    ├── ibm/                    # IBM (2 solutions)
+    ├── juniper/                # Juniper Networks (2 solutions)
+    ├── microsoft/              # Microsoft 365 (2 solutions)
+    └── nvidia/                 # NVIDIA (2 solutions)
 ```
 
 ## Categories
 
-Each provider includes solutions across five key categories:
-- **Cloud** - Infrastructure, storage, compute services
-- **Network** - Connectivity, routing, load balancing
-- **Cyber Security** - Identity, threat protection, compliance
-- **DevOps** - CI/CD, automation, orchestration
-- **AI** - Machine learning, analytics, intelligent services
+Each provider includes solutions across six key categories:
+- **🤖 AI** - Artificial Intelligence and Machine Learning solutions
+- **☁️ Cloud** - Cloud infrastructure and platform solutions  
+- **🔒 Cyber Security** - Security, compliance, and threat protection
+- **🚀 DevOps** - DevOps automation and CI/CD solutions
+- **💻 Modern Workspace** - Digital workplace and collaboration
+- **🌐 Network** - Network infrastructure and connectivity
+
+## Current Statistics
+
+- **Total Solutions**: 34
+- **Active Providers**: 11
+- **Solution Categories**: 6
+- **Template Completeness**: Full presales, delivery, and documentation
 
 ## Quick Start
+
+### Exploring Solutions
+
+Browse solutions through our distributed catalog system:
+
+```bash
+# View master catalog with all statistics
+cat catalog/catalog.yml
+
+# Browse specific provider solutions
+cat catalog/providers/aws.yml
+cat catalog/providers/azure.yml
+
+# Browse by category across all providers
+cat catalog/categories/ai.yml
+cat catalog/categories/cloud.yml
+
+# Use management tools
+python3 catalog/tools/aggregator.py    # Combine catalogs for search
+python3 catalog/tools/validator.py     # Validate catalog integrity
+```
 
 ### Creating a New Template
 
@@ -50,6 +99,9 @@ python scripts/clone-template.py \
   --solution "YourSolution" \
   --author-name "Your Name" \
   --author-email "your.email@company.com"
+
+# After creating solution, update catalogs
+python3 catalog/tools/generator.py
 ```
 
 ### Template Structure
@@ -67,9 +119,9 @@ solution-name/
 
 ## Contributing
 
-1. Read our [Contributing Guide](docs/CONTRIBUTING.md)
-2. Review [Template Standards](docs/TEMPLATE_STANDARDS.md)
-3. Understand the [Review Process](docs/REVIEW_PROCESS.md)
+1. Read our [Contributing Guide](docs/contributing.md)
+2. Review [Template Standards](docs/template-standards.md)
+3. Understand the [Review Process](docs/review-process.md)
 4. Create your template using the sample template
 5. Submit a pull request
 

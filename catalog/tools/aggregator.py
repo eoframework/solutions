@@ -19,7 +19,7 @@ class CatalogAggregator:
         
     def load_master_catalog(self):
         """Load the master catalog"""
-        master_file = self.catalog_dir / 'CATALOG.yml'
+        master_file = self.catalog_dir / 'catalog.yml'
         if master_file.exists():
             with open(master_file, 'r') as f:
                 self.master_catalog = yaml.safe_load(f)
@@ -158,30 +158,6 @@ class CatalogAggregator:
         
         return stats
     
-    def generate_unified_catalog(self, output_file=None):
-        """Generate a unified catalog file for backward compatibility"""
-        unified_catalog = {
-            'generated_at': datetime.now().isoformat(),
-            'version': '2.0',
-            'source': 'aggregated',
-            'metadata': self.master_catalog.get('metadata', {}) if self.master_catalog else {},
-            'providers_list': list(self.provider_catalogs.keys()),
-            'categories_list': list(self.category_catalogs.keys()),
-            'providers': {}
-        }
-        
-        # Reconstruct provider structure
-        for provider_name, provider_data in self.provider_catalogs.items():
-            unified_catalog['providers'][provider_name] = {
-                'categories': provider_data.get('categories', {})
-            }
-        
-        if output_file:
-            with open(output_file, 'w') as f:
-                yaml.dump(unified_catalog, f, default_flow_style=False, indent=2, sort_keys=False)
-            print(f"✓ Generated unified catalog: {output_file}")
-        
-        return unified_catalog
     
     def export_solutions_json(self, output_file):
         """Export all solutions as JSON for API consumption"""
@@ -212,9 +188,6 @@ class CatalogAggregator:
         # Generate outputs
         stats = self.get_statistics()
         
-        # Generate unified catalog for backward compatibility
-        unified_file = self.catalog_dir / 'UNIFIED_CATALOG.yml'
-        self.generate_unified_catalog(unified_file)
         
         # Export JSON for API consumption
         json_file = self.catalog_dir / 'solutions.json'

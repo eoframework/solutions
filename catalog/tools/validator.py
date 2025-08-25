@@ -76,7 +76,7 @@ class CatalogValidator:
     
     def validate_master_catalog(self):
         """Validate master catalog"""
-        master_file = self.catalog_dir / 'CATALOG.yml'
+        master_file = self.catalog_dir / 'catalog.yml'
         if master_file.exists():
             result = self.validate_file(master_file, 'master')
             status_icon = "✓" if result['status'] == 'PASS' else "✗"
@@ -124,7 +124,7 @@ class CatalogValidator:
         print("\nValidating cross-references:")
         
         # Load master catalog
-        master_file = self.catalog_dir / 'CATALOG.yml'
+        master_file = self.catalog_dir / 'catalog.yml'
         if not master_file.exists():
             print("✗ Cannot validate cross-references: master catalog missing")
             return

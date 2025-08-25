@@ -85,7 +85,7 @@ For technical support and questions:
 - Contact your HashiCorp support representative
 
 ## License
-This solution template is provided under the EO Framework license. HashiCorp Enterprise products require separate commercial licenses from HashiCorp.
+This solution template is provided under the EO Framework™ license. HashiCorp Enterprise products require separate commercial licenses from HashiCorp.
 
 ---
 **Solution Version**: 1.0  

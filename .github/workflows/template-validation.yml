@@ -37,14 +37,15 @@ jobs:
       - name: Generate catalog
         if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         run: |
-          python scripts/generate-catalog.py
-          python scripts/sync-csv.py
+          python3 catalog/tools/generator.py
+          python3 catalog/tools/aggregator.py
+          python3 catalog/tools/validator.py
       
       - name: Commit updated catalog
         if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
-          git add CATALOG.yml templates.csv
-          git diff --staged --quiet || git commit -m "Update catalog and CSV [skip ci]"
+          git add catalog/
+          git diff --staged --quiet || git commit -m "Update distributed catalog system [skip ci]"
           git push

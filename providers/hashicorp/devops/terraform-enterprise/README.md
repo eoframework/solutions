@@ -79,7 +79,7 @@ For technical support and questions:
 - Contact your HashiCorp support representative
 
 ## License
-This solution template is provided under the EO Framework license. HashiCorp Terraform Enterprise requires a separate commercial license from HashiCorp.
+This solution template is provided under the EO Framework™ license. HashiCorp Terraform Enterprise requires a separate commercial license from HashiCorp.
 
 ---
 **Solution Version**: 1.0  
