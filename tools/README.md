@@ -7,11 +7,12 @@ This directory contains all development utilities and template foundations for t
 ```
 tools/
 ├── README.md               # This file - tools overview and documentation
-├── master-template/        # 📋 Authoritative template foundation
-├── clone-template.py       # 🏗️ Creates new solution templates from master
+├── clone-template.py       # 🏗️ Creates new solution templates from master-template
 ├── validate-template.py    # ✅ Validates template structure and metadata
 └── sync-csv.py             # 📊 Generates website CSV export
 ```
+
+**Note**: The `master-template/` directory is located at the repository root level (`/templates/master-template/`) to emphasize its foundational importance as the authoritative template for all EO Framework™ solutions.
 
 ## Script Details
 
@@ -206,7 +207,7 @@ pip install pathlib         # Path manipulation (Python 3.4+)
 ### File Permissions
 Scripts require read/write access to:
 - `providers/` directory (for template creation)
-- `tools/master-template/` directory (for template source)
+- `master-template/` directory (for template source)
 - `catalog/` directory (for catalog updates)
 
 ## Error Handling

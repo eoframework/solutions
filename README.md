@@ -19,10 +19,13 @@ templates/
 │   ├── review-process.md       # Multi-stage review workflow documentation
 │   ├── governance.md           # Repository governance and decision-making
 │   └── license-guide.md        # BSL 1.1 license usage guidelines
-├── tools/                      # 🛠️ Development utilities and template foundation
-│   ├── master-template/        # 📋 Authoritative template foundation
-│   ├── clone-template.py       # 🏗️ Creates new solution templates
-│   ├── validate-template.py    # ✅ Validates template structure
+├── master-template/            # 📋 Authoritative foundation for all enterprise solutions
+│   └── sample-provider/        # Complete example solution structure
+│       └── sample-category/    # Shows proper organization and file naming
+│           └── sample-solution/ # Includes all required folders and files
+├── tools/                      # 🛠️ Development utilities and automation
+│   ├── clone-template.py       # 🏗️ Creates new solution templates from master-template
+│   ├── validate-template.py    # ✅ Validates template structure and metadata
 │   └── sync-csv.py             # 📊 Generates website CSV export
 ├── catalog/                    # 📊 Distributed solution discovery system
 │   ├── catalog.yml             # Master index with metadata and quick stats

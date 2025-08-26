@@ -44,7 +44,7 @@ def clone_template(provider, category, solution, author_name, author_email):
     
     # Define paths
     repo_root = Path(__file__).parent.parent
-    sample_path = repo_root / "tools" / "master-template" / "sample-provider" / "sample-category" / "sample-solution"
+    sample_path = repo_root / "master-template" / "sample-provider" / "sample-category" / "sample-solution"
     target_path = repo_root / "providers" / provider / category / solution
     
     # Check if master template exists
