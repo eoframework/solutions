@@ -7,7 +7,7 @@ Thank you for your interest in contributing to the EO Framework™ Templates rep
 1. **Fork the repository** and clone your fork
 2. **Create a new template** using our sample template:
    ```bash
-   python scripts/clone-template.py --provider "YourProvider" --category "YourCategory" --solution "YourSolution"
+   python support/tools/clone-template.py --provider "YourProvider" --category "YourCategory" --solution "YourSolution"
    ```
 3. **Follow our template standards** (see TEMPLATE_STANDARDS.md)
 4. **Submit a pull request** following our review process

@@ -81,7 +81,7 @@ enterprise_aws_solutions = aggregator.search_solutions(
 
 ```bash
 # Validate all catalogs
-python3 catalog/tools/validator.py
+python3 support/catalog/tools/validator.py
 
 # Check validation report
 cat catalog/validation-report.json
@@ -91,14 +91,14 @@ cat catalog/validation-report.json
 
 ```bash
 # Auto-generate catalogs from solution metadata.yml files
-python3 catalog/tools/generator.py
+python3 support/catalog/tools/generator.py
 ```
 
 ### Aggregating for API Consumption
 
 ```bash
 # Generate API exports
-python3 catalog/tools/aggregator.py
+python3 support/catalog/tools/aggregator.py
 
 # Outputs:
 # - catalog/solutions.json (API format)
@@ -207,12 +207,12 @@ providers:
 
 3. **Regenerate Catalogs**:
    ```bash
-   python3 catalog/tools/generator.py
+   python3 support/catalog/tools/generator.py
    ```
 
 4. **Validate**:
    ```bash
-   python3 catalog/tools/validator.py
+   python3 support/catalog/tools/validator.py
    ```
 
 ### Adding a New Provider
@@ -224,12 +224,12 @@ providers:
 
 2. **Update Master Catalog** (or regenerate):
    ```bash
-   python3 catalog/tools/generator.py
+   python3 support/catalog/tools/generator.py
    ```
 
 3. **Validate New Structure**:
    ```bash
-   python3 catalog/tools/validator.py
+   python3 support/catalog/tools/validator.py
    ```
 
 ### CI/CD Integration
@@ -251,9 +251,9 @@ jobs:
       - name: Install dependencies
         run: pip install pyyaml jsonschema
       - name: Validate catalogs
-        run: python3 catalog/tools/validator.py
+        run: python3 support/catalog/tools/validator.py
       - name: Generate API exports
-        run: python3 catalog/tools/aggregator.py
+        run: python3 support/catalog/tools/aggregator.py
 ```
 
 ## Statistics (Current)

@@ -16,9 +16,9 @@ This directory contains comprehensive delivery documentation for deploying and o
 - **[operations-runbook.md](operations-runbook.md)** - Day-to-day operations procedures and troubleshooting
 
 ### Technical Documentation
-- **[docs/architecture.md](docs/architecture.md)** - Detailed system architecture and design
-- **[docs/prerequisites.md](docs/prerequisites.md)** - Infrastructure and technical prerequisites
-- **[docs/troubleshooting.md](docs/troubleshooting.md)** - Comprehensive troubleshooting guide
+- **[docs/architecture.md](support/docs/architecture.md)** - Detailed system architecture and design
+- **[docs/prerequisites.md](support/docs/prerequisites.md)** - Infrastructure and technical prerequisites
+- **[docs/troubleshooting.md](support/docs/troubleshooting.md)** - Comprehensive troubleshooting guide
 
 ### Automation Scripts
 The `scripts/` directory contains deployment automation across multiple technologies:
@@ -31,15 +31,15 @@ The `scripts/` directory contains deployment automation across multiple technolo
 
 ## Getting Started
 
-1. **Review Prerequisites**: Start with [docs/prerequisites.md](docs/prerequisites.md) to ensure your environment is ready
-2. **Architecture Review**: Read [docs/architecture.md](docs/architecture.md) to understand the solution design
+1. **Review Prerequisites**: Start with [docs/prerequisites.md](support/docs/prerequisites.md) to ensure your environment is ready
+2. **Architecture Review**: Read [docs/architecture.md](support/docs/architecture.md) to understand the solution design
 3. **Implementation Planning**: Follow the [implementation-guide.md](implementation-guide.md) for deployment
 4. **Testing and Validation**: Use [testing-procedures.md](testing-procedures.md) to validate the deployment
 5. **Operations Handover**: Reference [operations-runbook.md](operations-runbook.md) for ongoing management
 
 ## Support and Resources
 
-- **Technical Issues**: See [docs/troubleshooting.md](docs/troubleshooting.md)
+- **Technical Issues**: See [docs/troubleshooting.md](support/docs/troubleshooting.md)
 - **Training**: Review [training-materials.md](training-materials.md)
 - **Configuration Questions**: Check [configuration-templates.md](configuration-templates.md)
 

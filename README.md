@@ -13,43 +13,26 @@ templates/
 ├── .github/                    # 🔧 GitHub Actions workflows and issue templates
 │   ├── workflows/              # CI/CD pipelines for template validation
 │   └── ISSUE_TEMPLATE/         # Standardized issue and PR templates
-├── docs/                       # 📚 Repository governance and standards documentation
-│   ├── contributing.md         # Contributor guidelines and submission process
-│   ├── template-standards.md   # Quality standards and formatting requirements
-│   ├── review-process.md       # Multi-stage review workflow documentation
-│   ├── governance.md           # Repository governance and decision-making
-│   └── license-guide.md        # BSL 1.1 license usage guidelines
 ├── master-template/            # 📋 Authoritative foundation for all enterprise solutions
 │   └── sample-provider/        # Complete example solution structure
 │       └── sample-category/    # Shows proper organization and file naming
 │           └── sample-solution/ # Includes all required folders and files
-├── tools/                      # 🛠️ Development utilities and automation
-│   ├── clone-template.py       # 🏗️ Creates new solution templates from master-template
-│   ├── validate-template.py    # ✅ Validates template structure and metadata
-│   └── sync-csv.py             # 📊 Generates website CSV export
-├── catalog/                    # 📊 Distributed solution discovery system
-│   ├── catalog.yml             # Master index with metadata and quick stats
-│   ├── providers/              # Provider-specific solution catalogs (11 files)
-│   ├── categories/             # Category-based solution catalogs (6 files)
-│   ├── schemas/                # JSON schemas for catalog validation
-│   ├── tools/                  # Catalog management and search utilities
-│   ├── solutions.json          # API-friendly JSON export for integrations
-│   └── validation-report.json  # Latest catalog validation results
-│   └── sample-provider/        # Complete example solution structure
-│       └── sample-category/    # Shows proper organization and file naming
-│           └── sample-solution/ # Includes all required folders and files
-└── solutions/                  # 📦 Complete enterprise solution libraries
-    ├── aws/                    # Amazon Web Services (3 solutions)
-    ├── azure/                  # Microsoft Azure (6 solutions)
-    ├── cisco/                  # Cisco Systems (5 solutions)
-    ├── dell/                   # Dell Technologies (6 solutions)
-    ├── github/                 # GitHub (2 solutions)
-    ├── google/                 # Google Cloud (2 solutions)
-    ├── hashicorp/              # HashiCorp (2 solutions)
-    ├── ibm/                    # IBM (2 solutions)
-    ├── juniper/                # Juniper Networks (2 solutions)
-    ├── microsoft/              # Microsoft 365 (2 solutions)
-    └── nvidia/                 # NVIDIA (2 solutions)
+├── solutions/                  # 📦 Complete enterprise solution libraries
+│   ├── aws/                    # Amazon Web Services (3 solutions)
+│   ├── azure/                  # Microsoft Azure (6 solutions)
+│   ├── cisco/                  # Cisco Systems (5 solutions)
+│   ├── dell/                   # Dell Technologies (6 solutions)
+│   ├── github/                 # GitHub (2 solutions)
+│   ├── google/                 # Google Cloud (2 solutions)
+│   ├── hashicorp/              # HashiCorp (2 solutions)
+│   ├── ibm/                    # IBM (2 solutions)
+│   ├── juniper/                # Juniper Networks (2 solutions)
+│   ├── microsoft/              # Microsoft 365 (2 solutions)
+│   └── nvidia/                 # NVIDIA (2 solutions)
+└── support/                    # 🛠️ Supporting infrastructure and documentation
+    ├── docs/                   # Repository governance and standards documentation
+    ├── tools/                  # Development utilities and automation
+    └── catalog/                # Distributed solution discovery system
 ```
 
 ## Categories
@@ -77,19 +60,19 @@ Browse solutions through our distributed catalog system:
 
 ```bash
 # View master catalog with all statistics
-cat catalog/catalog.yml
+cat support/catalog/catalog.yml
 
 # Browse specific provider solutions
-cat catalog/providers/aws.yml
-cat catalog/providers/azure.yml
+cat support/catalog/providers/aws.yml
+cat support/catalog/providers/azure.yml
 
 # Browse by category across all providers
-cat catalog/categories/ai.yml
-cat catalog/categories/cloud.yml
+cat support/catalog/categories/ai.yml
+cat support/catalog/categories/cloud.yml
 
 # Use management tools
-python3 catalog/tools/aggregator.py    # Combine catalogs for search
-python3 catalog/tools/validator.py     # Validate catalog integrity
+python3 support/catalog/tools/aggregator.py    # Combine catalogs for search
+python3 support/catalog/tools/validator.py     # Validate catalog integrity
 ```
 
 ### Creating a New Template
@@ -97,7 +80,7 @@ python3 catalog/tools/validator.py     # Validate catalog integrity
 Use our clone utility to create a new solution template:
 
 ```bash
-python tools/clone-template.py \
+python support/tools/clone-template.py \
   --provider "YourProvider" \
   --category "YourCategory" \
   --solution "YourSolution" \
@@ -105,7 +88,7 @@ python tools/clone-template.py \
   --author-email "your.email@company.com"
 
 # After creating solution, update catalogs
-python3 catalog/tools/generator.py
+python3 support/catalog/tools/generator.py
 ```
 
 ### Template Structure
@@ -123,9 +106,9 @@ solution-name/
 
 ## Contributing
 
-1. Read our [Contributing Guide](docs/contributing.md)
-2. Review [Template Standards](docs/template-standards.md)
-3. Understand the [Review Process](docs/review-process.md)
+1. Read our [Contributing Guide](support/docs/contributing.md)
+2. Review [Template Standards](support/docs/template-standards.md)
+3. Understand the [Review Process](support/docs/review-process.md)
 4. Create your template using the master template
 5. Submit a pull request
 
@@ -135,7 +118,7 @@ This repository is licensed under the Business Source License 1.1 (BSL 1.1). See
 
 ## Support
 
-- 📖 Documentation: [docs/](docs/)
+- 📖 Documentation: [docs/](support/docs/)
 - 🐛 Issues: [GitHub Issues](https://github.com/eoframework/templates/issues)
 - 💬 Discussions: [GitHub Discussions](https://github.com/eoframework/templates/discussions)
 - 🌐 Website: [EO Framework™](https://eoframework.github.io)

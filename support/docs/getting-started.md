@@ -42,7 +42,7 @@ Use the automated template cloner to create your solution structure:
 cd /path/to/eo-framework-templates
 
 # Run the template cloner
-python tools/clone-template.py \
+python support/tools/clone-template.py \
   --provider "your-provider" \
   --category "your-category" \
   --solution "your-solution-name" \
@@ -52,7 +52,7 @@ python tools/clone-template.py \
 
 **Example**:
 ```bash
-python tools/clone-template.py \
+python support/tools/clone-template.py \
   --provider "juniper" \
   --category "network" \
   --solution "sd-wan-enterprise" \
@@ -114,19 +114,19 @@ solutions/your-provider/your-category/your-solution/
 
 ### Phase 2: Technical Documentation
 
-3. **Architecture Documentation (docs/architecture.md)**
+3. **Architecture Documentation (support/docs/architecture.md)**
    - Create solution architecture diagrams
    - Document component relationships
    - Explain data flows and integrations
    - Include security considerations
 
-4. **Prerequisites (docs/prerequisites.md)**
+4. **Prerequisites (support/docs/prerequisites.md)**
    - List all technical requirements
    - Specify minimum system requirements
    - Document required licenses and accounts
    - Include network and security requirements
 
-5. **Troubleshooting Guide (docs/troubleshooting.md)**
+5. **Troubleshooting Guide (support/docs/troubleshooting.md)**
    - Document common issues and solutions
    - Include diagnostic procedures
    - Add FAQ section
@@ -230,10 +230,10 @@ After customization, validate your template structure and content:
 
 ```bash
 # Validate specific template
-python tools/validate-template.py --path solutions/your-provider/your-category/your-solution
+python support/tools/validate-template.py --path solutions/your-provider/your-category/your-solution
 
 # Run comprehensive validation
-python tools/validate-template.py --path solutions/your-provider/your-category/your-solution --verbose
+python support/tools/validate-template.py --path solutions/your-provider/your-category/your-solution --verbose
 ```
 
 **Common Validation Issues:**
@@ -248,16 +248,16 @@ Generate updated catalogs to include your new solution:
 
 ```bash
 # Update distributed catalog system
-python3 catalog/tools/generator.py
+python3 support/catalog/tools/generator.py
 
 # Generate API exports
-python3 catalog/tools/aggregator.py
+python3 support/catalog/tools/aggregator.py
 
 # Validate catalog integrity
-python3 catalog/tools/validator.py
+python3 support/catalog/tools/validator.py
 
 # Generate website export
-python tools/sync-csv.py
+python support/tools/sync-csv.py
 ```
 
 ### Step 6: Final Review Checklist
@@ -301,7 +301,7 @@ For solution updates:
 
 ### Support Resources
 
-- **Template Issues**: Use `python tools/validate-template.py --help`
+- **Template Issues**: Use `python support/tools/validate-template.py --help`
 - **Catalog Problems**: Check `catalog/README.md`
 - **Documentation Standards**: Review `docs/template-standards.md`
 - **Review Process**: See `docs/review-process.md`
@@ -310,7 +310,7 @@ For solution updates:
 
 - **GitHub Issues**: Report bugs and request features
 - **GitHub Discussions**: Ask questions and share ideas
-- **Contributing Guide**: See `docs/contributing.md`
+- **Contributing Guide**: See `support/docs/contributing.md`
 
 ### Best Practices
 

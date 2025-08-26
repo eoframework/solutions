@@ -65,9 +65,9 @@ The solution implements a highly available Terraform Enterprise deployment with:
 - Network security with private subnets and security groups
 
 ## Documentation
-- [Architecture Details](docs/architecture.md)
-- [Prerequisites and Requirements](docs/prerequisites.md)
-- [Troubleshooting Guide](docs/troubleshooting.md)
+- [Architecture Details](support/docs/architecture.md)
+- [Prerequisites and Requirements](support/docs/prerequisites.md)
+- [Troubleshooting Guide](support/docs/troubleshooting.md)
 - [Implementation Guide](delivery/implementation-guide.md)
 - [Operations Runbook](delivery/operations-runbook.md)
 

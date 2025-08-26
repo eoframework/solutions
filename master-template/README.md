@@ -177,13 +177,13 @@ Before submitting any template based on this sample:
 1. **Structure Check**: Ensure all required files and directories exist
 2. **Content Review**: All placeholder content replaced with real information
 3. **Script Testing**: Automation scripts function correctly
-4. **Quality Validation**: Run `python scripts/validate-template.py`
-5. **Catalog Update**: Execute `python3 catalog/tools/generator.py`
+4. **Quality Validation**: Run `python support/tools/validate-template.py`
+5. **Catalog Update**: Execute `python3 support/catalog/tools/generator.py`
 
 ## Support
 
 For questions about using this template:
 - **Template Creation**: See [scripts/README.md](../scripts/README.md)
 - **Standards**: Review [docs/template-standards.md](../docs/template-standards.md)
-- **Process**: Check [docs/contributing.md](../docs/contributing.md)
+- **Process**: Check [support/docs/contributing.md](../support/docs/contributing.md)
 - **Issues**: Report via GitHub Issues

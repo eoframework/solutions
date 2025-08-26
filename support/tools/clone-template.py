@@ -43,7 +43,7 @@ def clone_template(provider, category, solution, author_name, author_email):
     validate_inputs(provider, category, solution)
     
     # Define paths
-    repo_root = Path(__file__).parent.parent
+    repo_root = Path(__file__).parent.parent.parent
     sample_path = repo_root / "master-template" / "sample-provider" / "sample-category" / "sample-solution"
     target_path = repo_root / "solutions" / provider / category / solution
     

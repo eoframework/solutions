@@ -27,7 +27,7 @@ tools/
 
 **Usage**:
 ```bash
-python tools/clone-template.py \
+python support/tools/clone-template.py \
   --provider "ProviderName" \
   --category "category-name" \
   --solution "solution-name" \
@@ -50,7 +50,7 @@ python tools/clone-template.py \
 
 **Example**:
 ```bash
-python tools/clone-template.py \
+python support/tools/clone-template.py \
   --provider "juniper" \
   --category "network" \
   --solution "mist-ai-network" \
@@ -71,16 +71,16 @@ python tools/clone-template.py \
 **Usage**:
 ```bash
 # Validate specific template
-python tools/validate-template.py --path solutions/juniper/network/mist-ai-network
+python support/tools/validate-template.py --path solutions/juniper/network/mist-ai-network
 
 # Validate all templates
-python tools/validate-template.py --all
+python support/tools/validate-template.py --all
 
 # Validate with verbose output
-python tools/validate-template.py --all --verbose
+python support/tools/validate-template.py --all --verbose
 
 # Check only structure (skip content validation)
-python tools/validate-template.py --path solutions/aws/cloud/landing-zone --structure-only
+python support/tools/validate-template.py --path solutions/aws/cloud/landing-zone --structure-only
 ```
 
 **Parameters**:
@@ -113,7 +113,7 @@ python tools/validate-template.py --path solutions/aws/cloud/landing-zone --stru
 
 **Usage**:
 ```bash
-python tools/sync-csv.py
+python support/tools/sync-csv.py
 ```
 
 **Output**: Creates `templates.csv` with columns:
@@ -131,7 +131,7 @@ python tools/sync-csv.py
 
 1. **Run Template Creator**:
    ```bash
-   python tools/clone-template.py \
+   python support/tools/clone-template.py \
      --provider "your-provider" \
      --category "your-category" \
      --solution "your-solution" \
@@ -148,19 +148,19 @@ python tools/sync-csv.py
 
 3. **Validate Template**:
    ```bash
-   python tools/validate-template.py --path solutions/your-provider/your-category/your-solution
+   python support/tools/validate-template.py --path solutions/your-provider/your-category/your-solution
    ```
 
 4. **Update Catalogs**:
    ```bash
-   python3 catalog/tools/generator.py
+   python3 support/catalog/tools/generator.py
    ```
 
 ### Maintaining Existing Templates
 
 1. **Validate All Templates**:
    ```bash
-   python tools/validate-template.py --all
+   python support/tools/validate-template.py --all
    ```
 
 2. **Fix Issues**:
@@ -170,7 +170,7 @@ python tools/sync-csv.py
 
 3. **Re-validate**:
    ```bash
-   python tools/validate-template.py --path solutions/specific/template/path
+   python support/tools/validate-template.py --path solutions/specific/template/path
    ```
 
 ### CI/CD Integration
@@ -181,7 +181,7 @@ These scripts are integrated into the GitHub Actions workflow:
 # .github/workflows/template-validation.yml
 - name: Validate template structure
   run: |
-    python tools/validate-template.py --all
+    python support/tools/validate-template.py --all
 ```
 
 **Automated Checks**:
@@ -257,10 +257,10 @@ Scripts require read/write access to:
 
 ```bash
 # Test template creation
-python tools/clone-template.py --provider test --category ai --solution test-solution --author-name "Test User" --author-email "test@example.com"
+python support/tools/clone-template.py --provider test --category ai --solution test-solution --author-name "Test User" --author-email "test@example.com"
 
 # Test validation
-python tools/validate-template.py --path solutions/test/ai/test-solution
+python support/tools/validate-template.py --path solutions/test/ai/test-solution
 
 # Cleanup test data
 rm -rf solutions/test/

@@ -24,7 +24,7 @@ jobs:
       
       - name: Validate template structure
         run: |
-          python tools/validate-template.py --all
+          python support/tools/validate-template.py --all
       
       - name: Check for secrets
         run: |
@@ -37,15 +37,15 @@ jobs:
       - name: Generate catalog
         if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         run: |
-          python3 catalog/tools/generator.py
-          python3 catalog/tools/aggregator.py
-          python3 catalog/tools/validator.py
+          python3 support/catalog/tools/generator.py
+          python3 support/catalog/tools/aggregator.py
+          python3 support/catalog/tools/validator.py
       
       - name: Commit updated catalog
         if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
-          git add catalog/
+          git add support/catalog/
           git diff --staged --quiet || git commit -m "Update distributed catalog system [skip ci]"
           git push

@@ -153,13 +153,13 @@ find solutions/ -path "*/cloud/*" -type d -mindepth 3
 Leverage the distributed catalog for advanced search and discovery:
 ```bash
 # Search by provider
-python3 catalog/tools/aggregator.py --provider juniper
+python3 support/catalog/tools/aggregator.py --provider juniper
 
 # Search by category
-python3 catalog/tools/aggregator.py --category network
+python3 support/catalog/tools/aggregator.py --category network
 
 # Search by complexity level
-python3 catalog/tools/aggregator.py --complexity enterprise
+python3 support/catalog/tools/aggregator.py --complexity enterprise
 ```
 
 ## Quality Standards
@@ -180,7 +180,7 @@ To add a new solution to this directory:
 1. **Follow the Template**: Use the root-level `master-template/` as your starting point
 2. **Choose Correct Location**: Place in appropriate `solutions/{provider}/{category}/`
 3. **Complete All Sections**: Ensure all required files are present
-4. **Validate Structure**: Run `python scripts/validate-template.py`
-5. **Update Catalogs**: Execute `python3 catalog/tools/generator.py`
+4. **Validate Structure**: Run `python support/tools/validate-template.py`
+5. **Update Catalogs**: Execute `python3 support/catalog/tools/generator.py`
 
-See [docs/contributing.md](../docs/contributing.md) for detailed contribution guidelines.
+See [support/docs/contributing.md](../support/docs/contributing.md) for detailed contribution guidelines.
