@@ -12,35 +12,35 @@ providers:
     solutions:
     - name: sentinel-siem
       title: Azure Sentinel SIEM Platform
-      provider_catalog: ../providers/azure.yml
-      solution_path: ../../providers/azure/cyber-security/sentinel-siem/
+      provider_catalog: ../solutions/azure.yml
+      solution_path: ../../solutions/azure/cyber-security/sentinel-siem/
   cisco:
     solutions:
     - name: secure-access
       title: Cisco Secure Access Platform
-      provider_catalog: ../providers/cisco.yml
-      solution_path: ../../providers/cisco/cyber-security/secure-access/
+      provider_catalog: ../solutions/cisco.yml
+      solution_path: ../../solutions/cisco/cyber-security/secure-access/
   dell:
     solutions:
     - name: safeid-authentication
       title: Dell SafeID Authentication Platform
-      provider_catalog: ../providers/dell.yml
-      solution_path: ../../providers/dell/cyber-security/safeid-authentication/
+      provider_catalog: ../solutions/dell.yml
+      solution_path: ../../solutions/dell/cyber-security/safeid-authentication/
   github:
     solutions:
     - name: advanced-security
       title: GitHub Advanced Security Platform
-      provider_catalog: ../providers/github.yml
-      solution_path: ../../providers/github/cyber-security/advanced-security/
+      provider_catalog: ../solutions/github.yml
+      solution_path: ../../solutions/github/cyber-security/advanced-security/
   juniper:
     solutions:
     - name: srx-firewall-platform
       title: Juniper SRX Firewall Platform
-      provider_catalog: ../providers/juniper.yml
-      solution_path: ../../providers/juniper/cyber-security/srx-firewall-platform/
+      provider_catalog: ../solutions/juniper.yml
+      solution_path: ../../solutions/juniper/cyber-security/srx-firewall-platform/
   microsoft:
     solutions:
     - name: cmmc-enclave
       title: Microsoft CMMC Enclave
-      provider_catalog: ../providers/microsoft.yml
-      solution_path: ../../providers/microsoft/cyber-security/cmmc-enclave/
+      provider_catalog: ../solutions/microsoft.yml
+      solution_path: ../../solutions/microsoft/cyber-security/cmmc-enclave/

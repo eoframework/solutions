@@ -12,23 +12,23 @@ providers:
     solutions:
     - name: virtual-desktop
       title: Azure Virtual Desktop
-      provider_catalog: ../providers/azure.yml
-      solution_path: ../../providers/azure/modern-workspace/virtual-desktop/
+      provider_catalog: ../solutions/azure.yml
+      solution_path: ../../solutions/azure/modern-workspace/virtual-desktop/
   google:
     solutions:
     - name: workspace
       title: Google Workspace Enterprise Platform
-      provider_catalog: ../providers/google.yml
-      solution_path: ../../providers/google/modern-workspace/workspace/
+      provider_catalog: ../solutions/google.yml
+      solution_path: ../../solutions/google/modern-workspace/workspace/
   microsoft:
     solutions:
     - name: m365-deployment
       title: Microsoft 365 Enterprise Deployment
-      provider_catalog: ../providers/microsoft.yml
-      solution_path: ../../providers/microsoft/modern-workspace/m365-deployment/
+      provider_catalog: ../solutions/microsoft.yml
+      solution_path: ../../solutions/microsoft/modern-workspace/m365-deployment/
   nvidia:
     solutions:
     - name: omniverse-enterprise
       title: NVIDIA Omniverse Enterprise Collaboration Platform
-      provider_catalog: ../providers/nvidia.yml
-      solution_path: ../../providers/nvidia/modern-workspace/omniverse-enterprise/
+      provider_catalog: ../solutions/nvidia.yml
+      solution_path: ../../solutions/nvidia/modern-workspace/omniverse-enterprise/

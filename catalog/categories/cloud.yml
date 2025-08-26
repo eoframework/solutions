@@ -12,49 +12,49 @@ providers:
     solutions:
     - name: disaster-recovery-web-application
       title: AWS Disaster Recovery Web Application
-      provider_catalog: ../providers/aws.yml
-      solution_path: ../../providers/aws/cloud/disaster-recovery-web-application/
+      provider_catalog: ../solutions/aws.yml
+      solution_path: ../../solutions/aws/cloud/disaster-recovery-web-application/
     - name: onpremise-to-cloud-migration
       title: AWS On-Premise to Cloud Migration
-      provider_catalog: ../providers/aws.yml
-      solution_path: ../../providers/aws/cloud/onpremise-to-cloud-migration/
+      provider_catalog: ../solutions/aws.yml
+      solution_path: ../../solutions/aws/cloud/onpremise-to-cloud-migration/
   azure:
     solutions:
     - name: enterprise-landing-zone
       title: Azure Enterprise Landing Zone
-      provider_catalog: ../providers/azure.yml
-      solution_path: ../../providers/azure/cloud/enterprise-landing-zone/
+      provider_catalog: ../solutions/azure.yml
+      solution_path: ../../solutions/azure/cloud/enterprise-landing-zone/
   cisco:
     solutions:
     - name: hybrid-infrastructure
       title: Cisco Hybrid Cloud Infrastructure
-      provider_catalog: ../providers/cisco.yml
-      solution_path: ../../providers/cisco/cloud/hybrid-infrastructure/
+      provider_catalog: ../solutions/cisco.yml
+      solution_path: ../../solutions/cisco/cloud/hybrid-infrastructure/
   dell:
     solutions:
     - name: vxrail-hci
       title: Dell VxRail Hyper-Converged Infrastructure
-      provider_catalog: ../providers/dell.yml
-      solution_path: ../../providers/dell/cloud/vxrail-hci/
+      provider_catalog: ../solutions/dell.yml
+      solution_path: ../../solutions/dell/cloud/vxrail-hci/
     - name: vxrail-hyperconverged
       title: Dell VxRail Hyperconverged Platform
-      provider_catalog: ../providers/dell.yml
-      solution_path: ../../providers/dell/cloud/vxrail-hyperconverged/
+      provider_catalog: ../solutions/dell.yml
+      solution_path: ../../solutions/dell/cloud/vxrail-hyperconverged/
   google:
     solutions:
     - name: landing-zone
       title: Google Cloud Enterprise Landing Zone
-      provider_catalog: ../providers/google.yml
-      solution_path: ../../providers/google/cloud/landing-zone/
+      provider_catalog: ../solutions/google.yml
+      solution_path: ../../solutions/google/cloud/landing-zone/
   hashicorp:
     solutions:
     - name: multi-cloud-platform
       title: HashiCorp Multi-Cloud Infrastructure Management Platform
-      provider_catalog: ../providers/hashicorp.yml
-      solution_path: ../../providers/hashicorp/cloud/multi-cloud-platform/
+      provider_catalog: ../solutions/hashicorp.yml
+      solution_path: ../../solutions/hashicorp/cloud/multi-cloud-platform/
   ibm:
     solutions:
     - name: openshift-container-platform
       title: IBM OpenShift Container Platform
-      provider_catalog: ../providers/ibm.yml
-      solution_path: ../../providers/ibm/cloud/openshift-container-platform/
+      provider_catalog: ../solutions/ibm.yml
+      solution_path: ../../solutions/ibm/cloud/openshift-container-platform/

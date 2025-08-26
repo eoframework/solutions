@@ -20,8 +20,8 @@ categories:
         - extraction
         complexity: intermediate
         deployment_time: 2-4 weeks
-        repository: https://github.com/eoframework/templates/tree/main/providers/azure/ai/document-intelligence
-        solution_path: ../../providers/azure/ai/document-intelligence/
+        repository: https://github.com/eoframework/templates/tree/main/solutions/azure/ai/document-intelligence
+        solution_path: ../../solutions/azure/ai/document-intelligence/
   cloud:
     solutions:
       enterprise-landing-zone:
@@ -34,8 +34,8 @@ categories:
         - enterprise
         complexity: enterprise
         deployment_time: 6-10 weeks
-        repository: https://github.com/eoframework/templates/tree/main/providers/azure/cloud/enterprise-landing-zone
-        solution_path: ../../providers/azure/cloud/enterprise-landing-zone/
+        repository: https://github.com/eoframework/templates/tree/main/solutions/azure/cloud/enterprise-landing-zone
+        solution_path: ../../solutions/azure/cloud/enterprise-landing-zone/
   cyber-security:
     solutions:
       sentinel-siem:
@@ -49,8 +49,8 @@ categories:
         - security
         complexity: enterprise
         deployment_time: 4-8 weeks
-        repository: https://github.com/eoframework/templates/tree/main/providers/azure/cyber-security/sentinel-siem
-        solution_path: ../../providers/azure/cyber-security/sentinel-siem/
+        repository: https://github.com/eoframework/templates/tree/main/solutions/azure/cyber-security/sentinel-siem
+        solution_path: ../../solutions/azure/cyber-security/sentinel-siem/
   devops:
     solutions:
       enterprise-platform:
@@ -64,8 +64,8 @@ categories:
         - agile
         complexity: advanced
         deployment_time: 3-6 weeks
-        repository: https://github.com/eoframework/templates/tree/main/providers/azure/devops/enterprise-platform
-        solution_path: ../../providers/azure/devops/enterprise-platform/
+        repository: https://github.com/eoframework/templates/tree/main/solutions/azure/devops/enterprise-platform
+        solution_path: ../../solutions/azure/devops/enterprise-platform/
   modern-workspace:
     solutions:
       virtual-desktop:
@@ -81,8 +81,8 @@ categories:
         - remote-work
         complexity: intermediate
         deployment_time: 2-4 weeks
-        repository: https://github.com/eoframework/templates/tree/main/providers/azure/modern-workspace/virtual-desktop
-        solution_path: ../../providers/azure/modern-workspace/virtual-desktop/
+        repository: https://github.com/eoframework/templates/tree/main/solutions/azure/modern-workspace/virtual-desktop
+        solution_path: ../../solutions/azure/modern-workspace/virtual-desktop/
   network:
     solutions:
       virtual-wan-global:
@@ -96,5 +96,5 @@ categories:
         - sd-wan
         complexity: enterprise
         deployment_time: 6-10 weeks
-        repository: https://github.com/eoframework/templates/tree/main/providers/azure/network/virtual-wan-global
-        solution_path: ../../providers/azure/network/virtual-wan-global/
+        repository: https://github.com/eoframework/templates/tree/main/solutions/azure/network/virtual-wan-global
+        solution_path: ../../solutions/azure/network/virtual-wan-global/

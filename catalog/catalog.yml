@@ -7,17 +7,17 @@ metadata:
   total_solutions: 34
   last_updated: '2025-08-24T19:23:46.769130'
 provider_catalogs:
-  aws: ./providers/aws.yml
-  azure: ./providers/azure.yml
-  cisco: ./providers/cisco.yml
-  dell: ./providers/dell.yml
-  github: ./providers/github.yml
-  google: ./providers/google.yml
-  hashicorp: ./providers/hashicorp.yml
-  ibm: ./providers/ibm.yml
-  juniper: ./providers/juniper.yml
-  microsoft: ./providers/microsoft.yml
-  nvidia: ./providers/nvidia.yml
+  aws: ./solutions/aws.yml
+  azure: ./solutions/azure.yml
+  cisco: ./solutions/cisco.yml
+  dell: ./solutions/dell.yml
+  github: ./solutions/github.yml
+  google: ./solutions/google.yml
+  hashicorp: ./solutions/hashicorp.yml
+  ibm: ./solutions/ibm.yml
+  juniper: ./solutions/juniper.yml
+  microsoft: ./solutions/microsoft.yml
+  nvidia: ./solutions/nvidia.yml
 category_catalogs:
   ai: ./categories/ai.yml
   cloud: ./categories/cloud.yml

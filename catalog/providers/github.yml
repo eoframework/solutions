@@ -21,7 +21,7 @@ categories:
         - siem
         complexity: enterprise
         deployment_time: 4-6 weeks
-        repository: https://github.com/eoframework/templates/tree/main/providers/github/cyber-security/advanced-security
+        repository: https://github.com/eoframework/templates/tree/main/solutions/github/cyber-security/advanced-security
         features:
         - CodeQL semantic code analysis
         - Advanced secret scanning with push protection
@@ -46,7 +46,7 @@ categories:
         - GitHub Actions
         - AWS
         - Azure
-        solution_path: ../../providers/github/cyber-security/advanced-security/
+        solution_path: ../../solutions/github/cyber-security/advanced-security/
   devops:
     solutions:
       actions-enterprise-cicd:
@@ -61,7 +61,7 @@ categories:
         - devops
         complexity: enterprise
         deployment_time: 2-4 weeks
-        repository: https://github.com/eoframework/templates/tree/main/providers/github/devops/actions-enterprise-cicd
+        repository: https://github.com/eoframework/templates/tree/main/solutions/github/devops/actions-enterprise-cicd
         features:
         - Self-hosted GitHub Actions runners on AWS
         - Auto-scaling runner infrastructure
@@ -80,4 +80,4 @@ categories:
         - AWS S3
         - CloudWatch
         - Terraform
-        solution_path: ../../providers/github/devops/actions-enterprise-cicd/
+        solution_path: ../../solutions/github/devops/actions-enterprise-cicd/

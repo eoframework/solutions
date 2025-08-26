@@ -27,7 +27,7 @@ categories:
         - developer-tools
         complexity: intermediate
         deployment_time: 2-4 hours
-        repository: https://github.com/eoframework/templates/tree/main/providers/ibm/cloud/openshift-container-platform
+        repository: https://github.com/eoframework/templates/tree/main/solutions/ibm/cloud/openshift-container-platform
         features:
         - Enterprise Kubernetes with Red Hat support
         - Integrated developer tools and workflows
@@ -53,7 +53,7 @@ categories:
         - CI/CD Tools
         - Service Mesh
         - Storage Systems
-        solution_path: ../../providers/ibm/cloud/openshift-container-platform/
+        solution_path: ../../solutions/ibm/cloud/openshift-container-platform/
   devops:
     solutions:
       ansible-automation-platform:
@@ -74,7 +74,7 @@ categories:
         - workflow-orchestration
         complexity: intermediate
         deployment_time: 4-8 hours
-        repository: https://github.com/eoframework/templates/tree/main/providers/ibm/devops/ansible-automation-platform
+        repository: https://github.com/eoframework/templates/tree/main/solutions/ibm/devops/ansible-automation-platform
         features:
         - Automation Controller for centralized management
         - Automation Hub for private content repository
@@ -99,4 +99,4 @@ categories:
         - Identity Providers
         - Cloud Providers
         - Ticketing Systems
-        solution_path: ../../providers/ibm/devops/ansible-automation-platform/
+        solution_path: ../../solutions/ibm/devops/ansible-automation-platform/

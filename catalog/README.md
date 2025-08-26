@@ -7,7 +7,7 @@ This directory contains the distributed catalog system for the EO Framework™ T
 ```
 catalog/
 ├── catalog.yml              # 📋 Master catalog index with statistics and references
-├── providers/               # 🏢 Provider-specific solution catalogs (11 files)
+├── solutions/               # 🏢 Provider-specific solution catalogs (11 files)
 │   ├── aws.yml              #    Amazon Web Services solutions catalog
 │   ├── azure.yml            #    Microsoft Azure solutions catalog  
 │   ├── cisco.yml            #    Cisco Systems solutions catalog
@@ -119,8 +119,8 @@ metadata:
   total_solutions: 44
 
 provider_catalogs:
-  aws: './providers/aws.yml'
-  azure: './providers/azure.yml'
+  aws: './solutions/aws.yml'
+  azure: './solutions/azure.yml'
   
 category_catalogs:
   ai: './categories/ai.yml'
@@ -132,7 +132,7 @@ quick_stats:
   provider_solution_counts: {aws: 15, azure: 12, ...}
 ```
 
-### Provider Catalog (`providers/aws.yml`)
+### Provider Catalog (`solutions/aws.yml`)
 
 ```yaml
 version: '2.0'
@@ -154,7 +154,7 @@ categories:
         complexity: "enterprise"
         deployment_time: "4-6 weeks"
         tags: ["ai", "document-processing"]
-        solution_path: "../../providers/aws/ai/intelligent-document-processing/"
+        solution_path: "../../solutions/aws/ai/intelligent-document-processing/"
 ```
 
 ### Category Catalog (`categories/ai.yml`)
@@ -175,15 +175,15 @@ providers:
     solutions:
       - name: "intelligent-document-processing"
         title: "AWS Intelligent Document Processing"
-        provider_catalog: "../providers/aws.yml"
-        solution_path: "../../providers/aws/ai/intelligent-document-processing/"
+        provider_catalog: "../solutions/aws.yml"
+        solution_path: "../../solutions/aws/ai/intelligent-document-processing/"
   
   nvidia:
     solutions:
       - name: "dgx-superpod"
         title: "NVIDIA DGX SuperPOD AI Infrastructure"
-        provider_catalog: "../providers/nvidia.yml"
-        solution_path: "../../providers/nvidia/ai/dgx-superpod/"
+        provider_catalog: "../solutions/nvidia.yml"
+        solution_path: "../../solutions/nvidia/ai/dgx-superpod/"
 ```
 
 ## Management Workflows
@@ -192,7 +192,7 @@ providers:
 
 1. **Create Solution Structure**:
    ```bash
-   mkdir -p providers/{provider}/{category}/{solution-name}/{presales,delivery,docs}
+   mkdir -p solutions/{provider}/{category}/{solution-name}/{presales,delivery,docs}
    ```
 
 2. **Create metadata.yml**:
@@ -219,7 +219,7 @@ providers:
 
 1. **Create Provider Directory Structure**:
    ```bash
-   mkdir -p providers/{new-provider}/{ai,cloud,cyber-security,devops,modern-workspace,network}
+   mkdir -p solutions/{new-provider}/{ai,cloud,cyber-security,devops,modern-workspace,network}
    ```
 
 2. **Update Master Catalog** (or regenerate):

@@ -21,7 +21,7 @@ tools/
 **Functionality**:
 - Copies the complete `master-template/` structure
 - Replaces placeholder values with actual solution details
-- Creates proper directory structure under `providers/`
+- Creates proper directory structure under `solutions/`
 - Updates metadata and documentation files
 - Handles file naming and path generation
 
@@ -43,7 +43,7 @@ python tools/clone-template.py \
 - `--author-email`: Template author's email address
 
 **Output**:
-- Creates `providers/{provider}/{category}/{solution}/` directory
+- Creates `solutions/{provider}/{category}/{solution}/` directory
 - Populates with complete template structure
 - Updates all placeholder content with provided values
 - Ready for customization and development
@@ -71,7 +71,7 @@ python tools/clone-template.py \
 **Usage**:
 ```bash
 # Validate specific template
-python tools/validate-template.py --path providers/juniper/network/mist-ai-network
+python tools/validate-template.py --path solutions/juniper/network/mist-ai-network
 
 # Validate all templates
 python tools/validate-template.py --all
@@ -80,7 +80,7 @@ python tools/validate-template.py --all
 python tools/validate-template.py --all --verbose
 
 # Check only structure (skip content validation)
-python tools/validate-template.py --path providers/aws/cloud/landing-zone --structure-only
+python tools/validate-template.py --path solutions/aws/cloud/landing-zone --structure-only
 ```
 
 **Parameters**:
@@ -148,7 +148,7 @@ python tools/sync-csv.py
 
 3. **Validate Template**:
    ```bash
-   python tools/validate-template.py --path providers/your-provider/your-category/your-solution
+   python tools/validate-template.py --path solutions/your-provider/your-category/your-solution
    ```
 
 4. **Update Catalogs**:
@@ -170,7 +170,7 @@ python tools/sync-csv.py
 
 3. **Re-validate**:
    ```bash
-   python tools/validate-template.py --path providers/specific/template/path
+   python tools/validate-template.py --path solutions/specific/template/path
    ```
 
 ### CI/CD Integration
@@ -206,7 +206,7 @@ pip install pathlib         # Path manipulation (Python 3.4+)
 
 ### File Permissions
 Scripts require read/write access to:
-- `providers/` directory (for template creation)
+- `solutions/` directory (for template creation)
 - `master-template/` directory (for template source)
 - `catalog/` directory (for catalog updates)
 
@@ -217,7 +217,7 @@ Scripts require read/write access to:
 1. **Permission Denied**:
    ```bash
    # Fix: Ensure write permissions
-   chmod +w providers/
+   chmod +w solutions/
    ```
 
 2. **Invalid Category**:
@@ -260,10 +260,10 @@ Scripts require read/write access to:
 python tools/clone-template.py --provider test --category ai --solution test-solution --author-name "Test User" --author-email "test@example.com"
 
 # Test validation
-python tools/validate-template.py --path providers/test/ai/test-solution
+python tools/validate-template.py --path solutions/test/ai/test-solution
 
 # Cleanup test data
-rm -rf providers/test/
+rm -rf solutions/test/
 ```
 
 ## Support and Troubleshooting

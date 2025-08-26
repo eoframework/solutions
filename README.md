@@ -38,7 +38,7 @@ templates/
 │   └── sample-provider/        # Complete example solution structure
 │       └── sample-category/    # Shows proper organization and file naming
 │           └── sample-solution/ # Includes all required folders and files
-└── providers/                  # 📦 Complete enterprise solution libraries
+└── solutions/                  # 📦 Complete enterprise solution libraries
     ├── aws/                    # Amazon Web Services (3 solutions)
     ├── azure/                  # Microsoft Azure (6 solutions)
     ├── cisco/                  # Cisco Systems (5 solutions)

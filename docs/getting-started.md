@@ -65,7 +65,7 @@ python tools/clone-template.py \
 The tool will create a complete directory structure:
 
 ```
-providers/your-provider/your-category/your-solution/
+solutions/your-provider/your-category/your-solution/
 ├── README.md                   # Solution overview (customize this first)
 ├── metadata.yml               # Solution metadata (verify details)
 ├── docs/                      # Technical documentation
@@ -230,10 +230,10 @@ After customization, validate your template structure and content:
 
 ```bash
 # Validate specific template
-python tools/validate-template.py --path providers/your-provider/your-category/your-solution
+python tools/validate-template.py --path solutions/your-provider/your-category/your-solution
 
 # Run comprehensive validation
-python tools/validate-template.py --path providers/your-provider/your-category/your-solution --verbose
+python tools/validate-template.py --path solutions/your-provider/your-category/your-solution --verbose
 ```
 
 **Common Validation Issues:**
@@ -332,8 +332,8 @@ After creating your solution:
 ## Example Solutions
 
 Reference these existing solutions for inspiration:
-- **Juniper Mist AI Network** (`providers/juniper/network/mist-ai-network/`)
-- **Juniper SRX Firewall** (`providers/juniper/cyber-security/srx-firewall-platform/`)
+- **Juniper Mist AI Network** (`solutions/juniper/network/mist-ai-network/`)
+- **Juniper SRX Firewall** (`solutions/juniper/cyber-security/srx-firewall-platform/`)
 
 These examples demonstrate complete, professional solution templates that follow EO Framework™ standards.
 

@@ -45,7 +45,7 @@ def clone_template(provider, category, solution, author_name, author_email):
     # Define paths
     repo_root = Path(__file__).parent.parent
     sample_path = repo_root / "master-template" / "sample-provider" / "sample-category" / "sample-solution"
-    target_path = repo_root / "providers" / provider / category / solution
+    target_path = repo_root / "solutions" / provider / category / solution
     
     # Check if master template exists
     if not sample_path.exists():
@@ -94,7 +94,7 @@ def clone_template(provider, category, solution, author_name, author_email):
         with open(readme_path, 'w') as f:
             f.write(content)
     
-    print(f"✅ Successfully created new template: providers/{provider}/{category}/{solution}")
+    print(f"✅ Successfully created new template: solutions/{provider}/{category}/{solution}")
     print(f"📝 Next steps:")
     print(f"   1. Review and update {target_path}/metadata.yml")
     print(f"   2. Update {target_path}/README.md with solution details")

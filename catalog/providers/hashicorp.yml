@@ -27,7 +27,7 @@ categories:
         - secrets-management
         complexity: enterprise
         deployment_time: 4-8 weeks
-        repository: https://github.com/eoframework/templates/tree/main/providers/hashicorp/cloud/multi-cloud-platform
+        repository: https://github.com/eoframework/templates/tree/main/solutions/hashicorp/cloud/multi-cloud-platform
         features:
         - Unified multi-cloud operations across AWS, Azure, and GCP
         - HashiCorp Terraform Enterprise for infrastructure as code
@@ -51,7 +51,7 @@ categories:
         - Identity Providers
         - Monitoring Systems
         - CI/CD Pipelines
-        solution_path: ../../providers/hashicorp/cloud/multi-cloud-platform/
+        solution_path: ../../solutions/hashicorp/cloud/multi-cloud-platform/
   devops:
     solutions:
       terraform-enterprise:
@@ -71,7 +71,7 @@ categories:
         - automation
         complexity: enterprise
         deployment_time: 2-4 weeks
-        repository: https://github.com/eoframework/templates/tree/main/providers/hashicorp/devops/terraform-enterprise
+        repository: https://github.com/eoframework/templates/tree/main/solutions/hashicorp/devops/terraform-enterprise
         features:
         - Collaborative infrastructure as code workflows
         - Policy as code with Sentinel policy enforcement
@@ -95,4 +95,4 @@ categories:
         - CI/CD Pipelines
         - HashiCorp Vault
         - Monitoring Systems
-        solution_path: ../../providers/hashicorp/devops/terraform-enterprise/
+        solution_path: ../../solutions/hashicorp/devops/terraform-enterprise/

@@ -12,23 +12,23 @@ providers:
     solutions:
     - name: virtual-wan-global
       title: Azure Virtual WAN Global Architecture
-      provider_catalog: ../providers/azure.yml
-      solution_path: ../../providers/azure/network/virtual-wan-global/
+      provider_catalog: ../solutions/azure.yml
+      solution_path: ../../solutions/azure/network/virtual-wan-global/
   cisco:
     solutions:
     - name: sd-wan-enterprise
       title: Cisco SD-WAN Enterprise Platform
-      provider_catalog: ../providers/cisco.yml
-      solution_path: ../../providers/cisco/network/sd-wan-enterprise/
+      provider_catalog: ../solutions/cisco.yml
+      solution_path: ../../solutions/cisco/network/sd-wan-enterprise/
   dell:
     solutions:
     - name: powerswitch-datacenter
       title: Dell PowerSwitch Datacenter Network
-      provider_catalog: ../providers/dell.yml
-      solution_path: ../../providers/dell/network/powerswitch-datacenter/
+      provider_catalog: ../solutions/dell.yml
+      solution_path: ../../solutions/dell/network/powerswitch-datacenter/
   juniper:
     solutions:
     - name: mist-ai-network
       title: Juniper Mist AI Network Platform
-      provider_catalog: ../providers/juniper.yml
-      solution_path: ../../providers/juniper/network/mist-ai-network/
+      provider_catalog: ../solutions/juniper.yml
+      solution_path: ../../solutions/juniper/network/mist-ai-network/

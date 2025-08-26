@@ -20,8 +20,8 @@ categories:
         - high-performance
         complexity: enterprise
         deployment_time: 4-8 weeks
-        repository: https://github.com/eoframework/templates/tree/main/providers/dell/ai/precision-ai-workstation
-        solution_path: ../../providers/dell/ai/precision-ai-workstation/
+        repository: https://github.com/eoframework/templates/tree/main/solutions/dell/ai/precision-ai-workstation
+        solution_path: ../../solutions/dell/ai/precision-ai-workstation/
   cloud:
     solutions:
       vxrail-hci:
@@ -34,8 +34,8 @@ categories:
         - hyper-converged
         complexity: enterprise
         deployment_time: 6-10 weeks
-        repository: https://github.com/eoframework/templates/tree/main/providers/dell/cloud/vxrail-hci
-        solution_path: ../../providers/dell/cloud/vxrail-hci/
+        repository: https://github.com/eoframework/templates/tree/main/solutions/dell/cloud/vxrail-hci
+        solution_path: ../../solutions/dell/cloud/vxrail-hci/
       vxrail-hyperconverged:
         title: Dell VxRail Hyperconverged Platform
         description: Enterprise hyperconverged infrastructure solution
@@ -46,8 +46,8 @@ categories:
         - enterprise
         complexity: enterprise
         deployment_time: 6-10 weeks
-        repository: https://github.com/eoframework/templates/tree/main/providers/dell/cloud/vxrail-hyperconverged
-        solution_path: ../../providers/dell/cloud/vxrail-hyperconverged/
+        repository: https://github.com/eoframework/templates/tree/main/solutions/dell/cloud/vxrail-hyperconverged
+        solution_path: ../../solutions/dell/cloud/vxrail-hyperconverged/
   cyber-security:
     solutions:
       safeid-authentication:
@@ -61,8 +61,8 @@ categories:
         - security
         complexity: advanced
         deployment_time: 4-6 weeks
-        repository: https://github.com/eoframework/templates/tree/main/providers/dell/cyber-security/safeid-authentication
-        solution_path: ../../providers/dell/cyber-security/safeid-authentication/
+        repository: https://github.com/eoframework/templates/tree/main/solutions/dell/cyber-security/safeid-authentication
+        solution_path: ../../solutions/dell/cyber-security/safeid-authentication/
   devops:
     solutions:
       poweredge-ci-infrastructure:
@@ -76,8 +76,8 @@ categories:
         - servers
         complexity: advanced
         deployment_time: 4-6 weeks
-        repository: https://github.com/eoframework/templates/tree/main/providers/dell/devops/poweredge-ci-infrastructure
-        solution_path: ../../providers/dell/devops/poweredge-ci-infrastructure/
+        repository: https://github.com/eoframework/templates/tree/main/solutions/dell/devops/poweredge-ci-infrastructure
+        solution_path: ../../solutions/dell/devops/poweredge-ci-infrastructure/
   network:
     solutions:
       powerswitch-datacenter:
@@ -90,5 +90,5 @@ categories:
         - network
         complexity: enterprise
         deployment_time: 4-8 weeks
-        repository: https://github.com/eoframework/templates/tree/main/providers/dell/network/powerswitch-datacenter
-        solution_path: ../../providers/dell/network/powerswitch-datacenter/
+        repository: https://github.com/eoframework/templates/tree/main/solutions/dell/network/powerswitch-datacenter
+        solution_path: ../../solutions/dell/network/powerswitch-datacenter/

@@ -24,8 +24,8 @@ categories:
         - compliance
         complexity: enterprise
         deployment_time: 4-8 weeks
-        repository: https://github.com/eoframework/templates/tree/main/providers/google/cloud/landing-zone
-        solution_path: ../../providers/google/cloud/landing-zone/
+        repository: https://github.com/eoframework/templates/tree/main/solutions/google/cloud/landing-zone
+        solution_path: ../../solutions/google/cloud/landing-zone/
   modern-workspace:
     solutions:
       workspace:
@@ -40,5 +40,5 @@ categories:
         - cloud-native
         complexity: intermediate
         deployment_time: 2-6 weeks
-        repository: https://github.com/eoframework/templates/tree/main/providers/google/modern-workspace/workspace
-        solution_path: ../../providers/google/modern-workspace/workspace/
+        repository: https://github.com/eoframework/templates/tree/main/solutions/google/modern-workspace/workspace
+        solution_path: ../../solutions/google/modern-workspace/workspace/

@@ -24,7 +24,7 @@ categories:
         - enterprise-security
         complexity: intermediate
         deployment_time: 2-8 weeks
-        repository: https://github.com/eoframework/templates/tree/main/providers/juniper/cyber-security/srx-firewall-platform
+        repository: https://github.com/eoframework/templates/tree/main/solutions/juniper/cyber-security/srx-firewall-platform
         features:
         - Advanced threat protection with IDP signatures
         - High-performance security processing with hardware acceleration
@@ -49,7 +49,7 @@ categories:
           management_reduction: 60% reduction in security overhead
           incident_response: 50% faster resolution times
           system_availability: 99.99% uptime with failover
-        solution_path: ../../providers/juniper/cyber-security/srx-firewall-platform/
+        solution_path: ../../solutions/juniper/cyber-security/srx-firewall-platform/
   network:
     solutions:
       mist-ai-network:
@@ -67,7 +67,7 @@ categories:
         - enterprise-wifi
         complexity: intermediate
         deployment_time: 4-12 weeks
-        repository: https://github.com/eoframework/templates/tree/main/providers/juniper/network/mist-ai-network
+        repository: https://github.com/eoframework/templates/tree/main/solutions/juniper/network/mist-ai-network
         features:
         - AI-driven proactive network operations with 90% trouble ticket reduction
         - Cloud-native microservices architecture with zero hardware controllers
@@ -93,4 +93,4 @@ categories:
           incident_resolution: 75% faster MTTR
           operational_expenses: 50% lower vs traditional solutions
           network_availability: 99.9% with AI-driven optimization
-        solution_path: ../../providers/juniper/network/mist-ai-network/
+        solution_path: ../../solutions/juniper/network/mist-ai-network/

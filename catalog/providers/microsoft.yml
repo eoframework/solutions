@@ -31,7 +31,7 @@ categories:
         - security-center
         complexity: enterprise
         deployment_time: 6-12 weeks
-        repository: https://github.com/eoframework/templates/tree/main/providers/microsoft/cyber-security/cmmc-enclave
+        repository: https://github.com/eoframework/templates/tree/main/solutions/microsoft/cyber-security/cmmc-enclave
         features:
         - CMMC Level 2 compliance with 110 NIST SP 800-171 controls
         - Automated CUI data discovery and classification with Microsoft Purview
@@ -73,7 +73,7 @@ categories:
           contract_retention: $15M+ protected revenue
           new_opportunities: $8M+ annual contract value
           audit_efficiency: 85% faster compliance audits
-        solution_path: ../../providers/microsoft/cyber-security/cmmc-enclave/
+        solution_path: ../../solutions/microsoft/cyber-security/cmmc-enclave/
   modern-workspace:
     solutions:
       m365-deployment:
@@ -102,7 +102,7 @@ categories:
         - viva
         complexity: enterprise
         deployment_time: 12-16 weeks
-        repository: https://github.com/eoframework/templates/tree/main/providers/microsoft/modern-workspace/m365-deployment
+        repository: https://github.com/eoframework/templates/tree/main/solutions/microsoft/modern-workspace/m365-deployment
         features:
         - Complete Microsoft 365 E5 suite deployment and configuration
         - Azure Active Directory Premium P2 with advanced identity protection
@@ -150,4 +150,4 @@ categories:
           security_enhancement: 99.9% advanced threat protection coverage
           roi_achievement: 350% return on investment over 3 years
           user_satisfaction: 85% user adoption rate within 6 months
-        solution_path: ../../providers/microsoft/modern-workspace/m365-deployment/
+        solution_path: ../../solutions/microsoft/modern-workspace/m365-deployment/

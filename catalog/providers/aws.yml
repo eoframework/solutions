@@ -20,8 +20,8 @@ categories:
         - comprehend
         complexity: enterprise
         deployment_time: 4-6 weeks
-        repository: https://github.com/eoframework/templates/tree/main/providers/aws/ai/intelligent-document-processing
-        solution_path: ../../providers/aws/ai/intelligent-document-processing/
+        repository: https://github.com/eoframework/templates/tree/main/solutions/aws/ai/intelligent-document-processing
+        solution_path: ../../solutions/aws/ai/intelligent-document-processing/
   cloud:
     solutions:
       disaster-recovery-web-application:
@@ -34,8 +34,8 @@ categories:
         - web-app
         complexity: advanced
         deployment_time: 3-5 weeks
-        repository: https://github.com/eoframework/templates/tree/main/providers/aws/cloud/disaster-recovery-web-application
-        solution_path: ../../providers/aws/cloud/disaster-recovery-web-application/
+        repository: https://github.com/eoframework/templates/tree/main/solutions/aws/cloud/disaster-recovery-web-application
+        solution_path: ../../solutions/aws/cloud/disaster-recovery-web-application/
       onpremise-to-cloud-migration:
         title: AWS On-Premise to Cloud Migration
         description: Enterprise migration from on-premise to AWS cloud
@@ -47,5 +47,5 @@ categories:
         - assessment
         complexity: enterprise
         deployment_time: 8-12 weeks
-        repository: https://github.com/eoframework/templates/tree/main/providers/aws/cloud/onpremise-to-cloud-migration
-        solution_path: ../../providers/aws/cloud/onpremise-to-cloud-migration/
+        repository: https://github.com/eoframework/templates/tree/main/solutions/aws/cloud/onpremise-to-cloud-migration
+        solution_path: ../../solutions/aws/cloud/onpremise-to-cloud-migration/

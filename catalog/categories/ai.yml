@@ -12,29 +12,29 @@ providers:
     solutions:
     - name: intelligent-document-processing
       title: AWS Intelligent Document Processing
-      provider_catalog: ../providers/aws.yml
-      solution_path: ../../providers/aws/ai/intelligent-document-processing/
+      provider_catalog: ../solutions/aws.yml
+      solution_path: ../../solutions/aws/ai/intelligent-document-processing/
   azure:
     solutions:
     - name: document-intelligence
       title: Azure Document Intelligence Platform
-      provider_catalog: ../providers/azure.yml
-      solution_path: ../../providers/azure/ai/document-intelligence/
+      provider_catalog: ../solutions/azure.yml
+      solution_path: ../../solutions/azure/ai/document-intelligence/
   cisco:
     solutions:
     - name: network-analytics
       title: Cisco AI Network Analytics
-      provider_catalog: ../providers/cisco.yml
-      solution_path: ../../providers/cisco/ai/network-analytics/
+      provider_catalog: ../solutions/cisco.yml
+      solution_path: ../../solutions/cisco/ai/network-analytics/
   dell:
     solutions:
     - name: precision-ai-workstation
       title: Dell Precision AI Workstation
-      provider_catalog: ../providers/dell.yml
-      solution_path: ../../providers/dell/ai/precision-ai-workstation/
+      provider_catalog: ../solutions/dell.yml
+      solution_path: ../../solutions/dell/ai/precision-ai-workstation/
   nvidia:
     solutions:
     - name: dgx-superpod
       title: NVIDIA DGX SuperPOD AI Infrastructure
-      provider_catalog: ../providers/nvidia.yml
-      solution_path: ../../providers/nvidia/ai/dgx-superpod/
+      provider_catalog: ../solutions/nvidia.yml
+      solution_path: ../../solutions/nvidia/ai/dgx-superpod/

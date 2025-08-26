@@ -7,7 +7,7 @@ This document defines the required standards for all templates in the repository
 ### Required Files
 Every solution template must include:
 ```
-providers/[provider]/[category]/[solution]/
+solutions/[provider]/[category]/[solution]/
 ├── README.md                 # Solution overview and usage
 ├── metadata.yml             # Required metadata schema
 ├── docs/                    # Solution-specific documentation
