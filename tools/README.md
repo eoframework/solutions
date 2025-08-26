@@ -1,22 +1,24 @@
-# Repository Management Scripts
+# EO Framework™ Development Tools
 
-This directory contains utility scripts for managing the EO Framework™ Templates repository. These tools automate common tasks like template creation, validation, and maintenance.
+This directory contains all development utilities and template foundations for the EO Framework™ Templates repository. These tools enable efficient creation, validation, and management of enterprise solution templates.
 
-## Script Overview
+## Directory Structure
 
 ```
-scripts/
-├── README.md               # This file - scripts documentation
-├── clone-template.py       # 🏗️ Creates new solution templates from sample
-└── validate-template.py    # ✅ Validates template structure and metadata
+tools/
+├── README.md               # This file - tools overview and documentation
+├── master-template/        # 📋 Authoritative template foundation
+├── clone-template.py       # 🏗️ Creates new solution templates from master
+├── validate-template.py    # ✅ Validates template structure and metadata
+└── sync-csv.py             # 📊 Generates website CSV export
 ```
 
 ## Script Details
 
 ### [clone-template.py](clone-template.py) - Template Creator
-**Purpose**: Creates new solution templates from the sample template
+**Purpose**: Creates new solution templates from the master template
 **Functionality**:
-- Copies the complete `_sample-template/` structure
+- Copies the complete `master-template/` structure
 - Replaces placeholder values with actual solution details
 - Creates proper directory structure under `providers/`
 - Updates metadata and documentation files
@@ -24,7 +26,7 @@ scripts/
 
 **Usage**:
 ```bash
-python scripts/clone-template.py \
+python tools/clone-template.py \
   --provider "ProviderName" \
   --category "category-name" \
   --solution "solution-name" \
@@ -47,7 +49,7 @@ python scripts/clone-template.py \
 
 **Example**:
 ```bash
-python scripts/clone-template.py \
+python tools/clone-template.py \
   --provider "juniper" \
   --category "network" \
   --solution "mist-ai-network" \
@@ -68,16 +70,16 @@ python scripts/clone-template.py \
 **Usage**:
 ```bash
 # Validate specific template
-python scripts/validate-template.py --path providers/juniper/network/mist-ai-network
+python tools/validate-template.py --path providers/juniper/network/mist-ai-network
 
 # Validate all templates
-python scripts/validate-template.py --all
+python tools/validate-template.py --all
 
 # Validate with verbose output
-python scripts/validate-template.py --all --verbose
+python tools/validate-template.py --all --verbose
 
 # Check only structure (skip content validation)
-python scripts/validate-template.py --path providers/aws/cloud/landing-zone --structure-only
+python tools/validate-template.py --path providers/aws/cloud/landing-zone --structure-only
 ```
 
 **Parameters**:
@@ -100,13 +102,35 @@ python scripts/validate-template.py --path providers/aws/cloud/landing-zone --st
 - Detailed error and warning messages
 - Summary statistics and recommendations
 
+### [sync-csv.py](sync-csv.py) - CSV Export Tool
+**Purpose**: Generates CSV file for website integration and external systems
+**Functionality**:
+- Scans all solution templates in repository
+- Extracts key metadata from each solution
+- Generates GitHub URLs for presales and delivery materials
+- Creates `templates.csv` for website consumption
+
+**Usage**:
+```bash
+python tools/sync-csv.py
+```
+
+**Output**: Creates `templates.csv` with columns:
+- Provider
+- Category  
+- Solution Name
+- Description
+- Pre Sales Templates (GitHub URL)
+- Delivery Templates (GitHub URL)
+- Status
+
 ## Usage Workflows
 
 ### Creating a New Template
 
 1. **Run Template Creator**:
    ```bash
-   python scripts/clone-template.py \
+   python tools/clone-template.py \
      --provider "your-provider" \
      --category "your-category" \
      --solution "your-solution" \
@@ -123,7 +147,7 @@ python scripts/validate-template.py --path providers/aws/cloud/landing-zone --st
 
 3. **Validate Template**:
    ```bash
-   python scripts/validate-template.py --path providers/your-provider/your-category/your-solution
+   python tools/validate-template.py --path providers/your-provider/your-category/your-solution
    ```
 
 4. **Update Catalogs**:
@@ -135,7 +159,7 @@ python scripts/validate-template.py --path providers/aws/cloud/landing-zone --st
 
 1. **Validate All Templates**:
    ```bash
-   python scripts/validate-template.py --all
+   python tools/validate-template.py --all
    ```
 
 2. **Fix Issues**:
@@ -145,7 +169,7 @@ python scripts/validate-template.py --path providers/aws/cloud/landing-zone --st
 
 3. **Re-validate**:
    ```bash
-   python scripts/validate-template.py --path providers/specific/template/path
+   python tools/validate-template.py --path providers/specific/template/path
    ```
 
 ### CI/CD Integration
@@ -156,7 +180,7 @@ These scripts are integrated into the GitHub Actions workflow:
 # .github/workflows/template-validation.yml
 - name: Validate template structure
   run: |
-    python scripts/validate-template.py --all
+    python tools/validate-template.py --all
 ```
 
 **Automated Checks**:
@@ -182,7 +206,7 @@ pip install pathlib         # Path manipulation (Python 3.4+)
 ### File Permissions
 Scripts require read/write access to:
 - `providers/` directory (for template creation)
-- `_sample-template/` directory (for template source)
+- `tools/master-template/` directory (for template source)
 - `catalog/` directory (for catalog updates)
 
 ## Error Handling
@@ -232,10 +256,10 @@ Scripts require read/write access to:
 
 ```bash
 # Test template creation
-python scripts/clone-template.py --provider test --category ai --solution test-solution --author-name "Test User" --author-email "test@example.com"
+python tools/clone-template.py --provider test --category ai --solution test-solution --author-name "Test User" --author-email "test@example.com"
 
 # Test validation
-python scripts/validate-template.py --path providers/test/ai/test-solution
+python tools/validate-template.py --path providers/test/ai/test-solution
 
 # Cleanup test data
 rm -rf providers/test/

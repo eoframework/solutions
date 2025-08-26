@@ -129,7 +129,7 @@ All documentation in this directory follows these standards:
 
 - **Repository Root**: [../README.md](../README.md) - Main repository documentation
 - **Catalog System**: [../catalog/README.md](../catalog/README.md) - Solution discovery
-- **Sample Template**: [../_sample-template/](../_sample-template/) - Template reference
+- **Sample Template**: [../master-template/](../master-template/) - Template reference
 - **Provider Solutions**: [../providers/README.md](../providers/README.md) - Solution library
 
 ## Document History

@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 EO Framework™ Template Cloner
-Creates a new solution template from the sample template.
+Creates a new solution template from the master template.
 """
 
 import os
@@ -32,7 +32,7 @@ def validate_inputs(provider, category, solution):
     return True
 
 def clone_template(provider, category, solution, author_name, author_email):
-    """Clone the sample template to create a new solution"""
+    """Clone the master template to create a new solution"""
     
     # Normalize names
     provider = normalize_name(provider)
@@ -44,10 +44,10 @@ def clone_template(provider, category, solution, author_name, author_email):
     
     # Define paths
     repo_root = Path(__file__).parent.parent
-    sample_path = repo_root / "_sample-template" / "sample-provider" / "sample-category" / "sample-solution"
+    sample_path = repo_root / "tools" / "master-template" / "sample-provider" / "sample-category" / "sample-solution"
     target_path = repo_root / "providers" / provider / category / solution
     
-    # Check if sample template exists
+    # Check if master template exists
     if not sample_path.exists():
         raise FileNotFoundError(f"Sample template not found at {sample_path}")
     
@@ -58,7 +58,7 @@ def clone_template(provider, category, solution, author_name, author_email):
     # Create provider and category directories if they don't exist
     target_path.parent.mkdir(parents=True, exist_ok=True)
     
-    # Copy sample template
+    # Copy master template
     print(f"Cloning template to {target_path}")
     shutil.copytree(sample_path, target_path)
     

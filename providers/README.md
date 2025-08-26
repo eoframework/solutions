@@ -177,7 +177,7 @@ All solutions in this directory meet the EO Framework™ quality standards:
 
 To add a new solution to this directory:
 
-1. **Follow the Template**: Use `_sample-template/` as your starting point
+1. **Follow the Template**: Use `master-template/` as your starting point
 2. **Choose Correct Location**: Place in appropriate `providers/{provider}/{category}/`
 3. **Complete All Sections**: Ensure all required files are present
 4. **Validate Structure**: Run `python scripts/validate-template.py`

@@ -1,4 +1,4 @@
-# Sample Template Reference
+# Master Template Reference
 
 This directory contains the reference template structure for creating new EO Framework™ enterprise solutions. It serves as the foundation for all solution templates in the repository and demonstrates the complete file structure, naming conventions, and content organization.
 
@@ -19,7 +19,7 @@ This directory contains the reference template structure for creating new EO Fra
 ## Directory Structure
 
 ```
-_sample-template/
+master-template/
 └── sample-provider/           # Provider name (lowercase, hyphenated)
     └── sample-category/       # Category name (standardized category)
         └── sample-solution/   # Solution name (lowercase, hyphenated)
@@ -134,7 +134,7 @@ status: "Active"
 
 ## Template Placeholders
 
-The sample template contains placeholder values that are automatically replaced when using `scripts/clone-template.py`:
+The master template contains placeholder values that are automatically replaced when using `scripts/clone-template.py`:
 
 ### Replacement Variables
 - `{PROVIDER_NAME}` → Provider name (e.g., "Juniper")

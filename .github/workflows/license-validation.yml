@@ -18,8 +18,8 @@ jobs:
           missing_license=()
           
           while IFS= read -r -d '' file; do
-            if [[ "$file" == *"_sample-template"* ]]; then
-              continue  # Skip sample template files
+            if [[ "$file" == *"master-template"* ]]; then
+              continue  # Skip master template files
             fi
             
             case "$file" in

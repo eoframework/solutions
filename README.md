@@ -19,9 +19,11 @@ templates/
 │   ├── review-process.md       # Multi-stage review workflow documentation
 │   ├── governance.md           # Repository governance and decision-making
 │   └── license-guide.md        # BSL 1.1 license usage guidelines
-├── scripts/                    # 🛠️ Repository management utilities
-│   ├── clone-template.py       # Tool for creating new solution templates
-│   └── validate-template.py    # Structure and metadata validation tool
+├── tools/                      # 🛠️ Development utilities and template foundation
+│   ├── master-template/        # 📋 Authoritative template foundation
+│   ├── clone-template.py       # 🏗️ Creates new solution templates
+│   ├── validate-template.py    # ✅ Validates template structure
+│   └── sync-csv.py             # 📊 Generates website CSV export
 ├── catalog/                    # 📊 Distributed solution discovery system
 │   ├── catalog.yml             # Master index with metadata and quick stats
 │   ├── providers/              # Provider-specific solution catalogs (11 files)
@@ -30,7 +32,6 @@ templates/
 │   ├── tools/                  # Catalog management and search utilities
 │   ├── solutions.json          # API-friendly JSON export for integrations
 │   └── validation-report.json  # Latest catalog validation results
-├── _sample-template/           # 📋 Reference template for creating new solutions
 │   └── sample-provider/        # Complete example solution structure
 │       └── sample-category/    # Shows proper organization and file naming
 │           └── sample-solution/ # Includes all required folders and files
@@ -93,7 +94,7 @@ python3 catalog/tools/validator.py     # Validate catalog integrity
 Use our clone utility to create a new solution template:
 
 ```bash
-python scripts/clone-template.py \
+python tools/clone-template.py \
   --provider "YourProvider" \
   --category "YourCategory" \
   --solution "YourSolution" \
@@ -122,7 +123,7 @@ solution-name/
 1. Read our [Contributing Guide](docs/contributing.md)
 2. Review [Template Standards](docs/template-standards.md)
 3. Understand the [Review Process](docs/review-process.md)
-4. Create your template using the sample template
+4. Create your template using the master template
 5. Submit a pull request
 
 ## License
