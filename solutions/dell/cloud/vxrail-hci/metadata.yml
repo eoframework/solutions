@@ -1,0 +1,98 @@
+# EO Framework™ Template Metadata
+# Required fields for template registration
+
+provider: "Dell"
+category: "Cloud"
+solution_name: "VXRail HCI"
+description: "Hyperconverged infrastructure platform integrating compute, storage, and networking with VMware technologies"
+version: "1.0.0"
+status: "Active"
+
+# Maintainer information
+maintainers:
+  - name: "Dell Technologies Solutions Team"
+    email: "vxrail-support@dell.com"
+    role: "Solution Architect"
+  - name: "HCI Infrastructure Lead"
+    email: "hci-team@dell.com"
+    role: "Technical Lead"
+
+# Classification tags
+tags:
+  - "hyperconverged-infrastructure"
+  - "vmware-vsan"
+  - "vmware-vsphere"
+  - "enterprise-storage"
+  - "compute-storage"
+  - "data-center-modernization"
+
+# Technical requirements
+requirements:
+  prerequisites:
+    - "Dell VXRail appliances (E, P, V, or S series)"
+    - "VMware vCenter Server 7.0 or later"
+    - "Network infrastructure with 25GbE+ connectivity"
+    - "VXRail Manager administrative access"
+    - "DNS and NTP services configured"
+  tools:
+    - "VXRail Manager"
+    - "VMware vCenter Server"
+    - "PowerShell 5.1 or later"
+    - "Dell OpenManage Integration"
+    - "VMware vSphere Client"
+  skills:
+    - "VMware vSphere administration"
+    - "Storage and networking concepts"
+    - "Hyperconverged infrastructure experience"
+    - "Dell hardware management"
+    - "Windows and Linux system administration"
+
+# Business context
+business_value:
+  primary_benefits:
+    - "Simplified infrastructure management"
+    - "Reduced datacenter footprint"
+    - "Accelerated deployment times"
+    - "Integrated lifecycle management"
+    - "Enhanced scalability and performance"
+  target_audience:
+    - "IT infrastructure teams"
+    - "Virtualization administrators"
+    - "Storage administrators"
+    - "Data center managers"
+    - "Cloud architects"
+  use_cases:
+    - "Data center consolidation"
+    - "VDI infrastructure deployment"
+    - "Private cloud implementation"
+    - "Disaster recovery solutions"
+    - "Edge computing deployments"
+
+# Template structure
+template_structure:
+  presales:
+    - "Infrastructure assessment tools"
+    - "Sizing and configuration guidance"
+    - "Business case development"
+    - "Executive presentation materials"
+  delivery:
+    - "Implementation procedures"
+    - "Configuration templates"
+    - "Testing and validation"
+    - "Training and knowledge transfer"
+
+# Compliance and licensing
+compliance:
+  frameworks:
+    - "SOC 2"
+    - "ISO 27001"
+    - "HIPAA"
+  data_classification: "Internal"
+  export_control: "None"
+
+# Change tracking
+changelog:
+  - version: "1.0.0"
+    date: "2025-08-27"
+    changes: "Initial VXRail HCI template creation with comprehensive documentation"
+    author: "EO Framework Template Team"

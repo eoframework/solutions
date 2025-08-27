@@ -1,0 +1,99 @@
+# EO Framework™ Template Metadata
+# Required fields for template registration
+
+provider: "NVIDIA"
+category: "AI-ML"
+solution_name: "GPU Compute Cluster"
+description: "High-performance GPU compute cluster for AI/ML workloads and deep learning training"
+version: "1.0.0"
+status: "Active"
+
+# Maintainer information
+maintainers:
+  - name: "NVIDIA Solutions Team"
+    email: "solutions@nvidia.com"
+    role: "Solution Architect"
+  - name: "AI Infrastructure Lead"
+    email: "ai-infrastructure@nvidia.com"
+    role: "Technical Lead"
+
+# Classification tags
+tags:
+  - "gpu-computing"
+  - "artificial-intelligence"
+  - "machine-learning"
+  - "high-performance-computing"
+  - "cuda"
+  - "deep-learning"
+
+# Technical requirements
+requirements:
+  prerequisites:
+    - "NVIDIA GPU hardware (Tesla V100, A100, H100 series)"
+    - "CUDA Toolkit 11.8 or later"
+    - "Container runtime with GPU support"
+    - "High-bandwidth network fabric (InfiniBand/Ethernet)"
+    - "Kubernetes 1.24+ or equivalent orchestration"
+  tools:
+    - "NVIDIA Container Toolkit"
+    - "NVIDIA GPU Operator"
+    - "Helm >= 3.0"
+    - "kubectl"
+    - "Docker/containerd"
+    - "Terraform >= 1.0"
+  skills:
+    - "GPU computing architecture"
+    - "Container orchestration"
+    - "CUDA development experience"
+    - "Kubernetes administration"
+    - "Network configuration"
+
+# Business context
+business_value:
+  primary_benefits:
+    - "Accelerated AI/ML training and inference"
+    - "Optimized GPU resource utilization"
+    - "Scalable compute infrastructure"
+    - "Reduced time-to-insight for data science"
+    - "Cost-effective high-performance computing"
+  target_audience:
+    - "Data scientists and ML engineers"
+    - "AI research teams"
+    - "HPC infrastructure teams"
+    - "Cloud architects"
+    - "DevOps engineers"
+  use_cases:
+    - "Deep learning model training"
+    - "AI inference at scale"
+    - "Scientific computing workloads"
+    - "Computer vision processing"
+    - "Natural language processing"
+
+# Template structure
+template_structure:
+  presales:
+    - "GPU sizing and performance calculators"
+    - "AI/ML workload assessment tools"
+    - "ROI analysis for GPU investment"
+    - "Executive presentation materials"
+  delivery:
+    - "GPU cluster deployment guides"
+    - "Container orchestration setup"
+    - "Performance optimization procedures"
+    - "Monitoring and alerting configuration"
+
+# Compliance and licensing
+compliance:
+  frameworks:
+    - "SOC 2"
+    - "ISO 27001"
+    - "FedRAMP"
+  data_classification: "Internal"
+  export_control: "EAR99"
+
+# Change tracking
+changelog:
+  - version: "1.0.0"
+    date: "2025-08-26"
+    changes: "Initial GPU compute cluster template creation"
+    author: "EO Framework Template Team"
