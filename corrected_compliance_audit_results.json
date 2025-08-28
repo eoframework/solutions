@@ -1,0 +1,878 @@
+{
+  "total_solutions": 36,
+  "compliant_solutions": 18,
+  "non_compliant_solutions": [
+    {
+      "solution": "aws/ai/intelligent-document-processing",
+      "compliance_percentage": 88.88888888888889,
+      "missing_files": {
+        "docs": [
+          "prerequisites.md",
+          "troubleshooting.md"
+        ]
+      }
+    },
+    {
+      "solution": "aws/cloud/onpremise-to-cloud-migration",
+      "compliance_percentage": 83.33333333333334,
+      "missing_files": {
+        "delivery": [
+          "scripts/README.md"
+        ],
+        "docs": [
+          "architecture.md",
+          "prerequisites.md"
+        ]
+      }
+    },
+    {
+      "solution": "azure/ai/document-intelligence",
+      "compliance_percentage": 44.44444444444444,
+      "missing_files": {
+        "delivery": [
+          "README.md",
+          "configuration-templates.md",
+          "implementation-guide.md",
+          "operations-runbook.md",
+          "testing-procedures.md",
+          "training-materials.md"
+        ],
+        "presales": [
+          "executive-presentation-template.md",
+          "requirements-questionnaire.md",
+          "roi-calculator-template.md",
+          "solution-design-template.md"
+        ]
+      }
+    },
+    {
+      "solution": "azure/cloud/enterprise-landing-zone",
+      "compliance_percentage": 44.44444444444444,
+      "missing_files": {
+        "delivery": [
+          "README.md",
+          "configuration-templates.md",
+          "implementation-guide.md",
+          "operations-runbook.md",
+          "testing-procedures.md",
+          "training-materials.md"
+        ],
+        "presales": [
+          "executive-presentation-template.md",
+          "requirements-questionnaire.md",
+          "roi-calculator-template.md",
+          "solution-design-template.md"
+        ]
+      }
+    },
+    {
+      "solution": "azure/cyber-security/sentinel-siem",
+      "compliance_percentage": 44.44444444444444,
+      "missing_files": {
+        "delivery": [
+          "README.md",
+          "configuration-templates.md",
+          "implementation-guide.md",
+          "operations-runbook.md",
+          "testing-procedures.md",
+          "training-materials.md"
+        ],
+        "presales": [
+          "executive-presentation-template.md",
+          "requirements-questionnaire.md",
+          "roi-calculator-template.md",
+          "solution-design-template.md"
+        ]
+      }
+    },
+    {
+      "solution": "cisco/ai/network-analytics",
+      "compliance_percentage": 38.88888888888889,
+      "missing_files": {
+        "delivery": [
+          "configuration-templates.md",
+          "implementation-guide.md",
+          "operations-runbook.md",
+          "testing-procedures.md",
+          "training-materials.md"
+        ],
+        "docs": [
+          "architecture.md",
+          "prerequisites.md",
+          "troubleshooting.md"
+        ],
+        "presales": [
+          "executive-presentation-template.md",
+          "requirements-questionnaire.md",
+          "solution-design-template.md"
+        ]
+      }
+    },
+    {
+      "solution": "cisco/cloud/hybrid-infrastructure",
+      "compliance_percentage": 94.44444444444444,
+      "missing_files": {
+        "presales": [
+          "solution-design-template.md"
+        ]
+      }
+    },
+    {
+      "solution": "cisco/cyber-security/secure-access",
+      "compliance_percentage": 22.22222222222222,
+      "missing_files": {
+        "delivery": [
+          "README.md",
+          "configuration-templates.md",
+          "implementation-guide.md",
+          "operations-runbook.md",
+          "testing-procedures.md",
+          "training-materials.md",
+          "scripts/README.md"
+        ],
+        "docs": [
+          "architecture.md",
+          "prerequisites.md",
+          "troubleshooting.md"
+        ],
+        "presales": [
+          "executive-presentation-template.md",
+          "requirements-questionnaire.md",
+          "roi-calculator-template.md",
+          "solution-design-template.md"
+        ]
+      }
+    },
+    {
+      "solution": "cisco/devops/ci-cd-automation",
+      "compliance_percentage": 22.22222222222222,
+      "missing_files": {
+        "delivery": [
+          "README.md",
+          "configuration-templates.md",
+          "implementation-guide.md",
+          "operations-runbook.md",
+          "testing-procedures.md",
+          "training-materials.md",
+          "scripts/README.md"
+        ],
+        "docs": [
+          "architecture.md",
+          "prerequisites.md",
+          "troubleshooting.md"
+        ],
+        "presales": [
+          "executive-presentation-template.md",
+          "requirements-questionnaire.md",
+          "roi-calculator-template.md",
+          "solution-design-template.md"
+        ]
+      }
+    },
+    {
+      "solution": "dell/cyber-security/safeid-authentication",
+      "compliance_percentage": 27.77777777777778,
+      "missing_files": {
+        "delivery": [
+          "README.md",
+          "configuration-templates.md",
+          "implementation-guide.md",
+          "operations-runbook.md",
+          "testing-procedures.md",
+          "training-materials.md",
+          "scripts/README.md"
+        ],
+        "docs": [
+          "architecture.md",
+          "prerequisites.md",
+          "troubleshooting.md"
+        ],
+        "presales": [
+          "business-case-template.md",
+          "executive-presentation-template.md",
+          "solution-design-template.md"
+        ]
+      }
+    },
+    {
+      "solution": "dell/devops/poweredge-ci-infrastructure",
+      "compliance_percentage": 11.11111111111111,
+      "missing_files": {
+        "delivery": [
+          "README.md",
+          "configuration-templates.md",
+          "implementation-guide.md",
+          "operations-runbook.md",
+          "testing-procedures.md",
+          "training-materials.md",
+          "scripts/README.md"
+        ],
+        "docs": [
+          "architecture.md",
+          "prerequisites.md",
+          "troubleshooting.md"
+        ],
+        "presales": [
+          "README.md",
+          "business-case-template.md",
+          "executive-presentation-template.md",
+          "requirements-questionnaire.md",
+          "roi-calculator-template.md",
+          "solution-design-template.md"
+        ]
+      }
+    },
+    {
+      "solution": "dell/network/powerswitch-datacenter",
+      "compliance_percentage": 11.11111111111111,
+      "missing_files": {
+        "delivery": [
+          "README.md",
+          "configuration-templates.md",
+          "implementation-guide.md",
+          "operations-runbook.md",
+          "testing-procedures.md",
+          "training-materials.md",
+          "scripts/README.md"
+        ],
+        "docs": [
+          "architecture.md",
+          "prerequisites.md",
+          "troubleshooting.md"
+        ],
+        "presales": [
+          "README.md",
+          "business-case-template.md",
+          "executive-presentation-template.md",
+          "requirements-questionnaire.md",
+          "roi-calculator-template.md",
+          "solution-design-template.md"
+        ]
+      }
+    },
+    {
+      "solution": "google/modern-workspace/workspace",
+      "compliance_percentage": 66.66666666666666,
+      "missing_files": {
+        "delivery": [
+          "README.md",
+          "configuration-templates.md",
+          "implementation-guide.md",
+          "operations-runbook.md",
+          "testing-procedures.md",
+          "training-materials.md"
+        ]
+      }
+    },
+    {
+      "solution": "ibm/cloud/openshift-container-platform",
+      "compliance_percentage": 61.111111111111114,
+      "missing_files": {
+        "delivery": [
+          "implementation-guide.md",
+          "operations-runbook.md",
+          "testing-procedures.md",
+          "training-materials.md"
+        ],
+        "docs": [
+          "architecture.md",
+          "prerequisites.md",
+          "troubleshooting.md"
+        ]
+      }
+    },
+    {
+      "solution": "ibm/devops/ansible-automation-platform",
+      "compliance_percentage": 83.33333333333334,
+      "missing_files": {
+        "delivery": [
+          "scripts/README.md"
+        ],
+        "docs": [
+          "prerequisites.md",
+          "troubleshooting.md"
+        ]
+      }
+    },
+    {
+      "solution": "nvidia/ai/dgx-superpod",
+      "compliance_percentage": 55.55555555555556,
+      "missing_files": {
+        "docs": [
+          "architecture.md",
+          "prerequisites.md",
+          "troubleshooting.md"
+        ],
+        "presales": [
+          "README.md",
+          "executive-presentation-template.md",
+          "requirements-questionnaire.md",
+          "roi-calculator-template.md",
+          "solution-design-template.md"
+        ]
+      }
+    },
+    {
+      "solution": "nvidia/modern-workspace",
+      "compliance_percentage": 16.666666666666664,
+      "missing_files": {
+        "delivery": [
+          "README.md",
+          "configuration-templates.md",
+          "implementation-guide.md",
+          "operations-runbook.md",
+          "testing-procedures.md",
+          "training-materials.md",
+          "scripts/README.md"
+        ],
+        "docs": [
+          "architecture.md",
+          "prerequisites.md",
+          "troubleshooting.md"
+        ],
+        "presales": [
+          "README.md",
+          "executive-presentation-template.md",
+          "requirements-questionnaire.md",
+          "roi-calculator-template.md",
+          "solution-design-template.md"
+        ]
+      }
+    },
+    {
+      "solution": "nvidia/modern-workspace/omniverse-enterprise",
+      "compliance_percentage": 61.111111111111114,
+      "missing_files": {
+        "delivery": [
+          "operations-runbook.md",
+          "testing-procedures.md",
+          "training-materials.md",
+          "scripts/README.md"
+        ],
+        "docs": [
+          "architecture.md",
+          "prerequisites.md",
+          "troubleshooting.md"
+        ]
+      }
+    }
+  ],
+  "solutions_details": {
+    "aws/ai/intelligent-document-processing": {
+      "compliant": false,
+      "compliance_score": 16,
+      "total_required": 18,
+      "compliance_percentage": 88.88888888888889,
+      "missing_files": {
+        "docs": [
+          "prerequisites.md",
+          "troubleshooting.md"
+        ]
+      }
+    },
+    "aws/cloud/disaster-recovery-web-application": {
+      "compliant": true,
+      "compliance_score": 18,
+      "total_required": 18,
+      "compliance_percentage": 100.0,
+      "missing_files": {}
+    },
+    "aws/cloud/onpremise-to-cloud-migration": {
+      "compliant": false,
+      "compliance_score": 15,
+      "total_required": 18,
+      "compliance_percentage": 83.33333333333334,
+      "missing_files": {
+        "delivery": [
+          "scripts/README.md"
+        ],
+        "docs": [
+          "architecture.md",
+          "prerequisites.md"
+        ]
+      }
+    },
+    "azure/ai/document-intelligence": {
+      "compliant": false,
+      "compliance_score": 8,
+      "total_required": 18,
+      "compliance_percentage": 44.44444444444444,
+      "missing_files": {
+        "delivery": [
+          "README.md",
+          "configuration-templates.md",
+          "implementation-guide.md",
+          "operations-runbook.md",
+          "testing-procedures.md",
+          "training-materials.md"
+        ],
+        "presales": [
+          "executive-presentation-template.md",
+          "requirements-questionnaire.md",
+          "roi-calculator-template.md",
+          "solution-design-template.md"
+        ]
+      }
+    },
+    "azure/cloud/enterprise-landing-zone": {
+      "compliant": false,
+      "compliance_score": 8,
+      "total_required": 18,
+      "compliance_percentage": 44.44444444444444,
+      "missing_files": {
+        "delivery": [
+          "README.md",
+          "configuration-templates.md",
+          "implementation-guide.md",
+          "operations-runbook.md",
+          "testing-procedures.md",
+          "training-materials.md"
+        ],
+        "presales": [
+          "executive-presentation-template.md",
+          "requirements-questionnaire.md",
+          "roi-calculator-template.md",
+          "solution-design-template.md"
+        ]
+      }
+    },
+    "azure/cyber-security/sentinel-siem": {
+      "compliant": false,
+      "compliance_score": 8,
+      "total_required": 18,
+      "compliance_percentage": 44.44444444444444,
+      "missing_files": {
+        "delivery": [
+          "README.md",
+          "configuration-templates.md",
+          "implementation-guide.md",
+          "operations-runbook.md",
+          "testing-procedures.md",
+          "training-materials.md"
+        ],
+        "presales": [
+          "executive-presentation-template.md",
+          "requirements-questionnaire.md",
+          "roi-calculator-template.md",
+          "solution-design-template.md"
+        ]
+      }
+    },
+    "azure/devops/enterprise-platform": {
+      "compliant": true,
+      "compliance_score": 18,
+      "total_required": 18,
+      "compliance_percentage": 100.0,
+      "missing_files": {}
+    },
+    "azure/modern-workspace/virtual-desktop": {
+      "compliant": true,
+      "compliance_score": 18,
+      "total_required": 18,
+      "compliance_percentage": 100.0,
+      "missing_files": {}
+    },
+    "azure/network/virtual-wan-global": {
+      "compliant": true,
+      "compliance_score": 18,
+      "total_required": 18,
+      "compliance_percentage": 100.0,
+      "missing_files": {}
+    },
+    "cisco/ai/network-analytics": {
+      "compliant": false,
+      "compliance_score": 7,
+      "total_required": 18,
+      "compliance_percentage": 38.88888888888889,
+      "missing_files": {
+        "delivery": [
+          "configuration-templates.md",
+          "implementation-guide.md",
+          "operations-runbook.md",
+          "testing-procedures.md",
+          "training-materials.md"
+        ],
+        "docs": [
+          "architecture.md",
+          "prerequisites.md",
+          "troubleshooting.md"
+        ],
+        "presales": [
+          "executive-presentation-template.md",
+          "requirements-questionnaire.md",
+          "solution-design-template.md"
+        ]
+      }
+    },
+    "cisco/cloud/hybrid-infrastructure": {
+      "compliant": false,
+      "compliance_score": 17,
+      "total_required": 18,
+      "compliance_percentage": 94.44444444444444,
+      "missing_files": {
+        "presales": [
+          "solution-design-template.md"
+        ]
+      }
+    },
+    "cisco/cyber-security/secure-access": {
+      "compliant": false,
+      "compliance_score": 4,
+      "total_required": 18,
+      "compliance_percentage": 22.22222222222222,
+      "missing_files": {
+        "delivery": [
+          "README.md",
+          "configuration-templates.md",
+          "implementation-guide.md",
+          "operations-runbook.md",
+          "testing-procedures.md",
+          "training-materials.md",
+          "scripts/README.md"
+        ],
+        "docs": [
+          "architecture.md",
+          "prerequisites.md",
+          "troubleshooting.md"
+        ],
+        "presales": [
+          "executive-presentation-template.md",
+          "requirements-questionnaire.md",
+          "roi-calculator-template.md",
+          "solution-design-template.md"
+        ]
+      }
+    },
+    "cisco/devops/ci-cd-automation": {
+      "compliant": false,
+      "compliance_score": 4,
+      "total_required": 18,
+      "compliance_percentage": 22.22222222222222,
+      "missing_files": {
+        "delivery": [
+          "README.md",
+          "configuration-templates.md",
+          "implementation-guide.md",
+          "operations-runbook.md",
+          "testing-procedures.md",
+          "training-materials.md",
+          "scripts/README.md"
+        ],
+        "docs": [
+          "architecture.md",
+          "prerequisites.md",
+          "troubleshooting.md"
+        ],
+        "presales": [
+          "executive-presentation-template.md",
+          "requirements-questionnaire.md",
+          "roi-calculator-template.md",
+          "solution-design-template.md"
+        ]
+      }
+    },
+    "cisco/network/sd-wan-enterprise": {
+      "compliant": true,
+      "compliance_score": 18,
+      "total_required": 18,
+      "compliance_percentage": 100.0,
+      "missing_files": {}
+    },
+    "dell/ai/precision-ai-workstation": {
+      "compliant": true,
+      "compliance_score": 18,
+      "total_required": 18,
+      "compliance_percentage": 100.0,
+      "missing_files": {}
+    },
+    "dell/cloud/vxrail-hci": {
+      "compliant": true,
+      "compliance_score": 18,
+      "total_required": 18,
+      "compliance_percentage": 100.0,
+      "missing_files": {}
+    },
+    "dell/cloud/vxrail-hyperconverged": {
+      "compliant": true,
+      "compliance_score": 18,
+      "total_required": 18,
+      "compliance_percentage": 100.0,
+      "missing_files": {}
+    },
+    "dell/cyber-security/safeid-authentication": {
+      "compliant": false,
+      "compliance_score": 5,
+      "total_required": 18,
+      "compliance_percentage": 27.77777777777778,
+      "missing_files": {
+        "delivery": [
+          "README.md",
+          "configuration-templates.md",
+          "implementation-guide.md",
+          "operations-runbook.md",
+          "testing-procedures.md",
+          "training-materials.md",
+          "scripts/README.md"
+        ],
+        "docs": [
+          "architecture.md",
+          "prerequisites.md",
+          "troubleshooting.md"
+        ],
+        "presales": [
+          "business-case-template.md",
+          "executive-presentation-template.md",
+          "solution-design-template.md"
+        ]
+      }
+    },
+    "dell/devops/poweredge-ci-infrastructure": {
+      "compliant": false,
+      "compliance_score": 2,
+      "total_required": 18,
+      "compliance_percentage": 11.11111111111111,
+      "missing_files": {
+        "delivery": [
+          "README.md",
+          "configuration-templates.md",
+          "implementation-guide.md",
+          "operations-runbook.md",
+          "testing-procedures.md",
+          "training-materials.md",
+          "scripts/README.md"
+        ],
+        "docs": [
+          "architecture.md",
+          "prerequisites.md",
+          "troubleshooting.md"
+        ],
+        "presales": [
+          "README.md",
+          "business-case-template.md",
+          "executive-presentation-template.md",
+          "requirements-questionnaire.md",
+          "roi-calculator-template.md",
+          "solution-design-template.md"
+        ]
+      }
+    },
+    "dell/network/powerswitch-datacenter": {
+      "compliant": false,
+      "compliance_score": 2,
+      "total_required": 18,
+      "compliance_percentage": 11.11111111111111,
+      "missing_files": {
+        "delivery": [
+          "README.md",
+          "configuration-templates.md",
+          "implementation-guide.md",
+          "operations-runbook.md",
+          "testing-procedures.md",
+          "training-materials.md",
+          "scripts/README.md"
+        ],
+        "docs": [
+          "architecture.md",
+          "prerequisites.md",
+          "troubleshooting.md"
+        ],
+        "presales": [
+          "README.md",
+          "business-case-template.md",
+          "executive-presentation-template.md",
+          "requirements-questionnaire.md",
+          "roi-calculator-template.md",
+          "solution-design-template.md"
+        ]
+      }
+    },
+    "github/cyber-security/advanced-security": {
+      "compliant": true,
+      "compliance_score": 18,
+      "total_required": 18,
+      "compliance_percentage": 100.0,
+      "missing_files": {}
+    },
+    "github/devops/actions-enterprise-cicd": {
+      "compliant": true,
+      "compliance_score": 18,
+      "total_required": 18,
+      "compliance_percentage": 100.0,
+      "missing_files": {}
+    },
+    "google/cloud/landing-zone": {
+      "compliant": true,
+      "compliance_score": 18,
+      "total_required": 18,
+      "compliance_percentage": 100.0,
+      "missing_files": {}
+    },
+    "google/modern-workspace/workspace": {
+      "compliant": false,
+      "compliance_score": 12,
+      "total_required": 18,
+      "compliance_percentage": 66.66666666666666,
+      "missing_files": {
+        "delivery": [
+          "README.md",
+          "configuration-templates.md",
+          "implementation-guide.md",
+          "operations-runbook.md",
+          "testing-procedures.md",
+          "training-materials.md"
+        ]
+      }
+    },
+    "hashicorp/cloud/multi-cloud-platform": {
+      "compliant": true,
+      "compliance_score": 18,
+      "total_required": 18,
+      "compliance_percentage": 100.0,
+      "missing_files": {}
+    },
+    "hashicorp/devops/terraform-enterprise": {
+      "compliant": true,
+      "compliance_score": 18,
+      "total_required": 18,
+      "compliance_percentage": 100.0,
+      "missing_files": {}
+    },
+    "ibm/cloud/openshift-container-platform": {
+      "compliant": false,
+      "compliance_score": 11,
+      "total_required": 18,
+      "compliance_percentage": 61.111111111111114,
+      "missing_files": {
+        "delivery": [
+          "implementation-guide.md",
+          "operations-runbook.md",
+          "testing-procedures.md",
+          "training-materials.md"
+        ],
+        "docs": [
+          "architecture.md",
+          "prerequisites.md",
+          "troubleshooting.md"
+        ]
+      }
+    },
+    "ibm/devops/ansible-automation-platform": {
+      "compliant": false,
+      "compliance_score": 15,
+      "total_required": 18,
+      "compliance_percentage": 83.33333333333334,
+      "missing_files": {
+        "delivery": [
+          "scripts/README.md"
+        ],
+        "docs": [
+          "prerequisites.md",
+          "troubleshooting.md"
+        ]
+      }
+    },
+    "juniper/cyber-security/srx-firewall-platform": {
+      "compliant": true,
+      "compliance_score": 18,
+      "total_required": 18,
+      "compliance_percentage": 100.0,
+      "missing_files": {}
+    },
+    "juniper/network/mist-ai-network": {
+      "compliant": true,
+      "compliance_score": 18,
+      "total_required": 18,
+      "compliance_percentage": 100.0,
+      "missing_files": {}
+    },
+    "microsoft/cyber-security/cmmc-enclave": {
+      "compliant": true,
+      "compliance_score": 18,
+      "total_required": 18,
+      "compliance_percentage": 100.0,
+      "missing_files": {}
+    },
+    "microsoft/modern-workspace/m365-deployment": {
+      "compliant": true,
+      "compliance_score": 18,
+      "total_required": 18,
+      "compliance_percentage": 100.0,
+      "missing_files": {}
+    },
+    "nvidia/ai/dgx-superpod": {
+      "compliant": false,
+      "compliance_score": 10,
+      "total_required": 18,
+      "compliance_percentage": 55.55555555555556,
+      "missing_files": {
+        "docs": [
+          "architecture.md",
+          "prerequisites.md",
+          "troubleshooting.md"
+        ],
+        "presales": [
+          "README.md",
+          "executive-presentation-template.md",
+          "requirements-questionnaire.md",
+          "roi-calculator-template.md",
+          "solution-design-template.md"
+        ]
+      }
+    },
+    "nvidia/ai-ml/gpu-compute-cluster": {
+      "compliant": true,
+      "compliance_score": 18,
+      "total_required": 18,
+      "compliance_percentage": 100.0,
+      "missing_files": {}
+    },
+    "nvidia/modern-workspace": {
+      "compliant": false,
+      "compliance_score": 3,
+      "total_required": 18,
+      "compliance_percentage": 16.666666666666664,
+      "missing_files": {
+        "delivery": [
+          "README.md",
+          "configuration-templates.md",
+          "implementation-guide.md",
+          "operations-runbook.md",
+          "testing-procedures.md",
+          "training-materials.md",
+          "scripts/README.md"
+        ],
+        "docs": [
+          "architecture.md",
+          "prerequisites.md",
+          "troubleshooting.md"
+        ],
+        "presales": [
+          "README.md",
+          "executive-presentation-template.md",
+          "requirements-questionnaire.md",
+          "roi-calculator-template.md",
+          "solution-design-template.md"
+        ]
+      }
+    },
+    "nvidia/modern-workspace/omniverse-enterprise": {
+      "compliant": false,
+      "compliance_score": 11,
+      "total_required": 18,
+      "compliance_percentage": 61.111111111111114,
+      "missing_files": {
+        "delivery": [
+          "operations-runbook.md",
+          "testing-procedures.md",
+          "training-materials.md",
+          "scripts/README.md"
+        ],
+        "docs": [
+          "architecture.md",
+          "prerequisites.md",
+          "troubleshooting.md"
+        ]
+      }
+    }
+  }
+}

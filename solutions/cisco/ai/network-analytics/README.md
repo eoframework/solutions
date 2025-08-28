@@ -34,9 +34,24 @@ Cisco AI Network Analytics provides intelligent network monitoring and optimizat
 
 ## Documentation Structure
 
-- **Presales**: Business case, requirements, and design templates
-- **Delivery**: Implementation, configuration, and operations guides
-- **Docs**: Architecture, prerequisites, and troubleshooting
+### Presales Documentation
+- **[Business Case Template](presales/business-case-template.md)** - Executive business case and ROI justification
+- **[ROI Calculator Template](presales/roi-calculator-template.md)** - Financial analysis and cost-benefit calculations
+- **[Executive Presentation Template](presales/executive-presentation-template.md)** - C-level presentation materials and talking points
+- **[Requirements Questionnaire](presales/requirements-questionnaire.md)** - Comprehensive discovery questions for stakeholders
+- **[Solution Design Template](presales/solution-design-template.md)** - Technical solution design and architecture documentation
+
+### Delivery Documentation  
+- **[Configuration Templates](delivery/configuration-templates.md)** - Ready-to-use configuration templates for DNA Center, Catalyst Center, and ThousandEyes
+- **[Implementation Guide](delivery/implementation-guide.md)** - Comprehensive step-by-step deployment procedures and best practices
+- **[Operations Runbook](delivery/operations-runbook.md)** - Day-to-day operational procedures, monitoring, and maintenance tasks
+- **[Testing Procedures](delivery/testing-procedures.md)** - Validation methodologies, test scenarios, and acceptance criteria
+- **[Training Materials](delivery/training-materials.md)** - Comprehensive training programs for different user roles and skill levels
+
+### Technical Documentation
+- **[Architecture](docs/architecture.md)** - Complete technical architecture including AI/ML components, data flows, and integration patterns
+- **[Prerequisites](docs/prerequisites.md)** - Technical, infrastructure, skills, and organizational requirements
+- **[Troubleshooting](docs/troubleshooting.md)** - Common issues, systematic troubleshooting procedures, and resolution guides
 
 ---
 
