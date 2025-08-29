@@ -1,0 +1,84 @@
+# Azure Sentinel SIEM - Terraform Variables Example
+# Copy this file to terraform.tfvars and customize values for your deployment
+
+# General Configuration
+resource_group_name = "rg-sentinel-prod-eus2-001"
+location           = "East US 2"
+
+# Tags for resource organization and cost management
+tags = {
+  Environment   = "Production"
+  Solution     = "Azure Sentinel SIEM"
+  CostCenter   = "Security Operations"
+  Owner        = "security-team@company.com"
+  Department   = "Information Security"
+  Project      = "SIEM-2024"
+  Compliance   = "SOC2-PCI-DSS"
+}
+
+# Log Analytics Workspace Configuration
+log_analytics_workspace_name = "law-sentinel-prod-eus2-001"
+log_analytics_sku           = "PerGB2018"
+log_analytics_retention_days = 730    # 2 years retention
+log_analytics_daily_quota_gb = 500    # 500 GB daily quota
+
+# Network Security
+internet_ingestion_enabled = true
+internet_query_enabled     = false   # Use private endpoints for queries
+allowed_ip_ranges         = ["10.0.0.0/8", "172.16.0.0/12", "192.168.0.0/16"]
+enable_private_link       = true
+
+# Security Configuration
+customer_managed_key_enabled = false  # Set to true for enhanced security
+create_key_vault            = true
+key_vault_name             = "kv-sentinel-prod-eus2-001"
+
+# Storage Configuration
+create_storage_account = true
+storage_account_name   = "stsentinelprodeus2001"  # Must be globally unique
+
+# Data Connector Configuration
+enable_aad_connector     = true
+enable_asc_connector     = true
+enable_office365_connector = true
+
+# Office 365 Data Sources
+office365_exchange_enabled   = true
+office365_sharepoint_enabled = true
+office365_teams_enabled      = true
+
+# Sample Content (set to false for production)
+create_sample_rules     = false
+create_sample_automation = false
+
+# Incident Management
+incident_owner_object_id = "12345678-1234-1234-1234-123456789012"  # Replace with actual Azure AD Object ID
+
+# Monitoring and Cost Management
+enable_diagnostic_settings = true
+enable_cost_alerts        = true
+monthly_budget_amount     = 5000  # USD per month
+
+# Example for different environments:
+
+# Development Environment Example:
+# resource_group_name = "rg-sentinel-dev-eus2-001"
+# log_analytics_workspace_name = "law-sentinel-dev-eus2-001"
+# log_analytics_retention_days = 90
+# log_analytics_daily_quota_gb = 50
+# monthly_budget_amount = 1000
+
+# Test Environment Example:
+# resource_group_name = "rg-sentinel-test-eus2-001"
+# log_analytics_workspace_name = "law-sentinel-test-eus2-001"
+# log_analytics_retention_days = 180
+# log_analytics_daily_quota_gb = 100
+# create_sample_rules = true
+# create_sample_automation = true
+
+# High-Security Environment Example:
+# customer_managed_key_enabled = true
+# internet_query_enabled = false
+# enable_private_link = true
+# allowed_ip_ranges = ["10.0.0.0/24", "10.1.0.0/24"]
+# enable_diagnostic_settings = true

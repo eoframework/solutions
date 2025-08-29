@@ -1,0 +1,280 @@
+# Azure Sentinel SIEM - Ansible Playbook
+# Ansible playbook for configuring Azure Sentinel SIEM solution
+
+---
+- name: Configure Azure Sentinel SIEM
+  hosts: localhost
+  gather_facts: false
+  connection: local
+  
+  vars:
+    # Azure Configuration
+    azure_subscription_id: "{{ lookup('env', 'AZURE_SUBSCRIPTION_ID') }}"
+    azure_tenant_id: "{{ lookup('env', 'AZURE_TENANT_ID') }}"
+    azure_client_id: "{{ lookup('env', 'AZURE_CLIENT_ID') }}"
+    azure_client_secret: "{{ lookup('env', 'AZURE_CLIENT_SECRET') }}"
+    
+    # Resource Configuration
+    resource_group_name: "rg-sentinel-prod-eus2-001"
+    location: "East US 2"
+    workspace_name: "law-sentinel-prod-eus2-001"
+    
+    # Analytics Rules Configuration
+    analytics_rules:
+      - name: "Brute Force Attack Detection"
+        display_name: "Multiple Failed Login Attempts"
+        description: "Detects brute force attacks based on failed login attempts"
+        severity: "Medium"
+        query: |
+          SigninLogs
+          | where TimeGenerated >= ago(1h)
+          | where ResultType !in ("0", "50125", "50140")
+          | summarize FailedAttempts = count() by IPAddress, UserPrincipalName
+          | where FailedAttempts >= 10
+        frequency: "PT1H"
+        period: "PT1H"
+        
+      - name: "Suspicious PowerShell Activity"
+        display_name: "Suspicious PowerShell Execution"
+        description: "Detects potentially malicious PowerShell activity"
+        severity: "High"
+        query: |
+          SecurityEvent
+          | where TimeGenerated >= ago(1h)
+          | where EventID == 4688
+          | where Process contains "powershell.exe"
+          | where CommandLine contains "Download" or CommandLine contains "Invoke-"
+        frequency: "PT30M"
+        period: "PT1H"
+    
+    # Watchlists Configuration
+    watchlists:
+      - name: "HighRiskIPs"
+        display_name: "High Risk IP Addresses"
+        description: "Known malicious IP addresses"
+        provider: "SecurityTeam"
+        source: "ThreatIntelligence"
+        
+      - name: "VIPUsers"
+        display_name: "VIP User Accounts"
+        description: "High-privilege user accounts requiring monitoring"
+        provider: "SecurityTeam"
+        source: "ActiveDirectory"
+
+  tasks:
+    - name: Ensure Azure CLI is installed
+      package:
+        name: azure-cli
+        state: present
+      become: yes
+      when: ansible_os_family == "Debian" or ansible_os_family == "RedHat"
+
+    - name: Login to Azure
+      shell: |
+        az login --service-principal \
+          --username {{ azure_client_id }} \
+          --password {{ azure_client_secret }} \
+          --tenant {{ azure_tenant_id }}
+      no_log: true
+      
+    - name: Set Azure subscription
+      shell: az account set --subscription {{ azure_subscription_id }}
+      
+    - name: Verify Azure Sentinel workspace exists
+      shell: |
+        az monitor log-analytics workspace show \
+          --resource-group {{ resource_group_name }} \
+          --workspace-name {{ workspace_name }}
+      register: workspace_check
+      failed_when: workspace_check.rc != 0
+      
+    - name: Get workspace details
+      shell: |
+        az monitor log-analytics workspace show \
+          --resource-group {{ resource_group_name }} \
+          --workspace-name {{ workspace_name }} \
+          --query "{id:id,customerId:customerId}" \
+          --output json
+      register: workspace_details
+      
+    - name: Set workspace facts
+      set_fact:
+        workspace_id: "{{ (workspace_details.stdout | from_json).id }}"
+        workspace_customer_id: "{{ (workspace_details.stdout | from_json).customerId }}"
+        
+    - name: Create analytics rules
+      shell: |
+        az sentinel alert-rule create \
+          --resource-group {{ resource_group_name }} \
+          --workspace-name {{ workspace_name }} \
+          --rule-name "{{ item.name }}" \
+          --display-name "{{ item.display_name }}" \
+          --description "{{ item.description }}" \
+          --severity "{{ item.severity }}" \
+          --query '{{ item.query }}' \
+          --query-frequency "{{ item.frequency }}" \
+          --query-period "{{ item.period }}" \
+          --trigger-operator "GreaterThan" \
+          --trigger-threshold 0 \
+          --enabled true
+      loop: "{{ analytics_rules }}"
+      register: analytics_rule_results
+      failed_when: 
+        - analytics_rule_results.rc != 0
+        - "'already exists' not in analytics_rule_results.stderr"
+        
+    - name: Create threat intelligence watchlists
+      shell: |
+        az sentinel watchlist create \
+          --resource-group {{ resource_group_name }} \
+          --workspace-name {{ workspace_name }} \
+          --watchlist-alias "{{ item.name }}" \
+          --display-name "{{ item.display_name }}" \
+          --description "{{ item.description }}" \
+          --provider "{{ item.provider }}" \
+          --source "{{ item.source }}" \
+          --labels "['ThreatIntelligence', 'SecurityMonitoring']"
+      loop: "{{ watchlists }}"
+      register: watchlist_results
+      failed_when: 
+        - watchlist_results.rc != 0
+        - "'already exists' not in watchlist_results.stderr"
+        
+    - name: Configure data retention settings
+      shell: |
+        az monitor log-analytics workspace update \
+          --resource-group {{ resource_group_name }} \
+          --workspace-name {{ workspace_name }} \
+          --retention-time 730
+          
+    - name: Enable diagnostic settings
+      shell: |
+        az monitor diagnostic-settings create \
+          --name "sentinel-diagnostics" \
+          --resource {{ workspace_id }} \
+          --workspace {{ workspace_id }} \
+          --logs '[
+            {
+              "category": "Audit",
+              "enabled": true,
+              "retentionPolicy": {
+                "enabled": true,
+                "days": 90
+              }
+            }
+          ]'
+      register: diagnostic_result
+      failed_when: 
+        - diagnostic_result.rc != 0
+        - "'already exists' not in diagnostic_result.stderr"
+        
+    - name: Configure workspace permissions
+      shell: |
+        az role assignment create \
+          --assignee-object-id {{ item.object_id }} \
+          --role "{{ item.role }}" \
+          --scope {{ workspace_id }}
+      loop:
+        - { object_id: "{{ azure_client_id }}", role: "Azure Sentinel Contributor" }
+        - { object_id: "{{ azure_client_id }}", role: "Log Analytics Reader" }
+      register: permission_results
+      failed_when: 
+        - permission_results.rc != 0
+        - "'already exists' not in permission_results.stderr"
+        
+    - name: Create automation rules for incident management
+      shell: |
+        az sentinel automation-rule create \
+          --resource-group {{ resource_group_name }} \
+          --workspace-name {{ workspace_name }} \
+          --automation-rule-name "high-severity-auto-assign" \
+          --display-name "Auto-assign High Severity Incidents" \
+          --order 1 \
+          --triggering-logic '{
+            "isEnabled": true,
+            "conditions": [
+              {
+                "conditionType": "Property",
+                "conditionProperties": {
+                  "propertyName": "IncidentSeverity",
+                  "operator": "Equals",
+                  "propertyValues": ["High"]
+                }
+              }
+            ]
+          }' \
+          --actions '[
+            {
+              "order": 1,
+              "actionType": "ModifyProperties",
+              "actionConfiguration": {
+                "status": "Active",
+                "owner": {
+                  "objectId": "{{ azure_client_id }}"
+                }
+              }
+            }
+          ]'
+      register: automation_rule_result
+      failed_when: 
+        - automation_rule_result.rc != 0
+        - "'already exists' not in automation_rule_result.stderr"
+
+    - name: Display deployment summary
+      debug:
+        msg: |
+          Azure Sentinel configuration completed successfully:
+          - Workspace ID: {{ workspace_customer_id }}
+          - Analytics rules created: {{ analytics_rules | length }}
+          - Watchlists configured: {{ watchlists | length }}
+          - Diagnostic settings enabled
+          - Automation rules configured
+          
+    - name: Verify Sentinel workspace is operational
+      uri:
+        url: "https://management.azure.com{{ workspace_id }}/providers/Microsoft.SecurityInsights?api-version=2021-10-01"
+        method: GET
+        headers:
+          Authorization: "Bearer {{ ansible_env.AZURE_ACCESS_TOKEN | default('') }}"
+        validate_certs: yes
+      register: sentinel_check
+      when: ansible_env.AZURE_ACCESS_TOKEN is defined
+      
+    - name: Create post-deployment validation script
+      copy:
+        content: |
+          #!/bin/bash
+          # Azure Sentinel Post-Deployment Validation
+          
+          echo "Validating Azure Sentinel deployment..."
+          
+          # Check workspace status
+          az sentinel workspace show \
+            --resource-group {{ resource_group_name }} \
+            --workspace-name {{ workspace_name }}
+            
+          # List analytics rules
+          echo "Analytics rules:"
+          az sentinel alert-rule list \
+            --resource-group {{ resource_group_name }} \
+            --workspace-name {{ workspace_name }}
+            
+          # Check data connectors
+          echo "Data connectors:"
+          az sentinel data-connector list \
+            --resource-group {{ resource_group_name }} \
+            --workspace-name {{ workspace_name }}
+            
+          echo "Validation completed successfully!"
+        dest: "./validate-sentinel-deployment.sh"
+        mode: '0755'
+        
+    - name: Display next steps
+      debug:
+        msg: |
+          Deployment completed! Next steps:
+          1. Run validation script: ./validate-sentinel-deployment.sh
+          2. Configure additional data connectors as needed
+          3. Import custom analytics rules and workbooks
+          4. Set up incident response playbooks
+          5. Train security analysts on Sentinel usage
