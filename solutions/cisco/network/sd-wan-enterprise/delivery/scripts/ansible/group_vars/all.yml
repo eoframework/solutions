@@ -1,0 +1,172 @@
+---
+# Global variables for Cisco SD-WAN Enterprise deployment
+
+# Deployment Configuration
+deployment:
+  organization: "{{ sdwan_organization | default('ENTERPRISE-SDWAN') }}"
+  domain_id: "{{ sdwan_domain_id | default(1) }}"
+  timeout: 300
+  retry_count: 3
+  backup_enabled: true
+  
+# Network Configuration
+network:
+  control_plane_vrf: "Mgmt-intf"
+  transport_gateway: true
+  nat_transparent: false
+  port_hopping: true
+  control_plane_dscp: 48
+  
+# Security Configuration
+security:
+  ipsec_integrity: "ip-esp"
+  ipsec_encryption: "aes-256-cbc" 
+  ipsec_authentication: "sha256-hmac"
+  certificate_lifetime: 365
+  rekey_timer: 86400
+  
+# Quality of Service
+qos:
+  classes:
+    - name: "voice"
+      bandwidth_percent: 20
+      priority: "strict-priority"
+      dscp: 46
+    - name: "video"
+      bandwidth_percent: 25
+      priority: "priority"  
+      dscp: 34
+    - name: "business-data"
+      bandwidth_percent: 35
+      priority: "guaranteed"
+      dscp: 26
+    - name: "best-effort"
+      bandwidth_percent: 20
+      priority: "best-effort"
+      dscp: 0
+      
+# Application Awareness
+applications:
+  custom_apps:
+    - name: "ERP-System"
+      server_ip: "10.100.1.50"
+      port: 8080
+      protocol: "tcp"
+      dscp: 26
+    - name: "CRM-Database"
+      server_ip: "10.100.1.51"
+      port: 1521
+      protocol: "tcp"
+      dscp: 34
+      
+# Monitoring and Analytics
+monitoring:
+  netflow_enabled: true
+  cflowd_template_timeout: 60
+  flow_export_interval: 60
+  sla_classes:
+    - name: "VOICE"
+      loss_threshold: 1
+      latency_threshold: 150
+      jitter_threshold: 30
+    - name: "VIDEO"
+      loss_threshold: 3
+      latency_threshold: 400
+      jitter_threshold: 50
+    - name: "DATA"
+      loss_threshold: 10
+      latency_threshold: 1000
+      jitter_threshold: 100
+      
+# High Availability  
+high_availability:
+  bfd_enabled: true
+  bfd_hello_interval: 60000
+  bfd_detect_multiplier: 3
+  graceful_restart: true
+  graceful_restart_timer: 120
+  
+# DNS Configuration
+dns:
+  primary: "8.8.8.8"
+  secondary: "8.8.4.4"
+  domain_name: "enterprise.local"
+  
+# NTP Configuration  
+ntp:
+  servers:
+    - "pool.ntp.org"
+    - "time.google.com"
+  timezone: "UTC"
+  
+# SNMP Configuration
+snmp:
+  enabled: true
+  version: "v3"
+  community: "public"
+  location: "Enterprise Data Center"
+  contact: "network-ops@enterprise.com"
+  
+# Syslog Configuration
+syslog:
+  servers:
+    - server: "10.100.1.100"
+      vpn: 0
+      source_interface: "mgmt0"
+      priority: "informational"
+    - server: "10.100.1.101"
+      vpn: 0  
+      source_interface: "mgmt0"
+      priority: "warning"
+      
+# Interface Templates
+interface_templates:
+  wan_interface:
+    mtu: 1500
+    tcp_mss_adjust: 1380
+    clear_dont_fragment: true
+    pmtu_discovery: true
+    
+  lan_interface:
+    mtu: 1500
+    duplex: "full"
+    speed: "auto"
+    
+# Routing Configuration
+routing:
+  ospf:
+    areas:
+      - area_id: 0
+        area_type: "standard"
+        networks:
+          - "192.168.0.0/16"
+    redistribute:
+      - protocol: "connected"
+        route_map: "CONNECTED-ROUTES"
+      - protocol: "static"
+        route_map: "STATIC-ROUTES"
+        
+  bgp:
+    local_as: 65001
+    router_id: "auto"
+    graceful_restart: true
+    
+# Firewall Rules
+firewall:
+  zones:
+    - name: "LAN_ZONE"
+      interfaces: ["GigabitEthernet0/0/2"]
+    - name: "WAN_ZONE" 
+      interfaces: ["GigabitEthernet0/0/0", "GigabitEthernet0/0/1"]
+  
+  policies:
+    - name: "LAN_TO_WAN"
+      from_zone: "LAN_ZONE"
+      to_zone: "WAN_ZONE"
+      action: "accept"
+      logging: true
+    - name: "WAN_TO_LAN"
+      from_zone: "WAN_ZONE"
+      to_zone: "LAN_ZONE"
+      action: "drop"
+      logging: true

@@ -27,11 +27,14 @@ Operational procedures for day-to-day management:
 
 ### [Scripts Directory](scripts/)
 Automation scripts for deployment and management:
-- **Terraform**: Infrastructure as Code for Azure Government deployment
+- **Terraform**: Infrastructure as Code for Azure Government deployment with CMMC compliance framework integration
 - **PowerShell**: Windows-based automation and configuration scripts
 - **Python**: Data processing and integration automation
 - **Bash**: Linux-based deployment and management scripts
 - **Ansible**: Configuration management and orchestration playbooks
+
+**Key Configuration File**:
+- **`scripts/terraform/cmmc-compliance-framework.yml`** - Comprehensive CMMC Level 2 control mappings, Azure service requirements, data classification levels, and deployment configurations automatically loaded by Terraform to ensure compliance with NIST SP 800-171 Rev. 2 requirements.
 
 ### [Testing Procedures](testing-procedures.md)
 Comprehensive testing methodologies and validation procedures:

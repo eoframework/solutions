@@ -1,0 +1,51 @@
+# AWS On-Premise to Cloud Migration - Example Terraform Variables
+# Copy this file to terraform.tfvars and customize the values
+
+# AWS Configuration
+aws_region = "us-east-1"
+environment = "prod"
+
+# Project Configuration
+project_name = "onpremise-cloud-migration"
+migration_data_bucket_name = "your-company-migration-data-prod-20240101"
+
+# Network Configuration
+vpc_id = "vpc-xxxxxxxxx"
+vpc_cidr = "10.0.0.0/16"
+subnet_ids = ["subnet-xxxxxxxxx", "subnet-yyyyyyyyy"]
+on_premise_ip_ranges = ["192.168.0.0/16", "172.16.0.0/12"]
+
+# Migration Features
+enable_database_migration = true
+enable_file_migration = true
+enable_server_migration = true
+
+# Database Migration Configuration
+source_database_engine = "oracle"
+target_database_engine = "aurora-postgresql"
+migration_type = "full-load-and-cdc"
+
+# DMS Configuration
+dms_instance_class = "dms.r5.large"
+dms_allocated_storage = 500
+dms_engine_version = "3.4.7"
+dms_multi_az = true
+replication_instance_multi_az = true
+
+# Monitoring and Compliance
+enable_cloudtrail = true
+enable_config = true
+log_retention_days = 90
+notification_email = "migration-team@company.com"
+
+# Resource Tags
+default_tags = {
+  Project      = "onpremise-cloud-migration"
+  Environment  = "prod"
+  Owner        = "platform-team"
+  ManagedBy    = "terraform"
+  CostCenter   = "infrastructure"
+  Compliance   = "sox"
+  BusinessUnit = "it"
+  MigrationWave = "wave-1"
+}

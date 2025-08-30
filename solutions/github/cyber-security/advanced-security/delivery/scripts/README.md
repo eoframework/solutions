@@ -5,21 +5,16 @@ This directory contains security automation scripts for deploying and managing t
 
 ## Script Categories
 
-### Python Security Scripts
-- **security_automation.py**: Main security automation and monitoring script
-- **requirements.txt**: Python dependencies for security automation
+### Python Security Scripts (Primary)
+- **security_automation.py**: Main GitHub Advanced Security API integration and automation
+- **requirements.txt**: Python dependencies for GitHub API and security integrations
+- Handles: GitHub REST/GraphQL API calls, SIEM integrations, compliance reporting, advanced security workflows
 
-### Bash Security Scripts
-- **security_setup.sh**: Linux/macOS security configuration script
+### Bash Scripts (Secondary)
+- **deploy.sh**: GitHub CLI-based configuration and setup automation
+- Handles: GitHub CLI operations, environment setup, CI/CD pipeline integration, simple configuration tasks
 
-### PowerShell Security Scripts
-- **Security-Setup.ps1**: Windows PowerShell security configuration script
-
-### Terraform Security Infrastructure
-- **security_infrastructure.tf**: Security infrastructure as code deployment
-
-### Ansible Security Playbooks
-- **security_playbook.yml**: Security configuration management automation
+**Note**: This solution uses Python as the primary automation method due to its superior GitHub API integration capabilities and security automation features. Bash provides complementary CLI-based operations. Other script types (Terraform, PowerShell, Ansible) were removed as they are not optimal for GitHub Advanced Security configuration, which is API-driven rather than infrastructure-based.
 
 ## Security Features
 

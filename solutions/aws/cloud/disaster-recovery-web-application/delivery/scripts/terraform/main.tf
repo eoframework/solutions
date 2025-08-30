@@ -640,3 +640,273 @@ resource "aws_autoscaling_group" "secondary" {
     propagate_at_launch = false
   }
 }
+
+# IAM Roles and Policies
+resource "aws_iam_role" "rds_monitoring" {
+  name = "${var.project_name}-rds-monitoring-role"
+
+  assume_role_policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Action = "sts:AssumeRole"
+        Effect = "Allow"
+        Principal = {
+          Service = "monitoring.rds.amazonaws.com"
+        }
+      }
+    ]
+  })
+
+  tags = {
+    Name = "${var.project_name}-rds-monitoring-role"
+  }
+}
+
+resource "aws_iam_role_policy_attachment" "rds_monitoring" {
+  role       = aws_iam_role.rds_monitoring.name
+  policy_arn = "arn:aws:iam::aws:policy/service-role/AmazonRDSEnhancedMonitoringRole"
+}
+
+resource "aws_iam_role" "s3_replication" {
+  name = "${var.project_name}-s3-replication-role"
+
+  assume_role_policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Action = "sts:AssumeRole"
+        Effect = "Allow"
+        Principal = {
+          Service = "s3.amazonaws.com"
+        }
+      }
+    ]
+  })
+
+  tags = {
+    Name = "${var.project_name}-s3-replication-role"
+  }
+}
+
+resource "aws_iam_policy" "s3_replication" {
+  name = "${var.project_name}-s3-replication-policy"
+
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Effect = "Allow"
+        Action = [
+          "s3:GetObjectVersionForReplication",
+          "s3:GetObjectVersionAcl"
+        ]
+        Resource = "${aws_s3_bucket.primary.arn}/*"
+      },
+      {
+        Effect = "Allow"
+        Action = [
+          "s3:ListBucket"
+        ]
+        Resource = aws_s3_bucket.primary.arn
+      },
+      {
+        Effect = "Allow"
+        Action = [
+          "s3:ReplicateObject",
+          "s3:ReplicateDelete"
+        ]
+        Resource = "${aws_s3_bucket.secondary.arn}/*"
+      }
+    ]
+  })
+}
+
+resource "aws_iam_role_policy_attachment" "s3_replication" {
+  role       = aws_iam_role.s3_replication.name
+  policy_arn = aws_iam_policy.s3_replication.arn
+}
+
+# KMS Key for encryption
+resource "aws_kms_key" "main" {
+  description             = "KMS key for ${var.project_name} disaster recovery"
+  deletion_window_in_days = 7
+
+  tags = {
+    Name = "${var.project_name}-kms-key"
+  }
+}
+
+resource "aws_kms_alias" "main" {
+  name          = "alias/${var.project_name}-key"
+  target_key_id = aws_kms_key.main.key_id
+}
+
+# CloudWatch Log Group
+resource "aws_cloudwatch_log_group" "app_logs" {
+  name              = "/aws/ec2/${var.project_name}"
+  retention_in_days = var.cloudwatch_log_retention
+
+  tags = {
+    Name = "${var.project_name}-log-group"
+  }
+}
+
+# SNS Topic for notifications
+resource "aws_sns_topic" "alerts" {
+  name = "${var.project_name}-alerts"
+
+  tags = {
+    Name = "${var.project_name}-sns-topic"
+  }
+}
+
+resource "aws_sns_topic_subscription" "email" {
+  count     = var.notification_email != "" ? 1 : 0
+  topic_arn = aws_sns_topic.alerts.arn
+  protocol  = "email"
+  endpoint  = var.notification_email
+}
+
+# AWS Backup
+resource "aws_backup_vault" "main" {
+  name        = "${var.project_name}-backup-vault"
+  kms_key_arn = aws_kms_key.main.arn
+
+  tags = {
+    Name = "${var.project_name}-backup-vault"
+  }
+}
+
+resource "aws_backup_plan" "main" {
+  name = "${var.project_name}-backup-plan"
+
+  rule {
+    rule_name         = "daily_backups"
+    target_vault_name = aws_backup_vault.main.name
+    schedule          = "cron(0 5 ? * * *)"  # Daily at 5 AM UTC
+
+    recovery_point_tags = {
+      Name = "${var.project_name}-backup"
+    }
+
+    lifecycle {
+      cold_storage_after = 30
+      delete_after       = 120
+    }
+
+    copy_action {
+      destination_vault_arn = "arn:aws:backup:${var.secondary_region}:${data.aws_caller_identity.current.account_id}:backup-vault:${var.project_name}-backup-vault-dr"
+
+      lifecycle {
+        cold_storage_after = 30
+        delete_after       = 120
+      }
+    }
+  }
+
+  tags = {
+    Name = "${var.project_name}-backup-plan"
+  }
+}
+
+# CloudFront Distribution
+resource "aws_cloudfront_distribution" "main" {
+  origin {
+    domain_name = aws_lb.primary.dns_name
+    origin_id   = "primary-alb"
+
+    custom_origin_config {
+      http_port              = 80
+      https_port             = 443
+      origin_protocol_policy = "http-only"
+      origin_ssl_protocols   = ["TLSv1.2"]
+    }
+  }
+
+  enabled             = true
+  is_ipv6_enabled     = true
+  default_root_object = "index.html"
+
+  default_cache_behavior {
+    allowed_methods  = ["DELETE", "GET", "HEAD", "OPTIONS", "PATCH", "POST", "PUT"]
+    cached_methods   = ["GET", "HEAD"]
+    target_origin_id = "primary-alb"
+
+    forwarded_values {
+      query_string = false
+
+      cookies {
+        forward = "none"
+      }
+    }
+
+    viewer_protocol_policy = "redirect-to-https"
+    min_ttl                = 0
+    default_ttl            = 3600
+    max_ttl                = 86400
+  }
+
+  price_class = "PriceClass_100"
+
+  restrictions {
+    geo_restriction {
+      restriction_type = "none"
+    }
+  }
+
+  viewer_certificate {
+    cloudfront_default_certificate = true
+  }
+
+  tags = {
+    Name = "${var.project_name}-cloudfront"
+  }
+}
+
+# CloudWatch Alarms
+resource "aws_cloudwatch_metric_alarm" "high_cpu_primary" {
+  provider = aws.primary
+  
+  alarm_name          = "${var.project_name}-high-cpu-primary"
+  comparison_operator = "GreaterThanThreshold"
+  evaluation_periods  = "2"
+  metric_name         = "CPUUtilization"
+  namespace           = "AWS/EC2"
+  period              = "120"
+  statistic           = "Average"
+  threshold           = "80"
+  alarm_description   = "This metric monitors ec2 cpu utilization in primary region"
+  alarm_actions       = [aws_sns_topic.alerts.arn]
+
+  dimensions = {
+    AutoScalingGroupName = aws_autoscaling_group.primary.name
+  }
+
+  tags = {
+    Name = "${var.project_name}-high-cpu-primary"
+  }
+}
+
+resource "aws_cloudwatch_metric_alarm" "database_cpu_primary" {
+  provider = aws.primary
+  
+  alarm_name          = "${var.project_name}-database-cpu-primary"
+  comparison_operator = "GreaterThanThreshold"
+  evaluation_periods  = "2"
+  metric_name         = "CPUUtilization"
+  namespace           = "AWS/RDS"
+  period              = "120"
+  statistic           = "Average"
+  threshold           = "80"
+  alarm_description   = "This metric monitors RDS cpu utilization in primary region"
+  alarm_actions       = [aws_sns_topic.alerts.arn]
+
+  dimensions = {
+    DBInstanceIdentifier = aws_db_instance.primary.id
+  }
+
+  tags = {
+    Name = "${var.project_name}-database-cpu-primary"
+  }
+}

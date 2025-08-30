@@ -40,32 +40,27 @@ provider "azuread" {
 # Local values
 locals {
   # Common tags for CMMC compliance
-  common_tags = {
-    Environment           = var.environment
-    Project              = var.project_name
-    Solution             = "Microsoft CMMC Enclave"
-    "CMMC-Level"         = "Level-2"
-    "Data-Classification" = "CUI"
-    "Compliance-Framework" = "NIST-SP-800-171"
-    CreatedBy            = "Terraform"
-    Owner                = var.resource_owner
-    CostCenter           = var.cost_center
-    "Security-Classification" = var.security_classification
-  }
+  common_tags = merge(
+    {
+      Environment           = var.environment
+      Project              = var.project_name
+      Solution             = "Microsoft CMMC Enclave"
+      "CMMC-Level"         = "Level-${local.cmmc_framework.cmmc_framework.level}"
+      "Data-Classification" = var.security_classification
+      "Compliance-Framework" = "NIST-SP-800-171"
+      CreatedBy            = "Terraform"
+      Owner                = var.resource_owner
+      CostCenter           = var.cost_center
+      "Security-Classification" = var.security_classification
+    },
+    local.cmmc_framework.deployment_config.environment_tags
+  )
   
   # CMMC resource naming convention
   resource_prefix = "${var.project_name}-${var.environment}-cmmc"
   
-  # CUI data classification labels
-  cui_labels = [
-    "Public",
-    "Internal", 
-    "General",
-    "Confidential",
-    "Highly Confidential",
-    "CUI",
-    "CUI//SP"
-  ]
+  # CUI data classification labels from compliance framework
+  cui_labels = [for classification in local.cmmc_framework.cui_classifications : classification.marking]
 }
 
 # Data sources
@@ -73,6 +68,11 @@ data "azurerm_client_config" "current" {}
 
 data "azuread_domains" "default" {
   only_initial = true
+}
+
+# Load CMMC compliance framework configuration
+locals {
+  cmmc_framework = yamldecode(file(var.cmmc_framework_config_path))
 }
 
 # Random resources for unique naming
@@ -339,7 +339,7 @@ resource "azurerm_log_analytics_workspace" "cmmc_logs" {
   location            = azurerm_resource_group.cmmc_security.location
   resource_group_name = azurerm_resource_group.cmmc_security.name
   sku                 = "PerGB2018"
-  retention_in_days   = var.log_retention_days
+  retention_in_days   = local.cmmc_framework.deployment_config.retention_policies.audit_logs
   
   tags = merge(local.common_tags, {
     Purpose = "CMMC Audit and Logging"

@@ -6,10 +6,13 @@ This directory contains comprehensive automation scripts for deploying, configur
 
 ### [Terraform](terraform/)
 Infrastructure as Code (IaC) for Azure Government deployment:
-- **main.tf**: Complete infrastructure deployment
+- **main.tf**: Complete infrastructure deployment with CMMC compliance integration
 - **variables.tf**: Configurable parameters for customization
 - **outputs.tf**: Resource references and connection information
 - **terraform.tfvars.example**: Sample configuration values
+- **cmmc-compliance-framework.yml**: CMMC Level 2 control mappings and deployment configuration
+
+**Configuration Refactoring**: The CMMC compliance framework configuration has been refactored from the unauthorized `configs/` directory into the proper `scripts/terraform/` location. This ensures seamless deployment while maintaining compliance standards.
 
 ### [PowerShell](powershell/)
 Windows-based automation and configuration scripts:

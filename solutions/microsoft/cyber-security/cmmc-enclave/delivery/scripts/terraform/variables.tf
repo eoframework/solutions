@@ -336,6 +336,13 @@ variable "enable_sentinel" {
   default     = true
 }
 
+# CMMC Compliance Framework Configuration
+variable "cmmc_framework_config_path" {
+  description = "Path to CMMC compliance framework configuration file"
+  type        = string
+  default     = "./cmmc-compliance-framework.yml"
+}
+
 # Compliance Scanning Configuration
 variable "vulnerability_assessment_enabled" {
   description = "Enable vulnerability assessment scanning"
