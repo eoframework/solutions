@@ -1,36 +1,20 @@
 version: '2.0'
 category: cloud
-generated_at: '2025-08-31T09:19:40.211881'
+generated_at: '2025-08-31T14:27:25.405080'
 catalog_type: category
 metadata:
   category_name: Cloud Infrastructure
   description: Cloud infrastructure and platform solutions
   total_solutions: 7
-  last_updated: '2025-08-31T09:19:40.211917'
+  last_updated: '2025-08-31T14:27:25.405093'
   auto_generated: true
 providers:
-  aws:
+  hashicorp:
     solutions:
-    - name: disaster-recovery-web-application
-      title: Disaster Recovery Web Application
-      provider_catalog: ../providers/aws.yml
-      solution_path: ../../solutions/aws/cloud/disaster-recovery-web-application/
-    - name: onpremise-to-cloud-migration
-      title: Onpremise To Cloud Migration
-      provider_catalog: ../providers/aws.yml
-      solution_path: ../../solutions/aws/cloud/onpremise-to-cloud-migration/
-  azure:
-    solutions:
-    - name: enterprise-landing-zone
-      title: Enterprise Landing Zone
-      provider_catalog: ../providers/azure.yml
-      solution_path: ../../solutions/azure/cloud/enterprise-landing-zone/
-  cisco:
-    solutions:
-    - name: hybrid-infrastructure
-      title: Hybrid Infrastructure
-      provider_catalog: ../providers/cisco.yml
-      solution_path: ../../solutions/cisco/cloud/hybrid-infrastructure/
+    - name: multi-cloud-platform
+      title: Multi Cloud Platform
+      provider_catalog: ../providers/hashicorp.yml
+      solution_path: ../../solutions/hashicorp/cloud/multi-cloud-platform/
   dell:
     solutions:
     - name: vxrail-hci
@@ -47,15 +31,31 @@ providers:
       title: Landing Zone
       provider_catalog: ../providers/google.yml
       solution_path: ../../solutions/google/cloud/landing-zone/
-  hashicorp:
+  azure:
     solutions:
-    - name: multi-cloud-platform
-      title: Multi Cloud Platform
-      provider_catalog: ../providers/hashicorp.yml
-      solution_path: ../../solutions/hashicorp/cloud/multi-cloud-platform/
+    - name: enterprise-landing-zone
+      title: Enterprise Landing Zone
+      provider_catalog: ../providers/azure.yml
+      solution_path: ../../solutions/azure/cloud/enterprise-landing-zone/
+  aws:
+    solutions:
+    - name: disaster-recovery-web-application
+      title: Disaster Recovery Web Application
+      provider_catalog: ../providers/aws.yml
+      solution_path: ../../solutions/aws/cloud/disaster-recovery-web-application/
+    - name: onpremise-to-cloud-migration
+      title: Onpremise To Cloud Migration
+      provider_catalog: ../providers/aws.yml
+      solution_path: ../../solutions/aws/cloud/onpremise-to-cloud-migration/
   ibm:
     solutions:
     - name: openshift-container-platform
       title: Openshift Container Platform
       provider_catalog: ../providers/ibm.yml
       solution_path: ../../solutions/ibm/cloud/openshift-container-platform/
+  cisco:
+    solutions:
+    - name: hybrid-infrastructure
+      title: Hybrid Infrastructure
+      provider_catalog: ../providers/cisco.yml
+      solution_path: ../../solutions/cisco/cloud/hybrid-infrastructure/

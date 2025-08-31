@@ -1,45 +1,45 @@
 version: '2.0'
 category: ai
-generated_at: '2025-08-31T09:19:40.197859'
+generated_at: '2025-08-31T14:27:25.417379'
 catalog_type: category
 metadata:
   category_name: Artificial Intelligence
   description: Artificial Intelligence and Machine Learning solutions
   total_solutions: 5
-  last_updated: '2025-08-31T09:19:40.197903'
+  last_updated: '2025-08-31T14:27:25.417390'
   auto_generated: true
 providers:
-  aws:
+  nvidia:
     solutions:
-    - name: intelligent-document-processing
-      title: Intelligent Document Processing
-      provider_catalog: ../providers/aws.yml
-      solution_path: ../../solutions/aws/ai/intelligent-document-processing/
-  azure:
-    solutions:
-    - name: document-intelligence
-      title: Document Intelligence
-      provider_catalog: ../providers/azure.yml
-      solution_path: ../../solutions/azure/ai/document-intelligence/
-  cisco:
-    solutions:
-    - name: network-analytics
-      title: Network Analytics
-      provider_catalog: ../providers/cisco.yml
-      solution_path: ../../solutions/cisco/ai/network-analytics/
+    - name: gpu-compute-cluster
+      title: Gpu Compute Cluster
+      provider_catalog: ../providers/nvidia.yml
+      solution_path: ../../solutions/nvidia/ai/gpu-compute-cluster/
+    - name: dgx-superpod
+      title: Dgx Superpod
+      provider_catalog: ../providers/nvidia.yml
+      solution_path: ../../solutions/nvidia/ai/dgx-superpod/
   dell:
     solutions:
     - name: precision-ai-workstation
       title: Precision Ai Workstation
       provider_catalog: ../providers/dell.yml
       solution_path: ../../solutions/dell/ai/precision-ai-workstation/
-  nvidia:
+  azure:
     solutions:
-    - name: dgx-superpod
-      title: Dgx Superpod
-      provider_catalog: ../providers/nvidia.yml
-      solution_path: ../../solutions/nvidia/ai/dgx-superpod/
-    - name: gpu-compute-cluster
-      title: Gpu Compute Cluster
-      provider_catalog: ../providers/nvidia.yml
-      solution_path: ../../solutions/nvidia/ai/gpu-compute-cluster/
+    - name: document-intelligence
+      title: Document Intelligence
+      provider_catalog: ../providers/azure.yml
+      solution_path: ../../solutions/azure/ai/document-intelligence/
+  aws:
+    solutions:
+    - name: intelligent-document-processing
+      title: Intelligent Document Processing
+      provider_catalog: ../providers/aws.yml
+      solution_path: ../../solutions/aws/ai/intelligent-document-processing/
+  cisco:
+    solutions:
+    - name: network-analytics
+      title: Network Analytics
+      provider_catalog: ../providers/cisco.yml
+      solution_path: ../../solutions/cisco/ai/network-analytics/

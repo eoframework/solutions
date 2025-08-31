@@ -1,44 +1,13 @@
 version: '2.0'
 provider: cisco
-generated_at: '2025-08-31T09:19:39.990348'
+generated_at: '2025-08-31T14:27:25.391497'
 catalog_type: provider
 metadata:
   provider_name: Cisco Systems
   total_solutions: 5
-  last_updated: '2025-08-31T09:19:39.990401'
+  last_updated: '2025-08-31T14:27:25.391510'
   auto_generated: true
 categories:
-  ai:
-    solutions:
-      network-analytics:
-        provider: CISCO
-        category: ai
-        solution_name: Network Analytics
-        description: Network Analytics solution for CISCO
-        version: 1.0.0
-        status: Active
-        maintainers:
-        - name: "EO Framework\u2122 Cisco Solutions Team"
-          email: cisco-solutions@eoframework.com
-          role: Network Solutions Architect
-        tags:
-        - network
-        - ai
-        - analytics
-        - cisco
-        requirements:
-          prerequisites:
-          - CISCO Account
-          - Administrative Access
-          tools:
-          - Python 3.8+
-          - Ansible
-          skills:
-          - CISCO Platform
-          - Solution Architecture
-          - Network Infrastructure
-        solution_path: ../../solutions/cisco/ai/network-analytics/
-        title: Network Analytics
   cloud:
     solutions:
       hybrid-infrastructure:
@@ -70,6 +39,36 @@ categories:
           - Network Infrastructure
         solution_path: ../../solutions/cisco/cloud/hybrid-infrastructure/
         title: Hybrid Infrastructure
+  network:
+    solutions:
+      sd-wan-enterprise:
+        provider: CISCO
+        category: network
+        solution_name: Sd Wan Enterprise
+        description: Sd Wan Enterprise solution for CISCO
+        version: 1.0.0
+        status: Active
+        maintainers:
+        - name: "EO Framework\u2122 Cisco Solutions Team"
+          email: cisco-solutions@eoframework.com
+          role: Network Solutions Architect
+        tags:
+        - network
+        - enterprise
+        - cisco
+        requirements:
+          prerequisites:
+          - CISCO Account
+          - Administrative Access
+          tools:
+          - Python 3.8+
+          - Ansible
+          skills:
+          - CISCO Platform
+          - Solution Architecture
+          - Network Infrastructure
+        solution_path: ../../solutions/cisco/network/sd-wan-enterprise/
+        title: Sd Wan Enterprise
   cyber-security:
     solutions:
       secure-access:
@@ -101,6 +100,37 @@ categories:
           - Network Infrastructure
         solution_path: ../../solutions/cisco/cyber-security/secure-access/
         title: Secure Access
+  ai:
+    solutions:
+      network-analytics:
+        provider: CISCO
+        category: ai
+        solution_name: Network Analytics
+        description: Network Analytics solution for CISCO
+        version: 1.0.0
+        status: Active
+        maintainers:
+        - name: "EO Framework\u2122 Cisco Solutions Team"
+          email: cisco-solutions@eoframework.com
+          role: Network Solutions Architect
+        tags:
+        - network
+        - ai
+        - analytics
+        - cisco
+        requirements:
+          prerequisites:
+          - CISCO Account
+          - Administrative Access
+          tools:
+          - Python 3.8+
+          - Ansible
+          skills:
+          - CISCO Platform
+          - Solution Architecture
+          - Network Infrastructure
+        solution_path: ../../solutions/cisco/ai/network-analytics/
+        title: Network Analytics
   devops:
     solutions:
       ci-cd-automation:
@@ -131,33 +161,3 @@ categories:
           - Network Infrastructure
         solution_path: ../../solutions/cisco/devops/ci-cd-automation/
         title: Ci Cd Automation
-  network:
-    solutions:
-      sd-wan-enterprise:
-        provider: CISCO
-        category: network
-        solution_name: Sd Wan Enterprise
-        description: Sd Wan Enterprise solution for CISCO
-        version: 1.0.0
-        status: Active
-        maintainers:
-        - name: "EO Framework\u2122 Cisco Solutions Team"
-          email: cisco-solutions@eoframework.com
-          role: Network Solutions Architect
-        tags:
-        - network
-        - enterprise
-        - cisco
-        requirements:
-          prerequisites:
-          - CISCO Account
-          - Administrative Access
-          tools:
-          - Python 3.8+
-          - Ansible
-          skills:
-          - CISCO Platform
-          - Solution Architecture
-          - Network Infrastructure
-        solution_path: ../../solutions/cisco/network/sd-wan-enterprise/
-        title: Sd Wan Enterprise
