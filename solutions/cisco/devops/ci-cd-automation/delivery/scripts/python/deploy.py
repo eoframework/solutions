@@ -2,6 +2,9 @@
 """
 Cisco/Devops/Ci Cd Automation - Deployment Automation
 
+Copyright (c) 2025 EO Framework™
+Licensed under BSL 1.1 - see LICENSE file for details
+
 This script provides comprehensive automation for deploying and configuring
 the cisco/devops/ci cd automation solution.
 """

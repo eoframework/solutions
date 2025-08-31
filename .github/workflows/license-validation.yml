@@ -26,14 +26,15 @@ jobs:
           
           echo "✅ LICENSE file is valid"
       
-      - name: Check license headers in code files
+      - name: Check license headers in core framework files
         run: |
-          # Check for short license headers in code files
+          # Check for short license headers in core framework files only
+          # Template files in solutions/ are meant to be customized by users
           missing_license=()
           
           while IFS= read -r -d '' file; do
-            # Skip master template files and generated files
-            if [[ "$file" == *"master-template"* ]] || [[ "$file" == *"support/exports"* ]] || [[ "$file" == *"support/reports"* ]]; then
+            # Skip master template files, generated files, and solution templates
+            if [[ "$file" == *"master-template"* ]] || [[ "$file" == *"support/exports"* ]] || [[ "$file" == *"support/reports"* ]] || [[ "$file" == *"solutions/"* ]]; then
               continue
             fi
             
@@ -48,7 +49,7 @@ jobs:
           done < <(find . -type f \( -name "*.py" -o -name "*.sh" -o -name "*.ps1" -o -name "*.tf" \) -not -path "./.git/*" -print0)
           
           if [ ${#missing_license[@]} -gt 0 ]; then
-            echo "❌ Files missing license headers:"
+            echo "❌ Core framework files missing license headers:"
             printf '%s\n' "${missing_license[@]}"
             echo ""
             echo "Please add a short license header like:"
@@ -56,5 +57,5 @@ jobs:
             echo "# Licensed under BSL 1.1 - see LICENSE file for details"
             exit 1
           else
-            echo "✅ All code files have proper license headers"
+            echo "✅ All core framework files have proper license headers"
           fi

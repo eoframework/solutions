@@ -1,4 +1,6 @@
 #!/bin/bash
+# Copyright (c) 2025 EO Framework™
+# Licensed under BSL 1.1 - see LICENSE file for details
 
 # Cisco AI Network Analytics Platform Deployment Script
 # Automated deployment and configuration of Cisco AI-powered network analytics
