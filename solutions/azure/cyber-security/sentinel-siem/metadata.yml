@@ -1,44 +1,27 @@
-name: "Azure Sentinel SIEM Solution"
-description: "Cloud-native SIEM with AI-powered analytics and automated threat response"
-provider: "azure"
-category: "cyber-security"
-solution_type: "sentinel-siem"
-version: "1.0"
-license: "BSL-1.1"
-
-metadata:
-  industry_focus:
-    - "Enterprise"
-    - "Financial Services"
-    - "Government"
-    - "Healthcare"
-    - "Technology"
-  
-  use_cases:
-    - "SOC modernization"
-    - "Multi-cloud security monitoring"
-    - "Compliance reporting"
-    - "Advanced threat hunting"
-  
-  technologies:
-    - "Azure Sentinel"
-    - "Log Analytics"
-    - "Azure Logic Apps"
-    - "Microsoft Graph Security"
-  
-  business_benefits:
-    - "50% faster threat detection"
-    - "40% reduction in security costs"
-    - "Petabytes of security data scale"
-    - "80% automated incident response"
-
-technical_specs:
-  deployment_model: "Cloud-native Azure"
-  scalability: "Petabyte-scale data ingestion"
-  availability: "99.9%"
-  ai_capabilities: "Machine learning analytics"
-
-cost_model:
-  implementation: "$200,000 - $2,000,000"
-  monthly_operational: "$25,000 - $250,000"
-  roi_timeframe: "8-15 months"
+provider: AZURE
+category: cyber-security
+solution_name: Sentinel Siem
+description: Sentinel Siem solution for AZURE
+version: 1.0.0
+status: Active
+maintainers:
+- name: "EO Framework\u2122 Azure Solutions Team"
+  email: azure-solutions@eoframework.com
+  role: Cloud Solutions Architect
+tags:
+- azure
+- sentinel
+- siem
+- cyber-security
+requirements:
+  prerequisites:
+  - AZURE Account
+  - Administrative Access
+  tools:
+  - Python 3.8+
+  - Azure CLI
+  - PowerShell
+  skills:
+  - AZURE Platform
+  - Solution Architecture
+  - Azure Services

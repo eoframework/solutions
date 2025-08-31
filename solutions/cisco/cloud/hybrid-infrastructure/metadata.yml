@@ -1,42 +1,26 @@
-name: "Cisco Hybrid Cloud Infrastructure Solution"
-description: "Seamless integration between on-premises and cloud environments"
-provider: "cisco"
-category: "cloud"
-solution_type: "hybrid-infrastructure"
-version: "1.0"
-license: "BSL-1.1"
-
-metadata:
-  industry_focus:
-    - "Enterprise"
-    - "Service Provider"
-    - "Government"
-  
-  use_cases:
-    - "Hybrid cloud connectivity"
-    - "Cloud migration and modernization"
-    - "Multi-cloud management"
-    - "Disaster recovery"
-  
-  technologies:
-    - "Cisco HyperFlex"
-    - "Intersight"
-    - "ACI"
-    - "Workload Optimization Manager"
-  
-  business_benefits:
-    - "60% reduction in cloud complexity"
-    - "5x faster deployment speed"
-    - "80% enhanced security posture"
-    - "40% lower operational costs"
-
-technical_specs:
-  deployment_model: "Hybrid Cloud"
-  scalability: "100-10,000+ workloads"
-  availability: "99.9%"
-  management: "Centralized cloud operations"
-
-cost_model:
-  implementation: "$500,000 - $5,000,000"
-  monthly_operational: "$50,000 - $500,000"
-  roi_timeframe: "12-18 months"
+provider: CISCO
+category: cloud
+solution_name: Hybrid Infrastructure
+description: Hybrid Infrastructure solution for CISCO
+version: 1.0.0
+status: Active
+maintainers:
+- name: "EO Framework\u2122 Cisco Solutions Team"
+  email: cisco-solutions@eoframework.com
+  role: Network Solutions Architect
+tags:
+- cloud
+- infrastructure
+- hybrid
+- cisco
+requirements:
+  prerequisites:
+  - CISCO Account
+  - Administrative Access
+  tools:
+  - Python 3.8+
+  - Ansible
+  skills:
+  - CISCO Platform
+  - Solution Architecture
+  - Network Infrastructure

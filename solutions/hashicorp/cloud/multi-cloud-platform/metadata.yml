@@ -1,117 +1,27 @@
-name: "HashiCorp Multi-Cloud Infrastructure Management Platform"
-version: "1.0"
-provider: "hashicorp"
-category: "cloud"
-subcategory: "multi-cloud-management"
-
-description: "Enterprise multi-cloud infrastructure management platform using HashiCorp's complete product suite for unified cloud operations"
-
+provider: HashiCorp
+category: cloud
+solution_name: Multi Cloud Platform
+description: Multi Cloud Platform solution for HASHICORP
+version: 1.0.0
+status: Active
+maintainers:
+- name: "EO Framework\u2122 HashiCorp Solutions Team"
+  email: hashicorp-solutions@eoframework.com
+  role: Infrastructure Solutions Architect
 tags:
-  - multi-cloud
-  - terraform
-  - consul
-  - vault
-  - nomad
-  - boundary
-  - infrastructure-management
-  - hybrid-cloud
-  - service-mesh
-  - secrets-management
-
-complexity: "enterprise"
-deployment_time: "4-8 weeks"
-maintenance_level: "high"
-
-target_audience:
-  - cloud-architects
-  - platform-engineers
-  - infrastructure-teams
-  - devops-engineers
-  - security-engineers
-
-use_cases:
-  - "Multi-cloud infrastructure management"
-  - "Hybrid cloud orchestration" 
-  - "Enterprise digital transformation"
-  - "Cloud migration and modernization"
-  - "Disaster recovery automation"
-  - "Zero-trust security implementation"
-
-benefits:
-  - "Unified multi-cloud operations"
-  - "Improved security and compliance"
-  - "Reduced vendor lock-in"
-  - "Enhanced disaster recovery capabilities"
-  - "Streamlined operations across clouds"
-
-prerequisites:
-  software:
-    - "Terraform >= 1.5.0"
-    - "Kubernetes clusters on target clouds"
-    - "HashiCorp product licenses"
-    - "SSL certificates"
-  
-  infrastructure:
-    - "Multi-cloud account access"
-    - "Network connectivity between clouds"
-    - "Load balancers and DNS"
-    - "Persistent storage"
-  
-  access:
-    - "HashiCorp Enterprise licenses"
-    - "Administrative cloud access"
-    - "Network and security permissions"
-    - "DNS management capabilities"
-
-supported_platforms:
-  - "AWS"
-  - "Microsoft Azure"
-  - "Google Cloud Platform"
-  - "VMware vSphere"
-  - "OpenStack"
-  - "Kubernetes"
-
-integration_points:
-  - "Cloud Provider APIs (AWS, Azure, GCP)"
-  - "Kubernetes clusters"
-  - "Identity Providers (Active Directory, LDAP)"
-  - "Monitoring Systems (Prometheus, Grafana)"
-  - "CI/CD Pipelines"
-  - "ITSM Tools"
-
-security_features:
-  - "Zero-trust network security"
-  - "Dynamic secrets management"
-  - "Identity-based access control"
-  - "Certificate authority and PKI"
-  - "Audit logging and compliance"
-  - "Policy as code enforcement"
-
-scalability:
-  min_nodes: 6
-  max_nodes: 1000
-  supported_clouds: 5
-  concurrent_workloads: 10000
-
-licensing:
-  type: "commercial"
-  vendor: "HashiCorp"
-  model: "enterprise"
-  products:
-    - "Terraform Enterprise"
-    - "Consul Enterprise"
-    - "Vault Enterprise"
-    - "Nomad Enterprise"
-    - "Boundary Enterprise"
-
-support:
-  documentation: "comprehensive"
-  community: "active"
-  vendor_support: "enterprise"
-  sla_available: true
-
-last_updated: "2024-01-15"
-version_history:
-  - version: "1.0"
-    date: "2024-01-15"
-    changes: "Initial release with complete multi-cloud platform"
+- cloud
+- multi
+- platform
+- hashicorp
+requirements:
+  prerequisites:
+  - HASHICORP Account
+  - Administrative Access
+  tools:
+  - Python 3.8+
+  - Terraform
+  - Vault CLI
+  skills:
+  - HASHICORP Platform
+  - Solution Architecture
+  - Infrastructure as Code

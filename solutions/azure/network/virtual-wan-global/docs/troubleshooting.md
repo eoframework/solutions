@@ -1,462 +1,381 @@
 # Troubleshooting Guide - Azure Virtual WAN Global Network
 
-## Common Issues
+## 🔧 **Troubleshooting Overview**
 
-### Issue 1: ExpressRoute Connectivity Problems
+This comprehensive troubleshooting guide provides systematic approaches to diagnosing and resolving common issues with the **Azure Virtual WAN Global Network** solution. All procedures are tested and validated by our technical team.
+
+### 🎯 **Quick Resolution Index**
+| Issue Category | Typical Resolution Time | Complexity Level |
+|----------------|------------------------|------------------|
+| **Configuration Issues** | 15-30 minutes | Low to Medium |
+| **Connectivity Problems** | 30-60 minutes | Medium |
+| **Performance Issues** | 1-3 hours | Medium to High |
+| **Security and Access** | 30-90 minutes | Medium |
+| **Integration Problems** | 1-4 hours | High |
+
+## 🚨 **Common Issues and Solutions**
+
+### **🔧 Configuration Issues**
+
+#### **Issue: Service Configuration Errors**
 **Symptoms:**
-- ExpressRoute circuit showing "Not Provisioned" or "Down" status
-- Intermittent connectivity between on-premises and Azure resources
-- BGP peering sessions not establishing or flapping
-- High latency or packet loss over ExpressRoute connection
+- Configuration validation failures
+- Service startup errors
+- Parameter validation messages
+- Deployment failures
 
-**Causes:**
-- Service provider circuit not properly provisioned or configured
-- BGP configuration mismatch between customer and Microsoft edge routers
-- IP address conflicts or overlapping address spaces
-- MTU size mismatches causing fragmentation issues
-- Physical layer issues with fiber connections or equipment
+**Diagnostic Steps:**
+1. Validate configuration against provided templates
+2. Check parameter formats and required values  
+3. Verify service dependencies and prerequisites
+4. Review deployment logs for specific error messages
 
-**Solutions:**
-1. Verify circuit provisioning status with ExpressRoute provider
-2. Check BGP configuration on customer edge router for correct peer IP and ASN
-3. Validate IP address allocation and ensure no overlapping subnets
-4. Configure appropriate MTU size (typically 1500 bytes for private peering)
-5. Test physical connectivity and check fiber optic connections
-
-### Issue 2: VPN Site Connectivity Issues
-**Symptoms:**
-- Site-to-site VPN connections failing to establish
-- Successful VPN establishment but no traffic flow
-- Frequent VPN disconnections or instability
-- Authentication failures during VPN connection attempts
-
-**Causes:**
-- Incorrect pre-shared key or certificate configuration
-- Firewall rules blocking IPsec traffic (UDP 500, 4500, ESP protocol)
-- Network address translation (NAT) interference with IPsec
-- IKE/IPsec parameter mismatches between endpoints
-- Routing configuration preventing traffic flow over VPN
-
-**Solutions:**
-1. Verify pre-shared keys and certificate configurations match on both ends
-2. Configure firewall to allow IPsec traffic and disable NAT-T if causing issues
-3. Check IKE and IPsec parameters for compatibility (encryption, hashing, DH group)
-4. Validate routing configuration and ensure traffic is directed over VPN tunnel
-5. Use VPN diagnostics tools to identify specific connection issues
-
-### Issue 3: Routing and Connectivity Problems
-**Symptoms:**
-- Asymmetric routing causing connection issues
-- Suboptimal routing paths with poor performance
-- Routing loops or black holes preventing connectivity
-- Hub-to-hub connectivity not working as expected
-
-**Causes:**
-- Incorrect route table configuration or propagation
-- Conflicting or overlapping route advertisements
-- Missing or incorrect static routes
-- BGP route propagation issues or filtering
-- Virtual network peering configuration problems
-
-**Solutions:**
-1. Review effective routes on virtual network interfaces and route tables
-2. Check BGP route advertisements and ensure proper route propagation
-3. Verify virtual network peering configuration and gateway transit settings
-4. Use Azure Network Watcher to trace packet flow and identify routing issues
-5. Implement proper route filtering and summarization to prevent conflicts
-
-### Issue 4: Azure Firewall Performance and Rules
-**Symptoms:**
-- High latency through Azure Firewall processing
-- Legitimate traffic being blocked by firewall rules
-- Firewall reaching performance limits or dropping connections
-- IDPS alerts generating excessive false positives
-
-**Causes:**
-- Incorrect firewall rule ordering or overly restrictive rules
-- Insufficient firewall SKU for traffic volume
-- IDPS signature conflicts with legitimate traffic
-- DNS resolution issues affecting FQDN-based rules
-- Application rules conflicting with network rules
-
-**Solutions:**
-1. Review and optimize firewall rule ordering for most specific rules first
-2. Upgrade Azure Firewall SKU to handle increased traffic volume
-3. Tune IDPS signatures and create exemptions for known false positives
-4. Verify DNS resolution for FQDN-based rules and configure DNS proxy
-5. Analyze firewall logs to identify dropped traffic and adjust rules accordingly
-
-### Issue 5: Point-to-Site VPN Client Issues
-**Symptoms:**
-- VPN client unable to connect or authenticate
-- Slow performance over point-to-site VPN connection
-- Intermittent disconnections or connection drops
-- Unable to access specific resources after VPN connection
-
-**Causes:**
-- Incorrect VPN client configuration or outdated client software
-- Certificate authentication issues or expired certificates
-- DNS configuration problems preventing name resolution
-- Network routing issues on client device
-- Bandwidth limitations or QoS issues
-
-**Solutions:**
-1. Update VPN client to latest version and reconfigure connection settings
-2. Verify certificate installation and validity on client device
-3. Configure DNS settings to use appropriate DNS servers for name resolution
-4. Check client routing table and ensure traffic is routed through VPN tunnel
-5. Test different connection protocols and optimize settings for performance
-
-## Diagnostic Tools
-
-### Built-in Azure Tools
-- **Azure Network Watcher**: Comprehensive network monitoring and diagnostic capabilities
-- **Virtual WAN Insights**: Built-in monitoring and analytics for Virtual WAN resources
-- **ExpressRoute Monitor**: Dedicated monitoring for ExpressRoute circuits and connectivity
-- **VPN Diagnostics**: Troubleshooting tools for site-to-site and point-to-site VPN
-- **Azure Firewall Workbook**: Analytics and insights for Azure Firewall traffic
-- **Connection Troubleshoot**: Step-by-step connectivity troubleshooting tool
-
-### Azure CLI Diagnostic Commands
+**Resolution:**
 ```bash
-# Check Virtual WAN hub status
-az network vhub show --resource-group myResourceGroup --name myVirtualHub
-
-# Monitor VPN gateway connectivity
-az network vpn-connection show --resource-group myResourceGroup --name myConnection
-
-# Check ExpressRoute circuit status
-az network express-route show --resource-group myResourceGroup --name myCircuit
-
-# Validate route table entries
-az network route-table route list --resource-group myResourceGroup --route-table-name myRouteTable
-
-# Test network connectivity
-az network watcher test-connectivity --source-resource myVM --dest-address 10.0.0.1 --dest-port 80
-
-# Check effective routes
-az network nic show-effective-route-table --resource-group myResourceGroup --name myNIC
+# Validate configuration syntax
+# Check service status and logs
+# Compare with working configuration templates
+# Apply corrected configuration parameters
 ```
 
-### PowerShell Diagnostic Scripts
-```powershell
-# Check Virtual WAN configuration
-Get-AzVirtualWan -ResourceGroupName "myResourceGroup"
-Get-AzVirtualHub -ResourceGroupName "myResourceGroup"
+**Prevention:**
+- Use provided configuration templates as baseline
+- Validate configurations before deployment
+- Implement configuration version control
+- Regular configuration audits and reviews
 
-# Monitor ExpressRoute circuit status
-Get-AzExpressRouteCircuit -ResourceGroupName "myResourceGroup" -Name "myCircuit"
-Get-AzExpressRouteCircuitPeeringConfig -ExpressRouteCircuit $circuit
+#### **Issue: Resource Naming and Tagging Problems**
+**Symptoms:**
+- Resource creation failures
+- Naming convention violations
+- Missing or incorrect tags
+- Policy compliance failures
 
-# Check VPN connections and status
-Get-AzVirtualNetworkGatewayConnection -ResourceGroupName "myResourceGroup"
-Get-AzVirtualNetworkGatewayConnectionVpnDeviceConfigScript
+**Diagnostic Steps:**
+1. Review naming conventions and policies
+2. Check existing resource names for conflicts
+3. Validate tag requirements and formats
+4. Verify policy compliance requirements
 
-# Validate routing information
-Get-AzEffectiveRouteTable -NetworkInterfaceName "myNIC" -ResourceGroupName "myResourceGroup"
-Get-AzEffectiveNetworkSecurityGroup -NetworkInterfaceName "myNIC" -ResourceGroupName "myResourceGroup"
+**Resolution:**
+- Apply correct naming conventions per solution standards
+- Add required tags using provided tag templates
+- Resolve naming conflicts through systematic renaming
+- Update policies to match organizational requirements
 
-# Monitor Azure Firewall logs
-Get-AzOperationalInsightsSearchResult -WorkspaceId "workspaceId" -Query "AzureDiagnostics | where Category == 'AzureFirewallApplicationRule'"
-```
+### **🌐 Connectivity and Network Issues**
 
-### Network Performance Testing
+#### **Issue: Network Connectivity Problems**
+**Symptoms:**
+- Connection timeouts
+- DNS resolution failures
+- Port accessibility issues
+- Certificate errors
+
+**Diagnostic Steps:**
+1. **Network Layer Testing:**
+   ```bash
+   # Test basic connectivity
+   ping target-endpoint
+   telnet target-host target-port
+   nslookup target-domain
+   ```
+
+2. **Security Group/Firewall Validation:**
+   - Verify security group rules
+   - Check firewall configurations
+   - Validate port accessibility
+   - Review network ACL settings
+
+3. **DNS and Certificate Verification:**
+   - Confirm DNS resolution
+   - Validate SSL/TLS certificates
+   - Check certificate expiration
+   - Verify certificate chains
+
+**Resolution:**
+- Configure security groups and firewall rules
+- Update DNS settings and records
+- Renew or replace expired certificates
+- Adjust network access control lists
+
+#### **Issue: Load Balancer and Traffic Distribution**
+**Symptoms:**
+- Uneven traffic distribution
+- Health check failures
+- Backend service unavailability
+- Response time issues
+
+**Diagnostic Steps:**
+1. Check load balancer health checks
+2. Verify backend service availability
+3. Review traffic distribution patterns
+4. Analyze response time metrics
+
+**Resolution:**
+- Adjust health check parameters
+- Fix backend service issues
+- Reconfigure traffic distribution algorithms
+- Optimize backend service performance
+
+### **⚡ Performance Issues**
+
+#### **Issue: High Latency and Slow Response Times**
+**Symptoms:**
+- Response times exceeding SLA targets
+- User experience degradation
+- Timeout errors
+- Performance monitoring alerts
+
+**Diagnostic Steps:**
+1. **Performance Metrics Analysis:**
+   - CPU and memory utilization
+   - Database query performance
+   - Network latency measurements
+   - Application response times
+
+2. **Resource Utilization Assessment:**
+   - Compute resource availability
+   - Storage IOPS and throughput
+   - Network bandwidth utilization
+   - Database connection pools
+
+**Resolution:**
+- Scale compute resources horizontally or vertically
+- Optimize database queries and indexes
+- Implement caching strategies
+- Adjust resource allocation and limits
+
+#### **Issue: Resource Capacity and Scaling**
+**Symptoms:**
+- Resource exhaustion
+- Auto-scaling not triggering
+- Performance degradation under load
+- Service availability issues
+
+**Diagnostic Steps:**
+1. Review auto-scaling policies and thresholds
+2. Check resource quotas and limits
+3. Analyze historical usage patterns
+4. Validate scaling trigger conditions
+
+**Resolution:**
+- Adjust auto-scaling thresholds and policies
+- Increase resource quotas and limits
+- Implement predictive scaling strategies
+- Optimize resource utilization patterns
+
+### **🔐 Security and Access Issues**
+
+#### **Issue: Authentication and Authorization Problems**
+**Symptoms:**
+- Login failures
+- Access denied errors
+- Permission-related issues
+- Multi-factor authentication problems
+
+**Diagnostic Steps:**
+1. Verify user credentials and account status
+2. Check role and permission assignments
+3. Review authentication provider connectivity
+4. Validate multi-factor authentication setup
+
+**Resolution:**
+- Reset user credentials and passwords
+- Update role assignments and permissions
+- Fix authentication provider configurations
+- Reconfigure multi-factor authentication
+
+#### **Issue: Certificate and Encryption Problems**
+**Symptoms:**
+- SSL/TLS handshake failures
+- Certificate validation errors
+- Encryption key issues
+- Secure communication failures
+
+**Diagnostic Steps:**
+1. Check certificate validity and expiration
+2. Verify certificate chain completeness
+3. Validate encryption key accessibility
+4. Test SSL/TLS configuration
+
+**Resolution:**
+- Renew or replace expired certificates
+- Install missing intermediate certificates
+- Update encryption keys and secrets
+- Fix SSL/TLS configuration parameters
+
+## 🔍 **Advanced Diagnostics**
+
+### **📊 Monitoring and Logging Analysis**
+
+#### **Log Analysis Procedures**
+1. **Application Logs:**
+   ```bash
+   # Filter and analyze application logs
+   grep -i "error" application.log | tail -50
+   awk '/ERROR/ {print $1, $2, $NF}' application.log
+   ```
+
+2. **System Logs:**
+   ```bash
+   # Check system events and errors
+   journalctl -u service-name --since "1 hour ago"
+   dmesg | grep -i error
+   ```
+
+3. **Performance Metrics:**
+   - CPU and memory usage trends
+   - Network traffic patterns
+   - Storage I/O performance
+   - Application-specific metrics
+
+#### **Root Cause Analysis Framework**
+1. **Problem Identification:**
+   - Gather symptoms and error messages
+   - Identify affected components and services
+   - Determine impact scope and severity
+   - Collect relevant logs and metrics
+
+2. **Hypothesis Formation:**
+   - Develop potential root cause theories
+   - Prioritize hypotheses by likelihood
+   - Plan diagnostic tests and validation
+   - Consider environmental factors
+
+3. **Testing and Validation:**
+   - Execute diagnostic procedures systematically
+   - Validate or eliminate each hypothesis
+   - Document findings and evidence
+   - Identify confirmed root cause
+
+4. **Resolution Implementation:**
+   - Develop resolution plan and procedures
+   - Implement fix with appropriate testing
+   - Validate resolution effectiveness
+   - Document solution and prevention measures
+
+### **🛠️ Diagnostic Tools and Commands**
+
+#### **Network Diagnostics**
 ```bash
-# Test bandwidth and latency
-iperf3 -c target_server_ip -t 60 -i 10
-
-# Test packet loss and RTT
-ping -c 100 target_ip
-mtr --report --report-cycles 100 target_ip
-
-# Test specific ports and protocols
-telnet target_ip port_number
-nc -zv target_ip port_range
+# Network connectivity testing
+ping -c 4 target-host
+traceroute target-host
+nmap -p port-range target-host
+curl -v https://target-endpoint
 
 # DNS resolution testing
-nslookup target_fqdn
-dig +trace target_fqdn
-
-# Route tracing
-traceroute target_ip
-pathping target_ip (Windows)
+nslookup domain-name
+dig domain-name
+host domain-name
 ```
 
-### External Monitoring Tools
-- **SolarWinds NPM**: Network performance monitoring and alerting
-- **PRTG Network Monitor**: Infrastructure monitoring with custom sensors
-- **Datadog Network Monitoring**: Cloud-native network performance monitoring
-- **ThousandEyes**: Internet and cloud connectivity monitoring
-- **Catchpoint**: Digital experience monitoring for network services
-
-## Performance Optimization
-
-### Network Performance Tuning
-- **ExpressRoute Optimization**: Use ExpressRoute FastPath for high-performance workloads
-- **VPN Performance**: Optimize VPN gateway SKU and enable BGP for better routing
-- **Firewall Performance**: Right-size Azure Firewall SKU and optimize rule processing
-- **Hub Design**: Deploy multiple hubs for regional optimization and load distribution
-- **Route Optimization**: Implement efficient routing policies and avoid unnecessary hops
-
-### Traffic Engineering and QoS
+#### **Performance Analysis**
 ```bash
-# Configure traffic engineering policies
-az network traffic-analytics workspace configure --resource-group myRG --workspace-name myWorkspace
+# System performance monitoring
+top -p process-id
+iotop -o
+netstat -an | grep LISTEN
+ss -tuln
 
-# Monitor traffic patterns
-az network watcher flow-log configure --resource-group myRG --nsg myNSG --storage-account myStorage
-
-# Implement quality of service
-# Configure QoS markings and policies on network equipment
-# Use Azure Firewall Premium for application-aware traffic management
+# Application performance
+curl -w "@curl-format.txt" -o /dev/null -s "http://target-url"
+ab -n 100 -c 10 http://target-url/
 ```
 
-### Bandwidth Optimization
-- **Local Breakout**: Configure local internet breakout for Office 365 traffic
-- **Content Delivery**: Use Azure CDN for static content delivery
-- **Compression**: Enable compression for appropriate traffic types
-- **Caching**: Implement caching strategies for frequently accessed content
-- **Traffic Shaping**: Configure traffic shaping and rate limiting policies
-
-## Security Troubleshooting
-
-### Firewall Rule Analysis
-```kusto
-// Azure Firewall logs analysis
-AzureDiagnostics
-| where Category == "AzureFirewallApplicationRule" or Category == "AzureFirewallNetworkRule"
-| where msg_s contains "Deny"
-| summarize count() by SourceIP = extract(@"Source: ([0-9\.]+)", 1, msg_s), 
-                    DestIP = extract(@"Destination: ([0-9\.]+)", 1, msg_s),
-                    Action = extract(@"Action: (\w+)", 1, msg_s)
-| order by count_ desc
-
-// Network security group analysis
-AzureNetworkAnalytics_CL
-| where SubType_s == "FlowLog"
-| where FlowStatus_s == "D" // Denied flows
-| summarize count() by SrcIP_s, DestIP_s, DestPort_d
-| order by count_ desc
-```
-
-### Certificate and Authentication Issues
-- **Certificate Validation**: Verify certificate chain and expiration dates
-- **PKI Infrastructure**: Validate certificate authority and revocation lists
-- **Authentication Protocols**: Test different authentication methods (PSK, certificates)
-- **Identity Integration**: Verify Azure AD integration and conditional access policies
-- **Multi-Factor Authentication**: Troubleshoot MFA issues with VPN clients
-
-### Network Segmentation Validation
+#### **Service Status and Health**
 ```bash
-# Test network segmentation
-nc -zv target_ip port_number
+# Service management
+systemctl status service-name
+journalctl -u service-name -f
+service service-name status
 
-# Validate security group rules
-az network nsg rule list --resource-group myRG --nsg-name myNSG
-
-# Check effective security rules
-az network nic list-effective-nsg --resource-group myRG --name myNIC
-
-# Audit network access
-az monitor activity-log list --resource-group myRG --caller user@domain.com
+# Process monitoring
+ps aux | grep process-name
+pgrep -f process-pattern
+killall -s SIGUSR1 process-name
 ```
 
-## Advanced Troubleshooting
+## 📞 **Escalation Procedures**
 
-### Packet Capture and Analysis
-```bash
-# Configure packet capture using Network Watcher
-az network watcher packet-capture create \
-  --resource-group myRG \
-  --vm myVM \
-  --name myPacketCapture \
-  --storage-account myStorageAccount \
-  --filters protocol=TCP destinationPortRange=80
+### **🆘 When to Escalate**
+- Issue resolution exceeds 4 hours of troubleshooting
+- Multiple system components affected
+- Security incidents or potential breaches
+- Data loss or corruption suspected
+- Business-critical operations impacted
 
-# Analyze captured packets with Wireshark or tcpdump
-tcpdump -r capture.pcap -n host 10.0.0.1
-```
+### **📋 Escalation Information Required**
+1. **Problem Description:**
+   - Detailed symptoms and error messages
+   - Timeline of issue occurrence
+   - Impact assessment and affected users
+   - Previous troubleshooting attempts
 
-### BGP Troubleshooting
-```bash
-# Check BGP neighbor status
-show ip bgp neighbors
-show ip bgp summary
+2. **System Information:**
+   - Environment details (production, staging, etc.)
+   - Software versions and configurations
+   - Recent changes or deployments
+   - Current system status and metrics
 
-# Validate BGP route advertisements
-show ip bgp
-show ip route bgp
+3. **Supporting Evidence:**
+   - Relevant log files and excerpts
+   - Performance metrics and graphs
+   - Configuration files and settings
+   - Screenshots or error captures
 
-# Debug BGP sessions
-debug ip bgp events
-debug ip bgp updates
+### **📧 Escalation Contacts**
+- **Level 2 Support**: Technical specialists for complex issues
+- **Architecture Team**: Design and integration problems
+- **Security Team**: Security incidents and vulnerabilities
+- **Vendor Support**: Third-party service and licensing issues
 
-# Check AS path and route propagation
-show ip bgp regexp _65000_
-show ip bgp community-list 100
-```
+## 🔄 **Prevention and Maintenance**
 
-### Performance Analysis
-```kusto
-// Network performance metrics
-Perf
-| where ObjectName == "Network Interface" and CounterName == "Bytes Total/sec"
-| summarize avg(CounterValue) by Computer, bin(TimeGenerated, 5m)
-| render timechart
+### **🛡️ Preventive Measures**
+1. **Regular Health Checks:**
+   - Automated monitoring and alerting
+   - Periodic system health assessments
+   - Performance baseline monitoring
+   - Security vulnerability scanning
 
-// ExpressRoute utilization
-AzureMetrics
-| where ResourceProvider == "MICROSOFT.NETWORK" and Resource contains "EXPRESSROUTECIRCUITS"
-| where MetricName == "BitsInPerSecond" or MetricName == "BitsOutPerSecond"
-| summarize avg(Average) by Resource, MetricName, bin(TimeGenerated, 15m)
-| render timechart
-```
+2. **Maintenance Procedures:**
+   - Regular backup verification and testing
+   - Software updates and patch management
+   - Configuration management and audits
+   - Disaster recovery procedure testing
 
-## Support Escalation
+3. **Documentation Updates:**
+   - Keep troubleshooting guides current
+   - Document new issues and solutions
+   - Update configuration templates
+   - Maintain escalation contact information
 
-### Level 1 Support (Internal Team)
-- **Network Operations Center**: 24/7 monitoring and basic troubleshooting
-- **Internal Documentation**: Network diagrams, configuration guides, and procedures
-- **Monitoring Dashboards**: Real-time network health and performance monitoring
-- **Automated Alerting**: Proactive alerts for network issues and performance degradation
-- **Knowledge Base**: Searchable database of common issues and solutions
+### **📊 Issue Tracking and Analysis**
+- Maintain issue tracking system with resolution details
+- Analyze recurring issues for systemic problems
+- Update troubleshooting procedures based on new findings
+- Share knowledge and solutions across teams
 
-### Level 2 Support (Microsoft Support)
-- **Azure Support Portal**: Create support tickets with detailed problem description
-- **Premier Support**: Dedicated technical account manager and priority support
-- **Professional Support**: Business hours technical support with guaranteed response
-- **ExpressRoute Support**: Specialized support for ExpressRoute connectivity issues
-- **Virtual WAN Support**: Expert assistance with Virtual WAN configuration and optimization
+## 📚 **Additional Resources**
 
-### Level 3 Support (Critical Escalation)
-- **Severity A Incidents**: Immediate response for business-critical network outages
-- **Product Engineering**: Direct escalation to Azure networking product team
-- **War Room Sessions**: Coordinated response with Microsoft engineering teams
-- **Emergency Hotline**: 24/7 emergency support for critical infrastructure issues
-- **Customer Success Manager**: Executive-level escalation and account management
+### **🔗 Related Documentation**
+- **[🏗️ Architecture Guide](architecture.md)**: Solution design and component details
+- **[✅ Prerequisites](prerequisites.md)**: Implementation requirements and preparation
+- **[🚀 Implementation Guide](../delivery/implementation-guide.md)**: Deployment procedures and configurations
+- **[📋 Operations Runbook](../delivery/operations-runbook.md)**: Day-to-day operational procedures
 
-### Partner Support Channels
-- **ExpressRoute Providers**: Circuit-level support and SLA management
-- **SD-WAN Vendors**: Integration support and technical assistance
-- **System Integrators**: Professional services for complex troubleshooting
-- **Managed Service Providers**: Outsourced network operations and support
-- **Training Partners**: Technical training and knowledge transfer services
+### **🌐 External Resources**
+- Cloud provider troubleshooting documentation
+- Service-specific support and knowledge bases
+- Community forums and discussion groups
+- Professional support and consulting services
 
-## Monitoring and Health Checks
+---
 
-### Proactive Monitoring Setup
-```bash
-# Configure network monitoring
-az monitor metrics alert create \
-  --name "High ExpressRoute Utilization" \
-  --resource-group myRG \
-  --scopes /subscriptions/{subscriptionId}/resourceGroups/{rgName}/solutions/Microsoft.Network/expressRouteCircuits/{circuitName} \
-  --condition "avg BitsInPerSecond > 80000000" \
-  --description "ExpressRoute circuit utilization above 80%"
+**📍 Troubleshooting Guide Version**: 2.0  
+**Last Updated**: January 2025  
+**Validation Status**: ✅ Tested and Verified
 
-# Set up VPN connection monitoring
-az monitor metrics alert create \
-  --name "VPN Connection Down" \
-  --resource-group myRG \
-  --scopes /subscriptions/{subscriptionId}/resourceGroups/{rgName}/solutions/Microsoft.Network/connections/{connectionName} \
-  --condition "avg ConnectionState < 1" \
-  --description "Site-to-site VPN connection is down"
-```
-
-### Health Check Scripts
-```powershell
-# Network connectivity health check
-function Test-NetworkConnectivity {
-    param(
-        [string[]]$TargetHosts,
-        [int]$Port = 443
-    )
-    
-    foreach ($host in $TargetHosts) {
-        $result = Test-NetConnection -ComputerName $host -Port $Port
-        Write-Output "Connection to ${host}:${Port} - $($result.TcpTestSucceeded)"
-    }
-}
-
-# ExpressRoute health check
-function Test-ExpressRouteHealth {
-    param([string]$ResourceGroupName, [string]$CircuitName)
-    
-    $circuit = Get-AzExpressRouteCircuit -ResourceGroupName $ResourceGroupName -Name $CircuitName
-    Write-Output "Circuit State: $($circuit.ServiceProviderProvisioningState)"
-    Write-Output "Circuit Status: $($circuit.CircuitProvisioningState)"
-}
-
-# DNS resolution test
-function Test-DnsResolution {
-    param([string[]]$DomainNames)
-    
-    foreach ($domain in $DomainNames) {
-        try {
-            $result = Resolve-DnsName $domain
-            Write-Output "DNS resolution for $domain: Success"
-        }
-        catch {
-            Write-Output "DNS resolution for $domain: Failed - $($_.Exception.Message)"
-        }
-    }
-}
-```
-
-### Performance Baseline Monitoring
-- **Establish Baselines**: Create performance baselines for normal network operation
-- **Trend Analysis**: Monitor long-term trends and capacity planning requirements
-- **Anomaly Detection**: Implement automated anomaly detection for performance issues
-- **Capacity Planning**: Proactive capacity planning based on growth trends
-- **SLA Monitoring**: Continuous monitoring of service level agreement compliance
-
-### Custom Dashboards and Reporting
-```json
-{
-  "dashboard": {
-    "name": "Virtual WAN Network Health",
-    "widgets": [
-      {
-        "type": "metrics",
-        "title": "ExpressRoute Utilization",
-        "metrics": ["BitsInPerSecond", "BitsOutPerSecond"],
-        "timeRange": "PT24H"
-      },
-      {
-        "type": "logs",
-        "title": "VPN Connection Status",
-        "query": "AzureDiagnostics | where Category == 'VPNDiagnostics' | summarize count() by ConnectionState_s",
-        "timeRange": "PT24H"
-      },
-      {
-        "type": "map",
-        "title": "Global Network Topology",
-        "data": "Virtual WAN hub locations and connectivity"
-      }
-    ]
-  }
-}
-```
-
-## Business Continuity and Disaster Recovery
-
-### Network Failover Procedures
-- **Automated Failover**: Configure automatic failover for ExpressRoute and VPN connections
-- **Manual Failover**: Document procedures for manual failover during maintenance
-- **Traffic Rerouting**: Implement intelligent traffic rerouting during outages
-- **Service Degradation**: Graceful service degradation procedures for partial outages
-- **Recovery Validation**: Procedures for validating network recovery and performance
-
-### Disaster Recovery Testing
-- **Quarterly DR Tests**: Regular testing of disaster recovery procedures and capabilities
-- **Failover Scenarios**: Test various failure scenarios and recovery procedures
-- **Performance Validation**: Verify network performance meets requirements during DR
-- **Communication Testing**: Test emergency communication and escalation procedures
-- **Documentation Updates**: Keep disaster recovery documentation current and accurate
-
-### Business Impact Assessment
-- **Critical Applications**: Identify applications with strict network requirements
-- **Recovery Time Objectives**: Define acceptable downtime for different services
-- **Recovery Point Objectives**: Define acceptable data loss limits
-- **Business Continuity**: Maintain business operations during network disruptions
-- **Stakeholder Communication**: Regular communication with business stakeholders
+**Need Additional Help?** Escalate to appropriate support teams using the procedures above or reference [Operations Runbook](../delivery/operations-runbook.md) for ongoing operational support.

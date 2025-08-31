@@ -1,96 +1,69 @@
 version: '2.0'
 provider: juniper
-generated_at: '2025-08-24T19:23:46.690176'
+generated_at: '2025-08-31T09:02:28.495742'
 catalog_type: provider
 metadata:
   provider_name: Juniper Networks
   total_solutions: 2
-  last_updated: '2025-08-24T19:23:46.690201'
+  last_updated: '2025-08-31T09:02:28.495782'
+  auto_generated: true
 categories:
   cyber-security:
     solutions:
       srx-firewall-platform:
-        title: Juniper SRX Firewall Platform
-        description: Enterprise-grade next-generation firewall platform delivering
-          comprehensive network protection, advanced threat detection, and secure
-          connectivity
-        version: '2024.1'
+        provider: JUNIPER
+        category: cyber-security
+        solution_name: Srx Firewall Platform
+        description: Srx Firewall Platform solution for JUNIPER
+        version: 1.0.0
+        status: Active
+        maintainers:
+        - name: "EO Framework\u2122 Juniper Solutions Team"
+          email: juniper-solutions@eoframework.com
+          role: Network Solutions Architect
         tags:
-        - next-generation-firewall
-        - network-security
-        - threat-protection
-        - intrusion-prevention
-        - vpn-gateway
-        - enterprise-security
-        complexity: intermediate
-        deployment_time: 2-8 weeks
-        repository: https://github.com/eoframework/templates/tree/main/solutions/juniper/cyber-security/srx-firewall-platform
-        features:
-        - Advanced threat protection with IDP signatures
-        - High-performance security processing with hardware acceleration
-        - Unified security management with Security Director
-        - VPN gateway and secure remote access capabilities
-        - Application visibility and control with advanced inspection
-        - High availability with active/passive clustering
-        - Compliance support for PCI DSS, HIPAA, and FISMA
-        - Zero-day protection through behavioral analysis
-        supported_platforms:
-        - SRX300 Series
-        - SRX1500 Series
-        - SRX4000 Series
-        - SRX5000 Series
-        integrations:
-        - SIEM Platforms
-        - Active Directory/LDAP
-        - RADIUS Authentication
-        - Network Management Systems
-        business_value:
-          threat_detection: 99.9% accuracy with advanced IDP
-          management_reduction: 60% reduction in security overhead
-          incident_response: 50% faster resolution times
-          system_availability: 99.99% uptime with failover
+        - firewall
+        - juniper
+        - platform
+        - cyber-security
+        requirements:
+          prerequisites:
+          - JUNIPER Account
+          - Administrative Access
+          tools:
+          - Python 3.8+
+          - Ansible
+          skills:
+          - JUNIPER Platform
+          - Solution Architecture
+          - Network Infrastructure
         solution_path: ../../solutions/juniper/cyber-security/srx-firewall-platform/
   network:
     solutions:
       mist-ai-network:
-        title: Juniper Mist AI Network Platform
-        description: Cloud-native, AI-driven network infrastructure platform delivering
-          exceptional user experiences through proactive operations and predictive
-          intelligence
-        version: '2024.1'
+        provider: JUNIPER
+        category: network
+        solution_name: Mist Ai Network
+        description: Mist Ai Network solution for JUNIPER
+        version: 1.0.0
+        status: Active
+        maintainers:
+        - name: "EO Framework\u2122 Juniper Solutions Team"
+          email: juniper-solutions@eoframework.com
+          role: Network Solutions Architect
         tags:
-        - ai-networking
-        - cloud-native
-        - wireless-networking
-        - network-automation
-        - location-services
-        - enterprise-wifi
-        complexity: intermediate
-        deployment_time: 4-12 weeks
-        repository: https://github.com/eoframework/templates/tree/main/solutions/juniper/network/mist-ai-network
-        features:
-        - AI-driven proactive network operations with 90% trouble ticket reduction
-        - Cloud-native microservices architecture with zero hardware controllers
-        - Marvis Virtual Network Assistant for natural language troubleshooting
-        - Real-time location services with 1-3 meter accuracy
-        - Sub-millisecond Wi-Fi roaming for seamless connectivity
-        - Automated RF optimization and interference mitigation
-        - Comprehensive API ecosystem for integration and automation
-        - 24/7 AI monitoring with predictive problem detection
-        supported_platforms:
-        - Juniper Access Points
-        - EX Series Switches
-        - Mist Cloud Platform
-        - Wi-Fi 6/6E
-        integrations:
-        - RADIUS/Active Directory
-        - SIEM Platforms
-        - ServiceNow ITSM
-        - Slack/Teams
-        - Cloud Identity Providers
-        business_value:
-          trouble_ticket_reduction: 90% reduction through proactive AI
-          incident_resolution: 75% faster MTTR
-          operational_expenses: 50% lower vs traditional solutions
-          network_availability: 99.9% with AI-driven optimization
+        - network
+        - juniper
+        - mist
+        requirements:
+          prerequisites:
+          - JUNIPER Account
+          - Administrative Access
+          tools:
+          - Python 3.8+
+          - Ansible
+          skills:
+          - JUNIPER Platform
+          - Solution Architecture
+          - Network Infrastructure
         solution_path: ../../solutions/juniper/network/mist-ai-network/

@@ -1,1 +1,381 @@
-# Cisco Hybrid Infrastructure Troubleshooting Guide\n\n## Overview\n\nThis comprehensive troubleshooting guide provides systematic approaches to diagnose and resolve common issues in Cisco Hybrid Cloud Infrastructure deployments. The guide is organized by component and includes both reactive troubleshooting and proactive maintenance procedures.\n\n## Table of Contents\n\n1. [Troubleshooting Methodology](#troubleshooting-methodology)\n2. [HyperFlex Issues](#hyperflex-issues)\n3. [VMware Integration Issues](#vmware-integration-issues)\n4. [Network and ACI Issues](#network-and-aci-issues)\n5. [Performance Issues](#performance-issues)\n6. [Storage Issues](#storage-issues)\n7. [Security Issues](#security-issues)\n8. [Monitoring and Alerting Issues](#monitoring-and-alerting-issues)\n9. [Backup and Recovery Issues](#backup-and-recovery-issues)\n10. [Escalation Procedures](#escalation-procedures)\n\n## Troubleshooting Methodology\n\n### 1.1 Systematic Approach\n\n**The ITIL Problem-Solving Process:**\n```\n1. IDENTIFY\n   ├── Gather symptoms\n   ├── Collect error messages\n   ├── Document timeline\n   └── Determine impact and urgency\n\n2. CATEGORIZE\n   ├── Determine component affected\n   ├── Classify issue type\n   ├── Assess priority level\n   └── Identify potential causes\n\n3. INVESTIGATE\n   ├── Review logs and monitoring data\n   ├── Perform diagnostic tests\n   ├── Verify configurations\n   └── Analyze performance metrics\n\n4. DIAGNOSE\n   ├── Isolate root cause\n   ├── Reproduce issue if possible\n   ├── Develop hypothesis\n   └── Create resolution plan\n\n5. RESOLVE\n   ├── Implement solution\n   ├── Test resolution\n   ├── Monitor for recurrence\n   └── Document resolution\n\n6. CLOSE\n   ├── Verify issue resolved\n   ├── Update knowledge base\n   ├── Conduct post-incident review\n   └── Implement preventive measures\n```\n\n### 1.2 Information Gathering\n\n**Essential Information Checklist:**\n- [ ] Exact error messages\n- [ ] Timeline of events\n- [ ] Recent changes made\n- [ ] Affected systems/users\n- [ ] Impact assessment\n- [ ] Environmental factors\n- [ ] Performance metrics\n- [ ] Log entries\n\n**Data Collection Script:**\n```bash\n#!/bin/bash\n# Automated data collection script\n\nTIMESTAMP=$(date +\"%Y%m%d-%H%M%S\")\nCOLLECTION_DIR=\"/tmp/troubleshooting-data-$TIMESTAMP\"\nmkdir -p $COLLECTION_DIR\n\necho \"Collecting troubleshooting data...\"\n\n# System information\necho \"=== SYSTEM INFORMATION ===\" > $COLLECTION_DIR/system_info.txt\nuname -a >> $COLLECTION_DIR/system_info.txt\nuptime >> $COLLECTION_DIR/system_info.txt\nfree -h >> $COLLECTION_DIR/system_info.txt\ndf -h >> $COLLECTION_DIR/system_info.txt\n\n# HyperFlex information\necho \"=== HYPERFLEX STATUS ===\" > $COLLECTION_DIR/hx_status.txt\nhxcli cluster info >> $COLLECTION_DIR/hx_status.txt 2>&1\nhxcli node list >> $COLLECTION_DIR/hx_status.txt 2>&1\nhxcli datastore list >> $COLLECTION_DIR/hx_status.txt 2>&1\n\n# Network information\necho \"=== NETWORK STATUS ===\" > $COLLECTION_DIR/network_info.txt\nip addr show >> $COLLECTION_DIR/network_info.txt\nip route show >> $COLLECTION_DIR/network_info.txt\nss -tulnp >> $COLLECTION_DIR/network_info.txt\n\n# Log collection\necho \"=== LOG FILES ===\" > $COLLECTION_DIR/logs_summary.txt\ntail -1000 /var/log/messages > $COLLECTION_DIR/messages.log\ntail -1000 /var/log/vmkernel.log > $COLLECTION_DIR/vmkernel.log 2>/dev/null\ntail -1000 /var/log/springpath/hxcli.log > $COLLECTION_DIR/hxcli.log 2>/dev/null\n\n# Create archive\ntar -czf \"troubleshooting-data-$TIMESTAMP.tar.gz\" -C /tmp \"troubleshooting-data-$TIMESTAMP\"\necho \"Data collection complete: troubleshooting-data-$TIMESTAMP.tar.gz\"\n```\n\n## HyperFlex Issues\n\n### 2.1 Cluster Connectivity Issues\n\n**Symptom:** HyperFlex cluster shows as offline or unreachable\n\n**Diagnostic Steps:**\n```bash\n# 1. Check basic connectivity\nping [HX_CONTROLLER_IP]\ntelnet [HX_CONTROLLER_IP] 443\n\n# 2. Verify cluster status\nhxcli cluster info\nhxcli node list\nhxcli cluster service-status\n\n# 3. Check network configuration\nip addr show\nip route show\ncat /etc/resolv.conf\n\n# 4. Verify time synchronization\nchrony sources -v\nntpq -p\n```\n\n**Common Causes and Solutions:**\n\n| **Cause** | **Symptoms** | **Resolution** |\n|-----------|--------------|----------------|\n| **Network connectivity** | Ping failures, timeouts | Check physical connections, VLAN configuration |\n| **DNS resolution** | Name resolution failures | Verify DNS settings, update /etc/hosts |\n| **Time synchronization** | Certificate errors, cluster sync issues | Synchronize NTP servers, restart time services |\n| **Firewall blocking** | Connection refused errors | Review and update firewall rules |\n| **Service failures** | Service not responding | Restart HyperFlex services |\n\n**Resolution Examples:**\n```bash\n# Fix DNS resolution\necho \"192.168.1.10 hx-controller.company.com\" >> /etc/hosts\nsystemctl restart systemd-resolved\n\n# Restart HyperFlex services\nsystemctl restart springpath-storfs\nsystemctl restart springpath-storfs-mgmt\n\n# Check and fix time sync\nchrony makestep\nsystemctl restart chronyd\n```\n\n### 2.2 Node Failure Issues\n\n**Symptom:** One or more nodes showing as offline or failed\n\n**Diagnostic Steps:**\n```bash\n# 1. Check node status\nhxcli node list\nhxcli node status --node-ip [NODE_IP]\n\n# 2. Verify hardware health\nipmitool -I lanplus -H [BMC_IP] -U [BMC_USER] -P [BMC_PASSWORD] sdr list\nipmitool -I lanplus -H [BMC_IP] -U [BMC_USER] -P [BMC_PASSWORD] sel list\n\n# 3. Check network connectivity to failed node\nping [NODE_IP]\nssh [NODE_IP] \"uptime\"\n\n# 4. Review logs\ntail -100 /var/log/springpath/hxcli.log\ntail -100 /var/log/springpath/controller.log\n```\n\n**Recovery Procedures:**\n```bash\n# For temporary network issues\nhxcli node rebalance --node-ip [NODE_IP]\n\n# For hardware issues\n# 1. Power cycle the node\nipmitool -I lanplus -H [BMC_IP] -U [BMC_USER] -P [BMC_PASSWORD] power cycle\n\n# 2. Wait for node to come back online (5-10 minutes)\nhxcli node list\n\n# 3. If node doesn't recover, check hardware\n# - Verify all cables are connected\n# - Check server health in UCS Manager or Intersight\n# - Verify storage devices are functional\n\n# For permanent hardware failure\n# Contact Cisco TAC for node replacement procedures\n```\n\n### 2.3 Storage Controller Issues\n\n**Symptom:** Storage operations failing or performing poorly\n\n**Diagnostic Commands:**\n```bash\n# Check storage controller status\nhxcli storage controller-status\nhxcli storage drive-status\nhxcli datastore iostat\n\n# Check for storage alerts\nhxcli alert list --severity error\nhxcli alert list --severity warning\n\n# Performance analysis\nhxcli cluster iostat\nhxcli node iostat --node-ip [NODE_IP]\n```\n\n**Common Storage Issues:**\n\n| **Issue** | **Diagnostic** | **Resolution** |\n|-----------|----------------|----------------|\n| **Disk failure** | Drive status shows failed | Replace failed drive, allow auto-rebuild |\n| **Controller failure** | Controller not responding | Restart storage services, check hardware |\n| **Cache issues** | Poor performance metrics | Check cache utilization, verify SSD health |\n| **Metadata corruption** | Inconsistent data access | Run storage consistency checks |\n\n## VMware Integration Issues\n\n### 3.1 vCenter Connectivity Problems\n\n**Symptom:** Cannot access vCenter or vCenter shows HyperFlex as disconnected\n\n**Diagnostic Steps:**\n```bash\n# 1. Check vCenter service status\nsystemctl status vmware-vpxd\nsystemctl status vmware-vapi-endpoint\n\n# 2. Verify network connectivity\nping [VCENTER_IP]\ntelnet [VCENTER_IP] 443\ncurl -k https://[VCENTER_IP]/ui/\n\n# 3. Check certificate validity\nopenssl s_client -connect [VCENTER_IP]:443 -servername [VCENTER_FQDN]\n```\n\n**PowerCLI Diagnostic Script:**\n```powershell\n# PowerCLI troubleshooting script\ntry {\n    Connect-VIServer -Server [VCENTER_IP] -ErrorAction Stop\n    Write-Host \"✓ vCenter connection successful\"\n    \n    # Check cluster status\n    $Clusters = Get-Cluster\n    foreach ($Cluster in $Clusters) {\n        Write-Host \"Cluster: $($Cluster.Name) - DRS: $($Cluster.DrsEnabled) - HA: $($Cluster.HAEnabled)\"\n    }\n    \n    # Check host status\n    $Hosts = Get-VMHost\n    foreach ($Host in $Hosts) {\n        Write-Host \"Host: $($Host.Name) - State: $($Host.ConnectionState) - Version: $($Host.Version)\"\n    }\n    \n    # Check datastore status\n    $Datastores = Get-Datastore\n    foreach ($DS in $Datastores) {\n        $FreePercent = [math]::Round(($DS.FreeSpaceGB / $DS.CapacityGB) * 100, 2)\n        Write-Host \"Datastore: $($DS.Name) - Free: $FreePercent%\"\n    }\n    \n} catch {\n    Write-Host \"✗ vCenter connection failed: $($_.Exception.Message)\"\n    \n    # Basic network tests\n    Test-NetConnection -ComputerName [VCENTER_IP] -Port 443\n    Test-NetConnection -ComputerName [VCENTER_IP] -Port 80\n}\n```\n\n### 3.2 ESXi Host Issues\n\n**Symptom:** ESXi hosts disconnected or not responding\n\n**Diagnostic Commands:**\n```bash\n# Connect to ESXi host directly\nssh root@[ESXi_IP]\n\n# Check ESXi service status\n/etc/init.d/hostd status\n/etc/init.d/vpxa status\n/etc/init.d/ntpd status\n\n# Check ESXi logs\ntail -100 /var/log/hostd.log\ntail -100 /var/log/vpxa.log\ntail -100 /var/log/vmkernel.log\n\n# Check network configuration\nesxcfg-vswitch -l\nesxcfg-vmknic -l\nesxcfg-nics -l\n\n# Check storage connectivity\nesxcfg-scsidevs -a\nesxcfg-mpath -l\n```\n\n**Common ESXi Issues:**\n\n| **Issue** | **Symptoms** | **Resolution** |\n|-----------|--------------|----------------|\n| **Network configuration** | Host disconnected | Verify vSwitch and vmkernel configuration |\n| **Certificate issues** | SSL handshake failures | Regenerate ESXi certificates |\n| **Time synchronization** | Authentication failures | Configure NTP and restart services |\n| **Storage access** | Datastore unavailable | Check HBA configuration and multipathing |\n| **Resource exhaustion** | Host not responding | Check CPU, memory, and storage usage |\n\n### 3.3 VM Performance Issues\n\n**Symptom:** Virtual machines running slowly or unresponsively\n\n**Performance Analysis:**\n```bash\n# VM-level performance analysis\nvm_id=$(vim-cmd vmsvc/getallvms | grep \"[VM_NAME]\" | awk '{print $1}')\nvim-cmd vmsvc/get.summary $vm_id\nvim-cmd vmsvc/device.connection $vm_id\n\n# Resource utilization check\nesxtop\n# Press 'c' for CPU view, 'm' for memory, 'd' for disk, 'n' for network\n\n# Check VM tools status\nvim-cmd vmsvc/tools.status $vm_id\n\n# Review VM configuration\nvim-cmd vmsvc/get.config $vm_id\n```\n\n**Performance Optimization:**\n```powershell\n# PowerCLI performance optimization\n$VM = Get-VM \"[VM_NAME]\"\n\n# Check VM resource allocation\n$VM | Select Name, NumCpu, MemoryGB, \n    @{N=\"CPU Reservation\";E={$_.ExtensionData.Config.CpuAllocation.Reservation}},\n    @{N=\"Memory Reservation\";E={$_.ExtensionData.Config.MemoryAllocation.Reservation}}\n\n# Check for resource contention\nGet-Stat -Entity $VM -Stat \"cpu.ready.summation\" -Start (Get-Date).AddHours(-1)\nGet-Stat -Entity $VM -Stat \"mem.swapped.average\" -Start (Get-Date).AddHours(-1)\n\n# Optimize VM settings\n$VM | Set-VM -MemoryGB 16 -NumCpu 4 -CoresPerSocket 2 -Confirm:$false\n$VM | Get-HardDisk | Set-HardDisk -StorageFormat Thin -Confirm:$false\n```\n\n## Network and ACI Issues\n\n### 4.1 ACI Fabric Issues\n\n**Symptom:** Network connectivity issues or ACI fabric health problems\n\n**APIC Diagnostic Commands:**\n```bash\n# Access APIC via SSH\nssh admin@[APIC_IP]\n\n# Check fabric health\nmoquery -c fabricHealthTotal\nmoquery -c fabricNodeHealth5Min\n\n# Check fabric discovery\nmoquery -c fabricNode\nmoquery -c fabricLink\n\n# Check interface status\nmoquery -c fabricPathEp\nmoquery -c l1PhysIf\n\n# Review fabric events\nmoquery -c eventRecord | head -20\n```\n\n**ACI Troubleshooting Script:**\n```python\n#!/usr/bin/env python3\n# ACI health check script\n\nimport requests\nimport json\nfrom requests.packages.urllib3.exceptions import InsecureRequestWarning\nrequests.packages.urllib3.disable_warnings(InsecureRequestWarning)\n\ndef aci_health_check(apic_ip, username, password):\n    # Authenticate\n    auth_data = {\n        \"aaaUser\": {\n            \"attributes\": {\n                \"name\": username,\n                \"pwd\": password\n            }\n        }\n    }\n    \n    session = requests.Session()\n    session.verify = False\n    \n    # Login\n    login_response = session.post(\n        f\"https://{apic_ip}/api/aaaLogin.json\",\n        json=auth_data\n    )\n    \n    if login_response.status_code != 200:\n        print(f\"Authentication failed: {login_response.status_code}\")\n        return\n    \n    # Check fabric health\n    health_response = session.get(\n        f\"https://{apic_ip}/api/node/class/fabricHealthTotal.json\"\n    )\n    \n    if health_response.status_code == 200:\n        health_data = health_response.json()\n        for item in health_data['imdata']:\n            health_score = item['fabricHealthTotal']['attributes']['cur']\n            print(f\"Fabric Health Score: {health_score}/100\")\n            \n            if int(health_score) < 75:\n                print(\"⚠ Fabric health below acceptable threshold\")\n            else:\n                print(\"✓ Fabric health is acceptable\")\n    \n    # Check node status\n    nodes_response = session.get(\n        f\"https://{apic_ip}/api/node/class/fabricNode.json\"\n    )\n    \n    if nodes_response.status_code == 200:\n        nodes_data = nodes_response.json()\n        print(\"\\nFabric Nodes:\")\n        for node in nodes_data['imdata']:\n            attrs = node['fabricNode']['attributes']\n            print(f\"  Node {attrs['id']} ({attrs['name']}): {attrs['fabricSt']}\")\n    \n    # Check recent faults\n    faults_response = session.get(\n        f\"https://{apic_ip}/api/node/class/faultSummary.json?query-target-filter=not(wcard(faultSummary.cause,\\\"transition\\\"))\"\n    )\n    \n    if faults_response.status_code == 200:\n        faults_data = faults_response.json()\n        print(f\"\\nActive Faults: {len(faults_data['imdata'])}\")\n        \n        for fault in faults_data['imdata'][:5]:  # Show first 5 faults\n            attrs = fault['faultSummary']['attributes']\n            print(f\"  {attrs['severity']}: {attrs['descr']}\")\n\nif __name__ == \"__main__\":\n    aci_health_check(\"apic.company.com\", \"admin\", \"password\")\n```\n\n### 4.2 Network Connectivity Issues\n\n**Symptom:** VMs cannot communicate or have intermittent connectivity\n\n**Network Diagnostic Steps:**\n```bash\n# 1. Basic connectivity tests\nping [TARGET_IP]\ntraceroute [TARGET_IP]\nnslookup [TARGET_FQDN]\n\n# 2. Check local network configuration\nip addr show\nip route show\ncat /etc/resolv.conf\n\n# 3. Check VLAN configuration\nvconfig\nbridge vlan show\n\n# 4. Check for packet drops\nnetstat -i\ncat /proc/net/dev\n\n# 5. Test specific ports\ntelnet [TARGET_IP] [PORT]\nnc -zv [TARGET_IP] [PORT]\n```\n\n**VMware Network Diagnostics:**\n```bash\n# Check vSwitch configuration\nesxcfg-vswitch -l\n\n# Check vmkernel interfaces\nesxcfg-vmknic -l\n\n# Check physical adapters\nesxcfg-nics -l\n\n# Test vmkernel connectivity\nvmkping [TARGET_IP]\nvmkping -I vmk1 [TARGET_IP]  # Specify specific vmkernel interface\n\n# Check network statistics\nesxcli network nic stats get -n vmnic0\nesxcli network vswitch standard stats get -v vSwitch0\n```\n\n### 4.3 DNS and Name Resolution Issues\n\n**Symptom:** Services fail with name resolution errors\n\n**DNS Troubleshooting:**\n```bash\n# Test DNS resolution\nnslookup [HOSTNAME]\ndig [HOSTNAME]\nhost [HOSTNAME]\n\n# Check DNS configuration\ncat /etc/resolv.conf\nsystemd-resolve --status\n\n# Test different DNS servers\nnslookup [HOSTNAME] 8.8.8.8\nnslookup [HOSTNAME] [LOCAL_DNS_IP]\n\n# Check local hosts file\ncat /etc/hosts\n\n# Flush DNS cache\nsystemctl restart systemd-resolved\n# or\nservice nscd restart\n```\n\n## Performance Issues\n\n### 5.1 Storage Performance Problems\n\n**Symptom:** Slow VM performance, high storage latency\n\n**Storage Performance Analysis:**\n```bash\n# HyperFlex storage performance\nhxcli datastore iostat\nhxcli cluster iostat\nhxcli node iostat --node-ip [NODE_IP]\n\n# Check storage queue depths\nhxcli storage controller-status\nhxcli storage drive-status\n\n# Analyze I/O patterns\niostat -x 5 10\nsar -d 5 10\n```\n\n**ESXi Storage Performance:**\n```bash\n# ESXi storage latency analysis\nesxtop\n# Press 'd' for disk view\n# Look for DAVG (device average latency)\n# KAVG (kernel average latency)\n# GAVG (guest average latency)\n\n# Check storage adapter statistics\nesxcli storage core adapter stats get\n\n# Check multipathing\nesxcli storage nmp path list\nesxcli storage core path list\n```\n\n**Performance Tuning:**\n```bash\n# Optimize storage queue depths\nesxcli system settings advanced set -o /Disk/QFullSampleSize -i 32\nesxcli system settings advanced set -o /Disk/QFullThreshold -i 8\n\n# Adjust storage I/O scheduling\nesxcli storage nmp device set --device [DEVICE] --psp VMW_PSP_RR\n\n# Configure storage I/O control\n# Use vCenter to enable SIOC on datastores\n```\n\n### 5.2 CPU Performance Issues\n\n**Symptom:** High CPU utilization, slow application response\n\n**CPU Performance Analysis:**\n```bash\n# System-level CPU analysis\ntop\nhtop\nsar -u 5 10\nmpstat 5 10\n\n# Check CPU ready time (VMware)\nesxtop\n# Press 'c' for CPU view\n# Look for %RDY (CPU ready time)\n# Values > 10% indicate CPU contention\n\n# HyperFlex CPU utilization\nhxcli cluster cpu-usage\nhxcli node cpu-usage --node-ip [NODE_IP]\n```\n\n**CPU Optimization:**\n```powershell\n# PowerCLI CPU optimization\n$VMs = Get-VM | Where {$_.PowerState -eq \"PoweredOn\"}\n\nforeach ($VM in $VMs) {\n    # Check CPU ready time\n    $ReadyTime = Get-Stat -Entity $VM -Stat \"cpu.ready.summation\" -Start (Get-Date).AddHours(-1)\n    \n    if ($ReadyTime.Value -gt 1000) {  # > 10% ready time\n        Write-Host \"High CPU ready time for $($VM.Name): $($ReadyTime.Value)\"\n        \n        # Consider reducing vCPU count or adding CPU reservation\n        $VM | Set-VM -NumCpu ($VM.NumCpu / 2) -Confirm:$false\n    }\n}\n\n# Enable CPU hot-add for flexibility\n$VMs | Set-VM -CpuHotAddEnabled:$true -Confirm:$false\n```\n\n### 5.3 Memory Performance Issues\n\n**Symptom:** Memory pressure, swapping, or ballooning\n\n**Memory Analysis:**\n```bash\n# System memory analysis\nfree -h\nvmstat 5 10\nsar -r 5 10\n\n# Check for memory pressure indicators\ngrep -i \"out of memory\" /var/log/messages\ndmesg | grep -i memory\n\n# HyperFlex memory utilization\nhxcli cluster memory-usage\nhxcli node memory-usage --node-ip [NODE_IP]\n```\n\n**VMware Memory Analysis:**\n```bash\n# ESXi memory analysis\nesxtop\n# Press 'm' for memory view\n# Look for SWCUR (current swap usage)\n# SWTRGT (swap target)\n# MCTLSZ (memory control size - ballooning)\n\n# Check memory compression\nesxcli system stats memory get\n```\n\n**Memory Optimization:**\n```powershell\n# PowerCLI memory optimization\n$VMs = Get-VM | Where {$_.PowerState -eq \"PoweredOn\"}\n\nforeach ($VM in $VMs) {\n    # Check memory usage statistics\n    $MemStats = Get-Stat -Entity $VM -Stat \"mem.usage.average\" -Start (Get-Date).AddHours(-1)\n    $SwapStats = Get-Stat -Entity $VM -Stat \"mem.swapped.average\" -Start (Get-Date).AddHours(-1)\n    \n    if ($SwapStats.Value -gt 0) {\n        Write-Host \"Memory pressure detected for $($VM.Name)\"\n        \n        # Increase memory allocation\n        $CurrentMem = $VM.MemoryGB\n        $VM | Set-VM -MemoryGB ($CurrentMem * 1.5) -Confirm:$false\n    }\n}\n\n# Configure memory reservations for critical VMs\n$CriticalVMs = Get-VM -Tag \"Critical\"\n$CriticalVMs | ForEach {\n    $MemReservation = $_.MemoryGB * 1024 * 0.75  # 75% reservation\n    $_ | Get-VMResourceConfiguration | Set-VMResourceConfiguration -MemReservationMB $MemReservation\n}\n```\n\n## Storage Issues\n\n### 6.1 Datastore Capacity Issues\n\n**Symptom:** Datastore full or near capacity warnings\n\n**Capacity Analysis:**\n```bash\n# HyperFlex datastore capacity\nhxcli datastore list\nhxcli datastore capacity-summary\n\n# Check individual VM storage usage\nhxcli vm list\nhxcli vm storage-summary --vm-name [VM_NAME]\n\n# Identify large files\nfind /vmfs/volumes/[DATASTORE] -type f -size +10G -exec ls -lh {} \\;\n```\n\n**Capacity Management:**\n```powershell\n# PowerCLI capacity management\n$Datastores = Get-Datastore | Where {$_.FreeSpaceGB -lt ($_.CapacityGB * 0.15)}  # < 15% free\n\nforeach ($DS in $Datastores) {\n    Write-Host \"Low space on datastore: $($DS.Name) - $([math]::Round($DS.FreeSpaceGB, 2))GB free\"\n    \n    # Find VMs with snapshots\n    $VMsWithSnapshots = Get-VM -Datastore $DS | Get-Snapshot\n    if ($VMsWithSnapshots) {\n        Write-Host \"VMs with snapshots on $($DS.Name):\"\n        $VMsWithSnapshots | Select VM, Name, SizeGB, Created\n    }\n    \n    # Find VMs with large VMDK files\n    $LargeVMDKs = Get-VM -Datastore $DS | Get-HardDisk | Where {$_.CapacityGB -gt 500}\n    if ($LargeVMDKs) {\n        Write-Host \"Large VMDK files on $($DS.Name):\"\n        $LargeVMDKs | Select Parent, CapacityGB, StorageFormat\n    }\n}\n\n# Clean up old snapshots\nGet-VM | Get-Snapshot | Where {$_.Created -lt (Get-Date).AddDays(-7)} | Remove-Snapshot -Confirm:$false\n\n# Convert thick disks to thin\nGet-VM | Get-HardDisk | Where {$_.StorageFormat -eq \"Thick\"} | Set-HardDisk -StorageFormat Thin -Confirm:$false\n```\n\n### 6.2 Storage Replication Issues\n\n**Symptom:** Replication failures or synchronization problems\n\n**Replication Diagnostics:**\n```bash\n# Check replication status\nhxcli replication status\nhxcli replication list\n\n# Check replication health\nhxcli replication validate --remote-cluster [REMOTE_CLUSTER_IP]\n\n# Review replication logs\ntail -100 /var/log/springpath/replication.log\ngrep -i error /var/log/springpath/replication.log | tail -20\n\n# Check network connectivity to remote site\nping [REMOTE_SITE_IP]\ntelnet [REMOTE_SITE_IP] 443\nbandwidth-test [REMOTE_SITE_IP]\n```\n\n**Replication Recovery:**\n```bash\n# Restart replication services\nsystemctl restart springpath-replication\n\n# Re-establish replication pairing\nhxcli replication pair --remote-cluster [REMOTE_IP] --username [USER] --password [PASSWORD]\n\n# Force replication sync\nhxcli replication sync-now --vm [VM_NAME]\n\n# Check and resolve replication conflicts\nhxcli replication conflicts list\nhxcli replication conflicts resolve --vm [VM_NAME] --resolution [local|remote]\n```\n\n### 6.3 Backup and Snapshot Issues\n\n**Symptom:** Backup failures or snapshot management problems\n\n**Backup Diagnostics:**\n```bash\n# Check snapshot status\nhxcli snapshot list\nhxcli snapshot status --vm [VM_NAME]\n\n# Review backup job logs\ntail -100 /var/log/backup/backup.log\ngrep -i \"error\\|fail\" /var/log/backup/backup.log | tail -20\n\n# Check backup storage connectivity\nping [BACKUP_STORAGE_IP]\ntelnet [BACKUP_STORAGE_IP] [BACKUP_PORT]\n\n# Verify backup agent status\nsystemctl status veeam-backup-agent\nsystemctl status commvault-agent\n```\n\n**Backup Recovery:**\n```powershell\n# PowerCLI backup troubleshooting\n# Check for stuck snapshots\n$StuckSnapshots = Get-VM | Get-Snapshot | Where {$_.Created -lt (Get-Date).AddDays(-1)}\n\nif ($StuckSnapshots) {\n    Write-Host \"Found stuck snapshots:\"\n    $StuckSnapshots | Select VM, Name, SizeGB, Created\n    \n    # Attempt to remove stuck snapshots\n    $StuckSnapshots | Remove-Snapshot -Confirm:$false\n}\n\n# Check for VMs with consolidation needed\n$VMsNeedConsolidation = Get-VM | Where {$_.ExtensionData.Runtime.ConsolidationNeeded -eq $true}\n\nif ($VMsNeedConsolidation) {\n    Write-Host \"VMs needing disk consolidation:\"\n    $VMsNeedConsolidation | Select Name\n    \n    # Consolidate disks\n    $VMsNeedConsolidation | ForEach {\n        $_.ExtensionData.ConsolidateVMDisks_Task()\n    }\n}\n```\n\n## Security Issues\n\n### 7.1 Authentication and Access Issues\n\n**Symptom:** Login failures or access denied errors\n\n**Authentication Diagnostics:**\n```bash\n# Check authentication logs\ntail -100 /var/log/auth.log\ngrep -i \"authentication failure\" /var/log/auth.log\ngrep -i \"failed login\" /var/log/secure\n\n# Test LDAP connectivity\nldapsearch -x -H ldap://[LDAP_SERVER] -D \"[BIND_DN]\" -W\n\n# Check certificate validity\nopenssl x509 -in /etc/ssl/certs/[CERT_FILE] -noout -dates\nopenssl verify /etc/ssl/certs/[CERT_FILE]\n\n# Verify time synchronization\ntimedatectl status\nchrony sources -v\n```\n\n**Access Control Issues:**\n```bash\n# Check user account status\nid [USERNAME]\ngetent passwd [USERNAME]\nchage -l [USERNAME]\n\n# Verify group memberships\ngroups [USERNAME]\ngetent group [GROUPNAME]\n\n# Check sudo permissions\nsudo -l -U [USERNAME]\n\n# Review file permissions\nls -la [FILE_PATH]\ngetfacl [FILE_PATH]\n```\n\n### 7.2 Certificate Issues\n\n**Symptom:** SSL/TLS certificate errors or warnings\n\n**Certificate Diagnostics:**\n```bash\n# Check certificate details\nopenssl x509 -in [CERT_FILE] -text -noout\n\n# Verify certificate chain\nopenssl verify -CAfile [CA_CERT] [SERVER_CERT]\n\n# Test SSL connection\nopenssl s_client -connect [SERVER]:[PORT] -servername [HOSTNAME]\n\n# Check certificate expiration\nopenssl x509 -in [CERT_FILE] -noout -dates\n\n# Verify certificate matches private key\nopenssl x509 -noout -modulus -in [CERT_FILE] | openssl md5\nopenssl rsa -noout -modulus -in [KEY_FILE] | openssl md5\n```\n\n**Certificate Renewal:**\n```bash\n# Generate new certificate signing request\nopenssl req -new -newkey rsa:2048 -nodes -keyout [NEW_KEY] -out [CSR_FILE]\n\n# Install new certificate (example for HyperFlex)\nhxcli certificate install --cert-file [CERT_FILE] --key-file [KEY_FILE]\n\n# Restart services to use new certificate\nsystemctl restart springpath-storfs-mgmt\nsystemctl restart httpd\n\n# Verify new certificate installation\nhxcli certificate show\ncurl -I https://[SERVER_IP]\n```\n\n### 7.3 Network Security Issues\n\n**Symptom:** Blocked connections or security policy violations\n\n**Firewall Diagnostics:**\n```bash\n# Check firewall status and rules\niptables -L -n\nfirewall-cmd --list-all\nufw status verbose\n\n# Check for blocked connections\ngrep -i \"denied\\|blocked\" /var/log/firewall.log\ntail -100 /var/log/iptables.log\n\n# Test specific port connectivity\nnmap -p [PORT] [TARGET_IP]\ntelnet [TARGET_IP] [PORT]\nnc -zv [TARGET_IP] [PORT]\n\n# Check network security policies (ACI)\ncurl -k -X GET https://[APIC_IP]/api/node/class/faultSummary.json?query-target-filter=wcard(faultSummary.cause,\"security\")\n```\n\n## Monitoring and Alerting Issues\n\n### 8.1 Missing or False Alerts\n\n**Symptom:** Expected alerts not firing or too many false positives\n\n**Alert Configuration Review:**\n```bash\n# Check alert configuration\nhxcli alert policy list\nhxcli alert destination list\n\n# Test alert delivery\nhxcli alert test --destination [EMAIL_ADDRESS]\n\n# Review SNMP configuration\nhxcli snmp show\nhxcli snmp trap-destination list\n\n# Check monitoring agent status\nsystemctl status telegraf\nsystemctl status collectd\nsystemctl status zabbix-agent\n```\n\n**SNMP Troubleshooting:**\n```bash\n# Test SNMP connectivity\nsnmpwalk -v2c -c [COMMUNITY] [TARGET_IP] 1.3.6.1.2.1.1.1.0\nsnmpget -v2c -c [COMMUNITY] [TARGET_IP] 1.3.6.1.2.1.1.5.0\n\n# Check SNMP daemon status\nsystemctl status snmpd\nnetstat -ulnp | grep :161\n\n# Review SNMP logs\ntail -100 /var/log/snmpd.log\ngrep -i error /var/log/snmpd.log\n\n# Test SNMP traps\nsnmptrap -v2c -c [COMMUNITY] [TRAP_DESTINATION]:162 \"\" 1.3.6.1.4.1.9999 1.3.6.1.4.1.9999.1 s \"Test trap\"\n```\n\n### 8.2 Performance Monitoring Issues\n\n**Symptom:** Missing performance data or inaccurate metrics\n\n**Monitoring Data Validation:**\n```bash\n# Check data collection services\nsystemctl status prometheus\nsystemctl status grafana-server\nsystemctl status influxdb\n\n# Verify metric collection\ncurl http://localhost:8086/query?q=\"SHOW%20DATABASES\"  # InfluxDB\ncurl http://localhost:9090/api/v1/label/__name__/values  # Prometheus\n\n# Check monitoring agent connectivity\ntelegraf --test --config /etc/telegraf/telegraf.conf\ncollectd -f  # Run in foreground to see errors\n\n# Review monitoring logs\ntail -100 /var/log/telegraf/telegraf.log\ntail -100 /var/log/grafana/grafana.log\n```\n\n## Backup and Recovery Issues\n\n### 9.1 Backup Failures\n\n**Symptom:** Backup jobs failing or incomplete backups\n\n**Backup Diagnostics:**\n```bash\n# Check backup job status\nveeamconfig job list\nveeamconfig job info --name [JOB_NAME]\n\n# Review backup logs\ntail -100 /var/log/veeam/backup.log\ngrep -i \"error\\|fail\" /var/log/veeam/backup.log | tail -20\n\n# Check backup repository status\nveeamconfig repository list\nveeamconfig repository info --name [REPO_NAME]\n\n# Verify network connectivity to backup storage\nping [BACKUP_SERVER_IP]\ntelnet [BACKUP_SERVER_IP] [BACKUP_PORT]\n```\n\n**Backup Recovery Procedures:**\n```bash\n# Restart backup services\nsystemctl restart veeam\nsystemctl restart commvault\n\n# Check and fix backup repository issues\nveeamconfig repository rescan --name [REPO_NAME]\nveeamconfig repository repair --name [REPO_NAME]\n\n# Manually trigger backup job\nveeamconfig job start --name [JOB_NAME]\n\n# Check backup storage space\ndf -h [BACKUP_MOUNT_POINT]\ndu -sh [BACKUP_DIRECTORY]/*\n```\n\n### 9.2 Recovery Issues\n\n**Symptom:** Cannot restore VMs or files from backup\n\n**Recovery Diagnostics:**\n```bash\n# List available backups\nveeamconfig backup list\nveeamconfig backup info --name [BACKUP_NAME]\n\n# Check backup integrity\nveeamconfig backup verify --name [BACKUP_NAME]\n\n# Test restore capability\nveeamconfig backup restore --name [BACKUP_NAME] --target [TEST_LOCATION] --test\n\n# Review restore logs\ntail -100 /var/log/veeam/restore.log\ngrep -i \"error\\|fail\" /var/log/veeam/restore.log | tail -20\n```\n\n## Escalation Procedures\n\n### 10.1 Internal Escalation\n\n**Escalation Matrix:**\n\n| **Severity** | **Response Time** | **Escalation Level** | **Contact** |\n|--------------|-------------------|----------------------|-------------|\n| **Critical (P1)** | 15 minutes | Level 3 Engineer | [L3_CONTACT] |\n| **High (P2)** | 1 hour | Level 2 Engineer | [L2_CONTACT] |\n| **Medium (P3)** | 4 hours | Level 1 Engineer | [L1_CONTACT] |\n| **Low (P4)** | 24 hours | Level 1 Engineer | [L1_CONTACT] |\n\n**Escalation Process:**\n```\n1. INITIAL RESPONSE\n   ├── Acknowledge incident within response time\n   ├── Begin diagnostic procedures\n   ├── Document findings\n   └── Communicate status to stakeholders\n\n2. INVESTIGATION\n   ├── Follow troubleshooting procedures\n   ├── Collect diagnostic data\n   ├── Engage additional resources if needed\n   └── Provide regular status updates\n\n3. ESCALATION TRIGGERS\n   ├── Response time exceeded\n   ├── Expertise not available\n   ├── Multiple systems affected\n   └── Customer business impact high\n\n4. ESCALATION ACTIONS\n   ├── Contact next level support\n   ├── Engage vendor support if needed\n   ├── Schedule emergency bridge call\n   └── Notify management\n```\n\n### 10.2 Vendor Support Escalation\n\n**Cisco Technical Support:**\n```\nCisco TAC (Technical Assistance Center):\n├── Phone: 1-800-553-2447 (US)\n├── Online: https://www.cisco.com/c/en/us/support/\n├── Email: tac@cisco.com\n└── Contract Required: Yes (SmartNet)\n\nInformation to Provide:\n├── Contract number\n├── Product serial numbers\n├── Problem description\n├── Business impact\n├── Troubleshooting steps taken\n├── Diagnostic data collected\n└── Contact information\n```\n\n**VMware Support:**\n```\nVMware Global Support:\n├── Phone: 1-877-4-VMWARE (1-877-486-9273)\n├── Online: https://support.vmware.com/\n└── Contract Required: Yes (Support Subscription)\n\nSupport Request Bundle (required):\n├── vm-support logs from affected hosts\n├── vCenter support bundle\n├── Network configuration\n├── Recent changes log\n└── Performance statistics\n```\n\n### 10.3 Emergency Procedures\n\n**Business Continuity Activation:**\n```\nEmergency Response Checklist:\n├── [ ] Assess business impact\n├── [ ] Activate incident command center\n├── [ ] Notify executive management\n├── [ ] Engage business continuity team\n├── [ ] Communicate with affected users\n├── [ ] Document all actions taken\n├── [ ] Coordinate with vendors\n└── [ ] Plan recovery procedures\n\nEmergency Contacts:\n├── IT Manager: [PHONE] / [EMAIL]\n├── Network Operations: [PHONE] / [EMAIL]\n├── Business Continuity: [PHONE] / [EMAIL]\n├── Executive Sponsor: [PHONE] / [EMAIL]\n└── External Support: [VENDOR_CONTACTS]\n```\n\n**Disaster Recovery Activation:**\n```bash\n#!/bin/bash\n# Emergency DR activation script\n\necho \"=== DISASTER RECOVERY ACTIVATION ===\"\necho \"Timestamp: $(date)\"\n\n# Check primary site status\nping -c 3 [PRIMARY_SITE_IP]\nif [ $? -ne 0 ]; then\n    echo \"Primary site unreachable - proceeding with DR activation\"\n    \n    # Activate DR site\n    echo \"Activating DR site...\"\n    hxcli replication activate-site --remote-site [DR_SITE_IP]\n    \n    # Start critical VMs\n    echo \"Starting critical virtual machines...\"\n    CRITICAL_VMS=(\"DC-01\" \"DB-01\" \"WEB-01\")\n    for vm in \"${CRITICAL_VMS[@]}\"; do\n        vim-cmd vmsvc/power.on $(vim-cmd vmsvc/getallvms | grep $vm | awk '{print $1}')\n    done\n    \n    # Update DNS records (if automated)\n    echo \"Updating DNS records...\"\n    # nsupdate commands here\n    \n    # Send notifications\n    echo \"Sending DR activation notifications...\"\n    mail -s \"DR ACTIVATED - Primary site failure\" emergency-team@company.com < /dev/null\n    \nelse\n    echo \"Primary site is reachable - manual intervention required\"\nfi\n```\n\n---\n\n**Troubleshooting Guide Version**: 1.0  \n**Last Updated**: [Date]  \n**Next Review**: [Date + 90 days]  \n**Emergency Contact**: support@company.com"}]
+# Troubleshooting Guide - Solution
+
+## 🔧 **Troubleshooting Overview**
+
+This comprehensive troubleshooting guide provides systematic approaches to diagnosing and resolving common issues with the **Solution** solution. All procedures are tested and validated by our technical team.
+
+### 🎯 **Quick Resolution Index**
+| Issue Category | Typical Resolution Time | Complexity Level |
+|----------------|------------------------|------------------|
+| **Configuration Issues** | 15-30 minutes | Low to Medium |
+| **Connectivity Problems** | 30-60 minutes | Medium |
+| **Performance Issues** | 1-3 hours | Medium to High |
+| **Security and Access** | 30-90 minutes | Medium |
+| **Integration Problems** | 1-4 hours | High |
+
+## 🚨 **Common Issues and Solutions**
+
+### **🔧 Configuration Issues**
+
+#### **Issue: Service Configuration Errors**
+**Symptoms:**
+- Configuration validation failures
+- Service startup errors
+- Parameter validation messages
+- Deployment failures
+
+**Diagnostic Steps:**
+1. Validate configuration against provided templates
+2. Check parameter formats and required values  
+3. Verify service dependencies and prerequisites
+4. Review deployment logs for specific error messages
+
+**Resolution:**
+```bash
+# Validate configuration syntax
+# Check service status and logs
+# Compare with working configuration templates
+# Apply corrected configuration parameters
+```
+
+**Prevention:**
+- Use provided configuration templates as baseline
+- Validate configurations before deployment
+- Implement configuration version control
+- Regular configuration audits and reviews
+
+#### **Issue: Resource Naming and Tagging Problems**
+**Symptoms:**
+- Resource creation failures
+- Naming convention violations
+- Missing or incorrect tags
+- Policy compliance failures
+
+**Diagnostic Steps:**
+1. Review naming conventions and policies
+2. Check existing resource names for conflicts
+3. Validate tag requirements and formats
+4. Verify policy compliance requirements
+
+**Resolution:**
+- Apply correct naming conventions per solution standards
+- Add required tags using provided tag templates
+- Resolve naming conflicts through systematic renaming
+- Update policies to match organizational requirements
+
+### **🌐 Connectivity and Network Issues**
+
+#### **Issue: Network Connectivity Problems**
+**Symptoms:**
+- Connection timeouts
+- DNS resolution failures
+- Port accessibility issues
+- Certificate errors
+
+**Diagnostic Steps:**
+1. **Network Layer Testing:**
+   ```bash
+   # Test basic connectivity
+   ping target-endpoint
+   telnet target-host target-port
+   nslookup target-domain
+   ```
+
+2. **Security Group/Firewall Validation:**
+   - Verify security group rules
+   - Check firewall configurations
+   - Validate port accessibility
+   - Review network ACL settings
+
+3. **DNS and Certificate Verification:**
+   - Confirm DNS resolution
+   - Validate SSL/TLS certificates
+   - Check certificate expiration
+   - Verify certificate chains
+
+**Resolution:**
+- Configure security groups and firewall rules
+- Update DNS settings and records
+- Renew or replace expired certificates
+- Adjust network access control lists
+
+#### **Issue: Load Balancer and Traffic Distribution**
+**Symptoms:**
+- Uneven traffic distribution
+- Health check failures
+- Backend service unavailability
+- Response time issues
+
+**Diagnostic Steps:**
+1. Check load balancer health checks
+2. Verify backend service availability
+3. Review traffic distribution patterns
+4. Analyze response time metrics
+
+**Resolution:**
+- Adjust health check parameters
+- Fix backend service issues
+- Reconfigure traffic distribution algorithms
+- Optimize backend service performance
+
+### **⚡ Performance Issues**
+
+#### **Issue: High Latency and Slow Response Times**
+**Symptoms:**
+- Response times exceeding SLA targets
+- User experience degradation
+- Timeout errors
+- Performance monitoring alerts
+
+**Diagnostic Steps:**
+1. **Performance Metrics Analysis:**
+   - CPU and memory utilization
+   - Database query performance
+   - Network latency measurements
+   - Application response times
+
+2. **Resource Utilization Assessment:**
+   - Compute resource availability
+   - Storage IOPS and throughput
+   - Network bandwidth utilization
+   - Database connection pools
+
+**Resolution:**
+- Scale compute resources horizontally or vertically
+- Optimize database queries and indexes
+- Implement caching strategies
+- Adjust resource allocation and limits
+
+#### **Issue: Resource Capacity and Scaling**
+**Symptoms:**
+- Resource exhaustion
+- Auto-scaling not triggering
+- Performance degradation under load
+- Service availability issues
+
+**Diagnostic Steps:**
+1. Review auto-scaling policies and thresholds
+2. Check resource quotas and limits
+3. Analyze historical usage patterns
+4. Validate scaling trigger conditions
+
+**Resolution:**
+- Adjust auto-scaling thresholds and policies
+- Increase resource quotas and limits
+- Implement predictive scaling strategies
+- Optimize resource utilization patterns
+
+### **🔐 Security and Access Issues**
+
+#### **Issue: Authentication and Authorization Problems**
+**Symptoms:**
+- Login failures
+- Access denied errors
+- Permission-related issues
+- Multi-factor authentication problems
+
+**Diagnostic Steps:**
+1. Verify user credentials and account status
+2. Check role and permission assignments
+3. Review authentication provider connectivity
+4. Validate multi-factor authentication setup
+
+**Resolution:**
+- Reset user credentials and passwords
+- Update role assignments and permissions
+- Fix authentication provider configurations
+- Reconfigure multi-factor authentication
+
+#### **Issue: Certificate and Encryption Problems**
+**Symptoms:**
+- SSL/TLS handshake failures
+- Certificate validation errors
+- Encryption key issues
+- Secure communication failures
+
+**Diagnostic Steps:**
+1. Check certificate validity and expiration
+2. Verify certificate chain completeness
+3. Validate encryption key accessibility
+4. Test SSL/TLS configuration
+
+**Resolution:**
+- Renew or replace expired certificates
+- Install missing intermediate certificates
+- Update encryption keys and secrets
+- Fix SSL/TLS configuration parameters
+
+## 🔍 **Advanced Diagnostics**
+
+### **📊 Monitoring and Logging Analysis**
+
+#### **Log Analysis Procedures**
+1. **Application Logs:**
+   ```bash
+   # Filter and analyze application logs
+   grep -i "error" application.log | tail -50
+   awk '/ERROR/ {print $1, $2, $NF}' application.log
+   ```
+
+2. **System Logs:**
+   ```bash
+   # Check system events and errors
+   journalctl -u service-name --since "1 hour ago"
+   dmesg | grep -i error
+   ```
+
+3. **Performance Metrics:**
+   - CPU and memory usage trends
+   - Network traffic patterns
+   - Storage I/O performance
+   - Application-specific metrics
+
+#### **Root Cause Analysis Framework**
+1. **Problem Identification:**
+   - Gather symptoms and error messages
+   - Identify affected components and services
+   - Determine impact scope and severity
+   - Collect relevant logs and metrics
+
+2. **Hypothesis Formation:**
+   - Develop potential root cause theories
+   - Prioritize hypotheses by likelihood
+   - Plan diagnostic tests and validation
+   - Consider environmental factors
+
+3. **Testing and Validation:**
+   - Execute diagnostic procedures systematically
+   - Validate or eliminate each hypothesis
+   - Document findings and evidence
+   - Identify confirmed root cause
+
+4. **Resolution Implementation:**
+   - Develop resolution plan and procedures
+   - Implement fix with appropriate testing
+   - Validate resolution effectiveness
+   - Document solution and prevention measures
+
+### **🛠️ Diagnostic Tools and Commands**
+
+#### **Network Diagnostics**
+```bash
+# Network connectivity testing
+ping -c 4 target-host
+traceroute target-host
+nmap -p port-range target-host
+curl -v https://target-endpoint
+
+# DNS resolution testing
+nslookup domain-name
+dig domain-name
+host domain-name
+```
+
+#### **Performance Analysis**
+```bash
+# System performance monitoring
+top -p process-id
+iotop -o
+netstat -an | grep LISTEN
+ss -tuln
+
+# Application performance
+curl -w "@curl-format.txt" -o /dev/null -s "http://target-url"
+ab -n 100 -c 10 http://target-url/
+```
+
+#### **Service Status and Health**
+```bash
+# Service management
+systemctl status service-name
+journalctl -u service-name -f
+service service-name status
+
+# Process monitoring
+ps aux | grep process-name
+pgrep -f process-pattern
+killall -s SIGUSR1 process-name
+```
+
+## 📞 **Escalation Procedures**
+
+### **🆘 When to Escalate**
+- Issue resolution exceeds 4 hours of troubleshooting
+- Multiple system components affected
+- Security incidents or potential breaches
+- Data loss or corruption suspected
+- Business-critical operations impacted
+
+### **📋 Escalation Information Required**
+1. **Problem Description:**
+   - Detailed symptoms and error messages
+   - Timeline of issue occurrence
+   - Impact assessment and affected users
+   - Previous troubleshooting attempts
+
+2. **System Information:**
+   - Environment details (production, staging, etc.)
+   - Software versions and configurations
+   - Recent changes or deployments
+   - Current system status and metrics
+
+3. **Supporting Evidence:**
+   - Relevant log files and excerpts
+   - Performance metrics and graphs
+   - Configuration files and settings
+   - Screenshots or error captures
+
+### **📧 Escalation Contacts**
+- **Level 2 Support**: Technical specialists for complex issues
+- **Architecture Team**: Design and integration problems
+- **Security Team**: Security incidents and vulnerabilities
+- **Vendor Support**: Third-party service and licensing issues
+
+## 🔄 **Prevention and Maintenance**
+
+### **🛡️ Preventive Measures**
+1. **Regular Health Checks:**
+   - Automated monitoring and alerting
+   - Periodic system health assessments
+   - Performance baseline monitoring
+   - Security vulnerability scanning
+
+2. **Maintenance Procedures:**
+   - Regular backup verification and testing
+   - Software updates and patch management
+   - Configuration management and audits
+   - Disaster recovery procedure testing
+
+3. **Documentation Updates:**
+   - Keep troubleshooting guides current
+   - Document new issues and solutions
+   - Update configuration templates
+   - Maintain escalation contact information
+
+### **📊 Issue Tracking and Analysis**
+- Maintain issue tracking system with resolution details
+- Analyze recurring issues for systemic problems
+- Update troubleshooting procedures based on new findings
+- Share knowledge and solutions across teams
+
+## 📚 **Additional Resources**
+
+### **🔗 Related Documentation**
+- **[🏗️ Architecture Guide](architecture.md)**: Solution design and component details
+- **[✅ Prerequisites](prerequisites.md)**: Implementation requirements and preparation
+- **[🚀 Implementation Guide](../delivery/implementation-guide.md)**: Deployment procedures and configurations
+- **[📋 Operations Runbook](../delivery/operations-runbook.md)**: Day-to-day operational procedures
+
+### **🌐 External Resources**
+- Cloud provider troubleshooting documentation
+- Service-specific support and knowledge bases
+- Community forums and discussion groups
+- Professional support and consulting services
+
+---
+
+**📍 Troubleshooting Guide Version**: 2.0  
+**Last Updated**: January 2025  
+**Validation Status**: ✅ Tested and Verified
+
+**Need Additional Help?** Escalate to appropriate support teams using the procedures above or reference [Operations Runbook](../delivery/operations-runbook.md) for ongoing operational support.

@@ -1,46 +1,47 @@
 version: '2.0'
 category: devops
-generated_at: '2025-08-24T19:23:46.718923'
+generated_at: '2025-08-31T09:02:28.582416'
 catalog_type: category
 metadata:
   category_name: DevOps & Automation
   description: DevOps automation and CI/CD solutions
   total_solutions: 6
-  last_updated: '2025-08-24T19:23:46.718925'
+  last_updated: '2025-08-31T09:02:28.582453'
+  auto_generated: true
 providers:
   azure:
     solutions:
     - name: enterprise-platform
-      title: Azure DevOps Enterprise Platform
-      provider_catalog: ../solutions/azure.yml
+      title: enterprise-platform
+      provider_catalog: ../providers/azure.yml
       solution_path: ../../solutions/azure/devops/enterprise-platform/
   cisco:
     solutions:
     - name: ci-cd-automation
-      title: Cisco CI/CD Automation Platform
-      provider_catalog: ../solutions/cisco.yml
+      title: ci-cd-automation
+      provider_catalog: ../providers/cisco.yml
       solution_path: ../../solutions/cisco/devops/ci-cd-automation/
   dell:
     solutions:
     - name: poweredge-ci-infrastructure
-      title: Dell PowerEdge CI Infrastructure
-      provider_catalog: ../solutions/dell.yml
+      title: poweredge-ci-infrastructure
+      provider_catalog: ../providers/dell.yml
       solution_path: ../../solutions/dell/devops/poweredge-ci-infrastructure/
   github:
     solutions:
     - name: actions-enterprise-cicd
-      title: GitHub Actions Enterprise CI/CD Platform
-      provider_catalog: ../solutions/github.yml
+      title: actions-enterprise-cicd
+      provider_catalog: ../providers/github.yml
       solution_path: ../../solutions/github/devops/actions-enterprise-cicd/
   hashicorp:
     solutions:
     - name: terraform-enterprise
-      title: HashiCorp Terraform Enterprise Platform
-      provider_catalog: ../solutions/hashicorp.yml
+      title: terraform-enterprise
+      provider_catalog: ../providers/hashicorp.yml
       solution_path: ../../solutions/hashicorp/devops/terraform-enterprise/
   ibm:
     solutions:
     - name: ansible-automation-platform
-      title: IBM Ansible Automation Platform
-      provider_catalog: ../solutions/ibm.yml
+      title: ansible-automation-platform
+      provider_catalog: ../providers/ibm.yml
       solution_path: ../../solutions/ibm/devops/ansible-automation-platform/

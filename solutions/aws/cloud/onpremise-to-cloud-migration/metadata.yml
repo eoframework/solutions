@@ -1,181 +1,27 @@
-# EO Framework™ Template Metadata
-# Required fields for template registration
-
-provider: "Amazon Web Services"
-category: "Cloud"
-solution_name: "On-Premise to Cloud Migration"
-description: "Comprehensive migration solution for moving enterprise workloads from on-premise infrastructure to AWS cloud with automated discovery, assessment, and migration tools"
-version: "1.0.0"
-status: "Active"  # Active, Draft, Deprecated
-
-# Maintainer information
+provider: AWS
+category: cloud
+solution_name: Onpremise To Cloud Migration
+description: Onpremise To Cloud Migration solution for AWS
+version: 1.0.0
+status: Active
 maintainers:
-  - name: "AWS Migration Solutions Architect"
-    email: "migration-team@company.com"
-    role: "Lead Migration Architect"
-  - name: "Cloud Migration Specialist"
-    email: "cloud-migration@company.com"
-    role: "Senior Migration Engineer"
-
-# Classification tags
+- name: "EO Framework\u2122 AWS Solutions Team"
+  email: aws-solutions@eoframework.com
+  role: Cloud Solutions Architect
 tags:
-  - "migration"
-  - "hybrid-cloud"
-  - "workload-migration"
-  - "application-migration"
-  - "database-migration"
-  - "aws-dms"
-  - "aws-sms"
-  - "aws-mgn"
-  - "cloud-adoption"
-
-# Technical requirements
+- cloud
+- onpremise
+- aws
+- migration
 requirements:
   prerequisites:
-    - "AWS Account with migration permissions"
-    - "On-premise infrastructure inventory"
-    - "Network connectivity between on-premise and AWS"
-    - "Understanding of current application architecture"
-    - "Database and application access credentials"
+  - AWS Account
+  - Administrative Access
   tools:
-    - "AWS Application Migration Service (MGN)"
-    - "AWS Database Migration Service (DMS)"
-    - "AWS Server Migration Service (SMS)"
-    - "AWS Migration Hub"
-    - "Terraform >= 1.0"
-    - "Python >= 3.8"
-    - "PowerShell >= 5.1"
+  - Python 3.8+
+  - AWS CLI
+  - Terraform
   skills:
-    - "Infrastructure architecture and design"
-    - "Database administration"
-    - "Network configuration"
-    - "Application deployment"
-    - "Cloud migration strategies"
-
-# Business context
-business_value:
-  primary_benefits:
-    - "60-80% reduction in infrastructure costs"
-    - "Improved scalability and performance"
-    - "Enhanced security and compliance"
-    - "Reduced maintenance overhead"
-    - "Faster time-to-market for new features"
-  target_audience:
-    - "Enterprise IT teams"
-    - "Chief Technology Officers"
-    - "Infrastructure managers"
-    - "Application owners"
-    - "Database administrators"
-  use_cases:
-    - "Data center consolidation"
-    - "Legacy system modernization"
-    - "Cost optimization initiatives"
-    - "Digital transformation projects"
-    - "Disaster recovery improvement"
-
-# Template structure
-template_structure:
-  presales:
-    - "Migration readiness assessment"
-    - "Total cost of ownership analysis"
-    - "Migration strategy and roadmap"
-    - "Risk assessment and mitigation"
-    - "Executive business case"
-  delivery:
-    - "Discovery and assessment tools"
-    - "Migration wave planning"
-    - "Automated migration scripts"
-    - "Testing and validation procedures"
-    - "Go-live and cutover plans"
-
-# AWS-specific information
-aws_services:
-  migration:
-    - "AWS Application Migration Service (MGN)"
-    - "AWS Database Migration Service (DMS)"
-    - "AWS Server Migration Service (SMS)"
-    - "AWS Migration Hub"
-    - "AWS Application Discovery Service"
-  compute:
-    - "Amazon EC2"
-    - "AWS Auto Scaling"
-    - "Elastic Load Balancing"
-    - "Amazon ECS/EKS"
-  storage:
-    - "Amazon S3"
-    - "Amazon EBS"
-    - "Amazon EFS"
-    - "AWS Storage Gateway"
-  database:
-    - "Amazon RDS"
-    - "Amazon Aurora"
-    - "Amazon DynamoDB"
-    - "Amazon Redshift"
-  networking:
-    - "Amazon VPC"
-    - "AWS Direct Connect"
-    - "AWS VPN"
-    - "AWS Transit Gateway"
-  security:
-    - "AWS IAM"
-    - "AWS KMS"
-    - "AWS Certificate Manager"
-    - "AWS Security Hub"
-
-# Migration patterns
-migration_patterns:
-  - "Rehost (Lift and Shift)"
-  - "Replatform (Lift, Tinker, and Shift)"
-  - "Refactor/Re-architect"
-  - "Repurchase"
-  - "Retire"
-  - "Retain"
-
-# Migration waves
-migration_approach:
-  - "Discovery and Assessment"
-  - "Proof of Concept"
-  - "Pilot Migration"
-  - "Production Migration"
-  - "Optimization and Modernization"
-
-# Compliance and licensing
-compliance:
-  frameworks:
-    - "SOC 2"
-    - "ISO 27001"
-    - "PCI DSS"
-    - "HIPAA"
-    - "GDPR"
-  data_classification: "Confidential"
-  export_control: "None"
-
-# Cost considerations
-cost_factors:
-  - "AWS service consumption"
-  - "Data transfer costs"
-  - "Professional services"
-  - "Training and certification"
-  - "Operational overhead during migration"
-
-# Performance metrics
-performance_targets:
-  migration_speed: "10-50 servers per week"
-  downtime_target: "< 4 hours per application"
-  data_sync_efficiency: "> 95%"
-  rollback_time: "< 2 hours"
-
-# Risk factors
-risk_factors:
-  - "Application dependencies"
-  - "Data transfer bandwidth"
-  - "License compatibility"
-  - "Security and compliance"
-  - "Skills and training gaps"
-
-# Change tracking
-changelog:
-  - version: "1.0.0"
-    date: "2025-01-15"
-    changes: "Initial template creation with comprehensive migration framework"
-    author: "AWS Migration Team"
+  - AWS Platform
+  - Solution Architecture
+  - AWS Services

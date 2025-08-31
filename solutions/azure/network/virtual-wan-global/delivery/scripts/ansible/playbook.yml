@@ -1,0 +1,349 @@
+---
+# Azure Virtual WAN Global Network - Ansible Playbook
+# Comprehensive network deployment automation for Azure Virtual WAN
+
+- name: Deploy Azure Virtual WAN Global Network
+  hosts: localhost
+  connection: local
+  gather_facts: false
+  vars:
+    project_name: "{{ project_name | default('azure-vwan') }}"
+    environment: "{{ environment | default('production') }}"
+    location: "{{ location | default('eastus') }}"
+    secondary_location: "{{ secondary_location | default('westus2') }}"
+    resource_group_name: "{{ project_name }}-{{ environment }}-rg"
+    
+    # Virtual WAN configuration
+    vwan_name: "{{ project_name }}-vwan"
+    hub_primary_name: "{{ project_name }}-hub-primary"
+    hub_secondary_name: "{{ project_name }}-hub-secondary"
+    
+    # Network configuration
+    hub_primary_address_prefix: "10.0.0.0/16"
+    hub_secondary_address_prefix: "10.1.0.0/16"
+    vpn_gateway_scale: 1
+    expressroute_gateway_scale: 1
+    
+    # Tags
+    common_tags:
+      Project: "{{ project_name }}"
+      Environment: "{{ environment }}"
+      Solution: "Azure Virtual WAN"
+      ManagedBy: "Ansible"
+
+  tasks:
+    - name: Create resource group
+      azure_rm_resourcegroup:
+        name: "{{ resource_group_name }}"
+        location: "{{ location }}"
+        tags: "{{ common_tags }}"
+      register: rg_result
+
+    - name: Create Virtual WAN
+      azure_rm_virtualwan:
+        name: "{{ vwan_name }}"
+        resource_group: "{{ resource_group_name }}"
+        location: "{{ location }}"
+        disable_vpn_encryption: false
+        allow_branch_to_branch_traffic: true
+        allow_vnet_to_vnet_traffic: true
+        office365_local_breakout_category: "OptimizeAndAllow"
+        tags: "{{ common_tags }}"
+      register: vwan_result
+
+    - name: Create primary Virtual Hub
+      azure_rm_virtualhub:
+        name: "{{ hub_primary_name }}"
+        resource_group: "{{ resource_group_name }}"
+        location: "{{ location }}"
+        virtual_wan:
+          id: "{{ vwan_result.id }}"
+        address_prefix: "{{ hub_primary_address_prefix }}"
+        sku: "Standard"
+        tags: "{{ common_tags }}"
+      register: hub_primary_result
+
+    - name: Create secondary Virtual Hub
+      azure_rm_virtualhub:
+        name: "{{ hub_secondary_name }}"
+        resource_group: "{{ resource_group_name }}"
+        location: "{{ secondary_location }}"
+        virtual_wan:
+          id: "{{ vwan_result.id }}"
+        address_prefix: "{{ hub_secondary_address_prefix }}"
+        sku: "Standard"
+        tags: "{{ common_tags }}"
+      register: hub_secondary_result
+
+    - name: Create VPN Gateway in primary hub
+      azure_rm_vpngateway:
+        name: "{{ hub_primary_name }}-vpngw"
+        resource_group: "{{ resource_group_name }}"
+        location: "{{ location }}"
+        virtual_hub:
+          id: "{{ hub_primary_result.id }}"
+        vpn_gateway_scale_unit: "{{ vpn_gateway_scale }}"
+        tags: "{{ common_tags }}"
+      register: vpn_gw_primary
+
+    - name: Create VPN Gateway in secondary hub
+      azure_rm_vpngateway:
+        name: "{{ hub_secondary_name }}-vpngw"
+        resource_group: "{{ resource_group_name }}"
+        location: "{{ secondary_location }}"
+        virtual_hub:
+          id: "{{ hub_secondary_result.id }}"
+        vpn_gateway_scale_unit: "{{ vpn_gateway_scale }}"
+        tags: "{{ common_tags }}"
+      register: vpn_gw_secondary
+
+    - name: Create ExpressRoute Gateway in primary hub
+      azure_rm_expressroutegateway:
+        name: "{{ hub_primary_name }}-ergw"
+        resource_group: "{{ resource_group_name }}"
+        location: "{{ location }}"
+        virtual_hub:
+          id: "{{ hub_primary_result.id }}"
+        scale_units: "{{ expressroute_gateway_scale }}"
+        tags: "{{ common_tags }}"
+      register: er_gw_primary
+
+    - name: Create ExpressRoute Gateway in secondary hub
+      azure_rm_expressroutegateway:
+        name: "{{ hub_secondary_name }}-ergw"
+        resource_group: "{{ resource_group_name }}"
+        location: "{{ secondary_location }}"
+        virtual_hub:
+          id: "{{ hub_secondary_result.id }}"
+        scale_units: "{{ expressroute_gateway_scale }}"
+        tags: "{{ common_tags }}"
+      register: er_gw_secondary
+
+    - name: Create Azure Firewall Policy
+      azure_rm_firewallpolicy:
+        name: "{{ project_name }}-fw-policy"
+        resource_group: "{{ resource_group_name }}"
+        location: "{{ location }}"
+        sku:
+          name: "Standard"
+          tier: "Standard"
+        threat_intel_mode: "Alert"
+        tags: "{{ common_tags }}"
+      register: fw_policy_result
+
+    - name: Create Azure Firewall in primary hub
+      azure_rm_azurefirewall:
+        name: "{{ hub_primary_name }}-azfw"
+        resource_group: "{{ resource_group_name }}"
+        location: "{{ location }}"
+        sku:
+          name: "AZFW_Hub"
+          tier: "Standard"
+        virtual_hub:
+          id: "{{ hub_primary_result.id }}"
+        firewall_policy:
+          id: "{{ fw_policy_result.id }}"
+        hub_ip_addresses:
+          public_ips:
+            count: 1
+        tags: "{{ common_tags }}"
+      register: firewall_primary
+
+    - name: Create Azure Firewall in secondary hub
+      azure_rm_azurefirewall:
+        name: "{{ hub_secondary_name }}-azfw"
+        resource_group: "{{ resource_group_name }}"
+        location: "{{ secondary_location }}"
+        sku:
+          name: "AZFW_Hub"
+          tier: "Standard"
+        virtual_hub:
+          id: "{{ hub_secondary_result.id }}"
+        firewall_policy:
+          id: "{{ fw_policy_result.id }}"
+        hub_ip_addresses:
+          public_ips:
+            count: 1
+        tags: "{{ common_tags }}"
+      register: firewall_secondary
+
+    - name: Create spoke virtual networks
+      azure_rm_virtualnetwork:
+        name: "{{ item.name }}"
+        resource_group: "{{ resource_group_name }}"
+        location: "{{ item.location }}"
+        address_prefixes_cidr:
+          - "{{ item.address_space }}"
+        tags: "{{ common_tags | combine({'Tier': item.tier}) }}"
+      loop:
+        - name: "{{ project_name }}-spoke1-vnet"
+          location: "{{ location }}"
+          address_space: "10.10.0.0/16"
+          tier: "Application"
+        - name: "{{ project_name }}-spoke2-vnet"
+          location: "{{ location }}"
+          address_space: "10.11.0.0/16"
+          tier: "Database"
+        - name: "{{ project_name }}-spoke3-vnet"
+          location: "{{ secondary_location }}"
+          address_space: "10.12.0.0/16"
+          tier: "Application"
+      register: spoke_vnets
+
+    - name: Create subnets in spoke networks
+      azure_rm_subnet:
+        name: "{{ item.subnet_name }}"
+        resource_group: "{{ resource_group_name }}"
+        virtual_network_name: "{{ item.vnet_name }}"
+        address_prefix_cidr: "{{ item.address_prefix }}"
+      loop:
+        - vnet_name: "{{ project_name }}-spoke1-vnet"
+          subnet_name: "ApplicationSubnet"
+          address_prefix: "10.10.1.0/24"
+        - vnet_name: "{{ project_name }}-spoke1-vnet"
+          subnet_name: "WebSubnet"
+          address_prefix: "10.10.2.0/24"
+        - vnet_name: "{{ project_name }}-spoke2-vnet"
+          subnet_name: "DatabaseSubnet"
+          address_prefix: "10.11.1.0/24"
+        - vnet_name: "{{ project_name }}-spoke3-vnet"
+          subnet_name: "ApplicationSubnet"
+          address_prefix: "10.12.1.0/24"
+
+    - name: Create Virtual Hub connections for spoke networks
+      azure_rm_hubroutetable:
+        name: "{{ item.connection_name }}"
+        resource_group: "{{ resource_group_name }}"
+        virtual_hub_name: "{{ item.hub_name }}"
+        remote_virtual_network:
+          id: "/subscriptions/{{ ansible_subscription_id }}/resourceGroups/{{ resource_group_name }}/providers/Microsoft.Network/virtualNetworks/{{ item.vnet_name }}"
+        enable_internet_security: true
+        routing_configuration:
+          associated_route_table:
+            id: "/subscriptions/{{ ansible_subscription_id }}/resourceGroups/{{ resource_group_name }}/providers/Microsoft.Network/virtualHubs/{{ item.hub_name }}/hubRouteTables/defaultRouteTable"
+          propagated_route_tables:
+            ids:
+              - id: "/subscriptions/{{ ansible_subscription_id }}/resourceGroups/{{ resource_group_name }}/providers/Microsoft.Network/virtualHubs/{{ item.hub_name }}/hubRouteTables/defaultRouteTable"
+            labels:
+              - "default"
+      loop:
+        - connection_name: "{{ project_name }}-spoke1-connection"
+          hub_name: "{{ hub_primary_name }}"
+          vnet_name: "{{ project_name }}-spoke1-vnet"
+        - connection_name: "{{ project_name }}-spoke2-connection"
+          hub_name: "{{ hub_primary_name }}"
+          vnet_name: "{{ project_name }}-spoke2-vnet"
+        - connection_name: "{{ project_name }}-spoke3-connection"
+          hub_name: "{{ hub_secondary_name }}"
+          vnet_name: "{{ project_name }}-spoke3-vnet"
+
+    - name: Create Network Security Groups
+      azure_rm_securitygroup:
+        name: "{{ item.name }}"
+        resource_group: "{{ resource_group_name }}"
+        location: "{{ item.location }}"
+        rules: "{{ item.rules }}"
+        tags: "{{ common_tags | combine({'Tier': item.tier}) }}"
+      loop:
+        - name: "{{ project_name }}-web-nsg"
+          location: "{{ location }}"
+          tier: "Web"
+          rules:
+            - name: "AllowHTTP"
+              protocol: "Tcp"
+              source_address_prefix: "*"
+              destination_port_range: "80"
+              access: "Allow"
+              priority: 1001
+              direction: "Inbound"
+            - name: "AllowHTTPS"
+              protocol: "Tcp"
+              source_address_prefix: "*"
+              destination_port_range: "443"
+              access: "Allow"
+              priority: 1002
+              direction: "Inbound"
+        - name: "{{ project_name }}-app-nsg"
+          location: "{{ location }}"
+          tier: "Application"
+          rules:
+            - name: "AllowAppPorts"
+              protocol: "Tcp"
+              source_address_prefix: "10.10.2.0/24"
+              destination_port_range: "8080-8090"
+              access: "Allow"
+              priority: 1001
+              direction: "Inbound"
+        - name: "{{ project_name }}-db-nsg"
+          location: "{{ location }}"
+          tier: "Database"
+          rules:
+            - name: "AllowSQL"
+              protocol: "Tcp"
+              source_address_prefix: "10.10.1.0/24"
+              destination_port_range: "1433"
+              access: "Allow"
+              priority: 1001
+              direction: "Inbound"
+
+    - name: Create Route Tables for custom routing
+      azure_rm_routetable:
+        name: "{{ item.name }}"
+        resource_group: "{{ resource_group_name }}"
+        location: "{{ item.location }}"
+        routes: "{{ item.routes }}"
+        tags: "{{ common_tags }}"
+      loop:
+        - name: "{{ project_name }}-web-rt"
+          location: "{{ location }}"
+          routes:
+            - name: "ToFirewall"
+              address_prefix: "0.0.0.0/0"
+              next_hop_type: "VirtualAppliance"
+              next_hop_ip_address: "{{ firewall_primary.hub_ip_addresses.private_ip_address }}"
+        - name: "{{ project_name }}-app-rt"
+          location: "{{ location }}"
+          routes:
+            - name: "ToFirewall"
+              address_prefix: "0.0.0.0/0"
+              next_hop_type: "VirtualAppliance"
+              next_hop_ip_address: "{{ firewall_primary.hub_ip_addresses.private_ip_address }}"
+
+    - name: Display deployment summary
+      debug:
+        msg: |
+          ================================================================================
+          AZURE VIRTUAL WAN GLOBAL NETWORK DEPLOYMENT SUMMARY
+          ================================================================================
+          
+          Deployment Status: SUCCESSFUL
+          Deployment Date: {{ ansible_date_time.iso8601 }}
+          
+          Virtual WAN: {{ vwan_name }}
+          Resource Group: {{ resource_group_name }}
+          
+          Virtual Hubs:
+          - Primary Hub: {{ hub_primary_name }} ({{ location }})
+          - Secondary Hub: {{ hub_secondary_name }} ({{ secondary_location }})
+          
+          Gateways:
+          - VPN Gateways: Deployed in both hubs
+          - ExpressRoute Gateways: Deployed in both hubs
+          
+          Security:
+          - Azure Firewall: Deployed in both hubs
+          - Network Security Groups: Created for all tiers
+          
+          Spoke Networks:
+          - Application Spoke 1: {{ project_name }}-spoke1-vnet
+          - Database Spoke: {{ project_name }}-spoke2-vnet
+          - Application Spoke 2: {{ project_name }}-spoke3-vnet
+          
+          Next Steps:
+          1. Configure VPN connections for on-premises connectivity
+          2. Set up ExpressRoute circuits if required
+          3. Configure firewall rules and policies
+          4. Deploy workloads to spoke networks
+          5. Set up monitoring and alerting
+          
+          ================================================================================

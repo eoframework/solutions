@@ -1,82 +1,158 @@
 version: '2.0'
 provider: cisco
-generated_at: '2025-08-24T19:23:46.633255'
+generated_at: '2025-08-31T09:02:28.390887'
 catalog_type: provider
 metadata:
   provider_name: Cisco Systems
   total_solutions: 5
-  last_updated: '2025-08-24T19:23:46.633281'
+  last_updated: '2025-08-31T09:02:28.390928'
+  auto_generated: true
 categories:
   ai:
     solutions:
       network-analytics:
-        title: Cisco AI Network Analytics
-        description: AI-powered network monitoring and optimization
-        version: '1.0'
+        provider: CISCO
+        category: ai
+        solution_name: Network Analytics
+        description: Network Analytics solution for CISCO
+        version: 1.0.0
+        status: Active
+        maintainers:
+        - name: "EO Framework\u2122 Cisco Solutions Team"
+          email: cisco-solutions@eoframework.com
+          role: Network Solutions Architect
         tags:
-        - ai
         - network
+        - ai
         - analytics
-        - monitoring
-        complexity: advanced
-        deployment_time: 4-6 weeks
-        repository: https://github.com/eoframework/templates/tree/main/solutions/cisco/ai/network-analytics
+        - cisco
+        requirements:
+          prerequisites:
+          - CISCO Account
+          - Administrative Access
+          tools:
+          - Python 3.8+
+          - Ansible
+          skills:
+          - CISCO Platform
+          - Solution Architecture
+          - Network Infrastructure
         solution_path: ../../solutions/cisco/ai/network-analytics/
   cloud:
     solutions:
       hybrid-infrastructure:
-        title: Cisco Hybrid Cloud Infrastructure
-        description: Multi-cloud networking and security platform
-        version: '1.0'
+        provider: CISCO
+        category: cloud
+        solution_name: Hybrid Infrastructure
+        description: Hybrid Infrastructure solution for CISCO
+        version: 1.0.0
+        status: Active
+        maintainers:
+        - name: "EO Framework\u2122 Cisco Solutions Team"
+          email: cisco-solutions@eoframework.com
+          role: Network Solutions Architect
         tags:
-        - hybrid-cloud
-        - multi-cloud
-        - networking
-        complexity: enterprise
-        deployment_time: 6-8 weeks
-        repository: https://github.com/eoframework/templates/tree/main/solutions/cisco/cloud/hybrid-infrastructure
+        - cloud
+        - infrastructure
+        - hybrid
+        - cisco
+        requirements:
+          prerequisites:
+          - CISCO Account
+          - Administrative Access
+          tools:
+          - Python 3.8+
+          - Ansible
+          skills:
+          - CISCO Platform
+          - Solution Architecture
+          - Network Infrastructure
         solution_path: ../../solutions/cisco/cloud/hybrid-infrastructure/
   cyber-security:
     solutions:
       secure-access:
-        title: Cisco Secure Access Platform
-        description: Zero trust network access and security platform
-        version: '1.0'
+        provider: CISCO
+        category: cyber-security
+        solution_name: Secure Access
+        description: Secure Access solution for CISCO
+        version: 1.0.0
+        status: Active
+        maintainers:
+        - name: "EO Framework\u2122 Cisco Solutions Team"
+          email: cisco-solutions@eoframework.com
+          role: Network Solutions Architect
         tags:
-        - security
+        - secure
         - access
-        - zero-trust
-        - platform
-        complexity: enterprise
-        deployment_time: 8-12 weeks
-        repository: https://github.com/eoframework/templates/tree/main/solutions/cisco/cyber-security/secure-access
+        - cyber-security
+        - cisco
+        requirements:
+          prerequisites:
+          - CISCO Account
+          - Administrative Access
+          tools:
+          - Python 3.8+
+          - Ansible
+          skills:
+          - CISCO Platform
+          - Solution Architecture
+          - Network Infrastructure
         solution_path: ../../solutions/cisco/cyber-security/secure-access/
   devops:
     solutions:
       ci-cd-automation:
-        title: Cisco CI/CD Automation Platform
-        description: Network infrastructure automation and DevOps
-        version: '1.0'
+        provider: CISCO
+        category: devops
+        solution_name: Ci Cd Automation
+        description: Ci Cd Automation solution for CISCO
+        version: 1.0.0
+        status: Active
+        maintainers:
+        - name: "EO Framework\u2122 Cisco Solutions Team"
+          email: cisco-solutions@eoframework.com
+          role: Network Solutions Architect
         tags:
         - automation
-        - cicd
         - devops
-        - infrastructure
-        complexity: advanced
-        deployment_time: 4-8 weeks
-        repository: https://github.com/eoframework/templates/tree/main/solutions/cisco/devops/ci-cd-automation
+        - cisco
+        requirements:
+          prerequisites:
+          - CISCO Account
+          - Administrative Access
+          tools:
+          - Python 3.8+
+          - Ansible
+          skills:
+          - CISCO Platform
+          - Solution Architecture
+          - Network Infrastructure
         solution_path: ../../solutions/cisco/devops/ci-cd-automation/
   network:
     solutions:
       sd-wan-enterprise:
-        title: Cisco SD-WAN Enterprise Platform
-        description: Software-defined WAN for enterprise networks
-        version: '1.0'
+        provider: CISCO
+        category: network
+        solution_name: Sd Wan Enterprise
+        description: Sd Wan Enterprise solution for CISCO
+        version: 1.0.0
+        status: Active
+        maintainers:
+        - name: "EO Framework\u2122 Cisco Solutions Team"
+          email: cisco-solutions@eoframework.com
+          role: Network Solutions Architect
         tags:
-        - sd-wan
+        - network
         - enterprise
-        - software-defined
-        complexity: enterprise
-        deployment_time: 6-10 weeks
-        repository: https://github.com/eoframework/templates/tree/main/solutions/cisco/network/sd-wan-enterprise
+        - cisco
+        requirements:
+          prerequisites:
+          - CISCO Account
+          - Administrative Access
+          tools:
+          - Python 3.8+
+          - Ansible
+          skills:
+          - CISCO Platform
+          - Solution Architecture
+          - Network Infrastructure
         solution_path: ../../solutions/cisco/network/sd-wan-enterprise/

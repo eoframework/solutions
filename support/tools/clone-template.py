@@ -21,7 +21,7 @@ def validate_inputs(provider, category, solution):
         'aws', 'azure', 'google', 'microsoft', 'ibm', 
         'hashicorp', 'github', 'nvidia', 'dell', 'juniper', 'cisco'
     ]
-    valid_categories = ['cloud', 'network', 'cyber-security', 'devops', 'ai']
+    valid_categories = ['ai', 'cloud', 'cyber-security', 'devops', 'modern-workspace', 'network']
     
     if provider not in valid_providers:
         print(f"Warning: '{provider}' is not in standard providers list: {valid_providers}")

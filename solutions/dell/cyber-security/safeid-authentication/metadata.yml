@@ -1,43 +1,26 @@
-name: "Dell SafeID Authentication Solution"
-description: "Enterprise-grade multifactor authentication with hardware-based security for Dell devices"
-provider: "dell"
-category: "cyber-security"
-solution_type: "safeid-authentication"
-version: "1.0"
-license: "BSL-1.1"
-
-metadata:
-  industry_focus:
-    - "Government"
-    - "Healthcare"
-    - "Financial Services"
-    - "Defense"
-  
-  use_cases:
-    - "Enterprise device authentication"
-    - "Government security compliance"
-    - "Healthcare HIPAA compliance"
-    - "Financial services security"
-  
-  technologies:
-    - "Dell ControlVault"
-    - "SafeID Software"
-    - "Biometric Sensors"
-    - "Smart Card Readers"
-  
-  business_benefits:
-    - "95% reduction in security breaches"
-    - "80% fewer password helpdesk calls"
-    - "Federal compliance achievement"
-    - "Streamlined user experience"
-
-technical_specs:
-  deployment_model: "Hardware-integrated"
-  scalability: "1K-100K+ devices"
-  authentication: "Multi-factor hardware-based"
-  compliance: "FIPS 140-2, Common Criteria"
-
-cost_model:
-  implementation: "$100,000 - $1,000,000"
-  per_device: "$200 - $800"
-  roi_timeframe: "6-18 months"
+provider: DELL
+category: cyber-security
+solution_name: Safeid Authentication
+description: Safeid Authentication solution for DELL
+version: 1.0.0
+status: Active
+maintainers:
+- name: "EO Framework\u2122 Dell Solutions Team"
+  email: dell-solutions@eoframework.com
+  role: Infrastructure Solutions Architect
+tags:
+- safeid
+- authentication
+- dell
+- cyber-security
+requirements:
+  prerequisites:
+  - DELL Account
+  - Administrative Access
+  tools:
+  - Python 3.8+
+  - Ansible
+  skills:
+  - DELL Platform
+  - Solution Architecture
+  - Network Infrastructure

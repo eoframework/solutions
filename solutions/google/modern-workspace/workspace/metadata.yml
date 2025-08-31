@@ -1,47 +1,26 @@
-name: google-workspace
-title: Google Workspace Enterprise Platform
-version: "1.0"
-provider: google
+provider: GOOGLE
 category: modern-workspace
-complexity: intermediate
-deployment_time: 2-6 weeks
-
-description: >
-  Comprehensive Google Workspace deployment providing enterprise-grade email,
-  collaboration tools, document management, and video conferencing with advanced
-  security controls and centralized administration.
-
+solution_name: Workspace
+description: Workspace solution for GOOGLE
+version: 1.0.0
+status: Active
+maintainers:
+- name: "EO Framework\u2122 Google Solutions Team"
+  email: google-solutions@eoframework.com
+  role: Cloud Solutions Architect
 tags:
-  - workspace
-  - gmail
-  - collaboration
-  - productivity
-  - cloud-native
-  - remote-work
-
-key_features:
-  - Enterprise Gmail with custom domain
-  - Real-time document collaboration
-  - Video conferencing with Google Meet
-  - Cloud storage with Google Drive
-  - Advanced security and compliance
-  - Mobile device management
-
-prerequisites:
-  - Domain ownership and DNS control
-  - Email migration planning
-  - User account provisioning strategy
-  - Security policy requirements
-  - Third-party integration assessment
-
-estimated_costs:
-  licensing: "$6 - $18 per user per month"
-  implementation: "$5,000 - $25,000"
-  migration: "$2,000 - $15,000"
-  training: "$1,000 - $8,000"
-
-target_audience:
-  - IT administrators
-  - Email administrators
-  - Collaboration platform managers
-  - Security administrators
+- workspace
+- modern-workspace
+- google
+requirements:
+  prerequisites:
+  - GOOGLE Account
+  - Administrative Access
+  tools:
+  - Python 3.8+
+  - gcloud CLI
+  - Terraform
+  skills:
+  - GOOGLE Platform
+  - Solution Architecture
+  - GCP Services

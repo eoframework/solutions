@@ -1,144 +1,28 @@
-# EO Framework™ Template Metadata
-# Required fields for template registration
-
-provider: "Amazon Web Services"
-category: "Cloud"
-solution_name: "Disaster Recovery for Web Applications"
-description: "Multi-region disaster recovery solution for web applications using EC2, RDS, and S3 with automated failover"
-version: "1.0.0"
-status: "Active"  # Active, Draft, Deprecated
-
-# Maintainer information
+provider: AWS
+category: cloud
+solution_name: Disaster Recovery Web Application
+description: Disaster Recovery Web Application solution for AWS
+version: 1.0.0
+status: Active
 maintainers:
-  - name: "AWS Solutions Architect"
-    email: "aws-solutions@company.com"
-    role: "Lead Solutions Architect"
-  - name: "Cloud Infrastructure Team"
-    email: "cloud-ops@company.com"
-    role: "DevOps Engineer"
-
-# Classification tags
+- name: "EO Framework\u2122 AWS Solutions Team"
+  email: aws-solutions@eoframework.com
+  role: Cloud Solutions Architect
 tags:
-  - "disaster-recovery"
-  - "high-availability"
-  - "multi-region"
-  - "ec2"
-  - "rds"
-  - "s3"
-  - "route53"
-  - "automated-failover"
-
-# Technical requirements
+- cloud
+- application
+- recovery
+- disaster
+- aws
 requirements:
   prerequisites:
-    - "AWS Account with administrative privileges"
-    - "Existing web application infrastructure"
-    - "Understanding of AWS networking concepts"
-    - "DNS management capabilities"
+  - AWS Account
+  - Administrative Access
   tools:
-    - "Terraform >= 1.0"
-    - "AWS CLI >= 2.0"
-    - "Python >= 3.8"
-    - "Ansible >= 2.9"
+  - Python 3.8+
+  - AWS CLI
+  - Terraform
   skills:
-    - "AWS architecture and services"
-    - "Infrastructure as Code (IaC)"
-    - "Disaster recovery planning"
-    - "Network configuration"
-
-# Business context
-business_value:
-  primary_benefits:
-    - "99.99% application availability"
-    - "RPO < 1 hour, RTO < 15 minutes"
-    - "Automated failover reduces manual intervention"
-    - "Cost-optimized DR with right-sizing"
-  target_audience:
-    - "Enterprise IT teams"
-    - "Cloud architects"
-    - "DevOps engineers"
-    - "Business continuity planners"
-  use_cases:
-    - "Mission-critical web applications"
-    - "E-commerce platforms"
-    - "Customer-facing applications"
-    - "Regulatory compliance requirements"
-
-# Template structure
-template_structure:
-  presales:
-    - "Business continuity assessment"
-    - "RTO/RPO requirements analysis"
-    - "Cost-benefit analysis"
-    - "Architecture design proposal"
-    - "Executive presentation materials"
-  delivery:
-    - "Infrastructure deployment scripts"
-    - "Automated failover configuration"
-    - "Testing and validation procedures"
-    - "Operations runbook"
-    - "Training materials"
-
-# AWS-specific information
-aws_services:
-  compute:
-    - "Amazon EC2"
-    - "Auto Scaling Groups"
-    - "Elastic Load Balancer"
-  storage:
-    - "Amazon S3"
-    - "Amazon EBS"
-    - "S3 Cross-Region Replication"
-  database:
-    - "Amazon RDS"
-    - "RDS Cross-Region Read Replicas"
-    - "RDS Automated Backups"
-  networking:
-    - "Amazon VPC"
-    - "Route 53"
-    - "VPC Peering"
-  management:
-    - "AWS CloudFormation"
-    - "Amazon CloudWatch"
-    - "AWS Lambda"
-    - "AWS Systems Manager"
-
-# Architecture patterns
-architecture_patterns:
-  - "Active-Passive DR"
-  - "Multi-Region Deployment"
-  - "Database Read Replicas"
-  - "Cross-Region Backup"
-  - "DNS-based Failover"
-
-# Compliance and licensing
-compliance:
-  frameworks:
-    - "SOC 2"
-    - "ISO 27001"
-    - "PCI DSS"
-    - "GDPR"
-  data_classification: "Confidential"
-  export_control: "None"
-
-# Cost considerations
-cost_factors:
-  - "Multi-region data transfer costs"
-  - "Cross-region backup storage"
-  - "Read replica instances"
-  - "Route 53 health checks"
-  - "CloudWatch monitoring"
-
-# Performance metrics
-performance_targets:
-  availability: "99.99%"
-  rpo: "< 1 hour"
-  rto: "< 15 minutes"
-  failover_time: "< 5 minutes"
-
-# Change tracking
-changelog:
-  - version: "1.0.0"
-    date: "2025-01-15"
-    changes: "Initial template creation with multi-region DR architecture"
-    author: "AWS Solutions Team"
+  - AWS Platform
+  - Solution Architecture
+  - AWS Services

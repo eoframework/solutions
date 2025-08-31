@@ -1,102 +1,74 @@
 version: '2.0'
 provider: ibm
-generated_at: '2025-08-24T19:23:46.681084'
+generated_at: '2025-08-31T09:02:28.480293'
 catalog_type: provider
 metadata:
   provider_name: IBM
   total_solutions: 2
-  last_updated: '2025-08-24T19:23:46.681103'
+  last_updated: '2025-08-31T09:02:28.480342'
+  auto_generated: true
 categories:
   cloud:
     solutions:
       openshift-container-platform:
-        title: IBM OpenShift Container Platform
-        description: Enterprise Kubernetes platform with integrated developer tools
-          and multi-cloud capabilities
-        version: '4.14'
+        provider: IBM
+        category: cloud
+        solution_name: Openshift Container Platform
+        description: Openshift Container Platform solution for IBM
+        version: 1.0.0
+        status: Active
+        maintainers:
+        - name: "EO Framework\u2122 IBM Solutions Team"
+          email: ibm-solutions@eoframework.com
+          role: Enterprise Solutions Architect
         tags:
+        - cloud
+        - platform
         - openshift
-        - kubernetes
-        - containers
-        - cloud-native
-        - microservices
-        - devops
-        - ci-cd
-        - service-mesh
-        - hybrid-cloud
-        - developer-tools
-        complexity: intermediate
-        deployment_time: 2-4 hours
-        repository: https://github.com/eoframework/templates/tree/main/solutions/ibm/cloud/openshift-container-platform
-        features:
-        - Enterprise Kubernetes with Red Hat support
-        - Integrated developer tools and workflows
-        - Built-in security and compliance controls
-        - Multi-cloud and hybrid cloud capabilities
-        - Automated scaling and lifecycle management
-        - Service mesh and networking with Istio
-        - Monitoring and observability stack
-        - GitOps and CI/CD integration with Tekton
-        - Source-to-image (S2I) capabilities
-        - Built-in container image registry
-        supported_platforms:
-        - AWS
-        - Microsoft Azure
-        - Google Cloud Platform
-        - IBM Cloud
-        - VMware vSphere
-        - Bare Metal
-        integrations:
-        - AWS Services
-        - Identity Providers
-        - Monitoring Systems
-        - CI/CD Tools
-        - Service Mesh
-        - Storage Systems
+        - ibm
+        - container
+        requirements:
+          prerequisites:
+          - IBM Account
+          - Administrative Access
+          tools:
+          - Python 3.8+
+          - OpenShift CLI
+          - Ansible
+          skills:
+          - IBM Platform
+          - Solution Architecture
+          - Container Platforms
         solution_path: ../../solutions/ibm/cloud/openshift-container-platform/
   devops:
     solutions:
       ansible-automation-platform:
-        title: IBM Ansible Automation Platform
-        description: Enterprise-grade automation capabilities for DevOps teams, enabling
-          standardized, secure, and scalable infrastructure and application management
-        version: '2.4'
+        provider: IBM
+        category: devops
+        solution_name: Ansible Automation Platform
+        description: Ansible Automation Platform solution for IBM
+        version: 1.0.0
+        status: Active
+        maintainers:
+        - name: "EO Framework\u2122 IBM Solutions Team"
+          email: ibm-solutions@eoframework.com
+          role: Enterprise Solutions Architect
         tags:
-        - ansible
+        - platform
+        - ibm
         - automation
         - devops
-        - infrastructure-as-code
-        - configuration-management
-        - compliance
-        - hybrid-cloud
-        - gitops
-        - rbac
-        - workflow-orchestration
-        complexity: intermediate
-        deployment_time: 4-8 hours
-        repository: https://github.com/eoframework/templates/tree/main/solutions/ibm/devops/ansible-automation-platform
-        features:
-        - Automation Controller for centralized management
-        - Automation Hub for private content repository
-        - Event-Driven Ansible for reactive automation
-        - Decision Environment for policy-based governance
-        - Automation Mesh for distributed execution
-        - Role-based access control (RBAC)
-        - GitOps integration for Infrastructure as Code
-        - Multi-cloud and hybrid cloud automation
-        - Compliance and security policy enforcement
-        - Real-time monitoring and analytics
-        supported_platforms:
-        - Red Hat OpenShift
-        - AWS EKS
-        - Azure AKS
-        - Google GKE
-        - VMware Tanzu
-        integrations:
-        - Git Repositories
-        - CI/CD Pipelines
-        - Monitoring Systems
-        - Identity Providers
-        - Cloud Providers
-        - Ticketing Systems
+        - ansible
+        requirements:
+          prerequisites:
+          - IBM Account
+          - Administrative Access
+          tools:
+          - Python 3.8+
+          - OpenShift CLI
+          - Ansible
+          skills:
+          - IBM Platform
+          - Solution Architecture
+          - Container Platforms
         solution_path: ../../solutions/ibm/devops/ansible-automation-platform/

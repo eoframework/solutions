@@ -1,43 +1,26 @@
-name: "Dell PowerEdge CI/CD Infrastructure Solution"
-description: "High-performance server infrastructure optimized for continuous integration and deployment"
-provider: "dell"
-category: "devops"
-solution_type: "poweredge-ci-infrastructure"
-version: "1.0"
-license: "BSL-1.1"
-
-metadata:
-  industry_focus:
-    - "Technology"
-    - "Enterprise"
-    - "Financial Services"
-    - "Telecommunications"
-  
-  use_cases:
-    - "Software development pipelines"
-    - "Container orchestration"
-    - "Automated testing infrastructure"
-    - "Microservices deployment"
-  
-  technologies:
-    - "PowerEdge R750/R650"
-    - "iDRAC Management"
-    - "OpenManage Enterprise"
-    - "Dell Storage Arrays"
-  
-  business_benefits:
-    - "75% faster build times"
-    - "10x increase in deployment frequency"
-    - "99% reduction in downtime"
-    - "60% lower operational overhead"
-
-technical_specs:
-  deployment_model: "On-Premises/Hybrid"
-  scalability: "10-1000+ servers"
-  performance: "High-density compute"
-  management: "Automated infrastructure"
-
-cost_model:
-  implementation: "$300,000 - $3,000,000"
-  per_server: "$15,000 - $50,000"
-  roi_timeframe: "8-18 months"
+provider: DELL
+category: devops
+solution_name: Poweredge Ci Infrastructure
+description: Poweredge Ci Infrastructure solution for DELL
+version: 1.0.0
+status: Active
+maintainers:
+- name: "EO Framework\u2122 Dell Solutions Team"
+  email: dell-solutions@eoframework.com
+  role: Infrastructure Solutions Architect
+tags:
+- dell
+- poweredge
+- devops
+- infrastructure
+requirements:
+  prerequisites:
+  - DELL Account
+  - Administrative Access
+  tools:
+  - Python 3.8+
+  - Ansible
+  skills:
+  - DELL Platform
+  - Solution Architecture
+  - Network Infrastructure

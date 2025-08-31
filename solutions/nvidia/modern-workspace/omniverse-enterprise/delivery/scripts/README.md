@@ -1,27 +1,177 @@
-# Delivery Scripts - NVIDIA Omniverse Enterprise
+# NVIDIA Omniverse Enterprise - Deployment Scripts
 
-This folder contains solution-specific automation scripts for deployment and configuration.
+## Overview
 
-## Folder Structure:
+This directory contains deployment automation scripts for NVIDIA Omniverse Enterprise solution using NVIDIA Omniverse, GPU Computing. The scripts work together in a specific sequence to create a complete modern-workspace solution.
 
-### terraform/
-Infrastructure as Code templates for cloud resources
+## Script Architecture
 
-### ansible/
-Configuration management playbooks for Omniverse deployment
+### Script Types & Dependencies
 
-### bash/
-Shell scripts for Unix/Linux environments
+**📋 EXECUTION ORDER: Sequential (bash → python)**
 
-### powershell/
-PowerShell scripts for Windows environments
+The scripts are **NOT standalone** - they must be executed in the correct order as they have dependencies on each other.
 
-### python/
-Python automation scripts for Omniverse management
+1. **Bash Scripts** - System setup and infrastructure deployment
+2. **Python Scripts** - Application deployment and configuration
 
-## Usage:
-1. Choose the appropriate script type for your environment
-2. Customize variables and configurations
-3. Test scripts in non-production environment first
-4. Follow the deployment guide for proper execution order
-5. Use validation scripts to verify successful deployment
+### Directory Structure
+
+```
+scripts/
+├── README.md                    # This file
+├── bash/                   # Application deployment and configuration
+│   └── deploy.sh               # Primary script
+├── python/                   # Application deployment and configuration
+│   └── deploy.py               # Primary script
+```
+
+---
+
+## Prerequisites
+
+### Required Tools
+- Python 3.8+
+- bash shell
+- curl
+- jq
+- pip package manager
+
+### NVIDIA Permissions Required
+- Administrative access to NVIDIA systems
+- API access and authentication credentials
+- Network connectivity to target infrastructure
+
+### Environment Setup
+```bash
+# Configure NVIDIA credentials
+
+# Set solution-specific variables
+export PROJECT_NAME="omniverse_enterprise"
+export ENVIRONMENT="production"
+```
+
+---
+
+## Deployment Instructions
+
+### ⚠️ IMPORTANT: Scripts Must Run in Sequence
+
+### Step 1: System Setup And Infrastructure Deployment (REQUIRED FIRST)
+
+```bash
+cd bash/
+sudo ./deploy.sh
+```
+
+**What this does:**
+- ✅ Performs system-level configuration
+- ✅ Installs required packages and dependencies
+- ✅ Configures services and applications
+- ✅ Runs validation and health checks
+
+**Duration:** ~20-30 minutes
+### Step 2: Application Deployment And Configuration (REQUIRED NEXT)
+
+```bash
+cd python/
+python3 deploy.py
+```
+
+**What this does:**
+- ✅ Deploys application components
+- ✅ Configures API integrations
+- ✅ Sets up monitoring and alerting
+- ✅ Performs end-to-end validation
+
+**Duration:** ~20-30 minutes  
+**Dependencies:** Requires resources created by bash scripts
+---
+
+## Usage After Deployment
+
+### Accessing the Solution
+
+The deployed Omniverse Enterprise solution provides the following capabilities:
+
+#### Service Endpoints
+- Primary interface: Available via cloud provider console
+- API endpoints: Configured during deployment
+- Monitoring dashboards: Integrated with cloud monitoring
+
+#### Management Commands
+```bash
+# Check deployment status
+
+# Monitor solution health
+# (Provider-specific commands available in script output)
+```
+
+---
+
+## Troubleshooting
+
+### Common Issues
+
+#### 1. Authentication/Credentials
+```bash
+Error: Authentication failed or credentials not found
+Solution: Ensure cloud provider CLI is configured with appropriate credentials
+```
+
+#### 2. Insufficient Permissions  
+```bash
+Error: Access denied or permission errors
+Solution: Verify account has required permissions listed in Prerequisites
+```
+
+#### 3. Resource Conflicts
+```bash
+Error: Resource already exists or naming conflicts
+Solution: Choose unique PROJECT_NAME or clean up existing resources
+```
+
+#### 4. Deployment Timeout
+```bash
+Error: Deployment exceeded timeout limits
+Solution: Check network connectivity and resource availability in target region
+```
+
+### Validation Commands
+
+```bash
+# Verify all components are deployed
+cd bash/
+# Run validation commands specific to solution type
+# (Detailed commands available in individual scripts)
+```
+
+### Cleanup
+
+#### Remove All Resources
+```bash
+# WARNING: This will delete all created resources
+```
+
+---
+
+## Support
+
+### Log Locations
+- Deployment logs: Available in script output and cloud provider logs
+- Application logs: Configured during deployment
+- System logs: Available via cloud monitoring services
+
+### Monitoring
+Key metrics and monitoring capabilities are configured automatically during deployment. Access monitoring dashboards through your cloud provider console.
+
+### Documentation
+- Individual script directories contain detailed usage instructions
+- Cloud provider documentation for service-specific guidance
+- Solution-specific configuration examples in script files
+
+---
+
+**Last Updated:** August 2025  
+**Solution Version:** 1.0  
+**Maintained By:** EO Framework™ {provider_name} Solutions Team

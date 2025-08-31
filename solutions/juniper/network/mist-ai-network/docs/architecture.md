@@ -1,879 +1,188 @@
-# Architecture - Juniper Mist AI Network Platform
+# Solution - Solution Architecture
 
-## Executive Summary
+## 📐 **Architecture Overview**
 
-The Juniper Mist AI Network Platform delivers a cloud-native, artificial intelligence-driven networking solution that transforms traditional network operations through machine learning, automation, and predictive analytics. This architecture document provides comprehensive technical details of the platform components, data flows, integration points, and operational characteristics.
+Comprehensive enterprise solution architecture designed for scalability, security, and operational excellence.
 
-### Key Architectural Principles
-- **Cloud-Native by Design:** Microservices architecture with unlimited scalability
-- **AI-First Approach:** Machine learning integrated into every aspect of operations
-- **Zero-Touch Operations:** Automated deployment, configuration, and optimization
-- **API-Driven Integration:** RESTful APIs enabling seamless third-party integration
-- **Security-Embedded:** Built-in security controls and compliance frameworks
+### 🎯 **Design Principles**
+- **🔒 Security First**: Defense-in-depth security architecture
+- **📈 Scalability**: Horizontal and vertical scaling capabilities  
+- **🔄 Reliability**: High availability and disaster recovery
+- **⚡ Performance**: Optimized for production workloads
+- **🛡️ Compliance**: Industry standard compliance frameworks
+- **💡 Innovation**: Modern cloud-native design patterns
 
----
+## 🏗️ **Core Architecture Components**
 
-## Platform Architecture Overview
+### **Primary Components**
+- **Compute Layer**: Scalable compute resources with auto-scaling
+- **Storage Layer**: Durable, scalable storage with backup capabilities
+- **Network Layer**: Secure network architecture with access controls
+- **Security Layer**: Comprehensive security controls and monitoring
+- **Management Layer**: Centralized management and monitoring tools
 
-### High-Level System Architecture
+## 🔄 **Data Flow Architecture**
 
-```
-                    ┌─────────────────────────────────────────────────────────────┐
-                    │                 Mist Cloud Platform                         │
-                    │  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐       │
-                    │  │ AI Engine   │  │ Management  │  │ Analytics   │       │
-                    │  │ & Marvis    │  │ Plane       │  │ Engine      │       │
-                    │  └─────────────┘  └─────────────┘  └─────────────┘       │
-                    │  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐       │
-                    │  │ Location    │  │ Configuration│ │ Monitoring  │       │
-                    │  │ Services    │  │ Management  │  │ & Alerting  │       │
-                    │  └─────────────┘  └─────────────┘  └─────────────┘       │
-                    └─────────────────────┬───────────────────────────────────────┘
-                                          │ HTTPS/REST APIs
-                                          │ WebSocket Streams
-                    ┌─────────────────────┼───────────────────────────────────────┐
-                    │                     │           Internet                    │
-                    └─────────────────────┼───────────────────────────────────────┘
-                                          │
-                    ┌─────────────────────┼───────────────────────────────────────┐
-                    │                 On-Premises Infrastructure                  │
-                    │                     │                                       │
-                    │  ┌──────────────────▼─────────────────────────────────┐    │
-                    │  │                Core Network                        │    │
-                    │  │  ┌─────────┐    ┌─────────┐    ┌─────────┐        │    │
-                    │  │  │ Router/ │    │ Firewall│    │ Core SW │        │    │
-                    │  │  │ Gateway │    │         │    │         │        │    │
-                    │  │  └─────────┘    └─────────┘    └─────────┘        │    │
-                    │  └─────┬──────────────┬──────────────┬─────────────────┘    │
-                    │        │              │              │                      │
-                    │  ┌─────▼──────┐ ┌─────▼──────┐ ┌─────▼──────┐             │
-                    │  │Distribution│ │Distribution│ │Distribution│             │
-                    │  │  Switch-1  │ │  Switch-2  │ │  Switch-N  │             │
-                    │  └─────┬──────┘ └─────┬──────┘ └─────┬──────┘             │
-                    │        │              │              │                      │
-                    │  ┌─────▼──────┐ ┌─────▼──────┐ ┌─────▼──────┐             │
-                    │  │ Mist EX    │ │ Mist EX    │ │ Mist EX    │             │
-                    │  │ Switch-1   │ │ Switch-2   │ │ Switch-N   │             │
-                    │  └─────┬──────┘ └─────┬──────┘ └─────┬──────┘             │
-                    │        │              │              │                      │
-                    │   ┌────▼───┐     ┌────▼───┐     ┌────▼───┐                │
-                    │   │Mist AP │     │Mist AP │     │Mist AP │                │
-                    │   │   #1   │ ... │   #2   │ ... │   #N   │                │
-                    │   └────────┘     └────────┘     └────────┘                │
-                    └─────────────────────────────────────────────────────────────┘
-```
+### **Application Data Flow**
+1. **User Request**: Requests received through secure application gateways
+2. **Authentication**: User identity verified and authorized
+3. **Processing**: Business logic executed with appropriate data access
+4. **Data Operations**: Database operations performed with security controls
+5. **Response**: Results formatted and returned to requesting users
+6. **Logging**: All operations logged for audit and troubleshooting
 
-### Core Components
+## 🔐 **Security Architecture**
 
-#### Mist Cloud Platform
-**Cloud Infrastructure:**
-- **Global Presence:** Multi-region deployment with 99.99% availability SLA
-- **Microservices Architecture:** Containerized services with automatic scaling
-- **Data Protection:** End-to-end encryption and compliance with global regulations
-- **API Gateway:** RESTful APIs with rate limiting and authentication
-- **Real-Time Streaming:** WebSocket connections for live data and updates
+### **Security Layers**
+- **🌐 Network Security**: Network segmentation and access controls
+- **🔑 Identity & Access**: Multi-factor authentication and role-based access
+- **🛡️ Application Security**: Application-layer security and monitoring
+- **💾 Data Protection**: Encryption at rest and in transit
+- **🔍 Monitoring**: Continuous security monitoring and alerting
 
-**Key Services:**
-- **AI Engine (Marvis):** Natural language processing and machine learning models
-- **Configuration Management:** Centralized policy and template management
-- **Analytics Engine:** Real-time data processing and historical analysis
-- **Location Services:** Indoor positioning and occupancy analytics
-- **Monitoring & Alerting:** Proactive issue detection and notification systems
+### **Compliance Framework**
+- **SOC 2 Type II**: Security, availability, processing integrity
+- **ISO 27001**: Information security management system
+- **PCI DSS**: Payment card industry data security (where applicable)
+- **GDPR**: Data protection and privacy regulations
+- **Industry-Specific**: Additional compliance as required
 
-#### On-Premises Network Infrastructure
-**Access Layer:**
-- **Mist Access Points:** Wi-Fi 6/6E with integrated AI capabilities
-- **Mist Switches:** Cloud-managed switches with PoE and advanced features
-- **Device Connectivity:** Automatic discovery and zero-touch provisioning
+## 📊 **Scalability Design**
 
-**Distribution/Core Layer:**
-- **Existing Infrastructure Integration:** Seamless integration with current network
-- **Redundancy and Failover:** High availability design principles
-- **Performance Optimization:** QoS and traffic engineering capabilities
+### **Horizontal Scaling**
+- Auto-scaling groups for compute resources
+- Load balancing across multiple instances
+- Database read replicas for read-heavy workloads
+- Content delivery networks for global distribution
 
----
+### **Vertical Scaling**
+- Instance right-sizing based on workload demands
+- Storage auto-scaling for growing data requirements
+- Network bandwidth optimization
+- Memory and CPU optimization strategies
 
-## Detailed Component Architecture
+## 🔄 **High Availability & Disaster Recovery**
 
-### Mist Cloud Platform Components
+### **Availability Design**
+- **Multi-Zone Deployment**: Resources distributed across availability zones
+- **Redundancy**: Elimination of single points of failure
+- **Health Monitoring**: Automated health checks and failover
+- **Load Distribution**: Traffic distribution across healthy instances
 
-#### AI Engine and Marvis Assistant
+### **Disaster Recovery Strategy**
+- **RTO Target**: Recovery Time Objective < 4 hours
+- **RPO Target**: Recovery Point Objective < 1 hour
+- **Backup Strategy**: Automated backups with point-in-time recovery
+- **Failover Procedures**: Documented and tested failover processes
 
-**Architecture Overview:**
-```
-┌─────────────────────────────────────────────────────────────────┐
-│                      AI Engine Architecture                     │
-├─────────────────────────────────────────────────────────────────┤
-│  ┌─────────────────┐  ┌─────────────────┐  ┌─────────────────┐ │
-│  │ Natural Language│  │ Machine Learning│  │ Predictive      │ │
-│  │ Processing (NLP)│  │ Models          │  │ Analytics       │ │
-│  │                 │  │                 │  │                 │ │
-│  │ • Query Parse   │  │ • Anomaly Det.  │  │ • Capacity Plan │ │
-│  │ • Intent Recog. │  │ • Root Cause    │  │ • Failure Pred. │ │
-│  │ • Response Gen. │  │ • Optimization  │  │ • Performance   │ │
-│  └─────────────────┘  └─────────────────┘  └─────────────────┘ │
-├─────────────────────────────────────────────────────────────────┤
-│  ┌─────────────────┐  ┌─────────────────┐  ┌─────────────────┐ │
-│  │ Data Ingestion  │  │ Feature         │  │ Model Training  │ │
-│  │ Pipeline        │  │ Engineering     │  │ & Inference     │ │
-│  │                 │  │                 │  │                 │ │
-│  │ • Telemetry     │  │ • Data Prep     │  │ • Continuous    │ │
-│  │ • Events        │  │ • Normalization │  │ • Learning      │ │
-│  │ • Logs          │  │ • Correlation   │  │ • Model Updates │ │
-│  └─────────────────┘  └─────────────────┘  └─────────────────┘ │
-└─────────────────────────────────────────────────────────────────┘
-```
+## 🔗 **Integration Architecture**
 
-**Core AI Capabilities:**
-1. **Conversational Interface**
-   - Natural language query processing
-   - Intent recognition and context understanding
-   - Multi-turn conversation support
-   - Domain-specific knowledge base
+### **Internal Integrations**
+- API-first design for service communication
+- Event-driven architecture for loose coupling
+- Service mesh for microservices communication
+- Database integration patterns and strategies
 
-2. **Proactive Problem Detection**
-   - Anomaly detection algorithms
-   - Pattern recognition and baseline deviation
-   - Predictive failure analysis
-   - Performance degradation identification
+### **External Integrations**
+- Third-party service integrations
+- Legacy system integration capabilities
+- Partner and vendor API integrations
+- Data exchange and synchronization
 
-3. **Root Cause Analysis**
-   - Event correlation across multiple data sources
-   - Causal relationship modeling
-   - Impact assessment and prioritization
-   - Automated diagnosis workflows
+## 📈 **Performance Architecture**
 
-4. **Optimization Recommendations**
-   - Performance optimization suggestions
-   - Configuration improvement recommendations
-   - Capacity planning guidance
-   - Security enhancement proposals
+### **Performance Optimization**
+- **Caching Strategies**: Multi-tier caching implementation
+- **Database Optimization**: Query optimization and indexing
+- **Network Optimization**: CDN and edge computing
+- **Resource Optimization**: Right-sizing and efficiency
 
-#### Configuration Management System
+### **Performance Monitoring**
+- Real-time performance metrics
+- Application performance monitoring (APM)
+- Infrastructure monitoring and alerting
+- User experience monitoring
 
-**Architecture Components:**
-```
-┌─────────────────────────────────────────────────────────────────┐
-│                Configuration Management Architecture             │
-├─────────────────────────────────────────────────────────────────┤
-│  ┌─────────────────┐  ┌─────────────────┐  ┌─────────────────┐ │
-│  │ Template Engine │  │ Policy Engine   │  │ Validation      │ │
-│  │                 │  │                 │  │ Engine          │ │
-│  │ • WLAN Templates│  │ • Security Pol. │  │ • Syntax Check  │ │
-│  │ • Switch Profiles│ │ • QoS Policies  │  │ • Compliance    │ │
-│  │ • Site Templates│  │ • Access Control│  │ • Dependencies  │ │
-│  └─────────────────┘  └─────────────────┘  └─────────────────┘ │
-├─────────────────────────────────────────────────────────────────┤
-│  ┌─────────────────┐  ┌─────────────────┐  ┌─────────────────┐ │
-│  │ Version Control │  │ Change Tracking │  │ Rollback System │ │
-│  │                 │  │                 │  │                 │ │
-│  │ • Git-based     │  │ • Audit Logs    │  │ • Point-in-time │ │
-│  │ • Branching     │  │ • Change Impact │  │ • Recovery      │ │
-│  │ • Merge Control │  │ • Approval Flow │  │ • Verification  │ │
-│  └─────────────────┘  └─────────────────┘  └─────────────────┘ │
-└─────────────────────────────────────────────────────────────────┘
-```
+## 🛠️ **Operational Architecture**
 
-**Key Features:**
-- **Template-Based Configuration:** Standardized configurations with site-specific customization
-- **Policy Inheritance:** Hierarchical policy application from organization to device level
-- **Change Management:** Automated change tracking with approval workflows
-- **Configuration Validation:** Pre-deployment validation and compliance checking
-- **Version Control:** Git-based versioning with branching and merging capabilities
+### **DevOps Integration**
+- Infrastructure as Code (IaC) for consistent deployments
+- CI/CD pipelines for automated delivery
+- Configuration management and drift detection
+- Automated testing and validation
 
-#### Analytics and Monitoring Engine
+### **Monitoring & Observability**
+- Comprehensive logging and log aggregation
+- Metrics collection and visualization
+- Distributed tracing for complex workflows
+- Alerting and notification strategies
 
-**Data Processing Pipeline:**
-```
-┌─────────────────────────────────────────────────────────────────┐
-│                    Analytics Engine Architecture                │
-├─────────────────────────────────────────────────────────────────┤
-│  Data Sources        │  Processing Layer    │  Presentation     │
-│  ┌─────────────────┐ │ ┌─────────────────┐  │ ┌─────────────────┐ │
-│  │ Device Telemetry│ │ │ Stream Processing│ │ │ Dashboards     │ │
-│  │ • Metrics       │ │ │ • Real-time     │  │ │ • Executive    │ │
-│  │ • Logs          │ │ │ • Aggregation   │  │ │ • Operational  │ │
-│  │ • Events        │ │ │ • Correlation   │  │ │ • Technical    │ │
-│  │ • Performance   │ │ │                 │  │ │                │ │
-│  └─────────────────┘ │ └─────────────────┘  │ └─────────────────┘ │
-│  ┌─────────────────┐ │ ┌─────────────────┐  │ ┌─────────────────┐ │
-│  │ User Activity   │ │ │ Batch Processing│ │ │ Reports        │ │
-│  │ • Sessions      │ │ │ • Historical    │  │ │ • Scheduled    │ │
-│  │ • Applications  │ │ │ • Trending      │  │ │ • On-demand    │ │
-│  │ • Behavior      │ │ │ • ML Training   │  │ │ • Custom       │ │
-│  │ • Location      │ │ │                 │  │ │                │ │
-│  └─────────────────┘ │ └─────────────────┘  │ └─────────────────┘ │
-│  ┌─────────────────┐ │ ┌─────────────────┐  │ ┌─────────────────┐ │
-│  │ External Data   │ │ │ Data Lake       │ │ │ APIs & Webhooks│ │
-│  │ • Weather       │ │ │ • Time Series   │  │ │ • REST APIs    │ │
-│  │ • Calendar      │ │ │ • Blob Storage  │  │ │ • GraphQL      │ │
-│  │ • Directory     │ │ │ • Archive       │  │ │ • Webhooks     │ │
-│  │ • Ticketing     │ │ │                 │  │ │                │ │
-│  └─────────────────┘ │ └─────────────────┘  │ └─────────────────┘ │
-└─────────────────────────────────────────────────────────────────┘
-```
+## 💰 **Cost Optimization**
 
-**Analytics Capabilities:**
-1. **Real-Time Analytics**
-   - Live network performance monitoring
-   - User experience tracking
-   - Application performance analysis
-   - Security event correlation
+### **Cost Management Strategies**
+- Resource right-sizing and optimization
+- Reserved capacity for predictable workloads
+- Automated resource cleanup and lifecycle management
+- Cost monitoring and budgeting alerts
 
-2. **Historical Analysis**
-   - Trend analysis and forecasting
-   - Capacity utilization patterns
-   - Performance baseline establishment
-   - Compliance reporting
+### **Efficiency Measures**
+- Serverless computing for variable workloads
+- Auto-scaling to match demand
+- Storage tiering and lifecycle policies
+- Network traffic optimization
 
-3. **Predictive Analytics**
-   - Failure prediction modeling
-   - Capacity planning forecasts
-   - User behavior prediction
-   - Performance optimization opportunities
+## 📋 **Architecture Validation**
 
-### On-Premises Infrastructure Components
+### **Design Validation Criteria**
+- [ ] Security requirements met and validated
+- [ ] Performance targets achieved and tested
+- [ ] Scalability requirements demonstrated
+- [ ] Disaster recovery procedures tested
+- [ ] Compliance requirements verified
+- [ ] Integration points validated
+- [ ] Cost projections within budget
+- [ ] Operational procedures documented
 
-#### Mist Access Points
+### **Architecture Review Process**
+1. **Technical Review**: Architecture design validation
+2. **Security Review**: Security controls and compliance
+3. **Performance Review**: Performance and scalability testing
+4. **Operations Review**: Operational procedures and runbooks
+5. **Cost Review**: Budget validation and optimization
+6. **Stakeholder Approval**: Final architecture sign-off
 
-**Hardware Architecture:**
-```
-┌─────────────────────────────────────────────────────────────────┐
-│                  Access Point Architecture                      │
-├─────────────────────────────────────────────────────────────────┤
-│  ┌─────────────────┐  ┌─────────────────┐  ┌─────────────────┐ │
-│  │ Radio Subsystem │  │ Processing Unit │  │ Connectivity    │ │
-│  │                 │  │                 │  │                 │ │
-│  │ • 2.4GHz Radio  │  │ • ARM Cortex    │  │ • Gigabit Eth   │ │
-│  │ • 5GHz Radio    │  │ • Multi-core    │  │ • PoE/PoE+      │ │
-│  │ • 6GHz Radio*   │  │ • Hardware Acc. │  │ • Console Port  │ │
-│  │ • BLE Beacon    │  │ • Crypto Engine │  │ • USB (Optional)│ │
-│  └─────────────────┘  └─────────────────┘  └─────────────────┘ │
-├─────────────────────────────────────────────────────────────────┤
-│  ┌─────────────────┐  ┌─────────────────┐  ┌─────────────────┐ │
-│  │ Software Stack  │  │ Management      │  │ AI/ML Engines   │ │
-│  │                 │  │                 │  │                 │ │
-│  │ • Junos OS      │  │ • Cloud Agent   │  │ • Local AI      │ │
-│  │ • WiFi Stack    │  │ • Config Mgmt   │  │ • ML Inference  │ │
-│  │ • Security      │  │ • Monitoring    │  │ • Edge Compute  │ │
-│  │ • QoS Engine    │  │ • Telemetry     │  │ • Optimization  │ │
-│  └─────────────────┘  └─────────────────┘  └─────────────────┘ │
-└─────────────────────────────────────────────────────────────────┘
-                              * WiFi 6E/7 Models
-```
+## 🔄 **Migration Considerations**
 
-**Key Features:**
-- **Multi-Radio Design:** Concurrent dual/tri-band operation with dedicated security scanning
-- **AI-Optimized Performance:** Real-time RF optimization and client steering
-- **Integrated Location Services:** BLE beacons and ML-based positioning
-- **Security Integration:** Built-in firewall, IDS/IPS, and threat detection
-- **Edge Computing:** Local processing for latency-sensitive applications
+### **Migration Strategy**
+- Assessment of existing infrastructure and applications
+- Migration wave planning and dependencies
+- Risk mitigation and rollback procedures
+- Testing and validation at each migration phase
 
-#### Mist Switches
+### **Migration Tools and Services**
+- Cloud provider migration services and tools
+- Third-party migration utilities and frameworks
+- Assessment and discovery tools
+- Automated migration and validation tools
 
-**Switch Architecture:**
-```
-┌─────────────────────────────────────────────────────────────────┐
-│                    Switch Architecture                          │
-├─────────────────────────────────────────────────────────────────┤
-│  ┌─────────────────┐  ┌─────────────────┐  ┌─────────────────┐ │
-│  │ Switching       │  │ Processing      │  │ Management      │ │
-│  │ Infrastructure  │  │ Engine          │  │ Plane           │ │
-│  │                 │  │                 │  │                 │ │
-│  │ • Packet Buffer │  │ • Forwarding    │  │ • Junos OS      │ │
-│  │ • MAC Tables    │  │ • QoS Engine    │  │ • Cloud Agent   │ │
-│  │ • VLAN Engine   │  │ • Security      │  │ • Telemetry     │ │
-│  │ • Port Matrix   │  │ • Statistics    │  │ • APIs          │ │
-│  └─────────────────┘  └─────────────────┘  └─────────────────┘ │
-├─────────────────────────────────────────────────────────────────┤
-│  ┌─────────────────┐  ┌─────────────────┐  ┌─────────────────┐ │
-│  │ Physical Ports  │  │ Power System    │  │ Environmental   │ │
-│  │                 │  │                 │  │                 │ │
-│  │ • Access Ports  │  │ • PoE Budget    │  │ • Temp Sensors  │ │
-│  │ • Uplink Ports  │  │ • Power Monitor │  │ • Fan Control   │ │
-│  │ • SFP/SFP+     │  │ • Redundant PSU │  │ • LED Status    │ │
-│  │ • Console/Mgmt  │  │ • Efficiency    │  │ • Fault Monitor │ │
-│  └─────────────────┘  └─────────────────┘  └─────────────────┘ │
-└─────────────────────────────────────────────────────────────────┘
-```
+## 📚 **Architecture References**
 
-**Advanced Features:**
-- **Cloud Management:** Zero-touch provisioning and centralized configuration
-- **AI-Driven Insights:** Port-level analytics and predictive maintenance
-- **PoE Optimization:** Intelligent power allocation and monitoring
-- **Advanced Security:** Micro-segmentation and threat protection
-- **Virtual Chassis:** Stack multiple switches for simplified management
+### **Related Documentation**
+- **[📋 Prerequisites](prerequisites.md)**: Required skills, tools, and preparation
+- **[🚀 Implementation Guide](../delivery/implementation-guide.md)**: Step-by-step deployment procedures
+- **[⚙️ Configuration Templates](../delivery/configuration-templates.md)**: Infrastructure and service configurations
+- **[🔧 Troubleshooting](troubleshooting.md)**: Common issues and resolution procedures
+
+### **External References**
+- Cloud provider architecture best practices
+- Industry security and compliance frameworks
+- Performance optimization guidelines
+- Disaster recovery planning resources
 
 ---
 
-## Data Flow Architecture
-
-### Network Management Data Flow
-
-```
-┌─────────────────────────────────────────────────────────────────┐
-│                    Management Data Flow                         │
-└─────────────────────────────────────────────────────────────────┘
-                                │
-                    ┌───────────▼───────────┐
-                    │    Mist Cloud         │
-                    │  ┌─────────────────┐  │
-                    │  │ Configuration   │  │
-                    │  │ Management      │  │
-                    │  └─────────────────┘  │
-                    │  ┌─────────────────┐  │
-                    │  │ Policy Engine   │  │
-                    │  └─────────────────┘  │
-                    └───────────┬───────────┘
-                                │ HTTPS/WSS
-                    ┌───────────▼───────────┐
-                    │    Management         │
-                    │    Network/VPN        │
-                    └───────────┬───────────┘
-                                │
-          ┌─────────────────────┼─────────────────────┐
-          │                     │                     │
-    ┌─────▼──────┐      ┌─────▼──────┐      ┌─────▼──────┐
-    │  Mist AP   │      │  Mist SW   │      │  Network   │
-    │            │      │            │      │  Services  │
-    │ Config Mgmt│      │ Config Mgmt│      │            │
-    │ Monitoring │      │ Monitoring │      │ • DHCP     │
-    │ Telemetry  │      │ Telemetry  │      │ • DNS      │
-    │            │      │            │      │ • RADIUS   │
-    └────────────┘      └────────────┘      └────────────┘
-```
-
-### User Traffic Data Flow
-
-```
-┌─────────────────────────────────────────────────────────────────┐
-│                     User Traffic Flow                           │
-└─────────────────────────────────────────────────────────────────┘
-
-    ┌─────────────┐
-    │   Client    │
-    │   Device    │
-    └──────┬──────┘
-           │ 802.11 (Wireless)
-    ┌──────▼──────┐       ┌─────────────────┐      ┌─────────────┐
-    │  Mist AP    │       │  Authentication │      │   Internet  │
-    │             ├──────▶│    Server       ├─────▶│ /Corporate  │
-    │ • Auth      │       │  (RADIUS/AD)    │      │   Network   │
-    │ • VLAN Tag  │       └─────────────────┘      └─────────────┘
-    │ • QoS Mark  │
-    └──────┬──────┘
-           │ 802.1Q VLAN
-    ┌──────▼──────┐       ┌─────────────────┐
-    │  Mist       │       │   Core/Dist     │
-    │  Switch     ├──────▶│   Network       │
-    │             │       │                 │
-    │ • Switching │       │ • Routing       │
-    │ • PoE       │       │ • Firewalling   │
-    │ • Security  │       │ • Load Balance  │
-    └─────────────┘       └─────────────────┘
-```
-
-### Telemetry and Analytics Data Flow
-
-```
-┌─────────────────────────────────────────────────────────────────┐
-│                 Telemetry Data Flow                             │
-└─────────────────────────────────────────────────────────────────┘
-
-Network Infrastructure          Mist Cloud Platform
-┌─────────────────────┐         ┌─────────────────────┐
-│                     │         │                     │
-│ ┌─────────────────┐ │         │ ┌─────────────────┐ │
-│ │   Mist APs      │ │         │ │ Data Ingestion  │ │
-│ │                 │ ├────────▶│ │ Pipeline        │ │
-│ │ • Performance   │ │         │ └─────────────────┘ │
-│ │ • Client Stats  │ │         │ ┌─────────────────┐ │
-│ │ • RF Metrics    │ │         │ │ Stream Process  │ │
-│ │ • Events/Logs   │ │         │ │ Engine          │ │
-│ └─────────────────┘ │         │ └─────────────────┘ │
-│                     │         │ ┌─────────────────┐ │
-│ ┌─────────────────┐ │         │ │ AI/ML Engine    │ │
-│ │ Mist Switches   │ │         │ │                 │ │
-│ │                 │ ├────────▶│ │ • Anomaly Det.  │ │
-│ │ • Port Stats    │ │         │ │ • Root Cause    │ │
-│ │ • Power Metrics │ │         │ │ • Prediction    │ │
-│ │ • Environment   │ │         │ │ • Optimization  │ │
-│ │ • Security      │ │         │ └─────────────────┘ │
-│ └─────────────────┘ │         │ ┌─────────────────┐ │
-│                     │         │ │ Data Lake       │ │
-│ ┌─────────────────┐ │         │ │                 │ │
-│ │ User Devices    │ │         │ │ • Time Series   │ │
-│ │                 │ ├────────▶│ │ • Events        │ │
-│ │ • Connection    │ │         │ │ • Historical    │ │
-│ │ • Performance   │ │         │ │ • Aggregated    │ │
-│ │ • Location      │ │         │ └─────────────────┘ │
-│ │ • Application   │ │         └─────────────────────┘
-│ └─────────────────┘ │                    │
-└─────────────────────┘                    │
-                                           │
-                                   ┌───────▼────────┐
-                                   │   Presentation │
-                                   │                │
-                                   │ • Dashboards   │
-                                   │ • Reports      │
-                                   │ • APIs         │
-                                   │ • Alerts       │
-                                   └────────────────┘
-```
-
----
-
-## Integration Architecture
-
-### Identity and Authentication Integration
-
-```
-┌─────────────────────────────────────────────────────────────────┐
-│                Identity Integration Architecture                 │
-└─────────────────────────────────────────────────────────────────┘
-
-┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
-│   Active        │    │     RADIUS      │    │   Certificate   │
-│   Directory     │    │     Server      │    │   Authority     │
-│                 │    │                 │    │                 │
-│ • User Accounts │    │ • Authentication│    │ • Device Certs  │
-│ • Groups        │◄──►│ • Authorization │◄──►│ • User Certs    │
-│ • Policies      │    │ • Accounting    │    │ • CA Chain      │
-└─────────────────┘    └─────────────────┘    └─────────────────┘
-         ▲                       ▲                       ▲
-         │                       │                       │
-         └───────────────────────┼───────────────────────┘
-                                 │
-                    ┌────────────▼────────────┐
-                    │     Mist Cloud          │
-                    │                         │
-                    │ ┌─────────────────────┐ │
-                    │ │ Authentication      │ │
-                    │ │ Proxy               │ │
-                    │ └─────────────────────┘ │
-                    │ ┌─────────────────────┐ │
-                    │ │ Policy Engine       │ │
-                    │ └─────────────────────┘ │
-                    └────────────┬────────────┘
-                                 │
-                    ┌────────────▼────────────┐
-                    │   Network Access        │
-                    │   Infrastructure        │
-                    │                         │
-                    │ ┌─────────┐ ┌─────────┐ │
-                    │ │ APs     │ │ Switches│ │
-                    │ │         │ │         │ │
-                    │ │ 802.1X  │ │ 802.1X  │ │
-                    │ │ MAB     │ │ MAB     │ │
-                    │ └─────────┘ └─────────┘ │
-                    └─────────────────────────┘
-```
-
-### External System Integration
-
-```
-┌─────────────────────────────────────────────────────────────────┐
-│                External Integration Architecture                 │
-└─────────────────────────────────────────────────────────────────┘
-
-External Systems                 Mist Cloud Platform
-┌─────────────────┐              ┌─────────────────────┐
-│      SIEM       │              │                     │
-│   (Splunk,      │◄────────────►│ ┌─────────────────┐ │
-│   QRadar, etc)  │  Syslog/API  │ │ Event Streaming │ │
-└─────────────────┘              │ │ Engine          │ │
-                                 │ └─────────────────┘ │
-┌─────────────────┐              │ ┌─────────────────┐ │
-│      ITSM       │              │ │ Webhook         │ │
-│  (ServiceNow,   │◄────────────►│ │ Management      │ │
-│   Remedy, etc)  │  REST API    │ └─────────────────┘ │
-└─────────────────┘              │ ┌─────────────────┐ │
-                                 │ │ API Gateway     │ │
-┌─────────────────┐              │ │                 │ │
-│   Monitoring    │              │ │ • Authentication│ │
-│  (Nagios, PRTG, │◄────────────►│ │ • Rate Limiting │ │
-│   SolarWinds)   │  SNMP/API    │ │ • Logging       │ │
-└─────────────────┘              │ └─────────────────┘ │
-                                 │ ┌─────────────────┐ │
-┌─────────────────┐              │ │ Data Export     │ │
-│   Analytics     │              │ │ Engine          │ │
-│  (Tableau,      │◄────────────►│ │                 │ │
-│   Power BI)     │  REST API    │ │ • Scheduling    │ │
-└─────────────────┘              │ │ • Formatting    │ │
-                                 │ └─────────────────┘ │
-┌─────────────────┐              └─────────────────────┘
-│   Building      │
-│   Management    │◄─────────────── IoT Integration
-│   (BMS, IoT)    │      MQTT/CoAP    (Future Roadmap)
-└─────────────────┘
-```
-
----
-
-## Security Architecture
-
-### Security Framework
-
-```
-┌─────────────────────────────────────────────────────────────────┐
-│                    Security Architecture                        │
-└─────────────────────────────────────────────────────────────────┘
-
-       Defense in Depth Security Model
-
-┌─────────────────────────────────────────────────────────────────┐
-│                        Cloud Security                          │
-│ ┌─────────────────────────────────────────────────────────────┐ │
-│ │ • SOC2 Type II Compliance                                   │ │
-│ │ • End-to-End Encryption (TLS 1.3)                         │ │
-│ │ • Role-Based Access Control                                │ │
-│ │ │ • Multi-Tenant Isolation                                 │ │
-│ │ • Global Threat Intelligence                               │ │
-│ └─────────────────────────────────────────────────────────────┘ │
-└─────────────────────────────────────────────────────────────────┘
-                                │
-┌─────────────────────────────────────────────────────────────────┐
-│                    Network Security                             │
-│ ┌─────────────────────────────────────────────────────────────┐ │
-│ │ • WPA3 Enterprise Encryption                               │ │
-│ │ • 802.1X Authentication                                    │ │
-│ │ • Dynamic VLAN Assignment                                  │ │
-│ │ • Micro-Segmentation                                       │ │
-│ │ • Rogue AP Detection                                       │ │
-│ └─────────────────────────────────────────────────────────────┘ │
-└─────────────────────────────────────────────────────────────────┘
-                                │
-┌─────────────────────────────────────────────────────────────────┐
-│                    Device Security                              │
-│ ┌─────────────────────────────────────────────────────────────┐ │
-│ │ • Hardware Security Module (HSM)                           │ │
-│ │ • Secure Boot Process                                      │ │
-│ │ • Code Signing Verification                                │ │
-│ │ │ • Certificate-Based Authentication                        │ │
-│ │ • Local Firewall and IDS/IPS                              │ │
-│ └─────────────────────────────────────────────────────────────┘ │
-└─────────────────────────────────────────────────────────────────┘
-```
-
-### Data Security and Privacy
-
-**Data Classification and Protection:**
-```
-┌─────────────────────────────────────────────────────────────────┐
-│                    Data Security Model                          │
-├─────────────────────────────────────────────────────────────────┤
-│  Data Type         │ Classification │ Protection Level          │
-├────────────────────┼────────────────┼───────────────────────────┤
-│  User Identity     │ Highly Sens.   │ AES-256, Hashed, Salted  │
-│  Device Info       │ Sensitive      │ AES-256, Encrypted        │
-│  Network Config    │ Confidential   │ TLS 1.3, Encrypted       │
-│  Performance Data  │ Internal       │ TLS 1.3, Anonymized      │
-│  Location Data     │ Sensitive      │ Opt-in, Anonymized       │
-│  Logs/Events       │ Internal       │ Encrypted, Time-limited   │
-└────────────────────┴────────────────┴───────────────────────────┘
-```
-
-**Privacy Controls:**
-- **Data Minimization:** Collect only necessary data for service functionality
-- **Consent Management:** Opt-in controls for location and analytics services
-- **Data Anonymization:** Remove personally identifiable information where possible
-- **Right to be Forgotten:** Data deletion capabilities per privacy regulations
-- **Data Residency:** Geographic data storage controls for compliance
-
----
-
-## Scalability and Performance Architecture
-
-### Horizontal Scaling Model
-
-```
-┌─────────────────────────────────────────────────────────────────┐
-│                  Scalability Architecture                       │
-└─────────────────────────────────────────────────────────────────┘
-
-Cloud Platform Scaling:
-┌─────────────────────────────────────────────────────────────────┐
-│                        Global Cloud                            │
-│  ┌─────────────┐    ┌─────────────┐    ┌─────────────┐       │
-│  │   Region    │    │   Region    │    │   Region    │       │
-│  │   US-East   │    │   EU-West   │    │  APAC-SG    │       │
-│  │             │    │             │    │             │       │
-│  │ ┌─────────┐ │    │ ┌─────────┐ │    │ ┌─────────┐ │       │
-│  │ │ Micro   │ │    │ │ Micro   │ │    │ │ Micro   │ │       │
-│  │ │Services │ │    │ │Services │ │    │ │Services │ │       │
-│  │ └─────────┘ │    │ └─────────┘ │    │ └─────────┘ │       │
-│  └─────────────┘    └─────────────┘    └─────────────┘       │
-└─────────────────────────────────────────────────────────────────┘
-                                │
-Network Infrastructure Scaling:
-┌─────────────────────────────────────────────────────────────────┐
-│                    On-Premises Network                          │
-│                                                                 │
-│  Site 1             Site 2             Site N                  │
-│  ┌─────────────┐    ┌─────────────┐    ┌─────────────┐        │
-│  │ 10-100 APs  │    │ 100-500 APs │    │1000+ APs    │        │
-│  │ 5-20 SW     │    │ 20-50 SW    │    │100+ SW      │        │
-│  │ 100-1K Users│    │1K-5K Users  │    │10K+ Users   │        │
-│  └─────────────┘    └─────────────┘    └─────────────┘        │
-└─────────────────────────────────────────────────────────────────┘
-```
-
-### Performance Characteristics
-
-**Cloud Platform Performance:**
-| Metric | Target | Achieved |
-|--------|--------|----------|
-| **API Response Time** | <200ms | <100ms |
-| **Dashboard Load Time** | <3 sec | <2 sec |
-| **Configuration Push** | <30 sec | <15 sec |
-| **Alert Notification** | <60 sec | <30 sec |
-| **Data Synchronization** | <5 min | <2 min |
-
-**Network Infrastructure Performance:**
-| Component | Throughput | Latency | Capacity |
-|-----------|------------|---------|----------|
-| **Access Points** | 1-6 Gbps | <1ms | 50-200 clients |
-| **Switches** | 24-480 Gbps | <10µs | 24-48 ports |
-| **Management** | 100 Mbps | <50ms | Unlimited devices |
-| **Analytics** | 10 Gbps | <1 sec | Real-time processing |
-
----
-
-## High Availability and Disaster Recovery
-
-### High Availability Architecture
-
-```
-┌─────────────────────────────────────────────────────────────────┐
-│               High Availability Design                          │
-└─────────────────────────────────────────────────────────────────┘
-
-Cloud Platform HA:
-┌─────────────────────────────────────────────────────────────────┐
-│                        Mist Cloud                              │
-│  ┌─────────────────────────────────────────────────────────┐   │
-│  │                 Load Balancer                           │   │
-│  └─────────────────────┬───────────────────────────────────┘   │
-│                        │                                       │
-│  ┌─────────────────────▼───────────────────────────────────┐   │
-│  │              Application Layer                          │   │
-│  │  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐     │   │
-│  │  │   Region    │  │   Region    │  │   Region    │     │   │
-│  │  │   Primary   │  │  Secondary  │  │   Backup    │     │   │
-│  │  └─────────────┘  └─────────────┘  └─────────────┘     │   │
-│  └─────────────────────────────────────────────────────────┘   │
-│  ┌─────────────────────────────────────────────────────────┐   │
-│  │                  Data Layer                             │   │
-│  │  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐     │   │
-│  │  │   Master    │  │   Replica   │  │   Replica   │     │   │
-│  │  │  Database   │◄►│  Database   │◄►│  Database   │     │   │
-│  │  └─────────────┘  └─────────────┘  └─────────────┘     │   │
-│  └─────────────────────────────────────────────────────────┘   │
-└─────────────────────────────────────────────────────────────────┘
-
-Network Infrastructure HA:
-┌─────────────────────────────────────────────────────────────────┐
-│                   On-Premises Network                           │
-│  ┌─────────────────────────────────────────────────────────┐   │
-│  │                Core Network                             │   │
-│  │  ┌─────────────┐           ┌─────────────┐             │   │
-│  │  │ Primary     │           │ Secondary   │             │   │
-│  │  │ Internet    │◄─────────►│ Internet    │             │   │
-│  │  │ Connection  │           │ Connection  │             │   │
-│  │  └─────────────┘           └─────────────┘             │   │
-│  └─────────────────────────────────────────────────────────┘   │
-│  ┌─────────────────────────────────────────────────────────┐   │
-│  │              Distribution Layer                         │   │
-│  │  ┌─────────────┐           ┌─────────────┐             │   │
-│  │  │ Primary     │◄─────────►│ Secondary   │             │   │
-│  │  │ Distribution│    LACP   │Distribution │             │   │
-│  │  │ Switch      │           │ Switch      │             │   │
-│  │  └─────────────┘           └─────────────┘             │   │
-│  └─────────────────────────────────────────────────────────┘   │
-│  ┌─────────────────────────────────────────────────────────┐   │
-│  │                Access Layer                             │   │
-│  │  ┌─────────┐ ┌─────────┐ ┌─────────┐ ┌─────────┐       │   │
-│  │  │ Mist    │ │ Mist    │ │ Mist    │ │ Mist    │       │   │
-│  │  │ Switch  │ │ Switch  │ │ AP      │ │ AP      │       │   │
-│  │  │         │ │ (Stack) │ │         │ │(Mesh)   │       │   │
-│  │  └─────────┘ └─────────┘ └─────────┘ └─────────┘       │   │
-│  └─────────────────────────────────────────────────────────┘   │
-└─────────────────────────────────────────────────────────────────┘
-```
-
-### Disaster Recovery Planning
-
-**Recovery Time Objectives (RTO):**
-- **Cloud Service Restoration:** < 15 minutes
-- **Network Service Restoration:** < 1 hour  
-- **Full Functionality Restoration:** < 4 hours
-- **Data Recovery:** < 24 hours
-
-**Recovery Point Objectives (RPO):**
-- **Configuration Data:** < 5 minutes
-- **Performance Data:** < 15 minutes
-- **Historical Data:** < 1 hour
-- **Log Data:** < 1 hour
-
----
-
-## Compliance and Governance
-
-### Regulatory Compliance Framework
-
-```
-┌─────────────────────────────────────────────────────────────────┐
-│                 Compliance Framework                            │
-├─────────────────────────────────────────────────────────────────┤
-│  Regulation        │ Scope              │ Implementation        │
-├────────────────────┼────────────────────┼───────────────────────┤
-│  SOC 2 Type II     │ Cloud Platform     │ Annual Audit          │
-│  GDPR              │ EU Data            │ Privacy Controls      │
-│  HIPAA             │ Healthcare Data    │ Data Encryption       │
-│  FedRAMP           │ Federal Deployment │ Security Controls     │
-│  PCI DSS           │ Payment Data       │ Network Segmentation │
-│  ISO 27001         │ Information Sec.   │ Security Management   │
-└────────────────────┴────────────────────┴───────────────────────┘
-```
-
-### Governance Controls
-- **Change Management:** Formal change approval and tracking processes
-- **Access Control:** Role-based access with regular review and recertification
-- **Data Governance:** Data classification, retention, and deletion policies
-- **Audit Trail:** Comprehensive logging and audit trail maintenance
-- **Risk Management:** Regular risk assessments and mitigation planning
-
----
-
-## Monitoring and Observability
-
-### Comprehensive Monitoring Architecture
-
-```
-┌─────────────────────────────────────────────────────────────────┐
-│                  Monitoring Architecture                        │
-└─────────────────────────────────────────────────────────────────┘
-
-┌─────────────────────────────────────────────────────────────────┐
-│                      Observability Stack                       │
-│  ┌─────────────────┐ ┌─────────────────┐ ┌─────────────────┐   │
-│  │     Metrics     │ │      Logs       │ │     Traces      │   │
-│  │                 │ │                 │ │                 │   │
-│  │ • Performance   │ │ • System Events │ │ • Request Flow  │   │
-│  │ • Availability  │ │ • User Actions  │ │ • Latency       │   │
-│  │ • Capacity      │ │ • Errors        │ │ • Dependencies  │   │
-│  │ • Usage         │ │ • Security      │ │ • Bottlenecks   │   │
-│  └─────────────────┘ └─────────────────┘ └─────────────────┘   │
-└─────────────────────────────────────────────────────────────────┘
-                                │
-┌─────────────────────────────────────────────────────────────────┐
-│                   Alerting and Response                         │
-│  ┌─────────────────────────────────────────────────────────┐   │
-│  │                 Alert Engine                            │   │
-│  │  ┌─────────────┐ ┌─────────────┐ ┌─────────────┐       │   │
-│  │  │ Threshold   │ │ ML-Based    │ │ Correlation │       │   │
-│  │  │ Alerts      │ │ Anomaly     │ │ Analysis    │       │   │
-│  │  │             │ │ Detection   │ │             │       │   │
-│  │  └─────────────┘ └─────────────┘ └─────────────┘       │   │
-│  └─────────────────────────────────────────────────────────┘   │
-│  ┌─────────────────────────────────────────────────────────┐   │
-│  │              Response Actions                           │   │
-│  │  ┌─────────────┐ ┌─────────────┐ ┌─────────────┐       │   │
-│  │  │ Notifications│ │ Auto-       │ │ Escalation  │       │   │
-│  │  │ Email/SMS/  │ │ Remediation │ │ Workflows   │       │   │
-│  │  │ Webhooks    │ │             │ │             │       │   │
-│  │  └─────────────┘ └─────────────┘ └─────────────┘       │   │
-│  └─────────────────────────────────────────────────────────┘   │
-└─────────────────────────────────────────────────────────────────┘
-```
-
-### Key Performance Indicators (KPIs)
-
-**Network Performance KPIs:**
-- Network availability percentage
-- Mean time between failures (MTBF)  
-- Mean time to resolution (MTTR)
-- User connection success rate
-- Application response times
-- Bandwidth utilization efficiency
-
-**User Experience KPIs:**
-- Connection time to network
-- Roaming success and latency
-- Application performance scores
-- User satisfaction ratings
-- Support ticket volume and resolution
-
-**Operational KPIs:**
-- Configuration deployment time
-- Incident response time
-- Change success rate
-- Automated resolution percentage
-- Cost per user/device/location
-
----
-
-## Future Architecture Evolution
-
-### Technology Roadmap
-
-**Short-Term Evolution (6-12 months):**
-- Wi-Fi 6E deployment optimization
-- Enhanced AI model training and accuracy
-- Advanced location services capabilities
-- Expanded API integrations
-- Enhanced security features
-
-**Medium-Term Evolution (1-2 years):**
-- Wi-Fi 7 preparation and integration
-- Edge computing and local AI processing
-- Advanced IoT device management
-- Enhanced automation and orchestration
-- 6GHz spectrum optimization
-
-**Long-Term Evolution (2+ years):**
-- Next-generation AI and machine learning
-- Autonomous network operations
-- Advanced predictive maintenance
-- Integration with emerging technologies
-- Sustainability and energy optimization
-
-### Emerging Technology Integration
-
-**Artificial Intelligence Evolution:**
-- Large Language Model integration
-- Computer vision for space analytics
-- Advanced predictive modeling
-- Automated root cause analysis
-- Intelligent capacity planning
-
-**Edge Computing Integration:**
-- Local AI processing capabilities
-- Reduced latency for critical applications
-- Enhanced privacy and data residency
-- Improved resilience and autonomy
-- Real-time decision making
-
----
-
-## Conclusion
-
-The Juniper Mist AI Network Platform architecture provides a comprehensive, scalable, and intelligent networking solution that transforms traditional network operations through cloud-native design and artificial intelligence. This architecture ensures:
-
-- **Operational Excellence** through AI-driven automation and optimization
-- **Scalable Growth** supporting organizations from small deployments to global enterprises
-- **Security Leadership** with defense-in-depth and zero-trust principles
-- **Future Readiness** with continuous innovation and technology evolution
-- **Business Value** through reduced costs and enhanced user experiences
-
-The platform's microservices architecture, combined with advanced AI capabilities and comprehensive integration options, positions organizations for digital transformation success while maintaining the highest standards of security, compliance, and operational reliability.
-
----
-
-**Document Control:**
-- **Solution Architect:** [Name]
-- **Technical Reviewers:** [Names]  
-- **Approved By:** [Name]
-- **Version:** 1.0
-- **Last Updated:** [Date]
-- **Next Review:** [Date + 6 months]
+**📍 Architecture Version**: 2.0  
+**Last Updated**: January 2025  
+**Review Status**: ✅ Validated by Solution Architecture Team
+
+**Next Steps**: Review [Prerequisites](prerequisites.md) for implementation requirements or proceed to [Implementation Guide](../delivery/implementation-guide.md) for deployment procedures.

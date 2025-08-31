@@ -1,100 +1,197 @@
 version: '2.0'
 provider: azure
-generated_at: '2025-08-24T19:23:46.620277'
+generated_at: '2025-08-31T09:02:28.366411'
 catalog_type: provider
 metadata:
   provider_name: Microsoft Azure
   total_solutions: 6
-  last_updated: '2025-08-24T19:23:46.620297'
+  last_updated: '2025-08-31T09:02:28.366448'
+  auto_generated: true
 categories:
   ai:
     solutions:
       document-intelligence:
-        title: Azure Document Intelligence Platform
-        description: AI-powered document analysis and extraction
-        version: '1.0'
+        provider: AZURE
+        category: ai
+        solution_name: Document Intelligence
+        description: Document Intelligence solution for AZURE
+        version: 1.0.0
+        status: Active
+        maintainers:
+        - name: "EO Framework\u2122 Azure Solutions Team"
+          email: azure-solutions@eoframework.com
+          role: Cloud Solutions Architect
         tags:
+        - azure
         - ai
-        - document
         - intelligence
-        - extraction
-        complexity: intermediate
-        deployment_time: 2-4 weeks
-        repository: https://github.com/eoframework/templates/tree/main/solutions/azure/ai/document-intelligence
+        - document
+        requirements:
+          prerequisites:
+          - AZURE Account
+          - Administrative Access
+          tools:
+          - Python 3.8+
+          - Azure CLI
+          - PowerShell
+          skills:
+          - AZURE Platform
+          - Solution Architecture
+          - Azure Services
         solution_path: ../../solutions/azure/ai/document-intelligence/
   cloud:
     solutions:
       enterprise-landing-zone:
-        title: Azure Enterprise Landing Zone
-        description: Enterprise-grade Azure foundation architecture
-        version: '1.0'
+        provider: AZURE
+        category: cloud
+        solution_name: Enterprise Landing Zone
+        description: Enterprise Landing Zone solution for AZURE
+        version: 1.0.0
+        status: Active
+        maintainers:
+        - name: "EO Framework\u2122 Azure Solutions Team"
+          email: azure-solutions@eoframework.com
+          role: Cloud Solutions Architect
         tags:
-        - landing-zone
-        - governance
+        - cloud
+        - azure
+        - landing
         - enterprise
-        complexity: enterprise
-        deployment_time: 6-10 weeks
-        repository: https://github.com/eoframework/templates/tree/main/solutions/azure/cloud/enterprise-landing-zone
+        - zone
+        requirements:
+          prerequisites:
+          - AZURE Account
+          - Administrative Access
+          tools:
+          - Python 3.8+
+          - Azure CLI
+          - PowerShell
+          skills:
+          - AZURE Platform
+          - Solution Architecture
+          - Azure Services
         solution_path: ../../solutions/azure/cloud/enterprise-landing-zone/
   cyber-security:
     solutions:
       sentinel-siem:
-        title: Azure Sentinel SIEM Platform
-        description: Cloud-native SIEM and SOAR security platform
-        version: '1.0'
+        provider: AZURE
+        category: cyber-security
+        solution_name: Sentinel Siem
+        description: Sentinel Siem solution for AZURE
+        version: 1.0.0
+        status: Active
+        maintainers:
+        - name: "EO Framework\u2122 Azure Solutions Team"
+          email: azure-solutions@eoframework.com
+          role: Cloud Solutions Architect
         tags:
-        - siem
+        - azure
         - sentinel
-        - soar
-        - security
-        complexity: enterprise
-        deployment_time: 4-8 weeks
-        repository: https://github.com/eoframework/templates/tree/main/solutions/azure/cyber-security/sentinel-siem
+        - siem
+        - cyber-security
+        requirements:
+          prerequisites:
+          - AZURE Account
+          - Administrative Access
+          tools:
+          - Python 3.8+
+          - Azure CLI
+          - PowerShell
+          skills:
+          - AZURE Platform
+          - Solution Architecture
+          - Azure Services
         solution_path: ../../solutions/azure/cyber-security/sentinel-siem/
   devops:
     solutions:
       enterprise-platform:
-        title: Azure DevOps Enterprise Platform
-        description: Complete DevOps lifecycle management platform
-        version: '1.0'
+        provider: AZURE
+        category: devops
+        solution_name: Enterprise Platform
+        description: Enterprise Platform solution for AZURE
+        version: 1.0.0
+        status: Active
+        maintainers:
+        - name: "EO Framework\u2122 Azure Solutions Team"
+          email: azure-solutions@eoframework.com
+          role: Cloud Solutions Architect
         tags:
+        - azure
+        - enterprise
+        - platform
         - devops
-        - azure-devops
-        - cicd
-        - agile
-        complexity: advanced
-        deployment_time: 3-6 weeks
-        repository: https://github.com/eoframework/templates/tree/main/solutions/azure/devops/enterprise-platform
+        requirements:
+          prerequisites:
+          - AZURE Account
+          - Administrative Access
+          tools:
+          - Python 3.8+
+          - Azure CLI
+          - PowerShell
+          skills:
+          - AZURE Platform
+          - Solution Architecture
+          - Azure Services
         solution_path: ../../solutions/azure/devops/enterprise-platform/
   modern-workspace:
     solutions:
       virtual-desktop:
-        title: Azure Virtual Desktop
-        description: Comprehensive desktop virtualization with Windows 11 multi-session
-          support
-        version: '1.0'
+        provider: AZURE
+        category: modern-workspace
+        solution_name: Virtual Desktop
+        description: Virtual Desktop solution for AZURE
+        version: 1.0.0
+        status: Active
+        maintainers:
+        - name: "EO Framework\u2122 Azure Solutions Team"
+          email: azure-solutions@eoframework.com
+          role: Cloud Solutions Architect
         tags:
-        - virtual-desktop
-        - avd
-        - windows-11
-        - fslogix
-        - remote-work
-        complexity: intermediate
-        deployment_time: 2-4 weeks
-        repository: https://github.com/eoframework/templates/tree/main/solutions/azure/modern-workspace/virtual-desktop
+        - azure
+        - modern-workspace
+        - virtual
+        - desktop
+        requirements:
+          prerequisites:
+          - AZURE Account
+          - Administrative Access
+          tools:
+          - Python 3.8+
+          - Azure CLI
+          - PowerShell
+          skills:
+          - AZURE Platform
+          - Solution Architecture
+          - Azure Services
         solution_path: ../../solutions/azure/modern-workspace/virtual-desktop/
   network:
     solutions:
       virtual-wan-global:
-        title: Azure Virtual WAN Global Architecture
-        description: Global network architecture with Virtual WAN
-        version: '1.0'
+        provider: AZURE
+        category: network
+        solution_name: Virtual Wan Global
+        description: Virtual Wan Global solution for AZURE
+        version: 1.0.0
+        status: Active
+        maintainers:
+        - name: "EO Framework\u2122 Azure Solutions Team"
+          email: azure-solutions@eoframework.com
+          role: Cloud Solutions Architect
         tags:
-        - virtual-wan
+        - azure
         - global
+        - virtual
         - network
-        - sd-wan
-        complexity: enterprise
-        deployment_time: 6-10 weeks
-        repository: https://github.com/eoframework/templates/tree/main/solutions/azure/network/virtual-wan-global
+        requirements:
+          prerequisites:
+          - AZURE Account
+          - Administrative Access
+          tools:
+          - Python 3.8+
+          - Azure CLI
+          - PowerShell
+          skills:
+          - AZURE Platform
+          - Solution Architecture
+          - Azure Services
         solution_path: ../../solutions/azure/network/virtual-wan-global/

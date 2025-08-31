@@ -1,23 +1,24 @@
 version: '2.0'
-generated_at: '2025-08-24T19:23:46.769114'
+generated_at: '2025-08-31T09:02:28.614169'
 catalog_type: master
 metadata:
   total_providers: 11
   total_categories: 6
-  total_solutions: 34
-  last_updated: '2025-08-24T19:23:46.769130'
+  total_solutions: 35
+  last_updated: '2025-08-31T09:02:28.614189'
+  auto_generated: true
 provider_catalogs:
-  aws: ./solutions/aws.yml
-  azure: ./solutions/azure.yml
-  cisco: ./solutions/cisco.yml
-  dell: ./solutions/dell.yml
-  github: ./solutions/github.yml
-  google: ./solutions/google.yml
-  hashicorp: ./solutions/hashicorp.yml
-  ibm: ./solutions/ibm.yml
-  juniper: ./solutions/juniper.yml
-  microsoft: ./solutions/microsoft.yml
-  nvidia: ./solutions/nvidia.yml
+  aws: ./providers/aws.yml
+  azure: ./providers/azure.yml
+  cisco: ./providers/cisco.yml
+  dell: ./providers/dell.yml
+  github: ./providers/github.yml
+  google: ./providers/google.yml
+  hashicorp: ./providers/hashicorp.yml
+  ibm: ./providers/ibm.yml
+  juniper: ./providers/juniper.yml
+  microsoft: ./providers/microsoft.yml
+  nvidia: ./providers/nvidia.yml
 category_catalogs:
   ai: ./categories/ai.yml
   cloud: ./categories/cloud.yml
@@ -56,9 +57,9 @@ quick_stats:
     ibm: 2
     juniper: 2
     microsoft: 2
-    nvidia: 2
+    nvidia: 3
   category_solution_counts:
-    ai: 5
+    ai: 6
     cloud: 9
     cyber-security: 6
     devops: 6
@@ -66,22 +67,8 @@ quick_stats:
     network: 4
   complexity_distribution:
     basic: 0
-    intermediate: 8
-    advanced: 6
-    enterprise: 20
+    intermediate: 0
+    advanced: 0
+    enterprise: 0
   deployment_time_distribution:
-    4-6 weeks: 5
-    3-5 weeks: 1
-    8-12 weeks: 2
-    2-4 weeks: 4
-    6-10 weeks: 5
-    4-8 weeks: 6
-    3-6 weeks: 1
-    6-8 weeks: 1
-    2-6 weeks: 1
-    2-4 hours: 1
-    4-8 hours: 1
-    2-8 weeks: 1
-    4-12 weeks: 1
-    6-12 weeks: 1
-    12-16 weeks: 3
+    unknown: 35

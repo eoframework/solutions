@@ -1,98 +1,72 @@
 version: '2.0'
 provider: hashicorp
-generated_at: '2025-08-24T19:23:46.674149'
+generated_at: '2025-08-31T09:02:28.460265'
 catalog_type: provider
 metadata:
   provider_name: HashiCorp
   total_solutions: 2
-  last_updated: '2025-08-24T19:23:46.674171'
+  last_updated: '2025-08-31T09:02:28.460326'
+  auto_generated: true
 categories:
   cloud:
     solutions:
       multi-cloud-platform:
-        title: HashiCorp Multi-Cloud Infrastructure Management Platform
-        description: Enterprise multi-cloud infrastructure management platform using
-          HashiCorp's complete product suite for unified cloud operations
-        version: '1.0'
+        provider: HashiCorp
+        category: cloud
+        solution_name: Multi Cloud Platform
+        description: Multi Cloud Platform solution for HASHICORP
+        version: 1.0.0
+        status: Active
+        maintainers:
+        - name: "EO Framework\u2122 HashiCorp Solutions Team"
+          email: hashicorp-solutions@eoframework.com
+          role: Infrastructure Solutions Architect
         tags:
-        - multi-cloud
-        - terraform
-        - consul
-        - vault
-        - nomad
-        - boundary
-        - infrastructure-management
-        - hybrid-cloud
-        - service-mesh
-        - secrets-management
-        complexity: enterprise
-        deployment_time: 4-8 weeks
-        repository: https://github.com/eoframework/templates/tree/main/solutions/hashicorp/cloud/multi-cloud-platform
-        features:
-        - Unified multi-cloud operations across AWS, Azure, and GCP
-        - HashiCorp Terraform Enterprise for infrastructure as code
-        - HashiCorp Consul for service discovery and service mesh
-        - HashiCorp Vault for secrets and identity management
-        - HashiCorp Nomad for workload orchestration
-        - HashiCorp Boundary for secure remote access
-        - Cross-cloud networking and VPN connectivity
-        - Zero-trust security architecture
-        - Policy as code with Sentinel
-        - Automated disaster recovery and backup
-        supported_platforms:
-        - AWS
-        - Microsoft Azure
-        - Google Cloud Platform
-        - Kubernetes
-        - VMware vSphere
-        integrations:
-        - Multi-cloud APIs
-        - Kubernetes
-        - Identity Providers
-        - Monitoring Systems
-        - CI/CD Pipelines
+        - cloud
+        - multi
+        - platform
+        - hashicorp
+        requirements:
+          prerequisites:
+          - HASHICORP Account
+          - Administrative Access
+          tools:
+          - Python 3.8+
+          - Terraform
+          - Vault CLI
+          skills:
+          - HASHICORP Platform
+          - Solution Architecture
+          - Infrastructure as Code
         solution_path: ../../solutions/hashicorp/cloud/multi-cloud-platform/
   devops:
     solutions:
       terraform-enterprise:
-        title: HashiCorp Terraform Enterprise Platform
-        description: Enterprise-grade Terraform platform providing collaborative infrastructure
-          as code, policy as code, and automated workflows
-        version: '1.0'
+        provider: HashiCorp
+        category: devops
+        solution_name: Terraform Enterprise
+        description: Terraform Enterprise solution for HASHICORP
+        version: 1.0.0
+        status: Active
+        maintainers:
+        - name: "EO Framework\u2122 HashiCorp Solutions Team"
+          email: hashicorp-solutions@eoframework.com
+          role: Infrastructure Solutions Architect
         tags:
-        - terraform
-        - infrastructure-as-code
-        - devops
-        - policy-as-code
-        - multi-cloud
         - enterprise
-        - collaboration
-        - sentinel
-        - automation
-        complexity: enterprise
-        deployment_time: 2-4 weeks
-        repository: https://github.com/eoframework/templates/tree/main/solutions/hashicorp/devops/terraform-enterprise
-        features:
-        - Collaborative infrastructure as code workflows
-        - Policy as code with Sentinel policy enforcement
-        - Multi-cloud support for AWS, Azure, GCP, and on-premises
-        - Private module registry for standardized components
-        - Enterprise security with SSO and RBAC
-        - Cost estimation and analysis before deployment
-        - VCS integration with GitHub, GitLab, and Bitbucket
-        - Full REST API for automation and integration
-        - Workspace management and team collaboration
-        - Comprehensive audit logging and compliance
-        supported_platforms:
-        - AWS
-        - Microsoft Azure
-        - Google Cloud Platform
-        - VMware vSphere
-        - Kubernetes
-        integrations:
-        - Version Control Systems
-        - Identity Providers
-        - CI/CD Pipelines
-        - HashiCorp Vault
-        - Monitoring Systems
+        - terraform
+        - hashicorp
+        - devops
+        requirements:
+          prerequisites:
+          - HASHICORP Account
+          - Administrative Access
+          tools:
+          - Python 3.8+
+          - Terraform
+          - Vault CLI
+          skills:
+          - HASHICORP Platform
+          - Solution Architecture
+          - Infrastructure as Code
         solution_path: ../../solutions/hashicorp/devops/terraform-enterprise/

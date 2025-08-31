@@ -1,71 +1,175 @@
-# Scripts - Cisco SD-WAN Enterprise
+# CISCO Sd Wan Enterprise - Deployment Scripts
 
 ## Overview
 
-This directory contains automation scripts and utilities for Cisco SD-WAN Enterprise deployment and operations.
+This directory contains deployment automation scripts for CISCO Sd Wan Enterprise solution using Cloud services. The scripts work together in a specific sequence to create a complete network solution.
 
----
+## Script Architecture
 
-## Script Categories
+### Script Types & Dependencies
 
-### Deployment Scripts
-- **infrastructure-setup.sh** - Controller deployment automation
-- **device-onboarding.py** - Automated device provisioning
-- **template-deployment.sh** - Configuration template management
+**📋 EXECUTION ORDER: Sequential (ansible → python)**
 
-### Operations Scripts
-- **health-monitoring.sh** - System health checks and monitoring
-- **backup-management.py** - Configuration backup and restore
-- **performance-monitoring.sh** - Network performance validation
+The scripts are **NOT standalone** - they must be executed in the correct order as they have dependencies on each other.
 
-### Maintenance Scripts
-- **software-upgrade.py** - Automated software updates
-- **certificate-renewal.sh** - Certificate management automation
-- **policy-deployment.py** - Policy configuration automation
+1. **Ansible Scripts** - Infrastructure orchestration and configuration
+2. **Python Scripts** - Service integration and automation
+
+### Directory Structure
+
+```
+scripts/
+├── README.md                    # This file
+├── ansible/                   # Service integration and automation
+│   └── playbook.yml               # Primary script
+├── python/                   # Service integration and automation
+│   └── deploy.py               # Primary script
+```
 
 ---
 
 ## Prerequisites
 
 ### Required Tools
-- Bash shell (Linux/macOS)
-- Python 3.7+
-- Cisco SD-WAN APIs
-- SSH access to devices
+- Ansible v2.9+
+- Python 3.8+
+- pip package manager
 
-### Configuration
+### CISCO Permissions Required
+- Administrative access to CISCO systems
+- API access and authentication credentials
+- Network connectivity to target infrastructure
+
+### Environment Setup
 ```bash
-# Set environment variables
-export VMANAGE_HOST="192.168.1.1"
-export VMANAGE_USER="admin"
-export VMANAGE_PASS="password"
+# Configure CISCO credentials
+
+# Set solution-specific variables
+export PROJECT_NAME="sd_wan_enterprise"
+export ENVIRONMENT="production"
 ```
 
 ---
 
-## Usage Examples
+## Deployment Instructions
 
-### Device Onboarding
+### ⚠️ IMPORTANT: Scripts Must Run in Sequence
+
+### Step 1: Infrastructure Orchestration And Configuration (REQUIRED FIRST)
+
 ```bash
-# Onboard new device
-./device-onboarding.py --site-id 200 --device-ip 203.0.113.10
-
-# Bulk onboarding
-./device-onboarding.py --csv-file sites.csv
+cd ansible/
+ansible-playbook -i inventory.yml playbook.yml
 ```
 
-### Health Monitoring
-```bash
-# Daily health check
-./health-monitoring.sh --verbose
+**What this does:**
+- ✅ Configures infrastructure components
+- ✅ Installs and configures services
+- ✅ Manages multi-system orchestration
+- ✅ Ensures idempotent configuration state
 
-# Automated monitoring
-crontab -e
-0 8 * * * /scripts/health-monitoring.sh
+**Duration:** ~10-15 minutes
+### Step 2: Service Integration And Automation (REQUIRED NEXT)
+
+```bash
+cd python/
+python3 deploy.py
+```
+
+**What this does:**
+- ✅ Deploys application components
+- ✅ Configures API integrations
+- ✅ Sets up monitoring and alerting
+- ✅ Performs end-to-end validation
+
+**Duration:** ~10-15 minutes  
+**Dependencies:** Requires resources created by ansible scripts
+---
+
+## Usage After Deployment
+
+### Accessing the Solution
+
+The deployed Sd Wan Enterprise solution provides the following capabilities:
+
+#### Service Endpoints
+- Primary interface: Available via cloud provider console
+- API endpoints: Configured during deployment
+- Monitoring dashboards: Integrated with cloud monitoring
+
+#### Management Commands
+```bash
+# Check deployment status
+
+# Monitor solution health
+# (Provider-specific commands available in script output)
 ```
 
 ---
 
-**Directory Version**: 1.0  
-**Last Updated**: January 2025  
-**Maintained By**: Network Automation Team
+## Troubleshooting
+
+### Common Issues
+
+#### 1. Authentication/Credentials
+```bash
+Error: Authentication failed or credentials not found
+Solution: Ensure cloud provider CLI is configured with appropriate credentials
+```
+
+#### 2. Insufficient Permissions  
+```bash
+Error: Access denied or permission errors
+Solution: Verify account has required permissions listed in Prerequisites
+```
+
+#### 3. Resource Conflicts
+```bash
+Error: Resource already exists or naming conflicts
+Solution: Choose unique PROJECT_NAME or clean up existing resources
+```
+
+#### 4. Deployment Timeout
+```bash
+Error: Deployment exceeded timeout limits
+Solution: Check network connectivity and resource availability in target region
+```
+
+### Validation Commands
+
+```bash
+# Verify all components are deployed
+cd ansible/
+# Run validation commands specific to solution type
+# (Detailed commands available in individual scripts)
+```
+
+### Cleanup
+
+#### Remove All Resources
+```bash
+# WARNING: This will delete all created resources
+```
+
+---
+
+## Support
+
+### Log Locations
+- Deployment logs: Available in script output and cloud provider logs
+- Application logs: Configured during deployment
+- System logs: Available via cloud monitoring services
+
+### Monitoring
+Key metrics and monitoring capabilities are configured automatically during deployment. Access monitoring dashboards through your cloud provider console.
+
+### Documentation
+- Individual script directories contain detailed usage instructions
+- Cloud provider documentation for service-specific guidance
+- Solution-specific configuration examples in script files
+
+---
+
+**Last Updated:** August 2025  
+**Solution Version:** 1.0  
+**Maintained By:** EO Framework™ {provider_name} Solutions Team

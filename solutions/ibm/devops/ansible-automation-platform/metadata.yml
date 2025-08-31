@@ -1,58 +1,28 @@
-name: IBM Ansible Automation Platform
-version: "2.4"
-provider: ibm
+provider: IBM
 category: devops
-subcategory: automation
-description: Enterprise automation platform for hybrid cloud infrastructure and application management
+solution_name: Ansible Automation Platform
+description: Ansible Automation Platform solution for IBM
+version: 1.0.0
+status: Active
+maintainers:
+- name: "EO Framework\u2122 IBM Solutions Team"
+  email: ibm-solutions@eoframework.com
+  role: Enterprise Solutions Architect
 tags:
-  - ansible
-  - automation
-  - devops
-  - infrastructure-as-code
-  - configuration-management
-  - compliance
-  - hybrid-cloud
-  - gitops
-  - rbac
-  - workflow-orchestration
-author: IBM Red Hat Services
-contact: redhat-services@ibm.com
-license: IBM Internal Use
-created_date: "2024-01-15"
-updated_date: "2024-01-15"
-dependencies:
-  - red-hat-openshift
-  - postgresql
-  - persistent-storage
-supported_platforms:
-  - red-hat-openshift
-  - aws-eks
-  - azure-aks
-  - google-gke
-  - vmware-tanzu
-deployment_types:
-  - standard
-  - high-availability
-  - hub-and-spoke
-  - air-gapped
-compliance_frameworks:
-  - soc2
-  - iso27001
-  - nist
-  - pci-dss
-  - hipaa
-  - gdpr
-integration_points:
-  - git-repositories
-  - ci-cd-pipelines
-  - monitoring-systems
-  - identity-providers
-  - cloud-providers
-  - ticketing-systems
-estimated_deployment_time: "4-8 hours"
-complexity_level: intermediate
-business_value:
-  cost_reduction: "30-50%"
-  deployment_acceleration: "60-80%"
-  operational_efficiency: "40-60%"
-  compliance_improvement: "70-90%"
+- platform
+- ibm
+- automation
+- devops
+- ansible
+requirements:
+  prerequisites:
+  - IBM Account
+  - Administrative Access
+  tools:
+  - Python 3.8+
+  - OpenShift CLI
+  - Ansible
+  skills:
+  - IBM Platform
+  - Solution Architecture
+  - Container Platforms

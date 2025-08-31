@@ -1,43 +1,28 @@
-name: "Azure Enterprise Landing Zone Solution"
-description: "Scalable, secure foundation for enterprise cloud adoption with built-in governance"
-provider: "azure"
-category: "cloud"
-solution_type: "enterprise-landing-zone"
-version: "1.0"
-license: "BSL-1.1"
-
-metadata:
-  industry_focus:
-    - "Enterprise"
-    - "Financial Services"
-    - "Government"
-    - "Healthcare"
-  
-  use_cases:
-    - "Large-scale cloud migration"
-    - "Multi-subscription environments"
-    - "Regulatory compliance"
-    - "Standardized cloud foundation"
-  
-  technologies:
-    - "Azure Blueprints"
-    - "Azure Policy"
-    - "Azure Monitor"
-    - "Azure Security Center"
-  
-  business_benefits:
-    - "6 months faster cloud adoption"
-    - "100% compliance from deployment"
-    - "90% reduction in setup complexity"
-    - "Enterprise governance standards"
-
-technical_specs:
-  deployment_model: "Azure Cloud"
-  scalability: "Enterprise-scale architecture"
-  availability: "99.95%"
-  governance: "Policy-driven compliance"
-
-cost_model:
-  implementation: "$500,000 - $5,000,000"
-  monthly_operational: "$50,000 - $500,000"
-  roi_timeframe: "12-18 months"
+provider: AZURE
+category: cloud
+solution_name: Enterprise Landing Zone
+description: Enterprise Landing Zone solution for AZURE
+version: 1.0.0
+status: Active
+maintainers:
+- name: "EO Framework\u2122 Azure Solutions Team"
+  email: azure-solutions@eoframework.com
+  role: Cloud Solutions Architect
+tags:
+- cloud
+- azure
+- landing
+- enterprise
+- zone
+requirements:
+  prerequisites:
+  - AZURE Account
+  - Administrative Access
+  tools:
+  - Python 3.8+
+  - Azure CLI
+  - PowerShell
+  skills:
+  - AZURE Platform
+  - Solution Architecture
+  - Azure Services

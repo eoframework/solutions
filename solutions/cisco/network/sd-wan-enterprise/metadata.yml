@@ -1,59 +1,25 @@
-name: "Cisco SD-WAN Enterprise Solution"
-description: "Secure, cloud-delivered network architecture for branch connectivity and application optimization"
-provider: "cisco"
-category: "networking"
-solution_type: "sd-wan-enterprise"
-version: "1.0"
-license: "BSL-1.1"
-
-# Solution Metadata
-metadata:
-  industry_focus:
-    - "Enterprise"
-    - "Retail"
-    - "Healthcare"
-    - "Financial Services"
-  
-  use_cases:
-    - "Branch office connectivity"
-    - "Cloud migration enablement"
-    - "Application performance optimization"
-    - "Network security consolidation"
-  
-  technologies:
-    - "Cisco SD-WAN"
-    - "vManage"
-    - "vSmart Controller"
-    - "vBond Orchestrator"
-    - "vEdge/cEdge Routers"
-  
-  business_benefits:
-    - "40% reduction in network costs"
-    - "3x improvement in application performance"
-    - "Simplified network operations"
-    - "Integrated security protection"
-  
-  compliance_frameworks:
-    - "SOC 2 Type II"
-    - "ISO 27001"
-    - "GDPR"
-    - "HIPAA"
-
-# Technical Specifications
-technical_specs:
-  deployment_model: "Hybrid Cloud"
-  scalability: "5-5000+ branches"
-  availability: "99.9%"
-  performance: "Up to 10Gbps per branch"
-  
-# Estimated Costs
-cost_model:
-  implementation: "$50,000 - $500,000"
-  monthly_operational: "$5,000 - $50,000"
-  roi_timeframe: "12-18 months"
-
-# Support Information
-support:
-  documentation_level: "Enterprise"
-  training_required: "Intermediate"
-  support_tier: "24/7 Enterprise Support"
+provider: CISCO
+category: network
+solution_name: Sd Wan Enterprise
+description: Sd Wan Enterprise solution for CISCO
+version: 1.0.0
+status: Active
+maintainers:
+- name: "EO Framework\u2122 Cisco Solutions Team"
+  email: cisco-solutions@eoframework.com
+  role: Network Solutions Architect
+tags:
+- network
+- enterprise
+- cisco
+requirements:
+  prerequisites:
+  - CISCO Account
+  - Administrative Access
+  tools:
+  - Python 3.8+
+  - Ansible
+  skills:
+  - CISCO Platform
+  - Solution Architecture
+  - Network Infrastructure

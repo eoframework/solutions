@@ -1,125 +1,28 @@
-solution:
-  name: "Intelligent Document Processing"
-  version: "1.0.0"
-  description: "End-to-end intelligent document processing system using AWS AI/ML services"
-  
-provider:
-  name: "AWS"
-  category: "AI"
-  services:
-    - "Amazon Textract"
-    - "Amazon Comprehend" 
-    - "Amazon A2I"
-    - "AWS Lambda"
-    - "Amazon S3"
-    - "Amazon DynamoDB"
-    - "Amazon API Gateway"
-    - "Amazon SQS"
-    - "Amazon SNS"
-    - "Amazon CloudWatch"
-
-business:
-  use_cases:
-    - "Invoice Processing"
-    - "Form Digitization"
-    - "Document Classification"
-    - "Data Extraction"
-    - "Compliance Automation"
-    - "Medical Records Processing"
-    - "Legal Document Analysis"
-  
-  benefits:
-    - "95% reduction in manual processing time"
-    - "99%+ OCR accuracy for printed text"
-    - "Scalable serverless architecture"
-    - "Human-in-the-loop quality assurance"
-    - "Enterprise security and compliance"
-  
-  target_industries:
-    - "Financial Services"
-    - "Healthcare"
-    - "Government"
-    - "Legal"
-    - "Insurance"
-    - "Manufacturing"
-    - "Retail"
-
-technical:
-  deployment:
-    - "CloudFormation Templates"
-    - "Terraform Modules"
-    - "AWS CDK"
-  
-  integration:
-    - "REST APIs"
-    - "SDK Support"
-    - "Webhook Notifications"
-    - "Batch Processing"
-  
-  security:
-    - "Encryption at rest and in transit"
-    - "IAM role-based access control"
-    - "VPC network isolation"
-    - "CloudTrail audit logging"
-  
-  performance:
-    throughput: "1000+ documents/hour"
-    accuracy: "99%+ OCR accuracy"
-    availability: "99.9% SLA"
-    scalability: "Auto-scaling"
-
-compliance:
-  frameworks:
-    - "SOC 2 Type II"
-    - "GDPR"
-    - "HIPAA"
-    - "PCI DSS"
-  
-  certifications:
-    - "AWS Well-Architected"
-    - "AWS Security Best Practices"
-
-licensing:
-  type: "Business Source License 1.1"
-  commercial_use: "Requires license agreement"
-  modification: "Permitted for internal use"
-  distribution: "Under BSL 1.1 terms"
-
-support:
-  tiers:
-    - "Community Support"
-    - "Professional Services"
-    - "Enterprise Support"
-    - "Managed Services"
-  
-  channels:
-    - "Documentation Portal"
-    - "Technical Support Portal"
-    - "Professional Services"
-    - "Training Programs"
-
-documentation:
-  presales:
-    - "Business Case Template"
-    - "ROI Calculator"
-    - "Requirements Questionnaire"
-    - "Solution Design Template"
-    - "Executive Presentation"
-  
-  delivery:
-    - "Implementation Guide"
-    - "Configuration Templates"
-    - "Testing Procedures"
-    - "Training Materials"
-    - "Operations Runbook"
-  
-  technical:
-    - "Architecture Documentation"
-    - "API Reference"
-    - "Troubleshooting Guide"
-    - "Best Practices"
-
-created_date: "2025-01-18"
-last_updated: "2025-01-18"
-maintainer: "EO Framework™ AI Solutions Team"
-contact: "ai-solutions@eoframework.com"
+provider: AWS
+category: ai
+solution_name: Intelligent Document Processing
+description: Intelligent Document Processing solution for AWS
+version: 1.0.0
+status: Active
+maintainers:
+- name: "EO Framework\u2122 AWS Solutions Team"
+  email: aws-solutions@eoframework.com
+  role: Cloud Solutions Architect
+tags:
+- document
+- ai
+- intelligent
+- processing
+- aws
+requirements:
+  prerequisites:
+  - AWS Account
+  - Administrative Access
+  tools:
+  - Python 3.8+
+  - AWS CLI
+  - Terraform
+  skills:
+  - AWS Platform
+  - Solution Architecture
+  - AWS Services

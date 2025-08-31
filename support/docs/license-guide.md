@@ -60,7 +60,7 @@ All template files must include the BSL 1.1 header:
 
 ```
 /*
- * Copyright (c) 2024 EO Framework™
+ * Copyright (c) 2025 EO Framework™
  *
  * Licensed under the Business Source License 1.1 (the "License");
  * you may not use this file except in compliance with the License.

@@ -1,43 +1,26 @@
-name: "Dell PowerSwitch Datacenter Networking Solution"
-description: "High-performance datacenter switching with open networking and automation capabilities"
-provider: "dell"
-category: "network"
-solution_type: "powerswitch-datacenter"
-version: "1.0"
-license: "BSL-1.1"
-
-metadata:
-  industry_focus:
-    - "Cloud Service Providers"
-    - "Enterprise Datacenters"
-    - "High Performance Computing"
-    - "Telecommunications"
-  
-  use_cases:
-    - "Datacenter spine-leaf networks"
-    - "HPC cluster networking"
-    - "Cloud provider networks"
-    - "Enterprise campus networks"
-  
-  technologies:
-    - "PowerSwitch S5000 Series"
-    - "PowerSwitch N3000 Series"
-    - "SmartFabric OS10"
-    - "OpenManage Network Manager"
-  
-  business_benefits:
-    - "80% faster network deployment"
-    - "50% lower networking costs"
-    - "400% performance increase"
-    - "Simplified automation management"
-
-technical_specs:
-  deployment_model: "Datacenter/Campus"
-  scalability: "10-10,000+ ports"
-  performance: "25/100GbE backbone"
-  automation: "Zero-touch deployment"
-
-cost_model:
-  implementation: "$500,000 - $5,000,000"
-  per_switch: "$10,000 - $100,000"
-  roi_timeframe: "10-20 months"
+provider: DELL
+category: network
+solution_name: Powerswitch Datacenter
+description: Powerswitch Datacenter solution for DELL
+version: 1.0.0
+status: Active
+maintainers:
+- name: "EO Framework\u2122 Dell Solutions Team"
+  email: dell-solutions@eoframework.com
+  role: Infrastructure Solutions Architect
+tags:
+- network
+- datacenter
+- powerswitch
+- dell
+requirements:
+  prerequisites:
+  - DELL Account
+  - Administrative Access
+  tools:
+  - Python 3.8+
+  - Ansible
+  skills:
+  - DELL Platform
+  - Solution Architecture
+  - Network Infrastructure

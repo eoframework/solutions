@@ -1,94 +1,187 @@
 version: '2.0'
 provider: dell
-generated_at: '2025-08-24T19:23:46.646203'
+generated_at: '2025-08-31T09:02:28.411316'
 catalog_type: provider
 metadata:
   provider_name: Dell Technologies
   total_solutions: 6
-  last_updated: '2025-08-24T19:23:46.646232'
+  last_updated: '2025-08-31T09:02:28.411370'
+  auto_generated: true
 categories:
   ai:
     solutions:
       precision-ai-workstation:
-        title: Dell Precision AI Workstation
-        description: High-performance AI/ML workstation platform
-        version: '1.0'
+        provider: DELL
+        category: ai
+        solution_name: Precision Ai Workstation
+        description: Precision Ai Workstation solution for DELL
+        version: 1.0.0
+        status: Active
+        maintainers:
+        - name: "EO Framework\u2122 Dell Solutions Team"
+          email: dell-solutions@eoframework.com
+          role: Infrastructure Solutions Architect
         tags:
-        - ai
         - workstation
+        - ai
         - precision
-        - high-performance
-        complexity: enterprise
-        deployment_time: 4-8 weeks
-        repository: https://github.com/eoframework/templates/tree/main/solutions/dell/ai/precision-ai-workstation
+        - dell
+        requirements:
+          prerequisites:
+          - DELL Account
+          - Administrative Access
+          tools:
+          - Python 3.8+
+          - Ansible
+          skills:
+          - DELL Platform
+          - Solution Architecture
+          - Network Infrastructure
         solution_path: ../../solutions/dell/ai/precision-ai-workstation/
   cloud:
     solutions:
       vxrail-hci:
-        title: Dell VxRail Hyper-Converged Infrastructure
-        description: Hyper-converged infrastructure with VxRail
-        version: '1.0'
+        provider: DELL
+        category: cloud
+        solution_name: Vxrail Hci
+        description: Vxrail Hci solution for DELL
+        version: 1.0.0
+        status: Active
+        maintainers:
+        - name: "EO Framework\u2122 Dell Solutions Team"
+          email: dell-solutions@eoframework.com
+          role: Infrastructure Solutions Architect
         tags:
+        - cloud
         - vxrail
-        - hci
-        - hyper-converged
-        complexity: enterprise
-        deployment_time: 6-10 weeks
-        repository: https://github.com/eoframework/templates/tree/main/solutions/dell/cloud/vxrail-hci
+        - dell
+        requirements:
+          prerequisites:
+          - DELL Account
+          - Administrative Access
+          tools:
+          - Python 3.8+
+          - Ansible
+          skills:
+          - DELL Platform
+          - Solution Architecture
+          - Network Infrastructure
         solution_path: ../../solutions/dell/cloud/vxrail-hci/
       vxrail-hyperconverged:
-        title: Dell VxRail Hyperconverged Platform
-        description: Enterprise hyperconverged infrastructure solution
-        version: '1.0'
+        provider: DELL
+        category: cloud
+        solution_name: Vxrail Hyperconverged
+        description: Vxrail Hyperconverged solution for DELL
+        version: 1.0.0
+        status: Active
+        maintainers:
+        - name: "EO Framework\u2122 Dell Solutions Team"
+          email: dell-solutions@eoframework.com
+          role: Infrastructure Solutions Architect
         tags:
+        - cloud
         - vxrail
+        - dell
         - hyperconverged
-        - enterprise
-        complexity: enterprise
-        deployment_time: 6-10 weeks
-        repository: https://github.com/eoframework/templates/tree/main/solutions/dell/cloud/vxrail-hyperconverged
+        requirements:
+          prerequisites:
+          - DELL Account
+          - Administrative Access
+          tools:
+          - Python 3.8+
+          - Ansible
+          skills:
+          - DELL Platform
+          - Solution Architecture
+          - Network Infrastructure
         solution_path: ../../solutions/dell/cloud/vxrail-hyperconverged/
   cyber-security:
     solutions:
       safeid-authentication:
-        title: Dell SafeID Authentication Platform
-        description: Hardware-based security and authentication
-        version: '1.0'
+        provider: DELL
+        category: cyber-security
+        solution_name: Safeid Authentication
+        description: Safeid Authentication solution for DELL
+        version: 1.0.0
+        status: Active
+        maintainers:
+        - name: "EO Framework\u2122 Dell Solutions Team"
+          email: dell-solutions@eoframework.com
+          role: Infrastructure Solutions Architect
         tags:
         - safeid
         - authentication
-        - hardware
-        - security
-        complexity: advanced
-        deployment_time: 4-6 weeks
-        repository: https://github.com/eoframework/templates/tree/main/solutions/dell/cyber-security/safeid-authentication
+        - dell
+        - cyber-security
+        requirements:
+          prerequisites:
+          - DELL Account
+          - Administrative Access
+          tools:
+          - Python 3.8+
+          - Ansible
+          skills:
+          - DELL Platform
+          - Solution Architecture
+          - Network Infrastructure
         solution_path: ../../solutions/dell/cyber-security/safeid-authentication/
   devops:
     solutions:
       poweredge-ci-infrastructure:
-        title: Dell PowerEdge CI Infrastructure
-        description: CI/CD infrastructure with PowerEdge servers
-        version: '1.0'
+        provider: DELL
+        category: devops
+        solution_name: Poweredge Ci Infrastructure
+        description: Poweredge Ci Infrastructure solution for DELL
+        version: 1.0.0
+        status: Active
+        maintainers:
+        - name: "EO Framework\u2122 Dell Solutions Team"
+          email: dell-solutions@eoframework.com
+          role: Infrastructure Solutions Architect
         tags:
+        - dell
         - poweredge
-        - ci
+        - devops
         - infrastructure
-        - servers
-        complexity: advanced
-        deployment_time: 4-6 weeks
-        repository: https://github.com/eoframework/templates/tree/main/solutions/dell/devops/poweredge-ci-infrastructure
+        requirements:
+          prerequisites:
+          - DELL Account
+          - Administrative Access
+          tools:
+          - Python 3.8+
+          - Ansible
+          skills:
+          - DELL Platform
+          - Solution Architecture
+          - Network Infrastructure
         solution_path: ../../solutions/dell/devops/poweredge-ci-infrastructure/
   network:
     solutions:
       powerswitch-datacenter:
-        title: Dell PowerSwitch Datacenter Network
-        description: High-performance datacenter networking solution
-        version: '1.0'
+        provider: DELL
+        category: network
+        solution_name: Powerswitch Datacenter
+        description: Powerswitch Datacenter solution for DELL
+        version: 1.0.0
+        status: Active
+        maintainers:
+        - name: "EO Framework\u2122 Dell Solutions Team"
+          email: dell-solutions@eoframework.com
+          role: Infrastructure Solutions Architect
         tags:
-        - powerswitch
-        - datacenter
         - network
-        complexity: enterprise
-        deployment_time: 4-8 weeks
-        repository: https://github.com/eoframework/templates/tree/main/solutions/dell/network/powerswitch-datacenter
+        - datacenter
+        - powerswitch
+        - dell
+        requirements:
+          prerequisites:
+          - DELL Account
+          - Administrative Access
+          tools:
+          - Python 3.8+
+          - Ansible
+          skills:
+          - DELL Platform
+          - Solution Architecture
+          - Network Infrastructure
         solution_path: ../../solutions/dell/network/powerswitch-datacenter/

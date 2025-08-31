@@ -154,10 +154,10 @@ class TemplateValidator:
         success_count = 0
         total_count = 0
         
-        # Find all template directories in providers folder
-        providers_path = self.repo_root / "providers"
-        if providers_path.exists():
-            for provider_path in providers_path.iterdir():
+        # Find all template directories in solutions folder
+        solutions_path = self.repo_root / "solutions"
+        if solutions_path.exists():
+            for provider_path in solutions_path.iterdir():
                 if provider_path.is_dir():
                     for category_path in provider_path.iterdir():
                         if category_path.is_dir():

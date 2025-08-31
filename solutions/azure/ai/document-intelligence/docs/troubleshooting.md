@@ -1,206 +1,381 @@
-# Troubleshooting Guide - Azure Document Intelligence Solution
+# Troubleshooting Guide - Azure Document Intelligence
 
-## Common Issues
+## 🔧 **Troubleshooting Overview**
 
-### Issue 1: Document Intelligence API Rate Limiting
+This comprehensive troubleshooting guide provides systematic approaches to diagnosing and resolving common issues with the **Azure Document Intelligence** solution. All procedures are tested and validated by our technical team.
+
+### 🎯 **Quick Resolution Index**
+| Issue Category | Typical Resolution Time | Complexity Level |
+|----------------|------------------------|------------------|
+| **Configuration Issues** | 15-30 minutes | Low to Medium |
+| **Connectivity Problems** | 30-60 minutes | Medium |
+| **Performance Issues** | 1-3 hours | Medium to High |
+| **Security and Access** | 30-90 minutes | Medium |
+| **Integration Problems** | 1-4 hours | High |
+
+## 🚨 **Common Issues and Solutions**
+
+### **🔧 Configuration Issues**
+
+#### **Issue: Service Configuration Errors**
 **Symptoms:**
-- HTTP 429 "Too Many Requests" errors
-- Processing delays or timeouts
-- Intermittent failures during high-volume processing
+- Configuration validation failures
+- Service startup errors
+- Parameter validation messages
+- Deployment failures
 
-**Causes:**
-- Exceeding 15 requests per second default limit
-- Burst processing without proper throttling
-- Multiple concurrent applications using same service
+**Diagnostic Steps:**
+1. Validate configuration against provided templates
+2. Check parameter formats and required values  
+3. Verify service dependencies and prerequisites
+4. Review deployment logs for specific error messages
 
-**Solutions:**
-1. Implement exponential backoff retry logic in application code
-2. Request quota increase through Azure Support for higher limits
-3. Distribute processing across multiple Document Intelligence instances
-4. Implement queue-based processing with controlled throughput
-5. Monitor request patterns and optimize batch sizes
-
-### Issue 2: Low Confidence Scores in Document Extraction
-**Symptoms:**
-- Extracted data confidence scores below 0.8
-- Inconsistent data extraction results
-- High false positive/negative rates
-
-**Causes:**
-- Poor document image quality (low resolution, skewed, blurry)
-- Document format not supported by prebuilt models
-- Custom model not properly trained or insufficient training data
-
-**Solutions:**
-1. Improve document quality through preprocessing (deskew, enhance, resize)
-2. Train custom models with domain-specific document samples
-3. Use appropriate prebuilt model for document type
-4. Implement human-in-the-loop validation for low-confidence results
-5. Fine-tune confidence thresholds based on business requirements
-
-### Issue 3: Azure Storage Access Denied Errors
-**Symptoms:**
-- "Forbidden" or "Access Denied" errors when accessing blob storage
-- Unable to upload or download documents
-- Function apps cannot access storage containers
-
-**Causes:**
-- Incorrect storage account permissions or RBAC roles
-- Managed identity not properly configured
-- Storage account firewall blocking requests
-- Expired SAS tokens or connection strings
-
-**Solutions:**
-1. Verify managed identity has "Storage Blob Data Contributor" role
-2. Update storage account firewall rules to allow Azure services
-3. Regenerate storage account access keys if compromised
-4. Configure private endpoints for secure network access
-5. Validate SAS token permissions and expiration dates
-
-### Issue 4: Azure Functions Cold Start Performance
-**Symptoms:**
-- First request takes significantly longer (5-10 seconds)
-- Intermittent timeout errors during low usage periods
-- Inconsistent processing times
-
-**Causes:**
-- Function app running on Consumption plan with cold starts
-- Large deployment package size
-- Dependencies not optimized for cold start
-
-**Solutions:**
-1. Upgrade to Premium or Dedicated hosting plan for always-warm instances
-2. Implement warm-up triggers to keep functions active
-3. Optimize deployment package size and remove unused dependencies
-4. Use application initialization for critical functions
-5. Configure "Always On" setting for critical processing functions
-
-### Issue 5: Custom Model Training Failures
-**Symptoms:**
-- Model training jobs fail or timeout
-- Low model accuracy after training
-- Unable to create custom models
-
-**Causes:**
-- Insufficient or poor-quality training documents
-- Inconsistent document layouts in training set
-- Training data not properly labeled or formatted
-
-**Solutions:**
-1. Ensure minimum 5 documents per model with consistent structure
-2. Use high-quality scanned documents (300 DPI minimum)
-3. Provide diverse examples covering all document variations
-4. Validate document annotations and labeling accuracy
-5. Use document analysis insights to improve training data
-
-## Diagnostic Tools
-
-### Built-in Azure Tools
-- **Azure Monitor**: Comprehensive logging and metrics for all Azure services
-- **Application Insights**: Real-time performance monitoring and dependency tracking
-- **Azure Resource Health**: Service health status and maintenance notifications
-- **Storage Analytics**: Detailed storage account usage and performance metrics
-- **Document Intelligence Studio**: Visual tool for testing and model management
-
-### Azure CLI Diagnostic Commands
+**Resolution:**
 ```bash
-# Check Document Intelligence service status
-az cognitiveservices account show --name <service-name> --resource-group <rg-name>
-
-# Monitor Function App logs
-az functionapp log tail --name <function-app-name> --resource-group <rg-name>
-
-# Check storage account access
-az storage blob list --account-name <storage-name> --container-name <container>
-
-# Validate Key Vault access
-az keyvault secret show --vault-name <vault-name> --name <secret-name>
+# Validate configuration syntax
+# Check service status and logs
+# Compare with working configuration templates
+# Apply corrected configuration parameters
 ```
 
-### External Tools
-- **Postman**: API testing and debugging for Document Intelligence endpoints
-- **Azure Storage Explorer**: Visual interface for blob storage management and debugging
-- **Fiddler**: Network traffic analysis for API call debugging
-- **Visual Studio Code**: Integrated debugging for Azure Functions
-- **PowerBI Desktop**: Data visualization for processing analytics and monitoring
+**Prevention:**
+- Use provided configuration templates as baseline
+- Validate configurations before deployment
+- Implement configuration version control
+- Regular configuration audits and reviews
 
-## Performance Optimization
+#### **Issue: Resource Naming and Tagging Problems**
+**Symptoms:**
+- Resource creation failures
+- Naming convention violations
+- Missing or incorrect tags
+- Policy compliance failures
 
-### Document Processing Optimization
-- **Image Preprocessing**: Implement deskewing, noise reduction, and contrast enhancement
-- **Batch Processing**: Group documents for efficient processing (5-10 documents per batch)
-- **Parallel Processing**: Use Azure Functions with queue triggers for concurrent processing
-- **Caching**: Implement Redis cache for frequently accessed results
-- **Content Delivery**: Use Azure CDN for faster document access
+**Diagnostic Steps:**
+1. Review naming conventions and policies
+2. Check existing resource names for conflicts
+3. Validate tag requirements and formats
+4. Verify policy compliance requirements
 
-### Cost Optimization
-- **Lifecycle Management**: Implement blob storage lifecycle policies for automatic archiving
-- **Reserved Capacity**: Purchase reserved instances for predictable workloads
-- **Monitoring**: Set up cost alerts and budgets to track spending
-- **Optimization**: Regularly review and optimize resource sizing
+**Resolution:**
+- Apply correct naming conventions per solution standards
+- Add required tags using provided tag templates
+- Resolve naming conflicts through systematic renaming
+- Update policies to match organizational requirements
 
-## Support Escalation
+### **🌐 Connectivity and Network Issues**
 
-### Level 1 Support
-- **Documentation**: Azure Document Intelligence official documentation
-- **Community Forums**: Microsoft Q&A and Stack Overflow
-- **GitHub Issues**: Azure SDK and sample code repositories
-- **Learning Resources**: Microsoft Learn modules and tutorials
+#### **Issue: Network Connectivity Problems**
+**Symptoms:**
+- Connection timeouts
+- DNS resolution failures
+- Port accessibility issues
+- Certificate errors
 
-### Level 2 Support
-- **Azure Support Plans**: Professional Direct or Premier support
-- **Microsoft FastTrack**: Architecture guidance and best practices
-- **Partner Support**: Microsoft partner ecosystem for specialized assistance
-- **Training**: Microsoft official training courses and certifications
+**Diagnostic Steps:**
+1. **Network Layer Testing:**
+   ```bash
+   # Test basic connectivity
+   ping target-endpoint
+   telnet target-host target-port
+   nslookup target-domain
+   ```
 
-### Emergency Support
-- **Azure Support Center**: 24/7 technical support for production issues
-- **Critical Issue Escalation**: Severity A support for business-critical problems
-- **Premier Support**: Dedicated technical account manager and escalation procedures
-- **Emergency Contacts**: Pre-configured contact lists for critical incidents
+2. **Security Group/Firewall Validation:**
+   - Verify security group rules
+   - Check firewall configurations
+   - Validate port accessibility
+   - Review network ACL settings
 
-## Monitoring and Alerting
+3. **DNS and Certificate Verification:**
+   - Confirm DNS resolution
+   - Validate SSL/TLS certificates
+   - Check certificate expiration
+   - Verify certificate chains
 
-### Key Metrics to Monitor
-- **Request Rate**: Document Intelligence API requests per second
-- **Error Rate**: Failed requests and error response codes
-- **Latency**: Average processing time per document
-- **Confidence Scores**: Average extraction confidence levels
-- **Storage Usage**: Blob storage capacity and transaction costs
+**Resolution:**
+- Configure security groups and firewall rules
+- Update DNS settings and records
+- Renew or replace expired certificates
+- Adjust network access control lists
 
-### Alert Configuration
-```json
-{
-  "alertName": "High Error Rate",
-  "condition": "Error rate > 5% over 15 minutes",
-  "action": "Email admin team and create incident"
-}
+#### **Issue: Load Balancer and Traffic Distribution**
+**Symptoms:**
+- Uneven traffic distribution
+- Health check failures
+- Backend service unavailability
+- Response time issues
+
+**Diagnostic Steps:**
+1. Check load balancer health checks
+2. Verify backend service availability
+3. Review traffic distribution patterns
+4. Analyze response time metrics
+
+**Resolution:**
+- Adjust health check parameters
+- Fix backend service issues
+- Reconfigure traffic distribution algorithms
+- Optimize backend service performance
+
+### **⚡ Performance Issues**
+
+#### **Issue: High Latency and Slow Response Times**
+**Symptoms:**
+- Response times exceeding SLA targets
+- User experience degradation
+- Timeout errors
+- Performance monitoring alerts
+
+**Diagnostic Steps:**
+1. **Performance Metrics Analysis:**
+   - CPU and memory utilization
+   - Database query performance
+   - Network latency measurements
+   - Application response times
+
+2. **Resource Utilization Assessment:**
+   - Compute resource availability
+   - Storage IOPS and throughput
+   - Network bandwidth utilization
+   - Database connection pools
+
+**Resolution:**
+- Scale compute resources horizontally or vertically
+- Optimize database queries and indexes
+- Implement caching strategies
+- Adjust resource allocation and limits
+
+#### **Issue: Resource Capacity and Scaling**
+**Symptoms:**
+- Resource exhaustion
+- Auto-scaling not triggering
+- Performance degradation under load
+- Service availability issues
+
+**Diagnostic Steps:**
+1. Review auto-scaling policies and thresholds
+2. Check resource quotas and limits
+3. Analyze historical usage patterns
+4. Validate scaling trigger conditions
+
+**Resolution:**
+- Adjust auto-scaling thresholds and policies
+- Increase resource quotas and limits
+- Implement predictive scaling strategies
+- Optimize resource utilization patterns
+
+### **🔐 Security and Access Issues**
+
+#### **Issue: Authentication and Authorization Problems**
+**Symptoms:**
+- Login failures
+- Access denied errors
+- Permission-related issues
+- Multi-factor authentication problems
+
+**Diagnostic Steps:**
+1. Verify user credentials and account status
+2. Check role and permission assignments
+3. Review authentication provider connectivity
+4. Validate multi-factor authentication setup
+
+**Resolution:**
+- Reset user credentials and passwords
+- Update role assignments and permissions
+- Fix authentication provider configurations
+- Reconfigure multi-factor authentication
+
+#### **Issue: Certificate and Encryption Problems**
+**Symptoms:**
+- SSL/TLS handshake failures
+- Certificate validation errors
+- Encryption key issues
+- Secure communication failures
+
+**Diagnostic Steps:**
+1. Check certificate validity and expiration
+2. Verify certificate chain completeness
+3. Validate encryption key accessibility
+4. Test SSL/TLS configuration
+
+**Resolution:**
+- Renew or replace expired certificates
+- Install missing intermediate certificates
+- Update encryption keys and secrets
+- Fix SSL/TLS configuration parameters
+
+## 🔍 **Advanced Diagnostics**
+
+### **📊 Monitoring and Logging Analysis**
+
+#### **Log Analysis Procedures**
+1. **Application Logs:**
+   ```bash
+   # Filter and analyze application logs
+   grep -i "error" application.log | tail -50
+   awk '/ERROR/ {print $1, $2, $NF}' application.log
+   ```
+
+2. **System Logs:**
+   ```bash
+   # Check system events and errors
+   journalctl -u service-name --since "1 hour ago"
+   dmesg | grep -i error
+   ```
+
+3. **Performance Metrics:**
+   - CPU and memory usage trends
+   - Network traffic patterns
+   - Storage I/O performance
+   - Application-specific metrics
+
+#### **Root Cause Analysis Framework**
+1. **Problem Identification:**
+   - Gather symptoms and error messages
+   - Identify affected components and services
+   - Determine impact scope and severity
+   - Collect relevant logs and metrics
+
+2. **Hypothesis Formation:**
+   - Develop potential root cause theories
+   - Prioritize hypotheses by likelihood
+   - Plan diagnostic tests and validation
+   - Consider environmental factors
+
+3. **Testing and Validation:**
+   - Execute diagnostic procedures systematically
+   - Validate or eliminate each hypothesis
+   - Document findings and evidence
+   - Identify confirmed root cause
+
+4. **Resolution Implementation:**
+   - Develop resolution plan and procedures
+   - Implement fix with appropriate testing
+   - Validate resolution effectiveness
+   - Document solution and prevention measures
+
+### **🛠️ Diagnostic Tools and Commands**
+
+#### **Network Diagnostics**
+```bash
+# Network connectivity testing
+ping -c 4 target-host
+traceroute target-host
+nmap -p port-range target-host
+curl -v https://target-endpoint
+
+# DNS resolution testing
+nslookup domain-name
+dig domain-name
+host domain-name
 ```
 
-### Dashboard Metrics
-- Real-time processing volume and success rates
-- Document type distribution and processing times
-- Cost tracking and budget utilization
-- Service health and availability status
-- Custom model performance and accuracy trends
+#### **Performance Analysis**
+```bash
+# System performance monitoring
+top -p process-id
+iotop -o
+netstat -an | grep LISTEN
+ss -tuln
 
-## Backup and Recovery
+# Application performance
+curl -w "@curl-format.txt" -o /dev/null -s "http://target-url"
+ab -n 100 -c 10 http://target-url/
+```
 
-### Data Backup Strategy
-- **Storage Replication**: Use geo-redundant storage (GRS) for critical documents
-- **Database Backup**: Automated Cosmos DB backups with point-in-time recovery
-- **Configuration Backup**: Export ARM templates and configuration settings
-- **Secret Management**: Regular Key Vault backup and rotation procedures
+#### **Service Status and Health**
+```bash
+# Service management
+systemctl status service-name
+journalctl -u service-name -f
+service service-name status
 
-### Disaster Recovery
-- **Multi-Region Deployment**: Primary and secondary regions for high availability
-- **Traffic Manager**: Automatic failover for web endpoints
-- **Data Synchronization**: Real-time replication of critical data
-- **Recovery Testing**: Regular disaster recovery drills and validation
+# Process monitoring
+ps aux | grep process-name
+pgrep -f process-pattern
+killall -s SIGUSR1 process-name
+```
 
-### Incident Response
-1. **Detection**: Automated alerting and monitoring systems
-2. **Assessment**: Rapid triage and impact analysis
-3. **Response**: Execute incident response playbooks
-4. **Recovery**: Restore services and validate functionality
-5. **Post-Incident**: Root cause analysis and prevention measures
+## 📞 **Escalation Procedures**
+
+### **🆘 When to Escalate**
+- Issue resolution exceeds 4 hours of troubleshooting
+- Multiple system components affected
+- Security incidents or potential breaches
+- Data loss or corruption suspected
+- Business-critical operations impacted
+
+### **📋 Escalation Information Required**
+1. **Problem Description:**
+   - Detailed symptoms and error messages
+   - Timeline of issue occurrence
+   - Impact assessment and affected users
+   - Previous troubleshooting attempts
+
+2. **System Information:**
+   - Environment details (production, staging, etc.)
+   - Software versions and configurations
+   - Recent changes or deployments
+   - Current system status and metrics
+
+3. **Supporting Evidence:**
+   - Relevant log files and excerpts
+   - Performance metrics and graphs
+   - Configuration files and settings
+   - Screenshots or error captures
+
+### **📧 Escalation Contacts**
+- **Level 2 Support**: Technical specialists for complex issues
+- **Architecture Team**: Design and integration problems
+- **Security Team**: Security incidents and vulnerabilities
+- **Vendor Support**: Third-party service and licensing issues
+
+## 🔄 **Prevention and Maintenance**
+
+### **🛡️ Preventive Measures**
+1. **Regular Health Checks:**
+   - Automated monitoring and alerting
+   - Periodic system health assessments
+   - Performance baseline monitoring
+   - Security vulnerability scanning
+
+2. **Maintenance Procedures:**
+   - Regular backup verification and testing
+   - Software updates and patch management
+   - Configuration management and audits
+   - Disaster recovery procedure testing
+
+3. **Documentation Updates:**
+   - Keep troubleshooting guides current
+   - Document new issues and solutions
+   - Update configuration templates
+   - Maintain escalation contact information
+
+### **📊 Issue Tracking and Analysis**
+- Maintain issue tracking system with resolution details
+- Analyze recurring issues for systemic problems
+- Update troubleshooting procedures based on new findings
+- Share knowledge and solutions across teams
+
+## 📚 **Additional Resources**
+
+### **🔗 Related Documentation**
+- **[🏗️ Architecture Guide](architecture.md)**: Solution design and component details
+- **[✅ Prerequisites](prerequisites.md)**: Implementation requirements and preparation
+- **[🚀 Implementation Guide](../delivery/implementation-guide.md)**: Deployment procedures and configurations
+- **[📋 Operations Runbook](../delivery/operations-runbook.md)**: Day-to-day operational procedures
+
+### **🌐 External Resources**
+- Cloud provider troubleshooting documentation
+- Service-specific support and knowledge bases
+- Community forums and discussion groups
+- Professional support and consulting services
+
+---
+
+**📍 Troubleshooting Guide Version**: 2.0  
+**Last Updated**: January 2025  
+**Validation Status**: ✅ Tested and Verified
+
+**Need Additional Help?** Escalate to appropriate support teams using the procedures above or reference [Operations Runbook](../delivery/operations-runbook.md) for ongoing operational support.

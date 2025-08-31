@@ -37,9 +37,9 @@ jobs:
       - name: Generate catalog
         if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         run: |
-          python3 support/catalog/tools/generator.py
-          python3 support/catalog/tools/aggregator.py
-          python3 support/catalog/tools/validator.py
+          python3 support/tools/generate-catalogs.py
+          python3 support/tools/process-catalogs.py
+          python3 support/tools/validate-catalogs.py
       
       - name: Commit updated catalog
         if: github.event_name == 'push' && github.ref == 'refs/heads/main'

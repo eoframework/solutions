@@ -1,44 +1,71 @@
 version: '2.0'
 provider: google
-generated_at: '2025-08-24T19:23:46.664713'
+generated_at: '2025-08-31T09:02:28.447476'
 catalog_type: provider
 metadata:
   provider_name: Google Cloud
   total_solutions: 2
-  last_updated: '2025-08-24T19:23:46.664735'
+  last_updated: '2025-08-31T09:02:28.447537'
+  auto_generated: true
 categories:
   cloud:
     solutions:
       landing-zone:
-        title: Google Cloud Enterprise Landing Zone
-        description: Comprehensive enterprise cloud foundation with security, governance,
-          and operational excellence
-        version: '1.0'
+        provider: GOOGLE
+        category: cloud
+        solution_name: Landing Zone
+        description: Landing Zone solution for GOOGLE
+        version: 1.0.0
+        status: Active
+        maintainers:
+        - name: "EO Framework\u2122 Google Solutions Team"
+          email: google-solutions@eoframework.com
+          role: Cloud Solutions Architect
         tags:
-        - landing-zone
-        - gcp
-        - enterprise-architecture
-        - vpc
-        - iam
-        - security
-        - compliance
-        complexity: enterprise
-        deployment_time: 4-8 weeks
-        repository: https://github.com/eoframework/templates/tree/main/solutions/google/cloud/landing-zone
+        - cloud
+        - landing
+        - zone
+        - google
+        requirements:
+          prerequisites:
+          - GOOGLE Account
+          - Administrative Access
+          tools:
+          - Python 3.8+
+          - gcloud CLI
+          - Terraform
+          skills:
+          - GOOGLE Platform
+          - Solution Architecture
+          - GCP Services
         solution_path: ../../solutions/google/cloud/landing-zone/
   modern-workspace:
     solutions:
       workspace:
-        title: Google Workspace Enterprise Platform
-        description: Comprehensive cloud-based productivity and collaboration platform
-        version: '1.0'
+        provider: GOOGLE
+        category: modern-workspace
+        solution_name: Workspace
+        description: Workspace solution for GOOGLE
+        version: 1.0.0
+        status: Active
+        maintainers:
+        - name: "EO Framework\u2122 Google Solutions Team"
+          email: google-solutions@eoframework.com
+          role: Cloud Solutions Architect
         tags:
         - workspace
-        - gmail
-        - collaboration
-        - productivity
-        - cloud-native
-        complexity: intermediate
-        deployment_time: 2-6 weeks
-        repository: https://github.com/eoframework/templates/tree/main/solutions/google/modern-workspace/workspace
+        - modern-workspace
+        - google
+        requirements:
+          prerequisites:
+          - GOOGLE Account
+          - Administrative Access
+          tools:
+          - Python 3.8+
+          - gcloud CLI
+          - Terraform
+          skills:
+          - GOOGLE Platform
+          - Solution Architecture
+          - GCP Services
         solution_path: ../../solutions/google/modern-workspace/workspace/

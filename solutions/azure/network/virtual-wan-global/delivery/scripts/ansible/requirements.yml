@@ -1,0 +1,12 @@
+---
+# Ansible requirements for Azure Virtual WAN deployment
+
+collections:
+  - name: azure.azcollection
+    version: ">=1.15.0"
+  - name: community.general
+    version: ">=5.0.0"
+  - name: ansible.posix
+    version: ">=1.4.0"
+
+roles: []

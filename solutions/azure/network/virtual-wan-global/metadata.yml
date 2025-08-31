@@ -1,43 +1,27 @@
-name: "Azure Virtual WAN Global Connectivity Solution"
-description: "Global branch connectivity through Azure with integrated security and routing"
-provider: "azure"
-category: "network"
-solution_type: "virtual-wan-global"
-version: "1.0"
-license: "BSL-1.1"
-
-metadata:
-  industry_focus:
-    - "Enterprise"
-    - "Retail"
-    - "Manufacturing"
-    - "Government"
-  
-  use_cases:
-    - "Global branch connectivity"
-    - "SD-WAN cloud integration"
-    - "Multi-cloud networking"
-    - "Secure internet breakout"
-  
-  technologies:
-    - "Azure Virtual WAN"
-    - "Virtual Hubs"
-    - "VPN Gateway"
-    - "Azure Firewall"
-  
-  business_benefits:
-    - "40% reduction in WAN costs"
-    - "3x improvement in performance"
-    - "80% simplified management"
-    - "Thousands of branch scale"
-
-technical_specs:
-  deployment_model: "Azure Cloud"
-  scalability: "Thousands of branches"
-  availability: "99.95%"
-  connectivity: "Global backbone network"
-
-cost_model:
-  implementation: "$200,000 - $2,000,000"
-  monthly_operational: "$20,000 - $200,000"
-  roi_timeframe: "10-18 months"
+provider: AZURE
+category: network
+solution_name: Virtual Wan Global
+description: Virtual Wan Global solution for AZURE
+version: 1.0.0
+status: Active
+maintainers:
+- name: "EO Framework\u2122 Azure Solutions Team"
+  email: azure-solutions@eoframework.com
+  role: Cloud Solutions Architect
+tags:
+- azure
+- global
+- virtual
+- network
+requirements:
+  prerequisites:
+  - AZURE Account
+  - Administrative Access
+  tools:
+  - Python 3.8+
+  - Azure CLI
+  - PowerShell
+  skills:
+  - AZURE Platform
+  - Solution Architecture
+  - Azure Services

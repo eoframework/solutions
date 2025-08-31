@@ -1,51 +1,103 @@
 version: '2.0'
 provider: aws
-generated_at: '2025-08-24T19:23:46.612953'
+generated_at: '2025-08-31T09:02:28.354150'
 catalog_type: provider
 metadata:
   provider_name: Amazon Web Services
   total_solutions: 3
-  last_updated: '2025-08-24T19:23:46.612981'
+  last_updated: '2025-08-31T09:02:28.354194'
+  auto_generated: true
 categories:
   ai:
     solutions:
       intelligent-document-processing:
-        title: AWS Intelligent Document Processing
-        description: AI-powered document analysis and processing solution
-        version: '1.0'
+        provider: AWS
+        category: ai
+        solution_name: Intelligent Document Processing
+        description: Intelligent Document Processing solution for AWS
+        version: 1.0.0
+        status: Active
+        maintainers:
+        - name: "EO Framework\u2122 AWS Solutions Team"
+          email: aws-solutions@eoframework.com
+          role: Cloud Solutions Architect
         tags:
+        - document
         - ai
-        - document-processing
-        - textract
-        - comprehend
-        complexity: enterprise
-        deployment_time: 4-6 weeks
-        repository: https://github.com/eoframework/templates/tree/main/solutions/aws/ai/intelligent-document-processing
+        - intelligent
+        - processing
+        - aws
+        requirements:
+          prerequisites:
+          - AWS Account
+          - Administrative Access
+          tools:
+          - Python 3.8+
+          - AWS CLI
+          - Terraform
+          skills:
+          - AWS Platform
+          - Solution Architecture
+          - AWS Services
         solution_path: ../../solutions/aws/ai/intelligent-document-processing/
   cloud:
     solutions:
       disaster-recovery-web-application:
-        title: AWS Disaster Recovery Web Application
-        description: Multi-region disaster recovery for web applications
-        version: '1.0'
+        provider: AWS
+        category: cloud
+        solution_name: Disaster Recovery Web Application
+        description: Disaster Recovery Web Application solution for AWS
+        version: 1.0.0
+        status: Active
+        maintainers:
+        - name: "EO Framework\u2122 AWS Solutions Team"
+          email: aws-solutions@eoframework.com
+          role: Cloud Solutions Architect
         tags:
-        - disaster-recovery
-        - multi-region
-        - web-app
-        complexity: advanced
-        deployment_time: 3-5 weeks
-        repository: https://github.com/eoframework/templates/tree/main/solutions/aws/cloud/disaster-recovery-web-application
+        - cloud
+        - application
+        - recovery
+        - disaster
+        - aws
+        requirements:
+          prerequisites:
+          - AWS Account
+          - Administrative Access
+          tools:
+          - Python 3.8+
+          - AWS CLI
+          - Terraform
+          skills:
+          - AWS Platform
+          - Solution Architecture
+          - AWS Services
         solution_path: ../../solutions/aws/cloud/disaster-recovery-web-application/
       onpremise-to-cloud-migration:
-        title: AWS On-Premise to Cloud Migration
-        description: Enterprise migration from on-premise to AWS cloud
-        version: '1.0'
+        provider: AWS
+        category: cloud
+        solution_name: Onpremise To Cloud Migration
+        description: Onpremise To Cloud Migration solution for AWS
+        version: 1.0.0
+        status: Active
+        maintainers:
+        - name: "EO Framework\u2122 AWS Solutions Team"
+          email: aws-solutions@eoframework.com
+          role: Cloud Solutions Architect
         tags:
-        - migration
         - cloud
-        - enterprise
-        - assessment
-        complexity: enterprise
-        deployment_time: 8-12 weeks
-        repository: https://github.com/eoframework/templates/tree/main/solutions/aws/cloud/onpremise-to-cloud-migration
+        - onpremise
+        - aws
+        - migration
+        requirements:
+          prerequisites:
+          - AWS Account
+          - Administrative Access
+          tools:
+          - Python 3.8+
+          - AWS CLI
+          - Terraform
+          skills:
+          - AWS Platform
+          - Solution Architecture
+          - AWS Services
         solution_path: ../../solutions/aws/cloud/onpremise-to-cloud-migration/

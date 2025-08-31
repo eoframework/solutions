@@ -1,83 +1,73 @@
 version: '2.0'
 provider: github
-generated_at: '2025-08-24T19:23:46.656739'
+generated_at: '2025-08-31T09:02:28.431551'
 catalog_type: provider
 metadata:
   provider_name: GitHub
   total_solutions: 2
-  last_updated: '2025-08-24T19:23:46.656766'
+  last_updated: '2025-08-31T09:02:28.431608'
+  auto_generated: true
 categories:
   cyber-security:
     solutions:
       advanced-security:
-        title: GitHub Advanced Security Platform
-        description: Security scanning, monitoring, and compliance solution
-        version: '1.0'
+        provider: GITHUB
+        category: cyber-security
+        solution_name: Advanced Security
+        description: Advanced Security solution for GITHUB
+        version: 1.0.0
+        status: Active
+        maintainers:
+        - name: "EO Framework\u2122 GitHub Solutions Team"
+          email: github-solutions@eoframework.com
+          role: DevOps Solutions Architect
         tags:
+        - advanced
+        - cyber-security
+        - github
         - security
-        - compliance
-        - codeql
-        - secret-scanning
-        - siem
-        complexity: enterprise
-        deployment_time: 4-6 weeks
-        repository: https://github.com/eoframework/templates/tree/main/solutions/github/cyber-security/advanced-security
-        features:
-        - CodeQL semantic code analysis
-        - Advanced secret scanning with push protection
-        - Dependency vulnerability management
-        - SIEM integration (Splunk, Azure Sentinel, Datadog)
-        - Multi-framework compliance monitoring (SOC2, PCI-DSS, GDPR, HIPAA)
-        - Automated incident response and alerting
-        - Executive reporting and analytics dashboards
-        - Custom security policies and governance
-        supported_languages:
-        - JavaScript
-        - TypeScript
-        - Python
-        - Java
-        - C#
-        - C++
-        - Go
-        integrations:
-        - Splunk
-        - Azure Sentinel
-        - Datadog
-        - GitHub Actions
-        - AWS
-        - Azure
+        requirements:
+          prerequisites:
+          - GITHUB Account
+          - Administrative Access
+          tools:
+          - Python 3.8+
+          - GitHub CLI
+          - Git
+          skills:
+          - GITHUB Platform
+          - Solution Architecture
+          - DevOps Practices
         solution_path: ../../solutions/github/cyber-security/advanced-security/
   devops:
     solutions:
       actions-enterprise-cicd:
-        title: GitHub Actions Enterprise CI/CD Platform
-        description: Enterprise CI/CD platform with self-hosted runners
-        version: '1.0'
+        provider: GITHUB
+        category: devops
+        solution_name: Actions Enterprise Cicd
+        description: Actions Enterprise Cicd solution for GITHUB
+        version: 1.0.0
+        status: Active
+        maintainers:
+        - name: "EO Framework\u2122 GitHub Solutions Team"
+          email: github-solutions@eoframework.com
+          role: DevOps Solutions Architect
         tags:
         - cicd
-        - github-actions
-        - aws
-        - automation
+        - github
+        - enterprise
         - devops
-        complexity: enterprise
-        deployment_time: 2-4 weeks
-        repository: https://github.com/eoframework/templates/tree/main/solutions/github/devops/actions-enterprise-cicd
-        features:
-        - Self-hosted GitHub Actions runners on AWS
-        - Auto-scaling runner infrastructure
-        - Enterprise security and compliance
-        - Comprehensive monitoring and logging
-        - Multi-environment support (dev/staging/prod)
-        - Cost optimization with spot instances
-        - Advanced caching and artifact management
-        - Workflow automation and orchestration
-        supported_platforms:
-        - AWS
-        - GitHub Enterprise
-        integrations:
-        - GitHub Actions
-        - AWS EC2
-        - AWS S3
-        - CloudWatch
-        - Terraform
+        - actions
+        requirements:
+          prerequisites:
+          - GITHUB Account
+          - Administrative Access
+          tools:
+          - Python 3.8+
+          - GitHub CLI
+          - Git
+          skills:
+          - GITHUB Platform
+          - Solution Architecture
+          - DevOps Practices
         solution_path: ../../solutions/github/devops/actions-enterprise-cicd/
