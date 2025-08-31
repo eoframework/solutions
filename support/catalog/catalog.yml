@@ -1,11 +1,11 @@
 version: '2.0'
-generated_at: '2025-08-31T09:02:28.614169'
+generated_at: '2025-08-31T09:19:40.297660'
 catalog_type: master
 metadata:
   total_providers: 11
   total_categories: 6
   total_solutions: 35
-  last_updated: '2025-08-31T09:02:28.614189'
+  last_updated: '2025-08-31T09:19:40.297691'
   auto_generated: true
 provider_catalogs:
   aws: ./providers/aws.yml

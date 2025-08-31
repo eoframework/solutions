@@ -1,11 +1,11 @@
 version: '2.0'
 provider: google
-generated_at: '2025-08-31T09:02:28.447476'
+generated_at: '2025-08-31T09:19:40.075587'
 catalog_type: provider
 metadata:
   provider_name: Google Cloud
   total_solutions: 2
-  last_updated: '2025-08-31T09:02:28.447537'
+  last_updated: '2025-08-31T09:19:40.075645'
   auto_generated: true
 categories:
   cloud:
@@ -39,6 +39,7 @@ categories:
           - Solution Architecture
           - GCP Services
         solution_path: ../../solutions/google/cloud/landing-zone/
+        title: Landing Zone
   modern-workspace:
     solutions:
       workspace:
@@ -69,3 +70,4 @@ categories:
           - Solution Architecture
           - GCP Services
         solution_path: ../../solutions/google/modern-workspace/workspace/
+        title: Workspace

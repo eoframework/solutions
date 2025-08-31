@@ -12,7 +12,7 @@ import argparse
 
 class TemplateValidator:
     def __init__(self):
-        self.repo_root = Path(__file__).parent.parent
+        self.repo_root = Path(__file__).parent.parent.parent
         self.errors = []
         self.warnings = []
         

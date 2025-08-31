@@ -1,5 +1,5 @@
 {
-  "generated_at": "2025-08-31T09:02:29.317932",
+  "generated_at": "2025-08-31T09:19:40.934549",
   "total_solutions": 35,
   "statistics": {
     "total_solutions": 35,
@@ -92,7 +92,8 @@
           "AWS Services"
         ]
       },
-      "solution_path": "../../solutions/aws/ai/intelligent-document-processing/"
+      "solution_path": "../../solutions/aws/ai/intelligent-document-processing/",
+      "title": "Intelligent Document Processing"
     },
     {
       "id": "aws-cloud-disaster-recovery-web-application",
@@ -132,7 +133,8 @@
           "AWS Services"
         ]
       },
-      "solution_path": "../../solutions/aws/cloud/disaster-recovery-web-application/"
+      "solution_path": "../../solutions/aws/cloud/disaster-recovery-web-application/",
+      "title": "Disaster Recovery Web Application"
     },
     {
       "id": "aws-cloud-onpremise-to-cloud-migration",
@@ -171,7 +173,8 @@
           "AWS Services"
         ]
       },
-      "solution_path": "../../solutions/aws/cloud/onpremise-to-cloud-migration/"
+      "solution_path": "../../solutions/aws/cloud/onpremise-to-cloud-migration/",
+      "title": "Onpremise To Cloud Migration"
     },
     {
       "id": "azure-ai-document-intelligence",
@@ -210,7 +213,8 @@
           "Azure Services"
         ]
       },
-      "solution_path": "../../solutions/azure/ai/document-intelligence/"
+      "solution_path": "../../solutions/azure/ai/document-intelligence/",
+      "title": "Document Intelligence"
     },
     {
       "id": "azure-cloud-enterprise-landing-zone",
@@ -250,7 +254,8 @@
           "Azure Services"
         ]
       },
-      "solution_path": "../../solutions/azure/cloud/enterprise-landing-zone/"
+      "solution_path": "../../solutions/azure/cloud/enterprise-landing-zone/",
+      "title": "Enterprise Landing Zone"
     },
     {
       "id": "azure-cyber-security-sentinel-siem",
@@ -289,7 +294,8 @@
           "Azure Services"
         ]
       },
-      "solution_path": "../../solutions/azure/cyber-security/sentinel-siem/"
+      "solution_path": "../../solutions/azure/cyber-security/sentinel-siem/",
+      "title": "Sentinel Siem"
     },
     {
       "id": "azure-devops-enterprise-platform",
@@ -328,7 +334,8 @@
           "Azure Services"
         ]
       },
-      "solution_path": "../../solutions/azure/devops/enterprise-platform/"
+      "solution_path": "../../solutions/azure/devops/enterprise-platform/",
+      "title": "Enterprise Platform"
     },
     {
       "id": "azure-modern-workspace-virtual-desktop",
@@ -367,7 +374,8 @@
           "Azure Services"
         ]
       },
-      "solution_path": "../../solutions/azure/modern-workspace/virtual-desktop/"
+      "solution_path": "../../solutions/azure/modern-workspace/virtual-desktop/",
+      "title": "Virtual Desktop"
     },
     {
       "id": "azure-network-virtual-wan-global",
@@ -406,7 +414,8 @@
           "Azure Services"
         ]
       },
-      "solution_path": "../../solutions/azure/network/virtual-wan-global/"
+      "solution_path": "../../solutions/azure/network/virtual-wan-global/",
+      "title": "Virtual Wan Global"
     },
     {
       "id": "cisco-ai-network-analytics",
@@ -444,7 +453,8 @@
           "Network Infrastructure"
         ]
       },
-      "solution_path": "../../solutions/cisco/ai/network-analytics/"
+      "solution_path": "../../solutions/cisco/ai/network-analytics/",
+      "title": "Network Analytics"
     },
     {
       "id": "cisco-cloud-hybrid-infrastructure",
@@ -482,7 +492,8 @@
           "Network Infrastructure"
         ]
       },
-      "solution_path": "../../solutions/cisco/cloud/hybrid-infrastructure/"
+      "solution_path": "../../solutions/cisco/cloud/hybrid-infrastructure/",
+      "title": "Hybrid Infrastructure"
     },
     {
       "id": "cisco-cyber-security-secure-access",
@@ -520,7 +531,8 @@
           "Network Infrastructure"
         ]
       },
-      "solution_path": "../../solutions/cisco/cyber-security/secure-access/"
+      "solution_path": "../../solutions/cisco/cyber-security/secure-access/",
+      "title": "Secure Access"
     },
     {
       "id": "cisco-devops-ci-cd-automation",
@@ -557,7 +569,8 @@
           "Network Infrastructure"
         ]
       },
-      "solution_path": "../../solutions/cisco/devops/ci-cd-automation/"
+      "solution_path": "../../solutions/cisco/devops/ci-cd-automation/",
+      "title": "Ci Cd Automation"
     },
     {
       "id": "cisco-network-sd-wan-enterprise",
@@ -594,7 +607,8 @@
           "Network Infrastructure"
         ]
       },
-      "solution_path": "../../solutions/cisco/network/sd-wan-enterprise/"
+      "solution_path": "../../solutions/cisco/network/sd-wan-enterprise/",
+      "title": "Sd Wan Enterprise"
     },
     {
       "id": "dell-ai-precision-ai-workstation",
@@ -632,7 +646,8 @@
           "Network Infrastructure"
         ]
       },
-      "solution_path": "../../solutions/dell/ai/precision-ai-workstation/"
+      "solution_path": "../../solutions/dell/ai/precision-ai-workstation/",
+      "title": "Precision Ai Workstation"
     },
     {
       "id": "dell-cloud-vxrail-hci",
@@ -669,7 +684,8 @@
           "Network Infrastructure"
         ]
       },
-      "solution_path": "../../solutions/dell/cloud/vxrail-hci/"
+      "solution_path": "../../solutions/dell/cloud/vxrail-hci/",
+      "title": "Vxrail Hci"
     },
     {
       "id": "dell-cloud-vxrail-hyperconverged",
@@ -707,7 +723,8 @@
           "Network Infrastructure"
         ]
       },
-      "solution_path": "../../solutions/dell/cloud/vxrail-hyperconverged/"
+      "solution_path": "../../solutions/dell/cloud/vxrail-hyperconverged/",
+      "title": "Vxrail Hyperconverged"
     },
     {
       "id": "dell-cyber-security-safeid-authentication",
@@ -745,7 +762,8 @@
           "Network Infrastructure"
         ]
       },
-      "solution_path": "../../solutions/dell/cyber-security/safeid-authentication/"
+      "solution_path": "../../solutions/dell/cyber-security/safeid-authentication/",
+      "title": "Safeid Authentication"
     },
     {
       "id": "dell-devops-poweredge-ci-infrastructure",
@@ -783,7 +801,8 @@
           "Network Infrastructure"
         ]
       },
-      "solution_path": "../../solutions/dell/devops/poweredge-ci-infrastructure/"
+      "solution_path": "../../solutions/dell/devops/poweredge-ci-infrastructure/",
+      "title": "Poweredge Ci Infrastructure"
     },
     {
       "id": "dell-network-powerswitch-datacenter",
@@ -821,7 +840,8 @@
           "Network Infrastructure"
         ]
       },
-      "solution_path": "../../solutions/dell/network/powerswitch-datacenter/"
+      "solution_path": "../../solutions/dell/network/powerswitch-datacenter/",
+      "title": "Powerswitch Datacenter"
     },
     {
       "id": "github-cyber-security-advanced-security",
@@ -860,7 +880,8 @@
           "DevOps Practices"
         ]
       },
-      "solution_path": "../../solutions/github/cyber-security/advanced-security/"
+      "solution_path": "../../solutions/github/cyber-security/advanced-security/",
+      "title": "Advanced Security"
     },
     {
       "id": "github-devops-actions-enterprise-cicd",
@@ -900,7 +921,8 @@
           "DevOps Practices"
         ]
       },
-      "solution_path": "../../solutions/github/devops/actions-enterprise-cicd/"
+      "solution_path": "../../solutions/github/devops/actions-enterprise-cicd/",
+      "title": "Actions Enterprise Cicd"
     },
     {
       "id": "google-cloud-landing-zone",
@@ -939,7 +961,8 @@
           "GCP Services"
         ]
       },
-      "solution_path": "../../solutions/google/cloud/landing-zone/"
+      "solution_path": "../../solutions/google/cloud/landing-zone/",
+      "title": "Landing Zone"
     },
     {
       "id": "google-modern-workspace-workspace",
@@ -977,7 +1000,8 @@
           "GCP Services"
         ]
       },
-      "solution_path": "../../solutions/google/modern-workspace/workspace/"
+      "solution_path": "../../solutions/google/modern-workspace/workspace/",
+      "title": "Workspace"
     },
     {
       "id": "hashicorp-cloud-multi-cloud-platform",
@@ -1016,7 +1040,8 @@
           "Infrastructure as Code"
         ]
       },
-      "solution_path": "../../solutions/hashicorp/cloud/multi-cloud-platform/"
+      "solution_path": "../../solutions/hashicorp/cloud/multi-cloud-platform/",
+      "title": "Multi Cloud Platform"
     },
     {
       "id": "hashicorp-devops-terraform-enterprise",
@@ -1055,7 +1080,8 @@
           "Infrastructure as Code"
         ]
       },
-      "solution_path": "../../solutions/hashicorp/devops/terraform-enterprise/"
+      "solution_path": "../../solutions/hashicorp/devops/terraform-enterprise/",
+      "title": "Terraform Enterprise"
     },
     {
       "id": "ibm-cloud-openshift-container-platform",
@@ -1095,7 +1121,8 @@
           "Container Platforms"
         ]
       },
-      "solution_path": "../../solutions/ibm/cloud/openshift-container-platform/"
+      "solution_path": "../../solutions/ibm/cloud/openshift-container-platform/",
+      "title": "Openshift Container Platform"
     },
     {
       "id": "ibm-devops-ansible-automation-platform",
@@ -1135,7 +1162,8 @@
           "Container Platforms"
         ]
       },
-      "solution_path": "../../solutions/ibm/devops/ansible-automation-platform/"
+      "solution_path": "../../solutions/ibm/devops/ansible-automation-platform/",
+      "title": "Ansible Automation Platform"
     },
     {
       "id": "juniper-cyber-security-srx-firewall-platform",
@@ -1173,7 +1201,8 @@
           "Network Infrastructure"
         ]
       },
-      "solution_path": "../../solutions/juniper/cyber-security/srx-firewall-platform/"
+      "solution_path": "../../solutions/juniper/cyber-security/srx-firewall-platform/",
+      "title": "Srx Firewall Platform"
     },
     {
       "id": "juniper-network-mist-ai-network",
@@ -1210,7 +1239,8 @@
           "Network Infrastructure"
         ]
       },
-      "solution_path": "../../solutions/juniper/network/mist-ai-network/"
+      "solution_path": "../../solutions/juniper/network/mist-ai-network/",
+      "title": "Mist Ai Network"
     },
     {
       "id": "microsoft-cyber-security-cmmc-enclave",
@@ -1249,7 +1279,8 @@
           "Microsoft 365"
         ]
       },
-      "solution_path": "../../solutions/microsoft/cyber-security/cmmc-enclave/"
+      "solution_path": "../../solutions/microsoft/cyber-security/cmmc-enclave/",
+      "title": "Cmmc Enclave"
     },
     {
       "id": "microsoft-modern-workspace-m365-deployment",
@@ -1288,7 +1319,8 @@
           "Microsoft 365"
         ]
       },
-      "solution_path": "../../solutions/microsoft/modern-workspace/m365-deployment/"
+      "solution_path": "../../solutions/microsoft/modern-workspace/m365-deployment/",
+      "title": "M365 Deployment"
     },
     {
       "id": "nvidia-ai-dgx-superpod",
@@ -1326,7 +1358,8 @@
           "AI/ML Infrastructure"
         ]
       },
-      "solution_path": "../../solutions/nvidia/ai/dgx-superpod/"
+      "solution_path": "../../solutions/nvidia/ai/dgx-superpod/",
+      "title": "Dgx Superpod"
     },
     {
       "id": "nvidia-ai-gpu-compute-cluster",
@@ -1365,7 +1398,8 @@
           "AI/ML Infrastructure"
         ]
       },
-      "solution_path": "../../solutions/nvidia/ai/gpu-compute-cluster/"
+      "solution_path": "../../solutions/nvidia/ai/gpu-compute-cluster/",
+      "title": "Gpu Compute Cluster"
     },
     {
       "id": "nvidia-modern-workspace-omniverse-enterprise",
@@ -1404,7 +1438,8 @@
           "AI/ML Infrastructure"
         ]
       },
-      "solution_path": "../../solutions/nvidia/modern-workspace/omniverse-enterprise/"
+      "solution_path": "../../solutions/nvidia/modern-workspace/omniverse-enterprise/",
+      "title": "Omniverse Enterprise"
     }
   ]
 }

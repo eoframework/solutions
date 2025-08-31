@@ -1,11 +1,11 @@
 version: '2.0'
 provider: azure
-generated_at: '2025-08-31T09:02:28.366411'
+generated_at: '2025-08-31T09:19:39.935003'
 catalog_type: provider
 metadata:
   provider_name: Microsoft Azure
   total_solutions: 6
-  last_updated: '2025-08-31T09:02:28.366448'
+  last_updated: '2025-08-31T09:19:39.935073'
   auto_generated: true
 categories:
   ai:
@@ -39,6 +39,7 @@ categories:
           - Solution Architecture
           - Azure Services
         solution_path: ../../solutions/azure/ai/document-intelligence/
+        title: Document Intelligence
   cloud:
     solutions:
       enterprise-landing-zone:
@@ -71,6 +72,7 @@ categories:
           - Solution Architecture
           - Azure Services
         solution_path: ../../solutions/azure/cloud/enterprise-landing-zone/
+        title: Enterprise Landing Zone
   cyber-security:
     solutions:
       sentinel-siem:
@@ -102,6 +104,7 @@ categories:
           - Solution Architecture
           - Azure Services
         solution_path: ../../solutions/azure/cyber-security/sentinel-siem/
+        title: Sentinel Siem
   devops:
     solutions:
       enterprise-platform:
@@ -133,6 +136,7 @@ categories:
           - Solution Architecture
           - Azure Services
         solution_path: ../../solutions/azure/devops/enterprise-platform/
+        title: Enterprise Platform
   modern-workspace:
     solutions:
       virtual-desktop:
@@ -164,6 +168,7 @@ categories:
           - Solution Architecture
           - Azure Services
         solution_path: ../../solutions/azure/modern-workspace/virtual-desktop/
+        title: Virtual Desktop
   network:
     solutions:
       virtual-wan-global:
@@ -195,3 +200,4 @@ categories:
           - Solution Architecture
           - Azure Services
         solution_path: ../../solutions/azure/network/virtual-wan-global/
+        title: Virtual Wan Global

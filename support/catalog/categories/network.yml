@@ -1,35 +1,35 @@
 version: '2.0'
 category: network
-generated_at: '2025-08-31T09:02:28.603451'
+generated_at: '2025-08-31T09:19:40.276822'
 catalog_type: category
 metadata:
   category_name: Network Infrastructure
   description: Network infrastructure and connectivity solutions
   total_solutions: 4
-  last_updated: '2025-08-31T09:02:28.603482'
+  last_updated: '2025-08-31T09:19:40.276855'
   auto_generated: true
 providers:
   azure:
     solutions:
     - name: virtual-wan-global
-      title: virtual-wan-global
+      title: Virtual Wan Global
       provider_catalog: ../providers/azure.yml
       solution_path: ../../solutions/azure/network/virtual-wan-global/
   cisco:
     solutions:
     - name: sd-wan-enterprise
-      title: sd-wan-enterprise
+      title: Sd Wan Enterprise
       provider_catalog: ../providers/cisco.yml
       solution_path: ../../solutions/cisco/network/sd-wan-enterprise/
   dell:
     solutions:
     - name: powerswitch-datacenter
-      title: powerswitch-datacenter
+      title: Powerswitch Datacenter
       provider_catalog: ../providers/dell.yml
       solution_path: ../../solutions/dell/network/powerswitch-datacenter/
   juniper:
     solutions:
     - name: mist-ai-network
-      title: mist-ai-network
+      title: Mist Ai Network
       provider_catalog: ../providers/juniper.yml
       solution_path: ../../solutions/juniper/network/mist-ai-network/

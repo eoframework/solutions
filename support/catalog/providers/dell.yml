@@ -1,11 +1,11 @@
 version: '2.0'
 provider: dell
-generated_at: '2025-08-31T09:02:28.411316'
+generated_at: '2025-08-31T09:19:40.021802'
 catalog_type: provider
 metadata:
   provider_name: Dell Technologies
   total_solutions: 6
-  last_updated: '2025-08-31T09:02:28.411370'
+  last_updated: '2025-08-31T09:19:40.021866'
   auto_generated: true
 categories:
   ai:
@@ -38,6 +38,7 @@ categories:
           - Solution Architecture
           - Network Infrastructure
         solution_path: ../../solutions/dell/ai/precision-ai-workstation/
+        title: Precision Ai Workstation
   cloud:
     solutions:
       vxrail-hci:
@@ -67,6 +68,7 @@ categories:
           - Solution Architecture
           - Network Infrastructure
         solution_path: ../../solutions/dell/cloud/vxrail-hci/
+        title: Vxrail Hci
       vxrail-hyperconverged:
         provider: DELL
         category: cloud
@@ -95,6 +97,7 @@ categories:
           - Solution Architecture
           - Network Infrastructure
         solution_path: ../../solutions/dell/cloud/vxrail-hyperconverged/
+        title: Vxrail Hyperconverged
   cyber-security:
     solutions:
       safeid-authentication:
@@ -125,6 +128,7 @@ categories:
           - Solution Architecture
           - Network Infrastructure
         solution_path: ../../solutions/dell/cyber-security/safeid-authentication/
+        title: Safeid Authentication
   devops:
     solutions:
       poweredge-ci-infrastructure:
@@ -155,6 +159,7 @@ categories:
           - Solution Architecture
           - Network Infrastructure
         solution_path: ../../solutions/dell/devops/poweredge-ci-infrastructure/
+        title: Poweredge Ci Infrastructure
   network:
     solutions:
       powerswitch-datacenter:
@@ -185,3 +190,4 @@ categories:
           - Solution Architecture
           - Network Infrastructure
         solution_path: ../../solutions/dell/network/powerswitch-datacenter/
+        title: Powerswitch Datacenter

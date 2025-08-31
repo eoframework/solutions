@@ -195,7 +195,9 @@ class CatalogValidator:
         }
         
         # Write report to file
-        report_file = self.catalog_dir / 'validation-report.json'
+        reports_dir = self.catalog_dir.parent / 'reports'
+        reports_dir.mkdir(exist_ok=True)
+        report_file = reports_dir / 'validation-report.json'
         with open(report_file, 'w') as f:
             json.dump(report, f, indent=2)
         
@@ -232,5 +234,9 @@ class CatalogValidator:
         return report
 
 if __name__ == "__main__":
-    validator = CatalogValidator("/mnt/c/projects/wsl/templates/catalog")
+    # Auto-detect path relative to script location
+    script_dir = Path(__file__).parent
+    catalog_dir = script_dir.parent / "catalog"
+    
+    validator = CatalogValidator(catalog_dir)
     report = validator.run_full_validation()

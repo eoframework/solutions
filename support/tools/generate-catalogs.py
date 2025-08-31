@@ -45,8 +45,10 @@ class CatalogGenerator:
                             with open(metadata_file, 'r') as f:
                                 metadata = yaml.safe_load(f)
                             
-                            # Add solution path
+                            # Add solution path and title if missing
                             metadata['solution_path'] = f"../../solutions/{provider_name}/{category_name}/{solution_name}/"
+                            if 'title' not in metadata:
+                                metadata['title'] = metadata.get('solution_name', solution_name.replace('-', ' ').title())
                             
                             self.discovered_solutions[provider_name][category_name][solution_name] = metadata
                             print(f"✓ Found: {provider_name}/{category_name}/{solution_name}")

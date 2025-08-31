@@ -1,11 +1,11 @@
 version: '2.0'
 provider: hashicorp
-generated_at: '2025-08-31T09:02:28.460265'
+generated_at: '2025-08-31T09:19:40.110202'
 catalog_type: provider
 metadata:
   provider_name: HashiCorp
   total_solutions: 2
-  last_updated: '2025-08-31T09:02:28.460326'
+  last_updated: '2025-08-31T09:19:40.110270'
   auto_generated: true
 categories:
   cloud:
@@ -39,6 +39,7 @@ categories:
           - Solution Architecture
           - Infrastructure as Code
         solution_path: ../../solutions/hashicorp/cloud/multi-cloud-platform/
+        title: Multi Cloud Platform
   devops:
     solutions:
       terraform-enterprise:
@@ -70,3 +71,4 @@ categories:
           - Solution Architecture
           - Infrastructure as Code
         solution_path: ../../solutions/hashicorp/devops/terraform-enterprise/
+        title: Terraform Enterprise

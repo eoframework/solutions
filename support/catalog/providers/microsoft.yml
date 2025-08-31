@@ -1,11 +1,11 @@
 version: '2.0'
 provider: microsoft
-generated_at: '2025-08-31T09:02:28.511097'
+generated_at: '2025-08-31T09:19:40.163488'
 catalog_type: provider
 metadata:
   provider_name: Microsoft
   total_solutions: 2
-  last_updated: '2025-08-31T09:02:28.511151'
+  last_updated: '2025-08-31T09:19:40.163541'
   auto_generated: true
 categories:
   cyber-security:
@@ -39,6 +39,7 @@ categories:
           - Solution Architecture
           - Microsoft 365
         solution_path: ../../solutions/microsoft/cyber-security/cmmc-enclave/
+        title: Cmmc Enclave
   modern-workspace:
     solutions:
       m365-deployment:
@@ -70,3 +71,4 @@ categories:
           - Solution Architecture
           - Microsoft 365
         solution_path: ../../solutions/microsoft/modern-workspace/m365-deployment/
+        title: M365 Deployment

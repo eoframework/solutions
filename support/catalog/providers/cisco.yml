@@ -1,11 +1,11 @@
 version: '2.0'
 provider: cisco
-generated_at: '2025-08-31T09:02:28.390887'
+generated_at: '2025-08-31T09:19:39.990348'
 catalog_type: provider
 metadata:
   provider_name: Cisco Systems
   total_solutions: 5
-  last_updated: '2025-08-31T09:02:28.390928'
+  last_updated: '2025-08-31T09:19:39.990401'
   auto_generated: true
 categories:
   ai:
@@ -38,6 +38,7 @@ categories:
           - Solution Architecture
           - Network Infrastructure
         solution_path: ../../solutions/cisco/ai/network-analytics/
+        title: Network Analytics
   cloud:
     solutions:
       hybrid-infrastructure:
@@ -68,6 +69,7 @@ categories:
           - Solution Architecture
           - Network Infrastructure
         solution_path: ../../solutions/cisco/cloud/hybrid-infrastructure/
+        title: Hybrid Infrastructure
   cyber-security:
     solutions:
       secure-access:
@@ -98,6 +100,7 @@ categories:
           - Solution Architecture
           - Network Infrastructure
         solution_path: ../../solutions/cisco/cyber-security/secure-access/
+        title: Secure Access
   devops:
     solutions:
       ci-cd-automation:
@@ -127,6 +130,7 @@ categories:
           - Solution Architecture
           - Network Infrastructure
         solution_path: ../../solutions/cisco/devops/ci-cd-automation/
+        title: Ci Cd Automation
   network:
     solutions:
       sd-wan-enterprise:
@@ -156,3 +160,4 @@ categories:
           - Solution Architecture
           - Network Infrastructure
         solution_path: ../../solutions/cisco/network/sd-wan-enterprise/
+        title: Sd Wan Enterprise

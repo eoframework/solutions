@@ -8,79 +8,79 @@
   },
   "results": [
     {
-      "file": "/mnt/c/projects/wsl/templates/catalog/CATALOG.yml",
+      "file": "/mnt/c/projects/wsl/templates/support/catalog/catalog.yml",
       "schema": "master",
       "status": "PASS",
       "errors": []
     },
     {
-      "file": "/mnt/c/projects/wsl/templates/catalog/providers/aws.yml",
+      "file": "/mnt/c/projects/wsl/templates/support/catalog/providers/aws.yml",
       "schema": "provider",
       "status": "PASS",
       "errors": []
     },
     {
-      "file": "/mnt/c/projects/wsl/templates/catalog/providers/azure.yml",
+      "file": "/mnt/c/projects/wsl/templates/support/catalog/providers/azure.yml",
       "schema": "provider",
       "status": "PASS",
       "errors": []
     },
     {
-      "file": "/mnt/c/projects/wsl/templates/catalog/providers/cisco.yml",
+      "file": "/mnt/c/projects/wsl/templates/support/catalog/providers/cisco.yml",
       "schema": "provider",
       "status": "PASS",
       "errors": []
     },
     {
-      "file": "/mnt/c/projects/wsl/templates/catalog/providers/dell.yml",
+      "file": "/mnt/c/projects/wsl/templates/support/catalog/providers/dell.yml",
       "schema": "provider",
       "status": "PASS",
       "errors": []
     },
     {
-      "file": "/mnt/c/projects/wsl/templates/catalog/providers/github.yml",
+      "file": "/mnt/c/projects/wsl/templates/support/catalog/providers/github.yml",
       "schema": "provider",
       "status": "PASS",
       "errors": []
     },
     {
-      "file": "/mnt/c/projects/wsl/templates/catalog/providers/google.yml",
+      "file": "/mnt/c/projects/wsl/templates/support/catalog/providers/google.yml",
       "schema": "provider",
       "status": "PASS",
       "errors": []
     },
     {
-      "file": "/mnt/c/projects/wsl/templates/catalog/providers/hashicorp.yml",
+      "file": "/mnt/c/projects/wsl/templates/support/catalog/providers/hashicorp.yml",
       "schema": "provider",
       "status": "PASS",
       "errors": []
     },
     {
-      "file": "/mnt/c/projects/wsl/templates/catalog/providers/ibm.yml",
+      "file": "/mnt/c/projects/wsl/templates/support/catalog/providers/ibm.yml",
       "schema": "provider",
       "status": "PASS",
       "errors": []
     },
     {
-      "file": "/mnt/c/projects/wsl/templates/catalog/providers/juniper.yml",
+      "file": "/mnt/c/projects/wsl/templates/support/catalog/providers/juniper.yml",
       "schema": "provider",
       "status": "PASS",
       "errors": []
     },
     {
-      "file": "/mnt/c/projects/wsl/templates/catalog/providers/microsoft.yml",
+      "file": "/mnt/c/projects/wsl/templates/support/catalog/providers/microsoft.yml",
       "schema": "provider",
       "status": "PASS",
       "errors": []
     },
     {
-      "file": "/mnt/c/projects/wsl/templates/catalog/providers/nvidia.yml",
+      "file": "/mnt/c/projects/wsl/templates/support/catalog/providers/nvidia.yml",
       "schema": "provider",
       "status": "PASS",
       "errors": []
     },
     {
-      "file": "/mnt/c/projects/wsl/templates/catalog/categories/ai.yml",
+      "file": "/mnt/c/projects/wsl/templates/support/catalog/categories/ai.yml",
       "schema": "category",
       "status": "SKIP",
       "errors": [
@@ -88,7 +88,7 @@
       ]
     },
     {
-      "file": "/mnt/c/projects/wsl/templates/catalog/categories/cloud.yml",
+      "file": "/mnt/c/projects/wsl/templates/support/catalog/categories/cloud.yml",
       "schema": "category",
       "status": "SKIP",
       "errors": [
@@ -96,7 +96,7 @@
       ]
     },
     {
-      "file": "/mnt/c/projects/wsl/templates/catalog/categories/cyber-security.yml",
+      "file": "/mnt/c/projects/wsl/templates/support/catalog/categories/cyber-security.yml",
       "schema": "category",
       "status": "SKIP",
       "errors": [
@@ -104,7 +104,7 @@
       ]
     },
     {
-      "file": "/mnt/c/projects/wsl/templates/catalog/categories/devops.yml",
+      "file": "/mnt/c/projects/wsl/templates/support/catalog/categories/devops.yml",
       "schema": "category",
       "status": "SKIP",
       "errors": [
@@ -112,7 +112,7 @@
       ]
     },
     {
-      "file": "/mnt/c/projects/wsl/templates/catalog/categories/modern-workspace.yml",
+      "file": "/mnt/c/projects/wsl/templates/support/catalog/categories/modern-workspace.yml",
       "schema": "category",
       "status": "SKIP",
       "errors": [
@@ -120,7 +120,7 @@
       ]
     },
     {
-      "file": "/mnt/c/projects/wsl/templates/catalog/categories/network.yml",
+      "file": "/mnt/c/projects/wsl/templates/support/catalog/categories/network.yml",
       "schema": "category",
       "status": "SKIP",
       "errors": [
