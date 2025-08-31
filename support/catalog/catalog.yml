@@ -1,11 +1,11 @@
 version: '2.0'
-generated_at: '2025-08-31T14:27:25.436050'
+generated_at: '2025-08-31T15:32:24.839888'
 catalog_type: master
 metadata:
   total_providers: 11
   total_categories: 6
   total_solutions: 35
-  last_updated: '2025-08-31T14:27:25.436056'
+  last_updated: '2025-08-31T15:32:24.839892'
   auto_generated: true
 provider_catalogs:
   hashicorp: ./providers/hashicorp.yml
