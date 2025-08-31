@@ -2,6 +2,9 @@
 """
 Catalog Processing Tool
 Processes distributed catalogs into unified exports and reports
+
+Copyright (c) 2025 EO Framework™
+Licensed under BSL 1.1 - see LICENSE file for details
 """
 
 import yaml

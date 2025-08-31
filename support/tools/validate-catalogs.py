@@ -2,6 +2,9 @@
 """
 Catalog Validator Tool
 Validates catalog files against JSON schemas
+
+Copyright (c) 2025 EO Framework™
+Licensed under BSL 1.1 - see LICENSE file for details
 """
 
 import yaml

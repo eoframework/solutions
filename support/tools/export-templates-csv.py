@@ -2,6 +2,9 @@
 """
 EO Framework™ CSV Sync
 Syncs repository templates with website CSV format.
+
+Copyright (c) 2025 EO Framework™
+Licensed under BSL 1.1 - see LICENSE file for details
 """
 
 import csv

@@ -1,0 +1,60 @@
+name: License Validation
+on:
+  pull_request:
+    paths: ['**/*.py', '**/*.sh', '**/*.ps1', '**/*.tf', '**/*.yml', '**/*.yaml']
+  push:
+    branches: [main]
+
+jobs:
+  check-license:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Check LICENSE file exists
+        run: |
+          if [ ! -f LICENSE ]; then
+            echo "❌ LICENSE file not found in repository root"
+            exit 1
+          fi
+          
+          if ! grep -q "Business Source License 1.1" LICENSE; then
+            echo "❌ LICENSE file does not contain BSL 1.1 license"
+            exit 1
+          fi
+          
+          echo "✅ LICENSE file is valid"
+      
+      - name: Check license headers in code files
+        run: |
+          # Check for short license headers in code files
+          missing_license=()
+          
+          while IFS= read -r -d '' file; do
+            # Skip master template files and generated files
+            if [[ "$file" == *"master-template"* ]] || [[ "$file" == *"support/exports"* ]] || [[ "$file" == *"support/reports"* ]]; then
+              continue
+            fi
+            
+            case "$file" in
+              *.py|*.sh|*.ps1|*.tf)
+                # Check for copyright notice referencing BSL 1.1
+                if ! head -10 "$file" | grep -q -E "(Copyright.*EO Framework|Licensed under BSL|LICENSE file)"; then
+                  missing_license+=("$file")
+                fi
+                ;;
+            esac
+          done < <(find . -type f \( -name "*.py" -o -name "*.sh" -o -name "*.ps1" -o -name "*.tf" \) -not -path "./.git/*" -print0)
+          
+          if [ ${#missing_license[@]} -gt 0 ]; then
+            echo "❌ Files missing license headers:"
+            printf '%s\n' "${missing_license[@]}"
+            echo ""
+            echo "Please add a short license header like:"
+            echo "# Copyright (c) 2025 EO Framework™"
+            echo "# Licensed under BSL 1.1 - see LICENSE file for details"
+            exit 1
+          else
+            echo "✅ All code files have proper license headers"
+          fi

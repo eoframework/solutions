@@ -2,6 +2,9 @@
 """
 Catalog Generator Tool
 Auto-generates catalog entries from solution metadata.yml files
+
+Copyright (c) 2025 EO Framework™
+Licensed under BSL 1.1 - see LICENSE file for details
 """
 
 import yaml

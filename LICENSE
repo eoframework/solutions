@@ -1,0 +1,40 @@
+Business Source License 1.1
+
+Parameters for EO Framework™:
+
+Licensor: EO Framework™ Community
+Licensed Work: EO Framework™ v1.0 and later versions (including templates, processes, automation scripts, and documentation)
+Additional Use Grant: You may use the Licensed Work for any purpose other than providing a competing commercial framework service
+Change Date: January 1, 2028
+Change License: Apache License, Version 2.0
+
+License Terms
+The Licensed Work is provided under the terms of the Business Source License 1.1 (“BSL”).
+You are granted the right to copy, modify, create derivative works, redistribute, and make non-production use of the Licensed Work.
+
+Permitted Uses
+- Internal business use – within your organization
+- Development and testing – evaluation and research
+- Educational use – academic and training purposes
+- Non-commercial use – personal projects and non-profits
+- Commercial consulting – delivering services to clients
+- Integration – incorporating the framework into your own products and services
+
+Restricted Uses
+- Hosting competing services – offering EO Framework™ as a hosted service that competes with official offerings
+- Redistributing as a competing product – creating or selling competing framework products based on EO Framework™
+
+Change License
+On the Change Date (January 1, 2028), the Licensed Work will automatically become available under the Apache License, Version 2.0.
+
+Disclaimer
+THE LICENSED WORK IS PROVIDED “AS IS” WITHOUT WARRANTIES OF ANY KIND, EXPRESS OR IMPLIED,
+INCLUDING BUT NOT LIMITED TO NON-INFRINGEMENT, MERCHANTABILITY, OR FITNESS FOR A PARTICULAR PURPOSE.
+
+Contact
+For licensing questions or clarification about specific use cases, please contact:
+Email: licensing@eoframework.org
+GitHub Issues: EO Framework™ Repository
+
+See https://mariadb.com/bsl11/ for the full text of the Business Source License 1.1.
+
