@@ -1,12 +1,12 @@
 version: '2.0'
 category: cloud
-generated_at: '2025-09-01T14:08:02.614285'
+generated_at: '2025-09-01T14:13:50.788119'
 catalog_type: category
 metadata:
   category_name: Cloud Infrastructure
   description: Cloud infrastructure and platform solutions
   total_solutions: 7
-  last_updated: '2025-09-01T14:08:02.614303'
+  last_updated: '2025-09-01T14:13:50.788140'
   auto_generated: true
 providers:
   aws:

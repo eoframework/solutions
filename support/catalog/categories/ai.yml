@@ -1,12 +1,12 @@
 version: '2.0'
 category: ai
-generated_at: '2025-09-01T14:08:02.607635'
+generated_at: '2025-09-01T14:13:50.778749'
 catalog_type: category
 metadata:
   category_name: Artificial Intelligence
   description: Artificial Intelligence and Machine Learning solutions
   total_solutions: 5
-  last_updated: '2025-09-01T14:08:02.607648'
+  last_updated: '2025-09-01T14:13:50.778769'
   auto_generated: true
 providers:
   aws:

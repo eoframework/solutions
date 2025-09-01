@@ -1,12 +1,12 @@
 version: '2.0'
 category: cyber-security
-generated_at: '2025-09-01T14:08:02.621506'
+generated_at: '2025-09-01T14:13:50.800595'
 catalog_type: category
 metadata:
   category_name: Cyber Security
   description: Security, compliance, and threat protection solutions
   total_solutions: 6
-  last_updated: '2025-09-01T14:08:02.621521'
+  last_updated: '2025-09-01T14:13:50.800630'
   auto_generated: true
 providers:
   azure:
