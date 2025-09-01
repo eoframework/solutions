@@ -1,0 +1,61 @@
+version: '2.0'
+category: cloud
+generated_at: '2025-09-01T16:43:59.963518'
+catalog_type: category
+metadata:
+  category_name: Cloud Infrastructure
+  description: Cloud infrastructure and platform solutions
+  total_solutions: 7
+  last_updated: '2025-09-01T16:43:59.963526'
+  auto_generated: true
+providers:
+  hashicorp:
+    solutions:
+    - name: multi-cloud-platform
+      title: Multi Cloud Platform
+      provider_catalog: ../providers/hashicorp.yml
+      solution_path: ../../solutions/hashicorp/cloud/multi-cloud-platform/
+  dell:
+    solutions:
+    - name: vxrail-hci
+      title: VxRail HCI
+      provider_catalog: ../providers/dell.yml
+      solution_path: ../../solutions/dell/cloud/vxrail-hci/
+    - name: vxrail-hyperconverged
+      title: VxRail Hyperconverged
+      provider_catalog: ../providers/dell.yml
+      solution_path: ../../solutions/dell/cloud/vxrail-hyperconverged/
+  google:
+    solutions:
+    - name: landing-zone
+      title: Landing Zone
+      provider_catalog: ../providers/google.yml
+      solution_path: ../../solutions/google/cloud/landing-zone/
+  azure:
+    solutions:
+    - name: enterprise-landing-zone
+      title: Enterprise Landing Zone
+      provider_catalog: ../providers/azure.yml
+      solution_path: ../../solutions/azure/cloud/enterprise-landing-zone/
+  aws:
+    solutions:
+    - name: disaster-recovery-web-application
+      title: Disaster Recovery Web Application
+      provider_catalog: ../providers/aws.yml
+      solution_path: ../../solutions/aws/cloud/disaster-recovery-web-application/
+    - name: onpremise-to-cloud-migration
+      title: Onpremise To Cloud Migration
+      provider_catalog: ../providers/aws.yml
+      solution_path: ../../solutions/aws/cloud/onpremise-to-cloud-migration/
+  ibm:
+    solutions:
+    - name: openshift-container-platform
+      title: Openshift Container Platform
+      provider_catalog: ../providers/ibm.yml
+      solution_path: ../../solutions/ibm/cloud/openshift-container-platform/
+  cisco:
+    solutions:
+    - name: hybrid-infrastructure
+      title: HyperFlex Cloud Bridge
+      provider_catalog: ../providers/cisco.yml
+      solution_path: ../../solutions/cisco/cloud/hybrid-infrastructure/

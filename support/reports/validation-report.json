@@ -1,83 +1,107 @@
 {
   "summary": {
     "total_files": 18,
-    "passed": 12,
+    "passed": 0,
     "failed": 0,
     "errors": 0,
-    "success_rate": "66.7%"
+    "success_rate": "0.0%"
   },
   "results": [
     {
       "file": "/home/runner/work/templates/templates/support/catalog/catalog.yml",
       "schema": "master",
-      "status": "PASS",
-      "errors": []
+      "status": "SKIP",
+      "errors": [
+        "Schema master not available"
+      ]
     },
     {
       "file": "/home/runner/work/templates/templates/support/catalog/providers/github.yml",
       "schema": "provider",
-      "status": "PASS",
-      "errors": []
+      "status": "SKIP",
+      "errors": [
+        "Schema provider not available"
+      ]
     },
     {
       "file": "/home/runner/work/templates/templates/support/catalog/providers/hashicorp.yml",
       "schema": "provider",
-      "status": "PASS",
-      "errors": []
+      "status": "SKIP",
+      "errors": [
+        "Schema provider not available"
+      ]
     },
     {
       "file": "/home/runner/work/templates/templates/support/catalog/providers/google.yml",
       "schema": "provider",
-      "status": "PASS",
-      "errors": []
+      "status": "SKIP",
+      "errors": [
+        "Schema provider not available"
+      ]
     },
     {
       "file": "/home/runner/work/templates/templates/support/catalog/providers/juniper.yml",
       "schema": "provider",
-      "status": "PASS",
-      "errors": []
+      "status": "SKIP",
+      "errors": [
+        "Schema provider not available"
+      ]
     },
     {
       "file": "/home/runner/work/templates/templates/support/catalog/providers/cisco.yml",
       "schema": "provider",
-      "status": "PASS",
-      "errors": []
+      "status": "SKIP",
+      "errors": [
+        "Schema provider not available"
+      ]
     },
     {
       "file": "/home/runner/work/templates/templates/support/catalog/providers/aws.yml",
       "schema": "provider",
-      "status": "PASS",
-      "errors": []
+      "status": "SKIP",
+      "errors": [
+        "Schema provider not available"
+      ]
     },
     {
       "file": "/home/runner/work/templates/templates/support/catalog/providers/microsoft.yml",
       "schema": "provider",
-      "status": "PASS",
-      "errors": []
+      "status": "SKIP",
+      "errors": [
+        "Schema provider not available"
+      ]
     },
     {
       "file": "/home/runner/work/templates/templates/support/catalog/providers/nvidia.yml",
       "schema": "provider",
-      "status": "PASS",
-      "errors": []
+      "status": "SKIP",
+      "errors": [
+        "Schema provider not available"
+      ]
     },
     {
       "file": "/home/runner/work/templates/templates/support/catalog/providers/dell.yml",
       "schema": "provider",
-      "status": "PASS",
-      "errors": []
+      "status": "SKIP",
+      "errors": [
+        "Schema provider not available"
+      ]
     },
     {
       "file": "/home/runner/work/templates/templates/support/catalog/providers/ibm.yml",
       "schema": "provider",
-      "status": "PASS",
-      "errors": []
+      "status": "SKIP",
+      "errors": [
+        "Schema provider not available"
+      ]
     },
     {
       "file": "/home/runner/work/templates/templates/support/catalog/providers/azure.yml",
       "schema": "provider",
-      "status": "PASS",
-      "errors": []
+      "status": "SKIP",
+      "errors": [
+        "Schema provider not available"
+      ]
     },
     {
       "file": "/home/runner/work/templates/templates/support/catalog/categories/cloud.yml",

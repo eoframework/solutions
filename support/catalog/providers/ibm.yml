@@ -1,0 +1,76 @@
+version: '2.0'
+provider: ibm
+generated_at: '2025-09-01T16:43:59.952392'
+catalog_type: provider
+metadata:
+  provider_name: IBM
+  total_solutions: 2
+  last_updated: '2025-09-01T16:43:59.952404'
+  auto_generated: true
+categories:
+  cloud:
+    solutions:
+      openshift-container-platform:
+        provider: IBM
+        category: cloud
+        solution_name: Openshift Container Platform
+        description: Enterprise container platform for modern applications
+        version: 1.0.0
+        status: Active
+        maintainers:
+        - name: "EO Framework\u2122 IBM Solutions Team"
+          email: ibm-solutions@eoframework.com
+          role: Enterprise Solutions Architect
+        tags:
+        - cloud
+        - platform
+        - openshift
+        - ibm
+        - container
+        requirements:
+          prerequisites:
+          - IBM Account
+          - Administrative Access
+          tools:
+          - Python 3.8+
+          - OpenShift CLI
+          - Ansible
+          skills:
+          - IBM Platform
+          - Solution Architecture
+          - Container Platforms
+        solution_path: ../../solutions/ibm/cloud/openshift-container-platform/
+        title: Openshift Container Platform
+  devops:
+    solutions:
+      ansible-automation-platform:
+        provider: IBM
+        category: devops
+        solution_name: Ansible Automation Platform
+        description: IT automation platform for operational efficiency
+        version: 1.0.0
+        status: Active
+        maintainers:
+        - name: "EO Framework\u2122 IBM Solutions Team"
+          email: ibm-solutions@eoframework.com
+          role: Enterprise Solutions Architect
+        tags:
+        - platform
+        - ibm
+        - automation
+        - devops
+        - ansible
+        requirements:
+          prerequisites:
+          - IBM Account
+          - Administrative Access
+          tools:
+          - Python 3.8+
+          - OpenShift CLI
+          - Ansible
+          skills:
+          - IBM Platform
+          - Solution Architecture
+          - Container Platforms
+        solution_path: ../../solutions/ibm/devops/ansible-automation-platform/
+        title: Ansible Automation Platform

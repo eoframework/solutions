@@ -1,0 +1,193 @@
+version: '2.0'
+provider: dell
+generated_at: '2025-09-01T16:43:59.888184'
+catalog_type: provider
+metadata:
+  provider_name: Dell Technologies
+  total_solutions: 6
+  last_updated: '2025-09-01T16:43:59.888197'
+  auto_generated: true
+categories:
+  cloud:
+    solutions:
+      vxrail-hci:
+        provider: DELL
+        category: cloud
+        solution_name: VxRail HCI
+        description: Hyperconverged infrastructure for simplified IT
+        version: 1.0.0
+        status: Active
+        maintainers:
+        - name: "EO Framework\u2122 Dell Solutions Team"
+          email: dell-solutions@eoframework.com
+          role: Infrastructure Solutions Architect
+        tags:
+        - cloud
+        - vxrail
+        - dell
+        requirements:
+          prerequisites:
+          - DELL Account
+          - Administrative Access
+          tools:
+          - Python 3.8+
+          - Ansible
+          skills:
+          - DELL Platform
+          - Solution Architecture
+          - Network Infrastructure
+        solution_path: ../../solutions/dell/cloud/vxrail-hci/
+        title: VxRail HCI
+      vxrail-hyperconverged:
+        provider: DELL
+        category: cloud
+        solution_name: VxRail Hyperconverged
+        description: Complete HCI platform for enterprise workloads
+        version: 1.0.0
+        status: Active
+        maintainers:
+        - name: "EO Framework\u2122 Dell Solutions Team"
+          email: dell-solutions@eoframework.com
+          role: Infrastructure Solutions Architect
+        tags:
+        - cloud
+        - vxrail
+        - dell
+        - hyperconverged
+        requirements:
+          prerequisites:
+          - DELL Account
+          - Administrative Access
+          tools:
+          - Python 3.8+
+          - Ansible
+          skills:
+          - DELL Platform
+          - Solution Architecture
+          - Network Infrastructure
+        solution_path: ../../solutions/dell/cloud/vxrail-hyperconverged/
+        title: VxRail Hyperconverged
+  network:
+    solutions:
+      powerswitch-datacenter:
+        provider: DELL
+        category: network
+        solution_name: Powerswitch Datacenter
+        description: High-performance datacenter switching fabric
+        version: 1.0.0
+        status: Active
+        maintainers:
+        - name: "EO Framework\u2122 Dell Solutions Team"
+          email: dell-solutions@eoframework.com
+          role: Infrastructure Solutions Architect
+        tags:
+        - network
+        - datacenter
+        - powerswitch
+        - dell
+        requirements:
+          prerequisites:
+          - DELL Account
+          - Administrative Access
+          tools:
+          - Python 3.8+
+          - Ansible
+          skills:
+          - DELL Platform
+          - Solution Architecture
+          - Network Infrastructure
+        solution_path: ../../solutions/dell/network/powerswitch-datacenter/
+        title: Powerswitch Datacenter
+  cyber-security:
+    solutions:
+      safeid-authentication:
+        provider: DELL
+        category: cyber-security
+        solution_name: Safeid Authentication
+        description: Multi-factor authentication for secure access
+        version: 1.0.0
+        status: Active
+        maintainers:
+        - name: "EO Framework\u2122 Dell Solutions Team"
+          email: dell-solutions@eoframework.com
+          role: Infrastructure Solutions Architect
+        tags:
+        - safeid
+        - authentication
+        - dell
+        - cyber-security
+        requirements:
+          prerequisites:
+          - DELL Account
+          - Administrative Access
+          tools:
+          - Python 3.8+
+          - Ansible
+          skills:
+          - DELL Platform
+          - Solution Architecture
+          - Network Infrastructure
+        solution_path: ../../solutions/dell/cyber-security/safeid-authentication/
+        title: Safeid Authentication
+  ai:
+    solutions:
+      precision-ai-workstation:
+        provider: DELL
+        category: ai
+        solution_name: Precision AI Workstation
+        description: High-performance workstations for AI development
+        version: 1.0.0
+        status: Active
+        maintainers:
+        - name: "EO Framework\u2122 Dell Solutions Team"
+          email: dell-solutions@eoframework.com
+          role: Infrastructure Solutions Architect
+        tags:
+        - workstation
+        - ai
+        - precision
+        - dell
+        requirements:
+          prerequisites:
+          - DELL Account
+          - Administrative Access
+          tools:
+          - Python 3.8+
+          - Ansible
+          skills:
+          - DELL Platform
+          - Solution Architecture
+          - Network Infrastructure
+        solution_path: ../../solutions/dell/ai/precision-ai-workstation/
+        title: Precision AI Workstation
+  devops:
+    solutions:
+      poweredge-ci-infrastructure:
+        provider: DELL
+        category: devops
+        solution_name: Poweredge Ci Infrastructure
+        description: Enterprise CI infrastructure on PowerEdge servers
+        version: 1.0.0
+        status: Active
+        maintainers:
+        - name: "EO Framework\u2122 Dell Solutions Team"
+          email: dell-solutions@eoframework.com
+          role: Infrastructure Solutions Architect
+        tags:
+        - dell
+        - poweredge
+        - devops
+        - infrastructure
+        requirements:
+          prerequisites:
+          - DELL Account
+          - Administrative Access
+          tools:
+          - Python 3.8+
+          - Ansible
+          skills:
+          - DELL Platform
+          - Solution Architecture
+          - Network Infrastructure
+        solution_path: ../../solutions/dell/devops/poweredge-ci-infrastructure/
+        title: Poweredge Ci Infrastructure
