@@ -1,6 +1,7 @@
-# Generated catalog and export files
+# Generated catalog, export, and report files
 support/exports/
 support/catalog/
+support/reports/validation-report.json
 
 # IDE and editor files
 .vscode/
