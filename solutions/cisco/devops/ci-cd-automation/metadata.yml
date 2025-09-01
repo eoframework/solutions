@@ -1,6 +1,6 @@
 provider: CISCO
 category: devops
-solution_name: Ci Cd Automation
+solution_name: Network Infrastructure Pipeline
 description: Network-aware CI/CD for infrastructure automation
 version: 1.0.0
 status: Active

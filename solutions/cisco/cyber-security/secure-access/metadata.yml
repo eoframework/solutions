@@ -1,6 +1,6 @@
 provider: CISCO
 category: cyber-security
-solution_name: Secure Access
+solution_name: Zero Trust Network Gateway
 description: Zero-trust network access for enhanced security
 version: 1.0.0
 status: Active

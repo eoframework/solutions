@@ -1,6 +1,6 @@
 provider: AZURE
 category: devops
-solution_name: Enterprise Platform
+solution_name: DevOps Pipeline Factory
 description: DevOps platform for accelerated software delivery
 version: 1.0.0
 status: Active

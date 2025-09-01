@@ -1,6 +1,6 @@
 provider: CISCO
 category: cloud
-solution_name: Hybrid Infrastructure
+solution_name: HyperFlex Cloud Bridge
 description: Seamless hybrid cloud infrastructure integration
 version: 1.0.0
 status: Active
