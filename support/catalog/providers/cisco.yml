@@ -1,44 +1,13 @@
 version: '2.0'
 provider: cisco
-generated_at: '2025-09-01T14:13:50.669762'
+generated_at: '2025-09-01T19:14:40.313963'
 catalog_type: provider
 metadata:
   provider_name: Cisco Systems
   total_solutions: 5
-  last_updated: '2025-09-01T14:13:50.669783'
+  last_updated: '2025-09-01T19:14:40.313973'
   auto_generated: true
 categories:
-  ai:
-    solutions:
-      network-analytics:
-        provider: cisco
-        category: ai
-        solution_name: AI-Powered Network Insights
-        description: AI-driven network insights for optimized performance
-        version: 1.0.0
-        status: Active
-        maintainers:
-        - name: "EO Framework\u2122 Cisco Solutions Team"
-          email: cisco-solutions@eoframework.com
-          role: Network Solutions Architect
-        tags:
-        - network
-        - ai
-        - analytics
-        - cisco
-        requirements:
-          prerequisites:
-          - CISCO Account
-          - Administrative Access
-          tools:
-          - Python 3.8+
-          - Ansible
-          skills:
-          - CISCO Platform
-          - Solution Architecture
-          - Network Infrastructure
-        solution_path: ../../solutions/cisco/ai/network-analytics/
-        title: AI-Powered Network Insights
   cloud:
     solutions:
       hybrid-infrastructure:
@@ -70,6 +39,36 @@ categories:
           - Network Infrastructure
         solution_path: ../../solutions/cisco/cloud/hybrid-infrastructure/
         title: HyperFlex Cloud Bridge
+  network:
+    solutions:
+      sd-wan-enterprise:
+        provider: cisco
+        category: network
+        solution_name: SD-WAN Enterprise
+        description: Enterprise SD-WAN for optimized branch connectivity
+        version: 1.0.0
+        status: Active
+        maintainers:
+        - name: "EO Framework\u2122 Cisco Solutions Team"
+          email: cisco-solutions@eoframework.com
+          role: Network Solutions Architect
+        tags:
+        - network
+        - enterprise
+        - cisco
+        requirements:
+          prerequisites:
+          - CISCO Account
+          - Administrative Access
+          tools:
+          - Python 3.8+
+          - Ansible
+          skills:
+          - CISCO Platform
+          - Solution Architecture
+          - Network Infrastructure
+        solution_path: ../../solutions/cisco/network/sd-wan-enterprise/
+        title: SD-WAN Enterprise
   cyber-security:
     solutions:
       secure-access:
@@ -101,6 +100,37 @@ categories:
           - Network Infrastructure
         solution_path: ../../solutions/cisco/cyber-security/secure-access/
         title: Zero Trust Network Gateway
+  ai:
+    solutions:
+      network-analytics:
+        provider: cisco
+        category: ai
+        solution_name: AI-Powered Network Insights
+        description: AI-driven network insights for optimized performance
+        version: 1.0.0
+        status: Active
+        maintainers:
+        - name: "EO Framework\u2122 Cisco Solutions Team"
+          email: cisco-solutions@eoframework.com
+          role: Network Solutions Architect
+        tags:
+        - network
+        - ai
+        - analytics
+        - cisco
+        requirements:
+          prerequisites:
+          - CISCO Account
+          - Administrative Access
+          tools:
+          - Python 3.8+
+          - Ansible
+          skills:
+          - CISCO Platform
+          - Solution Architecture
+          - Network Infrastructure
+        solution_path: ../../solutions/cisco/ai/network-analytics/
+        title: AI-Powered Network Insights
   devops:
     solutions:
       ci-cd-automation:
@@ -131,33 +161,3 @@ categories:
           - Network Infrastructure
         solution_path: ../../solutions/cisco/devops/ci-cd-automation/
         title: Network Infrastructure Pipeline
-  network:
-    solutions:
-      sd-wan-enterprise:
-        provider: cisco
-        category: network
-        solution_name: SD-WAN Enterprise
-        description: Enterprise SD-WAN for optimized branch connectivity
-        version: 1.0.0
-        status: Active
-        maintainers:
-        - name: "EO Framework\u2122 Cisco Solutions Team"
-          email: cisco-solutions@eoframework.com
-          role: Network Solutions Architect
-        tags:
-        - network
-        - enterprise
-        - cisco
-        requirements:
-          prerequisites:
-          - CISCO Account
-          - Administrative Access
-          tools:
-          - Python 3.8+
-          - Ansible
-          skills:
-          - CISCO Platform
-          - Solution Architecture
-          - Network Infrastructure
-        solution_path: ../../solutions/cisco/network/sd-wan-enterprise/
-        title: SD-WAN Enterprise

@@ -1,47 +1,47 @@
 version: '2.0'
 category: devops
-generated_at: '2025-09-01T14:13:50.875323'
+generated_at: '2025-09-01T19:14:40.327913'
 catalog_type: category
 metadata:
   category_name: DevOps & Automation
   description: DevOps automation and CI/CD solutions
   total_solutions: 6
-  last_updated: '2025-09-01T14:13:50.875349'
+  last_updated: '2025-09-01T19:14:40.327924'
   auto_generated: true
 providers:
-  azure:
-    solutions:
-    - name: enterprise-platform
-      title: DevOps Pipeline Factory
-      provider_catalog: ../providers/azure.yml
-      solution_path: ../../solutions/azure/devops/enterprise-platform/
-  cisco:
-    solutions:
-    - name: ci-cd-automation
-      title: Network Infrastructure Pipeline
-      provider_catalog: ../providers/cisco.yml
-      solution_path: ../../solutions/cisco/devops/ci-cd-automation/
-  dell:
-    solutions:
-    - name: poweredge-ci-infrastructure
-      title: Poweredge Ci Infrastructure
-      provider_catalog: ../providers/dell.yml
-      solution_path: ../../solutions/dell/devops/poweredge-ci-infrastructure/
-  github:
-    solutions:
-    - name: actions-enterprise-cicd
-      title: GitHub Workflow Automation
-      provider_catalog: ../providers/github.yml
-      solution_path: ../../solutions/github/devops/actions-enterprise-cicd/
   hashicorp:
     solutions:
     - name: terraform-enterprise
       title: Terraform Enterprise
       provider_catalog: ../providers/hashicorp.yml
       solution_path: ../../solutions/hashicorp/devops/terraform-enterprise/
+  github:
+    solutions:
+    - name: actions-enterprise-cicd
+      title: GitHub Workflow Automation
+      provider_catalog: ../providers/github.yml
+      solution_path: ../../solutions/github/devops/actions-enterprise-cicd/
+  dell:
+    solutions:
+    - name: poweredge-ci-infrastructure
+      title: Poweredge Ci Infrastructure
+      provider_catalog: ../providers/dell.yml
+      solution_path: ../../solutions/dell/devops/poweredge-ci-infrastructure/
+  azure:
+    solutions:
+    - name: enterprise-platform
+      title: DevOps Pipeline Factory
+      provider_catalog: ../providers/azure.yml
+      solution_path: ../../solutions/azure/devops/enterprise-platform/
   ibm:
     solutions:
     - name: ansible-automation-platform
       title: Ansible Automation Platform
       provider_catalog: ../providers/ibm.yml
       solution_path: ../../solutions/ibm/devops/ansible-automation-platform/
+  cisco:
+    solutions:
+    - name: ci-cd-automation
+      title: Network Infrastructure Pipeline
+      provider_catalog: ../providers/cisco.yml
+      solution_path: ../../solutions/cisco/devops/ci-cd-automation/

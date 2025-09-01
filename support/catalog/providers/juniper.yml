@@ -1,13 +1,43 @@
 version: '2.0'
 provider: juniper
-generated_at: '2025-09-01T14:13:50.744798'
+generated_at: '2025-09-01T19:14:40.285458'
 catalog_type: provider
 metadata:
   provider_name: Juniper Networks
   total_solutions: 2
-  last_updated: '2025-09-01T14:13:50.744817'
+  last_updated: '2025-09-01T19:14:40.285468'
   auto_generated: true
 categories:
+  network:
+    solutions:
+      mist-ai-network:
+        provider: juniper
+        category: network
+        solution_name: Mist AI Network
+        description: AI-driven network operations & user experiences
+        version: 1.0.0
+        status: Active
+        maintainers:
+        - name: "EO Framework\u2122 Juniper Solutions Team"
+          email: juniper-solutions@eoframework.com
+          role: Network Solutions Architect
+        tags:
+        - network
+        - juniper
+        - mist
+        requirements:
+          prerequisites:
+          - JUNIPER Account
+          - Administrative Access
+          tools:
+          - Python 3.8+
+          - Ansible
+          skills:
+          - JUNIPER Platform
+          - Solution Architecture
+          - Network Infrastructure
+        solution_path: ../../solutions/juniper/network/mist-ai-network/
+        title: Mist AI Network
   cyber-security:
     solutions:
       srx-firewall-platform:
@@ -39,33 +69,3 @@ categories:
           - Network Infrastructure
         solution_path: ../../solutions/juniper/cyber-security/srx-firewall-platform/
         title: SRX Firewall Platform
-  network:
-    solutions:
-      mist-ai-network:
-        provider: juniper
-        category: network
-        solution_name: Mist AI Network
-        description: AI-driven network operations & user experiences
-        version: 1.0.0
-        status: Active
-        maintainers:
-        - name: "EO Framework\u2122 Juniper Solutions Team"
-          email: juniper-solutions@eoframework.com
-          role: Network Solutions Architect
-        tags:
-        - network
-        - juniper
-        - mist
-        requirements:
-          prerequisites:
-          - JUNIPER Account
-          - Administrative Access
-          tools:
-          - Python 3.8+
-          - Ansible
-          skills:
-          - JUNIPER Platform
-          - Solution Architecture
-          - Network Infrastructure
-        solution_path: ../../solutions/juniper/network/mist-ai-network/
-        title: Mist AI Network
