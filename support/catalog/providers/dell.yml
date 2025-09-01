@@ -1,11 +1,11 @@
 version: '2.0'
 provider: dell
-generated_at: '2025-09-01T16:47:36.239078'
+generated_at: '2025-09-01T16:55:13.530729'
 catalog_type: provider
 metadata:
   provider_name: Dell Technologies
   total_solutions: 6
-  last_updated: '2025-09-01T16:47:36.239090'
+  last_updated: '2025-09-01T16:55:13.530741'
   auto_generated: true
 categories:
   cloud:

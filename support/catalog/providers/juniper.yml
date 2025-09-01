@@ -1,11 +1,11 @@
 version: '2.0'
 provider: juniper
-generated_at: '2025-09-01T16:47:36.255763'
+generated_at: '2025-09-01T16:55:13.547470'
 catalog_type: provider
 metadata:
   provider_name: Juniper Networks
   total_solutions: 2
-  last_updated: '2025-09-01T16:47:36.255774'
+  last_updated: '2025-09-01T16:55:13.547486'
   auto_generated: true
 categories:
   network:
