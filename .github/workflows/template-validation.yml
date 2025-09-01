@@ -43,6 +43,7 @@ jobs:
       - name: Generate catalog and CSV
         if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         run: |
+          mkdir -p support/catalog support/exports support/reports
           python3 support/tools/generate-catalogs.py
           python3 support/tools/process-catalogs.py
           python3 support/tools/validate-catalogs.py
