@@ -1,18 +1,18 @@
 version: '2.0'
 provider: nvidia
-generated_at: '2025-09-01T02:47:29.763394'
+generated_at: '2025-09-01T05:04:38.697027'
 catalog_type: provider
 metadata:
   provider_name: NVIDIA
   total_solutions: 3
-  last_updated: '2025-09-01T02:47:29.763416'
+  last_updated: '2025-09-01T05:04:38.697036'
   auto_generated: true
 categories:
   ai:
     solutions:
       gpu-compute-cluster:
         provider: NVIDIA
-        category: ai
+        category: AI
         solution_name: Gpu Compute Cluster
         description: Gpu Compute Cluster solution for NVIDIA
         version: 1.0.0
@@ -42,7 +42,7 @@ categories:
         title: Gpu Compute Cluster
       dgx-superpod:
         provider: NVIDIA
-        category: ai
+        category: AI
         solution_name: Dgx Superpod
         description: Dgx Superpod solution for NVIDIA
         version: 1.0.0

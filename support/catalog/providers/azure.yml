@@ -1,11 +1,11 @@
 version: '2.0'
 provider: azure
-generated_at: '2025-09-01T02:47:29.793153'
+generated_at: '2025-09-01T05:04:38.725260'
 catalog_type: provider
 metadata:
   provider_name: Microsoft Azure
   total_solutions: 6
-  last_updated: '2025-09-01T02:47:29.793163'
+  last_updated: '2025-09-01T05:04:38.725268'
   auto_generated: true
 categories:
   cloud:
@@ -109,7 +109,7 @@ categories:
     solutions:
       document-intelligence:
         provider: AZURE
-        category: ai
+        category: AI
         solution_name: Document Intelligence
         description: Document Intelligence solution for AZURE
         version: 1.0.0

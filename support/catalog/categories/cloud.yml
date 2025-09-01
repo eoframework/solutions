@@ -1,12 +1,12 @@
 version: '2.0'
 category: cloud
-generated_at: '2025-09-01T02:47:29.818235'
+generated_at: '2025-09-01T05:04:38.749968'
 catalog_type: category
 metadata:
   category_name: Cloud Infrastructure
   description: Cloud infrastructure and platform solutions
   total_solutions: 7
-  last_updated: '2025-09-01T02:47:29.818243'
+  last_updated: '2025-09-01T05:04:38.749976'
   auto_generated: true
 providers:
   hashicorp:

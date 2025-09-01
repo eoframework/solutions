@@ -1,11 +1,11 @@
 version: '2.0'
 provider: cisco
-generated_at: '2025-09-01T02:47:29.810753'
+generated_at: '2025-09-01T05:04:38.742539'
 catalog_type: provider
 metadata:
   provider_name: Cisco Systems
   total_solutions: 5
-  last_updated: '2025-09-01T02:47:29.810761'
+  last_updated: '2025-09-01T05:04:38.742548'
   auto_generated: true
 categories:
   cloud:
@@ -104,7 +104,7 @@ categories:
     solutions:
       network-analytics:
         provider: CISCO
-        category: ai
+        category: AI
         solution_name: Network Analytics
         description: Network Analytics solution for CISCO
         version: 1.0.0

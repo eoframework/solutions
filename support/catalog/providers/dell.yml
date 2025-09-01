@@ -1,11 +1,11 @@
 version: '2.0'
 provider: dell
-generated_at: '2025-09-01T02:47:29.772818'
+generated_at: '2025-09-01T05:04:38.705983'
 catalog_type: provider
 metadata:
   provider_name: Dell Technologies
   total_solutions: 6
-  last_updated: '2025-09-01T02:47:29.772826'
+  last_updated: '2025-09-01T05:04:38.705991'
   auto_generated: true
 categories:
   cloud:
@@ -133,7 +133,7 @@ categories:
     solutions:
       precision-ai-workstation:
         provider: DELL
-        category: ai
+        category: AI
         solution_name: Precision Ai Workstation
         description: Precision Ai Workstation solution for DELL
         version: 1.0.0

@@ -1,11 +1,11 @@
 version: '2.0'
 provider: github
-generated_at: '2025-09-01T02:47:29.769105'
+generated_at: '2025-09-01T05:04:38.702453'
 catalog_type: provider
 metadata:
   provider_name: GitHub
   total_solutions: 2
-  last_updated: '2025-09-01T02:47:29.769114'
+  last_updated: '2025-09-01T05:04:38.702461'
   auto_generated: true
 categories:
   cyber-security:
