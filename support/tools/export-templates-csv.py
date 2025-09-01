@@ -21,8 +21,12 @@ def sync_to_csv():
     
     # Special capitalization mappings
     def format_name(name):
-        """Apply special capitalization rules"""
-        # Handle special cases
+        """Apply special capitalization rules - preserve already correct names"""
+        # If the name is already properly formatted (contains uppercase), return as-is
+        if any(c.isupper() for c in name):
+            return name
+            
+        # Handle special cases for lowercase names only
         special_cases = {
             'ai': 'AI',
             'aws': 'AWS', 
