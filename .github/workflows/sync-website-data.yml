@@ -1,5 +1,8 @@
 name: Sync Website Data
 
+# This workflow automatically syncs templates.csv to the eof-website repository
+# REQUIRED: WEBSITE_SYNC_TOKEN secret must be configured with write access to eoframework/eof-website
+
 on:
   workflow_run:
     workflows: ["Template Validation"]
