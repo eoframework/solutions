@@ -1,11 +1,11 @@
 version: '2.0'
 provider: aws
-generated_at: '2025-09-01T06:25:27.822613'
+generated_at: '2025-09-01T14:49:29.615904'
 catalog_type: provider
 metadata:
   provider_name: Amazon Web Services
   total_solutions: 3
-  last_updated: '2025-09-01T06:25:27.822632'
+  last_updated: '2025-09-01T14:49:29.615912'
   auto_generated: true
 categories:
   cloud:

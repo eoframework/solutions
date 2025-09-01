@@ -1,11 +1,11 @@
 version: '2.0'
 provider: azure
-generated_at: '2025-09-01T06:25:27.805758'
+generated_at: '2025-09-01T14:49:29.606937'
 catalog_type: provider
 metadata:
   provider_name: Microsoft Azure
   total_solutions: 6
-  last_updated: '2025-09-01T06:25:27.805773'
+  last_updated: '2025-09-01T14:49:29.606945'
   auto_generated: true
 categories:
   cloud:
@@ -14,7 +14,7 @@ categories:
         provider: AZURE
         category: cloud
         solution_name: Enterprise Landing Zone
-        description: Enterprise Landing Zone solution for AZURE
+        description: Secure Azure foundation for enterprise workloads
         version: 1.0.0
         status: Active
         maintainers:
@@ -47,7 +47,7 @@ categories:
         provider: AZURE
         category: network
         solution_name: Virtual Wan Global
-        description: Virtual Wan Global solution for AZURE
+        description: Global WAN connectivity for distributed enterprises
         version: 1.0.0
         status: Active
         maintainers:
@@ -79,7 +79,7 @@ categories:
         provider: AZURE
         category: cyber-security
         solution_name: Sentinel Siem
-        description: Sentinel Siem solution for AZURE
+        description: Cloud SIEM for advanced threat detection & response
         version: 1.0.0
         status: Active
         maintainers:
@@ -111,7 +111,7 @@ categories:
         provider: AZURE
         category: ai
         solution_name: Document Intelligence
-        description: Document Intelligence solution for AZURE
+        description: Smart document processing with Azure cognitive AI
         version: 1.0.0
         status: Active
         maintainers:
@@ -143,7 +143,7 @@ categories:
         provider: AZURE
         category: modern-workspace
         solution_name: Virtual Desktop
-        description: Virtual Desktop solution for AZURE
+        description: Secure remote desktop for modern workforce productivity
         version: 1.0.0
         status: Active
         maintainers:
@@ -175,7 +175,7 @@ categories:
         provider: AZURE
         category: devops
         solution_name: Enterprise Platform
-        description: Enterprise Platform solution for AZURE
+        description: DevOps platform for accelerated software delivery
         version: 1.0.0
         status: Active
         maintainers:

@@ -1,11 +1,11 @@
 version: '2.0'
 provider: cisco
-generated_at: '2025-09-01T06:25:27.838095'
+generated_at: '2025-09-01T14:49:29.624252'
 catalog_type: provider
 metadata:
   provider_name: Cisco Systems
   total_solutions: 5
-  last_updated: '2025-09-01T06:25:27.838108'
+  last_updated: '2025-09-01T14:49:29.624261'
   auto_generated: true
 categories:
   cloud:
@@ -14,7 +14,7 @@ categories:
         provider: CISCO
         category: cloud
         solution_name: Hybrid Infrastructure
-        description: Hybrid Infrastructure solution for CISCO
+        description: Seamless hybrid cloud infrastructure integration
         version: 1.0.0
         status: Active
         maintainers:
@@ -45,7 +45,7 @@ categories:
         provider: CISCO
         category: network
         solution_name: Sd Wan Enterprise
-        description: Sd Wan Enterprise solution for CISCO
+        description: Enterprise SD-WAN for optimized branch connectivity
         version: 1.0.0
         status: Active
         maintainers:
@@ -75,7 +75,7 @@ categories:
         provider: CISCO
         category: cyber-security
         solution_name: Secure Access
-        description: Secure Access solution for CISCO
+        description: Zero-trust network access for enhanced security
         version: 1.0.0
         status: Active
         maintainers:
@@ -106,7 +106,7 @@ categories:
         provider: CISCO
         category: ai
         solution_name: Network Analytics
-        description: Network Analytics solution for CISCO
+        description: AI-driven network insights for optimized performance
         version: 1.0.0
         status: Active
         maintainers:
@@ -137,7 +137,7 @@ categories:
         provider: CISCO
         category: devops
         solution_name: Ci Cd Automation
-        description: Ci Cd Automation solution for CISCO
+        description: Network-aware CI/CD for infrastructure automation
         version: 1.0.0
         status: Active
         maintainers:
