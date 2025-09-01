@@ -1,44 +1,13 @@
 version: '2.0'
 provider: dell
-generated_at: '2025-09-01T00:41:04.824415'
+generated_at: '2025-09-01T05:44:36.196312'
 catalog_type: provider
 metadata:
   provider_name: Dell Technologies
   total_solutions: 6
-  last_updated: '2025-09-01T00:41:04.824578'
+  last_updated: '2025-09-01T05:44:36.196321'
   auto_generated: true
 categories:
-  ai:
-    solutions:
-      precision-ai-workstation:
-        provider: DELL
-        category: ai
-        solution_name: Precision Ai Workstation
-        description: Precision Ai Workstation solution for DELL
-        version: 1.0.0
-        status: Active
-        maintainers:
-        - name: "EO Framework\u2122 Dell Solutions Team"
-          email: dell-solutions@eoframework.com
-          role: Infrastructure Solutions Architect
-        tags:
-        - workstation
-        - ai
-        - precision
-        - dell
-        requirements:
-          prerequisites:
-          - DELL Account
-          - Administrative Access
-          tools:
-          - Python 3.8+
-          - Ansible
-          skills:
-          - DELL Platform
-          - Solution Architecture
-          - Network Infrastructure
-        solution_path: ../../solutions/dell/ai/precision-ai-workstation/
-        title: Precision Ai Workstation
   cloud:
     solutions:
       vxrail-hci:
@@ -98,68 +67,6 @@ categories:
           - Network Infrastructure
         solution_path: ../../solutions/dell/cloud/vxrail-hyperconverged/
         title: Vxrail Hyperconverged
-  cyber-security:
-    solutions:
-      safeid-authentication:
-        provider: DELL
-        category: cyber-security
-        solution_name: Safeid Authentication
-        description: Safeid Authentication solution for DELL
-        version: 1.0.0
-        status: Active
-        maintainers:
-        - name: "EO Framework\u2122 Dell Solutions Team"
-          email: dell-solutions@eoframework.com
-          role: Infrastructure Solutions Architect
-        tags:
-        - safeid
-        - authentication
-        - dell
-        - cyber-security
-        requirements:
-          prerequisites:
-          - DELL Account
-          - Administrative Access
-          tools:
-          - Python 3.8+
-          - Ansible
-          skills:
-          - DELL Platform
-          - Solution Architecture
-          - Network Infrastructure
-        solution_path: ../../solutions/dell/cyber-security/safeid-authentication/
-        title: Safeid Authentication
-  devops:
-    solutions:
-      poweredge-ci-infrastructure:
-        provider: DELL
-        category: devops
-        solution_name: Poweredge Ci Infrastructure
-        description: Poweredge Ci Infrastructure solution for DELL
-        version: 1.0.0
-        status: Active
-        maintainers:
-        - name: "EO Framework\u2122 Dell Solutions Team"
-          email: dell-solutions@eoframework.com
-          role: Infrastructure Solutions Architect
-        tags:
-        - dell
-        - poweredge
-        - devops
-        - infrastructure
-        requirements:
-          prerequisites:
-          - DELL Account
-          - Administrative Access
-          tools:
-          - Python 3.8+
-          - Ansible
-          skills:
-          - DELL Platform
-          - Solution Architecture
-          - Network Infrastructure
-        solution_path: ../../solutions/dell/devops/poweredge-ci-infrastructure/
-        title: Poweredge Ci Infrastructure
   network:
     solutions:
       powerswitch-datacenter:
@@ -191,3 +98,96 @@ categories:
           - Network Infrastructure
         solution_path: ../../solutions/dell/network/powerswitch-datacenter/
         title: Powerswitch Datacenter
+  cyber-security:
+    solutions:
+      safeid-authentication:
+        provider: DELL
+        category: cyber-security
+        solution_name: Safeid Authentication
+        description: Safeid Authentication solution for DELL
+        version: 1.0.0
+        status: Active
+        maintainers:
+        - name: "EO Framework\u2122 Dell Solutions Team"
+          email: dell-solutions@eoframework.com
+          role: Infrastructure Solutions Architect
+        tags:
+        - safeid
+        - authentication
+        - dell
+        - cyber-security
+        requirements:
+          prerequisites:
+          - DELL Account
+          - Administrative Access
+          tools:
+          - Python 3.8+
+          - Ansible
+          skills:
+          - DELL Platform
+          - Solution Architecture
+          - Network Infrastructure
+        solution_path: ../../solutions/dell/cyber-security/safeid-authentication/
+        title: Safeid Authentication
+  ai:
+    solutions:
+      precision-ai-workstation:
+        provider: DELL
+        category: ai
+        solution_name: Precision Ai Workstation
+        description: Precision Ai Workstation solution for DELL
+        version: 1.0.0
+        status: Active
+        maintainers:
+        - name: "EO Framework\u2122 Dell Solutions Team"
+          email: dell-solutions@eoframework.com
+          role: Infrastructure Solutions Architect
+        tags:
+        - workstation
+        - ai
+        - precision
+        - dell
+        requirements:
+          prerequisites:
+          - DELL Account
+          - Administrative Access
+          tools:
+          - Python 3.8+
+          - Ansible
+          skills:
+          - DELL Platform
+          - Solution Architecture
+          - Network Infrastructure
+        solution_path: ../../solutions/dell/ai/precision-ai-workstation/
+        title: Precision Ai Workstation
+  devops:
+    solutions:
+      poweredge-ci-infrastructure:
+        provider: DELL
+        category: devops
+        solution_name: Poweredge Ci Infrastructure
+        description: Poweredge Ci Infrastructure solution for DELL
+        version: 1.0.0
+        status: Active
+        maintainers:
+        - name: "EO Framework\u2122 Dell Solutions Team"
+          email: dell-solutions@eoframework.com
+          role: Infrastructure Solutions Architect
+        tags:
+        - dell
+        - poweredge
+        - devops
+        - infrastructure
+        requirements:
+          prerequisites:
+          - DELL Account
+          - Administrative Access
+          tools:
+          - Python 3.8+
+          - Ansible
+          skills:
+          - DELL Platform
+          - Solution Architecture
+          - Network Infrastructure
+        solution_path: ../../solutions/dell/devops/poweredge-ci-infrastructure/
+        title: Poweredge Ci Infrastructure
