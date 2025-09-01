@@ -1,12 +1,12 @@
 version: '2.0'
 category: modern-workspace
-generated_at: '2025-09-01T02:47:29.827955'
+generated_at: '2025-09-01T05:04:38.759638'
 catalog_type: category
 metadata:
   category_name: Modern Workspace
   description: Digital workplace and collaboration solutions
   total_solutions: 4
-  last_updated: '2025-09-01T02:47:29.827962'
+  last_updated: '2025-09-01T05:04:38.759645'
   auto_generated: true
 providers:
   nvidia:

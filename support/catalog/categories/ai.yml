@@ -1,12 +1,12 @@
 version: '2.0'
 category: ai
-generated_at: '2025-09-01T02:47:29.825098'
+generated_at: '2025-09-01T05:04:38.756790'
 catalog_type: category
 metadata:
   category_name: Artificial Intelligence
   description: Artificial Intelligence and Machine Learning solutions
   total_solutions: 5
-  last_updated: '2025-09-01T02:47:29.825105'
+  last_updated: '2025-09-01T05:04:38.756796'
   auto_generated: true
 providers:
   nvidia:
@@ -22,7 +22,7 @@ providers:
   dell:
     solutions:
     - name: precision-ai-workstation
-      title: Precision AI Workstation
+      title: Precision Ai Workstation
       provider_catalog: ../providers/dell.yml
       solution_path: ../../solutions/dell/ai/precision-ai-workstation/
   azure:

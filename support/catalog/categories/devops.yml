@@ -1,12 +1,12 @@
 version: '2.0'
 category: devops
-generated_at: '2025-09-01T02:47:29.822122'
+generated_at: '2025-09-01T05:04:38.753877'
 catalog_type: category
 metadata:
   category_name: DevOps & Automation
   description: DevOps automation and CI/CD solutions
   total_solutions: 6
-  last_updated: '2025-09-01T02:47:29.822128'
+  last_updated: '2025-09-01T05:04:38.753883'
   auto_generated: true
 providers:
   hashicorp:

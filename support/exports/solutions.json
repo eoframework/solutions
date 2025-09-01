@@ -1,5 +1,5 @@
 {
-  "generated_at": "2025-09-01T02:47:30.138396",
+  "generated_at": "2025-09-01T05:04:39.102694",
   "total_solutions": 35,
   "statistics": {
     "total_solutions": 35,
@@ -22,7 +22,7 @@
       "cloud": 9,
       "modern-workspace": 4,
       "network": 4,
-      "ai": 6
+      "AI": 6
     },
     "by_complexity": {
       "unknown": 35
@@ -490,7 +490,7 @@
     {
       "id": "cisco-ai-network-analytics",
       "provider": "CISCO",
-      "category": "ai",
+      "category": "AI",
       "solution_name": "Network Analytics",
       "description": "Network Analytics solution for CISCO",
       "version": "1.0.0",
@@ -569,7 +569,7 @@
       "provider": "AWS",
       "category": "cloud",
       "solution_name": "Disaster Recovery Web Application",
-      "description": "Disaster Recovery Web Application solution for AWS",
+      "description": "Keep your business running when disaster strikes with bulletproof recovery automation",
       "version": "1.0.0",
       "status": "Active",
       "maintainers": [
@@ -610,7 +610,7 @@
       "provider": "AWS",
       "category": "cloud",
       "solution_name": "Onpremise To Cloud Migration",
-      "description": "Onpremise To Cloud Migration solution for AWS",
+      "description": "Escape legacy limitations and soar into the cloud with seamless enterprise migration",
       "version": "1.0.0",
       "status": "Active",
       "maintainers": [
@@ -648,9 +648,9 @@
     {
       "id": "aws-ai-intelligent-document-processing",
       "provider": "AWS",
-      "category": "ai",
+      "category": "AI",
       "solution_name": "Intelligent Document Processing",
-      "description": "Intelligent Document Processing solution for AWS",
+      "description": "Transform paper chaos into digital insights with AI-powered document extraction and analysis",
       "version": "1.0.0",
       "status": "Active",
       "maintainers": [
@@ -769,7 +769,7 @@
     {
       "id": "nvidia-ai-gpu-compute-cluster",
       "provider": "NVIDIA",
-      "category": "ai",
+      "category": "AI",
       "solution_name": "Gpu Compute Cluster",
       "description": "Gpu Compute Cluster solution for NVIDIA",
       "version": "1.0.0",
@@ -809,7 +809,7 @@
     {
       "id": "nvidia-ai-dgx-superpod",
       "provider": "NVIDIA",
-      "category": "ai",
+      "category": "AI",
       "solution_name": "Dgx Superpod",
       "description": "Dgx Superpod solution for NVIDIA",
       "version": "1.0.0",
@@ -1043,7 +1043,7 @@
     {
       "id": "dell-ai-precision-ai-workstation",
       "provider": "DELL",
-      "category": "ai",
+      "category": "AI",
       "solution_name": "Precision Ai Workstation",
       "description": "Precision Ai Workstation solution for DELL",
       "version": "1.0.0",
@@ -1324,7 +1324,7 @@
     {
       "id": "azure-ai-document-intelligence",
       "provider": "AZURE",
-      "category": "ai",
+      "category": "AI",
       "solution_name": "Document Intelligence",
       "description": "Document Intelligence solution for AZURE",
       "version": "1.0.0",
