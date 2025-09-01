@@ -1,45 +1,13 @@
 version: '2.0'
 provider: azure
-generated_at: '2025-09-01T00:41:04.783024'
+generated_at: '2025-09-01T05:44:36.215553'
 catalog_type: provider
 metadata:
   provider_name: Microsoft Azure
   total_solutions: 6
-  last_updated: '2025-09-01T00:41:04.783071'
+  last_updated: '2025-09-01T05:44:36.215563'
   auto_generated: true
 categories:
-  ai:
-    solutions:
-      document-intelligence:
-        provider: AZURE
-        category: ai
-        solution_name: Document Intelligence
-        description: Document Intelligence solution for AZURE
-        version: 1.0.0
-        status: Active
-        maintainers:
-        - name: "EO Framework\u2122 Azure Solutions Team"
-          email: azure-solutions@eoframework.com
-          role: Cloud Solutions Architect
-        tags:
-        - azure
-        - ai
-        - intelligence
-        - document
-        requirements:
-          prerequisites:
-          - AZURE Account
-          - Administrative Access
-          tools:
-          - Python 3.8+
-          - Azure CLI
-          - PowerShell
-          skills:
-          - AZURE Platform
-          - Solution Architecture
-          - Azure Services
-        solution_path: ../../solutions/azure/ai/document-intelligence/
-        title: Document Intelligence
   cloud:
     solutions:
       enterprise-landing-zone:
@@ -73,102 +41,6 @@ categories:
           - Azure Services
         solution_path: ../../solutions/azure/cloud/enterprise-landing-zone/
         title: Enterprise Landing Zone
-  cyber-security:
-    solutions:
-      sentinel-siem:
-        provider: AZURE
-        category: cyber-security
-        solution_name: Sentinel Siem
-        description: Sentinel Siem solution for AZURE
-        version: 1.0.0
-        status: Active
-        maintainers:
-        - name: "EO Framework\u2122 Azure Solutions Team"
-          email: azure-solutions@eoframework.com
-          role: Cloud Solutions Architect
-        tags:
-        - azure
-        - sentinel
-        - siem
-        - cyber-security
-        requirements:
-          prerequisites:
-          - AZURE Account
-          - Administrative Access
-          tools:
-          - Python 3.8+
-          - Azure CLI
-          - PowerShell
-          skills:
-          - AZURE Platform
-          - Solution Architecture
-          - Azure Services
-        solution_path: ../../solutions/azure/cyber-security/sentinel-siem/
-        title: Sentinel Siem
-  devops:
-    solutions:
-      enterprise-platform:
-        provider: AZURE
-        category: devops
-        solution_name: Enterprise Platform
-        description: Enterprise Platform solution for AZURE
-        version: 1.0.0
-        status: Active
-        maintainers:
-        - name: "EO Framework\u2122 Azure Solutions Team"
-          email: azure-solutions@eoframework.com
-          role: Cloud Solutions Architect
-        tags:
-        - azure
-        - enterprise
-        - platform
-        - devops
-        requirements:
-          prerequisites:
-          - AZURE Account
-          - Administrative Access
-          tools:
-          - Python 3.8+
-          - Azure CLI
-          - PowerShell
-          skills:
-          - AZURE Platform
-          - Solution Architecture
-          - Azure Services
-        solution_path: ../../solutions/azure/devops/enterprise-platform/
-        title: Enterprise Platform
-  modern-workspace:
-    solutions:
-      virtual-desktop:
-        provider: AZURE
-        category: modern-workspace
-        solution_name: Virtual Desktop
-        description: Virtual Desktop solution for AZURE
-        version: 1.0.0
-        status: Active
-        maintainers:
-        - name: "EO Framework\u2122 Azure Solutions Team"
-          email: azure-solutions@eoframework.com
-          role: Cloud Solutions Architect
-        tags:
-        - azure
-        - modern-workspace
-        - virtual
-        - desktop
-        requirements:
-          prerequisites:
-          - AZURE Account
-          - Administrative Access
-          tools:
-          - Python 3.8+
-          - Azure CLI
-          - PowerShell
-          skills:
-          - AZURE Platform
-          - Solution Architecture
-          - Azure Services
-        solution_path: ../../solutions/azure/modern-workspace/virtual-desktop/
-        title: Virtual Desktop
   network:
     solutions:
       virtual-wan-global:
@@ -201,3 +73,131 @@ categories:
           - Azure Services
         solution_path: ../../solutions/azure/network/virtual-wan-global/
         title: Virtual Wan Global
+  cyber-security:
+    solutions:
+      sentinel-siem:
+        provider: AZURE
+        category: cyber-security
+        solution_name: Sentinel Siem
+        description: Sentinel Siem solution for AZURE
+        version: 1.0.0
+        status: Active
+        maintainers:
+        - name: "EO Framework\u2122 Azure Solutions Team"
+          email: azure-solutions@eoframework.com
+          role: Cloud Solutions Architect
+        tags:
+        - azure
+        - sentinel
+        - siem
+        - cyber-security
+        requirements:
+          prerequisites:
+          - AZURE Account
+          - Administrative Access
+          tools:
+          - Python 3.8+
+          - Azure CLI
+          - PowerShell
+          skills:
+          - AZURE Platform
+          - Solution Architecture
+          - Azure Services
+        solution_path: ../../solutions/azure/cyber-security/sentinel-siem/
+        title: Sentinel Siem
+  ai:
+    solutions:
+      document-intelligence:
+        provider: AZURE
+        category: ai
+        solution_name: Document Intelligence
+        description: Document Intelligence solution for AZURE
+        version: 1.0.0
+        status: Active
+        maintainers:
+        - name: "EO Framework\u2122 Azure Solutions Team"
+          email: azure-solutions@eoframework.com
+          role: Cloud Solutions Architect
+        tags:
+        - azure
+        - ai
+        - intelligence
+        - document
+        requirements:
+          prerequisites:
+          - AZURE Account
+          - Administrative Access
+          tools:
+          - Python 3.8+
+          - Azure CLI
+          - PowerShell
+          skills:
+          - AZURE Platform
+          - Solution Architecture
+          - Azure Services
+        solution_path: ../../solutions/azure/ai/document-intelligence/
+        title: Document Intelligence
+  modern-workspace:
+    solutions:
+      virtual-desktop:
+        provider: AZURE
+        category: modern-workspace
+        solution_name: Virtual Desktop
+        description: Virtual Desktop solution for AZURE
+        version: 1.0.0
+        status: Active
+        maintainers:
+        - name: "EO Framework\u2122 Azure Solutions Team"
+          email: azure-solutions@eoframework.com
+          role: Cloud Solutions Architect
+        tags:
+        - azure
+        - modern-workspace
+        - virtual
+        - desktop
+        requirements:
+          prerequisites:
+          - AZURE Account
+          - Administrative Access
+          tools:
+          - Python 3.8+
+          - Azure CLI
+          - PowerShell
+          skills:
+          - AZURE Platform
+          - Solution Architecture
+          - Azure Services
+        solution_path: ../../solutions/azure/modern-workspace/virtual-desktop/
+        title: Virtual Desktop
+  devops:
+    solutions:
+      enterprise-platform:
+        provider: AZURE
+        category: devops
+        solution_name: Enterprise Platform
+        description: Enterprise Platform solution for AZURE
+        version: 1.0.0
+        status: Active
+        maintainers:
+        - name: "EO Framework\u2122 Azure Solutions Team"
+          email: azure-solutions@eoframework.com
+          role: Cloud Solutions Architect
+        tags:
+        - azure
+        - enterprise
+        - platform
+        - devops
+        requirements:
+          prerequisites:
+          - AZURE Account
+          - Administrative Access
+          tools:
+          - Python 3.8+
+          - Azure CLI
+          - PowerShell
+          skills:
+          - AZURE Platform
+          - Solution Architecture
+          - Azure Services
+        solution_path: ../../solutions/azure/devops/enterprise-platform/
+        title: Enterprise Platform
