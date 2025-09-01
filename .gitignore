@@ -1,6 +1,9 @@
-# Generated catalog, export, and report files
-support/exports/
-support/catalog/
+# Generated catalog and export files (keep directories, ignore content)
+support/catalog/*.yml
+support/catalog/**/*.yml
+support/catalog/**/*.json
+support/exports/*.csv
+support/exports/*.json
 support/reports/validation-report.json
 
 # IDE and editor files

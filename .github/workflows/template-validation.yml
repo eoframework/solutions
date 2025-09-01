@@ -43,7 +43,6 @@ jobs:
       - name: Generate catalog and CSV
         if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         run: |
-          mkdir -p support/catalog support/exports support/reports
           python3 support/tools/generate-catalogs.py
           python3 support/tools/process-catalogs.py
           python3 support/tools/validate-catalogs.py
@@ -54,7 +53,7 @@ jobs:
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
-          git add -f support/catalog/ support/exports/ support/reports/
+          git add support/catalog/ support/exports/ support/reports/
           git diff --staged --quiet || git commit -m "Update distributed catalog system [skip ci]"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
