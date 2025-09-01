@@ -1,12 +1,12 @@
 version: '2.0'
 category: ai
-generated_at: '2025-09-01T16:55:13.625227'
+generated_at: '2025-09-01T17:31:27.173192'
 catalog_type: category
 metadata:
   category_name: Artificial Intelligence
   description: Artificial Intelligence and Machine Learning solutions
   total_solutions: 5
-  last_updated: '2025-09-01T16:55:13.625237'
+  last_updated: '2025-09-01T17:31:27.173199'
   auto_generated: true
 providers:
   nvidia:
