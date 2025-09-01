@@ -1,7 +1,7 @@
 provider: CISCO
 category: cyber-security
 solution_name: Secure Access
-description: Secure Access solution for CISCO
+description: Zero-trust network access for enhanced security
 version: 1.0.0
 status: Active
 maintainers:

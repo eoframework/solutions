@@ -1,7 +1,7 @@
 provider: CISCO
 category: ai
 solution_name: Network Analytics
-description: Network Analytics solution for CISCO
+description: AI-driven network insights for optimized performance
 version: 1.0.0
 status: Active
 maintainers:

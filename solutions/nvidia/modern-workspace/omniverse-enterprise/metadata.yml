@@ -1,7 +1,7 @@
 provider: NVIDIA
 category: modern-workspace
 solution_name: Omniverse Enterprise
-description: Omniverse Enterprise solution for NVIDIA
+description: Real-time collaboration platform for 3D workflows
 version: 1.0.0
 status: Active
 maintainers:

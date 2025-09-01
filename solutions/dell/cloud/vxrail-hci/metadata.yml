@@ -1,7 +1,7 @@
 provider: DELL
 category: cloud
 solution_name: Vxrail Hci
-description: Vxrail Hci solution for DELL
+description: Hyperconverged infrastructure for simplified IT
 version: 1.0.0
 status: Active
 maintainers:

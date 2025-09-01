@@ -1,7 +1,7 @@
 provider: CISCO
 category: network
 solution_name: Sd Wan Enterprise
-description: Sd Wan Enterprise solution for CISCO
+description: Enterprise SD-WAN for optimized branch connectivity
 version: 1.0.0
 status: Active
 maintainers:

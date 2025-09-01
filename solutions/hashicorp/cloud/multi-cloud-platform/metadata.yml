@@ -1,7 +1,7 @@
 provider: HashiCorp
 category: cloud
 solution_name: Multi Cloud Platform
-description: Multi Cloud Platform solution for HASHICORP
+description: Multi-cloud infrastructure management & automation
 version: 1.0.0
 status: Active
 maintainers:

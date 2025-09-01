@@ -1,7 +1,7 @@
 provider: AZURE
 category: devops
 solution_name: Enterprise Platform
-description: Enterprise Platform solution for AZURE
+description: DevOps platform for accelerated software delivery
 version: 1.0.0
 status: Active
 maintainers:

@@ -1,7 +1,7 @@
 provider: JUNIPER
 category: cyber-security
 solution_name: Srx Firewall Platform
-description: Srx Firewall Platform solution for JUNIPER
+description: Next-gen firewall for enterprise network security
 version: 1.0.0
 status: Active
 maintainers:

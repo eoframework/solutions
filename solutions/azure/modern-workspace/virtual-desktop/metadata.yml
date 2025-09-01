@@ -1,7 +1,7 @@
 provider: AZURE
 category: modern-workspace
 solution_name: Virtual Desktop
-description: Virtual Desktop solution for AZURE
+description: Secure remote desktop for modern workforce productivity
 version: 1.0.0
 status: Active
 maintainers:

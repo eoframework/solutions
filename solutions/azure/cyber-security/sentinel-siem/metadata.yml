@@ -1,7 +1,7 @@
 provider: AZURE
 category: cyber-security
 solution_name: Sentinel Siem
-description: Sentinel Siem solution for AZURE
+description: Cloud SIEM for advanced threat detection & response
 version: 1.0.0
 status: Active
 maintainers:

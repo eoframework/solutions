@@ -1,7 +1,7 @@
 provider: DELL
 category: network
 solution_name: Powerswitch Datacenter
-description: Powerswitch Datacenter solution for DELL
+description: High-performance datacenter switching fabric
 version: 1.0.0
 status: Active
 maintainers:

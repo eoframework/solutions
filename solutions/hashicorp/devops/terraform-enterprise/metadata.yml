@@ -1,7 +1,7 @@
 provider: HashiCorp
 category: devops
 solution_name: Terraform Enterprise
-description: Terraform Enterprise solution for HASHICORP
+description: Enterprise infrastructure as code platform
 version: 1.0.0
 status: Active
 maintainers:

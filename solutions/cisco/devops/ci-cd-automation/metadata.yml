@@ -1,7 +1,7 @@
 provider: CISCO
 category: devops
 solution_name: Ci Cd Automation
-description: Ci Cd Automation solution for CISCO
+description: Network-aware CI/CD for infrastructure automation
 version: 1.0.0
 status: Active
 maintainers:

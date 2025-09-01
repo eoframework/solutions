@@ -1,7 +1,7 @@
 provider: DELL
 category: cyber-security
 solution_name: Safeid Authentication
-description: Safeid Authentication solution for DELL
+description: Multi-factor authentication for secure access
 version: 1.0.0
 status: Active
 maintainers:

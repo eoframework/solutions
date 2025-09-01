@@ -1,7 +1,7 @@
 provider: IBM
 category: devops
 solution_name: Ansible Automation Platform
-description: Ansible Automation Platform solution for IBM
+description: IT automation platform for operational efficiency
 version: 1.0.0
 status: Active
 maintainers:

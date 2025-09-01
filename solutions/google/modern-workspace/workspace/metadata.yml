@@ -1,7 +1,7 @@
 provider: GOOGLE
 category: modern-workspace
 solution_name: Workspace
-description: Workspace solution for GOOGLE
+description: Collaborative digital workspace for modern teams
 version: 1.0.0
 status: Active
 maintainers:

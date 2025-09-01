@@ -1,7 +1,7 @@
 provider: GITHUB
 category: cyber-security
 solution_name: Advanced Security
-description: Advanced Security solution for GITHUB
+description: Advanced threat protection for code repositories
 version: 1.0.0
 status: Active
 maintainers:

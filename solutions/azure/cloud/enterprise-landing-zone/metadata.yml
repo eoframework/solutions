@@ -1,7 +1,7 @@
 provider: AZURE
 category: cloud
 solution_name: Enterprise Landing Zone
-description: Enterprise Landing Zone solution for AZURE
+description: Secure Azure foundation for enterprise workloads
 version: 1.0.0
 status: Active
 maintainers:

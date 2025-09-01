@@ -1,7 +1,7 @@
 provider: GITHUB
 category: devops
 solution_name: Actions Enterprise Cicd
-description: Actions Enterprise Cicd solution for GITHUB
+description: Enterprise CI/CD automation & workflow management
 version: 1.0.0
 status: Active
 maintainers:

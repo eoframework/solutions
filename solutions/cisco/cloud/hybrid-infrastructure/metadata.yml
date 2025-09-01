@@ -1,7 +1,7 @@
 provider: CISCO
 category: cloud
 solution_name: Hybrid Infrastructure
-description: Hybrid Infrastructure solution for CISCO
+description: Seamless hybrid cloud infrastructure integration
 version: 1.0.0
 status: Active
 maintainers:
