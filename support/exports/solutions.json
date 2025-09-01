@@ -1,5 +1,5 @@
 {
-  "generated_at": "2025-09-01T14:49:29.877346",
+  "generated_at": "2025-09-01T16:19:16.878793",
   "total_solutions": 35,
   "statistics": {
     "total_solutions": 35,
@@ -58,7 +58,7 @@
       "id": "github-cyber-security-advanced-security",
       "provider": "GITHUB",
       "category": "cyber-security",
-      "solution_name": "Advanced Security",
+      "solution_name": "CodeQL Security Scanner",
       "description": "Advanced threat protection for code repositories",
       "version": "1.0.0",
       "status": "Active",
@@ -92,13 +92,13 @@
         ]
       },
       "solution_path": "../../solutions/github/cyber-security/advanced-security/",
-      "title": "Advanced Security"
+      "title": "CodeQL Security Scanner"
     },
     {
       "id": "github-devops-actions-enterprise-cicd",
       "provider": "GITHUB",
       "category": "devops",
-      "solution_name": "Actions Enterprise Cicd",
+      "solution_name": "GitHub Workflow Automation",
       "description": "Enterprise CI/CD automation & workflow management",
       "version": "1.0.0",
       "status": "Active",
@@ -133,7 +133,7 @@
         ]
       },
       "solution_path": "../../solutions/github/devops/actions-enterprise-cicd/",
-      "title": "Actions Enterprise Cicd"
+      "title": "GitHub Workflow Automation"
     },
     {
       "id": "hashicorp-cloud-multi-cloud-platform",
@@ -375,7 +375,7 @@
       "id": "cisco-cloud-hybrid-infrastructure",
       "provider": "CISCO",
       "category": "cloud",
-      "solution_name": "Hybrid Infrastructure",
+      "solution_name": "HyperFlex Cloud Bridge",
       "description": "Seamless hybrid cloud infrastructure integration",
       "version": "1.0.0",
       "status": "Active",
@@ -408,7 +408,7 @@
         ]
       },
       "solution_path": "../../solutions/cisco/cloud/hybrid-infrastructure/",
-      "title": "Hybrid Infrastructure"
+      "title": "HyperFlex Cloud Bridge"
     },
     {
       "id": "cisco-network-sd-wan-enterprise",
@@ -452,7 +452,7 @@
       "id": "cisco-cyber-security-secure-access",
       "provider": "CISCO",
       "category": "cyber-security",
-      "solution_name": "Secure Access",
+      "solution_name": "Zero Trust Network Gateway",
       "description": "Zero-trust network access for enhanced security",
       "version": "1.0.0",
       "status": "Active",
@@ -485,13 +485,13 @@
         ]
       },
       "solution_path": "../../solutions/cisco/cyber-security/secure-access/",
-      "title": "Secure Access"
+      "title": "Zero Trust Network Gateway"
     },
     {
       "id": "cisco-ai-network-analytics",
       "provider": "CISCO",
       "category": "ai",
-      "solution_name": "Network Analytics",
+      "solution_name": "AI-Powered Network Insights",
       "description": "AI-driven network insights for optimized performance",
       "version": "1.0.0",
       "status": "Active",
@@ -524,13 +524,13 @@
         ]
       },
       "solution_path": "../../solutions/cisco/ai/network-analytics/",
-      "title": "Network Analytics"
+      "title": "AI-Powered Network Insights"
     },
     {
       "id": "cisco-devops-ci-cd-automation",
       "provider": "CISCO",
       "category": "devops",
-      "solution_name": "Ci Cd Automation",
+      "solution_name": "Network Infrastructure Pipeline",
       "description": "Network-aware CI/CD for infrastructure automation",
       "version": "1.0.0",
       "status": "Active",
@@ -562,7 +562,7 @@
         ]
       },
       "solution_path": "../../solutions/cisco/devops/ci-cd-automation/",
-      "title": "Ci Cd Automation"
+      "title": "Network Infrastructure Pipeline"
     },
     {
       "id": "aws-cloud-disaster-recovery-web-application",
@@ -1325,7 +1325,7 @@
       "id": "azure-ai-document-intelligence",
       "provider": "AZURE",
       "category": "ai",
-      "solution_name": "Document Intelligence",
+      "solution_name": "Cognitive Document Processor",
       "description": "Smart document processing with Azure cognitive AI",
       "version": "1.0.0",
       "status": "Active",
@@ -1359,7 +1359,7 @@
         ]
       },
       "solution_path": "../../solutions/azure/ai/document-intelligence/",
-      "title": "Document Intelligence"
+      "title": "Cognitive Document Processor"
     },
     {
       "id": "azure-modern-workspace-virtual-desktop",
@@ -1405,7 +1405,7 @@
       "id": "azure-devops-enterprise-platform",
       "provider": "AZURE",
       "category": "devops",
-      "solution_name": "Enterprise Platform",
+      "solution_name": "DevOps Pipeline Factory",
       "description": "DevOps platform for accelerated software delivery",
       "version": "1.0.0",
       "status": "Active",
@@ -1439,7 +1439,7 @@
         ]
       },
       "solution_path": "../../solutions/azure/devops/enterprise-platform/",
-      "title": "Enterprise Platform"
+      "title": "DevOps Pipeline Factory"
     }
   ]
 }

@@ -1,12 +1,12 @@
 version: '2.0'
 category: cloud
-generated_at: '2025-09-01T14:49:29.631589'
+generated_at: '2025-09-01T16:19:16.665173'
 catalog_type: category
 metadata:
   category_name: Cloud Infrastructure
   description: Cloud infrastructure and platform solutions
   total_solutions: 7
-  last_updated: '2025-09-01T14:49:29.631596'
+  last_updated: '2025-09-01T16:19:16.665180'
   auto_generated: true
 providers:
   hashicorp:
@@ -56,6 +56,6 @@ providers:
   cisco:
     solutions:
     - name: hybrid-infrastructure
-      title: Hybrid Infrastructure
+      title: HyperFlex Cloud Bridge
       provider_catalog: ../providers/cisco.yml
       solution_path: ../../solutions/cisco/cloud/hybrid-infrastructure/

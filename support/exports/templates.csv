@@ -4,8 +4,8 @@ Hashicorp,DevOps,Terraform Enterprise,Enterprise infrastructure as code platform
 Nvidia,AI,Gpu Compute Cluster,GPU cluster for parallel computing & AI workloads,https://github.com/eoframework/templates/tree/main/solutions/nvidia/ai/gpu-compute-cluster,Active
 Nvidia,AI,Dgx Superpod,High-performance computing for AI model training,https://github.com/eoframework/templates/tree/main/solutions/nvidia/ai/dgx-superpod,Active
 Nvidia,Modern Workspace,Omniverse Enterprise,Real-time collaboration platform for 3D workflows,https://github.com/eoframework/templates/tree/main/solutions/nvidia/modern-workspace/omniverse-enterprise,Active
-Github,Cyber Security,Advanced Security,Advanced threat protection for code repositories,https://github.com/eoframework/templates/tree/main/solutions/github/cyber-security/advanced-security,Active
-Github,DevOps,Actions Enterprise CI/CD,Enterprise CI/CD automation & workflow management,https://github.com/eoframework/templates/tree/main/solutions/github/devops/actions-enterprise-cicd,Active
+Github,Cyber Security,Codeql Security Scanner,Advanced threat protection for code repositories,https://github.com/eoframework/templates/tree/main/solutions/github/cyber-security/advanced-security,Active
+Github,DevOps,Github Workflow Automation,Enterprise CI/CD automation & workflow management,https://github.com/eoframework/templates/tree/main/solutions/github/devops/actions-enterprise-cicd,Active
 Dell,Cloud,Vxrail Hci,Hyperconverged infrastructure for simplified IT,https://github.com/eoframework/templates/tree/main/solutions/dell/cloud/vxrail-hci,Active
 Dell,Cloud,Vxrail Hyperconverged,Complete HCI platform for enterprise workloads,https://github.com/eoframework/templates/tree/main/solutions/dell/cloud/vxrail-hyperconverged,Active
 Dell,Network,Powerswitch Datacenter,High-performance datacenter switching fabric,https://github.com/eoframework/templates/tree/main/solutions/dell/network/powerswitch-datacenter,Active
@@ -21,16 +21,16 @@ Google,Modern Workspace,Workspace,Collaborative digital workspace for modern tea
 Azure,Cloud,Enterprise Landing Zone,Secure Azure foundation for enterprise workloads,https://github.com/eoframework/templates/tree/main/solutions/azure/cloud/enterprise-landing-zone,Active
 Azure,Network,Virtual WAN Global,Global WAN connectivity for distributed enterprises,https://github.com/eoframework/templates/tree/main/solutions/azure/network/virtual-wan-global,Active
 Azure,Cyber Security,Sentinel SIEM,Cloud SIEM for advanced threat detection & response,https://github.com/eoframework/templates/tree/main/solutions/azure/cyber-security/sentinel-siem,Active
-Azure,AI,Document Intelligence,Smart document processing with Azure cognitive AI,https://github.com/eoframework/templates/tree/main/solutions/azure/ai/document-intelligence,Active
+Azure,AI,Cognitive Document Processor,Smart document processing with Azure cognitive AI,https://github.com/eoframework/templates/tree/main/solutions/azure/ai/document-intelligence,Active
 Azure,Modern Workspace,Virtual Desktop,Secure remote desktop for modern workforce productivity,https://github.com/eoframework/templates/tree/main/solutions/azure/modern-workspace/virtual-desktop,Active
-Azure,DevOps,Enterprise Platform,DevOps platform for accelerated software delivery,https://github.com/eoframework/templates/tree/main/solutions/azure/devops/enterprise-platform,Active
+Azure,DevOps,DevOps Pipeline Factory,DevOps platform for accelerated software delivery,https://github.com/eoframework/templates/tree/main/solutions/azure/devops/enterprise-platform,Active
 AWS,Cloud,Disaster Recovery Web Application,Rapid business continuity with automated failover,https://github.com/eoframework/templates/tree/main/solutions/aws/cloud/disaster-recovery-web-application,Active
 AWS,Cloud,Onpremise To Cloud Migration,Seamless enterprise migration to modern cloud platform,https://github.com/eoframework/templates/tree/main/solutions/aws/cloud/onpremise-to-cloud-migration,Active
 AWS,AI,Intelligent Document Processing,Automate document insights with AI-driven extraction,https://github.com/eoframework/templates/tree/main/solutions/aws/ai/intelligent-document-processing,Active
 IBM,Cloud,Openshift Container Platform,Enterprise container platform for modern applications,https://github.com/eoframework/templates/tree/main/solutions/ibm/cloud/openshift-container-platform,Active
 IBM,DevOps,Ansible Automation Platform,IT automation platform for operational efficiency,https://github.com/eoframework/templates/tree/main/solutions/ibm/devops/ansible-automation-platform,Active
-Cisco,Cloud,Hybrid Infrastructure,Seamless hybrid cloud infrastructure integration,https://github.com/eoframework/templates/tree/main/solutions/cisco/cloud/hybrid-infrastructure,Active
+Cisco,Cloud,Hyperflex Cloud Bridge,Seamless hybrid cloud infrastructure integration,https://github.com/eoframework/templates/tree/main/solutions/cisco/cloud/hybrid-infrastructure,Active
 Cisco,Network,Sd WAN Enterprise,Enterprise SD-WAN for optimized branch connectivity,https://github.com/eoframework/templates/tree/main/solutions/cisco/network/sd-wan-enterprise,Active
-Cisco,Cyber Security,Secure Access,Zero-trust network access for enhanced security,https://github.com/eoframework/templates/tree/main/solutions/cisco/cyber-security/secure-access,Active
-Cisco,AI,Network Analytics,AI-driven network insights for optimized performance,https://github.com/eoframework/templates/tree/main/solutions/cisco/ai/network-analytics,Active
-Cisco,DevOps,CI Cd Automation,Network-aware CI/CD for infrastructure automation,https://github.com/eoframework/templates/tree/main/solutions/cisco/devops/ci-cd-automation,Active
+Cisco,Cyber Security,Zero Trust Network Gateway,Zero-trust network access for enhanced security,https://github.com/eoframework/templates/tree/main/solutions/cisco/cyber-security/secure-access,Active
+Cisco,AI,AI Powered Network Insights,AI-driven network insights for optimized performance,https://github.com/eoframework/templates/tree/main/solutions/cisco/ai/network-analytics,Active
+Cisco,DevOps,Network Infrastructure Pipeline,Network-aware CI/CD for infrastructure automation,https://github.com/eoframework/templates/tree/main/solutions/cisco/devops/ci-cd-automation,Active

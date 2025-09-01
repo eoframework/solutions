@@ -1,18 +1,18 @@
 version: '2.0'
 category: cyber-security
-generated_at: '2025-09-01T14:49:29.643294'
+generated_at: '2025-09-01T16:19:16.677188'
 catalog_type: category
 metadata:
   category_name: Cyber Security
   description: Security, compliance, and threat protection solutions
   total_solutions: 6
-  last_updated: '2025-09-01T14:49:29.643301'
+  last_updated: '2025-09-01T16:19:16.677195'
   auto_generated: true
 providers:
   github:
     solutions:
     - name: advanced-security
-      title: Advanced Security
+      title: CodeQL Security Scanner
       provider_catalog: ../providers/github.yml
       solution_path: ../../solutions/github/cyber-security/advanced-security/
   dell:
@@ -42,6 +42,6 @@ providers:
   cisco:
     solutions:
     - name: secure-access
-      title: Secure Access
+      title: Zero Trust Network Gateway
       provider_catalog: ../providers/cisco.yml
       solution_path: ../../solutions/cisco/cyber-security/secure-access/

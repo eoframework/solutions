@@ -1,12 +1,12 @@
 version: '2.0'
 category: network
-generated_at: '2025-09-01T14:49:29.646173'
+generated_at: '2025-09-01T16:19:16.680157'
 catalog_type: category
 metadata:
   category_name: Network Infrastructure
   description: Network infrastructure and connectivity solutions
   total_solutions: 4
-  last_updated: '2025-09-01T14:49:29.646180'
+  last_updated: '2025-09-01T16:19:16.680164'
   auto_generated: true
 providers:
   dell:

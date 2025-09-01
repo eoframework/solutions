@@ -1,11 +1,11 @@
 version: '2.0'
 provider: azure
-generated_at: '2025-09-01T14:49:29.606937'
+generated_at: '2025-09-01T16:19:16.637401'
 catalog_type: provider
 metadata:
   provider_name: Microsoft Azure
   total_solutions: 6
-  last_updated: '2025-09-01T14:49:29.606945'
+  last_updated: '2025-09-01T16:19:16.637409'
   auto_generated: true
 categories:
   cloud:
@@ -110,7 +110,7 @@ categories:
       document-intelligence:
         provider: AZURE
         category: ai
-        solution_name: Document Intelligence
+        solution_name: Cognitive Document Processor
         description: Smart document processing with Azure cognitive AI
         version: 1.0.0
         status: Active
@@ -136,7 +136,7 @@ categories:
           - Solution Architecture
           - Azure Services
         solution_path: ../../solutions/azure/ai/document-intelligence/
-        title: Document Intelligence
+        title: Cognitive Document Processor
   modern-workspace:
     solutions:
       virtual-desktop:
@@ -174,7 +174,7 @@ categories:
       enterprise-platform:
         provider: AZURE
         category: devops
-        solution_name: Enterprise Platform
+        solution_name: DevOps Pipeline Factory
         description: DevOps platform for accelerated software delivery
         version: 1.0.0
         status: Active
@@ -200,4 +200,4 @@ categories:
           - Solution Architecture
           - Azure Services
         solution_path: ../../solutions/azure/devops/enterprise-platform/
-        title: Enterprise Platform
+        title: DevOps Pipeline Factory

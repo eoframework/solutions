@@ -1,12 +1,12 @@
 version: '2.0'
 category: ai
-generated_at: '2025-09-01T14:49:29.638306'
+generated_at: '2025-09-01T16:19:16.672038'
 catalog_type: category
 metadata:
   category_name: Artificial Intelligence
   description: Artificial Intelligence and Machine Learning solutions
   total_solutions: 5
-  last_updated: '2025-09-01T14:49:29.638312'
+  last_updated: '2025-09-01T16:19:16.672045'
   auto_generated: true
 providers:
   nvidia:
@@ -28,7 +28,7 @@ providers:
   azure:
     solutions:
     - name: document-intelligence
-      title: Document Intelligence
+      title: Cognitive Document Processor
       provider_catalog: ../providers/azure.yml
       solution_path: ../../solutions/azure/ai/document-intelligence/
   aws:
@@ -40,6 +40,6 @@ providers:
   cisco:
     solutions:
     - name: network-analytics
-      title: Network Analytics
+      title: AI-Powered Network Insights
       provider_catalog: ../providers/cisco.yml
       solution_path: ../../solutions/cisco/ai/network-analytics/

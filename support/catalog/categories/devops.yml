@@ -1,12 +1,12 @@
 version: '2.0'
 category: devops
-generated_at: '2025-09-01T14:49:29.635389'
+generated_at: '2025-09-01T16:19:16.669039'
 catalog_type: category
 metadata:
   category_name: DevOps & Automation
   description: DevOps automation and CI/CD solutions
   total_solutions: 6
-  last_updated: '2025-09-01T14:49:29.635396'
+  last_updated: '2025-09-01T16:19:16.669045'
   auto_generated: true
 providers:
   hashicorp:
@@ -18,7 +18,7 @@ providers:
   github:
     solutions:
     - name: actions-enterprise-cicd
-      title: Actions Enterprise Cicd
+      title: GitHub Workflow Automation
       provider_catalog: ../providers/github.yml
       solution_path: ../../solutions/github/devops/actions-enterprise-cicd/
   dell:
@@ -30,7 +30,7 @@ providers:
   azure:
     solutions:
     - name: enterprise-platform
-      title: Enterprise Platform
+      title: DevOps Pipeline Factory
       provider_catalog: ../providers/azure.yml
       solution_path: ../../solutions/azure/devops/enterprise-platform/
   ibm:
@@ -42,6 +42,6 @@ providers:
   cisco:
     solutions:
     - name: ci-cd-automation
-      title: Ci Cd Automation
+      title: Network Infrastructure Pipeline
       provider_catalog: ../providers/cisco.yml
       solution_path: ../../solutions/cisco/devops/ci-cd-automation/
