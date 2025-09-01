@@ -1,11 +1,11 @@
 version: '2.0'
 provider: aws
-generated_at: '2025-09-01T05:44:36.224389'
+generated_at: '2025-09-01T06:25:27.822613'
 catalog_type: provider
 metadata:
   provider_name: Amazon Web Services
   total_solutions: 3
-  last_updated: '2025-09-01T05:44:36.224397'
+  last_updated: '2025-09-01T06:25:27.822632'
   auto_generated: true
 categories:
   cloud:
@@ -14,8 +14,7 @@ categories:
         provider: AWS
         category: cloud
         solution_name: Disaster Recovery Web Application
-        description: Keep your business running when disaster strikes with bulletproof
-          recovery automation
+        description: Rapid business continuity with automated failover
         version: 1.0.0
         status: Active
         maintainers:
@@ -46,8 +45,7 @@ categories:
         provider: AWS
         category: cloud
         solution_name: Onpremise To Cloud Migration
-        description: Escape legacy limitations and soar into the cloud with seamless
-          enterprise migration
+        description: Seamless enterprise migration to modern cloud platform
         version: 1.0.0
         status: Active
         maintainers:
@@ -79,8 +77,7 @@ categories:
         provider: AWS
         category: ai
         solution_name: Intelligent Document Processing
-        description: Transform paper chaos into digital insights with AI-powered document
-          extraction and analysis
+        description: Automate document insights with AI-driven extraction
         version: 1.0.0
         status: Active
         maintainers:

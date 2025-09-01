@@ -1,5 +1,5 @@
 {
-  "generated_at": "2025-09-01T05:44:36.527797",
+  "generated_at": "2025-09-01T06:25:28.084045",
   "total_solutions": 35,
   "statistics": {
     "total_solutions": 35,
@@ -569,7 +569,7 @@
       "provider": "AWS",
       "category": "cloud",
       "solution_name": "Disaster Recovery Web Application",
-      "description": "Keep your business running when disaster strikes with bulletproof recovery automation",
+      "description": "Rapid business continuity with automated failover",
       "version": "1.0.0",
       "status": "Active",
       "maintainers": [
@@ -610,7 +610,7 @@
       "provider": "AWS",
       "category": "cloud",
       "solution_name": "Onpremise To Cloud Migration",
-      "description": "Escape legacy limitations and soar into the cloud with seamless enterprise migration",
+      "description": "Seamless enterprise migration to modern cloud platform",
       "version": "1.0.0",
       "status": "Active",
       "maintainers": [
@@ -650,7 +650,7 @@
       "provider": "AWS",
       "category": "ai",
       "solution_name": "Intelligent Document Processing",
-      "description": "Transform paper chaos into digital insights with AI-powered document extraction and analysis",
+      "description": "Automate document insights with AI-driven extraction",
       "version": "1.0.0",
       "status": "Active",
       "maintainers": [
