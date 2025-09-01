@@ -18,7 +18,25 @@ class TemplateValidator:
         self.repo_root = Path(__file__).parent.parent.parent
         self.errors = []
         self.warnings = []
+        self.authorized_providers = []
+        self.authorized_categories = []
+        self._load_authorized_lists()
         
+    def _load_authorized_lists(self):
+        """Load authorized providers and categories from catalog.yml"""
+        try:
+            catalog_path = self.repo_root / "support" / "catalog" / "catalog.yml"
+            if catalog_path.exists():
+                with open(catalog_path, 'r') as f:
+                    catalog = yaml.safe_load(f)
+                
+                self.authorized_providers = catalog.get('quick_stats', {}).get('providers_list', [])
+                self.authorized_categories = catalog.get('quick_stats', {}).get('categories_list', [])
+            else:
+                self.warnings.append("catalog.yml not found - skipping authorization validation")
+        except Exception as e:
+            self.warnings.append(f"Could not load authorization lists: {e}")
+    
     def validate_structure(self, template_path):
         """Validate required folder structure"""
         required_files = [
@@ -96,6 +114,18 @@ class TemplateValidator:
                     for field in required_maintainer_fields:
                         if field not in maintainer:
                             self.errors.append(f"maintainer[{i}] missing field: {field}")
+        
+        # Validate provider authorization
+        if 'provider' in metadata and self.authorized_providers:
+            provider_lower = metadata['provider'].lower()
+            if provider_lower not in self.authorized_providers:
+                self.errors.append(f"Unauthorized provider: '{metadata['provider']}'. Must be one of {self.authorized_providers}")
+        
+        # Validate category authorization  
+        if 'category' in metadata and self.authorized_categories:
+            category_lower = metadata['category'].lower()
+            if category_lower not in self.authorized_categories:
+                self.errors.append(f"Unauthorized category: '{metadata['category']}'. Must be one of {self.authorized_categories}")
     
     def validate_security(self, template_path):
         """Scan for potential security issues"""

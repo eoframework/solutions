@@ -17,7 +17,7 @@ def sync_to_csv():
     csv_data = []
     
     # CSV headers matching website format
-    headers = ['Provider', 'Category', 'Solution Name', 'Description', 'Pre Sales Templates', 'Delivery Templates', 'Status']
+    headers = ['Provider', 'Category', 'Solution Name', 'Description', 'Templates', 'Status']
     
     # Scan all templates
     solutions_path = repo_root / "solutions"
@@ -40,18 +40,16 @@ def sync_to_csv():
                                         with open(metadata_path, 'r') as f:
                                             metadata = yaml.safe_load(f)
                                         
-                                        # Build URLs for templates
+                                        # Build URLs for templates - combine into single Templates column
                                         base_url = "https://github.com/eoframework/templates/tree/main"
-                                        presales_url = f"{base_url}/solutions/{provider_name}/{category_name}/{solution_name}/presales"
-                                        delivery_url = f"{base_url}/solutions/{provider_name}/{category_name}/{solution_name}/delivery"
+                                        solution_url = f"{base_url}/solutions/{provider_name}/{category_name}/{solution_name}"
                                         
                                         csv_row = [
                                             metadata.get('provider', provider_name).title(),
                                             metadata.get('category', category_name).title().replace('-', ' '),
                                             metadata.get('solution_name', solution_name.title().replace('-', ' ')),
                                             metadata.get('description', ''),
-                                            presales_url,
-                                            delivery_url,
+                                            solution_url,
                                             metadata.get('status', 'Active')
                                         ]
                                         csv_data.append(csv_row)
