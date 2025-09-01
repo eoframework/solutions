@@ -11,10 +11,48 @@ import csv
 import yaml
 from pathlib import Path
 
+def load_display_names(repo_root):
+    """Load provider and category display names from catalog files"""
+    provider_names = {}
+    category_names = {}
+    
+    # Load provider display names
+    providers_path = repo_root / "support" / "catalog" / "providers"
+    if providers_path.exists():
+        for provider_file in providers_path.glob("*.yml"):
+            try:
+                with open(provider_file, 'r') as f:
+                    catalog = yaml.safe_load(f)
+                    provider_id = catalog.get('provider')
+                    provider_name = catalog.get('metadata', {}).get('provider_name')
+                    if provider_id and provider_name:
+                        provider_names[provider_id] = provider_name
+            except Exception as e:
+                print(f"Warning: Could not load provider catalog {provider_file}: {e}")
+    
+    # Load category display names
+    categories_path = repo_root / "support" / "catalog" / "categories"
+    if categories_path.exists():
+        for category_file in categories_path.glob("*.yml"):
+            try:
+                with open(category_file, 'r') as f:
+                    catalog = yaml.safe_load(f)
+                    category_id = catalog.get('category')
+                    category_name = catalog.get('metadata', {}).get('category_name')
+                    if category_id and category_name:
+                        category_names[category_id] = category_name
+            except Exception as e:
+                print(f"Warning: Could not load category catalog {category_file}: {e}")
+    
+    return provider_names, category_names
+
 def sync_to_csv():
     """Generate CSV file for website integration"""
     repo_root = Path(__file__).parent.parent.parent  # Go up to repository root
     csv_data = []
+    
+    # Load display names from catalog files
+    provider_names, category_names = load_display_names(repo_root)
     
     # CSV headers matching website format
     headers = ['Provider', 'Category', 'Solution Name', 'Description', 'Templates', 'Status']
@@ -44,9 +82,13 @@ def sync_to_csv():
                                         base_url = "https://github.com/eoframework/templates/tree/main"
                                         solution_url = f"{base_url}/solutions/{provider_name}/{category_name}/{solution_name}"
                                         
+                                        # Get display names, fall back to raw names if not found
+                                        provider_display = provider_names.get(provider_name, provider_name)
+                                        category_display = category_names.get(category_name, category_name)
+                                        
                                         csv_row = [
-                                            metadata.get('provider', provider_name),
-                                            metadata.get('category', category_name),
+                                            provider_display,
+                                            category_display,
                                             metadata.get('solution_name', solution_name),
                                             metadata.get('description', ''),
                                             solution_url,
