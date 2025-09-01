@@ -1,11 +1,11 @@
 version: '2.0'
 provider: microsoft
-generated_at: '2025-09-01T19:14:40.289038'
+generated_at: '2025-09-01T14:29:32.956049'
 catalog_type: provider
 metadata:
   provider_name: Microsoft
   total_solutions: 2
-  last_updated: '2025-09-01T19:14:40.289047'
+  last_updated: '2025-09-01T14:29:32.956076'
   auto_generated: true
 categories:
   cyber-security:
@@ -13,7 +13,7 @@ categories:
       cmmc-enclave:
         provider: microsoft
         category: cyber-security
-        solution_name: Cmmc Enclave
+        solution_name: CMMC Enclave
         description: CMMC-compliant secure enclave for defense contractors
         version: 1.0.0
         status: Active
@@ -39,7 +39,7 @@ categories:
           - Solution Architecture
           - Microsoft 365
         solution_path: ../../solutions/microsoft/cyber-security/cmmc-enclave/
-        title: Cmmc Enclave
+        title: CMMC Enclave
   modern-workspace:
     solutions:
       m365-deployment:

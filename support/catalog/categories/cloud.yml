@@ -1,20 +1,36 @@
 version: '2.0'
 category: cloud
-generated_at: '2025-09-01T19:14:40.321847'
+generated_at: '2025-09-01T14:29:32.982722'
 catalog_type: category
 metadata:
   category_name: Cloud Infrastructure
   description: Cloud infrastructure and platform solutions
   total_solutions: 7
-  last_updated: '2025-09-01T19:14:40.321856'
+  last_updated: '2025-09-01T14:29:32.982743'
   auto_generated: true
 providers:
-  hashicorp:
+  aws:
     solutions:
-    - name: multi-cloud-platform
-      title: Multi Cloud Platform
-      provider_catalog: ../providers/hashicorp.yml
-      solution_path: ../../solutions/hashicorp/cloud/multi-cloud-platform/
+    - name: disaster-recovery-web-application
+      title: Disaster Recovery Web Application
+      provider_catalog: ../providers/aws.yml
+      solution_path: ../../solutions/aws/cloud/disaster-recovery-web-application/
+    - name: onpremise-to-cloud-migration
+      title: Onpremise To Cloud Migration
+      provider_catalog: ../providers/aws.yml
+      solution_path: ../../solutions/aws/cloud/onpremise-to-cloud-migration/
+  azure:
+    solutions:
+    - name: enterprise-landing-zone
+      title: Enterprise Landing Zone
+      provider_catalog: ../providers/azure.yml
+      solution_path: ../../solutions/azure/cloud/enterprise-landing-zone/
+  cisco:
+    solutions:
+    - name: hybrid-infrastructure
+      title: HyperFlex Cloud Bridge
+      provider_catalog: ../providers/cisco.yml
+      solution_path: ../../solutions/cisco/cloud/hybrid-infrastructure/
   dell:
     solutions:
     - name: vxrail-hci
@@ -31,31 +47,15 @@ providers:
       title: Landing Zone
       provider_catalog: ../providers/google.yml
       solution_path: ../../solutions/google/cloud/landing-zone/
-  azure:
+  hashicorp:
     solutions:
-    - name: enterprise-landing-zone
-      title: Enterprise Landing Zone
-      provider_catalog: ../providers/azure.yml
-      solution_path: ../../solutions/azure/cloud/enterprise-landing-zone/
-  aws:
-    solutions:
-    - name: disaster-recovery-web-application
-      title: Disaster Recovery Web Application
-      provider_catalog: ../providers/aws.yml
-      solution_path: ../../solutions/aws/cloud/disaster-recovery-web-application/
-    - name: onpremise-to-cloud-migration
-      title: Onpremise To Cloud Migration
-      provider_catalog: ../providers/aws.yml
-      solution_path: ../../solutions/aws/cloud/onpremise-to-cloud-migration/
+    - name: multi-cloud-platform
+      title: Multi Cloud Platform
+      provider_catalog: ../providers/hashicorp.yml
+      solution_path: ../../solutions/hashicorp/cloud/multi-cloud-platform/
   ibm:
     solutions:
     - name: openshift-container-platform
       title: Openshift Container Platform
       provider_catalog: ../providers/ibm.yml
       solution_path: ../../solutions/ibm/cloud/openshift-container-platform/
-  cisco:
-    solutions:
-    - name: hybrid-infrastructure
-      title: HyperFlex Cloud Bridge
-      provider_catalog: ../providers/cisco.yml
-      solution_path: ../../solutions/cisco/cloud/hybrid-infrastructure/

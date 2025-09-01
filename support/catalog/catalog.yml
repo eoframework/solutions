@@ -1,69 +1,69 @@
 version: '2.0'
-generated_at: '2025-09-01T19:14:40.350392'
+generated_at: '2025-09-01T14:29:33.025321'
 catalog_type: master
 metadata:
   total_providers: 11
   total_categories: 6
   total_solutions: 35
-  last_updated: '2025-09-01T19:14:40.350398'
+  last_updated: '2025-09-01T14:29:33.025335'
   auto_generated: true
 provider_catalogs:
-  hashicorp: ./providers/hashicorp.yml
-  nvidia: ./providers/nvidia.yml
-  github: ./providers/github.yml
+  aws: ./providers/aws.yml
+  azure: ./providers/azure.yml
+  cisco: ./providers/cisco.yml
   dell: ./providers/dell.yml
+  github: ./providers/github.yml
+  google: ./providers/google.yml
+  hashicorp: ./providers/hashicorp.yml
+  ibm: ./providers/ibm.yml
   juniper: ./providers/juniper.yml
   microsoft: ./providers/microsoft.yml
-  google: ./providers/google.yml
-  azure: ./providers/azure.yml
-  aws: ./providers/aws.yml
-  ibm: ./providers/ibm.yml
-  cisco: ./providers/cisco.yml
+  nvidia: ./providers/nvidia.yml
 category_catalogs:
-  cloud: ./categories/cloud.yml
-  devops: ./categories/devops.yml
   ai: ./categories/ai.yml
-  modern-workspace: ./categories/modern-workspace.yml
+  cloud: ./categories/cloud.yml
   cyber-security: ./categories/cyber-security.yml
+  devops: ./categories/devops.yml
+  modern-workspace: ./categories/modern-workspace.yml
   network: ./categories/network.yml
 quick_stats:
   providers_list:
-  - hashicorp
-  - nvidia
-  - github
+  - aws
+  - azure
+  - cisco
   - dell
+  - github
+  - google
+  - hashicorp
+  - ibm
   - juniper
   - microsoft
-  - google
-  - azure
-  - aws
-  - ibm
-  - cisco
+  - nvidia
   categories_list:
-  - cloud
-  - devops
   - ai
-  - modern-workspace
+  - cloud
   - cyber-security
+  - devops
+  - modern-workspace
   - network
   provider_solution_counts:
-    hashicorp: 2
-    nvidia: 3
-    github: 2
+    aws: 3
+    azure: 6
+    cisco: 5
     dell: 6
+    github: 2
+    google: 2
+    hashicorp: 2
+    ibm: 2
     juniper: 2
     microsoft: 2
-    google: 2
-    azure: 6
-    aws: 3
-    ibm: 2
-    cisco: 5
+    nvidia: 3
   category_solution_counts:
-    cloud: 9
-    devops: 6
     ai: 6
-    modern-workspace: 4
+    cloud: 9
     cyber-security: 6
+    devops: 6
+    modern-workspace: 4
     network: 4
   complexity_distribution:
     basic: 0
