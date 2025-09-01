@@ -1,36 +1,36 @@
 Provider,Category,Solution Name,Description,Templates,Status
-HashiCorp,Cloud,Multi Cloud Platform,Multi-cloud infrastructure management & automation,https://github.com/eoframework/templates/tree/main/solutions/hashicorp/cloud/multi-cloud-platform,Active
-HashiCorp,DevOps,Terraform Enterprise,Enterprise infrastructure as code platform,https://github.com/eoframework/templates/tree/main/solutions/hashicorp/devops/terraform-enterprise,Active
-NVIDIA,AI,GPU Compute Cluster,GPU cluster for parallel computing & AI workloads,https://github.com/eoframework/templates/tree/main/solutions/nvidia/ai/gpu-compute-cluster,Active
-NVIDIA,AI,DGX SuperPOD,High-performance computing for AI model training,https://github.com/eoframework/templates/tree/main/solutions/nvidia/ai/dgx-superpod,Active
-NVIDIA,Modern Workspace,Omniverse Enterprise,Real-time collaboration platform for 3D workflows,https://github.com/eoframework/templates/tree/main/solutions/nvidia/modern-workspace/omniverse-enterprise,Active
-GITHUB,Cyber Security,CodeQL Security Scanner,Advanced threat protection for code repositories,https://github.com/eoframework/templates/tree/main/solutions/github/cyber-security/advanced-security,Active
-GITHUB,DevOps,GitHub Workflow Automation,Enterprise CI/CD automation & workflow management,https://github.com/eoframework/templates/tree/main/solutions/github/devops/actions-enterprise-cicd,Active
-DELL,Cloud,VxRail HCI,Hyperconverged infrastructure for simplified IT,https://github.com/eoframework/templates/tree/main/solutions/dell/cloud/vxrail-hci,Active
-DELL,Cloud,VxRail Hyperconverged,Complete HCI platform for enterprise workloads,https://github.com/eoframework/templates/tree/main/solutions/dell/cloud/vxrail-hyperconverged,Active
-DELL,Network,Powerswitch Datacenter,High-performance datacenter switching fabric,https://github.com/eoframework/templates/tree/main/solutions/dell/network/powerswitch-datacenter,Active
-DELL,Cyber Security,Safeid Authentication,Multi-factor authentication for secure access,https://github.com/eoframework/templates/tree/main/solutions/dell/cyber-security/safeid-authentication,Active
-DELL,AI,Precision AI Workstation,High-performance workstations for AI development,https://github.com/eoframework/templates/tree/main/solutions/dell/ai/precision-ai-workstation,Active
-DELL,DevOps,Poweredge Ci Infrastructure,Enterprise CI infrastructure on PowerEdge servers,https://github.com/eoframework/templates/tree/main/solutions/dell/devops/poweredge-ci-infrastructure,Active
-JUNIPER,Network,Mist AI Network,AI-driven network operations & user experiences,https://github.com/eoframework/templates/tree/main/solutions/juniper/network/mist-ai-network,Active
-JUNIPER,Cyber Security,SRX Firewall Platform,Next-gen firewall for enterprise network security,https://github.com/eoframework/templates/tree/main/solutions/juniper/cyber-security/srx-firewall-platform,Active
-MICROSOFT,Cyber Security,Cmmc Enclave,CMMC-compliant secure enclave for defense contractors,https://github.com/eoframework/templates/tree/main/solutions/microsoft/cyber-security/cmmc-enclave,Active
-MICROSOFT,Modern Workspace,Microsoft 365 Deployment,Complete Microsoft 365 enterprise deployment,https://github.com/eoframework/templates/tree/main/solutions/microsoft/modern-workspace/m365-deployment,Active
-GOOGLE,Cloud,Landing Zone,Secure cloud foundation with governance & controls,https://github.com/eoframework/templates/tree/main/solutions/google/cloud/landing-zone,Active
-GOOGLE,Modern Workspace,Workspace,Collaborative digital workspace for modern teams,https://github.com/eoframework/templates/tree/main/solutions/google/modern-workspace/workspace,Active
-AZURE,Cloud,Enterprise Landing Zone,Secure Azure foundation for enterprise workloads,https://github.com/eoframework/templates/tree/main/solutions/azure/cloud/enterprise-landing-zone,Active
-AZURE,Network,Virtual Wan Global,Global WAN connectivity for distributed enterprises,https://github.com/eoframework/templates/tree/main/solutions/azure/network/virtual-wan-global,Active
-AZURE,Cyber Security,Sentinel SIEM,Cloud SIEM for advanced threat detection & response,https://github.com/eoframework/templates/tree/main/solutions/azure/cyber-security/sentinel-siem,Active
-AZURE,AI,Cognitive Document Processor,Smart document processing with Azure cognitive AI,https://github.com/eoframework/templates/tree/main/solutions/azure/ai/document-intelligence,Active
-AZURE,Modern Workspace,Virtual Desktop,Secure remote desktop for modern workforce productivity,https://github.com/eoframework/templates/tree/main/solutions/azure/modern-workspace/virtual-desktop,Active
-AZURE,DevOps,DevOps Pipeline Factory,DevOps platform for accelerated software delivery,https://github.com/eoframework/templates/tree/main/solutions/azure/devops/enterprise-platform,Active
-AWS,Cloud,Disaster Recovery Web Application,Rapid business continuity with automated failover,https://github.com/eoframework/templates/tree/main/solutions/aws/cloud/disaster-recovery-web-application,Active
-AWS,Cloud,Onpremise To Cloud Migration,Seamless enterprise migration to modern cloud platform,https://github.com/eoframework/templates/tree/main/solutions/aws/cloud/onpremise-to-cloud-migration,Active
-AWS,AI,Intelligent Document Processing,Automate document insights with AI-driven extraction,https://github.com/eoframework/templates/tree/main/solutions/aws/ai/intelligent-document-processing,Active
-IBM,Cloud,Openshift Container Platform,Enterprise container platform for modern applications,https://github.com/eoframework/templates/tree/main/solutions/ibm/cloud/openshift-container-platform,Active
-IBM,DevOps,Ansible Automation Platform,IT automation platform for operational efficiency,https://github.com/eoframework/templates/tree/main/solutions/ibm/devops/ansible-automation-platform,Active
-CISCO,Cloud,HyperFlex Cloud Bridge,Seamless hybrid cloud infrastructure integration,https://github.com/eoframework/templates/tree/main/solutions/cisco/cloud/hybrid-infrastructure,Active
-CISCO,Network,SD-WAN Enterprise,Enterprise SD-WAN for optimized branch connectivity,https://github.com/eoframework/templates/tree/main/solutions/cisco/network/sd-wan-enterprise,Active
-CISCO,Cyber Security,Zero Trust Network Gateway,Zero-trust network access for enhanced security,https://github.com/eoframework/templates/tree/main/solutions/cisco/cyber-security/secure-access,Active
-CISCO,AI,AI-Powered Network Insights,AI-driven network insights for optimized performance,https://github.com/eoframework/templates/tree/main/solutions/cisco/ai/network-analytics,Active
-CISCO,DevOps,Network Infrastructure Pipeline,Network-aware CI/CD for infrastructure automation,https://github.com/eoframework/templates/tree/main/solutions/cisco/devops/ci-cd-automation,Active
+HashiCorp,cloud,Multi Cloud Platform,Multi-cloud infrastructure management & automation,https://github.com/eoframework/templates/tree/main/solutions/hashicorp/cloud/multi-cloud-platform,Active
+HashiCorp,devops,Terraform Enterprise,Enterprise infrastructure as code platform,https://github.com/eoframework/templates/tree/main/solutions/hashicorp/devops/terraform-enterprise,Active
+NVIDIA,ai,GPU Compute Cluster,GPU cluster for parallel computing & AI workloads,https://github.com/eoframework/templates/tree/main/solutions/nvidia/ai/gpu-compute-cluster,Active
+NVIDIA,ai,DGX SuperPOD,High-performance computing for AI model training,https://github.com/eoframework/templates/tree/main/solutions/nvidia/ai/dgx-superpod,Active
+NVIDIA,modern-workspace,Omniverse Enterprise,Real-time collaboration platform for 3D workflows,https://github.com/eoframework/templates/tree/main/solutions/nvidia/modern-workspace/omniverse-enterprise,Active
+GITHUB,cyber-security,CodeQL Security Scanner,Advanced threat protection for code repositories,https://github.com/eoframework/templates/tree/main/solutions/github/cyber-security/advanced-security,Active
+GITHUB,devops,GitHub Workflow Automation,Enterprise CI/CD automation & workflow management,https://github.com/eoframework/templates/tree/main/solutions/github/devops/actions-enterprise-cicd,Active
+DELL,cloud,VxRail HCI,Hyperconverged infrastructure for simplified IT,https://github.com/eoframework/templates/tree/main/solutions/dell/cloud/vxrail-hci,Active
+DELL,cloud,VxRail Hyperconverged,Complete HCI platform for enterprise workloads,https://github.com/eoframework/templates/tree/main/solutions/dell/cloud/vxrail-hyperconverged,Active
+DELL,network,Powerswitch Datacenter,High-performance datacenter switching fabric,https://github.com/eoframework/templates/tree/main/solutions/dell/network/powerswitch-datacenter,Active
+DELL,cyber-security,Safeid Authentication,Multi-factor authentication for secure access,https://github.com/eoframework/templates/tree/main/solutions/dell/cyber-security/safeid-authentication,Active
+DELL,ai,Precision AI Workstation,High-performance workstations for AI development,https://github.com/eoframework/templates/tree/main/solutions/dell/ai/precision-ai-workstation,Active
+DELL,devops,Poweredge Ci Infrastructure,Enterprise CI infrastructure on PowerEdge servers,https://github.com/eoframework/templates/tree/main/solutions/dell/devops/poweredge-ci-infrastructure,Active
+JUNIPER,network,Mist AI Network,AI-driven network operations & user experiences,https://github.com/eoframework/templates/tree/main/solutions/juniper/network/mist-ai-network,Active
+JUNIPER,cyber-security,SRX Firewall Platform,Next-gen firewall for enterprise network security,https://github.com/eoframework/templates/tree/main/solutions/juniper/cyber-security/srx-firewall-platform,Active
+MICROSOFT,cyber-security,Cmmc Enclave,CMMC-compliant secure enclave for defense contractors,https://github.com/eoframework/templates/tree/main/solutions/microsoft/cyber-security/cmmc-enclave,Active
+MICROSOFT,modern-workspace,Microsoft 365 Deployment,Complete Microsoft 365 enterprise deployment,https://github.com/eoframework/templates/tree/main/solutions/microsoft/modern-workspace/m365-deployment,Active
+GOOGLE,cloud,Landing Zone,Secure cloud foundation with governance & controls,https://github.com/eoframework/templates/tree/main/solutions/google/cloud/landing-zone,Active
+GOOGLE,modern-workspace,Workspace,Collaborative digital workspace for modern teams,https://github.com/eoframework/templates/tree/main/solutions/google/modern-workspace/workspace,Active
+AZURE,cloud,Enterprise Landing Zone,Secure Azure foundation for enterprise workloads,https://github.com/eoframework/templates/tree/main/solutions/azure/cloud/enterprise-landing-zone,Active
+AZURE,network,Virtual Wan Global,Global WAN connectivity for distributed enterprises,https://github.com/eoframework/templates/tree/main/solutions/azure/network/virtual-wan-global,Active
+AZURE,cyber-security,Sentinel SIEM,Cloud SIEM for advanced threat detection & response,https://github.com/eoframework/templates/tree/main/solutions/azure/cyber-security/sentinel-siem,Active
+AZURE,ai,Cognitive Document Processor,Smart document processing with Azure cognitive AI,https://github.com/eoframework/templates/tree/main/solutions/azure/ai/document-intelligence,Active
+AZURE,modern-workspace,Virtual Desktop,Secure remote desktop for modern workforce productivity,https://github.com/eoframework/templates/tree/main/solutions/azure/modern-workspace/virtual-desktop,Active
+AZURE,devops,DevOps Pipeline Factory,DevOps platform for accelerated software delivery,https://github.com/eoframework/templates/tree/main/solutions/azure/devops/enterprise-platform,Active
+AWS,cloud,Disaster Recovery Web Application,Rapid business continuity with automated failover,https://github.com/eoframework/templates/tree/main/solutions/aws/cloud/disaster-recovery-web-application,Active
+AWS,cloud,Onpremise To Cloud Migration,Seamless enterprise migration to modern cloud platform,https://github.com/eoframework/templates/tree/main/solutions/aws/cloud/onpremise-to-cloud-migration,Active
+AWS,ai,Intelligent Document Processing,Automate document insights with AI-driven extraction,https://github.com/eoframework/templates/tree/main/solutions/aws/ai/intelligent-document-processing,Active
+IBM,cloud,Openshift Container Platform,Enterprise container platform for modern applications,https://github.com/eoframework/templates/tree/main/solutions/ibm/cloud/openshift-container-platform,Active
+IBM,devops,Ansible Automation Platform,IT automation platform for operational efficiency,https://github.com/eoframework/templates/tree/main/solutions/ibm/devops/ansible-automation-platform,Active
+CISCO,cloud,HyperFlex Cloud Bridge,Seamless hybrid cloud infrastructure integration,https://github.com/eoframework/templates/tree/main/solutions/cisco/cloud/hybrid-infrastructure,Active
+CISCO,network,SD-WAN Enterprise,Enterprise SD-WAN for optimized branch connectivity,https://github.com/eoframework/templates/tree/main/solutions/cisco/network/sd-wan-enterprise,Active
+CISCO,cyber-security,Zero Trust Network Gateway,Zero-trust network access for enhanced security,https://github.com/eoframework/templates/tree/main/solutions/cisco/cyber-security/secure-access,Active
+CISCO,ai,AI-Powered Network Insights,AI-driven network insights for optimized performance,https://github.com/eoframework/templates/tree/main/solutions/cisco/ai/network-analytics,Active
+CISCO,devops,Network Infrastructure Pipeline,Network-aware CI/CD for infrastructure automation,https://github.com/eoframework/templates/tree/main/solutions/cisco/devops/ci-cd-automation,Active
