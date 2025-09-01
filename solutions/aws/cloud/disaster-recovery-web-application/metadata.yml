@@ -1,7 +1,7 @@
 provider: AWS
 category: cloud
 solution_name: Disaster Recovery Web Application
-description: Keep your business running when disaster strikes with bulletproof recovery automation
+description: Rapid business continuity with automated failover
 version: 1.0.0
 status: Active
 maintainers:

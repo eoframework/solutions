@@ -1,7 +1,7 @@
 provider: AWS
 category: cloud
 solution_name: Onpremise To Cloud Migration
-description: Escape legacy limitations and soar into the cloud with seamless enterprise migration
+description: Seamless enterprise migration to modern cloud platform
 version: 1.0.0
 status: Active
 maintainers:

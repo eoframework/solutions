@@ -1,7 +1,7 @@
 Provider,Category,Solution Name,Description,Templates,Status
-AWS,AI,Intelligent Document Processing,Transform paper chaos into digital insights with AI-powered document extraction and analysis,https://github.com/eoframework/templates/tree/main/solutions/aws/ai/intelligent-document-processing,Active
-AWS,Cloud,Disaster Recovery Web Application,Keep your business running when disaster strikes with bulletproof recovery automation,https://github.com/eoframework/templates/tree/main/solutions/aws/cloud/disaster-recovery-web-application,Active
-AWS,Cloud,Onpremise To Cloud Migration,Escape legacy limitations and soar into the cloud with seamless enterprise migration,https://github.com/eoframework/templates/tree/main/solutions/aws/cloud/onpremise-to-cloud-migration,Active
+AWS,AI,Intelligent Document Processing,Automate document insights with AI-driven extraction,https://github.com/eoframework/templates/tree/main/solutions/aws/ai/intelligent-document-processing,Active
+AWS,Cloud,Disaster Recovery Web Application,Rapid business continuity with automated failover,https://github.com/eoframework/templates/tree/main/solutions/aws/cloud/disaster-recovery-web-application,Active
+AWS,Cloud,Onpremise To Cloud Migration,Seamless enterprise migration to modern cloud platform,https://github.com/eoframework/templates/tree/main/solutions/aws/cloud/onpremise-to-cloud-migration,Active
 Azure,AI,Document Intelligence,Document Intelligence solution for AZURE,https://github.com/eoframework/templates/tree/main/solutions/azure/ai/document-intelligence,Active
 Azure,Cloud,Enterprise Landing Zone,Enterprise Landing Zone solution for AZURE,https://github.com/eoframework/templates/tree/main/solutions/azure/cloud/enterprise-landing-zone,Active
 Azure,Cyber Security,Sentinel SIEM,Sentinel Siem solution for AZURE,https://github.com/eoframework/templates/tree/main/solutions/azure/cyber-security/sentinel-siem,Active
