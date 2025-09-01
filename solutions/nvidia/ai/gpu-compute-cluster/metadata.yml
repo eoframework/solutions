@@ -1,5 +1,5 @@
 provider: NVIDIA
-category: ai
+category: AI
 solution_name: Gpu Compute Cluster
 description: Gpu Compute Cluster solution for NVIDIA
 version: 1.0.0

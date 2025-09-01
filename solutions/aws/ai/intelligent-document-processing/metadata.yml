@@ -1,5 +1,5 @@
 provider: AWS
-category: ai
+category: AI
 solution_name: Intelligent Document Processing
 description: Transform paper chaos into digital insights with AI-powered document extraction and analysis
 version: 1.0.0

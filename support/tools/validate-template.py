@@ -115,16 +115,16 @@ class TemplateValidator:
                         if field not in maintainer:
                             self.errors.append(f"maintainer[{i}] missing field: {field}")
         
-        # Validate provider authorization
+        # Validate provider authorization (case-insensitive for backward compatibility)
         if 'provider' in metadata and self.authorized_providers:
             provider_lower = metadata['provider'].lower()
-            if provider_lower not in self.authorized_providers:
+            authorized_lower = [prov.lower() for prov in self.authorized_providers]
+            if provider_lower not in authorized_lower:
                 self.errors.append(f"Unauthorized provider: '{metadata['provider']}'. Must be one of {self.authorized_providers}")
         
-        # Validate category authorization  
+        # Validate category authorization (strict case matching)
         if 'category' in metadata and self.authorized_categories:
-            category_lower = metadata['category'].lower()
-            if category_lower not in self.authorized_categories:
+            if metadata['category'] not in self.authorized_categories:
                 self.errors.append(f"Unauthorized category: '{metadata['category']}'. Must be one of {self.authorized_categories}")
     
     def validate_security(self, template_path):
