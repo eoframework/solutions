@@ -1,109 +1,17 @@
 version: '2.0'
 provider: cisco
-generated_at: '2025-09-01T17:31:27.159051'
+generated_at: '2025-09-01T14:08:02.524523'
 catalog_type: provider
 metadata:
   provider_name: Cisco Systems
   total_solutions: 5
-  last_updated: '2025-09-01T17:31:27.159060'
+  last_updated: '2025-09-01T14:08:02.524538'
   auto_generated: true
 categories:
-  cloud:
-    solutions:
-      hybrid-infrastructure:
-        provider: CISCO
-        category: cloud
-        solution_name: HyperFlex Cloud Bridge
-        description: Seamless hybrid cloud infrastructure integration
-        version: 1.0.0
-        status: Active
-        maintainers:
-        - name: "EO Framework\u2122 Cisco Solutions Team"
-          email: cisco-solutions@eoframework.com
-          role: Network Solutions Architect
-        tags:
-        - cloud
-        - infrastructure
-        - hybrid
-        - cisco
-        requirements:
-          prerequisites:
-          - CISCO Account
-          - Administrative Access
-          tools:
-          - Python 3.8+
-          - Ansible
-          skills:
-          - CISCO Platform
-          - Solution Architecture
-          - Network Infrastructure
-        solution_path: ../../solutions/cisco/cloud/hybrid-infrastructure/
-        title: HyperFlex Cloud Bridge
-  network:
-    solutions:
-      sd-wan-enterprise:
-        provider: CISCO
-        category: network
-        solution_name: SD-WAN Enterprise
-        description: Enterprise SD-WAN for optimized branch connectivity
-        version: 1.0.0
-        status: Active
-        maintainers:
-        - name: "EO Framework\u2122 Cisco Solutions Team"
-          email: cisco-solutions@eoframework.com
-          role: Network Solutions Architect
-        tags:
-        - network
-        - enterprise
-        - cisco
-        requirements:
-          prerequisites:
-          - CISCO Account
-          - Administrative Access
-          tools:
-          - Python 3.8+
-          - Ansible
-          skills:
-          - CISCO Platform
-          - Solution Architecture
-          - Network Infrastructure
-        solution_path: ../../solutions/cisco/network/sd-wan-enterprise/
-        title: SD-WAN Enterprise
-  cyber-security:
-    solutions:
-      secure-access:
-        provider: CISCO
-        category: cyber-security
-        solution_name: Zero Trust Network Gateway
-        description: Zero-trust network access for enhanced security
-        version: 1.0.0
-        status: Active
-        maintainers:
-        - name: "EO Framework\u2122 Cisco Solutions Team"
-          email: cisco-solutions@eoframework.com
-          role: Network Solutions Architect
-        tags:
-        - secure
-        - access
-        - cyber-security
-        - cisco
-        requirements:
-          prerequisites:
-          - CISCO Account
-          - Administrative Access
-          tools:
-          - Python 3.8+
-          - Ansible
-          skills:
-          - CISCO Platform
-          - Solution Architecture
-          - Network Infrastructure
-        solution_path: ../../solutions/cisco/cyber-security/secure-access/
-        title: Zero Trust Network Gateway
   ai:
     solutions:
       network-analytics:
-        provider: CISCO
+        provider: cisco
         category: ai
         solution_name: AI-Powered Network Insights
         description: AI-driven network insights for optimized performance
@@ -131,10 +39,72 @@ categories:
           - Network Infrastructure
         solution_path: ../../solutions/cisco/ai/network-analytics/
         title: AI-Powered Network Insights
+  cloud:
+    solutions:
+      hybrid-infrastructure:
+        provider: cisco
+        category: cloud
+        solution_name: HyperFlex Cloud Bridge
+        description: Seamless hybrid cloud infrastructure integration
+        version: 1.0.0
+        status: Active
+        maintainers:
+        - name: "EO Framework\u2122 Cisco Solutions Team"
+          email: cisco-solutions@eoframework.com
+          role: Network Solutions Architect
+        tags:
+        - cloud
+        - infrastructure
+        - hybrid
+        - cisco
+        requirements:
+          prerequisites:
+          - CISCO Account
+          - Administrative Access
+          tools:
+          - Python 3.8+
+          - Ansible
+          skills:
+          - CISCO Platform
+          - Solution Architecture
+          - Network Infrastructure
+        solution_path: ../../solutions/cisco/cloud/hybrid-infrastructure/
+        title: HyperFlex Cloud Bridge
+  cyber-security:
+    solutions:
+      secure-access:
+        provider: cisco
+        category: cyber-security
+        solution_name: Zero Trust Network Gateway
+        description: Zero-trust network access for enhanced security
+        version: 1.0.0
+        status: Active
+        maintainers:
+        - name: "EO Framework\u2122 Cisco Solutions Team"
+          email: cisco-solutions@eoframework.com
+          role: Network Solutions Architect
+        tags:
+        - secure
+        - access
+        - cyber-security
+        - cisco
+        requirements:
+          prerequisites:
+          - CISCO Account
+          - Administrative Access
+          tools:
+          - Python 3.8+
+          - Ansible
+          skills:
+          - CISCO Platform
+          - Solution Architecture
+          - Network Infrastructure
+        solution_path: ../../solutions/cisco/cyber-security/secure-access/
+        title: Zero Trust Network Gateway
   devops:
     solutions:
       ci-cd-automation:
-        provider: CISCO
+        provider: cisco
         category: devops
         solution_name: Network Infrastructure Pipeline
         description: Network-aware CI/CD for infrastructure automation
@@ -161,3 +131,33 @@ categories:
           - Network Infrastructure
         solution_path: ../../solutions/cisco/devops/ci-cd-automation/
         title: Network Infrastructure Pipeline
+  network:
+    solutions:
+      sd-wan-enterprise:
+        provider: cisco
+        category: network
+        solution_name: SD-WAN Enterprise
+        description: Enterprise SD-WAN for optimized branch connectivity
+        version: 1.0.0
+        status: Active
+        maintainers:
+        - name: "EO Framework\u2122 Cisco Solutions Team"
+          email: cisco-solutions@eoframework.com
+          role: Network Solutions Architect
+        tags:
+        - network
+        - enterprise
+        - cisco
+        requirements:
+          prerequisites:
+          - CISCO Account
+          - Administrative Access
+          tools:
+          - Python 3.8+
+          - Ansible
+          skills:
+          - CISCO Platform
+          - Solution Architecture
+          - Network Infrastructure
+        solution_path: ../../solutions/cisco/network/sd-wan-enterprise/
+        title: SD-WAN Enterprise

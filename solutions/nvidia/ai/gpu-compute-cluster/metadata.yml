@@ -1,4 +1,4 @@
-provider: NVIDIA
+provider: nvidia
 category: ai
 solution_name: GPU Compute Cluster
 description: GPU cluster for parallel computing & AI workloads

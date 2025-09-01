@@ -1,4 +1,4 @@
-provider: JUNIPER
+provider: juniper
 category: cyber-security
 solution_name: SRX Firewall Platform
 description: Next-gen firewall for enterprise network security

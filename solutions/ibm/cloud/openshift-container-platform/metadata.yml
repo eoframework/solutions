@@ -1,4 +1,4 @@
-provider: IBM
+provider: ibm
 category: cloud
 solution_name: Openshift Container Platform
 description: Enterprise container platform for modern applications

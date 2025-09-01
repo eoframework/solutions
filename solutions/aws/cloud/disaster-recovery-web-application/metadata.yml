@@ -1,4 +1,4 @@
-provider: AWS
+provider: aws
 category: cloud
 solution_name: Disaster Recovery Web Application
 description: Rapid business continuity with automated failover

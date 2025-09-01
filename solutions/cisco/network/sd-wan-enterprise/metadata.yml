@@ -1,4 +1,4 @@
-provider: CISCO
+provider: cisco
 category: network
 solution_name: SD-WAN Enterprise
 description: Enterprise SD-WAN for optimized branch connectivity

@@ -1,4 +1,4 @@
-provider: DELL
+provider: dell
 category: cloud
 solution_name: VxRail Hyperconverged
 description: Complete HCI platform for enterprise workloads

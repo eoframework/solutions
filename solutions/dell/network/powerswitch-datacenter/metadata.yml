@@ -1,4 +1,4 @@
-provider: DELL
+provider: dell
 category: network
 solution_name: Powerswitch Datacenter
 description: High-performance datacenter switching fabric

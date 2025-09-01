@@ -1,17 +1,17 @@
 version: '2.0'
 provider: google
-generated_at: '2025-09-01T17:31:27.138436'
+generated_at: '2025-09-01T14:08:02.557962'
 catalog_type: provider
 metadata:
   provider_name: Google Cloud
   total_solutions: 2
-  last_updated: '2025-09-01T17:31:27.138444'
+  last_updated: '2025-09-01T14:08:02.557988'
   auto_generated: true
 categories:
   cloud:
     solutions:
       landing-zone:
-        provider: GOOGLE
+        provider: google
         category: cloud
         solution_name: Landing Zone
         description: Secure cloud foundation with governance & controls
@@ -43,7 +43,7 @@ categories:
   modern-workspace:
     solutions:
       workspace:
-        provider: GOOGLE
+        provider: google
         category: modern-workspace
         solution_name: Workspace
         description: Collaborative digital workspace for modern teams

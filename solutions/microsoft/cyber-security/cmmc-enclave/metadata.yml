@@ -1,4 +1,4 @@
-provider: MICROSOFT
+provider: microsoft
 category: cyber-security
 solution_name: Cmmc Enclave
 description: CMMC-compliant secure enclave for defense contractors

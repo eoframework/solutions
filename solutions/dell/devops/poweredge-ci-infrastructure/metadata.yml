@@ -1,4 +1,4 @@
-provider: DELL
+provider: dell
 category: devops
 solution_name: Poweredge Ci Infrastructure
 description: Enterprise CI infrastructure on PowerEdge servers

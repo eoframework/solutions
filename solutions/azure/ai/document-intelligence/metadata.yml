@@ -1,4 +1,4 @@
-provider: AZURE
+provider: azure
 category: ai
 solution_name: Cognitive Document Processor
 description: Smart document processing with Azure cognitive AI

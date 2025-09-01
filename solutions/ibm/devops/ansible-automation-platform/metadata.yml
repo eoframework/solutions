@@ -1,4 +1,4 @@
-provider: IBM
+provider: ibm
 category: devops
 solution_name: Ansible Automation Platform
 description: IT automation platform for operational efficiency

@@ -1,4 +1,4 @@
-provider: AWS
+provider: aws
 category: cloud
 solution_name: Onpremise To Cloud Migration
 description: Seamless enterprise migration to modern cloud platform

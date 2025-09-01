@@ -1,4 +1,4 @@
-provider: HashiCorp
+provider: hashicorp
 category: devops
 solution_name: Terraform Enterprise
 description: Enterprise infrastructure as code platform

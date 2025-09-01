@@ -1,4 +1,4 @@
-provider: AZURE
+provider: azure
 category: cloud
 solution_name: Enterprise Landing Zone
 description: Secure Azure foundation for enterprise workloads

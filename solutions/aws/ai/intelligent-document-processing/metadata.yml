@@ -1,4 +1,4 @@
-provider: AWS
+provider: aws
 category: ai
 solution_name: Intelligent Document Processing
 description: Automate document insights with AI-driven extraction

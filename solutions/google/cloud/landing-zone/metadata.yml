@@ -1,4 +1,4 @@
-provider: GOOGLE
+provider: google
 category: cloud
 solution_name: Landing Zone
 description: Secure cloud foundation with governance & controls

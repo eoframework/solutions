@@ -1,4 +1,4 @@
-provider: DELL
+provider: dell
 category: cloud
 solution_name: VxRail HCI
 description: Hyperconverged infrastructure for simplified IT

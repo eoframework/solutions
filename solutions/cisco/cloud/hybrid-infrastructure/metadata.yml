@@ -1,4 +1,4 @@
-provider: CISCO
+provider: cisco
 category: cloud
 solution_name: HyperFlex Cloud Bridge
 description: Seamless hybrid cloud infrastructure integration

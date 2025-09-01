@@ -115,19 +115,17 @@ class TemplateValidator:
                         if field not in maintainer:
                             self.errors.append(f"maintainer[{i}] missing field: {field}")
         
-        # Validate provider authorization (case-insensitive for backward compatibility)
+        # Validate provider against catalog.yml
         if 'provider' in metadata and self.authorized_providers:
-            provider_lower = metadata['provider'].lower()
-            authorized_lower = [prov.lower() for prov in self.authorized_providers]
-            if provider_lower not in authorized_lower:
-                self.errors.append(f"Unauthorized provider: '{metadata['provider']}'. Must be one of {self.authorized_providers}")
+            provider_value = metadata['provider']
+            if provider_value not in self.authorized_providers:
+                self.errors.append(f"Unauthorized provider: '{provider_value}'. Must be one of {self.authorized_providers}")
         
-        # Validate category authorization (case-insensitive)
+        # Validate category against catalog.yml
         if 'category' in metadata and self.authorized_categories:
-            category_lower = metadata['category'].lower()
-            authorized_lower = [cat.lower() for cat in self.authorized_categories]
-            if category_lower not in authorized_lower:
-                self.errors.append(f"Unauthorized category: '{metadata['category']}'. Must be one of {self.authorized_categories}")
+            category_value = metadata['category']
+            if category_value not in self.authorized_categories:
+                self.errors.append(f"Unauthorized category: '{category_value}'. Must be one of {self.authorized_categories}")
     
     def validate_security(self, template_path):
         """Scan for potential security issues"""

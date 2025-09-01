@@ -1,4 +1,4 @@
-provider: CISCO
+provider: cisco
 category: cyber-security
 solution_name: Zero Trust Network Gateway
 description: Zero-trust network access for enhanced security

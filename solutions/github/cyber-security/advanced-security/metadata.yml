@@ -1,4 +1,4 @@
-provider: GITHUB
+provider: github
 category: cyber-security
 solution_name: CodeQL Security Scanner
 description: Advanced threat protection for code repositories

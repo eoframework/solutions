@@ -1,4 +1,4 @@
-provider: AZURE
+provider: azure
 category: network
 solution_name: Virtual Wan Global
 description: Global WAN connectivity for distributed enterprises

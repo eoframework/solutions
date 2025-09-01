@@ -1,4 +1,4 @@
-provider: GOOGLE
+provider: google
 category: modern-workspace
 solution_name: Workspace
 description: Collaborative digital workspace for modern teams

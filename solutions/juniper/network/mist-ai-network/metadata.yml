@@ -1,4 +1,4 @@
-provider: JUNIPER
+provider: juniper
 category: network
 solution_name: Mist AI Network
 description: AI-driven network operations & user experiences

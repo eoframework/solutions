@@ -1,4 +1,4 @@
-provider: AZURE
+provider: azure
 category: modern-workspace
 solution_name: Virtual Desktop
 description: Secure remote desktop for modern workforce productivity

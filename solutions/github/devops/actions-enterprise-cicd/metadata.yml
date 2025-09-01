@@ -1,4 +1,4 @@
-provider: GITHUB
+provider: github
 category: devops
 solution_name: GitHub Workflow Automation
 description: Enterprise CI/CD automation & workflow management

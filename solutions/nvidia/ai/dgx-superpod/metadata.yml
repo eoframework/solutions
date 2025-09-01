@@ -1,4 +1,4 @@
-provider: NVIDIA
+provider: nvidia
 category: ai
 solution_name: DGX SuperPOD
 description: High-performance computing for AI model training

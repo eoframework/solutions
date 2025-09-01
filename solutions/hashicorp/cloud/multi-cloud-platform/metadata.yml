@@ -1,4 +1,4 @@
-provider: HashiCorp
+provider: hashicorp
 category: cloud
 solution_name: Multi Cloud Platform
 description: Multi-cloud infrastructure management & automation

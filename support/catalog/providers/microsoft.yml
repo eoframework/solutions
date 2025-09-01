@@ -1,17 +1,17 @@
 version: '2.0'
 provider: microsoft
-generated_at: '2025-09-01T17:31:27.134859'
+generated_at: '2025-09-01T14:08:02.593005'
 catalog_type: provider
 metadata:
   provider_name: Microsoft
   total_solutions: 2
-  last_updated: '2025-09-01T17:31:27.134867'
+  last_updated: '2025-09-01T14:08:02.593026'
   auto_generated: true
 categories:
   cyber-security:
     solutions:
       cmmc-enclave:
-        provider: MICROSOFT
+        provider: microsoft
         category: cyber-security
         solution_name: Cmmc Enclave
         description: CMMC-compliant secure enclave for defense contractors
@@ -43,7 +43,7 @@ categories:
   modern-workspace:
     solutions:
       m365-deployment:
-        provider: MICROSOFT
+        provider: microsoft
         category: modern-workspace
         solution_name: Microsoft 365 Deployment
         description: Complete Microsoft 365 enterprise deployment

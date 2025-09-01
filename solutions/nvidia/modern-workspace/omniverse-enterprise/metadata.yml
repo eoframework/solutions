@@ -1,4 +1,4 @@
-provider: NVIDIA
+provider: nvidia
 category: modern-workspace
 solution_name: Omniverse Enterprise
 description: Real-time collaboration platform for 3D workflows

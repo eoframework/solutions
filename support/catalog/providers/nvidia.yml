@@ -1,17 +1,46 @@
 version: '2.0'
 provider: nvidia
-generated_at: '2025-09-01T17:31:27.113421'
+generated_at: '2025-09-01T14:08:02.600648'
 catalog_type: provider
 metadata:
   provider_name: NVIDIA
   total_solutions: 3
-  last_updated: '2025-09-01T17:31:27.113430'
+  last_updated: '2025-09-01T14:08:02.600667'
   auto_generated: true
 categories:
   ai:
     solutions:
+      dgx-superpod:
+        provider: nvidia
+        category: ai
+        solution_name: DGX SuperPOD
+        description: High-performance computing for AI model training
+        version: 1.0.0
+        status: Active
+        maintainers:
+        - name: "EO Framework\u2122 NVIDIA Solutions Team"
+          email: nvidia-solutions@eoframework.com
+          role: AI/HPC Solutions Architect
+        tags:
+        - ai
+        - superpod
+        - nvidia
+        requirements:
+          prerequisites:
+          - NVIDIA Account
+          - Administrative Access
+          tools:
+          - Python 3.8+
+          - CUDA Toolkit
+          - Docker
+          skills:
+          - NVIDIA Platform
+          - Solution Architecture
+          - AI/ML Infrastructure
+        solution_path: ../../solutions/nvidia/ai/dgx-superpod/
+        title: DGX SuperPOD
       gpu-compute-cluster:
-        provider: NVIDIA
+        provider: nvidia
         category: ai
         solution_name: GPU Compute Cluster
         description: GPU cluster for parallel computing & AI workloads
@@ -40,39 +69,10 @@ categories:
           - AI/ML Infrastructure
         solution_path: ../../solutions/nvidia/ai/gpu-compute-cluster/
         title: GPU Compute Cluster
-      dgx-superpod:
-        provider: NVIDIA
-        category: ai
-        solution_name: DGX SuperPOD
-        description: High-performance computing for AI model training
-        version: 1.0.0
-        status: Active
-        maintainers:
-        - name: "EO Framework\u2122 NVIDIA Solutions Team"
-          email: nvidia-solutions@eoframework.com
-          role: AI/HPC Solutions Architect
-        tags:
-        - ai
-        - superpod
-        - nvidia
-        requirements:
-          prerequisites:
-          - NVIDIA Account
-          - Administrative Access
-          tools:
-          - Python 3.8+
-          - CUDA Toolkit
-          - Docker
-          skills:
-          - NVIDIA Platform
-          - Solution Architecture
-          - AI/ML Infrastructure
-        solution_path: ../../solutions/nvidia/ai/dgx-superpod/
-        title: DGX SuperPOD
   modern-workspace:
     solutions:
       omniverse-enterprise:
-        provider: NVIDIA
+        provider: nvidia
         category: modern-workspace
         solution_name: Omniverse Enterprise
         description: Real-time collaboration platform for 3D workflows

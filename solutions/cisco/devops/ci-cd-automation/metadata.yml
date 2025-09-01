@@ -1,4 +1,4 @@
-provider: CISCO
+provider: cisco
 category: devops
 solution_name: Network Infrastructure Pipeline
 description: Network-aware CI/CD for infrastructure automation
