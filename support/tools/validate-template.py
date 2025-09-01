@@ -122,9 +122,11 @@ class TemplateValidator:
             if provider_lower not in authorized_lower:
                 self.errors.append(f"Unauthorized provider: '{metadata['provider']}'. Must be one of {self.authorized_providers}")
         
-        # Validate category authorization (strict case matching)
+        # Validate category authorization (case-insensitive)
         if 'category' in metadata and self.authorized_categories:
-            if metadata['category'] not in self.authorized_categories:
+            category_lower = metadata['category'].lower()
+            authorized_lower = [cat.lower() for cat in self.authorized_categories]
+            if category_lower not in authorized_lower:
                 self.errors.append(f"Unauthorized category: '{metadata['category']}'. Must be one of {self.authorized_categories}")
     
     def validate_security(self, template_path):

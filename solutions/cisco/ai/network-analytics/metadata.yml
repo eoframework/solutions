@@ -1,5 +1,5 @@
 provider: CISCO
-category: AI
+category: ai
 solution_name: Network Analytics
 description: Network Analytics solution for CISCO
 version: 1.0.0

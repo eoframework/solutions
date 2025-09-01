@@ -1,5 +1,5 @@
 provider: NVIDIA
-category: AI
+category: ai
 solution_name: Dgx Superpod
 description: Dgx Superpod solution for NVIDIA
 version: 1.0.0

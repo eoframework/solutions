@@ -1,5 +1,5 @@
 provider: AZURE
-category: AI
+category: ai
 solution_name: Document Intelligence
 description: Document Intelligence solution for AZURE
 version: 1.0.0
