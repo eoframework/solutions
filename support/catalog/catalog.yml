@@ -22,7 +22,7 @@ provider_catalogs:
 category_catalogs:
   cloud: ./categories/cloud.yml
   devops: ./categories/devops.yml
-  ai: ./categories/ai.yml
+  AI: ./categories/ai.yml
   modern-workspace: ./categories/modern-workspace.yml
   cyber-security: ./categories/cyber-security.yml
   network: ./categories/network.yml
@@ -42,7 +42,7 @@ quick_stats:
   categories_list:
   - cloud
   - devops
-  - ai
+  - AI
   - modern-workspace
   - cyber-security
   - network
@@ -61,7 +61,7 @@ quick_stats:
   category_solution_counts:
     cloud: 9
     devops: 6
-    ai: 6
+    AI: 6
     modern-workspace: 4
     cyber-security: 6
     network: 4

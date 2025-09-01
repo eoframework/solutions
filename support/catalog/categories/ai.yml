@@ -22,7 +22,7 @@ providers:
   dell:
     solutions:
     - name: precision-ai-workstation
-      title: Precision Ai Workstation
+      title: Precision AI Workstation
       provider_catalog: ../providers/dell.yml
       solution_path: ../../solutions/dell/ai/precision-ai-workstation/
   azure:
