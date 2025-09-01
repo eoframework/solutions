@@ -54,7 +54,7 @@ jobs:
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
-          git add support/catalog/ support/exports/ support/reports/
+          git add -f support/catalog/ support/exports/ support/reports/
           git diff --staged --quiet || git commit -m "Update distributed catalog system [skip ci]"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
