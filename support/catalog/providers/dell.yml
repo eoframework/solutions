@@ -1,13 +1,44 @@
 version: '2.0'
 provider: dell
-generated_at: '2025-09-01T20:02:16.758355'
+generated_at: '2025-09-01T15:16:51.690283'
 catalog_type: provider
 metadata:
-  provider_name: Dell Technologies
+  provider_name: Dell
   total_solutions: 6
-  last_updated: '2025-09-01T20:02:16.758365'
+  last_updated: '2025-09-01T15:16:51.690306'
   auto_generated: true
 categories:
+  ai:
+    solutions:
+      precision-ai-workstation:
+        provider: dell
+        category: ai
+        solution_name: Precision AI Workstation
+        description: High-performance workstations for AI development
+        version: 1.0.0
+        status: Active
+        maintainers:
+        - name: "EO Framework\u2122 Dell Solutions Team"
+          email: dell-solutions@eoframework.com
+          role: Infrastructure Solutions Architect
+        tags:
+        - workstation
+        - ai
+        - precision
+        - dell
+        requirements:
+          prerequisites:
+          - DELL Account
+          - Administrative Access
+          tools:
+          - Python 3.8+
+          - Ansible
+          skills:
+          - DELL Platform
+          - Solution Architecture
+          - Network Infrastructure
+        solution_path: ../../solutions/dell/ai/precision-ai-workstation/
+        title: Precision AI Workstation
   cloud:
     solutions:
       vxrail-hci:
@@ -67,37 +98,6 @@ categories:
           - Network Infrastructure
         solution_path: ../../solutions/dell/cloud/vxrail-hyperconverged/
         title: VxRail Hyperconverged
-  network:
-    solutions:
-      powerswitch-datacenter:
-        provider: dell
-        category: network
-        solution_name: Powerswitch Datacenter
-        description: High-performance datacenter switching fabric
-        version: 1.0.0
-        status: Active
-        maintainers:
-        - name: "EO Framework\u2122 Dell Solutions Team"
-          email: dell-solutions@eoframework.com
-          role: Infrastructure Solutions Architect
-        tags:
-        - network
-        - datacenter
-        - powerswitch
-        - dell
-        requirements:
-          prerequisites:
-          - DELL Account
-          - Administrative Access
-          tools:
-          - Python 3.8+
-          - Ansible
-          skills:
-          - DELL Platform
-          - Solution Architecture
-          - Network Infrastructure
-        solution_path: ../../solutions/dell/network/powerswitch-datacenter/
-        title: Powerswitch Datacenter
   cyber-security:
     solutions:
       safeid-authentication:
@@ -129,37 +129,6 @@ categories:
           - Network Infrastructure
         solution_path: ../../solutions/dell/cyber-security/safeid-authentication/
         title: Safeid Authentication
-  ai:
-    solutions:
-      precision-ai-workstation:
-        provider: dell
-        category: ai
-        solution_name: Precision AI Workstation
-        description: High-performance workstations for AI development
-        version: 1.0.0
-        status: Active
-        maintainers:
-        - name: "EO Framework\u2122 Dell Solutions Team"
-          email: dell-solutions@eoframework.com
-          role: Infrastructure Solutions Architect
-        tags:
-        - workstation
-        - ai
-        - precision
-        - dell
-        requirements:
-          prerequisites:
-          - DELL Account
-          - Administrative Access
-          tools:
-          - Python 3.8+
-          - Ansible
-          skills:
-          - DELL Platform
-          - Solution Architecture
-          - Network Infrastructure
-        solution_path: ../../solutions/dell/ai/precision-ai-workstation/
-        title: Precision AI Workstation
   devops:
     solutions:
       poweredge-ci-infrastructure:
@@ -191,3 +160,34 @@ categories:
           - Network Infrastructure
         solution_path: ../../solutions/dell/devops/poweredge-ci-infrastructure/
         title: Poweredge Ci Infrastructure
+  network:
+    solutions:
+      powerswitch-datacenter:
+        provider: dell
+        category: network
+        solution_name: Powerswitch Datacenter
+        description: High-performance datacenter switching fabric
+        version: 1.0.0
+        status: Active
+        maintainers:
+        - name: "EO Framework\u2122 Dell Solutions Team"
+          email: dell-solutions@eoframework.com
+          role: Infrastructure Solutions Architect
+        tags:
+        - network
+        - datacenter
+        - powerswitch
+        - dell
+        requirements:
+          prerequisites:
+          - DELL Account
+          - Administrative Access
+          tools:
+          - Python 3.8+
+          - Ansible
+          skills:
+          - DELL Platform
+          - Solution Architecture
+          - Network Infrastructure
+        solution_path: ../../solutions/dell/network/powerswitch-datacenter/
+        title: Powerswitch Datacenter

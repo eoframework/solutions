@@ -17,7 +17,49 @@ class CatalogGenerator:
         self.providers_dir = Path(providers_dir)
         self.catalog_dir = Path(catalog_dir)
         self.discovered_solutions = {}
+        self.existing_provider_names = {}
+        self.existing_category_names = {}
+        self.existing_category_descriptions = {}
         
+    def load_existing_display_names(self):
+        """Load existing display names from catalog files"""
+        print("📖 Loading existing display names from catalogs...")
+        
+        # Load provider display names
+        providers_path = self.catalog_dir / "providers"
+        if providers_path.exists():
+            for provider_file in providers_path.glob("*.yml"):
+                try:
+                    with open(provider_file, 'r') as f:
+                        catalog = yaml.safe_load(f)
+                        provider_id = catalog.get('provider')
+                        provider_name = catalog.get('metadata', {}).get('provider_name')
+                        if provider_id and provider_name:
+                            self.existing_provider_names[provider_id] = provider_name
+                except Exception as e:
+                    print(f"Warning: Could not load provider catalog {provider_file}: {e}")
+        
+        # Load category display names
+        categories_path = self.catalog_dir / "categories"
+        if categories_path.exists():
+            for category_file in categories_path.glob("*.yml"):
+                try:
+                    with open(category_file, 'r') as f:
+                        catalog = yaml.safe_load(f)
+                        category_id = catalog.get('category')
+                        category_name = catalog.get('metadata', {}).get('category_name')
+                        category_description = catalog.get('metadata', {}).get('description')
+                        if category_id and category_name:
+                            self.existing_category_names[category_id] = category_name
+                        if category_id and category_description:
+                            self.existing_category_descriptions[category_id] = category_description
+                except Exception as e:
+                    print(f"Warning: Could not load category catalog {category_file}: {e}")
+        
+        print(f"✓ Loaded {len(self.existing_provider_names)} provider names")
+        print(f"✓ Loaded {len(self.existing_category_names)} category names")
+        print(f"✓ Loaded {len(self.existing_category_descriptions)} category descriptions")
+
     def scan_solutions(self):
         """Scan providers directory for solution metadata"""
         print("🔍 Scanning for solution metadata files...")
@@ -203,45 +245,16 @@ class CatalogGenerator:
         return distribution
     
     def get_provider_display_name(self, provider_name):
-        """Get display name for provider"""
-        names = {
-            'aws': 'Amazon Web Services',
-            'azure': 'Microsoft Azure',
-            'cisco': 'Cisco Systems',
-            'dell': 'Dell Technologies',
-            'github': 'GitHub',
-            'google': 'Google Cloud',
-            'hashicorp': 'HashiCorp',
-            'ibm': 'IBM',
-            'juniper': 'Juniper Networks',
-            'microsoft': 'Microsoft',
-            'nvidia': 'NVIDIA'
-        }
-        return names.get(provider_name, provider_name.title())
+        """Get display name for provider from existing catalog or fallback to title case"""
+        return self.existing_provider_names.get(provider_name, provider_name.title())
     
     def get_category_display_name(self, category_name):
-        """Get display name for category"""
-        names = {
-            'ai': 'Artificial Intelligence',
-            'cloud': 'Cloud Infrastructure',
-            'cyber-security': 'Cyber Security',
-            'devops': 'DevOps & Automation',
-            'modern-workspace': 'Modern Workspace',
-            'network': 'Network Infrastructure'
-        }
-        return names.get(category_name, category_name.title())
+        """Get display name for category from existing catalog or fallback to title case"""
+        return self.existing_category_names.get(category_name, category_name.title())
     
     def get_category_description(self, category_name):
-        """Get description for category"""
-        descriptions = {
-            'ai': 'Artificial Intelligence and Machine Learning solutions',
-            'cloud': 'Cloud infrastructure and platform solutions',
-            'cyber-security': 'Security, compliance, and threat protection solutions',
-            'devops': 'DevOps automation and CI/CD solutions',
-            'modern-workspace': 'Digital workplace and collaboration solutions',
-            'network': 'Network infrastructure and connectivity solutions'
-        }
-        return descriptions.get(category_name, f"{category_name.title()} solutions")
+        """Get description for category from existing catalog or fallback to generated description"""
+        return self.existing_category_descriptions.get(category_name, f"{category_name.title()} solutions")
     
     def write_catalogs(self):
         """Write all generated catalogs to files"""
@@ -293,6 +306,9 @@ class CatalogGenerator:
     def generate_all_catalogs(self):
         """Generate complete catalog structure from solution metadata"""
         print("🚀 Starting catalog generation from solution metadata...")
+        
+        # Load existing display names first
+        self.load_existing_display_names()
         
         # Scan for solutions
         self.scan_solutions()
