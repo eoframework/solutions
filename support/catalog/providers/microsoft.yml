@@ -1,11 +1,11 @@
 version: '2.0'
 provider: microsoft
-generated_at: '2025-09-01T16:43:59.910923'
+generated_at: '2025-09-01T16:47:36.262158'
 catalog_type: provider
 metadata:
   provider_name: Microsoft
   total_solutions: 2
-  last_updated: '2025-09-01T16:43:59.910934'
+  last_updated: '2025-09-01T16:47:36.262170'
   auto_generated: true
 categories:
   cyber-security:
