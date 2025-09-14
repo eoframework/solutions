@@ -1,6 +1,6 @@
 name: Sync Website Data
 
-# This workflow automatically syncs templates.csv to the eof-website repository
+# This workflow automatically syncs solutions.csv to the eof-website repository
 # REQUIRED: WEBSITE_SYNC_TOKEN secret must be configured with write access to eoframework/eof-website
 
 on:
@@ -36,7 +36,7 @@ jobs:
           python -m pip install --upgrade pip
           pip install pyyaml
       
-      - name: Generate latest templates.csv
+      - name: Generate latest solutions.csv
         run: |
           cd templates
           python3 support/tools/export-templates-csv.py
@@ -48,22 +48,22 @@ jobs:
           token: ${{ secrets.WEBSITE_SYNC_TOKEN }}
           path: website
       
-      - name: Copy templates.csv to website
+      - name: Copy solutions.csv to website
         run: |
           # Ensure _data directory exists
           mkdir -p website/_data
           
           # Copy the generated CSV
-          cp templates/support/exports/templates.csv website/_data/templates.csv
+          cp templates/support/exports/solutions.csv website/_data/solutions.csv
           
           # Verify copy succeeded
-          if [ ! -f website/_data/templates.csv ]; then
-            echo "❌ Failed to copy templates.csv"
+          if [ ! -f website/_data/solutions.csv ]; then
+            echo "❌ Failed to copy solutions.csv"
             exit 1
           fi
-          
-          echo "✅ Successfully copied templates.csv to eof-website"
-          echo "📄 File size: $(wc -l < website/_data/templates.csv) lines"
+
+          echo "✅ Successfully copied solutions.csv to eof-website"
+          echo "📄 File size: $(wc -l < website/_data/solutions.csv) lines"
       
       - name: Commit and push to website repository
         run: |
@@ -72,13 +72,13 @@ jobs:
           git config --local user.name "GitHub Action - Template Sync"
           
           # Check if there are changes
-          if git diff --quiet HEAD _data/templates.csv; then
-            echo "✅ No changes to templates.csv - skipping commit"
+          if git diff --quiet HEAD _data/solutions.csv; then
+            echo "✅ No changes to solutions.csv - skipping commit"
             exit 0
           fi
-          
-          git add _data/templates.csv
-          git commit -m "Update templates.csv from eoframework/templates
+
+          git add _data/solutions.csv
+          git commit -m "Update solutions.csv from eoframework/templates
 
           Auto-generated from commit: ${{ github.event.workflow_run.head_sha }}
           Template validation completed successfully
@@ -87,6 +87,6 @@ jobs:
           
           git push origin main
           
-          echo "✅ Successfully updated templates.csv in eof-website repository"
+          echo "✅ Successfully updated solutions.csv in eof-website repository"
         env:
           GITHUB_TOKEN: ${{ secrets.WEBSITE_SYNC_TOKEN }}

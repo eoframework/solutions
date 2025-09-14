@@ -100,7 +100,7 @@ def sync_to_csv():
                                         print(f"Warning: Could not process {solution_path}: {e}")
     
     # Write CSV file to exports directory
-    csv_path = repo_root / 'support' / 'exports' / 'templates.csv'
+    csv_path = repo_root / 'support' / 'exports' / 'solutions.csv'
     with open(csv_path, 'w', newline='', encoding='utf-8') as f:
         writer = csv.writer(f)
         writer.writerow(headers)

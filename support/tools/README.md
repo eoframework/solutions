@@ -271,7 +271,7 @@ support/catalog/
 
 support/exports/
 ├── solutions.json             # API-ready comprehensive solution dataset
-└── templates.csv              # Website-ready CSV format
+└── solutions.csv              # Website-ready CSV format
 
 support/reports/
 └── validation-report.json     # Quality and validation reports
@@ -321,7 +321,7 @@ python3 support/tools/validate-catalogs.py
 # Generate CSV export for website
 python3 support/tools/export-templates-csv.py
 
-# Output: support/exports/templates.csv
+# Output: support/exports/solutions.csv
 ```
 
 **CSV Output Format:**
