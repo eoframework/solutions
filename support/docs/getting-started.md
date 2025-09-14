@@ -1,4 +1,4 @@
-# Getting Started with EO Framework™ Templates
+# Getting Started with EO Framework™ Solutions
 
 ![Quick Start](https://img.shields.io/badge/Quick_Start-Ready-green)
 ![Templates](https://img.shields.io/badge/Templates-35-blue)
@@ -7,7 +7,7 @@
 
 ## 🎯 **Welcome to EO Framework™**
 
-This comprehensive guide walks you through creating your first enterprise solution template using the **EO Framework™ Templates** repository. You'll learn to leverage our proven methodologies, automated tools, and enterprise-grade standards to build professional solution documentation and automation.
+This comprehensive guide walks you through creating your first enterprise solution template using the **EO Framework™ Solutions** repository. You'll learn to leverage our proven methodologies, automated tools, and enterprise-grade standards to build professional solution documentation and automation.
 
 ## 🚀 **Quick Start: 5 Minutes to Your First Template**
 
@@ -18,7 +18,7 @@ python --version  # Ensure Python 3.8+
 git --version     # Ensure Git is configured
 
 # Clone and setup (2 minutes)
-git clone https://github.com/eoframework/templates.git
+git clone https://github.com/eoframework/solutions.git
 cd templates
 pip install pyyaml jsonschema click
 

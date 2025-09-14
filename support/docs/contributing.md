@@ -1,4 +1,4 @@
-# Contributing to EO Framework™ Templates
+# Contributing to EO Framework™ Solutions
 
 ![Contributors](https://img.shields.io/badge/Contributors-Welcome-green)
 ![Standards](https://img.shields.io/badge/Standards-Enterprise-blue)
@@ -7,7 +7,7 @@
 
 ## 🎯 **Welcome Contributors!**
 
-Thank you for your interest in contributing to the **EO Framework™ Templates** repository! This comprehensive guide will help you make valuable contributions to the most extensive collection of enterprise solution templates available today.
+Thank you for your interest in contributing to the **EO Framework™ Solutions** repository! This comprehensive guide will help you make valuable contributions to the most extensive collection of enterprise solution templates available today.
 
 ## 🚀 **Quick Start for New Contributors**
 
@@ -26,7 +26,7 @@ git clone git@github.com:YOUR-USERNAME/templates.git
 cd templates
 
 # Add upstream remote
-git remote add upstream git@github.com:eoframework/templates.git
+git remote add upstream git@github.com:eoframework/solutions.git
 
 # Install required Python packages
 pip install -r requirements.txt
@@ -342,9 +342,9 @@ python support/tools/generator.py --help
 ### 🆘 **When You Need Help**
 
 **🔧 Technical Questions:**
-- Check existing [GitHub Issues](https://github.com/eoframework/templates/issues)
+- Check existing [GitHub Issues](https://github.com/eoframework/solutions/issues)
 - Review relevant documentation sections
-- Ask in [GitHub Discussions](https://github.com/eoframework/templates/discussions)
+- Ask in [GitHub Discussions](https://github.com/eoframework/solutions/discussions)
 - Contact technical-support@eoframework.com
 
 **📋 Process Questions:**

@@ -413,8 +413,8 @@ We welcome contributions from the technology community! To add solutions to this
 
 ### **Getting Help**
 - **📖 Documentation**: [support/docs/](../support/docs/) - Comprehensive guides and standards
-- **🐛 Report Issues**: [GitHub Issues](https://github.com/eoframework/templates/issues) - Bug reports and feature requests
-- **💬 Community Discussion**: [GitHub Discussions](https://github.com/eoframework/templates/discussions) - Q&A and collaboration
+- **🐛 Report Issues**: [GitHub Issues](https://github.com/eoframework/solutions/issues) - Bug reports and feature requests
+- **💬 Community Discussion**: [GitHub Discussions](https://github.com/eoframework/solutions/discussions) - Q&A and collaboration
 - **🌐 Official Website**: [EO Framework™](https://eoframework.com) - Latest news and announcements
 
 ### **Professional Services**

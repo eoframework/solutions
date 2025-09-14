@@ -7,7 +7,7 @@
 
 ## 🎯 **Overview**
 
-The **EO Framework™ Documentation Hub** provides comprehensive governance, standards, and process documentation for the EO Framework™ Templates repository. These documents ensure consistent quality, establish clear processes, and guide contributors in creating exceptional enterprise solution templates.
+The **EO Framework™ Documentation Hub** provides comprehensive governance, standards, and process documentation for the EO Framework™ Solutions repository. These documents ensure consistent quality, establish clear processes, and guide contributors in creating exceptional enterprise solution templates.
 
 ## 📚 **Documentation Architecture**
 
@@ -183,8 +183,8 @@ support/docs/
 - **📄 Legal Questions**: Contact legal@eoframework.com
 
 ### **Community Resources**
-- **💬 GitHub Discussions**: [Community conversations](https://github.com/eoframework/templates/discussions)
-- **🐛 GitHub Issues**: [Bug reports and features](https://github.com/eoframework/templates/issues)
+- **💬 GitHub Discussions**: [Community conversations](https://github.com/eoframework/solutions/discussions)
+- **🐛 GitHub Issues**: [Bug reports and features](https://github.com/eoframework/solutions/issues)
 - **📧 Email Support**: support@eoframework.com
 - **🌐 Website**: [EO Framework™](https://eoframework.com)
 

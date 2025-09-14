@@ -79,7 +79,7 @@ def sync_to_csv():
                                             metadata = yaml.safe_load(f)
                                         
                                         # Build URLs for templates - combine into single Templates column
-                                        base_url = "https://github.com/eoframework/templates/tree/main"
+                                        base_url = "https://github.com/eoframework/solutions/tree/main"
                                         solution_url = f"{base_url}/solutions/{provider_name}/{category_name}/{solution_name}"
                                         
                                         # Get display names, fall back to raw names if not found

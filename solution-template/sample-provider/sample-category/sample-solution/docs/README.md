@@ -170,8 +170,8 @@ Every document in this directory meets these standards:
 ## 🆘 **Support & Resources**
 
 ### **📞 Documentation Support**
-- **Content Issues**: Report inaccuracies or unclear sections via [GitHub Issues](https://github.com/eoframework/templates/issues)
-- **Missing Information**: Request additional content through [GitHub Discussions](https://github.com/eoframework/templates/discussions)
+- **Content Issues**: Report inaccuracies or unclear sections via [GitHub Issues](https://github.com/eoframework/solutions/issues)
+- **Missing Information**: Request additional content through [GitHub Discussions](https://github.com/eoframework/solutions/discussions)
 - **Technical Questions**: Reference [Troubleshooting Guide](troubleshooting.md) first
 
 ### **🛠️ Implementation Support**
@@ -183,7 +183,7 @@ Every document in this directory meets these standards:
 - **📖 EO Framework™ Standards**: [Master Template](../../../master-template/)
 - **🛠️ Development Tools**: [Support Tools](../../../support/tools/)
 - **📋 Best Practices**: [Contributing Guidelines](../../../support/docs/)
-- **🤝 Community Forum**: [GitHub Discussions](https://github.com/eoframework/templates/discussions)
+- **🤝 Community Forum**: [GitHub Discussions](https://github.com/eoframework/solutions/discussions)
 
 ### **🎓 Training & Learning**
 - **Solution-Specific Training**: [Training Materials](../delivery/training-materials.md)
@@ -208,8 +208,8 @@ Every document in this directory meets these standards:
 ### **🤝 Contributing to Documentation**
 - Review [Contributing Guidelines](../../../support/docs/contributing.md)
 - Submit improvements via pull requests
-- Report issues through [GitHub Issues](https://github.com/eoframework/templates/issues)
-- Participate in [Community Discussions](https://github.com/eoframework/templates/discussions)
+- Report issues through [GitHub Issues](https://github.com/eoframework/solutions/issues)
+- Participate in [Community Discussions](https://github.com/eoframework/solutions/discussions)
 
 ---
 

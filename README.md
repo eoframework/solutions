@@ -1,4 +1,4 @@
-# EO Framework™ Templates
+# EO Framework™ Solutions
 
 ![EO Framework](https://img.shields.io/badge/EO_Framework-2.0-blue)
 ![Solutions](https://img.shields.io/badge/Solutions-35-green)
@@ -6,7 +6,7 @@
 ![Categories](https://img.shields.io/badge/Categories-6-purple)
 ![License](https://img.shields.io/badge/License-BSL_1.1-red)
 
-Welcome to the **EO Framework™ Templates** - the most comprehensive collection of enterprise technology solution templates for accelerating sales, presales, and delivery processes.
+Welcome to the **EO Framework™ Solutions** - the most comprehensive collection of enterprise technology solution templates for accelerating sales, presales, and delivery processes.
 
 ## 🎯 **What is EO Framework™?**
 
@@ -45,7 +45,7 @@ The **EO Framework™ (Exceptional Outcomes Framework)** is an enterprise-grade,
 ## 🏗️ **Repository Structure**
 
 ```
-templates/
+solutions/
 ├── 📁 solutions/                   # 35 Complete Enterprise Solutions
 │   ├── aws/                        # Amazon Web Services (3 solutions)
 │   ├── azure/                      # Microsoft Azure (4 solutions)
@@ -267,12 +267,12 @@ All EO Framework™ solutions meet stringent enterprise quality requirements:
    - Improve documentation and usability
 
 3. **🐛 Report Issues**
-   - Use [GitHub Issues](https://github.com/eoframework/templates/issues)
+   - Use [GitHub Issues](https://github.com/eoframework/solutions/issues)
    - Provide detailed description and reproduction steps
    - Tag with appropriate labels
 
 4. **💡 Suggest Features**
-   - Submit via [GitHub Discussions](https://github.com/eoframework/templates/discussions)
+   - Submit via [GitHub Discussions](https://github.com/eoframework/solutions/discussions)
    - Explain use case and business value
    - Consider implementation approach
 
@@ -329,8 +329,8 @@ For production deployments and commercial use:
 
 ### **📞 Getting Help**
 - **📖 Documentation**: [support/docs/](support/docs/) directory
-- **🐛 Report Issues**: [GitHub Issues](https://github.com/eoframework/templates/issues)
-- **💬 Discussions**: [GitHub Discussions](https://github.com/eoframework/templates/discussions)
+- **🐛 Report Issues**: [GitHub Issues](https://github.com/eoframework/solutions/issues)
+- **💬 Discussions**: [GitHub Discussions](https://github.com/eoframework/solutions/discussions)
 - **🌐 Website**: [EO Framework™](https://eoframework.com)
 - **📧 Email**: support@eoframework.com
 

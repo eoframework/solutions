@@ -7,7 +7,7 @@
 
 ## 🎯 **Overview**
 
-This directory contains the complete suite of development utilities and automation tools for the **EO Framework™ Templates** repository. These production-ready Python scripts enable efficient creation, validation, catalog management, and quality assurance of enterprise solution templates.
+This directory contains the complete suite of development utilities and automation tools for the **EO Framework™ Solutions** repository. These production-ready Python scripts enable efficient creation, validation, catalog management, and quality assurance of enterprise solution templates.
 
 ## 📋 **Prerequisites and Installation**
 
@@ -69,7 +69,7 @@ python3 -c "import yaml, jsonschema, click; print('All dependencies installed su
 **Repository Access:**
 ```bash
 # Clone repository (if not already done)
-git clone https://github.com/eoframework/templates.git
+git clone https://github.com/eoframework/solutions.git
 cd templates
 
 # Verify tools directory structure
@@ -604,8 +604,8 @@ rm -rf solutions/test-provider/
 
 ### **Getting Help**
 - **Script Usage**: Run any script with `--help` flag for detailed usage information
-- **Issues**: Report bugs via [GitHub Issues](https://github.com/eoframework/templates/issues)
-- **Feature Requests**: Submit via [GitHub Discussions](https://github.com/eoframework/templates/discussions)
+- **Issues**: Report bugs via [GitHub Issues](https://github.com/eoframework/solutions/issues)
+- **Feature Requests**: Submit via [GitHub Discussions](https://github.com/eoframework/solutions/discussions)
 - **Documentation**: Check [repository docs](../../docs/) for comprehensive guidance
 
 ### **Best Practices**
@@ -615,4 +615,4 @@ rm -rf solutions/test-provider/
 - Keep tools updated with latest repository standards and requirements
 - Follow established workflows for consistent results and quality
 
-**These comprehensive development tools ensure consistent quality, efficient workflows, and enterprise-grade automation for the EO Framework™ Templates repository.**# Trigger workflow to regenerate catalogs with updated solution names
+**These comprehensive development tools ensure consistent quality, efficient workflows, and enterprise-grade automation for the EO Framework™ Solutions repository.**# Trigger workflow to regenerate catalogs with updated solution names

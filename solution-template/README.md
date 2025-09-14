@@ -455,8 +455,8 @@ python3 support/tools/aggregator.py --provider your-provider
 - **🎯 Quality Framework** - [support/docs/quality-requirements.md](../support/docs/quality-requirements.md)
 
 ### **🌐 Community & Professional Support**
-- **🐛 Issue Tracking** - [GitHub Issues](https://github.com/eoframework/templates/issues)
-- **💬 Community Discussion** - [GitHub Discussions](https://github.com/eoframework/templates/discussions)
+- **🐛 Issue Tracking** - [GitHub Issues](https://github.com/eoframework/solutions/issues)
+- **💬 Community Discussion** - [GitHub Discussions](https://github.com/eoframework/solutions/discussions)
 - **📚 Knowledge Base** - [Documentation Hub](../support/docs/)
 - **🏢 Enterprise Support** - [Professional Services](https://eoframework.com/services)
 
@@ -470,7 +470,7 @@ python3 support/tools/aggregator.py --provider your-provider
 
 **Ready to create world-class enterprise solutions?**
 
-🚀 [**Generate New Template**](../support/tools/) | 📏 [**Review Standards**](../support/docs/) | 🔍 [**Explore Examples**](../solutions/) | 🤝 [**Join Community**](https://github.com/eoframework/templates/discussions)
+🚀 [**Generate New Template**](../support/tools/) | 📏 [**Review Standards**](../support/docs/) | 🔍 [**Explore Examples**](../solutions/) | 🤝 [**Join Community**](https://github.com/eoframework/solutions/discussions)
 
 ---
 

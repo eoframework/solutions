@@ -7,7 +7,7 @@
 
 ## 🎯 **Overview**
 
-This comprehensive document defines the enterprise-grade standards and requirements for all templates in the **EO Framework™ Templates** repository. These standards ensure consistency, quality, and professional excellence across all solution templates.
+This comprehensive document defines the enterprise-grade standards and requirements for all templates in the **EO Framework™ Solutions** repository. These standards ensure consistency, quality, and professional excellence across all solution templates.
 
 ## 🏗️ **Repository Structure Standards**
 
@@ -340,7 +340,7 @@ Closes #123
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     https://github.com/eoframework/templates/blob/main/LICENSE
+ *     https://github.com/eoframework/solutions/blob/main/LICENSE
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -390,4 +390,4 @@ Closes #123
 
 ---
 
-**These comprehensive standards ensure enterprise-grade quality, security, and consistency across all EO Framework™ Templates, enabling organizations to confidently implement professional technology solutions with proven methodologies and best practices.**
+**These comprehensive standards ensure enterprise-grade quality, security, and consistency across all EO Framework™ Solutions, enabling organizations to confidently implement professional technology solutions with proven methodologies and best practices.**

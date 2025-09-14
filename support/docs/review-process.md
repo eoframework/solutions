@@ -7,7 +7,7 @@
 
 ## 🎯 **Overview**
 
-This comprehensive document outlines the multi-stage review process for all template submissions to the **EO Framework™ Templates** repository. Our rigorous review process ensures enterprise-grade quality, technical accuracy, and business value for all published solution templates.
+This comprehensive document outlines the multi-stage review process for all template submissions to the **EO Framework™ Solutions** repository. Our rigorous review process ensures enterprise-grade quality, technical accuracy, and business value for all published solution templates.
 
 ## 🔄 **Multi-Stage Review Process**
 

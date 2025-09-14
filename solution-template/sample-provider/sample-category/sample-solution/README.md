@@ -220,7 +220,7 @@ python3 deploy.py --environment production
 - **Technical Issues**: Reference [Troubleshooting Guide](docs/troubleshooting.md)
 - **Implementation Support**: Contact {SUPPORT_CONTACT}
 - **Business Questions**: Reach out to {BUSINESS_CONTACT}
-- **Community Forum**: [EO Framework™ Discussions](https://github.com/eoframework/templates/discussions)
+- **Community Forum**: [EO Framework™ Discussions](https://github.com/eoframework/solutions/discussions)
 
 ### **📚 Additional Resources**
 - **📖 EO Framework™ Standards**: [Master Template](../../../master-template/)
@@ -229,8 +229,8 @@ python3 deploy.py --environment production
 - **🌐 Official Website**: [EO Framework™](https://eoframework.com)
 
 ### **🤝 Contributing**
-- Report issues via [GitHub Issues](https://github.com/eoframework/templates/issues)
-- Suggest improvements through [GitHub Discussions](https://github.com/eoframework/templates/discussions)
+- Report issues via [GitHub Issues](https://github.com/eoframework/solutions/issues)
+- Suggest improvements through [GitHub Discussions](https://github.com/eoframework/solutions/discussions)
 - Review [Contributing Guidelines](../../../support/docs/contributing.md)
 
 ---

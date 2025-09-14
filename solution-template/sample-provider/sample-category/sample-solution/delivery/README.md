@@ -284,7 +284,7 @@ Comprehensive operations approach ensuring solution reliability:
 
 ### **🌐 Community & Professional Support**
 - **📖 Technical Documentation**: [Architecture Guide](../docs/architecture.md)
-- **🤝 Community Forum**: [GitHub Discussions](https://github.com/eoframework/templates/discussions)
+- **🤝 Community Forum**: [GitHub Discussions](https://github.com/eoframework/solutions/discussions)
 - **🎓 Training Resources**: {TRAINING_PLATFORM_LINK}
 - **🏢 Professional Services**: {PROFESSIONAL_SERVICES_CONTACT}
 
