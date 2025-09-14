@@ -99,7 +99,7 @@ pip install -r requirements.txt  # If requirements.txt exists
 **Purpose**: Creates new solution templates from the master template foundation
 
 **Core Functionality:**
-- Copies complete `master-template/` structure to new solution directory
+- Copies complete `solution-template/` structure to new solution directory
 - Replaces all placeholder values with actual solution details
 - Creates proper directory structure under `solutions/[provider]/[category]/[solution]/`
 - Updates metadata.yml with author information and current timestamps

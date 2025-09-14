@@ -1,7 +1,7 @@
 name: Template Validation
 on:
   pull_request:
-    paths: ['solutions/**/presales/**', 'solutions/**/delivery/**', 'solutions/**/metadata.yml', 'solutions/**/README.md', 'master-template/**']
+    paths: ['solutions/**/presales/**', 'solutions/**/delivery/**', 'solutions/**/metadata.yml', 'solutions/**/README.md', 'solution-template/**']
   push:
     branches: [main]
 

@@ -377,7 +377,7 @@ We welcome contributions from the technology community! To add solutions to this
    - [Quality Requirements](../support/docs/quality-standards.md)
 
 2. **🏗️ Create Solution**
-   - Use [master-template](../master-template/) as foundation
+   - Use [solution-template](../solution-template/) as foundation
    - Follow directory structure and naming conventions
    - Include all required documentation and automation
 
@@ -427,7 +427,7 @@ We welcome contributions from the technology community! To add solutions to this
 
 **Ready to explore enterprise solutions?** 
 
-🎯 [**Browse by Category**](#-solution-categories) | 🏢 [**Browse by Provider**](#-provider-distribution) | 🔍 [**Search Solutions**](#-navigation-and-discovery) | 🛠️ [**Create New Solution**](../master-template/)
+🎯 [**Browse by Category**](#-solution-categories) | 🏢 [**Browse by Provider**](#-provider-distribution) | 🔍 [**Search Solutions**](#-navigation-and-discovery) | 🛠️ [**Create New Solution**](../solution-template/)
 
 ---
 

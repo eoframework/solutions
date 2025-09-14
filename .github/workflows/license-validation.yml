@@ -34,7 +34,7 @@ jobs:
           
           while IFS= read -r -d '' file; do
             # Skip master template files, generated files, and solution templates
-            if [[ "$file" == *"master-template"* ]] || [[ "$file" == *"support/exports"* ]] || [[ "$file" == *"support/reports"* ]] || [[ "$file" == *"solutions/"* ]]; then
+            if [[ "$file" == *"solution-template"* ]] || [[ "$file" == *"support/exports"* ]] || [[ "$file" == *"support/reports"* ]] || [[ "$file" == *"solutions/"* ]]; then
               continue
             fi
             

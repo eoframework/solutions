@@ -47,10 +47,10 @@ def clone_template(provider, category, solution, author_name, author_email):
     
     # Define paths
     repo_root = Path(__file__).parent.parent.parent
-    sample_path = repo_root / "master-template" / "sample-provider" / "sample-category" / "sample-solution"
+    sample_path = repo_root / "solution-template" / "sample-provider" / "sample-category" / "sample-solution"
     target_path = repo_root / "solutions" / provider / category / solution
     
-    # Check if master template exists
+    # Check if solution template exists
     if not sample_path.exists():
         raise FileNotFoundError(f"Sample template not found at {sample_path}")
     
@@ -61,7 +61,7 @@ def clone_template(provider, category, solution, author_name, author_email):
     # Create provider and category directories if they don't exist
     target_path.parent.mkdir(parents=True, exist_ok=True)
     
-    # Copy master template
+    # Copy solution template
     print(f"Cloning template to {target_path}")
     shutil.copytree(sample_path, target_path)
     

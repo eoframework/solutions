@@ -58,7 +58,7 @@ templates/
 │   ├── juniper/                    # Juniper Networks (2 solutions)
 │   ├── microsoft/                  # Microsoft 365 (2 solutions)
 │   └── nvidia/                     # NVIDIA (3 solutions)
-├── 📋 master-template/             # Authoritative Template Foundation
+├── 📋 solution-template/             # Authoritative Template Foundation
 │   └── sample-provider/            # Complete reference template structure
 ├── 🛠️ support/                     # Supporting Infrastructure
 │   ├── docs/                       # Repository governance and standards
@@ -257,7 +257,7 @@ All EO Framework™ solutions meet stringent enterprise quality requirements:
 ### **Ways to Contribute**
 
 1. **🆕 Add New Solutions**
-   - Use `master-template/` as foundation
+   - Use `solution-template/` as foundation
    - Follow [Template Standards](support/docs/template-standards.md)
    - Submit via pull request with validation
 
@@ -364,7 +364,7 @@ For production deployments and commercial use:
 
 **Ready to accelerate your enterprise solution delivery?** 
 
-🚀 [**Browse Solutions**](solutions/) | 📋 [**Use Master Template**](master-template/) | 🛠️ [**Development Tools**](support/tools/) | 📚 [**Documentation**](support/docs/)
+🚀 [**Browse Solutions**](solutions/) | 📋 [**Use Solution Template**](solution-template/) | 🛠️ [**Development Tools**](support/tools/) | 📚 [**Documentation**](support/docs/)
 
 ---
 
