@@ -1,11 +1,11 @@
 version: '2.0'
 provider: nvidia
-generated_at: '2025-09-01T20:19:21.296931'
+generated_at: '2025-09-14T02:11:39.457377'
 catalog_type: provider
 metadata:
   provider_name: Nvidia
   total_solutions: 3
-  last_updated: '2025-09-01T20:19:21.296943'
+  last_updated: '2025-09-14T02:11:39.457394'
   auto_generated: true
 categories:
   ai:
