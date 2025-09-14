@@ -147,7 +147,7 @@ Use our automated template creator:
 
 ```bash
 # Create new solution template
-python3 support/tools/clone-template.py \
+python3 support/tools/clone-solution-template.py \
   --provider "your-provider" \
   --category "ai|cloud|cyber-security|devops|modern-workspace|network" \
   --solution "your-solution-name" \

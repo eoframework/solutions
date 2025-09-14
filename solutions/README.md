@@ -335,7 +335,7 @@ All solutions in this library meet stringent EO Framework™ quality requirement
 
 1. **🏗️ Generate Template**
    ```bash
-   python3 support/tools/clone-template.py \
+   python3 support/tools/clone-solution-template.py \
      --provider "your-provider" \
      --category "ai|cloud|cyber-security|devops|modern-workspace|network" \
      --solution "your-solution-name" \

@@ -13,7 +13,7 @@ The **Master Template** is the authoritative, immutable foundation for all EO Fr
 This master template is the **immutable reference standard** that defines:
 - **📋 Complete Structure** - Comprehensive directory hierarchy and file organization
 - **📏 Quality Standards** - Documentation patterns, content depth, and presentation excellence
-- **🤖 Automation Source** - Template used by clone-template.py for consistent generation
+- **🤖 Automation Source** - Template used by clone-solution-template.py for consistent generation
 - **🎨 Content Patterns** - Standardized formats for business cases, technical docs, and automation
 
 ### **🔒 Critical Usage Principle**
@@ -342,7 +342,7 @@ Sales and business materials must include:
 ### **🤖 Recommended: Automated Generation** 
 ```bash
 # Generate new solution template with comprehensive structure
-python3 support/tools/clone-template.py   --provider "your-provider"   --category "network"   --solution "innovative-network-solution"   --author-name "Solution Architect"   --author-email "architect@company.com"
+python3 support/tools/clone-solution-template.py   --provider "your-provider"   --category "network"   --solution "innovative-network-solution"   --author-name "Solution Architect"   --author-email "architect@company.com"
 
 # Navigate to generated solution
 cd solutions/your-provider/network/innovative-network-solution/
@@ -443,7 +443,7 @@ python3 support/tools/aggregator.py --provider your-provider
 ## 📞 **Support Ecosystem & Resources**
 
 ### **🛠️ Development Tools & Utilities**
-- **📋 Template Creation** - [support/tools/clone-template.py](../support/tools/clone-template.py)
+- **📋 Template Creation** - [support/tools/clone-solution-template.py](../support/tools/clone-solution-template.py)
 - **✅ Quality Validation** - [support/tools/validate-template.py](../support/tools/validate-template.py)  
 - **📊 Catalog Management** - [support/tools/](../support/tools/)
 - **🔄 CSV Generation** - [support/tools/sync-csv.py](../support/tools/sync-csv.py)

@@ -95,7 +95,7 @@ pip install -r requirements.txt  # If requirements.txt exists
 
 ## 🛠️ **Tool Scripts Overview**
 
-### 🏗️ **1. clone-template.py - Template Creator**
+### 🏗️ **1. clone-solution-template.py - Solution Template Creator**
 **Purpose**: Creates new solution templates from the master template foundation
 
 **Core Functionality:**
@@ -108,7 +108,7 @@ pip install -r requirements.txt  # If requirements.txt exists
 **Usage:**
 ```bash
 # Basic template creation
-python3 support/tools/clone-template.py \
+python3 support/tools/clone-solution-template.py \
   --provider "aws" \
   --category "cloud" \
   --solution "enterprise-landing-zone" \
@@ -116,7 +116,7 @@ python3 support/tools/clone-template.py \
   --author-email "john.smith@company.com"
 
 # Example with different provider and category
-python3 support/tools/clone-template.py \
+python3 support/tools/clone-solution-template.py \
   --provider "cisco" \
   --category "network" \
   --solution "sd-wan-enterprise" \
@@ -341,7 +341,7 @@ python3 support/tools/export-templates-csv.py
 
 **Step 1: Create Template Foundation**
 ```bash
-python3 support/tools/clone-template.py \
+python3 support/tools/clone-solution-template.py \
   --provider "your-provider" \
   --category "your-category" \
   --solution "your-solution-name" \
@@ -577,7 +577,7 @@ python3 -m venv venv && source venv/bin/activate
 ### **Testing Scripts**
 ```bash
 # Create test template for development
-python3 support/tools/clone-template.py \
+python3 support/tools/clone-solution-template.py \
   --provider "test-provider" \
   --category "ai" \
   --solution "test-solution" \

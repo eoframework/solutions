@@ -23,7 +23,7 @@ cd templates
 pip install pyyaml jsonschema click
 
 # Create your first template (1 minute)
-python support/tools/clone-template.py \
+python support/tools/clone-solution-template.py \
   --provider "demo-corp" \
   --category "cloud" \
   --solution "sample-infrastructure" \
@@ -116,7 +116,7 @@ Create a descriptive, implementable solution name:
 cd /path/to/templates
 
 # Create your solution template
-python support/tools/clone-template.py \
+python support/tools/clone-solution-template.py \
   --provider "your-provider" \
   --category "your-category" \
   --solution "your-solution-name" \
@@ -266,7 +266,7 @@ git push origin feature/your-solution-branch
 ```bash
 # Create multiple solutions for the same provider
 for solution in "solution1" "solution2" "solution3"; do
-  python support/tools/clone-template.py \
+  python support/tools/clone-solution-template.py \
     --provider "your-provider" \
     --category "cloud" \
     --solution "$solution" \
@@ -329,7 +329,7 @@ python support/tools/optimization-recommendations.py --path solutions/your-provi
 ### **🛠️ Tool Documentation**
 ```bash
 # Get detailed help for all tools
-python support/tools/clone-template.py --help
+python support/tools/clone-solution-template.py --help
 python support/tools/validate-template.py --help
 python support/tools/generator.py --help
 python support/tools/aggregator.py --help

@@ -34,7 +34,7 @@ pip install pyyaml jsonschema click
 
 # Verify tools are working
 python support/tools/validate-template.py --help
-python support/tools/clone-template.py --help
+python support/tools/clone-solution-template.py --help
 ```
 
 ### **First Contribution Workflow**
@@ -60,7 +60,7 @@ python support/tools/clone-template.py --help
 **🛠️ Creation Process:**
 ```bash
 # Create new template using our generator
-python support/tools/clone-template.py \
+python support/tools/clone-solution-template.py \
   --provider "your-provider" \
   --category "ai|cloud|cyber-security|devops|modern-workspace|network" \
   --solution "your-solution-name" \
@@ -211,7 +211,7 @@ git checkout -b feature/provider-category-solution
 **2. 🏗️ Development Phase**
 ```bash
 # Create and customize your solution
-python support/tools/clone-template.py [options]
+python support/tools/clone-solution-template.py [options]
 # ... customize content ...
 
 # Validate your work
@@ -285,7 +285,7 @@ ls solutions/azure/cloud/enterprise-landing-zone/
 ls solutions/cisco/network/sd-wan-enterprise/
 
 # Use our comprehensive toolset
-python support/tools/clone-template.py --help
+python support/tools/clone-solution-template.py --help
 python support/tools/validate-template.py --help
 python support/tools/generator.py --help
 ```
