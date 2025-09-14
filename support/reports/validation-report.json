@@ -8,7 +8,7 @@
   },
   "results": [
     {
-      "file": "/home/runner/work/templates/templates/support/catalog/catalog.yml",
+      "file": "/home/runner/work/solutions/solutions/support/catalog/catalog.yml",
       "schema": "master",
       "status": "SKIP",
       "errors": [
@@ -16,7 +16,7 @@
       ]
     },
     {
-      "file": "/home/runner/work/templates/templates/support/catalog/providers/github.yml",
+      "file": "/home/runner/work/solutions/solutions/support/catalog/providers/github.yml",
       "schema": "provider",
       "status": "SKIP",
       "errors": [
@@ -24,7 +24,7 @@
       ]
     },
     {
-      "file": "/home/runner/work/templates/templates/support/catalog/providers/hashicorp.yml",
+      "file": "/home/runner/work/solutions/solutions/support/catalog/providers/hashicorp.yml",
       "schema": "provider",
       "status": "SKIP",
       "errors": [
@@ -32,7 +32,7 @@
       ]
     },
     {
-      "file": "/home/runner/work/templates/templates/support/catalog/providers/google.yml",
+      "file": "/home/runner/work/solutions/solutions/support/catalog/providers/google.yml",
       "schema": "provider",
       "status": "SKIP",
       "errors": [
@@ -40,7 +40,7 @@
       ]
     },
     {
-      "file": "/home/runner/work/templates/templates/support/catalog/providers/juniper.yml",
+      "file": "/home/runner/work/solutions/solutions/support/catalog/providers/juniper.yml",
       "schema": "provider",
       "status": "SKIP",
       "errors": [
@@ -48,7 +48,7 @@
       ]
     },
     {
-      "file": "/home/runner/work/templates/templates/support/catalog/providers/cisco.yml",
+      "file": "/home/runner/work/solutions/solutions/support/catalog/providers/cisco.yml",
       "schema": "provider",
       "status": "SKIP",
       "errors": [
@@ -56,7 +56,7 @@
       ]
     },
     {
-      "file": "/home/runner/work/templates/templates/support/catalog/providers/aws.yml",
+      "file": "/home/runner/work/solutions/solutions/support/catalog/providers/aws.yml",
       "schema": "provider",
       "status": "SKIP",
       "errors": [
@@ -64,7 +64,7 @@
       ]
     },
     {
-      "file": "/home/runner/work/templates/templates/support/catalog/providers/microsoft.yml",
+      "file": "/home/runner/work/solutions/solutions/support/catalog/providers/microsoft.yml",
       "schema": "provider",
       "status": "SKIP",
       "errors": [
@@ -72,7 +72,7 @@
       ]
     },
     {
-      "file": "/home/runner/work/templates/templates/support/catalog/providers/nvidia.yml",
+      "file": "/home/runner/work/solutions/solutions/support/catalog/providers/nvidia.yml",
       "schema": "provider",
       "status": "SKIP",
       "errors": [
@@ -80,7 +80,7 @@
       ]
     },
     {
-      "file": "/home/runner/work/templates/templates/support/catalog/providers/dell.yml",
+      "file": "/home/runner/work/solutions/solutions/support/catalog/providers/dell.yml",
       "schema": "provider",
       "status": "SKIP",
       "errors": [
@@ -88,7 +88,7 @@
       ]
     },
     {
-      "file": "/home/runner/work/templates/templates/support/catalog/providers/ibm.yml",
+      "file": "/home/runner/work/solutions/solutions/support/catalog/providers/ibm.yml",
       "schema": "provider",
       "status": "SKIP",
       "errors": [
@@ -96,7 +96,7 @@
       ]
     },
     {
-      "file": "/home/runner/work/templates/templates/support/catalog/providers/azure.yml",
+      "file": "/home/runner/work/solutions/solutions/support/catalog/providers/azure.yml",
       "schema": "provider",
       "status": "SKIP",
       "errors": [
@@ -104,7 +104,7 @@
       ]
     },
     {
-      "file": "/home/runner/work/templates/templates/support/catalog/categories/cloud.yml",
+      "file": "/home/runner/work/solutions/solutions/support/catalog/categories/cloud.yml",
       "schema": "category",
       "status": "SKIP",
       "errors": [
@@ -112,7 +112,7 @@
       ]
     },
     {
-      "file": "/home/runner/work/templates/templates/support/catalog/categories/network.yml",
+      "file": "/home/runner/work/solutions/solutions/support/catalog/categories/network.yml",
       "schema": "category",
       "status": "SKIP",
       "errors": [
@@ -120,7 +120,7 @@
       ]
     },
     {
-      "file": "/home/runner/work/templates/templates/support/catalog/categories/modern-workspace.yml",
+      "file": "/home/runner/work/solutions/solutions/support/catalog/categories/modern-workspace.yml",
       "schema": "category",
       "status": "SKIP",
       "errors": [
@@ -128,7 +128,7 @@
       ]
     },
     {
-      "file": "/home/runner/work/templates/templates/support/catalog/categories/ai.yml",
+      "file": "/home/runner/work/solutions/solutions/support/catalog/categories/ai.yml",
       "schema": "category",
       "status": "SKIP",
       "errors": [
@@ -136,7 +136,7 @@
       ]
     },
     {
-      "file": "/home/runner/work/templates/templates/support/catalog/categories/devops.yml",
+      "file": "/home/runner/work/solutions/solutions/support/catalog/categories/devops.yml",
       "schema": "category",
       "status": "SKIP",
       "errors": [
@@ -144,7 +144,7 @@
       ]
     },
     {
-      "file": "/home/runner/work/templates/templates/support/catalog/categories/cyber-security.yml",
+      "file": "/home/runner/work/solutions/solutions/support/catalog/categories/cyber-security.yml",
       "schema": "category",
       "status": "SKIP",
       "errors": [
