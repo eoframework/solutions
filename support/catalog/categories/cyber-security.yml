@@ -1,12 +1,12 @@
 version: '2.0'
 category: cyber-security
-generated_at: '2025-09-14T02:26:25.163356'
+generated_at: '2025-09-14T02:37:56.266152'
 catalog_type: category
 metadata:
   category_name: Cyber Security
   description: Security, compliance, and threat protection solutions
   total_solutions: 6
-  last_updated: '2025-09-14T02:26:25.163362'
+  last_updated: '2025-09-14T02:37:56.266159'
   auto_generated: true
 providers:
   github:
