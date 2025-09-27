@@ -1,28 +1,28 @@
 {
-  "generated_at": "2025-09-14T03:02:59.229116",
+  "generated_at": "2025-09-27T16:52:26.356944",
   "total_solutions": 35,
   "statistics": {
     "total_solutions": 35,
     "by_provider": {
-      "github": 2,
-      "hashicorp": 2,
-      "google": 2,
-      "juniper": 2,
-      "cisco": 5,
-      "aws": 3,
       "microsoft": 2,
-      "nvidia": 3,
+      "azure": 6,
       "dell": 6,
+      "hashicorp": 2,
+      "juniper": 2,
+      "google": 2,
+      "github": 2,
       "ibm": 2,
-      "azure": 6
+      "nvidia": 3,
+      "cisco": 5,
+      "aws": 3
     },
     "by_category": {
-      "cyber-security": 6,
-      "devops": 6,
-      "cloud": 9,
       "modern-workspace": 4,
+      "cyber-security": 6,
+      "ai": 6,
+      "cloud": 9,
       "network": 4,
-      "ai": 6
+      "devops": 6
     },
     "by_complexity": {
       "unknown": 35
@@ -33,107 +33,580 @@
     "top_tags": {
       "cloud": 9,
       "cyber-security": 6,
+      "azure": 6,
+      "ai": 6,
       "enterprise": 6,
       "devops": 6,
-      "ai": 6,
       "dell": 6,
-      "azure": 6,
-      "platform": 5,
       "network": 5,
+      "platform": 5,
       "cisco": 5,
       "modern-workspace": 4,
-      "aws": 3,
       "nvidia": 3,
-      "github": 2,
-      "hashicorp": 2,
+      "aws": 3,
+      "microsoft": 2,
+      "document": 2,
       "landing": 2,
       "zone": 2,
-      "google": 2,
-      "juniper": 2,
+      "virtual": 2,
+      "vxrail": 2,
       "infrastructure": 2
     }
   },
   "solutions": [
     {
-      "id": "github-cyber-security-advanced-security",
-      "provider": "github",
-      "category": "cyber-security",
-      "solution_name": "CodeQL Security Scanner",
-      "description": "Advanced threat protection for code repositories",
+      "id": "microsoft-modern-workspace-m365-deployment",
+      "provider": "microsoft",
+      "category": "modern-workspace",
+      "solution_name": "Microsoft 365 Deployment",
+      "description": "Complete Microsoft 365 enterprise deployment",
       "version": "1.0.0",
       "status": "Active",
       "maintainers": [
         {
-          "name": "EO Framework\u2122 GitHub Solutions Team",
-          "email": "github-solutions@eoframework.com",
-          "role": "DevOps Solutions Architect"
+          "name": "EO Framework\u2122 Microsoft Solutions Team",
+          "email": "microsoft-solutions@eoframework.com",
+          "role": "Enterprise Solutions Architect"
         }
       ],
       "tags": [
-        "advanced",
-        "cyber-security",
-        "github",
-        "security"
+        "microsoft",
+        "deployment",
+        "modern-workspace",
+        "m365"
       ],
       "requirements": {
         "prerequisites": [
-          "GITHUB Account",
+          "MICROSOFT Account",
           "Administrative Access"
         ],
         "tools": [
           "Python 3.8+",
-          "GitHub CLI",
-          "Git"
+          "PowerShell",
+          "Microsoft Graph"
         ],
         "skills": [
-          "GITHUB Platform",
+          "MICROSOFT Platform",
           "Solution Architecture",
-          "DevOps Practices"
+          "Microsoft 365"
         ]
       },
-      "solution_path": "../../solutions/github/cyber-security/advanced-security/",
-      "title": "CodeQL Security Scanner"
+      "solution_path": "../../solutions/microsoft/modern-workspace/m365-deployment/",
+      "title": "Microsoft 365 Deployment"
     },
     {
-      "id": "github-devops-actions-enterprise-cicd",
-      "provider": "github",
-      "category": "devops",
-      "solution_name": "GitHub Workflow Automation",
-      "description": "Enterprise CI/CD automation & workflow management",
+      "id": "microsoft-cyber-security-cmmc-enclave",
+      "provider": "microsoft",
+      "category": "cyber-security",
+      "solution_name": "CMMC Enclave",
+      "description": "CMMC-compliant secure enclave for defense contractors",
       "version": "1.0.0",
       "status": "Active",
       "maintainers": [
         {
-          "name": "EO Framework\u2122 GitHub Solutions Team",
-          "email": "github-solutions@eoframework.com",
-          "role": "DevOps Solutions Architect"
+          "name": "EO Framework\u2122 Microsoft Solutions Team",
+          "email": "microsoft-solutions@eoframework.com",
+          "role": "Enterprise Solutions Architect"
         }
       ],
       "tags": [
-        "cicd",
-        "github",
-        "enterprise",
-        "devops",
-        "actions"
+        "microsoft",
+        "cmmc",
+        "cyber-security",
+        "enclave"
       ],
       "requirements": {
         "prerequisites": [
-          "GITHUB Account",
+          "MICROSOFT Account",
           "Administrative Access"
         ],
         "tools": [
           "Python 3.8+",
-          "GitHub CLI",
-          "Git"
+          "PowerShell",
+          "Microsoft Graph"
         ],
         "skills": [
-          "GITHUB Platform",
+          "MICROSOFT Platform",
           "Solution Architecture",
-          "DevOps Practices"
+          "Microsoft 365"
         ]
       },
-      "solution_path": "../../solutions/github/devops/actions-enterprise-cicd/",
-      "title": "GitHub Workflow Automation"
+      "solution_path": "../../solutions/microsoft/cyber-security/cmmc-enclave/",
+      "title": "CMMC Enclave"
+    },
+    {
+      "id": "azure-ai-document-intelligence",
+      "provider": "azure",
+      "category": "ai",
+      "solution_name": "Cognitive Document Processor",
+      "description": "Smart document processing with Azure cognitive AI",
+      "version": "1.0.0",
+      "status": "Active",
+      "maintainers": [
+        {
+          "name": "EO Framework\u2122 Azure Solutions Team",
+          "email": "azure-solutions@eoframework.com",
+          "role": "Cloud Solutions Architect"
+        }
+      ],
+      "tags": [
+        "azure",
+        "ai",
+        "intelligence",
+        "document"
+      ],
+      "requirements": {
+        "prerequisites": [
+          "AZURE Account",
+          "Administrative Access"
+        ],
+        "tools": [
+          "Python 3.8+",
+          "Azure CLI",
+          "PowerShell"
+        ],
+        "skills": [
+          "AZURE Platform",
+          "Solution Architecture",
+          "Azure Services"
+        ]
+      },
+      "solution_path": "../../solutions/azure/ai/document-intelligence/",
+      "title": "Cognitive Document Processor"
+    },
+    {
+      "id": "azure-cloud-enterprise-landing-zone",
+      "provider": "azure",
+      "category": "cloud",
+      "solution_name": "Enterprise Landing Zone",
+      "description": "Secure Azure foundation for enterprise workloads",
+      "version": "1.0.0",
+      "status": "Active",
+      "maintainers": [
+        {
+          "name": "EO Framework\u2122 Azure Solutions Team",
+          "email": "azure-solutions@eoframework.com",
+          "role": "Cloud Solutions Architect"
+        }
+      ],
+      "tags": [
+        "cloud",
+        "azure",
+        "landing",
+        "enterprise",
+        "zone"
+      ],
+      "requirements": {
+        "prerequisites": [
+          "AZURE Account",
+          "Administrative Access"
+        ],
+        "tools": [
+          "Python 3.8+",
+          "Azure CLI",
+          "PowerShell"
+        ],
+        "skills": [
+          "AZURE Platform",
+          "Solution Architecture",
+          "Azure Services"
+        ]
+      },
+      "solution_path": "../../solutions/azure/cloud/enterprise-landing-zone/",
+      "title": "Enterprise Landing Zone"
+    },
+    {
+      "id": "azure-network-virtual-wan-global",
+      "provider": "azure",
+      "category": "network",
+      "solution_name": "Virtual Wan Global",
+      "description": "Global WAN connectivity for distributed enterprises",
+      "version": "1.0.0",
+      "status": "Active",
+      "maintainers": [
+        {
+          "name": "EO Framework\u2122 Azure Solutions Team",
+          "email": "azure-solutions@eoframework.com",
+          "role": "Cloud Solutions Architect"
+        }
+      ],
+      "tags": [
+        "azure",
+        "global",
+        "virtual",
+        "network"
+      ],
+      "requirements": {
+        "prerequisites": [
+          "AZURE Account",
+          "Administrative Access"
+        ],
+        "tools": [
+          "Python 3.8+",
+          "Azure CLI",
+          "PowerShell"
+        ],
+        "skills": [
+          "AZURE Platform",
+          "Solution Architecture",
+          "Azure Services"
+        ]
+      },
+      "solution_path": "../../solutions/azure/network/virtual-wan-global/",
+      "title": "Virtual Wan Global"
+    },
+    {
+      "id": "azure-devops-enterprise-platform",
+      "provider": "azure",
+      "category": "devops",
+      "solution_name": "DevOps Pipeline Factory",
+      "description": "DevOps platform for accelerated software delivery",
+      "version": "1.0.0",
+      "status": "Active",
+      "maintainers": [
+        {
+          "name": "EO Framework\u2122 Azure Solutions Team",
+          "email": "azure-solutions@eoframework.com",
+          "role": "Cloud Solutions Architect"
+        }
+      ],
+      "tags": [
+        "azure",
+        "enterprise",
+        "platform",
+        "devops"
+      ],
+      "requirements": {
+        "prerequisites": [
+          "AZURE Account",
+          "Administrative Access"
+        ],
+        "tools": [
+          "Python 3.8+",
+          "Azure CLI",
+          "PowerShell"
+        ],
+        "skills": [
+          "AZURE Platform",
+          "Solution Architecture",
+          "Azure Services"
+        ]
+      },
+      "solution_path": "../../solutions/azure/devops/enterprise-platform/",
+      "title": "DevOps Pipeline Factory"
+    },
+    {
+      "id": "azure-modern-workspace-virtual-desktop",
+      "provider": "azure",
+      "category": "modern-workspace",
+      "solution_name": "Virtual Desktop",
+      "description": "Secure remote desktop for modern workforce productivity",
+      "version": "1.0.0",
+      "status": "Active",
+      "maintainers": [
+        {
+          "name": "EO Framework\u2122 Azure Solutions Team",
+          "email": "azure-solutions@eoframework.com",
+          "role": "Cloud Solutions Architect"
+        }
+      ],
+      "tags": [
+        "azure",
+        "modern-workspace",
+        "virtual",
+        "desktop"
+      ],
+      "requirements": {
+        "prerequisites": [
+          "AZURE Account",
+          "Administrative Access"
+        ],
+        "tools": [
+          "Python 3.8+",
+          "Azure CLI",
+          "PowerShell"
+        ],
+        "skills": [
+          "AZURE Platform",
+          "Solution Architecture",
+          "Azure Services"
+        ]
+      },
+      "solution_path": "../../solutions/azure/modern-workspace/virtual-desktop/",
+      "title": "Virtual Desktop"
+    },
+    {
+      "id": "azure-cyber-security-sentinel-siem",
+      "provider": "azure",
+      "category": "cyber-security",
+      "solution_name": "Sentinel SIEM",
+      "description": "Cloud SIEM for advanced threat detection & response",
+      "version": "1.0.0",
+      "status": "Active",
+      "maintainers": [
+        {
+          "name": "EO Framework\u2122 Azure Solutions Team",
+          "email": "azure-solutions@eoframework.com",
+          "role": "Cloud Solutions Architect"
+        }
+      ],
+      "tags": [
+        "azure",
+        "sentinel",
+        "siem",
+        "cyber-security"
+      ],
+      "requirements": {
+        "prerequisites": [
+          "AZURE Account",
+          "Administrative Access"
+        ],
+        "tools": [
+          "Python 3.8+",
+          "Azure CLI",
+          "PowerShell"
+        ],
+        "skills": [
+          "AZURE Platform",
+          "Solution Architecture",
+          "Azure Services"
+        ]
+      },
+      "solution_path": "../../solutions/azure/cyber-security/sentinel-siem/",
+      "title": "Sentinel SIEM"
+    },
+    {
+      "id": "dell-ai-precision-ai-workstation",
+      "provider": "dell",
+      "category": "ai",
+      "solution_name": "Precision AI Workstation",
+      "description": "High-performance workstations for AI development",
+      "version": "1.0.0",
+      "status": "Active",
+      "maintainers": [
+        {
+          "name": "EO Framework\u2122 Dell Solutions Team",
+          "email": "dell-solutions@eoframework.com",
+          "role": "Infrastructure Solutions Architect"
+        }
+      ],
+      "tags": [
+        "workstation",
+        "ai",
+        "precision",
+        "dell"
+      ],
+      "requirements": {
+        "prerequisites": [
+          "DELL Account",
+          "Administrative Access"
+        ],
+        "tools": [
+          "Python 3.8+",
+          "Ansible"
+        ],
+        "skills": [
+          "DELL Platform",
+          "Solution Architecture",
+          "Network Infrastructure"
+        ]
+      },
+      "solution_path": "../../solutions/dell/ai/precision-ai-workstation/",
+      "title": "Precision AI Workstation"
+    },
+    {
+      "id": "dell-cloud-vxrail-hyperconverged",
+      "provider": "dell",
+      "category": "cloud",
+      "solution_name": "VxRail Hyperconverged",
+      "description": "Complete HCI platform for enterprise workloads",
+      "version": "1.0.0",
+      "status": "Active",
+      "maintainers": [
+        {
+          "name": "EO Framework\u2122 Dell Solutions Team",
+          "email": "dell-solutions@eoframework.com",
+          "role": "Infrastructure Solutions Architect"
+        }
+      ],
+      "tags": [
+        "cloud",
+        "vxrail",
+        "dell",
+        "hyperconverged"
+      ],
+      "requirements": {
+        "prerequisites": [
+          "DELL Account",
+          "Administrative Access"
+        ],
+        "tools": [
+          "Python 3.8+",
+          "Ansible"
+        ],
+        "skills": [
+          "DELL Platform",
+          "Solution Architecture",
+          "Network Infrastructure"
+        ]
+      },
+      "solution_path": "../../solutions/dell/cloud/vxrail-hyperconverged/",
+      "title": "VxRail Hyperconverged"
+    },
+    {
+      "id": "dell-cloud-vxrail-hci",
+      "provider": "dell",
+      "category": "cloud",
+      "solution_name": "VxRail HCI",
+      "description": "Hyperconverged infrastructure for simplified IT",
+      "version": "1.0.0",
+      "status": "Active",
+      "maintainers": [
+        {
+          "name": "EO Framework\u2122 Dell Solutions Team",
+          "email": "dell-solutions@eoframework.com",
+          "role": "Infrastructure Solutions Architect"
+        }
+      ],
+      "tags": [
+        "cloud",
+        "vxrail",
+        "dell"
+      ],
+      "requirements": {
+        "prerequisites": [
+          "DELL Account",
+          "Administrative Access"
+        ],
+        "tools": [
+          "Python 3.8+",
+          "Ansible"
+        ],
+        "skills": [
+          "DELL Platform",
+          "Solution Architecture",
+          "Network Infrastructure"
+        ]
+      },
+      "solution_path": "../../solutions/dell/cloud/vxrail-hci/",
+      "title": "VxRail HCI"
+    },
+    {
+      "id": "dell-network-powerswitch-datacenter",
+      "provider": "dell",
+      "category": "network",
+      "solution_name": "Powerswitch Datacenter",
+      "description": "High-performance datacenter switching fabric",
+      "version": "1.0.0",
+      "status": "Active",
+      "maintainers": [
+        {
+          "name": "EO Framework\u2122 Dell Solutions Team",
+          "email": "dell-solutions@eoframework.com",
+          "role": "Infrastructure Solutions Architect"
+        }
+      ],
+      "tags": [
+        "network",
+        "datacenter",
+        "powerswitch",
+        "dell"
+      ],
+      "requirements": {
+        "prerequisites": [
+          "DELL Account",
+          "Administrative Access"
+        ],
+        "tools": [
+          "Python 3.8+",
+          "Ansible"
+        ],
+        "skills": [
+          "DELL Platform",
+          "Solution Architecture",
+          "Network Infrastructure"
+        ]
+      },
+      "solution_path": "../../solutions/dell/network/powerswitch-datacenter/",
+      "title": "Powerswitch Datacenter"
+    },
+    {
+      "id": "dell-devops-poweredge-ci-infrastructure",
+      "provider": "dell",
+      "category": "devops",
+      "solution_name": "Poweredge Ci Infrastructure",
+      "description": "Enterprise CI infrastructure on PowerEdge servers",
+      "version": "1.0.0",
+      "status": "Active",
+      "maintainers": [
+        {
+          "name": "EO Framework\u2122 Dell Solutions Team",
+          "email": "dell-solutions@eoframework.com",
+          "role": "Infrastructure Solutions Architect"
+        }
+      ],
+      "tags": [
+        "dell",
+        "poweredge",
+        "devops",
+        "infrastructure"
+      ],
+      "requirements": {
+        "prerequisites": [
+          "DELL Account",
+          "Administrative Access"
+        ],
+        "tools": [
+          "Python 3.8+",
+          "Ansible"
+        ],
+        "skills": [
+          "DELL Platform",
+          "Solution Architecture",
+          "Network Infrastructure"
+        ]
+      },
+      "solution_path": "../../solutions/dell/devops/poweredge-ci-infrastructure/",
+      "title": "Poweredge Ci Infrastructure"
+    },
+    {
+      "id": "dell-cyber-security-safeid-authentication",
+      "provider": "dell",
+      "category": "cyber-security",
+      "solution_name": "Safeid Authentication",
+      "description": "Multi-factor authentication for secure access",
+      "version": "1.0.0",
+      "status": "Active",
+      "maintainers": [
+        {
+          "name": "EO Framework\u2122 Dell Solutions Team",
+          "email": "dell-solutions@eoframework.com",
+          "role": "Infrastructure Solutions Architect"
+        }
+      ],
+      "tags": [
+        "safeid",
+        "authentication",
+        "dell",
+        "cyber-security"
+      ],
+      "requirements": {
+        "prerequisites": [
+          "DELL Account",
+          "Administrative Access"
+        ],
+        "tools": [
+          "Python 3.8+",
+          "Ansible"
+        ],
+        "skills": [
+          "DELL Platform",
+          "Solution Architecture",
+          "Network Infrastructure"
+        ]
+      },
+      "solution_path": "../../solutions/dell/cyber-security/safeid-authentication/",
+      "title": "Safeid Authentication"
     },
     {
       "id": "hashicorp-cloud-multi-cloud-platform",
@@ -216,6 +689,83 @@
       "title": "Terraform Enterprise"
     },
     {
+      "id": "juniper-network-mist-ai-network",
+      "provider": "juniper",
+      "category": "network",
+      "solution_name": "Mist AI Network",
+      "description": "AI-driven network operations & user experiences",
+      "version": "1.0.0",
+      "status": "Active",
+      "maintainers": [
+        {
+          "name": "EO Framework\u2122 Juniper Solutions Team",
+          "email": "juniper-solutions@eoframework.com",
+          "role": "Network Solutions Architect"
+        }
+      ],
+      "tags": [
+        "network",
+        "juniper",
+        "mist"
+      ],
+      "requirements": {
+        "prerequisites": [
+          "JUNIPER Account",
+          "Administrative Access"
+        ],
+        "tools": [
+          "Python 3.8+",
+          "Ansible"
+        ],
+        "skills": [
+          "JUNIPER Platform",
+          "Solution Architecture",
+          "Network Infrastructure"
+        ]
+      },
+      "solution_path": "../../solutions/juniper/network/mist-ai-network/",
+      "title": "Mist AI Network"
+    },
+    {
+      "id": "juniper-cyber-security-srx-firewall-platform",
+      "provider": "juniper",
+      "category": "cyber-security",
+      "solution_name": "SRX Firewall Platform",
+      "description": "Next-gen firewall for enterprise network security",
+      "version": "1.0.0",
+      "status": "Active",
+      "maintainers": [
+        {
+          "name": "EO Framework\u2122 Juniper Solutions Team",
+          "email": "juniper-solutions@eoframework.com",
+          "role": "Network Solutions Architect"
+        }
+      ],
+      "tags": [
+        "firewall",
+        "juniper",
+        "platform",
+        "cyber-security"
+      ],
+      "requirements": {
+        "prerequisites": [
+          "JUNIPER Account",
+          "Administrative Access"
+        ],
+        "tools": [
+          "Python 3.8+",
+          "Ansible"
+        ],
+        "skills": [
+          "JUNIPER Platform",
+          "Solution Architecture",
+          "Network Infrastructure"
+        ]
+      },
+      "solution_path": "../../solutions/juniper/cyber-security/srx-firewall-platform/",
+      "title": "SRX Firewall Platform"
+    },
+    {
       "id": "google-cloud-landing-zone",
       "provider": "google",
       "category": "cloud",
@@ -295,476 +845,167 @@
       "title": "Workspace"
     },
     {
-      "id": "juniper-network-mist-ai-network",
-      "provider": "juniper",
-      "category": "network",
-      "solution_name": "Mist AI Network",
-      "description": "AI-driven network operations & user experiences",
+      "id": "github-devops-actions-enterprise-cicd",
+      "provider": "github",
+      "category": "devops",
+      "solution_name": "GitHub Workflow Automation",
+      "description": "Enterprise CI/CD automation & workflow management",
       "version": "1.0.0",
       "status": "Active",
       "maintainers": [
         {
-          "name": "EO Framework\u2122 Juniper Solutions Team",
-          "email": "juniper-solutions@eoframework.com",
-          "role": "Network Solutions Architect"
+          "name": "EO Framework\u2122 GitHub Solutions Team",
+          "email": "github-solutions@eoframework.com",
+          "role": "DevOps Solutions Architect"
         }
       ],
       "tags": [
-        "network",
-        "juniper",
-        "mist"
+        "cicd",
+        "github",
+        "enterprise",
+        "devops",
+        "actions"
       ],
       "requirements": {
         "prerequisites": [
-          "JUNIPER Account",
+          "GITHUB Account",
           "Administrative Access"
         ],
         "tools": [
           "Python 3.8+",
-          "Ansible"
+          "GitHub CLI",
+          "Git"
         ],
         "skills": [
-          "JUNIPER Platform",
+          "GITHUB Platform",
           "Solution Architecture",
-          "Network Infrastructure"
+          "DevOps Practices"
         ]
       },
-      "solution_path": "../../solutions/juniper/network/mist-ai-network/",
-      "title": "Mist AI Network"
+      "solution_path": "../../solutions/github/devops/actions-enterprise-cicd/",
+      "title": "GitHub Workflow Automation"
     },
     {
-      "id": "juniper-cyber-security-srx-firewall-platform",
-      "provider": "juniper",
+      "id": "github-cyber-security-advanced-security",
+      "provider": "github",
       "category": "cyber-security",
-      "solution_name": "SRX Firewall Platform",
-      "description": "Next-gen firewall for enterprise network security",
+      "solution_name": "CodeQL Security Scanner",
+      "description": "Advanced threat protection for code repositories",
       "version": "1.0.0",
       "status": "Active",
       "maintainers": [
         {
-          "name": "EO Framework\u2122 Juniper Solutions Team",
-          "email": "juniper-solutions@eoframework.com",
-          "role": "Network Solutions Architect"
+          "name": "EO Framework\u2122 GitHub Solutions Team",
+          "email": "github-solutions@eoframework.com",
+          "role": "DevOps Solutions Architect"
         }
       ],
       "tags": [
-        "firewall",
-        "juniper",
-        "platform",
-        "cyber-security"
+        "advanced",
+        "cyber-security",
+        "github",
+        "security"
       ],
       "requirements": {
         "prerequisites": [
-          "JUNIPER Account",
+          "GITHUB Account",
           "Administrative Access"
         ],
         "tools": [
           "Python 3.8+",
-          "Ansible"
+          "GitHub CLI",
+          "Git"
         ],
         "skills": [
-          "JUNIPER Platform",
+          "GITHUB Platform",
           "Solution Architecture",
-          "Network Infrastructure"
+          "DevOps Practices"
         ]
       },
-      "solution_path": "../../solutions/juniper/cyber-security/srx-firewall-platform/",
-      "title": "SRX Firewall Platform"
+      "solution_path": "../../solutions/github/cyber-security/advanced-security/",
+      "title": "CodeQL Security Scanner"
     },
     {
-      "id": "cisco-cloud-hybrid-infrastructure",
-      "provider": "cisco",
+      "id": "ibm-cloud-openshift-container-platform",
+      "provider": "ibm",
       "category": "cloud",
-      "solution_name": "HyperFlex Cloud Bridge",
-      "description": "Seamless hybrid cloud infrastructure integration",
+      "solution_name": "Openshift Container Platform",
+      "description": "Enterprise container platform for modern applications",
       "version": "1.0.0",
       "status": "Active",
       "maintainers": [
         {
-          "name": "EO Framework\u2122 Cisco Solutions Team",
-          "email": "cisco-solutions@eoframework.com",
-          "role": "Network Solutions Architect"
+          "name": "EO Framework\u2122 IBM Solutions Team",
+          "email": "ibm-solutions@eoframework.com",
+          "role": "Enterprise Solutions Architect"
         }
       ],
       "tags": [
         "cloud",
-        "infrastructure",
-        "hybrid",
-        "cisco"
+        "platform",
+        "openshift",
+        "ibm",
+        "container"
       ],
       "requirements": {
         "prerequisites": [
-          "CISCO Account",
+          "IBM Account",
           "Administrative Access"
         ],
         "tools": [
           "Python 3.8+",
+          "OpenShift CLI",
           "Ansible"
         ],
         "skills": [
-          "CISCO Platform",
+          "IBM Platform",
           "Solution Architecture",
-          "Network Infrastructure"
+          "Container Platforms"
         ]
       },
-      "solution_path": "../../solutions/cisco/cloud/hybrid-infrastructure/",
-      "title": "HyperFlex Cloud Bridge"
+      "solution_path": "../../solutions/ibm/cloud/openshift-container-platform/",
+      "title": "Openshift Container Platform"
     },
     {
-      "id": "cisco-network-sd-wan-enterprise",
-      "provider": "cisco",
-      "category": "network",
-      "solution_name": "SD-WAN Enterprise",
-      "description": "Enterprise SD-WAN for optimized branch connectivity",
-      "version": "1.0.0",
-      "status": "Active",
-      "maintainers": [
-        {
-          "name": "EO Framework\u2122 Cisco Solutions Team",
-          "email": "cisco-solutions@eoframework.com",
-          "role": "Network Solutions Architect"
-        }
-      ],
-      "tags": [
-        "network",
-        "enterprise",
-        "cisco"
-      ],
-      "requirements": {
-        "prerequisites": [
-          "CISCO Account",
-          "Administrative Access"
-        ],
-        "tools": [
-          "Python 3.8+",
-          "Ansible"
-        ],
-        "skills": [
-          "CISCO Platform",
-          "Solution Architecture",
-          "Network Infrastructure"
-        ]
-      },
-      "solution_path": "../../solutions/cisco/network/sd-wan-enterprise/",
-      "title": "SD-WAN Enterprise"
-    },
-    {
-      "id": "cisco-cyber-security-secure-access",
-      "provider": "cisco",
-      "category": "cyber-security",
-      "solution_name": "Zero Trust Network Gateway",
-      "description": "Zero-trust network access for enhanced security",
-      "version": "1.0.0",
-      "status": "Active",
-      "maintainers": [
-        {
-          "name": "EO Framework\u2122 Cisco Solutions Team",
-          "email": "cisco-solutions@eoframework.com",
-          "role": "Network Solutions Architect"
-        }
-      ],
-      "tags": [
-        "secure",
-        "access",
-        "cyber-security",
-        "cisco"
-      ],
-      "requirements": {
-        "prerequisites": [
-          "CISCO Account",
-          "Administrative Access"
-        ],
-        "tools": [
-          "Python 3.8+",
-          "Ansible"
-        ],
-        "skills": [
-          "CISCO Platform",
-          "Solution Architecture",
-          "Network Infrastructure"
-        ]
-      },
-      "solution_path": "../../solutions/cisco/cyber-security/secure-access/",
-      "title": "Zero Trust Network Gateway"
-    },
-    {
-      "id": "cisco-ai-network-analytics",
-      "provider": "cisco",
-      "category": "ai",
-      "solution_name": "AI-Powered Network Insights",
-      "description": "AI-driven network insights for optimized performance",
-      "version": "1.0.0",
-      "status": "Active",
-      "maintainers": [
-        {
-          "name": "EO Framework\u2122 Cisco Solutions Team",
-          "email": "cisco-solutions@eoframework.com",
-          "role": "Network Solutions Architect"
-        }
-      ],
-      "tags": [
-        "network",
-        "ai",
-        "analytics",
-        "cisco"
-      ],
-      "requirements": {
-        "prerequisites": [
-          "CISCO Account",
-          "Administrative Access"
-        ],
-        "tools": [
-          "Python 3.8+",
-          "Ansible"
-        ],
-        "skills": [
-          "CISCO Platform",
-          "Solution Architecture",
-          "Network Infrastructure"
-        ]
-      },
-      "solution_path": "../../solutions/cisco/ai/network-analytics/",
-      "title": "AI-Powered Network Insights"
-    },
-    {
-      "id": "cisco-devops-ci-cd-automation",
-      "provider": "cisco",
+      "id": "ibm-devops-ansible-automation-platform",
+      "provider": "ibm",
       "category": "devops",
-      "solution_name": "Network Infrastructure Pipeline",
-      "description": "Network-aware CI/CD for infrastructure automation",
+      "solution_name": "Ansible Automation Platform",
+      "description": "IT automation platform for operational efficiency",
       "version": "1.0.0",
       "status": "Active",
       "maintainers": [
         {
-          "name": "EO Framework\u2122 Cisco Solutions Team",
-          "email": "cisco-solutions@eoframework.com",
-          "role": "Network Solutions Architect"
+          "name": "EO Framework\u2122 IBM Solutions Team",
+          "email": "ibm-solutions@eoframework.com",
+          "role": "Enterprise Solutions Architect"
         }
       ],
       "tags": [
+        "platform",
+        "ibm",
         "automation",
         "devops",
-        "cisco"
+        "ansible"
       ],
       "requirements": {
         "prerequisites": [
-          "CISCO Account",
+          "IBM Account",
           "Administrative Access"
         ],
         "tools": [
           "Python 3.8+",
+          "OpenShift CLI",
           "Ansible"
         ],
         "skills": [
-          "CISCO Platform",
+          "IBM Platform",
           "Solution Architecture",
-          "Network Infrastructure"
+          "Container Platforms"
         ]
       },
-      "solution_path": "../../solutions/cisco/devops/ci-cd-automation/",
-      "title": "Network Infrastructure Pipeline"
-    },
-    {
-      "id": "aws-cloud-disaster-recovery-web-application",
-      "provider": "aws",
-      "category": "cloud",
-      "solution_name": "Disaster Recovery Web Application",
-      "description": "Rapid business continuity with automated failover",
-      "version": "1.0.0",
-      "status": "Active",
-      "maintainers": [
-        {
-          "name": "EO Framework\u2122 AWS Solutions Team",
-          "email": "aws-solutions@eoframework.com",
-          "role": "Cloud Solutions Architect"
-        }
-      ],
-      "tags": [
-        "cloud",
-        "application",
-        "recovery",
-        "disaster",
-        "aws"
-      ],
-      "requirements": {
-        "prerequisites": [
-          "AWS Account",
-          "Administrative Access"
-        ],
-        "tools": [
-          "Python 3.8+",
-          "AWS CLI",
-          "Terraform"
-        ],
-        "skills": [
-          "AWS Platform",
-          "Solution Architecture",
-          "AWS Services"
-        ]
-      },
-      "solution_path": "../../solutions/aws/cloud/disaster-recovery-web-application/",
-      "title": "Disaster Recovery Web Application"
-    },
-    {
-      "id": "aws-cloud-onpremise-to-cloud-migration",
-      "provider": "aws",
-      "category": "cloud",
-      "solution_name": "Onpremise To Cloud Migration",
-      "description": "Seamless enterprise migration to modern cloud platform",
-      "version": "1.0.0",
-      "status": "Active",
-      "maintainers": [
-        {
-          "name": "EO Framework\u2122 AWS Solutions Team",
-          "email": "aws-solutions@eoframework.com",
-          "role": "Cloud Solutions Architect"
-        }
-      ],
-      "tags": [
-        "cloud",
-        "onpremise",
-        "aws",
-        "migration"
-      ],
-      "requirements": {
-        "prerequisites": [
-          "AWS Account",
-          "Administrative Access"
-        ],
-        "tools": [
-          "Python 3.8+",
-          "AWS CLI",
-          "Terraform"
-        ],
-        "skills": [
-          "AWS Platform",
-          "Solution Architecture",
-          "AWS Services"
-        ]
-      },
-      "solution_path": "../../solutions/aws/cloud/onpremise-to-cloud-migration/",
-      "title": "Onpremise To Cloud Migration"
-    },
-    {
-      "id": "aws-ai-intelligent-document-processing",
-      "provider": "aws",
-      "category": "ai",
-      "solution_name": "Intelligent Document Processing",
-      "description": "Automate document insights with AI-driven extraction",
-      "version": "1.0.0",
-      "status": "Active",
-      "maintainers": [
-        {
-          "name": "EO Framework\u2122 AWS Solutions Team",
-          "email": "aws-solutions@eoframework.com",
-          "role": "Cloud Solutions Architect"
-        }
-      ],
-      "tags": [
-        "document",
-        "ai",
-        "intelligent",
-        "processing",
-        "aws"
-      ],
-      "requirements": {
-        "prerequisites": [
-          "AWS Account",
-          "Administrative Access"
-        ],
-        "tools": [
-          "Python 3.8+",
-          "AWS CLI",
-          "Terraform"
-        ],
-        "skills": [
-          "AWS Platform",
-          "Solution Architecture",
-          "AWS Services"
-        ]
-      },
-      "solution_path": "../../solutions/aws/ai/intelligent-document-processing/",
-      "title": "Intelligent Document Processing"
-    },
-    {
-      "id": "microsoft-cyber-security-cmmc-enclave",
-      "provider": "microsoft",
-      "category": "cyber-security",
-      "solution_name": "CMMC Enclave",
-      "description": "CMMC-compliant secure enclave for defense contractors",
-      "version": "1.0.0",
-      "status": "Active",
-      "maintainers": [
-        {
-          "name": "EO Framework\u2122 Microsoft Solutions Team",
-          "email": "microsoft-solutions@eoframework.com",
-          "role": "Enterprise Solutions Architect"
-        }
-      ],
-      "tags": [
-        "microsoft",
-        "cmmc",
-        "cyber-security",
-        "enclave"
-      ],
-      "requirements": {
-        "prerequisites": [
-          "MICROSOFT Account",
-          "Administrative Access"
-        ],
-        "tools": [
-          "Python 3.8+",
-          "PowerShell",
-          "Microsoft Graph"
-        ],
-        "skills": [
-          "MICROSOFT Platform",
-          "Solution Architecture",
-          "Microsoft 365"
-        ]
-      },
-      "solution_path": "../../solutions/microsoft/cyber-security/cmmc-enclave/",
-      "title": "CMMC Enclave"
-    },
-    {
-      "id": "microsoft-modern-workspace-m365-deployment",
-      "provider": "microsoft",
-      "category": "modern-workspace",
-      "solution_name": "Microsoft 365 Deployment",
-      "description": "Complete Microsoft 365 enterprise deployment",
-      "version": "1.0.0",
-      "status": "Active",
-      "maintainers": [
-        {
-          "name": "EO Framework\u2122 Microsoft Solutions Team",
-          "email": "microsoft-solutions@eoframework.com",
-          "role": "Enterprise Solutions Architect"
-        }
-      ],
-      "tags": [
-        "microsoft",
-        "deployment",
-        "modern-workspace",
-        "m365"
-      ],
-      "requirements": {
-        "prerequisites": [
-          "MICROSOFT Account",
-          "Administrative Access"
-        ],
-        "tools": [
-          "Python 3.8+",
-          "PowerShell",
-          "Microsoft Graph"
-        ],
-        "skills": [
-          "MICROSOFT Platform",
-          "Solution Architecture",
-          "Microsoft 365"
-        ]
-      },
-      "solution_path": "../../solutions/microsoft/modern-workspace/m365-deployment/",
-      "title": "Microsoft 365 Deployment"
+      "solution_path": "../../solutions/ibm/devops/ansible-automation-platform/",
+      "title": "Ansible Automation Platform"
     },
     {
       "id": "nvidia-ai-gpu-compute-cluster",
@@ -886,184 +1127,29 @@
       "title": "Omniverse Enterprise"
     },
     {
-      "id": "dell-cloud-vxrail-hci",
-      "provider": "dell",
-      "category": "cloud",
-      "solution_name": "VxRail HCI",
-      "description": "Hyperconverged infrastructure for simplified IT",
+      "id": "cisco-ai-network-analytics",
+      "provider": "cisco",
+      "category": "ai",
+      "solution_name": "AI-Powered Network Insights",
+      "description": "AI-driven network insights for optimized performance",
       "version": "1.0.0",
       "status": "Active",
       "maintainers": [
         {
-          "name": "EO Framework\u2122 Dell Solutions Team",
-          "email": "dell-solutions@eoframework.com",
-          "role": "Infrastructure Solutions Architect"
-        }
-      ],
-      "tags": [
-        "cloud",
-        "vxrail",
-        "dell"
-      ],
-      "requirements": {
-        "prerequisites": [
-          "DELL Account",
-          "Administrative Access"
-        ],
-        "tools": [
-          "Python 3.8+",
-          "Ansible"
-        ],
-        "skills": [
-          "DELL Platform",
-          "Solution Architecture",
-          "Network Infrastructure"
-        ]
-      },
-      "solution_path": "../../solutions/dell/cloud/vxrail-hci/",
-      "title": "VxRail HCI"
-    },
-    {
-      "id": "dell-cloud-vxrail-hyperconverged",
-      "provider": "dell",
-      "category": "cloud",
-      "solution_name": "VxRail Hyperconverged",
-      "description": "Complete HCI platform for enterprise workloads",
-      "version": "1.0.0",
-      "status": "Active",
-      "maintainers": [
-        {
-          "name": "EO Framework\u2122 Dell Solutions Team",
-          "email": "dell-solutions@eoframework.com",
-          "role": "Infrastructure Solutions Architect"
-        }
-      ],
-      "tags": [
-        "cloud",
-        "vxrail",
-        "dell",
-        "hyperconverged"
-      ],
-      "requirements": {
-        "prerequisites": [
-          "DELL Account",
-          "Administrative Access"
-        ],
-        "tools": [
-          "Python 3.8+",
-          "Ansible"
-        ],
-        "skills": [
-          "DELL Platform",
-          "Solution Architecture",
-          "Network Infrastructure"
-        ]
-      },
-      "solution_path": "../../solutions/dell/cloud/vxrail-hyperconverged/",
-      "title": "VxRail Hyperconverged"
-    },
-    {
-      "id": "dell-network-powerswitch-datacenter",
-      "provider": "dell",
-      "category": "network",
-      "solution_name": "Powerswitch Datacenter",
-      "description": "High-performance datacenter switching fabric",
-      "version": "1.0.0",
-      "status": "Active",
-      "maintainers": [
-        {
-          "name": "EO Framework\u2122 Dell Solutions Team",
-          "email": "dell-solutions@eoframework.com",
-          "role": "Infrastructure Solutions Architect"
+          "name": "EO Framework\u2122 Cisco Solutions Team",
+          "email": "cisco-solutions@eoframework.com",
+          "role": "Network Solutions Architect"
         }
       ],
       "tags": [
         "network",
-        "datacenter",
-        "powerswitch",
-        "dell"
-      ],
-      "requirements": {
-        "prerequisites": [
-          "DELL Account",
-          "Administrative Access"
-        ],
-        "tools": [
-          "Python 3.8+",
-          "Ansible"
-        ],
-        "skills": [
-          "DELL Platform",
-          "Solution Architecture",
-          "Network Infrastructure"
-        ]
-      },
-      "solution_path": "../../solutions/dell/network/powerswitch-datacenter/",
-      "title": "Powerswitch Datacenter"
-    },
-    {
-      "id": "dell-cyber-security-safeid-authentication",
-      "provider": "dell",
-      "category": "cyber-security",
-      "solution_name": "Safeid Authentication",
-      "description": "Multi-factor authentication for secure access",
-      "version": "1.0.0",
-      "status": "Active",
-      "maintainers": [
-        {
-          "name": "EO Framework\u2122 Dell Solutions Team",
-          "email": "dell-solutions@eoframework.com",
-          "role": "Infrastructure Solutions Architect"
-        }
-      ],
-      "tags": [
-        "safeid",
-        "authentication",
-        "dell",
-        "cyber-security"
-      ],
-      "requirements": {
-        "prerequisites": [
-          "DELL Account",
-          "Administrative Access"
-        ],
-        "tools": [
-          "Python 3.8+",
-          "Ansible"
-        ],
-        "skills": [
-          "DELL Platform",
-          "Solution Architecture",
-          "Network Infrastructure"
-        ]
-      },
-      "solution_path": "../../solutions/dell/cyber-security/safeid-authentication/",
-      "title": "Safeid Authentication"
-    },
-    {
-      "id": "dell-ai-precision-ai-workstation",
-      "provider": "dell",
-      "category": "ai",
-      "solution_name": "Precision AI Workstation",
-      "description": "High-performance workstations for AI development",
-      "version": "1.0.0",
-      "status": "Active",
-      "maintainers": [
-        {
-          "name": "EO Framework\u2122 Dell Solutions Team",
-          "email": "dell-solutions@eoframework.com",
-          "role": "Infrastructure Solutions Architect"
-        }
-      ],
-      "tags": [
-        "workstation",
         "ai",
-        "precision",
-        "dell"
+        "analytics",
+        "cisco"
       ],
       "requirements": {
         "prerequisites": [
-          "DELL Account",
+          "CISCO Account",
           "Administrative Access"
         ],
         "tools": [
@@ -1071,375 +1157,289 @@
           "Ansible"
         ],
         "skills": [
-          "DELL Platform",
+          "CISCO Platform",
           "Solution Architecture",
           "Network Infrastructure"
         ]
       },
-      "solution_path": "../../solutions/dell/ai/precision-ai-workstation/",
-      "title": "Precision AI Workstation"
+      "solution_path": "../../solutions/cisco/ai/network-analytics/",
+      "title": "AI-Powered Network Insights"
     },
     {
-      "id": "dell-devops-poweredge-ci-infrastructure",
-      "provider": "dell",
-      "category": "devops",
-      "solution_name": "Poweredge Ci Infrastructure",
-      "description": "Enterprise CI infrastructure on PowerEdge servers",
-      "version": "1.0.0",
-      "status": "Active",
-      "maintainers": [
-        {
-          "name": "EO Framework\u2122 Dell Solutions Team",
-          "email": "dell-solutions@eoframework.com",
-          "role": "Infrastructure Solutions Architect"
-        }
-      ],
-      "tags": [
-        "dell",
-        "poweredge",
-        "devops",
-        "infrastructure"
-      ],
-      "requirements": {
-        "prerequisites": [
-          "DELL Account",
-          "Administrative Access"
-        ],
-        "tools": [
-          "Python 3.8+",
-          "Ansible"
-        ],
-        "skills": [
-          "DELL Platform",
-          "Solution Architecture",
-          "Network Infrastructure"
-        ]
-      },
-      "solution_path": "../../solutions/dell/devops/poweredge-ci-infrastructure/",
-      "title": "Poweredge Ci Infrastructure"
-    },
-    {
-      "id": "ibm-cloud-openshift-container-platform",
-      "provider": "ibm",
+      "id": "cisco-cloud-hybrid-infrastructure",
+      "provider": "cisco",
       "category": "cloud",
-      "solution_name": "Openshift Container Platform",
-      "description": "Enterprise container platform for modern applications",
+      "solution_name": "HyperFlex Cloud Bridge",
+      "description": "Seamless hybrid cloud infrastructure integration",
       "version": "1.0.0",
       "status": "Active",
       "maintainers": [
         {
-          "name": "EO Framework\u2122 IBM Solutions Team",
-          "email": "ibm-solutions@eoframework.com",
-          "role": "Enterprise Solutions Architect"
+          "name": "EO Framework\u2122 Cisco Solutions Team",
+          "email": "cisco-solutions@eoframework.com",
+          "role": "Network Solutions Architect"
         }
       ],
       "tags": [
         "cloud",
-        "platform",
-        "openshift",
-        "ibm",
-        "container"
+        "infrastructure",
+        "hybrid",
+        "cisco"
       ],
       "requirements": {
         "prerequisites": [
-          "IBM Account",
+          "CISCO Account",
           "Administrative Access"
         ],
         "tools": [
           "Python 3.8+",
-          "OpenShift CLI",
           "Ansible"
         ],
         "skills": [
-          "IBM Platform",
+          "CISCO Platform",
           "Solution Architecture",
-          "Container Platforms"
+          "Network Infrastructure"
         ]
       },
-      "solution_path": "../../solutions/ibm/cloud/openshift-container-platform/",
-      "title": "Openshift Container Platform"
+      "solution_path": "../../solutions/cisco/cloud/hybrid-infrastructure/",
+      "title": "HyperFlex Cloud Bridge"
     },
     {
-      "id": "ibm-devops-ansible-automation-platform",
-      "provider": "ibm",
-      "category": "devops",
-      "solution_name": "Ansible Automation Platform",
-      "description": "IT automation platform for operational efficiency",
+      "id": "cisco-network-sd-wan-enterprise",
+      "provider": "cisco",
+      "category": "network",
+      "solution_name": "SD-WAN Enterprise",
+      "description": "Enterprise SD-WAN for optimized branch connectivity",
       "version": "1.0.0",
       "status": "Active",
       "maintainers": [
         {
-          "name": "EO Framework\u2122 IBM Solutions Team",
-          "email": "ibm-solutions@eoframework.com",
-          "role": "Enterprise Solutions Architect"
+          "name": "EO Framework\u2122 Cisco Solutions Team",
+          "email": "cisco-solutions@eoframework.com",
+          "role": "Network Solutions Architect"
         }
       ],
       "tags": [
-        "platform",
-        "ibm",
+        "network",
+        "enterprise",
+        "cisco"
+      ],
+      "requirements": {
+        "prerequisites": [
+          "CISCO Account",
+          "Administrative Access"
+        ],
+        "tools": [
+          "Python 3.8+",
+          "Ansible"
+        ],
+        "skills": [
+          "CISCO Platform",
+          "Solution Architecture",
+          "Network Infrastructure"
+        ]
+      },
+      "solution_path": "../../solutions/cisco/network/sd-wan-enterprise/",
+      "title": "SD-WAN Enterprise"
+    },
+    {
+      "id": "cisco-devops-ci-cd-automation",
+      "provider": "cisco",
+      "category": "devops",
+      "solution_name": "Network Infrastructure Pipeline",
+      "description": "Network-aware CI/CD for infrastructure automation",
+      "version": "1.0.0",
+      "status": "Active",
+      "maintainers": [
+        {
+          "name": "EO Framework\u2122 Cisco Solutions Team",
+          "email": "cisco-solutions@eoframework.com",
+          "role": "Network Solutions Architect"
+        }
+      ],
+      "tags": [
         "automation",
         "devops",
-        "ansible"
+        "cisco"
       ],
       "requirements": {
         "prerequisites": [
-          "IBM Account",
+          "CISCO Account",
           "Administrative Access"
         ],
         "tools": [
           "Python 3.8+",
-          "OpenShift CLI",
           "Ansible"
         ],
         "skills": [
-          "IBM Platform",
+          "CISCO Platform",
           "Solution Architecture",
-          "Container Platforms"
+          "Network Infrastructure"
         ]
       },
-      "solution_path": "../../solutions/ibm/devops/ansible-automation-platform/",
-      "title": "Ansible Automation Platform"
+      "solution_path": "../../solutions/cisco/devops/ci-cd-automation/",
+      "title": "Network Infrastructure Pipeline"
     },
     {
-      "id": "azure-cloud-enterprise-landing-zone",
-      "provider": "azure",
-      "category": "cloud",
-      "solution_name": "Enterprise Landing Zone",
-      "description": "Secure Azure foundation for enterprise workloads",
+      "id": "cisco-cyber-security-secure-access",
+      "provider": "cisco",
+      "category": "cyber-security",
+      "solution_name": "Zero Trust Network Gateway",
+      "description": "Zero-trust network access for enhanced security",
       "version": "1.0.0",
       "status": "Active",
       "maintainers": [
         {
-          "name": "EO Framework\u2122 Azure Solutions Team",
-          "email": "azure-solutions@eoframework.com",
+          "name": "EO Framework\u2122 Cisco Solutions Team",
+          "email": "cisco-solutions@eoframework.com",
+          "role": "Network Solutions Architect"
+        }
+      ],
+      "tags": [
+        "secure",
+        "access",
+        "cyber-security",
+        "cisco"
+      ],
+      "requirements": {
+        "prerequisites": [
+          "CISCO Account",
+          "Administrative Access"
+        ],
+        "tools": [
+          "Python 3.8+",
+          "Ansible"
+        ],
+        "skills": [
+          "CISCO Platform",
+          "Solution Architecture",
+          "Network Infrastructure"
+        ]
+      },
+      "solution_path": "../../solutions/cisco/cyber-security/secure-access/",
+      "title": "Zero Trust Network Gateway"
+    },
+    {
+      "id": "aws-ai-intelligent-document-processing",
+      "provider": "aws",
+      "category": "ai",
+      "solution_name": "Intelligent Document Processing",
+      "description": "Automate document insights with AI-driven extraction",
+      "version": "1.0.0",
+      "status": "Active",
+      "maintainers": [
+        {
+          "name": "EO Framework\u2122 AWS Solutions Team",
+          "email": "aws-solutions@eoframework.com",
+          "role": "Cloud Solutions Architect"
+        }
+      ],
+      "tags": [
+        "document",
+        "ai",
+        "intelligent",
+        "processing",
+        "aws"
+      ],
+      "requirements": {
+        "prerequisites": [
+          "AWS Account",
+          "Administrative Access"
+        ],
+        "tools": [
+          "Python 3.8+",
+          "AWS CLI",
+          "Terraform"
+        ],
+        "skills": [
+          "AWS Platform",
+          "Solution Architecture",
+          "AWS Services"
+        ]
+      },
+      "solution_path": "../../solutions/aws/ai/intelligent-document-processing/",
+      "title": "Intelligent Document Processing"
+    },
+    {
+      "id": "aws-cloud-onpremise-to-cloud-migration",
+      "provider": "aws",
+      "category": "cloud",
+      "solution_name": "Onpremise To Cloud Migration",
+      "description": "Seamless enterprise migration to modern cloud platform",
+      "version": "1.0.0",
+      "status": "Active",
+      "maintainers": [
+        {
+          "name": "EO Framework\u2122 AWS Solutions Team",
+          "email": "aws-solutions@eoframework.com",
           "role": "Cloud Solutions Architect"
         }
       ],
       "tags": [
         "cloud",
-        "azure",
-        "landing",
-        "enterprise",
-        "zone"
+        "onpremise",
+        "aws",
+        "migration"
       ],
       "requirements": {
         "prerequisites": [
-          "AZURE Account",
+          "AWS Account",
           "Administrative Access"
         ],
         "tools": [
           "Python 3.8+",
-          "Azure CLI",
-          "PowerShell"
+          "AWS CLI",
+          "Terraform"
         ],
         "skills": [
-          "AZURE Platform",
+          "AWS Platform",
           "Solution Architecture",
-          "Azure Services"
+          "AWS Services"
         ]
       },
-      "solution_path": "../../solutions/azure/cloud/enterprise-landing-zone/",
-      "title": "Enterprise Landing Zone"
+      "solution_path": "../../solutions/aws/cloud/onpremise-to-cloud-migration/",
+      "title": "Onpremise To Cloud Migration"
     },
     {
-      "id": "azure-network-virtual-wan-global",
-      "provider": "azure",
-      "category": "network",
-      "solution_name": "Virtual Wan Global",
-      "description": "Global WAN connectivity for distributed enterprises",
+      "id": "aws-cloud-disaster-recovery-web-application",
+      "provider": "aws",
+      "category": "cloud",
+      "solution_name": "Disaster Recovery Web Application",
+      "description": "Rapid business continuity with automated failover",
       "version": "1.0.0",
       "status": "Active",
       "maintainers": [
         {
-          "name": "EO Framework\u2122 Azure Solutions Team",
-          "email": "azure-solutions@eoframework.com",
+          "name": "EO Framework\u2122 AWS Solutions Team",
+          "email": "aws-solutions@eoframework.com",
           "role": "Cloud Solutions Architect"
         }
       ],
       "tags": [
-        "azure",
-        "global",
-        "virtual",
-        "network"
+        "cloud",
+        "application",
+        "recovery",
+        "disaster",
+        "aws"
       ],
       "requirements": {
         "prerequisites": [
-          "AZURE Account",
+          "AWS Account",
           "Administrative Access"
         ],
         "tools": [
           "Python 3.8+",
-          "Azure CLI",
-          "PowerShell"
+          "AWS CLI",
+          "Terraform"
         ],
         "skills": [
-          "AZURE Platform",
+          "AWS Platform",
           "Solution Architecture",
-          "Azure Services"
+          "AWS Services"
         ]
       },
-      "solution_path": "../../solutions/azure/network/virtual-wan-global/",
-      "title": "Virtual Wan Global"
-    },
-    {
-      "id": "azure-cyber-security-sentinel-siem",
-      "provider": "azure",
-      "category": "cyber-security",
-      "solution_name": "Sentinel SIEM",
-      "description": "Cloud SIEM for advanced threat detection & response",
-      "version": "1.0.0",
-      "status": "Active",
-      "maintainers": [
-        {
-          "name": "EO Framework\u2122 Azure Solutions Team",
-          "email": "azure-solutions@eoframework.com",
-          "role": "Cloud Solutions Architect"
-        }
-      ],
-      "tags": [
-        "azure",
-        "sentinel",
-        "siem",
-        "cyber-security"
-      ],
-      "requirements": {
-        "prerequisites": [
-          "AZURE Account",
-          "Administrative Access"
-        ],
-        "tools": [
-          "Python 3.8+",
-          "Azure CLI",
-          "PowerShell"
-        ],
-        "skills": [
-          "AZURE Platform",
-          "Solution Architecture",
-          "Azure Services"
-        ]
-      },
-      "solution_path": "../../solutions/azure/cyber-security/sentinel-siem/",
-      "title": "Sentinel SIEM"
-    },
-    {
-      "id": "azure-ai-document-intelligence",
-      "provider": "azure",
-      "category": "ai",
-      "solution_name": "Cognitive Document Processor",
-      "description": "Smart document processing with Azure cognitive AI",
-      "version": "1.0.0",
-      "status": "Active",
-      "maintainers": [
-        {
-          "name": "EO Framework\u2122 Azure Solutions Team",
-          "email": "azure-solutions@eoframework.com",
-          "role": "Cloud Solutions Architect"
-        }
-      ],
-      "tags": [
-        "azure",
-        "ai",
-        "intelligence",
-        "document"
-      ],
-      "requirements": {
-        "prerequisites": [
-          "AZURE Account",
-          "Administrative Access"
-        ],
-        "tools": [
-          "Python 3.8+",
-          "Azure CLI",
-          "PowerShell"
-        ],
-        "skills": [
-          "AZURE Platform",
-          "Solution Architecture",
-          "Azure Services"
-        ]
-      },
-      "solution_path": "../../solutions/azure/ai/document-intelligence/",
-      "title": "Cognitive Document Processor"
-    },
-    {
-      "id": "azure-modern-workspace-virtual-desktop",
-      "provider": "azure",
-      "category": "modern-workspace",
-      "solution_name": "Virtual Desktop",
-      "description": "Secure remote desktop for modern workforce productivity",
-      "version": "1.0.0",
-      "status": "Active",
-      "maintainers": [
-        {
-          "name": "EO Framework\u2122 Azure Solutions Team",
-          "email": "azure-solutions@eoframework.com",
-          "role": "Cloud Solutions Architect"
-        }
-      ],
-      "tags": [
-        "azure",
-        "modern-workspace",
-        "virtual",
-        "desktop"
-      ],
-      "requirements": {
-        "prerequisites": [
-          "AZURE Account",
-          "Administrative Access"
-        ],
-        "tools": [
-          "Python 3.8+",
-          "Azure CLI",
-          "PowerShell"
-        ],
-        "skills": [
-          "AZURE Platform",
-          "Solution Architecture",
-          "Azure Services"
-        ]
-      },
-      "solution_path": "../../solutions/azure/modern-workspace/virtual-desktop/",
-      "title": "Virtual Desktop"
-    },
-    {
-      "id": "azure-devops-enterprise-platform",
-      "provider": "azure",
-      "category": "devops",
-      "solution_name": "DevOps Pipeline Factory",
-      "description": "DevOps platform for accelerated software delivery",
-      "version": "1.0.0",
-      "status": "Active",
-      "maintainers": [
-        {
-          "name": "EO Framework\u2122 Azure Solutions Team",
-          "email": "azure-solutions@eoframework.com",
-          "role": "Cloud Solutions Architect"
-        }
-      ],
-      "tags": [
-        "azure",
-        "enterprise",
-        "platform",
-        "devops"
-      ],
-      "requirements": {
-        "prerequisites": [
-          "AZURE Account",
-          "Administrative Access"
-        ],
-        "tools": [
-          "Python 3.8+",
-          "Azure CLI",
-          "PowerShell"
-        ],
-        "skills": [
-          "AZURE Platform",
-          "Solution Architecture",
-          "Azure Services"
-        ]
-      },
-      "solution_path": "../../solutions/azure/devops/enterprise-platform/",
-      "title": "DevOps Pipeline Factory"
+      "solution_path": "../../solutions/aws/cloud/disaster-recovery-web-application/",
+      "title": "Disaster Recovery Web Application"
     }
   ]
 }

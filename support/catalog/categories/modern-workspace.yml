@@ -1,20 +1,14 @@
 version: '2.0'
 category: modern-workspace
-generated_at: '2025-09-14T03:02:59.008281'
+generated_at: '2025-09-27T16:52:26.006809'
 catalog_type: category
 metadata:
   category_name: Modern Workspace
   description: Digital workplace and collaboration solutions
   total_solutions: 4
-  last_updated: '2025-09-14T03:02:59.008288'
+  last_updated: '2025-09-27T16:52:26.006818'
   auto_generated: true
 providers:
-  nvidia:
-    solutions:
-    - name: omniverse-enterprise
-      title: Omniverse Enterprise
-      provider_catalog: ../providers/nvidia.yml
-      solution_path: ../../solutions/nvidia/modern-workspace/omniverse-enterprise/
   microsoft:
     solutions:
     - name: m365-deployment
@@ -33,3 +27,9 @@ providers:
       title: Virtual Desktop
       provider_catalog: ../providers/azure.yml
       solution_path: ../../solutions/azure/modern-workspace/virtual-desktop/
+  nvidia:
+    solutions:
+    - name: omniverse-enterprise
+      title: Omniverse Enterprise
+      provider_catalog: ../providers/nvidia.yml
+      solution_path: ../../solutions/nvidia/modern-workspace/omniverse-enterprise/

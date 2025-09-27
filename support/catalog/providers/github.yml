@@ -1,45 +1,13 @@
 version: '2.0'
 provider: github
-generated_at: '2025-09-14T03:02:58.920461'
+generated_at: '2025-09-27T16:52:25.926324'
 catalog_type: provider
 metadata:
   provider_name: GitHub
   total_solutions: 2
-  last_updated: '2025-09-14T03:02:58.920479'
+  last_updated: '2025-09-27T16:52:25.926331'
   auto_generated: true
 categories:
-  cyber-security:
-    solutions:
-      advanced-security:
-        provider: github
-        category: cyber-security
-        solution_name: CodeQL Security Scanner
-        description: Advanced threat protection for code repositories
-        version: 1.0.0
-        status: Active
-        maintainers:
-        - name: "EO Framework\u2122 GitHub Solutions Team"
-          email: github-solutions@eoframework.com
-          role: DevOps Solutions Architect
-        tags:
-        - advanced
-        - cyber-security
-        - github
-        - security
-        requirements:
-          prerequisites:
-          - GITHUB Account
-          - Administrative Access
-          tools:
-          - Python 3.8+
-          - GitHub CLI
-          - Git
-          skills:
-          - GITHUB Platform
-          - Solution Architecture
-          - DevOps Practices
-        solution_path: ../../solutions/github/cyber-security/advanced-security/
-        title: CodeQL Security Scanner
   devops:
     solutions:
       actions-enterprise-cicd:
@@ -73,3 +41,35 @@ categories:
           - DevOps Practices
         solution_path: ../../solutions/github/devops/actions-enterprise-cicd/
         title: GitHub Workflow Automation
+  cyber-security:
+    solutions:
+      advanced-security:
+        provider: github
+        category: cyber-security
+        solution_name: CodeQL Security Scanner
+        description: Advanced threat protection for code repositories
+        version: 1.0.0
+        status: Active
+        maintainers:
+        - name: "EO Framework\u2122 GitHub Solutions Team"
+          email: github-solutions@eoframework.com
+          role: DevOps Solutions Architect
+        tags:
+        - advanced
+        - cyber-security
+        - github
+        - security
+        requirements:
+          prerequisites:
+          - GITHUB Account
+          - Administrative Access
+          tools:
+          - Python 3.8+
+          - GitHub CLI
+          - Git
+          skills:
+          - GITHUB Platform
+          - Solution Architecture
+          - DevOps Practices
+        solution_path: ../../solutions/github/cyber-security/advanced-security/
+        title: CodeQL Security Scanner

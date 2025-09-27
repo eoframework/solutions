@@ -1,45 +1,13 @@
 version: '2.0'
 provider: microsoft
-generated_at: '2025-09-14T03:02:58.951371'
+generated_at: '2025-09-27T16:52:25.929967'
 catalog_type: provider
 metadata:
   provider_name: Microsoft
   total_solutions: 2
-  last_updated: '2025-09-14T03:02:58.951387'
+  last_updated: '2025-09-27T16:52:25.929975'
   auto_generated: true
 categories:
-  cyber-security:
-    solutions:
-      cmmc-enclave:
-        provider: microsoft
-        category: cyber-security
-        solution_name: CMMC Enclave
-        description: CMMC-compliant secure enclave for defense contractors
-        version: 1.0.0
-        status: Active
-        maintainers:
-        - name: "EO Framework\u2122 Microsoft Solutions Team"
-          email: microsoft-solutions@eoframework.com
-          role: Enterprise Solutions Architect
-        tags:
-        - microsoft
-        - cmmc
-        - cyber-security
-        - enclave
-        requirements:
-          prerequisites:
-          - MICROSOFT Account
-          - Administrative Access
-          tools:
-          - Python 3.8+
-          - PowerShell
-          - Microsoft Graph
-          skills:
-          - MICROSOFT Platform
-          - Solution Architecture
-          - Microsoft 365
-        solution_path: ../../solutions/microsoft/cyber-security/cmmc-enclave/
-        title: CMMC Enclave
   modern-workspace:
     solutions:
       m365-deployment:
@@ -72,3 +40,35 @@ categories:
           - Microsoft 365
         solution_path: ../../solutions/microsoft/modern-workspace/m365-deployment/
         title: Microsoft 365 Deployment
+  cyber-security:
+    solutions:
+      cmmc-enclave:
+        provider: microsoft
+        category: cyber-security
+        solution_name: CMMC Enclave
+        description: CMMC-compliant secure enclave for defense contractors
+        version: 1.0.0
+        status: Active
+        maintainers:
+        - name: "EO Framework\u2122 Microsoft Solutions Team"
+          email: microsoft-solutions@eoframework.com
+          role: Enterprise Solutions Architect
+        tags:
+        - microsoft
+        - cmmc
+        - cyber-security
+        - enclave
+        requirements:
+          prerequisites:
+          - MICROSOFT Account
+          - Administrative Access
+          tools:
+          - Python 3.8+
+          - PowerShell
+          - Microsoft Graph
+          skills:
+          - MICROSOFT Platform
+          - Solution Architecture
+          - Microsoft 365
+        solution_path: ../../solutions/microsoft/cyber-security/cmmc-enclave/
+        title: CMMC Enclave

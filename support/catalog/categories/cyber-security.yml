@@ -1,47 +1,47 @@
 version: '2.0'
 category: cyber-security
-generated_at: '2025-09-14T03:02:59.010923'
+generated_at: '2025-09-27T16:52:26.001439'
 catalog_type: category
 metadata:
   category_name: Cyber Security
   description: Security, compliance, and threat protection solutions
   total_solutions: 6
-  last_updated: '2025-09-14T03:02:59.010931'
+  last_updated: '2025-09-27T16:52:26.001448'
   auto_generated: true
 providers:
-  github:
-    solutions:
-    - name: advanced-security
-      title: CodeQL Security Scanner
-      provider_catalog: ../providers/github.yml
-      solution_path: ../../solutions/github/cyber-security/advanced-security/
-  dell:
-    solutions:
-    - name: safeid-authentication
-      title: Safeid Authentication
-      provider_catalog: ../providers/dell.yml
-      solution_path: ../../solutions/dell/cyber-security/safeid-authentication/
-  juniper:
-    solutions:
-    - name: srx-firewall-platform
-      title: SRX Firewall Platform
-      provider_catalog: ../providers/juniper.yml
-      solution_path: ../../solutions/juniper/cyber-security/srx-firewall-platform/
-  microsoft:
-    solutions:
-    - name: cmmc-enclave
-      title: CMMC Enclave
-      provider_catalog: ../providers/microsoft.yml
-      solution_path: ../../solutions/microsoft/cyber-security/cmmc-enclave/
-  azure:
-    solutions:
-    - name: sentinel-siem
-      title: Sentinel SIEM
-      provider_catalog: ../providers/azure.yml
-      solution_path: ../../solutions/azure/cyber-security/sentinel-siem/
   cisco:
     solutions:
     - name: secure-access
       title: Zero Trust Network Gateway
       provider_catalog: ../providers/cisco.yml
       solution_path: ../../solutions/cisco/cyber-security/secure-access/
+  github:
+    solutions:
+    - name: advanced-security
+      title: CodeQL Security Scanner
+      provider_catalog: ../providers/github.yml
+      solution_path: ../../solutions/github/cyber-security/advanced-security/
+  microsoft:
+    solutions:
+    - name: cmmc-enclave
+      title: CMMC Enclave
+      provider_catalog: ../providers/microsoft.yml
+      solution_path: ../../solutions/microsoft/cyber-security/cmmc-enclave/
+  dell:
+    solutions:
+    - name: safeid-authentication
+      title: Safeid Authentication
+      provider_catalog: ../providers/dell.yml
+      solution_path: ../../solutions/dell/cyber-security/safeid-authentication/
+  azure:
+    solutions:
+    - name: sentinel-siem
+      title: Sentinel SIEM
+      provider_catalog: ../providers/azure.yml
+      solution_path: ../../solutions/azure/cyber-security/sentinel-siem/
+  juniper:
+    solutions:
+    - name: srx-firewall-platform
+      title: SRX Firewall Platform
+      provider_catalog: ../providers/juniper.yml
+      solution_path: ../../solutions/juniper/cyber-security/srx-firewall-platform/

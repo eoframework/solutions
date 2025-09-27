@@ -1,24 +1,26 @@
 version: '2.0'
 category: ai
-generated_at: '2025-09-14T03:02:59.005382'
+generated_at: '2025-09-27T16:52:25.980099'
 catalog_type: category
 metadata:
   category_name: AI
   description: Artificial Intelligence and Machine Learning solutions
   total_solutions: 5
-  last_updated: '2025-09-14T03:02:59.005388'
+  last_updated: '2025-09-27T16:52:25.980109'
   auto_generated: true
 providers:
-  nvidia:
+  cisco:
     solutions:
-    - name: gpu-compute-cluster
-      title: GPU Compute Cluster
-      provider_catalog: ../providers/nvidia.yml
-      solution_path: ../../solutions/nvidia/ai/gpu-compute-cluster/
-    - name: dgx-superpod
-      title: DGX SuperPOD
-      provider_catalog: ../providers/nvidia.yml
-      solution_path: ../../solutions/nvidia/ai/dgx-superpod/
+    - name: network-analytics
+      title: AI-Powered Network Insights
+      provider_catalog: ../providers/cisco.yml
+      solution_path: ../../solutions/cisco/ai/network-analytics/
+  aws:
+    solutions:
+    - name: intelligent-document-processing
+      title: Intelligent Document Processing
+      provider_catalog: ../providers/aws.yml
+      solution_path: ../../solutions/aws/ai/intelligent-document-processing/
   dell:
     solutions:
     - name: precision-ai-workstation
@@ -31,15 +33,13 @@ providers:
       title: Cognitive Document Processor
       provider_catalog: ../providers/azure.yml
       solution_path: ../../solutions/azure/ai/document-intelligence/
-  aws:
+  nvidia:
     solutions:
-    - name: intelligent-document-processing
-      title: Intelligent Document Processing
-      provider_catalog: ../providers/aws.yml
-      solution_path: ../../solutions/aws/ai/intelligent-document-processing/
-  cisco:
-    solutions:
-    - name: network-analytics
-      title: AI-Powered Network Insights
-      provider_catalog: ../providers/cisco.yml
-      solution_path: ../../solutions/cisco/ai/network-analytics/
+    - name: gpu-compute-cluster
+      title: GPU Compute Cluster
+      provider_catalog: ../providers/nvidia.yml
+      solution_path: ../../solutions/nvidia/ai/gpu-compute-cluster/
+    - name: dgx-superpod
+      title: DGX SuperPOD
+      provider_catalog: ../providers/nvidia.yml
+      solution_path: ../../solutions/nvidia/ai/dgx-superpod/
