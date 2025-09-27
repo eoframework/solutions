@@ -8,15 +8,16 @@ This directory contains comprehensive implementation, operations, and technical 
 
 | Document | Purpose | Target Audience | Usage Phase | Effort Required |
 |----------|---------|-----------------|-------------|-----------------|
-| **[🏗️ Architecture](architecture.md)** | Solution architecture and technical design | Architects, Engineers | Design | 20-30 minutes |
-| **[✅ Prerequisites](prerequisites.md)** | Requirements, skills, and preparation steps | Implementation Teams | Planning | 15-20 minutes |
-| **[📋 Requirements Specification](requirements-specification.csv)** | Detailed functional and technical requirements | Implementation Teams | Requirements | 4-8 hours |
+| **[📅 Project Plan](project-plan.csv)** | Master project timeline, milestones, and dependencies | Project Teams | Planning/Execution | 1-2 days |
+| **[👥 Roles](roles.csv)** | RACI matrix and team assignments with contact information | All Teams | Planning/Execution | 4-8 hours |
+| **[📢 Communication Plan](communication-plan.csv)** | Stakeholder communication strategy and meeting schedules | All Stakeholders | Planning/Execution | 4-8 hours |
+| **[📋 Requirements](requirements.csv)** | Comprehensive requirements including prerequisites, functional, and technical specs | Implementation Teams | Planning/Requirements | 4-8 hours |
+| **[🏗️ Detailed Design](detailed-design.md)** | Comprehensive technical design including architecture, security, integration, and operational design | Architects, Engineers | Design | 2-4 hours |
 | **[📖 Implementation Guide](implementation-guide.md)** | Step-by-step deployment procedures | Implementation Teams | Deployment | 2-4 days |
-| **[⚙️ Configuration Templates](configuration-templates.md)** | Setup examples and standards | Technical Teams | Configuration | 4-8 hours |
-| **[🧪 Testing Procedures](testing-procedures.md)** | Quality assurance and validation | QA Teams | Testing | 1-2 days |
-| **[🔧 Troubleshooting](troubleshooting.md)** | Issue resolution and diagnostic procedures | Operations, Support | Reference | Operations |
-| **[🎓 Training Materials](training-materials.md)** | User enablement and knowledge transfer | End Users, Admins | Enablement | 2-3 days |
-| **[🔄 Operations Runbook](operations-runbook.md)** | Day-to-day operational procedures | Operations Teams | Operations | Ongoing |
+| **[⚙️ Configuration](configuration.csv)** | Structured configuration settings and environment variables | Technical Teams | Configuration | 4-8 hours |
+| **[🧪 Test Plan](test-plan.csv)** | Comprehensive test cases with tracking and status | QA Teams | Testing | 1-2 days |
+| **[🎓 Training Plan](training-plan.csv)** | Organized training modules with schedules and tracking | Training Teams | Enablement | 2-3 days |
+| **[🎯 Closeout Presentation](closeout-presentation.md)** | Final project presentation with achievements, lessons learned, and recommendations | Executive Team | Closure | 4-8 hours |
 | **[🤖 Scripts Directory](scripts/)** | Automation and deployment tools | DevOps Teams | Automation | Variable |
 
 ### 🎯 **Documentation Quality Standards**
