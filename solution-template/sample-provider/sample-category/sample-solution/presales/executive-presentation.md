@@ -262,22 +262,7 @@ Foundation → Implementation → Optimization → Value Realization
 
 ---
 
-### Slide 17: Investment Authorization
-**Seeking Your Approval**
-
-**Requesting Authorization for:**
-- ✅ Project approval and budget allocation
-- ✅ Resource commitment from [Client] team
-- ✅ Executive sponsorship
-- ✅ Target go-live date: [Date]
-
-**Total Investment:** $[Amount]
-**Expected Annual ROI:** [Percentage]
-**Payback Period:** [Months]
-
----
-
-### Slide 18: Contact Information
+### Slide 17: Contact Information
 **Your Implementation Team**
 
 **Project Lead:**

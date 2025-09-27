@@ -8,11 +8,13 @@ This directory contains comprehensive business and sales materials for the **{SO
 
 | Document | Primary Audience | Usage Phase | Preparation Time |
 |----------|------------------|-------------|------------------|
-| **[💰 Business Case](business-case-template.md)** | Executives, Budget Holders | Funding Approval | 2-4 hours |
-| **[📊 Executive Presentation](executive-presentation-template.md)** | C-Level, Senior Leadership | Strategic Presentations | 1-2 hours |
-| **[📈 ROI Calculator](roi-calculator-template.md)** | Financial Teams, CFO | Budget Justification | 1-2 hours |
-| **[❓ Requirements Questionnaire](requirements-questionnaire.md)** | Technical Teams, IT Leadership | Discovery & Assessment | 3-5 hours |
-| **[🎨 Solution Design](solution-design-template.md)** | Architects, Technical Leaders | Technical Planning | 4-6 hours |
+| **[💰 Business Case](business-case.md)** | Executives, Budget Holders | Funding Approval | 2-4 hours |
+| **[📊 Executive Presentation](executive-presentation.md)** | C-Level, Senior Leadership | Strategic Presentations | 1-2 hours |
+| **[📈 ROI Calculator](roi-calculator.csv)** | Financial Teams, CFO | Budget Justification | 1-2 hours |
+| **[❓ Requirements Questionnaire](requirements-questionnaire.csv)** | Technical Teams, IT Leadership | Discovery & Assessment | 3-5 hours |
+| **[⏱️ Level of Effort Estimate](level-of-effort-estimate.csv)** | Project Managers, Resource Planning | Project Planning | 6-12 hours |
+| **[🎨 Solution Design](solution-design.md)** | Architects, Technical Leaders | Technical Planning | 4-6 hours |
+| **[📄 Statement of Work](statement-of-work.md)** | Legal, Contracts, Project Managers | Contract Negotiation | 3-6 hours |
 
 ### 💼 **Business Value Proposition**
 
@@ -46,10 +48,12 @@ Technical Design → Business Case → Executive Presentation → Proposal
 ```
 
 **Materials Used**:
-1. **[🎨 Solution Design](solution-design-template.md)** - Technical architecture planning
-2. **[💰 Business Case](business-case-template.md)** - Comprehensive business justification
-3. **[📊 Executive Presentation](executive-presentation-template.md)** - Senior leadership materials
-4. **[📈 ROI Calculator](roi-calculator-template.md)** - Financial impact analysis
+1. **[❓ Requirements Questionnaire](requirements-questionnaire.csv)** - Initial discovery and assessment
+2. **[🎨 Solution Design](solution-design.md)** - Technical architecture planning
+3. **[⏱️ Level of Effort Estimate](level-of-effort-estimate.csv)** - Project planning and resource estimation
+4. **[💰 Business Case](business-case.md)** - Comprehensive business justification
+5. **[📊 Executive Presentation](executive-presentation.md)** - Senior leadership materials
+6. **[📈 ROI Calculator](roi-calculator.csv)** - Financial impact analysis
 
 ### **Phase 3: Validation & Approval** (Week 4-6)
 ```
@@ -61,6 +65,7 @@ Stakeholder Review → Technical Validation → Financial Approval → Contract
 **Materials Used**:
 1. **Technical Validation** - Architecture review and validation
 2. **Financial Review** - Budget approval and procurement process
+3. **[📄 Statement of Work](statement-of-work.md)** - Formal project scope and contract terms
 3. **Implementation Planning** - Resource allocation and timeline planning
 
 ## 📚 **Material Details & Usage**
@@ -244,7 +249,7 @@ Stakeholder Review → Technical Validation → Financial Approval → Contract
 - **Case Studies**: Customer success stories and metrics
 
 ### **🌐 Additional Resources**
-- **📖 Product Documentation**: [Technical Docs](../docs/)
+- **📖 Product Documentation**: [Technical Docs](../delivery/)
 - **🛠️ Implementation Guides**: [Delivery Materials](../delivery/)
 - **🤝 Partner Resources**: {PARTNER_PORTAL_LINK}
 - **📱 Mobile Resources**: {MOBILE_SALES_TOOLS}

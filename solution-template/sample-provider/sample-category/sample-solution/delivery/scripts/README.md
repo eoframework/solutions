@@ -523,8 +523,8 @@ ansible-vault decrypt configs/production.yml --output -
 ```
 
 ### **📞 Support Resources**
-- **Technical Documentation**: [Architecture Guide](../../docs/architecture.md)
-- **Troubleshooting Guide**: [Issue Resolution](../../docs/troubleshooting.md)  
+- **Technical Documentation**: [Architecture Guide](../architecture.md)
+- **Troubleshooting Guide**: [Issue Resolution](../troubleshooting.md)  
 - **Community Support**: [GitHub Discussions](https://github.com/eoframework/solutions/discussions)
 - **Professional Support**: {PROFESSIONAL_SUPPORT_CONTACT}
 
