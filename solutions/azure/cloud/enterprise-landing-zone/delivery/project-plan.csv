@@ -1,6 +1,6 @@
 Phase,Task ID,Task Name,Duration (Days),Start Date,End Date,Dependencies,Assigned To,Status,Progress %,Critical Path,Risk Level,Notes
 Phase 1: Planning and Assessment,T001,Project Initiation and Team Assembly,5,2025-02-01,2025-02-07,,Program Director,Not Started,0%,Yes,Low,Kick-off meeting and resource allocation
-Phase 1: Planning and Assessment,T002,Current State Assessment,10,2025-02-08,2025-02-21,T001,Solution Architect,Not Started,0%,Yes,Medium,Document existing infrastructure and applications
+Phase 1: Planning and Assessment,T002,Current State Assessment,10,2025-02-08,2025-02-21,T001,EO Quarterback,Not Started,0%,Yes,Medium,Document existing infrastructure and applications
 Phase 1: Planning and Assessment,T003,Requirements Gathering and Analysis,7,2025-02-08,2025-02-16,T001,Business Analyst,Not Started,0%,No,Low,Business and technical requirements documentation
 Phase 1: Planning and Assessment,T004,Risk Assessment and Mitigation Planning,5,2025-02-17,2025-02-23,T002 T003,Risk Manager,Not Started,0%,No,Medium,Identify and plan for project risks
 Phase 1: Planning and Assessment,T005,Azure Tenant and Subscription Planning,10,2025-02-22,2025-03-07,T002,Cloud Architect,Not Started,0%,Yes,Medium,Plan management group hierarchy and subscriptions
@@ -10,25 +10,25 @@ Phase 1: Planning and Assessment,T008,Governance Framework Design,8,2025-03-01,2
 Phase 2: Foundation Setup,T009,Azure AD Tenant Configuration,7,2025-03-10,2025-03-18,T005 T007,Identity Specialist,Not Started,0%,Yes,High,Configure tenant settings and conditional access
 Phase 2: Foundation Setup,T010,Management Group Hierarchy Deployment,5,2025-03-11,2025-03-17,T005,Cloud Engineer,Not Started,0%,Yes,Medium,Deploy management group structure
 Phase 2: Foundation Setup,T011,Azure Policy Framework Deployment,8,2025-03-18,2025-03-27,T008 T010,Policy Specialist,Not Started,0%,Yes,High,Deploy enterprise policies and initiatives
-Phase 2: Foundation Setup,T012,RBAC and Access Control Configuration,6,2025-03-19,2025-03-26,T009,Security Engineer,Not Started,0%,No,High,Configure role-based access controls
+Phase 2: Foundation Setup,T012,RBAC and Access Control Configuration,6,2025-03-19,2025-03-26,T009,EO Engineer,Not Started,0%,No,High,Configure role-based access controls
 Phase 2: Foundation Setup,T013,Subscription Provisioning and Organization,5,2025-03-17,2025-03-23,T010,Cloud Engineer,Not Started,0%,No,Medium,Create and organize platform subscriptions
 Phase 2: Foundation Setup,T014,Billing and Cost Management Setup,4,2025-03-24,2025-03-27,T013,FinOps Specialist,Not Started,0%,No,Low,Configure budgets and cost allocation
 Phase 3: Platform Services,T015,Identity Platform Deployment,10,2025-03-28,2025-04-10,T009 T011,Identity Specialist,Not Started,0%,Yes,High,Deploy identity infrastructure and services
 Phase 3: Platform Services,T016,Management Platform Deployment,8,2025-03-28,2025-04-07,T011 T013,Platform Engineer,Not Started,0%,Yes,Medium,Deploy monitoring and management services
 Phase 3: Platform Services,T017,Hub Network Infrastructure Deployment,12,2025-04-01,2025-04-16,T006 T011,Network Engineer,Not Started,0%,Yes,High,Deploy hub VNet and core network services
-Phase 3: Platform Services,T018,Azure Firewall Configuration,6,2025-04-17,2025-04-24,T017,Security Engineer,Not Started,0%,Yes,High,Configure firewall rules and policies
+Phase 3: Platform Services,T018,Azure Firewall Configuration,6,2025-04-17,2025-04-24,T017,EO Engineer,Not Started,0%,Yes,High,Configure firewall rules and policies
 Phase 3: Platform Services,T019,VPN Gateway and Connectivity Setup,8,2025-04-17,2025-04-28,T017,Network Engineer,Not Started,0%,No,Medium,Configure site-to-site VPN connectivity
-Phase 3: Platform Services,T020,Key Vault and Secrets Management,5,2025-04-08,2025-04-14,T015,Security Engineer,Not Started,0%,No,High,Deploy enterprise key management
+Phase 3: Platform Services,T020,Key Vault and Secrets Management,5,2025-04-08,2025-04-14,T015,EO Engineer,Not Started,0%,No,High,Deploy enterprise key management
 Phase 3: Platform Services,T021,Backup and Recovery Services,6,2025-04-08,2025-04-15,T016,Backup Specialist,Not Started,0%,No,Medium,Configure backup policies and procedures
-Phase 4: Security Implementation,T022,Security Center and Defender Configuration,7,2025-04-25,2025-05-03,T018 T020,Security Engineer,Not Started,0%,Yes,High,Enable advanced threat protection
+Phase 4: Security Implementation,T022,Security Center and Defender Configuration,7,2025-04-25,2025-05-03,T018 T020,EO Engineer,Not Started,0%,Yes,High,Enable advanced threat protection
 Phase 4: Security Implementation,T023,Azure Sentinel Deployment,10,2025-04-29,2025-05-12,T016 T022,SIEM Specialist,Not Started,0%,No,High,Deploy SIEM and security analytics
 Phase 4: Security Implementation,T024,Compliance and Governance Validation,8,2025-05-04,2025-05-13,T011 T022,Compliance Manager,Not Started,0%,No,Medium,Validate regulatory compliance
 Phase 4: Security Implementation,T025,Security Testing and Validation,10,2025-05-06,2025-05-19,T022 T023,Security Tester,Not Started,0%,No,High,Penetration testing and vulnerability assessment
 Phase 5: Landing Zone Deployment,T026,Corporate Landing Zone Template,8,2025-05-14,2025-05-23,T017 T022,Cloud Engineer,Not Started,0%,Yes,Medium,Deploy corporate workload landing zone
 Phase 5: Landing Zone Deployment,T027,Online Landing Zone Template,10,2025-05-14,2025-05-27,T017 T022,Cloud Engineer,Not Started,0%,Yes,Medium,Deploy internet-facing landing zone
 Phase 5: Landing Zone Deployment,T028,Spoke Network Connectivity,12,2025-05-24,2025-06-08,T026 T027,Network Engineer,Not Started,0%,Yes,Medium,Configure spoke VNet connectivity
-Phase 5: Landing Zone Deployment,T029,Application Security Controls,8,2025-05-28,2025-06-06,T027,Security Engineer,Not Started,0%,No,High,Configure application-layer security
-Phase 5: Landing Zone Deployment,T030,Landing Zone Testing and Validation,10,2025-06-09,2025-06-22,T028 T029,QA Engineer,Not Started,0%,Yes,Medium,End-to-end testing of landing zones
+Phase 5: Landing Zone Deployment,T029,Application Security Controls,8,2025-05-28,2025-06-06,T027,EO Engineer,Not Started,0%,No,High,Configure application-layer security
+Phase 5: Landing Zone Deployment,T030,Landing Zone Testing and Validation,10,2025-06-09,2025-06-22,T028 T029,EO Engineer,Not Started,0%,Yes,Medium,End-to-end testing of landing zones
 Phase 6: Monitoring and Operations,T031,Monitoring and Alerting Configuration,8,2025-06-16,2025-06-25,T016 T030,Operations Engineer,Not Started,0%,No,Medium,Configure comprehensive monitoring
 Phase 6: Monitoring and Operations,T032,Log Analytics and Reporting Setup,6,2025-06-16,2025-06-23,T016,Data Engineer,Not Started,0%,No,Low,Configure log analytics and dashboards
 Phase 6: Monitoring and Operations,T033,Automation and Runbook Development,10,2025-06-24,2025-07-07,T031,Automation Engineer,Not Started,0%,No,Medium,Develop operational automation
