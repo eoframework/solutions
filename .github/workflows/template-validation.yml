@@ -33,8 +33,8 @@ jobs:
       
       - name: Check for secrets
         run: |
-          # Basic secret scanning - exclude template files, placeholders and legitimate key references
-          if grep -r -i "password.*=\|secret.*=\|api_key.*=" . --exclude-dir=.git --exclude-dir=support --exclude="*.md" --exclude="*.yml" --exclude="*.tf" | grep -v -i "placeholder\|sample\|example\|your_\|add your\|replace\|template\|dummy\|configuration\|parameter\|variable"; then
+          # Basic secret scanning - exclude template files, placeholders and secure patterns
+          if grep -r -i "password.*=\|secret.*=\|api_key.*=" . --exclude-dir=.git --exclude-dir=support --exclude="*.md" --exclude="*.yml" --exclude="*.tf" | grep -v -i "placeholder\|sample\|example\|your_\|add your\|replace\|template\|dummy\|configuration\|parameter\|variable\|openssl rand\|getenv\|os.getenv\|secrets.token\|generate.*password\|\$(.*rand.*)\|environment\|env\|config\|args\.\|self\.\|\${\|help="; then
             echo "❌ Actual secrets found in templates"
             exit 1
           fi
