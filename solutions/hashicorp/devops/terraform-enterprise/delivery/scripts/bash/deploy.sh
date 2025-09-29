@@ -519,7 +519,7 @@ deploy_monitoring() {
     info "Deploying Prometheus..."
     helm upgrade --install prometheus prometheus-community/kube-prometheus-stack \
         --namespace monitoring \
-        --set grafana.adminPassword=admin123 \
+        --set grafana.adminPassword="${GRAFANA_ADMIN_PASSWORD:-$(openssl rand -base64 32)}" \
         --wait --timeout 600s
     
     # Create TFE ServiceMonitor

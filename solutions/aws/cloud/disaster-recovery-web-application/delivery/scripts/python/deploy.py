@@ -416,7 +416,7 @@ class DisasterRecoveryDeployment:
                 DBInstanceClass='db.r5.large',
                 Engine='mysql',
                 MasterUsername='admin',
-                MasterUserPassword=os.getenv('DB_PASSWORD', 'ChangeMePlease123!'),
+                MasterUserPassword=os.getenv('DB_PASSWORD'),
                 AllocatedStorage=100,
                 StorageType='gp2',
                 StorageEncrypted=True,

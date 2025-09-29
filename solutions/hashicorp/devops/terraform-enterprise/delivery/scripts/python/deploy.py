@@ -528,7 +528,7 @@ allowed_cidr_blocks = [
                 "helm", "upgrade", "--install", "prometheus",
                 "prometheus-community/kube-prometheus-stack",
                 "--namespace", "monitoring",
-                "--set", "grafana.adminPassword=admin123",
+                "--set", f"grafana.adminPassword={os.getenv('GRAFANA_ADMIN_PASSWORD', secrets.token_urlsafe(32))}",
                 "--wait", "--timeout", "600s"
             ], check=True)
             

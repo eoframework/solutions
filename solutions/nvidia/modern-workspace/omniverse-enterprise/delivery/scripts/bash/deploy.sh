@@ -199,7 +199,7 @@ create_admin_user() {
     # Create admin user via API
     docker exec omniverse-nucleus omni-cli user create \
         --username admin \
-        --password "${ADMIN_PASSWORD:-OmniverseAdmin123!}" \
+        --password "${ADMIN_PASSWORD:-$(openssl rand -base64 32)}" \
         --email admin@company.com \
         --role administrator
     
@@ -225,7 +225,7 @@ Services Deployed:
 
 Admin Credentials:
 - Username: admin
-- Password: ${ADMIN_PASSWORD:-OmniverseAdmin123!}
+- Password: ${ADMIN_PASSWORD:-[Generated randomly - check deployment logs]}
 
 Next Steps:
 1. Access the Nucleus Web Interface at http://$(hostname -I | awk '{print $1}'):3009
@@ -248,8 +248,8 @@ main() {
     
     # Get admin password from user if not set
     if [[ -z "${ADMIN_PASSWORD:-}" ]]; then
-        read -s -p "Enter admin password (default: OmniverseAdmin123!): " ADMIN_PASSWORD
-        ADMIN_PASSWORD=${ADMIN_PASSWORD:-OmniverseAdmin123!}
+        read -s -p "Enter admin password (or press Enter to generate randomly): " ADMIN_PASSWORD
+        ADMIN_PASSWORD=${ADMIN_PASSWORD:-$(openssl rand -base64 32)}
         echo
     fi
     

@@ -568,7 +568,7 @@ setup_monitoring() {
         --namespace monitoring \
         --set prometheus.prometheusSpec.retention=15d \
         --set prometheus.prometheusSpec.storageSpec.volumeClaimTemplate.spec.resources.requests.storage=100Gi \
-        --set grafana.adminPassword=admin123 \
+        --set grafana.adminPassword="${GRAFANA_ADMIN_PASSWORD:-$(openssl rand -base64 32)}" \
         --timeout=20m
     
     # Install GPU monitoring
