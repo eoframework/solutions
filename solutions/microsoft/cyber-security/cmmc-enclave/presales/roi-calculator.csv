@@ -1,0 +1,7 @@
+Category,Item,Current_Annual_Cost,Solution_Cost,Annual_Savings,3_Year_Savings
+Infrastructure,Current infrastructure costs,$100000,$80000,$20000,$60000
+Operations,Operational overhead,$50000,$35000,$15000,$45000
+Productivity,Staff productivity improvements,$0,$0,$25000,$75000
+Efficiency,Process efficiency gains,$0,$0,$15000,$45000
+Risk,Risk mitigation value,$0,$0,$10000,$30000
+Total,Total Cost Benefit Analysis,$150000,$115000,$85000,$255000

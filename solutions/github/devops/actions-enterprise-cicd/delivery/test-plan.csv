@@ -1,0 +1,6 @@
+Test_Phase,Test_Category,Test_ID,Test_Name,Description,Prerequisites,Expected_Result,Priority,Duration,Responsible_Team
+Functional Testing,Core Functionality,FT001,Basic Functionality Test,Verify core solution functionality,Solution deployed and configured,All core functions operational,High,60 minutes,QA Team
+Functional Testing,Integration Testing,FT002,System Integration Test,Validate integration with existing systems,Integration points configured,All integrations functional,High,90 minutes,Integration Team
+Performance Testing,Load Testing,PT001,Performance Load Test,Test solution under expected load,Performance test environment ready,Performance meets specifications,High,120 minutes,Performance Team
+Security Testing,Security Validation,ST001,Security Configuration Test,Validate security controls and configurations,Security policies applied,All security controls operational,High,90 minutes,Security Team
+User Acceptance,Business Validation,UAT001,User Acceptance Test,Validate solution meets business requirements,User training completed,Business requirements satisfied,Medium,180 minutes,Business Users

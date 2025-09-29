@@ -1,0 +1,9 @@
+Category,Question,Response_Type,Required,Options,Business_Impact
+Business Requirements,Primary business objectives,Text,Yes,,High
+Technical Requirements,Current technical environment,Text,Yes,,High
+Performance Requirements,Performance expectations,Multiple_Choice,Yes,Basic|Standard|High Performance,High
+Integration Requirements,Required system integrations,Text,Yes,,Medium
+Security Requirements,Security and compliance requirements,Multiple_Choice,Yes,Basic|Standard|High Security,High
+Budget Requirements,Budget range for solution,Multiple_Choice,Yes,Under $50K|$50K-$150K|$150K-$500K|Over $500K,High
+Timeline Requirements,Expected implementation timeline,Multiple_Choice,Yes,1-3 months|3-6 months|6-12 months|Over 12 months,Medium
+Support Requirements,Ongoing support expectations,Multiple_Choice,Yes,Community|Professional|Enterprise,Medium

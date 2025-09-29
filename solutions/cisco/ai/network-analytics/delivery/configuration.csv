@@ -1,0 +1,10 @@
+Component,Parameter,Environment,Value,Data_Type,Required,Description,Validation_Rule,Default_Value
+Solution Configuration,Solution Name,All,Enterprise Solution,String,Yes,Solution identifier,Valid solution name,Enterprise Solution
+Environment,Environment Type,Dev,Development,String,Yes,Environment designation,dev|test|prod,dev
+Environment,Environment Type,Test,Test,String,Yes,Environment designation,dev|test|prod,test
+Environment,Environment Type,Prod,Production,String,Yes,Environment designation,dev|test|prod,prod
+Network Configuration,Network Mode,All,Enterprise,String,Yes,Network configuration mode,Basic|Standard|Enterprise,Enterprise
+Security Configuration,Security Level,All,High,String,Yes,Security configuration level,Low|Medium|High,High
+Performance Configuration,Performance Tier,All,Standard,String,Yes,Performance configuration tier,Basic|Standard|Premium,Standard
+Monitoring Configuration,Monitoring Enabled,All,true,Boolean,Yes,Enable comprehensive monitoring,true|false,true
+Backup Configuration,Backup Enabled,All,true,Boolean,Yes,Enable automated backups,true|false,true
