@@ -3,9 +3,9 @@ Assessment,Migration Readiness Assessment,Conduct comprehensive on-premise infra
 Assessment,Application Portfolio Analysis,Analyze and categorize applications for migration strategy,EO Engineer,48,$190,$9,120,,Medium,Include complexity scoring and cloud readiness assessment
 Assessment,Dependency Mapping,Map application dependencies and data flows,EO Engineer,40,$160,$6,400,Application Portfolio Analysis,High,Critical for migration wave planning
 Assessment,Network Assessment,Evaluate network connectivity and bandwidth requirements,EO Engineer,24,$170,$4,080,,Medium,Include hybrid connectivity planning
-Planning,Migration Wave Planning,Design migration waves and sequencing strategy,EO Quarterback,92,$200,$8,000,Dependency Mapping,High,Risk mitigation and rollback planning required
-Planning,Cloud Architecture Design,Design target cloud architecture and landing zones,EO Quarterback,92,$200,$11,200,Migration Readiness Assessment,Medium,Include security and compliance requirements
-Planning,Migration Factory Setup,Design migration factory processes and automation,EO Quarterback,92,$160,$7,680,Cloud Architecture Design,Medium,Include CI/CD pipeline setup
+Planning,Migration Wave Planning,Design migration waves and sequencing strategy,EO Engineer,92,$200,$8,000,Dependency Mapping,High,Risk mitigation and rollback planning required
+Planning,Cloud Architecture Design,Design target cloud architecture and landing zones,EO Quarterback,322,$200,$11,200,Migration Readiness Assessment,Medium,Include security and compliance requirements
+Planning,Migration Factory Setup,Design migration factory processes and automation,EO Engineer,92,$160,$7,680,Cloud Architecture Design,Medium,Include CI/CD pipeline setup
 Planning,Cutover Planning,Develop detailed cutover procedures and rollback plans,EO Engineer,32,$180,$5,760,Migration Wave Planning,High,Include business continuity planning
 Planning,Testing Strategy,Define migration testing approach and acceptance criteria,EO Engineer,24,$140,$3,360,Cutover Planning,Medium,Include performance baseline establishment
 Development,Landing Zone Implementation,Implement AWS landing zones and core services,EO Engineer,80,$160,$12,800,Cloud Architecture Design,Medium,Include security baseline configuration
@@ -26,5 +26,5 @@ Optimization,Cloud Optimization,Optimize cloud resources for cost and performanc
 Training,Technical Training,Train IT staff on cloud operations and management,EO Engineer,32,$140,$4,480,Cloud Optimization,Low,Include AWS best practices and tools
 Training,End User Training,Train business users on any application changes,EO Engineer,24,$130,$3,120,Technical Training,Low,Focus on workflow changes and new features
 Closeout,Knowledge Transfer,Transfer operational knowledge to internal teams,EO Engineer,24,$190,$4,560,End User Training,Low,Include documentation and runbooks
-Closeout,Project Closure,Complete project documentation and lessons learned,EO Project Manager,220,$150,$2,400,Knowledge Transfer,Low,Include success metrics and recommendations
+Closeout,Project Closure,Complete project documentation and lessons learned,EO Project Manager,96,$150,$2,400,Knowledge Transfer,Low,Include success metrics and recommendations
 ,,,"     TOTAL HOURS",1100,"   TOTAL COST","=TEXT(SUM(G2:G29),""$#,##0"")",,,Total migration project cost estimate

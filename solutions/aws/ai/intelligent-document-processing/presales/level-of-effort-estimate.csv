@@ -1,19 +1,19 @@
 Phase,Work Package,Task Description,Resource Type,Estimated Hours,Rate,Cost Estimate,Dependencies,Risk Level,Notes
 Discovery,Requirements Gathering,Conduct stakeholder interviews for IDP requirements,EO Engineer,40,$150,$6,000,,Low,Focus on document processing workflows
-Discovery,Document Analysis,Analyze current document types and processing volumes,EO Quarterback,43,$200,$6,400,,Medium,Document classification and data extraction requirements
+Discovery,Document Analysis,Analyze current document types and processing volumes,EO Engineer,43,$200,$6,400,,Medium,Document classification and data extraction requirements
 Discovery,AWS Environment Assessment,Evaluate existing AWS infrastructure and services,EO Engineer,24,$200,$4,800,,Medium,Focus on AI/ML services and document storage
 Discovery,Compliance Review,Assess data privacy and industry compliance requirements,EO Engineer,16,$175,$2,800,,High,GDPR HIPAA PCI-DSS considerations
-Planning,IDP Solution Design,Design AWS AI/ML architecture for document processing,EO Quarterback,43,$200,$9,600,Requirements Gathering,Medium,Include Textract Comprehend and custom models
-Planning,Data Flow Design,Design document ingestion processing and output workflows,EO Quarterback,43,$180,$5,760,Document Analysis,Medium,Include real-time and batch processing options
-Planning,Security Architecture,Design security controls for document processing pipeline,EO Quarterback,43,$175,$4,200,Compliance Review,High,Encryption key management and access controls
-Planning,Project Planning,Develop implementation timeline and resource allocation,EO Project Manager,46,$140,$3,360,IDP Solution Design,Low,Coordinate with AWS and AI/ML specialists
+Planning,IDP Solution Design,Design AWS AI/ML architecture for document processing,EO Quarterback,290,$200,$9,600,Requirements Gathering,Medium,Include Textract Comprehend and custom models
+Planning,Data Flow Design,Design document ingestion processing and output workflows,EO Engineer,43,$180,$5,760,Document Analysis,Medium,Include real-time and batch processing options
+Planning,Security Architecture,Design security controls for document processing pipeline,EO Engineer,113,$175,$4,200,Compliance Review,High,Encryption key management and access controls
+Planning,Project Planning,Develop implementation timeline and resource allocation,EO Project Manager,232,$140,$3,360,IDP Solution Design,Low,Coordinate with AWS and AI/ML specialists
 Development,AWS Infrastructure Setup,Provision Textract Comprehend S3 and supporting services,EO Engineer,40,$160,$6,400,IDP Solution Design,Medium,Multi-environment setup required
 Development,Document Processing Pipeline,Build core document ingestion and processing workflows,EO Engineer,80,$130,$10,400,AWS Infrastructure Setup,Medium,Focus on scalability and error handling
 Development,AI/ML Model Integration,Integrate AWS AI services and custom model endpoints,EO Engineer,60,$170,$10,200,Document Processing Pipeline,High,Model training and optimization included
 Development,Custom Classification Models,Develop custom document classification models,EO Engineer,48,$165,$7,920,AI/ML Model Integration,High,Training data preparation and validation
 Development,Data Extraction Logic,Build structured data extraction and validation logic,EO Engineer,40,$130,$5,200,Custom Classification Models,Medium,Handle various document formats and quality
 Development,API Development,Create REST APIs for document submission and retrieval,EO Engineer,32,$125,$4,000,Data Extraction Logic,Low,Include authentication and rate limiting
-Development,Web Interface,Build document upload and results viewing interface,EO Project Manager,46,$125,$5,000,API Development,Low,Responsive design with drag-drop functionality
+Development,Web Interface,Build document upload and results viewing interface,EO Engineer,46,$125,$5,000,API Development,Low,Responsive design with drag-drop functionality
 Testing,Unit Testing,Develop automated tests for all processing components,EO Engineer,32,$120,$3,840,Data Extraction Logic,Low,Include ML model accuracy testing
 Testing,Document Processing Testing,Test various document types formats and qualities,EO Engineer,40,$120,$4,800,Web Interface,Medium,Comprehensive document library required
 Testing,Performance Testing,Test system performance with high document volumes,EO Engineer,24,$140,$3,360,Document Processing Testing,Medium,Load testing with realistic document sizes
@@ -25,6 +25,6 @@ Deployment,Go-Live Support,Provide support during initial production rollout,EO 
 Training,Administrator Training,Train system administrators on IDP solution management,EO Engineer,16,$130,$2,080,Production Deployment,Low,AWS service management and monitoring
 Training,Business User Training,Train users on document submission and results review,EO Engineer,20,$120,$2,400,Administrator Training,Low,Role-based training for different user types
 Training,Documentation,Create user guides technical documentation and runbooks,EO Engineer,32,$110,$3,520,Business User Training,Low,Include troubleshooting and best practices
-Closeout,Knowledge Transfer,Transfer solution ownership to client operations team,EO Project Manager,45,$140,$2,240,Documentation,Low,Include operational procedures and escalation paths
+Closeout,Knowledge Transfer,Transfer solution ownership to client operations team,EO Project Manager,0,$140,$2,240,Documentation,Low,Include operational procedures and escalation paths
 Closeout,Performance Baseline,Establish performance metrics and monitoring baselines,EO Engineer,8,$130,$1,040,Knowledge Transfer,Low,Document accuracy SLAs and throughput metrics
 ,,,"     TOTAL HOURS",704,"   TOTAL COST","=TEXT(SUM(G2:G28),""$#,##0"")",,,Total AWS IDP project cost estimate
