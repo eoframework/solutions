@@ -1,0 +1,28 @@
+Phase,Work Package,Task Description,Resource Type,Estimated Hours,Rate,Cost Estimate,Dependencies,Risk Level,Notes
+Discovery,Business Continuity Assessment,Conduct RTO/RPO requirements analysis and business impact assessment,Business Continuity Analyst,40,$160,"$6,400",,Medium,Critical for defining DR objectives
+Discovery,Current State Analysis,Evaluate existing infrastructure and identify critical applications,Solution Architect,48,$200,"$9,600",,Medium,Complete inventory of systems and dependencies
+Discovery,Risk Assessment,Assess disaster scenarios and vulnerability analysis,Risk Management Specialist,32,$175,"$5,600",,High,Include natural disasters and cyber threats
+Discovery,Compliance Review,Review regulatory requirements (SOX HIPAA PCI etc.),Compliance Specialist,24,$180,"$4,320",,Medium,Industry-specific compliance validation
+Planning,DR Architecture Design,Design disaster recovery architecture and failover mechanisms,DR Architect,64,$220,"$14,080",Current State Analysis,High,Multi-region architecture complexity
+Planning,Recovery Strategy Planning,Define recovery procedures and failback processes,DR Specialist,40,$190,"$7,600",DR Architecture Design,Medium,Include automated and manual procedures
+Planning,Implementation Roadmap,Develop phased implementation plan with milestones,Project Manager,32,$140,"$4,480",Recovery Strategy Planning,Low,Coordinate with business continuity requirements
+Planning,Vendor Selection,Evaluate and select DR tools and third-party services,Technical Procurement Specialist,24,$155,"$3,720",DR Architecture Design,Medium,Include cost-benefit analysis
+Implementation,Primary Site Setup,Configure primary AWS region infrastructure and monitoring,Cloud Infrastructure Engineer,80,$170,"$13,600",DR Architecture Design,Medium,Multi-AZ deployment required
+Implementation,DR Site Setup,Configure secondary AWS region for disaster recovery,Cloud Infrastructure Engineer,96,$170,"$16,320",Primary Site Setup,High,Cross-region networking complexity
+Implementation,Data Replication Setup,Implement database replication and backup strategies,Database Specialist,72,$160,"$11,520",DR Site Setup,High,Real-time and scheduled replication
+Implementation,Application Deployment,Deploy web application across primary and DR environments,Application Deployment Engineer,88,$150,"$13,200",Data Replication Setup,Medium,Load balancer and auto-scaling configuration
+Implementation,Monitoring Integration,Implement DR monitoring and alerting systems,Monitoring Specialist,48,$145,"$6,960",Application Deployment,Medium,Health checks and failover triggers
+Implementation,Network Configuration,Configure VPN DNS and routing for DR scenarios,Network Engineer,56,$165,"$9,240",DR Site Setup,High,Ensure seamless failover connectivity
+Testing,DR Testing Framework,Develop automated DR testing procedures and scripts,Test Automation Engineer,64,$140,"$8,960",Monitoring Integration,Medium,Include various disaster scenarios
+Testing,Failover Testing,Execute planned failover tests and document results,DR Test Specialist,72,$155,"$11,160",DR Testing Framework,High,Business downtime coordination required
+Testing,Performance Validation,Validate DR environment performance meets RTO/RPO requirements,Performance Engineer,40,$150,"$6,000",Failover Testing,Medium,Load testing in DR environment
+Testing,Security Validation,Verify security controls and compliance in DR environment,Security Specialist,32,$175,"$5,600",Performance Validation,High,Compliance audit preparation
+Testing,End-to-End Testing,Complete application functionality testing in DR mode,QA Engineer,56,$125,"$7,000",Security Validation,Medium,User acceptance in DR scenario
+Documentation,DR Procedures Documentation,Create detailed disaster recovery runbooks and procedures,Technical Writer,48,$110,"$5,280",End-to-End Testing,Low,Include step-by-step recovery procedures
+Documentation,Training Materials,Develop DR training materials for operations teams,Training Specialist,32,$130,"$4,160",DR Procedures Documentation,Low,Hands-on scenarios and simulations
+Training,Operations Team Training,Train IT operations on DR procedures and tools,DR Trainer,40,$140,"$5,600",Training Materials,Medium,Include tabletop exercises
+Training,Executive Briefing,Brief executive leadership on DR capabilities and procedures,Business Continuity Manager,16,$200,"$3,200",Operations Team Training,Low,Decision-making during disasters
+Transition,DR Operations Handover,Transfer DR operations to ongoing support teams,Project Manager,24,$140,"$3,360",Executive Briefing,Low,Include 30-day support period
+Transition,Documentation Review,Final review and approval of all DR documentation,Technical Documentation Manager,16,$120,"$1,920",DR Operations Handover,Low,Version control and change management
+Transition,Lessons Learned,Conduct project retrospective and continuous improvement planning,Project Manager,16,$140,"$2,240",Documentation Review,Low,Include recommendations for DR optimization
+,,,"     TOTAL HOURS",1048,"   TOTAL COST","=TEXT(SUM(G2:G26),""$#,##0"")",,,Total DR implementation cost estimate

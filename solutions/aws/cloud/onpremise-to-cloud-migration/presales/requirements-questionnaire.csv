@@ -1,0 +1,61 @@
+Question ID,Category,Sub-Category,Question,Response Type,Response Options,Customer Response,Priority,Source,Notes
+PROJ-001,Project Information,Basic Details,What is the cloud migration project name?,Text,,"",High,Template,Internal project reference
+PROJ-002,Project Information,Basic Details,What is your company name?,Text,,"",High,Template,Client identification
+PROJ-003,Project Information,Basic Details,Who is the primary stakeholder for this migration?,Text,,"",High,Template,Main point of contact
+PROJ-004,Project Information,Basic Details,What is the stakeholder's role?,Text,,"",Medium,Template,Decision-making authority
+PROJ-005,Project Information,Basic Details,What is today's date?,Date,,"",Low,Template,Questionnaire completion date
+CURRENT-001,Current Environment,Infrastructure Assessment,How many servers are currently on-premise?,Number,,"",High,Assessment,Migration scope sizing
+CURRENT-002,Current Environment,Infrastructure Assessment,What operating systems are in use?,Multiple Choice,"Windows Server 2012/2016/2019/2022,Linux (RHEL/CentOS/Ubuntu),Unix (AIX/Solaris),Other","",High,Assessment,OS compatibility assessment
+CURRENT-003,Current Environment,Infrastructure Assessment,What is the total storage capacity currently used?,Text,,"",High,Assessment,Storage migration planning
+CURRENT-004,Current Environment,Infrastructure Assessment,What databases are currently in use?,Multiple Choice,"SQL Server,Oracle,MySQL,PostgreSQL,MongoDB,Other NoSQL,Other","",High,Assessment,Database migration strategy
+CURRENT-005,Current Environment,Network Assessment,What is your current network bandwidth?,Multiple Choice,"< 100 Mbps,100 Mbps - 1 Gbps,1-10 Gbps,> 10 Gbps","",High,Assessment,Migration bandwidth planning
+CURRENT-006,Current Environment,Network Assessment,Do you have existing AWS connectivity?,Multiple Choice,"No connectivity,VPN connection,Direct Connect,ExpressRoute,Other","",High,Assessment,Hybrid connectivity options
+CURRENT-007,Current Environment,Application Portfolio,How many applications need to be migrated?,Number,,"",High,Assessment,Application migration scope
+CURRENT-008,Current Environment,Application Portfolio,What types of applications are involved?,Multiple Choice,"Web applications,Enterprise applications,Databases,File servers,Email systems,Legacy systems,Custom applications,Other","",High,Assessment,Application categorization
+CURRENT-009,Current Environment,Application Portfolio,Which applications are business-critical?,Text,,"",High,Assessment,Migration prioritization
+CURRENT-010,Current Environment,Dependencies,What are the key application dependencies?,Text,,"",High,Assessment,Dependency mapping for wave planning
+MIGRATION-001,Migration Strategy,Approach,What is your preferred migration approach?,Multiple Choice,"Lift and shift (rehost),Re-platform,Re-architect,Hybrid approach,Not sure","",High,Strategy,Migration strategy definition
+MIGRATION-002,Migration Strategy,Timeline,What is your target timeline for migration completion?,Multiple Choice,"3-6 months,6-12 months,12-18 months,18+ months","",High,Planning,Migration timeline expectations
+MIGRATION-003,Migration Strategy,Downtime,What is your acceptable downtime per application?,Multiple Choice,"No downtime,< 1 hour,1-4 hours,4-8 hours,1-2 days,Flexible","",High,Planning,Cutover planning
+MIGRATION-004,Migration Strategy,Pilot,Do you want to start with a pilot migration?,Yes/No,"Yes,No","",High,Strategy,Pilot approach validation
+MIGRATION-005,Migration Strategy,Waves,How would you prefer to sequence the migration?,Multiple Choice,"All at once,By application type,By business unit,By complexity,By dependencies,Let consultant decide","",High,Planning,Wave planning strategy
+MIGRATION-006,Migration Strategy,Testing,What testing approach do you prefer?,Multiple Choice,"Minimal testing,Standard testing,Comprehensive testing,Parallel running,Other","",High,Planning,Testing strategy
+CLOUD-001,Cloud Strategy,Platform,Which AWS services are you interested in?,Multiple Choice,"EC2,RDS,S3,Lambda,ECS/EKS,Not sure,Other","",High,Strategy,Target service selection
+CLOUD-002,Cloud Strategy,Architecture,Do you want to optimize architecture during migration?,Yes/No,"Yes,No","",Medium,Strategy,Modernization opportunities
+CLOUD-003,Cloud Strategy,Cost,What are your cost optimization priorities?,Multiple Choice,"Reduce total cost,Predictable pricing,Pay-as-you-go,Reserved instances,Spot instances,Not sure","",High,Strategy,Cost optimization goals
+CLOUD-004,Cloud Strategy,Scalability,Do you need auto-scaling capabilities?,Multiple Choice,"Yes - critical,Yes - nice to have,No - not needed,Not sure","",Medium,Strategy,Scalability requirements
+CLOUD-005,Cloud Strategy,Management,Who will manage the cloud environment?,Multiple Choice,"Internal team,Managed services,Hybrid model,Not decided","",High,Strategy,Operational model
+SECURITY-001,Security & Compliance,Current State,What security tools are currently in use?,Text,,"",High,Security,Security migration planning
+SECURITY-002,Security & Compliance,Requirements,What compliance standards must be maintained?,Multiple Choice,"SOC 2,ISO 27001,HIPAA,PCI DSS,GDPR,FedRAMP,Other,None","",High,Security,Compliance requirements
+SECURITY-003,Security & Compliance,Data Classification,What types of sensitive data will be migrated?,Multiple Choice,"Customer PII,Financial data,Healthcare data,Payment data,Intellectual property,No sensitive data,Other","",High,Security,Data protection requirements
+SECURITY-004,Security & Compliance,Network Security,What network security requirements exist?,Multiple Choice,"Firewall rules,VPN access,Private networks,Network segmentation,Not sure,Other","",High,Security,Network security design
+SECURITY-005,Security & Compliance,Identity Management,What identity management systems are in use?,Text,,"",Medium,Security,Identity integration planning
+BUSINESS-001,Business Requirements,Drivers,What are the primary drivers for cloud migration?,Multiple Choice,"Cost reduction,Scalability,Disaster recovery,Innovation enablement,Legacy system modernization,Compliance,Other","",High,Discovery,Business justification
+BUSINESS-002,Business Requirements,Success Metrics,How will you measure migration success?,Text,,"",High,Discovery,Success criteria definition
+BUSINESS-003,Business Requirements,ROI,What ROI expectations do you have?,Multiple Choice,"Break even in 1 year,Break even in 2 years,Break even in 3+ years,Cost savings not primary goal","",High,Discovery,Financial expectations
+BUSINESS-004,Business Requirements,Performance,What are your performance requirements?,Text,,"",Medium,Discovery,Performance baseline
+BUSINESS-005,Business Requirements,Availability,What are your uptime requirements?,Multiple Choice,"99%,99.5%,99.9%,99.95%,99.99%","",High,Discovery,SLA requirements
+TECHNICAL-001,Technical Requirements,Backup & DR,What are your backup and DR requirements?,Text,,"",High,Technical,DR strategy design
+TECHNICAL-002,Technical Requirements,Monitoring,What monitoring and alerting is needed?,Text,,"",Medium,Technical,Monitoring strategy
+TECHNICAL-003,Technical Requirements,Integration,What systems need to integrate with migrated applications?,Text,,"",High,Technical,Integration requirements
+TECHNICAL-004,Technical Requirements,Performance,What are your performance baselines?,Text,,"",Medium,Technical,Performance validation
+TECHNICAL-005,Technical Requirements,Capacity,What are your peak capacity requirements?,Text,,"",Medium,Technical,Capacity planning
+ORGANIZATIONAL-001,Organizational Readiness,Team,Who will be the technical lead for the migration?,Text,,"",High,Resource Planning,Technical ownership
+ORGANIZATIONAL-002,Organizational Readiness,Skills,What cloud skills exist in your team?,Multiple Choice,"No cloud experience,Basic cloud knowledge,Intermediate cloud skills,Advanced cloud expertise","",High,Resource Planning,Training needs assessment
+ORGANIZATIONAL-003,Organizational Readiness,Training,What training will be needed post-migration?,Text,,"",Medium,Resource Planning,Enablement requirements
+ORGANIZATIONAL-004,Organizational Readiness,Change Management,How will you manage organizational change?,Text,,"",Medium,Change Management,Change strategy
+ORGANIZATIONAL-005,Organizational Readiness,Support,What ongoing support model do you prefer?,Multiple Choice,"Full self-service,Hybrid support,Fully managed,Not decided","",High,Resource Planning,Support model
+RISK-001,Risk Assessment,Technical Risks,What are your main technical concerns?,Text,,"",High,Risk Assessment,Technical risk mitigation
+RISK-002,Risk Assessment,Business Risks,What business risks are you trying to address?,Text,,"",High,Risk Assessment,Business risk factors
+RISK-003,Risk Assessment,Migration Risks,What concerns do you have about the migration process?,Text,,"",High,Risk Assessment,Migration risk factors
+RISK-004,Risk Assessment,Data Risk,What are your data migration concerns?,Text,,"",High,Risk Assessment,Data protection priorities
+RISK-005,Risk Assessment,Rollback,What is your rollback strategy if migration fails?,Text,,"",High,Risk Assessment,Contingency planning
+CONSTRAINTS-001,Project Constraints,Budget,What is your migration budget range?,Multiple Choice,"$50K-250K,$250K-1M,$1M-5M,>$5M","",High,Planning,Budget constraints
+CONSTRAINTS-002,Project Constraints,Timeline,Are there any critical business dates or deadlines?,Text,,"",High,Planning,Timeline constraints
+CONSTRAINTS-003,Project Constraints,Resources,What internal resources are available?,Text,,"",High,Planning,Resource availability
+CONSTRAINTS-004,Project Constraints,Blackout Periods,Are there any periods when migration work cannot be done?,Text,,"",Medium,Planning,Implementation restrictions
+CONSTRAINTS-005,Project Constraints,Regulatory,Are there any regulatory constraints?,Text,,"",Medium,Compliance,Regulatory requirements
+FUTURE-001,Future State,Vision,What is your long-term cloud strategy?,Text,,"",Medium,Strategic Planning,Future roadmap
+FUTURE-002,Future State,Growth,How do you expect your infrastructure needs to grow?,Text,,"",Medium,Strategic Planning,Scalability planning
+FUTURE-003,Future State,Innovation,What new capabilities do you want to enable?,Text,,"",Low,Strategic Planning,Innovation opportunities
+FUTURE-004,Future State,Multi-Cloud,Do you plan to use multiple cloud providers?,Multiple Choice,"AWS only,Multi-cloud strategy,Not decided","",Low,Strategic Planning,Multi-cloud considerations

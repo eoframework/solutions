@@ -18,7 +18,37 @@ Automated document processing with AI/ML leveraging Amazon Textract, Comprehend,
 
 ---
 
+## EO Framework™ Sales Process
+
+This solution follows the structured **EO Framework™** sales methodology, ensuring consistent customer experience and optimal outcomes.
+
+### EO Framework™ Sales Approach
+- **Discovery Phase**: Comprehensive requirements gathering led by EO Sales Engineers (Business Analysis)
+- **Solution Design**: Technical architecture development by EO Sales Engineers (Solution Architecture)
+- **Value Proposition**: Business case development with proven EO Framework™ methodologies
+- **Proof of Concept**: Structured demonstration approach with EO quality standards
+- **Proposal Development**: Standardized proposal process with EO Framework™ best practices
+
+### EO Framework™ Sales Team Structure
+- **EO Sales Engineer (Business Analysis)**: Requirements gathering and business case development
+- **EO Sales Engineer (Solution Architecture)**: Technical design and architecture validation
+- **EO Project Manager**: Presales coordination and stakeholder management
+- **EO Quarterback**: Executive engagement and strategic oversight
+
+---
+
 ## Presales Materials Inventory
+
+### 🎯 **Documentation Quality Standards**
+
+All presales materials follow EO Framework™ quality standards:
+
+- ✅ **Complete**: Comprehensive AWS IDP-specific business case and ROI analysis
+- ✅ **Accurate**: Validated financial models and market-tested assumptions
+- ✅ **Persuasive**: Compelling business value proposition and competitive differentiation
+- ✅ **Actionable**: Clear next steps and decision frameworks for stakeholders
+- ✅ **Customizable**: Templates adapt to specific client requirements and contexts
+- ✅ **Professional**: Executive-ready presentation materials and documentation
 
 ### 📊 Business Case and ROI Analysis
 - **[Business Case Template](business-case-template.md)** - Comprehensive business case framework including problem definition, solution benefits, and financial analysis

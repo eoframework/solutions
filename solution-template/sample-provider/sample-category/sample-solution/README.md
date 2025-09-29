@@ -75,24 +75,24 @@ This comprehensive enterprise solution provides **{PRIMARY_BUSINESS_VALUE}** thr
 
 ### **📋 Phase 1: Planning & Preparation** ({PLANNING_DURATION})
 1. **📊 Business Case Development**
-   - Review [Business Case Template](presales/business-case-template.md)
-   - Complete [ROI Calculator](presales/roi-calculator-template.md)
-   - Present to stakeholders using [Executive Materials](presales/executive-presentation-template.md)
+   - Review [Business Case](presales/business-case.md)
+   - Complete [ROI Calculator](presales/roi-calculator.csv)
+   - Present to stakeholders using [Executive Materials](presales/executive-presentation.md)
 
 2. **🔍 Requirements Assessment**
-   - Complete [Requirements Questionnaire](presales/requirements-questionnaire.md)
-   - Validate [Prerequisites](docs/prerequisites.md)
-   - Review [Solution Architecture](docs/architecture.md)
+   - Complete [Requirements Questionnaire](presales/requirements-questionnaire.csv)
+   - Validate [Prerequisites](delivery/implementation-guide.md#prerequisites)
+   - Review [Solution Architecture](delivery/detailed-design.md)
 
 3. **🎯 Solution Design**
-   - Customize [Solution Design Template](presales/solution-design-template.md)
+   - Review [Detailed Design](delivery/detailed-design.md)
    - Plan implementation using [Implementation Guide](delivery/implementation-guide.md)
    - Prepare resources and team assignments
 
 ### **📦 Phase 2: Implementation** ({IMPLEMENTATION_DURATION})
 1. **🔧 Environment Preparation**
-   - Follow [Prerequisites Setup](docs/prerequisites.md)
-   - Configure infrastructure using [Configuration Templates](delivery/configuration-templates.md)
+   - Follow [Prerequisites Setup](delivery/implementation-guide.md#prerequisites)
+   - Configure infrastructure using [Configuration Parameters](delivery/configuration.csv)
    - Validate environment readiness
 
 2. **🚀 Solution Deployment**
@@ -101,23 +101,23 @@ This comprehensive enterprise solution provides **{PRIMARY_BUSINESS_VALUE}** thr
    - Monitor progress and validate functionality
 
 3. **🧪 Testing & Validation**
-   - Perform [Testing Procedures](delivery/testing-procedures.md)
+   - Follow [Test Plan](delivery/test-plan.csv)
    - Validate against requirements and success criteria
    - Document results and performance metrics
 
 ### **🎓 Phase 3: Enablement & Operations** ({ENABLEMENT_DURATION})
 1. **👥 User Training**
-   - Deliver [Training Materials](delivery/training-materials.md)
+   - Follow [Training Plan](delivery/training-plan.csv)
    - Conduct hands-on workshops and knowledge transfer
    - Create user documentation and quick reference guides
 
 2. **🔄 Operational Readiness**
-   - Implement [Operations Runbook](delivery/operations-runbook.md)
    - Establish monitoring and alerting procedures
    - Create backup and disaster recovery protocols
+   - Review operational procedures
 
 3. **🛠️ Ongoing Support**
-   - Reference [Troubleshooting Guide](docs/troubleshooting.md)
+   - Reference [Troubleshooting Guide](delivery/implementation-guide.md#troubleshooting)
    - Establish maintenance schedules and update procedures
    - Plan for continuous improvement and optimization
 
@@ -126,23 +126,23 @@ This comprehensive enterprise solution provides **{PRIMARY_BUSINESS_VALUE}** thr
 ### **📖 Technical Documentation**
 | Document | Purpose | Audience | Time Required |
 |----------|---------|----------|---------------|
-| **[📋 Architecture Guide](docs/architecture.md)** | Technical design and components | Architects, Engineers | 20-30 minutes |
-| **[✅ Prerequisites](docs/prerequisites.md)** | Requirements and preparation | Implementation Teams | 15-20 minutes |
-| **[🔧 Troubleshooting](docs/troubleshooting.md)** | Issue resolution and diagnostics | Operations, Support | Reference as needed |
+| **[🏗️ Detailed Design](delivery/detailed-design.md)** | Technical architecture and components | Architects, Engineers | 20-30 minutes |
+| **[📖 Implementation Guide](delivery/implementation-guide.md)** | Step-by-step deployment with prerequisites | Implementation Teams | 30-45 minutes |
+| **[⚙️ Configuration Parameters](delivery/configuration.csv)** | Setup parameters and standards | Technical Teams | Reference as needed |
 
 ### **💼 Business & Sales Materials**
 | Document | Purpose | Audience | Usage |
 |----------|---------|----------|--------|
-| **[💰 Business Case](presales/business-case-template.md)** | ROI analysis and justification | Executives, Stakeholders | Funding approval |
-| **[📊 Executive Presentation](presales/executive-presentation-template.md)** | C-level stakeholder materials | Senior Leadership | Strategic presentations |
-| **[🎯 Solution Design](presales/solution-design-template.md)** | Technical architecture planning | Technical Stakeholders | Design validation |
+| **[💰 Business Case](presales/business-case.md)** | ROI analysis and justification | Executives, Stakeholders | Funding approval |
+| **[📊 Executive Presentation](presales/executive-presentation.md)** | C-level stakeholder materials | Senior Leadership | Strategic presentations |
+| **[📋 ROI Calculator](presales/roi-calculator.csv)** | Financial analysis and projections | Finance, Stakeholders | Investment planning |
 
 ### **🚀 Implementation & Operations**
 | Document | Purpose | Audience | Phase |
 |----------|---------|----------|-------|
-| **[📖 Implementation Guide](delivery/implementation-guide.md)** | Step-by-step deployment | Implementation Teams | Deployment |
-| **[⚙️ Configuration Templates](delivery/configuration-templates.md)** | Setup examples and standards | Technical Teams | Configuration |
-| **[🔄 Operations Runbook](delivery/operations-runbook.md)** | Day-to-day operations | Operations Teams | Ongoing |
+| **[📋 Requirements](delivery/requirements.csv)** | Detailed functional requirements | Implementation Teams | Planning |
+| **[🧪 Test Plan](delivery/test-plan.csv)** | Comprehensive testing strategy | QA, Implementation | Validation |
+| **[🎓 Training Plan](delivery/training-plan.csv)** | User enablement strategy | Training, Operations | Enablement |
 
 ## 🤖 **Automation & Scripts**
 
@@ -217,7 +217,7 @@ python3 deploy.py --environment production
 ## 🆘 **Support & Resources**
 
 ### **📞 Getting Help**
-- **Technical Issues**: Reference [Troubleshooting Guide](docs/troubleshooting.md)
+- **Technical Issues**: Reference [Implementation Troubleshooting](delivery/implementation-guide.md#troubleshooting)
 - **Implementation Support**: Contact {SUPPORT_CONTACT}
 - **Business Questions**: Reach out to {BUSINESS_CONTACT}
 - **Community Forum**: [EO Framework™ Discussions](https://github.com/eoframework/solutions/discussions)
@@ -240,4 +240,4 @@ python3 deploy.py --environment production
 **Author**: {AUTHOR_NAME} <{AUTHOR_EMAIL}>  
 **Status**: ✅ Production Ready
 
-**Ready to implement?** Start with [Prerequisites](docs/prerequisites.md) or jump to [Business Case](presales/business-case-template.md) for stakeholder approval.
+**Ready to implement?** Start with [Implementation Guide](delivery/implementation-guide.md) or jump to [Business Case](presales/business-case.md) for stakeholder approval.
