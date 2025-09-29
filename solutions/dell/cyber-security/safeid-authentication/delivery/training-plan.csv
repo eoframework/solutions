@@ -1,6 +1,6 @@
 Training_Module,Target_Audience,Learning_Objectives,Duration,Delivery_Method,Prerequisites,Instructor_Type,Priority
-Dell Hardware Overview,All Technical Staff,Understand Dell hardware architecture and capabilities,4 hours,Workshop,Basic IT knowledge,EO Engineer,High
-iDRAC Management,EO Engineers,Master Dell iDRAC remote management,6 hours,Hands-on Lab,System administration experience,Dell Technical Specialist,High
+Dell Hardware Overview,All Technical Staff,Understand Dell hardware architecture and capabilities,4 hours,Workshop,Basic IT knowledge,Dell Certified Trainer,High
+iDRAC Management,System Administrators,Master Dell iDRAC remote management,6 hours,Hands-on Lab,System administration experience,Dell Technical Specialist,High
 Performance Optimization,Performance Engineers,Learn Dell hardware optimization techniques,8 hours,Technical Workshop,Performance testing experience,Dell Performance Engineer,Medium
 Security Configuration,Security Teams,Understand Dell security features and configuration,4 hours,Security Workshop,Security background,Dell Security Specialist,High
 Troubleshooting Procedures,Support Teams,Learn Dell diagnostic and troubleshooting methods,6 hours,Problem Scenarios,Dell hardware knowledge,Dell Support Engineer,Medium
