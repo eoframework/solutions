@@ -1,0 +1,7 @@
+Test_Phase,Test_Category,Test_ID,Test_Name,Description,Prerequisites,Expected_Result,Priority,Duration,Responsible_Team
+Hardware Testing,Component Validation,HW001,Hardware POST Test,Verify all hardware components pass Power-On Self Test,Hardware installed and connected,All components pass POST without errors,High,30 minutes,Hardware Team
+Hardware Testing,Performance Testing,HW002,CPU Performance Validation,Validate CPU performance meets specifications,System fully operational,CPU benchmarks within 5% of specifications,High,60 minutes,Performance Team
+Hardware Testing,Memory Testing,HW003,Memory Stress Test,Comprehensive memory testing under load,Hardware configuration complete,Memory passes all stress tests without errors,High,120 minutes,QA Team
+Network Testing,Connectivity Testing,NET001,Network Interface Validation,Test all network interfaces and connectivity,Network configuration complete,All interfaces operational with expected throughput,High,45 minutes,Network Team
+Management Testing,Dell Integration,MGMT001,iDRAC Functionality Test,Validate iDRAC management capabilities,iDRAC configured and accessible,All management functions operational,Medium,60 minutes,Systems Team
+Security Testing,Security Validation,SEC001,TPM and Secure Boot Test,Verify security features are properly configured,Security policies applied,Security features operational and compliant,High,30 minutes,Security Team

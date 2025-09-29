@@ -1,0 +1,7 @@
+Category,Question,Response_Type,Required,Options,Business_Impact
+Infrastructure,Current server environment size,Number,Yes,,High
+Infrastructure,Performance requirements,Multiple_Choice,Yes,High|Medium|Low,High
+Infrastructure,Availability requirements,Multiple_Choice,Yes,99.9%|99.95%|99.99%,High
+Management,Preferred management approach,Multiple_Choice,Yes,Centralized|Distributed|Hybrid,Medium
+Support,Support level requirements,Multiple_Choice,Yes,Basic|ProSupport|ProSupport Plus,Medium
+Budget,Budget range,Multiple_Choice,Yes,$50K-150K|$150K-300K|$300K+,High
