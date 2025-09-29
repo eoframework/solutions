@@ -34,7 +34,7 @@ Phase 6: Monitoring and Operations,T032,Log Analytics and Reporting Setup,6,2025
 Phase 6: Monitoring and Operations,T033,Automation and Runbook Development,10,2025-06-24,2025-07-07,T031,EO Engineer,Not Started,0%,No,Medium,Develop operational automation,N/A
 Phase 6: Monitoring and Operations,T034,Disaster Recovery Testing,8,2025-06-26,2025-07-07,T021 T030,EO Engineer,Not Started,0%,No,High,Test backup and recovery procedures,test-plan.csv
 Phase 6: Monitoring and Operations,T035,Performance Optimization,7,2025-07-08,2025-07-16,T030 T031,EO Engineer,Not Started,0%,No,Low,Optimize platform performance,N/A
-Phase 7: Training and Handover,T036,Technical Documentation Completion,8,2025-07-08,2025-07-17,T033,EO Engineer,Not Started,0%,No,Low,Complete all technical documentation,implementation-guide.md,troubleshooting.md,architecture.md
+Phase 7: Training and Handover,T036,Technical Documentation Completion,8,2025-07-08,2025-07-17,T033,EO Engineer,Not Started,0%,No,Low,Complete all technical documentation,implementation-guide.md,troubleshooting.md
 Phase 7: Training and Handover,T037,Operations Team Training,10,2025-07-17,2025-07-30,T033 T036,EO Engineer,Not Started,0%,Yes,Medium,Train operations and support teams,training-plan.csv
 Phase 7: Training and Handover,T038,User Training and Onboarding,12,2025-07-18,2025-08-04,T036,EO Engineer,Not Started,0%,No,Low,Train end users and administrators,training-plan.csv
 Phase 7: Training and Handover,T039,Go-Live Readiness Assessment,5,2025-07-31,2025-08-06,T037,EO Project Manager,Not Started,0%,Yes,Medium,Final readiness assessment,N/A
