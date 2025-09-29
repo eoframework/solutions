@@ -1,0 +1,38 @@
+Category,Question,Response_Type,Required,Options,Description,Impact
+Business Context,What types of documents does your organization process regularly?,Multiple Choice,Yes,"Invoices,Purchase Orders,Receipts,Contracts,Forms,Insurance Claims,Medical Records,Financial Statements,Shipping Documents,Other",Core document types for solution design,High
+Business Context,What is your current monthly document processing volume?,Number,Yes,,Number of documents processed per month,High
+Business Context,What are your current document processing costs?,Number,Yes,,Annual labor and technology costs for document processing,High
+Business Context,What is your current document processing timeline?,Text,Yes,,Average time to process documents end-to-end,Medium
+Business Context,What are your primary business drivers for automation?,Multiple Choice,Yes,"Reduce costs,Improve speed,Enhance accuracy,Increase scalability,Improve compliance,Enable remote work,Free up staff time",Key motivations for implementing solution,High
+Business Context,What are your specific goals for automated processing?,Text,Yes,,Quantified targets for improvement and ROI expectations,High
+Technology Infrastructure,What document management systems do you currently use?,Multiple Choice,No,"Microsoft SharePoint,Box,Dropbox Business,Google Workspace,Adobe Document Cloud,DocuSign,Custom Systems,Paper-based only",Existing systems for integration planning,Medium
+Technology Infrastructure,What enterprise systems need integration?,Text,Yes,,ERP CRM accounting systems requiring integration,High
+Technology Infrastructure,How do you currently process documents?,Multiple Choice,Yes,"Fully manual,Basic OCR,Template-based capture,Workflow automation,Outsourced services,Hybrid processes",Current processing methods for comparison,Medium
+Technology Infrastructure,What are your biggest processing challenges?,Multiple Choice,Yes,"High costs,Slow processing,High error rates,Format variations,Limited scalability,Compliance issues,Integration complexity",Current pain points to address,High
+Technology Infrastructure,What is your team's technical expertise level?,Scale,Yes,"High,Medium,Low",Experience levels for training and support planning,Medium
+Document Characteristics,What specific invoice processing requirements do you have?,Text,No,,Volume formats required data extraction accuracy needs,Medium
+Document Characteristics,What receipt processing needs do you have?,Text,No,,Volume sources required fields integration requirements,Low
+Document Characteristics,What contract processing requirements exist?,Text,No,,Types required extraction compliance needs workflows,Medium
+Document Characteristics,What are your accuracy requirements by document type?,Text,Yes,,Minimum accuracy percentages for different document types,High
+Document Characteristics,How do you handle processing errors and exceptions?,Multiple Choice,Yes,"Manual review,Automated validation,Approval processes,Exception reporting,Quality assurance sampling",Error handling and quality control processes,Medium
+Technical Requirements,What is your preferred deployment approach?,Multiple Choice,Yes,"Public cloud,Private cloud,Hybrid cloud,SaaS solution,No preference",Infrastructure and deployment preferences,High
+Technical Requirements,What are your data residency and compliance requirements?,Text,Yes,,Geographic regulatory and industry-specific requirements,High
+Technical Requirements,What are your security and access control requirements?,Multiple Choice,Yes,"Single sign-on,Multi-factor authentication,Role-based access,Data encryption,Network isolation,Audit logging",Security and compliance needs,High
+Technical Requirements,What systems require integration?,Text,Yes,,Specific systems APIs databases requiring connectivity,High
+Technical Requirements,What are your API and integration requirements?,Multiple Choice,Yes,"RESTful APIs,Webhook integration,Batch processing,Real-time processing,File-based integration,Database connectivity",Integration patterns and requirements,Medium
+Technical Requirements,What are your performance and scalability requirements?,Text,Yes,,Peak volumes processing times availability requirements,High
+Organizational,Who will be involved in the solution implementation?,Text,Yes,,Business IT operations compliance and end-user stakeholders,Medium
+Organizational,What is your team's current technical expertise?,Scale,Yes,"High,Medium,Low",Skill levels for training and support planning,Medium
+Organizational,What training and support will be needed?,Text,Yes,,Administrative end-user technical and ongoing support needs,Medium
+Organizational,What is your preferred implementation timeline?,Text,Yes,,Project start pilot completion full deployment timelines,High
+Organizational,How do you want to approach implementation?,Multiple Choice,Yes,"Big bang deployment,Phased approach,Pilot program,Parallel processing",Implementation strategy and risk management,Medium
+Budget,What is your total project budget range?,Range,Yes,"$100K-$500K,$500K-$1M,$1M-$5M,$5M+",Available investment for solution implementation,High
+Budget,What is your annual operational budget?,Range,Yes,"$50K-$200K,$200K-$500K,$500K-$1M,$1M+",Ongoing operational and licensing budget,Medium
+Budget,How do you evaluate technology investments?,Multiple Choice,Yes,"Total Cost of Ownership,Return on Investment,Net Present Value,Payback period,Business case development",Investment evaluation criteria and processes,Medium
+Budget,What are your ROI expectations and timeframes?,Text,Yes,,Expected ROI percentage and payback period requirements,High
+Budget,What are your cost optimization priorities?,Multiple Choice,Yes,"Minimize upfront investment,Optimize ongoing costs,Flexible scaling,Predictable costs,Maximum value for budget",Cost management preferences and priorities,Medium
+Success Criteria,How will you measure solution success?,Text,Yes,,Key performance indicators and success metrics,High
+Success Criteria,What are your target improvements?,Text,Yes,,Quantified targets for processing time cost accuracy,High
+Success Criteria,How often will you review and optimize?,Text,Yes,,Performance review optimization and improvement frequency,Low
+Success Criteria,What are your primary concerns about implementation?,Multiple Choice,Yes,"Technical complexity,User adoption,Data security,Vendor dependency,Performance concerns,Budget overruns",Implementation risks and concerns,Medium
+Success Criteria,What risk mitigation strategies are important?,Multiple Choice,Yes,"Comprehensive pilot testing,Phased implementation,Extensive training,Strong vendor support,Performance guarantees",Risk management preferences and approaches,Medium

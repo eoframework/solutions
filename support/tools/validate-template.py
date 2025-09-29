@@ -42,17 +42,15 @@ class TemplateValidator:
         required_files = [
             "README.md",
             "metadata.yml",
-            "docs/architecture.md",
-            "docs/prerequisites.md", 
-            "docs/troubleshooting.md",
+            "delivery/detailed-design.md",
+            "delivery/implementation-guide.md",
             "presales/README.md",
             "delivery/README.md",
             "delivery/scripts/README.md"
         ]
-        
+
         required_dirs = [
-            "docs",
-            "presales", 
+            "presales",
             "delivery",
             "delivery/scripts"
         ]
