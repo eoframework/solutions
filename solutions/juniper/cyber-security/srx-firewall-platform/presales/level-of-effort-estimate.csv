@@ -1,26 +1,28 @@
 Phase,Work Package,Task Description,Resource Type,Estimated Hours,Rate,Cost Estimate,Dependencies,Risk Level,Notes
-Discovery,Requirements Gathering,Conduct stakeholder interviews and workshops,EO Engineer,40,$150,$6,000,,Low,Include all key stakeholders
-Discovery,Technical Assessment,Evaluate current infrastructure and integration points,EO Engineer,59,$200,$6,400,,Medium,Access to existing systems required
-Discovery,Security Review,Assess security requirements and compliance needs,EO Engineer,16,$175,$2,800,,Medium,Compliance framework validation needed
-Planning,Solution Design,Create detailed technical architecture and design,EO Quarterback,241,$200,$9,600,Requirements Gathering,Medium,Include integration specifications
-Planning,Project Planning,Develop implementation timeline and resource allocation,EO Engineer,36,$140,$3,360,Technical Assessment,Low,Coordinate with all team leads
-Planning,Risk Assessment,Identify and document project risks and mitigation strategies,EO Engineer,35,$140,$2,240,Solution Design,Medium,Regular risk review sessions required
-Development,Infrastructure Setup,Provision and configure cloud infrastructure,EO Engineer,60,$160,$9,600,Solution Design,Medium,Environment provisioning and testing
-Development,Core Application Development,Build primary application functionality,EO Engineer,120,$130,$15,600,Infrastructure Setup,Medium,Agile development methodology
-Development,Database Development,Design and implement database schema and procedures,EO Engineer,59,$145,$5,800,Core Application Development,Low,Performance optimization included
-Development,Integration Development,Build API integrations and data connectors,EO Engineer,80,$155,$12,400,Core Application Development,High,External system dependencies
-Development,UI/UX Development,Create user interface and user experience components,EO Engineer,64,$125,$8,000,Core Application Development,Low,Responsive design requirements
-Testing,Unit Testing,Develop and execute unit tests for all components,EO Engineer,32,$120,$3,840,Core Application Development,Low,Automated testing framework
-Testing,Integration Testing,Test system integrations and data flows,EO Engineer,40,$120,$4,800,Integration Development,Medium,External system coordination required
-Testing,Performance Testing,Conduct load and performance testing,EO Engineer,24,$140,$3,360,Integration Testing,Medium,Production-like environment needed
-Testing,Security Testing,Perform security assessments and penetration testing,EO Engineer,16,$175,$2,800,Performance Testing,High,Third-party security audit may be required
-Testing,User Acceptance Testing,Coordinate and support UAT with business users,EO Engineer,32,$150,$4,800,Security Testing,Medium,Business user availability critical
-Deployment,Production Deployment,Deploy solution to production environment,EO Engineer,24,$160,$3,840,User Acceptance Testing,High,Rollback procedures required
-Deployment,Data Migration,Migrate existing data to new system,EO Engineer,40,$145,$5,800,Production Deployment,High,Data validation and backup critical
-Deployment,Go-Live Support,Provide support during initial production rollout,EO Engineer,48,$110,$5,280,Data Migration,Medium,24/7 support coverage for first week
-Training,Administrator Training,Train system administrators and technical users,EO Engineer,16,$130,$2,080,Production Deployment,Low,Hands-on training environment required
-Training,End User Training,Train business users on system functionality,EO Engineer,24,$120,$2,880,Administrator Training,Low,Role-based training materials
-Training,Documentation,Create user manuals and technical documentation,EO Engineer,32,$110,$3,520,End User Training,Low,Version control for documentation updates
-Closeout,Project Handover,Transfer ownership to operations and support teams,EO Engineer,35,$140,$2,240,Documentation,Low,Knowledge transfer sessions
-Closeout,Lessons Learned,Conduct project retrospective and document learnings,EO Engineer,35,$140,$1,120,Project Handover,Low,Stakeholder feedback collection
-,,,"     TOTAL HOURS",732,"   TOTAL COST","=TEXT(SUM(G2:G25),""$#,##0"")",,,Total project cost estimate
+Discovery,Requirements Gathering,Conduct stakeholder interviews and workshops,EO Engineer,40,$150,"""$6,000""",,Low,Include all key stakeholders
+Discovery,Technical Assessment,Evaluate current infrastructure and integration points,EO Engineer,32,$200,"""$6,400""",,Medium,Access to existing systems required
+Discovery,Security Review,Assess security requirements and compliance needs,EO Engineer,16,$175,"""$2,800""",,Medium,Compliance framework validation needed
+Planning,Solution Design,Create detailed technical architecture and design,EO Engineer,48,$200,"""$9,600""",Requirements Gathering,Medium,Include integration specifications
+Planning,Project Planning,Develop implementation timeline and resource allocation,EO Engineer,24,$140,"""$3,360""",Technical Assessment,Low,Coordinate with all team leads
+Planning,Risk Assessment,Identify and document project risks and mitigation strategies,EO Engineer,16,$140,"""$2,240""",Solution Design,Medium,Regular risk review sessions required
+Development,Infrastructure Setup,Provision and configure cloud infrastructure,EO Engineer,60,$160,"""$9,600""",Solution Design,Medium,Environment provisioning and testing
+Development,Core Application Development,Build primary application functionality,EO Engineer,120,$130,"""$15,600""",Infrastructure Setup,Medium,Agile development methodology
+Development,Database Development,Design and implement database schema and procedures,EO Engineer,40,$145,"""$5,800""",Core Application Development,Low,Performance optimization included
+Development,Integration Development,Build API integrations and data connectors,EO Engineer,80,$155,"""$12,400""",Core Application Development,High,External system dependencies
+Development,UI/UX Development,Create user interface and user experience components,EO Engineer,64,$125,"""$8,000""",Core Application Development,Low,Responsive design requirements
+Testing,Unit Testing,Develop and execute unit tests for all components,EO Engineer,32,$120,"""$3,840""",Core Application Development,Low,Automated testing framework
+Testing,Integration Testing,Test system integrations and data flows,EO Engineer,40,$120,"""$4,800""",Integration Development,Medium,External system coordination required
+Testing,Performance Testing,Conduct load and performance testing,EO Engineer,24,$140,"""$3,360""",Integration Testing,Medium,Production-like environment needed
+Testing,Security Testing,Perform security assessments and penetration testing,EO Engineer,16,$175,"""$2,800""",Performance Testing,High,Third-party security audit may be required
+Testing,User Acceptance Testing,Coordinate and support UAT with business users,EO Engineer,32,$150,"""$4,800""",Security Testing,Medium,Business user availability critical
+Deployment,Production Deployment,Deploy solution to production environment,EO Engineer,24,$160,"""$3,840""",User Acceptance Testing,High,Rollback procedures required
+Deployment,Data Migration,Migrate existing data to new system,EO Engineer,40,$145,"""$5,800""",Production Deployment,High,Data validation and backup critical
+Deployment,Go-Live Support,Provide support during initial production rollout,EO Engineer,48,$110,"""$5,280""",Data Migration,Medium,24/7 support coverage for first week
+Training,Administrator Training,Train system administrators and technical users,EO Engineer,16,$130,"""$2,080""",Production Deployment,Low,Hands-on training environment required
+Training,End User Training,Train business users on system functionality,EO Engineer,24,$120,"""$2,880""",Administrator Training,Low,Role-based training materials
+Training,Documentation,Create user manuals and technical documentation,EO Engineer,32,$110,"""$3,520""",End User Training,Low,Version control for documentation updates
+Closeout,Project Handover,Transfer ownership to operations and support teams,EO Engineer,16,$140,"""$2,240""",Documentation,Low,Knowledge transfer sessions
+Closeout,Lessons Learned,Conduct project retrospective and document learnings,EO Engineer,8,$140,"""$1,120""",Project Handover,Low,Stakeholder feedback collection
+Management,Technical Leadership,Quarterback technical oversight and architecture review,EO Quarterback,223,$180,"""$40,140""",,Medium,25% of engineering effort
+Management,Project Management,Project coordination and management activities,EO Project Manager,178,$150,"""$26,700""",,Low,20% of engineering effort
+,,,     TOTAL HOURS,732,   TOTAL COST,"=TEXT(SUM(G2:G25),""$#,##0"")",,,Total project cost estimate
