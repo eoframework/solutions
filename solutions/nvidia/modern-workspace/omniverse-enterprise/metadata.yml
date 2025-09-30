@@ -1,6 +1,6 @@
 provider: nvidia
 category: modern-workspace
-solution_name: Omniverse Enterprise
+solution_name: omniverse-enterprise
 description: Real-time collaboration platform for 3D workflows
 version: 1.0.0
 status: Active
