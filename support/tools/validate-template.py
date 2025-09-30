@@ -82,9 +82,15 @@ class EnhancedTemplateValidator:
         print(f"🔍 Checking folder structure against solution-template...")
         print(f"   Expected {len(template_files)} files and {len(template_dirs)} directories")
 
-        # Check directories
+        # Check directories - exclude script subdirectories as they are solution-specific
         missing_dirs = []
+        script_subdirs = ['delivery/scripts/ansible', 'delivery/scripts/bash', 'delivery/scripts/powershell', 'delivery/scripts/python', 'delivery/scripts/terraform']
+
         for expected_dir in template_dirs:
+            # Skip script subdirectories - they are solution-specific
+            if expected_dir in script_subdirs:
+                continue
+
             dir_path = template_path / expected_dir
             if not dir_path.exists() or not dir_path.is_dir():
                 missing_dirs.append(expected_dir)
@@ -92,11 +98,24 @@ class EnhancedTemplateValidator:
         if missing_dirs:
             self.errors.append(f"Missing required directories: {', '.join(missing_dirs)}")
 
-        # Check files
+        # Check files - exclude script files as they are solution-specific
         missing_files = []
-        extra_files = []
+        script_files = [
+            'delivery/scripts/ansible/playbook.yml',
+            'delivery/scripts/bash/deploy.sh',
+            'delivery/scripts/powershell/Deploy-Solution.ps1',
+            'delivery/scripts/python/requirements.txt',
+            'delivery/scripts/terraform/main.tf',
+            'delivery/scripts/terraform/outputs.tf',
+            'delivery/scripts/terraform/terraform.tfvars.example',
+            'delivery/scripts/terraform/variables.tf'
+        ]
 
         for expected_file in template_files:
+            # Skip script files - they are solution-specific
+            if expected_file in script_files:
+                continue
+
             file_path = template_path / expected_file
             if not file_path.exists() or not file_path.is_file():
                 missing_files.append(expected_file)

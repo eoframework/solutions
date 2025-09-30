@@ -1,10 +1,52 @@
-Component,Parameter,Environment,Value,Data_Type,Required,Description,Validation_Rule,Default_Value
-Solution Configuration,Solution Name,All,Enterprise Solution,String,Yes,Solution identifier,Valid solution name,Enterprise Solution
-Environment,Environment Type,Dev,Development,String,Yes,Environment designation,dev|test|prod,dev
-Environment,Environment Type,Test,Test,String,Yes,Environment designation,dev|test|prod,test
-Environment,Environment Type,Prod,Production,String,Yes,Environment designation,dev|test|prod,prod
-Network Configuration,Network Mode,All,Enterprise,String,Yes,Network configuration mode,Basic|Standard|Enterprise,Enterprise
-Security Configuration,Security Level,All,High,String,Yes,Security configuration level,Low|Medium|High,High
-Performance Configuration,Performance Tier,All,Standard,String,Yes,Performance configuration tier,Basic|Standard|Premium,Standard
-Monitoring Configuration,Monitoring Enabled,All,true,Boolean,Yes,Enable comprehensive monitoring,true|false,true
-Backup Configuration,Backup Enabled,All,true,Boolean,Yes,Enable automated backups,true|false,true
+Parameter Name,Category,Environment,Default Value,Description,Required,Data Type,Validation Rules,Security Level,Owner Team,Dependencies,Notes,Last Updated
+CMMC_SOLUTION_NAME,Application,All,Microsoft CMMC Enclave,CMMC compliance enclave solution identifier,Yes,String,Max 50 characters,Confidential,Security Team,None,Used in compliance reporting and auditing,[DATE]
+CMMC_LEVEL_REQUIRED,Compliance,All,Level 3,Required CMMC compliance level,Yes,String,Level 1|Level 2|Level 3,Confidential,Compliance Team,DoD contract requirements,Foundational + Advanced + Expert,[DATE]
+AZURE_GOVERNMENT_CLOUD,Cloud Platform,All,true,Deploy to Azure Government Cloud,Yes,Boolean,true|false,Secret,Platform Team,CMMC compliance,Required for CMMC Level 2+,[DATE]
+AZURE_GOVERNMENT_REGION,Cloud Platform,All,USGov Virginia,Azure Government region,Yes,String,Valid Azure Gov region,Secret,Platform Team,Data sovereignty,US Government cloud region,[DATE]
+TENANT_ID_GOVERNMENT,Azure Configuration,All,[gov-tenant-id],Azure Government tenant ID,Yes,String,GUID format,Secret,Platform Team,Government cloud access,DoD tenant identifier,[DATE]
+SUBSCRIPTION_ID_GOVERNMENT,Azure Configuration,All,[gov-subscription-id],Azure Government subscription ID,Yes,String,GUID format,Secret,Platform Team,Government billing,CMMC-compliant subscription,[DATE]
+FedRAMP_COMPLIANCE_LEVEL,Compliance,All,High,Required FedRAMP compliance level,Yes,String,Low|Moderate|High,Secret,Compliance Team,Federal authorization,Required for government use,[DATE]
+NIST_SP_800_171_COMPLIANCE,Compliance,All,required,NIST SP 800-171 compliance requirement,Yes,String,required|optional,Confidential,Compliance Team,CUI protection,Controlled Unclassified Information,[DATE]
+NIST_SP_800_53_CONTROLS,Compliance,All,required,NIST SP 800-53 security controls,Yes,String,required|optional,Confidential,Compliance Team,Security framework,Federal security controls,[DATE]
+DATA_CLASSIFICATION_LEVEL,Data Protection,All,CUI,Data classification level,Yes,String,Public|Internal|CUI|Classified,Secret,Data Protection,Classification policy,Controlled Unclassified Information,[DATE]
+FIPS_140_2_COMPLIANCE,Cryptography,All,Level 2,FIPS 140-2 compliance level,Yes,String,Level 1|Level 2|Level 3|Level 4,Secret,Cryptography Team,Hardware security modules,Validated cryptographic modules,[DATE]
+ENCRYPTION_ALGORITHM,Cryptography,All,AES-256,Required encryption algorithm,Yes,String,Valid encryption algorithm,Secret,Cryptography Team,FIPS compliance,Government-approved encryption,[DATE]
+ENCRYPTION_KEY_LENGTH,Cryptography,All,256,Encryption key length in bits,Yes,Integer,128-512,Secret,Cryptography Team,Security requirements,Minimum 256-bit keys,[DATE]
+PKI_CERTIFICATE_AUTHORITY,Cryptography,All,DoD PKI,Public Key Infrastructure authority,Yes,String,Valid PKI CA,Secret,PKI Team,Certificate management,Department of Defense PKI,[DATE]
+COMMON_ACCESS_CARD_REQUIRED,Authentication,All,true,Require Common Access Card (CAC) authentication,Yes,Boolean,true|false,Secret,Security Team,DoD identity,Smart card authentication,[DATE]
+PIV_CARD_AUTHENTICATION,Authentication,All,true,Enable PIV card authentication,Yes,Boolean,true|false,Secret,Security Team,Federal identity,Personal Identity Verification,[DATE]
+MULTI_FACTOR_AUTHENTICATION,Authentication,All,required,Multi-factor authentication requirement,Yes,String,required|optional|disabled,Confidential,Security Team,Access control,Mandatory MFA for all access,[DATE]
+PRIVILEGED_ACCESS_MANAGEMENT,Security,All,required,Privileged access management system,Yes,String,required|optional,Secret,Security Team,Administrative access,PAM for privileged accounts,[DATE]
+ZERO_TRUST_ARCHITECTURE,Security,All,enabled,Zero Trust network architecture,Yes,String,enabled|disabled,Confidential,Security Team,Network security,Never trust always verify,[DATE]
+NETWORK_SEGMENTATION,Network Security,All,microsegmentation,Network segmentation strategy,Yes,String,basic|advanced|microsegmentation,Secret,Network Team,Traffic isolation,Granular network controls,[DATE]
+INTRUSION_DETECTION_SYSTEM,Security Monitoring,All,required,Intrusion detection system,Yes,String,required|optional,Confidential,SOC Team,Threat detection,Real-time monitoring,[DATE]
+INTRUSION_PREVENTION_SYSTEM,Security Monitoring,All,required,Intrusion prevention system,Yes,String,required|optional,Confidential,SOC Team,Threat prevention,Automated threat blocking,[DATE]
+SIEM_PLATFORM,Security Monitoring,All,Microsoft Sentinel,Security Information Event Management,Yes,String,Valid SIEM platform,Confidential,SOC Team,Log analysis,Centralized security monitoring,[DATE]
+LOG_RETENTION_YEARS,Compliance,All,7,Security log retention period in years,Yes,Integer,3-10,Confidential,Compliance Team,Audit requirements,Long-term compliance,[DATE]
+AUDIT_LOG_INTEGRITY,Compliance,All,digital-signature,Audit log integrity protection,Yes,String,hash|digital-signature|blockchain,Secret,Audit Team,Non-repudiation,Tamper-evident logs,[DATE]
+CONTINUOUS_MONITORING,Security Operations,All,24x7,Continuous security monitoring,Yes,String,24x7|business-hours,Confidential,SOC Team,Threat response,Round-the-clock monitoring,[DATE]
+VULNERABILITY_SCANNING_FREQUENCY,Security Assessment,All,weekly,Vulnerability scanning frequency,Yes,String,daily|weekly|monthly,Confidential,Security Team,Risk management,Regular security assessment,[DATE]
+PENETRATION_TESTING_FREQUENCY,Security Assessment,All,quarterly,Penetration testing frequency,Yes,String,monthly|quarterly|annually,Secret,Security Team,Security validation,Third-party security testing,[DATE]
+INCIDENT_RESPONSE_PLAN,Security Operations,All,required,Incident response plan requirement,Yes,String,required|optional,Confidential,Incident Response,Security incidents,Documented IR procedures,[DATE]
+INCIDENT_RESPONSE_TIME_CRITICAL,Security Operations,All,1,Critical incident response time in hours,Yes,Integer,1-4,Confidential,Incident Response,SLA requirements,Immediate response,[DATE]
+INCIDENT_RESPONSE_TIME_HIGH,Security Operations,All,4,High severity incident response time in hours,Yes,Integer,2-8,Confidential,Incident Response,SLA requirements,Rapid response,[DATE]
+SECURITY_AWARENESS_TRAINING,Compliance,All,required,Security awareness training requirement,Yes,String,required|optional,Confidential,Training Team,Personnel security,Annual training requirement,[DATE]
+BACKGROUND_CHECK_REQUIREMENT,Personnel Security,All,required,Background check requirement,Yes,String,required|optional,Secret,HR Team,Clearance requirement,Personnel screening,[DATE]
+SECURITY_CLEARANCE_LEVEL,Personnel Security,All,Secret,Required security clearance level,Yes,String,Public Trust|Secret|Top Secret,Secret,Security Team,Access authorization,Government clearance,[DATE]
+PHYSICAL_ACCESS_CONTROLS,Physical Security,All,biometric,Physical access control system,Yes,String,card|biometric|dual-factor,Secret,Physical Security,Facility access,Multi-factor physical access,[DATA]
+FACILITY_SECURITY_LEVEL,Physical Security,All,SCIF,Facility security classification,Yes,String,Normal|Sensitive|SCIF,Secret,Physical Security,Information handling,Sensitive Compartmented Information Facility,[DATE]
+VIDEO_SURVEILLANCE,Physical Security,All,required,Video surveillance requirement,Yes,String,required|optional,Confidential,Physical Security,Monitoring coverage,24x7 video monitoring,[DATE]
+BACKUP_ENCRYPTION,Data Protection,All,required,Backup encryption requirement,Yes,String,required|optional,Secret,Backup Team,Data at rest,Encrypted backup storage,[DATE]
+BACKUP_OFFSITE_STORAGE,Data Protection,All,required,Offsite backup storage requirement,Yes,String,required|optional,Confidential,Backup Team,Disaster recovery,Geographic separation,[DATE]
+BACKUP_RETENTION_COMPLIANCE,Data Protection,All,7-years,Compliance-driven backup retention,Yes,String,Valid retention period,Confidential,Compliance Team,Regulatory requirements,Long-term data retention,[DATE]
+DISASTER_RECOVERY_RTO,Business Continuity,All,4,Recovery Time Objective in hours,Yes,Integer,1-24,Confidential,DR Team,Service restoration,Maximum downtime tolerance,[DATE]
+DISASTER_RECOVERY_RPO,Business Continuity,All,1,Recovery Point Objective in hours,Yes,Integer,0-4,Confidential,DR Team,Data loss tolerance,Maximum data loss tolerance,[DATE]
+BUSINESS_CONTINUITY_PLAN,Business Continuity,All,required,Business continuity plan requirement,Yes,String,required|optional,Confidential,BCP Team,Operational resilience,Documented continuity procedures,[DATE]
+SUPPLY_CHAIN_SECURITY,Compliance,All,required,Supply chain security requirements,Yes,String,required|optional,Secret,Procurement Team,Vendor management,CMMC supply chain controls,[DATE]
+THIRD_PARTY_ASSESSMENT,Compliance,All,required,Third-party security assessment,Yes,String,required|optional,Secret,Vendor Management,Risk assessment,External security validation,[DATE]
+CONFIGURATION_MANAGEMENT,Operations,All,automated,Configuration management system,Yes,String,automated|manual,Confidential,DevOps Team,Change control,Automated configuration enforcement,[DATE]
+CHANGE_MANAGEMENT_PROCESS,Operations,All,required,Change management process,Yes,String,required|optional,Confidential,Change Control,Process control,Formal change procedures,[DATE]
+SECURITY_TESTING_INTEGRATION,Development,All,required,Security testing in development,Yes,String,required|optional,Confidential,DevSecOps Team,Shift-left security,Integrated security testing,[DATE]
+SECURE_CODING_STANDARDS,Development,All,required,Secure coding standards requirement,Yes,String,required|optional,Confidential,Development Team,Code security,OWASP secure coding,[DATE]
+CODE_REVIEW_SECURITY,Development,All,required,Security-focused code reviews,Yes,String,required|optional,Confidential,Development Team,Code quality,Security review process,[DATE]
+MAINTENANCE_WINDOW_SECURITY,Operations,All,Sunday 02:00-04:00 UTC,Security maintenance window,Yes,String,Valid time range,Confidential,Security Operations,System updates,Coordinated security updates,[DATE]
