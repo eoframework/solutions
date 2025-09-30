@@ -1,6 +1,6 @@
 provider: microsoft
 category: cyber-security
-solution_name: CMMC Enclave
+solution_name: cmmc-enclave
 description: CMMC-compliant secure enclave for defense contractors
 version: 1.0.0
 status: Active
