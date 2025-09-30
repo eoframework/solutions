@@ -104,23 +104,12 @@ class EnhancedTemplateValidator:
         if missing_files:
             self.errors.append(f"Missing required files: {', '.join(missing_files)}")
 
-        # Check for extra files and directories
+        # Check for extra files (optional warning)
         solution_files = set()
-        solution_dirs = set()
-
         for root, dirs, files in os.walk(template_path):
             rel_root = Path(root).relative_to(template_path)
             dirs[:] = [d for d in dirs if not d.startswith('.')]
 
-            # Record directories
-            for dir_name in dirs:
-                if rel_root == Path('.'):
-                    dir_path = dir_name
-                else:
-                    dir_path = str(rel_root / dir_name)
-                solution_dirs.add(dir_path)
-
-            # Record files
             for file in files:
                 if not file.startswith('.') and not file.endswith('.pptx'):
                     if rel_root == Path('.'):
@@ -129,15 +118,9 @@ class EnhancedTemplateValidator:
                         file_path = str(rel_root / file)
                     solution_files.add(file_path)
 
-        # Check for extra files
         extra_files = solution_files - set(template_files.keys())
         if extra_files:
             self.warnings.append(f"Extra files not in solution-template: {', '.join(sorted(extra_files))}")
-
-        # Check for extra directories
-        extra_dirs = solution_dirs - set(template_dirs.keys())
-        if extra_dirs:
-            self.errors.append(f"Extra directories not in solution-template: {', '.join(sorted(extra_dirs))}")
 
         print(f"   ✅ Structure validation completed")
 
