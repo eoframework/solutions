@@ -166,8 +166,9 @@ class EnhancedTemplateValidator:
         path_parts = template_path.parts
         solutions_index = None
 
-        for i, part in enumerate(path_parts):
-            if part == 'solutions':
+        # Find the LAST occurrence of 'solutions' to handle GitHub Actions paths
+        for i in range(len(path_parts) - 1, -1, -1):
+            if path_parts[i] == 'solutions':
                 solutions_index = i
                 break
 
@@ -247,8 +248,9 @@ class EnhancedTemplateValidator:
         path_parts = template_path.parts
         solutions_index = None
 
-        for i, part in enumerate(path_parts):
-            if part == 'solutions':
+        # Find the LAST occurrence of 'solutions' to handle GitHub Actions paths
+        for i in range(len(path_parts) - 1, -1, -1):
+            if path_parts[i] == 'solutions':
                 solutions_index = i
                 break
 
