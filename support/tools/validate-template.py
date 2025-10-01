@@ -105,6 +105,7 @@ class EnhancedTemplateValidator:
             'delivery/scripts/bash/deploy.sh',
             'delivery/scripts/powershell/Deploy-Solution.ps1',
             'delivery/scripts/python/requirements.txt',
+            'delivery/scripts/python/deploy.py',
             'delivery/scripts/terraform/main.tf',
             'delivery/scripts/terraform/outputs.tf',
             'delivery/scripts/terraform/terraform.tfvars.example',
@@ -122,6 +123,18 @@ class EnhancedTemplateValidator:
 
         if missing_files:
             self.errors.append(f"Missing required files: {', '.join(missing_files)}")
+
+        # Check that at least one script subdirectory exists (solution must use at least one technology)
+        scripts_path = template_path / "delivery" / "scripts"
+        if scripts_path.exists():
+            script_subdirs_present = [
+                subdir for subdir in script_subdirs
+                if (template_path / subdir).exists() and (template_path / subdir).is_dir()
+            ]
+            if not script_subdirs_present:
+                self.errors.append("At least one script subdirectory must exist in delivery/scripts/ (ansible, bash, powershell, python, or terraform)")
+        else:
+            self.errors.append("Missing required directory: delivery/scripts")
 
         # Check for extra files and directories
         solution_files = set()
@@ -153,10 +166,27 @@ class EnhancedTemplateValidator:
         if extra_files:
             self.warnings.append(f"Extra files not in solution-template: {', '.join(sorted(extra_files))}")
 
-        # Check for extra directories
+        # Check for extra directories - allow common script subdirectories
         extra_dirs = solution_dirs - set(template_dirs.keys())
-        if extra_dirs:
-            self.errors.append(f"Extra directories not in solution-template: {', '.join(sorted(extra_dirs))}")
+        allowed_extra_dirs = {
+            'delivery/scripts/terraform/modules',
+            'delivery/scripts/terraform/scripts',
+            'delivery/scripts/ansible/group_vars',
+            'delivery/scripts/ansible/inventory'
+        }
+        # Filter out allowed extra directories and their subdirectories
+        filtered_extra_dirs = []
+        for extra_dir in extra_dirs:
+            is_allowed = False
+            for allowed_dir in allowed_extra_dirs:
+                if extra_dir == allowed_dir or extra_dir.startswith(allowed_dir + '/'):
+                    is_allowed = True
+                    break
+            if not is_allowed:
+                filtered_extra_dirs.append(extra_dir)
+
+        if filtered_extra_dirs:
+            self.errors.append(f"Extra directories not in solution-template: {', '.join(sorted(filtered_extra_dirs))}")
 
         print(f"   ✅ Structure validation completed")
 

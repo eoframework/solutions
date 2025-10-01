@@ -1,6 +1,6 @@
 provider: github
 category: cyber-security
-solution_name: CodeQL Security Scanner
+solution_name: advanced-security
 description: Advanced threat protection for code repositories
 version: 1.0.0
 status: Active
