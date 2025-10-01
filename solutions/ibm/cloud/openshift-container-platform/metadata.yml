@@ -1,6 +1,7 @@
 provider: ibm
 category: cloud
 solution_name: openshift-container-platform
+solution_display_name: Openshift Container Platform
 description: Enterprise container platform for modern applications
 version: 1.0.0
 status: Active

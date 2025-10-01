@@ -1,6 +1,7 @@
 provider: azure
 category: ai
 solution_name: document-intelligence
+solution_display_name: Cognitive Document Processor
 description: Smart document processing with Azure cognitive AI
 version: 1.0.0
 status: Active

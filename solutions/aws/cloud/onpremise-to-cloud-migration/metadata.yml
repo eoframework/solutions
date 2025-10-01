@@ -1,6 +1,7 @@
 provider: aws
 category: cloud
 solution_name: onpremise-to-cloud-migration
+solution_display_name: Onpremise To Cloud Migration
 description: Seamless enterprise migration to modern cloud platform
 version: 1.0.0
 status: Active

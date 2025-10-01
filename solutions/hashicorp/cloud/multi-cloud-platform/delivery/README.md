@@ -18,6 +18,15 @@ HashiCorp Multi-Cloud Platform solution providing unified infrastructure automat
 - **Multi-Cloud Flexibility** avoiding vendor lock-in with consistent tooling
 - **10-12 Week** typical deployment timeline for enterprise multi-cloud transformation
 
+### Solution Metadata
+```yaml
+solution_name: "multi-cloud-platform"
+provider: "hashicorp"
+category: "cloud"
+complexity: "advanced"
+deployment_time: "10-12 weeks"
+```
+
 ## 🏛️ **Technical Architecture**
 
 ### **Core HashiCorp Stack**

@@ -18,6 +18,15 @@ Dell VxRail Hyperconverged Infrastructure (HCI) solution providing enterprise-gr
 - **50% Lower TCO** over 5 years compared to legacy infrastructure
 - **4-6 Week** typical deployment timeline for enterprise environments
 
+### Solution Metadata
+```yaml
+solution_name: "vxrail-hci"
+provider: "dell"
+category: "cloud"
+complexity: "intermediate"
+deployment_time: "4-6 weeks"
+```
+
 ## 🏛️ **Technical Architecture**
 
 ### **Core VxRail Components**

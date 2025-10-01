@@ -16,6 +16,15 @@ AI-powered automation and intelligent processing leveraging AZURE Ai Services. T
 - **Target Outcomes**: 80%+ accuracy improvements, automated processing
 - **Primary Technology**: AZURE Ai Services
 
+### Solution Metadata
+```yaml
+solution_name: "document-intelligence"
+provider: "azure"
+category: "ai"
+complexity: "intermediate"
+deployment_time: "2-3 weeks"
+```
+
 ---
 
 ## Delivery Materials Inventory

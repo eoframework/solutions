@@ -1,6 +1,7 @@
 provider: microsoft
 category: modern-workspace
 solution_name: m365-deployment
+solution_display_name: Microsoft 365 Deployment
 description: Complete Microsoft 365 enterprise deployment
 version: 1.0.0
 status: Active

@@ -1,6 +1,7 @@
 provider: aws
 category: cloud
 solution_name: disaster-recovery-web-application
+solution_display_name: Disaster Recovery Web Application
 description: Rapid business continuity with automated failover
 version: 1.0.0
 status: Active

@@ -16,6 +16,15 @@ Secure, scalable virtual desktop infrastructure leveraging Azure Virtual Desktop
 - **Target Outcomes**: 40% cost reduction, 99.9% availability
 - **Primary Technology**: Azure Virtual Desktop, Azure AD, Log Analytics
 
+### Solution Metadata
+```yaml
+solution_name: "virtual-desktop"
+provider: "azure"
+category: "modern-workspace"
+complexity: "advanced"
+deployment_time: "2-3 weeks"
+```
+
 ---
 
 ## Delivery Materials Inventory

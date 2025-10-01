@@ -1,6 +1,7 @@
 provider: google
 category: cloud
 solution_name: landing-zone
+solution_display_name: Landing Zone
 description: Secure cloud foundation with governance & controls
 version: 1.0.0
 status: Active

@@ -89,7 +89,7 @@ def sync_to_csv():
                                         csv_row = [
                                             provider_display,
                                             category_display,
-                                            metadata.get('solution_name', solution_name),
+                                            metadata.get('solution_display_name', metadata.get('solution_name', solution_name)),
                                             metadata.get('description', ''),
                                             solution_url,
                                             metadata.get('status', 'Active')

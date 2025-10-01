@@ -16,6 +16,15 @@ Automated document processing with AI/ML leveraging Amazon Textract, Comprehend,
 - **Target Outcomes**: 95% processing time reduction, 99%+ accuracy
 - **Primary Technology**: Amazon Textract, Comprehend, Bedrock
 
+### Solution Metadata
+```yaml
+solution_name: "intelligent-document-processing"
+provider: "aws"
+category: "ai"
+complexity: "advanced"
+deployment_time: "2-3 weeks"
+```
+
 ---
 
 ## EO Framework™ Delivery Excellence

@@ -1,6 +1,7 @@
 provider: dell
 category: ai
 solution_name: precision-ai-workstation
+solution_display_name: Precision AI Workstation
 description: High-performance workstations for AI development
 version: 1.0.0
 status: Active

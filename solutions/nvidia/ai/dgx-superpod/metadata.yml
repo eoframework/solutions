@@ -1,6 +1,7 @@
 provider: nvidia
 category: ai
 solution_name: dgx-superpod
+solution_display_name: DGX SuperPOD
 description: High-performance computing for AI model training
 version: 1.0.0
 status: Active

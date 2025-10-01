@@ -3,6 +3,7 @@
 provider: aws
 category: ai
 solution_name: intelligent-document-processing
+solution_display_name: Intelligent Document Processing
 description: Automate document insights with AI-driven extraction
 version: 1.0.0
 status: Active

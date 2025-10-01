@@ -1,6 +1,7 @@
 provider: azure
 category: cyber-security
 solution_name: sentinel-siem
+solution_display_name: Sentinel SIEM
 description: Cloud SIEM for advanced threat detection & response
 version: 1.0.0
 status: Active

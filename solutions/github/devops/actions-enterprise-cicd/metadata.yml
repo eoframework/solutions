@@ -1,6 +1,7 @@
 provider: github
 category: devops
 solution_name: actions-enterprise-cicd
+solution_display_name: GitHub Workflow Automation
 description: Enterprise CI/CD automation & workflow management
 version: 1.0.0
 status: Active

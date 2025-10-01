@@ -16,6 +16,15 @@ Automated development and deployment pipelines leveraging AZURE Devops Services.
 - **Target Outcomes**: 60% faster deployments, automated workflows
 - **Primary Technology**: AZURE Devops Services
 
+### Solution Metadata
+```yaml
+solution_name: "enterprise-platform"
+provider: "azure"
+category: "devops"
+complexity: "intermediate"
+deployment_time: "2-3 weeks"
+```
+
 ---
 
 ## Delivery Materials Inventory

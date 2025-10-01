@@ -16,6 +16,15 @@ Modern, flexible workforce productivity platform leveraging MICROSOFT Modern Wor
 - **Target Outcomes**: 50% productivity increase, flexible access
 - **Primary Technology**: MICROSOFT Modern Workspace Services
 
+### Solution Metadata
+```yaml
+solution_name: "m365-deployment"
+provider: "microsoft"
+category: "modern-workspace"
+complexity: "intermediate"
+deployment_time: "2-3 weeks"
+```
+
 ---
 
 ## Delivery Materials Inventory

@@ -1,6 +1,7 @@
 provider: juniper
 category: network
 solution_name: mist-ai-network
+solution_display_name: Mist AI Network
 description: AI-driven network operations & user experiences
 version: 1.0.0
 status: Active

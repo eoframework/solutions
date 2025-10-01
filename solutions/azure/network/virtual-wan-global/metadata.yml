@@ -1,6 +1,7 @@
 provider: azure
 category: network
 solution_name: virtual-wan-global
+solution_display_name: Virtual Wan Global
 description: Global WAN connectivity for distributed enterprises
 version: 1.0.0
 status: Active

@@ -1,6 +1,7 @@
 provider: azure
 category: modern-workspace
 solution_name: virtual-desktop
+solution_display_name: Virtual Desktop
 description: Secure remote desktop for modern workforce productivity
 version: 1.0.0
 status: Active
