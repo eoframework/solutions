@@ -1,5 +1,5 @@
 {
-  "generated_at": "2025-09-29T21:21:44.606789",
+  "generated_at": "2025-10-01T03:18:43.210002",
   "total_solutions": 35,
   "statistics": {
     "total_solutions": 35,
@@ -58,7 +58,7 @@
       "id": "microsoft-modern-workspace-m365-deployment",
       "provider": "microsoft",
       "category": "modern-workspace",
-      "solution_name": "Microsoft 365 Deployment",
+      "solution_name": "m365-deployment",
       "description": "Complete Microsoft 365 enterprise deployment",
       "version": "1.0.0",
       "status": "Active",
@@ -92,13 +92,13 @@
         ]
       },
       "solution_path": "../../solutions/microsoft/modern-workspace/m365-deployment/",
-      "title": "Microsoft 365 Deployment"
+      "title": "m365-deployment"
     },
     {
       "id": "microsoft-cyber-security-cmmc-enclave",
       "provider": "microsoft",
       "category": "cyber-security",
-      "solution_name": "CMMC Enclave",
+      "solution_name": "cmmc-enclave",
       "description": "CMMC-compliant secure enclave for defense contractors",
       "version": "1.0.0",
       "status": "Active",
@@ -132,13 +132,13 @@
         ]
       },
       "solution_path": "../../solutions/microsoft/cyber-security/cmmc-enclave/",
-      "title": "CMMC Enclave"
+      "title": "cmmc-enclave"
     },
     {
       "id": "azure-ai-document-intelligence",
       "provider": "azure",
       "category": "ai",
-      "solution_name": "Cognitive Document Processor",
+      "solution_name": "document-intelligence",
       "description": "Smart document processing with Azure cognitive AI",
       "version": "1.0.0",
       "status": "Active",
@@ -172,13 +172,13 @@
         ]
       },
       "solution_path": "../../solutions/azure/ai/document-intelligence/",
-      "title": "Cognitive Document Processor"
+      "title": "document-intelligence"
     },
     {
       "id": "azure-cloud-enterprise-landing-zone",
       "provider": "azure",
       "category": "cloud",
-      "solution_name": "Enterprise Landing Zone",
+      "solution_name": "enterprise-landing-zone",
       "description": "Secure Azure foundation for enterprise workloads",
       "version": "1.0.0",
       "status": "Active",
@@ -213,13 +213,13 @@
         ]
       },
       "solution_path": "../../solutions/azure/cloud/enterprise-landing-zone/",
-      "title": "Enterprise Landing Zone"
+      "title": "enterprise-landing-zone"
     },
     {
       "id": "azure-network-virtual-wan-global",
       "provider": "azure",
       "category": "network",
-      "solution_name": "Virtual Wan Global",
+      "solution_name": "virtual-wan-global",
       "description": "Global WAN connectivity for distributed enterprises",
       "version": "1.0.0",
       "status": "Active",
@@ -253,13 +253,13 @@
         ]
       },
       "solution_path": "../../solutions/azure/network/virtual-wan-global/",
-      "title": "Virtual Wan Global"
+      "title": "virtual-wan-global"
     },
     {
       "id": "azure-devops-enterprise-platform",
       "provider": "azure",
       "category": "devops",
-      "solution_name": "DevOps Pipeline Factory",
+      "solution_name": "enterprise-platform",
       "description": "DevOps platform for accelerated software delivery",
       "version": "1.0.0",
       "status": "Active",
@@ -293,13 +293,13 @@
         ]
       },
       "solution_path": "../../solutions/azure/devops/enterprise-platform/",
-      "title": "DevOps Pipeline Factory"
+      "title": "enterprise-platform"
     },
     {
       "id": "azure-modern-workspace-virtual-desktop",
       "provider": "azure",
       "category": "modern-workspace",
-      "solution_name": "Virtual Desktop",
+      "solution_name": "virtual-desktop",
       "description": "Secure remote desktop for modern workforce productivity",
       "version": "1.0.0",
       "status": "Active",
@@ -333,13 +333,13 @@
         ]
       },
       "solution_path": "../../solutions/azure/modern-workspace/virtual-desktop/",
-      "title": "Virtual Desktop"
+      "title": "virtual-desktop"
     },
     {
       "id": "azure-cyber-security-sentinel-siem",
       "provider": "azure",
       "category": "cyber-security",
-      "solution_name": "Sentinel SIEM",
+      "solution_name": "sentinel-siem",
       "description": "Cloud SIEM for advanced threat detection & response",
       "version": "1.0.0",
       "status": "Active",
@@ -373,13 +373,13 @@
         ]
       },
       "solution_path": "../../solutions/azure/cyber-security/sentinel-siem/",
-      "title": "Sentinel SIEM"
+      "title": "sentinel-siem"
     },
     {
       "id": "dell-ai-precision-ai-workstation",
       "provider": "dell",
       "category": "ai",
-      "solution_name": "Precision AI Workstation",
+      "solution_name": "precision-ai-workstation",
       "description": "High-performance workstations for AI development",
       "version": "1.0.0",
       "status": "Active",
@@ -412,13 +412,13 @@
         ]
       },
       "solution_path": "../../solutions/dell/ai/precision-ai-workstation/",
-      "title": "Precision AI Workstation"
+      "title": "precision-ai-workstation"
     },
     {
       "id": "dell-cloud-vxrail-hyperconverged",
       "provider": "dell",
       "category": "cloud",
-      "solution_name": "VxRail Hyperconverged",
+      "solution_name": "vxrail-hyperconverged",
       "description": "Complete HCI platform for enterprise workloads",
       "version": "1.0.0",
       "status": "Active",
@@ -451,13 +451,13 @@
         ]
       },
       "solution_path": "../../solutions/dell/cloud/vxrail-hyperconverged/",
-      "title": "VxRail Hyperconverged"
+      "title": "vxrail-hyperconverged"
     },
     {
       "id": "dell-cloud-vxrail-hci",
       "provider": "dell",
       "category": "cloud",
-      "solution_name": "VxRail HCI",
+      "solution_name": "vxrail-hci",
       "description": "Hyperconverged infrastructure for simplified IT",
       "version": "1.0.0",
       "status": "Active",
@@ -489,13 +489,13 @@
         ]
       },
       "solution_path": "../../solutions/dell/cloud/vxrail-hci/",
-      "title": "VxRail HCI"
+      "title": "vxrail-hci"
     },
     {
       "id": "dell-network-powerswitch-datacenter",
       "provider": "dell",
       "category": "network",
-      "solution_name": "Powerswitch Datacenter",
+      "solution_name": "powerswitch-datacenter",
       "description": "High-performance datacenter switching fabric",
       "version": "1.0.0",
       "status": "Active",
@@ -528,13 +528,13 @@
         ]
       },
       "solution_path": "../../solutions/dell/network/powerswitch-datacenter/",
-      "title": "Powerswitch Datacenter"
+      "title": "powerswitch-datacenter"
     },
     {
       "id": "dell-devops-poweredge-ci-infrastructure",
       "provider": "dell",
       "category": "devops",
-      "solution_name": "Poweredge Ci Infrastructure",
+      "solution_name": "poweredge-ci-infrastructure",
       "description": "Enterprise CI infrastructure on PowerEdge servers",
       "version": "1.0.0",
       "status": "Active",
@@ -567,13 +567,13 @@
         ]
       },
       "solution_path": "../../solutions/dell/devops/poweredge-ci-infrastructure/",
-      "title": "Poweredge Ci Infrastructure"
+      "title": "poweredge-ci-infrastructure"
     },
     {
       "id": "dell-cyber-security-safeid-authentication",
       "provider": "dell",
       "category": "cyber-security",
-      "solution_name": "Safeid Authentication",
+      "solution_name": "safeid-authentication",
       "description": "Multi-factor authentication for secure access",
       "version": "1.0.0",
       "status": "Active",
@@ -606,13 +606,13 @@
         ]
       },
       "solution_path": "../../solutions/dell/cyber-security/safeid-authentication/",
-      "title": "Safeid Authentication"
+      "title": "safeid-authentication"
     },
     {
       "id": "hashicorp-cloud-multi-cloud-platform",
       "provider": "hashicorp",
       "category": "cloud",
-      "solution_name": "Multi Cloud Platform",
+      "solution_name": "multi-cloud-platform",
       "description": "Multi-cloud infrastructure management & automation",
       "version": "1.0.0",
       "status": "Active",
@@ -646,13 +646,13 @@
         ]
       },
       "solution_path": "../../solutions/hashicorp/cloud/multi-cloud-platform/",
-      "title": "Multi Cloud Platform"
+      "title": "multi-cloud-platform"
     },
     {
       "id": "hashicorp-devops-terraform-enterprise",
       "provider": "hashicorp",
       "category": "devops",
-      "solution_name": "Terraform Enterprise",
+      "solution_name": "terraform-enterprise",
       "description": "Enterprise infrastructure as code platform",
       "version": "1.0.0",
       "status": "Active",
@@ -686,13 +686,13 @@
         ]
       },
       "solution_path": "../../solutions/hashicorp/devops/terraform-enterprise/",
-      "title": "Terraform Enterprise"
+      "title": "terraform-enterprise"
     },
     {
       "id": "juniper-network-mist-ai-network",
       "provider": "juniper",
       "category": "network",
-      "solution_name": "Mist AI Network",
+      "solution_name": "mist-ai-network",
       "description": "AI-driven network operations & user experiences",
       "version": "1.0.0",
       "status": "Active",
@@ -724,13 +724,13 @@
         ]
       },
       "solution_path": "../../solutions/juniper/network/mist-ai-network/",
-      "title": "Mist AI Network"
+      "title": "mist-ai-network"
     },
     {
       "id": "juniper-cyber-security-srx-firewall-platform",
       "provider": "juniper",
       "category": "cyber-security",
-      "solution_name": "SRX Firewall Platform",
+      "solution_name": "srx-firewall-platform",
       "description": "Next-gen firewall for enterprise network security",
       "version": "1.0.0",
       "status": "Active",
@@ -763,13 +763,13 @@
         ]
       },
       "solution_path": "../../solutions/juniper/cyber-security/srx-firewall-platform/",
-      "title": "SRX Firewall Platform"
+      "title": "srx-firewall-platform"
     },
     {
       "id": "google-cloud-landing-zone",
       "provider": "google",
       "category": "cloud",
-      "solution_name": "Landing Zone",
+      "solution_name": "landing-zone",
       "description": "Secure cloud foundation with governance & controls",
       "version": "1.0.0",
       "status": "Active",
@@ -803,13 +803,13 @@
         ]
       },
       "solution_path": "../../solutions/google/cloud/landing-zone/",
-      "title": "Landing Zone"
+      "title": "landing-zone"
     },
     {
       "id": "google-modern-workspace-workspace",
       "provider": "google",
       "category": "modern-workspace",
-      "solution_name": "Workspace",
+      "solution_name": "workspace",
       "description": "Collaborative digital workspace for modern teams",
       "version": "1.0.0",
       "status": "Active",
@@ -842,13 +842,13 @@
         ]
       },
       "solution_path": "../../solutions/google/modern-workspace/workspace/",
-      "title": "Workspace"
+      "title": "workspace"
     },
     {
       "id": "github-devops-actions-enterprise-cicd",
       "provider": "github",
       "category": "devops",
-      "solution_name": "GitHub Workflow Automation",
+      "solution_name": "actions-enterprise-cicd",
       "description": "Enterprise CI/CD automation & workflow management",
       "version": "1.0.0",
       "status": "Active",
@@ -883,13 +883,13 @@
         ]
       },
       "solution_path": "../../solutions/github/devops/actions-enterprise-cicd/",
-      "title": "GitHub Workflow Automation"
+      "title": "actions-enterprise-cicd"
     },
     {
       "id": "github-cyber-security-advanced-security",
       "provider": "github",
       "category": "cyber-security",
-      "solution_name": "CodeQL Security Scanner",
+      "solution_name": "advanced-security",
       "description": "Advanced threat protection for code repositories",
       "version": "1.0.0",
       "status": "Active",
@@ -923,13 +923,13 @@
         ]
       },
       "solution_path": "../../solutions/github/cyber-security/advanced-security/",
-      "title": "CodeQL Security Scanner"
+      "title": "advanced-security"
     },
     {
       "id": "ibm-cloud-openshift-container-platform",
       "provider": "ibm",
       "category": "cloud",
-      "solution_name": "Openshift Container Platform",
+      "solution_name": "openshift-container-platform",
       "description": "Enterprise container platform for modern applications",
       "version": "1.0.0",
       "status": "Active",
@@ -964,13 +964,13 @@
         ]
       },
       "solution_path": "../../solutions/ibm/cloud/openshift-container-platform/",
-      "title": "Openshift Container Platform"
+      "title": "openshift-container-platform"
     },
     {
       "id": "ibm-devops-ansible-automation-platform",
       "provider": "ibm",
       "category": "devops",
-      "solution_name": "Ansible Automation Platform",
+      "solution_name": "ansible-automation-platform",
       "description": "IT automation platform for operational efficiency",
       "version": "1.0.0",
       "status": "Active",
@@ -1005,13 +1005,13 @@
         ]
       },
       "solution_path": "../../solutions/ibm/devops/ansible-automation-platform/",
-      "title": "Ansible Automation Platform"
+      "title": "ansible-automation-platform"
     },
     {
       "id": "nvidia-ai-gpu-compute-cluster",
       "provider": "nvidia",
       "category": "ai",
-      "solution_name": "GPU Compute Cluster",
+      "solution_name": "gpu-compute-cluster",
       "description": "GPU cluster for parallel computing & AI workloads",
       "version": "1.0.0",
       "status": "Active",
@@ -1045,13 +1045,13 @@
         ]
       },
       "solution_path": "../../solutions/nvidia/ai/gpu-compute-cluster/",
-      "title": "GPU Compute Cluster"
+      "title": "gpu-compute-cluster"
     },
     {
       "id": "nvidia-ai-dgx-superpod",
       "provider": "nvidia",
       "category": "ai",
-      "solution_name": "DGX SuperPOD",
+      "solution_name": "dgx-superpod",
       "description": "High-performance computing for AI model training",
       "version": "1.0.0",
       "status": "Active",
@@ -1084,13 +1084,13 @@
         ]
       },
       "solution_path": "../../solutions/nvidia/ai/dgx-superpod/",
-      "title": "DGX SuperPOD"
+      "title": "dgx-superpod"
     },
     {
       "id": "nvidia-modern-workspace-omniverse-enterprise",
       "provider": "nvidia",
       "category": "modern-workspace",
-      "solution_name": "Omniverse Enterprise",
+      "solution_name": "omniverse-enterprise",
       "description": "Real-time collaboration platform for 3D workflows",
       "version": "1.0.0",
       "status": "Active",
@@ -1124,13 +1124,13 @@
         ]
       },
       "solution_path": "../../solutions/nvidia/modern-workspace/omniverse-enterprise/",
-      "title": "Omniverse Enterprise"
+      "title": "omniverse-enterprise"
     },
     {
       "id": "cisco-ai-network-analytics",
       "provider": "cisco",
       "category": "ai",
-      "solution_name": "AI-Powered Network Insights",
+      "solution_name": "network-analytics",
       "description": "AI-driven network insights for optimized performance",
       "version": "1.0.0",
       "status": "Active",
@@ -1163,13 +1163,13 @@
         ]
       },
       "solution_path": "../../solutions/cisco/ai/network-analytics/",
-      "title": "AI-Powered Network Insights"
+      "title": "network-analytics"
     },
     {
       "id": "cisco-cloud-hybrid-infrastructure",
       "provider": "cisco",
       "category": "cloud",
-      "solution_name": "HyperFlex Cloud Bridge",
+      "solution_name": "hybrid-infrastructure",
       "description": "Seamless hybrid cloud infrastructure integration",
       "version": "1.0.0",
       "status": "Active",
@@ -1202,13 +1202,13 @@
         ]
       },
       "solution_path": "../../solutions/cisco/cloud/hybrid-infrastructure/",
-      "title": "HyperFlex Cloud Bridge"
+      "title": "hybrid-infrastructure"
     },
     {
       "id": "cisco-network-sd-wan-enterprise",
       "provider": "cisco",
       "category": "network",
-      "solution_name": "SD-WAN Enterprise",
+      "solution_name": "sd-wan-enterprise",
       "description": "Enterprise SD-WAN for optimized branch connectivity",
       "version": "1.0.0",
       "status": "Active",
@@ -1240,13 +1240,13 @@
         ]
       },
       "solution_path": "../../solutions/cisco/network/sd-wan-enterprise/",
-      "title": "SD-WAN Enterprise"
+      "title": "sd-wan-enterprise"
     },
     {
       "id": "cisco-devops-ci-cd-automation",
       "provider": "cisco",
       "category": "devops",
-      "solution_name": "Network Infrastructure Pipeline",
+      "solution_name": "ci-cd-automation",
       "description": "Network-aware CI/CD for infrastructure automation",
       "version": "1.0.0",
       "status": "Active",
@@ -1278,13 +1278,13 @@
         ]
       },
       "solution_path": "../../solutions/cisco/devops/ci-cd-automation/",
-      "title": "Network Infrastructure Pipeline"
+      "title": "ci-cd-automation"
     },
     {
       "id": "cisco-cyber-security-secure-access",
       "provider": "cisco",
       "category": "cyber-security",
-      "solution_name": "Zero Trust Network Gateway",
+      "solution_name": "secure-access",
       "description": "Zero-trust network access for enhanced security",
       "version": "1.0.0",
       "status": "Active",
@@ -1317,13 +1317,13 @@
         ]
       },
       "solution_path": "../../solutions/cisco/cyber-security/secure-access/",
-      "title": "Zero Trust Network Gateway"
+      "title": "secure-access"
     },
     {
       "id": "aws-ai-intelligent-document-processing",
       "provider": "aws",
       "category": "ai",
-      "solution_name": "Intelligent Document Processing",
+      "solution_name": "intelligent-document-processing",
       "description": "Automate document insights with AI-driven extraction",
       "version": "1.0.0",
       "status": "Active",
@@ -1358,13 +1358,13 @@
         ]
       },
       "solution_path": "../../solutions/aws/ai/intelligent-document-processing/",
-      "title": "Intelligent Document Processing"
+      "title": "intelligent-document-processing"
     },
     {
       "id": "aws-cloud-onpremise-to-cloud-migration",
       "provider": "aws",
       "category": "cloud",
-      "solution_name": "Onpremise To Cloud Migration",
+      "solution_name": "onpremise-to-cloud-migration",
       "description": "Seamless enterprise migration to modern cloud platform",
       "version": "1.0.0",
       "status": "Active",
@@ -1398,13 +1398,13 @@
         ]
       },
       "solution_path": "../../solutions/aws/cloud/onpremise-to-cloud-migration/",
-      "title": "Onpremise To Cloud Migration"
+      "title": "onpremise-to-cloud-migration"
     },
     {
       "id": "aws-cloud-disaster-recovery-web-application",
       "provider": "aws",
       "category": "cloud",
-      "solution_name": "Disaster Recovery Web Application",
+      "solution_name": "disaster-recovery-web-application",
       "description": "Rapid business continuity with automated failover",
       "version": "1.0.0",
       "status": "Active",
@@ -1439,7 +1439,7 @@
         ]
       },
       "solution_path": "../../solutions/aws/cloud/disaster-recovery-web-application/",
-      "title": "Disaster Recovery Web Application"
+      "title": "disaster-recovery-web-application"
     }
   ]
 }

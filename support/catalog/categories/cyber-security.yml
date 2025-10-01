@@ -1,47 +1,47 @@
 version: '2.0'
 category: cyber-security
-generated_at: '2025-09-29T21:21:44.397321'
+generated_at: '2025-10-01T03:18:43.005539'
 catalog_type: category
 metadata:
   category_name: Cyber Security
   description: Security, compliance, and threat protection solutions
   total_solutions: 6
-  last_updated: '2025-09-29T21:21:44.397330'
+  last_updated: '2025-10-01T03:18:43.005546'
   auto_generated: true
 providers:
   cisco:
     solutions:
     - name: secure-access
-      title: Zero Trust Network Gateway
+      title: secure-access
       provider_catalog: ../providers/cisco.yml
       solution_path: ../../solutions/cisco/cyber-security/secure-access/
   github:
     solutions:
     - name: advanced-security
-      title: CodeQL Security Scanner
+      title: advanced-security
       provider_catalog: ../providers/github.yml
       solution_path: ../../solutions/github/cyber-security/advanced-security/
   microsoft:
     solutions:
     - name: cmmc-enclave
-      title: CMMC Enclave
+      title: cmmc-enclave
       provider_catalog: ../providers/microsoft.yml
       solution_path: ../../solutions/microsoft/cyber-security/cmmc-enclave/
   dell:
     solutions:
     - name: safeid-authentication
-      title: Safeid Authentication
+      title: safeid-authentication
       provider_catalog: ../providers/dell.yml
       solution_path: ../../solutions/dell/cyber-security/safeid-authentication/
   azure:
     solutions:
     - name: sentinel-siem
-      title: Sentinel SIEM
+      title: sentinel-siem
       provider_catalog: ../providers/azure.yml
       solution_path: ../../solutions/azure/cyber-security/sentinel-siem/
   juniper:
     solutions:
     - name: srx-firewall-platform
-      title: SRX Firewall Platform
+      title: srx-firewall-platform
       provider_catalog: ../providers/juniper.yml
       solution_path: ../../solutions/juniper/cyber-security/srx-firewall-platform/

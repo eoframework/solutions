@@ -1,11 +1,11 @@
 version: '2.0'
 provider: cisco
-generated_at: '2025-09-29T21:21:44.319451'
+generated_at: '2025-10-01T03:18:42.914837'
 catalog_type: provider
 metadata:
   provider_name: Cisco
   total_solutions: 5
-  last_updated: '2025-09-29T21:21:44.319464'
+  last_updated: '2025-10-01T03:18:42.914854'
   auto_generated: true
 categories:
   ai:
@@ -13,7 +13,7 @@ categories:
       network-analytics:
         provider: cisco
         category: ai
-        solution_name: AI-Powered Network Insights
+        solution_name: network-analytics
         description: AI-driven network insights for optimized performance
         version: 1.0.0
         status: Active
@@ -38,13 +38,13 @@ categories:
           - Solution Architecture
           - Network Infrastructure
         solution_path: ../../solutions/cisco/ai/network-analytics/
-        title: AI-Powered Network Insights
+        title: network-analytics
   cloud:
     solutions:
       hybrid-infrastructure:
         provider: cisco
         category: cloud
-        solution_name: HyperFlex Cloud Bridge
+        solution_name: hybrid-infrastructure
         description: Seamless hybrid cloud infrastructure integration
         version: 1.0.0
         status: Active
@@ -69,13 +69,13 @@ categories:
           - Solution Architecture
           - Network Infrastructure
         solution_path: ../../solutions/cisco/cloud/hybrid-infrastructure/
-        title: HyperFlex Cloud Bridge
+        title: hybrid-infrastructure
   network:
     solutions:
       sd-wan-enterprise:
         provider: cisco
         category: network
-        solution_name: SD-WAN Enterprise
+        solution_name: sd-wan-enterprise
         description: Enterprise SD-WAN for optimized branch connectivity
         version: 1.0.0
         status: Active
@@ -99,13 +99,13 @@ categories:
           - Solution Architecture
           - Network Infrastructure
         solution_path: ../../solutions/cisco/network/sd-wan-enterprise/
-        title: SD-WAN Enterprise
+        title: sd-wan-enterprise
   devops:
     solutions:
       ci-cd-automation:
         provider: cisco
         category: devops
-        solution_name: Network Infrastructure Pipeline
+        solution_name: ci-cd-automation
         description: Network-aware CI/CD for infrastructure automation
         version: 1.0.0
         status: Active
@@ -129,13 +129,13 @@ categories:
           - Solution Architecture
           - Network Infrastructure
         solution_path: ../../solutions/cisco/devops/ci-cd-automation/
-        title: Network Infrastructure Pipeline
+        title: ci-cd-automation
   cyber-security:
     solutions:
       secure-access:
         provider: cisco
         category: cyber-security
-        solution_name: Zero Trust Network Gateway
+        solution_name: secure-access
         description: Zero-trust network access for enhanced security
         version: 1.0.0
         status: Active
@@ -160,4 +160,4 @@ categories:
           - Solution Architecture
           - Network Infrastructure
         solution_path: ../../solutions/cisco/cyber-security/secure-access/
-        title: Zero Trust Network Gateway
+        title: secure-access

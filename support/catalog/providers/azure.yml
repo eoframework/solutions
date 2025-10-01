@@ -1,11 +1,11 @@
 version: '2.0'
 provider: azure
-generated_at: '2025-09-29T21:21:44.359128'
+generated_at: '2025-10-01T03:18:42.976661'
 catalog_type: provider
 metadata:
   provider_name: Azure
   total_solutions: 6
-  last_updated: '2025-09-29T21:21:44.359136'
+  last_updated: '2025-10-01T03:18:42.976670'
   auto_generated: true
 categories:
   ai:
@@ -13,7 +13,7 @@ categories:
       document-intelligence:
         provider: azure
         category: ai
-        solution_name: Cognitive Document Processor
+        solution_name: document-intelligence
         description: Smart document processing with Azure cognitive AI
         version: 1.0.0
         status: Active
@@ -39,13 +39,13 @@ categories:
           - Solution Architecture
           - Azure Services
         solution_path: ../../solutions/azure/ai/document-intelligence/
-        title: Cognitive Document Processor
+        title: document-intelligence
   cloud:
     solutions:
       enterprise-landing-zone:
         provider: azure
         category: cloud
-        solution_name: Enterprise Landing Zone
+        solution_name: enterprise-landing-zone
         description: Secure Azure foundation for enterprise workloads
         version: 1.0.0
         status: Active
@@ -72,13 +72,13 @@ categories:
           - Solution Architecture
           - Azure Services
         solution_path: ../../solutions/azure/cloud/enterprise-landing-zone/
-        title: Enterprise Landing Zone
+        title: enterprise-landing-zone
   network:
     solutions:
       virtual-wan-global:
         provider: azure
         category: network
-        solution_name: Virtual Wan Global
+        solution_name: virtual-wan-global
         description: Global WAN connectivity for distributed enterprises
         version: 1.0.0
         status: Active
@@ -104,13 +104,13 @@ categories:
           - Solution Architecture
           - Azure Services
         solution_path: ../../solutions/azure/network/virtual-wan-global/
-        title: Virtual Wan Global
+        title: virtual-wan-global
   devops:
     solutions:
       enterprise-platform:
         provider: azure
         category: devops
-        solution_name: DevOps Pipeline Factory
+        solution_name: enterprise-platform
         description: DevOps platform for accelerated software delivery
         version: 1.0.0
         status: Active
@@ -136,13 +136,13 @@ categories:
           - Solution Architecture
           - Azure Services
         solution_path: ../../solutions/azure/devops/enterprise-platform/
-        title: DevOps Pipeline Factory
+        title: enterprise-platform
   modern-workspace:
     solutions:
       virtual-desktop:
         provider: azure
         category: modern-workspace
-        solution_name: Virtual Desktop
+        solution_name: virtual-desktop
         description: Secure remote desktop for modern workforce productivity
         version: 1.0.0
         status: Active
@@ -168,13 +168,13 @@ categories:
           - Solution Architecture
           - Azure Services
         solution_path: ../../solutions/azure/modern-workspace/virtual-desktop/
-        title: Virtual Desktop
+        title: virtual-desktop
   cyber-security:
     solutions:
       sentinel-siem:
         provider: azure
         category: cyber-security
-        solution_name: Sentinel SIEM
+        solution_name: sentinel-siem
         description: Cloud SIEM for advanced threat detection & response
         version: 1.0.0
         status: Active
@@ -200,4 +200,4 @@ categories:
           - Solution Architecture
           - Azure Services
         solution_path: ../../solutions/azure/cyber-security/sentinel-siem/
-        title: Sentinel SIEM
+        title: sentinel-siem

@@ -1,11 +1,11 @@
 version: '2.0'
 provider: juniper
-generated_at: '2025-09-29T21:21:44.368147'
+generated_at: '2025-10-01T03:18:42.985628'
 catalog_type: provider
 metadata:
   provider_name: Juniper
   total_solutions: 2
-  last_updated: '2025-09-29T21:21:44.368154'
+  last_updated: '2025-10-01T03:18:42.985636'
   auto_generated: true
 categories:
   network:
@@ -13,7 +13,7 @@ categories:
       mist-ai-network:
         provider: juniper
         category: network
-        solution_name: Mist AI Network
+        solution_name: mist-ai-network
         description: AI-driven network operations & user experiences
         version: 1.0.0
         status: Active
@@ -37,13 +37,13 @@ categories:
           - Solution Architecture
           - Network Infrastructure
         solution_path: ../../solutions/juniper/network/mist-ai-network/
-        title: Mist AI Network
+        title: mist-ai-network
   cyber-security:
     solutions:
       srx-firewall-platform:
         provider: juniper
         category: cyber-security
-        solution_name: SRX Firewall Platform
+        solution_name: srx-firewall-platform
         description: Next-gen firewall for enterprise network security
         version: 1.0.0
         status: Active
@@ -68,4 +68,4 @@ categories:
           - Solution Architecture
           - Network Infrastructure
         solution_path: ../../solutions/juniper/cyber-security/srx-firewall-platform/
-        title: SRX Firewall Platform
+        title: srx-firewall-platform

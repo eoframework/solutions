@@ -1,11 +1,11 @@
 version: '2.0'
 provider: github
-generated_at: '2025-09-29T21:21:44.339623'
+generated_at: '2025-10-01T03:18:42.951760'
 catalog_type: provider
 metadata:
   provider_name: GitHub
   total_solutions: 2
-  last_updated: '2025-09-29T21:21:44.339631'
+  last_updated: '2025-10-01T03:18:42.951771'
   auto_generated: true
 categories:
   devops:
@@ -13,7 +13,7 @@ categories:
       actions-enterprise-cicd:
         provider: github
         category: devops
-        solution_name: GitHub Workflow Automation
+        solution_name: actions-enterprise-cicd
         description: Enterprise CI/CD automation & workflow management
         version: 1.0.0
         status: Active
@@ -40,13 +40,13 @@ categories:
           - Solution Architecture
           - DevOps Practices
         solution_path: ../../solutions/github/devops/actions-enterprise-cicd/
-        title: GitHub Workflow Automation
+        title: actions-enterprise-cicd
   cyber-security:
     solutions:
       advanced-security:
         provider: github
         category: cyber-security
-        solution_name: CodeQL Security Scanner
+        solution_name: advanced-security
         description: Advanced threat protection for code repositories
         version: 1.0.0
         status: Active
@@ -72,4 +72,4 @@ categories:
           - Solution Architecture
           - DevOps Practices
         solution_path: ../../solutions/github/cyber-security/advanced-security/
-        title: CodeQL Security Scanner
+        title: advanced-security

@@ -1,11 +1,11 @@
 version: '2.0'
 provider: nvidia
-generated_at: '2025-09-29T21:21:44.371551'
+generated_at: '2025-10-01T03:18:42.989087'
 catalog_type: provider
 metadata:
   provider_name: Nvidia
   total_solutions: 3
-  last_updated: '2025-09-29T21:21:44.371559'
+  last_updated: '2025-10-01T03:18:42.989094'
   auto_generated: true
 categories:
   ai:
@@ -13,7 +13,7 @@ categories:
       gpu-compute-cluster:
         provider: nvidia
         category: ai
-        solution_name: GPU Compute Cluster
+        solution_name: gpu-compute-cluster
         description: GPU cluster for parallel computing & AI workloads
         version: 1.0.0
         status: Active
@@ -39,11 +39,11 @@ categories:
           - Solution Architecture
           - AI/ML Infrastructure
         solution_path: ../../solutions/nvidia/ai/gpu-compute-cluster/
-        title: GPU Compute Cluster
+        title: gpu-compute-cluster
       dgx-superpod:
         provider: nvidia
         category: ai
-        solution_name: DGX SuperPOD
+        solution_name: dgx-superpod
         description: High-performance computing for AI model training
         version: 1.0.0
         status: Active
@@ -68,13 +68,13 @@ categories:
           - Solution Architecture
           - AI/ML Infrastructure
         solution_path: ../../solutions/nvidia/ai/dgx-superpod/
-        title: DGX SuperPOD
+        title: dgx-superpod
   modern-workspace:
     solutions:
       omniverse-enterprise:
         provider: nvidia
         category: modern-workspace
-        solution_name: Omniverse Enterprise
+        solution_name: omniverse-enterprise
         description: Real-time collaboration platform for 3D workflows
         version: 1.0.0
         status: Active
@@ -100,4 +100,4 @@ categories:
           - Solution Architecture
           - AI/ML Infrastructure
         solution_path: ../../solutions/nvidia/modern-workspace/omniverse-enterprise/
-        title: Omniverse Enterprise
+        title: omniverse-enterprise
