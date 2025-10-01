@@ -1,11 +1,11 @@
 version: '2.0'
 provider: github
-generated_at: '2025-10-01T03:18:42.951760'
+generated_at: '2025-10-01T03:33:44.847061'
 catalog_type: provider
 metadata:
   provider_name: GitHub
   total_solutions: 2
-  last_updated: '2025-10-01T03:18:42.951771'
+  last_updated: '2025-10-01T03:33:44.847069'
   auto_generated: true
 categories:
   devops:
@@ -14,6 +14,7 @@ categories:
         provider: github
         category: devops
         solution_name: actions-enterprise-cicd
+        solution_display_name: GitHub Workflow Automation
         description: Enterprise CI/CD automation & workflow management
         version: 1.0.0
         status: Active
@@ -47,6 +48,7 @@ categories:
         provider: github
         category: cyber-security
         solution_name: advanced-security
+        solution_display_name: CodeQL Security Scanner
         description: Advanced threat protection for code repositories
         version: 1.0.0
         status: Active

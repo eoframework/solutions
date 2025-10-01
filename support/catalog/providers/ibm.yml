@@ -1,11 +1,11 @@
 version: '2.0'
 provider: ibm
-generated_at: '2025-10-01T03:18:42.945467'
+generated_at: '2025-10-01T03:33:44.843389'
 catalog_type: provider
 metadata:
   provider_name: IBM
   total_solutions: 2
-  last_updated: '2025-10-01T03:18:42.945481'
+  last_updated: '2025-10-01T03:33:44.843397'
   auto_generated: true
 categories:
   cloud:
@@ -14,6 +14,7 @@ categories:
         provider: ibm
         category: cloud
         solution_name: openshift-container-platform
+        solution_display_name: Openshift Container Platform
         description: Enterprise container platform for modern applications
         version: 1.0.0
         status: Active
@@ -47,6 +48,7 @@ categories:
         provider: ibm
         category: devops
         solution_name: ansible-automation-platform
+        solution_display_name: Ansible Automation Platform
         description: IT automation platform for operational efficiency
         version: 1.0.0
         status: Active

@@ -1,11 +1,11 @@
 version: '2.0'
 provider: azure
-generated_at: '2025-10-01T03:18:42.976661'
+generated_at: '2025-10-01T03:33:44.867217'
 catalog_type: provider
 metadata:
   provider_name: Azure
   total_solutions: 6
-  last_updated: '2025-10-01T03:18:42.976670'
+  last_updated: '2025-10-01T03:33:44.867225'
   auto_generated: true
 categories:
   ai:
@@ -14,6 +14,7 @@ categories:
         provider: azure
         category: ai
         solution_name: document-intelligence
+        solution_display_name: Cognitive Document Processor
         description: Smart document processing with Azure cognitive AI
         version: 1.0.0
         status: Active
@@ -46,6 +47,7 @@ categories:
         provider: azure
         category: cloud
         solution_name: enterprise-landing-zone
+        solution_display_name: Enterprise Landing Zone
         description: Secure Azure foundation for enterprise workloads
         version: 1.0.0
         status: Active
@@ -79,6 +81,7 @@ categories:
         provider: azure
         category: network
         solution_name: virtual-wan-global
+        solution_display_name: Virtual Wan Global
         description: Global WAN connectivity for distributed enterprises
         version: 1.0.0
         status: Active
@@ -111,6 +114,7 @@ categories:
         provider: azure
         category: devops
         solution_name: enterprise-platform
+        solution_display_name: DevOps Pipeline Factory
         description: DevOps platform for accelerated software delivery
         version: 1.0.0
         status: Active
@@ -143,6 +147,7 @@ categories:
         provider: azure
         category: modern-workspace
         solution_name: virtual-desktop
+        solution_display_name: Virtual Desktop
         description: Secure remote desktop for modern workforce productivity
         version: 1.0.0
         status: Active
@@ -175,6 +180,7 @@ categories:
         provider: azure
         category: cyber-security
         solution_name: sentinel-siem
+        solution_display_name: Sentinel SIEM
         description: Cloud SIEM for advanced threat detection & response
         version: 1.0.0
         status: Active

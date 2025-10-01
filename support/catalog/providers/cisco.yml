@@ -1,11 +1,11 @@
 version: '2.0'
 provider: cisco
-generated_at: '2025-10-01T03:18:42.914837'
+generated_at: '2025-10-01T03:33:44.826567'
 catalog_type: provider
 metadata:
   provider_name: Cisco
   total_solutions: 5
-  last_updated: '2025-10-01T03:18:42.914854'
+  last_updated: '2025-10-01T03:33:44.826581'
   auto_generated: true
 categories:
   ai:
@@ -14,6 +14,7 @@ categories:
         provider: cisco
         category: ai
         solution_name: network-analytics
+        solution_display_name: AI-Powered Network Insights
         description: AI-driven network insights for optimized performance
         version: 1.0.0
         status: Active
@@ -45,6 +46,7 @@ categories:
         provider: cisco
         category: cloud
         solution_name: hybrid-infrastructure
+        solution_display_name: HyperFlex Cloud Bridge
         description: Seamless hybrid cloud infrastructure integration
         version: 1.0.0
         status: Active
@@ -76,6 +78,7 @@ categories:
         provider: cisco
         category: network
         solution_name: sd-wan-enterprise
+        solution_display_name: SD-WAN Enterprise
         description: Enterprise SD-WAN for optimized branch connectivity
         version: 1.0.0
         status: Active
@@ -106,6 +109,7 @@ categories:
         provider: cisco
         category: devops
         solution_name: ci-cd-automation
+        solution_display_name: Network Infrastructure Pipeline
         description: Network-aware CI/CD for infrastructure automation
         version: 1.0.0
         status: Active
@@ -136,6 +140,7 @@ categories:
         provider: cisco
         category: cyber-security
         solution_name: secure-access
+        solution_display_name: Zero Trust Network Gateway
         description: Zero-trust network access for enhanced security
         version: 1.0.0
         status: Active

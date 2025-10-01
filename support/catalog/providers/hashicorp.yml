@@ -1,11 +1,11 @@
 version: '2.0'
 provider: hashicorp
-generated_at: '2025-10-01T03:18:42.929316'
+generated_at: '2025-10-01T03:33:44.834601'
 catalog_type: provider
 metadata:
   provider_name: HashiCorp
   total_solutions: 2
-  last_updated: '2025-10-01T03:18:42.929329'
+  last_updated: '2025-10-01T03:33:44.834610'
   auto_generated: true
 categories:
   cloud:
@@ -14,6 +14,7 @@ categories:
         provider: hashicorp
         category: cloud
         solution_name: multi-cloud-platform
+        solution_display_name: Multi Cloud Platform
         description: Multi-cloud infrastructure management & automation
         version: 1.0.0
         status: Active
@@ -46,6 +47,7 @@ categories:
         provider: hashicorp
         category: devops
         solution_name: terraform-enterprise
+        solution_display_name: Terraform Enterprise
         description: Enterprise infrastructure as code platform
         version: 1.0.0
         status: Active

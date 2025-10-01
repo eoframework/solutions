@@ -1,11 +1,11 @@
 version: '2.0'
 provider: nvidia
-generated_at: '2025-10-01T03:18:42.989087'
+generated_at: '2025-10-01T03:33:44.880132'
 catalog_type: provider
 metadata:
   provider_name: Nvidia
   total_solutions: 3
-  last_updated: '2025-10-01T03:18:42.989094'
+  last_updated: '2025-10-01T03:33:44.880140'
   auto_generated: true
 categories:
   ai:
@@ -14,6 +14,7 @@ categories:
         provider: nvidia
         category: ai
         solution_name: gpu-compute-cluster
+        solution_display_name: GPU Compute Cluster
         description: GPU cluster for parallel computing & AI workloads
         version: 1.0.0
         status: Active
@@ -44,6 +45,7 @@ categories:
         provider: nvidia
         category: ai
         solution_name: dgx-superpod
+        solution_display_name: DGX SuperPOD
         description: High-performance computing for AI model training
         version: 1.0.0
         status: Active
@@ -75,6 +77,7 @@ categories:
         provider: nvidia
         category: modern-workspace
         solution_name: omniverse-enterprise
+        solution_display_name: Omniverse Enterprise
         description: Real-time collaboration platform for 3D workflows
         version: 1.0.0
         status: Active
