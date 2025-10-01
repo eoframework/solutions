@@ -1,6 +1,6 @@
 provider: azure
 category: cloud
-solution_name: Enterprise Landing Zone
+solution_name: enterprise-landing-zone
 description: Secure Azure foundation for enterprise workloads
 version: 1.0.0
 status: Active
