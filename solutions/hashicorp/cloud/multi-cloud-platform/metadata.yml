@@ -1,6 +1,6 @@
 provider: hashicorp
 category: cloud
-solution_name: Multi Cloud Platform
+solution_name: multi-cloud-platform
 description: Multi-cloud infrastructure management & automation
 version: 1.0.0
 status: Active

@@ -1,6 +1,6 @@
 provider: nvidia
 category: ai
-solution_name: GPU Compute Cluster
+solution_name: gpu-compute-cluster
 description: GPU cluster for parallel computing & AI workloads
 version: 1.0.0
 status: Active

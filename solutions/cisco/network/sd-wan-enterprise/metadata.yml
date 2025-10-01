@@ -1,6 +1,6 @@
 provider: cisco
 category: network
-solution_name: SD-WAN Enterprise
+solution_name: sd-wan-enterprise
 description: Enterprise SD-WAN for optimized branch connectivity
 version: 1.0.0
 status: Active

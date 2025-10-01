@@ -1,6 +1,6 @@
 provider: cisco
 category: ai
-solution_name: AI-Powered Network Insights
+solution_name: network-analytics
 description: AI-driven network insights for optimized performance
 version: 1.0.0
 status: Active

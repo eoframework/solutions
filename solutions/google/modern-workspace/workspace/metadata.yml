@@ -1,6 +1,6 @@
 provider: google
 category: modern-workspace
-solution_name: Workspace
+solution_name: workspace
 description: Collaborative digital workspace for modern teams
 version: 1.0.0
 status: Active
