@@ -1,6 +1,6 @@
 provider: dell
 category: devops
-solution_name: Poweredge Ci Infrastructure
+solution_name: poweredge-ci-infrastructure
 description: Enterprise CI infrastructure on PowerEdge servers
 version: 1.0.0
 status: Active
