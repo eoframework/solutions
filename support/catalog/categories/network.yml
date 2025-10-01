@@ -1,12 +1,12 @@
 version: '2.0'
 category: network
-generated_at: '2025-10-01T03:33:44.891879'
+generated_at: '2025-10-01T11:33:47.713039'
 catalog_type: category
 metadata:
   category_name: Network
   description: Network infrastructure and connectivity solutions
   total_solutions: 4
-  last_updated: '2025-10-01T03:33:44.891886'
+  last_updated: '2025-10-01T11:33:47.713045'
   auto_generated: true
 providers:
   cisco:
