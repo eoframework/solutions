@@ -1,7 +1,0 @@
-# Sample Terraform Variables File
-# Copy to terraform.tfvars and customize for your environment
-
-resource_name = "my-solution-resource"
-environment   = "dev"
-
-# Add your variable values here
