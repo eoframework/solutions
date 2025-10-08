@@ -52,9 +52,9 @@ jobs:
         run: |
           # Ensure _data directory exists
           mkdir -p website/_data
-          
-          # Copy the generated CSV
-          cp solutions/support/exports/solutions.csv website/_data/solutions.csv
+
+          # Copy the generated CSV (public version with download URLs)
+          cp solutions/support/exports/solutions-public.csv website/_data/solutions.csv
           
           # Verify copy succeeded
           if [ ! -f website/_data/solutions.csv ]; then
