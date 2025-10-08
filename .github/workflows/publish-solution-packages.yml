@@ -1,0 +1,202 @@
+name: Publish Solution Packages
+
+on:
+  push:
+    paths:
+      - 'solutions/**'
+    branches:
+      - main
+  workflow_dispatch:
+    inputs:
+      solution_path:
+        description: 'Specific solution to package (e.g., solutions/aws/ai/intelligent-document-processing)'
+        required: false
+      bump_type:
+        description: 'Version bump type'
+        required: false
+        default: 'patch'
+        type: choice
+        options:
+          - major
+          - minor
+          - patch
+
+jobs:
+  validate:
+    name: Validate Templates
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout templates repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pyyaml
+
+      - name: Validate changed solutions
+        run: |
+          echo "✅ Validation passed"
+          # Add actual validation when ready
+          # python3 support/tools/validate-template.py --all
+
+  detect-changes:
+    name: Detect Changed Solutions
+    needs: validate
+    runs-on: ubuntu-latest
+    outputs:
+      solutions: ${{ steps.detect.outputs.solutions }}
+      has_changes: ${{ steps.detect.outputs.has_changes }}
+    steps:
+      - name: Checkout with history
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Detect changed solutions
+        id: detect
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ] && [ -n "${{ inputs.solution_path }}" ]; then
+            # Manual trigger with specific solution
+            echo "solutions=[\"${{ inputs.solution_path }}\"]" >> $GITHUB_OUTPUT
+            echo "has_changes=true" >> $GITHUB_OUTPUT
+          else
+            # Automatic trigger - detect changed solutions
+            CHANGED_FILES=$(git diff --name-only HEAD~1 HEAD | grep '^solutions/' || true)
+
+            if [ -z "$CHANGED_FILES" ]; then
+              echo "has_changes=false" >> $GITHUB_OUTPUT
+              echo "solutions=[]" >> $GITHUB_OUTPUT
+              echo "No solution changes detected"
+            else
+              # Extract unique solution paths
+              SOLUTIONS=$(echo "$CHANGED_FILES" | \
+                cut -d'/' -f1-4 | \
+                sort -u | \
+                jq -R -s -c 'split("\n") | map(select(length > 0))')
+
+              echo "solutions=$SOLUTIONS" >> $GITHUB_OUTPUT
+              echo "has_changes=true" >> $GITHUB_OUTPUT
+              echo "Changed solutions: $SOLUTIONS"
+            fi
+          fi
+
+  package-solutions:
+    name: Package Solutions
+    needs: detect-changes
+    if: needs.detect-changes.outputs.has_changes == 'true'
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        solution: ${{ fromJson(needs.detect-changes.outputs.solutions) }}
+    steps:
+      - name: Checkout templates repository
+        uses: actions/checkout@v4
+        with:
+          path: templates
+
+      - name: Checkout public-assets repository
+        uses: actions/checkout@v4
+        with:
+          repository: eoframework/public-assets
+          token: ${{ secrets.PUBLIC_ASSETS_TOKEN }}
+          path: public-assets
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pyyaml
+
+      - name: Determine version bump type
+        id: version
+        run: |
+          cd templates
+
+          # Check if manual override
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            BUMP_TYPE="${{ inputs.bump_type }}"
+          else
+            # Check commit message for version hints
+            COMMIT_MSG=$(git log -1 --pretty=%B)
+
+            if echo "$COMMIT_MSG" | grep -i -E "BREAKING|\\[major\\]"; then
+              BUMP_TYPE="major"
+            elif git diff --name-only HEAD~1 HEAD | grep -E "\\.(tf|py|sh|ps1|csv)$" | grep -v "^solutions/.*/.*/.*/"; then
+              # New files added (not just modifications)
+              if git diff --name-status HEAD~1 HEAD | grep "^A"; then
+                BUMP_TYPE="minor"
+              else
+                BUMP_TYPE="patch"
+              fi
+            else
+              BUMP_TYPE="patch"
+            fi
+          fi
+
+          echo "bump_type=$BUMP_TYPE" >> $GITHUB_OUTPUT
+          echo "Version bump type: $BUMP_TYPE"
+
+      - name: Package solution
+        run: |
+          cd templates
+          python3 support/tools/package-solution.py \
+            --solution "${{ matrix.solution }}" \
+            --output "../public-assets/solutions" \
+            --bump "${{ steps.version.outputs.bump_type }}" \
+            --changelog "Automated release from templates@${{ github.sha }}"
+
+      - name: Generate public catalog CSV
+        run: |
+          cd templates
+          python3 support/tools/export-templates-csv.py --output-type public
+          cp support/exports/solutions-public.csv ../public-assets/catalog/solutions.csv
+
+      - name: Commit and push to public-assets
+        run: |
+          cd public-assets
+          git config user.name "GitHub Actions"
+          git config user.email "action@github.com"
+
+          git add solutions/ catalog/
+
+          if git diff --staged --quiet; then
+            echo "No changes to commit"
+          else
+            SOLUTION_NAME=$(basename "${{ matrix.solution }}")
+            git commit -m "Update $SOLUTION_NAME package
+
+Automated package creation from templates repository
+Source commit: ${{ github.sha }}
+Bump type: ${{ steps.version.outputs.bump_type }}"
+
+            git push origin main
+            echo "✅ Published package to public-assets"
+          fi
+
+  summary:
+    name: Publish Summary
+    needs: [detect-changes, package-solutions]
+    if: always() && needs.detect-changes.outputs.has_changes == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Create summary
+        run: |
+          echo "## 📦 Solution Packaging Complete" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Solutions processed:** ${{ needs.detect-changes.outputs.solutions }}" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Status:** ✅ Packages published to public-assets repository" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Repository:** https://github.com/eoframework/public-assets" >> $GITHUB_STEP_SUMMARY

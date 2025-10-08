@@ -2,6 +2,7 @@
 """
 EO Framework™ CSV Sync
 Syncs repository templates with website CSV format.
+Supports both private (internal) and public (distribution) output modes.
 
 Copyright (c) 2025 EO Framework™
 Licensed under BSL 1.1 - see LICENSE file for details
@@ -9,6 +10,7 @@ Licensed under BSL 1.1 - see LICENSE file for details
 
 import csv
 import yaml
+import argparse
 from pathlib import Path
 
 def load_display_names(repo_root):
@@ -46,16 +48,23 @@ def load_display_names(repo_root):
     
     return provider_names, category_names
 
-def sync_to_csv():
-    """Generate CSV file for website integration"""
+def sync_to_csv(output_type='private'):
+    """Generate CSV file for website integration
+
+    Args:
+        output_type: 'private' for internal paths or 'public' for distribution URLs
+    """
     repo_root = Path(__file__).parent.parent.parent  # Go up to repository root
     csv_data = []
-    
+
     # Load display names from catalog files
     provider_names, category_names = load_display_names(repo_root)
-    
-    # CSV headers matching website format
-    headers = ['Provider', 'Category', 'Solution Name', 'Description', 'Templates', 'Status']
+
+    # CSV headers based on output type
+    if output_type == 'private':
+        headers = ['Provider', 'Category', 'Solution Name', 'Description', 'Templates', 'Status']
+    else:  # public
+        headers = ['Provider', 'Category', 'Solution Name', 'Description', 'Version', 'Download URL', 'Manifest URL', 'Website', 'Support Email']
     
     # Scan all templates
     solutions_path = repo_root / "solutions"
@@ -78,37 +87,74 @@ def sync_to_csv():
                                         with open(metadata_path, 'r') as f:
                                             metadata = yaml.safe_load(f)
                                         
-                                        # Build URLs for templates - combine into single Templates column
-                                        base_url = "https://github.com/eoframework/solutions/tree/main"
-                                        solution_url = f"{base_url}/solutions/{provider_name}/{category_name}/{solution_name}"
-                                        
                                         # Get display names, fall back to raw names if not found
                                         provider_display = provider_names.get(provider_name, provider_name)
                                         category_display = category_names.get(category_name, category_name)
-                                        
-                                        csv_row = [
-                                            provider_display,
-                                            category_display,
-                                            metadata.get('solution_display_name', metadata.get('solution_name', solution_name)),
-                                            metadata.get('description', ''),
-                                            solution_url,
-                                            metadata.get('status', 'Active')
-                                        ]
+                                        solution_display = metadata.get('solution_display_name', metadata.get('solution_name', solution_name))
+                                        description = metadata.get('description', '')
+                                        version = metadata.get('version', '1.0.0')
+                                        status = metadata.get('status', 'Active')
+
+                                        if output_type == 'private':
+                                            # Build URLs for templates - internal repo
+                                            base_url = "https://github.com/eoframework/solutions/tree/main"
+                                            solution_url = f"{base_url}/solutions/{provider_name}/{category_name}/{solution_name}"
+
+                                            csv_row = [
+                                                provider_display,
+                                                category_display,
+                                                solution_display,
+                                                description,
+                                                solution_url,
+                                                status
+                                            ]
+                                        else:  # public
+                                            # Build URLs for public distribution
+                                            base_url = "https://github.com/eoframework/public-assets/raw/main"
+                                            solution_path = f"solutions/{provider_name}/{category_name}/{solution_name}"
+                                            download_url = f"{base_url}/{solution_path}/latest/{solution_name}.zip"
+                                            manifest_url = f"{base_url}/{solution_path}/manifest.json"
+                                            website = "https://eoframework.com/solutions"
+                                            support_email = "support@eoframework.com"
+
+                                            csv_row = [
+                                                provider_display,
+                                                category_display,
+                                                solution_display,
+                                                description,
+                                                version,
+                                                download_url,
+                                                manifest_url,
+                                                website,
+                                                support_email
+                                            ]
+
                                         csv_data.append(csv_row)
                                         
                                     except Exception as e:
                                         print(f"Warning: Could not process {solution_path}: {e}")
     
     # Write CSV file to exports directory
-    csv_path = repo_root / 'support' / 'exports' / 'solutions.csv'
+    if output_type == 'private':
+        csv_path = repo_root / 'support' / 'exports' / 'solutions.csv'
+    else:  # public
+        csv_path = repo_root / 'support' / 'exports' / 'solutions-public.csv'
+
+    csv_path.parent.mkdir(parents=True, exist_ok=True)
+
     with open(csv_path, 'w', newline='', encoding='utf-8') as f:
         writer = csv.writer(f)
         writer.writerow(headers)
         writer.writerows(csv_data)
-    
-    print(f"✅ Generated CSV with {len(csv_data)} templates")
+
+    print(f"✅ Generated {output_type} CSV with {len(csv_data)} templates")
     print(f"📁 Created: {csv_path}")
     return csv_path
 
 if __name__ == "__main__":
-    sync_to_csv()
+    parser = argparse.ArgumentParser(description='Export EO Framework solutions to CSV')
+    parser.add_argument('--output-type', choices=['private', 'public'], default='private',
+                       help='Output type: private (internal) or public (distribution)')
+    args = parser.parse_args()
+
+    sync_to_csv(output_type=args.output_type)
