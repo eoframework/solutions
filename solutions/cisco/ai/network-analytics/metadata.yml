@@ -4,7 +4,7 @@ solution_name: network-analytics
 solution_display_name: AI-Powered Network Insights
 description: AI-driven network insights for optimized performance
 version: 1.0.0
-status: Active
+status: In Review
 maintainers:
 - name: "EO Framework\u2122 Cisco Solutions Team"
   email: cisco-solutions@eoframework.com

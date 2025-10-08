@@ -4,7 +4,7 @@ solution_name: m365-deployment
 solution_display_name: Microsoft 365 Deployment
 description: Complete Microsoft 365 enterprise deployment
 version: 1.0.0
-status: Active
+status: In Review
 maintainers:
 - name: "EO Framework\u2122 Microsoft Solutions Team"
   email: microsoft-solutions@eoframework.com

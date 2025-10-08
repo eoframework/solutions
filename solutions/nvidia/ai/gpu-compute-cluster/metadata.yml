@@ -4,7 +4,7 @@ solution_name: gpu-compute-cluster
 solution_display_name: GPU Compute Cluster
 description: GPU cluster for parallel computing & AI workloads
 version: 1.0.0
-status: Active
+status: In Review
 maintainers:
 - name: "EO Framework\u2122 NVIDIA Solutions Team"
   email: nvidia-solutions@eoframework.com

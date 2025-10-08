@@ -4,7 +4,7 @@ solution_name: ansible-automation-platform
 solution_display_name: Ansible Automation Platform
 description: IT automation platform for operational efficiency
 version: 1.0.0
-status: Active
+status: In Review
 maintainers:
 - name: "EO Framework\u2122 IBM Solutions Team"
   email: ibm-solutions@eoframework.com

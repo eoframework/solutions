@@ -4,7 +4,7 @@ solution_name: srx-firewall-platform
 solution_display_name: SRX Firewall Platform
 description: Next-gen firewall for enterprise network security
 version: 1.0.0
-status: Active
+status: In Review
 maintainers:
 - name: "EO Framework\u2122 Juniper Solutions Team"
   email: juniper-solutions@eoframework.com

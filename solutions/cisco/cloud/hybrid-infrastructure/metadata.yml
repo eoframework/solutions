@@ -4,7 +4,7 @@ solution_name: hybrid-infrastructure
 solution_display_name: HyperFlex Cloud Bridge
 description: Seamless hybrid cloud infrastructure integration
 version: 1.0.0
-status: Active
+status: In Review
 maintainers:
 - name: "EO Framework\u2122 Cisco Solutions Team"
   email: cisco-solutions@eoframework.com

@@ -1,12 +1,10 @@
-# EO Framework™ Template Metadata
-
 provider: aws
 category: ai
 solution_name: intelligent-document-processing
 solution_display_name: Intelligent Document Processing
 description: Automate document insights with AI-driven extraction
 version: 1.0.0
-status: Active
+status: In Review
 maintainers:
 - name: "EO Framework\u2122 AWS Solutions Team"
   email: aws-solutions@eoframework.com

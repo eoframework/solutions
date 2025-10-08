@@ -4,7 +4,7 @@ solution_name: poweredge-ci-infrastructure
 solution_display_name: Poweredge Ci Infrastructure
 description: Enterprise CI infrastructure on PowerEdge servers
 version: 1.0.0
-status: Active
+status: In Review
 maintainers:
 - name: "EO Framework\u2122 Dell Solutions Team"
   email: dell-solutions@eoframework.com

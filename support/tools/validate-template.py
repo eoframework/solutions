@@ -255,9 +255,9 @@ class EnhancedTemplateValidator:
 
         # Validate status values
         if 'status' in metadata:
-            valid_statuses = ['Active', 'Draft', 'Deprecated']
+            valid_statuses = ["Draft", "In Review", "Active", "Beta", "Deprecated"]
             if metadata['status'] not in valid_statuses:
-                self.errors.append(f"Invalid status: {metadata['status']}. Must be one of {valid_statuses}")
+                self.errors.append(f"Invalid status: '{metadata['status']}'. Must be one of: {', '.join(valid_statuses)}")
 
         # Validate maintainers structure
         if 'maintainers' in metadata:

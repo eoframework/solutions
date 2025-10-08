@@ -36,6 +36,9 @@ EXCLUDE_PATTERNS = [
     '.idea'
 ]
 
+# Valid status values
+VALID_STATUSES = ["Draft", "In Review", "Active", "Beta", "Deprecated"]
+
 def should_exclude(path):
     """Check if file/directory should be excluded from package"""
     path_str = str(path)
@@ -140,8 +143,16 @@ def create_package(solution_path, output_dir, version=None, bump_type='patch', c
     provider = metadata.get('provider')
     category = metadata.get('category')
     solution_name = metadata.get('solution_name')
+    status = metadata.get('status', 'In Review')
+
+    # Validate status value
+    if status not in VALID_STATUSES:
+        print(f"❌ Error: Invalid status '{status}' in metadata.yml")
+        print(f"   Must be one of: {', '.join(VALID_STATUSES)}")
+        return None
 
     print(f"📦 Packaging: {provider}/{category}/{solution_name}")
+    print(f"   Status: {status}")
 
     # Determine version
     manifest_path = output_dir / provider / category / solution_name / 'manifest.json'

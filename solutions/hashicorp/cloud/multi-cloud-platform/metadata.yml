@@ -4,7 +4,7 @@ solution_name: multi-cloud-platform
 solution_display_name: Multi Cloud Platform
 description: Multi-cloud infrastructure management & automation
 version: 1.0.0
-status: Active
+status: In Review
 maintainers:
 - name: "EO Framework\u2122 HashiCorp Solutions Team"
   email: hashicorp-solutions@eoframework.com

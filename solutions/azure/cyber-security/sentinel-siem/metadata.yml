@@ -4,7 +4,7 @@ solution_name: sentinel-siem
 solution_display_name: Sentinel SIEM
 description: Cloud SIEM for advanced threat detection & response
 version: 1.0.0
-status: Active
+status: In Review
 maintainers:
 - name: "EO Framework\u2122 Azure Solutions Team"
   email: azure-solutions@eoframework.com

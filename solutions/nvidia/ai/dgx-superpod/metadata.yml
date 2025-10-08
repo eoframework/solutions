@@ -4,7 +4,7 @@ solution_name: dgx-superpod
 solution_display_name: DGX SuperPOD
 description: High-performance computing for AI model training
 version: 1.0.0
-status: Active
+status: In Review
 maintainers:
 - name: "EO Framework\u2122 NVIDIA Solutions Team"
   email: nvidia-solutions@eoframework.com

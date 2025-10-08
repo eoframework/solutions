@@ -4,7 +4,7 @@ solution_name: cmmc-enclave
 solution_display_name: CMMC Enclave
 description: CMMC-compliant secure enclave for defense contractors
 version: 1.0.0
-status: Active
+status: In Review
 maintainers:
 - name: "EO Framework\u2122 Microsoft Solutions Team"
   email: microsoft-solutions@eoframework.com

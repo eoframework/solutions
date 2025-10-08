@@ -4,7 +4,7 @@ solution_name: landing-zone
 solution_display_name: Landing Zone
 description: Secure cloud foundation with governance & controls
 version: 1.0.0
-status: Active
+status: In Review
 maintainers:
 - name: "EO Framework\u2122 Google Solutions Team"
   email: google-solutions@eoframework.com

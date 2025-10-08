@@ -4,7 +4,7 @@ solution_name: actions-enterprise-cicd
 solution_display_name: GitHub Workflow Automation
 description: Enterprise CI/CD automation & workflow management
 version: 1.0.0
-status: Active
+status: In Review
 maintainers:
 - name: "EO Framework\u2122 GitHub Solutions Team"
   email: github-solutions@eoframework.com

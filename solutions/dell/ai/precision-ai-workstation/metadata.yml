@@ -4,7 +4,7 @@ solution_name: precision-ai-workstation
 solution_display_name: Precision AI Workstation
 description: High-performance workstations for AI development
 version: 1.0.0
-status: Active
+status: In Review
 maintainers:
 - name: "EO Framework\u2122 Dell Solutions Team"
   email: dell-solutions@eoframework.com

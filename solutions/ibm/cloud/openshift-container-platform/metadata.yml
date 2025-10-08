@@ -4,7 +4,7 @@ solution_name: openshift-container-platform
 solution_display_name: Openshift Container Platform
 description: Enterprise container platform for modern applications
 version: 1.0.0
-status: Active
+status: In Review
 maintainers:
 - name: "EO Framework\u2122 IBM Solutions Team"
   email: ibm-solutions@eoframework.com

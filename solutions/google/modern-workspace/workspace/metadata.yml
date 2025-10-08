@@ -4,7 +4,7 @@ solution_name: workspace
 solution_display_name: Workspace
 description: Collaborative digital workspace for modern teams
 version: 1.0.0
-status: Active
+status: In Review
 maintainers:
 - name: "EO Framework\u2122 Google Solutions Team"
   email: google-solutions@eoframework.com

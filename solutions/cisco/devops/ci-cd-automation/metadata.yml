@@ -4,7 +4,7 @@ solution_name: ci-cd-automation
 solution_display_name: Network Infrastructure Pipeline
 description: Network-aware CI/CD for infrastructure automation
 version: 1.0.0
-status: Active
+status: In Review
 maintainers:
 - name: "EO Framework\u2122 Cisco Solutions Team"
   email: cisco-solutions@eoframework.com

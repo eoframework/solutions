@@ -4,7 +4,7 @@ solution_name: sd-wan-enterprise
 solution_display_name: SD-WAN Enterprise
 description: Enterprise SD-WAN for optimized branch connectivity
 version: 1.0.0
-status: Active
+status: In Review
 maintainers:
 - name: "EO Framework\u2122 Cisco Solutions Team"
   email: cisco-solutions@eoframework.com

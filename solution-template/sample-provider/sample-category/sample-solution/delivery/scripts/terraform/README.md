@@ -84,8 +84,9 @@ terraform/
 1. **Clone and Configure**
    ```bash
    cd terraform/
-   cp environments/production/config/project.tfvars.example environments/production/config/project.tfvars
-   # Edit the tfvars file with your project settings
+   # Copy and edit configuration files as needed
+   # Note: Sample config files are already provided
+   vim environments/production/config/project.tfvars
    ```
 
 2. **Setup Remote State Backend**
@@ -116,8 +117,9 @@ terraform/
 3. **Deploy Infrastructure**
    ```bash
    cd environments/production/
-   terraform plan -var-file=config/project.tfvars
-   terraform apply -var-file=config/project.tfvars
+   ./deploy.sh init     # Initialize Terraform
+   ./deploy.sh plan     # Plan with all config files auto-loaded
+   ./deploy.sh apply    # Deploy infrastructure
    ```
 
 ## 🌍 Multi-Environment Support
@@ -143,19 +145,77 @@ Each environment is completely self-contained with:
 
 ### Working with Environments
 
-```bash
-# Production Environment
-cd environments/production/
-terraform plan -var-file=config/project.tfvars \\
-               -var-file=config/networking.tfvars \\
-               -var-file=config/security.tfvars \\
-               -var-file=config/compute.tfvars
+Each environment includes a comprehensive `deploy.sh` script that automatically loads all config files:
 
-# Test Environment
-cd environments/test/
-terraform plan -var-file=config/project.tfvars \\
-               -var-file=config/networking.tfvars
+```bash
+# Production Environment - Complete workflow
+cd environments/production/
+
+# Initialize Terraform
+./deploy.sh init
+
+# Plan deployment (auto-loads ALL config/*.tfvars files)
+./deploy.sh plan
+
+# Apply infrastructure
+./deploy.sh apply
+
+# Other useful commands
+./deploy.sh validate     # Validate configuration
+./deploy.sh fmt          # Format Terraform files
+./deploy.sh output       # Show deployment outputs
+./deploy.sh destroy      # Destroy infrastructure (with warnings)
 ```
+
+```bash
+# Test Environment - Same simple workflow
+cd environments/test/
+
+./deploy.sh init         # Initialize
+./deploy.sh plan         # Plan with all config files
+./deploy.sh apply        # Deploy infrastructure
+```
+
+```bash
+# Disaster Recovery Environment
+cd environments/disaster-recovery/
+
+./deploy.sh plan         # Plan DR deployment
+./deploy.sh apply        # Deploy DR infrastructure
+```
+
+### Advanced Usage
+
+```bash
+# Pass additional Terraform flags
+./deploy.sh plan -out=production.tfplan
+./deploy.sh fmt -recursive
+./deploy.sh apply -auto-approve
+
+# Get help on available commands
+./deploy.sh help
+```
+
+### What deploy.sh Does Automatically
+
+- **🔄 Auto-discovery**: Finds and loads ALL `.tfvars` files in `config/`
+- **📋 Visual feedback**: Shows which config files are loaded
+- **🎨 Colored output**: Clear status indicators and progress
+- **⚠️ Safety checks**: Warnings for destructive operations
+- **🔧 Pass-through**: All Terraform flags work normally
+
+### Quick Reference
+
+| Command | Description |
+|---------|-------------|
+| `./deploy.sh init` | Initialize Terraform working directory |
+| `./deploy.sh plan` | Create execution plan with all configs |
+| `./deploy.sh apply` | Apply infrastructure changes |
+| `./deploy.sh destroy` | Destroy infrastructure (with warnings) |
+| `./deploy.sh validate` | Validate Terraform configuration |
+| `./deploy.sh fmt` | Format Terraform files |
+| `./deploy.sh output` | Show deployment outputs |
+| `./deploy.sh help` | Show all available commands |
 
 ## 📁 Configuration Management
 
@@ -386,16 +446,16 @@ Add to your CI/CD pipeline:
 ### Manual Deployment
 
 ```bash
-# 1. Plan changes
-terraform plan -var-file=config/project.tfvars \\
-               -var-file=config/networking.tfvars \\
-               -out=production.tfplan
+cd environments/production/
+
+# 1. Plan changes (auto-loads all config files)
+./deploy.sh plan -out=production.tfplan
 
 # 2. Review plan
-terraform show production.tfplan
+./deploy.sh show production.tfplan
 
 # 3. Apply changes
-terraform apply production.tfplan
+./deploy.sh apply production.tfplan
 ```
 
 ### Automated Deployment (CI/CD)
@@ -419,12 +479,12 @@ jobs:
       - name: Terraform Plan
         run: |
           cd environments/production
-          terraform init -backend-config=backend.hcl
-          terraform plan -var-file=config/project.tfvars
+          ./deploy.sh init
+          ./deploy.sh plan
 
       - name: Terraform Apply
         if: github.ref == 'refs/heads/main'
-        run: terraform apply -auto-approve
+        run: ./deploy.sh apply -auto-approve
 ```
 
 ## 🔄 Disaster Recovery

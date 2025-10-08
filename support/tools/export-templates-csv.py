@@ -64,7 +64,7 @@ def sync_to_csv(output_type='private'):
     if output_type == 'private':
         headers = ['Provider', 'Category', 'SolutionName', 'Description', 'Templates', 'Status']
     else:  # public
-        headers = ['Provider', 'Category', 'SolutionName', 'Description', 'Version', 'DownloadUrl', 'ManifestUrl', 'Website', 'SupportEmail']
+        headers = ['Provider', 'Category', 'SolutionName', 'Description', 'Version', 'DownloadUrl', 'ManifestUrl', 'Website', 'SupportEmail', 'Status']
     
     # Scan all templates
     solutions_path = repo_root / "solutions"
@@ -126,7 +126,8 @@ def sync_to_csv(output_type='private'):
                                                 download_url,
                                                 manifest_url,
                                                 website,
-                                                support_email
+                                                support_email,
+                                                status
                                             ]
 
                                         csv_data.append(csv_row)

@@ -6,7 +6,7 @@ category: "Sample Category"
 solution_name: "Sample Solution"
 description: "Brief description of what this solution provides"
 version: "1.0.0"
-status: "Active"  # Active, Draft, Deprecated
+status: "In Review"  # Draft, In Review, Active, Beta, Deprecated
 
 # Maintainer information
 maintainers:

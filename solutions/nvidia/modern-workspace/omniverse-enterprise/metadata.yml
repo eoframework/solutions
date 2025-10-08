@@ -4,7 +4,7 @@ solution_name: omniverse-enterprise
 solution_display_name: Omniverse Enterprise
 description: Real-time collaboration platform for 3D workflows
 version: 1.0.0
-status: Active
+status: In Review
 maintainers:
 - name: "EO Framework\u2122 NVIDIA Solutions Team"
   email: nvidia-solutions@eoframework.com
