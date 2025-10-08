@@ -1,11 +1,11 @@
 version: '2.0'
 provider: dell
-generated_at: '2025-10-08T03:25:12.355851'
+generated_at: '2025-10-08T03:55:19.294273'
 catalog_type: provider
 metadata:
   provider_name: Dell
   total_solutions: 6
-  last_updated: '2025-10-08T03:25:12.355859'
+  last_updated: '2025-10-08T03:55:19.294280'
   auto_generated: true
 categories:
   ai:
@@ -17,7 +17,7 @@ categories:
         solution_display_name: Precision AI Workstation
         description: High-performance workstations for AI development
         version: 1.0.0
-        status: Active
+        status: In Review
         maintainers:
         - name: "EO Framework\u2122 Dell Solutions Team"
           email: dell-solutions@eoframework.com
@@ -49,7 +49,7 @@ categories:
         solution_display_name: VxRail Hyperconverged
         description: Complete HCI platform for enterprise workloads
         version: 1.0.0
-        status: Active
+        status: In Review
         maintainers:
         - name: "EO Framework\u2122 Dell Solutions Team"
           email: dell-solutions@eoframework.com
@@ -79,7 +79,7 @@ categories:
         solution_display_name: VxRail HCI
         description: Hyperconverged infrastructure for simplified IT
         version: 1.0.0
-        status: Active
+        status: In Review
         maintainers:
         - name: "EO Framework\u2122 Dell Solutions Team"
           email: dell-solutions@eoframework.com
@@ -110,7 +110,7 @@ categories:
         solution_display_name: Powerswitch Datacenter
         description: High-performance datacenter switching fabric
         version: 1.0.0
-        status: Active
+        status: In Review
         maintainers:
         - name: "EO Framework\u2122 Dell Solutions Team"
           email: dell-solutions@eoframework.com
@@ -142,7 +142,7 @@ categories:
         solution_display_name: Poweredge Ci Infrastructure
         description: Enterprise CI infrastructure on PowerEdge servers
         version: 1.0.0
-        status: Active
+        status: In Review
         maintainers:
         - name: "EO Framework\u2122 Dell Solutions Team"
           email: dell-solutions@eoframework.com
@@ -174,7 +174,7 @@ categories:
         solution_display_name: Safeid Authentication
         description: Multi-factor authentication for secure access
         version: 1.0.0
-        status: Active
+        status: In Review
         maintainers:
         - name: "EO Framework\u2122 Dell Solutions Team"
           email: dell-solutions@eoframework.com

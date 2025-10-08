@@ -1,11 +1,11 @@
 version: '2.0'
 provider: nvidia
-generated_at: '2025-10-08T03:25:12.377529'
+generated_at: '2025-10-08T03:55:19.316345'
 catalog_type: provider
 metadata:
   provider_name: Nvidia
   total_solutions: 3
-  last_updated: '2025-10-08T03:25:12.377537'
+  last_updated: '2025-10-08T03:55:19.316353'
   auto_generated: true
 categories:
   ai:
@@ -17,7 +17,7 @@ categories:
         solution_display_name: GPU Compute Cluster
         description: GPU cluster for parallel computing & AI workloads
         version: 1.0.0
-        status: Active
+        status: In Review
         maintainers:
         - name: "EO Framework\u2122 NVIDIA Solutions Team"
           email: nvidia-solutions@eoframework.com
@@ -48,7 +48,7 @@ categories:
         solution_display_name: DGX SuperPOD
         description: High-performance computing for AI model training
         version: 1.0.0
-        status: Active
+        status: In Review
         maintainers:
         - name: "EO Framework\u2122 NVIDIA Solutions Team"
           email: nvidia-solutions@eoframework.com
@@ -80,7 +80,7 @@ categories:
         solution_display_name: Omniverse Enterprise
         description: Real-time collaboration platform for 3D workflows
         version: 1.0.0
-        status: Active
+        status: In Review
         maintainers:
         - name: "EO Framework\u2122 NVIDIA Solutions Team"
           email: nvidia-solutions@eoframework.com

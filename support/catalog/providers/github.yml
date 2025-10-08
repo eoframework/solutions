@@ -1,11 +1,11 @@
 version: '2.0'
 provider: github
-generated_at: '2025-10-08T03:25:12.345100'
+generated_at: '2025-10-08T03:55:19.283461'
 catalog_type: provider
 metadata:
   provider_name: GitHub
   total_solutions: 2
-  last_updated: '2025-10-08T03:25:12.345108'
+  last_updated: '2025-10-08T03:55:19.283468'
   auto_generated: true
 categories:
   devops:
@@ -17,7 +17,7 @@ categories:
         solution_display_name: GitHub Workflow Automation
         description: Enterprise CI/CD automation & workflow management
         version: 1.0.0
-        status: Active
+        status: In Review
         maintainers:
         - name: "EO Framework\u2122 GitHub Solutions Team"
           email: github-solutions@eoframework.com
@@ -51,7 +51,7 @@ categories:
         solution_display_name: CodeQL Security Scanner
         description: Advanced threat protection for code repositories
         version: 1.0.0
-        status: Active
+        status: In Review
         maintainers:
         - name: "EO Framework\u2122 GitHub Solutions Team"
           email: github-solutions@eoframework.com

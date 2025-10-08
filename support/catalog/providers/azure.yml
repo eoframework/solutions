@@ -1,11 +1,11 @@
 version: '2.0'
 provider: azure
-generated_at: '2025-10-08T03:25:12.364873'
+generated_at: '2025-10-08T03:55:19.303450'
 catalog_type: provider
 metadata:
   provider_name: Azure
   total_solutions: 6
-  last_updated: '2025-10-08T03:25:12.364881'
+  last_updated: '2025-10-08T03:55:19.303458'
   auto_generated: true
 categories:
   ai:
@@ -17,7 +17,7 @@ categories:
         solution_display_name: Cognitive Document Processor
         description: Smart document processing with Azure cognitive AI
         version: 1.0.0
-        status: Active
+        status: In Review
         maintainers:
         - name: "EO Framework\u2122 Azure Solutions Team"
           email: azure-solutions@eoframework.com
@@ -50,7 +50,7 @@ categories:
         solution_display_name: Enterprise Landing Zone
         description: Secure Azure foundation for enterprise workloads
         version: 1.0.0
-        status: Active
+        status: In Review
         maintainers:
         - name: "EO Framework\u2122 Azure Solutions Team"
           email: azure-solutions@eoframework.com
@@ -84,7 +84,7 @@ categories:
         solution_display_name: Virtual Wan Global
         description: Global WAN connectivity for distributed enterprises
         version: 1.0.0
-        status: Active
+        status: In Review
         maintainers:
         - name: "EO Framework\u2122 Azure Solutions Team"
           email: azure-solutions@eoframework.com
@@ -117,7 +117,7 @@ categories:
         solution_display_name: DevOps Pipeline Factory
         description: DevOps platform for accelerated software delivery
         version: 1.0.0
-        status: Active
+        status: In Review
         maintainers:
         - name: "EO Framework\u2122 Azure Solutions Team"
           email: azure-solutions@eoframework.com
@@ -150,7 +150,7 @@ categories:
         solution_display_name: Virtual Desktop
         description: Secure remote desktop for modern workforce productivity
         version: 1.0.0
-        status: Active
+        status: In Review
         maintainers:
         - name: "EO Framework\u2122 Azure Solutions Team"
           email: azure-solutions@eoframework.com
@@ -183,7 +183,7 @@ categories:
         solution_display_name: Sentinel SIEM
         description: Cloud SIEM for advanced threat detection & response
         version: 1.0.0
-        status: Active
+        status: In Review
         maintainers:
         - name: "EO Framework\u2122 Azure Solutions Team"
           email: azure-solutions@eoframework.com

@@ -1,11 +1,11 @@
 version: '2.0'
 provider: microsoft
-generated_at: '2025-10-08T03:25:12.348719'
+generated_at: '2025-10-08T03:55:19.287111'
 catalog_type: provider
 metadata:
   provider_name: Microsoft
   total_solutions: 2
-  last_updated: '2025-10-08T03:25:12.348726'
+  last_updated: '2025-10-08T03:55:19.287118'
   auto_generated: true
 categories:
   modern-workspace:
@@ -17,7 +17,7 @@ categories:
         solution_display_name: Microsoft 365 Deployment
         description: Complete Microsoft 365 enterprise deployment
         version: 1.0.0
-        status: Active
+        status: In Review
         maintainers:
         - name: "EO Framework\u2122 Microsoft Solutions Team"
           email: microsoft-solutions@eoframework.com
@@ -50,7 +50,7 @@ categories:
         solution_display_name: CMMC Enclave
         description: CMMC-compliant secure enclave for defense contractors
         version: 1.0.0
-        status: Active
+        status: In Review
         maintainers:
         - name: "EO Framework\u2122 Microsoft Solutions Team"
           email: microsoft-solutions@eoframework.com

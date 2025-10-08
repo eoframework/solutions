@@ -1,12 +1,12 @@
 version: '2.0'
 category: cyber-security
-generated_at: '2025-10-08T03:25:12.393801'
+generated_at: '2025-10-08T03:55:19.332701'
 catalog_type: category
 metadata:
   category_name: Cyber Security
   description: Security, compliance, and threat protection solutions
   total_solutions: 6
-  last_updated: '2025-10-08T03:25:12.393807'
+  last_updated: '2025-10-08T03:55:19.332707'
   auto_generated: true
 providers:
   cisco:

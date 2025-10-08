@@ -1,11 +1,11 @@
 version: '2.0'
 provider: cisco
-generated_at: '2025-10-08T03:25:12.324287'
+generated_at: '2025-10-08T03:55:19.262131'
 catalog_type: provider
 metadata:
   provider_name: Cisco
   total_solutions: 5
-  last_updated: '2025-10-08T03:25:12.324301'
+  last_updated: '2025-10-08T03:55:19.262143'
   auto_generated: true
 categories:
   ai:
@@ -17,7 +17,7 @@ categories:
         solution_display_name: AI-Powered Network Insights
         description: AI-driven network insights for optimized performance
         version: 1.0.0
-        status: Active
+        status: In Review
         maintainers:
         - name: "EO Framework\u2122 Cisco Solutions Team"
           email: cisco-solutions@eoframework.com
@@ -49,7 +49,7 @@ categories:
         solution_display_name: HyperFlex Cloud Bridge
         description: Seamless hybrid cloud infrastructure integration
         version: 1.0.0
-        status: Active
+        status: In Review
         maintainers:
         - name: "EO Framework\u2122 Cisco Solutions Team"
           email: cisco-solutions@eoframework.com
@@ -81,7 +81,7 @@ categories:
         solution_display_name: SD-WAN Enterprise
         description: Enterprise SD-WAN for optimized branch connectivity
         version: 1.0.0
-        status: Active
+        status: In Review
         maintainers:
         - name: "EO Framework\u2122 Cisco Solutions Team"
           email: cisco-solutions@eoframework.com
@@ -112,7 +112,7 @@ categories:
         solution_display_name: Network Infrastructure Pipeline
         description: Network-aware CI/CD for infrastructure automation
         version: 1.0.0
-        status: Active
+        status: In Review
         maintainers:
         - name: "EO Framework\u2122 Cisco Solutions Team"
           email: cisco-solutions@eoframework.com
@@ -143,7 +143,7 @@ categories:
         solution_display_name: Zero Trust Network Gateway
         description: Zero-trust network access for enhanced security
         version: 1.0.0
-        status: Active
+        status: In Review
         maintainers:
         - name: "EO Framework\u2122 Cisco Solutions Team"
           email: cisco-solutions@eoframework.com

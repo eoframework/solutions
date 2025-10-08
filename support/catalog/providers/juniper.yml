@@ -1,11 +1,11 @@
 version: '2.0'
 provider: juniper
-generated_at: '2025-10-08T03:25:12.374016'
+generated_at: '2025-10-08T03:55:19.312822'
 catalog_type: provider
 metadata:
   provider_name: Juniper
   total_solutions: 2
-  last_updated: '2025-10-08T03:25:12.374024'
+  last_updated: '2025-10-08T03:55:19.312829'
   auto_generated: true
 categories:
   network:
@@ -17,7 +17,7 @@ categories:
         solution_display_name: Mist AI Network
         description: AI-driven network operations & user experiences
         version: 1.0.0
-        status: Active
+        status: In Review
         maintainers:
         - name: "EO Framework\u2122 Juniper Solutions Team"
           email: juniper-solutions@eoframework.com
@@ -48,7 +48,7 @@ categories:
         solution_display_name: SRX Firewall Platform
         description: Next-gen firewall for enterprise network security
         version: 1.0.0
-        status: Active
+        status: In Review
         maintainers:
         - name: "EO Framework\u2122 Juniper Solutions Team"
           email: juniper-solutions@eoframework.com

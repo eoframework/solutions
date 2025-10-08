@@ -1,11 +1,11 @@
 version: '2.0'
 provider: ibm
-generated_at: '2025-10-08T03:25:12.341348'
+generated_at: '2025-10-08T03:55:19.279754'
 catalog_type: provider
 metadata:
   provider_name: IBM
   total_solutions: 2
-  last_updated: '2025-10-08T03:25:12.341356'
+  last_updated: '2025-10-08T03:55:19.279762'
   auto_generated: true
 categories:
   cloud:
@@ -17,7 +17,7 @@ categories:
         solution_display_name: Openshift Container Platform
         description: Enterprise container platform for modern applications
         version: 1.0.0
-        status: Active
+        status: In Review
         maintainers:
         - name: "EO Framework\u2122 IBM Solutions Team"
           email: ibm-solutions@eoframework.com
@@ -51,7 +51,7 @@ categories:
         solution_display_name: Ansible Automation Platform
         description: IT automation platform for operational efficiency
         version: 1.0.0
-        status: Active
+        status: In Review
         maintainers:
         - name: "EO Framework\u2122 IBM Solutions Team"
           email: ibm-solutions@eoframework.com
