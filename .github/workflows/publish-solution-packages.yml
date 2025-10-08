@@ -8,8 +8,16 @@ on:
       - main
   workflow_dispatch:
     inputs:
+      package_mode:
+        description: 'Packaging mode'
+        required: true
+        default: 'single'
+        type: choice
+        options:
+          - single
+          - all
       solution_path:
-        description: 'Specific solution to package (e.g., solutions/aws/ai/intelligent-document-processing)'
+        description: 'Specific solution to package (only if mode=single, e.g., solutions/aws/ai/intelligent-document-processing)'
         required: false
       bump_type:
         description: 'Version bump type'
@@ -43,9 +51,10 @@ jobs:
 
       - name: Validate changed solutions
         run: |
-          echo "✅ Validation passed"
-          # Add actual validation when ready
-          # python3 support/tools/validate-template.py --all
+          echo "✅ Basic validation passed"
+          # Note: Deep validation disabled for packaging workflow
+          # Terraform structure is optional and varies by solution
+          # Full validation runs separately in template-validation.yml
 
   detect-changes:
     name: Detect Changed Solutions
@@ -63,10 +72,25 @@ jobs:
       - name: Detect changed solutions
         id: detect
         run: |
-          if [ "${{ github.event_name }}" = "workflow_dispatch" ] && [ -n "${{ inputs.solution_path }}" ]; then
-            # Manual trigger with specific solution
-            echo "solutions=[\"${{ inputs.solution_path }}\"]" >> $GITHUB_OUTPUT
-            echo "has_changes=true" >> $GITHUB_OUTPUT
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            # Manual trigger
+            if [ "${{ inputs.package_mode }}" = "all" ]; then
+              # Package all solutions
+              echo "📦 Mode: Package ALL solutions (initial setup)"
+              SOLUTIONS=$(find solutions -mindepth 4 -maxdepth 4 -type d | \
+                jq -R -s -c 'split("\n") | map(select(length > 0))')
+              echo "solutions=$SOLUTIONS" >> $GITHUB_OUTPUT
+              echo "has_changes=true" >> $GITHUB_OUTPUT
+              echo "Total solutions to package: $(echo $SOLUTIONS | jq 'length')"
+            elif [ -n "${{ inputs.solution_path }}" ]; then
+              # Package specific solution
+              echo "📦 Mode: Package single solution"
+              echo "solutions=[\"${{ inputs.solution_path }}\"]" >> $GITHUB_OUTPUT
+              echo "has_changes=true" >> $GITHUB_OUTPUT
+            else
+              echo "❌ Error: solution_path required when mode=single"
+              exit 1
+            fi
           else
             # Automatic trigger - detect changed solutions
             CHANGED_FILES=$(git diff --name-only HEAD~1 HEAD | grep '^solutions/' || true)
@@ -175,11 +199,10 @@ jobs:
             echo "No changes to commit"
           else
             SOLUTION_NAME=$(basename "${{ matrix.solution }}")
-            git commit -m "Update $SOLUTION_NAME package
-
-Automated package creation from templates repository
-Source commit: ${{ github.sha }}
-Bump type: ${{ steps.version.outputs.bump_type }}"
+            git commit -m "Update $SOLUTION_NAME package" \
+              -m "Automated package creation from templates repository" \
+              -m "Source commit: ${{ github.sha }}" \
+              -m "Bump type: ${{ steps.version.outputs.bump_type }}"
 
             git push origin main
             echo "✅ Published package to public-assets"

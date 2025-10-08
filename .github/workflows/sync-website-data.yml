@@ -39,7 +39,7 @@ jobs:
       - name: Generate latest solutions.csv
         run: |
           cd solutions
-          python3 support/tools/export-templates-csv.py
+          python3 support/tools/export-templates-csv.py --output-type public
       
       - name: Checkout eof-website repository
         uses: actions/checkout@v4
