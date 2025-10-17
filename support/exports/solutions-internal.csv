@@ -1,36 +1,36 @@
 Provider,Category,SolutionName,Description,Templates,Status
-AWS,AI,Intelligent Document Processing,Automate document insights with AI-driven extraction,https://github.com/eoframework/solutions/tree/main/solutions/aws/ai/intelligent-document-processing,In Review
-AWS,Cloud,Disaster Recovery Web Application,Rapid business continuity with automated failover,https://github.com/eoframework/solutions/tree/main/solutions/aws/cloud/disaster-recovery-web-application,In Review
-AWS,Cloud,Onpremise To Cloud Migration,Seamless enterprise migration to modern cloud platform,https://github.com/eoframework/solutions/tree/main/solutions/aws/cloud/onpremise-to-cloud-migration,In Review
-Azure,AI,Cognitive Document Processor,Smart document processing with Azure cognitive AI,https://github.com/eoframework/solutions/tree/main/solutions/azure/ai/document-intelligence,In Review
-Azure,Cloud,Enterprise Landing Zone,Secure Azure foundation for enterprise workloads,https://github.com/eoframework/solutions/tree/main/solutions/azure/cloud/enterprise-landing-zone,In Review
-Azure,Cyber Security,Sentinel SIEM,Cloud SIEM for advanced threat detection & response,https://github.com/eoframework/solutions/tree/main/solutions/azure/cyber-security/sentinel-siem,In Review
-Azure,DevOps,DevOps Pipeline Factory,DevOps platform for accelerated software delivery,https://github.com/eoframework/solutions/tree/main/solutions/azure/devops/enterprise-platform,In Review
-Azure,Modern Workspace,Virtual Desktop,Secure remote desktop for modern workforce productivity,https://github.com/eoframework/solutions/tree/main/solutions/azure/modern-workspace/virtual-desktop,In Review
-Azure,Network,Virtual Wan Global,Global WAN connectivity for distributed enterprises,https://github.com/eoframework/solutions/tree/main/solutions/azure/network/virtual-wan-global,In Review
 Cisco,AI,AI-Powered Network Insights,AI-driven network insights for optimized performance,https://github.com/eoframework/solutions/tree/main/solutions/cisco/ai/network-analytics,In Review
 Cisco,Cloud,HyperFlex Cloud Bridge,Seamless hybrid cloud infrastructure integration,https://github.com/eoframework/solutions/tree/main/solutions/cisco/cloud/hybrid-infrastructure,In Review
-Cisco,Cyber Security,Zero Trust Network Gateway,Zero-trust network access for enhanced security,https://github.com/eoframework/solutions/tree/main/solutions/cisco/cyber-security/secure-access,In Review
-Cisco,DevOps,Network Infrastructure Pipeline,Network-aware CI/CD for infrastructure automation,https://github.com/eoframework/solutions/tree/main/solutions/cisco/devops/ci-cd-automation,In Review
 Cisco,Network,SD-WAN Enterprise,Enterprise SD-WAN for optimized branch connectivity,https://github.com/eoframework/solutions/tree/main/solutions/cisco/network/sd-wan-enterprise,In Review
-Dell,AI,Precision AI Workstation,High-performance workstations for AI development,https://github.com/eoframework/solutions/tree/main/solutions/dell/ai/precision-ai-workstation,In Review
-Dell,Cloud,VxRail HCI,Hyperconverged infrastructure for simplified IT,https://github.com/eoframework/solutions/tree/main/solutions/dell/cloud/vxrail-hci,In Review
-Dell,Cloud,VxRail Hyperconverged,Complete HCI platform for enterprise workloads,https://github.com/eoframework/solutions/tree/main/solutions/dell/cloud/vxrail-hyperconverged,In Review
-Dell,Cyber Security,Safeid Authentication,Multi-factor authentication for secure access,https://github.com/eoframework/solutions/tree/main/solutions/dell/cyber-security/safeid-authentication,In Review
-Dell,DevOps,Poweredge Ci Infrastructure,Enterprise CI infrastructure on PowerEdge servers,https://github.com/eoframework/solutions/tree/main/solutions/dell/devops/poweredge-ci-infrastructure,In Review
-Dell,Network,Powerswitch Datacenter,High-performance datacenter switching fabric,https://github.com/eoframework/solutions/tree/main/solutions/dell/network/powerswitch-datacenter,In Review
-GitHub,Cyber Security,CodeQL Security Scanner,Advanced threat protection for code repositories,https://github.com/eoframework/solutions/tree/main/solutions/github/cyber-security/advanced-security,In Review
-GitHub,DevOps,GitHub Workflow Automation,Enterprise CI/CD automation & workflow management,https://github.com/eoframework/solutions/tree/main/solutions/github/devops/actions-enterprise-cicd,In Review
-Google,Cloud,Landing Zone,Secure cloud foundation with governance & controls,https://github.com/eoframework/solutions/tree/main/solutions/google/cloud/landing-zone,In Review
-Google,Modern Workspace,Workspace,Collaborative digital workspace for modern teams,https://github.com/eoframework/solutions/tree/main/solutions/google/modern-workspace/workspace,In Review
+Cisco,DevOps,Network Infrastructure Pipeline,Network-aware CI/CD for infrastructure automation,https://github.com/eoframework/solutions/tree/main/solutions/cisco/devops/ci-cd-automation,In Review
+Cisco,Cyber Security,Zero Trust Network Gateway,Zero-trust network access for enhanced security,https://github.com/eoframework/solutions/tree/main/solutions/cisco/cyber-security/secure-access,In Review
 HashiCorp,Cloud,Multi Cloud Platform,Multi-cloud infrastructure management & automation,https://github.com/eoframework/solutions/tree/main/solutions/hashicorp/cloud/multi-cloud-platform,In Review
 HashiCorp,DevOps,Terraform Enterprise,Enterprise infrastructure as code platform,https://github.com/eoframework/solutions/tree/main/solutions/hashicorp/devops/terraform-enterprise,In Review
+AWS,AI,Intelligent Document Processing,Automate document insights with AI-driven extraction,https://github.com/eoframework/solutions/tree/main/solutions/aws/ai/intelligent-document-processing,In Review
+AWS,Cloud,Onpremise To Cloud Migration,Seamless enterprise migration to modern cloud platform,https://github.com/eoframework/solutions/tree/main/solutions/aws/cloud/onpremise-to-cloud-migration,In Review
+AWS,Cloud,Disaster Recovery Web Application,Rapid business continuity with automated failover,https://github.com/eoframework/solutions/tree/main/solutions/aws/cloud/disaster-recovery-web-application,In Review
 IBM,Cloud,Openshift Container Platform,Enterprise container platform for modern applications,https://github.com/eoframework/solutions/tree/main/solutions/ibm/cloud/openshift-container-platform,In Review
 IBM,DevOps,Ansible Automation Platform,IT automation platform for operational efficiency,https://github.com/eoframework/solutions/tree/main/solutions/ibm/devops/ansible-automation-platform,In Review
-Juniper,Cyber Security,SRX Firewall Platform,Next-gen firewall for enterprise network security,https://github.com/eoframework/solutions/tree/main/solutions/juniper/cyber-security/srx-firewall-platform,In Review
-Juniper,Network,Mist AI Network,AI-driven network operations & user experiences,https://github.com/eoframework/solutions/tree/main/solutions/juniper/network/mist-ai-network,In Review
-Microsoft,Cyber Security,CMMC Enclave,CMMC-compliant secure enclave for defense contractors,https://github.com/eoframework/solutions/tree/main/solutions/microsoft/cyber-security/cmmc-enclave,In Review
+GitHub,DevOps,GitHub Workflow Automation,Enterprise CI/CD automation & workflow management,https://github.com/eoframework/solutions/tree/main/solutions/github/devops/actions-enterprise-cicd,In Review
+GitHub,Cyber Security,CodeQL Security Scanner,Advanced threat protection for code repositories,https://github.com/eoframework/solutions/tree/main/solutions/github/cyber-security/advanced-security,In Review
 Microsoft,Modern Workspace,Microsoft 365 Deployment,Complete Microsoft 365 enterprise deployment,https://github.com/eoframework/solutions/tree/main/solutions/microsoft/modern-workspace/m365-deployment,In Review
-Nvidia,AI,DGX SuperPOD,High-performance computing for AI model training,https://github.com/eoframework/solutions/tree/main/solutions/nvidia/ai/dgx-superpod,In Review
+Microsoft,Cyber Security,CMMC Enclave,CMMC-compliant secure enclave for defense contractors,https://github.com/eoframework/solutions/tree/main/solutions/microsoft/cyber-security/cmmc-enclave,In Review
+Google,Cloud,Landing Zone,Secure cloud foundation with governance & controls,https://github.com/eoframework/solutions/tree/main/solutions/google/cloud/landing-zone,In Review
+Google,Modern Workspace,Workspace,Collaborative digital workspace for modern teams,https://github.com/eoframework/solutions/tree/main/solutions/google/modern-workspace/workspace,In Review
+Dell,AI,Precision AI Workstation,High-performance workstations for AI development,https://github.com/eoframework/solutions/tree/main/solutions/dell/ai/precision-ai-workstation,In Review
+Dell,Cloud,VxRail Hyperconverged,Complete HCI platform for enterprise workloads,https://github.com/eoframework/solutions/tree/main/solutions/dell/cloud/vxrail-hyperconverged,In Review
+Dell,Cloud,VxRail HCI,Hyperconverged infrastructure for simplified IT,https://github.com/eoframework/solutions/tree/main/solutions/dell/cloud/vxrail-hci,In Review
+Dell,Network,Powerswitch Datacenter,High-performance datacenter switching fabric,https://github.com/eoframework/solutions/tree/main/solutions/dell/network/powerswitch-datacenter,In Review
+Dell,DevOps,Poweredge Ci Infrastructure,Enterprise CI infrastructure on PowerEdge servers,https://github.com/eoframework/solutions/tree/main/solutions/dell/devops/poweredge-ci-infrastructure,In Review
+Dell,Cyber Security,Safeid Authentication,Multi-factor authentication for secure access,https://github.com/eoframework/solutions/tree/main/solutions/dell/cyber-security/safeid-authentication,In Review
+Azure,AI,Cognitive Document Processor,Smart document processing with Azure cognitive AI,https://github.com/eoframework/solutions/tree/main/solutions/azure/ai/document-intelligence,In Review
+Azure,Cloud,Enterprise Landing Zone,Secure Azure foundation for enterprise workloads,https://github.com/eoframework/solutions/tree/main/solutions/azure/cloud/enterprise-landing-zone,In Review
+Azure,Network,Virtual Wan Global,Global WAN connectivity for distributed enterprises,https://github.com/eoframework/solutions/tree/main/solutions/azure/network/virtual-wan-global,In Review
+Azure,DevOps,DevOps Pipeline Factory,DevOps platform for accelerated software delivery,https://github.com/eoframework/solutions/tree/main/solutions/azure/devops/enterprise-platform,In Review
+Azure,Modern Workspace,Virtual Desktop,Secure remote desktop for modern workforce productivity,https://github.com/eoframework/solutions/tree/main/solutions/azure/modern-workspace/virtual-desktop,In Review
+Azure,Cyber Security,Sentinel SIEM,Cloud SIEM for advanced threat detection & response,https://github.com/eoframework/solutions/tree/main/solutions/azure/cyber-security/sentinel-siem,In Review
+Juniper,Network,Mist AI Network,AI-driven network operations & user experiences,https://github.com/eoframework/solutions/tree/main/solutions/juniper/network/mist-ai-network,In Review
+Juniper,Cyber Security,SRX Firewall Platform,Next-gen firewall for enterprise network security,https://github.com/eoframework/solutions/tree/main/solutions/juniper/cyber-security/srx-firewall-platform,In Review
 Nvidia,AI,GPU Compute Cluster,GPU cluster for parallel computing & AI workloads,https://github.com/eoframework/solutions/tree/main/solutions/nvidia/ai/gpu-compute-cluster,In Review
+Nvidia,AI,DGX SuperPOD,High-performance computing for AI model training,https://github.com/eoframework/solutions/tree/main/solutions/nvidia/ai/dgx-superpod,In Review
 Nvidia,Modern Workspace,Omniverse Enterprise,Real-time collaboration platform for 3D workflows,https://github.com/eoframework/solutions/tree/main/solutions/nvidia/modern-workspace/omniverse-enterprise,In Review
