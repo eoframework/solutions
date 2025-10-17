@@ -1,10 +1,11 @@
-# Generated catalog and export files (keep directories, ignore content)
+# Generated catalog files (keep directories, ignore content)
 support/catalog/*.yml
 support/catalog/**/*.yml
 support/catalog/**/*.json
-support/exports/*.csv
-support/exports/*.json
 support/reports/validation-report.json
+
+# Export files - keep JSON ignored but commit CSV files for tracking
+support/exports/*.json
 
 # IDE and editor files
 .vscode/

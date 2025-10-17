@@ -48,7 +48,8 @@ jobs:
           python3 support/tools/generate-catalogs.py
           python3 support/tools/process-catalogs.py
           python3 support/tools/validate-catalogs.py
-          python3 support/tools/export-templates-csv.py
+          python3 support/tools/export-templates-csv.py --output-type private
+          python3 support/tools/export-templates-csv.py --output-type public
       
       - name: Commit updated catalog
         if: github.event_name == 'push' && github.ref == 'refs/heads/main'

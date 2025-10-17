@@ -137,9 +137,9 @@ def sync_to_csv(output_type='private'):
     
     # Write CSV file to exports directory
     if output_type == 'private':
-        csv_path = repo_root / 'support' / 'exports' / 'solutions.csv'
+        csv_path = repo_root / 'support' / 'exports' / 'solutions-internal.csv'
     else:  # public
-        csv_path = repo_root / 'support' / 'exports' / 'solutions-public.csv'
+        csv_path = repo_root / 'support' / 'exports' / 'solutions.csv'
 
     csv_path.parent.mkdir(parents=True, exist_ok=True)
 

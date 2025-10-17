@@ -185,7 +185,7 @@ jobs:
         run: |
           cd templates
           python3 support/tools/export-templates-csv.py --output-type public
-          cp support/exports/solutions-public.csv ../public-assets/catalog/solutions.csv
+          cp support/exports/solutions.csv ../public-assets/catalog/solutions.csv
 
       - name: Commit and push to public-assets
         run: |
