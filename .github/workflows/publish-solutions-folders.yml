@@ -83,6 +83,7 @@ jobs:
     strategy:
       matrix:
         solution: ${{ fromJson(needs.detect-changes.outputs.solutions) }}
+      max-parallel: 1  # Process solutions one at a time to avoid git conflicts
       fail-fast: false
     steps:
       - name: Checkout solutions repository
