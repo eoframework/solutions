@@ -1,5 +1,5 @@
 {
-  "generated_at": "2025-10-24T12:42:05.015868",
+  "generated_at": "2025-10-24T13:50:32.579689",
   "total_solutions": 35,
   "statistics": {
     "total_solutions": 35,
@@ -61,6 +61,7 @@
       "solution_name": "m365-deployment",
       "solution_display_name": "Microsoft 365 Deployment",
       "description": "Complete Microsoft 365 enterprise deployment",
+      "long_description": "Organizations moving to Microsoft 365 face complexity in migrating email, enabling collaboration tools, and training users on new applications. Deployments often miss important configurations for security, compliance, and backup. Without proper planning, migrations disrupt users and businesses don't realize the full value of Microsoft 365 capabilities.\n\nThis solution provides a structured approach to deploy Microsoft 365 across the organization. It includes migration planning, email and data migration procedures, security baseline configurations, and user adoption materials. The solution covers Exchange Online, SharePoint, Teams, OneDrive, and security features with templates and automation to accelerate deployment while maintaining security standards.\n",
       "version": "1.0.0",
       "status": "In Review",
       "maintainers": [
@@ -102,6 +103,7 @@
       "solution_name": "cmmc-enclave",
       "solution_display_name": "CMMC Enclave",
       "description": "CMMC-compliant secure enclave for defense contractors",
+      "long_description": "Defense contractors must comply with CMMC (Cybersecurity Maturity Model Certification) requirements to protect Controlled Unclassified Information (CUI). Meeting these requirements means implementing specific security controls, maintaining audit trails, and proving compliance. Building a compliant environment from scratch is complex and time-consuming without clear guidance on required configurations.\n\nThis solution creates a secure enclave within Microsoft 365 and Azure that meets CMMC Level 2 requirements. It implements required security controls, configures audit logging, restricts data access, and provides compliance reporting. The enclave isolates CUI data and ensures only authorized users can access it through compliant methods.\n",
       "version": "1.0.0",
       "status": "In Review",
       "maintainers": [
@@ -143,6 +145,7 @@
       "solution_name": "document-intelligence",
       "solution_display_name": "Cognitive Document Processor",
       "description": "Smart document processing with Azure cognitive AI",
+      "long_description": "Businesses handle large volumes of forms and documents that require manual review and data entry. Processing insurance claims, loan applications, or customer onboarding forms ties up staff in repetitive tasks. Errors in manual processing lead to delays, rework, and compliance issues.\n\nThis solution uses Azure AI Document Intelligence (Form Recognizer) to automatically extract data from structured and semi-structured documents. It processes forms, receipts, invoices, and identity documents, extracting key fields and validating data. The solution integrates with existing business processes and can handle high document volumes with consistent accuracy.\n",
       "version": "1.0.0",
       "status": "In Review",
       "maintainers": [
@@ -184,6 +187,7 @@
       "solution_name": "enterprise-landing-zone",
       "solution_display_name": "Enterprise Landing Zone",
       "description": "Secure Azure foundation for enterprise workloads",
+      "long_description": "Organizations moving to Azure need a secure, well-organized cloud foundation that supports multiple teams and workloads. Without proper setup, environments become disorganized, security gaps emerge, and managing costs and compliance becomes difficult. Building this foundation from scratch requires deep Azure expertise and understanding of best practices.\n\nThis solution implements Azure's Enterprise-Scale Landing Zone architecture, providing a secure foundation for cloud operations. It sets up management groups, subscriptions, networking, identity, security controls, and governance policies. The landing zone gives teams self-service capabilities while maintaining centralized security and compliance controls.\n",
       "version": "1.0.0",
       "status": "In Review",
       "maintainers": [
@@ -226,6 +230,7 @@
       "solution_name": "virtual-wan-global",
       "solution_display_name": "Virtual Wan Global",
       "description": "Global WAN connectivity for distributed enterprises",
+      "long_description": "Organizations with multiple offices, data centers, and cloud resources need reliable connectivity between all locations. Managing separate connections, routing, and security policies for each site is complex and expensive. Network performance issues impact user experience and application availability across distributed operations.\n\nThis solution implements Azure Virtual WAN to create a unified global network connecting branches, data centers, and Azure regions. It provides optimized routing through Microsoft's global network, centralized security policies, and simplified management of all connections. The solution reduces network latency and makes it easier to add new locations.\n",
       "version": "1.0.0",
       "status": "In Review",
       "maintainers": [
@@ -267,6 +272,7 @@
       "solution_name": "enterprise-platform",
       "solution_display_name": "DevOps Pipeline Factory",
       "description": "DevOps platform for accelerated software delivery",
+      "long_description": "Development teams using disparate tools and manual processes struggle with slow deployment cycles, inconsistent environments, and difficulty tracking changes across projects. Teams waste time on repetitive tasks instead of delivering features. Without standardized pipelines, errors increase and getting code to production takes too long.\n\nThis solution establishes an Azure DevOps platform with standardized CI/CD pipelines, automated testing, and infrastructure-as-code templates. It provides project templates, branching strategies, and deployment workflows that teams can adopt immediately. The platform enforces quality gates, automates security scanning, and provides visibility into the entire delivery process.\n",
       "version": "1.0.0",
       "status": "In Review",
       "maintainers": [
@@ -308,6 +314,7 @@
       "solution_name": "virtual-desktop",
       "solution_display_name": "Virtual Desktop",
       "description": "Secure remote desktop for modern workforce productivity",
+      "long_description": "Remote and hybrid work requires secure access to corporate applications and desktops from any location. Traditional VPN solutions struggle with performance and user experience. Managing physical desktops or individual virtual machines for remote workers is expensive and difficult to scale during rapid workforce changes.\n\nThis solution deploys Azure Virtual Desktop to provide managed Windows desktops and applications through the cloud. Users access their work environment from any device with a consistent experience. The solution handles session management, scaling based on demand, and integrates with existing identity systems. IT teams can quickly provision new users and update applications centrally.\n",
       "version": "1.0.0",
       "status": "In Review",
       "maintainers": [
@@ -349,6 +356,7 @@
       "solution_name": "sentinel-siem",
       "solution_display_name": "Sentinel SIEM",
       "description": "Cloud SIEM for advanced threat detection & response",
+      "long_description": "Security teams face an overwhelming volume of alerts from multiple tools\u2014firewalls, endpoints, cloud services, and applications. Analysts spend significant time correlating events across systems, investigating false positives, and trying to identify real threats before they cause damage. Without centralized visibility, threats can go undetected across your environment.\n\nThis solution implements Azure Sentinel as a cloud-based SIEM that collects security data from across your infrastructure. It correlates events, detects anomalies using built-in analytics rules, and provides investigation tools to respond to incidents. The solution includes pre-configured connectors for common security tools and playbooks for automated response.\n",
       "version": "1.0.0",
       "status": "In Review",
       "maintainers": [
@@ -390,6 +398,7 @@
       "solution_name": "precision-ai-workstation",
       "solution_display_name": "Precision AI Workstation",
       "description": "High-performance workstations for AI development",
+      "long_description": "AI and machine learning development requires substantial computing power for training models and processing large datasets. Standard workstations lack the GPU performance and memory needed for this work, forcing teams to queue for shared resources or wait for cloud instances. This slows down experimentation and model development cycles.\n\nThis solution provides Dell Precision workstations configured specifically for AI development with professional-grade GPUs, high-memory configurations, and fast storage. These workstations give data scientists and ML engineers dedicated resources for model development without depending on shared infrastructure. The solution includes software configurations for popular AI frameworks and tools.\n",
       "version": "1.0.0",
       "status": "In Review",
       "maintainers": [
@@ -430,6 +439,7 @@
       "solution_name": "vxrail-hyperconverged",
       "solution_display_name": "VxRail Hyperconverged",
       "description": "Complete HCI platform for enterprise workloads",
+      "long_description": "Organizations need scalable infrastructure that can grow with business demands without major forklift upgrades. Traditional infrastructure requires planning large capacity expansions months in advance and purchasing multiple components separately. This leads to either overprovisioning that wastes budget or underprovisioning that impacts performance.\n\nThis solution uses Dell VxRail hyperconverged architecture to provide infrastructure that scales incrementally by adding nodes as needed. Each node expands both compute and storage capacity proportionally. The solution handles configuration automatically, maintains performance as you scale, and provides predictable cost structure based on node count.\n",
       "version": "1.0.0",
       "status": "In Review",
       "maintainers": [
@@ -470,6 +480,7 @@
       "solution_name": "vxrail-hci",
       "solution_display_name": "VxRail HCI",
       "description": "Hyperconverged infrastructure for simplified IT",
+      "long_description": "Traditional data center infrastructure requires separate servers, storage, and networking components that are complex to integrate, scale, and manage. Capacity planning is difficult\u2014organizations often overprovision to avoid outages or underprovision and face performance issues. Managing these separate systems requires specialized expertise and significant time.\n\nThis solution implements Dell VxRail hyperconverged infrastructure that combines compute, storage, and networking into a single system. It simplifies deployment with pre-configured nodes that can be added incrementally as needs grow. The solution provides integrated management, automated operations, and seamless integration with VMware for running virtualized workloads.\n",
       "version": "1.0.0",
       "status": "In Review",
       "maintainers": [
@@ -509,6 +520,7 @@
       "solution_name": "powerswitch-datacenter",
       "solution_display_name": "Powerswitch Datacenter",
       "description": "High-performance datacenter switching fabric",
+      "long_description": "Data center networks must handle high-speed traffic between servers, storage, and external connections without becoming a bottleneck. Network complexity grows as organizations add virtualization, containers, and hybrid cloud connectivity. Managing individual switch configurations and troubleshooting network issues across many devices is time-consuming.\n\nThis solution implements Dell PowerSwitch data center networking with high-speed switches designed for modern data center workloads. It provides low-latency connectivity for server-to-server traffic, supports automation for configuration management, and includes monitoring for identifying performance issues. The solution scales from small data centers to large facilities with thousands of connections.\n",
       "version": "1.0.0",
       "status": "In Review",
       "maintainers": [
@@ -549,6 +561,7 @@
       "solution_name": "poweredge-ci-infrastructure",
       "solution_display_name": "Poweredge Ci Infrastructure",
       "description": "Enterprise CI infrastructure on PowerEdge servers",
+      "long_description": "Running CI/CD pipelines requires substantial computing resources for building code, running tests, and deploying applications. Cloud-based CI/CD can become expensive at scale, especially for organizations with frequent builds and large test suites. Teams need reliable infrastructure that can handle peak loads without delays in the development process.\n\nThis solution provides Dell PowerEdge server infrastructure optimized for CI/CD workloads. It includes configurations for build servers, test environments, and artifact storage with capacity to handle multiple concurrent pipelines. The solution reduces CI/CD costs compared to cloud-only approaches while maintaining the automation and scalability teams need.\n",
       "version": "1.0.0",
       "status": "In Review",
       "maintainers": [
@@ -589,6 +602,7 @@
       "solution_name": "safeid-authentication",
       "solution_display_name": "Safeid Authentication",
       "description": "Multi-factor authentication for secure access",
+      "long_description": "Password-based authentication is vulnerable to phishing, credential theft, and brute force attacks. Managing passwords is difficult for users and help desk password resets consume significant support resources. Regulatory requirements increasingly demand multi-factor authentication, but deploying MFA across all applications is challenging.\n\nThis solution implements Dell SafeID for multi-factor authentication across enterprise applications. It supports multiple authentication methods including hardware tokens, biometrics, and mobile apps. The solution integrates with existing identity systems, provides centralized policy management, and reduces password-related security risks and support costs.\n",
       "version": "1.0.0",
       "status": "In Review",
       "maintainers": [
@@ -629,6 +643,7 @@
       "solution_name": "multi-cloud-platform",
       "solution_display_name": "Multi Cloud Platform",
       "description": "Multi-cloud infrastructure management & automation",
+      "long_description": "Organizations using multiple cloud providers face the challenge of different APIs, tools, and workflows for each platform. Managing infrastructure requires cloud-specific expertise and creates dependencies on specific vendors. Deploying the same application across clouds requires building everything multiple times with provider-specific tools.\n\nThis solution uses HashiCorp tools (Terraform, Consul, Vault) to create a consistent platform across cloud providers. It enables infrastructure-as-code that works across AWS, Azure, and Google Cloud with the same workflow. The solution provides unified service networking, secrets management, and infrastructure provisioning regardless of underlying cloud provider.\n",
       "version": "1.0.0",
       "status": "In Review",
       "maintainers": [
@@ -670,6 +685,7 @@
       "solution_name": "terraform-enterprise",
       "solution_display_name": "Terraform Enterprise",
       "description": "Enterprise infrastructure as code platform",
+      "long_description": "Teams adopting infrastructure-as-code with Terraform need collaboration features, state management, and governance controls. Storing Terraform state locally or in basic storage risks conflicts, data loss, and security exposure of sensitive information. Without standardization, each team implements Terraform differently, making it hard to share modules and maintain consistency.\n\nThis solution implements Terraform Enterprise to provide centralized state management, access controls, and policy enforcement for infrastructure-as-code. It enables team collaboration on Terraform code, provides approval workflows for changes, and integrates with VCS for version control. The solution includes module registry for sharing reusable code and compliance policies that automatically prevent violations.\n",
       "version": "1.0.0",
       "status": "In Review",
       "maintainers": [
@@ -711,6 +727,7 @@
       "solution_name": "mist-ai-network",
       "solution_display_name": "Mist AI Network",
       "description": "AI-driven network operations & user experiences",
+      "long_description": "Wireless networks are critical infrastructure, but troubleshooting connectivity issues is time-consuming and reactive. Network teams receive vague complaints like \"WiFi is slow\" without tools to identify root causes quickly. Planning WiFi coverage requires specialized expertise, and changes made in one area can impact other locations unexpectedly.\n\nThis solution uses Juniper Mist AI-driven wireless networking with machine learning to optimize performance and troubleshoot issues automatically. It provides real-time visibility into user experience, identifies problems before users report them, and recommends fixes. The solution simplifies WiFi planning with AI-powered coverage analysis and automates routine network operations.\n",
       "version": "1.0.0",
       "status": "In Review",
       "maintainers": [
@@ -750,6 +767,7 @@
       "solution_name": "srx-firewall-platform",
       "solution_display_name": "SRX Firewall Platform",
       "description": "Next-gen firewall for enterprise network security",
+      "long_description": "Network security requires filtering traffic between network segments, inspecting for threats, and enforcing access policies. Traditional firewalls become bottlenecks as traffic grows and struggle to inspect encrypted traffic effectively. Managing firewall rules across multiple devices leads to configuration drift and security gaps.\n\nThis solution deploys Juniper SRX firewalls providing high-performance network security for enterprise and data center environments. It handles firewall, VPN, intrusion prevention, and threat intelligence in a single platform. The solution scales from branch offices to large data centers, provides centralized management of policies, and includes threat intelligence feeds for detecting known malicious activity.\n",
       "version": "1.0.0",
       "status": "In Review",
       "maintainers": [
@@ -790,6 +808,7 @@
       "solution_name": "landing-zone",
       "solution_display_name": "Landing Zone",
       "description": "Secure cloud foundation with governance & controls",
+      "long_description": "Starting on Google Cloud without a proper foundation leads to security gaps, disorganized resources, and management challenges as usage grows. Teams need guardrails that prevent misconfigurations while allowing them to work independently. Building a secure, scalable cloud foundation requires understanding Google Cloud best practices and implementing many interconnected configurations.\n\nThis solution implements Google Cloud's enterprise foundation blueprint with security controls, networking, identity management, and governance policies. It creates organizational structure, sets up billing, configures logging and monitoring, and establishes policies that enforce security requirements. The landing zone provides teams with secure project environments while maintaining centralized oversight.\n",
       "version": "1.0.0",
       "status": "In Review",
       "maintainers": [
@@ -831,6 +850,7 @@
       "solution_name": "workspace",
       "solution_display_name": "Workspace",
       "description": "Collaborative digital workspace for modern teams",
+      "long_description": "Organizations need collaboration tools that work seamlessly across email, documents, video conferencing, and messaging. Managing separate tools from different vendors creates complexity and poor user experience. Data ends up scattered across multiple systems, making it hard to find information and collaborate effectively.\n\nThis solution deploys Google Workspace providing integrated email, calendar, documents, spreadsheets, presentations, video conferencing, and team chat. Users can collaborate in real-time on documents, schedule meetings easily, and find information across all tools with unified search. The solution includes admin controls, security policies, and integration with existing identity systems.\n",
       "version": "1.0.0",
       "status": "In Review",
       "maintainers": [
@@ -871,6 +891,7 @@
       "solution_name": "actions-enterprise-cicd",
       "solution_display_name": "GitHub Workflow Automation",
       "description": "Enterprise CI/CD automation & workflow management",
+      "long_description": "Development teams need reliable CI/CD automation, but building and maintaining pipeline infrastructure diverts resources from feature development. Different teams often duplicate effort creating similar pipelines. Without standardization, pipelines become difficult to maintain and troubleshoot when issues occur.\n\nThis solution establishes enterprise CI/CD using GitHub Actions with reusable workflows and organization-level policies. It provides pipeline templates for common scenarios, centralized secret management, and self-hosted runners for internal deployments. Teams get automated builds and deployments without managing infrastructure, while maintaining security and compliance controls.\n",
       "version": "1.0.0",
       "status": "In Review",
       "maintainers": [
@@ -913,6 +934,7 @@
       "solution_name": "advanced-security",
       "solution_display_name": "CodeQL Security Scanner",
       "description": "Advanced threat protection for code repositories",
+      "long_description": "Security vulnerabilities in code often go undetected until after deployment, when they become expensive to fix and may already be exploited. Manual code reviews miss subtle security issues, and separate security scanning tools create friction in the development process. Developers need security feedback early, when fixing issues is fastest and cheapest.\n\nThis solution implements GitHub Advanced Security with CodeQL scanning integrated into development workflows. It automatically analyzes code for security vulnerabilities, detects secrets accidentally committed, and scans dependencies for known issues. Developers receive immediate feedback in pull requests, and security teams get visibility into risks across all repositories.\n",
       "version": "1.0.0",
       "status": "In Review",
       "maintainers": [
@@ -954,6 +976,7 @@
       "solution_name": "openshift-container-platform",
       "solution_display_name": "Openshift Container Platform",
       "description": "Enterprise container platform for modern applications",
+      "long_description": "Organizations adopting containers need a platform that runs applications consistently across different environments\u2014data center, cloud, and edge. Kubernetes alone requires significant expertise and additional tools for logging, monitoring, networking, and security. Development teams need self-service capabilities while operations teams need control and visibility.\n\nThis solution deploys Red Hat OpenShift on IBM Cloud as an enterprise Kubernetes platform. It adds developer tools, integrated CI/CD, security policies, and operational capabilities on top of Kubernetes. The platform provides a consistent runtime environment across locations, includes built-in monitoring and logging, and gives developers self-service application deployment with guardrails.\n",
       "version": "1.0.0",
       "status": "In Review",
       "maintainers": [
@@ -996,6 +1019,7 @@
       "solution_name": "ansible-automation-platform",
       "solution_display_name": "Ansible Automation Platform",
       "description": "IT automation platform for operational efficiency",
+      "long_description": "IT operations teams manage thousands of servers, network devices, and cloud resources using manual procedures or custom scripts. This approach is error-prone, time-consuming, and doesn't scale. Changes made manually are difficult to track, audit, and reverse when problems occur. Knowledge about how systems are configured exists in people's heads rather than in documented, testable code.\n\nThis solution implements Red Hat Ansible Automation Platform to automate IT operations across infrastructure. It provides automation playbooks for common tasks, centralized execution and scheduling, and role-based access control. Teams can automate server configuration, application deployment, and routine maintenance tasks with auditable, version-controlled automation code. The solution reduces manual errors and frees IT staff for higher-value work.\n",
       "version": "1.0.0",
       "status": "In Review",
       "maintainers": [
@@ -1038,6 +1062,7 @@
       "solution_name": "gpu-compute-cluster",
       "solution_display_name": "GPU Compute Cluster",
       "description": "GPU cluster for parallel computing & AI workloads",
+      "long_description": "Scientific computing, simulations, and data analytics workloads need parallel processing power that traditional CPU-based systems can't provide efficiently. Setting up GPU computing requires expertise in hardware selection, driver configuration, and optimizing workloads to use GPUs effectively. Sharing GPU resources fairly among multiple users and jobs requires specialized cluster management.\n\nThis solution creates an NVIDIA GPU compute cluster for parallel processing workloads. It includes GPU servers, job scheduling, resource management, and monitoring configured specifically for GPU computing. Users can submit jobs that automatically utilize available GPUs, and administrators can manage resources and track utilization across the cluster.\n",
       "version": "1.0.0",
       "status": "In Review",
       "maintainers": [
@@ -1079,6 +1104,7 @@
       "solution_name": "dgx-superpod",
       "solution_display_name": "DGX SuperPOD",
       "description": "High-performance computing for AI model training",
+      "long_description": "Training large AI models requires massive computing power and parallel processing across many GPUs. Building this infrastructure with standard servers is complex, inefficient, and difficult to scale. Organizations waste resources on suboptimal configurations and spend significant time troubleshooting performance issues instead of focusing on AI research and development.\n\nThis solution deploys NVIDIA DGX SuperPOD\u2014a pre-designed AI infrastructure with optimized GPU configurations, high-speed networking, and AI software stack. It provides the computing power needed for large-scale model training with validated architecture and configurations. The solution eliminates guesswork in building AI infrastructure and delivers maximum performance for training workloads.\n",
       "version": "1.0.0",
       "status": "In Review",
       "maintainers": [
@@ -1119,6 +1145,7 @@
       "solution_name": "omniverse-enterprise",
       "solution_display_name": "Omniverse Enterprise",
       "description": "Real-time collaboration platform for 3D workflows",
+      "long_description": "Design and engineering teams working on 3D content face challenges collaborating when using different software tools. Large 3D files are difficult to share, reviewing designs requires specialized software, and real-time collaboration is nearly impossible. Teams waste time converting files between formats and coordinating changes across team members.\n\nThis solution implements NVIDIA Omniverse Enterprise for real-time 3D collaboration and simulation. It connects different 3D tools and allows teams to work on the same project simultaneously regardless of the software they use. The solution provides physically accurate rendering, real-time visualization of changes, and centralized project management for 3D design workflows.\n",
       "version": "1.0.0",
       "status": "In Review",
       "maintainers": [
@@ -1160,6 +1187,7 @@
       "solution_name": "network-analytics",
       "solution_display_name": "AI-Powered Network Insights",
       "description": "AI-driven network insights for optimized performance",
+      "long_description": "Network teams troubleshoot issues reactively, often discovering problems only after users complain. Identifying the root cause requires analyzing data from multiple network devices, correlating events, and understanding traffic patterns. Without visibility into network behavior, teams struggle to prevent issues or optimize performance.\n\nThis solution uses Cisco AI-powered analytics to monitor network health, predict problems, and provide recommendations. It collects data from network devices, identifies anomalies, and alerts teams before issues impact users. The solution provides insights into application performance, security threats, and capacity planning needs across the network infrastructure.\n",
       "version": "1.0.0",
       "status": "In Review",
       "maintainers": [
@@ -1200,6 +1228,7 @@
       "solution_name": "hybrid-infrastructure",
       "solution_display_name": "HyperFlex Cloud Bridge",
       "description": "Seamless hybrid cloud infrastructure integration",
+      "long_description": "Organizations running workloads both on-premise and in the cloud need seamless connectivity and consistent management across environments. Managing separate infrastructure, security policies, and operational tools for each environment creates complexity and increases overhead. Applications that span both environments face performance and reliability challenges.\n\nThis solution implements Cisco HyperFlex to create a unified hybrid infrastructure platform. It extends on-premise data center capabilities into the cloud with consistent networking, security, and management. The solution allows workloads to move between environments and provides centralized visibility and control across all infrastructure.\n",
       "version": "1.0.0",
       "status": "In Review",
       "maintainers": [
@@ -1240,6 +1269,7 @@
       "solution_name": "sd-wan-enterprise",
       "solution_display_name": "SD-WAN Enterprise",
       "description": "Enterprise SD-WAN for optimized branch connectivity",
+      "long_description": "Branch offices traditionally require expensive MPLS circuits for connectivity to headquarters and cloud services. Managing individual configurations for each branch is time-consuming, and changes require site visits or complex remote procedures. Users experience poor performance when accessing cloud applications over backhauled connections through the data center.\n\nThis solution deploys Cisco SD-WAN to connect branch offices using multiple internet connections instead of costly MPLS. It automatically routes traffic based on application requirements and network conditions, providing better performance and reliability. The solution centralizes management, allows policy changes across all branches simultaneously, and improves cloud application access with direct internet breakout.\n",
       "version": "1.0.0",
       "status": "In Review",
       "maintainers": [
@@ -1279,6 +1309,7 @@
       "solution_name": "ci-cd-automation",
       "solution_display_name": "Network Infrastructure Pipeline",
       "description": "Network-aware CI/CD for infrastructure automation",
+      "long_description": "Network infrastructure changes often require manual configuration across multiple devices, leading to errors and slow deployment cycles. Teams struggle to track changes, roll back problematic updates, and maintain consistency across environments. Testing network changes in production is risky, but building separate test environments is expensive.\n\nThis solution brings DevOps practices to network infrastructure using Cisco automation tools. It enables infrastructure-as-code for network configurations, automated testing of changes, and version-controlled network policies. Teams can deploy network changes through CI/CD pipelines with approval workflows, automated validation, and easy rollback capabilities.\n",
       "version": "1.0.0",
       "status": "In Review",
       "maintainers": [
@@ -1318,6 +1349,7 @@
       "solution_name": "secure-access",
       "solution_display_name": "Zero Trust Network Gateway",
       "description": "Zero-trust network access for enhanced security",
+      "long_description": "Traditional network security assumes users inside the network perimeter are trusted, but remote work and cloud applications have eliminated clear perimeters. Users access applications from various devices and locations, making it difficult to verify identity and enforce security policies. Breaches often occur when attackers gain initial access and move laterally through the network.\n\nThis solution implements zero-trust network access using Cisco security technologies. It verifies every access request regardless of location, enforces least-privilege access, and continuously validates user and device trust. The solution provides secure access to applications without exposing the entire network and logs all access for compliance and investigation.\n",
       "version": "1.0.0",
       "status": "In Review",
       "maintainers": [
@@ -1358,6 +1390,7 @@
       "solution_name": "intelligent-document-processing",
       "solution_display_name": "Intelligent Document Processing",
       "description": "Automate document insights with AI-driven extraction",
+      "long_description": "Organizations process thousands of documents daily\u2014invoices, contracts, forms, and reports\u2014requiring manual data entry and review. This manual processing is slow, error-prone, and prevents teams from focusing on higher-value work. Staff spend hours extracting key information, validating data accuracy, and routing documents to the right teams.\n\nThis solution uses AWS AI services (Textract, Comprehend) to automatically extract text, forms, and tables from documents. It identifies key data points, classifies document types, and routes them based on content. The system handles common business documents like invoices, purchase orders, and contracts without custom training.\n",
       "version": "1.0.0",
       "status": "In Review",
       "maintainers": [
@@ -1400,6 +1433,7 @@
       "solution_name": "onpremise-to-cloud-migration",
       "solution_display_name": "Onpremise To Cloud Migration",
       "description": "Seamless enterprise migration to modern cloud platform",
+      "long_description": "Organizations running on-premise infrastructure face high maintenance costs, capacity constraints, and difficulty scaling to meet changing business needs. Migrating to the cloud is complex\u2014it requires assessing current workloads, planning the migration sequence, converting servers, and validating that applications work correctly in the new environment.\n\nThis solution provides a structured approach to migrate on-premise workloads to AWS. It includes discovery tools to inventory current systems, migration planning templates, and automation scripts for common migration patterns. The solution handles server migrations, database conversions, and application modernization while maintaining business continuity throughout the transition.\n",
       "version": "1.0.0",
       "status": "In Review",
       "maintainers": [
@@ -1441,6 +1475,7 @@
       "solution_name": "disaster-recovery-web-application",
       "solution_display_name": "Disaster Recovery Web Application",
       "description": "Rapid business continuity with automated failover",
+      "long_description": "Web applications are critical to business operations, but outages due to hardware failures, regional disruptions, or disasters can cause significant revenue loss and customer impact. Traditional disaster recovery solutions are expensive to maintain and complex to test, often requiring duplicate infrastructure that sits idle until needed.\n\nThis solution implements automated disaster recovery for web applications using AWS services across multiple regions. It continuously replicates application data, maintains backup environments, and can failover automatically when primary systems become unavailable. The solution includes regular testing procedures to ensure recovery capabilities work when needed.\n",
       "version": "1.0.0",
       "status": "In Review",
       "maintainers": [

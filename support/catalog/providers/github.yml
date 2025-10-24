@@ -1,11 +1,11 @@
 version: '2.0'
 provider: github
-generated_at: '2025-10-24T12:42:04.763328'
+generated_at: '2025-10-24T13:50:32.313200'
 catalog_type: provider
 metadata:
   provider_name: GitHub
   total_solutions: 2
-  last_updated: '2025-10-24T12:42:04.763338'
+  last_updated: '2025-10-24T13:50:32.313208'
   auto_generated: true
 categories:
   devops:
@@ -16,6 +16,20 @@ categories:
         solution_name: actions-enterprise-cicd
         solution_display_name: GitHub Workflow Automation
         description: Enterprise CI/CD automation & workflow management
+        long_description: 'Development teams need reliable CI/CD automation, but building
+          and maintaining pipeline infrastructure diverts resources from feature development.
+          Different teams often duplicate effort creating similar pipelines. Without
+          standardization, pipelines become difficult to maintain and troubleshoot
+          when issues occur.
+
+
+          This solution establishes enterprise CI/CD using GitHub Actions with reusable
+          workflows and organization-level policies. It provides pipeline templates
+          for common scenarios, centralized secret management, and self-hosted runners
+          for internal deployments. Teams get automated builds and deployments without
+          managing infrastructure, while maintaining security and compliance controls.
+
+          '
         version: 1.0.0
         status: In Review
         maintainers:
@@ -50,6 +64,20 @@ categories:
         solution_name: advanced-security
         solution_display_name: CodeQL Security Scanner
         description: Advanced threat protection for code repositories
+        long_description: 'Security vulnerabilities in code often go undetected until
+          after deployment, when they become expensive to fix and may already be exploited.
+          Manual code reviews miss subtle security issues, and separate security scanning
+          tools create friction in the development process. Developers need security
+          feedback early, when fixing issues is fastest and cheapest.
+
+
+          This solution implements GitHub Advanced Security with CodeQL scanning integrated
+          into development workflows. It automatically analyzes code for security
+          vulnerabilities, detects secrets accidentally committed, and scans dependencies
+          for known issues. Developers receive immediate feedback in pull requests,
+          and security teams get visibility into risks across all repositories.
+
+          '
         version: 1.0.0
         status: In Review
         maintainers:

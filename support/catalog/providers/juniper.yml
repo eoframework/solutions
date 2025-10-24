@@ -1,11 +1,11 @@
 version: '2.0'
 provider: juniper
-generated_at: '2025-10-24T12:42:04.798000'
+generated_at: '2025-10-24T13:50:32.350037'
 catalog_type: provider
 metadata:
   provider_name: Juniper
   total_solutions: 2
-  last_updated: '2025-10-24T12:42:04.798009'
+  last_updated: '2025-10-24T13:50:32.350046'
   auto_generated: true
 categories:
   network:
@@ -16,6 +16,21 @@ categories:
         solution_name: mist-ai-network
         solution_display_name: Mist AI Network
         description: AI-driven network operations & user experiences
+        long_description: 'Wireless networks are critical infrastructure, but troubleshooting
+          connectivity issues is time-consuming and reactive. Network teams receive
+          vague complaints like "WiFi is slow" without tools to identify root causes
+          quickly. Planning WiFi coverage requires specialized expertise, and changes
+          made in one area can impact other locations unexpectedly.
+
+
+          This solution uses Juniper Mist AI-driven wireless networking with machine
+          learning to optimize performance and troubleshoot issues automatically.
+          It provides real-time visibility into user experience, identifies problems
+          before users report them, and recommends fixes. The solution simplifies
+          WiFi planning with AI-powered coverage analysis and automates routine network
+          operations.
+
+          '
         version: 1.0.0
         status: In Review
         maintainers:
@@ -47,6 +62,21 @@ categories:
         solution_name: srx-firewall-platform
         solution_display_name: SRX Firewall Platform
         description: Next-gen firewall for enterprise network security
+        long_description: 'Network security requires filtering traffic between network
+          segments, inspecting for threats, and enforcing access policies. Traditional
+          firewalls become bottlenecks as traffic grows and struggle to inspect encrypted
+          traffic effectively. Managing firewall rules across multiple devices leads
+          to configuration drift and security gaps.
+
+
+          This solution deploys Juniper SRX firewalls providing high-performance network
+          security for enterprise and data center environments. It handles firewall,
+          VPN, intrusion prevention, and threat intelligence in a single platform.
+          The solution scales from branch offices to large data centers, provides
+          centralized management of policies, and includes threat intelligence feeds
+          for detecting known malicious activity.
+
+          '
         version: 1.0.0
         status: In Review
         maintainers:

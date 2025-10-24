@@ -1,11 +1,11 @@
 version: '2.0'
 provider: hashicorp
-generated_at: '2025-10-24T12:42:04.740252'
+generated_at: '2025-10-24T13:50:32.297619'
 catalog_type: provider
 metadata:
   provider_name: HashiCorp
   total_solutions: 2
-  last_updated: '2025-10-24T12:42:04.740264'
+  last_updated: '2025-10-24T13:50:32.297630'
   auto_generated: true
 categories:
   cloud:
@@ -16,6 +16,20 @@ categories:
         solution_name: multi-cloud-platform
         solution_display_name: Multi Cloud Platform
         description: Multi-cloud infrastructure management & automation
+        long_description: 'Organizations using multiple cloud providers face the challenge
+          of different APIs, tools, and workflows for each platform. Managing infrastructure
+          requires cloud-specific expertise and creates dependencies on specific vendors.
+          Deploying the same application across clouds requires building everything
+          multiple times with provider-specific tools.
+
+
+          This solution uses HashiCorp tools (Terraform, Consul, Vault) to create
+          a consistent platform across cloud providers. It enables infrastructure-as-code
+          that works across AWS, Azure, and Google Cloud with the same workflow. The
+          solution provides unified service networking, secrets management, and infrastructure
+          provisioning regardless of underlying cloud provider.
+
+          '
         version: 1.0.0
         status: In Review
         maintainers:
@@ -49,6 +63,22 @@ categories:
         solution_name: terraform-enterprise
         solution_display_name: Terraform Enterprise
         description: Enterprise infrastructure as code platform
+        long_description: 'Teams adopting infrastructure-as-code with Terraform need
+          collaboration features, state management, and governance controls. Storing
+          Terraform state locally or in basic storage risks conflicts, data loss,
+          and security exposure of sensitive information. Without standardization,
+          each team implements Terraform differently, making it hard to share modules
+          and maintain consistency.
+
+
+          This solution implements Terraform Enterprise to provide centralized state
+          management, access controls, and policy enforcement for infrastructure-as-code.
+          It enables team collaboration on Terraform code, provides approval workflows
+          for changes, and integrates with VCS for version control. The solution includes
+          module registry for sharing reusable code and compliance policies that automatically
+          prevent violations.
+
+          '
         version: 1.0.0
         status: In Review
         maintainers:

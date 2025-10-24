@@ -1,11 +1,11 @@
 version: '2.0'
 provider: google
-generated_at: '2025-10-24T12:42:04.774414'
+generated_at: '2025-10-24T13:50:32.322127'
 catalog_type: provider
 metadata:
   provider_name: Google
   total_solutions: 2
-  last_updated: '2025-10-24T12:42:04.774422'
+  last_updated: '2025-10-24T13:50:32.322134'
   auto_generated: true
 categories:
   cloud:
@@ -16,6 +16,22 @@ categories:
         solution_name: landing-zone
         solution_display_name: Landing Zone
         description: Secure cloud foundation with governance & controls
+        long_description: 'Starting on Google Cloud without a proper foundation leads
+          to security gaps, disorganized resources, and management challenges as usage
+          grows. Teams need guardrails that prevent misconfigurations while allowing
+          them to work independently. Building a secure, scalable cloud foundation
+          requires understanding Google Cloud best practices and implementing many
+          interconnected configurations.
+
+
+          This solution implements Google Cloud''s enterprise foundation blueprint
+          with security controls, networking, identity management, and governance
+          policies. It creates organizational structure, sets up billing, configures
+          logging and monitoring, and establishes policies that enforce security requirements.
+          The landing zone provides teams with secure project environments while maintaining
+          centralized oversight.
+
+          '
         version: 1.0.0
         status: In Review
         maintainers:
@@ -49,6 +65,21 @@ categories:
         solution_name: workspace
         solution_display_name: Workspace
         description: Collaborative digital workspace for modern teams
+        long_description: 'Organizations need collaboration tools that work seamlessly
+          across email, documents, video conferencing, and messaging. Managing separate
+          tools from different vendors creates complexity and poor user experience.
+          Data ends up scattered across multiple systems, making it hard to find information
+          and collaborate effectively.
+
+
+          This solution deploys Google Workspace providing integrated email, calendar,
+          documents, spreadsheets, presentations, video conferencing, and team chat.
+          Users can collaborate in real-time on documents, schedule meetings easily,
+          and find information across all tools with unified search. The solution
+          includes admin controls, security policies, and integration with existing
+          identity systems.
+
+          '
         version: 1.0.0
         status: In Review
         maintainers:

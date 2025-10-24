@@ -1,11 +1,11 @@
 version: '2.0'
 provider: dell
-generated_at: '2025-10-24T12:42:04.778019'
+generated_at: '2025-10-24T13:50:32.326568'
 catalog_type: provider
 metadata:
   provider_name: Dell
   total_solutions: 6
-  last_updated: '2025-10-24T12:42:04.778027'
+  last_updated: '2025-10-24T13:50:32.326576'
   auto_generated: true
 categories:
   ai:
@@ -16,6 +16,21 @@ categories:
         solution_name: precision-ai-workstation
         solution_display_name: Precision AI Workstation
         description: High-performance workstations for AI development
+        long_description: 'AI and machine learning development requires substantial
+          computing power for training models and processing large datasets. Standard
+          workstations lack the GPU performance and memory needed for this work, forcing
+          teams to queue for shared resources or wait for cloud instances. This slows
+          down experimentation and model development cycles.
+
+
+          This solution provides Dell Precision workstations configured specifically
+          for AI development with professional-grade GPUs, high-memory configurations,
+          and fast storage. These workstations give data scientists and ML engineers
+          dedicated resources for model development without depending on shared infrastructure.
+          The solution includes software configurations for popular AI frameworks
+          and tools.
+
+          '
         version: 1.0.0
         status: In Review
         maintainers:
@@ -48,6 +63,20 @@ categories:
         solution_name: vxrail-hyperconverged
         solution_display_name: VxRail Hyperconverged
         description: Complete HCI platform for enterprise workloads
+        long_description: 'Organizations need scalable infrastructure that can grow
+          with business demands without major forklift upgrades. Traditional infrastructure
+          requires planning large capacity expansions months in advance and purchasing
+          multiple components separately. This leads to either overprovisioning that
+          wastes budget or underprovisioning that impacts performance.
+
+
+          This solution uses Dell VxRail hyperconverged architecture to provide infrastructure
+          that scales incrementally by adding nodes as needed. Each node expands both
+          compute and storage capacity proportionally. The solution handles configuration
+          automatically, maintains performance as you scale, and provides predictable
+          cost structure based on node count.
+
+          '
         version: 1.0.0
         status: In Review
         maintainers:
@@ -78,6 +107,17 @@ categories:
         solution_name: vxrail-hci
         solution_display_name: VxRail HCI
         description: Hyperconverged infrastructure for simplified IT
+        long_description: "Traditional data center infrastructure requires separate\
+          \ servers, storage, and networking components that are complex to integrate,\
+          \ scale, and manage. Capacity planning is difficult\u2014organizations often\
+          \ overprovision to avoid outages or underprovision and face performance\
+          \ issues. Managing these separate systems requires specialized expertise\
+          \ and significant time.\n\nThis solution implements Dell VxRail hyperconverged\
+          \ infrastructure that combines compute, storage, and networking into a single\
+          \ system. It simplifies deployment with pre-configured nodes that can be\
+          \ added incrementally as needs grow. The solution provides integrated management,\
+          \ automated operations, and seamless integration with VMware for running\
+          \ virtualized workloads.\n"
         version: 1.0.0
         status: In Review
         maintainers:
@@ -109,6 +149,21 @@ categories:
         solution_name: powerswitch-datacenter
         solution_display_name: Powerswitch Datacenter
         description: High-performance datacenter switching fabric
+        long_description: 'Data center networks must handle high-speed traffic between
+          servers, storage, and external connections without becoming a bottleneck.
+          Network complexity grows as organizations add virtualization, containers,
+          and hybrid cloud connectivity. Managing individual switch configurations
+          and troubleshooting network issues across many devices is time-consuming.
+
+
+          This solution implements Dell PowerSwitch data center networking with high-speed
+          switches designed for modern data center workloads. It provides low-latency
+          connectivity for server-to-server traffic, supports automation for configuration
+          management, and includes monitoring for identifying performance issues.
+          The solution scales from small data centers to large facilities with thousands
+          of connections.
+
+          '
         version: 1.0.0
         status: In Review
         maintainers:
@@ -141,6 +196,20 @@ categories:
         solution_name: poweredge-ci-infrastructure
         solution_display_name: Poweredge Ci Infrastructure
         description: Enterprise CI infrastructure on PowerEdge servers
+        long_description: 'Running CI/CD pipelines requires substantial computing
+          resources for building code, running tests, and deploying applications.
+          Cloud-based CI/CD can become expensive at scale, especially for organizations
+          with frequent builds and large test suites. Teams need reliable infrastructure
+          that can handle peak loads without delays in the development process.
+
+
+          This solution provides Dell PowerEdge server infrastructure optimized for
+          CI/CD workloads. It includes configurations for build servers, test environments,
+          and artifact storage with capacity to handle multiple concurrent pipelines.
+          The solution reduces CI/CD costs compared to cloud-only approaches while
+          maintaining the automation and scalability teams need.
+
+          '
         version: 1.0.0
         status: In Review
         maintainers:
@@ -173,6 +242,20 @@ categories:
         solution_name: safeid-authentication
         solution_display_name: Safeid Authentication
         description: Multi-factor authentication for secure access
+        long_description: 'Password-based authentication is vulnerable to phishing,
+          credential theft, and brute force attacks. Managing passwords is difficult
+          for users and help desk password resets consume significant support resources.
+          Regulatory requirements increasingly demand multi-factor authentication,
+          but deploying MFA across all applications is challenging.
+
+
+          This solution implements Dell SafeID for multi-factor authentication across
+          enterprise applications. It supports multiple authentication methods including
+          hardware tokens, biometrics, and mobile apps. The solution integrates with
+          existing identity systems, provides centralized policy management, and reduces
+          password-related security risks and support costs.
+
+          '
         version: 1.0.0
         status: In Review
         maintainers:

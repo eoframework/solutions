@@ -1,11 +1,11 @@
 version: '2.0'
 provider: azure
-generated_at: '2025-10-24T12:42:04.787238'
+generated_at: '2025-10-24T13:50:32.338308'
 catalog_type: provider
 metadata:
   provider_name: Azure
   total_solutions: 6
-  last_updated: '2025-10-24T12:42:04.787246'
+  last_updated: '2025-10-24T13:50:32.338317'
   auto_generated: true
 categories:
   ai:
@@ -16,6 +16,20 @@ categories:
         solution_name: document-intelligence
         solution_display_name: Cognitive Document Processor
         description: Smart document processing with Azure cognitive AI
+        long_description: 'Businesses handle large volumes of forms and documents
+          that require manual review and data entry. Processing insurance claims,
+          loan applications, or customer onboarding forms ties up staff in repetitive
+          tasks. Errors in manual processing lead to delays, rework, and compliance
+          issues.
+
+
+          This solution uses Azure AI Document Intelligence (Form Recognizer) to automatically
+          extract data from structured and semi-structured documents. It processes
+          forms, receipts, invoices, and identity documents, extracting key fields
+          and validating data. The solution integrates with existing business processes
+          and can handle high document volumes with consistent accuracy.
+
+          '
         version: 1.0.0
         status: In Review
         maintainers:
@@ -49,6 +63,20 @@ categories:
         solution_name: enterprise-landing-zone
         solution_display_name: Enterprise Landing Zone
         description: Secure Azure foundation for enterprise workloads
+        long_description: 'Organizations moving to Azure need a secure, well-organized
+          cloud foundation that supports multiple teams and workloads. Without proper
+          setup, environments become disorganized, security gaps emerge, and managing
+          costs and compliance becomes difficult. Building this foundation from scratch
+          requires deep Azure expertise and understanding of best practices.
+
+
+          This solution implements Azure''s Enterprise-Scale Landing Zone architecture,
+          providing a secure foundation for cloud operations. It sets up management
+          groups, subscriptions, networking, identity, security controls, and governance
+          policies. The landing zone gives teams self-service capabilities while maintaining
+          centralized security and compliance controls.
+
+          '
         version: 1.0.0
         status: In Review
         maintainers:
@@ -83,6 +111,20 @@ categories:
         solution_name: virtual-wan-global
         solution_display_name: Virtual Wan Global
         description: Global WAN connectivity for distributed enterprises
+        long_description: 'Organizations with multiple offices, data centers, and
+          cloud resources need reliable connectivity between all locations. Managing
+          separate connections, routing, and security policies for each site is complex
+          and expensive. Network performance issues impact user experience and application
+          availability across distributed operations.
+
+
+          This solution implements Azure Virtual WAN to create a unified global network
+          connecting branches, data centers, and Azure regions. It provides optimized
+          routing through Microsoft''s global network, centralized security policies,
+          and simplified management of all connections. The solution reduces network
+          latency and makes it easier to add new locations.
+
+          '
         version: 1.0.0
         status: In Review
         maintainers:
@@ -116,6 +158,20 @@ categories:
         solution_name: enterprise-platform
         solution_display_name: DevOps Pipeline Factory
         description: DevOps platform for accelerated software delivery
+        long_description: 'Development teams using disparate tools and manual processes
+          struggle with slow deployment cycles, inconsistent environments, and difficulty
+          tracking changes across projects. Teams waste time on repetitive tasks instead
+          of delivering features. Without standardized pipelines, errors increase
+          and getting code to production takes too long.
+
+
+          This solution establishes an Azure DevOps platform with standardized CI/CD
+          pipelines, automated testing, and infrastructure-as-code templates. It provides
+          project templates, branching strategies, and deployment workflows that teams
+          can adopt immediately. The platform enforces quality gates, automates security
+          scanning, and provides visibility into the entire delivery process.
+
+          '
         version: 1.0.0
         status: In Review
         maintainers:
@@ -149,6 +205,21 @@ categories:
         solution_name: virtual-desktop
         solution_display_name: Virtual Desktop
         description: Secure remote desktop for modern workforce productivity
+        long_description: 'Remote and hybrid work requires secure access to corporate
+          applications and desktops from any location. Traditional VPN solutions struggle
+          with performance and user experience. Managing physical desktops or individual
+          virtual machines for remote workers is expensive and difficult to scale
+          during rapid workforce changes.
+
+
+          This solution deploys Azure Virtual Desktop to provide managed Windows desktops
+          and applications through the cloud. Users access their work environment
+          from any device with a consistent experience. The solution handles session
+          management, scaling based on demand, and integrates with existing identity
+          systems. IT teams can quickly provision new users and update applications
+          centrally.
+
+          '
         version: 1.0.0
         status: In Review
         maintainers:
@@ -182,6 +253,16 @@ categories:
         solution_name: sentinel-siem
         solution_display_name: Sentinel SIEM
         description: Cloud SIEM for advanced threat detection & response
+        long_description: "Security teams face an overwhelming volume of alerts from\
+          \ multiple tools\u2014firewalls, endpoints, cloud services, and applications.\
+          \ Analysts spend significant time correlating events across systems, investigating\
+          \ false positives, and trying to identify real threats before they cause\
+          \ damage. Without centralized visibility, threats can go undetected across\
+          \ your environment.\n\nThis solution implements Azure Sentinel as a cloud-based\
+          \ SIEM that collects security data from across your infrastructure. It correlates\
+          \ events, detects anomalies using built-in analytics rules, and provides\
+          \ investigation tools to respond to incidents. The solution includes pre-configured\
+          \ connectors for common security tools and playbooks for automated response.\n"
         version: 1.0.0
         status: In Review
         maintainers:
