@@ -116,7 +116,7 @@ This solution is licensed under the Business Source License 1.1 (BSL 1.1).
 
 ---
 
-**EO Framework™** - Enterprise Optimization Solutions
+**[EO Framework™](https://eoframework.org)** - Exceptional Outcome Framework
 """
 
     return readme_content
