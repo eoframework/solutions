@@ -76,15 +76,10 @@ jobs:
           fi
 
   publish-solutions:
-    name: Sync Solutions to Public Assets
+    name: Sync Solutions to Public Assets (Batch)
     needs: detect-changes
     if: needs.detect-changes.outputs.has_changes == 'true'
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        solution: ${{ fromJson(needs.detect-changes.outputs.solutions) }}
-      max-parallel: 1  # Process solutions one at a time to avoid git conflicts
-      fail-fast: false
     steps:
       - name: Checkout solutions repository
         uses: actions/checkout@v4
@@ -110,15 +105,30 @@ jobs:
           python -m pip install --upgrade pip
           pip install pyyaml
 
-      - name: Sync solution folder to public-assets
+      - name: Sync all changed solutions
         run: |
           cd solutions-repo
-          python3 support/tools/sync-solution.py \
-            --solution "${{ matrix.solution }}" \
-            --target "../public-assets" \
-            --create-tag
 
-      - name: Commit and push to public-assets
+          SOLUTIONS='${{ needs.detect-changes.outputs.solutions }}'
+          SOLUTION_COUNT=$(echo "$SOLUTIONS" | jq 'length')
+
+          echo "📦 Syncing $SOLUTION_COUNT changed solution(s)..."
+          echo ""
+
+          # Loop through all changed solutions and sync them
+          for solution in $(echo "$SOLUTIONS" | jq -r '.[]'); do
+            echo "▶ Processing: $solution"
+            python3 support/tools/sync-solution.py \
+              --solution "$solution" \
+              --target "../public-assets" \
+              --create-tag
+            echo "✅ Synced: $solution"
+            echo ""
+          done
+
+          echo "✅ All solutions synced successfully"
+
+      - name: Batch commit and push to public-assets
         run: |
           cd public-assets
 
@@ -128,46 +138,89 @@ jobs:
 
           # Check for changes
           if git diff --quiet && git diff --staged --quiet; then
-            echo "ℹ️ No changes to commit for ${{ matrix.solution }}"
+            echo "ℹ️ No changes to commit"
             exit 0
           fi
 
-          # Get solution metadata for commit message
-          SOLUTION_PATH="${{ matrix.solution }}"
-          METADATA_FILE="${SOLUTION_PATH}/metadata.yml"
+          # Get solution count and list
+          SOLUTIONS='${{ needs.detect-changes.outputs.solutions }}'
+          SOLUTION_COUNT=$(echo "$SOLUTIONS" | jq 'length')
 
-          if [ -f "$METADATA_FILE" ]; then
-            SOLUTION_NAME=$(python3 -c "import yaml; print(yaml.safe_load(open('$METADATA_FILE'))['solution_display_name'])" 2>/dev/null || echo "Solution")
-            VERSION=$(python3 -c "import yaml; print(yaml.safe_load(open('$METADATA_FILE'))['version'])" 2>/dev/null || echo "1.0.0")
+          # Build commit message
+          if [ "$SOLUTION_COUNT" -eq 1 ]; then
+            # Single solution - use detailed message
+            SOLUTION_PATH=$(echo "$SOLUTIONS" | jq -r '.[0]')
+            METADATA_FILE="${SOLUTION_PATH}/metadata.yml"
+
+            if [ -f "$METADATA_FILE" ]; then
+              SOLUTION_NAME=$(python3 -c "import yaml; print(yaml.safe_load(open('$METADATA_FILE'))['solution_display_name'])" 2>/dev/null || echo "Solution")
+              VERSION=$(python3 -c "import yaml; print(yaml.safe_load(open('$METADATA_FILE'))['version'])" 2>/dev/null || echo "1.0.0")
+            else
+              SOLUTION_NAME=$(basename "$SOLUTION_PATH")
+              VERSION="1.0.0"
+            fi
+
+            COMMIT_TITLE="Publish ${SOLUTION_NAME} v${VERSION}"
           else
-            SOLUTION_NAME=$(basename "${{ matrix.solution }}")
-            VERSION="1.0.0"
+            # Multiple solutions - use batch message
+            COMMIT_TITLE="Batch publish: ${SOLUTION_COUNT} solutions updated"
           fi
 
-          # Commit changes
+          # Commit all changes as one batch
           git add .
-          git commit -m "Publish ${SOLUTION_NAME} v${VERSION}" \
+          git commit -m "$COMMIT_TITLE" \
             -m "Automated sync from solutions repository" \
             -m "Source: ${{ github.repository }}@${{ github.sha }}" \
-            -m "Solution: ${{ matrix.solution }}"
+            -m "" \
+            -m "Changed solutions ($SOLUTION_COUNT):" \
+            -m "$(echo "$SOLUTIONS" | jq -r '.[]')"
 
-          # Push main branch
+          # Push changes
+          git pull --rebase origin main
           git push origin main
-          echo "✅ Pushed changes to main branch"
+          echo "✅ Pushed batch commit to main branch"
 
-          # Create and push git tag if TAG_NAME was set by sync script
-          if [ -f .tag-info ]; then
-            TAG_NAME=$(cat .tag-info)
-            rm .tag-info
+      - name: Create and push solution tags
+        run: |
+          cd public-assets
+
+          # Configure git (in case it's a new shell)
+          git config user.name "eof-publisher"
+          git config user.email "publisher@eoframework.com"
+
+          # Collect all tag files created by sync-solution.py
+          TAG_FILES=$(find . -name ".tag-info" -type f)
+
+          if [ -z "$TAG_FILES" ]; then
+            echo "ℹ️ No tags to create"
+            exit 0
+          fi
+
+          echo "📋 Processing solution tags..."
+          TAG_COUNT=0
+
+          # Process each tag file
+          for tag_file in $TAG_FILES; do
+            TAG_NAME=$(cat "$tag_file")
+            rm "$tag_file"
 
             # Check if tag already exists
             if git rev-parse "$TAG_NAME" >/dev/null 2>&1; then
-              echo "ℹ️ Tag $TAG_NAME already exists, skipping tag creation"
+              echo "⏭️  Tag already exists: $TAG_NAME"
             else
-              git tag -a "$TAG_NAME" -m "Release ${SOLUTION_NAME} v${VERSION}"
-              git push origin "$TAG_NAME"
-              echo "✅ Created and pushed tag: $TAG_NAME"
+              # Extract solution info from tag name for tag message
+              git tag -a "$TAG_NAME" -m "Release $TAG_NAME"
+              TAG_COUNT=$((TAG_COUNT + 1))
+              echo "✅ Created tag: $TAG_NAME"
             fi
+          done
+
+          # Push all tags at once
+          if [ $TAG_COUNT -gt 0 ]; then
+            git push origin --tags
+            echo "✅ Pushed $TAG_COUNT new tag(s)"
+          else
+            echo "ℹ️ No new tags to push"
           fi
 
   update-catalog:
@@ -224,6 +277,7 @@ jobs:
             -m "Automated catalog generation" \
             -m "Source: ${{ github.repository }}@${{ github.sha }}"
 
+          git pull --rebase origin main
           git push origin main
           echo "✅ Updated solution catalog"
 
@@ -235,17 +289,25 @@ jobs:
     steps:
       - name: Create summary
         run: |
+          SOLUTIONS='${{ needs.detect-changes.outputs.solutions }}'
+          SOLUTION_COUNT=$(echo "$SOLUTIONS" | jq 'length')
+
           echo "## 📦 Solution Publishing Complete" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
-          echo "**Publishing Mode:** Folder-based (Git repository)" >> $GITHUB_STEP_SUMMARY
-          echo "**Solutions Processed:** ${{ needs.detect-changes.outputs.solutions }}" >> $GITHUB_STEP_SUMMARY
+          echo "**Publishing Mode:** Batch (Git repository)" >> $GITHUB_STEP_SUMMARY
+          echo "**Solutions Published:** $SOLUTION_COUNT" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "### ✅ Published Components" >> $GITHUB_STEP_SUMMARY
-          echo "- Solution folders synced to main branch" >> $GITHUB_STEP_SUMMARY
+          echo "- Solution folders synced in single batch commit" >> $GITHUB_STEP_SUMMARY
           echo "- Git tags created for version tracking" >> $GITHUB_STEP_SUMMARY
           echo "- Solution catalog updated" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "**Repository:** https://github.com/eoframework/public-assets" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### 📋 Changed Solutions" >> $GITHUB_STEP_SUMMARY
+          echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
+          echo "$SOLUTIONS" | jq -r '.[]' >> $GITHUB_STEP_SUMMARY
+          echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "### 📖 User Access" >> $GITHUB_STEP_SUMMARY
           echo "\`\`\`bash" >> $GITHUB_STEP_SUMMARY
