@@ -5,7 +5,7 @@ name: Sync Website Data
 
 on:
   workflow_run:
-    workflows: ["Template Validation"]
+    workflows: ["Template Validation", "Publish Solutions to Public Assets"]
     types:
       - completed
     branches:
@@ -39,7 +39,7 @@ jobs:
       - name: Generate latest solutions.csv
         run: |
           cd solutions
-          python3 support/tools/export-templates-csv.py --output-type public
+          python3 support/tools/export-templates-csv.py --output-type public --git-based
       
       - name: Checkout eof-website repository
         uses: actions/checkout@v4
