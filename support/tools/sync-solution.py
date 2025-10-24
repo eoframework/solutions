@@ -397,13 +397,8 @@ def sync_solution(solution_path, target_repo, create_tag=False):
 
     print(f"   ✅ Copied {copied_count} files")
 
-    # Generate clean README for main solution
-    print(f"   📝 Generating clean README...")
-    main_readme = target_dir / 'README.md'
-    clean_readme_content = generate_clean_readme(metadata, provider_display, category_display)
-    with open(main_readme, 'w', encoding='utf-8') as f:
-        f.write(clean_readme_content)
-    print(f"   ✅ Created clean README.md")
+    # Note: README.md is already copied as-is from source (single source of truth)
+    # Source READMEs are clean and maintained in solutions repository
 
     # Sanitize and update metadata.yml
     metadata_target = target_dir / 'metadata.yml'

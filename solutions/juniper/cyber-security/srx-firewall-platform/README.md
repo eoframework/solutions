@@ -1,54 +1,66 @@
-# Juniper Srx Firewall Platform Solution
+# SRX Firewall Platform
 
-## Solution Overview
+**Provider:** Juniper
+**Category:** Cyber Security
+**Version:** 1.0.0
+**Status:** In Review
 
-Enterprise solution providing advanced capabilities for modern digital infrastructure with proven methodologies and comprehensive support.
+## Overview
 
-### Key Benefits
-- High performance and reliability
-- Scalable architecture design
-- Enterprise security features
-- Comprehensive management tools
+Next-gen firewall for enterprise network security
 
-### Target Use Cases
-- Enterprise infrastructure modernization
-- Digital transformation initiatives
-- Performance and scalability improvements
-- Security and compliance enhancement
+## 📥 Access This Solution
 
-## Getting Started
+### Quick Download
 
-### Prerequisites
-- Enterprise infrastructure environment
-- Administrative access and permissions
-- Technical expertise and project team
-- Budget approval and timeline commitment
+**Option 1: Using Helper Script**
+```bash
+curl -O https://raw.githubusercontent.com/eoframework/public-assets/main/download-solution.sh
+chmod +x download-solution.sh
+./download-solution.sh juniper/cyber-security/srx-firewall-platform
+```
 
-### Implementation Approach
-1. **Planning**: Requirements assessment and solution design
-2. **Preparation**: Environment setup and team preparation
-3. **Implementation**: Solution deployment and configuration
-4. **Validation**: Testing and performance validation
-5. **Operations**: Go-live and ongoing operations
+**Option 2: Git Sparse Checkout (Recommended)**
+```bash
+# Clone with sparse checkout
+git clone --filter=blob:none --sparse https://github.com/eoframework/public-assets.git
+cd public-assets
 
-## Documentation
+# Checkout this specific solution
+git sparse-checkout set solutions/juniper/cyber-security/srx-firewall-platform
 
-### Business Materials
-- **[Business Case](presales/business-case.md)**: ROI analysis and justification
-- **[Requirements](presales/requirements-questionnaire.csv)**: Comprehensive requirements assessment
+# View the solution
+cd solutions/juniper/cyber-security/srx-firewall-platform
+ls -la
+```
 
-### Technical Documentation  
-- **[Technical Design](delivery/detailed-design.md)**: Architecture and component details
-- **[Implementation Guide](delivery/implementation-guide.md)**: Step-by-step deployment procedures
+**Option 3: Browse on GitHub**
+- View online: https://github.com/eoframework/public-assets/tree/main/solutions/juniper/cyber-security/srx-firewall-platform
 
-### Support Resources
-- **[Configuration](delivery/configuration.csv)**: Setup parameters and standards
-- **[Test Plan](delivery/test-plan.csv)**: Comprehensive testing procedures
-- **[Training Plan](delivery/training-plan.csv)**: User enablement strategy
+## 📁 Solution Structure
+
+This solution includes:
+
+- **`presales/`** - Business case materials, ROI calculators, presentations
+- **`delivery/`** - Implementation guides, configuration templates, automation scripts
+  - `implementation-guide.md` - Step-by-step implementation instructions
+  - `scripts/` - Deployment automation (Bash, Python, Terraform, PowerShell)
+  - `scripts/README.md` - Detailed script usage and prerequisites
+- **`metadata.yml`** - Solution metadata and requirements
+- **`CHANGELOG.md`** - Version history and updates
+
+## 🚀 Getting Started
+
+1. **Review the business case**: See `presales/` for ROI analysis and presentations
+2. **Check prerequisites**: Review `delivery/implementation-guide.md` for requirements
+3. **Deploy the solution**: Follow instructions in `delivery/scripts/README.md`
+
+For detailed deployment steps, see [`delivery/scripts/README.md`](delivery/scripts/README.md).
+
+## 📄 License
+
+This solution is licensed under the Business Source License 1.1 (BSL 1.1).
 
 ---
 
-**Solution Version**: 2.0  
-**Last Updated**: January 2025  
-**Provider**: Juniper  
-**Support Level**: Community
+**EO Framework™** - Enterprise Optimization Solutions
