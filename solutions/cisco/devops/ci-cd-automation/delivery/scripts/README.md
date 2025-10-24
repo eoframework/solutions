@@ -174,4 +174,4 @@ Key metrics and monitoring capabilities are configured automatically during depl
 
 **Last Updated:** August 2025  
 **Solution Version:** 1.0  
-**Maintained By:** EO Framework™ {provider_name} Solutions Team
+**Maintained By:** EO Framework™ Cisco Solutions Team
