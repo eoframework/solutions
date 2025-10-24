@@ -1,4 +1,7 @@
 #!/usr/bin/env python3
+# Copyright (c) 2025 EO Framework™
+# Licensed under BSL 1.1 - see LICENSE file for details
+
 """
 Add long_description field to all solution metadata files.
 """

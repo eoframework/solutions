@@ -1,4 +1,6 @@
 #!/bin/bash
+# Copyright (c) 2025 EO Framework™
+# Licensed under BSL 1.1 - see LICENSE file for details
 #
 # Verify PUBLIC_ASSETS_TOKEN has correct permissions
 #

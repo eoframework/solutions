@@ -1,4 +1,6 @@
 #!/bin/bash
+# Copyright (c) 2025 EO Framework™
+# Licensed under BSL 1.1 - see LICENSE file for details
 #
 # EO Framework™ Solution Download Helper
 # Simple script to download solutions without full Git workflow knowledge
