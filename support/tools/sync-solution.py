@@ -197,32 +197,29 @@ def replace_readme_placeholders(readme_path, metadata, provider_display, categor
             f.write(content)
         print(f"   ✅ Replaced placeholders in {readme_path.name}")
 
-def add_git_instructions_to_readme(readme_path, metadata):
-    """Add Git clone/sparse checkout instructions to the top of main solution README"""
-    if not readme_path.exists():
-        return
-
-    # Only add to the main README.md in the solution root, not subdirectories
-    if readme_path.name != 'README.md':
-        return
-
+def generate_clean_readme(metadata, provider_display, category_display):
+    """Generate a clean, simple README from metadata"""
     provider = metadata.get('provider', '').lower()
     category = metadata.get('category', '').lower()
     solution_name = metadata.get('solution_name', '').lower()
-    solution_display = metadata.get('solution_display_name', solution_name)
+    solution_display = metadata.get('solution_display_name', solution_name.replace('-', ' ').title())
+    description = metadata.get('description', '')
+    version = metadata.get('version', '1.0.0')
+    status = metadata.get('status', 'In Review')
     solution_path = f"solutions/{provider}/{category}/{solution_name}"
 
-    with open(readme_path, 'r', encoding='utf-8') as f:
-        content = f.read()
+    readme_content = f"""# {solution_display}
 
-    # Check if instructions already exist
-    if '## 📥 Access This Solution' in content or 'git sparse-checkout set' in content:
-        return  # Already has instructions
+**Provider:** {provider_display}
+**Category:** {category_display}
+**Version:** {version}
+**Status:** {status}
 
-    # Create Git instructions section
-    git_instructions = f"""## 📥 Access This Solution
+## Overview
 
-This solution is available in the [EO Framework Public Assets](https://github.com/eoframework/public-assets) repository.
+{description}
+
+## 📥 Access This Solution
 
 ### Quick Download
 
@@ -250,31 +247,36 @@ ls -la
 **Option 3: Browse on GitHub**
 - View online: https://github.com/eoframework/public-assets/tree/main/{solution_path}
 
+## 📁 Solution Structure
+
+This solution includes:
+
+- **`presales/`** - Business case materials, ROI calculators, presentations
+- **`delivery/`** - Implementation guides, configuration templates, automation scripts
+  - `implementation-guide.md` - Step-by-step implementation instructions
+  - `scripts/` - Deployment automation (Bash, Python, Terraform, PowerShell)
+  - `scripts/README.md` - Detailed script usage and prerequisites
+- **`metadata.yml`** - Solution metadata and requirements
+- **`CHANGELOG.md`** - Version history and updates
+
+## 🚀 Getting Started
+
+1. **Review the business case**: See `presales/` for ROI analysis and presentations
+2. **Check prerequisites**: Review `delivery/implementation-guide.md` for requirements
+3. **Deploy the solution**: Follow instructions in `delivery/scripts/README.md`
+
+For detailed deployment steps, see [`delivery/scripts/README.md`](delivery/scripts/README.md).
+
+## 📄 License
+
+This solution is licensed under the Business Source License 1.1 (BSL 1.1).
+
 ---
 
+**EO Framework™** - Enterprise Optimization Solutions
 """
 
-    # Insert at the beginning, after the title if it exists
-    lines = content.split('\n')
-    insert_position = 0
-
-    # Find first heading and insert after it
-    for i, line in enumerate(lines):
-        if line.startswith('# '):
-            insert_position = i + 1
-            # Skip any immediate description/badges after title
-            while insert_position < len(lines) and lines[insert_position].strip() and not lines[insert_position].startswith('#'):
-                insert_position += 1
-            break
-
-    # Insert the instructions
-    lines.insert(insert_position, git_instructions)
-    new_content = '\n'.join(lines)
-
-    with open(readme_path, 'w', encoding='utf-8') as f:
-        f.write(new_content)
-
-    print(f"   ✅ Added Git clone instructions to {readme_path.name}")
+    return readme_content
 
 def create_changelog(solution_path, metadata):
     """Create or update CHANGELOG.md if it doesn't exist"""
@@ -395,15 +397,13 @@ def sync_solution(solution_path, target_repo, create_tag=False):
 
     print(f"   ✅ Copied {copied_count} files")
 
-    # Replace placeholders in README files
-    print(f"   🔧 Processing README files...")
-    for readme_file in target_dir.rglob('README.md'):
-        replace_readme_placeholders(readme_file, metadata, provider_display, category_display)
-
-    # Add Git clone instructions to main README
+    # Generate clean README for main solution
+    print(f"   📝 Generating clean README...")
     main_readme = target_dir / 'README.md'
-    if main_readme.exists():
-        add_git_instructions_to_readme(main_readme, metadata)
+    clean_readme_content = generate_clean_readme(metadata, provider_display, category_display)
+    with open(main_readme, 'w', encoding='utf-8') as f:
+        f.write(clean_readme_content)
+    print(f"   ✅ Created clean README.md")
 
     # Sanitize and update metadata.yml
     metadata_target = target_dir / 'metadata.yml'
