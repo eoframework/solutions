@@ -57,6 +57,41 @@ def should_exclude(path):
                 return True
     return False
 
+def load_display_names(repo_root):
+    """Load provider and category display names from catalog files"""
+    provider_names = {}
+    category_names = {}
+
+    # Load provider display names
+    providers_path = repo_root / "support" / "catalog" / "providers"
+    if providers_path.exists():
+        for provider_file in providers_path.glob("*.yml"):
+            try:
+                with open(provider_file, 'r') as f:
+                    catalog = yaml.safe_load(f)
+                    provider_id = catalog.get('provider')
+                    provider_name = catalog.get('metadata', {}).get('provider_name')
+                    if provider_id and provider_name:
+                        provider_names[provider_id] = provider_name
+            except Exception:
+                pass  # Skip invalid catalog files
+
+    # Load category display names
+    categories_path = repo_root / "support" / "catalog" / "categories"
+    if categories_path.exists():
+        for category_file in categories_path.glob("*.yml"):
+            try:
+                with open(category_file, 'r') as f:
+                    catalog = yaml.safe_load(f)
+                    category_id = catalog.get('category')
+                    category_name = catalog.get('metadata', {}).get('category_name')
+                    if category_id and category_name:
+                        category_names[category_id] = category_name
+            except Exception:
+                pass  # Skip invalid catalog files
+
+    return provider_names, category_names
+
 def sanitize_metadata(metadata):
     """Remove private fields and add public information"""
     # Remove private/internal fields
@@ -133,6 +168,114 @@ def read_metadata(solution_path):
 
     return metadata
 
+def replace_readme_placeholders(readme_path, metadata, provider_display, category_display):
+    """Replace placeholder variables in README files"""
+    if not readme_path.exists():
+        return
+
+    with open(readme_path, 'r', encoding='utf-8') as f:
+        content = f.read()
+
+    # Define placeholder replacements
+    replacements = {
+        '{SOLUTION_NAME}': metadata.get('solution_display_name', metadata.get('solution_name', 'Solution')),
+        '{PROVIDER_NAME}': provider_display,
+        '{CATEGORY_NAME}': category_display,
+        '{VERSION}': metadata.get('version', '1.0.0'),
+        '{DESCRIPTION}': metadata.get('description', ''),
+        '{SOLUTION_ID}': metadata.get('solution_name', '').lower()
+    }
+
+    # Perform replacements
+    original_content = content
+    for placeholder, value in replacements.items():
+        content = content.replace(placeholder, str(value))
+
+    # Only write if changes were made
+    if content != original_content:
+        with open(readme_path, 'w', encoding='utf-8') as f:
+            f.write(content)
+        print(f"   ✅ Replaced placeholders in {readme_path.name}")
+
+def add_git_instructions_to_readme(readme_path, metadata):
+    """Add Git clone/sparse checkout instructions to the top of main solution README"""
+    if not readme_path.exists():
+        return
+
+    # Only add to the main README.md in the solution root, not subdirectories
+    if readme_path.name != 'README.md':
+        return
+
+    provider = metadata.get('provider', '').lower()
+    category = metadata.get('category', '').lower()
+    solution_name = metadata.get('solution_name', '').lower()
+    solution_display = metadata.get('solution_display_name', solution_name)
+    solution_path = f"solutions/{provider}/{category}/{solution_name}"
+
+    with open(readme_path, 'r', encoding='utf-8') as f:
+        content = f.read()
+
+    # Check if instructions already exist
+    if '## 📥 Access This Solution' in content or 'git sparse-checkout set' in content:
+        return  # Already has instructions
+
+    # Create Git instructions section
+    git_instructions = f"""## 📥 Access This Solution
+
+This solution is available in the [EO Framework Public Assets](https://github.com/eoframework/public-assets) repository.
+
+### Quick Download
+
+**Option 1: Using Helper Script**
+```bash
+curl -O https://raw.githubusercontent.com/eoframework/public-assets/main/download-solution.sh
+chmod +x download-solution.sh
+./download-solution.sh {provider}/{category}/{solution_name}
+```
+
+**Option 2: Git Sparse Checkout (Recommended)**
+```bash
+# Clone with sparse checkout
+git clone --filter=blob:none --sparse https://github.com/eoframework/public-assets.git
+cd public-assets
+
+# Checkout this specific solution
+git sparse-checkout set {solution_path}
+
+# View the solution
+cd {solution_path}
+ls -la
+```
+
+**Option 3: Browse on GitHub**
+- View online: https://github.com/eoframework/public-assets/tree/main/{solution_path}
+
+---
+
+"""
+
+    # Insert at the beginning, after the title if it exists
+    lines = content.split('\n')
+    insert_position = 0
+
+    # Find first heading and insert after it
+    for i, line in enumerate(lines):
+        if line.startswith('# '):
+            insert_position = i + 1
+            # Skip any immediate description/badges after title
+            while insert_position < len(lines) and lines[insert_position].strip() and not lines[insert_position].startswith('#'):
+                insert_position += 1
+            break
+
+    # Insert the instructions
+    lines.insert(insert_position, git_instructions)
+    new_content = '\n'.join(lines)
+
+    with open(readme_path, 'w', encoding='utf-8') as f:
+        f.write(new_content)
+
+    print(f"   ✅ Added Git clone instructions to {readme_path.name}")
+
 def create_changelog(solution_path, metadata):
     """Create or update CHANGELOG.md if it doesn't exist"""
     changelog_path = solution_path / 'CHANGELOG.md'
@@ -195,6 +338,12 @@ def sync_solution(solution_path, target_repo, create_tag=False):
     version = metadata['version']
     status = metadata['status']
 
+    # Load display names from catalog
+    repo_root = solution_path.parent.parent.parent.parent  # Go up to repo root
+    provider_names, category_names = load_display_names(repo_root)
+    provider_display = provider_names.get(provider, provider.title())
+    category_display = category_names.get(category, category.replace('-', ' ').title())
+
     print(f"\n📦 Syncing Solution: {provider}/{category}/{solution_name}")
     print(f"   Version: {version}")
     print(f"   Status: {status}")
@@ -245,6 +394,16 @@ def sync_solution(solution_path, target_repo, create_tag=False):
             copied_count += sum(1 for _ in target_item.rglob('*') if _.is_file())
 
     print(f"   ✅ Copied {copied_count} files")
+
+    # Replace placeholders in README files
+    print(f"   🔧 Processing README files...")
+    for readme_file in target_dir.rglob('README.md'):
+        replace_readme_placeholders(readme_file, metadata, provider_display, category_display)
+
+    # Add Git clone instructions to main README
+    main_readme = target_dir / 'README.md'
+    if main_readme.exists():
+        add_git_instructions_to_readme(main_readme, metadata)
 
     # Sanitize and update metadata.yml
     metadata_target = target_dir / 'metadata.yml'

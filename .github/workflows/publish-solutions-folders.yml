@@ -123,8 +123,8 @@ jobs:
           cd public-assets
 
           # Configure git
-          git config user.name "GitHub Actions Bot"
-          git config user.email "actions@github.com"
+          git config user.name "eof-publisher"
+          git config user.email "publisher@eoframework.com"
 
           # Check for changes
           if git diff --quiet && git diff --staged --quiet; then
@@ -211,8 +211,8 @@ jobs:
         run: |
           cd public-assets
 
-          git config user.name "GitHub Actions Bot"
-          git config user.email "actions@github.com"
+          git config user.name "eof-publisher"
+          git config user.email "publisher@eoframework.com"
 
           if git diff --quiet catalog/; then
             echo "ℹ️ No catalog changes"
