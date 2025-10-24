@@ -1,11 +1,11 @@
 version: '2.0'
 provider: google
-generated_at: '2025-10-24T14:48:47.572441'
+generated_at: '2025-10-24T14:58:42.105275'
 catalog_type: provider
 metadata:
   provider_name: Google
   total_solutions: 2
-  last_updated: '2025-10-24T14:48:47.572448'
+  last_updated: '2025-10-24T14:58:42.105286'
   auto_generated: true
 categories:
   cloud:

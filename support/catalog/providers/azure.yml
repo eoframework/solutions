@@ -1,11 +1,11 @@
 version: '2.0'
 provider: azure
-generated_at: '2025-10-24T14:48:47.588411'
+generated_at: '2025-10-24T14:58:42.123888'
 catalog_type: provider
 metadata:
   provider_name: Azure
   total_solutions: 6
-  last_updated: '2025-10-24T14:48:47.588424'
+  last_updated: '2025-10-24T14:58:42.123903'
   auto_generated: true
 categories:
   ai:
