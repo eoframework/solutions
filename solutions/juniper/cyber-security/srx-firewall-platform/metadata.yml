@@ -3,6 +3,20 @@ category: cyber-security
 solution_name: srx-firewall-platform
 solution_display_name: SRX Firewall Platform
 description: Next-gen firewall for enterprise network security
+long_description: 'Network security requires filtering traffic between network segments,
+  inspecting for threats, and enforcing access policies. Traditional firewalls become
+  bottlenecks as traffic grows and struggle to inspect encrypted traffic effectively.
+  Managing firewall rules across multiple devices leads to configuration drift and
+  security gaps.
+
+
+  This solution deploys Juniper SRX firewalls providing high-performance network security
+  for enterprise and data center environments. It handles firewall, VPN, intrusion
+  prevention, and threat intelligence in a single platform. The solution scales from
+  branch offices to large data centers, provides centralized management of policies,
+  and includes threat intelligence feeds for detecting known malicious activity.
+
+  '
 version: 1.0.0
 status: In Review
 maintainers:

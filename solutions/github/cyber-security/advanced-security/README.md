@@ -5,9 +5,12 @@
 **Version:** 1.0.0
 **Status:** In Review
 
-## Overview
+## Solution Description
 
-Advanced threat protection for code repositories
+Security vulnerabilities in code often go undetected until after deployment, when they become expensive to fix and may already be exploited. Manual code reviews miss subtle security issues, and separate security scanning tools create friction in the development process. Developers need security feedback early, when fixing issues is fastest and cheapest.
+
+This solution implements GitHub Advanced Security with CodeQL scanning integrated into development workflows. It automatically analyzes code for security vulnerabilities, detects secrets accidentally committed, and scans dependencies for known issues. Developers receive immediate feedback in pull requests, and security teams get visibility into risks across all repositories.
+
 
 ## 📥 Access This Solution
 
@@ -51,7 +54,7 @@ Navigate to **`presales/`** for business case development and stakeholder engage
 
 ### 3. Delivery and Implementation
 Navigate to **`delivery/`** for project execution:
-- Project plan and communication plan (CSV format)
+- Project plan and communication plan
 - Requirements documentation
 - Implementation guides and configuration templates
 - **`scripts/`** folder - Deployment automation (Bash, Python, Terraform, PowerShell)

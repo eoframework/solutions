@@ -5,9 +5,12 @@
 **Version:** 1.0.0
 **Status:** In Review
 
-## Overview
+## Solution Description
 
-Cloud SIEM for advanced threat detection & response
+Security teams face an overwhelming volume of alerts from multiple tools—firewalls, endpoints, cloud services, and applications. Analysts spend significant time correlating events across systems, investigating false positives, and trying to identify real threats before they cause damage. Without centralized visibility, threats can go undetected across your environment.
+
+This solution implements Azure Sentinel as a cloud-based SIEM that collects security data from across your infrastructure. It correlates events, detects anomalies using built-in analytics rules, and provides investigation tools to respond to incidents. The solution includes pre-configured connectors for common security tools and playbooks for automated response.
+
 
 ## 📥 Access This Solution
 
@@ -51,7 +54,7 @@ Navigate to **`presales/`** for business case development and stakeholder engage
 
 ### 3. Delivery and Implementation
 Navigate to **`delivery/`** for project execution:
-- Project plan and communication plan (CSV format)
+- Project plan and communication plan
 - Requirements documentation
 - Implementation guides and configuration templates
 - **`scripts/`** folder - Deployment automation (Bash, Python, Terraform, PowerShell)

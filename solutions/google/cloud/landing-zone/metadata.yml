@@ -3,6 +3,20 @@ category: cloud
 solution_name: landing-zone
 solution_display_name: Landing Zone
 description: Secure cloud foundation with governance & controls
+long_description: 'Starting on Google Cloud without a proper foundation leads to security
+  gaps, disorganized resources, and management challenges as usage grows. Teams need
+  guardrails that prevent misconfigurations while allowing them to work independently.
+  Building a secure, scalable cloud foundation requires understanding Google Cloud
+  best practices and implementing many interconnected configurations.
+
+
+  This solution implements Google Cloud''s enterprise foundation blueprint with security
+  controls, networking, identity management, and governance policies. It creates organizational
+  structure, sets up billing, configures logging and monitoring, and establishes policies
+  that enforce security requirements. The landing zone provides teams with secure
+  project environments while maintaining centralized oversight.
+
+  '
 version: 1.0.0
 status: In Review
 maintainers:

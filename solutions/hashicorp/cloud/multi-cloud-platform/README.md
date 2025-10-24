@@ -5,9 +5,12 @@
 **Version:** 1.0.0
 **Status:** In Review
 
-## Overview
+## Solution Description
 
-Multi-cloud infrastructure management & automation
+Organizations using multiple cloud providers face the challenge of different APIs, tools, and workflows for each platform. Managing infrastructure requires cloud-specific expertise and creates dependencies on specific vendors. Deploying the same application across clouds requires building everything multiple times with provider-specific tools.
+
+This solution uses HashiCorp tools (Terraform, Consul, Vault) to create a consistent platform across cloud providers. It enables infrastructure-as-code that works across AWS, Azure, and Google Cloud with the same workflow. The solution provides unified service networking, secrets management, and infrastructure provisioning regardless of underlying cloud provider.
+
 
 ## 📥 Access This Solution
 
@@ -51,7 +54,7 @@ Navigate to **`presales/`** for business case development and stakeholder engage
 
 ### 3. Delivery and Implementation
 Navigate to **`delivery/`** for project execution:
-- Project plan and communication plan (CSV format)
+- Project plan and communication plan
 - Requirements documentation
 - Implementation guides and configuration templates
 - **`scripts/`** folder - Deployment automation (Bash, Python, Terraform, PowerShell)

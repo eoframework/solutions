@@ -3,6 +3,20 @@ category: cyber-security
 solution_name: cmmc-enclave
 solution_display_name: CMMC Enclave
 description: CMMC-compliant secure enclave for defense contractors
+long_description: 'Defense contractors must comply with CMMC (Cybersecurity Maturity
+  Model Certification) requirements to protect Controlled Unclassified Information
+  (CUI). Meeting these requirements means implementing specific security controls,
+  maintaining audit trails, and proving compliance. Building a compliant environment
+  from scratch is complex and time-consuming without clear guidance on required configurations.
+
+
+  This solution creates a secure enclave within Microsoft 365 and Azure that meets
+  CMMC Level 2 requirements. It implements required security controls, configures
+  audit logging, restricts data access, and provides compliance reporting. The enclave
+  isolates CUI data and ensures only authorized users can access it through compliant
+  methods.
+
+  '
 version: 1.0.0
 status: In Review
 maintainers:

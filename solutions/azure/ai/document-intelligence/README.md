@@ -5,9 +5,12 @@
 **Version:** 1.0.0
 **Status:** In Review
 
-## Overview
+## Solution Description
 
-Smart document processing with Azure cognitive AI
+Businesses handle large volumes of forms and documents that require manual review and data entry. Processing insurance claims, loan applications, or customer onboarding forms ties up staff in repetitive tasks. Errors in manual processing lead to delays, rework, and compliance issues.
+
+This solution uses Azure AI Document Intelligence (Form Recognizer) to automatically extract data from structured and semi-structured documents. It processes forms, receipts, invoices, and identity documents, extracting key fields and validating data. The solution integrates with existing business processes and can handle high document volumes with consistent accuracy.
+
 
 ## 📥 Access This Solution
 
@@ -51,7 +54,7 @@ Navigate to **`presales/`** for business case development and stakeholder engage
 
 ### 3. Delivery and Implementation
 Navigate to **`delivery/`** for project execution:
-- Project plan and communication plan (CSV format)
+- Project plan and communication plan
 - Requirements documentation
 - Implementation guides and configuration templates
 - **`scripts/`** folder - Deployment automation (Bash, Python, Terraform, PowerShell)

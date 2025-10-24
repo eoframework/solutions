@@ -5,9 +5,12 @@
 **Version:** 1.0.0
 **Status:** In Review
 
-## Overview
+## Solution Description
 
-Enterprise infrastructure as code platform
+Teams adopting infrastructure-as-code with Terraform need collaboration features, state management, and governance controls. Storing Terraform state locally or in basic storage risks conflicts, data loss, and security exposure of sensitive information. Without standardization, each team implements Terraform differently, making it hard to share modules and maintain consistency.
+
+This solution implements Terraform Enterprise to provide centralized state management, access controls, and policy enforcement for infrastructure-as-code. It enables team collaboration on Terraform code, provides approval workflows for changes, and integrates with VCS for version control. The solution includes module registry for sharing reusable code and compliance policies that automatically prevent violations.
+
 
 ## 📥 Access This Solution
 
@@ -51,7 +54,7 @@ Navigate to **`presales/`** for business case development and stakeholder engage
 
 ### 3. Delivery and Implementation
 Navigate to **`delivery/`** for project execution:
-- Project plan and communication plan (CSV format)
+- Project plan and communication plan
 - Requirements documentation
 - Implementation guides and configuration templates
 - **`scripts/`** folder - Deployment automation (Bash, Python, Terraform, PowerShell)

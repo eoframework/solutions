@@ -5,9 +5,12 @@
 **Version:** 1.0.0
 **Status:** In Review
 
-## Overview
+## Solution Description
 
-Next-gen firewall for enterprise network security
+Network security requires filtering traffic between network segments, inspecting for threats, and enforcing access policies. Traditional firewalls become bottlenecks as traffic grows and struggle to inspect encrypted traffic effectively. Managing firewall rules across multiple devices leads to configuration drift and security gaps.
+
+This solution deploys Juniper SRX firewalls providing high-performance network security for enterprise and data center environments. It handles firewall, VPN, intrusion prevention, and threat intelligence in a single platform. The solution scales from branch offices to large data centers, provides centralized management of policies, and includes threat intelligence feeds for detecting known malicious activity.
+
 
 ## 📥 Access This Solution
 
@@ -51,7 +54,7 @@ Navigate to **`presales/`** for business case development and stakeholder engage
 
 ### 3. Delivery and Implementation
 Navigate to **`delivery/`** for project execution:
-- Project plan and communication plan (CSV format)
+- Project plan and communication plan
 - Requirements documentation
 - Implementation guides and configuration templates
 - **`scripts/`** folder - Deployment automation (Bash, Python, Terraform, PowerShell)

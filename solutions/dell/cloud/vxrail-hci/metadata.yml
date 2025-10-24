@@ -3,6 +3,16 @@ category: cloud
 solution_name: vxrail-hci
 solution_display_name: VxRail HCI
 description: Hyperconverged infrastructure for simplified IT
+long_description: "Traditional data center infrastructure requires separate servers,\
+  \ storage, and networking components that are complex to integrate, scale, and manage.\
+  \ Capacity planning is difficult\u2014organizations often overprovision to avoid\
+  \ outages or underprovision and face performance issues. Managing these separate\
+  \ systems requires specialized expertise and significant time.\n\nThis solution\
+  \ implements Dell VxRail hyperconverged infrastructure that combines compute, storage,\
+  \ and networking into a single system. It simplifies deployment with pre-configured\
+  \ nodes that can be added incrementally as needs grow. The solution provides integrated\
+  \ management, automated operations, and seamless integration with VMware for running\
+  \ virtualized workloads.\n"
 version: 1.0.0
 status: In Review
 maintainers:

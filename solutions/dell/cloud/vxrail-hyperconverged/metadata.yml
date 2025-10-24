@@ -3,6 +3,20 @@ category: cloud
 solution_name: vxrail-hyperconverged
 solution_display_name: VxRail Hyperconverged
 description: Complete HCI platform for enterprise workloads
+long_description: 'Organizations need scalable infrastructure that can grow with business
+  demands without major forklift upgrades. Traditional infrastructure requires planning
+  large capacity expansions months in advance and purchasing multiple components separately.
+  This leads to either overprovisioning that wastes budget or underprovisioning that
+  impacts performance.
+
+
+  This solution uses Dell VxRail hyperconverged architecture to provide infrastructure
+  that scales incrementally by adding nodes as needed. Each node expands both compute
+  and storage capacity proportionally. The solution handles configuration automatically,
+  maintains performance as you scale, and provides predictable cost structure based
+  on node count.
+
+  '
 version: 1.0.0
 status: In Review
 maintainers:

@@ -5,9 +5,12 @@
 **Version:** 1.0.0
 **Status:** In Review
 
-## Overview
+## Solution Description
 
-Secure remote desktop for modern workforce productivity
+Remote and hybrid work requires secure access to corporate applications and desktops from any location. Traditional VPN solutions struggle with performance and user experience. Managing physical desktops or individual virtual machines for remote workers is expensive and difficult to scale during rapid workforce changes.
+
+This solution deploys Azure Virtual Desktop to provide managed Windows desktops and applications through the cloud. Users access their work environment from any device with a consistent experience. The solution handles session management, scaling based on demand, and integrates with existing identity systems. IT teams can quickly provision new users and update applications centrally.
+
 
 ## 📥 Access This Solution
 
@@ -51,7 +54,7 @@ Navigate to **`presales/`** for business case development and stakeholder engage
 
 ### 3. Delivery and Implementation
 Navigate to **`delivery/`** for project execution:
-- Project plan and communication plan (CSV format)
+- Project plan and communication plan
 - Requirements documentation
 - Implementation guides and configuration templates
 - **`scripts/`** folder - Deployment automation (Bash, Python, Terraform, PowerShell)

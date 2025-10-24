@@ -3,6 +3,16 @@ category: cloud
 solution_name: onpremise-to-cloud-migration
 solution_display_name: Onpremise To Cloud Migration
 description: Seamless enterprise migration to modern cloud platform
+long_description: "Organizations running on-premise infrastructure face high maintenance\
+  \ costs, capacity constraints, and difficulty scaling to meet changing business\
+  \ needs. Migrating to the cloud is complex\u2014it requires assessing current workloads,\
+  \ planning the migration sequence, converting servers, and validating that applications\
+  \ work correctly in the new environment.\n\nThis solution provides a structured\
+  \ approach to migrate on-premise workloads to AWS. It includes discovery tools to\
+  \ inventory current systems, migration planning templates, and automation scripts\
+  \ for common migration patterns. The solution handles server migrations, database\
+  \ conversions, and application modernization while maintaining business continuity\
+  \ throughout the transition.\n"
 version: 1.0.0
 status: In Review
 maintainers:

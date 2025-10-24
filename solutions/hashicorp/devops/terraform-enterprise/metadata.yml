@@ -3,6 +3,20 @@ category: devops
 solution_name: terraform-enterprise
 solution_display_name: Terraform Enterprise
 description: Enterprise infrastructure as code platform
+long_description: 'Teams adopting infrastructure-as-code with Terraform need collaboration
+  features, state management, and governance controls. Storing Terraform state locally
+  or in basic storage risks conflicts, data loss, and security exposure of sensitive
+  information. Without standardization, each team implements Terraform differently,
+  making it hard to share modules and maintain consistency.
+
+
+  This solution implements Terraform Enterprise to provide centralized state management,
+  access controls, and policy enforcement for infrastructure-as-code. It enables team
+  collaboration on Terraform code, provides approval workflows for changes, and integrates
+  with VCS for version control. The solution includes module registry for sharing
+  reusable code and compliance policies that automatically prevent violations.
+
+  '
 version: 1.0.0
 status: In Review
 maintainers:

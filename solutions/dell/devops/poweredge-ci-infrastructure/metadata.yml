@@ -3,6 +3,20 @@ category: devops
 solution_name: poweredge-ci-infrastructure
 solution_display_name: Poweredge Ci Infrastructure
 description: Enterprise CI infrastructure on PowerEdge servers
+long_description: 'Running CI/CD pipelines requires substantial computing resources
+  for building code, running tests, and deploying applications. Cloud-based CI/CD
+  can become expensive at scale, especially for organizations with frequent builds
+  and large test suites. Teams need reliable infrastructure that can handle peak loads
+  without delays in the development process.
+
+
+  This solution provides Dell PowerEdge server infrastructure optimized for CI/CD
+  workloads. It includes configurations for build servers, test environments, and
+  artifact storage with capacity to handle multiple concurrent pipelines. The solution
+  reduces CI/CD costs compared to cloud-only approaches while maintaining the automation
+  and scalability teams need.
+
+  '
 version: 1.0.0
 status: In Review
 maintainers:

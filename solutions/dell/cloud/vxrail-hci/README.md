@@ -5,9 +5,12 @@
 **Version:** 1.0.0
 **Status:** In Review
 
-## Overview
+## Solution Description
 
-Hyperconverged infrastructure for simplified IT
+Traditional data center infrastructure requires separate servers, storage, and networking components that are complex to integrate, scale, and manage. Capacity planning is difficult—organizations often overprovision to avoid outages or underprovision and face performance issues. Managing these separate systems requires specialized expertise and significant time.
+
+This solution implements Dell VxRail hyperconverged infrastructure that combines compute, storage, and networking into a single system. It simplifies deployment with pre-configured nodes that can be added incrementally as needs grow. The solution provides integrated management, automated operations, and seamless integration with VMware for running virtualized workloads.
+
 
 ## 📥 Access This Solution
 
@@ -51,7 +54,7 @@ Navigate to **`presales/`** for business case development and stakeholder engage
 
 ### 3. Delivery and Implementation
 Navigate to **`delivery/`** for project execution:
-- Project plan and communication plan (CSV format)
+- Project plan and communication plan
 - Requirements documentation
 - Implementation guides and configuration templates
 - **`scripts/`** folder - Deployment automation (Bash, Python, Terraform, PowerShell)

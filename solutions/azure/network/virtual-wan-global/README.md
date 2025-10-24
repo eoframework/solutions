@@ -5,9 +5,12 @@
 **Version:** 1.0.0
 **Status:** In Review
 
-## Overview
+## Solution Description
 
-Global WAN connectivity for distributed enterprises
+Organizations with multiple offices, data centers, and cloud resources need reliable connectivity between all locations. Managing separate connections, routing, and security policies for each site is complex and expensive. Network performance issues impact user experience and application availability across distributed operations.
+
+This solution implements Azure Virtual WAN to create a unified global network connecting branches, data centers, and Azure regions. It provides optimized routing through Microsoft's global network, centralized security policies, and simplified management of all connections. The solution reduces network latency and makes it easier to add new locations.
+
 
 ## 📥 Access This Solution
 
@@ -51,7 +54,7 @@ Navigate to **`presales/`** for business case development and stakeholder engage
 
 ### 3. Delivery and Implementation
 Navigate to **`delivery/`** for project execution:
-- Project plan and communication plan (CSV format)
+- Project plan and communication plan
 - Requirements documentation
 - Implementation guides and configuration templates
 - **`scripts/`** folder - Deployment automation (Bash, Python, Terraform, PowerShell)

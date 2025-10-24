@@ -5,9 +5,12 @@
 **Version:** 1.0.0
 **Status:** In Review
 
-## Overview
+## Solution Description
 
-Network-aware CI/CD for infrastructure automation
+Network infrastructure changes often require manual configuration across multiple devices, leading to errors and slow deployment cycles. Teams struggle to track changes, roll back problematic updates, and maintain consistency across environments. Testing network changes in production is risky, but building separate test environments is expensive.
+
+This solution brings DevOps practices to network infrastructure using Cisco automation tools. It enables infrastructure-as-code for network configurations, automated testing of changes, and version-controlled network policies. Teams can deploy network changes through CI/CD pipelines with approval workflows, automated validation, and easy rollback capabilities.
+
 
 ## 📥 Access This Solution
 
@@ -51,7 +54,7 @@ Navigate to **`presales/`** for business case development and stakeholder engage
 
 ### 3. Delivery and Implementation
 Navigate to **`delivery/`** for project execution:
-- Project plan and communication plan (CSV format)
+- Project plan and communication plan
 - Requirements documentation
 - Implementation guides and configuration templates
 - **`scripts/`** folder - Deployment automation (Bash, Python, Terraform, PowerShell)

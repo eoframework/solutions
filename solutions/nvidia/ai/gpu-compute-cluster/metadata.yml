@@ -3,6 +3,21 @@ category: ai
 solution_name: gpu-compute-cluster
 solution_display_name: GPU Compute Cluster
 description: GPU cluster for parallel computing & AI workloads
+long_description: 'Scientific computing, simulations, and data analytics workloads
+  need parallel processing power that traditional CPU-based systems can''t provide
+  efficiently. Setting up GPU computing requires expertise in hardware selection,
+  driver configuration, and optimizing workloads to use GPUs effectively. Sharing
+  GPU resources fairly among multiple users and jobs requires specialized cluster
+  management.
+
+
+  This solution creates an NVIDIA GPU compute cluster for parallel processing workloads.
+  It includes GPU servers, job scheduling, resource management, and monitoring configured
+  specifically for GPU computing. Users can submit jobs that automatically utilize
+  available GPUs, and administrators can manage resources and track utilization across
+  the cluster.
+
+  '
 version: 1.0.0
 status: In Review
 maintainers:

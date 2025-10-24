@@ -5,9 +5,12 @@
 **Version:** 1.0.0
 **Status:** In Review
 
-## Overview
+## Solution Description
 
-Seamless enterprise migration to modern cloud platform
+Organizations running on-premise infrastructure face high maintenance costs, capacity constraints, and difficulty scaling to meet changing business needs. Migrating to the cloud is complex—it requires assessing current workloads, planning the migration sequence, converting servers, and validating that applications work correctly in the new environment.
+
+This solution provides a structured approach to migrate on-premise workloads to AWS. It includes discovery tools to inventory current systems, migration planning templates, and automation scripts for common migration patterns. The solution handles server migrations, database conversions, and application modernization while maintaining business continuity throughout the transition.
+
 
 ## 📥 Access This Solution
 
@@ -51,7 +54,7 @@ Navigate to **`presales/`** for business case development and stakeholder engage
 
 ### 3. Delivery and Implementation
 Navigate to **`delivery/`** for project execution:
-- Project plan and communication plan (CSV format)
+- Project plan and communication plan
 - Requirements documentation
 - Implementation guides and configuration templates
 - **`scripts/`** folder - Deployment automation (Bash, Python, Terraform, PowerShell)

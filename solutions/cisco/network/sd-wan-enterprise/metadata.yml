@@ -3,6 +3,20 @@ category: network
 solution_name: sd-wan-enterprise
 solution_display_name: SD-WAN Enterprise
 description: Enterprise SD-WAN for optimized branch connectivity
+long_description: 'Branch offices traditionally require expensive MPLS circuits for
+  connectivity to headquarters and cloud services. Managing individual configurations
+  for each branch is time-consuming, and changes require site visits or complex remote
+  procedures. Users experience poor performance when accessing cloud applications
+  over backhauled connections through the data center.
+
+
+  This solution deploys Cisco SD-WAN to connect branch offices using multiple internet
+  connections instead of costly MPLS. It automatically routes traffic based on application
+  requirements and network conditions, providing better performance and reliability.
+  The solution centralizes management, allows policy changes across all branches simultaneously,
+  and improves cloud application access with direct internet breakout.
+
+  '
 version: 1.0.0
 status: In Review
 maintainers:

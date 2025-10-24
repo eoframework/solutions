@@ -3,6 +3,19 @@ category: cloud
 solution_name: hybrid-infrastructure
 solution_display_name: HyperFlex Cloud Bridge
 description: Seamless hybrid cloud infrastructure integration
+long_description: 'Organizations running workloads both on-premise and in the cloud
+  need seamless connectivity and consistent management across environments. Managing
+  separate infrastructure, security policies, and operational tools for each environment
+  creates complexity and increases overhead. Applications that span both environments
+  face performance and reliability challenges.
+
+
+  This solution implements Cisco HyperFlex to create a unified hybrid infrastructure
+  platform. It extends on-premise data center capabilities into the cloud with consistent
+  networking, security, and management. The solution allows workloads to move between
+  environments and provides centralized visibility and control across all infrastructure.
+
+  '
 version: 1.0.0
 status: In Review
 maintainers:

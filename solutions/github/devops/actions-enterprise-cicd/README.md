@@ -5,9 +5,12 @@
 **Version:** 1.0.0
 **Status:** In Review
 
-## Overview
+## Solution Description
 
-Enterprise CI/CD automation & workflow management
+Development teams need reliable CI/CD automation, but building and maintaining pipeline infrastructure diverts resources from feature development. Different teams often duplicate effort creating similar pipelines. Without standardization, pipelines become difficult to maintain and troubleshoot when issues occur.
+
+This solution establishes enterprise CI/CD using GitHub Actions with reusable workflows and organization-level policies. It provides pipeline templates for common scenarios, centralized secret management, and self-hosted runners for internal deployments. Teams get automated builds and deployments without managing infrastructure, while maintaining security and compliance controls.
+
 
 ## 📥 Access This Solution
 
@@ -51,7 +54,7 @@ Navigate to **`presales/`** for business case development and stakeholder engage
 
 ### 3. Delivery and Implementation
 Navigate to **`delivery/`** for project execution:
-- Project plan and communication plan (CSV format)
+- Project plan and communication plan
 - Requirements documentation
 - Implementation guides and configuration templates
 - **`scripts/`** folder - Deployment automation (Bash, Python, Terraform, PowerShell)

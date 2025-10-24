@@ -3,6 +3,20 @@ category: ai
 solution_name: precision-ai-workstation
 solution_display_name: Precision AI Workstation
 description: High-performance workstations for AI development
+long_description: 'AI and machine learning development requires substantial computing
+  power for training models and processing large datasets. Standard workstations lack
+  the GPU performance and memory needed for this work, forcing teams to queue for
+  shared resources or wait for cloud instances. This slows down experimentation and
+  model development cycles.
+
+
+  This solution provides Dell Precision workstations configured specifically for AI
+  development with professional-grade GPUs, high-memory configurations, and fast storage.
+  These workstations give data scientists and ML engineers dedicated resources for
+  model development without depending on shared infrastructure. The solution includes
+  software configurations for popular AI frameworks and tools.
+
+  '
 version: 1.0.0
 status: In Review
 maintainers:

@@ -5,9 +5,12 @@
 **Version:** 1.0.0
 **Status:** In Review
 
-## Overview
+## Solution Description
 
-AI-driven network insights for optimized performance
+Network teams troubleshoot issues reactively, often discovering problems only after users complain. Identifying the root cause requires analyzing data from multiple network devices, correlating events, and understanding traffic patterns. Without visibility into network behavior, teams struggle to prevent issues or optimize performance.
+
+This solution uses Cisco AI-powered analytics to monitor network health, predict problems, and provide recommendations. It collects data from network devices, identifies anomalies, and alerts teams before issues impact users. The solution provides insights into application performance, security threats, and capacity planning needs across the network infrastructure.
+
 
 ## 📥 Access This Solution
 
@@ -51,7 +54,7 @@ Navigate to **`presales/`** for business case development and stakeholder engage
 
 ### 3. Delivery and Implementation
 Navigate to **`delivery/`** for project execution:
-- Project plan and communication plan (CSV format)
+- Project plan and communication plan
 - Requirements documentation
 - Implementation guides and configuration templates
 - **`scripts/`** folder - Deployment automation (Bash, Python, Terraform, PowerShell)

@@ -3,6 +3,19 @@ category: modern-workspace
 solution_name: workspace
 solution_display_name: Workspace
 description: Collaborative digital workspace for modern teams
+long_description: 'Organizations need collaboration tools that work seamlessly across
+  email, documents, video conferencing, and messaging. Managing separate tools from
+  different vendors creates complexity and poor user experience. Data ends up scattered
+  across multiple systems, making it hard to find information and collaborate effectively.
+
+
+  This solution deploys Google Workspace providing integrated email, calendar, documents,
+  spreadsheets, presentations, video conferencing, and team chat. Users can collaborate
+  in real-time on documents, schedule meetings easily, and find information across
+  all tools with unified search. The solution includes admin controls, security policies,
+  and integration with existing identity systems.
+
+  '
 version: 1.0.0
 status: In Review
 maintainers:

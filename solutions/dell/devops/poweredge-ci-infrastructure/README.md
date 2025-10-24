@@ -5,9 +5,12 @@
 **Version:** 1.0.0
 **Status:** In Review
 
-## Overview
+## Solution Description
 
-Enterprise CI infrastructure on PowerEdge servers
+Running CI/CD pipelines requires substantial computing resources for building code, running tests, and deploying applications. Cloud-based CI/CD can become expensive at scale, especially for organizations with frequent builds and large test suites. Teams need reliable infrastructure that can handle peak loads without delays in the development process.
+
+This solution provides Dell PowerEdge server infrastructure optimized for CI/CD workloads. It includes configurations for build servers, test environments, and artifact storage with capacity to handle multiple concurrent pipelines. The solution reduces CI/CD costs compared to cloud-only approaches while maintaining the automation and scalability teams need.
+
 
 ## 📥 Access This Solution
 
@@ -51,7 +54,7 @@ Navigate to **`presales/`** for business case development and stakeholder engage
 
 ### 3. Delivery and Implementation
 Navigate to **`delivery/`** for project execution:
-- Project plan and communication plan (CSV format)
+- Project plan and communication plan
 - Requirements documentation
 - Implementation guides and configuration templates
 - **`scripts/`** folder - Deployment automation (Bash, Python, Terraform, PowerShell)

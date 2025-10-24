@@ -3,6 +3,20 @@ category: cyber-security
 solution_name: secure-access
 solution_display_name: Zero Trust Network Gateway
 description: Zero-trust network access for enhanced security
+long_description: 'Traditional network security assumes users inside the network perimeter
+  are trusted, but remote work and cloud applications have eliminated clear perimeters.
+  Users access applications from various devices and locations, making it difficult
+  to verify identity and enforce security policies. Breaches often occur when attackers
+  gain initial access and move laterally through the network.
+
+
+  This solution implements zero-trust network access using Cisco security technologies.
+  It verifies every access request regardless of location, enforces least-privilege
+  access, and continuously validates user and device trust. The solution provides
+  secure access to applications without exposing the entire network and logs all access
+  for compliance and investigation.
+
+  '
 version: 1.0.0
 status: In Review
 maintainers:

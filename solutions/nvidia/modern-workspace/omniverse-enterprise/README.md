@@ -5,9 +5,12 @@
 **Version:** 1.0.0
 **Status:** In Review
 
-## Overview
+## Solution Description
 
-Real-time collaboration platform for 3D workflows
+Design and engineering teams working on 3D content face challenges collaborating when using different software tools. Large 3D files are difficult to share, reviewing designs requires specialized software, and real-time collaboration is nearly impossible. Teams waste time converting files between formats and coordinating changes across team members.
+
+This solution implements NVIDIA Omniverse Enterprise for real-time 3D collaboration and simulation. It connects different 3D tools and allows teams to work on the same project simultaneously regardless of the software they use. The solution provides physically accurate rendering, real-time visualization of changes, and centralized project management for 3D design workflows.
+
 
 ## 📥 Access This Solution
 
@@ -51,7 +54,7 @@ Navigate to **`presales/`** for business case development and stakeholder engage
 
 ### 3. Delivery and Implementation
 Navigate to **`delivery/`** for project execution:
-- Project plan and communication plan (CSV format)
+- Project plan and communication plan
 - Requirements documentation
 - Implementation guides and configuration templates
 - **`scripts/`** folder - Deployment automation (Bash, Python, Terraform, PowerShell)

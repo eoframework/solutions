@@ -3,6 +3,15 @@ category: ai
 solution_name: intelligent-document-processing
 solution_display_name: Intelligent Document Processing
 description: Automate document insights with AI-driven extraction
+long_description: "Organizations process thousands of documents daily\u2014invoices,\
+  \ contracts, forms, and reports\u2014requiring manual data entry and review. This\
+  \ manual processing is slow, error-prone, and prevents teams from focusing on higher-value\
+  \ work. Staff spend hours extracting key information, validating data accuracy,\
+  \ and routing documents to the right teams.\n\nThis solution uses AWS AI services\
+  \ (Textract, Comprehend) to automatically extract text, forms, and tables from documents.\
+  \ It identifies key data points, classifies document types, and routes them based\
+  \ on content. The system handles common business documents like invoices, purchase\
+  \ orders, and contracts without custom training.\n"
 version: 1.0.0
 status: In Review
 maintainers:

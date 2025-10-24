@@ -3,6 +3,20 @@ category: cyber-security
 solution_name: safeid-authentication
 solution_display_name: Safeid Authentication
 description: Multi-factor authentication for secure access
+long_description: 'Password-based authentication is vulnerable to phishing, credential
+  theft, and brute force attacks. Managing passwords is difficult for users and help
+  desk password resets consume significant support resources. Regulatory requirements
+  increasingly demand multi-factor authentication, but deploying MFA across all applications
+  is challenging.
+
+
+  This solution implements Dell SafeID for multi-factor authentication across enterprise
+  applications. It supports multiple authentication methods including hardware tokens,
+  biometrics, and mobile apps. The solution integrates with existing identity systems,
+  provides centralized policy management, and reduces password-related security risks
+  and support costs.
+
+  '
 version: 1.0.0
 status: In Review
 maintainers:

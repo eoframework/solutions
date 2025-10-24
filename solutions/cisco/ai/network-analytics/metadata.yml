@@ -3,6 +3,20 @@ category: ai
 solution_name: network-analytics
 solution_display_name: AI-Powered Network Insights
 description: AI-driven network insights for optimized performance
+long_description: 'Network teams troubleshoot issues reactively, often discovering
+  problems only after users complain. Identifying the root cause requires analyzing
+  data from multiple network devices, correlating events, and understanding traffic
+  patterns. Without visibility into network behavior, teams struggle to prevent issues
+  or optimize performance.
+
+
+  This solution uses Cisco AI-powered analytics to monitor network health, predict
+  problems, and provide recommendations. It collects data from network devices, identifies
+  anomalies, and alerts teams before issues impact users. The solution provides insights
+  into application performance, security threats, and capacity planning needs across
+  the network infrastructure.
+
+  '
 version: 1.0.0
 status: In Review
 maintainers:

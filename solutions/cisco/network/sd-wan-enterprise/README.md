@@ -5,9 +5,12 @@
 **Version:** 1.0.0
 **Status:** In Review
 
-## Overview
+## Solution Description
 
-Enterprise SD-WAN for optimized branch connectivity
+Branch offices traditionally require expensive MPLS circuits for connectivity to headquarters and cloud services. Managing individual configurations for each branch is time-consuming, and changes require site visits or complex remote procedures. Users experience poor performance when accessing cloud applications over backhauled connections through the data center.
+
+This solution deploys Cisco SD-WAN to connect branch offices using multiple internet connections instead of costly MPLS. It automatically routes traffic based on application requirements and network conditions, providing better performance and reliability. The solution centralizes management, allows policy changes across all branches simultaneously, and improves cloud application access with direct internet breakout.
+
 
 ## 📥 Access This Solution
 
@@ -51,7 +54,7 @@ Navigate to **`presales/`** for business case development and stakeholder engage
 
 ### 3. Delivery and Implementation
 Navigate to **`delivery/`** for project execution:
-- Project plan and communication plan (CSV format)
+- Project plan and communication plan
 - Requirements documentation
 - Implementation guides and configuration templates
 - **`scripts/`** folder - Deployment automation (Bash, Python, Terraform, PowerShell)

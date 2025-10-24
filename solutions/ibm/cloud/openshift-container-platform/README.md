@@ -5,9 +5,12 @@
 **Version:** 1.0.0
 **Status:** In Review
 
-## Overview
+## Solution Description
 
-Enterprise container platform for modern applications
+Organizations adopting containers need a platform that runs applications consistently across different environments—data center, cloud, and edge. Kubernetes alone requires significant expertise and additional tools for logging, monitoring, networking, and security. Development teams need self-service capabilities while operations teams need control and visibility.
+
+This solution deploys Red Hat OpenShift on IBM Cloud as an enterprise Kubernetes platform. It adds developer tools, integrated CI/CD, security policies, and operational capabilities on top of Kubernetes. The platform provides a consistent runtime environment across locations, includes built-in monitoring and logging, and gives developers self-service application deployment with guardrails.
+
 
 ## 📥 Access This Solution
 
@@ -51,7 +54,7 @@ Navigate to **`presales/`** for business case development and stakeholder engage
 
 ### 3. Delivery and Implementation
 Navigate to **`delivery/`** for project execution:
-- Project plan and communication plan (CSV format)
+- Project plan and communication plan
 - Requirements documentation
 - Implementation guides and configuration templates
 - **`scripts/`** folder - Deployment automation (Bash, Python, Terraform, PowerShell)

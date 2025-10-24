@@ -3,6 +3,19 @@ category: devops
 solution_name: actions-enterprise-cicd
 solution_display_name: GitHub Workflow Automation
 description: Enterprise CI/CD automation & workflow management
+long_description: 'Development teams need reliable CI/CD automation, but building
+  and maintaining pipeline infrastructure diverts resources from feature development.
+  Different teams often duplicate effort creating similar pipelines. Without standardization,
+  pipelines become difficult to maintain and troubleshoot when issues occur.
+
+
+  This solution establishes enterprise CI/CD using GitHub Actions with reusable workflows
+  and organization-level policies. It provides pipeline templates for common scenarios,
+  centralized secret management, and self-hosted runners for internal deployments.
+  Teams get automated builds and deployments without managing infrastructure, while
+  maintaining security and compliance controls.
+
+  '
 version: 1.0.0
 status: In Review
 maintainers:

@@ -3,6 +3,20 @@ category: network
 solution_name: powerswitch-datacenter
 solution_display_name: Powerswitch Datacenter
 description: High-performance datacenter switching fabric
+long_description: 'Data center networks must handle high-speed traffic between servers,
+  storage, and external connections without becoming a bottleneck. Network complexity
+  grows as organizations add virtualization, containers, and hybrid cloud connectivity.
+  Managing individual switch configurations and troubleshooting network issues across
+  many devices is time-consuming.
+
+
+  This solution implements Dell PowerSwitch data center networking with high-speed
+  switches designed for modern data center workloads. It provides low-latency connectivity
+  for server-to-server traffic, supports automation for configuration management,
+  and includes monitoring for identifying performance issues. The solution scales
+  from small data centers to large facilities with thousands of connections.
+
+  '
 version: 1.0.0
 status: In Review
 maintainers:

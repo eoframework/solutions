@@ -3,6 +3,16 @@ category: cyber-security
 solution_name: sentinel-siem
 solution_display_name: Sentinel SIEM
 description: Cloud SIEM for advanced threat detection & response
+long_description: "Security teams face an overwhelming volume of alerts from multiple\
+  \ tools\u2014firewalls, endpoints, cloud services, and applications. Analysts spend\
+  \ significant time correlating events across systems, investigating false positives,\
+  \ and trying to identify real threats before they cause damage. Without centralized\
+  \ visibility, threats can go undetected across your environment.\n\nThis solution\
+  \ implements Azure Sentinel as a cloud-based SIEM that collects security data from\
+  \ across your infrastructure. It correlates events, detects anomalies using built-in\
+  \ analytics rules, and provides investigation tools to respond to incidents. The\
+  \ solution includes pre-configured connectors for common security tools and playbooks\
+  \ for automated response.\n"
 version: 1.0.0
 status: In Review
 maintainers:

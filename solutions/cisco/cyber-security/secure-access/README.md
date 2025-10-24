@@ -5,9 +5,12 @@
 **Version:** 1.0.0
 **Status:** In Review
 
-## Overview
+## Solution Description
 
-Zero-trust network access for enhanced security
+Traditional network security assumes users inside the network perimeter are trusted, but remote work and cloud applications have eliminated clear perimeters. Users access applications from various devices and locations, making it difficult to verify identity and enforce security policies. Breaches often occur when attackers gain initial access and move laterally through the network.
+
+This solution implements zero-trust network access using Cisco security technologies. It verifies every access request regardless of location, enforces least-privilege access, and continuously validates user and device trust. The solution provides secure access to applications without exposing the entire network and logs all access for compliance and investigation.
+
 
 ## 📥 Access This Solution
 
@@ -51,7 +54,7 @@ Navigate to **`presales/`** for business case development and stakeholder engage
 
 ### 3. Delivery and Implementation
 Navigate to **`delivery/`** for project execution:
-- Project plan and communication plan (CSV format)
+- Project plan and communication plan
 - Requirements documentation
 - Implementation guides and configuration templates
 - **`scripts/`** folder - Deployment automation (Bash, Python, Terraform, PowerShell)

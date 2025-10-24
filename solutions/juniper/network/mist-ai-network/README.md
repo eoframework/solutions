@@ -5,9 +5,12 @@
 **Version:** 1.0.0
 **Status:** In Review
 
-## Overview
+## Solution Description
 
-AI-driven network operations & user experiences
+Wireless networks are critical infrastructure, but troubleshooting connectivity issues is time-consuming and reactive. Network teams receive vague complaints like "WiFi is slow" without tools to identify root causes quickly. Planning WiFi coverage requires specialized expertise, and changes made in one area can impact other locations unexpectedly.
+
+This solution uses Juniper Mist AI-driven wireless networking with machine learning to optimize performance and troubleshoot issues automatically. It provides real-time visibility into user experience, identifies problems before users report them, and recommends fixes. The solution simplifies WiFi planning with AI-powered coverage analysis and automates routine network operations.
+
 
 ## 📥 Access This Solution
 
@@ -51,7 +54,7 @@ Navigate to **`presales/`** for business case development and stakeholder engage
 
 ### 3. Delivery and Implementation
 Navigate to **`delivery/`** for project execution:
-- Project plan and communication plan (CSV format)
+- Project plan and communication plan
 - Requirements documentation
 - Implementation guides and configuration templates
 - **`scripts/`** folder - Deployment automation (Bash, Python, Terraform, PowerShell)

@@ -47,6 +47,7 @@ def generate_clean_readme(metadata, provider_display, category_display):
     solution_name = metadata.get('solution_name', '').lower()
     solution_display = metadata.get('solution_display_name', solution_name.replace('-', ' ').title())
     description = metadata.get('description', '')
+    long_description = metadata.get('long_description', description)
     version = metadata.get('version', '1.0.0')
     status = metadata.get('status', 'In Review')
     solution_path = f"solutions/{provider}/{category}/{solution_name}"
@@ -58,9 +59,9 @@ def generate_clean_readme(metadata, provider_display, category_display):
 **Version:** {version}
 **Status:** {status}
 
-## Overview
+## Solution Description
 
-{description}
+{long_description}
 
 ## 📥 Access This Solution
 
@@ -104,7 +105,7 @@ Navigate to **`presales/`** for business case development and stakeholder engage
 
 ### 3. Delivery and Implementation
 Navigate to **`delivery/`** for project execution:
-- Project plan and communication plan (CSV format)
+- Project plan and communication plan
 - Requirements documentation
 - Implementation guides and configuration templates
 - **`scripts/`** folder - Deployment automation (Bash, Python, Terraform, PowerShell)

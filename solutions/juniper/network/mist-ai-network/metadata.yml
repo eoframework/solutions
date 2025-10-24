@@ -3,6 +3,20 @@ category: network
 solution_name: mist-ai-network
 solution_display_name: Mist AI Network
 description: AI-driven network operations & user experiences
+long_description: 'Wireless networks are critical infrastructure, but troubleshooting
+  connectivity issues is time-consuming and reactive. Network teams receive vague
+  complaints like "WiFi is slow" without tools to identify root causes quickly. Planning
+  WiFi coverage requires specialized expertise, and changes made in one area can impact
+  other locations unexpectedly.
+
+
+  This solution uses Juniper Mist AI-driven wireless networking with machine learning
+  to optimize performance and troubleshoot issues automatically. It provides real-time
+  visibility into user experience, identifies problems before users report them, and
+  recommends fixes. The solution simplifies WiFi planning with AI-powered coverage
+  analysis and automates routine network operations.
+
+  '
 version: 1.0.0
 status: In Review
 maintainers:

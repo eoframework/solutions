@@ -5,9 +5,12 @@
 **Version:** 1.0.0
 **Status:** In Review
 
-## Overview
+## Solution Description
 
-IT automation platform for operational efficiency
+IT operations teams manage thousands of servers, network devices, and cloud resources using manual procedures or custom scripts. This approach is error-prone, time-consuming, and doesn't scale. Changes made manually are difficult to track, audit, and reverse when problems occur. Knowledge about how systems are configured exists in people's heads rather than in documented, testable code.
+
+This solution implements Red Hat Ansible Automation Platform to automate IT operations across infrastructure. It provides automation playbooks for common tasks, centralized execution and scheduling, and role-based access control. Teams can automate server configuration, application deployment, and routine maintenance tasks with auditable, version-controlled automation code. The solution reduces manual errors and frees IT staff for higher-value work.
+
 
 ## 📥 Access This Solution
 
@@ -51,7 +54,7 @@ Navigate to **`presales/`** for business case development and stakeholder engage
 
 ### 3. Delivery and Implementation
 Navigate to **`delivery/`** for project execution:
-- Project plan and communication plan (CSV format)
+- Project plan and communication plan
 - Requirements documentation
 - Implementation guides and configuration templates
 - **`scripts/`** folder - Deployment automation (Bash, Python, Terraform, PowerShell)

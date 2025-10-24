@@ -5,9 +5,12 @@
 **Version:** 1.0.0
 **Status:** In Review
 
-## Overview
+## Solution Description
 
-Seamless hybrid cloud infrastructure integration
+Organizations running workloads both on-premise and in the cloud need seamless connectivity and consistent management across environments. Managing separate infrastructure, security policies, and operational tools for each environment creates complexity and increases overhead. Applications that span both environments face performance and reliability challenges.
+
+This solution implements Cisco HyperFlex to create a unified hybrid infrastructure platform. It extends on-premise data center capabilities into the cloud with consistent networking, security, and management. The solution allows workloads to move between environments and provides centralized visibility and control across all infrastructure.
+
 
 ## 📥 Access This Solution
 
@@ -51,7 +54,7 @@ Navigate to **`presales/`** for business case development and stakeholder engage
 
 ### 3. Delivery and Implementation
 Navigate to **`delivery/`** for project execution:
-- Project plan and communication plan (CSV format)
+- Project plan and communication plan
 - Requirements documentation
 - Implementation guides and configuration templates
 - **`scripts/`** folder - Deployment automation (Bash, Python, Terraform, PowerShell)

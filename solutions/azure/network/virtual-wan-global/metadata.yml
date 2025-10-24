@@ -3,6 +3,19 @@ category: network
 solution_name: virtual-wan-global
 solution_display_name: Virtual Wan Global
 description: Global WAN connectivity for distributed enterprises
+long_description: 'Organizations with multiple offices, data centers, and cloud resources
+  need reliable connectivity between all locations. Managing separate connections,
+  routing, and security policies for each site is complex and expensive. Network performance
+  issues impact user experience and application availability across distributed operations.
+
+
+  This solution implements Azure Virtual WAN to create a unified global network connecting
+  branches, data centers, and Azure regions. It provides optimized routing through
+  Microsoft''s global network, centralized security policies, and simplified management
+  of all connections. The solution reduces network latency and makes it easier to
+  add new locations.
+
+  '
 version: 1.0.0
 status: In Review
 maintainers:

@@ -5,9 +5,12 @@
 **Version:** 1.0.0
 **Status:** In Review
 
-## Overview
+## Solution Description
 
-Rapid business continuity with automated failover
+Web applications are critical to business operations, but outages due to hardware failures, regional disruptions, or disasters can cause significant revenue loss and customer impact. Traditional disaster recovery solutions are expensive to maintain and complex to test, often requiring duplicate infrastructure that sits idle until needed.
+
+This solution implements automated disaster recovery for web applications using AWS services across multiple regions. It continuously replicates application data, maintains backup environments, and can failover automatically when primary systems become unavailable. The solution includes regular testing procedures to ensure recovery capabilities work when needed.
+
 
 ## 📥 Access This Solution
 
@@ -51,7 +54,7 @@ Navigate to **`presales/`** for business case development and stakeholder engage
 
 ### 3. Delivery and Implementation
 Navigate to **`delivery/`** for project execution:
-- Project plan and communication plan (CSV format)
+- Project plan and communication plan
 - Requirements documentation
 - Implementation guides and configuration templates
 - **`scripts/`** folder - Deployment automation (Bash, Python, Terraform, PowerShell)

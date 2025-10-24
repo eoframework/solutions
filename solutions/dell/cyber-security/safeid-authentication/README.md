@@ -5,9 +5,12 @@
 **Version:** 1.0.0
 **Status:** In Review
 
-## Overview
+## Solution Description
 
-Multi-factor authentication for secure access
+Password-based authentication is vulnerable to phishing, credential theft, and brute force attacks. Managing passwords is difficult for users and help desk password resets consume significant support resources. Regulatory requirements increasingly demand multi-factor authentication, but deploying MFA across all applications is challenging.
+
+This solution implements Dell SafeID for multi-factor authentication across enterprise applications. It supports multiple authentication methods including hardware tokens, biometrics, and mobile apps. The solution integrates with existing identity systems, provides centralized policy management, and reduces password-related security risks and support costs.
+
 
 ## 📥 Access This Solution
 
@@ -51,7 +54,7 @@ Navigate to **`presales/`** for business case development and stakeholder engage
 
 ### 3. Delivery and Implementation
 Navigate to **`delivery/`** for project execution:
-- Project plan and communication plan (CSV format)
+- Project plan and communication plan
 - Requirements documentation
 - Implementation guides and configuration templates
 - **`scripts/`** folder - Deployment automation (Bash, Python, Terraform, PowerShell)

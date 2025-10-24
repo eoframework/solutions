@@ -5,9 +5,12 @@
 **Version:** 1.0.0
 **Status:** In Review
 
-## Overview
+## Solution Description
 
-Automate document insights with AI-driven extraction
+Organizations process thousands of documents daily—invoices, contracts, forms, and reports—requiring manual data entry and review. This manual processing is slow, error-prone, and prevents teams from focusing on higher-value work. Staff spend hours extracting key information, validating data accuracy, and routing documents to the right teams.
+
+This solution uses AWS AI services (Textract, Comprehend) to automatically extract text, forms, and tables from documents. It identifies key data points, classifies document types, and routes them based on content. The system handles common business documents like invoices, purchase orders, and contracts without custom training.
+
 
 ## 📥 Access This Solution
 
@@ -51,7 +54,7 @@ Navigate to **`presales/`** for business case development and stakeholder engage
 
 ### 3. Delivery and Implementation
 Navigate to **`delivery/`** for project execution:
-- Project plan and communication plan (CSV format)
+- Project plan and communication plan
 - Requirements documentation
 - Implementation guides and configuration templates
 - **`scripts/`** folder - Deployment automation (Bash, Python, Terraform, PowerShell)

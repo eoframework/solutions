@@ -5,9 +5,12 @@
 **Version:** 1.0.0
 **Status:** In Review
 
-## Overview
+## Solution Description
 
-Secure cloud foundation with governance & controls
+Starting on Google Cloud without a proper foundation leads to security gaps, disorganized resources, and management challenges as usage grows. Teams need guardrails that prevent misconfigurations while allowing them to work independently. Building a secure, scalable cloud foundation requires understanding Google Cloud best practices and implementing many interconnected configurations.
+
+This solution implements Google Cloud's enterprise foundation blueprint with security controls, networking, identity management, and governance policies. It creates organizational structure, sets up billing, configures logging and monitoring, and establishes policies that enforce security requirements. The landing zone provides teams with secure project environments while maintaining centralized oversight.
+
 
 ## 📥 Access This Solution
 
@@ -51,7 +54,7 @@ Navigate to **`presales/`** for business case development and stakeholder engage
 
 ### 3. Delivery and Implementation
 Navigate to **`delivery/`** for project execution:
-- Project plan and communication plan (CSV format)
+- Project plan and communication plan
 - Requirements documentation
 - Implementation guides and configuration templates
 - **`scripts/`** folder - Deployment automation (Bash, Python, Terraform, PowerShell)
