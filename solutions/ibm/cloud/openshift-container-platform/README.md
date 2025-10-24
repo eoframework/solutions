@@ -65,8 +65,8 @@ All templates and configuration files can be modified to meet your specific requ
 
 ## 📄 License
 
-For license information see: https://www.eoframework.org/license/
+For license information see: <a href="https://www.eoframework.org/license/" target="_blank">https://www.eoframework.org/license/</a>
 
 ---
 
-**[EO Framework™](https://eoframework.org)** - Exceptional Outcome Framework
+**<a href="https://eoframework.org" target="_blank">EO Framework™</a>** - Exceptional Outcome Framework
