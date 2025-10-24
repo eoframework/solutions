@@ -66,7 +66,8 @@ def sync_to_csv(output_type='private', git_based=False):
         headers = ['Provider', 'Category', 'SolutionName', 'Description', 'Templates', 'Status']
     else:  # public
         if git_based:
-            headers = ['Provider', 'Category', 'SolutionName', 'Description', 'Version', 'GitURL', 'RawURL', 'LatestTag', 'Website', 'SupportEmail', 'Status']
+            # Keep DownloadUrl column name for website compatibility, but use Git URLs
+            headers = ['Provider', 'Category', 'SolutionName', 'Description', 'Version', 'DownloadUrl', 'RawURL', 'LatestTag', 'Website', 'SupportEmail', 'Status']
         else:
             headers = ['Provider', 'Category', 'SolutionName', 'Description', 'Version', 'DownloadUrl', 'ManifestUrl', 'Website', 'SupportEmail', 'Status']
     
@@ -119,8 +120,9 @@ def sync_to_csv(output_type='private', git_based=False):
 
                                             if git_based:
                                                 # Git-based folder publishing
+                                                # Use Git URLs but keep DownloadUrl column name for website compatibility
                                                 base_url = "https://github.com/eoframework/public-assets"
-                                                git_url = f"{base_url}/tree/main/{solution_path}"
+                                                download_url = f"{base_url}/tree/main/{solution_path}"  # Git folder URL
                                                 raw_url = f"https://raw.githubusercontent.com/eoframework/public-assets/main/{solution_path}"
                                                 tag_name = f"{provider_name}/{category_name}/{solution_name}-v{version}"
 
@@ -130,7 +132,7 @@ def sync_to_csv(output_type='private', git_based=False):
                                                     solution_display,
                                                     description,
                                                     version,
-                                                    git_url,
+                                                    download_url,  # DownloadUrl column points to Git folder
                                                     raw_url,
                                                     tag_name,
                                                     website,
