@@ -1,0 +1,255 @@
+name: Publish Solutions to Public Assets
+
+on:
+  push:
+    paths:
+      - 'solutions/**'
+    branches:
+      - main
+  workflow_dispatch:
+    inputs:
+      publish_mode:
+        description: 'Publishing mode'
+        required: true
+        default: 'changed'
+        type: choice
+        options:
+          - changed
+          - all
+          - single
+      solution_path:
+        description: 'Specific solution to publish (only if mode=single, e.g., solutions/aws/ai/intelligent-document-processing)'
+        required: false
+
+jobs:
+  detect-changes:
+    name: Detect Changed Solutions
+    runs-on: ubuntu-latest
+    outputs:
+      solutions: ${{ steps.detect.outputs.solutions }}
+      has_changes: ${{ steps.detect.outputs.has_changes }}
+    steps:
+      - name: Checkout solutions repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Detect changed solutions
+        id: detect
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            # Manual trigger
+            if [ "${{ inputs.publish_mode }}" = "all" ]; then
+              echo "📦 Mode: Publish ALL solutions (initial setup)"
+              SOLUTIONS=$(find solutions -mindepth 4 -maxdepth 4 -type d | \
+                jq -R -s -c 'split("\n") | map(select(length > 0))')
+              echo "solutions=$SOLUTIONS" >> $GITHUB_OUTPUT
+              echo "has_changes=true" >> $GITHUB_OUTPUT
+              echo "Total solutions to publish: $(echo $SOLUTIONS | jq 'length')"
+            elif [ "${{ inputs.publish_mode }}" = "single" ] && [ -n "${{ inputs.solution_path }}" ]; then
+              echo "📦 Mode: Publish single solution"
+              echo "solutions=[\"${{ inputs.solution_path }}\"]" >> $GITHUB_OUTPUT
+              echo "has_changes=true" >> $GITHUB_OUTPUT
+            else
+              echo "❌ Error: Invalid workflow_dispatch configuration"
+              exit 1
+            fi
+          else
+            # Automatic trigger - detect changed solutions
+            CHANGED_FILES=$(git diff --name-only HEAD~1 HEAD | grep '^solutions/' || true)
+
+            if [ -z "$CHANGED_FILES" ]; then
+              echo "has_changes=false" >> $GITHUB_OUTPUT
+              echo "solutions=[]" >> $GITHUB_OUTPUT
+              echo "ℹ️ No solution changes detected"
+            else
+              # Extract unique solution paths (provider/category/solution)
+              SOLUTIONS=$(echo "$CHANGED_FILES" | \
+                cut -d'/' -f1-4 | \
+                sort -u | \
+                jq -R -s -c 'split("\n") | map(select(length > 0))')
+
+              echo "solutions=$SOLUTIONS" >> $GITHUB_OUTPUT
+              echo "has_changes=true" >> $GITHUB_OUTPUT
+              echo "📋 Changed solutions: $SOLUTIONS"
+            fi
+          fi
+
+  publish-solutions:
+    name: Sync Solutions to Public Assets
+    needs: detect-changes
+    if: needs.detect-changes.outputs.has_changes == 'true'
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        solution: ${{ fromJson(needs.detect-changes.outputs.solutions) }}
+      fail-fast: false
+    steps:
+      - name: Checkout solutions repository
+        uses: actions/checkout@v4
+        with:
+          path: solutions-repo
+          fetch-depth: 0
+
+      - name: Checkout public-assets repository
+        uses: actions/checkout@v4
+        with:
+          repository: eoframework/public-assets
+          token: ${{ secrets.PUBLIC_ASSETS_TOKEN }}
+          path: public-assets
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pyyaml
+
+      - name: Sync solution folder to public-assets
+        run: |
+          cd solutions-repo
+          python3 support/tools/sync-solution.py \
+            --solution "${{ matrix.solution }}" \
+            --target "../public-assets" \
+            --create-tag
+
+      - name: Commit and push to public-assets
+        run: |
+          cd public-assets
+
+          # Configure git
+          git config user.name "GitHub Actions Bot"
+          git config user.email "actions@github.com"
+
+          # Check for changes
+          if git diff --quiet && git diff --staged --quiet; then
+            echo "ℹ️ No changes to commit for ${{ matrix.solution }}"
+            exit 0
+          fi
+
+          # Get solution metadata for commit message
+          SOLUTION_PATH="${{ matrix.solution }}"
+          METADATA_FILE="${SOLUTION_PATH}/metadata.yml"
+
+          if [ -f "$METADATA_FILE" ]; then
+            SOLUTION_NAME=$(python3 -c "import yaml; print(yaml.safe_load(open('$METADATA_FILE'))['solution_display_name'])" 2>/dev/null || echo "Solution")
+            VERSION=$(python3 -c "import yaml; print(yaml.safe_load(open('$METADATA_FILE'))['version'])" 2>/dev/null || echo "1.0.0")
+          else
+            SOLUTION_NAME=$(basename "${{ matrix.solution }}")
+            VERSION="1.0.0"
+          fi
+
+          # Commit changes
+          git add .
+          git commit -m "Publish ${SOLUTION_NAME} v${VERSION}" \
+            -m "Automated sync from solutions repository" \
+            -m "Source: ${{ github.repository }}@${{ github.sha }}" \
+            -m "Solution: ${{ matrix.solution }}"
+
+          # Push main branch
+          git push origin main
+          echo "✅ Pushed changes to main branch"
+
+          # Create and push git tag if TAG_NAME was set by sync script
+          if [ -f .tag-info ]; then
+            TAG_NAME=$(cat .tag-info)
+            rm .tag-info
+
+            # Check if tag already exists
+            if git rev-parse "$TAG_NAME" >/dev/null 2>&1; then
+              echo "ℹ️ Tag $TAG_NAME already exists, skipping tag creation"
+            else
+              git tag -a "$TAG_NAME" -m "Release ${SOLUTION_NAME} v${VERSION}"
+              git push origin "$TAG_NAME"
+              echo "✅ Created and pushed tag: $TAG_NAME"
+            fi
+          fi
+
+  update-catalog:
+    name: Update Solution Catalog
+    needs: publish-solutions
+    if: needs.detect-changes.outputs.has_changes == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout solutions repository
+        uses: actions/checkout@v4
+        with:
+          path: solutions-repo
+
+      - name: Checkout public-assets repository
+        uses: actions/checkout@v4
+        with:
+          repository: eoframework/public-assets
+          token: ${{ secrets.PUBLIC_ASSETS_TOKEN }}
+          path: public-assets
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+
+      - name: Install dependencies
+        run: |
+          pip install pyyaml
+
+      - name: Generate catalog CSV and JSON
+        run: |
+          cd solutions-repo
+          python3 support/tools/export-templates-csv.py --output-type public --git-based
+
+          # Copy catalog files to public-assets
+          mkdir -p ../public-assets/catalog
+          cp support/exports/solutions.csv ../public-assets/catalog/solutions.csv
+          cp support/exports/solutions.json ../public-assets/catalog/solutions.json
+
+      - name: Commit catalog updates
+        run: |
+          cd public-assets
+
+          git config user.name "GitHub Actions Bot"
+          git config user.email "actions@github.com"
+
+          if git diff --quiet catalog/; then
+            echo "ℹ️ No catalog changes"
+            exit 0
+          fi
+
+          git add catalog/
+          git commit -m "Update solution catalog" \
+            -m "Automated catalog generation" \
+            -m "Source: ${{ github.repository }}@${{ github.sha }}"
+
+          git push origin main
+          echo "✅ Updated solution catalog"
+
+  summary:
+    name: Publishing Summary
+    needs: [detect-changes, publish-solutions, update-catalog]
+    if: always() && needs.detect-changes.outputs.has_changes == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Create summary
+        run: |
+          echo "## 📦 Solution Publishing Complete" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Publishing Mode:** Folder-based (Git repository)" >> $GITHUB_STEP_SUMMARY
+          echo "**Solutions Processed:** ${{ needs.detect-changes.outputs.solutions }}" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### ✅ Published Components" >> $GITHUB_STEP_SUMMARY
+          echo "- Solution folders synced to main branch" >> $GITHUB_STEP_SUMMARY
+          echo "- Git tags created for version tracking" >> $GITHUB_STEP_SUMMARY
+          echo "- Solution catalog updated" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Repository:** https://github.com/eoframework/public-assets" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### 📖 User Access" >> $GITHUB_STEP_SUMMARY
+          echo "\`\`\`bash" >> $GITHUB_STEP_SUMMARY
+          echo "# Clone with sparse checkout" >> $GITHUB_STEP_SUMMARY
+          echo "git clone --filter=blob:none --sparse https://github.com/eoframework/public-assets" >> $GITHUB_STEP_SUMMARY
+          echo "cd public-assets" >> $GITHUB_STEP_SUMMARY
+          echo "git sparse-checkout set solutions/PROVIDER/CATEGORY/SOLUTION" >> $GITHUB_STEP_SUMMARY
+          echo "\`\`\`" >> $GITHUB_STEP_SUMMARY

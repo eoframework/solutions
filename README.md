@@ -109,7 +109,52 @@ Network infrastructure, connectivity, and management solutions
 
 ## 🚀 **Quick Start Guide**
 
-### **Option 1: Browse Existing Solutions**
+### **For Solution Users: Access Public Solutions**
+
+Solutions are distributed via Git repository for maximum transparency and flexibility.
+
+**📦 Public Repository:** [eoframework/public-assets](https://github.com/eoframework/public-assets)
+
+**Option 1: Browse on GitHub (No Download)**
+```
+Visit: https://github.com/eoframework/public-assets
+Navigate: solutions/ → provider/ → category/ → solution-name/
+```
+
+**Option 2: Download Specific Solution (Recommended)**
+```bash
+# Quick download with helper script
+curl -O https://raw.githubusercontent.com/eoframework/public-assets/main/download-solution.sh
+chmod +x download-solution.sh
+./download-solution.sh aws/ai/intelligent-document-processing
+
+# Or use Git sparse checkout
+git clone --filter=blob:none --sparse https://github.com/eoframework/public-assets.git
+cd public-assets
+git sparse-checkout set solutions/aws/ai/intelligent-document-processing
+```
+
+**Option 3: Download Multiple Solutions**
+```bash
+git clone --filter=blob:none --sparse https://github.com/eoframework/public-assets.git
+cd public-assets
+git sparse-checkout set solutions/aws solutions/azure
+```
+
+**Option 4: View Solution Catalog**
+```bash
+# Download catalog
+wget https://raw.githubusercontent.com/eoframework/public-assets/main/catalog/solutions.csv
+
+# View available solutions
+cat solutions.csv | column -t -s ','
+```
+
+**📖 Full Documentation:** See [Git-Based Distribution Guide](support/docs/git-based-distribution.md)
+
+---
+
+### **For Contributors: Browse Repository Solutions**
 
 **By Provider** (Find all solutions from a specific vendor):
 ```bash
@@ -129,19 +174,9 @@ find solutions/ -path "*/ai/*" -type d -mindepth 3 -maxdepth 3
 find solutions/ -path "*/cloud/*" -type d -mindepth 3 -maxdepth 3
 ```
 
-**Using Catalog System** (Advanced search and discovery):
-```bash
-# Search by provider
-python3 support/tools/aggregator.py --provider aws
+---
 
-# Search by category
-python3 support/tools/aggregator.py --category ai
-
-# Search by complexity
-python3 support/tools/aggregator.py --complexity advanced
-```
-
-### **Option 2: Create New Solution**
+### **For Contributors: Create New Solution**
 
 Use our automated template creator:
 
