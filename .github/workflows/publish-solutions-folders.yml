@@ -41,7 +41,7 @@ jobs:
             # Manual trigger
             if [ "${{ inputs.publish_mode }}" = "all" ]; then
               echo "📦 Mode: Publish ALL solutions (initial setup)"
-              SOLUTIONS=$(find solutions -mindepth 4 -maxdepth 4 -type d | \
+              SOLUTIONS=$(find solutions -mindepth 3 -maxdepth 3 -type d | \
                 jq -R -s -c 'split("\n") | map(select(length > 0))')
               echo "solutions=$SOLUTIONS" >> $GITHUB_OUTPUT
               echo "has_changes=true" >> $GITHUB_OUTPUT
