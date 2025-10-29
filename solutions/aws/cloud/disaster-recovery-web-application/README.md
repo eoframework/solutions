@@ -18,7 +18,7 @@ This solution implements automated disaster recovery for web applications using 
 
 **Option 1: Using Helper Script**
 ```bash
-curl -O https://raw.githubusercontent.com/eoframework/public-assets/main/download-solution.sh
+curl -O https://raw.githubusercontent.com/eoframework/solutions/main/support/tools/download-solution.sh
 chmod +x download-solution.sh
 ./download-solution.sh aws/cloud/disaster-recovery-web-application
 ```
@@ -26,8 +26,8 @@ chmod +x download-solution.sh
 **Option 2: Git Sparse Checkout (Recommended)**
 ```bash
 # Clone with sparse checkout
-git clone --filter=blob:none --sparse https://github.com/eoframework/public-assets.git
-cd public-assets
+git clone --filter=blob:none --sparse https://github.com/eoframework/solutions.git
+cd solutions
 
 # Checkout this specific solution
 git sparse-checkout set solutions/aws/cloud/disaster-recovery-web-application
@@ -38,7 +38,7 @@ ls -la
 ```
 
 **Option 3: Browse on GitHub**
-- View online: https://github.com/eoframework/public-assets/tree/main/solutions/aws/cloud/disaster-recovery-web-application
+- View online: https://github.com/eoframework/solutions/tree/main/solutions/aws/cloud/disaster-recovery-web-application
 
 ## 🚀 Getting Started
 

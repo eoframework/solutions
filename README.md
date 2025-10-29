@@ -109,48 +109,48 @@ Network infrastructure, connectivity, and management solutions
 
 ## 🚀 **Quick Start Guide**
 
-### **For Solution Users: Access Public Solutions**
+### **For Solution Users: Access Solutions**
 
-Solutions are distributed via Git repository for maximum transparency and flexibility.
+All solutions are publicly available in this repository for maximum transparency and flexibility.
 
-**📦 Public Repository:** [eoframework/public-assets](https://github.com/eoframework/public-assets)
+**📦 Repository:** [eoframework/solutions](https://github.com/eoframework/solutions)
 
 **Option 1: Browse on GitHub (No Download)**
 ```
-Visit: https://github.com/eoframework/public-assets
+Visit: https://github.com/eoframework/solutions
 Navigate: solutions/ → provider/ → category/ → solution-name/
 ```
 
 **Option 2: Download Specific Solution (Recommended)**
 ```bash
 # Quick download with helper script
-curl -O https://raw.githubusercontent.com/eoframework/public-assets/main/download-solution.sh
+curl -O https://raw.githubusercontent.com/eoframework/solutions/main/support/tools/download-solution.sh
 chmod +x download-solution.sh
 ./download-solution.sh aws/ai/intelligent-document-processing
 
 # Or use Git sparse checkout
-git clone --filter=blob:none --sparse https://github.com/eoframework/public-assets.git
-cd public-assets
+git clone --filter=blob:none --sparse https://github.com/eoframework/solutions.git
+cd solutions
 git sparse-checkout set solutions/aws/ai/intelligent-document-processing
 ```
 
 **Option 3: Download Multiple Solutions**
 ```bash
-git clone --filter=blob:none --sparse https://github.com/eoframework/public-assets.git
-cd public-assets
+git clone --filter=blob:none --sparse https://github.com/eoframework/solutions.git
+cd solutions
 git sparse-checkout set solutions/aws solutions/azure
 ```
 
 **Option 4: View Solution Catalog**
 ```bash
 # Download catalog
-wget https://raw.githubusercontent.com/eoframework/public-assets/main/catalog/solutions.csv
+wget https://raw.githubusercontent.com/eoframework/solutions/main/support/exports/solutions.csv
 
 # View available solutions
 cat solutions.csv | column -t -s ','
 ```
 
-**📖 Full Documentation:** See [Git-Based Distribution Guide](support/docs/git-based-distribution.md)
+**📖 Full Documentation:** See documentation in `support/docs/`
 
 ---
 

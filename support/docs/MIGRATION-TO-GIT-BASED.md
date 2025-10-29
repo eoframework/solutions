@@ -1,12 +1,14 @@
 # Migration to Git-Based Solution Distribution
 
+> **⚠️ DEPRECATED:** This document is now historical. As of October 2025, the solutions repository is public and all solutions are distributed directly from https://github.com/eoframework/solutions. The separate public-assets repository is no longer used.
+
 ## Overview
 
 This document describes the migration from ZIP-based solution packaging to Git-based folder distribution.
 
 **Date:** 2025-10-23
 **Version:** 1.0.0 (Fresh start - no previous distribution)
-**Status:** ✅ Ready for Implementation
+**Status:** ⚠️ Superseded (Solutions repo is now public)
 
 ---
 

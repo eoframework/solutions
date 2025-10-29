@@ -121,9 +121,9 @@ def sync_to_csv(output_type='private', git_based=False):
                                             if git_based:
                                                 # Git-based folder publishing
                                                 # Use Git URLs but keep DownloadUrl column name for website compatibility
-                                                base_url = "https://github.com/eoframework/public-assets"
+                                                base_url = "https://github.com/eoframework/solutions"
                                                 download_url = f"{base_url}/tree/main/{solution_path}"  # Git folder URL
-                                                raw_url = f"https://raw.githubusercontent.com/eoframework/public-assets/main/{solution_path}"
+                                                raw_url = f"https://raw.githubusercontent.com/eoframework/solutions/main/{solution_path}"
                                                 tag_name = f"{provider_name}/{category_name}/{solution_name}-v{version}"
 
                                                 csv_row = [
@@ -140,8 +140,8 @@ def sync_to_csv(output_type='private', git_based=False):
                                                     status
                                                 ]
                                             else:
-                                                # ZIP-based publishing (legacy)
-                                                base_url = "https://github.com/eoframework/public-assets/raw/main"
+                                                # ZIP-based publishing (legacy - not used with public solutions repo)
+                                                base_url = "https://github.com/eoframework/solutions/raw/main"
                                                 download_url = f"{base_url}/{solution_path}/latest/{solution_name}.zip"
                                                 manifest_url = f"{base_url}/{solution_path}/manifest.json"
 

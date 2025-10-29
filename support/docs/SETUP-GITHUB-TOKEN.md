@@ -1,5 +1,7 @@
 # Setting Up PUBLIC_ASSETS_TOKEN for GitHub Actions
 
+> **⚠️ DEPRECATED:** This document is no longer applicable. As of October 2025, the solutions repository is public and no longer publishes to a separate public-assets repository. The PUBLIC_ASSETS_TOKEN secret is no longer needed.
+
 This guide walks you through creating and configuring the `PUBLIC_ASSETS_TOKEN` secret needed for the publishing workflow.
 
 ---

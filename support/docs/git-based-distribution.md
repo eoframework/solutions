@@ -15,7 +15,7 @@ EO Framework™ solutions are distributed directly through Git repositories, all
 ## Repository Structure
 
 ```
-eoframework/public-assets (Public Repository)
+eoframework/solutions (Public Repository)
 ├── solutions/
 │   ├── aws/
 │   │   ├── ai/
@@ -43,7 +43,7 @@ eoframework/public-assets (Public Repository)
 
 Simply visit:
 ```
-https://github.com/eoframework/public-assets
+https://github.com/eoframework/solutions
 ```
 
 Navigate through folders to preview solutions.
@@ -54,7 +54,7 @@ Navigate through folders to preview solutions.
 
 ```bash
 # 1. Clone repository with sparse checkout
-git clone --filter=blob:none --sparse https://github.com/eoframework/public-assets.git
+git clone --filter=blob:none --sparse https://github.com/eoframework/solutions.git
 cd public-assets
 
 # 2. Checkout only the solution you need
@@ -76,7 +76,7 @@ cat README.md
 
 ```bash
 # Clone repository structure
-git clone --filter=blob:none --sparse https://github.com/eoframework/public-assets.git
+git clone --filter=blob:none --sparse https://github.com/eoframework/solutions.git
 cd public-assets
 
 # Add multiple solutions
@@ -95,7 +95,7 @@ git sparse-checkout set solutions/aws
 
 ```bash
 # Full clone (if you need all solutions)
-git clone https://github.com/eoframework/public-assets.git
+git clone https://github.com/eoframework/solutions.git
 cd public-assets
 ```
 
@@ -110,7 +110,7 @@ cd public-assets
 When you clone, you automatically get the latest version:
 
 ```bash
-git clone --sparse https://github.com/eoframework/public-assets.git
+git clone --sparse https://github.com/eoframework/solutions.git
 cd public-assets
 git sparse-checkout set solutions/aws/ai/intelligent-document-processing
 
@@ -126,7 +126,7 @@ Each solution version is tagged in Git:
 
 ```bash
 # Clone repository
-git clone --sparse https://github.com/eoframework/public-assets.git
+git clone --sparse https://github.com/eoframework/solutions.git
 cd public-assets
 
 # List available tags for a solution
@@ -197,10 +197,10 @@ Don't need the entire solution? Grab just one file:
 
 ```bash
 # Download a specific file directly
-wget https://raw.githubusercontent.com/eoframework/public-assets/main/solutions/aws/ai/intelligent-document-processing/README.md
+wget https://raw.githubusercontent.com/eoframework/solutions/main/solutions/aws/ai/intelligent-document-processing/README.md
 
 # Or use curl
-curl -O https://raw.githubusercontent.com/eoframework/public-assets/main/solutions/aws/ai/intelligent-document-processing/presales/business-case.md
+curl -O https://raw.githubusercontent.com/eoframework/solutions/main/solutions/aws/ai/intelligent-document-processing/presales/business-case.md
 ```
 
 ---
@@ -209,7 +209,7 @@ curl -O https://raw.githubusercontent.com/eoframework/public-assets/main/solutio
 
 ```bash
 # Clone and compare two similar solutions
-git clone --sparse https://github.com/eoframework/public-assets.git
+git clone --sparse https://github.com/eoframework/solutions.git
 cd public-assets
 
 git sparse-checkout set \
@@ -227,7 +227,7 @@ diff solutions/aws/cloud/landing-zone/docs/architecture.md \
 
 ```bash
 # 1. Fork the repository on GitHub
-#    Visit: https://github.com/eoframework/public-assets
+#    Visit: https://github.com/eoframework/solutions
 #    Click "Fork"
 
 # 2. Clone your fork
@@ -254,7 +254,7 @@ For users who prefer a simpler download experience:
 
 ```bash
 # Download the helper script
-curl -O https://raw.githubusercontent.com/eoframework/public-assets/main/download-solution.sh
+curl -O https://raw.githubusercontent.com/eoframework/solutions/main/download-solution.sh
 chmod +x download-solution.sh
 
 # Download latest version of a solution
@@ -283,10 +283,10 @@ ls -la
 
 ```bash
 # Browse online
-https://github.com/eoframework/public-assets/tree/main/solutions
+https://github.com/eoframework/solutions/tree/main/solutions
 
 # Or view catalog
-wget https://raw.githubusercontent.com/eoframework/public-assets/main/catalog/solutions.csv
+wget https://raw.githubusercontent.com/eoframework/solutions/main/catalog/solutions.csv
 cat solutions.csv
 ```
 
@@ -297,7 +297,7 @@ Make sure you have Git 2.25+:
 git --version
 
 # If older, update Git or use full clone:
-git clone https://github.com/eoframework/public-assets.git
+git clone https://github.com/eoframework/solutions.git
 ```
 
 ---
@@ -343,10 +343,10 @@ A: Please review the LICENSE file. BSL 1.1 allows evaluation and development but
 ## Support
 
 - **Documentation:** https://docs.eoframework.com
-- **Issues:** https://github.com/eoframework/public-assets/issues
+- **Issues:** https://github.com/eoframework/solutions/issues
 - **Email:** support@eoframework.com
 - **Website:** https://eoframework.com
 
 ---
 
-**Ready to get started?** Visit https://github.com/eoframework/public-assets
+**Ready to get started?** Visit https://github.com/eoframework/solutions

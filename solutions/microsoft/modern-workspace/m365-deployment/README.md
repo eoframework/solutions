@@ -18,7 +18,7 @@ This solution provides a structured approach to deploy Microsoft 365 across the 
 
 **Option 1: Using Helper Script**
 ```bash
-curl -O https://raw.githubusercontent.com/eoframework/public-assets/main/download-solution.sh
+curl -O https://raw.githubusercontent.com/eoframework/solutions/main/support/tools/download-solution.sh
 chmod +x download-solution.sh
 ./download-solution.sh microsoft/modern-workspace/m365-deployment
 ```
@@ -26,8 +26,8 @@ chmod +x download-solution.sh
 **Option 2: Git Sparse Checkout (Recommended)**
 ```bash
 # Clone with sparse checkout
-git clone --filter=blob:none --sparse https://github.com/eoframework/public-assets.git
-cd public-assets
+git clone --filter=blob:none --sparse https://github.com/eoframework/solutions.git
+cd solutions
 
 # Checkout this specific solution
 git sparse-checkout set solutions/microsoft/modern-workspace/m365-deployment
@@ -38,7 +38,7 @@ ls -la
 ```
 
 **Option 3: Browse on GitHub**
-- View online: https://github.com/eoframework/public-assets/tree/main/solutions/microsoft/modern-workspace/m365-deployment
+- View online: https://github.com/eoframework/solutions/tree/main/solutions/microsoft/modern-workspace/m365-deployment
 
 ## 🚀 Getting Started
 
