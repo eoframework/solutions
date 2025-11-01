@@ -78,6 +78,18 @@ Every solution must include these files:
 | `delivery/implementation-guide.md` | Step-by-step deployment procedures |
 | `delivery/scripts/README.md` | Automation scripts overview |
 
+## Script Types
+
+The template includes scaffolding for multiple automation platforms:
+
+| Script Type | Purpose | Use Cases |
+|-------------|---------|-----------|
+| `terraform/` | Infrastructure as Code | Cloud resource provisioning, infrastructure deployment, multi-cloud environments |
+| `ansible/` | Configuration management | Server configuration, application deployment, post-deployment configuration |
+| `python/` | Custom automation | Complex business logic, API integrations, data processing, custom workflows |
+| `bash/` | Linux/Unix automation | System administration, deployment scripts, startup/shutdown procedures |
+| `powershell/` | Windows automation | Windows server management, Active Directory, Azure automation, Windows-specific tasks |
+
 ## Solution Categories
 
 Solutions must be organized under one of these six standardized categories:
