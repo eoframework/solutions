@@ -37,3 +37,16 @@ node_modules/
 *.tmp
 *.temp
 *.log
+
+# Generated output files (generated from source/ directories)
+# These are created by support/tools/generate-outputs.py
+# Source files in */source/ directories are version controlled
+**/presales/*.docx
+**/presales/*.xlsx
+**/presales/*.pptx
+**/delivery/*.docx
+**/delivery/*.xlsx
+**/delivery/*.pptx
+
+# Exception: Keep source directories and their contents
+!**/source/**

@@ -18,26 +18,24 @@ sample-provider/sample-category/sample-solution/
 ├── metadata.yml                # Solution metadata and classification
 ├── presales/                   # Pre-sales materials
 │   ├── README.md
-│   ├── business-case.md
-│   ├── executive-presentation.md
+│   ├── business-case.docx
 │   ├── executive-presentation.pptx
-│   ├── roi-calculator.csv
-│   ├── requirements-questionnaire.csv
-│   ├── level-of-effort-estimate.csv
-│   └── statement-of-work.md
+│   ├── statement-of-work.docx
+│   ├── roi-calculator.xlsx
+│   ├── requirements-questionnaire.xlsx
+│   └── level-of-effort-estimate.xlsx
 └── delivery/                   # Implementation and delivery materials
     ├── README.md
-    ├── requirements.csv
-    ├── project-plan.csv
-    ├── communication-plan.csv
-    ├── configuration.csv
-    ├── roles.csv
-    ├── test-plan.csv
-    ├── training-plan.csv
-    ├── detailed-design.md
-    ├── implementation-guide.md
-    ├── closeout-presentation.md
+    ├── detailed-design.docx
+    ├── implementation-guide.docx
     ├── closeout-presentation.pptx
+    ├── requirements.xlsx
+    ├── project-plan.xlsx
+    ├── communication-plan.xlsx
+    ├── configuration.xlsx
+    ├── roles.xlsx
+    ├── test-plan.xlsx
+    ├── training-plan.xlsx
     └── scripts/                # Automation scripts
         ├── README.md
         ├── terraform/          # Infrastructure as Code
@@ -63,19 +61,28 @@ Every solution must include these files:
 | File | Purpose |
 |------|---------|
 | `presales/README.md` | Pre-sales process and materials overview |
-| `presales/business-case.md` | ROI analysis and business justification |
-| `presales/executive-presentation.md` | Executive stakeholder presentation |
-| `presales/roi-calculator.csv` | Financial impact calculator |
-| `presales/requirements-questionnaire.csv` | Discovery and assessment framework |
+| `presales/business-case.docx` | ROI analysis and business justification |
+| `presales/executive-presentation.pptx` | Executive stakeholder presentation |
+| `presales/statement-of-work.docx` | Statement of work template |
+| `presales/roi-calculator.xlsx` | Financial impact calculator |
+| `presales/requirements-questionnaire.xlsx` | Discovery and assessment framework |
+| `presales/level-of-effort-estimate.xlsx` | Effort estimation template |
 
 ### Delivery Files
 
 | File | Purpose |
 |------|---------|
 | `delivery/README.md` | Implementation process overview |
-| `delivery/requirements.csv` | Detailed requirements matrix |
-| `delivery/project-plan.csv` | Implementation project plan |
-| `delivery/implementation-guide.md` | Step-by-step deployment procedures |
+| `delivery/detailed-design.docx` | Detailed technical design |
+| `delivery/implementation-guide.docx` | Step-by-step deployment procedures |
+| `delivery/closeout-presentation.pptx` | Project closeout presentation |
+| `delivery/requirements.xlsx` | Detailed requirements matrix |
+| `delivery/project-plan.xlsx` | Implementation project plan |
+| `delivery/communication-plan.xlsx` | Stakeholder communication plan |
+| `delivery/configuration.xlsx` | Configuration specifications |
+| `delivery/roles.xlsx` | Team roles and responsibilities |
+| `delivery/test-plan.xlsx` | Testing strategy and plan |
+| `delivery/training-plan.xlsx` | User training plan |
 | `delivery/scripts/README.md` | Automation scripts overview |
 
 ## Script Types
