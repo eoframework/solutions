@@ -1,11 +1,11 @@
 version: '2.0'
 provider: microsoft
-generated_at: '2025-11-01T04:55:40.537077'
+generated_at: '2025-11-01T06:11:08.359109'
 catalog_type: provider
 metadata:
   provider_name: Microsoft
   total_solutions: 2
-  last_updated: '2025-11-01T04:55:40.537085'
+  last_updated: '2025-11-01T06:11:08.359116'
   auto_generated: true
 categories:
   modern-workspace:
