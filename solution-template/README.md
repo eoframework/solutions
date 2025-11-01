@@ -51,15 +51,27 @@ sample-provider/sample-category/sample-solution/
 
 Every solution must include these files:
 
+### Core Files
+
 | File | Purpose |
 |------|---------|
 | `README.md` | Solution overview and navigation hub |
 | `metadata.yml` | Structured metadata for catalogs and discovery |
+
+### Presales Files
+
+| File | Purpose |
+|------|---------|
 | `presales/README.md` | Pre-sales process and materials overview |
 | `presales/business-case.md` | ROI analysis and business justification |
 | `presales/executive-presentation.md` | Executive stakeholder presentation |
 | `presales/roi-calculator.csv` | Financial impact calculator |
 | `presales/requirements-questionnaire.csv` | Discovery and assessment framework |
+
+### Delivery Files
+
+| File | Purpose |
+|------|---------|
 | `delivery/README.md` | Implementation process overview |
 | `delivery/requirements.csv` | Detailed requirements matrix |
 | `delivery/project-plan.csv` | Implementation project plan |
