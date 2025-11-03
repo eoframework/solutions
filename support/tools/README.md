@@ -1,6 +1,6 @@
 # EO Framework™ Development Tools
 
-![Tools](https://img.shields.io/badge/Tools-9_Scripts-blue)
+![Tools](https://img.shields.io/badge/Tools-10_Scripts-blue)
 ![Python](https://img.shields.io/badge/Python-3.8%2B-green)
 ![Automation](https://img.shields.io/badge/Automation-Production_Ready-orange)
 ![Status](https://img.shields.io/badge/Status-Active-purple)
@@ -264,6 +264,102 @@ chmod +x download-solution.sh
 
 ---
 
+### **9. generate-outputs.py** - Professional Output Generator
+
+Converts raw source files (Markdown, CSV) into professional deliverables (Word, Excel, PowerPoint) using branded templates.
+
+**Usage:**
+```bash
+# Generate outputs for solution template
+python3 support/tools/generate-outputs.py --path solution-template/
+
+# Generate for specific solution
+python3 support/tools/generate-outputs.py --path solutions/aws/ai/intelligent-document-processing/
+
+# Generate for all solutions
+find solutions/ -type d -name "sample-solution" -prune -o -type d -mindepth 3 -maxdepth 3 -print | \
+  while read dir; do python3 support/tools/generate-outputs.py --path "$dir"; done
+```
+
+**Parameters:**
+- `--path` **(required)**: Directory containing `raw/` subdirectories with source files
+
+**What it does:**
+- **CSV → Excel (.xlsx)**: Converts CSV files to styled Excel spreadsheets with:
+  - Professional header formatting (blue background, white text)
+  - Auto-adjusted column widths
+  - Border styling and cell alignment
+  - Frozen header rows
+
+- **Markdown → Word (.docx)**: Converts Markdown to formatted Word documents with:
+  - Heading hierarchy preservation (H1-H6)
+  - Paragraph formatting
+  - Bullet and numbered lists
+  - Basic text formatting
+
+- **Markdown → PowerPoint (.pptx)**: Converts Markdown to presentations with:
+  - EO Framework branded template (from `support/doc-templates/powerpoint/`)
+  - H1 headers create title slides
+  - H2 headers create content slides
+  - Bullet points automatically formatted
+  - Professional layouts and styling
+
+**Dependencies:**
+```bash
+pip3 install pandas openpyxl python-docx python-pptx markdown-it-py
+```
+
+**Directory Structure:**
+```
+solution-name/
+├── presales/
+│   ├── raw/                           # Source files
+│   │   ├── business-case.md
+│   │   ├── executive-presentation.md
+│   │   └── roi-calculator.csv
+│   ├── business-case.docx             # Generated
+│   ├── executive-presentation.pptx    # Generated (using template)
+│   └── roi-calculator.xlsx            # Generated
+└── delivery/
+    ├── raw/                           # Source files
+    │   ├── implementation-guide.md
+    │   └── requirements.csv
+    ├── implementation-guide.docx      # Generated
+    └── requirements.xlsx              # Generated
+```
+
+**Output Example:**
+```
+🔍 Scanning: solutions/aws/ai/intelligent-document-processing
+📁 Found 2 raw directories
+
+📂 Processing: presales/raw
+  ✅ business-case.md → business-case.docx
+  ✅ executive-presentation.md → executive-presentation.pptx
+  ✅ roi-calculator.csv → roi-calculator.xlsx
+
+📂 Processing: delivery/raw
+  ✅ implementation-guide.md → implementation-guide.docx
+  ✅ requirements.csv → requirements.xlsx
+
+============================================================
+📊 Generation Summary
+============================================================
+✅ CSV → Excel:      2 files
+✅ MD → Word:        2 files
+✅ MD → PowerPoint:  1 files
+
+📁 Total generated:  5 files
+✨ All files generated successfully!
+============================================================
+```
+
+**Templates:**
+- PowerPoint template: `support/doc-templates/powerpoint/EOFramework-Template-3Logos.pptx`
+- See: [doc-templates/README.md](../doc-templates/README.md) for template customization
+
+---
+
 ## 🔄 **Common Workflows**
 
 ### **Creating a New Solution**
@@ -279,13 +375,17 @@ python3 support/tools/clone-solution-template.py \
 
 # Step 2: Customize content
 cd solutions/aws/cloud/my-solution
-# Edit README.md, metadata.yml, add presales/delivery materials
+# Edit raw/ files: markdown and CSV source files in presales/raw/ and delivery/raw/
 
-# Step 3: Validate
+# Step 3: Generate professional outputs
+cd ../../..  # Back to repo root
+python3 support/tools/generate-outputs.py --path solutions/aws/cloud/my-solution
+
+# Step 4: Validate
 python3 support/tools/validate-template.py \
   --path solutions/aws/cloud/my-solution
 
-# Step 4: Update catalogs
+# Step 5: Update catalogs
 python3 support/tools/generate-catalogs.py
 python3 support/tools/process-catalogs.py
 python3 support/tools/export-templates-csv.py --output-type public --git-based
@@ -297,6 +397,14 @@ python3 support/tools/export-templates-csv.py --output-type public --git-based
 # Complete health check
 echo "🔍 Validating all templates..."
 python3 support/tools/validate-template.py --all
+
+echo "📄 Regenerating professional outputs..."
+find solutions/ -type d -name "sample-solution" -prune -o -type d -mindepth 3 -maxdepth 3 -print | \
+  while read dir; do
+    if [ -d "$dir/presales/raw" ] || [ -d "$dir/delivery/raw" ]; then
+      python3 support/tools/generate-outputs.py --path "$dir"
+    fi
+  done
 
 echo "🔄 Regenerating catalogs..."
 python3 support/tools/generate-catalogs.py

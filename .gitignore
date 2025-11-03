@@ -38,15 +38,6 @@ node_modules/
 *.temp
 *.log
 
-# Generated output files (generated from raw/ directories)
-# These are created by support/tools/generate-outputs.py
-# Raw files in */raw/ directories are version controlled
-**/presales/*.docx
-**/presales/*.xlsx
-**/presales/*.pptx
-**/delivery/*.docx
-**/delivery/*.xlsx
-**/delivery/*.pptx
-
-# Exception: Keep raw directories and their contents
-!**/raw/**
+# Note: Generated output files (.docx, .xlsx, .pptx) ARE committed to the repository
+# They are the final products for consumers, generated from raw/ source files
+# Both raw source files and generated outputs are version controlled

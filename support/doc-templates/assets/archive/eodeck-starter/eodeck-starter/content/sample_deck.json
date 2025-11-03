@@ -1,0 +1,27 @@
+{
+  "title": "EO Framework \u2014 Generated From Layouts (JSON)",
+  "subtitle": "Exceptional Outcomes at Scale",
+  "slides": [
+    {
+      "layout": "Title",
+      "title": "EO Framework",
+      "subtitle": "From JSON",
+      "image": "assets/eof-logo.png"
+    },
+    {
+      "layout": "Content",
+      "title": "Why EO",
+      "bullets": [
+        "Consistency",
+        "Speed",
+        "Quality"
+      ]
+    },
+    {
+      "layout": "Visual",
+      "title": "Visual Example",
+      "image": "assets/eof-logo.png",
+      "caption": "Swap with a real image"
+    }
+  ]
+}

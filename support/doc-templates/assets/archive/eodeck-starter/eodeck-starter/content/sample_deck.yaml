@@ -1,0 +1,33 @@
+title: "EO Framework — Generated From Layouts"
+subtitle: "Exceptional Outcomes at Scale"
+slides:
+  - layout: "Title"
+    title: "EO Framework"
+    subtitle: "Exceptional Outcomes at Scale"
+    image: "assets/eof-logo.png"
+
+  - layout: "Content"
+    title: "Key Points"
+    bullets:
+      - "Standardized templates accelerate proposals"
+      - "Shared reviews improve delivery quality"
+      - "Automation bridges Sales ⇄ Delivery"
+
+  - layout: "Two-Column"
+    title: "Overview"
+    left:
+      - "Left column supports paragraphs"
+      - "Use this for context, narrative, or definitions"
+    right_image: "assets/eof-logo.png"
+
+  - layout: "Visual"
+    title: "Architecture Diagram"
+    image: "assets/eof-logo.png"
+    caption: "Replace this with your real diagram"
+
+  - layout: "Data"
+    title: "Key Metrics"
+    bullets:
+      - "Time-to-proposal: ↓ 60%"
+      - "Delivery rework: ↓ 35%"
+      - "Win-rate: ↑ 12%"
