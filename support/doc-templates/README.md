@@ -14,36 +14,77 @@ This directory contains master templates for generating professional outputs:
 
 ```
 doc-templates/
+├── assets/
+│   ├── logos/                                # Common logo assets
+│   │   ├── client_logo.png                   # Client branding
+│   │   ├── consulting_company_logo.png       # Consulting company branding
+│   │   └── eo-framework-logo-real.png        # EO Framework logo
+│   └── README.md                             # Asset documentation
 ├── powerpoint/
-│   ├── EOFramework-Template-3Logos.pptx    # Master presentation template
-│   ├── README.md                            # PowerPoint template documentation
-│   └── eo-framework-logo.png                # Example logo asset
+│   ├── EOFramework-Template-01.pptx          # Master presentation template
+│   └── README.md                             # PowerPoint template docs
 ├── word/
-│   └── (Word templates - coming soon)
+│   ├── EOFramework-Word-Template-01.docx     # Master Word template
+│   └── README.md                             # Word template docs
 └── excel/
-    └── (Excel templates - coming soon)
+    ├── EOFramework-Excel-Template-01.xlsx    # Master Excel template
+    └── README.md                             # Excel template docs (pending)
 ```
 
 ## PowerPoint Templates
 
-### EOFramework-Template-3Logos.pptx
+### EOFramework-Template-01.pptx
 
-Professional presentation template with 4 custom layouts:
+Professional presentation template with 7 custom layouts including title slide, content slides, and two-column layouts.
 
-| Layout | Placeholders | Use Case |
-|--------|--------------|----------|
-| **EO Title Slide** | Title, Subtitle, 3 Logos | Opening slides, section covers |
-| **EO Title and Content** | Title, Content | Standard content slides with bullets |
-| **EO Two Content** | Title, 2 Content columns | Comparison slides, side-by-side content |
-| **EO Section Header** | Title, Text | Section transitions, chapter breaks |
-
-**Specifications:**
+**Features:**
 - Format: 16:9 widescreen (10" x 7.5")
-- Color scheme: Professional EO Framework branding
-- Fonts: Calibri family for consistency
-- Logo placeholders: Three customizable positions
+- Professional EO Framework branding
+- Logo placeholders for client and consulting company
+- Calibri font family
+- Auto-layout selection from Markdown
 
 **See:** [powerpoint/README.md](powerpoint/README.md) for detailed documentation.
+
+## Word Templates
+
+### EOFramework-Word-Template-01.docx
+
+Professional Word document template with branded cover page, table of contents, and footer.
+
+**Structure:**
+- **Page 1**: Cover page with consulting company logo, title, subtitle, metadata
+- **Page 2**: Table of contents (auto-generated from headings)
+- **Page 3+**: Document content from Markdown
+- **Footer**: Page numbers (center) + EO Framework logo (right)
+
+**Features:**
+- Calibri font, professional color scheme
+- Dynamic TOC generation
+- Branded footer on all pages
+- Metadata tracking (date, solution, version)
+
+**See:** [word/README.md](word/README.md) for detailed documentation.
+
+## Excel Templates
+
+### EOFramework-Excel-Template-01.xlsx
+
+Professional Excel template with branded cover sheet and styled data presentation.
+
+**Structure:**
+- **Cover Sheet**: 3 logos (client, consulting company, EO Framework), metadata fields
+- **Data Sheet**: Professional styling with gray header, alternating rows
+
+**Features:**
+- Gray header (#808080), 12pt font
+- Alternating row colors for readability
+- Auto-filter, freeze panes
+- Currency formatting with numeric values
+- Dynamic sheet naming based on file type
+- Auto-adjusted column widths
+
+**See:** Excel template documentation (pending) for detailed information.
 
 ## Usage
 
@@ -94,11 +135,13 @@ All templates must meet:
 ## Future Enhancements
 
 Planned additions:
-- Word document templates for reports and guides
-- Excel templates for calculators and data sheets
+- ✅ ~~Word document templates for reports and guides~~ **COMPLETED**
+- ✅ ~~Excel templates for calculators and data sheets~~ **COMPLETED**
 - Additional PowerPoint layouts for specialized content
 - Template versioning and changelog
 - Multi-language template variants
+- Advanced Excel features (charts, pivot tables)
+- Word styles library for consistent formatting
 
 ## Support
 

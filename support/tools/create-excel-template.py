@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
-Create Excel template with cover sheet and styled data template.
-Similar to PowerPoint template approach.
+Create a clean Excel template without Table objects that cause conflicts.
+Uses simple ranges with AutoFilter instead of Excel Tables.
 """
 
 from openpyxl import Workbook
@@ -12,20 +12,20 @@ from pathlib import Path
 from datetime import datetime
 
 
-def create_excel_template():
-    """Create Excel template with cover and data sheets."""
+def create_clean_excel_template():
+    """Create clean Excel template avoiding Table/AutoFilter conflicts."""
 
     output_file = Path('support/doc-templates/excel/EOFramework-Excel-Template-01.xlsx')
-    logo_path = Path('support/doc-templates/powerpoint')
+    logo_path = Path('support/doc-templates/assets/logos')
 
-    # Create workbook
+    # Create new workbook (not loading any existing template)
     wb = Workbook()
 
     # Remove default sheet
     if 'Sheet' in wb.sheetnames:
         wb.remove(wb['Sheet'])
 
-    print("📄 Creating Excel Template")
+    print("📄 Creating Clean Excel Template")
     print("=" * 70)
 
     # =========================================================================
@@ -36,10 +36,10 @@ def create_excel_template():
 
     cover = wb.create_sheet("Cover", 0)
 
-    # Set column widths for cover layout
+    # Set column widths
     cover.column_dimensions['A'].width = 5
     cover.column_dimensions['B'].width = 30
-    cover.column_dimensions['C'].width = 30
+    cover.column_dimensions['C'].width = 13
     cover.column_dimensions['D'].width = 5
 
     # Title styling
@@ -48,121 +48,87 @@ def create_excel_template():
     label_font = Font(name='Calibri', size=11, bold=True, color='44546A')
     value_font = Font(name='Calibri', size=11, color='44546A')
 
-    # Row 2-3: Spacing
+    # Row 1-2: Top spacing
     cover.row_dimensions[1].height = 20
-    cover.row_dimensions[2].height = 5
+    cover.row_dimensions[2].height = 10
 
-    # Row 4: Document Title (placeholder)
-    cover['B4'] = '[DOCUMENT TITLE]'
-    cover['B4'].font = title_font
-    cover['B4'].alignment = Alignment(horizontal='left', vertical='center')
-    cover.merge_cells('B4:C4')
-    cover.row_dimensions[4].height = 30
-
-    # Row 5: Document Type (placeholder)
-    cover['B5'] = '[Document Type]'
-    cover['B5'].font = subtitle_font
-    cover['B5'].alignment = Alignment(horizontal='left', vertical='center')
-    cover.merge_cells('B5:C5')
-    cover.row_dimensions[5].height = 20
-
-    # Row 6-7: Spacing
-    cover.row_dimensions[6].height = 10
-    cover.row_dimensions[7].height = 5
-
-    # Row 8: Client Logo placeholder
-    cover['B8'] = '[Client Logo]'
-    cover['B8'].font = Font(name='Calibri', size=10, italic=True, color='7F7F7F')
-    cover['B8'].alignment = Alignment(horizontal='center', vertical='center')
-    cover['B8'].fill = PatternFill(start_color='F0F0F0', end_color='F0F0F0', fill_type='solid')
-    cover.merge_cells('B8:B10')
-    cover.row_dimensions[8].height = 60
-
-    # Insert client logo if available
+    # Row 3: Client Logo
+    cover.row_dimensions[3].height = 60
     client_logo = logo_path / 'client_logo.png'
     if client_logo.exists():
         img = XLImage(str(client_logo))
         img.width = 150
-        img.height = 60
-        cover.add_image(img, 'B8')
-        print("  ✅ Client logo placeholder added")
-    else:
-        print("  ⚠️  Client logo not found, using text placeholder")
+        img.height = 50
+        img.anchor = 'B3'
+        cover.add_image(img)
+        print("  ✅ Client logo added at B3")
 
-    # Row 11: Spacing
-    cover.row_dimensions[11].height = 10
+    # Row 4: Document Title
+    cover['B4'] = '[DOCUMENT TITLE]'
+    cover['B4'].font = title_font
+    cover['B4'].alignment = Alignment(horizontal='left', vertical='center')
+    cover.row_dimensions[4].height = 30
 
-    # Row 12: Consulting Company Logo placeholder
-    cover['B12'] = '[Consulting Company Logo]'
-    cover['B12'].font = Font(name='Calibri', size=10, italic=True, color='7F7F7F')
-    cover['B12'].alignment = Alignment(horizontal='center', vertical='center')
-    cover['B12'].fill = PatternFill(start_color='F0F0F0', end_color='F0F0F0', fill_type='solid')
-    cover.merge_cells('B12:B14')
-    cover.row_dimensions[12].height = 60
+    # Row 5: Document Type
+    cover['B5'] = '[Document Type]'
+    cover['B5'].font = subtitle_font
+    cover['B5'].alignment = Alignment(horizontal='left', vertical='center')
+    cover.row_dimensions[5].height = 20
 
-    # Insert consulting logo if available
+    # Row 6: Spacing
+    cover.row_dimensions[6].height = 20
+
+    # Rows 7-10: Metadata
+    cover['B7'] = 'Generated:'
+    cover['B7'].font = label_font
+    cover['C7'] = datetime.now().strftime('%B %d, %Y')
+    cover['C7'].font = value_font
+
+    cover['B8'] = 'Solution:'
+    cover['B8'].font = label_font
+    cover['C8'] = '[Solution Name]'
+    cover['C8'].font = value_font
+
+    cover['B9'] = 'Purpose:'
+    cover['B9'].font = label_font
+    cover['C9'] = '[Document Purpose]'
+    cover['C9'].font = value_font
+
+    cover['B10'] = 'Version:'
+    cover['B10'].font = label_font
+    cover['C10'] = '1.0'
+    cover['C10'].font = value_font
+
+    # Row 11-12: Spacing
+    cover.row_dimensions[11].height = 20
+    cover.row_dimensions[12].height = 10
+
+    # Row 13: Consulting Company Logo
+    cover.row_dimensions[13].height = 60
     consulting_logo = logo_path / 'consulting_company_logo.png'
     if consulting_logo.exists():
         img = XLImage(str(consulting_logo))
         img.width = 150
-        img.height = 60
-        cover.add_image(img, 'B12')
-        print("  ✅ Consulting company logo placeholder added")
-    else:
-        print("  ⚠️  Consulting company logo not found, using text placeholder")
+        img.height = 50
+        img.anchor = 'B13'
+        cover.add_image(img)
+        print("  ✅ Consulting company logo added at B13")
 
-    # Row 15: Spacing
-    cover.row_dimensions[15].height = 10
+    # Row 14: Spacing
+    cover.row_dimensions[14].height = 10
 
-    # Row 16: EO Framework Logo placeholder
-    cover['B16'] = '[EO Framework Logo]'
-    cover['B16'].font = Font(name='Calibri', size=10, italic=True, color='7F7F7F')
-    cover['B16'].alignment = Alignment(horizontal='center', vertical='center')
-    cover['B16'].fill = PatternFill(start_color='F0F0F0', end_color='F0F0F0', fill_type='solid')
-    cover.merge_cells('B16:B18')
-    cover.row_dimensions[16].height = 60
-
-    # Insert EO Framework logo if available
+    # Row 15: EO Framework Logo
+    cover.row_dimensions[15].height = 60
     eo_logo = logo_path / 'eo-framework-logo-real.png'
     if eo_logo.exists():
         img = XLImage(str(eo_logo))
         img.width = 200
-        img.height = 60
-        cover.add_image(img, 'B16')
-        print("  ✅ EO Framework logo placeholder added")
-    else:
-        print("  ⚠️  EO Framework logo not found, using text placeholder")
-
-    # Row 19-20: Spacing
-    cover.row_dimensions[19].height = 15
-    cover.row_dimensions[20].height = 5
-
-    # Row 21: Metadata - Generated Date
-    cover['B21'] = 'Generated:'
-    cover['B21'].font = label_font
-    cover['C21'] = f'{datetime.now().strftime("%B %d, %Y")}'
-    cover['C21'].font = value_font
-
-    # Row 22: Metadata - Solution
-    cover['B22'] = 'Solution:'
-    cover['B22'].font = label_font
-    cover['C22'] = '[Solution Name]'
-    cover['C22'].font = value_font
-
-    # Row 23: Metadata - Purpose
-    cover['B23'] = 'Purpose:'
-    cover['B23'].font = label_font
-    cover['C23'] = '[Document Purpose]'
-    cover['C23'].font = value_font
-
-    # Row 24: Metadata - Version
-    cover['B24'] = 'Version:'
-    cover['B24'].font = label_font
-    cover['C24'] = '1.0'
-    cover['C24'].font = value_font
+        img.height = 50
+        img.anchor = 'B15'
+        cover.add_image(img)
+        print("  ✅ EO Framework logo added at B15")
 
     print("  ✅ Cover page layout complete")
-    print("  ✅ Metadata fields added")
 
     # =========================================================================
     # SHEET 2: DATA TEMPLATE
@@ -172,15 +138,21 @@ def create_excel_template():
 
     data = wb.create_sheet("Data", 1)
 
-    # Sample header row with styling
+    # Sample headers
     headers = ['Column 1', 'Column 2', 'Column 3', 'Column 4', 'Column 5']
 
-    # Header styling
-    header_font = Font(name='Calibri', size=11, bold=True, color='FFFFFF')
-    header_fill = PatternFill(start_color='4472C4', end_color='4472C4', fill_type='solid')
+    # Styling
+    header_font = Font(name='Calibri', size=12, bold=True, color='FFFFFF')  # Size 12
+    header_fill = PatternFill(start_color='808080', end_color='808080', fill_type='solid')  # Gray header
     header_alignment = Alignment(horizontal='center', vertical='center')
 
-    # Border style
+    data_font = Font(name='Calibri', size=12, color='000000')  # Size 12
+    data_alignment = Alignment(horizontal='left', vertical='center', wrap_text=True, indent=1)  # Center vertical + indent for padding
+
+    # Alternating row colors for better readability
+    even_fill = PatternFill(start_color='F2F2F2', end_color='F2F2F2', fill_type='solid')  # Light gray
+    odd_fill = PatternFill(start_color='FFFFFF', end_color='FFFFFF', fill_type='solid')   # White
+
     thin_border = Border(
         left=Side(style='thin'),
         right=Side(style='thin'),
@@ -188,7 +160,7 @@ def create_excel_template():
         bottom=Side(style='thin')
     )
 
-    # Set headers
+    # Write headers
     for col_idx, header in enumerate(headers, 1):
         cell = data.cell(row=1, column=col_idx, value=header)
         cell.font = header_font
@@ -196,9 +168,9 @@ def create_excel_template():
         cell.alignment = header_alignment
         cell.border = thin_border
 
-    print("  ✅ Header row configured")
+    print("  ✅ Header row created")
 
-    # Sample data rows with alternating colors
+    # Sample data (just a few rows to show styling)
     sample_data = [
         ['Sample Data 1', 'Value A', '100', 'Active', 'Note 1'],
         ['Sample Data 2', 'Value B', '200', 'Pending', 'Note 2'],
@@ -206,15 +178,7 @@ def create_excel_template():
         ['Sample Data 4', 'Value D', '400', 'Active', 'Note 4'],
     ]
 
-    # Alternate row fill
-    even_fill = PatternFill(start_color='F2F2F2', end_color='F2F2F2', fill_type='solid')
-    odd_fill = PatternFill(start_color='FFFFFF', end_color='FFFFFF', fill_type='solid')
-
-    # Data styling
-    data_font = Font(name='Calibri', size=11, color='000000')
-    data_alignment = Alignment(horizontal='left', vertical='top', wrap_text=True)
-
-    # Add sample data
+    # Write sample data with alternating colors
     for row_idx, row_data in enumerate(sample_data, 2):
         for col_idx, value in enumerate(row_data, 1):
             cell = data.cell(row=row_idx, column=col_idx, value=value)
@@ -228,50 +192,51 @@ def create_excel_template():
             else:
                 cell.fill = odd_fill
 
-    print("  ✅ Sample data rows with alternating colors")
+    print("  ✅ Sample data rows added")
 
-    # Auto-adjust column widths
+    # Set column widths
     for col_idx in range(1, len(headers) + 1):
-        col_letter = get_column_letter(col_idx)
-        data.column_dimensions[col_letter].width = 20
+        data.column_dimensions[get_column_letter(col_idx)].width = 20
 
-    print("  ✅ Column widths configured")
+    print("  ✅ Column widths set")
+
+    # Set minimum row heights with auto-adjust capability (maintains padding while allowing content expansion)
+    # Note: Setting explicit height, but wrap_text + vertical center provides the padding effect
+    data.row_dimensions[1].height = 32  # Header row - minimum height with padding
+    for row_idx in range(2, len(sample_data) + 2):
+        data.row_dimensions[row_idx].height = 26  # Data rows - minimum height, will auto-expand with content
+
+    print("  ✅ Row heights set (auto-adjusts to content with padding)")
 
     # Freeze header row
-    data.freeze_panes = data['A2']
-    print("  ✅ Freeze panes enabled")
+    data.freeze_panes = 'A2'
+    print("  ✅ Freeze panes enabled at A2")
 
-    # Enable auto-filter
+    # Enable auto-filter (without using Table object)
     data.auto_filter.ref = f'A1:{get_column_letter(len(headers))}1'
-    print("  ✅ Auto-filter enabled")
+    print("  ✅ Auto-filter enabled (range-based, not Table)")
 
     # Save template
     print("\n" + "=" * 70)
-    print(f"💾 Saving template: {output_file}")
+    print(f"💾 Saving clean template: {output_file}")
 
-    # Ensure directory exists
     output_file.parent.mkdir(parents=True, exist_ok=True)
-
     wb.save(str(output_file))
 
     print()
-    print("✨ Excel template created successfully!")
-    print(f"   Location: {output_file.absolute()}")
+    print("✨ Clean Excel template created successfully!")
     print()
     print("Template structure:")
-    print("  📋 Sheet 1: Cover - Professional cover page with logos and metadata")
-    print("  📊 Sheet 2: Data - Styled template with headers and alternating rows")
+    print("  📋 Sheet 1: Cover - 3 logos, metadata fields")
+    print("  📊 Sheet 2: Data - Styled headers, alternating rows, auto-filter")
     print()
-    print("Features:")
-    print("  ✅ 3 logo placeholders (Client, Consulting, EO Framework)")
-    print("  ✅ Metadata fields (Generated, Solution, Purpose, Version)")
-    print("  ✅ Styled header row (blue background, white text, bold)")
-    print("  ✅ Alternating row colors (gray/white)")
-    print("  ✅ Borders on all cells")
-    print("  ✅ Auto-filter enabled")
-    print("  ✅ Freeze panes on header row")
-    print("  ✅ Professional fonts (Calibri)")
+    print("Key fixes:")
+    print("  ✅ No Excel Table objects (avoids Table/AutoFilter conflict)")
+    print("  ✅ Simple range-based AutoFilter")
+    print("  ✅ Clean image anchoring (avoids drawing corruption)")
+    print("  ✅ Proper styling without Table formatting")
+    print()
 
 
 if __name__ == '__main__':
-    create_excel_template()
+    create_clean_excel_template()

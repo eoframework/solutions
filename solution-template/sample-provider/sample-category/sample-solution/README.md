@@ -74,13 +74,13 @@ This comprehensive enterprise solution provides **{PRIMARY_BUSINESS_VALUE}** thr
 ## 🚀 **Getting Started**
 
 ### **📋 Phase 1: Planning & Preparation** ({PLANNING_DURATION})
-1. **📊 Business Case Development**
-   - Review [Business Case](presales/business-case.md)
-   - Complete [ROI Calculator](presales/roi-calculator.csv)
-   - Present to stakeholders using [Executive Materials](presales/executive-presentation.md)
+1. **📊 Business Case & Stakeholder Alignment**
+   - Prepare [Solution Briefing](presales/solution-briefing.md) covering business need, impact, stakeholders, and success criteria
+   - Complete [Discovery Questionnaire](presales/discovery-questionnaire.csv)
+   - Estimate effort using [Level of Effort](presales/level-of-effort-estimate.csv)
 
-2. **🔍 Requirements Assessment**
-   - Complete [Requirements Questionnaire](presales/requirements-questionnaire.csv)
+2. **🔍 Discovery & Assessment**
+   - Complete [Discovery Questionnaire](presales/discovery-questionnaire.csv)
    - Validate [Prerequisites](delivery/implementation-guide.md#prerequisites)
    - Review [Solution Architecture](delivery/detailed-design.md)
 

@@ -341,24 +341,23 @@ All EO Framework™ solutions meet stringent enterprise quality requirements:
 
 ### **Business Source License 1.1 (BSL 1.1)**
 
-This repository uses the Business Source License 1.1, which provides:
+This repository is licensed under the **Business Source License 1.1 (BSL 1.1)**.
 
 **✅ Permitted Use:**
-- **Evaluation**: Assessment and proof-of-concept implementations
-- **Development**: Internal development and testing environments
-- **Education**: Learning, training, and academic purposes
-- **Modification**: Customization for permitted use cases
+- Use templates for client implementations and internal projects
+- Customize and create derivative works
+- Development, testing, and educational purposes
+- Non-production evaluation and proof-of-concept
 
-**⚠️ Restricted Use:**
-- **Production**: Commercial production deployments require licensing
-- **Redistribution**: Commercial redistribution requires authorization
-- **Service Provision**: Using templates for commercial service delivery
+**❌ Restricted Use:**
+- Cannot resell templates as a standalone product
+- Cannot offer template-as-a-service platforms
+- Cannot use for competitive service offerings
 
-**📞 Commercial Licensing:**
-For production deployments and commercial use:
-- Contact: licensing@eoframework.com
-- Website: https://eoframework.com/licensing
-- Documentation: [LICENSE](LICENSE) file
+**📖 Full Details:**
+- **License Guide**: [https://www.eoframework.org/license/](https://www.eoframework.org/license/)
+- **License Text**: [LICENSE](LICENSE)
+- **Support**: [support/docs/license-guide.md](support/docs/license-guide.md)
 
 ## 🌐 **Community and Support**
 

@@ -1,26 +1,61 @@
-Phase,Work Package,Task Description,Resource Type,Estimated Hours,Rate,Cost Estimate,Dependencies,Risk Level,Notes
-Discovery,Requirements Gathering,Conduct stakeholder interviews and workshops,Business Analyst,40,$150,"$6,000",,Low,Include all key stakeholders
-Discovery,Technical Assessment,Evaluate current infrastructure and integration points,Solution Architect,32,$200,"$6,400",,Medium,Access to existing systems required
-Discovery,Security Review,Assess security requirements and compliance needs,Security Specialist,16,$175,"$2,800",,Medium,Compliance framework validation needed
-Planning,Solution Design,Create detailed technical architecture and design,Solution Architect,48,$200,"$9,600",Requirements Gathering,Medium,Include integration specifications
-Planning,Project Planning,Develop implementation timeline and resource allocation,Project Manager,24,$140,"$3,360",Technical Assessment,Low,Coordinate with all team leads
-Planning,Risk Assessment,Identify and document project risks and mitigation strategies,Project Manager,16,$140,"$2,240",Solution Design,Medium,Regular risk review sessions required
-Development,Infrastructure Setup,Provision and configure cloud infrastructure,DevOps Engineer,60,$160,"$9,600",Solution Design,Medium,Environment provisioning and testing
-Development,Core Application Development,Build primary application functionality,Senior Developer,120,$130,"$15,600",Infrastructure Setup,Medium,Agile development methodology
-Development,Database Development,Design and implement database schema and procedures,Database Administrator,40,$145,"$5,800",Core Application Development,Low,Performance optimization included
-Development,Integration Development,Build API integrations and data connectors,Integration Specialist,80,$155,"$12,400",Core Application Development,High,External system dependencies
-Development,UI/UX Development,Create user interface and user experience components,Frontend Developer,64,$125,"$8,000",Core Application Development,Low,Responsive design requirements
-Testing,Unit Testing,Develop and execute unit tests for all components,QA Engineer,32,$120,"$3,840",Core Application Development,Low,Automated testing framework
-Testing,Integration Testing,Test system integrations and data flows,QA Engineer,40,$120,"$4,800",Integration Development,Medium,External system coordination required
-Testing,Performance Testing,Conduct load and performance testing,Performance Engineer,24,$140,"$3,360",Integration Testing,Medium,Production-like environment needed
-Testing,Security Testing,Perform security assessments and penetration testing,Security Specialist,16,$175,"$2,800",Performance Testing,High,Third-party security audit may be required
-Testing,User Acceptance Testing,Coordinate and support UAT with business users,Business Analyst,32,$150,"$4,800",Security Testing,Medium,Business user availability critical
-Deployment,Production Deployment,Deploy solution to production environment,DevOps Engineer,24,$160,"$3,840",User Acceptance Testing,High,Rollback procedures required
-Deployment,Data Migration,Migrate existing data to new system,Data Engineer,40,$145,"$5,800",Production Deployment,High,Data validation and backup critical
-Deployment,Go-Live Support,Provide support during initial production rollout,Support Team,48,$110,"$5,280",Data Migration,Medium,24/7 support coverage for first week
-Training,Administrator Training,Train system administrators and technical users,Technical Trainer,16,$130,"$2,080",Production Deployment,Low,Hands-on training environment required
-Training,End User Training,Train business users on system functionality,Business Trainer,24,$120,"$2,880",Administrator Training,Low,Role-based training materials
-Training,Documentation,Create user manuals and technical documentation,Technical Writer,32,$110,"$3,520",End User Training,Low,Version control for documentation updates
-Closeout,Project Handover,Transfer ownership to operations and support teams,Project Manager,16,$140,"$2,240",Documentation,Low,Knowledge transfer sessions
-Closeout,Lessons Learned,Conduct project retrospective and document learnings,Project Manager,8,$140,"$1,120",Project Handover,Low,Stakeholder feedback collection
-,,,"     TOTAL HOURS",732,"   TOTAL COST","=TEXT(SUM(G2:G25),""$#,##0"")",,,Total project cost estimate
+# SCOPE ASSUMPTIONS - BASELINE (MULTIPLIER 1.0),,,,,,,,,,
+Category,Baseline Assumption,Small (1x),Medium (2x),Large (3x),Notes,,,,,
+Solution Scope,Primary Features/Capabilities,3-5 core features,6-10 features,10+ features or advanced capabilities,Standard feature set for solution type,,,,,
+Solution Scope,Customization Level,Minimal configuration,Moderate customization,Extensive custom development,Configuration vs custom code,,,,,
+Integration,External System Integrations,2 REST APIs,4-6 systems,8+ systems or complex protocols,Standard REST/API integrations,,,,,
+Integration,Data Sources,2-3 data sources,4-6 data sources,8+ data sources or complex formats,Structured data sources,,,,,
+User Base,Total Users,50 users,100-250 users,500+ users,Across all user types and roles,,,,,
+User Base,User Roles,2-3 standard roles,4-6 roles,8+ roles with complex permissions,Role-based access control,,,,,
+Data Volume,Data Processing Volume,Small scale standard volume,Medium scale increased volume,Large scale high volume,Varies by solution type (transactions docs etc),,,,,
+Data Volume,Data Storage Requirements,100 GB,500 GB - 1 TB,2+ TB,Includes retention and backup,,,,,
+Technical Environment,Deployment Regions,Single region,2-3 regions,Global multi-region,Geographic distribution,,,,,
+Technical Environment,Availability Requirements,Standard (99.5%),High availability (99.9%),Mission critical (99.95%+),SLA and uptime requirements,,,,,
+Technical Environment,Infrastructure Complexity,Basic single-tier,Multi-tier standard,Complex distributed architecture,Architecture complexity level,,,,,
+Security & Compliance,Security Requirements,Basic authentication and encryption,Industry standard (SOC2 HIPAA),Advanced (FedRAMP multi-jurisdiction),Security controls and compliance,,,,,
+Security & Compliance,Compliance Frameworks,1-2 basic standards,2-3 industry standards,Multiple complex frameworks,Regulatory compliance requirements,,,,,
+Performance,Performance Requirements,Standard performance,Enhanced performance,High performance low latency,Response time and throughput needs,,,,,
+Environment,Deployment Environments,2 environments (dev prod),3 environments (dev staging prod),4+ environments with automation,Environment management complexity,,,,,
+,,,,,,,,,,
+# ESTIMATE SETTINGS - EO Sales Engineer Updates Multipliers Based on Customer Scope,,,,,,,,,,
+Phase,Variable Name,Multiplier,Description / Applies To Tasks,,,,,,,
+Discovery,DISCOVERY_MX,1,"All Discovery phase tasks (Requirements Gathering, Technical Assessment, Security Review, Integration Assessment)",,,,,,,
+Planning,PLANNING_MX,1,"All Planning phase tasks (Solution Design, Security Architecture, Data Architecture, Implementation Planning)",,,,,,,
+Development,DEVELOPMENT_MX,1,"All Development phase tasks (Infrastructure Setup, Core Development, Database Development, Integration Development, UI Development, Security Implementation)",,,,,,,
+Testing,TESTING_MX,1,"All Testing phase tasks (Unit Testing, Integration Testing, Performance Testing, Security Testing, UAT)",,,,,,,
+Deployment,DEPLOYMENT_MX,1,"All Deployment phase tasks (Pre-Production Validation, Production Deployment, Data Migration, Go-Live Support)",,,,,,,
+Training,TRAINING_MX,1,"All Training phase tasks (Administrator Training, End User Training, Documentation)",,,,,,,
+Closeout,CLOSEOUT_MX,1,"All Closeout phase tasks (Knowledge Transfer, Performance Baseline, Project Retrospective)",,,,,,,
+Management,MANAGEMENT_MX,1.5,Project Management overhead - 10% of actual engineering hours,,,,,,,
+Leadership,LEADERSHIP_MX,1.5,Quarterback/Technical Leadership overhead - 10% of actual engineering hours,,,,,,,
+,,,,,,,,,,
+# EFFORT ESTIMATE
+Phase,Work Package,Task Description,Resource Type,Base Hours,Effort Multiplier,Actual Hours,Rate,Cost Estimate,Dependencies,Notes
+Discovery,Requirements Gathering,Conduct stakeholder interviews and discovery workshops,EO Engineer,40,='Estimate Settings'!$C$24,=$E33*$F33,$150,"=TEXT($G33*$H33,""$#,##0"")",,Uses DISCOVERY_MX - Baseline: 3-5 features 50 users
+Discovery,Technical Assessment,Evaluate current infrastructure and technical environment,EO Engineer,32,='Estimate Settings'!$C$24,=$E34*$F34,$175,"=TEXT($G34*$H34,""$#,##0"")",,Uses DISCOVERY_MX - Baseline: Single region standard architecture
+Discovery,Security & Compliance Review,Assess security requirements and compliance standards,EO Engineer,16,='Estimate Settings'!$C$24,=$E35*$F35,$175,"=TEXT($G35*$H35,""$#,##0"")",,Uses DISCOVERY_MX - Baseline: 1-2 basic compliance standards
+Discovery,Integration Assessment,Identify integration points and data flow requirements,EO Engineer,24,='Estimate Settings'!$C$24,=$E36*$F36,$160,"=TEXT($G36*$H36,""$#,##0"")",,Uses DISCOVERY_MX - Baseline: 2 REST APIs 2-3 data sources
+Planning,Security Architecture,Design security controls and compliance framework,EO Engineer,24,='Estimate Settings'!$C$25,=$E37*$F37,$175,"=TEXT($G37*$H37,""$#,##0"")",Security & Compliance Review,Uses PLANNING_MX - Baseline: Basic authentication and encryption
+Planning,Data Architecture,Design data models schemas and data flow,EO Engineer,32,='Estimate Settings'!$C$25,=$E38*$F38,$165,"=TEXT($G38*$H38,""$#,##0"")",Integration Assessment,Uses PLANNING_MX - Baseline: 100GB storage 2-3 data sources
+Development,Infrastructure Setup,Provision and configure infrastructure environment,EO Engineer,40,='Estimate Settings'!$C$26,=$E39*$F39,$160,"=TEXT($G39*$H39,""$#,##0"")",,Uses DEVELOPMENT_MX - Baseline: Single region 2 environments
+Development,Core Application Development,Build primary application functionality and services,EO Engineer,120,='Estimate Settings'!$C$26,=$E40*$F40,$150,"=TEXT($G40*$H40,""$#,##0"")",Infrastructure Setup,Uses DEVELOPMENT_MX - Baseline: 3-5 core features minimal customization
+Development,Database Development,Implement database schema stored procedures and queries,EO Engineer,40,='Estimate Settings'!$C$26,=$E41*$F41,$155,"=TEXT($G41*$H41,""$#,##0"")",Data Architecture,Uses DEVELOPMENT_MX - Baseline: Standard relational schema 100GB
+Development,Integration Development,Build API integrations data connectors and workflows,EO Engineer,64,='Estimate Settings'!$C$26,=$E42*$F42,$155,"=TEXT($G42*$H42,""$#,##0"")",Core Application Development,Uses DEVELOPMENT_MX - Baseline: 2 REST API integrations
+Development,User Interface Development,Create user interface and user experience components,EO Engineer,48,='Estimate Settings'!$C$26,=$E43*$F43,$140,"=TEXT($G43*$H43,""$#,##0"")",Core Application Development,Uses DEVELOPMENT_MX - Baseline: Standard responsive UI 2-3 roles
+Development,Security Implementation,Implement authentication authorization and security controls,EO Engineer,32,='Estimate Settings'!$C$26,=$E44*$F44,$165,"=TEXT($G44*$H44,""$#,##0"")",Security Architecture,Uses DEVELOPMENT_MX - Baseline: Basic auth encryption RBAC for 2-3 roles
+Testing,Unit Testing,Develop and execute unit tests for all components,EO Engineer,32,='Estimate Settings'!$C$27,=$E45*$F45,$140,"=TEXT($G45*$H45,""$#,##0"")",Core Application Development,Uses TESTING_MX - Testing coverage for core features
+Testing,Integration Testing,Test system integrations data flows and API endpoints,EO Engineer,40,='Estimate Settings'!$C$27,=$E46*$F46,$140,"=TEXT($G46*$H46,""$#,##0"")",Integration Development,Uses TESTING_MX - Baseline: 2 API integrations 2-3 data sources
+Testing,Performance Testing,Conduct load performance and scalability testing,EO Engineer,24,='Estimate Settings'!$C$27,=$E47*$F47,$150,"=TEXT($G47*$H47,""$#,##0"")",Integration Testing,Uses TESTING_MX - Baseline: Standard performance 50 concurrent users
+Testing,Security Testing,Perform security assessments and vulnerability testing,EO Engineer,16,='Estimate Settings'!$C$27,=$E48*$F48,$175,"=TEXT($G48*$H48,""$#,##0"")",Security Implementation,Uses TESTING_MX - Baseline: Basic security controls assessment
+Testing,User Acceptance Testing,Coordinate and support UAT with business users,EO Engineer,32,='Estimate Settings'!$C$27,=$E49*$F49,$150,"=TEXT($G49*$H49,""$#,##0"")",Performance Testing,Uses TESTING_MX - Baseline: 50 users 2-3 roles
+Deployment,Pre-Production Validation,Validate solution in pre-production environment,EO Engineer,16,='Estimate Settings'!$C$28,=$E50*$F50,$150,"=TEXT($G50*$H50,""$#,##0"")",User Acceptance Testing,Uses DEPLOYMENT_MX - Baseline: 2 environments (dev prod)
+Deployment,Production Deployment,Deploy solution to production environment,EO Engineer,24,='Estimate Settings'!$C$28,=$E51*$F51,$160,"=TEXT($G51*$H51,""$#,##0"")",Pre-Production Validation,Uses DEPLOYMENT_MX - Baseline: Single region standard deployment
+Deployment,Data Migration,Migrate existing data to new system,EO Engineer,32,='Estimate Settings'!$C$28,=$E52*$F52,$155,"=TEXT($G52*$H52,""$#,##0"")",Production Deployment,Uses DEPLOYMENT_MX - Baseline: 100GB data 2-3 data sources
+Deployment,Go-Live Support,Provide support during initial production rollout,EO Engineer,40,='Estimate Settings'!$C$28,=$E53*$F53,$130,"=TEXT($G53*$H53,""$#,##0"")",Data Migration,Uses DEPLOYMENT_MX - Extended support during stabilization
+Training,Administrator Training,Train system administrators and technical users,EO Engineer,16,='Estimate Settings'!$C$29,=$E54*$F54,$140,"=TEXT($G54*$H54,""$#,##0"")",Production Deployment,Uses TRAINING_MX - Baseline: 50 users admin and technical roles
+Training,End User Training,Train business users on system functionality,EO Engineer,24,='Estimate Settings'!$C$29,=$E55*$F55,$130,"=TEXT($G55*$H55,""$#,##0"")",Administrator Training,Uses TRAINING_MX - Baseline: 50 users 2-3 roles
+Training,Documentation,Create user manuals technical documentation and runbooks,EO Engineer,32,='Estimate Settings'!$C$29,=$E56*$F56,$120,"=TEXT($G56*$H56,""$#,##0"")",End User Training,Uses TRAINING_MX - Documentation scope matches feature set
+Closeout,Knowledge Transfer,Transfer ownership to operations and support teams,EO Engineer,16,='Estimate Settings'!$C$30,=$E57*$F57,$140,"=TEXT($G57*$H57,""$#,##0"")",Documentation,Uses CLOSEOUT_MX - Comprehensive handover
+Closeout,Performance Baseline,Establish performance metrics and monitoring baselines,EO Engineer,8,='Estimate Settings'!$C$30,=$E58*$F58,$130,"=TEXT($G58*$H58,""$#,##0"")",Knowledge Transfer,Uses CLOSEOUT_MX - Performance monitoring setup
+Management,Technical Leadership,Quarterback technical oversight and architecture review,EO Quarterback,"=ROUND(SUM($G$33:$G$58)*0.10,0)",='Estimate Settings'!$C$32,=$E59*$F59,$200,"=TEXT($G59*$H59,""$#,##0"")",,Includes: Solution Design. 10% of ACTUAL engineering hours - Uses LEADERSHIP_MX
+Management,Project Management,Project coordination planning and management activities,EO Project Manager,"=ROUND(SUM($G$33:$G$58)*0.10,0)",='Estimate Settings'!$C$31,=$E60*$F60,$150,"=TEXT($G60*$H60,""$#,##0"")",,Includes: Implementation Planning and Project Retrospective. 10% of ACTUAL engineering hours - Uses MANAGEMENT_MX
+,,,,,TOTAL HOURS,"=SUM($G$33:$G$60)",TOTAL COST,"=TEXT(SUMPRODUCT($G$33:$G$60,$H$33:$H$60),""$#,##0"")",,EO Sales Engineer: Update phase-based multipliers in Estimate Settings sheet based on customer scope

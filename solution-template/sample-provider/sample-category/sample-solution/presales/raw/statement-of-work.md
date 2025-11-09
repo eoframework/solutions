@@ -1,268 +1,446 @@
-# STATEMENT OF WORK (SOW)
+# [Project Name] Statement of Work (SOW)
 
-**Document Version:** 1.0
-**Date:** [DATE]
-**Prepared by:** [VENDOR_NAME]
-**Client:** [CLIENT_NAME]
-**Project:** {SOLUTION_NAME} Implementation
-**SOW Number:** [SOW_NUMBER]
+**Project Name:** [Project Name]
+**Client:** [Client Name]
+**Date:** [Month DD, YYYY]
+**Version:** v1.0
 
----
-
-## 1. EXECUTIVE SUMMARY
-
-### 1.1 Project Overview
-This Statement of Work (SOW) outlines the scope, deliverables, timeline, and terms for the implementation of {SOLUTION_NAME} for [CLIENT_NAME]. The project will deliver [PRIMARY_BUSINESS_OUTCOME] through [HIGH_LEVEL_APPROACH].
-
-### 1.2 Business Objectives
-- **Primary Goal:** [PRIMARY_BUSINESS_OBJECTIVE]
-- **Success Metrics:** [QUANTIFIED_SUCCESS_CRITERIA]
-- **Expected ROI:** [ROI_PERCENTAGE] over [TIME_PERIOD]
-
-### 1.3 Project Duration
-**Start Date:** [PROJECT_START_DATE]
-**End Date:** [PROJECT_END_DATE]
-**Total Duration:** [PROJECT_DURATION] weeks
+**Prepared by:**
+[Vendor/Consultant Name]
+[Address] • [Phone] • [Email] • [Website]
 
 ---
 
-## 2. SCOPE OF WORK
+## Executive Summary
 
-### 2.1 In-Scope Activities
-The following services and deliverables are included in this SOW:
-
-#### 2.1.1 Discovery & Planning Phase
-- [ ] Stakeholder interviews and requirements gathering
-- [ ] Current state assessment and technical evaluation
-- [ ] Solution architecture design and documentation
-- [ ] Project planning and resource allocation
-- [ ] Risk assessment and mitigation planning
-
-#### 2.1.2 Implementation Phase
-- [ ] Infrastructure provisioning and configuration
-- [ ] Application deployment and customization
-- [ ] System integration and data migration
-- [ ] Security configuration and hardening
-- [ ] Performance optimization and tuning
-
-#### 2.1.3 Testing & Validation Phase
-- [ ] Unit and integration testing
-- [ ] Performance and security testing
-- [ ] User acceptance testing coordination
-- [ ] Bug fixes and issue resolution
-- [ ] Go-live readiness assessment
-
-#### 2.1.4 Deployment & Support Phase
-- [ ] Production deployment and cutover
-- [ ] Post-deployment monitoring and support
-- [ ] User training and knowledge transfer
-- [ ] Documentation delivery
-- [ ] Project closure and handover
-
-### 2.2 Out-of-Scope Activities
-The following activities are explicitly excluded from this SOW:
-
-- [ ] Hardware procurement and installation
-- [ ] Third-party software licensing
-- [ ] Network infrastructure modifications
-- [ ] Legacy system decommissioning
-- [ ] Ongoing operational support beyond [SUPPORT_PERIOD]
-- [ ] Custom development beyond specified requirements
-- [ ] Data cleansing or transformation of legacy data
-- [ ] Training beyond initial knowledge transfer
+This Statement of Work (SOW) defines the scope, deliverables, roles, and terms for [brief description of the project engagement]. This engagement will deliver [key outcomes] to achieve [client's business objectives].
 
 ---
 
-## 3. DELIVERABLES
+## Background & Objectives
 
-### 3.1 Documentation Deliverables
-| Deliverable | Description | Due Date | Format |
-|-------------|-------------|----------|---------|
-| **Requirements Specification** | Detailed functional and non-functional requirements | [DATE] | CSV/Excel |
-| **Solution Architecture Document** | Technical architecture and design specifications | [DATE] | PDF |
-| **Implementation Plan** | Detailed project timeline and resource allocation | [DATE] | MS Project |
-| **Test Plan & Results** | Testing strategy and execution results | [DATE] | PDF |
-| **User Training Materials** | End-user guides and training documentation | [DATE] | PDF/Video |
-| **Operations Runbook** | System administration and maintenance procedures | [DATE] | PDF |
-| **As-Built Documentation** | Final system configuration and architecture | [DATE] | PDF |
+### Background
+Client currently [describe current situation, challenges, or pain points]. Key challenges include:
+- [e.g., legacy systems]
+- [e.g., scalability limitations]
+- [e.g., security concerns]
 
-### 3.2 System Deliverables
-| Component | Description | Acceptance Criteria |
-|-----------|-------------|-------------------|
-| **Production Environment** | Fully configured and operational system | Passes all acceptance tests |
-| **Integration Interfaces** | Configured data connections and APIs | Successful data flow validation |
-| **Security Configuration** | Implemented security controls and policies | Security audit compliance |
-| **Monitoring Setup** | Operational monitoring and alerting | Functional dashboards and alerts |
-| **Backup & Recovery** | Automated backup and disaster recovery | Successful recovery test |
+### Objectives
+- [Define desired business outcome #1]
+- [Define desired business outcome #2]
+- [Define desired business outcome #3]
+- [Define desired business outcome #4]
 
-### 3.3 Knowledge Transfer Deliverables
-- Administrator training (2 days, up to 10 participants)
-- End-user training (1 day, up to 25 participants)
-- Technical documentation and procedures
-- Recorded training sessions for future reference
+### Success Metrics
+- [Example metric, e.g., 99.9% uptime]
+- [e.g., Application latency < X ms]
+- [e.g., Zero critical issues during cutover]
+- [e.g., 20–30% cost reduction within 12 months]
 
 ---
 
-## 4. PROJECT TIMELINE & MILESTONES
+## Scope of Work
 
-### 4.1 Project Phases
-| Phase | Duration | Start Date | End Date | Key Milestones |
-|-------|----------|------------|----------|----------------|
-| **Discovery & Planning** | 2 weeks | [DATE] | [DATE] | Requirements approved, Architecture signed-off |
-| **Implementation** | 6 weeks | [DATE] | [DATE] | Infrastructure ready, Application deployed |
-| **Testing & Validation** | 2 weeks | [DATE] | [DATE] | UAT completed, Go-live approved |
-| **Deployment & Support** | 2 weeks | [DATE] | [DATE] | Production live, Training completed |
+### In Scope
+- [Discovery and assessment activities]
+- [Infrastructure or platform setup]
+- [System configuration and integration]
+- [Data migration and validation]
+- [Testing and quality assurance]
+- [Knowledge transfer and documentation]
 
-### 4.2 Critical Dependencies
-- [ ] Client provides timely access to required systems and environments
-- [ ] Subject matter experts available for requirements gathering and testing
-- [ ] Network connectivity and security approvals obtained
-- [ ] Third-party vendor coordination for integrations
-- [ ] Business stakeholder availability for key decision points
+### Activities
 
----
+#### Phase 1 – Discovery & Assessment
+During this initial phase, the Vendor will perform a comprehensive assessment of the Client's current state. This includes analyzing existing systems, identifying requirements, and determining the optimal approach for implementation.
 
-## 5. ROLES & RESPONSIBILITIES
+Key activities:
+- Comprehensive discovery and inventory
+- Requirements gathering and stakeholder interviews
+- Current-state documentation and analysis
+- Solution architecture design
+- Implementation planning and prioritization
+- Cost estimation and resource planning
 
-### 5.1 Vendor Responsibilities ([VENDOR_NAME])
-- **Project Manager:** Overall project coordination and delivery management
-- **Solution Architect:** Technical design and architecture oversight
-- **Implementation Team:** System configuration, deployment, and testing
-- **Training Specialist:** User enablement and knowledge transfer
-- **Support Engineer:** Post-deployment support and issue resolution
+This phase concludes with an Assessment Report that outlines the proposed plan, scope, risks, and timeline.
 
-### 5.2 Client Responsibilities ([CLIENT_NAME])
-- **Project Sponsor:** Executive oversight and business decision authority
-- **Technical Lead:** Infrastructure coordination and technical approvals
-- **Business Analyst:** Requirements validation and user acceptance testing
-- **System Administrator:** Ongoing system maintenance and administration
-- **End Users:** Participation in training and user acceptance testing
+#### Phase 2 – Solution Design & Environment Setup
+In this phase, the foundational infrastructure is provisioned and configured based on industry best practices. This includes environment setup, network configuration, security controls, monitoring, and access management.
 
-### 5.3 Shared Responsibilities
-- Risk management and issue escalation
-- Change control and scope management
-- Quality assurance and acceptance testing
-- Communication and stakeholder management
+Key activities:
+- Infrastructure and platform deployment
+- Network connectivity and configuration
+- Centralized logging and monitoring setup
+- Access control, authentication, and authorization policies
+- Security baseline configuration
+- Implementation of backup strategies and disaster recovery setup
 
----
+By the end of this phase, the Client will have a secure, production-ready environment for the solution.
 
-## 6. COMMERCIAL TERMS
+#### Phase 3 – Implementation & Execution
+Implementation will occur in well-defined phases based on business priority and complexity. Each phase follows a repeatable process with automated workflows for consistency and risk reduction.
 
-### 6.1 Project Investment
-| Category | Description | Amount |
-|----------|-------------|--------|
-| **Professional Services** | Implementation and configuration services | $[SERVICES_AMOUNT] |
-| **Training & Support** | User training and initial support | $[TRAINING_AMOUNT] |
-| **Travel & Expenses** | On-site support and travel costs | $[TRAVEL_AMOUNT] |
-| ****TOTAL PROJECT COST** | **Total investment for complete implementation** | **$[TOTAL_AMOUNT]** |
+Key activities:
+- Component development and configuration
+- Data migration and integration implementation
+- System configuration and tuning
+- Incremental testing and validation
+- Performance optimization
+- Issue remediation and quality assurance
 
-### 6.2 Payment Terms
-- **25%** upon SOW execution and project kickoff
-- **25%** upon completion of Discovery & Planning phase
-- **25%** upon completion of Implementation phase
-- **25%** upon successful go-live and project acceptance
+After each phase, the Vendor will coordinate validation and sign-off with the Client before proceeding.
 
-### 6.3 Additional Services
-Any additional services beyond the scope of this SOW will be quoted separately and require written approval from both parties.
+#### Phase 4 – Testing & Validation
+In the Testing and Validation phase, the solution undergoes thorough functional, performance, and security validation to ensure it meets required SLAs and compliance standards. Test cases and scripts will be executed based on Client-defined acceptance criteria.
 
----
+Key activities:
+- Smoke testing and sanity checks
+- Performance benchmarking and load testing
+- Security and compliance validation
+- Failover and resiliency testing
+- User Acceptance Testing (UAT) coordination
+- Go-live readiness review
 
-## 7. ACCEPTANCE CRITERIA
+Cutover will be coordinated with all relevant stakeholders and executed during an approved maintenance window, with well-documented rollback procedures in place.
 
-### 7.1 Technical Acceptance
-The solution will be considered technically accepted when:
-- [ ] All functional requirements are implemented and tested
-- [ ] System performance meets specified requirements
-- [ ] Security controls are implemented and validated
-- [ ] Integration testing is completed successfully
-- [ ] System passes all acceptance tests
+#### Phase 5 – Handover & Post-Implementation Support
+Following successful implementation and cutover, the focus shifts to ensuring operational continuity and knowledge transfer. The Vendor will provide a period of hypercare support and equip the Client's team with the documentation, tools, and processes needed for ongoing maintenance and optimization.
 
-### 7.2 Business Acceptance
-The project will be considered complete when:
-- [ ] Business stakeholders sign-off on user acceptance testing
-- [ ] Training is completed and knowledge transfer validated
-- [ ] Documentation is delivered and approved
-- [ ] System is operational in production environment
-- [ ] Support procedures are established and functional
+Activities include:
+- Delivery of as-built documentation (including architecture diagrams, configurations, monitoring setup, etc.)
+- Runbook and SOPs for day-to-day operations
+- Live or recorded knowledge transfer sessions for operations and application teams
+- Optimization recommendations
+- Optional transition to a managed services model for ongoing support, if contracted
 
 ---
 
-## 8. ASSUMPTIONS & CONSTRAINTS
+## Out of Scope
 
-### 8.1 Assumptions
-- Client will provide necessary access to systems, data, and personnel
-- Existing infrastructure meets minimum requirements for solution deployment
-- Required third-party systems and APIs are available and functional
-- Business requirements will remain stable throughout project duration
-- Client team members will be available for scheduled activities
-
-### 8.2 Constraints
-- Project must comply with existing security and compliance requirements
-- Implementation must not disrupt critical business operations
-- All data handling must meet privacy and regulatory requirements
-- Solution must integrate with existing IT infrastructure and policies
-- Budget and timeline constraints as specified in this SOW
+### Exclusions
+These items are not in scope unless added via change control:
+- [e.g., Application refactoring or custom development]
+- [e.g., Hardware procurement or disposal]
+- [e.g., Managed services post-implementation (unless separately contracted)]
+- [e.g., Training for end users]
 
 ---
 
-## 9. RISK MANAGEMENT
+## Deliverables
 
-### 9.1 Identified Risks
-| Risk | Impact | Probability | Mitigation Strategy |
-|------|--------|-------------|-------------------|
-| **Resource Availability** | High | Medium | Advance scheduling and backup resources |
-| **Integration Complexity** | Medium | High | Early integration testing and validation |
-| **Scope Creep** | High | Medium | Formal change control process |
-| **Technology Dependencies** | Medium | Low | Contingency planning and alternatives |
-
-### 9.2 Change Management
-Any changes to project scope, timeline, or budget must be documented through formal change requests and approved by both parties before implementation.
+| # | Deliverable                          | Type         | Due Date     | Acceptance By   |
+|---|--------------------------------------|--------------|--------------|-----------------|
+| 1 | Assessment Report                    | Document     | [Date]       | [Client Lead]   |
+| 2 | Solution Design Document             | Document     | [Date]       | [Technical Lead]|
+| 3 | Implementation Runbook               | Document     | [Date]       | [Ops Lead]      |
+| 4 | As-Built Documentation               | Document     | [Date]       | [Client Lead]   |
+| 5 | Knowledge Transfer Sessions          | Live/Recorded| [Date]       | [Client Team]   |
 
 ---
 
-## 10. TERMS & CONDITIONS
+## Project Plan & Timeline
 
-### 10.1 Intellectual Property
-- Client retains ownership of all business data and information
-- Vendor retains ownership of proprietary methodologies and tools
-- Solution configuration and customizations become client property upon final payment
-
-### 10.2 Confidentiality
-Both parties agree to maintain strict confidentiality of proprietary information and business data throughout the project and beyond.
-
-### 10.3 Warranty & Support
-- 90-day warranty on all deliverables from go-live date
-- Defect resolution included at no additional cost during warranty period
-- Post-warranty support available under separate maintenance agreement
-
-### 10.4 Limitation of Liability
-Vendor's liability is limited to the total contract value. Neither party shall be liable for indirect, incidental, or consequential damages.
+### Milestones
+- M1: Assessment Complete — [Date]
+- M2: Environment Ready — [Date]
+- M3: Implementation Complete — [Date]
+- M4: Testing Complete — [Date]
+- Go-Live — [Date]
+- Hypercare End — [Date]
 
 ---
 
-## 11. APPROVAL & SIGNATURES
+## Roles & Responsibilities (RACI)
 
-### Client Approval ([CLIENT_NAME])
+| Task/Role                                | Vendor PM | Vendor Arch | Vendor DevOps | Client IT | Client Sec | SME |
+|------------------------------------------|-----------|-------------|---------------|-----------|------------|-----|
+| Discovery & Requirements Gathering       | A         | R           | R             | C         | I          | I   |
+| Solution Architecture & Design           | C         | A           | R             | I         | I          | C   |
+| Infrastructure Setup                     | C         | A           | R             | C         | C          | C   |
+| Implementation Planning                  | A         | R           | C             | R         | C          | I   |
+| System Configuration                     | C         | R           | R             | C         | I          | I   |
+| Testing & Validation                     | R         | R           | R             | A         | C          | I   |
+| Security Configuration                   | C         | C           | R             | I         | A          | C   |
+| Monitoring & Observability Setup         | C         | R           | R             | C         | I          | I   |
+| Hypercare & Post-Launch Support          | A         | R           | R             | C         | I          | I   |
+| Knowledge Transfer                       | R         | R           | C             | A         | I          | I   |
 
-**Name:** [CLIENT_AUTHORIZED_SIGNATORY]
-**Title:** [TITLE]
-**Signature:** ________________________________
-**Date:** ________________
-
-### Vendor Approval ([VENDOR_NAME])
-
-**Name:** [VENDOR_AUTHORIZED_SIGNATORY]
-**Title:** [TITLE]
-**Signature:** ________________________________
-**Date:** ________________
+Legend:
+**R** = Responsible | **A** = Accountable | **C** = Consulted | **I** = Informed
 
 ---
 
-**Document Control:**
-**File Name:** SOW_{SOLUTION_NAME}_{CLIENT_NAME}_{DATE}
-**Version:** 1.0
-**Last Modified:** [DATE]
-**Next Review:** [REVIEW_DATE]
+## Architecture & Technical Design
+
+### Architecture Overview
+The proposed architecture is designed to provide a secure, scalable, and compliant foundation for current and future workloads. The architecture aligns with industry best practices and uses automation where possible to streamline deployment, security, and ongoing operations.
+
+### Architecture Type
+The deployment will follow [e.g., multi-tier, microservices, serverless, hybrid] architecture. This approach enforces clear separation of concerns, allows for granular security controls, and enables future scaling with centralized governance.
+
+Key architectural components include:
+- [Component 1: e.g., Load balancers, API gateway]
+- [Component 2: e.g., Application tier]
+- [Component 3: e.g., Data tier]
+- [Component 4: e.g., Integration layer]
+
+This design enables future scaling while maintaining isolation and reducing risk.
+
+### Application Hosting
+Depending on the workload pattern and requirements, applications will be hosted using appropriate infrastructure:
+- [Option 1: e.g., Virtual machines for legacy applications]
+- [Option 2: e.g., Containers for cloud-native workloads]
+- [Option 3: e.g., Serverless for event-driven workloads]
+
+All hosting services will be deployed following security best practices and managed using infrastructure-as-code (IaC).
+
+### Networking
+The networking architecture will be implemented using industry-standard components:
+- Network segmentation by tier (web, application, data) and environment
+- Subnets configured across multiple availability zones for high availability
+- Routing configured with appropriate security controls
+- Connectivity for hybrid integration (if applicable)
+- Load balancing and traffic management
+
+### Observability
+A comprehensive observability framework ensures operational continuity and rapid incident response:
+- Centralized logging and log aggregation
+- Application and infrastructure metrics monitoring
+- Distributed tracing for application performance
+- Security monitoring and threat detection
+- Alerting and notification workflows
+
+### Backup & Disaster Recovery
+All critical data and workloads will be protected through:
+- Automated backup policies
+- High availability configuration
+- Optional disaster recovery (DR) setup
+- DR strategies aligned to Client's defined RTO/RPO goals
+
+---
+
+## Assumptions
+
+### General Assumptions
+- Client provides timely access to systems, subject matter experts, and required resources.
+- Appropriate access permissions and credentials are provisioned before project phases start.
+- Network connectivity and firewall rules are established as needed.
+- All required accounts and licenses are available for project use.
+
+---
+
+## Dependencies
+
+### Project Dependencies
+- Client approval for architectural decisions and environment setup
+- Third-party vendor support (if required for integrations)
+- Access to production systems during cutover windows
+- Required security policies and compliance approvals in place
+
+---
+
+## Security, Compliance & Governance
+
+The implementation and target environment will be architected and validated to meet the Client's security, compliance, and governance requirements. Vendor will adhere to industry-standard security frameworks and best practices during implementation.
+
+### Identity & Access Management
+- Access controls designed using least-privilege principles
+- Role-based access control (RBAC) aligned with Client's internal teams
+- Optional identity federation integration (e.g., Azure AD, Okta, SSO)
+
+### Monitoring & Threat Detection
+- Real-time security monitoring and threat detection
+- Audit logging and change detection enabled
+- Optional integration with SIEM tools (e.g., Splunk, Datadog, ELK)
+
+### Compliance & Auditing
+- Policies configured for adherence to standards such as SOC2, ISO27001, HIPAA, PCI-DSS, etc. (as applicable)
+- Continuous compliance assessment and reporting
+- Support for regulatory compliance requirements
+
+### Encryption & Key Management
+- Encryption for data in-transit and at-rest
+- Key management using industry-standard practices
+- Certificate management and rotation policies
+
+### Governance
+- Security policies enforced through automation
+- Resource tagging strategy for cost allocation, ownership, and compliance
+- Infrastructure-as-code policy enforcement
+
+---
+
+## Environments & Access
+
+### Environments
+- Dev, QA, Stage, Prod
+
+### Access Policies
+- Multi-factor authentication (MFA) required
+- Single sign-on (SSO) federation preferred
+- Secure remote access protocols
+
+---
+
+## Testing & Validation
+
+Comprehensive testing and validation will take place throughout the implementation lifecycle to ensure functionality, performance, security, and resilience of the solution.
+
+### Functional Validation
+- End-to-end application validation
+- Validation against business workflows and acceptance criteria
+
+### Performance & Load Testing
+- Benchmark testing and performance validation
+- Stress testing to identify capacity limits
+
+### Security Testing
+- Validation of access controls, encryption, and compliance requirements
+- Optional penetration testing and vulnerability scanning
+
+### Disaster Recovery & Resilience Tests
+- Failover testing (high availability validation)
+- RTO/RPO validation
+
+### User Acceptance Testing (UAT)
+- Performed in coordination with Client stakeholders
+- Test environment and test data managed by Vendor
+
+### Go-Live Readiness
+A Go-Live Readiness Checklist will be delivered including:
+- Security and compliance sign-offs
+- Functional validation completion
+- Data integrity checks
+- Issue log closure
+
+---
+
+## Implementation Strategy & Tools
+
+The implementation approach will follow industry best practices and proven methodologies, selecting the appropriate strategy for each component based on business and technical requirements.
+
+### Example Implementation Patterns
+- [Pattern 1: e.g., Incremental rollout]
+- [Pattern 2: e.g., Blue-green deployment]
+- [Pattern 3: e.g., Canary releases]
+
+### Tooling Overview
+
+| Category              | Primary Tools                | Alternative Options           |
+|-----------------------|------------------------------|-------------------------------|
+| Infrastructure        | [e.g., Terraform, ARM]       | [e.g., CloudFormation, Pulumi]|
+| Configuration Mgmt    | [e.g., Ansible, Chef]        | [e.g., Puppet, SaltStack]     |
+| Monitoring            | [e.g., Prometheus, Datadog]  | [e.g., New Relic, AppDynamics]|
+| CI/CD                 | [e.g., Jenkins, GitLab CI]   | [e.g., GitHub Actions, Azure DevOps]|
+| Security Scanning     | [e.g., Aqua, Snyk]           | [e.g., Twistlock, Qualys]     |
+
+---
+
+## Data Management Plan
+
+### Data Strategy
+- Data migration approach with minimal downtime
+- Validation through data integrity checks and reconciliation
+
+### Security & Compliance
+- Encryption enabled for data in-transit and at-rest
+- Data classification aligned with Client's internal policies
+
+---
+
+## Cutover Plan & Go-Live Readiness
+
+### Cutover Checklist
+- Pre-cutover validation and readiness review
+- DNS or routing configuration updates
+- Application endpoint reconfiguration
+- Health check monitoring and validation
+
+### Rollback Strategy
+- Documented rollback procedures
+- Backup restoration process
+- Revert configuration changes if needed
+
+---
+
+## Handover & Managed Services Transition
+
+### Handover Artifacts
+- As-Built documentation
+- Cost optimization recommendations
+- Access control and governance documentation
+- Monitoring and alert configuration reference
+
+### Knowledge Transfer
+- [X] live knowledge transfer sessions
+- Recorded training materials hosted in shared portal
+
+---
+
+## Pricing & Payment Terms
+
+### Pricing Model
+- Fixed price or Time & Materials (T&M)
+- Milestone-based payments per Deliverables table
+
+---
+
+## Invoicing & Expenses
+
+### Invoicing
+- Monthly invoicing based on milestones or work completed
+- Net 30 payment terms
+
+### Expenses
+- Reimbursable at cost with prior approval
+
+---
+
+## Terms & Conditions
+
+All services will be delivered in accordance with the executed Master Services Agreement (MSA) or equivalent contractual document between Vendor and Client.
+
+### Scope Changes
+- Change Requests required for any scope, schedule, or cost adjustments
+
+### Intellectual Property
+- Client retains all ownership of developed assets, applications, and configurations
+- Vendor retains proprietary methodologies, tools, and accelerators unless otherwise agreed
+
+### Service Levels
+- Deliverables based on best effort unless otherwise specified in SLAs
+- Hypercare period of [X] weeks included with option to extend via managed services
+
+### Liability
+- Liability caps as agreed in MSA
+- Excludes confidentiality or IP infringement breach
+
+### Confidentiality
+- All exchanged artifacts under NDA protection
+
+### Termination
+- Mutually terminable per MSA terms, subject to payment for completed work
+
+### Governing Law
+- Agreement governed under the laws of [State/Region]
+
+---
+
+## Sign-Off
+
+By signing below, both parties agree to the scope, approach, and terms outlined in this Statement of Work.
+
+**Client Authorized Signatory:**
+Name: __________________________
+Title: __________________________
+Signature: ______________________
+Date: __________________________
+
+**Service Provider Authorized Signatory:**
+Name: __________________________
+Title: __________________________
+Signature: ______________________
+Date: __________________________
 
 ---
 

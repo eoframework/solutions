@@ -1,0 +1,12 @@
+# Temporary development files
+temp/
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+
+# IDE files
+.vscode/
+.idea/
+*.swp

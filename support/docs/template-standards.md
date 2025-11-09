@@ -24,12 +24,11 @@ solutions/[provider]/[category]/[solution]/
 │   └── troubleshooting.md               # Common issues and resolution
 ├── 💼 presales/                          # Comprehensive business materials
 │   ├── README.md                         # Presales process overview
-│   ├── business-case-template.md         # ROI analysis and justification
-│   ├── executive-presentation-template.md # C-level stakeholder materials
-│   ├── roi-calculator-template.md        # Financial impact calculator
-│   ├── requirements-questionnaire.md     # Customer discovery framework
-│   ├── solution-design-template.md       # Technical architecture planning
-│   └── competitive-analysis.md           # Market positioning and differentiation
+│   └── raw/                              # Source files for document generation
+│       ├── solution-briefing.md          # Strategic presentation with business case
+│       ├── discovery-questionnaire.csv   # Standardized discovery framework
+│       ├── level-of-effort-estimate.csv  # Resource planning and timeline
+│       └── statement-of-work.md          # Contract scope and deliverables
 └── 🚀 delivery/                          # Implementation and deployment
     ├── README.md                         # Delivery process coordination
     ├── implementation-guide.md           # Step-by-step deployment procedures
@@ -112,19 +111,273 @@ All solutions must use one of these approved categories:
 
 ### 💼 **Presales Materials Requirements**
 
-**📊 Required Business Materials:**
-- **business-case-template.md:** Quantified ROI analysis and comprehensive business justification
-- **executive-presentation-template.md:** C-level stakeholder materials with strategic focus
-- **roi-calculator-template.md:** Financial impact calculator with customizable parameters
-- **requirements-questionnaire.md:** Structured customer discovery framework and assessment tools
-- **solution-design-template.md:** Technical architecture planning and design coordination
-- **competitive-analysis.md:** Market positioning, differentiation, and competitive landscape analysis
+**📊 Required Presales Documents (in `presales/raw/`):**
+- **solution-briefing.md:** Comprehensive presentation covering business case, solution overview, and strategic value. Includes business need, impact, stakeholders, success criteria, and implementation approach.
+- **discovery-questionnaire.csv:** Standardized discovery framework using EO Framework taxonomy (see Discovery Taxonomy section below). 7-column structure: Question ID, Category, Sub-Category, Question, Guidance, Customer Response, Notes.
+- **level-of-effort-estimate.csv:** Resource planning, timeline estimation, and effort breakdown by phase and role.
+- **statement-of-work.md:** Contract scope, deliverables, pricing, timeline, and terms.
 
-**✅ Business Content Quality Standards:**
-- **Quantified Value Propositions:** Specific ROI calculations, success metrics, and measurable outcomes
-- **Stakeholder Mapping:** Clear identification of decision makers, influencers, and end users
-- **Risk Assessment:** Identified challenges with comprehensive mitigation strategies
-- **Market Positioning:** Clear competitive differentiation and unique value proposition
+**✅ Presales Content Quality Standards:**
+- **Strategic Focus:** Business value over technical features, stakeholder-aligned messaging
+- **Standardized Discovery:** Use EO Framework taxonomy (mandatory), ensure consistent categorization
+- **Actionable Insights:** Clear next steps, decision points, and success criteria
+- **Professional Presentation:** Clean formatting, minimal clutter, conversation-friendly structure
+
+### 🔍 **Discovery Questionnaire Taxonomy Standard**
+
+All Discovery Questionnaires **must** use the standardized EO Framework taxonomy. This ensures consistency across all solutions, enables aggregation of insights, and provides a professional framework for client discovery.
+
+#### **Standardized Question Structure (7 Columns)**
+```csv
+Question ID, Category, Sub-Category, Question, Guidance, Customer Response, Notes
+```
+
+**Column Definitions:**
+- **Question ID:** Unique identifier using category prefix (e.g., PC-001, REQ-005)
+- **Category:** One of 8 standardized categories (see below)
+- **Sub-Category:** Standardized sub-category within the category
+- **Question:** The actual question to ask the client
+- **Guidance:** Optional answer guidance (common ranges, typical options, examples)
+- **Customer Response:** Client's answer (blank in template)
+- **Notes:** Why we're asking / what we'll use it for
+
+#### **8 Standardized Categories**
+
+**1. Project Context (Prefix: PC-)**
+Foundation information about the engagement
+- **Basic Information:** Project name, company, stakeholders, date
+- **Business Drivers:** Business needs, challenges, strategic objectives
+- **Success Criteria:** Success definition, KPIs, stakeholder mapping
+
+**2. Current State (Prefix: CS-)**
+Understanding what exists today
+- **Business Processes:** Current workflows, systems, operations
+- **Technology Environment:** Infrastructure, platforms, applications
+- **Challenges:** Problems, limitations, pain points
+
+**3. Requirements (Prefix: REQ-)**
+What the solution needs to deliver
+- **Business Requirements:** Timeline, budget, business goals
+- **Technical Requirements:** Performance, users, uptime, disaster recovery
+- **Security & Compliance:** Security needs, compliance standards
+- **Integration Requirements:** Systems to connect, data sources
+
+**4. Technical Environment (Prefix: TE-)**
+Current and target technical landscape
+- **Infrastructure:** Current/target platforms, cloud strategy
+- **Data & Storage:** Data types, retention, lifecycle
+- **Security:** Authentication, authorization, encryption
+- **Performance & Scale:** Load requirements, geographic distribution
+
+**5. Organizational Readiness (Prefix: OR-)**
+People, process, governance
+- **Team & Resources:** Technical leads, available resources, skill levels
+- **Governance:** Approval processes, decision authority
+- **Change Management:** Change readiness, training needs
+- **Communication:** Preferences, stakeholder engagement
+
+**6. Constraints (Prefix: CON-)**
+Boundaries and limitations
+- **Timeline:** Critical dates, deadlines, blackout periods
+- **Budget:** Budget range, financial constraints
+- **Technical:** Technical limitations, platform constraints
+- **Regulatory:** Compliance requirements, regulatory constraints
+
+**7. Risk Assessment (Prefix: RISK-)**
+Potential issues and mitigation
+- **Implementation Risks:** Concerns, failure modes
+- **Business Risks:** Business impact risks
+- **Technical Risks:** Technology-related concerns
+- **Organizational Risks:** Change management challenges
+
+**8. Future Vision (Prefix: FV-)**
+Long-term planning and growth
+- **Strategic Vision:** Long-term goals, roadmap
+- **Growth & Scalability:** Expected growth, future needs
+- **Future Capabilities:** Additional features, integrations
+
+#### **Taxonomy Usage Guidelines**
+
+**Mandatory Requirements:**
+- ✅ All solutions **must** use these 8 categories
+- ✅ All solutions **must** use standardized sub-categories within each category
+- ✅ Question IDs **must** use the category prefix
+- ❌ Solutions **cannot** create new categories outside this taxonomy
+- ❌ Solutions **cannot** create new sub-categories without framework approval
+
+**Flexibility Allowed:**
+- ✅ Solutions can use a **subset** of categories (e.g., skip Technical Environment for business-only solutions)
+- ✅ Solutions can use a **subset** of sub-categories within categories
+- ✅ Solutions can customize **questions** within the standard categories/sub-categories
+- ✅ Solutions can add solution-specific questions within standard categories
+
+**Example Question Structure:**
+```csv
+PC-001,Project Context,Basic Information,What is your company name?,"","",Client identification
+REQ-007,Requirements,Security & Compliance,What compliance standards must be met?,"Common standards: SOC 2, ISO 27001, HIPAA, PCI DSS, GDPR, FedRAMP","",Compliance requirements
+TE-003,Technical Environment,Data & Storage,What types of data will the system handle?,"Common types: Customer data, financial data, healthcare data, personal data","",Data classification
+```
+
+### 📊 **Level of Effort Estimate Standard**
+
+All Level of Effort (LOE) Estimates **must** use the standardized EO Framework structure. This ensures consistency in resource planning, accurate effort estimation, and professional client presentations.
+
+#### **Standardized LOE Structure (9 Columns)**
+```csv
+Phase, Work Package, Task Description, Resource Type, Estimated Hours, Rate, Cost Estimate, Dependencies, Notes
+```
+
+**Column Definitions:**
+- **Phase:** One of 8 standardized phases (see below)
+- **Work Package:** Logical grouping of related tasks within the phase
+- **Task Description:** Specific task or activity to be performed
+- **Resource Type:** One of 4 EO Framework roles (see below)
+- **Estimated Hours:** Effort estimate in hours for the task
+- **Rate:** Hourly rate for the resource (use dynamic formulas)
+- **Cost Estimate:** Calculated cost using formula: `=TEXT(E*F,"$#,##0")`
+- **Dependencies:** Tasks that must complete before this task
+- **Notes:** Additional context, assumptions, or special considerations
+
+#### **8 Standardized Phases**
+
+All LOE estimates **must** use these standardized phases in this order:
+
+**1. Discovery**
+Initial assessment and requirements gathering
+- Requirements Gathering, Technical Assessment, Security Review, Integration Assessment
+- Typically 10-15% of total engineering effort
+
+**2. Planning**
+Solution design and implementation planning
+- Solution Design, Security Architecture, Data Architecture, Implementation Planning
+- Typically 15-20% of total engineering effort
+
+**3. Development**
+Core implementation and build activities
+- Infrastructure Setup, Application Development, Database Development, Integration Development, Security Implementation
+- Typically 40-50% of total engineering effort
+
+**4. Testing**
+Quality assurance and validation
+- Unit Testing, Integration Testing, Performance Testing, Security Testing, User Acceptance Testing
+- Typically 15-20% of total engineering effort
+
+**5. Deployment**
+Production rollout and go-live activities
+- Pre-Production Validation, Production Deployment, Data Migration, Go-Live Support
+- Typically 10-15% of total engineering effort
+
+**6. Training**
+User enablement and knowledge transfer
+- Administrator Training, End User Training, Documentation
+- Typically 5-10% of total engineering effort
+
+**7. Closeout**
+Project completion and handover
+- Knowledge Transfer, Performance Baseline, Project Retrospective
+- Typically 2-5% of total engineering effort
+
+**8. Management**
+Project and technical leadership overhead (auto-calculated)
+- Technical Leadership (Quarterback): 25% of engineering hours
+- Project Management: 20% of engineering hours
+- **Must use dynamic formulas** (see below)
+
+#### **4 EO Framework Roles**
+
+All LOE estimates **must** use only these standardized roles:
+
+| Role | Description | Typical Rate Range | When to Use |
+|------|-------------|-------------------|-------------|
+| **EO Sales Engineer** | Presales technical support and discovery | $150-$180/hr | Presales activities, technical discovery, solution validation |
+| **EO Quarterback** | Technical leadership and architecture | $180-$220/hr | Solution design, technical oversight, architecture review |
+| **EO Engineer** | Technical implementation and delivery | $120-$180/hr | All technical work (development, testing, deployment, training) |
+| **EO Project Manager** | Project coordination and management | $140-$160/hr | Planning, coordination, closeout activities |
+
+**Rate Guidelines:**
+- Rates vary based on solution complexity, required expertise, and market conditions
+- Use higher rates for specialized skills (security, AI/ML, advanced architecture)
+- Use lower rates for standard implementation tasks
+- Document rate rationale in Notes column if using rates outside typical range
+
+#### **Management Overhead Formulas (CRITICAL)**
+
+The **Management phase** is **mandatory** and must include these two tasks with **dynamic formulas**:
+
+**Technical Leadership (EO Quarterback):**
+```csv
+Management,Technical Leadership,Quarterback technical oversight and architecture review,EO Quarterback,"=ROUND(SUM(E2:E[last_eng_task])*0.25,0)",$200,"=TEXT(E*F,""$#,##0"")",,25% of engineering effort for technical leadership
+```
+
+**Project Management (EO Project Manager):**
+```csv
+Management,Project Management,Project coordination planning and management activities,EO Project Manager,"=ROUND(SUM(E2:E[last_eng_task])*0.20,0)",$150,"=TEXT(E*F,""$#,##0"")",,20% of engineering effort for project management
+```
+
+**Formula Breakdown:**
+- `[last_eng_task]` = Row number of last task before Management phase (e.g., if Closeout ends at E30, use E30)
+- `SUM(E2:E[last_eng_task])` = Total of all engineering hours
+- `*0.25` = 25% overhead for Quarterback
+- `*0.20` = 20% overhead for Project Manager
+- `ROUND(...,0)` = Round to whole hours
+- Total overhead = 45% (25% QB + 20% PM)
+
+#### **Dynamic Cost Formulas (CRITICAL)**
+
+All cost calculations **must** use dynamic Excel formulas (not static values):
+
+**Individual Task Cost:**
+```excel
+=TEXT(E*F,"$#,##0")
+```
+Where E = Estimated Hours column, F = Rate column
+
+**Total Hours Formula:**
+```excel
+=SUM(E2:E[last_row])
+```
+
+**Total Cost Formula:**
+```excel
+=TEXT(SUM(E2:E[last_row]*F2:F[last_row]),"$#,##0")
+```
+
+**Why Dynamic Formulas:**
+- Enables real-time updates when hours or rates change
+- Prevents calculation errors from manual updates
+- Professional presentation with auto-calculated totals
+- Supports scenario planning and what-if analysis
+
+#### **LOE Usage Guidelines**
+
+**Mandatory Requirements:**
+- ✅ All LOE estimates **must** use the 9-column structure
+- ✅ All LOE estimates **must** use 8 standardized phases in order
+- ✅ All LOE estimates **must** use only 4 EO Framework roles
+- ✅ Management phase **must** include QB and PM with dynamic formulas
+- ✅ All cost estimates **must** use dynamic formulas
+- ❌ Cannot skip Management phase
+- ❌ Cannot create custom roles outside the 4 EO roles
+- ❌ Cannot use static cost values (must use formulas)
+
+**Flexibility Allowed:**
+- ✅ Can adjust hours based on solution complexity
+- ✅ Can adjust rates within typical ranges (document rationale)
+- ✅ Can skip certain tasks within phases if not applicable
+- ✅ Can add solution-specific tasks within standard phases
+- ✅ Can adjust QB/PM overhead percentages if justified (document in Notes)
+
+**Example LOE Total Row:**
+```csv
+,,,     TOTAL HOURS,"=SUM(E2:E32)",   TOTAL COST,"=TEXT(SUM(E2:E32*F2:F32),""$#,##0"")",,Total project cost estimate
+```
+
+**Quality Validation:**
+- Engineering hours should be 60-70% of total hours (before management overhead)
+- Management overhead (QB + PM) should be approximately 45% of engineering hours
+- Total hours = Engineering + Management (QB + PM)
+- Verify formulas calculate correctly when opened in Excel
+- Test scenarios: change hours/rates and verify totals update automatically
 
 ### 🚀 **Delivery Materials Requirements**
 

@@ -8,12 +8,9 @@ This directory contains comprehensive business and sales materials for the **{SO
 
 | Document | Primary Audience | Usage Phase | Preparation Time |
 |----------|------------------|-------------|------------------|
-| **[💰 Business Case](business-case.md)** | Executives, Budget Holders | Funding Approval | 2-4 hours |
-| **[📊 Executive Presentation](executive-presentation.md)** | C-Level, Senior Leadership | Strategic Presentations | 1-2 hours |
-| **[📈 ROI Calculator](roi-calculator.csv)** | Financial Teams, CFO | Budget Justification | 1-2 hours |
-| **[❓ Requirements Questionnaire](requirements-questionnaire.csv)** | Technical Teams, IT Leadership | Discovery & Assessment | 3-5 hours |
+| **[📊 Solution Briefing](solution-briefing.md)** | C-Level, Senior Leadership, Stakeholders | Strategic Presentations & Business Case | 2-3 hours |
+| **[🔍 Discovery Questionnaire](discovery-questionnaire.csv)** | Technical Teams, IT Leadership | Discovery & Assessment | 3-5 hours |
 | **[⏱️ Level of Effort Estimate](level-of-effort-estimate.csv)** | Project Managers, Resource Planning | Project Planning | 6-12 hours |
-| **[🎨 Solution Design](solution-design.md)** | Architects, Technical Leaders | Technical Planning | 4-6 hours |
 | **[📄 Statement of Work](statement-of-work.md)** | Legal, Contracts, Project Managers | Contract Negotiation | 3-6 hours |
 
 ### 💼 **Business Value Proposition**
@@ -36,7 +33,7 @@ Initial Contact → Discovery Meeting → Requirements Gathering → Qualificati
 ```
 
 **Materials Used**:
-1. **[❓ Requirements Questionnaire](requirements-questionnaire.md)** - Comprehensive stakeholder discovery
+1. **[🔍 Discovery Questionnaire](discovery-questionnaire.csv)** - Comprehensive stakeholder discovery
 2. **Solution Overview** - High-level capability presentation
 3. **Use Case Scenarios** - Industry-specific application examples
 
@@ -48,12 +45,9 @@ Technical Design → Business Case → Executive Presentation → Proposal
 ```
 
 **Materials Used**:
-1. **[❓ Requirements Questionnaire](requirements-questionnaire.csv)** - Initial discovery and assessment
-2. **[🎨 Solution Design](solution-design.md)** - Technical architecture planning
-3. **[⏱️ Level of Effort Estimate](level-of-effort-estimate.csv)** - Project planning and resource estimation
-4. **[💰 Business Case](business-case.md)** - Comprehensive business justification
-5. **[📊 Executive Presentation](executive-presentation.md)** - Senior leadership materials
-6. **[📈 ROI Calculator](roi-calculator.csv)** - Financial impact analysis
+1. **[🔍 Discovery Questionnaire](raw/discovery-questionnaire.csv)** - Initial discovery and assessment
+2. **[⏱️ Level of Effort Estimate](raw/level-of-effort-estimate.csv)** - Project planning and resource estimation
+3. **[📊 Solution Briefing](raw/solution-briefing.md)** - Comprehensive business case and executive presentation
 
 ### **Phase 3: Validation & Approval** (Week 4-6)
 ```
@@ -70,66 +64,38 @@ Stakeholder Review → Technical Validation → Financial Approval → Contract
 
 ## 📚 **Material Details & Usage**
 
-### **💰 Business Case Template**
-**Purpose**: Comprehensive business justification with financial analysis  
-**Audience**: Executives, Finance Teams, Budget Holders  
-**Usage**: Funding approval and strategic planning
-
-**Key Components**:
-- Executive Summary with strategic value proposition
-- Current State Analysis and business pain points
-- Solution Overview with technical capabilities
-- Financial Analysis with ROI calculations
-- Risk Assessment and mitigation strategies
-- Implementation Timeline and resource requirements
-
-**Customization Required**:
-- [ ] Customer-specific business metrics and KPIs
-- [ ] Industry-specific use cases and examples
-- [ ] Actual cost estimates based on customer scale
-- [ ] Customer stakeholder information and roles
-
-### **📊 Executive Presentation Template**
-**Purpose**: Senior leadership presentation for strategic approval  
-**Audience**: C-Level executives, Board Members, Senior Leadership  
-**Usage**: Strategic presentations and executive briefings
+### **📊 Solution Briefing Template**
+**Purpose**: Comprehensive presentation covering business case, solution overview, and strategic value
+**Audience**: C-Level executives, Senior Leadership, Key Stakeholders
+**Usage**: Strategic presentations, business case justification, and stakeholder alignment
 
 **Key Sections**:
-- Strategic Business Challenge and market context
-- Solution Overview with key differentiators
-- Financial Impact and ROI projections
+- Executive Summary with strategic value proposition
+- Current State - Business challenges and pain points
+- Business Case - Need, impact, stakeholders, and success criteria
+- Solution Overview with architecture and key components
+- Business Value - Strategic benefits and competitive advantages
 - Implementation Approach and timeline
-- Success Metrics and measurement framework
-- Next Steps and decision points
+- Investment Summary and next steps
 
 **Presentation Tips**:
 - Keep technical details high-level and business-focused
 - Emphasize strategic value and competitive advantage
 - Include customer references and success stories
 - Focus on business outcomes rather than technical features
+- Tailor the business case section to specific stakeholder concerns
 
-### **📈 ROI Calculator Template**
-**Purpose**: Detailed financial impact analysis and modeling  
-**Audience**: Finance Teams, CFO, Budget Analysts  
-**Usage**: Budget justification and financial planning
+**Customization Required**:
+- [ ] Customer-specific business needs and pain points
+- [ ] Key stakeholder groups and their concerns
+- [ ] Success criteria aligned with customer objectives
+- [ ] Industry-specific use cases and examples
+- [ ] Actual investment estimates based on customer scale
 
-**Calculator Components**:
-- Current State Cost Analysis (baseline establishment)
-- Solution Cost Breakdown (implementation and operational)
-- Benefit Quantification (efficiency gains, cost reductions)
-- ROI Calculation (payback period, NPV, IRR)
-- Sensitivity Analysis (scenario planning)
-
-**Input Requirements**:
-- Current operational costs and resource allocation
-- Transaction volumes and processing metrics
-- Labor costs and productivity measurements
-- Infrastructure and operational expense data
-
-### **❓ Requirements Questionnaire**
-**Purpose**: Comprehensive discovery and technical assessment  
-**Audience**: Technical Teams, IT Leadership, Operations  
-**Usage**: Solution design and requirements validation
+### **🔍 Discovery Questionnaire**
+**Purpose**: Comprehensive discovery and technical assessment
+**Audience**: Technical Teams, IT Leadership, Operations
+**Usage**: Solution design and needs validation
 
 **Question Categories**:
 - Business Requirements and use cases
@@ -145,26 +111,34 @@ Stakeholder Review → Technical Validation → Financial Approval → Contract
 - **Integration Needs**: Systems, APIs, data flows
 - **Constraints**: Budget, timeline, regulatory requirements
 
-### **🎨 Solution Design Template**
-**Purpose**: Technical architecture planning and design validation  
-**Audience**: Solution Architects, Technical Leadership, Engineering Teams  
-**Usage**: Technical planning and architecture approval
+**EO Framework Taxonomy**:
+- 8 standardized categories with mandatory prefixes (PC, CS, REQ, TE, OR, CON, RISK, FV)
+- 7-column structure: Question ID, Category, Sub-Category, Question, Guidance, Customer Response, Notes
+- Solutions use subset of categories relevant to their context
 
-**Design Components**:
-- High-Level Architecture with component relationships
-- Technical Requirements and specifications
-- Integration Architecture and data flows
-- Security Architecture and compliance controls
-- Deployment Architecture and environment design
-- Performance and Scalability considerations
+### **⏱️ Level of Effort Estimate**
+**Purpose**: Resource planning and accurate effort estimation
+**Audience**: Project Managers, Executives, Finance Teams
+**Usage**: Project planning, budgeting, and resource allocation
 
-**Validation Checklist**:
-- [ ] Requirements alignment with business needs
-- [ ] Technical feasibility and architecture validation
-- [ ] Integration complexity and dependencies
-- [ ] Security and compliance requirement coverage
-- [ ] Performance and scalability targets
-- [ ] Implementation timeline and resource needs
+**Standardized Structure**:
+- **9 Columns**: Phase, Work Package, Task Description, Resource Type, Estimated Hours, Rate, Cost Estimate, Dependencies, Notes
+- **8 Phases**: Discovery, Planning, Development, Testing, Deployment, Training, Closeout, Management
+- **4 EO Roles**: EO Sales Engineer, EO Quarterback, EO Engineer, EO Project Manager
+- **Dynamic Formulas**: Auto-calculated costs and totals for real-time updates
+
+**Key Features**:
+- **Management Overhead**: Automatically calculated as 25% QB + 20% PM of engineering hours (45% total overhead)
+- **Dynamic Cost Calculations**: Excel formulas enable instant updates when hours or rates change
+- **Phase Guidelines**: Typical effort distribution percentages for quality validation
+- **Rate Ranges**: Standardized hourly rates by role ($120-$220/hr depending on role and complexity)
+
+**LOE Best Practices**:
+- Engineering hours should be 60-70% of total hours (before management overhead)
+- Management overhead (QB + PM) adds approximately 45% to engineering hours
+- Use dynamic formulas for all cost calculations (never static values)
+- Document rate rationale if using rates outside typical ranges
+- Adjust hours based on solution complexity and customer environment
 
 ## 🎯 **Industry Use Cases & Applications**
 
@@ -261,4 +235,4 @@ Stakeholder Review → Technical Validation → Financial Approval → Contract
 **Maintained By**: {MAINTAINER_NAME}
 **Review Cycle**: Monthly
 
-**Ready to accelerate your sales cycle?** Start with [Requirements Questionnaire](requirements-questionnaire.md) for discovery or [Business Case](business-case-template.md) for stakeholder approval.
+**Ready to accelerate your sales cycle?** Start with [Discovery Questionnaire](discovery-questionnaire.csv) for discovery or [Solution Briefing](solution-briefing.md) for stakeholder presentations.
