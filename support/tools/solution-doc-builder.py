@@ -2222,7 +2222,9 @@ class OutputGenerator:
 
         i = 0
         while i < len(lines):
-            line = lines[i].strip()
+            # Keep original line with indentation for bullet parsing
+            line_original = lines[i]
+            line = line_original.strip()  # Stripped version for header checks
 
             # Stop processing when reaching Presentation Notes or similar sections
             if line.startswith('## ') and any(keyword in line.lower() for keyword in ['presentation notes', 'speaking points', 'q&a', 'appendix', 'powerpoint template']):
@@ -2271,23 +2273,34 @@ class OutputGenerator:
                     'metadata': metadata  # Store metadata for logo insertion
                 }
 
-            # Bullet points
-            elif (line.startswith('- ') or line.startswith('* ')) and current_slide:
-                bullet_text = line[2:].strip()
-                # Remove markdown formatting
-                bullet_text = re.sub(r'\*\*(.+?)\*\*', r'\1', bullet_text)
-                bullet_text = re.sub(r'\*(.+?)\*', r'\1', bullet_text)
-                bullet_text = re.sub(r'🔴|✅', '', bullet_text).strip()  # Remove emoji markers
+            # Bullet points (with indentation support)
+            elif current_slide and current_slide['type'] == 'content':
+                # Check for bullets at any indentation level - use original line with indentation
+                stripped = line_original.lstrip()
+                if stripped.startswith('- ') or stripped.startswith('* '):
+                    # Calculate indentation level (2 spaces = 1 level)
+                    indent_spaces = len(line_original) - len(stripped)
+                    level = indent_spaces // 2
 
-                if current_slide['type'] == 'content':
-                    current_slide['bullets'].append(bullet_text)
+                    # Extract bullet text
+                    bullet_text = stripped[2:].strip()
+                    # Remove markdown formatting but preserve bold markers for processing
+                    bullet_text = re.sub(r'🔴|✅', '', bullet_text).strip()
 
-            # Numbered list items
-            elif re.match(r'^\d+\.', line) and current_slide:
-                item_text = re.sub(r'^\d+\.\s*', '', line).strip()
-                item_text = re.sub(r'\*\*(.+?)\*\*', r'\1', item_text)
-                if current_slide['type'] == 'content':
-                    current_slide['bullets'].append(item_text)
+                    # Store bullet with its level
+                    current_slide['bullets'].append((bullet_text, level))
+
+            # Numbered list items (with indentation support)
+            elif current_slide and current_slide['type'] == 'content' and re.match(r'^\s*\d+\.', line_original):
+                stripped = line_original.lstrip()
+                if re.match(r'^\d+\.', stripped):
+                    # Calculate indentation level
+                    indent_spaces = len(line_original) - len(stripped)
+                    level = indent_spaces // 2
+
+                    item_text = re.sub(r'^\d+\.\s*', '', stripped).strip()
+                    item_text = re.sub(r'\*\*(.+?)\*\*', r'\1', item_text)
+                    current_slide['bullets'].append((item_text, level))
 
             # Table detection and parsing
             elif line.startswith('|') and current_slide:
@@ -2336,11 +2349,11 @@ class OutputGenerator:
                                 clean_header = re.sub(r'\*\*(.+?)\*\*', r'\1', header)
                                 clean_value = re.sub(r'\*\*(.+?)\*\*', r'\1', value)
                                 if i == 0:
-                                    # First column: use as main point
-                                    slide['bullets'].append(f"{clean_header}: {clean_value}")
+                                    # First column: use as main point (level 0)
+                                    slide['bullets'].append((f"{clean_header}: {clean_value}", 0))
                                 else:
-                                    # Additional columns: indent as sub-points
-                                    slide['bullets'].append(f"  • {clean_header}: {clean_value}")
+                                    # Additional columns: indent as sub-points (level 1)
+                                    slide['bullets'].append((f"{clean_header}: {clean_value}", 1))
 
         # Prepend title slide from metadata
         # Use current date instead of placeholder
@@ -2461,8 +2474,8 @@ class OutputGenerator:
                     # Visual content - idx=11 is content
                     self._fill_content_placeholder(slide, slide_data, [11])
                 else:
-                    # Single column - idx=11 is content
-                    self._fill_content_placeholder(slide, slide_data, [11])
+                    # Single column - idx=14 is content (EO Single Column layout)
+                    self._fill_content_placeholder(slide, slide_data, [14])
 
                 # Insert logos on content slides (footer logo)
                 metadata = slide_data.get('metadata', {})
@@ -2474,7 +2487,7 @@ class OutputGenerator:
             print(f"    ⚠️  Warning: Could not create slide '{slide_data.get('title', 'Unknown')}': {str(e)}")
 
     def _fill_content_placeholder(self, slide, slide_data, placeholder_indices):
-        """Fill content placeholders with bullets or text."""
+        """Fill content placeholders with bullets or text (supports hierarchical levels)."""
         try:
             from pptx.util import Pt
             from pptx.dml.color import RGBColor
@@ -2482,10 +2495,24 @@ class OutputGenerator:
             bullets = slide_data.get('bullets', [])
             content_lines = slide_data.get('content', [])
 
-            # Combine bullets and content (exclude table lines which start with |)
-            all_content = bullets + [line for line in content_lines if line.strip() and not line.startswith('**') and not line.startswith('|')]
+            # Process bullets - they are now tuples of (text, level)
+            processed_bullets = []
+            for item in bullets:
+                if isinstance(item, tuple):
+                    text, level = item
+                    # Remove markdown bold formatting but keep the text
+                    text = re.sub(r'\*\*(.+?)\*\*', r'\1', text)
+                    processed_bullets.append((text, level))
+                else:
+                    # Legacy format - just text, assume level 0
+                    processed_bullets.append((str(item), 0))
 
-            if not all_content:
+            # Add plain content lines as level 0
+            for line in content_lines:
+                if line.strip() and not line.startswith('**') and not line.startswith('|'):
+                    processed_bullets.append((line, 0))
+
+            if not processed_bullets:
                 return
 
             # Fill placeholders
@@ -2495,51 +2522,38 @@ class OutputGenerator:
                     tf = placeholder.text_frame
                     tf.clear()
 
-                    # For two-column layouts, split content logically
+                    # For two-column layouts, split content between columns
                     if len(placeholder_indices) == 2:
-                        # Check if content has natural sections (marked by ** headers)
-                        sections = []
-                        current_section = []
-
-                        for item in all_content:
-                            if item.strip():
-                                current_section.append(item)
-
-                        # Split content between columns
-                        mid_point = len(current_section) // 2
+                        mid_point = len(processed_bullets) // 2
                         if idx == placeholder_indices[0]:
-                            content_to_add = current_section[:mid_point] if mid_point > 0 else current_section[:len(current_section)//2 + 1]
+                            content_to_add = processed_bullets[:mid_point]
                         else:
-                            content_to_add = current_section[mid_point:] if mid_point > 0 else current_section[len(current_section)//2 + 1:]
+                            content_to_add = processed_bullets[mid_point:]
                     else:
-                        content_to_add = all_content
+                        content_to_add = processed_bullets
 
-                    # Add content
+                    # Add content with proper indentation levels
                     if content_to_add:
                         # First item
-                        tf.text = content_to_add[0]
-                        # Set font to black explicitly (fixes red text issue)
-                        for paragraph in tf.paragraphs:
-                            for run in paragraph.runs:
-                                run.font.color.rgb = RGBColor(0, 0, 0)  # Black
-                                run.font.size = Pt(14)  # Readable size
+                        first_text, first_level = content_to_add[0]
+                        tf.text = first_text
+                        # Set level for first paragraph (color inherited from template)
+                        if tf.paragraphs:
+                            p = tf.paragraphs[0]
+                            p.level = first_level
 
                         # Remaining items
-                        for item in content_to_add[1:]:
-                            if item.strip():
+                        for text, level in content_to_add[1:]:
+                            if text.strip():
                                 p = tf.add_paragraph()
-                                p.text = item
-                                p.level = 0
-                                # Set font to black explicitly for each paragraph
-                                for run in p.runs:
-                                    run.font.color.rgb = RGBColor(0, 0, 0)  # Black
-                                    run.font.size = Pt(14)
+                                p.text = text
+                                p.level = level  # Set the indentation level (color inherited from template)
 
                     # For single placeholder, we're done
                     if len(placeholder_indices) == 1:
                         break
 
-                except KeyError:
+                except KeyError as e:
                     # Placeholder index doesn't exist, try next one
                     continue
                 except Exception as e:

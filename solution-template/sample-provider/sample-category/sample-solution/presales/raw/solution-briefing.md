@@ -10,7 +10,7 @@ footer_logo_right: support/doc-templates/assets/logos/eo-framework-logo-real.png
 # Solution Briefing Template
 
 ## Slide Deck Structure for PowerPoint
-**7 Slides + Talking Points**
+**10 Slides**
 
 ### Slide 1: Title Slide
 **Presentation Title:** Solution Briefing
@@ -23,30 +23,17 @@ footer_logo_right: support/doc-templates/assets/logos/eo-framework-logo-real.png
 
 ---
 
-### Business Challenge, Impact & Success
-**Understanding the Need & Defining Success**
+### Business Opportunity
+**Unlocking Strategic Value**
 
-**Business Need:**
-- [Primary business driver or problem to solve]
-- [Underlying need or strategic opportunity]
-
-**Pain Points:**
-- 🔴 **[Challenge 1]:** [Specific pain point with cost/operational impact]
-- 🔴 **[Challenge 2]:** [Specific pain point with cost/operational impact]
-- 🔴 **[Challenge 3]:** [Specific pain point with cost/operational impact]
-
-**Business Impact:**
-- **Operational:** [Impact on efficiency, productivity, cost reduction]
-- **Competitive:** [Strategic advantage and market positioning benefit]
-- **Innovation:** [Future capabilities and scalability enabled]
-- **Risk:** [Risk exposure reduction and compliance improvement]
-
-**Success Criteria:**
-- **[Measurable Outcome 1]:** [How we'll measure success]
-- **[Measurable Outcome 2]:** [Timeline expectations]
-- **[Strategic Outcome]:** [Long-term value realization]
-
-*"The cost of inaction: $[Amount] in lost value over [timeframe]"*
+- **Opportunity**
+  - Accelerate digital transformation and modernize legacy systems to unlock new revenue streams
+  - Gain competitive advantage through data-driven insights and faster time-to-market
+  - Enable scalability and innovation while reducing operational costs by 30-40%
+- **Success Criteria**
+  - Achieve measurable ROI within 12 months with quantified business value metrics
+  - Complete deployment across all business units with 95% user adoption rate
+  - Establish foundation for continuous innovation and future capability expansion
 
 ---
 
@@ -147,6 +134,72 @@ footer_logo_right: support/doc-templates/assets/logos/eo-framework-logo-real.png
 
 ---
 
+### Our Partnership Advantage
+**Why Partner with Us**
+
+**Proven Expertise:**
+- [Years] years of experience in [domain]
+- [Number] successful implementations
+- [Certification/partnership level with key vendors]
+
+**Comprehensive Support:**
+- End-to-end implementation services
+- 24/7 support post-launch
+- Ongoing optimization and innovation roadmap
+
+**Industry Leadership:**
+- [Recognition 1]
+- [Recognition 2]
+
+**Your Dedicated Team:**
+- Solution architects with [domain] expertise
+- Certified implementation specialists
+- Dedicated account and support management
+
+---
+
+### Investment Summary
+**Total Investment & Value**
+
+**Initial Investment:** $[Amount]
+- Implementation Services: $[Amount]
+- Technology/Licenses: $[Amount]
+- Training & Change Management: $[Amount]
+
+**Annual Operating Costs:** $[Amount]
+- Platform/Infrastructure: $[Amount]
+- Support & Maintenance: $[Amount]
+
+**Total 3-Year TCO:** $[Amount]
+
+**Expected ROI:**
+- Payback Period: [Months]
+- 3-Year ROI: [Percentage]
+- Annual Benefits: $[Amount]
+
+---
+
+### Thank You & Next Steps
+**Let's Begin This Partnership**
+
+**Immediate Next Steps:**
+1. **Decision:** [Specific decision needed by when]
+2. **Kickoff:** [Target start date]
+3. **Team Formation:** [Key team members required]
+
+**30-Day Launch Plan:**
+- Week 1: Contract finalization
+- Week 2: Project initiation & planning
+- Week 3: Environment setup
+- Week 4: Initial implementation begins
+
+**Contact Information:**
+- **Project Lead:** [Name, Title] | [Email] | [Phone]
+- **Technical Lead:** [Name, Title] | [Email] | [Phone]
+- **Account Manager:** [Name, Title] | [Email] | [Phone]
+
+---
+
 ## Presentation Notes
 
 ### Speaking Points for Each Slide
@@ -156,12 +209,12 @@ footer_logo_right: support/doc-templates/assets/logos/eo-framework-logo-real.png
 - Set the tone: This is about partnership and solving real business challenges
 - Mention that we'll cover the challenge, solution, implementation, and investment
 
-**Slide 2 - Business Challenge, Impact & Success:**
-- Open with client-specific pain points using their data when possible
-- Create urgency around the cost of inaction with quantified impact
-- Link success criteria directly back to pain points
+**Slide 2 - Business Opportunity:**
+- Frame the conversation positively around opportunities, not problems
+- Emphasize strategic value and competitive advantages to be gained
+- Connect success criteria to measurable business outcomes
 - Get alignment on what "success" means to each stakeholder group
-- Emphasize both short-term wins and long-term strategic value
+- Focus on value creation and transformation potential
 
 **Slide 3 - Solution Overview:**
 - Walk through the high-level architecture at a business level
@@ -194,42 +247,13 @@ footer_logo_right: support/doc-templates/assets/logos/eo-framework-logo-real.png
 - Use the testimonial to build credibility and trust
 - Connect industry recognition to expertise and quality
 
-**Talking Point: Our Partnership Advantage**
-*(Use this as a verbal transition, not a slide)*
-
-**Why Partner with Us:**
-- **Proven Expertise:** [Years] years of experience in [domain], [Number] successful implementations, [Certification/partnership level with key vendors]
-- **Comprehensive Support:** End-to-end implementation services, 24/7 support post-launch, ongoing optimization and innovation roadmap
-- **Industry Leadership:** [Recognition 1], [Recognition 2]
-- **Your Dedicated Team:** Solution architects with [domain] expertise, certified implementation specialists, dedicated account and support management
-
-*Speaking Notes:*
+**Slide 8 - Our Partnership Advantage:**
 - Transition naturally from success stories to "why us"
 - Emphasize the team that will work with them
 - Position the partnership as long-term, not just implementation
 - Build confidence in our ability to deliver
 
-**Talking Point: Investment Summary**
-*(Use this as a verbal discussion point, not a slide)*
-
-**Total Investment & Value:**
-
-**Cost Summary:**
-- **Initial Investment:** $[Amount]
-  - Implementation Services: $[Amount]
-  - Technology/Licenses: $[Amount]
-  - Training & Change Management: $[Amount]
-- **Annual Operating Costs:** $[Amount]
-  - Platform/Infrastructure: $[Amount]
-  - Support & Maintenance: $[Amount]
-- **Total 3-Year TCO:** $[Amount]
-
-**Expected ROI:**
-- Payback Period: [Months]
-- 3-Year ROI: [Percentage]
-- Annual Benefits: $[Amount]
-
-*Speaking Notes:*
+**Slide 9 - Investment Summary:**
 - Be transparent about all costs - no surprises
 - Frame investment in context of business impact and ROI
 - Compare to cost of inaction from Slide 2
@@ -237,28 +261,7 @@ footer_logo_right: support/doc-templates/assets/logos/eo-framework-logo-real.png
 - Position as investment (not cost) with measurable returns
 - Have detailed breakdown ready if asked
 
-**Talking Point: Thank You & Next Steps**
-*(Use this as verbal closing, not a slide)*
-
-**Let's Begin This Partnership**
-
-**Immediate Next Steps:**
-1. **Decision:** [Specific decision needed by when]
-2. **Kickoff:** [Target start date]
-3. **Team Formation:** [Key team members required]
-
-**30-Day Launch Plan:**
-- Week 1: Contract finalization
-- Week 2: Project initiation & planning
-- Week 3: Environment setup
-- Week 4: Initial implementation begins
-
-**Contact Information:**
-- **Project Lead:** [Name, Title] | [Email] | [Phone]
-- **Technical Lead:** [Name, Title] | [Email] | [Phone]
-- **Account Manager:** [Name, Title] | [Email] | [Phone]
-
-*Speaking Notes:*
+**Slide 10 - Thank You & Next Steps:**
 - Be clear and specific about next steps
 - Create urgency with timeline
 - Make it easy to say yes
