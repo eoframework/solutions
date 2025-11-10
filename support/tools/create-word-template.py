@@ -645,6 +645,9 @@ def create_word_template(template_type='general', output_name=None):
         for col_idx, cell_text in enumerate(row_data):
             cell = cells[col_idx]
             para = cell.paragraphs[0]
+            # Add equal top and bottom padding to data cells for symmetry
+            para.paragraph_format.space_before = Pt(4)
+            para.paragraph_format.space_after = Pt(4)
             run = para.add_run(cell_text)
             run.font.name = 'Times New Roman'
             # Add borders to content cells
@@ -699,6 +702,9 @@ def create_word_template(template_type='general', output_name=None):
         for col_idx, cell_text in enumerate(row_data):
             cell = table2.rows[row_idx].cells[col_idx]
             para = cell.paragraphs[0]
+            # Add equal top and bottom padding to data cells for symmetry
+            para.paragraph_format.space_before = Pt(4)
+            para.paragraph_format.space_after = Pt(4)
             run = para.add_run(cell_text)
             run.font.name = 'Times New Roman'
             # Add borders to content cells

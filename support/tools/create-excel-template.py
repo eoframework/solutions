@@ -52,16 +52,8 @@ def create_clean_excel_template():
     cover.row_dimensions[1].height = 20
     cover.row_dimensions[2].height = 10
 
-    # Row 3: Client Logo
-    cover.row_dimensions[3].height = 60
-    client_logo = logo_path / 'client_logo.png'
-    if client_logo.exists():
-        img = XLImage(str(client_logo))
-        img.width = 150
-        img.height = 50
-        img.anchor = 'B3'
-        cover.add_image(img)
-        print("  ✅ Client logo added at B3")
+    # Row 3: Spacing (client logo removed)
+    cover.row_dimensions[3].height = 20
 
     # Row 4: Document Title
     cover['B4'] = '[DOCUMENT TITLE]'
@@ -89,9 +81,9 @@ def create_clean_excel_template():
     cover['C8'] = '[Solution Name]'
     cover['C8'].font = value_font
 
-    cover['B9'] = 'Purpose:'
+    cover['B9'] = 'Customer Name:'
     cover['B9'].font = label_font
-    cover['C9'] = '[Document Purpose]'
+    cover['C9'] = '[Customer Name]'
     cover['C9'].font = value_font
 
     cover['B10'] = 'Version:'
@@ -103,30 +95,22 @@ def create_clean_excel_template():
     cover.row_dimensions[11].height = 20
     cover.row_dimensions[12].height = 10
 
-    # Row 13: Consulting Company Logo
-    cover.row_dimensions[13].height = 60
-    consulting_logo = logo_path / 'consulting_company_logo.png'
-    if consulting_logo.exists():
-        img = XLImage(str(consulting_logo))
-        img.width = 150
-        img.height = 50
-        img.anchor = 'B13'
-        cover.add_image(img)
-        print("  ✅ Consulting company logo added at B13")
+    # Row 13: Consulting Company Logo (removed)
+    cover.row_dimensions[13].height = 10
 
     # Row 14: Spacing
     cover.row_dimensions[14].height = 10
 
-    # Row 15: EO Framework Logo
-    cover.row_dimensions[15].height = 60
+    # Row 15: EO Framework Logo (reduced size)
+    cover.row_dimensions[15].height = 40
     eo_logo = logo_path / 'eo-framework-logo-real.png'
     if eo_logo.exists():
         img = XLImage(str(eo_logo))
-        img.width = 200
-        img.height = 50
+        img.width = 120  # Reduced from 200
+        img.height = 30  # Reduced from 50
         img.anchor = 'B15'
         cover.add_image(img)
-        print("  ✅ EO Framework logo added at B15")
+        print("  ✅ EO Framework logo added at B15 (reduced size)")
 
     print("  ✅ Cover page layout complete")
 
@@ -227,7 +211,7 @@ def create_clean_excel_template():
     print("✨ Clean Excel template created successfully!")
     print()
     print("Template structure:")
-    print("  📋 Sheet 1: Cover - 3 logos, metadata fields")
+    print("  📋 Sheet 1: Cover - EO Framework logo (reduced size), metadata fields")
     print("  📊 Sheet 2: Data - Styled headers, alternating rows, auto-filter")
     print()
     print("Key fixes:")

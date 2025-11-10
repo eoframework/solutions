@@ -1511,6 +1511,12 @@ class OutputGenerator:
                             header_bg
                         ))
                         cell._element.get_or_add_tcPr().append(shading_elm)
+                    else:
+                        # Add equal top and bottom padding to non-header cells for symmetry
+                        if cell.paragraphs:
+                            para = cell.paragraphs[0]
+                            para.paragraph_format.space_before = Pt(4)  # Equal padding
+                            para.paragraph_format.space_after = Pt(4)   # Equal padding
 
                     # Set font for all cells using template font
                     for paragraph in cell.paragraphs:
