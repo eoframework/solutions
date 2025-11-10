@@ -852,10 +852,19 @@ class OutputGenerator:
         for i, line in enumerate(lines):
             if line.startswith('# '):
                 h1_text = line[2:].strip()
-                # Use H1 as both project name and document subtitle
                 project_name = h1_text
-                document_subtitle = h1_text
                 break
+
+        # Extract document subtitle from **Project Name:** metadata field
+        for line in lines:
+            if line.startswith('**Project Name:**'):
+                # Extract value after "**Project Name:**"
+                document_subtitle = line.replace('**Project Name:**', '').strip()
+                break
+
+        # Fallback to H1 if no Project Name metadata found
+        if not document_subtitle:
+            document_subtitle = project_name
 
         # Extract solution name from path
         solution_name = 'EO Framework Solution'
@@ -918,6 +927,76 @@ class OutputGenerator:
                     '[Address] • [Phone] • [Email] • [Website]',
                     '123 Business Street, Suite 100 • (555) 123-4567 • info@eoframework.com • www.eoframework.com'
                 )
+
+        # Update footer placeholders
+        for section in doc.sections:
+            footer = section.footer
+            for para in footer.paragraphs:
+                if '[Document Name]' in para.text:
+                    para.text = para.text.replace('[Document Name]', document_subtitle)
+
+    def _add_formatted_text(self, paragraph, text):
+        """Add text to paragraph with markdown bold/italic formatting applied.
+
+        Parses **bold** and *italic* markers and applies Word formatting.
+        """
+        # Pattern to match **bold** or *italic*
+        # Match **text** first (bold), then *text* (italic)
+        import re
+
+        pos = 0
+        while pos < len(text):
+            # Find next bold or italic marker
+            bold_match = re.search(r'\*\*(.+?)\*\*', text[pos:])
+            italic_match = re.search(r'\*(.+?)\*', text[pos:])
+
+            # Determine which comes first
+            next_match = None
+            is_bold = False
+
+            if bold_match and italic_match:
+                # Both found, use whichever comes first
+                if bold_match.start() < italic_match.start():
+                    next_match = bold_match
+                    is_bold = True
+                else:
+                    next_match = italic_match
+                    is_bold = False
+            elif bold_match:
+                next_match = bold_match
+                is_bold = True
+            elif italic_match:
+                next_match = italic_match
+                is_bold = False
+
+            if next_match:
+                # Add text before the match as normal text
+                if next_match.start() > 0:
+                    before_text = text[pos:pos + next_match.start()]
+                    run = paragraph.add_run(before_text)
+                    run.font.name = self.template_fonts['body_font']
+                    run.font.size = Pt(self.template_fonts['body_size'])
+
+                # Add the formatted text
+                formatted_text = next_match.group(1)
+                run = paragraph.add_run(formatted_text)
+                run.font.name = self.template_fonts['body_font']
+                run.font.size = Pt(self.template_fonts['body_size'])
+                if is_bold:
+                    run.font.bold = True
+                else:
+                    run.font.italic = True
+
+                # Move position past this match
+                pos = pos + next_match.end()
+            else:
+                # No more matches, add remaining text
+                remaining = text[pos:]
+                if remaining:
+                    run = paragraph.add_run(remaining)
+                    run.font.name = self.template_fonts['body_font']
+                    run.font.size = Pt(self.template_fonts['body_size'])
+                break
 
     def _generate_word_toc(self, doc, tokens):
         """Generate table of contents from markdown headings with page numbers."""
@@ -1482,7 +1561,14 @@ class OutputGenerator:
             for row_idx, row_data in enumerate(table_data):
                 for col_idx, cell_data in enumerate(row_data):
                     cell = table.rows[row_idx].cells[col_idx]
-                    cell.text = cell_data
+
+                    # Clear existing content and add formatted text
+                    if cell.paragraphs:
+                        para = cell.paragraphs[0]
+                        para.clear()
+                        self._add_formatted_text(para, cell_data)
+                    else:
+                        cell.text = cell_data
 
                     # Add borders to cell
                     set_cell_border(cell)
@@ -1835,11 +1921,10 @@ class OutputGenerator:
                             continue
 
                     if not is_metadata:
-                        # Simple text formatting
-                        text = re.sub(r'\*\*(.+?)\*\*', r'\1', text)  # Remove bold markers
-                        text = re.sub(r'\*(.+?)\*', r'\1', text)      # Remove italic markers
+                        # Add text with markdown formatting applied
                         if text.strip():
-                            para = doc.add_paragraph(text)
+                            para = doc.add_paragraph()
+                            self._add_formatted_text(para, text)
                             # Add spacing after paragraphs
                             para.paragraph_format.space_after = Pt(8)
                 i += 1  # Skip paragraph_close
@@ -1860,16 +1945,17 @@ class OutputGenerator:
                             i += 1
                             if i < len(tokens) and tokens[i].type == 'inline':
                                 text = tokens[i].content
-                                text = re.sub(r'\*\*(.+?)\*\*', r'\1', text)
-                                text = re.sub(r'\*(.+?)\*', r'\1', text)
                                 # Add bullet paragraph with manual formatting (1 tab = 0.5 inches)
                                 para = doc.add_paragraph()
                                 para.paragraph_format.left_indent = Inches(0.5)
                                 para.paragraph_format.first_line_indent = Inches(-0.25)
                                 para.paragraph_format.space_after = Pt(4)
-                                run = para.add_run('• ' + text)
+                                # Add bullet symbol
+                                run = para.add_run('• ')
                                 run.font.name = self.template_fonts['body_font']
                                 run.font.size = Pt(self.template_fonts['body_size'])
+                                # Add formatted text
+                                self._add_formatted_text(para, text)
                     i += 1
             else:
                 i += 1

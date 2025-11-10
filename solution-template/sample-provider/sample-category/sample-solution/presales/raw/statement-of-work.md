@@ -141,12 +141,15 @@ These items are not in scope unless added via change control:
 ## Project Plan & Timeline
 
 ### Milestones
-- M1: Assessment Complete — [Date]
-- M2: Environment Ready — [Date]
-- M3: Implementation Complete — [Date]
-- M4: Testing Complete — [Date]
-- Go-Live — [Date]
-- Hypercare End — [Date]
+
+| Milestone | Description | Target Date |
+|-----------|-------------|-------------|
+| M1 | Assessment Complete | [Date] |
+| M2 | Environment Ready | [Date] |
+| M3 | Implementation Complete | [Date] |
+| M4 | Testing Complete | [Date] |
+| Go-Live | Production Launch | [Date] |
+| Hypercare End | Support Period Complete | [Date] |
 
 ---
 
