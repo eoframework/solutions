@@ -1,14 +1,27 @@
 #!/usr/bin/env python3
 """
-Generate professional output files from raw source files.
+Build professional output documents from raw source files.
 
-Converts:
+Builds:
 - Markdown (.md) → Word (.docx) or PowerPoint (.pptx)
 - CSV (.csv) → Excel (.xlsx) with formatting
 
 Usage:
-    python3 generate-outputs.py --path solutions/provider/category/solution
-    python3 generate-outputs.py --path solution-template/
+    # Generate all files (default)
+    python3 solution-doc-builder.py --path solutions/provider/category/solution
+
+    # Generate specific file types
+    python3 solution-doc-builder.py --path <path> --type excel
+    python3 solution-doc-builder.py --path <path> --type word pptx
+
+    # Generate specific file
+    python3 solution-doc-builder.py --path <path> --file statement-of-work.md
+
+    # Generate from specific directory
+    python3 solution-doc-builder.py --path <path> --dir presales
+
+    # Dry run to preview
+    python3 solution-doc-builder.py --path <path> --dry-run
 """
 
 import argparse
@@ -35,29 +48,73 @@ import re
 
 
 class OutputGenerator:
-    """Generate professional output files from raw source files."""
+    """Build professional output files from raw source files."""
 
-    def __init__(self, base_path):
+    def __init__(self, base_path, type_filter=None, file_filter=None,
+                 dir_filter=None, force=False, dry_run=False, quiet=False, verbose=False):
         self.base_path = Path(base_path)
+        self.type_filter = set(type_filter) if type_filter else None
+        self.file_filter = set(file_filter) if file_filter else None
+        self.dir_filter = dir_filter
+        self.force = force
+        self.dry_run = dry_run
+        self.quiet = quiet
+        self.verbose = verbose
         self.stats = {
             'csv_to_xlsx': 0,
             'md_to_docx': 0,
             'md_to_pptx': 0,
+            'skipped': 0,
             'errors': []
         }
 
+    def should_process_file(self, source_file, output_type, raw_dir):
+        """
+        Determine if a file should be processed based on filters.
+
+        Returns True if:
+        - No filters specified (process everything)
+        - File matches all specified filters
+        """
+        # No filters = process everything (backward compatible)
+        if not any([self.type_filter, self.file_filter, self.dir_filter]):
+            return True
+
+        # Check directory filter
+        if self.dir_filter:
+            dir_name = raw_dir.parent.name  # e.g., 'presales' or 'delivery'
+            if dir_name != self.dir_filter:
+                return False
+
+        # Check file filter (match source filename)
+        if self.file_filter:
+            if source_file.name not in self.file_filter:
+                return False
+
+        # Check type filter
+        if self.type_filter:
+            if output_type not in self.type_filter:
+                return False
+
+        return True
+
     def generate_all(self):
         """Generate all output files from raw directories."""
-        print(f"🔍 Scanning: {self.base_path}")
+        if not self.quiet:
+            print(f"🔍 Scanning: {self.base_path}")
+            if self.dry_run:
+                print("🔍 DRY RUN MODE - No files will be generated\n")
 
         # Find all raw directories
         raw_dirs = list(self.base_path.rglob('raw'))
 
         if not raw_dirs:
-            print("❌ No 'raw' directories found.")
+            if not self.quiet:
+                print("❌ No 'raw' directories found.")
             return False
 
-        print(f"📁 Found {len(raw_dirs)} raw directories\n")
+        if not self.quiet:
+            print(f"📁 Found {len(raw_dirs)} raw directories\n")
 
         for raw_dir in raw_dirs:
             self.process_raw_directory(raw_dir)
@@ -69,21 +126,35 @@ class OutputGenerator:
         """Process all files in a raw directory."""
         output_dir = raw_dir.parent
 
-        print(f"📂 Processing: {raw_dir.relative_to(self.base_path)}")
+        if not self.quiet:
+            print(f"📂 Processing: {raw_dir.relative_to(self.base_path)}")
 
         # Process CSV files
         for csv_file in raw_dir.glob('*.csv'):
-            self.convert_csv_to_xlsx(csv_file, output_dir)
+            if self.should_process_file(csv_file, 'excel', raw_dir):
+                self.convert_csv_to_xlsx(csv_file, output_dir)
+            elif self.verbose:
+                print(f"  ⏭️  Skipped (filtered): {csv_file.name}")
+                self.stats['skipped'] += 1
 
         # Process Markdown files
         for md_file in raw_dir.glob('*.md'):
             # Check if file should be converted to PowerPoint (presentation or briefing)
             if 'presentation' in md_file.stem.lower() or 'briefing' in md_file.stem.lower():
-                self.convert_md_to_pptx(md_file, output_dir)
+                if self.should_process_file(md_file, 'pptx', raw_dir):
+                    self.convert_md_to_pptx(md_file, output_dir)
+                elif self.verbose:
+                    print(f"  ⏭️  Skipped (filtered): {md_file.name}")
+                    self.stats['skipped'] += 1
             else:
-                self.convert_md_to_docx(md_file, output_dir)
+                if self.should_process_file(md_file, 'word', raw_dir):
+                    self.convert_md_to_docx(md_file, output_dir)
+                elif self.verbose:
+                    print(f"  ⏭️  Skipped (filtered): {md_file.name}")
+                    self.stats['skipped'] += 1
 
-        print()
+        if not self.quiet:
+            print()
 
     def _is_currency_column(self, column_name, sample_values):
         """Detect if a column contains currency values."""
@@ -657,6 +728,12 @@ class OutputGenerator:
         """Convert CSV to styled Excel file using branded template."""
         try:
             output_file = output_dir / f"{csv_file.stem}.xlsx"
+
+            # Dry-run mode - just show what would be generated
+            if self.dry_run:
+                print(f"  🔍 Would generate: {csv_file.name} → {output_file.name}")
+                self.stats['csv_to_xlsx'] += 1
+                return
 
             # Special handling for level-of-effort-estimate (multi-section CSV)
             if 'level-of-effort' in csv_file.stem.lower():
@@ -1355,6 +1432,12 @@ class OutputGenerator:
         try:
             output_file = output_dir / f"{md_file.stem}.docx"
 
+            # Dry-run mode - just show what would be generated
+            if self.dry_run:
+                print(f"  🔍 Would generate: {md_file.name} → {output_file.name}")
+                self.stats['md_to_docx'] += 1
+                return
+
             # Load branded template
             template_path = Path(__file__).parent.parent / 'doc-templates' / 'word' / 'EOFramework-Word-Template-01.docx'
 
@@ -1996,6 +2079,12 @@ class OutputGenerator:
         try:
             output_file = output_dir / f"{md_file.stem}.pptx"
 
+            # Dry-run mode - just show what would be generated
+            if self.dry_run:
+                print(f"  🔍 Would generate: {md_file.name} → {output_file.name}")
+                self.stats['md_to_pptx'] += 1
+                return
+
             # Load branded template
             template_path = Path(__file__).parent.parent / 'doc-templates' / 'powerpoint' / 'EOFramework-Template-01.pptx'
 
@@ -2190,34 +2279,91 @@ class OutputGenerator:
 
     def print_summary(self):
         """Print generation summary."""
+        if self.quiet:
+            return
+
         print("\n" + "="*60)
-        print("📊 Generation Summary")
+        if self.dry_run:
+            print("📊 Dry Run Summary (No Files Generated)")
+        else:
+            print("📊 Generation Summary")
         print("="*60)
+
+        action = "Would generate" if self.dry_run else "Generated"
         print(f"✅ CSV → Excel:      {self.stats['csv_to_xlsx']} files")
         print(f"✅ MD → Word:        {self.stats['md_to_docx']} files")
         print(f"✅ MD → PowerPoint:  {self.stats['md_to_pptx']} files")
 
         total = self.stats['csv_to_xlsx'] + self.stats['md_to_docx'] + self.stats['md_to_pptx']
-        print(f"\n📁 Total generated:  {total} files")
+        print(f"\n📁 Total {action.lower()}:  {total} files")
+
+        if self.stats['skipped'] > 0:
+            print(f"⏭️  Skipped (filtered): {self.stats['skipped']} files")
 
         if self.stats['errors']:
             print(f"\n❌ Errors: {len(self.stats['errors'])}")
             for error in self.stats['errors']:
                 print(f"   • {error}")
-        else:
+        elif not self.dry_run:
             print("\n✨ All files generated successfully!")
         print("="*60)
 
 
 def main():
     parser = argparse.ArgumentParser(
-        description='Generate professional output files from raw source files.'
+        description='Build professional output documents from raw source files.',
+        epilog='Examples:\n'
+               '  %(prog)s --path solutions/aws/ai/idp\n'
+               '  %(prog)s --path solutions/aws/ai/idp --type excel\n'
+               '  %(prog)s --path solutions/aws/ai/idp --file statement-of-work.md\n'
+               '  %(prog)s --path solutions/aws/ai/idp --dir presales\n'
+               '  %(prog)s --path solutions/aws/ai/idp --dry-run\n',
+        formatter_class=argparse.RawDescriptionHelpFormatter
     )
     parser.add_argument(
         '--path',
         type=str,
         required=True,
         help='Path to solution directory or solution-template'
+    )
+    parser.add_argument(
+        '--type',
+        choices=['excel', 'word', 'pptx'],
+        nargs='+',
+        help='Generate only specific file types (can specify multiple)'
+    )
+    parser.add_argument(
+        '--file',
+        help='Generate only this specific source file (e.g., statement-of-work.md)'
+    )
+    parser.add_argument(
+        '--files',
+        help='Comma-separated list of source files to generate'
+    )
+    parser.add_argument(
+        '--dir',
+        choices=['presales', 'delivery'],
+        help='Process only files in this directory'
+    )
+    parser.add_argument(
+        '--force',
+        action='store_true',
+        help='Regenerate files even if output already exists'
+    )
+    parser.add_argument(
+        '--dry-run',
+        action='store_true',
+        help='Show what would be generated without actually generating files'
+    )
+    parser.add_argument(
+        '--quiet',
+        action='store_true',
+        help='Suppress progress output (errors only)'
+    )
+    parser.add_argument(
+        '--verbose',
+        action='store_true',
+        help='Show detailed processing information including skipped files'
     )
 
     args = parser.parse_args()
@@ -2228,8 +2374,24 @@ def main():
         print(f"❌ Error: Path does not exist: {path}")
         sys.exit(1)
 
+    # Parse file filters
+    file_filter = None
+    if args.file:
+        file_filter = [args.file]
+    elif args.files:
+        file_filter = [f.strip() for f in args.files.split(',')]
+
     # Generate outputs
-    generator = OutputGenerator(path)
+    generator = OutputGenerator(
+        base_path=path,
+        type_filter=args.type,
+        file_filter=file_filter,
+        dir_filter=args.dir,
+        force=args.force,
+        dry_run=args.dry_run,
+        quiet=args.quiet,
+        verbose=args.verbose
+    )
     success = generator.generate_all()
 
     sys.exit(0 if success else 1)

@@ -264,25 +264,45 @@ chmod +x download-solution.sh
 
 ---
 
-### **9. generate-outputs.py** - Professional Output Generator
+### **9. solution-doc-builder.py** - Professional Document Builder
 
-Converts raw source files (Markdown, CSV) into professional deliverables (Word, Excel, PowerPoint) using branded templates.
+Builds professional output documents from raw source files (Markdown, CSV) using branded templates. Supports granular filtering by file type, specific files, or directories for targeted generation.
 
 **Usage:**
 ```bash
-# Generate outputs for solution template
-python3 support/tools/generate-outputs.py --path solution-template/
+# Generate all outputs for a solution (default - backward compatible)
+python3 support/tools/solution-doc-builder.py --path solution-template/
 
-# Generate for specific solution
-python3 support/tools/generate-outputs.py --path solutions/aws/ai/intelligent-document-processing/
+# Generate only Excel files
+python3 support/tools/solution-doc-builder.py --path solutions/aws/ai/intelligent-document-processing/ --type excel
+
+# Generate only Word and PowerPoint files
+python3 support/tools/solution-doc-builder.py --path solutions/aws/ai/intelligent-document-processing/ --type word pptx
+
+# Generate only a specific file
+python3 support/tools/solution-doc-builder.py --path solutions/aws/ai/intelligent-document-processing/ --file statement-of-work.md
+
+# Generate only presales directory files
+python3 support/tools/solution-doc-builder.py --path solutions/aws/ai/intelligent-document-processing/ --dir presales
+
+# Dry run - preview what would be generated
+python3 support/tools/solution-doc-builder.py --path solutions/aws/ai/intelligent-document-processing/ --dry-run
 
 # Generate for all solutions
 find solutions/ -type d -name "sample-solution" -prune -o -type d -mindepth 3 -maxdepth 3 -print | \
-  while read dir; do python3 support/tools/generate-outputs.py --path "$dir"; done
+  while read dir; do python3 support/tools/solution-doc-builder.py --path "$dir"; done
 ```
 
 **Parameters:**
 - `--path` **(required)**: Directory containing `raw/` subdirectories with source files
+- `--type`: Filter by file type (`excel`, `word`, `pptx`) - can specify multiple
+- `--file`: Generate only this specific source file (e.g., `statement-of-work.md`)
+- `--files`: Comma-separated list of source files to generate
+- `--dir`: Process only files in this directory (`presales` or `delivery`)
+- `--force`: Regenerate files even if output already exists
+- `--dry-run`: Show what would be generated without creating files
+- `--quiet`: Suppress progress output (errors only)
+- `--verbose`: Show detailed processing including skipped files
 
 **What it does:**
 - **CSV → Excel (.xlsx)**: Converts CSV files to styled Excel spreadsheets with:
