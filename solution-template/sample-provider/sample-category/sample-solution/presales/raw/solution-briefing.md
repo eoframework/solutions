@@ -38,18 +38,19 @@ footer_logo_right: support/doc-templates/assets/logos/eo-framework-logo-real.png
 ---
 
 ### Solution Overview
-**[Solution Name] - High-Level Architecture**
+**Cloud-Native Architecture for Scalable Operations**
 
-[Architecture Diagram Placeholder]
+![Architecture Diagram](assets/images/architecture-diagram.png)
 
-**Key Components:**
-- **[Component 1]:** [Brief description]
-- **[Component 2]:** [Brief description]
-- **[Component 3]:** [Brief description]
-
-**Technology Stack:**
-- [Platform/Technology 1]
-- [Platform/Technology 2]
+- **Key Components**
+  - **Presentation Layer:** Modern web and mobile interfaces with responsive design and real-time updates
+  - **Application Layer:** API services handling business logic, authentication, and data orchestration
+  - **Data Layer:** Scalable database infrastructure with caching, backup, and disaster recovery
+- **Technology Stack**
+  - Cloud Platform: AWS, Azure, or GCP
+  - Containerization: Docker with Kubernetes
+  - API Framework: REST/GraphQL APIs
+  - Monitoring: Logging and observability
 
 ---
 

@@ -2130,6 +2130,10 @@ class OutputGenerator:
                 self.stats['md_to_pptx'] += 1
                 return
 
+            # Store current markdown file path for image path resolution
+            # Solution root is 3 levels up from: solution-name/presales/raw/file.md
+            self.current_solution_root = md_file.parent.parent.parent
+
             # Load branded template
             template_path = Path(__file__).parent.parent / 'doc-templates' / 'powerpoint' / 'EOFramework-Template-01.pptx'
 
@@ -2268,16 +2272,27 @@ class OutputGenerator:
                     'title': title_text,
                     'bullets': [],
                     'content': [],
+                    'images': [],  # Store image paths for slide
                     'slide_number': slide_counter,
                     'layout_hint': self._determine_layout_hint(title_text, slide_counter),
                     'metadata': metadata  # Store metadata for logo insertion
                 }
 
-            # Bullet points (with indentation support)
+            # Content slide processing - check for images, bullets, numbered lists
             elif current_slide and current_slide['type'] == 'content':
+                # First check for markdown images: ![alt text](image_path)
+                image_match = re.search(r'!\[([^\]]*)\]\(([^\)]+)\)', line)
+                if image_match:
+                    alt_text = image_match.group(1)
+                    image_path = image_match.group(2)
+                    current_slide['images'].append({
+                        'alt': alt_text,
+                        'path': image_path
+                    })
+
                 # Check for bullets at any indentation level - use original line with indentation
-                stripped = line_original.lstrip()
-                if stripped.startswith('- ') or stripped.startswith('* '):
+                elif line_original.lstrip().startswith('- ') or line_original.lstrip().startswith('* '):
+                    stripped = line_original.lstrip()
                     # Calculate indentation level (2 spaces = 1 level)
                     indent_spaces = len(line_original) - len(stripped)
                     level = indent_spaces // 2
@@ -2290,17 +2305,17 @@ class OutputGenerator:
                     # Store bullet with its level
                     current_slide['bullets'].append((bullet_text, level))
 
-            # Numbered list items (with indentation support)
-            elif current_slide and current_slide['type'] == 'content' and re.match(r'^\s*\d+\.', line_original):
-                stripped = line_original.lstrip()
-                if re.match(r'^\d+\.', stripped):
-                    # Calculate indentation level
-                    indent_spaces = len(line_original) - len(stripped)
-                    level = indent_spaces // 2
+                # Check for numbered list items (with indentation support)
+                elif re.match(r'^\s*\d+\.', line_original):
+                    stripped = line_original.lstrip()
+                    if re.match(r'^\d+\.', stripped):
+                        # Calculate indentation level
+                        indent_spaces = len(line_original) - len(stripped)
+                        level = indent_spaces // 2
 
-                    item_text = re.sub(r'^\d+\.\s*', '', stripped).strip()
-                    item_text = re.sub(r'\*\*(.+?)\*\*', r'\1', item_text)
-                    current_slide['bullets'].append((item_text, level))
+                        item_text = re.sub(r'^\d+\.\s*', '', stripped).strip()
+                        item_text = re.sub(r'\*\*(.+?)\*\*', r'\1', item_text)
+                        current_slide['bullets'].append((item_text, level))
 
             # Table detection and parsing
             elif line.startswith('|') and current_slide:
@@ -2471,8 +2486,8 @@ class OutputGenerator:
                     # Data visualization - idx=11 is content
                     self._fill_content_placeholder(slide, slide_data, [11])
                 elif layout_hint == 'visual':
-                    # Visual content - idx=11 is content
-                    self._fill_content_placeholder(slide, slide_data, [11])
+                    # Visual content - idx=16 is content (updated template)
+                    self._fill_content_placeholder(slide, slide_data, [16])
                 else:
                     # Single column - idx=14 is content (EO Single Column layout)
                     self._fill_content_placeholder(slide, slide_data, [14])
@@ -2482,9 +2497,33 @@ class OutputGenerator:
                 if metadata:
                     self._insert_logos(slide, metadata)
 
+                # Insert content images (e.g., architecture diagrams)
+                images = slide_data.get('images', [])
+                if images:
+                    self._insert_slide_images(slide, slide_data, layout_hint)
+
         except Exception as e:
             # Log error but continue with other slides
             print(f"    ⚠️  Warning: Could not create slide '{slide_data.get('title', 'Unknown')}': {str(e)}")
+
+    def _apply_bold_formatting(self, paragraph, text):
+        """Parse text with **bold** markers and apply formatting to paragraph runs."""
+        # Split text by ** markers to find bold sections
+        parts = text.split('**')
+
+        # Clear existing text
+        if paragraph.runs:
+            for run in paragraph.runs:
+                run.text = ''
+
+        # Add parts with alternating bold formatting
+        for i, part in enumerate(parts):
+            if part:  # Skip empty parts
+                run = paragraph.add_run()
+                run.text = part
+                # Odd indices (1, 3, 5...) are between ** markers, so make them bold
+                if i % 2 == 1:
+                    run.font.bold = True
 
     def _fill_content_placeholder(self, slide, slide_data, placeholder_indices):
         """Fill content placeholders with bullets or text (supports hierarchical levels)."""
@@ -2496,12 +2535,12 @@ class OutputGenerator:
             content_lines = slide_data.get('content', [])
 
             # Process bullets - they are now tuples of (text, level)
+            # Keep ** markers for bold formatting
             processed_bullets = []
             for item in bullets:
                 if isinstance(item, tuple):
                     text, level = item
-                    # Remove markdown bold formatting but keep the text
-                    text = re.sub(r'\*\*(.+?)\*\*', r'\1', text)
+                    # Keep ** markers for bold text formatting (don't remove them)
                     processed_bullets.append((text, level))
                 else:
                     # Legacy format - just text, assume level 0
@@ -2536,18 +2575,26 @@ class OutputGenerator:
                     if content_to_add:
                         # First item
                         first_text, first_level = content_to_add[0]
-                        tf.text = first_text
                         # Set level for first paragraph (color inherited from template)
                         if tf.paragraphs:
                             p = tf.paragraphs[0]
                             p.level = first_level
+                            # Apply bold formatting if ** markers present
+                            if '**' in first_text:
+                                self._apply_bold_formatting(p, first_text)
+                            else:
+                                p.text = first_text
 
                         # Remaining items
                         for text, level in content_to_add[1:]:
                             if text.strip():
                                 p = tf.add_paragraph()
-                                p.text = text
                                 p.level = level  # Set the indentation level (color inherited from template)
+                                # Apply bold formatting if ** markers present
+                                if '**' in text:
+                                    self._apply_bold_formatting(p, text)
+                                else:
+                                    p.text = text
 
                     # For single placeholder, we're done
                     if len(placeholder_indices) == 1:
@@ -2561,6 +2608,120 @@ class OutputGenerator:
                     continue
 
         except Exception as e:
+            pass
+
+    def _insert_slide_images(self, slide, slide_data, layout_hint):
+        """Insert images from markdown into slide picture placeholders."""
+        try:
+            from pptx.util import Inches
+
+            images = slide_data.get('images', [])
+            if not images:
+                return
+
+            # Determine picture placeholder index based on layout
+            picture_idx = None
+            if layout_hint == 'visual':
+                # Visual Content layout has main image at idx=15
+                picture_idx = 15
+            elif layout_hint == 'data_viz':
+                # Data Visualization layout might also have image placeholder
+                picture_idx = 15
+            else:
+                # Other layouts - try to find any picture placeholder that's not the footer
+                for placeholder in slide.placeholders:
+                    try:
+                        if placeholder.placeholder_format.type == 18:  # PICTURE type
+                            # Skip footer logos (idx 13, 14)
+                            if placeholder.placeholder_format.idx not in [13, 14]:
+                                picture_idx = placeholder.placeholder_format.idx
+                                break
+                    except:
+                        continue
+
+            if picture_idx is None:
+                return
+
+            # Insert the first image (for now, handle only one image per slide)
+            image_data = images[0]
+            image_path = image_data['path']
+
+            # Resolve relative path (relative to the solution root)
+            # The path in markdown is relative to the solution root
+            if not image_path.startswith('/'):
+                # Construct absolute path
+                # We're in: solution-name/presales/raw/file.md
+                # Image path is: assets/images/diagram.png (relative to solution root)
+                solution_root = self.current_solution_root
+                full_image_path = solution_root / image_path
+            else:
+                full_image_path = Path(image_path)
+
+            # Check if image file exists
+            if not full_image_path.exists():
+                print(f"    ⚠️  Warning: Image not found: {full_image_path}")
+                return
+
+            # Insert image directly to slide (not using placeholder's insert_picture)
+            try:
+                placeholder = slide.placeholders[picture_idx]
+
+                # Get placeholder dimensions for positioning
+                ph_left = placeholder.left
+                ph_top = placeholder.top
+                ph_width = placeholder.width
+                ph_height = placeholder.height
+
+                # Get image natural size
+                from PIL import Image as PILImage
+                with PILImage.open(full_image_path) as pil_img:
+                    img_width, img_height = pil_img.size
+
+                # Calculate aspect ratios
+                img_aspect = img_width / img_height
+                ph_aspect = ph_width / ph_height
+
+                # Calculate size to fit without cropping
+                if img_aspect > ph_aspect:
+                    # Image is wider - fit to width
+                    new_width = ph_width
+                    new_height = int(ph_width / img_aspect)
+                else:
+                    # Image is taller - fit to height
+                    new_height = ph_height
+                    new_width = int(ph_height * img_aspect)
+
+                # Center the image in placeholder area
+                left = ph_left + (ph_width - new_width) // 2
+                top = ph_top + (ph_height - new_height) // 2
+
+                # Remove existing picture shapes in the content area to avoid duplicates
+                # Keep only footer logos (typically in bottom area)
+                from pptx.util import Inches
+                shapes_to_remove = []
+                for shape in slide.shapes:
+                    # Remove picture shapes that are in the content area (not footer)
+                    if shape.shape_type == 13:  # PICTURE type
+                        # Check if it's in the main content area (not footer)
+                        # Footer is typically below 6.5 inches from top
+                        if shape.top < Inches(6.5):
+                            shapes_to_remove.append(shape)
+
+                # Remove identified shapes
+                for shape in shapes_to_remove:
+                    sp = shape.element
+                    sp.getparent().remove(sp)
+
+                # Add picture directly to slide at calculated position
+                pic = slide.shapes.add_picture(str(full_image_path), left, top, new_width, new_height)
+
+            except KeyError:
+                print(f"    ⚠️  Warning: Picture placeholder idx={picture_idx} not found in slide")
+            except Exception as e:
+                print(f"    ⚠️  Warning: Could not insert image: {str(e)}")
+
+        except Exception as e:
+            # Don't fail slide creation if image insertion fails
             pass
 
     def print_summary(self):
