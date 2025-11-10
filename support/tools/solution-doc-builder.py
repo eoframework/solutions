@@ -2050,29 +2050,74 @@ class OutputGenerator:
                 return layout
         raise ValueError(f"Layout containing '{name_contains}' not found")
 
-    def _insert_logos(self, slide):
-        """Insert logos into picture placeholders on a slide."""
-        # Path to logo files (common assets directory)
-        logo_path = Path(__file__).parent.parent / 'doc-templates' / 'assets' / 'logos'
+    def _insert_logos(self, slide, metadata=None):
+        """Insert logos into picture placeholders on a slide.
 
-        # Map of placeholder indices to logo files
-        # These match the template structure
-        logos = {
-            10: 'client_logo.png',
-            13: 'consulting_company_logo.png',
-            14: 'consulting_company_logo.png',  # Some layouts use idx 14 for logo
-        }
+        Args:
+            slide: The slide to insert logos into
+            metadata: Optional metadata dict with client_logo, footer_logo_left, and footer_logo_right paths
+        """
+        if not metadata:
+            return
 
+        from pptx.util import Inches
+
+        # Get logo paths from metadata (relative to repo root)
+        client_logo_path = metadata.get('client_logo', '')
+        footer_logo_left_path = metadata.get('footer_logo_left', '')
+        footer_logo_right_path = metadata.get('footer_logo_right', '')
+
+        # Convert to absolute paths
+        repo_root = Path(__file__).parent.parent.parent
+
+        # Map of placeholder indices to logo paths
+        # Title slide: idx=10 is client logo (top), idx=13 is footer left logo
+        # Content slides: idx=13 or idx=14 is footer left logo
+        logos = {}
+
+        if client_logo_path:
+            client_logo = repo_root / client_logo_path
+            if client_logo.exists():
+                logos[10] = str(client_logo)  # Top of slide (title slide only)
+
+        # Footer left logo (consulting company)
+        if footer_logo_left_path:
+            footer_logo_left = repo_root / footer_logo_left_path
+            if footer_logo_left.exists():
+                logos[13] = str(footer_logo_left)  # Left footer
+                logos[14] = str(footer_logo_left)  # Some layouts use idx 14
+
+        # Insert logos into picture placeholders
         for ph in slide.placeholders:
             idx = ph.placeholder_format.idx
             if idx in logos and ph.placeholder_format.type == PP_PLACEHOLDER.PICTURE:
-                logo_file = logo_path / logos[idx]
-                if logo_file.exists():
-                    try:
-                        ph.insert_picture(str(logo_file))
-                    except Exception as e:
-                        # Silently continue if logo insertion fails
-                        pass
+                try:
+                    ph.insert_picture(logos[idx])
+                except Exception as e:
+                    # Silently continue if logo insertion fails
+                    pass
+
+        # Add footer right logo (EO Framework) as a new picture shape
+        if footer_logo_right_path:
+            footer_logo_right = repo_root / footer_logo_right_path
+            if footer_logo_right.exists():
+                try:
+                    # Position and size to mirror the left logo
+                    # Left logo is at: Left=0.34", Top=4.96", Width=2.34", Height=0.58"
+                    # Slide width is 10.00"
+                    # Right logo position: Left=7.31", Top=4.96"
+                    left = Inches(7.31)
+                    top = Inches(4.96)
+                    width = Inches(2.34)
+                    height = Inches(0.58)
+
+                    slide.shapes.add_picture(
+                        str(footer_logo_right),
+                        left, top, width, height
+                    )
+                except Exception as e:
+                    # Silently continue if logo insertion fails
+                    pass
 
     def convert_md_to_pptx(self, md_file, output_dir):
         """Convert Markdown to PowerPoint presentation using branded template."""
@@ -2127,60 +2172,103 @@ class OutputGenerator:
             print(f"  ❌ {error_msg}")
             self.stats['errors'].append(error_msg)
 
+    def _parse_yaml_frontmatter(self, md_content):
+        """Extract YAML frontmatter from markdown content.
+
+        Returns: (metadata_dict, content_without_frontmatter)
+        """
+        metadata = {}
+        content = md_content
+
+        # Check if content starts with ---
+        if md_content.strip().startswith('---'):
+            parts = md_content.split('---', 2)
+            if len(parts) >= 3:
+                # Parse YAML frontmatter
+                frontmatter = parts[1].strip()
+                content = parts[2]
+
+                # Simple YAML parser for key: value pairs
+                for line in frontmatter.split('\n'):
+                    line = line.strip()
+                    if ':' in line:
+                        key, value = line.split(':', 1)
+                        metadata[key.strip()] = value.strip()
+
+        return metadata, content
+
     def _parse_md_for_presentation(self, md_content):
         """Parse markdown content into presentation slides.
 
         Expects format:
-        # Main Title (H1) → Title slide
+        ---
+        presentation_title: Title
+        solution_name: Name
+        ---
+        # Main Title (H1) → Skip
         ### Slide Title (H3) → Content slides
         --- → Slide separator
+
+        Stops processing when reaching ## Presentation Notes
         """
+        # Extract metadata
+        metadata, content = self._parse_yaml_frontmatter(md_content)
+
         slides = []
-        lines = md_content.split('\n')
+        lines = content.split('\n')
         current_slide = None
         first_h1_found = False
+        slide_counter = 0
 
         i = 0
         while i < len(lines):
             line = lines[i].strip()
 
-            # H1 creates title slide (only first one)
+            # Stop processing when reaching Presentation Notes or similar sections
+            if line.startswith('## ') and any(keyword in line.lower() for keyword in ['presentation notes', 'speaking points', 'q&a', 'appendix', 'powerpoint template']):
+                break
+
+            # Skip H2 "Slide Deck Structure" heading (don't create a slide for it)
+            if line.startswith('## ') and 'slide deck structure' in line.lower():
+                i += 1
+                continue
+
+            # Skip H1 (document title, not a slide)
             if line.startswith('# ') and not first_h1_found:
-                if current_slide:
-                    slides.append(current_slide)
-
-                title_text = line[2:].strip()
-
-                # Look ahead for subtitle (next non-empty line that's not a header)
-                subtitle_text = ''
-                j = i + 1
-                while j < len(lines):
-                    next_line = lines[j].strip()
-                    if next_line and not next_line.startswith('#') and not next_line.startswith('---'):
-                        subtitle_text = next_line
-                        break
-                    j += 1
-
-                current_slide = {
-                    'type': 'title',
-                    'title': title_text,
-                    'subtitle': subtitle_text,
-                    'presenter': 'EO Framework Team',
-                    'date': datetime.now().strftime('%B %d, %Y')
-                }
                 first_h1_found = True
+                i += 1
+                continue
 
-            # H3 creates content slide
-            elif line.startswith('### '):
+            # H3 creates slides (both title and content slides)
+            if line.startswith('### '):
                 if current_slide:
                     slides.append(current_slide)
 
                 title_text = line[4:].strip()
+
+                # Check if this is "Slide 1: Title Slide" - skip it (will use metadata instead)
+                if 'slide 1:' in title_text.lower() and 'title slide' in title_text.lower():
+                    # Skip this entire section until next --- or ###
+                    i += 1
+                    while i < len(lines):
+                        if lines[i].strip().startswith('---') or lines[i].strip().startswith('###'):
+                            i -= 1  # Back up one so we process the next section
+                            break
+                        i += 1
+                    i += 1
+                    continue
+
+                slide_counter += 1
+
+                # Regular content slide
                 current_slide = {
                     'type': 'content',
                     'title': title_text,
                     'bullets': [],
-                    'content': []
+                    'content': [],
+                    'slide_number': slide_counter,
+                    'layout_hint': self._determine_layout_hint(title_text, slide_counter),
+                    'metadata': metadata  # Store metadata for logo insertion
                 }
 
             # Bullet points
@@ -2201,6 +2289,26 @@ class OutputGenerator:
                 if current_slide['type'] == 'content':
                     current_slide['bullets'].append(item_text)
 
+            # Table detection and parsing
+            elif line.startswith('|') and current_slide:
+                if 'has_table' not in current_slide:
+                    current_slide['has_table'] = True
+                    current_slide['table_rows'] = []
+                    # Check if it's a comparison table (Traditional vs Our Solution)
+                    if 'traditional' in line.lower() or 'our solution' in line.lower():
+                        current_slide['layout_hint'] = 'two_column'
+
+                # Parse table row
+                if not line.strip().replace('|', '').replace('-', '').strip():
+                    # Skip separator rows (|---|---|)
+                    pass
+                else:
+                    # Parse actual table row
+                    cells = [cell.strip() for cell in line.split('|') if cell.strip()]
+                    if cells and current_slide['type'] == 'content':
+                        # Store table rows for later processing
+                        current_slide['table_rows'].append(cells)
+
             # Regular content lines
             elif line and not line.startswith('#') and not line.startswith('---') and current_slide:
                 if current_slide['type'] == 'content':
@@ -2211,71 +2319,235 @@ class OutputGenerator:
         if current_slide:
             slides.append(current_slide)
 
+        # Post-process: Convert table rows to formatted bullets
+        for slide in slides:
+            if slide.get('has_table') and slide.get('table_rows'):
+                table_rows = slide['table_rows']
+                if len(table_rows) > 1:
+                    # First row is headers
+                    headers = table_rows[0]
+                    # Remaining rows are data
+                    for row in table_rows[1:]:
+                        if len(row) == len(headers):
+                            # Format as "Header: Value" pairs
+                            formatted_items = []
+                            for i, (header, value) in enumerate(zip(headers, row)):
+                                # Remove markdown bold from headers
+                                clean_header = re.sub(r'\*\*(.+?)\*\*', r'\1', header)
+                                clean_value = re.sub(r'\*\*(.+?)\*\*', r'\1', value)
+                                if i == 0:
+                                    # First column: use as main point
+                                    slide['bullets'].append(f"{clean_header}: {clean_value}")
+                                else:
+                                    # Additional columns: indent as sub-points
+                                    slide['bullets'].append(f"  • {clean_header}: {clean_value}")
+
+        # Prepend title slide from metadata
+        # Use current date instead of placeholder
+        current_date = datetime.now().strftime('%B %d, %Y')
+
+        title_slide = {
+            'type': 'title',
+            'title': metadata.get('presentation_title', 'Presentation Title'),
+            'subtitle': metadata.get('solution_name', 'Solution Name'),
+            'presenter': metadata.get('presenter_name', 'Presenter Name'),
+            'date': current_date,
+            'layout_hint': 'title',
+            'metadata': metadata  # Store full metadata for logo paths
+        }
+        slides.insert(0, title_slide)
+
         return slides
 
+    def _determine_layout_hint(self, title, slide_number):
+        """Determine optimal layout based on slide title and position."""
+        title_lower = title.lower()
+
+        # Title slide keywords
+        if any(keyword in title_lower for keyword in ['thank you', 'contact', 'next steps']):
+            return 'thank_you'
+
+        # Two-column layout keywords (comparisons)
+        if any(keyword in title_lower for keyword in ['why this', 'differentiated', 'comparison', 'vs', 'versus']):
+            return 'two_column'
+
+        # Visual content keywords (diagrams, architecture)
+        if any(keyword in title_lower for keyword in ['overview', 'architecture', 'diagram', 'visual']):
+            return 'visual'
+
+        # Data visualization keywords (financials, metrics, charts)
+        if any(keyword in title_lower for keyword in ['investment', 'roi', 'cost', 'pricing', 'financials', 'metrics']):
+            return 'data_viz'
+
+        # Key points layout keywords (highlights, advantages)
+        if any(keyword in title_lower for keyword in ['partnership', 'advantage', 'why partner', 'key points', 'benefits']):
+            return 'key_points'
+
+        # Default to single column
+        return 'single'
+
     def _add_slide_from_layout(self, prs, slide_data):
-        """Add slide using appropriate template layout."""
+        """Add slide using appropriate template layout based on content."""
         try:
             if slide_data['type'] == 'title':
                 # Use "EO Title Slide" layout
                 layout = self._get_layout(prs, "Title")
                 slide = prs.slides.add_slide(layout)
 
-                # Fill placeholders: [12]=Title, [14]=Subtitle, [15]=Presenter|Date
-                try:
-                    slide.placeholders[12].text = slide_data['title']
-                except:
-                    pass
-
-                try:
-                    slide.placeholders[14].text = slide_data.get('subtitle', '')
-                except:
-                    pass
-
-                try:
-                    presenter_text = f"{slide_data.get('presenter', 'EO Framework Team')} | {slide_data.get('date', datetime.now().strftime('%B %d, %Y'))}"
-                    slide.placeholders[15].text = presenter_text
-                except:
-                    pass
-
-                # Insert logos
-                self._insert_logos(slide)
-
-            else:  # content slide
-                # Use "EO Single Column" layout for content slides
-                layout = self._get_layout(prs, "Single")
-                slide = prs.slides.add_slide(layout)
-
-                # Fill title: [10]=Title
-                try:
-                    slide.placeholders[10].text = slide_data['title']
-                except:
-                    pass
-
-                # Fill body content: [11]=Body
-                if slide_data.get('bullets'):
+                # Fill placeholders based on template structure
+                for placeholder in slide.placeholders:
                     try:
-                        body = slide.placeholders[11]
-                        tf = body.text_frame
-                        tf.clear()
-
-                        # First bullet
-                        tf.text = slide_data['bullets'][0]
-
-                        # Remaining bullets
-                        for bullet in slide_data['bullets'][1:]:
-                            p = tf.add_paragraph()
-                            p.text = bullet
-                            p.level = 0
+                        if 'title' in placeholder.name.lower() or placeholder.placeholder_format.idx == 12:
+                            placeholder.text = slide_data['title']
+                        elif 'subtitle' in placeholder.name.lower() or placeholder.placeholder_format.idx == 14:
+                            placeholder.text = slide_data.get('subtitle', '')
+                        elif placeholder.placeholder_format.idx == 15:
+                            presenter_text = f"{slide_data.get('presenter', 'Presenter Name')} | {slide_data.get('date', datetime.now().strftime('%B %d, %Y'))}"
+                            placeholder.text = presenter_text
                     except:
                         pass
 
-                # Insert logos
-                self._insert_logos(slide)
+                # Insert logos using metadata
+                metadata = slide_data.get('metadata', {})
+                self._insert_logos(slide, metadata)
+
+            else:  # content slide - use layout hint
+                layout_hint = slide_data.get('layout_hint', 'single')
+
+                # Select appropriate layout based on hint
+                if layout_hint == 'thank_you':
+                    layout = self._get_layout(prs, "Thank You")
+                elif layout_hint == 'two_column':
+                    layout = self._get_layout(prs, "Two Column")
+                elif layout_hint == 'visual':
+                    layout = self._get_layout(prs, "Visual Content")
+                elif layout_hint == 'data_viz':
+                    layout = self._get_layout(prs, "Data Visualization")
+                elif layout_hint == 'key_points':
+                    layout = self._get_layout(prs, "Key Points")
+                else:
+                    layout = self._get_layout(prs, "Single Column")
+
+                slide = prs.slides.add_slide(layout)
+
+                # Fill title (different index for each layout)
+                title_idx = 12 if layout_hint == 'thank_you' else 10
+                try:
+                    slide.placeholders[title_idx].text = slide_data['title']
+                except:
+                    # Fallback: try to find title placeholder by name
+                    for placeholder in slide.placeholders:
+                        try:
+                            if 'title' in placeholder.name.lower() or placeholder.placeholder_format.idx in [8, 10, 12]:
+                                placeholder.text = slide_data['title']
+                                break
+                        except:
+                            pass
+
+                # Fill body content based on layout type
+                if layout_hint in ['thank_you']:
+                    # Thank you slide - idx=14 is content
+                    self._fill_content_placeholder(slide, slide_data, [14])
+                elif layout_hint == 'two_column':
+                    # Two column - idx=11 (left), idx=12 (right)
+                    self._fill_content_placeholder(slide, slide_data, [11, 12])
+                elif layout_hint == 'key_points':
+                    # Key points - idx=14 is content
+                    self._fill_content_placeholder(slide, slide_data, [14])
+                elif layout_hint == 'data_viz':
+                    # Data visualization - idx=11 is content
+                    self._fill_content_placeholder(slide, slide_data, [11])
+                elif layout_hint == 'visual':
+                    # Visual content - idx=11 is content
+                    self._fill_content_placeholder(slide, slide_data, [11])
+                else:
+                    # Single column - idx=11 is content
+                    self._fill_content_placeholder(slide, slide_data, [11])
+
+                # Insert logos on content slides (footer logo)
+                metadata = slide_data.get('metadata', {})
+                if metadata:
+                    self._insert_logos(slide, metadata)
 
         except Exception as e:
             # Log error but continue with other slides
             print(f"    ⚠️  Warning: Could not create slide '{slide_data.get('title', 'Unknown')}': {str(e)}")
+
+    def _fill_content_placeholder(self, slide, slide_data, placeholder_indices):
+        """Fill content placeholders with bullets or text."""
+        try:
+            from pptx.util import Pt
+            from pptx.dml.color import RGBColor
+
+            bullets = slide_data.get('bullets', [])
+            content_lines = slide_data.get('content', [])
+
+            # Combine bullets and content (exclude table lines which start with |)
+            all_content = bullets + [line for line in content_lines if line.strip() and not line.startswith('**') and not line.startswith('|')]
+
+            if not all_content:
+                return
+
+            # Fill placeholders
+            for idx in placeholder_indices:
+                try:
+                    placeholder = slide.placeholders[idx]
+                    tf = placeholder.text_frame
+                    tf.clear()
+
+                    # For two-column layouts, split content logically
+                    if len(placeholder_indices) == 2:
+                        # Check if content has natural sections (marked by ** headers)
+                        sections = []
+                        current_section = []
+
+                        for item in all_content:
+                            if item.strip():
+                                current_section.append(item)
+
+                        # Split content between columns
+                        mid_point = len(current_section) // 2
+                        if idx == placeholder_indices[0]:
+                            content_to_add = current_section[:mid_point] if mid_point > 0 else current_section[:len(current_section)//2 + 1]
+                        else:
+                            content_to_add = current_section[mid_point:] if mid_point > 0 else current_section[len(current_section)//2 + 1:]
+                    else:
+                        content_to_add = all_content
+
+                    # Add content
+                    if content_to_add:
+                        # First item
+                        tf.text = content_to_add[0]
+                        # Set font to black explicitly (fixes red text issue)
+                        for paragraph in tf.paragraphs:
+                            for run in paragraph.runs:
+                                run.font.color.rgb = RGBColor(0, 0, 0)  # Black
+                                run.font.size = Pt(14)  # Readable size
+
+                        # Remaining items
+                        for item in content_to_add[1:]:
+                            if item.strip():
+                                p = tf.add_paragraph()
+                                p.text = item
+                                p.level = 0
+                                # Set font to black explicitly for each paragraph
+                                for run in p.runs:
+                                    run.font.color.rgb = RGBColor(0, 0, 0)  # Black
+                                    run.font.size = Pt(14)
+
+                    # For single placeholder, we're done
+                    if len(placeholder_indices) == 1:
+                        break
+
+                except KeyError:
+                    # Placeholder index doesn't exist, try next one
+                    continue
+                except Exception as e:
+                    # Other error, continue to next placeholder
+                    continue
+
+        except Exception as e:
+            pass
 
     def print_summary(self):
         """Print generation summary."""
