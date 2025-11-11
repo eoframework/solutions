@@ -2757,8 +2757,8 @@ class OutputGenerator:
         if any(keyword in title_lower for keyword in ['timeline', 'milestone', 'schedule', 'roadmap']):
             return 'table'
 
-        # Two-column layout keywords (comparisons)
-        if any(keyword in title_lower for keyword in ['why this', 'differentiated', 'comparison', 'vs', 'versus']):
+        # Two-column layout keywords (comparisons, partnerships, advantages)
+        if any(keyword in title_lower for keyword in ['why this', 'differentiated', 'comparison', 'vs', 'versus', 'partnership advantage', 'our partnership', 'why partner']):
             return 'two_column'
 
         # Visual content keywords (diagrams, architecture)
@@ -2769,8 +2769,9 @@ class OutputGenerator:
         if any(keyword in title_lower for keyword in ['investment', 'roi', 'cost', 'pricing', 'financials', 'metrics']):
             return 'data_viz'
 
-        # Key points layout keywords (highlights, advantages) - use single column
-        if any(keyword in title_lower for keyword in ['partnership', 'advantage', 'why partner', 'key points', 'benefits']):
+        # Key points layout keywords (highlights) - use single column
+        # Note: removed 'advantage', 'partnership', 'why partner' as they typically need two columns
+        if any(keyword in title_lower for keyword in ['key points', 'highlights', 'benefits summary']):
             return 'single'
 
         # Default to single column
@@ -2860,8 +2861,8 @@ class OutputGenerator:
                     # Table slide - idx=14 is table placeholder
                     self._fill_table_placeholder(slide, slide_data, 14)
                 elif layout_hint == 'two_column':
-                    # Two column - idx=11 (left), idx=12 (right)
-                    self._fill_content_placeholder(slide, slide_data, [11, 12])
+                    # Two column - idx=16 (left), idx=17 (right) - EO Two Column layout
+                    self._fill_content_placeholder(slide, slide_data, [16, 17])
                 elif layout_hint == 'data_viz':
                     # Data visualization - idx=11 is content
                     self._fill_content_placeholder(slide, slide_data, [11])
