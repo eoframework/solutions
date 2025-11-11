@@ -1,35 +1,66 @@
-# [Project Name] Statement of Work (SOW)
+---
+# Document Information
+document_title: Statement of Work
+document_version: 1.0
+document_date: November 10, 2025
+document_id: SOW-2025-001
 
-**Project Name:** [Project Name]
-**Client:** [Client Name]
-**Date:** [Month DD, YYYY]
-**Version:** v1.0
+# Project Information
+project_name: Enterprise Cloud Migration & Modernization
+project_id: PROJ-CF-2025-001
+opportunity_no: OPP-ACM-2025-0042
+project_start_date: February 1, 2025
+project_end_date: August 31, 2025
+project_duration: 7 months
 
-**Prepared by:**
-[Vendor/Consultant Name]
-[Address] • [Phone] • [Email] • [Website]
+# Client Information
+client_name: Acme Financial Services
+client_address: 123 Main Street, New York, NY 10001
+client_contact_name: John Smith
+client_contact_title: VP of Technology
+client_contact_email: john.smith@acmefinancial.com
+client_contact_phone: (555) 123-4567
+
+# Vendor Information
+vendor_name: Your Consulting Company
+vendor_address: 456 Tech Boulevard, San Francisco, CA 94105
+vendor_contact_name: Jane Doe
+vendor_contact_title: Senior Solutions Architect
+vendor_contact_email: jane.doe@consulting.com
+vendor_contact_phone: (555) 987-6543
+vendor_website: www.consulting.com
+
+# Cover Page Logos
+client_logo: support/doc-templates/assets/logos/client_logo.png
+vendor_logo: support/doc-templates/assets/logos/consulting_company_logo.png
+---
+
+# Enterprise Cloud Migration & Modernization - Statement of Work
 
 ---
 
 ## Executive Summary
 
-This Statement of Work (SOW) defines the scope, deliverables, roles, and terms for [brief description of the project engagement]. This engagement will deliver [key outcomes] to achieve [client's business objectives].
+This Statement of Work (SOW) defines the scope, deliverables, roles, and terms for the Enterprise Cloud Migration & Modernization project for Acme Financial Services. This engagement will deliver a modern, scalable, cloud-native 3-tier architecture to replace legacy on-premises systems and achieve digital transformation objectives including improved scalability, enhanced security, and reduced operational costs.
 
 ---
 
 ## Background & Objectives
 
 ### Background
-Client currently [describe current situation, challenges, or pain points]. Key challenges include:
-- [e.g., legacy systems]
-- [e.g., scalability limitations]
-- [e.g., security concerns]
+Acme Financial Services currently operates legacy on-premises applications with monolithic architecture. Key challenges include:
+- Limited scalability to handle peak transaction volumes
+- High infrastructure maintenance costs and aging hardware
+- Security concerns with legacy authentication and data protection
+- Slow deployment cycles hindering time-to-market for new features
+- Difficulty meeting regulatory compliance requirements
 
 ### Objectives
-- [Define desired business outcome #1]
-- [Define desired business outcome #2]
-- [Define desired business outcome #3]
-- [Define desired business outcome #4]
+- Migrate core applications to cloud-native 3-tier architecture (Presentation, Application, Data layers)
+- Achieve 99.9% uptime SLA with auto-scaling capabilities
+- Reduce infrastructure costs by 30-40% through cloud optimization
+- Implement modern security controls and compliance frameworks
+- Enable CI/CD pipelines for faster feature deployment
 
 ### Success Metrics
 - [Example metric, e.g., 99.9% uptime]
@@ -177,6 +208,10 @@ Legend:
 
 ### Architecture Overview
 The proposed architecture is designed to provide a secure, scalable, and compliant foundation for current and future workloads. The architecture aligns with industry best practices and uses automation where possible to streamline deployment, security, and ongoing operations.
+
+![Figure 1: Solution Architecture Diagram](../../assets/images/architecture-diagram.png)
+
+**Figure 1: Solution Architecture Diagram** - High-level overview of the proposed cloud-native 3-tier architecture
 
 ### Architecture Type
 The deployment will follow [e.g., multi-tier, microservices, serverless, hybrid] architecture. This approach enforces clear separation of concerns, allows for granular security controls, and enables future scaling with centralized governance.

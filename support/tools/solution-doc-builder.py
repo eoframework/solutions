@@ -915,84 +915,61 @@ class OutputGenerator:
             self.stats['errors'].append(error_msg)
 
     def _update_word_cover(self, doc, md_file, md_content):
-        """Update Word template cover page with document metadata."""
-        # Extract document title from file name
+        """Update Word template cover page with document metadata from YAML frontmatter."""
+        # Parse YAML metadata from markdown
+        metadata, content = self._parse_yaml_frontmatter(md_content)
+
+        # Get current date if not in metadata
+        current_date = metadata.get('document_date', datetime.now().strftime('%B %d, %Y'))
+
+        # Extract document title for footer from YAML or filename
         # e.g., "statement-of-work" → "Statement of Work"
         file_stem = md_file.stem
-        document_title = file_stem.replace('-', ' ').title()
+        default_doc_title = file_stem.replace('-', ' ').title()
+        document_title = metadata.get('document_title', default_doc_title)
 
-        # Extract project name from first H1 in markdown
-        project_name = 'Project Name'
-        document_subtitle = ''
+        # Extract project name from first H1 if not in metadata
+        project_name = metadata.get('project_name', 'Project Name')
+        if not project_name or project_name == 'Project Name':
+            lines = content.split('\n')
+            for line in lines:
+                if line.startswith('# '):
+                    project_name = line[2:].strip()
+                    break
 
-        lines = md_content.split('\n')
-        for i, line in enumerate(lines):
-            if line.startswith('# '):
-                h1_text = line[2:].strip()
-                project_name = h1_text
-                break
+        # Update cover page table (Table 0) with metadata - simple approach
+        if len(doc.tables) > 0:
+            cover_table = doc.tables[0]
 
-        # Extract document subtitle from **Project Name:** metadata field
-        for line in lines:
-            if line.startswith('**Project Name:**'):
-                # Extract value after "**Project Name:**"
-                document_subtitle = line.replace('**Project Name:**', '').strip()
-                break
+            # Define the metadata values in order
+            table_data = [
+                metadata.get('client_name', '[Client Company Name]'),
+                current_date,
+                metadata.get('vendor_name', '[Consulting Company Name]'),
+                f"{metadata.get('vendor_contact_name', '[Full Name]')}\n{metadata.get('vendor_contact_email', 'email@example.com')}",
+                metadata.get('opportunity_no', 'OPP-XXXXX'),
+                metadata.get('document_version', 'v1.0')
+            ]
 
-        # Fallback to H1 if no Project Name metadata found
-        if not document_subtitle:
-            document_subtitle = project_name
+            # Update only the second column (values) in each row
+            # Leave the first column (labels) and all formatting untouched
+            for row_idx in range(min(len(cover_table.rows), len(table_data))):
+                if len(cover_table.rows[row_idx].cells) >= 2:
+                    # Update only the value cell (column 2)
+                    cover_table.rows[row_idx].cells[1].text = table_data[row_idx]
 
-        # Extract solution name from path
-        solution_name = 'EO Framework Solution'
-        try:
-            parts = md_file.parts
-            if 'solution-template' in parts:
-                solution_name = 'Sample Solution'
-            else:
-                # Try to extract from path
-                for j, part in enumerate(parts):
-                    if part in ['presales', 'delivery'] and j > 0:
-                        solution_name = parts[j-1].replace('-', ' ').title()
-                        break
-        except:
-            pass
+        # Also update [Project Name] in paragraphs (for title/subtitle)
+        from docx.shared import Pt
 
-        # Get current date
-        current_date = datetime.now().strftime('%B %d, %Y')
-
-        # Update cover page paragraphs
-        for i, para in enumerate(doc.paragraphs):
-            # Update [DOCUMENT TITLE] placeholder (with brackets, uppercase)
-            if '[DOCUMENT TITLE]' in para.text:
-                para.text = para.text.replace('[DOCUMENT TITLE]', document_title)
-
-            # Update [Document Subtitle] placeholder (with brackets, mixed case)
-            elif '[Document Subtitle]' in para.text:
-                para.text = para.text.replace('[Document Subtitle]', document_subtitle)
-
-            # Also handle variants without brackets for backwards compatibility
-            elif 'Document Title' in para.text and '[' not in para.text:
-                para.text = para.text.replace('Document Title', document_title)
-
-            elif 'Document Sub Title' in para.text and '[' not in para.text:
-                para.text = para.text.replace('Document Sub Title', document_subtitle)
-
-            # Update [Project Name] placeholder
-            elif '[Project Name]' in para.text:
-                para.text = para.text.replace('[Project Name]', project_name)
-
-            # Update [Client Name] placeholder
-            elif '[Client Name]' in para.text:
-                para.text = para.text.replace('[Client Name]', 'Sample Client')
-
-            # Update [Month DD, YYYY] placeholder
-            elif '[Month DD, YYYY]' in para.text:
-                para.text = para.text.replace('[Month DD, YYYY]', current_date)
-
-            # Update [v1.0] placeholder (version)
-            elif '[v1.0]' in para.text:
-                para.text = para.text.replace('[v1.0]', 'v1.0')
+        for para in doc.paragraphs:
+            if '[Project Name]' in para.text:
+                # Replace text while preserving formatting
+                for run in para.runs:
+                    if '[Project Name]' in run.text:
+                        run.text = run.text.replace('[Project Name]', project_name)
+                        # Set font size to 20pt and ensure bold for cover page project name
+                        run.font.size = Pt(20)
+                        run.font.bold = True
 
             # Update [Vendor/Consultant Name] placeholder
             elif '[Vendor/Consultant Name]' in para.text:
@@ -1005,12 +982,240 @@ class OutputGenerator:
                     '123 Business Street, Suite 100 • (555) 123-4567 • info@eoframework.com • www.eoframework.com'
                 )
 
-        # Update footer placeholders
+        # Update footer - replace placeholders with actual values
+        from docx.oxml.ns import qn
+        from docx.oxml import OxmlElement
+        from docx.shared import Pt
+
         for section in doc.sections:
             footer = section.footer
+
             for para in footer.paragraphs:
-                if '[Document Name]' in para.text:
-                    para.text = para.text.replace('[Document Name]', document_subtitle)
+                # Get full paragraph text to check for placeholders
+                full_text = para.text
+
+                # Replace PROJECT NAME placeholder (case-insensitive, handles split runs)
+                if 'PROJECT NAME' in full_text.upper():
+                    # Replace across all runs
+                    for run in para.runs:
+                        if run.text:
+                            # Replace case-insensitively
+                            import re
+                            run.text = re.sub(r'PROJECT NAME', project_name, run.text, flags=re.IGNORECASE)
+
+                # Replace "PAGE NO" placeholder with page number fields
+                if 'PAGE NO' in full_text.upper():
+                    # Find the run containing PAGE NO
+                    for i, run in enumerate(para.runs):
+                        if run.text and 'PAGE NO' in run.text.upper():
+                            # Clear the run text
+                            run.text = ''
+
+                            # Add "Page "
+                            run.text = 'Page '
+                            run.font.name = 'Times New Roman'
+                            run.font.size = Pt(10)
+
+                            # Add PAGE field (current page number)
+                            fldChar1 = OxmlElement('w:fldChar')
+                            fldChar1.set(qn('w:fldCharType'), 'begin')
+                            run._element.append(fldChar1)
+
+                            instrText = OxmlElement('w:instrText')
+                            instrText.set(qn('xml:space'), 'preserve')
+                            instrText.text = 'PAGE'
+                            run._element.append(instrText)
+
+                            fldChar2 = OxmlElement('w:fldChar')
+                            fldChar2.set(qn('w:fldCharType'), 'end')
+                            run._element.append(fldChar2)
+
+                            # Add " of " in a new run
+                            run_of = para.add_run(' of ')
+                            run_of.font.name = 'Times New Roman'
+                            run_of.font.size = Pt(10)
+
+                            # Add NUMPAGES field (total pages)
+                            run_total = para.add_run()
+                            run_total.font.name = 'Times New Roman'
+                            run_total.font.size = Pt(10)
+
+                            fldChar3 = OxmlElement('w:fldChar')
+                            fldChar3.set(qn('w:fldCharType'), 'begin')
+                            run_total._element.append(fldChar3)
+
+                            instrText2 = OxmlElement('w:instrText')
+                            instrText2.set(qn('xml:space'), 'preserve')
+                            instrText2.text = 'NUMPAGES'
+                            run_total._element.append(instrText2)
+
+                            fldChar4 = OxmlElement('w:fldChar')
+                            fldChar4.set(qn('w:fldCharType'), 'end')
+                            run_total._element.append(fldChar4)
+
+                            break  # Only replace first occurrence
+
+            # Also update footer table if it exists (2-column table: project | page#)
+            if footer.tables:
+                footer_table = footer.tables[0]
+
+                if len(footer_table.rows) > 0 and len(footer_table.rows[0].cells) >= 2:
+                    from docx.enum.text import WD_ALIGN_PARAGRAPH
+                    from docx.shared import Inches
+                    from docx.enum.table import WD_TABLE_ALIGNMENT
+                    from docx.oxml.shared import OxmlElement
+
+                    # Set table to full width - critical for proper layout
+                    footer_table.alignment = WD_TABLE_ALIGNMENT.LEFT
+                    footer_table.autofit = False
+
+                    # Set table width to 100% of page width
+                    tbl = footer_table._element
+                    tblPr = tbl.tblPr
+
+                    # Remove existing tblW element if present
+                    existing_tblW = tblPr.find(qn('w:tblW'))
+                    if existing_tblW is not None:
+                        tblPr.remove(existing_tblW)
+
+                    # Add new tblW element for 100% width
+                    tblW = OxmlElement('w:tblW')
+                    tblW.set(qn('w:w'), '5000')  # 5000 = 100% in Word
+                    tblW.set(qn('w:type'), 'pct')
+                    tblPr.append(tblW)
+
+                    row = footer_table.rows[0]
+                    cell_1 = row.cells[0]
+                    cell_2 = row.cells[1]
+
+                    # Set explicit widths for full page coverage (6.5" total for letter size with 1" margins)
+                    cell_1.width = Inches(5.0)  # Left cell (project name) - wider to prevent wrapping
+                    cell_2.width = Inches(1.5)  # Right cell (page numbers)
+
+                    # Cell 1 (left): Project name
+                    if cell_1.paragraphs:
+                        para_1 = cell_1.paragraphs[0]
+                        para_1.clear()
+                        para_1.alignment = WD_ALIGN_PARAGRAPH.LEFT
+                        run = para_1.add_run(project_name)
+                        run.font.name = 'Times New Roman'
+                        run.font.size = Pt(10)
+                        run.font.bold = True
+
+                    # Cell 2 (right): Page X of Y
+                    # Add paragraph if cell doesn't have one
+                    if not cell_2.paragraphs:
+                        para_2 = cell_2.add_paragraph()
+                    else:
+                        para_2 = cell_2.paragraphs[0]
+
+                    para_2.clear()
+                    para_2.alignment = WD_ALIGN_PARAGRAPH.RIGHT
+
+                    # Add "Page "
+                    run_page = para_2.add_run('Page ')
+                    run_page.font.name = 'Times New Roman'
+                    run_page.font.size = Pt(10)
+
+                    # Add PAGE field (current page number)
+                    run_page_num = para_2.add_run()
+                    run_page_num.font.name = 'Times New Roman'
+                    run_page_num.font.size = Pt(10)
+
+                    fldChar1 = OxmlElement('w:fldChar')
+                    fldChar1.set(qn('w:fldCharType'), 'begin')
+                    run_page_num._element.append(fldChar1)
+
+                    instrText = OxmlElement('w:instrText')
+                    instrText.set(qn('xml:space'), 'preserve')
+                    instrText.text = 'PAGE'
+                    run_page_num._element.append(instrText)
+
+                    fldChar2 = OxmlElement('w:fldChar')
+                    fldChar2.set(qn('w:fldCharType'), 'separate')
+                    run_page_num._element.append(fldChar2)
+
+                    # Add text element for field result
+                    t = OxmlElement('w:t')
+                    t.text = '1'
+                    run_page_num._element.append(t)
+
+                    fldChar3 = OxmlElement('w:fldChar')
+                    fldChar3.set(qn('w:fldCharType'), 'end')
+                    run_page_num._element.append(fldChar3)
+
+                    # Add " of "
+                    run_of = para_2.add_run(' of ')
+                    run_of.font.name = 'Times New Roman'
+                    run_of.font.size = Pt(10)
+
+                    # Add NUMPAGES field (total pages)
+                    run_total = para_2.add_run()
+                    run_total.font.name = 'Times New Roman'
+                    run_total.font.size = Pt(10)
+
+                    fldChar4 = OxmlElement('w:fldChar')
+                    fldChar4.set(qn('w:fldCharType'), 'begin')
+                    run_total._element.append(fldChar4)
+
+                    instrText2 = OxmlElement('w:instrText')
+                    instrText2.set(qn('xml:space'), 'preserve')
+                    instrText2.text = 'NUMPAGES'
+                    run_total._element.append(instrText2)
+
+                    fldChar5 = OxmlElement('w:fldChar')
+                    fldChar5.set(qn('w:fldCharType'), 'separate')
+                    run_total._element.append(fldChar5)
+
+                    # Add text element for field result
+                    t2 = OxmlElement('w:t')
+                    t2.text = '1'
+                    run_total._element.append(t2)
+
+                    fldChar6 = OxmlElement('w:fldChar')
+                    fldChar6.set(qn('w:fldCharType'), 'end')
+                    run_total._element.append(fldChar6)
+
+    def _add_eo_framework_branding(self, doc):
+        """Add EO Framework logo and website at the end of the document."""
+        from pathlib import Path
+        from docx.shared import Inches, Pt
+        from docx.enum.text import WD_ALIGN_PARAGRAPH
+
+        try:
+            # Add spacing before branding (3 empty paragraphs)
+            for _ in range(3):
+                doc.add_paragraph()
+
+            # Add horizontal line separator
+            separator_para = doc.add_paragraph()
+            separator_para.alignment = WD_ALIGN_PARAGRAPH.CENTER
+            run = separator_para.add_run('_______________________________________________')
+            run.font.size = Pt(10)
+            run.font.color.rgb = None  # Use default color
+
+            # Add small spacing
+            doc.add_paragraph()
+
+            # Add centered paragraph for logo
+            logo_para = doc.add_paragraph()
+            logo_para.alignment = WD_ALIGN_PARAGRAPH.CENTER
+
+            # Add EO Framework logo
+            logo_path = Path(__file__).parent.parent / 'doc-templates' / 'assets' / 'logos' / 'eo-framework-logo-real.png'
+            if logo_path.exists():
+                run = logo_para.add_run()
+                run.add_picture(str(logo_path), width=Inches(1.5))
+
+            # Add website URL below logo
+            url_para = doc.add_paragraph()
+            url_para.alignment = WD_ALIGN_PARAGRAPH.CENTER
+            run = url_para.add_run('www.eoframework.org')
+            run.font.size = Pt(10)
+            run.font.name = 'Times New Roman'
+
+        except Exception as e:
+            print(f"  ⚠️  Warning: Could not add EO Framework branding: {e}")
 
     def _add_formatted_text(self, paragraph, text):
         """Add text to paragraph with markdown bold/italic formatting applied.
@@ -1076,110 +1281,9 @@ class OutputGenerator:
                 break
 
     def _generate_word_toc(self, doc, tokens):
-        """Generate table of contents from markdown headings with page numbers."""
-        # Find TOC placeholder paragraph
-        toc_placeholder_index = None
-        for i, para in enumerate(doc.paragraphs):
-            if '[Table of Contents will be generated here]' in para.text:
-                toc_placeholder_index = i
-                break
-
-        if toc_placeholder_index is None:
-            return
-
-        # Extract headings from tokens and assign section numbers
-        headings = []
-        section_counters = [0, 0, 0, 0, 0, 0]  # Support up to H6
-        i = 0
-
-        while i < len(tokens):
-            token = tokens[i]
-            if token.type == 'heading_open':
-                level = int(token.tag[1])  # h1 -> 1, h2 -> 2, etc.
-                i += 1
-                if i < len(tokens) and tokens[i].type == 'inline':
-                    text = tokens[i].content
-                    # Skip the first H1 (it's the title on cover page)
-                    if not (level == 1 and len(headings) == 0):
-                        # Update section counters
-                        section_counters[level - 1] += 1
-                        # Reset lower level counters
-                        for j in range(level, 6):
-                            section_counters[j] = 0
-
-                        # Generate section number (e.g., 1.2.3)
-                        section_parts = [str(section_counters[k]) for k in range(level) if section_counters[k] > 0]
-                        section_num = '.'.join(section_parts)
-
-                        headings.append({
-                            'level': level,
-                            'text': text,
-                            'section_num': section_num,
-                            'page': len(headings) + 3  # Approximate page number (3+ for pages after cover and TOC)
-                        })
-            i += 1
-
-        # Delete TOC placeholder paragraph
-        p_elem = doc.paragraphs[toc_placeholder_index]._element
-        p_elem.getparent().remove(p_elem)
-
-        # Add TOC entries as separate paragraphs for better control
-        for idx, heading in enumerate(headings):
-            # Insert paragraph at the correct position
-            toc_para = doc.add_paragraph()
-            # Move paragraph to correct position
-            if toc_placeholder_index + idx < len(doc.paragraphs) - 1:
-                p = toc_para._element
-                p.getparent().remove(p)
-                doc.paragraphs[toc_placeholder_index + idx]._element.addprevious(p)
-
-            # Add section number (single space)
-            num_run = toc_para.add_run(f"{heading['section_num']} ")
-            num_run.font.name = 'Calibri'
-            num_run.font.size = Pt(11)
-            num_run.font.bold = (heading['level'] == 1)
-
-            # Add heading text
-            text_run = toc_para.add_run(heading['text'])
-            text_run.font.name = 'Calibri'
-            text_run.font.size = Pt(11)
-
-            # Add dots leader
-            dots_run = toc_para.add_run(' ')
-            dots_run.font.name = 'Calibri'
-            dots_run.font.size = Pt(11)
-
-            # Add tab before page number
-            toc_para.add_run('\t')
-
-            # Add page number
-            page_run = toc_para.add_run(str(heading['page']))
-            page_run.font.name = 'Calibri'
-            page_run.font.size = Pt(11)
-
-            # Set tab stop for page numbers (right-aligned at 6")
-            from docx.enum.text import WD_TAB_ALIGNMENT, WD_TAB_LEADER
-            tab_stops = toc_para.paragraph_format.tab_stops
-            tab_stops.add_tab_stop(Inches(6.0), WD_TAB_ALIGNMENT.RIGHT, WD_TAB_LEADER.DOTS)
-
-            # Indent based on level
-            indent_level = heading['level'] - 1
-            toc_para.paragraph_format.left_indent = Inches(0.25 * indent_level)
-
-            # Different styling based on level
-            if heading['level'] == 1:
-                text_run.font.bold = True
-                num_run.font.color.rgb = RGBColor(31, 78, 120)
-                text_run.font.color.rgb = RGBColor(31, 78, 120)
-                page_run.font.color.rgb = RGBColor(31, 78, 120)
-            elif heading['level'] == 2:
-                text_run.font.color.rgb = RGBColor(68, 84, 106)
-                num_run.font.color.rgb = RGBColor(68, 84, 106)
-                page_run.font.color.rgb = RGBColor(68, 84, 106)
-            else:
-                text_run.font.color.rgb = RGBColor(128, 128, 128)
-                num_run.font.color.rgb = RGBColor(128, 128, 128)
-                page_run.font.color.rgb = RGBColor(128, 128, 128)
+        """Keep the template's TOC as-is. User will update it in Word using built-in TOC functionality."""
+        # Do nothing - preserve the template's TOC field so it can be updated in Word
+        pass
 
     def _extract_template_fonts(self, doc):
         """Extract font properties from Word template."""
@@ -1479,20 +1583,29 @@ class OutputGenerator:
             with open(md_file, 'r', encoding='utf-8') as f:
                 md_content = f.read()
 
-            # Parse markdown
-            md = MarkdownIt()
-            tokens = md.parse(md_content)
+            # Parse YAML frontmatter and get clean content (without YAML)
+            metadata, clean_content = self._parse_yaml_frontmatter(md_content)
 
-            # Update cover page
+            # Parse markdown (using clean content without YAML)
+            md = MarkdownIt()
+            tokens = md.parse(clean_content)
+
+            # Update cover page with original content (including YAML for metadata extraction)
             self._update_word_cover(doc, md_file, md_content)
 
             # Clear sample content after TOC (page 3 onwards), but keep TOC placeholder
+            # Also update List of Figures section with actual figures from markdown
             # Find and remove both paragraphs AND tables after the second page break
             from docx.oxml.ns import qn
             page_break_count = 0
             removal_start_index = None
+            list_of_figures_index = None
 
             for i, para in enumerate(doc.paragraphs):
+                # Track List of Figures heading location
+                if 'List of Figures' in para.text and para.style.name == 'Heading 1':
+                    list_of_figures_index = i
+
                 # Check if paragraph contains page break
                 # Look for w:br elements with type="page"
                 for run in para.runs:
@@ -1510,13 +1623,14 @@ class OutputGenerator:
                     removal_start_index = i
                     break
 
-            # Remove all content after second page break (both paragraphs and tables)
+            # Remove all content after second page break (including sample figures)
             # BUT preserve section elements
+            # Do this BEFORE clearing List of Figures content to avoid index shifting issues
             if removal_start_index is not None:
                 # Get the parent element (body)
                 body = doc._element.body
 
-                # Find the paragraph element corresponding to removal_start_index
+                # Get the paragraph element with the second page break
                 para_elem = doc.paragraphs[removal_start_index]._element
 
                 # Remove all siblings after this paragraph, EXCEPT sectPr (section properties)
@@ -1534,11 +1648,74 @@ class OutputGenerator:
                 for elem in elements_to_remove:
                     body.remove(elem)
 
+            # Clear sample figure entries from List of Figures section (keep heading only)
+            # This happens AFTER removing content post-page-break, so we need to find the heading again
+            if list_of_figures_index is not None:
+                # Re-find the List of Figures heading (index may have changed after removal)
+                list_of_figures_elem = None
+                for para in doc.paragraphs:
+                    if 'List of Figures' in para.text and para.style.name == 'Heading 1':
+                        list_of_figures_elem = para._element
+                        break
+
+                if list_of_figures_elem is not None:
+                    # Remove all paragraphs after List of Figures heading until we hit another heading or section break
+                    body = doc._element.body
+                    found_heading = False
+                    elements_to_remove = []
+
+                    for elem in body:
+                        if elem == list_of_figures_elem:
+                            found_heading = True
+                            continue
+
+                        if found_heading:
+                            # Stop if we hit another heading (Heading 1) or a page break
+                            if elem.tag.endswith('}p'):
+                                # Check if it's a heading
+                                pPr = elem.find(qn('w:pPr'))
+                                if pPr is not None:
+                                    pStyle = pPr.find(qn('w:pStyle'))
+                                    if pStyle is not None:
+                                        style_val = pStyle.get(qn('w:val'))
+                                        if style_val and style_val.startswith('Heading'):
+                                            break
+
+                                # Check for page break
+                                has_page_break = False
+                                for r in elem.findall(qn('w:r')):
+                                    for br in r.findall(qn('w:br')):
+                                        if br.get(qn('w:type')) == 'page':
+                                            has_page_break = True
+                                            break
+                                    if has_page_break:
+                                        break
+
+                                if has_page_break:
+                                    break
+
+                                # This is a regular paragraph under List of Figures, remove it
+                                elements_to_remove.append(elem)
+                            elif elem.tag.endswith('}tbl'):
+                                # Remove tables under List of Figures
+                                elements_to_remove.append(elem)
+
+                    for elem in elements_to_remove:
+                        body.remove(elem)
+
             # Generate table of contents (after clearing sample content)
             self._generate_word_toc(doc, tokens)
 
-            # Add content from markdown
-            self._process_md_tokens(doc, tokens, md_content)
+            # Add content from markdown (using clean content without YAML, pass md_file for image path resolution)
+            # Returns list of figures found
+            figure_list = self._process_md_tokens(doc, tokens, clean_content, md_file)
+
+            # Populate List of Figures section with actual figures
+            if figure_list:
+                self._populate_list_of_figures(doc, figure_list)
+
+            # Add EO Framework branding at the end of the document
+            self._add_eo_framework_branding(doc)
 
             doc.save(output_file)
             print(f"  ✅ {md_file.name} → {output_file.name}")
@@ -1828,12 +2005,17 @@ class OutputGenerator:
             for cell in row.cells:
                 cell.width = col_width
 
-    def _process_md_tokens(self, doc, tokens, md_content):
-        """Process markdown tokens and add to Word document with section numbering."""
+    def _process_md_tokens(self, doc, tokens, md_content, md_file=None):
+        """Process markdown tokens and add to Word document with section numbering.
+
+        Returns:
+            list: List of figure captions found in the document
+        """
         # Initialize section counters for numbering
         section_counters = [0, 0, 0, 0, 0, 0]  # Support up to H6
         first_h1_skipped = False
         current_section_title = ''
+        figure_list = []  # Track figures for List of Figures
 
         # Metadata field patterns to skip (these are now on cover page)
         metadata_patterns = [
@@ -1979,6 +2161,93 @@ class OutputGenerator:
                 if i < len(tokens) and tokens[i].type == 'inline':
                     text = tokens[i].content
 
+                    # Check for markdown image syntax: ![alt text](image_path)
+                    import re
+                    image_match = re.search(r'!\[([^\]]*)\]\(([^\)]+)\)', text)
+                    if image_match:
+                        # Extract image details
+                        alt_text = image_match.group(1)
+                        image_path = image_match.group(2)
+
+                        # Resolve image path relative to markdown file directory
+                        from pathlib import Path
+                        if md_file:
+                            # Get the directory containing the markdown file
+                            md_file_dir = md_file.parent
+                            # Resolve the relative image path from the markdown file location
+                            full_image_path = (md_file_dir / image_path).resolve()
+                        else:
+                            # Fallback: try as absolute path or relative to current directory
+                            full_image_path = Path(image_path).resolve()
+
+                        # Try to add the image - using table-based border approach (safer)
+                        try:
+                            if full_image_path.exists():
+                                # Create a 1x1 table to hold the image with border
+                                from docx.enum.table import WD_TABLE_ALIGNMENT
+                                from docx.oxml import OxmlElement
+                                from docx.oxml.ns import qn
+
+                                # Create table with 1 cell
+                                table = doc.add_table(rows=1, cols=1)
+                                table.alignment = WD_TABLE_ALIGNMENT.CENTER
+
+                                # Get the cell
+                                cell = table.rows[0].cells[0]
+
+                                # Set cell padding to create space around image
+                                cell_pr = cell._element.get_or_add_tcPr()
+                                tc_mar = OxmlElement('w:tcMar')
+                                for margin_name in ['top', 'left', 'bottom', 'right']:
+                                    node = OxmlElement(f'w:{margin_name}')
+                                    node.set(qn('w:w'), '100')  # 100 twips = about 7pt padding
+                                    node.set(qn('w:type'), 'dxa')
+                                    tc_mar.append(node)
+                                cell_pr.append(tc_mar)
+
+                                # Add the picture to the cell
+                                cell_para = cell.paragraphs[0]
+                                cell_para.alignment = WD_ALIGN_PARAGRAPH.CENTER
+                                run = cell_para.add_run()
+                                picture = run.add_picture(str(full_image_path), width=Inches(6.0))
+
+                                # Apply border to table (1pt black border)
+                                tbl_pr = table._element.tblPr
+                                tbl_borders = OxmlElement('w:tblBorders')
+                                for border_name in ['top', 'left', 'bottom', 'right']:
+                                    border = OxmlElement(f'w:{border_name}')
+                                    border.set(qn('w:val'), 'single')
+                                    border.set(qn('w:sz'), '8')  # 8 eighths of a point = 1pt
+                                    border.set(qn('w:space'), '0')
+                                    border.set(qn('w:color'), '000000')
+                                    tbl_borders.append(border)
+                                tbl_pr.append(tbl_borders)
+
+                                # Add simple caption directly under image (no spacing paragraph)
+                                if alt_text:
+                                    caption_para = doc.add_paragraph()
+                                    caption_para.alignment = WD_ALIGN_PARAGRAPH.CENTER
+                                    caption_para.paragraph_format.space_before = Pt(3)  # Minimal space before caption
+                                    caption_para.paragraph_format.space_after = Pt(12)
+
+                                    # Add caption text - simple format
+                                    caption_run = caption_para.add_run(alt_text)
+                                    caption_run.font.name = self.template_fonts['body_font']
+                                    caption_run.font.size = Pt(self.template_fonts['body_size'])
+                                    caption_run.bold = True
+
+                                    # Add to figure list
+                                    figure_list.append(alt_text)
+                            else:
+                                print(f"  Warning: Image file not found: {full_image_path}")
+                        except Exception as e:
+                            print(f"  Warning: Could not insert image {image_path}: {e}")
+                            import traceback
+                            traceback.print_exc()
+
+                        i += 1
+                        continue
+
                     # Skip table rows (they're already rendered as tables)
                     if text.startswith('|') and text.endswith('|'):
                         i += 1
@@ -1986,6 +2255,13 @@ class OutputGenerator:
 
                     # Skip table separators
                     if text.startswith('|') and set(text.replace('|', '').replace('-', '').replace(' ', '').replace(':', '')) == set():
+                        i += 1
+                        continue
+
+                    # Skip verbose figure descriptions (e.g., "**Figure 1: ...** - High-level overview...")
+                    # These are redundant since we add simple captions programmatically
+                    import re
+                    if re.match(r'\*\*Figure \d+:.*\*\*\s*-\s*', text):
                         i += 1
                         continue
 
@@ -2042,6 +2318,53 @@ class OutputGenerator:
                     i += 1
             else:
                 i += 1
+
+        return figure_list
+
+    def _populate_list_of_figures(self, doc, figure_list):
+        """Populate the List of Figures section with actual figure entries."""
+        # Insert figure entries after the List of Figures heading
+        from docx.oxml import OxmlElement
+        from docx.oxml.ns import qn
+
+        # Get the body element
+        body = doc._element.body
+
+        # Re-find the List of Figures heading (indices may have shifted)
+        heading_elem = None
+        for para in doc.paragraphs:
+            if 'List of Figures' in para.text and para.style.name == 'Heading 1':
+                heading_elem = para._element
+                break
+
+        if heading_elem is None:
+            return
+
+        # Find the position to insert after the heading
+        heading_index = list(body).index(heading_elem)
+
+        # Insert figure entries after the heading
+        for figure_caption in figure_list:
+            # Create a new paragraph element
+            p = OxmlElement('w:p')
+
+            # Add paragraph properties for Normal style
+            pPr = OxmlElement('w:pPr')
+            pStyle = OxmlElement('w:pStyle')
+            pStyle.set(qn('w:val'), 'Normal')
+            pPr.append(pStyle)
+            p.append(pPr)
+
+            # Add the text run with figure caption
+            r = OxmlElement('w:r')
+            t = OxmlElement('w:t')
+            t.text = figure_caption
+            r.append(t)
+            p.append(r)
+
+            # Insert the paragraph after the heading
+            heading_index += 1
+            body.insert(heading_index, p)
 
     def _get_layout(self, prs, name_contains):
         """Get layout by partial name match."""
