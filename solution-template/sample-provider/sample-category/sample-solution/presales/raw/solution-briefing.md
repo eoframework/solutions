@@ -10,7 +10,7 @@ footer_logo_right: support/doc-templates/assets/logos/eo-framework-logo-real.png
 # Solution Briefing Template
 
 ## Slide Deck Structure for PowerPoint
-**9 Slides**
+**10 Slides**
 
 ### Slide 1: Title Slide
 **Presentation Title:** Solution Briefing
@@ -198,24 +198,72 @@ footer_logo_right: support/doc-templates/assets/logos/eo-framework-logo-real.png
 
 ---
 
-### Thank You & Next Steps
-**Let's Begin This Partnership**
+### Next Steps
+**Your Path Forward**
 
-**Immediate Next Steps:**
+**Immediate Actions:**
 1. **Decision:** [Specific decision needed by when]
 2. **Kickoff:** [Target start date]
 3. **Team Formation:** [Key team members required]
 
 **30-Day Launch Plan:**
-- Week 1: Contract finalization
-- Week 2: Project initiation & planning
-- Week 3: Environment setup
+- Week 1: Contract finalization and legal review
+- Week 2: Project initiation & planning kickoff
+- Week 3: Environment setup and access provisioning
 - Week 4: Initial implementation begins
 
-**Contact Information:**
-- **Project Lead:** [Name, Title] | [Email] | [Phone]
-- **Technical Lead:** [Name, Title] | [Email] | [Phone]
-- **Account Manager:** [Name, Title] | [Email] | [Phone]
+**SPEAKER NOTES:**
+
+*Transition from Investment:*
+- "Now that we've covered the investment and value, let's talk about how we get started"
+- Position this as straightforward and low-friction process
+- Emphasize you'll be with them every step of the way
+
+*Walking Through Next Steps:*
+- Be specific about the decision needed - don't leave it vague
+- Propose concrete dates for kickoff based on their calendar
+- Identify key team members needed upfront (sponsor, tech lead, SMEs)
+- Show 30-day plan demonstrates we're ready to move fast
+
+*Talking Points:*
+- We can start as soon as [specific timeframe] after decision
+- Our team is already allocated and ready to begin
+- Week 1-2 are preparation, real work starts Week 3
+- You'll see tangible progress within first month
+- Emphasize partnership - "we'll be working alongside your team"
+
+---
+
+### Thank You
+
+- **Your Account Manager:** [Name, Title] | [Email] | [Phone]
+
+**SPEAKER NOTES:**
+
+*Closing Strong:*
+- Thank them for their time and attention
+- Reiterate excitement about partnership opportunity
+- Introduce the team members who will be working with them
+- Make yourself available for questions
+
+*Call to Action:*
+- "What questions do you have?"
+- "What concerns should we address?"
+- "What would you need to see to move forward?"
+- Be prepared to discuss next steps in detail
+
+*Handling Q&A:*
+- Listen actively and acknowledge concerns
+- Don't oversell - be honest about challenges
+- Offer to follow up on items you don't know
+- Schedule follow-up meeting before they leave
+- Send meeting summary within 24 hours
+
+*Closing Techniques:*
+- Ask for the business - "Are you ready to move forward?"
+- Trial close: "Does this approach work for your timeline?"
+- Alternative close: "Would you prefer to start in [Month A] or [Month B]?"
+- Don't leave without clear next steps and timeline
 
 ---
 
@@ -276,13 +324,21 @@ footer_logo_right: support/doc-templates/assets/logos/eo-framework-logo-real.png
 - Reference detailed speaker notes on slide for handling objections
 - Have line-item breakdown ready if deeper financial questions arise
 
-**Slide 9 - Thank You & Next Steps:**
-- Be clear and specific about next steps
-- Create urgency with timeline
-- Make it easy to say yes
-- End on collaborative, partnership tone
-- Thank them for their time and consideration
-- Open the floor for questions and discussion
+**Slide 9 - Next Steps:**
+- Transition naturally from investment discussion to "how we get started"
+- Walk through immediate actions with specific dates and requirements
+- Present 30-day launch plan to show readiness and momentum
+- Be specific about decision needed - don't leave it ambiguous
+- Emphasize partnership approach - working alongside their team
+- Reference detailed speaker notes for transition strategies
+
+**Slide 10 - Thank You:**
+- Thank audience for their time and engagement
+- Introduce your team members who will support them
+- Present contact information clearly for follow-up
+- Open floor for questions and discussion
+- Use closing techniques from speaker notes
+- Don't leave without clear next steps scheduled
 
 ### Q&A Preparation
 

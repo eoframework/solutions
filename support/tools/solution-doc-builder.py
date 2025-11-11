@@ -2760,9 +2760,13 @@ class OutputGenerator:
         """Determine optimal layout based on slide title and position."""
         title_lower = title.lower()
 
-        # Title slide keywords
-        if any(keyword in title_lower for keyword in ['thank you', 'contact', 'next steps']):
+        # Title slide keywords - only match "thank you" exactly, not "next steps"
+        if any(keyword in title_lower for keyword in ['thank you', 'contact']):
             return 'thank_you'
+
+        # Bullet points layout for next steps
+        if 'next steps' in title_lower:
+            return 'bullet_points'
 
         # Table layout keywords (timeline, milestones, schedule)
         if any(keyword in title_lower for keyword in ['timeline', 'milestone', 'schedule', 'roadmap']):
@@ -2819,6 +2823,8 @@ class OutputGenerator:
                 # Select appropriate layout based on hint
                 if layout_hint == 'thank_you':
                     layout = self._get_layout(prs, "Thank You")
+                elif layout_hint == 'bullet_points':
+                    layout = self._get_layout(prs, "Bullet Points")
                 elif layout_hint == 'table':
                     layout = self._get_layout(prs, "Table")
                 elif layout_hint == 'two_column':
@@ -2866,7 +2872,10 @@ class OutputGenerator:
 
                 # Fill body content based on layout type
                 if layout_hint in ['thank_you']:
-                    # Thank you slide - idx=14 is content
+                    # Thank you slide - idx=15 is content area below title
+                    self._fill_content_placeholder(slide, slide_data, [15])
+                elif layout_hint == 'bullet_points':
+                    # Bullet points slide - idx=14 is content
                     self._fill_content_placeholder(slide, slide_data, [14])
                 elif layout_hint == 'table':
                     # Table slide - idx=14 is table placeholder
