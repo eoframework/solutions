@@ -1,11 +1,11 @@
 version: '2.0'
 provider: hashicorp
-generated_at: '2025-11-11T20:03:07.640423'
+generated_at: '2025-11-11T22:22:04.306424'
 catalog_type: provider
 metadata:
   provider_name: HashiCorp
   total_solutions: 2
-  last_updated: '2025-11-11T20:03:07.640431'
+  last_updated: '2025-11-11T22:22:04.306433'
   auto_generated: true
 categories:
   cloud:
