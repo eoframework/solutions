@@ -2705,8 +2705,19 @@ class OutputGenerator:
         if current_slide:
             slides.append(current_slide)
 
-        # Post-process: Convert table rows to formatted bullets
+        # Post-process: Override layout_hint to 'table' if slide has table data
+        # This ensures tables are rendered as PowerPoint tables, not bullets
         for slide in slides:
+            if slide.get('has_table') and slide.get('table_rows') and len(slide['table_rows']) > 1:
+                # Force table layout for any slide with table data
+                slide['layout_hint'] = 'table'
+
+        # Post-process: Convert table rows to formatted bullets (only for non-table layouts)
+        for slide in slides:
+            # Skip table-to-bullets conversion if using table layout
+            if slide.get('layout_hint') == 'table':
+                continue
+
             if slide.get('has_table') and slide.get('table_rows'):
                 table_rows = slide['table_rows']
                 if len(table_rows) > 1:
@@ -2949,19 +2960,23 @@ class OutputGenerator:
             table = graphic_frame.table
 
             # Set column widths (proportional distribution)
-            # Assuming 4 columns: Phase No | Phase Description | Timeline | Key Deliverables
+            total_width = graphic_frame.width
+
+            # Different column width distributions based on column count
             if len(table.columns) == 4:
-                # Get total width
-                total_width = graphic_frame.width
-
-                # Column width distribution (as percentages):
-                # Phase No: 12%
-                # Phase Description: 25%
-                # Timeline: 12%
-                # Key Deliverables: 51%
+                # Phase No | Phase Description | Timeline | Key Deliverables
                 col_widths = [0.12, 0.25, 0.12, 0.51]
+            elif len(table.columns) == 5:
+                # Cost Item | Cost per Item | Credits | Total Cost to Client | Comments
+                # Optimized for Investment Summary tables
+                col_widths = [0.25, 0.15, 0.12, 0.18, 0.30]
+            else:
+                # Default: equal distribution for other column counts
+                col_widths = [1.0 / len(table.columns)] * len(table.columns)
 
-                for i, width_ratio in enumerate(col_widths):
+            # Apply column widths
+            for i, width_ratio in enumerate(col_widths):
+                if i < len(table.columns):
                     table.columns[i].width = int(total_width * width_ratio)
 
             # Fill table with data

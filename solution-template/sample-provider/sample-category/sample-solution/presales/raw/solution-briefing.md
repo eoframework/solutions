@@ -147,21 +147,54 @@ footer_logo_right: support/doc-templates/assets/logos/eo-framework-logo-real.png
 ### Investment Summary
 **Total Investment & Value**
 
-**Initial Investment:** $[Amount]
-- Implementation Services: $[Amount]
-- Technology/Licenses: $[Amount]
-- Training & Change Management: $[Amount]
+| Cost Item | Cost per Item | Credits | Total Cost to Client | Comments |
+|-----------|---------------|---------|---------------------|----------|
+| Assessment & Discovery | $45,000 | $0 | $45,000 | 4-week assessment, architecture design, ROI analysis |
+| Implementation Services | $180,000 | ($25,000) | $155,000 | Cloud Partner Program credit applied |
+| Cloud Consumption (Year 1) | $96,000 | ($15,000) | $81,000 | Platform services with 15% partner discount |
+| Training & Change Management | $35,000 | $0 | $35,000 | User training, documentation, adoption support |
+| Support & Maintenance (Year 1) | $48,000 | $0 | $48,000 | 24/7 support, SLA guarantee, ongoing optimization |
+| **Total Year 1 Investment** | **$404,000** | **($40,000)** | **$364,000** | **All-in first year cost with credits** |
 
-**Annual Operating Costs:** $[Amount]
-- Platform/Infrastructure: $[Amount]
-- Support & Maintenance: $[Amount]
+**Annual Operating Costs (Years 2-3):** $144,000/year
+- Cloud Platform Services: $96,000/year
+- Support & Maintenance: $48,000/year
 
-**Total 3-Year TCO:** $[Amount]
+**Total 3-Year TCO:** $652,000
 
 **Expected ROI:**
-- Payback Period: [Months]
-- 3-Year ROI: [Percentage]
-- Annual Benefits: $[Amount]
+- **Payback Period:** 14 months
+- **3-Year ROI:** 285%
+- **Annual Benefits:** $420,000 (starting Year 2)
+- **Net 3-Year Value:** $1.2M
+
+**SPEAKER NOTES:**
+
+*Value Positioning:*
+- Frame as investment with measurable returns, not just cost
+- Highlight $40K in credits reduces Year 1 investment by 10%
+- Emphasize 14-month payback means ROI achieved within first contract year
+- Annual benefits of $420K far exceed ongoing costs of $144K
+
+*Cost Breakdown Strategy:*
+- Walk through each cost item explaining value delivered
+- Assessment ensures we solve the right problems before building
+- Implementation includes all technical work and integrations
+- Credits demonstrate our partnership leverage with cloud vendors
+- Support costs ensure long-term success and optimization
+
+*Handling Objections:*
+- "Can we reduce costs?" - Explain risk of cutting assessment or change management
+- "What if we do it ourselves?" - Compare to cost of internal team + learning curve
+- "Why cloud consumption costs?" - Show scalability and elimination of CapEx
+- "What's included in support?" - Detail 24/7 coverage, proactive monitoring, optimization
+
+*Talking Points:*
+- Compare $364K investment to cost of status quo from Business Opportunity slide
+- Show how 285% ROI translates to $1.2M net value over 3 years
+- Position credits as evidence of our vendor relationships and negotiating power
+- Emphasize transparent pricing with no hidden costs or surprises
+- Offer to provide detailed line-item breakdown in follow-up meeting
 
 ---
 
@@ -234,12 +267,14 @@ footer_logo_right: support/doc-templates/assets/logos/eo-framework-logo-real.png
 - Build confidence in our ability to deliver
 
 **Slide 8 - Investment Summary:**
-- Be transparent about all costs - no surprises
-- Frame investment in context of business impact and ROI
-- Compare to cost of inaction from Slide 2
-- Explain value of each investment component
-- Position as investment (not cost) with measurable returns
-- Have detailed breakdown ready if asked
+- Walk through the cost table line by line, explaining value of each component
+- Highlight the $40K in credits (10% savings) from partner programs
+- Emphasize transparency - all costs shown including credits and discounts
+- Focus on ROI metrics: 14-month payback, 285% 3-year ROI, $1.2M net value
+- Compare $364K Year 1 investment to cost of inaction from Business Opportunity
+- Position as investment with measurable returns, not expense
+- Reference detailed speaker notes on slide for handling objections
+- Have line-item breakdown ready if deeper financial questions arise
 
 **Slide 9 - Thank You & Next Steps:**
 - Be clear and specific about next steps
