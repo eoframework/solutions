@@ -1,12 +1,12 @@
 version: '2.0'
 category: cloud
-generated_at: '2025-11-11T00:45:51.135012'
+generated_at: '2025-11-11T06:48:06.062127'
 catalog_type: category
 metadata:
   category_name: Cloud
   description: Cloud infrastructure and platform solutions
   total_solutions: 7
-  last_updated: '2025-11-11T00:45:51.135018'
+  last_updated: '2025-11-11T06:48:06.062133'
   auto_generated: true
 providers:
   cisco:
