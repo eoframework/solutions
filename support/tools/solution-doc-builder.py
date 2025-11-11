@@ -2273,6 +2273,7 @@ class OutputGenerator:
                     'bullets': [],
                     'content': [],
                     'images': [],  # Store image paths for slide
+                    'notes': [],  # Store speaker notes
                     'slide_number': slide_counter,
                     'layout_hint': self._determine_layout_hint(title_text, slide_counter),
                     'metadata': metadata  # Store metadata for logo insertion
@@ -2280,6 +2281,24 @@ class OutputGenerator:
 
             # Content slide processing - check for images, bullets, numbered lists
             elif current_slide and current_slide['type'] == 'content':
+                # Check for speaker notes marker
+                if line.strip().startswith('**SPEAKER NOTES:**'):
+                    # Set flag to capture everything after this as notes
+                    current_slide['in_notes_section'] = True
+                    i += 1
+                    continue
+
+                # If in notes section, capture all non-empty lines as notes (but stop at ---)
+                if current_slide.get('in_notes_section', False):
+                    # Stop collecting notes at slide separator or next slide header
+                    if line.strip() == '---' or line.strip().startswith('###'):
+                        current_slide['in_notes_section'] = False
+                        # Don't continue - let it be processed normally
+                    elif line.strip():  # Only add non-empty lines
+                        current_slide['notes'].append(line.strip())
+                        i += 1
+                        continue
+
                 # First check for markdown images: ![alt text](image_path)
                 image_match = re.search(r'!\[([^\]]*)\]\(([^\)]+)\)', line)
                 if image_match:
@@ -2317,7 +2336,23 @@ class OutputGenerator:
                         item_text = re.sub(r'\*\*(.+?)\*\*', r'\1', item_text)
                         current_slide['bullets'].append((item_text, level))
 
-            # Table detection and parsing
+                # Check for table rows (inside content slide processing)
+                elif line.startswith('|'):
+                    if 'has_table' not in current_slide:
+                        current_slide['has_table'] = True
+                        current_slide['table_rows'] = []
+
+                    # Parse table row (skip separator rows)
+                    if not line.strip().replace('|', '').replace('-', '').replace(' ', '').replace(':', ''):
+                        # Skip separator rows (|---|---|)
+                        pass
+                    else:
+                        # Parse actual table row
+                        cells = [cell.strip() for cell in line.split('|') if cell.strip()]
+                        if cells:
+                            current_slide['table_rows'].append(cells)
+
+            # Table detection and parsing (legacy - for non-content slides)
             elif line.startswith('|') and current_slide:
                 if 'has_table' not in current_slide:
                     current_slide['has_table'] = True
@@ -2395,6 +2430,10 @@ class OutputGenerator:
         if any(keyword in title_lower for keyword in ['thank you', 'contact', 'next steps']):
             return 'thank_you'
 
+        # Table layout keywords (timeline, milestones, schedule)
+        if any(keyword in title_lower for keyword in ['timeline', 'milestone', 'schedule', 'roadmap']):
+            return 'table'
+
         # Two-column layout keywords (comparisons)
         if any(keyword in title_lower for keyword in ['why this', 'differentiated', 'comparison', 'vs', 'versus']):
             return 'two_column'
@@ -2407,9 +2446,9 @@ class OutputGenerator:
         if any(keyword in title_lower for keyword in ['investment', 'roi', 'cost', 'pricing', 'financials', 'metrics']):
             return 'data_viz'
 
-        # Key points layout keywords (highlights, advantages)
+        # Key points layout keywords (highlights, advantages) - use single column
         if any(keyword in title_lower for keyword in ['partnership', 'advantage', 'why partner', 'key points', 'benefits']):
-            return 'key_points'
+            return 'single'
 
         # Default to single column
         return 'single'
@@ -2445,14 +2484,14 @@ class OutputGenerator:
                 # Select appropriate layout based on hint
                 if layout_hint == 'thank_you':
                     layout = self._get_layout(prs, "Thank You")
+                elif layout_hint == 'table':
+                    layout = self._get_layout(prs, "Table")
                 elif layout_hint == 'two_column':
                     layout = self._get_layout(prs, "Two Column")
                 elif layout_hint == 'visual':
                     layout = self._get_layout(prs, "Visual Content")
                 elif layout_hint == 'data_viz':
                     layout = self._get_layout(prs, "Data Visualization")
-                elif layout_hint == 'key_points':
-                    layout = self._get_layout(prs, "Key Points")
                 else:
                     layout = self._get_layout(prs, "Single Column")
 
@@ -2461,13 +2500,31 @@ class OutputGenerator:
                 # Fill title (different index for each layout)
                 title_idx = 12 if layout_hint == 'thank_you' else 10
                 try:
-                    slide.placeholders[title_idx].text = slide_data['title']
+                    title_placeholder = slide.placeholders[title_idx]
+                    title_placeholder.text = slide_data['title']
+
+                    # For table layout: left-align and bold the title
+                    if layout_hint == 'table':
+                        from pptx.enum.text import PP_ALIGN
+                        if title_placeholder.text_frame and title_placeholder.text_frame.paragraphs:
+                            for paragraph in title_placeholder.text_frame.paragraphs:
+                                paragraph.alignment = PP_ALIGN.LEFT
+                                for run in paragraph.runs:
+                                    run.font.bold = True
                 except:
                     # Fallback: try to find title placeholder by name
                     for placeholder in slide.placeholders:
                         try:
                             if 'title' in placeholder.name.lower() or placeholder.placeholder_format.idx in [8, 10, 12]:
                                 placeholder.text = slide_data['title']
+                                # Apply same formatting for table layout
+                                if layout_hint == 'table':
+                                    from pptx.enum.text import PP_ALIGN
+                                    if placeholder.text_frame and placeholder.text_frame.paragraphs:
+                                        for paragraph in placeholder.text_frame.paragraphs:
+                                            paragraph.alignment = PP_ALIGN.LEFT
+                                            for run in paragraph.runs:
+                                                run.font.bold = True
                                 break
                         except:
                             pass
@@ -2476,12 +2533,12 @@ class OutputGenerator:
                 if layout_hint in ['thank_you']:
                     # Thank you slide - idx=14 is content
                     self._fill_content_placeholder(slide, slide_data, [14])
+                elif layout_hint == 'table':
+                    # Table slide - idx=14 is table placeholder
+                    self._fill_table_placeholder(slide, slide_data, 14)
                 elif layout_hint == 'two_column':
                     # Two column - idx=11 (left), idx=12 (right)
                     self._fill_content_placeholder(slide, slide_data, [11, 12])
-                elif layout_hint == 'key_points':
-                    # Key points - idx=14 is content
-                    self._fill_content_placeholder(slide, slide_data, [14])
                 elif layout_hint == 'data_viz':
                     # Data visualization - idx=11 is content
                     self._fill_content_placeholder(slide, slide_data, [11])
@@ -2501,6 +2558,23 @@ class OutputGenerator:
                 images = slide_data.get('images', [])
                 if images:
                     self._insert_slide_images(slide, slide_data, layout_hint)
+
+                # Add speaker notes if present
+                notes = slide_data.get('notes', [])
+                if notes:
+                    try:
+                        notes_slide = slide.notes_slide
+                        text_frame = notes_slide.notes_text_frame
+                        # Join all notes with newlines and clean up markdown formatting
+                        notes_text = '\n'.join(notes)
+                        # Remove markdown formatting from notes
+                        notes_text = re.sub(r'\*([^\*]+)\*', r'\1', notes_text)  # Remove italic *text*
+                        notes_text = re.sub(r'_([^_]+)_', r'\1', notes_text)     # Remove italic _text_
+                        if text_frame:
+                            text_frame.text = notes_text
+                    except Exception as e:
+                        # Notes may not be available for all slide layouts
+                        pass
 
         except Exception as e:
             # Log error but continue with other slides
@@ -2524,6 +2598,78 @@ class OutputGenerator:
                 # Odd indices (1, 3, 5...) are between ** markers, so make them bold
                 if i % 2 == 1:
                     run.font.bold = True
+
+    def _fill_table_placeholder(self, slide, slide_data, table_placeholder_idx):
+        """Fill table placeholder with data from markdown table."""
+        try:
+            from pptx.util import Pt
+            from pptx.dml.color import RGBColor
+
+            # Get table data
+            table_rows = slide_data.get('table_rows', [])
+            if not table_rows or len(table_rows) < 2:
+                return
+
+            # Get the table placeholder
+            table_placeholder = None
+            for ph in slide.placeholders:
+                if ph.placeholder_format.idx == table_placeholder_idx:
+                    table_placeholder = ph
+                    break
+
+            if not table_placeholder:
+                return
+
+            # Access the table shape
+            graphic_frame = table_placeholder.insert_table(rows=len(table_rows), cols=len(table_rows[0]))
+            table = graphic_frame.table
+
+            # Set column widths (proportional distribution)
+            # Assuming 4 columns: Phase No | Phase Description | Timeline | Key Deliverables
+            if len(table.columns) == 4:
+                # Get total width
+                total_width = graphic_frame.width
+
+                # Column width distribution (as percentages):
+                # Phase No: 12%
+                # Phase Description: 25%
+                # Timeline: 12%
+                # Key Deliverables: 51%
+                col_widths = [0.12, 0.25, 0.12, 0.51]
+
+                for i, width_ratio in enumerate(col_widths):
+                    table.columns[i].width = int(total_width * width_ratio)
+
+            # Fill table with data
+            for row_idx, row_data in enumerate(table_rows):
+                for col_idx, cell_text in enumerate(row_data):
+                    cell = table.rows[row_idx].cells[col_idx]
+
+                    # Clean markdown formatting from cell text
+                    clean_text = re.sub(r'\*\*(.+?)\*\*', r'\1', cell_text)
+                    cell.text = clean_text
+
+                    # Format header row (row 0)
+                    if row_idx == 0:
+                        for paragraph in cell.text_frame.paragraphs:
+                            for run in paragraph.runs:
+                                run.font.bold = True
+                                run.font.size = Pt(14)
+                                run.font.color.rgb = RGBColor(255, 255, 255)
+                        # Header cell background (brand red #A01C02)
+                        cell.fill.solid()
+                        cell.fill.fore_color.rgb = RGBColor(160, 28, 2)
+                    else:
+                        # Data row formatting
+                        for paragraph in cell.text_frame.paragraphs:
+                            for run in paragraph.runs:
+                                run.font.size = Pt(11)
+                        # Data cell background (light gray #E7E6E6)
+                        cell.fill.solid()
+                        cell.fill.fore_color.rgb = RGBColor(231, 230, 230)
+
+        except Exception as e:
+            print(f"    ⚠️  Warning: Could not fill table: {str(e)}")
 
     def _fill_content_placeholder(self, slide, slide_data, placeholder_indices):
         """Fill content placeholders with bullets or text (supports hierarchical levels)."""
