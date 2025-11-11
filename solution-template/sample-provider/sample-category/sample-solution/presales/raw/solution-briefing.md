@@ -117,41 +117,30 @@ footer_logo_right: support/doc-templates/assets/logos/eo-framework-logo-real.png
 ### Success Stories
 **Proven Results with Similar Clients**
 
-| Aspect | Details |
-|--------|---------|
-| **Client** | [Similar Company Name] |
-| **Challenge** | [Similar challenge they faced] |
-| **Solution** | [Solution we implemented] |
-| **Results** | [Quantified results - ROI, efficiency gains, cost savings] |
-| **Industry Recognition** | [Award/recognition 1], [Award/recognition 2] |
-
-**Client Testimonial:**
-*"[Relevant quote from similar client showcasing business impact]"*
-— [Client Name, Title, Company]
+- **Client Success: Global Manufacturing Leader**
+  - **Client:** Fortune 500 Manufacturing Company with 15,000+ employees across 30 countries
+  - **Challenge:** Legacy systems causing 40% operational inefficiency, $12M annual waste from manual processes, and inability to scale for market expansion
+  - **Solution:** Deployed cloud-native platform with automated workflows, real-time analytics, and integrated supply chain visibility across all manufacturing sites
+  - **Results:** 45% reduction in operational costs ($5.4M annual savings), 60% faster order-to-delivery cycle, 99.7% system uptime, full ROI achieved in 14 months
+  - **Testimonial:** "This transformation exceeded our expectations. We've not only modernized our operations but created a competitive advantage that positions us for the next decade of growth. The implementation was seamless and the results were measurable from day one." — **Michael Chen, Chief Operations Officer**, Global Manufacturing Corp
 
 ---
 
 ### Our Partnership Advantage
 **Why Partner with Us**
 
-**Proven Expertise:**
-- [Years] years of experience in [domain]
-- [Number] successful implementations
-- [Certification/partnership level with key vendors]
-
-**Comprehensive Support:**
-- End-to-end implementation services
-- 24/7 support post-launch
-- Ongoing optimization and innovation roadmap
-
-**Industry Leadership:**
-- [Recognition 1]
-- [Recognition 2]
-
-**Your Dedicated Team:**
-- Solution architects with [domain] expertise
-- Certified implementation specialists
-- Dedicated account and support management
+- **What We Bring**
+  - 15+ years delivering enterprise technology solutions
+  - 200+ successful implementations for Fortune 500 companies
+  - Premier partnerships with AWS, Azure, Google Cloud
+  - Certified solution architects with 10+ years expertise
+  - 24/7 support with 99.5% SLA guarantee
+- **Value to You**
+  - Proven methodology reduces implementation risk by 60%
+  - Pre-built accelerators fast-track your deployment
+  - Direct vendor escalation and early-access programs
+  - Comprehensive skills transfer for team self-sufficiency
+  - Best practices from 200+ implementations
 
 ---
 
