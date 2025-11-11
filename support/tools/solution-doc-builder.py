@@ -1237,8 +1237,8 @@ class OutputGenerator:
             is_bold = False
 
             if bold_match and italic_match:
-                # Both found, use whichever comes first
-                if bold_match.start() < italic_match.start():
+                # Both found, prioritize bold (longer match) when they start at same position
+                if bold_match.start() <= italic_match.start():
                     next_match = bold_match
                     is_bold = True
                 else:
@@ -1531,6 +1531,35 @@ class OutputGenerator:
 
         return sig_format
 
+    def _adjust_toc_list_spacing(self, doc):
+        """Reduce spacing around Table of Contents, List of Tables, and List of Figures headings.
+
+        Focuses on reducing the gap between heading and content below it.
+        """
+        from docx.shared import Pt
+
+        headings_to_adjust = {
+            'Table of Contents': {'space_after': 3, 'space_before': None},
+            'List of Tables': {'space_after': 3, 'space_before': 6},
+            'List of Figures': {'space_after': 3, 'space_before': 6}
+        }
+
+        for para in doc.paragraphs:
+            if para.style.name == 'Heading 1':
+                heading_text = para.text.strip()
+                if heading_text in headings_to_adjust:
+                    settings = headings_to_adjust[heading_text]
+
+                    # Set space after (gap to content below)
+                    para.paragraph_format.space_after = Pt(settings['space_after'])
+
+                    # Set space before if specified (gap from previous section)
+                    if settings['space_before'] is not None:
+                        para.paragraph_format.space_before = Pt(settings['space_before'])
+
+                    if self.verbose:
+                        print(f"  Adjusted spacing for: {heading_text}")
+
     def convert_md_to_docx(self, md_file, output_dir):
         """Convert Markdown to styled Word document using branded template."""
         try:
@@ -1707,12 +1736,19 @@ class OutputGenerator:
             self._generate_word_toc(doc, tokens)
 
             # Add content from markdown (using clean content without YAML, pass md_file for image path resolution)
-            # Returns list of figures found
-            figure_list = self._process_md_tokens(doc, tokens, clean_content, md_file)
+            # Returns lists of tables and figures found
+            table_list, figure_list = self._process_md_tokens(doc, tokens, clean_content, md_file)
+
+            # Populate List of Tables section with actual tables (before List of Figures)
+            if table_list:
+                self._populate_list_of_tables(doc, table_list)
 
             # Populate List of Figures section with actual figures
             if figure_list:
                 self._populate_list_of_figures(doc, figure_list)
+
+            # Adjust spacing for TOC and List sections (do this AFTER all content is generated)
+            self._adjust_toc_list_spacing(doc)
 
             # Add EO Framework branding at the end of the document
             self._add_eo_framework_branding(doc)
@@ -1755,10 +1791,181 @@ class OutputGenerator:
 
         return table_rows, i
 
-    def _add_word_table(self, doc, table_data):
-        """Add a formatted table to Word document."""
+    def _calculate_text_width(self, text):
+        """Calculate weighted character width for proportional fonts.
+
+        Returns a relative width score accounting for character variations.
+        """
+        if not text:
+            return 0
+
+        # Character width weights (relative to average character)
+        # Based on typical proportional font (Times New Roman) characteristics
+        wide_chars = 'WMQOCDGHAB@%&'  # ~1.4x average
+        medium_wide = 'NRUKXYVZ$#0123456789'  # ~1.1x average
+        narrow_chars = 'iljft!|'  # ~0.5x average
+        space_chars = ' '  # ~0.6x average
+
+        width_score = 0
+        for char in str(text):
+            if char in wide_chars:
+                width_score += 1.4
+            elif char in medium_wide:
+                width_score += 1.1
+            elif char in narrow_chars:
+                width_score += 0.5
+            elif char in space_chars:
+                width_score += 0.6
+            else:
+                width_score += 1.0  # Average character
+
+        return width_score
+
+    def _calculate_optimal_column_widths(self, table_data, available_width):
+        """Calculate optimal column widths based on content.
+
+        Uses hybrid approach: max of header and content (first 5 rows).
+        Applies constraints: min 8%, max 35% of total width.
+        """
+        if not table_data or len(table_data) == 0:
+            return None
+
+        num_cols = len(table_data[0])
+
+        # Calculate width scores for each column
+        col_scores = [0] * num_cols
+
+        # Sample rows: header + first 5 data rows (or all if fewer)
+        sample_rows = table_data[:min(6, len(table_data))]
+
+        for row in sample_rows:
+            for col_idx, cell_text in enumerate(row):
+                # Remove markdown formatting for width calculation
+                clean_text = cell_text.replace('**', '').replace('*', '')
+                width_score = self._calculate_text_width(clean_text)
+                col_scores[col_idx] = max(col_scores[col_idx], width_score)
+
+        # Convert scores to percentages with constraints
+        total_score = sum(col_scores)
+        if total_score == 0:
+            return None
+
+        # Calculate initial percentages
+        col_percentages = [(score / total_score) for score in col_scores]
+
+        # Apply constraints: min 8%, max 35%
+        min_pct = 0.08
+        max_pct = 0.35
+
+        adjusted = True
+        iterations = 0
+        while adjusted and iterations < 10:  # Prevent infinite loops
+            adjusted = False
+            iterations += 1
+
+            # Find columns that violate constraints
+            constrained_pct = 0
+            constrained_count = 0
+
+            for i in range(num_cols):
+                if col_percentages[i] < min_pct:
+                    col_percentages[i] = min_pct
+                    constrained_pct += min_pct
+                    constrained_count += 1
+                    adjusted = True
+                elif col_percentages[i] > max_pct:
+                    col_percentages[i] = max_pct
+                    constrained_pct += max_pct
+                    constrained_count += 1
+                    adjusted = True
+
+            # Redistribute excess/deficit among unconstrained columns
+            if adjusted and constrained_count < num_cols:
+                remaining_pct = 1.0 - constrained_pct
+                unconstrained_total = sum(col_percentages[i] for i in range(num_cols)
+                                         if col_percentages[i] > min_pct and col_percentages[i] < max_pct)
+
+                if unconstrained_total > 0:
+                    for i in range(num_cols):
+                        if col_percentages[i] > min_pct and col_percentages[i] < max_pct:
+                            col_percentages[i] = (col_percentages[i] / unconstrained_total) * remaining_pct
+
+        # Normalize to ensure sum = 1.0
+        total_pct = sum(col_percentages)
+        col_percentages = [p / total_pct for p in col_percentages]
+
+        # Convert percentages to actual widths
+        col_widths = [available_width * pct for pct in col_percentages]
+
+        return col_widths
+
+    def _generate_table_caption(self, table_number, section_title, table_data):
+        """Generate table caption based on section context and table content.
+
+        Args:
+            table_number: Sequential table number
+            section_title: Current section heading (lowercase)
+            table_data: Table data to analyze
+
+        Returns:
+            str: Generated caption (e.g., "Table 1: Project Deliverables")
+        """
+        # Special case handling
+        if not table_data or len(table_data) == 0:
+            return f"Table {table_number}"
+
+        # Check table headers for specific patterns
+        first_row = ' '.join(table_data[0]).lower() if table_data else ''
+
+        # RACI table
+        if 'vendor' in first_row and 'client' in first_row and 'task' in first_row:
+            return f"Table {table_number}: Roles and Responsibilities (RACI Matrix)"
+
+        # Deliverables table
+        if 'deliverable' in first_row and 'acceptance' in first_row:
+            return f"Table {table_number}: Project Deliverables and Acceptance Criteria"
+
+        # Milestones table
+        if 'milestone' in first_row and ('target date' in first_row or 'description' in first_row):
+            return f"Table {table_number}: Project Milestones and Timeline"
+
+        # Tooling table
+        if 'primary tools' in first_row or 'alternative' in first_row:
+            return f"Table {table_number}: Implementation Tools and Technologies"
+
+        # Generic caption based on section title
+        # Clean up section title for use in caption
+        clean_section = section_title.replace('&', 'and').strip()
+
+        # Remove common prefixes
+        for prefix in ['overview', 'description', 'details']:
+            if clean_section.startswith(prefix):
+                clean_section = clean_section[len(prefix):].strip()
+
+        # Capitalize words
+        caption_text = ' '.join(word.capitalize() for word in clean_section.split())
+
+        # If section title is too generic or empty, try to infer from headers
+        if not caption_text or len(caption_text) < 3:
+            # Use first header as basis
+            if table_data and len(table_data[0]) > 0:
+                caption_text = table_data[0][0].replace('**', '').strip()
+
+        return f"Table {table_number}: {caption_text}"
+
+    def _add_word_table(self, doc, table_data, caption=None):
+        """Add a formatted table to Word document with optional caption.
+
+        Args:
+            doc: Word document object
+            table_data: List of lists containing table data
+            caption: Optional caption text (e.g., "Table 1: Deliverables")
+
+        Returns:
+            table: The created table object
+        """
         if not table_data or len(table_data) < 2:
-            return
+            return None
 
         try:
             # Create table
@@ -1870,16 +2077,229 @@ class OutputGenerator:
                             run.font.name = self.template_fonts['body_font']
                             run.font.size = Pt(self.template_fonts['body_size'])
 
-            # Distribute columns evenly across full width
-            col_width = available_width / num_cols
+            # Determine column widths based on table type
+            col_widths = None
+
+            # Special case 1: RACI table (7 columns with specific headers)
+            is_raci_table = False
+            if num_cols == 7 and len(table_data) > 0:
+                first_row_text = ' '.join(table_data[0]).lower()
+                if 'task' in first_row_text and 'vendor' in first_row_text and 'client' in first_row_text:
+                    is_raci_table = True
+
+            # Special case 2: Cover/metadata table (2 columns, first column ~33%)
+            is_cover_table = False
+            if num_cols == 2 and len(table_data) > 3:
+                first_col_text = ' '.join([row[0] for row in table_data[:3]]).lower()
+                if 'client name' in first_col_text or 'document' in first_col_text:
+                    is_cover_table = True
+
+            if is_raci_table:
+                # RACI table: Custom widths prioritizing Task/Role column
+                base_width = available_width / num_cols
+                reduced_width = base_width * 0.85
+                extra_width = (base_width - reduced_width) * 3
+                col_widths = [
+                    base_width + extra_width,  # Task/Role
+                    reduced_width,              # Vendor PM
+                    reduced_width,              # Vendor Arch
+                    reduced_width,              # Vendor DevOps
+                    base_width,                 # Client IT
+                    base_width,                 # Client Sec
+                    base_width                  # SME
+                ]
+            elif is_cover_table:
+                # Cover table: 33% label, 67% content
+                col_widths = [available_width * 0.33, available_width * 0.67]
+            elif num_cols == 1:
+                # Single column: use full width
+                col_widths = [available_width]
+            else:
+                # All other tables: use content-based optimization
+                col_widths = self._calculate_optimal_column_widths(table_data, available_width)
+
+            # Fallback: equal distribution if optimization fails
+            if not col_widths:
+                col_widths = [available_width / num_cols] * num_cols
+
+            # Apply column widths
             for row in table.rows:
-                for cell in row.cells:
-                    cell.width = col_width
+                for col_idx, cell in enumerate(row.cells):
+                    if col_idx < len(col_widths):
+                        cell.width = col_widths[col_idx]
+
+            # Add caption if provided (using proper Word caption fields)
+            if caption:
+                self._add_table_caption(doc, caption)
+
+            return table
 
         except Exception as e:
             # Log error but don't stop document generation
             print(f"  Warning: Table formatting error: {e}")
-            return
+            return None
+
+    def _add_table_caption(self, doc, caption_text):
+        """Add a proper Word caption with SEQ field for automatic numbering.
+
+        Args:
+            doc: Word document object
+            caption_text: Full caption text including number (e.g., "Table 1: Description")
+
+        Creates a caption paragraph with:
+        - "Table " literal text
+        - SEQ field for auto-numbering
+        - ": " separator
+        - Caption description text
+        """
+        from docx.oxml import OxmlElement
+        from docx.oxml.ns import qn
+
+        # Extract table number and description from caption text
+        # caption_text format: "Table 1: Description"
+        import re
+        match = re.match(r'Table\s+(\d+):\s*(.*)', caption_text)
+        if match:
+            table_number = match.group(1)
+            description = match.group(2)
+        else:
+            table_number = '1'
+            description = caption_text
+
+        # Create caption paragraph
+        caption_para = doc.add_paragraph()
+        caption_para.style = 'Caption'
+        caption_para.alignment = WD_ALIGN_PARAGRAPH.CENTER
+        caption_para.paragraph_format.space_before = Pt(3)
+        caption_para.paragraph_format.space_after = Pt(12)
+
+        # Add "Table " text
+        run1 = caption_para.add_run('Table ')
+        run1.font.name = self.template_fonts['body_font']
+        run1.font.size = Pt(12)
+
+        # Add SEQ field for auto-numbering
+        # Structure: fldChar(begin) -> instrText -> fldChar(separate) -> run(result) -> fldChar(end)
+
+        # Field begin
+        fld_begin = OxmlElement('w:r')
+        fld_char_begin = OxmlElement('w:fldChar')
+        fld_char_begin.set(qn('w:fldCharType'), 'begin')
+        fld_begin.append(fld_char_begin)
+        caption_para._element.append(fld_begin)
+
+        # Field instruction text: " SEQ Table \* ARABIC "
+        fld_instr = OxmlElement('w:r')
+        instr_text = OxmlElement('w:instrText')
+        instr_text.set(qn('xml:space'), 'preserve')
+        instr_text.text = ' SEQ Table \\* ARABIC '
+        fld_instr.append(instr_text)
+        caption_para._element.append(fld_instr)
+
+        # Field separator
+        fld_sep = OxmlElement('w:r')
+        fld_char_sep = OxmlElement('w:fldChar')
+        fld_char_sep.set(qn('w:fldCharType'), 'separate')
+        fld_sep.append(fld_char_sep)
+        caption_para._element.append(fld_sep)
+
+        # Field result (actual table number)
+        result_run = caption_para.add_run(table_number)
+        result_run.font.name = self.template_fonts['body_font']
+        result_run.font.size = Pt(12)
+
+        # Field end
+        fld_end = OxmlElement('w:r')
+        fld_char_end = OxmlElement('w:fldChar')
+        fld_char_end.set(qn('w:fldCharType'), 'end')
+        fld_end.append(fld_char_end)
+        caption_para._element.append(fld_end)
+
+        # Add ": " separator and description
+        run_desc = caption_para.add_run(f': {description}')
+        run_desc.font.name = self.template_fonts['body_font']
+        run_desc.font.size = Pt(12)
+
+    def _add_figure_caption(self, doc, caption_text):
+        """Add a proper Word figure caption with SEQ field for automatic numbering.
+
+        Args:
+            doc: Word document object
+            caption_text: Full caption text including number (e.g., "Figure 1: Description")
+
+        Creates a caption paragraph with:
+        - "Figure " literal text
+        - SEQ field for auto-numbering
+        - ": " separator
+        - Caption description text
+        """
+        from docx.oxml import OxmlElement
+        from docx.oxml.ns import qn
+
+        # Extract figure number and description from caption text
+        # caption_text format: "Figure 1: Description"
+        import re
+        match = re.match(r'Figure\s+(\d+):\s*(.*)', caption_text)
+        if match:
+            figure_number = match.group(1)
+            description = match.group(2)
+        else:
+            figure_number = '1'
+            description = caption_text
+
+        # Create caption paragraph
+        caption_para = doc.add_paragraph()
+        caption_para.style = 'Caption'
+        caption_para.alignment = WD_ALIGN_PARAGRAPH.CENTER
+        caption_para.paragraph_format.space_before = Pt(3)
+        caption_para.paragraph_format.space_after = Pt(12)
+
+        # Add "Figure " text
+        run1 = caption_para.add_run('Figure ')
+        run1.font.name = self.template_fonts['body_font']
+        run1.font.size = Pt(12)
+
+        # Add SEQ field for auto-numbering
+        # Structure: fldChar(begin) -> instrText -> fldChar(separate) -> run(result) -> fldChar(end)
+
+        # Field begin
+        fld_begin = OxmlElement('w:r')
+        fld_char_begin = OxmlElement('w:fldChar')
+        fld_char_begin.set(qn('w:fldCharType'), 'begin')
+        fld_begin.append(fld_char_begin)
+        caption_para._element.append(fld_begin)
+
+        # Field instruction text: " SEQ Figure \* ARABIC "
+        fld_instr = OxmlElement('w:r')
+        instr_text = OxmlElement('w:instrText')
+        instr_text.set(qn('xml:space'), 'preserve')
+        instr_text.text = ' SEQ Figure \\* ARABIC '
+        fld_instr.append(instr_text)
+        caption_para._element.append(fld_instr)
+
+        # Field separator
+        fld_sep = OxmlElement('w:r')
+        fld_char_sep = OxmlElement('w:fldChar')
+        fld_char_sep.set(qn('w:fldCharType'), 'separate')
+        fld_sep.append(fld_char_sep)
+        caption_para._element.append(fld_sep)
+
+        # Field result (actual figure number)
+        result_run = caption_para.add_run(figure_number)
+        result_run.font.name = self.template_fonts['body_font']
+        result_run.font.size = Pt(12)
+
+        # Field end
+        fld_end = OxmlElement('w:r')
+        fld_char_end = OxmlElement('w:fldChar')
+        fld_char_end.set(qn('w:fldCharType'), 'end')
+        fld_end.append(fld_char_end)
+        caption_para._element.append(fld_end)
+
+        # Add ": " separator and description
+        run_desc = caption_para.add_run(f': {description}')
+        run_desc.font.name = self.template_fonts['body_font']
+        run_desc.font.size = Pt(12)
 
     def _add_signoff_table(self, doc):
         """Add sign-off table matching template format (5 rows x 2 columns)."""
@@ -2009,13 +2429,15 @@ class OutputGenerator:
         """Process markdown tokens and add to Word document with section numbering.
 
         Returns:
-            list: List of figure captions found in the document
+            tuple: (table_list, figure_list) - Lists of captions for List of Tables and List of Figures
         """
         # Initialize section counters for numbering
         section_counters = [0, 0, 0, 0, 0, 0]  # Support up to H6
         first_h1_skipped = False
         current_section_title = ''
         figure_list = []  # Track figures for List of Figures
+        table_list = []   # Track tables for List of Tables
+        table_counter = 0  # Track table numbers
 
         # Metadata field patterns to skip (these are now on cover page)
         metadata_patterns = [
@@ -2080,7 +2502,7 @@ class OutputGenerator:
                     current_section_title = text.lower()
 
                     # Check for content after this heading (tables, bullets, etc.)
-                    heading_marker = f"## {text}" if level == 2 else f"### {text}"
+                    heading_marker = '#' * level + ' ' + text
                     try:
                         md_pos = md_content.find(heading_marker)
                         if md_pos != -1:
@@ -2098,9 +2520,34 @@ class OutputGenerator:
                                 # Check for markdown table (ANY section can have a table)
                                 if line.startswith('|'):
                                     # Found table, parse it
-                                    table_data, _ = self._parse_md_table(md_content, idx)
+                                    table_data, end_idx = self._parse_md_table(md_content, idx)
                                     if table_data:
-                                        self._add_word_table(doc, table_data)
+                                        # Increment table counter
+                                        table_counter += 1
+
+                                        # Check for explicit caption after table
+                                        explicit_caption = None
+                                        for caption_idx in range(end_idx, min(len(lines), end_idx + 5)):
+                                            caption_line = lines[caption_idx].strip()
+                                            if caption_line.startswith('Table:'):
+                                                explicit_caption = caption_line[6:].strip()
+                                                explicit_caption = f"Table {table_counter}: {explicit_caption}"
+                                                break
+                                            elif caption_line and not caption_line.startswith('---'):
+                                                # Non-empty, non-separator line found - stop looking
+                                                break
+
+                                        # Generate caption if not explicitly provided
+                                        if not explicit_caption:
+                                            caption = self._generate_table_caption(table_counter, current_section_title, table_data)
+                                        else:
+                                            caption = explicit_caption
+
+                                        # Add table with caption
+                                        self._add_word_table(doc, table_data, caption=caption)
+
+                                        # Track table for List of Tables
+                                        table_list.append(caption)
                                     break
 
                                 # Check for Milestones bullets (convert to table)
@@ -2120,7 +2567,15 @@ class OutputGenerator:
                                         milestone_rows.append([parts[0].strip(), parts[1].strip() if len(parts) > 1 else '[Date]'])
                                         j += 1
                                     if len(milestone_rows) > 1:
-                                        self._add_word_table(doc, milestone_rows)
+                                        # Increment table counter and generate caption
+                                        table_counter += 1
+                                        caption = self._generate_table_caption(table_counter, current_section_title, milestone_rows)
+
+                                        # Add table with caption
+                                        self._add_word_table(doc, milestone_rows, caption=caption)
+
+                                        # Track table for List of Tables
+                                        table_list.append(caption)
                                     break
 
                                 # Check for Sign-off section (special formatting)
@@ -2223,21 +2678,22 @@ class OutputGenerator:
                                     tbl_borders.append(border)
                                 tbl_pr.append(tbl_borders)
 
-                                # Add simple caption directly under image (no spacing paragraph)
+                                # Add proper caption with SEQ field for figures
                                 if alt_text:
-                                    caption_para = doc.add_paragraph()
-                                    caption_para.alignment = WD_ALIGN_PARAGRAPH.CENTER
-                                    caption_para.paragraph_format.space_before = Pt(3)  # Minimal space before caption
-                                    caption_para.paragraph_format.space_after = Pt(12)
+                                    # Determine figure number (count existing figure captions + 1)
+                                    figure_number = len(figure_list) + 1
 
-                                    # Add caption text - simple format
-                                    caption_run = caption_para.add_run(alt_text)
-                                    caption_run.font.name = self.template_fonts['body_font']
-                                    caption_run.font.size = Pt(self.template_fonts['body_size'])
-                                    caption_run.bold = True
+                                    # Create full caption text: "Figure X: Description"
+                                    if alt_text.startswith('Figure'):
+                                        full_caption = alt_text
+                                    else:
+                                        full_caption = f"Figure {figure_number}: {alt_text}"
+
+                                    # Add caption using proper Word field
+                                    self._add_figure_caption(doc, full_caption)
 
                                     # Add to figure list
-                                    figure_list.append(alt_text)
+                                    figure_list.append(full_caption)
                             else:
                                 print(f"  Warning: Image file not found: {full_image_path}")
                         except Exception as e:
@@ -2319,52 +2775,190 @@ class OutputGenerator:
             else:
                 i += 1
 
-        return figure_list
+        return table_list, figure_list
 
-    def _populate_list_of_figures(self, doc, figure_list):
-        """Populate the List of Figures section with actual figure entries."""
-        # Insert figure entries after the List of Figures heading
+    def _populate_list_of_tables(self, doc, table_list):
+        r"""Populate the List of Tables section with a TOC field that references Table captions.
+
+        Creates a proper Word Table of Contents field that automatically updates
+        when user right-clicks and selects "Update Field".
+
+        Field format: { TOC \h \z \c "Table" }
+        - \h: Use hyperlinks
+        - \z: Hide page numbers in Web Layout view
+        - \c "Table": Build table from Caption label "Table"
+        """
         from docx.oxml import OxmlElement
         from docx.oxml.ns import qn
 
-        # Get the body element
-        body = doc._element.body
-
-        # Re-find the List of Figures heading (indices may have shifted)
-        heading_elem = None
-        for para in doc.paragraphs:
-            if 'List of Figures' in para.text and para.style.name == 'Heading 1':
-                heading_elem = para._element
+        # Find the "List of Tables" heading
+        list_of_tables_idx = None
+        for idx, para in enumerate(doc.paragraphs):
+            if para.text.strip() == 'List of Tables' and para.style.name == 'Heading 1':
+                list_of_tables_idx = idx
                 break
 
-        if heading_elem is None:
+        if list_of_tables_idx is None:
+            print("  Warning: 'List of Tables' heading not found in template")
             return
 
-        # Find the position to insert after the heading
-        heading_index = list(body).index(heading_elem)
+        # Remove template sample content between "List of Tables" heading and next heading
+        # This removes entries like "Table 1: Table 1 contents    3"
+        paragraphs_to_remove = []
+        for idx in range(list_of_tables_idx + 1, len(doc.paragraphs)):
+            para = doc.paragraphs[idx]
+            # Stop at next heading
+            if para.style.name.startswith('Heading'):
+                break
+            # Mark paragraph for removal if it's a table of figures style or contains template content
+            if para.style.name == 'table of figures' or 'Table 1 contents' in para.text:
+                paragraphs_to_remove.append(para)
 
-        # Insert figure entries after the heading
-        for figure_caption in figure_list:
-            # Create a new paragraph element
-            p = OxmlElement('w:p')
+        # Remove marked paragraphs
+        for para in paragraphs_to_remove:
+            p_element = para._element
+            p_element.getparent().remove(p_element)
 
-            # Add paragraph properties for Normal style
-            pPr = OxmlElement('w:pPr')
-            pStyle = OxmlElement('w:pStyle')
-            pStyle.set(qn('w:val'), 'Normal')
-            pPr.append(pStyle)
-            p.append(pPr)
+        # Insert TOC field paragraph after the List of Tables heading
+        heading_element = doc.paragraphs[list_of_tables_idx]._element
 
-            # Add the text run with figure caption
-            r = OxmlElement('w:r')
-            t = OxmlElement('w:t')
-            t.text = figure_caption
-            r.append(t)
-            p.append(r)
+        # Create a new paragraph for the TOC field
+        toc_para = doc.add_paragraph()
+        toc_para.style = 'Normal'
 
-            # Insert the paragraph after the heading
-            heading_index += 1
-            body.insert(heading_index, p)
+        # Move paragraph right after heading
+        heading_element.addnext(toc_para._element)
+
+        # Build TOC field: { TOC \h \z \c "Table" }
+        # Field begin
+        fld_begin = OxmlElement('w:r')
+        fld_char_begin = OxmlElement('w:fldChar')
+        fld_char_begin.set(qn('w:fldCharType'), 'begin')
+        fld_begin.append(fld_char_begin)
+        toc_para._element.append(fld_begin)
+
+        # Field instruction
+        fld_instr = OxmlElement('w:r')
+        instr_text = OxmlElement('w:instrText')
+        instr_text.set(qn('xml:space'), 'preserve')
+        instr_text.text = ' TOC \\h \\z \\c "Table" '
+        fld_instr.append(instr_text)
+        toc_para._element.append(fld_instr)
+
+        # Field separator
+        fld_sep = OxmlElement('w:r')
+        fld_char_sep = OxmlElement('w:fldChar')
+        fld_char_sep.set(qn('w:fldCharType'), 'separate')
+        fld_sep.append(fld_char_sep)
+        toc_para._element.append(fld_sep)
+
+        # Field result (placeholder - will be populated when field updates)
+        # Add sample entries so user knows what to expect
+        for i, caption in enumerate(table_list, 1):
+            result_run = toc_para.add_run(f'{caption}\t{i+2}\n' if i < len(table_list) else f'{caption}\t{i+2}')
+            result_run.font.name = self.template_fonts['body_font']
+            result_run.font.size = Pt(12)
+
+        # Field end
+        fld_end = OxmlElement('w:r')
+        fld_char_end = OxmlElement('w:fldChar')
+        fld_char_end.set(qn('w:fldCharType'), 'end')
+        fld_end.append(fld_char_end)
+        toc_para._element.append(fld_end)
+
+    def _populate_list_of_figures(self, doc, figure_list):
+        r"""Populate the List of Figures section with a TOC field that references Figure captions.
+
+        Creates a proper Word Table of Contents field that automatically updates
+        when user right-clicks and selects "Update Field".
+
+        Field format: { TOC \h \z \c "Figure" }
+        - \h: Use hyperlinks
+        - \z: Hide page numbers in Web Layout view
+        - \c "Figure": Build table from Caption label "Figure"
+        """
+        from docx.oxml import OxmlElement
+        from docx.oxml.ns import qn
+
+        # Find the "List of Figures" heading
+        list_of_figures_idx = None
+        for idx, para in enumerate(doc.paragraphs):
+            if para.text.strip() == 'List of Figures' and para.style.name == 'Heading 1':
+                list_of_figures_idx = idx
+                break
+
+        if list_of_figures_idx is None:
+            print("  Warning: 'List of Figures' heading not found in template")
+            return
+
+        # Remove template sample content between "List of Figures" heading and next heading
+        paragraphs_to_remove = []
+        for idx in range(list_of_figures_idx + 1, len(doc.paragraphs)):
+            para = doc.paragraphs[idx]
+            # Stop at next heading
+            if para.style.name.startswith('Heading'):
+                break
+            # Mark paragraph for removal
+            if para.text.strip():  # Remove any existing content
+                paragraphs_to_remove.append(para)
+
+        # Remove marked paragraphs
+        for para in paragraphs_to_remove:
+            p_element = para._element
+            p_element.getparent().remove(p_element)
+
+        # Insert TOC field paragraph after the List of Figures heading
+        heading_element = doc.paragraphs[list_of_figures_idx]._element
+
+        # Create a new paragraph for the TOC field
+        toc_para = doc.add_paragraph()
+        toc_para.style = 'Normal'
+
+        # Move paragraph right after heading
+        heading_element.addnext(toc_para._element)
+
+        # Build TOC field: { TOC \h \z \c "Figure" }
+        # Field begin
+        fld_begin = OxmlElement('w:r')
+        fld_char_begin = OxmlElement('w:fldChar')
+        fld_char_begin.set(qn('w:fldCharType'), 'begin')
+        fld_begin.append(fld_char_begin)
+        toc_para._element.append(fld_begin)
+
+        # Field instruction
+        fld_instr = OxmlElement('w:r')
+        instr_text = OxmlElement('w:instrText')
+        instr_text.set(qn('xml:space'), 'preserve')
+        instr_text.text = ' TOC \\h \\z \\c "Figure" '
+        fld_instr.append(instr_text)
+        toc_para._element.append(fld_instr)
+
+        # Field separator
+        fld_sep = OxmlElement('w:r')
+        fld_char_sep = OxmlElement('w:fldChar')
+        fld_char_sep.set(qn('w:fldCharType'), 'separate')
+        fld_sep.append(fld_char_sep)
+        toc_para._element.append(fld_sep)
+
+        # Field result (placeholder - will be populated when field updates)
+        # Add sample entries so user knows what to expect
+        if figure_list:
+            for i, caption in enumerate(figure_list, 1):
+                result_run = toc_para.add_run(f'{caption}\t{i+10}\n' if i < len(figure_list) else f'{caption}\t{i+10}')
+                result_run.font.name = self.template_fonts['body_font']
+                result_run.font.size = Pt(12)
+        else:
+            # Add placeholder text if no figures
+            result_run = toc_para.add_run('[No figures in document]')
+            result_run.font.name = self.template_fonts['body_font']
+            result_run.font.size = Pt(12)
+
+        # Field end
+        fld_end = OxmlElement('w:r')
+        fld_char_end = OxmlElement('w:fldChar')
+        fld_char_end.set(qn('w:fldCharType'), 'end')
+        fld_end.append(fld_char_end)
+        toc_para._element.append(fld_end)
 
     def _get_layout(self, prs, name_contains):
         """Get layout by partial name match."""

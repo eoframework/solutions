@@ -39,15 +39,15 @@ vendor_logo: support/doc-templates/assets/logos/consulting_company_logo.png
 
 ---
 
-## Executive Summary
+# Executive Summary
 
 This Statement of Work (SOW) defines the scope, deliverables, roles, and terms for the Enterprise Cloud Migration & Modernization project for Acme Financial Services. This engagement will deliver a modern, scalable, cloud-native 3-tier architecture to replace legacy on-premises systems and achieve digital transformation objectives including improved scalability, enhanced security, and reduced operational costs.
 
 ---
 
-## Background & Objectives
+# Background & Objectives
 
-### Background
+## Background
 Acme Financial Services currently operates legacy on-premises applications with monolithic architecture. Key challenges include:
 - Limited scalability to handle peak transaction volumes
 - High infrastructure maintenance costs and aging hardware
@@ -55,14 +55,14 @@ Acme Financial Services currently operates legacy on-premises applications with 
 - Slow deployment cycles hindering time-to-market for new features
 - Difficulty meeting regulatory compliance requirements
 
-### Objectives
+## Objectives
 - Migrate core applications to cloud-native 3-tier architecture (Presentation, Application, Data layers)
 - Achieve 99.9% uptime SLA with auto-scaling capabilities
 - Reduce infrastructure costs by 30-40% through cloud optimization
 - Implement modern security controls and compliance frameworks
 - Enable CI/CD pipelines for faster feature deployment
 
-### Success Metrics
+## Success Metrics
 - [Example metric, e.g., 99.9% uptime]
 - [e.g., Application latency < X ms]
 - [e.g., Zero critical issues during cutover]
@@ -70,9 +70,9 @@ Acme Financial Services currently operates legacy on-premises applications with 
 
 ---
 
-## Scope of Work
+# Scope of Work
 
-### In Scope
+## In Scope
 - [Discovery and assessment activities]
 - [Infrastructure or platform setup]
 - [System configuration and integration]
@@ -80,9 +80,9 @@ Acme Financial Services currently operates legacy on-premises applications with 
 - [Testing and quality assurance]
 - [Knowledge transfer and documentation]
 
-### Activities
+## Activities
 
-#### Phase 1 – Discovery & Assessment
+### Phase 1 – Discovery & Assessment
 During this initial phase, the Vendor will perform a comprehensive assessment of the Client's current state. This includes analyzing existing systems, identifying requirements, and determining the optimal approach for implementation.
 
 Key activities:
@@ -95,7 +95,7 @@ Key activities:
 
 This phase concludes with an Assessment Report that outlines the proposed plan, scope, risks, and timeline.
 
-#### Phase 2 – Solution Design & Environment Setup
+### Phase 2 – Solution Design & Environment Setup
 In this phase, the foundational infrastructure is provisioned and configured based on industry best practices. This includes environment setup, network configuration, security controls, monitoring, and access management.
 
 Key activities:
@@ -108,7 +108,7 @@ Key activities:
 
 By the end of this phase, the Client will have a secure, production-ready environment for the solution.
 
-#### Phase 3 – Implementation & Execution
+### Phase 3 – Implementation & Execution
 Implementation will occur in well-defined phases based on business priority and complexity. Each phase follows a repeatable process with automated workflows for consistency and risk reduction.
 
 Key activities:
@@ -121,7 +121,7 @@ Key activities:
 
 After each phase, the Vendor will coordinate validation and sign-off with the Client before proceeding.
 
-#### Phase 4 – Testing & Validation
+### Phase 4 – Testing & Validation
 In the Testing and Validation phase, the solution undergoes thorough functional, performance, and security validation to ensure it meets required SLAs and compliance standards. Test cases and scripts will be executed based on Client-defined acceptance criteria.
 
 Key activities:
@@ -134,7 +134,7 @@ Key activities:
 
 Cutover will be coordinated with all relevant stakeholders and executed during an approved maintenance window, with well-documented rollback procedures in place.
 
-#### Phase 5 – Handover & Post-Implementation Support
+### Phase 5 – Handover & Post-Implementation Support
 Following successful implementation and cutover, the focus shifts to ensuring operational continuity and knowledge transfer. The Vendor will provide a period of hypercare support and equip the Client's team with the documentation, tools, and processes needed for ongoing maintenance and optimization.
 
 Activities include:
@@ -146,9 +146,9 @@ Activities include:
 
 ---
 
-## Out of Scope
+# Out of Scope
 
-### Exclusions
+## Exclusions
 These items are not in scope unless added via change control:
 - [e.g., Application refactoring or custom development]
 - [e.g., Hardware procurement or disposal]
@@ -157,7 +157,7 @@ These items are not in scope unless added via change control:
 
 ---
 
-## Deliverables
+# Deliverables
 
 | # | Deliverable                          | Type         | Due Date     | Acceptance By   |
 |---|--------------------------------------|--------------|--------------|-----------------|
@@ -169,9 +169,9 @@ These items are not in scope unless added via change control:
 
 ---
 
-## Project Plan & Timeline
+# Project Plan & Timeline
 
-### Milestones
+## Milestones
 
 | Milestone | Description | Target Date |
 |-----------|-------------|-------------|
@@ -184,7 +184,7 @@ These items are not in scope unless added via change control:
 
 ---
 
-## Roles & Responsibilities (RACI)
+# Roles & Responsibilities (RACI)
 
 | Task/Role                                | Vendor PM | Vendor Arch | Vendor DevOps | Client IT | Client Sec | SME |
 |------------------------------------------|-----------|-------------|---------------|-----------|------------|-----|
@@ -199,21 +199,20 @@ These items are not in scope unless added via change control:
 | Hypercare & Post-Launch Support          | A         | R           | R             | C         | I          | I   |
 | Knowledge Transfer                       | R         | R           | C             | A         | I          | I   |
 
-Legend:
-**R** = Responsible | **A** = Accountable | **C** = Consulted | **I** = Informed
+Legend: **R** = Responsible | **A** = Accountable | **C** = Consulted | **I** = Informed
 
 ---
 
-## Architecture & Technical Design
+# Architecture & Technical Design
 
-### Architecture Overview
+## Architecture Overview
 The proposed architecture is designed to provide a secure, scalable, and compliant foundation for current and future workloads. The architecture aligns with industry best practices and uses automation where possible to streamline deployment, security, and ongoing operations.
 
 ![Figure 1: Solution Architecture Diagram](../../assets/images/architecture-diagram.png)
 
 **Figure 1: Solution Architecture Diagram** - High-level overview of the proposed cloud-native 3-tier architecture
 
-### Architecture Type
+## Architecture Type
 The deployment will follow [e.g., multi-tier, microservices, serverless, hybrid] architecture. This approach enforces clear separation of concerns, allows for granular security controls, and enables future scaling with centralized governance.
 
 Key architectural components include:
@@ -224,7 +223,7 @@ Key architectural components include:
 
 This design enables future scaling while maintaining isolation and reducing risk.
 
-### Application Hosting
+## Application Hosting
 Depending on the workload pattern and requirements, applications will be hosted using appropriate infrastructure:
 - [Option 1: e.g., Virtual machines for legacy applications]
 - [Option 2: e.g., Containers for cloud-native workloads]
@@ -232,7 +231,7 @@ Depending on the workload pattern and requirements, applications will be hosted 
 
 All hosting services will be deployed following security best practices and managed using infrastructure-as-code (IaC).
 
-### Networking
+## Networking
 The networking architecture will be implemented using industry-standard components:
 - Network segmentation by tier (web, application, data) and environment
 - Subnets configured across multiple availability zones for high availability
@@ -240,7 +239,7 @@ The networking architecture will be implemented using industry-standard componen
 - Connectivity for hybrid integration (if applicable)
 - Load balancing and traffic management
 
-### Observability
+## Observability
 A comprehensive observability framework ensures operational continuity and rapid incident response:
 - Centralized logging and log aggregation
 - Application and infrastructure metrics monitoring
@@ -248,7 +247,7 @@ A comprehensive observability framework ensures operational continuity and rapid
 - Security monitoring and threat detection
 - Alerting and notification workflows
 
-### Backup & Disaster Recovery
+## Backup & Disaster Recovery
 All critical data and workloads will be protected through:
 - Automated backup policies
 - High availability configuration
@@ -257,9 +256,9 @@ All critical data and workloads will be protected through:
 
 ---
 
-## Assumptions
+# Assumptions
 
-### General Assumptions
+## General Assumptions
 - Client provides timely access to systems, subject matter experts, and required resources.
 - Appropriate access permissions and credentials are provisioned before project phases start.
 - Network connectivity and firewall rules are established as needed.
@@ -267,9 +266,9 @@ All critical data and workloads will be protected through:
 
 ---
 
-## Dependencies
+# Dependencies
 
-### Project Dependencies
+## Project Dependencies
 - Client approval for architectural decisions and environment setup
 - Third-party vendor support (if required for integrations)
 - Access to production systems during cutover windows
@@ -277,74 +276,74 @@ All critical data and workloads will be protected through:
 
 ---
 
-## Security, Compliance & Governance
+# Security, Compliance & Governance
 
 The implementation and target environment will be architected and validated to meet the Client's security, compliance, and governance requirements. Vendor will adhere to industry-standard security frameworks and best practices during implementation.
 
-### Identity & Access Management
+## Identity & Access Management
 - Access controls designed using least-privilege principles
 - Role-based access control (RBAC) aligned with Client's internal teams
 - Optional identity federation integration (e.g., Azure AD, Okta, SSO)
 
-### Monitoring & Threat Detection
+## Monitoring & Threat Detection
 - Real-time security monitoring and threat detection
 - Audit logging and change detection enabled
 - Optional integration with SIEM tools (e.g., Splunk, Datadog, ELK)
 
-### Compliance & Auditing
+## Compliance & Auditing
 - Policies configured for adherence to standards such as SOC2, ISO27001, HIPAA, PCI-DSS, etc. (as applicable)
 - Continuous compliance assessment and reporting
 - Support for regulatory compliance requirements
 
-### Encryption & Key Management
+## Encryption & Key Management
 - Encryption for data in-transit and at-rest
 - Key management using industry-standard practices
 - Certificate management and rotation policies
 
-### Governance
+## Governance
 - Security policies enforced through automation
 - Resource tagging strategy for cost allocation, ownership, and compliance
 - Infrastructure-as-code policy enforcement
 
 ---
 
-## Environments & Access
+# Environments & Access
 
-### Environments
+## Environments
 - Dev, QA, Stage, Prod
 
-### Access Policies
+## Access Policies
 - Multi-factor authentication (MFA) required
 - Single sign-on (SSO) federation preferred
 - Secure remote access protocols
 
 ---
 
-## Testing & Validation
+# Testing & Validation
 
 Comprehensive testing and validation will take place throughout the implementation lifecycle to ensure functionality, performance, security, and resilience of the solution.
 
-### Functional Validation
+## Functional Validation
 - End-to-end application validation
 - Validation against business workflows and acceptance criteria
 
-### Performance & Load Testing
+## Performance & Load Testing
 - Benchmark testing and performance validation
 - Stress testing to identify capacity limits
 
-### Security Testing
+## Security Testing
 - Validation of access controls, encryption, and compliance requirements
 - Optional penetration testing and vulnerability scanning
 
-### Disaster Recovery & Resilience Tests
+## Disaster Recovery & Resilience Tests
 - Failover testing (high availability validation)
 - RTO/RPO validation
 
-### User Acceptance Testing (UAT)
+## User Acceptance Testing (UAT)
 - Performed in coordination with Client stakeholders
 - Test environment and test data managed by Vendor
 
-### Go-Live Readiness
+## Go-Live Readiness
 A Go-Live Readiness Checklist will be delivered including:
 - Security and compliance sign-offs
 - Functional validation completion
@@ -353,16 +352,16 @@ A Go-Live Readiness Checklist will be delivered including:
 
 ---
 
-## Implementation Strategy & Tools
+# Implementation Strategy & Tools
 
 The implementation approach will follow industry best practices and proven methodologies, selecting the appropriate strategy for each component based on business and technical requirements.
 
-### Example Implementation Patterns
+## Example Implementation Patterns
 - [Pattern 1: e.g., Incremental rollout]
 - [Pattern 2: e.g., Blue-green deployment]
 - [Pattern 3: e.g., Canary releases]
 
-### Tooling Overview
+## Tooling Overview
 
 | Category              | Primary Tools                | Alternative Options           |
 |-----------------------|------------------------------|-------------------------------|
@@ -374,97 +373,97 @@ The implementation approach will follow industry best practices and proven metho
 
 ---
 
-## Data Management Plan
+# Data Management Plan
 
-### Data Strategy
+## Data Strategy
 - Data migration approach with minimal downtime
 - Validation through data integrity checks and reconciliation
 
-### Security & Compliance
+## Security & Compliance
 - Encryption enabled for data in-transit and at-rest
 - Data classification aligned with Client's internal policies
 
 ---
 
-## Cutover Plan & Go-Live Readiness
+# Cutover Plan & Go-Live Readiness
 
-### Cutover Checklist
+## Cutover Checklist
 - Pre-cutover validation and readiness review
 - DNS or routing configuration updates
 - Application endpoint reconfiguration
 - Health check monitoring and validation
 
-### Rollback Strategy
+## Rollback Strategy
 - Documented rollback procedures
 - Backup restoration process
 - Revert configuration changes if needed
 
 ---
 
-## Handover & Managed Services Transition
+# Handover & Managed Services Transition
 
-### Handover Artifacts
+## Handover Artifacts
 - As-Built documentation
 - Cost optimization recommendations
 - Access control and governance documentation
 - Monitoring and alert configuration reference
 
-### Knowledge Transfer
+## Knowledge Transfer
 - [X] live knowledge transfer sessions
 - Recorded training materials hosted in shared portal
 
 ---
 
-## Pricing & Payment Terms
+# Pricing & Payment Terms
 
-### Pricing Model
+## Pricing Model
 - Fixed price or Time & Materials (T&M)
 - Milestone-based payments per Deliverables table
 
 ---
 
-## Invoicing & Expenses
+# Invoicing & Expenses
 
-### Invoicing
+## Invoicing
 - Monthly invoicing based on milestones or work completed
 - Net 30 payment terms
 
-### Expenses
+## Expenses
 - Reimbursable at cost with prior approval
 
 ---
 
-## Terms & Conditions
+# Terms & Conditions
 
 All services will be delivered in accordance with the executed Master Services Agreement (MSA) or equivalent contractual document between Vendor and Client.
 
-### Scope Changes
+## Scope Changes
 - Change Requests required for any scope, schedule, or cost adjustments
 
-### Intellectual Property
+## Intellectual Property
 - Client retains all ownership of developed assets, applications, and configurations
 - Vendor retains proprietary methodologies, tools, and accelerators unless otherwise agreed
 
-### Service Levels
+## Service Levels
 - Deliverables based on best effort unless otherwise specified in SLAs
 - Hypercare period of [X] weeks included with option to extend via managed services
 
-### Liability
+## Liability
 - Liability caps as agreed in MSA
 - Excludes confidentiality or IP infringement breach
 
-### Confidentiality
+## Confidentiality
 - All exchanged artifacts under NDA protection
 
-### Termination
+## Termination
 - Mutually terminable per MSA terms, subject to payment for completed work
 
-### Governing Law
+## Governing Law
 - Agreement governed under the laws of [State/Region]
 
 ---
 
-## Sign-Off
+# Sign-Off
 
 By signing below, both parties agree to the scope, approach, and terms outlined in this Statement of Work.
 
