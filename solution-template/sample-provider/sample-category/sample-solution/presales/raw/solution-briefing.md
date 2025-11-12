@@ -147,26 +147,25 @@ footer_logo_right: support/doc-templates/assets/logos/eo-framework-logo-real.png
 ### Investment Summary
 **Total Investment & Value**
 
-| Cost Item | Cost per Item | Credits | Total Cost to Client | Comments |
-|-----------|---------------|---------|---------------------|----------|
-| Assessment & Discovery | $45,000 | $0 | $45,000 | 4-week assessment, architecture design, ROI analysis |
-| Implementation Services | $180,000 | ($25,000) | $155,000 | Cloud Partner Program credit applied |
-| Cloud Consumption (Year 1) | $96,000 | ($15,000) | $81,000 | Platform services with 15% partner discount |
-| Training & Change Management | $35,000 | $0 | $35,000 | User training, documentation, adoption support |
-| Support & Maintenance (Year 1) | $48,000 | $0 | $48,000 | 24/7 support, SLA guarantee, ongoing optimization |
-| **Total Year 1 Investment** | **$404,000** | **($40,000)** | **$364,000** | **All-in first year cost with credits** |
+<!-- BEGIN COST_SUMMARY_TABLE -->
+| Cost Category | Year 1 | Year 2 | Year 3 | 3-Year Total |
+|---------------|---------|---------|---------|--------------|
+| Professional Services | $364,000 | $0 | $0 | $364,000 |
+| Equipment & Hardware | $95,000 | $0 | $0 | $95,000 |
+| Cloud Infrastructure | $48,000 | $48,000 | $48,000 | $144,000 |
+| Software Licenses & Subscriptions | $108,000 | $108,000 | $108,000 | $324,000 |
+| Support & Maintenance | $24,000 | $24,000 | $24,000 | $72,000 |
+| **TOTAL SOLUTION INVESTMENT** | **$639,000** | **$180,000** | **$180,000** | **$999,000** |
+<!-- END COST_SUMMARY_TABLE -->
 
-**Annual Operating Costs (Years 2-3):** $144,000/year
-- Cloud Platform Services: $96,000/year
-- Support & Maintenance: $48,000/year
+**Annual Operating Costs (Years 2-3):** $180,000/year
+- Cloud Infrastructure: $48,000/year
+- Software Licenses & Subscriptions: $108,000/year
+- Support & Maintenance: $24,000/year
 
-**Total 3-Year TCO:** $652,000
+**Total 3-Year TCO:** $999,000
 
-**Expected ROI:**
-- **Payback Period:** 14 months
-- **3-Year ROI:** 285%
-- **Annual Benefits:** $420,000 (starting Year 2)
-- **Net 3-Year Value:** $1.2M
+Detailed cost breakdown including equipment specifications, cloud consumption estimates, software licensing, and support contracts is provided in cost-breakdown.xlsx.
 
 **SPEAKER NOTES:**
 

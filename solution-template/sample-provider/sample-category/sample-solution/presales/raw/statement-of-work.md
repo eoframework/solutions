@@ -414,9 +414,25 @@ The implementation approach will follow industry best practices and proven metho
 
 ---
 
-# Pricing & Payment Terms
+# Pricing & Investment Summary
 
-## Pricing Model
+<!-- BEGIN COST_SUMMARY_TABLE -->
+| Cost Category | Year 1 | Year 2 | Year 3 | 3-Year Total |
+|---------------|---------|---------|---------|--------------|
+| Professional Services | $364,000 | $0 | $0 | $364,000 |
+| Infrastructure & Materials | $275,000 | $180,000 | $180,000 | $635,000 |
+| **TOTAL SOLUTION INVESTMENT** | **$639,000** | **$180,000** | **$180,000** | **$999,000** |
+<!-- END COST_SUMMARY_TABLE -->
+
+## Cost Components
+
+**Professional Services**: Labor costs for discovery, design, implementation, testing, and knowledge transfer. Detailed breakdown provided in level-of-effort-estimate.xlsx.
+
+**Infrastructure & Materials**: Equipment, cloud consumption, software licenses, and support contracts. Detailed breakdown including equipment specifications, cloud consumption estimates, software licensing, and support contracts is provided in the accompanying Cost Breakdown workbook (cost-breakdown.xlsx).
+
+## Payment Terms
+
+### Pricing Model
 - Fixed price or Time & Materials (T&M)
 - Milestone-based payments per Deliverables table
 

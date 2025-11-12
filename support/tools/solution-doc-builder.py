@@ -743,6 +743,10 @@ class OutputGenerator:
             if 'discovery-questionnaire' in csv_file.stem.lower():
                 return self.convert_discovery_to_xlsx(csv_file, output_dir)
 
+            # Special handling for cost-breakdown (5-tab workbook)
+            if 'cost-breakdown' in csv_file.stem.lower():
+                return self.convert_cost_breakdown_to_xlsx(csv_file, output_dir)
+
             # Load branded template
             template_path = Path(__file__).parent.parent / 'doc-templates' / 'excel' / 'EOFramework-Excel-Template-01.xlsx'
 
