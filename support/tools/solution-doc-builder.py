@@ -724,6 +724,311 @@ class OutputGenerator:
             self.stats['errors'].append(error_msg)
             return False
 
+    def convert_cost_breakdown_to_xlsx(self, csv_file, output_dir):
+        """Convert cost-breakdown.csv to 5-tab Excel workbook with branded template."""
+        try:
+            output_file = output_dir / f"{csv_file.stem}.xlsx"
+
+            # Load branded template
+            template_path = Path(__file__).parent.parent / 'doc-templates' / 'excel' / 'EOFramework-Excel-Template-01.xlsx'
+            if not template_path.exists():
+                raise FileNotFoundError(f"Excel template not found: {template_path}")
+
+            wb = load_workbook(str(template_path))
+
+            # Update Cover sheet
+            if 'Cover' in wb.sheetnames:
+                cover = wb['Cover']
+                cover['B4'] = "Cost Breakdown"
+                cover['B5'] = 'Presales Document' if 'presales' in str(csv_file) else 'Financial Planning Document'
+                cover['C7'] = datetime.now().strftime('%B %d, %Y')
+
+                # Extract solution name from path
+                solution_name = 'Sample Solution'
+                try:
+                    parts = csv_file.parts
+                    if 'solution-template' in parts:
+                        solution_name = 'Sample Solution'
+                    else:
+                        for i, part in enumerate(parts):
+                            if part in ['presales', 'delivery'] and i > 0:
+                                solution_name = parts[i-1].replace('-', ' ').title()
+                                break
+                except:
+                    pass
+
+                cover['C8'] = solution_name
+                cover['C9'] = "[Customer Name]"
+
+            # Read CSV data
+            df = pd.read_csv(csv_file)
+
+            # Standard styling from template
+            header_font = Font(name='Calibri', size=12, bold=True, color='FFFFFF')
+            header_fill = PatternFill(start_color='808080', end_color='808080', fill_type='solid')
+            data_font = Font(name='Calibri', size=12, color='000000')
+            thin_border = Border(left=Side(style='thin'), right=Side(style='thin'),
+                               top=Side(style='thin'), bottom=Side(style='thin'))
+            currency_format = '"$"#,##0'
+
+            # TAB 1: Cost Breakdown (Working Quantities)
+            ws_breakdown = wb['Data']
+            ws_breakdown.title = 'Cost Breakdown'
+            ws_breakdown.delete_rows(2, ws_breakdown.max_row)
+
+            # Headers for Tab 1
+            tab1_columns = ['Category', 'Item', 'Description', 'Unit', 'Quantity', 'Unit_Cost',
+                           'Subtotal', 'Billing_Cycle', 'Year_1', 'Year_2', 'Year_3', 'Notes']
+
+            for c_idx, col_name in enumerate(tab1_columns, 1):
+                cell = ws_breakdown.cell(row=1, column=c_idx, value=col_name)
+                cell.font = header_font
+                cell.fill = header_fill
+                cell.alignment = Alignment(horizontal='center', vertical='center')
+                cell.border = thin_border
+
+            # Data rows for Tab 1
+            current_category = None
+            row_idx = 2
+
+            for _, row_data in df.iterrows():
+                # Check if Qty_Working is populated
+                qty_working = row_data.get('Qty_Working', '')
+                if pd.isna(qty_working) or str(qty_working).strip() == '':
+                    continue
+
+                # Calculate subtotal
+                try:
+                    qty = float(qty_working)
+                    unit_cost = float(row_data.get('Unit_Cost', 0))
+                    subtotal = qty * unit_cost
+                except (ValueError, TypeError):
+                    subtotal = 0
+
+                # Category grouping with blank row
+                category = row_data.get('Category', '')
+                if category != current_category and current_category is not None:
+                    row_idx += 1  # Blank row between categories
+                current_category = category
+
+                # Write data row
+                ws_breakdown.cell(row=row_idx, column=1, value=category).font = data_font
+                ws_breakdown.cell(row=row_idx, column=2, value=row_data.get('Item', '')).font = data_font
+                ws_breakdown.cell(row=row_idx, column=3, value=row_data.get('Description', '')).font = data_font
+                ws_breakdown.cell(row=row_idx, column=4, value=row_data.get('Unit', '')).font = data_font
+
+                qty_cell = ws_breakdown.cell(row=row_idx, column=5, value=qty if not pd.isna(qty_working) else 0)
+                qty_cell.font = data_font
+                qty_cell.number_format = '#,##0.00'
+
+                cost_cell = ws_breakdown.cell(row=row_idx, column=6, value=unit_cost if 'unit_cost' in locals() else 0)
+                cost_cell.font = data_font
+                cost_cell.number_format = currency_format
+
+                subtotal_cell = ws_breakdown.cell(row=row_idx, column=7, value=subtotal)
+                subtotal_cell.font = data_font
+                subtotal_cell.number_format = currency_format
+
+                ws_breakdown.cell(row=row_idx, column=8, value=row_data.get('Billing_Cycle', '')).font = data_font
+
+                year_1_val = float(row_data.get('Year_1', 0)) if not pd.isna(row_data.get('Year_1')) and str(row_data.get('Year_1')).strip() != '' else 0
+                year_1_cell = ws_breakdown.cell(row=row_idx, column=9, value=year_1_val)
+                year_1_cell.font = data_font
+                year_1_cell.number_format = currency_format
+
+                year_2_val = float(row_data.get('Year_2', 0)) if not pd.isna(row_data.get('Year_2')) and str(row_data.get('Year_2')).strip() != '' else 0
+                year_2_cell = ws_breakdown.cell(row=row_idx, column=10, value=year_2_val)
+                year_2_cell.font = data_font
+                year_2_cell.number_format = currency_format
+
+                year_3_val = float(row_data.get('Year_3', 0)) if not pd.isna(row_data.get('Year_3')) and str(row_data.get('Year_3')).strip() != '' else 0
+                year_3_cell = ws_breakdown.cell(row=row_idx, column=11, value=year_3_val)
+                year_3_cell.font = data_font
+                year_3_cell.number_format = currency_format
+
+                ws_breakdown.cell(row=row_idx, column=12, value=row_data.get('Sizing_Notes', '')).font = data_font
+
+                # Apply borders
+                for col in range(1, 13):
+                    ws_breakdown.cell(row=row_idx, column=col).border = thin_border
+
+                row_idx += 1
+
+            # Set column widths for Tab 1
+            ws_breakdown.column_dimensions['A'].width = 25  # Category
+            ws_breakdown.column_dimensions['B'].width = 30  # Item
+            ws_breakdown.column_dimensions['C'].width = 35  # Description
+            ws_breakdown.column_dimensions['D'].width = 12  # Unit
+            ws_breakdown.column_dimensions['E'].width = 10  # Quantity
+            ws_breakdown.column_dimensions['F'].width = 12  # Unit_Cost
+            ws_breakdown.column_dimensions['G'].width = 12  # Subtotal
+            ws_breakdown.column_dimensions['H'].width = 14  # Billing_Cycle
+            ws_breakdown.column_dimensions['I'].width = 12  # Year_1
+            ws_breakdown.column_dimensions['J'].width = 12  # Year_2
+            ws_breakdown.column_dimensions['K'].width = 12  # Year_3
+            ws_breakdown.column_dimensions['L'].width = 45  # Notes
+
+            # TAB 2: Sizing Guidance
+            ws_guidance = wb.create_sheet('Sizing Guidance', 2)
+
+            # Instructions at top
+            ws_guidance['A1'] = "SIZING GUIDANCE - REFERENCE ONLY"
+            ws_guidance['A1'].font = Font(name='Calibri', size=14, bold=True, color='C00000')
+            ws_guidance.merge_cells('A1:G1')
+
+            ws_guidance['A2'] = "Use this tab to understand typical quantities for Small/Medium/Large projects."
+            ws_guidance['A2'].font = Font(name='Calibri', size=11, italic=True)
+            ws_guidance.merge_cells('A2:G2')
+
+            ws_guidance['A3'] = "Adjust quantities in Cost Breakdown tab based on client requirements."
+            ws_guidance['A3'].font = Font(name='Calibri', size=11, italic=True)
+            ws_guidance.merge_cells('A3:G3')
+
+            # Headers
+            guidance_headers = ['Category', 'Item', 'Unit', 'Small', 'Medium', 'Large', 'Sizing Notes']
+            for c_idx, col_name in enumerate(guidance_headers, 1):
+                cell = ws_guidance.cell(row=5, column=c_idx, value=col_name)
+                cell.font = header_font
+                cell.fill = header_fill
+                cell.alignment = Alignment(horizontal='center', vertical='center')
+                cell.border = thin_border
+
+            # Data rows
+            row_idx = 6
+            current_category = None
+            for _, row_data in df.iterrows():
+                category = row_data.get('Category', '')
+                if category != current_category and current_category is not None:
+                    row_idx += 1
+                current_category = category
+
+                ws_guidance.cell(row=row_idx, column=1, value=category).font = data_font
+                ws_guidance.cell(row=row_idx, column=2, value=row_data.get('Item', '')).font = data_font
+                ws_guidance.cell(row=row_idx, column=3, value=row_data.get('Unit', '')).font = data_font
+
+                small_val = float(row_data.get('Qty_Small', 0)) if not pd.isna(row_data.get('Qty_Small')) else 0
+                ws_guidance.cell(row=row_idx, column=4, value=small_val).font = data_font
+
+                medium_val = float(row_data.get('Qty_Medium', 0)) if not pd.isna(row_data.get('Qty_Medium')) else 0
+                ws_guidance.cell(row=row_idx, column=5, value=medium_val).font = data_font
+
+                large_val = float(row_data.get('Qty_Large', 0)) if not pd.isna(row_data.get('Qty_Large')) else 0
+                ws_guidance.cell(row=row_idx, column=6, value=large_val).font = data_font
+
+                ws_guidance.cell(row=row_idx, column=7, value=row_data.get('Sizing_Notes', '')).font = data_font
+
+                for col in range(1, 8):
+                    ws_guidance.cell(row=row_idx, column=col).border = thin_border
+
+                row_idx += 1
+
+            ws_guidance.column_dimensions['A'].width = 25
+            ws_guidance.column_dimensions['B'].width = 30
+            ws_guidance.column_dimensions['C'].width = 12
+            ws_guidance.column_dimensions['D'].width = 10
+            ws_guidance.column_dimensions['E'].width = 10
+            ws_guidance.column_dimensions['F'].width = 10
+            ws_guidance.column_dimensions['G'].width = 50
+
+            # TAB 3: 3-Year TCO
+            ws_tco = wb.create_sheet('3-Year TCO', 3)
+
+            ws_tco['A1'] = "3-YEAR TOTAL COST OF OWNERSHIP"
+            ws_tco['A1'].font = Font(name='Calibri', size=14, bold=True)
+            ws_tco.merge_cells('A1:E1')
+
+            tco_headers = ['Category', 'Year 1', 'Year 2', 'Year 3', '3-Year Total']
+            for c_idx, col_name in enumerate(tco_headers, 1):
+                cell = ws_tco.cell(row=3, column=c_idx, value=col_name)
+                cell.font = header_font
+                cell.fill = header_fill
+                cell.alignment = Alignment(horizontal='center', vertical='center')
+                cell.border = thin_border
+
+            # Calculate category totals
+            category_totals = {}
+            for _, row_data in df.iterrows():
+                category = row_data.get('Category', 'Other')
+                if category not in category_totals:
+                    category_totals[category] = {'Year_1': 0, 'Year_2': 0, 'Year_3': 0}
+
+                try:
+                    year_1 = float(row_data.get('Year_1', 0)) if not pd.isna(row_data.get('Year_1')) and str(row_data.get('Year_1')).strip() != '' else 0
+                    year_2 = float(row_data.get('Year_2', 0)) if not pd.isna(row_data.get('Year_2')) and str(row_data.get('Year_2')).strip() != '' else 0
+                    year_3 = float(row_data.get('Year_3', 0)) if not pd.isna(row_data.get('Year_3')) and str(row_data.get('Year_3')).strip() != '' else 0
+
+                    category_totals[category]['Year_1'] += year_1
+                    category_totals[category]['Year_2'] += year_2
+                    category_totals[category]['Year_3'] += year_3
+                except (ValueError, TypeError):
+                    pass
+
+            # Write category totals
+            row_idx = 4
+            total_y1 = total_y2 = total_y3 = 0
+
+            for category in sorted(category_totals.keys()):
+                y1 = category_totals[category]['Year_1']
+                y2 = category_totals[category]['Year_2']
+                y3 = category_totals[category]['Year_3']
+                total_3yr = y1 + y2 + y3
+
+                ws_tco.cell(row=row_idx, column=1, value=category).font = data_font
+
+                y1_cell = ws_tco.cell(row=row_idx, column=2, value=y1)
+                y1_cell.font = data_font
+                y1_cell.number_format = currency_format
+
+                y2_cell = ws_tco.cell(row=row_idx, column=3, value=y2)
+                y2_cell.font = data_font
+                y2_cell.number_format = currency_format
+
+                y3_cell = ws_tco.cell(row=row_idx, column=4, value=y3)
+                y3_cell.font = data_font
+                y3_cell.number_format = currency_format
+
+                total_cell = ws_tco.cell(row=row_idx, column=5, value=total_3yr)
+                total_cell.font = data_font
+                total_cell.number_format = currency_format
+
+                for col in range(1, 6):
+                    ws_tco.cell(row=row_idx, column=col).border = thin_border
+
+                total_y1 += y1
+                total_y2 += y2
+                total_y3 += y3
+                row_idx += 1
+
+            # Total row
+            ws_tco.cell(row=row_idx, column=1, value="TOTAL").font = Font(name='Calibri', size=12, bold=True)
+
+            for col_idx, value in enumerate([total_y1, total_y2, total_y3, total_y1 + total_y2 + total_y3], 2):
+                cell = ws_tco.cell(row=row_idx, column=col_idx, value=value)
+                cell.font = Font(name='Calibri', size=12, bold=True)
+                cell.number_format = currency_format
+                cell.border = thin_border
+
+            ws_tco.column_dimensions['A'].width = 35
+            ws_tco.column_dimensions['B'].width = 15
+            ws_tco.column_dimensions['C'].width = 15
+            ws_tco.column_dimensions['D'].width = 15
+            ws_tco.column_dimensions['E'].width = 15
+
+            # Save workbook
+            wb.save(str(output_file))
+            print(f"  ✓ {csv_file.name} → {output_file.name}")
+            self.stats['csv_to_xlsx'] += 1
+            return True
+
+        except Exception as e:
+            import traceback
+            error_msg = f"Error converting {csv_file.name}: {str(e)}"
+            print(f"  ❌ {error_msg}")
+            print("Full traceback:")
+            traceback.print_exc()
+            self.stats['errors'].append(error_msg)
+            return False
+
     def convert_csv_to_xlsx(self, csv_file, output_dir):
         """Convert CSV to styled Excel file using branded template."""
         try:
@@ -2517,8 +2822,8 @@ class OutputGenerator:
                             for idx in range(start_line + 1, min(len(lines), start_line + 20)):
                                 line = lines[idx].strip()
 
-                                # Skip empty lines
-                                if not line:
+                                # Skip empty lines and HTML comments
+                                if not line or line.startswith('<!--'):
                                     continue
 
                                 # Check for markdown table (ANY section can have a table)

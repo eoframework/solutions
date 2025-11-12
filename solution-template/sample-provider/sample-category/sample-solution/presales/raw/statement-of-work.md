@@ -420,8 +420,8 @@ The implementation approach will follow industry best practices and proven metho
 | Cost Category | Year 1 | Year 2 | Year 3 | 3-Year Total |
 |---------------|---------|---------|---------|--------------|
 | Professional Services | $364,000 | $0 | $0 | $364,000 |
-| Infrastructure & Materials | $275,000 | $180,000 | $180,000 | $635,000 |
-| **TOTAL SOLUTION INVESTMENT** | **$639,000** | **$180,000** | **$180,000** | **$999,000** |
+| Infrastructure & Materials | $16,564 | $16,564 | $16,564 | $49,691 |
+| **TOTAL SOLUTION INVESTMENT** | **$380,564** | **$16,564** | **$16,564** | **$413,691** |
 <!-- END COST_SUMMARY_TABLE -->
 
 ## Cost Components

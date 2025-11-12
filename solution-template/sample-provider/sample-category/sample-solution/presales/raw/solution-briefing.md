@@ -151,11 +151,10 @@ footer_logo_right: support/doc-templates/assets/logos/eo-framework-logo-real.png
 | Cost Category | Year 1 | Year 2 | Year 3 | 3-Year Total |
 |---------------|---------|---------|---------|--------------|
 | Professional Services | $364,000 | $0 | $0 | $364,000 |
-| Equipment & Hardware | $95,000 | $0 | $0 | $95,000 |
-| Cloud Infrastructure | $48,000 | $48,000 | $48,000 | $144,000 |
-| Software Licenses & Subscriptions | $108,000 | $108,000 | $108,000 | $324,000 |
-| Support & Maintenance | $24,000 | $24,000 | $24,000 | $72,000 |
-| **TOTAL SOLUTION INVESTMENT** | **$639,000** | **$180,000** | **$180,000** | **$999,000** |
+| Cloud Infrastructure | $8,914 | $8,914 | $8,914 | $26,741 |
+| Software Licenses & Subscriptions | $7,650 | $7,650 | $7,650 | $22,950 |
+| Support & Maintenance | $0 | $0 | $0 | $0 |
+| **TOTAL SOLUTION INVESTMENT** | **$380,564** | **$16,564** | **$16,564** | **$413,691** |
 <!-- END COST_SUMMARY_TABLE -->
 
 **Annual Operating Costs (Years 2-3):** $180,000/year
