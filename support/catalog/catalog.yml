@@ -1,11 +1,11 @@
 version: '2.0'
-generated_at: '2025-11-13T06:52:54.797974'
+generated_at: '2025-11-13T07:05:39.927261'
 catalog_type: master
 metadata:
   total_providers: 11
   total_categories: 6
   total_solutions: 35
-  last_updated: '2025-11-13T06:52:54.797978'
+  last_updated: '2025-11-13T07:05:39.927264'
   auto_generated: true
 provider_catalogs:
   cisco: ./providers/cisco.yml
