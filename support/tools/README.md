@@ -1,6 +1,6 @@
 # EO Framework™ Development Tools
 
-![Tools](https://img.shields.io/badge/Tools-10_Scripts-blue)
+![Tools](https://img.shields.io/badge/Tools-8_Scripts-blue)
 ![Python](https://img.shields.io/badge/Python-3.8%2B-green)
 ![Automation](https://img.shields.io/badge/Automation-Production_Ready-orange)
 ![Status](https://img.shields.io/badge/Status-Active-purple)
@@ -264,119 +264,7 @@ chmod +x download-solution.sh
 
 ---
 
-### **9. solution-doc-builder.py** - Professional Document Builder
-
-Builds professional output documents from raw source files (Markdown, CSV) using branded templates. Supports granular filtering by file type, specific files, or directories for targeted generation.
-
-**Usage:**
-```bash
-# Generate all outputs for a solution (default - backward compatible)
-python3 support/tools/solution-doc-builder.py --path solution-template/
-
-# Generate only Excel files
-python3 support/tools/solution-doc-builder.py --path solutions/aws/ai/intelligent-document-processing/ --type excel
-
-# Generate only Word and PowerPoint files
-python3 support/tools/solution-doc-builder.py --path solutions/aws/ai/intelligent-document-processing/ --type word pptx
-
-# Generate only a specific file
-python3 support/tools/solution-doc-builder.py --path solutions/aws/ai/intelligent-document-processing/ --file statement-of-work.md
-
-# Generate only presales directory files
-python3 support/tools/solution-doc-builder.py --path solutions/aws/ai/intelligent-document-processing/ --dir presales
-
-# Dry run - preview what would be generated
-python3 support/tools/solution-doc-builder.py --path solutions/aws/ai/intelligent-document-processing/ --dry-run
-
-# Generate for all solutions
-find solutions/ -type d -name "sample-solution" -prune -o -type d -mindepth 3 -maxdepth 3 -print | \
-  while read dir; do python3 support/tools/solution-doc-builder.py --path "$dir"; done
-```
-
-**Parameters:**
-- `--path` **(required)**: Directory containing `raw/` subdirectories with source files
-- `--type`: Filter by file type (`excel`, `word`, `pptx`) - can specify multiple
-- `--file`: Generate only this specific source file (e.g., `statement-of-work.md`)
-- `--files`: Comma-separated list of source files to generate
-- `--dir`: Process only files in this directory (`presales` or `delivery`)
-- `--force`: Regenerate files even if output already exists
-- `--dry-run`: Show what would be generated without creating files
-- `--quiet`: Suppress progress output (errors only)
-- `--verbose`: Show detailed processing including skipped files
-
-**What it does:**
-- **CSV → Excel (.xlsx)**: Converts CSV files to styled Excel spreadsheets with:
-  - Professional header formatting (blue background, white text)
-  - Auto-adjusted column widths
-  - Border styling and cell alignment
-  - Frozen header rows
-
-- **Markdown → Word (.docx)**: Converts Markdown to formatted Word documents with:
-  - Heading hierarchy preservation (H1-H6)
-  - Paragraph formatting
-  - Bullet and numbered lists
-  - Basic text formatting
-
-- **Markdown → PowerPoint (.pptx)**: Converts Markdown to presentations with:
-  - EO Framework branded template (from `support/doc-templates/powerpoint/`)
-  - H1 headers create title slides
-  - H2 headers create content slides
-  - Bullet points automatically formatted
-  - Professional layouts and styling
-
-**Dependencies:**
-```bash
-pip3 install pandas openpyxl python-docx python-pptx markdown-it-py
-```
-
-**Directory Structure:**
-```
-solution-name/
-├── presales/
-│   ├── raw/                           # Source files
-│   │   ├── business-case.md
-│   │   ├── executive-presentation.md
-│   │   └── roi-calculator.csv
-│   ├── business-case.docx             # Generated
-│   ├── executive-presentation.pptx    # Generated (using template)
-│   └── roi-calculator.xlsx            # Generated
-└── delivery/
-    ├── raw/                           # Source files
-    │   ├── implementation-guide.md
-    │   └── requirements.csv
-    ├── implementation-guide.docx      # Generated
-    └── requirements.xlsx              # Generated
-```
-
-**Output Example:**
-```
-🔍 Scanning: solutions/aws/ai/intelligent-document-processing
-📁 Found 2 raw directories
-
-📂 Processing: presales/raw
-  ✅ business-case.md → business-case.docx
-  ✅ executive-presentation.md → executive-presentation.pptx
-  ✅ roi-calculator.csv → roi-calculator.xlsx
-
-📂 Processing: delivery/raw
-  ✅ implementation-guide.md → implementation-guide.docx
-  ✅ requirements.csv → requirements.xlsx
-
-============================================================
-📊 Generation Summary
-============================================================
-✅ CSV → Excel:      2 files
-✅ MD → Word:        2 files
-✅ MD → PowerPoint:  1 files
-
-📁 Total generated:  5 files
-✨ All files generated successfully!
-============================================================
-```
-
-**Templates:**
-- PowerPoint template: `support/doc-templates/powerpoint/EOFramework-Template-3Logos.pptx`
-- See: [doc-templates/README.md](../doc-templates/README.md) for template customization
+> **Note:** Document generation tools (solution-doc-builder.py, compute-costs.py, template creation scripts) have been moved to the private `eof-tools` repository for better security and maintenance. See the [eof-tools repository](https://github.com/eoframework/eof-tools) for document generation capabilities.
 
 ---
 
@@ -395,17 +283,13 @@ python3 support/tools/clone-solution-template.py \
 
 # Step 2: Customize content
 cd solutions/aws/cloud/my-solution
-# Edit raw/ files: markdown and CSV source files in presales/raw/ and delivery/raw/
+# Edit metadata.yml, README.md, and add solution materials
 
-# Step 3: Generate professional outputs
-cd ../../..  # Back to repo root
-python3 support/tools/generate-outputs.py --path solutions/aws/cloud/my-solution
-
-# Step 4: Validate
+# Step 3: Validate
 python3 support/tools/validate-template.py \
   --path solutions/aws/cloud/my-solution
 
-# Step 5: Update catalogs
+# Step 4: Update catalogs
 python3 support/tools/generate-catalogs.py
 python3 support/tools/process-catalogs.py
 python3 support/tools/export-templates-csv.py --output-type public --git-based
@@ -417,14 +301,6 @@ python3 support/tools/export-templates-csv.py --output-type public --git-based
 # Complete health check
 echo "🔍 Validating all templates..."
 python3 support/tools/validate-template.py --all
-
-echo "📄 Regenerating professional outputs..."
-find solutions/ -type d -name "sample-solution" -prune -o -type d -mindepth 3 -maxdepth 3 -print | \
-  while read dir; do
-    if [ -d "$dir/presales/raw" ] || [ -d "$dir/delivery/raw" ]; then
-      python3 support/tools/generate-outputs.py --path "$dir"
-    fi
-  done
 
 echo "🔄 Regenerating catalogs..."
 python3 support/tools/generate-catalogs.py
