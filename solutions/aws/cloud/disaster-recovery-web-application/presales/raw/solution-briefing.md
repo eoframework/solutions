@@ -24,6 +24,8 @@ footer_logo_right: eof-tools/doc-tools/brands/default/assets/logos/eo-framework-
 ---
 
 ### Business Opportunity
+**layout:** two_column
+
 **Protecting Business Continuity with Multi-Region DR**
 
 - **Opportunity**
@@ -38,6 +40,8 @@ footer_logo_right: eof-tools/doc-tools/brands/default/assets/logos/eo-framework-
 ---
 
 ### Solution Overview
+**layout:** visual
+
 **Active-Standby Multi-Region Architecture**
 
 ![Architecture Diagram](assets/diagrams/architecture-diagram.png)
@@ -54,6 +58,8 @@ footer_logo_right: eof-tools/doc-tools/brands/default/assets/logos/eo-framework-
 ---
 
 ### Implementation Approach
+**layout:** single
+
 **Proven DR Methodology**
 
 - **Phase 1: Assessment & Design (Months 1-2)**
@@ -89,6 +95,8 @@ footer_logo_right: eof-tools/doc-tools/brands/default/assets/logos/eo-framework-
 ---
 
 ### Timeline & Milestones
+**layout:** table
+
 **Path to DR Readiness**
 
 | Phase No | Phase Description | Timeline | Key Deliverables |
@@ -112,6 +120,8 @@ footer_logo_right: eof-tools/doc-tools/brands/default/assets/logos/eo-framework-
 ---
 
 ### Success Stories
+**layout:** single
+
 **Proven Multi-Region DR Results**
 
 - **Client Success: Financial Services SaaS Provider**
@@ -124,6 +134,8 @@ footer_logo_right: eof-tools/doc-tools/brands/default/assets/logos/eo-framework-
 ---
 
 ### Our Partnership Advantage
+**layout:** two_column
+
 **Why Partner with Us for DR**
 
 - **What We Bring**
@@ -142,6 +154,8 @@ footer_logo_right: eof-tools/doc-tools/brands/default/assets/logos/eo-framework-
 ---
 
 ### Investment Summary
+**layout:** data_viz
+
 **Total Investment & Value with AWS Partner Credits**
 
 <!-- BEGIN COST_SUMMARY_TABLE -->
@@ -216,6 +230,8 @@ Detailed cost breakdown including primary/DR infrastructure, AWS services, and t
 ---
 
 ### Next Steps
+**layout:** bullet_points
+
 **Your Path Forward**
 
 **Immediate Actions:**
@@ -252,6 +268,8 @@ Detailed cost breakdown including primary/DR infrastructure, AWS services, and t
 ---
 
 ### Thank You
+**layout:** thank_you
+
 
 - **Your Account Manager:** [Name, Title] | [Email] | [Phone]
 

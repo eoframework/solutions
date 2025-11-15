@@ -127,24 +127,32 @@ footer_logo_right: eof-tools/doc-tools/brands/default/assets/logos/eo-framework-
 **Enterprise-Grade Security Intelligence Stack**
 
 ### Data Connectors & Collection
+**layout:** single
+
 - **Microsoft 365 Defender**: Endpoint, cloud apps, email, and identity threat data
 - **Azure AD & Identity**: User and sign-in activities, privilege access management
 - **Firewall & Network**: Azure Firewall, NSG Flow Logs, on-premises firewalls
 - **Third-Party SIEM**: Integration with existing Splunk, ArcSight, or other platforms
 
 ### Analytics & Detection Engine
+**layout:** single
+
 - **KQL-Based Rules**: 200+ built-in detection rules covering MITRE ATT&CK framework
 - **Machine Learning Models**: Anomaly detection identifying unusual user/network behavior
 - **Threat Intelligence**: Integration with Microsoft Threat Intelligence, MISP, and custom feeds
 - **Advanced Analytics**: User and entity behavior analytics (UEBA) for insider threat detection
 
 ### Incident Management & Investigation
+**layout:** single
+
 - **Automated Incident Creation**: Correlated alerts automatically grouped into incidents
 - **Investigation Workbooks**: AI-powered timeline and relationship mapping
 - **Advanced Hunting**: Comprehensive query tool for manual threat hunting across all data
 - **Forensics Capabilities**: Long-term data retention for compliance and historical analysis
 
 ### SOAR & Automation
+**layout:** single
+
 - **Logic Apps Playbooks**: Pre-built and custom automated response workflows
 - **Incident Response Automation**: Auto-remediation and isolation of compromised assets
 - **Integration Hub**: Seamless integration with ticketing, communication, and other tools
@@ -156,6 +164,8 @@ footer_logo_right: eof-tools/doc-tools/brands/default/assets/logos/eo-framework-
 **Proven Azure Sentinel Results in Regulated Industries**
 
 ### Healthcare Provider - Ransomware Detection & Response
+**layout:** single
+
 **Organization**: Multi-hospital health system, 5,000 employees, 10+ facilities
 **Challenge**: Increasing ransomware attacks targeting healthcare, need for rapid detection and isolation, compliance with HIPAA audit requirements
 
@@ -168,6 +178,8 @@ footer_logo_right: eof-tools/doc-tools/brands/default/assets/logos/eo-framework-
 - **Testimonial**: "Azure Sentinel transformed our security posture. We now detect threats before they spread, and the automated response capabilities give us confidence we're protected against ransomware." - Chief Information Security Officer, Premier Health System
 
 ### Financial Services Firm - Insider Threat & Compliance
+**layout:** data_viz
+
 **Organization**: International financial services firm, 3,000 employees, strict PCI-DSS and SOX compliance
 **Challenge**: Detecting insider threats and suspicious user behavior, meeting strict compliance audit requirements, investigating incidents rapidly
 
@@ -211,6 +223,8 @@ footer_logo_right: eof-tools/doc-tools/brands/default/assets/logos/eo-framework-
 **Azure Partner Credits Breakdown (Year 1 Only):** Azure Sentinel Credit: $9,000 (10% discount on data ingestion), Microsoft Partner Services Credit: $12,000 (managed services & support enablement)
 
 ### Investment Breakdown by Category
+**layout:** data_viz
+
 
 **Medium Deployment Specifications:**
 - **Data Volume:** 300 GB/month (Office 365, Azure AD, Defender, firewall logs, third-party sources)

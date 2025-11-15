@@ -24,6 +24,8 @@ footer_logo_right: support/doc-templates/assets/logos/eo-framework-logo-real.png
 ---
 
 ### Business Opportunity
+**layout:** two_column
+
 **Simplify Global Network Architecture**
 
 - **Opportunity**
@@ -40,6 +42,8 @@ footer_logo_right: support/doc-templates/assets/logos/eo-framework-logo-real.png
 ---
 
 ### Solution Overview
+**layout:** visual
+
 **Azure Virtual WAN: Hub-and-Spoke Global Connectivity**
 
 ![Architecture Diagram](assets/images/architecture-diagram.png)
@@ -59,6 +63,8 @@ footer_logo_right: support/doc-templates/assets/logos/eo-framework-logo-real.png
 ---
 
 ### Implementation Approach
+**layout:** single
+
 **Phased Migration to Virtual WAN**
 
 - **Phase 1: Assessment & Design** *(Months 1-2)*
@@ -99,6 +105,8 @@ footer_logo_right: support/doc-templates/assets/logos/eo-framework-logo-real.png
 ---
 
 ### Virtual WAN Architecture Details
+**layout:** visual
+
 **Hub-and-Spoke Design with Multi-Region Redundancy**
 
 | Component | Configuration | Benefit |
@@ -127,6 +135,8 @@ footer_logo_right: support/doc-templates/assets/logos/eo-framework-logo-real.png
 ---
 
 ### Timeline & Milestones
+**layout:** table
+
 **Path to Unified Global Network**
 
 | Phase | Timeline | Key Milestones |
@@ -152,6 +162,8 @@ footer_logo_right: support/doc-templates/assets/logos/eo-framework-logo-real.png
 ---
 
 ### Success Stories
+**layout:** single
+
 **Enterprise Global Network Transformations**
 
 - **Client Success: Global Financial Services Firm**
@@ -164,6 +176,8 @@ footer_logo_right: support/doc-templates/assets/logos/eo-framework-logo-real.png
 ---
 
 ### Our Partnership Advantage
+**layout:** two_column
+
 **Why Choose Us for Your Virtual WAN Journey**
 
 - **What We Bring**
@@ -182,6 +196,8 @@ footer_logo_right: support/doc-templates/assets/logos/eo-framework-logo-real.png
 ---
 
 ### Investment Summary
+**layout:** data_viz
+
 **Total Investment & Value**
 
 <!-- BEGIN COST_SUMMARY_TABLE -->
@@ -245,6 +261,8 @@ Detailed cost breakdown including infrastructure specifications, bandwidth plann
 ---
 
 ### Next Steps
+**layout:** bullet_points
+
 **Your Path Forward**
 
 **Immediate Actions:**
@@ -281,6 +299,8 @@ Detailed cost breakdown including infrastructure specifications, bandwidth plann
 ---
 
 ### Thank You
+**layout:** thank_you
+
 
 - **Your Account Manager:** [Name, Title] | [Email] | [Phone]
 
@@ -317,6 +337,8 @@ Detailed cost breakdown including infrastructure specifications, bandwidth plann
 ## Presentation Notes
 
 ### Speaking Points for Each Slide
+**layout:** single
+
 
 **Slide 1 - Title Slide:**
 - Welcome attendees and set context for the meeting
@@ -389,6 +411,8 @@ Detailed cost breakdown including infrastructure specifications, bandwidth plann
 - Don't leave without clear next meeting scheduled and decision timeline confirmed
 
 ### Q&A Preparation
+**layout:** single
+
 
 **Common Questions & Responses:**
 
@@ -411,6 +435,8 @@ A: ExpressRoute private peering provides secure, high-performance connection fro
 A: We design for 99.9%+ availability through redundant hubs, multiple connectivity paths (VPN + ExpressRoute), and automated failover. We commit to 99.95% SLA in our support contract.
 
 ### Appendix Slides (If Needed)
+**layout:** single
+
 
 **A1: Detailed Virtual WAN Architecture Diagram**
 **A2: Branch Migration Sequence & Timeline**

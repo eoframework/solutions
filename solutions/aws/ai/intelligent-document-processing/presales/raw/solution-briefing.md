@@ -24,6 +24,8 @@ footer_logo_right: eof-tools/doc-tools/brands/default/assets/logos/eo-framework-
 ---
 
 ### Business Opportunity
+**layout:** two_column
+
 **Transforming Manual Document Processing with AI**
 
 - **Opportunity**
@@ -38,6 +40,8 @@ footer_logo_right: eof-tools/doc-tools/brands/default/assets/logos/eo-framework-
 ---
 
 ### Solution Overview
+**layout:** visual
+
 **Serverless AI/ML Document Processing Architecture**
 
 ![Architecture Diagram](assets/diagrams/architecture-diagram.png)
@@ -54,6 +58,8 @@ footer_logo_right: eof-tools/doc-tools/brands/default/assets/logos/eo-framework-
 ---
 
 ### Implementation Approach
+**layout:** single
+
 **Proven Methodology for AI/ML Success**
 
 - **Phase 1: Pilot (Months 1-2)**
@@ -89,6 +95,8 @@ footer_logo_right: eof-tools/doc-tools/brands/default/assets/logos/eo-framework-
 ---
 
 ### Timeline & Milestones
+**layout:** table
+
 **Path to Value Realization**
 
 | Phase No | Phase Description | Timeline | Key Deliverables |
@@ -112,6 +120,8 @@ footer_logo_right: eof-tools/doc-tools/brands/default/assets/logos/eo-framework-
 ---
 
 ### Success Stories
+**layout:** single
+
 **Proven AI/ML Document Processing Results**
 
 - **Client Success: Healthcare Insurance Provider**
@@ -124,6 +134,8 @@ footer_logo_right: eof-tools/doc-tools/brands/default/assets/logos/eo-framework-
 ---
 
 ### Our Partnership Advantage
+**layout:** two_column
+
 **Why Partner with Us for AI/ML**
 
 - **What We Bring**
@@ -142,6 +154,8 @@ footer_logo_right: eof-tools/doc-tools/brands/default/assets/logos/eo-framework-
 ---
 
 ### Investment Summary
+**layout:** data_viz
+
 **Total Investment & Value with AWS Partner Credits**
 
 <!-- BEGIN COST_SUMMARY_TABLE -->
@@ -222,6 +236,8 @@ Detailed cost breakdown including AWS service consumption, Textract/Comprehend p
 ---
 
 ### Next Steps
+**layout:** bullet_points
+
 **Your Path Forward**
 
 **Immediate Actions:**
@@ -257,6 +273,8 @@ Detailed cost breakdown including AWS service consumption, Textract/Comprehend p
 ---
 
 ### Thank You
+**layout:** thank_you
+
 
 - **Your Account Manager:** [Name, Title] | [Email] | [Phone]
 
@@ -280,12 +298,16 @@ Detailed cost breakdown including AWS service consumption, Textract/Comprehend p
 ## APPENDIX: Detailed Slide Notes
 
 ### Presentation Guidelines
+**layout:** single
+
 - **Duration:** 45-60 minutes including Q&A
 - **Audience:** Business executives, IT leadership, operations managers
 - **Focus:** Business value and proven results, not technical details
 - **Approach:** Consultative partnership, not vendor pitch
 
 ### Slide Timing Recommendations
+**layout:** single
+
 - Business Opportunity: 5 minutes
 - Solution Overview: 7 minutes (focus on architecture diagram)
 - Implementation Approach: 6 minutes
@@ -297,12 +319,16 @@ Detailed cost breakdown including AWS service consumption, Textract/Comprehend p
 - Q&A: 15-20 minutes
 
 ### Key Messages
+**layout:** single
+
 1. AI/ML accuracy proven in pilot before full investment
 2. Serverless architecture scales effortlessly with no infrastructure management
 3. Typical ROI within 12-18 months through labor cost savings
 4. Partnership brings proven methodology and AWS expertise
 
 ### Anticipated Questions & Answers
+**layout:** single
+
 - **Q:** "How accurate is the AI extraction?"
   **A:** Textract achieves 95-99% accuracy on structured documents, Comprehend 90-95% on unstructured text. Pilot validates accuracy with your specific documents before full deployment.
 

@@ -24,6 +24,8 @@ footer_logo_right: eof-tools/doc-tools/brands/default/assets/logos/eo-framework-
 ---
 
 ### Slide 2: Business Opportunity
+**layout:** two_column
+
 **Accelerating Software Delivery with Enterprise CI/CD**
 
 - **Opportunity**
@@ -38,6 +40,8 @@ footer_logo_right: eof-tools/doc-tools/brands/default/assets/logos/eo-framework-
 ---
 
 ### Slide 3: Solution Overview
+**layout:** visual
+
 **DevOps Pipeline Factory Architecture**
 
 ![Architecture Diagram](assets/diagrams/architecture-diagram.png)
@@ -55,6 +59,8 @@ footer_logo_right: eof-tools/doc-tools/brands/default/assets/logos/eo-framework-
 ---
 
 ### Slide 4: Implementation Approach
+**layout:** single
+
 **Proven Phased Methodology**
 
 - **Phase 1: Foundation (Weeks 1-4)**
@@ -90,6 +96,8 @@ footer_logo_right: eof-tools/doc-tools/brands/default/assets/logos/eo-framework-
 ---
 
 ### Slide 5: Timeline & Milestones
+**layout:** table
+
 **Path to DevOps Maturity**
 
 | Phase No | Phase Description | Timeline | Key Deliverables |
@@ -113,6 +121,8 @@ footer_logo_right: eof-tools/doc-tools/brands/default/assets/logos/eo-framework-
 ---
 
 ### Slide 6: Success Stories
+**layout:** single
+
 **Enterprise DevOps Transformation Results**
 
 - **Client Success: Global Financial Services Firm**
@@ -125,6 +135,8 @@ footer_logo_right: eof-tools/doc-tools/brands/default/assets/logos/eo-framework-
 ---
 
 ### Slide 7: Our Partnership Advantage
+**layout:** two_column
+
 **Why Partner with Us for DevOps**
 
 - **What We Bring**
@@ -143,6 +155,8 @@ footer_logo_right: eof-tools/doc-tools/brands/default/assets/logos/eo-framework-
 ---
 
 ### Slide 8: Investment Summary
+**layout:** data_viz
+
 **Total Investment with Azure Credits**
 
 <!-- BEGIN COST_SUMMARY_TABLE -->
@@ -177,6 +191,8 @@ footer_logo_right: eof-tools/doc-tools/brands/default/assets/logos/eo-framework-
 ---
 
 ### Slide 9: Implementation Roadmap
+**layout:** table
+
 **Detailed Execution Plan**
 
 **Month 1: Assessment & Design**
@@ -198,6 +214,8 @@ footer_logo_right: eof-tools/doc-tools/brands/default/assets/logos/eo-framework-
 ---
 
 ### Slide 10: Call to Action
+**layout:** single
+
 **Let's Transform Your Software Delivery**
 
 - **Next Steps**

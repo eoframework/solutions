@@ -24,6 +24,8 @@ footer_logo_right: eof-tools/doc-tools/brands/default/assets/logos/eo-framework-
 ---
 
 ### Business Opportunity
+**layout:** two_column
+
 **Transforming Workforce Mobility with Azure Virtual Desktop**
 
 - **Opportunity**
@@ -38,6 +40,8 @@ footer_logo_right: eof-tools/doc-tools/brands/default/assets/logos/eo-framework-
 ---
 
 ### Solution Overview
+**layout:** visual
+
 **Secure, Scalable Azure Virtual Desktop Architecture**
 
 ![Architecture Diagram](assets/diagrams/architecture-diagram.png)
@@ -55,6 +59,8 @@ footer_logo_right: eof-tools/doc-tools/brands/default/assets/logos/eo-framework-
 ---
 
 ### Implementation Approach
+**layout:** single
+
 **Proven Methodology for Azure Virtual Desktop Success**
 
 - **Phase 1: Discovery & Planning (Weeks 1-2)**
@@ -95,6 +101,8 @@ footer_logo_right: eof-tools/doc-tools/brands/default/assets/logos/eo-framework-
 ---
 
 ### Timeline & Milestones
+**layout:** table
+
 **Path to Modern Workplace Delivery**
 
 | Phase No | Phase Description | Timeline | Key Deliverables |
@@ -119,6 +127,8 @@ footer_logo_right: eof-tools/doc-tools/brands/default/assets/logos/eo-framework-
 ---
 
 ### Success Stories
+**layout:** single
+
 **Proven Azure Virtual Desktop Results**
 
 - **Client Success: Global Financial Services Firm**
@@ -131,6 +141,8 @@ footer_logo_right: eof-tools/doc-tools/brands/default/assets/logos/eo-framework-
 ---
 
 ### Our Partnership Advantage
+**layout:** two_column
+
 **Why Partner with Us for Azure Virtual Desktop**
 
 - **What We Bring**
@@ -149,6 +161,8 @@ footer_logo_right: eof-tools/doc-tools/brands/default/assets/logos/eo-framework-
 ---
 
 ### Investment Summary
+**layout:** data_viz
+
 **Total Investment & Value**
 
 <!-- BEGIN COST_SUMMARY_TABLE -->
@@ -222,6 +236,8 @@ Detailed cost breakdown including Azure VM consumption, Microsoft 365 licensing,
 ---
 
 ### Next Steps
+**layout:** bullet_points
+
 **Your Path Forward**
 
 **Immediate Actions:**
@@ -258,6 +274,8 @@ Detailed cost breakdown including Azure VM consumption, Microsoft 365 licensing,
 ---
 
 ### Thank You
+**layout:** thank_you
+
 
 - **Your Account Manager:** [Name, Title] | [Email] | [Phone]
 

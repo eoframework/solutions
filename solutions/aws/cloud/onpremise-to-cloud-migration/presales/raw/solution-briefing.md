@@ -24,6 +24,8 @@ footer_logo_right: eof-tools/doc-tools/brands/default/assets/logos/eo-framework-
 ---
 
 ### Business Opportunity
+**layout:** two_column
+
 **Accelerating Digital Transformation Through Cloud Migration**
 
 - **Opportunity**
@@ -38,6 +40,8 @@ footer_logo_right: eof-tools/doc-tools/brands/default/assets/logos/eo-framework-
 ---
 
 ### Solution Overview
+**layout:** visual
+
 **Comprehensive Migration Journey to AWS**
 
 ![Architecture Diagram](assets/diagrams/architecture-diagram.png)
@@ -54,6 +58,8 @@ footer_logo_right: eof-tools/doc-tools/brands/default/assets/logos/eo-framework-
 ---
 
 ### Implementation Approach
+**layout:** single
+
 **Proven AWS Migration Methodology**
 
 - **Phase 1: Discovery & Assessment (Months 1-2)**
@@ -89,6 +95,8 @@ footer_logo_right: eof-tools/doc-tools/brands/default/assets/logos/eo-framework-
 ---
 
 ### Timeline & Milestones
+**layout:** table
+
 **Path to Cloud Migration**
 
 | Phase No | Phase Description | Timeline | Key Deliverables |
@@ -112,6 +120,8 @@ footer_logo_right: eof-tools/doc-tools/brands/default/assets/logos/eo-framework-
 ---
 
 ### Success Stories
+**layout:** single
+
 **Proven Cloud Migration Results**
 
 - **Client Success: Global Manufacturing Company**
@@ -124,6 +134,8 @@ footer_logo_right: eof-tools/doc-tools/brands/default/assets/logos/eo-framework-
 ---
 
 ### Our Partnership Advantage
+**layout:** two_column
+
 **Why Partner with Us for AWS Migration**
 
 - **What We Bring**
@@ -142,6 +154,8 @@ footer_logo_right: eof-tools/doc-tools/brands/default/assets/logos/eo-framework-
 ---
 
 ### Investment Summary
+**layout:** data_viz
+
 **Total Investment & Value with AWS MAP Program Credits**
 
 <!-- BEGIN COST_SUMMARY_TABLE -->
@@ -233,6 +247,8 @@ Detailed cost breakdown including migration services, AWS consumption, and compa
 ---
 
 ### Next Steps
+**layout:** bullet_points
+
 **Your Path Forward**
 
 **Immediate Actions:**
@@ -269,6 +285,8 @@ Detailed cost breakdown including migration services, AWS consumption, and compa
 ---
 
 ### Thank You
+**layout:** thank_you
+
 
 - **Your Account Manager:** [Name, Title] | [Email] | [Phone]
 

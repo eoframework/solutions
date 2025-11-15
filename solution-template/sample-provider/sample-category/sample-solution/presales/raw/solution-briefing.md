@@ -24,6 +24,8 @@ footer_logo_right: eof-tools/doc-tools/brands/default/assets/logos/eo-framework-
 ---
 
 ### Business Opportunity
+**layout:** two_column
+
 **Unlocking Strategic Value**
 
 - **Opportunity**
@@ -38,6 +40,8 @@ footer_logo_right: eof-tools/doc-tools/brands/default/assets/logos/eo-framework-
 ---
 
 ### Solution Overview
+**layout:** visual
+
 **Cloud-Native Architecture for Scalable Operations**
 
 ![Architecture Diagram](assets/images/architecture-diagram.png)
@@ -55,6 +59,8 @@ footer_logo_right: eof-tools/doc-tools/brands/default/assets/logos/eo-framework-
 ---
 
 ### Implementation Approach
+**layout:** single
+
 **Proven Methodology for Success**
 
 - **Phase 1: Foundation & Planning** *(Months 1-2)*
@@ -91,6 +97,8 @@ footer_logo_right: eof-tools/doc-tools/brands/default/assets/logos/eo-framework-
 ---
 
 ### Timeline & Milestones
+**layout:** table
+
 **Path to Value Realization**
 
 | Phase No | Phase Description | Timeline | Key Deliverables |
@@ -115,6 +123,8 @@ footer_logo_right: eof-tools/doc-tools/brands/default/assets/logos/eo-framework-
 ---
 
 ### Success Stories
+**layout:** single
+
 **Proven Results with Similar Clients**
 
 - **Client Success: Global Manufacturing Leader**
@@ -127,6 +137,8 @@ footer_logo_right: eof-tools/doc-tools/brands/default/assets/logos/eo-framework-
 ---
 
 ### Our Partnership Advantage
+**layout:** two_column
+
 **Why Partner with Us**
 
 - **What We Bring**
@@ -145,6 +157,8 @@ footer_logo_right: eof-tools/doc-tools/brands/default/assets/logos/eo-framework-
 ---
 
 ### Investment Summary
+**layout:** data_viz
+
 **Total Investment & Value**
 
 <!-- BEGIN COST_SUMMARY_TABLE -->
@@ -206,6 +220,8 @@ Detailed cost breakdown including equipment specifications, cloud consumption es
 ---
 
 ### Next Steps
+**layout:** bullet_points
+
 **Your Path Forward**
 
 **Immediate Actions:**
@@ -242,6 +258,7 @@ Detailed cost breakdown including equipment specifications, cloud consumption es
 ---
 
 ### Thank You
+**layout:** thank_you
 
 - **Your Account Manager:** [Name, Title] | [Email] | [Phone]
 
