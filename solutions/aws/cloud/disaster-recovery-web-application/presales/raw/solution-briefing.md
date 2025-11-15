@@ -56,15 +56,15 @@ footer_logo_right: eof-tools/doc-tools/brands/default/assets/logos/eo-framework-
 ### Implementation Approach
 **Proven DR Methodology**
 
-- **Phase 1: Assessment & Design** *(Months 1-2)*
+- **Phase 1: Assessment & Design (Months 1-2)**
   - Business Impact Analysis (BIA) to determine RTO/RPO requirements
   - Current-state architecture assessment and dependency mapping
   - DR architecture design and AWS landing zone setup
-- **Phase 2: Implementation** *(Months 3-4)*
+- **Phase 2: Implementation (Months 3-4)**
   - Primary and DR region infrastructure deployment
   - RDS replication, S3 sync, and backup configuration
   - Route 53 failover policies and health check setup
-- **Phase 3: Testing & Validation** *(Month 5-6)*
+- **Phase 3: Testing & Validation (Month 5-6)**
   - DR failover testing and RTO/RPO validation
   - Runbook development and team training
   - Production cutover and ongoing monitoring

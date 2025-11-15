@@ -56,15 +56,15 @@ footer_logo_right: eof-tools/doc-tools/brands/default/assets/logos/eo-framework-
 ### Implementation Approach
 **Proven Methodology for AI/ML Success**
 
-- **Phase 1: Pilot** *(Months 1-2)*
+- **Phase 1: Pilot (Months 1-2)**
   - Deploy single document type to validate AI accuracy and business value
   - Configure Textract/Comprehend models with sample documents
   - Establish human review workflow and quality benchmarks
-- **Phase 2: Expansion** *(Months 3-4)*
+- **Phase 2: Expansion (Months 3-4)**
   - Extend to additional document types and higher volumes
   - Implement API integrations with downstream business systems
   - Configure automated routing and exception handling
-- **Phase 3: Optimization** *(Months 5-6)*
+- **Phase 3: Optimization (Months 5-6)**
   - Fine-tune AI models based on production data and feedback
   - Implement advanced features like multi-language support
   - Complete training and transition to operations team

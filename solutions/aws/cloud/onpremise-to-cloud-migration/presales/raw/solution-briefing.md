@@ -56,15 +56,15 @@ footer_logo_right: eof-tools/doc-tools/brands/default/assets/logos/eo-framework-
 ### Implementation Approach
 **Proven AWS Migration Methodology**
 
-- **Phase 1: Discovery & Assessment** *(Months 1-2)*
+- **Phase 1: Discovery & Assessment (Months 1-2)**
   - Application discovery and dependency mapping with AWS tools
   - Migration readiness assessment and wave planning (lift-shift vs replatform)
   - AWS landing zone design and account structure setup
-- **Phase 2: Migration Execution** *(Months 3-6)*
+- **Phase 2: Migration Execution (Months 3-6)**
   - Wave 1: Non-critical applications for validation and learning
   - Wave 2: Business-critical applications with tested migration patterns
   - Wave 3: Complex/legacy applications requiring refactoring
-- **Phase 3: Optimization** *(Months 7-9)*
+- **Phase 3: Optimization (Months 7-9)**
   - Right-sizing based on CloudWatch metrics and usage patterns
   - Cost optimization through Reserved Instances and Savings Plans
   - Security hardening and compliance validation
