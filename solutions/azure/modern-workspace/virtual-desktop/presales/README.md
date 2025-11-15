@@ -1,20 +1,126 @@
-# AZURE Virtual Desktop - Presales Resources
+# Azure Virtual Desktop Solution - Presales Documentation
 
-## Solution Overview
+## Overview
 
-### Business Value Proposition
-Secure, scalable virtual desktop infrastructure leveraging Azure Virtual Desktop, Azure AD, Log Analytics. This enterprise-grade solution delivers 40% cost reduction, 99.9% availability through proven implementation methodologies and comprehensive support materials.
+This directory contains complete presales materials for the Azure Virtual Desktop (AVD) solution, including cost analysis, discovery questionnaire, solution briefing, statement of work, and architecture diagrams.
 
-### Key Use Cases
-- **Remote Work**: Enhanced capabilities and streamlined processes
-- **BYOD Support**: Enhanced capabilities and streamlined processes
-- **Virtual Workstations**: Enhanced capabilities and streamlined processes
+## Solution Summary
+
+**Azure Virtual Desktop for Enterprise Remote Access**
+
+Deploy a complete virtual desktop infrastructure on Azure supporting 100 remote workers with:
+- Managed Windows 11 Multi-Session desktops (20 x D4s_v5 VMs)
+- User profile management via FSLogix (Azure Files Premium 500GB)
+- Enterprise authentication through Azure AD
+- Comprehensive monitoring with Azure Monitor
+- Full compliance and audit logging
+
+**Year 1 Investment:** $126,600 net (after $10K partner credit)
+**Year 2-3 Recurring:** $63,600/year
 
 ### Solution Characteristics
 - **Complexity Level**: Advanced
-- **Estimated Deployment**: 2-3 weeks
-- **Target Outcomes**: 40% cost reduction, 99.9% availability
-- **Primary Technology**: Azure Virtual Desktop, Azure AD, Log Analytics
+- **Estimated Deployment**: 12 weeks
+- **Target Outcomes**: Secure remote access, 99.5% availability, 30% support reduction
+- **Primary Technology**: Azure Virtual Desktop, Azure AD, Azure Files, Azure Monitor
+
+---
+
+## Files in This Package
+
+### 1. **cost-breakdown.csv**
+Detailed cost structure with 9 columns showing:
+- Infrastructure costs (VMs, storage, monitoring)
+- Licensing costs (Microsoft 365 E3 per user)
+- Professional services (design, implementation, migration, training)
+- Partner credits applied
+- Year 1 vs. Year 2-3 recurring costs
+
+**Key Metrics:**
+- 100 users at $1,366/user Year 1 ($1,266 net)
+- 100 users at $636/user Year 2-3
+- D4s_v5 VMs: $28,800/year (20 VMs × $120/VM/month)
+- Azure Files Premium: $9,600/year
+
+### 2. **discovery-questionnaire.csv**
+Comprehensive discovery questionnaire with 22 questions across:
+- Current Environment (5 questions)
+- Security & Compliance (4 questions)
+- User & Support (4 questions)
+- Infrastructure (5 questions)
+- Migration (2 questions)
+- Budget (2 questions)
+
+Use this to gather customer requirements before the design phase.
+
+### 3. **solution-briefing.md**
+10-slide executive presentation covering:
+1. Executive Summary
+2. Current State & Business Challenge
+3. Solution Architecture (with ASCII diagram)
+4. Technical Implementation
+5. Key Differentiators
+6. Implementation Approach (12-week phased timeline)
+7. **Investment Summary** (7-column cost table)
+8. ROI & Business Value
+9. Risk Mitigation
+10. Next Steps & Call-to-Action
+
+**Includes:** ASCII architecture diagram and cost breakdown table
+
+### 4. **statement-of-work.md**
+Formal SOW document with:
+- Executive Overview
+- Business Objectives (5 key objectives)
+- Solution Architecture Details
+- Scope of Work (6 phases)
+- Out-of-Scope Items
+- Detailed Investment Summary (6 tables)
+- Roles & Responsibilities
+- 12-week Timeline with Milestones
+- Success Criteria & KPIs
+- Change Management & Risk Mitigation
+- Support & Transition Plan
+- Terms & Conditions
+
+**Includes:** Consolidated investment summary with Year 1 and Year 2-3 costs
+
+### 5. **DIAGRAM_REQUIREMENTS.md**
+Specification document for architecture diagrams:
+- Simple design (6-8 components maximum)
+- 4-5 data flows
+- Component specifications
+- Visual style guidelines
+- Export requirements (PNG @ 1920x1200, Draw.io XML)
+- Validation checklist
+
+### 6. **generate_diagram.py**
+Python script to generate both:
+- **Draw.io XML** (.drawio file) - Fully editable in Draw.io
+- **PNG image** (.png file) - High-resolution (1920x1200) ready for presentations
+
+**Requirements:**
+- Python 3.6+
+- PIL/Pillow (for PNG generation): `pip install Pillow`
+
+**Usage:**
+```bash
+python generate_diagram.py
+```
+
+### 7. **architecture-diagram.drawio**
+Editable Draw.io XML file containing the complete AVD architecture diagram:
+- All 8 components (Users, Azure AD, Host Pool, Azure Files, Monitor, etc.)
+- 5 labeled data flows
+- Simple, clean design following requirements
+- Color-coded by component type
+
+### 8. **architecture-diagram.png**
+High-resolution PNG image (1920x1200) of the complete architecture:
+- Ready for presentations and documents
+- Clear, large text and components
+- Professional design
+- Legend and component labels
 
 ---
 

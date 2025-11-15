@@ -1,0 +1,31 @@
+Cost Category,Description,Year 1 List,Azure/Partner Credit,Year 1 Net,Year 2,Year 3,3-Year Total,Credit Comments
+Cloud Infrastructure,Azure Blob Storage Hot Tier (1TB for document storage),$240,$0,$240,$240,$240,$720,
+Cloud Infrastructure,Azure AI Document Intelligence - Layout API (50k pages/month @ $0.15/page),$9000,$2700,$6300,$9000,$9000,$24300,Azure AI Services Credit - 30% Year 1 consumption
+Cloud Infrastructure,Azure AI Document Intelligence - Prebuilt Models (25k pages/month @ $0.10/page),$3000,$900,$2100,$3000,$3000,$8100,Azure AI Services Credit - 30% Year 1
+Cloud Infrastructure,Azure Cognitive Services - Text Analytics (25k units/month @ $0.001/unit),$300,$90,$210,$300,$300,$810,Azure AI Services Credit - 30% Year 1
+Cloud Infrastructure,Azure Functions Premium Plan (EP1 - 1 instance),$1920,$0,$1920,$1920,$1920,$5760,
+Cloud Infrastructure,Azure Cosmos DB - Serverless (10GB storage + 50k RU/s),$720,$0,$720,$720,$720,$2160,
+Cloud Infrastructure,Azure API Management - Consumption tier (5M API calls/month),$360,$0,$360,$360,$360,$1080,
+Cloud Infrastructure,Azure Service Bus Standard (10M messages/month),$120,$0,$120,$120,$120,$360,
+Cloud Infrastructure,Azure Event Grid (2M events/month),$48,$0,$48,$48,$48,$144,
+Cloud Infrastructure,Azure Monitor + Log Analytics (50GB logs/month),$1200,$0,$1200,$1200,$1200,$3600,
+Cloud Infrastructure,Azure Logic Apps Standard (100k workflow runs/month),$480,$0,$480,$480,$480,$1440,
+Cloud Infrastructure,Azure Cache for Redis - Basic C1 (1GB),$180,$0,$180,$180,$180,$540,
+Cloud Infrastructure,Azure Key Vault - Standard tier (10 secrets + 5k operations),$60,$0,$60,$60,$60,$180,
+Cloud Infrastructure,Azure Virtual Network - NAT Gateway (single zone),$480,$0,$480,$480,$480,$1440,
+Cloud Infrastructure,Azure Bandwidth - Data Transfer Out (500GB/month),$420,$0,$420,$420,$420,$1260,
+Software Licenses,Azure AI Custom Vision for document classification (optional),$600,$0,$600,$600,$600,$1800,
+Software Licenses,Datadog Pro monitoring (3 instances),$828,$0,$828,$828,$828,$2484,
+Software Licenses,PagerDuty Professional incident management (3 users),$1476,$0,$1476,$1476,$1476,$4428,
+Professional Services,Discovery & Assessment - requirements gathering and analysis (40 hours @ $200/hr),$8000,$0,$8000,$0,$0,$8000,
+Professional Services,Solution Architecture & Design - Azure architecture and documentation (60 hours @ $225/hr),$13500,$5000,$8500,$0,$0,$8500,Microsoft Partner Services Credit
+Professional Services,Infrastructure Deployment - Azure environment setup and security (60 hours @ $200/hr),$12000,$0,$12000,$0,$0,$12000,
+Professional Services,AI Model Configuration - Document Intelligence and Text Analytics setup (80 hours @ $225/hr),$18000,$5000,$13000,$0,$0,$13000,Microsoft Partner Services Credit
+Professional Services,Application Development - workflow orchestration and API integration (40 hours @ $175/hr),$7000,$0,$7000,$0,$0,$7000,
+Professional Services,Testing & Quality Assurance - functional and accuracy validation (30 hours @ $175/hr),$5250,$0,$5250,$0,$0,$5250,
+Professional Services,Data Migration & Integration - legacy system integration (20 hours @ $175/hr),$3500,$0,$3500,$0,$0,$3500,
+Professional Services,Training & Knowledge Transfer - admin and user training (16 hours @ $175/hr),$2800,$0,$2800,$0,$0,$2800,
+Professional Services,Project Management - coordination and stakeholder management (40 hours @ $200/hr),$8000,$0,$8000,$0,$0,$8000,
+Professional Services,Hypercare Support (30 days post-launch) - stabilization support (24 hours @ $175/hr),$4200,$0,$4200,$0,$0,$4200,
+Support & Maintenance,Azure managed services and monitoring (15% of cloud infrastructure),$2670,$0,$2670,$2670,$2670,$8010,
+Total Investment,,$106352,$13690,$92662,$24102,$24102,$140866,Year 1 credits reduce net investment by 13%

@@ -1,0 +1,18 @@
+Cost Category,Description,Year 1 List,Azure/Partner Credit,Year 1 Net,Year 2,Year 3,3-Year Total,Credit Comments
+Cloud Infrastructure,Azure Virtual WAN Standard (2 regional hubs),$4400,$0,$4400,$4400,$4400,$13200,Per-hub monthly rate for hub connectivity and routing
+Cloud Infrastructure,Azure VPN Gateway (10 branch connections @ $438/year each),$4400,$0,$4400,$4400,$4400,$13200,Standard VPN gateway for site-to-site connectivity
+Cloud Infrastructure,ExpressRoute Standard Circuit (2 circuits @ $9000/year each),$18000,$0,$18000,$18000,$18000,$54000,Direct private connection for mission-critical traffic
+Cloud Infrastructure,Azure Firewall Premium (2 instances for redundancy @ $7665/year each),$15300,$0,$15300,$15300,$15300,$45900,Premium tier with advanced threat protection and logging
+Cloud Infrastructure,Azure Monitor and Logging (centralized monitoring across hubs),$2400,$0,$2400,$2400,$2400,$7200,Application Insights and Log Analytics for network observability
+Cloud Infrastructure,Data Transfer Out (inter-region and internet egress @ $6K/year),$6000,$0,$6000,$6000,$6000,$18000,Bandwidth charges for branch-to-hub and hub-to-internet traffic
+Software Licenses,Azure Backup and Disaster Recovery (2 hub regions),$3600,$0,$3600,$3600,$3600,$10800,Backup and geo-redundancy for network configurations
+Professional Services,Network Discovery & Requirements Gathering (40 hours @ $200/hr),$8000,$0,$8000,$0,$0,$8000,Assess current network topology and pain points
+Professional Services,Azure Virtual WAN Architecture & Design (60 hours @ $250/hr),$15000,$6000,$9000,$0,$0,$9000,Azure Partner Architecture Credit - hub design and branch connectivity strategy
+Professional Services,Infrastructure Deployment & Configuration (80 hours @ $225/hr),$18000,$6000,$12000,$0,$0,$12000,Azure Partner Services Credit - hub setup and VPN/ExpressRoute provisioning
+Professional Services,Network Security Configuration (50 hours @ $225/hr),$11250,$0,$11250,$0,$0,$11250,Firewall policies and DDoS protection setup
+Professional Services,Branch Migration & Connectivity (70 hours @ $200/hr),$14000,$0,$14000,$0,$0,$14000,Migrate branch offices to Virtual WAN architecture
+Professional Services,Testing & Validation (40 hours @ $175/hr),$7000,$0,$7000,$0,$0,$7000,Performance testing and failover validation across branches
+Professional Services,Training & Knowledge Transfer (30 hours @ $200/hr),$6000,$0,$6000,$0,$0,$6000,Network team training on Virtual WAN management and operations
+Professional Services,Project Management & Coordination (50 hours @ $225/hr),$11250,$0,$11250,$0,$0,$11250,End-to-end project delivery coordination
+Support & Maintenance,Azure hybrid connectivity support and monitoring (25% of hub infrastructure annual),$11450,$0,$11450,$11450,$11450,$34350,Ongoing support for Virtual WAN and branch connectivity health
+Total Investment,,$152050,$12000,$140050,$48150,$48150,$236350,Year 1 credits reduce net investment by 8%

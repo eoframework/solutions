@@ -1,0 +1,14 @@
+Cost Category,Description,Year 1 List,Azure/Partner Credits,Year 1 Net,Year 2,Year 3,3-Year Total,Credit Comments
+Cloud Infrastructure,Windows 11 Multi-Session VMs - D4s_v5 (20 VMs for 100 users 8 hrs/day),$28800,$0,$28800,$28800,$28800,$86400,100 users with shared session hosting
+Cloud Infrastructure,Azure Files Premium (FSLogix 500GB user profiles storage),$9600,$0,$9600,$9600,$9600,$28800,Profile containers and Office container storage
+Software Licenses,Microsoft 365 E3 (100 users @ $240/user/year),$24000,$0,$24000,$24000,$24000,$72000,Includes Office and security capabilities
+Cloud Infrastructure,Azure Monitor (diagnostics logs performance metrics),$1200,$0,$1200,$1200,$1200,$3600,Log Analytics and performance monitoring
+Professional Services,Discovery & Assessment (requirements gathering analysis - 30 hours @ $250/hr),$7500,$0,$7500,$0,$0,$7500,Current state evaluation
+Professional Services,Solution Architecture & Design (AVD architecture documentation - 60 hours @ $250/hr),$15000,$2500,$12500,$0,$0,$12500,Azure Partner Services Credit
+Professional Services,Infrastructure Deployment (Azure environment setup security configuration - 80 hours @ $250/hr),$20000,$3500,$16500,$0,$0,$16500,Azure Partner Services Credit - infrastructure setup
+Professional Services,AVD Session Host Deployment (VM configuration FSLogix setup - 40 hours @ $225/hr),$9000,$1000,$8000,$0,$0,$8000,Partner credit for infrastructure
+Professional Services,Migration Services (user profile migration connectivity testing - 50 hours @ $250/hr),$12500,$2000,$10500,$0,$0,$10500,Data migration support
+Professional Services,Training & Knowledge Transfer (administrator and user training - 32 hours @ $200/hr),$6400,$1000,$5400,$0,$0,$5400,Enablement services
+Professional Services,Project Management & Hypercare (coordination and 30-day post-launch support - 40 hours @ $200/hr),$8000,$0,$8000,$0,$0,$8000,30-day hypercare period
+Support & Maintenance,Azure support and AVD monitoring (15% of cloud infrastructure),$5184,$0,$5184,$5184,$5184,$15552,Ongoing operations and monitoring
+Total Investment,,$147684,$10000,$137684,$64784,$64784,$267252,Year 1 credits reduce net investment by 7%

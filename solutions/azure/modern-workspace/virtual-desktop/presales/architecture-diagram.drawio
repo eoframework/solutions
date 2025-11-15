@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxfile host="app.diagrams.net" modified="2025-11-15" agent="5.0" version="24.0.0" type="device">
+  <diagram id="diagram-avd-architecture" name="AVD Architecture">
+    <mxGraphModel dx="1200" dy="800" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1920" pageHeight="1200" math="0" shadow="0">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+
+        <!-- VNet Background -->
+        <mxCell id="vnet-bg" value="Azure Virtual Network" style="rounded=1;whiteSpace=wrap;html=1;strokeWidth=2;strokeDasharray=5,5;fillColor=none;strokeColor=#0078D4;fontSize=14;fontStyle=bold;arcSize=10;" vertex="1" parent="1">
+          <mxGeometry x="50" y="50" width="1820" height="1100" as="geometry"/>
+        </mxCell>
+
+        <!-- Users (Top-Left) -->
+        <mxCell id="users" value="100 Users&#10;(Global)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F5F5F5;strokeColor=#333333;strokeWidth=2;fontSize=14;fontStyle=bold;" vertex="1" parent="1">
+          <mxGeometry x="100" y="100" width="180" height="120" as="geometry"/>
+        </mxCell>
+
+        <!-- Azure AD (Top-Center) -->
+        <mxCell id="aad" value="Azure AD&#10;Authentication &amp; SSO" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0078D4;strokeColor=#003366;strokeWidth=2;fontSize=13;fontStyle=bold;fontColor=#FFFFFF;" vertex="1" parent="1">
+          <mxGeometry x="450" y="100" width="200" height="120" as="geometry"/>
+        </mxCell>
+
+        <!-- M365 Apps (Top-Right) -->
+        <mxCell id="apps" value="M365 Apps&#10;&amp; Services" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0078D4;strokeColor=#003366;strokeWidth=2;fontSize=13;fontStyle=bold;fontColor=#FFFFFF;" vertex="1" parent="1">
+          <mxGeometry x="1600" y="100" width="200" height="120" as="geometry"/>
+        </mxCell>
+
+        <!-- AVD Host Pool (Center) -->
+        <mxCell id="hostpool-container" value="AVD Host Pool&#10;20 x D4s_v5 VMs (Windows 11 Multi-Session)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#D4E6FF;strokeColor=#0078D4;strokeWidth=3;fontSize=13;fontStyle=bold;" vertex="1" parent="1">
+          <mxGeometry x="400" y="350" width="1100" height="320" as="geometry"/>
+        </mxCell>
+
+        <!-- VM Boxes inside Host Pool -->
+        <mxCell id="vm1" value="Session Host VM&#n5 users/VM" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0078D4;strokeColor=#003366;strokeWidth=2;fontSize=11;fontColor=#FFFFFF;" vertex="1" parent="1">
+          <mxGeometry x="440" y="390" width="140" height="100" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="vm2" value="Session Host VM&#n5 users/VM" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0078D4;strokeColor=#003366;strokeWidth=2;fontSize=11;fontColor=#FFFFFF;" vertex="1" parent="1">
+          <mxGeometry x="620" y="390" width="140" height="100" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="vm3" value="Session Host VM&#n5 users/VM" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0078D4;strokeColor=#003366;strokeWidth=2;fontSize=11;fontColor=#FFFFFF;" vertex="1" parent="1">
+          <mxGeometry x="800" y="390" width="140" height="100" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="vm-more" value="...&#10;(17 more VMs)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0078D4;strokeColor=#003366;strokeWidth=2;fontSize=11;fontColor=#FFFFFF;" vertex="1" parent="1">
+          <mxGeometry x="980" y="390" width="140" height="100" as="geometry"/>
+        </mxCell>
+
+        <!-- Load Balancer info -->
+        <mxCell id="lb-info" value="Session Broker&#n(Load Balancing)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#107C10;strokeColor=#003366;strokeWidth=2;fontSize=11;fontColor=#FFFFFF;" vertex="1" parent="1">
+          <mxGeometry x="600" y="520" width="160" height="80" as="geometry"/>
+        </mxCell>
+
+        <!-- Azure Files (Bottom-Left) -->
+        <mxCell id="files" value="Azure Files Premium&#n500GB - FSLogix Profiles" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0078D4;strokeColor=#003366;strokeWidth=2;fontSize=13;fontStyle=bold;fontColor=#FFFFFF;" vertex="1" parent="1">
+          <mxGeometry x="100" y="820" width="220" height="130" as="geometry"/>
+        </mxCell>
+
+        <!-- Azure Monitor (Bottom-Right) -->
+        <mxCell id="monitor" value="Azure Monitor&#n&amp; Log Analytics" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0078D4;strokeColor=#003366;strokeWidth=2;fontSize=13;fontStyle=bold;fontColor=#FFFFFF;" vertex="1" parent="1">
+          <mxGeometry x="1580" y="820" width="220" height="130" as="geometry"/>
+        </mxCell>
+
+        <!-- Data Flows -->
+
+        <!-- Flow 1: Users to Azure AD -->
+        <mxCell id="flow1-line" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#003366;strokeWidth=2.5;dashed=0;endArrow=classic;endFill=1;" edge="1" parent="1" source="users" target="aad">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="flow1-label" value="Authentication Request" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=11;fontStyle=italic;" vertex="1" connectedEdge="flow1-line" parent="1">
+          <mxGeometry x="275" y="80" as="geometry"/>
+        </mxCell>
+
+        <!-- Flow 2: Azure AD to Host Pool -->
+        <mxCell id="flow2-line" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#003366;strokeWidth=2.5;dashed=0;endArrow=classic;endFill=1;" edge="1" parent="1" source="aad" target="hostpool-container">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="flow2-label" value="Session Broker Assignment" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=11;fontStyle=italic;" vertex="1" connectedEdge="flow2-line" parent="1">
+          <mxGeometry x="475" y="280" as="geometry"/>
+        </mxCell>
+
+        <!-- Flow 3: Apps to Host Pool -->
+        <mxCell id="flow3-line" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#107C10;strokeWidth=2.5;dashed=0;endArrow=classic;endFill=1;" edge="1" parent="1" source="apps" target="hostpool-container">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="flow3-label" value="Apps &amp; Data Access" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=11;fontStyle=italic;" vertex="1" connectedEdge="flow3-line" parent="1">
+          <mxGeometry x="1545" y="280" as="geometry"/>
+        </mxCell>
+
+        <!-- Flow 4: Host Pool to Files (Bidirectional) -->
+        <mxCell id="flow4-line" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#003366;strokeWidth=2.5;dashed=0;endArrow=classic;endFill=1;" edge="1" parent="1" source="hostpool-container" target="files">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="flow4-label" value="FSLogix Profile Sync" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=11;fontStyle=italic;" vertex="1" connectedEdge="flow4-line" parent="1">
+          <mxGeometry x="250" y="720" as="geometry"/>
+        </mxCell>
+
+        <!-- Flow 5: Host Pool to Monitor -->
+        <mxCell id="flow5-line" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#107C10;strokeWidth=2.5;dashed=0;endArrow=classic;endFill=1;" edge="1" parent="1" source="hostpool-container" target="monitor">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="flow5-label" value="Telemetry &amp; Audit Logs" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=11;fontStyle=italic;" vertex="1" connectedEdge="flow5-line" parent="1">
+          <mxGeometry x="1490" y="720" as="geometry"/>
+        </mxCell>
+
+        <!-- Legend -->
+        <mxCell id="legend-bg" value="Legend: Blue = Azure Service | Green = Flow | Gray = External" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#EEEEEE;strokeColor=#999999;strokeWidth=1;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="100" y="1000" width="1720" height="40" as="geometry"/>
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

@@ -1,20 +1,23 @@
-Category,Item,Description,Unit,Qty_Small,Qty_Medium,Qty_Large,Qty_Working,Unit_Cost,Billing_Cycle,Year_1,Year_2,Year_3,Sizing_Notes
-Cloud Infrastructure,Azure VM Standard_D4s_v5 (Web Tier),4 vCPU 16GB RAM for web/presentation layer,Instance,1,2,6,1,138,Monthly,1656.00,1656.00,1656.00,"Small: 1 instance, Medium: 2 instances (HA), Large: 6 instances (multi-region)"
-Cloud Infrastructure,Azure VM Standard_D8s_v5 (App Tier),8 vCPU 32GB RAM for application/business logic layer,Instance,1,2,6,1,276,Monthly,3312.00,3312.00,3312.00,"Small: 1 instance, Medium: 2 instances (HA), Large: 6 instances (multi-region)"
-Cloud Infrastructure,Azure SQL Database Standard S3,Managed SQL database with 100 DTUs for data tier,Instance,1,1,2,1,200,Monthly,2400.00,2400.00,2400.00,"Small/Medium: Single database, Large: 2 databases (read replicas)"
-Cloud Infrastructure,Azure Redis Cache Standard C2,2.5GB cache for session state and data caching,Instance,1,1,1,1,75,Monthly,900.00,900.00,900.00,All sizes: Single cache instance sufficient
-Cloud Infrastructure,Azure Load Balancer Standard,Standard tier load balancer for web tier,Instance,1,1,1,1,25,Monthly,300.00,300.00,300.00,All sizes: Single load balancer
-Cloud Infrastructure,Azure Application Gateway WAF_v2,Web application firewall with SSL offloading,Instance,0,1,1,0,150,Monthly,0.00,0.00,0.00,"Small: Not included, Medium/Large: WAF protection"
-Cloud Infrastructure,Azure Blob Storage Standard,Object storage for files backups and logs,GB,500,2000,10000,500,0.0184,Monthly,110.40,110.40,110.40,Storage scales with data volume and user base
-Cloud Infrastructure,Azure CDN Standard,Content delivery network for static assets,GB,100,500,2000,100,0.081,Monthly,97.20,97.20,97.20,CDN bandwidth scales with user traffic
-Cloud Infrastructure,Azure Virtual Network Gateway VpnGw2,Site-to-site VPN for hybrid connectivity,Instance,0,1,1,0,250,Monthly,0.00,0.00,0.00,"Small: Not included, Medium/Large: Hybrid connectivity"
-Cloud Infrastructure,Azure Monitor,Application insights and log analytics,GB,5,20,100,5,2.30,Monthly,138.00,138.00,138.00,Log volume increases with scale and detail level
-Software Licenses & Subscriptions,Microsoft 365 Business Standard,Productivity suite for end users,Users,25,100,300,25,12.50,Monthly,3750.00,3750.00,3750.00,Per-user licensing based on organization size
-Software Licenses & Subscriptions,Azure DevOps Services Basic,Development platform and CI/CD pipelines,Users,5,10,25,5,6,Monthly,360.00,360.00,360.00,Development team size scales with project complexity
-Software Licenses & Subscriptions,GitHub Enterprise,Source code management and collaboration,Users,5,10,25,5,21,Monthly,1260.00,1260.00,1260.00,Development team licensing
-Software Licenses & Subscriptions,Datadog Pro,APM and infrastructure monitoring,Host,5,15,40,5,23,Monthly,1380.00,1380.00,1380.00,Monitoring hosts scale with infrastructure
-Software Licenses & Subscriptions,Auth0 Professional,Identity and access management platform,Users,1000,5000,20000,1000,0.07,Monthly,840.00,840.00,840.00,Monthly Active Users (MAU) pricing
-Software Licenses & Subscriptions,SendGrid Pro,Transactional email delivery service,Emails,50000,200000,1000000,50000,0.0001,Monthly,60.00,60.00,60.00,Email volume based on user activity
-Support & Maintenance,Azure Professional Direct Support,24x7 Azure support with 1-hour response,Instance,0,1,1,0,1000,Monthly,0.00,0.00,0.00,"Small: Community support, Medium/Large: Professional support"
-Support & Maintenance,Datadog Support,Standard support included in Pro tier,Included,1,1,1,1,0,Monthly,0.00,0.00,0.00,Support included with Datadog Pro subscription
-Support & Maintenance,Application Performance Tuning,Quarterly performance review and optimization,Hours,0,8,16,0,200,Quarterly,0.00,0.00,0.00,"Small: None, Medium: 8 hours/quarter, Large: 16 hours/quarter"
+Cost Category,Description,Year 1 List,Provider/Partner Credit,Year 1 Net,Year 2,Year 3,3-Year Total,Credit Comments
+Professional Services,Solution architecture & design (120 hours @ $200/hr),$24000,$5000,$19000,$0,$0,$19000,Partner Services Credit - architecture design and planning
+Professional Services,Infrastructure deployment & configuration (100 hours @ $175/hr),$17500,$0,$17500,$0,$0,$17500,
+Professional Services,Application development & integration (80 hours @ $175/hr),$14000,$0,$14000,$0,$0,$14000,
+Professional Services,Testing & quality assurance (40 hours @ $150/hr),$6000,$0,$6000,$0,$0,$6000,
+Professional Services,Training & documentation (20 hours @ $140/hr),$2800,$0,$2800,$0,$0,$2800,
+Cloud Infrastructure,Virtual Machine Standard Tier - Web/App tier (2 instances 4vCPU 16GB each),$4968,$0,$4968,$4968,$4968,$14904,
+Cloud Infrastructure,Virtual Machine High Performance - Database tier (1 instance 8vCPU 32GB),$3312,$0,$3312,$3312,$3312,$9936,
+Cloud Infrastructure,Managed Database Service Standard Tier (100 capacity units),$2400,$720,$1680,$2400,$2400,$6480,Database service credit - 30% Year 1 consumption
+Cloud Infrastructure,Managed Cache Service Standard (2.5GB capacity),$900,$270,$630,$900,$900,$2430,Cache service credit - 30% Year 1 consumption
+Cloud Infrastructure,Load Balancer Standard Tier,$300,$0,$300,$300,$300,$900,
+Cloud Infrastructure,Object Storage Standard Tier (500GB storage),$110,$0,$110,$110,$110,$330,
+Cloud Infrastructure,CDN Service (100GB bandwidth/month),$97,$0,$97,$97,$97,$291,
+Cloud Infrastructure,Monitoring & Logging Service (5GB data ingestion/month),$138,$0,$138,$138,$138,$414,
+Software Licenses & Subscriptions,Productivity Suite Enterprise (25 user licenses),$3750,$0,$3750,$3750,$3750,$11250,No credits on third-party software
+Software Licenses & Subscriptions,DevOps Platform Professional (5 developer seats),$360,$0,$360,$360,$360,$1080,
+Software Licenses & Subscriptions,Source Control Enterprise (5 developer seats),$1260,$0,$1260,$1260,$1260,$3780,No credits on third-party software
+Software Licenses & Subscriptions,APM & Monitoring Tool Professional (5 monitored hosts),$1380,$0,$1380,$1380,$1380,$4140,No credits on third-party software
+Software Licenses & Subscriptions,Identity & Access Management Platform (1000 monthly active users),$840,$0,$840,$840,$840,$2520,No credits on third-party software
+Software Licenses & Subscriptions,Email Delivery Service Professional (50K emails/month),$60,$0,$60,$60,$60,$180,No credits on third-party software
+Support & Maintenance,Cloud provider infrastructure support (monitoring & alerting),$0,$0,$0,$0,$0,$0,Included with cloud services
+Support & Maintenance,Third-party software support (included in licenses),$0,$0,$0,$0,$0,$0,Included with software subscriptions
+Total Investment,,$84175,$5990,$78185,$19875,$19875,$117935,Year 1 credits reduce net investment by 7%

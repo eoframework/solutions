@@ -1,0 +1,61 @@
+Question ID,Category,Sub-Category,Question,Guidance,Customer Response,Notes
+PROJ-001,Project Information,Basic Details,What is the name of your Azure Virtual Desktop solution?,"","",Internal project reference
+PROJ-002,Project Information,Basic Details,What is your company name?,"","",Client identification
+PROJ-003,Project Information,Basic Details,Who is the primary stakeholder for this AVD project?,"","",Main point of contact
+PROJ-004,Project Information,Basic Details,What is the stakeholder's role and decision-making authority?,"","",Decision-making authority
+PROJ-005,Project Information,Basic Details,What is today's date?,"","",Questionnaire completion date
+BUS-001,Business Requirements,Current State,What are your primary drivers for implementing Azure Virtual Desktop?,"Common drivers: Hybrid workforce support, Desktop modernization, Cost optimization, Enhanced security, BYOD enablement, Disaster recovery","",Primary business driver for AVD
+BUS-002,Business Requirements,Current State,What is your current desktop and application delivery model?,"","",Current state assessment
+BUS-003,Business Requirements,Current State,What user profiles do you need to support?,"Common types: Office workers, Knowledge workers, Call center agents, Medical professionals, Developers, Executive users, Contractors","",User classification
+BUS-004,Business Requirements,Current State,How many users need to be migrated to AVD?,"Typical ranges: 50-100, 100-500, 500-1000, 1000+","",User count and scale
+BUS-005,Business Requirements,Current State,What applications and workloads must run on AVD?,"Common applications: Microsoft 365, Line-of-business apps, Industry-specific software, Web applications, Development tools","",Application portfolio
+BUS-006,Business Requirements,Objectives,What are your primary goals for implementing AVD?,"Common goals: Enable hybrid workforce, Reduce IT costs, Improve security posture, Modernize infrastructure, Simplify management, Enable remote access","",Business objectives
+BUS-007,Business Requirements,Objectives,What specific security and compliance requirements must AVD meet?,"","",Security and regulatory requirements
+BUS-008,Business Requirements,Timeline,What is your expected timeline for AVD implementation?,"Typical ranges: 0-3 months, 3-6 months, 6-12 months, 12+ months","",Project timeline expectations
+BUS-009,Business Requirements,Budget,What is your approved budget range for this AVD solution?,"Common ranges: $100K-300K, $300K-750K, $750K-2M, $2M+","",Budget constraints
+BUS-010,Business Requirements,Success Metrics,How will you measure AVD success? (user adoption remote access quality cost reduction),"","",KPI definition
+USER-001,User Requirements,Profiles,What user groups will be using AVD?,"User groups: Corporate workforce, Remote workers, Branch office users, Third-party contractors, Mobile users","",User segmentation
+USER-002,User Requirements,Profiles,What are the performance requirements for each user group?,"Performance needs: Basic (email and web), Standard (Office and LOB apps), High-performance (graphics rendering), Real-time (trading or design)","",Performance expectations
+USER-003,User Requirements,Device Access,What devices will users use to access AVD?,"Device types: Windows PCs, Mac computers, iOS devices, Android devices, Chromebooks, Thin clients, Browser-only","",Client device diversity
+USER-004,User Requirements,Bandwidth,What is the typical user bandwidth availability?,"Bandwidth availability: High speed (corporate LAN), Good (home broadband 100+ Mbps), Limited (4G/5G mobile), Variable (branch offices)","",Network capacity
+USER-005,User Requirements,Printing,What printing and peripheral requirements must AVD support?,"Printing needs: No printing required, Local printers only, Network printers, Specialized printing, Peripheral redirection","",Printing and device redirection
+APP-001,Application Requirements,Portfolio,What is your total application portfolio size?,"Application count: 20-50 apps, 50-100 apps, 100-250 apps, 250+ apps","",Scope of application support
+APP-002,Application Requirements,Compatibility,What percentage of applications are natively compatible with multi-session OS?,"Compatibility levels: 90%+, 70-90%, 50-70%, Less than 50%","",Application modernization assessment
+APP-003,Application Requirements,Critical Apps,What are your mission-critical applications that must run on AVD?,"","",Critical application identification
+APP-004,Application Requirements,Dependencies,Do you have complex application dependencies or integration needs?,"Complexity: Simple standalone apps, Dependent applications, Complex LOB systems, Legacy mainframe integration","",Integration complexity
+APP-005,Application Requirements,Deployment,How do you currently deploy and manage applications?,"Deployment methods: Manual installation, SCCM/Intune, Image-based, Cloud-native, Mix of methods","",Application delivery method
+INFRA-001,Infrastructure Requirements,Network,What is your current network architecture?,"","",Network topology
+INFRA-002,Infrastructure Requirements,Network,What network connectivity exists between locations?,"Connectivity: All sites on same LAN, Connected via VPN, Hybrid cloud connected, Multiple regions","",Network connectivity
+INFRA-003,Infrastructure Requirements,Azure Environment,What Azure services are you currently using?,"Azure services: Nothing, Azure AD only, Compute services, Multiple services, Enterprise-scale","",Current Azure footprint
+INFRA-004,Infrastructure Requirements,Azure Environment,What Azure regions would you prefer for AVD deployment?,"","",Data residency requirements
+INFRA-005,Infrastructure Requirements,Hybrid Cloud,Do you need to integrate with on-premises infrastructure?,"Integration: Cloud-only, Minimal on-premises connectivity, Hybrid connectivity required, Strong on-premises tie-in","",Hybrid connectivity needs
+INFRA-006,Infrastructure Requirements,Infrastructure,What current desktop infrastructure (physical or virtual) will be replaced?,"Infrastructure: Physical desktops, VDI environment, Hybrid setup, Multiple legacy systems","",Infrastructure replacement scope
+SEC-001,Security Requirements,Authentication,What authentication methods must AVD support?,"Authentication methods: Password only, Multi-factor authentication, Windows Hello, FIDO2, Smart cards, Single Sign-On","",Authentication requirements
+SEC-002,Security Requirements,Access Control,What conditional access policies must be enforced?,"Access policies: Location-based, Device compliance-based, Risk-based, Time-based, Application-specific","",Access control complexity
+SEC-003,Security Requirements,Data Protection,What data classification and protection must be applied?,"Data classification: Public only, Internal data, Confidential data, Highly sensitive (PII/PHI), Regulated data","",Data sensitivity
+SEC-004,Security Requirements,Encryption,What encryption standards must be applied?,"Encryption needs: Standard encryption, Enhanced encryption, FIPS 140-2, HIPAA compliance, PCI-DSS compliance","",Encryption requirements
+SEC-005,Security Requirements,Logging,What audit logging and compliance requirements apply?,"Logging needs: Basic activity logs, Detailed audit logs, Real-time threat detection, 24/7 monitoring, Regulatory compliance reporting","",Logging and compliance
+ARCH-001,Architecture,Session Hosts,What VM SKU and sizing requirements do you have?,"VM sizes: D2s, D4s (4vCPU 16GB), D8s (8vCPU 32GB), High-memory (Ev5 series), GPU-enabled (NV series)","",VM sizing requirements
+ARCH-002,Architecture,Session Hosts,What is your preferred deployment model for session hosts?,"Deployment: Shared multi-session (D4s), Personal dedicated (D2s-D4s), Pooled with auto-scaling, Fixed session count","",Session host strategy
+ARCH-003,Architecture,Scaling,What are your peak and average concurrent user requirements?,"User scenarios: 25 peak concurrent, 50-100 peak, 100-500 peak, 500+ peak simultaneous users","",Scaling requirements
+ARCH-004,Architecture,Profile Management,What profile and data persistence strategy do you need?,"Strategy: Stateless (no persistent profiles), FSLogix containers, User profiles on network storage, Hybrid approach","",Profile management approach
+ARCH-005,Architecture,Disaster Recovery,What disaster recovery and business continuity requirements exist?,"DR needs: No specific requirements, RPO 24 hours, RPO < 4 hours, Near real-time replication","",DR/BC requirements
+MGT-001,Management,Monitoring,What monitoring and alerting capabilities do you require?,"Monitoring: Basic availability, Performance metrics, User experience metrics, Proactive anomaly detection","",Monitoring requirements
+MGT-002,Management,Support,What operational support model do you prefer?,"Support models: Self-service, 24/5 support, 24/7 support, Dedicated support team","",Support model preference
+MGT-003,Management,Licensing,Do you have existing Microsoft licensing agreements?,"Licensing: Volume license agreement, Enterprise agreement, No Microsoft licensing, Mixed licensing","",Licensing situation
+MGT-004,Management,Training,What training and change management support do you need?,"Training needs: Online self-service, Instructor-led training, Ongoing coaching, Change management support","",Training requirements
+ORG-001,Organizational,Resources,Who will be the technical lead for this AVD project?,"","",Technical ownership
+ORG-002,Organizational,Resources,What internal resources are available for AVD implementation?,"","",Team availability
+ORG-003,Organizational,Resources,What is your team's experience with Azure and AVD?,"Experience levels: No experience, Basic knowledge, Intermediate, Advanced, Expert","",Training needs assessment
+ORG-004,Organizational,Change Management,How will you handle the transition from existing desktops to AVD?,"","",Change management approach
+ORG-005,Organizational,Change Management,What change management and user communication plan exists?,"","",Stakeholder management
+ORG-006,Organizational,Governance,What approval processes are required for infrastructure changes?,"","",Change approval process
+RISK-001,Risk Assessment,Implementation,What are your main concerns about implementing AVD?,"","",Primary implementation concerns
+RISK-002,Risk Assessment,Implementation,What could cause this AVD project to fail?,"","",Failure mode analysis
+RISK-003,Risk Assessment,User Experience,What concerns do you have about user experience and performance?,"","",UX/performance risks
+RISK-004,Risk Assessment,Migration,What migration risks worry you most?,"","",Migration risk factors
+FUTURE-001,Future State,Vision,What is your long-term vision for virtual desktops?,"","",Future roadmap
+FUTURE-002,Future State,Growth,How do you expect user base and application needs to evolve?,"","",Scalability planning
+FUTURE-003,Future State,Expansion,What future geographies or user groups might need AVD?,"","",Future expansion needs
+VENDOR-001,Vendor Selection,Experience,What AVD and Azure implementation experience do you expect from partners?,"","",Partner requirements
+VENDOR-002,Vendor Selection,Support,What ongoing support do you expect for the AVD solution?,"","",Support expectations

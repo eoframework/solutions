@@ -1,0 +1,225 @@
+<mxfile host="app.diagrams.net" modified="2024-01-15T00:00:00.000Z" agent="Draw.io" version="22.1.0">
+  <diagram name="Azure Enterprise Landing Zone" id="azure-landing-zone">
+    <mxGraphModel dx="1422" dy="794" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="1200" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <!-- Title -->
+        <mxCell id="title" value="Azure Enterprise Landing Zone Architecture" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=20;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="500" y="20" width="600" height="30" as="geometry" />
+        </mxCell>
+
+        <!-- Azure Cloud Boundary -->
+        <mxCell id="azure-cloud" value="Azure Tenant" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontSize=16;fontStyle=1;verticalAlign=top;align=left;spacingLeft=10;" vertex="1" parent="1">
+          <mxGeometry x="40" y="70" width="1520" height="1080" as="geometry" />
+        </mxCell>
+
+        <!-- Management Groups Hierarchy -->
+        <mxCell id="mgmt-groups-cluster" value="Management Groups Hierarchy" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1f0ff;strokeColor=#0078d4;fontSize=14;fontStyle=1;verticalAlign=top;" vertex="1" parent="1">
+          <mxGeometry x="80" y="120" width="700" height="300" as="geometry" />
+        </mxCell>
+
+        <mxCell id="tenant-root" value="Tenant Root Group&#xa;(Azure AD)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="320" y="160" width="220" height="50" as="geometry" />
+        </mxCell>
+
+        <mxCell id="platform-mg" value="Platform Management Group&#xa;(Shared Infrastructure)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="120" y="250" width="200" height="50" as="geometry" />
+        </mxCell>
+
+        <mxCell id="landing-zones-mg" value="Landing Zones MG&#xa;(Application Workloads)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="360" y="250" width="200" height="50" as="geometry" />
+        </mxCell>
+
+        <mxCell id="decommissioned-mg" value="Decommissioned MG&#xa;(Archived Resources)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="600" y="250" width="160" height="50" as="geometry" />
+        </mxCell>
+
+        <!-- Platform Subscriptions -->
+        <mxCell id="mgmt-sub" value="Management&#xa;Subscription" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="1">
+          <mxGeometry x="100" y="340" width="100" height="60" as="geometry" />
+        </mxCell>
+
+        <mxCell id="connectivity-sub" value="Connectivity&#xa;Subscription" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="1">
+          <mxGeometry x="220" y="340" width="100" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- Landing Zone Subscriptions -->
+        <mxCell id="prod-sub" value="Production&#xa;Subscriptions" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="1">
+          <mxGeometry x="360" y="340" width="100" height="60" as="geometry" />
+        </mxCell>
+
+        <mxCell id="nonprod-sub" value="Non-Prod&#xa;Subscriptions" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="1">
+          <mxGeometry x="480" y="340" width="100" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- Hub Network -->
+        <mxCell id="hub-cluster" value="Hub Network (Connectivity Subscription)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=14;fontStyle=1;verticalAlign=top;" vertex="1" parent="1">
+          <mxGeometry x="80" y="480" width="400" height="340" as="geometry" />
+        </mxCell>
+
+        <mxCell id="hub-vnet" value="Hub VNet&#xa;(10.0.0.0/22)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d4edda;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="160" y="520" width="240" height="50" as="geometry" />
+        </mxCell>
+
+        <mxCell id="azure-firewall" value="Azure Firewall Premium&#xa;(Network Security)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" vertex="1" parent="1">
+          <mxGeometry x="100" y="600" width="160" height="50" as="geometry" />
+        </mxCell>
+
+        <mxCell id="vpn-gateway" value="VPN Gateway&#xa;(Site-to-Site)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" vertex="1" parent="1">
+          <mxGeometry x="100" y="670" width="160" height="50" as="geometry" />
+        </mxCell>
+
+        <mxCell id="expressroute" value="ExpressRoute Gateway&#xa;(1 Gbps)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" vertex="1" parent="1">
+          <mxGeometry x="100" y="740" width="160" height="50" as="geometry" />
+        </mxCell>
+
+        <mxCell id="bastion" value="Azure Bastion&#xa;(Secure Access)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" vertex="1" parent="1">
+          <mxGeometry x="300" y="670" width="160" height="50" as="geometry" />
+        </mxCell>
+
+        <!-- Spoke Network - Production -->
+        <mxCell id="spoke-prod-cluster" value="Production Spoke (10.1.0.0/24)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=12;fontStyle=1;verticalAlign=top;" vertex="1" parent="1">
+          <mxGeometry x="540" y="480" width="320" height="160" as="geometry" />
+        </mxCell>
+
+        <mxCell id="app-gateway" value="Application Gateway&#xa;(WAF)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="560" y="520" width="130" height="50" as="geometry" />
+        </mxCell>
+
+        <mxCell id="app-vms" value="Application VMs&#xa;(App Tier)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="710" y="520" width="130" height="50" as="geometry" />
+        </mxCell>
+
+        <mxCell id="private-endpoint" value="Private Endpoints&#xa;(Azure SQL, Storage)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" vertex="1" parent="1">
+          <mxGeometry x="560" y="590" width="280" height="40" as="geometry" />
+        </mxCell>
+
+        <!-- Spoke Network - Non-Production -->
+        <mxCell id="spoke-nonprod-cluster" value="Non-Prod Spoke (10.1.1.0/24)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=12;fontStyle=1;verticalAlign=top;" vertex="1" parent="1">
+          <mxGeometry x="540" y="660" width="320" height="100" as="geometry" />
+        </mxCell>
+
+        <mxCell id="dev-vms" value="Dev/Test VMs" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff4e6;strokeColor=#d79b00;" vertex="1" parent="1">
+          <mxGeometry x="560" y="700" width="280" height="40" as="geometry" />
+        </mxCell>
+
+        <!-- Security & Monitoring -->
+        <mxCell id="security-cluster" value="Security & Monitoring (Management Subscription)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=14;fontStyle=1;verticalAlign=top;" vertex="1" parent="1">
+          <mxGeometry x="920" y="480" width="400" height="340" as="geometry" />
+        </mxCell>
+
+        <mxCell id="log-analytics" value="Log Analytics Workspace&#xa;(Centralized Logging)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff4e6;strokeColor=#d79b00;" vertex="1" parent="1">
+          <mxGeometry x="940" y="520" width="360" height="50" as="geometry" />
+        </mxCell>
+
+        <mxCell id="sentinel" value="Azure Sentinel&#xa;(SIEM/SOAR)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" vertex="1" parent="1">
+          <mxGeometry x="940" y="590" width="170" height="50" as="geometry" />
+        </mxCell>
+
+        <mxCell id="defender" value="Microsoft Defender&#xa;for Cloud" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" vertex="1" parent="1">
+          <mxGeometry x="1130" y="590" width="170" height="50" as="geometry" />
+        </mxCell>
+
+        <mxCell id="azure-policy" value="Azure Policy&#xa;(Governance)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="940" y="660" width="170" height="50" as="geometry" />
+        </mxCell>
+
+        <mxCell id="keyvault" value="Azure Key Vault&#xa;(Secrets)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" vertex="1" parent="1">
+          <mxGeometry x="1130" y="660" width="170" height="50" as="geometry" />
+        </mxCell>
+
+        <mxCell id="app-insights" value="Azure Monitor&#xa;(Metrics & Alerts)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff4e6;strokeColor=#d79b00;" vertex="1" parent="1">
+          <mxGeometry x="940" y="730" width="360" height="50" as="geometry" />
+        </mxCell>
+
+        <!-- Identity -->
+        <mxCell id="identity-cluster" value="Identity &amp; Access Management" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=14;fontStyle=1;verticalAlign=top;" vertex="1" parent="1">
+          <mxGeometry x="920" y="120" width="400" height="180" as="geometry" />
+        </mxCell>
+
+        <mxCell id="azure-ad" value="Azure Active Directory&#xa;(Conditional Access + MFA)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1">
+          <mxGeometry x="940" y="160" width="360" height="50" as="geometry" />
+        </mxCell>
+
+        <mxCell id="pim" value="Privileged Identity Mgmt&#xa;(Just-in-Time Access)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" vertex="1" parent="1">
+          <mxGeometry x="940" y="230" width="170" height="50" as="geometry" />
+        </mxCell>
+
+        <mxCell id="rbac" value="RBAC&#xa;(Role Assignments)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" vertex="1" parent="1">
+          <mxGeometry x="1130" y="230" width="170" height="50" as="geometry" />
+        </mxCell>
+
+        <!-- On-Premises -->
+        <mxCell id="onprem" value="On-Premises&#xa;Data Center" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="80" y="900" width="160" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- Arrows / Data Flows -->
+        <mxCell id="flow-hierarchy1" value="Policy&#xa;Inheritance" style="endArrow=classic;html=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;strokeWidth=2;dashed=1;strokeColor=#0078d4;" edge="1" parent="1" source="tenant-root" target="platform-mg">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="flow-hierarchy2" value="Policy&#xa;Inheritance" style="endArrow=classic;html=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;strokeWidth=2;dashed=1;strokeColor=#0078d4;" edge="1" parent="1" source="tenant-root" target="landing-zones-mg">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="flow-mgmt1" value="" style="endArrow=classic;html=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;strokeWidth=1;" edge="1" parent="1" source="platform-mg" target="mgmt-sub">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="flow-mgmt2" value="" style="endArrow=classic;html=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;strokeWidth=1;" edge="1" parent="1" source="platform-mg" target="connectivity-sub">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="flow-lz1" value="" style="endArrow=classic;html=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;strokeWidth=1;" edge="1" parent="1" source="landing-zones-mg" target="prod-sub">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="flow-lz2" value="" style="endArrow=classic;html=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;strokeWidth=1;" edge="1" parent="1" source="landing-zones-mg" target="nonprod-sub">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="flow-onprem" value="1. Hybrid&#xa;Connectivity" style="endArrow=classic;html=1;exitX=1;exitY=0.5;entryX=0;entryY=1;strokeWidth=3;strokeColor=#d79b00;" edge="1" parent="1" source="onprem" target="expressroute">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="flow-hub-spoke1" value="2. VNet&#xa;Peering" style="endArrow=classic;html=1;exitX=1;exitY=0.5;entryX=0;entryY=0.5;strokeWidth=3;strokeColor=#0078d4;" edge="1" parent="1" source="azure-firewall" target="app-gateway">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="flow-logs1" value="3. Diagnostic&#xa;Logs" style="endArrow=classic;html=1;exitX=1;exitY=0;entryX=0;entryY=0.5;strokeWidth=2;dashed=1;strokeColor=#7FBA00;" edge="1" parent="1" source="hub-vnet" target="log-analytics">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="flow-logs2" value="Logs" style="endArrow=classic;html=1;exitX=1;exitY=0.5;entryX=0;entryY=1;strokeWidth=2;dashed=1;strokeColor=#7FBA00;" edge="1" parent="1" source="app-gateway" target="log-analytics">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="flow-sentinel" value="4. Analytics" style="endArrow=classic;html=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;strokeWidth=2;" edge="1" parent="1" source="log-analytics" target="sentinel">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="flow-identity" value="5. Auth" style="endArrow=classic;html=1;exitX=0;exitY=0.5;entryX=1;entryY=0;strokeWidth=2;dashed=1;strokeColor=#8B008B;" edge="1" parent="1" source="azure-ad" target="app-vms">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Legend -->
+        <mxCell id="legend" value="LEGEND" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontSize=12;fontStyle=1;verticalAlign=top;" vertex="1" parent="1">
+          <mxGeometry x="80" y="1000" width="1240" height="80" as="geometry" />
+        </mxCell>
+
+        <mxCell id="legend-text" value="━━ Solid Line: Network connectivity  |  ╌╌ Dashed Line: Policy/Governance  |  ┈┈ Dotted Line: Auth/Monitoring&#xa;🟦 Blue: Management  |  🟩 Green: Networking  |  🟧 Orange: Security  |  🟪 Purple: Identity" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="100" y="1030" width="1200" height="40" as="geometry" />
+        </mxCell>
+
+        <!-- Instructions Box -->
+        <mxCell id="instructions" value="📝 CUSTOMIZATION INSTRUCTIONS:&#xa;&#xa;1. Replace with actual Azure icons from Draw.io stencils&#xa;2. Update CIDR ranges to match network design&#xa;3. Add additional spokes for specific workloads&#xa;4. Export as PNG: File → Export → PNG" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffcccc;strokeColor=#b85450;fontSize=11;align=left;verticalAlign=top;" vertex="1" parent="1">
+          <mxGeometry x="1360" y="1000" width="200" height="80" as="geometry" />
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

@@ -2,9 +2,9 @@
 presentation_title: Solution Briefing
 solution_name: Test Solution
 presenter_name: Alison Smith
-client_logo: support/doc-templates/assets/logos/client_logo.png
-footer_logo_left: support/doc-templates/assets/logos/consulting_company_logo.png
-footer_logo_right: support/doc-templates/assets/logos/eo-framework-logo-real.png
+client_logo: eof-tools/doc-tools/brands/default/assets/logos/client_logo.png
+footer_logo_left: eof-tools/doc-tools/brands/default/assets/logos/consulting_company_logo.png
+footer_logo_right: eof-tools/doc-tools/brands/default/assets/logos/eo-framework-logo-real.png
 ---
 
 # Solution Briefing Template
@@ -148,21 +148,30 @@ footer_logo_right: support/doc-templates/assets/logos/eo-framework-logo-real.png
 **Total Investment & Value**
 
 <!-- BEGIN COST_SUMMARY_TABLE -->
-| Cost Category | Year 1 | Year 2 | Year 3 | 3-Year Total |
-|---------------|---------|---------|---------|--------------|
-| Professional Services | $364,000 | $0 | $0 | $364,000 |
-| Cloud Infrastructure | $8,914 | $8,914 | $8,914 | $26,741 |
-| Software Licenses & Subscriptions | $7,650 | $7,650 | $7,650 | $22,950 |
-| Support & Maintenance | $0 | $0 | $0 | $0 |
-| **TOTAL INVESTMENT** | **$380,564** | **$16,564** | **$16,564** | **$413,691** |
+| Cost Category | Year 1 List | Provider/Partner Credits | Year 1 Net | Year 2 | Year 3 | 3-Year Total |
+|---------------|-------------|-------------------------|------------|---------|---------|-----------------|
+| Cloud Infrastructure | $12,225 | ($990) | $11,235 | $12,225 | $12,225 | $35,685 |
+| Professional Services | $64,300 | ($5,000) | $59,300 | $0 | $0 | $59,300 |
+| Software Licenses & Subscriptions | $7,650 | $0 | $7,650 | $7,650 | $7,650 | $22,950 |
+| Support & Maintenance | $0 | $0 | $0 | $0 | $0 | $0 |
+| **TOTAL INVESTMENT** | **$84,175** | **($5,990)** | **$78,185** | **$19,875** | **$19,875** | **$117,935** |
 <!-- END COST_SUMMARY_TABLE -->
 
-**Annual Operating Costs (Years 2-3):** $180,000/year
-- Cloud Infrastructure: $48,000/year
-- Software Licenses & Subscriptions: $108,000/year
-- Support & Maintenance: $24,000/year
+**Provider/Partner Credits Breakdown (Year 1 Only):**
+- **Partner Services Credit:** $5,000 (applied to architecture design and planning)
+- **Database Service Credit:** $720 (30% discount on Year 1 managed database consumption)
+- **Cache Service Credit:** $270 (30% discount on Year 1 cache service consumption)
+- **Total Credits Applied:** $5,990
 
-**Total 3-Year TCO:** $999,000
+**Note:** Credits are typically one-time, Year 1 only. Adjust based on your cloud provider's programs (e.g., AWS MAP, Azure Credits, GCP Credits).
+<!-- END COST_SUMMARY_TABLE -->
+
+**Annual Operating Costs (Years 2-3):** $19,875/year
+- Cloud Infrastructure: $12,225/year
+- Software Licenses & Subscriptions: $7,650/year
+- Support & Maintenance: $0/year
+
+**Total 3-Year TCO:** $117,935
 
 Detailed cost breakdown including equipment specifications, cloud consumption estimates, software licensing, and support contracts is provided in cost-breakdown.xlsx.
 
@@ -170,9 +179,9 @@ Detailed cost breakdown including equipment specifications, cloud consumption es
 
 *Value Positioning:*
 - Frame as investment with measurable returns, not just cost
-- Highlight $40K in credits reduces Year 1 investment by 10%
-- Emphasize 14-month payback means ROI achieved within first contract year
-- Annual benefits of $420K far exceed ongoing costs of $144K
+- Highlight $6K in credits reduces Year 1 investment by 7%
+- Show how Year 1 net investment of $78K delivers ongoing value
+- Annual operating costs of $20K far lower than initial implementation
 
 *Cost Breakdown Strategy:*
 - Walk through each cost item explaining value delivered
@@ -188,9 +197,9 @@ Detailed cost breakdown including equipment specifications, cloud consumption es
 - "What's included in support?" - Detail 24/7 coverage, proactive monitoring, optimization
 
 *Talking Points:*
-- Compare $364K investment to cost of status quo from Business Opportunity slide
-- Show how 285% ROI translates to $1.2M net value over 3 years
+- Compare $78K Year 1 net investment to cost of status quo from Business Opportunity slide
 - Position credits as evidence of our vendor relationships and negotiating power
+- 3-year TCO of $118K provides long-term predictable costs
 - Emphasize transparent pricing with no hidden costs or surprises
 - Offer to provide detailed line-item breakdown in follow-up meeting
 
@@ -314,10 +323,10 @@ Detailed cost breakdown including equipment specifications, cloud consumption es
 
 **Slide 8 - Investment Summary:**
 - Walk through the cost table line by line, explaining value of each component
-- Highlight the $40K in credits (10% savings) from partner programs
+- Highlight the $6K in credits (7% savings) from partner programs
 - Emphasize transparency - all costs shown including credits and discounts
-- Focus on ROI metrics: 14-month payback, 285% 3-year ROI, $1.2M net value
-- Compare $364K Year 1 investment to cost of inaction from Business Opportunity
+- Show Year 1 net investment of $78K vs. $84K list price
+- Compare to cost of inaction from Business Opportunity
 - Position as investment with measurable returns, not expense
 - Reference detailed speaker notes on slide for handling objections
 - Have line-item breakdown ready if deeper financial questions arise

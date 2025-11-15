@@ -1,0 +1,52 @@
+Question ID,Category,Sub-Category,Question,Guidance,Customer Response,Notes
+PROJ-001,Project Information,Basic Details,What is the solution name?,"","",Internal project reference
+PROJ-002,Project Information,Basic Details,What is your company name?,"","",Client identification
+PROJ-003,Project Information,Basic Details,Who is the primary stakeholder for this project?,"","",Main point of contact
+PROJ-004,Project Information,Basic Details,What is the stakeholder's role?,"","",Decision-making authority
+PROJ-005,Project Information,Basic Details,What is today's date?,"","",Questionnaire completion date
+BUS-001,Business Requirements,Current State,What is the current challenge or pain point this solution aims to address?,"Common challenges: Network complexity across multiple locations, slow WAN performance, high branch connectivity costs, limited visibility into network traffic, security concerns at branch offices","",Primary business driver
+BUS-002,Business Requirements,Current State,What systems or processes are currently in place?,"","",Current network infrastructure assessment
+BUS-003,Business Requirements,Current State,What is working well with the current setup?,"","",Strengths to preserve
+BUS-004,Business Requirements,Current State,What are the specific limitations or failures?,"","",Network pain points to address
+BUS-005,Business Requirements,Objectives,What are the primary business goals for this project?,"Common goals: Centralize WAN management, reduce bandwidth costs, improve branch office security, enable cloud application access, simplify network operations, achieve 99.9% availability","",Business objectives
+BUS-006,Business Requirements,Objectives,What does success look like? (Measurable outcomes),"","",Success criteria definition
+BUS-007,Business Requirements,Timeline,What is the expected timeline for implementation?,"Typical ranges: 0-3 months, 3-6 months, 6-12 months, 12+ months","",Project timeline expectations
+BUS-008,Business Requirements,Budget,What is the approved budget range?,"Common ranges: $0-50K, $50K-250K, $250K-500K, $500K+","",Budget constraints
+BUS-009,Business Requirements,Stakeholders,Who are the key stakeholders and decision makers?,"Network operations team, IT leadership, Finance, Security, Branch office managers","",Stakeholder mapping
+BUS-010,Business Requirements,Success Metrics,How will you measure the success of this project?,"Bandwidth reduction, cost savings, uptime improvement, deployment time reduction, network visibility metrics","",KPI definition
+TECH-001,Technical Requirements,Infrastructure,What is your current network infrastructure?,"","",Current technology stack
+TECH-002,Technical Requirements,Infrastructure,How many branch offices do you have and where are they located?,"Common configurations: 5-10 branches, 10-20 branches, 20-50 branches, 50+ branches","",Branch office footprint
+TECH-003,Technical Requirements,Connectivity,What connectivity methods do your branches currently use?,"Common methods: MPLS, Internet VPN, Direct internet, leased lines, hybrid connectivity","",Current branch connectivity
+TECH-004,Technical Requirements,Connectivity,What is your expected bandwidth requirement per branch?,"Common ranges: 10Mbps, 50Mbps, 100Mbps, 1Gbps+","",Bandwidth planning
+TECH-005,Technical Requirements,Cloud,What cloud platforms do you currently use?,"Common platforms: Azure, AWS, Google Cloud, multi-cloud, hybrid","",Cloud adoption status
+TECH-006,Technical Requirements,Cloud,Do you have existing Azure infrastructure or ExpressRoute circuits?,"","",Azure presence assessment
+TECH-007,Technical Requirements,Integration,What systems need to integrate with this solution?,"","",Integration requirements
+TECH-008,Technical Requirements,Integration,What data sources need to be connected?,"","",Data integration needs
+TECH-009,Technical Requirements,Security,What are your security requirements?,"Common requirements: DDoS protection, threat detection, micro-segmentation, encrypted tunnels, policy enforcement","",Security needs
+TECH-010,Technical Requirements,Security,What compliance standards must be met?,"Common standards: SOC 2, ISO 27001, HIPAA, PCI DSS, GDPR, FedRAMP","",Compliance requirements
+TECH-011,Technical Requirements,Availability,What are your uptime requirements?,"Common targets: 99%, 99.5%, 99.9%, 99.95%, 99.99%","",SLA requirements
+TECH-012,Technical Requirements,Disaster Recovery,Do you require disaster recovery across regions?,"","",Business continuity needs
+TECH-013,Technical Requirements,Management,What is your current network management approach?,"","",Operational model
+TECH-014,Technical Requirements,Scale,How many users will connect through this network?,"Typical ranges: 1-100, 101-500, 501-2000, 2000+","",User capacity planning
+ORG-001,Organizational,Resources,Who will be the technical lead for this project?,"","",Technical ownership
+ORG-002,Organizational,Resources,What internal resources are available for this project?,"","",Team availability
+ORG-003,Organizational,Resources,What is the experience level of your network team?,"Typical levels: Beginner, intermediate, advanced, expert","",Training needs assessment
+ORG-004,Organizational,Change Management,How do you typically handle network changes?,"","",Change readiness
+ORG-005,Organizational,Change Management,What training and support will be needed?,"","",Enablement requirements
+ORG-006,Organizational,Governance,What approval processes are required?,"","",Decision-making process
+ORG-007,Organizational,Governance,Who has final approval authority?,"","",Decision authority
+ORG-008,Organizational,Communication,How do you prefer project communication?,"Common channels: Email, Teams, Slack, weekly meetings, bi-weekly meetings, monthly meetings","",Communication preferences
+PROJ-010,Project Constraints,Timing,Are there any critical business dates or deadlines?,"","",Timeline constraints
+PROJ-011,Project Constraints,Timing,Are there any blackout periods when work cannot be done?,"","",Implementation restrictions
+PROJ-012,Project Constraints,Budget,Are there any budget constraints or considerations?,"","",Financial constraints
+PROJ-013,Project Constraints,Technical,Are there any technical constraints or limitations?,"Legacy systems, regulatory requirements, vendor lock-in concerns","",Technical limitations
+PROJ-014,Project Constraints,Regulatory,Are there any regulatory or compliance constraints?,"","",Regulatory requirements
+RISK-001,Risk Assessment,Implementation,What are your main concerns about this implementation?,"","",Primary concerns
+RISK-002,Risk Assessment,Implementation,What could cause this project to fail?,"Network outages during migration, compatibility with legacy systems, vendor lock-in concerns","",Failure modes
+RISK-003,Risk Assessment,Business,What business risks are you trying to mitigate?,"Cost overruns, performance degradation, unplanned downtime, security breaches","",Business risk factors
+RISK-004,Risk Assessment,Technical,What technical risks are you most concerned about?,"Scalability limitations, integration challenges, multi-region complexity","",Technical risk factors
+RISK-005,Risk Assessment,Organizational,What organizational challenges do you anticipate?,"Staff training, operational changes, vendor management, change fatigue","",Change management risks
+FUTURE-001,Future State,Vision,What is your long-term vision for this solution?,"","",Future roadmap
+FUTURE-002,Future State,Growth,How do you expect your WAN needs to grow over time?,"Additional branches, increased bandwidth, new cloud regions, enhanced security","",Scalability planning
+FUTURE-003,Future State,Integration,What future integrations might be needed?,"Additional cloud providers, edge locations, remote workers, SD-WAN capabilities","",Future integration needs
+FUTURE-004,Future State,Features,What additional capabilities might you need in the future?,"Advanced analytics, automated failover, AI-driven optimization, enhanced visibility","",Future feature requirements

@@ -1,0 +1,12 @@
+Component,Unit,Quantity,Unit Cost,Annual Cost,Year 1,Year 1 Credits,Year 1 Net,Year 2,Year 2 Net,Notes
+Azure Virtual WAN Standard,Hub,2,$2190,$4380,$4380,$0,$4380,$4380,$4380,2 regional hubs
+VPN Gateway Connections,Site,10,$438,$4380,$4380,$0,$4380,$4380,$4380,10 branch office connections
+ExpressRoute Gateway,Circuit,2,$9000,$18000,$18000,$0,$18000,$18000,$18000,2 circuits for data centers
+Azure Firewall Premium,Instance,2,$7665,$15330,$15330,$0,$15330,$15330,$15330,2 instances (US + EU hubs)
+Data Transfer,GB,Variable,$0.05,$6000,$6000,$0,$6000,$6000,$6000,Cross-region traffic
+Network Design,Service,1,$24000,$24000,$24000,$0,$24000,$0,$0,Professional services
+Implementation,Service,1,$40000,$40000,$40000,$0,$40000,$0,$0,Professional services
+Migration,Service,1,$18000,$18000,$18000,$0,$18000,$0,$0,Professional services
+Training,Service,1,$10000,$10000,$10000,$0,$10000,$0,$0,Professional services
+Partner Services Credit,Credit,-1,$12000,-$12000,$0,-$12000,-$12000,$0,$0,Applied to services
+TOTAL,,,,$140190,$140190,-$12000,$128190,$48090,$48090,Year 1: Services included

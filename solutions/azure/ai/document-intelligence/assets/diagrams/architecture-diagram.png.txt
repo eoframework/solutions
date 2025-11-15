@@ -1,0 +1,8 @@
+PLACEHOLDER: This file should contain the generated architecture diagram PNG.
+
+To generate the diagram:
+1. Install Python diagrams library: pip install diagrams graphviz
+2. Run: python3 generate_diagram.py
+3. Or use Draw.io to edit architecture-diagram.drawio and export as PNG
+
+For now, use the Draw.io file to create the diagram manually, then export as PNG.

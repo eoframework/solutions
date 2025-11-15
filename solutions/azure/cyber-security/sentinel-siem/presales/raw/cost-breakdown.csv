@@ -1,0 +1,27 @@
+Cost Category,Description,Year 1 List,Azure/Partner Credits,Year 1 Net,Year 2,Year 3,3-Year Total,Notes
+Cloud Infrastructure,Azure Sentinel - Data Ingestion (300 GB/month @ $2.50/GB),$90000,($9000),$81000,$90000,$90000,$261000,10% Year 1 credit
+Cloud Infrastructure,Log Analytics Workspace (300 GB/month @ $2.30/GB),$82800,$0,$82800,$82800,$82800,$248400,Standard tier
+Cloud Infrastructure,Azure Defender for Cloud - Servers (100 servers),$8500,$0,$8500,$8500,$8500,$25500,Enterprise protection
+Cloud Infrastructure,Automation Runbook Storage & Execution (Logic Apps),$4800,$0,$4800,$4800,$4800,$14400,SOAR automation
+Cloud Infrastructure,Azure Monitor & Application Insights (200GB logs/month),$2400,$0,$2400,$2400,$2400,$7200,Diagnostics
+Cloud Infrastructure,Network Security & Firewall Logs (NSG Flow Logs),$1200,$0,$1200,$1200,$1200,$3600,Network monitoring
+Cloud Infrastructure,Azure Storage Account for archival (500 GB/month),$600,$0,$600,$600,$600,$1800,Long-term retention
+Cloud Infrastructure,Private Endpoint for secure connectivity to Log Analytics,$300,$0,$300,$300,$300,$900,Network security
+Cloud Infrastructure,Azure Key Vault - Standard tier (security credentials management),$60,$0,$60,$60,$60,$180,Credential management
+Cloud Infrastructure,Azure Virtual Network - NAT Gateway (for secure outbound),$480,$0,$480,$480,$480,$1440,Outbound security
+Software Licenses,SOAR Playbooks & Logic Apps automation,$2400,$0,$2400,$2400,$2400,$7200,Incident automation
+Software Licenses,Third-party SIEM connector licenses (optional integrations),$5000,$0,$5000,$5000,$5000,$15000,External integrations
+Professional Services,Discovery & Requirements - security assessment (60 hours @ $225/hr),$13500,$0,$13500,$0,$0,$13500,Initial assessment
+Professional Services,Solution Architecture & Design - Sentinel architecture (80 hours @ $225/hr),$18000,$0,$18000,$0,$0,$18000,Architecture design
+Professional Services,Infrastructure Deployment - Azure Sentinel setup and Log Analytics (60 hours @ $200/hr),$12000,$0,$12000,$0,$0,$12000,Deployment
+Professional Services,Analytics Rules Configuration - KQL queries and detection rules (80 hours @ $225/hr),$18000,$0,$18000,$0,$0,$18000,Detection rules
+Professional Services,SOAR Playbook Development - incident response automation (60 hours @ $200/hr),$20000,$0,$20000,$0,$0,$20000,Automation playbooks
+Professional Services,Data Connector Configuration - Office 365 and Azure AD and Defender (40 hours @ $200/hr),$8000,$0,$8000,$0,$0,$8000,Data integration
+Professional Services,Threat Hunting & Advanced Analytics - custom detection models (40 hours @ $225/hr),$9000,$0,$9000,$0,$0,$9000,Threat hunting
+Professional Services,Integration & API Setup - external SIEM & systems (30 hours @ $175/hr),$5250,$0,$5250,$0,$0,$5250,System integration
+Professional Services,Testing & Security Validation - functionality & threat testing (30 hours @ $175/hr),$5250,$0,$5250,$0,$0,$5250,Quality assurance
+Professional Services,Training & Knowledge Transfer - SOC/security team training (40 hours @ $175/hr),$10000,$0,$10000,$0,$0,$10000,Team enablement
+Professional Services,Project Management - coordination and stakeholder management (60 hours @ $200/hr),$10000,$0,$10000,$0,$0,$10000,Project oversight
+Professional Services,Hypercare Support (60 days post-launch) - operational support (40 hours @ $175/hr),$8000,$0,$8000,$0,$0,$8000,Hypercare support
+Support & Maintenance,Azure Sentinel managed services and monitoring (10% of cloud infrastructure),$19424,($12000),$7424,$19424,$19424,$46272,Partner managed services
+Total Investment,,$308084,($21000),$287084,$182084,$182084,$651252,Year 1 credits reduce net investment by 7%

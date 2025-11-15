@@ -32,44 +32,52 @@ This Statement of Work (SOW) outlines the scope, deliverables, timeline, and ter
 The following services and deliverables are included in this SOW:
 
 #### 2.1.1 Discovery & Planning Phase
-- [ ] Stakeholder interviews and requirements gathering
-- [ ] Current state assessment and technical evaluation
-- [ ] Solution architecture design and documentation
-- [ ] Project planning and resource allocation
-- [ ] Risk assessment and mitigation planning
+- [ ] Stakeholder interviews with development teams, ops, and leadership
+- [ ] Current CI/CD pipeline assessment and tooling inventory
+- [ ] DevOps maturity evaluation and baseline metrics definition
+- [ ] Azure DevOps platform architecture design and documentation
+- [ ] Repository migration strategy and team training plan
+- [ ] Risk assessment for deployment and security controls
 
 #### 2.1.2 Implementation Phase
-- [ ] Infrastructure provisioning and configuration
-- [ ] Application deployment and customization
-- [ ] System integration and data migration
-- [ ] Security configuration and hardening
-- [ ] Performance optimization and tuning
+- [ ] Azure DevOps repositories setup and branching strategy
+- [ ] CI/CD pipeline template development (15+ reusable patterns)
+- [ ] Infrastructure as Code templates (Terraform/ARM for AKS)
+- [ ] Azure Container Registry configuration and image scanning
+- [ ] Azure Kubernetes Service (AKS) cluster provisioning
+- [ ] Azure Key Vault integration for secrets management
+- [ ] Multi-environment pipeline configuration (Dev/Test/Prod)
+- [ ] Automated testing and security scanning integration
+- [ ] Azure Monitor and logging configuration
 
 #### 2.1.3 Testing & Validation Phase
-- [ ] Unit and integration testing
-- [ ] Performance and security testing
-- [ ] User acceptance testing coordination
-- [ ] Bug fixes and issue resolution
-- [ ] Go-live readiness assessment
+- [ ] Pipeline validation with sample applications
+- [ ] Container build and deployment testing
+- [ ] Automated test execution and reporting
+- [ ] Security scanning and compliance validation
+- [ ] Performance testing of AKS cluster
+- [ ] Disaster recovery and backup testing
+- [ ] Team acceptance testing and feedback
 
 #### 2.1.4 Deployment & Support Phase
-- [ ] Production deployment and cutover
-- [ ] Post-deployment monitoring and support
-- [ ] User training and knowledge transfer
-- [ ] Documentation delivery
-- [ ] Project closure and handover
+- [ ] Production pipeline activation with live applications
+- [ ] Team training and knowledge transfer (hands-on workshops)
+- [ ] Documentation delivery (pipeline guides, runbooks, troubleshooting)
+- [ ] Post-implementation monitoring and optimization
+- [ ] Hypercare support (30 days post-launch)
+- [ ] Project closure and handover to operations team
 
 ### 2.2 Out-of-Scope Activities
 The following activities are explicitly excluded from this SOW:
 
-- [ ] Hardware procurement and installation
-- [ ] Third-party software licensing
-- [ ] Network infrastructure modifications
-- [ ] Legacy system decommissioning
-- [ ] Ongoing operational support beyond [SUPPORT_PERIOD]
-- [ ] Custom development beyond specified requirements
-- [ ] Data cleansing or transformation of legacy data
-- [ ] Training beyond initial knowledge transfer
+- [ ] Ongoing 24/7 managed services (beyond 30-day hypercare)
+- [ ] Application development or refactoring to support DevOps
+- [ ] Legacy system modernization or container migration
+- [ ] Network infrastructure changes or firewall modifications
+- [ ] Azure subscription management or billing optimization
+- [ ] Custom Azure DevOps plugins or extensions development
+- [ ] Third-party tool licensing or procurement
+- [ ] Developer IDE configuration (engineers do their own setup)
 
 ---
 
@@ -78,28 +86,35 @@ The following activities are explicitly excluded from this SOW:
 ### 3.1 Documentation Deliverables
 | Deliverable | Description | Due Date | Format |
 |-------------|-------------|----------|---------|
-| **Requirements Specification** | Detailed functional and non-functional requirements | [DATE] | CSV/Excel |
-| **Solution Architecture Document** | Technical architecture and design specifications | [DATE] | PDF |
-| **Implementation Plan** | Detailed project timeline and resource allocation | [DATE] | MS Project |
-| **Test Plan & Results** | Testing strategy and execution results | [DATE] | PDF |
-| **User Training Materials** | End-user guides and training documentation | [DATE] | PDF/Video |
-| **Operations Runbook** | System administration and maintenance procedures | [DATE] | PDF |
-| **As-Built Documentation** | Final system configuration and architecture | [DATE] | PDF |
+| **DevOps Architecture Document** | Azure DevOps platform design, AKS architecture, pipeline patterns | Week 4 | PDF |
+| **Pipeline Templates Library** | 15+ reusable CI/CD pipeline YAML templates with documentation | Week 8 | GitHub/Azure Repos |
+| **Infrastructure as Code** | Terraform and ARM templates for reproducible AKS deployment | Week 8 | GitHub/Azure Repos |
+| **Security & Compliance Guide** | Key Vault setup, RBAC policies, compliance controls documentation | Week 10 | PDF |
+| **Operational Runbooks** | Pipeline troubleshooting, AKS management, disaster recovery procedures | Week 12 | PDF/Markdown |
+| **Training Materials** | Hands-on workshop guides, video recordings, best practices documentation | Week 12 | PDF/Video |
+| **As-Built Documentation** | Final system configuration, customizations, team role definitions | Week 14 | PDF |
 
 ### 3.2 System Deliverables
 | Component | Description | Acceptance Criteria |
 |-----------|-------------|-------------------|
-| **Production Environment** | Fully configured and operational system | Passes all acceptance tests |
-| **Integration Interfaces** | Configured data connections and APIs | Successful data flow validation |
-| **Security Configuration** | Implemented security controls and policies | Security audit compliance |
-| **Monitoring Setup** | Operational monitoring and alerting | Functional dashboards and alerts |
-| **Backup & Recovery** | Automated backup and disaster recovery | Successful recovery test |
+| **Azure DevOps Platform** | Repositories, pipelines, artifact management, multi-team projects | All teams can commit and deploy |
+| **CI Pipeline Templates** | 15+ reusable pipeline patterns (Build, Test, Security, Deploy) | Templates execute successfully on sample apps |
+| **Container Infrastructure** | Azure Container Registry + AKS cluster with auto-scaling | Can build, push, and deploy container images |
+| **Security & Secrets** | Azure Key Vault integration, RBAC, rotation policies | All sensitive data secured and rotated |
+| **Monitoring & Logging** | Azure Monitor dashboards, alerts, log aggregation | Real-time visibility into pipeline and production systems |
+| **Multi-Environment Support** | Dev/Test/Staging/Production environments with approval gates | Can deploy to all environments with proper gates |
 
 ### 3.3 Knowledge Transfer Deliverables
-- Administrator training (2 days, up to 10 participants)
-- End-user training (1 day, up to 25 participants)
-- Technical documentation and procedures
-- Recorded training sessions for future reference
+- **DevOps Platform Administration** training (2 days for ops/platform team)
+  - Azure DevOps project administration and user management
+  - AKS cluster management, scaling, and troubleshooting
+  - Key Vault rotation and secrets management procedures
+- **Development Team Training** (2 days for developers - multiple sessions)
+  - Using Azure DevOps repositories and branching strategy
+  - Writing and maintaining CI/CD pipeline definitions
+  - Deploying applications through the pipeline
+- **Recorded Training Sessions** for asynchronous learning by new team members
+- **Best Practices Documentation** and architectural decision records
 
 ---
 
@@ -108,35 +123,39 @@ The following activities are explicitly excluded from this SOW:
 ### 4.1 Project Phases
 | Phase | Duration | Start Date | End Date | Key Milestones |
 |-------|----------|------------|----------|----------------|
-| **Discovery & Planning** | 2 weeks | [DATE] | [DATE] | Requirements approved, Architecture signed-off |
-| **Implementation** | 6 weeks | [DATE] | [DATE] | Infrastructure ready, Application deployed |
-| **Testing & Validation** | 2 weeks | [DATE] | [DATE] | UAT completed, Go-live approved |
-| **Deployment & Support** | 2 weeks | [DATE] | [DATE] | Production live, Training completed |
+| **Discovery & Planning** | 1 month | [DATE] | [DATE] | Current state assessment complete, Architecture approved, Teams identified |
+| **Foundation & CI Setup** | 1 month | [DATE] | [DATE] | Azure DevOps repos configured, First CI pipeline operational, Team training started |
+| **Build & Deploy** | 1 month | [DATE] | [DATE] | AKS cluster operational, Container Registry configured, Multi-environment pipelines ready |
+| **Security & Operations** | 1 month | [DATE] | [DATE] | Key Vault integrated, Monitoring live, Hypercare support beginning |
 
 ### 4.2 Critical Dependencies
-- [ ] Client provides timely access to required systems and environments
-- [ ] Subject matter experts available for requirements gathering and testing
-- [ ] Network connectivity and security approvals obtained
-- [ ] Third-party vendor coordination for integrations
-- [ ] Business stakeholder availability for key decision points
+- [ ] Client provides Azure subscription admin access and resource quotas
+- [ ] Development team members available for 4 weeks during implementation
+- [ ] Decision on repository migration strategy (phased vs. big-bang)
+- [ ] Application architecture analysis (monolithic vs. microservices)
+- [ ] Network and security team coordination for AKS networking requirements
+- [ ] Executive sponsorship and stakeholder commitment to change adoption
 
 ---
 
 ## 5. ROLES & RESPONSIBILITIES
 
 ### 5.1 Vendor Responsibilities ([VENDOR_NAME])
-- **Project Manager:** Overall project coordination and delivery management
-- **Solution Architect:** Technical design and architecture oversight
-- **Implementation Team:** System configuration, deployment, and testing
-- **Training Specialist:** User enablement and knowledge transfer
-- **Support Engineer:** Post-deployment support and issue resolution
+- **Project Manager:** Overall project coordination, stakeholder management, schedule tracking
+- **DevOps Solution Architect:** Azure DevOps platform design, AKS architecture, pipeline patterns
+- **Pipeline Engineer:** CI/CD pipeline template development and automation
+- **Infrastructure Engineer:** AKS provisioning, container registry setup, IaC templates
+- **Security Engineer:** Key Vault integration, RBAC, compliance and hardening
+- **Training Lead:** Workshop delivery, documentation, team enablement
+- **Support Engineer:** Hypercare support and operational handoff (30 days post-launch)
 
 ### 5.2 Client Responsibilities ([CLIENT_NAME])
-- **Project Sponsor:** Executive oversight and business decision authority
-- **Technical Lead:** Infrastructure coordination and technical approvals
-- **Business Analyst:** Requirements validation and user acceptance testing
-- **System Administrator:** Ongoing system maintenance and administration
-- **End Users:** Participation in training and user acceptance testing
+- **Executive Sponsor:** Business case validation, resource commitment, change leadership
+- **DevOps/Platform Lead:** Technical lead for platform team, AKS cluster management
+- **Development Team Lead:** Repository strategy, developer training, adoption
+- **Security Officer:** Security policy approval, compliance validation
+- **Operations Manager:** Production readiness, incident response, ongoing operations
+- **Development Teams:** Training participation, pilot application support, feedback
 
 ### 5.3 Shared Responsibilities
 - Risk management and issue escalation
@@ -148,19 +167,27 @@ The following activities are explicitly excluded from this SOW:
 
 ## 6. COMMERCIAL TERMS
 
-### 6.1 Project Investment
-| Category | Description | Amount |
-|----------|-------------|--------|
-| **Professional Services** | Implementation and configuration services | $[SERVICES_AMOUNT] |
-| **Training & Support** | User training and initial support | $[TRAINING_AMOUNT] |
-| **Travel & Expenses** | On-site support and travel costs | $[TRAVEL_AMOUNT] |
-| ****TOTAL PROJECT COST** | **Total investment for complete implementation** | **$[TOTAL_AMOUNT]** |
+### 6.1 Project Investment - Investment Summary
+| Category | Year 1 List | Azure/Partner Credits | Year 1 Net | Year 2 | Year 3 | 3-Year Total |
+|----------|-------------|---------------------|------------|---------|---------|--------------|
+| Azure Platform Services | $6,200 | $0 | $6,200 | $6,200 | $6,200 | $18,600 |
+| Professional Services | $101,000 | $0 | $101,000 | $0 | $0 | $101,000 |
+| Support & Managed Services | $1,520 | $0 | $1,520 | $1,520 | $1,520 | $4,560 |
+| Partner Services Credit | $0 | ($8,000) | ($8,000) | $0 | $0 | ($8,000) |
+| **Total Investment** | **$108,200** | **($8,000)** | **$100,200** | **$7,720** | **$7,720** | **$115,640** |
+
+**Investment Notes:**
+- **Year 1** includes one-time professional services for platform setup, pipeline development, and training
+- **Year 2-3** maintenance costs cover Azure platform operations and managed services only
+- **Partner Credits:** $8,000 Azure/Microsoft partner services credit reduces net Year 1 investment by 7%
+- **ROI Timeline:** 8-12 months through developer productivity improvements and reduced manual deployment effort
 
 ### 6.2 Payment Terms
-- **25%** upon SOW execution and project kickoff
-- **25%** upon completion of Discovery & Planning phase
-- **25%** upon completion of Implementation phase
-- **25%** upon successful go-live and project acceptance
+- **25%** upon SOW execution and project kickoff ($25,050)
+- **25%** upon completion of Discovery & Planning phase ($25,050)
+- **25%** upon completion of Implementation phase ($25,050)
+- **25%** upon successful go-live and hypercare support completion ($25,050)
+- **Less Credits:** ($8,000) Azure partner services credit applied at project completion
 
 ### 6.3 Additional Services
 Any additional services beyond the scope of this SOW will be quoted separately and require written approval from both parties.

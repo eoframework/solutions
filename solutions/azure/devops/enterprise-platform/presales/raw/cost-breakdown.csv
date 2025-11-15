@@ -1,0 +1,19 @@
+Cost Category,Description,Year 1 List,Azure/Partner Credits,Year 1 Net,Year 2,Year 3,3-Year Total,Credit Comments
+Azure Services,Azure DevOps Services Basic (10 users),$3600,$0,$3600,$3600,$3600,$10800,Basic tier for development team
+Azure Services,Azure DevOps Services Stakeholder (5 Stakeholders),$0,$0,$0,$0,$0,$0,Stakeholder access included
+Azure Services,Azure Container Registry Premium,$2000,$0,$2000,$2000,$2000,$6000,Premium tier for enterprise features
+Azure Services,Azure Key Vault (Standard),$120,$0,$120,$120,$120,$360,Standard tier for secret management
+Azure Services,Azure Monitor (Log Analytics),$480,$0,$480,$480,$480,$1440,5GB/month ingestion
+Azure Services,Azure App Service (B3 instances for CI/CD),$0,$0,$0,$0,$0,$0,Optional infrastructure layer
+Professional Services,Pipeline Templates & CI/CD Framework (120 hours @ $200/hr),$24000,$0,$24000,$0,$0,$24000,Reusable pipeline templates and automation
+Professional Services,Infrastructure as Code (IaC) Setup - Terraform/ARM (90 hours @ $200/hr),$18000,$0,$18000,$0,$0,$18000,IaC templates for reproducible deployments
+Professional Services,Security Integration & Policy Configuration (60 hours @ $200/hr),$12000,$0,$12000,$0,$0,$12000,Security policies and compliance integration
+Professional Services,Training & Knowledge Transfer (40 hours @ $175/hr),$7000,$0,$7000,$0,$0,$7000,Admin and end-user training
+Professional Services,Project Management & Governance (50 hours @ $200/hr),$10000,$0,$10000,$0,$0,$10000,Project coordination and stakeholder management
+Professional Services,Discovery & Assessment (30 hours @ $200/hr),$6000,$0,$6000,$0,$0,$6000,Current state analysis and requirements
+Professional Services,Security Assessment & Hardening (40 hours @ $225/hr),$9000,$0,$9000,$0,$0,$9000,Security audit and recommendations
+Professional Services,Hypercare Support (30 days post-launch - 80 hours @ $175/hr),$14000,$0,$14000,$0,$0,$14000,Production stabilization support
+Support & Maintenance,Azure Professional Direct Support (Month 1-3 optional),$0,$0,$0,$0,$0,$0,Optional premium support upgrade
+Support & Maintenance,Managed Services (15% of Year 1 platform),$1520,$0,$1520,$1520,$1520,$4560,Ongoing platform optimization
+Partner Credit,Partner Services Credit Available,,$8000,$8000,$0,$0,$8000,Azure or Microsoft partner services credit
+Total Investment,,$108200,$8000,$100200,$7720,$7720,$115640,Year 1 includes professional services and credits reduce net investment by 7%

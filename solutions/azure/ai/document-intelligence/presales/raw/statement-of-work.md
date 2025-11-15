@@ -1,268 +1,714 @@
-# STATEMENT OF WORK (SOW)
+---
+# Document Information
+document_title: Statement of Work
+document_version: 1.0
+document_date: [Month DD, YYYY]
+document_id: SOW-2025-001
 
-**Document Version:** 1.0
-**Date:** [DATE]
-**Prepared by:** [VENDOR_NAME]
-**Client:** [CLIENT_NAME]
-**Project:** {SOLUTION_NAME} Implementation
-**SOW Number:** [SOW_NUMBER]
+# Project Information
+project_name: Azure AI Document Intelligence Implementation
+project_id: PROJ-AZDI-2025-001
+opportunity_no: OPP-AZDI-2025-0001
+project_start_date: [Month DD, YYYY]
+project_end_date: [Month DD, YYYY]
+project_duration: 6 months
+
+# Client Information
+client_name: [Client Name]
+client_address: [Client Address]
+client_contact_name: [Client Contact Name]
+client_contact_title: [Client Contact Title]
+client_contact_email: [Client Contact Email]
+client_contact_phone: [Client Contact Phone]
+
+# Vendor Information
+vendor_name: EO Framework Consulting
+vendor_address: 123 Business Street, Suite 100
+vendor_contact_name: [Vendor Contact Name]
+vendor_contact_title: Senior Solutions Architect
+vendor_contact_email: info@eoframework.com
+vendor_contact_phone: (555) 123-4567
+---
+
+# Azure AI Document Intelligence - Statement of Work (SOW)
+
+**Project Name:** Azure AI Document Intelligence Implementation
+**Client:** [Client Name]
+**Date:** [Month DD, YYYY]
+**Version:** v1.0
+
+**Prepared by:**
+[Vendor/Consultant Name]
+[Address] • [Phone] • [Email] • [Website]
 
 ---
 
-## 1. EXECUTIVE SUMMARY
+# Executive Summary
 
-### 1.1 Project Overview
-This Statement of Work (SOW) outlines the scope, deliverables, timeline, and terms for the implementation of {SOLUTION_NAME} for [CLIENT_NAME]. The project will deliver [PRIMARY_BUSINESS_OUTCOME] through [HIGH_LEVEL_APPROACH].
+This Statement of Work (SOW) defines the scope, deliverables, roles, and terms for implementing a **small-scope, department-level** Azure AI Document Intelligence solution for [Client Name]. This engagement will deliver automated document processing capabilities through Azure cognitive services including Azure AI Document Intelligence (Form Recognizer), Azure Cognitive Services Text Analytics, and automated workflows to transform manual document workflows into intelligent, automated processes.
 
-### 1.2 Business Objectives
-- **Primary Goal:** [PRIMARY_BUSINESS_OBJECTIVE]
-- **Success Metrics:** [QUANTIFIED_SUCCESS_CRITERIA]
-- **Expected ROI:** [ROI_PERCENTAGE] over [TIME_PERIOD]
+**Small Scope Deployment:**
+- **Document Capacity:** 50,000 pages/month processing
+- **User Base:** 50-100 department users
+- **Document Types:** 3-5 common types (invoices, purchase orders, contracts)
+- **Deployment Model:** Single Azure region, business hours support
+- **Total Investment:** $140,866 over 3 years ($92,662 Year 1 implementation)
 
-### 1.3 Project Duration
-**Start Date:** [PROJECT_START_DATE]
-**End Date:** [PROJECT_END_DATE]
-**Total Duration:** [PROJECT_DURATION] weeks
+**Key Outcomes:**
+- Automated document processing with 95%+ accuracy using Azure AI services
+- 90% reduction in manual processing time (hours → minutes per document)
+- Serverless architecture enabling 24/7 processing and automatic scaling
+- Foundation for expanding to medium/large scope across organization
+
+**Expected ROI:** Typical payback period of 8-12 months based on labor cost savings. For a department processing 50K pages/month at current manual cost of $2-3/page, annual savings of $1.2M-$1.8M against Year 1 investment of $93K.
 
 ---
 
-## 2. SCOPE OF WORK
+# Background & Objectives
 
-### 2.1 In-Scope Activities
+## Background
+
+[Client Name] currently processes approximately [X,000] documents manually each [month/year] across multiple business functions. Key challenges include:
+- Manual Processing Bottlenecks: Hours of staff time required per document
+- High Error Rates: 5-10% error rate in manual data entry requiring costly rework
+- Scalability Limitations: Cannot handle volume fluctuations or business growth
+- Resource Intensive: [Y] FTE dedicated to repetitive, low-value data entry tasks
+- Compliance Risk: Manual processes increase audit exposure and data security concerns
+
+## Objectives
+- Automate Document Processing: Implement Azure AI services (Document Intelligence, Text Analytics) to automate extraction and classification
+- Improve Accuracy: Achieve 95%+ data extraction accuracy through AI and human-in-the-loop review
+- Reduce Processing Time: Decrease document processing time by 90% (hours → minutes)
+- Lower Operational Costs: Reduce document operations costs by 70% through automation
+- Enable Scalability: Serverless architecture handles any volume without proportional cost increase
+- Foundation for Innovation: Establish AI/ML platform for expanding automation to other processes
+
+## Success Metrics
+- 95%+ data extraction accuracy measured against validation dataset
+- 90% reduction in document processing time (from baseline)
+- 70% reduction in document operations costs within 12 months
+- Process [target volume] documents per month with <1% error rate
+- 99.5% system uptime for document processing services
+- Successful integration with [X] existing business systems
+
+---
+
+# Scope of Work
+
+## In Scope
 The following services and deliverables are included in this SOW:
+- Document workflow analysis and AI/ML solution design
+- Azure infrastructure provisioning and configuration
+- AI model development and training for document classification and extraction
+- Document processing pipeline implementation
+- API and web interface development
+- Integration with existing business systems
+- Testing, validation, and accuracy verification
+- Knowledge transfer and documentation
 
-#### 2.1.1 Discovery & Planning Phase
-- [ ] Stakeholder interviews and requirements gathering
-- [ ] Current state assessment and technical evaluation
-- [ ] Solution architecture design and documentation
-- [ ] Project planning and resource allocation
-- [ ] Risk assessment and mitigation planning
+## Activities
 
-#### 2.1.2 Implementation Phase
-- [ ] Infrastructure provisioning and configuration
-- [ ] Application deployment and customization
-- [ ] System integration and data migration
-- [ ] Security configuration and hardening
-- [ ] Performance optimization and tuning
+### Phase 1 – Discovery & Assessment
+During this initial phase, the Vendor will perform a comprehensive assessment of the Client's current document processing workflows and requirements. This includes analyzing existing processes, identifying document types, determining data extraction requirements, and designing the optimal Azure AI solution approach.
 
-#### 2.1.3 Testing & Validation Phase
-- [ ] Unit and integration testing
-- [ ] Performance and security testing
-- [ ] User acceptance testing coordination
-- [ ] Bug fixes and issue resolution
-- [ ] Go-live readiness assessment
+Key activities:
+- Document workflow analysis and requirements gathering
+- Document type classification and data extraction field identification
+- Azure environment assessment and AI services readiness evaluation
+- Training data requirements and labeling strategy
+- Security and compliance requirements analysis (HIPAA, GDPR, SOC 2, etc.)
+- Integration requirements with existing business systems
+- Solution architecture design (Document Intelligence, Text Analytics, Functions, Cosmos DB)
+- Implementation planning and resource allocation
 
-#### 2.1.4 Deployment & Support Phase
-- [ ] Production deployment and cutover
-- [ ] Post-deployment monitoring and support
-- [ ] User training and knowledge transfer
-- [ ] Documentation delivery
-- [ ] Project closure and handover
+This phase concludes with an Assessment Report that outlines the proposed Document Intelligence architecture, document processing workflow, AI model strategy, integration approach, risks, and project timeline.
 
-### 2.2 Out-of-Scope Activities
-The following activities are explicitly excluded from this SOW:
+### Phase 2 – Solution Design & Environment Setup
+In this phase, the Azure infrastructure is provisioned and configured based on AI/ML best practices. This includes environment setup, document processing pipeline design, security controls, monitoring, and access management.
 
-- [ ] Hardware procurement and installation
-- [ ] Third-party software licensing
-- [ ] Network infrastructure modifications
-- [ ] Legacy system decommissioning
-- [ ] Ongoing operational support beyond [SUPPORT_PERIOD]
-- [ ] Custom development beyond specified requirements
-- [ ] Data cleansing or transformation of legacy data
-- [ ] Training beyond initial knowledge transfer
+Key activities:
+- Azure infrastructure provisioning (Blob Storage, Functions, API Management)
+- AI services configuration (Document Intelligence, Text Analytics, automated review workflows)
+- Document processing pipeline development (ingestion, classification, extraction, validation)
+- Security baseline configuration (encryption, managed identities, Key Vault, private endpoints)
+- Integration framework setup (REST APIs, webhooks, event triggers)
+- Azure Monitor and Application Insights setup
+- Backup strategies and disaster recovery setup
 
----
+By the end of this phase, the Client will have a secure, production-ready Azure AI Document Intelligence environment for document processing.
 
-## 3. DELIVERABLES
+### Phase 3 – Implementation & Execution
+Implementation will occur in well-defined phases based on document type complexity and business priority. Each phase follows a repeatable process with automated workflows for consistency and risk reduction.
 
-### 3.1 Documentation Deliverables
-| Deliverable | Description | Due Date | Format |
-|-------------|-------------|----------|---------|
-| **Requirements Specification** | Detailed functional and non-functional requirements | [DATE] | CSV/Excel |
-| **Solution Architecture Document** | Technical architecture and design specifications | [DATE] | PDF |
-| **Implementation Plan** | Detailed project timeline and resource allocation | [DATE] | MS Project |
-| **Test Plan & Results** | Testing strategy and execution results | [DATE] | PDF |
-| **User Training Materials** | End-user guides and training documentation | [DATE] | PDF/Video |
-| **Operations Runbook** | System administration and maintenance procedures | [DATE] | PDF |
-| **As-Built Documentation** | Final system configuration and architecture | [DATE] | PDF |
+Key activities:
+- Custom AI model development for document classification (if required)
+- Data extraction logic implementation for structured and unstructured documents
+- Validation rules and business logic configuration
+- API development for document submission and results retrieval
+- Web interface development for document upload and results review
+- Integration implementation with existing business systems (ERP, CRM, databases)
+- Human review workflow configuration
+- Incremental testing and validation with sample documents
 
-### 3.2 System Deliverables
-| Component | Description | Acceptance Criteria |
-|-----------|-------------|-------------------|
-| **Production Environment** | Fully configured and operational system | Passes all acceptance tests |
-| **Integration Interfaces** | Configured data connections and APIs | Successful data flow validation |
-| **Security Configuration** | Implemented security controls and policies | Security audit compliance |
-| **Monitoring Setup** | Operational monitoring and alerting | Functional dashboards and alerts |
-| **Backup & Recovery** | Automated backup and disaster recovery | Successful recovery test |
+After each phase, the Vendor will coordinate validation and sign-off with the Client before proceeding.
 
-### 3.3 Knowledge Transfer Deliverables
-- Administrator training (2 days, up to 10 participants)
-- End-user training (1 day, up to 25 participants)
-- Technical documentation and procedures
-- Recorded training sessions for future reference
+### Phase 4 – Testing & Validation
+In the Testing and Validation phase, the Document Intelligence solution undergoes thorough functional, performance, and accuracy validation to ensure it meets required SLAs and compliance standards. Test cases will be executed based on Client-defined acceptance criteria.
 
----
+Key activities:
+- Unit testing of all processing components
+- Document processing testing with various formats and quality levels
+- AI model accuracy validation against test dataset
+- Performance benchmarking and load testing
+- Security and compliance validation
+- Integration testing with business systems
+- User Acceptance Testing (UAT) coordination
+- Go-live readiness review and cutover planning
 
-## 4. PROJECT TIMELINE & MILESTONES
+Cutover will be coordinated with all relevant stakeholders and executed during an approved maintenance window, with well-documented rollback procedures in place.
 
-### 4.1 Project Phases
-| Phase | Duration | Start Date | End Date | Key Milestones |
-|-------|----------|------------|----------|----------------|
-| **Discovery & Planning** | 2 weeks | [DATE] | [DATE] | Requirements approved, Architecture signed-off |
-| **Implementation** | 6 weeks | [DATE] | [DATE] | Infrastructure ready, Application deployed |
-| **Testing & Validation** | 2 weeks | [DATE] | [DATE] | UAT completed, Go-live approved |
-| **Deployment & Support** | 2 weeks | [DATE] | [DATE] | Production live, Training completed |
+### Phase 5 – Handover & Post-Implementation Support
+Following successful implementation and cutover, the focus shifts to ensuring operational continuity and knowledge transfer. The Vendor will provide a period of hypercare support and equip the Client's team with the documentation, tools, and processes needed for ongoing maintenance and optimization.
 
-### 4.2 Critical Dependencies
-- [ ] Client provides timely access to required systems and environments
-- [ ] Subject matter experts available for requirements gathering and testing
-- [ ] Network connectivity and security approvals obtained
-- [ ] Third-party vendor coordination for integrations
-- [ ] Business stakeholder availability for key decision points
+Activities include:
+- Delivery of as-built documentation (architecture diagrams, configurations, model details)
+- Operations runbook and SOPs for day-to-day document processing management
+- Azure service management training (Document Intelligence, Text Analytics, Functions, Cosmos DB)
+- AI model monitoring and maintenance training
+- Live or recorded knowledge transfer sessions for administrators and users
+- Performance optimization recommendations
+- 30-day warranty support for issue resolution
+- Optional transition to a managed services model for ongoing support, if contracted
 
 ---
 
-## 5. ROLES & RESPONSIBILITIES
+# Out of Scope
 
-### 5.1 Vendor Responsibilities ([VENDOR_NAME])
-- **Project Manager:** Overall project coordination and delivery management
-- **Solution Architect:** Technical design and architecture oversight
-- **Implementation Team:** System configuration, deployment, and testing
-- **Training Specialist:** User enablement and knowledge transfer
-- **Support Engineer:** Post-deployment support and issue resolution
-
-### 5.2 Client Responsibilities ([CLIENT_NAME])
-- **Project Sponsor:** Executive oversight and business decision authority
-- **Technical Lead:** Infrastructure coordination and technical approvals
-- **Business Analyst:** Requirements validation and user acceptance testing
-- **System Administrator:** Ongoing system maintenance and administration
-- **End Users:** Participation in training and user acceptance testing
-
-### 5.3 Shared Responsibilities
-- Risk management and issue escalation
-- Change control and scope management
-- Quality assurance and acceptance testing
-- Communication and stakeholder management
+## Exclusions
+These items are not in scope unless added via change control:
+- Hardware procurement or on-premises infrastructure
+- Third-party software licensing beyond Azure services
+- Legacy document system decommissioning or data archive migration
+- Historical document processing or back-file conversion
+- Ongoing operational support beyond 30-day warranty period
+- Custom development for document types not specified in requirements
+- Manual document digitization, scanning, or data labeling services
+- End-user training beyond initial knowledge transfer sessions
+- Azure service costs (billed directly by Azure to client)
 
 ---
 
-## 6. COMMERCIAL TERMS
+# Deliverables
 
-### 6.1 Project Investment
-| Category | Description | Amount |
-|----------|-------------|--------|
-| **Professional Services** | Implementation and configuration services | $[SERVICES_AMOUNT] |
-| **Training & Support** | User training and initial support | $[TRAINING_AMOUNT] |
-| **Travel & Expenses** | On-site support and travel costs | $[TRAVEL_AMOUNT] |
-| ****TOTAL PROJECT COST** | **Total investment for complete implementation** | **$[TOTAL_AMOUNT]** |
-
-### 6.2 Payment Terms
-- **25%** upon SOW execution and project kickoff
-- **25%** upon completion of Discovery & Planning phase
-- **25%** upon completion of Implementation phase
-- **25%** upon successful go-live and project acceptance
-
-### 6.3 Additional Services
-Any additional services beyond the scope of this SOW will be quoted separately and require written approval from both parties.
-
----
-
-## 7. ACCEPTANCE CRITERIA
-
-### 7.1 Technical Acceptance
-The solution will be considered technically accepted when:
-- [ ] All functional requirements are implemented and tested
-- [ ] System performance meets specified requirements
-- [ ] Security controls are implemented and validated
-- [ ] Integration testing is completed successfully
-- [ ] System passes all acceptance tests
-
-### 7.2 Business Acceptance
-The project will be considered complete when:
-- [ ] Business stakeholders sign-off on user acceptance testing
-- [ ] Training is completed and knowledge transfer validated
-- [ ] Documentation is delivered and approved
-- [ ] System is operational in production environment
-- [ ] Support procedures are established and functional
+| # | Deliverable | Type | Due Date | Acceptance By |
+|---|--------------------------------------|--------------|--------------|-----------------|
+| 1 | Requirements Specification | Document/CSV | Week 2 | [Client Lead] |
+| 2 | Document Intelligence Solution Architecture | Document | Week 3 | [Technical Lead] |
+| 3 | Implementation Plan | Project Plan | Week 3 | [Project Sponsor] |
+| 4 | Azure Document Intelligence Environment | System | Week 11 | [Technical Lead] |
+| 5 | Document Processing Pipeline | System | Week 11 | [Technical Lead] |
+| 6 | Custom AI Models (if required) | System | Week 11 | [Data Science Lead] |
+| 7 | API Interfaces | System | Week 11 | [Integration Lead] |
+| 8 | Web Interface | System | Week 11 | [Business Lead] |
+| 9 | Test Plan & Results | Document | Week 12 | [QA Lead] |
+| 10 | User Training Materials | Document/Video | Week 14 | [Training Lead] |
+| 11 | Operations Runbook | Document | Week 15 | [Ops Lead] |
+| 12 | As-Built Documentation | Document | Week 16 | [Client Lead] |
+| 13 | Knowledge Transfer Sessions | Training | Week 15-16 | [Client Team] |
 
 ---
 
-## 8. ASSUMPTIONS & CONSTRAINTS
+# Project Plan & Timeline
 
-### 8.1 Assumptions
-- Client will provide necessary access to systems, data, and personnel
-- Existing infrastructure meets minimum requirements for solution deployment
-- Required third-party systems and APIs are available and functional
-- Business requirements will remain stable throughout project duration
-- Client team members will be available for scheduled activities
+## Milestones
 
-### 8.2 Constraints
-- Project must comply with existing security and compliance requirements
-- Implementation must not disrupt critical business operations
-- All data handling must meet privacy and regulatory requirements
-- Solution must integrate with existing IT infrastructure and policies
-- Budget and timeline constraints as specified in this SOW
+| Milestone | Description | Target Date |
+|-----------|-------------|-------------|
+| M1 | Assessment Complete | Week 3 |
+| M2 | Azure Environment Ready | Week 5 |
+| M3 | AI Models Trained & Validated | Week 9 |
+| M4 | Implementation Complete | Week 11 |
+| M5 | Testing Complete | Week 14 |
+| Go-Live | Production Launch | Week 15 |
+| Hypercare End | Support Period Complete | Week 19 |
 
 ---
 
-## 9. RISK MANAGEMENT
+# Roles & Responsibilities (RACI)
 
-### 9.1 Identified Risks
-| Risk | Impact | Probability | Mitigation Strategy |
-|------|--------|-------------|-------------------|
-| **Resource Availability** | High | Medium | Advance scheduling and backup resources |
-| **Integration Complexity** | Medium | High | Early integration testing and validation |
-| **Scope Creep** | High | Medium | Formal change control process |
-| **Technology Dependencies** | Medium | Low | Contingency planning and alternatives |
+| Task/Role | Vendor PM | Vendor Architect | Vendor AI Engineer | Vendor Dev | Client IT | Client Business |
+|-----------|-----------|------------------|-------------------|-----------|-----------|-----------------|
+| Discovery & Requirements | A | R | C | C | C | R |
+| Solution Architecture | C | A | R | C | I | C |
+| AI Model Development | C | C | A | R | I | C |
+| Infrastructure Setup | C | A | R | R | C | I |
+| Pipeline Implementation | C | C | R | A | C | I |
+| Integration Development | C | R | C | A | C | C |
+| Testing & Validation | R | C | R | R | A | A |
+| Security Configuration | C | R | C | R | A | I |
+| Knowledge Transfer | A | R | R | R | C | C |
+| Hypercare Support | A | R | R | R | C | I |
 
-### 9.2 Change Management
-Any changes to project scope, timeline, or budget must be documented through formal change requests and approved by both parties before implementation.
-
----
-
-## 10. TERMS & CONDITIONS
-
-### 10.1 Intellectual Property
-- Client retains ownership of all business data and information
-- Vendor retains ownership of proprietary methodologies and tools
-- Solution configuration and customizations become client property upon final payment
-
-### 10.2 Confidentiality
-Both parties agree to maintain strict confidentiality of proprietary information and business data throughout the project and beyond.
-
-### 10.3 Warranty & Support
-- 90-day warranty on all deliverables from go-live date
-- Defect resolution included at no additional cost during warranty period
-- Post-warranty support available under separate maintenance agreement
-
-### 10.4 Limitation of Liability
-Vendor's liability is limited to the total contract value. Neither party shall be liable for indirect, incidental, or consequential damages.
+Legend:
+**R** = Responsible | **A** = Accountable | **C** = Consulted | **I** = Informed
 
 ---
 
-## 11. APPROVAL & SIGNATURES
+# Architecture & Technical Design
 
-### Client Approval ([CLIENT_NAME])
+## Architecture Overview
+The Azure AI Document Intelligence solution is designed as a **serverless, event-driven architecture** leveraging Azure cognitive services and platform services. The architecture provides scalability, cost optimization, and enterprise-grade security for automated document processing workflows.
 
-**Name:** [CLIENT_AUTHORIZED_SIGNATORY]
-**Title:** [TITLE]
-**Signature:** ________________________________
-**Date:** ________________
+This architecture is designed for **small-scope deployment** supporting 50,000 pages/month with 50-100 department users. The design prioritizes:
+- **Cost efficiency:** Right-sized Azure services for department-level volume
+- **Simplicity:** Single-region deployment (East US) with essential availability
+- **Scalability:** Can grow to medium/large scope by adjusting Azure service limits (no re-architecture)
 
-### Vendor Approval ([VENDOR_NAME])
+![Figure 1: Solution Architecture Diagram](../../assets/diagrams/architecture-diagram.png)
 
-**Name:** [VENDOR_AUTHORIZED_SIGNATORY]
-**Title:** [TITLE]
-**Signature:** ________________________________
-**Date:** ________________
+**Figure 1: Solution Architecture Diagram** - High-level overview of the Azure AI Document Intelligence solution architecture
+
+## Architecture Type
+The deployment follows a serverless microservices architecture with event-driven processing. This approach enables:
+- Automatic scaling based on document volume (scales from 0 to peak load)
+- Pay-per-use cost model with no idle infrastructure costs
+- Clear separation of concerns for classification, extraction, validation, and integration
+- High availability and fault tolerance through Azure managed services
+
+Key architectural components include:
+- Document Ingestion Layer (Blob Storage, API Management)
+- AI Processing Layer (Azure AI Document Intelligence, Azure Cognitive Services Text Analytics)
+- Orchestration Layer (Azure Functions, Azure Logic Apps)
+- Data Storage Layer (Azure Blob Storage, Azure Cosmos DB)
+- Integration Layer (Azure API Management, Azure Service Bus, Azure Event Grid)
+
+## Small Scope Specifications
+
+**Compute & Processing:**
+- Azure Functions Premium: EP1 instance (1 instance base, auto-scale to 10)
+- Azure Logic Apps: 100K workflow runs/month
+- Single Azure region deployment (East US recommended)
+
+**AI Services:**
+- Azure AI Document Intelligence Layout API: 50K pages/month document analysis
+- Azure AI Document Intelligence Prebuilt Models: 25K pages/month forms/tables
+- Azure Cognitive Services Text Analytics: 25K units/month entity recognition
+
+**Storage & Database:**
+- Azure Blob Storage: 1TB storage (Hot tier for active documents, Cool tier for archives)
+- Azure Cosmos DB: Serverless mode with 10GB storage, 50K RU/s capacity
+
+**Networking & Integration:**
+- Azure API Management: Consumption tier with 5M API requests/month
+- Azure Service Bus: Standard tier with 10M messages/month
+- Azure Event Grid: 2M events/month
+- Single availability zone NAT Gateway (cost optimization)
+
+**Monitoring & Operations:**
+- Azure Monitor + Log Analytics: 50GB logs/month
+- Azure Cache for Redis: Basic C1 (1GB)
+- Business hours support coverage (not 24/7)
+
+**Scalability Path:**
+- Medium scope: Increase to 250K pages/month by adjusting service limits
+- Large scope: Scale to 1M+ pages/month with multi-region deployment
+- No architectural changes required - only Azure service limit increases
+
+## Application Hosting
+All application logic will be hosted using Azure serverless services:
+- Azure Functions for all processing functions (classification, extraction, validation, integration)
+- Azure API Management for REST API endpoints
+- Azure Logic Apps for complex workflow orchestration
+- Static web hosting for user interfaces (Blob Storage + Azure CDN)
+
+All services are deployed using infrastructure-as-code (Bicep/Terraform).
+
+## Networking
+The networking architecture follows Azure best practices for AI workloads:
+- Private endpoints for private connectivity to Azure services (Document Intelligence, Blob Storage, Cosmos DB)
+- VNet integration for Azure Functions Premium
+- API Management with virtual network integration or access policies for access control
+- Azure Front Door for secure content delivery of web interfaces
+- Network security groups (NSGs) for subnet-level security
+
+## Observability
+Comprehensive observability ensures operational excellence:
+- Azure Monitor for centralized logging from all Azure Functions
+- Application Insights for application performance monitoring and distributed tracing
+- Custom metrics for processing volumes, accuracy rates, and latency
+- Azure Monitor Alerts for proactive alerting on failures or performance issues
+- Custom dashboards showing business KPIs (documents processed, accuracy, cost per document)
+
+## Backup & Disaster Recovery
+All critical data and configurations are protected through:
+- Blob Storage with versioning enabled for document storage
+- Cosmos DB continuous backup enabled
+- Automated daily backups of Cosmos DB data
+- Cross-region replication (optional) for disaster recovery
+- RTO: 4 hours | RPO: 1 hour
 
 ---
 
-**Document Control:**
-**File Name:** SOW_{SOLUTION_NAME}_{CLIENT_NAME}_{DATE}
-**Version:** 1.0
-**Last Modified:** [DATE]
-**Next Review:** [REVIEW_DATE]
+# Assumptions
+
+## General Assumptions
+- Client will provide representative document samples for AI model training (minimum 1,000 documents per type)
+- Document quality is sufficient for OCR and AI processing (readable text, minimum 150 DPI)
+- Existing Azure infrastructure meets minimum requirements for AI services
+- Business requirements for document types and extraction fields will remain stable during implementation
+- Client technical team will be available for requirements validation, testing, and approvals
+- Azure subscription access and appropriate permissions will be provided within 1 week of project start
+- Document subject matter experts (SMEs) will be available for data labeling and validation
+- Integration endpoints and API documentation for existing systems will be provided
+- Security and compliance approval processes will not delay critical path activities
+- Client will handle Azure service costs directly with Microsoft (estimated $1,500-$2,000/month)
+
+---
+
+# Dependencies
+
+## Project Dependencies
+- Azure Subscription Access: Client provides Azure subscription access with appropriate permissions (Document Intelligence, Cognitive Services, Functions, Blob Storage, Cosmos DB, API Management, Monitor)
+- Document Samples: Client provides representative document samples across all document types for AI model training and testing
+- Training Data Labeling: Client SMEs available to label documents and validate extraction rules
+- Integration Endpoints: Client provides API documentation, test environments, and credentials for system integration
+- Testing Document Library: Client provides comprehensive document library covering various formats, quality levels, and edge cases
+- SME Availability: Document processing experts available for requirements clarification and accuracy validation
+- Security Approvals: Security and compliance approvals obtained on schedule to avoid implementation delays
+- Infrastructure Readiness: Client Azure environment meets service limits and VNet/networking requirements
+- Change Freeze: No major changes to integration systems during testing and deployment phases
+- Go-Live Approval: Business and technical approval authority available for production deployment decision
+
+---
+
+# Security, Compliance & Governance
+
+The implementation and target environment will be architected and validated to meet the Client's security, compliance, and governance requirements. Vendor will adhere to industry-standard security frameworks and Azure AI best practices.
+
+## Identity & Access Management
+- Azure AD-based authentication with managed identities for service-to-service authentication
+- Multi-factor authentication (MFA) required for Azure portal access
+- Role-based access control (RBAC) with least-privilege access for all Azure services
+- Private endpoints for private connectivity to AI services
+- API authentication using Azure AD or managed identities
+
+## Monitoring & Threat Detection
+- Azure Monitor logging enabled for all API calls and document access
+- Application Insights for system health and performance metrics
+- Distributed tracing for document processing workflow analysis
+- Automated alerts for anomalous processing patterns or unauthorized access attempts
+- Integration with Microsoft Defender for Cloud for centralized security findings
+
+## Compliance & Auditing
+- SOC 2 certified Azure services, architecture follows SOC 2 security principles
+- GDPR compliance: Data residency controls, right-to-deletion capabilities, audit trail
+- HIPAA compliance (if applicable): HIPAA-eligible services, BAA with Microsoft, encryption, access controls
+- PCI DSS (if applicable): Secure handling of payment documents, no plaintext storage of card numbers
+- Continuous compliance monitoring using Azure Policy
+
+## Encryption & Key Management
+- All documents encrypted at rest using Azure Storage Service Encryption with Azure Key Vault
+- All data encrypted in transit using TLS 1.2+
+- Document storage in Blob Storage with server-side encryption enabled
+- Encryption key rotation policies implemented
+- Secure key management using Azure Key Vault with audit logging
+
+## Governance
+- Change control: All changes to document types, extraction rules, or integrations require formal change request
+- AI model governance: Model versions tracked, performance monitored, retraining process documented
+- Access reviews: Quarterly review of Azure RBAC roles and user access
+- Incident response: Documented procedures for security incidents, data breaches, or system outages
+- Resource tagging strategy for cost allocation and compliance tracking
+
+---
+
+# Environments & Access
+
+## Environments
+
+| Environment | Purpose | Azure Region | Access |
+|-------------|---------|------------|--------|
+| Development | AI model training, pipeline development | [Azure Region] | Development team |
+| Staging | Integration testing, UAT, pre-production validation | [Azure Region] | Project team, testers |
+| Production | Live document processing | [Azure Region] | Operations team, authorized users |
+
+## Access Policies
+- Multi-factor authentication (MFA) required for all Azure portal access
+- API access via Azure AD authentication tokens or managed identities
+- Administrator Access: Full Azure portal and API access for implementation team during project
+- Developer Access: Read/write access to Functions, Blob Storage, API Management for development team
+- Operator Access: Read-only access to Azure Monitor, limited management of document processing
+- User Access: API access via authentication tokens for document submission and retrieval
+
+---
+
+# Testing & Validation
+
+Comprehensive testing and validation will take place throughout the implementation lifecycle to ensure functionality, performance, security, and accuracy of the AI-powered document processing solution.
+
+## Functional Validation
+- End-to-end document processing workflow validation
+- Validation of document classification accuracy across all document types
+- Validation of data extraction accuracy against business requirements
+- Human review workflow testing
+- API endpoint functional testing
+- Web interface functional testing
+
+## Performance & Load Testing
+- Benchmark testing with target document volumes ([X,000] documents/month)
+- Stress testing to identify capacity limits and auto-scaling behavior
+- Latency validation (target: <5 minutes per document)
+- Concurrent processing capacity testing
+
+## Security Testing
+- Validation of encryption (data at rest and in transit)
+- Access control testing (Azure RBAC policies, API authentication)
+- Compliance validation (HIPAA, GDPR, SOC 2 as applicable)
+- PII/PHI detection and masking validation
+- Penetration testing (optional)
+
+## Disaster Recovery & Resilience Tests
+- Backup and restore validation
+- Failover testing (if cross-region replication configured)
+- RTO/RPO validation
+
+## User Acceptance Testing (UAT)
+- Performed in coordination with Client business stakeholders
+- Test environment and sample documents provided by Vendor
+- Accuracy validation against business-defined acceptance criteria
+- Integration testing with client systems
+
+## Go-Live Readiness
+A Go-Live Readiness Checklist will be delivered including:
+- Security and compliance sign-offs
+- Accuracy validation completion (95%+ threshold)
+- Performance testing completion
+- Integration testing completion
+- Data integrity checks
+- Issue log closure (all critical/high issues resolved)
+- Training completion
+- Documentation delivery
+
+---
+
+# Implementation Strategy & Tools
+
+The implementation approach follows Azure AI best practices and proven methodologies for document processing solutions.
+
+## Example Implementation Patterns
+- Phased rollout: Pilot with single document type, then expand
+- Parallel processing: Run Document Intelligence alongside manual processes before full cutover
+- Iterative model training: Continuous improvement of AI models based on production data
+
+## Tooling Overview
+
+| Category | Primary Tools | Purpose |
+|-----------------------|------------------------------|-------------------------------|
+| Infrastructure | Azure Bicep, Terraform | Infrastructure provisioning and deployment |
+| AI Services | Document Intelligence, Text Analytics | Document OCR, entity recognition, classification |
+| Compute | Azure Functions | Serverless processing functions |
+| Storage | Blob Storage, Cosmos DB | Document storage and metadata |
+| Monitoring | Azure Monitor, App Insights | Centralized logging, metrics, tracing |
+| CI/CD | Azure DevOps, GitHub Actions | Automated deployment pipeline |
+| Security | Key Vault, Azure AD, Front Door | Encryption, access control, API protection |
+
+---
+
+# Data Management Plan
+
+## Data Strategy
+- Document ingestion via multiple channels (Blob Storage upload, API, batch processing)
+- Automated classification and extraction using Azure AI services
+- Metadata storage in Cosmos DB for fast retrieval
+- Lifecycle management with automated archival and deletion
+- Data validation and quality checks at each processing stage
+
+## Security & Compliance
+- Encryption enabled for data in-transit and at-rest
+- PII/PHI detection and masking using Azure Cognitive Services Text Analytics
+- Document retention policies aligned with regulatory requirements
+- Audit trail for all document access via Azure Monitor
+- Secure deletion capabilities for GDPR/data privacy compliance
+
+---
+
+# Cutover Plan & Go-Live Readiness
+
+## Cutover Checklist
+- Pre-cutover validation: Final UAT sign-off, accuracy validation (95%+)
+- Production environment validated and monitoring operational
+- Rollback procedures documented and rehearsed
+- Stakeholder communication completed
+- Enable document routing to Document Intelligence solution
+- Monitor first batch of live documents
+- Verify processing accuracy and performance
+- Daily monitoring during hypercare period (4 weeks)
+
+## Rollback Strategy
+- Documented rollback triggers (accuracy <90%, critical integration failure, security incident)
+- Rollback procedures: Disable Document Intelligence routing, revert to manual processing
+- Root cause analysis and fix validation before retry
+- Communication plan for stakeholders
+- Preserve all logs and processed documents for analysis
+
+---
+
+# Handover & Managed Services Transition
+
+## Handover Artifacts
+- As-Built documentation including architecture diagrams and Azure service configurations
+- AI model documentation (training data, accuracy metrics, version history)
+- Operations runbook with troubleshooting procedures
+- Monitoring and alert configuration reference
+- Azure cost optimization recommendations
+- Integration documentation and API specifications
+
+## Knowledge Transfer
+- Live knowledge transfer sessions for administrators and operations team
+- Azure service management training (Document Intelligence, Text Analytics, Functions, Cosmos DB)
+- AI model monitoring and maintenance training
+- Recorded training materials hosted in shared portal
+- Documentation portal with searchable content
+
+---
+
+# Investment Summary
+
+**Small Scope Implementation:** This pricing reflects a department-level deployment designed for 50,000 pages/month processing capacity with 50-100 users. For larger enterprise deployments, please request medium or large scope pricing.
+
+## Total Investment
+
+<!-- BEGIN COST_SUMMARY_TABLE -->
+| Cost Category | Year 1 List | Provider/Partner Credits | Year 1 Net | Year 2 | Year 3 | 3-Year Total |
+|---------------|-------------|-------------------------|------------|---------|---------|-----------------|
+| Cloud Infrastructure | $18,528 | ($3,690) | $14,838 | $18,528 | $18,528 | $51,894 |
+| Professional Services | $82,250 | ($10,000) | $72,250 | $0 | $0 | $72,250 |
+| Software Licenses | $2,904 | $0 | $2,904 | $2,904 | $2,904 | $8,712 |
+| Support & Maintenance | $2,670 | $0 | $2,670 | $2,670 | $2,670 | $8,010 |
+| **TOTAL INVESTMENT** | **$106,352** | **($13,690)** | **$92,662** | **$24,102** | **$24,102** | **$140,866** |
+<!-- END COST_SUMMARY_TABLE -->
+
+## Azure Partner Credits
+
+**Year 1 Credits Applied:** $13,690 (13% reduction)
+- **Microsoft Partner Services Credit:** $10,000 applied to solution architecture and AI model configuration
+- **Azure AI Services Consumption Credit:** $3,690 applied to Year 1 Document Intelligence and Text Analytics usage (30% discount)
+- Credits are real Azure account credits, automatically applied as services are consumed
+- Credits are Year 1 only; Years 2-3 reflect standard Azure pricing
+
+**Investment Comparison:**
+- **Year 1 Net Investment:** $92,662 (after credits) vs. $106,352 list price
+- **3-Year Total Cost of Ownership:** $140,866
+- **Expected ROI:** 8-12 month payback based on typical labor cost savings from automation
+
+## Cost Components
+
+**Professional Services** ($82,250 - 310 hours): Labor costs for discovery, architecture, implementation, testing, and knowledge transfer. Breakdown:
+- Discovery & Architecture (100 hours): Requirements analysis, Azure solution design, documentation
+- Implementation (180 hours): Infrastructure deployment, AI integration, development, testing
+- Training & Support (30 hours): Knowledge transfer and 30-day post-launch hypercare
+
+**Cloud Infrastructure** ($18,068/year): Azure AI services sized for small scope (50K pages/month):
+- Azure AI Document Intelligence (Layout + Prebuilt Models): $12,000/year
+- Azure compute/storage (Functions, Blob Storage, Cosmos DB, API Management): $6,068/year
+- Scales automatically with document volume - pay only for usage
+
+**Software Licenses & Subscriptions** ($2,904/year): Operational tooling for small scope:
+- Azure AI Custom Vision for document classification: $600/year
+- Datadog monitoring (3 hosts): $828/year
+- PagerDuty incident management (3 users): $1,476/year
+
+**Support & Maintenance** ($2,710/year): Ongoing managed services (15% of cloud infrastructure):
+- Business hours monitoring and support
+- Monthly cost optimization reviews
+- Azure service limit management
+
+Detailed breakdown including Azure service consumption estimates and sizing is provided in cost-breakdown.csv.
+
+---
+
+## Payment Terms
+
+### Pricing Model
+- Fixed price or Time & Materials (T&M)
+- Milestone-based payments per Deliverables table
+
+### Payment Schedule
+- 25% upon SOW execution and project kickoff
+- 30% upon completion of Discovery & Planning phase
+- 30% upon completion of Implementation and Testing
+- 15% upon successful go-live and project acceptance
+
+---
+
+## Invoicing & Expenses
+
+### Invoicing
+- Milestone-based invoicing per Payment Terms above
+- Net 30 payment terms
+- Invoices submitted upon milestone completion and acceptance
+
+### Expenses
+- Azure service costs are included in Cloud Infrastructure pricing ($18,068/year = ~$1,506/month)
+- Small scope sizing: 50K pages/month document processing capacity
+- Costs scale with actual usage - can increase/decrease based on volume
+- Travel and on-site expenses reimbursable at cost with prior approval (remote-first delivery model)
+
+---
+
+# Terms & Conditions
+
+All services will be delivered in accordance with the executed Master Services Agreement (MSA) or equivalent contractual document between Vendor and Client.
+
+## Scope Changes
+- Changes to document types, extraction requirements, integration scope, or timeline require formal change requests
+- Change requests may impact project timeline and budget
+
+## Intellectual Property
+- Client retains ownership of all business data and document content
+- Vendor retains ownership of proprietary AI methodologies and frameworks
+- Custom AI models and configurations become Client property upon final payment
+- Azure service configurations and infrastructure code transfer to Client
+
+## Service Levels
+- Document processing accuracy: 95%+ on production dataset
+- System uptime: 99.5% during business hours
+- 30-day warranty on all deliverables from go-live date
+- Post-warranty support available under separate managed services agreement
+
+## Liability
+- Model accuracy guarantees apply only to document types and quality levels within training dataset scope
+- Performance may vary with significantly different document characteristics
+- Ongoing model retraining recommended as document patterns evolve
+- Liability caps as agreed in MSA
+
+## Confidentiality
+- Both parties agree to maintain strict confidentiality of business data, document content, and proprietary AI techniques
+- All exchanged artifacts under NDA protection
+
+## Termination
+- Mutually terminable per MSA terms, subject to payment for completed work
+
+## Governing Law
+- Agreement governed under the laws of [State/Region]
+
+---
+
+# Sign-Off
+
+By signing below, both parties agree to the scope, approach, and terms outlined in this Statement of Work.
+
+**Client Authorized Signatory:**
+Name: __________________________
+Title: __________________________
+Signature: ______________________
+Date: __________________________
+
+**Service Provider Authorized Signatory:**
+Name: __________________________
+Title: __________________________
+Signature: ______________________
+Date: __________________________
 
 ---
 

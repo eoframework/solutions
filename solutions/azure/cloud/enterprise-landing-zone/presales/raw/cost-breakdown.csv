@@ -1,0 +1,23 @@
+Cost Category,Description,Year 1 List,Azure/Partner Credit,Year 1 Net,Year 2,Year 3,3-Year Total,Credit Comments
+Professional Services,Enterprise Architecture & Design - Landing zone architecture and governance framework (120 hours @ $225/hr),$27000,$10000,$17000,$0,$0,$17000,Microsoft Partner Services Credit
+Professional Services,Landing Zone Implementation - Management groups subscription structure networking policies (240 hours @ $200/hr),$48000,$0,$48000,$0,$0,$48000,
+Professional Services,Security & Compliance Setup - Azure Policy Azure Sentinel RBAC configuration (80 hours @ $200/hr),$16000,$5000,$11000,$0,$0,$11000,Microsoft Partner Services Credit
+Professional Services,Network Architecture Implementation - Hub-spoke topology Azure Firewall Private DNS zones (120 hours @ $200/hr),$24000,$0,$24000,$0,$0,$24000,
+Professional Services,Identity & Access Management - Azure AD integration RBAC design Conditional Access (60 hours @ $200/hr),$12000,$0,$12000,$0,$0,$12000,
+Professional Services,Azure Training & Knowledge Transfer - Admin training operational runbooks (40 hours @ $175/hr),$7000,$0,$7000,$0,$0,$7000,
+Cloud Infrastructure,Azure Virtual WAN - Premium tier for global connectivity (2 hubs),$5200,$0,$5200,$5200,$5200,$15600,
+Cloud Infrastructure,Azure Firewall - Premium tier for advanced threat protection (2 instances),$15000,$0,$15000,$15000,$15000,$45000,
+Cloud Infrastructure,Azure DDoS Protection Standard - Network-wide DDoS protection,$3000,$0,$3000,$3000,$3000,$9000,
+Cloud Infrastructure,Azure Private DNS Zones - DNS hosting for private endpoints (20 zones),$120,$0,$120,$120,$120,$360,
+Cloud Infrastructure,Azure Bastion - Secure RDP/SSH access (2 instances),$1800,$0,$1800,$1800,$1800,$5400,
+Cloud Infrastructure,Azure Log Analytics Workspace - Centralized logging (500 GB/month),$13500,$0,$13500,$13500,$13500,$40500,
+Cloud Infrastructure,Azure Virtual Network - Hub and spoke VNets (10 VNets),$0,$0,$0,$0,$0,$0,
+Cloud Infrastructure,ExpressRoute Circuit - Hybrid connectivity (1 Gbps),$18000,$0,$18000,$18000,$18000,$54000,
+Software Licenses & Subscriptions,Azure Monitor - Application and infrastructure monitoring,$3600,$0,$3600,$3600,$3600,$10800,
+Software Licenses & Subscriptions,Azure Sentinel - SIEM/SOAR for security operations (200 GB/month),$18000,$0,$18000,$18000,$18000,$54000,
+Software Licenses & Subscriptions,Azure Policy - Governance and compliance enforcement (included),$0,$0,$0,$0,$0,$0,
+Software Licenses & Subscriptions,Microsoft Defender for Cloud - Standard tier for all subscriptions,$9000,$0,$9000,$9000,$9000,$27000,
+Support & Maintenance,Azure Support - Professional Direct support plan,$12000,$0,$12000,$12000,$12000,$36000,
+Support & Maintenance,Ongoing Governance & Optimization - Quarterly reviews policy updates (40 hours/year @ $200/hr),$8000,$0,$8000,$8000,$8000,$24000,
+Support & Maintenance,Security Operations Support - Monthly security reviews threat hunting (24 hours/year @ $200/hr),$4800,$0,$4800,$4800,$4800,$14400,
+Total Investment,,$245020,$15000,$230020,$112020,$112020,$454060,Year 1 credits reduce net investment by 6%

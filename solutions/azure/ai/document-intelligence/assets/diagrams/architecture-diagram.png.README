@@ -1,0 +1,27 @@
+⚠️ ARCHITECTURE DIAGRAM PNG GENERATION NEEDED
+
+The architecture-diagram.png file needs to be generated before regenerating presentations and documents.
+
+OPTIONS TO CREATE THE PNG:
+
+Option 1: Use Draw.io (RECOMMENDED)
+1. Open architecture-diagram.drawio in Draw.io (https://app.diagrams.net)  
+2. The diagram includes a complete Azure architecture layout
+3. Replace colored rectangles with actual Azure icons from Azure stencil library
+4. Export as PNG: File → Export as → PNG
+5. Save as "architecture-diagram.png" in this directory
+
+Option 2: Use Python Script
+1. Install diagrams library: pip install diagrams graphviz
+2. Fix import path if needed (Azure AI icons)
+3. Run: python3 generate_diagram.py
+4. PNG will be generated automatically
+
+Option 3: Create Custom Diagram
+1. Use your preferred diagramming tool
+2. Follow the architecture in DIAGRAM_REQUIREMENTS.md
+3. Export as PNG (recommended size: 1920x1080 or similar)
+4. Save as "architecture-diagram.png"
+
+TEMPORARY WORKAROUND:
+Documents can still be generated without the PNG, but the architecture diagram will show as missing image placeholder in presentations/documents.

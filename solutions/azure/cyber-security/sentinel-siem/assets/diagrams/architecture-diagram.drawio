@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxfile host="app.diagrams.net" modified="2025-01-01T00:00:00.000Z" agent="13.0" etag="test" version="13.0" type="device">
+  <diagram id="sentinel-siem-arch" name="Page-1">
+    <mxGraphModel dx="1200" dy="800" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1200" pageHeight="800" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="2" value="Azure Sentinel SIEM - Enterprise Architecture" style="text;html=1;fontSize=16;fontStyle=1;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="400" y="10" width="400" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="3" value="Note: This is a template file. Use generate_diagram.py to create the full architecture diagram with all components. The Python script generates a comprehensive diagram showing:&#10;&#10;Data Sources:&#10;- Microsoft 365 Defender&#10;- Azure AD&#10;- Defender for Cloud&#10;- Azure Firewall &amp; NSG Logs&#10;- On-Premises Firewalls&#10;- EDR/XDR Solutions&#10;- Third-Party SIEM&#10;&#10;Processing:&#10;- Log Analytics Workspace (300 GB/month)&#10;- KQL Detection Rules (50+)&#10;- ML Anomaly Detection&#10;- UEBA (Behavior Analytics)&#10;- Threat Intelligence Integration&#10;&#10;Response:&#10;- Incident Management&#10;- Investigation Workbooks&#10;- Advanced Hunting&#10;- SOAR Playbooks (50+)&#10;- Auto-Remediation&#10;&#10;Integration:&#10;- Ticketing Systems&#10;- Communication Tools&#10;- Security Tools&#10;&#10;Governance:&#10;- RBAC&#10;- Audit Logging&#10;- Compliance Reporting&#10;- Azure Monitor&#10;- Key Vault" style="text;html=1;fontSize=12;align=left;verticalAlign=top;spacing=5;spacingTop=5;spacingLeft=10;spacingRight=10;" vertex="1" parent="1">
+          <mxGeometry x="50" y="50" width="1100" height="700" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

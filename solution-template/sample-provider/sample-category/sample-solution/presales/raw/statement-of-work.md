@@ -417,11 +417,13 @@ The implementation approach will follow industry best practices and proven metho
 # Investment Summary
 
 <!-- BEGIN COST_SUMMARY_TABLE -->
-| Cost Category | Year 1 | Year 2 | Year 3 | 3-Year Total |
-|---------------|---------|---------|---------|--------------|
-| Professional Services | $364,000 | $0 | $0 | $364,000 |
-| Infrastructure & Materials | $16,564 | $16,564 | $16,564 | $49,691 |
-| **TOTAL INVESTMENT** | **$380,564** | **$16,564** | **$16,564** | **$413,691** |
+| Cost Category | Year 1 List | Provider/Partner Credits | Year 1 Net | Year 2 | Year 3 | 3-Year Total |
+|---------------|-------------|-------------------------|------------|---------|---------|-----------------|
+| Cloud Infrastructure | $12,225 | ($990) | $11,235 | $12,225 | $12,225 | $35,685 |
+| Professional Services | $64,300 | ($5,000) | $59,300 | $0 | $0 | $59,300 |
+| Software Licenses & Subscriptions | $7,650 | $0 | $7,650 | $7,650 | $7,650 | $22,950 |
+| Support & Maintenance | $0 | $0 | $0 | $0 | $0 | $0 |
+| **TOTAL INVESTMENT** | **$84,175** | **($5,990)** | **$78,185** | **$19,875** | **$19,875** | **$117,935** |
 <!-- END COST_SUMMARY_TABLE -->
 
 ## Cost Components
