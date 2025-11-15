@@ -1,101 +1,135 @@
-# STATEMENT OF WORK (SOW)
-## AWS Disaster Recovery Web Application Implementation
+---
+# Document Information
+document_title: Statement of Work
+document_version: 1.0
+document_date: [Month DD, YYYY]
+document_id: SOW-2025-002
 
-**Document Version:** 1.0
-**Date:** [DATE]
-**Prepared by:** [VENDOR_NAME]
-**Client:** [CLIENT_NAME]
-**Project:** AWS Disaster Recovery Web Application Implementation
-**SOW Number:** [SOW_NUMBER]
+# Project Information
+project_name: AWS Disaster Recovery for Web Applications
+project_id: PROJ-DR-2025-001
+opportunity_no: OPP-DR-2025-0001
+project_start_date: [Month DD, YYYY]
+project_end_date: [Month DD, YYYY]
+project_duration: 6 months
+
+# Client Information
+client_name: [Client Name]
+client_address: [Client Address]
+client_contact_name: [Client Contact Name]
+client_contact_title: [Client Contact Title]
+client_contact_email: [Client Contact Email]
+client_contact_phone: [Client Contact Phone]
+
+# Vendor Information
+vendor_name: EO Framework Consulting
+vendor_address: 123 Business Street, Suite 100
+vendor_contact_name: [Vendor Contact Name]
+vendor_contact_title: Senior Solutions Architect
+vendor_contact_email: info@eoframework.com
+vendor_contact_phone: (555) 123-4567
+---
+
+# AWS Disaster Recovery for Web Applications - Statement of Work
 
 ---
 
-## 1. EXECUTIVE SUMMARY
+# Executive Summary
 
-### 1.1 Project Overview
-This Statement of Work (SOW) outlines the scope, deliverables, timeline, and terms for the implementation of a comprehensive AWS Disaster Recovery solution for [CLIENT_NAME]'s web application infrastructure. The project will deliver business continuity assurance through automated failover capabilities, data replication, and comprehensive disaster recovery procedures that ensure minimal downtime and data loss during disaster scenarios.
+This Statement of Work (SOW) defines the scope, deliverables, roles, and terms for implementing a comprehensive AWS Disaster Recovery solution for [CLIENT_NAME]'s web application infrastructure. The project will deliver business continuity assurance through automated failover capabilities, data replication, and comprehensive disaster recovery procedures that ensure minimal downtime and data loss during disaster scenarios.
 
-### 1.2 Business Objectives
-- **Primary Goal:** Achieve [RTO_TARGET] Recovery Time Objective and [RPO_TARGET] Recovery Point Objective for critical web applications
-- **Success Metrics:** 99.9% application availability, automated failover within [RTO_MINUTES] minutes, zero data loss tolerance
-- **Expected ROI:** [ROI_PERCENTAGE]% over 3 years through avoided downtime costs and business continuity assurance
+## Business Objectives
 
-### 1.3 Project Duration
+- **Primary Goal:** Achieve 15-minute Recovery Time Objective (RTO) and 5-minute Recovery Point Objective (RPO) for critical web applications
+- **Success Metrics:** 99.9% application availability, automated failover capabilities, zero data loss tolerance
+- **Expected ROI:** Risk mitigation value through avoided downtime costs and business continuity assurance
+
+## Project Duration
+
 **Start Date:** [PROJECT_START_DATE]
 **End Date:** [PROJECT_END_DATE]
-**Total Duration:** [PROJECT_DURATION] weeks
+**Total Duration:** 6 months
 
 ---
 
-## 2. SCOPE OF WORK
+# Scope of Work
 
-### 2.1 In-Scope Activities
+## In-Scope Activities
+
 The following disaster recovery services and deliverables are included in this SOW:
 
-#### 2.1.1 Discovery & Business Continuity Planning Phase
-- [ ] Business impact assessment and critical application prioritization
-- [ ] Current state disaster recovery capability evaluation
-- [ ] RTO/RPO requirements analysis and validation
-- [ ] Compliance and regulatory requirement assessment
-- [ ] Disaster scenario modeling and risk assessment
-- [ ] DR architecture design and multi-region strategy
+### Discovery & Business Continuity Planning Phase
 
-#### 2.1.2 Infrastructure Implementation Phase
-- [ ] Secondary AWS region setup and configuration
-- [ ] Cross-region networking and VPN connectivity
-- [ ] Database replication configuration (RDS/Aurora cross-region)
-- [ ] Application server deployment in DR region
-- [ ] Load balancer and DNS failover configuration
-- [ ] Storage replication and backup strategy implementation
+- Business impact assessment and critical application prioritization
+- Current state disaster recovery capability evaluation
+- RTO/RPO requirements analysis and validation
+- Compliance and regulatory requirement assessment
+- Disaster scenario modeling and risk assessment
+- DR architecture design and multi-region strategy
 
-#### 2.1.3 Application & Data Replication Phase
-- [ ] Web application deployment to DR environment
-- [ ] Real-time and scheduled data replication setup
-- [ ] Database synchronization and consistency validation
-- [ ] File system and static content replication
-- [ ] Configuration management and environment parity
-- [ ] Application dependency mapping and replication
+### Infrastructure Implementation Phase
 
-#### 2.1.4 Monitoring & Automation Phase
-- [ ] DR monitoring dashboard and alerting system
-- [ ] Automated failover trigger configuration
-- [ ] Health check and availability monitoring
-- [ ] Performance monitoring in DR environment
-- [ ] Automated backup verification and testing
-- [ ] Incident response automation and notifications
+- Secondary AWS region setup and configuration
+- Cross-region networking and VPN connectivity
+- Database replication configuration (RDS/Aurora cross-region)
+- Application server deployment in DR region
+- Load balancer and DNS failover configuration
+- Storage replication and backup strategy implementation
 
-#### 2.1.5 Testing & Validation Phase
-- [ ] DR testing framework development
-- [ ] Planned failover testing and validation
-- [ ] Performance testing in DR environment
-- [ ] Data integrity and consistency validation
-- [ ] Full disaster simulation exercises
-- [ ] Business process validation in DR mode
+### Application & Data Replication Phase
 
-#### 2.1.6 Operations & Handover Phase
-- [ ] DR runbook creation and documentation
-- [ ] Operations team training on DR procedures
-- [ ] 24/7 monitoring and support procedures
-- [ ] Incident response and escalation procedures
-- [ ] Ongoing DR testing and maintenance planning
+- Web application deployment to DR environment
+- Real-time and scheduled data replication setup
+- Database synchronization and consistency validation
+- File system and static content replication
+- Configuration management and environment parity
+- Application dependency mapping and replication
 
-### 2.2 Out-of-Scope Activities
+### Monitoring & Automation Phase
+
+- DR monitoring dashboard and alerting system
+- Automated failover trigger configuration
+- Health check and availability monitoring
+- Performance monitoring in DR environment
+- Automated backup verification and testing
+- Incident response automation and notifications
+
+### Testing & Validation Phase
+
+- DR testing framework development
+- Planned failover testing and validation
+- Performance testing in DR environment
+- Data integrity and consistency validation
+- Full disaster simulation exercises
+- Business process validation in DR mode
+
+### Operations & Handover Phase
+
+- DR runbook creation and documentation
+- Operations team training on DR procedures
+- 24/7 monitoring and support procedures
+- Incident response and escalation procedures
+- Ongoing DR testing and maintenance planning
+
+## Out-of-Scope Activities
+
 The following activities are explicitly excluded from this SOW:
 
-- [ ] Legacy application re-architecture or modernization
-- [ ] Third-party software licensing for DR environments
-- [ ] Physical hardware procurement or data center setup
-- [ ] Network infrastructure modifications outside AWS
-- [ ] Ongoing operational support beyond [SUPPORT_PERIOD]
-- [ ] Application performance optimization unrelated to DR
-- [ ] Data migration from non-AWS environments
-- [ ] Compliance audit services or regulatory reporting
+- Legacy application re-architecture or modernization
+- Third-party software licensing for DR environments
+- Physical hardware procurement or data center setup
+- Network infrastructure modifications outside AWS
+- Ongoing operational support beyond the warranty period
+- Application performance optimization unrelated to DR
+- Data migration from non-AWS environments
+- Compliance audit services or regulatory reporting
 
 ---
 
-## 3. DELIVERABLES
+# Deliverables
 
-### 3.1 Documentation Deliverables
+## Documentation Deliverables
+
 | Deliverable | Description | Due Date | Format |
 |-------------|-------------|----------|---------|
 | **DR Requirements Specification** | Detailed RTO/RPO requirements and business continuity needs | [DATE] | CSV/Excel |
@@ -107,9 +141,10 @@ The following activities are explicitly excluded from this SOW:
 | **DR Monitoring Guide** | Monitoring dashboard configuration and alert procedures | [DATE] | PDF |
 | **As-Built DR Documentation** | Final DR system configuration and architecture | [DATE] | PDF |
 
-### 3.2 System Deliverables
+## System Deliverables
+
 | Component | Description | Acceptance Criteria |
-|-----------|-------------|-------------------|
+|-----------|-------------|---------------------|
 | **Primary Production Environment** | Fully configured primary region with DR monitoring | Passes all acceptance tests |
 | **DR Production Environment** | Fully operational secondary region environment | Successful failover demonstration |
 | **Data Replication System** | Real-time database and file replication | RPO compliance validation |
@@ -117,7 +152,8 @@ The following activities are explicitly excluded from this SOW:
 | **Monitoring & Alerting** | 24/7 DR monitoring and incident alerting | Functional dashboards and alerts |
 | **Backup & Recovery Validation** | Automated backup testing and verification | Successful recovery demonstrations |
 
-### 3.3 Knowledge Transfer Deliverables
+## Knowledge Transfer Deliverables
+
 - DR operations training (3 days, up to 15 participants)
 - Executive disaster response briefing (4 hours, up to 10 participants)
 - Hands-on failover simulation exercises
@@ -126,9 +162,10 @@ The following activities are explicitly excluded from this SOW:
 
 ---
 
-## 4. PROJECT TIMELINE & MILESTONES
+# Project Plan & Timeline
 
-### 4.1 Project Phases
+## Milestones
+
 | Phase | Duration | Start Date | End Date | Key Milestones |
 |-------|----------|------------|----------|----------------|
 | **Discovery & Planning** | 3 weeks | [DATE] | [DATE] | BIA completed, DR architecture approved |
@@ -138,19 +175,21 @@ The following activities are explicitly excluded from this SOW:
 | **Testing & Validation** | 3 weeks | [DATE] | [DATE] | DR tests passed, failover validated |
 | **Operations & Handover** | 2 weeks | [DATE] | [DATE] | Training completed, documentation delivered |
 
-### 4.2 Critical Dependencies
-- [ ] Client provides access to current production environment and configurations
-- [ ] Business stakeholders available for BIA and requirements validation
-- [ ] AWS account access and appropriate permissions for multi-region deployment
-- [ ] Network connectivity approvals for cross-region traffic
-- [ ] Maintenance windows available for DR testing and validation
-- [ ] Operations team availability for training and knowledge transfer
+## Critical Dependencies
+
+- Client provides access to current production environment and configurations
+- Business stakeholders available for BIA and requirements validation
+- AWS account access and appropriate permissions for multi-region deployment
+- Network connectivity approvals for cross-region traffic
+- Maintenance windows available for DR testing and validation
+- Operations team availability for training and knowledge transfer
 
 ---
 
-## 5. ROLES & RESPONSIBILITIES
+# Roles & Responsibilities (RACI)
 
-### 5.1 Vendor Responsibilities ([VENDOR_NAME])
+## Vendor Responsibilities
+
 - **DR Project Manager:** Overall DR project coordination and delivery management
 - **DR Solution Architect:** Multi-region DR architecture design and oversight
 - **Cloud Infrastructure Engineer:** AWS DR infrastructure deployment and configuration
@@ -158,14 +197,16 @@ The following activities are explicitly excluded from this SOW:
 - **Monitoring Engineer:** DR monitoring and alerting system implementation
 - **Training Specialist:** DR operations training and knowledge transfer
 
-### 5.2 Client Responsibilities ([CLIENT_NAME])
+## Client Responsibilities
+
 - **Business Continuity Sponsor:** Executive oversight and DR investment decisions
 - **Technical Lead:** Infrastructure coordination and security approvals
 - **Application Owner:** Business requirements validation and acceptance testing
 - **Operations Manager:** DR procedures adoption and team coordination
 - **System Administrator:** Ongoing DR system maintenance and monitoring
 
-### 5.3 Shared Responsibilities
+## Shared Responsibilities
+
 - Disaster scenario planning and business impact assessment
 - DR testing coordination and business process validation
 - Incident response procedures and escalation protocols
@@ -174,60 +215,92 @@ The following activities are explicitly excluded from this SOW:
 
 ---
 
-## 6. COMMERCIAL TERMS
+# Architecture & Technical Design
 
-### 6.1 Project Investment
-| Category | Description | Amount |
-|----------|-------------|--------|
-| **DR Infrastructure Services** | Multi-region setup and configuration | $[INFRASTRUCTURE_AMOUNT] |
-| **DR Implementation Services** | Application replication and automation | $[IMPLEMENTATION_AMOUNT] |
-| **DR Testing & Validation** | Comprehensive DR testing and simulation | $[TESTING_AMOUNT] |
-| **DR Training & Documentation** | Operations training and runbook creation | $[TRAINING_AMOUNT] |
-| **Travel & Expenses** | On-site DR planning and training | $[TRAVEL_AMOUNT] |
-| **TOTAL PROJECT COST** | **Complete DR implementation investment** | **$[TOTAL_AMOUNT]** |
+## Architecture Overview
 
-### 6.2 Payment Terms
-- **30%** upon SOW execution and project kickoff
-- **25%** upon completion of DR infrastructure setup
-- **25%** upon successful DR testing and validation
-- **20%** upon training completion and project acceptance
+The AWS Disaster Recovery solution implements a multi-region, active-standby architecture designed for high availability and rapid failover. The architecture provides automated failover capabilities, continuous data replication, and comprehensive monitoring to ensure business continuity.
 
-### 6.3 Additional Services
-Any additional DR services beyond the scope of this SOW will be quoted separately and require written approval from both parties.
+![Solution Architecture Diagram](assets/diagrams/architecture-diagram.png)
+
+**Figure 1: Solution Architecture Diagram** - High-level overview of the multi-region DR architecture
+
+## Architecture Type
+
+The deployment follows a warm standby DR strategy with active-passive multi-region deployment. This approach enables:
+
+- RTO (Recovery Time Objective): 15 minutes
+- RPO (Recovery Point Objective): 5 minutes
+- Automated health checks and DNS failover via Route 53
+- Continuous cross-region replication for databases and storage
+- Cost optimization through reduced capacity in standby region
 
 ---
 
-## 7. ACCEPTANCE CRITERIA
+# Pricing & Investment Summary
 
-### 7.1 Technical Acceptance
+<!-- BEGIN COST_SUMMARY_TABLE -->
+| Cost Category | Year 1 | Year 2 | Year 3 | 3-Year Total |
+|---------------|---------|---------|---------|--------------|
+| Professional Services | $364,000 | $0 | $0 | $364,000 |
+| Infrastructure & Materials | $228,277 | $23,777 | $23,777 | $275,832 |
+| **TOTAL SOLUTION INVESTMENT** | **$592,277** | **$23,777** | **$23,777** | **$639,832** |
+<!-- END COST_SUMMARY_TABLE -->
+
+## Cost Components
+
+**Professional Services**: Labor costs for discovery, DR architecture design, infrastructure deployment, testing, runbook development, and knowledge transfer. Detailed breakdown provided in level-of-effort-estimate.xlsx.
+
+**Infrastructure & Materials**: AWS cloud services for primary and DR regions (EC2, RDS, S3, Route53, ALB, backups), software licenses, and support contracts. Detailed breakdown including AWS service consumption estimates, software licensing, and support contracts is provided in the accompanying Cost Breakdown workbook (cost-breakdown.xlsx).
+
+## Payment Terms
+
+### Payment Schedule
+
+- 30% upon SOW execution and project kickoff
+- 25% upon completion of DR infrastructure setup
+- 25% upon successful DR testing and validation
+- 20% upon training completion and project acceptance
+
+---
+
+# Acceptance Criteria
+
+## Technical Acceptance
+
 The DR solution will be considered technically accepted when:
-- [ ] RTO objectives are met through successful failover demonstrations
-- [ ] RPO objectives are validated through data replication testing
-- [ ] DR environment performs within specified parameters
-- [ ] Automated failover triggers operate correctly
-- [ ] All DR monitoring and alerting systems are functional
-- [ ] Cross-region connectivity and security controls are validated
 
-### 7.2 Business Acceptance
+- RTO objectives are met through successful failover demonstrations
+- RPO objectives are validated through data replication testing
+- DR environment performs within specified parameters
+- Automated failover triggers operate correctly
+- All DR monitoring and alerting systems are functional
+- Cross-region connectivity and security controls are validated
+
+## Business Acceptance
+
 The project will be considered complete when:
-- [ ] Business stakeholders validate DR capabilities meet requirements
-- [ ] Operations team demonstrates competency in DR procedures
-- [ ] DR documentation is delivered and approved
-- [ ] DR environment is operational and monitored 24/7
-- [ ] Emergency response procedures are established and tested
+
+- Business stakeholders validate DR capabilities meet requirements
+- Operations team demonstrates competency in DR procedures
+- DR documentation is delivered and approved
+- DR environment is operational and monitored 24/7
+- Emergency response procedures are established and tested
 
 ---
 
-## 8. ASSUMPTIONS & CONSTRAINTS
+# Assumptions & Constraints
 
-### 8.1 Assumptions
+## Assumptions
+
 - Client will provide necessary access to production systems and data
 - Existing AWS infrastructure meets minimum requirements for DR deployment
 - Required business stakeholders will be available for BIA and requirements gathering
 - Current application architecture supports multi-region deployment
 - Client team will participate actively in DR testing and validation
 
-### 8.2 Constraints
+## Constraints
+
 - DR implementation must not impact production system performance
 - All DR activities must comply with existing security and compliance requirements
 - Data replication must meet privacy and regulatory requirements
@@ -236,65 +309,67 @@ The project will be considered complete when:
 
 ---
 
-## 9. RISK MANAGEMENT
+# Risk Management
 
-### 9.1 Identified Risks
+## Identified Risks
+
 | Risk | Impact | Probability | Mitigation Strategy |
-|------|--------|-------------|-------------------|
+|------|--------|-------------|---------------------|
 | **Complex Application Dependencies** | High | Medium | Thorough dependency mapping and phased testing |
 | **Cross-Region Latency Impact** | Medium | Low | Performance testing and optimization |
 | **DR Testing Business Impact** | Medium | Medium | Careful planning and off-hours testing |
 | **Regulatory Compliance Changes** | High | Low | Ongoing compliance monitoring and adaptation |
 | **Team Availability for Training** | Medium | Medium | Flexible training schedules and recorded sessions |
 
-### 9.2 Change Management
+## Change Management
+
 Any changes to DR scope, RTO/RPO requirements, or timeline must be documented through formal change requests and approved by both parties before implementation.
 
 ---
 
-## 10. TERMS & CONDITIONS
+# Terms & Conditions
 
-### 10.1 Intellectual Property
+## Intellectual Property
+
 - Client retains ownership of all business data and application configurations
 - Vendor retains ownership of DR methodologies and automation tools
 - DR configuration and procedures become client property upon final payment
 
-### 10.2 Confidentiality
+## Confidentiality
+
 Both parties agree to maintain strict confidentiality of business continuity plans, system configurations, and sensitive data throughout the project and beyond.
 
-### 10.3 Warranty & Support
+## Warranty & Support
+
 - 90-day warranty on all DR deliverables from go-live date
 - DR system defect resolution included at no additional cost during warranty period
 - Post-warranty DR support available under separate maintenance agreement
 
-### 10.4 Limitation of Liability
+## Limitation of Liability
+
 Vendor's liability is limited to the total contract value. Neither party shall be liable for indirect, incidental, or consequential damages related to DR implementation.
 
----
+## Governing Law
 
-## 11. APPROVAL & SIGNATURES
-
-### Client Approval ([CLIENT_NAME])
-
-**Name:** [CLIENT_AUTHORIZED_SIGNATORY]
-**Title:** [TITLE]
-**Signature:** ________________________________
-**Date:** ________________
-
-### Vendor Approval ([VENDOR_NAME])
-
-**Name:** [VENDOR_AUTHORIZED_SIGNATORY]
-**Title:** [TITLE]
-**Signature:** ________________________________
-**Date:** ________________
+Agreement governed under the laws of [State/Region]
 
 ---
 
-**Document Control:**
-**File Name:** SOW_AWS_DR_Web_Application_{CLIENT_NAME}_{DATE}
-**Version:** 1.0
-**Last Modified:** [DATE]
-**Next Review:** [REVIEW_DATE]
+# Sign-Off
+
+By signing below, both parties agree to the scope, approach, and terms outlined in this Statement of Work.
+
+**Client Authorized Signatory:**
+Name: __________________________
+Title: __________________________
+Signature: ______________________
+Date: __________________________
+
+**Service Provider Authorized Signatory:**
+Name: __________________________
+Title: __________________________
+Signature: ______________________
+Date: __________________________
 
 ---
 

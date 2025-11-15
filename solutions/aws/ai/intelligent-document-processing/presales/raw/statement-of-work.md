@@ -1,3 +1,35 @@
+---
+# Document Information
+document_title: Statement of Work
+document_version: 1.0
+document_date: [Month DD, YYYY]
+document_id: SOW-2025-001
+
+# Project Information
+project_name: AWS Intelligent Document Processing (IDP) Implementation
+project_id: PROJ-IDP-2025-001
+opportunity_no: OPP-IDP-2025-0001
+project_start_date: [Month DD, YYYY]
+project_end_date: [Month DD, YYYY]
+project_duration: 6 months
+
+# Client Information
+client_name: [Client Name]
+client_address: [Client Address]
+client_contact_name: [Client Contact Name]
+client_contact_title: [Client Contact Title]
+client_contact_email: [Client Contact Email]
+client_contact_phone: [Client Contact Phone]
+
+# Vendor Information
+vendor_name: EO Framework Consulting
+vendor_address: 123 Business Street, Suite 100
+vendor_contact_name: [Vendor Contact Name]
+vendor_contact_title: Senior Solutions Architect
+vendor_contact_email: info@eoframework.com
+vendor_contact_phone: (555) 123-4567
+---
+
 # AWS Intelligent Document Processing - Statement of Work (SOW)
 
 **Project Name:** AWS Intelligent Document Processing (IDP) Implementation
@@ -219,6 +251,10 @@ Legend:
 
 ### Architecture Overview
 The AWS Intelligent Document Processing solution is designed as a serverless, event-driven architecture leveraging AWS AI/ML services. The architecture provides scalability, cost optimization, and enterprise-grade security for automated document processing workflows.
+
+![Figure 1: Solution Architecture Diagram](../../assets/diagrams/architecture-diagram.png)
+
+**Figure 1: Solution Architecture Diagram** - High-level overview of the AWS Intelligent Document Processing solution architecture
 
 ### Architecture Type
 The deployment follows a serverless microservices architecture with event-driven processing. This approach enables:
@@ -492,22 +528,32 @@ The implementation approach follows AWS AI/ML best practices and proven methodol
 
 ---
 
-## Pricing & Payment Terms
+# Pricing & Investment Summary
+
+<!-- BEGIN COST_SUMMARY_TABLE -->
+| Cost Category | Year 1 | Year 2 | Year 3 | 3-Year Total |
+|---------------|---------|---------|---------|--------------|
+| Professional Services | $364,000 | $0 | $0 | $364,000 |
+| Infrastructure & Materials | $333,968 | $33,968 | $33,968 | $401,904 |
+| **TOTAL SOLUTION INVESTMENT** | **$697,968** | **$33,968** | **$33,968** | **$765,904** |
+<!-- END COST_SUMMARY_TABLE -->
+
+## Cost Components
+
+**Professional Services**: Labor costs for discovery, design, implementation, testing, and knowledge transfer. Detailed breakdown provided in level-of-effort-estimate.xlsx.
+
+**Infrastructure & Materials**: AWS cloud services (Textract, Comprehend, Lambda, S3, DynamoDB, etc.), software licenses (Datadog, PagerDuty, ABBYY, A2I), and support contracts. Detailed breakdown including AWS service consumption estimates, software licensing, and support contracts is provided in the accompanying Cost Breakdown workbook (cost-breakdown.xlsx).
+
+## Payment Terms
 
 ### Pricing Model
+- Fixed price or Time & Materials (T&M)
+- Milestone-based payments per Deliverables table
 
-| Category | Description | Amount |
-|----------|-------------|--------|
-| Professional Services | IDP implementation, ML model development, configuration | $[SERVICES_AMOUNT] |
-| AWS Infrastructure Setup | Initial service configuration and optimization | $[INFRASTRUCTURE_AMOUNT] |
-| Training & Support | User training and 30-day hypercare support | $[TRAINING_AMOUNT] |
-| Travel & Expenses | On-site support (if applicable) | $[TRAVEL_AMOUNT] |
-| TOTAL PROJECT COST | Complete AWS IDP implementation | $[TOTAL_AMOUNT] |
-
-Payment Terms:
+### Payment Schedule
 - 25% upon SOW execution and project kickoff
-- 30% upon completion of Discovery & Planning phase (Milestone M1)
-- 30% upon completion of Implementation and Testing (Milestone M5)
+- 30% upon completion of Discovery & Planning phase
+- 30% upon completion of Implementation and Testing
 - 15% upon successful go-live and project acceptance
 
 ---

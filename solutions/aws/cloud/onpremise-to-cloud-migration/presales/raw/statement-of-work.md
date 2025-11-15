@@ -1,8 +1,40 @@
+---
+# Document Information
+document_title: Statement of Work
+document_version: 1.0
+document_date: [Month DD, YYYY]
+document_id: SOW-2025-003
+
+# Project Information
+project_name: AWS Cloud Migration - On-Premise to Cloud
+project_id: PROJ-MIGRATION-2025-001
+opportunity_no: OPP-MIGRATION-2025-0001
+project_start_date: [Month DD, YYYY]
+project_end_date: [Month DD, YYYY]
+project_duration: 9 months
+
+# Client Information
+client_name: [Client Name]
+client_address: [Client Address]
+client_contact_name: [Client Contact Name]
+client_contact_title: [Client Contact Title]
+client_contact_email: [Client Contact Email]
+client_contact_phone: [Client Contact Phone]
+
+# Vendor Information
+vendor_name: EO Framework Consulting
+vendor_address: 123 Business Street, Suite 100
+vendor_contact_name: [Vendor Contact Name]
+vendor_contact_title: Senior Solutions Architect
+vendor_contact_email: info@eoframework.com
+vendor_contact_phone: (555) 123-4567
+---
+
 # AWS Cloud Migration Statement of Work (SOW)
 
-**Project Name:** # AWS Cloud Migration
-**Client:** [Client Name]  
-**Date:** [Month DD, YYYY]  
+**Project Name:** AWS Cloud Migration - On-Premise to Cloud
+**Client:** [Client Name]
+**Date:** [Month DD, YYYY]
 **Version:** v1.0  
 
 **Prepared by:**  
@@ -171,8 +203,12 @@ Legend:
 
 ## AWS Architecture & Accounts
 
-### Architecture Overview  
+### Architecture Overview
 The proposed AWS architecture is designed to provide a secure, scalable, and compliant foundation for current and future workloads. The architecture aligns with AWS best practices, including the Well-Architected Framework, and uses automation where possible to streamline deployment, security, and ongoing operations.
+
+![Figure 1: Solution Architecture Diagram](../../assets/diagrams/architecture-diagram.png)
+
+**Figure 1: Solution Architecture Diagram** - High-level overview of the AWS cloud migration journey architecture
 
 ### Architecture Type – Multi-account Landing Zone  
 The deployment will follow a multi-account architecture using an AWS Landing Zone model. This approach enforces clear separation of environments (e.g., Dev, QA, Prod, Shared Services) and allows for granular SC (Service Control Policies), billing segmentation, and enhanced security boundary enforcement.
@@ -375,11 +411,33 @@ The migration approach will follow AWS’s “7 Rs” migration pattern framewor
 
 ---
 
-## Pricing & Payment Terms
+# Pricing & Investment Summary
 
-### Pricing Model  
-- Fixed price or T&M  
-- Milestone-based payments per Deliverables table  
+<!-- BEGIN COST_SUMMARY_TABLE -->
+| Cost Category | Year 1 | Year 2 | Year 3 | 3-Year Total |
+|---------------|---------|---------|---------|--------------|
+| Professional Services | $364,000 | $0 | $0 | $364,000 |
+| Infrastructure & Materials | $375,532 | $25,282 | $25,282 | $426,097 |
+| **TOTAL SOLUTION INVESTMENT** | **$739,532** | **$25,282** | **$25,282** | **$790,097** |
+<!-- END COST_SUMMARY_TABLE -->
+
+## Cost Components
+
+**Professional Services**: Labor costs for migration assessment, wave planning, landing zone setup, application migration, database migration, testing, cutover, and knowledge transfer. Detailed breakdown provided in level-of-effort-estimate.xlsx.
+
+**Infrastructure & Materials**: AWS cloud services (EC2, RDS, S3, VPN, ALB, CloudFront, ElastiCache), software licenses (Datadog, PagerDuty, Terraform Cloud), and support contracts. Detailed breakdown including AWS service consumption estimates, software licensing, and support contracts is provided in the accompanying Cost Breakdown workbook (cost-breakdown.xlsx).
+
+## Payment Terms
+
+### Pricing Model
+- Fixed price or Time & Materials (T&M)
+- Milestone-based payments per Deliverables table
+
+### Payment Schedule
+- 25% upon SOW execution and project kickoff
+- 30% upon completion of Assessment and Wave 1 migration
+- 30% upon completion of Wave 2-3 migrations
+- 15% upon successful cutover and hypercare completion  
 
 ---
 
