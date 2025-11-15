@@ -414,14 +414,14 @@ The implementation approach will follow industry best practices and proven metho
 
 ---
 
-# Pricing & Investment Summary
+# Investment Summary
 
 <!-- BEGIN COST_SUMMARY_TABLE -->
 | Cost Category | Year 1 | Year 2 | Year 3 | 3-Year Total |
 |---------------|---------|---------|---------|--------------|
 | Professional Services | $364,000 | $0 | $0 | $364,000 |
 | Infrastructure & Materials | $16,564 | $16,564 | $16,564 | $49,691 |
-| **TOTAL SOLUTION INVESTMENT** | **$380,564** | **$16,564** | **$16,564** | **$413,691** |
+| **TOTAL INVESTMENT** | **$380,564** | **$16,564** | **$16,564** | **$413,691** |
 <!-- END COST_SUMMARY_TABLE -->
 
 ## Cost Components
@@ -436,15 +436,21 @@ The implementation approach will follow industry best practices and proven metho
 - Fixed price or Time & Materials (T&M)
 - Milestone-based payments per Deliverables table
 
+### Payment Schedule
+- 30% upon SOW execution and project kickoff
+- 30% upon completion of Phase 2 (Solution Design)
+- 25% upon completion of Phase 3 (Implementation)
+- 15% upon successful go-live and project acceptance
+
 ---
 
-# Invoicing & Expenses
+## Invoicing & Expenses
 
-## Invoicing
+### Invoicing
 - Monthly invoicing based on milestones or work completed
 - Net 30 payment terms
 
-## Expenses
+### Expenses
 - Reimbursable at cost with prior approval
 
 ---
