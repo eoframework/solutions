@@ -1,11 +1,11 @@
 version: '2.0'
 provider: cisco
-generated_at: '2025-11-15T06:36:44.799993'
+generated_at: '2025-11-15T17:17:29.188920'
 catalog_type: provider
 metadata:
   provider_name: Cisco
   total_solutions: 5
-  last_updated: '2025-11-15T06:36:44.800007'
+  last_updated: '2025-11-15T17:17:29.188929'
   auto_generated: true
 categories:
   ai:
