@@ -43,23 +43,30 @@ vendor_contact_phone: (555) 123-4567
 
 ---
 
-## Executive Summary
+# Executive Summary
 
-This Statement of Work (SOW) defines the scope, deliverables, roles, and terms for implementing an AWS Intelligent Document Processing (IDP) solution for [Client Name]. This engagement will deliver automated document processing capabilities through AWS AI/ML services including Amazon Textract, Amazon Comprehend, and Amazon A2I (Augmented AI) to transform manual document workflows into intelligent, automated processes.
+This Statement of Work (SOW) defines the scope, deliverables, roles, and terms for implementing a **small-scope, department-level** AWS Intelligent Document Processing (IDP) solution for [Client Name]. This engagement will deliver automated document processing capabilities through AWS AI/ML services including Amazon Textract, Amazon Comprehend, and Amazon A2I (Augmented AI) to transform manual document workflows into intelligent, automated processes.
+
+**Small Scope Deployment:**
+- **Document Capacity:** 50,000 pages/month processing
+- **User Base:** 50-100 department users
+- **Document Types:** 3-5 common types (invoices, purchase orders, contracts)
+- **Deployment Model:** Single AWS region, business hours support
+- **Total Investment:** $183,353 over 3 years ($115,951 Year 1 implementation)
 
 **Key Outcomes:**
 - Automated document processing with 95%+ accuracy using AWS AI services
-- 90% reduction in manual processing time and 70% reduction in document operations costs
+- 90% reduction in manual processing time (hours → minutes per document)
 - Serverless architecture enabling 24/7 processing and automatic scaling
-- Foundation for additional AI/ML automation initiatives across the organization
+- Foundation for expanding to medium/large scope across organization
 
-**Expected ROI:** 1958% over 3 years with 2.2-month payback period
+**Expected ROI:** Typical payback period of 8-12 months based on labor cost savings. For a department processing 50K pages/month at current manual cost of $2-3/page, annual savings of $1.2M-$1.8M against Year 1 investment of $116K.
 
 ---
 
-## Background & Objectives
+# Background & Objectives
 
-### Background
+## Background
 
 [Client Name] currently processes approximately [X,000] documents manually each [month/year] across multiple business functions. Key challenges include:
 - Manual Processing Bottlenecks: Hours of staff time required per document
@@ -68,7 +75,7 @@ This Statement of Work (SOW) defines the scope, deliverables, roles, and terms f
 - Resource Intensive: [Y] FTE dedicated to repetitive, low-value data entry tasks
 - Compliance Risk: Manual processes increase audit exposure and data security concerns
 
-### Objectives
+## Objectives
 - Automate Document Processing: Implement AWS AI services (Textract, Comprehend, A2I) to automate extraction and classification
 - Improve Accuracy: Achieve 95%+ data extraction accuracy through AI and human-in-the-loop review
 - Reduce Processing Time: Decrease document processing time by 90% (hours → minutes)
@@ -76,7 +83,7 @@ This Statement of Work (SOW) defines the scope, deliverables, roles, and terms f
 - Enable Scalability: Serverless architecture handles any volume without proportional cost increase
 - Foundation for Innovation: Establish AI/ML platform for expanding automation to other processes
 
-### Success Metrics
+## Success Metrics
 - 95%+ data extraction accuracy measured against validation dataset
 - 90% reduction in document processing time (from baseline)
 - 70% reduction in document operations costs within 12 months
@@ -86,9 +93,9 @@ This Statement of Work (SOW) defines the scope, deliverables, roles, and terms f
 
 ---
 
-## Scope of Work
+# Scope of Work
 
-### In Scope
+## In Scope
 The following services and deliverables are included in this SOW:
 - Document workflow analysis and AI/ML solution design
 - AWS infrastructure provisioning and configuration
@@ -99,9 +106,9 @@ The following services and deliverables are included in this SOW:
 - Testing, validation, and accuracy verification
 - Knowledge transfer and documentation
 
-### Activities
+## Activities
 
-#### Phase 1 – Discovery & Assessment
+### Phase 1 – Discovery & Assessment
 During this initial phase, the Vendor will perform a comprehensive assessment of the Client's current document processing workflows and requirements. This includes analyzing existing processes, identifying document types, determining data extraction requirements, and designing the optimal AWS AI/ML solution approach.
 
 Key activities:
@@ -116,7 +123,7 @@ Key activities:
 
 This phase concludes with an Assessment Report that outlines the proposed IDP architecture, document processing workflow, AI/ML model strategy, integration approach, risks, and project timeline.
 
-#### Phase 2 – Solution Design & Environment Setup
+### Phase 2 – Solution Design & Environment Setup
 In this phase, the AWS infrastructure is provisioned and configured based on AI/ML best practices. This includes environment setup, document processing pipeline design, security controls, monitoring, and access management.
 
 Key activities:
@@ -130,7 +137,7 @@ Key activities:
 
 By the end of this phase, the Client will have a secure, production-ready AWS IDP environment for document processing.
 
-#### Phase 3 – Implementation & Execution
+### Phase 3 – Implementation & Execution
 Implementation will occur in well-defined phases based on document type complexity and business priority. Each phase follows a repeatable process with automated workflows for consistency and risk reduction.
 
 Key activities:
@@ -145,7 +152,7 @@ Key activities:
 
 After each phase, the Vendor will coordinate validation and sign-off with the Client before proceeding.
 
-#### Phase 4 – Testing & Validation
+### Phase 4 – Testing & Validation
 In the Testing and Validation phase, the IDP solution undergoes thorough functional, performance, and accuracy validation to ensure it meets required SLAs and compliance standards. Test cases will be executed based on Client-defined acceptance criteria.
 
 Key activities:
@@ -160,7 +167,7 @@ Key activities:
 
 Cutover will be coordinated with all relevant stakeholders and executed during an approved maintenance window, with well-documented rollback procedures in place.
 
-#### Phase 5 – Handover & Post-Implementation Support
+### Phase 5 – Handover & Post-Implementation Support
 Following successful implementation and cutover, the focus shifts to ensuring operational continuity and knowledge transfer. The Vendor will provide a period of hypercare support and equip the Client's team with the documentation, tools, and processes needed for ongoing maintenance and optimization.
 
 Activities include:
@@ -175,9 +182,9 @@ Activities include:
 
 ---
 
-## Out of Scope
+# Out of Scope
 
-### Exclusions
+## Exclusions
 These items are not in scope unless added via change control:
 - Hardware procurement or on-premises infrastructure
 - Third-party software licensing beyond AWS services
@@ -191,7 +198,7 @@ These items are not in scope unless added via change control:
 
 ---
 
-## Deliverables
+# Deliverables
 
 | # | Deliverable | Type | Due Date | Acceptance By |
 |---|--------------------------------------|--------------|--------------|-----------------|
@@ -211,9 +218,9 @@ These items are not in scope unless added via change control:
 
 ---
 
-## Project Plan & Timeline
+# Project Plan & Timeline
 
-### Milestones
+## Milestones
 
 | Milestone | Description | Target Date |
 |-----------|-------------|-------------|
@@ -227,7 +234,7 @@ These items are not in scope unless added via change control:
 
 ---
 
-## Roles & Responsibilities (RACI)
+# Roles & Responsibilities (RACI)
 
 | Task/Role | Vendor PM | Vendor Architect | Vendor ML Engineer | Vendor Dev | Client IT | Client Business |
 |-----------|-----------|------------------|-------------------|-----------|-----------|-----------------|
@@ -247,30 +254,66 @@ Legend:
 
 ---
 
-## Architecture & Technical Design
+# Architecture & Technical Design
 
-### Architecture Overview
-The AWS Intelligent Document Processing solution is designed as a serverless, event-driven architecture leveraging AWS AI/ML services. The architecture provides scalability, cost optimization, and enterprise-grade security for automated document processing workflows.
+## Architecture Overview
+The AWS Intelligent Document Processing solution is designed as a **serverless, event-driven architecture** leveraging AWS AI/ML services. The architecture provides scalability, cost optimization, and enterprise-grade security for automated document processing workflows.
+
+This architecture is designed for **small-scope deployment** supporting 50,000 pages/month with 50-100 department users. The design prioritizes:
+- **Cost efficiency:** Right-sized AWS services for department-level volume
+- **Simplicity:** Single-region deployment (us-east-1) with essential availability
+- **Scalability:** Can grow to medium/large scope by adjusting AWS service limits (no re-architecture)
 
 ![Figure 1: Solution Architecture Diagram](../../assets/diagrams/architecture-diagram.png)
 
 **Figure 1: Solution Architecture Diagram** - High-level overview of the AWS Intelligent Document Processing solution architecture
 
-### Architecture Type
+## Architecture Type
 The deployment follows a serverless microservices architecture with event-driven processing. This approach enables:
-- Automatic scaling based on document volume
+- Automatic scaling based on document volume (scales from 0 to peak load)
 - Pay-per-use cost model with no idle infrastructure costs
 - Clear separation of concerns for classification, extraction, validation, and integration
 - High availability and fault tolerance through AWS managed services
 
 Key architectural components include:
 - Document Ingestion Layer (S3, API Gateway)
-- AI/ML Processing Layer (Textract, Comprehend, A2I)
-- Orchestration Layer (Lambda, Step Functions)
-- Data Storage Layer (S3, DynamoDB)
-- Integration Layer (API Gateway, EventBridge)
+- AI/ML Processing Layer (Amazon Textract, Amazon Comprehend, Amazon A2I)
+- Orchestration Layer (AWS Lambda, AWS Step Functions)
+- Data Storage Layer (Amazon S3, Amazon DynamoDB)
+- Integration Layer (Amazon API Gateway, Amazon SQS, Amazon SNS)
 
-### Application Hosting
+## Small Scope Specifications
+
+**Compute & Processing:**
+- AWS Lambda: 500K GB-seconds/month allocation (sufficient for 50K pages)
+- AWS Step Functions: 100K state transitions/month
+- Single AWS region deployment (us-east-1 recommended)
+
+**AI/ML Services:**
+- Amazon Textract: 50K pages/month document analysis + 25K pages/month forms/tables
+- Amazon Comprehend: 25K units/month entity recognition
+- Amazon A2I: 1K tasks/month human review capacity
+
+**Storage & Database:**
+- Amazon S3: 1TB storage (document archive + processed data)
+- Amazon DynamoDB: On-demand mode with 50GB storage, 10M read/write requests/month
+
+**Networking & Integration:**
+- Amazon API Gateway: 5M API requests/month
+- Amazon SQS: 10M queue messages/month
+- Single availability zone NAT Gateway (cost optimization)
+
+**Monitoring & Operations:**
+- Amazon CloudWatch: 50GB logs, 100 custom metrics
+- ElastiCache Redis: Single cache.t3.micro node
+- Business hours support coverage (not 24/7)
+
+**Scalability Path:**
+- Medium scope: Increase to 250K pages/month by adjusting service limits
+- Large scope: Scale to 1M+ pages/month with multi-region deployment
+- No architectural changes required - only AWS service limit increases
+
+## Application Hosting
 All application logic will be hosted using AWS serverless services:
 - AWS Lambda for all processing functions (classification, extraction, validation, integration)
 - Amazon API Gateway for REST API endpoints
@@ -279,7 +322,7 @@ All application logic will be hosted using AWS serverless services:
 
 All services are deployed using infrastructure-as-code (CloudFormation/SAM).
 
-### Networking
+## Networking
 The networking architecture follows AWS best practices for AI/ML workloads:
 - VPC endpoints for private connectivity to AWS services (Textract, Comprehend, S3)
 - Subnet isolation for compute resources if VPC deployment is required
@@ -287,7 +330,7 @@ The networking architecture follows AWS best practices for AI/ML workloads:
 - AWS WAF for API protection against common web exploits
 - CloudFront for secure content delivery of web interfaces
 
-### Observability
+## Observability
 Comprehensive observability ensures operational excellence:
 - CloudWatch Logs for centralized logging from all Lambda functions
 - CloudWatch Metrics for processing volumes, accuracy rates, and latency
@@ -295,7 +338,7 @@ Comprehensive observability ensures operational excellence:
 - CloudWatch Alarms for proactive alerting on failures or performance issues
 - Custom dashboards showing business KPIs (documents processed, accuracy, cost per document)
 
-### Backup & Disaster Recovery
+## Backup & Disaster Recovery
 All critical data and configurations are protected through:
 - S3 versioning for document storage buckets
 - DynamoDB point-in-time recovery enabled
@@ -305,9 +348,9 @@ All critical data and configurations are protected through:
 
 ---
 
-## Assumptions
+# Assumptions
 
-### General Assumptions
+## General Assumptions
 - Client will provide representative document samples for ML model training (minimum 1,000 documents per type)
 - Document quality is sufficient for OCR and AI processing (readable text, minimum 150 DPI)
 - Existing AWS infrastructure meets minimum requirements for AI/ML services
@@ -321,9 +364,9 @@ All critical data and configurations are protected through:
 
 ---
 
-## Dependencies
+# Dependencies
 
-### Project Dependencies
+## Project Dependencies
 - AWS Account Access: Client provides AWS account access with appropriate permissions (Textract, Comprehend, SageMaker, S3, Lambda, API Gateway, CloudWatch)
 - Document Samples: Client provides representative document samples across all document types for ML model training and testing
 - Training Data Labeling: Client SMEs available to label documents and validate extraction rules
@@ -337,39 +380,39 @@ All critical data and configurations are protected through:
 
 ---
 
-## Security, Compliance & Governance
+# Security, Compliance & Governance
 
 The implementation and target environment will be architected and validated to meet the Client's security, compliance, and governance requirements. Vendor will adhere to industry-standard security frameworks and AWS AI/ML best practices.
 
-### Identity & Access Management
+## Identity & Access Management
 - IAM-based role security with least-privilege access for all AWS services
 - Multi-factor authentication (MFA) required for AWS console access
 - Role-based access control (RBAC) for document processing operations
 - VPC endpoints for private connectivity to AI services
 - API authentication using AWS Cognito or IAM-based tokens
 
-### Monitoring & Threat Detection
+## Monitoring & Threat Detection
 - AWS CloudTrail logging enabled for all API calls and document access
 - CloudWatch monitoring for system health and security metrics
 - AWS X-Ray tracing for document processing workflow analysis
 - Automated alerts for anomalous processing patterns or unauthorized access attempts
 - Integration with AWS Security Hub for centralized security findings
 
-### Compliance & Auditing
+## Compliance & Auditing
 - SOC 2 certified AWS services, architecture follows SOC 2 security principles
 - GDPR compliance: Data residency controls, right-to-deletion capabilities, audit trail
 - HIPAA compliance (if applicable): HIPAA-eligible services, BAA with AWS, encryption, access controls
 - PCI DSS (if applicable): Secure handling of payment documents, no plaintext storage of card numbers
 - Continuous compliance monitoring using AWS Config
 
-### Encryption & Key Management
+## Encryption & Key Management
 - All documents encrypted at rest using AWS KMS (Customer Managed Keys)
 - All data encrypted in transit using TLS 1.2+
 - Document storage in S3 with server-side encryption enabled
 - Encryption key rotation policies implemented
 - Secure key management using AWS KMS with audit logging
 
-### Governance
+## Governance
 - Change control: All changes to document types, extraction rules, or integrations require formal change request
 - ML model governance: Model versions tracked, performance monitored, retraining process documented
 - Access reviews: Quarterly review of IAM roles and user access
@@ -378,9 +421,9 @@ The implementation and target environment will be architected and validated to m
 
 ---
 
-## Environments & Access
+# Environments & Access
 
-### Environments
+## Environments
 
 | Environment | Purpose | AWS Region | Access |
 |-------------|---------|------------|--------|
@@ -388,7 +431,7 @@ The implementation and target environment will be architected and validated to m
 | Staging | Integration testing, UAT, pre-production validation | [AWS Region] | Project team, testers |
 | Production | Live document processing | [AWS Region] | Operations team, authorized users |
 
-### Access Policies
+## Access Policies
 - Multi-factor authentication (MFA) required for all AWS console access
 - API access via authentication tokens (AWS Cognito or IAM)
 - Administrator Access: Full AWS console and API access for implementation team during project
@@ -398,11 +441,11 @@ The implementation and target environment will be architected and validated to m
 
 ---
 
-## Testing & Validation
+# Testing & Validation
 
 Comprehensive testing and validation will take place throughout the implementation lifecycle to ensure functionality, performance, security, and accuracy of the AI/ML-powered document processing solution.
 
-### Functional Validation
+## Functional Validation
 - End-to-end document processing workflow validation
 - Validation of document classification accuracy across all document types
 - Validation of data extraction accuracy against business requirements
@@ -410,31 +453,31 @@ Comprehensive testing and validation will take place throughout the implementati
 - API endpoint functional testing
 - Web interface functional testing
 
-### Performance & Load Testing
+## Performance & Load Testing
 - Benchmark testing with target document volumes ([X,000] documents/month)
 - Stress testing to identify capacity limits and auto-scaling behavior
 - Latency validation (target: <5 minutes per document)
 - Concurrent processing capacity testing
 
-### Security Testing
+## Security Testing
 - Validation of encryption (data at rest and in transit)
 - Access control testing (IAM policies, API authentication)
 - Compliance validation (HIPAA, GDPR, SOC 2 as applicable)
 - PII/PHI detection and masking validation
 - Penetration testing (optional)
 
-### Disaster Recovery & Resilience Tests
+## Disaster Recovery & Resilience Tests
 - Backup and restore validation
 - Failover testing (if cross-region replication configured)
 - RTO/RPO validation
 
-### User Acceptance Testing (UAT)
+## User Acceptance Testing (UAT)
 - Performed in coordination with Client business stakeholders
 - Test environment and sample documents provided by Vendor
 - Accuracy validation against business-defined acceptance criteria
 - Integration testing with client systems
 
-### Go-Live Readiness
+## Go-Live Readiness
 A Go-Live Readiness Checklist will be delivered including:
 - Security and compliance sign-offs
 - Accuracy validation completion (95%+ threshold)
@@ -447,16 +490,16 @@ A Go-Live Readiness Checklist will be delivered including:
 
 ---
 
-## Implementation Strategy & Tools
+# Implementation Strategy & Tools
 
 The implementation approach follows AWS AI/ML best practices and proven methodologies for document processing solutions.
 
-### Example Implementation Patterns
+## Example Implementation Patterns
 - Phased rollout: Pilot with single document type, then expand
 - Parallel processing: Run IDP alongside manual processes before full cutover
 - Iterative model training: Continuous improvement of ML models based on production data
 
-### Tooling Overview
+## Tooling Overview
 
 | Category | Primary Tools | Purpose |
 |-----------------------|------------------------------|-------------------------------|
@@ -470,16 +513,16 @@ The implementation approach follows AWS AI/ML best practices and proven methodol
 
 ---
 
-## Data Management Plan
+# Data Management Plan
 
-### Data Strategy
+## Data Strategy
 - Document ingestion via multiple channels (S3 upload, API, batch processing)
 - Automated classification and extraction using AI/ML services
 - Metadata storage in DynamoDB for fast retrieval
 - Lifecycle management with automated archival and deletion
 - Data validation and quality checks at each processing stage
 
-### Security & Compliance
+## Security & Compliance
 - Encryption enabled for data in-transit and at-rest
 - PII/PHI detection and masking using Amazon Comprehend
 - Document retention policies aligned with regulatory requirements
@@ -488,9 +531,9 @@ The implementation approach follows AWS AI/ML best practices and proven methodol
 
 ---
 
-## Cutover Plan & Go-Live Readiness
+# Cutover Plan & Go-Live Readiness
 
-### Cutover Checklist
+## Cutover Checklist
 - Pre-cutover validation: Final UAT sign-off, accuracy validation (95%+)
 - Production environment validated and monitoring operational
 - Rollback procedures documented and rehearsed
@@ -500,7 +543,7 @@ The implementation approach follows AWS AI/ML best practices and proven methodol
 - Verify processing accuracy and performance
 - Daily monitoring during hypercare period (4 weeks)
 
-### Rollback Strategy
+## Rollback Strategy
 - Documented rollback triggers (accuracy <90%, critical integration failure, security incident)
 - Rollback procedures: Disable IDP routing, revert to manual processing
 - Root cause analysis and fix validation before retry
@@ -509,9 +552,9 @@ The implementation approach follows AWS AI/ML best practices and proven methodol
 
 ---
 
-## Handover & Managed Services Transition
+# Handover & Managed Services Transition
 
-### Handover Artifacts
+## Handover Artifacts
 - As-Built documentation including architecture diagrams and AWS service configurations
 - ML model documentation (training data, accuracy metrics, version history)
 - Operations runbook with troubleshooting procedures
@@ -519,7 +562,7 @@ The implementation approach follows AWS AI/ML best practices and proven methodol
 - AWS cost optimization recommendations
 - Integration documentation and API specifications
 
-### Knowledge Transfer
+## Knowledge Transfer
 - Live knowledge transfer sessions for administrators and operations team
 - AWS service management training (Textract, Comprehend, A2I, Lambda, S3)
 - ML model monitoring and maintenance training
@@ -528,21 +571,60 @@ The implementation approach follows AWS AI/ML best practices and proven methodol
 
 ---
 
-# Pricing & Investment Summary
+# Investment Summary
+
+**Small Scope Implementation:** This pricing reflects a department-level deployment designed for 50,000 pages/month processing capacity with 50-100 users. For larger enterprise deployments, please request medium or large scope pricing.
+
+## Total Investment
 
 <!-- BEGIN COST_SUMMARY_TABLE -->
-| Cost Category | Year 1 | Year 2 | Year 3 | 3-Year Total |
-|---------------|---------|---------|---------|--------------|
-| Professional Services | $364,000 | $0 | $0 | $364,000 |
-| Infrastructure & Materials | $333,968 | $33,968 | $33,968 | $401,904 |
-| **TOTAL SOLUTION INVESTMENT** | **$697,968** | **$33,968** | **$33,968** | **$765,904** |
+| Cost Category | Year 1 List | AWS/Partner Credits | Year 1 Net | Year 2 | Year 3 | 3-Year Total |
+|---------------|-------------|---------------------|------------|---------|---------|--------------|
+| Professional Services | $82,250 | ($10,000) | $72,250 | $0 | $0 | $72,250 |
+| Cloud Infrastructure | $26,830 | ($5,000) | $21,830 | $26,830 | $26,830 | $75,490 |
+| Software Licenses & Subscriptions | $2,784 | $0 | $2,784 | $2,784 | $2,784 | $8,352 |
+| Support & Maintenance | $4,087 | $0 | $4,087 | $4,087 | $4,087 | $12,261 |
+| **TOTAL INVESTMENT** | **$115,951** | **($15,000)** | **$100,951** | **$33,701** | **$33,701** | **$168,353** |
 <!-- END COST_SUMMARY_TABLE -->
+
+## AWS Partner Credits
+
+**Year 1 Credits Applied:** $15,000 (13% reduction)
+- **AWS Partner Services Credit:** $10,000 applied to solution architecture and AI/ML integration
+- **AWS AI Services Consumption Credit:** $5,000 applied to Year 1 Amazon Textract usage
+- Credits are real AWS account credits, automatically applied as services are consumed
+- Credits are Year 1 only; Years 2-3 reflect standard AWS pricing
+
+**Investment Comparison:**
+- **Year 1 Net Investment:** $100,951 (after credits) vs. $115,951 list price
+- **3-Year Total Cost of Ownership:** $168,353
+- **Expected ROI:** 8-12 month payback based on typical labor cost savings from automation
 
 ## Cost Components
 
-**Professional Services**: Labor costs for discovery, design, implementation, testing, and knowledge transfer. Detailed breakdown provided in level-of-effort-estimate.xlsx.
+**Professional Services** ($82,250 - 310 hours): Labor costs for discovery, architecture, implementation, testing, and knowledge transfer. Breakdown:
+- Discovery & Architecture (100 hours): Requirements analysis, AWS solution design, documentation
+- Implementation (180 hours): Infrastructure deployment, AI/ML integration, development, testing
+- Training & Support (30 hours): Knowledge transfer and 30-day post-launch hypercare
 
-**Infrastructure & Materials**: AWS cloud services (Textract, Comprehend, Lambda, S3, DynamoDB, etc.), software licenses (Datadog, PagerDuty, ABBYY, A2I), and support contracts. Detailed breakdown including AWS service consumption estimates, software licensing, and support contracts is provided in the accompanying Cost Breakdown workbook (cost-breakdown.xlsx).
+**Cloud Infrastructure** ($26,830/year): AWS AI/ML services sized for small scope (50K pages/month):
+- Amazon Textract (Document Analysis + Forms/Tables): $24,000/year
+- AWS compute/storage (Lambda, S3, DynamoDB, API Gateway): $2,830/year
+- Scales automatically with document volume - pay only for usage
+
+**Software Licenses & Subscriptions** ($2,784/year): Operational tooling for small scope:
+- Amazon Augmented AI (A2I) for human review: $480/year
+- Datadog monitoring (3 hosts): $828/year
+- PagerDuty incident management (3 users): $1,476/year
+
+**Support & Maintenance** ($4,087/year): Ongoing managed services (15% of cloud infrastructure):
+- Business hours monitoring and support
+- Monthly cost optimization reviews
+- AWS service limit management
+
+Detailed breakdown including AWS service consumption estimates and sizing is provided in cost-breakdown.xlsx.
+
+---
 
 ## Payment Terms
 
@@ -566,51 +648,52 @@ The implementation approach follows AWS AI/ML best practices and proven methodol
 - Invoices submitted upon milestone completion and acceptance
 
 ### Expenses
-- AWS service costs (Textract, Comprehend, S3, Lambda, etc.) are Client responsibility
-- Estimated monthly AWS costs: $7,000-$10,000 based on projected document volumes
-- Travel and on-site expenses reimbursable at cost with prior approval
+- AWS service costs are included in Cloud Infrastructure pricing ($26,830/year = ~$2,236/month)
+- Small scope sizing: 50K pages/month document processing capacity
+- Costs scale with actual usage - can increase/decrease based on volume
+- Travel and on-site expenses reimbursable at cost with prior approval (remote-first delivery model)
 
 ---
 
-## Terms & Conditions
+# Terms & Conditions
 
 All services will be delivered in accordance with the executed Master Services Agreement (MSA) or equivalent contractual document between Vendor and Client.
 
-### Scope Changes
+## Scope Changes
 - Changes to document types, extraction requirements, integration scope, or timeline require formal change requests
 - Change requests may impact project timeline and budget
 
-### Intellectual Property
+## Intellectual Property
 - Client retains ownership of all business data and document content
 - Vendor retains ownership of proprietary AI/ML methodologies and frameworks
 - Custom ML models and configurations become Client property upon final payment
 - AWS service configurations and infrastructure code transfer to Client
 
-### Service Levels
+## Service Levels
 - Document processing accuracy: 95%+ on production dataset
 - System uptime: 99.5% during business hours
 - 30-day warranty on all deliverables from go-live date
 - Post-warranty support available under separate managed services agreement
 
-### Liability
+## Liability
 - Model accuracy guarantees apply only to document types and quality levels within training dataset scope
 - Performance may vary with significantly different document characteristics
 - Ongoing model retraining recommended as document patterns evolve
 - Liability caps as agreed in MSA
 
-### Confidentiality
+## Confidentiality
 - Both parties agree to maintain strict confidentiality of business data, document content, and proprietary AI/ML techniques
 - All exchanged artifacts under NDA protection
 
-### Termination
+## Termination
 - Mutually terminable per MSA terms, subject to payment for completed work
 
-### Governing Law
+## Governing Law
 - Agreement governed under the laws of [State/Region]
 
 ---
 
-## Sign-Off
+# Sign-Off
 
 By signing below, both parties agree to the scope, approach, and terms outlined in this Statement of Work.
 

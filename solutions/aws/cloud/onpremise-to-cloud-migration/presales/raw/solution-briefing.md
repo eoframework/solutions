@@ -142,55 +142,93 @@ footer_logo_right: eof-tools/doc-tools/brands/default/assets/logos/eo-framework-
 ---
 
 ### Investment Summary
-**Total Investment & Value**
+**Total Investment & Value with AWS MAP Program Credits**
 
 <!-- BEGIN COST_SUMMARY_TABLE -->
-| Cost Category | Year 1 | Year 2 | Year 3 | 3-Year Total |
-|---------------|---------|---------|---------|--------------|
-| Professional Services | $514,000 | $0 | $0 | $514,000 |
-| Cloud Infrastructure | $200,532 | $25,282 | $25,282 | $251,096 |
-| Software Licenses & Subscriptions | $25,000 | $0 | $0 | $25,000 |
-| **TOTAL SOLUTION INVESTMENT** | **$739,532** | **$25,282** | **$25,282** | **$790,096** |
+| Cost Category | Year 1 List | AWS/Partner Credits | Year 1 Net | Year 2 | Year 3 | 3-Year Total |
+|---------------|-------------|---------------------|------------|---------|---------|--------------|
+| Professional Services | $125,150 | ($22,000) | $103,150 | $0 | $0 | $103,150 |
+| Cloud Infrastructure | $9,572 | ($8,117) | $1,455 | $9,472 | $9,472 | $20,399 |
+| Software Licenses & Subscriptions | $3,132 | $0 | $3,132 | $3,132 | $3,132 | $9,396 |
+| Support & Maintenance | $1,462 | $0 | $1,462 | $1,462 | $1,462 | $4,386 |
+| **TOTAL INVESTMENT** | **$139,316** | **($30,117)** | **$109,199** | **$14,066** | **$14,066** | **$137,331** |
 <!-- END COST_SUMMARY_TABLE -->
 
-**Annual Operating Costs (Years 2-3):** $25,282/year
-- Cloud Infrastructure (right-sized workloads): $25,282/year
-- No data center costs (facilities, power, cooling eliminated)
+**AWS MAP Program Credits Breakdown (Year 1 Only):**
+- **AWS MAP Assessment Credit:** $12,000 (100% funding for migration discovery and planning)
+- **AWS MAP Mobilize/Migrate Credit:** $10,000 (partial funding for migration execution)
+- **AWS MAP Consumption Credit:** $8,117 (35% of Year 1 cloud infrastructure ARR)
+- **Total Credits Applied:** $30,117
 
-**Total 3-Year TCO:** $790,096
+**Net Client Investment:**
+- **Year 1:** $109,199 (after $30,117 in MAP program credits)
+- **3-Year Total:** $137,331 (vs. $167,448 list price)
+- **You Save:** $30,117 (22% discount through AWS MAP program)
+<!-- END COST_SUMMARY_TABLE -->
 
-**Cost Comparison:**
-- On-Premises 3-Year Cost: $2.1M (hardware refresh, data center, staffing)
-- AWS 3-Year TCO: $790K
-- **Net Savings: $1.31M over 3 years**
+**Small Scope Migration Specifications:**
+- **Workloads:** 15-25 VMs/applications migrated to AWS
+- **Migration Strategy:** Lift-and-shift (rehost) - not refactoring
+- **Infrastructure:** 3x t3.large EC2, db.t3.large RDS Multi-AZ, 1TB storage, single region
+- **Timeline:** 4-6 months from assessment to cutover
 
-Detailed cost breakdown including migration services, AWS consumption, and cost comparison is provided in cost-breakdown.xlsx.
+**Annual Operating Costs (Years 2-3):** $14,066/year
+- Cloud Infrastructure: $9,472/year (EC2, RDS, storage, networking)
+- Software Licenses: $3,132/year (Datadog, PagerDuty)
+- Support & Maintenance: $1,462/year (ongoing optimization)
+
+**Total 3-Year TCO:** $137,331
+
+**Cost Comparison (Small Scope):**
+- On-Premises 3-Year Cost: $420K (25 VMs × $5.6K/year + maintenance)
+- AWS 3-Year TCO: $137K (after MAP credits)
+- **Net Savings: $283K over 3 years** (67% reduction in infrastructure costs)
+
+**Professional Services Breakdown (548 hours):**
+- Assessment & Planning (140 hours): Discovery, migration strategy, AWS landing zone
+- Migration Execution (330 hours): App migration, DB migration, security, testing, cutover
+- Training & Support (78 hours): Knowledge transfer, documentation, 60-day hypercare
+
+Detailed cost breakdown including migration services, AWS consumption, and comparison is provided in cost-breakdown.xlsx.
 
 **SPEAKER NOTES:**
 
-*Value Positioning:*
-- Frame as transformation investment with immediate cost savings
+*Value Positioning (Small Scope):*
+- This is a **department-level migration** of 15-25 workloads using lift-and-shift strategy
+- Small scope = proven approach before scaling to enterprise migration
+- Year 1 net investment of $109K (after $30K MAP credits) eliminates ongoing data center costs
+- 67% cost reduction vs. keeping workloads on-premises
 - Highlight Year 1 includes full migration (one-time)
 - Ongoing costs (Years 2-3) significantly lower than data center operations
-- Net savings of $1.31M over 3 years demonstrates clear ROI
+- Net savings of $283K over 3 years demonstrates clear ROI
+
+*AWS MAP Program Credits Strategy:*
+- **Assessment Credit:** $12K covers 100% of migration discovery and planning
+- **Mobilize/Migrate Credit:** $10K partial funding for migration execution
+- **Consumption Credit:** $8.1K (35% of Year 1 cloud spend)
+- Total $30K in credits reduces Year 1 by 22%
+- Frame as AWS partnership investment in client's cloud journey
+- MAP credits are non-dilutive - don't impact AWS pricing post-Year 1
 
 *Cost Breakdown Strategy:*
-- Professional services cover discovery, migration, and optimization
-- Cloud costs include one-time data transfer and ongoing infrastructure
-- AWS Migration credits (10-25%) reduce actual Year 1 costs
+- Professional services net cost $103K after MAP credits (from $125K list)
+- Cloud costs Year 1 net $1.4K after consumption credit (from $9.6K list)
+- AWS MAP program makes migration investment significantly more affordable
 - No hidden costs - transparent pricing model
 
 *Handling Objections:*
-- "Can we migrate ourselves?" - Highlight risk and time-to-value tradeoffs
-- "Why professional services?" - Show proven methodology reduces failures
-- "What if migration fails?" - Point to wave approach and contingency planning
+- "Can we migrate ourselves?" - Highlight MAP credits require partner engagement
+- "Why professional services?" - Show proven methodology + $22K MAP funding
+- "What if migration fails?" - Point to wave approach and AWS TAM support
 - "How do we control cloud costs?" - Explain optimization in Phase 3 and FinOps
+- "Do credits expire?" - MAP credits are one-time Year 1, must be utilized during migration
 
 *Talking Points:*
-- Compare $740K to $3M data center upgrade avoided
+- MAP program reduces Year 1 net investment to $109K (from $139K list)
+- Compare $137K 3-year TCO to $420K on-prem equivalent
 - Migration pays for itself through hardware/facility cost elimination
-- AWS pay-per-use eliminates overprovisioning waste
-- Migration credits from AWS offset 10-25% of Year 1 costs
+- AWS MAP partnership de-risks migration and accelerates timeline
+- $30K in credits demonstrates AWS commitment to successful migration
 
 ---
 

@@ -1,42 +1,36 @@
-Category,Item,Description,Unit,Qty_Small,Qty_Medium,Qty_Large,Qty_Working,Unit_Cost,Billing_Cycle,Year_1,Year_2,Year_3,Sizing_Notes
-Cloud Infrastructure,Amazon EC2 Primary Region (Production),t3.large instances for web application tier,Instance,2,4,8,2,75,Monthly,1800.00,1800.00,1800.00,"Small: 2 instances, Medium: 4 instances (HA), Large: 8 instances (multi-AZ)"
-Cloud Infrastructure,Amazon EC2 DR Region (Standby),t3.medium instances for warm standby tier,Instance,1,2,4,1,42,Monthly,504.00,504.00,504.00,"Small: Pilot light, Medium: Warm standby, Large: Hot standby"
-Cloud Infrastructure,Amazon RDS Primary (Production),db.r5.large Multi-AZ PostgreSQL database,Instance,1,1,2,1,350,Monthly,4200.00,4200.00,4200.00,"Small/Medium: Single Multi-AZ, Large: 2 instances with read replicas"
-Cloud Infrastructure,Amazon RDS DR Region (Read Replica),Cross-region read replica for disaster recovery,Instance,1,1,2,1,350,Monthly,4200.00,4200.00,4200.00,DR read replica in secondary region for RTO/RPO requirements
-Cloud Infrastructure,Amazon S3 Standard Storage,Application data backups and static assets,GB,500,2000,5000,500,0.023,Monthly,138.00,138.00,138.00,Storage scales with data volume and backup retention
-Cloud Infrastructure,Amazon S3 Cross-Region Replication,Automated replication to DR region,GB,500,2000,5000,500,0.0005,Monthly,3.00,3.00,3.00,Data transfer for cross-region replication
-Cloud Infrastructure,Amazon Route 53 Health Checks,Endpoint monitoring and failover automation,Checks,5,10,20,5,0.50,Monthly,30.00,30.00,30.00,Health checks for automatic DNS failover
-Cloud Infrastructure,Amazon Route 53 Hosted Zones,DNS management for primary and DR regions,Zones,2,2,2,2,0.50,Monthly,12.00,12.00,12.00,Hosted zones for production and DR domains
-Cloud Infrastructure,Application Load Balancer Primary,Load balancing for primary region instances,Instance,1,1,2,1,22.50,Monthly,270.00,270.00,270.00,"Small/Medium: Single ALB, Large: 2 ALBs across AZs"
-Cloud Infrastructure,Application Load Balancer DR,Load balancing for DR region instances,Instance,1,1,2,1,22.50,Monthly,270.00,270.00,270.00,DR region load balancer for standby instances
-Cloud Infrastructure,Amazon EBS Volumes Primary,Block storage for EC2 instances primary region,GB,500,1000,2000,500,0.10,Monthly,600.00,600.00,600.00,General purpose SSD (gp3) volumes
-Cloud Infrastructure,Amazon EBS Volumes DR,Block storage for EC2 instances DR region,GB,250,500,1000,250,0.10,Monthly,300.00,300.00,300.00,DR region storage for standby instances
-Cloud Infrastructure,Amazon EBS Snapshots,Automated EBS volume snapshots for backup,GB,500,1000,2000,500,0.05,Monthly,300.00,300.00,300.00,Incremental snapshots for point-in-time recovery
-Cloud Infrastructure,AWS Backup,Centralized backup management and automation,GB,500,1000,2000,500,0.05,Monthly,300.00,300.00,300.00,Automated backup policies for EC2 RDS and EBS
-Cloud Infrastructure,Amazon CloudWatch Logs,Centralized logging for both regions,GB,50,150,300,50,0.50,Monthly,300.00,300.00,300.00,Log aggregation from primary and DR regions
-Cloud Infrastructure,Amazon CloudWatch Metrics,Custom metrics and monitoring dashboards,Metrics,100,300,600,100,0.30,Monthly,360.00,360.00,360.00,Monitoring for primary DR and failover health
-Cloud Infrastructure,AWS CloudTrail,API activity logging and compliance auditing,Trails,2,2,2,2,2.00,Monthly,48.00,48.00,48.00,Audit trails for both primary and DR regions
-Cloud Infrastructure,Amazon VPC Primary,Virtual private cloud for primary region,VPC,1,1,1,1,0,Monthly,0.00,0.00,0.00,No charge for VPC itself
-Cloud Infrastructure,Amazon VPC DR,Virtual private cloud for DR region,VPC,1,1,1,1,0,Monthly,0.00,0.00,0.00,No charge for VPC itself
-Cloud Infrastructure,VPN Connection Primary to DR,Site-to-site VPN between regions,Connection,1,1,2,1,36,Monthly,432.00,432.00,432.00,"Small/Medium: Single VPN, Large: Redundant VPN connections"
-Cloud Infrastructure,NAT Gateway Primary,Outbound internet access from private subnets,Instance,1,2,4,1,32.85,Monthly,394.20,394.20,394.20,"Small: 1 AZ, Medium: 2 AZs (HA), Large: 4 AZs"
-Cloud Infrastructure,NAT Gateway DR,Outbound internet access for DR region,Instance,1,1,2,1,32.85,Monthly,394.20,394.20,394.20,DR region NAT gateway for standby environment
-Cloud Infrastructure,AWS Systems Manager,Configuration management and patch automation,Free,1,1,1,1,0,Monthly,0.00,0.00,0.00,Parameter Store and Session Manager included
-Cloud Infrastructure,AWS Secrets Manager,Secure credential storage for both regions,Secrets,10,20,30,10,0.40,Monthly,48.00,48.00,48.00,Database credentials API keys and certificates
-Cloud Infrastructure,Amazon SNS,Notifications for DR events and failover,Topics,5,10,15,5,0.50,Monthly,30.00,30.00,30.00,Alerts for health checks failover and recovery
-Cloud Infrastructure,Data Transfer Cross-Region,Data replication between primary and DR,GB,100,500,1000,100,0.02,Monthly,24.00,24.00,24.00,Cross-region data transfer for replication
-Software Licenses & Subscriptions,Datadog Pro,APM and infrastructure monitoring,Hosts,10,20,40,10,23,Monthly,2760.00,2760.00,2760.00,Monitoring for primary and DR infrastructure
-Software Licenses & Subscriptions,PagerDuty Professional,Incident management and on-call scheduling,Users,5,10,15,5,41,Monthly,2460.00,2460.00,2460.00,24x7 incident response for DR events
-Software Licenses & Subscriptions,Veeam Backup & Replication,Application-aware backup and DR orchestration,Instance,2,4,8,2,150,Monthly,3600.00,3600.00,3600.00,Enterprise backup solution for complex workloads
-Support & Maintenance,AWS Enterprise Support,24x7 support with 15-minute critical response,Percent,0,0.03,0.03,0,0,Monthly,0.00,0.00,0.00,"Small: Business support, Medium/Large: 3% of monthly AWS spend"
-Support & Maintenance,DR Testing & Validation,Quarterly DR failover testing and validation,Hours,0,8,16,0,200,Quarterly,0.00,0.00,0.00,"Small: Annual test, Medium: Quarterly 8h, Large: Quarterly 16h"
-Professional Services,Discovery & Assessment,Current-state analysis RTO/RPO requirements,Hours,80,80,80,80,200,One-Time,16000.00,0,0,Initial assessment of DR requirements and dependencies
-Professional Services,DR Architecture Design,Detailed DR architecture and runbook design,Hours,120,150,200,120,225,One-Time,27000.00,0,0,DR strategy design failover procedures and documentation
-Professional Services,Infrastructure Deployment,AWS DR environment setup and configuration,Hours,200,280,400,200,200,One-Time,40000.00,0,0,"Small: Pilot light, Medium: Warm standby, Large: Hot standby"
-Professional Services,Application Configuration,Application deployment and DR configuration,Hours,160,240,320,160,175,One-Time,28000.00,0,0,Application setup in DR region with failover config
-Professional Services,Data Replication Setup,Database and storage replication configuration,Hours,80,120,160,80,200,One-Time,16000.00,0,0,RDS read replicas S3 cross-region replication setup
-Professional Services,DR Testing & Validation,Failover testing and RTO/RPO validation,Hours,80,120,160,80,175,One-Time,14000.00,0,0,End-to-end DR testing and runbook validation
-Professional Services,Runbook Development,DR procedures documentation and automation,Hours,60,80,120,60,175,One-Time,10500.00,0,0,Detailed failover and recovery runbooks
-Professional Services,Training & Knowledge Transfer,Operations team training on DR procedures,Hours,40,60,80,40,175,One-Time,7000.00,0,0,Training on DR runbooks and failover procedures
-Professional Services,Project Management,Project coordination and stakeholder management,Hours,160,200,280,160,200,One-Time,32000.00,0,0,PM oversight for DR implementation
-Professional Services,Hypercare Support (30 days),Post-implementation support and optimization,Hours,80,120,160,80,175,One-Time,14000.00,0,0,Support during initial DR operational period
+Cost Category,Description,Year 1 List,AWS/Partner Credit,Year 1 Net,Year 2,Year 3,3-Year Total,Credit Comments
+Cloud Infrastructure,Amazon EC2 Primary Region - t3.large web tier (2 instances),$1800,$0,$1800,$1800,$1800,$5400,
+Cloud Infrastructure,Amazon EC2 DR Region - pilot light (1 t3.medium on-demand for testing),$252,$84,$168,$252,$252,$672,AWS DR Program Credit - pilot light infrastructure
+Cloud Infrastructure,Amazon RDS Primary - db.t3.large Multi-AZ PostgreSQL,$2880,$0,$2880,$2880,$2880,$8640,
+Cloud Infrastructure,Amazon RDS DR - Cross-region automated backups (not read replica),$720,$240,$480,$720,$720,$1920,AWS DR Program Credit - backup costs Year 1
+Cloud Infrastructure,Amazon S3 Standard Storage - app data and backups (500GB),$138,$0,$138,$138,$138,$414,
+Cloud Infrastructure,Amazon S3 Cross-Region Replication (500GB),$3,$0,$3,$3,$3,$9,
+Cloud Infrastructure,Amazon Route 53 Health Checks for automatic DNS failover (5 checks),$30,$0,$30,$30,$30,$90,
+Cloud Infrastructure,Amazon Route 53 Hosted Zones - production and DR domains (2),$12,$0,$12,$12,$12,$36,
+Cloud Infrastructure,Application Load Balancer Primary region,$270,$0,$270,$270,$270,$810,
+Cloud Infrastructure,Application Load Balancer DR (on-demand for DR testing),$135,$45,$90,$135,$135,$360,AWS DR Program Credit - DR testing infrastructure
+Cloud Infrastructure,Amazon EBS Volumes Primary - gp3 storage (500GB),$600,$0,$600,$600,$600,$1800,
+Cloud Infrastructure,Amazon EBS Snapshots - automated incremental backups (500GB),$300,$0,$300,$300,$300,$900,
+Cloud Infrastructure,AWS Backup - centralized backup policies (500GB),$300,$0,$300,$300,$300,$900,
+Cloud Infrastructure,Amazon CloudWatch Logs - primary and DR regions (50GB),$300,$0,$300,$300,$300,$900,
+Cloud Infrastructure,Amazon CloudWatch Metrics - monitoring dashboards (100 metrics),$360,$0,$360,$360,$360,$1080,
+Cloud Infrastructure,AWS CloudTrail - audit logging both regions (2 trails),$48,$0,$48,$48,$48,$144,
+Cloud Infrastructure,NAT Gateway Primary - single AZ for cost optimization,$394,$0,$394,$394,$394,$1182,
+Cloud Infrastructure,AWS Systems Manager - parameter store and session manager,$0,$0,$0,$0,$0,$0,
+Cloud Infrastructure,AWS Secrets Manager - secure credential storage (10 secrets),$48,$0,$48,$48,$48,$144,
+Cloud Infrastructure,Amazon SNS - DR event notifications (5 topics),$30,$0,$30,$30,$30,$90,
+Cloud Infrastructure,Data Transfer Cross-Region - replication traffic (100GB/month),$24,$0,$24,$24,$24,$72,
+Software Licenses,Datadog Pro monitoring - primary and DR (6 hosts),$1656,$0,$1656,$1656,$1656,$4968,
+Software Licenses,PagerDuty Professional incident management (3 users),$1476,$0,$1476,$1476,$1476,$4428,
+Professional Services,Discovery & Assessment - RTO/RPO requirements analysis (40 hours @ $200/hr),$8000,$0,$8000,$0,$0,$8000,
+Professional Services,DR Architecture Design - failover strategy and runbooks (80 hours @ $225/hr),$18000,$5000,$13000,$0,$0,$13000,AWS Partner Services Credit - DR design
+Professional Services,Infrastructure Deployment - AWS DR environment setup (100 hours @ $200/hr),$20000,$0,$20000,$0,$0,$20000,
+Professional Services,Application Configuration - DR region deployment (60 hours @ $175/hr),$10500,$0,$10500,$0,$0,$10500,
+Professional Services,Data Replication Setup - RDS backups and S3 replication (40 hours @ $200/hr),$8000,$0,$8000,$0,$0,$8000,
+Professional Services,DR Testing & Validation - failover testing (40 hours @ $175/hr),$7000,$3000,$4000,$0,$0,$4000,AWS Partner Services Credit - DR testing
+Professional Services,Runbook Development - DR procedures and automation (30 hours @ $175/hr),$5250,$0,$5250,$0,$0,$5250,
+Professional Services,Training & Knowledge Transfer - ops team DR training (20 hours @ $175/hr),$3500,$0,$3500,$0,$0,$3500,
+Professional Services,Project Management - coordination and management (40 hours @ $200/hr),$8000,$0,$8000,$0,$0,$8000,
+Professional Services,Hypercare Support (30 days) - post-launch support (30 hours @ $175/hr),$5250,$0,$5250,$0,$0,$5250,
+Support & Maintenance,AWS managed DR services and quarterly testing (15% of infrastructure),$1467,$0,$1467,$1467,$1467,$4401,
+Total Investment,,$106743,$12369,$94374,$13243,$13243,$120860,Year 1 credits reduce net investment by 12%

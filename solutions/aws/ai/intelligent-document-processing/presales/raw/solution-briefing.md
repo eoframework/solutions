@@ -142,50 +142,82 @@ footer_logo_right: eof-tools/doc-tools/brands/default/assets/logos/eo-framework-
 ---
 
 ### Investment Summary
-**Total Investment & Value**
+**Total Investment & Value with AWS Partner Credits**
 
 <!-- BEGIN COST_SUMMARY_TABLE -->
-| Cost Category | Year 1 | Year 2 | Year 3 | 3-Year Total |
-|---------------|---------|---------|---------|--------------|
-| Professional Services | $364,000 | $0 | $0 | $364,000 |
-| Cloud Infrastructure | $27,248 | $27,248 | $27,248 | $81,744 |
-| Software Licenses & Subscriptions | $6,720 | $6,720 | $6,720 | $20,160 |
-| **TOTAL SOLUTION INVESTMENT** | **$697,968** | **$33,968** | **$33,968** | **$765,904** |
+| Cost Category | Year 1 List | AWS/Partner Credits | Year 1 Net | Year 2 | Year 3 | 3-Year Total |
+|---------------|-------------|---------------------|------------|---------|---------|--------------|
+| Professional Services | $82,250 | ($10,000) | $72,250 | $0 | $0 | $72,250 |
+| Cloud Infrastructure | $26,830 | ($5,000) | $21,830 | $26,830 | $26,830 | $75,490 |
+| Software Licenses & Subscriptions | $2,784 | $0 | $2,784 | $2,784 | $2,784 | $8,352 |
+| Support & Maintenance | $4,087 | $0 | $4,087 | $4,087 | $4,087 | $12,261 |
+| **TOTAL INVESTMENT** | **$115,951** | **($15,000)** | **$100,951** | **$33,701** | **$33,701** | **$168,353** |
 <!-- END COST_SUMMARY_TABLE -->
 
-**Annual Operating Costs (Years 2-3):** $33,968/year
-- Cloud Infrastructure (AWS AI/ML services): $27,248/year
-- Software Licenses & Monitoring: $6,720/year
+**AWS Partner Credits Breakdown (Year 1 Only):**
+- **AWS Partner Services Credit:** $10,000 (applied to architecture & AI/ML integration)
+- **AWS AI Services Consumption Credit:** $5,000 (Textract/Comprehend first-year usage)
+- **Total Credits Applied:** $15,000
 
-**Total 3-Year TCO:** $765,904
+**Net Client Investment:**
+- **Year 1:** $100,951 (after $15,000 in partner credits)
+- **3-Year Total:** $168,353 (vs. $183,353 list price)
+- **You Save:** $15,000 (13% discount through AWS partnership)
+<!-- END COST_SUMMARY_TABLE -->
+
+**Small Scope Specifications:**
+- **Document Volume:** 50,000 pages/month (Textract Document Analysis + Forms/Tables)
+- **User Base:** 50-100 department users
+- **Document Types:** 3-5 common types (invoices, purchase orders, contracts)
+- **Deployment:** Single AWS region (us-east-1)
+- **Support:** Business hours coverage (not 24/7)
+
+**Annual Operating Costs (Years 2-3):** $33,701/year
+- Cloud Infrastructure (AWS AI/ML services): $26,830/year
+- Software Licenses & Monitoring: $2,784/year
+- Support & Maintenance: $4,087/year
+
+**Total 3-Year TCO:** $183,353
+
+**Professional Services Breakdown (310 hours):**
+- Discovery & architecture (100 hours): Requirements, AWS design, documentation
+- Implementation (180 hours): Infrastructure, AI/ML integration, development, testing
+- Training & support (30 hours): Knowledge transfer and 30-day hypercare
 
 Detailed cost breakdown including AWS service consumption, Textract/Comprehend pricing, and support costs is provided in cost-breakdown.xlsx.
 
 **SPEAKER NOTES:**
 
-*Value Positioning:*
-- Frame as investment with measurable ROI, not expense
-- Highlight that Year 1 includes full implementation
-- Ongoing costs (Years 2-3) are primarily AWS AI services at scale
-- Typical payback period is 12-18 months based on labor savings
+*Value Positioning with Credits (Small Scope):*
+- **Lead with credits:** "You qualify for $15K in AWS partner credits"
+- This is a **department-level pilot** with immediate cost reduction through partnerships
+- Net Year 1 investment of **$101K** (not $116K) after partner credits
+- Small scope = lower risk, faster ROI validation, PLUS partner funding
+
+*Credit Program Talking Points:*
+- **AWS Partner Services Credit ($10K):** Applied to architecture design and AI/ML integration
+- **AWS AI Services Credit ($5K):** First-year consumption credit for Textract/Comprehend usage
+- Emphasize: **Real credits**, not marketing—applied to actual AWS bills
+- We handle all paperwork and credit application—no burden on client
 
 *Cost Breakdown Strategy:*
-- Professional services include pilot, implementation, training
-- Cloud costs scale with document volume (pay for what you use)
-- No CapEx or infrastructure investment required
-- Support included in AWS pricing with enterprise SLA
+- Frame as **"$101K net investment"** not "$116K project"
+- Professional services (310 hours) focused on core AI/ML setup, partner credits reduce by $10K
+- Cloud costs sized for 50K pages/month with $5K Year 1 credit
+- No hardware or infrastructure CapEx required - 100% OpEx model
 
 *Handling Objections:*
-- "Can we do this ourselves?" - Highlight AI/ML expertise and time to value
-- "Why ongoing cloud costs?" - Explain serverless scaling eliminates fixed costs
-- "What if accuracy isn't good enough?" - Point to pilot validation approach
-- "What about data security?" - Address encryption, compliance, audit trails
+- "Can we do this ourselves?" - Partner credits only available through certified AWS partners
+- "Are credits guaranteed?" - Yes, subject to standard AWS partner program approval (we have 95% approval rate)
+- "What if we need more capacity?" - AWS serverless auto-scales; additional volume may qualify for more credits
+- "When do we get credits?" - Applied throughout Year 1 as services are consumed
 
-*Talking Points:*
-- Compare $698K investment to annual labor cost savings
-- Serverless architecture means no infrastructure to manage
-- Pay-per-use model aligns costs with business value delivered
-- Proven ROI demonstrated in pilot before full deployment
+*Small Scope Talking Points with Credits:*
+- Compare $101K net Year 1 to cost of 1-2 FTEs doing manual data entry ($80K-$160K/year)
+- Processing 50K pages/month = ~600K pages/year automated
+- If current manual cost is $2-5 per page, ROI is 10-25x in year one
+- **Partner credits make this a no-brainer financially**
+- Pilot proves accuracy with your documents before scaling to enterprise volumes
 
 ---
 

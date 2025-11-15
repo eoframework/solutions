@@ -1,34 +1,31 @@
-Category,Item,Description,Unit,Qty_Small,Qty_Medium,Qty_Large,Qty_Working,Unit_Cost,Billing_Cycle,Year_1,Year_2,Year_3,Sizing_Notes
-Cloud Infrastructure,Amazon S3 Standard Storage,Object storage for document ingestion and archives,GB,1000,5000,20000,1000,0.023,Monthly,276.00,276.00,276.00,Storage scales with document volume and retention requirements
-Cloud Infrastructure,Amazon Textract Document Analysis,AI-powered document text and form extraction,Instance,1,1,1,1,750,Monthly,9000.00,9000.00,9000.00,"Small: 50k pages/mo, Medium: 250k pages/mo, Large: 1M pages/mo"
-Cloud Infrastructure,Amazon Textract Forms/Tables,Extract structured data from forms and tables,Instance,1,1,1,1,1250,Monthly,15000.00,15000.00,15000.00,"Small: 25k pages/mo, Medium: 150k pages/mo, Large: 500k pages/mo"
-Cloud Infrastructure,Amazon Comprehend Entity Recognition,Extract entities organizations people locations from text,Instance,1,1,1,1,2.50,Monthly,30.00,30.00,30.00,"Small: 25k units/mo, Medium: 150k units/mo, Large: 500k units/mo"
-Cloud Infrastructure,AWS Lambda (Processing Functions),Serverless compute for document workflow orchestration,Instance,1,1,1,1,8.33,Monthly,99.96,99.96,99.96,"Small: 500k GB-sec/mo, Medium: 2.5M GB-sec/mo, Large: 10M GB-sec/mo"
-Cloud Infrastructure,Amazon DynamoDB On-Demand,NoSQL database for document metadata and job tracking,GB-Month,50,250,1000,50,0.25,Monthly,150.00,150.00,150.00,Storage scales with metadata volume
-Cloud Infrastructure,Amazon DynamoDB Read/Write Units,Database throughput for metadata operations,Million-Requests,10,50,200,10,1.25,Monthly,150.00,150.00,150.00,"Read/write request units, scales with API traffic"
-Cloud Infrastructure,Amazon API Gateway REST API,API endpoints for document submission and retrieval,Million-Requests,5,25,100,5,3.50,Monthly,210.00,210.00,210.00,API call volume based on integration patterns
-Cloud Infrastructure,Amazon SQS Standard Queue,Message queuing for asynchronous document processing,Million-Requests,10,50,200,10,0.40,Monthly,48.00,48.00,48.00,Queue requests for workflow coordination
-Cloud Infrastructure,Amazon SNS Standard,Notifications for processing completion and errors,Million-Requests,2,10,40,2,0.50,Monthly,12.00,12.00,12.00,Notification volume for status updates
-Cloud Infrastructure,Amazon CloudWatch Logs,Centralized logging for monitoring and troubleshooting,GB,50,200,800,50,0.50,Monthly,300.00,300.00,300.00,Log volume increases with processing activity
-Cloud Infrastructure,Amazon CloudWatch Metrics,Custom metrics and monitoring dashboards,Metrics,100,500,2000,100,0.30,Monthly,360.00,360.00,360.00,Custom metrics for business and technical KPIs
-Cloud Infrastructure,AWS Step Functions Standard,Workflow orchestration for complex document pipelines,Instance,1,1,1,1,2.50,Monthly,30.00,30.00,30.00,"Small: 100k transitions/mo, Medium: 500k transitions/mo, Large: 2M transitions/mo"
-Cloud Infrastructure,Amazon ElastiCache Redis,In-memory caching for document metadata and sessions,Node-Hours,1,2,4,1,50,Monthly,600.00,600.00,600.00,"Small: 1 node, Medium: 2 nodes (HA), Large: 4 nodes (cluster)"
-Cloud Infrastructure,AWS Secrets Manager,Secure storage for API keys and credentials,Secrets,10,20,40,10,0.40,Monthly,48.00,48.00,48.00,Number of secrets stored (API keys databases credentials)
-Cloud Infrastructure,Amazon VPC NAT Gateway,Network address translation for private subnet egress,Instance,1,2,4,1,32.85,Monthly,394.20,394.20,394.20,"Small: 1 AZ, Medium: 2 AZs (HA), Large: 4 AZs (multi-region)"
-Cloud Infrastructure,AWS Data Transfer Out,Outbound data transfer to internet and regions,GB,500,2000,8000,500,0.09,Monthly,540.00,540.00,540.00,Data transfer for API responses and document retrieval
-Software Licenses & Subscriptions,Amazon Augmented AI (A2I),Human review workflow for low-confidence predictions,Instance,1,1,1,1,40,Monthly,480.00,480.00,480.00,"Small: 1k tasks/mo, Medium: 5k tasks/mo, Large: 20k tasks/mo"
-Software Licenses & Subscriptions,ABBYY FineReader Engine (Optional),Advanced OCR for complex document formats,Instance,1,1,1,1,200,Monthly,2400.00,2400.00,2400.00,"Small: 10k pages/mo, Medium: 50k pages/mo, Large: 200k pages/mo"
-Software Licenses & Subscriptions,Datadog Pro,APM infrastructure monitoring and log aggregation,Hosts,5,15,40,5,23,Monthly,1380.00,1380.00,1380.00,Monitoring hosts scale with Lambda functions and infrastructure
-Software Licenses & Subscriptions,PagerDuty Professional,Incident management and on-call scheduling,Users,5,10,20,5,41,Monthly,2460.00,2460.00,2460.00,Operations team size for 24x7 support coverage
-Support & Maintenance,AWS Enterprise Support,24x7 support with 15-minute critical response SLA,Percent,0,0.03,0.03,0,0,Monthly,0.00,0.00,0.00,"Small: Business support (included), Medium/Large: 3% of monthly AWS spend"
-Support & Maintenance,Solution Optimization Review,Quarterly cost and performance optimization review,Hours,0,8,16,0,200,Quarterly,0.00,0.00,0.00,"Small: None, Medium: 8 hours/quarter, Large: 16 hours/quarter"
-Professional Services,Discovery & Assessment,Current-state analysis and requirements gathering,Hours,80,80,80,80,200,One-Time,16000.00,0,0,Initial assessment phase fixed scope
-Professional Services,Solution Architecture & Design,Detailed technical design and AWS architecture,Hours,120,120,120,120,225,One-Time,27000.00,0,0,Architecture design and documentation
-Professional Services,Infrastructure Deployment,AWS environment setup security and networking,Hours,160,200,280,160,200,One-Time,32000.00,0,0,"Small: Basic setup, Large: Multi-region with DR"
-Professional Services,AI/ML Model Integration,Textract Comprehend integration and tuning,Hours,200,240,320,200,225,One-Time,45000.00,0,0,AI service configuration and custom model training
-Professional Services,Application Development,Custom workflow development API integration,Hours,400,600,1000,400,175,One-Time,70000.00,0,0,Development effort scales with customization requirements
-Professional Services,Testing & Quality Assurance,Functional performance and security testing,Hours,120,160,240,120,175,One-Time,21000.00,0,0,Testing effort based on solution complexity
-Professional Services,Data Migration & Integration,Legacy system integration and data migration,Hours,160,240,400,160,175,One-Time,28000.00,0,0,Integration complexity with existing systems
-Professional Services,Training & Knowledge Transfer,Administrator and user training documentation,Hours,40,60,80,40,175,One-Time,7000.00,0,0,Training sessions and documentation delivery
-Professional Services,Project Management,Project coordination and stakeholder management,Hours,200,280,400,200,200,One-Time,40000.00,0,0,PM effort scales with project duration and complexity
-Professional Services,Hypercare Support (30 days),Post-launch support and issue resolution,Hours,80,120,160,80,175,One-Time,14000.00,0,0,Dedicated support during stabilization period
+Cost Category,Description,Year 1 List,AWS/Partner Credit,Year 1 Net,Year 2,Year 3,3-Year Total,Credit Comments
+Cloud Infrastructure,Amazon S3 Standard Storage (1TB for document ingestion and archives),$276,$0,$276,$276,$276,$828,
+Cloud Infrastructure,Amazon Textract Document Analysis (50k pages/month),$9000,$3150,$5850,$9000,$9000,$23850,AWS AI Services Credit - 35% Year 1 consumption
+Cloud Infrastructure,Amazon Textract Forms/Tables extraction (25k pages/month),$15000,$1850,$13150,$15000,$15000,$43150,AWS AI Services Credit - partial Year 1
+Cloud Infrastructure,Amazon Comprehend Entity Recognition (25k units/month),$30,$0,$30,$30,$30,$90,
+Cloud Infrastructure,AWS Lambda processing functions (500k GB-seconds/month),$100,$0,$100,$100,$100,$300,
+Cloud Infrastructure,Amazon DynamoDB On-Demand storage and throughput,$300,$0,$300,$300,$300,$900,
+Cloud Infrastructure,Amazon API Gateway REST API (5M requests/month),$210,$0,$210,$210,$210,$630,
+Cloud Infrastructure,Amazon SQS Standard Queue (10M requests/month),$48,$0,$48,$48,$48,$144,
+Cloud Infrastructure,Amazon SNS Standard notifications (2M requests/month),$12,$0,$12,$12,$12,$36,
+Cloud Infrastructure,Amazon CloudWatch Logs and Metrics (50GB logs + 100 metrics),$660,$0,$660,$660,$660,$1980,
+Cloud Infrastructure,AWS Step Functions Standard workflows (100k transitions/month),$30,$0,$30,$30,$30,$90,
+Cloud Infrastructure,Amazon ElastiCache Redis (cache.t3.micro single node),$182,$0,$182,$182,$182,$546,
+Cloud Infrastructure,AWS Secrets Manager (10 secrets for API keys and credentials),$48,$0,$48,$48,$48,$144,
+Cloud Infrastructure,Amazon VPC NAT Gateway (single AZ),$394,$0,$394,$394,$394,$1182,
+Cloud Infrastructure,AWS Data Transfer Out (500GB/month),$540,$0,$540,$540,$540,$1620,
+Software Licenses,Amazon Augmented AI (A2I) for human review (1k tasks/month),$480,$0,$480,$480,$480,$1440,
+Software Licenses,Datadog Pro monitoring (3 hosts),$828,$0,$828,$828,$828,$2484,
+Software Licenses,PagerDuty Professional incident management (3 users),$1476,$0,$1476,$1476,$1476,$4428,
+Professional Services,Discovery & Assessment - requirements gathering and analysis (40 hours @ $200/hr),$8000,$0,$8000,$0,$0,$8000,
+Professional Services,Solution Architecture & Design - AWS architecture and documentation (60 hours @ $225/hr),$13500,$5000,$8500,$0,$0,$8500,AWS Partner Services Credit
+Professional Services,Infrastructure Deployment - AWS environment setup and security (60 hours @ $200/hr),$12000,$0,$12000,$0,$0,$12000,
+Professional Services,AI/ML Model Integration - Textract and Comprehend configuration (80 hours @ $225/hr),$18000,$5000,$13000,$0,$0,$13000,AWS Partner Services Credit
+Professional Services,Application Development - workflow and API integration (40 hours @ $175/hr),$7000,$0,$7000,$0,$0,$7000,
+Professional Services,Testing & Quality Assurance - functional and accuracy testing (30 hours @ $175/hr),$5250,$0,$5250,$0,$0,$5250,
+Professional Services,Data Migration & Integration - legacy system integration (20 hours @ $175/hr),$3500,$0,$3500,$0,$0,$3500,
+Professional Services,Training & Knowledge Transfer - admin and user training (16 hours @ $175/hr),$2800,$0,$2800,$0,$0,$2800,
+Professional Services,Project Management - coordination and stakeholder management (40 hours @ $200/hr),$8000,$0,$8000,$0,$0,$8000,
+Professional Services,Hypercare Support (30 days post-launch) - stabilization support (24 hours @ $175/hr),$4200,$0,$4200,$0,$0,$4200,
+Support & Maintenance,AWS managed services and monitoring (15% of cloud infrastructure),$4087,$0,$4087,$4087,$4087,$12261,
+Total Investment,,$115951,$15000,$100951,$33701,$33701,$168353,Year 1 credits reduce net investment by 13%

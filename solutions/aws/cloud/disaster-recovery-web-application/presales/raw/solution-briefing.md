@@ -142,50 +142,76 @@ footer_logo_right: eof-tools/doc-tools/brands/default/assets/logos/eo-framework-
 ---
 
 ### Investment Summary
-**Total Investment & Value**
+**Total Investment & Value with AWS Partner Credits**
 
 <!-- BEGIN COST_SUMMARY_TABLE -->
-| Cost Category | Year 1 | Year 2 | Year 3 | 3-Year Total |
-|---------------|---------|---------|---------|--------------|
-| Professional Services | $364,000 | $0 | $0 | $364,000 |
-| Infrastructure & Materials | $228,277 | $23,777 | $23,777 | $275,832 |
-| **TOTAL SOLUTION INVESTMENT** | **$592,277** | **$23,777** | **$23,777** | **$639,832** |
+| Cost Category | Year 1 List | AWS/Partner Credits | Year 1 Net | Year 2 | Year 3 | 3-Year Total |
+|---------------|-------------|---------------------|------------|---------|---------|--------------|
+| Professional Services | $93,500 | ($8,000) | $85,500 | $0 | $0 | $85,500 |
+| Cloud Infrastructure | $8,644 | ($4,369) | $4,275 | $8,644 | $8,644 | $21,563 |
+| Software Licenses & Subscriptions | $3,132 | $0 | $3,132 | $3,132 | $3,132 | $9,396 |
+| Support & Maintenance | $1,467 | $0 | $1,467 | $1,467 | $1,467 | $4,401 |
+| **TOTAL INVESTMENT** | **$106,743** | **($12,369)** | **$94,374** | **$13,243** | **$13,243** | **$120,860** |
 <!-- END COST_SUMMARY_TABLE -->
 
-**Annual Operating Costs (Years 2-3):** $23,777/year
-- DR Region Infrastructure (warm standby): $15,600/year
-- Cross-region data transfer and replication: $5,400/year
-- Backup storage, monitoring, and support: $2,777/year
+**AWS Partner Credits Breakdown (Year 1 Only):**
+- **AWS Partner DR Services Credit:** $8,000 (DR architecture design + testing validation)
+- **AWS DR Infrastructure Credit:** $4,369 (pilot light DR region costs Year 1)
+- **Total Credits Applied:** $12,369
 
-**Total 3-Year TCO:** $639,832
+**Net Client Investment:**
+- **Year 1:** $94,374 (after $12,369 in partner credits)
+- **3-Year Total:** $120,860 (vs. $133,229 list price)
+- **You Save:** $12,369 (12% discount through AWS DR partnership)
+<!-- END COST_SUMMARY_TABLE -->
 
-Detailed cost breakdown including primary/DR infrastructure, AWS services, and support is provided in cost-breakdown.xlsx.
+**Small Scope DR Specifications:**
+- **DR Strategy:** Pilot light (not warm/hot standby)
+- **RTO Target:** 4 hours (time to recover to operational state)
+- **RPO Target:** 1 hour (acceptable data loss window)
+- **Applications:** 5-10 critical web applications
+- **Infrastructure:** 2x t3.large primary + minimal DR footprint
+- **Database:** db.t3.large Multi-AZ with cross-region automated backups
+
+**Annual Operating Costs (Years 2-3):** $13,243/year
+- Cloud Infrastructure (primary + DR backups): $8,644/year
+- Software Licenses (monitoring): $3,132/year
+- Support & quarterly DR testing: $1,467/year
+
+**Total 3-Year TCO:** $133,229
+
+**Professional Services Breakdown (450 hours):**
+- Discovery & DR design (120 hours): BIA, RTO/RPO requirements, architecture, runbooks
+- Implementation (280 hours): Infrastructure deployment, replication, DR testing, automation
+- Training & support (50 hours): Operations training and 30-day hypercare
+
+Detailed cost breakdown including primary/DR infrastructure, AWS services, and testing is provided in cost-breakdown.xlsx.
 
 **SPEAKER NOTES:**
 
-*Value Positioning:*
-- Frame as risk mitigation investment, not IT expense
-- Highlight that ongoing DR costs are <5% of application revenue
-- Warm standby optimizes cost while meeting RTO/RPO requirements
-- Insurance perspective: cost of downtime far exceeds DR investment
+*Value Positioning (Small Scope):*
+- This is a **department-level pilot light DR** for 5-10 critical applications
+- Pilot light = minimal ongoing costs, 4-hour RTO (not instant failover)
+- Frame as risk mitigation: Cost of 1 hour downtime likely exceeds entire DR investment
+- Insurance perspective: $107K Year 1 protects against catastrophic business impact
 
 *Cost Breakdown Strategy:*
-- Year 1 includes full DR design, implementation, and testing
-- Ongoing costs primarily AWS DR region infrastructure
-- Warm standby means paying for minimal capacity when not in use
-- Cost scales with application size and RTO/RPO requirements
+- Professional services (450 hours) includes BIA, design, implementation, and testing
+- Ongoing costs only $13K/year - primarily automated backups and monitoring
+- Pilot light means DR resources created on-demand during failover (cost-optimized)
+- Can upgrade to warm standby (faster RTO) by adjusting AWS resources
 
 *Handling Objections:*
-- "Can we reduce costs?" - Explain RTO/RPO tradeoffs with cold standby
-- "Why ongoing DR costs?" - Show cost of downtime vs DR investment
-- "Can we test ourselves?" - Highlight complexity and risk of failed DR test
-- "What if we never need it?" - Position as insurance and compliance requirement
+- "Can we reduce costs?" - Pilot light is already minimum DR strategy; cold backup = no RTO guarantee
+- "Why not just backup to S3?" - Backups alone don't provide tested recovery capability or RTO/RPO assurance
+- "What if we never use it?" - Quarterly DR tests validate it works; also satisfies compliance/audit requirements
+- "Can we test ourselves?" - DR testing requires expertise to avoid impacting production; included in support costs
 
-*Talking Points:*
-- Compare $592K to cost of 1-hour production outage
-- DR becomes competitive advantage, not just insurance
-- Compliance requirements often mandate documented DR capability
-- Quarterly testing ensures DR works when you need it
+*Small Scope Talking Points:*
+- Compare $107K to revenue lost from 2-4 hours of downtime for critical apps
+- Pilot light suitable for RTO 4 hours; if need faster, can upgrade to warm standby
+- Quarterly testing included ensures DR actually works when emergency happens
+- Foundation to expand DR coverage to additional applications
 
 ---
 

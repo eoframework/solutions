@@ -36,13 +36,20 @@ vendor_contact_phone: (555) 123-4567
 
 # Executive Summary
 
-This Statement of Work (SOW) defines the scope, deliverables, roles, and terms for implementing a comprehensive AWS Disaster Recovery solution for [CLIENT_NAME]'s web application infrastructure. The project will deliver business continuity assurance through automated failover capabilities, data replication, and comprehensive disaster recovery procedures that ensure minimal downtime and data loss during disaster scenarios.
+This Statement of Work (SOW) defines the scope, deliverables, roles, and terms for implementing a **small-scope, pilot light** AWS Disaster Recovery solution for [CLIENT_NAME]'s web application infrastructure. The project will deliver business continuity assurance for 5-10 critical applications through automated failover capabilities, cross-region backups, and comprehensive disaster recovery procedures.
+
+**Small Scope DR Deployment:**
+- **DR Strategy:** Pilot light (cost-optimized standby with on-demand recovery)
+- **RTO Target:** 4 hours (time to restore operations after disaster)
+- **RPO Target:** 1 hour (acceptable data loss window)
+- **Application Scope:** 5-10 critical web applications
+- **Total Investment:** $133,229 over 3 years ($106,743 Year 1 implementation)
 
 ## Business Objectives
 
-- **Primary Goal:** Achieve 15-minute Recovery Time Objective (RTO) and 5-minute Recovery Point Objective (RPO) for critical web applications
-- **Success Metrics:** 99.9% application availability, automated failover capabilities, zero data loss tolerance
-- **Expected ROI:** Risk mitigation value through avoided downtime costs and business continuity assurance
+- **Primary Goal:** Achieve 4-hour RTO and 1-hour RPO for critical web applications through pilot light DR
+- **Success Metrics:** Documented and tested recovery procedures, 95% success rate on quarterly DR tests, automated backup validation
+- **Expected ROI:** Risk mitigation - compare $107K investment to cost of 4+ hours downtime for revenue-generating applications
 
 ## Project Duration
 
@@ -237,21 +244,59 @@ The deployment follows a warm standby DR strategy with active-passive multi-regi
 
 ---
 
-# Pricing & Investment Summary
+# Investment Summary
+
+**Small Scope Implementation:** This pricing reflects a pilot light DR strategy for 5-10 critical applications with 4-hour RTO and 1-hour RPO targets. For warm/hot standby or enterprise-scale DR, please request medium or large scope pricing.
+
+## Total Investment
 
 <!-- BEGIN COST_SUMMARY_TABLE -->
-| Cost Category | Year 1 | Year 2 | Year 3 | 3-Year Total |
-|---------------|---------|---------|---------|--------------|
-| Professional Services | $364,000 | $0 | $0 | $364,000 |
-| Infrastructure & Materials | $228,277 | $23,777 | $23,777 | $275,832 |
-| **TOTAL SOLUTION INVESTMENT** | **$592,277** | **$23,777** | **$23,777** | **$639,832** |
+| Cost Category | Year 1 List | AWS/Partner Credits | Year 1 Net | Year 2 | Year 3 | 3-Year Total |
+|---------------|-------------|---------------------|------------|---------|---------|--------------|
+| Professional Services | $93,500 | ($8,000) | $85,500 | $0 | $0 | $85,500 |
+| Cloud Infrastructure | $8,644 | ($4,369) | $4,275 | $8,644 | $8,644 | $21,563 |
+| Software Licenses & Subscriptions | $3,132 | $0 | $3,132 | $3,132 | $3,132 | $9,396 |
+| Support & Maintenance | $1,467 | $0 | $1,467 | $1,467 | $1,467 | $4,401 |
+| **TOTAL INVESTMENT** | **$106,743** | **($12,369)** | **$94,374** | **$13,243** | **$13,243** | **$120,860** |
 <!-- END COST_SUMMARY_TABLE -->
+
+## AWS Partner Credits
+
+**Year 1 Credits Applied:** $12,369 (12% reduction)
+- **AWS Partner DR Services Credit:** $8,000 applied to DR architecture design and testing validation
+- **AWS DR Infrastructure Credit:** $4,369 applied to pilot light DR region costs in Year 1
+- Credits are real AWS account credits, automatically applied as services are consumed
+- Credits are Year 1 only; Years 2-3 reflect standard AWS pricing
+
+**Investment Comparison:**
+- **Year 1 Net Investment:** $94,374 (after credits) vs. $106,743 list price
+- **3-Year Total Cost of Ownership:** $120,860
+- **Expected Value:** Risk mitigation - compare $95K Year 1 investment to cost of 4+ hours downtime for critical applications
 
 ## Cost Components
 
-**Professional Services**: Labor costs for discovery, DR architecture design, infrastructure deployment, testing, runbook development, and knowledge transfer. Detailed breakdown provided in level-of-effort-estimate.xlsx.
+**Professional Services** ($93,500 - 450 hours): Labor costs for discovery, DR architecture design, infrastructure deployment, testing, runbook development, and knowledge transfer. Breakdown:
+- Discovery & DR design (120 hours): Business impact analysis, RTO/RPO requirements, architecture design, runbook development
+- Implementation (280 hours): AWS DR environment setup, replication configuration, DR testing, automation
+- Training & support (50 hours): Operations team training and 30-day hypercare
 
-**Infrastructure & Materials**: AWS cloud services for primary and DR regions (EC2, RDS, S3, Route53, ALB, backups), software licenses, and support contracts. Detailed breakdown including AWS service consumption estimates, software licensing, and support contracts is provided in the accompanying Cost Breakdown workbook (cost-breakdown.xlsx).
+**Cloud Infrastructure** ($8,644/year): AWS services for primary region and pilot light DR:
+- Primary region (EC2, RDS Multi-AZ, ALB, EBS): $6,644/year
+- DR region (automated backups, Route53, minimal compute for testing): $2,000/year
+- Pilot light strategy minimizes ongoing costs while maintaining DR capability
+
+**Software Licenses & Subscriptions** ($3,132/year): Operational tooling for small scope:
+- Datadog Pro monitoring (6 hosts - primary + DR): $1,656/year
+- PagerDuty Professional incident management (3 users): $1,476/year
+
+**Support & Maintenance** ($1,467/year): Ongoing managed services (15% of cloud infrastructure):
+- Quarterly DR testing and validation
+- Monthly backup verification
+- DR runbook updates
+
+Detailed breakdown including primary/DR infrastructure, AWS service consumption, and quarterly testing is provided in cost-breakdown.xlsx.
+
+---
 
 ## Payment Terms
 
