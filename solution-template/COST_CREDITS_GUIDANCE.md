@@ -2,9 +2,9 @@
 
 ## ⚠️ IMPORTANT: This is the ONLY Supported Format
 
-**Partner/vendor credit format is the ONLY supported format for all cost-breakdown.csv files.**
+**All cost-breakdown.csv files must use the 9-column format documented in this guide.**
 
-All solutions must use the 9-column credit-based format documented in this guide. The legacy quantity-based format (Qty_Working, Qty_Small, etc.) is deprecated and should NOT be used for new solutions.
+This format shows both list prices and partner/cloud provider credits, providing transparency and demonstrating value from partner programs and cloud incentives.
 
 ## Overview
 
@@ -174,15 +174,13 @@ Total Investment,,$36793,$8150,$28643,$11293,$11293,$51229,Year 1 credits reduce
 The following template files have been updated with credit structure:
 
 - ✅ `solution-template/.../solution-briefing.md` - 7-column investment table with credits
-- ✅ `All production solutions` - Use 9-column credit format (MANDATORY)
+- ✅ `All production solutions` - Use 9-column format (MANDATORY)
 
 ## Creating New Solutions
 
 When creating new solutions, you MUST:
 
-1. ✅ Use the **9-column credit-based format** for cost-breakdown.csv
+1. ✅ Use the **9-column format** for cost-breakdown.csv
 2. ✅ Include partner/vendor credits in solution-briefing.md Investment Summary table
 3. ✅ Document credit sources in the "Credit Comments" column
 4. ✅ Run `compute-costs.py` to automatically update markdown files after modifying cost-breakdown.csv
-
-All solutions (including solution-template) use the credit-based format exclusively.
