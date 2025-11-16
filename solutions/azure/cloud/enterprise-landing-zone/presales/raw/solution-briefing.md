@@ -84,6 +84,7 @@ footer_logo_right: eof-tools/doc-tools/brands/default/assets/logos/eo-framework-
 
 **Path to Value Realization**
 
+<!-- TABLE_CONFIG: widths=[10, 25, 15, 50] -->
 | Phase No | Phase Description | Timeline | Key Deliverables |
 |----------|-------------------|----------|-----------------|
 | Phase 1 | Foundation & Planning | Weeks 1-4 | Management groups configured, Hub network operational, Azure AD integrated |
@@ -129,6 +130,7 @@ footer_logo_right: eof-tools/doc-tools/brands/default/assets/logos/eo-framework-
 **Total Investment & Value**
 
 <!-- BEGIN COST_SUMMARY_TABLE -->
+<!-- TABLE_CONFIG: widths=[20, 12, 23, 13, 10, 10, 12] -->
 | Cost Category | Year 1 List | Azure/Partner Credits | Year 1 Net | Year 2 | Year 3 | 3-Year Total |
 |---------------|-------------|----------------------|-----------|--------|--------|--------------|
 | Professional Services | $134,000 | ($15,000) | $119,000 | $0 | $0 | $119,000 |

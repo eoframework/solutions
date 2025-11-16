@@ -101,6 +101,7 @@ footer_logo_right: eof-tools/doc-tools/brands/default/assets/logos/eo-framework-
 
 **Path to DR Readiness**
 
+<!-- TABLE_CONFIG: widths=[10, 25, 15, 50] -->
 | Phase No | Phase Description | Timeline | Key Deliverables |
 |----------|-------------------|----------|-----------------|
 | Phase 1 | Assessment & Design | Months 1-2 | BIA completed, DR architecture approved, AWS environments provisioned |
@@ -161,6 +162,7 @@ footer_logo_right: eof-tools/doc-tools/brands/default/assets/logos/eo-framework-
 **Total Investment & Value with AWS Partner Credits**
 
 <!-- BEGIN COST_SUMMARY_TABLE -->
+<!-- TABLE_CONFIG: widths=[20, 12, 23, 13, 10, 10, 12] -->
 | Cost Category | Year 1 List | AWS/Partner Credits | Year 1 Net | Year 2 | Year 3 | 3-Year Total |
 |---------------|-------------|---------------------|------------|---------|---------|--------------|
 | Professional Services | $93,500 | ($8,000) | $85,500 | $0 | $0 | $85,500 |

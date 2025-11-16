@@ -165,7 +165,7 @@ footer_logo_right: eof-tools/doc-tools/brands/default/assets/logos/eo-framework-
 **Total Investment & Value**
 
 <!-- BEGIN COST_SUMMARY_TABLE -->
-<!-- TABLE_CONFIG: widths=[20, 10, 21, 14, 11, 11, 13] -->
+<!-- TABLE_CONFIG: widths=[20, 12, 23, 13, 10, 10, 12] -->
 | Cost Category | Year 1 List | Provider/Partner Credits | Year 1 Net | Year 2 | Year 3 | 3-Year Total |
 |---------------|-------------|-------------------------|------------|---------|---------|-----------------|
 | Cloud Infrastructure | $12,225 | ($990) | $11,235 | $12,225 | $12,225 | $35,685 |

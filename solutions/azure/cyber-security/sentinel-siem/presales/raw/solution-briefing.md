@@ -113,6 +113,7 @@ footer_logo_right: eof-tools/doc-tools/brands/default/assets/logos/eo-framework-
 
 **Path to Value Realization**
 
+<!-- TABLE_CONFIG: widths=[10, 25, 15, 50] -->
 | Phase No | Phase Description | Timeline | Key Deliverables |
 |----------|-------------------|----------|-----------------|
 | Phase 1 | Foundation & Data Ingestion | Weeks 1-4 | Sentinel workspace operational, Primary data connectors live, Identity controls configured |
@@ -185,6 +186,7 @@ footer_logo_right: eof-tools/doc-tools/brands/default/assets/logos/eo-framework-
 **Total Investment & Value**
 
 <!-- BEGIN COST_SUMMARY_TABLE -->
+<!-- TABLE_CONFIG: widths=[20, 12, 23, 13, 10, 10, 12] -->
 | Cost Category | Year 1 List | Azure/Partner Credits | Year 1 Net | Year 2 | Year 3 | 3-Year Total |
 |---------------|-------------|----------------------|-----------|--------|--------|--------------|
 | Professional Services | $126,000 | $0 | $126,000 | $0 | $0 | $126,000 |

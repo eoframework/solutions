@@ -103,6 +103,7 @@ footer_logo_right: eof-tools/doc-tools/brands/default/assets/logos/eo-framework-
 
 **Path to Modern Workplace Delivery**
 
+<!-- TABLE_CONFIG: widths=[10, 25, 15, 50] -->
 | Phase No | Phase Description | Timeline | Key Deliverables |
 |----------|-------------------|----------|-----------------|
 | Phase 1 | Discovery & Planning | Weeks 1-2 | Requirements validated, Architecture designed, Project plan approved |
@@ -163,6 +164,7 @@ footer_logo_right: eof-tools/doc-tools/brands/default/assets/logos/eo-framework-
 **Total Investment & Value**
 
 <!-- BEGIN COST_SUMMARY_TABLE -->
+<!-- TABLE_CONFIG: widths=[20, 12, 23, 13, 10, 10, 12] -->
 | Cost Category | Year 1 List | Azure/Partner Credits | Year 1 Net | Year 2 | Year 3 | 3-Year Total |
 |---------------|-------------|----------------------|------------|---------|---------|--------------|
 | Professional Services | $78,400 | ($6,500) | $71,900 | $0 | $0 | $71,900 |

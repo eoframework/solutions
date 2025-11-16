@@ -101,6 +101,7 @@ footer_logo_right: eof-tools/doc-tools/brands/default/assets/logos/eo-framework-
 
 **Path to Value Realization**
 
+<!-- TABLE_CONFIG: widths=[10, 25, 15, 50] -->
 | Phase No | Phase Description | Timeline | Key Deliverables |
 |----------|-------------------|----------|-----------------|
 | Phase 1 | Pilot & Validation | Months 1-2 | Single document type automated, 95%+ accuracy validated, Human review workflow operational |
@@ -161,6 +162,7 @@ footer_logo_right: eof-tools/doc-tools/brands/default/assets/logos/eo-framework-
 **Total Investment & Value with AWS Partner Credits**
 
 <!-- BEGIN COST_SUMMARY_TABLE -->
+<!-- TABLE_CONFIG: widths=[20, 12, 23, 13, 10, 10, 12] -->
 | Cost Category | Year 1 List | AWS/Partner Credits | Year 1 Net | Year 2 | Year 3 | 3-Year Total |
 |---------------|-------------|---------------------|------------|---------|---------|--------------|
 | Professional Services | $82,250 | ($10,000) | $72,250 | $0 | $0 | $72,250 |
@@ -299,7 +301,7 @@ Detailed cost breakdown including AWS service consumption, Textract/Comprehend p
 
 ## APPENDIX: Detailed Slide Notes
 
-### Presentation Guidelines
+## Presentation Guidelines
 **layout:** single
 
 - **Duration:** 45-60 minutes including Q&A
@@ -307,7 +309,7 @@ Detailed cost breakdown including AWS service consumption, Textract/Comprehend p
 - **Focus:** Business value and proven results, not technical details
 - **Approach:** Consultative partnership, not vendor pitch
 
-### Slide Timing Recommendations
+## Slide Timing Recommendations
 **layout:** single
 
 - Business Opportunity: 5 minutes
@@ -320,7 +322,7 @@ Detailed cost breakdown including AWS service consumption, Textract/Comprehend p
 - Next Steps: 5 minutes
 - Q&A: 15-20 minutes
 
-### Key Messages
+## Key Messages
 **layout:** single
 
 1. AI/ML accuracy proven in pilot before full investment
@@ -328,7 +330,7 @@ Detailed cost breakdown including AWS service consumption, Textract/Comprehend p
 3. Typical ROI within 12-18 months through labor cost savings
 4. Partnership brings proven methodology and AWS expertise
 
-### Anticipated Questions & Answers
+## Anticipated Questions & Answers
 **layout:** single
 
 - **Q:** "How accurate is the AI extraction?"

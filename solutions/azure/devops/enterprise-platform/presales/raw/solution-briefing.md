@@ -102,6 +102,7 @@ footer_logo_right: eof-tools/doc-tools/brands/default/assets/logos/eo-framework-
 
 **Path to DevOps Maturity**
 
+<!-- TABLE_CONFIG: widths=[10, 25, 15, 50] -->
 | Phase No | Phase Description | Timeline | Key Deliverables |
 |----------|-------------------|----------|-----------------|
 | Phase 1 | Foundation & CI Setup | Weeks 1-4 | Azure DevOps repositories, CI pipeline templates, Security policies defined |
@@ -162,6 +163,7 @@ footer_logo_right: eof-tools/doc-tools/brands/default/assets/logos/eo-framework-
 **Total Investment with Azure Credits**
 
 <!-- BEGIN COST_SUMMARY_TABLE -->
+<!-- TABLE_CONFIG: widths=[20, 12, 23, 13, 10, 10, 12] -->
 | Cost Category | Year 1 List | Azure/Partner Credits | Year 1 Net | Year 2 | Year 3 | 3-Year Total |
 |---------------|-------------|---------------------|------------|---------|---------|--------------|
 | Azure Platform Services | $6,200 | $0 | $6,200 | $6,200 | $6,200 | $18,600 |
@@ -216,5 +218,3 @@ footer_logo_right: eof-tools/doc-tools/brands/default/assets/logos/eo-framework-
 - **Your Account Manager:** [Name, Title] | [Email] | [Phone]
 
 ---
-
-*This presentation is confidential and proprietary. It is intended solely for the use of the party to whom it is addressed.*

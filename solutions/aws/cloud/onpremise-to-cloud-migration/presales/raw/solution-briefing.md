@@ -101,6 +101,7 @@ footer_logo_right: eof-tools/doc-tools/brands/default/assets/logos/eo-framework-
 
 **Path to Cloud Migration**
 
+<!-- TABLE_CONFIG: widths=[10, 25, 15, 50] -->
 | Phase No | Phase Description | Timeline | Key Deliverables |
 |----------|-------------------|----------|-----------------|
 | Phase 1 | Discovery & Assessment | Months 1-2 | Application inventory completed, Migration waves defined, AWS landing zone operational |
@@ -161,6 +162,7 @@ footer_logo_right: eof-tools/doc-tools/brands/default/assets/logos/eo-framework-
 **Total Investment & Value with AWS MAP Program Credits**
 
 <!-- BEGIN COST_SUMMARY_TABLE -->
+<!-- TABLE_CONFIG: widths=[20, 12, 23, 13, 10, 10, 12] -->
 | Cost Category | Year 1 List | AWS/Partner Credits | Year 1 Net | Year 2 | Year 3 | 3-Year Total |
 |---------------|-------------|---------------------|------------|---------|---------|--------------|
 | Professional Services | $125,150 | ($22,000) | $103,150 | $0 | $0 | $103,150 |
