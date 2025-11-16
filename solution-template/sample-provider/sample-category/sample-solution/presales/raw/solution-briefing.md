@@ -103,6 +103,7 @@ footer_logo_right: eof-tools/doc-tools/brands/default/assets/logos/eo-framework-
 
 **Path to Value Realization**
 
+<!-- TABLE_CONFIG: widths=[10, 25, 15, 50] -->
 | Phase No | Phase Description | Timeline | Key Deliverables |
 |----------|-------------------|----------|-----------------|
 | Phase 1 | Foundation & Planning | Months 1-2 | Cloud environment live, Security baseline configured, CI/CD pipeline operational |
@@ -164,6 +165,7 @@ footer_logo_right: eof-tools/doc-tools/brands/default/assets/logos/eo-framework-
 **Total Investment & Value**
 
 <!-- BEGIN COST_SUMMARY_TABLE -->
+<!-- TABLE_CONFIG: widths=[20, 10, 21, 14, 11, 11, 13] -->
 | Cost Category | Year 1 List | Provider/Partner Credits | Year 1 Net | Year 2 | Year 3 | 3-Year Total |
 |---------------|-------------|-------------------------|------------|---------|---------|-----------------|
 | Cloud Infrastructure | $12,225 | ($990) | $11,235 | $12,225 | $12,225 | $35,685 |
