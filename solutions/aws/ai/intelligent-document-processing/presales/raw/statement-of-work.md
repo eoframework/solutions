@@ -177,6 +177,7 @@ These items are not in scope unless added via change control:
 
 ## Deliverables
 
+<!-- TABLE_CONFIG: widths=[8, 40, 12, 20, 20] -->
 | # | Deliverable | Type | Due Date | Acceptance By |
 |---|--------------------------------------|--------------|--------------|-----------------|
 | 1 | Requirements Specification | Document/CSV | Week 2 | [Client Lead] |
@@ -199,6 +200,7 @@ These items are not in scope unless added via change control:
 
 ## Milestones
 
+<!-- TABLE_CONFIG: widths=[20, 50, 30] -->
 | Milestone | Description | Target Date |
 |-----------|-------------|-------------|
 | M1 | Assessment Complete | Week 3 |
@@ -215,6 +217,7 @@ These items are not in scope unless added via change control:
 
 # Roles & Responsibilities
 
+<!-- TABLE_CONFIG: widths=[34, 11, 11, 11, 11, 11, 11] -->
 | Task/Role | Vendor PM | Vendor Architect | Vendor ML Engineer | Vendor Dev | Client IT | Client Business |
 |-----------|-----------|------------------|-------------------|-----------|-----------|-----------------|
 | Discovery & Requirements | A | R | C | C | C | R |
@@ -245,7 +248,7 @@ This architecture is designed for **small-scope deployment** supporting 50,000 p
 - **Simplicity:** Single-region deployment (us-east-1) with essential availability
 - **Scalability:** Can grow to medium/large scope by adjusting AWS service limits (no re-architecture)
 
-![Figure 1: Solution Architecture Diagram](../../assets/diagrams/architecture-diagram.png)
+![Figure 1: Solution Architecture Diagram](assets/diagrams/architecture-diagram.png)
 
 **Figure 1: Solution Architecture Diagram** - High-level overview of the AWS Intelligent Document Processing solution architecture
 
@@ -340,6 +343,7 @@ The implementation approach follows AWS AI/ML best practices and proven methodol
 
 ## Tooling Overview
 
+<!-- TABLE_CONFIG: widths=[25, 35, 40] -->
 | Category | Primary Tools | Purpose |
 |-----------------------|------------------------------|-------------------------------|
 | Infrastructure | AWS CloudFormation, SAM | Infrastructure provisioning and Lambda deployment |

@@ -206,6 +206,7 @@ These items are not in scope unless added via change control:
 
 ## Deliverables
 
+<!-- TABLE_CONFIG: widths=[8, 40, 12, 20, 20] -->
 | # | Deliverable | Type | Due Date | Acceptance By |
 |---|--------------------------------------|--------------|--------------|-----------------|
 | 1 | Current State Assessment Report | Document | Week 2 | [IT Director] |
@@ -232,6 +233,7 @@ These items are not in scope unless added via change control:
 
 ## Milestones
 
+<!-- TABLE_CONFIG: widths=[20, 50, 30] -->
 | Milestone | Description | Target Week |
 |-----------|-------------|-------------|
 | M1 | Assessment and Design Complete | Week 4 |
@@ -248,6 +250,7 @@ These items are not in scope unless added via change control:
 
 # Roles & Responsibilities
 
+<!-- TABLE_CONFIG: widths=[24, 10, 10, 10, 10, 10, 10, 8, 8] -->
 | Task/Role | Vendor PM | Vendor Architect | Vendor Security | Vendor Network | Vendor Developer | Client IT | Client Security | Client Network |
 |-----------|-----------|------------------|-----------------|-----------------|-----------------|-----------|-----------------|--------------|
 | Assessment | A | R | C | C | I | C | C | C |
@@ -283,7 +286,7 @@ This architecture is designed for **enterprise-scale deployment** supporting mul
 - **Cost Management:** Chargeback models and resource governance for cost optimization
 - **Operational Excellence:** Centralized monitoring, logging, and alerting for visibility
 
-![Figure 1: Enterprise Landing Zone Architecture Diagram](../../assets/diagrams/architecture-diagram.png)
+![Figure 1: Enterprise Landing Zone Architecture Diagram](assets/diagrams/architecture-diagram.png)
 
 **Figure 1: Enterprise Landing Zone Architecture Diagram** - High-level overview of the Azure Enterprise Landing Zone architecture
 
@@ -415,6 +418,7 @@ The implementation approach follows Azure Cloud Adoption Framework (CAF) best pr
 
 ## Tooling Overview
 
+<!-- TABLE_CONFIG: widths=[25, 35, 40] -->
 | Category | Primary Tools | Purpose |
 |----------|---------------|---------|
 | Infrastructure | Terraform, ARM Templates | Infrastructure-as-code for landing zone deployment |
@@ -516,6 +520,7 @@ The implementation and target environment will be architected and validated to m
 
 ## Environments
 
+<!-- TABLE_CONFIG: widths=[25, 35, 20, 20] -->
 | Environment | Purpose | Azure Region | Lifecycle |
 |-------------|---------|------------|-----------------|
 | Management | Enterprise landing zone services | Primary Region | Persistent |

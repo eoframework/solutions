@@ -127,6 +127,7 @@ The following activities are explicitly excluded from this SOW:
 
 ## Documentation Deliverables
 
+<!-- TABLE_CONFIG: widths=[25, 40, 15, 20] -->
 | Deliverable | Description | Due Date | Format |
 |-------------|-------------|----------|---------|
 | **DR Requirements Specification** | Detailed RTO/RPO requirements and business continuity needs | [DATE] | CSV/Excel |
@@ -140,6 +141,7 @@ The following activities are explicitly excluded from this SOW:
 
 ## System Deliverables
 
+<!-- TABLE_CONFIG: widths=[30, 40, 30] -->
 | Component | Description | Acceptance Criteria |
 |-----------|-------------|---------------------|
 | **Primary Production Environment** | Fully configured primary region with DR monitoring | Passes all acceptance tests |
@@ -187,30 +189,36 @@ The following activities are explicitly excluded from this SOW:
 
 # Roles & Responsibilities
 
-## Vendor Responsibilities
+## RACI Matrix
 
-- **DR Project Manager:** Overall DR project coordination and delivery management
-- **DR Solution Architect:** Multi-region DR architecture design and oversight
-- **Cloud Infrastructure Engineer:** AWS DR infrastructure deployment and configuration
-- **DR Specialist:** Disaster recovery procedures and testing coordination
-- **Monitoring Engineer:** DR monitoring and alerting system implementation
-- **Training Specialist:** DR operations training and knowledge transfer
+<!-- TABLE_CONFIG: widths=[34, 11, 11, 11, 11, 11, 11] -->
+| Task/Deliverable | Vendor PM | Vendor Arch | Vendor Eng | Client IT | Client Mgmt | SME |
+|------------------|-----------|-------------|------------|-----------|-------------|-----|
+| DR Requirements Analysis | A | R | C | C | I | R |
+| DR Architecture Design | C | A | R | C | I | C |
+| Infrastructure Deployment | C | R | A | C | I | I |
+| Data Replication Setup | C | R | R | C | I | I |
+| Failover Automation | C | A | R | C | I | I |
+| Testing & Validation | R | R | R | A | I | C |
+| Runbook Development | A | R | R | C | I | I |
+| Knowledge Transfer | R | R | C | A | I | I |
+| Project Management | A | I | I | C | R | I |
 
-## Client Responsibilities
+**Legend:** R = Responsible | A = Accountable | C = Consulted | I = Informed
 
-- **Business Continuity Sponsor:** Executive oversight and DR investment decisions
-- **Technical Lead:** Infrastructure coordination and security approvals
-- **Application Owner:** Business requirements validation and acceptance testing
-- **Operations Manager:** DR procedures adoption and team coordination
-- **System Administrator:** Ongoing DR system maintenance and monitoring
+## Key Personnel
 
-## Shared Responsibilities
+**Vendor Team:**
+- Project Manager: Overall delivery accountability
+- Solution Architect: Technical design and oversight
+- Engineers: Implementation and configuration
+- Support Specialist: Training and hypercare
 
-- Disaster scenario planning and business impact assessment
-- DR testing coordination and business process validation
-- Incident response procedures and escalation protocols
-- Change control for DR environment modifications
-- Ongoing DR strategy optimization and improvement
+**Client Team:**
+- IT Lead: Primary technical contact
+- Management Sponsor: Executive oversight
+- Operations Team: Knowledge transfer recipients
+- Subject Matter Experts: Requirements validation
 
 ---
 

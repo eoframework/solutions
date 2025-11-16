@@ -1,6 +1,6 @@
 ---
 document_title: Statement of Work
-project_name: Enterprise Solution Implementation
+project_name: AWS Cloud Migration - On-Premise to Cloud Implementation
 client_name: '[Client Name]'
 client_contact: '[Contact Name | Email | Phone]'
 consulting_company: Your Consulting Company
@@ -14,44 +14,34 @@ vendor_logo: assets/logos/consulting_company_logo.png
 
 # Executive Summary
 
-This Statement of Work (SOW) defines the scope, deliverables, roles, and terms for a **small-scope, lift-and-shift** migration of 15-25 workloads from on-premise infrastructure to Amazon Web Services (AWS).
+This Statement of Work defines the scope, deliverables, timeline, and terms for the **AWS Cloud Migration** implementation. This engagement will transform your organization's capabilities by delivering a comprehensive, enterprise-grade solution designed to meet your specific business requirements.
 
-**Small Scope Migration:**
-- **Workloads:** 15-25 VMs/applications
-- **Migration Strategy:** Lift-and-shift (rehost) - not refactoring
-- **Infrastructure:** 3x t3.large EC2, db.t3.large RDS Multi-AZ, 1TB storage
-- **Timeline:** 4-6 months from discovery to cutover
-- **Total Investment:** $167,448 over 3 years ($139,316 Year 1)
+**Project Duration:** 12 weeks (as detailed in Timeline & Milestones section)
 
-**Key Outcomes:**
-- Eliminate data center costs for migrated workloads
-- 61% cost reduction vs. keeping on-premise
-- Cloud scalability and AWS managed services benefits
-- Foundation to expand migration to additional workloads
-
----
+**Key Objectives:**
+- Deploy and configure AWS Cloud Migration according to best practices
+- Integrate with existing enterprise systems and workflows
+- Train technical staff on operations and management
+- Achieve defined success metrics and business outcomes
 
 ---
 
 # Background & Objectives
 
-## Background  
-Client currently hosts **[#] applications** on **[VMware/Hyper-V/Physical servers]** across **[#] environments**. Challenges include:  
-- [e.g., scaling]  
-- [e.g., end-of-life hardware]  
-- [e.g., data center contract expiration]
+## Business Context
 
-## Objectives  
-- Migrate **[#] workloads** to AWS using proven tooling such as AWS MGN and DMS.  
-- Improve security posture using VPC segmentation, IAM controls, GuardDuty, etc.  
-- Reduce TCO by leveraging managed services (e.g., RDS, ECS Fargate).  
-- Enable DR across AZs or regions where applicable.  
+**layout:** two_column
 
-## Success Metrics  
-- Zero high-severity issues during cutover  
-- App latency < [X ms] post-migration  
-- 99.9% uptime during the stabilization period  
-- 20–35% cost reduction vs. on-prem within 12 months
+**Accelerating Digital Transformation Through Cloud Migration**
+
+- **Opportunity**
+  - Eliminate data center costs and redirect capital to business innovation and growth
+  - Achieve operational agility with cloud-native scalability and global infrastructure
+  - Modernize legacy applications while reducing technical debt and maintenance burden
+- **Success Criteria**
+  - Complete migration of production workloads within 6-9 months with zero data loss
+  - Achieve 30-40% infrastructure cost reduction through right-sizing and optimization
+  - Establish AWS landing zone foundation for future cloud-native development
 
 ---
 
@@ -59,389 +49,245 @@ Client currently hosts **[#] applications** on **[VMware/Hyper-V/Physical server
 
 # Scope of Work
 
-### In Scope  
-- Workload discovery & dependency analysis (via AWS Application Discovery Service)  
-- AWS Landing Zone deployment (Control Tower or Terraform)  
-- VPC, subnet, routing, and shared services setup  
-- Workload migration using AWS MGN / CloudEndure  
-- RDS migration (if part of replatform strategy)  
-- Cutover, DNS updates, and validation  
-- Knowledge transfer and documentation  
+## In Scope
 
-### Activities  
+**layout:** single
 
-### Phase 1 – Discovery & Assessment  
-During this initial phase, the Vendor will perform a comprehensive assessment of the Client’s infrastructure and application landscape. This includes analyzing existing workloads, identifying dependencies, and determining the most appropriate migration strategy for each workload.
+**Proven AWS Migration Methodology**
 
-Key activities:
-- Comprehensive infrastructure discovery and inventory  
-- Application portfolio analysis and dependency mapping  
-- Migration readiness assessment using AWS MAP framework  
-- AWS architecture design and landing zone planning  
-- Migration wave planning and prioritization  
-- Cost estimation and right-sizing recommendations  
+- **Phase 1: Discovery & Assessment (Months 1-2)**
+  - Application discovery and dependency mapping with AWS tools
+  - Migration readiness assessment and wave planning (lift-shift vs replatform)
+  - AWS landing zone design and account structure setup
+- **Phase 2: Migration Execution (Months 3-6)**
+  - Wave 1: Non-critical applications for validation and learning
+  - Wave 2: Business-critical applications with tested migration patterns
+  - Wave 3: Complex/legacy applications requiring refactoring
+- **Phase 3: Optimization & Handoff (Months 7-9)**
+  - Right-sizing based on CloudWatch metrics and usage patterns
+  - Cost optimization through Reserved Instances and Savings Plans
+  - Security hardening, compliance validation, and knowledge transfer
 
-This phase concludes with a Migration Assessment Report that outlines the proposed plan, scope, risks, and timeline.
-
-### Phase 2 – Landing Zone & Infrastructure Deployment  
-In this phase, the foundational AWS infrastructure is provisioned and configured based on AWS best practices. This includes account structure, network setup, security controls, monitoring, and access management.
-
-Key activities:
-- AWS Landing Zone implementation with account provisioning  
-- Network connectivity setup using VPN or Direct Connect  
-- Centralized logging and monitoring via CloudWatch, CloudTrail, and security services  
-- IAM roles, SSO, MFA policies based on least-privilege model  
-- Baseline security configuration using AWS Config, GuardDuty, and SCPs  
-- Implementation of automated backup strategies and disaster recovery setup  
-
-By the end of this phase, the Client will have a secure, production-ready AWS environment for hosting migrated workloads.
-
-### Phase 3 – Migration Execution (in waves)  
-Migration of workloads will occur in well-defined waves based on business priority and workload complexity. Each wave follows a repeatable factory approach with automated processes for consistency and risk reduction.
-
-Key activities:
-- Migration factory setup with CI/CD and automation tooling  
-- Database migrations using AWS DMS or native tools (e.g., RMAN, SQL)  
-- Application migration via rehost, replatform, or refactor strategies  
-- Incremental or real-time data sync between source and target systems  
-- DNS updates, endpoint reconfiguration  
-- Resource right-sizing and performance optimization  
-
-After each wave, the Vendor will coordinate validation and sign-off with the Client before proceeding.
-
-### Phase 4 – Testing & Cutover  
-In the Testing and Cutover phase, migrated workloads undergo thorough functional, performance, and failover validation to ensure they meet required SLAs and compliance standards. Test cases and scripts will be executed based on Client-defined acceptance criteria.
-
-Key activities:
-- Smoke testing and sanity checks for each migrated workload  
-- Performance benchmarking vs. on-premise baselines  
-- Failover and resiliency testing (Multi-AZ, DR)  
-- Final synchronization of data (if using DMS)  
-- DNS cutover, user acceptance testing (UAT), and go-live readiness review  
-
-Cutover will be coordinated with all relevant stakeholders and executed during an approved maintenance window, with well-documented rollback procedures in place.
-
-### Phase 5 – Handover & Post-Migration Support  
-Following successful migration and cutover, the focus shifts to ensuring operational continuity and knowledge transfer. The Vendor will provide a period of hypercare support and equip the Client’s team with the documentation, tools, and processes needed for ongoing maintenance and optimization.
-
-Activities include:
-- Delivery of as-built documentation (including architecture diagrams, IAM permissions, monitoring setup, etc.)  
-- Runbook and SOPs for day-to-day operations  
-- Live or recorded knowledge transfer sessions for Ops and Application teams  
-- Cost optimization recommendations (based on AWS Trusted Advisor and Cost Explorer)  
-- Optional transition to a managed services model for 24/7 support, if contracted  
-
----
 
 ## Out of Scope
 
-## Exclusions
 These items are not in scope unless added via change control:
-- Application refactoring (code-level changes)  
-- On-prem hardware recycling or disposal  
-- Managed services post-migration (unless separately contracted)  
-- Training for non-IT end users  
 
----
+- Custom development beyond standard configuration
+- Third-party application licensing (unless specified)
+- Hardware procurement or disposal
+- End-user training (technical team only)
+- Ongoing managed services post-hypercare
 
 ---
 
 # Deliverables & Timeline
 
-## Deliverables
-
-| # | Deliverable                          | Type         | Due Date     | Acceptance By   |
-|---|--------------------------------------|--------------|--------------|-----------------|
-| 1 | Migration Assessment Report          | Document     | [Date]       | [Client Lead]   |
-| 2 | AWS Landing Zone Source Code         | IaC/Code     | [Date]       | [AWS Architect] |
-| 3 | Migration Runbook & Cutover Plan     | Document     | [Date]       | [Ops Lead]      |
-| 4 | As-Built Diagrams & Documentation    | Document     | [Date]       | [Client Lead]   |
-| 5 | Knowledge Transfer Sessions          | Live/Recorded| [Date]       | [Client Team]   |
-
----
-
 ## Project Milestones
 
-## Milestones
-- M1: Assessment Complete — [Date]  
-- M2: Landing Zone Ready — [Date]  
-- M3: Wave 1 App Migration — [Date]  
-- Go-Live — [Date]  
-- Hypercare End — [Date]  
+**layout:** table
 
----
+**Path to Cloud-First Infrastructure**
+
+<!-- TABLE_CONFIG: widths=[10, 25, 15, 50] -->
+| Phase No | Phase Description | Timeline | Key Deliverables |
+|----------|-------------------|----------|------------------|
+| Phase 1 | Discovery & Assessment | Months 1-2 | Application inventory complete, Dependencies mapped, Migration waves planned |
+| Phase 2 | Migration Execution | Months 3-6 | Landing zone operational, Waves 1-3 migrated, Applications validated |
+| Phase 3 | Optimization & Handoff | Months 7-9 | Resources right-sized, Cost optimization active, Operations handoff complete |
+
+
+## Key Deliverables
+
+<!-- TABLE_CONFIG: widths=[8, 40, 12, 20, 20] -->
+| # | Deliverable | Type | Due Date | Acceptance By |
+|---|-------------|------|----------|---------------|
+| 1 | Migration Assessment Report | Document | Month 1 | Client IT Lead |
+| 2 | AWS Landing Zone Source Code | IaC/Code | Month 2 | AWS Architect |
+| 3 | Migration Runbook & Cutover Plan | Document | Month 3 | Operations Lead |
+| 4 | As-Built Documentation | Document | Month 9 | Client IT Lead |
+| 5 | Knowledge Transfer Sessions | Training | Month 9 | Technical Team |
 
 ---
 
 # Roles & Responsibilities
 
-| Task/Role                                | Vendor PM | Vendor Arch | Vendor DevOps | Client IT | Client Sec | AWS SA |
-|------------------------------------------|-----------|-------------|---------------|-----------|------------|--------|
-| Discovery & Dependency Mapping           | A         | R           | R             | C         | I          | I      |
-| AWS Account & Landing Zone               | C         | A           | R             | I         | I          | C      |
-| Network Setup (VPC, Routing)             | C         | A           | R             | C         | C          | C      |
-| Migration Wave Design                    | A         | R           | C             | R         | C          | I      |
-| Database Migration                       | C         | R           | R             | C         | I          | I      |
-| Application Cutover Execution            | R         | R           | R             | A         | C          | I      |
-| IAM & Security Configuration             | C         | C           | R             | I         | A          | C      |
-| Monitoring Configuration (CW, X-Ray)     | C         | R           | R             | C         | I          | I      |
-| Hypercare Post-Migration Support         | A         | R           | R             | C         | I          | I      |
-| Knowledge Transfer                       | R         | R           | C             | A         | I          | I      |
+## RACI Matrix
 
-Legend:  
-**R** = Responsible | **A** = Accountable | **C** = Consulted | **I** = Informed
+<!-- TABLE_CONFIG: widths=[34, 11, 11, 11, 11, 11, 11] -->
+| Task/Deliverable | Vendor PM | Vendor Arch | Vendor Eng | Client IT | Client Mgmt | SME |
+|------------------|-----------|-------------|------------|-----------|-------------|-----|
+| Discovery & Dependency Mapping | A | R | R | C | I | C |
+| AWS Landing Zone Setup | C | A | R | I | I | I |
+| Network Connectivity | C | A | R | C | I | C |
+| Migration Wave Design | A | R | C | R | I | C |
+| Database Migration | C | R | R | C | I | I |
+| Application Cutover | R | R | R | A | I | C |
+| IAM & Security Config | C | R | R | I | I | A |
+| Monitoring Setup | C | R | R | C | I | I |
+| Knowledge Transfer | R | R | C | A | I | I |
+| Hypercare Support | A | R | R | C | I | I |
 
----
+**Legend:** R = Responsible | A = Accountable | C = Consulted | I = Informed
+
+## Key Personnel
+
+**Vendor Team:**
+- Project Manager: Overall delivery accountability
+- Solution Architect: Technical design and oversight
+- Engineers: Implementation and configuration
+- Support Specialist: Training and hypercare
+
+**Client Team:**
+- IT Lead: Primary technical contact
+- Management Sponsor: Executive oversight
+- Operations Team: Knowledge transfer recipients
+- Subject Matter Experts: Requirements validation
 
 ---
 
 # Architecture & Design
 
+## Solution Architecture
 
+**layout:** visual
+
+**Comprehensive Migration Journey to AWS**
+
+![Architecture Diagram](assets/diagrams/architecture-diagram.png)
+
+- **Migration Approach**
+  - Discovery with Application Discovery Service maps dependencies and complexity
+  - Migration tools: DMS for databases, SMS for servers, DataSync for data transfer
+  - Migration Hub provides centralized tracking across all migration waves
+- **AWS Landing Zone**
+  - Multi-account structure with Control Tower and Organizations for governance
+  - Production infrastructure: Auto Scaling EC2, RDS, S3, CloudFront, VPC networking
+  - Site-to-Site VPN enables secure hybrid connectivity during phased migration
+
+---
+
+## Technical Implementation
+
+The implementation will follow industry best practices with:
+
+- Infrastructure as Code for repeatable deployments
+- Configuration management for consistency
+- Automated testing and validation
+- Comprehensive monitoring and alerting
+- Security-first design principles
 
 ---
 
 # Security & Compliance
 
-## Environments & Access
+## Identity & Access Management
 
-## Environments  
-- Dev, QA, Stage, Prod
+- Role-based access control (RBAC) implementation
+- Least-privilege principle enforcement
+- Multi-factor authentication (MFA) required
+- Service accounts with minimal permissions
+- Regular access reviews and certification
 
-## Access Policies  
-- MFA required  
-- SSO federation preferred  
-- No direct SSH — use SSM Session Manager  
+## Monitoring & Threat Detection
 
----
+- Real-time security monitoring and alerting
+- Audit logging for all administrative actions
+- Anomaly detection and behavioral analysis
+- Incident response integration
+- Compliance reporting dashboards
+
+## Compliance & Governance
+
+- Industry standard compliance frameworks (SOC 2, ISO 27001)
+- Data classification and protection policies
+- Encryption for data at-rest and in-transit
+- Regular security assessments
+- Policy enforcement automation
 
 ---
 
 # Testing & Validation
 
-Comprehensive testing and validation will take place throughout the migration lifecycle to ensure functionality, performance, security, and resilience of all workloads on AWS.
+## Testing Strategy
 
-## Functional Validation  
-- End-to-end application validation via UI, API, or batch-level testing  
-- Validation against business workflows and user stories  
+**Functional Validation:**
+- End-to-end workflow testing
+- Integration point validation
+- User acceptance testing coordination
+- Data integrity verification
 
-## Performance & Load Testing  
-- Benchmark comparison between on-prem and AWS target states  
-- Stress testing using tools like JMeter or Locust  
+**Performance Testing:**
+- Load testing under expected conditions
+- Stress testing at 2x capacity
+- Response time benchmarking
+- Scalability validation
 
-## Security Testing  
-- Validation of IAM policies, encryption, and compliance requirements  
-- Optional penetration testing and vulnerability scanning  
+**Security Testing:**
+- Vulnerability scanning
+- Access control validation
+- Compliance verification
+- Penetration testing coordination (if required)
 
-## Disaster Recovery & Resilience Tests  
-- Failover testing (Multi-AZ, Multi-region if applicable)  
-- RTO/RPO validation  
+## Go-Live Readiness
 
-## User Acceptance Testing (UAT)  
-- Performed in coordination with Client stakeholders  
-- Test data and environment setup managed by Vendor  
-
-## Go-Live Readiness  
-A Go-Live Readiness Checklist will be delivered including:
-- Security and compliance sign-offs  
-- Functional benchmark validation  
-- Data integrity checks  
-- Issue log closure  
-
----
-
-## Cutover Plan
-
-## Cutover Checklist  
-- DNS switch sequencing  
-- Disable legacy database writes  
-- Application and endpoint reconfiguration  
-- Health check monitoring  
-
-## Rollback Strategy  
-- Reverse DNS  
-- Re-enable legacy data writes  
-- Rollback to earlier snapshot or AMI  
-
----
+- [ ] All functional tests passed
+- [ ] Performance benchmarks achieved
+- [ ] Security validation complete
+- [ ] Documentation finalized
+- [ ] Team training completed
+- [ ] Stakeholder sign-off obtained
 
 ---
 
 # Handover & Support
 
-## Handover Artifacts  
-- As-Built documentation  
-- Cloud cost estimation & optimization recommendations  
-- IAM and account governance model  
-- Monitoring & alert setup reference  
+## Knowledge Transfer
 
-## Knowledge Transfer  
-- [X] live sessions  
-- Recorded materials hosted in shared portal  
+**Training Sessions:**
+- 3x live knowledge transfer sessions (recorded)
+- Operations runbook walkthrough
+- Monitoring and alerting procedures
+- Incident response playbooks
+- Best practices documentation
 
----
+**Documentation Package:**
+- As-built architecture documentation
+- Configuration management guide
+- Operational runbooks
+- Troubleshooting guide
+- Optimization recommendations
 
-## Assumptions
+## Hypercare Support
 
-### General Assumptions  
-- Client provides timely access to applications, SMEs, and target systems.  
-- IAM roles are provisioned with appropriate permissions before migration waves start.  
-- On-prem network connectivity will be handled via DX or VPN.  
-- All required AWS accounts are permitted for project use.
+**Duration:** 4 weeks post-go-live
 
----
+**Coverage:**
+- Business hours support (8 AM - 6 PM local time)
+- 4-hour response time for critical issues
+- Daily health check calls (first 2 weeks)
+- Weekly status meetings
 
-## Dependencies
-
-## Project Dependencies  
-- Approval for AWS Organizations setup  
-- Third-party application vendor support (if required for migration)  
-- DNS access and domain control during cutover  
-- Required firewall/NAT rules established prior to migration  
-
----
-
-## AWS Security, Compliance & Governance
-
-The migration and target AWS environment will be architected and validated to meet the Client’s security, compliance, and governance requirements. Vendor will adhere to AWS's Shared Responsibility Model and industry-standard security frameworks during implementation.
-
-### Identity & Access Management  
-- IAM roles designed using least-privilege access  
-- Role-based access control (RBAC) aligned with Client’s internal teams  
-- Optional identity federation integration (e.g. Azure AD, Okta)
-
-### Monitoring & Threat Detection  
-- GuardDuty enabled across accounts for real-time threat detection  
-- AWS Config and CloudTrail enabled for audit logging and change detection  
-- Optional integration with SIEM tools like Splunk, Datadog, or ELK  
-
-### Compliance & Auditing  
-- Policies configured for adherence to standards such as SOC2, ISO27001, HIPAA, etc.  
-- Continuous assessment using Security Hub and Trusted Advisor  
-- Optional support for GovCloud for regulatory compliance  
-
-### Encryption & Key Management  
-- KMS-managed keys for in-transit and at-rest encryption  
-- Optional BYOK or CloudHSM deployment  
-- TLS enforcement for all data channels  
-
-### Governance  
-- Use of Service Control Policies (SCPs) to enforce mandatory security posture  
-- AWS tagging strategy applied for cost allocation, ownership, and automation  
-- IaC policy enforcement using tools such as Conftest or AWS CodePipeline  
-
----
+**Scope:**
+- Issue investigation and resolution
+- Performance tuning and optimization
+- Configuration adjustments
+- Continued knowledge transfer
 
 ---
 
 # Investment Summary
 
-**Small Scope Implementation:** This pricing reflects a lift-and-shift migration of 15-25 workloads. For larger migrations (50+ workloads) or refactoring/modernization, please request medium or large scope pricing.
-
-## Total Investment
-
 <!-- BEGIN COST_SUMMARY_TABLE -->
 <!-- TABLE_CONFIG: widths=[20, 12, 23, 13, 10, 10, 12] -->
-| Cost Category | Year 1 List | AWS/Partner Credits | Year 1 Net | Year 2 | Year 3 | 3-Year Total |
-|---------------|-------------|---------------------|------------|---------|---------|--------------|
-| Professional Services | $125,150 | ($22,000) | $103,150 | $0 | $0 | $103,150 |
-| Cloud Infrastructure | $9,572 | ($8,117) | $1,455 | $9,472 | $9,472 | $20,399 |
-| Software Licenses & Subscriptions | $3,132 | $0 | $3,132 | $3,132 | $3,132 | $9,396 |
-| Support & Maintenance | $1,462 | $0 | $1,462 | $1,462 | $1,462 | $4,386 |
-| **TOTAL INVESTMENT** | **$139,316** | **($30,117)** | **$109,199** | **$14,066** | **$14,066** | **$137,331** |
+| Cost Category | Year 1 List | Credits | Year 1 Net | Year 2 | Year 3 | 3-Year Total |
+|---------------|-------------|---------|------------|--------|--------|--------------|
+| Cloud Infrastructure | $0 | $0 | $0 | $0 | $0 | $0 |
+| Professional Services | $0 | $0 | $0 | $0 | $0 | $0 |
+| Software Licenses | $0 | $0 | $0 | $0 | $0 | $0 |
+| Support & Maintenance | $0 | $0 | $0 | $0 | $0 | $0 |
+| **TOTAL INVESTMENT** | **$0** | **$0** | **$0** | **$0** | **$0** | **$0** |
 <!-- END COST_SUMMARY_TABLE -->
-
-## AWS Migration Acceleration Program (MAP) Credits
-
-**Year 1 Credits Applied:** $30,117 (22% reduction)
-- **AWS MAP Assessment Credit:** $12,000 - 100% funding for migration discovery and application inventory
-- **AWS MAP Mobilize/Migrate Credit:** $10,000 - Partial funding for migration wave planning and execution
-- **AWS MAP Consumption Credit:** $8,117 - 35% of Year 1 cloud infrastructure costs
-- Credits are real AWS promotional credits, applied automatically through AWS Migration Hub
-- MAP credits are Year 1 only; Years 2-3 reflect standard AWS pricing
-
-**Investment Comparison:**
-- **Year 1 Net Investment:** $109,199 (after MAP credits) vs. $139,316 list price
-- **3-Year Total Cost of Ownership:** $137,331
-- **On-Premise Comparison:** $420K (3-year on-prem cost for 25 VMs) - **Net Savings: $283K (67% reduction)**
-
-## Cost Components
-
-**Professional Services** ($125,150 - 548 hours): Labor costs for migration assessment, wave planning, AWS landing zone, application/database migration, testing, cutover, and knowledge transfer. Breakdown:
-- Assessment & Planning (140 hours): Discovery, migration strategy, AWS landing zone setup
-- Migration Execution (330 hours): Application migration, database migration, security, testing, cutover coordination
-- Training & Support (78 hours): Knowledge transfer, documentation, 60-day hypercare
-
-**Cloud Infrastructure** ($9,572 Year 1, $9,472 Years 2-3): AWS services for migrated workloads:
-- Amazon EC2 (3x t3.large), RDS (db.t3.large Multi-AZ), S3 (1TB), EBS, ALB, VPN, caching
-- Single region deployment with standard availability
-- Year 1 includes $100 one-time data transfer costs
-
-**Software Licenses & Subscriptions** ($3,132/year): Monitoring and incident management:
-- Datadog Pro (6 hosts): $1,656/year
-- PagerDuty Professional (3 users): $1,476/year
-
-**Support & Maintenance** ($1,462/year): Ongoing managed services (15% of cloud infrastructure):
-- Monthly cost optimization reviews
-- AWS service management
-- Performance tuning
-
-Detailed breakdown including AWS service consumption, migration tasks, and cost comparison is provided in cost-breakdown.xlsx.
-
----
-
-## Payment Terms
-
-### Pricing Model
-- Fixed price or Time & Materials (T&M)
-- Milestone-based payments per Deliverables table
-
-### Payment Schedule
-- 25% upon SOW execution and project kickoff
-- 30% upon completion of Assessment and Wave 1 migration
-- 30% upon completion of Wave 2-3 migrations
-- 15% upon successful cutover and hypercare completion  
-
----
-
-## Invoicing & Expenses
-
-### Invoicing
-- Monthly invoicing
-- Net 30 payment terms
-
-### Expenses  
-- Reimbursable at cost with prior approval  
-
----
-
-## Terms & Conditions
-
-All migration services will be delivered in accordance with the executed Master Services Agreement (MSA) or equivalent contractual document between Vendor and Client.
-
-### Scope Changes  
-- Change Requests required for any scope, schedule, or cost adjustments  
-
-### Intellectual Property  
-- Client retains all ownership of migrated assets, applications, and cloud configs  
-- Vendor retains proprietary scripts and accelerators unless otherwise agreed  
-
-### Service Levels  
-- Deliverables based on best effort unless otherwise specified in SLAs  
-- Hypercare period of [X] weeks included with option to extend via managed services  
-
-### Liability  
-- Liability caps as agreed in MSA  
-- Excludes confidentiality or IP infringement breach  
-
-### Confidentiality  
-- All exchanged artifacts under NDA protection  
-
-### Termination  
-- Mutually terminable per MSA terms, subject to payment for completed work  
-
-### Governing Law  
-- Agreement governed under the laws of [State/Region]  
 
 ---
 
@@ -449,24 +295,64 @@ All migration services will be delivered in accordance with the executed Master 
 
 # Terms & Conditions
 
+## General Terms
 
+All services will be delivered in accordance with the executed Master Services Agreement (MSA) between Vendor and Client.
+
+## Scope Changes
+
+Any changes to scope, schedule, or cost require a formal Change Request approved by both parties. Impact assessment will be provided within 5 business days.
+
+## Intellectual Property
+
+- Client retains ownership of all configurations and documentation specific to their environment
+- Vendor retains proprietary methodologies, tools, and accelerators
+- Pre-existing IP remains with original owner
+
+## Service Levels
+
+- Deliverables provided per agreed schedule
+- Hypercare period: 4 weeks with defined response times
+- Extended support available via managed services contract
+
+## Confidentiality
+
+- All exchanged artifacts under NDA protection
+- Client data handled per security requirements
+- No disclosure to third parties without consent
+
+## Termination
+
+- Either party may terminate with 30 days written notice
+- Payment due for all completed work
+- Deliverables transferred upon termination
 
 ---
 
 # Sign-Off
 
-**Client Authorized Signatory:**  
-Name: __________________________  
-Title: __________________________  
-Signature: ______________________  
-Date: __________________________  
+By signing below, both parties agree to the scope, approach, and terms outlined in this Statement of Work.
 
-**Vendor Authorized Signatory:**  
-Name: __________________________  
-Title: __________________________  
-Signature: ______________________  
-Date: __________________________  
+**Client Authorized Signatory:**
+
+Name: ______________________________
+
+Title: ______________________________
+
+Signature: __________________________
+
+Date: ______________________________
+
+**Service Provider Authorized Signatory:**
+
+Name: ______________________________
+
+Title: ______________________________
+
+Signature: __________________________
+
+Date: ______________________________
 
 ---
 
-*This Statement of Work constitutes the complete agreement between the parties for the cloud migration services described herein and supersedes all prior negotiations, representations, or agreements relating to the subject matter.*
+*This Statement of Work constitutes the complete agreement between the parties for the services described herein.*
