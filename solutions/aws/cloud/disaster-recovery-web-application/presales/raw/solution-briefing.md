@@ -13,6 +13,8 @@ footer_logo_right: eof-tools/doc-tools/brands/default/assets/logos/eo-framework-
 **10 Slides**
 
 ### Slide 1: Title Slide
+**layout:** eo_title_slide
+
 **Presentation Title:** Solution Briefing
 **Subtitle:** AWS Disaster Recovery for Web Applications
 **Presenter:** [Presenter Name] | [Current Date]
@@ -240,10 +242,10 @@ Detailed cost breakdown including primary/DR infrastructure, AWS services, and t
 3. **Team Formation:** Identify application owners, infrastructure team, business stakeholders
 
 **30-Day Launch Plan:**
-- Week 1: Contract finalization and project kickoff
-- Week 2: Business Impact Analysis (BIA) workshops with stakeholders
-- Week 3: Current-state architecture assessment and dependency mapping
-- Week 4: DR architecture design review and AWS environment setup
+- **Week 1:** Contract finalization and project kickoff
+- **Week 2:** Business Impact Analysis (BIA) workshops with stakeholders
+- **Week 3:** Current-state architecture assessment and dependency mapping
+- **Week 4:** DR architecture design review and AWS environment setup
 
 **SPEAKER NOTES:**
 

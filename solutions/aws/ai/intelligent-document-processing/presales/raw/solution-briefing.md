@@ -13,6 +13,8 @@ footer_logo_right: eof-tools/doc-tools/brands/default/assets/logos/eo-framework-
 **10 Slides**
 
 ### Slide 1: Title Slide
+**layout:** eo_title_slide
+
 **Presentation Title:** Solution Briefing
 **Subtitle:** AWS Intelligent Document Processing
 **Presenter:** [Presenter Name] | [Current Date]
@@ -246,10 +248,10 @@ Detailed cost breakdown including AWS service consumption, Textract/Comprehend p
 3. **Team Formation:** Identify business SME, IT contact, document samples
 
 **30-Day Launch Plan:**
-- Week 1: Contract finalization and AWS account setup
-- Week 2: Document sample collection and AI model configuration
-- Week 3: Textract/Comprehend training and initial testing
-- Week 4: First production documents processed with validation
+- **Week 1:** Contract finalization and AWS account setup
+- **Week 2:** Document sample collection and AI model configuration
+- **Week 3:** Textract/Comprehend training and initial testing
+- **Week 4:** First production documents processed with validation
 
 **SPEAKER NOTES:**
 

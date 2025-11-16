@@ -13,6 +13,8 @@ footer_logo_right: eof-tools/doc-tools/brands/default/assets/logos/eo-framework-
 **10 Slides**
 
 ### Slide 1: Title Slide
+**layout:** eo_title_slide
+
 **Presentation Title:** Solution Briefing
 **Subtitle:** Azure Sentinel SIEM - Advanced Threat Detection & Response
 **Presenter:** [Presenter Name] | [Current Date]
@@ -23,7 +25,9 @@ footer_logo_right: eof-tools/doc-tools/brands/default/assets/logos/eo-framework-
 
 ---
 
-## Business Opportunity
+### Business Opportunity
+**layout:** two_column
+
 **Transforming Security Operations with Cloud-Native SIEM**
 
 - **Opportunity**
@@ -39,7 +43,9 @@ footer_logo_right: eof-tools/doc-tools/brands/default/assets/logos/eo-framework-
 
 ---
 
-## Solution Overview
+### Solution Overview
+**layout:** visual
+
 **Cloud-Native Security Intelligence Platform Architecture**
 
 ![Architecture Diagram](assets/diagrams/architecture-diagram.png)
@@ -62,7 +68,9 @@ footer_logo_right: eof-tools/doc-tools/brands/default/assets/logos/eo-framework-
 
 ---
 
-## Implementation Approach
+### Implementation Approach
+**layout:** single
+
 **Proven Methodology for Enterprise Security Success**
 
 - **Phase 1: Foundation (Weeks 1-4)**
@@ -100,7 +108,9 @@ footer_logo_right: eof-tools/doc-tools/brands/default/assets/logos/eo-framework-
 
 ---
 
-## Timeline & Milestones
+### Timeline & Milestones
+**layout:** table
+
 **Path to Value Realization**
 
 | Phase No | Phase Description | Timeline | Key Deliverables |
@@ -123,48 +133,10 @@ footer_logo_right: eof-tools/doc-tools/brands/default/assets/logos/eo-framework-
 
 ---
 
-## Solution Architecture Components
-**Enterprise-Grade Security Intelligence Stack**
-
-### Data Connectors & Collection
+### Success Stories
 **layout:** single
 
-- **Microsoft 365 Defender**: Endpoint, cloud apps, email, and identity threat data
-- **Azure AD & Identity**: User and sign-in activities, privilege access management
-- **Firewall & Network**: Azure Firewall, NSG Flow Logs, on-premises firewalls
-- **Third-Party SIEM**: Integration with existing Splunk, ArcSight, or other platforms
-
-### Analytics & Detection Engine
-**layout:** single
-
-- **KQL-Based Rules**: 200+ built-in detection rules covering MITRE ATT&CK framework
-- **Machine Learning Models**: Anomaly detection identifying unusual user/network behavior
-- **Threat Intelligence**: Integration with Microsoft Threat Intelligence, MISP, and custom feeds
-- **Advanced Analytics**: User and entity behavior analytics (UEBA) for insider threat detection
-
-### Incident Management & Investigation
-**layout:** single
-
-- **Automated Incident Creation**: Correlated alerts automatically grouped into incidents
-- **Investigation Workbooks**: AI-powered timeline and relationship mapping
-- **Advanced Hunting**: Comprehensive query tool for manual threat hunting across all data
-- **Forensics Capabilities**: Long-term data retention for compliance and historical analysis
-
-### SOAR & Automation
-**layout:** single
-
-- **Logic Apps Playbooks**: Pre-built and custom automated response workflows
-- **Incident Response Automation**: Auto-remediation and isolation of compromised assets
-- **Integration Hub**: Seamless integration with ticketing, communication, and other tools
-- **Microsoft Defender Integration**: Automated coordinated response across security tools
-
----
-
-## Success Stories
 **Proven Azure Sentinel Results in Regulated Industries**
-
-### Healthcare Provider - Ransomware Detection & Response
-**layout:** single
 
 **Organization**: Multi-hospital health system, 5,000 employees, 10+ facilities
 **Challenge**: Increasing ransomware attacks targeting healthcare, need for rapid detection and isolation, compliance with HIPAA audit requirements
@@ -177,8 +149,6 @@ footer_logo_right: eof-tools/doc-tools/brands/default/assets/logos/eo-framework-
 - **100% compliance audit success**: Complete audit trail and incident investigation records automated
 - **Testimonial**: "Azure Sentinel transformed our security posture. We now detect threats before they spread, and the automated response capabilities give us confidence we're protected against ransomware." - Chief Information Security Officer, Premier Health System
 
-### Financial Services Firm - Insider Threat & Compliance
-**layout:** data_viz
 
 **Organization**: International financial services firm, 3,000 employees, strict PCI-DSS and SOX compliance
 **Challenge**: Detecting insider threats and suspicious user behavior, meeting strict compliance audit requirements, investigating incidents rapidly
@@ -193,8 +163,10 @@ footer_logo_right: eof-tools/doc-tools/brands/default/assets/logos/eo-framework-
 
 ---
 
-## Competitive Advantages
-**Why Azure Sentinel for Your Organization**
+### Our Partnership Advantage
+**layout:** two_column
+
+**Why Partner with Us for Azure Sentinel**
 
 - **Microsoft Integration**: Native integration with Microsoft 365, Azure, and Windows environments (95% of enterprise devices)
 - **Cost-Effective Scaling**: Simple consumption-based pricing scaling with data volume (no per-user licensing)
@@ -207,7 +179,9 @@ footer_logo_right: eof-tools/doc-tools/brands/default/assets/logos/eo-framework-
 
 ---
 
-## Investment Summary
+### Investment Summary
+**layout:** data_viz
+
 **Total Investment & Value**
 
 <!-- BEGIN COST_SUMMARY_TABLE -->
@@ -221,10 +195,6 @@ footer_logo_right: eof-tools/doc-tools/brands/default/assets/logos/eo-framework-
 <!-- END COST_SUMMARY_TABLE -->
 
 **Azure Partner Credits Breakdown (Year 1 Only):** Azure Sentinel Credit: $9,000 (10% discount on data ingestion), Microsoft Partner Services Credit: $12,000 (managed services & support enablement)
-
-### Investment Breakdown by Category
-**layout:** data_viz
-
 
 **Medium Deployment Specifications:**
 - **Data Volume:** 300 GB/month (Office 365, Azure AD, Defender, firewall logs, third-party sources)
@@ -284,7 +254,9 @@ Detailed cost breakdown including Azure service consumption, third-party integra
 
 ---
 
-## Next Steps
+### Next Steps
+**layout:** bullet_points
+
 **Your Path Forward**
 
 **Immediate Actions:**
@@ -293,10 +265,10 @@ Detailed cost breakdown including Azure service consumption, third-party integra
 3. **Team Formation:** Identify security team lead, IT infrastructure contact, compliance officer
 
 **90-Day Launch Plan:**
-- Week 1-2: Contract finalization and Azure subscription setup
-- Week 3-4: Sentinel workspace configuration and data connector setup
-- Week 5-8: Analytics rules deployment and initial alert tuning
-- Week 9-12: SOAR playbooks, training, and optimization
+- **Week 1-2:** Contract finalization and Azure subscription setup
+- **Week 3-4:** Sentinel workspace configuration and data connector setup
+- **Week 5-8:** Analytics rules deployment and initial alert tuning
+- **Week 9-12:** SOAR playbooks, training, and optimization
 
 **SPEAKER NOTES:**
 
@@ -319,7 +291,8 @@ Detailed cost breakdown including Azure service consumption, third-party integra
 
 ---
 
-## Thank You
+### Thank You
+**layout:** thank_you
 
 - **Your Account Manager:** [Name, Title] | [Email] | [Phone]
 

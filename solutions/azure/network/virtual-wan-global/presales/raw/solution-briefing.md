@@ -1,10 +1,10 @@
 ---
-presentation_title: Azure Virtual WAN Global Network Solution
-solution_name: Azure Virtual WAN Global Network Architecture
-presenter_name: Network Solutions Team
-client_logo: support/doc-templates/assets/logos/client_logo.png
-footer_logo_left: support/doc-templates/assets/logos/consulting_company_logo.png
-footer_logo_right: support/doc-templates/assets/logos/eo-framework-logo-real.png
+presentation_title: Solution Briefing
+solution_name: Azure Virtual WAN Global Network
+presenter_name: [Presenter Name]
+client_logo: eof-tools/doc-tools/brands/default/assets/logos/client_logo.png
+footer_logo_left: eof-tools/doc-tools/brands/default/assets/logos/consulting_company_logo.png
+footer_logo_right: eof-tools/doc-tools/brands/default/assets/logos/eo-framework-logo-real.png
 ---
 
 # Azure Virtual WAN Global Network Solution
@@ -13,8 +13,10 @@ footer_logo_right: support/doc-templates/assets/logos/eo-framework-logo-real.png
 **10 Slides**
 
 ### Slide 1: Title Slide
-**Presentation Title:** Azure Virtual WAN Global Network Solution
-**Subtitle:** Enterprise Branch Connectivity with Centralized Management
+**layout:** eo_title_slide
+
+**Presentation Title:** Solution Briefing
+**Subtitle:** Azure Virtual WAN Global Network - Enterprise Branch Connectivity
 **Presenter:** [Presenter Name] | [Current Date]
 **Logos:**
 - Client Logo (top center)
@@ -46,19 +48,16 @@ footer_logo_right: support/doc-templates/assets/logos/eo-framework-logo-real.png
 
 **Azure Virtual WAN: Hub-and-Spoke Global Connectivity**
 
-![Architecture Diagram](assets/images/architecture-diagram.png)
+![Architecture Diagram](assets/diagrams/architecture-diagram.png)
 
 - **Core Components**
   - **Virtual WAN Hubs:** Two regional hubs (US, Europe) providing centralized routing and connectivity
   - **Branch Connectivity:** VPN gateways and ExpressRoute circuits connecting 10 branch offices
-  - **Security Layer:** Azure Firewall Premium for centralized threat protection and policy enforcement
-  - **Monitoring & Analytics:** Unified visibility across all branch connections and traffic flows
+  - **Security & Monitoring:** Azure Firewall Premium with unified visibility across all connections
 - **Technology Stack**
   - Azure Virtual WAN Standard for hub management and routing
-  - Site-to-Site VPN for branch office connectivity
-  - ExpressRoute circuits for mission-critical traffic with SLA guarantees
-  - Azure Firewall Premium for advanced DDoS and threat detection
-  - Azure Monitor and Log Analytics for centralized network observability
+  - Site-to-Site VPN and ExpressRoute for branch connectivity with SLA guarantees
+  - Azure Firewall Premium and Monitor for threat detection and observability
 
 ---
 
@@ -67,19 +66,16 @@ footer_logo_right: support/doc-templates/assets/logos/eo-framework-logo-real.png
 
 **Phased Migration to Virtual WAN**
 
-- **Phase 1: Assessment & Design** *(Months 1-2)*
+- **Phase 1: Assessment & Design (Months 1-2)**
   - Audit current network topology and branch connectivity methods
-  - Design hub locations and branch connectivity strategy
-  - Plan security policies and network segmentation
+  - Design hub locations, security policies, and network segmentation
   - Validate ExpressRoute peering locations and bandwidth requirements
-- **Phase 2: Hub Deployment & Branch Migration** *(Months 3-4)*
-  - Provision Virtual WAN hubs in primary and secondary regions
-  - Deploy VPN gateways and configure site-to-site connectivity
-  - Establish ExpressRoute circuits and configure routing
+- **Phase 2: Hub Deployment & Branch Migration (Months 3-4)**
+  - Provision Virtual WAN hubs with VPN gateways in primary and secondary regions
+  - Establish ExpressRoute circuits and configure routing policies
   - Migrate branch offices in waves with minimal disruption
-- **Phase 3: Security, Optimization & Handoff** *(Months 5-6)*
-  - Deploy Azure Firewall with centralized policies
-  - Enable advanced threat protection and DDoS mitigation
+- **Phase 3: Security, Optimization & Handoff (Months 5-6)**
+  - Deploy Azure Firewall with centralized threat protection policies
   - Optimize routing and traffic flow across hubs
   - Complete training and operational handoff to network team
 
@@ -104,46 +100,16 @@ footer_logo_right: support/doc-templates/assets/logos/eo-framework-logo-real.png
 
 ---
 
-### Virtual WAN Architecture Details
-**layout:** visual
-
-**Hub-and-Spoke Design with Multi-Region Redundancy**
-
-| Component | Configuration | Benefit |
-|-----------|----------------|---------|
-| Regional Hubs | 2 hubs (US East, Europe West) | High availability with geo-failover |
-| Branch Connectivity | VPN (10 offices) + ExpressRoute (2 circuits) | Hybrid approach for flexibility and performance |
-| Security Layer | Azure Firewall Premium on hubs | Centralized threat protection for all traffic |
-| Bandwidth | Per-branch 100Mbps typical | Scalable from 10Mbps to 1Gbps+ per branch |
-| Routing | Azure-managed intelligent routing | Automatic failover and optimal path selection |
-| Monitoring | Unified Azure Monitor dashboard | Real-time visibility into all connections |
-
-**SPEAKER NOTES:**
-
-*Key Benefits to Emphasize:*
-- Hub-and-spoke eliminates complex mesh networking (branch-to-branch direct connections)
-- Azure manages routing intelligence - less operational burden on customer
-- Virtual WAN Standard provides all necessary hub capabilities at minimal cost
-- ExpressRoute circuits provide SLA guarantees for critical applications
-
-*Handling Technical Questions:*
-- "Why two hubs?" - Ensures zero-downtime failover if one region experiences outage
-- "Can we add more branches later?" - Virtual WAN scales seamlessly; no redesign needed
-- "What about on-premises data centers?" - ExpressRoute private peering provides secure direct connection
-- "How does security work?" - Azure Firewall inspects all traffic through hubs before distribution
-
----
-
 ### Timeline & Milestones
 **layout:** table
 
 **Path to Unified Global Network**
 
-| Phase | Timeline | Key Milestones |
-|-------|----------|------------------|
-| Phase 1: Assessment & Design | Months 1-2 | Network audit complete, hub design approved, ExpressRoute peering confirmed |
-| Phase 2: Hub & Branch Deployment | Months 3-4 | Primary hub operational, 5 branches migrated, secondary hub deployed, remaining 5 branches cut over |
-| Phase 3: Security & Optimization | Months 5-6 | Firewall policies deployed, threat detection enabled, network optimized, team trained, operations ready |
+| Phase No | Phase Description | Timeline | Key Deliverables |
+|----------|-------------------|----------|-----------------|
+| Phase 1 | Assessment & Design | Months 1-2 | Network audit complete, Hub design approved, ExpressRoute peering confirmed |
+| Phase 2 | Hub & Branch Deployment | Months 3-4 | Primary hub operational, 5 branches migrated, Secondary hub deployed |
+| Phase 3 | Security & Optimization | Months 5-6 | Firewall policies deployed, Threat detection enabled, Operations handoff complete |
 
 **SPEAKER NOTES:**
 
@@ -271,10 +237,10 @@ Detailed cost breakdown including infrastructure specifications, bandwidth plann
 3. **Team Formation:** Network lead, security stakeholder, Azure platform owner, project sponsor
 
 **30-Day Launch Plan:**
-- Week 1: Contract finalization and network audit kickoff
-- Week 2: Hub design finalization and ExpressRoute ordering
-- Week 3: Primary hub deployment and security policy development
-- Week 4: First branch migration and pilot validation
+- **Week 1:** Contract finalization and network audit kickoff
+- **Week 2:** Hub design finalization and ExpressRoute ordering
+- **Week 3:** Primary hub deployment and security policy development
+- **Week 4:** First branch migration and pilot validation
 
 **SPEAKER NOTES:**
 
@@ -336,9 +302,7 @@ Detailed cost breakdown including infrastructure specifications, bandwidth plann
 
 ## Presentation Notes
 
-### Speaking Points for Each Slide
-**layout:** single
-
+**Speaking Points for Each Slide**
 
 **Slide 1 - Title Slide:**
 - Welcome attendees and set context for the meeting
@@ -410,9 +374,7 @@ Detailed cost breakdown including infrastructure specifications, bandwidth plann
 - Open floor for questions and clarifications
 - Don't leave without clear next meeting scheduled and decision timeline confirmed
 
-### Q&A Preparation
-**layout:** single
-
+**Q&A Preparation**
 
 **Common Questions & Responses:**
 
@@ -434,9 +396,7 @@ A: ExpressRoute private peering provides secure, high-performance connection fro
 **Q: "Can you guarantee 99.9% uptime?"**
 A: We design for 99.9%+ availability through redundant hubs, multiple connectivity paths (VPN + ExpressRoute), and automated failover. We commit to 99.95% SLA in our support contract.
 
-### Appendix Slides (If Needed)
-**layout:** single
-
+**Appendix Slides (If Needed)**
 
 **A1: Detailed Virtual WAN Architecture Diagram**
 **A2: Branch Migration Sequence & Timeline**
@@ -450,8 +410,6 @@ A: We design for 99.9%+ availability through redundant hubs, multiple connectivi
 **A10: Training Curriculum & Knowledge Transfer Plan**
 
 ---
-
-## PowerPoint Template Specifications
 
 **Design Guidelines:**
 - Company brand colors and fonts

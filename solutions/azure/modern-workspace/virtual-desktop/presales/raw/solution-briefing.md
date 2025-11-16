@@ -13,6 +13,8 @@ footer_logo_right: eof-tools/doc-tools/brands/default/assets/logos/eo-framework-
 **10 Slides**
 
 ### Slide 1: Title Slide
+**layout:** eo_title_slide
+
 **Presentation Title:** Solution Briefing
 **Subtitle:** Azure Virtual Desktop
 **Presenter:** [Presenter Name] | [Current Date]
@@ -71,14 +73,10 @@ footer_logo_right: eof-tools/doc-tools/brands/default/assets/logos/eo-framework-
   - Deploy Azure Virtual Network and identity infrastructure
   - Configure D4s_v5 session hosts with Windows 11 Multi-Session
   - Set up Azure Files Premium and FSLogix profile containers
-- **Phase 3: Application Deployment & Testing (Weeks 6-8)**
-  - Deploy Microsoft 365 and critical business applications
-  - Validate application functionality and user experience
-  - Conduct user acceptance testing with representative user groups
-- **Phase 4: Migration & Hypercare (Weeks 9-10)**
-  - Migrate users in waves to new AVD environment
-  - Provide 30-day hypercare support for stabilization
-  - Transition to operations team with documentation and training
+- **Phase 3: Application Deployment, Migration & Hypercare (Weeks 6-10)**
+  - Deploy Microsoft 365 and critical business applications with UAT validation
+  - Migrate users in waves to new AVD environment with application testing
+  - Provide 30-day hypercare support and transition to operations team
 
 **SPEAKER NOTES:**
 
@@ -109,8 +107,7 @@ footer_logo_right: eof-tools/doc-tools/brands/default/assets/logos/eo-framework-
 |----------|-------------------|----------|-----------------|
 | Phase 1 | Discovery & Planning | Weeks 1-2 | Requirements validated, Architecture designed, Project plan approved |
 | Phase 2 | Infrastructure Deployment | Weeks 3-5 | Azure networking live, Session hosts operational, FSLogix configured |
-| Phase 3 | Application Deployment & Testing | Weeks 6-8 | Applications deployed, UAT completed, User readiness confirmed |
-| Phase 4 | Migration & Hypercare | Weeks 9-10 | Users migrated in waves, 30-day hypercare support, Operations handoff |
+| Phase 3 | Application Deployment, Migration & Hypercare | Weeks 6-10 | Applications deployed, Users migrated in waves, 30-day hypercare support |
 
 **SPEAKER NOTES:**
 
@@ -246,11 +243,11 @@ Detailed cost breakdown including Azure VM consumption, Microsoft 365 licensing,
 3. **Team Formation:** Identify infrastructure owner, application SMEs, network contact
 
 **10-Week Launch Plan:**
-- Week 1-2: Contract finalization, Azure subscription setup, and detailed design
-- Week 3-4: Azure infrastructure and session host deployment
-- Week 5-6: Application deployment and compatibility testing
-- Week 7-8: User acceptance testing and pilot migration
-- Week 9-10: Full user migration and hypercare support
+- **Week 1-2:** Contract finalization, Azure subscription setup, and detailed design
+- **Week 3-4:** Azure infrastructure and session host deployment
+- **Week 5-6:** Application deployment and compatibility testing
+- **Week 7-8:** User acceptance testing and pilot migration
+- **Week 9-10:** Full user migration and hypercare support
 
 **SPEAKER NOTES:**
 

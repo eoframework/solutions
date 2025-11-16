@@ -13,6 +13,8 @@ footer_logo_right: eof-tools/doc-tools/brands/default/assets/logos/eo-framework-
 **10 Slides**
 
 ### Slide 1: Title Slide
+**layout:** eo_title_slide
+
 **Presentation Title:** Solution Briefing
 **Subtitle:** Azure DevOps Enterprise Platform - DevOps Pipeline Factory
 **Presenter:** [Presenter Name] | [Current Date]
@@ -23,7 +25,7 @@ footer_logo_right: eof-tools/doc-tools/brands/default/assets/logos/eo-framework-
 
 ---
 
-### Slide 2: Business Opportunity
+### Business Opportunity
 **layout:** two_column
 
 **Accelerating Software Delivery with Enterprise CI/CD**
@@ -39,7 +41,7 @@ footer_logo_right: eof-tools/doc-tools/brands/default/assets/logos/eo-framework-
 
 ---
 
-### Slide 3: Solution Overview
+### Solution Overview
 **layout:** visual
 
 **DevOps Pipeline Factory Architecture**
@@ -58,7 +60,7 @@ footer_logo_right: eof-tools/doc-tools/brands/default/assets/logos/eo-framework-
 
 ---
 
-### Slide 4: Implementation Approach
+### Implementation Approach
 **layout:** single
 
 **Proven Phased Methodology**
@@ -95,7 +97,7 @@ footer_logo_right: eof-tools/doc-tools/brands/default/assets/logos/eo-framework-
 
 ---
 
-### Slide 5: Timeline & Milestones
+### Timeline & Milestones
 **layout:** table
 
 **Path to DevOps Maturity**
@@ -120,7 +122,7 @@ footer_logo_right: eof-tools/doc-tools/brands/default/assets/logos/eo-framework-
 
 ---
 
-### Slide 6: Success Stories
+### Success Stories
 **layout:** single
 
 **Enterprise DevOps Transformation Results**
@@ -134,7 +136,7 @@ footer_logo_right: eof-tools/doc-tools/brands/default/assets/logos/eo-framework-
 
 ---
 
-### Slide 7: Our Partnership Advantage
+### Our Partnership Advantage
 **layout:** two_column
 
 **Why Partner with Us for DevOps**
@@ -154,7 +156,7 @@ footer_logo_right: eof-tools/doc-tools/brands/default/assets/logos/eo-framework-
 
 ---
 
-### Slide 8: Investment Summary
+### Investment Summary
 **layout:** data_viz
 
 **Total Investment with Azure Credits**
@@ -167,6 +169,7 @@ footer_logo_right: eof-tools/doc-tools/brands/default/assets/logos/eo-framework-
 | Support & Managed Services | $1,520 | $0 | $1,520 | $1,520 | $1,520 | $4,560 |
 | Partner Services Credit | $0 | ($8,000) | ($8,000) | $0 | $0 | ($8,000) |
 | **Total Investment** | **$108,200** | **($8,000)** | **$100,200** | **$7,720** | **$7,720** | **$115,640** |
+<!-- END COST_SUMMARY_TABLE -->
 
 **SPEAKER NOTES:**
 
@@ -190,53 +193,27 @@ footer_logo_right: eof-tools/doc-tools/brands/default/assets/logos/eo-framework-
 
 ---
 
-### Slide 9: Implementation Roadmap
-**layout:** table
+### Next Steps
+**layout:** bullet_points
 
-**Detailed Execution Plan**
+**Your Path Forward**
 
-**Month 1: Assessment & Design**
-- Week 1-2: Current state analysis, team interviews, requirements definition
-- Week 3-4: Solution design, architecture documentation, resource planning
+**Immediate Actions:**
+1. **Decision:** Executive approval for DevOps platform implementation by [specific date]
+2. **Kickoff:** Target deployment start [30 days from approval]
+3. **Team Formation:** Identify DevOps engineer lead, development team contacts, security lead
 
-**Month 2: Build Foundation**
-- Week 5-6: Azure DevOps setup, repository migration, pipeline templates
-- Week 7-8: Team training, first pilot application, CI pipeline validation
-
-**Month 3-4: Production Deployment**
-- Week 9-10: Container registry, AKS cluster, multi-environment pipelines
-- Week 11-12: Security hardening, Key Vault integration, advanced deployments
-
-**Month 3-4: Operations Handoff**
-- Week 13-14: Production monitoring, incident response procedures, operations training
-- Week 15-16: Knowledge transfer completion, support transition
+**90-Day Launch Plan:**
+- **Week 1-4:** Foundation and CI setup (Azure DevOps, repositories, pipeline templates)
+- **Week 5-8:** Build and deployment (container registry, AKS cluster, automated releases)
+- **Week 9-12:** Security and operations (Key Vault, monitoring, advanced deployments)
 
 ---
 
-### Slide 10: Call to Action
-**layout:** single
+### Thank You
+**layout:** thank_you
 
-**Let's Transform Your Software Delivery**
-
-- **Next Steps**
-  - Schedule architecture workshop with our DevOps specialists (2 hours)
-  - Detailed assessment of current state and baseline metrics
-  - Customized proposal with timeline and investment details
-  - 30-day SOW upon agreement
-- **Your Investment**
-  - $100,200 Year 1 net (with partner credits)
-  - Payback in 8 months through team productivity
-  - Ongoing platform operations at $7.7K/year
-- **Your Outcome**
-  - Deploy code 10x faster with confidence
-  - 99%+ deployment success rate
-  - Automated security and compliance controls
-  - Team prepared for enterprise DevOps maturity
-
-**Contact Information:**
-[Consulting Company]
-[Email] | [Phone]
-[Address]
+- **Your Account Manager:** [Name, Title] | [Email] | [Phone]
 
 ---
 

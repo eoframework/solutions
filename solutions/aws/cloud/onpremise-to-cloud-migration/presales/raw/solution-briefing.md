@@ -13,6 +13,8 @@ footer_logo_right: eof-tools/doc-tools/brands/default/assets/logos/eo-framework-
 **10 Slides**
 
 ### Slide 1: Title Slide
+**layout:** eo_title_slide
+
 **Presentation Title:** Solution Briefing
 **Subtitle:** AWS Cloud Migration - On-Premise to Cloud
 **Presenter:** [Presenter Name] | [Current Date]
@@ -257,10 +259,10 @@ Detailed cost breakdown including migration services, AWS consumption, and compa
 3. **Team Formation:** Application owners, infrastructure team, migration project manager
 
 **30-Day Launch Plan:**
-- Week 1: Contract finalization and AWS account setup
-- Week 2: Application Discovery Service deployment and data collection
-- Week 3: Dependency mapping and migration complexity assessment
-- Week 4: Migration wave planning and AWS landing zone design
+- **Week 1:** Contract finalization and AWS account setup
+- **Week 2:** Application Discovery Service deployment and data collection
+- **Week 3:** Dependency mapping and migration complexity assessment
+- **Week 4:** Migration wave planning and AWS landing zone design
 
 **SPEAKER NOTES:**
 

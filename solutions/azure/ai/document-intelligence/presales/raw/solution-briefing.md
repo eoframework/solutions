@@ -13,6 +13,8 @@ footer_logo_right: eof-tools/doc-tools/brands/default/assets/logos/eo-framework-
 **10 Slides**
 
 ### Slide 1: Title Slide
+**layout:** eo_title_slide
+
 **Presentation Title:** Solution Briefing
 **Subtitle:** Azure AI Document Intelligence
 **Presenter:** [Presenter Name] | [Current Date]
@@ -44,7 +46,7 @@ footer_logo_right: eof-tools/doc-tools/brands/default/assets/logos/eo-framework-
 
 **Serverless AI/ML Document Processing Architecture**
 
-![Architecture Diagram](../../assets/diagrams/architecture-diagram.png)
+![Architecture Diagram](assets/diagrams/architecture-diagram.png)
 
 - **AI/ML Services**
   - Azure AI Document Intelligence for OCR and intelligent form/table extraction from documents
@@ -246,10 +248,10 @@ Detailed cost breakdown including Azure service consumption, Document Intelligen
 3. **Team Formation:** Identify business SME, IT contact, document samples
 
 **30-Day Launch Plan:**
-- Week 1: Contract finalization and Azure account setup
-- Week 2: Document sample collection and AI model configuration
-- Week 3: Document Intelligence/Text Analytics training and initial testing
-- Week 4: First production documents processed with validation
+- **Week 1:** Contract finalization and Azure account setup
+- **Week 2:** Document sample collection and AI model configuration
+- **Week 3:** Document Intelligence/Text Analytics training and initial testing
+- **Week 4:** First production documents processed with validation
 
 **SPEAKER NOTES:**
 
@@ -294,52 +296,3 @@ Detailed cost breakdown including Azure service consumption, Document Intelligen
 - Set timeline for decision and pilot start date
 
 ---
-
-## APPENDIX: Detailed Slide Notes
-
-### Presentation Guidelines
-**layout:** single
-
-- **Duration:** 45-60 minutes including Q&A
-- **Audience:** Business executives, IT leadership, operations managers
-- **Focus:** Business value and proven results, not technical details
-- **Approach:** Consultative partnership, not vendor pitch
-
-### Slide Timing Recommendations
-**layout:** single
-
-- Business Opportunity: 5 minutes
-- Solution Overview: 7 minutes (focus on architecture diagram)
-- Implementation Approach: 6 minutes
-- Timeline & Milestones: 4 minutes
-- Success Stories: 6 minutes (customer proof points)
-- Partnership Advantage: 4 minutes
-- Investment Summary: 8 minutes (expect questions)
-- Next Steps: 5 minutes
-- Q&A: 15-20 minutes
-
-### Key Messages
-**layout:** single
-
-1. AI/ML accuracy proven in pilot before full investment
-2. Serverless architecture scales effortlessly with no infrastructure management
-3. Typical ROI within 12-18 months through labor cost savings
-4. Partnership brings proven methodology and Azure expertise
-
-### Anticipated Questions & Answers
-**layout:** single
-
-- **Q:** "How accurate is the AI extraction?"
-  **A:** Document Intelligence achieves 95-99% accuracy on structured documents, Text Analytics 90-95% on unstructured text. Pilot validates accuracy with your specific documents before full deployment.
-
-- **Q:** "What happens when AI can't process a document?"
-  **A:** Azure AI Custom Vision routes low-confidence results to human reviewers. Over time, AI learns from corrections and accuracy improves.
-
-- **Q:** "Can it handle handwriting?"
-  **A:** Yes, Document Intelligence supports handwritten text extraction, though accuracy varies by handwriting quality. Pilot will validate with your documents.
-
-- **Q:** "What about data security and compliance?"
-  **A:** All data encrypted in transit and at rest. Azure Monitor provides complete audit logs. Architecture supports HIPAA, SOC 2, GDPR compliance requirements.
-
-- **Q:** "How long until we see ROI?"
-  **A:** Typical payback period is 12-18 months. Pilot in Month 1-2 validates cost savings before full investment.

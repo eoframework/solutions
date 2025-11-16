@@ -13,6 +13,8 @@ footer_logo_right: eof-tools/doc-tools/brands/default/assets/logos/eo-framework-
 **10 Slides**
 
 ### Slide 1: Title Slide
+**layout:** eo_title_slide
+
 **Presentation Title:** Solution Briefing
 **Subtitle:** [Solution Name]
 **Presenter:** [Presenter Name] | [Current Date]
@@ -230,10 +232,10 @@ Detailed cost breakdown including equipment specifications, cloud consumption es
 3. **Team Formation:** [Key team members required]
 
 **30-Day Launch Plan:**
-- Week 1: Contract finalization and legal review
-- Week 2: Project initiation & planning kickoff
-- Week 3: Environment setup and access provisioning
-- Week 4: Initial implementation begins
+- **Week 1:** Contract finalization and legal review
+- **Week 2:** Project initiation & planning kickoff
+- **Week 3:** Environment setup and access provisioning
+- **Week 4:** Initial implementation begins
 
 **SPEAKER NOTES:**
 
@@ -293,7 +295,7 @@ Detailed cost breakdown including equipment specifications, cloud consumption es
 
 ## Presentation Notes
 
-### Speaking Points for Each Slide
+**Speaking Points for Each Slide**
 
 **Slide 1 - Title Slide:**
 - Welcome attendees and introduce yourself
@@ -364,7 +366,7 @@ Detailed cost breakdown including equipment specifications, cloud consumption es
 - Use closing techniques from speaker notes
 - Don't leave without clear next steps scheduled
 
-### Q&A Preparation
+**Q&A Preparation**
 
 **Common Questions & Responses:**
 
@@ -380,7 +382,7 @@ A: [Comparison highlighting key differentiators without negative competitor posi
 **Q: "What happens after go-live?"**
 A: [Response about ongoing support, optimization, and partnership model]
 
-### Appendix Slides (If Needed)
+**Appendix Slides (If Needed)**
 
 **A1: Detailed Technical Architecture**
 **A2: Implementation Timeline Detail**
