@@ -1,465 +1,367 @@
 ---
-# Document Information
 document_title: Statement of Work
-document_version: 1.0
-document_date: [Month DD, YYYY]
-document_id: SOW-2025-SENTINEL-001
-
-# Project Information
 project_name: Azure Sentinel SIEM Implementation
-project_id: PROJ-AZSENTINEL-2025-001
-opportunity_no: OPP-AZSENTINEL-2025-0001
-project_start_date: [Month DD, YYYY]
-project_end_date: [Month DD, YYYY]
-project_duration: 12 weeks
-
-# Client Information
-client_name: [Client Name]
-client_address: [Client Address]
-client_contact_name: [Client Contact Name]
-client_contact_title: [Client Contact Title]
-client_contact_email: [Client Contact Email]
-client_contact_phone: [Client Contact Phone]
-
-# Vendor Information
-vendor_name: EO Framework Consulting
-vendor_address: 123 Business Street, Suite 100
-vendor_contact_name: [Vendor Contact Name]
-vendor_contact_title: Senior Solutions Architect
-vendor_contact_email: info@eoframework.com
-vendor_contact_phone: (555) 123-4567
+client_name: '[Client Name]'
+client_contact: '[Contact Name | Email | Phone]'
+consulting_company: Your Consulting Company
+consultant_contact: '[Consultant Name | Email | Phone]'
+opportunity_no: OPP-2025-001
+document_date: November 15, 2025
+version: '1.0'
+client_logo: assets/logos/client_logo.png
+vendor_logo: assets/logos/consulting_company_logo.png
 ---
 
-# Azure Sentinel SIEM - Statement of Work (SOW)
+# Executive Summary
 
-**Project Name:** Azure Sentinel SIEM Implementation
-**Client:** [Client Name]
-**Date:** [Month DD, YYYY]
-**Version:** v1.0
+This Statement of Work defines the scope, deliverables, timeline, and terms for the **Azure Sentinel SIEM** implementation. This engagement will transform your organization's capabilities by delivering a comprehensive, enterprise-grade solution designed to meet your specific business requirements.
 
-**Prepared by:**
-[Vendor/Consultant Name]
-[Address] • [Phone] • [Email] • [Website]
+**Project Duration:** 12 weeks (as detailed in Timeline & Milestones section)
+
+**Key Objectives:**
+- Deploy and configure Azure Sentinel SIEM according to best practices
+- Integrate with existing enterprise systems and workflows
+- Train technical staff on operations and management
+- Achieve defined success metrics and business outcomes
 
 ---
 
-## Executive Summary
+# Background & Objectives
 
-This Statement of Work (SOW) defines the scope, deliverables, roles, and terms for implementing a **cloud-native SIEM solution** using Azure Sentinel for [Client Name]. This engagement will deliver advanced threat detection and response capabilities through Azure Sentinel analytics engine, automated SOAR playbooks, and integrated threat intelligence to transform security operations from reactive to proactive threat hunting.
+## Business Context
 
-**Medium Scope Deployment:**
-- **Data Ingestion:** 300 GB/month from cloud and on-premises sources
-- **Data Sources:** 8-10 connectors (Office 365, Azure AD, Defender, firewalls, network)
-- **User Base:** 50-100 SOC analysts and security team members
-- **Deployment Model:** Single Azure region with HA/DR, 24x7 monitoring and support
-- **Total Investment:** $776,424 over 3 years ($342,808 Year 1 implementation)
+**layout:** two_column
 
-**Key Outcomes:**
-- Real-time threat detection across all infrastructure with 200+ KQL detection rules
-- 85%+ reduction in mean time to detect (MTTD) with AI-powered analytics
-- Automated incident response through SOAR playbooks for 50+ attack scenarios
-- Enterprise-grade compliance reporting for HIPAA, PCI-DSS, SOC 2, GDPR
+**Transforming Security Operations with Cloud-Native SIEM**
 
-**Expected ROI:** Typical payback period of 6-12 months based on security incident prevention and operational efficiency. For organizations with average annual incident response costs of $500K-$2M, Sentinel ROI exceeds 150% annually.
-
----
-
-## Background & Objectives
-
-### Background
-
-[Client Name] currently relies on fragmented security tools that lack integrated threat correlation and automated response capabilities. Key challenges include:
-
-- **Limited Visibility:** Multiple disconnected security tools prevent comprehensive threat correlation across infrastructure
-- **Slow Threat Response:** Manual incident investigation and response processes requiring 8+ hours per incident
-- **Alert Fatigue:** High false positive rates from basic rule engines overloading SOC analysts with noise
-- **Compliance Gaps:** Manual compliance reporting and audit trail management increasing risk and audit findings
-- **Lack of Automation:** Repetitive incident response tasks consuming analyst time and delaying remediation
-- **Advanced Threats:** Inability to detect sophisticated threats and insider attacks requiring behavioral analysis
-
-### Objectives
-
-- **Deploy SIEM:** Implement Azure Sentinel workspace with comprehensive data source integration
-- **Enable Threat Detection:** Deploy 50+ KQL detection rules covering MITRE ATT&CK framework with high fidelity
-- **Automate Response:** Develop SOAR playbooks for 50+ attack scenarios enabling 5-minute automated response
-- **Reduce MTTD:** Decrease mean time to detect (MTTD) from 4+ hours to 30 minutes
-- **Reduce MTTR:** Achieve 50% reduction in mean time to respond (MTTR) through automation
-- **Improve Compliance:** Automate compliance reporting for HIPAA, PCI-DSS, SOC 2, GDPR, ISO 27001
-- **Enable Hunting:** Empower security team with advanced hunting capabilities for proactive threat identification
-
-### Success Metrics
-
-- 200+ detection rules deployed and operationalized with <5% false positive rate
-- MTTD reduced from baseline to <30 minutes for critical threats
-- MTTR reduced by 50% compared to current manual processes
-- Automated response playbooks executing within 5 minutes of threat detection
-- 99.9% system uptime for Sentinel workspace and analytics engine
-- Successful integration with 8+ data sources with <1% ingestion failures
-- Completion of SOC team training with >90% competency assessment
-- Compliance audit readiness with automated monthly reporting
+- **Opportunity**
+  - Detect and respond to threats 10x faster with AI-powered analytics and automated response playbooks
+  - Reduce mean time to detect (MTTD) from hours to minutes with real-time threat correlation across all data sources
+  - Consolidate fragmented security tools into unified platform, reducing tool sprawl and operational complexity
+  - Enable advanced threat hunting and forensic analysis across historical and real-time security data
+- **Success Criteria**
+  - 90% reduction in mean time to respond (MTTR) with measurable incident resolution improvements
+  - 99%+ uptime for security operations with built-in redundancy and failover
+  - 50%+ reduction in false positive alerts through ML-powered anomaly detection
+  - ROI realization within 12 months through reduced security incidents and operational efficiency gains
 
 ---
 
-## Scope of Work
+---
 
-### In Scope
+# Scope of Work
 
-The following services and deliverables are included in this SOW:
+## In Scope
 
-#### Discovery & Planning Phase (Weeks 1-2)
-- Security posture assessment and current SIEM tooling evaluation
-- Data source inventory and connector requirements analysis
-- Threat landscape assessment and organization-specific threat identification
-- Azure infrastructure assessment and subscription readiness validation
-- Project planning and stakeholder alignment
-- Risk assessment and mitigation strategy development
+**layout:** single
 
-#### Implementation Phase (Weeks 3-8)
+**Proven Methodology for Enterprise Security Success**
 
-**Infrastructure Deployment:**
-- Azure Sentinel workspace provisioning and configuration
-- Log Analytics Workspace setup with appropriate retention and tiers
-- RBAC and access control implementation for security team
-- Network connectivity for hybrid data source ingestion
+- **Phase 1: Foundation (Weeks 1-4)**
+  - Deploy Azure Sentinel workspace and configure Log Analytics storage
+  - Implement data connectors for primary sources (Office 365, Azure AD, Defender for Cloud)
+  - Configure identity and access controls with RBAC and privilege management
+  - Establish centralized logging and audit trail capabilities
+- **Phase 2: Analytics & Detection (Weeks 5-8)**
+  - Deploy 50+ built-in KQL analytics rules with high-fidelity detections
+  - Configure threat intelligence feeds and integration with external threat sources
+  - Implement custom detection rules based on organization-specific threats
+  - Establish incident investigation workflows and SOC procedures
+- **Phase 3: Automation & Optimization (Weeks 9-12)**
+  - Develop and test SOAR playbooks for automated incident response
+  - Integrate with external systems (ticketing, communication, IR tools)
+  - Optimize alert tuning to reduce false positives while maintaining detection rate
+  - Train SOC team on advanced hunting and investigation techniques
 
-**Data Connector Configuration:**
-- Office 365 Defender connector (Exchange, Teams, SharePoint threat data)
-- Azure AD connector (user activities, sign-in logs, identity threats)
-- Microsoft Defender for Cloud integration (infrastructure security events)
-- Azure Firewall and NSG Flow Log ingestion
-- On-premises firewall data collection (Palo Alto, Fortinet, Cisco ASA)
-- Endpoint Detection & Response (EDR) tool integration
-- Optional third-party SIEM data connector (Splunk, ArcSight, etc.)
 
-**Analytics Rules Development:**
-- Deploy 50+ built-in KQL detection rules covering:
-  - Initial access attacks (credential compromise, phishing)
-  - Lateral movement and privilege escalation
-  - Data exfiltration and command & control
-  - Denial of service and infrastructure attacks
-  - Insider threats and suspicious user behavior
-- Configure threat intelligence feed integration
-- Establish incident auto-grouping and correlation rules
-- Implement alert tuning to reduce false positives
+## Out of Scope
 
-**Investigation & Hunting Setup:**
-- Configure investigation workbooks for rapid incident analysis
-- Establish advanced hunting queries for threat investigation
-- Create forensic investigation playbooks and procedures
+These items are not in scope unless added via change control:
 
-#### SOAR & Automation Phase (Weeks 5-8)
-- Design 50+ automated incident response playbooks covering:
-  - User compromise response (disable account, reset credentials)
-  - Malware detection response (isolate endpoint, block hash)
-  - Data exfiltration response (block connection, alert CISO)
-  - Privilege escalation response (revoke access, force MFA)
-- Logic Apps development for workflow automation
-- Integration with ticketing system (ServiceNow, Jira, etc.)
-- Integration with communication tools (Teams, Slack)
-- Testing and validation of all playbooks
-
-#### Testing & Validation Phase (Weeks 9-10)
-- Functional testing of all data connectors and ingestion
-- Detection rule testing with simulated threat scenarios
-- Playbook testing and refinement
-- Performance and load testing (300 GB/month data validation)
-- Security testing and compliance validation
-- User acceptance testing with SOC team
-- Go-live readiness assessment
-
-#### Deployment & Training Phase (Weeks 11-12)
-- Production deployment and cutover
-- Post-deployment monitoring and optimization
-- Comprehensive SOC team training (2 days, up to 20 participants)
-- Advanced hunting training (1 day, hands-on)
-- Incident response procedure training
-- Compliance and audit trail training
-- Documentation delivery and knowledge transfer
-- 60-day hypercare support engagement
-
-### Out-of-Scope
-
-The following activities are explicitly excluded from this SOW:
-
-- Hardware procurement and installation for on-premises log forwarding
-- Custom application development beyond Azure Sentinel configuration
-- Network infrastructure modifications and firewall rule changes
-- Ongoing managed SIEM services beyond 60-day hypercare period
-- Incident response service delivery (advisory only, not 24x7 SOC)
-- Third-party software licensing (licensing responsibility remains with client)
-- Legacy system decommissioning or data migration services
-- Advanced machine learning model development beyond built-in capabilities
-- Multi-region or disaster recovery site deployment
+- Custom development beyond standard configuration
+- Third-party application licensing (unless specified)
+- Hardware procurement or disposal
+- End-user training (technical team only)
+- Ongoing managed services post-hypercare
 
 ---
 
-## Deliverables
+# Deliverables & Timeline
 
-### Documentation Deliverables
+## Project Milestones
 
-| Deliverable | Description | Due Date | Format |
-|-------------|-------------|----------|---------|
-| **Sentinel Deployment Architecture** | Detailed design for Sentinel workspace, data connectors, and integration architecture | Week 3 | PDF/Visio |
-| **Data Connector Configuration Guide** | Step-by-step setup instructions for all data sources and connectors | Week 4 | PDF/Wiki |
-| **KQL Detection Rules Catalog** | Complete documentation of 50+ detection rules with technical details and tuning guidance | Week 8 | Excel/PDF |
-| **SOAR Playbook Documentation** | 50+ playbook specifications with trigger conditions, actions, and integration details | Week 8 | PDF |
-| **Investigation Playbooks** | Incident investigation procedures and forensic analysis workflows | Week 10 | PDF |
-| **SOC Operations Runbook** | System administration, maintenance, and operational procedures | Week 12 | PDF |
-| **Training Materials** | SOC team training slides, labs, and reference guides | Week 11 | PDF/Video |
-| **As-Built Documentation** | Final system configuration, data sources, and integration specifications | Week 12 | PDF |
+**layout:** table
 
-### System Deliverables
+**Path to Value Realization**
 
-| Component | Description | Acceptance Criteria |
-|-----------|-------------|-------------------|
-| **Sentinel Workspace** | Fully configured Azure Sentinel workspace with HA/DR | Workspace operational, data ingestion functional, RBAC configured |
-| **Data Connectors** | 8-10 production data connectors with 300 GB/month ingestion | <1% ingestion failures, <30min latency for hot data |
-| **Detection Rules** | 50+ operational KQL detection rules with tuning | <5% false positive rate, 200+ MITRE ATT&CK techniques covered |
-| **SOAR Playbooks** | 50+ automated incident response playbooks | All playbooks tested, documented, and production-ready |
-| **Integration Interfaces** | API integration with ticketing, communication, and security tools | Successful incident creation, notification, and data enrichment |
-| **Investigation Tools** | Preconfigured workbooks and hunting queries | Query library documented, <5 second query performance |
-| **Monitoring Setup** | Operational monitoring and alerting for Sentinel infrastructure | Functional dashboards and alerts for availability/performance |
-| **Compliance Reporting** | Automated compliance workbooks for HIPAA, PCI-DSS, SOC 2, GDPR | Daily/weekly/monthly reports automatically generated |
+<!-- TABLE_CONFIG: widths=[10, 25, 15, 50] -->
+| Phase No | Phase Description | Timeline | Key Deliverables |
+|----------|-------------------|----------|-----------------|
+| Phase 1 | Foundation & Data Ingestion | Weeks 1-4 | Sentinel workspace operational, Primary data connectors live, Identity controls configured |
+| Phase 2 | Analytics & Detection | Weeks 5-8 | 50+ detection rules deployed, Threat intel integration live, Investigation procedures documented |
+| Phase 3 | Automation & Optimization | Weeks 9-12 | SOAR playbooks operational, SOC team trained, Alert tuning completed, Hunting capabilities enabled |
 
-### Knowledge Transfer Deliverables
 
-- SOC analyst training (40 hours across 2 days, 20 participants max)
-- Advanced hunting workshop (8 hours, hands-on)
-- Incident response procedures training (4 hours)
-- Compliance and audit trail management (2 hours)
-- Recorded training sessions for future reference
-- Technical documentation and operations runbooks
-- Post-training 60-day hypercare support
+## Key Deliverables
+
+<!-- TABLE_CONFIG: widths=[8, 40, 12, 20, 20] -->
+| # | Deliverable | Type | Due Date | Acceptance By |
+|---|-------------|------|----------|---------------|
+| 1 | Solution Architecture Document | Document | Week 4 | Client IT Lead |
+| 2 | Configuration Runbook | Document | Week 8 | Operations Team |
+| 3 | Test Results Report | Document | Week 10 | QA Lead |
+| 4 | As-Built Documentation | Document | Week 12 | Client IT Lead |
+| 5 | Knowledge Transfer Sessions | Training | Week 12 | Technical Team |
 
 ---
 
-## Project Timeline & Milestones
+# Roles & Responsibilities
 
-### Project Phases
+## RACI Matrix
 
-| Phase | Duration | Start Date | End Date | Key Milestones |
-|-------|----------|------------|----------|----------------|
-| **Discovery & Planning** | 2 weeks | [DATE] | [DATE] | Infrastructure assessment approved, Threat landscape documented, Project plan signed off |
-| **Implementation** | 6 weeks | [DATE] | [DATE] | Sentinel workspace deployed, Data connectors operational, Detection rules tuned |
-| **Testing & Validation** | 2 weeks | [DATE] | [DATE] | All tests passed, UAT completed, Go-live approved |
-| **Deployment & Training** | 2 weeks | [DATE] | [DATE] | Production live, Training completed, Support transitioned |
+<!-- TABLE_CONFIG: widths=[34, 11, 11, 11, 11, 11, 11] -->
+| Task/Deliverable | Vendor PM | Vendor Arch | Vendor Eng | Client IT | Client Mgmt | SME |
+|------------------|-----------|-------------|------------|-----------|-------------|-----|
+| Solution Architecture | C | A | R | C | I | C |
+| Infrastructure Setup | C | R | R | C | I | I |
+| Configuration & Tuning | A | R | R | C | I | I |
+| Integration Development | C | A | R | C | I | I |
+| Testing & Validation | R | R | R | A | I | C |
+| Knowledge Transfer | R | R | C | A | I | I |
+| Project Management | A | I | I | C | R | I |
 
-### Critical Milestones
+**Legend:** R = Responsible | A = Accountable | C = Consulted | I = Informed
 
-- **Week 2:** Discovery complete and requirements approved
-- **Week 4:** Sentinel workspace and primary data connectors operational (data flowing)
-- **Week 6:** First 30 detection rules deployed and producing detections
-- **Week 8:** All 50 detection rules and playbooks operational
-- **Week 10:** All testing complete and UAT approved
-- **Week 12:** Production go-live and training completion
+## Key Personnel
 
-### Critical Dependencies
+**Vendor Team:**
+- Project Manager: Overall delivery accountability
+- Solution Architect: Technical design and oversight
+- Engineers: Implementation and configuration
+- Support Specialist: Training and hypercare
 
-- Client provides timely access to Azure subscription and on-premises networks
-- Data source owners (security tools, infrastructure) available for connector setup
-- SOC team and security SMEs available for requirements and testing (60+ hours)
-- Business stakeholder participation in decision points (threat landscape, playbook priorities)
-- Third-party vendor coordination for EDR, firewall, and SIEM connectors
-- Network and firewall rule changes approved for data collection
-
----
-
-## Roles & Responsibilities
-
-### Vendor Responsibilities (EO Framework Consulting)
-
-- **Project Manager:** Overall coordination, timeline management, stakeholder communication
-- **Security Architect:** Sentinel design, analytics strategy, threat detection methodology
-- **Implementation Engineer:** Workspace setup, connector configuration, testing
-- **Analytics Developer:** KQL rule development, threat intelligence integration, tuning
-- **Automation Engineer:** Logic Apps development, playbook design, integration
-- **Training Specialist:** Team enablement, hands-on workshops, documentation
-- **Support Engineer:** 60-day hypercare, issue resolution, optimization
-
-### Client Responsibilities ([CLIENT_NAME])
-
-- **Project Sponsor:** Executive oversight and decision authority for scope/timeline/budget
-- **Security Director:** Strategic guidance on threat priorities and compliance requirements
-- **SOC Manager:** Team coordination, incident response process definition
-- **Technical Lead:** Infrastructure coordination, network/security access, third-party vendor liaison
-- **Data Source Owners:** Support for connector setup (firewall, EDR, mail, AD teams)
-- **Compliance Officer:** Compliance requirements definition and audit trail validation
-- **End Users (SOC Team):** Participation in training, testing, and operational procedures
-
-### Shared Responsibilities
-
-- Risk management and issue escalation
-- Change control and scope management
-- Quality assurance and acceptance testing
-- Security and compliance validation
-- Communication and stakeholder management
+**Client Team:**
+- IT Lead: Primary technical contact
+- Management Sponsor: Executive oversight
+- Operations Team: Knowledge transfer recipients
+- Subject Matter Experts: Requirements validation
 
 ---
 
-## Commercial Terms
+# Architecture & Design
 
-### Project Investment
+## Solution Architecture
 
-| Category | Description | Amount |
-|----------|-------------|--------|
-| **Professional Services** | Implementation, analytics, automation, training (560 hours) | $126,000 |
-| **Azure Sentinel & Log Analytics** | Year 1 cloud infrastructure costs for 300 GB/month | $182,800 |
-| **Deployment & Support** | Infrastructure setup, hypercare, and initial support | $26,160 |
-| ****TOTAL PROJECT COST** | **Total investment for complete 12-week deployment** | **$335,000** |
+**layout:** visual
 
-### Year 1 Total Cost of Ownership
+**Cloud-Native Security Intelligence Platform Architecture**
 
-| Category | Amount |
-|----------|--------|
-| Professional Services (one-time) | $126,000 |
-| Azure Cloud Infrastructure (Year 1) | $182,800 |
-| Defender for Cloud & Licenses (Year 1) | $8,500 |
-| SOAR Automation & Playbooks (Year 1) | $2,400 |
-| Support & Maintenance (Year 1) | $17,948 |
-| **TOTAL YEAR 1** | **$337,648** |
+![Architecture Diagram](assets/diagrams/architecture-diagram.png)
 
-### Payment Terms
-
-- **25%** upon SOW execution and project kickoff ($83,750)
-- **25%** upon completion of Implementation Phase (Week 8) ($83,750)
-- **25%** upon completion of Testing & Validation (Week 10) ($83,750)
-- **25%** upon go-live and training completion (Week 12) ($83,750)
-
-### Ongoing Operational Costs (Years 2-3)
-
-Annual operational costs for years 2 and 3 are approximately $216,808/year including:
-- Azure Sentinel & Log Analytics (300 GB/month): $172,800/year
-- Defender for Cloud & Additional Licenses: $8,500/year
-- SOAR Automation & Custom Playbooks: $2,400/year
-- Support & Managed Services: $17,948/year
-- Third-party Connectors & Integrations: $5,000/year
-- Professional Services for optimization/tuning: $10,000/year (optional)
-
-### Additional Services
-
-Any additional services beyond this SOW (e.g., additional data sources, advanced playbook development, extended support) will be quoted separately and require written approval from both parties.
+- **Data Ingestion Layer**
+  - Multi-source data collection from Office 365, Azure AD, Microsoft Defender, firewalls, and third-party SIEMs
+  - Automated connectors for rapid onboarding with zero custom configuration
+- **Analytics Engine**
+  - KQL (Kusto Query Language) rules for threat detection with 200+ built-in detections
+  - ML models for anomaly detection identifying unusual patterns and behaviors
+  - Threat intelligence integration for correlation with known attack patterns
+- **Incident Management & Investigation**
+  - Automated incident investigation with AI-powered timeline reconstruction
+  - Advanced hunting capabilities for manual threat investigation and forensics
+  - Workbooks and dashboards for real-time visibility
+- **SOAR Automation**
+  - Logic Apps for automated incident response playbooks
+  - Custom playbook development for organization-specific workflows
+  - Integration with existing ticketing and communication systems
 
 ---
 
-## Acceptance Criteria
+## Technical Implementation
 
-### Technical Acceptance
+The implementation will follow industry best practices with:
 
-The solution will be considered technically accepted when:
-- All 8+ data connectors are operational with <1% ingestion failures
-- 50+ detection rules deployed and producing alerts at <5% false positive rate
-- 50+ SOAR playbooks tested and operational for automated response
-- Integration with ticketing, communication, and security tools functional
-- Investigation tools and advanced hunting queries operational
-- System passes performance testing at 300 GB/month data volume
-- Compliance reporting automated and validated
-- Security controls implemented and validated
-- System achieves 99.9% availability target
-
-### Business Acceptance
-
-The project will be considered complete when:
-- SOC team signs off on threat detection capability and playbook execution
-- Security leadership approves incident response procedures
-- Compliance officer validates audit trail and compliance reporting
-- Training is completed with >90% team competency assessment
-- Documentation is delivered and operationally validated
-- System is operational in production environment
-- 60-day hypercare support plan is established and functional
+- Infrastructure as Code for repeatable deployments
+- Configuration management for consistency
+- Automated testing and validation
+- Comprehensive monitoring and alerting
+- Security-first design principles
 
 ---
 
-## Assumptions & Constraints
+# Security & Compliance
 
-### Assumptions
+## Identity & Access Management
 
-- Client will provide necessary access to Azure subscription, data sources, and networks
-- Existing infrastructure meets minimum requirements for Sentinel deployment
-- Third-party vendors (firewall, EDR, SIEM) will provide connector support
-- Security team members (20+) will be available for 60+ hours of training/testing
-- Business requirements will remain stable throughout project (change control for major additions)
-- Incident response processes will be documented or defined during Discovery phase
+- Role-based access control (RBAC) implementation
+- Least-privilege principle enforcement
+- Multi-factor authentication (MFA) required
+- Service accounts with minimal permissions
+- Regular access reviews and certification
 
-### Constraints
+## Monitoring & Threat Detection
 
-- Project must comply with existing security and compliance requirements
-- Implementation must not disrupt security operations or incident response
-- All data handling must meet privacy and regulatory requirements (HIPAA, PCI-DSS, GDPR, SOC 2)
-- Solution must integrate with existing Azure and on-premises infrastructure
-- Budget and timeline constraints as specified in this SOW
-- Data retention policies must comply with organizational and regulatory requirements
+- Real-time security monitoring and alerting
+- Audit logging for all administrative actions
+- Anomaly detection and behavioral analysis
+- Incident response integration
+- Compliance reporting dashboards
 
----
+## Compliance & Governance
 
-## Risk Management
-
-### Identified Risks
-
-| Risk | Impact | Probability | Mitigation Strategy |
-|------|--------|-------------|-------------------|
-| **Data Source Integration Delays** | High | Medium | Early vendor coordination, pre-testing of connectors, backup manual log forwarding |
-| **Analytics Rule Tuning Complexity** | Medium | Medium | Start with built-in rules, phased custom rule deployment, SOC team collaboration |
-| **Analyst Skill Gaps** | Medium | High | Comprehensive training, documentation, ongoing support, Microsoft learning resources |
-| **Performance Under Load** | Medium | Low | Load testing before go-live, consumption-based pricing auto-scaling, monitoring |
-| **Scope Creep** | High | Medium | Formal change control process, clear out-of-scope definition, documented deliverables |
-| **Third-Party Integration Issues** | Medium | Medium | API integration testing, vendor support escalation, alternative integration methods |
-
-### Change Management
-
-Any changes to project scope, timeline, budget, or deliverables must be documented through formal change requests and approved by both client sponsor and vendor leadership before implementation. Minor clarifications may be handled through email with both parties' written agreement.
+- Industry standard compliance frameworks (SOC 2, ISO 27001)
+- Data classification and protection policies
+- Encryption for data at-rest and in-transit
+- Regular security assessments
+- Policy enforcement automation
 
 ---
 
-## Terms & Conditions
+# Testing & Validation
 
-### Intellectual Property
+## Testing Strategy
 
-- Client retains ownership of all business data, threat intelligence, and information collected during implementation
-- Vendor retains ownership of methodologies, tools, templates, and best practices
-- Client receives unrestricted license to use all Sentinel configurations, KQL rules, and playbooks post-implementation
-- Vendor may reference solution success stories and architecture (with client approval) for marketing
+**Functional Validation:**
+- End-to-end workflow testing
+- Integration point validation
+- User acceptance testing coordination
+- Data integrity verification
 
-### Confidentiality
+**Performance Testing:**
+- Load testing under expected conditions
+- Stress testing at 2x capacity
+- Response time benchmarking
+- Scalability validation
 
-Both parties agree to maintain strict confidentiality of proprietary information, security data, threat intelligence, and business details throughout the project and for 2 years following completion.
+**Security Testing:**
+- Vulnerability scanning
+- Access control validation
+- Compliance verification
+- Penetration testing coordination (if required)
 
-### Warranty & Support
+## Go-Live Readiness
 
-- 90-day warranty on all professional services deliverables from go-live date
-- Defect resolution included at no additional cost during warranty period
-- 60-day hypercare support included (8x5 business hours, <4hr response)
-- Extended support available under separate maintenance agreement
-
-### Limitation of Liability
-
-Vendor's liability is limited to the total contract value. Neither party shall be liable for indirect, incidental, consequential, or punitive damages. Client is responsible for maintaining independent backups and disaster recovery capabilities.
-
----
-
-## Approval & Signatures
-
-### Client Approval ([CLIENT_NAME])
-
-**Name:** [CLIENT_AUTHORIZED_SIGNATORY]
-**Title:** [TITLE]
-**Signature:** ________________________________
-**Date:** ________________
-
-### Vendor Approval ([VENDOR_NAME])
-
-**Name:** [VENDOR_AUTHORIZED_SIGNATORY]
-**Title:** [TITLE]
-**Signature:** ________________________________
-**Date:** ________________
+- [ ] All functional tests passed
+- [ ] Performance benchmarks achieved
+- [ ] Security validation complete
+- [ ] Documentation finalized
+- [ ] Team training completed
+- [ ] Stakeholder sign-off obtained
 
 ---
 
-**Document Control:**
-**File Name:** SOW_AzureSentinel_[CLIENT_NAME]_[DATE]
-**Version:** 1.0
-**Last Modified:** [DATE]
-**Next Review:** [REVIEW_DATE]
+# Handover & Support
+
+## Knowledge Transfer
+
+**Training Sessions:**
+- 3x live knowledge transfer sessions (recorded)
+- Operations runbook walkthrough
+- Monitoring and alerting procedures
+- Incident response playbooks
+- Best practices documentation
+
+**Documentation Package:**
+- As-built architecture documentation
+- Configuration management guide
+- Operational runbooks
+- Troubleshooting guide
+- Optimization recommendations
+
+## Hypercare Support
+
+**Duration:** 4 weeks post-go-live
+
+**Coverage:**
+- Business hours support (8 AM - 6 PM local time)
+- 4-hour response time for critical issues
+- Daily health check calls (first 2 weeks)
+- Weekly status meetings
+
+**Scope:**
+- Issue investigation and resolution
+- Performance tuning and optimization
+- Configuration adjustments
+- Continued knowledge transfer
 
 ---
 
-*This Statement of Work constitutes the complete agreement between the parties for the services described herein and supersedes all prior negotiations, representations, or agreements relating to the subject matter.*
+# Investment Summary
+
+<!-- BEGIN COST_SUMMARY_TABLE -->
+<!-- TABLE_CONFIG: widths=[20, 12, 23, 13, 10, 10, 12] -->
+| Cost Category | Year 1 List | Credits | Year 1 Net | Year 2 | Year 3 | 3-Year Total |
+|---------------|-------------|---------|------------|--------|--------|--------------| 
+| Cloud Infrastructure | $0 | $0 | $0 | $0 | $0 | $0 |
+| Professional Services | $0 | $0 | $0 | $0 | $0 | $0 |
+| Software Licenses | $0 | $0 | $0 | $0 | $0 | $0 |
+| Support & Maintenance | $0 | $0 | $0 | $0 | $0 | $0 |
+| **TOTAL INVESTMENT** | **$0** | **$0** | **$0** | **$0** | **$0** | **$0** |
+<!-- END COST_SUMMARY_TABLE -->
+
+---
+
+---
+
+# Terms & Conditions
+
+## General Terms
+
+All services will be delivered in accordance with the executed Master Services Agreement (MSA) between Vendor and Client.
+
+## Scope Changes
+
+Any changes to scope, schedule, or cost require a formal Change Request approved by both parties. Impact assessment will be provided within 5 business days.
+
+## Intellectual Property
+
+- Client retains ownership of all configurations and documentation specific to their environment
+- Vendor retains proprietary methodologies, tools, and accelerators
+- Pre-existing IP remains with original owner
+
+## Service Levels
+
+- Deliverables provided per agreed schedule
+- Hypercare period: 4 weeks with defined response times
+- Extended support available via managed services contract
+
+## Confidentiality
+
+- All exchanged artifacts under NDA protection
+- Client data handled per security requirements
+- No disclosure to third parties without consent
+
+## Termination
+
+- Either party may terminate with 30 days written notice
+- Payment due for all completed work
+- Deliverables transferred upon termination
+
+---
+
+# Sign-Off
+
+By signing below, both parties agree to the scope, approach, and terms outlined in this Statement of Work.
+
+**Client Authorized Signatory:**
+
+Name: ______________________________
+
+Title: ______________________________
+
+Signature: __________________________
+
+Date: ______________________________
+
+**Service Provider Authorized Signatory:**
+
+Name: ______________________________
+
+Title: ______________________________
+
+Signature: __________________________
+
+Date: ______________________________
+
+---
+
+*This Statement of Work constitutes the complete agreement between the parties for the services described herein.*

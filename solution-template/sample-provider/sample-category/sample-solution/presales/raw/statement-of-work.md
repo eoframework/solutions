@@ -1,53 +1,36 @@
 ---
-# Document Information
+# Document Metadata (Simplified)
 document_title: Statement of Work
-document_version: 1.0
-document_date: November 10, 2025
-document_id: SOW-2025-001
-
-# Project Information
 project_name: Enterprise Cloud Migration & Modernization
-project_id: PROJ-CF-2025-001
-opportunity_no: OPP-ACM-2025-0042
-project_start_date: February 1, 2025
-project_end_date: August 31, 2025
-project_duration: 7 months
-
-# Client Information
 client_name: Acme Financial Services
-client_address: 123 Main Street, New York, NY 10001
-client_contact_name: John Smith
-client_contact_title: VP of Technology
-client_contact_email: john.smith@acmefinancial.com
-client_contact_phone: (555) 123-4567
-
-# Vendor Information
-vendor_name: Your Consulting Company
-vendor_address: 456 Tech Boulevard, San Francisco, CA 94105
-vendor_contact_name: Jane Doe
-vendor_contact_title: Senior Solutions Architect
-vendor_contact_email: jane.doe@consulting.com
-vendor_contact_phone: (555) 987-6543
-vendor_website: www.consulting.com
-
-# Cover Page Logos
-client_logo: support/doc-templates/assets/logos/client_logo.png
-vendor_logo: support/doc-templates/assets/logos/consulting_company_logo.png
----
-
-# Enterprise Cloud Migration & Modernization - Statement of Work
-
+client_contact: John Smith | john.smith@acmefinancial.com | (555) 123-4567
+consulting_company: Your Consulting Company
+consultant_contact: Jane Doe | jane.doe@consulting.com | (555) 987-6543
+opportunity_no: OPP-2025-001
+document_date: November 10, 2025
+version: 1.0
+client_logo: assets/logos/client_logo.png
+vendor_logo: assets/logos/consulting_company_logo.png
 ---
 
 # Executive Summary
 
 This Statement of Work (SOW) defines the scope, deliverables, roles, and terms for the Enterprise Cloud Migration & Modernization project for Acme Financial Services. This engagement will deliver a modern, scalable, cloud-native 3-tier architecture to replace legacy on-premises systems and achieve digital transformation objectives including improved scalability, enhanced security, and reduced operational costs.
 
+**Project Duration:** 7 months (February 1, 2025 - August 31, 2025)
+
+**Key Objectives:**
+- Migrate core applications to cloud-native 3-tier architecture
+- Achieve 99.9% uptime SLA with auto-scaling capabilities
+- Reduce infrastructure costs by 30-40%
+- Enable CI/CD pipelines for faster deployment
+
 ---
 
 # Background & Objectives
 
-## Background
+## Current State
+
 Acme Financial Services currently operates legacy on-premises applications with monolithic architecture. Key challenges include:
 - Limited scalability to handle peak transaction volumes
 - High infrastructure maintenance costs and aging hardware
@@ -55,7 +38,8 @@ Acme Financial Services currently operates legacy on-premises applications with 
 - Slow deployment cycles hindering time-to-market for new features
 - Difficulty meeting regulatory compliance requirements
 
-## Objectives
+## Business Objectives
+
 - Migrate core applications to cloud-native 3-tier architecture (Presentation, Application, Data layers)
 - Achieve 99.9% uptime SLA with auto-scaling capabilities
 - Reduce infrastructure costs by 30-40% through cloud optimization
@@ -63,27 +47,41 @@ Acme Financial Services currently operates legacy on-premises applications with 
 - Enable CI/CD pipelines for faster feature deployment
 
 ## Success Metrics
-- [Example metric, e.g., 99.9% uptime]
-- [e.g., Application latency < X ms]
-- [e.g., Zero critical issues during cutover]
-- [e.g., 20–30% cost reduction within 12 months]
+
+- 99.9% uptime availability
+- Application latency < 200ms
+- Zero critical issues during cutover
+- 30% cost reduction within 12 months
+- 50% reduction in deployment cycle time
 
 ---
 
 # Scope of Work
 
 ## In Scope
-- [Discovery and assessment activities]
-- [Infrastructure or platform setup]
-- [System configuration and integration]
-- [Data migration and validation]
-- [Testing and quality assurance]
-- [Knowledge transfer and documentation]
 
-## Activities
+- Discovery and assessment of current infrastructure
+- Cloud platform setup and configuration
+- Application migration and modernization
+- Data migration and validation
+- Testing and quality assurance
+- Knowledge transfer and documentation
+- 4-week hypercare support period
 
-### Phase 1 – Discovery & Assessment
-During this initial phase, the Vendor will perform a comprehensive assessment of the Client's current state. This includes analyzing existing systems, identifying requirements, and determining the optimal approach for implementation.
+## Out of Scope
+
+These items are not in scope unless added via change control:
+- Application refactoring or custom development beyond migration
+- Hardware procurement or disposal
+- End-user training (technical team only)
+- Managed services post-hypercare (unless separately contracted)
+- Third-party application licensing
+
+## Phase Activities
+
+### Phase 1 – Discovery & Assessment (Weeks 1-4)
+
+During this initial phase, the Vendor will perform a comprehensive assessment of the Client's current state.
 
 Key activities:
 - Comprehensive discovery and inventory
@@ -93,10 +91,11 @@ Key activities:
 - Implementation planning and prioritization
 - Cost estimation and resource planning
 
-This phase concludes with an Assessment Report that outlines the proposed plan, scope, risks, and timeline.
+**Deliverable:** Assessment Report
 
-### Phase 2 – Solution Design & Environment Setup
-In this phase, the foundational infrastructure is provisioned and configured based on industry best practices. This includes environment setup, network configuration, security controls, monitoring, and access management.
+### Phase 2 – Solution Design & Environment Setup (Weeks 5-8)
+
+In this phase, the foundational infrastructure is provisioned and configured based on industry best practices.
 
 Key activities:
 - Infrastructure and platform deployment
@@ -104,12 +103,13 @@ Key activities:
 - Centralized logging and monitoring setup
 - Access control, authentication, and authorization policies
 - Security baseline configuration
-- Implementation of backup strategies and disaster recovery setup
+- Backup strategies and disaster recovery setup
 
-By the end of this phase, the Client will have a secure, production-ready environment for the solution.
+**Deliverable:** Solution Design Document
 
-### Phase 3 – Implementation & Execution
-Implementation will occur in well-defined phases based on business priority and complexity. Each phase follows a repeatable process with automated workflows for consistency and risk reduction.
+### Phase 3 – Implementation & Execution (Weeks 9-20)
+
+Implementation will occur in well-defined phases based on business priority and complexity.
 
 Key activities:
 - Component development and configuration
@@ -119,10 +119,11 @@ Key activities:
 - Performance optimization
 - Issue remediation and quality assurance
 
-After each phase, the Vendor will coordinate validation and sign-off with the Client before proceeding.
+**Deliverable:** Implementation Runbook
 
-### Phase 4 – Testing & Validation
-In the Testing and Validation phase, the solution undergoes thorough functional, performance, and security validation to ensure it meets required SLAs and compliance standards. Test cases and scripts will be executed based on Client-defined acceptance criteria.
+### Phase 4 – Testing & Validation (Weeks 21-24)
+
+The solution undergoes thorough functional, performance, and security validation.
 
 Key activities:
 - Smoke testing and sanity checks
@@ -132,358 +133,356 @@ Key activities:
 - User Acceptance Testing (UAT) coordination
 - Go-live readiness review
 
-Cutover will be coordinated with all relevant stakeholders and executed during an approved maintenance window, with well-documented rollback procedures in place.
+**Deliverable:** Test Results Report
 
-### Phase 5 – Handover & Post-Implementation Support
-Following successful implementation and cutover, the focus shifts to ensuring operational continuity and knowledge transfer. The Vendor will provide a period of hypercare support and equip the Client's team with the documentation, tools, and processes needed for ongoing maintenance and optimization.
+### Phase 5 – Handover & Support (Weeks 25-28)
 
-Activities include:
-- Delivery of as-built documentation (including architecture diagrams, configurations, monitoring setup, etc.)
+Following successful implementation, focus shifts to ensuring operational continuity.
+
+Key activities:
+- Delivery of as-built documentation
 - Runbook and SOPs for day-to-day operations
-- Live or recorded knowledge transfer sessions for operations and application teams
+- Live knowledge transfer sessions
 - Optimization recommendations
-- Optional transition to a managed services model for ongoing support, if contracted
+- 4-week hypercare support
+
+**Deliverable:** As-Built Documentation & Knowledge Transfer
 
 ---
 
-# Out of Scope
+# Deliverables & Timeline
 
-## Exclusions
-These items are not in scope unless added via change control:
-- [e.g., Application refactoring or custom development]
-- [e.g., Hardware procurement or disposal]
-- [e.g., Managed services post-implementation (unless separately contracted)]
-- [e.g., Training for end users]
+## Deliverables
 
----
+<!-- TABLE_CONFIG: widths=[8, 40, 12, 20, 20] -->
+| # | Deliverable | Type | Due Date | Acceptance By |
+|---|-------------|------|----------|---------------|
+| 1 | Assessment Report | Document | Week 4 | Client IT Lead |
+| 2 | Solution Design Document | Document | Week 8 | Technical Lead |
+| 3 | Implementation Runbook | Document | Week 20 | Operations Lead |
+| 4 | Test Results Report | Document | Week 24 | QA Lead |
+| 5 | As-Built Documentation | Document | Week 28 | Client IT Lead |
+| 6 | Knowledge Transfer Sessions | Live/Recorded | Week 28 | Client Team |
 
-# Deliverables
+## Project Milestones
 
-| # | Deliverable                          | Type         | Due Date     | Acceptance By   |
-|---|--------------------------------------|--------------|--------------|-----------------|
-| 1 | Assessment Report                    | Document     | [Date]       | [Client Lead]   |
-| 2 | Solution Design Document             | Document     | [Date]       | [Technical Lead]|
-| 3 | Implementation Runbook               | Document     | [Date]       | [Ops Lead]      |
-| 4 | As-Built Documentation               | Document     | [Date]       | [Client Lead]   |
-| 5 | Knowledge Transfer Sessions          | Live/Recorded| [Date]       | [Client Team]   |
-
----
-
-# Project Plan & Timeline
-
-## Milestones
-
+<!-- TABLE_CONFIG: widths=[20, 55, 25] -->
 | Milestone | Description | Target Date |
 |-----------|-------------|-------------|
-| M1 | Assessment Complete | [Date] |
-| M2 | Environment Ready | [Date] |
-| M3 | Implementation Complete | [Date] |
-| M4 | Testing Complete | [Date] |
-| Go-Live | Production Launch | [Date] |
-| Hypercare End | Support Period Complete | [Date] |
+| M1 - Assessment Complete | Discovery and analysis finished | Week 4 |
+| M2 - Environment Ready | Cloud infrastructure provisioned | Week 8 |
+| M3 - Implementation Complete | All components deployed | Week 20 |
+| M4 - Testing Complete | UAT and validation passed | Week 24 |
+| Go-Live | Production launch | Week 25 |
+| Hypercare End | Support period complete | Week 28 |
 
 ---
 
-# Roles & Responsibilities (RACI)
+# Roles & Responsibilities
 
-| Task/Role                                | Vendor PM | Vendor Arch | Vendor DevOps | Client IT | Client Sec | SME |
-|------------------------------------------|-----------|-------------|---------------|-----------|------------|-----|
-| Discovery & Requirements Gathering       | A         | R           | R             | C         | I          | I   |
-| Solution Architecture & Design           | C         | A           | R             | I         | I          | C   |
-| Infrastructure Setup                     | C         | A           | R             | C         | C          | C   |
-| Implementation Planning                  | A         | R           | C             | R         | C          | I   |
-| System Configuration                     | C         | R           | R             | C         | I          | I   |
-| Testing & Validation                     | R         | R           | R             | A         | C          | I   |
-| Security Configuration                   | C         | C           | R             | I         | A          | C   |
-| Monitoring & Observability Setup         | C         | R           | R             | C         | I          | I   |
-| Hypercare & Post-Launch Support          | A         | R           | R             | C         | I          | I   |
-| Knowledge Transfer                       | R         | R           | C             | A         | I          | I   |
+## RACI Matrix
 
-Legend: **R** = Responsible | **A** = Accountable | **C** = Consulted | **I** = Informed
+<!-- TABLE_CONFIG: widths=[34, 11, 11, 11, 11, 11, 11] -->
+| Task/Role | Vendor PM | Vendor Arch | Vendor Eng | Client IT | Client Sec | SME |
+|-----------|-----------|-------------|------------|-----------|------------|-----|
+| Discovery & Requirements | A | R | R | C | I | C |
+| Solution Architecture | C | A | R | I | C | I |
+| Infrastructure Setup | C | A | R | C | C | I |
+| Implementation | A | R | R | C | I | I |
+| Security Configuration | C | C | R | I | A | I |
+| Testing & Validation | R | R | R | A | C | I |
+| Knowledge Transfer | R | R | C | A | I | I |
 
----
+**Legend:** R = Responsible | A = Accountable | C = Consulted | I = Informed
 
-# Architecture & Technical Design
+## Key Personnel
 
-## Architecture Overview
-The proposed architecture is designed to provide a secure, scalable, and compliant foundation for current and future workloads. The architecture aligns with industry best practices and uses automation where possible to streamline deployment, security, and ongoing operations.
+**Vendor Team:**
+- Project Manager: Overall delivery accountability
+- Solution Architect: Technical design and oversight
+- Cloud Engineers: Implementation and configuration
+- Security Specialist: Security controls and compliance
 
-![Figure 1: Solution Architecture Diagram](../../assets/images/architecture-diagram.png)
-
-**Figure 1: Solution Architecture Diagram** - High-level overview of the proposed cloud-native 3-tier architecture
-
-## Architecture Type
-The deployment will follow [e.g., multi-tier, microservices, serverless, hybrid] architecture. This approach enforces clear separation of concerns, allows for granular security controls, and enables future scaling with centralized governance.
-
-Key architectural components include:
-- [Component 1: e.g., Load balancers, API gateway]
-- [Component 2: e.g., Application tier]
-- [Component 3: e.g., Data tier]
-- [Component 4: e.g., Integration layer]
-
-This design enables future scaling while maintaining isolation and reducing risk.
-
-## Application Hosting
-Depending on the workload pattern and requirements, applications will be hosted using appropriate infrastructure:
-- [Option 1: e.g., Virtual machines for legacy applications]
-- [Option 2: e.g., Containers for cloud-native workloads]
-- [Option 3: e.g., Serverless for event-driven workloads]
-
-All hosting services will be deployed following security best practices and managed using infrastructure-as-code (IaC).
-
-## Networking
-The networking architecture will be implemented using industry-standard components:
-- Network segmentation by tier (web, application, data) and environment
-- Subnets configured across multiple availability zones for high availability
-- Routing configured with appropriate security controls
-- Connectivity for hybrid integration (if applicable)
-- Load balancing and traffic management
-
-## Observability
-A comprehensive observability framework ensures operational continuity and rapid incident response:
-- Centralized logging and log aggregation
-- Application and infrastructure metrics monitoring
-- Distributed tracing for application performance
-- Security monitoring and threat detection
-- Alerting and notification workflows
-
-## Backup & Disaster Recovery
-All critical data and workloads will be protected through:
-- Automated backup policies
-- High availability configuration
-- Optional disaster recovery (DR) setup
-- DR strategies aligned to Client's defined RTO/RPO goals
+**Client Team:**
+- IT Lead: Primary technical contact
+- Security Lead: Security and compliance approval
+- Business SME: Requirements validation
+- Operations Team: Knowledge transfer recipients
 
 ---
 
-# Assumptions
+# Architecture & Design
 
-## General Assumptions
-- Client provides timely access to systems, subject matter experts, and required resources.
-- Appropriate access permissions and credentials are provisioned before project phases start.
-- Network connectivity and firewall rules are established as needed.
-- All required accounts and licenses are available for project use.
+## Solution Architecture
+
+![Solution Architecture](assets/diagrams/architecture-diagram.png)
+
+**Figure 1: Cloud Migration Architecture** - High-level overview of the proposed cloud-native 3-tier architecture
+
+The proposed architecture provides a secure, scalable, and compliant foundation for current and future workloads. Key components include:
+
+- **Presentation Tier:** Load balancers, CDN, API Gateway
+- **Application Tier:** Containerized microservices, auto-scaling
+- **Data Tier:** Managed databases, caching, storage
+
+## Technical Implementation Strategy
+
+The deployment will follow a phased migration approach with blue-green deployment patterns for minimal downtime.
+
+**Migration Patterns:**
+- Lift-and-shift for compatible workloads
+- Re-platform for optimization opportunities
+- Re-architecture for critical modernization needs
+
+**Infrastructure as Code:**
+All infrastructure will be deployed using IaC tools (Terraform/CloudFormation) for consistency, version control, and repeatability.
+
+## Tooling Overview
+
+<!-- TABLE_CONFIG: widths=[30, 35, 35] -->
+| Category | Primary Tools | Alternative Options |
+|----------|---------------|---------------------|
+| Infrastructure | Terraform | CloudFormation, Pulumi |
+| Configuration Mgmt | Ansible | Chef, Puppet |
+| Monitoring | Prometheus + Grafana | Datadog, New Relic |
+| CI/CD | Jenkins | GitHub Actions, GitLab CI |
+| Security Scanning | Snyk | Aqua, Twistlock |
+
+## Data Management
+
+**Data Migration Strategy:**
+- Incremental migration with minimal downtime
+- Data validation and integrity checks
+- Encryption for data in-transit and at-rest
+- Classification aligned with Client's policies
+
+**Backup & Disaster Recovery:**
+- Automated backup policies (daily, weekly, monthly)
+- High availability configuration across zones
+- DR site in secondary region
+- RTO: 4 hours | RPO: 1 hour
 
 ---
 
-# Dependencies
-
-## Project Dependencies
-- Client approval for architectural decisions and environment setup
-- Third-party vendor support (if required for integrations)
-- Access to production systems during cutover windows
-- Required security policies and compliance approvals in place
-
----
-
-# Security, Compliance & Governance
-
-The implementation and target environment will be architected and validated to meet the Client's security, compliance, and governance requirements. Vendor will adhere to industry-standard security frameworks and best practices during implementation.
+# Security & Compliance
 
 ## Identity & Access Management
-- Access controls designed using least-privilege principles
-- Role-based access control (RBAC) aligned with Client's internal teams
-- Optional identity federation integration (e.g., Azure AD, Okta, SSO)
+
+- Least-privilege access controls
+- Role-based access control (RBAC) aligned with Client's teams
+- Multi-factor authentication (MFA) required
+- Single sign-on (SSO) federation with existing identity provider
 
 ## Monitoring & Threat Detection
-- Real-time security monitoring and threat detection
-- Audit logging and change detection enabled
-- Optional integration with SIEM tools (e.g., Splunk, Datadog, ELK)
 
-## Compliance & Auditing
-- Policies configured for adherence to standards such as SOC2, ISO27001, HIPAA, PCI-DSS, etc. (as applicable)
+- Real-time security monitoring and alerting
+- Audit logging and change detection
+- SIEM integration for centralized analysis
+- Automated vulnerability scanning
+
+## Compliance & Governance
+
+- SOC 2 Type II compliance
+- HIPAA controls (if applicable)
+- PCI-DSS requirements (if applicable)
 - Continuous compliance assessment and reporting
-- Support for regulatory compliance requirements
 
 ## Encryption & Key Management
-- Encryption for data in-transit and at-rest
-- Key management using industry-standard practices
-- Certificate management and rotation policies
 
-## Governance
-- Security policies enforced through automation
-- Resource tagging strategy for cost allocation, ownership, and compliance
-- Infrastructure-as-code policy enforcement
-
----
-
-# Environments & Access
-
-## Environments
-- Dev, QA, Stage, Prod
-
-## Access Policies
-- Multi-factor authentication (MFA) required
-- Single sign-on (SSO) federation preferred
-- Secure remote access protocols
+- TLS 1.3 for data in-transit
+- AES-256 for data at-rest
+- Centralized key management service
+- Automated key rotation policies
 
 ---
 
 # Testing & Validation
 
-Comprehensive testing and validation will take place throughout the implementation lifecycle to ensure functionality, performance, security, and resilience of the solution.
+## Testing Strategy
 
-## Functional Validation
+**Functional Validation:**
 - End-to-end application validation
-- Validation against business workflows and acceptance criteria
+- Business workflow testing
+- API integration testing
+- Data integrity verification
 
-## Performance & Load Testing
-- Benchmark testing and performance validation
-- Stress testing to identify capacity limits
+**Performance Testing:**
+- Load testing (expected peak traffic)
+- Stress testing (2x peak capacity)
+- Latency benchmarking
+- Auto-scaling validation
 
-## Security Testing
-- Validation of access controls, encryption, and compliance requirements
-- Optional penetration testing and vulnerability scanning
+**Security Testing:**
+- Penetration testing (third-party)
+- Vulnerability scanning
+- Access control validation
+- Compliance verification
 
-## Disaster Recovery & Resilience Tests
-- Failover testing (high availability validation)
-- RTO/RPO validation
+**Disaster Recovery Testing:**
+- Failover testing
+- Backup restoration validation
+- RTO/RPO verification
+- Runbook execution testing
 
-## User Acceptance Testing (UAT)
-- Performed in coordination with Client stakeholders
-- Test environment and test data managed by Vendor
+## Go-Live Readiness Checklist
 
-## Go-Live Readiness
-A Go-Live Readiness Checklist will be delivered including:
-- Security and compliance sign-offs
-- Functional validation completion
-- Data integrity checks
-- Issue log closure
+- [ ] All functional tests passed
+- [ ] Performance benchmarks met
+- [ ] Security sign-off obtained
+- [ ] Data integrity verified
+- [ ] Runbooks documented and tested
+- [ ] Rollback procedures validated
+- [ ] Stakeholder approval obtained
 
----
+## Cutover Plan
 
-# Implementation Strategy & Tools
+**Pre-Cutover:**
+- Final data sync
+- DNS TTL reduction
+- Communication to stakeholders
+- Support team on standby
 
-The implementation approach will follow industry best practices and proven methodologies, selecting the appropriate strategy for each component based on business and technical requirements.
+**Cutover Window:**
+- Scheduled maintenance window (Saturday 10 PM - Sunday 6 AM)
+- Traffic redirection
+- Health check monitoring
+- Validation testing
 
-## Example Implementation Patterns
-- [Pattern 1: e.g., Incremental rollout]
-- [Pattern 2: e.g., Blue-green deployment]
-- [Pattern 3: e.g., Canary releases]
-
-## Tooling Overview
-
-| Category              | Primary Tools                | Alternative Options           |
-|-----------------------|------------------------------|-------------------------------|
-| Infrastructure        | [e.g., Terraform, ARM]       | [e.g., CloudFormation, Pulumi]|
-| Configuration Mgmt    | [e.g., Ansible, Chef]        | [e.g., Puppet, SaltStack]     |
-| Monitoring            | [e.g., Prometheus, Datadog]  | [e.g., New Relic, AppDynamics]|
-| CI/CD                 | [e.g., Jenkins, GitLab CI]   | [e.g., GitHub Actions, Azure DevOps]|
-| Security Scanning     | [e.g., Aqua, Snyk]           | [e.g., Twistlock, Qualys]     |
-
----
-
-# Data Management Plan
-
-## Data Strategy
-- Data migration approach with minimal downtime
-- Validation through data integrity checks and reconciliation
-
-## Security & Compliance
-- Encryption enabled for data in-transit and at-rest
-- Data classification aligned with Client's internal policies
-
----
-
-# Cutover Plan & Go-Live Readiness
-
-## Cutover Checklist
-- Pre-cutover validation and readiness review
-- DNS or routing configuration updates
-- Application endpoint reconfiguration
-- Health check monitoring and validation
-
-## Rollback Strategy
+**Rollback Strategy:**
 - Documented rollback procedures
 - Backup restoration process
-- Revert configuration changes if needed
+- DNS revert capability
+- Maximum rollback time: 2 hours
 
 ---
 
-# Handover & Managed Services Transition
-
-## Handover Artifacts
-- As-Built documentation
-- Cost optimization recommendations
-- Access control and governance documentation
-- Monitoring and alert configuration reference
+# Handover & Support
 
 ## Knowledge Transfer
-- [X] live knowledge transfer sessions
-- Recorded training materials hosted in shared portal
+
+**Training Sessions:**
+- 3x live knowledge transfer sessions (recorded)
+- Operations runbook walkthrough
+- Monitoring and alerting procedures
+- Incident response procedures
+- Security management practices
+
+**Documentation Package:**
+- As-built architecture documentation
+- Configuration management guide
+- Operational runbooks and SOPs
+- Troubleshooting guide
+- Optimization recommendations
+
+## Hypercare Support
+
+**Duration:** 4 weeks post-go-live
+
+**Coverage:**
+- Business hours support (8 AM - 6 PM EST)
+- 4-hour response time for critical issues
+- Daily health check calls (first 2 weeks)
+- Weekly status meetings
+
+**Scope:**
+- Issue investigation and resolution
+- Performance tuning
+- Configuration adjustments
+- Knowledge transfer continuation
+
+## Managed Services Transition (Optional)
+
+Post-hypercare, Client may transition to ongoing managed services:
+- 24/7 monitoring and support
+- Proactive optimization
+- Patch management
+- Capacity planning
 
 ---
 
 # Investment Summary
 
 <!-- BEGIN COST_SUMMARY_TABLE -->
-| Cost Category | Year 1 List | Provider/Partner Credits | Year 1 Net | Year 2 | Year 3 | 3-Year Total |
-|---------------|-------------|-------------------------|------------|---------|---------|-----------------|
+<!-- TABLE_CONFIG: widths=[25, 15, 15, 15, 10, 10, 10] -->
+| Cost Category | Year 1 List | Credits | Year 1 Net | Year 2 | Year 3 | 3-Year Total |
+|---------------|-------------|---------|------------|--------|--------|--------------|
 | Cloud Infrastructure | $12,225 | ($990) | $11,235 | $12,225 | $12,225 | $35,685 |
 | Professional Services | $64,300 | ($5,000) | $59,300 | $0 | $0 | $59,300 |
-| Software Licenses & Subscriptions | $7,650 | $0 | $7,650 | $7,650 | $7,650 | $22,950 |
+| Software Licenses | $7,650 | $0 | $7,650 | $7,650 | $7,650 | $22,950 |
 | Support & Maintenance | $0 | $0 | $0 | $0 | $0 | $0 |
 | **TOTAL INVESTMENT** | **$84,175** | **($5,990)** | **$78,185** | **$19,875** | **$19,875** | **$117,935** |
 <!-- END COST_SUMMARY_TABLE -->
 
 ## Cost Components
 
-**Professional Services**: Labor costs for discovery, design, implementation, testing, and knowledge transfer. Detailed breakdown provided in level-of-effort-estimate.xlsx.
+**Professional Services (76%):** Labor costs for discovery, design, implementation, testing, and knowledge transfer. Detailed breakdown provided in level-of-effort-estimate.xlsx.
 
-**Infrastructure & Materials**: Equipment, cloud consumption, software licenses, and support contracts. Detailed breakdown including equipment specifications, cloud consumption estimates, software licensing, and support contracts is provided in the accompanying Cost Breakdown workbook (cost-breakdown.xlsx).
+**Cloud Infrastructure (14%):** Platform services, compute, storage, networking. Monthly estimates based on sizing analysis.
+
+**Software Licenses (9%):** Third-party tools and services required for implementation.
+
+**Partner Credits:** One-time credits applied to offset Year 1 costs.
 
 ## Payment Terms
 
-### Pricing Model
-- Fixed price or Time & Materials (T&M)
-- Milestone-based payments per Deliverables table
+**Pricing Model:** Fixed price with milestone-based payments
 
-### Payment Schedule
-- 30% upon SOW execution and project kickoff
-- 30% upon completion of Phase 2 (Solution Design)
-- 25% upon completion of Phase 3 (Implementation)
-- 15% upon successful go-live and project acceptance
+**Payment Schedule:**
+- 30% upon SOW execution and project kickoff ($23,456)
+- 30% upon completion of Phase 2 - Solution Design ($23,456)
+- 25% upon completion of Phase 3 - Implementation ($19,546)
+- 15% upon successful go-live and project acceptance ($11,728)
 
----
+**Invoicing:** Monthly invoicing based on milestones completed. Net 30 payment terms.
 
-## Invoicing & Expenses
-
-### Invoicing
-- Monthly invoicing based on milestones or work completed
-- Net 30 payment terms
-
-### Expenses
-- Reimbursable at cost with prior approval
+**Expenses:** Travel and incidental expenses reimbursable at cost with prior written approval.
 
 ---
 
 # Terms & Conditions
 
-All services will be delivered in accordance with the executed Master Services Agreement (MSA) or equivalent contractual document between Vendor and Client.
+## General Terms
+
+All services will be delivered in accordance with the executed Master Services Agreement (MSA) between Vendor and Client.
 
 ## Scope Changes
-- Change Requests required for any scope, schedule, or cost adjustments
+
+Any changes to scope, schedule, or cost require a formal Change Request approved by both parties. Impact assessment will be provided within 5 business days.
 
 ## Intellectual Property
-- Client retains all ownership of developed assets, applications, and configurations
-- Vendor retains proprietary methodologies, tools, and accelerators unless otherwise agreed
+
+- Client retains ownership of all deliverables, configurations, and documentation
+- Vendor retains proprietary methodologies, tools, and accelerators
+- Pre-existing IP remains with original owner
 
 ## Service Levels
-- Deliverables based on best effort unless otherwise specified in SLAs
-- Hypercare period of [X] weeks included with option to extend via managed services
+
+- Deliverables provided on best-effort basis unless specified in SLA
+- Hypercare period: 4 weeks with defined response times
+- Extended support available via managed services contract
 
 ## Liability
-- Liability caps as agreed in MSA
-- Excludes confidentiality or IP infringement breach
+
+- Liability capped as defined in MSA
+- Excludes gross negligence, willful misconduct, or IP infringement
+- Professional liability insurance maintained
 
 ## Confidentiality
+
 - All exchanged artifacts under NDA protection
+- Client data handled per security requirements
+- No disclosure to third parties without consent
 
 ## Termination
-- Mutually terminable per MSA terms, subject to payment for completed work
+
+- Either party may terminate with 30 days written notice
+- Payment due for all completed work
+- Deliverables transferred upon termination
+- Transition assistance available upon request
 
 ## Governing Law
-- Agreement governed under the laws of [State/Region]
+
+This agreement shall be governed by the laws of the State of [State], without regard to conflict of law principles.
 
 ---
 
@@ -492,16 +491,24 @@ All services will be delivered in accordance with the executed Master Services A
 By signing below, both parties agree to the scope, approach, and terms outlined in this Statement of Work.
 
 **Client Authorized Signatory:**
-Name: __________________________
-Title: __________________________
-Signature: ______________________
-Date: __________________________
+
+Name: ______________________________
+
+Title: ______________________________
+
+Signature: __________________________
+
+Date: ______________________________
 
 **Service Provider Authorized Signatory:**
-Name: __________________________
-Title: __________________________
-Signature: ______________________
-Date: __________________________
+
+Name: ______________________________
+
+Title: ______________________________
+
+Signature: __________________________
+
+Date: ______________________________
 
 ---
 

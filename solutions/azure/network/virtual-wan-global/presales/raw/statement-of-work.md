@@ -1,269 +1,357 @@
-# STATEMENT OF WORK (SOW)
+---
+document_title: Statement of Work
+project_name: Azure Virtual WAN Global Network Implementation
+client_name: '[Client Name]'
+client_contact: '[Contact Name | Email | Phone]'
+consulting_company: Your Consulting Company
+consultant_contact: '[Consultant Name | Email | Phone]'
+opportunity_no: OPP-2025-001
+document_date: November 15, 2025
+version: '1.0'
+client_logo: assets/logos/client_logo.png
+vendor_logo: assets/logos/consulting_company_logo.png
+---
 
-**Document Version:** 1.0
-**Date:** [DATE]
-**Prepared by:** [VENDOR_NAME]
-**Client:** [CLIENT_NAME]
-**Project:** {SOLUTION_NAME} Implementation
-**SOW Number:** [SOW_NUMBER]
+# Executive Summary
+
+This Statement of Work defines the scope, deliverables, timeline, and terms for the **Azure Virtual WAN Global Network** implementation. This engagement will transform your organization's capabilities by delivering a comprehensive, enterprise-grade solution designed to meet your specific business requirements.
+
+**Project Duration:** 12 weeks (as detailed in Timeline & Milestones section)
+
+**Key Objectives:**
+- Deploy and configure Azure Virtual WAN Global Network according to best practices
+- Integrate with existing enterprise systems and workflows
+- Train technical staff on operations and management
+- Achieve defined success metrics and business outcomes
 
 ---
 
-## 1. EXECUTIVE SUMMARY
+# Background & Objectives
 
-### 1.1 Project Overview
-This Statement of Work (SOW) outlines the scope, deliverables, timeline, and terms for the implementation of {SOLUTION_NAME} for [CLIENT_NAME]. The project will deliver [PRIMARY_BUSINESS_OUTCOME] through [HIGH_LEVEL_APPROACH].
+## Business Context
 
-### 1.2 Business Objectives
-- **Primary Goal:** [PRIMARY_BUSINESS_OBJECTIVE]
-- **Success Metrics:** [QUANTIFIED_SUCCESS_CRITERIA]
-- **Expected ROI:** [ROI_PERCENTAGE] over [TIME_PERIOD]
+**layout:** two_column
 
-### 1.3 Project Duration
-**Start Date:** [PROJECT_START_DATE]
-**End Date:** [PROJECT_END_DATE]
-**Total Duration:** [PROJECT_DURATION] weeks
+**Simplify Global Network Architecture**
 
----
-
-## 2. SCOPE OF WORK
-
-### 2.1 In-Scope Activities
-The following services and deliverables are included in this SOW:
-
-#### 2.1.1 Discovery & Planning Phase
-- [ ] Stakeholder interviews and requirements gathering
-- [ ] Current state assessment and technical evaluation
-- [ ] Solution architecture design and documentation
-- [ ] Project planning and resource allocation
-- [ ] Risk assessment and mitigation planning
-
-#### 2.1.2 Implementation Phase
-- [ ] Infrastructure provisioning and configuration
-- [ ] Application deployment and customization
-- [ ] System integration and data migration
-- [ ] Security configuration and hardening
-- [ ] Performance optimization and tuning
-
-#### 2.1.3 Testing & Validation Phase
-- [ ] Unit and integration testing
-- [ ] Performance and security testing
-- [ ] User acceptance testing coordination
-- [ ] Bug fixes and issue resolution
-- [ ] Go-live readiness assessment
-
-#### 2.1.4 Deployment & Support Phase
-- [ ] Production deployment and cutover
-- [ ] Post-deployment monitoring and support
-- [ ] User training and knowledge transfer
-- [ ] Documentation delivery
-- [ ] Project closure and handover
-
-### 2.2 Out-of-Scope Activities
-The following activities are explicitly excluded from this SOW:
-
-- [ ] Hardware procurement and installation
-- [ ] Third-party software licensing
-- [ ] Network infrastructure modifications
-- [ ] Legacy system decommissioning
-- [ ] Ongoing operational support beyond [SUPPORT_PERIOD]
-- [ ] Custom development beyond specified requirements
-- [ ] Data cleansing or transformation of legacy data
-- [ ] Training beyond initial knowledge transfer
+- **Opportunity**
+  - Consolidate multiple WAN technologies (MPLS, VPN, ExpressRoute) into a unified cloud-based network hub
+  - Reduce operational complexity by 60% through centralized management and automated connectivity
+  - Optimize bandwidth costs by 40-50% while improving branch office security and performance
+  - Enable rapid scale to new branch offices in days instead of weeks
+- **Success Criteria**
+  - Achieve unified connectivity across all 10+ branch offices within 6 months
+  - Reduce WAN-related incident resolution time by 70% through centralized visibility
+  - Maintain 99.9% network uptime with automatic failover across regions
+  - Enable secure, high-performance access to Azure services and SaaS applications
 
 ---
 
-## 3. DELIVERABLES
+---
 
-### 3.1 Documentation Deliverables
-| Deliverable | Description | Due Date | Format |
-|-------------|-------------|----------|---------|
-| **Requirements Specification** | Detailed functional and non-functional requirements | [DATE] | CSV/Excel |
-| **Solution Architecture Document** | Technical architecture and design specifications | [DATE] | PDF |
-| **Implementation Plan** | Detailed project timeline and resource allocation | [DATE] | MS Project |
-| **Test Plan & Results** | Testing strategy and execution results | [DATE] | PDF |
-| **User Training Materials** | End-user guides and training documentation | [DATE] | PDF/Video |
-| **Operations Runbook** | System administration and maintenance procedures | [DATE] | PDF |
-| **As-Built Documentation** | Final system configuration and architecture | [DATE] | PDF |
+# Scope of Work
 
-### 3.2 System Deliverables
-| Component | Description | Acceptance Criteria |
-|-----------|-------------|-------------------|
-| **Production Environment** | Fully configured and operational system | Passes all acceptance tests |
-| **Integration Interfaces** | Configured data connections and APIs | Successful data flow validation |
-| **Security Configuration** | Implemented security controls and policies | Security audit compliance |
-| **Monitoring Setup** | Operational monitoring and alerting | Functional dashboards and alerts |
-| **Backup & Recovery** | Automated backup and disaster recovery | Successful recovery test |
+## In Scope
 
-### 3.3 Knowledge Transfer Deliverables
-- Administrator training (2 days, up to 10 participants)
-- End-user training (1 day, up to 25 participants)
-- Technical documentation and procedures
-- Recorded training sessions for future reference
+**layout:** single
+
+**Phased Migration to Virtual WAN**
+
+- **Phase 1: Assessment & Design (Months 1-2)**
+  - Audit current network topology and branch connectivity methods
+  - Design hub locations, security policies, and network segmentation
+  - Validate ExpressRoute peering locations and bandwidth requirements
+- **Phase 2: Hub Deployment & Branch Migration (Months 3-4)**
+  - Provision Virtual WAN hubs with VPN gateways in primary and secondary regions
+  - Establish ExpressRoute circuits and configure routing policies
+  - Migrate branch offices in waves with minimal disruption
+- **Phase 3: Security, Optimization & Handoff (Months 5-6)**
+  - Deploy Azure Firewall with centralized threat protection policies
+  - Optimize routing and traffic flow across hubs
+  - Complete training and operational handoff to network team
+
+
+## Out of Scope
+
+These items are not in scope unless added via change control:
+
+- Custom development beyond standard configuration
+- Third-party application licensing (unless specified)
+- Hardware procurement or disposal
+- End-user training (technical team only)
+- Ongoing managed services post-hypercare
 
 ---
 
-## 4. PROJECT TIMELINE & MILESTONES
+# Deliverables & Timeline
 
-### 4.1 Project Phases
-| Phase | Duration | Start Date | End Date | Key Milestones |
-|-------|----------|------------|----------|----------------|
-| **Discovery & Planning** | 2 weeks | [DATE] | [DATE] | Requirements approved, Architecture signed-off |
-| **Implementation** | 6 weeks | [DATE] | [DATE] | Infrastructure ready, Application deployed |
-| **Testing & Validation** | 2 weeks | [DATE] | [DATE] | UAT completed, Go-live approved |
-| **Deployment & Support** | 2 weeks | [DATE] | [DATE] | Production live, Training completed |
+## Project Milestones
 
-### 4.2 Critical Dependencies
-- [ ] Client provides timely access to required systems and environments
-- [ ] Subject matter experts available for requirements gathering and testing
-- [ ] Network connectivity and security approvals obtained
-- [ ] Third-party vendor coordination for integrations
-- [ ] Business stakeholder availability for key decision points
+**layout:** table
 
----
+**Path to Unified Global Network**
 
-## 5. ROLES & RESPONSIBILITIES
+<!-- TABLE_CONFIG: widths=[10, 25, 15, 50] -->
+| Phase No | Phase Description | Timeline | Key Deliverables |
+|----------|-------------------|----------|-----------------|
+| Phase 1 | Assessment & Design | Months 1-2 | Network audit complete, Hub design approved, ExpressRoute peering confirmed |
+| Phase 2 | Hub & Branch Deployment | Months 3-4 | Primary hub operational, 5 branches migrated, Secondary hub deployed |
+| Phase 3 | Security & Optimization | Months 5-6 | Firewall policies deployed, Threat detection enabled, Operations handoff complete |
 
-### 5.1 Vendor Responsibilities ([VENDOR_NAME])
-- **Project Manager:** Overall project coordination and delivery management
-- **Solution Architect:** Technical design and architecture oversight
-- **Implementation Team:** System configuration, deployment, and testing
-- **Training Specialist:** User enablement and knowledge transfer
-- **Support Engineer:** Post-deployment support and issue resolution
 
-### 5.2 Client Responsibilities ([CLIENT_NAME])
-- **Project Sponsor:** Executive oversight and business decision authority
-- **Technical Lead:** Infrastructure coordination and technical approvals
-- **Business Analyst:** Requirements validation and user acceptance testing
-- **System Administrator:** Ongoing system maintenance and administration
-- **End Users:** Participation in training and user acceptance testing
+## Key Deliverables
 
-### 5.3 Shared Responsibilities
-- Risk management and issue escalation
-- Change control and scope management
-- Quality assurance and acceptance testing
-- Communication and stakeholder management
+<!-- TABLE_CONFIG: widths=[8, 40, 12, 20, 20] -->
+| # | Deliverable | Type | Due Date | Acceptance By |
+|---|-------------|------|----------|---------------|
+| 1 | Solution Architecture Document | Document | Week 4 | Client IT Lead |
+| 2 | Configuration Runbook | Document | Week 8 | Operations Team |
+| 3 | Test Results Report | Document | Week 10 | QA Lead |
+| 4 | As-Built Documentation | Document | Week 12 | Client IT Lead |
+| 5 | Knowledge Transfer Sessions | Training | Week 12 | Technical Team |
 
 ---
 
-## 6. COMMERCIAL TERMS
+# Roles & Responsibilities
 
-### 6.1 Project Investment
-| Category | Description | Amount |
-|----------|-------------|--------|
-| **Professional Services** | Implementation and configuration services | $[SERVICES_AMOUNT] |
-| **Training & Support** | User training and initial support | $[TRAINING_AMOUNT] |
-| **Travel & Expenses** | On-site support and travel costs | $[TRAVEL_AMOUNT] |
-| ****TOTAL PROJECT COST** | **Total investment for complete implementation** | **$[TOTAL_AMOUNT]** |
+## RACI Matrix
 
-### 6.2 Payment Terms
-- **25%** upon SOW execution and project kickoff
-- **25%** upon completion of Discovery & Planning phase
-- **25%** upon completion of Implementation phase
-- **25%** upon successful go-live and project acceptance
+<!-- TABLE_CONFIG: widths=[34, 11, 11, 11, 11, 11, 11] -->
+| Task/Deliverable | Vendor PM | Vendor Arch | Vendor Eng | Client IT | Client Mgmt | SME |
+|------------------|-----------|-------------|------------|-----------|-------------|-----|
+| Solution Architecture | C | A | R | C | I | C |
+| Infrastructure Setup | C | R | R | C | I | I |
+| Configuration & Tuning | A | R | R | C | I | I |
+| Integration Development | C | A | R | C | I | I |
+| Testing & Validation | R | R | R | A | I | C |
+| Knowledge Transfer | R | R | C | A | I | I |
+| Project Management | A | I | I | C | R | I |
 
-### 6.3 Additional Services
-Any additional services beyond the scope of this SOW will be quoted separately and require written approval from both parties.
+**Legend:** R = Responsible | A = Accountable | C = Consulted | I = Informed
 
----
+## Key Personnel
 
-## 7. ACCEPTANCE CRITERIA
+**Vendor Team:**
+- Project Manager: Overall delivery accountability
+- Solution Architect: Technical design and oversight
+- Engineers: Implementation and configuration
+- Support Specialist: Training and hypercare
 
-### 7.1 Technical Acceptance
-The solution will be considered technically accepted when:
-- [ ] All functional requirements are implemented and tested
-- [ ] System performance meets specified requirements
-- [ ] Security controls are implemented and validated
-- [ ] Integration testing is completed successfully
-- [ ] System passes all acceptance tests
-
-### 7.2 Business Acceptance
-The project will be considered complete when:
-- [ ] Business stakeholders sign-off on user acceptance testing
-- [ ] Training is completed and knowledge transfer validated
-- [ ] Documentation is delivered and approved
-- [ ] System is operational in production environment
-- [ ] Support procedures are established and functional
+**Client Team:**
+- IT Lead: Primary technical contact
+- Management Sponsor: Executive oversight
+- Operations Team: Knowledge transfer recipients
+- Subject Matter Experts: Requirements validation
 
 ---
 
-## 8. ASSUMPTIONS & CONSTRAINTS
+# Architecture & Design
 
-### 8.1 Assumptions
-- Client will provide necessary access to systems, data, and personnel
-- Existing infrastructure meets minimum requirements for solution deployment
-- Required third-party systems and APIs are available and functional
-- Business requirements will remain stable throughout project duration
-- Client team members will be available for scheduled activities
+## Solution Architecture
 
-### 8.2 Constraints
-- Project must comply with existing security and compliance requirements
-- Implementation must not disrupt critical business operations
-- All data handling must meet privacy and regulatory requirements
-- Solution must integrate with existing IT infrastructure and policies
-- Budget and timeline constraints as specified in this SOW
+**layout:** visual
 
----
+**Azure Virtual WAN: Hub-and-Spoke Global Connectivity**
 
-## 9. RISK MANAGEMENT
+![Architecture Diagram](assets/diagrams/architecture-diagram.png)
 
-### 9.1 Identified Risks
-| Risk | Impact | Probability | Mitigation Strategy |
-|------|--------|-------------|-------------------|
-| **Resource Availability** | High | Medium | Advance scheduling and backup resources |
-| **Integration Complexity** | Medium | High | Early integration testing and validation |
-| **Scope Creep** | High | Medium | Formal change control process |
-| **Technology Dependencies** | Medium | Low | Contingency planning and alternatives |
-
-### 9.2 Change Management
-Any changes to project scope, timeline, or budget must be documented through formal change requests and approved by both parties before implementation.
+- **Core Components**
+  - **Virtual WAN Hubs:** Two regional hubs (US, Europe) providing centralized routing and connectivity
+  - **Branch Connectivity:** VPN gateways and ExpressRoute circuits connecting 10 branch offices
+  - **Security & Monitoring:** Azure Firewall Premium with unified visibility across all connections
+- **Technology Stack**
+  - Azure Virtual WAN Standard for hub management and routing
+  - Site-to-Site VPN and ExpressRoute for branch connectivity with SLA guarantees
+  - Azure Firewall Premium and Monitor for threat detection and observability
 
 ---
 
-## 10. TERMS & CONDITIONS
+## Technical Implementation
 
-### 10.1 Intellectual Property
-- Client retains ownership of all business data and information
-- Vendor retains ownership of proprietary methodologies and tools
-- Solution configuration and customizations become client property upon final payment
+The implementation will follow industry best practices with:
 
-### 10.2 Confidentiality
-Both parties agree to maintain strict confidentiality of proprietary information and business data throughout the project and beyond.
-
-### 10.3 Warranty & Support
-- 90-day warranty on all deliverables from go-live date
-- Defect resolution included at no additional cost during warranty period
-- Post-warranty support available under separate maintenance agreement
-
-### 10.4 Limitation of Liability
-Vendor's liability is limited to the total contract value. Neither party shall be liable for indirect, incidental, or consequential damages.
+- Infrastructure as Code for repeatable deployments
+- Configuration management for consistency
+- Automated testing and validation
+- Comprehensive monitoring and alerting
+- Security-first design principles
 
 ---
 
-## 11. APPROVAL & SIGNATURES
+# Security & Compliance
 
-### Client Approval ([CLIENT_NAME])
+## Identity & Access Management
 
-**Name:** [CLIENT_AUTHORIZED_SIGNATORY]
-**Title:** [TITLE]
-**Signature:** ________________________________
-**Date:** ________________
+- Role-based access control (RBAC) implementation
+- Least-privilege principle enforcement
+- Multi-factor authentication (MFA) required
+- Service accounts with minimal permissions
+- Regular access reviews and certification
 
-### Vendor Approval ([VENDOR_NAME])
+## Monitoring & Threat Detection
 
-**Name:** [VENDOR_AUTHORIZED_SIGNATORY]
-**Title:** [TITLE]
-**Signature:** ________________________________
-**Date:** ________________
+- Real-time security monitoring and alerting
+- Audit logging for all administrative actions
+- Anomaly detection and behavioral analysis
+- Incident response integration
+- Compliance reporting dashboards
+
+## Compliance & Governance
+
+- Industry standard compliance frameworks (SOC 2, ISO 27001)
+- Data classification and protection policies
+- Encryption for data at-rest and in-transit
+- Regular security assessments
+- Policy enforcement automation
 
 ---
 
-**Document Control:**
-**File Name:** SOW_{SOLUTION_NAME}_{CLIENT_NAME}_{DATE}
-**Version:** 1.0
-**Last Modified:** [DATE]
-**Next Review:** [REVIEW_DATE]
+# Testing & Validation
+
+## Testing Strategy
+
+**Functional Validation:**
+- End-to-end workflow testing
+- Integration point validation
+- User acceptance testing coordination
+- Data integrity verification
+
+**Performance Testing:**
+- Load testing under expected conditions
+- Stress testing at 2x capacity
+- Response time benchmarking
+- Scalability validation
+
+**Security Testing:**
+- Vulnerability scanning
+- Access control validation
+- Compliance verification
+- Penetration testing coordination (if required)
+
+## Go-Live Readiness
+
+- [ ] All functional tests passed
+- [ ] Performance benchmarks achieved
+- [ ] Security validation complete
+- [ ] Documentation finalized
+- [ ] Team training completed
+- [ ] Stakeholder sign-off obtained
 
 ---
 
-*This Statement of Work constitutes the complete agreement between the parties for the services described herein and supersedes all prior negotiations, representations, or agreements relating to the subject matter.*
+# Handover & Support
+
+## Knowledge Transfer
+
+**Training Sessions:**
+- 3x live knowledge transfer sessions (recorded)
+- Operations runbook walkthrough
+- Monitoring and alerting procedures
+- Incident response playbooks
+- Best practices documentation
+
+**Documentation Package:**
+- As-built architecture documentation
+- Configuration management guide
+- Operational runbooks
+- Troubleshooting guide
+- Optimization recommendations
+
+## Hypercare Support
+
+**Duration:** 4 weeks post-go-live
+
+**Coverage:**
+- Business hours support (8 AM - 6 PM local time)
+- 4-hour response time for critical issues
+- Daily health check calls (first 2 weeks)
+- Weekly status meetings
+
+**Scope:**
+- Issue investigation and resolution
+- Performance tuning and optimization
+- Configuration adjustments
+- Continued knowledge transfer
+
+---
+
+# Investment Summary
+
+<!-- BEGIN COST_SUMMARY_TABLE -->
+<!-- TABLE_CONFIG: widths=[20, 12, 23, 13, 10, 10, 12] -->
+| Cost Category | Year 1 List | Credits | Year 1 Net | Year 2 | Year 3 | 3-Year Total |
+|---------------|-------------|---------|------------|--------|--------|--------------| 
+| Cloud Infrastructure | $0 | $0 | $0 | $0 | $0 | $0 |
+| Professional Services | $0 | $0 | $0 | $0 | $0 | $0 |
+| Software Licenses | $0 | $0 | $0 | $0 | $0 | $0 |
+| Support & Maintenance | $0 | $0 | $0 | $0 | $0 | $0 |
+| **TOTAL INVESTMENT** | **$0** | **$0** | **$0** | **$0** | **$0** | **$0** |
+<!-- END COST_SUMMARY_TABLE -->
+
+---
+
+---
+
+# Terms & Conditions
+
+## General Terms
+
+All services will be delivered in accordance with the executed Master Services Agreement (MSA) between Vendor and Client.
+
+## Scope Changes
+
+Any changes to scope, schedule, or cost require a formal Change Request approved by both parties. Impact assessment will be provided within 5 business days.
+
+## Intellectual Property
+
+- Client retains ownership of all configurations and documentation specific to their environment
+- Vendor retains proprietary methodologies, tools, and accelerators
+- Pre-existing IP remains with original owner
+
+## Service Levels
+
+- Deliverables provided per agreed schedule
+- Hypercare period: 4 weeks with defined response times
+- Extended support available via managed services contract
+
+## Confidentiality
+
+- All exchanged artifacts under NDA protection
+- Client data handled per security requirements
+- No disclosure to third parties without consent
+
+## Termination
+
+- Either party may terminate with 30 days written notice
+- Payment due for all completed work
+- Deliverables transferred upon termination
+
+---
+
+# Sign-Off
+
+By signing below, both parties agree to the scope, approach, and terms outlined in this Statement of Work.
+
+**Client Authorized Signatory:**
+
+Name: ______________________________
+
+Title: ______________________________
+
+Signature: __________________________
+
+Date: ______________________________
+
+**Service Provider Authorized Signatory:**
+
+Name: ______________________________
+
+Title: ______________________________
+
+Signature: __________________________
+
+Date: ______________________________
+
+---
+
+*This Statement of Work constitutes the complete agreement between the parties for the services described herein.*

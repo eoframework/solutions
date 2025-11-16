@@ -1,46 +1,15 @@
 ---
-# Document Information
 document_title: Statement of Work
-document_version: 1.0
-document_date: [Month DD, YYYY]
-document_id: SOW-2025-001
-
-# Project Information
-project_name: AWS Intelligent Document Processing (IDP) Implementation
-project_id: PROJ-IDP-2025-001
-opportunity_no: OPP-IDP-2025-0001
-project_start_date: [Month DD, YYYY]
-project_end_date: [Month DD, YYYY]
-project_duration: 6 months
-
-# Client Information
-client_name: [Client Name]
-client_address: [Client Address]
-client_contact_name: [Client Contact Name]
-client_contact_title: [Client Contact Title]
-client_contact_email: [Client Contact Email]
-client_contact_phone: [Client Contact Phone]
-
-# Vendor Information
-vendor_name: EO Framework Consulting
-vendor_address: 123 Business Street, Suite 100
-vendor_contact_name: [Vendor Contact Name]
-vendor_contact_title: Senior Solutions Architect
-vendor_contact_email: info@eoframework.com
-vendor_contact_phone: (555) 123-4567
----
-
-# AWS Intelligent Document Processing - Statement of Work (SOW)
-
-**Project Name:** AWS Intelligent Document Processing (IDP) Implementation
-**Client:** [Client Name]
-**Date:** [Month DD, YYYY]
-**Version:** v1.0
-
-**Prepared by:**
-[Vendor/Consultant Name]
-[Address] • [Phone] • [Email] • [Website]
-
+project_name: Enterprise Solution Implementation
+client_name: '[Client Name]'
+client_contact: '[Contact Name | Email | Phone]'
+consulting_company: Your Consulting Company
+consultant_contact: '[Consultant Name | Email | Phone]'
+opportunity_no: OPP-2025-001
+document_date: November 15, 2025
+version: '1.0'
+client_logo: assets/logos/client_logo.png
+vendor_logo: assets/logos/consulting_company_logo.png
 ---
 
 # Executive Summary
@@ -61,6 +30,8 @@ This Statement of Work (SOW) defines the scope, deliverables, roles, and terms f
 - Foundation for expanding to medium/large scope across organization
 
 **Expected ROI:** Typical payback period of 8-12 months based on labor cost savings. For a department processing 50K pages/month at current manual cost of $2-3/page, annual savings of $1.2M-$1.8M against Year 1 investment of $116K.
+
+---
 
 ---
 
@@ -90,6 +61,8 @@ This Statement of Work (SOW) defines the scope, deliverables, roles, and terms f
 - Process [target volume] documents per month with <1% error rate
 - 99.5% system uptime for document processing services
 - Successful integration with [X] existing business systems
+
+---
 
 ---
 
@@ -182,7 +155,7 @@ Activities include:
 
 ---
 
-# Out of Scope
+## Out of Scope
 
 ## Exclusions
 These items are not in scope unless added via change control:
@@ -198,7 +171,11 @@ These items are not in scope unless added via change control:
 
 ---
 
-# Deliverables
+---
+
+# Deliverables & Timeline
+
+## Deliverables
 
 | # | Deliverable | Type | Due Date | Acceptance By |
 |---|--------------------------------------|--------------|--------------|-----------------|
@@ -218,7 +195,7 @@ These items are not in scope unless added via change control:
 
 ---
 
-# Project Plan & Timeline
+## Project Milestones
 
 ## Milestones
 
@@ -234,7 +211,9 @@ These items are not in scope unless added via change control:
 
 ---
 
-# Roles & Responsibilities (RACI)
+---
+
+# Roles & Responsibilities
 
 | Task/Role | Vendor PM | Vendor Architect | Vendor ML Engineer | Vendor Dev | Client IT | Client Business |
 |-----------|-----------|------------------|-------------------|-----------|-----------|-----------------|
@@ -254,7 +233,9 @@ Legend:
 
 ---
 
-# Architecture & Technical Design
+---
+
+# Architecture & Design
 
 ## Architecture Overview
 The AWS Intelligent Document Processing solution is designed as a **serverless, event-driven architecture** leveraging AWS AI/ML services. The architecture provides scalability, cost optimization, and enterprise-grade security for automated document processing workflows.
@@ -348,39 +329,50 @@ All critical data and configurations are protected through:
 
 ---
 
-# Assumptions
+## Technical Implementation Strategy
 
-## General Assumptions
-- Client will provide representative document samples for ML model training (minimum 1,000 documents per type)
-- Document quality is sufficient for OCR and AI processing (readable text, minimum 150 DPI)
-- Existing AWS infrastructure meets minimum requirements for AI/ML services
-- Business requirements for document types and extraction fields will remain stable during implementation
-- Client technical team will be available for requirements validation, testing, and approvals
-- AWS account access and appropriate IAM permissions will be provided within 1 week of project start
-- Document subject matter experts (SMEs) will be available for data labeling and validation
-- Integration endpoints and API documentation for existing systems will be provided
-- Security and compliance approval processes will not delay critical path activities
-- Client will handle AWS service costs directly with AWS (estimated $7,000-$10,000/month)
+The implementation approach follows AWS AI/ML best practices and proven methodologies for document processing solutions.
 
----
+## Example Implementation Patterns
+- Phased rollout: Pilot with single document type, then expand
+- Parallel processing: Run IDP alongside manual processes before full cutover
+- Iterative model training: Continuous improvement of ML models based on production data
 
-# Dependencies
+## Tooling Overview
 
-## Project Dependencies
-- AWS Account Access: Client provides AWS account access with appropriate permissions (Textract, Comprehend, SageMaker, S3, Lambda, API Gateway, CloudWatch)
-- Document Samples: Client provides representative document samples across all document types for ML model training and testing
-- Training Data Labeling: Client SMEs available to label documents and validate extraction rules
-- Integration Endpoints: Client provides API documentation, test environments, and credentials for system integration
-- Testing Document Library: Client provides comprehensive document library covering various formats, quality levels, and edge cases
-- SME Availability: Document processing experts available for requirements clarification and accuracy validation
-- Security Approvals: Security and compliance approvals obtained on schedule to avoid implementation delays
-- Infrastructure Readiness: Client AWS environment meets service limits and VPC/networking requirements
-- Change Freeze: No major changes to integration systems during testing and deployment phases
-- Go-Live Approval: Business and technical approval authority available for production deployment decision
+| Category | Primary Tools | Purpose |
+|-----------------------|------------------------------|-------------------------------|
+| Infrastructure | AWS CloudFormation, SAM | Infrastructure provisioning and Lambda deployment |
+| AI/ML Services | Textract, Comprehend, A2I | Document OCR, entity recognition, human review |
+| Compute | AWS Lambda | Serverless processing functions |
+| Storage | Amazon S3, DynamoDB | Document storage and metadata |
+| Monitoring | CloudWatch, X-Ray | Centralized logging, metrics, tracing |
+| CI/CD | CodePipeline, CodeBuild | Automated deployment pipeline |
+| Security | KMS, IAM, WAF | Encryption, access control, API protection |
 
 ---
 
-# Security, Compliance & Governance
+## Data Management
+
+## Data Strategy
+- Document ingestion via multiple channels (S3 upload, API, batch processing)
+- Automated classification and extraction using AI/ML services
+- Metadata storage in DynamoDB for fast retrieval
+- Lifecycle management with automated archival and deletion
+- Data validation and quality checks at each processing stage
+
+## Security & Compliance
+- Encryption enabled for data in-transit and at-rest
+- PII/PHI detection and masking using Amazon Comprehend
+- Document retention policies aligned with regulatory requirements
+- Audit trail for all document access via CloudTrail
+- Secure deletion capabilities for GDPR/data privacy compliance
+
+---
+
+---
+
+# Security & Compliance
 
 The implementation and target environment will be architected and validated to meet the Client's security, compliance, and governance requirements. Vendor will adhere to industry-standard security frameworks and AWS AI/ML best practices.
 
@@ -421,7 +413,7 @@ The implementation and target environment will be architected and validated to m
 
 ---
 
-# Environments & Access
+## Environments & Access
 
 ## Environments
 
@@ -438,6 +430,8 @@ The implementation and target environment will be architected and validated to m
 - Developer Access: Read/write access to Lambda, S3, API Gateway for development team
 - Operator Access: Read-only access to CloudWatch, limited management of document processing
 - User Access: API access via authentication tokens for document submission and retrieval
+
+---
 
 ---
 
@@ -490,48 +484,7 @@ A Go-Live Readiness Checklist will be delivered including:
 
 ---
 
-# Implementation Strategy & Tools
-
-The implementation approach follows AWS AI/ML best practices and proven methodologies for document processing solutions.
-
-## Example Implementation Patterns
-- Phased rollout: Pilot with single document type, then expand
-- Parallel processing: Run IDP alongside manual processes before full cutover
-- Iterative model training: Continuous improvement of ML models based on production data
-
-## Tooling Overview
-
-| Category | Primary Tools | Purpose |
-|-----------------------|------------------------------|-------------------------------|
-| Infrastructure | AWS CloudFormation, SAM | Infrastructure provisioning and Lambda deployment |
-| AI/ML Services | Textract, Comprehend, A2I | Document OCR, entity recognition, human review |
-| Compute | AWS Lambda | Serverless processing functions |
-| Storage | Amazon S3, DynamoDB | Document storage and metadata |
-| Monitoring | CloudWatch, X-Ray | Centralized logging, metrics, tracing |
-| CI/CD | CodePipeline, CodeBuild | Automated deployment pipeline |
-| Security | KMS, IAM, WAF | Encryption, access control, API protection |
-
----
-
-# Data Management Plan
-
-## Data Strategy
-- Document ingestion via multiple channels (S3 upload, API, batch processing)
-- Automated classification and extraction using AI/ML services
-- Metadata storage in DynamoDB for fast retrieval
-- Lifecycle management with automated archival and deletion
-- Data validation and quality checks at each processing stage
-
-## Security & Compliance
-- Encryption enabled for data in-transit and at-rest
-- PII/PHI detection and masking using Amazon Comprehend
-- Document retention policies aligned with regulatory requirements
-- Audit trail for all document access via CloudTrail
-- Secure deletion capabilities for GDPR/data privacy compliance
-
----
-
-# Cutover Plan & Go-Live Readiness
+## Cutover Plan
 
 ## Cutover Checklist
 - Pre-cutover validation: Final UAT sign-off, accuracy validation (95%+)
@@ -552,7 +505,9 @@ The implementation approach follows AWS AI/ML best practices and proven methodol
 
 ---
 
-# Handover & Managed Services Transition
+---
+
+# Handover & Support
 
 ## Handover Artifacts
 - As-Built documentation including architecture diagrams and AWS service configurations
@@ -571,6 +526,40 @@ The implementation approach follows AWS AI/ML best practices and proven methodol
 
 ---
 
+## Assumptions
+
+## General Assumptions
+- Client will provide representative document samples for ML model training (minimum 1,000 documents per type)
+- Document quality is sufficient for OCR and AI processing (readable text, minimum 150 DPI)
+- Existing AWS infrastructure meets minimum requirements for AI/ML services
+- Business requirements for document types and extraction fields will remain stable during implementation
+- Client technical team will be available for requirements validation, testing, and approvals
+- AWS account access and appropriate IAM permissions will be provided within 1 week of project start
+- Document subject matter experts (SMEs) will be available for data labeling and validation
+- Integration endpoints and API documentation for existing systems will be provided
+- Security and compliance approval processes will not delay critical path activities
+- Client will handle AWS service costs directly with AWS (estimated $7,000-$10,000/month)
+
+---
+
+## Dependencies
+
+## Project Dependencies
+- AWS Account Access: Client provides AWS account access with appropriate permissions (Textract, Comprehend, SageMaker, S3, Lambda, API Gateway, CloudWatch)
+- Document Samples: Client provides representative document samples across all document types for ML model training and testing
+- Training Data Labeling: Client SMEs available to label documents and validate extraction rules
+- Integration Endpoints: Client provides API documentation, test environments, and credentials for system integration
+- Testing Document Library: Client provides comprehensive document library covering various formats, quality levels, and edge cases
+- SME Availability: Document processing experts available for requirements clarification and accuracy validation
+- Security Approvals: Security and compliance approvals obtained on schedule to avoid implementation delays
+- Infrastructure Readiness: Client AWS environment meets service limits and VPC/networking requirements
+- Change Freeze: No major changes to integration systems during testing and deployment phases
+- Go-Live Approval: Business and technical approval authority available for production deployment decision
+
+---
+
+---
+
 # Investment Summary
 
 **Small Scope Implementation:** This pricing reflects a department-level deployment designed for 50,000 pages/month processing capacity with 50-100 users. For larger enterprise deployments, please request medium or large scope pricing.
@@ -578,6 +567,7 @@ The implementation approach follows AWS AI/ML best practices and proven methodol
 ## Total Investment
 
 <!-- BEGIN COST_SUMMARY_TABLE -->
+<!-- TABLE_CONFIG: widths=[20, 12, 23, 13, 10, 10, 12] -->
 | Cost Category | Year 1 List | AWS/Partner Credits | Year 1 Net | Year 2 | Year 3 | 3-Year Total |
 |---------------|-------------|---------------------|------------|---------|---------|--------------|
 | Professional Services | $82,250 | ($10,000) | $72,250 | $0 | $0 | $72,250 |
@@ -655,6 +645,8 @@ Detailed breakdown including AWS service consumption estimates and sizing is pro
 
 ---
 
+---
+
 # Terms & Conditions
 
 All services will be delivered in accordance with the executed Master Services Agreement (MSA) or equivalent contractual document between Vendor and Client.
@@ -690,6 +682,8 @@ All services will be delivered in accordance with the executed Master Services A
 
 ## Governing Law
 - Agreement governed under the laws of [State/Region]
+
+---
 
 ---
 

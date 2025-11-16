@@ -1,46 +1,15 @@
 ---
-# Document Information
 document_title: Statement of Work
-document_version: 1.0
-document_date: [Month DD, YYYY]
-document_id: SOW-2025-003
-
-# Project Information
-project_name: AWS Cloud Migration - On-Premise to Cloud
-project_id: PROJ-MIGRATION-2025-001
-opportunity_no: OPP-MIGRATION-2025-0001
-project_start_date: [Month DD, YYYY]
-project_end_date: [Month DD, YYYY]
-project_duration: 9 months
-
-# Client Information
-client_name: [Client Name]
-client_address: [Client Address]
-client_contact_name: [Client Contact Name]
-client_contact_title: [Client Contact Title]
-client_contact_email: [Client Contact Email]
-client_contact_phone: [Client Contact Phone]
-
-# Vendor Information
-vendor_name: EO Framework Consulting
-vendor_address: 123 Business Street, Suite 100
-vendor_contact_name: [Vendor Contact Name]
-vendor_contact_title: Senior Solutions Architect
-vendor_contact_email: info@eoframework.com
-vendor_contact_phone: (555) 123-4567
----
-
-# AWS Cloud Migration Statement of Work (SOW)
-
-**Project Name:** AWS Cloud Migration - On-Premise to Cloud
-**Client:** [Client Name]
-**Date:** [Month DD, YYYY]
-**Version:** v1.0  
-
-**Prepared by:**  
-[Vendor/Consultant Name]  
-[Address] • [Phone] • [Email] • [Website]
-
+project_name: Enterprise Solution Implementation
+client_name: '[Client Name]'
+client_contact: '[Contact Name | Email | Phone]'
+consulting_company: Your Consulting Company
+consultant_contact: '[Consultant Name | Email | Phone]'
+opportunity_no: OPP-2025-001
+document_date: November 15, 2025
+version: '1.0'
+client_logo: assets/logos/client_logo.png
+vendor_logo: assets/logos/consulting_company_logo.png
 ---
 
 # Executive Summary
@@ -59,6 +28,8 @@ This Statement of Work (SOW) defines the scope, deliverables, roles, and terms f
 - 61% cost reduction vs. keeping on-premise
 - Cloud scalability and AWS managed services benefits
 - Foundation to expand migration to additional workloads
+
+---
 
 ---
 
@@ -81,6 +52,8 @@ Client currently hosts **[#] applications** on **[VMware/Hyper-V/Physical server
 - App latency < [X ms] post-migration  
 - 99.9% uptime during the stabilization period  
 - 20–35% cost reduction vs. on-prem within 12 months
+
+---
 
 ---
 
@@ -160,7 +133,7 @@ Activities include:
 
 ---
 
-# Out of Scope
+## Out of Scope
 
 ## Exclusions
 These items are not in scope unless added via change control:
@@ -171,7 +144,11 @@ These items are not in scope unless added via change control:
 
 ---
 
-# Deliverables
+---
+
+# Deliverables & Timeline
+
+## Deliverables
 
 | # | Deliverable                          | Type         | Due Date     | Acceptance By   |
 |---|--------------------------------------|--------------|--------------|-----------------|
@@ -183,7 +160,7 @@ These items are not in scope unless added via change control:
 
 ---
 
-# Project Plan & Timeline
+## Project Milestones
 
 ## Milestones
 - M1: Assessment Complete — [Date]  
@@ -194,7 +171,9 @@ These items are not in scope unless added via change control:
 
 ---
 
-# Roles & Responsibilities (RACI)
+---
+
+# Roles & Responsibilities
 
 | Task/Role                                | Vendor PM | Vendor Arch | Vendor DevOps | Client IT | Client Sec | AWS SA |
 |------------------------------------------|-----------|-------------|---------------|-----------|------------|--------|
@@ -214,58 +193,95 @@ Legend:
 
 ---
 
-# AWS Architecture & Accounts
+---
 
-## Architecture Overview
-The proposed AWS architecture is designed to provide a secure, scalable, and compliant foundation for current and future workloads. The architecture aligns with AWS best practices, including the Well-Architected Framework, and uses automation where possible to streamline deployment, security, and ongoing operations.
+# Architecture & Design
 
-![Figure 1: Solution Architecture Diagram](../../assets/diagrams/architecture-diagram.png)
 
-**Figure 1: Solution Architecture Diagram** - High-level overview of the AWS cloud migration journey architecture
-
-## Architecture Type – Multi-account Landing Zone  
-The deployment will follow a multi-account architecture using an AWS Landing Zone model. This approach enforces clear separation of environments (e.g., Dev, QA, Prod, Shared Services) and allows for granular SC (Service Control Policies), billing segmentation, and enhanced security boundary enforcement.
-
-Landing zone setup includes:
-- AWS Organizations with consolidated billing and root management account  
-- Standardized baseline policies (SCPs, Guardrails)  
-- Account vending and configuration via AWS Control Tower or custom Terraform modules  
-
-This design enables future scaling with centralized governance, improving isolation and reducing blast radius.
-
-## Application Hosting  
-Depending on the workload pattern and migration strategy, applications will be hosted using best-fit AWS compute options:
-- **EC2 (Elastic Compute Cloud)** for rehosted VMs or applications requiring custom OS-level control  
-- **ECS or Fargate** for containerized workloads  
-- **Lambda** for serverless or event-driven workloads  
-
-All compute services will be deployed in private subnets for optimal security and managed using infrastructure-as-code (IaC).
-
-## Networking  
-The networking architecture will be implemented using AWS Virtual Private Cloud (VPC) components, adhering to a hub-and-spoke or shared VPC design:
-- VPCs created per environment or workload type  
-- Subnets segmented by tier (web, app, data) across multiple Availability Zones (AZs)  
-- Routing configured via route tables and NAT gateways  
-- Transit Gateway (TGW) or VPC peering used for inter-VPC communication  
-- Hybrid connectivity via AWS VPN or Direct Connect (DX), enabling integration with on-prem systems  
-
-## Observability  
-A centralized observability framework ensures operational continuity and rapid incident response:
-- **CloudWatch** Logs and Metrics  
-- **X-Ray** for application tracing  
-- **GuardDuty** for threat detection  
-- Logs will be aggregated in a central logging account using AWS Organizations practices  
-
-## Backup & Disaster Recovery  
-All critical data and workloads will be protected through:
-- Automated backups via AWS Backup  
-- Cross-AZ replication for high availability  
-- Optional cross-region replication for disaster recovery (DR) scenarios  
-- DR strategies aligned to Client’s defined RTO/RPO goals  
 
 ---
 
-# Assumptions
+# Security & Compliance
+
+## Environments & Access
+
+## Environments  
+- Dev, QA, Stage, Prod
+
+## Access Policies  
+- MFA required  
+- SSO federation preferred  
+- No direct SSH — use SSM Session Manager  
+
+---
+
+---
+
+# Testing & Validation
+
+Comprehensive testing and validation will take place throughout the migration lifecycle to ensure functionality, performance, security, and resilience of all workloads on AWS.
+
+## Functional Validation  
+- End-to-end application validation via UI, API, or batch-level testing  
+- Validation against business workflows and user stories  
+
+## Performance & Load Testing  
+- Benchmark comparison between on-prem and AWS target states  
+- Stress testing using tools like JMeter or Locust  
+
+## Security Testing  
+- Validation of IAM policies, encryption, and compliance requirements  
+- Optional penetration testing and vulnerability scanning  
+
+## Disaster Recovery & Resilience Tests  
+- Failover testing (Multi-AZ, Multi-region if applicable)  
+- RTO/RPO validation  
+
+## User Acceptance Testing (UAT)  
+- Performed in coordination with Client stakeholders  
+- Test data and environment setup managed by Vendor  
+
+## Go-Live Readiness  
+A Go-Live Readiness Checklist will be delivered including:
+- Security and compliance sign-offs  
+- Functional benchmark validation  
+- Data integrity checks  
+- Issue log closure  
+
+---
+
+## Cutover Plan
+
+## Cutover Checklist  
+- DNS switch sequencing  
+- Disable legacy database writes  
+- Application and endpoint reconfiguration  
+- Health check monitoring  
+
+## Rollback Strategy  
+- Reverse DNS  
+- Re-enable legacy data writes  
+- Rollback to earlier snapshot or AMI  
+
+---
+
+---
+
+# Handover & Support
+
+## Handover Artifacts  
+- As-Built documentation  
+- Cloud cost estimation & optimization recommendations  
+- IAM and account governance model  
+- Monitoring & alert setup reference  
+
+## Knowledge Transfer  
+- [X] live sessions  
+- Recorded materials hosted in shared portal  
+
+---
+
+## Assumptions
 
 ### General Assumptions  
 - Client provides timely access to applications, SMEs, and target systems.  
@@ -275,7 +291,7 @@ All critical data and workloads will be protected through:
 
 ---
 
-# Dependencies
+## Dependencies
 
 ## Project Dependencies  
 - Approval for AWS Organizations setup  
@@ -316,112 +332,6 @@ The migration and target AWS environment will be architected and validated to me
 
 ---
 
-# Environments & Access
-
-## Environments  
-- Dev, QA, Stage, Prod
-
-## Access Policies  
-- MFA required  
-- SSO federation preferred  
-- No direct SSH — use SSM Session Manager  
-
----
-
-# Testing & Validation
-
-Comprehensive testing and validation will take place throughout the migration lifecycle to ensure functionality, performance, security, and resilience of all workloads on AWS.
-
-## Functional Validation  
-- End-to-end application validation via UI, API, or batch-level testing  
-- Validation against business workflows and user stories  
-
-## Performance & Load Testing  
-- Benchmark comparison between on-prem and AWS target states  
-- Stress testing using tools like JMeter or Locust  
-
-## Security Testing  
-- Validation of IAM policies, encryption, and compliance requirements  
-- Optional penetration testing and vulnerability scanning  
-
-## Disaster Recovery & Resilience Tests  
-- Failover testing (Multi-AZ, Multi-region if applicable)  
-- RTO/RPO validation  
-
-## User Acceptance Testing (UAT)  
-- Performed in coordination with Client stakeholders  
-- Test data and environment setup managed by Vendor  
-
-## Go-Live Readiness  
-A Go-Live Readiness Checklist will be delivered including:
-- Security and compliance sign-offs  
-- Functional benchmark validation  
-- Data integrity checks  
-- Issue log closure  
-
----
-
-# Migration Strategy & Tools
-
-The migration approach will follow AWS’s “7 Rs” migration pattern framework, selecting the appropriate strategy (Rehost, Replatform, Repurchase, Refactor, Retire, Retain) for each workload based on business and technical drivers.
-
-## Example Migration Patterns  
-- **Rehost** (Lift & Shift) using AWS MGN  
-- **Replatform** to AWS RDS or containers  
-- **Refactor** via modularization to AWS Lambda or ECS  
-
-## Tooling Overview  
-
-| Category              | AWS Tools                | Third-party Options           |
-|-----------------------|--------------------------|-------------------------------|
-| Server Migration      | AWS MGN, CloudEndure     | RackWare, Zerto               |
-| Database Migration    | AWS DMS, SCT             | Azure Database Migration Tool |
-| File/Data Migration   | DataSync, Snowball, S3   | Rsync, Robocopy               |
-| IaC                   | CloudFormation, CDK      | Terraform, Pulumi             |
-| CI/CD Automation      | CodePipeline, CodeBuild  | Jenkins, GitHub Actions       |
-| Monitoring            | CloudWatch, X-Ray        | Datadog, New Relic            |
-
----
-
-## Data Migration Plan
-
-### Data Strategy  
-- AWS DMS with CDC (Change Data Capture) for minimal downtime  
-- Validation through record counts and checksum comparison  
-
-### Security & Compliance  
-- KMS encryption enabled in-transit and at-rest  
-- Data classification aligned with Client’s internal policies  
-
----
-
-# Cutover Plan & Go-Live Readiness
-
-## Cutover Checklist  
-- DNS switch sequencing  
-- Disable legacy database writes  
-- Application and endpoint reconfiguration  
-- Health check monitoring  
-
-## Rollback Strategy  
-- Reverse DNS  
-- Re-enable legacy data writes  
-- Rollback to earlier snapshot or AMI  
-
----
-
-# Handover & Managed Services Transition
-
-## Handover Artifacts  
-- As-Built documentation  
-- Cloud cost estimation & optimization recommendations  
-- IAM and account governance model  
-- Monitoring & alert setup reference  
-
-## Knowledge Transfer  
-- [X] live sessions  
-- Recorded materials hosted in shared portal  
-
 ---
 
 # Investment Summary
@@ -431,6 +341,7 @@ The migration approach will follow AWS’s “7 Rs” migration pattern framewor
 ## Total Investment
 
 <!-- BEGIN COST_SUMMARY_TABLE -->
+<!-- TABLE_CONFIG: widths=[20, 12, 23, 13, 10, 10, 12] -->
 | Cost Category | Year 1 List | AWS/Partner Credits | Year 1 Net | Year 2 | Year 3 | 3-Year Total |
 |---------------|-------------|---------------------|------------|---------|---------|--------------|
 | Professional Services | $125,150 | ($22,000) | $103,150 | $0 | $0 | $103,150 |
@@ -531,6 +442,14 @@ All migration services will be delivered in accordance with the executed Master 
 
 ### Governing Law  
 - Agreement governed under the laws of [State/Region]  
+
+---
+
+---
+
+# Terms & Conditions
+
+
 
 ---
 

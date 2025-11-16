@@ -1,46 +1,15 @@
 ---
-# Document Information
 document_title: Statement of Work
-document_version: 1.0
-document_date: [Month DD, YYYY]
-document_id: SOW-2025-002
-
-# Project Information
-project_name: Azure Enterprise Landing Zone Implementation
-project_id: PROJ-ELZ-2025-001
-opportunity_no: OPP-ELZ-2025-0001
-project_start_date: [Month DD, YYYY]
-project_end_date: [Month DD, YYYY]
-project_duration: 12 weeks
-
-# Client Information
-client_name: [Client Name]
-client_address: [Client Address]
-client_contact_name: [Client Contact Name]
-client_contact_title: [Client Contact Title]
-client_contact_email: [Client Contact Email]
-client_contact_phone: [Client Contact Phone]
-
-# Vendor Information
-vendor_name: EO Framework Consulting
-vendor_address: 123 Business Street, Suite 100
-vendor_contact_name: [Vendor Contact Name]
-vendor_contact_title: Senior Solutions Architect
-vendor_contact_email: info@eoframework.com
-vendor_contact_phone: (555) 123-4567
----
-
-# Azure Enterprise Landing Zone - Statement of Work (SOW)
-
-**Project Name:** Azure Enterprise Landing Zone Implementation
-**Client:** [Client Name]
-**Date:** [Month DD, YYYY]
-**Version:** v1.0
-
-**Prepared by:**
-[Vendor/Consultant Name]
-[Address] • [Phone] • [Email] • [Website]
-
+project_name: Enterprise Solution Implementation
+client_name: '[Client Name]'
+client_contact: '[Contact Name | Email | Phone]'
+consulting_company: Your Consulting Company
+consultant_contact: '[Consultant Name | Email | Phone]'
+opportunity_no: OPP-2025-001
+document_date: November 15, 2025
+version: '1.0'
+client_logo: assets/logos/client_logo.png
+vendor_logo: assets/logos/consulting_company_logo.png
 ---
 
 # Executive Summary
@@ -72,6 +41,8 @@ The Azure Enterprise Landing Zone architecture implements Azure's Cloud Adoption
 - 30%+ cost optimization through chargeback models and resource governance
 - Elimination of ad-hoc cloud deployments and shadow IT
 - Enterprise-grade security posture from day one
+
+---
 
 ---
 
@@ -113,6 +84,8 @@ An enterprise landing zone provides the structured foundation needed to prevent 
 - 99.9%+ uptime for hub services (firewall, DNS, connectivity)
 - Zero security policy exceptions in first 90 days post-implementation
 - All operations team staff successfully complete landing zone management training
+
+---
 
 ---
 
@@ -208,7 +181,7 @@ Key activities:
 
 ---
 
-# Out of Scope
+## Out of Scope
 
 ## Exclusions
 
@@ -227,7 +200,11 @@ These items are not in scope unless added via change control:
 
 ---
 
-# Deliverables
+---
+
+# Deliverables & Timeline
+
+## Deliverables
 
 | # | Deliverable | Type | Due Date | Acceptance By |
 |---|--------------------------------------|--------------|--------------|-----------------|
@@ -251,7 +228,7 @@ These items are not in scope unless added via change control:
 
 ---
 
-# Project Plan & Timeline
+## Project Milestones
 
 ## Milestones
 
@@ -267,7 +244,9 @@ These items are not in scope unless added via change control:
 
 ---
 
-# Roles & Responsibilities (RACI)
+---
+
+# Roles & Responsibilities
 
 | Task/Role | Vendor PM | Vendor Architect | Vendor Security | Vendor Network | Vendor Developer | Client IT | Client Security | Client Network |
 |-----------|-----------|------------------|-----------------|-----------------|-----------------|-----------|-----------------|--------------|
@@ -288,7 +267,9 @@ Legend:
 
 ---
 
-# Architecture & Technical Design
+---
+
+# Architecture & Design
 
 ## Architecture Overview
 
@@ -421,43 +402,59 @@ All critical data and configurations are protected through:
 
 ---
 
-# Assumptions
+## Technical Implementation Strategy
 
-## General Assumptions
+The implementation approach follows Azure Cloud Adoption Framework (CAF) best practices and proven methodologies for enterprise landing zones.
 
-- Client will provide current state information for assessment (resource inventory, organizational structure, compliance requirements)
-- Azure AD is deployed and available for identity configuration
-- Client technical team will be available for requirements validation, testing, and approvals
-- Azure account access and appropriate permissions will be provided within 1 week of project start
-- Azure subscriptions (minimum 3: management, platform, connectivity) will be available for landing zone deployment
-- ExpressRoute circuit capacity is available and can be provisioned within project timeline
-- Network policies and requirements are stable during implementation
-- Security and compliance approval processes will not delay critical path activities
-- Client will handle ongoing Azure cost directly with Azure (estimated $8,500-$12,000/month post-implementation)
-- Sufficient staff capacity exists for knowledge transfer and operations transition
-- Hybrid connectivity (ExpressRoute) is required and budget is approved
+## Implementation Approach
 
----
+- Phased deployment: Foundation (weeks 1-4), Platform (weeks 5-8), Operations (weeks 9-12)
+- Iterative design with stakeholder feedback at each phase milestone
+- Risk mitigation: Change control process for all deployments
+- Communication: Weekly status updates and stakeholder reviews
 
-# Dependencies
+## Tooling Overview
 
-## Project Dependencies
-
-- Azure Account Access: Client provides Azure account with appropriate permissions (Owner/Contributor on root management group)
-- Subscription Quota: Azure subscription limits are sufficient for landing zone design (minimum 50 subscriptions capacity)
-- Network Planning: Client provides network design requirements, IP addressing scheme, hybrid connectivity details
-- Azure AD Configuration: Client Azure AD tenant is ready for configuration and integration
-- Organizational Structure: Client provides organizational chart and team structure for management group design
-- Compliance Requirements: Client provides list of compliance requirements (SOC 2, PCI-DSS, HIPAA, regulatory standards)
-- Security Requirements: Client defines threat model, incident response requirements, and security standards
-- Integration Endpoints: Client identifies systems that require integration with landing zone (ITSM, CMDB, SIEM)
-- Stakeholder Availability: Business, security, network, and IT operations stakeholders available for review sessions
-- Change Approval Process: Client change control board available for approvals
-- Go-Live Approval: Business and technical authority available for production deployment decision
+| Category | Primary Tools | Purpose |
+|----------|---------------|---------|
+| Infrastructure | Terraform, ARM Templates | Infrastructure-as-code for landing zone deployment |
+| Policy Enforcement | Azure Policy, Azure Blueprints | Governance and compliance automation |
+| Monitoring | Azure Monitor, Log Analytics | Centralized logging and monitoring |
+| Security | Azure Sentinel, Defender for Cloud | SIEM and threat detection |
+| Network | Azure Virtual WAN, Firewall | Network architecture and security |
+| Identity | Azure AD, Conditional Access | Identity and access management |
+| CI/CD | Azure DevOps, GitHub Actions | Policy and infrastructure deployment |
+| Dashboarding | Power BI, Azure Monitor | Operational and business metrics |
 
 ---
 
-# Security, Compliance & Governance
+## Data Management
+
+## Data Strategy
+
+- Centralized logging via Log Analytics Workspace
+- Diagnostic settings configured on all Azure resources
+- Activity Logs captured for audit trail
+- Metrics collected for performance monitoring
+- Cost data captured for chargeback and optimization
+- Data retention: Logs retained for 90 days minimum, archival to storage after 90 days
+- Data classification applied to sensitive resources
+
+## Security & Compliance
+
+- Encryption enabled for all data at rest and in transit
+- Personally identifiable information (PII) handling per compliance requirements
+- Data residency controls ensuring data remains in required regions
+- Audit trail for all administrative access to data
+- Secure deletion capabilities for GDPR/data privacy compliance
+- Data access reviews on quarterly basis
+- Backup and recovery procedures documented and tested
+
+---
+
+---
+
+# Security & Compliance
 
 The implementation and target environment will be architected and validated to meet the Client's security, compliance, and governance requirements. Vendor will adhere to Azure and industry-standard security frameworks.
 
@@ -515,7 +512,7 @@ The implementation and target environment will be architected and validated to m
 
 ---
 
-# Environments & Access
+## Environments & Access
 
 ## Environments
 
@@ -540,6 +537,8 @@ The implementation and target environment will be architected and validated to m
   - Subscription Contributor: Subscription-level operations
 - Custom roles for specialized operations (DevOps, Database Admin, etc.)
 - Privileged Identity Management (PIM) for eligible role assignment
+
+---
 
 ---
 
@@ -608,57 +607,7 @@ A Go-Live Readiness Checklist will be delivered including:
 
 ---
 
-# Implementation Strategy & Tools
-
-The implementation approach follows Azure Cloud Adoption Framework (CAF) best practices and proven methodologies for enterprise landing zones.
-
-## Implementation Approach
-
-- Phased deployment: Foundation (weeks 1-4), Platform (weeks 5-8), Operations (weeks 9-12)
-- Iterative design with stakeholder feedback at each phase milestone
-- Risk mitigation: Change control process for all deployments
-- Communication: Weekly status updates and stakeholder reviews
-
-## Tooling Overview
-
-| Category | Primary Tools | Purpose |
-|----------|---------------|---------|
-| Infrastructure | Terraform, ARM Templates | Infrastructure-as-code for landing zone deployment |
-| Policy Enforcement | Azure Policy, Azure Blueprints | Governance and compliance automation |
-| Monitoring | Azure Monitor, Log Analytics | Centralized logging and monitoring |
-| Security | Azure Sentinel, Defender for Cloud | SIEM and threat detection |
-| Network | Azure Virtual WAN, Firewall | Network architecture and security |
-| Identity | Azure AD, Conditional Access | Identity and access management |
-| CI/CD | Azure DevOps, GitHub Actions | Policy and infrastructure deployment |
-| Dashboarding | Power BI, Azure Monitor | Operational and business metrics |
-
----
-
-# Data Management Plan
-
-## Data Strategy
-
-- Centralized logging via Log Analytics Workspace
-- Diagnostic settings configured on all Azure resources
-- Activity Logs captured for audit trail
-- Metrics collected for performance monitoring
-- Cost data captured for chargeback and optimization
-- Data retention: Logs retained for 90 days minimum, archival to storage after 90 days
-- Data classification applied to sensitive resources
-
-## Security & Compliance
-
-- Encryption enabled for all data at rest and in transit
-- Personally identifiable information (PII) handling per compliance requirements
-- Data residency controls ensuring data remains in required regions
-- Audit trail for all administrative access to data
-- Secure deletion capabilities for GDPR/data privacy compliance
-- Data access reviews on quarterly basis
-- Backup and recovery procedures documented and tested
-
----
-
-# Cutover Plan & Go-Live Readiness
+## Cutover Plan
 
 ## Cutover Checklist
 
@@ -682,7 +631,9 @@ The implementation approach follows Azure Cloud Adoption Framework (CAF) best pr
 
 ---
 
-# Handover & Managed Services Transition
+---
+
+# Handover & Support
 
 ## Handover Artifacts
 
@@ -709,6 +660,44 @@ The implementation approach follows Azure Cloud Adoption Framework (CAF) best pr
 
 ---
 
+## Assumptions
+
+## General Assumptions
+
+- Client will provide current state information for assessment (resource inventory, organizational structure, compliance requirements)
+- Azure AD is deployed and available for identity configuration
+- Client technical team will be available for requirements validation, testing, and approvals
+- Azure account access and appropriate permissions will be provided within 1 week of project start
+- Azure subscriptions (minimum 3: management, platform, connectivity) will be available for landing zone deployment
+- ExpressRoute circuit capacity is available and can be provisioned within project timeline
+- Network policies and requirements are stable during implementation
+- Security and compliance approval processes will not delay critical path activities
+- Client will handle ongoing Azure cost directly with Azure (estimated $8,500-$12,000/month post-implementation)
+- Sufficient staff capacity exists for knowledge transfer and operations transition
+- Hybrid connectivity (ExpressRoute) is required and budget is approved
+
+---
+
+## Dependencies
+
+## Project Dependencies
+
+- Azure Account Access: Client provides Azure account with appropriate permissions (Owner/Contributor on root management group)
+- Subscription Quota: Azure subscription limits are sufficient for landing zone design (minimum 50 subscriptions capacity)
+- Network Planning: Client provides network design requirements, IP addressing scheme, hybrid connectivity details
+- Azure AD Configuration: Client Azure AD tenant is ready for configuration and integration
+- Organizational Structure: Client provides organizational chart and team structure for management group design
+- Compliance Requirements: Client provides list of compliance requirements (SOC 2, PCI-DSS, HIPAA, regulatory standards)
+- Security Requirements: Client defines threat model, incident response requirements, and security standards
+- Integration Endpoints: Client identifies systems that require integration with landing zone (ITSM, CMDB, SIEM)
+- Stakeholder Availability: Business, security, network, and IT operations stakeholders available for review sessions
+- Change Approval Process: Client change control board available for approvals
+- Go-Live Approval: Business and technical authority available for production deployment decision
+
+---
+
+---
+
 # Investment Summary
 
 **Enterprise-Scale Implementation:** This pricing reflects an enterprise-scale deployment designed to support multiple business units and 20+ application subscriptions with centralized governance and security. For pilot or smaller deployments, please request small scope pricing.
@@ -716,6 +705,7 @@ The implementation approach follows Azure Cloud Adoption Framework (CAF) best pr
 ## Total Investment
 
 <!-- BEGIN COST_SUMMARY_TABLE -->
+<!-- TABLE_CONFIG: widths=[20, 12, 23, 13, 10, 10, 12] -->
 | Cost Category | Year 1 List | Azure Credits | Year 1 Net | Year 2 | Year 3 | 3-Year Total |
 |---------------|-------------|---------------------|------------|---------|---------|--------------|
 | Professional Services | $134,000 | ($15,000) | $119,000 | $0 | $0 | $119,000 |
@@ -802,6 +792,8 @@ Detailed breakdown including Azure service consumption and sizing is provided in
 
 ---
 
+---
+
 # Terms & Conditions
 
 All services will be delivered in accordance with the executed Master Services Agreement (MSA) or equivalent contractual document between Vendor and Client.
@@ -850,6 +842,8 @@ All services will be delivered in accordance with the executed Master Services A
 ## Governing Law
 
 - Agreement governed under the laws of [State/Region]
+
+---
 
 ---
 

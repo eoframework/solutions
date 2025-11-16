@@ -1,37 +1,15 @@
 ---
-# Document Information
 document_title: Statement of Work
-document_version: 1.0
-document_date: [Month DD, YYYY]
-document_id: SOW-2025-002
-
-# Project Information
-project_name: AWS Disaster Recovery for Web Applications
-project_id: PROJ-DR-2025-001
-opportunity_no: OPP-DR-2025-0001
-project_start_date: [Month DD, YYYY]
-project_end_date: [Month DD, YYYY]
-project_duration: 6 months
-
-# Client Information
-client_name: [Client Name]
-client_address: [Client Address]
-client_contact_name: [Client Contact Name]
-client_contact_title: [Client Contact Title]
-client_contact_email: [Client Contact Email]
-client_contact_phone: [Client Contact Phone]
-
-# Vendor Information
-vendor_name: EO Framework Consulting
-vendor_address: 123 Business Street, Suite 100
-vendor_contact_name: [Vendor Contact Name]
-vendor_contact_title: Senior Solutions Architect
-vendor_contact_email: info@eoframework.com
-vendor_contact_phone: (555) 123-4567
----
-
-# AWS Disaster Recovery for Web Applications - Statement of Work
-
+project_name: Enterprise Solution Implementation
+client_name: '[Client Name]'
+client_contact: '[Contact Name | Email | Phone]'
+consulting_company: Your Consulting Company
+consultant_contact: '[Consultant Name | Email | Phone]'
+opportunity_no: OPP-2025-001
+document_date: November 15, 2025
+version: '1.0'
+client_logo: assets/logos/client_logo.png
+vendor_logo: assets/logos/consulting_company_logo.png
 ---
 
 # Executive Summary
@@ -56,6 +34,14 @@ This Statement of Work (SOW) defines the scope, deliverables, roles, and terms f
 **Start Date:** [PROJECT_START_DATE]
 **End Date:** [PROJECT_END_DATE]
 **Total Duration:** 6 months
+
+---
+
+---
+
+# Background & Objectives
+
+Background information and business objectives.
 
 ---
 
@@ -133,7 +119,11 @@ The following activities are explicitly excluded from this SOW:
 
 ---
 
-# Deliverables
+---
+
+# Deliverables & Timeline
+
+## Deliverables
 
 ## Documentation Deliverables
 
@@ -169,7 +159,7 @@ The following activities are explicitly excluded from this SOW:
 
 ---
 
-# Project Plan & Timeline
+## Project Milestones
 
 ## Milestones
 
@@ -193,7 +183,9 @@ The following activities are explicitly excluded from this SOW:
 
 ---
 
-# Roles & Responsibilities (RACI)
+---
+
+# Roles & Responsibilities
 
 ## Vendor Responsibilities
 
@@ -222,7 +214,9 @@ The following activities are explicitly excluded from this SOW:
 
 ---
 
-# Architecture & Technical Design
+---
+
+# Architecture & Design
 
 ## Architecture Overview
 
@@ -244,6 +238,26 @@ The deployment follows a warm standby DR strategy with active-passive multi-regi
 
 ---
 
+---
+
+# Security & Compliance
+
+
+
+---
+
+# Testing & Validation
+
+
+
+---
+
+# Handover & Support
+
+
+
+---
+
 # Investment Summary
 
 **Small Scope Implementation:** This pricing reflects a pilot light DR strategy for 5-10 critical applications with 4-hour RTO and 1-hour RPO targets. For warm/hot standby or enterprise-scale DR, please request medium or large scope pricing.
@@ -251,6 +265,7 @@ The deployment follows a warm standby DR strategy with active-passive multi-regi
 ## Total Investment
 
 <!-- BEGIN COST_SUMMARY_TABLE -->
+<!-- TABLE_CONFIG: widths=[20, 12, 23, 13, 10, 10, 12] -->
 | Cost Category | Year 1 List | AWS/Partner Credits | Year 1 Net | Year 2 | Year 3 | 3-Year Total |
 |---------------|-------------|---------------------|------------|---------|---------|--------------|
 | Professional Services | $93,500 | ($8,000) | $85,500 | $0 | $0 | $85,500 |
@@ -309,67 +324,6 @@ Detailed breakdown including primary/DR infrastructure, AWS service consumption,
 
 ---
 
-# Acceptance Criteria
-
-## Technical Acceptance
-
-The DR solution will be considered technically accepted when:
-
-- RTO objectives are met through successful failover demonstrations
-- RPO objectives are validated through data replication testing
-- DR environment performs within specified parameters
-- Automated failover triggers operate correctly
-- All DR monitoring and alerting systems are functional
-- Cross-region connectivity and security controls are validated
-
-## Business Acceptance
-
-The project will be considered complete when:
-
-- Business stakeholders validate DR capabilities meet requirements
-- Operations team demonstrates competency in DR procedures
-- DR documentation is delivered and approved
-- DR environment is operational and monitored 24/7
-- Emergency response procedures are established and tested
-
----
-
-# Assumptions & Constraints
-
-## Assumptions
-
-- Client will provide necessary access to production systems and data
-- Existing AWS infrastructure meets minimum requirements for DR deployment
-- Required business stakeholders will be available for BIA and requirements gathering
-- Current application architecture supports multi-region deployment
-- Client team will participate actively in DR testing and validation
-
-## Constraints
-
-- DR implementation must not impact production system performance
-- All DR activities must comply with existing security and compliance requirements
-- Data replication must meet privacy and regulatory requirements
-- DR testing must be conducted during approved maintenance windows
-- Budget and timeline constraints as specified in this SOW
-
----
-
-# Risk Management
-
-## Identified Risks
-
-| Risk | Impact | Probability | Mitigation Strategy |
-|------|--------|-------------|---------------------|
-| **Complex Application Dependencies** | High | Medium | Thorough dependency mapping and phased testing |
-| **Cross-Region Latency Impact** | Medium | Low | Performance testing and optimization |
-| **DR Testing Business Impact** | Medium | Medium | Careful planning and off-hours testing |
-| **Regulatory Compliance Changes** | High | Low | Ongoing compliance monitoring and adaptation |
-| **Team Availability for Training** | Medium | Medium | Flexible training schedules and recorded sessions |
-
-## Change Management
-
-Any changes to DR scope, RTO/RPO requirements, or timeline must be documented through formal change requests and approved by both parties before implementation.
-
 ---
 
 # Terms & Conditions
@@ -397,6 +351,8 @@ Vendor's liability is limited to the total contract value. Neither party shall b
 ## Governing Law
 
 Agreement governed under the laws of [State/Region]
+
+---
 
 ---
 
