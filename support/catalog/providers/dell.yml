@@ -1,11 +1,11 @@
 version: '2.0'
 provider: dell
-generated_at: '2025-11-16T07:59:44.423558'
+generated_at: '2025-11-17T03:52:30.108042'
 catalog_type: provider
 metadata:
   provider_name: Dell
   total_solutions: 6
-  last_updated: '2025-11-16T07:59:44.423566'
+  last_updated: '2025-11-17T03:52:30.108050'
   auto_generated: true
 categories:
   ai:
