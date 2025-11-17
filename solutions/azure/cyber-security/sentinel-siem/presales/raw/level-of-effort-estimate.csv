@@ -1,30 +1,62 @@
-Phase,Work Package,Task Description,Resource Type,Estimated Hours,Rate,Cost Estimate,Dependencies,Risk Level,Notes
-Discovery,Security Requirements Gathering,Conduct security stakeholder interviews and threat modeling,EO Engineer,40,$150,"=TEXT(E2*F2,""$#,##0"")",,Medium,Focus on threat landscape and security objectives
-Discovery,Current Security Assessment,Analyze existing security tools logs and incident response,EO Engineer,32,$200,"=TEXT(E3*F3,""$#,##0"")",,Medium,Include SIEM SOC and security tool inventory
-Discovery,Azure Security Assessment,Evaluate Azure security services (Sentinel Defender Security Center),EO Engineer,24,$200,"=TEXT(E4*F4,""$#,##0"")",,Medium,Focus on integration capabilities and licensing
-Discovery,Compliance Review,Assess regulatory requirements and security frameworks,EO Engineer,16,$175,"=TEXT(E5*F5,""$#,##0"")",,Medium,Include SOC2 ISO27001 and industry regulations
-Planning,SIEM Architecture Design,Design Azure Sentinel architecture and data connectors,EO Engineer,48,$200,"=TEXT(E6*F6,""$#,##0"")",,Medium,Include log sources analytics rules and retention
-Planning,Security Playbook Design,Design incident response playbooks and automation workflows,EO Engineer,32,$180,"=TEXT(E7*F7,""$#,##0"")",,Medium,Include threat hunting and SOAR integration
-Planning,Security Governance,Design security policies roles and access controls,EO Engineer,24,$175,"=TEXT(E8*F8,""$#,##0"")",,Medium,Include RBAC privileged access and compliance
-Planning,Project Planning,Develop security implementation timeline and resource allocation,EO Engineer,24,$140,"=TEXT(E9*F9,""$#,##0"")",,Medium,Coordinate with security compliance and IT teams
-Development,Azure Sentinel Deployment,Deploy and configure Azure Sentinel workspace and connectors,EO Engineer,40,$160,"=TEXT(E10*F10,""$#,##0"")",,Medium,Include data connectors parsers and retention policies
-Development,Log Analytics Configuration,Configure log collection parsing normalization and enrichment,EO Engineer,60,$145,"=TEXT(E11*F11,""$#,##0"")",,Medium,Include custom parsers KQL queries and data correlation
-Development,Security Rules and Detection,Build detection rules alerts and threat hunting queries,EO Engineer,80,$170,"=TEXT(E12*F12,""$#,##0"")",,Medium,Include MITRE ATT&CK mapping and custom analytics
-Development,Incident Response Automation,Build automated response playbooks and SOAR workflows,EO Engineer,48,$165,"=TEXT(E13*F13,""$#,##0"")",,Medium,Include threat containment isolation and remediation
-Development,Security Dashboard and Reporting,Create SOC dashboards executive reporting and metrics,EO Engineer,40,$130,"=TEXT(E14*F14,""$#,##0"")",,Medium,Include compliance reporting and KPI tracking
-Development,Integration Development,Build integrations with existing security tools and ITSM,EO Engineer,32,$155,"=TEXT(E15*F15,""$#,##0"")",,Medium,Include SOAR ticketing threat intelligence and SIEM
-Testing,Unit Testing,Develop automated tests for all solution components,EO Engineer,32,$120,"=TEXT(E16*F16,""$#,##0"")",,Medium,Include technology-specific testing frameworks
-Testing,Integration Testing,Test system integrations data flows and external dependencies,EO Engineer,40,$120,"=TEXT(E17*F17,""$#,##0"")",,Medium,Include end-to-end workflow validation
-Testing,Performance Testing,Conduct load performance and scalability testing,EO Engineer,24,$140,"=TEXT(E18*F18,""$#,##0"")",,Medium,Include production-like environment and stress testing
-Testing,Security Testing,Perform security assessments penetration testing and compliance validation,EO Engineer,16,$175,"=TEXT(E19*F19,""$#,##0"")",,Medium,Include vulnerability scanning and compliance checks
-Testing,User Acceptance Testing,Coordinate UAT with business users and stakeholders,EO Engineer,32,$150,"=TEXT(E20*F20,""$#,##0"")",,Medium,Include training feedback collection and sign-off
-Deployment,Production Deployment,Deploy solution to production environment with monitoring,EO Engineer,24,$160,"=TEXT(E21*F21,""$#,##0"")",,Medium,Include blue-green deployment rollback and validation
-Deployment,Go-Live Support,Provide comprehensive support during initial production rollout,EO Engineer,48,$110,"=TEXT(E22*F22,""$#,##0"")",,Medium,Include 24/7 support monitoring and issue resolution
-Training,Administrator Training,Train system administrators and technical support teams,EO Engineer,16,$130,"=TEXT(E23*F23,""$#,##0"")",,Medium,Include hands-on technical training and certification
-Training,End User Training,Train business users on solution functionality and workflows,EO Engineer,24,$120,"=TEXT(E24*F24,""$#,##0"")",,Medium,Include role-based training documentation and support
-Training,Documentation,Create comprehensive technical and user documentation,EO Engineer,32,$110,"=TEXT(E25*F25,""$#,##0"")",,Medium,Include runbooks troubleshooting guides and best practices
-Closeout,Knowledge Transfer,Transfer solution ownership to operations and support teams,EO Engineer,16,$140,"=TEXT(E26*F26,""$#,##0"")",,Medium,Include operational procedures escalation and maintenance
-Closeout,Performance Baseline,Establish performance metrics monitoring baselines and SLAs,EO Engineer,8,$130,"=TEXT(E27*F27,""$#,##0"")",,Medium,Include KPI definition monitoring setup and reporting
-Management,Technical Leadership,Quarterback technical oversight and architecture review,EO Quarterback,"=ROUND(SUM(E2:E27)*0.25,0)",$180,"=TEXT(E28*F28,""$#,##0"")",,Medium,25% of engineering effort
-Management,Project Management,Project coordination and management activities,EO Project Manager,"=ROUND(SUM(E2:E27)*0.20,0)",$150,"=TEXT(E29*F29,""$#,##0"")",,Low,20% of engineering effort
-,,,     TOTAL HOURS,1235,   TOTAL COST,"=TEXT(E2*F2+E3*F3+E4*F4+E5*F5+E6*F6+E7*F7+E8*F8+E9*F9+E10*F10+E11*F11+E12*F12+E13*F13+E14*F14+E15*F15+E16*F16+E17*F17+E18*F18+E19*F19+E20*F20+E21*F21+E22*F22+E23*F23+E24*F24+E25*F25+E26*F26+E27*F27+E28*F28+E29*F29,""$#,##0"")",,,Total Sentinel Siem project cost estimate
+# SCOPE ASSUMPTIONS - BASELINE (MULTIPLIER 1.0),,,,,,,,,,
+Category,Baseline Assumption,Current Scope,Small (1x),Medium (2x),Large (3x),Notes,,,,
+Solution Scope,Data Connectors,10-15 connectors,10-15 connectors,Enhanced data connectors,Enterprise-scale data connectors,Sizing parameter for Data Connectors,,,,
+Solution Scope,Analytics Rules,50 custom detection rules,50 custom detection rules,Enhanced analytics rules,Enterprise-scale analytics rules,Sizing parameter for Analytics Rules,,,,
+Integration,Log Sources,Azure AD Office365 Firewall Endpoints,Azure AD Office365 Firewall Endpoints,Enhanced log sources,Enterprise-scale log sources,Sizing parameter for Log Sources,,,,
+Integration,SOAR Playbooks,10 automated playbooks,10 automated playbooks,Enhanced soar playbooks,Enterprise-scale soar playbooks,Sizing parameter for SOAR Playbooks,,,,
+User Base,Total Users,10 SOC analysts,10 SOC analysts,Enhanced total users,Enterprise-scale total users,Sizing parameter for Total Users,,,,
+User Base,User Roles,3 roles (analyst engineer admin),3 roles (analyst engineer admin),Enhanced user roles,Enterprise-scale user roles,Sizing parameter for User Roles,,,,
+Data Volume,Daily Log Ingestion,50 GB/day,50 GB/day,Enhanced daily log ingestion,Enterprise-scale daily log ingestion,Sizing parameter for Daily Log Ingestion,,,,
+Data Volume,Retention Period,90 days hot 2 years archive,90 days hot 2 years archive,Enhanced retention period,Enterprise-scale retention period,Sizing parameter for Retention Period,,,,
+Technical Environment,Deployment Regions,Single Azure region (East US),Single Azure region (East US),Enhanced deployment regions,Enterprise-scale deployment regions,Sizing parameter for Deployment Regions,,,,
+Technical Environment,Availability Requirements,24/7 monitoring,24/7 monitoring,Enhanced availability requirements,Enterprise-scale availability requirements,Sizing parameter for Availability Requirements,,,,
+Technical Environment,Infrastructure Complexity,Log Analytics + Sentinel workspace,Log Analytics + Sentinel workspace,Enhanced infrastructure complexity,Enterprise-scale infrastructure complexity,Sizing parameter for Infrastructure Complexity,,,,
+Security & Compliance,Security Requirements,RBAC MFA audit logging,RBAC MFA audit logging,Enhanced security requirements,Enterprise-scale security requirements,Sizing parameter for Security Requirements,,,,
+Security & Compliance,Compliance Frameworks,SOC2 NIST CSF,SOC2 NIST CSF,Enhanced compliance frameworks,Enterprise-scale compliance frameworks,Sizing parameter for Compliance Frameworks,,,,
+Performance,Detection Response,MTTR <1 hour,MTTR <1 hour,Enhanced detection response,Enterprise-scale detection response,Sizing parameter for Detection Response,,,,
+Performance,Query Performance,Standard KQL queries,Standard KQL queries,Enhanced query performance,Enterprise-scale query performance,Sizing parameter for Query Performance,,,,
+Environment,Deployment Environments,2 environments (dev prod),2 environments (dev prod),Enhanced deployment environments,Enterprise-scale deployment environments,Sizing parameter for Deployment Environments,,,,
+,,,,,,,,,,
+# ESTIMATE SETTINGS - EO Sales Engineer Updates Multipliers Based on Customer Scope,,,,,,,,,,
+Phase,Variable Name,Multiplier,Description / Applies To Tasks,,,,,,,
+Discovery,DISCOVERY_MX,1,All Discovery phase tasks,,,,,,,
+Planning,PLANNING_MX,1,All Planning phase tasks,,,,,,,
+Development,DEVELOPMENT_MX,1,All Development phase tasks,,,,,,,
+Testing,TESTING_MX,1,All Testing phase tasks,,,,,,,
+Deployment,DEPLOYMENT_MX,1,All Deployment phase tasks,,,,,,,
+Training,TRAINING_MX,1,All Training phase tasks,,,,,,,
+Closeout,CLOSEOUT_MX,1,All Closeout phase tasks,,,,,,,
+Management,MANAGEMENT_MX,1.5,Project Management overhead,,,,,,,
+Leadership,LEADERSHIP_MX,1.5,Technical Leadership overhead,,,,,,,
+,,,,,,,,,,
+# EFFORT ESTIMATE
+Phase,Work Package,Task Description,Resource Type,Base Hours,Effort Multiplier,Actual Hours,Rate,Cost Estimate,Dependencies,Notes
+Discovery,Security Requirements Gathering,Conduct security stakeholder interviews and threat modeling,EO Engineer,40,='Estimate Settings'!$C$24,=$E33*$F33,$150,=TEXT($G33*$H33,""$#,##0""),""$#,
+Discovery,Current Security Assessment,Analyze existing security tools logs and incident response,EO Engineer,32,='Estimate Settings'!$C$24,=$E34*$F34,$200,=TEXT($G34*$H34,""$#,##0""),""$#,
+Discovery,Azure Security Assessment,Evaluate Azure security services (Sentinel Defender Security Center),EO Engineer,24,='Estimate Settings'!$C$24,=$E35*$F35,$200,=TEXT($G35*$H35,""$#,##0""),""$#,
+Discovery,Compliance Review,Assess regulatory requirements and security frameworks,EO Engineer,16,='Estimate Settings'!$C$24,=$E36*$F36,$175,=TEXT($G36*$H36,""$#,##0""),""$#,
+Planning,SIEM Architecture Design,Design Azure Sentinel architecture and data connectors,EO Engineer,48,='Estimate Settings'!$C$25,=$E37*$F37,$200,=TEXT($G37*$H37,""$#,##0""),""$#,
+Planning,Security Playbook Design,Design incident response playbooks and automation workflows,EO Engineer,32,='Estimate Settings'!$C$25,=$E38*$F38,$180,=TEXT($G38*$H38,""$#,##0""),""$#,
+Planning,Security Governance,Design security policies roles and access controls,EO Engineer,24,='Estimate Settings'!$C$25,=$E39*$F39,$175,=TEXT($G39*$H39,""$#,##0""),""$#,
+Planning,Project Planning,Develop security implementation timeline and resource allocation,EO Engineer,24,='Estimate Settings'!$C$25,=$E40*$F40,$140,=TEXT($G40*$H40,""$#,##0""),""$#,
+Development,Azure Sentinel Deployment,Deploy and configure Azure Sentinel workspace and connectors,EO Engineer,40,='Estimate Settings'!$C$26,=$E41*$F41,$160,=TEXT($G41*$H41,""$#,##0""),""$#,
+Development,Log Analytics Configuration,Configure log collection parsing normalization and enrichment,EO Engineer,60,='Estimate Settings'!$C$26,=$E42*$F42,$145,=TEXT($G42*$H42,""$#,##0""),""$#,
+Development,Security Rules and Detection,Build detection rules alerts and threat hunting queries,EO Engineer,80,='Estimate Settings'!$C$26,=$E43*$F43,$170,=TEXT($G43*$H43,""$#,##0""),""$#,
+Development,Incident Response Automation,Build automated response playbooks and SOAR workflows,EO Engineer,48,='Estimate Settings'!$C$26,=$E44*$F44,$165,=TEXT($G44*$H44,""$#,##0""),""$#,
+Development,Security Dashboard and Reporting,Create SOC dashboards executive reporting and metrics,EO Engineer,40,='Estimate Settings'!$C$26,=$E45*$F45,$130,=TEXT($G45*$H45,""$#,##0""),""$#,
+Development,Integration Development,Build integrations with existing security tools and ITSM,EO Engineer,32,='Estimate Settings'!$C$26,=$E46*$F46,$155,=TEXT($G46*$H46,""$#,##0""),""$#,
+Testing,Unit Testing,Develop automated tests for all solution components,EO Engineer,32,='Estimate Settings'!$C$27,=$E47*$F47,$120,=TEXT($G47*$H47,""$#,##0""),""$#,
+Testing,Integration Testing,Test system integrations data flows and external dependencies,EO Engineer,40,='Estimate Settings'!$C$27,=$E48*$F48,$120,=TEXT($G48*$H48,""$#,##0""),""$#,
+Testing,Performance Testing,Conduct load performance and scalability testing,EO Engineer,24,='Estimate Settings'!$C$27,=$E49*$F49,$140,=TEXT($G49*$H49,""$#,##0""),""$#,
+Testing,Security Testing,Perform security assessments penetration testing and compliance validation,EO Engineer,16,='Estimate Settings'!$C$27,=$E50*$F50,$175,=TEXT($G50*$H50,""$#,##0""),""$#,
+Testing,User Acceptance Testing,Coordinate UAT with business users and stakeholders,EO Engineer,32,='Estimate Settings'!$C$27,=$E51*$F51,$150,=TEXT($G51*$H51,""$#,##0""),""$#,
+Deployment,Production Deployment,Deploy solution to production environment with monitoring,EO Engineer,24,='Estimate Settings'!$C$28,=$E52*$F52,$160,=TEXT($G52*$H52,""$#,##0""),""$#,
+Deployment,Go-Live Support,Provide comprehensive support during initial production rollout,EO Engineer,48,='Estimate Settings'!$C$28,=$E53*$F53,$110,=TEXT($G53*$H53,""$#,##0""),""$#,
+Training,Administrator Training,Train system administrators and technical support teams,EO Engineer,16,='Estimate Settings'!$C$29,=$E54*$F54,$130,=TEXT($G54*$H54,""$#,##0""),""$#,
+Training,End User Training,Train business users on solution functionality and workflows,EO Engineer,24,='Estimate Settings'!$C$29,=$E55*$F55,$120,=TEXT($G55*$H55,""$#,##0""),""$#,
+Training,Documentation,Create comprehensive technical and user documentation,EO Engineer,32,='Estimate Settings'!$C$29,=$E56*$F56,$110,=TEXT($G56*$H56,""$#,##0""),""$#,
+Closeout,Knowledge Transfer,Transfer solution ownership to operations and support teams,EO Engineer,16,='Estimate Settings'!$C$30,=$E57*$F57,$140,=TEXT($G57*$H57,""$#,##0""),""$#,
+Closeout,Performance Baseline,Establish performance metrics monitoring baselines and SLAs,EO Engineer,8,='Estimate Settings'!$C$30,=$E58*$F58,$130,=TEXT($G58*$H58,""$#,##0""),""$#,
+Management,Technical Leadership,Quarterback technical oversight and architecture review,EO Quarterback,"=ROUND(SUM(E2:E27)*0.25,='Estimate Settings'!$C$31,=$E59*$F59,0)",=TEXT($G59*$H59,""$#,##0""),"=TEXT(E28*F28,##0"")"
+Management,Project Management,Project coordination and management activities,EO Project Manager,"=ROUND(SUM(E2:E27)*0.20,='Estimate Settings'!$C$31,=$E60*$F60,0)",=TEXT($G60*$H60,""$#,##0""),"=TEXT(E29*F29,##0"")"
+,,,,,TOTAL HOURS,=SUM($G$33:$G$60),TOTAL COST,=TEXT(SUMPRODUCT($G$33:$G$60,$H$33:$H$60),""$#,##0""),,EO Sales Engineer: Update multipliers based on customer scope
