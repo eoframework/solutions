@@ -41,12 +41,44 @@ footer_logo_right: eof-tools/doc-tools/brands/default/assets/logos/eo-framework-
 
 ---
 
+### Engagement Scope
+**layout:** table
+
+**Sizing Parameters for This Engagement**
+
+This engagement is sized based on the following parameters:
+
+<!-- BEGIN SCOPE_SIZING_TABLE -->
+<!-- TABLE_CONFIG: widths=[30, 35, 35] -->
+| Category | Parameter | Scope |
+|----------|-----------|-------|
+| Solution Scope | Primary Features/Capabilities | 3-5 core features |
+| Solution Scope | Customization Level | Minimal configuration |
+| Integration | External System Integrations | 2 REST APIs |
+| Integration | Data Sources | 2-3 data sources |
+| User Base | Total Users | 50 users |
+| User Base | User Roles | 2-3 standard roles |
+| Data Volume | Data Processing Volume | Small scale standard volume |
+| Data Volume | Data Storage Requirements | 100 GB |
+| Technical Environment | Deployment Regions | Single region |
+| Technical Environment | Availability Requirements | Standard (99.5%) |
+| Technical Environment | Infrastructure Complexity | Basic single-tier |
+| Security & Compliance | Security Requirements | Basic authentication and encryption |
+| Security & Compliance | Compliance Frameworks | 1-2 basic standards |
+| Performance | Performance Requirements | Standard performance |
+| Environment | Deployment Environments | 2 environments (dev prod) |
+<!-- END SCOPE_SIZING_TABLE -->
+
+*Note: Changes to these parameters may require scope adjustment and additional investment.*
+
+---
+
 ### Solution Overview
 **layout:** visual
 
 **Cloud-Native Architecture for Scalable Operations**
 
-![Architecture Diagram](assets/images/architecture-diagram.png)
+![Architecture Diagram](assets/diagrams/architecture-diagram.png)
 
 - **Key Components**
   - **Presentation Layer:** Modern web and mobile interfaces with responsive design and real-time updates
@@ -165,14 +197,10 @@ footer_logo_right: eof-tools/doc-tools/brands/default/assets/logos/eo-framework-
 **Total Investment & Value**
 
 <!-- BEGIN COST_SUMMARY_TABLE -->
-<!-- TABLE_CONFIG: widths=[20, 12, 23, 13, 10, 10, 12] -->
+<!-- TABLE_CONFIG: widths=[25, 15, 15, 15, 10, 10, 10] -->
 | Cost Category | Year 1 List | Provider/Partner Credits | Year 1 Net | Year 2 | Year 3 | 3-Year Total |
-|---------------|-------------|-------------------------|------------|---------|---------|-----------------|
-| Cloud Infrastructure | $12,225 | ($990) | $11,235 | $12,225 | $12,225 | $35,685 |
-| Professional Services | $64,300 | ($5,000) | $59,300 | $0 | $0 | $59,300 |
-| Software Licenses & Subscriptions | $7,650 | $0 | $7,650 | $7,650 | $7,650 | $22,950 |
-| Support & Maintenance | $0 | $0 | $0 | $0 | $0 | $0 |
-| **TOTAL INVESTMENT** | **$84,175** | **($5,990)** | **$78,185** | **$19,875** | **$19,875** | **$117,935** |
+|---------------|-------------|-------------------------|------------|--------|--------|--------------|
+| **TOTAL INVESTMENT** | **$0** | **$0** | **$0** | **$0** | **$0** | **$0** |
 <!-- END COST_SUMMARY_TABLE -->
 
 **Provider/Partner Credits Breakdown (Year 1 Only):**
@@ -191,7 +219,7 @@ footer_logo_right: eof-tools/doc-tools/brands/default/assets/logos/eo-framework-
 
 **Total 3-Year TCO:** $117,935
 
-Detailed cost breakdown including equipment specifications, cloud consumption estimates, software licensing, and support contracts is provided in cost-breakdown.xlsx.
+Detailed infrastructure costs including equipment specifications, cloud consumption estimates, software licensing, and support contracts is provided in infrastructure-costs.xlsx.
 
 **SPEAKER NOTES:**
 
