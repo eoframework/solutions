@@ -51,6 +51,34 @@ Background information and business objectives.
 
 The following disaster recovery services and deliverables are included in this SOW:
 
+### Scope Parameters
+
+This engagement is sized based on the following parameters:
+
+<!-- TABLE_CONFIG: widths=[25, 35, 40] -->
+| Category | Parameter | Scope |
+|----------|-----------|-------|
+| Solution Scope | Application Tiers | 3-tier web application |
+| Solution Scope | RTO/RPO Requirements | RTO 4 hours RPO 1 hour |
+| Integration | Database Replication | Aurora Global Database |
+| Integration | Data Sources | Primary app database + S3 |
+| User Base | Total Users | 200 concurrent users |
+| User Base | User Roles | 3 roles (end-user admin ops) |
+| Data Volume | Database Size | 50 GB |
+| Data Volume | Backup Retention | 30 days retention |
+| Technical Environment | Primary AWS Region | us-east-1 |
+| Technical Environment | DR AWS Region | us-west-2 |
+| Technical Environment | Infrastructure Complexity | Pilot Light DR |
+| Security & Compliance | Security Requirements | Encryption at rest/transit IAM |
+| Security & Compliance | Compliance Frameworks | SOC2 Type II |
+| Performance | Failover Requirements | Automated failover <15 min |
+| Performance | Recovery Testing | Quarterly DR drills |
+| Environment | Deployment Environments | 3 environments (dev staging prod) |
+
+Table: Engagement Scope Parameters
+
+*Note: Changes to these parameters may require scope adjustment and additional investment.*
+
 ### Discovery & Business Continuity Planning Phase
 
 - Business impact assessment and critical application prioritization

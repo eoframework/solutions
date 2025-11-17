@@ -68,6 +68,18 @@ This Statement of Work defines the scope, deliverables, timeline, and terms for 
   - Configure monitoring and alerting for production visibility
   - Enable blue-green and canary deployments for safe releases
 
+### Scope Parameters
+
+This engagement is sized based on the following parameters:
+
+<!-- TABLE_CONFIG: widths=[25, 35, 40] -->
+| Category | Parameter | Scope |
+|----------|-----------|-------|
+
+Table: Engagement Scope Parameters
+
+*Note: Changes to these parameters may require scope adjustment and additional investment.*
+
 
 ## Out of Scope
 

@@ -79,6 +79,35 @@ The following services and deliverables are included in this SOW:
 - Testing, validation, and accuracy verification
 - Knowledge transfer and documentation
 
+### Scope Parameters
+
+This engagement is sized based on the following parameters:
+
+<!-- TABLE_CONFIG: widths=[25, 35, 40] -->
+| Category | Parameter | Scope |
+|----------|-----------|-------|
+| Solution Scope | Document Types | 2-3 document types |
+| Solution Scope | AI/ML Complexity | AWS Textract/Comprehend only |
+| Integration | External System Integrations | 2 REST APIs |
+| Integration | Data Sources | S3 and email ingestion |
+| User Base | Total Users | 50 users |
+| User Base | User Roles | 3 roles (submitter reviewer admin) |
+| Data Volume | Document Processing Volume | 1000-5000 docs/month |
+| Data Volume | Data Storage Requirements | 500 GB |
+| Technical Environment | Deployment Regions | Single AWS region (us-east-1) |
+| Technical Environment | Availability Requirements | Standard (99.5%) |
+| Technical Environment | Infrastructure Complexity | Serverless (Lambda S3 Textract) |
+| Security & Compliance | Security Requirements | Basic encryption IAM SSE-S3 |
+| Security & Compliance | Compliance Frameworks | SOC2 |
+| Performance | Accuracy Requirements | 95%+ extraction accuracy |
+| Performance | Processing Speed | Standard batch processing |
+| Environment | Deployment Environments | 2 environments (dev prod) |
+
+Table: Engagement Scope Parameters
+
+*Note: Changes to these parameters may require scope adjustment and additional investment.*
+
+
 ## Activities
 
 ### Phase 1 – Discovery & Assessment

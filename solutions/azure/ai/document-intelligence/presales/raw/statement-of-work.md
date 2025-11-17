@@ -79,6 +79,35 @@ The following services and deliverables are included in this SOW:
 - Testing, validation, and accuracy verification
 - Knowledge transfer and documentation
 
+### Scope Parameters
+
+This engagement is sized based on the following parameters:
+
+<!-- TABLE_CONFIG: widths=[25, 35, 40] -->
+| Category | Parameter | Scope |
+|----------|-----------|-------|
+| Solution Scope | Document Types | 3 document types (invoices receipts forms) |
+| Solution Scope | AI/ML Complexity | Azure Document Intelligence pre-built |
+| Integration | External System Integrations | 2 REST APIs (CRM ERP) |
+| Integration | Data Sources | Blob Storage and SharePoint |
+| User Base | Total Users | 75 users |
+| User Base | User Roles | 3 roles (submitter reviewer admin) |
+| Data Volume | Document Processing Volume | 2000 docs/month |
+| Data Volume | Data Storage Requirements | 250 GB |
+| Technical Environment | Deployment Regions | Single Azure region (East US) |
+| Technical Environment | Availability Requirements | Standard (99.5%) |
+| Technical Environment | Infrastructure Complexity | Serverless (Functions Blob Doc Intel) |
+| Security & Compliance | Security Requirements | RBAC encryption at rest/transit |
+| Security & Compliance | Compliance Frameworks | SOC2 |
+| Performance | Accuracy Requirements | 95%+ extraction accuracy |
+| Performance | Processing Speed | Batch processing |
+| Environment | Deployment Environments | 2 environments (dev prod) |
+
+Table: Engagement Scope Parameters
+
+*Note: Changes to these parameters may require scope adjustment and additional investment.*
+
+
 ## Activities
 
 ### Phase 1 – Discovery & Assessment

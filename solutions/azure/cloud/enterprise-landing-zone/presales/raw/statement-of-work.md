@@ -109,6 +109,35 @@ The following services and deliverables are included in this SOW:
 - Operational runbooks and procedures documentation
 - Knowledge transfer and training for operations teams
 
+### Scope Parameters
+
+This engagement is sized based on the following parameters:
+
+<!-- TABLE_CONFIG: widths=[25, 35, 40] -->
+| Category | Parameter | Scope |
+|----------|-----------|-------|
+| Solution Scope | Management Groups | 3-tier hierarchy |
+| Solution Scope | Subscriptions | 5-10 subscriptions |
+| Integration | Hybrid Connectivity | ExpressRoute circuit |
+| Integration | Identity Federation | Azure AD Connect sync |
+| User Base | Total Users | 500 Azure users |
+| User Base | User Roles | 10 custom RBAC roles |
+| Data Volume | Workloads to Onboard | 20-30 applications |
+| Data Volume | Policy Assignments | 50 policy assignments |
+| Technical Environment | Target Azure Regions | 2 regions (East US West US) |
+| Technical Environment | Availability Requirements | Standard (99.9%) |
+| Technical Environment | Infrastructure Complexity | Hub-spoke network topology |
+| Security & Compliance | Security Requirements | Azure Defender Standard |
+| Security & Compliance | Compliance Frameworks | SOC2 ISO27001 |
+| Performance | Cost Management | Azure Cost Management |
+| Performance | Governance Automation | Policy-driven governance |
+| Environment | Deployment Environments | Landing zones for dev staging prod |
+
+Table: Engagement Scope Parameters
+
+*Note: Changes to these parameters may require scope adjustment and additional investment.*
+
+
 ## Activities
 
 ### Phase 1 – Discovery & Architecture Design (Weeks 1-4)

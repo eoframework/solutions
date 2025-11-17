@@ -68,6 +68,34 @@ This Statement of Work defines the scope, deliverables, timeline, and terms for 
   - Cost optimization through Reserved Instances and Savings Plans
   - Security hardening, compliance validation, and knowledge transfer
 
+### Scope Parameters
+
+This engagement is sized based on the following parameters:
+
+<!-- TABLE_CONFIG: widths=[25, 35, 40] -->
+| Category | Parameter | Scope |
+|----------|-----------|-------|
+| Solution Scope | Workloads to Migrate | 5-10 VMs/applications |
+| Solution Scope | Migration Strategy | Rehost (lift-and-shift) |
+| Integration | Source Environment | VMware vSphere on-premises |
+| Integration | Hybrid Connectivity | AWS Direct Connect |
+| User Base | Total Users | 100 application users |
+| User Base | User Roles | 3 roles (admin operator user) |
+| Data Volume | Total Data to Migrate | 500 GB |
+| Data Volume | Database Migration | 2 databases (MySQL PostgreSQL) |
+| Technical Environment | Target AWS Region | us-east-1 |
+| Technical Environment | Availability Requirements | Standard (99.5%) |
+| Technical Environment | Infrastructure Complexity | EC2 RDS S3 standard |
+| Security & Compliance | Security Requirements | VPC Security Groups IAM |
+| Security & Compliance | Compliance Frameworks | SOC2 |
+| Performance | Migration Window | Weekend maintenance windows |
+| Performance | Performance Requirements | Match on-premises baseline |
+| Environment | Deployment Environments | 2 environments (dev prod) |
+
+Table: Engagement Scope Parameters
+
+*Note: Changes to these parameters may require scope adjustment and additional investment.*
+
 
 ## Out of Scope
 
