@@ -1,13 +1,13 @@
 ---
 presentation_title: Solution Briefing
-solution_name: Azure AI Document Intelligence
+solution_name: Azure Document Intelligence
 presenter_name: [Presenter Name]
 client_logo: eof-tools/doc-tools/brands/default/assets/logos/client_logo.png
 footer_logo_left: eof-tools/doc-tools/brands/default/assets/logos/consulting_company_logo.png
 footer_logo_right: eof-tools/doc-tools/brands/default/assets/logos/eo-framework-logo-real.png
 ---
 
-# Azure AI Document Intelligence - Solution Briefing
+# Azure Document Intelligence - Solution Briefing
 
 ## Slide Deck Structure for PowerPoint
 **10 Slides**
@@ -16,7 +16,7 @@ footer_logo_right: eof-tools/doc-tools/brands/default/assets/logos/eo-framework-
 **layout:** eo_title_slide
 
 **Presentation Title:** Solution Briefing
-**Subtitle:** Azure AI Document Intelligence
+**Subtitle:** Azure Document Intelligence
 **Presenter:** [Presenter Name] | [Current Date]
 **Logos:**
 - Client Logo (top center)
@@ -28,214 +28,227 @@ footer_logo_right: eof-tools/doc-tools/brands/default/assets/logos/eo-framework-
 ### Business Opportunity
 **layout:** two_column
 
-**Transforming Manual Document Processing with AI**
+**Automating Document Processing with Azure AI**
 
 - **Opportunity**
-  - Eliminate manual data entry bottlenecks and reduce processing time from hours to minutes
-  - Achieve 99%+ accuracy with AI-powered extraction replacing error-prone manual processes
-  - Scale effortlessly to handle volume fluctuations without adding headcount
+  - Eliminate manual data entry and reduce document processing time by 80% with AI-powered extraction
+  - Achieve 95%+ accuracy using pre-built and custom models trained on your document types
+  - Scale document processing automatically to handle peak volumes without additional staffing
 - **Success Criteria**
-  - 90% reduction in document processing time with measurable productivity gains
-  - 95%+ data extraction accuracy validated against business requirements
-  - ROI realization within 12-18 months through labor cost savings and efficiency gains
+  - 85% reduction in manual data entry with measurable FTE savings within 6 months
+  - 95%+ extraction accuracy validated against business-critical document types
+  - Full integration with existing LOB systems (ERP, CRM, SharePoint) operational by Month 4
+
+---
+
+
+### Engagement Scope
+**layout:** table
+
+**Sizing Parameters for This Engagement**
+
+This engagement is sized based on the following parameters:
+
+<!-- BEGIN SCOPE_SIZING_TABLE -->
+<!-- TABLE_CONFIG: widths=[30, 35, 35] -->
+| Category | Parameter | Scope |
+|----------|-----------|-------|
+| Solution Scope | Document Types | 3 document types (invoices receipts forms) |
+| Solution Scope | AI/ML Complexity | Azure Document Intelligence pre-built |
+| Integration | External System Integrations | 2 REST APIs (CRM ERP) |
+| Integration | Data Sources | Blob Storage and SharePoint |
+| User Base | Total Users | 75 users |
+| User Base | User Roles | 3 roles (submitter reviewer admin) |
+| Data Volume | Document Processing Volume | 2000 docs/month |
+| Data Volume | Data Storage Requirements | 250 GB |
+| Technical Environment | Deployment Regions | Single Azure region (East US) |
+| Technical Environment | Availability Requirements | Standard (99.5%) |
+| Technical Environment | Infrastructure Complexity | Serverless (Functions Blob Doc Intel) |
+| Security & Compliance | Security Requirements | RBAC encryption at rest/transit |
+| Security & Compliance | Compliance Frameworks | SOC2 |
+| Performance | Accuracy Requirements | 95%+ extraction accuracy |
+| Performance | Processing Speed | Batch processing |
+| Environment | Deployment Environments | 2 environments (dev prod) |
+<!-- END SCOPE_SIZING_TABLE -->
+
+*Note: Changes to these parameters may require scope adjustment and additional investment.*
 
 ---
 
 ### Solution Overview
 **layout:** visual
 
-**Serverless AI/ML Document Processing Architecture**
+**Azure AI-Powered Document Processing Platform**
 
 ![Architecture Diagram](assets/diagrams/architecture-diagram.png)
 
 - **AI/ML Services**
-  - Azure AI Document Intelligence for OCR and intelligent form/table extraction from documents
-  - Azure Cognitive Services Text Analytics for NLP entity recognition and document classification
-  - Azure AI Custom Vision for document classification and quality assurance on low-confidence results
+  - Azure Document Intelligence for OCR, layout analysis, and structured data extraction
+  - Pre-built models for invoices, receipts, contracts, and identity documents
+  - Custom models trained on your specific document types and business rules
 - **Platform Architecture**
-  - Serverless processing with Azure Functions and Logic Apps for scalable workflows
-  - Blob Storage, Cosmos DB metadata, and API Management for integration
-  - Azure Monitor and Application Insights for compliance and audit logging
+  - Azure Functions for serverless document processing workflows
+  - Cosmos DB for scalable metadata storage and extraction results
+  - Logic Apps and Power Automate for business process integration
+  - Azure Blob Storage for secure document ingestion and archival
 
 ---
 
 ### Implementation Approach
 **layout:** single
 
-**Proven Methodology for AI/ML Success**
+**Proven Methodology for Azure AI Success**
 
-- **Phase 1: Pilot (Months 1-2)**
-  - Deploy single document type to validate AI accuracy and business value
-  - Configure Document Intelligence/Text Analytics models with sample documents
-  - Establish human review workflow and quality benchmarks
-- **Phase 2: Expansion (Months 3-4)**
-  - Extend to additional document types and higher volumes
-  - Implement API integrations with downstream business systems
-  - Configure automated routing and exception handling
-- **Phase 3: Optimization (Months 5-6)**
-  - Fine-tune AI models based on production data and feedback
-  - Implement advanced features like multi-language support
-  - Complete training and transition to operations team
+- **Phase 1: Foundation & Model Training (Months 1-2)**
+  - Deploy Azure Document Intelligence resource and configure security
+  - Analyze document samples and select appropriate pre-built models
+  - Train custom models for organization-specific document types
+- **Phase 2: Pipeline Development (Months 3-4)**
+  - Build serverless processing pipeline with Azure Functions
+  - Implement confidence scoring and human review workflows
+  - Integrate with downstream systems via Logic Apps and APIs
+- **Phase 3: Optimization & Scale (Months 5-6)**
+  - Fine-tune models based on production accuracy metrics
+  - Implement advanced validation rules and exception handling
+  - Complete knowledge transfer and operations handover
 
 **SPEAKER NOTES:**
 
 *Risk Mitigation:*
-- Start with pilot to validate accuracy before full deployment
-- Human review ensures quality during AI model learning period
-- Agile approach allows course correction based on real results
+- Start with pre-built models to validate value before custom training
+- Human review workflow ensures quality during model learning period
+- Incremental rollout reduces risk of business disruption
 
 *Success Factors:*
-- Document samples for AI training (representative of production)
-- Business SMEs available for validation and review workflows
-- Clear success metrics defined upfront (accuracy, speed, cost)
+- Representative document samples for model training (minimum 50 per type)
+- Business SMEs available to validate extraction accuracy
+- Clear success metrics defined upfront (accuracy, speed, cost savings)
 
 *Talking Points:*
-- Pilot validates business case with minimal investment
-- Phased approach reduces risk and delivers incremental value
-- Full automation achieved by Month 6 with proven accuracy
+- Phase 1 focuses on model accuracy before building production pipeline
+- Pre-built models accelerate time-to-value for common document types
+- Custom models unlock value from organization-specific documents
+- Human review ensures quality assurance during initial deployment
 
 ---
 
 ### Timeline & Milestones
 **layout:** table
 
-**Path to Value Realization**
+**Path to Intelligent Document Processing**
 
 <!-- TABLE_CONFIG: widths=[10, 25, 15, 50] -->
 | Phase No | Phase Description | Timeline | Key Deliverables |
 |----------|-------------------|----------|-----------------|
-| Phase 1 | Pilot & Validation | Months 1-2 | Single document type automated, 95%+ accuracy validated, Human review workflow operational |
-| Phase 2 | Expansion & Integration | Months 3-4 | Multiple document types supported, API integrations live, Volume processing at scale |
-| Phase 3 | Optimization & Handoff | Months 5-6 | AI models fine-tuned, Advanced features deployed, Operations team trained |
+| Phase 1 | Foundation & Model Training | Months 1-2 | Azure environment configured, Document Intelligence models trained, Initial accuracy validated at 90%+ |
+| Phase 2 | Pipeline Development | Months 3-4 | Processing pipeline operational, LOB system integrations complete, Human review workflows functional |
+| Phase 3 | Optimization & Scale | Months 5-6 | Model accuracy optimized to 95%+, Full production deployment, Operations team trained and certified |
 
 **SPEAKER NOTES:**
 
 *Quick Wins:*
-- First documents processed by AI within 2 weeks of start
-- Accuracy validation and ROI confirmation by Month 2
-- Measurable productivity gains visible in Month 3
+- First documents processed automatically - Week 3
+- Pre-built invoice/receipt models operational - Month 1
+- Custom model trained on primary document type - Month 2
 
 *Talking Points:*
-- Pilot proves value before major investment
-- Integration in Month 3-4 connects to business workflows
-- Full handoff to operations by Month 6 with complete training
+- Early value delivery with pre-built models while custom models train
+- Phased approach validates accuracy before full production deployment
+- Operations team fully self-sufficient by project completion
+- Continuous model improvement built into post-deployment operations
 
 ---
 
 ### Success Stories
 **layout:** single
 
-**Proven AI/ML Document Processing Results**
+**Proven Results in Document Automation**
 
-- **Client Success: Healthcare Insurance Provider**
-  - **Client:** Regional health insurer processing 50,000+ claims monthly
-  - **Challenge:** Manual processing taking 24-48 hours, 8% error rate, high labor costs limiting scalability
-  - **Solution:** Azure AI Document Intelligence with Text Analytics and Custom Vision for automated claims processing
-  - **Results:** 92% faster processing (24hrs → 2hrs), 99.2% accuracy, $2.1M annual savings, ROI in 11 months
-  - **Testimonial:** "The AI accuracy exceeded our expectations. We've redeployed staff to complex cases requiring human judgment, dramatically improving both efficiency and job satisfaction." — **Sarah Martinez, VP Operations**, HealthFirst Insurance
+- **Client Success: Regional Healthcare Provider**
+  - **Client:** Mid-size healthcare network processing 50,000+ patient documents monthly
+  - **Challenge:** 8 FTEs dedicated to manual data entry, 72-hour processing backlog, 15% error rate causing compliance issues
+  - **Solution:** Deployed Azure Document Intelligence with custom models for patient intake forms, insurance claims, and medical records, integrated with Epic EHR system
+  - **Results:** 85% reduction in manual processing (6.8 FTE savings), processing time reduced from 72 hours to 4 hours, accuracy improved to 97%, $420K annual labor cost savings
+  - **Testimonial:** "Azure Document Intelligence transformed our patient onboarding process. What used to take our team 3 days now happens in hours, and with better accuracy. The integration with Epic was seamless." — **Sarah Mitchell, VP of Operations**, Regional Healthcare Network
 
 ---
 
 ### Our Partnership Advantage
 **layout:** two_column
 
-**Why Partner with Us for AI/ML**
+**Why Partner with Us**
 
 - **What We Bring**
-  - 10+ years delivering Azure AI/ML solutions with proven results
-  - 50+ successful Document Intelligence implementations across healthcare, finance, government
-  - Microsoft Gold Partner with Azure Advanced Specialization
-  - Certified solutions architects with Document Intelligence/Text Analytics expertise
-  - Dedicated AI/ML practice with data scientists and ML engineers
+  - Microsoft Solutions Partner with AI and Data specialization
+  - 50+ Azure Document Intelligence deployments across healthcare, finance, and insurance
+  - Certified Azure AI Engineers with custom model training expertise
+  - Pre-built accelerators for common document types and integrations
+  - Direct Microsoft escalation path for complex scenarios
 - **Value to You**
-  - Pre-built document processing templates accelerate deployment
-  - Proven AI model training methodology reduces time to accuracy
-  - Direct Microsoft Azure specialist support through partner network
-  - Best practices from 50+ implementations avoid common pitfalls
-  - Comprehensive training ensures team self-sufficiency
+  - Proven deployment methodology reduces risk and accelerates time-to-value
+  - Pre-trained model templates for invoices, contracts, and forms
+  - Best practices from 50+ similar implementations
+  - Comprehensive knowledge transfer ensures team self-sufficiency
+  - Post-deployment optimization services improve accuracy over time
 
 ---
 
 ### Investment Summary
 **layout:** data_viz
 
-**Total Investment & Value with Azure Partner Credits**
+**Total Investment & Value**
 
 <!-- BEGIN COST_SUMMARY_TABLE -->
 <!-- TABLE_CONFIG: widths=[20, 12, 23, 13, 10, 10, 12] -->
 | Cost Category | Year 1 List | Provider/Partner Credits | Year 1 Net | Year 2 | Year 3 | 3-Year Total |
 |---------------|-------------|-------------------------|------------|---------|---------|-----------------|
-| Cloud Infrastructure | $18,528 | ($3,690) | $14,838 | $18,528 | $18,528 | $51,894 |
-| Professional Services | $82,250 | ($10,000) | $72,250 | $0 | $0 | $72,250 |
-| Software Licenses | $2,904 | $0 | $2,904 | $2,904 | $2,904 | $8,712 |
-| Support & Maintenance | $2,670 | $0 | $2,670 | $2,670 | $2,670 | $8,010 |
-| **TOTAL INVESTMENT** | **$106,352** | **($13,690)** | **$92,662** | **$24,102** | **$24,102** | **$140,866** |
+| Cloud Infrastructure | $14,400 | ($5,000) | $9,400 | $14,400 | $14,400 | $38,200 |
+| Professional Services | $72,000 | $0 | $72,000 | $0 | $0 | $72,000 |
+| Software Licenses & Subscriptions | $960 | $0 | $960 | $960 | $960 | $2,880 |
+| Support & Maintenance | $1,200 | $0 | $1,200 | $1,200 | $1,200 | $3,600 |
+| **TOTAL INVESTMENT** | **$88,560** | **($5,000)** | **$83,560** | **$16,560** | **$16,560** | **$116,680** |
 <!-- END COST_SUMMARY_TABLE -->
 
-**Azure Partner Credits Breakdown (Year 1 Only):**
-- **Microsoft Partner Services Credit:** $10,000 (applied to architecture & AI/ML integration)
-- **Azure AI Services Consumption Credit:** $3,690 (Document Intelligence/Text Analytics first-year usage)
-- **Total Credits Applied:** $13,690
+**Provider/Partner Credits Breakdown (Year 1 Only):**
+- **Azure AI Services Credit:** $5,000 (30% of eligible Azure Document Intelligence consumption Year 1)
+- **Total Credits Applied:** $5,000
 
-**Net Client Investment:**
-- **Year 1:** $92,662 (after $13,690 in partner credits)
-- **3-Year Total:** $140,866 (vs. $154,556 list price)
-- **You Save:** $13,690 (13% discount through Microsoft partnership)
+**Note:** Credits are based on Microsoft Azure Consumption Commitment and AI Services programs. Actual credits may vary based on existing Microsoft agreements.
 <!-- END COST_SUMMARY_TABLE -->
 
-**Small Scope Specifications:**
-- **Document Volume:** 50,000 pages/month (Document Intelligence Layout + Prebuilt Models)
-- **User Base:** 50-100 department users
-- **Document Types:** 3-5 common types (invoices, purchase orders, contracts)
-- **Deployment:** Single Azure region (East US)
-- **Support:** Business hours coverage (not 24/7)
+**Annual Operating Costs (Years 2-3):** $16,560/year
+- Cloud Infrastructure: $14,400/year
+- Software Licenses & Subscriptions: $960/year
+- Support & Maintenance: $1,200/year
 
-**Annual Operating Costs (Years 2-3):** $24,102/year
-- Cloud Infrastructure (Azure AI/ML services): $18,528/year
-- Software Licenses & Monitoring: $2,904/year
-- Support & Maintenance: $2,670/year
+**Total 3-Year TCO:** $116,680
 
-**Total 3-Year TCO:** $154,556
-
-**Professional Services Breakdown (310 hours):**
-- Discovery & architecture (100 hours): Requirements, Azure design, documentation
-- Implementation (180 hours): Infrastructure, AI/ML integration, development, testing
-- Training & support (30 hours): Knowledge transfer and 30-day hypercare
-
-Detailed cost breakdown including Azure service consumption, Document Intelligence pricing, and support costs is provided in cost-breakdown.xlsx.
+Detailed infrastructure costs including Azure service consumption, software licensing, and support contracts is provided in infrastructure-costs.xlsx.
 
 **SPEAKER NOTES:**
 
-*Value Positioning with Credits (Small Scope):*
-- **Lead with credits:** "You qualify for $13.7K in Azure partner credits"
-- This is a **department-level pilot** with immediate cost reduction through partnerships
-- Net Year 1 investment of **$92.7K** (not $106K) after partner credits
-- Small scope = lower risk, faster ROI validation, PLUS partner funding
-
-*Credit Program Talking Points:*
-- **Microsoft Partner Services Credit ($10K):** Applied to architecture design and AI/ML integration
-- **Azure AI Services Credit ($3.7K):** First-year consumption credit for Document Intelligence/Text Analytics usage
-- Emphasize: **Real credits**, not marketing—applied to actual Azure bills
-- We handle all paperwork and credit application—no burden on client
+*Value Positioning:*
+- Year 1 investment of $84K delivers $420K+ annual savings (5:1 ROI)
+- Azure credits reduce initial cloud costs by 35%
+- Ongoing costs of $17K/year far outweigh FTE savings
 
 *Cost Breakdown Strategy:*
-- Frame as **"$92.7K net investment"** not "$106K project"
-- Professional services (310 hours) focused on core AI/ML setup, partner credits reduce by $10K
-- Cloud costs sized for 50K pages/month with $3.7K Year 1 credit
-- No hardware or infrastructure CapEx required - 100% OpEx model
+- Cloud infrastructure scales with document volume
+- Professional services include model training expertise
+- Credits demonstrate our Microsoft partnership leverage
+- Support ensures continuous model optimization
 
 *Handling Objections:*
-- "Can we do this ourselves?" - Partner credits only available through certified Microsoft partners
-- "Are credits guaranteed?" - Yes, subject to standard Microsoft partner program approval (we have 95% approval rate)
-- "What if we need more capacity?" - Azure serverless auto-scales; additional volume may qualify for more credits
-- "When do we get credits?" - Applied throughout Year 1 as services are consumed
+- "Can we use pre-built models only?" - Explain custom model value for accuracy
+- "What if accuracy doesn't meet targets?" - Human review workflow ensures quality
+- "How does this compare to other OCR solutions?" - Azure AI provides intelligent extraction, not just OCR
+- "What about document security?" - Azure compliance certifications (SOC 2, HIPAA, etc.)
 
-*Small Scope Talking Points with Credits:*
-- Compare $92.7K net Year 1 to cost of 1-2 FTEs doing manual data entry ($80K-$160K/year)
-- Processing 50K pages/month = ~600K pages/year automated
-- If current manual cost is $2-5 per page, ROI is 10-25x in year one
-- **Partner credits make this a no-brainer financially**
-- Pilot proves accuracy with your documents before scaling to enterprise volumes
+*Talking Points:*
+- Compare $84K investment to $420K annual savings potential
+- Break-even achieved within first 3 months post-deployment
+- Azure consumption model means you pay for what you use
+- Transparent pricing with no hidden costs
 
 ---
 
@@ -245,56 +258,169 @@ Detailed cost breakdown including Azure service consumption, Document Intelligen
 **Your Path Forward**
 
 **Immediate Actions:**
-1. **Decision:** Executive approval for pilot phase by [specific date]
-2. **Kickoff:** Target pilot start date [30 days from approval]
-3. **Team Formation:** Identify business SME, IT contact, document samples
+1. **Document Samples:** Provide 50+ samples per document type for model training
+2. **Decision:** SOW approval and contract execution by [Target Date]
+3. **Kickoff:** Project initiation scheduled for [Start Date]
 
 **30-Day Launch Plan:**
-- **Week 1:** Contract finalization and Azure account setup
-- **Week 2:** Document sample collection and AI model configuration
-- **Week 3:** Document Intelligence/Text Analytics training and initial testing
-- **Week 4:** First production documents processed with validation
+- **Week 1:** Azure environment setup and security configuration
+- **Week 2:** Document analysis and model selection workshop
+- **Week 3:** Initial model training with sample documents
+- **Week 4:** First automated extractions validated
 
 **SPEAKER NOTES:**
 
 *Transition from Investment:*
-- "Now that we've covered the investment and proven ROI, let's talk about getting started"
-- Emphasize pilot approach reduces risk and validates value quickly
-- Show we can start processing documents within 30 days
+- "With the investment clear, let's discuss how we begin"
+- Emphasize document samples are key to model accuracy
+- Position kickoff as straightforward and well-structured
 
 *Walking Through Next Steps:*
-- Decision needed for pilot only (not full commitment)
-- Pilot validates accuracy and ROI before expansion
-- Collect representative document samples now to accelerate start
-- Our team is ready to begin immediately upon approval
+- Document samples are critical - quality affects accuracy
+- We provide templates for organizing and labeling samples
+- First results visible within 30 days of kickoff
+- Emphasize partnership - "we'll work alongside your team"
 
 *Talking Points:*
-- Pilot can start within 30 days of approval
-- You'll see actual AI processing results in first month
-- Decision point after pilot with validated accuracy metrics
-- Risk-free approach - prove value before full investment
+- Our team is ready to start immediately upon approval
+- Week 1-2 are preparation, real AI training begins Week 3
+- You'll see tangible extraction results within first month
+- Document sample collection can begin immediately
 
 ---
 
 ### Thank You
 **layout:** thank_you
 
-
 - **Your Account Manager:** [Name, Title] | [Email] | [Phone]
 
 **SPEAKER NOTES:**
 
 *Closing Strong:*
-- Thank them for their time and consideration
-- Reiterate excitement about transforming their document processing
-- Emphasize partnership approach and commitment to their success
-- Offer to provide additional technical deep-dive or proof of concept
-- Confirm next steps and timeline for decision
+- Thank them for their time and engagement
+- Reiterate the document processing transformation opportunity
+- Introduce team members who will support implementation
+- Make yourself available for questions
 
 *Call to Action:*
-- Schedule follow-up meeting to discuss pilot approach
-- Request document samples for AI model assessment
-- Identify key stakeholders for pilot kickoff planning
-- Set timeline for decision and pilot start date
+- "What questions do you have about the AI models?"
+- "Which document types are your highest priority?"
+- "What would you need to see to move forward?"
+- Be prepared to discuss document sample requirements
+
+*Handling Q&A:*
+- Listen actively and acknowledge concerns about AI accuracy
+- Offer proof-of-concept for specific document types
+- Schedule follow-up to review detailed technical architecture
+- Send meeting summary within 24 hours
+
+*Closing Techniques:*
+- "Shall we schedule a document analysis workshop?"
+- "Would you prefer to start with invoices or contracts?"
+- "Can we schedule a follow-up with your IT security team?"
+- Don't leave without clear next steps and timeline
 
 ---
+
+## Presentation Notes
+
+**Speaking Points for Each Slide**
+
+**Slide 1 - Title Slide:**
+- Welcome attendees and introduce yourself
+- Set the tone: This is about transforming document processing with AI
+- Mention we'll cover the business case, Azure solution, and implementation
+
+**Slide 2 - Business Opportunity:**
+- Focus on document processing pain points most organizations share
+- Quantify the opportunity (80% time reduction, 95%+ accuracy)
+- Emphasize scalability - no additional staff for volume increases
+- Get alignment on specific document types and volumes to process
+
+**Slide 3 - Solution Overview:**
+- Walk through Azure Document Intelligence capabilities
+- Distinguish between pre-built models (fast) and custom models (accurate)
+- Show how the serverless architecture scales automatically
+- Emphasize security and compliance built into Azure platform
+
+**Slide 4 - Implementation Approach:**
+- Emphasize model training is critical first step
+- Pre-built models provide quick wins while custom models train
+- Human review workflow ensures accuracy during learning period
+- Knowledge transfer ensures long-term self-sufficiency
+
+**Slide 5 - Timeline & Milestones:**
+- Show progressive value delivery starting Month 1
+- Emphasize quick wins with pre-built models
+- Final accuracy targets achieved through production optimization
+- Operations team fully capable by project end
+
+**Slide 6 - Success Stories:**
+- Healthcare case study relatable to most industries
+- Quantified results: 85% reduction, 97% accuracy, $420K savings
+- Testimonial builds credibility and trust
+- Emphasize integration with existing systems (Epic in this case)
+
+**Slide 7 - Our Partnership Advantage:**
+- Microsoft Solutions Partner provides credibility
+- 50+ deployments demonstrates deep experience
+- Pre-built accelerators reduce implementation risk
+- Direct Microsoft escalation shows partnership strength
+
+**Slide 8 - Investment Summary:**
+- Walk through costs showing clear ROI potential
+- $5K Azure credits reduce first-year investment
+- Ongoing costs minimal compared to current manual processing costs
+- Emphasize transparent pricing model
+
+**Slide 9 - Next Steps:**
+- Document samples are the key first step
+- Clear 30-day plan shows immediate momentum
+- First results visible within first month
+- Partnership approach emphasized
+
+**Slide 10 - Thank You:**
+- Open for questions focusing on AI capabilities
+- Offer proof-of-concept for specific documents
+- Schedule follow-up with technical team if needed
+- Don't leave without clear next steps
+
+**Q&A Preparation**
+
+**Common Questions & Responses:**
+
+**Q: "How accurate is the AI extraction?"**
+A: Pre-built models achieve 90-95% accuracy out of the box. Custom models trained on your specific documents typically reach 95-98% accuracy. We implement confidence scoring so low-confidence extractions route to human review.
+
+**Q: "What happens when the AI makes mistakes?"**
+A: We implement a human review workflow for extractions below confidence threshold. This ensures 100% accuracy for business-critical data while the AI handles routine processing.
+
+**Q: "How long does it take to train custom models?"**
+A: With 50+ labeled samples per document type, we can train an initial model in 1-2 weeks. Model accuracy improves as we feed it more production data over time.
+
+**Q: "What about data security and privacy?"**
+A: Azure Document Intelligence processes documents within your Azure tenant. Data never leaves your environment. Azure provides SOC 2, HIPAA, GDPR, and other compliance certifications.
+
+**Appendix Slides (If Needed)**
+
+**A1: Detailed Azure Architecture Diagram**
+**A2: Pre-built Model Capabilities Matrix**
+**A3: Custom Model Training Process**
+**A4: Integration Patterns (Logic Apps, Power Automate)**
+**A5: Azure Security & Compliance Certifications**
+**A6: Detailed Cost Breakdown by Azure Service**
+
+---
+
+## PowerPoint Template Specifications
+
+**Design Guidelines:**
+- Company brand colors and fonts
+- Consistent slide layout and formatting
+- Professional graphics and icons
+- Client logo on each slide (if approved)
+
+**File Format:** .pptx
+**Slide Size:** 16:9 widescreen
+**Font:** [Company standard font]
+**Colors:** [Company brand palette]

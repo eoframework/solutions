@@ -1,29 +1,61 @@
-Phase,Work Package,Task Description,Resource Type,Estimated Hours,Rate,Cost Estimate,Dependencies,Risk Level,Notes
-Discovery,Azure Requirements Gathering,Conduct stakeholder interviews for Azure cloud strategy,EO Engineer,40,$150,"=TEXT(E2*F2,""$#,##0"")",,Medium,Focus on governance scalability and business alignment
-Discovery,Current Environment Assessment,Analyze existing infrastructure and Azure readiness,EO Engineer,32,$200,"=TEXT(E3*F3,""$#,##0"")",,Medium,Include identity networking and application assessment
-Discovery,Azure Services Assessment,Evaluate Azure services and landing zone requirements,EO Engineer,24,$200,"=TEXT(E4*F4,""$#,##0"")",,Medium,Focus on management groups policies and compliance
-Discovery,Compliance Review,Assess governance security and regulatory requirements,EO Engineer,16,$175,"=TEXT(E5*F5,""$#,##0"")",,Medium,Include Azure Policy and compliance frameworks
-Planning,Azure Landing Zone Design,Design Azure landing zone architecture and governance model,EO Engineer,48,$200,"=TEXT(E6*F6,""$#,##0"")",,Medium,Include management groups policies and blueprints
-Planning,Identity and Access Design,Design Azure AD integration and access management strategy,EO Engineer,32,$180,"=TEXT(E7*F7,""$#,##0"")",,Medium,Include SSO RBAC conditional access and PIM
-Planning,Network Architecture Design,Design Azure networking security and hybrid connectivity,EO Engineer,24,$175,"=TEXT(E8*F8,""$#,##0"")",,Medium,Include hub-spoke VNet peering and security
-Planning,Project Planning,Develop Azure implementation timeline and resource allocation,EO Engineer,24,$140,"=TEXT(E9*F9,""$#,##0"")",,Medium,Coordinate with infrastructure security and compliance teams
-Development,Management Groups and Subscriptions,Configure Azure management groups subscription structure and policies,EO Engineer,40,$160,"=TEXT(E10*F10,""$#,##0"")",,Medium,Include policy inheritance governance and billing
-Development,Azure Policy Implementation,Implement Azure policies governance controls and compliance,EO Engineer,60,$145,"=TEXT(E11*F11,""$#,##0"")",,Medium,Include policy definitions initiatives and remediation
-Development,Network Infrastructure,Build Azure networking VNet peering and hybrid connectivity,EO Engineer,48,$140,"=TEXT(E12*F12,""$#,##0"")",,Medium,Include ExpressRoute VPN and network security
-Development,Identity and Access Implementation,Implement Azure AD integration access controls and SSO,EO Engineer,40,$155,"=TEXT(E13*F13,""$#,##0"")",,Medium,Include MFA conditional access and privileged access
-Development,Monitoring and Operations,Build Azure monitoring logging alerting and operational tools,EO Engineer,32,$130,"=TEXT(E14*F14,""$#,##0"")",,Medium,Include Azure Monitor Log Analytics and automation
-Testing,Unit Testing,Develop automated tests for all solution components,EO Engineer,32,$120,"=TEXT(E15*F15,""$#,##0"")",,Medium,Include technology-specific testing frameworks
-Testing,Integration Testing,Test system integrations data flows and external dependencies,EO Engineer,40,$120,"=TEXT(E16*F16,""$#,##0"")",,Medium,Include end-to-end workflow validation
-Testing,Performance Testing,Conduct load performance and scalability testing,EO Engineer,24,$140,"=TEXT(E17*F17,""$#,##0"")",,Medium,Include production-like environment and stress testing
-Testing,Security Testing,Perform security assessments penetration testing and compliance validation,EO Engineer,16,$175,"=TEXT(E18*F18,""$#,##0"")",,Medium,Include vulnerability scanning and compliance checks
-Testing,User Acceptance Testing,Coordinate UAT with business users and stakeholders,EO Engineer,32,$150,"=TEXT(E19*F19,""$#,##0"")",,Medium,Include training feedback collection and sign-off
-Deployment,Production Deployment,Deploy solution to production environment with monitoring,EO Engineer,24,$160,"=TEXT(E20*F20,""$#,##0"")",,Medium,Include blue-green deployment rollback and validation
-Deployment,Go-Live Support,Provide comprehensive support during initial production rollout,EO Engineer,48,$110,"=TEXT(E21*F21,""$#,##0"")",,Medium,Include 24/7 support monitoring and issue resolution
-Training,Administrator Training,Train system administrators and technical support teams,EO Engineer,16,$130,"=TEXT(E22*F22,""$#,##0"")",,Medium,Include hands-on technical training and certification
-Training,End User Training,Train business users on solution functionality and workflows,EO Engineer,24,$120,"=TEXT(E23*F23,""$#,##0"")",,Medium,Include role-based training documentation and support
-Training,Documentation,Create comprehensive technical and user documentation,EO Engineer,32,$110,"=TEXT(E24*F24,""$#,##0"")",,Medium,Include runbooks troubleshooting guides and best practices
-Closeout,Knowledge Transfer,Transfer solution ownership to operations and support teams,EO Engineer,16,$140,"=TEXT(E25*F25,""$#,##0"")",,Medium,Include operational procedures escalation and maintenance
-Closeout,Performance Baseline,Establish performance metrics monitoring baselines and SLAs,EO Engineer,8,$130,"=TEXT(E26*F26,""$#,##0"")",,Medium,Include KPI definition monitoring setup and reporting
-Management,Technical Leadership,Quarterback technical oversight and architecture review,EO Quarterback,"=ROUND(SUM(E2:E26)*0.25,0)",$180,"=TEXT(E27*F27,""$#,##0"")",,Medium,25% of engineering effort
-Management,Project Management,Project coordination and management activities,EO Project Manager,"=ROUND(SUM(E2:E26)*0.20,0)",$150,"=TEXT(E28*F28,""$#,##0"")",,Low,20% of engineering effort
-,,,     TOTAL HOURS,1119,   TOTAL COST,"=TEXT(E2*F2+E3*F3+E4*F4+E5*F5+E6*F6+E7*F7+E8*F8+E9*F9+E10*F10+E11*F11+E12*F12+E13*F13+E14*F14+E15*F15+E16*F16+E17*F17+E18*F18+E19*F19+E20*F20+E21*F21+E22*F22+E23*F23+E24*F24+E25*F25+E26*F26+E27*F27+E28*F28,""$#,##0"")",,,Total Enterprise Landing Zone project cost estimate
+# SCOPE ASSUMPTIONS - BASELINE (MULTIPLIER 1.0),,,,,,,,,,
+Category,Baseline Assumption,Current Scope,Small (1x),Medium (2x),Large (3x),Notes,,,,,
+Solution Scope,Management Groups,3-tier hierarchy,3-tier hierarchy,4-5 tier hierarchy,6+ tier complex hierarchy,Azure management group structure,,,,,
+Solution Scope,Subscriptions,5-10 subscriptions,5-10 subscriptions,10-25 subscriptions,25+ subscriptions,Subscription organization model,,,,,
+Integration,Hybrid Connectivity,ExpressRoute circuit,VPN only,ExpressRoute,ExpressRoute + VPN redundancy,On-premises to Azure connectivity,,,,,
+Integration,Identity Federation,Azure AD Connect sync,Basic AD sync,AD Connect with PTA,AD FS federation,Identity synchronization method,,,,,
+User Base,Total Users,500 Azure users,100-500 users,500-2000 users,2000+ users,Users with Azure access,,,,,
+User Base,User Roles,10 custom RBAC roles,5-10 roles,10-20 roles,20+ roles with PIM,Role-based access control,,,,,
+Data Volume,Workloads to Onboard,20-30 applications,10-30 apps,30-50 apps,50+ applications,Applications deploying to landing zone,,,,,
+Data Volume,Policy Assignments,50 policy assignments,25-50 policies,50-100 policies,100+ policies,Azure Policy governance,,,,,
+Technical Environment,Target Azure Regions,2 regions (East US West US),Single region,2-3 regions,4+ global regions,Azure region deployment,,,,,
+Technical Environment,Availability Requirements,Standard (99.9%),Standard (99.5%),High availability (99.9%),Mission critical (99.95%+),Platform availability SLA,,,,,
+Technical Environment,Infrastructure Complexity,Hub-spoke network topology,Basic hub-spoke,Advanced hub-spoke with FW,Multi-hub global mesh,Network architecture complexity,,,,,
+Security & Compliance,Security Requirements,Azure Defender Standard,Basic security center,Azure Defender Standard,Defender for Cloud advanced,Cloud security posture management,,,,,
+Security & Compliance,Compliance Frameworks,SOC2 ISO27001,1-2 basic standards,2-3 industry standards,Multiple complex frameworks,Regulatory compliance requirements,,,,,
+Performance,Cost Management,Azure Cost Management,Basic budgets,Cost Management + optimization,FinOps practice,Cloud cost governance,,,,,
+Performance,Governance Automation,Policy-driven governance,Manual governance,Policy automation,GitOps policy management,Governance automation level,,,,,
+Environment,Deployment Environments,Landing zones for dev staging prod,2 landing zones,3-4 landing zones,5+ specialized landing zones,Landing zone segregation,,,,,
+,,,,,,,,,,
+# ESTIMATE SETTINGS - EO Sales Engineer Updates Multipliers Based on Customer Scope,,,,,,,,,,
+Phase,Variable Name,Multiplier,Description / Applies To Tasks,,,,,,,
+Discovery,DISCOVERY_MX,1,"All Discovery phase tasks (Requirements Gathering, Environment Assessment, Azure Services Assessment, Compliance Review)",,,,,,,
+Planning,PLANNING_MX,1,"All Planning phase tasks (Landing Zone Design, Identity Design, Network Architecture, Project Planning)",,,,,,,
+Development,DEVELOPMENT_MX,1,"All Development phase tasks (Management Groups, Policy Implementation, Network Infrastructure, Identity Implementation, Monitoring)",,,,,,,
+Testing,TESTING_MX,1,"All Testing phase tasks (Unit Testing, Integration Testing, Performance Testing, Security Testing, UAT)",,,,,,,
+Deployment,DEPLOYMENT_MX,1,"All Deployment phase tasks (Production Deployment, Go-Live Support)",,,,,,,
+Training,TRAINING_MX,1,"All Training phase tasks (Administrator Training, End User Training, Documentation)",,,,,,,
+Closeout,CLOSEOUT_MX,1,"All Closeout phase tasks (Knowledge Transfer, Performance Baseline)",,,,,,,
+Management,MANAGEMENT_MX,1.5,Project Management overhead - 20% of actual engineering hours,,,,,,,
+Leadership,LEADERSHIP_MX,1.5,Quarterback/Technical Leadership overhead - 25% of actual engineering hours,,,,,,,
+,,,,,,,,,,
+# EFFORT ESTIMATE
+Phase,Work Package,Task Description,Resource Type,Base Hours,Effort Multiplier,Actual Hours,Rate,Cost Estimate,Dependencies,Notes
+Discovery,Azure Requirements Gathering,Conduct stakeholder interviews for Azure cloud strategy,EO Engineer,40,='Estimate Settings'!$C$24,=$E33*$F33,$150,"=TEXT($G33*$H33,""$#,##0"")",,Focus on governance scalability and business alignment
+Discovery,Current Environment Assessment,Analyze existing infrastructure and Azure readiness,EO Engineer,32,='Estimate Settings'!$C$24,=$E34*$F34,$200,"=TEXT($G34*$H34,""$#,##0"")",,Include identity networking and application assessment
+Discovery,Azure Services Assessment,Evaluate Azure services and landing zone requirements,EO Engineer,24,='Estimate Settings'!$C$24,=$E35*$F35,$200,"=TEXT($G35*$H35,""$#,##0"")",,Focus on management groups policies and compliance
+Discovery,Compliance Review,Assess governance security and regulatory requirements,EO Engineer,16,='Estimate Settings'!$C$24,=$E36*$F36,$175,"=TEXT($G36*$H36,""$#,##0"")",,Include Azure Policy and compliance frameworks
+Planning,Azure Landing Zone Design,Design Azure landing zone architecture and governance model,EO Engineer,48,='Estimate Settings'!$C$25,=$E37*$F37,$200,"=TEXT($G37*$H37,""$#,##0"")",Requirements Gathering,Include management groups policies and blueprints
+Planning,Identity and Access Design,Design Azure AD integration and access management strategy,EO Engineer,32,='Estimate Settings'!$C$25,=$E38*$F38,$180,"=TEXT($G38*$H38,""$#,##0"")",Environment Assessment,Include SSO RBAC conditional access and PIM
+Planning,Network Architecture Design,Design Azure networking security and hybrid connectivity,EO Engineer,24,='Estimate Settings'!$C$25,=$E39*$F39,$175,"=TEXT($G39*$H39,""$#,##0"")",Azure Services Assessment,Include hub-spoke VNet peering and security
+Planning,Project Planning,Develop Azure implementation timeline and resource allocation,EO Engineer,24,='Estimate Settings'!$C$25,=$E40*$F40,$140,"=TEXT($G40*$H40,""$#,##0"")",Landing Zone Design,Coordinate with infrastructure security and compliance teams
+Development,Management Groups and Subscriptions,Configure Azure management groups subscription structure and policies,EO Engineer,40,='Estimate Settings'!$C$26,=$E41*$F41,$160,"=TEXT($G41*$H41,""$#,##0"")",Landing Zone Design,Include policy inheritance governance and billing
+Development,Azure Policy Implementation,Implement Azure policies governance controls and compliance,EO Engineer,60,='Estimate Settings'!$C$26,=$E42*$F42,$145,"=TEXT($G42*$H42,""$#,##0"")",Management Groups,Include policy definitions initiatives and remediation
+Development,Network Infrastructure,Build Azure networking VNet peering and hybrid connectivity,EO Engineer,48,='Estimate Settings'!$C$26,=$E43*$F43,$140,"=TEXT($G43*$H43,""$#,##0"")",Network Architecture,Include ExpressRoute VPN and network security
+Development,Identity and Access Implementation,Implement Azure AD integration access controls and SSO,EO Engineer,40,='Estimate Settings'!$C$26,=$E44*$F44,$155,"=TEXT($G44*$H44,""$#,##0"")",Identity Design,Include MFA conditional access and privileged access
+Development,Monitoring and Operations,Build Azure monitoring logging alerting and operational tools,EO Engineer,32,='Estimate Settings'!$C$26,=$E45*$F45,$130,"=TEXT($G45*$H45,""$#,##0"")",Policy Implementation,Include Azure Monitor Log Analytics and automation
+Testing,Unit Testing,Develop automated tests for all solution components,EO Engineer,32,='Estimate Settings'!$C$27,=$E46*$F46,$120,"=TEXT($G46*$H46,""$#,##0"")",Policy Implementation,Include technology-specific testing frameworks
+Testing,Integration Testing,Test system integrations data flows and external dependencies,EO Engineer,40,='Estimate Settings'!$C$27,=$E47*$F47,$120,"=TEXT($G47*$H47,""$#,##0"")",Monitoring Setup,Include end-to-end workflow validation
+Testing,Performance Testing,Conduct load performance and scalability testing,EO Engineer,24,='Estimate Settings'!$C$27,=$E48*$F48,$140,"=TEXT($G48*$H48,""$#,##0"")",Integration Testing,Include production-like environment and stress testing
+Testing,Security Testing,Perform security assessments penetration testing and compliance validation,EO Engineer,16,='Estimate Settings'!$C$27,=$E49*$F49,$175,"=TEXT($G49*$H49,""$#,##0"")",Performance Testing,Include vulnerability scanning and compliance checks
+Testing,User Acceptance Testing,Coordinate UAT with business users and stakeholders,EO Engineer,32,='Estimate Settings'!$C$27,=$E50*$F50,$150,"=TEXT($G50*$H50,""$#,##0"")",Security Testing,Include training feedback collection and sign-off
+Deployment,Production Deployment,Deploy landing zone to production environment,EO Engineer,24,='Estimate Settings'!$C$28,=$E51*$F51,$160,"=TEXT($G51*$H51,""$#,##0"")",UAT,Include blue-green deployment rollback and validation
+Deployment,Go-Live Support,Provide comprehensive support during initial production rollout,EO Engineer,48,='Estimate Settings'!$C$28,=$E52*$F52,$110,"=TEXT($G52*$H52,""$#,##0"")",Production Deployment,Include 24/7 support monitoring and issue resolution
+Training,Administrator Training,Train system administrators and technical support teams,EO Engineer,16,='Estimate Settings'!$C$29,=$E53*$F53,$130,"=TEXT($G53*$H53,""$#,##0"")",Production Deployment,Include hands-on technical training and certification
+Training,End User Training,Train business users on solution functionality and workflows,EO Engineer,24,='Estimate Settings'!$C$29,=$E54*$F54,$120,"=TEXT($G54*$H54,""$#,##0"")",Administrator Training,Include role-based training documentation and support
+Training,Documentation,Create comprehensive technical and user documentation,EO Engineer,32,='Estimate Settings'!$C$29,=$E55*$F55,$110,"=TEXT($G55*$H55,""$#,##0"")",End User Training,Include runbooks troubleshooting guides and best practices
+Closeout,Knowledge Transfer,Transfer solution ownership to operations and support teams,EO Engineer,16,='Estimate Settings'!$C$30,=$E56*$F56,$140,"=TEXT($G56*$H56,""$#,##0"")",Documentation,Include operational procedures escalation and maintenance
+Closeout,Performance Baseline,Establish performance metrics monitoring baselines and SLAs,EO Engineer,8,='Estimate Settings'!$C$30,=$E57*$F57,$130,"=TEXT($G57*$H57,""$#,##0"")",Knowledge Transfer,Include KPI definition monitoring setup and reporting
+Management,Technical Leadership,Quarterback technical oversight and architecture review,EO Quarterback,"=ROUND(SUM($G$33:$G$57)*0.10,0)",='Estimate Settings'!$C$32,=$E58*$F58,$200,"=TEXT($G58*$H58,""$#,##0"")",,Azure architecture review and technical escalation support
+Management,Project Management,Project coordination planning and management activities,EO Project Manager,"=ROUND(SUM($G$33:$G$57)*0.10,0)",='Estimate Settings'!$C$31,=$E59*$F59,$150,"=TEXT($G59*$H59,""$#,##0"")",,Includes weekly status reporting risk management and stakeholder coordination
+,,,,,TOTAL HOURS,"=SUM($G$33:$G$59)",TOTAL COST,"=TEXT(SUMPRODUCT($G$33:$G$59,$H$33:$H$59),""$#,##0"")",,EO Sales Engineer: Update phase-based multipliers in Estimate Settings based on customer landing zone scope

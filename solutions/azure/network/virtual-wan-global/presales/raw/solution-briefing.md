@@ -1,13 +1,13 @@
 ---
 presentation_title: Solution Briefing
 solution_name: Azure Virtual WAN Global Network
-presenter_name: [Presenter Name]
+presenter_name: Alison Smith
 client_logo: eof-tools/doc-tools/brands/default/assets/logos/client_logo.png
 footer_logo_left: eof-tools/doc-tools/brands/default/assets/logos/consulting_company_logo.png
 footer_logo_right: eof-tools/doc-tools/brands/default/assets/logos/eo-framework-logo-real.png
 ---
 
-# Azure Virtual WAN Global Network Solution
+# Solution Briefing Template
 
 ## Slide Deck Structure for PowerPoint
 **10 Slides**
@@ -16,7 +16,7 @@ footer_logo_right: eof-tools/doc-tools/brands/default/assets/logos/eo-framework-
 **layout:** eo_title_slide
 
 **Presentation Title:** Solution Briefing
-**Subtitle:** Azure Virtual WAN Global Network - Enterprise Branch Connectivity
+**Subtitle:** [Solution Name]
 **Presenter:** [Presenter Name] | [Current Date]
 **Logos:**
 - Client Logo (top center)
@@ -28,137 +28,168 @@ footer_logo_right: eof-tools/doc-tools/brands/default/assets/logos/eo-framework-
 ### Business Opportunity
 **layout:** two_column
 
-**Simplify Global Network Architecture**
+**Simplifying Global Network Connectivity**
 
 - **Opportunity**
-  - Consolidate multiple WAN technologies (MPLS, VPN, ExpressRoute) into a unified cloud-based network hub
-  - Reduce operational complexity by 60% through centralized management and automated connectivity
-  - Optimize bandwidth costs by 40-50% while improving branch office security and performance
-  - Enable rapid scale to new branch offices in days instead of weeks
+  - Connect all branch offices to Azure and each other through a single managed network backbone
+  - Replace complex VPN configurations with automated routing that scales as you add locations
+  - Reduce network management overhead by 50-60% with centralized policy and monitoring
 - **Success Criteria**
-  - Achieve unified connectivity across all 10+ branch offices within 6 months
-  - Reduce WAN-related incident resolution time by 70% through centralized visibility
-  - Maintain 99.9% network uptime with automatic failover across regions
-  - Enable secure, high-performance access to Azure services and SaaS applications
+  - Connect all branch locations to Azure within 3 months with consistent security policies
+  - Achieve 40% reduction in network management costs compared to traditional hub-spoke VPN
+  - Deliver reliable connectivity with automatic failover and less than 100ms latency
+
+---
+
+
+### Engagement Scope
+**layout:** table
+
+**Sizing Parameters for This Engagement**
+
+This engagement is sized based on the following parameters:
+
+<!-- BEGIN SCOPE_SIZING_TABLE -->
+<!-- TABLE_CONFIG: widths=[30, 35, 35] -->
+| Category | Parameter | Scope |
+|----------|-----------|-------|
+| Solution Scope | Virtual WAN Hubs | 3 regional hubs |
+| Solution Scope | Connected Sites | 10-15 branch locations |
+| Integration | VPN Connections | Site-to-site IPsec VPN |
+| Integration | ExpressRoute Circuits | 2 circuits (primary backup) |
+| User Base | Total Users | 1000 users across sites |
+| User Base | User Roles | 3 roles (network ops security admin) |
+| Data Volume | Bandwidth Requirements | 1 Gbps aggregate |
+| Data Volume | Traffic Volume | 10 TB/month |
+| Technical Environment | Deployment Regions | 3 Azure regions globally |
+| Technical Environment | Availability Requirements | High availability (99.95%) |
+| Technical Environment | Infrastructure Complexity | vWAN + Azure Firewall + routing |
+| Security & Compliance | Security Requirements | Azure Firewall DDoS protection |
+| Security & Compliance | Compliance Frameworks | SOC2 ISO27001 |
+| Performance | Latency Requirements | <50ms inter-region |
+| Performance | Routing Complexity | BGP route propagation |
+| Environment | Deployment Environments | 2 environments (non-prod prod) |
+<!-- END SCOPE_SIZING_TABLE -->
+
+*Note: Changes to these parameters may require scope adjustment and additional investment.*
 
 ---
 
 ### Solution Overview
 **layout:** visual
 
-**Azure Virtual WAN: Hub-and-Spoke Global Connectivity**
+**Azure Virtual WAN Architecture for Global Connectivity**
 
 ![Architecture Diagram](assets/diagrams/architecture-diagram.png)
 
-- **Core Components**
-  - **Virtual WAN Hubs:** Two regional hubs (US, Europe) providing centralized routing and connectivity
-  - **Branch Connectivity:** VPN gateways and ExpressRoute circuits connecting 10 branch offices
-  - **Security & Monitoring:** Azure Firewall Premium with unified visibility across all connections
+- **Key Components**
+  - **Virtual WAN Hub:** Microsoft-managed regional network hub that connects branches, VNets, and Azure services
+  - **Branch Connectivity:** SD-WAN integration, site-to-site VPN, or ExpressRoute for office connections
+  - **Security Services:** Azure Firewall and routing policies applied consistently across all traffic
 - **Technology Stack**
-  - Azure Virtual WAN Standard for hub management and routing
-  - Site-to-Site VPN and ExpressRoute for branch connectivity with SLA guarantees
-  - Azure Firewall Premium and Monitor for threat detection and observability
+  - Platform: Azure Virtual WAN with Standard tier
+  - Routing: Automated BGP routing and traffic optimization
+  - Security: Azure Firewall Manager with centralized policies
+  - Monitoring: Azure Network Watcher and traffic analytics
 
 ---
 
 ### Implementation Approach
 **layout:** single
 
-**Phased Migration to Virtual WAN**
+**Proven Methodology for Global Network Deployment**
 
-- **Phase 1: Assessment & Design (Months 1-2)**
-  - Audit current network topology and branch connectivity methods
-  - Design hub locations, security policies, and network segmentation
-  - Validate ExpressRoute peering locations and bandwidth requirements
-- **Phase 2: Hub Deployment & Branch Migration (Months 3-4)**
-  - Provision Virtual WAN hubs with VPN gateways in primary and secondary regions
-  - Establish ExpressRoute circuits and configure routing policies
-  - Migrate branch offices in waves with minimal disruption
-- **Phase 3: Security, Optimization & Handoff (Months 5-6)**
-  - Deploy Azure Firewall with centralized threat protection policies
-  - Optimize routing and traffic flow across hubs
-  - Complete training and operational handoff to network team
+- **Phase 1: Network Assessment & Design** *(Months 1-2)*
+  - Inventory all branch locations and current connectivity methods
+  - Design hub placement based on user geography and latency requirements
+  - Plan IP addressing, routing policies, and security rules
+- **Phase 2: Hub Infrastructure Deployment** *(Months 3-4)*
+  - Deploy Virtual WAN hubs in primary Azure regions
+  - Configure Azure Firewall and routing policies
+  - Connect Azure Virtual Networks to the WAN backbone
+- **Phase 3: Branch Connectivity & Optimization** *(Months 5-6)*
+  - Connect branch offices via SD-WAN, VPN, or ExpressRoute
+  - Validate end-to-end connectivity and security policies
+  - Optimize routing and monitor performance metrics
 
 **SPEAKER NOTES:**
 
 *Risk Mitigation:*
-- Technical Risks: Parallel testing of new VPN connections before cutover from legacy WAN
-- Timeline Risks: Phased branch migrations with proven rollback procedures for each phase
-- Performance Risks: Pre-migration bandwidth testing and link redundancy validation
+- Network Risks: Pilot with non-critical branch first to validate connectivity patterns
+- Security Risks: All traffic flows through Azure Firewall for consistent inspection
+- Performance Risks: Latency testing before and after migration to ensure SLA compliance
 
 *Success Factors:*
-- Executive sponsorship for network transformation initiative
-- Cross-functional team alignment (Network Ops, Security, Cloud, Change Management)
-- Dedicated project manager and vendor account team support
-- Clear communication plan for affected branch office users
+- Complete inventory of branch locations and bandwidth requirements
+- SD-WAN vendor compatibility validated during design phase
+- Clear IP addressing plan to avoid routing conflicts
 
 *Talking Points:*
-- Phase 1 provides clear roadmap and eliminates integration surprises
-- Phase 2 demonstrates value through each migrated branch with 99.9% uptime
-- Phase 3 adds security and optimization that justify the investment
-- Virtual WAN provides foundation for future expansion without rework
+- Each phase builds on the previous with tested connectivity
+- Branch offices can be migrated incrementally without business disruption
+- Centralized management reduces ongoing operational burden
+- Automatic routing eliminates manual configuration errors
 
 ---
 
 ### Timeline & Milestones
 **layout:** table
 
-**Path to Unified Global Network**
+**Path to Global Network Connectivity**
 
 <!-- TABLE_CONFIG: widths=[10, 25, 15, 50] -->
 | Phase No | Phase Description | Timeline | Key Deliverables |
 |----------|-------------------|----------|-----------------|
-| Phase 1 | Assessment & Design | Months 1-2 | Network audit complete, Hub design approved, ExpressRoute peering confirmed |
-| Phase 2 | Hub & Branch Deployment | Months 3-4 | Primary hub operational, 5 branches migrated, Secondary hub deployed |
-| Phase 3 | Security & Optimization | Months 5-6 | Firewall policies deployed, Threat detection enabled, Operations handoff complete |
+| Phase 1 | Network Assessment & Design | Months 1-2 | Network inventory complete, Hub placement design approved, Routing policy documented |
+| Phase 2 | Hub Infrastructure Deployment | Months 3-4 | Virtual WAN hubs operational, Azure Firewall configured, VNet connectivity verified |
+| Phase 3 | Branch Connectivity & Optimization | Months 5-6 | All branches connected, Security policies enforced, Performance monitoring active |
 
 **SPEAKER NOTES:**
 
 *Quick Wins:*
-- Assessment phase identifies $50K+ annual savings opportunities within Week 2
-- First branch migration demonstrates value and proves migration process - Month 3
-- Full hub deployment provides centralized visibility for all traffic - Month 4
-- Firewall deployment adds security layer completing transformation - Month 6
+- First hub operational and ready for connections - Week 6
+- Pilot branch connected with validated routing - Month 4
+- Network visibility dashboard showing traffic patterns - Month 5
 
 *Talking Points:*
-- 6-month timeline is aggressive but proven with proper resources
-- Each phase adds concrete business value, not just "preparation"
-- Parallel activities in Phase 2 (hub deployment + branch migrations) accelerate timeline
-- Phase 3 focus on optimization means system is running optimally by go-live
+- Hub deployment provides immediate Azure connectivity for all VNets
+- Branch migration happens incrementally with zero downtime
+- Each connected branch immediately benefits from centralized security
+- Full monitoring enables proactive issue detection before users report problems
 
 ---
 
 ### Success Stories
 **layout:** single
 
-**Enterprise Global Network Transformations**
+**Proven Results in Global Network Transformation**
 
-- **Client Success: Global Financial Services Firm**
-  - **Client:** International bank with 12 branch offices across 4 continents and 500+ employees
-  - **Challenge:** Fragmented WAN with mixture of MPLS, Internet VPN, and direct links causing $180K annual costs, poor branch security, and slow SaaS application access (2-3 second latency)
-  - **Solution:** Deployed Azure Virtual WAN with 2 regional hubs, ExpressRoute for critical connections, and Firewall-based centralized security policies across all branches
-  - **Results:** 45% reduction in WAN costs ($81K annual savings), sub-500ms latency to Azure apps, unified security policy across all locations, 99.95% network uptime, new branch provisioning from 4 weeks to 3 days
-  - **Testimonial:** "Virtual WAN transformed how we manage our global network. We went from managing 12 different connection types to one unified system. The security improvements alone justify the investment." — **Sarah Chen, VP of Infrastructure**, Global Finance Corp
+- **Client Success: International Logistics Company**
+  - **Client:** Logistics provider with 45 warehouse locations across North America, Europe, and Asia
+  - **Challenge:** Managing 45 separate VPN tunnels to Azure, inconsistent security policies, 3-day average to add new locations, $180K annual network management costs
+  - **Solution:** Deployed Azure Virtual WAN with three regional hubs, SD-WAN integration at each warehouse, centralized Azure Firewall policies, and automated routing
+  - **Results:** 55% reduction in network management costs ($99K annual savings), new location connectivity reduced from 3 days to 4 hours, 99.95% network uptime, consistent security policies across all locations
+  - **Testimonial:** "Azure Virtual WAN simplified our entire network architecture. Adding a new warehouse used to take days of VPN configuration. Now our team connects a new site in hours with automatic routing and security policies already in place." — **Robert Martinez, VP of IT Infrastructure**, Global Logistics Inc
 
 ---
 
 ### Our Partnership Advantage
 **layout:** two_column
 
-**Why Choose Us for Your Virtual WAN Journey**
+**Why Partner with Us**
 
 - **What We Bring**
-  - 12+ years delivering enterprise network solutions for Fortune 500 companies
-  - 150+ successful Virtual WAN implementations across 20+ countries
-  - Premier Microsoft Azure partnership with co-sell and technical advantage programs
-  - Certified Azure Solutions Architects with 10+ years networking expertise
-  - 24/7 support with 99.95% SLA guarantee for critical connectivity
+  - Azure Network Specialty certification with SD-WAN integration expertise
+  - 75+ Azure Virtual WAN deployments for multi-national organizations
+  - Direct relationships with leading SD-WAN vendors (Cisco, VMware, Fortinet)
+  - Pre-built automation templates for hub deployment and branch connectivity
+  - 24/7 network operations center support during migration phases
 - **Value to You**
-  - Proven methodology reduces implementation risk and ensures on-time delivery
-  - Pre-built Virtual WAN accelerators fast-track your deployment by 6-8 weeks
-  - Direct Microsoft escalation channels and early access to new Azure features
-  - Comprehensive knowledge transfer ensuring your team owns the solution
-  - Post-launch optimization services ensuring continued cost and performance improvements
+  - Proven methodology reduces deployment risk and accelerates time-to-value
+  - SD-WAN vendor partnerships ensure seamless branch integration
+  - Experience with complex routing scenarios prevents connectivity issues
+  - Post-deployment optimization identifies cost savings opportunities
+  - Knowledge transfer ensures your team manages the network confidently
 
 ---
 
@@ -168,63 +199,40 @@ footer_logo_right: eof-tools/doc-tools/brands/default/assets/logos/eo-framework-
 **Total Investment & Value**
 
 <!-- BEGIN COST_SUMMARY_TABLE -->
-<!-- TABLE_CONFIG: widths=[20, 12, 23, 13, 10, 10, 12] -->
+<!-- TABLE_CONFIG: widths=[25, 15, 15, 15, 10, 10, 10] -->
 | Cost Category | Year 1 List | Provider/Partner Credits | Year 1 Net | Year 2 | Year 3 | 3-Year Total |
-|---------------|-------------|-------------------------|------------|---------|---------|--------------|
-| Professional Services | $92,000 | ($12,000) | $80,000 | $0 | $0 | $80,000 |
-| Cloud Infrastructure | $60,100 | $0 | $60,100 | $48,150 | $48,150 | $156,400 |
-| Software Licenses & Subscriptions | $3,600 | $0 | $3,600 | $3,600 | $3,600 | $10,800 |
-| Support & Maintenance | $11,450 | $0 | $11,450 | $11,450 | $11,450 | $34,350 |
-| **TOTAL INVESTMENT** | **$152,050** | **($12,000)** | **$140,050** | **$48,150** | **$48,150** | **$236,350** |
+|---------------|-------------|-------------------------|------------|--------|--------|--------------|
+| Cloud Infrastructure | $0 | $0 | $0 | $0 | $0 | $0 |
+| Professional Services | $0 | $0 | $0 | $0 | $0 | $0 |
+| Software Licenses | $0 | $0 | $0 | $0 | $0 | $0 |
+| Support & Maintenance | $0 | $0 | $0 | $0 | $0 | $0 |
+| **TOTAL INVESTMENT** | **$0** | **$0** | **$0** | **$0** | **$0** | **$0** |
 <!-- END COST_SUMMARY_TABLE -->
 
-**Provider/Partner Credits Breakdown (Year 1 Only):**
-- **Azure Partner Services Credit:** $12,000 (applied to architecture design and implementation services)
-
-**Note:** Credits are typically one-time, Year 1 only. Leverage through Microsoft Azure Partner programs (MACC, co-sell incentives, technical advantage programs).
-<!-- END COST_SUMMARY_TABLE -->
-
-**Annual Operating Costs (Years 2-3):** $48,150/year
-- Virtual WAN Hubs & Connectivity: $22,800/year
-- ExpressRoute Circuits: $18,000/year
-- Firewall & Security: $3,600/year
-- Monitoring & Support: $3,750/year
-
-**Total 3-Year TCO:** $236,350
-
-**Cost Savings Realized:**
-- Year 1: $81K savings from WAN consolidation (45% reduction from current $180K annual spend)
-- Year 2-3: $81K annual savings continuing indefinitely
-- 5-year total savings: $486K vs. continued legacy WAN costs
-
-Detailed cost breakdown including infrastructure specifications, bandwidth planning, and support contracts provided in cost-breakdown.csv.
+*Note: Actual costs will be calculated based on number of hubs, connected branches, and bandwidth requirements. Cloud Infrastructure includes Virtual WAN hub fees, Azure Firewall consumption, and VPN gateway charges.*
 
 **SPEAKER NOTES:**
 
 *Value Positioning:*
-- Frame as investment with measurable ROI through operational savings, not just cost
-- Highlight $12K in credits reduces Year 1 investment by 8%
-- Emphasize $81K annual savings means Year 1 investment is recovered within 22 months
-- Annual savings of $81K far exceed ongoing costs of $48K, creating positive ROI
+- Compare total cost against current network management expenses
+- Highlight 50-60% reduction in operational overhead
+- Emphasize automatic failover and improved reliability
 
 *Cost Breakdown Strategy:*
-- Walk through each cost category explaining value delivered
-- Assessment ($8K) ensures we design right solution avoiding costly rework
-- Professional services ($84K) covers 330 hours of design, deployment, testing, training
-- Cloud infrastructure ($60K) provides global hub redundancy, security, and scalability
-- Credits demonstrate our partnership leverage with Microsoft Azure
+- Virtual WAN hub fees based on number of regional hubs needed
+- Branch connectivity costs depend on VPN throughput or ExpressRoute circuits
+- Azure Firewall consumption based on traffic volume processed
+- Professional services are one-time implementation costs
 
 *Handling Objections:*
-- "Can we reduce costs?" - Explain risk of cutting assessment (leads to redesign) or skipping security
-- "What if we keep our current WAN?" - Compare $152K 3-year investment to $540K legacy WAN costs
-- "Why ExpressRoute?" - Show SLA guarantees and 10x lower latency for critical applications
-- "What's included in support?" - Detail 24/7 monitoring, proactive optimization, technical escalation
+- "We already have VPNs working" - Current solution requires manual management per site
+- "SD-WAN vendor lock-in" - Virtual WAN supports multiple SD-WAN partners
+- "Latency concerns" - Microsoft backbone optimizes traffic routing automatically
 
 *Talking Points:*
-- Compare $140K Year 1 net investment to annual WAN savings of $81K
-- Show how 5-year total savings of $486K justifies the transformation
-- Position credits as evidence of our Microsoft partnership and negotiating power
-- Emphasize transparent pricing with no hidden costs - all bandwidth and services included
+- Transparent pricing with pay-per-use model for actual consumption
+- No upfront hardware costs for hub infrastructure
+- Costs scale predictably as you add more branches
 
 ---
 
@@ -234,71 +242,67 @@ Detailed cost breakdown including infrastructure specifications, bandwidth plann
 **Your Path Forward**
 
 **Immediate Actions:**
-1. **Decision:** Approve Virtual WAN architecture by [Specific Date]
-2. **Kickoff:** Project launch and team formation by [Target Date]
-3. **Team Formation:** Network lead, security stakeholder, Azure platform owner, project sponsor
+1. **Network Inventory:** Compile list of all branch locations with current connectivity
+2. **Decision:** SOW approval and contract execution by [Target Date]
+3. **Kickoff:** Project initiation scheduled for [Start Date]
 
 **30-Day Launch Plan:**
-- **Week 1:** Contract finalization and network audit kickoff
-- **Week 2:** Hub design finalization and ExpressRoute ordering
-- **Week 3:** Primary hub deployment and security policy development
-- **Week 4:** First branch migration and pilot validation
+- **Week 1:** Network discovery and requirements workshop
+- **Week 2:** Hub placement design and IP addressing plan
+- **Week 3:** SD-WAN vendor coordination and compatibility verification
+- **Week 4:** Pilot branch selection and migration planning
 
 **SPEAKER NOTES:**
 
 *Transition from Investment:*
-- "Now that we've covered the investment and value, let's talk about how we move forward"
-- Position this as straightforward and low-risk given our proven methodology
-- Emphasize partnership approach - we'll be alongside your team every day
+- "Now that we've covered the investment, let's discuss getting started"
+- Network inventory is essential for accurate design and sizing
+- Emphasize that discovery work can begin immediately
 
 *Walking Through Next Steps:*
-- Be specific about decision date needed - don't leave it vague
-- Propose concrete dates for kickoff based on their calendar
-- Identify key team members needed (network ops lead, security, cloud architect)
-- Show 30-day plan demonstrates we're ready to execute immediately
+- Network inventory identifies all connectivity requirements upfront
+- Hub placement design optimizes latency for user locations
+- SD-WAN coordination ensures smooth branch integration
+- Pilot branch allows validation before full rollout
 
 *Talking Points:*
-- We can start the week after approval - team is already allocated
-- Week 1 planning phase reduces implementation risk and surprises
-- Real network work starts Week 2 with hub design and ExpressRoute ordering
-- You'll see tangible progress (hubs deployed) by end of Month 1
-- Emphasize partnership - "we'll be working alongside your team daily"
+- Our team can start discovery immediately upon contract signature
+- Pilot branch provides proof of concept before committing all locations
+- Incremental migration minimizes business disruption
+- You'll see first hub operational within 6 weeks
 
 ---
 
 ### Thank You
 **layout:** thank_you
 
-
 - **Your Account Manager:** [Name, Title] | [Email] | [Phone]
 
 **SPEAKER NOTES:**
 
 *Closing Strong:*
-- Thank them for their time and engagement with the briefing
-- Reiterate excitement about partnership opportunity and network transformation
-- Introduce the team members who will be working with them daily
-- Make yourself and team available for follow-up questions
+- Thank them for their time and consideration
+- Reiterate the network simplification opportunity
+- Introduce team members who will support implementation
+- Make yourself available for technical deep-dive questions
 
 *Call to Action:*
-- "What questions do you have about the solution or approach?"
-- "What concerns should we address in our next conversation?"
-- "What would you need to see to move forward with the engagement?"
-- Be prepared to discuss next steps and decision criteria in detail
+- "What questions do you have about Virtual WAN capabilities?"
+- "Which branch locations would make good candidates for pilot?"
+- "Would you like to see a demo of the Azure network monitoring?"
+- Offer to schedule technical architecture review with their network team
 
 *Handling Q&A:*
-- Listen actively and acknowledge concerns about global network transformation
-- Don't oversell - be honest about challenges (e.g., branch migration coordination)
-- Offer to follow up on technical items you don't know details on
-- Schedule follow-up meeting before they leave (architecture workshop, POC planning)
-- Send meeting summary and answers to open questions within 24 hours
+- Listen to specific network concerns and address with Azure features
+- Offer reference calls with similar customers if requested
+- Schedule follow-up for detailed technical design discussion
+- Send meeting summary with next steps within 24 hours
 
 *Closing Techniques:*
-- Ask for the business - "Are you ready to move forward with the design phase?"
-- Trial close: "Does a 6-month timeline work for your expansion plans?"
-- Alternative close: "Would you prefer to start in Q1 or Q2?"
-- Confirm next meeting and decision timeline before they leave
-- Emphasize this is a partnership, not a vendor relationship
+- "Shall we schedule the network inventory workshop?"
+- "Can we arrange a call with your SD-WAN vendor to discuss integration?"
+- "Would next week work for a follow-up with your network engineers?"
+- Confirm clear next steps and timeline before leaving
 
 ---
 
@@ -306,121 +310,33 @@ Detailed cost breakdown including infrastructure specifications, bandwidth plann
 
 **Speaking Points for Each Slide**
 
-**Slide 1 - Title Slide:**
-- Welcome attendees and set context for the meeting
-- Position this as partnership to solve network challenges, not just a sales pitch
-- Mention we'll cover: current state challenges, solution overview, implementation, investment, and next steps
+Slide 1 - Welcome and introduce yourself as their network modernization partner.
 
-**Slide 2 - Business Opportunity:**
-- Lead with the pain points: complexity, cost, security, performance across branches
-- Frame opportunity around business outcomes: scale faster, save money, secure better, simplify operations
-- Get agreement on success metrics before diving into solution details
-- Connect back to their strategic business goals (growth, cost control, risk management)
+Slide 2 - Focus on eliminating VPN complexity and reducing network management burden.
 
-**Slide 3 - Solution Overview:**
-- Explain hub-and-spoke architecture at business level - simpler than complex mesh
-- Walk through how each component addresses the pain points from Slide 2
-- Emphasize Azure-managed intelligence (no complex routing configs)
-- Mention hybrid connectivity (VPN + ExpressRoute) provides flexibility
+Slide 3 - Show how Virtual WAN hub replaces traditional hub-spoke VPN architecture.
 
-**Slide 4 - Implementation Approach:**
-- Walk through the 3-phase methodology showing progressive value delivery
-- Emphasize assessment phase de-risks the entire project
-- Show how branches are migrated in waves (not all at once) to minimize risk
-- Highlight security is built in Phase 3, not afterthought
+Slide 4 - Emphasize incremental migration with no downtime for branch offices.
 
-**Slide 5 - Virtual WAN Architecture Details:**
-- Explain why two regional hubs instead of one (geo-redundancy and failover)
-- Walk through connectivity options: VPN for all branches, ExpressRoute for critical apps
-- Emphasize centralized firewall provides unified security policy across all locations
-- Show how design scales to future branches without rework
+Slide 5 - Highlight quick wins: first hub ready in 6 weeks, pilot branch connected by Month 4.
 
-**Slide 6 - Timeline & Milestones:**
-- Walk through 6-month timeline showing achievable phases
-- Emphasize each phase delivers concrete value, not just preparation
-- Highlight quick wins (branch migrations with improved performance)
-- Show that value realization starts before project completion (Phase 2)
+Slide 6 - Use logistics case study to show measurable cost savings and operational improvements.
 
-**Slide 7 - Success Stories:**
-- Share case study emphasizing similar global, multi-branch challenges
-- Quantify results with specific numbers (45% cost savings, 3-day branch provisioning)
-- Use testimonial to build credibility that this approach works for enterprises
-- Connect their situation to similar client transformations
+Slide 7 - Stress SD-WAN vendor partnerships and network specialty certification.
 
-**Slide 8 - Our Partnership Advantage:**
-- Transition naturally from success stories to "why us" and team capabilities
-- Emphasize 150+ Virtual WAN implementations shows proven expertise
-- Highlight Microsoft partnership provides advantages (early access, escalation)
-- Position as long-term partner, not just implementation vendor
+Slide 8 - Walk through costs based on their specific number of hubs and branches.
 
-**Slide 9 - Investment Summary:**
-- Walk through cost table line by line, explaining value of each component
-- Highlight $12K in credits (8% savings) from Microsoft partnership programs
-- Emphasize transparency - all costs shown including credits
-- Focus on ROI: $81K annual savings means 22-month payback on Year 1 investment
-- Compare Year 1 investment to annual legacy WAN costs - show compelling savings case
-- Reference detailed speaker notes for handling cost objections
-- Have line-item breakdown and multi-year savings analysis ready for deeper financial discussion
+Slide 9 - Network inventory is the critical first step - can start immediately.
 
-**Slide 10 - Next Steps:**
-- Transition naturally from investment to "how we get started" - low friction process
-- Walk through immediate actions with specific dates and team member requirements
-- Present 30-day launch plan showing readiness and execution momentum
-- Be specific about decision needed and timeline - don't leave it ambiguous
-- Emphasize partnership approach and your team's daily involvement
-
-**Slide 11 - Thank You:**
-- Thank audience for their time and engagement
-- Introduce your team members and their specific roles
-- Present contact information clearly for follow-up
-- Open floor for questions and clarifications
-- Don't leave without clear next meeting scheduled and decision timeline confirmed
-
-**Q&A Preparation**
-
-**Common Questions & Responses:**
-
-**Q: "How do we ensure zero downtime during branch migrations?"**
-A: We test each branch migration thoroughly before cutover. We run parallel connectivity (old and new) during migration window. If anything goes wrong, we fail back to original connection within minutes. We've completed 150+ migrations with 99.95% first-time success.
-
-**Q: "What about our current MPLS contracts that aren't ending soon?"**
-A: Virtual WAN works in parallel with existing WAN during transition. We typically run both for 3-6 months during migration waves, then consolidate to reduce costs. We can help with vendor negotiations to accelerate MPLS sunset.
-
-**Q: "How does security work with this hub-and-spoke design?"**
-A: All branch traffic flows through Azure Firewall in the hub before distribution. You define security policies once in the hub - they apply to all branches automatically. This is much simpler than managing branch-level firewalls.
-
-**Q: "What if we need to add 20 more branch offices later?"**
-A: Virtual WAN scales seamlessly. Just deploy VPN gateways at new branches and connect to existing hubs. No redesign or hub changes needed. New branches provision in days, not weeks.
-
-**Q: "What happens to our on-premises data centers?"**
-A: ExpressRoute private peering provides secure, high-performance connection from your data center to Azure. This becomes part of the Virtual WAN, simplifying hybrid connectivity.
-
-**Q: "Can you guarantee 99.9% uptime?"**
-A: We design for 99.9%+ availability through redundant hubs, multiple connectivity paths (VPN + ExpressRoute), and automated failover. We commit to 99.95% SLA in our support contract.
-
-**Appendix Slides (If Needed)**
-
-**A1: Detailed Virtual WAN Architecture Diagram**
-**A2: Branch Migration Sequence & Timeline**
-**A3: Azure Firewall Security Policy Examples**
-**A4: ExpressRoute Peering Locations & Bandwidth Options**
-**A5: Competitive Comparison (Virtual WAN vs. Traditional WAN)**
-**A6: Reference Client List & Case Studies**
-**A7: Team Biographies & Azure Certifications**
-**A8: Detailed Cost Breakdown by Component**
-**A9: Network Monitoring & Analytics Dashboard Examples**
-**A10: Training Curriculum & Knowledge Transfer Plan**
+Slide 10 - Offer technical architecture review with their network team as next step.
 
 ---
 
-**Design Guidelines:**
-- Company brand colors and fonts
-- Consistent slide layout and formatting
-- Professional network diagrams and architecture graphics
-- Client logo on each slide (if approved)
-- Azure service icons for components (Virtual WAN, Firewall, ExpressRoute, Monitor)
+## Appendix Slides (If Needed)
 
-**File Format:** .pptx
-**Slide Size:** 16:9 widescreen
-**Font:** [Company standard font]
-**Colors:** [Company brand palette]
+A1: Detailed Hub Deployment Architecture
+A2: SD-WAN Vendor Compatibility Matrix
+A3: Azure Firewall Policy Examples
+A4: Network Monitoring Dashboard Screenshots
+A5: Branch Connectivity Options Comparison (VPN vs ExpressRoute)
+A6: Pricing Calculator Based on Hubs and Branches

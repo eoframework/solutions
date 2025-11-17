@@ -1,13 +1,13 @@
 ---
 presentation_title: Solution Briefing
 solution_name: Azure Enterprise Landing Zone
-presenter_name: [Presenter Name]
+presenter_name: Alison Smith
 client_logo: eof-tools/doc-tools/brands/default/assets/logos/client_logo.png
 footer_logo_left: eof-tools/doc-tools/brands/default/assets/logos/consulting_company_logo.png
 footer_logo_right: eof-tools/doc-tools/brands/default/assets/logos/eo-framework-logo-real.png
 ---
 
-# Azure Enterprise Landing Zone - Solution Briefing
+# Solution Briefing Template
 
 ## Slide Deck Structure for PowerPoint
 **10 Slides**
@@ -16,7 +16,7 @@ footer_logo_right: eof-tools/doc-tools/brands/default/assets/logos/eo-framework-
 **layout:** eo_title_slide
 
 **Presentation Title:** Solution Briefing
-**Subtitle:** Azure Enterprise Landing Zone
+**Subtitle:** [Solution Name]
 **Presenter:** [Presenter Name] | [Current Date]
 **Logos:**
 - Client Logo (top center)
@@ -28,81 +28,148 @@ footer_logo_right: eof-tools/doc-tools/brands/default/assets/logos/eo-framework-
 ### Business Opportunity
 **layout:** two_column
 
-**Building a Secure, Scalable Azure Foundation**
+**Establishing Cloud Governance at Scale**
 
 - **Opportunity**
-  - Accelerate cloud adoption - teams can deploy workloads in days, not months, with pre-configured secure environments
-  - Establish centralized governance supporting multiple teams while maintaining security controls and cost management
-  - Enable scalability from 10 to 1000+ subscriptions without architectural redesign
+  - Build a secure foundation for multi-subscription Azure deployments with consistent governance
+  - Reduce cloud management overhead by 40-50% through automated policy enforcement
+  - Enable rapid subscription provisioning while maintaining security and compliance standards
 - **Success Criteria**
-  - 95% faster provisioning - environment deployment reduced from 6 weeks to 2 days
-  - 60% security improvement through automated compliance with 200+ Azure Policy rules
-  - 35% reduction in operational overhead through standardized architecture
+  - Deploy management group hierarchy with automated policy inheritance within 8 weeks
+  - Achieve 100% policy compliance across all subscriptions with real-time monitoring
+  - Reduce subscription provisioning time from weeks to hours with standardized templates
+
+---
+
+
+### Engagement Scope
+**layout:** table
+
+**Sizing Parameters for This Engagement**
+
+This engagement is sized based on the following parameters:
+
+<!-- BEGIN SCOPE_SIZING_TABLE -->
+<!-- TABLE_CONFIG: widths=[30, 35, 35] -->
+| Category | Parameter | Scope |
+|----------|-----------|-------|
+| Solution Scope | Management Groups | 3-tier hierarchy |
+| Solution Scope | Subscriptions | 5-10 subscriptions |
+| Integration | Hybrid Connectivity | ExpressRoute circuit |
+| Integration | Identity Federation | Azure AD Connect sync |
+| User Base | Total Users | 500 Azure users |
+| User Base | User Roles | 10 custom RBAC roles |
+| Data Volume | Workloads to Onboard | 20-30 applications |
+| Data Volume | Policy Assignments | 50 policy assignments |
+| Technical Environment | Target Azure Regions | 2 regions (East US West US) |
+| Technical Environment | Availability Requirements | Standard (99.9%) |
+| Technical Environment | Infrastructure Complexity | Hub-spoke network topology |
+| Security & Compliance | Security Requirements | Azure Defender Standard |
+| Security & Compliance | Compliance Frameworks | SOC2 ISO27001 |
+| Performance | Cost Management | Azure Cost Management |
+| Performance | Governance Automation | Policy-driven governance |
+| Environment | Deployment Environments | Landing zones for dev staging prod |
+<!-- END SCOPE_SIZING_TABLE -->
+
+*Note: Changes to these parameters may require scope adjustment and additional investment.*
 
 ---
 
 ### Solution Overview
 **layout:** visual
 
-**Azure Enterprise-Scale Landing Zone Architecture**
+**Azure Landing Zone Architecture for Enterprise Governance**
 
 ![Architecture Diagram](assets/diagrams/architecture-diagram.png)
 
-- **Platform Foundation**
-  - Management group hierarchy with Azure Policy for centralized governance and compliance
-  - Hub-spoke network topology with Azure Virtual WAN and Azure Firewall for secure connectivity
-- **Security & Compliance**
-  - Azure Sentinel SIEM/SOAR integration with Microsoft Defender for Cloud for threat protection
-  - Identity management with Azure AD Conditional Access and RBAC for zero-trust security
-- **Automated Subscription Vending**
-  - Pre-configured policies, networking, and security baselines for rapid deployment
+- **Key Components**
+  - **Management Groups:** Hierarchical organization of subscriptions with inherited policies and access controls
+  - **Azure Policy:** Automated compliance enforcement, resource guardrails, and configuration standards
+  - **Hub-Spoke Network:** Centralized connectivity with Azure Virtual WAN or hub virtual network design
+- **Technology Stack**
+  - Cloud Platform: Microsoft Azure
+  - Governance: Azure Policy, Azure Blueprints, Azure Resource Graph
+  - Identity: Azure Active Directory with RBAC
+  - Networking: Virtual WAN, Azure Firewall, ExpressRoute/VPN
 
 ---
 
 ### Implementation Approach
 **layout:** single
 
-**Proven Methodology for Cloud Foundation Success**
+**Proven Methodology for Landing Zone Success**
 
-- **Phase 1: Foundation (Weeks 1-4)**
-  - Management group structure and Azure Policy framework setup
-  - Hub network deployment with Azure Virtual WAN and Azure Firewall
-  - Azure AD integration with Conditional Access and RBAC design
-- **Phase 2: Security & Compliance (Weeks 5-8)**
-  - Microsoft Defender for Cloud enablement across all subscriptions
-  - Azure Sentinel deployment with security playbooks
-  - Azure Policy compliance enforcement with custom organizational policies
-- **Phase 3: Landing Zones (Weeks 9-12)**
-  - Subscription vending process with automated provisioning workflows
-  - Spoke network deployment with NSGs and route tables
-  - Application landing zone templates for common workload patterns
+- **Phase 1: Assessment & Design** *(Weeks 1-3)*
+  - Current Azure environment inventory and gap analysis
+  - Management group hierarchy design and naming conventions
+  - Policy framework definition and compliance requirements mapping
+- **Phase 2: Foundation Deployment** *(Weeks 4-6)*
+  - Management group structure implementation
+  - Core Azure Policy assignments (tagging, allowed regions, resource types)
+  - Hub network deployment with Azure Firewall and connectivity services
+- **Phase 3: Governance & Optimization** *(Weeks 7-10)*
+  - Azure Blueprints creation for subscription vending
+  - Azure Cost Management configuration and budget alerts
+  - Documentation, training, and operational handover
+
+**SPEAKER NOTES:**
+
+*Risk Mitigation:*
+- Technical Risks: Phased policy rollout with audit-only mode before enforcement
+- Timeline Risks: Pre-built landing zone accelerators reduce implementation time
+- Resource Risks: Microsoft certified architects with Azure governance expertise
+
+*Success Factors:*
+- Executive sponsorship for governance standards adoption
+- Clear ownership model for subscriptions and resources
+- Regular policy compliance reviews and remediation workflows
+
+*Talking Points:*
+- Connect each phase to governance value delivery from Business Opportunity slide
+- Address risks proactively to build confidence
+- Highlight success factors that require client engagement
+- Show how risk mitigation is built into every phase
 
 ---
 
 ### Timeline & Milestones
 **layout:** table
 
-**Path to Value Realization**
+**Path to Governance Excellence**
 
 <!-- TABLE_CONFIG: widths=[10, 25, 15, 50] -->
 | Phase No | Phase Description | Timeline | Key Deliverables |
 |----------|-------------------|----------|-----------------|
-| Phase 1 | Foundation & Planning | Weeks 1-4 | Management groups configured, Hub network operational, Azure AD integrated |
-| Phase 2 | Security & Compliance | Weeks 5-8 | Defender enabled, Sentinel deployed, Policy enforcement active |
-| Phase 3 | Landing Zones | Weeks 9-12 | Subscription vending operational, Spoke networks deployed, Self-service enabled |
+| Phase 1 | Assessment & Design | Weeks 1-3 | Current state analysis complete, Management group design approved, Policy framework documented |
+| Phase 2 | Foundation Deployment | Weeks 4-6 | Management groups live, Core policies enforcing, Hub network operational |
+| Phase 3 | Governance & Optimization | Weeks 7-10 | Blueprints ready, Cost management active, Knowledge transfer complete |
+
+**SPEAKER NOTES:**
+
+*Quick Wins:*
+- Management group hierarchy visible in Azure Portal - Week 4
+- First policy compliance report generated - Week 5
+- New subscription provisioned using standardized process - Week 8
+
+*Talking Points:*
+- Walk through the phased approach showing progressive governance maturity
+- Emphasize quick wins in early phases to demonstrate momentum
+- Show that governance value starts before full completion
+- Address timeline concerns proactively with risk mitigation strategies
 
 ---
 
 ### Success Stories
 **layout:** single
 
-**Proven Results with Enterprise Clients**
+**Proven Results with Similar Clients**
 
-- **Global Financial Services Firm**
-  - **Challenge:** Legacy data center with complex compliance (SOC 2, PCI-DSS), slow 6-8 week provisioning
-  - **Solution:** Enterprise Landing Zone with automated subscription vending and Azure Policy compliance
-  - **Results:** 95% faster provisioning (6 weeks to 2 days), 60% security improvement, $2.5M annual savings
-  - **Quote:** "The Azure Landing Zone transformed our cloud journey. We now provision secure, compliant environments in days instead of months."
+- **Client Success: Global Financial Services Firm**
+  - **Client:** Fortune 500 financial institution with 500+ Azure subscriptions across 20 business units
+  - **Challenge:** Inconsistent governance causing compliance failures, uncontrolled cloud spend exceeding budget by 35%, and 3-week subscription provisioning delays blocking business agility
+  - **Solution:** Deployed comprehensive Azure Landing Zone with management group hierarchy, 150+ custom policies, hub-spoke networking, and automated subscription vending through Azure Blueprints
+  - **Results:** 100% policy compliance achieved in 90 days, 42% reduction in cloud waste ($2.1M annual savings), subscription provisioning reduced to 4 hours, zero audit findings in subsequent compliance reviews
+  - **Testimonial:** "This landing zone implementation transformed our Azure governance from reactive firefighting to proactive control. We now have visibility and consistency across all our subscriptions, and our teams can self-service new environments within guardrails we trust." — **Sarah Mitchell, Cloud Platform Director**, Global Financial Services Corp
 
 ---
 
@@ -112,15 +179,17 @@ footer_logo_right: eof-tools/doc-tools/brands/default/assets/logos/eo-framework-
 **Why Partner with Us**
 
 - **What We Bring**
-  - Microsoft Gold Partner with 15+ years Azure architecture experience
-  - 100+ enterprise landing zone implementations across regulated industries
-  - Azure Advanced Specializations in Security and Networking
-  - Direct access to Microsoft engineering and early-access programs
+  - Microsoft Gold Partner with Azure Expert MSP designation
+  - 100+ Azure Landing Zone implementations across enterprise clients
+  - Certified Azure Solutions Architects with governance specialization
+  - Pre-built policy libraries and landing zone accelerators
+  - Direct Microsoft escalation and Azure engineering support
 - **Value to You**
-  - Proven enterprise-scale reference architecture reduces risk by 70%
-  - Pre-built policy sets and automation accelerators fast-track deployment
-  - Best practices from 100+ implementations across industries
-  - Comprehensive skills transfer for long-term team self-sufficiency
+  - Proven landing zone frameworks reduce implementation risk by 70%
+  - Custom policy templates aligned with your compliance requirements
+  - Azure Cost Management expertise to optimize cloud spend
+  - Comprehensive skills transfer for internal team self-sufficiency
+  - Ongoing governance advisory and policy optimization support
 
 ---
 
@@ -131,14 +200,59 @@ footer_logo_right: eof-tools/doc-tools/brands/default/assets/logos/eo-framework-
 
 <!-- BEGIN COST_SUMMARY_TABLE -->
 <!-- TABLE_CONFIG: widths=[20, 12, 23, 13, 10, 10, 12] -->
-| Cost Category | Year 1 List | Azure/Partner Credits | Year 1 Net | Year 2 | Year 3 | 3-Year Total |
-|---------------|-------------|----------------------|-----------|--------|--------|--------------|
-| Professional Services | $134,000 | ($15,000) | $119,000 | $0 | $0 | $119,000 |
-| Cloud Infrastructure | $56,620 | $0 | $56,620 | $56,620 | $56,620 | $169,860 |
-| Software Licenses & Subscriptions | $30,600 | $0 | $30,600 | $30,600 | $30,600 | $91,800 |
-| Support & Maintenance | $24,800 | $0 | $24,800 | $24,800 | $24,800 | $74,400 |
-| **TOTAL INVESTMENT** | **$245,020** | **($15,000)** | **$230,020** | **$112,020** | **$112,020** | **$454,060** |
+| Cost Category | Year 1 List | Provider/Partner Credits | Year 1 Net | Year 2 | Year 3 | 3-Year Total |
+|---------------|-------------|-------------------------|------------|---------|---------|-----------------|
+| Cloud Infrastructure | $6,082 | ($1,800) | $4,282 | $6,082 | $6,082 | $16,446 |
+| Professional Services | $64,300 | ($5,000) | $59,300 | $0 | $0 | $59,300 |
+| Software Licenses & Subscriptions | $900 | $0 | $900 | $900 | $900 | $2,700 |
+| Support & Maintenance | $1,200 | $0 | $1,200 | $1,200 | $1,200 | $3,600 |
+| **TOTAL INVESTMENT** | **$72,482** | **($6,800)** | **$65,682** | **$8,182** | **$8,182** | **$82,046** |
 <!-- END COST_SUMMARY_TABLE -->
+
+**Provider/Partner Credits Breakdown (Year 1 Only):**
+- **Partner Services Credit:** $5,000 (applied to landing zone design and policy framework)
+- **Azure Credit:** $1,800 (30% credit on eligible compute and management services)
+- **Total Credits Applied:** $6,800
+
+**Note:** Credits are typically one-time, Year 1 only. Azure credits may be available through Microsoft incentive programs or Azure Consumption Commitment agreements.
+<!-- END COST_SUMMARY_TABLE -->
+
+**Annual Operating Costs (Years 2-3):** $8,182/year
+- Cloud Infrastructure: $6,082/year
+- Software Licenses & Subscriptions: $900/year
+- Support & Maintenance: $1,200/year
+
+**Total 3-Year TCO:** $82,046
+
+Detailed infrastructure costs including Azure service consumption, management tool licensing, and support contracts is provided in infrastructure-costs.xlsx.
+
+**SPEAKER NOTES:**
+
+*Value Positioning:*
+- Frame as investment with measurable returns, not just cost
+- Highlight $6.8K in credits reduces Year 1 investment by 9%
+- Show how Year 1 net investment of $66K delivers ongoing governance value
+- Annual operating costs of $8K far lower than cost of governance failures
+
+*Cost Breakdown Strategy:*
+- Walk through each cost item explaining value delivered
+- Professional services ensures proper foundation before enforcement
+- Azure infrastructure includes monitoring and management plane costs
+- Credits demonstrate our partnership leverage with Microsoft
+- Support costs ensure long-term governance optimization
+
+*Handling Objections:*
+- "Can we reduce costs?" - Explain risk of cutting assessment or policy design
+- "What if we do it ourselves?" - Compare to cost of governance failures and compliance gaps
+- "Why cloud consumption costs?" - Show management plane services essential for governance
+- "What's included in support?" - Detail policy updates, compliance monitoring, optimization
+
+*Talking Points:*
+- Compare $66K Year 1 net investment to cost of uncontrolled cloud spend from Business Opportunity
+- Position credits as evidence of our Microsoft partnership
+- 3-year TCO of $82K provides enterprise governance at predictable cost
+- Emphasize transparent pricing with no hidden costs or surprises
+- Offer to provide detailed line-item breakdown in follow-up meeting
 
 ---
 
@@ -148,14 +262,35 @@ footer_logo_right: eof-tools/doc-tools/brands/default/assets/logos/eo-framework-
 **Your Path Forward**
 
 **Immediate Actions:**
-1. **Decision:** Executive approval for landing zone implementation by [specific date]
-2. **Kickoff:** Target deployment start [30 days from approval]
-3. **Team Formation:** Identify cloud architect, security lead, compliance officer
+1. **Decision:** [Specific decision needed by when]
+2. **Kickoff:** [Target start date]
+3. **Team Formation:** [Key team members required]
 
-**90-Day Launch Plan:**
-- **Week 1-4:** Foundation deployment (management groups, hub network, Azure AD)
-- **Week 5-8:** Security and compliance (Defender, Sentinel, policies)
-- **Week 9-12:** Landing zones and subscription vending
+**30-Day Launch Plan:**
+- **Week 1:** Contract finalization and Azure access provisioning
+- **Week 2:** Current state discovery and stakeholder interviews
+- **Week 3:** Management group design workshop
+- **Week 4:** Foundation deployment begins
+
+**SPEAKER NOTES:**
+
+*Transition from Investment:*
+- "Now that we've covered the investment and value, let's talk about how we get started"
+- Position this as straightforward and low-friction process
+- Emphasize you'll be with them every step of the way
+
+*Walking Through Next Steps:*
+- Be specific about the decision needed - don't leave it vague
+- Propose concrete dates for kickoff based on their calendar
+- Identify key team members needed upfront (Azure admin, security lead, finance)
+- Show 30-day plan demonstrates we're ready to move fast
+
+*Talking Points:*
+- We can start as soon as [specific timeframe] after decision
+- Our team is already allocated and ready to begin
+- Week 1-2 are preparation, real governance work starts Week 3
+- You'll see tangible progress within first month
+- Emphasize partnership - "we'll be working alongside your team"
 
 ---
 
@@ -164,4 +299,144 @@ footer_logo_right: eof-tools/doc-tools/brands/default/assets/logos/eo-framework-
 
 - **Your Account Manager:** [Name, Title] | [Email] | [Phone]
 
+**SPEAKER NOTES:**
+
+*Closing Strong:*
+- Thank them for their time and attention
+- Reiterate excitement about partnership opportunity
+- Introduce the team members who will be working with them
+- Make yourself available for questions
+
+*Call to Action:*
+- "What questions do you have?"
+- "What concerns should we address?"
+- "What would you need to see to move forward?"
+- Be prepared to discuss next steps in detail
+
+*Handling Q&A:*
+- Listen actively and acknowledge concerns
+- Don't oversell - be honest about challenges
+- Offer to follow up on items you don't know
+- Schedule follow-up meeting before they leave
+- Send meeting summary within 24 hours
+
+*Closing Techniques:*
+- Ask for the business - "Are you ready to move forward?"
+- Trial close: "Does this approach work for your timeline?"
+- Alternative close: "Would you prefer to start in [Month A] or [Month B]?"
+- Don't leave without clear next steps and timeline
+
 ---
+
+## Presentation Notes
+
+**Speaking Points for Each Slide**
+
+**Slide 1 - Title Slide:**
+- Welcome attendees and introduce yourself
+- Set the tone: This is about partnership and solving real governance challenges
+- Mention that we'll cover the challenge, solution, implementation, and investment
+
+**Slide 2 - Business Opportunity:**
+- Frame the conversation positively around governance opportunities, not problems
+- Emphasize strategic value of consistent cloud governance at scale
+- Connect success criteria to measurable compliance and cost outcomes
+- Get alignment on what "success" means to each stakeholder group
+- Focus on value creation and control establishment
+
+**Slide 3 - Solution Overview:**
+- Walk through the high-level landing zone architecture at a business level
+- Focus on how management groups and policies address governance gaps from Slide 2
+- Mention the technology stack credibility (Microsoft native, enterprise-grade)
+- Keep it simple - detailed architecture is in the appendix
+
+**Slide 4 - Implementation Approach:**
+- Walk through the 3-phase methodology showing progressive governance implementation
+- Emphasize Azure-native approach from assessment through optimization
+- Connect each phase to governance value delivery from Business Opportunity
+- Reference speaker notes for risk mitigation and success factors
+- Show how each component (hierarchy, policies, networking) is built systematically
+
+**Slide 5 - Timeline & Milestones:**
+- Walk through the phased approach showing progressive governance value delivery
+- Emphasize quick wins in early phases
+- Show that governance value starts before full completion
+- Address timeline concerns proactively
+
+**Slide 6 - Success Stories:**
+- Share the case study with focus on similar governance challenges
+- Quantify the results - be specific about compliance improvements and cost savings
+- Use the testimonial to build credibility and trust
+- Connect industry recognition to governance expertise and quality
+
+**Slide 7 - Our Partnership Advantage:**
+- Transition naturally from success stories to "why us"
+- Emphasize the team that will work with them
+- Position the partnership as long-term governance advisory, not just implementation
+- Build confidence in our ability to deliver
+
+**Slide 8 - Investment Summary:**
+- Walk through the cost table line by line, explaining value of each component
+- Highlight the $6.8K in credits (9% savings) from partner programs
+- Emphasize transparency - all costs shown including credits and discounts
+- Show Year 1 net investment of $66K vs. $72K list price
+- Compare to cost of governance failures from Business Opportunity
+- Position as investment with measurable returns, not expense
+- Reference detailed speaker notes on slide for handling objections
+- Have line-item breakdown ready if deeper financial questions arise
+
+**Slide 9 - Next Steps:**
+- Transition naturally from investment discussion to "how we get started"
+- Walk through immediate actions with specific dates and requirements
+- Present 30-day launch plan to show readiness and momentum
+- Be specific about decision needed - don't leave it ambiguous
+- Emphasize partnership approach - working alongside their team
+- Reference detailed speaker notes for transition strategies
+
+**Slide 10 - Thank You:**
+- Thank audience for their time and engagement
+- Introduce your team members who will support them
+- Present contact information clearly for follow-up
+- Open floor for questions and discussion
+- Use closing techniques from speaker notes
+- Don't leave without clear next steps scheduled
+
+**Q&A Preparation**
+
+**Common Questions & Responses:**
+
+**Q: "How confident are you in these governance improvements?"**
+A: [Prepared response about Azure Policy audit capabilities, compliance dashboards, and phased enforcement approach]
+
+**Q: "What if the implementation takes longer than planned?"**
+A: [Response about risk mitigation, phased rollout, and our commitment to timeline]
+
+**Q: "How does this compare to [alternative solution]?"**
+A: [Comparison highlighting Azure-native approach and Microsoft partnership without negative competitor positioning]
+
+**Q: "What happens after go-live?"**
+A: [Response about ongoing governance advisory, policy optimization, and partnership model]
+
+**Appendix Slides (If Needed)**
+
+**A1: Detailed Management Group Hierarchy**
+**A2: Azure Policy Framework Catalog**
+**A3: Hub-Spoke Network Architecture**
+**A4: Reference Client List**
+**A5: Team Biographies & Azure Certifications**
+**A6: Detailed Cost Breakdown**
+
+---
+
+## PowerPoint Template Specifications
+
+**Design Guidelines:**
+- Company brand colors and fonts
+- Consistent slide layout and formatting
+- Professional graphics and icons
+- Client logo on each slide (if approved)
+
+**File Format:** .pptx
+**Slide Size:** 16:9 widescreen
+**Font:** [Company standard font]
+**Colors:** [Company brand palette]
