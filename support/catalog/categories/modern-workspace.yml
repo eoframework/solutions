@@ -1,12 +1,12 @@
 version: '2.0'
 category: modern-workspace
-generated_at: '2025-11-17T04:52:18.099062'
+generated_at: '2025-11-17T05:00:46.190974'
 catalog_type: category
 metadata:
   category_name: Modern Workspace
   description: Digital workplace and collaboration solutions
   total_solutions: 4
-  last_updated: '2025-11-17T04:52:18.099069'
+  last_updated: '2025-11-17T05:00:46.190980'
   auto_generated: true
 providers:
   microsoft:
