@@ -41,6 +41,39 @@ footer_logo_right: eof-tools/doc-tools/brands/default/assets/logos/eo-framework-
 
 ---
 
+### Engagement Scope
+**layout:** table
+
+**Sizing Parameters for This Engagement**
+
+This engagement is sized based on the following parameters:
+
+<!-- BEGIN SCOPE_SIZING_TABLE -->
+<!-- TABLE_CONFIG: widths=[30, 35, 35] -->
+| Category | Parameter | Scope |
+|----------|-----------|-------|
+| Solution Scope | Document Types | 2-3 document types |
+| Solution Scope | AI/ML Complexity | AWS Textract/Comprehend only |
+| Integration | External System Integrations | 2 REST APIs |
+| Integration | Data Sources | S3 and email ingestion |
+| User Base | Total Users | 50 users |
+| User Base | User Roles | 3 roles (submitter reviewer admin) |
+| Data Volume | Document Processing Volume | 1000-5000 docs/month |
+| Data Volume | Data Storage Requirements | 500 GB |
+| Technical Environment | Deployment Regions | Single AWS region (us-east-1) |
+| Technical Environment | Availability Requirements | Standard (99.5%) |
+| Technical Environment | Infrastructure Complexity | Serverless (Lambda S3 Textract) |
+| Security & Compliance | Security Requirements | Basic encryption IAM SSE-S3 |
+| Security & Compliance | Compliance Frameworks | SOC2 |
+| Performance | Accuracy Requirements | 95%+ extraction accuracy |
+| Performance | Processing Speed | Standard batch processing |
+| Environment | Deployment Environments | 2 environments (dev prod) |
+<!-- END SCOPE_SIZING_TABLE -->
+
+*Note: Changes to these parameters may require scope adjustment and additional investment.*
+
+---
+
 ### Solution Overview
 **layout:** visual
 
@@ -202,7 +235,7 @@ footer_logo_right: eof-tools/doc-tools/brands/default/assets/logos/eo-framework-
 - Implementation (180 hours): Infrastructure, AI/ML integration, development, testing
 - Training & support (30 hours): Knowledge transfer and 30-day hypercare
 
-Detailed cost breakdown including AWS service consumption, Textract/Comprehend pricing, and support costs is provided in cost-breakdown.xlsx.
+Detailed infrastructure costs including AWS service consumption, Textract/Comprehend pricing, and support costs is provided in infrastructure-costs.xlsx.
 
 **SPEAKER NOTES:**
 

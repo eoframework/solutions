@@ -41,6 +41,39 @@ footer_logo_right: eof-tools/doc-tools/brands/default/assets/logos/eo-framework-
 
 ---
 
+### Engagement Scope
+**layout:** table
+
+**Sizing Parameters for This Engagement**
+
+This engagement is sized based on the following parameters:
+
+<!-- BEGIN SCOPE_SIZING_TABLE -->
+<!-- TABLE_CONFIG: widths=[30, 35, 35] -->
+| Category | Parameter | Scope |
+|----------|-----------|-------|
+| Solution Scope | Workloads to Migrate | 5-10 VMs/applications |
+| Solution Scope | Migration Strategy | Rehost (lift-and-shift) |
+| Integration | Source Environment | VMware vSphere on-premises |
+| Integration | Hybrid Connectivity | AWS Direct Connect |
+| User Base | Total Users | 100 application users |
+| User Base | User Roles | 3 roles (admin operator user) |
+| Data Volume | Total Data to Migrate | 500 GB |
+| Data Volume | Database Migration | 2 databases (MySQL PostgreSQL) |
+| Technical Environment | Target AWS Region | us-east-1 |
+| Technical Environment | Availability Requirements | Standard (99.5%) |
+| Technical Environment | Infrastructure Complexity | EC2 RDS S3 standard |
+| Security & Compliance | Security Requirements | VPC Security Groups IAM |
+| Security & Compliance | Compliance Frameworks | SOC2 |
+| Performance | Migration Window | Weekend maintenance windows |
+| Performance | Performance Requirements | Match on-premises baseline |
+| Environment | Deployment Environments | 2 environments (dev prod) |
+<!-- END SCOPE_SIZING_TABLE -->
+
+*Note: Changes to these parameters may require scope adjustment and additional investment.*
+
+---
+
 ### Solution Overview
 **layout:** visual
 
@@ -207,7 +240,7 @@ footer_logo_right: eof-tools/doc-tools/brands/default/assets/logos/eo-framework-
 - Migration Execution (330 hours): App migration, DB migration, security, testing, cutover
 - Training & Support (78 hours): Knowledge transfer, documentation, 60-day hypercare
 
-Detailed cost breakdown including migration services, AWS consumption, and comparison is provided in cost-breakdown.xlsx.
+Detailed infrastructure costs including AWS consumption, cloud services, and support is provided in infrastructure-costs.xlsx.
 
 **SPEAKER NOTES:**
 

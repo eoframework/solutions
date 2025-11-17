@@ -41,6 +41,39 @@ footer_logo_right: eof-tools/doc-tools/brands/default/assets/logos/eo-framework-
 
 ---
 
+### Engagement Scope
+**layout:** table
+
+**Sizing Parameters for This Engagement**
+
+This engagement is sized based on the following parameters:
+
+<!-- BEGIN SCOPE_SIZING_TABLE -->
+<!-- TABLE_CONFIG: widths=[30, 35, 35] -->
+| Category | Parameter | Scope |
+|----------|-----------|-------|
+| Solution Scope | Application Tiers | 3-tier web application |
+| Solution Scope | RTO/RPO Requirements | RTO 4 hours RPO 1 hour |
+| Integration | Database Replication | Aurora Global Database |
+| Integration | Data Sources | Primary app database + S3 |
+| User Base | Total Users | 200 concurrent users |
+| User Base | User Roles | 3 roles (end-user admin ops) |
+| Data Volume | Database Size | 50 GB |
+| Data Volume | Backup Retention | 30 days retention |
+| Technical Environment | Primary AWS Region | us-east-1 |
+| Technical Environment | DR AWS Region | us-west-2 |
+| Technical Environment | Infrastructure Complexity | Pilot Light DR |
+| Security & Compliance | Security Requirements | Encryption at rest/transit IAM |
+| Security & Compliance | Compliance Frameworks | SOC2 Type II |
+| Performance | Failover Requirements | Automated failover <15 min |
+| Performance | Recovery Testing | Quarterly DR drills |
+| Environment | Deployment Environments | 3 environments (dev staging prod) |
+<!-- END SCOPE_SIZING_TABLE -->
+
+*Note: Changes to these parameters may require scope adjustment and additional investment.*
+
+---
+
 ### Solution Overview
 **layout:** visual
 
@@ -203,7 +236,7 @@ footer_logo_right: eof-tools/doc-tools/brands/default/assets/logos/eo-framework-
 - Implementation (280 hours): Infrastructure deployment, replication, DR testing, automation
 - Training & support (50 hours): Operations training and 30-day hypercare
 
-Detailed cost breakdown including primary/DR infrastructure, AWS services, and testing is provided in cost-breakdown.xlsx.
+Detailed infrastructure costs including primary/DR infrastructure, AWS services, and testing is provided in infrastructure-costs.xlsx.
 
 **SPEAKER NOTES:**
 
