@@ -187,10 +187,14 @@ This engagement is sized based on the following parameters:
 **Total Investment & Value with AWS Partner Credits**
 
 <!-- BEGIN COST_SUMMARY_TABLE -->
-<!-- TABLE_CONFIG: widths=[25, 15, 15, 15, 10, 10, 10] -->
+<!-- TABLE_CONFIG: widths=[18, 12, 24, 12, 10, 10, 14] -->
 | Cost Category | Year 1 List | Provider/Partner Credits | Year 1 Net | Year 2 | Year 3 | 3-Year Total |
 |---------------|-------------|-------------------------|------------|--------|--------|--------------|
-| **TOTAL INVESTMENT** | **$0** | **$0** | **$0** | **$0** | **$0** | **$0** |
+| Professional Services | $82,250 | ($10,000) | $72,250 | $0 | $0 | $72,250 |
+| Cloud Infrastructure | $26,830 | ($5,000) | $21,830 | $26,830 | $26,830 | $75,490 |
+| Software Licenses | $2,784 | $0 | $2,784 | $2,784 | $2,784 | $8,352 |
+| Support & Maintenance | $4,087 | $0 | $4,087 | $4,087 | $4,087 | $12,261 |
+| **TOTAL INVESTMENT** | **$115,951** | **($15,000)** | **$100,951** | **$33,701** | **$33,701** | **$168,353** |
 <!-- END COST_SUMMARY_TABLE -->
 
 **AWS Partner Credits Breakdown (Year 1 Only):**
@@ -202,7 +206,6 @@ This engagement is sized based on the following parameters:
 - **Year 1:** $100,951 (after $15,000 in partner credits)
 - **3-Year Total:** $168,353 (vs. $183,353 list price)
 - **You Save:** $15,000 (13% discount through AWS partnership)
-<!-- END COST_SUMMARY_TABLE -->
 
 **Small Scope Specifications:**
 - **Document Volume:** 50,000 pages/month (Textract Document Analysis + Forms/Tables)

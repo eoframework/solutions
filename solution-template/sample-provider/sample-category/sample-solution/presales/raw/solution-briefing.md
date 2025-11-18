@@ -90,15 +90,15 @@ This engagement is sized based on the following parameters:
 
 **Proven Methodology for Success**
 
-- **Phase 1: Foundation & Planning** *(Months 1-2)*
+- **Phase 1: Foundation & Planning (Months 1-2)**
   - Cloud environment setup and infrastructure provisioning
   - Security baseline and CI/CD pipeline establishment
   - Architecture validation and technical design review
-- **Phase 2: Core Implementation** *(Months 3-4)*
+- **Phase 2: Core Implementation (Months 3-4)**
   - Database layer deployment with backup and replication
   - Application and presentation tier development
   - Integration testing and performance optimization
-- **Phase 3: Deployment & Optimization** *(Months 5-6)*
+- **Phase 3: Deployment & Optimization (Months 5-6)**
   - User acceptance testing and production deployment
   - Monitoring and observability implementation
   - Performance tuning and continuous optimization
@@ -190,10 +190,14 @@ This engagement is sized based on the following parameters:
 **Total Investment & Value**
 
 <!-- BEGIN COST_SUMMARY_TABLE -->
-<!-- TABLE_CONFIG: widths=[25, 15, 15, 15, 10, 10, 10] -->
+<!-- TABLE_CONFIG: widths=[18, 12, 24, 12, 10, 10, 14] -->
 | Cost Category | Year 1 List | Provider/Partner Credits | Year 1 Net | Year 2 | Year 3 | 3-Year Total |
 |---------------|-------------|-------------------------|------------|--------|--------|--------------|
-| **TOTAL INVESTMENT** | **$0** | **$0** | **$0** | **$0** | **$0** | **$0** |
+| Cloud Infrastructure | $0 | $0 | $0 | $0 | $0 | $0 |
+| Software Licenses | $0 | $0 | $0 | $0 | $0 | $0 |
+| Support & Maintenance | $0 | $0 | $0 | $0 | $0 | $0 |
+| Hardware/Equipment | $0 | $0 | $0 | $0 | $0 | $0 |
+| **TOTAL** | **$0** | **$0** | **$0** | **$0** | **$0** | **$0** |
 <!-- END COST_SUMMARY_TABLE -->
 
 **Provider/Partner Credits Breakdown (Year 1 Only):**
@@ -203,7 +207,6 @@ This engagement is sized based on the following parameters:
 - **Total Credits Applied:** $5,990
 
 **Note:** Credits are typically one-time, Year 1 only. Adjust based on your cloud provider's programs (e.g., AWS MAP, Azure Credits, GCP Credits).
-<!-- END COST_SUMMARY_TABLE -->
 
 **Annual Operating Costs (Years 2-3):** $19,875/year
 - Cloud Infrastructure: $12,225/year

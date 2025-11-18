@@ -190,7 +190,11 @@ This engagement is sized based on the following parameters:
 <!-- TABLE_CONFIG: widths=[25, 15, 15, 15, 10, 10, 10] -->
 | Cost Category | Year 1 List | Provider/Partner Credits | Year 1 Net | Year 2 | Year 3 | 3-Year Total |
 |---------------|-------------|-------------------------|------------|--------|--------|--------------|
-| **TOTAL INVESTMENT** | **$0** | **$0** | **$0** | **$0** | **$0** | **$0** |
+| Professional Services | $93,250 | ($8,000) | $85,250 | $0 | $0 | $85,250 |
+| Cloud Infrastructure | $9,620 | ($369) | $9,251 | $9,620 | $9,620 | $28,491 |
+| Software Licenses | $3,132 | $0 | $3,132 | $3,132 | $3,132 | $9,396 |
+| Support & Maintenance | $1,467 | $0 | $1,467 | $1,467 | $1,467 | $4,401 |
+| **TOTAL INVESTMENT** | **$107,469** | **($8,369)** | **$99,100** | **$14,219** | **$14,219** | **$127,538** |
 <!-- END COST_SUMMARY_TABLE -->
 
 **AWS Partner Credits Breakdown (Year 1 Only):**

@@ -1,6 +1,7 @@
 ---
 document_title: Statement of Work
-project_name: Enterprise Solution Implementation
+technology_provider: AWS
+project_name: Intelligent Document Processing Solution
 client_name: '[Client Name]'
 client_contact: '[Contact Name | Email | Phone]'
 consulting_company: Your Consulting Company
@@ -14,22 +15,16 @@ vendor_logo: assets/logos/consulting_company_logo.png
 
 # Executive Summary
 
-This Statement of Work (SOW) defines the scope, deliverables, roles, and terms for implementing a **small-scope, department-level** AWS Intelligent Document Processing (IDP) solution for [Client Name]. This engagement will deliver automated document processing capabilities through AWS AI/ML services including Amazon Textract, Amazon Comprehend, and Amazon A2I (Augmented AI) to transform manual document workflows into intelligent, automated processes.
+This Statement of Work (SOW) defines the scope, deliverables, roles, and terms for implementing an AWS Intelligent Document Processing (IDP) solution for [Client Name]. This engagement will deliver automated document processing capabilities through AWS AI/ML services including Amazon Textract, Amazon Comprehend, and Amazon A2I (Augmented AI) to transform manual document workflows into intelligent, automated processes.
 
-**Small Scope Deployment:**
-- **Document Capacity:** 50,000 pages/month processing
-- **User Base:** 50-100 department users
-- **Document Types:** 3-5 common types (invoices, purchase orders, contracts)
-- **Deployment Model:** Single AWS region, business hours support
-- **Total Investment:** $183,353 over 3 years ($115,951 Year 1 implementation)
+**Project Duration:** [X] months
 
-**Key Outcomes:**
-- Automated document processing with 95%+ accuracy using AWS AI services
-- 90% reduction in manual processing time (hours → minutes per document)
-- Serverless architecture enabling 24/7 processing and automatic scaling
-- Foundation for expanding to medium/large scope across organization
-
-**Expected ROI:** Typical payback period of 8-12 months based on labor cost savings. For a department processing 50K pages/month at current manual cost of $2-3/page, annual savings of $1.2M-$1.8M against Year 1 investment of $116K.
+**Key Objectives:**
+- Implement automated document processing using AWS AI/ML services (Textract, Comprehend, A2I)
+- Achieve 95%+ data extraction accuracy through AI and human-in-the-loop review
+- Reduce manual processing time by 80-90% through intelligent automation
+- Build scalable serverless architecture supporting flexible document volumes
+- Enable foundation for expanding automation across additional document types and business processes
 
 ---
 
@@ -37,7 +32,7 @@ This Statement of Work (SOW) defines the scope, deliverables, roles, and terms f
 
 # Background & Objectives
 
-## Background
+## Current State
 
 [Client Name] currently processes approximately [X,000] documents manually each [month/year] across multiple business functions. Key challenges include:
 - Manual Processing Bottlenecks: Hours of staff time required per document
@@ -46,7 +41,7 @@ This Statement of Work (SOW) defines the scope, deliverables, roles, and terms f
 - Resource Intensive: [Y] FTE dedicated to repetitive, low-value data entry tasks
 - Compliance Risk: Manual processes increase audit exposure and data security concerns
 
-## Objectives
+## Business Objectives
 - Automate Document Processing: Implement AWS AI services (Textract, Comprehend, A2I) to automate extraction and classification
 - Improve Accuracy: Achieve 95%+ data extraction accuracy through AI and human-in-the-loop review
 - Reduce Processing Time: Decrease document processing time by 90% (hours → minutes)
@@ -186,7 +181,6 @@ Activities include:
 
 ## Out of Scope
 
-## Exclusions
 These items are not in scope unless added via change control:
 - Hardware procurement or on-premises infrastructure
 - Third-party software licensing beyond AWS services
@@ -227,8 +221,6 @@ These items are not in scope unless added via change control:
 
 ## Project Milestones
 
-## Milestones
-
 <!-- TABLE_CONFIG: widths=[20, 50, 30] -->
 | Milestone | Description | Target Date |
 |-----------|-------------|-------------|
@@ -246,22 +238,37 @@ These items are not in scope unless added via change control:
 
 # Roles & Responsibilities
 
-<!-- TABLE_CONFIG: widths=[34, 11, 11, 11, 11, 11, 11] -->
-| Task/Role | Vendor PM | Vendor Architect | Vendor ML Engineer | Vendor Dev | Client IT | Client Business |
-|-----------|-----------|------------------|-------------------|-----------|-----------|-----------------|
-| Discovery & Requirements | A | R | C | C | C | R |
-| Solution Architecture | C | A | R | C | I | C |
-| ML Model Development | C | C | A | R | I | C |
-| Infrastructure Setup | C | A | R | R | C | I |
-| Pipeline Implementation | C | C | R | A | C | I |
-| Integration Development | C | R | C | A | C | C |
-| Testing & Validation | R | C | R | R | A | A |
-| Security Configuration | C | R | C | R | A | I |
-| Knowledge Transfer | A | R | R | R | C | C |
-| Hypercare Support | A | R | R | R | C | I |
+## RACI Matrix
 
-Legend:
-**R** = Responsible | **A** = Accountable | **C** = Consulted | **I** = Informed
+<!-- TABLE_CONFIG: widths=[28, 11, 11, 11, 11, 9, 9, 10] -->
+| Task/Role | EO PM | EO Quarterback | EO Sales Eng | EO Eng (ML) | Client IT | Client Business | SME |
+|-----------|-------|----------------|--------------|-------------|-----------|-----------------|-----|
+| Discovery & Requirements | A | R | R | C | C | R | C |
+| Solution Architecture | C | A | R | I | I | C | I |
+| ML Model Development | C | C | R | A | I | C | I |
+| Infrastructure Setup | C | A | C | R | C | I | I |
+| Pipeline Implementation | C | R | C | A | C | I | I |
+| Integration Development | C | R | C | A | C | C | I |
+| Testing & Validation | R | C | R | R | A | A | I |
+| Security Configuration | C | R | I | A | I | A | I |
+| Knowledge Transfer | A | R | R | R | C | C | I |
+| Hypercare Support | A | R | R | R | C | I | I |
+
+**Legend:** R = Responsible | A = Accountable | C = Consulted | I = Informed
+
+## Key Personnel
+
+**Vendor Team:**
+- EO Project Manager: Overall delivery accountability
+- EO Quarterback: Technical design and oversight
+- EO Sales Engineer: Solution architecture and pre-sales support
+- EO Engineer (ML): AI/ML model development and integration
+
+**Client Team:**
+- IT Lead: Primary technical contact and AWS access management
+- Business Lead: Document processing requirements and UAT coordination
+- Data Science Lead: ML model validation and accuracy sign-off
+- Operations Team: Knowledge transfer recipients
 
 ---
 
@@ -295,7 +302,7 @@ Key architectural components include:
 - Data Storage Layer (Amazon S3, Amazon DynamoDB)
 - Integration Layer (Amazon API Gateway, Amazon SQS, Amazon SNS)
 
-## Small Scope Specifications
+## Scope Specifications
 
 **Compute & Processing:**
 - AWS Lambda: 500K GB-seconds/month allocation (sufficient for 50K pages)
@@ -387,14 +394,14 @@ The implementation approach follows AWS AI/ML best practices and proven methodol
 
 ## Data Management
 
-## Data Strategy
+### Data Strategy
 - Document ingestion via multiple channels (S3 upload, API, batch processing)
 - Automated classification and extraction using AI/ML services
 - Metadata storage in DynamoDB for fast retrieval
 - Lifecycle management with automated archival and deletion
 - Data validation and quality checks at each processing stage
 
-## Security & Compliance
+### Data Security & Compliance
 - Encryption enabled for data in-transit and at-rest
 - PII/PHI detection and masking using Amazon Comprehend
 - Document retention policies aligned with regulatory requirements
@@ -448,7 +455,7 @@ The implementation and target environment will be architected and validated to m
 
 ## Environments & Access
 
-## Environments
+### Environment Strategy
 
 | Environment | Purpose | AWS Region | Access |
 |-------------|---------|------------|--------|
@@ -456,7 +463,7 @@ The implementation and target environment will be architected and validated to m
 | Staging | Integration testing, UAT, pre-production validation | [AWS Region] | Project team, testers |
 | Production | Live document processing | [AWS Region] | Operations team, authorized users |
 
-## Access Policies
+### Access Policies
 - Multi-factor authentication (MFA) required for all AWS console access
 - API access via authentication tokens (AWS Cognito or IAM)
 - Administrator Access: Full AWS console and API access for implementation team during project
@@ -557,11 +564,47 @@ A Go-Live Readiness Checklist will be delivered including:
 - Recorded training materials hosted in shared portal
 - Documentation portal with searchable content
 
+## Hypercare Support
+
+Post-implementation support to ensure smooth transition to Client operations:
+
+**Duration:** 4 weeks post-go-live (30 days)
+
+**Coverage:**
+- Business hours support (8 AM - 6 PM EST)
+- 4-hour response time for critical issues
+- Daily health check calls (first 2 weeks)
+- Weekly status meetings
+
+**Scope:**
+- Issue investigation and resolution
+- Performance tuning and optimization
+- Configuration adjustments
+- Knowledge transfer continuation
+- ML model accuracy monitoring
+
+## Managed Services Transition (Optional)
+
+Post-hypercare, Client may transition to ongoing managed services:
+
+**Managed Services Options:**
+- 24/7 monitoring and support for document processing pipeline
+- Proactive optimization and cost management
+- ML model retraining and accuracy monitoring
+- AWS service limit management and scaling support
+- Monthly performance and cost optimization reviews
+
+**Transition Approach:**
+- Evaluation of managed services requirements during hypercare
+- Service Level Agreement (SLA) definition for document processing
+- Separate managed services contract and pricing
+- Seamless transition from hypercare to managed services
+
 ---
 
 ## Assumptions
 
-## General Assumptions
+### General Assumptions
 - Client will provide representative document samples for ML model training (minimum 1,000 documents per type)
 - Document quality is sufficient for OCR and AI processing (readable text, minimum 150 DPI)
 - Existing AWS infrastructure meets minimum requirements for AI/ML services
@@ -577,7 +620,7 @@ A Go-Live Readiness Checklist will be delivered including:
 
 ## Dependencies
 
-## Project Dependencies
+### Project Dependencies
 - AWS Account Access: Client provides AWS account access with appropriate permissions (Textract, Comprehend, SageMaker, S3, Lambda, API Gateway, CloudWatch)
 - Document Samples: Client provides representative document samples across all document types for ML model training and testing
 - Training Data Labeling: Client SMEs available to label documents and validate extraction rules
@@ -610,7 +653,7 @@ A Go-Live Readiness Checklist will be delivered including:
 | **TOTAL INVESTMENT** | **$115,951** | **($15,000)** | **$100,951** | **$33,701** | **$33,701** | **$168,353** |
 <!-- END COST_SUMMARY_TABLE -->
 
-## AWS Partner Credits
+## Partner Credits
 
 **Year 1 Credits Applied:** $15,000 (13% reduction)
 - **AWS Partner Services Credit:** $10,000 applied to solution architecture and AI/ML integration
@@ -681,6 +724,8 @@ Detailed breakdown including AWS service consumption estimates and sizing is pro
 ---
 
 # Terms & Conditions
+
+## General Terms
 
 All services will be delivered in accordance with the executed Master Services Agreement (MSA) or equivalent contractual document between Vendor and Client.
 

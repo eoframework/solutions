@@ -1,0 +1,51 @@
+# SIZING GUIDELINES - Based on Solution Scope (Default: Small)
+Category,Component,Small,Medium,Large,Notes
+Cloud Infrastructure,Application Tier,2 web servers,4-6 web servers,10+ web servers,Primary region compute capacity
+Cloud Infrastructure,Database Size,db.t3.large Multi-AZ,db.r5.xlarge Multi-AZ,db.r5.4xlarge Multi-AZ,RDS instance sizing
+Cloud Infrastructure,DR Strategy,Pilot Light,Warm Standby,Hot Standby,Disaster recovery approach
+Cloud Infrastructure,Storage Volume,500 GB,2 TB,10+ TB,Application data and backups
+Cloud Infrastructure,Monthly Traffic,100 GB cross-region,500 GB cross-region,2 TB+ cross-region,Data replication volume
+Software Licenses,Monitoring Tools,Basic (6 hosts),Standard (15 hosts),Enterprise (50+ hosts),Application performance monitoring
+Support & Maintenance,Support Level,Business hours,24x5 support,24x7 premium,SLA requirements
+
+# INFRASTRUCTURE COSTS - Quantities Default to Small Scope
+Category,Component,Description,Quantity,Unit,Unit Price,Annual Cost,Year 2,Year 3,3-Year Total,Notes
+Cloud Infrastructure,EC2 Primary Web Tier,t3.large instances for web tier (primary),2,Instance/Month,$75,"=D11*F11*12","=G11","=G11","=G11+H11+I11",Primary region compute
+Cloud Infrastructure,EC2 DR Pilot Light,t3.medium on-demand for DR testing,1,Instance/Month,$21,"=D12*F12*12","=G12","=G12","=G12+H12+I12",DR region pilot light
+Cloud Infrastructure,RDS Primary Database,db.t3.large Multi-AZ PostgreSQL,1,Instance/Month,$240,"=D13*F13*12","=G13","=G13","=G13+H13+I13",Primary database
+Cloud Infrastructure,RDS DR Backups,Cross-region automated backups,1,Service/Month,$60,"=D14*F14*12","=G14","=G14","=G14+H14+I14",DR backup strategy
+Cloud Infrastructure,S3 Standard Storage,App data and backups (500GB),500,GB/Month,$0.023,"=D15*F15*12","=G15","=G15","=G15+H15+I15",Object storage
+Cloud Infrastructure,S3 Cross-Region Replication,Replication to DR region (500GB),500,GB/Month,$0.0005,"=D16*F16*12","=G16","=G16","=G16+H16+I16",DR replication
+Cloud Infrastructure,Route 53 Health Checks,DNS failover health checks,5,Checks/Month,$0.5,"=D17*F17*12","=G17","=G17","=G17+H17+I17",Automated failover
+Cloud Infrastructure,Route 53 Hosted Zones,Production and DR domains,2,Zones/Month,$0.5,"=D18*F18*12","=G18","=G18","=G18+H18+I18",DNS management
+Cloud Infrastructure,ALB Primary,Application Load Balancer primary,1,ALB/Month,$22.5,"=D19*F19*12","=G19","=G19","=G19+H19+I19",Load balancing
+Cloud Infrastructure,ALB DR,ALB for DR testing,1,ALB/Month,$11.25,"=D20*F20*12","=G20","=G20","=G20+H20+I20",DR load balancer
+Cloud Infrastructure,EBS Volumes Primary,gp3 storage volumes (500GB),500,GB/Month,$0.1,"=D21*F21*12","=G21","=G21","=G21+H21+I21",Block storage
+Cloud Infrastructure,EBS Snapshots,Automated incremental backups,500,GB/Month,$0.05,"=D22*F22*12","=G22","=G22","=G22+H22+I22",Backup snapshots
+Cloud Infrastructure,AWS Backup,Centralized backup policies (500GB),500,GB/Month,$0.05,"=D23*F23*12","=G23","=G23","=G23+H23+I23",Backup management
+Cloud Infrastructure,CloudWatch Logs,Primary and DR regions (50GB),50,GB/Month,$0.5,"=D24*F24*12","=G24","=G24","=G24+H24+I24",Monitoring logs
+Cloud Infrastructure,CloudWatch Metrics,Monitoring dashboards (100 metrics),100,Metrics/Month,$0.3,"=D25*F25*12","=G25","=G25","=G25+H25+I25",Custom metrics
+Cloud Infrastructure,CloudTrail,Audit logging both regions,2,Trails/Month,$2,"=D26*F26*12","=G26","=G26","=G26+H26+I26",Compliance audit
+Cloud Infrastructure,NAT Gateway Primary,Single AZ NAT Gateway,1,Gateway/Month,$32.85,"=D27*F27*12","=G27","=G27","=G27+H27+I27",Outbound connectivity
+Cloud Infrastructure,Secrets Manager,Secure credential storage,10,Secrets/Month,$0.4,"=D28*F28*12","=G28","=G28","=G28+H28+I28",Secrets management
+Cloud Infrastructure,SNS Notifications,DR event notifications,5,Topics/Month,$0.5,"=D29*F29*12","=G29","=G29","=G29+H29+I29",Alert notifications
+Cloud Infrastructure,Data Transfer Cross-Region,Replication traffic (100GB/month),100,GB/Month,$0.02,"=D30*F30*12","=G30","=G30","=G30+H30+I30",Cross-region transfer
+Software Licenses,Datadog Monitoring,Pro monitoring (6 hosts),6,Hosts/Month,$23,"=D31*F31*12","=G31","=G31","=G31+H31+I31",Application monitoring
+Software Licenses,PagerDuty,Professional incident management (3 users),3,Users/Month,$41,"=D32*F32*12","=G32","=G32","=G32+H32+I32",Incident management
+Support & Maintenance,AWS Managed DR Services,Managed services and quarterly testing (15% of infrastructure),1,Service/Month,$122.25,"=D33*F33*12","=G33","=G33","=G33+H33+I33",Ongoing support
+
+# CREDITS - Applied per Category (Year 1 Only)
+Category,Credit Type,Credit Amount,Credit Comments
+Cloud Infrastructure,AWS DR Program Credit,"($369)",Pilot light infrastructure and DR testing credits
+Software Licenses,Partner Credit,$0,No software credits available
+Support & Maintenance,Program Credit,$0,No support credits available
+Hardware/Equipment,Equipment Credit,$0,No hardware credits available
+Professional Services,AWS Partner Services Credit,"($8000)",DR design and testing services
+
+# SUMMARY
+Category,Year 1 List,Year 1 Credits,Year 1 Net,Year 2,Year 3,3-Year Total
+Cloud Infrastructure,$9620,"($369)",$9251,$9620,$9620,$28491
+Software Licenses,$3132,$0,$3132,$3132,$3132,$9396
+Support & Maintenance,$1467,$0,$1467,$1467,$1467,$4401
+Professional Services,$93250,"($8000)",$85250,$0,$0,$85250
+TOTAL,$107469,"($8369)",$99100,$14219,$14219,$127538

@@ -54,5 +54,5 @@ RISK-004,Risk Assessment,Technical,What technical risks worry you most about AI/
 FUTURE-001,Future State,Vision,What is your long-term vision for document processing automation?,"","",Future roadmap
 FUTURE-002,Future State,Growth,How do you expect document processing volumes to change?,"","",Scalability planning
 FUTURE-003,Future State,Integration,What future document types or sources might need processing?,"","",Future expansion needs
-VENDOR-001,Vendor Selection,Experience,What AWS AI/ML implementation experience do you expect from partners?,"","",Partner requirements
-VENDOR-002,Vendor Selection,Support,What ongoing support do you expect for the IDP solution?,"","",Support expectations
+ORG-007,Vendor Selection,Experience,What AWS AI/ML implementation experience do you expect from partners?,"","",Partner requirements
+ORG-008,Vendor Selection,Support,What ongoing support do you expect for the IDP solution?,"","",Support expectations
