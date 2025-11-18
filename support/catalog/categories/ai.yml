@@ -1,12 +1,12 @@
 version: '2.0'
 category: ai
-generated_at: '2025-11-17T05:00:46.178494'
+generated_at: '2025-11-18T00:49:34.424527'
 catalog_type: category
 metadata:
   category_name: AI
   description: Artificial Intelligence and Machine Learning solutions
   total_solutions: 5
-  last_updated: '2025-11-17T05:00:46.178502'
+  last_updated: '2025-11-18T00:49:34.424534'
   auto_generated: true
 providers:
   cisco:
