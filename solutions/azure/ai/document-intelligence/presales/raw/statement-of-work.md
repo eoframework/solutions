@@ -2,13 +2,13 @@
 document_title: Statement of Work
 technology_provider: Azure
 project_name: Azure Document Intelligence Solution
-client_name: '[Client Name]'
-client_contact: '[Contact Name | Email | Phone]'
+client_name: [Client Name]
+client_contact: [Contact Name | Email | Phone]
 consulting_company: Your Consulting Company
-consultant_contact: '[Consultant Name | Email | Phone]'
+consultant_contact: [Consultant Name | Email | Phone]
 opportunity_no: OPP-2025-001
 document_date: November 15, 2025
-version: '1.0'
+version: 1.0
 client_logo: assets/logos/client_logo.png
 vendor_logo: assets/logos/consulting_company_logo.png
 ---
@@ -34,7 +34,7 @@ This Statement of Work (SOW) defines the scope, deliverables, roles, and terms f
 - **Resource Intensive:** [Y] FTE dedicated to repetitive, low-value data entry tasks
 - **Compliance Risk:** Manual processes increase audit exposure and data security concerns
 
-## Objectives
+## Business Objectives
 - **Automate Document Processing:** Implement automated document processing using Azure AI services (Document Intelligence, Text Analytics) to eliminate manual data entry and classification
 - **Improve Accuracy:** Achieve 95%+ data extraction accuracy through AI and human-in-the-loop review, reducing costly rework and compliance risks
 - **Reduce Processing Time:** Reduce manual processing time by 80-90% through intelligent automation, improving throughput from hours to minutes per document
