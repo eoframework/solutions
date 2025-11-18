@@ -2,13 +2,13 @@
 document_title: Statement of Work
 technology_provider: AWS
 project_name: Disaster Recovery Web Application Solution
-client_name: '[Client Name]'
-client_contact: '[Contact Name | Email | Phone]'
+client_name: [Client Name]
+client_contact: [Contact Name | Email | Phone]
 consulting_company: Your Consulting Company
-consultant_contact: '[Consultant Name | Email | Phone]'
+consultant_contact: [Consultant Name | Email | Phone]
 opportunity_no: OPP-2025-001
 document_date: November 15, 2025
-version: '1.0'
+version: 1.0
 client_logo: assets/logos/client_logo.png
 vendor_logo: assets/logos/consulting_company_logo.png
 ---
@@ -19,13 +19,6 @@ This Statement of Work (SOW) defines the scope, deliverables, roles, and terms f
 
 **Project Duration:** 6 months
 
-**Key Objectives:**
-- Implement automated disaster recovery with cross-region failover capabilities for critical web applications
-- Achieve defined RTO (Recovery Time Objective) and RPO (Recovery Point Objective) targets
-- Establish comprehensive DR testing, validation, and runbook procedures
-- Enable business continuity assurance through proven AWS multi-region architecture
-- Reduce disaster recovery risk and meet compliance requirements for business continuity
-
 ---
 
 # Background & Objectives
@@ -33,21 +26,21 @@ This Statement of Work (SOW) defines the scope, deliverables, roles, and terms f
 ## Current State
 
 [Client Name] currently operates critical web applications in a single AWS region without formal disaster recovery capabilities. Key challenges include:
-- No documented disaster recovery plan or runbooks for critical applications
-- Single point of failure with no automated failover capabilities
-- Unacceptable business risk exposure from potential regional outages
-- Manual recovery processes requiring hours or days to restore operations
-- Compliance gaps for business continuity and disaster recovery requirements
-- Limited visibility into recovery readiness and testing capabilities
+- **No Disaster Recovery Plan:** No documented disaster recovery plan or runbooks for critical applications
+- **Single Point of Failure:** No automated failover capabilities creating critical business risk
+- **Business Risk Exposure:** Unacceptable business risk exposure from potential regional outages
+- **Manual Recovery Processes:** Manual recovery processes requiring hours or days to restore operations
+- **Compliance Gaps:** Compliance gaps for business continuity and disaster recovery requirements
+- **Limited Visibility:** Limited visibility into recovery readiness and testing capabilities
 
 ## Business Objectives
 
-- Implement AWS-native disaster recovery solution with pilot light strategy for 5-10 critical applications
-- Achieve 4-hour RTO and 1-hour RPO through cross-region replication and automated backup
-- Establish automated failover capabilities with DNS-based traffic management (Route 53)
-- Reduce business continuity risk through regular DR testing and validation (quarterly drills)
-- Meet compliance requirements for documented and tested disaster recovery procedures
-- Enable foundation for expanding DR coverage to additional applications and workloads
+- **Implement Disaster Recovery:** Deploy AWS-native disaster recovery solution with pilot light strategy for 5-10 critical applications, protecting business operations from regional outages
+- **Achieve Recovery Targets:** Achieve 4-hour RTO and 1-hour RPO through cross-region replication and automated backup, minimizing business disruption and data loss
+- **Enable Automated Failover:** Establish automated failover capabilities with DNS-based traffic management (Route 53), eliminating manual recovery delays
+- **Reduce Business Risk:** Reduce business continuity risk through regular DR testing and validation (quarterly drills), ensuring recovery readiness when needed
+- **Meet Compliance Requirements:** Satisfy compliance requirements for documented and tested disaster recovery procedures, reducing audit risk
+- **Foundation for Expansion:** Enable foundation for expanding DR coverage to additional applications and workloads beyond initial scope
 
 ## Success Metrics
 

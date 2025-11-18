@@ -1,38 +1,62 @@
-Category,Question,Response_Type,Required,Options,Description,Impact
-Business Context,What types of documents does your organization process regularly?,Multiple Choice,Yes,"Invoices,Purchase Orders,Receipts,Contracts,Forms,Insurance Claims,Medical Records,Financial Statements,Shipping Documents,Other",Core document types for solution design,High
-Business Context,What is your current monthly document processing volume?,Number,Yes,,Number of documents processed per month,High
-Business Context,What are your current document processing costs?,Number,Yes,,Annual labor and technology costs for document processing,High
-Business Context,What is your current document processing timeline?,Text,Yes,,Average time to process documents end-to-end,Medium
-Business Context,What are your primary business drivers for automation?,Multiple Choice,Yes,"Reduce costs,Improve speed,Enhance accuracy,Increase scalability,Improve compliance,Enable remote work,Free up staff time",Key motivations for implementing solution,High
-Business Context,What are your specific goals for automated processing?,Text,Yes,,Quantified targets for improvement and ROI expectations,High
-Technology Infrastructure,What document management systems do you currently use?,Multiple Choice,No,"Microsoft SharePoint,Box,Dropbox Business,Google Workspace,Adobe Document Cloud,DocuSign,Custom Systems,Paper-based only",Existing systems for integration planning,Medium
-Technology Infrastructure,What enterprise systems need integration?,Text,Yes,,ERP CRM accounting systems requiring integration,High
-Technology Infrastructure,How do you currently process documents?,Multiple Choice,Yes,"Fully manual,Basic OCR,Template-based capture,Workflow automation,Outsourced services,Hybrid processes",Current processing methods for comparison,Medium
-Technology Infrastructure,What are your biggest processing challenges?,Multiple Choice,Yes,"High costs,Slow processing,High error rates,Format variations,Limited scalability,Compliance issues,Integration complexity",Current pain points to address,High
-Technology Infrastructure,What is your team's technical expertise level?,Scale,Yes,"High,Medium,Low",Experience levels for training and support planning,Medium
-Document Characteristics,What specific invoice processing requirements do you have?,Text,No,,Volume formats required data extraction accuracy needs,Medium
-Document Characteristics,What receipt processing needs do you have?,Text,No,,Volume sources required fields integration requirements,Low
-Document Characteristics,What contract processing requirements exist?,Text,No,,Types required extraction compliance needs workflows,Medium
-Document Characteristics,What are your accuracy requirements by document type?,Text,Yes,,Minimum accuracy percentages for different document types,High
-Document Characteristics,How do you handle processing errors and exceptions?,Multiple Choice,Yes,"Manual review,Automated validation,Approval processes,Exception reporting,Quality assurance sampling",Error handling and quality control processes,Medium
-Technical Requirements,What is your preferred deployment approach?,Multiple Choice,Yes,"Public cloud,Private cloud,Hybrid cloud,SaaS solution,No preference",Infrastructure and deployment preferences,High
-Technical Requirements,What are your data residency and compliance requirements?,Text,Yes,,Geographic regulatory and industry-specific requirements,High
-Technical Requirements,What are your security and access control requirements?,Multiple Choice,Yes,"Single sign-on,Multi-factor authentication,Role-based access,Data encryption,Network isolation,Audit logging",Security and compliance needs,High
-Technical Requirements,What systems require integration?,Text,Yes,,Specific systems APIs databases requiring connectivity,High
-Technical Requirements,What are your API and integration requirements?,Multiple Choice,Yes,"RESTful APIs,Webhook integration,Batch processing,Real-time processing,File-based integration,Database connectivity",Integration patterns and requirements,Medium
-Technical Requirements,What are your performance and scalability requirements?,Text,Yes,,Peak volumes processing times availability requirements,High
-Organizational,Who will be involved in the solution implementation?,Text,Yes,,Business IT operations compliance and end-user stakeholders,Medium
-Organizational,What is your team's current technical expertise?,Scale,Yes,"High,Medium,Low",Skill levels for training and support planning,Medium
-Organizational,What training and support will be needed?,Text,Yes,,Administrative end-user technical and ongoing support needs,Medium
-Organizational,What is your preferred implementation timeline?,Text,Yes,,Project start pilot completion full deployment timelines,High
-Organizational,How do you want to approach implementation?,Multiple Choice,Yes,"Big bang deployment,Phased approach,Pilot program,Parallel processing",Implementation strategy and risk management,Medium
-Budget,What is your total project budget range?,Range,Yes,"$100K-$500K,$500K-$1M,$1M-$5M,$5M+",Available investment for solution implementation,High
-Budget,What is your annual operational budget?,Range,Yes,"$50K-$200K,$200K-$500K,$500K-$1M,$1M+",Ongoing operational and licensing budget,Medium
-Budget,How do you evaluate technology investments?,Multiple Choice,Yes,"Total Cost of Ownership,Return on Investment,Net Present Value,Payback period,Business case development",Investment evaluation criteria and processes,Medium
-Budget,What are your ROI expectations and timeframes?,Text,Yes,,Expected ROI percentage and payback period requirements,High
-Budget,What are your cost optimization priorities?,Multiple Choice,Yes,"Minimize upfront investment,Optimize ongoing costs,Flexible scaling,Predictable costs,Maximum value for budget",Cost management preferences and priorities,Medium
-Success Criteria,How will you measure solution success?,Text,Yes,,Key performance indicators and success metrics,High
-Success Criteria,What are your target improvements?,Text,Yes,,Quantified targets for processing time cost accuracy,High
-Success Criteria,How often will you review and optimize?,Text,Yes,,Performance review optimization and improvement frequency,Low
-Success Criteria,What are your primary concerns about implementation?,Multiple Choice,Yes,"Technical complexity,User adoption,Data security,Vendor dependency,Performance concerns,Budget overruns",Implementation risks and concerns,Medium
-Success Criteria,What risk mitigation strategies are important?,Multiple Choice,Yes,"Comprehensive pilot testing,Phased implementation,Extensive training,Strong vendor support,Performance guarantees",Risk management preferences and approaches,Medium
+Question ID,Category,Sub-Category,Question,Guidance,Customer Response,Notes
+PROJ-001,Project Information,Basic Details,What is the name of your Document Intelligence solution?,"","",Internal project reference
+PROJ-002,Project Information,Basic Details,What is your company name?,"","",Client identification
+PROJ-003,Project Information,Basic Details,Who is the primary stakeholder for this project?,"","",Main point of contact
+PROJ-004,Project Information,Basic Details,What is the stakeholder's role and decision-making authority?,"","",Decision-making authority
+PROJ-005,Project Information,Basic Details,What is today's date?,"","",Questionnaire completion date
+BUS-001,Business Requirements,Current State,What document processing challenges are you trying to solve?,"Common challenges: Manual data entry, Document classification errors, Slow processing times, High operational costs, Compliance issues, Data accuracy problems","",Primary business driver
+BUS-002,Business Requirements,Current State,What is your current document processing workflow?,"","",Current state assessment
+BUS-003,Business Requirements,Current State,What types of documents do you process regularly?,"Common types: Invoices, Purchase orders, Receipts, Contracts, Forms, Insurance claims, Medical records, Financial statements, Shipping documents","",Document type classification
+BUS-004,Business Requirements,Current State,What volume of documents do you process monthly?,"Typical ranges: 1-100, 101-1000, 1001-10000, 10000+, 50000+, 100000+","",Processing volume requirements
+BUS-005,Business Requirements,Current State,What document formats do you currently handle?,"Common formats: PDF, Word documents, Excel spreadsheets, Scanned images, Handwritten documents, Multi-page documents, Email attachments","",Input format requirements
+BUS-006,Business Requirements,Objectives,What are your primary goals for implementing Document Intelligence?,"Common goals: Reduce manual data entry, Improve processing speed, Increase accuracy, Lower operational costs, Ensure compliance, Enable scalability, Free up staff time","",Business objectives
+BUS-007,Business Requirements,Objectives,What specific data do you need to extract from documents?,"Common fields: Line items, Totals, Dates, Names, Addresses, Account numbers, Custom fields","",Data extraction requirements
+BUS-008,Business Requirements,Timeline,What is your expected timeline for implementation?,"Typical ranges: 0-3 months, 3-6 months, 6-12 months, 12+ months","",Project timeline expectations
+BUS-009,Business Requirements,Budget,What is your approved budget range for this solution?,"Common ranges: $0-50K, $50K-250K, $250K-1M, $1M+","",Budget constraints
+BUS-010,Business Requirements,Success Metrics,How will you measure success?,"Common metrics: Processing time reduction, Accuracy improvement, Cost savings, FTE reduction, Error rate reduction","",KPI definition
+DOC-001,Document Requirements,Types,What specific document types need automated processing?,"","",Detailed document classification
+DOC-002,Document Requirements,Structure,Are your documents structured semi-structured or unstructured?,"Types: Structured forms, Semi-structured invoices/receipts, Unstructured letters/contracts, Mixed types","",Document structure analysis
+DOC-003,Document Requirements,Quality,What is the typical quality of your source documents?,"Quality levels: High quality digital PDF, Good quality scanned, Poor quality scanned, Handwritten, Mixed quality, Faxed documents","",OCR accuracy expectations
+DOC-004,Document Requirements,Languages,What languages appear in your documents?,"Common languages: English only, Spanish, French, Multi-language, Specific Asian/European languages","",Multi-language processing needs
+DOC-005,Document Requirements,Variations,How much variation exists within each document type?,"Variation levels: Highly standardized templates, Some layout variation, Significant format variation, Completely variable layouts","",Model training complexity
+DOC-006,Document Requirements,Sources,Where do documents originate?,"Common sources: Email attachments, SharePoint upload, Blob storage, Web portal upload, Mobile app, Fax, Scanned paper","",Input channel requirements
+TECH-001,Technical Requirements,Azure Environment,What Azure services are you currently using?,"Azure services: Blob Storage, Functions, Logic Apps, Cosmos DB, SQL Database, Power Platform, Document Intelligence, None, Other","",Current Azure footprint
+TECH-002,Technical Requirements,Azure Environment,What Azure region(s) do you prefer for data processing?,"Common regions: East US, West US, West Europe, UK South, Southeast Asia, Data residency requirements","",Data residency and compliance
+TECH-003,Technical Requirements,Integration,What systems need to integrate with the Document Intelligence solution?,"Common systems: Dynamics 365, SAP, Oracle, Salesforce, SharePoint, Power Apps, Custom line-of-business apps","",Integration requirements
+TECH-004,Technical Requirements,Integration,What document storage systems do you currently use?,"Common systems: SharePoint Online, OneDrive, Azure Blob Storage, Azure Files, Box, Dropbox, Google Drive, On-premises file servers","",Storage integration needs
+TECH-005,Technical Requirements,API Requirements,Do you need real-time or batch document processing?,"Options: Real-time processing, Batch processing overnight, Both real-time and batch, Event-driven processing","",Processing mode requirements
+TECH-006,Technical Requirements,API Requirements,What API integration capabilities do you need?,"Common integrations: REST APIs, Power Automate connectors, Logic Apps, Azure Functions, Event Grid triggers, Webhooks","",API integration needs
+TECH-007,Technical Requirements,Performance,What are your document processing speed requirements?,"Typical targets: Under 1 minute per document, Under 5 minutes, Under 1 hour, Same business day, Next business day","",Performance expectations
+TECH-008,Technical Requirements,Performance,What accuracy level do you require for data extraction?,"Common targets: 90%+, 95%+, 98%+, 99%+, 99.5%+","",Accuracy requirements
+TECH-009,Technical Requirements,Security,What security requirements apply to document processing?,"Common requirements: Encryption at rest (SSE), Encryption in transit (TLS), Azure AD authentication, RBAC, Managed identities, Private endpoints, Audit logging","",Security controls needed
+TECH-010,Technical Requirements,Security,What compliance standards must the solution meet?,"Common standards: SOC 2, ISO 27001, HIPAA, PCI DSS, GDPR, FedRAMP, CMMC, State-specific regulations, None","",Compliance requirements
+TECH-011,Technical Requirements,Data,What sensitive data types are present in your documents?,"Sensitive data types: PII (personally identifiable information), PHI (protected health information), Financial data, Credit card numbers, SSNs, Tax IDs, Other sensitive data, No sensitive data","",Data protection requirements
+TECH-012,Technical Requirements,Data,What are your data retention and deletion requirements?,"Common requirements: Retain X years, Delete after processing, Archive to cold storage, Compliance-driven retention, Legal hold capabilities","",Data lifecycle management
+TECH-013,Technical Requirements,Availability,What uptime requirements do you have for document processing?,"Common targets: Business hours only, 99% (99.5% standard Azure SLA), 99.9%, 99.95%, 99.99%","",SLA requirements
+AI-001,AI/ML Requirements,Model Selection,Do you need custom models or will pre-built Document Intelligence models suffice?,"Options: Pre-built models only (invoices receipts IDs W2), Custom models for specific forms, Combination of pre-built and custom, Fully custom classification and extraction","",Model complexity requirements
+AI-002,AI/ML Requirements,Training Data,Do you have labeled training data for custom models?,"Options: Yes - 50+ samples per document type, Yes - limited samples (5-15), No - need data labeling assistance, Unsure what's needed","",Training data availability
+AI-003,AI/ML Requirements,Human Review,How will you handle cases where extraction confidence is low?,"Options: Human review workflow, Automated rejection and retry, Manual correction interface, Confidence thresholds with routing, No review needed","",Quality assurance process
+AI-004,AI/ML Requirements,Model Maintenance,How often do you expect to retrain or update models?,"Options: One-time training, Quarterly updates, Monthly updates, As needed when accuracy degrades, Continuous learning","",Model maintenance expectations
+AI-005,AI/ML Requirements,Document Variety,Do you need to handle variations of the same document type?,"Examples: Multiple invoice vendors with different layouts, Regional variations of forms, Legacy vs current versions, Client-specific templates","",Layout variation handling
+ORG-001,Organizational,Resources,Who will be the technical lead for this project?,"","",Technical ownership
+ORG-002,Organizational,Resources,What internal resources are available for implementation?,"","",Team availability
+ORG-003,Organizational,Resources,What is your team's experience with Azure AI services?,"Experience levels: No experience, Basic Azure knowledge, Intermediate Azure skills, Advanced AI/ML experience, Expert level","",Training needs assessment
+ORG-004,Organizational,Resources,What is your team's experience with Power Platform?,"Experience levels: No experience, Basic Power Automate, Intermediate (Logic Apps/Functions), Advanced automation, Power Platform expert","",Low-code integration capability
+ORG-005,Organizational,Change Management,How will you handle the transition from manual to automated processing?,"","",Change management approach
+ORG-006,Organizational,Change Management,What training will be needed for end users?,"","",Training requirements
+ORG-007,Organizational,Governance,What approval processes are required for processing changes?,"","",Change approval process
+ORG-008,Organizational,Team Structure,Who will perform quality review and exception handling?,"","",Operational roles definition
+WORKFLOW-001,Workflow Requirements,Process Flow,What happens to extracted data after processing?,"Common destinations: Update ERP/CRM, Store in database, Trigger approval workflow, Generate report, Send notification, Archive document","",Downstream processing requirements
+WORKFLOW-002,Workflow Requirements,Process Flow,How should processing errors and exceptions be handled?,"Options: Queue for manual review, Send alert/notification, Auto-retry, Route to supervisor, Log and skip","",Error handling requirements
+WORKFLOW-003,Workflow Requirements,Process Flow,Do you need human-in-the-loop review capabilities?,"Options: Always required for all documents, Only for low confidence results, Only for exceptions/errors, Only for high-value transactions, Never needed","",Human review requirements
+WORKFLOW-004,Workflow Requirements,Process Flow,What notifications or alerts do you need during processing?,"Common alerts: Processing complete, Errors encountered, Review required, Daily summary, SLA breach warning","",Notification requirements
+WORKFLOW-005,Workflow Requirements,Approval,What approval workflows are required for extracted data?,"Examples: Manager approval for high amounts, Multi-level approval for contracts, Department head sign-off, No approvals needed","",Approval workflow requirements
+RISK-001,Risk Assessment,Implementation,What are your main concerns about implementing Document Intelligence?,"","",Primary implementation concerns
+RISK-002,Risk Assessment,Implementation,What could cause this project to fail?,"","",Failure mode analysis
+RISK-003,Risk Assessment,Data,What are your concerns about data accuracy and quality?,"","",Data quality risks
+RISK-004,Risk Assessment,Technical,What technical risks worry you most about AI implementation?,"","",Technical risk factors
+RISK-005,Risk Assessment,Organizational,What organizational challenges do you anticipate?,"Common challenges: User adoption resistance, Lack of technical skills, Insufficient time/resources, Process change resistance, Management buy-in","",Change management risks
+FUTURE-001,Future State,Vision,What is your long-term vision for document automation?,"","",Future roadmap
+FUTURE-002,Future State,Growth,How do you expect document processing volumes to change?,"Growth patterns: Steady state, Gradual growth, Rapid growth expected, Seasonal spikes, Acquisition-driven growth","",Scalability planning
+FUTURE-003,Future State,Expansion,What future document types or sources might need processing?,"","",Future expansion needs
+FUTURE-004,Future State,Integration,What additional integrations might be needed in the future?,"","",Future integration roadmap

@@ -2,13 +2,13 @@
 document_title: Statement of Work
 technology_provider: AWS
 project_name: On-Premise to Cloud Migration Solution
-client_name: '[Client Name]'
-client_contact: '[Contact Name | Email | Phone]'
+client_name: [Client Name]
+client_contact: [Contact Name | Email | Phone]
 consulting_company: Your Consulting Company
-consultant_contact: '[Consultant Name | Email | Phone]'
+consultant_contact: [Consultant Name | Email | Phone]
 opportunity_no: OPP-2025-001
 document_date: November 15, 2025
-version: '1.0'
+version: 1.0
 client_logo: assets/logos/client_logo.png
 vendor_logo: assets/logos/consulting_company_logo.png
 ---
@@ -19,13 +19,6 @@ This Statement of Work (SOW) defines the scope, deliverables, roles, and terms f
 
 **Project Duration:** 9 months (as detailed in Timeline & Milestones section)
 
-**Key Objectives:**
-- Execute phased migration of production workloads to AWS using proven migration patterns
-- Establish AWS landing zone foundation with multi-account architecture and governance controls
-- Achieve 30-40% infrastructure cost reduction through right-sizing and cloud optimization
-- Enable cloud-native scalability and operational agility across migrated applications
-- Implement security, compliance, and operational excellence following AWS Well-Architected Framework
-
 ---
 
 ---
@@ -35,22 +28,22 @@ This Statement of Work (SOW) defines the scope, deliverables, roles, and terms f
 ## Current State
 
 [Client Name] currently operates critical business applications on aging on-premise infrastructure with significant maintenance burden. Key challenges include:
-- Infrastructure Limitations: Aging hardware approaching end-of-life with costly refresh cycles
-- Capacity Constraints: Limited ability to scale compute and storage to meet growing business demands
-- Capital Expense Burden: High upfront infrastructure costs and extended procurement cycles
-- Operational Overhead: Significant IT resources dedicated to infrastructure maintenance vs innovation
-- Business Continuity Risk: Single data center architecture with limited disaster recovery capabilities
-- Compliance Challenges: Difficulty maintaining audit-ready compliance controls across legacy systems
+- **Infrastructure Limitations:** Aging hardware approaching end-of-life with costly refresh cycles
+- **Capacity Constraints:** Limited ability to scale compute and storage to meet growing business demands
+- **Capital Expense Burden:** High upfront infrastructure costs and extended procurement cycles
+- **Operational Overhead:** Significant IT resources dedicated to infrastructure maintenance vs innovation
+- **Business Continuity Risk:** Single data center architecture with limited disaster recovery capabilities
+- **Compliance Challenges:** Difficulty maintaining audit-ready compliance controls across legacy systems
 
 ## Business Objectives
 
-- Migrate Production Workloads: Move 5-10 core applications to AWS using lift-and-shift and replatform strategies
-- Reduce Infrastructure Costs: Achieve 30-40% cost savings through cloud economics and right-sizing
-- Improve Operational Agility: Enable rapid provisioning and scaling of resources to support business growth
-- Enhance Business Continuity: Implement multi-AZ architecture with automated backup and disaster recovery
-- Accelerate Innovation: Free IT resources from infrastructure management to focus on business value
-- Establish Cloud Foundation: Deploy AWS landing zone as platform for future cloud-native development
-- Modernize Operations: Implement DevOps practices with Infrastructure-as-Code and automated deployment
+- **Migrate Production Workloads:** Execute phased migration of 5-10 core applications to AWS using proven lift-and-shift and replatform strategies, eliminating aging infrastructure constraints
+- **Reduce Infrastructure Costs:** Achieve 30-40% infrastructure cost reduction through cloud economics and right-sizing, eliminating costly hardware refresh cycles
+- **Improve Operational Agility:** Enable rapid provisioning and scaling of resources to support business growth, reducing procurement cycles from months to minutes
+- **Enhance Business Continuity:** Implement multi-AZ architecture with automated backup and disaster recovery, protecting business operations from outages
+- **Accelerate Innovation:** Free IT resources from infrastructure management to focus on business value and strategic initiatives
+- **Establish Cloud Foundation:** Deploy AWS landing zone with multi-account architecture and governance controls as platform for future cloud-native development
+- **Modernize Operations:** Implement DevOps practices with Infrastructure-as-Code and automated deployment following AWS Well-Architected Framework
 
 ## Success Metrics
 
@@ -1479,8 +1472,6 @@ Credits represent real AWS account credits, partner services discounts, or MAP p
 **Support & Maintenance:** Ongoing AWS Support plan and optional managed services
 - AWS Support: Business or Enterprise Support plan for AWS technical assistance
 - Managed Services (Optional): Post-hypercare ongoing operations support under separate contract
-
-Detailed breakdown including AWS service consumption estimates, right-sizing analysis, and line-item pricing is provided in infrastructure-costs.xlsx.
 
 ---
 

@@ -2,13 +2,13 @@
 document_title: Statement of Work
 technology_provider: AWS
 project_name: Intelligent Document Processing Solution
-client_name: '[Client Name]'
-client_contact: '[Contact Name | Email | Phone]'
+client_name: [Client Name]
+client_contact: [Contact Name | Email | Phone]
 consulting_company: Your Consulting Company
-consultant_contact: '[Consultant Name | Email | Phone]'
+consultant_contact: [Consultant Name | Email | Phone]
 opportunity_no: OPP-2025-001
 document_date: November 15, 2025
-version: '1.0'
+version: 1.0
 client_logo: assets/logos/client_logo.png
 vendor_logo: assets/logos/consulting_company_logo.png
 ---
@@ -19,13 +19,6 @@ This Statement of Work (SOW) defines the scope, deliverables, roles, and terms f
 
 **Project Duration:** [X] months
 
-**Key Objectives:**
-- Implement automated document processing using AWS AI/ML services (Textract, Comprehend, A2I)
-- Achieve 95%+ data extraction accuracy through AI and human-in-the-loop review
-- Reduce manual processing time by 80-90% through intelligent automation
-- Build scalable serverless architecture supporting flexible document volumes
-- Enable foundation for expanding automation across additional document types and business processes
-
 ---
 
 ---
@@ -35,19 +28,19 @@ This Statement of Work (SOW) defines the scope, deliverables, roles, and terms f
 ## Current State
 
 [Client Name] currently processes approximately [X,000] documents manually each [month/year] across multiple business functions. Key challenges include:
-- Manual Processing Bottlenecks: Hours of staff time required per document
-- High Error Rates: 5-10% error rate in manual data entry requiring costly rework
-- Scalability Limitations: Cannot handle volume fluctuations or business growth
-- Resource Intensive: [Y] FTE dedicated to repetitive, low-value data entry tasks
-- Compliance Risk: Manual processes increase audit exposure and data security concerns
+- **Manual Processing Bottlenecks:** Hours of staff time required per document
+- **High Error Rates:** 5-10% error rate in manual data entry requiring costly rework
+- **Scalability Limitations:** Cannot handle volume fluctuations or business growth
+- **Resource Intensive:** [Y] FTE dedicated to repetitive, low-value data entry tasks
+- **Compliance Risk:** Manual processes increase audit exposure and data security concerns
 
 ## Business Objectives
-- Automate Document Processing: Implement AWS AI services (Textract, Comprehend, A2I) to automate extraction and classification
-- Improve Accuracy: Achieve 95%+ data extraction accuracy through AI and human-in-the-loop review
-- Reduce Processing Time: Decrease document processing time by 90% (hours → minutes)
-- Lower Operational Costs: Reduce document operations costs by 70% through automation
-- Enable Scalability: Serverless architecture handles any volume without proportional cost increase
-- Foundation for Innovation: Establish AI/ML platform for expanding automation to other processes
+- **Automate Document Processing:** Implement automated document processing using AWS AI services (Textract, Comprehend, A2I) to eliminate manual data entry and classification
+- **Improve Accuracy:** Achieve 95%+ data extraction accuracy through AI and human-in-the-loop review, reducing costly rework and compliance risks
+- **Reduce Processing Time:** Reduce manual processing time by 80-90% through intelligent automation, improving throughput from hours to minutes per document
+- **Lower Operational Costs:** Reduce document operations costs by 70% through automation, freeing staff from repetitive tasks to focus on higher-value work
+- **Enable Scalability:** Build scalable serverless architecture supporting flexible document volumes without proportional cost increase
+- **Foundation for Growth:** Enable foundation for expanding automation across additional document types and business processes beyond initial scope
 
 ## Success Metrics
 - 95%+ data extraction accuracy measured against validation dataset
@@ -687,8 +680,6 @@ Post-hypercare, Client may transition to ongoing managed services:
 - Business hours monitoring and support
 - Monthly cost optimization reviews
 - AWS service limit management
-
-Detailed breakdown including AWS service consumption estimates and sizing is provided in cost-breakdown.xlsx.
 
 ---
 

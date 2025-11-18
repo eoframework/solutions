@@ -191,18 +191,22 @@ This engagement is sized based on the following parameters:
 **Total Investment & Value**
 
 <!-- BEGIN COST_SUMMARY_TABLE -->
-<!-- TABLE_CONFIG: widths=[25, 15, 15, 15, 10, 10, 10] -->
+<!-- TABLE_CONFIG: widths=[18, 12, 24, 12, 10, 10, 14] -->
 | Cost Category | Year 1 List | Provider/Partner Credits | Year 1 Net | Year 2 | Year 3 | 3-Year Total |
 |---------------|-------------|-------------------------|------------|--------|--------|--------------|
-| **TOTAL INVESTMENT** | **$0** | **$0** | **$0** | **$0** | **$0** | **$0** |
+| Professional Services | $82,250 | ($10,000) | $72,250 | $0 | $0 | $72,250 |
+| Cloud Infrastructure | $18,528 | ($3,690) | $14,838 | $18,528 | $18,528 | $51,894 |
+| Software Licenses | $2,904 | $0 | $2,904 | $2,904 | $2,904 | $8,712 |
+| Support & Maintenance | $2,676 | $0 | $2,676 | $2,676 | $2,676 | $8,028 |
+| **TOTAL INVESTMENT** | **$106,358** | **($13,690)** | **$92,668** | **$24,108** | **$24,108** | **$140,884** |
 <!-- END COST_SUMMARY_TABLE -->
 
 **Provider/Partner Credits Breakdown (Year 1 Only):**
-- **Azure AI Services Credit:** $5,000 (30% of eligible Azure Document Intelligence consumption Year 1)
-- **Total Credits Applied:** $5,000
+- **Azure AI Services Credit:** $3,690 (30% of eligible Azure Document Intelligence consumption Year 1)
+- **Microsoft Partner Services Credit:** $10,000 (Applied to architecture and AI configuration)
+- **Total Credits Applied:** $13,690
 
-**Note:** Credits are based on Microsoft Azure Consumption Commitment and AI Services programs. Actual credits may vary based on existing Microsoft agreements.
-<!-- END COST_SUMMARY_TABLE -->
+**Note:** Credits are based on Microsoft Azure Consumption Commitment and Partner Services programs. Actual credits may vary based on existing Microsoft agreements.
 
 **Annual Operating Costs (Years 2-3):** $16,560/year
 - Cloud Infrastructure: $14,400/year

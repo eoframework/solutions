@@ -1,6 +1,7 @@
 ---
 document_title: Statement of Work
-project_name: Enterprise Solution Implementation
+technology_provider: Azure
+project_name: Azure Document Intelligence Solution
 client_name: '[Client Name]'
 client_contact: '[Contact Name | Email | Phone]'
 consulting_company: Your Consulting Company
@@ -14,22 +15,9 @@ vendor_logo: assets/logos/consulting_company_logo.png
 
 # Executive Summary
 
-This Statement of Work (SOW) defines the scope, deliverables, roles, and terms for implementing a **small-scope, department-level** Azure AI Document Intelligence solution for [Client Name]. This engagement will deliver automated document processing capabilities through Azure cognitive services including Azure AI Document Intelligence (Form Recognizer), Azure Cognitive Services Text Analytics, and automated workflows to transform manual document workflows into intelligent, automated processes.
+This Statement of Work (SOW) defines the scope, deliverables, roles, and terms for implementing an Azure Document Intelligence solution for [Client Name]. This engagement will deliver automated document processing capabilities through Azure AI services including Azure Document Intelligence, Azure Cognitive Services Text Analytics, and automated workflows to transform manual document workflows into intelligent, automated processes.
 
-**Small Scope Deployment:**
-- **Document Capacity:** 50,000 pages/month processing
-- **User Base:** 50-100 department users
-- **Document Types:** 3-5 common types (invoices, purchase orders, contracts)
-- **Deployment Model:** Single Azure region, business hours support
-- **Total Investment:** $140,866 over 3 years ($92,662 Year 1 implementation)
-
-**Key Outcomes:**
-- Automated document processing with 95%+ accuracy using Azure AI services
-- 90% reduction in manual processing time (hours → minutes per document)
-- Serverless architecture enabling 24/7 processing and automatic scaling
-- Foundation for expanding to medium/large scope across organization
-
-**Expected ROI:** Typical payback period of 8-12 months based on labor cost savings. For a department processing 50K pages/month at current manual cost of $2-3/page, annual savings of $1.2M-$1.8M against Year 1 investment of $93K.
+**Project Duration:** [X] months
 
 ---
 
@@ -37,22 +25,22 @@ This Statement of Work (SOW) defines the scope, deliverables, roles, and terms f
 
 # Background & Objectives
 
-## Background
+## Current State
 
 [Client Name] currently processes approximately [X,000] documents manually each [month/year] across multiple business functions. Key challenges include:
-- Manual Processing Bottlenecks: Hours of staff time required per document
-- High Error Rates: 5-10% error rate in manual data entry requiring costly rework
-- Scalability Limitations: Cannot handle volume fluctuations or business growth
-- Resource Intensive: [Y] FTE dedicated to repetitive, low-value data entry tasks
-- Compliance Risk: Manual processes increase audit exposure and data security concerns
+- **Manual Processing Bottlenecks:** Hours of staff time required per document
+- **High Error Rates:** 5-10% error rate in manual data entry requiring costly rework
+- **Scalability Limitations:** Cannot handle volume fluctuations or business growth
+- **Resource Intensive:** [Y] FTE dedicated to repetitive, low-value data entry tasks
+- **Compliance Risk:** Manual processes increase audit exposure and data security concerns
 
 ## Objectives
-- Automate Document Processing: Implement Azure AI services (Document Intelligence, Text Analytics) to automate extraction and classification
-- Improve Accuracy: Achieve 95%+ data extraction accuracy through AI and human-in-the-loop review
-- Reduce Processing Time: Decrease document processing time by 90% (hours → minutes)
-- Lower Operational Costs: Reduce document operations costs by 70% through automation
-- Enable Scalability: Serverless architecture handles any volume without proportional cost increase
-- Foundation for Innovation: Establish AI/ML platform for expanding automation to other processes
+- **Automate Document Processing:** Implement automated document processing using Azure AI services (Document Intelligence, Text Analytics) to eliminate manual data entry and classification
+- **Improve Accuracy:** Achieve 95%+ data extraction accuracy through AI and human-in-the-loop review, reducing costly rework and compliance risks
+- **Reduce Processing Time:** Reduce manual processing time by 80-90% through intelligent automation, improving throughput from hours to minutes per document
+- **Lower Operational Costs:** Reduce document operations costs by 70% through automation, freeing staff from repetitive tasks to focus on higher-value work
+- **Enable Scalability:** Build scalable serverless architecture supporting flexible document volumes without proportional cost increase
+- **Foundation for Growth:** Enable foundation for expanding automation across additional document types and business processes beyond initial scope
 
 ## Success Metrics
 - 95%+ data extraction accuracy measured against validation dataset
@@ -645,8 +633,6 @@ A Go-Live Readiness Checklist will be delivered including:
 - Business hours monitoring and support
 - Monthly cost optimization reviews
 - Azure service limit management
-
-Detailed breakdown including Azure service consumption estimates and sizing is provided in cost-breakdown.csv.
 
 ---
 
