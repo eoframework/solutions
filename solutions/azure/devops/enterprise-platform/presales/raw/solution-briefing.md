@@ -50,25 +50,17 @@ footer_logo_right: eof-tools/doc-tools/brands/default/assets/logos/eo-framework-
 This engagement is sized based on the following parameters:
 
 <!-- BEGIN SCOPE_SIZING_TABLE -->
-<!-- TABLE_CONFIG: widths=[30, 35, 35] -->
-| Category | Parameter | Scope |
-|----------|-----------|-------|
-| Solution Scope | Projects/Repositories | 10-20 repositories |
-| Solution Scope | CI/CD Pipelines | 25-50 pipelines |
-| Integration | External Integrations | GitHub SonarQube Artifactory |
-| Integration | Deployment Targets | Azure Kubernetes Service VMs |
-| User Base | Total Users | 50 developers |
-| User Base | User Roles | 4 roles (dev lead ops admin) |
-| Data Volume | Build Artifacts | 100 GB storage |
-| Data Volume | Pipeline Runs | 500 runs/month |
-| Technical Environment | Deployment Regions | Single Azure region |
-| Technical Environment | Availability Requirements | Standard (99.5%) |
-| Technical Environment | Infrastructure Complexity | Azure DevOps + self-hosted agents |
-| Security & Compliance | Security Requirements | Service connections branch policies |
-| Security & Compliance | Compliance Frameworks | SOC2 |
-| Performance | Build Performance | Standard build times |
-| Performance | Deployment Frequency | Daily deployments |
-| Environment | Deployment Environments | 3 environments (dev staging prod) |
+<!-- TABLE_CONFIG: widths=[18, 29, 5, 18, 30] -->
+| Parameter | Scope | | Parameter | Scope |
+|-----------|-------|---|-----------|-------|
+| **Projects/Repositories** | 10-20 repositories | | **Deployment Regions** | Single Azure region |
+| **CI/CD Pipelines** | 25-50 pipelines | | **Availability Requirements** | Standard (99.5%) |
+| **External Integrations** | GitHub SonarQube Artifactory | | **Infrastructure Complexity** | Azure DevOps + self-hosted agents |
+| **Deployment Targets** | Azure Kubernetes Service VMs | | **Security Requirements** | Service connections branch policies |
+| **Total Users** | 50 developers | | **Compliance Frameworks** | SOC2 |
+| **User Roles** | 4 roles (dev lead ops admin) | | **Build Performance** | Standard build times |
+| **Build Artifacts** | 100 GB storage | | **Deployment Frequency** | Daily deployments |
+| **Pipeline Runs** | 500 runs/month | | **Deployment Environments** | 3 environments (dev staging prod) |
 <!-- END SCOPE_SIZING_TABLE -->
 
 *Note: Changes to these parameters may require scope adjustment and additional investment.*
@@ -199,14 +191,10 @@ This engagement is sized based on the following parameters:
 **Total Investment & Value**
 
 <!-- BEGIN COST_SUMMARY_TABLE -->
-<!-- TABLE_CONFIG: widths=[20, 12, 23, 13, 10, 10, 12] -->
+<!-- TABLE_CONFIG: widths=[25, 15, 15, 15, 10, 10, 10] -->
 | Cost Category | Year 1 List | Provider/Partner Credits | Year 1 Net | Year 2 | Year 3 | 3-Year Total |
-|---------------|-------------|-------------------------|------------|---------|---------|-----------------|
-| Cloud Infrastructure | $6,082 | ($1,800) | $4,282 | $6,082 | $6,082 | $16,446 |
-| Professional Services | $64,300 | ($5,000) | $59,300 | $0 | $0 | $59,300 |
-| Software Licenses & Subscriptions | $900 | $0 | $900 | $900 | $900 | $2,700 |
-| Support & Maintenance | $1,200 | $0 | $1,200 | $1,200 | $1,200 | $3,600 |
-| **TOTAL INVESTMENT** | **$72,482** | **($6,800)** | **$65,682** | **$8,182** | **$8,182** | **$82,046** |
+|---------------|-------------|-------------------------|------------|--------|--------|--------------|
+| **TOTAL INVESTMENT** | **$0** | **$0** | **$0** | **$0** | **$0** | **$0** |
 <!-- END COST_SUMMARY_TABLE -->
 
 **Provider/Partner Credits Breakdown (Year 1 Only):**

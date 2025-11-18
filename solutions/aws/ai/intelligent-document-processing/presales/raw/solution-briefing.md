@@ -49,25 +49,17 @@ footer_logo_right: eof-tools/doc-tools/brands/default/assets/logos/eo-framework-
 This engagement is sized based on the following parameters:
 
 <!-- BEGIN SCOPE_SIZING_TABLE -->
-<!-- TABLE_CONFIG: widths=[30, 35, 35] -->
-| Category | Parameter | Scope |
-|----------|-----------|-------|
-| Solution Scope | Document Types | 2-3 document types |
-| Solution Scope | AI/ML Complexity | AWS Textract/Comprehend only |
-| Integration | External System Integrations | 2 REST APIs |
-| Integration | Data Sources | S3 and email ingestion |
-| User Base | Total Users | 50 users |
-| User Base | User Roles | 3 roles (submitter reviewer admin) |
-| Data Volume | Document Processing Volume | 1000-5000 docs/month |
-| Data Volume | Data Storage Requirements | 500 GB |
-| Technical Environment | Deployment Regions | Single AWS region (us-east-1) |
-| Technical Environment | Availability Requirements | Standard (99.5%) |
-| Technical Environment | Infrastructure Complexity | Serverless (Lambda S3 Textract) |
-| Security & Compliance | Security Requirements | Basic encryption IAM SSE-S3 |
-| Security & Compliance | Compliance Frameworks | SOC2 |
-| Performance | Accuracy Requirements | 95%+ extraction accuracy |
-| Performance | Processing Speed | Standard batch processing |
-| Environment | Deployment Environments | 2 environments (dev prod) |
+<!-- TABLE_CONFIG: widths=[18, 29, 5, 18, 30] -->
+| Parameter | Scope | | Parameter | Scope |
+|-----------|-------|---|-----------|-------|
+| **Document Types** | 2-3 document types | | **Deployment Regions** | Single AWS region (us-east-1) |
+| **AI/ML Complexity** | AWS Textract/Comprehend only | | **Availability Requirements** | Standard (99.5%) |
+| **External System Integrations** | 2 REST APIs | | **Infrastructure Complexity** | Serverless (Lambda S3 Textract) |
+| **Data Sources** | S3 and email ingestion | | **Security Requirements** | Basic encryption IAM SSE-S3 |
+| **Total Users** | 50 users | | **Compliance Frameworks** | SOC2 |
+| **User Roles** | 3 roles (submitter reviewer admin) | | **Accuracy Requirements** | 95%+ extraction accuracy |
+| **Document Processing Volume** | 1000-5000 docs/month | | **Processing Speed** | Standard batch processing |
+| **Data Storage Requirements** | 500 GB | | **Deployment Environments** | 2 environments (dev prod) |
 <!-- END SCOPE_SIZING_TABLE -->
 
 *Note: Changes to these parameters may require scope adjustment and additional investment.*
@@ -195,14 +187,10 @@ This engagement is sized based on the following parameters:
 **Total Investment & Value with AWS Partner Credits**
 
 <!-- BEGIN COST_SUMMARY_TABLE -->
-<!-- TABLE_CONFIG: widths=[20, 12, 23, 13, 10, 10, 12] -->
-| Cost Category | Year 1 List | AWS/Partner Credits | Year 1 Net | Year 2 | Year 3 | 3-Year Total |
-|---------------|-------------|---------------------|------------|---------|---------|--------------|
-| Professional Services | $82,250 | ($10,000) | $72,250 | $0 | $0 | $72,250 |
-| Cloud Infrastructure | $26,830 | ($5,000) | $21,830 | $26,830 | $26,830 | $75,490 |
-| Software Licenses & Subscriptions | $2,784 | $0 | $2,784 | $2,784 | $2,784 | $8,352 |
-| Support & Maintenance | $4,087 | $0 | $4,087 | $4,087 | $4,087 | $12,261 |
-| **TOTAL INVESTMENT** | **$115,951** | **($15,000)** | **$100,951** | **$33,701** | **$33,701** | **$168,353** |
+<!-- TABLE_CONFIG: widths=[25, 15, 15, 15, 10, 10, 10] -->
+| Cost Category | Year 1 List | Provider/Partner Credits | Year 1 Net | Year 2 | Year 3 | 3-Year Total |
+|---------------|-------------|-------------------------|------------|--------|--------|--------------|
+| **TOTAL INVESTMENT** | **$0** | **$0** | **$0** | **$0** | **$0** | **$0** |
 <!-- END COST_SUMMARY_TABLE -->
 
 **AWS Partner Credits Breakdown (Year 1 Only):**

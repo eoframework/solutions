@@ -49,24 +49,17 @@ footer_logo_right: eof-tools/doc-tools/brands/default/assets/logos/eo-framework-
 This engagement is sized based on the following parameters:
 
 <!-- BEGIN SCOPE_SIZING_TABLE -->
-<!-- TABLE_CONFIG: widths=[30, 35, 35] -->
-| Category | Parameter | Scope |
-|----------|-----------|-------|
-| Solution Scope | Primary Features/Capabilities | 3-5 core features |
-| Solution Scope | Customization Level | Minimal configuration |
-| Integration | External System Integrations | 2 REST APIs |
-| Integration | Data Sources | 2-3 data sources |
-| User Base | Total Users | 50 users |
-| User Base | User Roles | 2-3 standard roles |
-| Data Volume | Data Processing Volume | Small scale standard volume |
-| Data Volume | Data Storage Requirements | 100 GB |
-| Technical Environment | Deployment Regions | Single region |
-| Technical Environment | Availability Requirements | Standard (99.5%) |
-| Technical Environment | Infrastructure Complexity | Basic single-tier |
-| Security & Compliance | Security Requirements | Basic authentication and encryption |
-| Security & Compliance | Compliance Frameworks | 1-2 basic standards |
-| Performance | Performance Requirements | Standard performance |
-| Environment | Deployment Environments | 2 environments (dev prod) |
+<!-- TABLE_CONFIG: widths=[18, 29, 5, 18, 30] -->
+| Parameter | Scope | | Parameter | Scope |
+|-----------|-------|---|-----------|-------|
+| **Primary Features** | 3-5 core features | | **Deployment Regions** | Single region |
+| **Customization Level** | Minimal configuration | | **Availability** | Standard (99.5% SLA) |
+| **External Integrations** | 2 REST APIs | | **Infrastructure** | Basic single-tier |
+| **Data Sources** | 2-3 data sources | | **Security** | Basic authentication and encryption |
+| **Total Users** | 50 users | | **Compliance** | 1-2 basic standards |
+| **User Roles** | 2-3 standard roles | | **Performance** | Standard performance |
+| **Processing Volume** | Small scale standard volume | | **Environments** | 2 (dev, prod) |
+| **Data Storage** | 100 GB | | | |
 <!-- END SCOPE_SIZING_TABLE -->
 
 *Note: Changes to these parameters may require scope adjustment and additional investment.*

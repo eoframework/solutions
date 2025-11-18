@@ -49,25 +49,17 @@ footer_logo_right: eof-tools/doc-tools/brands/default/assets/logos/eo-framework-
 This engagement is sized based on the following parameters:
 
 <!-- BEGIN SCOPE_SIZING_TABLE -->
-<!-- TABLE_CONFIG: widths=[30, 35, 35] -->
-| Category | Parameter | Scope |
-|----------|-----------|-------|
-| Solution Scope | Workloads to Migrate | 5-10 VMs/applications |
-| Solution Scope | Migration Strategy | Rehost (lift-and-shift) |
-| Integration | Source Environment | VMware vSphere on-premises |
-| Integration | Hybrid Connectivity | AWS Direct Connect |
-| User Base | Total Users | 100 application users |
-| User Base | User Roles | 3 roles (admin operator user) |
-| Data Volume | Total Data to Migrate | 500 GB |
-| Data Volume | Database Migration | 2 databases (MySQL PostgreSQL) |
-| Technical Environment | Target AWS Region | us-east-1 |
-| Technical Environment | Availability Requirements | Standard (99.5%) |
-| Technical Environment | Infrastructure Complexity | EC2 RDS S3 standard |
-| Security & Compliance | Security Requirements | VPC Security Groups IAM |
-| Security & Compliance | Compliance Frameworks | SOC2 |
-| Performance | Migration Window | Weekend maintenance windows |
-| Performance | Performance Requirements | Match on-premises baseline |
-| Environment | Deployment Environments | 2 environments (dev prod) |
+<!-- TABLE_CONFIG: widths=[18, 29, 5, 18, 30] -->
+| Parameter | Scope | | Parameter | Scope |
+|-----------|-------|---|-----------|-------|
+| **Workloads to Migrate** | 5-10 VMs/applications | | **Target AWS Region** | us-east-1 |
+| **Migration Strategy** | Rehost (lift-and-shift) | | **Availability Requirements** | Standard (99.5%) |
+| **Source Environment** | VMware vSphere on-premises | | **Infrastructure Complexity** | EC2 RDS S3 standard |
+| **Hybrid Connectivity** | AWS Direct Connect | | **Security Requirements** | VPC Security Groups IAM |
+| **Total Users** | 100 application users | | **Compliance Frameworks** | SOC2 |
+| **User Roles** | 3 roles (admin operator user) | | **Migration Window** | Weekend maintenance windows |
+| **Total Data to Migrate** | 500 GB | | **Performance Requirements** | Match on-premises baseline |
+| **Database Migration** | 2 databases (MySQL PostgreSQL) | | **Deployment Environments** | 2 environments (dev prod) |
 <!-- END SCOPE_SIZING_TABLE -->
 
 *Note: Changes to these parameters may require scope adjustment and additional investment.*
@@ -195,14 +187,10 @@ This engagement is sized based on the following parameters:
 **Total Investment & Value with AWS MAP Program Credits**
 
 <!-- BEGIN COST_SUMMARY_TABLE -->
-<!-- TABLE_CONFIG: widths=[20, 12, 23, 13, 10, 10, 12] -->
-| Cost Category | Year 1 List | AWS/Partner Credits | Year 1 Net | Year 2 | Year 3 | 3-Year Total |
-|---------------|-------------|---------------------|------------|---------|---------|--------------|
-| Professional Services | $125,150 | ($22,000) | $103,150 | $0 | $0 | $103,150 |
-| Cloud Infrastructure | $9,572 | ($8,117) | $1,455 | $9,472 | $9,472 | $20,399 |
-| Software Licenses & Subscriptions | $3,132 | $0 | $3,132 | $3,132 | $3,132 | $9,396 |
-| Support & Maintenance | $1,462 | $0 | $1,462 | $1,462 | $1,462 | $4,386 |
-| **TOTAL INVESTMENT** | **$139,316** | **($30,117)** | **$109,199** | **$14,066** | **$14,066** | **$137,331** |
+<!-- TABLE_CONFIG: widths=[25, 15, 15, 15, 10, 10, 10] -->
+| Cost Category | Year 1 List | Provider/Partner Credits | Year 1 Net | Year 2 | Year 3 | 3-Year Total |
+|---------------|-------------|-------------------------|------------|--------|--------|--------------|
+| **TOTAL INVESTMENT** | **$0** | **$0** | **$0** | **$0** | **$0** | **$0** |
 <!-- END COST_SUMMARY_TABLE -->
 
 **AWS MAP Program Credits Breakdown (Year 1 Only):**

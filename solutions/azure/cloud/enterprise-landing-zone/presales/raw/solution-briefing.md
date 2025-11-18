@@ -50,25 +50,17 @@ footer_logo_right: eof-tools/doc-tools/brands/default/assets/logos/eo-framework-
 This engagement is sized based on the following parameters:
 
 <!-- BEGIN SCOPE_SIZING_TABLE -->
-<!-- TABLE_CONFIG: widths=[30, 35, 35] -->
-| Category | Parameter | Scope |
-|----------|-----------|-------|
-| Solution Scope | Management Groups | 3-tier hierarchy |
-| Solution Scope | Subscriptions | 5-10 subscriptions |
-| Integration | Hybrid Connectivity | ExpressRoute circuit |
-| Integration | Identity Federation | Azure AD Connect sync |
-| User Base | Total Users | 500 Azure users |
-| User Base | User Roles | 10 custom RBAC roles |
-| Data Volume | Workloads to Onboard | 20-30 applications |
-| Data Volume | Policy Assignments | 50 policy assignments |
-| Technical Environment | Target Azure Regions | 2 regions (East US West US) |
-| Technical Environment | Availability Requirements | Standard (99.9%) |
-| Technical Environment | Infrastructure Complexity | Hub-spoke network topology |
-| Security & Compliance | Security Requirements | Azure Defender Standard |
-| Security & Compliance | Compliance Frameworks | SOC2 ISO27001 |
-| Performance | Cost Management | Azure Cost Management |
-| Performance | Governance Automation | Policy-driven governance |
-| Environment | Deployment Environments | Landing zones for dev staging prod |
+<!-- TABLE_CONFIG: widths=[18, 29, 5, 18, 30] -->
+| Parameter | Scope | | Parameter | Scope |
+|-----------|-------|---|-----------|-------|
+| **Management Groups** | 3-tier hierarchy | | **Target Azure Regions** | 2 regions (East US West US) |
+| **Subscriptions** | 5-10 subscriptions | | **Availability Requirements** | Standard (99.9%) |
+| **Hybrid Connectivity** | ExpressRoute circuit | | **Infrastructure Complexity** | Hub-spoke network topology |
+| **Identity Federation** | Azure AD Connect sync | | **Security Requirements** | Azure Defender Standard |
+| **Total Users** | 500 Azure users | | **Compliance Frameworks** | SOC2 ISO27001 |
+| **User Roles** | 10 custom RBAC roles | | **Cost Management** | Azure Cost Management |
+| **Workloads to Onboard** | 20-30 applications | | **Governance Automation** | Policy-driven governance |
+| **Policy Assignments** | 50 policy assignments | | **Deployment Environments** | Landing zones for dev staging prod |
 <!-- END SCOPE_SIZING_TABLE -->
 
 *Note: Changes to these parameters may require scope adjustment and additional investment.*
@@ -199,14 +191,10 @@ This engagement is sized based on the following parameters:
 **Total Investment & Value**
 
 <!-- BEGIN COST_SUMMARY_TABLE -->
-<!-- TABLE_CONFIG: widths=[20, 12, 23, 13, 10, 10, 12] -->
+<!-- TABLE_CONFIG: widths=[25, 15, 15, 15, 10, 10, 10] -->
 | Cost Category | Year 1 List | Provider/Partner Credits | Year 1 Net | Year 2 | Year 3 | 3-Year Total |
-|---------------|-------------|-------------------------|------------|---------|---------|-----------------|
-| Cloud Infrastructure | $6,082 | ($1,800) | $4,282 | $6,082 | $6,082 | $16,446 |
-| Professional Services | $64,300 | ($5,000) | $59,300 | $0 | $0 | $59,300 |
-| Software Licenses & Subscriptions | $900 | $0 | $900 | $900 | $900 | $2,700 |
-| Support & Maintenance | $1,200 | $0 | $1,200 | $1,200 | $1,200 | $3,600 |
-| **TOTAL INVESTMENT** | **$72,482** | **($6,800)** | **$65,682** | **$8,182** | **$8,182** | **$82,046** |
+|---------------|-------------|-------------------------|------------|--------|--------|--------------|
+| **TOTAL INVESTMENT** | **$0** | **$0** | **$0** | **$0** | **$0** | **$0** |
 <!-- END COST_SUMMARY_TABLE -->
 
 **Provider/Partner Credits Breakdown (Year 1 Only):**

@@ -52,25 +52,17 @@ footer_logo_right: eof-tools/doc-tools/brands/default/assets/logos/eo-framework-
 This engagement is sized based on the following parameters:
 
 <!-- BEGIN SCOPE_SIZING_TABLE -->
-<!-- TABLE_CONFIG: widths=[30, 35, 35] -->
-| Category | Parameter | Scope |
-|----------|-----------|-------|
-| Solution Scope | Host Pools | 3 host pools |
-| Solution Scope | Application Groups | 5-10 app groups |
-| Integration | Identity Integration | Azure AD hybrid join |
-| Integration | Profile Management | FSLogix profile containers |
-| User Base | Total Users | 200 concurrent users |
-| User Base | User Roles | 3 roles (standard power admin) |
-| Data Volume | User Profiles | 10 GB per user |
-| Data Volume | Application Data | 500 GB shared storage |
-| Technical Environment | Deployment Regions | Single Azure region (East US) |
-| Technical Environment | Availability Requirements | Standard (99.9%) |
-| Technical Environment | Infrastructure Complexity | Multi-session Windows 11 hosts |
-| Security & Compliance | Security Requirements | Conditional Access MFA Intune |
-| Security & Compliance | Compliance Frameworks | SOC2 |
-| Performance | User Experience | Standard latency requirements |
-| Performance | Graphics Requirements | Standard office workloads |
-| Environment | Deployment Environments | 2 environments (pilot prod) |
+<!-- TABLE_CONFIG: widths=[18, 29, 5, 18, 30] -->
+| Parameter | Scope | | Parameter | Scope |
+|-----------|-------|---|-----------|-------|
+| **Host Pools** | 3 host pools | | **Deployment Regions** | Single Azure region (East US) |
+| **Application Groups** | 5-10 app groups | | **Availability Requirements** | Standard (99.9%) |
+| **Identity Integration** | Azure AD hybrid join | | **Infrastructure Complexity** | Multi-session Windows 11 hosts |
+| **Profile Management** | FSLogix profile containers | | **Security Requirements** | Conditional Access MFA Intune |
+| **Total Users** | 200 concurrent users | | **Compliance Frameworks** | SOC2 |
+| **User Roles** | 3 roles (standard power admin) | | **User Experience** | Standard latency requirements |
+| **User Profiles** | 10 GB per user | | **Graphics Requirements** | Standard office workloads |
+| **Application Data** | 500 GB shared storage | | **Deployment Environments** | 2 environments (pilot prod) |
 <!-- END SCOPE_SIZING_TABLE -->
 
 *Note: Changes to these parameters may require scope adjustment and additional investment.*
@@ -212,14 +204,10 @@ This engagement is sized based on the following parameters:
 **Total Investment & Value**
 
 <!-- BEGIN COST_SUMMARY_TABLE -->
-<!-- TABLE_CONFIG: widths=[20, 12, 23, 13, 10, 10, 12] -->
+<!-- TABLE_CONFIG: widths=[25, 15, 15, 15, 10, 10, 10] -->
 | Cost Category | Year 1 List | Provider/Partner Credits | Year 1 Net | Year 2 | Year 3 | 3-Year Total |
-|---------------|-------------|-------------------------|------------|---------|---------|-----------------|
-| Cloud Infrastructure | $28,000 | ($4,000) | $24,000 | $28,000 | $28,000 | $80,000 |
-| Professional Services | $55,000 | ($2,000) | $53,000 | $0 | $0 | $53,000 |
-| Software Licenses & Subscriptions | $12,000 | $0 | $12,000 | $12,000 | $12,000 | $36,000 |
-| Support & Maintenance | $3,500 | $0 | $3,500 | $3,500 | $3,500 | $10,500 |
-| **TOTAL INVESTMENT** | **$98,500** | **($6,000)** | **$92,500** | **$43,500** | **$43,500** | **$179,500** |
+|---------------|-------------|-------------------------|------------|--------|--------|--------------|
+| **TOTAL INVESTMENT** | **$0** | **$0** | **$0** | **$0** | **$0** | **$0** |
 <!-- END COST_SUMMARY_TABLE -->
 
 **Provider/Partner Credits Breakdown (Year 1 Only):**

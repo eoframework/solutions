@@ -49,25 +49,17 @@ footer_logo_right: eof-tools/doc-tools/brands/default/assets/logos/eo-framework-
 This engagement is sized based on the following parameters:
 
 <!-- BEGIN SCOPE_SIZING_TABLE -->
-<!-- TABLE_CONFIG: widths=[30, 35, 35] -->
-| Category | Parameter | Scope |
-|----------|-----------|-------|
-| Solution Scope | Application Tiers | 3-tier web application |
-| Solution Scope | RTO/RPO Requirements | RTO 4 hours RPO 1 hour |
-| Integration | Database Replication | Aurora Global Database |
-| Integration | Data Sources | Primary app database + S3 |
-| User Base | Total Users | 200 concurrent users |
-| User Base | User Roles | 3 roles (end-user admin ops) |
-| Data Volume | Database Size | 50 GB |
-| Data Volume | Backup Retention | 30 days retention |
-| Technical Environment | Primary AWS Region | us-east-1 |
-| Technical Environment | DR AWS Region | us-west-2 |
-| Technical Environment | Infrastructure Complexity | Pilot Light DR |
-| Security & Compliance | Security Requirements | Encryption at rest/transit IAM |
-| Security & Compliance | Compliance Frameworks | SOC2 Type II |
-| Performance | Failover Requirements | Automated failover <15 min |
-| Performance | Recovery Testing | Quarterly DR drills |
-| Environment | Deployment Environments | 3 environments (dev staging prod) |
+<!-- TABLE_CONFIG: widths=[18, 29, 5, 18, 30] -->
+| Parameter | Scope | | Parameter | Scope |
+|-----------|-------|---|-----------|-------|
+| **Application Tiers** | 3-tier web application | | **Primary AWS Region** | us-east-1 |
+| **RTO/RPO Requirements** | RTO 4 hours RPO 1 hour | | **DR AWS Region** | us-west-2 |
+| **Database Replication** | Aurora Global Database | | **Infrastructure Complexity** | Pilot Light DR |
+| **Data Sources** | Primary app database + S3 | | **Security Requirements** | Encryption at rest/transit IAM |
+| **Total Users** | 200 concurrent users | | **Compliance Frameworks** | SOC2 Type II |
+| **User Roles** | 3 roles (end-user admin ops) | | **Failover Requirements** | Automated failover <15 min |
+| **Database Size** | 50 GB | | **Recovery Testing** | Quarterly DR drills |
+| **Backup Retention** | 30 days retention | | **Deployment Environments** | 3 environments (dev staging prod) |
 <!-- END SCOPE_SIZING_TABLE -->
 
 *Note: Changes to these parameters may require scope adjustment and additional investment.*
@@ -195,14 +187,10 @@ This engagement is sized based on the following parameters:
 **Total Investment & Value with AWS Partner Credits**
 
 <!-- BEGIN COST_SUMMARY_TABLE -->
-<!-- TABLE_CONFIG: widths=[20, 12, 23, 13, 10, 10, 12] -->
-| Cost Category | Year 1 List | AWS/Partner Credits | Year 1 Net | Year 2 | Year 3 | 3-Year Total |
-|---------------|-------------|---------------------|------------|---------|---------|--------------|
-| Professional Services | $93,500 | ($8,000) | $85,500 | $0 | $0 | $85,500 |
-| Cloud Infrastructure | $8,644 | ($4,369) | $4,275 | $8,644 | $8,644 | $21,563 |
-| Software Licenses & Subscriptions | $3,132 | $0 | $3,132 | $3,132 | $3,132 | $9,396 |
-| Support & Maintenance | $1,467 | $0 | $1,467 | $1,467 | $1,467 | $4,401 |
-| **TOTAL INVESTMENT** | **$106,743** | **($12,369)** | **$94,374** | **$13,243** | **$13,243** | **$120,860** |
+<!-- TABLE_CONFIG: widths=[25, 15, 15, 15, 10, 10, 10] -->
+| Cost Category | Year 1 List | Provider/Partner Credits | Year 1 Net | Year 2 | Year 3 | 3-Year Total |
+|---------------|-------------|-------------------------|------------|--------|--------|--------------|
+| **TOTAL INVESTMENT** | **$0** | **$0** | **$0** | **$0** | **$0** | **$0** |
 <!-- END COST_SUMMARY_TABLE -->
 
 **AWS Partner Credits Breakdown (Year 1 Only):**

@@ -50,25 +50,17 @@ footer_logo_right: eof-tools/doc-tools/brands/default/assets/logos/eo-framework-
 This engagement is sized based on the following parameters:
 
 <!-- BEGIN SCOPE_SIZING_TABLE -->
-<!-- TABLE_CONFIG: widths=[30, 35, 35] -->
-| Category | Parameter | Scope |
-|----------|-----------|-------|
-| Solution Scope | Document Types | 3 document types (invoices receipts forms) |
-| Solution Scope | AI/ML Complexity | Azure Document Intelligence pre-built |
-| Integration | External System Integrations | 2 REST APIs (CRM ERP) |
-| Integration | Data Sources | Blob Storage and SharePoint |
-| User Base | Total Users | 75 users |
-| User Base | User Roles | 3 roles (submitter reviewer admin) |
-| Data Volume | Document Processing Volume | 2000 docs/month |
-| Data Volume | Data Storage Requirements | 250 GB |
-| Technical Environment | Deployment Regions | Single Azure region (East US) |
-| Technical Environment | Availability Requirements | Standard (99.5%) |
-| Technical Environment | Infrastructure Complexity | Serverless (Functions Blob Doc Intel) |
-| Security & Compliance | Security Requirements | RBAC encryption at rest/transit |
-| Security & Compliance | Compliance Frameworks | SOC2 |
-| Performance | Accuracy Requirements | 95%+ extraction accuracy |
-| Performance | Processing Speed | Batch processing |
-| Environment | Deployment Environments | 2 environments (dev prod) |
+<!-- TABLE_CONFIG: widths=[18, 29, 5, 18, 30] -->
+| Parameter | Scope | | Parameter | Scope |
+|-----------|-------|---|-----------|-------|
+| **Document Types** | 3 document types (invoices receipts forms) | | **Deployment Regions** | Single Azure region (East US) |
+| **AI/ML Complexity** | Azure Document Intelligence pre-built | | **Availability Requirements** | Standard (99.5%) |
+| **External System Integrations** | 2 REST APIs (CRM ERP) | | **Infrastructure Complexity** | Serverless (Functions Blob Doc Intel) |
+| **Data Sources** | Blob Storage and SharePoint | | **Security Requirements** | RBAC encryption at rest/transit |
+| **Total Users** | 75 users | | **Compliance Frameworks** | SOC2 |
+| **User Roles** | 3 roles (submitter reviewer admin) | | **Accuracy Requirements** | 95%+ extraction accuracy |
+| **Document Processing Volume** | 2000 docs/month | | **Processing Speed** | Batch processing |
+| **Data Storage Requirements** | 250 GB | | **Deployment Environments** | 2 environments (dev prod) |
 <!-- END SCOPE_SIZING_TABLE -->
 
 *Note: Changes to these parameters may require scope adjustment and additional investment.*
@@ -199,14 +191,10 @@ This engagement is sized based on the following parameters:
 **Total Investment & Value**
 
 <!-- BEGIN COST_SUMMARY_TABLE -->
-<!-- TABLE_CONFIG: widths=[20, 12, 23, 13, 10, 10, 12] -->
+<!-- TABLE_CONFIG: widths=[25, 15, 15, 15, 10, 10, 10] -->
 | Cost Category | Year 1 List | Provider/Partner Credits | Year 1 Net | Year 2 | Year 3 | 3-Year Total |
-|---------------|-------------|-------------------------|------------|---------|---------|-----------------|
-| Cloud Infrastructure | $14,400 | ($5,000) | $9,400 | $14,400 | $14,400 | $38,200 |
-| Professional Services | $72,000 | $0 | $72,000 | $0 | $0 | $72,000 |
-| Software Licenses & Subscriptions | $960 | $0 | $960 | $960 | $960 | $2,880 |
-| Support & Maintenance | $1,200 | $0 | $1,200 | $1,200 | $1,200 | $3,600 |
-| **TOTAL INVESTMENT** | **$88,560** | **($5,000)** | **$83,560** | **$16,560** | **$16,560** | **$116,680** |
+|---------------|-------------|-------------------------|------------|--------|--------|--------------|
+| **TOTAL INVESTMENT** | **$0** | **$0** | **$0** | **$0** | **$0** | **$0** |
 <!-- END COST_SUMMARY_TABLE -->
 
 **Provider/Partner Credits Breakdown (Year 1 Only):**

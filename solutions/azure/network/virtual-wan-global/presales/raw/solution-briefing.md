@@ -50,25 +50,17 @@ footer_logo_right: eof-tools/doc-tools/brands/default/assets/logos/eo-framework-
 This engagement is sized based on the following parameters:
 
 <!-- BEGIN SCOPE_SIZING_TABLE -->
-<!-- TABLE_CONFIG: widths=[30, 35, 35] -->
-| Category | Parameter | Scope |
-|----------|-----------|-------|
-| Solution Scope | Virtual WAN Hubs | 3 regional hubs |
-| Solution Scope | Connected Sites | 10-15 branch locations |
-| Integration | VPN Connections | Site-to-site IPsec VPN |
-| Integration | ExpressRoute Circuits | 2 circuits (primary backup) |
-| User Base | Total Users | 1000 users across sites |
-| User Base | User Roles | 3 roles (network ops security admin) |
-| Data Volume | Bandwidth Requirements | 1 Gbps aggregate |
-| Data Volume | Traffic Volume | 10 TB/month |
-| Technical Environment | Deployment Regions | 3 Azure regions globally |
-| Technical Environment | Availability Requirements | High availability (99.95%) |
-| Technical Environment | Infrastructure Complexity | vWAN + Azure Firewall + routing |
-| Security & Compliance | Security Requirements | Azure Firewall DDoS protection |
-| Security & Compliance | Compliance Frameworks | SOC2 ISO27001 |
-| Performance | Latency Requirements | <50ms inter-region |
-| Performance | Routing Complexity | BGP route propagation |
-| Environment | Deployment Environments | 2 environments (non-prod prod) |
+<!-- TABLE_CONFIG: widths=[18, 29, 5, 18, 30] -->
+| Parameter | Scope | | Parameter | Scope |
+|-----------|-------|---|-----------|-------|
+| **Virtual WAN Hubs** | 3 regional hubs | | **Deployment Regions** | 3 Azure regions globally |
+| **Connected Sites** | 10-15 branch locations | | **Availability Requirements** | High availability (99.95%) |
+| **VPN Connections** | Site-to-site IPsec VPN | | **Infrastructure Complexity** | vWAN + Azure Firewall + routing |
+| **ExpressRoute Circuits** | 2 circuits (primary backup) | | **Security Requirements** | Azure Firewall DDoS protection |
+| **Total Users** | 1000 users across sites | | **Compliance Frameworks** | SOC2 ISO27001 |
+| **User Roles** | 3 roles (network ops security admin) | | **Latency Requirements** | <50ms inter-region |
+| **Bandwidth Requirements** | 1 Gbps aggregate | | **Routing Complexity** | BGP route propagation |
+| **Traffic Volume** | 10 TB/month | | **Deployment Environments** | 2 environments (non-prod prod) |
 <!-- END SCOPE_SIZING_TABLE -->
 
 *Note: Changes to these parameters may require scope adjustment and additional investment.*
@@ -202,10 +194,6 @@ This engagement is sized based on the following parameters:
 <!-- TABLE_CONFIG: widths=[25, 15, 15, 15, 10, 10, 10] -->
 | Cost Category | Year 1 List | Provider/Partner Credits | Year 1 Net | Year 2 | Year 3 | 3-Year Total |
 |---------------|-------------|-------------------------|------------|--------|--------|--------------|
-| Cloud Infrastructure | $0 | $0 | $0 | $0 | $0 | $0 |
-| Professional Services | $0 | $0 | $0 | $0 | $0 | $0 |
-| Software Licenses | $0 | $0 | $0 | $0 | $0 | $0 |
-| Support & Maintenance | $0 | $0 | $0 | $0 | $0 | $0 |
 | **TOTAL INVESTMENT** | **$0** | **$0** | **$0** | **$0** | **$0** | **$0** |
 <!-- END COST_SUMMARY_TABLE -->
 

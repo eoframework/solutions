@@ -50,25 +50,17 @@ footer_logo_right: eof-tools/doc-tools/brands/default/assets/logos/eo-framework-
 This engagement is sized based on the following parameters:
 
 <!-- BEGIN SCOPE_SIZING_TABLE -->
-<!-- TABLE_CONFIG: widths=[30, 35, 35] -->
-| Category | Parameter | Scope |
-|----------|-----------|-------|
-| Solution Scope | Data Connectors | 10-15 connectors |
-| Solution Scope | Analytics Rules | 50 custom detection rules |
-| Integration | Log Sources | Azure AD Office365 Firewall Endpoints |
-| Integration | SOAR Playbooks | 10 automated playbooks |
-| User Base | Total Users | 10 SOC analysts |
-| User Base | User Roles | 3 roles (analyst engineer admin) |
-| Data Volume | Daily Log Ingestion | 50 GB/day |
-| Data Volume | Retention Period | 90 days hot 2 years archive |
-| Technical Environment | Deployment Regions | Single Azure region (East US) |
-| Technical Environment | Availability Requirements | 24/7 monitoring |
-| Technical Environment | Infrastructure Complexity | Log Analytics + Sentinel workspace |
-| Security & Compliance | Security Requirements | RBAC MFA audit logging |
-| Security & Compliance | Compliance Frameworks | SOC2 NIST CSF |
-| Performance | Detection Response | MTTR <1 hour |
-| Performance | Query Performance | Standard KQL queries |
-| Environment | Deployment Environments | 2 environments (dev prod) |
+<!-- TABLE_CONFIG: widths=[18, 29, 5, 18, 30] -->
+| Parameter | Scope | | Parameter | Scope |
+|-----------|-------|---|-----------|-------|
+| **Data Connectors** | 10-15 connectors | | **Deployment Regions** | Single Azure region (East US) |
+| **Analytics Rules** | 50 custom detection rules | | **Availability Requirements** | 24/7 monitoring |
+| **Log Sources** | Azure AD Office365 Firewall Endpoints | | **Infrastructure Complexity** | Log Analytics + Sentinel workspace |
+| **SOAR Playbooks** | 10 automated playbooks | | **Security Requirements** | RBAC MFA audit logging |
+| **Total Users** | 10 SOC analysts | | **Compliance Frameworks** | SOC2 NIST CSF |
+| **User Roles** | 3 roles (analyst engineer admin) | | **Detection Response** | MTTR <1 hour |
+| **Daily Log Ingestion** | 50 GB/day | | **Query Performance** | Standard KQL queries |
+| **Retention Period** | 90 days hot 2 years archive | | **Deployment Environments** | 2 environments (dev prod) |
 <!-- END SCOPE_SIZING_TABLE -->
 
 *Note: Changes to these parameters may require scope adjustment and additional investment.*
@@ -199,14 +191,10 @@ This engagement is sized based on the following parameters:
 **Total Investment & Value**
 
 <!-- BEGIN COST_SUMMARY_TABLE -->
-<!-- TABLE_CONFIG: widths=[20, 12, 23, 13, 10, 10, 12] -->
+<!-- TABLE_CONFIG: widths=[25, 15, 15, 15, 10, 10, 10] -->
 | Cost Category | Year 1 List | Provider/Partner Credits | Year 1 Net | Year 2 | Year 3 | 3-Year Total |
-|---------------|-------------|-------------------------|------------|---------|---------|-----------------|
-| Cloud Infrastructure | $6,082 | ($1,800) | $4,282 | $6,082 | $6,082 | $16,446 |
-| Professional Services | $64,300 | ($5,000) | $59,300 | $0 | $0 | $59,300 |
-| Software Licenses & Subscriptions | $900 | $0 | $900 | $900 | $900 | $2,700 |
-| Support & Maintenance | $1,200 | $0 | $1,200 | $1,200 | $1,200 | $3,600 |
-| **TOTAL INVESTMENT** | **$72,482** | **($6,800)** | **$65,682** | **$8,182** | **$8,182** | **$82,046** |
+|---------------|-------------|-------------------------|------------|--------|--------|--------------|
+| **TOTAL INVESTMENT** | **$0** | **$0** | **$0** | **$0** | **$0** | **$0** |
 <!-- END COST_SUMMARY_TABLE -->
 
 **Provider/Partner Credits Breakdown (Year 1 Only):**
