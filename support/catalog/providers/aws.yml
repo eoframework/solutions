@@ -1,11 +1,11 @@
 version: '2.0'
 provider: aws
-generated_at: '2025-11-18T17:09:01.139137'
+generated_at: '2025-11-18T18:19:51.915103'
 catalog_type: provider
 metadata:
   provider_name: AWS
   total_solutions: 3
-  last_updated: '2025-11-18T17:09:01.139149'
+  last_updated: '2025-11-18T18:19:51.915110'
   auto_generated: true
 categories:
   ai:
