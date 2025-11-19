@@ -91,15 +91,15 @@ This engagement is sized based on the following parameters:
 
 **Proven Methodology for DevOps Success**
 
-- **Phase 1: Assessment & Planning** *(Months 1-2)*
+- **Phase 1: Assessment & Planning** (Months 1-2)
   - Current development workflow analysis and tool inventory assessment
   - Pipeline strategy design and branching standards definition
   - Azure DevOps organization structure and security configuration
-- **Phase 2: Core Platform Setup** *(Months 3-4)*
+- **Phase 2: Core Platform Setup** (Months 3-4)
   - Azure Repos migration with Git history preservation
   - Azure Pipelines templates for build and release automation
   - Azure Artifacts feeds and package management setup
-- **Phase 3: Optimization & Adoption** *(Months 5-6)*
+- **Phase 3: Optimization & Adoption** (Months 5-6)
   - Team onboarding and pipeline standardization across projects
   - Advanced workflows including multi-stage deployments and approvals
   - Performance monitoring and continuous improvement processes

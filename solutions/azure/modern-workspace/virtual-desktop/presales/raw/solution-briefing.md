@@ -98,17 +98,17 @@ This engagement is sized based on the following parameters:
 
 **Proven Methodology for Desktop Modernization**
 
-- **Phase 1: Assessment & Design** *(Weeks 1-3)*
+- **Phase 1: Assessment & Design** (Weeks 1-3)
   - Current desktop environment discovery and user requirements
   - AVD architecture design (pooled vs. personal selection)
   - Golden image strategy and application packaging
   - Network and security design with NSG and Private Endpoints
-- **Phase 2: Infrastructure & Golden Image** *(Weeks 4-6)*
+- **Phase 2: Infrastructure & Golden Image** (Weeks 4-6)
   - Azure infrastructure provisioning (host pools, Azure Files, networking)
   - Golden image creation and application deployment
   - FSLogix profile configuration and testing
   - Azure Monitor setup and baseline metrics
-- **Phase 3: Deployment & Validation** *(Weeks 7-10)*
+- **Phase 3: Deployment & Validation** (Weeks 7-10)
   - User and group assignment to host pools
   - Pilot deployment with business users (10-15 users)
   - Performance validation and optimization

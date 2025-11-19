@@ -1,7 +1,7 @@
 # Development Guidelines
 
 ## Git Commit Guidelines
-- Do not include tool or AI assistant references in GitHub commit comments
+- Do not include tool or AI assistant (CLAUDE) references in GitHub commit comments
 - Keep commit messages focused on technical changes and business value
 
 ## Repository Management

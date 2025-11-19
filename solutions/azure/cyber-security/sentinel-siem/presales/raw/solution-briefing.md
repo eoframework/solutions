@@ -91,15 +91,15 @@ This engagement is sized based on the following parameters:
 
 **Proven Methodology for Success**
 
-- **Phase 1: Foundation & Planning** *(Months 1-2)*
+- **Phase 1: Foundation & Planning** (Months 1-2)
   - Log Analytics Workspace setup and Sentinel deployment
   - Data connector configuration for critical systems (Azure AD, firewalls, endpoints)
   - Initial detection rules and alert tuning
-- **Phase 2: Core Implementation** *(Months 3-4)*
+- **Phase 2: Core Implementation** (Months 3-4)
   - Advanced threat detection rules using KQL queries
   - Automated incident response playbooks for common scenarios
   - Security dashboard and reporting configuration
-- **Phase 3: Deployment & Optimization** *(Months 5-6)*
+- **Phase 3: Deployment & Optimization** (Months 5-6)
   - User acceptance testing and security team training
   - Detection rule optimization based on false positive analysis
   - Continuous monitoring and threat hunting procedures

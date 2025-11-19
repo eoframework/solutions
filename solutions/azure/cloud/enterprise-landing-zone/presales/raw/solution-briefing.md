@@ -91,15 +91,15 @@ This engagement is sized based on the following parameters:
 
 **Proven Methodology for Landing Zone Success**
 
-- **Phase 1: Assessment & Design** *(Weeks 1-3)*
+- **Phase 1: Assessment & Design** (Weeks 1-3)
   - Current Azure environment inventory and gap analysis
   - Management group hierarchy design and naming conventions
   - Policy framework definition and compliance requirements mapping
-- **Phase 2: Foundation Deployment** *(Weeks 4-6)*
+- **Phase 2: Foundation Deployment** (Weeks 4-6)
   - Management group structure implementation
   - Core Azure Policy assignments (tagging, allowed regions, resource types)
   - Hub network deployment with Azure Firewall and connectivity services
-- **Phase 3: Governance & Optimization** *(Weeks 7-10)*
+- **Phase 3: Governance & Optimization** (Weeks 7-10)
   - Azure Blueprints creation for subscription vending
   - Azure Cost Management configuration and budget alerts
   - Documentation, training, and operational handover

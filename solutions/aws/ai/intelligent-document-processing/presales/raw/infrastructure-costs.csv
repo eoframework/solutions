@@ -1,4 +1,4 @@
-# SIZING GUIDELINES - Based on Solution Scope (Default: Small)
+# Sizing Guidelines
 Category,Component,Small,Medium,Large,Notes
 Cloud Infrastructure,Document Processing Volume,50K pages/month,250K pages/month,1M+ pages/month,Monthly document processing capacity
 Cloud Infrastructure,AI/ML Service Tier,Textract + Comprehend,+ Custom models,+ Advanced NLP + SageMaker,AI/ML service complexity
@@ -9,7 +9,7 @@ Software Licenses,A2I Human Review,1K tasks/month,5K tasks/month,25K+ tasks/mont
 Software Licenses,Monitoring Tools,Basic (3 hosts),Standard (10 hosts),Enterprise (50+ hosts),Application performance monitoring
 Support & Maintenance,Support Level,Business hours,24x5 support,24x7 premium,SLA requirements
 
-# INFRASTRUCTURE COSTS - Quantities Default to Small Scope
+# Infrastructure Costs
 Category,Component,Description,Quantity,Unit,Unit Price,Annual Cost,Year 2,Year 3,3-Year Total,Notes
 Cloud Infrastructure,S3 Storage,Standard Storage for document ingestion and archives,1000,GB/Month,$0.023,"=D11*F11*12","=G11","=G11","=G11+H11+I11",Document storage
 Cloud Infrastructure,Textract Document Analysis,Document Analysis API (50k pages/month),50000,Pages/Month,$0.015,"=D12*F12*12","=G12","=G12","=G12+H12+I12",OCR and document analysis
@@ -31,18 +31,17 @@ Software Licenses,Datadog Monitoring,Pro monitoring (3 hosts),3,Hosts/Month,$23,
 Software Licenses,PagerDuty,Professional incident management (3 users),3,Users/Month,$41,"=D28*F28*12","=G28","=G28","=G28+H28+I28",Incident management
 Support & Maintenance,AWS Managed Services,Managed services and monitoring (15% of cloud infrastructure),1,Service/Month,$4087,"=D29*F29*12","=G29","=G29","=G29+H29+I29",Ongoing support
 
-# CREDITS - Applied per Category (Year 1 Only)
+# Credits
 Category,Credit Type,Credit Amount,Credit Comments
 Cloud Infrastructure,AWS AI Services Credit,"($5000)",35% Year 1 Textract consumption credit
 Software Licenses,Partner Credit,$0,No software credits available
 Support & Maintenance,Program Credit,$0,No support credits available
 Hardware/Equipment,Equipment Credit,$0,No hardware credits available
-Professional Services,AWS Partner Services Credit,"($10000)",Solution architecture and AI/ML integration services
 
-# SUMMARY
+# 3-Year Summary
 Category,Year 1 List,Year 1 Credits,Year 1 Net,Year 2,Year 3,3-Year Total
 Cloud Infrastructure,$26830,"($5000)",$21830,$26830,$26830,$75490
 Software Licenses,$2784,$0,$2784,$2784,$2784,$8352
 Support & Maintenance,$4087,$0,$4087,$4087,$4087,$12261
-Professional Services,$82250,"($10000)",$72250,$0,$0,$72250
-TOTAL,$115951,"($15000)",$100951,$33701,$33701,$168353
+Professional Services,$82250,$0,$82250,$0,$0,$82250
+TOTAL,$115951,"($5000)",$110951,$33701,$33701,$178353

@@ -91,15 +91,15 @@ This engagement is sized based on the following parameters:
 
 **Proven Methodology for Global Network Deployment**
 
-- **Phase 1: Network Assessment & Design** *(Months 1-2)*
+- **Phase 1: Network Assessment & Design** (Months 1-2)
   - Inventory all branch locations and current connectivity methods
   - Design hub placement based on user geography and latency requirements
   - Plan IP addressing, routing policies, and security rules
-- **Phase 2: Hub Infrastructure Deployment** *(Months 3-4)*
+- **Phase 2: Hub Infrastructure Deployment** (Months 3-4)
   - Deploy Virtual WAN hubs in primary Azure regions
   - Configure Azure Firewall and routing policies
   - Connect Azure Virtual Networks to the WAN backbone
-- **Phase 3: Branch Connectivity & Optimization** *(Months 5-6)*
+- **Phase 3: Branch Connectivity & Optimization** (Months 5-6)
   - Connect branch offices via SD-WAN, VPN, or ExpressRoute
   - Validate end-to-end connectivity and security policies
   - Optimize routing and monitor performance metrics

@@ -1,0 +1,47 @@
+# SIZING GUIDELINES - Based on Solution Scope (Default: Small)
+Category,Component,Small,Medium,Large,Notes
+Cloud Infrastructure,Virtual WAN Hubs,1-2 regional hubs,2-3 regional hubs,4+ global hubs,Network connectivity points
+Cloud Infrastructure,Branch Connections,5-10 sites,10-25 sites,50+ sites,Connected office locations
+Cloud Infrastructure,VPN Tunnels,5-10 tunnels,10-25 tunnels,50+ tunnels,Site-to-site VPN count
+Cloud Infrastructure,ExpressRoute Circuits,1-2 circuits,2-4 circuits,6+ circuits,Private connectivity circuits
+Cloud Infrastructure,Connected VNets,5-10 VNets,10-25 VNets,50+ VNets,Virtual networks in topology
+Cloud Infrastructure,Total Users,500-1000 users,1000-5000 users,5000+ users,Users across all locations
+Software Licenses,Firewall Tier,Standard firewall,Premium firewall,Premium + DDoS,Security requirements
+Software Licenses,Monitoring Scope,Basic monitoring,Standard APM,Enterprise observability,Network visibility level
+Support & Maintenance,Support Level,Business hours,24x5 support,24x7 premium,SLA requirements
+Professional Services,Implementation Hours,300-400 hours,400-600 hours,800+ hours,Network complexity
+
+# INFRASTRUCTURE COSTS - Quantities Default to Small Scope
+Category,Component,Description,Quantity,Unit,Unit Price,Annual Cost,Year 2,Year 3,3-Year Total,Notes
+Cloud Infrastructure,Virtual WAN Standard,Regional hub connectivity and routing,2,Hubs/Month,$183,"=D11*F11*12","=G11","=G11","=G11+H11+I11",Per-hub monthly rate
+Cloud Infrastructure,VPN Gateway,Site-to-site VPN for branches,10,Connections/Year,$438,"=D12*F12","=G12","=G12","=G12+H12+I12",Branch connectivity
+Cloud Infrastructure,ExpressRoute Circuit,Private connection for critical traffic,2,Circuits/Year,$9000,"=D13*F13","=G13","=G13","=G13+H13+I13",Hybrid connectivity
+Cloud Infrastructure,Azure Firewall Premium,Advanced threat protection and logging,2,Instances/Year,$7650,"=D14*F14","=G14","=G14","=G14+H14+I14",Network security
+Cloud Infrastructure,Monitor and Logging,Centralized monitoring across hubs,1,Service/Month,$200,"=D15*F15*12","=G15","=G15","=G15+H15+I15",Network observability
+Cloud Infrastructure,Data Transfer Out,Inter-region and internet egress,1,Service/Year,$6000,"=D16*F16","=G16","=G16","=G16+H16+I16",Bandwidth charges
+Software Licenses,Backup Disaster Recovery,Backup and geo-redundancy for configs,2,Regions/Month,$150,"=D17*F17*12","=G17","=G17","=G17+H17+I17",Configuration backup
+Support & Maintenance,Hybrid Connectivity Support,Virtual WAN and branch connectivity health,1,Service/Month,$954,"=D18*F18*12","=G18","=G18","=G18+H18+I18",25% of hub infrastructure
+Professional Services,Network Discovery,Assess current network topology and requirements,40,Hours,$200,"=D19*F19","=0","=0","=G19",One-time assessment
+Professional Services,Architecture Design,Virtual WAN hub design and branch strategy,60,Hours,$250,"=D20*F20","=0","=0","=G20",One-time architecture
+Professional Services,Infrastructure Deployment,Hub setup and VPN/ExpressRoute provisioning,80,Hours,$225,"=D21*F21","=0","=0","=G21",One-time deployment
+Professional Services,Network Security Configuration,Firewall policies and DDoS protection setup,50,Hours,$225,"=D22*F22","=0","=0","=G22",One-time security setup
+Professional Services,Branch Migration,Migrate branch offices to Virtual WAN architecture,70,Hours,$200,"=D23*F23","=0","=0","=G23",One-time migration
+Professional Services,Testing Validation,Performance testing and failover validation,40,Hours,$175,"=D24*F24","=0","=0","=G24",One-time validation
+Professional Services,Training Knowledge Transfer,Network team training on Virtual WAN operations,30,Hours,$200,"=D25*F25","=0","=0","=G25",One-time training
+Professional Services,Project Management,End-to-end project delivery coordination,50,Hours,$225,"=D26*F26","=0","=0","=G26",One-time oversight
+
+# CREDITS - Applied per Category (Year 1 Only)
+Category,Credit Type,Credit Amount,Credit Comments
+Cloud Infrastructure,Azure Credit,$0,No infrastructure credits available
+Software Licenses,Partner Credit,$0,No software credits available
+Support & Maintenance,Program Credit,$0,No support credits available
+Hardware/Equipment,Equipment Credit,$0,No hardware credits available
+Professional Services,Azure Partner Architecture Credit,"($12000)",Applied to architecture design and infrastructure deployment
+
+# SUMMARY
+Category,Year 1 List,Year 1 Credits,Year 1 Net,Year 2,Year 3,3-Year Total
+Cloud Infrastructure,$50496,$0,$50496,$50496,$50496,$151488
+Software Licenses,$3600,$0,$3600,$3600,$3600,$10800
+Support & Maintenance,$11448,$0,$11448,$11448,$11448,$34344
+Professional Services,$90500,"($12000)",$78500,$0,$0,$78500
+TOTAL,$156044,"($12000)",$144044,$65544,$65544,$275132

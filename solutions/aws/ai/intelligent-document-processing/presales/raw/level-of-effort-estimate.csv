@@ -62,3 +62,9 @@ Closeout,Performance Baseline,Establish performance metrics and monitoring basel
 Management,Technical Leadership,Quarterback technical oversight and architecture review,EO Quarterback,"=ROUND(SUM($G$33:$G$60)*0.10,0)",='Estimate Settings'!$C$32,=$E61*$F61,$200,"=TEXT($G61*$H61,""$#,##0"")",,AWS AI/ML architecture review and technical escalation support
 Management,Project Management,Project coordination planning and management activities,EO Project Manager,"=ROUND(SUM($G$33:$G$60)*0.10,0)",='Estimate Settings'!$C$31,=$E62*$F62,$150,"=TEXT($G62*$H62,""$#,##0"")",,Includes weekly status reporting risk management and stakeholder coordination
 ,,,,,TOTAL HOURS,"=SUM($G$33:$G$62)",TOTAL COST,"=TEXT(SUMPRODUCT($G$33:$G$62,$H$33:$H$62),""$#,##0"")",,EO Sales Engineer: Update phase-based multipliers in Estimate Settings based on customer document processing scope
+
+# PROFESSIONAL SERVICES CREDITS - Applied to Total Cost (Year 1 Only)
+Credit Type,Credit Amount,Credit Comments
+AWS Partner Services Credit,"($10000)",AWS Partner Network (APN) credit for solution architecture and AI/ML integration services
+Implementation Discount,$0,No implementation discount applicable
+NET PROFESSIONAL SERVICES COST,"=SUMPRODUCT($G$33:$G$62,$H$33:$H$62)-10000",Total Cost minus AWS Partner credits

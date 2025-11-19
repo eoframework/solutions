@@ -1,4 +1,4 @@
-# SIZING GUIDELINES - Based on Solution Scope (Default: Small)
+# Sizing Guidelines
 Category,Component,Small,Medium,Large,Notes
 Cloud Infrastructure,Compute Instances,2-4 instances,5-10 instances,15+ instances,Production workload capacity
 Cloud Infrastructure,Storage Volume,100 GB,500 GB - 1 TB,2+ TB,Based on data requirements
@@ -8,7 +8,7 @@ Software Licenses,Monitoring Tools,Basic monitoring,Advanced APM,Enterprise obse
 Support & Maintenance,Support Level,Business hours,24x5 support,24x7 premium,SLA requirements
 Hardware/Equipment,Network Devices,0-2 devices,3-5 devices,10+ devices,Based on site count
 
-# INFRASTRUCTURE COSTS - Quantities Default to Small Scope
+# Infrastructure Costs
 Category,Component,Description,Quantity,Unit,Unit Price,Annual Cost,Year 2,Year 3,3-Year Total,Notes
 Cloud Infrastructure,Compute Instance,Cloud VM or equivalent,2,Instance/Month,$150,"=D12*F12*12","=G12","=G12","=G12+H12+I12",Production workloads
 Cloud Infrastructure,Database,Managed database service,1,Instance/Month,$200,"=D13*F13*12","=G13","=G13","=G13+H13+I13",Relational database
@@ -19,17 +19,17 @@ Software Licenses,Security,Web application firewall,1,Service/Month,$25,"=D17*F1
 Support & Maintenance,Cloud Support,Provider support plan,1,Plan/Month,$100,"=D18*F18*12","=G18","=G18","=G18+H18+I18",Technical support
 Hardware/Equipment,Network Switch,Network equipment,0,Device,$2500,"=D19*F19","=G19","=G19","=G19+H19+I19",Optional on-premises
 
-# CREDITS - Applied per Category (Year 1 Only)
+# Credits
 Category,Credit Type,Credit Amount,Credit Comments
 Cloud Infrastructure,Provider Credit,"($1800)",30% credit on eligible compute and database services
 Software Licenses,Partner Credit,$0,No software credits available
 Support & Maintenance,Program Credit,$0,No support credits available
 Hardware/Equipment,Equipment Credit,$0,No hardware credits available
 
-# SUMMARY
+# 3-Year Summary
 Category,Year 1 List,Year 1 Credits,Year 1 Net,Year 2,Year 3,3-Year Total
-Cloud Infrastructure,0,0,0,0,0,0
-Software Licenses,0,0,0,0,0,0
-Support & Maintenance,0,0,0,0,0,0
-Hardware/Equipment,0,0,0,0,0,0
-TOTAL,0,0,0,0,0,0
+Cloud Infrastructure,$6082,"($1800)",$4282,$6082,$6082,$16446
+Software Licenses,$900,$0,$900,$900,$900,$2700
+Support & Maintenance,$1200,$0,$1200,$1200,$1200,$3600
+Hardware/Equipment,$0,$0,$0,$0,$0,$0
+TOTAL,$8182,"($1800)",$6382,$8182,$8182,$22746

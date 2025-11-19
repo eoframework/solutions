@@ -59,3 +59,9 @@ Closeout,Performance Baseline,Establish performance metrics and monitoring basel
 Management,Technical Leadership,Quarterback technical oversight and architecture review,EO Quarterback,"=ROUND(SUM($G$33:$G$58)*0.10,0)",='Estimate Settings'!$C$32,=$E59*$F59,$200,"=TEXT($G59*$H59,""$#,##0"")",,Solution architecture review and technical escalation support
 Management,Project Management,Project coordination planning and management activities,EO Project Manager,"=ROUND(SUM($G$33:$G$58)*0.10,0)",='Estimate Settings'!$C$31,=$E60*$F60,$150,"=TEXT($G60*$H60,""$#,##0"")",,Includes weekly status reporting and risk management
 ,,,,,TOTAL HOURS,"=SUM($G$33:$G$60)",TOTAL COST,"=TEXT(SUMPRODUCT($G$33:$G$60,$H$33:$H$60),""$#,##0"")",,EO Sales Engineer: Update phase-based multipliers in Estimate Settings sheet based on customer scope
+
+# PROFESSIONAL SERVICES CREDITS - Applied to Total Cost (Year 1 Only)
+Credit Type,Credit Amount,Credit Comments
+Partner Program Credit,"($5000)",Partner program services credit applied to professional services
+Volume Discount,$0,No volume discount applicable
+NET PROFESSIONAL SERVICES COST,"=SUMPRODUCT($G$33:$G$60,$H$33:$H$60)-5000",Total Cost minus credits
