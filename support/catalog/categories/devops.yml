@@ -1,12 +1,12 @@
 version: '2.0'
 category: devops
-generated_at: '2025-11-19T21:54:33.647301'
+generated_at: '2025-11-20T01:45:39.086037'
 catalog_type: category
 metadata:
   category_name: DevOps
   description: DevOps automation and CI/CD solutions
   total_solutions: 6
-  last_updated: '2025-11-19T21:54:33.647307'
+  last_updated: '2025-11-20T01:45:39.086044'
   auto_generated: true
 providers:
   cisco:
