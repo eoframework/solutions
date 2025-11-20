@@ -36,9 +36,11 @@ jobs:
           python -m pip install --upgrade pip
           pip install pyyaml
       
-      - name: Generate latest solutions.csv
+      - name: Generate catalogs and solutions.csv
         run: |
           cd solutions
+          python3 support/tools/generate-catalogs.py
+          python3 support/tools/process-catalogs.py
           python3 support/tools/export-templates-csv.py --output-type public --git-based
       
       - name: Checkout eof-website repository

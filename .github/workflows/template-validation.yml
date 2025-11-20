@@ -9,7 +9,7 @@ jobs:
   validate:
     runs-on: ubuntu-latest
     permissions:
-      contents: write
+      contents: read
       actions: read
     steps:
       - name: Checkout code
@@ -68,28 +68,10 @@ jobs:
             echo "ℹ️ No solution changes detected - skipping catalog update"
           fi
 
-      - name: Generate catalog and CSV
+      - name: Validate catalog generation
         if: github.event_name == 'push' && github.ref == 'refs/heads/main' && steps.changed-solutions.outputs.has_changes == 'true'
         run: |
           python3 support/tools/generate-catalogs.py --solutions "${{ steps.changed-solutions.outputs.changed_solutions }}"
           python3 support/tools/process-catalogs.py --solutions "${{ steps.changed-solutions.outputs.changed_solutions }}"
           python3 support/tools/validate-catalogs.py
-          python3 support/tools/export-templates-csv.py --output-type private
-          python3 support/tools/export-templates-csv.py --output-type public
-      
-      - name: Commit updated catalog
-        if: github.event_name == 'push' && github.ref == 'refs/heads/main' && steps.changed-solutions.outputs.has_changes == 'true'
-        run: |
-          git config --local user.email "action@github.com"
-          git config --local user.name "GitHub Action"
-          git add support/catalog/ support/exports/ support/reports/
-          git diff --staged --quiet || git commit -m "Update distributed catalog system [skip ci]"
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Push changes
-        if: github.event_name == 'push' && github.ref == 'refs/heads/main' && steps.changed-solutions.outputs.has_changes == 'true'
-        uses: ad-m/github-push-action@master
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          branch: main
+          echo "✅ Catalog validation successful (files not committed - generated fresh by sync workflow)"
