@@ -9,6 +9,7 @@ Licensed under BSL 1.1 - see LICENSE file for details
 
 import yaml
 import os
+import argparse
 from pathlib import Path
 from datetime import datetime
 
@@ -107,7 +108,59 @@ class CatalogGenerator:
             for cat in categories
         )
         print(f"📊 Discovered {total_solutions} solutions across {len(self.discovered_solutions)} providers")
-    
+
+    def scan_specific_solutions(self, solution_paths):
+        """Scan only specific solutions from provided paths
+
+        Args:
+            solution_paths: List of solution paths in format "provider/category/solution"
+        """
+        print(f"🔍 Scanning {len(solution_paths)} specific solution(s)...")
+
+        for solution_path in solution_paths:
+            parts = solution_path.strip().split('/')
+            if len(parts) != 3:
+                print(f"⚠️ Skipping invalid path format: {solution_path}")
+                continue
+
+            provider_name, category_name, solution_name = parts
+
+            # Initialize nested dict structure if needed
+            if provider_name not in self.discovered_solutions:
+                self.discovered_solutions[provider_name] = {}
+            if category_name not in self.discovered_solutions[provider_name]:
+                self.discovered_solutions[provider_name][category_name] = {}
+
+            # Build path to metadata file
+            solution_dir = self.providers_dir / provider_name / category_name / solution_name
+            metadata_file = solution_dir / 'metadata.yml'
+
+            if not metadata_file.exists():
+                print(f"⚠️ Metadata not found: {solution_path}")
+                continue
+
+            try:
+                with open(metadata_file, 'r') as f:
+                    metadata = yaml.safe_load(f)
+
+                # Add solution path and title if missing
+                metadata['solution_path'] = f"../../solutions/{provider_name}/{category_name}/{solution_name}/"
+                if 'title' not in metadata:
+                    metadata['title'] = metadata.get('solution_name', solution_name.replace('-', ' ').title())
+
+                self.discovered_solutions[provider_name][category_name][solution_name] = metadata
+                print(f"✓ Scanned: {provider_name}/{category_name}/{solution_name}")
+
+            except Exception as e:
+                print(f"✗ Error reading {metadata_file}: {e}")
+
+        total_solutions = sum(
+            len(cat_data)
+            for provider_data in self.discovered_solutions.values()
+            for cat_data in provider_data.values()
+        )
+        print(f"📊 Scanned {total_solutions} specific solution(s)")
+
     def generate_provider_catalog(self, provider_name, provider_data):
         """Generate catalog for a single provider"""
         provider_catalog = {
@@ -303,21 +356,18 @@ class CatalogGenerator:
         
         print(f"✓ {master_file}")
     
-    def generate_all_catalogs(self):
-        """Generate complete catalog structure from solution metadata"""
-        print("🚀 Starting catalog generation from solution metadata...")
-        
+    def generate_catalogs(self):
+        """Generate catalog files from discovered solutions"""
+        print("\n🚀 Generating catalog files...")
+
         # Load existing display names first
         self.load_existing_display_names()
-        
-        # Scan for solutions
-        self.scan_solutions()
-        
+
         # Write all catalogs
         self.write_catalogs()
-        
+
         print("\n✅ Catalog generation completed successfully!")
-        
+
         # Display summary
         total_solutions = sum(
             len(cat_data)
@@ -326,19 +376,39 @@ class CatalogGenerator:
         )
         print(f"📊 Generated catalogs for {total_solutions} solutions")
         print(f"📊 Across {len(self.discovered_solutions)} providers")
-        
+
         categories = set()
         for provider_data in self.discovered_solutions.values():
             categories.update(provider_data.keys())
         print(f"📊 In {len(categories)} categories")
 
 if __name__ == "__main__":
+    # Parse command line arguments
+    parser = argparse.ArgumentParser(description='Generate solution catalogs')
+    parser.add_argument('--solutions', type=str, help='Space-separated list of solution paths (provider/category/solution)')
+    parser.add_argument('--all', action='store_true', help='Process all solutions (default if --solutions not provided)')
+    args = parser.parse_args()
+
     # Auto-detect paths relative to script location
     script_dir = Path(__file__).parent
     repo_root = script_dir.parent.parent
-    
+
     generator = CatalogGenerator(
         providers_dir=repo_root / "solutions",
         catalog_dir=repo_root / "support" / "catalog"
     )
-    generator.generate_all_catalogs()
+
+    # Display which solutions triggered this run
+    if args.solutions:
+        solution_paths = args.solutions.strip().split()
+        print(f"🎯 Triggered by {len(solution_paths)} changed solution(s):")
+        for path in solution_paths:
+            print(f"   - {path}")
+        print()
+
+    # Always scan all solutions to maintain complete catalogs
+    print("🌐 Scanning all solutions to generate complete catalogs...")
+    generator.scan_solutions()
+
+    # Generate catalogs from discovered solutions
+    generator.generate_catalogs()

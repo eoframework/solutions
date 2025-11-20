@@ -10,6 +10,7 @@ Licensed under BSL 1.1 - see LICENSE file for details
 import yaml
 import json
 import os
+import argparse
 from pathlib import Path
 from datetime import datetime
 
@@ -205,19 +206,33 @@ class CatalogProcessor:
         return stats
 
 if __name__ == "__main__":
+    # Parse command line arguments
+    parser = argparse.ArgumentParser(description='Process solution catalogs')
+    parser.add_argument('--solutions', type=str, help='Space-separated list of solution paths (provider/category/solution) - for incremental mode info only')
+    parser.add_argument('--all', action='store_true', help='Process all solutions (default behavior)')
+    args = parser.parse_args()
+
     # Auto-detect paths relative to script location
     script_dir = Path(__file__).parent
     catalog_dir = script_dir.parent / "catalog"
-    
+
+    # Display processing mode
+    if args.solutions:
+        solution_paths = args.solutions.strip().split()
+        print(f"🎯 Incremental mode: Processing catalogs updated by {len(solution_paths)} solution(s)")
+        print(f"   Solutions: {', '.join(solution_paths)}")
+    else:
+        print("🌐 Full mode: Processing all catalogs")
+
     processor = CatalogProcessor(catalog_dir)
     stats = processor.run_full_processing()
-    
+
     # Display some statistics
     print("\n📈 Solution Statistics:")
     print("By Provider:")
     for provider, count in sorted(stats['by_provider'].items()):
         print(f"  {provider}: {count}")
-    
+
     print("\nBy Category:")
     for category, count in sorted(stats['by_category'].items()):
         print(f"  {category}: {count}")

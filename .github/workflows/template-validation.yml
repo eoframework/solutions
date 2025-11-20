@@ -42,17 +42,43 @@ jobs:
           fi
           echo "✅ No hardcoded secrets detected"
       
-      - name: Generate catalog and CSV
+      - name: Detect changed solutions
+        id: changed-solutions
         if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         run: |
-          python3 support/tools/generate-catalogs.py
-          python3 support/tools/process-catalogs.py
+          # Get list of changed files from the push
+          CHANGED_FILES=$(git diff --name-only ${{ github.event.before }} ${{ github.sha }})
+
+          # Extract unique solution paths (provider/category/solution)
+          CHANGED_SOLUTIONS=$(echo "$CHANGED_FILES" | \
+            grep -E "^solutions/[^/]+/[^/]+/[^/]+" | \
+            sed -E 's|^solutions/([^/]+)/([^/]+)/([^/]+)/.*|\1/\2/\3|' | \
+            sort -u)
+
+          # Convert to space-separated list
+          SOLUTIONS_LIST=$(echo "$CHANGED_SOLUTIONS" | tr '\n' ' ' | xargs)
+
+          echo "changed_solutions=$SOLUTIONS_LIST" >> $GITHUB_OUTPUT
+          echo "has_changes=$([ -n "$SOLUTIONS_LIST" ] && echo 'true' || echo 'false')" >> $GITHUB_OUTPUT
+
+          if [ -n "$SOLUTIONS_LIST" ]; then
+            echo "✅ Changed solutions detected:"
+            echo "$CHANGED_SOLUTIONS"
+          else
+            echo "ℹ️ No solution changes detected - skipping catalog update"
+          fi
+
+      - name: Generate catalog and CSV
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main' && steps.changed-solutions.outputs.has_changes == 'true'
+        run: |
+          python3 support/tools/generate-catalogs.py --solutions "${{ steps.changed-solutions.outputs.changed_solutions }}"
+          python3 support/tools/process-catalogs.py --solutions "${{ steps.changed-solutions.outputs.changed_solutions }}"
           python3 support/tools/validate-catalogs.py
           python3 support/tools/export-templates-csv.py --output-type private
           python3 support/tools/export-templates-csv.py --output-type public
       
       - name: Commit updated catalog
-        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main' && steps.changed-solutions.outputs.has_changes == 'true'
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
@@ -60,9 +86,9 @@ jobs:
           git diff --staged --quiet || git commit -m "Update distributed catalog system [skip ci]"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      
+
       - name: Push changes
-        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main' && steps.changed-solutions.outputs.has_changes == 'true'
         uses: ad-m/github-push-action@master
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
