@@ -29,7 +29,7 @@ Closeout,CLOSEOUT_MX,1,All Closeout phase tasks,,,,,,,
 Management,MANAGEMENT_MX,1.5,Project Management overhead,,,,,,,
 Leadership,LEADERSHIP_MX,1.5,Quarterback/Technical Leadership overhead,,,,,,,
 ,,,,,,,,,,
-# EFFORT ESTIMATE,,,,,,,,,,
+# Level of Effort,
 Phase,Work Package,Task Description,Resource Type,Base Hours,Effort Multiplier,Actual Hours,Rate,Cost Estimate,Dependencies,Notes
 Discovery,Cloud Requirements Gathering,Conduct stakeholder interviews for cloud migration/infrastructure,EO Engineer,40,='Estimate Settings'!$C$21,=$E33*$F33,$150,"=TEXT($G33*$H33,""$#,##0"")",,Focus on scalability performance and business objectives
 Discovery,Infrastructure Assessment,Analyze current infrastructure workloads and dependencies,EO Engineer,32,='Estimate Settings'!$C$21,=$E34*$F34,$200,"=TEXT($G34*$H34,""$#,##0"")",,Include application dependencies and performance baselines

@@ -1,5 +1,7 @@
-# SCOPE ASSUMPTIONS - BASELINE (MULTIPLIER 1.0),,,,,,,,,,
-Category,Baseline Assumption,Current Scope,Small (1x),Medium (2x),Large (3x),Notes,,,,
+# SCOPE ASSUMPTIONS - BASELINE (MULTIPLIER 1.0)
+#WIDTH: 25,35,30,25,25,30,40
+#ALIGN: left,left,left,left,left,left,left
+Category,Baseline Assumption,Current Scope,Small (1x),Medium (2x),Large (3x),Notes
 Solution Scope,Primary Features/Capabilities,3-5 core features,3-5 core features,6-10 features,10+ features or advanced capabilities,Standard feature set for solution type,,,,
 Solution Scope,Customization Level,Minimal configuration,Minimal configuration,Moderate customization,Extensive custom development,Configuration vs custom code,,,,
 Integration,External System Integrations,2 REST APIs,2 REST APIs,4-6 systems,8+ systems or complex protocols,Standard REST/API integrations,,,,
@@ -16,8 +18,10 @@ Security & Compliance,Compliance Frameworks,1-2 basic standards,1-2 basic standa
 Performance,Performance Requirements,Standard performance,Standard performance,Enhanced performance,High performance low latency,Response time and throughput needs,,,,
 Environment,Deployment Environments,2 environments (dev prod),2 environments (dev prod),3 environments (dev staging prod),4+ environments with automation,Environment management complexity,,,,
 ,,,,,,,,,,
-# ESTIMATE SETTINGS - EO Sales Engineer Updates Multipliers Based on Customer Scope,,,,,,,,,,
-Phase,Variable Name,Multiplier,Description / Applies To Tasks,,,,,,,
+# ESTIMATE SETTINGS - EO Sales Engineer Updates Multipliers Based on Customer Scope
+#WIDTH: 15,20,12,150
+#ALIGN: left,left,center,left
+Phase,Variable Name,Multiplier,Description / Applies To Tasks
 Discovery,DISCOVERY_MX,1,"All Discovery phase tasks (Requirements Gathering, Technical Assessment, Security Review, Integration Assessment)",,,,,,,
 Planning,PLANNING_MX,1,"All Planning phase tasks (Solution Design, Security Architecture, Data Architecture, Implementation Planning)",,,,,,,
 Development,DEVELOPMENT_MX,1,"All Development phase tasks (Infrastructure Setup, Core Development, Database Development, Integration Development, UI Development, Security Implementation)",,,,,,,
@@ -28,40 +32,44 @@ Closeout,CLOSEOUT_MX,1,"All Closeout phase tasks (Knowledge Transfer, Performanc
 Management,MANAGEMENT_MX,1.5,Project Management overhead - 10% of actual engineering hours,,,,,,,
 Leadership,LEADERSHIP_MX,1.5,Quarterback/Technical Leadership overhead - 10% of actual engineering hours,,,,,,,
 ,,,,,,,,,,
-# EFFORT ESTIMATE
+# Level of Effort
+#WIDTH: 15,25,50,15,12,14,12,12,15,25,40
+#ALIGN: left,left,left,left,right,center,right,right,right,left,left
 Phase,Work Package,Task Description,Resource Type,Base Hours,Effort Multiplier,Actual Hours,Rate,Cost Estimate,Dependencies,Notes
-Discovery,Requirements Gathering,Conduct stakeholder interviews and discovery workshops,EO Engineer,40,='Estimate Settings'!$C$24,=$E33*$F33,$150,"=TEXT($G33*$H33,""$#,##0"")",,Includes stakeholder interviews and requirements documentation deliverable
-Discovery,Technical Assessment,Evaluate current infrastructure and technical environment,EO Engineer,32,='Estimate Settings'!$C$24,=$E34*$F34,$175,"=TEXT($G34*$H34,""$#,##0"")",,Customer must provide access to current infrastructure for evaluation
-Discovery,Security & Compliance Review,Assess security requirements and compliance standards,EO Engineer,16,='Estimate Settings'!$C$24,=$E35*$F35,$175,"=TEXT($G35*$H35,""$#,##0"")",,Identifies compliance gaps and remediation requirements
-Discovery,Integration Assessment,Identify integration points and data flow requirements,EO Engineer,24,='Estimate Settings'!$C$24,=$E36*$F36,$160,"=TEXT($G36*$H36,""$#,##0"")",,Customer must provide API documentation and integration endpoints
-Planning,Security Architecture,Design security controls and compliance framework,EO Engineer,24,='Estimate Settings'!$C$25,=$E37*$F37,$175,"=TEXT($G37*$H37,""$#,##0"")",Security & Compliance Review,Deliverable: Security design document with controls and compliance mapping
-Planning,Data Architecture,Design data models schemas and data flow,EO Engineer,32,='Estimate Settings'!$C$25,=$E38*$F38,$165,"=TEXT($G38*$H38,""$#,##0"")",Integration Assessment,Deliverable: Data model diagrams and migration strategy
-Development,Infrastructure Setup,Provision and configure infrastructure environment,EO Engineer,40,='Estimate Settings'!$C$26,=$E39*$F39,$160,"=TEXT($G39*$H39,""$#,##0"")",,Includes environment provisioning and configuration baseline
-Development,Core Application Development,Build primary application functionality and services,EO Engineer,120,='Estimate Settings'!$C$26,=$E40*$F40,$150,"=TEXT($G40*$H40,""$#,##0"")",Infrastructure Setup,Largest effort item - varies significantly based on feature complexity
-Development,Database Development,Implement database schema stored procedures and queries,EO Engineer,40,='Estimate Settings'!$C$26,=$E41*$F41,$155,"=TEXT($G41*$H41,""$#,##0"")",Data Architecture,Includes schema design stored procedures and initial data seeding
-Development,Integration Development,Build API integrations data connectors and workflows,EO Engineer,64,='Estimate Settings'!$C$26,=$E42*$F42,$155,"=TEXT($G42*$H42,""$#,##0"")",Core Application Development,Customer integration endpoints must be available for testing
-Development,User Interface Development,Create user interface and user experience components,EO Engineer,48,='Estimate Settings'!$C$26,=$E43*$F43,$140,"=TEXT($G43*$H43,""$#,##0"")",Core Application Development,Includes responsive design for desktop and mobile devices
-Development,Security Implementation,Implement authentication authorization and security controls,EO Engineer,32,='Estimate Settings'!$C$26,=$E44*$F44,$165,"=TEXT($G44*$H44,""$#,##0"")",Security Architecture,Deliverable: Functional authentication authorization and audit logging
-Testing,Unit Testing,Develop and execute unit tests for all components,EO Engineer,32,='Estimate Settings'!$C$27,=$E45*$F45,$140,"=TEXT($G45*$H45,""$#,##0"")",Core Application Development,Automated test suite for regression testing
-Testing,Integration Testing,Test system integrations data flows and API endpoints,EO Engineer,40,='Estimate Settings'!$C$27,=$E46*$F46,$140,"=TEXT($G46*$H46,""$#,##0"")",Integration Development,Requires access to customer test environments and systems
-Testing,Performance Testing,Conduct load performance and scalability testing,EO Engineer,24,='Estimate Settings'!$C$27,=$E47*$F47,$150,"=TEXT($G47*$H47,""$#,##0"")",Integration Testing,Load testing with expected concurrent user volumes
-Testing,Security Testing,Perform security assessments and vulnerability testing,EO Engineer,16,='Estimate Settings'!$C$27,=$E48*$F48,$175,"=TEXT($G48*$H48,""$#,##0"")",Security Implementation,Third-party security assessment may require additional budget
-Testing,User Acceptance Testing,Coordinate and support UAT with business users,EO Engineer,32,='Estimate Settings'!$C$27,=$E49*$F49,$150,"=TEXT($G49*$H49,""$#,##0"")",Performance Testing,Customer business users must be available for UAT period
-Deployment,Pre-Production Validation,Validate solution in pre-production environment,EO Engineer,16,='Estimate Settings'!$C$28,=$E50*$F50,$150,"=TEXT($G50*$H50,""$#,##0"")",User Acceptance Testing,Final checks before production deployment
-Deployment,Production Deployment,Deploy solution to production environment,EO Engineer,24,='Estimate Settings'!$C$28,=$E51*$F51,$160,"=TEXT($G51*$H51,""$#,##0"")",Pre-Production Validation,Includes deployment runbook and rollback procedures
-Deployment,Data Migration,Migrate existing data to new system,EO Engineer,32,='Estimate Settings'!$C$28,=$E52*$F52,$155,"=TEXT($G52*$H52,""$#,##0"")",Production Deployment,Customer responsible for data quality and validation
-Deployment,Go-Live Support,Provide support during initial production rollout,EO Engineer,40,='Estimate Settings'!$C$28,=$E53*$F53,$130,"=TEXT($G53*$H53,""$#,##0"")",Data Migration,Includes daily monitoring and rapid issue response during hypercare
-Training,Administrator Training,Train system administrators and technical users,EO Engineer,16,='Estimate Settings'!$C$29,=$E54*$F54,$140,"=TEXT($G54*$H54,""$#,##0"")",Production Deployment,Includes system administration and troubleshooting procedures
-Training,End User Training,Train business users on system functionality,EO Engineer,24,='Estimate Settings'!$C$29,=$E55*$F55,$130,"=TEXT($G55*$H55,""$#,##0"")",Administrator Training,Role-based training sessions - customer provides training space
-Training,Documentation,Create user manuals technical documentation and runbooks,EO Engineer,32,='Estimate Settings'!$C$29,=$E56*$F56,$120,"=TEXT($G56*$H56,""$#,##0"")",End User Training,Deliverable: User guides administrator guides and runbooks
-Closeout,Knowledge Transfer,Transfer ownership to operations and support teams,EO Engineer,16,='Estimate Settings'!$C$30,=$E57*$F57,$140,"=TEXT($G57*$H57,""$#,##0"")",Documentation,Comprehensive handover to customer operations team
-Closeout,Performance Baseline,Establish performance metrics and monitoring baselines,EO Engineer,8,='Estimate Settings'!$C$30,=$E58*$F58,$130,"=TEXT($G58*$H58,""$#,##0"")",Knowledge Transfer,Establishes SLA metrics and monitoring thresholds
-Management,Technical Leadership,Quarterback technical oversight and architecture review,EO Quarterback,"=ROUND(SUM($G$33:$G$58)*0.10,0)",='Estimate Settings'!$C$32,=$E59*$F59,$200,"=TEXT($G59*$H59,""$#,##0"")",,Solution architecture review and technical escalation support
-Management,Project Management,Project coordination planning and management activities,EO Project Manager,"=ROUND(SUM($G$33:$G$58)*0.10,0)",='Estimate Settings'!$C$31,=$E60*$F60,$150,"=TEXT($G60*$H60,""$#,##0"")",,Includes weekly status reporting and risk management
-,,,,,TOTAL HOURS,"=SUM($G$33:$G$60)",TOTAL COST,"=TEXT(SUMPRODUCT($G$33:$G$60,$H$33:$H$60),""$#,##0"")",,EO Sales Engineer: Update phase-based multipliers in Estimate Settings sheet based on customer scope
+Discovery,Requirements Gathering,Conduct stakeholder interviews and discovery workshops,EO Engineer,40,='Estimate Settings'!$C$3,=$E33*$F33,$150,"=TEXT($G33*$H33,""$#,##0"")",,Includes stakeholder interviews and requirements documentation deliverable
+Discovery,Technical Assessment,Evaluate current infrastructure and technical environment,EO Engineer,32,='Estimate Settings'!$C$3,=$E34*$F34,$175,"=TEXT($G34*$H34,""$#,##0"")",,Customer must provide access to current infrastructure for evaluation
+Discovery,Security & Compliance Review,Assess security requirements and compliance standards,EO Engineer,16,='Estimate Settings'!$C$3,=$E35*$F35,$175,"=TEXT($G35*$H35,""$#,##0"")",,Identifies compliance gaps and remediation requirements
+Discovery,Integration Assessment,Identify integration points and data flow requirements,EO Engineer,24,='Estimate Settings'!$C$3,=$E36*$F36,$160,"=TEXT($G36*$H36,""$#,##0"")",,Customer must provide API documentation and integration endpoints
+Planning,Security Architecture,Design security controls and compliance framework,EO Engineer,24,='Estimate Settings'!$C$4,=$E37*$F37,$175,"=TEXT($G37*$H37,""$#,##0"")",Security & Compliance Review,Deliverable: Security design document with controls and compliance mapping
+Planning,Data Architecture,Design data models schemas and data flow,EO Engineer,32,='Estimate Settings'!$C$4,=$E38*$F38,$165,"=TEXT($G38*$H38,""$#,##0"")",Integration Assessment,Deliverable: Data model diagrams and migration strategy
+Development,Infrastructure Setup,Provision and configure infrastructure environment,EO Engineer,40,='Estimate Settings'!$C$5,=$E39*$F39,$160,"=TEXT($G39*$H39,""$#,##0"")",,Includes environment provisioning and configuration baseline
+Development,Core Application Development,Build primary application functionality and services,EO Engineer,120,='Estimate Settings'!$C$5,=$E40*$F40,$150,"=TEXT($G40*$H40,""$#,##0"")",Infrastructure Setup,Largest effort item - varies significantly based on feature complexity
+Development,Database Development,Implement database schema stored procedures and queries,EO Engineer,40,='Estimate Settings'!$C$5,=$E41*$F41,$155,"=TEXT($G41*$H41,""$#,##0"")",Data Architecture,Includes schema design stored procedures and initial data seeding
+Development,Integration Development,Build API integrations data connectors and workflows,EO Engineer,64,='Estimate Settings'!$C$5,=$E42*$F42,$155,"=TEXT($G42*$H42,""$#,##0"")",Core Application Development,Customer integration endpoints must be available for testing
+Development,User Interface Development,Create user interface and user experience components,EO Engineer,48,='Estimate Settings'!$C$5,=$E43*$F43,$140,"=TEXT($G43*$H43,""$#,##0"")",Core Application Development,Includes responsive design for desktop and mobile devices
+Development,Security Implementation,Implement authentication authorization and security controls,EO Engineer,32,='Estimate Settings'!$C$5,=$E44*$F44,$165,"=TEXT($G44*$H44,""$#,##0"")",Security Architecture,Deliverable: Functional authentication authorization and audit logging
+Testing,Unit Testing,Develop and execute unit tests for all components,EO Engineer,32,='Estimate Settings'!$C$6,=$E45*$F45,$140,"=TEXT($G45*$H45,""$#,##0"")",Core Application Development,Automated test suite for regression testing
+Testing,Integration Testing,Test system integrations data flows and API endpoints,EO Engineer,40,='Estimate Settings'!$C$6,=$E46*$F46,$140,"=TEXT($G46*$H46,""$#,##0"")",Integration Development,Requires access to customer test environments and systems
+Testing,Performance Testing,Conduct load performance and scalability testing,EO Engineer,24,='Estimate Settings'!$C$6,=$E47*$F47,$150,"=TEXT($G47*$H47,""$#,##0"")",Integration Testing,Load testing with expected concurrent user volumes
+Testing,Security Testing,Perform security assessments and vulnerability testing,EO Engineer,16,='Estimate Settings'!$C$6,=$E48*$F48,$175,"=TEXT($G48*$H48,""$#,##0"")",Security Implementation,Third-party security assessment may require additional budget
+Testing,User Acceptance Testing,Coordinate and support UAT with business users,EO Engineer,32,='Estimate Settings'!$C$6,=$E49*$F49,$150,"=TEXT($G49*$H49,""$#,##0"")",Performance Testing,Customer business users must be available for UAT period
+Deployment,Pre-Production Validation,Validate solution in pre-production environment,EO Engineer,16,='Estimate Settings'!$C$7,=$E50*$F50,$150,"=TEXT($G50*$H50,""$#,##0"")",User Acceptance Testing,Final checks before production deployment
+Deployment,Production Deployment,Deploy solution to production environment,EO Engineer,24,='Estimate Settings'!$C$7,=$E51*$F51,$160,"=TEXT($G51*$H51,""$#,##0"")",Pre-Production Validation,Includes deployment runbook and rollback procedures
+Deployment,Data Migration,Migrate existing data to new system,EO Engineer,32,='Estimate Settings'!$C$7,=$E52*$F52,$155,"=TEXT($G52*$H52,""$#,##0"")",Production Deployment,Customer responsible for data quality and validation
+Deployment,Go-Live Support,Provide support during initial production rollout,EO Engineer,40,='Estimate Settings'!$C$7,=$E53*$F53,$130,"=TEXT($G53*$H53,""$#,##0"")",Data Migration,Includes daily monitoring and rapid issue response during hypercare
+Training,Administrator Training,Train system administrators and technical users,EO Engineer,16,='Estimate Settings'!$C$8,=$E54*$F54,$140,"=TEXT($G54*$H54,""$#,##0"")",Production Deployment,Includes system administration and troubleshooting procedures
+Training,End User Training,Train business users on system functionality,EO Engineer,24,='Estimate Settings'!$C$8,=$E55*$F55,$130,"=TEXT($G55*$H55,""$#,##0"")",Administrator Training,Role-based training sessions - customer provides training space
+Training,Documentation,Create user manuals technical documentation and runbooks,EO Engineer,32,='Estimate Settings'!$C$8,=$E56*$F56,$120,"=TEXT($G56*$H56,""$#,##0"")",End User Training,Deliverable: User guides administrator guides and runbooks
+Closeout,Knowledge Transfer,Transfer ownership to operations and support teams,EO Engineer,16,='Estimate Settings'!$C$9,=$E57*$F57,$140,"=TEXT($G57*$H57,""$#,##0"")",Documentation,Comprehensive handover to customer operations team
+Closeout,Performance Baseline,Establish performance metrics and monitoring baselines,EO Engineer,8,='Estimate Settings'!$C$9,=$E58*$F58,$130,"=TEXT($G58*$H58,""$#,##0"")",Knowledge Transfer,Establishes SLA metrics and monitoring thresholds
+Management,Technical Leadership,Quarterback technical oversight and architecture review,EO Quarterback,"=ROUND(SUM($G$3:$G$28)*0.10,0)",='Estimate Settings'!$C$11,=$E59*$F59,$200,"=TEXT($G59*$H59,""$#,##0"")",,Solution architecture review and technical escalation support
+Management,Project Management,Project coordination planning and management activities,EO Project Manager,"=ROUND(SUM($G$3:$G$28)*0.10,0)",='Estimate Settings'!$C$10,=$E60*$F60,$150,"=TEXT($G60*$H60,""$#,##0"")",,Includes weekly status reporting and risk management
+,,,,,TOTAL HOURS,"=SUM($G$3:$G$30)",TOTAL COST,"=TEXT(SUMPRODUCT($G$3:$G$30,$H$3:$H$30),""$#,##0"")",,EO Sales Engineer: Update phase-based multipliers in Estimate Settings sheet based on customer scope
 
-# PROFESSIONAL SERVICES CREDITS - Applied to Total Cost (Year 1 Only)
+# Credits - Applied to Total Cost (Year 1 Only)
+#WIDTH: 25,15,100
+#ALIGN: left,right,left
 Credit Type,Credit Amount,Credit Comments
 Partner Program Credit,"($5000)",Partner program services credit applied to professional services
 Volume Discount,$0,No volume discount applicable
-NET PROFESSIONAL SERVICES COST,"=SUMPRODUCT($G$33:$G$60,$H$33:$H$60)-5000",Total Cost minus credits
+NET PROFESSIONAL SERVICES COST,"=SUMPRODUCT($G$3:$G$30,$H$3:$H$30)-5000",Total Cost minus credits

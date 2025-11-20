@@ -29,7 +29,7 @@ Closeout,CLOSEOUT_MX,1,"All Closeout phase tasks (Knowledge Transfer, Performanc
 Management,MANAGEMENT_MX,1.5,Project Management overhead - 20% of actual engineering hours,,,,,,,
 Leadership,LEADERSHIP_MX,1.5,Quarterback/Technical Leadership overhead - 25% of actual engineering hours,,,,,,,
 ,,,,,,,,,,
-# EFFORT ESTIMATE
+# Level of Effort,
 Phase,Work Package,Task Description,Resource Type,Base Hours,Effort Multiplier,Actual Hours,Rate,Cost Estimate,Dependencies,Notes
 Discovery,Azure Requirements Gathering,Conduct stakeholder interviews for Azure cloud strategy,EO Engineer,40,='Estimate Settings'!$C$24,=$E33*$F33,$150,"=TEXT($G33*$H33,""$#,##0"")",,Focus on governance scalability and business alignment
 Discovery,Current Environment Assessment,Analyze existing infrastructure and Azure readiness,EO Engineer,32,='Estimate Settings'!$C$24,=$E34*$F34,$200,"=TEXT($G34*$H34,""$#,##0"")",,Include identity networking and application assessment

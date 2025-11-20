@@ -1,4 +1,6 @@
 # SCOPE ASSUMPTIONS - BASELINE (MULTIPLIER 1.0),,,,,,,,,,
+#WIDTH: 25,35,30,25,25,30,40
+#ALIGN: left,left,left,left,left,left,left
 Category,Baseline Assumption,Current Scope,Small (1x),Medium (2x),Large (3x),Notes,,,,,
 Solution Scope,Document Types,2-3 document types,2-3 document types,4-6 document types,8+ document types or complex variations,Standard document types for IDP,,,,,
 Solution Scope,AI/ML Complexity,AWS Textract/Comprehend only,AWS Textract/Comprehend only,Custom classification models,Advanced custom models + NLP,Pre-built vs custom model development,,,,,
@@ -18,6 +20,8 @@ Performance,Processing Speed,Standard batch processing,Standard batch processing
 Environment,Deployment Environments,2 environments (dev prod),2 environments (dev prod),3 environments (dev staging prod),4+ environments with ML pipelines,Environment management for IDP,,,,,
 ,,,,,,,,,,
 # ESTIMATE SETTINGS - EO Sales Engineer Updates Multipliers Based on Customer Scope,,,,,,,,,,
+#WIDTH: 15,20,12,150
+#ALIGN: left,left,center,left
 Phase,Variable Name,Multiplier,Description / Applies To Tasks,,,,,,,
 Discovery,DISCOVERY_MX,1,"All Discovery phase tasks (Requirements Gathering, Document Analysis, AWS Assessment, Compliance Review)",,,,,,,
 Planning,PLANNING_MX,1,"All Planning phase tasks (IDP Solution Design, Data Flow Design, Security Architecture, Project Planning)",,,,,,,
@@ -29,42 +33,46 @@ Closeout,CLOSEOUT_MX,1,"All Closeout phase tasks (Knowledge Transfer, Performanc
 Management,MANAGEMENT_MX,1.5,Project Management overhead - 10% of actual engineering hours,,,,,,,
 Leadership,LEADERSHIP_MX,1.5,Quarterback/Technical Leadership overhead - 10% of actual engineering hours,,,,,,,
 ,,,,,,,,,,
-# EFFORT ESTIMATE
+# Level of Effort,
+#WIDTH: 15,25,50,15,12,14,12,12,15,25,40
+#ALIGN: left,left,left,left,right,center,right,right,right,left,left
 Phase,Work Package,Task Description,Resource Type,Base Hours,Effort Multiplier,Actual Hours,Rate,Cost Estimate,Dependencies,Notes
-Discovery,Requirements Gathering,Conduct stakeholder interviews for IDP requirements,EO Engineer,32,='Estimate Settings'!$C$24,=$E33*$F33,$150,"=TEXT($G33*$H33,""$#,##0"")",,Includes requirements documentation and document processing workflow analysis
-Discovery,Document Analysis,Analyze document types volumes and data extraction requirements,EO Engineer,24,='Estimate Settings'!$C$24,=$E34*$F34,$200,"=TEXT($G34*$H34,""$#,##0"")",,Customer must provide representative document samples for each document type
-Discovery,AWS Environment Assessment,Evaluate AWS infrastructure and AI/ML services readiness,EO Engineer,24,='Estimate Settings'!$C$24,=$E35*$F35,$200,"=TEXT($G35*$H35,""$#,##0"")",,Customer must provide AWS account access and service limits information
-Discovery,Compliance Review,Assess data privacy compliance and security requirements,EO Engineer,16,='Estimate Settings'!$C$24,=$E36*$F36,$175,"=TEXT($G36*$H36,""$#,##0"")",,Identifies PII/PHI handling requirements and document retention policies
-Planning,IDP Solution Design,Design AWS AI/ML architecture with Textract Comprehend A2I,EO Engineer,40,='Estimate Settings'!$C$25,=$E37*$F37,$200,"=TEXT($G37*$H37,""$#,##0"")",Requirements Gathering,Deliverable: AWS architecture diagram with AI/ML service integration design
-Planning,Data Flow Design,Design document ingestion processing and output workflows,EO Engineer,24,='Estimate Settings'!$C$25,=$E38*$F38,$180,"=TEXT($G38*$H38,""$#,##0"")",Document Analysis,Deliverable: Document processing workflow and data flow diagrams
-Planning,Security Architecture,Design security controls encryption and access for documents,EO Engineer,24,='Estimate Settings'!$C$25,=$E39*$F39,$175,"=TEXT($G39*$H39,""$#,##0"")",Compliance Review,Document encryption at rest/transit IAM roles and audit logging design
-Planning,Project Planning,Develop implementation timeline and resource allocation,EO Engineer,24,='Estimate Settings'!$C$25,=$E40*$F40,$140,"=TEXT($G40*$H40,""$#,##0"")",IDP Solution Design,Deliverable: Project plan with phased rollout and milestone schedule
-Development,AWS Infrastructure Setup,Provision Textract Comprehend S3 Lambda and supporting services,EO Engineer,40,='Estimate Settings'!$C$26,=$E41*$F41,$160,"=TEXT($G41*$H41,""$#,##0"")",IDP Solution Design,Includes S3 buckets Lambda functions API Gateway and CloudWatch setup
-Development,Document Processing Pipeline,Build document ingestion and processing workflows,EO Engineer,64,='Estimate Settings'!$C$26,=$E42*$F42,$130,"=TEXT($G42*$H42,""$#,##0"")",AWS Infrastructure Setup,Serverless event-driven pipeline with error handling and retry logic
-Development,AI/ML Model Integration,Integrate AWS Textract Comprehend and A2I services,EO Engineer,48,='Estimate Settings'!$C$26,=$E43*$F43,$170,"=TEXT($G43*$H43,""$#,##0"")",Document Processing Pipeline,Configure Textract APIs Comprehend entity recognition and A2I workflows
-Development,Custom Classification Models,Develop minimal classification logic for 2-3 document types,EO Engineer,24,='Estimate Settings'!$C$26,=$E44*$F44,$165,"=TEXT($G44*$H44,""$#,##0"")",AI/ML Model Integration,Simple classification using AWS pre-built services - not full custom ML models
-Development,Data Extraction Logic,Build structured data extraction and validation logic,EO Engineer,32,='Estimate Settings'!$C$26,=$E45*$F45,$130,"=TEXT($G45*$H45,""$#,##0"")",Custom Classification Models,Includes field validation business rules and confidence scoring
-Development,API Development,Create REST APIs for document submission and retrieval,EO Engineer,24,='Estimate Settings'!$C$26,=$E46*$F46,$125,"=TEXT($G46*$H46,""$#,##0"")",Data Extraction Logic,API Gateway endpoints with authentication and rate limiting
-Development,Web Interface,Build document upload and results viewing interface,EO Engineer,32,='Estimate Settings'!$C$26,=$E47*$F47,$125,"=TEXT($G47*$H47,""$#,##0"")",API Development,Simple upload UI with drag-drop and results dashboard - not full application
-Testing,Unit Testing,Develop automated tests for all processing components,EO Engineer,32,='Estimate Settings'!$C$27,=$E48*$F48,$120,"=TEXT($G48*$H48,""$#,##0"")",Data Extraction Logic,Automated test suite for Lambda functions and API endpoints
-Testing,Document Processing Testing,Test various document types formats and qualities,EO Engineer,32,='Estimate Settings'!$C$27,=$E49*$F49,$120,"=TEXT($G49*$H49,""$#,##0"")",Web Interface,Customer must provide comprehensive test document library with variations
-Testing,Performance Testing,Test system performance with high document volumes,EO Engineer,24,='Estimate Settings'!$C$27,=$E50*$F50,$140,"=TEXT($G50*$H50,""$#,##0"")",Document Processing Testing,Load testing with realistic document volumes and concurrent processing
-Testing,Accuracy Testing,Validate AI/ML model accuracy and data extraction quality,EO Engineer,24,='Estimate Settings'!$C$27,=$E51*$F51,$170,"=TEXT($G51*$H51,""$#,##0"")",Performance Testing,Statistical validation of extraction accuracy against labeled test dataset
-Testing,Security Testing,Perform security testing on document handling pipeline,EO Engineer,16,='Estimate Settings'!$C$27,=$E52*$F52,$175,"=TEXT($G52*$H52,""$#,##0"")",Accuracy Testing,Includes IAM policy validation encryption testing and audit log verification
-Deployment,Production Deployment,Deploy IDP solution to production AWS environment,EO Engineer,24,='Estimate Settings'!$C$28,=$E53*$F53,$160,"=TEXT($G53*$H53,""$#,##0"")",Security Testing,Blue-green deployment with rollback procedures and smoke testing
-Deployment,Model Deployment,Deploy trained ML models to production endpoints,EO Engineer,16,='Estimate Settings'!$C$28,=$E54*$F54,$170,"=TEXT($G54*$H54,""$#,##0"")",Production Deployment,Deploy classification logic and configure production Textract/Comprehend
-Deployment,Go-Live Support,Provide support during initial production rollout,EO Engineer,40,='Estimate Settings'!$C$28,=$E55*$F55,$110,"=TEXT($G55*$H55,""$#,##0"")",Model Deployment,Daily monitoring rapid issue response and accuracy validation during hypercare
-Training,Administrator Training,Train system administrators on IDP solution management,EO Engineer,16,='Estimate Settings'!$C$29,=$E56*$F56,$130,"=TEXT($G56*$H56,""$#,##0"")",Production Deployment,Includes AWS service management CloudWatch monitoring and troubleshooting
-Training,Business User Training,Train users on document submission and results review,EO Engineer,16,='Estimate Settings'!$C$29,=$E57*$F57,$120,"=TEXT($G57*$H57,""$#,##0"")",Administrator Training,Role-based training for document processors and quality reviewers
-Training,Documentation,Create user guides technical documentation and runbooks,EO Engineer,24,='Estimate Settings'!$C$29,=$E58*$F58,$110,"=TEXT($G58*$H58,""$#,##0"")",Business User Training,Deliverable: Operations runbook user guides and troubleshooting procedures
-Closeout,Knowledge Transfer,Transfer solution ownership to client operations team,EO Engineer,16,='Estimate Settings'!$C$30,=$E59*$F59,$140,"=TEXT($G59*$H59,""$#,##0"")",Documentation,Comprehensive handover including AWS architecture model details and procedures
-Closeout,Performance Baseline,Establish performance metrics and monitoring baselines,EO Engineer,8,='Estimate Settings'!$C$30,=$E60*$F60,$130,"=TEXT($G60*$H60,""$#,##0"")",Knowledge Transfer,Establishes accuracy SLAs processing time metrics and cost monitoring
-Management,Technical Leadership,Quarterback technical oversight and architecture review,EO Quarterback,"=ROUND(SUM($G$33:$G$60)*0.10,0)",='Estimate Settings'!$C$32,=$E61*$F61,$200,"=TEXT($G61*$H61,""$#,##0"")",,AWS AI/ML architecture review and technical escalation support
-Management,Project Management,Project coordination planning and management activities,EO Project Manager,"=ROUND(SUM($G$33:$G$60)*0.10,0)",='Estimate Settings'!$C$31,=$E62*$F62,$150,"=TEXT($G62*$H62,""$#,##0"")",,Includes weekly status reporting risk management and stakeholder coordination
-,,,,,TOTAL HOURS,"=SUM($G$33:$G$62)",TOTAL COST,"=TEXT(SUMPRODUCT($G$33:$G$62,$H$33:$H$62),""$#,##0"")",,EO Sales Engineer: Update phase-based multipliers in Estimate Settings based on customer document processing scope
+Discovery,Requirements Gathering,Conduct stakeholder interviews for IDP requirements,EO Engineer,32,='Estimate Settings'!$C$3,=$E33*$F33,$150,"=TEXT($G33*$H33,""$#,##0"")",,Includes requirements documentation and document processing workflow analysis
+Discovery,Document Analysis,Analyze document types volumes and data extraction requirements,EO Engineer,24,='Estimate Settings'!$C$3,=$E34*$F34,$200,"=TEXT($G34*$H34,""$#,##0"")",,Customer must provide representative document samples for each document type
+Discovery,AWS Environment Assessment,Evaluate AWS infrastructure and AI/ML services readiness,EO Engineer,24,='Estimate Settings'!$C$3,=$E35*$F35,$200,"=TEXT($G35*$H35,""$#,##0"")",,Customer must provide AWS account access and service limits information
+Discovery,Compliance Review,Assess data privacy compliance and security requirements,EO Engineer,16,='Estimate Settings'!$C$3,=$E36*$F36,$175,"=TEXT($G36*$H36,""$#,##0"")",,Identifies PII/PHI handling requirements and document retention policies
+Planning,IDP Solution Design,Design AWS AI/ML architecture with Textract Comprehend A2I,EO Engineer,40,='Estimate Settings'!$C$4,=$E37*$F37,$200,"=TEXT($G37*$H37,""$#,##0"")",Requirements Gathering,Deliverable: AWS architecture diagram with AI/ML service integration design
+Planning,Data Flow Design,Design document ingestion processing and output workflows,EO Engineer,24,='Estimate Settings'!$C$4,=$E38*$F38,$180,"=TEXT($G38*$H38,""$#,##0"")",Document Analysis,Deliverable: Document processing workflow and data flow diagrams
+Planning,Security Architecture,Design security controls encryption and access for documents,EO Engineer,24,='Estimate Settings'!$C$4,=$E39*$F39,$175,"=TEXT($G39*$H39,""$#,##0"")",Compliance Review,Document encryption at rest/transit IAM roles and audit logging design
+Planning,Project Planning,Develop implementation timeline and resource allocation,EO Engineer,24,='Estimate Settings'!$C$4,=$E40*$F40,$140,"=TEXT($G40*$H40,""$#,##0"")",IDP Solution Design,Deliverable: Project plan with phased rollout and milestone schedule
+Development,AWS Infrastructure Setup,Provision Textract Comprehend S3 Lambda and supporting services,EO Engineer,40,='Estimate Settings'!$C$5,=$E41*$F41,$160,"=TEXT($G41*$H41,""$#,##0"")",IDP Solution Design,Includes S3 buckets Lambda functions API Gateway and CloudWatch setup
+Development,Document Processing Pipeline,Build document ingestion and processing workflows,EO Engineer,64,='Estimate Settings'!$C$5,=$E42*$F42,$130,"=TEXT($G42*$H42,""$#,##0"")",AWS Infrastructure Setup,Serverless event-driven pipeline with error handling and retry logic
+Development,AI/ML Model Integration,Integrate AWS Textract Comprehend and A2I services,EO Engineer,48,='Estimate Settings'!$C$5,=$E43*$F43,$170,"=TEXT($G43*$H43,""$#,##0"")",Document Processing Pipeline,Configure Textract APIs Comprehend entity recognition and A2I workflows
+Development,Custom Classification Models,Develop minimal classification logic for 2-3 document types,EO Engineer,24,='Estimate Settings'!$C$5,=$E44*$F44,$165,"=TEXT($G44*$H44,""$#,##0"")",AI/ML Model Integration,Simple classification using AWS pre-built services - not full custom ML models
+Development,Data Extraction Logic,Build structured data extraction and validation logic,EO Engineer,32,='Estimate Settings'!$C$5,=$E45*$F45,$130,"=TEXT($G45*$H45,""$#,##0"")",Custom Classification Models,Includes field validation business rules and confidence scoring
+Development,API Development,Create REST APIs for document submission and retrieval,EO Engineer,24,='Estimate Settings'!$C$5,=$E46*$F46,$125,"=TEXT($G46*$H46,""$#,##0"")",Data Extraction Logic,API Gateway endpoints with authentication and rate limiting
+Development,Web Interface,Build document upload and results viewing interface,EO Engineer,32,='Estimate Settings'!$C$5,=$E47*$F47,$125,"=TEXT($G47*$H47,""$#,##0"")",API Development,Simple upload UI with drag-drop and results dashboard - not full application
+Testing,Unit Testing,Develop automated tests for all processing components,EO Engineer,32,='Estimate Settings'!$C$6,=$E48*$F48,$120,"=TEXT($G48*$H48,""$#,##0"")",Data Extraction Logic,Automated test suite for Lambda functions and API endpoints
+Testing,Document Processing Testing,Test various document types formats and qualities,EO Engineer,32,='Estimate Settings'!$C$6,=$E49*$F49,$120,"=TEXT($G49*$H49,""$#,##0"")",Web Interface,Customer must provide comprehensive test document library with variations
+Testing,Performance Testing,Test system performance with high document volumes,EO Engineer,24,='Estimate Settings'!$C$6,=$E50*$F50,$140,"=TEXT($G50*$H50,""$#,##0"")",Document Processing Testing,Load testing with realistic document volumes and concurrent processing
+Testing,Accuracy Testing,Validate AI/ML model accuracy and data extraction quality,EO Engineer,24,='Estimate Settings'!$C$6,=$E51*$F51,$170,"=TEXT($G51*$H51,""$#,##0"")",Performance Testing,Statistical validation of extraction accuracy against labeled test dataset
+Testing,Security Testing,Perform security testing on document handling pipeline,EO Engineer,16,='Estimate Settings'!$C$6,=$E52*$F52,$175,"=TEXT($G52*$H52,""$#,##0"")",Accuracy Testing,Includes IAM policy validation encryption testing and audit log verification
+Deployment,Production Deployment,Deploy IDP solution to production AWS environment,EO Engineer,24,='Estimate Settings'!$C$7,=$E53*$F53,$160,"=TEXT($G53*$H53,""$#,##0"")",Security Testing,Blue-green deployment with rollback procedures and smoke testing
+Deployment,Model Deployment,Deploy trained ML models to production endpoints,EO Engineer,16,='Estimate Settings'!$C$7,=$E54*$F54,$170,"=TEXT($G54*$H54,""$#,##0"")",Production Deployment,Deploy classification logic and configure production Textract/Comprehend
+Deployment,Go-Live Support,Provide support during initial production rollout,EO Engineer,40,='Estimate Settings'!$C$7,=$E55*$F55,$110,"=TEXT($G55*$H55,""$#,##0"")",Model Deployment,Daily monitoring rapid issue response and accuracy validation during hypercare
+Training,Administrator Training,Train system administrators on IDP solution management,EO Engineer,16,='Estimate Settings'!$C$8,=$E56*$F56,$130,"=TEXT($G56*$H56,""$#,##0"")",Production Deployment,Includes AWS service management CloudWatch monitoring and troubleshooting
+Training,Business User Training,Train users on document submission and results review,EO Engineer,16,='Estimate Settings'!$C$8,=$E57*$F57,$120,"=TEXT($G57*$H57,""$#,##0"")",Administrator Training,Role-based training for document processors and quality reviewers
+Training,Documentation,Create user guides technical documentation and runbooks,EO Engineer,24,='Estimate Settings'!$C$8,=$E58*$F58,$110,"=TEXT($G58*$H58,""$#,##0"")",Business User Training,Deliverable: Operations runbook user guides and troubleshooting procedures
+Closeout,Knowledge Transfer,Transfer solution ownership to client operations team,EO Engineer,16,='Estimate Settings'!$C$9,=$E59*$F59,$140,"=TEXT($G59*$H59,""$#,##0"")",Documentation,Comprehensive handover including AWS architecture model details and procedures
+Closeout,Performance Baseline,Establish performance metrics and monitoring baselines,EO Engineer,8,='Estimate Settings'!$C$9,=$E60*$F60,$130,"=TEXT($G60*$H60,""$#,##0"")",Knowledge Transfer,Establishes accuracy SLAs processing time metrics and cost monitoring
+Management,Technical Leadership,Quarterback technical oversight and architecture review,EO Quarterback,"=ROUND(SUM($G$3:$G$30)*0.10,0)",='Estimate Settings'!$C$11,=$E61*$F61,$200,"=TEXT($G61*$H61,""$#,##0"")",,AWS AI/ML architecture review and technical escalation support
+Management,Project Management,Project coordination planning and management activities,EO Project Manager,"=ROUND(SUM($G$3:$G$30)*0.10,0)",='Estimate Settings'!$C$10,=$E62*$F62,$150,"=TEXT($G62*$H62,""$#,##0"")",,Includes weekly status reporting risk management and stakeholder coordination
+,,,,,TOTAL HOURS,"=SUM($G$3:$G$32)",TOTAL COST,"=TEXT(SUMPRODUCT($G$3:$G$32,$H$3:$H$32),""$#,##0"")",,EO Sales Engineer: Update phase-based multipliers in Estimate Settings based on customer document processing scope
 
-# PROFESSIONAL SERVICES CREDITS - Applied to Total Cost (Year 1 Only)
+# Credits - Applied to Total Cost (Year 1 Only)
+#WIDTH: 25,15,100
+#ALIGN: left,right,left
 Credit Type,Credit Amount,Credit Comments
 AWS Partner Services Credit,"($10000)",AWS Partner Network (APN) credit for solution architecture and AI/ML integration services
 Implementation Discount,$0,No implementation discount applicable
-NET PROFESSIONAL SERVICES COST,"=SUMPRODUCT($G$33:$G$62,$H$33:$H$62)-10000",Total Cost minus AWS Partner credits
+NET PROFESSIONAL SERVICES COST,"=SUMPRODUCT($G$3:$G$32,$H$3:$H$32)-10000",Total Cost minus AWS Partner credits

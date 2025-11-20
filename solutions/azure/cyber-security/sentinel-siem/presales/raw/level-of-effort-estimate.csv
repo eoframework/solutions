@@ -29,7 +29,7 @@ Closeout,CLOSEOUT_MX,1,All Closeout phase tasks,,,,,,,
 Management,MANAGEMENT_MX,1.5,Project Management overhead,,,,,,,
 Leadership,LEADERSHIP_MX,1.5,Technical Leadership overhead,,,,,,,
 ,,,,,,,,,,
-# EFFORT ESTIMATE
+# Level of Effort
 Phase,Work Package,Task Description,Resource Type,Base Hours,Effort Multiplier,Actual Hours,Rate,Cost Estimate,Dependencies,Notes
 Discovery,Security Requirements Gathering,Conduct security stakeholder interviews and threat modeling,EO Engineer,40,='Estimate Settings'!$C$24,=$E33*$F33,$150,=TEXT($G33*$H33,""$#,##0""),""$#,
 Discovery,Current Security Assessment,Analyze existing security tools logs and incident response,EO Engineer,32,='Estimate Settings'!$C$24,=$E34*$F34,$200,=TEXT($G34*$H34,""$#,##0""),""$#,

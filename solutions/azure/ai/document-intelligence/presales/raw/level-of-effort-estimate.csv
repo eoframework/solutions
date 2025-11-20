@@ -29,7 +29,7 @@ Closeout,CLOSEOUT_MX,1,"All Closeout phase tasks (Knowledge Transfer, Performanc
 Management,MANAGEMENT_MX,1.5,Project Management overhead - 10% of actual engineering hours,,,,,,,
 Leadership,LEADERSHIP_MX,1.5,Quarterback/Technical Leadership overhead - 10% of actual engineering hours,,,,,,,
 ,,,,,,,,,,
-# EFFORT ESTIMATE
+# Level of Effort,
 Phase,Work Package,Task Description,Resource Type,Base Hours,Effort Multiplier,Actual Hours,Rate,Cost Estimate,Dependencies,Notes
 Discovery,Requirements Gathering,Conduct stakeholder interviews for IDP requirements,EO Engineer,32,='Estimate Settings'!$C$24,=$E33*$F33,$150,"=TEXT($G33*$H33,""$#,##0"")",,Includes requirements documentation and document processing workflow analysis
 Discovery,Document Analysis,Analyze document types volumes and data extraction requirements,EO Engineer,24,='Estimate Settings'!$C$24,=$E34*$F34,$200,"=TEXT($G34*$H34,""$#,##0"")",,Customer must provide representative document samples for each document type
