@@ -1,11 +1,11 @@
 version: '2.0'
 provider: ibm
-generated_at: '2025-11-20T01:45:39.017654'
+generated_at: '2025-11-20T02:10:28.123370'
 catalog_type: provider
 metadata:
   provider_name: IBM
   total_solutions: 2
-  last_updated: '2025-11-20T01:45:39.017661'
+  last_updated: '2025-11-20T02:10:28.123382'
   auto_generated: true
 categories:
   cloud:
