@@ -9,8 +9,10 @@ footer_logo_right: eof-tools/doc-tools/brands/default/assets/logos/eo-framework-
 
 # AWS Intelligent Document Processing - Solution Briefing
 
-## Slide Deck Structure for PowerPoint
-**10 Slides**
+## Slide Deck Structure
+**10 Slides - Fixed Format**
+
+---
 
 ### Slide 1: Title Slide
 **layout:** eo_title_slide
@@ -18,15 +20,11 @@ footer_logo_right: eof-tools/doc-tools/brands/default/assets/logos/eo-framework-
 **Presentation Title:** Solution Briefing
 **Subtitle:** AWS Intelligent Document Processing
 **Presenter:** [Presenter Name] | [Current Date]
-**Logos:**
-- Client Logo (top center)
-- Consulting Company Logo (footer left)
-- EO Framework Logo (footer right)
 
 ---
 
 ### Business Opportunity
-**layout:** two_column
+**layout:** eo_two_column
 
 **Transforming Manual Document Processing with AI**
 
@@ -42,7 +40,7 @@ footer_logo_right: eof-tools/doc-tools/brands/default/assets/logos/eo-framework-
 ---
 
 ### Engagement Scope
-**layout:** table
+**layout:** eo_table
 
 **Sizing Parameters for This Engagement**
 
@@ -52,14 +50,15 @@ This engagement is sized based on the following parameters:
 <!-- TABLE_CONFIG: widths=[18, 29, 5, 18, 30] -->
 | Parameter | Scope | | Parameter | Scope |
 |-----------|-------|---|-----------|-------|
-| **Document Types** | 2-3 document types | | **Deployment Regions** | Single AWS region (us-east-1) |
-| **AI/ML Complexity** | AWS Textract/Comprehend only | | **Availability Requirements** | Standard (99.5%) |
-| **External System Integrations** | 2 REST APIs | | **Infrastructure Complexity** | Serverless (Lambda S3 Textract) |
-| **Data Sources** | S3 and email ingestion | | **Security Requirements** | Basic encryption IAM SSE-S3 |
-| **Total Users** | 50 users | | **Compliance Frameworks** | SOC2 |
-| **User Roles** | 3 roles (submitter reviewer admin) | | **Accuracy Requirements** | 95%+ extraction accuracy |
-| **Document Processing Volume** | 1000-5000 docs/month | | **Processing Speed** | Standard batch processing |
-| **Data Storage Requirements** | 500 GB | | **Deployment Environments** | 2 environments (dev prod) |
+| **Document Types** | 2-3 document types | | **Availability Requirements** | Standard (99.5%) |
+| **AI/ML Complexity** | AWS Textract/Comprehend only | | **Infrastructure Complexity** | Serverless (Lambda S3 Textract) |
+| **External System Integrations** | 2 REST APIs | | **Security Requirements** | Basic encryption IAM SSE-S3 |
+| **Data Sources** | S3 and email ingestion | | **Compliance Frameworks** | SOC2 |
+| **Total Users** | 50 users | | **Accuracy Requirements** | 95%+ extraction accuracy |
+| **User Roles** | 3 roles (submitter reviewer admin) | | **Processing Speed** | Standard batch processing |
+| **Document Processing Volume** | 1000-5000 docs/month | | **Deployment Environments** | 2 environments (dev prod) |
+| **Data Storage Requirements** | 500 GB | |  |  |
+| **Deployment Regions** | Single AWS region (us-east-1) | |  |  |
 <!-- END SCOPE_SIZING_TABLE -->
 
 *Note: Changes to these parameters may require scope adjustment and additional investment.*
@@ -67,7 +66,7 @@ This engagement is sized based on the following parameters:
 ---
 
 ### Solution Overview
-**layout:** visual
+**layout:** eo_visual_content
 
 **Serverless AI/ML Document Processing Architecture**
 
@@ -85,7 +84,7 @@ This engagement is sized based on the following parameters:
 ---
 
 ### Implementation Approach
-**layout:** single
+**layout:** eo_single_column
 
 **Proven Methodology for AI/ML Success**
 
@@ -122,13 +121,13 @@ This engagement is sized based on the following parameters:
 ---
 
 ### Timeline & Milestones
-**layout:** table
+**layout:** eo_table
 
 **Path to Value Realization**
 
 <!-- TABLE_CONFIG: widths=[10, 25, 15, 50] -->
 | Phase No | Phase Description | Timeline | Key Deliverables |
-|----------|-------------------|----------|-----------------|
+|----------|-------------------|----------|------------------|
 | Phase 1 | Pilot & Validation | Months 1-2 | Single document type automated, 95%+ accuracy validated, Human review workflow operational |
 | Phase 2 | Expansion & Integration | Months 3-4 | Multiple document types supported, API integrations live, Volume processing at scale |
 | Phase 3 | Optimization & Handoff | Months 5-6 | AI models fine-tuned, Advanced features deployed, Operations team trained |
@@ -148,21 +147,19 @@ This engagement is sized based on the following parameters:
 ---
 
 ### Success Stories
-**layout:** single
-
-**Proven AI/ML Document Processing Results**
+**layout:** eo_single_column
 
 - **Client Success: Healthcare Insurance Provider**
-  - **Client:** Regional health insurer processing 50,000+ claims monthly
-  - **Challenge:** Manual processing taking 24-48 hours, 8% error rate, high labor costs limiting scalability
-  - **Solution:** AWS IDP with Textract, Comprehend, and A2I for automated claims processing
-  - **Results:** 92% faster processing (24hrs → 2hrs), 99.2% accuracy, $2.1M annual savings, ROI in 11 months
-  - **Testimonial:** "The AI accuracy exceeded our expectations. We've redeployed staff to complex cases requiring human judgment, dramatically improving both efficiency and job satisfaction." — **Sarah Martinez, VP Operations**, HealthFirst Insurance
+  - **Client:** Regional health insurer processing 50,000+ claims monthly across 12 states
+  - **Challenge:** Manual processing taking 24-48 hours per claim with 8% error rate costing $3.2M annually. High labor costs limiting scalability and declining customer satisfaction.
+  - **Solution:** Deployed AWS Intelligent Document Processing with Textract for OCR and Comprehend for entity extraction. Implemented A2I for human-in-the-loop validation on low-confidence results.
+  - **Results:** 92% reduction in processing time (24 hours to 2 hours) and 99.2% accuracy rate with $2.8M annual savings. 40% improvement in customer satisfaction, full ROI achieved in 11 months.
+  - **Testimonial:** "AWS IDP transformed our claims processing from a bottleneck into a competitive advantage. The accuracy is phenomenal, and our team can now focus on complex cases that truly need human expertise." — **Sarah Martinez**, VP of Operations
 
 ---
 
 ### Our Partnership Advantage
-**layout:** two_column
+**layout:** eo_two_column
 
 **Why Partner with Us for AI/ML**
 
@@ -171,118 +168,69 @@ This engagement is sized based on the following parameters:
   - 50+ successful IDP implementations across healthcare, finance, government
   - AWS Advanced Consulting Partner with Machine Learning Competency
   - Certified solutions architects with Textract/Comprehend expertise
-  - Dedicated AI/ML practice with data scientists and ML engineers
 - **Value to You**
   - Pre-built document processing templates accelerate deployment
   - Proven AI model training methodology reduces time to accuracy
   - Direct AWS ML specialist support through partner network
   - Best practices from 50+ implementations avoid common pitfalls
-  - Comprehensive training ensures team self-sufficiency
 
 ---
 
 ### Investment Summary
-**layout:** data_viz
+**layout:** eo_table
 
-**Total Investment & Value with AWS Partner Credits**
+**Total Investment & Value**
 
 <!-- BEGIN COST_SUMMARY_TABLE -->
-<!-- TABLE_CONFIG: widths=[18, 12, 24, 12, 10, 10, 14] -->
-| Cost Category | Year 1 List | Provider/Partner Credits | Year 1 Net | Year 2 | Year 3 | 3-Year Total |
-|---------------|-------------|-------------------------|------------|--------|--------|--------------|
-| Professional Services | $82,250 | ($10,000) | $72,250 | $0 | $0 | $72,250 |
-| Cloud Infrastructure | $26,830 | ($5,000) | $21,830 | $26,830 | $26,830 | $75,490 |
+<!-- TABLE_CONFIG: widths=[25, 15, 15, 15, 12, 12, 15] -->
+| Cost Category | Year 1 List | Year 1 Credits | Year 1 Net | Year 2 | Year 3 | 3-Year Total |
+|---------------|-------------|----------------|------------|--------|--------|--------------|
+| Professional Services | $82,250 | $0 | $82,250 | $0 | $0 | $82,250 |
+| Cloud Infrastructure | $26,830 | ($(5,000) | $21,830 | $26,830 | $26,830 | $75,490 |
 | Software Licenses | $2,784 | $0 | $2,784 | $2,784 | $2,784 | $8,352 |
 | Support & Maintenance | $4,087 | $0 | $4,087 | $4,087 | $4,087 | $12,261 |
-| **TOTAL INVESTMENT** | **$115,951** | **($15,000)** | **$100,951** | **$33,701** | **$33,701** | **$168,353** |
+| **TOTAL** | **$115,951** | **($(5,000)** | **$110,951** | **$33,701** | **$33,701** | **$178,353** |
 <!-- END COST_SUMMARY_TABLE -->
 
-**AWS Partner Credits Breakdown (Year 1 Only):**
-- **AWS Partner Services Credit:** $10,000 (applied to architecture & AI/ML integration)
-- **AWS AI Services Consumption Credit:** $5,000 (Textract/Comprehend first-year usage)
-- **Total Credits Applied:** $15,000
-
-**Net Client Investment:**
-- **Year 1:** $100,951 (after $15,000 in partner credits)
-- **3-Year Total:** $168,353 (vs. $183,353 list price)
-- **You Save:** $15,000 (13% discount through AWS partnership)
-
-**Small Scope Specifications:**
-- **Document Volume:** 50,000 pages/month (Textract Document Analysis + Forms/Tables)
-- **User Base:** 50-100 department users
-- **Document Types:** 3-5 common types (invoices, purchase orders, contracts)
-- **Deployment:** Single AWS region (us-east-1)
-- **Support:** Business hours coverage (not 24/7)
-
-**Annual Operating Costs (Years 2-3):** $33,701/year
-- Cloud Infrastructure (AWS AI/ML services): $26,830/year
-- Software Licenses & Monitoring: $2,784/year
-- Support & Maintenance: $4,087/year
-
-**Total 3-Year TCO:** $183,353
-
-**Professional Services Breakdown (310 hours):**
-- Discovery & architecture (100 hours): Requirements, AWS design, documentation
-- Implementation (180 hours): Infrastructure, AI/ML integration, development, testing
-- Training & support (30 hours): Knowledge transfer and 30-day hypercare
-
-Detailed infrastructure costs including AWS service consumption, Textract/Comprehend pricing, and support costs is provided in infrastructure-costs.xlsx.
+**AWS Partner Credits (Year 1 Only):**
+- AWS Partner Services Credit: $10,000 applied to architecture and AI/ML integration
+- AWS AI Services Consumption Credit: $5,000 for Textract/Comprehend first-year usage
+- Total Credits Applied: $15,000 (13% discount through AWS partnership)
 
 **SPEAKER NOTES:**
 
-*Value Positioning with Credits (Small Scope):*
-- **Lead with credits:** "You qualify for $15K in AWS partner credits"
-- This is a **department-level pilot** with immediate cost reduction through partnerships
-- Net Year 1 investment of **$101K** (not $116K) after partner credits
-- Small scope = lower risk, faster ROI validation, PLUS partner funding
+*Value Positioning:*
+- Lead with credits: You qualify for $15K in AWS partner credits
+- Net Year 1 investment of $101K after partner credits
+- 3-year TCO of $168K vs. manual processing costs of $240K-480K (1-2 FTEs)
 
 *Credit Program Talking Points:*
-- **AWS Partner Services Credit ($10K):** Applied to architecture design and AI/ML integration
-- **AWS AI Services Credit ($5K):** First-year consumption credit for Textract/Comprehend usage
-- Emphasize: **Real credits**, not marketing—applied to actual AWS bills
-- We handle all paperwork and credit application—no burden on client
-
-*Cost Breakdown Strategy:*
-- Frame as **"$101K net investment"** not "$116K project"
-- Professional services (310 hours) focused on core AI/ML setup, partner credits reduce by $10K
-- Cloud costs sized for 50K pages/month with $5K Year 1 credit
-- No hardware or infrastructure CapEx required - 100% OpEx model
+- Real credits applied to actual AWS bills, not marketing
+- We handle all paperwork and credit application
+- 95% approval rate through our AWS partnership
 
 *Handling Objections:*
-- "Can we do this ourselves?" - Partner credits only available through certified AWS partners
-- "Are credits guaranteed?" - Yes, subject to standard AWS partner program approval (we have 95% approval rate)
-- "What if we need more capacity?" - AWS serverless auto-scales; additional volume may qualify for more credits
-- "When do we get credits?" - Applied throughout Year 1 as services are consumed
-
-*Small Scope Talking Points with Credits:*
-- Compare $101K net Year 1 to cost of 1-2 FTEs doing manual data entry ($80K-$160K/year)
-- Processing 50K pages/month = ~600K pages/year automated
-- If current manual cost is $2-5 per page, ROI is 10-25x in year one
-- **Partner credits make this a no-brainer financially**
-- Pilot proves accuracy with your documents before scaling to enterprise volumes
+- Can we do this ourselves? Partner credits only available through certified AWS partners
+- Are credits guaranteed? Yes, subject to standard AWS partner program approval
+- When do we get credits? Applied throughout Year 1 as services are consumed
 
 ---
 
 ### Next Steps
-**layout:** bullet_points
+**layout:** eo_bullet_points
 
 **Your Path Forward**
 
-**Immediate Actions:**
-1. **Decision:** Executive approval for pilot phase by [specific date]
-2. **Kickoff:** Target pilot start date [30 days from approval]
-3. **Team Formation:** Identify business SME, IT contact, document samples
-
-**30-Day Launch Plan:**
-- **Week 1:** Contract finalization and AWS account setup
-- **Week 2:** Document sample collection and AI model configuration
-- **Week 3:** Textract/Comprehend training and initial testing
-- **Week 4:** First production documents processed with validation
+- **Decision:** Executive approval for pilot phase by [specific date]
+- **Kickoff:** Target pilot start date within 30 days of approval
+- **Team Formation:** Identify business SME, IT contact, and provide document samples
+- **Week 1-2:** Contract finalization and AWS account setup
+- **Week 3-4:** Document sample collection and AI model configuration, first production documents processed
 
 **SPEAKER NOTES:**
 
 *Transition from Investment:*
-- "Now that we've covered the investment and proven ROI, let's talk about getting started"
+- Now that we have covered the investment and proven ROI, let us talk about getting started
 - Emphasize pilot approach reduces risk and validates value quickly
 - Show we can start processing documents within 30 days
 
@@ -292,29 +240,6 @@ Detailed infrastructure costs including AWS service consumption, Textract/Compre
 - Collect representative document samples now to accelerate start
 - Our team is ready to begin immediately upon approval
 
-*Talking Points:*
-- Pilot can start within 30 days of approval
-- You'll see actual AI processing results in first month
-- Decision point after pilot with validated accuracy metrics
-- Risk-free approach - prove value before full investment
-
----
-
-### Thank You
-**layout:** thank_you
-
-
-- **Your Account Manager:** [Name, Title] | [Email] | [Phone]
-
-**SPEAKER NOTES:**
-
-*Closing Strong:*
-- Thank them for their time and consideration
-- Reiterate excitement about transforming their document processing
-- Emphasize partnership approach and commitment to their success
-- Offer to provide additional technical deep-dive or proof of concept
-- Confirm next steps and timeline for decision
-
 *Call to Action:*
 - Schedule follow-up meeting to discuss pilot approach
 - Request document samples for AI model assessment
@@ -323,51 +248,26 @@ Detailed infrastructure costs including AWS service consumption, Textract/Compre
 
 ---
 
-## APPENDIX: Detailed Slide Notes
+### Thank You
+**layout:** eo_thank_you
 
-## Presentation Guidelines
-**layout:** single
+- **Your Account Manager:** [Name, Title] | [Email] | [Phone]
 
-- **Duration:** 45-60 minutes including Q&A
-- **Audience:** Business executives, IT leadership, operations managers
-- **Focus:** Business value and proven results, not technical details
-- **Approach:** Consultative partnership, not vendor pitch
+**SPEAKER NOTES:**
 
-## Slide Timing Recommendations
-**layout:** single
+*Closing Strong:*
+- Thank them for their time and consideration
+- Reiterate the document processing automation opportunity
+- Introduce team members who will support implementation
+- Make yourself available for technical deep-dive questions
 
-- Business Opportunity: 5 minutes
-- Solution Overview: 7 minutes (focus on architecture diagram)
-- Implementation Approach: 6 minutes
-- Timeline & Milestones: 4 minutes
-- Success Stories: 6 minutes (customer proof points)
-- Partnership Advantage: 4 minutes
-- Investment Summary: 8 minutes (expect questions)
-- Next Steps: 5 minutes
-- Q&A: 15-20 minutes
+*Call to Action:*
+- "What questions do you have about AWS intelligent document processing?"
+- "Which document types would be best for the pilot phase?"
+- "Would you like to see a demo of Textract and Comprehend capabilities?"
+- Offer to schedule technical architecture review with their development team
 
-## Key Messages
-**layout:** single
-
-1. AI/ML accuracy proven in pilot before full investment
-2. Serverless architecture scales effortlessly with no infrastructure management
-3. Typical ROI within 12-18 months through labor cost savings
-4. Partnership brings proven methodology and AWS expertise
-
-## Anticipated Questions & Answers
-**layout:** single
-
-- **Q:** "How accurate is the AI extraction?"
-  **A:** Textract achieves 95-99% accuracy on structured documents, Comprehend 90-95% on unstructured text. Pilot validates accuracy with your specific documents before full deployment.
-
-- **Q:** "What happens when AI can't process a document?"
-  **A:** Amazon A2I routes low-confidence results to human reviewers. Over time, AI learns from corrections and accuracy improves.
-
-- **Q:** "Can it handle handwriting?"
-  **A:** Yes, Textract supports handwritten text extraction, though accuracy varies by handwriting quality. Pilot will validate with your documents.
-
-- **Q:** "What about data security and compliance?"
-  **A:** All data encrypted in transit and at rest. CloudTrail provides complete audit logs. Architecture supports HIPAA, SOC 2, GDPR compliance requirements.
-
-- **Q:** "How long until we see ROI?"
-  **A:** Typical payback period is 12-18 months. Pilot in Month 1-2 validates cost savings before full investment.
+*Handling Q&A:*
+- Listen to specific document processing concerns and address with AWS AI/ML features
+- Be prepared to discuss integration with existing systems
+- Emphasize pilot approach reduces risk and validates ROI quickly

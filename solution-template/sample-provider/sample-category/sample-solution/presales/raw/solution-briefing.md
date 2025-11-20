@@ -1,7 +1,7 @@
 ---
 presentation_title: Solution Briefing
-solution_name: Test Solution
-presenter_name: Alison Smith
+solution_name: [Solution Name]
+presenter_name: [Presenter Name]
 client_logo: eof-tools/doc-tools/brands/default/assets/logos/client_logo.png
 footer_logo_left: eof-tools/doc-tools/brands/default/assets/logos/consulting_company_logo.png
 footer_logo_right: eof-tools/doc-tools/brands/default/assets/logos/eo-framework-logo-real.png
@@ -9,8 +9,10 @@ footer_logo_right: eof-tools/doc-tools/brands/default/assets/logos/eo-framework-
 
 # Solution Briefing Template
 
-## Slide Deck Structure for PowerPoint
-**10 Slides**
+## Slide Deck Structure
+**10 Slides - Fixed Format**
+
+---
 
 ### Slide 1: Title Slide
 **layout:** eo_title_slide
@@ -18,15 +20,11 @@ footer_logo_right: eof-tools/doc-tools/brands/default/assets/logos/eo-framework-
 **Presentation Title:** Solution Briefing
 **Subtitle:** [Solution Name]
 **Presenter:** [Presenter Name] | [Current Date]
-**Logos:**
-- Client Logo (top center)
-- Consulting Company Logo (footer left)
-- EO Framework Logo (footer right)
 
 ---
 
 ### Business Opportunity
-**layout:** two_column
+**layout:** eo_two_column
 
 **Unlocking Strategic Value**
 
@@ -42,7 +40,7 @@ footer_logo_right: eof-tools/doc-tools/brands/default/assets/logos/eo-framework-
 ---
 
 ### Engagement Scope
-**layout:** table
+**layout:** eo_table
 
 **Sizing Parameters for This Engagement**
 
@@ -52,14 +50,15 @@ This engagement is sized based on the following parameters:
 <!-- TABLE_CONFIG: widths=[18, 29, 5, 18, 30] -->
 | Parameter | Scope | | Parameter | Scope |
 |-----------|-------|---|-----------|-------|
-| **Primary Features** | 3-5 core features | | **Deployment Regions** | Single region |
-| **Customization Level** | Minimal configuration | | **Availability** | Standard (99.5% SLA) |
-| **External Integrations** | 2 REST APIs | | **Infrastructure** | Basic single-tier |
-| **Data Sources** | 2-3 data sources | | **Security** | Basic authentication and encryption |
-| **Total Users** | 50 users | | **Compliance** | 1-2 basic standards |
-| **User Roles** | 2-3 standard roles | | **Performance** | Standard performance |
-| **Processing Volume** | Small scale standard volume | | **Environments** | 2 (dev, prod) |
-| **Data Storage** | 100 GB | | | |
+| **Primary Features/Capabilities** | 3-5 core features | | **Availability Requirements** | Standard (99.5%) |
+| **Customization Level** | Minimal configuration | | **Infrastructure Complexity** | Basic single-tier |
+| **External System Integrations** | 2 REST APIs | | **Security Requirements** | Basic authentication and encryption |
+| **Data Sources** | 2-3 data sources | | **Compliance Frameworks** | 1-2 basic standards |
+| **Total Users** | 50 users | | **Performance Requirements** | Standard performance |
+| **User Roles** | 2-3 standard roles | | **Deployment Environments** | 2 environments (dev prod) |
+| **Data Processing Volume** | Small scale standard volume | |  |  |
+| **Data Storage Requirements** | 100 GB | |  |  |
+| **Deployment Regions** | Single region | |  |  |
 <!-- END SCOPE_SIZING_TABLE -->
 
 *Note: Changes to these parameters may require scope adjustment and additional investment.*
@@ -67,16 +66,16 @@ This engagement is sized based on the following parameters:
 ---
 
 ### Solution Overview
-**layout:** visual
+**layout:** eo_visual_content
 
 **Cloud-Native Architecture for Scalable Operations**
 
 ![Architecture Diagram](assets/diagrams/architecture-diagram.png)
 
 - **Key Components**
-  - **Presentation Layer:** Modern web and mobile interfaces with responsive design and real-time updates
-  - **Application Layer:** API services handling business logic, authentication, and data orchestration
-  - **Data Layer:** Scalable database infrastructure with caching, backup, and disaster recovery
+  - Modern web and mobile interfaces with responsive design and real-time updates
+  - API services handling business logic, authentication, and data orchestration
+  - Scalable database infrastructure with caching, backup, and disaster recovery
 - **Technology Stack**
   - Cloud Platform: AWS, Azure, or GCP
   - Containerization: Docker with Kubernetes
@@ -86,7 +85,7 @@ This engagement is sized based on the following parameters:
 ---
 
 ### Implementation Approach
-**layout:** single
+**layout:** eo_single_column
 
 **Proven Methodology for Success**
 
@@ -124,13 +123,13 @@ This engagement is sized based on the following parameters:
 ---
 
 ### Timeline & Milestones
-**layout:** table
+**layout:** eo_table
 
 **Path to Value Realization**
 
 <!-- TABLE_CONFIG: widths=[10, 25, 15, 50] -->
 | Phase No | Phase Description | Timeline | Key Deliverables |
-|----------|-------------------|----------|-----------------|
+|----------|-------------------|----------|------------------|
 | Phase 1 | Foundation & Planning | Months 1-2 | Cloud environment live, Security baseline configured, CI/CD pipeline operational |
 | Phase 2 | Core Implementation | Months 3-4 | Database layer deployed, Application tier functional, Integration testing complete |
 | Phase 3 | Deployment & Optimization | Months 5-6 | UAT completed, Production deployment successful, Monitoring and optimization active |
@@ -151,21 +150,19 @@ This engagement is sized based on the following parameters:
 ---
 
 ### Success Stories
-**layout:** single
-
-**Proven Results with Similar Clients**
+**layout:** eo_single_column
 
 - **Client Success: Global Manufacturing Leader**
   - **Client:** Fortune 500 Manufacturing Company with 15,000+ employees across 30 countries
-  - **Challenge:** Legacy systems causing 40% operational inefficiency, $12M annual waste from manual processes, and inability to scale for market expansion
-  - **Solution:** Deployed cloud-native platform with automated workflows, real-time analytics, and integrated supply chain visibility across all manufacturing sites
-  - **Results:** 45% reduction in operational costs ($5.4M annual savings), 60% faster order-to-delivery cycle, 99.7% system uptime, full ROI achieved in 14 months
-  - **Testimonial:** "This transformation exceeded our expectations. We've not only modernized our operations but created a competitive advantage that positions us for the next decade of growth. The implementation was seamless and the results were measurable from day one." — **Michael Chen, Chief Operations Officer**, Global Manufacturing Corp
+  - **Challenge:** Legacy systems causing 40% operational inefficiency with $12M annual waste from manual processes. Inability to scale for market expansion and declining customer satisfaction due to slow response times.
+  - **Solution:** Deployed cloud-native platform with automated workflows and real-time analytics. Integrated supply chain visibility across all manufacturing sites with AI-powered demand forecasting.
+  - **Results:** 45% reduction in operational costs ($5.4M annual savings) and 60% faster order-to-delivery cycle. 99.7% system uptime with 35% improvement in customer satisfaction, full ROI in 14 months.
+  - **Testimonial:** "This transformation exceeded our expectations. We've not only modernized our operations but created a competitive advantage that positions us for the next decade of growth. The implementation was seamless and results were measurable from day one." — **Michael Chen**, Chief Operations Officer
 
 ---
 
 ### Our Partnership Advantage
-**layout:** two_column
+**layout:** eo_two_column
 
 **Why Partner with Us**
 
@@ -174,260 +171,80 @@ This engagement is sized based on the following parameters:
   - 200+ successful implementations for Fortune 500 companies
   - Premier partnerships with AWS, Azure, Google Cloud
   - Certified solution architects with 10+ years expertise
-  - 24/7 support with 99.5% SLA guarantee
 - **Value to You**
   - Proven methodology reduces implementation risk by 60%
   - Pre-built accelerators fast-track your deployment
   - Direct vendor escalation and early-access programs
-  - Comprehensive skills transfer for team self-sufficiency
   - Best practices from 200+ implementations
 
 ---
 
 ### Investment Summary
-**layout:** data_viz
+**layout:** eo_table
 
 **Total Investment & Value**
 
 <!-- BEGIN COST_SUMMARY_TABLE -->
-<!-- TABLE_CONFIG: widths=[18, 12, 24, 12, 10, 10, 14] -->
-| Cost Category | Year 1 List | Provider/Partner Credits | Year 1 Net | Year 2 | Year 3 | 3-Year Total |
-|---------------|-------------|-------------------------|------------|--------|--------|--------------|
-| Cloud Infrastructure | $0 | $0 | $0 | $0 | $0 | $0 |
-| Software Licenses | $0 | $0 | $0 | $0 | $0 | $0 |
-| Support & Maintenance | $0 | $0 | $0 | $0 | $0 | $0 |
-| Hardware/Equipment | $0 | $0 | $0 | $0 | $0 | $0 |
-| **TOTAL** | **$0** | **$0** | **$0** | **$0** | **$0** | **$0** |
+<!-- TABLE_CONFIG: widths=[25, 15, 15, 15, 12, 12, 15] -->
+| Cost Category | Year 1 List | Year 1 Credits | Year 1 Net | Year 2 | Year 3 | 3-Year Total |
+|---------------|-------------|----------------|------------|--------|--------|--------------|
+| Professional Services | $0 | $0 | $0 | $0 | $0 | $0 |
+| Cloud Infrastructure | $6,082 | ($(1,800) | $4,282 | $6,082 | $6,082 | $16,446 |
+| Software Licenses | $900 | $0 | $900 | $900 | $900 | $2,700 |
+| Support & Maintenance | $1,200 | $0 | $1,200 | $1,200 | $1,200 | $3,600 |
+| **TOTAL** | **$8,182** | **($(1,800)** | **$6,382** | **$8,182** | **$8,182** | **$22,746** |
 <!-- END COST_SUMMARY_TABLE -->
 
-**Provider/Partner Credits Breakdown (Year 1 Only):**
-- **Partner Services Credit:** $5,000 (applied to architecture design and planning)
-- **Database Service Credit:** $720 (30% discount on Year 1 managed database consumption)
-- **Cache Service Credit:** $270 (30% discount on Year 1 cache service consumption)
-- **Total Credits Applied:** $5,990
-
-**Note:** Credits are typically one-time, Year 1 only. Adjust based on your cloud provider's programs (e.g., AWS MAP, Azure Credits, GCP Credits).
-
-**Annual Operating Costs (Years 2-3):** $19,875/year
-- Cloud Infrastructure: $12,225/year
-- Software Licenses & Subscriptions: $7,650/year
-- Support & Maintenance: $0/year
-
-**Total 3-Year TCO:** $117,935
-
-Detailed infrastructure costs including equipment specifications, cloud consumption estimates, software licensing, and support contracts is provided in infrastructure-costs.xlsx.
+**Partner Credits (Year 1 Only):**
+- Professional Services Credit: $15,000 applied to architecture and integration work
+- Cloud Consumption Credit: $10,000 for first-year infrastructure usage
+- Total Credits Applied: $25,000 (10% discount through partnership)
 
 **SPEAKER NOTES:**
 
 *Value Positioning:*
-- Frame as investment with measurable returns, not just cost
-- Highlight $6K in credits reduces Year 1 investment by 7%
-- Show how Year 1 net investment of $78K delivers ongoing value
-- Annual operating costs of $20K far lower than initial implementation
+- Lead with credits: You qualify for $25K in partner credits
+- Net Year 1 investment of $215K after partner credits
+- 3-year TCO of $395K with full enterprise capabilities
 
-*Cost Breakdown Strategy:*
-- Walk through each cost item explaining value delivered
-- Assessment ensures we solve the right problems before building
-- Implementation includes all technical work and integrations
-- Credits demonstrate our partnership leverage with cloud vendors
-- Support costs ensure long-term success and optimization
+*Credit Program Talking Points:*
+- Real credits applied to actual bills, not marketing
+- We handle all paperwork and credit application
+- High approval rate through our partnership programs
 
 *Handling Objections:*
-- "Can we reduce costs?" - Explain risk of cutting assessment or change management
-- "What if we do it ourselves?" - Compare to cost of internal team + learning curve
-- "Why cloud consumption costs?" - Show scalability and elimination of CapEx
-- "What's included in support?" - Detail 24/7 coverage, proactive monitoring, optimization
-
-*Talking Points:*
-- Compare $78K Year 1 net investment to cost of status quo from Business Opportunity slide
-- Position credits as evidence of our vendor relationships and negotiating power
-- 3-year TCO of $118K provides long-term predictable costs
-- Emphasize transparent pricing with no hidden costs or surprises
-- Offer to provide detailed line-item breakdown in follow-up meeting
+- Can we do this ourselves? Partner credits only available through certified partners
+- Are credits guaranteed? Yes, subject to standard partner program approval
+- When do we get credits? Applied throughout Year 1 as services are consumed
 
 ---
 
 ### Next Steps
-**layout:** bullet_points
+**layout:** eo_bullet_points
 
 **Your Path Forward**
 
-**Immediate Actions:**
-1. **Decision:** [Specific decision needed by when]
-2. **Kickoff:** [Target start date]
-3. **Team Formation:** [Key team members required]
-
-**30-Day Launch Plan:**
-- **Week 1:** Contract finalization and legal review
-- **Week 2:** Project initiation & planning kickoff
-- **Week 3:** Environment setup and access provisioning
-- **Week 4:** Initial implementation begins
+- **Decision:** Executive approval for project by [specific date]
+- **Kickoff:** Target project start date within 30 days of approval
+- **Team Formation:** Identify executive sponsor, project manager, and technical leads
+- **Week 1-2:** Contract finalization and environment setup
+- **Week 3-4:** Architecture design and infrastructure provisioning begins
 
 **SPEAKER NOTES:**
 
 *Transition from Investment:*
-- "Now that we've covered the investment and value, let's talk about how we get started"
-- Position this as straightforward and low-friction process
-- Emphasize you'll be with them every step of the way
+- Now that we have covered the investment and proven ROI, let us talk about getting started
+- Emphasize structured approach reduces risk and ensures success
+- Show we can start work within 30 days
 
 *Walking Through Next Steps:*
-- Be specific about the decision needed - don't leave it vague
-- Propose concrete dates for kickoff based on their calendar
-- Identify key team members needed upfront (sponsor, tech lead, SMEs)
-- Show 30-day plan demonstrates we're ready to move fast
-
-*Talking Points:*
-- We can start as soon as [specific timeframe] after decision
-- Our team is already allocated and ready to begin
-- Week 1-2 are preparation, real work starts Week 3
-- You'll see tangible progress within first month
-- Emphasize partnership - "we'll be working alongside your team"
-
----
-
-### Thank You
-**layout:** thank_you
-
-- **Your Account Manager:** [Name, Title] | [Email] | [Phone]
-
-**SPEAKER NOTES:**
-
-*Closing Strong:*
-- Thank them for their time and attention
-- Reiterate excitement about partnership opportunity
-- Introduce the team members who will be working with them
-- Make yourself available for questions
+- Decision needed to move forward with implementation
+- Identify key stakeholders and project team members
+- Establish governance and communication cadence
+- Our team is ready to begin immediately upon approval
 
 *Call to Action:*
-- "What questions do you have?"
-- "What concerns should we address?"
-- "What would you need to see to move forward?"
-- Be prepared to discuss next steps in detail
-
-*Handling Q&A:*
-- Listen actively and acknowledge concerns
-- Don't oversell - be honest about challenges
-- Offer to follow up on items you don't know
-- Schedule follow-up meeting before they leave
-- Send meeting summary within 24 hours
-
-*Closing Techniques:*
-- Ask for the business - "Are you ready to move forward?"
-- Trial close: "Does this approach work for your timeline?"
-- Alternative close: "Would you prefer to start in [Month A] or [Month B]?"
-- Don't leave without clear next steps and timeline
-
----
-
-## Presentation Notes
-
-**Speaking Points for Each Slide**
-
-**Slide 1 - Title Slide:**
-- Welcome attendees and introduce yourself
-- Set the tone: This is about partnership and solving real business challenges
-- Mention that we'll cover the challenge, solution, implementation, and investment
-
-**Slide 2 - Business Opportunity:**
-- Frame the conversation positively around opportunities, not problems
-- Emphasize strategic value and competitive advantages to be gained
-- Connect success criteria to measurable business outcomes
-- Get alignment on what "success" means to each stakeholder group
-- Focus on value creation and transformation potential
-
-**Slide 3 - Solution Overview:**
-- Walk through the high-level architecture at a business level
-- Focus on how components address the pain points from Slide 2
-- Mention the technology stack credibility (cloud-native, enterprise-grade)
-- Keep it simple - detailed architecture is in the appendix
-
-**Slide 4 - Implementation Approach:**
-- Walk through the 3-phase methodology showing progressive implementation
-- Emphasize cloud-native approach from foundation through optimization
-- Connect each phase to business value delivery from Business Opportunity
-- Reference speaker notes for risk mitigation and success factors
-- Show how each tier (data, application, presentation) is built systematically
-
-**Slide 5 - Timeline & Milestones:**
-- Walk through the phased approach showing progressive value delivery
-- Emphasize quick wins in early phases
-- Show that value realization starts before full completion
-- Address timeline concerns proactively
-
-**Slide 6 - Success Stories:**
-- Share the case study with focus on similar challenges
-- Quantify the results - be specific about ROI, efficiency gains
-- Use the testimonial to build credibility and trust
-- Connect industry recognition to expertise and quality
-
-**Slide 7 - Our Partnership Advantage:**
-- Transition naturally from success stories to "why us"
-- Emphasize the team that will work with them
-- Position the partnership as long-term, not just implementation
-- Build confidence in our ability to deliver
-
-**Slide 8 - Investment Summary:**
-- Walk through the cost table line by line, explaining value of each component
-- Highlight the $6K in credits (7% savings) from partner programs
-- Emphasize transparency - all costs shown including credits and discounts
-- Show Year 1 net investment of $78K vs. $84K list price
-- Compare to cost of inaction from Business Opportunity
-- Position as investment with measurable returns, not expense
-- Reference detailed speaker notes on slide for handling objections
-- Have line-item breakdown ready if deeper financial questions arise
-
-**Slide 9 - Next Steps:**
-- Transition naturally from investment discussion to "how we get started"
-- Walk through immediate actions with specific dates and requirements
-- Present 30-day launch plan to show readiness and momentum
-- Be specific about decision needed - don't leave it ambiguous
-- Emphasize partnership approach - working alongside their team
-- Reference detailed speaker notes for transition strategies
-
-**Slide 10 - Thank You:**
-- Thank audience for their time and engagement
-- Introduce your team members who will support them
-- Present contact information clearly for follow-up
-- Open floor for questions and discussion
-- Use closing techniques from speaker notes
-- Don't leave without clear next steps scheduled
-
-**Q&A Preparation**
-
-**Common Questions & Responses:**
-
-**Q: "How confident are you in these ROI projections?"**
-A: [Prepared response about methodology, conservative estimates, and client-specific validation]
-
-**Q: "What if the implementation takes longer than planned?"**
-A: [Response about risk mitigation, contingency plans, and our commitment to timeline]
-
-**Q: "How does this compare to [alternative solution]?"**
-A: [Comparison highlighting key differentiators without negative competitor positioning]
-
-**Q: "What happens after go-live?"**
-A: [Response about ongoing support, optimization, and partnership model]
-
-**Appendix Slides (If Needed)**
-
-**A1: Detailed Technical Architecture**
-**A2: Implementation Timeline Detail**
-**A3: Competitive Comparison Matrix**
-**A4: Reference Client List**
-**A5: Team Biographies & Certifications**
-**A6: Detailed Cost Breakdown**
-
----
-
-## PowerPoint Template Specifications
-
-**Design Guidelines:**
-- Company brand colors and fonts
-- Consistent slide layout and formatting
-- Professional graphics and icons
-- Client logo on each slide (if approved)
-
-**File Format:** .pptx
-**Slide Size:** 16:9 widescreen
-**Font:** [Company standard font]
-**Colors:** [Company brand palette]
+- Schedule follow-up meeting to discuss project approach
+- Identify executive sponsor and project team
+- Review and approve architecture design
+- Set timeline for decision and project kickoff
