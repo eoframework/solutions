@@ -1,4 +1,6 @@
 # Sizing Guidelines
+#WIDTH: 24,36,28,28,28,51
+#ALIGN: left,left,center,center,center,left
 Category,Component,Small,Medium,Large,Notes
 Cloud Infrastructure,Compute Instances,2-4 instances,5-10 instances,15+ instances,Production workload capacity
 Cloud Infrastructure,Storage Volume,100 GB,500 GB - 1 TB,2+ TB,Based on data requirements
@@ -9,6 +11,8 @@ Support & Maintenance,Support Level,Business hours,24x5 support,24x7 premium,SLA
 Hardware/Equipment,Network Devices,0-2 devices,3-5 devices,10+ devices,Based on site count
 
 # Infrastructure Costs
+#WIDTH: 23,30,50,12,15,12,15,12,12,15,30
+#ALIGN: left,left,left,right,left,right,right,right,right,right,left
 Category,Component,Description,Quantity,Unit,Unit Price,Annual Cost,Year 2,Year 3,3-Year Total,Notes
 Cloud Infrastructure,Compute Instance,Cloud VM or equivalent,2,Instance/Month,$150,"=D12*F12*12","=G12","=G12","=G12+H12+I12",Production workloads
 Cloud Infrastructure,Database,Managed database service,1,Instance/Month,$200,"=D13*F13*12","=G13","=G13","=G13+H13+I13",Relational database
@@ -20,6 +24,8 @@ Support & Maintenance,Cloud Support,Provider support plan,1,Plan/Month,$100,"=D1
 Hardware/Equipment,Network Switch,Network equipment,0,Device,$2500,"=D19*F19","=G19","=G19","=G19+H19+I19",Optional on-premises
 
 # Credits
+#WIDTH: 25,25,15,50
+#ALIGN: left,left,right,left
 Category,Credit Type,Credit Amount,Credit Comments
 Cloud Infrastructure,Provider Credit,"($1800)",30% credit on eligible compute and database services
 Software Licenses,Partner Credit,$0,No software credits available
@@ -27,6 +33,8 @@ Support & Maintenance,Program Credit,$0,No support credits available
 Hardware/Equipment,Equipment Credit,$0,No hardware credits available
 
 # 3-Year Summary
+#WIDTH: 25,15,15,15,12,12,15
+#ALIGN: left,right,right,right,right,right,right
 Category,Year 1 List,Year 1 Credits,Year 1 Net,Year 2,Year 3,3-Year Total
 Cloud Infrastructure,$6082,"($1800)",$4282,$6082,$6082,$16446
 Software Licenses,$900,$0,$900,$900,$900,$2700
