@@ -1,5 +1,5 @@
 # SCOPE ASSUMPTIONS - BASELINE (MULTIPLIER 1.0)
-#WIDTH: 25,35,30,25,25,30,40
+#WIDTH: 25,35,33,32,32,39,44
 #ALIGN: left,left,left,left,left,left,left
 Category,Baseline Assumption,Current Scope,Small (1x),Medium (2x),Large (3x),Notes
 Solution Scope,Primary Features/Capabilities,3-5 core features,3-5 core features,6-10 features,10+ features or advanced capabilities,Standard feature set for solution type,,,,
@@ -17,9 +17,8 @@ Security & Compliance,Security Requirements,Basic authentication and encryption,
 Security & Compliance,Compliance Frameworks,1-2 basic standards,1-2 basic standards,2-3 industry standards,Multiple complex frameworks,Regulatory compliance requirements,,,,
 Performance,Performance Requirements,Standard performance,Standard performance,Enhanced performance,High performance low latency,Response time and throughput needs,,,,
 Environment,Deployment Environments,2 environments (dev prod),2 environments (dev prod),3 environments (dev staging prod),4+ environments with automation,Environment management complexity,,,,
-,,,,,,,,,,
-# ESTIMATE SETTINGS - EO Sales Engineer Updates Multipliers Based on Customer Scope
-#WIDTH: 15,20,12,150
+# ESTIMATE SETTINGS
+#WIDTH: 17,22,14,173
 #ALIGN: left,left,center,left
 Phase,Variable Name,Multiplier,Description / Applies To Tasks
 Discovery,DISCOVERY_MX,1,"All Discovery phase tasks (Requirements Gathering, Technical Assessment, Security Review, Integration Assessment)",,,,,,,
@@ -31,9 +30,8 @@ Training,TRAINING_MX,1,"All Training phase tasks (Administrator Training, End Us
 Closeout,CLOSEOUT_MX,1,"All Closeout phase tasks (Knowledge Transfer, Performance Baseline, Project Retrospective)",,,,,,,
 Management,MANAGEMENT_MX,1.5,Project Management overhead - 10% of actual engineering hours,,,,,,,
 Leadership,LEADERSHIP_MX,1.5,Quarterback/Technical Leadership overhead - 10% of actual engineering hours,,,,,,,
-,,,,,,,,,,
 # Level of Effort
-#WIDTH: 15,25,50,15,12,14,12,12,15,25,40
+#WIDTH: 16,25,58,18,12,14,12,12,15,25,40
 #ALIGN: left,left,left,left,right,center,right,right,right,left,left
 Phase,Work Package,Task Description,Resource Type,Base Hours,Effort Multiplier,Actual Hours,Rate,Cost Estimate,Dependencies,Notes
 Discovery,Requirements Gathering,Conduct stakeholder interviews and discovery workshops,EO Engineer,40,='Estimate Settings'!$C$3,=$E33*$F33,$150,"=TEXT($G33*$H33,""$#,##0"")",,Includes stakeholder interviews and requirements documentation deliverable
@@ -67,7 +65,7 @@ Management,Project Management,Project coordination planning and management activ
 ,,,,,TOTAL HOURS,"=SUM($G$3:$G$30)",TOTAL COST,"=TEXT(SUMPRODUCT($G$3:$G$30,$H$3:$H$30),""$#,##0"")",,EO Sales Engineer: Update phase-based multipliers in Estimate Settings sheet based on customer scope
 
 # Credits - Applied to Total Cost (Year 1 Only)
-#WIDTH: 25,15,100
+#WIDTH: 27,17,100
 #ALIGN: left,right,left
 Credit Type,Credit Amount,Credit Comments
 Partner Program Credit,"($5000)",Partner program services credit applied to professional services

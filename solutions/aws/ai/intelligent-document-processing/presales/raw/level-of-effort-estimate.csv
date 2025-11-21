@@ -1,5 +1,5 @@
 # SCOPE ASSUMPTIONS - BASELINE (MULTIPLIER 1.0),,,,,,,,,,
-#WIDTH: 25,35,30,25,25,30,40
+#WIDTH: 25,35,33,32,32,39,44
 #ALIGN: left,left,left,left,left,left,left
 Category,Baseline Assumption,Current Scope,Small (1x),Medium (2x),Large (3x),Notes,,,,,
 Solution Scope,Document Types,2-3 document types,2-3 document types,4-6 document types,8+ document types or complex variations,Standard document types for IDP,,,,,
@@ -18,9 +18,8 @@ Security & Compliance,Compliance Frameworks,SOC2,1-2 basic standards,2-3 industr
 Performance,Accuracy Requirements,95%+ extraction accuracy,95%+ standard,98%+ enhanced,99%+ with human review,Data extraction accuracy targets,,,,,
 Performance,Processing Speed,Standard batch processing,Standard batch processing,Near real-time processing,Real-time with sub-second response,Document processing speed requirements,,,,,
 Environment,Deployment Environments,2 environments (dev prod),2 environments (dev prod),3 environments (dev staging prod),4+ environments with ML pipelines,Environment management for IDP,,,,,
-,,,,,,,,,,
-# ESTIMATE SETTINGS - EO Sales Engineer Updates Multipliers Based on Customer Scope,,,,,,,,,,
-#WIDTH: 15,20,12,150
+# ESTIMATE SETTINGS,,,,,,,,,,
+#WIDTH: 17,22,14,173
 #ALIGN: left,left,center,left
 Phase,Variable Name,Multiplier,Description / Applies To Tasks,,,,,,,
 Discovery,DISCOVERY_MX,1,"All Discovery phase tasks (Requirements Gathering, Document Analysis, AWS Assessment, Compliance Review)",,,,,,,
@@ -32,9 +31,8 @@ Training,TRAINING_MX,1,"All Training phase tasks (Administrator Training, Busine
 Closeout,CLOSEOUT_MX,1,"All Closeout phase tasks (Knowledge Transfer, Performance Baseline)",,,,,,,
 Management,MANAGEMENT_MX,1.5,Project Management overhead - 10% of actual engineering hours,,,,,,,
 Leadership,LEADERSHIP_MX,1.5,Quarterback/Technical Leadership overhead - 10% of actual engineering hours,,,,,,,
-,,,,,,,,,,
 # Level of Effort,
-#WIDTH: 15,25,50,15,12,14,12,12,15,25,40
+#WIDTH: 16,25,58,18,12,14,12,12,15,25,40
 #ALIGN: left,left,left,left,right,center,right,right,right,left,left
 Phase,Work Package,Task Description,Resource Type,Base Hours,Effort Multiplier,Actual Hours,Rate,Cost Estimate,Dependencies,Notes
 Discovery,Requirements Gathering,Conduct stakeholder interviews for IDP requirements,EO Engineer,32,='Estimate Settings'!$C$3,=$E33*$F33,$150,"=TEXT($G33*$H33,""$#,##0"")",,Includes requirements documentation and document processing workflow analysis
@@ -70,7 +68,7 @@ Management,Project Management,Project coordination planning and management activ
 ,,,,,TOTAL HOURS,"=SUM($G$3:$G$32)",TOTAL COST,"=TEXT(SUMPRODUCT($G$3:$G$32,$H$3:$H$32),""$#,##0"")",,EO Sales Engineer: Update phase-based multipliers in Estimate Settings based on customer document processing scope
 
 # Credits - Applied to Total Cost (Year 1 Only)
-#WIDTH: 25,15,100
+#WIDTH: 27,17,100
 #ALIGN: left,right,left
 Credit Type,Credit Amount,Credit Comments
 AWS Partner Services Credit,"($10000)",AWS Partner Network (APN) credit for solution architecture and AI/ML integration services

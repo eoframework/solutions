@@ -50,22 +50,22 @@ All presales materials follow EO Framework™ quality standards:
 - ✅ **Customizable**: Templates adapt to specific client requirements and contexts
 - ✅ **Professional**: Executive-ready presentation materials and documentation
 
-### 📊 Business Case and ROI Analysis
-- **[Business Case Template](business-case-template.md)** - Comprehensive business case framework including problem definition, solution benefits, and financial analysis
-- **[ROI Calculator Template](roi-calculator-template.md)** - Detailed ROI calculation methodology with financial models and assumptions
-- **[Executive Presentation Template](executive-presentation-template.md)** - High-level presentation template for executive stakeholders
-- **[Competitive Analysis](competitive-analysis.md)** - Market positioning and competitive differentiation analysis
+### 📊 Available Presales Materials
 
-### 🎯 Requirements and Solution Design  
-- **[Requirements Questionnaire](requirements-questionnaire.md)** - Comprehensive questionnaire to gather business and technical requirements
-- **[Solution Design Template](solution-design-template.md)** - Detailed solution architecture and design documentation template
-- **[Technical Specifications](technical-specifications.md)** - Detailed technical requirements and capabilities overview
-- **[Integration Assessment](integration-assessment.md)** - System integration requirements and compatibility analysis
+| Document | Format | Purpose | Audience |
+|----------|--------|---------|----------|
+| **[Solution Briefing](raw/solution-briefing.md)** | Markdown → PowerPoint | Executive presentation with business case and ROI | C-Level, Senior Leadership |
+| **[Statement of Work](raw/statement-of-work.md)** | Markdown → Word | Formal project scope and contract terms | Legal, Contracts, Project Managers |
+| **[Discovery Questionnaire](raw/discovery-questionnaire.csv)** | CSV → Excel | Customer requirements gathering | Technical Teams, IT Leadership |
+| **[Level of Effort Estimate](raw/level-of-effort-estimate.csv)** | CSV → Excel | Resource planning and effort estimation | Project Managers, Finance |
+| **[Infrastructure Costs](raw/infrastructure-costs.csv)** | CSV → Excel | Cloud infrastructure cost breakdown | Finance, Stakeholders |
 
-### 🏆 Proof of Concept and Demos
-- **[POC Framework](poc-framework.md)** - Structured proof of concept methodology and success criteria
-- **[Demo Scripts](demo-scripts.md)** - Standardized demonstration scenarios and talking points
-- **[Use Case Scenarios](use-case-scenarios.md)** - Industry-specific implementation scenarios and examples
+**Generated Outputs** (created from raw files using eof-tools):
+- `solution-briefing.pptx` - Executive presentation deck
+- `statement-of-work.docx` - Professional SOW document
+- `discovery-questionnaire.xlsx` - Formatted Excel workbook
+- `level-of-effort-estimate.xlsx` - Resource planning workbook
+- `infrastructure-costs.xlsx` - Cost analysis workbook
 
 ---
 

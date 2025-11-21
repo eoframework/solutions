@@ -1,6 +1,6 @@
 ---
 presentation_title: Solution Briefing
-solution_name: [Solution Name]
+solution_name: Sample Provider Sample Solution
 presenter_name: [Presenter Name]
 client_logo: eof-tools/doc-tools/brands/default/assets/logos/client_logo.png
 footer_logo_left: eof-tools/doc-tools/brands/default/assets/logos/consulting_company_logo.png
@@ -18,7 +18,7 @@ footer_logo_right: eof-tools/doc-tools/brands/default/assets/logos/eo-framework-
 **layout:** eo_title_slide
 
 **Presentation Title:** Solution Briefing
-**Subtitle:** [Solution Name]
+**Subtitle:** Sample Provider Sample Solution
 **Presenter:** [Presenter Name] | [Current Date]
 
 ---
@@ -248,3 +248,30 @@ This engagement is sized based on the following parameters:
 - Identify executive sponsor and project team
 - Review and approve architecture design
 - Set timeline for decision and project kickoff
+
+---
+
+### Thank You
+**layout:** eo_thank_you
+
+- **Your Account Manager:** [Name, Title] | [Email] | [Phone]
+
+**SPEAKER NOTES:**
+
+*Closing Strong:*
+- Thank them for their time and consideration
+- Reiterate the solution opportunity and business value proposition
+- Introduce team members who will support implementation
+- Make yourself available for technical deep-dive questions
+
+*Call to Action:*
+- "What questions do you have about this solution?"
+- "Which aspects of the solution would you like to explore further?"
+- "Would you like to see a technical demonstration?"
+- Offer to schedule follow-up sessions with specific stakeholders
+
+*Handling Q&A:*
+- Listen to specific business concerns and address with solution features
+- Be prepared to discuss integration with existing systems
+- Emphasize proven approach reduces risk and ensures success
+- Highlight partnership support throughout implementation
