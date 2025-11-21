@@ -69,6 +69,7 @@ This Statement of Work (SOW) defines the scope, deliverables, roles, and terms f
 
 This engagement is sized based on the following parameters:
 
+<!-- BEGIN SCOPE_PARAMETERS_TABLE -->
 <!-- TABLE_CONFIG: widths=[25, 35, 40] -->
 | Category | Parameter | Scope |
 |----------|-----------|-------|
@@ -87,6 +88,7 @@ This engagement is sized based on the following parameters:
 | Security & Compliance | Compliance Frameworks | 1-2 basic standards |
 | Performance | Performance Requirements | Standard performance |
 | Environment | Deployment Environments | 2 environments (dev prod) |
+<!-- END SCOPE_PARAMETERS_TABLE -->
 
 Table: Engagement Scope Parameters
 
@@ -904,13 +906,13 @@ The investment includes all professional services, infrastructure costs, softwar
 
 <!-- BEGIN COST_SUMMARY_TABLE -->
 <!-- TABLE_CONFIG: widths=[25, 15, 12, 15, 11, 11, 11] -->
-| Cost Category | Year 1 List | Credits | Year 1 Net | Year 2 | Year 3 | 3-Year Total |
-|---------------|-------------|---------|------------|--------|--------|--------------|
-| Cloud Infrastructure | $12,225 | ($990) | $11,235 | $12,225 | $12,225 | $35,685 |
-| Professional Services | $64,300 | ($5,000) | $59,300 | $0 | $0 | $59,300 |
-| Software Licenses | $7,650 | $0 | $7,650 | $7,650 | $7,650 | $22,950 |
-| Support & Maintenance | $0 | $0 | $0 | $0 | $0 | $0 |
-| **TOTAL INVESTMENT** | **$84,175** | **($5,990)** | **$78,185** | **$19,875** | **$19,875** | **$117,935** |
+| Cost Category | Year 1 List | AWS/Partner Credits | Year 1 Net | Year 2 | Year 3 | 3-Year Total |
+|---------------|-------------|---------------------|------------|--------|--------|--------------|
+| Professional Services | $0 | $0 | $0 | $0 | $0 | $0 |
+| Cloud Infrastructure | $6,082 | ($1,800) | $4,282 | $6,082 | $6,082 | $16,446 |
+| Software Licenses | $900 | $0 | $900 | $900 | $900 | $2,700 |
+| Support & Maintenance | $1,200 | $0 | $1,200 | $1,200 | $1,200 | $3,600 |
+| **TOTAL INVESTMENT** | **$8,182** | **($1,800)** | **$6,382** | **$8,182** | **$8,182** | **$22,746** |
 <!-- END COST_SUMMARY_TABLE -->
 
 ## Partner Credits

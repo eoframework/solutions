@@ -72,6 +72,7 @@ The following services and deliverables are included in this SOW:
 
 This engagement is sized based on the following parameters:
 
+<!-- BEGIN SCOPE_PARAMETERS_TABLE -->
 <!-- TABLE_CONFIG: widths=[25, 35, 40] -->
 | Category | Parameter | Scope |
 |----------|-----------|-------|
@@ -91,6 +92,7 @@ This engagement is sized based on the following parameters:
 | Performance | Accuracy Requirements | 95%+ extraction accuracy |
 | Performance | Processing Speed | Standard batch processing |
 | Environment | Deployment Environments | 2 environments (dev prod) |
+<!-- END SCOPE_PARAMETERS_TABLE -->
 
 Table: Engagement Scope Parameters
 
@@ -639,12 +641,12 @@ Post-hypercare, Client may transition to ongoing managed services:
 <!-- BEGIN COST_SUMMARY_TABLE -->
 <!-- TABLE_CONFIG: widths=[20, 12, 18, 14, 12, 11, 13] -->
 | Cost Category | Year 1 List | AWS/Partner Credits | Year 1 Net | Year 2 | Year 3 | 3-Year Total |
-|---------------|-------------|---------------------|------------|---------|---------|--------------|
-| Professional Services | $82,250 | ($10,000) | $72,250 | $0 | $0 | $72,250 |
+|---------------|-------------|---------------------|------------|--------|--------|--------------|
+| Professional Services | $82,250 | $0 | $82,250 | $0 | $0 | $82,250 |
 | Cloud Infrastructure | $26,830 | ($5,000) | $21,830 | $26,830 | $26,830 | $75,490 |
-| Software Licenses & Subscriptions | $2,784 | $0 | $2,784 | $2,784 | $2,784 | $8,352 |
+| Software Licenses | $2,784 | $0 | $2,784 | $2,784 | $2,784 | $8,352 |
 | Support & Maintenance | $4,087 | $0 | $4,087 | $4,087 | $4,087 | $12,261 |
-| **TOTAL INVESTMENT** | **$115,951** | **($15,000)** | **$100,951** | **$33,701** | **$33,701** | **$168,353** |
+| **TOTAL INVESTMENT** | **$115,951** | **($5,000)** | **$110,951** | **$33,701** | **$33,701** | **$178,353** |
 <!-- END COST_SUMMARY_TABLE -->
 
 ## Partner Credits
