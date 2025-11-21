@@ -40,6 +40,7 @@ node_modules/
 *.tmp
 *.temp
 *.log
+*.bak
 
 # Note: Generated output files (.docx, .xlsx, .pptx) ARE committed to the repository
 # They are the final products for consumers, generated from raw/ source files
