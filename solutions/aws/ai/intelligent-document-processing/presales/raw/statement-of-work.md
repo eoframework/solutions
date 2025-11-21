@@ -9,8 +9,9 @@ consultant_contact: [Consultant Name | Email | Phone]
 opportunity_no: OPP-2025-001
 document_date: November 15, 2025
 version: 1.0
-client_logo: assets/logos/client_logo.png
-vendor_logo: assets/logos/consulting_company_logo.png
+client_logo: ../../assets/logos/client_logo.png
+vendor_logo: ../../assets/logos/consulting_company_logo.png
+eoframework_logo: ../../assets/logos/eo-framework-logo-real.png
 ---
 
 # Executive Summary
@@ -636,7 +637,7 @@ Post-hypercare, Client may transition to ongoing managed services:
 ## Total Investment
 
 <!-- BEGIN COST_SUMMARY_TABLE -->
-<!-- TABLE_CONFIG: widths=[20, 12, 23, 13, 10, 10, 12] -->
+<!-- TABLE_CONFIG: widths=[20, 12, 18, 14, 12, 11, 13] -->
 | Cost Category | Year 1 List | AWS/Partner Credits | Year 1 Net | Year 2 | Year 3 | 3-Year Total |
 |---------------|-------------|---------------------|------------|---------|---------|--------------|
 | Professional Services | $82,250 | ($10,000) | $72,250 | $0 | $0 | $72,250 |

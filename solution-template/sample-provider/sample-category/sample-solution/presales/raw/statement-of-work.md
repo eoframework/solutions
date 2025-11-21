@@ -10,8 +10,9 @@ consultant_contact: [Contact Name | Email | Phone]
 opportunity_no: [OPP-YYYY-###]
 document_date: [Month DD, YYYY]
 version: [1.0]
-client_logo: assets/logos/client_logo.png
-vendor_logo: assets/logos/consulting_company_logo.png
+client_logo: ../../assets/logos/client_logo.png
+vendor_logo: ../../assets/logos/consulting_company_logo.png
+eoframework_logo: ../../assets/logos/eo-framework-logo-real.png
 ---
 
 # Executive Summary
@@ -902,7 +903,7 @@ This section provides a comprehensive overview of the total investment required 
 The investment includes all professional services, infrastructure costs, software licenses, and support services required to successfully implement and operate the solution. Credits and discounts have been applied where applicable to reduce Year 1 costs.
 
 <!-- BEGIN COST_SUMMARY_TABLE -->
-<!-- TABLE_CONFIG: widths=[25, 15, 15, 15, 10, 10, 10] -->
+<!-- TABLE_CONFIG: widths=[25, 15, 12, 15, 11, 11, 11] -->
 | Cost Category | Year 1 List | Credits | Year 1 Net | Year 2 | Year 3 | 3-Year Total |
 |---------------|-------------|---------|------------|--------|--------|--------------|
 | Cloud Infrastructure | $12,225 | ($990) | $11,235 | $12,225 | $12,225 | $35,685 |
