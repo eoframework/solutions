@@ -1,3 +1,6 @@
+# Local development guidelines (not for public repo)
+DEVELOPMENT.md
+
 # Generated catalog files (keep directories, ignore content)
 support/catalog/*.yml
 support/catalog/**/*.yml
