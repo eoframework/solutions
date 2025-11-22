@@ -73,14 +73,13 @@ This engagement is sized based on the following parameters:
 ![Architecture Diagram](assets/diagrams/architecture-diagram.png)
 
 - **Key Components**
-  - Cisco DNA Center appliances (DN2-HW-APL) with primary and secondary HA for 99.9% uptime
-  - AI Network Analytics with predictive failure detection and automated remediation workflows
-  - Application Experience monitoring for Office 365, Webex, SAP with real-time SLA tracking
+  - Cisco DNA Center appliances with primary and secondary HA for 99.9% uptime
+  - AI Network Analytics with predictive failure detection and automated remediation
+  - Application Experience monitoring for Office 365, Webex, and SAP
 - **Technology Stack**
-  - Platform: Cisco DNA Center with vManage orchestration
-  - Automation: Zero-touch provisioning and policy templates
-  - Integration: Active Directory, ServiceNow ITSM, NetBox IPAM
-  - Security: TrustSec micro-segmentation (optional)
+  - Platform: Cisco DNA Center with zero-touch provisioning and policy automation
+  - Integration: Active Directory, ServiceNow ITSM, and NetBox IPAM
+  - Security: TrustSec micro-segmentation with policy-based access control
 
 ---
 
@@ -156,11 +155,11 @@ This engagement is sized based on the following parameters:
 **layout:** eo_single_column
 
 - **Client Success: Regional Healthcare System**
-  - **Client:** Multi-hospital healthcare system with 180 network devices across 8 locations managing patient care systems, EMR access, and telemedicine platforms
-  - **Challenge:** Reactive troubleshooting causing 4-6 hour network outages impacting patient care. Manual switch provisioning taking 4 hours per device limiting expansion. No visibility into application performance for critical healthcare apps.
-  - **Solution:** Deployed Cisco DNA Center with AI Network Analytics for 180 devices. Implemented zero-touch provisioning and application experience monitoring for Epic EMR and telemedicine platforms. Integrated with ServiceNow ITSM for automated ticket workflows.
-  - **Results:** 78% reduction in MTTR (6 hours to 1.3 hours) with AI root cause analysis. Zero-touch provisioning reduced device deployment from 4 hours to 12 minutes. 99.8% network uptime achieved with predictive failure detection preventing 14 unplanned outages. $135K annual operational savings with 14-month ROI.
-  - **Testimonial:** "DNA Center transformed our network operations from reactive firefighting to proactive management. We detected and prevented device failures before they impacted patient care. The AI analytics gave us visibility we never had before." — **Michael Chen**, Director of IT Infrastructure
+  - **Client:** Multi-hospital healthcare system with 180 devices across 8 locations
+  - **Challenge:** 4-6 hour outages impacting patient care. Manual provisioning taking 4 hours per device. No application performance visibility for critical healthcare apps.
+  - **Solution:** Deployed DNA Center with AI analytics, zero-touch provisioning, and Epic EMR monitoring.
+  - **Results:** 78% MTTR reduction and 99.8% uptime achieved. Device deployment reduced to 12 minutes. $135K annual savings with 14-month ROI.
+  - **Testimonial:** "DNA Center transformed our network from reactive firefighting to proactive management. We detected device failures before impacting patient care." — **Michael Chen**, Director of IT Infrastructure
 
 ---
 

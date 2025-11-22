@@ -73,14 +73,13 @@ This engagement is sized based on the following parameters:
 ![Architecture Diagram](assets/diagrams/architecture-diagram.png)
 
 - **Key Components**
-  - 4x HyperFlex HX240c M5 nodes with dual Xeon Gold, 768 GB RAM, 7.68 TB NVMe per node
-  - Cisco UCS 6454 Fabric Interconnects providing unified 25GbE network and SAN fabric
-  - VMware vSphere 8 with integrated HyperFlex distributed storage and data services
+  - 4x HyperFlex HX240c M5 nodes with dual Xeon Gold and 768 GB RAM
+  - Cisco UCS 6454 Fabric Interconnects with unified 25GbE fabric
+  - VMware vSphere 8 with HyperFlex distributed storage and data services
 - **Technology Stack**
-  - Hypervisor: VMware vSphere 8 Enterprise Plus
-  - Storage: HyperFlex Data Platform with dedup, compression, snapshots
-  - Management: Cisco Intersight cloud-based unified management
-  - Backup: Veeam integration with snapshot-based backups
+  - Platform: VMware vSphere 8 Enterprise Plus with HyperFlex Data Platform
+  - Management: Cisco Intersight cloud-based management and Veeam backup
+  - Data Services: Deduplication, compression, snapshots, and self-healing
 
 ---
 
@@ -156,11 +155,11 @@ This engagement is sized based on the following parameters:
 **layout:** eo_single_column
 
 - **Client Success: Regional Manufacturing Company**
-  - **Client:** Manufacturing company with 250 VMs supporting ERP, MES, and engineering applications across 3 production facilities requiring 24/7 uptime
-  - **Challenge:** Aging 3-tier infrastructure with 45 servers and dedicated SAN consuming 42U rack space. VM provisioning taking 4-8 hours delaying project deployments. $180K annual power and cooling costs with frequent hardware failures causing unplanned downtime.
-  - **Solution:** Deployed 4-node Cisco HyperFlex HX240c cluster with 20 TB usable storage. Migrated 250 VMs using vMotion with zero downtime for critical ERP systems. Integrated Cisco Intersight for unified cloud management and Veeam for backup workflows.
-  - **Results:** 72% data center footprint reduction (42U to 8U) freeing rack space for expansion. 92% faster VM provisioning (4 hours to 10 minutes) accelerating project delivery. $95K annual operational savings from reduced power/cooling and simplified management. 28-month ROI with ongoing efficiency improvements.
-  - **Testimonial:** "HyperFlex transformed our infrastructure from aging and inefficient to modern and streamlined. We freed up 34U of rack space, cut our power bill significantly, and can now deploy VMs in minutes instead of hours. The Intersight management is incredibly intuitive." — **Robert Thompson**, Director of IT Infrastructure
+  - **Client:** Manufacturing company with 250 VMs across 3 production facilities
+  - **Challenge:** 42U rack space consumption. 4-8 hour VM provisioning delays. $180K annual power costs with frequent hardware failures.
+  - **Solution:** 4-node HyperFlex cluster, vMotion migration, Intersight management, Veeam backup.
+  - **Results:** 72% footprint reduction (42U to 8U). 92% faster provisioning. $95K annual savings. 28-month ROI.
+  - **Testimonial:** "HyperFlex transformed our infrastructure to modern and streamlined. We freed up 34U rack space and deploy VMs in minutes instead of hours." — **Robert Thompson**, Director of IT Infrastructure
 
 ---
 

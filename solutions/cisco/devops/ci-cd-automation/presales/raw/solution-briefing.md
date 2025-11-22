@@ -73,14 +73,13 @@ This engagement is sized based on the following parameters:
 ![Architecture Diagram](assets/diagrams/architecture-diagram.png)
 
 - **Key Components**
-  - GitLab Premium with CI/CD runners for automated testing and deployment pipelines
-  - Ansible playbooks with configuration templates for Cisco IOS-XE, NX-OS, and ASA
-  - NetBox IPAM as network source of truth with dynamic inventory integration
+  - GitLab Premium with CI/CD runners for automated testing and deployment
+  - Ansible playbooks with templates for Cisco IOS-XE, NX-OS, and ASA
+  - NetBox IPAM as network source of truth with dynamic inventory
 - **Technology Stack**
-  - Version Control: GitLab self-hosted with merge request workflows
-  - Automation: Ansible for config management, Terraform for IaC (optional)
-  - CI/CD: GitLab pipelines with syntax validation and pre-deployment testing
-  - Secrets: Vault integration for credential management
+  - Platform: GitLab self-hosted with CI/CD pipelines and merge request workflows
+  - Automation: Ansible and Terraform for configuration management and IaC
+  - Security: Vault integration for secrets and credential management
 
 ---
 
@@ -156,11 +155,11 @@ This engagement is sized based on the following parameters:
 **layout:** eo_single_column
 
 - **Client Success: Regional Financial Services Company**
-  - **Client:** Multi-branch financial institution with 120 network devices across 15 retail locations supporting ATM networks, branch connectivity, and customer-facing applications
-  - **Challenge:** Manual CLI configuration causing 15% error rate leading to network outages. Device provisioning taking 4-6 hours per site delaying branch openings. No change tracking for PCI DSS compliance audits failing security reviews.
-  - **Solution:** Deployed GitLab CI/CD with Ansible automation for 120 Cisco devices (IOS-XE and ASA). Implemented NetBox as source of truth with dynamic inventory. Created standardized playbooks for VLAN, ACL, routing, and compliance configuration with automated validation.
-  - **Results:** 96% faster provisioning (4 hours to 10 minutes) enabling same-day branch deployments. 87% error reduction (15% to 2%) through automated validation catching mistakes before production. Complete Git audit trail achieving PCI DSS compliance. $52K annual savings with 18-month ROI.
-  - **Testimonial:** "Network automation transformed our operations from error-prone manual processes to reliable infrastructure as code. We deploy new branches in hours instead of days, and our PCI audits are now straightforward with complete change tracking." — **Jennifer Park**, VP of Network Operations
+  - **Client:** Financial institution with 120 devices across 15 retail locations
+  - **Challenge:** 15% error rate causing outages. 4-6 hour provisioning delaying openings. No change tracking failing PCI DSS audits.
+  - **Solution:** GitLab CI/CD with Ansible for 120 devices, NetBox source of truth, standardized playbooks.
+  - **Results:** 96% faster provisioning (10 minutes vs 4 hours). 87% error reduction. PCI DSS compliance achieved. $52K annual savings.
+  - **Testimonial:** "Network automation transformed us from error-prone manual processes to reliable infrastructure as code. We deploy new branches in hours instead of days." — **Jennifer Park**, VP of Network Operations
 
 ---
 

@@ -73,15 +73,13 @@ This engagement is sized based on the following parameters:
 ![Architecture Diagram](assets/diagrams/architecture-diagram.png)
 
 - **Key Components**
-  - 25x Cisco ISR 4331 branch routers with dual WAN ports and integrated security
-  - 2x Cisco ISR 4451 hub routers at data centers providing redundant aggregation
-  - vManage, vSmart, vBond virtual controllers for centralized orchestration
+  - 25x Cisco ISR 4331 branch routers with dual WAN and integrated security
+  - 2x Cisco ISR 4451 hub routers providing redundant data center aggregation
+  - vManage, vSmart, vBond controllers for centralized orchestration
 - **Technology Stack**
-  - Edge Platform: Cisco ISR 4300/4400 series routers with SD-WAN software
-  - Controllers: vManage (management), vSmart (control), vBond (orchestration)
-  - WAN Transport: Dual broadband (100 Mbps) + LTE backup per site
-  - Application Routing: SLA-based policies for Office 365, VoIP, ERP traffic
-  - Security: Integrated firewall, VPN encryption, Umbrella DNS (optional)
+  - Platform: Cisco ISR 4300/4400 SD-WAN with dual broadband and LTE backup
+  - Application Routing: SLA-based policies for Office 365, VoIP, and ERP
+  - Security: Integrated firewall, VPN encryption, and Umbrella DNS
 
 ---
 
@@ -157,11 +155,11 @@ This engagement is sized based on the following parameters:
 **layout:** eo_single_column
 
 - **Client Success: Regional Retail Chain**
-  - **Client:** Retail chain with 30 stores requiring reliable WAN connectivity for POS systems, inventory management, and video surveillance across distributed locations
-  - **Challenge:** $320K annual MPLS costs constraining growth with 8-12 week provisioning delays for new stores. Cloud application performance suffering from MPLS backhauling. No WAN visibility or centralized management creating troubleshooting challenges.
-  - **Solution:** Deployed Cisco SD-WAN with 30 ISR 4331 branch routers and dual broadband circuits plus LTE backup. Implemented vManage centralized orchestration with application-aware routing for POS, inventory, and cloud apps. Configured direct internet breakout for Office 365 and SaaS applications.
-  - **Results:** 65% WAN cost reduction ($320K to $112K annually) replacing MPLS with broadband plus LTE. 97% faster site deployment (8 weeks to 2 hours) enabling rapid store openings. 70% improvement in Office 365 performance through local internet breakout. Zero-touch provisioning eliminated truck rolls for router configuration. $208K annual savings with 15-month ROI.
-  - **Testimonial:** "SD-WAN eliminated our MPLS dependency and slashed our WAN costs by two-thirds. We can open new stores in hours instead of months, and our cloud application performance is phenomenal. The centralized vManage dashboard transformed our WAN operations." — **James Wilson**, VP of IT Operations
+  - **Client:** Retail chain with 30 stores across distributed locations
+  - **Challenge:** $320K MPLS costs. 8-12 week provisioning delays. Cloud app performance suffering from backhauling.
+  - **Solution:** SD-WAN with 30 ISR routers, dual broadband plus LTE, vManage orchestration.
+  - **Results:** 65% cost reduction ($320K to $112K). 97% faster deployment (2 hours vs 8 weeks). $208K annual savings, 15-month ROI.
+  - **Testimonial:** "SD-WAN slashed our WAN costs by two-thirds. We open new stores in hours instead of months, and cloud performance is phenomenal." — **James Wilson**, VP of IT Operations
 
 ---
 

@@ -73,15 +73,13 @@ This engagement is sized based on the following parameters:
 ![Architecture Diagram](assets/diagrams/architecture-diagram.png)
 
 - **Key Components**
-  - Cisco ISE 3615 appliances (primary + secondary HA) supporting 3000 concurrent endpoints
-  - 802.1X authentication with Active Directory integration for corporate users
+  - Cisco ISE 3615 appliances in HA configuration supporting 3000 endpoints
+  - 802.1X authentication with Active Directory integration for users
   - TrustSec micro-segmentation with security group tags and policy matrix
 - **Technology Stack**
-  - Identity Platform: Cisco Identity Services Engine (ISE) Plus
-  - Authentication: 802.1X wired/wireless, MAB for non-supplicant devices
+  - Platform: Cisco ISE Plus with 802.1X, MAB, BYOD, and guest access
   - Authorization: TrustSec security groups with policy-based access control
-  - BYOD: Self-service onboarding with certificate provisioning for iOS/Android
-  - Guest: Sponsor-based workflow with time-limited access
+  - Integration: Active Directory LDAP and certificate-based authentication
 
 ---
 
@@ -157,11 +155,11 @@ This engagement is sized based on the following parameters:
 **layout:** eo_single_column
 
 - **Client Success: Healthcare System**
-  - **Client:** Multi-hospital healthcare system with 1200 users and 2500 devices including clinical systems, medical devices, and staff BYOD requiring HIPAA compliance and network segmentation
-  - **Challenge:** Unauthorized device access creating compliance risk with no visibility into network connections. Manual BYOD provisioning generating 150+ monthly helpdesk tickets. Medical IoT devices requiring network access without 802.1X support causing security gaps.
-  - **Solution:** Deployed Cisco ISE with 802.1X authentication for corporate devices and MAB for medical IoT. Implemented self-service BYOD portal for iOS/Android with certificate provisioning. Configured TrustSec micro-segmentation isolating patient data networks from guest and IoT zones.
-  - **Results:** 100% device authentication compliance achieving HIPAA audit requirements. 78% reduction in helpdesk tickets (150 to 33 monthly) through self-service BYOD. 92% reduction in unauthorized access attempts detected and blocked. TrustSec segmentation preventing lateral movement between clinical and administrative networks. $82K annual savings with 22-month ROI.
-  - **Testimonial:** "ISE gave us the visibility and control we desperately needed for HIPAA compliance. The self-service BYOD portal eliminated a major helpdesk burden, and TrustSec segmentation protects our patient data without complex VLAN changes. Our audits are now straightforward with complete access logs." — **Dr. Maria Rodriguez**, CISO
+  - **Client:** Multi-hospital system with 1200 users and 2500 devices
+  - **Challenge:** Unauthorized access creating compliance risk. 150+ monthly BYOD tickets. Medical IoT lacking 802.1X support.
+  - **Solution:** Cisco ISE with 802.1X, MAB for IoT, BYOD portal, TrustSec segmentation.
+  - **Results:** 100% compliance. 78% ticket reduction (150 to 33). 92% fewer unauthorized access attempts. $82K savings, 22-month ROI.
+  - **Testimonial:** "ISE gave us HIPAA compliance visibility. The BYOD portal eliminated helpdesk burden, and TrustSec protects patient data without VLAN complexity." — **Dr. Maria Rodriguez**, CISO
 
 ---
 
