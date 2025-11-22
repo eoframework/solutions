@@ -1,0 +1,263 @@
+<mxfile host="app.diagrams.net">
+  <diagram id="cmmc-gcc-high-architecture" name="Microsoft CMMC GCC High Enclave">
+    <mxGraphModel dx="1422" dy="794" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="900">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <!-- Instructions Box -->
+        <mxCell id="instructions" value="📝 INSTRUCTIONS: Replace Generic Shapes with Microsoft Icons&#xa;&#xa;1. Click 'More Shapes...' in left sidebar&#xa;2. Search for 'Microsoft Azure' and 'Microsoft 365'&#xa;3. Click 'Apply'&#xa;4. Drag Microsoft icons from sidebar to replace rectangles&#xa;5. Delete old shapes and reposition as needed&#xa;&#xa;Color Guide:&#xa;🔵 Blue = Identity/Security | 🟢 Green = Collaboration&#xa;🟣 Purple = Compliance | 🟠 Orange = Infrastructure | 🔴 Red = Monitoring"
+          style="text;html=1;strokeColor=#6c8ebf;fillColor=#dae8fc;align=left;verticalAlign=top;whiteSpace=wrap;rounded=1;fontSize=11;fontFamily=Helvetica;fontStyle=1;"
+          vertex="1" parent="1">
+          <mxGeometry x="20" y="20" width="400" height="180" as="geometry" />
+        </mxCell>
+
+        <!-- Title -->
+        <mxCell id="title" value="Microsoft CMMC GCC High Enclave Architecture"
+          style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontSize=20;fontStyle=1;fontFamily=Helvetica;"
+          vertex="1" parent="1">
+          <mxGeometry x="450" y="40" width="700" height="40" as="geometry" />
+        </mxCell>
+
+        <!-- User Access Layer -->
+        <mxCell id="layer1" value="User Access &amp; Identity"
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=14;fontStyle=1;verticalAlign=top;"
+          vertex="1" parent="1">
+          <mxGeometry x="80" y="250" width="250" height="180" as="geometry" />
+        </mxCell>
+        <mxCell id="users" value="CUI Users&#xa;(CAC/PIV Smart Cards)"
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=12;"
+          vertex="1" parent="1">
+          <mxGeometry x="100" y="280" width="210" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="azuread" value="Azure AD (GCC High)&#xa;MFA + Conditional Access"
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=12;"
+          vertex="1" parent="1">
+          <mxGeometry x="100" y="350" width="210" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- M365 GCC High Layer -->
+        <mxCell id="layer2" value="Microsoft 365 GCC High"
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=14;fontStyle=1;verticalAlign=top;"
+          vertex="1" parent="1">
+          <mxGeometry x="380" y="250" width="280" height="320" as="geometry" />
+        </mxCell>
+        <mxCell id="exchange" value="Exchange Online&#xa;CUI Email &amp; Calendar"
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=12;"
+          vertex="1" parent="1">
+          <mxGeometry x="400" y="280" width="240" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="sharepoint" value="SharePoint Online&#xa;CUI Document Management"
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=12;"
+          vertex="1" parent="1">
+          <mxGeometry x="400" y="345" width="240" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="teams" value="Microsoft Teams&#xa;Secure Collaboration"
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=12;"
+          vertex="1" parent="1">
+          <mxGeometry x="400" y="410" width="240" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="onedrive" value="OneDrive for Business&#xa;Personal CUI Storage"
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=12;"
+          vertex="1" parent="1">
+          <mxGeometry x="400" y="475" width="240" height="50" as="geometry" />
+        </mxCell>
+
+        <!-- Azure Government Layer -->
+        <mxCell id="layer3" value="Azure Government Cloud"
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=14;fontStyle=1;verticalAlign=top;"
+          vertex="1" parent="1">
+          <mxGeometry x="710" y="250" width="250" height="180" as="geometry" />
+        </mxCell>
+        <mxCell id="vms" value="Virtual Machines&#xa;CUI Workloads (D4s_v3)"
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=12;"
+          vertex="1" parent="1">
+          <mxGeometry x="730" y="280" width="210" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="storage" value="Azure Storage&#xa;CUI Data (Encrypted)"
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=12;"
+          vertex="1" parent="1">
+          <mxGeometry x="730" y="345" width="210" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="networking" value="ExpressRoute + VPN&#xa;Secure Connectivity"
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=12;"
+          vertex="1" parent="1">
+          <mxGeometry x="730" y="410" width="210" height="50" as="geometry" />
+        </mxCell>
+
+        <!-- Security &amp; Compliance Layer -->
+        <mxCell id="layer4" value="Security &amp; Compliance"
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=14;fontStyle=1;verticalAlign=top;"
+          vertex="1" parent="1">
+          <mxGeometry x="1010" y="250" width="280" height="320" as="geometry" />
+        </mxCell>
+        <mxCell id="sentinel" value="Microsoft Sentinel&#xa;SIEM (100 GB/month)"
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=12;"
+          vertex="1" parent="1">
+          <mxGeometry x="1030" y="280" width="240" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="defender" value="Defender for Cloud&#xa;CMMC Compliance Posture"
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=12;"
+          vertex="1" parent="1">
+          <mxGeometry x="1030" y="345" width="240" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="purview" value="Microsoft Purview&#xa;DLP &amp; Information Protection"
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=12;"
+          vertex="1" parent="1">
+          <mxGeometry x="1030" y="410" width="240" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="compliance" value="Compliance Manager&#xa;NIST 800-171 Controls"
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=12;"
+          vertex="1" parent="1">
+          <mxGeometry x="1030" y="475" width="240" height="50" as="geometry" />
+        </mxCell>
+
+        <!-- Infrastructure Services -->
+        <mxCell id="layer5" value="Infrastructure Services"
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontSize=14;fontStyle=1;verticalAlign=top;"
+          vertex="1" parent="1">
+          <mxGeometry x="380" y="610" width="580" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="keyvault" value="Azure Key Vault&#xa;FIPS 140-2 Keys"
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontSize=12;"
+          vertex="1" parent="1">
+          <mxGeometry x="400" y="640" width="160" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="monitor" value="Azure Monitor&#xa;Logs &amp; Metrics"
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontSize=12;"
+          vertex="1" parent="1">
+          <mxGeometry x="590" y="640" width="160" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="backup" value="Azure Backup&#xa;GRS Retention"
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontSize=12;"
+          vertex="1" parent="1">
+          <mxGeometry x="780" y="640" width="160" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- Connections/Arrows -->
+        <mxCell id="arrow1" value="Authenticate&#xa;CAC/PIV"
+          style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;fontSize=10;"
+          edge="1" parent="1" source="users" target="azuread">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="arrow2" value="SSO"
+          style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;fontSize=10;"
+          edge="1" parent="1" source="azuread" target="exchange">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="arrow3" value="Access&#xa;CUI Data"
+          style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;fontSize=10;"
+          edge="1" parent="1" source="azuread" target="vms">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="350" y="380" />
+              <mxPoint x="350" y="305" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+
+        <mxCell id="arrow4" value="Store&#xa;Files"
+          style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;fontSize=10;"
+          edge="1" parent="1" source="vms" target="storage">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="arrow5" value="Security&#xa;Logs"
+          style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;fontSize=10;"
+          edge="1" parent="1" source="exchange" target="sentinel">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="520" y="240" />
+              <mxPoint x="1150" y="240" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+
+        <mxCell id="arrow6" value="Compliance&#xa;Scan"
+          style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;fontSize=10;"
+          edge="1" parent="1" source="vms" target="defender">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="980" y="305" />
+              <mxPoint x="980" y="370" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+
+        <mxCell id="arrow7" value="DLP&#xa;Policies"
+          style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;fontSize=10;"
+          edge="1" parent="1" source="sharepoint" target="purview">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="680" y="370" />
+              <mxPoint x="680" y="435" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+
+        <mxCell id="arrow8" value="NIST&#xa;Controls"
+          style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=2;fontSize=10;"
+          edge="1" parent="1" source="defender" target="compliance">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="arrow9" value="Encrypt"
+          style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=1;fontSize=10;dashed=1;dashPattern=3 3;"
+          edge="1" parent="1" source="storage" target="keyvault">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="835" y="580" />
+              <mxPoint x="480" y="580" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+
+        <mxCell id="arrow10" value="Monitor"
+          style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=1;fontSize=10;dashed=1;dashPattern=3 3;"
+          edge="1" parent="1" source="sentinel" target="monitor">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1150" y="580" />
+              <mxPoint x="670" y="580" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+
+        <mxCell id="arrow11" value="Backup"
+          style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=1;fontSize=10;dashed=1;dashPattern=3 3;"
+          edge="1" parent="1" source="vms" target="backup">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="835" y="580" />
+              <mxPoint x="860" y="580" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Compliance Zone -->
+        <mxCell id="compliance-zone" value="🔒 CMMC Level 2 Compliance Zone (FedRAMP High Authorized)"
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=12;fontStyle=1;dashed=1;dashPattern=5 5;"
+          vertex="1" parent="1">
+          <mxGeometry x="60" y="210" width="1250" height="550" as="geometry" />
+        </mxCell>
+
+        <!-- Legend -->
+        <mxCell id="legend" value="Legend: Solid arrows = Data/Access flow | Dashed arrows = Security/Infrastructure"
+          style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontSize=11;fontStyle=2;fontFamily=Helvetica;"
+          vertex="1" parent="1">
+          <mxGeometry x="450" y="780" width="600" height="30" as="geometry" />
+        </mxCell>
+
+        <!-- Key Features -->
+        <mxCell id="features" value="Key CMMC Features:&#xa;✓ CAC/PIV Smart Card Authentication&#xa;✓ FIPS 140-2 Encryption (Key Vault HSM)&#xa;✓ NIST 800-171 Automated Controls&#xa;✓ 7-Year Audit Log Retention&#xa;✓ Sentinel SIEM 24x7 Monitoring&#xa;✓ FedRAMP High Authorization"
+          style="text;html=1;strokeColor=#82b366;fillColor=#d5e8d4;align=left;verticalAlign=top;whiteSpace=wrap;rounded=1;fontSize=11;fontFamily=Helvetica;"
+          vertex="1" parent="1">
+          <mxGeometry x="1340" y="250" width="240" height="160" as="geometry" />
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
