@@ -141,9 +141,9 @@ This engagement is sized based on the following parameters:
 **layout:** eo_single_column
 
 - **Client Success: Global Investment Bank**
-  - **Client:** Top 10 investment bank managing infrastructure across 200+ AWS accounts supporting trading systems and customer applications
+  - **Client:** Top 10 investment bank with 200+ AWS accounts
   - **Challenge:** Inconsistent Terraform OSS usage creating configuration drift and compliance gaps. Manual infrastructure approvals taking 3-5 days. Security incidents from misconfigured infrastructure costing $250K annually.
-  - **Solution:** Deployed Terraform Enterprise with centralized workspace management, VCS-driven workflows, and 40+ Sentinel policies for governance. Implemented self-service provisioning with approval gates.
+  - **Solution:** Deployed Terraform Enterprise with centralized workspace management, VCS workflows, and 40+ Sentinel policies for governance.
   - **Results:** 80% reduction in provisioning time (5 days to 1 day) and 100% policy compliance with zero production incidents from drift. $380K annual savings through cost governance. Full ROI achieved in 14 months.
   - **Testimonial:** "Terraform Enterprise gave us the governance we needed without sacrificing velocity. Sentinel policies catch security issues before they reach production, and our teams love the self-service capability." — **Michael Rodriguez**, Director of Infrastructure
 

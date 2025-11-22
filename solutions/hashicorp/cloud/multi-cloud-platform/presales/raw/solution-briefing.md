@@ -150,9 +150,9 @@ This engagement is sized based on the following parameters:
 **layout:** eo_single_column
 
 - **Client Success: Global Financial Services Firm**
-  - **Client:** Fortune 500 financial institution managing infrastructure across 12 AWS accounts and 8 Azure subscriptions with 2500+ resources
+  - **Client:** Fortune 500 financial institution with 2500+ multi-cloud resources
   - **Challenge:** Inconsistent Terraform usage creating compliance gaps and infrastructure drift. Manual provisioning taking 5-7 days per environment. No policy enforcement enabling security misconfigurations costing $180K annually in incidents.
-  - **Solution:** Deployed HashiCorp multi-cloud platform with Terraform Cloud for centralized state management, Vault for secrets, and 50+ Sentinel policies for governance. Implemented GitOps workflows and self-service provisioning.
+  - **Solution:** Deployed HashiCorp multi-cloud platform with Terraform Cloud, Vault, and 50+ Sentinel policies. Implemented GitOps workflows and self-service provisioning.
   - **Results:** 75% reduction in provisioning time (7 days to 1.5 days) and 99% policy compliance rate with zero security incidents. $450K annual savings through cost optimization policies. Full ROI achieved in 16 months.
   - **Testimonial:** "The HashiCorp platform transformed our infrastructure chaos into a governed, compliant multi-cloud operation. Sentinel policies prevent misconfigurations before they reach production." — **James Chen**, VP of Cloud Engineering
 
