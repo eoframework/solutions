@@ -82,7 +82,6 @@ This engagement is sized based on the following parameters:
 - **Platform Architecture**
   - Azure Functions for serverless document processing workflows
   - Cosmos DB for scalable metadata storage and extraction results
-  - Logic Apps and Power Automate for business process integration
   - Azure Blob Storage for secure document ingestion and archival
 
 ---
@@ -158,11 +157,11 @@ This engagement is sized based on the following parameters:
 **Proven Results in Document Automation**
 
 - **Client Success: Regional Healthcare Provider**
-  - **Client:** Mid-size healthcare network processing 50,000+ patient documents monthly
-  - **Challenge:** 8 FTEs dedicated to manual data entry, 72-hour processing backlog, 15% error rate causing compliance issues
-  - **Solution:** Deployed Azure Document Intelligence with custom models for patient intake forms, insurance claims, and medical records, integrated with Epic EHR system
-  - **Results:** 85% reduction in manual processing (6.8 FTE savings), processing time reduced from 72 hours to 4 hours, accuracy improved to 97%, $420K annual labor cost savings
-  - **Testimonial:** "Azure Document Intelligence transformed our patient onboarding process. What used to take our team 3 days now happens in hours, and with better accuracy. The integration with Epic was seamless." — **Sarah Mitchell, VP of Operations**, Regional Healthcare Network
+  - **Client:** Mid-size healthcare network processing 50K+ documents monthly
+  - **Challenge:** 8 FTEs manual data entry, 72-hour backlog, 15% error rate causing compliance issues
+  - **Solution:** Document Intelligence with custom models for forms, claims, records
+  - **Results:** 85% manual reduction, 72hrs→4hrs processing, 97% accuracy, $420K savings
+  - **Testimonial:** "Document Intelligence transformed our patient onboarding. What took 3 days now happens in hours with better accuracy." — **Sarah Mitchell, VP Operations**, Regional Healthcare
 
 ---
 

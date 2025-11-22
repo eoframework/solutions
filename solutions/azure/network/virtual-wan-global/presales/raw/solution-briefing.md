@@ -160,9 +160,9 @@ This engagement is sized based on the following parameters:
 **Proven Results in Global Network Transformation**
 
 - **Client Success: International Logistics Company**
-  - **Client:** Logistics provider with 45 warehouse locations across North America, Europe, and Asia
+  - **Client:** Logistics provider with 45 warehouse locations across three continents
   - **Challenge:** Managing 45 separate VPN tunnels to Azure, inconsistent security policies, 3-day average to add new locations, $180K annual network management costs
-  - **Solution:** Deployed Azure Virtual WAN with three regional hubs, SD-WAN integration at each warehouse, centralized Azure Firewall policies, and automated routing
+  - **Solution:** Deployed Azure Virtual WAN with three regional hubs, SD-WAN integration, centralized Azure Firewall policies, and automated routing
   - **Results:** 55% reduction in network management costs ($99K annual savings), new location connectivity reduced from 3 days to 4 hours, 99.95% network uptime, consistent security policies across all locations
   - **Testimonial:** "Azure Virtual WAN simplified our entire network architecture. Adding a new warehouse used to take days of VPN configuration. Now our team connects a new site in hours with automatic routing and security policies already in place." — **Robert Martinez, VP of IT Infrastructure**, Global Logistics Inc
 

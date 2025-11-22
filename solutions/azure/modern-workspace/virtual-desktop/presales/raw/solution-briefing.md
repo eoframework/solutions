@@ -80,12 +80,9 @@ This engagement is sized based on the following parameters:
 ![Architecture Diagram](assets/diagrams/architecture-diagram.png)
 
 - **Key Components**
-  - **Host Pools:** Pooled (multi-session Windows 10/11) or personal (dedicated per-user) configurations
-  - **Session Hosts:** Azure VMs (D4s_v5 series) running Windows 10/11 Multi-session with load balancing
-  - **FSLogix Profile Management:** Unified profile containers and Office containers for persistent user data
-  - **Azure Files:** SMB-based storage for profile and user-specific data with fast access
-  - **Azure AD & Conditional Access:** Enterprise identity management with policy-driven access control
-  - **Azure Monitor:** Real-time diagnostics, performance monitoring, and health alerts
+  - **Host Pools & Session Hosts:** Pooled or personal desktop configurations with Azure VMs running Windows 10/11 Multi-session
+  - **FSLogix & Azure Files:** Profile containers with SMB-based storage for persistent user data and seamless roaming
+  - **Azure AD & Monitoring:** Enterprise identity management with conditional access policies and real-time performance diagnostics
 - **Technology Stack**
   - Platform: Azure Virtual Desktop (AVD)
   - Session Hosts: Windows 10/11 Multi-session (D4s_v5 VMs)
@@ -102,19 +99,16 @@ This engagement is sized based on the following parameters:
 **Proven Methodology for Desktop Modernization**
 
 - **Phase 1: Assessment & Design** (Weeks 1-3)
-  - Current desktop environment discovery and user requirements
-  - AVD architecture design (pooled vs. personal selection)
-  - Golden image strategy and application packaging
+  - Current desktop environment discovery and user requirements analysis
+  - AVD architecture design including pooled vs. personal selection and golden image strategy
   - Network and security design with NSG and Private Endpoints
 - **Phase 2: Infrastructure & Golden Image** (Weeks 4-6)
-  - Azure infrastructure provisioning (host pools, Azure Files, networking)
-  - Golden image creation and application deployment
-  - FSLogix profile configuration and testing
-  - Azure Monitor setup and baseline metrics
+  - Azure infrastructure provisioning including host pools, Azure Files, and networking
+  - Golden image creation with application deployment and FSLogix profile configuration
+  - Azure Monitor setup and baseline metrics establishment
 - **Phase 3: Deployment & Validation** (Weeks 7-10)
-  - User and group assignment to host pools
-  - Pilot deployment with business users (10-15 users)
-  - Performance validation and optimization
+  - Pilot deployment with business users and performance validation
+  - User and group assignment to production host pools
   - Training and handover to support team
 
 **SPEAKER NOTES:**
@@ -171,11 +165,11 @@ This engagement is sized based on the following parameters:
 **Real Results: Remote Workforce Enablement**
 
 - **Client Success: Global Financial Services Organization**
-  - **Client:** Fortune 500 Financial Services company with 8,000+ employees in 45 countries
+  - **Client:** Fortune 500 Financial Services company with 8,000+ employees globally
   - **Challenge:** Legacy desktop infrastructure unable to support remote work; expensive VPN with poor user experience; security gaps with unsecured bring-your-own-device access; IT helpdesk overwhelmed with remote access issues
-  - **Solution:** Deployed Azure Virtual Desktop with pooled desktops for 70% of workforce and personal desktops for executives; integrated FSLogix for seamless profile access across any device; implemented conditional access policies; centralized monitoring and management
+  - **Solution:** Deployed Azure Virtual Desktop with pooled and personal desktops, FSLogix profiles, conditional access policies, and centralized monitoring
   - **Results:** 100% remote work capability within 10 weeks, 60% reduction in IT helpdesk tickets, 85% user satisfaction (NPS 72), 45% reduction in VPN-related security incidents, achieved SOC2 compliance with unified audit logging
-  - **Testimonial:** "Azure Virtual Desktop enabled us to embrace distributed work while actually improving security and reducing costs. Our users love the seamless experience, and our IT team finally has visibility and control. This was a game-changer for our business continuity." — **Patricia Wong, Chief Information Officer**, Global Financial Services
+  - **Testimonial:** "Azure Virtual Desktop enabled us to embrace distributed work while improving security and reducing costs. Our users love the seamless experience, and our IT team finally has visibility and control." — **Patricia Wong, CIO**, Global Financial Services
 
 ---
 

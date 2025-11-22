@@ -158,11 +158,11 @@ This engagement is sized based on the following parameters:
 **Proven Results with Similar Clients**
 
 - **Client Success: Global Financial Services Firm**
-  - **Client:** Fortune 500 financial institution with 500+ Azure subscriptions across 20 business units
-  - **Challenge:** Inconsistent governance causing compliance failures, uncontrolled cloud spend exceeding budget by 35%, and 3-week subscription provisioning delays blocking business agility
-  - **Solution:** Deployed comprehensive Azure Landing Zone with management group hierarchy, 150+ custom policies, hub-spoke networking, and automated subscription vending through Azure Blueprints
-  - **Results:** 100% policy compliance achieved in 90 days, 42% reduction in cloud waste ($2.1M annual savings), subscription provisioning reduced to 4 hours, zero audit findings in subsequent compliance reviews
-  - **Testimonial:** "This landing zone implementation transformed our Azure governance from reactive firefighting to proactive control. We now have visibility and consistency across all our subscriptions, and our teams can self-service new environments within guardrails we trust." — **Sarah Mitchell, Cloud Platform Director**, Global Financial Services Corp
+  - **Client:** Fortune 500 financial institution with 500+ Azure subscriptions
+  - **Challenge:** Inconsistent governance, compliance failures, 35% cloud overspend, 3-week provisioning delays
+  - **Solution:** Landing zone with policies, hub-spoke network, automated subscription vending
+  - **Results:** 100% compliance in 90 days, 42% cost reduction ($2.1M savings), 4-hour provisioning
+  - **Testimonial:** "Landing zone transformed our governance from firefighting to proactive control. Teams self-service environments within trusted guardrails." — **Sarah Mitchell, Cloud Director**, Global Financial Services
 
 ---
 

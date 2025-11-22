@@ -158,11 +158,11 @@ This engagement is sized based on the following parameters:
 **Proven Results with Similar Clients**
 
 - **Client Success: Regional Healthcare Network**
-  - **Client:** Healthcare organization with 5,000+ employees across 12 facilities managing patient data
+  - **Client:** Healthcare organization with 5,000+ employees across 12 facilities
   - **Challenge:** Security team overwhelmed by 10,000+ daily alerts from disconnected tools, 48-hour average threat detection time, compliance gaps with HIPAA requirements
-  - **Solution:** Deployed Microsoft Sentinel with unified log collection from all systems, AI-powered threat detection, and automated incident response playbooks for common security events
-  - **Results:** 90% reduction in alert noise (from 10,000 to 1,000 actionable alerts daily), threat detection time reduced from 48 hours to 15 minutes, full HIPAA compliance reporting automated, security team productivity increased 3x
-  - **Testimonial:** "Microsoft Sentinel transformed our security operations. We went from drowning in alerts to proactively hunting threats. The automated playbooks handle routine incidents automatically, freeing our team to focus on advanced threats. We finally have the visibility and response capability we needed." — **Sarah Martinez, Chief Information Security Officer**, Regional Healthcare Network
+  - **Solution:** Deployed Microsoft Sentinel with unified log collection, AI-powered threat detection, and automated incident response playbooks
+  - **Results:** 90% reduction in alert noise, threat detection time reduced from 48 hours to 15 minutes, full HIPAA compliance automated, security team productivity increased 3x
+  - **Testimonial:** "Microsoft Sentinel transformed our security operations. We went from drowning in alerts to proactively hunting threats. The automated playbooks freed our team to focus on advanced threats." — **Sarah Martinez, CISO**, Regional Healthcare Network
 
 ---
 
