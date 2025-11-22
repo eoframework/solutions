@@ -28,26 +28,24 @@ eoframework_logo: ../../assets/logos/eo-framework-logo-real.png
 ---
 
 ### Business Opportunity
-**layout:** two_column
+**layout:** eo_two_column
 
 **Enabling Distributed Workforce Excellence**
 
 - **Opportunity**
   - Modernize desktop infrastructure to support secure remote work and flexible workplace models
   - Reduce IT operational overhead by 40-50% through centralized cloud-based desktop management
-  - Enable employees to access corporate desktops from any device, location, or network connection
-  - Implement enterprise-grade security and compliance controls with multi-session efficiency
+  - Enable employees to access corporate desktops from any device with enterprise-grade security
 - **Success Criteria**
   - Deploy pooled and/or personal desktops with 99.9% availability within 8-10 weeks
   - Achieve 70%+ reduction in remote access VPN complexity and security incidents
   - Reduce per-user infrastructure costs by 35-45% compared to traditional VDI solutions
-  - Enable seamless user experience with sub-200ms latency across geographies
 
 ---
 
 
 ### Engagement Scope
-**layout:** table
+**layout:** eo_table
 
 **Sizing Parameters for This Engagement**
 
@@ -73,7 +71,7 @@ This engagement is sized based on the following parameters:
 ---
 
 ### Solution Overview
-**layout:** visual
+**layout:** eo_visual_content
 
 **Azure Virtual Desktop with Pooled & Personal Desktop Options**
 
@@ -94,7 +92,7 @@ This engagement is sized based on the following parameters:
 ---
 
 ### Implementation Approach
-**layout:** single
+**layout:** eo_single_column
 
 **Proven Methodology for Desktop Modernization**
 
@@ -133,7 +131,7 @@ This engagement is sized based on the following parameters:
 ---
 
 ### Timeline & Milestones
-**layout:** table
+**layout:** eo_table
 
 **Path to Secure, Modern Desktop Infrastructure**
 
@@ -160,7 +158,7 @@ This engagement is sized based on the following parameters:
 ---
 
 ### Success Stories
-**layout:** single
+**layout:** eo_single_column
 
 **Real Results: Remote Workforce Enablement**
 
@@ -174,7 +172,7 @@ This engagement is sized based on the following parameters:
 ---
 
 ### Our Partnership Advantage
-**layout:** two_column
+**layout:** eo_two_column
 
 **Why Partner with Us for AVD**
 
@@ -183,25 +181,21 @@ This engagement is sized based on the following parameters:
   - 150+ successful Azure Virtual Desktop deployments
   - Certified Microsoft Azure Solutions Architects
   - Deep expertise in FSLogix, golden image optimization, and performance tuning
-  - 24/7 support with guaranteed response times
-  - Pre-built AVD accelerators for faster deployment
 - **Value to You**
   - Proven methodology reduces implementation risk by 70%
   - Pre-optimized golden images for common applications
-  - Network design expertise ensures optimal user experience
   - Training ensures your team becomes self-sufficient
   - Ongoing optimization recommendations for cost and performance
-  - Access to Microsoft AVD partner ecosystem and best practices
 
 ---
 
 ### Investment Summary
-**layout:** data_viz
+**layout:** eo_table
 
 **Total Investment & Value**
 
 <!-- BEGIN COST_SUMMARY_TABLE -->
-<!-- TABLE_CONFIG: widths=[25, 15, 15, 15, 10, 10, 10] -->
+<!-- TABLE_CONFIG: widths=[25, 15, 15, 15, 12, 12, 15] -->
 | Cost Category | Year 1 List | Year 1 Credits | Year 1 Net | Year 2 | Year 3 | 3-Year Total |
 |---------------|-------------|----------------|------------|--------|--------|--------------|
 | Professional Services | $78,400 | ($10,000) | $68,400 | $0 | $0 | $68,400 |
@@ -229,6 +223,12 @@ This engagement is sized based on the following parameters:
 Detailed infrastructure costs including VM specifications, storage capacity, licensing tiers, and support options is provided in infrastructure-costs.csv.
 
 **SPEAKER NOTES:**
+
+*Credit Program Talking Points:*
+- Azure Hybrid Benefit & Credits ($4,000) leverages existing Windows licenses and Azure modern workplace credits
+- Microsoft Solutions Partner Program ($2,000) provides professional services credit
+- Credits are real Azure account credits automatically applied as services are consumed
+- Total Year 1 credits: $6,000 (4% reduction from list price)
 
 *Value Positioning:*
 - Frame as investment in modern, secure workforce enablement
@@ -258,22 +258,22 @@ Detailed infrastructure costs including VM specifications, storage capacity, lic
 ---
 
 ### Next Steps
-**layout:** bullet_points
+**layout:** eo_bullet_points
 
 **Your Path Forward to Modern Workspace**
 
-**Immediate Actions:**
-1. **Decision:** Board approval for AVD initiative by [specific date]
-2. **Kickoff:** Project start date of [target start date]
-3. **Team Formation:** Designate IT lead, network architect, and user champions
-
-**30-Day Launch Plan:**
-- **Week 1:** Contract finalization and project initiation
-- **Week 2:** Discovery sessions and requirements gathering
-- **Week 3:** Architecture design and golden image planning
-- **Week 4:** Environment setup and pilot user selection
+- **Decision:** Board approval for AVD initiative by [Target Date]
+- **Kickoff:** Project start scheduled for [Start Date] with IT lead, network architect, and user champions
+- **Team Formation:** Designate IT lead, network architect, and user champions for engagement
+- **Week 1-2:** Contract finalization, project initiation, discovery sessions, and requirements gathering
+- **Week 3-4:** Architecture design, golden image planning, environment setup, and pilot user selection
 
 **SPEAKER NOTES:**
+
+*Call to Action:*
+- "Let's schedule a follow-up meeting to review desktop requirements and finalize the SOW"
+- "What questions can I answer to help you move forward with confidence?"
+- "Our next available start date is [Date] - shall we reserve that slot for your team?"
 
 *Transition from Investment:*
 - "Now that we've covered the investment and value, let's talk about how we get started"
@@ -296,7 +296,7 @@ Detailed infrastructure costs including VM specifications, storage capacity, lic
 ---
 
 ### Thank You
-**layout:** thank_you
+**layout:** eo_thank_you
 
 - **Your Account Manager:** [Name, Title] | [Email] | [Phone]
 

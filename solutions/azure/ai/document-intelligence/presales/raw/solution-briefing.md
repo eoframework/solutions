@@ -26,7 +26,7 @@ footer_logo_right: ../../assets/logos/eo-framework-logo-real.png
 ---
 
 ### Business Opportunity
-**layout:** two_column
+**layout:** eo_two_column
 
 **Automating Document Processing with Azure AI**
 
@@ -43,7 +43,7 @@ footer_logo_right: ../../assets/logos/eo-framework-logo-real.png
 
 
 ### Engagement Scope
-**layout:** table
+**layout:** eo_table
 
 **Sizing Parameters for This Engagement**
 
@@ -69,7 +69,7 @@ This engagement is sized based on the following parameters:
 ---
 
 ### Solution Overview
-**layout:** visual
+**layout:** eo_visual_content
 
 **Azure AI-Powered Document Processing Platform**
 
@@ -87,7 +87,7 @@ This engagement is sized based on the following parameters:
 ---
 
 ### Implementation Approach
-**layout:** single
+**layout:** eo_single_column
 
 **Proven Methodology for Azure AI Success**
 
@@ -125,7 +125,7 @@ This engagement is sized based on the following parameters:
 ---
 
 ### Timeline & Milestones
-**layout:** table
+**layout:** eo_table
 
 **Path to Intelligent Document Processing**
 
@@ -152,7 +152,7 @@ This engagement is sized based on the following parameters:
 ---
 
 ### Success Stories
-**layout:** single
+**layout:** eo_single_column
 
 **Proven Results in Document Automation**
 
@@ -166,7 +166,7 @@ This engagement is sized based on the following parameters:
 ---
 
 ### Our Partnership Advantage
-**layout:** two_column
+**layout:** eo_two_column
 
 **Why Partner with Us**
 
@@ -175,23 +175,21 @@ This engagement is sized based on the following parameters:
   - 50+ Azure Document Intelligence deployments across healthcare, finance, and insurance
   - Certified Azure AI Engineers with custom model training expertise
   - Pre-built accelerators for common document types and integrations
-  - Direct Microsoft escalation path for complex scenarios
 - **Value to You**
   - Proven deployment methodology reduces risk and accelerates time-to-value
   - Pre-trained model templates for invoices, contracts, and forms
   - Best practices from 50+ similar implementations
   - Comprehensive knowledge transfer ensures team self-sufficiency
-  - Post-deployment optimization services improve accuracy over time
 
 ---
 
 ### Investment Summary
-**layout:** data_viz
+**layout:** eo_table
 
 **Total Investment & Value**
 
 <!-- BEGIN COST_SUMMARY_TABLE -->
-<!-- TABLE_CONFIG: widths=[18, 12, 24, 12, 10, 10, 14] -->
+<!-- TABLE_CONFIG: widths=[25, 15, 15, 15, 12, 12, 15] -->
 | Cost Category | Year 1 List | Year 1 Credits | Year 1 Net | Year 2 | Year 3 | 3-Year Total |
 |---------------|-------------|----------------|------------|--------|--------|--------------|
 | Professional Services | $82,250 | ($10,000) | $72,250 | $0 | $0 | $72,250 |
@@ -207,6 +205,14 @@ This engagement is sized based on the following parameters:
 - **Total Credits Applied:** $13,690
 
 **Note:** Credits are based on Microsoft Azure Consumption Commitment and Partner Services programs. Actual credits may vary based on existing Microsoft agreements.
+
+**SPEAKER NOTES:**
+
+*Credit Program Talking Points:*
+- Microsoft Partner Services Credit ($10,000) applied to professional services
+- Azure AI Services Credit ($3,690) provides 30% discount on Document Intelligence consumption in Year 1
+- Credits are real Azure account credits automatically applied as services are consumed
+- Total Year 1 credits: $13,690 (13% reduction from list price)
 
 **Annual Operating Costs (Years 2-3):** $16,560/year
 - Cloud Infrastructure: $14,400/year
@@ -245,20 +251,15 @@ Detailed infrastructure costs including Azure service consumption, software lice
 ---
 
 ### Next Steps
-**layout:** bullet_points
+**layout:** eo_bullet_points
 
 **Your Path Forward**
 
-**Immediate Actions:**
-1. **Document Samples:** Provide 50+ samples per document type for model training
-2. **Decision:** SOW approval and contract execution by [Target Date]
-3. **Kickoff:** Project initiation scheduled for [Start Date]
-
-**30-Day Launch Plan:**
-- **Week 1:** Azure environment setup and security configuration
-- **Week 2:** Document analysis and model selection workshop
-- **Week 3:** Initial model training with sample documents
-- **Week 4:** First automated extractions validated
+- **Decision:** SOW approval and contract execution by [Target Date]
+- **Kickoff:** Project initiation scheduled for [Start Date] with team formation
+- **Document Samples:** Provide 50+ samples per document type for model training accuracy
+- **Week 1-2:** Azure environment setup, security configuration, and model selection workshop
+- **Week 3-4:** Model training with sample documents and first automated extractions validated
 
 **SPEAKER NOTES:**
 
@@ -279,10 +280,15 @@ Detailed infrastructure costs including Azure service consumption, software lice
 - You'll see tangible extraction results within first month
 - Document sample collection can begin immediately
 
+*Call to Action:*
+- "Let's schedule a follow-up meeting to review document samples and finalize the SOW"
+- "What questions can I answer to help you move forward with confidence?"
+- "Our next available start date is [Date] - shall we reserve that slot for your team?"
+
 ---
 
 ### Thank You
-**layout:** thank_you
+**layout:** eo_thank_you
 
 - **Your Account Manager:** [Name, Title] | [Email] | [Phone]
 

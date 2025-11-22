@@ -28,7 +28,7 @@ eoframework_logo: ../../assets/logos/eo-framework-logo-real.png
 ---
 
 ### Business Opportunity
-**layout:** two_column
+**layout:** eo_two_column
 
 **Accelerating Software Delivery**
 
@@ -45,7 +45,7 @@ eoframework_logo: ../../assets/logos/eo-framework-logo-real.png
 
 
 ### Engagement Scope
-**layout:** table
+**layout:** eo_table
 
 **Sizing Parameters for This Engagement**
 
@@ -71,7 +71,7 @@ This engagement is sized based on the following parameters:
 ---
 
 ### Solution Overview
-**layout:** visual
+**layout:** eo_visual_content
 
 **Enterprise DevOps Platform Architecture**
 
@@ -90,7 +90,7 @@ This engagement is sized based on the following parameters:
 ---
 
 ### Implementation Approach
-**layout:** single
+**layout:** eo_single_column
 
 **Proven Methodology for DevOps Success**
 
@@ -128,7 +128,7 @@ This engagement is sized based on the following parameters:
 ---
 
 ### Timeline & Milestones
-**layout:** table
+**layout:** eo_table
 
 **Path to Automated Software Delivery**
 
@@ -155,7 +155,7 @@ This engagement is sized based on the following parameters:
 ---
 
 ### Success Stories
-**layout:** single
+**layout:** eo_single_column
 
 **Proven Results with Similar Clients**
 
@@ -169,7 +169,7 @@ This engagement is sized based on the following parameters:
 ---
 
 ### Our Partnership Advantage
-**layout:** two_column
+**layout:** eo_two_column
 
 **Why Partner with Us**
 
@@ -178,23 +178,21 @@ This engagement is sized based on the following parameters:
   - 100+ successful DevOps platform implementations
   - Certified Azure DevOps Engineers and Solutions Architects
   - Pre-built pipeline templates and migration accelerators
-  - 24/7 support with dedicated DevOps expertise
 - **Value to You**
   - Proven migration methodology reduces disruption to development teams
   - Reusable pipeline templates accelerate onboarding by 50%
-  - Direct Microsoft escalation for complex technical issues
   - Comprehensive training program ensures team self-sufficiency
   - Best practices from 100+ enterprise DevOps transformations
 
 ---
 
 ### Investment Summary
-**layout:** data_viz
+**layout:** eo_table
 
 **Total Investment & Value**
 
 <!-- BEGIN COST_SUMMARY_TABLE -->
-<!-- TABLE_CONFIG: widths=[25, 15, 15, 15, 10, 10, 10] -->
+<!-- TABLE_CONFIG: widths=[25, 15, 15, 15, 12, 12, 15] -->
 | Cost Category | Year 1 List | Year 1 Credits | Year 1 Net | Year 2 | Year 3 | 3-Year Total |
 |---------------|-------------|----------------|------------|--------|--------|--------------|
 | Professional Services | $100,000 | ($8,000) | $92,000 | $0 | $0 | $92,000 |
@@ -221,6 +219,12 @@ This engagement is sized based on the following parameters:
 Detailed infrastructure costs including Azure DevOps service tiers, compute requirements, storage consumption, and support contracts is provided in infrastructure-costs.xlsx.
 
 **SPEAKER NOTES:**
+
+*Credit Program Talking Points:*
+- Partner Services Credit ($5,000) applied to assessment and pipeline design
+- Azure Infrastructure Credit ($1,800) provides 30% discount on Year 1 Azure DevOps compute and services
+- Credits are real Azure account credits automatically applied as services are consumed
+- Total Year 1 credits: $6,800 (6% reduction from list price)
 
 *Value Positioning:*
 - Frame as investment in developer productivity and software quality
@@ -251,22 +255,22 @@ Detailed infrastructure costs including Azure DevOps service tiers, compute requ
 ---
 
 ### Next Steps
-**layout:** bullet_points
+**layout:** eo_bullet_points
 
 **Your Path Forward**
 
-**Immediate Actions:**
-1. **Decision:** Confirm DevOps platform investment by [specific date]
-2. **Kickoff:** Target project start in [Month]
-3. **Team Formation:** Identify platform owner and pilot team
-
-**30-Day Launch Plan:**
-- **Week 1:** Contract finalization and Azure DevOps organization setup
-- **Week 2:** Current state assessment and stakeholder interviews
-- **Week 3:** Pipeline strategy workshop with development leads
-- **Week 4:** Pilot project selection and migration planning
+- **Decision:** Confirm DevOps platform investment by [Target Date]
+- **Kickoff:** Project start scheduled for [Start Date] with platform owner and pilot team
+- **Team Formation:** Identify platform owner, pilot team lead, and security approver
+- **Week 1-2:** Contract finalization, Azure DevOps organization setup, and stakeholder interviews
+- **Week 3-4:** Pipeline strategy workshop and pilot project selection with first automated pipeline running
 
 **SPEAKER NOTES:**
+
+*Call to Action:*
+- "Let's schedule a follow-up meeting to review pipeline requirements and finalize the SOW"
+- "What questions can I answer to help you move forward with confidence?"
+- "Our next available start date is [Date] - shall we reserve that slot for your team?"
 
 *Transition from Investment:*
 - "Now that we've covered the investment and value, let's talk about how we get started"
@@ -289,7 +293,7 @@ Detailed infrastructure costs including Azure DevOps service tiers, compute requ
 ---
 
 ### Thank You
-**layout:** thank_you
+**layout:** eo_thank_you
 
 - **Your Account Manager:** [Name, Title] | [Email] | [Phone]
 

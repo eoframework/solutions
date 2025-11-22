@@ -26,7 +26,7 @@ footer_logo_right: ../../assets/logos/eo-framework-logo-real.png
 ---
 
 ### Business Opportunity
-**layout:** two_column
+**layout:** eo_two_column
 
 **Establishing Cloud Governance at Scale**
 
@@ -43,7 +43,7 @@ footer_logo_right: ../../assets/logos/eo-framework-logo-real.png
 
 
 ### Engagement Scope
-**layout:** table
+**layout:** eo_table
 
 **Sizing Parameters for This Engagement**
 
@@ -69,7 +69,7 @@ This engagement is sized based on the following parameters:
 ---
 
 ### Solution Overview
-**layout:** visual
+**layout:** eo_visual_content
 
 **Azure Landing Zone Architecture for Enterprise Governance**
 
@@ -88,7 +88,7 @@ This engagement is sized based on the following parameters:
 ---
 
 ### Implementation Approach
-**layout:** single
+**layout:** eo_single_column
 
 **Proven Methodology for Landing Zone Success**
 
@@ -126,7 +126,7 @@ This engagement is sized based on the following parameters:
 ---
 
 ### Timeline & Milestones
-**layout:** table
+**layout:** eo_table
 
 **Path to Governance Excellence**
 
@@ -153,7 +153,7 @@ This engagement is sized based on the following parameters:
 ---
 
 ### Success Stories
-**layout:** single
+**layout:** eo_single_column
 
 **Proven Results with Similar Clients**
 
@@ -167,7 +167,7 @@ This engagement is sized based on the following parameters:
 ---
 
 ### Our Partnership Advantage
-**layout:** two_column
+**layout:** eo_two_column
 
 **Why Partner with Us**
 
@@ -176,23 +176,21 @@ This engagement is sized based on the following parameters:
   - 100+ Azure Landing Zone implementations across enterprise clients
   - Certified Azure Solutions Architects with governance specialization
   - Pre-built policy libraries and landing zone accelerators
-  - Direct Microsoft escalation and Azure engineering support
 - **Value to You**
   - Proven landing zone frameworks reduce implementation risk by 70%
   - Custom policy templates aligned with your compliance requirements
   - Azure Cost Management expertise to optimize cloud spend
   - Comprehensive skills transfer for internal team self-sufficiency
-  - Ongoing governance advisory and policy optimization support
 
 ---
 
 ### Investment Summary
-**layout:** data_viz
+**layout:** eo_table
 
 **Total Investment & Value**
 
 <!-- BEGIN COST_SUMMARY_TABLE -->
-<!-- TABLE_CONFIG: widths=[25, 15, 15, 15, 10, 10, 10] -->
+<!-- TABLE_CONFIG: widths=[25, 15, 15, 15, 12, 12, 15] -->
 | Cost Category | Year 1 List | Year 1 Credits | Year 1 Net | Year 2 | Year 3 | 3-Year Total |
 |---------------|-------------|----------------|------------|--------|--------|--------------|
 | Professional Services | $134,000 | ($15,000) | $119,000 | $0 | $0 | $119,000 |
@@ -220,6 +218,12 @@ This engagement is sized based on the following parameters:
 Detailed infrastructure costs including Azure service consumption, management tool licensing, and support contracts is provided in infrastructure-costs.xlsx.
 
 **SPEAKER NOTES:**
+
+*Credit Program Talking Points:*
+- Partner Services Credit ($5,000) applied to landing zone design and policy framework
+- Azure Credit ($1,800) provides 30% discount on eligible compute and management services
+- Credits are real Azure account credits automatically applied as services are consumed
+- Total Year 1 credits: $6,800 (3% reduction from list price)
 
 *Value Positioning:*
 - Frame as investment with measurable returns, not just cost
@@ -250,22 +254,22 @@ Detailed infrastructure costs including Azure service consumption, management to
 ---
 
 ### Next Steps
-**layout:** bullet_points
+**layout:** eo_bullet_points
 
 **Your Path Forward**
 
-**Immediate Actions:**
-1. **Decision:** [Specific decision needed by when]
-2. **Kickoff:** [Target start date]
-3. **Team Formation:** [Key team members required]
-
-**30-Day Launch Plan:**
-- **Week 1:** Contract finalization and Azure access provisioning
-- **Week 2:** Current state discovery and stakeholder interviews
-- **Week 3:** Management group design workshop
-- **Week 4:** Foundation deployment begins
+- **Decision:** SOW approval and contract execution by [Target Date]
+- **Kickoff:** Project initiation scheduled for [Start Date] with team formation
+- **Team Setup:** Identify Azure admin, security lead, and finance stakeholders upfront
+- **Week 1-2:** Contract finalization, Azure access provisioning, and discovery workshops
+- **Week 3-4:** Management group design workshop and foundation deployment begins
 
 **SPEAKER NOTES:**
+
+*Call to Action:*
+- "Let's schedule a follow-up meeting to finalize the governance framework and SOW"
+- "What questions can I answer to help you move forward with confidence?"
+- "Our next available start date is [Date] - shall we reserve that slot for your team?"
 
 *Transition from Investment:*
 - "Now that we've covered the investment and value, let's talk about how we get started"
@@ -288,7 +292,7 @@ Detailed infrastructure costs including Azure service consumption, management to
 ---
 
 ### Thank You
-**layout:** thank_you
+**layout:** eo_thank_you
 
 - **Your Account Manager:** [Name, Title] | [Email] | [Phone]
 

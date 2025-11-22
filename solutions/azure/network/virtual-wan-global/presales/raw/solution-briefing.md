@@ -28,7 +28,7 @@ eoframework_logo: ../../assets/logos/eo-framework-logo-real.png
 ---
 
 ### Business Opportunity
-**layout:** two_column
+**layout:** eo_two_column
 
 **Simplifying Global Network Connectivity**
 
@@ -45,7 +45,7 @@ eoframework_logo: ../../assets/logos/eo-framework-logo-real.png
 
 
 ### Engagement Scope
-**layout:** table
+**layout:** eo_table
 
 **Sizing Parameters for This Engagement**
 
@@ -71,7 +71,7 @@ This engagement is sized based on the following parameters:
 ---
 
 ### Solution Overview
-**layout:** visual
+**layout:** eo_visual_content
 
 **Azure Virtual WAN Architecture for Global Connectivity**
 
@@ -90,7 +90,7 @@ This engagement is sized based on the following parameters:
 ---
 
 ### Implementation Approach
-**layout:** single
+**layout:** eo_single_column
 
 **Proven Methodology for Global Network Deployment**
 
@@ -128,7 +128,7 @@ This engagement is sized based on the following parameters:
 ---
 
 ### Timeline & Milestones
-**layout:** table
+**layout:** eo_table
 
 **Path to Global Network Connectivity**
 
@@ -155,7 +155,7 @@ This engagement is sized based on the following parameters:
 ---
 
 ### Success Stories
-**layout:** single
+**layout:** eo_single_column
 
 **Proven Results in Global Network Transformation**
 
@@ -169,7 +169,7 @@ This engagement is sized based on the following parameters:
 ---
 
 ### Our Partnership Advantage
-**layout:** two_column
+**layout:** eo_two_column
 
 **Why Partner with Us**
 
@@ -178,23 +178,21 @@ This engagement is sized based on the following parameters:
   - 75+ Azure Virtual WAN deployments for multi-national organizations
   - Direct relationships with leading SD-WAN vendors (Cisco, VMware, Fortinet)
   - Pre-built automation templates for hub deployment and branch connectivity
-  - 24/7 network operations center support during migration phases
 - **Value to You**
   - Proven methodology reduces deployment risk and accelerates time-to-value
   - SD-WAN vendor partnerships ensure seamless branch integration
   - Experience with complex routing scenarios prevents connectivity issues
-  - Post-deployment optimization identifies cost savings opportunities
   - Knowledge transfer ensures your team manages the network confidently
 
 ---
 
 ### Investment Summary
-**layout:** data_viz
+**layout:** eo_table
 
 **Total Investment & Value**
 
 <!-- BEGIN COST_SUMMARY_TABLE -->
-<!-- TABLE_CONFIG: widths=[25, 15, 15, 15, 10, 10, 10] -->
+<!-- TABLE_CONFIG: widths=[25, 15, 15, 15, 12, 12, 15] -->
 | Cost Category | Year 1 List | Year 1 Credits | Year 1 Net | Year 2 | Year 3 | 3-Year Total |
 |---------------|-------------|----------------|------------|--------|--------|--------------|
 | Professional Services | $90,500 | ($12,000) | $78,500 | $0 | $0 | $78,500 |
@@ -207,6 +205,11 @@ This engagement is sized based on the following parameters:
 *Note: Actual costs will be calculated based on number of hubs, connected branches, and bandwidth requirements. Cloud Infrastructure includes Virtual WAN hub fees, Azure Firewall consumption, and VPN gateway charges.*
 
 **SPEAKER NOTES:**
+
+*Credit Program Talking Points:*
+- Microsoft Partner Services Credit ($12,000) applied to network design and hub deployment
+- Credits are real Azure account credits automatically applied as services are consumed
+- Total Year 1 credits: $12,000 (8% reduction from list price)
 
 *Value Positioning:*
 - Compare total cost against current network management expenses
@@ -232,22 +235,22 @@ This engagement is sized based on the following parameters:
 ---
 
 ### Next Steps
-**layout:** bullet_points
+**layout:** eo_bullet_points
 
 **Your Path Forward**
 
-**Immediate Actions:**
-1. **Network Inventory:** Compile list of all branch locations with current connectivity
-2. **Decision:** SOW approval and contract execution by [Target Date]
-3. **Kickoff:** Project initiation scheduled for [Start Date]
-
-**30-Day Launch Plan:**
-- **Week 1:** Network discovery and requirements workshop
-- **Week 2:** Hub placement design and IP addressing plan
-- **Week 3:** SD-WAN vendor coordination and compatibility verification
-- **Week 4:** Pilot branch selection and migration planning
+- **Network Inventory:** Compile list of all branch locations with current connectivity methods
+- **Decision:** SOW approval and contract execution by [Target Date]
+- **Kickoff:** Project initiation scheduled for [Start Date] with network team engaged
+- **Week 1-2:** Network discovery, requirements workshop, hub placement design, and IP addressing plan
+- **Week 3-4:** SD-WAN vendor coordination, compatibility verification, and pilot branch selection
 
 **SPEAKER NOTES:**
+
+*Call to Action:*
+- "Let's schedule a follow-up meeting to review branch connectivity and finalize the SOW"
+- "What questions can I answer to help you move forward with confidence?"
+- "Our next available start date is [Date] - shall we reserve that slot for your team?"
 
 *Transition from Investment:*
 - "Now that we've covered the investment, let's discuss getting started"
@@ -269,7 +272,7 @@ This engagement is sized based on the following parameters:
 ---
 
 ### Thank You
-**layout:** thank_you
+**layout:** eo_thank_you
 
 - **Your Account Manager:** [Name, Title] | [Email] | [Phone]
 
