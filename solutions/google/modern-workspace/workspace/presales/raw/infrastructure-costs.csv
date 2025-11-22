@@ -1,0 +1,51 @@
+# Sizing Guidelines
+#WIDTH: 24,36,28,28,28,51
+#ALIGN: left,left,center,center,center,left
+Category,Component,Small,Medium,Large,Notes
+Software Licenses,User Count,100 users,500 users,2000+ users,Total licensed users
+Software Licenses,Workspace Edition,Business Standard,Business Plus,Enterprise Plus,Feature tier and storage capacity
+Software Licenses,Storage per User,2 TB per user,5 TB per user,Unlimited storage,Google Drive capacity allocation
+Software Licenses,Google Meet Capacity,150 participants,500 participants,500 participants + recording,Video conferencing scale
+Software Licenses,Google Vault,Not included,Included,Included + advanced features,Email and file retention compliance
+Support & Maintenance,Support Level,Standard,Enhanced,Premium Support,Support coverage and SLA requirements
+Professional Services,Migration Complexity,Email only,Email + Files (2 TB),Email + Files (10+ TB) + Custom,Migration scope and data volume
+Professional Services,Training Scope,Self-service,Virtual training,In-person + virtual + e-learning,User enablement approach
+
+# Infrastructure Costs
+#WIDTH: 23,30,50,12,16,12,15,12,12,15,30
+#ALIGN: left,left,left,right,left,right,right,right,right,right,left
+Category,Component,Description,Quantity,Unit,Unit Price,Annual Cost,Year 2,Year 3,3-Year Total,Notes
+Software Licenses,Google Workspace Business Plus,Business Plus edition (500 users @ $18/user/month),500,Users/Month,$18,"=D11*F11*12","=G11","=G11","=G11+H11+I11",Core productivity suite
+Software Licenses,Google Vault,eDiscovery and retention (included in Business Plus),500,Users/Month,$0,"=D12*F12*12","=G12","=G12","=G12+H12+I12",Legal hold and compliance
+Software Licenses,Cloud Identity Premium,Advanced identity and endpoint management (100 admins),100,Users/Month,$6,"=D13*F13*12","=G13","=G13","=G13+H13+I13",Enhanced security and device management
+Professional Services,Migration Planning and Design,Requirements gathering and migration strategy,40,Hours,$200,"=D14*F14","=0","=0","=G14",One-time planning effort
+Professional Services,Email Migration from Exchange,Mailbox migration (500 users avg 5 GB each),500,Mailboxes,$40,"=D15*F15","=0","=0","=G15",Email data migration
+Professional Services,File Migration to Drive,File server to Google Drive migration (3 TB total),3000,GB,$10,"=D16*F16","=0","=0","=G16",File data migration
+Professional Services,Calendar and Contacts Migration,Calendar and contact migration (500 users),500,Users,$8,"=D17*F17","=0","=0","=G17",Schedule and contact data
+Professional Services,Distribution List Migration,Group and distribution list migration (150 groups),150,Groups,$15,"=D18*F18","=0","=0","=G18",Email group configuration
+Professional Services,Configuration and Setup,Google Admin console and security configuration,32,Hours,$175,"=D19*F19","=0","=0","=G19",Platform configuration
+Professional Services,SSO and Identity Integration,SAML SSO and directory sync configuration,24,Hours,$200,"=D20*F20","=0","=0","=G20",Identity provider integration
+Professional Services,Security Policy Configuration,DLP policies mobile management endpoint controls,16,Hours,$175,"=D21*F21","=0","=0","=G21",Security hardening
+Professional Services,Administrator Training,Google Admin console and GAM training (2 days),16,Hours,$150,"=D22*F22","=0","=0","=G22",Admin enablement
+Professional Services,End User Training,Virtual training sessions (10 sessions @ 4 hours each),40,Hours,$125,"=D23*F23","=0","=0","=G23",User enablement
+Professional Services,Training Materials Development,Custom quick start guides and video tutorials,24,Hours,$140,"=D24*F24","=0","=0","=G24",Documentation creation
+Professional Services,Go-Live Support,Post-migration support (2 weeks),80,Hours,$110,"=D25*F25","=0","=0","=G25",Hypercare period support
+
+# Credits
+#WIDTH: 25,25,15,50
+#ALIGN: left,left,right,left
+Category,Credit Type,Credit Amount,Credit Comments
+Software Licenses,Google Workspace Promo,"($10000)",First 3 months free for new customers (500 users @ $18/mo)
+Professional Services,Migration Credit,"($3000)",Partner migration services discount
+Support & Maintenance,Program Credit,$0,No support credits available
+Cloud Infrastructure,Infrastructure Credit,$0,No infrastructure credits available
+
+# 3-Year Summary
+#WIDTH: 25,15,15,15,12,12,15
+#ALIGN: left,right,right,right,right,right,right
+Category,Year 1 List,Year 1 Credits,Year 1 Net,Year 2,Year 3,3-Year Total
+Software Licenses,$115200,"($10000)",$105200,$115200,$115200,$335600
+Professional Services,$38400,"($3000)",$35400,$0,$0,$35400
+Support & Maintenance,$0,$0,$0,$0,$0,$0
+Cloud Infrastructure,$0,$0,$0,$0,$0,$0
+TOTAL,$153600,"($13000)",$140600,$115200,$115200,$371000
