@@ -1,0 +1,22 @@
+<mxfile host="app.diagrams.net" modified="2025-11-22T12:00:00.000Z" agent="placeholder" version="1.0">
+  <diagram name="SRX Firewall Architecture" id="srx-firewall">
+    <mxGraphModel dx="1422" dy="794" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1920" pageHeight="1080">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <!-- PLACEHOLDER DIAGRAM -->
+        <!-- This is a placeholder Draw.io file. -->
+        <!-- Open in Draw.io Desktop or Web (https://app.diagrams.net/) to create the actual diagram. -->
+        <!-- Follow instructions in DIAGRAM_REQUIREMENTS.md for component layout and design. -->
+
+        <mxCell id="instructions" value="INSTRUCTIONS:&#xa;1. Open this file in Draw.io (https://app.diagrams.net/)&#xa;2. Follow DIAGRAM_REQUIREMENTS.md for complete specifications&#xa;3. Create the architecture diagram with these components:&#xa;   - SRX4600 HA Pair (Datacenter)&#xa;   - SRX300 Branch Firewalls (10 sites)&#xa;   - Security Zones (Untrust, DMZ, Trust, Management)&#xa;   - Multi-Cloud VPN (AWS, Azure, GCP)&#xa;   - Security Services (IPS, ATP, SSL Inspection, SecIntel)&#xa;   - Management Infrastructure (Security Director, SIEM)&#xa;4. Export as PNG: srx-firewall-architecture.png (300 DPI)&#xa;&#xa;See README.md and DIAGRAM_REQUIREMENTS.md for detailed guidance."
+          style="text;html=1;strokeColor=#d6b656;fillColor=#fff2cc;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;fontSize=14;fontFamily=Courier New;spacing=10;"
+          vertex="1" parent="1">
+          <mxGeometry x="60" y="60" width="1800" height="960" as="geometry" />
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
