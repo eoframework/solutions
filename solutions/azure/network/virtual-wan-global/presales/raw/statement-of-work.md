@@ -8,8 +8,10 @@ consultant_contact: '[Consultant Name | Email | Phone]'
 opportunity_no: OPP-2025-001
 document_date: November 15, 2025
 version: '1.0'
-client_logo: assets/logos/client_logo.png
-vendor_logo: assets/logos/consulting_company_logo.png
+technology_provider: Azure
+client_logo: ../../assets/logos/client_logo.png
+vendor_logo: ../../assets/logos/consulting_company_logo.png
+eoframework_logo: ../../assets/logos/eo-framework-logo-real.png
 ---
 
 # Executive Summary

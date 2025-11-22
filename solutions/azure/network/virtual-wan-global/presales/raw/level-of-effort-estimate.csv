@@ -1,4 +1,6 @@
-# SCOPE ASSUMPTIONS - BASELINE (MULTIPLIER 1.0),,,,,,,,,,
+# SCOPE ASSUMPTIONS - BASELINE (MULTIPLIER 1.0)
+#WIDTH: 20,30,35,25,30,35,60,10,10,10,10
+#ALIGN: left,left,left,left,left,left,left,left,left,left,left
 Category,Baseline Assumption,Current Scope,Small (1x),Medium (2x),Large (3x),Notes,,,,
 Solution Scope,Virtual WAN Hubs,3 regional hubs,3 regional hubs,Enhanced virtual wan hubs,Enterprise-scale virtual wan hubs,Sizing parameter for Virtual WAN Hubs,,,,
 Solution Scope,Connected Sites,10-15 branch locations,10-15 branch locations,Enhanced connected sites,Enterprise-scale connected sites,Sizing parameter for Connected Sites,,,,
@@ -17,7 +19,9 @@ Performance,Latency Requirements,<50ms inter-region,<50ms inter-region,Enhanced 
 Performance,Routing Complexity,BGP route propagation,BGP route propagation,Enhanced routing complexity,Enterprise-scale routing complexity,Sizing parameter for Routing Complexity,,,,
 Environment,Deployment Environments,2 environments (non-prod prod),2 environments (non-prod prod),Enhanced deployment environments,Enterprise-scale deployment environments,Sizing parameter for Deployment Environments,,,,
 ,,,,,,,,,,
-# ESTIMATE SETTINGS - EO Sales Engineer Updates Multipliers Based on Customer Scope,,,,,,,,,,
+# ESTIMATE SETTINGS - EO Sales Engineer Updates Multipliers Based on Customer Scope
+#WIDTH: 15,25,12,60,10,10,10,10,10,10,10
+#ALIGN: left,left,center,left,left,left,left,left,left,left,left
 Phase,Variable Name,Multiplier,Description / Applies To Tasks,,,,,,,
 Discovery,DISCOVERY_MX,1,All Discovery phase tasks,,,,,,,
 Planning,PLANNING_MX,1,All Planning phase tasks,,,,,,,
@@ -30,6 +34,8 @@ Management,MANAGEMENT_MX,1.5,Project Management overhead,,,,,,,
 Leadership,LEADERSHIP_MX,1.5,Technical Leadership overhead,,,,,,,
 ,,,,,,,,,,
 # Level of Effort
+#WIDTH: 12,25,50,18,12,15,12,10,15,20,40
+#ALIGN: left,left,left,left,right,center,right,right,right,left,left
 Phase,Work Package,Task Description,Resource Type,Base Hours,Effort Multiplier,Actual Hours,Rate,Cost Estimate,Dependencies,Notes
 Discovery,Azure Requirements Gathering,Conduct stakeholder interviews for Azure cloud strategy,EO Engineer,40,='Estimate Settings'!$C$24,=$E33*$F33,$150,=TEXT($G33*$H33,""$#,##0""),""$#,
 Discovery,Current Environment Assessment,Analyze existing infrastructure and Azure readiness,EO Engineer,32,='Estimate Settings'!$C$24,=$E34*$F34,$200,=TEXT($G34*$H34,""$#,##0""),""$#,
@@ -59,3 +65,9 @@ Closeout,Performance Baseline,Establish performance metrics monitoring baselines
 Management,Technical Leadership,Quarterback technical oversight and architecture review,EO Quarterback,"=ROUND(SUM(E2:E26)*0.25,='Estimate Settings'!$C$31,=$E58*$F58,0)",=TEXT($G58*$H58,""$#,##0""),"=TEXT(E27*F27,##0"")"
 Management,Project Management,Project coordination and management activities,EO Project Manager,"=ROUND(SUM(E2:E26)*0.20,='Estimate Settings'!$C$31,=$E59*$F59,0)",=TEXT($G59*$H59,""$#,##0""),"=TEXT(E28*F28,##0"")"
 ,,,,,TOTAL HOURS,=SUM($G$33:$G$59),TOTAL COST,=TEXT(SUMPRODUCT($G$33:$G$59,$H$33:$H$59),""$#,##0""),,EO Sales Engineer: Update multipliers based on customer scope
+
+# CREDITS
+#WIDTH: 30,60,20,40
+#ALIGN: left,left,right,left
+Category,Credit Type,Credit Amount,Credit Comments
+Professional Services,Partner Services Credit,"($5000)",Technology provider partner services credit applied to Year 1

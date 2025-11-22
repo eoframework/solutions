@@ -2,9 +2,11 @@
 presentation_title: Solution Briefing
 solution_name: Azure DevOps Enterprise Platform
 presenter_name: Alison Smith
-client_logo: eof-tools/doc-tools/brands/default/assets/logos/client_logo.png
-footer_logo_left: eof-tools/doc-tools/brands/default/assets/logos/consulting_company_logo.png
-footer_logo_right: eof-tools/doc-tools/brands/default/assets/logos/eo-framework-logo-real.png
+technology_provider: Azure
+client_logo: ../../assets/logos/client_logo.png
+footer_logo_left: ../../assets/logos/consulting_company_logo.png
+footer_logo_right: ../../assets/logos/eo-framework-logo-real.png
+eoframework_logo: ../../assets/logos/eo-framework-logo-real.png
 ---
 
 # Solution Briefing Template

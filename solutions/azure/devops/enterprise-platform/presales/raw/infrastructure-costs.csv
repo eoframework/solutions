@@ -1,4 +1,6 @@
-# SIZING GUIDELINES - Based on Solution Scope (Default: Small)
+# Sizing Guidelines
+#WIDTH: 24,36,28,28,28,51
+#ALIGN: left,left,center,center,center,left
 Category,Component,Small,Medium,Large,Notes
 Cloud Infrastructure,DevOps Users,5-10 users,10-25 users,50+ users,Active development team size
 Cloud Infrastructure,Pipeline Complexity,5-10 pipelines,10-25 pipelines,50+ pipelines,CI/CD pipeline count
@@ -11,7 +13,9 @@ Professional Services,Implementation Hours,300-400 hours,400-600 hours,800+ hour
 Professional Services,Custom Pipeline Templates,10-20 templates,20-40 templates,50+ templates,Reusable automation count
 Professional Services,IaC Templates,5-10 templates,10-20 templates,30+ templates,Infrastructure automation
 
-# INFRASTRUCTURE COSTS - Quantities Default to Small Scope
+# Infrastructure Costs
+#WIDTH: 20,22,35,10,14,12,14,14,14,16,40
+#ALIGN: left,left,left,right,left,right,right,right,right,right,left
 Category,Component,Description,Quantity,Unit,Unit Price,Annual Cost,Year 2,Year 3,3-Year Total,Notes
 Cloud Infrastructure,Azure DevOps Basic,Basic tier for development team,10,Users/Month,$30,"=D11*F11*12","=G11","=G11","=G11+H11+I11",Development licenses
 Cloud Infrastructure,DevOps Stakeholder,Stakeholder view-only access,5,Users/Month,$0,"=D12*F12*12","=G12","=G12","=G12+H12+I12",Included access
@@ -30,7 +34,9 @@ Professional Services,Discovery Assessment,Current state analysis and requiremen
 Professional Services,Security Assessment,Security audit and hardening recommendations,40,Hours,$225,"=D25*F25","=0","=0","=G25",One-time security audit
 Professional Services,Hypercare Support,30 days post-launch production stabilization,80,Hours,$175,"=D26*F26","=0","=0","=G26",One-time hypercare
 
-# CREDITS - Applied per Category (Year 1 Only)
+# Credits
+#WIDTH: 25,30,20,75
+#ALIGN: left,left,right,left
 Category,Credit Type,Credit Amount,Credit Comments
 Cloud Infrastructure,Azure DevOps Credit,$0,No infrastructure credits available
 Software Licenses,Partner Credit,$0,No software credits available
@@ -38,7 +44,9 @@ Support & Maintenance,Program Credit,$0,No support credits available
 Hardware/Equipment,Equipment Credit,$0,No hardware credits available
 Professional Services,Partner Services Credit,"($8000)",Azure or Microsoft partner services credit
 
-# SUMMARY
+# 3-Year Summary
+#WIDTH: 25,15,18,15,15,15,15
+#ALIGN: left,right,right,right,right,right,right
 Category,Year 1 List,Year 1 Credits,Year 1 Net,Year 2,Year 3,3-Year Total
 Cloud Infrastructure,$6200,$0,$6200,$6200,$6200,$18600
 Software Licenses,$0,$0,$0,$0,$0,$0

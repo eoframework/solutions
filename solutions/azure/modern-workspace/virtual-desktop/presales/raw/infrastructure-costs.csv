@@ -1,4 +1,6 @@
-# SIZING GUIDELINES - Based on Solution Scope (Default: Small)
+# Sizing Guidelines
+#WIDTH: 24,36,28,28,28,51
+#ALIGN: left,left,center,center,center,left
 Category,Component,Small,Medium,Large,Notes
 Cloud Infrastructure,Concurrent Users,50-100 users,100-250 users,500+ users,Simultaneous active users
 Cloud Infrastructure,Host Pool Type,Pooled multi-session,Mixed pooled+personal,Personal desktops,Session host deployment model
@@ -11,7 +13,9 @@ Support & Maintenance,Support Level,Business hours,24x5 support,24x7 premium,SLA
 Professional Services,Implementation Hours,200-300 hours,300-500 hours,600+ hours,Deployment complexity
 Professional Services,User Migration Count,50-100 users,100-250 users,500+ users,Profile migration scope
 
-# INFRASTRUCTURE COSTS - Quantities Default to Small Scope
+# Infrastructure Costs
+#WIDTH: 20,22,35,10,14,12,14,14,14,16,40
+#ALIGN: left,left,left,right,left,right,right,right,right,right,left
 Category,Component,Description,Quantity,Unit,Unit Price,Annual Cost,Year 2,Year 3,3-Year Total,Notes
 Cloud Infrastructure,Session Host VMs,Windows 11 Multi-Session D4s_v5 for pooled desktops,20,VMs/Month,$120,"=D11*F11*12","=G11","=G11","=G11+H11+I11",100 users shared hosting
 Cloud Infrastructure,Azure Files Premium,FSLogix user profiles storage,500,GB/Month,$1.60,"=D12*F12*12","=G12","=G12","=G12+H12+I12",Profile and Office containers
@@ -26,7 +30,9 @@ Professional Services,Migration Services,User profile migration and connectivity
 Professional Services,Training Knowledge Transfer,Administrator and user training,32,Hours,$200,"=D21*F21","=0","=0","=G21",One-time enablement
 Professional Services,Project Management Hypercare,Coordination and 30-day post-launch support,40,Hours,$200,"=D22*F22","=0","=0","=G22",One-time hypercare
 
-# CREDITS - Applied per Category (Year 1 Only)
+# Credits
+#WIDTH: 25,30,20,75
+#ALIGN: left,left,right,left
 Category,Credit Type,Credit Amount,Credit Comments
 Cloud Infrastructure,Azure Credit,$0,No infrastructure credits available
 Software Licenses,Partner Credit,$0,No software credits available
@@ -34,7 +40,9 @@ Support & Maintenance,Program Credit,$0,No support credits available
 Hardware/Equipment,Equipment Credit,$0,No hardware credits available
 Professional Services,Azure Partner Services Credit,"($10000)",Applied to architecture infrastructure and migration services
 
-# SUMMARY
+# 3-Year Summary
+#WIDTH: 25,15,18,15,15,15,15
+#ALIGN: left,right,right,right,right,right,right
 Category,Year 1 List,Year 1 Credits,Year 1 Net,Year 2,Year 3,3-Year Total
 Cloud Infrastructure,$39600,$0,$39600,$39600,$39600,$118800
 Software Licenses,$24000,$0,$24000,$24000,$24000,$72000

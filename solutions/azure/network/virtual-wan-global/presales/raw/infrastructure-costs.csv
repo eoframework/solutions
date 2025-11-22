@@ -1,4 +1,6 @@
-# SIZING GUIDELINES - Based on Solution Scope (Default: Small)
+# Sizing Guidelines
+#WIDTH: 24,36,28,28,28,51
+#ALIGN: left,left,center,center,center,left
 Category,Component,Small,Medium,Large,Notes
 Cloud Infrastructure,Virtual WAN Hubs,1-2 regional hubs,2-3 regional hubs,4+ global hubs,Network connectivity points
 Cloud Infrastructure,Branch Connections,5-10 sites,10-25 sites,50+ sites,Connected office locations
@@ -11,7 +13,9 @@ Software Licenses,Monitoring Scope,Basic monitoring,Standard APM,Enterprise obse
 Support & Maintenance,Support Level,Business hours,24x5 support,24x7 premium,SLA requirements
 Professional Services,Implementation Hours,300-400 hours,400-600 hours,800+ hours,Network complexity
 
-# INFRASTRUCTURE COSTS - Quantities Default to Small Scope
+# Infrastructure Costs
+#WIDTH: 20,22,35,10,14,12,14,14,14,16,40
+#ALIGN: left,left,left,right,left,right,right,right,right,right,left
 Category,Component,Description,Quantity,Unit,Unit Price,Annual Cost,Year 2,Year 3,3-Year Total,Notes
 Cloud Infrastructure,Virtual WAN Standard,Regional hub connectivity and routing,2,Hubs/Month,$183,"=D11*F11*12","=G11","=G11","=G11+H11+I11",Per-hub monthly rate
 Cloud Infrastructure,VPN Gateway,Site-to-site VPN for branches,10,Connections/Year,$438,"=D12*F12","=G12","=G12","=G12+H12+I12",Branch connectivity
@@ -30,7 +34,9 @@ Professional Services,Testing Validation,Performance testing and failover valida
 Professional Services,Training Knowledge Transfer,Network team training on Virtual WAN operations,30,Hours,$200,"=D25*F25","=0","=0","=G25",One-time training
 Professional Services,Project Management,End-to-end project delivery coordination,50,Hours,$225,"=D26*F26","=0","=0","=G26",One-time oversight
 
-# CREDITS - Applied per Category (Year 1 Only)
+# Credits
+#WIDTH: 25,30,20,75
+#ALIGN: left,left,right,left
 Category,Credit Type,Credit Amount,Credit Comments
 Cloud Infrastructure,Azure Credit,$0,No infrastructure credits available
 Software Licenses,Partner Credit,$0,No software credits available
@@ -38,7 +44,9 @@ Support & Maintenance,Program Credit,$0,No support credits available
 Hardware/Equipment,Equipment Credit,$0,No hardware credits available
 Professional Services,Azure Partner Architecture Credit,"($12000)",Applied to architecture design and infrastructure deployment
 
-# SUMMARY
+# 3-Year Summary
+#WIDTH: 25,15,18,15,15,15,15
+#ALIGN: left,right,right,right,right,right,right
 Category,Year 1 List,Year 1 Credits,Year 1 Net,Year 2,Year 3,3-Year Total
 Cloud Infrastructure,$50496,$0,$50496,$50496,$50496,$151488
 Software Licenses,$3600,$0,$3600,$3600,$3600,$10800
