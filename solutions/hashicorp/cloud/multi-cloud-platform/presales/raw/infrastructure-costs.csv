@@ -1,0 +1,69 @@
+# Sizing Guidelines
+#WIDTH: 24,36,28,28,28,51
+#ALIGN: left,left,center,center,center,left
+Category,Component,Small,Medium,Large,Notes
+Multi-Cloud Infrastructure,Managed Clouds,2 clouds (AWS + Azure),3 clouds (AWS Azure GCP),4+ clouds + on-prem,Cloud provider diversity and complexity
+Multi-Cloud Infrastructure,Infrastructure Resources,500 resources,2500 resources,10000+ resources,Total managed infrastructure across all clouds
+Multi-Cloud Infrastructure,Terraform Workspaces,25 workspaces,100 workspaces,500+ workspaces,Isolated environment and team workspaces
+Multi-Cloud Infrastructure,Concurrent Runs,5 concurrent,15 concurrent,50+ concurrent,Parallel infrastructure operations
+Multi-Cloud Infrastructure,Team Size,10 users,50 users,200+ users,Platform operators and developers
+HashiCorp Platform,Terraform Edition,Team,Team & Governance,Business,Feature set and governance capabilities
+HashiCorp Platform,Vault Edition,Starter,Standard,Plus,Secrets management complexity
+HashiCorp Platform,Consul Edition,Not required,Standard,Enterprise,Service mesh and discovery needs
+HashiCorp Platform,Sentinel Policies,10 policies,50 policies,200+ policies,Policy as code governance rules
+Infrastructure Hosting,Deployment Model,Single region,Multi-region active-passive,Multi-region active-active,High availability architecture
+Infrastructure Hosting,Kubernetes Cluster,Small (3 nodes),Medium (6 nodes),Large (12+ nodes),Platform hosting infrastructure
+Infrastructure Hosting,Storage Volume,500 GB,2 TB,10+ TB,State files and backup storage
+Support & Services,Support Level,Business hours,Business Critical,Premium,SLA and response time requirements
+
+# Infrastructure Costs
+#WIDTH: 23,30,50,12,15,12,15,12,12,15,30
+#ALIGN: left,left,left,right,left,right,right,right,right,right,left
+Category,Component,Description,Quantity,Unit,Unit Price,Annual Cost,Year 2,Year 3,3-Year Total,Notes
+HashiCorp Licenses,Terraform Cloud Business,Business tier with full governance and SSO (50 users),50,Users/Year,$85,"=D18*F18","=G18","=G18","=G18+H18+I18",Infrastructure as code platform
+HashiCorp Licenses,HashiCorp Vault Plus,Plus tier for multi-cloud secrets management,10,Clusters/Year,$4500,"=D19*F19","=G19","=G19","=G19+H19+I19",Centralized secrets management
+HashiCorp Licenses,HashiCorp Consul Enterprise,Enterprise for service mesh across clouds,25,Nodes/Year,$850,"=D20*F20","=G20","=G20","=G20+H20+I20",Service discovery and mesh
+HashiCorp Licenses,Sentinel Enterprise,Policy as code enforcement,1,License/Year,$15000,"=D21*F21","=G21","=G21","=G21+H21+I21",Governance and compliance
+Cloud Infrastructure,AWS EKS Cluster,Managed Kubernetes for Terraform Enterprise hosting,2,Clusters/Month,$146,"=D22*F22*12","=G22","=G22","=G22+H22+I22",Platform infrastructure - AWS
+Cloud Infrastructure,AWS EC2 Instances,t3.xlarge worker nodes for Terraform Enterprise (6 nodes),6,Instances/Month,$151,"=D23*F23*12","=G23","=G23","=G23+H23+I23",Compute capacity - AWS
+Cloud Infrastructure,AWS RDS PostgreSQL,db.r5.large for Terraform Enterprise state,1,Instance/Month,$308,"=D24*F24*12","=G24","=G24","=G24+H24+I24",State database - AWS
+Cloud Infrastructure,AWS S3 Storage,Standard storage for state files and backups,2000,GB/Month,$0.023,"=D25*F25*12","=G25","=G25","=G25+H25+I25",State and artifact storage - AWS
+Cloud Infrastructure,AWS EBS Storage,gp3 volumes for persistent storage (2TB total),2000,GB/Month,$0.08,"=D26*F26*12","=G26","=G26","=G26+H26+I26",Persistent storage - AWS
+Cloud Infrastructure,AWS Application Load Balancer,ALB for Terraform Enterprise access,2,Balancers/Month,$22.5,"=D27*F27*12","=G27","=G27","=G27+H27+I27",Load balancing - AWS
+Cloud Infrastructure,AWS NAT Gateway,NAT Gateway for private subnet access,2,Gateways/Month,$45.6,"=D28*F28*12","=G28","=G28","=G28+H28+I28",Network connectivity - AWS
+Cloud Infrastructure,AWS Data Transfer,Outbound data transfer (1TB/month),1000,GB/Month,$0.09,"=D29*F29*12","=G29","=G29","=G29+H29+I29",Egress charges - AWS
+Cloud Infrastructure,Azure AKS Cluster,Managed Kubernetes for multi-cloud redundancy,1,Cluster/Month,$146,"=D30*F30*12","=G30","=G30","=G30+H30+I30",Platform infrastructure - Azure
+Cloud Infrastructure,Azure VMs,Standard_D4s_v3 for worker nodes (3 nodes),3,Instances/Month,$140,"=D31*F31*12","=G31","=G31","=G31+H31+I31",Compute capacity - Azure
+Cloud Infrastructure,Azure PostgreSQL,Flexible Server General Purpose 4 vCores,1,Instance/Month,$295,"=D32*F32*12","=G32","=G32","=G32+H32+I32",State database - Azure
+Cloud Infrastructure,Azure Blob Storage,Standard storage for state and backups,2000,GB/Month,$0.018,"=D33*F33*12","=G33","=G33","=G33+H33+I33",State storage - Azure
+Cloud Infrastructure,GCP Artifact Registry,Container image storage and management,1,Service/Month,$50,"=D34*F34*12","=G34","=G34","=G34+H34+I34",Container registry - GCP
+Cloud Infrastructure,CloudWatch/Monitor Logs,Centralized logging (200GB logs/month),200,GB/Month,$0.5,"=D35*F35*12","=G35","=G35","=G35+H35+I35",Platform monitoring
+Cloud Infrastructure,Secrets Manager,AWS Secrets Manager for credentials (50 secrets),50,Secrets/Month,$0.4,"=D36*F36*12","=G36","=G36","=G36+H36+I36",Credential storage
+Cloud Infrastructure,Backup Storage,Cross-region backup storage (5TB),5000,GB/Month,$0.023,"=D37*F37*12","=G37","=G37","=G37+H37+I37",Disaster recovery backups
+Software Licenses,VCS Integration,GitHub Enterprise for infrastructure code repos,50,Users/Year,$252,"=D38*F38","=G38","=G38","=G38+H38+I38",Version control integration
+Software Licenses,Datadog Monitoring,Pro monitoring for platform infrastructure (10 hosts),10,Hosts/Month,$23,"=D39*F39*12","=G39","=G39","=G39+H39+I39",Infrastructure monitoring
+Software Licenses,PagerDuty,Professional incident management (5 users),5,Users/Month,$41,"=D40*F40*12","=G40","=G40","=G40+H40+I40",Incident response
+Software Licenses,Slack Business,Team collaboration platform (50 users),50,Users/Month,$8.75,"=D41*F41*12","=G41","=G41","=G41+H41+I41",Team communication
+Support & Maintenance,HashiCorp Premium Support,Premium support for all HashiCorp products,1,Contract/Year,$45000,"=D42*F42","=G42","=G42","=G42+H42+I42",Enterprise support
+Support & Maintenance,Managed Services,Platform management and operations (15% of infrastructure),1,Service/Month,$2825,"=D43*F43*12","=G43","=G43","=G43+H43+I43",Ongoing platform support
+Support & Maintenance,Security Scanning,Terraform security scanning and compliance (Snyk/Checkov),1,Service/Month,$500,"=D44*F44*12","=G44","=G44","=G44+H44+I44",Policy and security validation
+
+# Credits
+#WIDTH: 25,25,15,50
+#ALIGN: left,left,right,left
+Category,Credit Type,Credit Amount,Credit Comments
+HashiCorp Licenses,First Year Discount,"($15000)",20% discount on Terraform Business first year
+Cloud Infrastructure,AWS Reserved Instances,"($8500)",Reserved Instance savings on EC2 and RDS
+Cloud Infrastructure,Azure Reserved Instances,"($4200)",1-year reserved pricing on VMs and database
+Support & Maintenance,Partner Credit,$0,No support credits available
+
+# 3-Year Summary
+#WIDTH: 25,15,15,15,12,12,15
+#ALIGN: left,right,right,right,right,right,right
+Category,Year 1 List,Year 1 Credits,Year 1 Net,Year 2,Year 3,3-Year Total
+HashiCorp Licenses,$71250,"($15000)",$56250,$71250,$71250,$198750
+Cloud Infrastructure,$47918,"($12700)",$35218,$47918,$47918,$131054
+Software Licenses,$18360,$0,$18360,$18360,$18360,$55080
+Support & Maintenance,$84900,$0,$84900,$84900,$84900,$254700
+Professional Services,$165000,$0,$165000,$0,$0,$165000
+TOTAL,$387428,"($27700)",$359728,$222428,$222428,$804584

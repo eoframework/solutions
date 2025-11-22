@@ -1,7 +1,7 @@
 ---
 document_title: Statement of Work
-technology_provider: HashiCorp
-project_name: Multi-Cloud Platform Implementation
+technology_provider: Google Workspace
+project_name: Google Workspace Deployment
 client_name: [Client Name]
 client_contact: [Contact Name | Email | Phone]
 consulting_company: Your Consulting Company
@@ -16,18 +16,16 @@ eoframework_logo: ../../assets/logos/eo-framework-logo-real.png
 
 # Executive Summary
 
-This Statement of Work (SOW) defines the scope, deliverables, roles, and terms for implementing a HashiCorp Multi-Cloud Platform for [Client Name]. This engagement will deliver unified infrastructure automation across AWS, Azure, and GCP through HashiCorp Terraform Cloud, Vault, and Consul to transform manual multi-cloud provisioning into intelligent, policy-driven infrastructure as code.
+This Statement of Work (SOW) defines the scope, deliverables, roles, and terms for deploying Google Workspace for [Client Name]. This engagement will migrate 500 users from Microsoft Exchange and on-premises file servers to Google Workspace Business Plus, enabling cloud-based email, collaboration, and productivity with Gmail, Drive, Docs, and Meet.
 
-**Project Duration:** 9 months
-
----
+**Project Duration:** 12 weeks
 
 ---
 
-# Background & Objectives
+## 1. EXECUTIVE SUMMARY
 
-## Current State
-[Client Name] currently manages infrastructure across multiple cloud providers using a combination of manual processes, CloudFormation templates, ARM templates, and basic Terraform open source. This fragmented approach creates operational overhead, inconsistent configurations, and governance challenges.
+### 1.1 Project Overview
+This Statement of Work (SOW) outlines the scope, deliverables, timeline, and terms for the implementation of {SOLUTION_NAME} for [CLIENT_NAME]. The project will deliver [PRIMARY_BUSINESS_OUTCOME] through [HIGH_LEVEL_APPROACH].
 
 ### 1.2 Business Objectives
 - **Primary Goal:** [PRIMARY_BUSINESS_OBJECTIVE]

@@ -1,29 +1,75 @@
-Phase,Work Package,Task Description,Resource Type,Estimated Hours,Rate,Cost Estimate,Dependencies,Risk Level,Notes
-Discovery,Azure Requirements Gathering,Conduct stakeholder interviews for Azure cloud strategy,EO Engineer,40,$150,"=TEXT(E2*F2,""$#,##0"")",,Medium,Focus on governance scalability and business alignment
-Discovery,Current Environment Assessment,Analyze existing infrastructure and Azure readiness,EO Engineer,32,$200,"=TEXT(E3*F3,""$#,##0"")",,Medium,Include identity networking and application assessment
-Discovery,Azure Services Assessment,Evaluate Azure services and landing zone requirements,EO Engineer,24,$200,"=TEXT(E4*F4,""$#,##0"")",,Medium,Focus on management groups policies and compliance
-Discovery,Compliance Review,Assess governance security and regulatory requirements,EO Engineer,16,$175,"=TEXT(E5*F5,""$#,##0"")",,Medium,Include Azure Policy and compliance frameworks
-Planning,Azure Landing Zone Design,Design Azure landing zone architecture and governance model,EO Engineer,48,$200,"=TEXT(E6*F6,""$#,##0"")",,Medium,Include management groups policies and blueprints
-Planning,Identity and Access Design,Design Azure AD integration and access management strategy,EO Engineer,32,$180,"=TEXT(E7*F7,""$#,##0"")",,Medium,Include SSO RBAC conditional access and PIM
-Planning,Network Architecture Design,Design Azure networking security and hybrid connectivity,EO Engineer,24,$175,"=TEXT(E8*F8,""$#,##0"")",,Medium,Include hub-spoke VNet peering and security
-Planning,Project Planning,Develop Azure implementation timeline and resource allocation,EO Engineer,24,$140,"=TEXT(E9*F9,""$#,##0"")",,Medium,Coordinate with infrastructure security and compliance teams
-Development,Management Groups and Subscriptions,Configure Azure management groups subscription structure and policies,EO Engineer,40,$160,"=TEXT(E10*F10,""$#,##0"")",,Medium,Include policy inheritance governance and billing
-Development,Azure Policy Implementation,Implement Azure policies governance controls and compliance,EO Engineer,60,$145,"=TEXT(E11*F11,""$#,##0"")",,Medium,Include policy definitions initiatives and remediation
-Development,Network Infrastructure,Build Azure networking VNet peering and hybrid connectivity,EO Engineer,48,$140,"=TEXT(E12*F12,""$#,##0"")",,Medium,Include ExpressRoute VPN and network security
-Development,Identity and Access Implementation,Implement Azure AD integration access controls and SSO,EO Engineer,40,$155,"=TEXT(E13*F13,""$#,##0"")",,Medium,Include MFA conditional access and privileged access
-Development,Monitoring and Operations,Build Azure monitoring logging alerting and operational tools,EO Engineer,32,$130,"=TEXT(E14*F14,""$#,##0"")",,Medium,Include Azure Monitor Log Analytics and automation
-Testing,Unit Testing,Develop automated tests for all solution components,EO Engineer,32,$120,"=TEXT(E15*F15,""$#,##0"")",,Medium,Include technology-specific testing frameworks
-Testing,Integration Testing,Test system integrations data flows and external dependencies,EO Engineer,40,$120,"=TEXT(E16*F16,""$#,##0"")",,Medium,Include end-to-end workflow validation
-Testing,Performance Testing,Conduct load performance and scalability testing,EO Engineer,24,$140,"=TEXT(E17*F17,""$#,##0"")",,Medium,Include production-like environment and stress testing
-Testing,Security Testing,Perform security assessments penetration testing and compliance validation,EO Engineer,16,$175,"=TEXT(E18*F18,""$#,##0"")",,Medium,Include vulnerability scanning and compliance checks
-Testing,User Acceptance Testing,Coordinate UAT with business users and stakeholders,EO Engineer,32,$150,"=TEXT(E19*F19,""$#,##0"")",,Medium,Include training feedback collection and sign-off
-Deployment,Production Deployment,Deploy solution to production environment with monitoring,EO Engineer,24,$160,"=TEXT(E20*F20,""$#,##0"")",,Medium,Include blue-green deployment rollback and validation
-Deployment,Go-Live Support,Provide comprehensive support during initial production rollout,EO Engineer,48,$110,"=TEXT(E21*F21,""$#,##0"")",,Medium,Include 24/7 support monitoring and issue resolution
-Training,Administrator Training,Train system administrators and technical support teams,EO Engineer,16,$130,"=TEXT(E22*F22,""$#,##0"")",,Medium,Include hands-on technical training and certification
-Training,End User Training,Train business users on solution functionality and workflows,EO Engineer,24,$120,"=TEXT(E23*F23,""$#,##0"")",,Medium,Include role-based training documentation and support
-Training,Documentation,Create comprehensive technical and user documentation,EO Engineer,32,$110,"=TEXT(E24*F24,""$#,##0"")",,Medium,Include runbooks troubleshooting guides and best practices
-Closeout,Knowledge Transfer,Transfer solution ownership to operations and support teams,EO Engineer,16,$140,"=TEXT(E25*F25,""$#,##0"")",,Medium,Include operational procedures escalation and maintenance
-Closeout,Performance Baseline,Establish performance metrics monitoring baselines and SLAs,EO Engineer,8,$130,"=TEXT(E26*F26,""$#,##0"")",,Medium,Include KPI definition monitoring setup and reporting
-Management,Technical Leadership,Quarterback technical oversight and architecture review,EO Quarterback,"=ROUND(SUM(E2:E26)*0.25,0)",$180,"=TEXT(E27*F27,""$#,##0"")",,Medium,25% of engineering effort
-Management,Project Management,Project coordination and management activities,EO Project Manager,"=ROUND(SUM(E2:E26)*0.20,0)",$150,"=TEXT(E28*F28,""$#,##0"")",,Low,20% of engineering effort
-,,,     TOTAL HOURS,1119,   TOTAL COST,"=TEXT(E2*F2+E3*F3+E4*F4+E5*F5+E6*F6+E7*F7+E8*F8+E9*F9+E10*F10+E11*F11+E12*F12+E13*F13+E14*F14+E15*F15+E16*F16+E17*F17+E18*F18+E19*F19+E20*F20+E21*F21+E22*F22+E23*F23+E24*F24+E25*F25+E26*F26+E27*F27+E28*F28,""$#,##0"")",,,Total Multi Cloud Platform project cost estimate
+# SCOPE ASSUMPTIONS - BASELINE (MULTIPLIER 1.0)
+#WIDTH: 25,35,33,32,32,39,44
+#ALIGN: left,left,left,left,left,left,left
+Category,Baseline Assumption,Current Scope,Small (1x),Medium (2x),Large (3x),Notes
+Solution Scope,Managed Cloud Providers,3 clouds (AWS Azure GCP),2 clouds,3 clouds,4+ clouds + on-prem,Number of cloud platforms to manage
+Solution Scope,Infrastructure Resources,2500 total resources,500 resources,2500 resources,10000+ resources,Total managed infrastructure across all clouds
+Solution Scope,Terraform Workspaces,100 workspaces,25 workspaces,100 workspaces,500+ workspaces,Isolated environment and team workspaces
+Integration,External System Integrations,4 integrations (GitHub Datadog Slack ServiceNow),2 integrations,4-6 integrations,8+ integrations,VCS monitoring ITSM tools
+Integration,VCS Platform,GitHub,GitHub or GitLab,Multiple VCS platforms,Complex multi-VCS with custom workflows,Version control system integration
+User Base,Total Platform Users,50 users,10 users,50 users,200+ users,Platform operators and developers
+User Base,User Roles,5 roles (viewer operator admin security auditor),3 roles,5 roles,8+ roles with complex permissions,RBAC and access control structure
+Data Volume,Concurrent Infrastructure Runs,15 concurrent runs,5 concurrent,15 concurrent,50+ concurrent,Parallel Terraform operations
+Data Volume,State Storage Volume,2 TB,500 GB,2 TB,10+ TB,Terraform state files and backups
+Technical Environment,Deployment Regions,Multi-region (us-east-1 eu-west-1 ap-southeast-1),Single region,Multi-region,Global multi-region HA,Platform deployment footprint
+Technical Environment,Availability Requirements,High (99.9%),Standard (99.5%),High (99.9%),Mission critical (99.95%+),Platform uptime SLA
+Technical Environment,Infrastructure Complexity,Multi-cloud with networking,Single cloud basic,Multi-cloud with networking,Multi-cloud with service mesh,Terraform Vault Consul integration
+Security & Compliance,Security Requirements,Enterprise (Vault SSO RBAC),Basic IAM,Enterprise security,Advanced with HSM,Secrets management and access control
+Security & Compliance,Compliance Frameworks,SOC2 ISO27001,1-2 basic standards,2-3 standards,Multiple complex frameworks,Governance and audit requirements
+Performance,Policy Governance,50 Sentinel policies,10 policies,50 policies,200+ policies,Policy as code enforcement rules
+Performance,Processing Mode,Self-service with approvals,Manual approval,Self-service with approvals,Fully automated GitOps,Infrastructure provisioning workflow
+Environment,Deployment Environments,3 environments (dev staging prod),2 environments,3 environments,4+ environments,Platform environment management
+# ESTIMATE SETTINGS
+#WIDTH: 17,22,14,173
+#ALIGN: left,left,center,left
+Phase,Variable Name,Multiplier,Description / Applies To Tasks
+Discovery,DISCOVERY_MX,1,"All Discovery phase tasks (Requirements Gathering, Current State Assessment, HashiCorp Assessment, Multi-Cloud Strategy)"
+Planning,PLANNING_MX,1,"All Planning phase tasks (Platform Architecture, Vault Design, Consul Design, Network Design, Migration Planning)"
+Development,DEVELOPMENT_MX,1,"All Development phase tasks (Terraform Cloud Setup, Vault Implementation, Consul Deployment, Policy Development, Integration)"
+Testing,TESTING_MX,1,"All Testing phase tasks (Unit Testing, Integration Testing, Policy Testing, Security Testing, Multi-Cloud Testing)"
+Deployment,DEPLOYMENT_MX,1,"All Deployment phase tasks (Production Deployment, Workspace Migration, Go-Live Support)"
+Training,TRAINING_MX,1,"All Training phase tasks (Platform Training, Vault Training, Policy Training, Documentation)"
+Closeout,CLOSEOUT_MX,1,"All Closeout phase tasks (Knowledge Transfer, Performance Baseline)"
+Management,MANAGEMENT_MX,1.5,Project Management overhead - 10% of actual engineering hours
+Leadership,LEADERSHIP_MX,1.5,Quarterback/Technical Leadership overhead - 10% of actual engineering hours
+# Level of Effort
+#WIDTH: 16,25,58,18,12,14,12,12,15,25,40
+#ALIGN: left,left,left,left,right,center,right,right,right,left,left
+Phase,Work Package,Task Description,Resource Type,Base Hours,Effort Multiplier,Actual Hours,Rate,Cost Estimate,Dependencies,Notes
+Discovery,Requirements Gathering,Conduct stakeholder interviews for multi-cloud platform requirements,EO Engineer,40,1,=$E38*$F38,$150,"=TEXT($G38*$H38,""$#,##0"")",,Includes requirements documentation and current state analysis
+Discovery,Current State Assessment,Analyze existing infrastructure automation and cloud environments,EO Engineer,32,1,=$E39*$F39,$200,"=TEXT($G39*$H39,""$#,##0"")",,Customer must provide access to existing Terraform code and cloud accounts
+Discovery,HashiCorp Assessment,Evaluate HashiCorp product usage and enterprise readiness,EO Engineer,24,1,=$E40*$F40,$200,"=TEXT($G40*$H40,""$#,##0"")",,Assess current Terraform Vault Consul usage and licensing
+Discovery,Multi-Cloud Strategy,Define multi-cloud strategy and workload distribution,EO Engineer,16,1,=$E41*$F41,$175,"=TEXT($G41*$H41,""$#,##0"")",,Includes cloud provider selection and governance model
+Planning,Platform Architecture Design,Design Terraform Cloud/Enterprise architecture and deployment,EO Engineer,48,1,=$E42*$F42,$200,"=TEXT($G42*$H42,""$#,##0"")",,Includes workspace organization state management and HA design
+Planning,Vault Architecture Design,Design HashiCorp Vault secrets management architecture,EO Engineer,32,1,=$E43*$F43,$180,"=TEXT($G43*$H43,""$#,##0"")",,Includes auth methods secrets engines and multi-cloud integration
+Planning,Consul Architecture Design,Design HashiCorp Consul service mesh and discovery architecture,EO Engineer,24,1,=$E44*$F44,$175,"=TEXT($G44*$H44,""$#,##0"")",,Includes service mesh networking and cross-cloud connectivity
+Planning,Network Architecture Design,Design multi-cloud networking VPN and connectivity,EO Engineer,24,1,=$E45*$F45,$175,"=TEXT($G45*$H45,""$#,##0"")",,Includes VPC/VNet peering VPN and network security
+Planning,Migration Planning,Develop Terraform state migration and workspace transition plan,EO Engineer,24,1,=$E46*$F46,$140,"=TEXT($G46*$H46,""$#,##0"")",,Plan for migrating existing Terraform to centralized platform
+Planning,Policy Development,Design Sentinel policies for security cost and compliance,EO Engineer,32,1,=$E47*$F47,$150,"=TEXT($G47*$H47,""$#,##0"")",,Develop policy as code framework and governance rules
+Development,Terraform Cloud Setup,Deploy and configure Terraform Cloud/Enterprise platform,EO Engineer,48,1,=$E48*$F48,$160,"=TEXT($G48*$H48,""$#,##0"")",,Includes Kubernetes deployment database setup and HA configuration
+Development,Workspace Migration,Migrate Terraform workspaces and state to centralized platform,EO Engineer,60,1,=$E49*$F49,$145,"=TEXT($G49*$H49,""$#,##0"")",,Customer must provide existing Terraform code and state files
+Development,Vault Implementation,Deploy HashiCorp Vault and configure secrets management,EO Engineer,40,1,=$E50*$F50,$160,"=TEXT($G50*$H50,""$#,##0"")",,Includes Vault cluster deployment unsealing and auth configuration
+Development,Vault Integration,Integrate Vault with Terraform and cloud providers,EO Engineer,32,1,=$E51*$F51,$150,"=TEXT($G51*$H51,""$#,##0"")",,Configure dynamic credentials for AWS Azure GCP
+Development,Consul Deployment,Deploy HashiCorp Consul service mesh across clouds,EO Engineer,32,1,=$E52*$F52,$145,"=TEXT($G52*$H52,""$#,##0"")",,Includes Consul server deployment and agent configuration
+Development,Policy Implementation,Implement Sentinel policies and governance controls,EO Engineer,40,1,=$E53*$F53,$140,"=TEXT($G53*$H53,""$#,##0"")",,Deploy security cost and compliance policies
+Development,VCS Integration,Configure GitHub/GitLab integration and webhooks,EO Engineer,24,1,=$E54*$F54,$140,"=TEXT($G54*$H54,""$#,##0"")",,Setup GitOps workflow and PR automation
+Development,CI/CD Integration,Integrate platform with CI/CD pipelines,EO Engineer,24,1,=$E55*$F55,$135,"=TEXT($G55*$H55,""$#,##0"")",,Connect to Jenkins GitHub Actions GitLab CI
+Development,Monitoring Setup,Configure monitoring logging and alerting,EO Engineer,32,1,=$E56*$F56,$130,"=TEXT($G56*$H56,""$#,##0"")",,Integrate with Datadog CloudWatch and Azure Monitor
+Testing,Unit Testing,Develop automated tests for platform components,EO Engineer,32,1,=$E57*$F57,$120,"=TEXT($G57*$H57,""$#,##0"")",,Test Terraform modules and infrastructure code
+Testing,Integration Testing,Test multi-cloud provisioning and cross-cloud connectivity,EO Engineer,40,1,=$E58*$F58,$120,"=TEXT($G58*$H58,""$#,##0"")",,End-to-end testing across AWS Azure GCP
+Testing,Policy Testing,Validate Sentinel policies and governance enforcement,EO Engineer,24,1,=$E59*$F59,$125,"=TEXT($G59*$H59,""$#,##0"")",,Test security cost and compliance policy rules
+Testing,Security Testing,Perform security assessments and compliance validation,EO Engineer,16,1,=$E60*$F60,$175,"=TEXT($G60*$H60,""$#,##0"")",,Vault security Consul mTLS and RBAC testing
+Testing,Performance Testing,Conduct platform performance and scalability testing,EO Engineer,24,1,=$E61*$F61,$140,"=TEXT($G61*$H61,""$#,##0"")",,Test concurrent runs workspace performance state operations
+Testing,User Acceptance Testing,Coordinate UAT with platform users and teams,EO Engineer,32,1,=$E62*$F62,$150,"=TEXT($G62*$H62,""$#,##0"")",,Infrastructure teams test self-service workflows
+Deployment,Production Deployment,Deploy platform to production with monitoring,EO Engineer,24,1,=$E63*$F63,$160,"=TEXT($G63*$H63,""$#,##0"")",,Production cutover and validation
+Deployment,Production Migration,Migrate production workspaces to new platform,EO Engineer,40,1,=$E64*$F64,$150,"=TEXT($G64*$H64,""$#,##0"")",,Critical path for production infrastructure
+Deployment,Go-Live Support,Provide comprehensive support during platform launch,EO Engineer,48,1,=$E65*$F65,$110,"=TEXT($G65*$H65,""$#,##0"")",,24/7 support for initial production period
+Training,Platform Training,Train users on Terraform Cloud/Enterprise platform,EO Engineer,24,1,=$E66*$F66,$130,"=TEXT($G66*$H66,""$#,##0"")",,Workspace management state operations
+Training,Vault Training,Train teams on HashiCorp Vault secrets management,EO Engineer,16,1,=$E67*$F67,$130,"=TEXT($G67*$H67,""$#,##0"")",,Secrets retrieval dynamic credentials
+Training,Policy Training,Train teams on Sentinel policy development,EO Engineer,16,1,=$E68*$F68,$120,"=TEXT($G68*$H68,""$#,##0"")",,Policy as code development and testing
+Training,Administrator Training,Train platform administrators on operations,EO Engineer,24,1,=$E69*$F69,$140,"=TEXT($G69*$H69,""$#,##0"")",,Platform maintenance troubleshooting upgrades
+Training,Documentation,Create comprehensive platform and operational documentation,EO Engineer,32,1,=$E70*$F70,$110,"=TEXT($G70*$H70,""$#,##0"")",,Runbooks troubleshooting guides best practices
+Closeout,Knowledge Transfer,Transfer platform ownership to operations team,EO Engineer,16,1,=$E71*$F71,$140,"=TEXT($G71*$H71,""$#,##0"")",,Operational procedures escalation maintenance
+Closeout,Performance Baseline,Establish platform performance metrics and SLAs,EO Engineer,8,1,=$E72*$F72,$130,"=TEXT($G72*$H72,""$#,##0"")",,KPI definition monitoring setup reporting
+Management,Project Management,Project coordination and stakeholder management,EO Project Manager,"=ROUND(SUM($G$38:$G$72)*0.10,0)",1.5,=$E73*$F73,$150,"=TEXT($G73*$H73,""$#,##0"")",,10% of engineering effort with 1.5x multiplier
+Leadership,Technical Leadership,Quarterback technical oversight and architecture review,EO Quarterback,"=ROUND(SUM($G$38:$G$72)*0.10,0)",1.5,=$E74*$F74,$180,"=TEXT($G74*$H74,""$#,##0"")",,10% of engineering effort with 1.5x multiplier
