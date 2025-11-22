@@ -1,21 +1,73 @@
-Phase,Work Package,Task Description,Resource Type,Estimated Hours,Rate,Cost Estimate,Dependencies,Risk Level,Notes
-Discovery,Infrastructure Requirements Assessment,Assess Dell infrastructure requirements and business objectives,EO Engineer,40,$150,"=TEXT(E2*F2,""$#,##0"")",,Medium,Focus on compute storage and virtualization needs
-Discovery,Dell Hardware Assessment,Evaluate existing Dell hardware and infrastructure capabilities,EO Engineer,32,$200,"=TEXT(E3*F3,""$#,##0"")",,Medium,Include capacity performance compatibility and lifecycle
-Planning,Dell Infrastructure Design,Design Dell infrastructure architecture (VxRail PowerEdge storage),EO Engineer,48,$200,"=TEXT(E4*F4,""$#,##0"")",,Medium,Include cluster design storage and network architecture
-Development,Dell Hardware Deployment,Deploy configure and optimize Dell infrastructure,EO Engineer,80,$160,"=TEXT(E5*F5,""$#,##0"")",,Medium,Include VxRail PowerEdge iDRAC and storage configuration
-Development,Dell Management Integration,Implement Dell OpenManage monitoring and lifecycle management,EO Engineer,40,$140,"=TEXT(E6*F6,""$#,##0"")",,Medium,Include hardware monitoring alerting and automation
-Testing,Unit Testing,Develop automated tests for all solution components,EO Engineer,32,$120,"=TEXT(E7*F7,""$#,##0"")",,Medium,Include technology-specific testing frameworks
-Testing,Integration Testing,Test system integrations data flows and external dependencies,EO Engineer,40,$120,"=TEXT(E8*F8,""$#,##0"")",,Medium,Include end-to-end workflow validation
-Testing,Performance Testing,Conduct load performance and scalability testing,EO Engineer,24,$140,"=TEXT(E9*F9,""$#,##0"")",,Medium,Include production-like environment and stress testing
-Testing,Security Testing,Perform security assessments penetration testing and compliance validation,EO Engineer,16,$175,"=TEXT(E10*F10,""$#,##0"")",,Medium,Include vulnerability scanning and compliance checks
-Testing,User Acceptance Testing,Coordinate UAT with business users and stakeholders,EO Engineer,32,$150,"=TEXT(E11*F11,""$#,##0"")",,Medium,Include training feedback collection and sign-off
-Deployment,Production Deployment,Deploy solution to production environment with monitoring,EO Engineer,24,$160,"=TEXT(E12*F12,""$#,##0"")",,Medium,Include blue-green deployment rollback and validation
-Deployment,Go-Live Support,Provide comprehensive support during initial production rollout,EO Engineer,48,$110,"=TEXT(E13*F13,""$#,##0"")",,Medium,Include 24/7 support monitoring and issue resolution
-Training,Administrator Training,Train system administrators and technical support teams,EO Engineer,16,$130,"=TEXT(E14*F14,""$#,##0"")",,Medium,Include hands-on technical training and certification
-Training,End User Training,Train business users on solution functionality and workflows,EO Engineer,24,$120,"=TEXT(E15*F15,""$#,##0"")",,Medium,Include role-based training documentation and support
-Training,Documentation,Create comprehensive technical and user documentation,EO Engineer,32,$110,"=TEXT(E16*F16,""$#,##0"")",,Medium,Include runbooks troubleshooting guides and best practices
-Closeout,Knowledge Transfer,Transfer solution ownership to operations and support teams,EO Engineer,16,$140,"=TEXT(E17*F17,""$#,##0"")",,Medium,Include operational procedures escalation and maintenance
-Closeout,Performance Baseline,Establish performance metrics monitoring baselines and SLAs,EO Engineer,8,$130,"=TEXT(E18*F18,""$#,##0"")",,Medium,Include KPI definition monitoring setup and reporting
-Management,Technical Leadership,Quarterback technical oversight and architecture review,EO Quarterback,"=ROUND(SUM(E2:E18)*0.25,0)",$180,"=TEXT(E19*F19,""$#,##0"")",,Medium,25% of engineering effort
-Management,Project Management,Project coordination and management activities,EO Project Manager,"=ROUND(SUM(E2:E18)*0.20,0)",$150,"=TEXT(E20*F20,""$#,##0"")",,Low,20% of engineering effort
-,,,     TOTAL HOURS,800,   TOTAL COST,"=TEXT(E2*F2+E3*F3+E4*F4+E5*F5+E6*F6+E7*F7+E8*F8+E9*F9+E10*F10+E11*F11+E12*F12+E13*F13+E14*F14+E15*F15+E16*F16+E17*F17+E18*F18+E19*F19+E20*F20,""$#,##0"")",,,Total Vxrail Hci project cost estimate
+# SCOPE ASSUMPTIONS - BASELINE (MULTIPLIER 1.0)
+#WIDTH: 25,35,33,32,32,39,44
+#ALIGN: left,left,left,left,left,left,left
+Category,Baseline Assumption,Current Scope,Small (1x),Medium (2x),Large (3x),Notes
+Solution Scope,Number of Workstations,10 Dell Precision 7960 units,3 workstations,10 workstations,25+ workstations,AI/ML workstation deployment scale
+Solution Scope,GPU Configuration,NVIDIA RTX A6000 48GB,RTX A5000 24GB,RTX A6000 48GB,RTX A6000 or A100 80GB,GPU memory and compute requirements
+Integration,Data Science Tools,Standard stack (PyTorch TensorFlow),Jupyter only,Full stack (Jupyter VS Code TensorBoard),Advanced MLOps platform,AI/ML framework and tooling complexity
+Integration,Shared Storage,Dell PowerScale F600 100TB NAS,Local storage only,Shared NAS 50-100TB,Enterprise NAS 200TB+ with replication,Centralized dataset and model storage
+User Base,Data Scientists,10 concurrent users,3 users,10 users,25+ users,Active data science team size
+User Base,User Roles,2 roles (data scientist admin),Single role,2-3 roles,Complex role-based access,RBAC and storage permissions
+Data Volume,Dataset Size per Project,5TB average dataset size,1-2TB datasets,5TB datasets,10TB+ datasets,Training data volume requirements
+Data Volume,Model Checkpoint Storage,2TB model storage requirements,500GB checkpoints,2TB checkpoints,5TB+ model versioning,Saved model and checkpoint capacity
+Technical Environment,Network Connectivity,10GbE to shared storage,1GbE standard,10GbE recommended,25GbE or higher,Network bandwidth for data loading
+Technical Environment,Workstation Performance,Dell Precision 7960 dual Xeon Gold,Standard config,High-performance config,Maximum performance with liquid cooling,CPU and system performance tier
+Technical Environment,Operating System,Ubuntu 22.04 LTS with CUDA,Windows only,Ubuntu or CentOS,Multi-OS with custom kernels,OS standardization and support
+Security & Compliance,Access Control,Standard file permissions and SSH,Basic access,LDAP/AD integration,Advanced PAM and audit logging,Authentication and authorization
+Security & Compliance,Data Classification,Unclassified research data,Public data,Sensitive research,Regulated data (HIPAA ITAR),Data sensitivity and compliance
+Performance,Training Performance,Target: 80% GPU utilization average,Best effort,80% utilization,90%+ with job scheduling,GPU efficiency and workload optimization
+Performance,Storage Performance,7000 MB/s NVMe read per workstation,Standard SSD,High-speed NVMe,NVMe RAID arrays,Local storage I/O performance
+Environment,Deployment Environments,Production only,Single environment,Production + dev,Multi-tenant with quotas,Environment separation and management
+# ESTIMATE SETTINGS
+#WIDTH: 17,22,14,173
+#ALIGN: left,left,center,left
+Phase,Variable Name,Multiplier,Description / Applies To Tasks
+Discovery,DISCOVERY_MX,1,All Discovery phase tasks (Requirements Assessment Hardware Planning Dataset Analysis)
+Planning,PLANNING_MX,1,All Planning phase tasks (Infrastructure Design Storage Architecture Network Design)
+Development,DEVELOPMENT_MX,1,All Development phase tasks (Workstation Deployment GPU Configuration Storage Setup)
+Testing,TESTING_MX,1,All Testing phase tasks (Performance Testing GPU Benchmarking Storage Validation)
+Deployment,DEPLOYMENT_MX,1,All Deployment phase tasks (Production Rollout User Onboarding)
+Training,TRAINING_MX,1,All Training phase tasks (User Training Documentation)
+Closeout,CLOSEOUT_MX,1,All Closeout phase tasks (Knowledge Transfer Performance Baseline)
+Management,MANAGEMENT_MX,1,Project Management overhead - 10% of actual engineering hours
+Leadership,LEADERSHIP_MX,1,Quarterback/Technical Leadership overhead - 10% of actual engineering hours
+# Level of Effort
+#WIDTH: 16,25,58,18,12,14,12,12,15,25,40
+#ALIGN: left,left,left,left,right,center,right,right,right,left,left
+Phase,Work Package,Task Description,Resource Type,Base Hours,Effort Multiplier,Actual Hours,Rate,Cost Estimate,Dependencies,Notes
+Discovery,Requirements Assessment,Assess AI/ML workload requirements and user workflows,EO Engineer,40,1,=E25*F25,$150,"=TEXT(G25*H25,""$#,##0"")",,Includes dataset analysis and GPU sizing for PyTorch/TensorFlow
+Discovery,Hardware Planning,Evaluate Dell Precision and GPU configuration options,EO Engineer,32,='Estimate Settings'!$C$3,=$E26*$F26,$200,"=TEXT($G26*$H26,""$#,##0"")",,Customer must provide representative training workloads for benchmarking
+Discovery,Dataset Analysis,Analyze dataset sizes access patterns and storage needs,EO Engineer,24,='Estimate Settings'!$C$3,=$E27*$F27,$200,"=TEXT($G27*$H27,""$#,##0"")",,Customer must provide dataset inventory and growth projections
+Discovery,Network Assessment,Evaluate network infrastructure for 10GbE connectivity,EO Engineer,16,='Estimate Settings'!$C$3,=$E28*$F28,$175,"=TEXT($G28*$H28,""$#,##0"")",,Identifies network upgrades needed for shared storage access
+Planning,Infrastructure Design,Design Dell Precision workstation and GPU architecture,EO Engineer,40,='Estimate Settings'!$C$4,=$E29*$F29,$200,"=TEXT($G29*$H29,""$#,##0"")",Requirements Assessment,Deliverable: Hardware architecture with GPU and storage design
+Planning,Storage Architecture,Design PowerScale NAS storage and dataset organization,EO Engineer,24,='Estimate Settings'!$C$4,=$E30*$F30,$180,"=TEXT($G30*$H30,""$#,##0"")",Dataset Analysis,Deliverable: Storage capacity plan and NFS/SMB share design
+Planning,Network Design,Design 10GbE network connectivity and switch topology,EO Engineer,24,='Estimate Settings'!$C$4,=$E31*$F31,$175,"=TEXT($G31*$H31,""$#,##0"")",Network Assessment,Network diagram with workstation-to-storage connectivity
+Planning,Project Planning,Develop implementation timeline and procurement schedule,EO Engineer,24,='Estimate Settings'!$C$4,=$E32*$F32,$140,"=TEXT($G32*$H32,""$#,##0"")",Infrastructure Design,Deliverable: Project plan with hardware lead times
+Development,Workstation Procurement,Order Dell Precision 7960 workstations and components,EO Engineer,16,='Estimate Settings'!$C$5,=$E33*$F33,$160,"=TEXT($G33*$H33,""$#,##0"")",Infrastructure Design,Coordinate with Dell sales and track delivery schedule
+Development,GPU Configuration,Install and configure NVIDIA RTX A6000 GPUs with drivers,EO Engineer,40,='Estimate Settings'!$C$5,=$E34*$F34,$160,"=TEXT($G34*$H34,""$#,##0"")",Workstation Procurement,Includes CUDA cuDNN installation and GPU burn-in testing
+Development,Storage Deployment,Deploy Dell PowerScale F600 NAS and configure shares,EO Engineer,48,='Estimate Settings'!$C$5,=$E35*$F35,$170,"=TEXT($G35*$H35,""$#,##0"")",Storage Architecture,Configure NFS/SMB shares with user permissions and quotas
+Development,Operating System Setup,Install Ubuntu 22.04 LTS and AI/ML software stack,EO Engineer,32,='Estimate Settings'!$C$5,=$E36*$F36,$130,"=TEXT($G36*$H36,""$#,##0"")",GPU Configuration,Install PyTorch TensorFlow Jupyter and development tools
+Development,Network Configuration,Configure 10GbE network and storage connectivity,EO Engineer,24,='Estimate Settings'!$C$5,=$E37*$F37,$140,"=TEXT($G37*$H37,""$#,##0"")",Network Design,Includes switch configuration VLAN setup and network validation
+Development,Monitoring Setup,Deploy Datadog for GPU metrics and utilization tracking,EO Engineer,24,='Estimate Settings'!$C$5,=$E38*$F38,$130,"=TEXT($G38*$H38,""$#,##0"")",Operating System Setup,Configure GPU monitoring dashboards and alerting
+Testing,Performance Testing,Benchmark GPU performance with PyTorch/TensorFlow,EO Engineer,24,='Estimate Settings'!$C$6,=$E39*$F39,$140,"=TEXT($G39*$H39,""$#,##0"")",Operating System Setup,Validate GPU utilization and training throughput
+Testing,Storage Performance,Test NAS storage throughput and dataset loading speeds,EO Engineer,16,='Estimate Settings'!$C$6,=$E40*$F40,$120,"=TEXT($G40*$H40,""$#,##0"")",Storage Deployment,Measure read/write performance with large datasets
+Testing,Network Validation,Validate 10GbE network performance and bandwidth,EO Engineer,16,='Estimate Settings'!$C$6,=$E41*$F41,$120,"=TEXT($G41*$H41,""$#,##0"")",Network Configuration,Network throughput testing between workstations and storage
+Testing,End-to-End Testing,Run representative training workloads end-to-end,EO Engineer,24,='Estimate Settings'!$C$6,=$E42*$F42,$130,"=TEXT($G42*$H42,""$#,##0"")",Performance Testing,Customer must provide sample training scripts for validation
+Deployment,Production Rollout,Deploy remaining workstations to production,EO Engineer,24,='Estimate Settings'!$C$7,=$E43*$F43,$160,"=TEXT($G43*$H43,""$#,##0"")",End-to-End Testing,Phased rollout with monitoring and issue tracking
+Deployment,User Onboarding,Onboard data scientists to new workstation environment,EO Engineer,16,='Estimate Settings'!$C$7,=$E44*$F44,$110,"=TEXT($G44*$H44,""$#,##0"")",Production Rollout,Assist with workspace setup and first training runs
+Deployment,Go-Live Support,Provide hypercare support during initial production use,EO Engineer,40,='Estimate Settings'!$C$7,=$E45*$F45,$110,"=TEXT($G45*$H45,""$#,##0"")",User Onboarding,Daily monitoring and rapid issue response
+Training,Data Scientist Training,Train users on GPU workstation usage and best practices,EO Engineer,16,='Estimate Settings'!$C$8,=$E46*$F46,$130,"=TEXT($G46*$H46,""$#,##0"")",Production Rollout,Includes PyTorch/TensorFlow optimization and GPU profiling
+Training,Administrator Training,Train IT staff on workstation and storage management,EO Engineer,16,='Estimate Settings'!$C$8,=$E47*$F47,$120,"=TEXT($G47*$H47,""$#,##0"")",Data Scientist Training,Includes GPU monitoring Datadog and PowerScale administration
+Training,Documentation,Create user guides and operational runbooks,EO Engineer,24,='Estimate Settings'!$C$8,=$E48*$F48,$110,"=TEXT($G48*$H48,""$#,##0"")",Administrator Training,Deliverable: User guides troubleshooting procedures GPU optimization
+Closeout,Knowledge Transfer,Transfer solution ownership to IT operations,EO Engineer,16,='Estimate Settings'!$C$9,=$E49*$F49,$140,"=TEXT($G49*$H49,""$#,##0"")",Documentation,Comprehensive handover including hardware specs and procedures
+Closeout,Performance Baseline,Establish GPU utilization and performance baselines,EO Engineer,8,='Estimate Settings'!$C$9,=$E50*$F50,$130,"=TEXT($G50*$H50,""$#,##0"")",Knowledge Transfer,Establishes GPU efficiency metrics and cost tracking
+Management,Technical Leadership,Quarterback technical oversight and architecture review,EO Quarterback,"=ROUND(SUM($G$3:$G$28)*0.10,0)",='Estimate Settings'!$C$11,=$E51*$F51,$200,"=TEXT($G51*$H51,""$#,##0"")",,Dell Precision architecture review and GPU optimization guidance
+Management,Project Management,Project coordination planning and management activities,EO Project Manager,"=ROUND(SUM($G$3:$G$28)*0.10,0)",='Estimate Settings'!$C$10,=$E52*$F52,$150,"=TEXT($G52*$H52,""$#,##0"")",,Includes status reporting risk management and vendor coordination
+,,,,,TOTAL HOURS,"=SUM($G$3:$G$30)",TOTAL COST,"=TEXT(SUMPRODUCT($G$3:$G$30,$H$3:$H$30),""$#,##0"")",,EO Sales Engineer: Update phase multipliers in Estimate Settings based on deployment scale
+# Credits - Applied to Total Cost (Year 1 Only)
+#WIDTH: 27,17,100
+#ALIGN: left,right,left
+Credit Type,Credit Amount,Credit Comments
+Dell Partner Discount,"($15000)",Dell Titanium Partner discount on hardware procurement (negotiate 5-10% on volume orders)
+Implementation Discount,$0,No implementation discount applicable
+NET PROFESSIONAL SERVICES COST,"=SUMPRODUCT($G$3:$G$30,$H$3:$H$30)-15000",Total Cost minus Dell Partner discount
