@@ -1,28 +1,34 @@
-# STATEMENT OF WORK (SOW)
-
-**Document Version:** 1.0
-**Date:** [DATE]
-**Prepared by:** [VENDOR_NAME]
-**Client:** [CLIENT_NAME]
-**Project:** {SOLUTION_NAME} Implementation
-**SOW Number:** [SOW_NUMBER]
-
+---
+document_title: Statement of Work
+technology_provider: IBM Red Hat
+project_name: Ansible Automation Platform Implementation
+client_name: [Client Name]
+client_contact: [Contact Name | Email | Phone]
+consulting_company: Your Consulting Company
+consultant_contact: [Consultant Name | Email | Phone]
+opportunity_no: OPP-2025-001
+document_date: November 22, 2025
+version: 1.0
+client_logo: ../../assets/logos/client_logo.png
+vendor_logo: ../../assets/logos/consulting_company_logo.png
+eoframework_logo: ../../assets/logos/eo-framework-logo-real.png
 ---
 
-## 1. EXECUTIVE SUMMARY
+# Executive Summary
 
-### 1.1 Project Overview
-This Statement of Work (SOW) outlines the scope, deliverables, timeline, and terms for the implementation of {SOLUTION_NAME} for [CLIENT_NAME]. The project will deliver [PRIMARY_BUSINESS_OUTCOME] through [HIGH_LEVEL_APPROACH].
+This Statement of Work (SOW) defines the scope, deliverables, roles, and terms for implementing Red Hat Ansible Automation Platform for [Client Name]. This engagement will deliver IT automation capabilities managing 500 servers and 100 network devices, enabling standardized configuration management, automated provisioning, and event-driven remediation to eliminate manual operations and reduce costs.
 
-### 1.2 Business Objectives
-- **Primary Goal:** [PRIMARY_BUSINESS_OBJECTIVE]
-- **Success Metrics:** [QUANTIFIED_SUCCESS_CRITERIA]
-- **Expected ROI:** [ROI_PERCENTAGE] over [TIME_PERIOD]
+## 1. PROJECT OVERVIEW
 
-### 1.3 Project Duration
+### 1.1 Business Objectives
+- **Primary Goal:** Automate IT operations for 500 servers and 100 network devices with 100 custom playbooks
+- **Success Metrics:** 90% reduction in manual effort, zero configuration drift, $400K annual labor savings
+- **Expected ROI:** Break-even within 12-15 months through labor cost avoidance
+
+### 1.2 Project Duration
 **Start Date:** [PROJECT_START_DATE]
 **End Date:** [PROJECT_END_DATE]
-**Total Duration:** [PROJECT_DURATION] weeks
+**Total Duration:** 24 weeks (6 months)
 
 ---
 
