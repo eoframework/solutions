@@ -1,0 +1,59 @@
+# Sizing Guidelines
+#WIDTH: 24,36,28,28,28,51
+#ALIGN: left,left,center,center,center,left
+Category,Component,Small (4 DGX),Medium (8 DGX),Large (16 DGX),Notes
+GPU Infrastructure,DGX H100 Systems,4 systems (32 GPUs),8 systems (64 GPUs),16 systems (128 GPUs),8x H100 80GB GPUs per system
+AI Performance,FP8 Performance,16 petaFLOPS,32 petaFLOPS,64 petaFLOPS,Tensor Core AI compute
+GPU Memory,Total GPU Memory,2.56 TB,5.12 TB,10.24 TB,80 GB per GPU aggregate
+Network Fabric,InfiniBand Switches,2 Quantum-2 (400G),4 Quantum-2 (400G),8 Quantum-2 (400G),High-speed GPU-to-GPU fabric
+Storage Capacity,NVMe Storage,500 TB,1 PB,2 PB,All-flash high-performance storage
+Storage Throughput,Read/Write Performance,7 GB/s,14 GB/s,28 GB/s,Parallel file system throughput
+Power Requirements,Total Power Draw,250 kW,500 kW,1000 kW,Including cooling overhead
+Cooling Requirements,BTU/Hour,850000 BTU,1700000 BTU,3400000 BTU,Datacenter cooling capacity needed
+Research Capacity,Data Scientists Supported,20-30 users,50-75 users,100+ users,Concurrent user capacity
+Typical Workload,Example Use Case,Fine-tuning models <50B params,Training models 50B-500B params,Training models >500B params and LLM research,Primary workload sizing
+
+# Infrastructure Costs
+#WIDTH: 23,30,50,12,15,12,15,12,12,15,30
+#ALIGN: left,left,left,right,left,right,right,right,right,right,left
+Category,Component,Description,Quantity,Unit,Unit Price,Annual Cost,Year 2,Year 3,3-Year Total,Notes
+Hardware,NVIDIA DGX H100 System,DGX H100 with 8x H100 80GB GPUs per system,8,Systems,$450000,"=$8*$450000","=$0","=$0","=$3600000",Flagship AI supercomputer
+Hardware,NVIDIA Quantum-2 InfiniBand Switch,400 Gbps InfiniBand fabric switches,4,Switches,$85000,"=$4*$85000","=$0","=$0","=$340000",High-speed interconnect
+Hardware,NVIDIA Base Command Storage,1 PB NVMe all-flash storage cluster,1,System,$400000,"=$1*$400000","=$0","=$0","=$400000",High-performance parallel file system
+Hardware,Rack Infrastructure,Server racks with PDUs and cable management,4,Racks,$15000,"=$4*$15000","=$0","=$0","=$60000",Physical infrastructure
+Facilities,Datacenter Power Upgrade,500 kW power distribution and electrical upgrades,1,System,$150000,"=$1*$150000","=$0","=$0","=$150000",480V power infrastructure
+Facilities,Cooling System Installation,In-row cooling for high-density GPU compute,2,Units,$75000,"=$2*$75000","=$0","=$0","=$150000",Thermal management
+Facilities,Raised Floor & Cabling,Datacenter floor preparation and network cabling,1,Build-out,$50000,"=$1*$50000","=$0","=$0","=$50000",Site preparation
+Software Licenses,NVIDIA AI Enterprise,AI software suite (5-year subscription per GPU),64,GPU Licenses,$3000,"=$64*$3000*1","=$19200","=$19200","=$211200",CUDA RAPIDS TensorRT NGC
+Software Licenses,Base Command Manager,Cluster management and job scheduling platform,1,Cluster License,$50000,"=$1*$50000","=$50000","=$50000","=$150000",Infrastructure orchestration
+Software Licenses,Monitoring & Observability,Datadog Enterprise monitoring (20 hosts),20,Hosts/Month,$31,"=$20*$31*12","=$7440","=$7440","=$22320",Infrastructure and GPU monitoring
+Support & Maintenance,NVIDIA DGX Support,Enterprise support with 4-hour response (annual),8,Systems,$35000,"=$8*$35000","=$280000","=$280000","=$840000",24x7 mission-critical support
+Support & Maintenance,Storage Support,Annual hardware and software maintenance,1,System/Year,$40000,"=$1*$40000","=$40000","=$40000","=$120000",Storage system support
+Professional Services,Site Assessment & Planning,Facilities assessment and deployment planning,80,Hours,$250,"=$80*$250","=$0","=$0","=$20000",Pre-deployment engineering
+Professional Services,Installation & Configuration,DGX system installation and InfiniBand setup,200,Hours,$250,"=$200*$250","=$0","=$0","=$50000",System deployment
+Professional Services,Network & Storage Setup,InfiniBand fabric and storage cluster configuration,120,Hours,$250,"=$120*$250","=$0","=$0","=$30000",Network and storage integration
+Professional Services,Software & Workload Setup,NGC container deployment and AI framework setup,80,Hours,$250,"=$80*$250","=$0","=$0","=$20000",Software stack configuration
+Professional Services,Performance Optimization,Workload benchmarking and performance tuning,60,Hours,$250,"=$60*$250","=$0","=$0","=$15000",AI workload optimization
+Professional Services,Administrator Training,Technical training for infrastructure team,40,Hours,$200,"=$40*$200","=$0","=$0","=$8000",Knowledge transfer
+Professional Services,User Training,AI researcher and data scientist training,24,Hours,$200,"=$24*$200","=$0","=$0","=$4800",End-user enablement
+Professional Services,Project Management,End-to-end project coordination and delivery,160,Hours,$175,"=$160*$175","=$0","=$0","=$28000",Implementation oversight
+
+# Credits
+#WIDTH: 25,25,15,50
+#ALIGN: left,left,right,left
+Category,Credit Type,Credit Amount,Credit Comments
+Hardware,NVIDIA Volume Discount,"($180000)",5% discount on DGX systems for 8-unit purchase
+Software Licenses,AI Enterprise Bundle Credit,"($15000)",Included with DGX purchase - Year 1 software credit
+Professional Services,Partner Services Credit,$0,No professional services credits available
+Facilities,Infrastructure Credit,$0,No facilities credits available
+
+# 3-Year Summary
+#WIDTH: 25,15,15,15,12,12,15
+#ALIGN: left,right,right,right,right,right,right
+Category,Year 1 List,Year 1 Credits,Year 1 Net,Year 2,Year 3,3-Year Total
+Hardware,$4550000,"($180000)",$4370000,$0,$0,$4370000
+Facilities,$350000,$0,$350000,$0,$0,$350000
+Software Licenses,$211200,"($15000)",$196200,$76640,$76640,$349480
+Support & Maintenance,$320000,$0,$320000,$320000,$320000,$960000
+Professional Services,$175800,$0,$175800,$0,$0,$175800
+TOTAL,$5607000,"($195000)",$5412000,$396640,$396640,$6205280

@@ -1,0 +1,61 @@
+# Sizing Guidelines
+#WIDTH: 24,36,28,28,28,51
+#ALIGN: left,left,center,center,center,left
+Category,Component,Small (4 Servers),Medium (8 Servers),Large (16 Servers),Notes
+GPU Infrastructure,GPU Count,16 GPUs (4x per server),32 GPUs (4x per server),64 GPUs (4x per server),NVIDIA A100 40GB or 80GB
+GPU Memory,Total GPU Memory,640 GB (40GB) or 1.28 TB (80GB),1.28 TB (40GB) or 2.56 TB (80GB),2.56 TB (40GB) or 5.12 TB (80GB),Aggregate across all GPUs
+Compute Nodes,Server Configuration,4x GPU servers,8x GPU servers,16x GPU servers,Dell R750xa or HPE DL380 Gen11
+Network Fabric,Ethernet Switches,1x 100 GbE switch,2x 100 GbE switches (redundant),4x 100 GbE switches (redundant),Mellanox ConnectX-6 NICs
+Storage Capacity,Shared Storage,100 TB NFS,200 TB NFS,400 TB NFS,NetApp or Pure Storage all-flash
+Storage Throughput,Read/Write Performance,2-3 GB/s,3-5 GB/s,6-10 GB/s,Parallel dataset streaming
+Research Team Size,Data Scientists Supported,10-15 users,20-30 users,40-60 users,Concurrent user capacity
+Kubernetes,Pod Capacity,50-100 pods,100-200 pods,200-400 pods,GPU-accelerated workloads
+Typical Workload,Primary Use Case,Fine-tuning models <10B params,Training models 10-50B params,Training models 50B+ params or high-throughput inference,Workload sizing guidance
+
+# Infrastructure Costs
+#WIDTH: 23,30,50,12,15,12,15,12,12,15,30
+#ALIGN: left,left,left,right,left,right,right,right,right,right,left
+Category,Component,Description,Quantity,Unit,Unit Price,Annual Cost,Year 2,Year 3,3-Year Total,Notes
+Hardware,Dell PowerEdge R750xa,4x NVIDIA A100 40GB GPUs dual AMD EPYC 7763 (128 cores) 1TB RAM,8,Servers,$80000,"=$8*$80000","=$0","=$0","=$640000",GPU compute nodes
+Hardware,Mellanox 100GbE Switch,100 Gbps Ethernet switches with RDMA support,2,Switches,$18000,"=$2*$18000","=$0","=$0","=$36000",Network fabric
+Hardware,Mellanox ConnectX-6,100 GbE NICs for GPU servers (2 per server),16,NICs,$1500,"=$16*$1500","=$0","=$0","=$24000",RDMA network adapters
+Hardware,NetApp AFF A400,200 TB NVMe all-flash storage system,1,System,$180000,"=$1*$180000","=$0","=$0","=$180000",Shared storage for datasets
+Hardware,Server Racks,42U racks with PDUs and cable management,2,Racks,$8000,"=$2*$8000","=$0","=$0","=$16000",Physical infrastructure
+Software Licenses,NVIDIA AI Enterprise,AI software suite with NGC access (annual per GPU),32,GPU Licenses/Year,$3000,"=$32*$3000","=$96000","=$96000","=$384000",CUDA TensorRT Triton support
+Software Licenses,Red Hat Enterprise Linux,RHEL for GPU servers (annual per server),8,Server Licenses/Year,$1200,"=$8*$1200","=$9600","=$9600","=$28800",Operating system
+Software Licenses,Kubernetes Platform,Enterprise Kubernetes (Rancher or OpenShift),1,Cluster/Year,$25000,"=$1*$25000","=$25000","=$25000","=$75000",Container orchestration
+Software Licenses,MLOps Platform,Kubeflow or Run:ai for ML workflow management,1,Platform/Year,$30000,"=$1*$30000","=$30000","=$30000","=$90000",Experiment tracking and scheduling
+Software Licenses,Monitoring Tools,Datadog or Prometheus stack (20 nodes),20,Nodes/Month,$23,"=$20*$23*12","=$5520","=$5520","=$16560",Cluster and GPU monitoring
+Support & Maintenance,Dell ProSupport Plus,24x7 hardware support with next-day replacement,8,Systems/Year,$8000,"=$8*$8000","=$64000","=$64000","=$192000",Server support contract
+Support & Maintenance,NVIDIA Enterprise Support,Software support for AI Enterprise suite,1,Contract/Year,$40000,"=$1*$40000","=$40000","=$40000","=$120000",NVIDIA software support
+Support & Maintenance,NetApp Support,Hardware and software maintenance,1,System/Year,$18000,"=$1*$18000","=$18000","=$18000","=$54000",Storage support
+Professional Services,Cluster Design & Architecture,Solution architecture and deployment planning,80,Hours,$225,"=$80*$225","=$0","=$0","=$18000",Pre-deployment design
+Professional Services,Server Installation & Config,Hardware installation and GPU driver setup,120,Hours,$200,"=$120*$200","=$0","=$0","=$24000",System deployment
+Professional Services,Network Configuration,100 GbE fabric and RDMA setup,60,Hours,$200,"=$60*$200","=$0","=$0","=$12000",Network infrastructure
+Professional Services,Storage Configuration,NetApp deployment and NFS optimization,40,Hours,$200,"=$40*$200","=$0","=$0","=$8000",Storage integration
+Professional Services,Kubernetes Deployment,K8s cluster NVIDIA GPU Operator and scheduling,80,Hours,$225,"=$80*$225","=$0","=$0","=$18000",Container orchestration
+Professional Services,MLOps Platform Setup,Kubeflow or Run:ai deployment and configuration,60,Hours,$225,"=$60*$225","=$0","=$0","=$13500",ML workflow platform
+Professional Services,Monitoring & Observability,Prometheus Grafana GPU metrics dashboards,40,Hours,$175,"=$40*$175","=$0","=$0","=$7000",Monitoring setup
+Professional Services,Administrator Training,Cluster management Kubernetes GPU troubleshooting,32,Hours,$200,"=$32*$200","=$0","=$0","=$6400",Admin knowledge transfer
+Professional Services,User Training,Data scientist onboarding job submission best practices,24,Hours,$200,"=$24*$200","=$0","=$0","=$4800",End-user training
+Professional Services,Performance Tuning,Benchmark testing and workload optimization,40,Hours,$225,"=$40*$225","=$0","=$0","=$9000",Performance optimization
+Professional Services,Project Management,End-to-end project coordination,120,Hours,$175,"=$120*$175","=$0","=$0","=$21000",Implementation oversight
+
+# Credits
+#WIDTH: 25,25,15,50
+#ALIGN: left,left,right,left
+Category,Credit Type,Credit Amount,Credit Comments
+Hardware,Dell Volume Discount,"($32000)",5% discount on 8-server purchase
+Software Licenses,NVIDIA AI Enterprise Bundle,"($12000)",Year 1 included with Dell GPU servers
+Professional Services,Partner Services Credit,$0,No professional services credits available
+Support & Maintenance,Support Credit,$0,No support credits available
+
+# 3-Year Summary
+#WIDTH: 25,15,15,15,12,12,15
+#ALIGN: left,right,right,right,right,right,right
+Category,Year 1 List,Year 1 Credits,Year 1 Net,Year 2,Year 3,3-Year Total
+Hardware,$896000,"($32000)",$864000,$0,$0,$864000
+Software Licenses,$160520,"($12000)",$148520,$166120,$166120,$480760
+Support & Maintenance,$122000,$0,$122000,$122000,$122000,$366000
+Professional Services,$141700,$0,$141700,$0,$0,$141700
+TOTAL,$1320220,"($44000)",$1276220,$288120,$288120,$1852460

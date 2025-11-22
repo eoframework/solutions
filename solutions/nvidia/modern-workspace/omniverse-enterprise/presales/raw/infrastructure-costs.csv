@@ -1,0 +1,62 @@
+# Sizing Guidelines
+#WIDTH: 24,36,28,28,28,51
+#ALIGN: left,left,center,center,center,left
+Category,Component,Small (25 Users),Medium (50 Users),Large (100 Users),Notes
+User Workstations,RTX Workstations,25 Dell Precision 7960,50 Dell Precision 7960,100 Dell Precision 7960,RTX A6000 48GB or RTX 6000 Ada
+GPU Configuration,GPU per Workstation,1x RTX A6000 48GB,1x RTX A6000 48GB,1-2x RTX A6000 48GB,48GB VRAM for complex scenes
+Nucleus Servers,Collaboration Servers,1 primary + 1 replica,2 primary + 2 replica,4 primary + 4 replica (HA),USD scene version control
+Storage Capacity,USD Scene Storage,50 TB,100 TB,200 TB,Projects models textures caches
+Storage Performance,Throughput,2-3 GB/s,3-5 GB/s,5-10 GB/s,Large scene sync performance
+Network Fabric,Ethernet Speed,10 GbE,100 GbE,100 GbE (redundant),Fast file transfers for collaboration
+Rendering Capacity,Omniverse Farm Nodes,5 render nodes,10 render nodes,20 render nodes,Batch rendering capacity
+Concurrent Collaboration,Real-Time Users,10-15 concurrent,25-30 concurrent,50-75 concurrent,Simultaneous scene editing
+Software Licenses,Omniverse Enterprise,25 user licenses,50 user licenses,100 user licenses,Annual subscription per user
+Typical Use Case,Primary Application,Product design collaboration,Architectural visualization + product design,Large-scale manufacturing digital twins,Workload guidance
+
+# Infrastructure Costs
+#WIDTH: 23,30,50,12,15,12,15,12,12,15,30
+#ALIGN: left,left,left,right,left,right,right,right,right,right,left
+Category,Component,Description,Quantity,Unit,Unit Price,Annual Cost,Year 2,Year 3,3-Year Total,Notes
+Hardware,Dell Precision 7960 Workstation,Intel Xeon W 64GB RAM 2TB NVMe 1x RTX A6000 48GB,50,Workstations,$15000,"=$50*$15000","=$0","=$0","=$750000",Designer workstations
+Hardware,Omniverse Nucleus Server,Dell PowerEdge R750 dual Xeon 256GB RAM 20TB NVMe RAID,2,Servers,$50000,"=$2*$50000","=$0","=$0","=$100000",Primary + replica HA
+Hardware,Rendering Farm Nodes,Dell Precision 7960 with RTX A6000 for batch rendering,10,Nodes,$15000,"=$10*$15000","=$0","=$0","=$150000",Omniverse Farm rendering
+Hardware,Network Switch 100GbE,Mellanox 100 Gbps Ethernet switch,2,Switches,$18000,"=$2*$18000","=$0","=$0","=$36000",High-speed file transfers
+Hardware,Storage Array,NetApp AFF A400 100 TB NVMe all-flash,1,System,$120000,"=$1*$120000","=$0","=$0","=$120000",USD scene storage
+Hardware,UPS Power Protection,Rack-mounted UPS for servers (10 kVA),2,UPS Units,$8000,"=$2*$8000","=$0","=$0","=$16000",Power protection
+Software Licenses,Omniverse Enterprise,Per-user annual subscription (50 users),50,User Licenses/Year,$1800,"=$50*$1800","=$90000","=$90000","=$360000",Collaboration platform
+Software Licenses,Omniverse Farm,Rendering node licenses (10 nodes),10,Node Licenses/Year,$900,"=$10*$900","=$9000","=$9000","=$36000",Batch rendering
+Software Licenses,CAD Connectors,Revit SolidWorks Rhino connectors included with Enterprise,1,Included,$0,"=$0","=$0","=$0","=$0",Included with subscription
+Software Licenses,Asset Libraries,Pre-built materials models environments,1,Library/Year,$5000,"=$1*$5000","=$5000","=$5000","=$15000",Content library subscription
+Support & Maintenance,Dell ProSupport Plus,24x7 hardware support for workstations,60,Systems/Year,$1200,"=$60*$1200","=$72000","=$72000","=$216000",Workstation and server support
+Support & Maintenance,NVIDIA Omniverse Support,Enterprise support with dedicated TAM,1,Contract/Year,$25000,"=$1*$25000","=$25000","=$25000","=$75000",Platform support
+Support & Maintenance,NetApp Support,Storage hardware and software maintenance,1,System/Year,$12000,"=$1*$12000","=$12000","=$12000","=$36000",Storage support
+Professional Services,Nucleus Server Deployment,Server installation configuration HA setup,40,Hours,$225,"=$40*$225","=$0","=$0","=$9000",Collaboration server setup
+Professional Services,Network Configuration,100 GbE fabric storage network optimization,40,Hours,$200,"=$40*$200","=$0","=$0","=$8000",Network infrastructure
+Professional Services,Storage Deployment,NetApp installation NFS configuration,32,Hours,$200,"=$32*$200","=$0","=$0","=$6400",Storage setup
+Professional Services,Workstation Deployment,RTX workstation imaging driver installation,80,Hours,$150,"=$80*$150","=$0","=$0","=$12000",Desktop deployment
+Professional Services,Connector Integration,Revit SolidWorks Rhino connector setup,60,Hours,$225,"=$60*$225","=$0","=$0","=$13500",CAD tool integration
+Professional Services,Custom USD Pipeline,Studio-specific workflow automation,80,Hours,$250,"=$80*$250","=$0","=$0","=$20000",Workflow customization
+Professional Services,Rendering Farm Setup,Omniverse Farm configuration render queue,40,Hours,$200,"=$40*$200","=$0","=$0","=$8000",Batch rendering setup
+Professional Services,Training - Administrators,Nucleus server admin USD management,24,Hours,$200,"=$24*$200","=$0","=$0","=$4800",Admin training
+Professional Services,Training - Users,Designer workflow training connector usage,40,Hours,$200,"=$40*$200","=$0","=$0","=$8000",User enablement
+Professional Services,Training - Advanced,USD pipeline development PhysX simulation,24,Hours,$250,"=$24*$250","=$0","=$0","=$6000",Advanced capabilities
+Professional Services,Project Management,End-to-end deployment coordination,100,Hours,$175,"=$100*$175","=$0","=$0","=$17500",Implementation oversight
+
+# Credits
+#WIDTH: 25,25,15,50
+#ALIGN: left,left,right,left
+Category,Credit Type,Credit Amount,Credit Comments
+Hardware,Dell Volume Discount,"($37500)",5% discount on 50-workstation purchase
+Software Licenses,Omniverse Launch Credit,"($9000)",10% Year 1 discount for new enterprise deployment
+Professional Services,Partner Services Credit,$0,No professional services credits available
+Support & Maintenance,Support Credit,$0,No support credits available
+
+# 3-Year Summary
+#WIDTH: 25,15,15,15,12,12,15
+#ALIGN: left,right,right,right,right,right,right
+Category,Year 1 List,Year 1 Credits,Year 1 Net,Year 2,Year 3,3-Year Total
+Hardware,$1172000,"($37500)",$1134500,$0,$0,$1134500
+Software Licenses,$99000,"($9000)",$90000,$104000,$104000,$298000
+Support & Maintenance,$109000,$0,$109000,$109000,$109000,$327000
+Professional Services,$113200,$0,$113200,$0,$0,$113200
+TOTAL,$1493200,"($46500)",$1446700,$213000,$213000,$1872700
