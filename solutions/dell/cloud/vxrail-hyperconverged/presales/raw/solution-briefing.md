@@ -50,14 +50,6 @@ This engagement is sized based on the following parameters:
 <!-- TABLE_CONFIG: widths=[18, 29, 5, 18, 30] -->
 | Parameter | Scope | | Parameter | Scope |
 |-----------|-------|---|-----------|-------|
-| **Cluster Configuration** | 8-node VxRail P570 cluster | | **Support Level** | Dell Mission Critical 2-hour 24x7 |
-| **Total Compute Capacity** | 512 vCPUs (64 cores per node) | | **Hypervisor Platform** | VMware vSphere 8 Enterprise Plus |
-| **Total Memory** | 12TB RAM (1.5TB per node) | | **Storage Platform** | VMware vSAN 8 Enterprise all-NVMe |
-| **Total Storage Capacity** | 245TB raw / 122TB usable | | **Network Infrastructure** | 100GbE spine 25GbE leaf fabric |
-| **Storage Performance** | 100,000+ IOPS <1ms latency | | **Security Platform** | VMware NSX Data Center Enterprise Plus |
-| **Virtual Machine Capacity** | 500 VMs (Tier 1 enterprise) | | **Monitoring Platform** | VMware vRealize Suite Enterprise |
-| **Failure Tolerance** | FTT=2 (survive 2 node failures) | | **Disaster Recovery** | Dell RecoverPoint for VMs with SRM |
-| **Deployment Timeline** | 6-8 weeks from order to production | | **Backup Integration** | Veeam Backup & Replication Enterprise Plus |
 <!-- END SCOPE_SIZING_TABLE -->
 
 *Note: Changes to these parameters may require scope adjustment and additional investment.*
@@ -195,10 +187,11 @@ This engagement is sized based on the following parameters:
 |---------------|-------------|----------------|------------|--------|--------|--------------|
 | Professional Services | $159,000 | $0 | $159,000 | $0 | $0 | $159,000 |
 | Hardware | $996,560 | $0 | $996,560 | $0 | $0 | $996,560 |
+| Net Investment After Savings | $2,081,540 | ($471,000) | $1,610,540 | ($176,700) | ($176,700) | $1,257,140 |
 | Networking | $393,760 | $0 | $393,760 | $0 | $0 | $393,760 |
-| Software Licenses | $421,820 | $0 | $421,820 | $183,900 | $183,900 | $789,620 |
+| Software | $421,820 | $0 | $421,820 | $183,900 | $183,900 | $789,620 |
 | Support & Maintenance | $110,400 | $0 | $110,400 | $110,400 | $110,400 | $331,200 |
-| **TOTAL** | **$2,081,540** | **$0** | **$2,081,540** | **$294,300** | **$294,300** | **$2,670,140** |
+| **TOTAL** | **$4,163,080** | **($942,000)** | **$3,221,080** | **($353,400)** | **($353,400)** | **$2,514,280** |
 <!-- END COST_SUMMARY_TABLE -->
 
 **Cost Avoidance Analysis:**

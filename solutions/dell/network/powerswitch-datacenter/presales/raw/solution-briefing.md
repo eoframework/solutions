@@ -50,14 +50,6 @@ This engagement is sized based on the following parameters:
 <!-- TABLE_CONFIG: widths=[18, 29, 5, 18, 30] -->
 | Parameter | Scope | | Parameter | Scope |
 |-----------|-------|---|-----------|-------|
-| **Data Center Size** | 40 racks | | **Support Level** | Dell ProSupport Plus 24x7 |
-| **Spine Switches** | 4x Z9432F-ON (100GbE) | | **Network OS** | Dell OS10 Enterprise |
-| **Leaf Switches** | 40x S5248F-ON (25GbE ToR) | | **Management Platform** | Dell SmartFabric Services |
-| **Aggregation** | 2x S5296F-ON (border leafs) | | **Topology** | Spine-leaf (Clos fabric) |
-| **Server Ports** | 1920 × 25GbE ports | | **Oversubscription** | 3:1 typical enterprise |
-| **Fabric Bandwidth** | 1.6Tbps total capacity | | **Routing Protocol** | BGP with EVPN-VXLAN |
-| **Network Virtualization** | VXLAN overlay support | | **Deployment Timeline** | 8-10 weeks from order to production |
-| **Automation** | Ansible integration and ZTP | |  |  |
 <!-- END SCOPE_SIZING_TABLE -->
 
 *Note: Changes to these parameters may require scope adjustment and additional investment.*
@@ -193,12 +185,13 @@ This engagement is sized based on the following parameters:
 | Cost Category | Year 1 List | Year 1 Credits | Year 1 Net | Year 2 | Year 3 | 3-Year Total |
 |---------------|-------------|----------------|------------|--------|--------|--------------|
 | Professional Services | $87,000 | $0 | $87,000 | $0 | $0 | $87,000 |
-| Spine Switches | $380,000 | $0 | $380,000 | $0 | $0 | $380,000 |
+| Cisco Nexus Alternative | $3,383,600 | $0 | $3,383,600 | $0 | $0 | $3,383,600 |
 | Leaf Switches | $816,000 | $0 | $816,000 | $0 | $0 | $816,000 |
 | Optics & Cabling | $719,000 | $0 | $719,000 | $0 | $0 | $719,000 |
 | Software | $160,000 | $0 | $160,000 | $0 | $0 | $160,000 |
+| Spine Switches | $380,000 | $0 | $380,000 | $0 | $0 | $380,000 |
 | Support & Maintenance (3-Year) | $165,600 | $0 | $165,600 | $0 | $0 | $165,600 |
-| **TOTAL** | **$2,327,600** | **$0** | **$2,327,600** | **$0** | **$0** | **$2,327,600** |
+| **TOTAL** | **$4,655,200** | **($1,056,000)** | **$4,655,200** | **($1,056,000)** | **($1,056,000)** | **$4,655,200** |
 <!-- END COST_SUMMARY_TABLE -->
 
 **Cisco Nexus Cost Comparison:**

@@ -77,22 +77,6 @@ This engagement is sized based on the following parameters:
 <!-- TABLE_CONFIG: widths=[25, 35, 40] -->
 | Category | Parameter | Scope |
 |----------|-----------|-------|
-| Solution Scope | Number of Workstations | 10 Dell Precision 7960 units |
-| Solution Scope | GPU Configuration | NVIDIA RTX A6000 48GB |
-| Integration | Data Science Tools | Standard stack (PyTorch TensorFlow) |
-| Integration | Shared Storage | Dell PowerScale F600 100TB NAS |
-| User Base | Data Scientists | 10 concurrent users |
-| User Base | User Roles | 2 roles (data scientist admin) |
-| Data Volume | Dataset Size per Project | 5TB average dataset size |
-| Data Volume | Model Checkpoint Storage | 2TB model storage requirements |
-| Technical Environment | Network Connectivity | 10GbE to shared storage |
-| Technical Environment | Workstation Performance | Dell Precision 7960 dual Xeon Gold |
-| Technical Environment | Operating System | Ubuntu 22.04 LTS with CUDA |
-| Security & Compliance | Access Control | Standard file permissions and SSH |
-| Security & Compliance | Data Classification | Unclassified research data |
-| Performance | Training Performance | Target: 80% GPU utilization average |
-| Performance | Storage Performance | 7000 MB/s NVMe read per workstation |
-| Environment | Deployment Environments | Production only |
 <!-- END SCOPE_PARAMETERS_TABLE -->
 
 Table: Engagement Scope Parameters
@@ -333,11 +317,13 @@ After the 6-week engagement:
 <!-- TABLE_CONFIG: widths=[25, 15, 15, 15, 12, 12, 15] -->
 | Cost Category | Year 1 List | AWS/Partner Credits | Year 1 Net | Year 2 | Year 3 | 3-Year Total |
 |---------------|-------------|---------------------|------------|--------|--------|--------------|
-| Professional Services | $38,000 | ($4,000) | $34,000 | $0 | $0 | $34,000 |
-| Hardware | $306,000 | ($59,175) | $246,825 | $0 | $0 | $246,825 |
-| Software | $45,260 | ($10,800) | $34,460 | $45,260 | $45,260 | $125,980 |
-| Support & Maintenance | $24,850 | $0 | $24,850 | $24,850 | $24,850 | $74,550 |
-| **TOTAL INVESTMENT** | **$414,110** | **($73,975)** | **$340,135** | **$70,110** | **$70,110** | **$481,355** |
+| Professional Services | $43,000 | $0 | $43,000 | $0 | $0 | $43,000 |
+| Hardware | $52,500 | $0 | $52,500 | $0 | $0 | $52,500 |
+| Integration | $30,000 | $0 | $30,000 | $0 | $0 | $30,000 |
+| Net Investment After Savings | $198,750 | ($25,000) | $173,750 | $48,250 | $48,250 | $270,250 |
+| Software | $60,000 | $0 | $60,000 | $60,000 | $60,000 | $180,000 |
+| Support & Maintenance | $13,250 | $0 | $13,250 | $13,250 | $13,250 | $39,750 |
+| **TOTAL INVESTMENT** | **$397,500** | **($50,000)** | **$347,500** | **$96,500** | **$96,500** | **$540,500** |
 <!-- END COST_SUMMARY_TABLE -->
 
 Table: Total Investment Summary

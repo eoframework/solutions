@@ -50,14 +50,6 @@ This engagement is sized based on the following parameters:
 <!-- TABLE_CONFIG: widths=[18, 29, 5, 18, 30] -->
 | Parameter | Scope | | Parameter | Scope |
 |-----------|-------|---|-----------|-------|
-| **Developer Count** | 50 developers | | **Support Level** | Dell ProSupport Plus 24x7 |
-| **Daily Build Volume** | 5000 builds per day | | **CI/CD Platform** | GitLab Premium Self-Hosted |
-| **Build Agent Servers** | 8 PowerEdge R650 servers | | **Artifact Repository** | JFrog Artifactory Pro |
-| **Concurrent Builds** | 64 concurrent builds | | **Code Quality** | SonarQube Data Center |
-| **Artifact Storage** | Dell Unity XT 380 (50TB SSD) | | **Secrets Management** | HashiCorp Vault |
-| **Network Infrastructure** | 10GbE redundant fabric | | **Container Platform** | Docker Enterprise |
-| **Operating System** | Red Hat Enterprise Linux | | **Deployment Timeline** | 8-10 weeks from order to production |
-| **Migration Approach** | Phased migration from cloud | |  |  |
 <!-- END SCOPE_SIZING_TABLE -->
 
 *Note: Changes to these parameters may require scope adjustment and additional investment.*
@@ -194,10 +186,11 @@ This engagement is sized based on the following parameters:
 |---------------|-------------|----------------|------------|--------|--------|--------------|
 | Professional Services | $61,500 | $0 | $61,500 | $0 | $0 | $61,500 |
 | Hardware | $190,320 | $0 | $190,320 | $0 | $0 | $190,320 |
+| Net Investment After Savings | $338,140 | ($149,400) | $188,740 | ($88,400) | ($88,400) | $11,940 |
 | Networking | $25,320 | $0 | $25,320 | $0 | $0 | $25,320 |
-| Software Licenses | $48,500 | $0 | $48,500 | $48,500 | $48,500 | $145,500 |
+| Software | $48,500 | $0 | $48,500 | $48,500 | $48,500 | $145,500 |
 | Support & Maintenance | $12,500 | $0 | $12,500 | $12,500 | $12,500 | $37,500 |
-| **TOTAL** | **$338,140** | **$0** | **$338,140** | **$61,000** | **$61,000** | **$460,140** |
+| **TOTAL** | **$676,280** | **($298,800)** | **$377,480** | **($176,800)** | **($176,800)** | **$23,880** |
 <!-- END COST_SUMMARY_TABLE -->
 
 **Cloud Cost Avoidance Analysis:**

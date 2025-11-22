@@ -50,13 +50,6 @@ This engagement is sized based on the following parameters:
 <!-- TABLE_CONFIG: widths=[18, 29, 5, 18, 30] -->
 | Parameter | Scope | | Parameter | Scope |
 |-----------|-------|---|-----------|-------|
-| **User Count** | 500 users requiring MFA | | **Support Model** | Dell SafeID Enterprise Support |
-| **Authentication Methods** | YubiKey 5 NFC hardware tokens | | **Compliance Target** | CMMC Level 2 and NIST 800-63 AAL2 |
-| **Identity Integration** | Active Directory connector | | **Deployment Timeline** | 90 days (pilot + production rollout) |
-| **VPN Integration** | RADIUS integration for VPN MFA | | **Rollout Approach** | Phased by department with pilot |
-| **Cloud SSO** | 5 SaaS applications (O365 AWS) | | **Token Distribution** | YubiKey shipped to remote workers |
-| **MFA Infrastructure** | 2 authentication servers (HA) | | **User Enrollment** | Self-service portal with IT assistance |
-| **High Availability** | Active-passive HA pair | | **Training Included** | Admin training and user awareness |
 <!-- END SCOPE_SIZING_TABLE -->
 
 *Note: Changes to these parameters may require scope adjustment and additional investment.*
@@ -191,11 +184,12 @@ This engagement is sized based on the following parameters:
 | Cost Category | Year 1 List | Year 1 Credits | Year 1 Net | Year 2 | Year 3 | 3-Year Total |
 |---------------|-------------|----------------|------------|--------|--------|--------------|
 | Professional Services | $43,000 | $0 | $43,000 | $0 | $0 | $43,000 |
-| Software Licenses | $60,000 | $0 | $60,000 | $60,000 | $60,000 | $180,000 |
 | Hardware | $52,500 | $0 | $52,500 | $0 | $0 | $52,500 |
-| Integration Services | $30,000 | $0 | $30,000 | $0 | $0 | $30,000 |
+| Integration | $30,000 | $0 | $30,000 | $0 | $0 | $30,000 |
+| Net Investment After Savings | $198,750 | ($25,000) | $173,750 | $48,250 | $48,250 | $270,250 |
+| Software | $60,000 | $0 | $60,000 | $60,000 | $60,000 | $180,000 |
 | Support & Maintenance | $13,250 | $0 | $13,250 | $13,250 | $13,250 | $39,750 |
-| **TOTAL** | **$198,750** | **$0** | **$198,750** | **$73,250** | **$73,250** | **$345,250** |
+| **TOTAL** | **$397,500** | **($50,000)** | **$347,500** | **$96,500** | **$96,500** | **$540,500** |
 <!-- END COST_SUMMARY_TABLE -->
 
 **Operational Savings & Risk Avoidance:**
