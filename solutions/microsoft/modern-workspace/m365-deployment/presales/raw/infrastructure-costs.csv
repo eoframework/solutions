@@ -1,0 +1,50 @@
+# Sizing Guidelines
+#WIDTH: 24,36,28,28,28,51
+#ALIGN: left,left,center,center,center,left
+Category,Component,Small,Medium,Large,Notes
+Software Licenses,User Count,100 users,500 users,1000+ users,Number of M365 licensed users
+Software Licenses,M365 License Tier,Business Premium,E3 licensing,E5 licensing,License tier based on security needs
+Cloud Infrastructure,Email Migration Volume,10 GB total,250 GB total,1 TB+ total,Total mailbox data for migration
+Cloud Infrastructure,File Migration Volume,500 GB,5 TB,20+ TB,SharePoint and OneDrive file migration
+Cloud Infrastructure,Teams Phone Users,No phone system,100 phone users,500+ phone users,Teams calling and PSTN connectivity
+Support & Maintenance,Support Level,Business hours,24x5 support,24x7 premium,User support and helpdesk coverage
+
+# Infrastructure Costs
+#WIDTH: 23,30,50,12,15,12,15,12,12,15,30
+#ALIGN: left,left,left,right,left,right,right,right,right,right,left
+Category,Component,Description,Quantity,Unit,Unit Price,Annual Cost,Year 2,Year 3,3-Year Total,Notes
+Software Licenses,Microsoft 365 E5,E5 licenses for 500 users ($57/user/month),500,Users/Month,$57,"=D11*F11*12","=G11","=G11","=G11+H11+I11",Includes Office apps Exchange SharePoint Teams Defender Purview
+Software Licenses,Audio Conferencing,Audio dial-in for meetings (200 users @ $4/month),200,Users/Month,$4,"=D12*F12*12","=G12","=G12","=G12+H12+I12",PSTN conferencing bridge access
+Software Licenses,Teams Phone Standard,Teams Phone licenses (150 users @ $8/month),150,Users/Month,$8,"=D13*F13*12","=G13","=G13","=G13+H13+I13",Phone system for calling features
+Software Licenses,Domestic Calling Plan,120 minutes domestic calling (150 users @ $12/month),150,Users/Month,$12,"=D14*F14*12","=G14","=G14","=G14+H14+I14",PSTN connectivity for calling
+Software Licenses,Power BI Pro,Analytics and reporting (50 users @ $10/month),50,Users/Month,$10,"=D15*F15*12","=G15","=G15","=G15+H15+I15",Business intelligence and dashboards
+Cloud Infrastructure,Azure AD Premium P2,Additional identity features (included in E5),0,Users/Month,$0,$0,$0,$0,$0,Included in M365 E5 licensing
+Cloud Infrastructure,SharePoint Storage,Additional SharePoint storage 10TB ($0.20/GB/month),10000,GB/Month,$0.20,"=D17*F17*12","=G17","=G17","=G17+H17+I17",Beyond included 10TB + 10GB per user
+Cloud Infrastructure,Exchange Online Archiving,Email archiving (included in E5),0,Users/Month,$0,$0,$0,$0,$0,Included in M365 E5 licensing
+Cloud Infrastructure,Microsoft Stream,Video hosting and streaming (included in E5),0,Service/Month,$0,$0,$0,$0,$0,Included in M365 E5 licensing
+Support & Maintenance,Microsoft 365 Support,Premier Support for M365 (15% of licenses),1,Service/Month,$3562,"=D20*F20*12","=G20","=G20","=G20+H20+I20",24x7 support for production environment
+Support & Maintenance,Intune Device Management,Mobile device management (included in E5),0,Devices/Month,$0,$0,$0,$0,$0,Included in M365 E5 licensing
+Professional Services,Migration Services - Email,Exchange migration 250GB (150 hours @ $200),150,Hours,$200,$30000,$0,$0,$30000,Year 1 only - email migration
+Professional Services,Migration Services - Files,SharePoint and OneDrive migration 5TB (80 hours @ $200),80,Hours,$200,$16000,$0,$0,$16000,Year 1 only - file migration
+Professional Services,Security Configuration,Conditional Access DLP Defender setup (80 hours @ $225),80,Hours,$225,$18000,$0,$0,$18000,Year 1 only - security baseline
+Professional Services,Teams Deployment,Teams channels apps governance (40 hours @ $200),40,Hours,$200,$8000,$0,$0,$8000,Year 1 only - Teams rollout
+Professional Services,Training & Documentation,Admin and user training (40 hours @ $175),40,Hours,$175,$7000,$0,$0,$7000,Year 1 only - knowledge transfer
+
+# Credits
+#WIDTH: 25,25,15,50
+#ALIGN: left,left,right,left
+Category,Credit Type,Credit Amount,Credit Comments
+Software Licenses,Microsoft Partner Credit,$0,No partner credits for commercial licensing
+Cloud Infrastructure,Azure Credit,$0,No Azure credits for M365 SaaS
+Support & Maintenance,Program Credit,$0,No support credits available
+Professional Services,FastTrack Assistance,$0,Microsoft FastTrack included for 150+ seats (not applicable for 500 users - threshold is 500+)
+
+# 3-Year Summary
+#WIDTH: 25,15,15,15,12,12,15
+#ALIGN: left,right,right,right,right,right,right
+Category,Year 1 List,Year 1 Credits,Year 1 Net,Year 2,Year 3,3-Year Total
+Software Licenses,$399000,$0,$399000,$399000,$399000,$1197000
+Cloud Infrastructure,$24000,$0,$24000,$24000,$24000,$72000
+Support & Maintenance,$42744,$0,$42744,$42744,$42744,$128232
+Professional Services,$79000,$0,$79000,$0,$0,$79000
+TOTAL,$544744,$0,$544744,$465744,$465744,$1476232
