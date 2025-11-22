@@ -154,10 +154,10 @@ This engagement is sized based on the following parameters:
 **layout:** eo_single_column
 
 - **Client Success: Financial Services Company**
-  - **Client:** Regional bank with $50B assets expanding digital banking across 8 states
+  - **Client:** Regional bank with $50B assets across 8 states
   - **Challenge:** 6-8 week project provisioning delays blocking innovation. No security standards causing audit findings. 15+ application teams manually configuring GCP with inconsistent controls costing $4M annually in security remediation and delayed time-to-market.
-  - **Solution:** Deployed Google Cloud Landing Zone with Cloud Foundation Toolkit Terraform automation. Implemented Shared VPC hub-spoke network and Security Command Center Premium. Established self-service project provisioning with enforced security policies.
-  - **Results:** 95% reduction in provisioning time (6 weeks to 4 hours) and zero security misconfigurations in 6 months. $3.8M annual savings from reduced manual work and security incidents. SOC 2 and PCI-DSS compliance achieved with 100% audit pass rate. Full ROI in 14 months.
+  - **Solution:** Deployed Cloud Landing Zone with Terraform automation and Security Command Center Premium.
+  - **Results:** 95% faster provisioning (6 weeks to 4 hours). Zero security misconfigurations. $3.8M annual savings. SOC 2 and PCI-DSS compliance achieved. Full ROI in 14 months.
   - **Testimonial:** "The landing zone transformed our cloud adoption from chaotic to controlled. Teams get the agility they need while we maintain the security and compliance our regulators demand." — **Michael Chen**, VP of Cloud Engineering
 
 ---

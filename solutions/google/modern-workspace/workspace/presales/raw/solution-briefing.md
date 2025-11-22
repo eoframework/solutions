@@ -152,10 +152,10 @@ This engagement is sized based on the following parameters:
 **layout:** eo_single_column
 
 - **Client Success: Professional Services Firm**
-  - **Client:** Management consulting firm with 450 employees across 6 office locations
+  - **Client:** Management consulting firm with 450 employees across 6 locations
   - **Challenge:** Aging Exchange 2013 servers requiring $180K hardware refresh. Limited remote collaboration forcing consultants to VPN for file access. 85% of workforce now remote post-pandemic requiring modern mobile-first tools.
-  - **Solution:** Deployed Google Workspace Business Plus for 450 users. Migrated 2.8 TB email from Exchange and 4 TB files from Windows file servers. Implemented SAML SSO with Okta and DLP policies for client data protection.
-  - **Results:** $170K annual savings eliminating Exchange servers and file server hardware. 10x improvement in document collaboration (10+ users editing simultaneously vs. email attachments). 95% user adoption within 60 days with 4.8/5 satisfaction score. Full ROI achieved in 18 months.
+  - **Solution:** Deployed Google Workspace Business Plus with SAML SSO and DLP policies for 450 users.
+  - **Results:** $170K annual savings eliminating Exchange servers. 10x improvement in collaboration. 95% adoption within 60 days. Full ROI in 18 months.
   - **Testimonial:** "Google Workspace transformed how our consultants collaborate. Real-time document editing eliminated version control nightmares, and Meet replaced expensive video conferencing subscriptions. Our IT team went from managing servers to enabling business value." — **Jennifer Rodriguez**, CTO
 
 ---
@@ -188,7 +188,9 @@ This engagement is sized based on the following parameters:
 | Cost Category | Year 1 List | Year 1 Credits | Year 1 Net | Year 2 | Year 3 | 3-Year Total |
 |---------------|-------------|----------------|------------|--------|--------|--------------|
 | Professional Services | $38,400 | ($3,000) | $35,400 | $0 | $0 | $35,400 |
+| Cloud Infrastructure | $0 | $0 | $0 | $0 | $0 | $0 |
 | Software Licenses | $115,200 | ($10,000) | $105,200 | $115,200 | $115,200 | $335,600 |
+| Support & Maintenance | $0 | $0 | $0 | $0 | $0 | $0 |
 | **TOTAL** | **$153,600** | **($13,000)** | **$140,600** | **$115,200** | **$115,200** | **$371,000** |
 <!-- END COST_SUMMARY_TABLE -->
 
