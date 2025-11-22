@@ -1,58 +1,37 @@
-# Architecture Diagrams - Azure Enterprise Landing Zone
+# Azure Enterprise Landing Zone - Architecture Diagram
 
-## Files in this Directory
+## Overview
+Architecture diagram showing Azure Enterprise Landing Zone implementation with management groups, hub-spoke networking, and governance framework.
 
-- `architecture-diagram.png` - Generated architecture diagram (embedded in presentations/documents)
-- `generate_diagram.py` - Python script to generate diagram using diagrams library
-- `architecture-diagram.drawio` - Editable Draw.io source with Azure icons
-- `DIAGRAM_REQUIREMENTS.md` - Architecture requirements and component details
-- `README.md` - This file
+## Key Components
 
-## Generating the Diagram
+### Management Structure
+1. **Management Groups** - Hierarchical organization (Root → Platform → Landing Zones)
+2. **Subscriptions** - Management, Connectivity, Identity, and Workload subscriptions
+3. **Azure Policy** - Centralized governance and compliance enforcement
 
-### Using Python Script
+### Network Architecture  
+4. **Hub VNet** - Central connectivity with Azure Firewall, VPN/ExpressRoute Gateway, Bastion
+5. **Spoke VNets** - Workload networks with VNet peering to Hub
+6. **Hybrid Connectivity** - ExpressRoute or Site-to-Site VPN to on-premises
 
-```bash
-# Install required library
-pip install diagrams
+### Security & Monitoring
+7. **Microsoft Entra ID** - Identity and access management with Conditional Access
+8. **Defender for Cloud** - Security posture management and workload protection
+9. **Azure Monitor** - Centralized logging and monitoring across all subscriptions
 
-# Generate diagram
-python3 generate_diagram.py
+## Processing Flow
+```
+1. Management Groups hierarchy defines organization structure
+2. Azure Policy applied at management group level cascades to subscriptions
+3. Hub VNet provides centralized connectivity and security (Firewall)
+4. Spoke VNets host workloads with private connectivity through Hub
+5. On-premises connects via ExpressRoute or VPN to Hub
+6. All traffic routed through Azure Firewall for inspection
+7. Azure Monitor collects logs from all resources
+8. Defender for Cloud provides security recommendations
 ```
 
-This will create `architecture-diagram.png` showing the complete Azure Enterprise Landing Zone architecture with management groups, hub-spoke networking, and security controls.
-
-### Using Draw.io
-
-1. Open `architecture-diagram.drawio` in Draw.io (https://app.diagrams.net)
-2. The diagram includes Azure-specific icons and proper hierarchical grouping
-3. Modify as needed for your specific requirements
-4. Export as PNG: File → Export as → PNG
-5. Save as `architecture-diagram.png` in this directory
-
-## Updating the Diagram
-
-When updating the architecture:
-
-1. **For minor changes:** Edit `architecture-diagram.drawio` and export PNG
-2. **For major changes:** Update `generate_diagram.py` to reflect new architecture, then regenerate
-3. **Always update:** `DIAGRAM_REQUIREMENTS.md` to document architectural changes
-4. **Regenerate documents:** After updating PNG, regenerate presentation and SOW documents
-
-## Architecture Overview
-
-The diagram illustrates:
-- **Management Groups**: Hierarchical structure (Platform, Landing Zones, Sandboxes, Decommissioned) for governance
-- **Hub-Spoke Networking**: Azure Virtual WAN with Azure Firewall and ExpressRoute for hybrid connectivity
-- **Security Controls**: Azure Sentinel, Microsoft Defender for Cloud, Azure Policy for threat protection
-- **Identity & Access**: Azure AD with Conditional Access, PIM, and RBAC for zero-trust security
-- **Subscription Vending**: Automated provisioning with pre-configured policies and network integration
-- **Monitoring**: Centralized logging with Log Analytics Workspace and Azure Monitor
-
-## Customization Notes
-
-- Replace placeholder CIDR ranges with actual network design (Hub: 10.0.0.0/22, Spokes: 10.1.0.0/16)
-- Update management group names to match organizational structure
-- Adjust Azure service tiers based on actual sizing (e.g., Firewall Premium vs. Standard)
-- Add additional spoke VNets for specific application landing zones
-- Include custom Azure Policy assignments for organizational compliance requirements
+## References
+- **Diagram Requirements**: See `DIAGRAM_REQUIREMENTS.md`
+- **Azure CAF**: https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/

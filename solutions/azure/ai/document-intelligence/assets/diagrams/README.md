@@ -1,58 +1,170 @@
-# Architecture Diagrams - Azure AI Document Intelligence
+# Azure Document Intelligence - Architecture Diagram
 
-## Files in this Directory
+## Overview
+This directory contains the architecture diagram for the Azure Document Intelligence solution using **official Azure Architecture Icons**.
 
-- `architecture-diagram.png` - Generated architecture diagram (embedded in presentations/documents)
-- `generate_diagram.py` - Python script to generate diagram using diagrams library
-- `architecture-diagram.drawio` - Editable Draw.io source with Azure icons
-- `DIAGRAM_REQUIREMENTS.md` - Architecture requirements and component details
-- `README.md` - This file
+## Files
+- **`architecture-diagram.drawio`** - Editable diagram source (Draw.io format)
+- **`architecture-diagram.png`** - Published diagram image (300 DPI)
+- **`DIAGRAM_REQUIREMENTS.md`** - Detailed component specifications
+- **`README.md`** - This file
 
-## Generating the Diagram
+## Quick Start: Editing the Diagram
 
-### Using Python Script
+### Prerequisites
+- Download Draw.io Desktop: https://github.com/jgraph/drawio-desktop/releases
+- Or use online: https://app.diagrams.net
 
+### Steps
+
+#### 1. Open the Diagram
 ```bash
-# Install required library
-pip install diagrams
+# Open in Draw.io Desktop
+drawio architecture-diagram.drawio
 
-# Generate diagram
-python3 generate_diagram.py
+# Or double-click the file if Draw.io is installed
 ```
 
-This will create `architecture-diagram.png` showing the complete Azure AI Document Intelligence architecture.
+#### 2. Enable Azure Icons
+1. In Draw.io, click **"More Shapes..."** in the left sidebar
+2. Scroll to find **"Azure"** section
+3. Check **"Azure (2023)"** or latest Azure icons
+4. Click **"Apply"**
 
-### Using Draw.io
+Alternatively:
+- Download Azure icons: https://learn.microsoft.com/en-us/azure/architecture/icons/
+- Import into Draw.io: File > Open Library > Select downloaded SVG files
 
-1. Open `architecture-diagram.drawio` in Draw.io (https://app.diagrams.net)
-2. The diagram includes Azure-specific icons and proper grouping
-3. Modify as needed for your specific requirements
-4. Export as PNG: File → Export as → PNG
-5. Save as `architecture-diagram.png` in this directory
+#### 3. Edit the Diagram
+The diagram contains placeholder shapes. Replace with official Azure icons:
 
-## Updating the Diagram
+**For Each Azure Service:**
+1. Find the Azure service icon in the left sidebar (e.g., "Azure Functions", "Blob Storage")
+2. Drag the icon onto the canvas
+3. Position it to replace the placeholder shape
+4. Delete the old placeholder
+5. Add service name label below
 
-When updating the architecture:
+**Key Azure Services to Replace:**
+- 📦 **Azure Blob Storage** → Use "Storage Accounts" icon (green)
+- ⚡ **Azure Functions** → Use "Function Apps" icon (blue)
+- 🤖 **Document Intelligence** → Use "Form Recognizer" icon (purple)
+- 🗄️ **Azure Cosmos DB** → Use "Cosmos DB" icon (orange)
+- 🔌 **API Management** → Use "API Management services" icon (red)
+- 📨 **Service Bus** → Use "Service Bus" icon (red)
+- 🔑 **Key Vault** → Use "Key Vaults" icon (red)
 
-1. **For minor changes:** Edit `architecture-diagram.drawio` and export PNG
-2. **For major changes:** Update `generate_diagram.py` to reflect new architecture, then regenerate
-3. **Always update:** `DIAGRAM_REQUIREMENTS.md` to document architectural changes
-4. **Regenerate documents:** After updating PNG, regenerate presentation and SOW documents
+#### 4. Update Connections
+1. Use **Connector** tool (press 'C')
+2. Draw arrows between services to show data flow
+3. Label each arrow (e.g., "Document uploaded", "Extract text")
+4. Use different line styles:
+   - **Solid**: Synchronous calls
+   - **Dashed**: Asynchronous/events
+   - **Bold**: Primary flow
 
-## Architecture Overview
+#### 5. Export to PNG
+1. Select all (Ctrl+A / Cmd+A)
+2. **File > Export as > PNG**
+3. Settings:
+   - Resolution: **300 DPI**
+   - Border width: **10px**
+   - Transparent background: Optional
+4. Save as: `architecture-diagram.png`
 
-The diagram illustrates:
-- **Document Ingestion**: Azure Blob Storage with Event Grid triggers
-- **AI Processing**: Azure AI Document Intelligence and Cognitive Services
-- **Orchestration**: Azure Functions and Logic Apps
-- **Data Storage**: Azure Cosmos DB for extracted data
-- **Integration**: Azure API Management for external systems
-- **Security**: Private endpoints, managed identities, Key Vault
-- **Monitoring**: Azure Monitor and Application Insights
+#### 6. Regenerate Documents
+After updating the diagram, regenerate Office documents:
+```bash
+cd /mnt/c/projects/wsl/eof-tools/converters/presales/scripts
+python3 solution-presales-converter.py \
+  --path /mnt/c/projects/wsl/solutions/solutions/azure/ai/document-intelligence \
+  --force
+```
 
-## Customization Notes
+## Azure Architecture Best Practices
 
-- Replace placeholder values with actual Azure resource names
-- Update subnet CIDR ranges to match client network design
-- Adjust Azure service tiers based on actual sizing (e.g., Functions Premium vs. Consumption)
-- Add additional integrations as needed (e.g., PowerBI, SharePoint, Dynamics)
+### Layout Recommendations
+- **Left to Right**: Show data flow from ingestion → processing → storage
+- **Layered**: Group related services in visual layers
+- **Clear Labels**: Include service names and brief descriptions
+
+### Color Coding (Azure Standard)
+- 🔵 **Blue**: Compute (Functions, Logic Apps)
+- 🟢 **Green**: Storage (Blob Storage)
+- 🟠 **Orange**: Database (Cosmos DB)
+- 🟣 **Purple**: AI/ML (Document Intelligence, Text Analytics)
+- 🔴 **Red**: Integration (API Management, Service Bus)
+- ⚫ **Gray**: Infrastructure (Monitor, Key Vault)
+
+### Data Flow Types
+- **Solid arrow** →  Synchronous API call
+- **Dashed arrow** ⤍  Asynchronous message
+- **Dotted arrow** ⋯→ Event trigger
+- **Bold arrow** ➜  Primary data path
+
+## Key Components
+
+### Document Ingestion
+1. **Blob Storage (Input)** - Documents uploaded via API or direct upload
+2. **Event trigger** - Blob creation triggers Azure Function
+
+### Processing
+3. **Azure Functions** - Orchestrates the document processing workflow
+4. **Document Intelligence** - Extracts text, forms, and tables from documents
+5. **Text Analytics** - Performs entity recognition and NLP analysis
+
+### Data Storage
+6. **Cosmos DB** - Stores metadata and extraction results (fast queries)
+7. **Blob Storage (Output)** - Archives processed documents and JSON results
+
+### API Access
+8. **API Management** - Exposes REST APIs for document submission and results
+9. **Service Bus** - Handles asynchronous processing queues
+
+### Operations
+10. **Monitor** - Logging, metrics, and alerting
+11. **Key Vault** - Manages secrets and API keys securely
+
+## Processing Flow
+
+```
+1. User uploads document → Blob Storage (Input Container)
+2. Blob event triggers → Azure Function
+3. Function calls → Document Intelligence API
+4. Document Intelligence extracts → Text, forms, tables
+5. Function calls → Text Analytics (optional NLP)
+6. Results stored → Cosmos DB (metadata) + Blob Storage (JSON)
+7. API Management exposes → Results via REST API
+8. Event Grid publishes → Completion notification
+```
+
+## Detailed Requirements
+See `DIAGRAM_REQUIREMENTS.md` for:
+- Complete component list
+- Azure service specifications
+- Icon reference table
+- Advanced layout guidelines
+
+## Troubleshooting
+
+### Can't find Azure icons in Draw.io
+- Click "More Shapes..." → Search for "Azure"
+- Check "Azure (2023)" → Apply
+- Restart Draw.io if icons don't appear
+
+### Export quality is poor
+- Use **300 DPI** setting in PNG export
+- Export as PNG (not JPEG)
+- Ensure canvas size is adequate (1920x1080 minimum)
+
+### Diagram doesn't update in documents
+```bash
+# Force regenerate all documents
+python3 solution-presales-converter.py --path /path/to/solution --force
+```
+
+## References
+- **Azure Architecture Icons**: https://learn.microsoft.com/en-us/azure/architecture/icons/
+- **Azure Architecture Center**: https://learn.microsoft.com/en-us/azure/architecture/
+- **Draw.io Documentation**: https://www.diagrams.net/doc/
+- **Document Intelligence Docs**: https://learn.microsoft.com/en-us/azure/ai-services/document-intelligence/

@@ -1,62 +1,83 @@
-# Architecture Diagram Requirements - Azure AI Document Intelligence
+# Azure Document Intelligence - Architecture Diagram Requirements
 
-## Solution Overview
-This solution automates document processing using Azure AI Document Intelligence (Form Recognizer) and Azure Cognitive Services. Documents are uploaded to Azure Blob Storage, triggering serverless processing through Azure Functions and Logic Apps. Extracted data is validated and stored in Cosmos DB, with REST APIs enabling integration with existing business systems.
+## Overview
+This document specifies the components and layout for the Azure Document Intelligence solution architecture diagram.
 
-## Architecture Components
+## Required Components
 
-### Azure AI/ML Services Required
-- **Azure AI Document Intelligence (Form Recognizer)**: OCR and intelligent form/table extraction
-- **Azure Cognitive Services - Text Analytics**: NLP entity recognition and document classification
-- **Azure Cognitive Services - Custom Vision** (optional): Document type classification
+### 1. Document Ingestion Layer
+- **Azure Blob Storage (Input Container)**
+  - Raw document storage
+  - Supported formats: PDF, JPEG, PNG, TIFF
+  - Event triggers for processing workflow
+  - Hot tier for active documents
 
-### Compute & Orchestration
-- **Azure Functions**: Serverless processing logic (Premium or Consumption plan)
-- **Azure Logic Apps**: Workflow orchestration and business process automation
-- **Azure API Management**: REST API gateway for system integrations
+### 2. Document Processing Layer
+- **Azure Functions (Orchestration)**
+  - Document workflow orchestration
+  - Event-driven processing (Blob triggers)
+  - Error handling and retries
+  - Premium plan for VNet integration
 
-### Data Storage
-- **Azure Blob Storage**: Document ingestion and archival (Hot/Cool tiers)
-- **Azure Cosmos DB**: NoSQL database for metadata and extracted data (serverless)
-- **Azure Cache for Redis**: Caching layer for performance optimization
+- **Azure Document Intelligence (Form Recognizer)**
+  - Layout API for OCR and structure extraction
+  - Prebuilt models for invoices, receipts, ID documents
+  - Custom models for specialized documents
+  - Form and table extraction
 
-### Integration & Messaging
-- **Azure Event Grid**: Event-driven triggers for document uploads
-- **Azure Service Bus**: Message queue for reliable processing
-- **Azure API Management**: External API gateway with security policies
+- **Azure Text Analytics / Language Service**
+  - Entity recognition (people, organizations, locations)
+  - Key phrase extraction
+  - Language detection
 
-### Security & Monitoring
-- **Azure Key Vault**: Secrets, keys, and certificate management
-- **Azure Monitor + Application Insights**: Monitoring, logging, and alerting
-- **Azure AD**: Identity and access management
-- **Managed Identities**: Secure service-to-service authentication
+### 3. Data Layer
+- **Azure Cosmos DB**
+  - Document metadata storage
+  - Job tracking and status
+  - Extraction results index
+  - Serverless or provisioned throughput
 
-### Network Architecture
-- **Azure Virtual Network**: Network isolation with private endpoints
-- **Private Endpoints**: Secure connectivity to PaaS services
-- **NAT Gateway**: Outbound internet connectivity for Functions
-- **Network Security Groups**: Traffic filtering and segmentation
+- **Azure Blob Storage (Output Container)**
+  - Processed document archive
+  - Extracted data (JSON/CSV)
+  - Cool tier for archival
 
-### Key Features to Highlight
-1. **Serverless Architecture**: Auto-scaling, pay-per-use model with Azure Functions
-2. **AI-Powered Extraction**: 95%+ accuracy using Azure Document Intelligence
-3. **Secure by Design**: Private endpoints, managed identities, encryption at rest/transit
-4. **Event-Driven Processing**: Real-time document ingestion via Event Grid
-5. **API-First Integration**: RESTful APIs via Azure API Management
-6. **Enterprise Monitoring**: Complete observability with Azure Monitor
+### 4. API & Integration Layer
+- **Azure API Management**
+  - RESTful API endpoints
+  - Document submission endpoint
+  - Results retrieval endpoint
+  - Authentication and rate limiting
 
-## Diagram Generation
-- Primary tool: Python `diagrams` library with Azure icons
-- Alternative: Draw.io for manual editing with Azure stencils
-- Output format: PNG (for embedding in documents)
+- **Azure Service Bus**
+  - Asynchronous processing queue
+  - Dead-letter queue for failed items
 
-## Data Flow
-1. User uploads document → Azure Blob Storage (Hot tier)
-2. Event Grid triggers → Azure Function (document orchestrator)
-3. Azure Function calls → Azure AI Document Intelligence API
-4. Document Intelligence extracts → structured data (JSON)
-5. Azure Function validates → data quality checks
-6. Validated data stored → Azure Cosmos DB
-7. API Management exposes → REST API for business systems
-8. Logic Apps orchestrate → complex business workflows
-9. Azure Monitor tracks → all processing metrics and logs
+- **Azure Event Grid**
+  - Event-driven architecture
+  - Document processing events
+
+### 5. Monitoring & Operations
+- **Azure Monitor + Log Analytics**
+  - Centralized logging
+  - Custom metrics and dashboards
+
+- **Azure Key Vault**
+  - API keys and secrets
+  - Certificate management
+
+## Azure Icon Quick Reference
+
+| Component | Azure Service | Color |
+|-----------|--------------|-------|
+| Blob Storage | Storage Accounts | Green |
+| Functions | Function Apps | Blue |
+| Document Intelligence | Form Recognizer | Purple |
+| Cosmos DB | Cosmos DB | Orange |
+| API Management | API Management | Red |
+| Service Bus | Service Bus | Red |
+| Key Vault | Key Vaults | Red |
+
+## References
+- **Azure Architecture Icons**: https://learn.microsoft.com/en-us/azure/architecture/icons/
+- **Document Intelligence**: https://learn.microsoft.com/en-us/azure/ai-services/document-intelligence/
