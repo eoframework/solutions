@@ -76,8 +76,8 @@ This engagement is sized based on the following parameters:
 ![Architecture Diagram](assets/diagrams/architecture-diagram.png)
 
 - **Key Components**
-  - **Data Collection Layer:** Log connectors pulling security data from servers, applications, firewalls, and cloud services
-  - **Analytics Engine:** Microsoft Sentinel workspace with KQL queries analyzing millions of events in real-time
+  - **Data Collection Layer:** Log connectors from servers, applications, firewalls, and cloud services
+  - **Analytics Engine:** Sentinel workspace with KQL queries analyzing events in real-time
   - **Response Layer:** Automated playbooks and incident management with investigation tools
 - **Technology Stack**
   - Platform: Microsoft Azure with Sentinel (SIEM/SOAR)

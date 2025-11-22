@@ -78,7 +78,7 @@ This engagement is sized based on the following parameters:
 ![Architecture Diagram](assets/diagrams/architecture-diagram.png)
 
 - **Key Components**
-  - **Virtual WAN Hub:** Microsoft-managed regional network hub that connects branches, VNets, and Azure services
+  - **Virtual WAN Hub:** Microsoft-managed regional hub connecting branches, VNets, and Azure services
   - **Branch Connectivity:** SD-WAN integration, site-to-site VPN, or ExpressRoute for office connections
   - **Security Services:** Azure Firewall and routing policies applied consistently across all traffic
 - **Technology Stack**

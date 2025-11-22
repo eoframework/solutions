@@ -78,8 +78,8 @@ This engagement is sized based on the following parameters:
 ![Architecture Diagram](assets/diagrams/architecture-diagram.png)
 
 - **Key Components**
-  - **Host Pools & Session Hosts:** Pooled or personal desktop configurations with Windows 10/11 Multi-session VMs
-  - **FSLogix & Azure Files:** Profile containers with SMB storage for persistent user data and roaming
+  - **Host Pools & Session Hosts:** Pooled or personal desktops with Windows 10/11 Multi-session
+  - **FSLogix & Azure Files:** Profile containers with SMB storage for user data roaming
   - **Azure AD & Monitoring:** Enterprise identity with conditional access and real-time performance diagnostics
 - **Technology Stack**
   - Platform: Azure Virtual Desktop (AVD) with Windows 10/11 Multi-session hosts
