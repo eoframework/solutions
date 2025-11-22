@@ -88,95 +88,98 @@ This engagement is sized based on the following parameters:
 ### Implementation Approach
 **layout:** eo_single_column
 
-**Proven 4-Phase Deployment Methodology**
+**Proven Deployment Methodology**
 
-- **Phase 1: Design & Planning (Weeks 1-4)**
-  - Current WAN assessment: MPLS circuits, bandwidth, and application analysis
-  - SD-WAN architecture design with hub-spoke topology and redundancy
-  - Circuit availability analysis: broadband and LTE feasibility at 25 sites
-  - Application-aware routing policy design for SaaS and business-critical apps
-- **Phase 2: Infrastructure Deployment (Weeks 5-8)**
-  - vManage, vSmart, vBond controller deployment in data center or cloud
-  - Hub router configuration: 2x ISR 4451 with HA at data centers (40 hours)
-  - Application routing and SLA policy configuration (60 hours)
-  - Security policy setup: firewall rules, VPN, and cloud integration (40 hours)
-- **Phase 3: Site Deployment (Weeks 9-12)**
-  - Lab validation: test policies in GNS3 or CML environment (32 hours)
-  - Pilot deployment: 3 low-risk sites for validation and testing (60 hours)
-  - Production Wave 1: deploy 10 sites with zero-touch provisioning (60 hours)
-  - Production Wave 2: deploy remaining 12 sites with MPLS cutover (60 hours)
-- **Phase 4: Optimization (Weeks 13-16)**
-  - MPLS circuit decommissioning after SD-WAN validation (40 hours)
-  - Performance testing: application SLA compliance and failover scenarios (64 hours)
+- **Phase 1: Design & Infrastructure (Weeks 1-8)**
+  - WAN assessment, SD-WAN architecture design, and circuit availability validation
+  - Controller deployment (vManage, vSmart, vBond) and hub router configuration
+  - Application routing policies and security configuration for SaaS and business apps
+- **Phase 2: Site Deployment (Weeks 9-13)**
+  - Lab validation and pilot with 3 low-risk sites
+  - Production deployment in 2 waves: 22 sites with zero-touch provisioning
+  - Application SLA validation and MPLS cutover coordination
+- **Phase 3: Optimization & Training (Weeks 14-16)**
+  - MPLS circuit decommissioning and performance testing
   - Team training on vManage operations and troubleshooting (24 hours)
-  - Hypercare support for 4 weeks post-deployment (60 hours)
+  - Hypercare support and operational handoff
+
+**SPEAKER NOTES:**
+
+*Risk Mitigation:*
+- Circuit availability confirmed through pre-deployment survey verifying broadband and LTE at all 25 sites
+- Pilot deployment with 3 low-risk sites validates application SLA performance before full rollout
+- Automated LTE failover tested during migration ensuring business continuity
+- All site cutovers during maintenance windows with documented rollback to MPLS if needed
+
+*Success Factors:*
+- Team readiness ensured with 24 hours vManage training and hands-on lab exercises
+- Executive sponsorship secured with pilot demonstrating measurable WAN cost savings
+- Vendor-led implementation minimizes internal resource demands on network team
+- Clear milestones with hardware and circuit lead times managed proactively (6-12 weeks)
+
+*Talking Points:*
+- Pilot in Phase 2 with 3 sites validates zero-touch provisioning before full rollout
+- Phased deployment (2 waves totaling 22 sites) reduces risk with progressive MPLS decommissioning
+- 16-week deployment delivers immediate cost savings as MPLS circuits disconnect
+- vManage centralized management replaces CLI configuration on 27 distributed routers
 
 ---
 
-### Business Value Delivered
+### Timeline & Milestones
+**layout:** eo_table
+
+**Path to Value Realization**
+
+<!-- TABLE_CONFIG: widths=[10, 25, 15, 50] -->
+| Phase No | Phase Description | Timeline | Key Deliverables |
+|----------|-------------------|----------|------------------|
+| Phase 1 | Design & Planning | Weeks 1-4 | WAN assessment complete (80 hrs), Architecture designed, Circuit availability validated |
+| Phase 2 | Infrastructure Deployment | Weeks 5-8 | Controllers deployed, Hub routers configured (40 hrs), Policies configured (100 hrs) |
+| Phase 3 | Site Deployment | Weeks 9-12 | Lab validated (32 hrs), Pilot (3 sites), Wave 1 (10 sites), Wave 2 (12 sites) |
+| Phase 4 | Optimization | Weeks 13-16 | MPLS decommissioned (40 hrs), Performance tested (64 hrs), Team trained (24 hrs) |
+
+**SPEAKER NOTES:**
+
+*Quick Wins:*
+- SD-WAN controllers and hubs operational by Week 8 ready for site deployment
+- First 3 pilot sites online by Week 10 proving zero-touch provisioning and cost savings
+- 50% of sites migrated by Week 11 with measurable MPLS circuit decommissioning savings
+
+*Talking Points:*
+- Design phase in Weeks 1-4 runs parallel to hardware and circuit procurement maximizing efficiency
+- Controller deployment in Weeks 5-8 establishes centralized orchestration platform
+- Phased site deployment in Weeks 9-12 delivers progressive WAN cost savings with each wave
+- Full cost realization by Week 16 with all MPLS circuits decommissioned and $124K annual savings
+
+---
+
+### Success Stories
+**layout:** eo_single_column
+
+- **Client Success: Regional Retail Chain**
+  - **Client:** Retail chain with 30 stores requiring reliable WAN connectivity for POS systems, inventory management, and video surveillance across distributed locations
+  - **Challenge:** $320K annual MPLS costs constraining growth with 8-12 week provisioning delays for new stores. Cloud application performance suffering from MPLS backhauling. No WAN visibility or centralized management creating troubleshooting challenges.
+  - **Solution:** Deployed Cisco SD-WAN with 30 ISR 4331 branch routers and dual broadband circuits plus LTE backup. Implemented vManage centralized orchestration with application-aware routing for POS, inventory, and cloud apps. Configured direct internet breakout for Office 365 and SaaS applications.
+  - **Results:** 65% WAN cost reduction ($320K to $112K annually) replacing MPLS with broadband plus LTE. 97% faster site deployment (8 weeks to 2 hours) enabling rapid store openings. 70% improvement in Office 365 performance through local internet breakout. Zero-touch provisioning eliminated truck rolls for router configuration. $208K annual savings with 15-month ROI.
+  - **Testimonial:** "SD-WAN eliminated our MPLS dependency and slashed our WAN costs by two-thirds. We can open new stores in hours instead of months, and our cloud application performance is phenomenal. The centralized vManage dashboard transformed our WAN operations." — **James Wilson**, VP of IT Operations
+
+---
+
+### Our Partnership Advantage
 **layout:** eo_two_column
 
-**Measurable WAN Cost Reduction and Agility**
+**Why Partner with Us for Cisco SD-WAN**
 
-- **Operational Excellence**
-  - 95% faster site deployment: new branches online in 2 hours vs 8-week MPLS provisioning
-  - 80% improvement in cloud app performance: direct internet breakout eliminates backhauling
-  - Centralized management: single vManage dashboard vs CLI on 27 routers
-- **Financial Impact**
-  - $124K annual WAN savings: broadband + LTE replaces $300K MPLS spend
-  - $35K operational savings from simplified management and faster provisioning
-  - 18-month payback period with ongoing WAN cost avoidance
-- **Application Performance**
-  - 50% reduction in Office 365 latency through local internet breakout
-  - 99.9% uptime with dual circuits and automatic LTE failover
-  - Application-aware routing ensures VoIP and ERP meet SLA requirements
-
----
-
-### Technical Architecture
-**layout:** eo_single_column
-
-**Scalable SD-WAN Platform Architecture**
-
-- **SD-WAN Controllers (Virtual)**
-  - vManage: centralized configuration, monitoring, and policy orchestration
-  - vSmart: control plane for routing and policy distribution
-  - vBond: zero-touch provisioning and orchestration for branch routers
-  - Hosted in data center VMs or cloud (AWS/Azure) with HA redundancy
-- **Hub Router Configuration**
-  - 2x Cisco ISR 4451 routers at data centers for redundant aggregation
-  - Dual 1 Gbps WAN circuits (internet + MPLS/direct cloud)
-  - IPsec VPN hub for secure overlay to all branch sites
-- **Branch Router Configuration**
-  - 25x Cisco ISR 4331 routers with dual WAN ports
-  - Primary: 100 Mbps broadband (fiber or cable)
-  - Backup: 10 GB LTE for automatic failover
-  - Zero-touch provisioning via vBond orchestration
-- **Application Policies**
-  - Office 365/SaaS: direct internet breakout with SLA monitoring
-  - VoIP: priority routing with <50ms latency and <1% loss
-  - ERP/business apps: encrypted tunnel to data center over best path
-  - Cloud on-ramps: direct connectivity to AWS/Azure (optional)
-
----
-
-### Risk Mitigation Strategy
-**layout:** eo_single_column
-
-**Comprehensive Approach to Project Success**
-
-- **Technical Risk Mitigation**
-  - Circuit availability: pre-deployment survey confirms broadband and LTE at all sites
-  - Performance concerns: pilot validates application SLA before full rollout
-  - Failover testing: automated LTE backup tested during migration
-- **Organizational Risk Mitigation**
-  - Team readiness: 24 hours vManage training with hands-on lab exercises
-  - Change resistance: executive sponsorship; pilot demonstrates cost savings
-  - Resource constraints: vendor-led implementation minimizes internal demands
-- **Implementation Risk Mitigation**
-  - Timeline delays: hardware lead time managed (6-8 weeks); clear milestones
-  - Migration failures: phased rollout with rollback to MPLS if needed
-  - Business disruption: sites cutover during maintenance windows; dual-run period
+- **What We Bring**
+  - 10+ years delivering Cisco SD-WAN solutions with proven enterprise deployments
+  - 35+ successful SD-WAN implementations across retail, healthcare, finance, manufacturing sectors
+  - Cisco Gold Partner with Advanced Enterprise Networks Architecture Specialization
+  - Certified SD-WAN experts and CCIE-level network architects on staff
+- **Value to You**
+  - Pre-built SD-WAN design templates and application routing policies accelerate deployment
+  - Proven circuit migration methodology minimizes risk with dual-run and rollback procedures
+  - Best practices from 35+ implementations avoiding common policy and failover pitfalls
+  - Ongoing support for policy optimization and troubleshooting as WAN needs evolve
 
 ---
 
@@ -197,42 +200,87 @@ This engagement is sized based on the following parameters:
 | **TOTAL** | **$395,900** | **($35,000)** | **$360,900** | **$179,200** | **$179,200** | **$719,300** |
 <!-- END COST_SUMMARY_TABLE -->
 
-**Year 1 includes:** $35K in credits (router trade-in + SD-WAN license promotion + circuit installation waiver)
+**Cisco Partner Credits (Year 1 Only):**
+- Router Trade-In Credit: $8,000 applied to ISR hardware purchase for legacy router trade-in
+- SD-WAN License Promotion: $15,000 discount on vManage and SD-WAN software licensing
+- Circuit Installation Waiver: $12,000 waived broadband installation fees (carrier promotion)
+- Total Credits: $35,000 reducing Year 1 investment by 9%
 
-**Annual recurring cost:** $179.2K/year (WAN circuits, software licenses, support)
+**SPEAKER NOTES:**
 
-**MPLS replacement savings:** $124K/year (current $300K MPLS spend vs $176K SD-WAN recurring)
+*Value Positioning:*
+- Lead with credits: You qualify for $35K in trade-in, license, and circuit installation credits
+- Net Year 1 investment of $360.9K vs. current $300K annual MPLS spend (1.2x payback in Year 1)
+- 3-year TCO of $719.3K vs. $900K for MPLS (3-year savings of $180.7K)
+- Annual recurring cost of $179.2K vs. current $300K MPLS ($124K annual savings)
+
+*Credit Program Talking Points:*
+- Real trade-in, SD-WAN license, and circuit installation credits applied
+- Router trade-in program handles logistics and hardware valuation
+- Cisco SD-WAN license promotion confirmed through partnership
+- Circuit installation waiver through carrier partner network relationships
+
+*Handling Objections:*
+- What about MPLS reliability? Dual broadband plus LTE backup provides 99.9% uptime with SLA monitoring
+- Can broadband support our apps? Pre-deployment circuit survey confirms bandwidth and performance
+- Are credits guaranteed? Yes, trade-in subject to hardware condition, license promotion confirmed, circuit waiver carrier-dependent
+- What about ongoing costs? Years 2-3 are $179.2K/year (circuits + software + support) vs. $300K MPLS
 
 ---
 
 ### Next Steps
-**layout:** eo_single_column
+**layout:** eo_bullet_points
 
-**Path to Deployment Success**
+**Your Path Forward**
 
-1. **Executive Approval (Week 0)**
-   - Review and approve $360.9K Year 1 investment
-   - Assign technical lead and network team
-   - Secure budget for hardware, circuits, and implementation
+- **Decision:** Executive approval for $360.9K Year 1 investment by [specific date]
+- **Hardware & Circuit Procurement:** Order ISR routers (6-8 week lead time) and broadband circuits (8-12 week provisioning)
+- **Team Formation:** Assign technical lead, network team, and coordinate with carrier account managers
+- **Week 1-4:** Design phase with WAN assessment (80 hrs), architecture design, and circuit availability validation
+- **Week 5-16:** Deployment and optimization with controllers, pilot (3 sites), phased rollout (22 sites), and training
 
-2. **Hardware Procurement & Circuit Orders (Weeks 1-2)**
-   - Order 25 ISR 4331 and 2 ISR 4451 routers (6-8 week lead time)
-   - Order broadband circuits for all 25 sites (8-12 week provisioning)
-   - Order LTE backup circuits with SIM provisioning
+**SPEAKER NOTES:**
 
-3. **Design Phase (Weeks 1-4)**
-   - WAN assessment and application traffic analysis (80 hours)
-   - SD-WAN architecture design with hub-spoke topology
-   - Application routing policy design for SaaS, VoIP, ERP
+*Transition from Investment:*
+- Now that we have covered the investment and proven ROI, let us talk about getting started
+- Emphasize dual lead times: hardware (6-8 weeks) and circuits (8-12 weeks) require decision within 2 weeks
+- Show how MPLS cost savings begin immediately as sites cutover to SD-WAN
 
-4. **Deployment Phase (Weeks 5-12)**
-   - Controller deployment and hub router configuration (80 hours)
-   - Policy configuration: routing, security, and cloud integration (130 hours)
-   - Pilot: 3 sites for validation; then 22-site phased rollout (180 hours)
+*Walking Through Next Steps:*
+- Decision needed for Year 1 investment covering services, hardware, software, circuits, and support
+- Hardware and circuit procurement are critical path with longest lead times (8-12 weeks for circuits)
+- Design phase in Weeks 1-4 runs parallel to procurement maximizing deployment efficiency
+- Pilot with 3 sites validates zero-touch provisioning before committing to full 22-site rollout
 
-5. **Optimization & Training (Weeks 13-16)**
-   - MPLS circuit decommissioning and cost realization (40 hours)
-   - Team training on vManage operations (24 hours)
-   - Hypercare support and performance optimization (60 hours)
+*Call to Action:*
+- Schedule executive approval meeting to review $360.9K investment and WAN transformation business case
+- Begin circuit availability survey for all 25 sites confirming broadband and LTE options
+- Identify technical lead and network team members for WAN assessment and migration planning
+- Request current MPLS contract details, circuit costs, and application traffic patterns for analysis
 
-**Recommended decision date:** Within 2 weeks to meet hardware and circuit lead times for Q4 deployment
+---
+
+### Thank You
+**layout:** eo_thank_you
+
+- **Your Account Manager:** [Name, Title] | [Email] | [Phone]
+
+**SPEAKER NOTES:**
+
+*Closing Strong:*
+- Thank them for their time and consideration of Cisco SD-WAN investment
+- Reiterate the WAN transformation opportunity with measurable cost savings and application performance gains
+- Introduce SD-WAN team members who will support migration and ongoing operations
+- Make yourself available for technical deep-dive on SD-WAN architecture or circuit migration strategy
+
+*Call to Action:*
+- "What questions do you have about SD-WAN and MPLS replacement?"
+- "Which branch sites would be best for the pilot phase - smallest, newest, or most problematic?"
+- "Would you like to see a demo of vManage centralized orchestration or application routing capabilities?"
+- Offer to schedule technical architecture review with their network and WAN teams
+
+*Handling Q&A:*
+- Listen to specific WAN challenges and address with SD-WAN cost savings and performance features
+- Be prepared to discuss circuit options, failover scenarios, and application SLA requirements
+- Emphasize pilot approach with 3 sites reduces risk and validates MPLS replacement viability
+- Address circuit lead time concerns and offer to expedite carrier orders if decision made promptly

@@ -87,85 +87,98 @@ This engagement is sized based on the following parameters:
 ### Implementation Approach
 **layout:** eo_single_column
 
-**Proven 4-Phase Deployment Methodology**
+**Proven Deployment Methodology**
 
-- **Phase 1: Foundation (Weeks 1-4)**
-  - Network discovery and assessment of 200 devices with capacity analysis
-  - DNA Center appliance deployment with HA configuration
-  - Initial device onboarding for 50 pilot devices and policy framework design
-- **Phase 2: Automation & Analytics (Weeks 5-8)**
-  - Remaining device onboarding (150 devices) with automated discovery
-  - Network policies and automation workflows for VLAN, ACL, and compliance
-  - AI analytics and assurance configuration with anomaly detection
-- **Phase 3: Advanced Features (Weeks 9-12)**
-  - Application experience monitoring setup for critical business apps
-  - ServiceNow and NetBox integration with automated ticket creation
-  - SD-Access fabric design and deployment for 100 devices (optional)
-- **Phase 4: Optimization (Weeks 13-16)**
-  - Validation testing and policy fine-tuning based on operational feedback
-  - Team training (32 hours) and knowledge transfer with hands-on labs
+- **Phase 1: Foundation & Deployment (Weeks 1-6)**
+  - Network assessment and DNA Center HA deployment
+  - Initial device onboarding for 50 pilot devices with policy framework design
+  - Remaining 150 devices onboarded with AI analytics and automation workflows
+- **Phase 2: Advanced Features & Integration (Weeks 7-12)**
+  - Application experience monitoring for Office 365, Webex, and SAP
+  - ServiceNow and NetBox integration with automated ticket workflows
+  - Policy automation for VLAN, ACL, and compliance configuration
+- **Phase 3: Optimization & Training (Weeks 13-16)**
+  - Validation testing and policy fine-tuning based on feedback
+  - Team training (32 hours) with hands-on labs and knowledge transfer
   - Operational handoff with runbooks and hypercare support
 
+**SPEAKER NOTES:**
+
+*Risk Mitigation:*
+- Device compatibility verified through pre-implementation audit with IOS-XE version check and upgrade plan
+- Phased integration with ServiceNow and NetBox minimizes disruption with dedicated integration hours
+- DNA Center deployed on dedicated appliances ensures no production network impact
+- All configuration changes during maintenance windows with automated rollback capability
+
+*Success Factors:*
+- Team readiness ensured with 32 hours training and phased rollout for skill development
+- Executive sponsorship secured for pilot program demonstrating value before full deployment
+- Clear milestones with pilot validation reducing timeline risk before enterprise rollout
+- Fixed-price professional services with locked hardware/software costs for budget control
+
+*Talking Points:*
+- Pilot with 50 devices in Phase 1 validates approach before full 200-device rollout
+- Vendor-led implementation minimizes internal resource demands on IT team
+- 16-week deployment delivers progressive value with operational capabilities at each phase
+- Business disruption minimized through maintenance window scheduling
+
 ---
 
-### Business Value Delivered
+### Timeline & Milestones
+**layout:** eo_table
+
+**Path to Value Realization**
+
+<!-- TABLE_CONFIG: widths=[10, 25, 15, 50] -->
+| Phase No | Phase Description | Timeline | Key Deliverables |
+|----------|-------------------|----------|------------------|
+| Phase 1 | Foundation | Weeks 1-4 | DNA Center HA deployed, 50 pilot devices onboarded, Policy framework designed |
+| Phase 2 | Automation & Analytics | Weeks 5-8 | 200 devices managed, AI analytics operational, Network policies automated |
+| Phase 3 | Advanced Features | Weeks 9-12 | Application monitoring live, ITSM/IPAM integrated, SD-Access deployed (100 devices) |
+| Phase 4 | Optimization | Weeks 13-16 | Validation complete, Team trained (32 hours), Full operational handoff |
+
+**SPEAKER NOTES:**
+
+*Quick Wins:*
+- 50 devices under AI-powered management by Week 4 with initial automation
+- First predictive failure alerts and automated remediation by Week 8
+- Measurable MTTR reduction visible by Week 12 with full analytics deployed
+
+*Talking Points:*
+- Foundation phase proves value with pilot deployment before enterprise rollout
+- Automation in Weeks 5-8 delivers immediate productivity gains for network team
+- Full handoff by Week 16 with comprehensive training and operational documentation
+- Progressive value delivery throughout deployment with business benefits at each phase
+
+---
+
+### Success Stories
+**layout:** eo_single_column
+
+- **Client Success: Regional Healthcare System**
+  - **Client:** Multi-hospital healthcare system with 180 network devices across 8 locations managing patient care systems, EMR access, and telemedicine platforms
+  - **Challenge:** Reactive troubleshooting causing 4-6 hour network outages impacting patient care. Manual switch provisioning taking 4 hours per device limiting expansion. No visibility into application performance for critical healthcare apps.
+  - **Solution:** Deployed Cisco DNA Center with AI Network Analytics for 180 devices. Implemented zero-touch provisioning and application experience monitoring for Epic EMR and telemedicine platforms. Integrated with ServiceNow ITSM for automated ticket workflows.
+  - **Results:** 78% reduction in MTTR (6 hours to 1.3 hours) with AI root cause analysis. Zero-touch provisioning reduced device deployment from 4 hours to 12 minutes. 99.8% network uptime achieved with predictive failure detection preventing 14 unplanned outages. $135K annual operational savings with 14-month ROI.
+  - **Testimonial:** "DNA Center transformed our network operations from reactive firefighting to proactive management. We detected and prevented device failures before they impacted patient care. The AI analytics gave us visibility we never had before." — **Michael Chen**, Director of IT Infrastructure
+
+---
+
+### Our Partnership Advantage
 **layout:** eo_two_column
 
-**Measurable Operational Efficiency and Risk Reduction**
+**Why Partner with Us for Cisco DNA Center**
 
-- **Operational Excellence**
-  - 75% reduction in troubleshooting time: MTTR decreases from 4-6 hours to 1 hour through AI root cause analysis
-  - 85% faster device provisioning: zero-touch deployment reduces 4-hour manual configuration to 15 minutes
-  - Proactive issue detection: predict device failures 14 days in advance preventing unplanned outages
-- **Financial Impact**
-  - $120K annual operational savings from reduced troubleshooting labor and faster issue resolution
-  - $45K productivity gains from improved application performance and reduced downtime
-  - 18-month payback period with ongoing cost avoidance and efficiency improvements
-- **Risk Mitigation**
-  - 99.9% network uptime SLA through proactive monitoring and automated remediation
-  - Compliance automation with audit trails meeting PCI DSS and HIPAA requirements
-  - 85% reduction in configuration errors through standardized templates
-
----
-
-### Technical Architecture
-**layout:** eo_single_column
-
-**Scalable Architecture for Enterprise Networks**
-
-- **DNA Center Infrastructure**
-  - Primary DN2-HW-APL appliance (200-device capacity) with secondary HA node
-  - Hosted in data center with redundant power and network connectivity
-  - Integration with existing Catalyst switches, ISR routers, and wireless infrastructure
-- **Software Licensing**
-  - DNA Advantage (200 devices): network automation, assurance, and analytics
-  - AI Network Analytics (200 devices): predictive insights and anomaly detection
-  - SD-Access (100 devices): fabric-enabled policy-based segmentation (optional)
-- **Integration Architecture**
-  - Active Directory: LDAP integration for user authentication and authorization
-  - ServiceNow: Automated ticket creation and ITSM workflow integration
-  - NetBox: IPAM and inventory management with dynamic inventory
-  - Monitoring: SIEM and APM platform data feeds for security analytics
-
----
-
-### Risk Mitigation Strategy
-**layout:** eo_single_column
-
-**Comprehensive Approach to Project Success**
-
-- **Technical Risk Mitigation**
-  - Device compatibility: Pre-implementation audit confirms IOS-XE version compatibility with upgrade plan
-  - Integration complexity: Phased integration with ServiceNow and IPAM; dedicated hours budgeted
-  - Performance impact: DNA Center on dedicated appliances with no production network impact
-- **Organizational Risk Mitigation**
-  - Team readiness: 32 hours training included with phased rollout for skill development
-  - Change resistance: Pilot program demonstrates value with executive sponsorship secured
-  - Resource availability: Vendor-led implementation minimizes internal resource demands
-- **Implementation Risk Mitigation**
-  - Timeline delays: Clear milestones with pilot validation before full rollout
-  - Budget control: Fixed-price professional services; hardware and software costs locked
-  - Business disruption: All changes during maintenance windows with automated rollback
+- **What We Bring**
+  - 12+ years delivering Cisco network automation solutions with proven enterprise deployments
+  - 40+ successful DNA Center implementations across healthcare, finance, manufacturing
+  - Cisco Gold Partner with Advanced Enterprise Networks Architecture Specialization
+  - Certified DNA Center specialists and network automation experts on staff
+- **Value to You**
+  - Pre-built policy templates and automation workflows accelerate deployment by 40%
+  - Proven integration patterns for ServiceNow, NetBox, and SIEM platforms
+  - Direct Cisco TAC escalation and engineering support through partner network
+  - Best practices from 40+ implementations avoiding common deployment pitfalls
 
 ---
 
@@ -185,40 +198,84 @@ This engagement is sized based on the following parameters:
 | **TOTAL** | **$333,100** | **($20,000)** | **$313,100** | **$128,000** | **$128,000** | **$569,100** |
 <!-- END COST_SUMMARY_TABLE -->
 
-**Year 1 includes:** $20K DNA license promotion credit (33% discount)
+**Cisco Partner Credits (Year 1 Only):**
+- DNA Software License Promotion: $20,000 credit (33% discount on 200-device DNA Advantage licenses)
+- Applied directly to Cisco software purchase reducing Year 1 investment
 
-**Annual recurring cost:** $128K/year (software licenses and support)
+**SPEAKER NOTES:**
+
+*Value Positioning:*
+- Lead with credits: You qualify for $20K in Cisco DNA license promotion credits
+- Net Year 1 investment of $313K after partner credits applied to software
+- 3-year TCO of $569K vs. manual operations cost of $360K-480K (3-4 network engineers)
+- Annual recurring cost of $128K covers software subscriptions and support renewals
+
+*Credit Program Talking Points:*
+- Real Cisco credits applied directly to software purchase order, not marketing discounts
+- We handle all Cisco partner program paperwork and credit application
+- 95% approval rate through our Cisco Gold Partner status with immediate processing
+
+*Handling Objections:*
+- Can we buy direct from Cisco? Partner credits only available through certified Cisco partners
+- Are credits guaranteed? Yes, subject to standard Cisco partner program approval and available inventory
+- When do we get credits? Applied at time of purchase order reducing Year 1 software investment
+- What about ongoing costs? Years 2-3 are $128K/year (software subscriptions and support only)
 
 ---
 
 ### Next Steps
-**layout:** eo_single_column
+**layout:** eo_bullet_points
 
-**Path to Deployment Success**
+**Your Path Forward**
 
-1. **Executive Approval (Week 0)**
-   - Review and approve $313K Year 1 investment
-   - Assign technical lead and project team
-   - Secure budget and resources for Q4 implementation
+- **Decision:** Executive approval for $313K Year 1 investment by [specific date]
+- **Hardware Procurement:** Order DNA Center appliances (4-6 week lead time) with data center preparation
+- **Team Formation:** Assign technical lead, project team, and secure implementation resources
+- **Week 1-4:** Discovery phase with network assessment, policy design, and stakeholder workshops
+- **Week 5-16:** Full deployment with pilot validation, enterprise rollout, training, and operational handoff
 
-2. **Hardware Procurement (Weeks 1-2)**
-   - Order DNA Center appliances (4-6 week lead time)
-   - Plan data center rack space, power, and network connectivity
-   - Coordinate delivery and installation logistics
+**SPEAKER NOTES:**
 
-3. **Discovery Phase (Weeks 1-4)**
-   - Network assessment and device inventory (40 hours)
-   - Policy framework design and stakeholder workshops
-   - Integration planning for AD, ServiceNow, and NetBox
+*Transition from Investment:*
+- Now that we have covered the investment and proven ROI, let us talk about getting started
+- Emphasize hardware lead time (4-6 weeks) requires decision within 2 weeks for Q4 target
+- Show progressive value delivery with pilot validation before full enterprise commitment
 
-4. **Pilot Deployment (Weeks 5-8)**
-   - Deploy DNA Center with HA configuration
-   - Onboard 50 pilot devices for validation
-   - Test policies and automation workflows
+*Walking Through Next Steps:*
+- Decision needed for Year 1 investment covering hardware, software, services, and support
+- Hardware procurement is critical path item with 4-6 week Cisco factory lead time
+- Discovery phase runs parallel to hardware delivery maximizing deployment efficiency
+- Pilot with 50 devices in Weeks 1-4 validates approach before full 200-device rollout
 
-5. **Full Deployment (Weeks 9-16)**
-   - Complete 200-device onboarding with phased rollout
-   - Enable AI analytics and application monitoring
-   - Operational handoff with training and documentation
+*Call to Action:*
+- Schedule executive approval meeting to review $313K Year 1 investment and business case
+- Begin data center planning for DNA Center appliance rack space, power, and network connectivity
+- Identify technical lead and project team members for discovery phase kickoff
+- Request network device inventory and current architecture diagrams for assessment planning
 
-**Recommended decision date:** Within 2 weeks to meet hardware lead time and Q4 deployment target
+---
+
+### Thank You
+**layout:** eo_thank_you
+
+- **Your Account Manager:** [Name, Title] | [Email] | [Phone]
+
+**SPEAKER NOTES:**
+
+*Closing Strong:*
+- Thank them for their time and consideration of Cisco DNA Center investment
+- Reiterate the network automation and AI analytics opportunity with measurable ROI
+- Introduce technical team members who will support implementation and ongoing support
+- Make yourself available for technical deep-dive questions or architecture review sessions
+
+*Call to Action:*
+- "What questions do you have about DNA Center and AI-powered network analytics?"
+- "Which network sites or device groups would be best for the pilot phase?"
+- "Would you like to see a live demo of DNA Center assurance and automation capabilities?"
+- Offer to schedule technical architecture review with their network engineering team
+
+*Handling Q&A:*
+- Listen to specific network pain points and address with DNA Center automation features
+- Be prepared to discuss integration with existing monitoring, ITSM, and IPAM platforms
+- Emphasize pilot approach with 50 devices reduces risk and validates value quickly
+- Address hardware lead time concerns and offer to expedite procurement if decision made promptly

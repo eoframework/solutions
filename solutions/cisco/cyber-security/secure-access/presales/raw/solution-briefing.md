@@ -88,90 +88,98 @@ This engagement is sized based on the following parameters:
 ### Implementation Approach
 **layout:** eo_single_column
 
-**Proven 4-Phase Deployment Methodology**
+**Proven Deployment Methodology**
 
-- **Phase 1: Foundation (Weeks 1-4)**
-  - Network assessment for 802.1X readiness and switch/WLC compatibility
-  - ISE appliance deployment with primary and secondary HA configuration
-  - Active Directory integration with LDAP and identity source setup
-- **Phase 2: Policy Development (Weeks 5-8)**
-  - Authentication and authorization policy framework design
-  - 802.1X wired and wireless configuration with fallback MAB
-  - BYOD self-service portal configuration for iOS and Android
-  - Guest portal setup with sponsor workflow and approval process
-- **Phase 3: TrustSec & Integration (Weeks 9-12)**
-  - TrustSec security group tag (SGT) design and matrix configuration
-  - Network infrastructure integration: switches and WLCs configured for 802.1X
-  - Lab validation with end-to-end authentication testing
-- **Phase 4: Deployment (Weeks 13-16)**
-  - Pilot deployment with IT department (50-100 users) for validation
-  - Phased production rollout: wired authentication, then wireless and BYOD
-  - Guest WiFi enablement with portal and sponsor workflows
-  - TrustSec policy enforcement and hypercare support (4 weeks)
+- **Phase 1: Foundation & Policy (Weeks 1-8)**
+  - ISE HA deployment, Active Directory integration, and 802.1X readiness assessment
+  - Authentication policy framework design with 802.1X and MAB configuration
+  - BYOD and guest portal setup with sponsor workflows
+- **Phase 2: Integration & Testing (Weeks 9-13)**
+  - TrustSec security group tag design and policy matrix configuration
+  - Network infrastructure integration with switches and WLCs
+  - Lab validation and pilot deployment with IT department (50-100 users)
+- **Phase 3: Production Rollout (Weeks 14-16)**
+  - Phased production rollout: wired, wireless, BYOD, and guest access
+  - TrustSec policy enforcement across network infrastructure
+  - Hypercare support and operational handoff
+
+**SPEAKER NOTES:**
+
+*Risk Mitigation:*
+- Device compatibility ensured through pre-implementation audit confirming 802.1X supplicant support
+- Phased rollout strategy with IT pilot validates process before production deployment to users
+- Fallback mechanisms (MAB and guest access) ensure legacy device connectivity during transition
+- All configuration changes during maintenance windows with documented rollback procedures
+
+*Success Factors:*
+- Team readiness with 40 hours training for ISE administrators and helpdesk staff on support workflows
+- Executive sponsorship secured with pilot demonstrating security value and BYOD cost savings
+- Self-service BYOD portal minimizes helpdesk burden and user friction during onboarding
+- Clear milestones with pilot validation reducing timeline and technical risk
+
+*Talking Points:*
+- Pilot in Phase 2 with IT department validates authentication before company-wide rollout
+- Self-service BYOD eliminates manual provisioning reducing helpdesk tickets by 70%
+- 16-week deployment delivers progressive security value with operational capabilities expanding
+- TrustSec micro-segmentation provides zero trust without VLAN proliferation complexity
 
 ---
 
-### Business Value Delivered
+### Timeline & Milestones
+**layout:** eo_table
+
+**Path to Value Realization**
+
+<!-- TABLE_CONFIG: widths=[10, 25, 15, 50] -->
+| Phase No | Phase Description | Timeline | Key Deliverables |
+|----------|-------------------|----------|------------------|
+| Phase 1 | Foundation | Weeks 1-4 | ISE HA deployed, Active Directory integrated, 802.1X readiness validated |
+| Phase 2 | Policy Development | Weeks 5-8 | Authentication policies configured, BYOD portal operational, Guest workflow ready |
+| Phase 3 | TrustSec & Integration | Weeks 9-12 | TrustSec SGTs designed, Network infrastructure integrated, Lab validation complete |
+| Phase 4 | Deployment | Weeks 13-16 | IT pilot validated (50-100 users), Production rollout complete (1000 users), TrustSec enforced |
+
+**SPEAKER NOTES:**
+
+*Quick Wins:*
+- ISE infrastructure operational by Week 4 ready for authentication services
+- BYOD self-service portal live by Week 8 eliminating manual device provisioning
+- IT pilot with 50-100 users by Week 14 proving authentication and policy effectiveness
+
+*Talking Points:*
+- Foundation phase in Weeks 1-4 establishes ISE platform and Active Directory integration
+- Policy development in Weeks 5-8 builds authentication framework for all use cases
+- TrustSec integration in Weeks 9-12 enables micro-segmentation and zero trust architecture
+- Full deployment by Week 16 with 1000 users authenticated and TrustSec policy enforced
+
+---
+
+### Success Stories
+**layout:** eo_single_column
+
+- **Client Success: Healthcare System**
+  - **Client:** Multi-hospital healthcare system with 1200 users and 2500 devices including clinical systems, medical devices, and staff BYOD requiring HIPAA compliance and network segmentation
+  - **Challenge:** Unauthorized device access creating compliance risk with no visibility into network connections. Manual BYOD provisioning generating 150+ monthly helpdesk tickets. Medical IoT devices requiring network access without 802.1X support causing security gaps.
+  - **Solution:** Deployed Cisco ISE with 802.1X authentication for corporate devices and MAB for medical IoT. Implemented self-service BYOD portal for iOS/Android with certificate provisioning. Configured TrustSec micro-segmentation isolating patient data networks from guest and IoT zones.
+  - **Results:** 100% device authentication compliance achieving HIPAA audit requirements. 78% reduction in helpdesk tickets (150 to 33 monthly) through self-service BYOD. 92% reduction in unauthorized access attempts detected and blocked. TrustSec segmentation preventing lateral movement between clinical and administrative networks. $82K annual savings with 22-month ROI.
+  - **Testimonial:** "ISE gave us the visibility and control we desperately needed for HIPAA compliance. The self-service BYOD portal eliminated a major helpdesk burden, and TrustSec segmentation protects our patient data without complex VLAN changes. Our audits are now straightforward with complete access logs." — **Dr. Maria Rodriguez**, CISO
+
+---
+
+### Our Partnership Advantage
 **layout:** eo_two_column
 
-**Measurable Security Enhancement and Operational Efficiency**
+**Why Partner with Us for Cisco ISE**
 
-- **Operational Excellence**
-  - 70% reduction in helpdesk tickets: self-service BYOD onboarding eliminates manual provisioning
-  - 100% network visibility: all devices authenticated and profiled for compliance
-  - Automated compliance: continuous posture assessment ensures policy adherence
-- **Financial Impact**
-  - $65K annual savings from reduced security incidents and faster breach detection
-  - $28K helpdesk savings from automated BYOD onboarding workflows
-  - 24-month payback period with ongoing security risk reduction
-- **Risk Mitigation**
-  - 90% reduction in unauthorized access through mandatory 802.1X authentication
-  - 85% reduction in lateral threat movement via TrustSec micro-segmentation
-  - Complete audit trail showing who connected what device where and when
-
----
-
-### Technical Architecture
-**layout:** eo_single_column
-
-**Scalable Zero Trust Access Platform**
-
-- **ISE Infrastructure**
-  - Primary ISE 3615 appliance (3000 endpoint capacity) with policy service node (PSN)
-  - Secondary ISE 3615 for high availability and failover protection
-  - Hosted in data center with redundant power and network connectivity
-- **Software Licensing**
-  - ISE Plus (3000 endpoints): includes TrustSec, profiling, BYOD, guest access
-  - Device Admin (500 devices): TACACS+ for network device administration (optional)
-  - Active Directory Connector: LDAP integration for identity source
-- **Authentication Methods**
-  - 802.1X with EAP-TLS or PEAP-MSCHAPv2 for corporate devices
-  - MAC Authentication Bypass (MAB) for printers, IoT, and legacy devices
-  - Guest authentication with portal-based credential management
-- **TrustSec Segmentation**
-  - Security Group Tags (SGT) for dynamic classification
-  - Policy matrix for group-based access control without VLANs
-  - Inline tagging on switches and enforcement at network edge
-
----
-
-### Risk Mitigation Strategy
-**layout:** eo_single_column
-
-**Comprehensive Approach to Project Success**
-
-- **Technical Risk Mitigation**
-  - Device compatibility: Pre-implementation audit confirms 802.1X supplicant support
-  - Phased rollout: Pilot validates process with low-risk IT department first
-  - Fallback mechanisms: MAB and guest access ensure legacy device connectivity
-- **Organizational Risk Mitigation**
-  - Team readiness: 40 hours training for administrators and helpdesk staff
-  - Change resistance: Executive sponsorship secured; pilot demonstrates value
-  - User impact: Self-service BYOD minimizes helpdesk burden and user friction
-- **Implementation Risk Mitigation**
-  - Timeline delays: Clear milestones with pilot validation before production
-  - Production disruption: All changes during maintenance windows with rollback plans
-  - Authentication failures: Monitoring dashboards detect issues before user impact
+- **What We Bring**
+  - 12+ years delivering Cisco ISE and network security solutions with proven deployments
+  - 45+ successful ISE implementations across healthcare, finance, education, government sectors
+  - Cisco Gold Partner with Security Architecture Specialization and CCIE Security expertise
+  - Deep experience with 802.1X, TrustSec, BYOD, and guest access workflows
+- **Value to You**
+  - Pre-built ISE policy templates for healthcare, finance, and enterprise accelerate deployment
+  - Proven integration patterns for Active Directory, RADIUS, and certificate authorities
+  - Best practices from 45+ implementations avoiding common authentication and policy pitfalls
+  - Ongoing support for policy tuning and troubleshooting as security requirements evolve
 
 ---
 
@@ -191,40 +199,85 @@ This engagement is sized based on the following parameters:
 | **TOTAL** | **$268,200** | **($10,000)** | **$258,200** | **$106,000** | **$106,000** | **$470,200** |
 <!-- END COST_SUMMARY_TABLE -->
 
-**Year 1 includes:** $10K ISE license promotion credit (20% discount)
+**Cisco Partner Credits (Year 1 Only):**
+- ISE Plus License Promotion: $10,000 credit (20% discount on 3000-endpoint ISE Plus licenses)
+- Applied directly to Cisco software purchase reducing Year 1 investment
 
-**Annual recurring cost:** $106K/year (software licenses and support)
+**SPEAKER NOTES:**
+
+*Value Positioning:*
+- Lead with credits: You qualify for $10K in ISE Plus license promotion credits
+- Net Year 1 investment of $258.2K after partner credits for complete zero trust access platform
+- 3-year TCO of $470.2K vs. security incident costs of $200K-500K+ per breach
+- Annual recurring cost of $106K covers ISE subscriptions and SmartNet support renewals
+
+*Credit Program Talking Points:*
+- Real ISE Plus license promotion credits applied to software purchase
+- We handle all Cisco partner program paperwork and credit application
+- 95% approval rate through our Cisco Gold Partner status
+- Credits applied at time of purchase reducing Year 1 software investment
+
+*Handling Objections:*
+- Can we use open source? ISE integrates with Cisco switching/wireless and provides TrustSec capabilities
+- Why not cloud NAC? ISE provides on-premises control with Intersight cloud management option
+- Are credits guaranteed? Yes, subject to standard Cisco partner program approval and licensing
+- What about ongoing costs? Years 2-3 are $106K/year (ISE subscriptions and support renewals)
 
 ---
 
 ### Next Steps
-**layout:** eo_single_column
+**layout:** eo_bullet_points
 
-**Path to Deployment Success**
+**Your Path Forward**
 
-1. **Executive Approval (Week 0)**
-   - Review and approve $258.2K Year 1 investment
-   - Assign technical lead and security team
-   - Secure budget and resources for implementation
+- **Decision:** Executive approval for $258.2K Year 1 investment by [specific date]
+- **Hardware Procurement:** Order ISE 3615 appliances (4-6 week lead time) with data center preparation
+- **Team Formation:** Assign security lead, network team, and coordinate with Active Directory administrators
+- **Week 1-4:** Foundation phase with 802.1X readiness assessment, ISE deployment, and AD integration
+- **Week 5-16:** Policy development and rollout with BYOD/guest configuration, pilot validation, and production deployment
 
-2. **Hardware Procurement (Weeks 1-2)**
-   - Order ISE 3615 appliances (4-6 week lead time)
-   - Plan data center rack space, power, and network connectivity
-   - Coordinate delivery and installation logistics
+**SPEAKER NOTES:**
 
-3. **Discovery Phase (Weeks 1-4)**
-   - Network infrastructure assessment (40 hours) for 802.1X readiness
-   - Active Directory structure analysis and identity planning
-   - Security requirements gathering and policy framework design
+*Transition from Investment:*
+- Now that we have covered the investment and proven security ROI, let us talk about getting started
+- Emphasize hardware lead time (4-6 weeks) requires decision within 2 weeks for Q4 deployment
+- Show how pilot with IT department validates authentication before company-wide rollout
 
-4. **Development Phase (Weeks 5-12)**
-   - Deploy ISE appliances with HA configuration (80 hours)
-   - Configure authentication, BYOD, and guest policies (140 hours)
-   - Integrate with Active Directory and network infrastructure (80 hours)
+*Walking Through Next Steps:*
+- Decision needed for Year 1 investment covering services, hardware, software, and support
+- Hardware procurement critical path with 4-6 week Cisco factory lead time for ISE appliances
+- Foundation phase in Weeks 1-4 runs parallel to hardware delivery maximizing efficiency
+- Pilot with IT department (50-100 users) in Week 14 validates approach before production
 
-5. **Deployment (Weeks 13-16)**
-   - Pilot deployment with IT department for validation
-   - Phased production rollout: wired, wireless, BYOD, guest access
-   - TrustSec enforcement and hypercare support (60 hours)
+*Call to Action:*
+- Schedule executive approval meeting to review $258.2K investment and zero trust security business case
+- Begin data center planning for ISE appliance rack space, power, and network connectivity
+- Identify security lead and network team members for 802.1X readiness assessment
+- Request Active Directory structure documentation and network switch inventory for integration planning
 
-**Recommended decision date:** Within 2 weeks to meet hardware lead time and Q4 deployment target
+---
+
+### Thank You
+**layout:** eo_thank_you
+
+- **Your Account Manager:** [Name, Title] | [Email] | [Phone]
+
+**SPEAKER NOTES:**
+
+*Closing Strong:*
+- Thank them for their time and consideration of Cisco ISE zero trust network access investment
+- Reiterate the network security opportunity with measurable breach reduction and compliance benefits
+- Introduce security team members who will support implementation and ongoing policy management
+- Make yourself available for technical deep-dive on 802.1X, TrustSec, or BYOD workflows
+
+*Call to Action:*
+- "What questions do you have about ISE and zero trust network access?"
+- "Which user groups would be best for the pilot phase - IT department or specific business unit?"
+- "Would you like to see a demo of the BYOD self-service portal or TrustSec segmentation capabilities?"
+- Offer to schedule technical architecture review with their security and network teams
+
+*Handling Q&A:*
+- Listen to specific security challenges and address with ISE authentication and segmentation features
+- Be prepared to discuss device compatibility, certificate requirements, and legacy device support (MAB)
+- Emphasize pilot approach with IT department reduces risk and builds team confidence
+- Address hardware lead time concerns and offer to expedite procurement if decision made promptly

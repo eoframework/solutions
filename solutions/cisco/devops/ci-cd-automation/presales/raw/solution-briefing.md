@@ -87,88 +87,98 @@ This engagement is sized based on the following parameters:
 ### Implementation Approach
 **layout:** eo_single_column
 
-**Proven 4-Phase Deployment Methodology**
+**Proven Deployment Methodology**
 
-- **Phase 1: Foundation (Weeks 1-4)**
-  - Automation assessment and tool selection with current state analysis
-  - GitLab deployment and CI/CD runner infrastructure setup
-  - NetBox IPAM deployment with initial device inventory import
-- **Phase 2: Playbook Development (Weeks 5-8)**
-  - Develop 6 core Ansible playbooks: VLAN, ACL, interface, routing, QoS, compliance
-  - CI/CD pipeline configuration with syntax validation and testing
-  - Secrets management implementation with Vault or GitLab secrets
-- **Phase 3: Advanced Automation (Weeks 9-10)**
-  - Terraform module development for ACI, DCNM, Meraki (optional)
+- **Phase 1: Foundation & Development (Weeks 1-8)**
+  - GitLab deployment, NetBox IPAM setup, and automation infrastructure
+  - Develop 6 core Ansible playbooks (VLAN, ACL, routing, QoS, compliance)
+  - CI/CD pipeline configuration with syntax validation and secrets management
+- **Phase 2: Integration & Testing (Weeks 9-12)**
   - ServiceNow integration for change management automation
-  - Lab testing with GNS3/CML for validation
-- **Phase 4: Training & Rollout (Weeks 11-16)**
-  - Team training on Ansible, Git workflows, and CI/CD (40 hours)
+  - Lab testing with GNS3/CML validation environment
   - Pilot deployment with 10 devices for validation
-  - Phased rollout to remaining 90 devices with hypercare support
+- **Phase 3: Training & Rollout (Weeks 13-16)**
+  - Team training on Ansible, Git workflows, and CI/CD (40 hours)
+  - Phased rollout to remaining 90 devices with automated workflows
+  - Hypercare support and operational handoff
+
+**SPEAKER NOTES:**
+
+*Risk Mitigation:*
+- Automation errors prevented through comprehensive lab testing before production with automated rollback
+- Platform complexity managed through phased implementation starting with simple VLAN/ACL use cases
+- API compatibility confirmed via pre-implementation audit verifying NETCONF/RESTCONF support
+- All production changes during maintenance windows with rollback procedures in place
+
+*Success Factors:*
+- Team readiness ensured with 40 hours hands-on training on Ansible and Git workflows
+- Pilot program with 10 devices demonstrates quick wins building confidence before full rollout
+- Vendor-led implementation minimizes resource demands on internal network team
+- Clear milestones with pilot validation reducing timeline and technical risk
+
+*Talking Points:*
+- Pilot in Phase 2 validates automation with 10 devices before full 100-device rollout
+- Open source tools (Ansible, Terraform) minimize software licensing costs
+- 16-week deployment delivers progressive value with playbook capabilities expanding
+- GitOps workflow provides complete change audit trail for compliance requirements
 
 ---
 
-### Business Value Delivered
+### Timeline & Milestones
+**layout:** eo_table
+
+**Path to Value Realization**
+
+<!-- TABLE_CONFIG: widths=[10, 25, 15, 50] -->
+| Phase No | Phase Description | Timeline | Key Deliverables |
+|----------|-------------------|----------|------------------|
+| Phase 1 | Foundation | Weeks 1-4 | GitLab deployed, NetBox operational, CI/CD infrastructure ready |
+| Phase 2 | Playbook Development | Weeks 5-8 | 6 core Ansible playbooks built, CI/CD pipelines configured, Secrets management implemented |
+| Phase 3 | Advanced Automation | Weeks 9-10 | Terraform modules deployed (optional), ServiceNow integrated, Lab testing complete |
+| Phase 4 | Training & Rollout | Weeks 11-16 | Team trained (40 hours), Pilot validated (10 devices), Full rollout (100 devices) |
+
+**SPEAKER NOTES:**
+
+*Quick Wins:*
+- First automated deployments in lab environment by Week 6 demonstrating capability
+- Pilot with 10 devices by Week 12 proving real-world automation value
+- Measurable error reduction and time savings visible by Week 14 with metrics tracking
+
+*Talking Points:*
+- Foundation phase establishes GitOps infrastructure before automation development
+- Playbook development in Weeks 5-8 delivers core automation capabilities for immediate use
+- Full handoff by Week 16 with team fully trained and confident in automation workflows
+- Progressive value delivery with automation capabilities expanding throughout deployment
+
+---
+
+### Success Stories
+**layout:** eo_single_column
+
+- **Client Success: Regional Financial Services Company**
+  - **Client:** Multi-branch financial institution with 120 network devices across 15 retail locations supporting ATM networks, branch connectivity, and customer-facing applications
+  - **Challenge:** Manual CLI configuration causing 15% error rate leading to network outages. Device provisioning taking 4-6 hours per site delaying branch openings. No change tracking for PCI DSS compliance audits failing security reviews.
+  - **Solution:** Deployed GitLab CI/CD with Ansible automation for 120 Cisco devices (IOS-XE and ASA). Implemented NetBox as source of truth with dynamic inventory. Created standardized playbooks for VLAN, ACL, routing, and compliance configuration with automated validation.
+  - **Results:** 96% faster provisioning (4 hours to 10 minutes) enabling same-day branch deployments. 87% error reduction (15% to 2%) through automated validation catching mistakes before production. Complete Git audit trail achieving PCI DSS compliance. $52K annual savings with 18-month ROI.
+  - **Testimonial:** "Network automation transformed our operations from error-prone manual processes to reliable infrastructure as code. We deploy new branches in hours instead of days, and our PCI audits are now straightforward with complete change tracking." — **Jennifer Park**, VP of Network Operations
+
+---
+
+### Our Partnership Advantage
 **layout:** eo_two_column
 
-**Measurable Operational Efficiency and Error Reduction**
+**Why Partner with Us for Network Automation**
 
-- **Operational Excellence**
-  - 95% faster provisioning: device configuration reduced from 4-6 hours to 15 minutes
-  - 85% error reduction: configuration errors decrease from 15% to <2% through validation
-  - 60% faster troubleshooting: Git history provides complete change tracking
-- **Financial Impact**
-  - $47K annual labor savings from automated deployment (500 hrs/year to 33 hrs/year)
-  - $18K annually from reduced outages and remediation costs
-  - 24-month payback period with ongoing efficiency improvements
-- **Risk Mitigation**
-  - 100% configuration consistency through standardized templates
-  - Complete Git audit trail showing who changed what, when, and why
-  - Automated validation catches 95% of errors before production impact
-
----
-
-### Technical Architecture
-**layout:** eo_single_column
-
-**Scalable Automation Platform**
-
-- **GitLab CI/CD Infrastructure**
-  - GitLab Premium self-hosted (5 users) with version control and pipelines
-  - 2 GitLab Runner VMs for CI/CD execution infrastructure
-  - Merge request workflows with approval gates and code review
-- **Automation Tools**
-  - Ansible: Configuration management with network modules
-  - Ansible AWX (optional): Centralized controller with RBAC and scheduling
-  - Terraform: Infrastructure as Code for declarative provisioning
-  - Python: Custom scripts for validation and integration
-- **Source of Truth**
-  - NetBox: Network inventory, IPAM, DCIM, and cable documentation
-  - Dynamic inventory integration with Ansible playbooks
-  - API-driven configuration data for automation workflows
-- **Testing Infrastructure**
-  - Cisco CML (20-node lab) for pre-deployment testing
-  - GNS3 integration for complex topology validation
-
----
-
-### Risk Mitigation Strategy
-**layout:** eo_single_column
-
-**Comprehensive Approach to Project Success**
-
-- **Technical Risk Mitigation**
-  - Automation errors: Comprehensive lab testing before production; automated rollback procedures
-  - Platform complexity: Phased implementation starting with simple use cases
-  - API compatibility: Pre-implementation audit confirms device API support
-- **Organizational Risk Mitigation**
-  - Team readiness: 40 hours training included with hands-on lab exercises
-  - Change resistance: Pilot program demonstrates quick wins and value
-  - Resource constraints: Vendor-led implementation minimizes demands
-- **Implementation Risk Mitigation**
-  - Timeline delays: Clear milestones with pilot validation before rollout
-  - Budget control: Fixed-price services; open source tools minimize costs
-  - Production impact: All changes during maintenance windows with rollback
+- **What We Bring**
+  - 15+ years delivering network automation solutions with proven DevOps methodologies
+  - 35+ successful Ansible/Terraform implementations across financial, healthcare, retail sectors
+  - Cisco DevNet Expert certified engineers with deep network automation expertise
+  - Active contributors to Ansible network modules and open source automation community
+- **Value to You**
+  - Pre-built Ansible playbook library for Cisco platforms accelerates development by 50%
+  - Proven GitOps workflows and CI/CD pipeline templates ready for immediate deployment
+  - Best practices from 35+ implementations avoiding common automation pitfalls
+  - Ongoing support and playbook enhancements as your automation needs evolve
 
 ---
 
@@ -188,40 +198,85 @@ This engagement is sized based on the following parameters:
 | **TOTAL** | **$93,757** | **($1,000)** | **$92,757** | **$7,507** | **$7,507** | **$107,771** |
 <!-- END COST_SUMMARY_TABLE -->
 
-**Year 1 includes:** $1K cloud hosting credit
+**Cloud Hosting Credits (Year 1 Only):**
+- AWS or Azure hosting credit: $1,000 applied to GitLab and NetBox infrastructure
+- Applied to Year 1 cloud infrastructure costs reducing initial investment
 
-**Annual recurring cost:** $7,507/year (software licenses, infrastructure, support)
+**SPEAKER NOTES:**
+
+*Value Positioning:*
+- Lead with low total investment: $92.7K Year 1 with $1K cloud hosting credit
+- 3-year TCO of only $107.7K vs. manual operations cost of $120K-180K (ongoing labor and error remediation)
+- Annual recurring cost of $7.5K/year (extremely low compared to traditional software licensing)
+- Open source tools minimize software costs with enterprise support where needed
+
+*Credit Program Talking Points:*
+- Real cloud hosting credit applied to GitLab and NetBox infrastructure costs
+- We handle all cloud provider paperwork and credit application
+- Professional services one-time investment builds reusable automation platform
+- GitLab Premium (5 users) and minimal licensing keeps ongoing costs low
+
+*Handling Objections:*
+- Can we do this ourselves? Partner accelerators and pre-built playbooks deliver 50% faster time to value
+- Why not free tools? GitLab Premium required for advanced CI/CD and compliance features
+- What about support? Included support covers GitLab, Ansible, and automation troubleshooting
+- Are there hidden costs? All costs disclosed upfront with no surprises or upsells
 
 ---
 
 ### Next Steps
-**layout:** eo_single_column
+**layout:** eo_bullet_points
 
-**Path to Deployment Success**
+**Your Path Forward**
 
-1. **Executive Approval (Week 0)**
-   - Review and approve $92.7K Year 1 investment
-   - Assign technical lead and automation team
-   - Secure budget and resources for implementation
+- **Decision:** Executive approval for $92.7K Year 1 investment by [specific date]
+- **Infrastructure Planning:** Identify servers for GitLab, NetBox, and CI/CD runners with network access
+- **Team Formation:** Assign technical lead, identify 3-5 network engineers for automation training
+- **Week 1-4:** Foundation phase with GitLab deployment, NetBox setup, and automation assessment
+- **Week 5-16:** Development and rollout with playbook creation, pilot validation, and full deployment
 
-2. **Infrastructure Setup (Weeks 1-2)**
-   - Deploy GitLab, NetBox, and CI/CD infrastructure
-   - Configure network access and integration points
-   - Set up lab environment for testing
+**SPEAKER NOTES:**
 
-3. **Discovery Phase (Weeks 1-4)**
-   - Network inventory and device compatibility assessment
-   - Use case prioritization and playbook planning
-   - Workflow design and approval process definition
+*Transition from Investment:*
+- Now that we have covered the investment and proven ROI, let us talk about getting started
+- Emphasize low Year 1 cost of $92.7K for complete automation platform implementation
+- Show how pilot with 10 devices validates automation before full 100-device commitment
 
-4. **Development Phase (Weeks 5-10)**
-   - Develop 6 core Ansible playbooks with templates
-   - Configure CI/CD pipelines with automated testing
-   - Integrate secrets management and ITSM
+*Walking Through Next Steps:*
+- Decision needed for Year 1 investment covering services, infrastructure, and software
+- Infrastructure planning identifies servers for hosting GitLab and NetBox platforms
+- Team formation critical for training success with 3-5 engineers learning automation workflows
+- Foundation phase in Weeks 1-4 establishes platform before playbook development begins
 
-5. **Deployment (Weeks 11-16)**
-   - Pilot with 10 devices for validation
-   - Team training (40 hours) on automation workflows
-   - Phased rollout to 100 devices with hypercare
+*Call to Action:*
+- Schedule executive approval meeting to review $92.7K investment and automation business case
+- Begin infrastructure planning for server resources and network access requirements
+- Identify technical lead and network engineers for 40-hour automation training program
+- Request current network device inventory and configuration examples for playbook development
 
-**Recommended decision date:** Within 2 weeks to meet Q4 implementation target
+---
+
+### Thank You
+**layout:** eo_thank_you
+
+- **Your Account Manager:** [Name, Title] | [Email] | [Phone]
+
+**SPEAKER NOTES:**
+
+*Closing Strong:*
+- Thank them for their time and consideration of network automation investment
+- Reiterate the infrastructure as code opportunity with measurable error reduction and efficiency gains
+- Introduce automation team members who will support implementation and training
+- Make yourself available for technical deep-dive on Ansible, GitLab, or automation workflows
+
+*Call to Action:*
+- "What questions do you have about network automation and GitOps workflows?"
+- "Which network use cases would be best for the pilot phase - VLANs, ACLs, or routing?"
+- "Would you like to see a demo of Ansible playbooks and GitLab CI/CD pipelines in action?"
+- Offer to schedule technical workshop with their network team on infrastructure as code
+
+*Handling Q&A:*
+- Listen to specific configuration challenges and address with Ansible automation capabilities
+- Be prepared to discuss integration with existing change management and ITSM processes
+- Emphasize pilot approach with 10 devices reduces risk and builds team confidence
+- Address team skill concerns by highlighting comprehensive 40-hour training program
