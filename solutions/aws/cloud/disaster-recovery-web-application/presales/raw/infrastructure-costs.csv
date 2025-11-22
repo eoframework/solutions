@@ -1,4 +1,4 @@
-# SIZING GUIDELINES - Based on Solution Scope (Default: Small)
+# Sizing Guidelines
 #WIDTH: 24,36,28,28,28,51
 #ALIGN: left,left,center,center,center,left
 Category,Component,Small,Medium,Large,Notes
@@ -10,8 +10,8 @@ Cloud Infrastructure,Monthly Traffic,100 GB cross-region,500 GB cross-region,2 T
 Software Licenses,Monitoring Tools,Basic (6 hosts),Standard (15 hosts),Enterprise (50+ hosts),Application performance monitoring
 Support & Maintenance,Support Level,Business hours,24x5 support,24x7 premium,SLA requirements
 
-# INFRASTRUCTURE COSTS - Quantities Default to Small Scope
-#WIDTH: 23,30,50,12,15,12,15,12,12,15,30
+# Infrastructure Costs
+#WIDTH: 23,30,50,12,16,12,15,12,12,15,30
 #ALIGN: left,left,left,right,left,right,right,right,right,right,left
 Category,Component,Description,Quantity,Unit,Unit Price,Annual Cost,Year 2,Year 3,3-Year Total,Notes
 Cloud Infrastructure,EC2 Primary Web Tier,t3.large instances for web tier (primary),2,Instance/Month,$75,"=D11*F11*12","=G11","=G11","=G11+H11+I11",Primary region compute
@@ -38,7 +38,7 @@ Software Licenses,Datadog Monitoring,Pro monitoring (6 hosts),6,Hosts/Month,$23,
 Software Licenses,PagerDuty,Professional incident management (3 users),3,Users/Month,$41,"=D32*F32*12","=G32","=G32","=G32+H32+I32",Incident management
 Support & Maintenance,AWS Managed DR Services,Managed services and quarterly testing (15% of infrastructure),1,Service/Month,$122.25,"=D33*F33*12","=G33","=G33","=G33+H33+I33",Ongoing support
 
-# CREDITS - Applied per Category (Year 1 Only)
+# Credits
 #WIDTH: 25,25,15,50
 #ALIGN: left,left,right,left
 Category,Credit Type,Credit Amount,Credit Comments
@@ -48,7 +48,7 @@ Support & Maintenance,Program Credit,$0,No support credits available
 Hardware/Equipment,Equipment Credit,$0,No hardware credits available
 Professional Services,AWS Partner Services Credit,"($8000)",DR design and testing services
 
-# SUMMARY
+# 3-Year Summary
 #WIDTH: 25,15,15,15,12,12,15
 #ALIGN: left,right,right,right,right,right,right
 Category,Year 1 List,Year 1 Credits,Year 1 Net,Year 2,Year 3,3-Year Total

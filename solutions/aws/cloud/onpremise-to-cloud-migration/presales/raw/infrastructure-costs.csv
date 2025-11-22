@@ -1,4 +1,4 @@
-# SIZING GUIDELINES - Based on Solution Scope (Default: Small)
+# Sizing Guidelines
 #WIDTH: 24,36,28,28,28,51
 #ALIGN: left,left,center,center,center,left
 Category,Component,Small,Medium,Large,Notes
@@ -11,8 +11,8 @@ Cloud Infrastructure,Migration Data Transfer,2 TB initial transfer,10 TB initial
 Migration Timeline,Migration Duration,4-6 months,9-12 months,18+ months,Full migration timeline
 Support & Maintenance,Support Level,Business hours,24x5 support,24x7 premium,SLA requirements
 
-# INFRASTRUCTURE COSTS - Quantities Default to Small Scope
-#WIDTH: 23,30,50,12,15,12,15,12,12,15,30
+# Infrastructure Costs
+#WIDTH: 23,30,50,12,16,12,15,12,12,15,30
 #ALIGN: left,left,left,right,left,right,right,right,right,right,left
 Category,Component,Description,Quantity,Unit,Unit Price,Annual Cost,Year 2,Year 3,3-Year Total,Notes
 Cloud Infrastructure,EC2 Application Tier,t3.large instances for migrated apps,3,Instance/Month,$67.5,"=D11*F11*12","=G11","=G11","=G11+H11+I11",Target application servers
@@ -36,7 +36,7 @@ Software Licenses,Datadog Monitoring,Pro monitoring (6 hosts for migrated apps),
 Software Licenses,PagerDuty,Professional incident management (3 users),3,Users/Month,$41,"=D29*F29*12","=G29","=G29","=G29+H29+I29",Incident management
 Support & Maintenance,AWS Managed Services,Managed services and ongoing optimization (15% of infrastructure),1,Service/Month,$121.83,"=D30*F30*12","=G30","=G30","=G30+H30+I30",Ongoing support
 
-# CREDITS - Applied per Category (Year 1 Only)
+# Credits
 #WIDTH: 25,25,15,50
 #ALIGN: left,left,right,left
 Category,Credit Type,Credit Amount,Credit Comments
@@ -48,7 +48,7 @@ Professional Services,AWS MAP Assessment Credit,"($12000)",100% funded - discove
 Professional Services,AWS MAP Mobilize Credit,"($5000)",Partial funding - migration strategy and planning
 Professional Services,AWS MAP Migrate Credit,"($5000)",Partial funding - application lift-and-shift migration
 
-# SUMMARY
+# 3-Year Summary
 #WIDTH: 25,15,15,15,12,12,15
 #ALIGN: left,right,right,right,right,right,right
 Category,Year 1 List,Year 1 Credits,Year 1 Net,Year 2,Year 3,3-Year Total
