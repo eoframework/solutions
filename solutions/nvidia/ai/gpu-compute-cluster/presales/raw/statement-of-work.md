@@ -79,22 +79,21 @@ This engagement is sized based on the following parameters:
 <!-- TABLE_CONFIG: widths=[25, 35, 40] -->
 | Category | Parameter | Scope |
 |----------|-----------|-------|
-| Solution Scope | GPU Servers | 8 servers (4x A100 40GB per server) |
-| Solution Scope | GPU Performance | 32 GPUs total, 5 petaFLOPS FP16 |
-| Integration | Network Fabric | 100 GbE Ethernet with RDMA |
-| Integration | Storage Platform | 200 TB NVMe all-flash (NetApp AFF) |
-| User Base | Data Scientists | 20-25 users, 10-15 concurrent jobs |
-| User Base | User Roles | 4 roles (admin, data scientist, engineer, viewer) |
-| Data Volume | Training Datasets | 100 TB initial, 200 TB total capacity |
-| Data Volume | Model Registry | 20 TB model storage |
-| Technical Environment | Deployment Location | On-premises datacenter (single site) |
-| Technical Environment | Availability Requirements | 99.5% uptime, N+1 redundancy |
-| Technical Environment | Orchestration | Kubernetes 1.28+ with GPU Operator |
-| Security & Compliance | Security Requirements | RBAC, TLS, audit logging |
-| Security & Compliance | Compliance Frameworks | SOC2, data residency |
-| Performance | Training Workloads | Mid-scale LLMs, CV, recommender systems |
-| Performance | Inference Workloads | Triton for production model serving |
-| Environment | Deployment Environments | 1 Kubernetes cluster (dev/prod namespaces) |
+| Solution Scope | GPU Servers | 8x Dell R750xa servers |
+| Solution Scope | AI Workload Type | Distributed training |
+| Integration | Data Science Team Size | 20 data scientists |
+| Integration | Storage Infrastructure | 200 TB NetApp storage |
+| Data Volume | Training Datasets | Multi-TB datasets |
+| Data Volume | Model Checkpointing | Regular checkpointing |
+| Technical Environment | Network Fabric | 100 GbE Ethernet |
+| Technical Environment | Datacenter Readiness | Standard datacenter |
+| Technical Environment | Deployment Model | On-premises datacenter |
+| Security & Compliance | Data Classification | Proprietary models |
+| Security & Compliance | Compliance Requirements | Standard security |
+| Performance | GPU Utilization Target | 80% utilization |
+| Performance | Training Time Requirements | Hours to days |
+| Environment | Software Stack | NVIDIA AI Enterprise |
+| Environment | Management Platform | Kubernetes with GPU Operator |
 <!-- END SCOPE_PARAMETERS_TABLE -->
 
 Table: Engagement Scope Parameters
@@ -698,13 +697,13 @@ Post-hypercare, Client may transition to ongoing managed services:
 
 <!-- BEGIN COST_SUMMARY_TABLE -->
 <!-- TABLE_CONFIG: widths=[20, 12, 18, 14, 12, 11, 13] -->
-| Cost Category | Year 1 List | Partner Credits | Year 1 Net | Year 2 | Year 3 | 3-Year Total |
-|---------------|-------------|-----------------|------------|--------|--------|--------------|
-| Professional Services | $45,500 | $0 | $45,500 | $0 | $0 | $45,500 |
-| Hardware Infrastructure | $940,000 | ($40,000) | $900,000 | $0 | $0 | $900,000 |
-| Software Licenses | $105,600 | $0 | $105,600 | $105,600 | $105,600 | $316,800 |
-| Support & Maintenance | $104,000 | $0 | $104,000 | $104,000 | $104,000 | $312,000 |
-| **TOTAL INVESTMENT** | **$1,195,100** | **($40,000)** | **$1,155,100** | **$209,600** | **$209,600** | **$1,574,300** |
+| Cost Category | Year 1 List | AWS/Partner Credits | Year 1 Net | Year 2 | Year 3 | 3-Year Total |
+|---------------|-------------|---------------------|------------|--------|--------|--------------|
+| Professional Services | $141,700 | $0 | $141,700 | $0 | $0 | $141,700 |
+| Hardware | $896,000 | ($32,000) | $864,000 | $0 | $0 | $864,000 |
+| Software Licenses | $160,520 | ($12,000) | $148,520 | $166,120 | $166,120 | $480,760 |
+| Support & Maintenance | $122,000 | $0 | $122,000 | $122,000 | $122,000 | $366,000 |
+| **TOTAL INVESTMENT** | **$1,320,220** | **($44,000)** | **$1,276,220** | **$288,120** | **$288,120** | **$1,852,460** |
 <!-- END COST_SUMMARY_TABLE -->
 
 ## Partner Credits

@@ -79,22 +79,21 @@ This engagement is sized based on the following parameters:
 <!-- TABLE_CONFIG: widths=[25, 35, 40] -->
 | Category | Parameter | Scope |
 |----------|-----------|-------|
-| Solution Scope | DGX Systems | 8x DGX H100 (64 GPUs total) |
-| Solution Scope | GPU Performance | 32 petaFLOPS FP8, 5.1 TB GPU memory |
-| Integration | InfiniBand Fabric | 400 Gbps Quantum-2, 3.2 Tbps bisection |
-| Integration | Storage Platform | 1 PB NVMe @ 14 GB/s throughput |
-| User Base | Data Scientists | 50+ users, 20-30 concurrent jobs |
-| User Base | User Roles | 4 roles (admin, researcher, engineer, viewer) |
-| Data Volume | Training Datasets | 500 TB initial, 1 PB total capacity |
-| Data Volume | Model Checkpoints | 100 TB checkpoint storage |
-| Technical Environment | Deployment Location | On-premises datacenter (single site) |
-| Technical Environment | Availability Requirements | 99.5% uptime, N+1 redundancy |
-| Technical Environment | Power & Cooling | 500 kW power, 50-ton cooling capacity |
-| Security & Compliance | Security Requirements | RBAC, encryption, audit logging |
-| Security & Compliance | Compliance Frameworks | SOC2, data residency requirements |
-| Performance | Training Workloads | LLMs (100B+ params), CV, drug discovery |
-| Performance | Network Latency | <2 microseconds GPU-to-GPU via IB |
-| Environment | Deployment Environments | 1 production cluster (dev/test on same) |
+| Solution Scope | DGX Systems | 8x DGX H100 systems |
+| Solution Scope | AI Workload Type | LLM training and inference |
+| Integration | Research Team Size | 50-75 data scientists |
+| Integration | Storage Infrastructure | 1 PB NVMe storage |
+| Data Volume | Training Datasets | Multi-TB datasets |
+| Data Volume | Model Checkpointing | Frequent checkpointing |
+| Technical Environment | Network Fabric | InfiniBand 400 Gbps |
+| Technical Environment | Datacenter Readiness | Facility upgrades required |
+| Technical Environment | Deployment Model | On-premises datacenter |
+| Security & Compliance | Data Classification | Proprietary AI models |
+| Security & Compliance | Compliance Requirements | Standard security |
+| Performance | GPU Utilization Target | 70-80% utilization |
+| Performance | Training Time Requirements | Weeks to train large models |
+| Environment | Software Stack | NVIDIA AI Enterprise + NGC |
+| Environment | Management Platform | Base Command Manager |
 <!-- END SCOPE_PARAMETERS_TABLE -->
 
 Table: Engagement Scope Parameters
@@ -694,13 +693,14 @@ Post-hypercare, Client may transition to ongoing managed services:
 
 <!-- BEGIN COST_SUMMARY_TABLE -->
 <!-- TABLE_CONFIG: widths=[20, 12, 18, 14, 12, 11, 13] -->
-| Cost Category | Year 1 List | NVIDIA Credits | Year 1 Net | Year 2 | Year 3 | 3-Year Total |
-|---------------|-------------|----------------|------------|--------|--------|--------------|
-| Professional Services | $108,000 | $0 | $108,000 | $0 | $0 | $108,000 |
-| Hardware Infrastructure | $4,682,000 | ($280,000) | $4,402,000 | $0 | $0 | $4,402,000 |
-| Software Licenses | $192,000 | $0 | $192,000 | $192,000 | $192,000 | $576,000 |
-| Support & Maintenance | $280,000 | $0 | $280,000 | $280,000 | $280,000 | $840,000 |
-| **TOTAL INVESTMENT** | **$5,262,000** | **($280,000)** | **$4,982,000** | **$472,000** | **$472,000** | **$5,926,000** |
+| Cost Category | Year 1 List | AWS/Partner Credits | Year 1 Net | Year 2 | Year 3 | 3-Year Total |
+|---------------|-------------|---------------------|------------|--------|--------|--------------|
+| Professional Services | $175,800 | $0 | $175,800 | $0 | $0 | $175,800 |
+| Facilities | $350,000 | $0 | $350,000 | $0 | $0 | $350,000 |
+| Hardware | $4,550,000 | ($180,000) | $4,370,000 | $0 | $0 | $4,370,000 |
+| Software Licenses | $211,200 | ($15,000) | $196,200 | $76,640 | $76,640 | $349,480 |
+| Support & Maintenance | $320,000 | $0 | $320,000 | $320,000 | $320,000 | $960,000 |
+| **TOTAL INVESTMENT** | **$5,607,000** | **($195,000)** | **$5,412,000** | **$396,640** | **$396,640** | **$6,205,280** |
 <!-- END COST_SUMMARY_TABLE -->
 
 ## Partner Credits

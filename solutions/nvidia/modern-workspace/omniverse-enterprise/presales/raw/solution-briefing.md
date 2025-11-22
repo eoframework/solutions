@@ -50,15 +50,15 @@ This engagement is sized based on the following parameters:
 <!-- TABLE_CONFIG: widths=[18, 29, 5, 18, 30] -->
 | Parameter | Scope | | Parameter | Scope |
 |-----------|-------|---|-----------|-------|
-| **Design Team Size** | 50 designers engineers artists | | **Storage Capacity** | 100 TB NVMe for USD scenes |
-| **Workstations** | 50x Dell Precision RTX A6000 | | **Network Fabric** | 100 GbE for large file transfers |
-| **GPU Configuration** | RTX A6000 48GB per workstation | | **Nucleus Servers** | 2 servers (primary + replica HA) |
-| **Rendering Farm** | 10 RTX nodes for batch rendering | | **Primary Use Cases** | Product design and architectural viz |
-| **CAD Tools** | Revit SolidWorks Rhino connectors | | **Collaboration Model** | Real-time multi-user scene editing |
-| **Software Platform** | Omniverse Enterprise (50 licenses) | | **Rendering** | RTX real-time + Omniverse Farm batch |
-| **Concurrent Users** | 25-30 simultaneous scene editors | | **Support Level** | 24x7 with dedicated NVIDIA TAM |
-| **Storage Performance** | 3-5 GB/s for scene sync | |  |  |
-| **Deployment Timeline** | 3-4 months (including training) | |  |  |
+| **GPU Workstations** | 50x RTX A6000 workstations | | **Data Classification** | Proprietary 3D designs |
+| **Nucleus Servers** | 2x Nucleus servers (HA) | | **Compliance Requirements** | Standard security |
+| **Design Team Size** | 50 designers and engineers | | **Real-Time Collaboration** | 50 concurrent users |
+| **Storage Infrastructure** | 100 TB USD scene storage | | **Rendering Performance** | RTX ray tracing |
+| **3D Scene Data** | Multi-TB project files | | **CAD Tool Connectors** | 5 primary connectors |
+| **Rendering Workloads** | Interactive + batch rendering | | **Rendering Farm** | 10 GPU render nodes |
+| **Network Infrastructure** | 100 GbE network | |  |  |
+| **Datacenter Readiness** | Standard IT infrastructure | |  |  |
+| **Deployment Model** | On-premises deployment | |  |  |
 <!-- END SCOPE_SIZING_TABLE -->
 
 *Note: Changes to these parameters may require scope adjustment and additional investment.*
@@ -77,10 +77,9 @@ This engagement is sized based on the following parameters:
   - 50x Dell Precision 7960 workstations each with NVIDIA RTX A6000 48GB for real-time ray tracing
   - Native connectors for Revit SolidWorks Rhino Blender Maya and Unreal Engine
 - **Platform Capabilities**
-  - Real-time collaboration with Git-like branching and merging for 3D scenes and live sync across tools
-  - RTX-accelerated ray tracing for photorealistic rendering and interactive viewport performance
-  - Omniverse Farm with 10 rendering nodes for batch rendering and overnight production jobs
-  - 100 TB NetApp storage (3-5 GB/s) for USD scenes models textures and asset libraries
+  - Real-time collaboration with Git-like branching merging and live sync across tools
+  - RTX-accelerated ray tracing for photorealistic rendering and interactive performance
+  - Omniverse Farm (10 nodes) and 100 TB storage (3-5 GB/s) for USD assets
 
 ---
 
@@ -151,9 +150,9 @@ This engagement is sized based on the following parameters:
 **layout:** eo_single_column
 
 - **Client Success: Automotive Design Studio**
-  - **Client:** European automotive manufacturer with 75-person design studio spanning industrial design surfacing engineering and marketing visualization teams
+  - **Client:** European automotive manufacturer with 75-person design studio
   - **Challenge:** Design tools operated in silos requiring manual file exports and conversions causing 2-3 day delays between departments. CPU-based rendering taking 12-16 hours per frame limiting design iteration. Remote collaboration impossible during pandemic forcing expensive travel.
-  - **Solution:** Deployed NVIDIA Omniverse Enterprise with 75 RTX A6000 workstations Nucleus cluster and 20-node rendering farm. Integrated Alias SolidWorks VRED and Unreal Engine via USD connectors. Enabled real-time design reviews with global teams.
+  - **Solution:** Deployed Omniverse Enterprise with 75 RTX workstations, Nucleus cluster, and native CAD tool integrations.
   - **Results:** 95% reduction in rendering time (12 hours to 35 minutes with RTX) and eliminated 2-3 day file conversion delays. Enabled real-time collaboration across 3 continents saving $240K in annual travel costs. Increased design iterations by 400% accelerating time-to-market by 6 months. Full ROI achieved in 22 months.
   - **Testimonial:** "Omniverse transformed how our global design teams collaborate. Engineers in Germany see surface changes from designers in California instantly in their native tools. The rendering performance is jaw-dropping - what took overnight now happens in minutes." — **Klaus Bergmann**, Design Director
 

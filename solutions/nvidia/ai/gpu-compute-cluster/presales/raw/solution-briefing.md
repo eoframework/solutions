@@ -50,15 +50,15 @@ This engagement is sized based on the following parameters:
 <!-- TABLE_CONFIG: widths=[18, 29, 5, 18, 30] -->
 | Parameter | Scope | | Parameter | Scope |
 |-----------|-------|---|-----------|-------|
-| **GPU Servers** | 8x Dell PowerEdge R750xa | | **Storage Capacity** | 200 TB NVMe all-flash |
-| **Total GPUs** | 32x NVIDIA A100 40GB | | **Network Fabric** | 100 GbE with RDMA (Mellanox) |
-| **GPU Memory** | 1.28 TB aggregate | | **Orchestration** | Kubernetes with GPU Operator |
-| **Research Team Size** | 20-30 data scientists | | **MLOps Platform** | Kubeflow for pipelines |
-| **Primary Workloads** | Model training 1B-50B parameters | | **Inference Platform** | Triton Inference Server |
-| **AI Frameworks** | PyTorch TensorFlow JAX | | **Software Stack** | NVIDIA AI Enterprise + NGC |
-| **Distributed Training** | Multi-GPU and multi-node | | **Monitoring** | Prometheus + Grafana dashboards |
-| **Storage Performance** | 3-5 GB/s throughput | | **Support Level** | 24x7 with next-day replacement |
-| **Deployment Timeline** | 3-4 months (including setup) | |  |  |
+| **GPU Servers** | 8x Dell R750xa servers | | **Data Classification** | Proprietary models |
+| **AI Workload Type** | Distributed training | | **Compliance Requirements** | Standard security |
+| **Data Science Team Size** | 20 data scientists | | **GPU Utilization Target** | 80% utilization |
+| **Storage Infrastructure** | 200 TB NetApp storage | | **Training Time Requirements** | Hours to days |
+| **Training Datasets** | Multi-TB datasets | | **Software Stack** | NVIDIA AI Enterprise |
+| **Model Checkpointing** | Regular checkpointing | | **Management Platform** | Kubernetes with GPU Operator |
+| **Network Fabric** | 100 GbE Ethernet | |  |  |
+| **Datacenter Readiness** | Standard datacenter | |  |  |
+| **Deployment Model** | On-premises datacenter | |  |  |
 <!-- END SCOPE_SIZING_TABLE -->
 
 *Note: Changes to these parameters may require scope adjustment and additional investment.*
@@ -78,9 +78,8 @@ This engagement is sized based on the following parameters:
   - NVIDIA AI Enterprise software suite with NGC container catalog access
 - **Platform Architecture**
   - Kubernetes 1.28+ with NVIDIA GPU Operator for GPU scheduling and time-slicing
-  - 100 GbE RDMA network for distributed training with NCCL multi-GPU communication
-  - NetApp AFF A400 200 TB all-flash storage (3-5 GB/s) for datasets and checkpoints
-  - Kubeflow for ML pipelines and Triton Inference Server for model deployment
+  - 100 GbE RDMA network with NCCL for distributed training communication
+  - NetApp AFF 200 TB storage (3-5 GB/s) with Kubeflow and Triton Inference Server
 
 ---
 
@@ -151,9 +150,9 @@ This engagement is sized based on the following parameters:
 **layout:** eo_single_column
 
 - **Client Success: Financial Services AI Team**
-  - **Client:** Mid-size investment firm with 25-person data science team building ML models for trading strategies risk analysis and fraud detection
+  - **Client:** Mid-size investment firm with 25-person data science team
   - **Challenge:** Cloud GPU costs exceeding $350K annually with frequent quota limitations blocking research. Training times of 2-3 days per experiment limiting iteration speed and model quality. No infrastructure for production model deployment.
-  - **Solution:** Deployed 32x NVIDIA A100 GPU cluster with Kubernetes orchestration and Kubeflow MLOps platform. Implemented Triton Inference Server for production model serving. Integrated with existing data lake and CI/CD pipelines.
+  - **Solution:** Deployed 32x A100 GPU cluster with Kubernetes, Kubeflow, and Triton Inference Server integration.
   - **Results:** 85% reduction in GPU costs ($350K to $50K annually cloud supplemental usage). 12x faster training for trading models (2 days to 4 hours). 40% increase in research throughput enabling 60% more model experiments. Full ROI achieved in 16 months.
   - **Testimonial:** "The GPU cluster transformed our AI capabilities from constrained cloud bursting to a true research platform. Our team can now experiment freely and deploy models to production in hours instead of weeks. The ROI was immediate and substantial." — **Michael Torres**, Head of Quantitative Research
 

@@ -78,22 +78,21 @@ This engagement is sized based on the following parameters:
 <!-- TABLE_CONFIG: widths=[25, 35, 40] -->
 | Category | Parameter | Scope |
 |----------|-----------|-------|
-| Solution Scope | RTX Workstations | 50x Dell Precision 7960 with RTX A6000 48GB |
-| Solution Scope | Nucleus Servers | 2 servers (primary + replica for HA) |
-| Integration | CAD Tool Connectors | 5 connectors (Revit, SolidWorks, Rhino, Blender, Maya) |
-| Integration | Storage Platform | 100 TB NVMe all-flash (NetApp AFF) |
-| User Base | Designers/Engineers | 50 users (architects, engineers, artists) |
-| User Base | User Roles | 3 roles (admin, designer, viewer) |
-| Data Volume | USD Scene Storage | 100 TB total capacity |
-| Data Volume | Asset Library | 10 TB materials and assets |
-| Technical Environment | Deployment Location | On-premises datacenter + workstations |
-| Technical Environment | Availability Requirements | 99.5% Nucleus uptime |
-| Technical Environment | Network | 100 GbE backbone, 10 GbE to workstations |
-| Security & Compliance | Security Requirements | RBAC, TLS, audit logging |
-| Security & Compliance | Compliance Frameworks | SOC2, intellectual property protection |
-| Performance | Rendering Performance | RTX real-time ray tracing, 90% faster |
-| Performance | Collaboration | 10+ concurrent users per scene |
-| Environment | Deployment Environments | 1 production Nucleus cluster |
+| Solution Scope | GPU Workstations | 50x RTX A6000 workstations |
+| Solution Scope | Nucleus Servers | 2x Nucleus servers (HA) |
+| Integration | Design Team Size | 50 designers and engineers |
+| Integration | Storage Infrastructure | 100 TB USD scene storage |
+| Data Volume | 3D Scene Data | Multi-TB project files |
+| Data Volume | Rendering Workloads | Interactive + batch rendering |
+| Technical Environment | Network Infrastructure | 100 GbE network |
+| Technical Environment | Datacenter Readiness | Standard IT infrastructure |
+| Technical Environment | Deployment Model | On-premises deployment |
+| Security & Compliance | Data Classification | Proprietary 3D designs |
+| Security & Compliance | Compliance Requirements | Standard security |
+| Performance | Real-Time Collaboration | 50 concurrent users |
+| Performance | Rendering Performance | RTX ray tracing |
+| Environment | CAD Tool Connectors | 5 primary connectors |
+| Environment | Rendering Farm | 10 GPU render nodes |
 <!-- END SCOPE_PARAMETERS_TABLE -->
 
 Table: Engagement Scope Parameters
@@ -702,13 +701,13 @@ Post-hypercare, Client may transition to ongoing managed services:
 
 <!-- BEGIN COST_SUMMARY_TABLE -->
 <!-- TABLE_CONFIG: widths=[20, 12, 18, 14, 12, 11, 13] -->
-| Cost Category | Year 1 List | Partner Credits | Year 1 Net | Year 2 | Year 3 | 3-Year Total |
-|---------------|-------------|-----------------|------------|--------|--------|--------------|
-| Professional Services | $49,500 | $0 | $49,500 | $0 | $0 | $49,500 |
-| Hardware Infrastructure | $1,006,000 | ($50,000) | $956,000 | $0 | $0 | $956,000 |
-| Software Licenses | $99,000 | $0 | $99,000 | $99,000 | $99,000 | $297,000 |
-| Support & Maintenance | $85,000 | $0 | $85,000 | $85,000 | $85,000 | $255,000 |
-| **TOTAL INVESTMENT** | **$1,239,500** | **($50,000)** | **$1,189,500** | **$184,000** | **$184,000** | **$1,557,500** |
+| Cost Category | Year 1 List | AWS/Partner Credits | Year 1 Net | Year 2 | Year 3 | 3-Year Total |
+|---------------|-------------|---------------------|------------|--------|--------|--------------|
+| Professional Services | $113,200 | $0 | $113,200 | $0 | $0 | $113,200 |
+| Hardware | $1,172,000 | ($37,500) | $1,134,500 | $0 | $0 | $1,134,500 |
+| Software Licenses | $99,000 | ($9,000) | $90,000 | $104,000 | $104,000 | $298,000 |
+| Support & Maintenance | $109,000 | $0 | $109,000 | $109,000 | $109,000 | $327,000 |
+| **TOTAL INVESTMENT** | **$1,493,200** | **($46,500)** | **$1,446,700** | **$213,000** | **$213,000** | **$1,872,700** |
 <!-- END COST_SUMMARY_TABLE -->
 
 ## Partner Credits

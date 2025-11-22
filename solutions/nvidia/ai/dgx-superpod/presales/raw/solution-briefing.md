@@ -50,6 +50,15 @@ This engagement is sized based on the following parameters:
 <!-- TABLE_CONFIG: widths=[18, 29, 5, 18, 30] -->
 | Parameter | Scope | | Parameter | Scope |
 |-----------|-------|---|-----------|-------|
+| **DGX Systems** | 8x DGX H100 systems | | **Data Classification** | Proprietary AI models |
+| **AI Workload Type** | LLM training and inference | | **Compliance Requirements** | Standard security |
+| **Research Team Size** | 50-75 data scientists | | **GPU Utilization Target** | 70-80% utilization |
+| **Storage Infrastructure** | 1 PB NVMe storage | | **Training Time Requirements** | Weeks to train large models |
+| **Training Datasets** | Multi-TB datasets | | **Software Stack** | NVIDIA AI Enterprise + NGC |
+| **Model Checkpointing** | Frequent checkpointing | | **Management Platform** | Base Command Manager |
+| **Network Fabric** | InfiniBand 400 Gbps | |  |  |
+| **Datacenter Readiness** | Facility upgrades required | |  |  |
+| **Deployment Model** | On-premises datacenter | |  |  |
 <!-- END SCOPE_SIZING_TABLE -->
 
 *Note: Changes to these parameters may require scope adjustment and additional investment.*
@@ -70,8 +79,7 @@ This engagement is sized based on the following parameters:
 - **High-Performance Architecture**
   - NVIDIA Quantum-2 400 Gbps InfiniBand fabric for multi-node distributed training
   - 1 PB NVMe all-flash storage with 14 GB/s throughput for dataset streaming
-  - Base Command Manager for cluster orchestration job scheduling and resource allocation
-  - Enterprise support with 24x7 coverage and 4-hour hardware replacement SLA
+  - Base Command Manager for orchestration with enterprise 24x7 support and 4-hour SLA
 
 ---
 
@@ -142,9 +150,9 @@ This engagement is sized based on the following parameters:
 **layout:** eo_single_column
 
 - **Client Success: Pharmaceutical Research Company**
-  - **Client:** Global pharmaceutical company with 200+ researchers across computational biology drug discovery and clinical trials
+  - **Client:** Global pharmaceutical company with 200+ researchers across drug discovery
   - **Challenge:** Training molecular dynamics and protein folding models taking 8-12 weeks on cloud infrastructure costing $4M annually. Limited GPU availability creating research bottlenecks and delaying drug development programs.
-  - **Solution:** Deployed NVIDIA DGX SuperPOD with 16 DGX A100 systems (128 GPUs) InfiniBand fabric and 2 PB storage. Implemented Base Command for multi-tenant resource allocation across research teams.
+  - **Solution:** Deployed DGX SuperPOD with 128 GPUs, InfiniBand fabric, 2 PB storage, and Base Command orchestration.
   - **Results:** 12x faster training times for AlphaFold2 models (1 week vs 12 weeks) and $3.2M annual cloud cost savings. Enabled 5 new drug discovery programs previously infeasible due to compute constraints. Full ROI achieved in 18 months.
   - **Testimonial:** "DGX SuperPOD transformed our computational drug discovery capabilities. We can now run experiments that were previously impossible and our time-to-candidate has been cut in half. The investment paid for itself faster than we projected." — **Dr. James Chen**, VP of Computational Sciences
 
