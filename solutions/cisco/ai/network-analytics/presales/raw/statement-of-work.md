@@ -1,269 +1,657 @@
-# STATEMENT OF WORK (SOW)
+---
+# Document Metadata (Simplified)
+document_title: Statement of Work
+technology_provider: Cisco Systems
+project_name: Cisco DNA Center Network Analytics
+client_name: [Client Name]
+client_contact: [Contact Name | Email | Phone]
+consulting_company: [Consulting Company Name]
+consultant_contact: [Contact Name | Email | Phone]
+opportunity_no: [OPP-YYYY-###]
+document_date: [Month DD, YYYY]
+version: [1.0]
+client_logo: ../../assets/logos/client_logo.png
+vendor_logo: ../../assets/logos/consulting_company_logo.png
+eoframework_logo: ../../assets/logos/eo-framework-logo-real.png
+---
 
-**Document Version:** 1.0
-**Date:** [DATE]
-**Prepared by:** [VENDOR_NAME]
-**Client:** [CLIENT_NAME]
-**Project:** {SOLUTION_NAME} Implementation
-**SOW Number:** [SOW_NUMBER]
+# Executive Summary
+
+This Statement of Work (SOW) defines the scope, deliverables, roles, and terms for the Cisco DNA Center Network Analytics project for [Client Name]. This engagement will deliver an AI-powered network management platform to transform network operations, reduce troubleshooting time by 75%, and achieve 99.9% network uptime with predictive analytics and automation.
+
+**Project Duration:** 16 weeks
 
 ---
 
-## 1. EXECUTIVE SUMMARY
+# Background & Objectives
 
-### 1.1 Project Overview
-This Statement of Work (SOW) outlines the scope, deliverables, timeline, and terms for the implementation of {SOLUTION_NAME} for [CLIENT_NAME]. The project will deliver [PRIMARY_BUSINESS_OUTCOME] through [HIGH_LEVEL_APPROACH].
+## Current State
 
-### 1.2 Business Objectives
-- **Primary Goal:** [PRIMARY_BUSINESS_OBJECTIVE]
-- **Success Metrics:** [QUANTIFIED_SUCCESS_CRITERIA]
-- **Expected ROI:** [ROI_PERCENTAGE] over [TIME_PERIOD]
+[Client Name] currently operates a traditional network infrastructure with manual configuration and reactive troubleshooting. Key challenges include:
+- **Reactive Troubleshooting:** Network issues diagnosed manually taking 4-6 hours per incident
+- **Limited Visibility:** No centralized visibility into application performance and network health
+- **Manual Provisioning:** New switch deployments take 4 hours per device with CLI configuration
+- **Compliance Gaps:** Difficulty maintaining consistent security policies across 200+ devices
+- **Unplanned Downtime:** Network failures detected after user complaints rather than proactively
 
-### 1.3 Project Duration
-**Start Date:** [PROJECT_START_DATE]
-**End Date:** [PROJECT_END_DATE]
-**Total Duration:** [PROJECT_DURATION] weeks
+## Business Objectives
 
----
+- **Transform to Proactive Operations:** Deploy AI-powered analytics to predict network failures 14 days in advance, reducing unplanned downtime by 90%
+- **Reduce Troubleshooting Time:** Achieve 75% reduction in mean time to repair (MTTR) from 4-6 hours to under 1 hour through AI root cause analysis
+- **Automate Device Provisioning:** Enable zero-touch provisioning reducing switch deployment time from 4 hours to 15 minutes
+- **Improve Network Uptime:** Achieve 99.9% network availability SLA through predictive insights and automated remediation
+- **Application Experience:** Monitor Office 365, Webex, and SAP performance with real-time SLA tracking and optimization
+- **Operational Efficiency:** Reduce network management overhead by 60% through centralized DNA Center orchestration
 
-## 2. SCOPE OF WORK
+## Success Metrics
 
-### 2.1 In-Scope Activities
-The following services and deliverables are included in this SOW:
-
-#### 2.1.1 Discovery & Planning Phase
-- [ ] Stakeholder interviews and requirements gathering
-- [ ] Current state assessment and technical evaluation
-- [ ] Solution architecture design and documentation
-- [ ] Project planning and resource allocation
-- [ ] Risk assessment and mitigation planning
-
-#### 2.1.2 Implementation Phase
-- [ ] Infrastructure provisioning and configuration
-- [ ] Application deployment and customization
-- [ ] System integration and data migration
-- [ ] Security configuration and hardening
-- [ ] Performance optimization and tuning
-
-#### 2.1.3 Testing & Validation Phase
-- [ ] Unit and integration testing
-- [ ] Performance and security testing
-- [ ] User acceptance testing coordination
-- [ ] Bug fixes and issue resolution
-- [ ] Go-live readiness assessment
-
-#### 2.1.4 Deployment & Support Phase
-- [ ] Production deployment and cutover
-- [ ] Post-deployment monitoring and support
-- [ ] User training and knowledge transfer
-- [ ] Documentation delivery
-- [ ] Project closure and handover
-
-### 2.2 Out-of-Scope Activities
-The following activities are explicitly excluded from this SOW:
-
-- [ ] Hardware procurement and installation
-- [ ] Third-party software licensing
-- [ ] Network infrastructure modifications
-- [ ] Legacy system decommissioning
-- [ ] Ongoing operational support beyond [SUPPORT_PERIOD]
-- [ ] Custom development beyond specified requirements
-- [ ] Data cleansing or transformation of legacy data
-- [ ] Training beyond initial knowledge transfer
+- 75% reduction in network troubleshooting time (MTTR < 1 hour)
+- 99.9% network uptime SLA achievement
+- Zero-touch provisioning for new sites (deployment in hours vs weeks)
+- 85% reduction in configuration errors through automation
+- 14-day advance warning for device failures
 
 ---
 
-## 3. DELIVERABLES
+# Scope of Work
 
-### 3.1 Documentation Deliverables
-| Deliverable | Description | Due Date | Format |
-|-------------|-------------|----------|---------|
-| **Requirements Specification** | Detailed functional and non-functional requirements | [DATE] | CSV/Excel |
-| **Solution Architecture Document** | Technical architecture and design specifications | [DATE] | PDF |
-| **Implementation Plan** | Detailed project timeline and resource allocation | [DATE] | MS Project |
-| **Test Plan & Results** | Testing strategy and execution results | [DATE] | PDF |
-| **User Training Materials** | End-user guides and training documentation | [DATE] | PDF/Video |
-| **Operations Runbook** | System administration and maintenance procedures | [DATE] | PDF |
-| **As-Built Documentation** | Final system configuration and architecture | [DATE] | PDF |
+## In Scope
 
-### 3.2 System Deliverables
-| Component | Description | Acceptance Criteria |
-|-----------|-------------|-------------------|
-| **Production Environment** | Fully configured and operational system | Passes all acceptance tests |
-| **Integration Interfaces** | Configured data connections and APIs | Successful data flow validation |
-| **Security Configuration** | Implemented security controls and policies | Security audit compliance |
-| **Monitoring Setup** | Operational monitoring and alerting | Functional dashboards and alerts |
-| **Backup & Recovery** | Automated backup and disaster recovery | Successful recovery test |
+- Network discovery and assessment of 200 devices
+- DNA Center appliance deployment with HA configuration
+- AI Network Analytics and assurance configuration
+- Zero-touch provisioning and automation workflows
+- Application experience monitoring for critical business apps
+- Integration with Active Directory, ServiceNow, and NetBox
+- SD-Access fabric deployment for 100 devices (optional)
+- Testing and validation across campus, branch, and data center
+- Knowledge transfer and documentation
+- 4-week hypercare support period
 
-### 3.3 Knowledge Transfer Deliverables
-- Administrator training (2 days, up to 10 participants)
-- End-user training (1 day, up to 25 participants)
-- Technical documentation and procedures
-- Recorded training sessions for future reference
+### Scope Parameters
 
----
+This engagement is sized based on the following parameters:
 
-## 4. PROJECT TIMELINE & MILESTONES
+<!-- BEGIN SCOPE_PARAMETERS_TABLE -->
+<!-- TABLE_CONFIG: widths=[25, 35, 40] -->
+| Category | Parameter | Scope |
+|----------|-----------|-------|
+| Solution Scope | Primary Features/Capabilities | DNA Center for 200 devices |
+| Solution Scope | Customization Level | Standard DNA Center deployment |
+| Integration | External System Integrations | 2 systems (AD + ITSM) |
+| Integration | Data Sources | Network devices only |
+| User Base | Total Users | 10 network administrators |
+| User Base | User Roles | 2 roles (admin + viewer) |
+| Data Volume | Data Processing Volume | 200 devices telemetry |
+| Data Volume | Data Storage Requirements | 500 GB (90-day retention) |
+| Technical Environment | Deployment Regions | Single data center |
+| Technical Environment | Availability Requirements | Standard (99.5%) |
+| Technical Environment | Infrastructure Complexity | Basic campus network |
+| Security & Compliance | Security Requirements | Basic 802.1X and encryption |
+| Security & Compliance | Compliance Frameworks | Basic logging |
+| Performance | Performance Requirements | Standard telemetry |
+| Environment | Deployment Environments | Production only |
+<!-- END SCOPE_PARAMETERS_TABLE -->
 
-### 4.1 Project Phases
-| Phase | Duration | Start Date | End Date | Key Milestones |
-|-------|----------|------------|----------|----------------|
-| **Discovery & Planning** | 2 weeks | [DATE] | [DATE] | Requirements approved, Architecture signed-off |
-| **Implementation** | 6 weeks | [DATE] | [DATE] | Infrastructure ready, Application deployed |
-| **Testing & Validation** | 2 weeks | [DATE] | [DATE] | UAT completed, Go-live approved |
-| **Deployment & Support** | 2 weeks | [DATE] | [DATE] | Production live, Training completed |
+Table: Engagement Scope Parameters
 
-### 4.2 Critical Dependencies
-- [ ] Client provides timely access to required systems and environments
-- [ ] Subject matter experts available for requirements gathering and testing
-- [ ] Network connectivity and security approvals obtained
-- [ ] Third-party vendor coordination for integrations
-- [ ] Business stakeholder availability for key decision points
+*Note: Changes to these parameters may require scope adjustment and additional investment.*
 
----
+## Out of Scope
 
-## 5. ROLES & RESPONSIBILITIES
+These items are not in scope unless added via change control:
+- Hardware procurement beyond DNA Center appliances
+- Network device hardware upgrades or replacements
+- Wireless LAN controller upgrades or replacements
+- End-user training (network team only)
+- Managed services post-hypercare period
+- Network redesign or re-architecture
+- Third-party software licenses (NetBox, ServiceNow)
 
-### 5.1 Vendor Responsibilities ([VENDOR_NAME])
-- **Project Manager:** Overall project coordination and delivery management
-- **Solution Architect:** Technical design and architecture oversight
-- **Implementation Team:** System configuration, deployment, and testing
-- **Training Specialist:** User enablement and knowledge transfer
-- **Support Engineer:** Post-deployment support and issue resolution
+## Activities
 
-### 5.2 Client Responsibilities ([CLIENT_NAME])
-- **Project Sponsor:** Executive oversight and business decision authority
-- **Technical Lead:** Infrastructure coordination and technical approvals
-- **Business Analyst:** Requirements validation and user acceptance testing
-- **System Administrator:** Ongoing system maintenance and administration
-- **End Users:** Participation in training and user acceptance testing
+### Phase 1 – Foundation (Weeks 1-4)
 
-### 5.3 Shared Responsibilities
-- Risk management and issue escalation
-- Change control and scope management
-- Quality assurance and acceptance testing
-- Communication and stakeholder management
+During this initial phase, the Vendor will perform comprehensive network discovery and deploy DNA Center infrastructure.
 
----
+Key activities:
+- Network discovery and assessment of 200 devices
+- Capacity analysis and device compatibility validation
+- DNA Center appliance deployment (primary + secondary HA)
+- Initial device onboarding for 50 pilot devices
+- Policy framework design for automation and analytics
 
-## 6. COMMERCIAL TERMS
+**Deliverable:** Network Assessment Report
 
-### 6.1 Project Investment
-| Category | Description | Amount |
-|----------|-------------|--------|
-| **Professional Services** | Implementation and configuration services | $[SERVICES_AMOUNT] |
-| **Training & Support** | User training and initial support | $[TRAINING_AMOUNT] |
-| **Travel & Expenses** | On-site support and travel costs | $[TRAVEL_AMOUNT] |
-| ****TOTAL PROJECT COST** | **Total investment for complete implementation** | **$[TOTAL_AMOUNT]** |
+### Phase 2 – Automation & Analytics (Weeks 5-8)
 
-### 6.2 Payment Terms
-- **25%** upon SOW execution and project kickoff
-- **25%** upon completion of Discovery & Planning phase
-- **25%** upon completion of Implementation phase
-- **25%** upon successful go-live and project acceptance
+In this phase, remaining devices are onboarded and automation workflows configured.
 
-### 6.3 Additional Services
-Any additional services beyond the scope of this SOW will be quoted separately and require written approval from both parties.
+Key activities:
+- Remaining device onboarding (150 devices) with automated discovery
+- Network policies and automation workflows (VLAN, ACL, compliance)
+- AI analytics and assurance configuration with anomaly detection
+- Predictive insights enablement for proactive failure detection
+- Dashboard and reporting configuration
 
----
+**Deliverable:** Automation Playbook and Analytics Configuration Guide
 
-## 7. ACCEPTANCE CRITERIA
+### Phase 3 – Advanced Features (Weeks 9-12)
 
-### 7.1 Technical Acceptance
-The solution will be considered technically accepted when:
-- [ ] All functional requirements are implemented and tested
-- [ ] System performance meets specified requirements
-- [ ] Security controls are implemented and validated
-- [ ] Integration testing is completed successfully
-- [ ] System passes all acceptance tests
+Implementation of advanced capabilities including application monitoring and integrations.
 
-### 7.2 Business Acceptance
-The project will be considered complete when:
-- [ ] Business stakeholders sign-off on user acceptance testing
-- [ ] Training is completed and knowledge transfer validated
-- [ ] Documentation is delivered and approved
-- [ ] System is operational in production environment
-- [ ] Support procedures are established and functional
+Key activities:
+- Application experience monitoring for Office 365, Webex, SAP
+- ServiceNow integration with automated ticket creation
+- NetBox IPAM integration for inventory management
+- SD-Access fabric design and deployment for 100 devices (optional)
+- TrustSec micro-segmentation policies (optional)
+
+**Deliverable:** Integration Documentation and SD-Access Design
+
+### Phase 4 – Optimization (Weeks 13-16)
+
+The solution undergoes validation, fine-tuning, and operational handoff.
+
+Key activities:
+- Validation testing and policy fine-tuning
+- Performance baseline establishment
+- Team training (32 hours) with hands-on labs
+- Runbooks and operational documentation
+- Hypercare support activation
+
+**Deliverable:** As-Built Documentation and Operational Runbooks
 
 ---
 
-## 8. ASSUMPTIONS & CONSTRAINTS
+# Deliverables & Timeline
 
-### 8.1 Assumptions
-- Client will provide necessary access to systems, data, and personnel
-- Existing infrastructure meets minimum requirements for solution deployment
-- Required third-party systems and APIs are available and functional
-- Business requirements will remain stable throughout project duration
-- Client team members will be available for scheduled activities
+## Deliverables
 
-### 8.2 Constraints
-- Project must comply with existing security and compliance requirements
-- Implementation must not disrupt critical business operations
-- All data handling must meet privacy and regulatory requirements
-- Solution must integrate with existing IT infrastructure and policies
-- Budget and timeline constraints as specified in this SOW
+<!-- TABLE_CONFIG: widths=[8, 40, 12, 20, 20] -->
+| # | Deliverable | Type | Due Date | Acceptance By |
+|---|-------------|------|----------|---------------|
+| 1 | Network Assessment Report | Document | Week 4 | Client IT Lead |
+| 2 | Automation Playbook | Document | Week 8 | Network Lead |
+| 3 | Integration Documentation | Document | Week 12 | Operations Lead |
+| 4 | As-Built Documentation | Document | Week 16 | Client IT Lead |
+| 5 | Knowledge Transfer Sessions | Live/Recorded | Week 16 | Network Team |
 
----
+## Project Milestones
 
-## 9. RISK MANAGEMENT
-
-### 9.1 Identified Risks
-| Risk | Impact | Probability | Mitigation Strategy |
-|------|--------|-------------|-------------------|
-| **Resource Availability** | High | Medium | Advance scheduling and backup resources |
-| **Integration Complexity** | Medium | High | Early integration testing and validation |
-| **Scope Creep** | High | Medium | Formal change control process |
-| **Technology Dependencies** | Medium | Low | Contingency planning and alternatives |
-
-### 9.2 Change Management
-Any changes to project scope, timeline, or budget must be documented through formal change requests and approved by both parties before implementation.
+<!-- TABLE_CONFIG: widths=[20, 55, 25] -->
+| Milestone | Description | Target Date |
+|-----------|-------------|-------------|
+| M1 - Foundation Complete | DNA Center deployed with 50 devices onboarded | Week 4 |
+| M2 - Analytics Operational | All 200 devices onboarded with analytics enabled | Week 8 |
+| M3 - Integrations Complete | ServiceNow NetBox and app monitoring live | Week 12 |
+| M4 - Go-Live | Production operational handoff | Week 16 |
+| Hypercare End | Support period complete | Week 20 |
 
 ---
 
-## 10. TERMS & CONDITIONS
+# Roles & Responsibilities
 
-### 10.1 Intellectual Property
-- Client retains ownership of all business data and information
-- Vendor retains ownership of proprietary methodologies and tools
-- Solution configuration and customizations become client property upon final payment
+## RACI Matrix
 
-### 10.2 Confidentiality
-Both parties agree to maintain strict confidentiality of proprietary information and business data throughout the project and beyond.
+<!-- TABLE_CONFIG: widths=[28, 11, 11, 11, 11, 9, 9, 10] -->
+| Task/Role | EO PM | EO Quarterback | EO Network Eng | EO Automation | Client Net | Client Ops | SME |
+|-----------|-------|----------------|----------------|---------------|------------|------------|-----|
+| Discovery & Requirements | A | R | R | C | C | I | C |
+| DNA Center Deployment | C | A | R | C | C | I | I |
+| Device Onboarding | C | R | A | C | C | I | I |
+| Analytics Configuration | C | A | R | R | I | C | I |
+| Integration Setup | C | R | C | A | I | A | I |
+| Testing & Validation | R | R | C | R | A | C | I |
+| Knowledge Transfer | A | R | R | C | C | I | I |
 
-### 10.3 Warranty & Support
-- 90-day warranty on all deliverables from go-live date
-- Defect resolution included at no additional cost during warranty period
-- Post-warranty support available under separate maintenance agreement
+**Legend:** R = Responsible | A = Accountable | C = Consulted | I = Informed
 
-### 10.4 Limitation of Liability
-Vendor's liability is limited to the total contract value. Neither party shall be liable for indirect, incidental, or consequential damages.
+## Key Personnel
 
----
+**Vendor Team:**
+- EO Project Manager: Overall delivery accountability
+- EO Quarterback: Technical design and architecture oversight
+- EO Network Engineer: DNA Center deployment and configuration
+- EO Automation Engineer: Policy automation and integration
 
-## 11. APPROVAL & SIGNATURES
-
-### Client Approval ([CLIENT_NAME])
-
-**Name:** [CLIENT_AUTHORIZED_SIGNATORY]
-**Title:** [TITLE]
-**Signature:** ________________________________
-**Date:** ________________
-
-### Vendor Approval ([VENDOR_NAME])
-
-**Name:** [VENDOR_AUTHORIZED_SIGNATORY]
-**Title:** [TITLE]
-**Signature:** ________________________________
-**Date:** ________________
+**Client Team:**
+- Network Lead: Primary technical contact
+- Operations Lead: Day-to-day operations and monitoring
+- Security Lead: Security policy and compliance approval
+- Application SME: Application experience requirements
 
 ---
 
-**Document Control:**
-**File Name:** SOW_{SOLUTION_NAME}_{CLIENT_NAME}_{DATE}
-**Version:** 1.0
-**Last Modified:** [DATE]
-**Next Review:** [REVIEW_DATE]
+# Architecture & Design
+
+## Architecture Overview
+
+![Solution Architecture](../../assets/diagrams/architecture-diagram.png)
+
+**Figure 1: DNA Center Network Analytics Architecture** - AI-powered network management platform
+
+The proposed architecture provides centralized network management, AI-driven analytics, and automation for 200 devices. Key components include:
+
+- **Management Tier:** Cisco DNA Center appliances (primary + secondary HA)
+- **Analytics Tier:** AI Network Analytics with predictive insights and anomaly detection
+- **Integration Tier:** ServiceNow ITSM, NetBox IPAM, Active Directory identity
+- **Network Infrastructure:** Catalyst switches, ISR routers, wireless controllers
+
+## Architecture Type
+
+This solution follows a **centralized orchestration** architecture pattern. Key characteristics:
+
+- **Scaling Approach:** Horizontal scaling with additional DNA Center nodes for capacity
+- **Deployment Model:** On-premises DNA Center appliances with cloud integration (Cisco Intersight)
+- **Management Paradigm:** Intent-based networking with policy-driven automation
+- **Communication Patterns:** Controller-based with NETCONF/RESTCONF to network devices
+
+The architecture is designed to support the 200-device scope with capacity to scale to 500+ devices.
+
+## Scope Specifications
+
+This engagement is scoped for a **Medium (200-device)** deployment:
+
+**DNA Center Infrastructure:**
+- Medium (200 devices): Primary DN2-HW-APL + Secondary HA, 32 vCPU, 256 GB RAM
+- Large (500 devices): DN2-HW-APL-L with clustered nodes, 64 vCPU, 512 GB RAM
+
+**Software Licensing:**
+- Medium (200 devices): DNA Advantage + AI Analytics (200 device licenses)
+- Large (500 devices): DNA Premier with advanced security and analytics
+
+**Network Scope:**
+- Medium (200 devices): Campus + branch + data center (2-3 sites)
+- Large (500 devices): Multi-site distributed deployment (5+ locations)
+
+**Integration Complexity:**
+- Medium (200 devices): 3 integrations (AD, ServiceNow, NetBox)
+- Large (500 devices): 6+ integrations including SIEM, APM, cloud orchestration
+
+Changes to scope level will require adjustment to infrastructure resources, timeline, and investment.
+
+## Application Hosting
+
+DNA Center appliances will be hosted in the client data center:
+
+**Compute Services:**
+- Primary DN2-HW-APL appliance (200-device capacity)
+- Secondary DN2-HW-APL for high availability
+- Hosted on dedicated hardware appliances (not virtualized)
+
+**Deployment Approach:**
+- Rack-mounted appliances with redundant power and network
+- HA configuration with automatic failover
+- Integration with existing network infrastructure
+
+## Networking
+
+The networking architecture follows Cisco SD-Access and traditional campus best practices:
+
+**Network Topology:**
+- Campus core with distribution and access layers
+- Branch offices with direct WAN connectivity
+- Data center with redundant uplinks
+
+**Connectivity:**
+- DNA Center management network connectivity
+- NETCONF/RESTCONF to managed devices
+- SNMP, syslog, and NetFlow telemetry collection
+
+**Security Controls:**
+- 802.1X authentication for user and device access
+- TrustSec micro-segmentation (optional)
+- Encrypted management protocols (SSH, HTTPS)
+- Role-based access control (RBAC) for DNA Center
+
+## Observability
+
+Comprehensive observability ensures proactive network management:
+
+**Logging:**
+- Centralized syslog collection from all 200 devices
+- 90-day log retention for troubleshooting and compliance
+- Automated log correlation and anomaly detection
+
+**Monitoring:**
+- Real-time device health monitoring (CPU, memory, interfaces)
+- Application performance monitoring (Office 365, Webex, SAP)
+- Network path analysis and hop-by-hop visibility
+- Wireless client connectivity and roaming analytics
+
+**Alerting:**
+- Predictive alerts for device failures (14-day advance warning)
+- Performance threshold alerts for SLA violations
+- Automated ticket creation in ServiceNow for critical issues
+
+## Backup & Disaster Recovery
+
+All configurations and data are protected:
+
+**Backup Strategy:**
+- Automated nightly backups of DNA Center configuration
+- Device configuration backups stored in DNA Center
+- Cross-site replication to secondary HA node
+- 30-day backup retention
+
+**Disaster Recovery:**
+- Recovery Time Objective (RTO): 4 hours
+- Recovery Point Objective (RPO): 24 hours
+- HA failover for DNA Center (automatic)
+- Documented recovery procedures
+
+## Technical Implementation Strategy
+
+The deployment follows a phased approach with pilot validation:
+
+**Migration Patterns:**
+- Pilot with 50 devices to validate automation workflows
+- Incremental onboarding in waves (50 → 100 → 200 devices)
+- Policy enforcement phased rollout (monitor → enforce)
+
+**Infrastructure as Code:**
+- DNA Center templates for device configurations
+- Policy as code for automation workflows
+- Version control for templates and policies
 
 ---
 
-*This Statement of Work constitutes the complete agreement between the parties for the services described herein and supersedes all prior negotiations, representations, or agreements relating to the subject matter.*
+# Security & Compliance
+
+## Identity & Access Management
+
+- Role-based access control (RBAC) for DNA Center administrators
+- Active Directory integration with LDAP for authentication
+- Multi-factor authentication (MFA) for privileged access
+- Audit logging for all administrative actions
+
+## Monitoring & Threat Detection
+
+- Real-time security monitoring through DNA Center assurance
+- Encrypted management protocols (SSH, HTTPS, NETCONF/TLS)
+- Anomaly detection for unusual device or network behavior
+- Integration with SIEM for security analytics (optional)
+
+## Compliance & Auditing
+
+- Configuration compliance validation against baselines
+- Automated drift detection and remediation
+- Audit trails for all configuration changes
+- Compliance reporting for PCI DSS or HIPAA requirements
+
+**Audit Capabilities:**
+- Change tracking with who/what/when/why
+- Policy compliance scoring
+- Security posture dashboards
+- Automated compliance remediation
+
+## Encryption & Key Management
+
+- TLS 1.2+ for all DNA Center communications
+- SSH for device management
+- 802.1X with EAP-TLS for network access (optional)
+- Certificate management for device authentication
+
+---
+
+# Testing & Validation
+
+## Functional Validation
+
+Comprehensive testing ensures all features work as designed:
+
+**End-to-End Testing:**
+- Device discovery and onboarding workflows
+- Zero-touch provisioning for new switches
+- Policy automation and template application
+- AI analytics and predictive insights validation
+
+**Integration Testing:**
+- Active Directory authentication
+- ServiceNow ticket creation and closure
+- NetBox inventory synchronization
+- Application experience data collection
+
+## Performance & Load Testing
+
+Performance validation ensures the solution meets requirements:
+
+**Load Testing:**
+- 200-device telemetry ingestion and processing
+- Dashboard and reporting performance
+- Concurrent administrator access (10 users)
+
+**Benchmarking:**
+- Telemetry latency (target: < 5 minutes)
+- Dashboard response time (target: < 3 seconds)
+- Policy deployment time (target: < 5 minutes for 200 devices)
+
+## Security Testing
+
+Security validation to ensure compliance:
+
+**Vulnerability Assessment:**
+- DNA Center appliance security hardening verification
+- Role-based access control (RBAC) validation
+- Encrypted communication verification
+
+**Compliance Validation:**
+- Configuration compliance against organizational standards
+- Audit logging completeness
+- Access control verification
+
+## User Acceptance Testing (UAT)
+
+UAT is performed in coordination with Client network team:
+
+**UAT Approach:**
+- Lab environment for hands-on testing
+- Operational workflow validation
+- Dashboard and reporting validation
+- Knowledge transfer during UAT
+
+**Acceptance Criteria:**
+- All devices successfully onboarded
+- Analytics and assurance operational
+- Integrations functional
+- Team trained and confident
+
+---
+
+# Handover & Support
+
+## Handover Artifacts
+
+Upon successful implementation, the following artifacts will be delivered:
+
+**Documentation Deliverables:**
+- As-built architecture diagrams
+- DNA Center configuration documentation
+- Policy templates and automation workflows
+- Integration configuration guides
+- Network topology and device inventory
+
+**Operational Deliverables:**
+- Operations runbooks and SOPs
+- Troubleshooting guides
+- Monitoring and alerting procedures
+- Escalation and incident response playbooks
+
+**Knowledge Assets:**
+- Recorded training sessions
+- DNA Center administrator credentials
+- Integration API keys and credentials
+- Vendor support contacts
+
+## Knowledge Transfer
+
+Knowledge transfer ensures the Client team can operate DNA Center:
+
+**Training Sessions:**
+- 32 hours of hands-on training (live and recorded)
+- DNA Center operations and monitoring
+- Policy automation and template management
+- Troubleshooting and incident response
+- Application experience analytics
+
+**Documentation Package:**
+- As-built architecture documentation
+- Configuration management guide
+- Operational runbooks and SOPs
+- Troubleshooting and optimization guide
+
+## Hypercare Support
+
+Post-implementation support for smooth transition:
+
+**Duration:** 4 weeks post-go-live
+
+**Coverage:**
+- Business hours support (8 AM - 6 PM local time)
+- 4-hour response time for critical issues
+- Daily health check calls (first 2 weeks)
+- Weekly status meetings
+
+**Scope:**
+- Issue investigation and resolution
+- Performance tuning and optimization
+- Policy adjustments and fine-tuning
+- Knowledge transfer continuation
+
+## Assumptions
+
+### General Assumptions
+
+This engagement is based on the following assumptions:
+
+**Client Responsibilities:**
+- Client will provide timely access to network devices and DNA Center appliances
+- Client network team will be available for requirements validation and testing
+- Client will provide Active Directory, ServiceNow, and NetBox integration credentials
+- Client will handle internal change management and stakeholder communication
+
+**Technical Environment:**
+- Network devices are IOS-XE 16.12+ or NX-OS compatible with DNA Center
+- Network connectivity and bandwidth sufficient for telemetry collection
+- Data center rack space, power, and network available for DNA Center appliances
+- Active Directory, ServiceNow, and NetBox systems are operational
+
+**Project Execution:**
+- Project scope and requirements will remain stable during implementation
+- Resources (both Vendor and Client) will be available per project plan
+- No major network changes during pilot and deployment phases
+- Security and compliance approvals will not delay critical path activities
+
+## Dependencies
+
+### Project Dependencies
+
+Critical dependencies for successful project execution:
+
+**Access & Infrastructure:**
+- Data center rack space and power for DNA Center appliances (Week 1)
+- Network management connectivity to all 200 devices
+- DNS and NTP services for DNA Center
+- SMTP for email notifications
+
+**Data & Integration:**
+- Active Directory LDAP integration credentials (Week 2)
+- ServiceNow API credentials and ITSM instance access (Week 6)
+- NetBox API credentials and IPAM data (Week 6)
+- Application monitoring requirements documented (Week 6)
+
+**Resources & Expertise:**
+- Client network team available for device onboarding validation
+- Security team available for policy approval and compliance sign-off
+- Operations team available for knowledge transfer
+- Application SMEs for performance monitoring requirements
+
+---
+
+# Investment Summary
+
+## Total Investment
+
+This section provides a comprehensive overview of the total investment required for this engagement.
+
+<!-- BEGIN COST_SUMMARY_TABLE -->
+<!-- TABLE_CONFIG: widths=[25, 15, 12, 15, 11, 11, 11] -->
+| Cost Category | Year 1 List | AWS/Partner Credits | Year 1 Net | Year 2 | Year 3 | 3-Year Total |
+|---------------|-------------|---------------------|------------|--------|--------|--------------|
+| Professional Services | $85,100 | $0 | $85,100 | $0 | $0 | $85,100 |
+| Hardware | $120,000 | $0 | $120,000 | $0 | $0 | $120,000 |
+| Software | $110,000 | ($20,000) | $90,000 | $110,000 | $110,000 | $310,000 |
+| Support | $18,000 | $0 | $18,000 | $18,000 | $18,000 | $54,000 |
+| **TOTAL INVESTMENT** | **$333,100** | **($20,000)** | **$313,100** | **$128,000** | **$128,000** | **$569,100** |
+<!-- END COST_SUMMARY_TABLE -->
+
+## Partner Credits
+
+**Year 1 Credits Applied:** $20,000 (DNA license promotion)
+
+**Annual Recurring Cost:** $128,000/year (software licenses and support)
+
+## Payment Terms
+
+**Pricing Model:** Fixed price with milestone-based payments
+
+**Payment Schedule:**
+- 30% upon SOW execution and project kickoff ($93,930)
+- 30% upon completion of Phase 2 - Analytics Operational ($93,930)
+- 25% upon completion of Phase 3 - Integrations Complete ($78,275)
+- 15% upon successful go-live and project acceptance ($46,965)
+
+**Invoicing:** Monthly invoicing based on milestones completed. Net 30 payment terms.
+
+---
+
+# Terms & Conditions
+
+## General Terms
+
+All services will be delivered in accordance with the executed Master Services Agreement (MSA) between Vendor and Client.
+
+## Scope Changes
+
+Any changes to scope, schedule, or cost require a formal Change Request approved by both parties. Impact assessment will be provided within 5 business days.
+
+## Intellectual Property
+
+- Client retains ownership of all deliverables, configurations, and documentation
+- Vendor retains proprietary methodologies, tools, and accelerators
+- Pre-existing IP remains with original owner
+
+## Confidentiality
+
+- All exchanged artifacts under NDA protection
+- Client data handled per security requirements
+- No disclosure to third parties without consent
+
+---
+
+# Sign-Off
+
+By signing below, both parties agree to the scope, approach, and terms outlined in this Statement of Work.
+
+**Client Authorized Signatory:**
+
+Name: ______________________________
+
+Title: ______________________________
+
+Signature: __________________________
+
+Date: ______________________________
+
+**Service Provider Authorized Signatory:**
+
+Name: ______________________________
+
+Title: ______________________________
+
+Signature: __________________________
+
+Date: ______________________________
+
+---

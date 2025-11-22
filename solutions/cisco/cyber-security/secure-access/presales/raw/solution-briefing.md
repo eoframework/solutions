@@ -1,319 +1,195 @@
-# Cisco Secure Access Solution
+---
+presentation_title: Solution Briefing
+solution_name: Cisco ISE Secure Network Access
+presenter_name: [Presenter Name]
+client_logo: ../../assets/logos/client_logo.png
+footer_logo_left: ../../assets/logos/consulting_company_logo.png
+footer_logo_right: ../../assets/logos/eo-framework-logo-real.png
+---
 
-## Executive Summary
+# Cisco ISE Secure Network Access - Solution Briefing
 
-Implement zero-trust network access control with Cisco Identity Services Engine (ISE) for 1000 users and 2000 endpoints. Prevent unauthorized device access, enable secure BYOD, automate guest WiFi workflows, and achieve micro-segmentation to reduce breach risk by 70% through identity-based access policies.
-
-**Investment:** $258.2K Year 1 | $470.2K 3-Year Total
-**Timeline:** 3-4 months implementation
-**ROI:** 28-month payback through security risk reduction and operational efficiency
+## Slide Deck Structure
+**10 Slides - Fixed Format**
 
 ---
 
-## Business Challenge
+### Slide 1: Title Slide
+**layout:** eo_title_slide
 
-Traditional network security relies on perimeter defenses while allowing unrestricted access once inside the network, creating critical security and operational challenges:
-
-- **Unauthorized Device Access:** No visibility or control over which devices connect to the network enabling rogue access points and shadow IT
-- **Lateral Movement Risk:** Compromised endpoints can freely move across the network accessing sensitive data and systems
-- **BYOD Security Gap:** Personal smartphones and laptops access corporate resources without security validation
-- **Manual Guest WiFi:** IT staff manually create guest credentials consuming 15-20 hours weekly in helpdesk time
-- **Compliance Failures:** No audit trail for network access decisions and device posture validation required by PCI DSS, HIPAA, NIST 800-53
-- **Breach Exposure:** Single compromised device can access entire network leading to data exfiltration and ransomware propagation
-
-These challenges result in $320K annually in security risk exposure, compliance remediation costs, and operational inefficiency. A single data breach averages $4.5M in direct costs plus reputational damage and regulatory fines.
+**Presentation Title:** Solution Briefing
+**Subtitle:** Cisco ISE Secure Network Access
+**Presenter:** [Presenter Name] | [Current Date]
 
 ---
 
-## Solution Overview
+### Business Opportunity
+**layout:** eo_two_column
 
-Cisco Identity Services Engine (ISE) delivers zero-trust network access control with identity-driven security policies:
+**Secure Network Access with Zero Trust Architecture**
 
-### Core Capabilities
-
-**802.1X Authentication**
-- User and device identity verification before network access
-- Active Directory integration for credential validation
-- Certificate-based authentication (EAP-TLS) for corporate devices
-- Username/password authentication (PEAP-MSCHAPv2) for BYOD
-- Dynamic VLAN assignment based on user role and device type
-- Enforcement on Cisco Catalyst switches and wireless controllers
-
-**TrustSec Micro-Segmentation**
-- Software-defined segmentation with Security Group Tags (SGTs)
-- Policy enforcement without complex ACLs or firewall rules
-- Role-based access: Employees, Contractors, Guests, IoT devices
-- Lateral movement prevention: compromised endpoint contained to segment
-- Integration with Cisco Catalyst switches for inline enforcement
-- Centralized policy management across wired and wireless network
-
-**BYOD Self-Service Portal**
-- Employee self-registration for personal smartphones and tablets
-- Automated certificate provisioning for iOS and Android devices
-- MDM integration (Intune, Workspace ONE) for device compliance
-- Separate SSID for BYOD with restricted access policies
-- Device limit enforcement (maximum 2-3 devices per user)
-- User-friendly onboarding in < 5 minutes vs 30 minutes helpdesk call
-
-**Guest Access Portal**
-- Sponsor approval workflow for visitor WiFi access
-- Time-limited credentials (4 hours, 8 hours, 24 hours)
-- Self-registration with email or SMS verification
-- Social login integration (LinkedIn, Google) optional
-- Lobby ambassador kiosk for walk-up registration
-- Automated cleanup of expired guest accounts
-
-**Device Posture Assessment**
-- Pre-admission compliance checks before network access
-- Antivirus status, OS patching level, disk encryption validation
-- Non-compliant device quarantine to remediation VLAN
-- Automatic remediation portal for self-service fixes
-- Integration with endpoint security platforms (AMP, Defender)
-- Continuous monitoring and re-assessment
+- **Opportunity**
+  - Eliminate unauthorized network access reducing security breaches by 90% with 802.1X authentication
+  - Achieve micro-segmentation with TrustSec reducing lateral threat movement by 85%
+  - Automate BYOD onboarding reducing helpdesk tickets by 70% with self-service provisioning
+- **Success Criteria**
+  - 100% device authentication compliance across wired and wireless networks
+  - 90% reduction in network security incidents through policy enforcement
+  - ROI realization within 24 months through reduced security incidents and helpdesk costs
 
 ---
 
-## Business Value
+### Engagement Scope
+**layout:** eo_table
 
-### Security Risk Reduction
-- **70% breach risk reduction:** Micro-segmentation prevents lateral movement limiting blast radius of compromised endpoints
-- **100% device visibility:** All network devices identified and profiled (Windows, macOS, iOS, Android, IoT, printers)
-- **Unauthorized access elimination:** Rogue devices and shadow IT blocked before network entry
-- **Compliance posture enforcement:** Non-compliant devices quarantined until antivirus and patches applied
+**Sizing Parameters for This Engagement**
 
-### Operational Efficiency
-- **85% reduction in guest WiFi helpdesk tickets:** Automated self-service reduces 20 hours/week manual effort to 3 hours/week
-- **5-minute BYOD onboarding:** Employees self-register devices vs 30-minute helpdesk call
-- **Automated access policies:** Dynamic VLAN assignment eliminates manual switch port configuration
-- **Centralized management:** Single ISE dashboard vs managing individual switch configurations
+This engagement is sized based on the following parameters:
 
-### Compliance and Audit
-- **100% audit trail:** Complete logging of authentication, authorization, and accounting (AAA) decisions
-- **PCI DSS compliance:** Network segmentation and access controls meet cardholder data environment requirements
-- **HIPAA compliance:** Device authentication and encryption validation for PHI access
-- **NIST 800-53 compliance:** Continuous monitoring and least-privilege access controls
+<!-- BEGIN SCOPE_SIZING_TABLE -->
+<!-- TABLE_CONFIG: widths=[18, 29, 5, 18, 30] -->
+| Parameter | Scope | | Parameter | Scope |
+|-----------|-------|---|-----------|-------|
+| **Primary Features/Capabilities** | ISE for 1000 users 2000 devices | | **Availability Requirements** | Standard (99.5%) |
+| **Customization Level** | Standard ISE deployment | | **Infrastructure Complexity** | Basic campus network |
+| **External System Integrations** | 2 systems (AD + switches) | | **Security Requirements** | Basic 802.1X authentication |
+| **Data Sources** | User identity only | | **Compliance Frameworks** | Basic logging |
+| **Total Users** | 1000 employees and guests | | **Performance Requirements** | Standard authentication speed |
+| **User Roles** | 2 roles (employee + guest) | | **Deployment Environments** | Production only |
+| **Data Processing Volume** | 2000 endpoint authentications | |  |  |
+| **Data Storage Requirements** | 100 GB (90-day logs) | |  |  |
+| **Deployment Regions** | Single site | |  |  |
+<!-- END SCOPE_SIZING_TABLE -->
 
-### Financial Impact
-- **Annual security risk mitigation:** $95K value from breach prevention and faster incident response
-- **Operational savings:** $42K annually from guest WiFi automation and BYOD self-service
-- **Compliance savings:** $15K annually avoiding audit findings and remediation costs
-- **Total 3-year value:** $456K (risk mitigation + savings) vs $470.2K investment = 28-month payback
+*Note: Changes to these parameters may require scope adjustment and additional investment.*
 
 ---
 
-## Technical Architecture
+### Solution Overview
+**layout:** eo_visual_content
 
-### ISE Deployment Architecture
+**Zero Trust Network Access for 1000 Users and 2000 Devices**
 
-**High Availability Pair**
-- Primary ISE 3615 appliance (policy and monitoring)
-- Secondary ISE 3615 appliance (failover and load balancing)
-- Active-active authentication for zero downtime
-- Configuration synchronization between nodes
-- Geographic redundancy option for disaster recovery
+![Architecture Diagram](assets/diagrams/architecture-diagram.png)
 
-**Integration Points**
-- Active Directory: LDAP integration for user authentication
-- Certificate Authority: Microsoft CA or third-party PKI
-- Network Infrastructure: Cisco Catalyst switches and wireless controllers
-- MDM Platforms: Intune, Workspace ONE for mobile device management
-- SIEM: Syslog integration with Splunk, QRadar for security analytics
-
-**Capacity and Sizing**
-- 3000 endpoint license (supports 2000 devices with 50% headroom)
-- 1000 concurrent user sessions
-- 500 device admin licenses for TACACS+ (network device AAA)
-- 10,000 authentications per second (peak capacity)
-- 90-day authentication log retention (expandable to 1 year)
+- **Key Components**
+  - Cisco ISE 3615 appliances (primary + secondary HA) supporting 3000 concurrent endpoints
+  - 802.1X authentication with Active Directory integration for corporate users
+  - TrustSec micro-segmentation with security group tags and policy matrix
+- **Technology Stack**
+  - Identity Platform: Cisco Identity Services Engine (ISE) Plus
+  - Authentication: 802.1X wired/wireless, MAB for non-supplicant devices
+  - Authorization: TrustSec security groups with policy-based access control
+  - BYOD: Self-service onboarding with certificate provisioning for iOS/Android
+  - Guest: Sponsor-based workflow with time-limited access
 
 ---
 
-## Authentication Workflows
+### Implementation Approach
+**layout:** eo_single_column
 
-### Wired 802.1X (Corporate Laptops)
+**Proven 4-Phase Deployment Methodology**
 
-**1. Network Connection**
-- Employee connects laptop to Catalyst switch port
-- Switch enables 802.1X authentication (identity mode)
-- Client supplicant (Windows, macOS) initiated authentication
-
-**2. Identity Validation**
-- ISE requests credentials from device
-- Device presents machine certificate (EAP-TLS)
-- ISE validates certificate against trusted CA
-- ISE queries Active Directory for user/computer object
-
-**3. Authorization Decision**
-- ISE determines user role (Employee, IT Admin, Contractor)
-- ISE assigns Security Group Tag (SGT) and VLAN
-- Switch applies VLAN and enables network access
-- TrustSec policies enforced for traffic segmentation
-
-**4. Access Granted**
-- Laptop assigned to Corporate VLAN (VLAN 100)
-- Full access to file servers, applications, internet
-- SGT enables granular access control beyond VLAN
-- Session monitored for compliance and threats
-
-**Total Time:** < 5 seconds transparent to user
-
-### Wireless 802.1X (Corporate Devices)
-
-**1. WiFi Connection**
-- Employee connects to "CorpNet-Secure" SSID
-- Wireless controller forwards authentication to ISE
-- Device presents certificate or username/password
-
-**2. Authentication**
-- ISE validates credentials against Active Directory
-- Device compliance checked (AV, patches, encryption)
-- User role and device type determined
-
-**3. Access Control**
-- Dynamic VLAN assigned based on user role
-- WPA2-Enterprise encryption applied
-- Access policies enforced (internet, internal apps)
-
-**Total Time:** < 8 seconds after SSID selection
-
-### BYOD Portal (Personal Devices)
-
-**1. Initial Connection**
-- Employee connects to "BYOD-Onboarding" SSID (open)
-- Captive portal redirects to ISE self-service portal
-- User logs in with corporate AD credentials
-
-**2. Device Registration**
-- Portal presents device registration form
-- User selects device type (iPhone, Android, personal laptop)
-- User agrees to acceptable use policy
-
-**3. Certificate Provisioning**
-- ISE generates device certificate via SCEP
-- Certificate auto-installed on iOS/Android
-- Device automatically connects to "BYOD-Secure" SSID
-
-**4. Access Granted**
-- Device assigned to BYOD VLAN (restricted access)
-- Internet access permitted, corporate file servers denied
-- Access to approved SaaS applications only
-
-**Total Time:** < 5 minutes for end user
-
-### Guest Access (Visitors)
-
-**1. Guest Request**
-- Visitor selects "Guest-WiFi" SSID
-- Captive portal presents registration options
-- Guest chooses "Request Access" button
-
-**2. Sponsor Approval**
-- Guest enters sponsor email (employee contact)
-- ISE emails sponsor with approval request
-- Sponsor approves via email link (1-click)
-
-**3. Credential Delivery**
-- Guest receives username and random password via email or SMS
-- Time-limited access (8 hours default)
-- Terms and conditions acceptance required
-
-**4. Guest Access**
-- Guest logs in with provided credentials
-- Assigned to Guest VLAN (internet-only)
-- All internal network access blocked
-- Account auto-expires after time limit
-
-**Total Time:** < 3 minutes after sponsor approval
+- **Phase 1: Foundation (Weeks 1-4)**
+  - Network assessment for 802.1X readiness and switch/WLC compatibility
+  - ISE appliance deployment with primary and secondary HA configuration
+  - Active Directory integration with LDAP and identity source setup
+- **Phase 2: Policy Development (Weeks 5-8)**
+  - Authentication and authorization policy framework design
+  - 802.1X wired and wireless configuration with fallback MAB
+  - BYOD self-service portal configuration for iOS and Android
+  - Guest portal setup with sponsor workflow and approval process
+- **Phase 3: TrustSec & Integration (Weeks 9-12)**
+  - TrustSec security group tag (SGT) design and matrix configuration
+  - Network infrastructure integration: switches and WLCs configured for 802.1X
+  - Lab validation with end-to-end authentication testing
+- **Phase 4: Deployment (Weeks 13-16)**
+  - Pilot deployment with IT department (50-100 users) for validation
+  - Phased production rollout: wired authentication, then wireless and BYOD
+  - Guest WiFi enablement with portal and sponsor workflows
+  - TrustSec policy enforcement and hypercare support (4 weeks)
 
 ---
 
-## TrustSec Micro-Segmentation
+### Business Value Delivered
+**layout:** eo_two_column
 
-### Security Group Tag (SGT) Strategy
+**Measurable Security Enhancement and Operational Efficiency**
 
-**User-Based SGTs**
-- **Employees (SGT 10):** Full access to corporate resources
-- **IT Admins (SGT 15):** Elevated access to servers and network devices
-- **Contractors (SGT 20):** Restricted access, no sensitive data
-- **Guests (SGT 30):** Internet-only, no internal access
-- **Quarantine (SGT 99):** Non-compliant devices, remediation-only
-
-**Device-Based SGTs**
-- **IoT Devices (SGT 40):** Sensors, cameras, isolated network segment
-- **Printers (SGT 45):** Printing services only, no internet access
-- **Medical Devices (SGT 50):** HIPAA-compliant segment, restricted access
-- **POS Terminals (SGT 55):** PCI DSS segment, payment processing only
-
-### Access Policy Matrix
-
-| Source SGT | Destination | Access |
-|------------|-------------|--------|
-| Employees (10) | File Servers | Permit |
-| Employees (10) | Internet | Permit |
-| Contractors (20) | File Servers | Deny |
-| Contractors (20) | Internet | Permit |
-| Guests (30) | File Servers | Deny |
-| Guests (30) | Internet | Permit |
-| IoT Devices (40) | IoT Controller | Permit |
-| IoT Devices (40) | All Other | Deny |
-
-### Enforcement Points
-
-**Cisco Catalyst Switches**
-- Inline SGT tagging on all switch ports
-- Hardware-accelerated policy enforcement
-- No performance impact on switching
-
-**Cisco Wireless Controllers**
-- SGT assignment for wireless clients
-- Per-SSID policy enforcement
-- Seamless roaming with policy persistence
+- **Operational Excellence**
+  - 70% reduction in helpdesk tickets: self-service BYOD onboarding eliminates manual provisioning
+  - 100% network visibility: all devices authenticated and profiled for compliance
+  - Automated compliance: continuous posture assessment ensures policy adherence
+- **Financial Impact**
+  - $65K annual savings from reduced security incidents and faster breach detection
+  - $28K helpdesk savings from automated BYOD onboarding workflows
+  - 24-month payback period with ongoing security risk reduction
+- **Risk Mitigation**
+  - 90% reduction in unauthorized access through mandatory 802.1X authentication
+  - 85% reduction in lateral threat movement via TrustSec micro-segmentation
+  - Complete audit trail showing who connected what device where and when
 
 ---
 
-## Implementation Approach
+### Technical Architecture
+**layout:** eo_single_column
 
-### Phase 1: Foundation (Weeks 1-4)
-- ISE appliance deployment and high availability configuration (20 hours)
-- Active Directory integration and testing (15 hours)
-- Network infrastructure readiness assessment (20 hours)
-- Access policy framework design and stakeholder approval (25 hours)
+**Scalable Zero Trust Access Platform**
 
-### Phase 2: Wired 802.1X (Weeks 5-8)
-- Pilot department wired authentication (15 users, 20 hours)
-- Certificate deployment via GPO for Windows devices (15 hours)
-- Switch configuration for 802.1X (50 switches, 25 hours)
-- Phased rollout to remaining wired users (30 hours)
-
-### Phase 3: Wireless 802.1X & BYOD (Weeks 9-10)
-- Wireless controller integration and SSID configuration (15 hours)
-- BYOD portal customization and testing (20 hours)
-- Pilot wireless deployment (50 users, 15 hours)
-- Full wireless rollout and BYOD enablement (20 hours)
-
-### Phase 4: Guest & TrustSec (Weeks 11-12)
-- Guest portal configuration and sponsor workflow (15 hours)
-- TrustSec SGT policy definition and testing (25 hours)
-- Guest WiFi pilot and full deployment (15 hours)
-- TrustSec enforcement enablement (20 hours)
-
-### Phase 5: Optimization (Weeks 13-16)
-- Policy fine-tuning based on operational feedback (15 hours)
-- Helpdesk training and documentation (24 hours)
-- Monitoring and reporting configuration (10 hours)
-- Operational handoff and hypercare support (20 hours)
+- **ISE Infrastructure**
+  - Primary ISE 3615 appliance (3000 endpoint capacity) with policy service node (PSN)
+  - Secondary ISE 3615 for high availability and failover protection
+  - Hosted in data center with redundant power and network connectivity
+- **Software Licensing**
+  - ISE Plus (3000 endpoints): includes TrustSec, profiling, BYOD, guest access
+  - Device Admin (500 devices): TACACS+ for network device administration (optional)
+  - Active Directory Connector: LDAP integration for identity source
+- **Authentication Methods**
+  - 802.1X with EAP-TLS or PEAP-MSCHAPv2 for corporate devices
+  - MAC Authentication Bypass (MAB) for printers, IoT, and legacy devices
+  - Guest authentication with portal-based credential management
+- **TrustSec Segmentation**
+  - Security Group Tags (SGT) for dynamic classification
+  - Policy matrix for group-based access control without VLANs
+  - Inline tagging on switches and enforcement at network edge
 
 ---
 
-## Investment Summary
+### Risk Mitigation Strategy
+**layout:** eo_single_column
 
-| Category | Year 1 | Year 2 | Year 3 | 3-Year Total |
-|----------|--------|--------|--------|--------------|
-| Hardware | $80,000 | $0 | $0 | $80,000 |
-| Software | $65,000 | $75,000 | $75,000 | $215,000 |
-| Support | $31,000 | $31,000 | $31,000 | $93,000 |
-| Professional Services | $82,200 | $0 | $0 | $82,200 |
-| **Total Investment** | **$258,200** | **$106,000** | **$106,000** | **$470,200** |
+**Comprehensive Approach to Project Success**
+
+- **Technical Risk Mitigation**
+  - Device compatibility: Pre-implementation audit confirms 802.1X supplicant support
+  - Phased rollout: Pilot validates process with low-risk IT department first
+  - Fallback mechanisms: MAB and guest access ensure legacy device connectivity
+- **Organizational Risk Mitigation**
+  - Team readiness: 40 hours training for administrators and helpdesk staff
+  - Change resistance: Executive sponsorship secured; pilot demonstrates value
+  - User impact: Self-service BYOD minimizes helpdesk burden and user friction
+- **Implementation Risk Mitigation**
+  - Timeline delays: Clear milestones with pilot validation before production
+  - Production disruption: All changes during maintenance windows with rollback plans
+  - Authentication failures: Monitoring dashboards detect issues before user impact
+
+---
+
+### Investment Summary
+**layout:** eo_table
+
+**3-Year Total Cost of Ownership**
+
+<!-- BEGIN COST_SUMMARY_TABLE -->
+<!-- TABLE_CONFIG: widths=[25, 15, 15, 15, 12, 12, 15] -->
+| Cost Category | Year 1 List | Year 1 Credits | Year 1 Net | Year 2 | Year 3 | 3-Year Total |
+|---------------|-------------|----------------|------------|--------|--------|--------------|
+| Professional Services | $82,200 | $0 | $82,200 | $0 | $0 | $82,200 |
+| Hardware | $80,000 | $0 | $80,000 | $0 | $0 | $80,000 |
+| Software | $75,000 | ($10,000) | $65,000 | $75,000 | $75,000 | $215,000 |
+| Support | $31,000 | $0 | $31,000 | $31,000 | $31,000 | $93,000 |
+| **TOTAL** | **$268,200** | **($10,000)** | **$258,200** | **$106,000** | **$106,000** | **$470,200** |
+<!-- END COST_SUMMARY_TABLE -->
 
 **Year 1 includes:** $10K ISE license promotion credit (20% discount)
 
@@ -321,67 +197,34 @@ Cisco Identity Services Engine (ISE) delivers zero-trust network access control 
 
 ---
 
-## Success Metrics
+### Next Steps
+**layout:** eo_single_column
 
-### Security KPIs (Measured at 6 months)
-- Unauthorized device access: 0 incidents (100% reduction from 8 incidents/month baseline)
-- Rogue access point detection: 100% detection and blocking
-- Network device visibility: 100% of connected devices identified and profiled
-- Non-compliant device quarantine: > 95% compliance before network access
+**Path to Deployment Success**
 
-### Operational KPIs (Measured at 12 months)
-- Guest WiFi helpdesk tickets: < 3 hours/week (85% reduction from 20 hours/week)
-- BYOD onboarding time: < 5 minutes (83% reduction from 30-minute baseline)
-- Authentication success rate: > 98% (minimal user lockouts)
-- Policy update deployment: < 1 hour (vs 2-week manual switch configuration)
+1. **Executive Approval (Week 0)**
+   - Review and approve $258.2K Year 1 investment
+   - Assign technical lead and security team
+   - Secure budget and resources for implementation
 
-### Compliance KPIs (Ongoing)
-- Audit trail coverage: 100% of network access decisions logged
-- PCI DSS compliance: Zero critical findings for network segmentation
-- HIPAA compliance: 100% device authentication for PHI access
-- NIST 800-53 controls: 95% automated compliance validation
+2. **Hardware Procurement (Weeks 1-2)**
+   - Order ISE 3615 appliances (4-6 week lead time)
+   - Plan data center rack space, power, and network connectivity
+   - Coordinate delivery and installation logistics
 
----
+3. **Discovery Phase (Weeks 1-4)**
+   - Network infrastructure assessment (40 hours) for 802.1X readiness
+   - Active Directory structure analysis and identity planning
+   - Security requirements gathering and policy framework design
 
-## Risk Mitigation
+4. **Development Phase (Weeks 5-12)**
+   - Deploy ISE appliances with HA configuration (80 hours)
+   - Configure authentication, BYOD, and guest policies (140 hours)
+   - Integrate with Active Directory and network infrastructure (80 hours)
 
-### Technical Risks
-- **User lockout:** Monitor mode deployment first; fallback to critical VLAN if ISE fails; extensive pilot testing
-- **Certificate issues:** Automated SCEP provisioning; username/password fallback; helpdesk training on certificate troubleshooting
-- **Legacy device compatibility:** MAC authentication bypass (MAB) for non-802.1X devices; exception policies documented
-
-### Organizational Risks
-- **Change resistance:** Executive sponsorship secured; phased rollout minimizes impact; user communication campaign
-- **Helpdesk readiness:** 24 hours helpdesk training; comprehensive runbooks; escalation to ISE team for complex issues
-- **BYOD adoption:** Self-service portal with clear instructions; manager communication; incentive program for early adopters
-
-### Implementation Risks
-- **Timeline delays:** Phased approach with clear milestones; pilot validates approach; buffer built into schedule
-- **Policy complexity:** Start with simple policies; iterate based on feedback; policy testing in lab environment
-- **Switch compatibility:** Pre-deployment audit confirms 802.1X support; IOS upgrade plan for legacy switches
-
----
-
-## Next Steps
-
-1. **Executive approval:** Review and approve $258.2K Year 1 investment
-2. **Project kickoff:** Assign technical lead and project team (week 1)
-3. **Hardware procurement:** Order ISE appliances (4-week lead time)
-4. **Design phase:** Access policy framework and AD integration planning (weeks 1-4)
-5. **Pilot deployment:** Wired 802.1X for IT department (weeks 5-6)
-6. **Full rollout:** Phased deployment across organization (weeks 7-12)
+5. **Deployment (Weeks 13-16)**
+   - Pilot deployment with IT department for validation
+   - Phased production rollout: wired, wireless, BYOD, guest access
+   - TrustSec enforcement and hypercare support (60 hours)
 
 **Recommended decision date:** Within 2 weeks to meet hardware lead time and Q4 deployment target
-
----
-
-## Conclusion
-
-Cisco ISE transforms network security from perimeter-based to zero-trust identity-driven access control. The solution delivers measurable ROI through breach risk reduction, operational automation, and compliance achievement while enabling secure BYOD and simplified guest access.
-
-**Investment:** $470.2K over 3 years
-**Value:** $456K in security risk mitigation and operational savings
-**Payback:** 28 months
-**Strategic Impact:** Foundation for zero-trust security architecture and digital transformation
-
-This investment addresses critical security gaps, reduces operational overhead, and positions the organization for modern security practices that protect against evolving threats while supporting business agility and user productivity.

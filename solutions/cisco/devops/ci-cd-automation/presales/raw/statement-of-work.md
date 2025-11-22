@@ -1,269 +1,511 @@
-# STATEMENT OF WORK (SOW)
+---
+# Document Metadata (Simplified)
+document_title: Statement of Work
+technology_provider: Cisco Systems
+project_name: Cisco Network CI/CD Automation
+client_name: [Client Name]
+client_contact: [Contact Name | Email | Phone]
+consulting_company: [Consulting Company Name]
+consultant_contact: [Contact Name | Email | Phone]
+opportunity_no: [OPP-YYYY-###]
+document_date: [Month DD, YYYY]
+version: [1.0]
+client_logo: ../../assets/logos/client_logo.png
+vendor_logo: ../../assets/logos/consulting_company_logo.png
+eoframework_logo: ../../assets/logos/eo-framework-logo-real.png
+---
 
-**Document Version:** 1.0
-**Date:** [DATE]
-**Prepared by:** [VENDOR_NAME]
-**Client:** [CLIENT_NAME]
-**Project:** {SOLUTION_NAME} Implementation
-**SOW Number:** [SOW_NUMBER]
+# Executive Summary
+
+This Statement of Work (SOW) defines the scope, deliverables, roles, and terms for the Cisco Network CI/CD Automation project for [Client Name]. This engagement will deliver Infrastructure as Code (IaC) automation for network operations, reducing configuration errors by 85% and accelerating device provisioning from 4-6 hours to 15 minutes through GitOps workflows.
+
+**Project Duration:** 16 weeks
 
 ---
 
-## 1. EXECUTIVE SUMMARY
+# Background & Objectives
 
-### 1.1 Project Overview
-This Statement of Work (SOW) outlines the scope, deliverables, timeline, and terms for the implementation of {SOLUTION_NAME} for [CLIENT_NAME]. The project will deliver [PRIMARY_BUSINESS_OUTCOME] through [HIGH_LEVEL_APPROACH].
+## Current State
 
-### 1.2 Business Objectives
-- **Primary Goal:** [PRIMARY_BUSINESS_OBJECTIVE]
-- **Success Metrics:** [QUANTIFIED_SUCCESS_CRITERIA]
-- **Expected ROI:** [ROI_PERCENTAGE] over [TIME_PERIOD]
+[Client Name] currently operates network infrastructure with manual CLI-based configuration and change management. Key challenges include:
+- **Manual Configuration Errors:** 15% configuration error rate due to manual CLI changes
+- **Slow Provisioning:** Network device deployment takes 4-6 hours per device with manual configuration
+- **Limited Audit Trails:** Difficulty tracking who made what changes and when for compliance
+- **Configuration Drift:** Inconsistent configurations across 100+ network devices
+- **Deployment Risk:** No testing or validation before production changes
 
-### 1.3 Project Duration
-**Start Date:** [PROJECT_START_DATE]
-**End Date:** [PROJECT_END_DATE]
-**Total Duration:** [PROJECT_DURATION] weeks
+## Business Objectives
 
----
+- **Eliminate Manual Errors:** Reduce configuration error rate from 15% to under 2% through automated validation
+- **Accelerate Provisioning:** Enable 95% faster device provisioning (15 minutes vs 4-6 hours) with zero-touch deployment
+- **Achieve Compliance:** Implement complete Git audit trails meeting PCI DSS and compliance requirements
+- **Standardize Configurations:** Ensure 100% configuration consistency through standardized templates
+- **Enable GitOps:** Implement Infrastructure as Code with CI/CD pipelines for network automation
+- **Reduce Labor Costs:** Save $47K annually through automated deployment and reduced troubleshooting
 
-## 2. SCOPE OF WORK
+## Success Metrics
 
-### 2.1 In-Scope Activities
-The following services and deliverables are included in this SOW:
-
-#### 2.1.1 Discovery & Planning Phase
-- [ ] Stakeholder interviews and requirements gathering
-- [ ] Current state assessment and technical evaluation
-- [ ] Solution architecture design and documentation
-- [ ] Project planning and resource allocation
-- [ ] Risk assessment and mitigation planning
-
-#### 2.1.2 Implementation Phase
-- [ ] Infrastructure provisioning and configuration
-- [ ] Application deployment and customization
-- [ ] System integration and data migration
-- [ ] Security configuration and hardening
-- [ ] Performance optimization and tuning
-
-#### 2.1.3 Testing & Validation Phase
-- [ ] Unit and integration testing
-- [ ] Performance and security testing
-- [ ] User acceptance testing coordination
-- [ ] Bug fixes and issue resolution
-- [ ] Go-live readiness assessment
-
-#### 2.1.4 Deployment & Support Phase
-- [ ] Production deployment and cutover
-- [ ] Post-deployment monitoring and support
-- [ ] User training and knowledge transfer
-- [ ] Documentation delivery
-- [ ] Project closure and handover
-
-### 2.2 Out-of-Scope Activities
-The following activities are explicitly excluded from this SOW:
-
-- [ ] Hardware procurement and installation
-- [ ] Third-party software licensing
-- [ ] Network infrastructure modifications
-- [ ] Legacy system decommissioning
-- [ ] Ongoing operational support beyond [SUPPORT_PERIOD]
-- [ ] Custom development beyond specified requirements
-- [ ] Data cleansing or transformation of legacy data
-- [ ] Training beyond initial knowledge transfer
+- 85% reduction in configuration errors (15% → <2%)
+- 95% faster device provisioning (4-6 hours → 15 minutes)
+- 100% configuration audit trail through Git
+- ROI realization within 24 months
+- 60% faster troubleshooting with complete change history
 
 ---
 
-## 3. DELIVERABLES
+# Scope of Work
 
-### 3.1 Documentation Deliverables
-| Deliverable | Description | Due Date | Format |
-|-------------|-------------|----------|---------|
-| **Requirements Specification** | Detailed functional and non-functional requirements | [DATE] | CSV/Excel |
-| **Solution Architecture Document** | Technical architecture and design specifications | [DATE] | PDF |
-| **Implementation Plan** | Detailed project timeline and resource allocation | [DATE] | MS Project |
-| **Test Plan & Results** | Testing strategy and execution results | [DATE] | PDF |
-| **User Training Materials** | End-user guides and training documentation | [DATE] | PDF/Video |
-| **Operations Runbook** | System administration and maintenance procedures | [DATE] | PDF |
-| **As-Built Documentation** | Final system configuration and architecture | [DATE] | PDF |
+## In Scope
 
-### 3.2 System Deliverables
-| Component | Description | Acceptance Criteria |
-|-----------|-------------|-------------------|
-| **Production Environment** | Fully configured and operational system | Passes all acceptance tests |
-| **Integration Interfaces** | Configured data connections and APIs | Successful data flow validation |
-| **Security Configuration** | Implemented security controls and policies | Security audit compliance |
-| **Monitoring Setup** | Operational monitoring and alerting | Functional dashboards and alerts |
-| **Backup & Recovery** | Automated backup and disaster recovery | Successful recovery test |
+- Network automation assessment and tool selection
+- GitLab deployment and CI/CD runner infrastructure
+- NetBox IPAM deployment and device inventory import
+- Development of 6 core Ansible playbooks (VLAN, ACL, interface, routing, QoS, compliance)
+- CI/CD pipeline configuration with syntax validation
+- Secrets management implementation (Vault or GitLab)
+- Terraform module development for ACI/DCNM/Meraki (optional)
+- ServiceNow integration for change management (optional)
+- Lab testing environment setup (GNS3 or CML)
+- Team training on Ansible, Git workflows, and CI/CD (40 hours)
+- Pilot deployment with 10 devices
+- Phased rollout to remaining 90 devices
+- 4-week hypercare support period
 
-### 3.3 Knowledge Transfer Deliverables
-- Administrator training (2 days, up to 10 participants)
-- End-user training (1 day, up to 25 participants)
-- Technical documentation and procedures
-- Recorded training sessions for future reference
+### Scope Parameters
 
----
+This engagement is sized based on the following parameters:
 
-## 4. PROJECT TIMELINE & MILESTONES
+<!-- BEGIN SCOPE_PARAMETERS_TABLE -->
+<!-- TABLE_CONFIG: widths=[25, 35, 40] -->
+| Category | Parameter | Scope |
+|----------|-----------|-------|
+| Solution Scope | Primary Features/Capabilities | Ansible + GitLab CI/CD for 100 devices |
+| Solution Scope | Customization Level | Standard playbooks and templates |
+| Integration | External System Integrations | 2 systems (Git + NetBox) |
+| Integration | Data Sources | Network device configs |
+| User Base | Total Users | 5 network engineers |
+| User Base | User Roles | 2 roles (developer + operator) |
+| Data Volume | Data Processing Volume | 100 device configs |
+| Data Volume | Data Storage Requirements | 50 GB (Git + backups) |
+| Technical Environment | Deployment Regions | Single data center |
+| Technical Environment | Availability Requirements | Standard (99%) |
+| Technical Environment | Infrastructure Complexity | Basic network (single platform) |
+| Security & Compliance | Security Requirements | Basic Git auth and secrets |
+| Security & Compliance | Compliance Frameworks | Change tracking only |
+| Performance | Performance Requirements | Standard deployment speed |
+| Environment | Deployment Environments | Production only |
+<!-- END SCOPE_PARAMETERS_TABLE -->
 
-### 4.1 Project Phases
-| Phase | Duration | Start Date | End Date | Key Milestones |
-|-------|----------|------------|----------|----------------|
-| **Discovery & Planning** | 2 weeks | [DATE] | [DATE] | Requirements approved, Architecture signed-off |
-| **Implementation** | 6 weeks | [DATE] | [DATE] | Infrastructure ready, Application deployed |
-| **Testing & Validation** | 2 weeks | [DATE] | [DATE] | UAT completed, Go-live approved |
-| **Deployment & Support** | 2 weeks | [DATE] | [DATE] | Production live, Training completed |
+Table: Engagement Scope Parameters
 
-### 4.2 Critical Dependencies
-- [ ] Client provides timely access to required systems and environments
-- [ ] Subject matter experts available for requirements gathering and testing
-- [ ] Network connectivity and security approvals obtained
-- [ ] Third-party vendor coordination for integrations
-- [ ] Business stakeholder availability for key decision points
+*Note: Changes to these parameters may require scope adjustment and additional investment.*
 
----
+## Out of Scope
 
-## 5. ROLES & RESPONSIBILITIES
+These items are not in scope unless added via change control:
+- Hardware procurement for servers or network devices
+- Network design or re-architecture
+- Application-specific automation beyond core network functions
+- Managed services post-hypercare period
+- Third-party software licenses (GitLab, NetBox, Ansible AWX)
+- Custom development beyond 6 core playbooks
 
-### 5.1 Vendor Responsibilities ([VENDOR_NAME])
-- **Project Manager:** Overall project coordination and delivery management
-- **Solution Architect:** Technical design and architecture oversight
-- **Implementation Team:** System configuration, deployment, and testing
-- **Training Specialist:** User enablement and knowledge transfer
-- **Support Engineer:** Post-deployment support and issue resolution
+## Activities
 
-### 5.2 Client Responsibilities ([CLIENT_NAME])
-- **Project Sponsor:** Executive oversight and business decision authority
-- **Technical Lead:** Infrastructure coordination and technical approvals
-- **Business Analyst:** Requirements validation and user acceptance testing
-- **System Administrator:** Ongoing system maintenance and administration
-- **End Users:** Participation in training and user acceptance testing
+### Phase 1 – Foundation (Weeks 1-4)
 
-### 5.3 Shared Responsibilities
-- Risk management and issue escalation
-- Change control and scope management
-- Quality assurance and acceptance testing
-- Communication and stakeholder management
+During this initial phase, the automation platform foundation is deployed.
 
----
+Key activities:
+- Automation assessment and current state analysis
+- Tool selection and architecture design
+- GitLab deployment with CI/CD runner infrastructure
+- NetBox IPAM deployment and initial device inventory import
+- Git workflow design and approval process definition
 
-## 6. COMMERCIAL TERMS
+**Deliverable:** Automation Assessment Report and Platform Architecture
 
-### 6.1 Project Investment
-| Category | Description | Amount |
-|----------|-------------|--------|
-| **Professional Services** | Implementation and configuration services | $[SERVICES_AMOUNT] |
-| **Training & Support** | User training and initial support | $[TRAINING_AMOUNT] |
-| **Travel & Expenses** | On-site support and travel costs | $[TRAVEL_AMOUNT] |
-| ****TOTAL PROJECT COST** | **Total investment for complete implementation** | **$[TOTAL_AMOUNT]** |
+### Phase 2 – Playbook Development (Weeks 5-8)
 
-### 6.2 Payment Terms
-- **25%** upon SOW execution and project kickoff
-- **25%** upon completion of Discovery & Planning phase
-- **25%** upon completion of Implementation phase
-- **25%** upon successful go-live and project acceptance
+Core Ansible playbooks are developed and tested.
 
-### 6.3 Additional Services
-Any additional services beyond the scope of this SOW will be quoted separately and require written approval from both parties.
+Key activities:
+- Develop 6 core Ansible playbooks (VLAN, ACL, interface, routing, QoS, compliance)
+- CI/CD pipeline configuration with syntax validation and testing
+- Secrets management implementation with Vault or GitLab secrets
+- Template development for Cisco IOS-XE, NX-OS, and ASA
+- Lab testing with GNS3 or CML for validation
 
----
+**Deliverable:** Ansible Playbook Repository and CI/CD Pipelines
 
-## 7. ACCEPTANCE CRITERIA
+### Phase 3 – Advanced Automation (Weeks 9-10)
 
-### 7.1 Technical Acceptance
-The solution will be considered technically accepted when:
-- [ ] All functional requirements are implemented and tested
-- [ ] System performance meets specified requirements
-- [ ] Security controls are implemented and validated
-- [ ] Integration testing is completed successfully
-- [ ] System passes all acceptance tests
+Advanced capabilities and integrations are implemented.
 
-### 7.2 Business Acceptance
-The project will be considered complete when:
-- [ ] Business stakeholders sign-off on user acceptance testing
-- [ ] Training is completed and knowledge transfer validated
-- [ ] Documentation is delivered and approved
-- [ ] System is operational in production environment
-- [ ] Support procedures are established and functional
+Key activities:
+- Terraform module development for ACI, DCNM, Meraki (optional)
+- ServiceNow integration for change management automation
+- Advanced validation and compliance checking
+- Lab testing with complex scenarios
+
+**Deliverable:** Terraform Modules and Integration Documentation
+
+### Phase 4 – Training & Rollout (Weeks 11-16)
+
+The team is trained and automation is rolled out to production.
+
+Key activities:
+- Team training on Ansible, Git workflows, and CI/CD (40 hours)
+- Pilot deployment with 10 devices for validation
+- Phased rollout to remaining 90 devices
+- Runbook creation and documentation
+- Hypercare support activation
+
+**Deliverable:** Training Materials and Operational Runbooks
 
 ---
 
-## 8. ASSUMPTIONS & CONSTRAINTS
+# Deliverables & Timeline
 
-### 8.1 Assumptions
-- Client will provide necessary access to systems, data, and personnel
-- Existing infrastructure meets minimum requirements for solution deployment
-- Required third-party systems and APIs are available and functional
-- Business requirements will remain stable throughout project duration
-- Client team members will be available for scheduled activities
+## Deliverables
 
-### 8.2 Constraints
-- Project must comply with existing security and compliance requirements
-- Implementation must not disrupt critical business operations
-- All data handling must meet privacy and regulatory requirements
-- Solution must integrate with existing IT infrastructure and policies
-- Budget and timeline constraints as specified in this SOW
+<!-- TABLE_CONFIG: widths=[8, 40, 12, 20, 20] -->
+| # | Deliverable | Type | Due Date | Acceptance By |
+|---|-------------|------|----------|---------------|
+| 1 | Automation Assessment Report | Document | Week 4 | Client IT Lead |
+| 2 | Ansible Playbook Repository | Code | Week 8 | Network Lead |
+| 3 | Integration Documentation | Document | Week 10 | Operations Lead |
+| 4 | Training Materials | Document | Week 12 | Network Team |
+| 5 | Operational Runbooks | Document | Week 16 | Client IT Lead |
 
----
+## Project Milestones
 
-## 9. RISK MANAGEMENT
-
-### 9.1 Identified Risks
-| Risk | Impact | Probability | Mitigation Strategy |
-|------|--------|-------------|-------------------|
-| **Resource Availability** | High | Medium | Advance scheduling and backup resources |
-| **Integration Complexity** | Medium | High | Early integration testing and validation |
-| **Scope Creep** | High | Medium | Formal change control process |
-| **Technology Dependencies** | Medium | Low | Contingency planning and alternatives |
-
-### 9.2 Change Management
-Any changes to project scope, timeline, or budget must be documented through formal change requests and approved by both parties before implementation.
+<!-- TABLE_CONFIG: widths=[20, 55, 25] -->
+| Milestone | Description | Target Date |
+|-----------|-------------|-------------|
+| M1 - Platform Ready | GitLab NetBox and runners deployed | Week 4 |
+| M2 - Playbooks Complete | 6 core playbooks developed and tested | Week 8 |
+| M3 - Integrations Live | Terraform and ServiceNow integrated | Week 10 |
+| M4 - Pilot Success | 10-device pilot validated | Week 12 |
+| M5 - Go-Live | All 100 devices automated | Week 16 |
+| Hypercare End | Support period complete | Week 20 |
 
 ---
 
-## 10. TERMS & CONDITIONS
+# Roles & Responsibilities
 
-### 10.1 Intellectual Property
-- Client retains ownership of all business data and information
-- Vendor retains ownership of proprietary methodologies and tools
-- Solution configuration and customizations become client property upon final payment
+## RACI Matrix
 
-### 10.2 Confidentiality
-Both parties agree to maintain strict confidentiality of proprietary information and business data throughout the project and beyond.
+<!-- TABLE_CONFIG: widths=[28, 11, 11, 11, 11, 9, 9, 10] -->
+| Task/Role | EO PM | EO Quarterback | EO DevOps | EO Network | Client Net | Client Ops | SME |
+|-----------|-------|----------------|-----------|------------|------------|------------|-----|
+| Discovery & Requirements | A | R | R | C | C | I | C |
+| Platform Deployment | C | A | R | C | C | I | I |
+| Playbook Development | C | R | A | R | C | I | I |
+| CI/CD Pipeline Config | C | A | R | C | I | C | I |
+| Integration Setup | C | R | R | C | I | A | I |
+| Testing & Validation | R | R | C | R | A | C | I |
+| Knowledge Transfer | A | R | R | R | C | I | I |
 
-### 10.3 Warranty & Support
-- 90-day warranty on all deliverables from go-live date
-- Defect resolution included at no additional cost during warranty period
-- Post-warranty support available under separate maintenance agreement
+**Legend:** R = Responsible | A = Accountable | C = Consulted | I = Informed
 
-### 10.4 Limitation of Liability
-Vendor's liability is limited to the total contract value. Neither party shall be liable for indirect, incidental, or consequential damages.
+## Key Personnel
 
----
+**Vendor Team:**
+- EO Project Manager: Overall delivery accountability
+- EO Quarterback: Technical design and architecture oversight
+- EO DevOps Engineer: GitLab and CI/CD pipeline development
+- EO Network Automation Engineer: Ansible playbook development
 
-## 11. APPROVAL & SIGNATURES
-
-### Client Approval ([CLIENT_NAME])
-
-**Name:** [CLIENT_AUTHORIZED_SIGNATORY]
-**Title:** [TITLE]
-**Signature:** ________________________________
-**Date:** ________________
-
-### Vendor Approval ([VENDOR_NAME])
-
-**Name:** [VENDOR_AUTHORIZED_SIGNATORY]
-**Title:** [TITLE]
-**Signature:** ________________________________
-**Date:** ________________
+**Client Team:**
+- Network Lead: Primary technical contact and playbook validation
+- Operations Lead: Day-to-day operations and runbook validation
+- DevOps SME: CI/CD and GitOps workflow guidance
+- Security Lead: Secrets management and compliance approval
 
 ---
 
-**Document Control:**
-**File Name:** SOW_{SOLUTION_NAME}_{CLIENT_NAME}_{DATE}
-**Version:** 1.0
-**Last Modified:** [DATE]
-**Next Review:** [REVIEW_DATE]
+# Architecture & Design
+
+## Architecture Overview
+
+![Solution Architecture](../../assets/diagrams/architecture-diagram.png)
+
+**Figure 1: Network CI/CD Automation Architecture** - GitOps workflow for infrastructure as code
+
+The proposed architecture provides a modern GitOps workflow for network automation. Key components include:
+
+- **Version Control:** GitLab Premium with merge request workflows
+- **Automation Engine:** Ansible for configuration management
+- **CI/CD:** GitLab runners for automated testing and deployment
+- **Source of Truth:** NetBox IPAM for network inventory
+- **Secrets Management:** Vault or GitLab secrets for credential management
+
+## Architecture Type
+
+This solution follows a **GitOps** architecture pattern. Key characteristics:
+
+- **Deployment Model:** On-premises GitLab with self-hosted runners
+- **Automation Approach:** Declarative configuration with Ansible and Terraform
+- **Workflow:** Git-based with merge requests and CI/CD pipelines
+- **Testing:** Automated validation in lab before production deployment
+
+The architecture supports 100 devices with scalability to 500+ devices.
+
+## Technical Implementation Strategy
+
+The deployment follows a crawl-walk-run approach:
+
+**Crawl Phase:**
+- Pilot with 10 devices and simple use cases (VLAN provisioning)
+- Manual approval gates for all changes
+- Extensive testing and validation
+
+**Walk Phase:**
+- Expand to 50 devices with additional playbooks
+- Automated approval for low-risk changes
+- Self-service for common operations
+
+**Run Phase:**
+- All 100 devices with full automation
+- Automated deployment for validated changes
+- Continuous improvement and optimization
 
 ---
 
-*This Statement of Work constitutes the complete agreement between the parties for the services described herein and supersedes all prior negotiations, representations, or agreements relating to the subject matter.*
+# Security & Compliance
+
+## Identity & Access Management
+
+- Role-based access control (RBAC) in GitLab
+- SSH key-based authentication for Git operations
+- Multi-factor authentication (MFA) for privileged access
+- Integration with Active Directory/LDAP
+
+## Secrets Management
+
+- HashiCorp Vault or GitLab secrets for credentials
+- Encrypted secrets at rest and in-transit
+- Automatic credential rotation
+- Audit logging for all secret access
+
+## Compliance & Auditing
+
+- Complete Git audit trail (who, what, when, why)
+- Change tracking and approval workflows
+- Compliance reporting for PCI DSS or SOC 2
+- Configuration backup and version control
+
+---
+
+# Testing & Validation
+
+## Functional Validation
+
+Comprehensive testing ensures automation works correctly:
+
+**Playbook Testing:**
+- Syntax validation (ansible-lint, yamllint)
+- Idempotency testing (multiple runs produce same result)
+- Error handling and rollback validation
+- End-to-end workflow testing
+
+**CI/CD Pipeline Testing:**
+- Automated syntax checks on merge requests
+- Lab testing before production deployment
+- Approval gates and notification workflows
+
+## Security Testing
+
+Security validation for compliance:
+
+**Vulnerability Assessment:**
+- Credential encryption verification
+- Access control validation (RBAC)
+- Audit logging completeness
+
+**Compliance Validation:**
+- Git audit trail verification
+- Change approval workflow testing
+- Secrets management validation
+
+## User Acceptance Testing (UAT)
+
+UAT performed with network team:
+
+**UAT Approach:**
+- Hands-on training with real playbooks
+- Pilot deployment with low-risk devices
+- Workflow validation (Git, merge requests, CI/CD)
+
+**Acceptance Criteria:**
+- Team can independently create and deploy changes
+- Playbooks work as documented
+- Rollback procedures validated
+
+---
+
+# Handover & Support
+
+## Handover Artifacts
+
+Upon successful implementation:
+
+**Documentation Deliverables:**
+- As-built architecture diagrams
+- Ansible playbook documentation
+- CI/CD pipeline configuration guide
+- NetBox integration documentation
+- Git workflow and branching strategy
+
+**Operational Deliverables:**
+- Operations runbooks for common tasks
+- Troubleshooting guides
+- Playbook development guide
+- Secrets management procedures
+
+**Code Repositories:**
+- Ansible playbook repository
+- Terraform module repository
+- CI/CD pipeline configurations
+- Custom scripts and tools
+
+## Knowledge Transfer
+
+**Training Sessions:**
+- 40 hours of hands-on training
+- Ansible fundamentals and best practices
+- Git workflows and merge requests
+- CI/CD pipeline operation
+- Playbook development and testing
+
+**Documentation Package:**
+- Playbook developer guide
+- Operations runbooks
+- Architecture documentation
+- Troubleshooting guide
+
+## Hypercare Support
+
+**Duration:** 4 weeks post-go-live
+
+**Coverage:**
+- Business hours support (8 AM - 6 PM local time)
+- 4-hour response time for critical issues
+- Daily check-ins (first 2 weeks)
+- Weekly status meetings
+
+**Scope:**
+- Issue investigation and resolution
+- Playbook optimization
+- Workflow adjustments
+- Knowledge transfer continuation
+
+## Assumptions
+
+### General Assumptions
+
+**Client Responsibilities:**
+- Client will provide access to network devices and lab environment
+- Client network team will be available for training and validation
+- Client will provide NetBox and ServiceNow integration credentials (if applicable)
+- Client will handle internal change management approvals
+
+**Technical Environment:**
+- Network devices support Ansible (SSH, NETCONF, or API access)
+- Lab environment (GNS3 or CML) available for testing
+- Servers available for GitLab and NetBox deployment
+- Network connectivity between automation platform and devices
+
+**Project Execution:**
+- Project scope and requirements remain stable
+- Resources available per project plan
+- No major network changes during pilot and rollout
+- Security and compliance approvals timely
+
+---
+
+# Investment Summary
+
+## Total Investment
+
+<!-- BEGIN COST_SUMMARY_TABLE -->
+<!-- TABLE_CONFIG: widths=[25, 15, 12, 15, 11, 11, 11] -->
+| Cost Category | Year 1 List | AWS/Partner Credits | Year 1 Net | Year 2 | Year 3 | 3-Year Total |
+|---------------|-------------|---------------------|------------|--------|--------|--------------|
+| Professional Services | $86,250 | $0 | $86,250 | $0 | $0 | $86,250 |
+| Cloud Infrastructure | $5,580 | ($1,000) | $4,580 | $5,580 | $5,580 | $15,740 |
+| Software | $1,427 | $0 | $1,427 | $1,427 | $1,427 | $4,281 |
+| Support | $500 | $0 | $500 | $500 | $500 | $1,500 |
+| **TOTAL INVESTMENT** | **$93,757** | **($1,000)** | **$92,757** | **$7,507** | **$7,507** | **$107,771** |
+<!-- END COST_SUMMARY_TABLE -->
+
+## Partner Credits
+
+**Year 1 Credits Applied:** $1,000 (cloud hosting credit)
+
+**Annual Recurring Cost:** $7,507/year (software, infrastructure, support)
+
+## Payment Terms
+
+**Pricing Model:** Fixed price with milestone-based payments
+
+**Payment Schedule:**
+- 30% upon SOW execution and project kickoff ($27,827)
+- 30% upon completion of Phase 2 - Playbooks Complete ($27,827)
+- 25% upon completion of Phase 4 - Pilot Success ($23,189)
+- 15% upon successful go-live and project acceptance ($13,914)
+
+**Invoicing:** Monthly invoicing based on milestones completed. Net 30 payment terms.
+
+---
+
+# Terms & Conditions
+
+## General Terms
+
+All services will be delivered in accordance with the executed Master Services Agreement (MSA) between Vendor and Client.
+
+## Scope Changes
+
+Any changes to scope, schedule, or cost require a formal Change Request approved by both parties.
+
+## Intellectual Property
+
+- Client retains ownership of playbooks, templates, and configurations
+- Vendor retains proprietary methodologies and accelerators
+- Open source tools used under their respective licenses
+
+## Confidentiality
+
+- All artifacts under NDA protection
+- Client credentials and data secured per security requirements
+- No disclosure to third parties without consent
+
+---
+
+# Sign-Off
+
+By signing below, both parties agree to the scope, approach, and terms outlined in this Statement of Work.
+
+**Client Authorized Signatory:**
+
+Name: ______________________________
+
+Title: ______________________________
+
+Signature: __________________________
+
+Date: ______________________________
+
+**Service Provider Authorized Signatory:**
+
+Name: ______________________________
+
+Title: ______________________________
+
+Signature: __________________________
+
+Date: ______________________________
+
+---

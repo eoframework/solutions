@@ -1,23 +1,75 @@
+# SCOPE ASSUMPTIONS - BASELINE (MULTIPLIER 1.0)
+#WIDTH: 25,35,33,32,32,39,44
+#ALIGN: left,left,left,left,left,left,left
+Category,Baseline Assumption,Current Scope,Small (1x),Medium (2x),Large (3x),Notes
+Solution Scope,Primary Features/Capabilities,HyperFlex 4-node for 200-300 VMs,HyperFlex 4-node for 200-300 VMs,HyperFlex 6-node for 400-600 VMs,HyperFlex 8+ node for 800+ VMs,Hyperconverged infrastructure scope,,,,
+Solution Scope,Customization Level,Standard HyperFlex deployment,Standard deployment,Custom vSphere policies and automation,Extensive custom integrations,Configuration vs customization,,,,
+Integration,External System Integrations,2 systems (vCenter + backup),2 systems (vCenter + backup),4 systems (vCenter backup monitoring CMDB),6+ systems including orchestration,vCenter Veeam Intersight integration,,,,
+Integration,Data Sources,VM inventory only,VM inventory,VM + storage + network telemetry,VM + storage + network + app metrics,Infrastructure monitoring data,,,,
+User Base,Total Users,10 infrastructure admins,10 admins,20 virtualization team members,40+ distributed team members,vCenter and Intersight users,,,,
+User Base,User Roles,2 roles (admin + operator),2 roles,4 roles with resource delegation,6+ roles with complex RBAC,Role-based access control,,,,
+Data Volume,Data Processing Volume,200-300 VMs workload,200-300 VMs,400-600 VMs mixed workload,800+ VMs high-density,Virtual machine capacity,,,,
+Data Volume,Data Storage Requirements,20 TB usable storage,20 TB,40 TB usable storage,80+ TB usable storage,After deduplication and compression,,,,
+Technical Environment,Deployment Regions,Single data center,Single data center,2 data centers with replication,Multi-site with disaster recovery,Geographic distribution,,,,
+Technical Environment,Availability Requirements,Standard (99.5%),Standard (99.5%),High availability (99.9%),Mission critical (99.95%+),Infrastructure uptime SLA,,,,
+Technical Environment,Infrastructure Complexity,Basic 3-tier compute storage network,Basic 3-tier,Complex multi-tier with DR,Distributed multi-site architecture,Infrastructure complexity level,,,,
+Security & Compliance,Security Requirements,Basic encryption and RBAC,Basic security,Encryption + compliance scanning,Advanced security + multi-framework compliance,Data protection and compliance,,,,
+Security & Compliance,Compliance Frameworks,Basic logging,Basic logging,PCI DSS or HIPAA,Multiple regulatory frameworks,Regulatory compliance requirements,,,,
+Performance,Performance Requirements,Standard IOPS and latency,Standard performance,High IOPS all-flash NVMe,Extreme performance low-latency,Storage performance tier,,,,
+Environment,Deployment Environments,Production only,Production only,Dev + production,Dev + staging + production + DR,Environment management,,,,
+# ESTIMATE SETTINGS
+#WIDTH: 17,22,14,173
+#ALIGN: left,left,center,left
+Phase,Variable Name,Multiplier,Description / Applies To Tasks
+Discovery,DISCOVERY_MX,1,"All Discovery phase tasks (Infrastructure Assessment, Workload Analysis, Requirements Gathering)",,,,,,,
+Planning,PLANNING_MX,1,"All Planning phase tasks (Architecture Design, Capacity Planning, Migration Planning)",,,,,,,
+Development,DEVELOPMENT_MX,1,"All Development phase tasks (HyperFlex Deployment, vSphere Configuration, VM Migration)",,,,,,,
+Testing,TESTING_MX,1,"All Testing phase tasks (Performance Testing, Failover Testing, Application Validation)",,,,,,,
+Deployment,DEPLOYMENT_MX,1,"All Deployment phase tasks (Production Deployment, VM Migration, Cutover Support)",,,,,,,
+Training,TRAINING_MX,1,"All Training phase tasks (Administrator Training, Operations Training, Documentation)",,,,,,,
+Closeout,CLOSEOUT_MX,1,"All Closeout phase tasks (Knowledge Transfer, Performance Baseline, Legacy Decommission)",,,,,,,
+Management,MANAGEMENT_MX,0.25,"Project management and technical leadership (25% of total engineering effort)",,,,,,,
+# LEVEL OF EFFORT
+#WIDTH: 14,30,40,18,10,12,18,14,12,40
+#ALIGN: left,left,left,left,right,right,left,left,left,left
 Phase,Work Package,Task Description,Resource Type,Estimated Hours,Rate,Cost Estimate,Dependencies,Risk Level,Notes
-Discovery,Network Requirements Analysis,Conduct network stakeholder interviews and requirements gathering,EO Engineer,40,$150,"=TEXT(E2*F2,""$#,##0"")",,Medium,Focus on network topology performance and business needs
-Discovery,Current Network Assessment,Analyze existing network infrastructure and Cisco equipment inventory,EO Engineer,32,$200,"=TEXT(E3*F3,""$#,##0"")",,Medium,Include capacity utilization performance and security analysis
-Discovery,Cisco Technology Assessment,Evaluate Cisco solutions (SD-WAN ACI DNA Center) and integration,EO Engineer,24,$200,"=TEXT(E4*F4,""$#,##0"")",,Medium,Focus on technology fit licensing and roadmap
-Planning,Network Architecture Design,Design Cisco network architecture and implementation strategy,EO Engineer,48,$200,"=TEXT(E5*F5,""$#,##0"")",,Medium,Include redundancy QoS security and scalability
-Development,Cisco Equipment Configuration,Configure deploy and optimize Cisco network equipment,EO Engineer,80,$160,"=TEXT(E6*F6,""$#,##0"")",,Medium,Include routing switching security and monitoring
-Development,Network Security Implementation,Implement Cisco security policies firewalls and access controls,EO Engineer,48,$170,"=TEXT(E7*F7,""$#,##0"")",,Medium,Include ISE firewalls VPN and threat detection
-Development,Network Management and Monitoring,Deploy Cisco network management monitoring and automation tools,EO Engineer,40,$140,"=TEXT(E8*F8,""$#,##0"")",,Medium,Include DNA Center Prime and performance monitoring
-Testing,Unit Testing,Develop automated tests for all solution components,EO Engineer,32,$120,"=TEXT(E9*F9,""$#,##0"")",,Medium,Include technology-specific testing frameworks
-Testing,Integration Testing,Test system integrations data flows and external dependencies,EO Engineer,40,$120,"=TEXT(E10*F10,""$#,##0"")",,Medium,Include end-to-end workflow validation
-Testing,Performance Testing,Conduct load performance and scalability testing,EO Engineer,24,$140,"=TEXT(E11*F11,""$#,##0"")",,Medium,Include production-like environment and stress testing
-Testing,Security Testing,Perform security assessments penetration testing and compliance validation,EO Engineer,16,$175,"=TEXT(E12*F12,""$#,##0"")",,Medium,Include vulnerability scanning and compliance checks
-Testing,User Acceptance Testing,Coordinate UAT with business users and stakeholders,EO Engineer,32,$150,"=TEXT(E13*F13,""$#,##0"")",,Medium,Include training feedback collection and sign-off
-Deployment,Production Deployment,Deploy solution to production environment with monitoring,EO Engineer,24,$160,"=TEXT(E14*F14,""$#,##0"")",,Medium,Include blue-green deployment rollback and validation
-Deployment,Go-Live Support,Provide comprehensive support during initial production rollout,EO Engineer,48,$110,"=TEXT(E15*F15,""$#,##0"")",,Medium,Include 24/7 support monitoring and issue resolution
-Training,Administrator Training,Train system administrators and technical support teams,EO Engineer,16,$130,"=TEXT(E16*F16,""$#,##0"")",,Medium,Include hands-on technical training and certification
-Training,End User Training,Train business users on solution functionality and workflows,EO Engineer,24,$120,"=TEXT(E17*F17,""$#,##0"")",,Medium,Include role-based training documentation and support
-Training,Documentation,Create comprehensive technical and user documentation,EO Engineer,32,$110,"=TEXT(E18*F18,""$#,##0"")",,Medium,Include runbooks troubleshooting guides and best practices
-Closeout,Knowledge Transfer,Transfer solution ownership to operations and support teams,EO Engineer,16,$140,"=TEXT(E19*F19,""$#,##0"")",,Medium,Include operational procedures escalation and maintenance
-Closeout,Performance Baseline,Establish performance metrics monitoring baselines and SLAs,EO Engineer,8,$130,"=TEXT(E20*F20,""$#,##0"")",,Medium,Include KPI definition monitoring setup and reporting
-Management,Technical Leadership,Quarterback technical oversight and architecture review,EO Quarterback,"=ROUND(SUM(E2:E20)*0.25,0)",$180,"=TEXT(E21*F21,""$#,##0"")",,Medium,25% of engineering effort
-Management,Project Management,Project coordination and management activities,EO Project Manager,"=ROUND(SUM(E2:E20)*0.20,0)",$150,"=TEXT(E22*F22,""$#,##0"")",,Low,20% of engineering effort
-,,,     TOTAL HOURS,904,   TOTAL COST,"=TEXT(E2*F2+E3*F3+E4*F4+E5*F5+E6*F6+E7*F7+E8*F8+E9*F9+E10*F10+E11*F11+E12*F12+E13*F13+E14*F14+E15*F15+E16*F16+E17*F17+E18*F18+E19*F19+E20*F20+E21*F21+E22*F22,""$#,##0"")",,,Total Hybrid Infrastructure project cost estimate
+Discovery,Infrastructure Assessment,Assess current servers storage and network infrastructure,"=ROUND($G$9*40,0)",40,225,"=TEXT(E17*F17,""$#,##0"")",,Medium,Capacity utilization and performance analysis,,
+Discovery,Workload Analysis,Analyze VM workloads and resource requirements,"=ROUND($G$9*32,0)",32,200,"=TEXT(E18*F18,""$#,##0"")",,Medium,vCPU memory storage IOPS profiling,,
+Discovery,Capacity Planning,Size HyperFlex cluster for current and future needs,"=ROUND($G$9*24,0)",24,225,"=TEXT(E19*F19,""$#,##0"")",Workload Analysis,Medium,3-year capacity planning,,
+Discovery,Application Dependencies,Map application dependencies and migration priorities,"=ROUND($G$9*32,0)",32,200,"=TEXT(E20*F20,""$#,##0"")",Workload Analysis,Medium,VM grouping and migration waves,,
+Planning,HyperFlex Architecture,Design 4-node HyperFlex cluster architecture,"=ROUND($G$10*48,0)",48,225,"=TEXT(E21*F21,""$#,##0"")",Capacity Planning,Medium,HA redundancy and storage design,,
+Planning,Network Design,Design fabric interconnect and network topology,"=ROUND($G$10*32,0)",32,200,"=TEXT(E22*F22,""$#,##0"")",Architecture,Medium,25GbE connectivity and VLANs,,
+Planning,Migration Strategy,Plan phased VM migration approach,"=ROUND($G$10*40,0)",40,200,"=TEXT(E23*F23,""$#,##0"")",Dependencies,High,vMotion vs cold migration strategy,,
+Planning,Backup Integration,Plan backup integration with Veeam or Commvault,"=ROUND($G$10*24,0)",24,175,"=TEXT(E24*F24,""$#,##0"")",Migration Plan,Medium,Snapshot-based backup design,,
+Development,HyperFlex Deployment,Deploy 4-node HyperFlex cluster with HA,"=ROUND($G$11*80,0)",80,225,"=TEXT(E25*F25,""$#,##0"")",Architecture,Medium,Hardware installation and cluster init,,
+Development,vSphere Configuration,Install and configure vSphere 8 on HyperFlex,"=ROUND($G$11*40,0)",40,200,"=TEXT(E26*F26,""$#,##0"")",HyperFlex Deploy,Medium,vCenter integration and vSphere setup,,
+Development,Network Configuration,Configure fabric interconnects and virtual networking,"=ROUND($G$11*32,0)",32,200,"=TEXT(E27*F27,""$#,##0"")",vSphere Setup,Medium,VLANs distributed switches port groups,,
+Development,Storage Configuration,Configure HyperFlex storage and data services,"=ROUND($G$11*32,0)",32,200,"=TEXT(E28*F28,""$#,##0"")",vSphere Setup,Medium,Deduplication compression replication,,
+Development,Intersight Integration,Integrate HyperFlex with Cisco Intersight,"=ROUND($G$11*20,0)",20,175,"=TEXT(E29*F29,""$#,##0"")",Cluster Deploy,Low,Cloud management and monitoring,,
+Development,Backup Configuration,Configure Veeam backup integration,"=ROUND($G$11*30,0)",30,200,"=TEXT(E30*F30,""$#,##0"")",Storage Config,Medium,Backup jobs and retention policies,,
+Testing,Performance Testing,Test storage and VM performance benchmarks,"=ROUND($G$12*30,0)",30,200,"=TEXT(E31*F31,""$#,##0"")",Config Complete,Medium,IOPS latency throughput validation,,
+Testing,Failover Testing,Test HA failover and node failure scenarios,"=ROUND($G$12*24,0)",24,200,"=TEXT(E32*F32,""$#,##0"")",Performance Tests,High,Node failure and cluster resilience,,
+Testing,VM Migration Testing,Test vMotion and migration procedures,"=ROUND($G$12*30,0)",30,175,"=TEXT(E33*F33,""$#,##0"")",Failover Tests,Medium,Pilot VM migrations (20 VMs),,
+Testing,Application Validation,Validate application functionality post-migration,"=ROUND($G$12*40,0)",40,175,"=TEXT(E34*F34,""$#,##0"")",VM Migration,High,Business application testing,,
+Deployment,Production VM Migration Wave 1,Migrate 50 non-critical VMs (Wave 1),"=ROUND($G$13*30,0)",30,175,"=TEXT(E35*F35,""$#,##0"")",Testing Complete,Medium,Dev/test and low-priority VMs,,
+Deployment,Production VM Migration Wave 2,Migrate 50 business application VMs (Wave 2),"=ROUND($G$13*40,0)",40,175,"=TEXT(E36*F36,""$#,##0"")",Wave 1 Success,Medium,Business apps and file servers,,
+Deployment,Production VM Migration Wave 3,Migrate 50 critical VMs (Wave 3),"=ROUND($G$13*50,0)",50,200,"=TEXT(E37*F37,""$#,##0"")",Wave 2 Success,High,Databases and mission-critical apps,,
+Deployment,Remaining VM Migration,Migrate final VMs and validate infrastructure,"=ROUND($G$13*40,0)",40,175,"=TEXT(E38*F38,""$#,##0"")",Wave 3 Success,Medium,Cleanup and final migrations,,
+Deployment,Hypercare Support,Provide post-migration stabilization support,"=ROUND($G$13*60,0)",60,150,"=TEXT(E39*F39,""$#,##0"")",Migration Complete,Medium,4-week hypercare period,,
+Training,Administrator Training,Train infrastructure team on HyperFlex operations,"=ROUND($G$14*24,0)",24,175,"=TEXT(E40*F40,""$#,##0"")",Deployment,Low,HyperFlex and Intersight management,,
+Training,Operations Training,Train operations on monitoring and troubleshooting,"=ROUND($G$14*16,0)",16,150,"=TEXT(E41*F41,""$#,##0"")",Admin Training,Low,Day-to-day operations and alerts,,
+Training,Documentation,Create runbooks SOPs and architecture docs,"=ROUND($G$14*32,0)",32,150,"=TEXT(E42*F42,""$#,##0"")",,Low,Operational procedures and diagrams,,
+Closeout,Knowledge Transfer,Transfer infrastructure to operations team,"=ROUND($G$15*16,0)",16,175,"=TEXT(E43*F43,""$#,##0"")",Training Complete,Low,Operational handoff and escalation,,
+Closeout,Performance Baseline,Establish performance baselines and SLAs,"=ROUND($G$15*16,0)",16,175,"=TEXT(E44*F44,""$#,##0"")",Hypercare,Low,VM performance and storage metrics,,
+Closeout,Legacy Decommission Planning,Plan decommissioning of legacy infrastructure,"=ROUND($G$15*24,0)",24,150,"=TEXT(E45*F45,""$#,##0"")",Migration Complete,Low,Server and SAN retirement planning,,
+Management,Technical Leadership,Technical quarterback and architecture oversight,"=ROUND(SUM(E17:E45)*$G$16,0)","=ROUND(SUM(E17:E45)*0.25,0)",225,"=TEXT(E46*F46,""$#,##0"")",,Medium,25% of total engineering effort,,
+Management,Project Management,Project coordination and stakeholder management,"=ROUND(SUM(E17:E45)*0.20,0)","=ROUND(SUM(E17:E45)*0.20,0)",175,"=TEXT(E47*F47,""$#,##0"")",,Low,20% of total engineering effort,,
+,,,TOTAL HOURS,"=SUM(E17:E47)",TOTAL COST,"=TEXT(SUM(G17:G47),""$#,##0"")",,,Total HyperFlex HCI implementation cost,,
+# CREDITS
+#WIDTH: 25,28,18,60
+#ALIGN: left,left,right,left
+Category,Credit Type,Credit Amount,Credit Comments
+Hardware,Server Trade-In Credit,"($15000)",Legacy server trade-in credit
+Software,VMware ELA Credit,"($20000)",Existing VMware Enterprise License Agreement credit
+Professional Services,Implementation Services,$0,No professional services credits available
+Support & Maintenance,Support Credit,$0,No support renewal credits available

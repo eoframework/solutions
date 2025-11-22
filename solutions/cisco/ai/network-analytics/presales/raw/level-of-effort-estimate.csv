@@ -1,23 +1,73 @@
+# SCOPE ASSUMPTIONS - BASELINE (MULTIPLIER 1.0)
+#WIDTH: 25,35,33,32,32,39,44
+#ALIGN: left,left,left,left,left,left,left
+Category,Baseline Assumption,Current Scope,Small (1x),Medium (2x),Large (3x),Notes
+Solution Scope,Primary Features/Capabilities,DNA Center for 200 devices,DNA Center for 200 devices,DNA Center for 500 devices,DNA Center for 1000+ devices,Network automation and assurance,,,,
+Solution Scope,Customization Level,Standard DNA Center deployment,Standard DNA Center deployment,Custom policy templates and workflows,Extensive custom integrations and automation,Configuration vs custom development,,,,
+Integration,External System Integrations,2 systems (AD + ITSM),2 systems (AD + ITSM),4 systems (AD ITSM IPAM monitoring),6+ systems including SIEM and orchestration,ServiceNow NetBox integration,,,,
+Integration,Data Sources,Network devices only,Network devices only,Network + IPAM + monitoring data,Network + IPAM + monitoring + external CMDBs,Device discovery and telemetry,,,,
+User Base,Total Users,10 network administrators,10 network administrators,25 network team members,50+ distributed team members,DNA Center users and operators,,,,
+User Base,User Roles,2 roles (admin + viewer),2 roles (admin + viewer),4 roles with delegation,6+ roles with complex RBAC,Role-based access control,,,,
+Data Volume,Data Processing Volume,200 devices telemetry,200 devices telemetry,500 devices high-frequency telemetry,1000+ devices with NetFlow,Network assurance and analytics data,,,,
+Data Volume,Data Storage Requirements,500 GB (90-day retention),500 GB (90-day retention),2 TB (1-year retention),5+ TB (multi-year retention),Telemetry logs and analytics data,,,,
+Technical Environment,Deployment Regions,Single data center,Single data center,2 data centers with HA,Multi-site with geographic redundancy,DNA Center deployment architecture,,,,
+Technical Environment,Availability Requirements,Standard (99.5%),Standard (99.5%),High availability (99.9%),Mission critical (99.95%+),DNA Center uptime SLA,,,,
+Technical Environment,Infrastructure Complexity,Basic campus network,Basic campus network,Campus + branch + data center,Complex multi-domain fabric architecture,Network topology complexity,,,,
+Security & Compliance,Security Requirements,Basic 802.1X and encryption,Basic 802.1X and encryption,TrustSec segmentation + ISE,Advanced TrustSec + compliance automation,Network security and access control,,,,
+Security & Compliance,Compliance Frameworks,Basic logging,Basic logging,PCI DSS or HIPAA,Multiple regulatory frameworks,Compliance automation requirements,,,,
+Performance,Performance Requirements,Standard telemetry,Standard telemetry,Enhanced analytics and reporting,Real-time analytics with AI insights,Network assurance performance,,,,
+Environment,Deployment Environments,Production only,Production only,Lab + production,Lab + staging + production + DR,Testing and validation environments,,,,
+# ESTIMATE SETTINGS
+#WIDTH: 17,22,14,173
+#ALIGN: left,left,center,left
+Phase,Variable Name,Multiplier,Description / Applies To Tasks
+Discovery,DISCOVERY_MX,1,"All Discovery phase tasks (Network Assessment, Device Inventory, Requirements Gathering, Integration Analysis)",,,,,,,
+Planning,PLANNING_MX,1,"All Planning phase tasks (Architecture Design, Policy Framework, Migration Planning, Training Plan)",,,,,,,
+Development,DEVELOPMENT_MX,1,"All Development phase tasks (DNA Center Deployment, Device Onboarding, Policy Configuration, Integration Setup)",,,,,,,
+Testing,TESTING_MX,1,"All Testing phase tasks (Lab Testing, Pilot Validation, Policy Testing, Failover Testing)",,,,,,,
+Deployment,DEPLOYMENT_MX,1,"All Deployment phase tasks (Production Deployment, Device Migration, Policy Rollout, Go-Live Support)",,,,,,,
+Training,TRAINING_MX,1,"All Training phase tasks (Administrator Training, Operations Training, Documentation)",,,,,,,
+Closeout,CLOSEOUT_MX,1,"All Closeout phase tasks (Knowledge Transfer, Performance Baseline, Operational Handoff)",,,,,,,
+Management,MANAGEMENT_MX,0.25,"Project management and technical leadership (25% of total engineering effort)",,,,,,,
+# LEVEL OF EFFORT
+#WIDTH: 14,30,40,18,10,12,18,14,12,40
+#ALIGN: left,left,left,left,right,right,left,left,left,left
 Phase,Work Package,Task Description,Resource Type,Estimated Hours,Rate,Cost Estimate,Dependencies,Risk Level,Notes
-Discovery,Network Requirements Analysis,Conduct network stakeholder interviews and requirements gathering,EO Engineer,40,$150,"=TEXT(E2*F2,""$#,##0"")",,Medium,Focus on network topology performance and business needs
-Discovery,Current Network Assessment,Analyze existing network infrastructure and Cisco equipment inventory,EO Engineer,32,$200,"=TEXT(E3*F3,""$#,##0"")",,Medium,Include capacity utilization performance and security analysis
-Discovery,Cisco Technology Assessment,Evaluate Cisco solutions (SD-WAN ACI DNA Center) and integration,EO Engineer,24,$200,"=TEXT(E4*F4,""$#,##0"")",,Medium,Focus on technology fit licensing and roadmap
-Planning,Network Architecture Design,Design Cisco network architecture and implementation strategy,EO Engineer,48,$200,"=TEXT(E5*F5,""$#,##0"")",,Medium,Include redundancy QoS security and scalability
-Development,Cisco Equipment Configuration,Configure deploy and optimize Cisco network equipment,EO Engineer,80,$160,"=TEXT(E6*F6,""$#,##0"")",,Medium,Include routing switching security and monitoring
-Development,Network Security Implementation,Implement Cisco security policies firewalls and access controls,EO Engineer,48,$170,"=TEXT(E7*F7,""$#,##0"")",,Medium,Include ISE firewalls VPN and threat detection
-Development,Network Management and Monitoring,Deploy Cisco network management monitoring and automation tools,EO Engineer,40,$140,"=TEXT(E8*F8,""$#,##0"")",,Medium,Include DNA Center Prime and performance monitoring
-Testing,Unit Testing,Develop automated tests for all solution components,EO Engineer,32,$120,"=TEXT(E9*F9,""$#,##0"")",,Medium,Include technology-specific testing frameworks
-Testing,Integration Testing,Test system integrations data flows and external dependencies,EO Engineer,40,$120,"=TEXT(E10*F10,""$#,##0"")",,Medium,Include end-to-end workflow validation
-Testing,Performance Testing,Conduct load performance and scalability testing,EO Engineer,24,$140,"=TEXT(E11*F11,""$#,##0"")",,Medium,Include production-like environment and stress testing
-Testing,Security Testing,Perform security assessments penetration testing and compliance validation,EO Engineer,16,$175,"=TEXT(E12*F12,""$#,##0"")",,Medium,Include vulnerability scanning and compliance checks
-Testing,User Acceptance Testing,Coordinate UAT with business users and stakeholders,EO Engineer,32,$150,"=TEXT(E13*F13,""$#,##0"")",,Medium,Include training feedback collection and sign-off
-Deployment,Production Deployment,Deploy solution to production environment with monitoring,EO Engineer,24,$160,"=TEXT(E14*F14,""$#,##0"")",,Medium,Include blue-green deployment rollback and validation
-Deployment,Go-Live Support,Provide comprehensive support during initial production rollout,EO Engineer,48,$110,"=TEXT(E15*F15,""$#,##0"")",,Medium,Include 24/7 support monitoring and issue resolution
-Training,Administrator Training,Train system administrators and technical support teams,EO Engineer,16,$130,"=TEXT(E16*F16,""$#,##0"")",,Medium,Include hands-on technical training and certification
-Training,End User Training,Train business users on solution functionality and workflows,EO Engineer,24,$120,"=TEXT(E17*F17,""$#,##0"")",,Medium,Include role-based training documentation and support
-Training,Documentation,Create comprehensive technical and user documentation,EO Engineer,32,$110,"=TEXT(E18*F18,""$#,##0"")",,Medium,Include runbooks troubleshooting guides and best practices
-Closeout,Knowledge Transfer,Transfer solution ownership to operations and support teams,EO Engineer,16,$140,"=TEXT(E19*F19,""$#,##0"")",,Medium,Include operational procedures escalation and maintenance
-Closeout,Performance Baseline,Establish performance metrics monitoring baselines and SLAs,EO Engineer,8,$130,"=TEXT(E20*F20,""$#,##0"")",,Medium,Include KPI definition monitoring setup and reporting
-Management,Technical Leadership,Quarterback technical oversight and architecture review,EO Quarterback,"=ROUND(SUM(E2:E20)*0.25,0)",$180,"=TEXT(E21*F21,""$#,##0"")",,Medium,25% of engineering effort
-Management,Project Management,Project coordination and management activities,EO Project Manager,"=ROUND(SUM(E2:E20)*0.20,0)",$150,"=TEXT(E22*F22,""$#,##0"")",,Low,20% of engineering effort
-,,,     TOTAL HOURS,904,   TOTAL COST,"=TEXT(E2*F2+E3*F3+E4*F4+E5*F5+E6*F6+E7*F7+E8*F8+E9*F9+E10*F10+E11*F11+E12*F12+E13*F13+E14*F14+E15*F15+E16*F16+E17*F17+E18*F18+E19*F19+E20*F20+E21*F21+E22*F22,""$#,##0"")",,,Total Network Analytics project cost estimate
+Discovery,Network Assessment,Assess current network infrastructure and Cisco device inventory,"=ROUND($G$9*40,0)",40,200,"=TEXT(E17*F17,""$#,##0"")",,Medium,200 devices analysis and capacity planning,,
+Discovery,DNA Center Requirements,Gather DNA Center requirements and use case definition,"=ROUND($G$9*32,0)",32,200,"=TEXT(E18*F18,""$#,##0"")",,Medium,Policy framework and automation goals,,
+Discovery,Integration Analysis,Analyze integration requirements for AD ITSM and IPAM,"=ROUND($G$9*24,0)",24,225,"=TEXT(E19*F19,""$#,##0"")",,Medium,ServiceNow and NetBox integration planning,,
+Discovery,Application Inventory,Identify critical applications for monitoring and SLA policies,"=ROUND($G$9*16,0)",16,175,"=TEXT(E20*F20,""$#,##0"")",,Low,Office 365 SAP VoIP applications,,
+Planning,Solution Architecture,Design DNA Center architecture and HA deployment,"=ROUND($G$10*48,0)",48,225,"=TEXT(E21*F21,""$#,##0"")",Network Assessment,Medium,Primary and secondary DNA Center nodes,,
+Planning,Network Policy Framework,Design authentication authorization and assurance policies,"=ROUND($G$10*40,0)",40,200,"=TEXT(E22*F22,""$#,##0"")",Requirements,Medium,802.1X TrustSec and compliance policies,,
+Planning,Migration Strategy,Plan phased device onboarding and migration approach,"=ROUND($G$10*32,0)",32,200,"=TEXT(E23*F23,""$#,##0"")",Assessment,Medium,Pilot sites and rollout waves,,
+Planning,Training Plan,Develop training curriculum for administrators and operators,"=ROUND($G$10*16,0)",16,175,"=TEXT(E24*F24,""$#,##0"")",,Low,Hands-on labs and certification prep,,
+Development,DNA Center Deployment,Deploy and configure DNA Center appliances,"=ROUND($G$11*60,0)",60,200,"=TEXT(E25*F25,""$#,##0"")",Architecture Design,Medium,HA pair installation and base configuration,,
+Development,Device Discovery,Discover and onboard 200 network devices,"=ROUND($G$11*80,0)",80,175,"=TEXT(E26*F26,""$#,##0"")",DNA Center Setup,Medium,Automated discovery and manual addition,,
+Development,Policy Configuration,Configure network policies templates and automation,"=ROUND($G$11*60,0)",60,200,"=TEXT(E27*F27,""$#,##0"")",Policy Framework,Medium,Authentication VLAN assignment ACLs,,
+Development,AI Analytics Setup,Configure AI network analytics and assurance features,"=ROUND($G$11*40,0)",40,225,"=TEXT(E28*F28,""$#,##0"")",Device Onboarding,Medium,Predictive insights and anomaly detection,,
+Development,Integration Setup,Integrate with AD ServiceNow and NetBox,"=ROUND($G$11*40,0)",40,200,"=TEXT(E29*F29,""$#,##0"")",Policy Config,Medium,Identity source ITSM and IPAM integration,,
+Development,Application Monitoring,Configure application experience monitoring,"=ROUND($G$11*32,0)",32,200,"=TEXT(E30*F30,""$#,##0"")",AI Analytics,Low,Office 365 Webex SAP monitoring,,
+Testing,Lab Validation,Test DNA Center policies in lab environment,"=ROUND($G$12*32,0)",32,175,"=TEXT(E31*F31,""$#,##0"")",Policy Config,Medium,GNS3 or physical lab testing,,
+Testing,Pilot Deployment,Deploy to 20 pilot devices for validation,"=ROUND($G$12*40,0)",40,175,"=TEXT(E32*F32,""$#,##0"")",Lab Validation,Medium,IT department or friendly site,,
+Testing,Policy Testing,Validate authentication authorization and analytics,"=ROUND($G$12*32,0)",32,175,"=TEXT(E33*F33,""$#,##0"")",Pilot Deployment,Medium,End-to-end workflow testing,,
+Testing,Failover Testing,Test DNA Center HA and device failover scenarios,"=ROUND($G$12*24,0)",24,200,"=TEXT(E34*F34,""$#,##0"")",Pilot Success,Medium,Controller failover and network resilience,,
+Deployment,Production Deployment,Deploy remaining 180 devices to DNA Center,"=ROUND($G$13*80,0)",80,175,"=TEXT(E35*F35,""$#,##0"")",Testing Complete,Medium,Phased rollout by site or device type,,
+Deployment,Policy Rollout,Enable enforcement policies across network,"=ROUND($G$13*40,0)",40,200,"=TEXT(E36*F36,""$#,##0"")",Device Migration,High,Gradual policy enforcement,,
+Deployment,Monitoring Activation,Activate assurance monitoring and alerting,"=ROUND($G$13*24,0)",24,175,"=TEXT(E37*F37,""$#,##0"")",Policy Rollout,Medium,CloudWatch and ITSM integration,,
+Deployment,Go-Live Support,Provide hypercare support during stabilization,"=ROUND($G$13*48,0)",48,150,"=TEXT(E38*F38,""$#,##0"")",Production Rollout,Medium,4-week post-deployment support,,
+Training,Administrator Training,Train DNA Center administrators on operations,"=ROUND($G$14*24,0)",24,175,"=TEXT(E39*F39,""$#,##0"")",Deployment Complete,Low,Policy management and troubleshooting,,
+Training,Operations Training,Train network team on assurance and analytics,"=ROUND($G$14*16,0)",16,150,"=TEXT(E40*F40,""$#,##0"")",Admin Training,Low,Dashboard usage and incident response,,
+Training,Documentation,Create runbooks and operational documentation,"=ROUND($G$14*32,0)",32,150,"=TEXT(E41*F41,""$#,##0"")",,Low,SOPs troubleshooting guides best practices,,
+Closeout,Knowledge Transfer,Transfer solution to operations team,"=ROUND($G$15*16,0)",16,175,"=TEXT(E42*F42,""$#,##0"")",Training Complete,Low,Operational handoff and escalation procedures,,
+Closeout,Performance Baseline,Establish performance baselines and KPIs,"=ROUND($G$15*16,0)",16,175,"=TEXT(E43*F43,""$#,##0"")",Go-Live,Low,MTTR uptime and automation metrics,,
+Management,Technical Leadership,Technical quarterback and architecture oversight,"=ROUND(SUM(E17:E43)*$G$16,0)","=ROUND(SUM(E17:E43)*0.25,0)",225,"=TEXT(E44*F44,""$#,##0"")",,Medium,25% of total engineering effort,,
+Management,Project Management,Project coordination and stakeholder management,"=ROUND(SUM(E17:E43)*0.20,0)","=ROUND(SUM(E17:E43)*0.20,0)",175,"=TEXT(E45*F45,""$#,##0"")",,Low,20% of total engineering effort,,
+,,,TOTAL HOURS,"=SUM(E17:E45)",TOTAL COST,"=TEXT(SUM(G17:G45),""$#,##0"")",,,Total DNA Center implementation cost,,
+# CREDITS
+#WIDTH: 25,28,18,60
+#ALIGN: left,left,right,left
+Category,Credit Type,Credit Amount,Credit Comments
+Hardware,Cisco SmartNet Renewal,"($5000)",Existing SmartNet contract renewal credit applied
+Software,DNA License Promotion,"($20000)",Year 1 DNA Advantage license 33% discount promotion
+Professional Services,Implementation Services,$0,No professional services credits available
+Support & Maintenance,Annual Support Credit,$0,No support renewal credits available

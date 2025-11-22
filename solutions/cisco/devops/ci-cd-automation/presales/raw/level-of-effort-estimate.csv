@@ -1,23 +1,73 @@
+# SCOPE ASSUMPTIONS - BASELINE (MULTIPLIER 1.0)
+#WIDTH: 25,35,33,32,32,39,44
+#ALIGN: left,left,left,left,left,left,left
+Category,Baseline Assumption,Current Scope,Small (1x),Medium (2x),Large (3x),Notes
+Solution Scope,Primary Features/Capabilities,Ansible + GitLab CI/CD for 100 devices,Ansible + GitLab for 100 devices,Ansible + Terraform + GitLab for 250 devices,Multi-tool stack for 500+ devices,Network automation platform scope,,,,
+Solution Scope,Customization Level,Standard playbooks and templates,Standard playbooks,Custom playbooks and modules,Extensive custom development and integrations,Ansible and Terraform customization,,,,
+Integration,External System Integrations,2 systems (Git + NetBox),2 systems (Git + NetBox),4 systems (Git NetBox ServiceNow monitoring),6+ systems including CMDB and orchestration,ITSM and IPAM integration,,,,
+Integration,Data Sources,Network device configs,Network device configs,Devices + IPAM + monitoring,Devices + IPAM + monitoring + external data,Configuration and inventory data,,,,
+User Base,Total Users,5 network engineers,5 network engineers,10 network team members,20+ distributed automation users,GitLab and AWX users,,,,
+User Base,User Roles,2 roles (developer + operator),2 roles (developer + operator),4 roles with approvers,6+ roles with complex workflows,RBAC and approval gates,,,,
+Data Volume,Data Processing Volume,100 device configs,100 device configs,250 device configs,500+ device configs,Configuration management scope,,,,
+Data Volume,Data Storage Requirements,50 GB (Git + backups),50 GB,200 GB,500+ GB,Git repositories and config backups,,,,
+Technical Environment,Deployment Regions,Single data center,Single data center,2 data centers,Multi-region deployment,CI/CD infrastructure distribution,,,,
+Technical Environment,Availability Requirements,Standard (99%),Standard (99%),High availability (99.5%),Mission critical (99.9%+),GitLab and AWX uptime requirements,,,,
+Technical Environment,Infrastructure Complexity,Basic network (single platform),Basic network,Multi-vendor multi-platform,Complex heterogeneous environment,Network device diversity,,,,
+Security & Compliance,Security Requirements,Basic Git auth and secrets,Basic Git auth,Vault integration and RBAC,Advanced secrets management and audit,Credential and secrets management,,,,
+Security & Compliance,Compliance Frameworks,Change tracking only,Change tracking,PCI DSS or SOC 2,Multiple regulatory frameworks,Audit and compliance automation,,,,
+Performance,Performance Requirements,Standard deployment speed,Standard speed,Fast parallel deployment,Optimized high-speed automation,Deployment performance targets,,,,
+Environment,Deployment Environments,Production only,Production only,Lab + production,Lab + staging + production,Testing and validation environments,,,,
+# ESTIMATE SETTINGS
+#WIDTH: 17,22,14,173
+#ALIGN: left,left,center,left
+Phase,Variable Name,Multiplier,Description / Applies To Tasks
+Discovery,DISCOVERY_MX,1,"All Discovery phase tasks (Current State Assessment, Tool Selection, Requirements Gathering)",,,,,,,
+Planning,PLANNING_MX,1,"All Planning phase tasks (Architecture Design, Workflow Design, Security Planning)",,,,,,,
+Development,DEVELOPMENT_MX,1,"All Development phase tasks (Platform Setup, Playbook Development, Pipeline Configuration)",,,,,,,
+Testing,TESTING_MX,1,"All Testing phase tasks (Lab Testing, Integration Testing, Security Testing)",,,,,,,
+Deployment,DEPLOYMENT_MX,1,"All Deployment phase tasks (Production Deployment, Device Onboarding, Policy Rollout)",,,,,,,
+Training,TRAINING_MX,1,"All Training phase tasks (Team Training, Documentation, Knowledge Transfer)",,,,,,,
+Closeout,CLOSEOUT_MX,1,"All Closeout phase tasks (Operational Handoff, Performance Baseline)",,,,,,,
+Management,MANAGEMENT_MX,0.25,"Project management and technical leadership (25% of total engineering effort)",,,,,,,
+# LEVEL OF EFFORT
+#WIDTH: 14,30,40,18,10,12,18,14,12,40
+#ALIGN: left,left,left,left,right,right,left,left,left,left
 Phase,Work Package,Task Description,Resource Type,Estimated Hours,Rate,Cost Estimate,Dependencies,Risk Level,Notes
-Discovery,Network Requirements Analysis,Conduct network stakeholder interviews and requirements gathering,EO Engineer,40,$150,"=TEXT(E2*F2,""$#,##0"")",,Medium,Focus on network topology performance and business needs
-Discovery,Current Network Assessment,Analyze existing network infrastructure and Cisco equipment inventory,EO Engineer,32,$200,"=TEXT(E3*F3,""$#,##0"")",,Medium,Include capacity utilization performance and security analysis
-Discovery,Cisco Technology Assessment,Evaluate Cisco solutions (SD-WAN ACI DNA Center) and integration,EO Engineer,24,$200,"=TEXT(E4*F4,""$#,##0"")",,Medium,Focus on technology fit licensing and roadmap
-Planning,Network Architecture Design,Design Cisco network architecture and implementation strategy,EO Engineer,48,$200,"=TEXT(E5*F5,""$#,##0"")",,Medium,Include redundancy QoS security and scalability
-Development,Cisco Equipment Configuration,Configure deploy and optimize Cisco network equipment,EO Engineer,80,$160,"=TEXT(E6*F6,""$#,##0"")",,Medium,Include routing switching security and monitoring
-Development,Network Security Implementation,Implement Cisco security policies firewalls and access controls,EO Engineer,48,$170,"=TEXT(E7*F7,""$#,##0"")",,Medium,Include ISE firewalls VPN and threat detection
-Development,Network Management and Monitoring,Deploy Cisco network management monitoring and automation tools,EO Engineer,40,$140,"=TEXT(E8*F8,""$#,##0"")",,Medium,Include DNA Center Prime and performance monitoring
-Testing,Unit Testing,Develop automated tests for all solution components,EO Engineer,32,$120,"=TEXT(E9*F9,""$#,##0"")",,Medium,Include technology-specific testing frameworks
-Testing,Integration Testing,Test system integrations data flows and external dependencies,EO Engineer,40,$120,"=TEXT(E10*F10,""$#,##0"")",,Medium,Include end-to-end workflow validation
-Testing,Performance Testing,Conduct load performance and scalability testing,EO Engineer,24,$140,"=TEXT(E11*F11,""$#,##0"")",,Medium,Include production-like environment and stress testing
-Testing,Security Testing,Perform security assessments penetration testing and compliance validation,EO Engineer,16,$175,"=TEXT(E12*F12,""$#,##0"")",,Medium,Include vulnerability scanning and compliance checks
-Testing,User Acceptance Testing,Coordinate UAT with business users and stakeholders,EO Engineer,32,$150,"=TEXT(E13*F13,""$#,##0"")",,Medium,Include training feedback collection and sign-off
-Deployment,Production Deployment,Deploy solution to production environment with monitoring,EO Engineer,24,$160,"=TEXT(E14*F14,""$#,##0"")",,Medium,Include blue-green deployment rollback and validation
-Deployment,Go-Live Support,Provide comprehensive support during initial production rollout,EO Engineer,48,$110,"=TEXT(E15*F15,""$#,##0"")",,Medium,Include 24/7 support monitoring and issue resolution
-Training,Administrator Training,Train system administrators and technical support teams,EO Engineer,16,$130,"=TEXT(E16*F16,""$#,##0"")",,Medium,Include hands-on technical training and certification
-Training,End User Training,Train business users on solution functionality and workflows,EO Engineer,24,$120,"=TEXT(E17*F17,""$#,##0"")",,Medium,Include role-based training documentation and support
-Training,Documentation,Create comprehensive technical and user documentation,EO Engineer,32,$110,"=TEXT(E18*F18,""$#,##0"")",,Medium,Include runbooks troubleshooting guides and best practices
-Closeout,Knowledge Transfer,Transfer solution ownership to operations and support teams,EO Engineer,16,$140,"=TEXT(E19*F19,""$#,##0"")",,Medium,Include operational procedures escalation and maintenance
-Closeout,Performance Baseline,Establish performance metrics monitoring baselines and SLAs,EO Engineer,8,$130,"=TEXT(E20*F20,""$#,##0"")",,Medium,Include KPI definition monitoring setup and reporting
-Management,Technical Leadership,Quarterback technical oversight and architecture review,EO Quarterback,"=ROUND(SUM(E2:E20)*0.25,0)",$180,"=TEXT(E21*F21,""$#,##0"")",,Medium,25% of engineering effort
-Management,Project Management,Project coordination and management activities,EO Project Manager,"=ROUND(SUM(E2:E20)*0.20,0)",$150,"=TEXT(E22*F22,""$#,##0"")",,Low,20% of engineering effort
-,,,     TOTAL HOURS,904,   TOTAL COST,"=TEXT(E2*F2+E3*F3+E4*F4+E5*F5+E6*F6+E7*F7+E8*F8+E9*F9+E10*F10+E11*F11+E12*F12+E13*F13+E14*F14+E15*F15+E16*F16+E17*F17+E18*F18+E19*F19+E20*F20+E21*F21+E22*F22,""$#,##0"")",,,Total Ci Cd Automation project cost estimate
+Discovery,Automation Assessment,Assess current network automation maturity and processes,"=ROUND($G$9*40,0)",40,225,"=TEXT(E17*F17,""$#,##0"")",,Medium,Current state and automation roadmap,,
+Discovery,Tool Evaluation,Evaluate automation tools (Ansible Terraform GitLab),"=ROUND($G$9*24,0)",24,200,"=TEXT(E18*F18,""$#,##0"")",,Medium,Tool selection and architecture,,
+Discovery,Device Inventory,Inventory 100 devices and platform types,"=ROUND($G$9*16,0)",16,175,"=TEXT(E19*F19,""$#,##0"")",,Low,Device compatibility assessment,,
+Discovery,Use Case Definition,Define priority automation use cases,"=ROUND($G$9*24,0)",24,200,"=TEXT(E20*F20,""$#,##0"")",,Medium,VLAN ACL interface routing playbooks,,
+Planning,CI/CD Architecture,Design GitLab CI/CD and runner infrastructure,"=ROUND($G$10*40,0)",40,225,"=TEXT(E21*F21,""$#,##0"")",Assessment,Medium,Pipeline and workflow architecture,,
+Planning,Automation Workflow,Design GitOps workflow and approval processes,"=ROUND($G$10*32,0)",32,200,"=TEXT(E22*F22,""$#,##0"")",Use Cases,Medium,Merge request and deployment workflow,,
+Planning,Security Architecture,Design secrets management and access control,"=ROUND($G$10*24,0)",24,225,"=TEXT(E23*F23,""$#,##0"")",Architecture,Medium,Vault integration and RBAC,,
+Planning,Testing Strategy,Plan lab testing and validation approach,"=ROUND($G$10*16,0)",16,175,"=TEXT(E24*F24,""$#,##0"")",Workflow,Low,GNS3 CML or staging devices,,
+Development,GitLab Deployment,Deploy GitLab and configure CI/CD runners,"=ROUND($G$11*40,0)",40,225,"=TEXT(E25*F25,""$#,##0"")",Architecture,Medium,Self-hosted GitLab Premium setup,,
+Development,NetBox IPAM Setup,Deploy and configure NetBox for network inventory,"=ROUND($G$11*40,0)",40,200,"=TEXT(E26*F26,""$#,##0"")",GitLab Setup,Medium,Source of truth and dynamic inventory,,
+Development,Ansible Playbook Development,Develop 6 core Ansible playbooks for device configs,"=ROUND($G$11*120,0)",120,200,"=TEXT(E27*F27,""$#,##0"")",Planning Complete,High,VLAN ACL interface routing QoS compliance,,
+Development,Terraform Module Development,Develop Terraform modules for ACI DCNM Meraki (optional),"=ROUND($G$11*80,0)",80,225,"=TEXT(E28*F28,""$#,##0"")",Playbooks,Medium,Infrastructure as Code for SDN,,
+Development,CI/CD Pipeline Configuration,Configure GitLab pipelines for automated testing,"=ROUND($G$11*60,0)",60,200,"=TEXT(E29*F29,""$#,##0"")",Playbooks,Medium,Syntax validation linting pre-deployment tests,,
+Development,Secrets Management,Implement Vault or GitLab secrets management,"=ROUND($G$11*24,0)",24,200,"=TEXT(E30*F30,""$#,##0"")",Security Design,Medium,Credential rotation and access control,,
+Testing,Lab Validation,Test playbooks in lab environment (GNS3/CML),"=ROUND($G$12*40,0)",40,200,"=TEXT(E31*F31,""$#,##0"")",Playbooks,Medium,Pre-deployment testing and validation,,
+Testing,Integration Testing,Test CI/CD pipeline end-to-end workflows,"=ROUND($G$12*32,0)",32,175,"=TEXT(E32*F32,""$#,##0"")",Pipeline Config,Medium,Commit to deployment workflow,,
+Testing,Rollback Testing,Test automated rollback and failure scenarios,"=ROUND($G$12*24,0)",24,175,"=TEXT(E33*F33,""$#,##0"")",Lab Testing,High,Config restore and recovery procedures,,
+Testing,Security Testing,Validate secrets management and access controls,"=ROUND($G$12*16,0)",16,200,"=TEXT(E34*F34,""$#,##0"")",Secrets Setup,Medium,Credential security and audit logging,,
+Deployment,Production Deployment,Deploy GitLab NetBox and pipelines to production,"=ROUND($G$13*40,0)",40,200,"=TEXT(E35*F35,""$#,##0"")",Testing Complete,Medium,Production infrastructure setup,,
+Deployment,Device Onboarding,Onboard 100 devices for automation management,"=ROUND($G$13*30,0)",30,175,"=TEXT(E36*F36,""$#,##0"")",Prod Deployment,Medium,Device authentication and connectivity,,
+Deployment,Pilot Automation,Execute pilot automations (10-20 devices),"=ROUND($G$13*40,0)",40,175,"=TEXT(E37*F37,""$#,##0"")",Device Onboarding,High,Validate automation in production,,
+Deployment,Full Rollout,Enable automation for all 100 devices,"=ROUND($G$13*30,0)",30,175,"=TEXT(E38*F38,""$#,##0"")",Pilot Success,Medium,Phased enablement and monitoring,,
+Training,Ansible Training,Train team on Ansible playbooks and best practices,"=ROUND($G$14*24,0)",24,175,"=TEXT(E39*F39,""$#,##0"")",Deployment,Low,Hands-on playbook development,,
+Training,GitLab CI/CD Training,Train team on GitLab workflows and pipelines,"=ROUND($G$14*16,0)",16,175,"=TEXT(E40*F40,""$#,##0"")",Ansible Training,Low,GitOps workflow and merge requests,,
+Training,Documentation,Create runbooks playbook docs and SOPs,"=ROUND($G$14*40,0)",40,150,"=TEXT(E41*F41,""$#,##0"")",,Low,Operational procedures and guides,,
+Closeout,Knowledge Transfer,Transfer automation platform to operations,"=ROUND($G$15*16,0)",16,175,"=TEXT(E42*F42,""$#,##0"")",Training Complete,Low,Operational handoff and support model,,
+Closeout,Performance Baseline,Establish automation metrics and KPIs,"=ROUND($G$15*8,0)",8,150,"=TEXT(E43*F43,""$#,##0"")",Production Rollout,Low,Deployment frequency error rate metrics,,
+Management,Technical Leadership,Technical quarterback and architecture oversight,"=ROUND(SUM(E17:E43)*$G$16,0)","=ROUND(SUM(E17:E43)*0.25,0)",225,"=TEXT(E44*F44,""$#,##0"")",,Medium,25% of total engineering effort,,
+Management,Project Management,Project coordination and stakeholder management,"=ROUND(SUM(E17:E43)*0.20,0)","=ROUND(SUM(E17:E43)*0.20,0)",175,"=TEXT(E45*F45,""$#,##0"")",,Low,20% of total engineering effort,,
+,,,TOTAL HOURS,"=SUM(E17:E45)",TOTAL COST,"=TEXT(SUM(G17:G45),""$#,##0"")",,,Total CI/CD Automation implementation cost,,
+# CREDITS
+#WIDTH: 25,28,18,60
+#ALIGN: left,left,right,left
+Category,Credit Type,Credit Amount,Credit Comments
+Software,GitLab License Credit,$0,No GitLab license credits available
+Cloud Infrastructure,Infrastructure Hosting Credit,"($1000)",Year 1 cloud hosting credit for GitLab runners
+Professional Services,Implementation Services,$0,No professional services credits available
+Support & Maintenance,Support Credit,$0,No support credits available
