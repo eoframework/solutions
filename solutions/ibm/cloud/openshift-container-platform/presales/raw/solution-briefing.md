@@ -72,18 +72,14 @@ This engagement is sized based on the following parameters:
 
 ![Architecture Diagram](assets/diagrams/architecture-diagram.png)
 
-- **Container Platform**
-  - OpenShift with integrated Kubernetes orchestration and automated operations
+- **OpenShift Platform**
   - Multi-master control plane with etcd cluster for high availability
   - Worker nodes running RHEL CoreOS for immutable infrastructure
-- **Developer Tools & CI/CD**
-  - OpenShift Pipelines (Tekton) for cloud-native CI/CD workflows
-  - GitOps with ArgoCD for declarative application deployment
-  - Integrated Quay registry with vulnerability scanning
-- **Observability & Security**
-  - Prometheus and Grafana for metrics and dashboarding
-  - OpenShift Logging (EFK stack) for centralized logs
-  - Advanced Cluster Security for vulnerability management
+  - Integrated storage networking and security controls
+- **Developer Experience**
+  - OpenShift Pipelines (Tekton) and GitOps with ArgoCD
+  - Quay registry with vulnerability scanning
+  - Prometheus Grafana and EFK logging stack
 
 ---
 

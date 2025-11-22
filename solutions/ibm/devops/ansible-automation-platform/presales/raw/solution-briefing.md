@@ -72,18 +72,14 @@ This engagement is sized based on the following parameters:
 
 ![Architecture Diagram](assets/diagrams/architecture-diagram.png)
 
-- **Automation Controller**
-  - Centralized automation with web UI API and CLI
-  - HA controller cluster with load balancing and failover
-  - RBAC with LDAP/AD integration for audit trails
-- **Execution Infrastructure**
+- **Automation Platform**
+  - HA controller cluster with web UI API and CLI
   - Distributed execution nodes for scalable job processing
   - Event-driven automation with webhooks and auto-remediation
-  - Credential vault with HashiCorp Vault or CyberArk
 - **Automation Content**
   - 2000+ certified Ansible collections for servers cloud network
   - Private Automation Hub for organization playbooks
-  - Git integration for version control and CI/CD
+  - Git integration with HashiCorp Vault or CyberArk
 
 ---
 

@@ -73,7 +73,7 @@ This engagement is sized based on the following parameters:
 ![Architecture Diagram](assets/diagrams/architecture-diagram.png)
 
 - **HashiCorp Stack**
-  - Terraform Cloud for infrastructure as code with workspaces state management and policy enforcement
+  - Terraform Cloud for infrastructure as code with workspaces and policy enforcement
   - HashiCorp Vault for centralized secrets management and dynamic credentials across clouds
   - HashiCorp Consul for service mesh and multi-cloud service discovery
 - **Platform Architecture**
