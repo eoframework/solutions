@@ -70,7 +70,7 @@ This engagement is sized based on the following parameters:
 
 **Unified Multi-Cloud Infrastructure Platform**
 
-![Architecture Diagram](../../assets/diagrams/architecture-diagram.png)
+![Architecture Diagram](assets/diagrams/architecture-diagram.png)
 
 - **HashiCorp Stack**
   - Terraform Cloud for infrastructure as code with workspaces state management and policy enforcement
@@ -149,125 +149,124 @@ This engagement is sized based on the following parameters:
 ### Success Stories
 **layout:** eo_single_column
 
-**Proven Results Across Industries**
+- **Client Success: Global Financial Services Firm**
+  - **Client:** Fortune 500 financial institution managing infrastructure across 12 AWS accounts and 8 Azure subscriptions with 2500+ resources
+  - **Challenge:** Inconsistent Terraform usage creating compliance gaps and infrastructure drift. Manual provisioning taking 5-7 days per environment. No policy enforcement enabling security misconfigurations costing $180K annually in incidents.
+  - **Solution:** Deployed HashiCorp multi-cloud platform with Terraform Cloud for centralized state management, Vault for secrets, and 50+ Sentinel policies for governance. Implemented GitOps workflows and self-service provisioning.
+  - **Results:** 75% reduction in provisioning time (7 days to 1.5 days) and 99% policy compliance rate with zero security incidents. $450K annual savings through cost optimization policies. Full ROI achieved in 16 months.
+  - **Testimonial:** "The HashiCorp platform transformed our infrastructure chaos into a governed, compliant multi-cloud operation. Sentinel policies prevent misconfigurations before they reach production." — **James Chen**, VP of Cloud Engineering
 
-- **Financial Services - Global Bank**
-  - Challenge: Managing infrastructure across 12 AWS accounts and 8 Azure subscriptions with inconsistent configurations and compliance gaps
-  - Solution: HashiCorp multi-cloud platform with Terraform Cloud Vault and Sentinel policies
-  - Results: 75% reduction in provisioning time 99% policy compliance zero security incidents related to infrastructure misconfigurations
-- **Technology - SaaS Provider**
-  - Challenge: Supporting customer deployments across AWS Azure and GCP with manual processes and high operational overhead
-  - Solution: Multi-cloud automation with self-service provisioning and cost governance
-  - Results: 90% faster customer onboarding 60% reduction in infrastructure costs through optimization 10x increase in deployment velocity
-- **Healthcare - Regional Health System**
-  - Challenge: Meeting HIPAA compliance across hybrid cloud and on-premises infrastructure with manual audit processes
-  - Solution: Policy-driven infrastructure with automated compliance validation and audit logging
-  - Results: 100% audit compliance automated evidence collection 80% reduction in compliance review time
+---
 
-**SPEAKER NOTES:**
+### Our Partnership Advantage
+**layout:** eo_two_column
 
-*Common Patterns:*
-- Organizations achieve 70-90% provisioning time reduction
-- Policy enforcement delivers measurable compliance and cost benefits
-- Self-service capability enables 5-10x increase in deployment velocity
+**Why Partner with Us for Multi-Cloud**
+
+- **What We Bring**
+  - 8+ years implementing HashiCorp solutions with proven multi-cloud expertise
+  - 30+ successful Terraform Enterprise deployments across enterprises
+  - HashiCorp Implementation Partner with certified platform engineers
+  - Deep expertise in Sentinel policy development and multi-cloud architecture
+- **Value to You**
+  - Pre-built Terraform modules and policy libraries accelerate deployment
+  - Proven workspace organization patterns from 30+ implementations
+  - Direct HashiCorp engineering support through partner network
+  - Best practices from real-world multi-cloud migrations avoid common pitfalls
 
 ---
 
 ### Investment Summary
 **layout:** eo_table
 
-**Transparent Financial Overview**
+**Total Investment & Value**
 
-This solution requires investment across HashiCorp licenses cloud infrastructure and professional services:
-
-<!-- TABLE_CONFIG: widths=[25, 15, 15, 15, 15, 15] -->
-| Investment Category | Year 1 List | Year 1 Credits | Year 1 Net | Year 2 | Year 3 |
-|---------------------|-------------|----------------|------------|--------|--------|
-| HashiCorp Licenses | $71250 | ($15000) | $56250 | $71250 | $71250 |
-| Cloud Infrastructure | $47918 | ($12700) | $35218 | $47918 | $47918 |
-| Software Licenses | $18360 | $0 | $18360 | $18360 | $18360 |
-| Support & Maintenance | $84900 | $0 | $84900 | $84900 | $84900 |
-| Professional Services | $165000 | $0 | $165000 | $0 | $0 |
-| **TOTAL** | **$387428** | **($27700)** | **$359728** | **$222428** | **$222428** |
-
-**3-Year Total Investment:** $804584
+<!-- BEGIN COST_SUMMARY_TABLE -->
+<!-- TABLE_CONFIG: widths=[25, 15, 15, 15, 12, 12, 15] -->
+| Cost Category | Year 1 List | Year 1 Credits | Year 1 Net | Year 2 | Year 3 | 3-Year Total |
+|---------------|-------------|----------------|------------|--------|--------|--------------|
+| Professional Services | $165,000 | $0 | $165,000 | $0 | $0 | $165,000 |
+| Cloud Infrastructure | $47,918 | ($12,700) | $35,218 | $47,918 | $47,918 | $131,054 |
+| HashiCorp Licenses | $71,250 | ($15,000) | $56,250 | $71,250 | $71,250 | $198,750 |
+| Software Licenses | $18,360 | $0 | $18,360 | $18,360 | $18,360 | $55,080 |
+| Support & Maintenance | $84,900 | $0 | $84,900 | $84,900 | $84,900 | $254,700 |
+| **TOTAL** | **$387,428** | **($27,700)** | **$359,728** | **$222,428** | **$222,428** | **$804,584** |
+<!-- END COST_SUMMARY_TABLE -->
 
 **SPEAKER NOTES:**
 
-*Investment Breakdown:*
-- HashiCorp licenses include Terraform Cloud Business Vault Plus and Consul Enterprise
-- Cloud infrastructure hosts platform across AWS and Azure for high availability
-- Professional services deliver 9-month implementation with full knowledge transfer
-- Year 2+ costs reduced by 38% as professional services complete
+*Value Positioning:*
+- Lead with first-year credits: You qualify for $27700 in HashiCorp and cloud provider credits
+- Net Year 1 investment of $360K after partner credits
+- 3-year TCO of $805K vs. manual multi-cloud operations costs of $900K-1.8M (3-6 FTEs)
 
-*ROI Drivers:*
-- Infrastructure team productivity improvement (2-3 FTE equivalent)
-- Cloud cost optimization through governance (10-20% savings)
-- Reduced security incidents and compliance violations
-- Faster time-to-market for new infrastructure capabilities
+*Credit Program Talking Points:*
+- Real credits applied to actual HashiCorp licenses and AWS bills, not marketing
+- We handle all paperwork and credit application through partner programs
+- 90% approval rate through our HashiCorp partnership
 
----
-
-### Return on Investment
-**layout:** eo_two_column
-
-**Measurable Business Value**
-
-- **Operational Efficiency**
-  - 80% reduction in infrastructure provisioning time
-  - 3 FTE productivity equivalent through automation
-  - 90% reduction in configuration errors and drift
-- **Cost Optimization**
-  - 15% cloud spend reduction through policy-driven governance
-  - Elimination of redundant resources through centralized visibility
-  - Reserved instance and savings plan optimization
-- **Risk Mitigation**
-  - 99% policy compliance with automated enforcement
-  - Zero critical security vulnerabilities from misconfigurations
-  - Complete audit trail for all infrastructure changes
-- **Strategic Benefits**
-  - Multi-cloud flexibility avoiding vendor lock-in
-  - Self-service capability enabling business agility
-  - Foundation for future cloud-native initiatives
-
-**Payback Period:** 18-24 months based on operational efficiency and cost optimization
+*Handling Objections:*
+- Can we do this ourselves? Partner credits only available through certified HashiCorp partners
+- Are credits guaranteed? Yes, subject to standard HashiCorp partner program approval
+- When do we get credits? Applied throughout Year 1 as licenses and services are consumed
 
 ---
 
 ### Next Steps
-**layout:** eo_single_column
+**layout:** eo_bullet_points
 
-**Accelerate Your Multi-Cloud Journey**
+**Your Path Forward**
 
-- **Immediate Actions**
-  - **Discovery Workshop (Week 1-2):** Assess current infrastructure automation maturity and identify quick wins
-  - **Architecture Design (Week 3-4):** Design multi-cloud platform architecture and migration approach
-  - **Proof of Concept (Week 5-8):** Validate approach with pilot workspaces and demonstrate value
-  - **Implementation Planning (Week 9-10):** Finalize project plan resource allocation and timeline
-- **Timeline to Launch**
-  - Week 1-10: Discovery design and proof of concept validation
-  - Month 3-5: Foundation implementation and initial workspace migration
-  - Month 6-9: Full platform deployment governance and optimization
-  - Month 9: Complete handoff to operations team
-- **Your Investment**
-  - Year 1 Net: $359728 (after credits)
-  - Years 2-3 Annual: $222428
-  - 3-Year Total: $804584
-  - Expected ROI: 18-24 month payback through operational efficiency and cost optimization
+- **Decision:** Executive approval for platform implementation by [specific date]
+- **Kickoff:** Target implementation start date within 30 days of approval
+- **Team Formation:** Identify infrastructure leads, provide existing Terraform code samples
+- **Week 1-2:** Contract finalization workspace migration planning and cloud access setup
+- **Week 3-4:** Initial workspace migration and platform configuration, first automated runs via VCS
 
 **SPEAKER NOTES:**
 
-*Engagement Approach:*
-- Discovery workshop identifies current state and quick win opportunities
-- POC validates technical approach with minimal investment
-- Phased implementation reduces risk and delivers incremental value
-- Full platform capabilities by Month 9 with comprehensive training
+*Transition from Investment:*
+- Now that we have covered the investment and proven ROI, let us talk about getting started
+- Emphasize phased approach reduces risk and validates value incrementally
+- Show we can migrate first workspaces within 30 days
 
-*Decision Criteria:*
-- Alignment with multi-cloud or hybrid cloud strategy
-- Need for infrastructure governance and policy enforcement
-- Desire to improve infrastructure team productivity
-- Compliance and security requirements for infrastructure
+*Walking Through Next Steps:*
+- Decision needed for initial implementation phase (pilot workspaces)
+- Pilot validates multi-cloud automation before full migration
+- Collect existing Terraform code now to accelerate migration
+- Our team is ready to begin immediately upon approval
+
+*Call to Action:*
+- Schedule follow-up meeting to discuss workspace migration strategy
+- Request access to existing Terraform code for assessment
+- Identify key stakeholders for platform implementation kickoff
+- Set timeline for decision and implementation start date
+
+---
+
+### Thank You
+**layout:** eo_thank_you
+
+- **Your Account Manager:** [Name, Title] | [Email] | [Phone]
+
+**SPEAKER NOTES:**
+
+*Closing Strong:*
+- Thank them for their time and consideration
+- Reiterate the multi-cloud infrastructure automation opportunity
+- Introduce team members who will support implementation
+- Make yourself available for technical deep-dive questions
+
+*Call to Action:*
+- "What questions do you have about the HashiCorp multi-cloud platform?"
+- "Which cloud environments would be best for the pilot migration?"
+- "Would you like to see a demo of Terraform Cloud and Sentinel policies?"
+- Offer to schedule technical architecture review with their infrastructure team
+
+*Handling Q&A:*
+- Listen to specific multi-cloud concerns and address with HashiCorp capabilities
+- Be prepared to discuss state migration strategy and risks
+- Emphasize phased approach reduces risk and validates value quickly
 
 ---
 

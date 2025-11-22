@@ -61,7 +61,7 @@ This engagement is sized based on the following parameters:
 
 **Enterprise-Grade Infrastructure as Code Platform**
 
-![Architecture Diagram](../../assets/diagrams/architecture-diagram.png)
+![Architecture Diagram](assets/diagrams/architecture-diagram.png)
 
 - **Terraform Enterprise Core**
   - Centralized workspace management with VCS-driven workflows and remote state storage
@@ -140,125 +140,124 @@ This engagement is sized based on the following parameters:
 ### Success Stories
 **layout:** eo_single_column
 
-**Proven Results Across Industries**
+- **Client Success: Global Investment Bank**
+  - **Client:** Top 10 investment bank managing infrastructure across 200+ AWS accounts supporting trading systems and customer applications
+  - **Challenge:** Inconsistent Terraform OSS usage creating configuration drift and compliance gaps. Manual infrastructure approvals taking 3-5 days. Security incidents from misconfigured infrastructure costing $250K annually.
+  - **Solution:** Deployed Terraform Enterprise with centralized workspace management, VCS-driven workflows, and 40+ Sentinel policies for governance. Implemented self-service provisioning with approval gates.
+  - **Results:** 80% reduction in provisioning time (5 days to 1 day) and 100% policy compliance with zero production incidents from drift. $380K annual savings through cost governance. Full ROI achieved in 14 months.
+  - **Testimonial:** "Terraform Enterprise gave us the governance we needed without sacrificing velocity. Sentinel policies catch security issues before they reach production, and our teams love the self-service capability." — **Michael Rodriguez**, Director of Infrastructure
 
-- **Financial Services - Investment Bank**
-  - Challenge: Managing infrastructure across 200+ AWS accounts with inconsistent Terraform OSS usage and no governance
-  - Solution: Terraform Enterprise with centralized workspaces Sentinel policies and automated compliance validation
-  - Results: 80% reduction in provisioning time 100% policy compliance zero production incidents from infrastructure drift
-- **Technology - SaaS Platform**
-  - Challenge: Supporting rapid product development with manual infrastructure approvals and configuration drift
-  - Solution: GitOps-driven Terraform Enterprise with self-service provisioning and cost governance policies
-  - Results: 90% faster feature deployment 70% reduction in infrastructure costs automated cost estimation preventing overruns
-- **Healthcare - Regional Provider**
-  - Challenge: Meeting HIPAA compliance with manual infrastructure audits and no centralized control
-  - Solution: Terraform Enterprise with policy as code automated audit logging and immutable infrastructure patterns
-  - Results: 100% audit compliance automated evidence collection 85% reduction in compliance review time
+---
 
-**SPEAKER NOTES:**
+### Our Partnership Advantage
+**layout:** eo_two_column
 
-*Common Patterns:*
-- Organizations achieve 70-90% provisioning time reduction
-- Policy enforcement delivers measurable compliance and cost benefits
-- Self-service capability enables 5-10x increase in deployment velocity
+**Why Partner with Us for Terraform Enterprise**
+
+- **What We Bring**
+  - 6+ years implementing Terraform Enterprise platforms with proven results
+  - 25+ successful TFE deployments across financial services healthcare and technology
+  - HashiCorp Implementation Partner with certified Terraform engineers
+  - Deep expertise in Sentinel policy development and GitOps workflows
+- **Value to You**
+  - Pre-built Terraform module libraries and policy templates accelerate deployment
+  - Proven workspace organization patterns from 25+ implementations
+  - Direct HashiCorp engineering support through partner network
+  - Best practices from real-world state migrations avoid data loss and downtime
 
 ---
 
 ### Investment Summary
 **layout:** eo_table
 
-**Transparent Financial Overview**
+**Total Investment & Value**
 
-This solution requires investment across Terraform Enterprise licenses cloud infrastructure and professional services:
-
-<!-- TABLE_CONFIG: widths=[25, 15, 15, 15, 15, 15] -->
-| Investment Category | Year 1 List | Year 1 Credits | Year 1 Net | Year 2 | Year 3 |
-|---------------------|-------------|----------------|------------|--------|--------|
-| HashiCorp Licenses | $29500 | ($10000) | $19500 | $29500 | $29500 |
-| Cloud Infrastructure | $35916 | ($12000) | $23916 | $35916 | $35916 |
-| Software Licenses | $34260 | $0 | $34260 | $34260 | $34260 |
-| Support & Maintenance | $58400 | $0 | $58400 | $58400 | $58400 |
-| Professional Services | $125000 | $0 | $125000 | $0 | $0 |
-| **TOTAL** | **$283076** | **($22000)** | **$261076** | **$158076** | **$158076** |
-
-**3-Year Total Investment:** $577228
+<!-- BEGIN COST_SUMMARY_TABLE -->
+<!-- TABLE_CONFIG: widths=[25, 15, 15, 15, 12, 12, 15] -->
+| Cost Category | Year 1 List | Year 1 Credits | Year 1 Net | Year 2 | Year 3 | 3-Year Total |
+|---------------|-------------|----------------|------------|--------|--------|--------------|
+| Professional Services | $125,000 | $0 | $125,000 | $0 | $0 | $125,000 |
+| Cloud Infrastructure | $35,916 | ($12,000) | $23,916 | $35,916 | $35,916 | $95,748 |
+| HashiCorp Licenses | $29,500 | ($10,000) | $19,500 | $29,500 | $29,500 | $78,500 |
+| Software Licenses | $34,260 | $0 | $34,260 | $34,260 | $34,260 | $102,780 |
+| Support & Maintenance | $58,400 | $0 | $58,400 | $58,400 | $58,400 | $175,200 |
+| **TOTAL** | **$283,076** | **($22,000)** | **$261,076** | **$158,076** | **$158,076** | **$577,228** |
+<!-- END COST_SUMMARY_TABLE -->
 
 **SPEAKER NOTES:**
 
-*Investment Breakdown:*
-- Terraform Enterprise licenses for 100 users with Sentinel policy enforcement
-- Cloud infrastructure hosts platform on AWS EKS with high availability
-- Professional services deliver 6-month implementation with full knowledge transfer
-- Year 2+ costs reduced by 44% as professional services complete
+*Value Positioning:*
+- Lead with first-year credits: You qualify for $22000 in HashiCorp and AWS provider credits
+- Net Year 1 investment of $261K after partner credits
+- 3-year TCO of $577K vs. manual infrastructure operations costs of $720K-1.4M (2-4 FTEs)
 
-*ROI Drivers:*
-- Infrastructure team productivity improvement (2 FTE equivalent)
-- Reduced infrastructure errors and security incidents (60-80% reduction)
-- Cloud cost optimization through policy governance (10-15% savings)
-- Faster time-to-market for infrastructure changes (75% faster)
+*Credit Program Talking Points:*
+- Real credits applied to actual Terraform Enterprise licenses and AWS bills, not marketing
+- We handle all paperwork and credit application through partner programs
+- 90% approval rate through our HashiCorp partnership
 
----
-
-### Return on Investment
-**layout:** eo_two_column
-
-**Measurable Business Value**
-
-- **Operational Efficiency**
-  - 75% reduction in infrastructure provisioning time
-  - 2 FTE productivity equivalent through automation
-  - 90% reduction in configuration drift and errors
-- **Cost Optimization**
-  - 12% cloud spend reduction through policy-driven cost controls
-  - Elimination of orphaned resources through centralized visibility
-  - Cost estimation preventing budget overruns before deployment
-- **Risk Mitigation**
-  - 100% policy compliance with automated Sentinel enforcement
-  - Zero critical security vulnerabilities from infrastructure misconfigurations
-  - Complete audit trail for all infrastructure changes with immutable history
-- **Strategic Benefits**
-  - Self-service infrastructure enabling developer velocity
-  - Standardized infrastructure patterns across all teams
-  - Foundation for GitOps and infrastructure automation maturity
-
-**Payback Period:** 12-18 months based on operational efficiency and error reduction
+*Handling Objections:*
+- Can we do this ourselves? Partner credits only available through certified HashiCorp partners
+- Are credits guaranteed? Yes, subject to standard HashiCorp partner program approval
+- When do we get credits? Applied throughout Year 1 as licenses and services are consumed
 
 ---
 
 ### Next Steps
-**layout:** eo_single_column
+**layout:** eo_bullet_points
 
-**Accelerate Your Infrastructure Automation Journey**
+**Your Path Forward**
 
-- **Immediate Actions**
-  - **Discovery Workshop (Week 1-2):** Assess current Terraform usage and identify migration priorities
-  - **Architecture Design (Week 3-4):** Design platform architecture and workspace organization strategy
-  - **Proof of Concept (Week 5-6):** Validate approach with pilot workspaces and demonstrate value
-  - **Implementation Planning (Week 7-8):** Finalize project plan resource allocation and timeline
-- **Timeline to Launch**
-  - Week 1-8: Discovery design and proof of concept validation
-  - Month 2-4: Foundation implementation and workspace migration
-  - Month 5-6: Full platform deployment governance and enablement
-  - Month 6: Complete handoff to operations team
-- **Your Investment**
-  - Year 1 Net: $261076 (after credits)
-  - Years 2-3 Annual: $158076
-  - 3-Year Total: $577228
-  - Expected ROI: 12-18 month payback through operational efficiency and error reduction
+- **Decision:** Executive approval for Terraform Enterprise implementation by [specific date]
+- **Kickoff:** Target implementation start date within 30 days of approval
+- **Team Formation:** Identify Terraform users, provide existing code and state files
+- **Week 1-2:** Contract finalization state migration planning and platform access setup
+- **Week 3-4:** Initial workspace migration and VCS integration, first automated runs
 
 **SPEAKER NOTES:**
 
-*Engagement Approach:*
-- Discovery workshop identifies current state and quick win opportunities
-- POC validates technical approach with minimal investment
-- Phased implementation reduces risk and delivers incremental value
-- Full platform capabilities by Month 6 with comprehensive training
+*Transition from Investment:*
+- Now that we have covered the investment and proven ROI, let us talk about getting started
+- Emphasize phased approach reduces risk and validates value with pilot workspaces
+- Show we can migrate first workspaces within 30 days
 
-*Decision Criteria:*
-- Need for infrastructure collaboration and state management
-- Desire to implement infrastructure governance and policy enforcement
-- Goal to improve infrastructure team productivity and reduce errors
-- Compliance and security requirements for infrastructure as code
+*Walking Through Next Steps:*
+- Decision needed for initial implementation phase (pilot workspaces)
+- Pilot validates enterprise platform before full migration
+- Collect existing Terraform code and state files now to accelerate migration
+- Our team is ready to begin immediately upon approval
+
+*Call to Action:*
+- Schedule follow-up meeting to discuss state migration strategy
+- Request access to existing Terraform repositories for assessment
+- Identify key stakeholders for platform implementation kickoff
+- Set timeline for decision and implementation start date
+
+---
+
+### Thank You
+**layout:** eo_thank_you
+
+- **Your Account Manager:** [Name, Title] | [Email] | [Phone]
+
+**SPEAKER NOTES:**
+
+*Closing Strong:*
+- Thank them for their time and consideration
+- Reiterate the infrastructure automation and collaboration opportunity
+- Introduce team members who will support implementation
+- Make yourself available for technical deep-dive questions
+
+*Call to Action:*
+- "What questions do you have about Terraform Enterprise?"
+- "Which Terraform workspaces would be best for the pilot migration?"
+- "Would you like to see a demo of the enterprise platform and Sentinel policies?"
+- Offer to schedule technical architecture review with their infrastructure team
+
+*Handling Q&A:*
+- Listen to specific infrastructure automation concerns and address with TFE capabilities
+- Be prepared to discuss state migration strategy and zero-downtime approaches
+- Emphasize pilot approach reduces risk and proves value quickly
 
 ---
 
