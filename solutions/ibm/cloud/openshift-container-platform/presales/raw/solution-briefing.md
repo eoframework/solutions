@@ -154,9 +154,9 @@ This engagement is sized based on the following parameters:
 **layout:** eo_single_column
 
 - **Client Success: Financial Services Company**
-  - **Client:** Global bank with 200 developers deploying applications across 15 countries
+  - **Client:** Global bank with 200 developers across 15 countries
   - **Challenge:** VM-based deployments taking 2 weeks with 15% resource utilization. Application teams blocked waiting for infrastructure provisioning. Inconsistent environments causing production failures.
-  - **Solution:** Deployed OpenShift Container Platform on VMware with 12-node cluster. Implemented GitOps workflows and developer self-service portal. Migrated 50 applications to containers over 6 months.
+  - **Solution:** Deployed OpenShift on VMware with GitOps workflows and developer self-service portal. Migrated 50 applications to containers.
   - **Results:** 95% reduction in deployment time (2 weeks to 4 hours) and 5x resource utilization improvement. Developer productivity increased 40% with self-service capabilities. Infrastructure costs reduced 35% through consolidation.
   - **Testimonial:** "OpenShift transformed our application delivery from a bottleneck into a competitive advantage. Developers love the self-service capabilities, and our operations team manages 3x more applications with the same headcount." — **Michael Chen**, VP of Infrastructure
 

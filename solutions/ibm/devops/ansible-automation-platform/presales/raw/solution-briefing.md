@@ -156,7 +156,7 @@ This engagement is sized based on the following parameters:
 - **Client Success: Technology Services Provider**
   - **Client:** Managed services provider supporting 200+ enterprise customers with 5000 servers
   - **Challenge:** Manual server configuration taking 4-8 hours per server. Configuration drift causing 30% of support tickets. Network changes requiring 2-day maintenance windows blocking deployments.
-  - **Solution:** Deployed Ansible Automation Platform managing 5000 servers and 800 network devices. Developed 200 playbooks for provisioning patching and network automation. Integrated with ServiceNow for ticket-driven workflows.
+  - **Solution:** Deployed Ansible Platform managing 5000 servers and 800 devices. Developed 200 playbooks with ServiceNow integration.
   - **Results:** 85% reduction in configuration time (8 hours to 1 hour) and zero drift violations. Network changes reduced from 2 days to 30 minutes. Support tickets reduced 40% through automated remediation. $600K annual labor savings.
   - **Testimonial:** "Ansible transformed our operations from firefighting to strategic service delivery. Our customers see faster deployments and our engineers focus on innovation instead of repetitive tasks." — **Jennifer Liu**, VP of Operations
 
