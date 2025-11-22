@@ -72,16 +72,14 @@ This engagement is sized based on the following parameters:
 
 ![Architecture Diagram](assets/diagrams/architecture-diagram.png)
 
-- **Core Productivity Applications**
-  - Gmail business email with 30 GB storage, Drive with 5 TB per user, and real-time Docs/Sheets/Slides collaboration
-  - Google Meet video conferencing for 500 participants with recording and live captions
-- **Security and Compliance**
-  - Data Loss Prevention (DLP) policies and Google Vault for 7-year retention with eDiscovery
-  - Advanced mobile device management for BYOD and corporate device security
-  - 2-Step Verification (2SV) and security key enforcement for all users
-- **Identity and Access**
-  - SAML SSO integration with Azure AD and automated user provisioning via directory sync
-  - Cloud Identity Premium for advanced endpoint management and context-aware access
+- **Core Workspace Applications**
+  - Gmail with 30 GB storage and Drive with 5 TB per user
+  - Google Docs, Sheets, Slides for real-time document collaboration
+  - Google Meet video conferencing for 500 participants with recording
+- **Security and Identity**
+  - Data Loss Prevention (DLP) and Google Vault for 7-year retention
+  - SAML SSO with Azure AD and automated user provisioning
+  - Advanced mobile device management with 2-Step Verification enforcement
 
 ---
 

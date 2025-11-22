@@ -72,18 +72,14 @@ This engagement is sized based on the following parameters:
 
 ![Architecture Diagram](assets/diagrams/architecture-diagram.png)
 
-- **Organization Foundation**
+- **Platform Foundation**
   - Organization hierarchy with folders for dev, staging, production environments
-  - Centralized billing with department chargeback and cost allocation labels
   - Cloud Foundation Toolkit Terraform modules for repeatable project provisioning
-- **Security and Compliance**
-  - Security Command Center Premium for continuous threat detection and compliance monitoring
-  - Chronicle SIEM integration for advanced security analytics and incident response
-  - Cloud Armor, Cloud IDS, and VPC Service Controls for defense-in-depth security
-- **Network and Connectivity**
-  - Shared VPC hub-spoke architecture with centralized internet egress via Cloud NAT
-  - Dedicated Interconnect 10 Gbps for low-latency hybrid connectivity to on-premises
-  - Cloud DNS private zones and VPC Flow Logs for visibility and control
+  - Centralized billing with department chargeback and cost allocation
+- **Security and Network**
+  - Security Command Center Premium for continuous threat detection and monitoring
+  - Shared VPC hub-spoke architecture with centralized internet egress
+  - Dedicated Interconnect 10 Gbps for low-latency hybrid connectivity
 
 ---
 
