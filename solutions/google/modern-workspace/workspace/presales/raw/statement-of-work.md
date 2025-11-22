@@ -82,6 +82,19 @@ This engagement is sized based on the following parameters:
 <!-- TABLE_CONFIG: widths=[25, 35, 40] -->
 | Category | Parameter | Scope |
 |----------|-----------|-------|
+| User Base | User Count | 500 licensed users |
+| User Base | Workspace Edition | Business Plus |
+| Migration | Email Migration | 500 mailboxes (2.5 TB) |
+| Migration | File Migration | File servers to Drive (3 TB) |
+| Integration | Identity Integration | SAML SSO with Azure AD |
+| Integration | Distribution Lists | 150 groups |
+| Security | DLP Policies | Sensitive content detection |
+| Security | Mobile Management | Advanced mobile device management |
+| Compliance | Retention Policy | 7-year retention (Vault) |
+| Deployment | Deployment Approach | Phased by department (5 waves) |
+| Training | Training Approach | Virtual + self-service |
+| Technical Environment | Coexistence Period | 4 weeks with Exchange |
+| Technical Environment | Directory Sync | GCDS for automated provisioning |
 <!-- END SCOPE_PARAMETERS_TABLE -->
 
 Table: Engagement Scope Parameters

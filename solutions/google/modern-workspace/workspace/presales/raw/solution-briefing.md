@@ -50,6 +50,15 @@ This engagement is sized based on the following parameters:
 <!-- TABLE_CONFIG: widths=[18, 29, 5, 18, 30] -->
 | Parameter | Scope | | Parameter | Scope |
 |-----------|-------|---|-----------|-------|
+| **User Count** | 500 licensed users | | **Deployment Approach** | Phased by department (5 waves) |
+| **Workspace Edition** | Business Plus | | **Training Approach** | Virtual + self-service |
+| **Email Migration** | 500 mailboxes (2.5 TB) | | **Coexistence Period** | 4 weeks with Exchange |
+| **File Migration** | File servers to Drive (3 TB) | | **Directory Sync** | GCDS for automated provisioning |
+| **Identity Integration** | SAML SSO with Azure AD | |  |  |
+| **Distribution Lists** | 150 groups | |  |  |
+| **DLP Policies** | Sensitive content detection | |  |  |
+| **Mobile Management** | Advanced mobile device management | |  |  |
+| **Retention Policy** | 7-year retention (Vault) | |  |  |
 <!-- END SCOPE_SIZING_TABLE -->
 
 *Note: Changes to these parameters may require scope adjustment and additional investment.*
@@ -64,19 +73,15 @@ This engagement is sized based on the following parameters:
 ![Architecture Diagram](assets/diagrams/architecture-diagram.png)
 
 - **Core Productivity Applications**
-  - Gmail business email with 30 GB storage and advanced phishing protection
-  - Google Drive with 5 TB per user and unlimited shared drives for teams
-  - Google Docs, Sheets, Slides for real-time collaboration replacing Microsoft Office
+  - Gmail business email with 30 GB storage, Drive with 5 TB per user, and real-time Docs/Sheets/Slides collaboration
   - Google Meet video conferencing for 500 participants with recording and live captions
 - **Security and Compliance**
-  - Data Loss Prevention (DLP) policies for sensitive content detection and blocking
+  - Data Loss Prevention (DLP) policies and Google Vault for 7-year retention with eDiscovery
   - Advanced mobile device management for BYOD and corporate device security
-  - Google Vault for 7-year email and file retention with eDiscovery capabilities
   - 2-Step Verification (2SV) and security key enforcement for all users
 - **Identity and Access**
-  - SAML SSO integration with Azure AD for seamless authentication
+  - SAML SSO integration with Azure AD and automated user provisioning via directory sync
   - Cloud Identity Premium for advanced endpoint management and context-aware access
-  - Automated user provisioning and de-provisioning via directory sync
 
 ---
 

@@ -1,29 +1,69 @@
-Phase,Work Package,Task Description,Resource Type,Estimated Hours,Rate,Cost Estimate,Dependencies,Risk Level,Notes
-Discovery,Azure Requirements Gathering,Conduct stakeholder interviews for Azure cloud strategy,EO Engineer,40,$150,"=TEXT(E2*F2,""$#,##0"")",,Medium,Focus on governance scalability and business alignment
-Discovery,Current Environment Assessment,Analyze existing infrastructure and Azure readiness,EO Engineer,32,$200,"=TEXT(E3*F3,""$#,##0"")",,Medium,Include identity networking and application assessment
-Discovery,Azure Services Assessment,Evaluate Azure services and landing zone requirements,EO Engineer,24,$200,"=TEXT(E4*F4,""$#,##0"")",,Medium,Focus on management groups policies and compliance
-Discovery,Compliance Review,Assess governance security and regulatory requirements,EO Engineer,16,$175,"=TEXT(E5*F5,""$#,##0"")",,Medium,Include Azure Policy and compliance frameworks
-Planning,Azure Landing Zone Design,Design Azure landing zone architecture and governance model,EO Engineer,48,$200,"=TEXT(E6*F6,""$#,##0"")",,Medium,Include management groups policies and blueprints
-Planning,Identity and Access Design,Design Azure AD integration and access management strategy,EO Engineer,32,$180,"=TEXT(E7*F7,""$#,##0"")",,Medium,Include SSO RBAC conditional access and PIM
-Planning,Network Architecture Design,Design Azure networking security and hybrid connectivity,EO Engineer,24,$175,"=TEXT(E8*F8,""$#,##0"")",,Medium,Include hub-spoke VNet peering and security
-Planning,Project Planning,Develop Azure implementation timeline and resource allocation,EO Engineer,24,$140,"=TEXT(E9*F9,""$#,##0"")",,Medium,Coordinate with infrastructure security and compliance teams
-Development,Management Groups and Subscriptions,Configure Azure management groups subscription structure and policies,EO Engineer,40,$160,"=TEXT(E10*F10,""$#,##0"")",,Medium,Include policy inheritance governance and billing
-Development,Azure Policy Implementation,Implement Azure policies governance controls and compliance,EO Engineer,60,$145,"=TEXT(E11*F11,""$#,##0"")",,Medium,Include policy definitions initiatives and remediation
-Development,Network Infrastructure,Build Azure networking VNet peering and hybrid connectivity,EO Engineer,48,$140,"=TEXT(E12*F12,""$#,##0"")",,Medium,Include ExpressRoute VPN and network security
-Development,Identity and Access Implementation,Implement Azure AD integration access controls and SSO,EO Engineer,40,$155,"=TEXT(E13*F13,""$#,##0"")",,Medium,Include MFA conditional access and privileged access
-Development,Monitoring and Operations,Build Azure monitoring logging alerting and operational tools,EO Engineer,32,$130,"=TEXT(E14*F14,""$#,##0"")",,Medium,Include Azure Monitor Log Analytics and automation
-Testing,Unit Testing,Develop automated tests for all solution components,EO Engineer,32,$120,"=TEXT(E15*F15,""$#,##0"")",,Medium,Include technology-specific testing frameworks
-Testing,Integration Testing,Test system integrations data flows and external dependencies,EO Engineer,40,$120,"=TEXT(E16*F16,""$#,##0"")",,Medium,Include end-to-end workflow validation
-Testing,Performance Testing,Conduct load performance and scalability testing,EO Engineer,24,$140,"=TEXT(E17*F17,""$#,##0"")",,Medium,Include production-like environment and stress testing
-Testing,Security Testing,Perform security assessments penetration testing and compliance validation,EO Engineer,16,$175,"=TEXT(E18*F18,""$#,##0"")",,Medium,Include vulnerability scanning and compliance checks
-Testing,User Acceptance Testing,Coordinate UAT with business users and stakeholders,EO Engineer,32,$150,"=TEXT(E19*F19,""$#,##0"")",,Medium,Include training feedback collection and sign-off
-Deployment,Production Deployment,Deploy solution to production environment with monitoring,EO Engineer,24,$160,"=TEXT(E20*F20,""$#,##0"")",,Medium,Include blue-green deployment rollback and validation
-Deployment,Go-Live Support,Provide comprehensive support during initial production rollout,EO Engineer,48,$110,"=TEXT(E21*F21,""$#,##0"")",,Medium,Include 24/7 support monitoring and issue resolution
-Training,Administrator Training,Train system administrators and technical support teams,EO Engineer,16,$130,"=TEXT(E22*F22,""$#,##0"")",,Medium,Include hands-on technical training and certification
-Training,End User Training,Train business users on solution functionality and workflows,EO Engineer,24,$120,"=TEXT(E23*F23,""$#,##0"")",,Medium,Include role-based training documentation and support
-Training,Documentation,Create comprehensive technical and user documentation,EO Engineer,32,$110,"=TEXT(E24*F24,""$#,##0"")",,Medium,Include runbooks troubleshooting guides and best practices
-Closeout,Knowledge Transfer,Transfer solution ownership to operations and support teams,EO Engineer,16,$140,"=TEXT(E25*F25,""$#,##0"")",,Medium,Include operational procedures escalation and maintenance
-Closeout,Performance Baseline,Establish performance metrics monitoring baselines and SLAs,EO Engineer,8,$130,"=TEXT(E26*F26,""$#,##0"")",,Medium,Include KPI definition monitoring setup and reporting
-Management,Technical Leadership,Quarterback technical oversight and architecture review,EO Quarterback,"=ROUND(SUM(E2:E26)*0.25,0)",$180,"=TEXT(E27*F27,""$#,##0"")",,Medium,25% of engineering effort
-Management,Project Management,Project coordination and management activities,EO Project Manager,"=ROUND(SUM(E2:E26)*0.20,0)",$150,"=TEXT(E28*F28,""$#,##0"")",,Low,20% of engineering effort
-,,,     TOTAL HOURS,1119,   TOTAL COST,"=TEXT(E2*F2+E3*F3+E4*F4+E5*F5+E6*F6+E7*F7+E8*F8+E9*F9+E10*F10+E11*F11+E12*F12+E13*F13+E14*F14+E15*F15+E16*F16+E17*F17+E18*F18+E19*F19+E20*F20+E21*F21+E22*F22+E23*F23+E24*F24+E25*F25+E26*F26+E27*F27+E28*F28,""$#,##0"")",,,Total Workspace project cost estimate
+# SCOPE ASSUMPTIONS - BASELINE (MULTIPLIER 1.0)
+#WIDTH: 25,35,33,32,32,39,44
+#ALIGN: left,left,left,left,left,left,left
+Category,Baseline Assumption,Current Scope,Small (1x),Medium (2x),Large (3x),Notes
+User Base,User Count,500 licensed users,100 users,500 users,2000+ users,Total Google Workspace licenses
+User Base,Workspace Edition,Business Plus,Business Standard,Business Plus,Enterprise Plus,Feature tier and storage capacity
+Migration,Email Migration,500 mailboxes (2.5 TB),100 mailboxes,500 mailboxes,2000+ mailboxes,Exchange to Gmail migration volume
+Migration,File Migration,File servers to Drive (3 TB),1 TB,3 TB,10+ TB,Document migration complexity
+Integration,Identity Integration,SAML SSO with Azure AD,Basic auth,SAML SSO,Federated + directory sync,Authentication complexity
+Integration,Distribution Lists,150 groups,50 groups,150 groups,500+ groups,Email group migration count
+Security,DLP Policies,Sensitive content detection,Basic DLP,Standard DLP,Advanced DLP + custom,Data loss prevention complexity
+Security,Mobile Management,Advanced mobile device management,Basic MDM,Advanced MDM,Enterprise EMM,Mobile security requirements
+Compliance,Retention Policy,7-year retention (Vault),3-year retention,7-year retention,Unlimited + legal hold,Data retention requirements
+Deployment,Deployment Approach,Phased by department (5 waves),Big bang,Phased rollout,Complex multi-phase,Migration strategy complexity
+Training,Training Approach,Virtual + self-service,Self-service only,Virtual training,In-person + virtual,User enablement scope
+Technical Environment,Coexistence Period,4 weeks with Exchange,2 weeks,4 weeks,8+ weeks,Parallel operation complexity
+Technical Environment,Directory Sync,GCDS for automated provisioning,Manual sync,Automated GCDS,Complex multi-directory,User provisioning automation
+
+# ESTIMATE SETTINGS
+#WIDTH: 17,22,14,173
+#ALIGN: left,left,center,left
+Phase,Variable Name,Multiplier,Description / Applies To Tasks
+Discovery,DISCOVERY_MX,1,"All Discovery phase tasks (Migration Assessment, Environment Analysis, Training Needs)"
+Planning,PLANNING_MX,1,"All Planning phase tasks (Migration Planning, Stakeholder Alignment)"
+Development,DEVELOPMENT_MX,1,"All Development phase tasks (Workspace Configuration, SSO Setup, DLP Policies, Vault Setup, Mobile Management)"
+Testing,TESTING_MX,1,"All Testing phase tasks (Pilot Validation, Migration Testing, UAT)"
+Deployment,DEPLOYMENT_MX,1,"All Deployment phase tasks (Pilot Migration, Email/File Migration, Group Migration, Go-Live Support)"
+Training,TRAINING_MX,1,"All Training phase tasks (Admin Training, End-User Training, Documentation)"
+Closeout,CLOSEOUT_MX,1,"All Closeout phase tasks (Knowledge Transfer, Hypercare Support)"
+Management,MANAGEMENT_MX,1,Project Management overhead - 20% of actual engineering hours
+Leadership,LEADERSHIP_MX,1,Quarterback/Technical Leadership overhead - 25% of actual engineering hours
+
+# Level of Effort
+#WIDTH: 16,25,58,18,12,14,12,12,15,25,40
+#ALIGN: left,left,left,left,right,center,right,right,right,left,left
+Phase,Work Package,Task Description,Resource Type,Base Hours,Effort Multiplier,Actual Hours,Rate,Cost Estimate,Dependencies,Notes
+Discovery,Migration Assessment,Exchange and file server inventory and migration planning,EO Engineer,24,='Estimate Settings'!$C$3,=$E19*$F19,$200,"=TEXT($G19*$H19,""$#,##0"")",,Customer must provide Exchange admin access and mailbox inventory
+Discovery,Environment Analysis,Analyze distribution lists groups and calendar complexity,EO Engineer,16,='Estimate Settings'!$C$3,=$E20*$F20,$200,"=TEXT($G20*$H20,""$#,##0"")",,Identify migration dependencies and integration requirements
+Discovery,Training Needs Assessment,User training requirements and change management planning,EO Engineer,8,='Estimate Settings'!$C$3,=$E21*$F21,$150,"=TEXT($G21*$H21,""$#,##0"")",,Define training approach and communication strategy
+Development,Workspace Configuration,Google Workspace tenant setup domain verification and OU structure,EO Engineer,16,='Estimate Settings'!$C$5,=$E22*$F22,$175,"=TEXT($G22*$H22,""$#,##0"")",Migration Assessment,Deliverable: Configured Workspace tenant with organizational units
+Development,SSO Integration,SAML SSO setup with Azure AD and directory sync (GCDS) deployment,EO Engineer,24,='Estimate Settings'!$C$5,=$E23*$F23,$200,"=TEXT($G23*$H23,""$#,##0"")",Workspace Configuration,Includes SAML metadata exchange and GCDS configuration testing
+Development,DLP Configuration,Data Loss Prevention policy setup for sensitive content,EO Engineer,16,='Estimate Settings'!$C$5,=$E24*$F24,$175,"=TEXT($G24*$H24,""$#,##0"")",Workspace Configuration,Configure DLP rules for PII PHI payment data
+Development,Vault Setup,Google Vault configuration for 7-year retention and eDiscovery,EO Engineer,8,='Estimate Settings'!$C$5,=$E25*$F25,$150,"=TEXT($G25*$H25,""$#,##0"")",Workspace Configuration,Setup retention policies and legal hold capabilities
+Development,Mobile Management,Advanced mobile device management policy configuration,EO Engineer,8,='Estimate Settings'!$C$5,=$E26*$F26,$150,"=TEXT($G26*$H26,""$#,##0"")",Workspace Configuration,Configure device policies passcode requirements remote wipe
+Deployment,Pilot Migration,Pilot migration of 25 IT and early adopter users,EO Engineer,24,='Estimate Settings'!$C$7,=$E27*$F27,$140,"=TEXT($G27*$H27,""$#,##0"")",Vault Setup,Validate migration tools workflows and training materials
+Deployment,Email Migration Wave 1-5,Mailbox migration for 475 users in 5 waves (95 users/week),EO Engineer,80,='Estimate Settings'!$C$7,=$E28*$F28,$140,"=TEXT($G28*$H28,""$#,##0"")",Pilot Migration,Exchange to Gmail migration with folder structure preservation
+Deployment,File Migration,File server to Google Drive migration (3 TB with permissions),EO Engineer,48,='Estimate Settings'!$C$7,=$E29*$F29,$130,"=TEXT($G29*$H29,""$#,##0"")",Email Migration Wave 1-5,Migrate files with ACL to Drive sharing permission mapping
+Deployment,Calendar and Contacts,Calendar and contacts migration for all 500 users,EO Engineer,16,='Estimate Settings'!$C$7,=$E30*$F30,$120,"=TEXT($G30*$H30,""$#,##0"")",Email Migration Wave 1-5,Preserve recurring appointments and contact deduplication
+Deployment,Distribution Lists,Migration of 150 distribution lists to Google Groups,EO Engineer,16,='Estimate Settings'!$C$7,=$E31*$F31,$120,"=TEXT($G31*$H31,""$#,##0"")",Email Migration Wave 1-5,Preserve group membership and email addresses
+Testing,Pilot Validation,Pilot user testing and workflow validation,EO Engineer,16,='Estimate Settings'!$C$6,=$E32*$F32,$120,"=TEXT($G32*$H32,""$#,##0"")",Pilot Migration,Validate Gmail Drive Docs Meet functionality with pilot users
+Testing,Migration Testing,Data integrity validation and migration quality checks,EO Engineer,24,='Estimate Settings'!$C$6,=$E33*$F33,$130,"=TEXT($G33*$H33,""$#,##0"")",File Migration,Ensure 100% data migration with zero data loss
+Testing,UAT Coordination,User acceptance testing coordination with business stakeholders,EO Engineer,16,='Estimate Settings'!$C$6,=$E34*$F34,$140,"=TEXT($G34*$H34,""$#,##0"")",Migration Testing,Business validation of collaboration workflows
+Training,Administrator Training,Google Admin Console GAM scripting and troubleshooting training,EO Engineer,16,='Estimate Settings'!$C$8,=$E35*$F35,$150,"=TEXT($G35*$H35,""$#,##0"")",UAT Coordination,Hands-on training for IT administrators
+Training,End-User Training,Virtual training sessions for Gmail Drive Docs Meet (10 sessions),EO Engineer,40,='Estimate Settings'!$C$8,=$E36*$F36,$125,"=TEXT($G36*$H36,""$#,##0"")",Administrator Training,2 sessions per migration wave covering core functionality
+Training,Training Materials,Custom quick start guides video tutorials and FAQ documentation,EO Engineer,24,='Estimate Settings'!$C$8,=$E37*$F37,$110,"=TEXT($G37*$H37,""$#,##0"")",End-User Training,Deliverable: Self-service training resources and help documentation
+Closeout,Knowledge Transfer,Operations handoff and support procedures documentation,EO Engineer,8,='Estimate Settings'!$C$9,=$E38*$F38,$140,"=TEXT($G38*$H38,""$#,##0"")",Training Materials,Transfer operational ownership to IT team
+Closeout,Hypercare Support,Post-migration support and issue resolution (4 weeks),EO Engineer,80,='Estimate Settings'!$C$9,=$E39*$F39,$110,"=TEXT($G39*$H39,""$#,##0"")",Knowledge Transfer,Daily monitoring rapid issue resolution optimization support
+Management,Project Management,Project coordination status reporting stakeholder management,EO Project Manager,"=ROUND(SUM(E19:E39)*0.20,0)",='Estimate Settings'!$C$10,=$E40*$F40,$150,"=TEXT($G40*$H40,""$#,##0"")",,20% of engineering effort for project management
+Management,Technical Leadership,Quarterback oversight migration strategy technical governance,EO Quarterback,"=ROUND(SUM(E19:E39)*0.25,0)",='Estimate Settings'!$C$11,=$E41*$F41,$180,"=TEXT($G41*$H41,""$#,##0"")",,25% of engineering effort for technical leadership
+,,TOTAL,,$E19+$E20+$E21+$E22+$E23+$E24+$E25+$E26+$E27+$E28+$E29+$E30+$E31+$E32+$E33+$E34+$E35+$E36+$E37+$E38+$E39,,=$G19+$G20+$G21+$G22+$G23+$G24+$G25+$G26+$G27+$G28+$G29+$G30+$G31+$G32+$G33+$G34+$G35+$G36+$G37+$G38+$G39+$G40+$G41,,"=TEXT($G42*$H42,""$#,##0"")",,Total Workspace migration implementation
+
+# Credits
+#WIDTH: 25,25,15,50
+#ALIGN: left,left,right,left
+Category,Credit Type,Credit Amount,Credit Comments
+Professional Services,Partner Migration Credit,"($3000)",Google Workspace partner migration services discount
+Software Licenses,New Customer Promotion,"($10000)",First 3 months free for new Google Workspace customers (500 users)
+Cloud Infrastructure,Infrastructure Credit,$0,No infrastructure credits available
+Support & Maintenance,Support Credit,$0,No support credits available
