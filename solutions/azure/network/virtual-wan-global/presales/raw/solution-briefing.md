@@ -82,8 +82,7 @@ This engagement is sized based on the following parameters:
   - **Branch Connectivity:** SD-WAN integration, site-to-site VPN, or ExpressRoute for office connections
   - **Security Services:** Azure Firewall and routing policies applied consistently across all traffic
 - **Technology Stack**
-  - Platform: Azure Virtual WAN with Standard tier
-  - Routing: Automated BGP routing and traffic optimization
+  - Platform: Azure Virtual WAN Standard tier with automated BGP routing
   - Security: Azure Firewall Manager with centralized policies
   - Monitoring: Azure Network Watcher and traffic analytics
 

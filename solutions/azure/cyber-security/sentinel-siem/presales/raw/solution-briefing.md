@@ -80,10 +80,9 @@ This engagement is sized based on the following parameters:
   - **Analytics Engine:** Microsoft Sentinel workspace with KQL queries analyzing millions of events in real-time
   - **Response Layer:** Automated playbooks and incident management with investigation tools
 - **Technology Stack**
-  - Cloud Platform: Microsoft Azure
-  - Core Service: Microsoft Sentinel (SIEM/SOAR)
-  - Data Store: Log Analytics Workspace
-  - Integration: Microsoft Defender, Azure Monitor, third-party security tools
+  - Platform: Microsoft Azure with Sentinel (SIEM/SOAR)
+  - Data & Analytics: Log Analytics Workspace with KQL queries
+  - Integration: Microsoft Defender, Azure Monitor, third-party tools
 
 ---
 

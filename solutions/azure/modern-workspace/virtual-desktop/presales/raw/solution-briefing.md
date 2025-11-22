@@ -82,12 +82,9 @@ This engagement is sized based on the following parameters:
   - **FSLogix & Azure Files:** Profile containers with SMB-based storage for persistent user data and seamless roaming
   - **Azure AD & Monitoring:** Enterprise identity management with conditional access policies and real-time performance diagnostics
 - **Technology Stack**
-  - Platform: Azure Virtual Desktop (AVD)
-  - Session Hosts: Windows 10/11 Multi-session (D4s_v5 VMs)
-  - Storage: Azure Files + FSLogix
-  - Identity: Azure AD / Microsoft Entra ID
-  - Security: Network Security Groups, Private Endpoints
-  - Monitoring: Azure Monitor, Diagnostics Services
+  - Platform: Azure Virtual Desktop (AVD) with Windows 10/11 Multi-session hosts
+  - Storage & Identity: Azure Files + FSLogix, Azure AD / Microsoft Entra ID
+  - Security & Monitoring: Network Security Groups, Private Endpoints, Azure Monitor
 
 ---
 

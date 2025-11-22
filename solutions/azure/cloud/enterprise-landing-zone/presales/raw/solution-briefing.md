@@ -80,9 +80,8 @@ This engagement is sized based on the following parameters:
   - **Azure Policy:** Automated compliance enforcement, resource guardrails, and configuration standards
   - **Hub-Spoke Network:** Centralized connectivity with Azure Virtual WAN or hub virtual network design
 - **Technology Stack**
-  - Cloud Platform: Microsoft Azure
-  - Governance: Azure Policy, Azure Blueprints, Azure Resource Graph
-  - Identity: Azure Active Directory with RBAC
+  - Platform: Microsoft Azure with Management Groups and Policy framework
+  - Governance: Azure Policy, Blueprints, Resource Graph, RBAC
   - Networking: Virtual WAN, Azure Firewall, ExpressRoute/VPN
 
 ---

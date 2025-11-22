@@ -82,10 +82,9 @@ This engagement is sized based on the following parameters:
   - **Azure Pipelines:** Automated build, test, and deployment workflows with multi-stage release management
   - **Azure Repos & Artifacts:** Version control for source code with centralized package management
 - **Technology Stack**
-  - Platform: Azure DevOps Services
-  - Source Control: Git with Azure Repos
-  - Build Automation: YAML-based Azure Pipelines
-  - Package Management: Azure Artifacts feeds
+  - Platform: Azure DevOps Services with Git-based Azure Repos
+  - Build & Release: YAML-based Azure Pipelines with multi-stage workflows
+  - Package Management: Azure Artifacts feeds for dependencies
 
 ---
 
