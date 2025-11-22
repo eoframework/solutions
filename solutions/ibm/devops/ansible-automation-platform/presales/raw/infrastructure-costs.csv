@@ -1,0 +1,55 @@
+# Sizing Guidelines
+#WIDTH: 24,36,28,28,28,51
+#ALIGN: left,left,center,center,center,left
+Category,Component,Small,Medium,Large,Notes
+Managed Infrastructure,Total Managed Nodes,100 nodes,500 nodes,1500 nodes,Servers and network devices under automation
+Managed Infrastructure,Linux Servers,75 servers,375 servers,1125 servers,RHEL CentOS Ubuntu managed hosts
+Managed Infrastructure,Windows Servers,15 servers,75 servers,225 servers,Windows Server automation via WinRM
+Managed Infrastructure,Network Devices,10 devices,50 devices,150 devices,Switches routers firewalls via APIs
+Automation Platform,Automation Controller Nodes,1 controller,2 controllers (HA),4 controllers (clustered),Platform capacity and availability
+Automation Platform,Execution Nodes,1 node,2 nodes,4 nodes,Distributed job execution capacity
+Automation Platform,Concurrent Jobs,10 jobs,50 jobs,200 jobs,Peak concurrent automation execution
+Automation Content,Custom Playbooks,20 playbooks,100 playbooks,300+ playbooks,Organization-specific automation content
+Automation Users,Platform Users,5 users,20 users,75 users,Automation developers and operators
+Support Level,Red Hat Support,Standard Support,Premium Support,Premium Support,SLA and response time requirements
+
+# Infrastructure Costs
+#WIDTH: 23,30,50,12,15,12,15,12,12,15,30
+#ALIGN: left,left,left,right,left,right,right,right,right,right,left
+Category,Component,Description,Quantity,Unit,Unit Price,Annual Cost,Year 2,Year 3,3-Year Total,Notes
+Cloud Infrastructure,Automation Controller VMs,Controller cluster VMs (2x 8 vCPU 32GB RAM),2,VMs,$750,"=D11*F11*12","=G11","=G11","=G11+H11+I11",HA controller pair on AWS EC2 or Azure
+Cloud Infrastructure,Execution Node VMs,Execution nodes for distributed jobs (2x 4 vCPU 16GB RAM),2,VMs,$300,"=D12*F12*12","=G12","=G12","=G12+H12+I12",Scale execution capacity
+Cloud Infrastructure,PostgreSQL Database,RDS PostgreSQL for controller database,1,Instance/Month,$150,"=D13*F13*12","=G13","=G13","=G13+H13+I13",Managed database service
+Cloud Infrastructure,Load Balancer,Application load balancer for controller HA,1,ALB/Month,$50,"=D14*F14*12","=G14","=G14","=G14+H14+I14",Distribute traffic to controllers
+Cloud Infrastructure,Storage Volumes,EBS volumes for VMs and backups (500GB),500,GB/Month,$0.1,"=D15*F15*12","=G15","=G15","=G15+H15+I15",Persistent storage and snapshots
+Cloud Infrastructure,Backup Storage,S3 backup storage for configurations and logs,1,TB/Month,$23,"=D16*F16*12","=G16","=G16","=G16+H16+I16",Disaster recovery and audit retention
+Software Licenses,Ansible Automation Platform,AAP subscription for 500 managed nodes,1,500-Node Tier,$100000,"=D17*F17","=G17","=G17","=G17+H17+I17",Annual subscription licensing
+Software Licenses,Red Hat Satellite (Optional),RHEL patch and config management integration,1,Subscription,$15000,"=D18*F18","=G18","=G18","=G18+H18+I18",Optional - lifecycle management
+Support & Maintenance,Red Hat Premium Support,24x7 Premium Support with SLA,1,Annual Contract,$15000,"=D19*F19","=G19","=G19","=G19+H19+I19",Production support coverage
+Support & Maintenance,Cloud Infrastructure Support,AWS/Azure infrastructure support (10% of cloud cost),1,Annual Support,$2652,"=D20*F20","=G20","=G20","=G20+H20+I20",Cloud provider support tier
+Professional Services,Architecture & Design,Solution design and automation strategy (40 hours),40,Hours,$200,"=D21*F21","=0","=0","=G21+H21+I21",Pre-implementation planning
+Professional Services,Platform Implementation,AAP installation and configuration (80 hours),80,Hours,$200,"=D22*F22","=0","=0","=G22+H22+I22",Controller cluster deployment
+Professional Services,Playbook Development,Custom playbook creation for use cases (120 hours),120,Hours,$200,"=D23*F23","=0","=0","=G23+H23+I23",Automation content development
+Professional Services,Integration Services,ITSM and CMDB integration (60 hours),60,Hours,$200,"=D24*F24","=0","=0","=G24+H24+I24",ServiceNow monitoring integration
+Professional Services,Ansible Developer Training,Developer training for playbook authors (32 hours 10 users),32,Hours,$200,"=D25*F25","=0","=0","=G25+H25+I25",Automation development skills
+Professional Services,Ansible Administrator Training,Platform admin training (24 hours 3 admins),24,Hours,$200,"=D26*F26","=0","=0","=G26+H26+I26",Day-2 operations training
+Professional Services,Post-Go-Live Support,Hypercare support for 30 days (60 hours),60,Hours,$200,"=D27*F27","=0","=0","=G27+H27+I27",Stabilization period support
+
+# Credits
+#WIDTH: 25,25,15,50
+#ALIGN: left,left,right,left
+Category,Credit Type,Credit Amount,Credit Comments
+Software Licenses,Red Hat Partner Discount,"($10000)",Partner discount on first year AAP subscription
+Professional Services,Training Credit,"($3000)",Red Hat training voucher credits
+Cloud Infrastructure,AWS Credit,"($2000)",AWS promotional credits for new workloads
+Support & Maintenance,Support Credit,$0,No support credits available
+
+# 3-Year Summary
+#WIDTH: 25,15,15,15,12,12,15
+#ALIGN: left,right,right,right,right,right,right
+Category,Year 1 List,Year 1 Credits,Year 1 Net,Year 2,Year 3,3-Year Total
+Cloud Infrastructure,$26520,"($2000)",$24520,$26520,$26520,$77560
+Software Licenses,$115000,"($10000)",$105000,$115000,$115000,$335000
+Support & Maintenance,$17652,$0,$17652,$17652,$17652,$52956
+Professional Services,$73600,"($3000)",$70600,$0,$0,$70600
+TOTAL,$232772,"($15000)",$217772,$159172,$159172,$536116

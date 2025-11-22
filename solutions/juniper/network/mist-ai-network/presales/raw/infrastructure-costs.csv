@@ -1,0 +1,57 @@
+# Sizing Guidelines
+#WIDTH: 24,36,28,28,28,51
+#ALIGN: left,left,center,center,center,left
+Category,Component,Small,Medium,Large,Notes
+Wireless Infrastructure,Access Point Count,25 APs,50 APs,100+ APs,WiFi 6E coverage for facility
+Wireless Infrastructure,User Capacity,500 users,1000 users,2500+ users,Concurrent wireless clients
+Wireless Infrastructure,Coverage Area,50K sq ft,100K sq ft,250K+ sq ft,Indoor facility coverage
+Wireless Infrastructure,Building Count,1-2 buildings,2-5 buildings,5+ buildings,Multi-building campus
+Wired Infrastructure,Switch Count,2 switches,4 switches,8+ switches,PoE access switches for APs
+Wired Infrastructure,Switch Ports,48 ports,96 ports,192+ ports,Total switch port capacity
+Management Platform,Mist Cloud Tier,Mist Cloud Standard,Mist Cloud Premium,Mist Cloud Premium + Location,AI-driven wireless management
+Location Services,vBLE Beacons,25 virtual beacons,50 virtual beacons,100+ virtual beacons,Indoor positioning via virtual BLE
+Location Services,Location Use Cases,Basic wayfinding,Asset tracking + Analytics,Full location platform,Location-based services complexity
+Support & Maintenance,Support Level,8x5 JTAC,24x5 JTAC,24x7 Premium JTAC,Juniper technical support coverage
+
+# Infrastructure Costs
+#WIDTH: 23,30,50,12,15,12,15,12,12,15,30
+#ALIGN: left,left,left,right,left,right,right,right,right,right,left
+Category,Component,Description,Quantity,Unit,Unit Price,Annual Cost,Year 2,Year 3,3-Year Total,Notes
+Hardware,Juniper AP45 WiFi 6E,WiFi 6E access points with 6 GHz support (9.6 Gbps tri-band),50,Access Points,$1500,$0,$0,$0,$75000,One-time CapEx for enterprise APs
+Hardware,Juniper EX4400 Switches,48-port PoE++ Gigabit switches with 10G uplinks,4,Switches,$8000,$0,$0,$0,$32000,PoE infrastructure for APs
+Hardware,Power Supplies,Redundant AC power supplies for EX4400 switches,8,Power Supply,$600,$0,$0,$0,$4800,HA redundancy
+Hardware,10G SFP+ Optics,10G SFP+ transceivers for uplinks and stacking,16,Transceiver,$300,$0,$0,$0,$4800,Uplink connectivity modules
+Software,Mist Cloud Subscription,AI-driven wireless management per AP (50 APs),50,AP/Year,$300,$15000,$15000,$15000,$45000,Annual cloud management subscription
+Software,Mist Wired Assurance,AI-driven switch management per switch (4 switches),4,Switch/Year,$600,$2400,$2400,$2400,$7200,Wired network management and AI
+Software,Location Services License,Indoor positioning and wayfinding per AP,50,AP/Year,$120,$6000,$6000,$6000,$18000,Virtual BLE location tracking
+Software,Marvis VNA,Virtual Network Assistant AI for 50 APs,1,Subscription/Year,$3000,$3000,$3000,$3000,$9000,Conversational AI troubleshooting
+Software,Premium Analytics,Advanced user engagement and presence analytics,1,Subscription/Year,$5000,$5000,$5000,$5000,$15000,Enhanced analytics beyond standard
+Support & Maintenance,Juniper Support Premium,24x7 JTAC support for APs and switches (54 devices),54,Device/Year,$180,$9720,$9720,$9720,$29160,Premium support with 4-hour response
+Professional Services,Site Survey,Predictive and validation RF site survey for 100K sq ft,80,Hours,$200,$16000,$0,$0,$16000,RF design and AP placement
+Professional Services,Installation Services,AP mounting cabling and switch configuration,120,Hours,$150,$18000,$0,$0,$18000,Physical installation and cabling
+Professional Services,Mist Configuration,Mist cloud setup WLAN configuration and policy deployment,60,Hours,$200,$12000,$0,$0,$12000,Wireless network configuration
+Professional Services,Wired Assurance Setup,Switch onboarding and wired assurance configuration,24,Hours,$200,$4800,$0,$0,$4800,Wired network integration
+Professional Services,Location Services Config,vBLE setup wayfinding and asset tracking configuration,32,Hours,$200,$6400,$0,$0,$6400,Indoor location services deployment
+Professional Services,Testing and Validation,RF validation client testing and performance verification,40,Hours,$200,$8000,$0,$0,$8000,Coverage and performance validation
+Professional Services,Training - IT Admins,Mist dashboard Marvis AI and troubleshooting training (2 days),16,Hours,$200,$3200,$0,$0,$3200,Administrator enablement
+Professional Services,Documentation,As-built RF maps configuration guides and runbooks,24,Hours,$150,$3600,$0,$0,$3600,Operational documentation
+Professional Services,Project Management,Project coordination and stakeholder management,60,Hours,$150,$9000,$0,$0,$9000,Overall project delivery
+
+# Credits
+#WIDTH: 25,25,15,50
+#ALIGN: left,left,right,left
+Category,Credit Type,Credit Amount,Credit Comments
+Hardware,Volume Discount,"($5580)",5% hardware discount for 50+ AP deployment
+Software,First Year Subscription Credit,"($7500)",50% Year 1 Mist Cloud subscription promotional discount
+Support & Maintenance,Multi-Year Support Credit,"($2916)",10% discount for 3-year support commitment
+Professional Services,Partner Credit,$0,No professional services credits available
+
+# 3-Year Summary
+#WIDTH: 25,15,15,15,12,12,15
+#ALIGN: left,right,right,right,right,right,right
+Category,Year 1 List,Year 1 Credits,Year 1 Net,Year 2,Year 3,3-Year Total
+Hardware,$116600,"($5580)",$111020,$0,$0,$111020
+Software,$31400,"($7500)",$23900,$31400,$31400,$86700
+Support & Maintenance,$9720,"($2916)",$6804,$9720,$9720,$26244
+Professional Services,$81000,$0,$81000,$0,$0,$81000
+TOTAL,$238720,"($15996)",$222724,$41120,$41120,$304964

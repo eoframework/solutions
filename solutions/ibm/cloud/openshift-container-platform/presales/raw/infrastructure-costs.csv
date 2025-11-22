@@ -1,0 +1,58 @@
+# Sizing Guidelines
+#WIDTH: 24,36,28,28,28,51
+#ALIGN: left,left,center,center,center,left
+Category,Component,Small,Medium,Large,Notes
+Cluster Configuration,Control Plane Nodes,3 nodes (8 vCPU 32GB),3 nodes (8 vCPU 32GB),3 nodes (16 vCPU 64GB),High availability control plane
+Cluster Configuration,Worker Nodes,3 nodes (16 vCPU 64GB),6 nodes (32 vCPU 128GB),12 nodes (32 vCPU 128GB),Application workload capacity
+Cluster Configuration,Total vCPUs,72 vCPUs,240 vCPUs,576 vCPUs,Combined control plane and workers
+Cluster Configuration,Total RAM,288 GB,960 GB,2304 GB,Combined control plane and workers
+Cluster Configuration,Total Containers,100-200 containers,500-1000 containers,2000+ containers,Pod capacity estimate
+Storage Configuration,Persistent Storage,5 TB,20 TB,100 TB,Application persistent volumes
+Storage Configuration,Registry Storage,1 TB,5 TB,20 TB,Container image registry
+Software Licensing,OpenShift Subscription,72 cores,240 cores,576 cores,Core-based licensing (2-core increments)
+Support Level,Red Hat Support,Standard Support,Premium Support,Premium Support,SLA and response time requirements
+Developer Count,Platform Users,10-25 developers,50-100 developers,200+ developers,User access and RBAC requirements
+
+# Infrastructure Costs
+#WIDTH: 23,30,50,12,15,12,15,12,12,15,30
+#ALIGN: left,left,left,right,left,right,right,right,right,right,left
+Category,Component,Description,Quantity,Unit,Unit Price,Annual Cost,Year 2,Year 3,3-Year Total,Notes
+Hardware/Equipment,Control Plane Servers,VMware VMs or bare metal (3x 8 vCPU 32GB RAM),3,Servers,$5000,"=D11*F11","=G11","=G11","=G11+H11+I11",Control plane nodes (HA configuration)
+Hardware/Equipment,Worker Node Servers,Application worker nodes (6x 32 vCPU 128GB RAM),6,Servers,$20000,"=D12*F12","=G12","=G12","=G12+H12+I12",Worker nodes for containerized workloads
+Hardware/Equipment,Storage Infrastructure,Block storage for persistent volumes (20TB usable),20,TB,$400,"=D13*F13","=G13","=G13","=G13+H13+I13",SAN or NFS storage for PVs
+Hardware/Equipment,Load Balancer,External load balancer for ingress traffic,2,Appliances,$8000,"=D14*F14","=G14","=G14","=G14+H14+I14",HA load balancer pair
+Software Licenses,OpenShift Platform Plus,OpenShift Platform Plus subscription (240 cores),120,2-Core Packs,$800,"=D15*F15","=G15","=G15","=G15+H15+I15",Includes OpenShift ACM ODF ACS
+Software Licenses,RHEL Subscriptions,Red Hat Enterprise Linux for worker nodes,6,Server Subs,$800,"=D16*F16","=G16","=G16","=G16+H16+I16",RHEL operating system licensing
+Software Licenses,OpenShift Data Foundation,ODF subscription for storage services (20TB),10,2-TB Packs,$1000,"=D17*F17","=G17","=G17","=G17+H17+I17",Software-defined storage (Ceph-based)
+Software Licenses,Advanced Cluster Security,ACS for Kubernetes security scanning,1,Cluster,$12000,"=D18*F18","=G18","=G18","=G18+H18+I18",Container vulnerability and compliance scanning
+Cloud Infrastructure,Backup Storage,S3-compatible backup storage for etcd and PVs,5,TB/Month,$23,"=D19*F19*12","=G19","=G19","=G19+H19+I19",Disaster recovery and backup retention
+Cloud Infrastructure,Monitoring Storage,Long-term metrics storage (Prometheus),1,Service/Month,$500,"=D20*F20*12","=G20","=G20","=G20+H20+I20",Extended metrics retention (90 days)
+Cloud Infrastructure,VPN Connectivity,Site-to-site VPN or Direct Connect,1,Connection/Month,$300,"=D21*F21*12","=G21","=G21","=G21+H21+I21",Secure connectivity to data center
+Support & Maintenance,Red Hat Premium Support,24x7 Premium Support with SLA,1,Annual Contract,$28000,"=D22*F22","=G22","=G22","=G22+H22+I22",Production support and SLA coverage
+Support & Maintenance,Infrastructure Maintenance,Hardware maintenance and support (15% of hardware),1,Annual Contract,$24900,"=D23*F23","=G23","=G23","=G23+H23+I23",Server and storage support contracts
+Professional Services,Architecture & Design,Solution architecture and design (80 hours),80,Hours,$225,"=D24*F24","=0","=0","=G24+H24+I24",Pre-implementation planning
+Professional Services,Implementation Services,OpenShift cluster deployment and config (120 hours),120,Hours,$225,"=D25*F25","=0","=0","=G25+H25+I25",Installation and configuration
+Professional Services,Application Migration,Container migration assistance (160 hours),160,Hours,$225,"=D26*F26","=0","=0","=G26+H26+I26",Containerization of existing apps
+Professional Services,Developer Training,OpenShift developer training (40 hours 10 developers),40,Hours,$200,"=D27*F27","=0","=0","=G27+H27+I27",Developer enablement and best practices
+Professional Services,Administrator Training,Platform admin training (40 hours 5 admins),40,Hours,$200,"=D28*F28","=0","=0","=G28+H28+I28",Day-2 operations training
+Professional Services,Post-Go-Live Support,Hypercare support for 30 days (80 hours),80,Hours,$200,"=D29*F29","=0","=0","=G29+H29+I29",Stabilization period support
+
+# Credits
+#WIDTH: 25,25,15,50
+#ALIGN: left,left,right,left
+Category,Credit Type,Credit Amount,Credit Comments
+Hardware/Equipment,Red Hat Partner Discount,"($15000)",Partner discount on first year subscriptions
+Software Licenses,Enterprise Agreement Credit,"($20000)",Multi-year commitment discount on licenses
+Professional Services,Training Credit,"($5000)",Red Hat training voucher credits
+Support & Maintenance,Support Credit,$0,No support credits available
+
+# 3-Year Summary
+#WIDTH: 25,15,15,15,12,12,15
+#ALIGN: left,right,right,right,right,right,right
+Category,Year 1 List,Year 1 Credits,Year 1 Net,Year 2,Year 3,3-Year Total
+Hardware/Equipment,$174000,"($15000)",$159000,$8000,$8000,$175000
+Software Licenses,$136800,"($20000)",$116800,$136800,$136800,$390400
+Cloud Infrastructure,$9876,$0,$9876,$9876,$9876,$29628
+Support & Maintenance,$52900,$0,$52900,$52900,$52900,$158700
+Professional Services,$90000,"($5000)",$85000,$0,$0,$85000
+TOTAL,$463576,"($40000)",$423576,$207576,$207576,$838728
