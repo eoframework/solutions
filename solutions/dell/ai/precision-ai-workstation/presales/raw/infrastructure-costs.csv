@@ -1,7 +1,7 @@
 # Sizing Guidelines
 #WIDTH: 24,36,28,28,28,51
 #ALIGN: left,left,center,center,center,left
-Category,Component,Small (3 users),Medium (10 users),Large (25 users),Notes
+Category,Component,Small,Medium,Large,Notes
 Workstations,Dell Precision 7960,3 units,10 units,25 units,Dual Xeon with 256GB RAM per workstation
 GPUs,NVIDIA RTX A6000 48GB,3 GPUs,10 GPUs,25 GPUs,Professional AI/ML GPU with CUDA and Tensor cores
 Local Storage,NVMe SSD per workstation,2TB per unit,4TB per unit,4TB per unit,High-speed local storage for training datasets

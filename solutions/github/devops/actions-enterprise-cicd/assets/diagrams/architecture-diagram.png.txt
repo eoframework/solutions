@@ -1,0 +1,16 @@
+TO CREATE architecture-diagram.png:
+
+1. Open architecture-diagram.drawio in https://app.diagrams.net/
+2. Review and adjust the diagram layout as needed
+3. Export as PNG: File > Export as > PNG
+4. Settings:
+   - Resolution: 300 DPI
+   - Transparent background: Yes
+   - Border width: 10
+5. Save as: architecture-diagram.png (remove .txt extension from this file)
+
+The PNG file is referenced in:
+- presales/raw/solution-briefing.md (Slide 4)
+- presales/README.md
+
+Once created, delete this .txt file.

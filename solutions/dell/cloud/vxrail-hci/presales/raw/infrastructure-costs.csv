@@ -1,7 +1,7 @@
 # Sizing Guidelines
 #WIDTH: 24,36,28,28,28,51
 #ALIGN: left,left,center,center,center,left
-Category,Component,Small (4 nodes),Medium (8 nodes),Large (16 nodes),Notes
+Category,Component,Small,Medium,Large,Notes
 Cluster Size,VxRail E560 Nodes,4 nodes,8 nodes,16 nodes,Minimum 4 nodes for HA with FTT=1
 Total vCPUs,Xeon Gold Processors,256 vCPUs,512 vCPUs,1024 vCPUs,32 cores per node (2x 16-core CPUs)
 Total RAM,DDR4 Memory,3TB (768GB per node),6TB (768GB per node),12TB (768GB per node),Expandable to 3TB per node if needed

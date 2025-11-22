@@ -1,269 +1,414 @@
-# STATEMENT OF WORK (SOW)
+---
+document_title: Statement of Work
+technology_provider: Dell Technologies
+project_name: Dell VxRail Hyperconverged Infrastructure
+client_name: [Client Name]
+client_contact: [Contact Name | Email | Phone]
+consulting_company: Your Consulting Company
+consultant_contact: [Consultant Name | Email | Phone]
+opportunity_no: OPP-2025-001
+document_date: November 22, 2025
+version: 1.0
+client_logo: ../../assets/logos/client_logo.png
+vendor_logo: ../../assets/logos/consulting_company_logo.png
+eoframework_logo: ../../assets/logos/eo-framework-logo-real.png
+---
 
-**Document Version:** 1.0
-**Date:** [DATE]
-**Prepared by:** [VENDOR_NAME]
-**Client:** [CLIENT_NAME]
-**Project:** {SOLUTION_NAME} Implementation
-**SOW Number:** [SOW_NUMBER]
+# Executive Summary
+
+This Statement of Work (SOW) defines the scope, deliverables, roles, and terms for implementing Dell VxRail Hyperconverged Infrastructure for [Client Name]. This engagement will deliver on-premises AI/ML computing infrastructure through Dell Precision 7960 workstations with NVIDIA RTX A6000 GPUs and PowerScale shared storage to reduce cloud GPU costs by 60-70% and achieve data sovereignty.
+
+**Project Duration:** 6 weeks
 
 ---
 
-## 1. EXECUTIVE SUMMARY
+---
 
-### 1.1 Project Overview
-This Statement of Work (SOW) outlines the scope, deliverables, timeline, and terms for the implementation of {SOLUTION_NAME} for [CLIENT_NAME]. The project will deliver [PRIMARY_BUSINESS_OUTCOME] through [HIGH_LEVEL_APPROACH].
+# Background & Objectives
 
-### 1.2 Business Objectives
-- **Primary Goal:** [PRIMARY_BUSINESS_OBJECTIVE]
-- **Success Metrics:** [QUANTIFIED_SUCCESS_CRITERIA]
-- **Expected ROI:** [ROI_PERCENTAGE] over [TIME_PERIOD]
+## Current State
 
-### 1.3 Project Duration
-**Start Date:** [PROJECT_START_DATE]
-**End Date:** [PROJECT_END_DATE]
-**Total Duration:** [PROJECT_DURATION] weeks
+[Client Name] currently spends approximately $58,000/month on cloud GPU instances (AWS p4d.24xlarge) for AI/ML model training across 10 data scientists. Key challenges include:
+- **High Cloud Costs:** $693K annual spend on cloud GPU compute creating budget pressure
+- **Data Transfer Bottlenecks:** Multi-terabyte datasets taking hours to transfer to/from cloud storage
+- **Data Sovereignty Concerns:** Sensitive training data required to remain on-premises for compliance
+- **Limited GPU Memory:** Cloud instance limits preventing training of larger models
+- **Productivity Loss:** Dataset download waits and network latency reducing data scientist productivity
+
+## Business Objectives
+- **Reduce Cloud Costs:** Eliminate cloud GPU spend through on-premises Dell Precision workstations with RTX A6000 GPUs achieving 60-70% cost reduction vs AWS p4d baseline
+- **Improve Training Performance:** Reduce model training time by 50% through local NVMe storage eliminating dataset transfer latency and providing dedicated 48GB GPU memory per workstation
+- **Enable Data Sovereignty:** Keep all AI training datasets on-premises to meet compliance requirements and eliminate cloud data residency concerns
+- **Increase Productivity:** Provide dedicated high-performance workstations allowing data scientists to iterate faster and train larger models without cloud quota limitations
+- **Support Team Growth:** Establish scalable on-premises infrastructure supporting current 10-person team with capacity for future expansion to 25+ data scientists
+- **Foundation for AI Platform:** Build foundation for expanding AI infrastructure to support distributed training and MLOps capabilities
+
+## Success Metrics
+- 60%+ reduction in AI infrastructure costs within 12 months (vs cloud baseline)
+- 50% reduction in model training time (vs current cloud performance)
+- 100% data sovereignty compliance (all datasets on-premises)
+- 95%+ GPU utilization across workstation fleet
+- 10 data scientists fully equipped and trained within 6 weeks
+- ROI payback within 3-6 months
 
 ---
 
-## 2. SCOPE OF WORK
+---
 
-### 2.1 In-Scope Activities
+# Scope of Work
+
+## In Scope
 The following services and deliverables are included in this SOW:
+- AI workload assessment and infrastructure sizing
+- Dell Precision workstation and PowerScale NAS procurement coordination
+- Data center infrastructure validation (power, cooling, network)
+- Hardware installation and OS/GPU driver configuration
+- ML framework stack setup (PyTorch, TensorFlow, CUDA)
+- Shared storage configuration and dataset migration
+- Performance benchmarking and validation
+- User and administrator training
+- Knowledge transfer and documentation
 
-#### 2.1.1 Discovery & Planning Phase
-- [ ] Stakeholder interviews and requirements gathering
-- [ ] Current state assessment and technical evaluation
-- [ ] Solution architecture design and documentation
-- [ ] Project planning and resource allocation
-- [ ] Risk assessment and mitigation planning
+### Scope Parameters
 
-#### 2.1.2 Implementation Phase
-- [ ] Infrastructure provisioning and configuration
-- [ ] Application deployment and customization
-- [ ] System integration and data migration
-- [ ] Security configuration and hardening
-- [ ] Performance optimization and tuning
+This engagement is sized based on the following parameters:
 
-#### 2.1.3 Testing & Validation Phase
-- [ ] Unit and integration testing
-- [ ] Performance and security testing
-- [ ] User acceptance testing coordination
-- [ ] Bug fixes and issue resolution
-- [ ] Go-live readiness assessment
+<!-- BEGIN SCOPE_PARAMETERS_TABLE -->
+<!-- TABLE_CONFIG: widths=[25, 35, 40] -->
+| Category | Parameter | Scope |
+|----------|-----------|-------|
+| Solution Scope | Number of Workstations | 10 Dell Precision 7960 units |
+| Solution Scope | GPU Configuration | NVIDIA RTX A6000 48GB |
+| Integration | Data Science Tools | Standard stack (PyTorch TensorFlow) |
+| Integration | Shared Storage | Dell PowerScale F600 100TB NAS |
+| User Base | Data Scientists | 10 concurrent users |
+| User Base | User Roles | 2 roles (data scientist admin) |
+| Data Volume | Dataset Size per Project | 5TB average dataset size |
+| Data Volume | Model Checkpoint Storage | 2TB model storage requirements |
+| Technical Environment | Network Connectivity | 10GbE to shared storage |
+| Technical Environment | Workstation Performance | Dell Precision 7960 dual Xeon Gold |
+| Technical Environment | Operating System | Ubuntu 22.04 LTS with CUDA |
+| Security & Compliance | Access Control | Standard file permissions and SSH |
+| Security & Compliance | Data Classification | Unclassified research data |
+| Performance | Training Performance | Target: 80% GPU utilization average |
+| Performance | Storage Performance | 7000 MB/s NVMe read per workstation |
+| Environment | Deployment Environments | Production only |
+<!-- END SCOPE_PARAMETERS_TABLE -->
 
-#### 2.1.4 Deployment & Support Phase
-- [ ] Production deployment and cutover
-- [ ] Post-deployment monitoring and support
-- [ ] User training and knowledge transfer
-- [ ] Documentation delivery
-- [ ] Project closure and handover
+Table: Engagement Scope Parameters
 
-### 2.2 Out-of-Scope Activities
-The following activities are explicitly excluded from this SOW:
+*Note: Changes to these parameters may require scope adjustment and additional investment.*
 
-- [ ] Hardware procurement and installation
-- [ ] Third-party software licensing
-- [ ] Network infrastructure modifications
-- [ ] Legacy system decommissioning
-- [ ] Ongoing operational support beyond [SUPPORT_PERIOD]
-- [ ] Custom development beyond specified requirements
-- [ ] Data cleansing or transformation of legacy data
-- [ ] Training beyond initial knowledge transfer
+## Out of Scope
+These items are not in scope unless added via change control:
+- Rack cabinets and PDU procurement (client responsibility)
+- Electrical infrastructure upgrades or circuit installation
+- Network switch procurement (only configuration included)
+- Custom ML model development or algorithm optimization
+- Data center facilities management
+- Managed services beyond 6-week engagement
 
----
+## Activities
 
-## 3. DELIVERABLES
+### Phase 1 – Planning & Procurement (Weeks 1-2)
 
-### 3.1 Documentation Deliverables
-| Deliverable | Description | Due Date | Format |
-|-------------|-------------|----------|---------|
-| **Requirements Specification** | Detailed functional and non-functional requirements | [DATE] | CSV/Excel |
-| **Solution Architecture Document** | Technical architecture and design specifications | [DATE] | PDF |
-| **Implementation Plan** | Detailed project timeline and resource allocation | [DATE] | MS Project |
-| **Test Plan & Results** | Testing strategy and execution results | [DATE] | PDF |
-| **User Training Materials** | End-user guides and training documentation | [DATE] | PDF/Video |
-| **Operations Runbook** | System administration and maintenance procedures | [DATE] | PDF |
-| **As-Built Documentation** | Final system configuration and architecture | [DATE] | PDF |
+During this initial phase, the team will finalize specifications and coordinate hardware procurement.
 
-### 3.2 System Deliverables
-| Component | Description | Acceptance Criteria |
-|-----------|-------------|-------------------|
-| **Production Environment** | Fully configured and operational system | Passes all acceptance tests |
-| **Integration Interfaces** | Configured data connections and APIs | Successful data flow validation |
-| **Security Configuration** | Implemented security controls and policies | Security audit compliance |
-| **Monitoring Setup** | Operational monitoring and alerting | Functional dashboards and alerts |
-| **Backup & Recovery** | Automated backup and disaster recovery | Successful recovery test |
+Key activities:
+- Review AI workload requirements and validate GPU sizing
+- Confirm power, cooling, and rack space availability
+- Submit Dell hardware purchase order (workstations, GPUs, storage)
+- Prepare data center space and network cabling
+- Plan dataset migration from cloud to PowerScale NAS
+- Develop implementation timeline and resource schedule
 
-### 3.3 Knowledge Transfer Deliverables
-- Administrator training (2 days, up to 10 participants)
-- End-user training (1 day, up to 25 participants)
-- Technical documentation and procedures
-- Recorded training sessions for future reference
+**Deliverable:** Implementation Plan & Hardware Order Confirmation
 
----
+### Phase 2 – Deployment & Configuration (Weeks 3-4)
 
-## 4. PROJECT TIMELINE & MILESTONES
+In this phase, hardware is installed and core infrastructure is configured.
 
-### 4.1 Project Phases
-| Phase | Duration | Start Date | End Date | Key Milestones |
-|-------|----------|------------|----------|----------------|
-| **Discovery & Planning** | 2 weeks | [DATE] | [DATE] | Requirements approved, Architecture signed-off |
-| **Implementation** | 6 weeks | [DATE] | [DATE] | Infrastructure ready, Application deployed |
-| **Testing & Validation** | 2 weeks | [DATE] | [DATE] | UAT completed, Go-live approved |
-| **Deployment & Support** | 2 weeks | [DATE] | [DATE] | Production live, Training completed |
+Key activities:
+- Dell ProDeploy rack installation and cabling
+- Ubuntu 22.04 LTS installation on all workstations
+- NVIDIA driver, CUDA 12.2, and cuDNN installation
+- PowerScale NAS configuration with NFS shares
+- 10GbE network configuration and validation
+- ML framework installation (PyTorch, TensorFlow, Jupyter)
+- Datadog monitoring agent deployment
 
-### 4.2 Critical Dependencies
-- [ ] Client provides timely access to required systems and environments
-- [ ] Subject matter experts available for requirements gathering and testing
-- [ ] Network connectivity and security approvals obtained
-- [ ] Third-party vendor coordination for integrations
-- [ ] Business stakeholder availability for key decision points
+**Deliverable:** Configured AI Infrastructure
 
----
+### Phase 3 – Validation & Training (Weeks 5-6)
 
-## 5. ROLES & RESPONSIBILITIES
+The solution undergoes performance validation and team training.
 
-### 5.1 Vendor Responsibilities ([VENDOR_NAME])
-- **Project Manager:** Overall project coordination and delivery management
-- **Solution Architect:** Technical design and architecture oversight
-- **Implementation Team:** System configuration, deployment, and testing
-- **Training Specialist:** User enablement and knowledge transfer
-- **Support Engineer:** Post-deployment support and issue resolution
+Key activities:
+- GPU benchmark testing (PyTorch/TensorFlow performance)
+- Storage throughput validation (NVMe and PowerScale)
+- Sample model training end-to-end testing
+- Dataset migration from AWS S3 to PowerScale
+- 2-day hands-on training: CUDA optimization and GPU profiling
+- Administrator training: Linux, GPU drivers, PowerScale management
+- Production go-live with first real-world training workloads
 
-### 5.2 Client Responsibilities ([CLIENT_NAME])
-- **Project Sponsor:** Executive oversight and business decision authority
-- **Technical Lead:** Infrastructure coordination and technical approvals
-- **Business Analyst:** Requirements validation and user acceptance testing
-- **System Administrator:** Ongoing system maintenance and administration
-- **End Users:** Participation in training and user acceptance testing
-
-### 5.3 Shared Responsibilities
-- Risk management and issue escalation
-- Change control and scope management
-- Quality assurance and acceptance testing
-- Communication and stakeholder management
+**Deliverable:** Performance Validation Report & Training Materials
 
 ---
 
-## 6. COMMERCIAL TERMS
+# Deliverables & Timeline
 
-### 6.1 Project Investment
-| Category | Description | Amount |
-|----------|-------------|--------|
-| **Professional Services** | Implementation and configuration services | $[SERVICES_AMOUNT] |
-| **Training & Support** | User training and initial support | $[TRAINING_AMOUNT] |
-| **Travel & Expenses** | On-site support and travel costs | $[TRAVEL_AMOUNT] |
-| ****TOTAL PROJECT COST** | **Total investment for complete implementation** | **$[TOTAL_AMOUNT]** |
+## Deliverables
 
-### 6.2 Payment Terms
-- **25%** upon SOW execution and project kickoff
-- **25%** upon completion of Discovery & Planning phase
-- **25%** upon completion of Implementation phase
-- **25%** upon successful go-live and project acceptance
+<!-- TABLE_CONFIG: widths=[8, 40, 12, 20, 20] -->
+| # | Deliverable | Type | Due Date | Acceptance By |
+|---|-------------|------|----------|---------------|
+| 1 | Implementation Plan | Document | Week 2 | Client IT Lead |
+| 2 | Configured AI Infrastructure | Infrastructure | Week 4 | Technical Lead |
+| 3 | Performance Validation Report | Document | Week 6 | Data Science Lead |
+| 4 | Training Materials & Runbooks | Document | Week 6 | Client Team |
+| 5 | As-Built Documentation | Document | Week 6 | IT Operations |
 
-### 6.3 Additional Services
-Any additional services beyond the scope of this SOW will be quoted separately and require written approval from both parties.
+## Project Milestones
 
----
-
-## 7. ACCEPTANCE CRITERIA
-
-### 7.1 Technical Acceptance
-The solution will be considered technically accepted when:
-- [ ] All functional requirements are implemented and tested
-- [ ] System performance meets specified requirements
-- [ ] Security controls are implemented and validated
-- [ ] Integration testing is completed successfully
-- [ ] System passes all acceptance tests
-
-### 7.2 Business Acceptance
-The project will be considered complete when:
-- [ ] Business stakeholders sign-off on user acceptance testing
-- [ ] Training is completed and knowledge transfer validated
-- [ ] Documentation is delivered and approved
-- [ ] System is operational in production environment
-- [ ] Support procedures are established and functional
+<!-- TABLE_CONFIG: widths=[20, 55, 25] -->
+| Milestone | Description | Target Date |
+|-----------|-------------|-------------|
+| M1 - Hardware Ordered | Dell purchase order submitted | Week 2 |
+| M2 - Hardware Delivered | All equipment on-site | Week 3 |
+| M3 - Infrastructure Configured | Workstations and storage operational | Week 4 |
+| M4 - Validation Complete | Performance benchmarks passed | Week 5 |
+| M5 - Training Complete | Team trained and productive | Week 6 |
 
 ---
 
-## 8. ASSUMPTIONS & CONSTRAINTS
+# Roles & Responsibilities
 
-### 8.1 Assumptions
-- Client will provide necessary access to systems, data, and personnel
-- Existing infrastructure meets minimum requirements for solution deployment
-- Required third-party systems and APIs are available and functional
-- Business requirements will remain stable throughout project duration
-- Client team members will be available for scheduled activities
+## Client Responsibilities
+- Provide data center space with adequate power and cooling
+- Install rack cabinets and PDUs (if rack-mount configuration)
+- Provide 10GbE network infrastructure and VLAN configuration
+- Assign technical lead and team for implementation support
+- Provide representative training datasets for validation
+- Approve hardware specifications and purchase order
+- Participate in knowledge transfer and training sessions
 
-### 8.2 Constraints
-- Project must comply with existing security and compliance requirements
-- Implementation must not disrupt critical business operations
-- All data handling must meet privacy and regulatory requirements
-- Solution must integrate with existing IT infrastructure and policies
-- Budget and timeline constraints as specified in this SOW
-
----
-
-## 9. RISK MANAGEMENT
-
-### 9.1 Identified Risks
-| Risk | Impact | Probability | Mitigation Strategy |
-|------|--------|-------------|-------------------|
-| **Resource Availability** | High | Medium | Advance scheduling and backup resources |
-| **Integration Complexity** | Medium | High | Early integration testing and validation |
-| **Scope Creep** | High | Medium | Formal change control process |
-| **Technology Dependencies** | Medium | Low | Contingency planning and alternatives |
-
-### 9.2 Change Management
-Any changes to project scope, timeline, or budget must be documented through formal change requests and approved by both parties before implementation.
+## Vendor Responsibilities
+- Coordinate Dell hardware procurement and delivery
+- Install and configure Ubuntu, CUDA, and ML frameworks
+- Configure PowerScale NAS with NFS shares and permissions
+- Benchmark GPU and storage performance
+- Migrate sample datasets from cloud to PowerScale
+- Conduct training workshops for users and administrators
+- Deliver documentation and operational runbooks
+- Provide 6-week implementation support
 
 ---
 
-## 10. TERMS & CONDITIONS
+# Architecture & Design
 
-### 10.1 Intellectual Property
-- Client retains ownership of all business data and information
-- Vendor retains ownership of proprietary methodologies and tools
-- Solution configuration and customizations become client property upon final payment
+## Solution Architecture
 
-### 10.2 Confidentiality
-Both parties agree to maintain strict confidentiality of proprietary information and business data throughout the project and beyond.
+The Dell Precision AI Workstation infrastructure consists of three layers:
 
-### 10.3 Warranty & Support
-- 90-day warranty on all deliverables from go-live date
-- Defect resolution included at no additional cost during warranty period
-- Post-warranty support available under separate maintenance agreement
+**Workstation Compute Layer:**
+- 10x Dell Precision 7960 Tower workstations
+- Dual Intel Xeon Gold 6430 processors (64 cores total)
+- 512GB DDR5 RAM for large-scale preprocessing
+- 4TB NVMe SSD achieving 7000MB/s read performance
+- NVIDIA RTX A6000 48GB GPU with 10752 CUDA cores
+- Ubuntu 22.04 LTS with CUDA 12.2 and cuDNN
+- PyTorch, TensorFlow, Jupyter Lab, VS Code
 
-### 10.4 Limitation of Liability
-Vendor's liability is limited to the total contract value. Neither party shall be liable for indirect, incidental, or consequential damages.
+**Shared Storage Layer:**
+- Dell PowerScale F600 NAS appliance
+- 100TB usable capacity for team dataset repository
+- NFS/SMB file sharing with user quotas
+- 10GbE network connectivity for high-speed access
+
+**Monitoring & Management:**
+- Datadog infrastructure monitoring
+- GPU utilization and temperature tracking
+- Storage capacity and performance metrics
+- Centralized logging for troubleshooting
+
+![Architecture Diagram](../../assets/diagrams/architecture-diagram.png)
+
+## Network Design
+
+- 10GbE network fabric connecting workstations to PowerScale NAS
+- Dedicated storage VLAN for dataset traffic isolation
+- 1GbE management network for out-of-band access
+- Firewall rules for SSH access and monitoring agents
+
+## Data Flow
+
+1. Data scientists access workstations via SSH or remote desktop
+2. Training datasets stored centrally on PowerScale NAS (NFS mounts)
+3. Dataset loaded from PowerScale to local NVMe for training
+4. GPU executes training workload with CUDA acceleration
+5. Model checkpoints saved to PowerScale for team sharing
+6. Datadog collects GPU metrics and performance telemetry
 
 ---
 
-## 11. APPROVAL & SIGNATURES
+# Security & Compliance
 
-### Client Approval ([CLIENT_NAME])
+## Access Control
+- SSH key-based authentication for workstation access
+- LDAP/Active Directory integration for centralized user management
+- Sudo access restricted to administrators
+- File-level permissions on PowerScale NAS shares
 
-**Name:** [CLIENT_AUTHORIZED_SIGNATORY]
-**Title:** [TITLE]
-**Signature:** ________________________________
-**Date:** ________________
+## Data Protection
+- Encryption at rest: LUKS encryption on workstation NVMe drives
+- Encryption in transit: TLS for all network communication
+- PowerScale snapshots for data recovery
+- No sensitive data transmitted to cloud services
 
-### Vendor Approval ([VENDOR_NAME])
+## Compliance
+- Data sovereignty: All training data remains on-premises
+- Audit logging: SSH access logs and file access audit trail
+- Patch management: Monthly security updates for Ubuntu and NVIDIA drivers
 
-**Name:** [VENDOR_AUTHORIZED_SIGNATORY]
-**Title:** [TITLE]
-**Signature:** ________________________________
-**Date:** ________________
+---
+
+# Testing & Validation
+
+## Performance Testing
+- **GPU Benchmark:** PyTorch and TensorFlow training performance vs specifications
+- **Storage Throughput:** NVMe local storage and PowerScale NAS read/write speeds
+- **Network Bandwidth:** 10GbE connectivity validation between workstations and storage
+- **End-to-End Training:** Sample model training with representative datasets
+
+## Acceptance Criteria
+- GPU utilization achieves 80%+ during training workloads
+- Local NVMe storage achieves 7000MB/s+ read performance
+- PowerScale NAS achieves 1GB/s+ aggregate throughput
+- All 10 workstations operational with CUDA and ML frameworks
+- Sample model training completes successfully
+- Users trained and able to execute training workloads independently
+
+---
+
+# Handover & Support
+
+## Knowledge Transfer
+- 2-day hands-on training workshop for data scientists
+  - CUDA optimization techniques
+  - Distributed training best practices
+  - GPU profiling and performance tuning
+- 1-day administrator training
+  - Ubuntu and GPU driver management
+  - PowerScale NAS administration
+  - Datadog monitoring and alerting
+
+## Documentation
+- Solution architecture diagram
+- Installation and configuration runbooks
+- GPU optimization best practices guide
+- Troubleshooting procedures
+- PowerScale backup and recovery procedures
+
+## Support Period
+- 6-week hypercare support during initial deployment
+- Email and phone support during business hours
+- Remote troubleshooting for technical issues
+- Escalation to Dell ProSupport for hardware failures
+
+## Post-Implementation
+After the 6-week engagement:
+- Client IT team assumes operational responsibility
+- Dell ProSupport Plus provides 24x7 hardware support
+- Vendor available for additional consulting as needed
+- Recommended quarterly performance reviews
+
+---
+
+# Investment Summary
+
+## Total Investment
+
+<!-- BEGIN COST_SUMMARY_TABLE -->
+<!-- TABLE_CONFIG: widths=[25, 15, 15, 15, 12, 12, 15] -->
+| Cost Category | Year 1 List | AWS/Partner Credits | Year 1 Net | Year 2 | Year 3 | 3-Year Total |
+|---------------|-------------|---------------------|------------|--------|--------|--------------|
+| Professional Services | $38,000 | ($4,000) | $34,000 | $0 | $0 | $34,000 |
+| Hardware | $306,000 | ($59,175) | $246,825 | $0 | $0 | $246,825 |
+| Software | $45,260 | ($10,800) | $34,460 | $45,260 | $45,260 | $125,980 |
+| Support & Maintenance | $24,850 | $0 | $24,850 | $24,850 | $24,850 | $74,550 |
+| **TOTAL INVESTMENT** | **$414,110** | **($73,975)** | **$340,135** | **$70,110** | **$70,110** | **$481,355** |
+<!-- END COST_SUMMARY_TABLE -->
+
+Table: Total Investment Summary
+
+## Professional Services Breakdown
+
+Professional services cost: $34,000 (after $4,000 Dell ProDeploy credit)
+
+*Detailed breakdown available in Level of Effort estimate.*
+
+## Payment Terms
+- 25% upon SOW signature
+- 50% upon hardware delivery (Week 3)
+- 25% upon final acceptance (Week 6)
+
+---
+
+# Terms & Conditions
+
+## Change Management
+Changes to scope, timeline, or deliverables require written change order approved by both parties. Changes may impact timeline and investment.
+
+## Assumptions
+- Client provides data center space with adequate power and cooling
+- Client network infrastructure supports 10GbE connectivity
+- Dell hardware delivered within 2-3 weeks of purchase order
+- Client team available for implementation coordination and training
+- Representative training datasets provided for validation
+
+## Client Obligations
+- Timely decision-making and approvals
+- Access to facilities and systems
+- Availability of technical resources
+- Hardware purchase order approval within 1 week
+
+## Risk Factors
+- Hardware delivery delays may impact timeline
+- Power or cooling constraints may require facility upgrades
+- Network infrastructure limitations may reduce performance
+- Dataset migration may take longer for multi-terabyte volumes
+
+## Warranty
+- Dell ProSupport Plus provides hardware warranty and support
+- Professional services guaranteed for 30 days post-acceptance
+- Software configuration supported during 6-week hypercare period
+
+---
+
+# Sign-Off
+
+## Acceptance
+
+This Statement of Work is agreed upon by the authorized representatives below:
+
+**Client:**
+
+Name: ________________________________
+Title: ________________________________
+Signature: ____________________________
+Date: _________________________________
+
+**Vendor:**
+
+Name: ________________________________
+Title: ________________________________
+Signature: ____________________________
+Date: _________________________________
 
 ---
 
 **Document Control:**
-**File Name:** SOW_{SOLUTION_NAME}_{CLIENT_NAME}_{DATE}
-**Version:** 1.0
-**Last Modified:** [DATE]
-**Next Review:** [REVIEW_DATE]
-
----
-
-*This Statement of Work constitutes the complete agreement between the parties for the services described herein and supersedes all prior negotiations, representations, or agreements relating to the subject matter.*
+- Version: 1.0
+- Last Updated: November 22, 2025
+- Document ID: OPP-2025-001

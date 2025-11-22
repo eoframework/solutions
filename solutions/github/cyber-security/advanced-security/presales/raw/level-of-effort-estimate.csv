@@ -1,29 +1,75 @@
-Phase,Work Package,Task Description,Resource Type,Estimated Hours,Rate,Cost Estimate,Dependencies,Risk Level,Notes
-Discovery,Azure Requirements Gathering,Conduct stakeholder interviews for Azure cloud strategy,EO Engineer,40,$150,"=TEXT(E2*F2,""$#,##0"")",,Medium,Focus on governance scalability and business alignment
-Discovery,Current Environment Assessment,Analyze existing infrastructure and Azure readiness,EO Engineer,32,$200,"=TEXT(E3*F3,""$#,##0"")",,Medium,Include identity networking and application assessment
-Discovery,Azure Services Assessment,Evaluate Azure services and landing zone requirements,EO Engineer,24,$200,"=TEXT(E4*F4,""$#,##0"")",,Medium,Focus on management groups policies and compliance
-Discovery,Compliance Review,Assess governance security and regulatory requirements,EO Engineer,16,$175,"=TEXT(E5*F5,""$#,##0"")",,Medium,Include Azure Policy and compliance frameworks
-Planning,Azure Landing Zone Design,Design Azure landing zone architecture and governance model,EO Engineer,48,$200,"=TEXT(E6*F6,""$#,##0"")",,Medium,Include management groups policies and blueprints
-Planning,Identity and Access Design,Design Azure AD integration and access management strategy,EO Engineer,32,$180,"=TEXT(E7*F7,""$#,##0"")",,Medium,Include SSO RBAC conditional access and PIM
-Planning,Network Architecture Design,Design Azure networking security and hybrid connectivity,EO Engineer,24,$175,"=TEXT(E8*F8,""$#,##0"")",,Medium,Include hub-spoke VNet peering and security
-Planning,Project Planning,Develop Azure implementation timeline and resource allocation,EO Engineer,24,$140,"=TEXT(E9*F9,""$#,##0"")",,Medium,Coordinate with infrastructure security and compliance teams
-Development,Management Groups and Subscriptions,Configure Azure management groups subscription structure and policies,EO Engineer,40,$160,"=TEXT(E10*F10,""$#,##0"")",,Medium,Include policy inheritance governance and billing
-Development,Azure Policy Implementation,Implement Azure policies governance controls and compliance,EO Engineer,60,$145,"=TEXT(E11*F11,""$#,##0"")",,Medium,Include policy definitions initiatives and remediation
-Development,Network Infrastructure,Build Azure networking VNet peering and hybrid connectivity,EO Engineer,48,$140,"=TEXT(E12*F12,""$#,##0"")",,Medium,Include ExpressRoute VPN and network security
-Development,Identity and Access Implementation,Implement Azure AD integration access controls and SSO,EO Engineer,40,$155,"=TEXT(E13*F13,""$#,##0"")",,Medium,Include MFA conditional access and privileged access
-Development,Monitoring and Operations,Build Azure monitoring logging alerting and operational tools,EO Engineer,32,$130,"=TEXT(E14*F14,""$#,##0"")",,Medium,Include Azure Monitor Log Analytics and automation
-Testing,Unit Testing,Develop automated tests for all solution components,EO Engineer,32,$120,"=TEXT(E15*F15,""$#,##0"")",,Medium,Include technology-specific testing frameworks
-Testing,Integration Testing,Test system integrations data flows and external dependencies,EO Engineer,40,$120,"=TEXT(E16*F16,""$#,##0"")",,Medium,Include end-to-end workflow validation
-Testing,Performance Testing,Conduct load performance and scalability testing,EO Engineer,24,$140,"=TEXT(E17*F17,""$#,##0"")",,Medium,Include production-like environment and stress testing
-Testing,Security Testing,Perform security assessments penetration testing and compliance validation,EO Engineer,16,$175,"=TEXT(E18*F18,""$#,##0"")",,Medium,Include vulnerability scanning and compliance checks
-Testing,User Acceptance Testing,Coordinate UAT with business users and stakeholders,EO Engineer,32,$150,"=TEXT(E19*F19,""$#,##0"")",,Medium,Include training feedback collection and sign-off
-Deployment,Production Deployment,Deploy solution to production environment with monitoring,EO Engineer,24,$160,"=TEXT(E20*F20,""$#,##0"")",,Medium,Include blue-green deployment rollback and validation
-Deployment,Go-Live Support,Provide comprehensive support during initial production rollout,EO Engineer,48,$110,"=TEXT(E21*F21,""$#,##0"")",,Medium,Include 24/7 support monitoring and issue resolution
-Training,Administrator Training,Train system administrators and technical support teams,EO Engineer,16,$130,"=TEXT(E22*F22,""$#,##0"")",,Medium,Include hands-on technical training and certification
-Training,End User Training,Train business users on solution functionality and workflows,EO Engineer,24,$120,"=TEXT(E23*F23,""$#,##0"")",,Medium,Include role-based training documentation and support
-Training,Documentation,Create comprehensive technical and user documentation,EO Engineer,32,$110,"=TEXT(E24*F24,""$#,##0"")",,Medium,Include runbooks troubleshooting guides and best practices
-Closeout,Knowledge Transfer,Transfer solution ownership to operations and support teams,EO Engineer,16,$140,"=TEXT(E25*F25,""$#,##0"")",,Medium,Include operational procedures escalation and maintenance
-Closeout,Performance Baseline,Establish performance metrics monitoring baselines and SLAs,EO Engineer,8,$130,"=TEXT(E26*F26,""$#,##0"")",,Medium,Include KPI definition monitoring setup and reporting
-Management,Technical Leadership,Quarterback technical oversight and architecture review,EO Quarterback,"=ROUND(SUM(E2:E26)*0.25,0)",$180,"=TEXT(E27*F27,""$#,##0"")",,Medium,25% of engineering effort
-Management,Project Management,Project coordination and management activities,EO Project Manager,"=ROUND(SUM(E2:E26)*0.20,0)",$150,"=TEXT(E28*F28,""$#,##0"")",,Low,20% of engineering effort
-,,,     TOTAL HOURS,1119,   TOTAL COST,"=TEXT(E2*F2+E3*F3+E4*F4+E5*F5+E6*F6+E7*F7+E8*F8+E9*F9+E10*F10+E11*F11+E12*F12+E13*F13+E14*F14+E15*F15+E16*F16+E17*F17+E18*F18+E19*F19+E20*F20+E21*F21+E22*F22+E23*F23+E24*F24+E25*F25+E26*F26+E27*F27+E28*F28,""$#,##0"")",,,Total Advanced Security project cost estimate
+# SCOPE ASSUMPTIONS - BASELINE (MULTIPLIER 1.0),,,,,,,,,,
+#WIDTH: 25,35,33,32,32,39,44
+#ALIGN: left,left,left,left,left,left,left
+Category,Baseline Assumption,Current Scope,Small (1x),Medium (2x),Large (3x),Notes,,,,,
+Solution Scope,Active Developers,100 developers,100 developers,250 developers,500+ developers,GitHub Enterprise user count,,,,,
+Solution Scope,Active Committers (GHAS),80 committers (90-day),80 committers,200 committers,400+ committers,GHAS pricing based on commit activity,,,,,
+Integration,Total Repositories,200 repositories,200 repositories,500 repositories,1000+ repositories,Code scanning coverage scope,,,,,
+Integration,Programming Languages,5-7 languages,5-7 languages,8-12 languages,15+ languages,CodeQL language support required,,,,,
+Integration,CI/CD Platform,GitHub Actions,GitHub Actions only,GitHub Actions + Jenkins,Multi-platform CI/CD,Pipeline integration complexity,,,,,
+Integration,SIEM Integration,Splunk Azure Sentinel,1 SIEM,2 SIEMs,3+ security platforms,Security event aggregation,,,,,
+User Base,Security Team Size,3-5 security engineers,3-5 engineers,8-12 engineers,20+ engineers,AppSec and security operations,,,,,
+User Base,Development Teams,8-10 teams,8-10 teams,15-20 teams,30+ teams,Team onboarding and training scope,,,,,
+Data Volume,Code Scanning Frequency,Per pull request,Per PR,Per commit,Continuous scanning,CodeQL analysis frequency,,,,,
+Technical Environment,CodeQL Custom Queries,10-15 custom queries,10-15 queries,25-40 queries,60+ queries,Org-specific security patterns,,,,,
+Technical Environment,GitHub Platform,Enterprise Cloud,Enterprise Cloud,Enterprise Server,Hybrid Cloud + Server,Deployment model complexity,,,,,
+Security & Compliance,Compliance Frameworks,SOC 2 PCI-DSS,2 frameworks,3-4 frameworks,5+ frameworks,Regulatory compliance requirements,,,,,
+Security & Compliance,Secret Scanning,Partner + custom patterns,Standard patterns,Advanced patterns,Enterprise + ML patterns,Secret detection scope,,,,,
+Performance,Deployment Environments,Dev staging production,3 environments,4 environments,6+ environments,Environment management complexity,,,,,
+# ESTIMATE SETTINGS,,,,,,,,,,
+#WIDTH: 17,22,14,173
+#ALIGN: left,left,center,left
+Phase,Variable Name,Multiplier,Description / Applies To Tasks,,,,,,,
+Discovery,DISCOVERY_MX,1,"All Discovery phase tasks (Security Assessment, Repository Analysis, GHAS Evaluation, Compliance Review)",,,,,,,
+Planning,PLANNING_MX,1,"All Planning phase tasks (GHAS Architecture, CodeQL Strategy, Integration Design, Project Planning)",,,,,,,
+Development,DEVELOPMENT_MX,1,"All Development phase tasks (GHAS Setup, CodeQL Configuration, Custom Queries, CI/CD Integration, SIEM Integration)",,,,,,,
+Testing,TESTING_MX,1,"All Testing phase tasks (CodeQL Testing, False Positive Analysis, Performance Testing, Security Validation)",,,,,,,
+Deployment,DEPLOYMENT_MX,1,"All Deployment phase tasks (Production Rollout, Repository Enablement, Go-Live Support)",,,,,,,
+Training,TRAINING_MX,1,"All Training phase tasks (Security Champion Training, Developer Training, Administrator Training, Documentation)",,,,,,,
+Closeout,CLOSEOUT_MX,1,"All Closeout phase tasks (Knowledge Transfer, Security Baseline)",,,,,,,
+Management,MANAGEMENT_MX,1,Project Management overhead - 10% of actual engineering hours,,,,,,,
+Leadership,LEADERSHIP_MX,1,Quarterback/Technical Leadership overhead - 10% of actual engineering hours,,,,,,,
+# Level of Effort,
+#WIDTH: 16,25,58,18,12,14,12,12,15,25,40
+#ALIGN: left,left,left,left,right,center,right,right,right,left,left
+Phase,Work Package,Task Description,Resource Type,Base Hours,Effort Multiplier,Actual Hours,Rate,Cost Estimate,Dependencies,Notes
+Discovery,Security Assessment,Conduct current state security posture and vulnerability assessment,EO Engineer,32,='Estimate Settings'!$C$3,=$E33*$F33,$225,"=TEXT($G33*$H33,""$#,##0"")",,Includes security debt analysis and current tooling evaluation
+Discovery,Repository Analysis,Analyze repository structure languages and scanning requirements,EO Engineer,24,='Estimate Settings'!$C$3,=$E34*$F34,$200,"=TEXT($G34*$H34,""$#,##0"")",,Customer must provide repository inventory and access
+Discovery,GHAS Evaluation,Evaluate GitHub Advanced Security features and requirements,EO Engineer,24,='Estimate Settings'!$C$3,=$E35*$F35,$200,"=TEXT($G35*$H35,""$#,##0"")",,Assess CodeQL secret scanning dependency scanning needs
+Discovery,Compliance Review,Assess security compliance and regulatory requirements,EO Engineer,16,='Estimate Settings'!$C$3,=$E36*$F36,$175,"=TEXT($G36*$H36,""$#,##0"")",,Identifies SOC 2 PCI-DSS HIPAA compliance drivers
+Planning,GHAS Architecture Design,Design GitHub Advanced Security architecture and workflow,EO Engineer,40,='Estimate Settings'!$C$4,=$E37*$F37,$225,"=TEXT($G37*$H37,""$#,##0"")",Security Assessment,Deliverable: GHAS architecture with scanning workflow design
+Planning,CodeQL Strategy Design,Design CodeQL configuration and custom query requirements,EO Engineer,32,='Estimate Settings'!$C$4,=$E38*$F38,$225,"=TEXT($G38*$H38,""$#,##0"")",Repository Analysis,Custom queries for org-specific security patterns
+Planning,Integration Design,Design CI/CD integration and SIEM security event routing,EO Engineer,24,='Estimate Settings'!$C$4,=$E39*$F39,$200,"=TEXT($G39*$H39,""$#,##0"")",GHAS Evaluation,GitHub Actions workflows and Splunk/Sentinel integration
+Planning,Project Planning,Develop implementation timeline and phased rollout plan,EO Engineer,24,='Estimate Settings'!$C$4,=$E40*$F40,$140,"=TEXT($G40*$H40,""$#,##0"")",GHAS Architecture Design,Deliverable: Phased rollout by team and repository priority
+Development,GHAS Platform Setup,Configure GitHub Advanced Security and organization settings,EO Engineer,40,='Estimate Settings'!$C$5,=$E41*$F41,$225,"=TEXT($G41*$H41,""$#,##0"")",GHAS Architecture Design,Enable GHAS code scanning secret scanning for organization
+Development,CodeQL Configuration,Configure CodeQL analysis for JavaScript Python Java C# Go,EO Engineer,48,='Estimate Settings'!$C$5,=$E42*$F42,$225,"=TEXT($G42*$H42,""$#,##0"")",GHAS Platform Setup,CodeQL setup for 5-7 languages with standard queries
+Development,Custom Query Development,Develop 10-15 custom CodeQL queries for org security policies,EO Engineer,60,='Estimate Settings'!$C$5,=$E43*$F43,$225,"=TEXT($G43*$H43,""$#,##0"")",CodeQL Configuration,Company-specific patterns framework rules business logic
+Development,Secret Scanning Setup,Configure secret scanning with partner and custom patterns,EO Engineer,24,='Estimate Settings'!$C$5,=$E44*$F44,$200,"=TEXT($G44*$H44,""$#,##0"")",GHAS Platform Setup,API keys tokens credentials with push protection
+Development,Dependency Scanning,Configure Dependabot alerts and automated updates,EO Engineer,24,='Estimate Settings'!$C$5,=$E45*$F45,$180,"=TEXT($G45*$H45,""$#,##0"")",GHAS Platform Setup,Software composition analysis and CVE monitoring
+Development,Policy Configuration,Configure branch protection PR checks and merge blocking,EO Engineer,30,='Estimate Settings'!$C$5,=$E46*$F46,$200,"=TEXT($G46*$H46,""$#,##0"")",Custom Query Development,Security policies and required status checks
+Development,CI/CD Integration,Integrate security scanning into GitHub Actions workflows,EO Engineer,40,='Estimate Settings'!$C$5,=$E47*$F47,$200,"=TEXT($G47*$H47,""$#,##0"")",Policy Configuration,Automated scanning in build and deployment pipelines
+Development,SIEM Integration,Integrate GHAS with Splunk Azure Sentinel for events,EO Engineer,24,='Estimate Settings'!$C$5,=$E48*$F48,$225,"=TEXT($G48*$H48,""$#,##0"")",CI/CD Integration,Security event forwarding and alert aggregation
+Testing,CodeQL Testing,Test CodeQL queries across repository sample set,EO Engineer,32,='Estimate Settings'!$C$6,=$E49*$F49,$200,"=TEXT($G49*$H49,""$#,##0"")",Custom Query Development,Validate detection accuracy across languages
+Testing,False Positive Analysis,Analyze and tune CodeQL queries to reduce false positives,EO Engineer,32,='Estimate Settings'!$C$6,=$E50*$F50,$200,"=TEXT($G50*$H50,""$#,##0"")",CodeQL Testing,Customer must provide feedback on alert accuracy
+Testing,Performance Testing,Test scanning performance and pipeline impact,EO Engineer,16,='Estimate Settings'!$C$6,=$E51*$F51,$175,"=TEXT($G51*$H51,""$#,##0"")",False Positive Analysis,Ensure scans complete within acceptable timeframes
+Testing,Security Validation,Validate vulnerability detection and policy enforcement,EO Engineer,24,='Estimate Settings'!$C$6,=$E52*$F52,$225,"=TEXT($G52*$H52,""$#,##0"")",Performance Testing,Test coverage across CWE patterns and secret types
+Deployment,Repository Enablement,Enable GHAS on 200 repositories in phased rollout,EO Engineer,32,='Estimate Settings'!$C$7,=$E53*$F53,$200,"=TEXT($G53*$H53,""$#,##0"")",Security Validation,Phased by team with monitoring and support
+Deployment,Production Rollout,Deploy GHAS to production with full scanning enabled,EO Engineer,24,='Estimate Settings'!$C$7,=$E54*$F54,$200,"=TEXT($G54*$H54,""$#,##0"")",Repository Enablement,Enable code scanning secret scanning dependency scanning
+Deployment,Go-Live Support,Provide support during initial GHAS rollout and adoption,EO Engineer,48,='Estimate Settings'!$C$7,=$E55*$F55,$175,"=TEXT($G55*$H55,""$#,##0"")",Production Rollout,Daily monitoring alert triage developer support
+Training,Security Champion Training,Train 8 security champions on GHAS administration,EO Engineer,16,='Estimate Settings'!$C$8,=$E56*$F56,$175,"=TEXT($G56*$H56,""$#,##0"")",Production Rollout,2 days training for security champions per team
+Training,Developer Training,Train developers on interpreting and fixing vulnerabilities,EO Engineer,24,='Estimate Settings'!$C$8,=$E57*$F57,$175,"=TEXT($G57*$H57,""$#,##0"")",Security Champion Training,3 days workshops for development teams
+Training,Administrator Training,Train platform admins on GHAS management,EO Engineer,8,='Estimate Settings'!$C$8,=$E58*$F58,$175,"=TEXT($G58*$H58,""$#,##0"")",Developer Training,GHAS configuration policy management monitoring
+Training,Documentation,Create GHAS runbooks user guides and best practices,EO Engineer,24,='Estimate Settings'!$C$8,=$E59*$F59,$150,"=TEXT($G59*$H59,""$#,##0"")",Administrator Training,Deliverable: Operations documentation and troubleshooting guides
+Closeout,Knowledge Transfer,Transfer GHAS ownership to security and platform teams,EO Engineer,16,='Estimate Settings'!$C$9,=$E60*$F60,$175,"=TEXT($G60*$H60,""$#,##0"")",Documentation,Comprehensive handover of configuration and processes
+Closeout,Security Baseline,Establish security metrics and monitoring baselines,EO Engineer,8,='Estimate Settings'!$C$9,=$E61*$F61,$175,"=TEXT($G61*$H61,""$#,##0"")",Knowledge Transfer,Baseline for vulnerability trends MTTR scan coverage
+Management,Technical Leadership,Quarterback technical oversight and security review,EO Quarterback,"=ROUND(SUM($G$3:$G$31)*0.10,0)",='Estimate Settings'!$C$11,=$E62*$F62,$225,"=TEXT($G62*$H62,""$#,##0"")",,Security architecture review and technical escalation
+Management,Project Management,Project coordination planning and stakeholder management,EO Project Manager,"=ROUND(SUM($G$3:$G$31)*0.10,0)",='Estimate Settings'!$C$10,=$E63*$F63,$200,"=TEXT($G63*$H63,""$#,##0"")",,Includes weekly status risk management vendor coordination
+,,,,,TOTAL HOURS,"=SUM($G$3:$G$33)",TOTAL COST,"=TEXT(SUMPRODUCT($G$3:$G$33,$H$3:$H$33),""$#,##0"")",,EO Sales Engineer: Update phase multipliers in Estimate Settings based on scope
+
+# Credits - Applied to Total Cost (Year 1 Only)
+#WIDTH: 27,17,100
+#ALIGN: left,right,left
+Credit Type,Credit Amount,Credit Comments
+GitHub Partner Services Credit,$0,No partner credits available for GHAS implementation
+Implementation Discount,$0,No implementation discount applicable
+NET PROFESSIONAL SERVICES COST,"=SUMPRODUCT($G$3:$G$33,$H$3:$H$33)",Total professional services cost for GHAS implementation

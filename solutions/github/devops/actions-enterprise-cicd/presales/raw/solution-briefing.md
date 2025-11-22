@@ -50,16 +50,15 @@ This engagement is sized based on the following parameters:
 <!-- TABLE_CONFIG: widths=[18, 29, 5, 18, 30] -->
 | Parameter | Scope | | Parameter | Scope |
 |-----------|-------|---|-----------|-------|
-| **Active Developers** | 100 developers | | **Deployment Targets** | AWS (EC2 ECS EKS Lambda) |
+| **Active Developers** | 100 developers | | **Reusable Workflows** | 15 workflow templates |
 | **Development Teams** | 8-10 teams | | **Technology Stack** | .NET Node.js Python Docker |
 | **Applications with CI/CD** | 20-50 applications | | **Container Registries** | GitHub Packages + AWS ECR |
 | **Builds Per Day** | 200 builds/day | | **Kubernetes** | AWS EKS clusters |
-| **Average Build Duration** | 20 minutes | | **Quality Tools** | SonarQube Codecov Jest |
-| **Self-Hosted Runners** | 20 runners (c5.2xlarge) | | **Monitoring** | Datadog APM |
-| **Runner OS** | Linux + Windows | | **Notifications** | Slack Microsoft Teams |
-| **GitHub Platform** | Enterprise Cloud | | **OIDC Integration** | AWS Azure keyless auth |
-| **Deployment Environments** | Dev test staging production | | **Migration Source** | Jenkins GitLab CI |
-| **GitHub Actions Minutes** | 50K minutes/month (included) | |  |  |
+| **Migration Source** | Jenkins GitLab CI | | **OIDC Integration** | AWS Azure keyless auth |
+| **Deployment Targets** | AWS (EC2 ECS EKS Lambda) | | **Security Scanning** | CodeQL Dependabot |
+| **Self-Hosted Runners** | 20 runners (c5.2xlarge) | | **Deployment Environments** | Dev test staging production |
+| **Runner OS** | Linux + Windows | |  |  |
+| **Average Build Duration** | 20 minutes | |  |  |
 <!-- END SCOPE_SIZING_TABLE -->
 
 *Note: Changes to these parameters may require scope adjustment and additional investment.*

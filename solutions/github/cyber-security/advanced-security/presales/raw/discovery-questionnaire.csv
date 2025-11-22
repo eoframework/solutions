@@ -47,10 +47,10 @@ INT-001,Integration Requirements,CI/CD Integration,Do you use GitHub Actions for
 INT-002,Integration Requirements,Issue Tracking,What issue tracking system do you use?,"Systems: GitHub Issues, JIRA, Azure Boards, ServiceNow","",Vulnerability tracking integration
 INT-003,Integration Requirements,SIEM Integration,Do you need SIEM integration for security events?,"SIEM platforms: Splunk, Azure Sentinel, Datadog, Sumo Logic","",Security event aggregation
 INT-004,Integration Requirements,Notification Channels,What notification channels do you use?,"Channels: Email, Slack, Microsoft Teams, PagerDuty, Webhooks","",Alert delivery mechanisms
-MIG-001,Migration Requirements,Existing Tools,What security tools will GHAS replace?,"Tools: Snyk, Checkmarx, Veracode, SonarQube - plan migration and comparison","",Tool migration and transition
-MIG-002,Migration Requirements,Historical Data,Do you need to import historical security findings?,"Options: Fresh start, Import open vulnerabilities, Full historical import","",Data migration requirements
-MIG-003,Migration Requirements,Rollout Strategy,What is your preferred rollout approach?,"Strategies: Pilot with 1-2 repos, Phased by team, All repos at once","",Implementation and adoption strategy
-MIG-004,Migration Requirements,Pilot Repositories,Which repositories will you pilot GHAS on first?,"Select representative repos with different languages and complexity","",Pilot selection and validation
-TRAIN-001,Training Requirements,Security Champion Training,Who will be trained as security champions?,"Identify 1-2 champions per team to lead GHAS adoption","",Security champion program
-TRAIN-002,Training Requirements,Developer Training,What training do developers need?,"Topics: GHAS overview, Interpreting alerts, Fixing vulnerabilities, CodeQL basics","",Developer enablement and adoption
-TRAIN-003,Training Requirements,Administrator Training,Who will administer GHAS policies and configurations?,"Roles: Security team, Platform team, DevOps","",Administrative training requirements
+IMPL-001,Implementation Planning,Existing Tools,What security tools will GHAS replace?,"Tools: Snyk, Checkmarx, Veracode, SonarQube - plan migration and comparison","",Tool migration and transition
+IMPL-002,Implementation Planning,Historical Data,Do you need to import historical security findings?,"Options: Fresh start, Import open vulnerabilities, Full historical import","",Data migration requirements
+IMPL-003,Implementation Planning,Rollout Strategy,What is your preferred rollout approach?,"Strategies: Pilot with 1-2 repos, Phased by team, All repos at once","",Implementation and adoption strategy
+IMPL-004,Implementation Planning,Pilot Repositories,Which repositories will you pilot GHAS on first?,"Select representative repos with different languages and complexity","",Pilot selection and validation
+IMPL-0001,Implementation Planning,Security Champion Training,Who will be trained as security champions?,"Identify 1-2 champions per team to lead GHAS adoption","",Security champion program
+IMPL-0002,Implementation Planning,Developer Training,What training do developers need?,"Topics: GHAS overview, Interpreting alerts, Fixing vulnerabilities, CodeQL basics","",Developer enablement and adoption
+IMPL-0003,Implementation Planning,Administrator Training,Who will administer GHAS policies and configurations?,"Roles: Security team, Platform team, DevOps","",Administrative training requirements

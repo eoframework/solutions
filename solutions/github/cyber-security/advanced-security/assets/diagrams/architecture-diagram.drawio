@@ -1,0 +1,131 @@
+<mxfile host="app.diagrams.net" modified="2025-11-22T12:00:00.000Z" agent="draw.io" version="22.1.11">
+  <diagram name="GitHub Advanced Security Architecture" id="github-advanced-security">
+    <mxGraphModel dx="1422" dy="794" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1400" pageHeight="850" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <!-- Title -->
+        <mxCell id="title" value="GitHub Advanced Security - DevSecOps Architecture" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=20;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="400" y="20" width="600" height="30" as="geometry" />
+        </mxCell>
+
+        <!-- Developer Workflow (Left) -->
+        <mxCell id="developer" value="Developer&lt;br&gt;Workstation" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="40" y="200" width="120" height="60" as="geometry" />
+        </mxCell>
+
+        <mxCell id="git-commit" value="Git Commit &amp;&amp; Push" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="40" y="300" width="120" height="60" as="geometry" />
+        </mxCell>
+
+        <mxCell id="pull-request" value="Create Pull Request" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="40" y="400" width="120" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- GitHub Platform (Center-Left) -->
+        <mxCell id="github-header" value="GitHub Enterprise Cloud" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#24292e;strokeColor=#000000;fontColor=#ffffff;fontSize=14;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="240" y="100" width="200" height="40" as="geometry" />
+        </mxCell>
+
+        <mxCell id="repository" value="Repository&lt;br&gt;(main, feature branches)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="240" y="200" width="200" height="60" as="geometry" />
+        </mxCell>
+
+        <mxCell id="pr-interface" value="Pull Request Interface" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="240" y="300" width="200" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- Security Scanning (Center-Right) -->
+        <mxCell id="security-header" value="Security Scanning Layer" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#6f42c1;strokeColor=#000000;fontColor=#ffffff;fontSize=14;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="520" y="100" width="360" height="40" as="geometry" />
+        </mxCell>
+
+        <mxCell id="code-scanning" value="Code Scanning&lt;br&gt;• CodeQL Analysis&lt;br&gt;• 300+ CWE Patterns&lt;br&gt;• SQL Injection, XSS, CSRF&lt;br&gt;• Custom Queries" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;align=left;" vertex="1" parent="1">
+          <mxGeometry x="520" y="160" width="160" height="120" as="geometry" />
+        </mxCell>
+
+        <mxCell id="secret-scanning" value="Secret Scanning&lt;br&gt;• Partner Patterns&lt;br&gt;• Custom Patterns&lt;br&gt;• Push Protection&lt;br&gt;• API Keys, Tokens" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;align=left;" vertex="1" parent="1">
+          <mxGeometry x="720" y="160" width="160" height="120" as="geometry" />
+        </mxCell>
+
+        <mxCell id="dependency-scanning" value="Dependency Scanning&lt;br&gt;• Dependabot Alerts&lt;br&gt;• CVE Database&lt;br&gt;• Auto-update PRs&lt;br&gt;• SCA Analysis" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;align=left;" vertex="1" parent="1">
+          <mxGeometry x="520" y="300" width="160" height="120" as="geometry" />
+        </mxCell>
+
+        <!-- CI/CD Integration (Right) -->
+        <mxCell id="cicd-header" value="CI/CD Integration" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0366d6;strokeColor=#000000;fontColor=#ffffff;fontSize=14;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="960" y="100" width="200" height="40" as="geometry" />
+        </mxCell>
+
+        <mxCell id="github-actions" value="GitHub Actions&lt;br&gt;Workflow" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" vertex="1" parent="1">
+          <mxGeometry x="960" y="160" width="200" height="60" as="geometry" />
+        </mxCell>
+
+        <mxCell id="security-checks" value="Security Status Checks" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" vertex="1" parent="1">
+          <mxGeometry x="960" y="240" width="200" height="60" as="geometry" />
+        </mxCell>
+
+        <mxCell id="merge-protection" value="Merge Protection Gates" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1">
+          <mxGeometry x="960" y="320" width="200" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- Security Operations (Bottom) -->
+        <mxCell id="secops-header" value="Security Operations" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d73a49;strokeColor=#000000;fontColor=#ffffff;fontSize=14;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="240" y="500" width="640" height="40" as="geometry" />
+        </mxCell>
+
+        <mxCell id="security-dashboard" value="Security Dashboard" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" vertex="1" parent="1">
+          <mxGeometry x="240" y="560" width="140" height="60" as="geometry" />
+        </mxCell>
+
+        <mxCell id="alert-triage" value="Alert Triage Interface" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" vertex="1" parent="1">
+          <mxGeometry x="400" y="560" width="140" height="60" as="geometry" />
+        </mxCell>
+
+        <mxCell id="siem" value="SIEM Integration&lt;br&gt;(Splunk/Sentinel)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" vertex="1" parent="1">
+          <mxGeometry x="560" y="560" width="140" height="60" as="geometry" />
+        </mxCell>
+
+        <mxCell id="tracking" value="Vulnerability Tracking&lt;br&gt;(JIRA/ServiceNow)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" vertex="1" parent="1">
+          <mxGeometry x="720" y="560" width="160" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- Arrows -->
+        <mxCell id="arrow1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="developer" target="repository">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="arrow2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="pr-interface" target="code-scanning">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="arrow3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="pr-interface" target="secret-scanning">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="arrow4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="pr-interface" target="dependency-scanning">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="arrow5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="code-scanning" target="github-actions">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Labels -->
+        <mxCell id="label1" value="90% Detection Rate" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=12;fontStyle=1;fontColor=#28a745;" vertex="1" parent="1">
+          <mxGeometry x="700" y="440" width="140" height="20" as="geometry" />
+        </mxCell>
+
+        <mxCell id="label2" value="Zero Secret Leaks" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=12;fontStyle=1;fontColor=#28a745;" vertex="1" parent="1">
+          <mxGeometry x="720" y="290" width="140" height="20" as="geometry" />
+        </mxCell>
+
+        <mxCell id="label3" value="Shift-Left Security" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=12;fontStyle=1;fontColor=#6f42c1;" vertex="1" parent="1">
+          <mxGeometry x="520" y="440" width="140" height="20" as="geometry" />
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

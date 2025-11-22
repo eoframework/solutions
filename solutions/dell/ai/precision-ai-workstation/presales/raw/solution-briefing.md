@@ -50,14 +50,15 @@ This engagement is sized based on the following parameters:
 <!-- TABLE_CONFIG: widths=[18, 29, 5, 18, 30] -->
 | Parameter | Scope | | Parameter | Scope |
 |-----------|-------|---|-----------|-------|
-| **Number of Workstations** | 10 Dell Precision 7960 units | | **Support Level** | Dell ProSupport Plus 24x7 |
-| **GPU Configuration** | NVIDIA RTX A6000 48GB per workstation | | **Network Infrastructure** | 10GbE switching and connectivity |
-| **System Memory** | 512GB DDR5 per workstation | | **Operating System** | Ubuntu 22.04 LTS with Ubuntu Pro |
-| **Local Storage** | 4TB NVMe SSD per workstation | | **ML Framework Support** | PyTorch TensorFlow JAX Hugging Face |
-| **Shared Storage** | Dell PowerScale F600 100TB usable | | **CUDA Toolkit** | CUDA 12.2 with cuDNN 8.9 |
-| **Number of Data Scientists** | 10 users | | **Training Duration** | 12-48 hours typical model training |
-| **Deployment Timeline** | 4-6 weeks from order to production | | **Professional Services** | ProDeploy installation and 2-day training |
-| **Deployment Location** | Data center or office environment | |  |  |
+| **Number of Workstations** | 10 Dell Precision 7960 units | | **Workstation Performance** | Dell Precision 7960 dual Xeon Gold |
+| **GPU Configuration** | NVIDIA RTX A6000 48GB | | **Operating System** | Ubuntu 22.04 LTS with CUDA |
+| **Data Science Tools** | Standard stack (PyTorch TensorFlow) | | **Access Control** | Standard file permissions and SSH |
+| **Shared Storage** | Dell PowerScale F600 100TB NAS | | **Data Classification** | Unclassified research data |
+| **Data Scientists** | 10 concurrent users | | **Training Performance** | Target: 80% GPU utilization average |
+| **User Roles** | 2 roles (data scientist admin) | | **Storage Performance** | 7000 MB/s NVMe read per workstation |
+| **Dataset Size per Project** | 5TB average dataset size | | **Deployment Environments** | Production only |
+| **Model Checkpoint Storage** | 2TB model storage requirements | |  |  |
+| **Network Connectivity** | 10GbE to shared storage | |  |  |
 <!-- END SCOPE_SIZING_TABLE -->
 
 *Note: Changes to these parameters may require scope adjustment and additional investment.*
@@ -102,8 +103,7 @@ This engagement is sized based on the following parameters:
 - **Phase 3: Validation & Training (Weeks 5-6)**
   - GPU benchmark testing and ML framework validation with sample models
   - Dataset migration from cloud storage to PowerScale shared repository
-  - 2-day hands-on training: CUDA optimization, distributed training, and GPU profiling
-  - Production go-live with first real-world model training workloads
+  - 2-day hands-on training and production go-live with real-world workloads
 
 **SPEAKER NOTES:**
 
@@ -191,7 +191,7 @@ This engagement is sized based on the following parameters:
 |---------------|-------------|----------------|------------|--------|--------|--------------|
 | Professional Services | $38,000 | ($4,000) | $34,000 | $0 | $0 | $34,000 |
 | Hardware | $306,000 | ($59,175) | $246,825 | $0 | $0 | $246,825 |
-| Software Licenses | $45,260 | ($10,800) | $34,460 | $45,260 | $45,260 | $125,980 |
+| Software | $45,260 | ($10,800) | $34,460 | $45,260 | $45,260 | $125,980 |
 | Support & Maintenance | $24,850 | $0 | $24,850 | $24,850 | $24,850 | $74,550 |
 | **TOTAL** | **$414,110** | **($73,975)** | **$340,135** | **$70,110** | **$70,110** | **$481,355** |
 <!-- END COST_SUMMARY_TABLE -->
@@ -235,8 +235,7 @@ This engagement is sized based on the following parameters:
 
 - **Decision:** Executive approval for AI workstation deployment by [specific date]
 - **Kickoff:** Submit Dell hardware purchase order within 1 week of approval
-- **Infrastructure Preparation:** Validate data center space, power circuits, and network cabling (Weeks 1-2)
-- **Hardware Delivery:** Dell ships workstations and PowerScale NAS (2-3 week lead time)
+- **Preparation & Delivery:** Validate data center space and Dell ships equipment (Weeks 1-3)
 - **Deployment:** Dell ProDeploy on-site installation and our team configures Ubuntu/CUDA stack (Weeks 3-4)
 - **Training & Go-Live:** 2-day hands-on workshop and first production models trained (Weeks 5-6)
 

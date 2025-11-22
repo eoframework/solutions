@@ -1,23 +1,80 @@
-Phase,Work Package,Task Description,Resource Type,Estimated Hours,Rate,Cost Estimate,Dependencies,Risk Level,Notes
-Discovery,DevOps Requirements Gathering,Conduct stakeholder interviews for DevOps platform requirements,EO Engineer,40,$150,"=TEXT(E2*F2,""$#,##0"")",,Medium,Focus on CI/CD workflows team needs and toolchain
-Discovery,Current DevOps Assessment,Analyze existing development tools processes and infrastructure,EO Engineer,32,$200,"=TEXT(E3*F3,""$#,##0"")",,Medium,Include source control build systems and deployment processes
-Discovery,Platform Technology Assessment,Evaluate DevOps platform technologies and integration requirements,EO Engineer,24,$200,"=TEXT(E4*F4,""$#,##0"")",,Medium,Focus on tool compatibility scalability and security
-Planning,DevOps Platform Design,Design CI/CD pipeline architecture and platform integration,EO Engineer,48,$200,"=TEXT(E5*F5,""$#,##0"")",,Medium,Include automated testing deployment and monitoring
-Development,CI/CD Pipeline Development,Build configure and optimize CI/CD pipelines,EO Engineer,80,$160,"=TEXT(E6*F6,""$#,##0"")",,Medium,Include automated testing quality gates and deployments
-Development,Platform Integration,Integrate development tools source control and deployment systems,EO Engineer,60,$145,"=TEXT(E7*F7,""$#,##0"")",,Medium,Include security scanning artifact management and notifications
-Development,Automation and Orchestration,Build deployment automation infrastructure orchestration and scaling,EO Engineer,48,$140,"=TEXT(E8*F8,""$#,##0"")",,Medium,Include containerization infrastructure as code and monitoring
-Testing,Unit Testing,Develop automated tests for all solution components,EO Engineer,32,$120,"=TEXT(E9*F9,""$#,##0"")",,Medium,Include technology-specific testing frameworks
-Testing,Integration Testing,Test system integrations data flows and external dependencies,EO Engineer,40,$120,"=TEXT(E10*F10,""$#,##0"")",,Medium,Include end-to-end workflow validation
-Testing,Performance Testing,Conduct load performance and scalability testing,EO Engineer,24,$140,"=TEXT(E11*F11,""$#,##0"")",,Medium,Include production-like environment and stress testing
-Testing,Security Testing,Perform security assessments penetration testing and compliance validation,EO Engineer,16,$175,"=TEXT(E12*F12,""$#,##0"")",,Medium,Include vulnerability scanning and compliance checks
-Testing,User Acceptance Testing,Coordinate UAT with business users and stakeholders,EO Engineer,32,$150,"=TEXT(E13*F13,""$#,##0"")",,Medium,Include training feedback collection and sign-off
-Deployment,Production Deployment,Deploy solution to production environment with monitoring,EO Engineer,24,$160,"=TEXT(E14*F14,""$#,##0"")",,Medium,Include blue-green deployment rollback and validation
-Deployment,Go-Live Support,Provide comprehensive support during initial production rollout,EO Engineer,48,$110,"=TEXT(E15*F15,""$#,##0"")",,Medium,Include 24/7 support monitoring and issue resolution
-Training,Administrator Training,Train system administrators and technical support teams,EO Engineer,16,$130,"=TEXT(E16*F16,""$#,##0"")",,Medium,Include hands-on technical training and certification
-Training,End User Training,Train business users on solution functionality and workflows,EO Engineer,24,$120,"=TEXT(E17*F17,""$#,##0"")",,Medium,Include role-based training documentation and support
-Training,Documentation,Create comprehensive technical and user documentation,EO Engineer,32,$110,"=TEXT(E18*F18,""$#,##0"")",,Medium,Include runbooks troubleshooting guides and best practices
-Closeout,Knowledge Transfer,Transfer solution ownership to operations and support teams,EO Engineer,16,$140,"=TEXT(E19*F19,""$#,##0"")",,Medium,Include operational procedures escalation and maintenance
-Closeout,Performance Baseline,Establish performance metrics monitoring baselines and SLAs,EO Engineer,8,$130,"=TEXT(E20*F20,""$#,##0"")",,Medium,Include KPI definition monitoring setup and reporting
-Management,Technical Leadership,Quarterback technical oversight and architecture review,EO Quarterback,"=ROUND(SUM(E2:E20)*0.25,0)",$180,"=TEXT(E21*F21,""$#,##0"")",,Medium,25% of engineering effort
-Management,Project Management,Project coordination and management activities,EO Project Manager,"=ROUND(SUM(E2:E20)*0.20,0)",$150,"=TEXT(E22*F22,""$#,##0"")",,Low,20% of engineering effort
-,,,     TOTAL HOURS,933,   TOTAL COST,"=TEXT(E2*F2+E3*F3+E4*F4+E5*F5+E6*F6+E7*F7+E8*F8+E9*F9+E10*F10+E11*F11+E12*F12+E13*F13+E14*F14+E15*F15+E16*F16+E17*F17+E18*F18+E19*F19+E20*F20+E21*F21+E22*F22,""$#,##0"")",,,Total Actions Enterprise Cicd project cost estimate
+# SCOPE ASSUMPTIONS - BASELINE (MULTIPLIER 1.0),,,,,,,,,,
+#WIDTH: 25,35,33,32,32,39,44
+#ALIGN: left,left,left,left,left,left,left
+Category,Baseline Assumption,Current Scope,Small (1x),Medium (2x),Large (3x),Notes,,,,,
+Solution Scope,Active Developers,100 developers,100 developers,250 developers,500+ developers,GitHub Enterprise user count,,,,,
+Solution Scope,Development Teams,8-10 teams,8-10 teams,15-20 teams,30+ teams,Team onboarding and rollout scope,,,,,
+Integration,Applications with CI/CD,20-50 applications,20-50 apps,60-100 apps,150+ apps,Pipeline development scope,,,,,
+Integration,Builds Per Day,200 builds/day,200 builds,500 builds,1000+ builds,Daily pipeline execution volume,,,,,
+Integration,Migration Source,Jenkins GitLab CI,1 platform,2 platforms,3+ platforms,CI/CD platform migration complexity,,,,,
+Integration,Deployment Targets,AWS (EC2 ECS EKS Lambda),Single cloud,Multi-cloud (AWS Azure),All clouds (AWS Azure GCP),Cloud provider deployment scope,,,,,
+User Base,Self-Hosted Runners,20 runners (c5.2xlarge),20 runners,50 runners,100+ runners,Runner infrastructure scale,,,,,
+User Base,Runner OS,Linux + Windows,2 OS types,3 OS types (+ macOS),Custom OS images,Multi-platform build support,,,,,
+Data Volume,Average Build Duration,20 minutes,20 minutes,45 minutes,90+ minutes,Pipeline execution time and optimization,,,,,
+Data Volume,Reusable Workflows,15 workflow templates,15 templates,30 templates,60+ templates,Centralized workflow library scope,,,,,
+Technical Environment,Technology Stack,.NET Node.js Python Docker,3-4 stacks,5-7 stacks,10+ stacks,Application technology diversity,,,,,
+Technical Environment,Container Registries,GitHub Packages + AWS ECR,2 registries,3-4 registries,5+ registries,Artifact storage integration,,,,,
+Technical Environment,Kubernetes,AWS EKS clusters,1 K8s platform,2 K8s platforms,Multi-cluster multi-cloud,Kubernetes deployment complexity,,,,,
+Security & Compliance,OIDC Integration,AWS Azure keyless auth,1 cloud OIDC,2 clouds OIDC,3+ clouds OIDC,Federated identity integration,,,,,
+Security & Compliance,Security Scanning,CodeQL Dependabot,2 scan types,3 scan types,4+ scan types,Security automation in pipelines,,,,,
+Performance,Deployment Environments,Dev test staging production,4 environments,5 environments,7+ environments,Environment management complexity,,,,,
+# ESTIMATE SETTINGS,,,,,,,,,,
+#WIDTH: 17,22,14,173
+#ALIGN: left,left,center,left
+Phase,Variable Name,Multiplier,Description / Applies To Tasks,,,,,,,
+Discovery,DISCOVERY_MX,1,"All Discovery phase tasks (CI/CD Assessment, Pipeline Inventory, Requirements Analysis, Compliance Review)",,,,,,,
+Planning,PLANNING_MX,1,"All Planning phase tasks (Actions Architecture, Workflow Design, Runner Infrastructure, Integration Planning)",,,,,,,
+Development,DEVELOPMENT_MX,1,"All Development phase tasks (Runner Setup, Pipeline Migration, Workflow Templates, OIDC Integration, Security Integration)",,,,,,,
+Testing,TESTING_MX,1,"All Testing phase tasks (Pipeline Testing, Performance Testing, Security Testing, Integration Testing)",,,,,,,
+Deployment,DEPLOYMENT_MX,1,"All Deployment phase tasks (Production Rollout, Application Migration, Go-Live Support)",,,,,,,
+Training,TRAINING_MX,1,"All Training phase tasks (DevOps Training, Developer Training, Administrator Training, Documentation)",,,,,,,
+Closeout,CLOSEOUT_MX,1,"All Closeout phase tasks (Knowledge Transfer, Performance Baseline)",,,,,,,
+Management,MANAGEMENT_MX,1,Project Management overhead - 10% of actual engineering hours,,,,,,,
+Leadership,LEADERSHIP_MX,1,Quarterback/Technical Leadership overhead - 10% of actual engineering hours,,,,,,,
+# Level of Effort,
+#WIDTH: 16,25,58,18,12,14,12,12,15,25,40
+#ALIGN: left,left,left,left,right,center,right,right,right,left,left
+Phase,Work Package,Task Description,Resource Type,Base Hours,Effort Multiplier,Actual Hours,Rate,Cost Estimate,Dependencies,Notes
+Discovery,CI/CD Platform Assessment,Conduct current state Jenkins/GitLab CI evaluation,EO Engineer,40,='Estimate Settings'!$C$3,=$E33*$F33,$225,"=TEXT($G33*$H33,""$#,##0"")",,Includes pipeline inventory and complexity analysis
+Discovery,Pipeline Inventory,Analyze existing pipelines builds and deployment workflows,EO Engineer,32,='Estimate Settings'!$C$3,=$E34*$F34,$200,"=TEXT($G34*$H34,""$#,##0"")",,Customer must provide pipeline access and documentation
+Discovery,Requirements Analysis,Evaluate GitHub Actions features and migration requirements,EO Engineer,24,='Estimate Settings'!$C$3,=$E35*$F35,$200,"=TEXT($G35*$H35,""$#,##0"")",,Assess workflow automation deployment and integration needs
+Discovery,Compliance Review,Assess CI/CD security compliance and audit requirements,EO Engineer,16,='Estimate Settings'!$C$3,=$E36*$F36,$175,"=TEXT($G36*$H36,""$#,##0"")",,Identifies deployment approval and audit logging needs
+Planning,Actions Architecture Design,Design GitHub Actions CI/CD architecture and workflows,EO Engineer,48,='Estimate Settings'!$C$4,=$E37*$F37,$225,"=TEXT($G37*$H37,""$#,##0"")",CI/CD Platform Assessment,Deliverable: GitHub Actions architecture with runner design
+Planning,Workflow Design,Design reusable workflow templates for .NET Node.js Python Docker,EO Engineer,40,='Estimate Settings'!$C$4,=$E38*$F38,$200,"=TEXT($G38*$H38,""$#,##0"")",Pipeline Inventory,Workflow templates for build test deploy patterns
+Planning,Runner Infrastructure Design,Design self-hosted runner infrastructure in AWS VPC,EO Engineer,32,='Estimate Settings'!$C$4,=$E39*$F39,$225,"=TEXT($G39*$H39,""$#,##0"")",Actions Architecture Design,EC2 auto-scaling groups multi-AZ networking security
+Planning,Integration Planning,Design OIDC AWS integration and artifact registry connections,EO Engineer,24,='Estimate Settings'!$C$4,=$E40*$F40,$200,"=TEXT($G40*$H40,""$#,##0"")",Workflow Design,Keyless authentication and ECR/ACR integration design
+Planning,Project Planning,Develop migration timeline and phased rollout plan,EO Engineer,24,='Estimate Settings'!$C$4,=$E41*$F41,$140,"=TEXT($G41*$H41,""$#,##0"")",Runner Infrastructure Design,Deliverable: Phased migration plan by application priority
+Development,Runner Infrastructure Setup,Deploy 20 self-hosted runners in AWS VPC with auto-scaling,EO Engineer,40,='Estimate Settings'!$C$5,=$E42*$F42,$200,"=TEXT($G42*$H42,""$#,##0"")",Runner Infrastructure Design,EC2 instances ASG VPC security groups monitoring
+Development,Runner Configuration,Configure Linux and Windows runners with required tools,EO Engineer,32,='Estimate Settings'!$C$5,=$E43*$F43,$180,"=TEXT($G43*$H43,""$#,##0"")",Runner Infrastructure Setup,Install build tools Docker Node.js .NET Python Go
+Development,Workflow Template Development,Develop 15 reusable workflow templates for standard patterns,EO Engineer,100,='Estimate Settings'!$C$5,=$E44*$F44,$200,"=TEXT($G44*$H44,""$#,##0"")",Workflow Design,Templates for .NET Node.js Python Docker Terraform builds
+Development,Jenkins Pipeline Migration,Migrate 5-10 pilot pipelines from Jenkins to GitHub Actions,EO Engineer,80,='Estimate Settings'!$C$5,=$E45*$F45,$225,"=TEXT($G45*$H45,""$#,##0"")",Workflow Template Development,Convert Groovy pipelines to YAML workflows
+Development,Application Pipeline Migration,Migrate remaining 40-45 application pipelines to Actions,EO Engineer,120,='Estimate Settings'!$C$5,=$E46*$F46,$200,"=TEXT($G46*$H46,""$#,##0"")",Jenkins Pipeline Migration,Parallel migration with testing and validation
+Development,Environment Configuration,Configure dev test staging production environments,EO Engineer,30,='Estimate Settings'!$C$5,=$E47*$F47,$200,"=TEXT($G47*$H47,""$#,##0"")",Application Pipeline Migration,Environment secrets protection rules approval gates
+Development,OIDC Integration,Configure OIDC for AWS Azure GCP keyless authentication,EO Engineer,40,='Estimate Settings'!$C$5,=$E48*$F48,$225,"=TEXT($G48*$H48,""$#,##0"")",Environment Configuration,Federated identity replacing static credentials
+Development,Security Integration,Integrate CodeQL Dependabot container scanning in workflows,EO Engineer,24,='Estimate Settings'!$C$5,=$E49*$F49,$225,"=TEXT($G49*$H49,""$#,##0"")",OIDC Integration,Security automation in build and deployment pipelines
+Development,Monitoring Setup,Configure Datadog New Relic for pipeline monitoring,EO Engineer,20,='Estimate Settings'!$C$5,=$E50*$F50,$200,"=TEXT($G50*$H50,""$#,##0"")",Security Integration,CI/CD observability and alerting
+Testing,Pipeline Testing,Test workflow templates across application types,EO Engineer,32,='Estimate Settings'!$C$6,=$E51*$F51,$180,"=TEXT($G51*$H51,""$#,##0"")",Workflow Template Development,Validate build test deploy workflows
+Testing,Performance Testing,Test pipeline performance and runner scaling,EO Engineer,24,='Estimate Settings'!$C$6,=$E52*$F52,$175,"=TEXT($G52*$H52,""$#,##0"")",Pipeline Testing,Load testing with realistic build volumes
+Testing,Security Testing,Test OIDC authentication and security scanning,EO Engineer,16,='Estimate Settings'!$C$6,=$E53*$F53,$200,"=TEXT($G53*$H53,""$#,##0"")",Performance Testing,Validate keyless auth and automated security scans
+Testing,Integration Testing,Test artifact publishing and deployment workflows,EO Engineer,24,='Estimate Settings'!$C$6,=$E54*$F54,$175,"=TEXT($G54*$H54,""$#,##0"")",Security Testing,End-to-end deployment testing to AWS Azure GCP
+Deployment,Pilot Rollout,Deploy GitHub Actions for 5-10 pilot applications,EO Engineer,32,='Estimate Settings'!$C$7,=$E55*$F55,$200,"=TEXT($G55*$H55,""$#,##0"")",Integration Testing,Pilot validation with monitoring and feedback
+Deployment,Production Rollout,Migrate all 50 applications to GitHub Actions,EO Engineer,40,='Estimate Settings'!$C$7,=$E56*$F56,$200,"=TEXT($G56*$H56,""$#,##0"")",Pilot Rollout,Phased rollout by team with parallel Jenkins operation
+Deployment,Legacy Decommission,Coordinate Jenkins decommissioning after validation,EO Engineer,16,='Estimate Settings'!$C$7,=$E57*$F57,$175,"=TEXT($G57*$H57,""$#,##0"")",Production Rollout,Graceful shutdown of Jenkins infrastructure
+Deployment,Go-Live Support,Provide support during GitHub Actions adoption,EO Engineer,48,='Estimate Settings'!$C$7,=$E58*$F58,$175,"=TEXT($G58*$H58,""$#,##0"")",Production Rollout,Daily monitoring pipeline support developer assistance
+Training,DevOps Engineer Training,Train platform engineers on GitHub Actions workflow authoring,EO Engineer,32,='Estimate Settings'!$C$8,=$E59*$F59,$175,"=TEXT($G59*$H59,""$#,##0"")",Production Rollout,4 days hands-on training for DevOps team
+Training,Developer Training,Train developers on using GitHub Actions and workflows,EO Engineer,24,='Estimate Settings'!$C$8,=$E60*$F60,$175,"=TEXT($G60*$H60,""$#,##0"")",DevOps Engineer Training,3 days enablement workshops for development teams
+Training,Administrator Training,Train platform admins on runner management,EO Engineer,16,='Estimate Settings'!$C$8,=$E61*$F61,$175,"=TEXT($G61*$H61,""$#,##0"")",Developer Training,Runner infrastructure monitoring troubleshooting
+Training,Documentation,Create workflow templates runbooks and best practices,EO Engineer,24,='Estimate Settings'!$C$8,=$E62*$F62,$150,"=TEXT($G62*$H62,""$#,##0"")",Administrator Training,Deliverable: Operations documentation and workflow guides
+Closeout,Knowledge Transfer,Transfer GitHub Actions ownership to DevOps team,EO Engineer,16,='Estimate Settings'!$C$9,=$E63*$F63,$175,"=TEXT($G63*$H63,""$#,##0"")",Documentation,Comprehensive handover of workflows and infrastructure
+Closeout,Performance Baseline,Establish CI/CD metrics and monitoring baselines,EO Engineer,8,='Estimate Settings'!$C$9,=$E64*$F64,$175,"=TEXT($G64*$H64,""$#,##0"")",Knowledge Transfer,Baseline for deployment frequency pipeline duration success rate
+Management,Technical Leadership,Quarterback technical oversight and architecture review,EO Quarterback,"=ROUND(SUM($G$3:$G$32)*0.10,0)",='Estimate Settings'!$C$11,=$E65*$F65,$225,"=TEXT($G65*$H65,""$#,##0"")",,CI/CD architecture review and technical escalation
+Management,Project Management,Project coordination planning and stakeholder management,EO Project Manager,"=ROUND(SUM($G$3:$G$32)*0.10,0)",='Estimate Settings'!$C$10,=$E66*$F66,$200,"=TEXT($G66*$H66,""$#,##0"")",,Includes weekly status risk management vendor coordination
+,,,,,TOTAL HOURS,"=SUM($G$3:$G$34)",TOTAL COST,"=TEXT(SUMPRODUCT($G$3:$G$34,$H$3:$H$34),""$#,##0"")",,EO Sales Engineer: Update phase multipliers in Estimate Settings based on scope
+
+# Credits - Applied to Total Cost (Year 1 Only)
+#WIDTH: 27,17,100
+#ALIGN: left,right,left
+Credit Type,Credit Amount,Credit Comments
+GitHub Partner Services Credit,$0,No partner credits available for GitHub Actions implementation
+AWS Migration Credit,"($10000)",One-time AWS credit for self-hosted runner infrastructure
+NET PROFESSIONAL SERVICES COST,"=SUMPRODUCT($G$3:$G$34,$H$3:$H$34)-10000",Total professional services cost minus AWS migration credit

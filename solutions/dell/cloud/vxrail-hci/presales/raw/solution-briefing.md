@@ -50,14 +50,6 @@ This engagement is sized based on the following parameters:
 <!-- TABLE_CONFIG: widths=[18, 29, 5, 18, 30] -->
 | Parameter | Scope | | Parameter | Scope |
 |-----------|-------|---|-----------|-------|
-| **Cluster Configuration** | 4-node VxRail E560 cluster | | **Support Level** | Dell ProSupport Plus 24x7 |
-| **Total Compute Capacity** | 256 vCPUs (64 cores per node) | | **Hypervisor Platform** | VMware vSphere 8 Enterprise Plus |
-| **Total Memory** | 3TB RAM (768GB per node) | | **Storage Platform** | VMware vSAN 8 Enterprise |
-| **Total Storage Capacity** | 61TB raw / 40TB usable all-flash | | **Network Infrastructure** | 25GbE redundant fabric |
-| **Virtual Machine Capacity** | 200 VMs (4vCPU 16GB average) | | **Management Platform** | vCenter Server and VxRail Manager |
-| **Failure Tolerance** | FTT=1 (survive 1 node failure) | | **Monitoring Solution** | VMware vRealize Operations |
-| **Deployment Timeline** | 4-6 weeks from order to production | | **Backup Integration** | Veeam Backup & Replication |
-| **Migration Approach** | Phased migration from legacy infrastructure | |  |  |
 <!-- END SCOPE_SIZING_TABLE -->
 
 *Note: Changes to these parameters may require scope adjustment and additional investment.*
@@ -193,9 +185,9 @@ This engagement is sized based on the following parameters:
 | Professional Services | $42,000 | $0 | $42,000 | $0 | $0 | $42,000 |
 | Hardware | $219,640 | $0 | $219,640 | $0 | $0 | $219,640 |
 | Networking | $38,240 | $0 | $38,240 | $0 | $0 | $38,240 |
-| Software Licenses | $109,000 | $0 | $109,000 | $27,000 | $27,000 | $163,000 |
+| Software | $109,000 | $0 | $109,000 | $27,000 | $27,000 | $163,000 |
 | Support & Maintenance | $29,400 | $0 | $29,400 | $29,400 | $29,400 | $88,200 |
-| **TOTAL** | **$438,280** | **$0** | **$438,280** | **$56,400** | **$56,400** | **$551,080** |
+| **TOTAL** | **$876,560** | **($378,000)** | **$498,560** | **($265,200)** | **($265,200)** | **($31,840)** |
 <!-- END COST_SUMMARY_TABLE -->
 
 **Cost Avoidance Analysis:**

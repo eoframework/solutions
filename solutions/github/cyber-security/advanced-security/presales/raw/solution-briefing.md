@@ -50,6 +50,15 @@ This engagement is sized based on the following parameters:
 <!-- TABLE_CONFIG: widths=[18, 29, 5, 18, 30] -->
 | Parameter | Scope | | Parameter | Scope |
 |-----------|-------|---|-----------|-------|
+| **Active Developers** | 100 developers | | **CodeQL Custom Queries** | 10-15 custom queries |
+| **Active Committers (GHAS)** | 80 committers (90-day) | | **GitHub Platform** | Enterprise Cloud |
+| **Total Repositories** | 200 repositories | | **Compliance Frameworks** | SOC 2 PCI-DSS |
+| **Programming Languages** | 5-7 languages | | **Secret Scanning** | Partner + custom patterns |
+| **CI/CD Platform** | GitHub Actions | | **Deployment Environments** | Dev staging production |
+| **SIEM Integration** | Splunk Azure Sentinel | |  |  |
+| **Security Team Size** | 3-5 security engineers | |  |  |
+| **Development Teams** | 8-10 teams | |  |  |
+| **Code Scanning Frequency** | Per pull request | |  |  |
 <!-- END SCOPE_SIZING_TABLE -->
 
 *Note: Changes to these parameters may require scope adjustment and additional investment.*
