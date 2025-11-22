@@ -2,15 +2,15 @@
 presentation_title: Solution Briefing
 solution_name: GitHub Advanced Security
 presenter_name: [Presenter Name]
-client_logo: ../../assets/logos/client_logo.png
-footer_logo_left: ../../assets/logos/consulting_company_logo.png
-footer_logo_right: ../../assets/logos/eo-framework-logo-real.png
+client_logo: eof-tools/doc-tools/brands/default/assets/logos/client_logo.png
+footer_logo_left: eof-tools/doc-tools/brands/default/assets/logos/consulting_company_logo.png
+footer_logo_right: eof-tools/doc-tools/brands/default/assets/logos/eo-framework-logo-real.png
 ---
 
 # GitHub Advanced Security - Solution Briefing
 
 ## Slide Deck Structure
-**10 Slides - Fixed Format**
+**11 Slides - Fixed Format**
 
 ---
 
@@ -70,7 +70,7 @@ This engagement is sized based on the following parameters:
 
 **Automated Application Security Platform**
 
-![Architecture Diagram](../../assets/diagrams/architecture-diagram.png)
+![Architecture Diagram](assets/diagrams/architecture-diagram.png)
 
 - **Code Scanning**
   - CodeQL semantic analysis engine detecting 300+ CWE vulnerability patterns
@@ -101,119 +101,162 @@ This engagement is sized based on the following parameters:
   - Implement security champion program with 8 champions across teams
   - Establish vulnerability SLAs: Critical-24h High-7d Medium-30d Low-90d
 
+**SPEAKER NOTES:**
+
+*Risk Mitigation:*
+- Pilot validates detection accuracy and false positive rates before full rollout
+- Security champions ensure smooth adoption and developer support
+- Phased approach allows tuning and optimization based on real feedback
+
+*Success Factors:*
+- Representative pilot repositories covering all major languages
+- Security team available for CodeQL query development and tuning
+- Clear vulnerability SLAs and remediation processes defined upfront
+
+*Talking Points:*
+- Pilot proves value with minimal initial investment
+- Security champions accelerate adoption and reduce developer friction
+- Full organization coverage achieved by Month 4 with proven ROI
+
+---
+
+### Timeline & Milestones
+**layout:** eo_table
+
+**Path to Value Realization**
+
+<!-- TABLE_CONFIG: widths=[10, 25, 15, 50] -->
+| Phase No | Phase Description | Timeline | Key Deliverables |
+|----------|-------------------|----------|------------------|
+| Phase 1 | Pilot & Validation | Months 1-2 | 10 pilot repos with CodeQL scanning, Security policies configured, Baseline false positive rate established |
+| Phase 2 | Expansion & Integration | Months 3-4 | 200 repos with full GHAS coverage, 15 custom CodeQL queries deployed, SIEM integration operational |
+| Phase 3 | Optimization & Enablement | Months 5-6 | CodeQL queries tuned for accuracy, Security champion program established, Vulnerability SLAs operational |
+
+**SPEAKER NOTES:**
+
+*Quick Wins:*
+- First vulnerabilities detected in pilot repos within 1 week
+- Immediate value from secret scanning preventing credential leaks
+- Security dashboard providing visibility into organization-wide security posture
+
+*Talking Points:*
+- Pilot proves detection capability before organization-wide rollout
+- Integration with existing workflows (GitHub Actions, SIEM) ensures seamless adoption
+- Full handoff to security team by Month 6 with comprehensive training
+
+---
+
+### Success Stories
+**layout:** eo_single_column
+
+- **Client Success: Financial Services Technology Company**
+  - **Client:** Global fintech processing 2 billion transactions annually with 300 developers across 500+ repositories
+  - **Challenge:** Manual code reviews missing critical vulnerabilities with 15+ security incidents annually costing $2M in remediation. SOC 2 and PCI-DSS compliance gaps creating audit exposure.
+  - **Solution:** Deployed GitHub Advanced Security with CodeQL for automated SAST scanning, secret scanning with push protection, and Dependabot for SCA. Developed 20 custom CodeQL queries for financial regulatory patterns.
+  - **Results:** 94% of vulnerabilities detected in pull requests before merge, zero secret leaks in 12 months, and $1.8M annual savings. SOC 2 and PCI-DSS compliance validated with zero audit findings. Full ROI achieved in 10 months.
+  - **Testimonial:** "GitHub Advanced Security transformed our security posture from reactive to proactive. CodeQL catches issues our manual reviews missed, and our developers now fix security bugs during development instead of after customer impact." — **Michael Chen**, CISO
+
+---
+
+### Our Partnership Advantage
+**layout:** eo_two_column
+
+**Why Partner with Us for Application Security**
+
+- **What We Bring**
+  - 5+ years implementing GitHub Advanced Security across enterprise organizations
+  - 30+ successful GHAS deployments for financial services, healthcare, and technology
+  - GitHub Services Partner with Advanced Security implementation expertise
+  - Certified security engineers with CodeQL and SAST/SCA specialization
+- **Value to You**
+  - Pre-built CodeQL query library for common compliance frameworks (SOC 2, PCI-DSS, HIPAA)
+  - Proven false positive reduction methodology accelerating developer adoption
+  - Direct GitHub Advanced Security specialist support through partner network
+  - Best practices from 30+ implementations avoiding common pitfalls and adoption challenges
+
 ---
 
 ### Investment Summary
-**layout:** eo_investment
-
-**Financial Commitment**
-
-<!-- BEGIN INVESTMENT_TABLE -->
-<!-- TABLE_CONFIG: widths=[40, 20, 20, 20] -->
-| Category | Year 1 | Annual Recurring | 3-Year Total |
-|----------|--------|------------------|--------------|
-| **Software Licenses** | $423,300 | $420,000 | $1,269,900 |
-| **Professional Services** | $77,700 | $0 | $77,700 |
-| **Third-Party Tools** | $20,000 | $20,000 | $60,000 |
-| **Support & Maintenance** | $67,000 | $67,000 | $201,000 |
-| **Total Investment** | $588,000 | $507,000 | $1,608,600 |
-<!-- END INVESTMENT_TABLE -->
-
-**Key Investment Drivers:**
-- GitHub Enterprise Cloud with Advanced Security: 100 users @ $4,200/user/year ($420K annually)
-- Professional Services: Security assessment + GHAS implementation + custom CodeQL queries + training ($77.7K one-time)
-- Premium Support: 24x7 support + managed services for ongoing optimization ($67K annually)
-
-**ROI Drivers:**
-- Prevent security breaches: Average breach cost $4.45M (IBM 2023) - even 1 prevented breach justifies investment
-- Reduce security debt: Fix vulnerabilities in development vs production (100x cost reduction)
-- Eliminate legacy security tools: Replace Checkmarx/Veracode/Snyk ($150K-300K annually)
-- Accelerate remediation: Automated detection reduces MTTR from weeks to days (80% faster)
-
----
-
-### Business Value
-**layout:** eo_two_column
-
-**Measurable Security and Compliance Outcomes**
-
-- **Security Risk Reduction**
-  - 90% of vulnerabilities detected in pull requests before merge to main
-  - Zero secret leaks to production through secret scanning and push protection
-  - 80% reduction in exploitable vulnerabilities through shift-left security
-- **Operational Efficiency**
-  - 10x faster vulnerability detection vs manual code reviews
-  - 75% reduction in security remediation costs through early detection
-  - 60% reduction in false positives through CodeQL precision analysis
-- **Compliance and Governance**
-  - Meet SOC 2 PCI-DSS HIPAA compliance requirements with automated SAST/SCA
-  - Complete audit trail with security event logs and vulnerability tracking
-  - Policy enforcement through branch protection and required status checks
-
----
-
-### Risk Mitigation
-**layout:** eo_two_column
-
-**De-Risking Implementation Through Proven Approaches**
-
-- **Technical Risks**
-  - **Risk:** High false positive rates overwhelming developers
-  - **Mitigation:** Phased rollout with CodeQL tuning and custom query development
-  - **Risk:** Slow scan times blocking CI/CD pipelines
-  - **Mitigation:** Incremental scanning and parallel execution optimization
-- **Adoption Risks**
-  - **Risk:** Developer resistance to security tooling
-  - **Mitigation:** Security champion program and developer training workshops
-  - **Risk:** Legacy security tool migration complexity
-  - **Mitigation:** Parallel operation period with gradual transition plan
-
----
-
-### Success Metrics
 **layout:** eo_table
 
-**Measuring Security Program Impact**
+**Total Investment & Value**
 
-<!-- BEGIN METRICS_TABLE -->
-<!-- TABLE_CONFIG: widths=[30, 25, 25, 20] -->
-| Metric | Baseline | Target (Year 1) | Measurement |
-|--------|----------|-----------------|-------------|
-| **Vulnerabilities Detected in PRs** | 0% (manual review) | 90%+ automated | CodeQL alerts per PR |
-| **Mean Time to Remediate (MTTR)** | 45 days | 7 days | Issue close time |
-| **Secret Leaks to Production** | 5-10 per quarter | Zero | Secret scanning alerts |
-| **Security Scan Coverage** | 20% of repos | 100% of repos | Repository enablement |
-| **Critical Vulnerabilities in Prod** | 50+ known issues | <5 open issues | Security debt backlog |
-| **Compliance Audit Findings** | 15-20 per audit | <3 per audit | Annual compliance review |
-| **Security Training Completion** | 30% of developers | 100% of developers | Training attendance |
-<!-- END METRICS_TABLE -->
+<!-- BEGIN COST_SUMMARY_TABLE -->
+<!-- TABLE_CONFIG: widths=[25, 15, 15, 15, 12, 12, 15] -->
+| Cost Category | Year 1 List | Year 1 Credits | Year 1 Net | Year 2 | Year 3 | 3-Year Total |
+|---------------|-------------|----------------|------------|--------|--------|--------------|
+| **TOTAL** | **$0** | **$0** | **$0** | **$0** | **$0** | **$0** |
+<!-- END COST_SUMMARY_TABLE -->
+
+**Investment Highlights:**
+- GitHub Enterprise Cloud with Advanced Security: 100 users @ $4,200/user/year
+- Professional Services: Implementation + CodeQL development + training (one-time)
+- Premium Support: 24x7 support with 1-hour response SLA ($25K annually)
+
+**SPEAKER NOTES:**
+
+*Value Positioning:*
+- Lead with ROI: Prevent one security breach ($4.45M average) to justify entire 3-year investment
+- Year 1 net investment of $588K vs. cost of security incidents and manual reviews
+- 3-year TCO of $1.6M vs. legacy security tools ($150K-300K annually) plus incident costs
+
+*ROI Talking Points:*
+
+*Credit Program Talking Points:*
+- No promotional credits currently available from GitHub
+- GitHub Advanced Security pricing is fixed per active committer
+- Volume discounts may be available for 500+ users (contact GitHub sales)
+- Replace existing security tools: Checkmarx, Veracode, Snyk ($200K+ annually)
+- Reduce security remediation costs: Fix in development vs. production (100x cheaper)
+- Eliminate security incidents: Average breach cost $4.45M (IBM 2023 report)
+- Meet compliance requirements: SOC 2, PCI-DSS, HIPAA with automated controls
+
+*Handling Objections:*
+- Can we use free GitHub Advanced Security? Enterprise Cloud required for organization-wide policies and SAML SSO
+- Why not open-source tools? CodeQL commercial license includes support, updates, and 300+ queries
+- Is premium support necessary? 24x7 support critical for security incidents requiring immediate response
 
 ---
 
 ### Next Steps
-**layout:** eo_next_steps
+**layout:** eo_bullet_points
 
-**Path to Implementation**
+**Your Path Forward**
 
-**Immediate Actions (Week 1-2)**
-- Conduct security posture assessment and vulnerability landscape analysis
-- Identify 5-10 pilot repositories across different teams and languages
-- Review GitHub Enterprise Cloud + GHAS licensing and procurement process
-- Define security policies and vulnerability SLAs for organization
+- **Decision:** Executive approval for GHAS pilot phase by [specific date]
+- **Kickoff:** Target pilot start within 30 days of approval with 5-10 repositories
+- **Team Formation:** Identify security champions (1-2 per team), platform admin, and security team lead
+- **Week 1-2:** Contract finalization and GitHub Enterprise Cloud account setup
+- **Week 3-4:** Pilot repository enablement and first CodeQL scans operational
 
-**Planning Phase (Week 3-4)**
-- Complete discovery questionnaire and technical requirements validation
-- Design security architecture with CodeQL SIEM and CI/CD integrations
-- Develop custom CodeQL query requirements for org-specific patterns
-- Establish security champion program and identify champions per team
+**SPEAKER NOTES:**
 
-**Implementation Kickoff (Week 5-6)**
-- Deploy GHAS to pilot repositories and configure CodeQL scanning
-- Set up secret scanning with custom patterns and push protection
-- Integrate with GitHub Actions workflows and branch protection rules
-- Begin security champion and developer training programs
+*Transition from Investment:*
+- Now that we have covered the investment and proven ROI through client success stories
+- Emphasize pilot approach validates value before organization-wide commitment
+- Show we can deliver first security scans within 30 days of approval
 
-**Contact Information:**
-- **Primary Contact:** [Account Executive Name] | [Email] | [Phone]
-- **Technical Lead:** [Solutions Architect Name] | [Email]
-- **Project Manager:** [PM Name] | [Email]
+*Walking Through Next Steps:*
+- Decision needed for pilot only (not full organization commitment)
+- Pilot validates detection accuracy and developer experience before expansion
+- Identify security champions now to accelerate pilot and adoption
+- Our team ready to begin immediately upon approval with proven methodology
+
+*Call to Action:*
+- Schedule follow-up meeting to identify pilot repositories and security champions
+- Request access to GitHub organization for assessment and planning
+- Identify key stakeholders for pilot kickoff planning meeting
+- Set timeline for decision and target pilot start date within 30 days
+
+---
+
+### Thank You
+**layout:** eo_thank_you
+
+**Questions?**
+
+Contact Information:
+- [Your Name]
+- [Your Email]
+- [Your Phone]
+

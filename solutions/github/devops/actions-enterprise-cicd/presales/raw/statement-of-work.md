@@ -14,271 +14,808 @@ vendor_logo: ../../assets/logos/consulting_company_logo.png
 eoframework_logo: ../../assets/logos/eo-framework-logo-real.png
 ---
 
-# STATEMENT OF WORK (SOW)
+# Executive Summary
 
-**Document Version:** 1.0
-**Date:** [DATE]
-**Prepared by:** [VENDOR_NAME]
-**Client:** [CLIENT_NAME]
-**Project:** {SOLUTION_NAME} Implementation
-**SOW Number:** [SOW_NUMBER]
+This Statement of Work (SOW) defines the scope, deliverables, roles, and terms for implementing GitHub Actions Enterprise CI/CD for [Client Name]. This engagement will deliver modern cloud-native CI/CD capabilities through GitHub's integrated automation platform to accelerate software delivery, reduce deployment failures, and eliminate legacy Jenkins infrastructure complexity.
+
+**Project Duration:** 6 months
 
 ---
 
-## 1. EXECUTIVE SUMMARY
+---
 
-### 1.1 Project Overview
-This Statement of Work (SOW) outlines the scope, deliverables, timeline, and terms for the implementation of {SOLUTION_NAME} for [CLIENT_NAME]. The project will deliver [PRIMARY_BUSINESS_OUTCOME] through [HIGH_LEVEL_APPROACH].
+# Background & Objectives
 
-### 1.2 Business Objectives
-- **Primary Goal:** [PRIMARY_BUSINESS_OBJECTIVE]
-- **Success Metrics:** [QUANTIFIED_SUCCESS_CRITERIA]
-- **Expected ROI:** [ROI_PERCENTAGE] over [TIME_PERIOD]
+## Current State
 
-### 1.3 Project Duration
-**Start Date:** [PROJECT_START_DATE]
-**End Date:** [PROJECT_END_DATE]
-**Total Duration:** [PROJECT_DURATION] weeks
+[Client Name] currently operates a legacy Jenkins CI/CD infrastructure supporting approximately [X] developers across [Y] applications. Key challenges include:
+- **Slow Deployment Velocity:** Weekly deployments vs industry standard daily deployments, limiting business agility and time-to-market
+- **High CI/CD Infrastructure Costs:** $800K+ annually for Jenkins servers, maintenance, plugins, and dedicated administrators
+- **Deployment Failures:** 30%+ deployment failure rate requiring rollbacks and emergency fixes
+- **Jenkins Complexity:** Groovy pipelines and XML configuration requiring specialized Jenkins expertise
+- **Limited Scalability:** Cannot handle concurrent builds during peak periods, creating developer bottlenecks
+- **Manual Processes:** Significant manual intervention required for deployments and troubleshooting
+
+## Business Objectives
+- **Accelerate Delivery:** Ship to production daily instead of weekly through automated GitHub Actions pipelines integrated with source control
+- **Reduce Infrastructure Costs:** Achieve 60% cost reduction vs cloud-only runners through self-hosted runner infrastructure in AWS VPC
+- **Improve Deployment Success:** Increase deployment success rate from 70% to 95%+ through automated testing and quality gates
+- **Simplify CI/CD:** Replace complex Groovy/XML Jenkins configuration with simple YAML workflows developers can maintain
+- **Enable Self-Service:** Empower developers with self-service deployments eliminating wait times and manual approvals
+- **Foundation for Scale:** Build scalable platform supporting 10x growth in build volume without proportional cost increase
+
+## Success Metrics
+- Deploy to production daily with 95%+ success rate
+- Reduce pipeline execution time from 45 minutes to <10 minutes (10x faster)
+- Eliminate $200K annually in Jenkins infrastructure and maintenance costs
+- 100% of applications migrated to GitHub Actions from Jenkins
+- 99.9% uptime for CI/CD platform
+- Developer satisfaction score 8+ out of 10
 
 ---
 
-## 2. SCOPE OF WORK
+---
 
-### 2.1 In-Scope Activities
+# Scope of Work
+
+## In Scope
 The following services and deliverables are included in this SOW:
+- CI/CD platform assessment and GitHub Actions readiness evaluation
+- Jenkins/GitLab CI pipeline analysis and migration planning
+- GitHub Actions workflow design and implementation
+- Self-hosted runner infrastructure in AWS VPC with auto-scaling
+- Reusable workflow template library for standardization
+- OIDC integration for keyless AWS authentication
+- Container registry integration (GitHub Packages, AWS ECR)
+- Kubernetes deployment automation (AWS EKS)
+- Security scanning integration (CodeQL, Dependabot)
+- Testing, validation, and performance optimization
+- Knowledge transfer and documentation
 
-#### 2.1.1 Discovery & Planning Phase
-- [ ] Stakeholder interviews and requirements gathering
-- [ ] Current state assessment and technical evaluation
-- [ ] Solution architecture design and documentation
-- [ ] Project planning and resource allocation
-- [ ] Risk assessment and mitigation planning
+### Scope Parameters
 
-#### 2.1.2 Implementation Phase
-- [ ] Infrastructure provisioning and configuration
-- [ ] Application deployment and customization
-- [ ] System integration and data migration
-- [ ] Security configuration and hardening
-- [ ] Performance optimization and tuning
+This engagement is sized based on the following parameters:
 
-#### 2.1.3 Testing & Validation Phase
-- [ ] Unit and integration testing
-- [ ] Performance and security testing
-- [ ] User acceptance testing coordination
-- [ ] Bug fixes and issue resolution
-- [ ] Go-live readiness assessment
+<!-- BEGIN SCOPE_PARAMETERS_TABLE -->
+<!-- TABLE_CONFIG: widths=[25, 35, 40] -->
+| Category | Parameter | Scope |
+|----------|-----------|-------|
+| Solution Scope | Active Developers | 100 developers |
+| Solution Scope | Development Teams | 8-10 teams |
+| Integration | Applications with CI/CD | 20-50 applications |
+| Integration | Builds Per Day | 200 builds/day |
+| Integration | Migration Source | Jenkins GitLab CI |
+| Integration | Deployment Targets | AWS (EC2 ECS EKS Lambda) |
+| User Base | Self-Hosted Runners | 20 runners (c5.2xlarge) |
+| User Base | Runner OS | Linux + Windows |
+| Data Volume | Average Build Duration | 20 minutes |
+| Data Volume | Reusable Workflows | 15 workflow templates |
+| Technical Environment | Technology Stack | .NET Node.js Python Docker |
+| Technical Environment | Container Registries | GitHub Packages + AWS ECR |
+| Technical Environment | Kubernetes | AWS EKS clusters |
+| Security & Compliance | OIDC Integration | AWS Azure keyless auth |
+| Security & Compliance | Security Scanning | CodeQL Dependabot |
+| Performance | Deployment Environments | Dev test staging production |
+<!-- END SCOPE_PARAMETERS_TABLE -->
 
-#### 2.1.4 Deployment & Support Phase
-- [ ] Production deployment and cutover
-- [ ] Post-deployment monitoring and support
-- [ ] User training and knowledge transfer
-- [ ] Documentation delivery
-- [ ] Project closure and handover
+Table: Engagement Scope Parameters
 
-### 2.2 Out-of-Scope Activities
-The following activities are explicitly excluded from this SOW:
+*Note: Changes to these parameters may require scope adjustment and additional investment.*
 
-- [ ] Hardware procurement and installation
-- [ ] Third-party software licensing
-- [ ] Network infrastructure modifications
-- [ ] Legacy system decommissioning
-- [ ] Ongoing operational support beyond [SUPPORT_PERIOD]
-- [ ] Custom development beyond specified requirements
-- [ ] Data cleansing or transformation of legacy data
-- [ ] Training beyond initial knowledge transfer
 
----
+## Activities
 
-## 3. DELIVERABLES
+### Phase 1 – Discovery & Assessment
+During this initial phase, the Vendor will perform a comprehensive assessment of the Client's current CI/CD workflows, Jenkins/GitLab infrastructure, and GitHub Actions readiness. This includes analyzing existing pipelines, identifying migration complexity, determining infrastructure requirements, and designing the optimal GitHub Actions deployment approach.
 
-### 3.1 Documentation Deliverables
-| Deliverable | Description | Due Date | Format |
-|-------------|-------------|----------|---------|
-| **Requirements Specification** | Detailed functional and non-functional requirements | [DATE] | CSV/Excel |
-| **Solution Architecture Document** | Technical architecture and design specifications | [DATE] | PDF |
-| **Implementation Plan** | Detailed project timeline and resource allocation | [DATE] | MS Project |
-| **Test Plan & Results** | Testing strategy and execution results | [DATE] | PDF |
-| **User Training Materials** | End-user guides and training documentation | [DATE] | PDF/Video |
-| **Operations Runbook** | System administration and maintenance procedures | [DATE] | PDF |
-| **As-Built Documentation** | Final system configuration and architecture | [DATE] | PDF |
+Key activities:
+- CI/CD platform assessment and current state analysis
+- Jenkins/GitLab pipeline inventory and complexity assessment
+- Application technology stack analysis (.NET, Node.js, Python, Docker)
+- Build performance baseline and optimization opportunities
+- Deployment workflow analysis (AWS EC2, ECS, EKS, Lambda)
+- Self-hosted runner infrastructure sizing and AWS VPC design
+- GitHub Actions migration strategy (pilot, phased migration, cutover)
+- Reusable workflow template requirements
+- Implementation planning and resource allocation
 
-### 3.2 System Deliverables
-| Component | Description | Acceptance Criteria |
-|-----------|-------------|-------------------|
-| **Production Environment** | Fully configured and operational system | Passes all acceptance tests |
-| **Integration Interfaces** | Configured data connections and APIs | Successful data flow validation |
-| **Security Configuration** | Implemented security controls and policies | Security audit compliance |
-| **Monitoring Setup** | Operational monitoring and alerting | Functional dashboards and alerts |
-| **Backup & Recovery** | Automated backup and disaster recovery | Successful recovery test |
+This phase concludes with an Assessment Report that outlines the proposed GitHub Actions architecture, migration strategy, infrastructure design, integration approach, risks, and project timeline.
 
-### 3.3 Knowledge Transfer Deliverables
-- Administrator training (2 days, up to 10 participants)
-- End-user training (1 day, up to 25 participants)
-- Technical documentation and procedures
-- Recorded training sessions for future reference
+### Phase 2 – Foundation & Pilot
+In this phase, GitHub Actions infrastructure is deployed and pilot pipelines are migrated to validate performance, developer experience, and migration approach.
 
----
+Key activities:
+- GitHub Enterprise Cloud configuration for CI/CD
+- Self-hosted runner infrastructure deployment in AWS VPC
+- Auto-scaling group configuration for dynamic runner capacity
+- OIDC configuration for keyless AWS authentication
+- Pilot application pipeline migration (5-10 applications)
+- Reusable workflow template development (initial set)
+- Container registry integration (GitHub Packages, AWS ECR)
+- Security scanning integration (CodeQL, Dependabot)
+- Performance testing and optimization
+- Developer feedback collection and process refinement
 
-## 4. PROJECT TIMELINE & MILESTONES
+By the end of this phase, the Client will have validated GitHub Actions capabilities and confirmed migration approach before full rollout.
 
-### 4.1 Project Phases
-| Phase | Duration | Start Date | End Date | Key Milestones |
-|-------|----------|------------|----------|----------------|
-| **Discovery & Planning** | 2 weeks | [DATE] | [DATE] | Requirements approved, Architecture signed-off |
-| **Implementation** | 6 weeks | [DATE] | [DATE] | Infrastructure ready, Application deployed |
-| **Testing & Validation** | 2 weeks | [DATE] | [DATE] | UAT completed, Go-live approved |
-| **Deployment & Support** | 2 weeks | [DATE] | [DATE] | Production live, Training completed |
+### Phase 3 – Scale & Integration
+Implementation will expand GitHub Actions to all applications following the proven pilot approach. Advanced features including deployment strategies, monitoring, and governance will be configured.
 
-### 4.2 Critical Dependencies
-- [ ] Client provides timely access to required systems and environments
-- [ ] Subject matter experts available for requirements gathering and testing
-- [ ] Network connectivity and security approvals obtained
-- [ ] Third-party vendor coordination for integrations
-- [ ] Business stakeholder availability for key decision points
+Key activities:
+- Migration of remaining 40-45 application pipelines from Jenkins
+- Complete reusable workflow template library (15 templates)
+- Advanced deployment strategies (blue-green, canary, feature flags)
+- Kubernetes deployment automation for AWS EKS
+- Monitoring and observability integration (Datadog, New Relic)
+- Notification configuration (Slack, Teams, email, PagerDuty)
+- Environment protection rules and deployment gates
+- Workflow approval workflows for production deployments
+- Cost optimization through caching and artifact management
+- Incremental testing and validation across all applications
 
----
+After each migration wave, the Vendor will coordinate validation and sign-off with the Client before proceeding.
 
-## 5. ROLES & RESPONSIBILITIES
+### Phase 4 – Testing & Validation
+In the Testing and Validation phase, GitHub Actions undergoes thorough functional, performance, and reliability validation to ensure it meets required SLAs and business objectives.
 
-### 5.1 Vendor Responsibilities ([VENDOR_NAME])
-- **Project Manager:** Overall project coordination and delivery management
-- **Solution Architect:** Technical design and architecture oversight
-- **Implementation Team:** System configuration, deployment, and testing
-- **Training Specialist:** User enablement and knowledge transfer
-- **Support Engineer:** Post-deployment support and issue resolution
+Key activities:
+- End-to-end workflow validation for all technology stacks
+- Performance testing and pipeline execution time verification
+- Concurrent build capacity testing (20+ parallel builds)
+- Deployment success rate validation (95%+ target)
+- Security scanning integration validation
+- Kubernetes deployment testing across environments
+- Monitoring and alerting validation
+- Disaster recovery and rollback testing
+- User Acceptance Testing (UAT) coordination with DevOps team
+- Go-live readiness review and Jenkins decommissioning planning
 
-### 5.2 Client Responsibilities ([CLIENT_NAME])
-- **Project Sponsor:** Executive oversight and business decision authority
-- **Technical Lead:** Infrastructure coordination and technical approvals
-- **Business Analyst:** Requirements validation and user acceptance testing
-- **System Administrator:** Ongoing system maintenance and administration
-- **End Users:** Participation in training and user acceptance testing
+Cutover will be coordinated with all relevant stakeholders and executed with documented rollback procedures to Jenkins if needed.
 
-### 5.3 Shared Responsibilities
-- Risk management and issue escalation
-- Change control and scope management
-- Quality assurance and acceptance testing
-- Communication and stakeholder management
+### Phase 5 – Handover & Post-Implementation Support
+Following successful implementation and Jenkins decommissioning, the focus shifts to ensuring operational continuity and knowledge transfer. The Vendor will provide hypercare support and equip the Client's team with documentation, tools, and processes for ongoing platform operations.
 
----
-
-## 6. COMMERCIAL TERMS
-
-### 6.1 Project Investment
-| Category | Description | Amount |
-|----------|-------------|--------|
-| **Professional Services** | Implementation and configuration services | $[SERVICES_AMOUNT] |
-| **Training & Support** | User training and initial support | $[TRAINING_AMOUNT] |
-| **Travel & Expenses** | On-site support and travel costs | $[TRAVEL_AMOUNT] |
-| ****TOTAL PROJECT COST** | **Total investment for complete implementation** | **$[TOTAL_AMOUNT]** |
-
-### 6.2 Payment Terms
-- **25%** upon SOW execution and project kickoff
-- **25%** upon completion of Discovery & Planning phase
-- **25%** upon completion of Implementation phase
-- **25%** upon successful go-live and project acceptance
-
-### 6.3 Additional Services
-Any additional services beyond the scope of this SOW will be quoted separately and require written approval from both parties.
+Activities include:
+- Delivery of as-built documentation (architecture, workflows, runner infrastructure)
+- Operations runbook and SOPs for CI/CD platform management
+- GitHub Actions administration training for platform team
+- Workflow development training for DevOps engineers
+- Self-hosted runner management and troubleshooting training
+- Live or recorded knowledge transfer sessions
+- Performance optimization recommendations
+- 30-day warranty support for issue resolution
+- Optional transition to managed services model for ongoing support
 
 ---
 
-## 7. ACCEPTANCE CRITERIA
+## Out of Scope
 
-### 7.1 Technical Acceptance
-The solution will be considered technically accepted when:
-- [ ] All functional requirements are implemented and tested
-- [ ] System performance meets specified requirements
-- [ ] Security controls are implemented and validated
-- [ ] Integration testing is completed successfully
-- [ ] System passes all acceptance tests
-
-### 7.2 Business Acceptance
-The project will be considered complete when:
-- [ ] Business stakeholders sign-off on user acceptance testing
-- [ ] Training is completed and knowledge transfer validated
-- [ ] Documentation is delivered and approved
-- [ ] System is operational in production environment
-- [ ] Support procedures are established and functional
+These items are not in scope unless added via change control:
+- Jenkins infrastructure decommissioning (client responsibility)
+- Historical build data migration from Jenkins
+- Application code refactoring or modernization
+- Custom development for unsupported deployment targets
+- GitHub Enterprise Server (on-premises) deployment
+- Network infrastructure provisioning beyond runner VPC
+- Third-party tool licensing beyond GitHub
+- End-user training beyond DevOps engineer enablement
+- Ongoing operational support beyond 30-day warranty period
+- GitHub and AWS service costs (billed directly to client)
 
 ---
 
-## 8. ASSUMPTIONS & CONSTRAINTS
+---
 
-### 8.1 Assumptions
-- Client will provide necessary access to systems, data, and personnel
-- Existing infrastructure meets minimum requirements for solution deployment
-- Required third-party systems and APIs are available and functional
-- Business requirements will remain stable throughout project duration
-- Client team members will be available for scheduled activities
+# Deliverables & Timeline
 
-### 8.2 Constraints
-- Project must comply with existing security and compliance requirements
-- Implementation must not disrupt critical business operations
-- All data handling must meet privacy and regulatory requirements
-- Solution must integrate with existing IT infrastructure and policies
-- Budget and timeline constraints as specified in this SOW
+## Deliverables
+
+<!-- TABLE_CONFIG: widths=[8, 40, 12, 20, 20] -->
+| # | Deliverable | Type | Due Date | Acceptance By |
+|---|--------------------------------------|--------------|--------------|-----------------|
+| 1 | CI/CD Platform Assessment | Document | Week 2 | [DevOps Lead] |
+| 2 | GitHub Actions Architecture | Document | Week 3 | [Technical Lead] |
+| 3 | Implementation Plan | Project Plan | Week 3 | [Project Sponsor] |
+| 4 | Self-Hosted Runner Infrastructure | System | Week 6 | [Infrastructure Lead] |
+| 5 | Pilot Pipeline Migration | System | Week 8 | [DevOps Lead] |
+| 6 | Reusable Workflow Templates | System | Week 12 | [DevOps Lead] |
+| 7 | Organization-Wide Migration | System | Week 16 | [DevOps Lead] |
+| 8 | Monitoring & Observability | System | Week 16 | [SRE Lead] |
+| 9 | Test Plan & Results | Document | Week 18 | [QA Lead] |
+| 10 | DevOps Engineer Training | Training | Week 20 | [Development Leads] |
+| 11 | Operations Runbook | Document | Week 22 | [Platform Team] |
+| 12 | As-Built Documentation | Document | Week 24 | [DevOps Lead] |
+| 13 | Knowledge Transfer Sessions | Training | Week 22-24 | [Platform Team] |
 
 ---
 
-## 9. RISK MANAGEMENT
+## Project Milestones
 
-### 9.1 Identified Risks
-| Risk | Impact | Probability | Mitigation Strategy |
-|------|--------|-------------|-------------------|
-| **Resource Availability** | High | Medium | Advance scheduling and backup resources |
-| **Integration Complexity** | Medium | High | Early integration testing and validation |
-| **Scope Creep** | High | Medium | Formal change control process |
-| **Technology Dependencies** | Medium | Low | Contingency planning and alternatives |
-
-### 9.2 Change Management
-Any changes to project scope, timeline, or budget must be documented through formal change requests and approved by both parties before implementation.
-
----
-
-## 10. TERMS & CONDITIONS
-
-### 10.1 Intellectual Property
-- Client retains ownership of all business data and information
-- Vendor retains ownership of proprietary methodologies and tools
-- Solution configuration and customizations become client property upon final payment
-
-### 10.2 Confidentiality
-Both parties agree to maintain strict confidentiality of proprietary information and business data throughout the project and beyond.
-
-### 10.3 Warranty & Support
-- 90-day warranty on all deliverables from go-live date
-- Defect resolution included at no additional cost during warranty period
-- Post-warranty support available under separate maintenance agreement
-
-### 10.4 Limitation of Liability
-Vendor's liability is limited to the total contract value. Neither party shall be liable for indirect, incidental, or consequential damages.
+<!-- TABLE_CONFIG: widths=[20, 50, 30] -->
+| Milestone | Description | Target Date |
+|-----------|-------------|-------------|
+| M1 | Assessment Complete | Week 3 |
+| M2 | Infrastructure Ready | Week 6 |
+| M3 | Pilot Migration Complete | Week 8 |
+| M4 | Organization-Wide Migration Complete | Week 16 |
+| M5 | Testing Complete | Week 20 |
+| Go-Live | Production Launch | Week 22 |
+| Hypercare End | Support Period Complete | Week 26 |
 
 ---
 
-## 11. APPROVAL & SIGNATURES
+---
 
-### Client Approval ([CLIENT_NAME])
+# Roles & Responsibilities
 
-**Name:** [CLIENT_AUTHORIZED_SIGNATORY]
-**Title:** [TITLE]
-**Signature:** ________________________________
-**Date:** ________________
+## RACI Matrix
 
-### Vendor Approval ([VENDOR_NAME])
+<!-- TABLE_CONFIG: widths=[28, 11, 11, 11, 11, 9, 9, 10] -->
+| Task/Role | EO PM | EO Quarterback | EO Sales Eng | EO Eng (DevOps) | Client IT | Client DevOps | SME |
+|-----------|-------|----------------|--------------|-----------------|-----------|---------------|-----|
+| Discovery & Requirements | A | R | R | C | C | R | C |
+| CI/CD Architecture | C | A | R | I | I | C | I |
+| Workflow Development | C | C | R | A | I | C | I |
+| Infrastructure Setup | C | A | C | R | C | I | I |
+| Pipeline Migration | C | R | C | A | C | I | I |
+| Integration Configuration | C | R | C | A | C | C | I |
+| Testing & Validation | R | C | R | R | A | A | I |
+| Deployment Automation | C | R | I | A | I | A | I |
+| Knowledge Transfer | A | R | R | R | C | C | I |
+| Hypercare Support | A | R | R | R | C | I | I |
 
-**Name:** [VENDOR_AUTHORIZED_SIGNATORY]
-**Title:** [TITLE]
-**Signature:** ________________________________
-**Date:** ________________
+**Legend:** R = Responsible | A = Accountable | C = Consulted | I = Informed
+
+## Key Personnel
+
+**Vendor Team:**
+- EO Project Manager: Overall delivery accountability
+- EO Quarterback: Technical design and oversight
+- EO Sales Engineer: Solution architecture and pre-sales support
+- EO Engineer (DevOps): GitHub Actions configuration and workflow development
+
+**Client Team:**
+- DevOps Lead: Primary CI/CD contact and platform ownership
+- Infrastructure Lead: AWS VPC and runner infrastructure
+- SRE Lead: Monitoring integration and reliability
+- Development Team Leads: Pipeline migration coordination
+- Platform Team: Ongoing GitHub Actions administration
 
 ---
 
-**Document Control:**
-**File Name:** SOW_{SOLUTION_NAME}_{CLIENT_NAME}_{DATE}
-**Version:** 1.0
-**Last Modified:** [DATE]
-**Next Review:** [REVIEW_DATE]
+---
+
+# Architecture & Design
+
+## Architecture Overview
+The GitHub Actions Enterprise CI/CD solution is designed as a **cloud-native automation platform** leveraging GitHub's integrated workflow engine with self-hosted runner infrastructure. The architecture provides scalable, cost-optimized CI/CD automation with seamless integration into existing AWS deployment infrastructure.
+
+This architecture is designed for **medium-scope deployment** supporting 100 developers with 20-50 applications and 200 builds per day. The design prioritizes:
+- **Performance:** 10x faster pipeline execution through self-hosted runners and parallelization
+- **Cost Efficiency:** 60% infrastructure cost reduction through self-hosted runners vs cloud-only
+- **Scalability:** Can grow to large-scope deployment by adding runners (no re-architecture)
+
+![Figure 1: Solution Architecture Diagram](assets/diagrams/architecture-diagram.png)
+
+**Figure 1: Solution Architecture Diagram** - High-level overview of the GitHub Actions Enterprise CI/CD solution architecture
+
+## Architecture Type
+The deployment follows a hybrid cloud architecture with GitHub-managed control plane and self-hosted compute infrastructure. This approach enables:
+- Automated workflow execution for every commit and pull request
+- Self-hosted runner infrastructure in AWS VPC for private builds and AWS resource access
+- Reusable workflow templates for standardization across teams
+- Environment protection rules for safe production deployments
+- Integration with existing AWS services (ECS, EKS, ECR, Lambda)
+
+Key architectural components include:
+- Workflow Orchestration Layer (GitHub Actions managed service)
+- Compute Layer (Self-Hosted Runners in AWS VPC)
+- Artifact Storage Layer (GitHub Packages, AWS ECR)
+- Deployment Layer (AWS EC2, ECS, EKS, Lambda)
+- Observability Layer (Datadog, New Relic, CloudWatch)
+
+## Scope Specifications
+
+**GitHub Platform:**
+- GitHub Enterprise Cloud with Actions enabled
+- 100 GitHub Enterprise user licenses
+- 50,000 Actions minutes included per month
+- Organization-wide workflow templates and policies
+
+**Self-Hosted Runner Infrastructure:**
+- 20x c5.2xlarge EC2 instances (8 vCPU, 16GB RAM each)
+- Auto-scaling groups for dynamic capacity (scale 10-30 runners)
+- Linux and Windows runner support
+- Deployed in AWS VPC with private subnet access
+- CloudWatch monitoring and alerting
+
+**Workflow Features:**
+- YAML-based workflow definitions (.github/workflows)
+- Matrix builds for multi-platform testing
+- Reusable workflow templates for .NET, Node.js, Python, Docker
+- Composite actions for common operations
+- Environment protection rules with manual approvals
+- Deployment gates and required reviewers
+
+**Integration:**
+- OIDC authentication for keyless AWS access (no static credentials)
+- Container registry integration (GitHub Packages, AWS ECR)
+- Kubernetes deployment via kubectl and Helm (AWS EKS)
+- Security scanning (CodeQL, Dependabot)
+- Monitoring integration (Datadog, New Relic, CloudWatch)
+- Notification channels (Slack, Teams, Email, PagerDuty)
+
+**Scalability Path:**
+- Medium scope: Current deployment (100 users, 200 builds/day, 20 runners)
+- Large scope: Scale to 500+ users, 1000+ builds/day with 50-100 runners
+- No architectural changes required - only infrastructure scaling
+
+## Application Hosting
+CI/CD workflow orchestration hosted by GitHub's managed platform:
+- GitHub Actions workflow engine (fully managed SaaS)
+- Self-hosted runners in AWS VPC (client-managed infrastructure)
+- Artifact storage in GitHub Packages and AWS ECR
+- Deployment targets in AWS (EC2, ECS, EKS, Lambda)
+
+All workflow definitions version-controlled in GitHub repositories alongside application code.
+
+## Integration Architecture
+The integration architecture connects GitHub Actions with AWS deployment infrastructure:
+- OIDC federation provides keyless authentication to AWS services
+- Workflows deploy to AWS EC2, ECS, EKS, and Lambda without static credentials
+- Container images pushed to GitHub Packages and AWS ECR
+- Kubernetes deployments via kubectl with EKS cluster access
+- CloudWatch logs and metrics for deployment observability
+
+## Observability
+Comprehensive observability ensures CI/CD platform reliability:
+- GitHub Actions workflow logs and execution history
+- Self-hosted runner health monitoring and auto-scaling metrics
+- Build duration trends and performance analytics
+- Deployment success/failure rate dashboards
+- Custom metrics for build queue depth and runner utilization
+
+## Runner Management
+Self-hosted runner infrastructure managed through:
+- Auto-scaling groups maintaining 10-30 active runners based on queue depth
+- Automated runner registration and configuration
+- Health check monitoring and automatic replacement of unhealthy runners
+- Secure runner image management with automated security patching
+- Cost optimization through spot instances (optional)
+
+---
+
+## Technical Implementation Strategy
+
+The implementation approach follows GitHub Actions best practices and proven methodologies for CI/CD migration from Jenkins and GitLab.
+
+## Example Implementation Patterns
+- Phased migration: Pilot with 5-10 applications, then migrate in waves
+- Parallel operation: Run GitHub Actions alongside Jenkins during transition
+- Iterative optimization: Continuous workflow tuning based on performance data
+
+## Tooling Overview
+
+<!-- TABLE_CONFIG: widths=[25, 35, 40] -->
+| Category | Primary Tools | Purpose |
+|-----------------------|------------------------------|-------------------------------|
+| CI/CD Platform | GitHub Actions | Workflow orchestration and automation |
+| Compute Infrastructure | AWS EC2 Auto-Scaling | Self-hosted runner infrastructure |
+| Container Registries | GitHub Packages, AWS ECR | Container image storage |
+| Deployment Targets | AWS EC2, ECS, EKS, Lambda | Application hosting |
+| Security Scanning | CodeQL, Dependabot | Vulnerability detection |
+| Monitoring | Datadog, New Relic, CloudWatch | Observability and alerting |
+| Notifications | Slack, Teams, PagerDuty | Build and deployment alerts |
+
+---
+
+## Data Management
+
+### Data Strategy
+- Workflow definitions stored in .github/workflows in each repository
+- Build artifacts stored in GitHub Packages (retention: 90 days)
+- Container images stored in GitHub Packages and AWS ECR
+- Workflow logs retained per GitHub retention policies
+- Runner infrastructure managed as cattle (immutable, auto-replaced)
+
+### Data Security & Compliance
+- All workflow execution within GitHub's SOC 2 certified infrastructure
+- Self-hosted runners isolated in AWS VPC with private subnets
+- OIDC authentication eliminates static AWS credentials in workflows
+- Secrets encrypted at rest in GitHub Secrets vault
+- Audit logging for all workflow executions and runner activity
+
+---
+
+---
+
+# Security & Compliance
+
+The implementation and target environment will be architected and validated to meet the Client's security, compliance, and governance requirements. Vendor will adhere to industry-standard security frameworks and GitHub Actions best practices.
+
+## Identity & Access Management
+- SAML SSO integration with existing identity provider
+- GitHub organization and team-based access control
+- OIDC federation for keyless AWS authentication (no static credentials)
+- IAM roles for self-hosted runners with least-privilege policies
+- Multi-factor authentication (MFA) required for all GitHub access
+
+## Monitoring & Threat Detection
+- GitHub audit log monitoring for workflow and runner activity
+- CloudWatch monitoring for runner infrastructure health
+- Automated alerts for failed deployments and security scan findings
+- Integration with existing SOC for incident response
+- Workflow approval gates for high-risk deployments
+
+## Compliance & Auditing
+- SOC 2 compliance: GitHub Enterprise Cloud is SOC 2 Type II certified
+- Audit trail: GitHub audit log provides complete workflow execution history
+- Deployment audit logging with approval records
+- Continuous security scanning via CodeQL and Dependabot
+- Change control through pull request workflows
+
+## Encryption & Key Management
+- All data encrypted in transit using TLS 1.2+
+- GitHub Secrets encrypted at rest with AES-256
+- OIDC tokens short-lived (no persistent credentials)
+- Container images signed and verified
+- AWS KMS integration for sensitive data encryption
+
+## Governance
+- Change control: All workflow changes via pull request review
+- Workflow governance: Organization-wide workflow templates and policies
+- Access reviews: Quarterly review of GitHub organization access
+- Deployment gates: Required approvals for production deployments
+- Cost governance: Monitoring and alerting on Actions minutes consumption
+
+---
+
+## Environments & Access
+
+### Environment Strategy
+
+| Environment | Purpose | AWS Account | Access |
+|-------------|---------|-------------|--------|
+| Development | Feature development and testing | dev-account | Development teams |
+| Staging | Integration testing and UAT | staging-account | DevOps, QA teams |
+| Production | Production deployments | prod-account | DevOps, approved deployers |
+
+### Access Policies
+- SAML SSO required for all GitHub access
+- Multi-factor authentication (MFA) enforced for all users
+- Organization Owner Access: Full GitHub administration (limited to 2-3 administrators)
+- Platform Team Access: Runner infrastructure management and workflow administration
+- Developer Access: Repository access per team membership with workflow authoring
+- Deployer Access: Production deployment approval authority
+
+---
+
+---
+
+# Testing & Validation
+
+Comprehensive testing and validation will take place throughout the implementation lifecycle to ensure functionality, performance, reliability, and deployment success of the GitHub Actions CI/CD platform.
+
+## Functional Validation
+- End-to-end workflow execution for all technology stacks (.NET, Node.js, Python, Docker)
+- Container build and push to GitHub Packages and AWS ECR
+- Kubernetes deployment to AWS EKS across environments
+- Lambda deployment validation
+- Security scanning integration (CodeQL, Dependabot)
+- Deployment gate and approval workflow validation
+
+## Performance & Load Testing
+- Pipeline execution time validation (<10 minutes target)
+- Concurrent build capacity testing (20+ parallel builds)
+- Auto-scaling validation for runner infrastructure
+- Build queue monitoring under peak load
+
+## Security Testing
+- OIDC authentication validation for AWS access
+- Secrets management and encryption verification
+- CodeQL and Dependabot integration validation
+- Runner infrastructure security hardening verification
+- Audit logging completeness validation
+
+## Integration Testing
+- AWS deployment validation (EC2, ECS, EKS, Lambda)
+- Container registry integration (GitHub Packages, AWS ECR)
+- Monitoring integration (Datadog, New Relic, CloudWatch)
+- Notification delivery (Slack, Teams, Email, PagerDuty)
+
+## User Acceptance Testing (UAT)
+- Performed in coordination with Client DevOps team and developers
+- Pilot applications and workflows provided by Vendor
+- Performance validation against business-defined acceptance criteria
+- Developer experience assessment
+
+## Go-Live Readiness
+A Go-Live Readiness Checklist will be delivered including:
+- All application pipelines migrated and validated
+- Performance meets targets (10 minutes, 95%+ success rate)
+- Self-hosted runner infrastructure stable and auto-scaling
+- Monitoring and alerting operational
+- Integration testing complete (AWS, registries, monitoring)
+- Issue log closure (all critical/high issues resolved)
+- DevOps team training completion
+- Documentation delivery
+
+---
+
+## Cutover Plan
+
+The cutover from Jenkins to GitHub Actions will be executed using a controlled, phased approach to minimize disruption and ensure deployment continuity.
+
+**Cutover Approach:**
+
+The implementation follows a **parallel operation then gradual migration** strategy where GitHub Actions runs alongside Jenkins during transition:
+
+1. **Pilot Phase (Weeks 1-8):** Deploy GitHub Actions infrastructure and migrate 5-10 pilot applications. Validate performance, developer experience, and deployment automation. Keep Jenkins operational for all other applications.
+
+2. **Migration Waves (Weeks 9-16):** Migrate remaining applications in waves of 5-10 applications per week. Each application runs on GitHub Actions while Jenkins pipeline disabled. Monitor for issues before proceeding to next wave.
+
+3. **Validation Phase (Weeks 17-20):** All applications running on GitHub Actions. Jenkins maintained as backup but not actively used. Performance and reliability monitoring to ensure stability.
+
+4. **Jenkins Decommissioning (Week 21+):** Client decommissions Jenkins infrastructure after 30-day validation period. Vendor provides support during transition.
+
+## Cutover Checklist
+- Pre-cutover validation: Pilot applications meet performance and reliability targets
+- Self-hosted runner infrastructure stable with auto-scaling operational
+- All deployment targets validated (AWS EC2, ECS, EKS, Lambda)
+- Monitoring and alerting configured
+- Stakeholder communication completed
+- Enable GitHub Actions workflows per migration wave schedule
+- Monitor first production deployments for each application
+- Verify deployment success rate and performance
+- Daily monitoring during migration waves
+
+## Rollback Strategy
+- Documented rollback triggers (deployment failures, performance issues, critical bugs)
+- Rollback procedures: Re-enable Jenkins pipeline, disable GitHub Actions workflow
+- Root cause analysis and resolution before retry
+- Communication plan for stakeholders
+- Preserve all workflow logs and deployment history for analysis
+
+---
+
+---
+
+# Handover & Support
+
+## Handover Artifacts
+- As-Built documentation including architecture diagrams and runner infrastructure
+- Reusable workflow template library with documentation
+- Operations runbook with troubleshooting procedures
+- Self-hosted runner management guide
+- Monitoring dashboard configuration
+- Integration documentation for AWS, registries, monitoring
+
+## Knowledge Transfer
+- Live knowledge transfer sessions for platform team and DevOps engineers
+- GitHub Actions administration training (runners, workflows, policies)
+- Workflow development workshop for advanced automation
+- Self-hosted runner management and troubleshooting training
+- Recorded training materials hosted in shared portal
+- Documentation portal with searchable content
+
+## Hypercare Support
+
+Post-implementation support to ensure smooth transition to Client platform operations:
+
+**Duration:** 4 weeks post-migration (30 days)
+
+**Coverage:**
+- Business hours support (8 AM - 6 PM local time)
+- 4-hour response time for critical deployment issues
+- Daily health check calls (first 2 weeks)
+- Weekly status meetings
+
+**Scope:**
+- Issue investigation and resolution
+- Workflow optimization and performance tuning
+- Runner infrastructure troubleshooting
+- Knowledge transfer continuation
+- CI/CD metrics review and optimization
+
+## Managed Services Transition (Optional)
+
+Post-hypercare, Client may transition to ongoing managed services:
+
+**Managed Services Options:**
+- 24/7 platform monitoring and support
+- Proactive workflow optimization and cost management
+- Runner infrastructure management and scaling
+- Monthly performance and cost optimization reviews
+- Continuous improvement and new feature adoption
+
+**Transition Approach:**
+- Evaluation of managed services requirements during hypercare
+- Service Level Agreement (SLA) definition for platform availability
+- Separate managed services contract and pricing
+- Seamless transition from hypercare to managed services
+
+---
+
+## Assumptions
+
+### General Assumptions
+- Client has GitHub Enterprise Cloud subscription or will procure as part of this engagement
+- All application source code is hosted on GitHub (or will be migrated)
+- Development teams use Git and pull request workflows
+- Client DevOps team available for pipeline requirements and validation
+- AWS account access with appropriate permissions for runner infrastructure
+- Jenkins/GitLab pipelines documented or source code available
+- AWS deployment targets accessible from runner VPC
+- Network connectivity between runner VPC and deployment targets established
+- Security and compliance approval processes will not delay critical path
+- Client will handle GitHub and AWS service costs directly
+
+---
+
+## Dependencies
+
+### Project Dependencies
+- GitHub Organization Access: Client provides GitHub organization owner access
+- AWS Account Access: IAM permissions for VPC, EC2, auto-scaling, OIDC provider
+- Jenkins/GitLab Access: Admin access for pipeline export and analysis
+- Application Inventory: Complete list of applications requiring CI/CD migration
+- Technology Stack Documentation: Programming languages, frameworks, build tools
+- DevOps Team Availability: Engineers available for requirements and validation
+- AWS Infrastructure: VPC, subnets, security groups for runner deployment
+- Container Registry Access: Credentials for GitHub Packages and AWS ECR
+- Deployment Credentials: AWS OIDC federation or IAM roles for deployments
+- Go-Live Approval: DevOps and development leadership approval for migration waves
+
+---
+
+---
+
+# Investment Summary
+
+**Medium Scope Implementation:** This pricing reflects an enterprise deployment designed for 100 developers with 20-50 applications and 200 builds per day. For smaller team deployments or larger enterprise-wide rollouts, please request small or large scope pricing.
+
+## Total Investment
+
+<!-- BEGIN COST_SUMMARY_TABLE -->
+<!-- TABLE_CONFIG: widths=[20, 12, 18, 14, 12, 11, 13] -->
+| Cost Category | Year 1 List | AWS/Partner Credits | Year 1 Net | Year 2 | Year 3 | 3-Year Total |
+|---------------|-------------|---------------------|------------|--------|--------|--------------|
+| **TOTAL INVESTMENT** | **$0** | **$0** | **$0** | **$0** | **$0** | **$0** |
+<!-- END COST_SUMMARY_TABLE -->
+
+## Partner Credits
+
+**Year 1 Credits Applied:** $0 (no credits available)
+- GitHub Actions pricing is standard for Enterprise Cloud
+- Self-hosted runners use client AWS account (client pays AWS directly)
+- Professional services discounts may be available based on engagement size
+
+**Investment Comparison:**
+- **Year 1 Net Investment:** $1,136,468 vs. current Jenkins costs $800K+ annually
+- **3-Year Total Cost of Ownership:** $3,244,924
+- **Expected ROI:** 18 month payback based on Jenkins elimination and productivity gains
+
+## Cost Components
+
+**Professional Services** ($80,200 - 268 hours): Labor costs for assessment, migration, infrastructure setup, integration, and knowledge transfer. Breakdown:
+- Discovery & Assessment (50 hours): CI/CD assessment, pipeline analysis, architecture design
+- Implementation (180 hours): Infrastructure setup, pipeline migration, workflow development, integration
+- Training & Support (38 hours): DevOps enablement and 30-day hypercare support
+
+**Software Licenses** ($212,040 Year 1, $210,000 Years 2-3): GitHub Enterprise with Actions:
+- GitHub Enterprise Cloud: 100 users @ $2,100/user/year ($210,000)
+- GitHub Actions: 50,000 minutes included, additional minutes @ $0.008/minute ($2,040 for overages)
+
+**Cloud Infrastructure** ($760,248/year): Self-hosted runner infrastructure in AWS:
+- AWS EC2 runners: 20x c5.2xlarge 24x7 @ $0.34/hour ($59,568/year)
+- AWS EBS storage: 20x 100GB volumes @ $0.10/GB-month ($2,400/year)
+- AWS data transfer: 10TB/month @ $0.09/GB ($10,800/year)
+- AWS VPC and networking: NAT Gateway, VPC endpoints ($7,680/year)
+- Note: Sizing assumes 200 builds/day averaging 20 minutes each
+
+**Third-Party Tools** ($28,980/year): Monitoring and observability:
+- Datadog monitoring (10 hosts): $13,800/year
+- PagerDuty incident management (5 users): $2,460/year
+- SonarQube code quality integration: $8,000/year
+- Artifact storage (GitHub Packages): $4,720/year
+
+**Support & Maintenance** ($55,000/year): Ongoing managed services (optional):
+- Business hours runner infrastructure monitoring: $30,000/year
+- Monthly cost optimization reviews: $15,000/year
+- Workflow optimization and tuning: $10,000/year
+
+---
+
+## Payment Terms
+
+### Pricing Model
+- Fixed price for professional services
+- Milestone-based payments per Deliverables table
+
+### Payment Schedule
+- 25% upon SOW execution and project kickoff
+- 30% upon completion of Foundation & Pilot phase
+- 30% upon completion of Organization-Wide Migration
+- 15% upon successful go-live and project acceptance
+
+---
+
+## Invoicing & Expenses
+
+### Invoicing
+- Milestone-based invoicing per Payment Terms above
+- Net 30 payment terms
+- Invoices submitted upon milestone completion and acceptance
+
+### Expenses
+- GitHub service costs billed directly by GitHub to client ($212,040 Year 1, $210,000 Years 2-3)
+- AWS infrastructure costs billed directly by AWS to client ($760,248/year estimated)
+- Medium scope sizing: 100 users, 200 builds/day, 20 self-hosted runners
+- Costs scale with build volume and runner count
+- Travel and on-site expenses reimbursable at cost with prior approval (remote-first delivery)
+
+---
+
+---
+
+# Terms & Conditions
+
+## General Terms
+
+All services will be delivered in accordance with the executed Master Services Agreement (MSA) or equivalent contractual document between Vendor and Client.
+
+## Scope Changes
+- Changes to application count, infrastructure sizing, or integration scope require formal change requests
+- Change requests may impact project timeline and budget
+
+## Intellectual Property
+- Client retains ownership of all application code and workflow definitions
+- Vendor retains ownership of proprietary CI/CD methodologies and frameworks
+- Reusable workflow templates become Client property upon final payment
+- Runner infrastructure and configurations transfer to Client
+
+## Service Levels
+- Pipeline execution time: <10 minutes for typical applications
+- Deployment success rate: 95%+ for production deployments
+- Platform uptime: 99.9% for runner infrastructure
+- 30-day warranty on all deliverables from go-live date
+- Post-warranty support available under separate managed services agreement
+
+## Liability
+- Performance guarantees apply to representative application workloads
+- Actual performance may vary based on application complexity and size
+- Ongoing optimization recommended as application requirements evolve
+- Liability caps as agreed in MSA
+
+## Confidentiality
+- Both parties agree to maintain strict confidentiality of application code, deployment configurations, and proprietary automation techniques
+- All exchanged artifacts under NDA protection
+
+## Termination
+- Mutually terminable per MSA terms, subject to payment for completed work
+
+## Governing Law
+- Agreement governed under the laws of [State/Region]
+
+---
+
+---
+
+# Sign-Off
+
+By signing below, both parties agree to the scope, approach, and terms outlined in this Statement of Work.
+
+**Client Authorized Signatory:**
+Name: __________________________
+Title: __________________________
+Signature: ______________________
+Date: __________________________
+
+**Service Provider Authorized Signatory:**
+Name: __________________________
+Title: __________________________
+Signature: ______________________
+Date: __________________________
 
 ---
 

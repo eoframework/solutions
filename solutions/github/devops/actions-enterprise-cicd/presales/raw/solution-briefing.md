@@ -2,15 +2,15 @@
 presentation_title: Solution Briefing
 solution_name: GitHub Actions Enterprise CI/CD
 presenter_name: [Presenter Name]
-client_logo: ../../assets/logos/client_logo.png
-footer_logo_left: ../../assets/logos/consulting_company_logo.png
-footer_logo_right: ../../assets/logos/eo-framework-logo-real.png
+client_logo: eof-tools/doc-tools/brands/default/assets/logos/client_logo.png
+footer_logo_left: eof-tools/doc-tools/brands/default/assets/logos/consulting_company_logo.png
+footer_logo_right: eof-tools/doc-tools/brands/default/assets/logos/eo-framework-logo-real.png
 ---
 
 # GitHub Actions Enterprise CI/CD - Solution Briefing
 
 ## Slide Deck Structure
-**10 Slides - Fixed Format**
+**11 Slides - Fixed Format**
 
 ---
 
@@ -70,7 +70,7 @@ This engagement is sized based on the following parameters:
 
 **Cloud-Native CI/CD Platform**
 
-![Architecture Diagram](../../assets/diagrams/architecture-diagram.png)
+![Architecture Diagram](assets/diagrams/architecture-diagram.png)
 
 - **GitHub Actions Platform**
   - YAML-based workflow definitions in .github/workflows directory
@@ -101,122 +101,163 @@ This engagement is sized based on the following parameters:
   - Configure monitoring and observability with Datadog New Relic
   - Establish CI/CD governance with workflow approvals and audit logging
 
+**SPEAKER NOTES:**
+
+*Risk Mitigation:*
+- Pilot validates Jenkins migration complexity and performance before full rollout
+- Parallel operation of Jenkins and GitHub Actions during transition period
+- Phased team migration allows learning and optimization from early adopters
+
+*Success Factors:*
+- Representative pilot applications covering all major technology stacks
+- Self-hosted runner infrastructure proven in pilot before organization-wide deployment
+- DevOps team available for workflow template development and developer support
+
+*Talking Points:*
+- Pilot proves migration viability with minimal disruption to production deployments
+- Reusable workflow templates accelerate adoption and ensure consistency
+- Full organization coverage achieved by Month 4 with proven ROI from pilot
+
+---
+
+### Timeline & Milestones
+**layout:** eo_table
+
+**Path to Value Realization**
+
+<!-- TABLE_CONFIG: widths=[10, 25, 15, 50] -->
+| Phase No | Phase Description | Timeline | Key Deliverables |
+|----------|-------------------|----------|------------------|
+| Phase 1 | Foundation & Pilot | Months 1-2 | 10 pilot pipelines migrated to GitHub Actions, Self-hosted runner infrastructure deployed in AWS VPC, OIDC authentication configured for keyless AWS access |
+| Phase 2 | Scale & Integration | Months 3-4 | 50 total application pipelines migrated, 15 reusable workflow templates deployed, Security scanning (CodeQL Dependabot) integrated in all workflows |
+| Phase 3 | Optimization & Governance | Months 5-6 | Advanced deployment strategies (blue-green canary) implemented, Monitoring and observability configured, CI/CD governance and audit logging operational |
+
+**SPEAKER NOTES:**
+
+*Quick Wins:*
+- First GitHub Actions pipelines operational within 2 weeks of kickoff
+- Immediate infrastructure cost savings from self-hosted runners vs cloud-only
+- Developer productivity gains visible from simplified YAML workflows vs Groovy
+
+*Talking Points:*
+- Pilot proves migration feasibility and performance before organization commitment
+- Integration with existing tools (AWS EKS Docker registries monitoring) ensures continuity
+- Full handoff to platform team by Month 6 with comprehensive documentation and training
+
+---
+
+### Success Stories
+**layout:** eo_single_column
+
+- **Client Success: Enterprise SaaS Technology Company**
+  - **Client:** Global SaaS provider with 150 developers across 80+ microservices deploying to AWS EKS
+  - **Challenge:** Legacy Jenkins infrastructure costing $800K annually with slow 45-minute build times, frequent deployment failures (30% failure rate), and complex Groovy pipeline maintenance requiring dedicated Jenkins administrators.
+  - **Solution:** Deployed GitHub Actions Enterprise CI/CD with 25 self-hosted runners in AWS VPC, developed 20 reusable workflow templates for Node.js Python .NET, and implemented OIDC for keyless AWS authentication. Integrated CodeQL security scanning and Dependabot.
+  - **Results:** Reduced pipeline execution time from 45 minutes to 8 minutes (5.6x faster), increased deployment frequency from weekly to daily, deployment success rate improved to 96%, and infrastructure costs reduced by 65% ($520K annual savings). Full ROI achieved in 14 months.
+  - **Testimonial:** "GitHub Actions transformed our CI/CD from a bottleneck to an enabler. Developers ship features daily instead of waiting for weekly release windows, and our infrastructure costs dropped dramatically with self-hosted runners." — **Sarah Martinez**, VP of Engineering
+
+---
+
+### Our Partnership Advantage
+**layout:** eo_two_column
+
+**Why Partner with Us for CI/CD Transformation**
+
+- **What We Bring**
+  - 7+ years implementing GitHub Actions across enterprise organizations
+  - 40+ successful CI/CD migrations from Jenkins GitLab CircleCI Azure DevOps
+  - GitHub Services Partner with GitHub Actions implementation expertise
+  - Certified DevOps engineers with GitHub Actions and cloud platform specialization
+- **Value to You**
+  - Pre-built workflow template library for .NET Node.js Python Docker Go
+  - Proven Jenkins-to-Actions migration methodology reducing risk and timeline
+  - Direct GitHub Enterprise specialist support through partner network
+  - Best practices from 40+ implementations avoiding common pitfalls and adoption challenges
+
 ---
 
 ### Investment Summary
-**layout:** eo_investment
-
-**Financial Commitment**
-
-<!-- BEGIN INVESTMENT_TABLE -->
-<!-- TABLE_CONFIG: widths=[40, 20, 20, 20] -->
-| Category | Year 1 | Annual Recurring | 3-Year Total |
-|----------|--------|------------------|--------------|
-| **Software Licenses** | $212,040 | $210,000 | $636,120 |
-| **Cloud Infrastructure** | $760,248 | $760,248 | $2,270,744 |
-| **Professional Services** | $80,200 | $0 | $80,200 |
-| **Third-Party Tools** | $28,980 | $28,980 | $86,940 |
-| **Support & Maintenance** | $55,000 | $55,000 | $165,000 |
-| **Total Investment** | $1,136,468 | $1,054,228 | $3,238,924 |
-<!-- END INVESTMENT_TABLE -->
-
-**Key Investment Drivers:**
-- GitHub Enterprise Cloud: 100 users @ $2,100/user/year ($210K annually) with 50K Actions minutes included
-- Self-Hosted Runners: 20x c5.2xlarge EC2 instances 24x7 ($604K annually) for private builds in VPC
-- Professional Services: Jenkins migration + workflow templates + OIDC integration + training ($80K one-time)
-- Managed Services: Runner infrastructure management and optimization ($30K annually)
-
-**ROI Drivers:**
-- Eliminate Jenkins infrastructure and maintenance: $200K annually in servers plugins and admin overhead
-- Reduce deployment failures by 80%: $150K annually in incident remediation and rollback costs
-- Accelerate developer productivity: 2 hours per week per developer = $520K annually at $100/hour
-- Self-hosted runners vs cloud-only: 60% cost savings for compute-intensive builds
-
----
-
-### Business Value
-**layout:** eo_two_column
-
-**Measurable DevOps Transformation Outcomes**
-
-- **Deployment Velocity**
-  - Deploy to production daily vs weekly through automated pipelines
-  - Reduce pipeline execution time from 45 minutes to <10 minutes (10x faster)
-  - Increase deployment frequency by 300% with confidence and quality
-- **Cost Optimization**
-  - 60% infrastructure cost reduction vs cloud-only runners for heavy workloads
-  - Eliminate Jenkins licensing and maintenance overhead ($200K annually)
-  - Reduce deployment failure costs by 80% through automated testing
-- **Developer Productivity**
-  - Eliminate Jenkins complexity - YAML workflows vs Groovy pipelines
-  - Reusable workflow templates reduce pipeline authoring time by 70%
-  - Self-service deployments reduce wait time from hours to minutes
-
----
-
-### Risk Mitigation
-**layout:** eo_two_column
-
-**De-Risking Implementation Through Proven Approaches**
-
-- **Technical Risks**
-  - **Risk:** Complex Jenkins pipelines difficult to migrate
-  - **Mitigation:** Phased migration starting with simple pipelines - parallel operation during transition
-  - **Risk:** Self-hosted runner infrastructure availability
-  - **Mitigation:** Auto-scaling groups multi-AZ deployment health monitoring
-- **Adoption Risks**
-  - **Risk:** Developer learning curve for GitHub Actions syntax
-  - **Mitigation:** Reusable workflow templates hands-on training documentation
-  - **Risk:** Deployment process disruption during migration
-  - **Mitigation:** Parallel Jenkins and Actions operation with gradual cutover per team
-
----
-
-### Success Metrics
 **layout:** eo_table
 
-**Measuring CI/CD Program Impact**
+**Total Investment & Value**
 
-<!-- BEGIN METRICS_TABLE -->
-<!-- TABLE_CONFIG: widths=[30, 25, 25, 20] -->
-| Metric | Baseline | Target (Year 1) | Measurement |
-|--------|----------|-----------------|-------------|
-| **Deployment Frequency** | Weekly | Daily | Deployments per day |
-| **Pipeline Execution Time** | 45 minutes | <10 minutes | Average duration |
-| **Deployment Success Rate** | 70% | 95%+ | Successful deployments |
-| **Mean Time to Recovery (MTTR)** | 4 hours | <30 minutes | Rollback time |
-| **CI/CD Infrastructure Cost** | $1M annually | $400K annually | 60% reduction |
-| **Pipeline Authoring Time** | 8 hours per pipeline | <2 hours per pipeline | 75% reduction |
-| **Developer Wait Time** | 2-4 hours | <15 minutes | Queue + execution |
-| **Security Scan Coverage** | 30% of builds | 100% of builds | Automated scanning |
-<!-- END METRICS_TABLE -->
+<!-- BEGIN COST_SUMMARY_TABLE -->
+<!-- TABLE_CONFIG: widths=[25, 15, 15, 15, 12, 12, 15] -->
+| Cost Category | Year 1 List | Year 1 Credits | Year 1 Net | Year 2 | Year 3 | 3-Year Total |
+|---------------|-------------|----------------|------------|--------|--------|--------------|
+| **TOTAL** | **$0** | **$0** | **$0** | **$0** | **$0** | **$0** |
+<!-- END COST_SUMMARY_TABLE -->
+
+**Investment Highlights:**
+- GitHub Enterprise Cloud: 100 users @ $2,100/user/year with 50K Actions minutes included
+- Self-Hosted Runners: 20x c5.2xlarge EC2 instances 24x7 ($604K annually) in AWS VPC
+- Professional Services: Jenkins migration + workflow templates + OIDC setup + training (one-time)
+- Managed Services: Runner infrastructure management and optimization ($30K annually)
+
+**SPEAKER NOTES:**
+
+*Value Positioning:*
+- Lead with cost savings: Eliminate $800K Jenkins infrastructure and reduce deployment failures
+- Year 1 net investment of $1.14M vs. current CI/CD costs and productivity losses
+- 3-year TCO of $3.24M vs. legacy Jenkins infrastructure ($2.4M) plus incident costs ($600K+)
+
+*ROI Talking Points:*
+- Replace Jenkins infrastructure: Eliminate $200K in servers plugins and admin overhead annually
+- Reduce deployment failures by 80%: Save $150K annually in incident remediation costs
+- Accelerate developer productivity: 2 hours per week per developer = $520K annually at $100/hour
+- Self-hosted runners: 60% cost savings vs cloud-only runners for compute-intensive builds
+
+*Credit Program Talking Points:*
+- No promotional credits currently available from GitHub
+- GitHub Actions pricing is standard for Enterprise Cloud
+- Self-hosted runners use client AWS account (cost optimization opportunity)
+
+*Handling Objections:*
+- Why not use GitHub-hosted runners only? Self-hosted runners in VPC required for compliance and cost efficiency
+- Why not keep Jenkins? Technical debt and maintenance costs exceed GitHub Actions investment
+- Is managed services necessary? Platform team can manage runners or outsource for $30K vs $150K admin salary
 
 ---
 
 ### Next Steps
-**layout:** eo_next_steps
+**layout:** eo_bullet_points
 
-**Path to Implementation**
+**Your Path Forward**
 
-**Immediate Actions (Week 1-2)**
-- Conduct CI/CD platform assessment and Jenkins/GitLab CI pipeline inventory
-- Identify 5-10 pilot applications for initial migration validation
-- Review GitHub Enterprise Cloud licensing and procurement process
-- Define deployment governance and approval requirements per environment
+- **Decision:** Executive approval for GitHub Actions pilot phase by [specific date]
+- **Kickoff:** Target pilot start within 30 days of approval with 5-10 applications
+- **Team Formation:** Identify DevOps engineers, platform admin, and pilot application teams
+- **Week 1-2:** Contract finalization and GitHub Enterprise Cloud account setup
+- **Week 3-4:** Self-hosted runner infrastructure deployment and first pipeline migrations
 
-**Planning Phase (Week 3-4)**
-- Complete discovery questionnaire and technical requirements validation
-- Design self-hosted runner architecture in AWS VPC with auto-scaling
-- Develop workflow template library for .NET Node.js Python Docker
-- Plan OIDC integration for AWS Azure GCP keyless authentication
+**SPEAKER NOTES:**
 
-**Implementation Kickoff (Week 5-6)**
-- Deploy self-hosted runner infrastructure in AWS with monitoring
-- Migrate 5-10 pilot pipelines to GitHub Actions workflows
-- Configure environment protection rules and deployment gates
-- Begin DevOps engineer and developer training programs
+*Transition from Investment:*
+- Now that we have covered the investment and proven ROI through client success stories
+- Emphasize pilot approach validates Jenkins migration complexity before full commitment
+- Show we can deliver first GitHub Actions pipelines within 30 days of approval
 
-**Contact Information:**
-- **Primary Contact:** [Account Executive Name] | [Email] | [Phone]
-- **Technical Lead:** [Solutions Architect Name] | [Email]
-- **Project Manager:** [PM Name] | [Email]
+*Walking Through Next Steps:*
+- Decision needed for pilot only (not full organization migration commitment)
+- Pilot validates migration effort and developer experience before expansion
+- Identify pilot applications now covering different technology stacks and complexity
+- Our team ready to begin immediately upon approval with proven migration methodology
+
+*Call to Action:*
+- Schedule follow-up meeting to identify pilot applications and DevOps team
+- Request access to GitHub organization and Jenkins for migration assessment
+- Identify key stakeholders for pilot kickoff planning meeting
+- Set timeline for decision and target pilot start date within 30 days
+
+---
+
+### Thank You
+**layout:** eo_thank_you
+
+**Questions?**
+
+Contact Information:
+- [Your Name]
+- [Your Email]
+- [Your Phone]
+
