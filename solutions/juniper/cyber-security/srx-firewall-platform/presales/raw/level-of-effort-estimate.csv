@@ -1,33 +1,78 @@
-Phase,Work Package,Task Description,Resource Type,Estimated Hours,Rate,Cost Estimate,Dependencies,Risk Level,Notes
-Discovery,Security Architecture Assessment,Analyze current firewall infrastructure security policies and network topology,EO Engineer,40,$225,"=TEXT(E2*F2,""$#,##0"")",,Medium,Document existing ASA/firewall rules and security zones
-Discovery,Policy Migration Analysis,Review and analyze 500+ firewall rules for migration and optimization,EO Engineer,48,$225,"=TEXT(E3*F3,""$#,##0"")",,High,Identify redundant rules and consolidation opportunities
-Discovery,Network Topology Documentation,Document datacenter and branch network architecture with traffic flows,EO Engineer,24,$200,"=TEXT(E4*F4,""$#,##0"")",,Medium,Include all security zones DMZ and cloud connectivity
-Discovery,Requirements Gathering,Conduct stakeholder interviews for security and compliance requirements,EO Engineer,16,$200,"=TEXT(E5*F5,""$#,##0"")",,Medium,PCI DSS SOC 2 compliance and audit requirements
-Planning,SRX Security Architecture Design,Design security zones segmentation and SRX HA architecture,EO Engineer,56,$225,"=TEXT(E6*F6,""$#,##0"")",,High,Multi-zone design with DMZ trust untrust and management
-Planning,Policy Migration Strategy,Develop policy migration approach with optimization and testing plan,EO Engineer,40,$225,"=TEXT(E7*F7,""$#,##0"")",,High,Lab validation before production with rollback procedures
-Planning,SD-WAN Design,Design branch SD-WAN architecture with application-based routing,EO Engineer,32,$200,"=TEXT(E8*F8,""$#,##0"")",,Medium,10 branch sites with SRX300 and centralized management
-Planning,Implementation Planning,Develop detailed cutover strategy and timeline with risk mitigation,EO Engineer,24,$150,"=TEXT(E9*F9,""$#,##0"")",,Medium,Zero-downtime parallel deployment approach
-Development,Lab Environment Setup,Build lab validation environment for SRX testing and policy validation,EO Engineer,32,$180,"=TEXT(E10*F10,""$#,##0"")",,Medium,Replicate production network zones for accurate testing
-Development,Datacenter SRX4600 Deployment,Deploy and configure SRX4600 HA pair with base networking and routing,EO Engineer,64,$200,"=TEXT(E11*F11,""$#,##0"")",,High,Active/passive HA with sub-second failover configuration
-Development,Security Policy Implementation,Migrate and implement 500+ firewall rules with optimization,EO Engineer,72,$200,"=TEXT(E12*F12,""$#,##0"")",,High,Zone-based policies with application control and logging
-Development,Advanced Security Services,Configure IPS ATP Cloud SecIntel and SSL inspection,EO Engineer,48,$225,"=TEXT(E13*F13,""$#,##0"")",,High,40 Gbps IPS 20 Gbps SSL inspection with threat feeds
-Development,Branch SRX300 Deployment,Deploy and configure 10 branch SRX300 firewalls with SD-WAN,EO Engineer,80,$200,"=TEXT(E14*F14,""$#,##0"")",,Medium,Standardized security policies across all locations
-Development,VPN Configuration,Configure 30 site-to-site IPsec VPN and 100 SSL VPN for remote users,EO Engineer,40,$200,"=TEXT(E15*F15,""$#,##0"")",,Medium,AWS Azure GCP cloud VPN and branch-to-datacenter
-Development,Security Director Setup,Deploy and configure Junos Space Security Director for centralized management,EO Engineer,32,$200,"=TEXT(E16*F16,""$#,##0"")",,Medium,Centralized policy management for 20+ SRX devices
-Development,SIEM Integration,Integrate SRX with Splunk SIEM for security event correlation and alerting,EO Engineer,24,$200,"=TEXT(E17*F17,""$#,##0"")",,Medium,Syslog forwarding threat logs and NetFlow integration
-Testing,Lab Validation Testing,Test policy migration HA failover and performance in lab environment,EO Engineer,40,$200,"=TEXT(E18*F18,""$#,##0"")",,High,Validate all policies before production deployment
-Testing,Performance Testing,Conduct throughput testing with 80 Gbps firewall and 40 Gbps IPS,EO Engineer,24,$200,"=TEXT(E19*F19,""$#,##0"")",,High,Validate performance with all security services enabled
-Testing,HA Failover Testing,Test active/passive failover and traffic recovery,EO Engineer,16,$200,"=TEXT(E20*F20,""$#,##0"")",,High,Sub-second failover with zero packet loss validation
-Testing,Security Validation,Validate IPS ATP and SSL inspection threat detection,EO Engineer,24,$225,"=TEXT(E21*F21,""$#,##0"")",,High,Test malware detection C2 blocking and threat prevention
-Testing,User Acceptance Testing,Coordinate UAT with network and security teams for production readiness,EO Engineer,32,$150,"=TEXT(E22*F22,""$#,##0"")",,Medium,Validate all security zones VPN and SD-WAN functionality
-Deployment,Datacenter Production Cutover,Migrate datacenter traffic zone-by-zone to SRX4600 with rollback capability,EO Engineer,48,$225,"=TEXT(E23*F23,""$#,##0"")",,High,Parallel deployment during maintenance windows
-Deployment,Branch Production Deployment,Deploy and cutover production traffic at 10 branch locations,EO Engineer,40,$200,"=TEXT(E24*F24,""$#,##0"")",,Medium,Pilot site first then standardized rollout
-Deployment,Go-Live Support,Provide 24x7 support during production cutover and stabilization,EO Engineer,80,$200,"=TEXT(E25*F25,""$#,##0"")",,High,First 2 weeks post-deployment with on-call support
-Training,SRX Administrator Training,Train firewall administrators on SRX management Junos OS and troubleshooting,EO Engineer,16,$200,"=TEXT(E26*F26,""$#,##0"")",,Medium,2-day hands-on training for up to 8 administrators
-Training,Security Operations Training,Train SOC team on policy management threat investigation and Security Director,EO Engineer,8,$200,"=TEXT(E27*F27,""$#,##0"")",,Medium,1-day training for security operations team
-Training,Documentation Development,Create as-built diagrams runbooks and operational procedures,EO Engineer,40,$150,"=TEXT(E28*F28,""$#,##0"")",,Medium,Architecture diagrams configuration guides and troubleshooting
-Closeout,Knowledge Transfer,Transfer solution ownership to client operations and security teams,EO Engineer,16,$200,"=TEXT(E29*F29,""$#,##0"")",,Medium,Operational procedures escalation paths and maintenance
-Closeout,Performance Baseline,Establish performance baselines security metrics and monitoring SLAs,EO Engineer,8,$150,"=TEXT(E30*F30,""$#,##0"")",,Medium,Throughput metrics security events and uptime monitoring
-Management,Technical Leadership,Security architecture oversight and technical review throughout project,EO Quarterback,"=ROUND(SUM(E2:E30)*0.25,0)",$225,"=TEXT(E31*F31,""$#,##0"")",,Medium,25% of engineering effort for architecture guidance
-Management,Project Management,Project coordination stakeholder management and timeline oversight,EO Project Manager,"=ROUND(SUM(E2:E30)*0.20,0)",$150,"=TEXT(E32*F32,""$#,##0"")",,Low,20% of engineering effort for project delivery
-,,,     TOTAL HOURS,1336,   TOTAL COST,"=TEXT(E2*F2+E3*F3+E4*F4+E5*F5+E6*F6+E7*F7+E8*F8+E9*F9+E10*F10+E11*F11+E12*F12+E13*F13+E14*F14+E15*F15+E16*F16+E17*F17+E18*F18+E19*F19+E20*F20+E21*F21+E22*F22+E23*F23+E24*F24+E25*F25+E26*F26+E27*F27+E28*F28+E29*F29+E30*F30+E31*F31+E32*F32,""$#,##0"")",,,Total Juniper SRX Firewall Platform professional services
+# SCOPE ASSUMPTIONS - BASELINE (MULTIPLIER 1.0),,,,,,,,,,
+#WIDTH: 25,35,33,32,32,39,44
+#ALIGN: left,left,left,left,left,left,left
+Category,Baseline Assumption,Current Scope,Small (1x),Medium (2x),Large (3x),Notes,,,,,
+Solution Scope,Datacenter Firewalls,2 SRX4600 (HA pair),2 SRX4600 (HA pair),4 SRX5400 (2 HA pairs),8+ SRX5800 (4 HA pairs),Enterprise datacenter firewall deployment,,,,,
+Solution Scope,Branch Firewalls,10 SRX300 branch sites,10 SRX300 branch sites,25 SRX345 branch sites,50+ SRX380 branch sites,Branch office firewall and SD-WAN deployment,,,,,
+Integration,Firewall Rules to Migrate,500 firewall rules,500 firewall rules,1500 firewall rules,3000+ firewall rules,Policy migration from legacy ASA or firewall platform,,,,,
+Integration,External System Integrations,2 integrations (SIEM NAC),2 integrations (SIEM NAC),4-6 systems,8+ systems or complex protocols,SIEM NAC authentication and management integration,,,,,
+Integration,VPN Tunnels,30 site-to-site + 100 SSL VPN,30 site-to-site + 100 SSL VPN,100 site-to-site + 500 SSL VPN,300+ site-to-site + 1500 SSL VPN,IPsec VPN tunnels and SSL VPN remote users,,,,,
+User Base,Network Administrators,4 firewall administrators,2-4 administrators,6-10 administrators,15+ administrators,Firewall administrators and security operators,,,,,
+User Base,Remote Users,100 SSL VPN users,100 SSL VPN users,500 SSL VPN users,1500+ SSL VPN users,Remote access SSL VPN concurrent users,,,,,
+Data Volume,Firewall Throughput,80 Gbps datacenter firewall,80 Gbps datacenter,160 Gbps datacenter,400+ Gbps datacenter,Total firewall throughput with security services,,,,,
+Data Volume,IPS Throughput,40 Gbps IPS inspection,40 Gbps IPS,80 Gbps IPS,200+ Gbps IPS,Intrusion prevention system throughput,,,,,
+Technical Environment,Deployment Locations,1 datacenter + 10 branches,1 datacenter + 10 branches,2 datacenters + 25 branches,4+ datacenters + 50+ branches,Geographic distribution for firewall deployment,,,,,
+Technical Environment,Availability Requirements,High availability (99.9%),High availability (99.9%),Mission critical (99.95%),Five nines (99.99%+),SLA for firewall uptime and failover,,,,,
+Technical Environment,Infrastructure Complexity,Active/passive HA,Active/passive HA,Active/active HA multi-zone,Clustered HA multi-tenant,SRX HA architecture and redundancy design,,,,,
+Security & Compliance,Security Services,IPS ATP Cloud SecIntel,IPS ATP Cloud SecIntel,+ SSL Inspection + URL Filtering,+ Advanced Malware + Sandbox,Advanced security subscriptions and threat prevention,,,,,
+Security & Compliance,Compliance Frameworks,PCI DSS SOC 2,1-2 basic standards,3-4 industry standards,Multiple complex frameworks (FedRAMP HIPAA),Regulatory compliance for firewall security,,,,,
+Performance,Inspection Requirements,Standard L3/L4 + IPS,Standard L3/L4 + IPS,Deep packet inspection + SSL,Full DPI + SSL + Sandboxing,Firewall inspection depth and performance requirements,,,,,
+Performance,Session Capacity,2 million concurrent sessions,2 million sessions,8 million sessions,20+ million sessions,Concurrent firewall session capacity,,,,,
+Environment,Deployment Environments,2 environments (lab prod),2 environments (lab prod),3 environments (lab stage prod),4+ environments with DR,Environment management for firewall deployment,,,,,
+# ESTIMATE SETTINGS,,,,,,,,,,
+#WIDTH: 17,22,14,173
+#ALIGN: left,left,center,left
+Phase,Variable Name,Multiplier,Description / Applies To Tasks,,,,,,,
+Discovery,DISCOVERY_MX,1,"All Discovery phase tasks (Security Architecture Assessment, Policy Migration Analysis, Network Topology Documentation, Requirements Gathering)",,,,,,,
+Planning,PLANNING_MX,1,"All Planning phase tasks (SRX Security Architecture Design, Policy Migration Strategy, SD-WAN Design, Implementation Planning)",,,,,,,
+Development,DEVELOPMENT_MX,1,"All Development phase tasks (Lab Environment Setup, Datacenter/Branch SRX Deployment, Security Policy Implementation, Advanced Security Services, VPN Configuration, Security Director Setup, SIEM Integration)",,,,,,,
+Testing,TESTING_MX,1,"All Testing phase tasks (Lab Validation Testing, Performance Testing, HA Failover Testing, Security Validation, User Acceptance Testing)",,,,,,,
+Deployment,DEPLOYMENT_MX,1,"All Deployment phase tasks (Datacenter Production Cutover, Branch Production Deployment, Go-Live Support)",,,,,,,
+Training,TRAINING_MX,1,"All Training phase tasks (SRX Administrator Training, Security Operations Training, Documentation Development)",,,,,,,
+Closeout,CLOSEOUT_MX,1,"All Closeout phase tasks (Knowledge Transfer, Performance Baseline)",,,,,,,
+Management,MANAGEMENT_MX,1.5,Project Management overhead - 10% of actual engineering hours,,,,,,,
+Leadership,LEADERSHIP_MX,1.5,Quarterback/Technical Leadership overhead - 10% of actual engineering hours,,,,,,,
+# Level of Effort,
+#WIDTH: 16,25,58,18,12,14,12,12,15,25,40
+#ALIGN: left,left,left,left,right,center,right,right,right,left,left
+Phase,Work Package,Task Description,Resource Type,Base Hours,Effort Multiplier,Actual Hours,Rate,Cost Estimate,Dependencies,Notes
+Discovery,Security Architecture Assessment,Analyze current firewall infrastructure security policies and network topology,EO Engineer,40,='Estimate Settings'!$C$3,=$E33*$F33,$225,"=TEXT($G33*$H33,""$#,##0"")",,Document existing ASA/firewall rules and security zones for migration analysis
+Discovery,Policy Migration Analysis,Review and analyze 500+ firewall rules for migration and optimization,EO Engineer,48,='Estimate Settings'!$C$3,=$E34*$F34,$225,"=TEXT($G34*$H34,""$#,##0"")",,Identify redundant rules consolidation opportunities and policy cleanup
+Discovery,Network Topology Documentation,Document datacenter and branch network architecture with traffic flows,EO Engineer,24,='Estimate Settings'!$C$3,=$E35*$F35,$200,"=TEXT($G35*$H35,""$#,##0"")",,Include all security zones DMZ trust untrust and cloud connectivity
+Discovery,Requirements Gathering,Conduct stakeholder interviews for security and compliance requirements,EO Engineer,16,='Estimate Settings'!$C$3,=$E36*$F36,$200,"=TEXT($G36*$H36,""$#,##0"")",,PCI DSS SOC 2 compliance and audit requirements documentation
+Planning,SRX Security Architecture Design,Design security zones segmentation and SRX HA architecture,EO Engineer,56,='Estimate Settings'!$C$4,=$E37*$F37,$225,"=TEXT($G37*$H37,""$#,##0"")",Security Architecture Assessment,Deliverable: Multi-zone design with DMZ trust untrust and management zones
+Planning,Policy Migration Strategy,Develop policy migration approach with optimization and testing plan,EO Engineer,40,='Estimate Settings'!$C$4,=$E38*$F38,$225,"=TEXT($G38*$H38,""$#,##0"")",Policy Migration Analysis,Lab validation before production deployment with rollback procedures
+Planning,SD-WAN Design,Design branch SD-WAN architecture with application-based routing,EO Engineer,32,='Estimate Settings'!$C$4,=$E39*$F39,$200,"=TEXT($G39*$H39,""$#,##0"")",SRX Security Architecture Design,10 branch sites with SRX300 and centralized Security Director management
+Planning,Implementation Planning,Develop detailed cutover strategy and timeline with risk mitigation,EO Engineer,24,='Estimate Settings'!$C$4,=$E40*$F40,$150,"=TEXT($G40*$H40,""$#,##0"")",Policy Migration Strategy,Deliverable: Zero-downtime parallel deployment approach with maintenance windows
+Development,Lab Environment Setup,Build lab validation environment for SRX testing and policy validation,EO Engineer,32,='Estimate Settings'!$C$5,=$E41*$F41,$180,"=TEXT($G41*$H41,""$#,##0"")",Implementation Planning,Replicate production network zones for accurate firewall testing
+Development,Datacenter SRX4600 Deployment,Deploy and configure SRX4600 HA pair with base networking and routing,EO Engineer,64,='Estimate Settings'!$C$5,=$E42*$F42,$200,"=TEXT($G42*$H42,""$#,##0"")",Lab Environment Setup,Active/passive HA with sub-second failover and chassis cluster configuration
+Development,Security Policy Implementation,Migrate and implement 500+ firewall rules with optimization,EO Engineer,72,='Estimate Settings'!$C$5,=$E43*$F43,$200,"=TEXT($G43*$H43,""$#,##0"")",Datacenter SRX4600 Deployment,Zone-based policies with application control ALG and logging
+Development,Advanced Security Services,Configure IPS ATP Cloud SecIntel and SSL inspection,EO Engineer,48,='Estimate Settings'!$C$5,=$E44*$F44,$225,"=TEXT($G44*$H44,""$#,##0"")",Security Policy Implementation,40 Gbps IPS 20 Gbps SSL inspection with threat intelligence feeds
+Development,Branch SRX300 Deployment,Deploy and configure 10 branch SRX300 firewalls with SD-WAN,EO Engineer,80,='Estimate Settings'!$C$5,=$E45*$F45,$200,"=TEXT($G45*$H45,""$#,##0"")",Advanced Security Services,Standardized security policies and SD-WAN routing across all branch locations
+Development,VPN Configuration,Configure 30 site-to-site IPsec VPN and 100 SSL VPN for remote users,EO Engineer,40,='Estimate Settings'!$C$5,=$E46*$F46,$200,"=TEXT($G46*$H46,""$#,##0"")",Branch SRX300 Deployment,AWS Azure GCP cloud VPN tunnels and branch-to-datacenter connectivity
+Development,Security Director Setup,Deploy and configure Junos Space Security Director for centralized management,EO Engineer,32,='Estimate Settings'!$C$5,=$E47*$F47,$200,"=TEXT($G47*$H47,""$#,##0"")",VPN Configuration,Centralized policy management visibility and compliance reporting for all SRX devices
+Development,SIEM Integration,Integrate SRX with Splunk SIEM for security event correlation and alerting,EO Engineer,24,='Estimate Settings'!$C$5,=$E48*$F48,$200,"=TEXT($G48*$H48,""$#,##0"")",Security Director Setup,Syslog forwarding for threat logs traffic logs and NetFlow integration
+Testing,Lab Validation Testing,Test policy migration HA failover and performance in lab environment,EO Engineer,40,='Estimate Settings'!$C$6,=$E49*$F49,$200,"=TEXT($G49*$H49,""$#,##0"")",SIEM Integration,Validate all security policies before production deployment
+Testing,Performance Testing,Conduct throughput testing with 80 Gbps firewall and 40 Gbps IPS,EO Engineer,24,='Estimate Settings'!$C$6,=$E50*$F50,$200,"=TEXT($G50*$H50,""$#,##0"")",Lab Validation Testing,Validate performance with all security services enabled under load
+Testing,HA Failover Testing,Test active/passive failover and traffic recovery,EO Engineer,16,='Estimate Settings'!$C$6,=$E51*$F51,$200,"=TEXT($G51*$H51,""$#,##0"")",Performance Testing,Sub-second failover with zero packet loss validation
+Testing,Security Validation,Validate IPS ATP and SSL inspection threat detection,EO Engineer,24,='Estimate Settings'!$C$6,=$E52*$F52,$225,"=TEXT($G52*$H52,""$#,##0"")",HA Failover Testing,Test malware detection command and control blocking and threat prevention
+Testing,User Acceptance Testing,Coordinate UAT with network and security teams for production readiness,EO Engineer,32,='Estimate Settings'!$C$6,=$E53*$F53,$150,"=TEXT($G53*$H53,""$#,##0"")",Security Validation,Validate all security zones VPN tunnels and SD-WAN functionality
+Deployment,Datacenter Production Cutover,Migrate datacenter traffic zone-by-zone to SRX4600 with rollback capability,EO Engineer,48,='Estimate Settings'!$C$7,=$E54*$F54,$225,"=TEXT($G54*$H54,""$#,##0"")",User Acceptance Testing,Parallel deployment during maintenance windows with incremental cutover
+Deployment,Branch Production Deployment,Deploy and cutover production traffic at 10 branch locations,EO Engineer,40,='Estimate Settings'!$C$7,=$E55*$F55,$200,"=TEXT($G55*$H55,""$#,##0"")",Datacenter Production Cutover,Pilot site deployment first then standardized rollout to remaining branches
+Deployment,Go-Live Support,Provide 24x7 support during production cutover and stabilization,EO Engineer,80,='Estimate Settings'!$C$7,=$E56*$F56,$200,"=TEXT($G56*$H56,""$#,##0"")",Branch Production Deployment,First 2 weeks post-deployment with on-call support and rapid issue resolution
+Training,SRX Administrator Training,Train firewall administrators on SRX management Junos OS and troubleshooting,EO Engineer,16,='Estimate Settings'!$C$8,=$E57*$F57,$200,"=TEXT($G57*$H57,""$#,##0"")",Datacenter Production Cutover,2-day hands-on training for up to 8 network and security administrators
+Training,Security Operations Training,Train SOC team on policy management threat investigation and Security Director,EO Engineer,8,='Estimate Settings'!$C$8,=$E58*$F58,$200,"=TEXT($G58*$H58,""$#,##0"")",SRX Administrator Training,1-day training for security operations and monitoring teams
+Training,Documentation Development,Create as-built diagrams runbooks and operational procedures,EO Engineer,40,='Estimate Settings'!$C$8,=$E59*$F59,$150,"=TEXT($G59*$H59,""$#,##0"")",Security Operations Training,Deliverable: Architecture diagrams configuration guides and troubleshooting runbooks
+Closeout,Knowledge Transfer,Transfer solution ownership to client operations and security teams,EO Engineer,16,='Estimate Settings'!$C$9,=$E60*$F60,$200,"=TEXT($G60*$H60,""$#,##0"")",Documentation Development,Comprehensive handover including operational procedures escalation paths and maintenance
+Closeout,Performance Baseline,Establish performance baselines security metrics and monitoring SLAs,EO Engineer,8,='Estimate Settings'!$C$9,=$E61*$F61,$150,"=TEXT($G61*$H61,""$#,##0"")",Knowledge Transfer,Throughput metrics security events blocked threats and uptime monitoring
+Management,Technical Leadership,Security architecture oversight and technical review throughout project,EO Quarterback,"=ROUND(SUM($G$3:$G$31)*0.10,0)",='Estimate Settings'!$C$11,=$E62*$F62,$225,"=TEXT($G62*$H62,""$#,##0"")",,25% of engineering effort for architecture guidance and technical escalation
+Management,Project Management,Project coordination stakeholder management and timeline oversight,EO Project Manager,"=ROUND(SUM($G$3:$G$31)*0.10,0)",='Estimate Settings'!$C$10,=$E63*$F63,$150,"=TEXT($G63*$H63,""$#,##0"")",,20% of engineering effort for project delivery and stakeholder coordination
+,,,,,TOTAL HOURS,"=SUM($G$3:$G$33)",TOTAL COST,"=TEXT(SUMPRODUCT($G$3:$G$33,$H$3:$H$33),""$#,##0"")",,EO Sales Engineer: Update phase-based multipliers in Estimate Settings based on firewall deployment scope
+
+# Credits - Applied to Total Cost (Year 1 Only)
+#WIDTH: 27,17,100
+#ALIGN: left,right,left
+Credit Type,Credit Amount,Credit Comments
+Juniper Partner Services Credit,"($12000)",Juniper Partner Network credit for security architecture and SRX deployment services
+Implementation Discount,$0,No implementation discount applicable
+NET PROFESSIONAL SERVICES COST,"=SUMPRODUCT($G$3:$G$33,$H$3:$H$33)-12000",Total Cost minus Juniper Partner credits

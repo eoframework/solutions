@@ -1,10 +1,26 @@
+---
+document_title: Statement of Work
+technology_provider: Juniper
+project_name: Mist AI Network Implementation
+client_name: [Client Name]
+client_contact: [Contact Name | Email | Phone]
+consulting_company: Your Consulting Company
+consultant_contact: [Consultant Name | Email | Phone]
+opportunity_no: OPP-2025-001
+document_date: November 15, 2025
+version: 1.0
+client_logo: ../../assets/logos/client_logo.png
+vendor_logo: ../../assets/logos/consulting_company_logo.png
+eoframework_logo: ../../assets/logos/eo-framework-logo-real.png
+---
+
 # STATEMENT OF WORK (SOW)
 
 **Document Version:** 1.0
 **Date:** [DATE]
 **Prepared by:** [VENDOR_NAME]
 **Client:** [CLIENT_NAME]
-**Project:** {SOLUTION_NAME} Implementation
+**Project:** Juniper Mist AI Network Implementation
 **SOW Number:** [SOW_NUMBER]
 
 ---
@@ -27,6 +43,35 @@ This Statement of Work (SOW) outlines the scope, deliverables, timeline, and ter
 ---
 
 ## 2. SCOPE OF WORK
+
+### 2.0 Engagement Scope Parameters
+
+This engagement is sized based on the following parameters:
+
+<!-- BEGIN SCOPE_PARAMETERS_TABLE -->
+<!-- TABLE_CONFIG: widths=[25, 35, 40] -->
+| Category | Parameter | Scope |
+|----------|-----------|-------|
+| Solution Scope | WiFi 6E Access Points | 50 Juniper AP45 APs |
+| Solution Scope | Wired Assurance | 4 EX4400 PoE switches |
+| Integration | SSIDs and VLANs | 3-5 wireless networks |
+| Integration | External System Integrations | 2 integrations |
+| Integration | Location Services | Indoor positioning enabled |
+| User Base | Concurrent Wireless Users | 500-1000 concurrent users |
+| User Base | Network Administrators | 3 wireless administrators |
+| Data Volume | Access Point Count | 50 access points |
+| Data Volume | Client Device Count | 2000 total devices |
+| Technical Environment | Building Types | Office commercial building |
+| Technical Environment | Deployment Locations | Single building multi-floor |
+| Technical Environment | RF Environment | Standard office construction |
+| Security & Compliance | Authentication Methods | 802.1X RADIUS |
+| Security & Compliance | Compliance Frameworks | Basic security SOC 2 |
+| Performance | Coverage Requirements | Standard office coverage |
+| Performance | Client Experience SLEs | 99% successful connects |
+| Environment | Deployment Environments | 2 environments (staging prod) |
+<!-- END SCOPE_PARAMETERS_TABLE -->
+
+*Note: Changes to these parameters may require scope adjustment and additional investment.*
 
 ### 2.1 In-Scope Activities
 The following services and deliverables are included in this SOW:

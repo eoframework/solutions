@@ -1,7 +1,14 @@
 ---
 document_title: Statement of Work
-solution_name: Juniper SRX Firewall Platform
-document_version: "1.0"
+technology_provider: Juniper
+project_name: SRX Firewall Platform Implementation
+client_name: [Client Name]
+client_contact: [Contact Name | Email | Phone]
+consulting_company: Your Consulting Company
+consultant_contact: [Consultant Name | Email | Phone]
+opportunity_no: OPP-2025-001
+document_date: November 15, 2025
+version: 1.0
 client_logo: ../../assets/logos/client_logo.png
 vendor_logo: ../../assets/logos/consulting_company_logo.png
 eoframework_logo: ../../assets/logos/eo-framework-logo-real.png
@@ -36,6 +43,35 @@ This Statement of Work (SOW) outlines the scope, deliverables, timeline, and ter
 ---
 
 ## 2. SCOPE OF WORK
+
+### 2.0 Engagement Scope Parameters
+
+This engagement is sized based on the following parameters:
+
+<!-- BEGIN SCOPE_PARAMETERS_TABLE -->
+<!-- TABLE_CONFIG: widths=[25, 35, 40] -->
+| Category | Parameter | Scope |
+|----------|-----------|-------|
+| Solution Scope | Datacenter Firewalls | 2 SRX4600 (HA pair) |
+| Solution Scope | Branch Firewalls | 10 SRX300 branch sites |
+| Integration | Firewall Rules to Migrate | 500 firewall rules |
+| Integration | External System Integrations | 2 integrations (SIEM NAC) |
+| Integration | VPN Tunnels | 30 site-to-site + 100 SSL VPN |
+| User Base | Network Administrators | 4 firewall administrators |
+| User Base | Remote Users | 100 SSL VPN users |
+| Data Volume | Firewall Throughput | 80 Gbps datacenter firewall |
+| Data Volume | IPS Throughput | 40 Gbps IPS inspection |
+| Technical Environment | Deployment Locations | 1 datacenter + 10 branches |
+| Technical Environment | Availability Requirements | High availability (99.9%) |
+| Technical Environment | Infrastructure Complexity | Active/passive HA |
+| Security & Compliance | Security Services | IPS ATP Cloud SecIntel |
+| Security & Compliance | Compliance Frameworks | PCI DSS SOC 2 |
+| Performance | Inspection Requirements | Standard L3/L4 + IPS |
+| Performance | Session Capacity | 2 million concurrent sessions |
+| Environment | Deployment Environments | 2 environments (lab prod) |
+<!-- END SCOPE_PARAMETERS_TABLE -->
+
+*Note: Changes to these parameters may require scope adjustment and additional investment.*
 
 ### 2.1 In-Scope Activities
 The following services and deliverables are included in this SOW:

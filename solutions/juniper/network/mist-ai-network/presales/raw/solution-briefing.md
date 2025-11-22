@@ -10,7 +10,7 @@ footer_logo_right: ../../assets/logos/eo-framework-logo-real.png
 # Juniper Mist AI Network - Solution Briefing
 
 ## Slide Deck Structure
-**10 Slides - Fixed Format**
+**11 Slides - Fixed Format**
 
 ---
 
@@ -50,6 +50,15 @@ This engagement is sized based on the following parameters:
 <!-- TABLE_CONFIG: widths=[18, 29, 5, 18, 30] -->
 | Parameter | Scope | | Parameter | Scope |
 |-----------|-------|---|-----------|-------|
+| **WiFi 6E Access Points** | 50 Juniper AP45 APs | | **Building Types** | Office commercial building |
+| **Wired Assurance** | 4 EX4400 PoE switches | | **Deployment Locations** | Single building multi-floor |
+| **SSIDs and VLANs** | 3-5 wireless networks | | **RF Environment** | Standard office construction |
+| **External System Integrations** | 2 integrations | | **Authentication Methods** | 802.1X RADIUS |
+| **Location Services** | Indoor positioning enabled | | **Compliance Frameworks** | Basic security SOC 2 |
+| **Concurrent Wireless Users** | 500-1000 concurrent users | | **Coverage Requirements** | Standard office coverage |
+| **Network Administrators** | 3 wireless administrators | | **Client Experience SLEs** | 99% successful connects |
+| **Access Point Count** | 50 access points | | **Deployment Environments** | 2 environments (staging prod) |
+| **Client Device Count** | 2000 total devices | |  |  |
 <!-- END SCOPE_SIZING_TABLE -->
 
 *Note: Changes to these parameters may require scope adjustment and additional investment.*
@@ -61,7 +70,7 @@ This engagement is sized based on the following parameters:
 
 **Cloud-Managed WiFi 6E with AI Operations**
 
-![Architecture Diagram](../../assets/diagrams/mist-ai-network-architecture.png)
+![Architecture Diagram](assets/diagrams/mist-ai-network-architecture.png)
 
 - **Mist AI Platform**
   - 50 Juniper AP45 WiFi 6E access points delivering 9.6 Gbps tri-band throughput
@@ -183,14 +192,16 @@ This engagement is sized based on the following parameters:
 
 This solution includes 50 WiFi 6E access points, 4 PoE switches, Mist Cloud AI management, location services, and professional services over 3 years.
 
+<!-- BEGIN COST_SUMMARY_TABLE -->
 <!-- TABLE_CONFIG: widths=[25, 15, 15, 15, 12, 12, 15] -->
-| Category | Year 1 List | Year 1 Credits | Year 1 Net | Year 2 | Year 3 | 3-Year Total |
-|----------|-------------|----------------|------------|--------|--------|--------------|
+| Cost Category | Year 1 List | Year 1 Credits | Year 1 Net | Year 2 | Year 3 | 3-Year Total |
+|---------------|-------------|----------------|------------|--------|--------|--------------|
+| Professional Services | $81,000 | $0 | $81,000 | $0 | $0 | $81,000 |
 | Hardware | $116,600 | ($5,580) | $111,020 | $0 | $0 | $111,020 |
 | Software | $31,400 | ($7,500) | $23,900 | $31,400 | $31,400 | $86,700 |
 | Support & Maintenance | $9,720 | ($2,916) | $6,804 | $9,720 | $9,720 | $26,244 |
-| Professional Services | $81,000 | $0 | $81,000 | $0 | $0 | $81,000 |
 | **TOTAL** | **$238,720** | **($15,996)** | **$222,724** | **$41,120** | **$41,120** | **$304,964** |
+<!-- END COST_SUMMARY_TABLE -->
 
 **Investment Breakdown:**
 - **Hardware (36%):** AP45 WiFi 6E access points, EX4400 PoE switches, redundant power, optics
@@ -242,9 +253,9 @@ This solution includes 50 WiFi 6E access points, 4 PoE switches, Mist Cloud AI m
 ---
 
 ### Next Steps
-**layout:** eo_single_column
+**layout:** eo_bullet_points
 
-**Engagement Process and Timeline**
+**Your Path Forward**
 
 - **Immediate Actions (This Week)**
   - Schedule technical deep-dive with network team to review Mist AI capabilities and architecture
@@ -274,6 +285,32 @@ This solution includes 50 WiFi 6E access points, 4 PoE switches, Mist Cloud AI m
 - 8-week implementation timeline from project start to full production
 - Zero-downtime deployment with incremental AP replacement approach
 - Professional services ensure successful deployment with comprehensive knowledge transfer
+
+---
+
+### Thank You
+**layout:** eo_thank_you
+
+- **Your Account Manager:** [Name, Title] | [Email] | [Phone]
+
+**SPEAKER NOTES:**
+
+*Closing Strong:*
+- Thank them for their time and consideration
+- Reiterate the wireless transformation opportunity with Mist AI
+- Introduce team members who will support implementation
+- Make yourself available for technical deep-dive questions
+
+*Call to Action:*
+- "What questions do you have about the Mist AI wireless platform?"
+- "Would you like to schedule an RF site survey to validate coverage requirements?"
+- "Can we arrange a demo of Marvis AI conversational troubleshooting?"
+- Offer to provide proof-of-concept with sample APs for testing
+
+*Handling Q&A:*
+- Listen to specific wireless pain points and address with Mist AI capabilities
+- Be prepared to discuss integration with existing network infrastructure
+- Emphasize AI-driven operations and measurable ROI through reduced troubleshooting time
 
 ---
 

@@ -1,30 +1,75 @@
-Phase,Work Package,Task Description,Resource Type,Estimated Hours,Rate,Cost Estimate,Dependencies,Risk Level,Notes
-Discovery,Wireless Requirements Assessment,Analyze current wireless infrastructure coverage and performance issues,EO Engineer,32,$200,"=TEXT(E2*F2,""$#,##0"")",,Medium,Document WiFi dead zones user complaints and capacity needs
-Discovery,Facility Assessment,Review building layouts construction materials and coverage requirements,EO Engineer,24,$200,"=TEXT(E3*F3,""$#,##0"")",,Medium,Building floor plans and RF propagation analysis
-Discovery,Network Integration Analysis,Assess existing wired network VLANs and authentication infrastructure,EO Engineer,16,$175,"=TEXT(E4*F4,""$#,##0"")",,Medium,VLAN design DHCP and RADIUS integration requirements
-Planning,RF Site Survey,Conduct predictive RF site survey using Mist AI planning tools,EO Engineer,40,$200,"=TEXT(E5*F5,""$#,##0"")",,High,AP placement design for optimal coverage and capacity
-Planning,WLAN Architecture Design,Design SSID strategy VLAN segmentation and security policies,EO Engineer,32,$200,"=TEXT(E6*F6,""$#,##0"")",,Medium,Corporate guest IoT and voice wireless networks
-Planning,Location Services Design,Design vBLE indoor positioning wayfinding and asset tracking,EO Engineer,24,$200,"=TEXT(E7*F7,""$#,##0"")",,Medium,Location-based services and analytics requirements
-Planning,Implementation Planning,Develop AP installation schedule and cutover strategy,EO Engineer,16,$150,"=TEXT(E8*F8,""$#,##0"")",,Low,Minimize business disruption during deployment
-Development,Switch Infrastructure Deployment,Deploy and configure EX4400 PoE switches for AP power and connectivity,EO Engineer,32,$200,"=TEXT(E9*F9,""$#,##0"")",,Medium,4 switches with uplinks to existing network
-Development,Mist Cloud Configuration,Configure Mist cloud with SSIDs VLANs RF policies and security settings,EO Engineer,40,$200,"=TEXT(E10*F10,""$#,##0"")",,Medium,WLAN profiles RF templates and policy deployment
-Development,AP Installation,Mount cable and deploy 50 Juniper AP45 WiFi 6E access points,EO Engineer,100,$150,"=TEXT(E11*F11,""$#,##0"")",,High,Physical installation across multiple buildings and floors
-Development,Authentication Integration,Integrate Mist with RADIUS Active Directory or SSO for enterprise auth,EO Engineer,24,$200,"=TEXT(E12*F12,""$#,##0"")",,Medium,802.1X configuration and user authentication testing
-Development,Marvis AI Activation,Enable Marvis VNA for AI-driven troubleshooting and anomaly detection,EO Engineer,16,$200,"=TEXT(E13*F13,""$#,##0"")",,Medium,AI virtual assistant configuration and SLE baseline
-Development,Location Services Setup,Configure vBLE indoor positioning wayfinding maps and asset tracking,EO Engineer,32,$200,"=TEXT(E14*F14,""$#,##0"")",,Medium,Virtual BLE beacons and location analytics setup
-Development,Wired Assurance Config,Onboard EX4400 switches to Wired Assurance for unified management,EO Engineer,16,$180,"=TEXT(E15*F15,""$#,##0"")",,Low,Wired network visibility and AI-driven operations
-Testing,RF Validation Testing,Conduct coverage testing throughput validation and roaming verification,EO Engineer,40,$200,"=TEXT(E16*F16,""$#,##0"")",,High,Walk-through testing with spectrum analyzer and client devices
-Testing,Client Connectivity Testing,Test authentication client onboarding and application performance,EO Engineer,24,$175,"=TEXT(E17*F17,""$#,##0"")",,Medium,Validate corporate guest IoT and voice wireless networks
-Testing,Location Services Testing,Validate vBLE accuracy wayfinding navigation and asset tracking,EO Engineer,16,$175,"=TEXT(E18*F18,""$#,##0"")",,Medium,Indoor positioning accuracy and mobile app integration
-Testing,Performance Testing,Conduct throughput testing with high-density client load,EO Engineer,16,$200,"=TEXT(E19*F19,""$#,##0"")",,Medium,Validate capacity and performance under real-world conditions
-Testing,User Acceptance Testing,Coordinate UAT with IT and business users for production readiness,EO Engineer,24,$150,"=TEXT(E20*F20,""$#,##0"")",,Medium,End-user validation and feedback collection
-Deployment,Legacy AP Decommissioning,Decommission old wireless infrastructure and migrate to Mist APs,EO Engineer,32,$175,"=TEXT(E21*F21,""$#,##0"")",,Medium,Incremental cutover with minimal business disruption
-Deployment,Go-Live Support,Provide on-site support during production cutover and initial operation,EO Engineer,40,$200,"=TEXT(E22*F22,""$#,##0"")",,High,First week post-deployment support and issue resolution
-Training,Mist Dashboard Training,Train IT administrators on Mist cloud dashboard and configuration,EO Engineer,16,$200,"=TEXT(E23*F23,""$#,##0"")",,Medium,2-day hands-on training for network administrators
-Training,Marvis AI Training,Train IT staff on Marvis VNA conversational AI and troubleshooting,EO Engineer,8,$200,"=TEXT(E24*F24,""$#,##0"")",,Medium,AI-driven operations and proactive monitoring training
-Training,Documentation Development,Create as-built RF maps configuration guides and troubleshooting runbooks,EO Engineer,32,$150,"=TEXT(E25*F25,""$#,##0"")",,Medium,Operational documentation and knowledge transfer
-Closeout,Knowledge Transfer,Transfer solution ownership to IT operations and support teams,EO Engineer,16,$175,"=TEXT(E26*F26,""$#,##0"")",,Medium,Operational procedures escalation and ongoing management
-Closeout,SLE Baseline Establishment,Establish Service Level Expectation baselines for client experience monitoring,EO Engineer,8,$150,"=TEXT(E27*F27,""$#,##0"")",,Low,Successful connects time to connect throughput roaming capacity
-Management,Technical Leadership,Wireless architecture oversight and RF design review,EO Quarterback,"=ROUND(SUM(E2:E27)*0.25,0)",$200,"=TEXT(E28*F28,""$#,##0"")",,Medium,25% of engineering effort for technical guidance
-Management,Project Management,Project coordination stakeholder management and timeline oversight,EO Project Manager,"=ROUND(SUM(E2:E27)*0.20,0)",$150,"=TEXT(E29*F29,""$#,##0"")",,Low,20% of engineering effort for project delivery
-,,,     TOTAL HOURS,1032,   TOTAL COST,"=TEXT(E2*F2+E3*F3+E4*F4+E5*F5+E6*F6+E7*F7+E8*F8+E9*F9+E10*F10+E11*F11+E12*F12+E13*F13+E14*F14+E15*F15+E16*F16+E17*F17+E18*F18+E19*F19+E20*F20+E21*F21+E22*F22+E23*F23+E24*F24+E25*F25+E26*F26+E27*F27+E28*F28+E29*F29,""$#,##0"")",,,Total Juniper Mist AI Network professional services
+# SCOPE ASSUMPTIONS - BASELINE (MULTIPLIER 1.0),,,,,,,,,,
+#WIDTH: 25,35,33,32,32,39,44
+#ALIGN: left,left,left,left,left,left,left
+Category,Baseline Assumption,Current Scope,Small (1x),Medium (2x),Large (3x),Notes,,,,,
+Solution Scope,WiFi 6E Access Points,50 Juniper AP45 APs,50 APs single building,150 APs multi-building,500+ APs campus,Enterprise wireless deployment with Mist AI,,,,,
+Solution Scope,Wired Assurance,4 EX4400 PoE switches,4 EX4400 switches,12 EX4400 switches,30+ EX switches,Wired infrastructure with AI-driven management,,,,,
+Integration,SSIDs and VLANs,3-5 wireless networks,3-5 SSIDs (corp guest IoT),8-10 SSIDs multi-tenant,15+ SSIDs complex segmentation,Wireless network segmentation and access control,,,,,
+Integration,External System Integrations,2 integrations,2 integrations (auth monitoring),4-6 systems,8+ systems or complex protocols,RADIUS SIEM and authentication integration,,,,,
+Integration,Location Services,Indoor positioning enabled,vBLE for 1 building,vBLE for multi-building campus,Advanced wayfinding asset tracking,Virtual Bluetooth LE and location analytics,,,,,
+User Base,Concurrent Wireless Users,500-1000 concurrent users,500-1000 users,2000-5000 users,10000+ users,Peak concurrent wireless client capacity,,,,,
+User Base,Network Administrators,3 wireless administrators,2-3 administrators,5-8 administrators,12+ administrators,Wireless network administrators and operators,,,,,
+Data Volume,Access Point Count,50 access points,50 APs single site,150 APs multi-site,500+ APs campus,Total AP deployment for coverage and capacity,,,,,
+Data Volume,Client Device Count,2000 total devices,2000 devices,8000 devices,20000+ devices,Total wireless client device inventory,,,,,
+Technical Environment,Building Types,Office commercial building,Single building type,Multi-building campus,Complex campus multiple building types,Facility type and RF environment complexity,,,,,
+Technical Environment,Deployment Locations,Single building multi-floor,Single building,2-3 buildings,5+ buildings or campus,Geographic distribution for wireless deployment,,,,,
+Technical Environment,RF Environment,Standard office construction,Standard office low interference,High-density or industrial,Complex RF stadium healthcare,RF propagation and interference considerations,,,,,
+Security & Compliance,Authentication Methods,802.1X RADIUS,Basic 802.1X + PSK,Advanced multi-factor PKI,Complex federation SSO,Enterprise wireless authentication architecture,,,,,
+Security & Compliance,Compliance Frameworks,Basic security SOC 2,1-2 basic standards,3-4 industry standards,Multiple complex frameworks (HIPAA PCI),Regulatory compliance for wireless security,,,,,
+Performance,Coverage Requirements,Standard office coverage,Standard office coverage,High-density conference rooms,Mission-critical 99.99% uptime,Wireless coverage density and performance,,,,,
+Performance,Client Experience SLEs,99% successful connects,Standard SLEs 95%,Enhanced SLEs 98%,Premium SLEs 99.5%+,Mist AI Service Level Expectations tracking,,,,,
+Environment,Deployment Environments,2 environments (staging prod),2 environments,3 environments (dev stage prod),4+ environments with lab,Environment management for wireless deployment,,,,,
+# ESTIMATE SETTINGS,,,,,,,,,,
+#WIDTH: 17,22,14,173
+#ALIGN: left,left,center,left
+Phase,Variable Name,Multiplier,Description / Applies To Tasks,,,,,,,
+Discovery,DISCOVERY_MX,1,"All Discovery phase tasks (Wireless Requirements Assessment, Facility Assessment, Network Integration Analysis)",,,,,,,
+Planning,PLANNING_MX,1,"All Planning phase tasks (RF Site Survey, WLAN Architecture Design, Location Services Design, Implementation Planning)",,,,,,,
+Development,DEVELOPMENT_MX,1,"All Development phase tasks (Switch Infrastructure Deployment, Mist Cloud Configuration, AP Installation, Authentication Integration, Marvis AI Activation, Location Services Setup, Wired Assurance Config)",,,,,,,
+Testing,TESTING_MX,1,"All Testing phase tasks (RF Validation Testing, Client Connectivity Testing, Location Services Testing, Performance Testing, User Acceptance Testing)",,,,,,,
+Deployment,DEPLOYMENT_MX,1,"All Deployment phase tasks (Legacy AP Decommissioning, Go-Live Support)",,,,,,,
+Training,TRAINING_MX,1,"All Training phase tasks (Mist Dashboard Training, Marvis AI Training, Documentation Development)",,,,,,,
+Closeout,CLOSEOUT_MX,1,"All Closeout phase tasks (Knowledge Transfer, SLE Baseline Establishment)",,,,,,,
+Management,MANAGEMENT_MX,1.5,Project Management overhead - 10% of actual engineering hours,,,,,,,
+Leadership,LEADERSHIP_MX,1.5,Quarterback/Technical Leadership overhead - 10% of actual engineering hours,,,,,,,
+# Level of Effort,
+#WIDTH: 16,25,58,18,12,14,12,12,15,25,40
+#ALIGN: left,left,left,left,right,center,right,right,right,left,left
+Phase,Work Package,Task Description,Resource Type,Base Hours,Effort Multiplier,Actual Hours,Rate,Cost Estimate,Dependencies,Notes
+Discovery,Wireless Requirements Assessment,Analyze current wireless infrastructure coverage and performance issues,EO Engineer,32,='Estimate Settings'!$C$3,=$E33*$F33,$200,"=TEXT($G33*$H33,""$#,##0"")",,Document WiFi dead zones user complaints and capacity needs
+Discovery,Facility Assessment,Review building layouts construction materials and coverage requirements,EO Engineer,24,='Estimate Settings'!$C$3,=$E34*$F34,$200,"=TEXT($G34*$H34,""$#,##0"")",,Building floor plans and RF propagation analysis for AP placement
+Discovery,Network Integration Analysis,Assess existing wired network VLANs and authentication infrastructure,EO Engineer,16,='Estimate Settings'!$C$3,=$E35*$F35,$175,"=TEXT($G35*$H35,""$#,##0"")",,VLAN design DHCP scopes and RADIUS integration requirements
+Planning,RF Site Survey,Conduct predictive RF site survey using Mist AI planning tools,EO Engineer,40,='Estimate Settings'!$C$4,=$E36*$F36,$200,"=TEXT($G36*$H36,""$#,##0"")",Facility Assessment,Deliverable: AP placement design for optimal coverage and capacity
+Planning,WLAN Architecture Design,Design SSID strategy VLAN segmentation and security policies,EO Engineer,32,='Estimate Settings'!$C$4,=$E37*$F37,$200,"=TEXT($G37*$H37,""$#,##0"")",Network Integration Analysis,Corporate guest IoT and voice wireless networks architecture
+Planning,Location Services Design,Design vBLE indoor positioning wayfinding and asset tracking,EO Engineer,24,='Estimate Settings'!$C$4,=$E38*$F38,$200,"=TEXT($G38*$H38,""$#,##0"")",RF Site Survey,Location-based services and occupancy analytics requirements
+Planning,Implementation Planning,Develop AP installation schedule and cutover strategy,EO Engineer,16,='Estimate Settings'!$C$4,=$E39*$F39,$150,"=TEXT($G39*$H39,""$#,##0"")",WLAN Architecture Design,Deliverable: Minimize business disruption during wireless deployment
+Development,Switch Infrastructure Deployment,Deploy and configure EX4400 PoE switches for AP power and connectivity,EO Engineer,32,='Estimate Settings'!$C$5,=$E40*$F40,$200,"=TEXT($G40*$H40,""$#,##0"")",Implementation Planning,4 switches with uplinks to existing network and PoE capacity
+Development,Mist Cloud Configuration,Configure Mist cloud with SSIDs VLANs RF policies and security settings,EO Engineer,40,='Estimate Settings'!$C$5,=$E41*$F41,$200,"=TEXT($G41*$H41,""$#,##0"")",Switch Infrastructure Deployment,WLAN profiles RF templates and wireless policy deployment
+Development,AP Installation,Mount cable and deploy 50 Juniper AP45 WiFi 6E access points,EO Engineer,100,='Estimate Settings'!$C$5,=$E42*$F42,$150,"=TEXT($G42*$H42,""$#,##0"")",Mist Cloud Configuration,Physical installation across multiple buildings and floors
+Development,Authentication Integration,Integrate Mist with RADIUS Active Directory or SSO for enterprise auth,EO Engineer,24,='Estimate Settings'!$C$5,=$E43*$F43,$200,"=TEXT($G43*$H43,""$#,##0"")",AP Installation,802.1X configuration and user authentication testing validation
+Development,Marvis AI Activation,Enable Marvis VNA for AI-driven troubleshooting and anomaly detection,EO Engineer,16,='Estimate Settings'!$C$5,=$E44*$F44,$200,"=TEXT($G44*$H44,""$#,##0"")",Authentication Integration,AI virtual assistant configuration and SLE baseline establishment
+Development,Location Services Setup,Configure vBLE indoor positioning wayfinding maps and asset tracking,EO Engineer,32,='Estimate Settings'!$C$5,=$E45*$F45,$200,"=TEXT($G45*$H45,""$#,##0"")",Marvis AI Activation,Virtual BLE beacons location analytics and wayfinding setup
+Development,Wired Assurance Config,Onboard EX4400 switches to Wired Assurance for unified management,EO Engineer,16,='Estimate Settings'!$C$5,=$E46*$F46,$180,"=TEXT($G46*$H46,""$#,##0"")",Location Services Setup,Wired network visibility and AI-driven switch operations
+Testing,RF Validation Testing,Conduct coverage testing throughput validation and roaming verification,EO Engineer,40,='Estimate Settings'!$C$6,=$E47*$F47,$200,"=TEXT($G47*$H47,""$#,##0"")",Wired Assurance Config,Walk-through testing with spectrum analyzer and wireless client devices
+Testing,Client Connectivity Testing,Test authentication client onboarding and application performance,EO Engineer,24,='Estimate Settings'!$C$6,=$E48*$F48,$175,"=TEXT($G48*$H48,""$#,##0"")",RF Validation Testing,Validate corporate guest IoT and voice wireless network connectivity
+Testing,Location Services Testing,Validate vBLE accuracy wayfinding navigation and asset tracking,EO Engineer,16,='Estimate Settings'!$C$6,=$E49*$F49,$175,"=TEXT($G49*$H49,""$#,##0"")",Client Connectivity Testing,Indoor positioning accuracy and mobile app integration testing
+Testing,Performance Testing,Conduct throughput testing with high-density client load,EO Engineer,16,='Estimate Settings'!$C$6,=$E50*$F50,$200,"=TEXT($G50*$H50,""$#,##0"")",Location Services Testing,Validate capacity and performance under real-world wireless conditions
+Testing,User Acceptance Testing,Coordinate UAT with IT and business users for production readiness,EO Engineer,24,='Estimate Settings'!$C$6,=$E51*$F51,$150,"=TEXT($G51*$H51,""$#,##0"")",Performance Testing,End-user validation of wireless coverage performance and features
+Deployment,Legacy AP Decommissioning,Decommission old wireless infrastructure and migrate to Mist APs,EO Engineer,32,='Estimate Settings'!$C$7,=$E52*$F52,$175,"=TEXT($G52*$H52,""$#,##0"")",User Acceptance Testing,Incremental AP cutover with minimal business disruption
+Deployment,Go-Live Support,Provide on-site support during production cutover and initial operation,EO Engineer,40,='Estimate Settings'!$C$7,=$E53*$F53,$200,"=TEXT($G53*$H53,""$#,##0"")",Legacy AP Decommissioning,First week post-deployment support and wireless issue resolution
+Training,Mist Dashboard Training,Train IT administrators on Mist cloud dashboard and configuration,EO Engineer,16,='Estimate Settings'!$C$8,=$E54*$F54,$200,"=TEXT($G54*$H54,""$#,##0"")",Go-Live Support,2-day hands-on training for wireless network administrators
+Training,Marvis AI Training,Train IT staff on Marvis VNA conversational AI and troubleshooting,EO Engineer,8,='Estimate Settings'!$C$8,=$E55*$F55,$200,"=TEXT($G55*$H55,""$#,##0"")",Mist Dashboard Training,AI-driven operations and proactive wireless monitoring training
+Training,Documentation Development,Create as-built RF maps configuration guides and troubleshooting runbooks,EO Engineer,32,='Estimate Settings'!$C$8,=$E56*$F56,$150,"=TEXT($G56*$H56,""$#,##0"")",Marvis AI Training,Deliverable: Operational documentation and wireless knowledge transfer
+Closeout,Knowledge Transfer,Transfer solution ownership to IT operations and support teams,EO Engineer,16,='Estimate Settings'!$C$9,=$E57*$F57,$175,"=TEXT($G57*$H57,""$#,##0"")",Documentation Development,Comprehensive handover including operational procedures and escalation
+Closeout,SLE Baseline Establishment,Establish Service Level Expectation baselines for client experience monitoring,EO Engineer,8,='Estimate Settings'!$C$9,=$E58*$F58,$150,"=TEXT($G58*$H58,""$#,##0"")",Knowledge Transfer,Successful connects time to connect throughput roaming capacity SLEs
+Management,Technical Leadership,Wireless architecture oversight and RF design review,EO Quarterback,"=ROUND(SUM($G$3:$G$28)*0.10,0)",='Estimate Settings'!$C$11,=$E59*$F59,$200,"=TEXT($G59*$H59,""$#,##0"")",,25% of engineering effort for wireless technical guidance and escalation
+Management,Project Management,Project coordination stakeholder management and timeline oversight,EO Project Manager,"=ROUND(SUM($G$3:$G$28)*0.10,0)",='Estimate Settings'!$C$10,=$E60*$F60,$150,"=TEXT($G60*$H60,""$#,##0"")",,20% of engineering effort for wireless project delivery coordination
+,,,,,TOTAL HOURS,"=SUM($G$3:$G$30)",TOTAL COST,"=TEXT(SUMPRODUCT($G$3:$G$30,$H$3:$H$30),""$#,##0"")",,EO Sales Engineer: Update phase-based multipliers in Estimate Settings based on wireless deployment scope
+
+# Credits - Applied to Total Cost (Year 1 Only)
+#WIDTH: 27,17,100
+#ALIGN: left,right,left
+Credit Type,Credit Amount,Credit Comments
+Juniper Partner Services Credit,"($8000)",Juniper Partner Network credit for wireless architecture and Mist AI deployment services
+Implementation Discount,$0,No implementation discount applicable
+NET PROFESSIONAL SERVICES COST,"=SUMPRODUCT($G$3:$G$30,$H$3:$H$30)-8000",Total Cost minus Juniper Partner credits

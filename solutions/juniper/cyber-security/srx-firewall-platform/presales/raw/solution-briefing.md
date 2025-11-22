@@ -10,7 +10,7 @@ footer_logo_right: ../../assets/logos/eo-framework-logo-real.png
 # Juniper SRX Firewall Platform - Solution Briefing
 
 ## Slide Deck Structure
-**10 Slides - Fixed Format**
+**11 Slides - Fixed Format**
 
 ---
 
@@ -50,6 +50,15 @@ This engagement is sized based on the following parameters:
 <!-- TABLE_CONFIG: widths=[18, 29, 5, 18, 30] -->
 | Parameter | Scope | | Parameter | Scope |
 |-----------|-------|---|-----------|-------|
+| **Datacenter Firewalls** | 2 SRX4600 (HA pair) | | **Deployment Locations** | 1 datacenter + 10 branches |
+| **Branch Firewalls** | 10 SRX300 branch sites | | **Availability Requirements** | High availability (99.9%) |
+| **Firewall Rules to Migrate** | 500 firewall rules | | **Infrastructure Complexity** | Active/passive HA |
+| **External System Integrations** | 2 integrations (SIEM NAC) | | **Security Services** | IPS ATP Cloud SecIntel |
+| **VPN Tunnels** | 30 site-to-site + 100 SSL VPN | | **Compliance Frameworks** | PCI DSS SOC 2 |
+| **Network Administrators** | 4 firewall administrators | | **Inspection Requirements** | Standard L3/L4 + IPS |
+| **Remote Users** | 100 SSL VPN users | | **Session Capacity** | 2 million concurrent sessions |
+| **Firewall Throughput** | 80 Gbps datacenter firewall | | **Deployment Environments** | 2 environments (lab prod) |
+| **IPS Throughput** | 40 Gbps IPS inspection | |  |  |
 <!-- END SCOPE_SIZING_TABLE -->
 
 *Note: Changes to these parameters may require scope adjustment and additional investment.*
@@ -61,7 +70,7 @@ This engagement is sized based on the following parameters:
 
 **Enterprise-Grade Security with Multi-Cloud Integration**
 
-![Architecture Diagram](../../assets/diagrams/srx-firewall-architecture.png)
+![Architecture Diagram](assets/diagrams/srx-firewall-architecture.png)
 
 - **Datacenter Security**
   - SRX4600 HA pair delivering 80 Gbps firewall throughput with full security services
@@ -183,14 +192,16 @@ This engagement is sized based on the following parameters:
 
 This solution includes datacenter HA firewall pair, 10 branch firewalls, security subscriptions, support, and professional services over 3 years.
 
+<!-- BEGIN COST_SUMMARY_TABLE -->
 <!-- TABLE_CONFIG: widths=[25, 15, 15, 15, 12, 12, 15] -->
-| Category | Year 1 List | Year 1 Credits | Year 1 Net | Year 2 | Year 3 | 3-Year Total |
-|----------|-------------|----------------|------------|--------|--------|--------------|
+| Cost Category | Year 1 List | Year 1 Credits | Year 1 Net | Year 2 | Year 3 | 3-Year Total |
+|---------------|-------------|----------------|------------|--------|--------|--------------|
+| Professional Services | $101,300 | $0 | $101,300 | $0 | $0 | $101,300 |
 | Hardware | $164,200 | ($8,000) | $156,200 | $0 | $0 | $156,200 |
 | Software | $98,000 | ($7,500) | $90,500 | $30,600 | $30,600 | $151,700 |
 | Support & Maintenance | $48,000 | ($13,500) | $34,500 | $48,000 | $48,000 | $130,500 |
-| Professional Services | $101,300 | $0 | $101,300 | $0 | $0 | $101,300 |
 | **TOTAL** | **$411,500** | **($29,000)** | **$382,500** | **$78,600** | **$78,600** | **$539,700** |
+<!-- END COST_SUMMARY_TABLE -->
 
 **Investment Breakdown:**
 - **Hardware (29%):** SRX4600 datacenter HA pair, 10x SRX300 branch firewalls, redundant power, optics
@@ -242,9 +253,9 @@ This solution includes datacenter HA firewall pair, 10 branch firewalls, securit
 ---
 
 ### Next Steps
-**layout:** eo_single_column
+**layout:** eo_bullet_points
 
-**Engagement Process and Timeline**
+**Your Path Forward**
 
 - **Immediate Actions (This Week)**
   - Schedule technical deep-dive session with network and security teams
@@ -274,6 +285,32 @@ This solution includes datacenter HA firewall pair, 10 branch firewalls, securit
 - 12-week implementation timeline from project start to production
 - Zero-downtime migration with parallel infrastructure approach
 - Professional services ensure successful deployment with knowledge transfer
+
+---
+
+### Thank You
+**layout:** eo_thank_you
+
+- **Your Account Manager:** [Name, Title] | [Email] | [Phone]
+
+**SPEAKER NOTES:**
+
+*Closing Strong:*
+- Thank them for their time and consideration
+- Reiterate the security transformation opportunity with SRX platform
+- Introduce team members who will support implementation
+- Make yourself available for technical deep-dive questions
+
+*Call to Action:*
+- "What questions do you have about the SRX firewall platform?"
+- "Would you like to review your existing firewall policies for migration planning?"
+- "Can we schedule a technical deep-dive with your network and security teams?"
+- Offer to arrange SRX demonstration or proof-of-concept
+
+*Handling Q&A:*
+- Listen to specific security concerns and address with SRX advanced threat prevention
+- Be prepared to discuss integration with existing network and security infrastructure
+- Emphasize parallel deployment approach reduces risk and ensures zero downtime
 
 ---
 
