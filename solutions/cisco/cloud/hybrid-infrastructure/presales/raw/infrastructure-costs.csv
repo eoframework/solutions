@@ -1,0 +1,50 @@
+# Sizing Guidelines
+#WIDTH: 24,36,28,28,28,51
+#ALIGN: left,left,center,center,center,left
+Category,Component,Small,Medium,Large,Notes
+Compute Capacity,VM Count,50-100 VMs,100-200 VMs,200-400+ VMs,Virtual machine capacity
+Compute Capacity,vCPU Count,128 vCPUs,256 vCPUs,512+ vCPUs,Total virtual CPUs available
+Memory Capacity,Total RAM,1.5 TB,3 TB,6+ TB,Total memory across cluster
+Storage Capacity,Usable Storage,10 TB,20 TB,40+ TB,Usable after RAID and dedup/compression
+Cluster Size,Node Count,3 nodes,4 nodes,6-8+ nodes,HyperFlex nodes for HA and capacity
+Node Performance,Storage Type,Hybrid (HDD+SSD),All-Flash SSD,All-Flash NVMe,Performance tier and IOPS
+Network Fabric,Fabric Interconnect,UCS 6324 (1G/10G),UCS 6454 (25G),UCS 6536 (100G),Unified network and SAN fabric
+
+# Infrastructure Costs
+#WIDTH: 23,30,50,12,15,12,15,12,12,15,30
+#ALIGN: left,left,left,right,left,right,right,right,right,right,left
+Category,Component,Description,Quantity,Unit,Unit Price,Annual Cost,Year 2,Year 3,3-Year Total,Notes
+Hardware,HyperFlex HX240c M5 Node,4-node cluster (2x Xeon Gold 768GB 7.68TB NVMe),4,Nodes,$52000,$208000,$0,$0,$208000,Compute and storage nodes
+Hardware,Cisco UCS 6454 Fabric Interconnect,Redundant pair for unified network and SAN,2,Fabric Interconnects,$28000,$56000,$0,$0,$56000,25GbE/100GbE fabric switches
+Networking,Cisco Nexus 93180YC-EX,25GbE ToR switches (redundant pair),2,Switches,$15000,$30000,$0,$0,$30000,Data center network connectivity
+Software,VMware vSphere Enterprise Plus,Per-socket licensing (8 sockets total),8,Sockets/Year,$5750,"=D14*F14","=G14","=G14","=G14+H14+I14",Hypervisor and vMotion licensing
+Software,HyperFlex Data Platform,Storage software per node (4 nodes),4,Nodes/Year,$15000,"=D15*F15","=G15","=G15","=G15+H15+I15",Distributed storage and data services
+Software,Cisco Intersight Advantage,Cloud-based management per node,4,Nodes/Year,$2000,"=D16*F16","=G16","=G16","=G16+H16+I16",Unified infrastructure management
+Support,Cisco SmartNet 24x7x4,Hardware support for HX nodes and fabric,4,Nodes/Year,$10000,"=D17*F17","=G17","=G17","=G17+H17+I17",24x7 support with 4-hour replacement
+Support,VMware Production Support,VMware technical support,8,Sockets/Year,$1500,"=D18*F18","=G18","=G18","=G18+H18+I18",24x7 VMware support and updates
+Professional Services,HyperFlex Design & Planning,Architecture design and capacity planning,40,Hours,$225,"=D19*F19","=G19*0","=G19*0","=G19+H19+I19",Solution architecture and sizing
+Professional Services,HyperFlex Deployment,Cluster installation and configuration,80,Hours,$225,"=D20*F20","=G20*0","=G20*0","=G20+H20+I20",Hardware deployment and setup
+Professional Services,VMware Configuration,vCenter vSphere and virtual networking setup,40,Hours,$200,"=D21*F21","=G21*0","=G21*0","=G21+H21+I21",Hypervisor configuration
+Professional Services,VM Migration Services,Migrate VMs from legacy infrastructure,60,Hours,$200,"=D22*F22","=G22*0","=G22*0","=G22+H22+I22",Workload migration (vMotion/cold)
+Professional Services,Intersight Integration,Cloud management setup and integration,20,Hours,$200,"=D23*F23","=G23*0","=G23*0","=G23+H23+I23",Hybrid cloud management
+Professional Services,Testing & Validation,Performance testing and application validation,30,Hours,$200,"=D24*F24","=G24*0","=G24*0","=G24+H24+I24",Validation and quality assurance
+Professional Services,Training,Administrator training and knowledge transfer,24,Hours,$175,"=D25*F25","=G25*0","=G25*0","=G25+H25+I25",HyperFlex and vSphere training
+
+# Credits
+#WIDTH: 25,25,15,50
+#ALIGN: left,left,right,left
+Category,Credit Type,Credit Amount,Credit Comments
+Hardware,Trade-In Credit,"($15000)",Legacy server trade-in credit
+Software,VMware ELA Credit,"($20000)",Existing Enterprise License Agreement credit
+Support,Renewal Credit,$0,No support renewal credits
+Professional Services,Implementation Credit,$0,No services credits available
+
+# 3-Year Summary
+#WIDTH: 25,15,15,15,12,12,15
+#ALIGN: left,right,right,right,right,right,right
+Category,Year 1 List,Year 1 Credits,Year 1 Net,Year 2,Year 3,3-Year Total
+Hardware,$294000,"($15000)",$279000,$0,$0,$279000
+Software,$106000,"($20000)",$86000,$106000,$106000,$298000
+Support,$52000,$0,$52000,$52000,$52000,$156000
+Professional Services,$63900,$0,$63900,$0,$0,$63900
+TOTAL,$515900,"($35000)",$480900,$158000,$158000,$796900

@@ -1,0 +1,54 @@
+# Sizing Guidelines
+#WIDTH: 24,36,28,28,28,51
+#ALIGN: left,left,center,center,center,left
+Category,Component,Small,Medium,Large,Notes
+Site Count,Branch Offices,10-25 sites,25-50 sites,50-100+ sites,Number of branch locations
+Site Bandwidth,Bandwidth per Site,50-100 Mbps,100-250 Mbps,250-500+ Mbps,Primary WAN circuit capacity
+Router Model,Branch Router,ISR 1100 (small),ISR 4300 (medium),ISR 4400 (large),Edge router based on site size
+Hub Router,Data Center Hub,ISR 4400 series,ASR 1000 series,ASR 1000 HA pair,Hub router capacity and redundancy
+Controllers,vManage/vSmart/vBond,Shared virtual,Dedicated virtual,Dedicated hardware,SD-WAN controller platform
+WAN Circuits,Circuit Diversity,Single broadband,Dual circuits (active),Dual + LTE backup,WAN redundancy and failover
+Software License,License Tier,SD-WAN Essentials,SD-WAN Advantage,DNA Advantage,Feature set and advanced capabilities
+
+# Infrastructure Costs
+#WIDTH: 23,30,50,12,15,12,15,12,12,15,30
+#ALIGN: left,left,left,right,left,right,right,right,right,right,left
+Category,Component,Description,Quantity,Unit,Unit Price,Annual Cost,Year 2,Year 3,3-Year Total,Notes
+Hardware,Cisco ISR 4331 Branch Router,Branch edge routers (25 sites),25,Routers,$4500,$112500,$0,$0,$112500,Dual WAN ports per site
+Hardware,Cisco ISR 4451 Hub Router,Data center hub routers (2 for HA),2,Routers,$12000,$24000,$0,$0,$24000,Redundant hub pair
+Software Controllers,vManage vSmart vBond,Virtual controllers (hosted in DC or cloud),3,Controllers,$15000,$45000,$0,$0,$45000,SD-WAN control plane
+WAN Circuits,Broadband 100 Mbps,Primary internet circuit per site (25 sites),25,Circuits/Month,$200,"=D14*F14*12","=G14","=G14","=G14+H14+I14",Fiber or cable broadband
+WAN Circuits,LTE Backup 10 GB,LTE failover circuit per site (25 sites),25,Circuits/Month,$50,"=D15*F15*12","=G15","=G15","=G15+H15+I15",4G/5G backup connectivity
+WAN Circuits,Hub Data Center Circuits,Redundant 1 Gbps circuits for hubs (2 sites),2,Circuits/Month,$800,"=D16*F16*12","=G16","=G16","=G16+H16+I16",Hub internet/MPLS connectivity
+Software,Cisco SD-WAN Essentials,Per-device subscription (27 devices),27,Devices/Year,$500,"=D17*F17","=G17","=G17","=G17+H17+I17",Base SD-WAN features
+Software,Cisco DNA Advantage,Advanced analytics and automation (27 devices),27,Devices/Year,$1200,"=D18*F18","=G18","=G18","=G18+H18+I18",Application visibility and assurance
+Software,Cisco Umbrella DNS Security,Cloud-delivered security per site (optional),27,Devices/Year,$400,"=D19*F19","=G19","=G19","=G19+H19+I19",DNS filtering and threat protection
+Support,Cisco SmartNet 8x5xNBD,Hardware support for routers,27,Devices/Year,$600,"=D20*F20","=G20","=G20","=G20+H20+I20",Business hours support NBD replacement
+Professional Services,SD-WAN Design & Architecture,Network design and policy framework,80,Hours,$225,"=D21*F21","=G21*0","=G21*0","=G21+H21+I21",Solution architecture and planning
+Professional Services,vManage Controller Deployment,Install and configure controllers,40,Hours,$225,"=D22*F22","=G22*0","=G22*0","=G22+H22+I22",Control plane deployment
+Professional Services,Hub Router Configuration,Configure hub routers and policies,40,Hours,$200,"=D23*F23","=G23*0","=G23*0","=G23+H23+I23",Data center hub setup
+Professional Services,Branch Router Deployment,Deploy and configure 25 branch routers,100,Hours,$200,"=D24*F24","=G24*0","=G24*0","=G24+H24+I24",Site deployment and ZTP
+Professional Services,Policy Configuration,Application-aware routing and SLA policies,60,Hours,$200,"=D25*F25","=G25*0","=G25*0","=G25+H25+I25",Traffic engineering policies
+Professional Services,Cloud Integration,AWS Azure cloud on-ramp configuration,30,Hours,$225,"=D26*F26","=G26*0","=G26*0","=G26+H26+I26",Cloud connectivity setup (optional)
+Professional Services,Migration & Testing,Site cutover and validation,60,Hours,$200,"=D27*F27","=G27*0","=G27*0","=G27+H27+I27",MPLS to SD-WAN migration
+Professional Services,Training,Administrator and operations training,24,Hours,$175,"=D28*F28","=G28*0","=G28*0","=G28+H28+I28",vManage and troubleshooting training
+
+# Credits
+#WIDTH: 25,25,15,50
+#ALIGN: left,left,right,left
+Category,Credit Type,Credit Amount,Credit Comments
+Hardware,Trade-In Credit,"($8000)",Legacy router trade-in credit
+Software,SD-WAN Promotion,"($15000)",Year 1 SD-WAN license 25% discount
+WAN Circuits,Circuit Migration Credit,"($12000)",Year 1 circuit installation waiver from provider
+Professional Services,Implementation Credit,$0,No services credits available
+
+# 3-Year Summary
+#WIDTH: 25,15,15,15,12,12,15
+#ALIGN: left,right,right,right,right,right,right
+Category,Year 1 List,Year 1 Credits,Year 1 Net,Year 2,Year 3,3-Year Total
+Hardware,$136500,"($8000)",$128500,$0,$0,$128500
+WAN Circuits,$103800,"($12000)",$91800,$103800,$103800,$299400
+Software,$59200,"($15000)",$44200,$59200,$59200,$162600
+Support,$16200,$0,$16200,$16200,$16200,$48600
+Professional Services,$80200,$0,$80200,$0,$0,$80200
+TOTAL,$395900,"($35000)",$360900,$179200,$179200,$719300
