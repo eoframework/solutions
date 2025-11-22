@@ -1,4 +1,6 @@
-# SIZING GUIDELINES - Based on Solution Scope (Default: Small)
+# Sizing Guidelines
+#WIDTH: 24,36,28,28,28,51
+#ALIGN: left,left,center,center,center,left
 Category,Component,Small,Medium,Large,Notes
 Cloud Infrastructure,Subscriptions,5-10 subscriptions,10-25 subscriptions,50+ subscriptions,Total Azure subscriptions to manage
 Cloud Infrastructure,Management Groups,2-3 levels,4-5 levels,6+ levels deep,Organizational hierarchy complexity
@@ -11,7 +13,9 @@ Software Licenses,Defender for Cloud Scope,Standard tier,Premium tier,Enterprise
 Support & Maintenance,Support Level,Business hours,24x5 support,24x7 premium,SLA requirements
 Professional Services,Implementation Hours,400-500 hours,500-800 hours,1000+ hours,Engagement complexity
 
-# INFRASTRUCTURE COSTS - Quantities Default to Small Scope
+# Infrastructure Costs
+#WIDTH: 23,30,50,12,15,12,15,12,12,15,30
+#ALIGN: left,left,left,right,left,right,right,right,right,right,left
 Category,Component,Description,Quantity,Unit,Unit Price,Annual Cost,Year 2,Year 3,3-Year Total,Notes
 Cloud Infrastructure,Virtual WAN,Premium tier for global connectivity,2,Hubs/Month,$260,"=D11*F11*12","=G11","=G11","=G11+H11+I11",Regional network hubs
 Cloud Infrastructure,Azure Firewall,Premium tier for advanced threat protection,2,Instances/Month,$625,"=D12*F12*12","=G12","=G12","=G12+H12+I12",Network security
@@ -35,7 +39,9 @@ Professional Services,Network Implementation,Hub-spoke topology Azure Firewall P
 Professional Services,Identity Access Management,Azure AD integration RBAC design Conditional Access,60,Hours,$200,"=D30*F30","=0","=0","=G30",One-time IAM setup
 Professional Services,Training Knowledge Transfer,Admin training and operational runbooks,40,Hours,$175,"=D31*F31","=0","=0","=G31",One-time training
 
-# CREDITS - Applied per Category (Year 1 Only)
+# Credits
+#WIDTH: 25,25,15,50
+#ALIGN: left,left,right,left
 Category,Credit Type,Credit Amount,Credit Comments
 Cloud Infrastructure,Azure Credit,$0,No infrastructure credits available
 Software Licenses,Partner Credit,$0,No software credits available
@@ -43,7 +49,9 @@ Support & Maintenance,Program Credit,$0,No support credits available
 Hardware/Equipment,Equipment Credit,$0,No hardware credits available
 Professional Services,Microsoft Partner Services Credit,"($15000)",Applied to architecture and security setup services
 
-# SUMMARY
+# 3-Year Summary
+#WIDTH: 25,15,15,15,12,12,15
+#ALIGN: left,right,right,right,right,right,right
 Category,Year 1 List,Year 1 Credits,Year 1 Net,Year 2,Year 3,3-Year Total
 Cloud Infrastructure,$56620,$0,$56620,$56620,$56620,$169860
 Software Licenses,$30600,$0,$30600,$30600,$30600,$91800

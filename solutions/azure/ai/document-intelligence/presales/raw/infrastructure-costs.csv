@@ -1,4 +1,6 @@
-# SIZING GUIDELINES - Based on Solution Scope (Default: Small)
+# Sizing Guidelines
+#WIDTH: 24,36,28,28,28,51
+#ALIGN: left,left,center,center,center,left
 Category,Component,Small,Medium,Large,Notes
 Cloud Infrastructure,Document Processing Volume,50K pages/month,250K pages/month,1M+ pages/month,Monthly document processing capacity
 Cloud Infrastructure,AI Service Tier,Pre-built models only,Pre-built + basic custom,Advanced custom models + NLP,Document Intelligence service complexity
@@ -8,7 +10,9 @@ Software Licenses,User Licenses,50 users,100-250 users,500+ users,Concurrent use
 Software Licenses,Monitoring Tools,Basic (3 hosts),Standard (10 hosts),Enterprise (50+ hosts),Application performance monitoring
 Support & Maintenance,Support Level,Business hours,24x5 support,24x7 premium,SLA requirements
 
-# INFRASTRUCTURE COSTS - Quantities Default to Small Scope
+# Infrastructure Costs
+#WIDTH: 23,30,50,12,15,12,15,12,12,15,30
+#ALIGN: left,left,left,right,left,right,right,right,right,right,left
 Category,Component,Description,Quantity,Unit,Unit Price,Annual Cost,Year 2,Year 3,3-Year Total,Notes
 Cloud Infrastructure,Blob Storage,Hot tier for document ingestion and archives,1000,GB/Month,$0.02,"=D11*F11*12","=G11","=G11","=G11+H11+I11",Document storage
 Cloud Infrastructure,Document Intelligence Layout,Layout API for OCR and structure,50000,Pages/Month,$0.015,"=D12*F12*12","=G12","=G12","=G12+H12+I12",Document analysis
@@ -30,7 +34,9 @@ Software Licenses,Datadog,Pro monitoring,3,Instances/Month,$23,"=D27*F27*12","=G
 Software Licenses,PagerDuty,Incident management,3,Users/Month,$41,"=D28*F28*12","=G28","=G28","=G28+H28+I28",Professional tier
 Support & Maintenance,Azure Support,Managed services and monitoring,1,Service/Month,$223,"=D29*F29*12","=G29","=G29","=G29+H29+I29",15% of cloud infrastructure
 
-# CREDITS - Applied per Category (Year 1 Only)
+# Credits
+#WIDTH: 25,25,15,50
+#ALIGN: left,left,right,left
 Category,Credit Type,Credit Amount,Credit Comments
 Cloud Infrastructure,Azure AI Services Credit,"($3690)",30% credit on Document Intelligence and Text Analytics Year 1 consumption
 Software Licenses,Partner Credit,$0,No software credits available
@@ -38,7 +44,9 @@ Support & Maintenance,Program Credit,$0,No support credits available
 Hardware/Equipment,Equipment Credit,$0,No hardware credits available
 Professional Services,Microsoft Partner Services Credit,"($10000)",Applied to architecture and AI configuration services
 
-# SUMMARY
+# 3-Year Summary
+#WIDTH: 25,15,15,15,12,12,15
+#ALIGN: left,right,right,right,right,right,right
 Category,Year 1 List,Year 1 Credits,Year 1 Net,Year 2,Year 3,3-Year Total
 Cloud Infrastructure,$18528,"($3690)",$14838,$18528,$18528,$51894
 Software Licenses,$2904,$0,$2904,$2904,$2904,$8712

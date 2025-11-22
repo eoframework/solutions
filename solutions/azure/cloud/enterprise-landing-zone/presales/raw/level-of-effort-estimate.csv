@@ -1,4 +1,6 @@
 # SCOPE ASSUMPTIONS - BASELINE (MULTIPLIER 1.0),,,,,,,,,,
+#WIDTH: 25,35,33,32,32,39,44
+#ALIGN: left,left,left,left,left,left,left
 Category,Baseline Assumption,Current Scope,Small (1x),Medium (2x),Large (3x),Notes,,,,,
 Solution Scope,Management Groups,3-tier hierarchy,3-tier hierarchy,4-5 tier hierarchy,6+ tier complex hierarchy,Azure management group structure,,,,,
 Solution Scope,Subscriptions,5-10 subscriptions,5-10 subscriptions,10-25 subscriptions,25+ subscriptions,Subscription organization model,,,,,
@@ -18,6 +20,8 @@ Performance,Governance Automation,Policy-driven governance,Manual governance,Pol
 Environment,Deployment Environments,Landing zones for dev staging prod,2 landing zones,3-4 landing zones,5+ specialized landing zones,Landing zone segregation,,,,,
 ,,,,,,,,,,
 # ESTIMATE SETTINGS - EO Sales Engineer Updates Multipliers Based on Customer Scope,,,,,,,,,,
+#WIDTH: 17,22,14,173
+#ALIGN: left,left,center,left
 Phase,Variable Name,Multiplier,Description / Applies To Tasks,,,,,,,
 Discovery,DISCOVERY_MX,1,"All Discovery phase tasks (Requirements Gathering, Environment Assessment, Azure Services Assessment, Compliance Review)",,,,,,,
 Planning,PLANNING_MX,1,"All Planning phase tasks (Landing Zone Design, Identity Design, Network Architecture, Project Planning)",,,,,,,
@@ -30,6 +34,8 @@ Management,MANAGEMENT_MX,1.5,Project Management overhead - 20% of actual enginee
 Leadership,LEADERSHIP_MX,1.5,Quarterback/Technical Leadership overhead - 25% of actual engineering hours,,,,,,,
 ,,,,,,,,,,
 # Level of Effort,
+#WIDTH: 16,25,58,18,12,14,12,12,15,25,40
+#ALIGN: left,left,left,left,right,center,right,right,right,left,left
 Phase,Work Package,Task Description,Resource Type,Base Hours,Effort Multiplier,Actual Hours,Rate,Cost Estimate,Dependencies,Notes
 Discovery,Azure Requirements Gathering,Conduct stakeholder interviews for Azure cloud strategy,EO Engineer,40,='Estimate Settings'!$C$24,=$E33*$F33,$150,"=TEXT($G33*$H33,""$#,##0"")",,Focus on governance scalability and business alignment
 Discovery,Current Environment Assessment,Analyze existing infrastructure and Azure readiness,EO Engineer,32,='Estimate Settings'!$C$24,=$E34*$F34,$200,"=TEXT($G34*$H34,""$#,##0"")",,Include identity networking and application assessment
@@ -59,3 +65,11 @@ Closeout,Performance Baseline,Establish performance metrics monitoring baselines
 Management,Technical Leadership,Quarterback technical oversight and architecture review,EO Quarterback,"=ROUND(SUM($G$33:$G$57)*0.10,0)",='Estimate Settings'!$C$32,=$E58*$F58,$200,"=TEXT($G58*$H58,""$#,##0"")",,Azure architecture review and technical escalation support
 Management,Project Management,Project coordination planning and management activities,EO Project Manager,"=ROUND(SUM($G$33:$G$57)*0.10,0)",='Estimate Settings'!$C$31,=$E59*$F59,$150,"=TEXT($G59*$H59,""$#,##0"")",,Includes weekly status reporting risk management and stakeholder coordination
 ,,,,,TOTAL HOURS,"=SUM($G$33:$G$59)",TOTAL COST,"=TEXT(SUMPRODUCT($G$33:$G$59,$H$33:$H$59),""$#,##0"")",,EO Sales Engineer: Update phase-based multipliers in Estimate Settings based on customer landing zone scope
+
+# Credits - Applied to Total Cost (Year 1 Only)
+#WIDTH: 27,17,100
+#ALIGN: left,right,left
+Credit Type,Credit Amount,Credit Comments
+Microsoft Partner Services Credit,"($15000)",Microsoft Partner Network credit for Azure architecture and landing zone implementation services
+Implementation Discount,$0,No implementation discount applicable
+NET PROFESSIONAL SERVICES COST,"=SUMPRODUCT($G$40:$G$65,$H$40:$H$65)-15000",Total Cost minus Microsoft Partner credits

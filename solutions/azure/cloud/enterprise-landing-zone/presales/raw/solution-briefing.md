@@ -2,9 +2,9 @@
 presentation_title: Solution Briefing
 solution_name: Azure Enterprise Landing Zone
 presenter_name: Alison Smith
-client_logo: eof-tools/doc-tools/brands/default/assets/logos/client_logo.png
-footer_logo_left: eof-tools/doc-tools/brands/default/assets/logos/consulting_company_logo.png
-footer_logo_right: eof-tools/doc-tools/brands/default/assets/logos/eo-framework-logo-real.png
+client_logo: ../../assets/logos/client_logo.png
+footer_logo_left: ../../assets/logos/consulting_company_logo.png
+footer_logo_right: ../../assets/logos/eo-framework-logo-real.png
 ---
 
 # Solution Briefing Template
@@ -53,14 +53,15 @@ This engagement is sized based on the following parameters:
 <!-- TABLE_CONFIG: widths=[18, 29, 5, 18, 30] -->
 | Parameter | Scope | | Parameter | Scope |
 |-----------|-------|---|-----------|-------|
-| **Management Groups** | 3-tier hierarchy | | **Target Azure Regions** | 2 regions (East US West US) |
-| **Subscriptions** | 5-10 subscriptions | | **Availability Requirements** | Standard (99.9%) |
-| **Hybrid Connectivity** | ExpressRoute circuit | | **Infrastructure Complexity** | Hub-spoke network topology |
-| **Identity Federation** | Azure AD Connect sync | | **Security Requirements** | Azure Defender Standard |
-| **Total Users** | 500 Azure users | | **Compliance Frameworks** | SOC2 ISO27001 |
-| **User Roles** | 10 custom RBAC roles | | **Cost Management** | Azure Cost Management |
-| **Workloads to Onboard** | 20-30 applications | | **Governance Automation** | Policy-driven governance |
-| **Policy Assignments** | 50 policy assignments | | **Deployment Environments** | Landing zones for dev staging prod |
+| **Management Groups** | 3-tier hierarchy | | **Availability Requirements** | Standard (99.9%) |
+| **Subscriptions** | 5-10 subscriptions | | **Infrastructure Complexity** | Hub-spoke network topology |
+| **Hybrid Connectivity** | ExpressRoute circuit | | **Security Requirements** | Azure Defender Standard |
+| **Identity Federation** | Azure AD Connect sync | | **Compliance Frameworks** | SOC2 ISO27001 |
+| **Total Users** | 500 Azure users | | **Cost Management** | Azure Cost Management |
+| **User Roles** | 10 custom RBAC roles | | **Governance Automation** | Policy-driven governance |
+| **Workloads to Onboard** | 20-30 applications | | **Deployment Environments** | Landing zones for dev staging prod |
+| **Policy Assignments** | 50 policy assignments | |  |  |
+| **Target Azure Regions** | 2 regions (East US West US) | |  |  |
 <!-- END SCOPE_SIZING_TABLE -->
 
 *Note: Changes to these parameters may require scope adjustment and additional investment.*
@@ -192,9 +193,13 @@ This engagement is sized based on the following parameters:
 
 <!-- BEGIN COST_SUMMARY_TABLE -->
 <!-- TABLE_CONFIG: widths=[25, 15, 15, 15, 10, 10, 10] -->
-| Cost Category | Year 1 List | Provider/Partner Credits | Year 1 Net | Year 2 | Year 3 | 3-Year Total |
-|---------------|-------------|-------------------------|------------|--------|--------|--------------|
-| **TOTAL INVESTMENT** | **$0** | **$0** | **$0** | **$0** | **$0** | **$0** |
+| Cost Category | Year 1 List | Year 1 Credits | Year 1 Net | Year 2 | Year 3 | 3-Year Total |
+|---------------|-------------|----------------|------------|--------|--------|--------------|
+| Professional Services | $134,000 | ($15,000) | $119,000 | $0 | $0 | $119,000 |
+| Cloud Infrastructure | $56,620 | $0 | $56,620 | $56,620 | $56,620 | $169,860 |
+| Software Licenses | $30,600 | $0 | $30,600 | $30,600 | $30,600 | $91,800 |
+| Support & Maintenance | $24,800 | $0 | $24,800 | $24,800 | $24,800 | $74,400 |
+| **TOTAL** | **$246,020** | **($15,000)** | **$231,020** | **$112,020** | **$112,020** | **$455,060** |
 <!-- END COST_SUMMARY_TABLE -->
 
 **Provider/Partner Credits Breakdown (Year 1 Only):**

@@ -1,5 +1,6 @@
 ---
 document_title: Statement of Work
+technology_provider: Azure
 project_name: Enterprise Solution Implementation
 client_name: '[Client Name]'
 client_contact: '[Contact Name | Email | Phone]'
@@ -8,8 +9,9 @@ consultant_contact: '[Consultant Name | Email | Phone]'
 opportunity_no: OPP-2025-001
 document_date: November 15, 2025
 version: '1.0'
-client_logo: assets/logos/client_logo.png
-vendor_logo: assets/logos/consulting_company_logo.png
+client_logo: ../../assets/logos/client_logo.png
+vendor_logo: ../../assets/logos/consulting_company_logo.png
+eoframework_logo: ../../assets/logos/eo-framework-logo-real.png
 ---
 
 # Executive Summary
@@ -740,15 +742,13 @@ A Go-Live Readiness Checklist will be delivered including:
 
 <!-- BEGIN COST_SUMMARY_TABLE -->
 <!-- TABLE_CONFIG: widths=[20, 12, 23, 13, 10, 10, 12] -->
-| Cost Category | Year 1 List | Azure Credits | Year 1 Net | Year 2 | Year 3 | 3-Year Total |
-|---------------|-------------|---------------------|------------|---------|---------|--------------|
+| Cost Category | Year 1 List | AWS/Partner Credits | Year 1 Net | Year 2 | Year 3 | 3-Year Total |
+|---------------|-------------|---------------------|------------|--------|--------|--------------|
 | Professional Services | $134,000 | ($15,000) | $119,000 | $0 | $0 | $119,000 |
-| Cloud Infrastructure | $75,520 | ($10,000) | $65,520 | $75,520 | $75,520 | $216,560 |
-| Software Licenses & Subscriptions | $30,600 | ($5,000) | $25,600 | $30,600 | $30,600 | $86,800 |
+| Cloud Infrastructure | $56,620 | $0 | $56,620 | $56,620 | $56,620 | $169,860 |
+| Software Licenses | $30,600 | $0 | $30,600 | $30,600 | $30,600 | $91,800 |
 | Support & Maintenance | $24,800 | $0 | $24,800 | $24,800 | $24,800 | $74,400 |
-| **TOTAL INVESTMENT** | **$265,020** | **($30,000)** | **$245,020** | **$131,020** | **$131,020** | **$497,060** |
-| **Billing Adjustment** | - | - | **($28,000)** | - | - | **($28,000)** |
-| **ADJUSTED TOTAL INVESTMENT** | **$265,020** | **($30,000)** | **$217,020** | **$131,020** | **$131,020** | **$469,060** |
+| **TOTAL INVESTMENT** | **$246,020** | **($15,000)** | **$231,020** | **$112,020** | **$112,020** | **$455,060** |
 <!-- END COST_SUMMARY_TABLE -->
 
 ## Cost Components

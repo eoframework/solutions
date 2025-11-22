@@ -1,0 +1,49 @@
+# Sizing Guidelines
+#WIDTH: 24,36,28,28,28,51
+#ALIGN: left,left,center,center,center,left
+Category,Component,Small (100 users),Medium (500 users),Large (1000 users),Notes
+User Licenses,Dell SafeID Enterprise,100 users,500 users,1000 users,Per-user annual subscription licensing
+Hardware Tokens,YubiKey 5 NFC,100 tokens,500 tokens,1000 tokens,USB-A and NFC hardware authenticator
+Smart Card Readers,USB Smart Card Readers,100 readers,500 readers,1000 readers,For CAC/PIV smart card authentication (optional)
+MFA Servers,Dell SafeID Authentication Servers,2 servers (HA pair),2 servers (HA pair),4 servers (HA pair per site),Virtual or physical appliances for redundancy
+Integration Connectors,Active Directory Connector,1 connector,2 connectors,4 connectors,AD integration and LDAP authentication
+Support Tier,Enterprise Support 20% of licenses,Included,Included,Included,Annual support and software updates
+
+# Infrastructure Costs
+#WIDTH: 23,30,50,12,16,12,15,12,12,15,30
+#ALIGN: left,left,left,right,left,right,right,right,right,right,left
+Category,Component,Description,Quantity,Unit,Unit Price,Annual Cost,Year 2,Year 3,3-Year Total,Notes
+Software,Dell SafeID Enterprise Licenses,Per-user annual subscription for MFA authentication,500,Users/Annual,$120,$60000,$60000,$60000,$180000,Annual recurring subscription
+Hardware,YubiKey 5 NFC Tokens,FIDO2 and OTP hardware authenticator with USB-A and NFC,500,Tokens,$50,$25000,$0,$0,$25000,One-time hardware purchase
+Hardware,USB Smart Card Readers,USB readers for CAC/PIV smart card authentication,500,Readers,$25,$12500,$0,$0,$12500,One-time purchase (optional for DoD)
+Hardware,Dell SafeID Authentication Server,Virtual appliance for authentication services (HA pair),2,Servers,$7500,$15000,$0,$0,$15000,Redundant authentication infrastructure
+Integration,Active Directory Connector,LDAP and AD integration connector for on-prem identity,1,Connector,$15000,$15000,$0,$0,$15000,One-time integration service
+Integration,VPN RADIUS Integration,RADIUS integration for VPN MFA (Cisco Palo Alto Fortinet),1,Integration,$5000,$5000,$0,$0,$5000,VPN MFA configuration
+Integration,Cloud SSO Integration,SAML/OIDC integration for cloud applications (O365 AWS Salesforce),5,Applications,$2000,$10000,$0,$0,$10000,SaaS application SSO setup
+Support & Maintenance,Dell SafeID Annual Support,Annual support at 20% of software license cost,1,Support Contract,$12000,$12000,$12000,$12000,$36000,Software updates and technical support
+Support & Maintenance,YubiKey Replacement Reserve,5% annual replacement for lost or damaged tokens,25,Tokens/Annual,$50,$1250,$1250,$1250,$3750,Replacement token budget
+Professional Services,MFA Implementation Services,Installation configuration and AD integration,1,Project,$25000,$25000,$0,$0,$25000,Implementation and deployment services
+Professional Services,User Enrollment Assistance,IT-assisted enrollment for initial 500 users,500,Users,$10,$5000,$0,$0,$5000,Help desk enrollment support
+Professional Services,Administrator Training,2-day MFA administration and policy management training,2,Students,$2500,$5000,$0,$0,$5000,IT team training on SafeID platform
+Professional Services,User Awareness Training,End-user MFA training materials and video production,1,Project,$8000,$8000,$0,$0,$8000,User communication and training content
+
+# Credits
+#WIDTH: 25,25,15,50
+#ALIGN: left,left,right,left
+Category,Credit Type,Credit Amount,Credit Comments
+Operational Savings,Password Reset Ticket Reduction,"($25000)",Annual savings from 40% reduction in password reset help desk tickets ($62.5K baseline)
+Risk Mitigation,Breach Prevention Value,"($4450000)",Avoided cost of credential-based data breach ($4.45M industry average per IBM 2023 report)
+Compliance Enablement,DoD Contract Revenue Enabled,$2000000,MFA enables CMMC Level 2 certification required for $2M annual DoD contract opportunity
+
+# 3-Year Summary
+#WIDTH: 25,15,15,15,12,12,15
+#ALIGN: left,right,right,right,right,right,right
+Category,Year 1 List,Year 1 Credits,Year 1 Net,Year 2,Year 3,3-Year Total
+Software,$60000,$0,$60000,$60000,$60000,$180000
+Hardware,$52500,$0,$52500,$0,$0,$52500
+Integration,$30000,$0,$30000,$0,$0,$30000
+Support & Maintenance,$13250,$0,$13250,$13250,$13250,$39750
+Professional Services,$43000,$0,$43000,$0,$0,$43000
+TOTAL,$198750,$0,$198750,$73250,$73250,$345250
+Password Reset Savings,$0,"($25000)","($25000)","($25000)","($25000)","($75000)"
+Net Investment After Savings,$198750,"($25000)",$173750,$48250,$48250,$270250

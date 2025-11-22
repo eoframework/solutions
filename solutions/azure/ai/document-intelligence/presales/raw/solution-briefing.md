@@ -2,9 +2,9 @@
 presentation_title: Solution Briefing
 solution_name: Azure Document Intelligence
 presenter_name: [Presenter Name]
-client_logo: eof-tools/doc-tools/brands/default/assets/logos/client_logo.png
-footer_logo_left: eof-tools/doc-tools/brands/default/assets/logos/consulting_company_logo.png
-footer_logo_right: eof-tools/doc-tools/brands/default/assets/logos/eo-framework-logo-real.png
+client_logo: ../../assets/logos/client_logo.png
+footer_logo_left: ../../assets/logos/consulting_company_logo.png
+footer_logo_right: ../../assets/logos/eo-framework-logo-real.png
 ---
 
 # Azure Document Intelligence - Solution Briefing
@@ -53,14 +53,15 @@ This engagement is sized based on the following parameters:
 <!-- TABLE_CONFIG: widths=[18, 29, 5, 18, 30] -->
 | Parameter | Scope | | Parameter | Scope |
 |-----------|-------|---|-----------|-------|
-| **Document Types** | 3 document types (invoices receipts forms) | | **Deployment Regions** | Single Azure region (East US) |
-| **AI/ML Complexity** | Azure Document Intelligence pre-built | | **Availability Requirements** | Standard (99.5%) |
-| **External System Integrations** | 2 REST APIs (CRM ERP) | | **Infrastructure Complexity** | Serverless (Functions Blob Doc Intel) |
-| **Data Sources** | Blob Storage and SharePoint | | **Security Requirements** | RBAC encryption at rest/transit |
-| **Total Users** | 75 users | | **Compliance Frameworks** | SOC2 |
-| **User Roles** | 3 roles (submitter reviewer admin) | | **Accuracy Requirements** | 95%+ extraction accuracy |
-| **Document Processing Volume** | 2000 docs/month | | **Processing Speed** | Batch processing |
-| **Data Storage Requirements** | 250 GB | | **Deployment Environments** | 2 environments (dev prod) |
+| **Document Types** | 3 document types (invoices receipts forms) | | **Availability Requirements** | Standard (99.5%) |
+| **AI/ML Complexity** | Azure Document Intelligence pre-built | | **Infrastructure Complexity** | Serverless (Functions Blob Doc Intel) |
+| **External System Integrations** | 2 REST APIs (CRM ERP) | | **Security Requirements** | RBAC encryption at rest/transit |
+| **Data Sources** | Blob Storage and SharePoint | | **Compliance Frameworks** | SOC2 |
+| **Total Users** | 75 users | | **Accuracy Requirements** | 95%+ extraction accuracy |
+| **User Roles** | 3 roles (submitter reviewer admin) | | **Processing Speed** | Batch processing |
+| **Document Processing Volume** | 2000 docs/month | | **Deployment Environments** | 2 environments (dev prod) |
+| **Data Storage Requirements** | 250 GB | |  |  |
+| **Deployment Regions** | Single Azure region (East US) | |  |  |
 <!-- END SCOPE_SIZING_TABLE -->
 
 *Note: Changes to these parameters may require scope adjustment and additional investment.*
@@ -192,13 +193,13 @@ This engagement is sized based on the following parameters:
 
 <!-- BEGIN COST_SUMMARY_TABLE -->
 <!-- TABLE_CONFIG: widths=[18, 12, 24, 12, 10, 10, 14] -->
-| Cost Category | Year 1 List | Provider/Partner Credits | Year 1 Net | Year 2 | Year 3 | 3-Year Total |
-|---------------|-------------|-------------------------|------------|--------|--------|--------------|
+| Cost Category | Year 1 List | Year 1 Credits | Year 1 Net | Year 2 | Year 3 | 3-Year Total |
+|---------------|-------------|----------------|------------|--------|--------|--------------|
 | Professional Services | $82,250 | ($10,000) | $72,250 | $0 | $0 | $72,250 |
 | Cloud Infrastructure | $18,528 | ($3,690) | $14,838 | $18,528 | $18,528 | $51,894 |
 | Software Licenses | $2,904 | $0 | $2,904 | $2,904 | $2,904 | $8,712 |
 | Support & Maintenance | $2,676 | $0 | $2,676 | $2,676 | $2,676 | $8,028 |
-| **TOTAL INVESTMENT** | **$106,358** | **($13,690)** | **$92,668** | **$24,108** | **$24,108** | **$140,884** |
+| **TOTAL** | **$106,358** | **($13,690)** | **$92,668** | **$24,108** | **$24,108** | **$140,884** |
 <!-- END COST_SUMMARY_TABLE -->
 
 **Provider/Partner Credits Breakdown (Year 1 Only):**

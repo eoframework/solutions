@@ -9,8 +9,9 @@ consultant_contact: [Consultant Name | Email | Phone]
 opportunity_no: OPP-2025-001
 document_date: November 15, 2025
 version: 1.0
-client_logo: assets/logos/client_logo.png
-vendor_logo: assets/logos/consulting_company_logo.png
+client_logo: ../../assets/logos/client_logo.png
+vendor_logo: ../../assets/logos/consulting_company_logo.png
+eoframework_logo: ../../assets/logos/eo-framework-logo-real.png
 ---
 
 # Executive Summary
@@ -590,13 +591,13 @@ A Go-Live Readiness Checklist will be delivered including:
 
 <!-- BEGIN COST_SUMMARY_TABLE -->
 <!-- TABLE_CONFIG: widths=[20, 12, 23, 13, 10, 10, 12] -->
-| Cost Category | Year 1 List | Provider/Partner Credits | Year 1 Net | Year 2 | Year 3 | 3-Year Total |
-|---------------|-------------|-------------------------|------------|---------|---------|-----------------|
-| Cloud Infrastructure | $18,528 | ($3,690) | $14,838 | $18,528 | $18,528 | $51,894 |
+| Cost Category | Year 1 List | AWS/Partner Credits | Year 1 Net | Year 2 | Year 3 | 3-Year Total |
+|---------------|-------------|---------------------|------------|--------|--------|--------------|
 | Professional Services | $82,250 | ($10,000) | $72,250 | $0 | $0 | $72,250 |
+| Cloud Infrastructure | $18,528 | ($3,690) | $14,838 | $18,528 | $18,528 | $51,894 |
 | Software Licenses | $2,904 | $0 | $2,904 | $2,904 | $2,904 | $8,712 |
-| Support & Maintenance | $2,670 | $0 | $2,670 | $2,670 | $2,670 | $8,010 |
-| **TOTAL INVESTMENT** | **$106,352** | **($13,690)** | **$92,662** | **$24,102** | **$24,102** | **$140,866** |
+| Support & Maintenance | $2,676 | $0 | $2,676 | $2,676 | $2,676 | $8,028 |
+| **TOTAL INVESTMENT** | **$106,358** | **($13,690)** | **$92,668** | **$24,108** | **$24,108** | **$140,884** |
 <!-- END COST_SUMMARY_TABLE -->
 
 ## Azure Partner Credits
