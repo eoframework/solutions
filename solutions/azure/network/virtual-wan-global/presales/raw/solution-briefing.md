@@ -55,14 +55,15 @@ This engagement is sized based on the following parameters:
 <!-- TABLE_CONFIG: widths=[18, 29, 5, 18, 30] -->
 | Parameter | Scope | | Parameter | Scope |
 |-----------|-------|---|-----------|-------|
-| **Virtual WAN Hubs** | 3 regional hubs | | **Deployment Regions** | 3 Azure regions globally |
-| **Connected Sites** | 10-15 branch locations | | **Availability Requirements** | High availability (99.95%) |
-| **VPN Connections** | Site-to-site IPsec VPN | | **Infrastructure Complexity** | vWAN + Azure Firewall + routing |
-| **ExpressRoute Circuits** | 2 circuits (primary backup) | | **Security Requirements** | Azure Firewall DDoS protection |
-| **Total Users** | 1000 users across sites | | **Compliance Frameworks** | SOC2 ISO27001 |
-| **User Roles** | 3 roles (network ops security admin) | | **Latency Requirements** | <50ms inter-region |
-| **Bandwidth Requirements** | 1 Gbps aggregate | | **Routing Complexity** | BGP route propagation |
-| **Traffic Volume** | 10 TB/month | | **Deployment Environments** | 2 environments (non-prod prod) |
+| **Virtual WAN Hubs** | 3 regional hubs | | **Availability Requirements** | High availability (99.95%) |
+| **Connected Sites** | 10-15 branch locations | | **Infrastructure Complexity** | vWAN + Azure Firewall + routing |
+| **VPN Connections** | Site-to-site IPsec VPN | | **Security Requirements** | Azure Firewall DDoS protection |
+| **ExpressRoute Circuits** | 2 circuits (primary backup) | | **Compliance Frameworks** | SOC2 ISO27001 |
+| **Total Users** | 1000 users across sites | | **Latency Requirements** | <50ms inter-region |
+| **User Roles** | 3 roles (network ops security admin) | | **Routing Complexity** | BGP route propagation |
+| **Bandwidth Requirements** | 1 Gbps aggregate | | **Deployment Environments** | 2 environments (non-prod prod) |
+| **Traffic Volume** | 10 TB/month | |  |  |
+| **Deployment Regions** | 3 Azure regions globally | |  |  |
 <!-- END SCOPE_SIZING_TABLE -->
 
 *Note: Changes to these parameters may require scope adjustment and additional investment.*
@@ -194,9 +195,13 @@ This engagement is sized based on the following parameters:
 
 <!-- BEGIN COST_SUMMARY_TABLE -->
 <!-- TABLE_CONFIG: widths=[25, 15, 15, 15, 10, 10, 10] -->
-| Cost Category | Year 1 List | Provider/Partner Credits | Year 1 Net | Year 2 | Year 3 | 3-Year Total |
-|---------------|-------------|-------------------------|------------|--------|--------|--------------|
-| **TOTAL INVESTMENT** | **$0** | **$0** | **$0** | **$0** | **$0** | **$0** |
+| Cost Category | Year 1 List | Year 1 Credits | Year 1 Net | Year 2 | Year 3 | 3-Year Total |
+|---------------|-------------|----------------|------------|--------|--------|--------------|
+| Professional Services | $90,500 | ($12,000) | $78,500 | $0 | $0 | $78,500 |
+| Cloud Infrastructure | $50,496 | $0 | $50,496 | $50,496 | $50,496 | $151,488 |
+| Software Licenses | $3,600 | $0 | $3,600 | $3,600 | $3,600 | $10,800 |
+| Support & Maintenance | $11,448 | $0 | $11,448 | $11,448 | $11,448 | $34,344 |
+| **TOTAL** | **$156,044** | **($12,000)** | **$144,044** | **$65,544** | **$65,544** | **$275,132** |
 <!-- END COST_SUMMARY_TABLE -->
 
 *Note: Actual costs will be calculated based on number of hubs, connected branches, and bandwidth requirements. Cloud Infrastructure includes Virtual WAN hub fees, Azure Firewall consumption, and VPN gateway charges.*

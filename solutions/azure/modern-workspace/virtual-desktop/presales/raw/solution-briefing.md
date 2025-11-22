@@ -57,14 +57,15 @@ This engagement is sized based on the following parameters:
 <!-- TABLE_CONFIG: widths=[18, 29, 5, 18, 30] -->
 | Parameter | Scope | | Parameter | Scope |
 |-----------|-------|---|-----------|-------|
-| **Host Pools** | 3 host pools | | **Deployment Regions** | Single Azure region (East US) |
-| **Application Groups** | 5-10 app groups | | **Availability Requirements** | Standard (99.9%) |
-| **Identity Integration** | Azure AD hybrid join | | **Infrastructure Complexity** | Multi-session Windows 11 hosts |
-| **Profile Management** | FSLogix profile containers | | **Security Requirements** | Conditional Access MFA Intune |
-| **Total Users** | 200 concurrent users | | **Compliance Frameworks** | SOC2 |
-| **User Roles** | 3 roles (standard power admin) | | **User Experience** | Standard latency requirements |
-| **User Profiles** | 10 GB per user | | **Graphics Requirements** | Standard office workloads |
-| **Application Data** | 500 GB shared storage | | **Deployment Environments** | 2 environments (pilot prod) |
+| **Host Pools** | 3 host pools | | **Availability Requirements** | Standard (99.9%) |
+| **Application Groups** | 5-10 app groups | | **Infrastructure Complexity** | Multi-session Windows 11 hosts |
+| **Identity Integration** | Azure AD hybrid join | | **Security Requirements** | Conditional Access MFA Intune |
+| **Profile Management** | FSLogix profile containers | | **Compliance Frameworks** | SOC2 |
+| **Total Users** | 200 concurrent users | | **User Experience** | Standard latency requirements |
+| **User Roles** | 3 roles (standard power admin) | | **Graphics Requirements** | Standard office workloads |
+| **User Profiles** | 10 GB per user | | **Deployment Environments** | 2 environments (pilot prod) |
+| **Application Data** | 500 GB shared storage | |  |  |
+| **Deployment Regions** | Single Azure region (East US) | |  |  |
 <!-- END SCOPE_SIZING_TABLE -->
 
 *Note: Changes to these parameters may require scope adjustment and additional investment.*
@@ -207,9 +208,13 @@ This engagement is sized based on the following parameters:
 
 <!-- BEGIN COST_SUMMARY_TABLE -->
 <!-- TABLE_CONFIG: widths=[25, 15, 15, 15, 10, 10, 10] -->
-| Cost Category | Year 1 List | Provider/Partner Credits | Year 1 Net | Year 2 | Year 3 | 3-Year Total |
-|---------------|-------------|-------------------------|------------|--------|--------|--------------|
-| **TOTAL INVESTMENT** | **$0** | **$0** | **$0** | **$0** | **$0** | **$0** |
+| Cost Category | Year 1 List | Year 1 Credits | Year 1 Net | Year 2 | Year 3 | 3-Year Total |
+|---------------|-------------|----------------|------------|--------|--------|--------------|
+| Professional Services | $78,400 | ($10,000) | $68,400 | $0 | $0 | $68,400 |
+| Cloud Infrastructure | $39,600 | $0 | $39,600 | $39,600 | $39,600 | $118,800 |
+| Software Licenses | $24,000 | $0 | $24,000 | $24,000 | $24,000 | $72,000 |
+| Support & Maintenance | $5,184 | $0 | $5,184 | $5,184 | $5,184 | $15,552 |
+| **TOTAL** | **$147,184** | **($10,000)** | **$137,184** | **$68,784** | **$68,784** | **$274,752** |
 <!-- END COST_SUMMARY_TABLE -->
 
 **Provider/Partner Credits Breakdown (Year 1 Only):**

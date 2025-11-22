@@ -53,14 +53,15 @@ This engagement is sized based on the following parameters:
 <!-- TABLE_CONFIG: widths=[18, 29, 5, 18, 30] -->
 | Parameter | Scope | | Parameter | Scope |
 |-----------|-------|---|-----------|-------|
-| **Data Connectors** | 10-15 connectors | | **Deployment Regions** | Single Azure region (East US) |
-| **Analytics Rules** | 50 custom detection rules | | **Availability Requirements** | 24/7 monitoring |
-| **Log Sources** | Azure AD Office365 Firewall Endpoints | | **Infrastructure Complexity** | Log Analytics + Sentinel workspace |
-| **SOAR Playbooks** | 10 automated playbooks | | **Security Requirements** | RBAC MFA audit logging |
-| **Total Users** | 10 SOC analysts | | **Compliance Frameworks** | SOC2 NIST CSF |
-| **User Roles** | 3 roles (analyst engineer admin) | | **Detection Response** | MTTR <1 hour |
-| **Daily Log Ingestion** | 50 GB/day | | **Query Performance** | Standard KQL queries |
-| **Retention Period** | 90 days hot 2 years archive | | **Deployment Environments** | 2 environments (dev prod) |
+| **Data Connectors** | 10-15 connectors | | **Availability Requirements** | 24/7 monitoring |
+| **Analytics Rules** | 50 custom detection rules | | **Infrastructure Complexity** | Log Analytics + Sentinel workspace |
+| **Log Sources** | Azure AD Office365 Firewall Endpoints | | **Security Requirements** | RBAC MFA audit logging |
+| **SOAR Playbooks** | 10 automated playbooks | | **Compliance Frameworks** | SOC2 NIST CSF |
+| **Total Users** | 10 SOC analysts | | **Detection Response** | MTTR <1 hour |
+| **User Roles** | 3 roles (analyst engineer admin) | | **Query Performance** | Standard KQL queries |
+| **Daily Log Ingestion** | 50 GB/day | | **Deployment Environments** | 2 environments (dev prod) |
+| **Retention Period** | 90 days hot 2 years archive | |  |  |
+| **Deployment Regions** | Single Azure region (East US) | |  |  |
 <!-- END SCOPE_SIZING_TABLE -->
 
 *Note: Changes to these parameters may require scope adjustment and additional investment.*
@@ -192,9 +193,13 @@ This engagement is sized based on the following parameters:
 
 <!-- BEGIN COST_SUMMARY_TABLE -->
 <!-- TABLE_CONFIG: widths=[25, 15, 15, 15, 10, 10, 10] -->
-| Cost Category | Year 1 List | Provider/Partner Credits | Year 1 Net | Year 2 | Year 3 | 3-Year Total |
-|---------------|-------------|-------------------------|------------|--------|--------|--------------|
-| **TOTAL INVESTMENT** | **$0** | **$0** | **$0** | **$0** | **$0** | **$0** |
+| Cost Category | Year 1 List | Year 1 Credits | Year 1 Net | Year 2 | Year 3 | 3-Year Total |
+|---------------|-------------|----------------|------------|--------|--------|--------------|
+| Professional Services | $137,000 | $0 | $137,000 | $0 | $0 | $137,000 |
+| Cloud Infrastructure | $191,140 | ($9,000) | $182,140 | $191,140 | $191,140 | $564,420 |
+| Software Licenses | $7,400 | $0 | $7,400 | $7,400 | $7,400 | $22,200 |
+| Support & Maintenance | $19,428 | ($12,000) | $7,428 | $19,428 | $19,428 | $46,284 |
+| **TOTAL** | **$354,968** | **($21,000)** | **$333,968** | **$217,968** | **$217,968** | **$769,904** |
 <!-- END COST_SUMMARY_TABLE -->
 
 **Provider/Partner Credits Breakdown (Year 1 Only):**

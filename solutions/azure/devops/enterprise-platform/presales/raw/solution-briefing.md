@@ -55,14 +55,15 @@ This engagement is sized based on the following parameters:
 <!-- TABLE_CONFIG: widths=[18, 29, 5, 18, 30] -->
 | Parameter | Scope | | Parameter | Scope |
 |-----------|-------|---|-----------|-------|
-| **Projects/Repositories** | 10-20 repositories | | **Deployment Regions** | Single Azure region |
-| **CI/CD Pipelines** | 25-50 pipelines | | **Availability Requirements** | Standard (99.5%) |
-| **External Integrations** | GitHub SonarQube Artifactory | | **Infrastructure Complexity** | Azure DevOps + self-hosted agents |
-| **Deployment Targets** | Azure Kubernetes Service VMs | | **Security Requirements** | Service connections branch policies |
-| **Total Users** | 50 developers | | **Compliance Frameworks** | SOC2 |
-| **User Roles** | 4 roles (dev lead ops admin) | | **Build Performance** | Standard build times |
-| **Build Artifacts** | 100 GB storage | | **Deployment Frequency** | Daily deployments |
-| **Pipeline Runs** | 500 runs/month | | **Deployment Environments** | 3 environments (dev staging prod) |
+| **Projects/Repositories** | 10-20 repositories | | **Availability Requirements** | Standard (99.5%) |
+| **CI/CD Pipelines** | 25-50 pipelines | | **Infrastructure Complexity** | Azure DevOps + self-hosted agents |
+| **External Integrations** | GitHub SonarQube Artifactory | | **Security Requirements** | Service connections branch policies |
+| **Deployment Targets** | Azure Kubernetes Service VMs | | **Compliance Frameworks** | SOC2 |
+| **Total Users** | 50 developers | | **Build Performance** | Standard build times |
+| **User Roles** | 4 roles (dev lead ops admin) | | **Deployment Frequency** | Daily deployments |
+| **Build Artifacts** | 100 GB storage | | **Deployment Environments** | 3 environments (dev staging prod) |
+| **Pipeline Runs** | 500 runs/month | |  |  |
+| **Deployment Regions** | Single Azure region | |  |  |
 <!-- END SCOPE_SIZING_TABLE -->
 
 *Note: Changes to these parameters may require scope adjustment and additional investment.*
@@ -194,9 +195,12 @@ This engagement is sized based on the following parameters:
 
 <!-- BEGIN COST_SUMMARY_TABLE -->
 <!-- TABLE_CONFIG: widths=[25, 15, 15, 15, 10, 10, 10] -->
-| Cost Category | Year 1 List | Provider/Partner Credits | Year 1 Net | Year 2 | Year 3 | 3-Year Total |
-|---------------|-------------|-------------------------|------------|--------|--------|--------------|
-| **TOTAL INVESTMENT** | **$0** | **$0** | **$0** | **$0** | **$0** | **$0** |
+| Cost Category | Year 1 List | Year 1 Credits | Year 1 Net | Year 2 | Year 3 | 3-Year Total |
+|---------------|-------------|----------------|------------|--------|--------|--------------|
+| Professional Services | $100,000 | ($8,000) | $92,000 | $0 | $0 | $92,000 |
+| Cloud Infrastructure | $6,200 | $0 | $6,200 | $6,200 | $6,200 | $18,600 |
+| Support & Maintenance | $1,524 | $0 | $1,524 | $1,524 | $1,524 | $4,572 |
+| **TOTAL** | **$107,724** | **($8,000)** | **$99,724** | **$7,724** | **$7,724** | **$115,172** |
 <!-- END COST_SUMMARY_TABLE -->
 
 **Provider/Partner Credits Breakdown (Year 1 Only):**
