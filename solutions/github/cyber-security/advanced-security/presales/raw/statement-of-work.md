@@ -1,3 +1,19 @@
+---
+document_title: Statement of Work
+technology_provider: GitHub
+project_name: GitHub Advanced Security Implementation
+client_name: [Client Name]
+client_contact: [Contact Name | Email | Phone]
+consulting_company: Your Consulting Company
+consultant_contact: [Consultant Name | Email | Phone]
+opportunity_no: OPP-2025-001
+document_date: November 22, 2025
+version: 1.0
+client_logo: ../../assets/logos/client_logo.png
+vendor_logo: ../../assets/logos/consulting_company_logo.png
+eoframework_logo: ../../assets/logos/eo-framework-logo-real.png
+---
+
 # STATEMENT OF WORK (SOW)
 
 **Document Version:** 1.0

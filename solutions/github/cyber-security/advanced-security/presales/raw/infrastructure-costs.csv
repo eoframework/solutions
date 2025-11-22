@@ -1,0 +1,55 @@
+# Sizing Guidelines
+#WIDTH: 24,36,28,28,28,51
+#ALIGN: left,left,center,center,center,left
+Category,Component,Small,Medium,Large,Notes
+Developer Licenses,Active Developers,25 developers,100 developers,500 developers,GitHub Enterprise + GHAS pricing
+Developer Licenses,Active Committers,20 committers,80 committers,400 committers,GHAS pricing based on 90-day commit activity
+Repository Scope,Total Repositories,50 repositories,200 repositories,1000 repositories,Code scanning coverage
+Security Scanning,Code Scanning Frequency,Per pull request,Per commit,Continuous,CodeQL analysis frequency
+Security Scanning,Languages Supported,2-3 languages,5-7 languages,10+ languages,JavaScript Python Java C# Go Ruby etc
+Security Features,CodeQL Queries,Standard queries,+ Custom queries,+ Advanced patterns,Security policy enforcement
+Security Features,Secret Scanning,Partner patterns,+ Custom patterns,+ Push protection,API keys tokens credentials
+Security Features,Dependency Scanning,Basic SCA,+ Policy enforcement,+ Auto-remediation,Dependabot alerts and updates
+CI/CD Integration,GitHub Actions Minutes,10K minutes/month,50K minutes/month,200K+ minutes/month,Included in Enterprise Cloud
+Professional Services,Implementation Hours,40 hours,120 hours,300 hours,Assessment integration training
+
+# Infrastructure Costs
+#WIDTH: 23,30,50,12,15,12,15,12,12,15,30
+#ALIGN: left,left,left,right,left,right,right,right,right,right,left
+Category,Component,Description,Quantity,Unit,Unit Price,Annual Cost,Year 2,Year 3,3-Year Total,Notes
+Software Licenses,GitHub Enterprise Cloud,Enterprise Cloud with Advanced Security (100 users),100,Users/Year,$4200,"=D11*F11","=G11","=G11","=G11+H11+I11",Includes GHAS code scanning secret scanning
+Software Licenses,GitHub Actions Minutes,Included compute minutes for CI/CD workflows,50000,Minutes/Month,$0,"=D12*F12*12","=G12","=G12","=G12+H12+I12",Included with Enterprise Cloud
+Software Licenses,GitHub Packages Storage,Package registry storage for artifacts (100 GB),100,GB/Month,$0.25,"=D13*F13*12","=G13","=G13","=G13+H13+I13",Docker npm Maven NuGet packages
+Software Licenses,GitHub LFS Storage,Large file storage for binaries (50 GB),50,GB/Month,$0.07,"=D14*F14*12","=G14","=G14","=G14+H14+I14",Binary assets and large files
+Professional Services,Security Assessment,Current state security posture assessment,40,Hours,$225,"=D15*F15","=0","=0","=G15+H15+I15",Vulnerability landscape analysis
+Professional Services,GHAS Implementation,GitHub Advanced Security setup and configuration,60,Hours,$225,"=D16*F16","=0","=0","=G16+H16+I16",Code scanning secret scanning setup
+Professional Services,CodeQL Custom Queries,Custom CodeQL query development for org-specific patterns,60,Hours,$225,"=D17*F17","=0","=0","=G17+H17+I17",Company security policies
+Professional Services,Policy Configuration,Security policies branch protection PR checks,30,Hours,$200,"=D18*F18","=0","=0","=G18+H18+I18",Merge blocking and approval rules
+Professional Services,CI/CD Integration,GitHub Actions workflow integration with scanning,40,Hours,$200,"=D19*F19","=0","=0","=G19+H19+I19",Automated security in pipelines
+Professional Services,SIEM Integration,Integration with Splunk Azure Sentinel,24,Hours,$225,"=D20*F20","=0","=0","=G20+H20+I20",Security event forwarding
+Professional Services,Security Champion Training,Train security champions on GHAS (8 champions),16,Hours,$175,"=D21*F21","=0","=0","=G21+H21+I21",2 days training for champions
+Professional Services,Developer Training,Developer workshops on fixing vulnerabilities,24,Hours,$175,"=D22*F22","=0","=0","=G22+H22+I22",3 days training for dev teams
+Professional Services,Administrator Training,Platform admin training for GHAS management,8,Hours,$175,"=D23*F23","=0","=0","=G23+H23+I23",1 day training for admins
+Third-Party Tools,Vulnerability Database,CVE database and threat intelligence feeds,1,Subscription/Year,$5000,"=D24*F24","=G24","=G24","=G24+H24+I24",Enhanced vulnerability data
+Third-Party Tools,Code Quality Analysis,SonarQube Developer Edition (100 users),100,Users/Year,$150,"=D25*F25","=G25","=G25","=G25+H25+I25",Complementary code quality
+Support & Maintenance,GitHub Premium Support,24x7 premium support with 1-hour response SLA,1,Service/Year,$25000,"=D26*F26","=G26","=G26","=G26+H26+I26",Enterprise-grade support
+Support & Maintenance,Managed Services,Ongoing GHAS management and optimization (10% of licenses),1,Service/Year,$42000,"=D27*F27","=G27","=G27","=G27+H27+I27",Quarterly security reviews
+
+# Credits
+#WIDTH: 25,25,15,50
+#ALIGN: left,left,right,left
+Category,Credit Type,Credit Amount,Credit Comments
+Software Licenses,GitHub Enterprise Credit,$0,No discounts applied - list pricing
+Professional Services,Implementation Credit,$0,No professional services credits
+Third-Party Tools,Partner Credit,$0,No third-party tool credits
+Support & Maintenance,Support Credit,$0,No support credits available
+
+# 3-Year Summary
+#WIDTH: 25,15,15,15,12,12,15
+#ALIGN: left,right,right,right,right,right,right
+Category,Year 1 List,Year 1 Credits,Year 1 Net,Year 2,Year 3,3-Year Total
+Software Licenses,"=SUM(G11:G14)","=0","=G51-H51","=SUM(H11:H14)","=SUM(I11:I14)","=J51+K51+L51"
+Professional Services,"=SUM(G15:G23)","=0","=G52-H52","=SUM(H15:H23)","=SUM(I15:I23)","=J52+K52+L52"
+Third-Party Tools,"=SUM(G24:G25)","=0","=G53-H53","=SUM(H24:H25)","=SUM(I24:I25)","=J53+K53+L53"
+Support & Maintenance,"=SUM(G26:G27)","=0","=G54-H54","=SUM(H26:H27)","=SUM(I26:I27)","=J54+K54+L54"
+**TOTAL INVESTMENT**,"=SUM(G51:G54)","=SUM(H51:H54)","=SUM(I51:I54)","=SUM(J51:J54)","=SUM(K51:K54)","=SUM(L51:L54)"
