@@ -26,7 +26,7 @@ footer_logo_right: eof-tools/doc-tools/brands/default/assets/logos/eo-framework-
 ---
 
 ### Business Opportunity
-**layout:** two_column
+**layout:** eo_two_column
 
 **Accelerating Digital Transformation Through Cloud Migration**
 
@@ -42,7 +42,7 @@ footer_logo_right: eof-tools/doc-tools/brands/default/assets/logos/eo-framework-
 ---
 
 ### Engagement Scope
-**layout:** table
+**layout:** eo_table
 
 **Sizing Parameters for This Engagement**
 
@@ -52,14 +52,15 @@ This engagement is sized based on the following parameters:
 <!-- TABLE_CONFIG: widths=[18, 29, 5, 18, 30] -->
 | Parameter | Scope | | Parameter | Scope |
 |-----------|-------|---|-----------|-------|
-| **Workloads to Migrate** | 5-10 VMs/applications | | **Target AWS Region** | us-east-1 |
-| **Migration Strategy** | Rehost (lift-and-shift) | | **Availability Requirements** | Standard (99.5%) |
-| **Source Environment** | VMware vSphere on-premises | | **Infrastructure Complexity** | EC2 RDS S3 standard |
-| **Hybrid Connectivity** | AWS Direct Connect | | **Security Requirements** | VPC Security Groups IAM |
-| **Total Users** | 100 application users | | **Compliance Frameworks** | SOC2 |
-| **User Roles** | 3 roles (admin operator user) | | **Migration Window** | Weekend maintenance windows |
-| **Total Data to Migrate** | 500 GB | | **Performance Requirements** | Match on-premises baseline |
-| **Database Migration** | 2 databases (MySQL PostgreSQL) | | **Deployment Environments** | 2 environments (dev prod) |
+| **Workloads to Migrate** | 5-10 VMs/applications | | **Availability Requirements** | Standard (99.5%) |
+| **Migration Strategy** | Rehost (lift-and-shift) | | **Infrastructure Complexity** | EC2 RDS S3 standard |
+| **Source Environment** | VMware vSphere on-premises | | **Security Requirements** | VPC Security Groups IAM |
+| **Hybrid Connectivity** | AWS Direct Connect | | **Compliance Frameworks** | SOC2 |
+| **Total Users** | 100 application users | | **Migration Window** | Weekend maintenance windows |
+| **User Roles** | 3 roles (admin operator user) | | **Performance Requirements** | Match on-premises baseline |
+| **Total Data to Migrate** | 500 GB | | **Deployment Environments** | 2 environments (dev prod) |
+| **Database Migration** | 2 databases (MySQL PostgreSQL) | |  |  |
+| **Target AWS Region** | us-east-1 | |  |  |
 <!-- END SCOPE_SIZING_TABLE -->
 
 *Note: Changes to these parameters may require scope adjustment and additional investment.*
@@ -67,7 +68,7 @@ This engagement is sized based on the following parameters:
 ---
 
 ### Solution Overview
-**layout:** visual
+**layout:** eo_visual_content
 
 **Comprehensive Migration Journey to AWS**
 
@@ -85,7 +86,7 @@ This engagement is sized based on the following parameters:
 ---
 
 ### Implementation Approach
-**layout:** single
+**layout:** eo_single_column
 
 **Proven AWS Migration Methodology**
 
@@ -122,7 +123,7 @@ This engagement is sized based on the following parameters:
 ---
 
 ### Timeline & Milestones
-**layout:** table
+**layout:** eo_table
 
 **Path to Cloud Migration**
 
@@ -148,7 +149,7 @@ This engagement is sized based on the following parameters:
 ---
 
 ### Success Stories
-**layout:** single
+**layout:** eo_single_column
 
 **Proven Cloud Migration Results**
 
@@ -162,7 +163,7 @@ This engagement is sized based on the following parameters:
 ---
 
 ### Our Partnership Advantage
-**layout:** two_column
+**layout:** eo_two_column
 
 **Why Partner with Us for AWS Migration**
 
@@ -170,31 +171,29 @@ This engagement is sized based on the following parameters:
   - 12+ years delivering AWS migrations with 100% success rate
   - 150+ successful migrations totaling 10,000+ servers to AWS
   - AWS Migration Competency and Premier Consulting Partner status
-  - Certified migration specialists and AWS-authorized instructors
   - Pre-built migration accelerators and automation tools
 - **Value to You**
   - Proven migration methodology reduces risk and accelerates timeline
   - AWS Migration credits (10-25% of spend) offset migration costs
-  - Direct AWS TAM and migration specialist support
-  - Best practices from 150+ migrations avoid common pitfalls
+  - Direct AWS TAM support and best practices from 150+ migrations
   - Comprehensive training for cloud operations team
 
 ---
 
 ### Investment Summary
-**layout:** data_viz
+**layout:** eo_table
 
 **Total Investment & Value with AWS MAP Program Credits**
 
 <!-- BEGIN COST_SUMMARY_TABLE -->
-<!-- TABLE_CONFIG: widths=[25, 15, 15, 15, 10, 10, 10] -->
-| Cost Category | Year 1 List | Provider/Partner Credits | Year 1 Net | Year 2 | Year 3 | 3-Year Total |
-|---------------|-------------|-------------------------|------------|--------|--------|--------------|
+<!-- TABLE_CONFIG: widths=[25, 15, 15, 15, 12, 12, 15] -->
+| Cost Category | Year 1 List | Year 1 Credits | Year 1 Net | Year 2 | Year 3 | 3-Year Total |
+|---------------|-------------|----------------|------------|--------|--------|--------------|
 | Professional Services | $125,150 | ($22,000) | $103,150 | $0 | $0 | $103,150 |
 | Cloud Infrastructure | $10,572 | ($3,317) | $7,255 | $10,472 | $10,472 | $28,199 |
 | Software Licenses | $3,132 | $0 | $3,132 | $3,132 | $3,132 | $9,396 |
 | Support & Maintenance | $1,462 | $0 | $1,462 | $1,462 | $1,462 | $4,386 |
-| **TOTAL INVESTMENT** | **$140,316** | **($25,317)** | **$114,999** | **$15,066** | **$15,066** | **$145,131** |
+| **TOTAL** | **$140,316** | **($25,317)** | **$114,999** | **$15,066** | **$15,066** | **$145,131** |
 <!-- END COST_SUMMARY_TABLE -->
 
 **AWS MAP Program Credits Breakdown (Year 1 Only):**
@@ -236,6 +235,19 @@ Detailed infrastructure costs including AWS consumption, cloud services, and sup
 
 **SPEAKER NOTES:**
 
+*Value Positioning:*
+- Total 3-year investment of $145,131 delivers 67% cost reduction vs. on-premises infrastructure
+- Year 1 net cost of $114,999 after AWS MAP credits eliminates ongoing data center costs
+- Ongoing costs only $15,066/year provide enterprise cloud infrastructure and support
+- Investment delivers cost savings, agility, innovation capability, and business transformation
+
+*Credit Program Talking Points:*
+- AWS MAP Assessment Credit ($12,000) covers 100% of migration discovery and planning
+- AWS MAP Mobilize/Migrate Credit ($10,000) partially funds migration execution
+- AWS MAP Consumption Credit ($8,117) offsets 35% of Year 1 cloud infrastructure costs
+- Total $30,117 in credits represent 22% discount on Year 1 investment
+- Credits available through AWS Migration Acceleration Program for qualified migrations
+
 *Value Positioning (Small Scope):*
 - This is a **department-level migration** of 15-25 workloads using lift-and-shift strategy
 - Small scope = proven approach before scaling to enterprise migration
@@ -276,20 +288,15 @@ Detailed infrastructure costs including AWS consumption, cloud services, and sup
 ---
 
 ### Next Steps
-**layout:** bullet_points
+**layout:** eo_bullet_points
 
 **Your Path Forward**
 
-**Immediate Actions:**
-1. **Decision:** Executive approval for discovery and migration planning by [specific date]
-2. **Kickoff:** Discovery phase start date [30 days from approval]
-3. **Team Formation:** Application owners, infrastructure team, migration project manager
-
-**30-Day Launch Plan:**
-- **Week 1:** Contract finalization and AWS account setup
-- **Week 2:** Application Discovery Service deployment and data collection
-- **Week 3:** Dependency mapping and migration complexity assessment
-- **Week 4:** Migration wave planning and AWS landing zone design
+- **Decision:** Executive approval for discovery and migration planning by [specific date]
+- **Kickoff:** Discovery phase start date [30 days from approval]
+- **Team Formation:** Application owners, infrastructure team, migration project manager
+- **AWS Setup:** Account creation, landing zone provisioning, and network connectivity
+- **Discovery Tools:** Deploy AWS Application Discovery Service for workload assessment
 
 **SPEAKER NOTES:**
 
@@ -311,10 +318,16 @@ Detailed infrastructure costs including AWS consumption, cloud services, and sup
 - Validate approach with Wave 1 before committing to Wave 2-3
 - Data center decommissioning delivers cost savings by Month 9
 
+*Call to Action:*
+- Get executive approval for migration discovery and planning
+- Schedule kickoff meeting with application owners and infrastructure team
+- Begin AWS account setup and landing zone provisioning
+- Deploy AWS Application Discovery Service for workload assessment
+
 ---
 
 ### Thank You
-**layout:** thank_you
+**layout:** eo_thank_you
 
 
 - **Your Account Manager:** [Name, Title] | [Email] | [Phone]

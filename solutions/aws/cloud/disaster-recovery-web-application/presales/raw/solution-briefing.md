@@ -26,7 +26,7 @@ footer_logo_right: eof-tools/doc-tools/brands/default/assets/logos/eo-framework-
 ---
 
 ### Business Opportunity
-**layout:** two_column
+**layout:** eo_two_column
 
 **Protecting Business Continuity with Multi-Region DR**
 
@@ -42,7 +42,7 @@ footer_logo_right: eof-tools/doc-tools/brands/default/assets/logos/eo-framework-
 ---
 
 ### Engagement Scope
-**layout:** table
+**layout:** eo_table
 
 **Sizing Parameters for This Engagement**
 
@@ -52,14 +52,15 @@ This engagement is sized based on the following parameters:
 <!-- TABLE_CONFIG: widths=[18, 29, 5, 18, 30] -->
 | Parameter | Scope | | Parameter | Scope |
 |-----------|-------|---|-----------|-------|
-| **Application Tiers** | 3-tier web application | | **Primary AWS Region** | us-east-1 |
-| **RTO/RPO Requirements** | RTO 4 hours RPO 1 hour | | **DR AWS Region** | us-west-2 |
-| **Database Replication** | Aurora Global Database | | **Infrastructure Complexity** | Pilot Light DR |
-| **Data Sources** | Primary app database + S3 | | **Security Requirements** | Encryption at rest/transit IAM |
-| **Total Users** | 200 concurrent users | | **Compliance Frameworks** | SOC2 Type II |
-| **User Roles** | 3 roles (end-user admin ops) | | **Failover Requirements** | Automated failover <15 min |
-| **Database Size** | 50 GB | | **Recovery Testing** | Quarterly DR drills |
-| **Backup Retention** | 30 days retention | | **Deployment Environments** | 3 environments (dev staging prod) |
+| **Application Tiers** | 3-tier web application | | **DR AWS Region** | us-west-2 |
+| **RTO/RPO Requirements** | RTO 4 hours RPO 1 hour | | **Infrastructure Complexity** | Pilot Light DR |
+| **Database Replication** | Aurora Global Database | | **Security Requirements** | Encryption at rest/transit IAM |
+| **Data Sources** | Primary app database + S3 | | **Compliance Frameworks** | SOC2 Type II |
+| **Total Users** | 200 concurrent users | | **Failover Requirements** | Automated failover <15 min |
+| **User Roles** | 3 roles (end-user admin ops) | | **Recovery Testing** | Quarterly DR drills |
+| **Database Size** | 50 GB | | **Deployment Environments** | 3 environments (dev staging prod) |
+| **Backup Retention** | 30 days retention | |  |  |
+| **Primary AWS Region** | us-east-1 | |  |  |
 <!-- END SCOPE_SIZING_TABLE -->
 
 *Note: Changes to these parameters may require scope adjustment and additional investment.*
@@ -67,7 +68,7 @@ This engagement is sized based on the following parameters:
 ---
 
 ### Solution Overview
-**layout:** visual
+**layout:** eo_visual_content
 
 **Active-Standby Multi-Region Architecture**
 
@@ -85,7 +86,7 @@ This engagement is sized based on the following parameters:
 ---
 
 ### Implementation Approach
-**layout:** single
+**layout:** eo_single_column
 
 **Proven DR Methodology**
 
@@ -111,8 +112,7 @@ This engagement is sized based on the following parameters:
 
 *Success Factors:*
 - Executive sponsorship for business continuity initiative
-- Application architecture supports multi-region deployment
-  - Availability of maintenance windows for DR testing
+- Application architecture supports multi-region deployment and maintenance windows for DR testing
 
 *Talking Points:*
 - DR is not just technical - it's business risk management
@@ -122,7 +122,7 @@ This engagement is sized based on the following parameters:
 ---
 
 ### Timeline & Milestones
-**layout:** table
+**layout:** eo_table
 
 **Path to DR Readiness**
 
@@ -148,7 +148,7 @@ This engagement is sized based on the following parameters:
 ---
 
 ### Success Stories
-**layout:** single
+**layout:** eo_single_column
 
 **Proven Multi-Region DR Results**
 
@@ -162,7 +162,7 @@ This engagement is sized based on the following parameters:
 ---
 
 ### Our Partnership Advantage
-**layout:** two_column
+**layout:** eo_two_column
 
 **Why Partner with Us for DR**
 
@@ -170,31 +170,29 @@ This engagement is sized based on the following parameters:
   - 15+ years designing and implementing AWS DR solutions
   - 75+ successful DR implementations across industries
   - AWS Advanced Consulting Partner with Migration Competency
-  - Certified solutions architects with DR expertise and AWS Well-Architected reviews
   - 24/7 support with documented escalation procedures
 - **Value to You**
   - Proven DR design patterns reduce implementation risk
-  - Pre-built runbooks and automation accelerate deployment
   - Quarterly DR testing included to maintain readiness
-  - Direct AWS TAM engagement for critical DR scenarios
+  - Direct AWS TAM engagement for critical scenarios
   - Best practices from 75+ implementations
 
 ---
 
 ### Investment Summary
-**layout:** data_viz
+**layout:** eo_table
 
 **Total Investment & Value with AWS Partner Credits**
 
 <!-- BEGIN COST_SUMMARY_TABLE -->
-<!-- TABLE_CONFIG: widths=[25, 15, 15, 15, 10, 10, 10] -->
-| Cost Category | Year 1 List | Provider/Partner Credits | Year 1 Net | Year 2 | Year 3 | 3-Year Total |
-|---------------|-------------|-------------------------|------------|--------|--------|--------------|
+<!-- TABLE_CONFIG: widths=[25, 15, 15, 15, 12, 12, 15] -->
+| Cost Category | Year 1 List | Year 1 Credits | Year 1 Net | Year 2 | Year 3 | 3-Year Total |
+|---------------|-------------|----------------|------------|--------|--------|--------------|
 | Professional Services | $93,250 | ($8,000) | $85,250 | $0 | $0 | $85,250 |
 | Cloud Infrastructure | $9,620 | ($369) | $9,251 | $9,620 | $9,620 | $28,491 |
 | Software Licenses | $3,132 | $0 | $3,132 | $3,132 | $3,132 | $9,396 |
 | Support & Maintenance | $1,467 | $0 | $1,467 | $1,467 | $1,467 | $4,401 |
-| **TOTAL INVESTMENT** | **$107,469** | **($8,369)** | **$99,100** | **$14,219** | **$14,219** | **$127,538** |
+| **TOTAL** | **$107,469** | **($8,369)** | **$99,100** | **$14,219** | **$14,219** | **$127,538** |
 <!-- END COST_SUMMARY_TABLE -->
 
 **AWS Partner Credits Breakdown (Year 1 Only):**
@@ -232,6 +230,18 @@ Detailed infrastructure costs including primary/DR infrastructure, AWS services,
 
 **SPEAKER NOTES:**
 
+*Value Positioning:*
+- Total 3-year investment of $127,538 protects against catastrophic business impact from regional failures
+- Year 1 net cost of $99,100 after AWS partner credits - compare to cost of single major outage
+- Ongoing costs only $14,219/year provide continuous DR readiness and quarterly testing
+- Investment delivers peace of mind, compliance, and competitive differentiation
+
+*Credit Program Talking Points:*
+- AWS Partner Services Credit ($8,000) applies to Year 1 professional services
+- AWS DR Infrastructure Credit ($4,369) offsets first-year pilot light DR costs
+- Total $12,369 in credits represent 12% discount on list price
+- Credits available through AWS Partner Network program for qualified DR implementations
+
 *Value Positioning (Small Scope):*
 - This is a **department-level pilot light DR** for 5-10 critical applications
 - Pilot light = minimal ongoing costs, 4-hour RTO (not instant failover)
@@ -259,20 +269,15 @@ Detailed infrastructure costs including primary/DR infrastructure, AWS services,
 ---
 
 ### Next Steps
-**layout:** bullet_points
+**layout:** eo_bullet_points
 
 **Your Path Forward**
 
-**Immediate Actions:**
-1. **Decision:** Executive approval and budget allocation by [specific date]
-2. **Kickoff:** BIA and DR assessment start date [30 days from approval]
-3. **Team Formation:** Identify application owners, infrastructure team, business stakeholders
-
-**30-Day Launch Plan:**
-- **Week 1:** Contract finalization and project kickoff
-- **Week 2:** Business Impact Analysis (BIA) workshops with stakeholders
-- **Week 3:** Current-state architecture assessment and dependency mapping
-- **Week 4:** DR architecture design review and AWS environment setup
+- **Decision:** Executive approval and budget allocation by [specific date]
+- **Kickoff:** BIA and DR assessment start date [30 days from approval]
+- **Team Formation:** Identify application owners, infrastructure team, business stakeholders
+- **Environment Prep:** AWS account setup and security baseline configuration
+- **Workshop Schedule:** Book BIA and architecture review sessions with stakeholders
 
 **SPEAKER NOTES:**
 
@@ -294,10 +299,16 @@ Detailed infrastructure costs including primary/DR infrastructure, AWS services,
 - First DR test validates readiness by Month 5
 - Quarterly testing maintains ongoing readiness
 
+*Call to Action:*
+- Get executive approval and budget allocation within 2 weeks
+- Schedule BIA workshop with key stakeholders
+- Identify DR project team and technical lead
+- Sign SOW and begin DR journey to business continuity
+
 ---
 
 ### Thank You
-**layout:** thank_you
+**layout:** eo_thank_you
 
 
 - **Your Account Manager:** [Name, Title] | [Email] | [Phone]

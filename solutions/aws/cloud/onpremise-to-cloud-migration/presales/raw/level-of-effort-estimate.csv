@@ -59,3 +59,11 @@ Closeout,Performance Baseline,Establish performance metrics monitoring baselines
 Management,Technical Leadership,Quarterback technical oversight and architecture review,EO Quarterback,40,='Estimate Settings'!$C$28,=$E58*$F58,$180,"=TEXT($G58*$H58,""$#,##0"")",,25% of engineering effort
 Management,Project Management,Project coordination and management activities,EO Project Manager,40,='Estimate Settings'!$C$28,=$E59*$F59,$150,"=TEXT($G59*$H59,""$#,##0"")",,20% of engineering effort
 ,,,,,TOTAL HOURS,=SUM(G33:G59),TOTAL COST,"=TEXT(SUMPRODUCT(G33:G59,H33:H59),""$#,##0"")",,Total project cost estimate
+
+# Credits - Applied to Total Cost (Year 1 Only)
+#WIDTH: 27,17,100
+#ALIGN: left,right,left
+Credit Type,Credit Amount,Credit Comments
+AWS Partner Services Credit,"($10000)",AWS Partner Network (APN) credit for cloud migration solution architecture and implementation services
+Implementation Discount,$0,No implementation discount applicable
+NET PROFESSIONAL SERVICES COST,"=SUMPRODUCT($G$33:$G$59,$H$33:$H$59)-10000",Total Cost minus AWS Partner credits

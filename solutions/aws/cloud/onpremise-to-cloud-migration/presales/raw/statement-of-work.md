@@ -1418,13 +1418,13 @@ The investment includes all professional services for migration execution, AWS i
 
 <!-- BEGIN COST_SUMMARY_TABLE -->
 <!-- TABLE_CONFIG: widths=[20, 12, 23, 13, 10, 10, 12] -->
-| Cost Category | Year 1 List | Credits | Year 1 Net | Year 2 | Year 3 | 3-Year Total |
-|---------------|-------------|---------|------------|--------|--------|--------------|
-| Cloud Infrastructure | $0 | $0 | $0 | $0 | $0 | $0 |
-| Professional Services | $0 | $0 | $0 | $0 | $0 | $0 |
-| Software Licenses | $0 | $0 | $0 | $0 | $0 | $0 |
-| Support & Maintenance | $0 | $0 | $0 | $0 | $0 | $0 |
-| **TOTAL INVESTMENT** | **$0** | **$0** | **$0** | **$0** | **$0** | **$0** |
+| Cost Category | Year 1 List | AWS/Partner Credits | Year 1 Net | Year 2 | Year 3 | 3-Year Total |
+|---------------|-------------|---------------------|------------|--------|--------|--------------|
+| Professional Services | $125,150 | ($22,000) | $103,150 | $0 | $0 | $103,150 |
+| Cloud Infrastructure | $10,572 | ($3,317) | $7,255 | $10,472 | $10,472 | $28,199 |
+| Software Licenses | $3,132 | $0 | $3,132 | $3,132 | $3,132 | $9,396 |
+| Support & Maintenance | $1,462 | $0 | $1,462 | $1,462 | $1,462 | $4,386 |
+| **TOTAL INVESTMENT** | **$140,316** | **($25,317)** | **$114,999** | **$15,066** | **$15,066** | **$145,131** |
 <!-- END COST_SUMMARY_TABLE -->
 
 ## Partner Credits

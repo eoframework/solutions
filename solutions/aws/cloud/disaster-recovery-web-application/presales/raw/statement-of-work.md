@@ -953,13 +953,13 @@ The investment includes all professional services, infrastructure costs, softwar
 
 <!-- BEGIN COST_SUMMARY_TABLE -->
 <!-- TABLE_CONFIG: widths=[25, 15, 15, 15, 10, 10, 10] -->
-| Cost Category | Year 1 List | Credits | Year 1 Net | Year 2 | Year 3 | 3-Year Total |
-|---------------|-------------|---------|------------|--------|--------|--------------|
-| Professional Services | $93,500 | ($8,000) | $85,500 | $0 | $0 | $85,500 |
-| Cloud Infrastructure | $8,644 | ($4,369) | $4,275 | $8,644 | $8,644 | $21,563 |
+| Cost Category | Year 1 List | AWS/Partner Credits | Year 1 Net | Year 2 | Year 3 | 3-Year Total |
+|---------------|-------------|---------------------|------------|--------|--------|--------------|
+| Professional Services | $93,250 | ($8,000) | $85,250 | $0 | $0 | $85,250 |
+| Cloud Infrastructure | $9,620 | ($369) | $9,251 | $9,620 | $9,620 | $28,491 |
 | Software Licenses | $3,132 | $0 | $3,132 | $3,132 | $3,132 | $9,396 |
 | Support & Maintenance | $1,467 | $0 | $1,467 | $1,467 | $1,467 | $4,401 |
-| **TOTAL INVESTMENT** | **$106,743** | **($12,369)** | **$94,374** | **$13,243** | **$13,243** | **$120,860** |
+| **TOTAL INVESTMENT** | **$107,469** | **($8,369)** | **$99,100** | **$14,219** | **$14,219** | **$127,538** |
 <!-- END COST_SUMMARY_TABLE -->
 
 ## Partner Credits

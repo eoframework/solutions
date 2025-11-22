@@ -1,0 +1,67 @@
+Question ID,Category,Sub-Category,Question,Guidance,Customer Response,Notes
+BUS-001,Business Requirements,Project Information,What is the name of your cloud migration project?,"Provide internal project reference name","",Internal project reference for tracking
+BUS-002,Business Requirements,Project Information,Who is the primary stakeholder for this migration initiative?,"Name, role, and decision-making authority","",Main point of contact and decision authority
+BUS-003,Business Requirements,Business Drivers,What is driving this migration initiative?,"Common drivers: Data center contract expiring, Cost reduction, Digital transformation, Scalability needs, Disaster recovery, Innovation","",Primary business driver for cloud migration
+BUS-004,Business Requirements,Migration Goals,What are your primary goals for cloud migration?,"Common goals: Reduce infrastructure costs, Improve scalability, Enable innovation, Retire data center, Improve disaster recovery, Support remote work","",Business objectives and expected outcomes
+BUS-005,Business Requirements,Success Criteria,How will you measure migration success?,"Define KPIs: cost savings %, uptime improvement, migration completion date, application performance","",Success metrics for project evaluation
+BUS-006,Business Requirements,Timeline,What is your target migration completion date?,"Specify target date or timeframe (e.g., Q3 2025)","",Migration timeline and urgency
+BUS-007,Business Requirements,Budget,What is your approved budget for this migration?,"Common ranges: $0-250K, $250K-1M, $1M-5M, $5M+. Include both CapEx and OpEx","",Budget constraints for solution sizing
+BUS-008,Business Requirements,Downtime Tolerance,What is your acceptable downtime window for migration cutover?,"Specify maximum acceptable downtime (e.g., 4 hours, 8 hours, weekend only)","",Affects migration strategy and tooling
+BUS-009,Business Requirements,Change Freeze,What is your change freeze period?,"Specify dates when migrations cannot occur (e.g., Dec 15 - Jan 5)","",Migration scheduling constraints
+BUS-010,Business Requirements,Business Continuity,What are your business continuity requirements during migration?,"Specify critical periods, peak seasons, or blackout windows","",Migration wave planning
+BUS-011,Business Requirements,Scope,What percentage of workloads are planned for migration?,"Specify percentage and number of servers (e.g., 80% - 300 of 375 servers)","",Migration scope definition
+BUS-012,Business Requirements,Growth Projections,How do you expect infrastructure needs to change post-migration?,"Provide projected growth rate and capacity requirements","",Cloud capacity and scalability planning
+TECH-001,Technical Requirements,Current Infrastructure,What is your current on-premise infrastructure?,"Examples: VMware vSphere 7.0, Hyper-V, Physical servers, Number of VMs/servers","",Helps select migration tools and approach
+TECH-002,Technical Requirements,Server Count,How many servers/VMs are in scope for migration?,"Specify total count and breakdown by type (physical, virtual, by OS)","",Migration sizing and wave planning
+TECH-003,Technical Requirements,Operating Systems,What operating systems are in scope?,"List all OS versions: Windows Server 2012/2016/2019/2022, RHEL 7/8, Ubuntu, etc.","",Licensing and compatibility assessment
+TECH-004,Technical Requirements,Applications,What applications are running on these servers?,"List key applications with business criticality (e.g., ERP - SAP, CRM - Salesforce)","",Application dependency mapping
+TECH-005,Technical Requirements,Database Platforms,What database platforms are you using?,"Examples: SQL Server 2017/2019, Oracle 12c/19c, PostgreSQL, MySQL, MongoDB","",Database migration strategy (DMS compatibility)
+TECH-006,Technical Requirements,Data Volume,What is your total data volume to migrate?,"Specify in TB (e.g., 150 TB across all systems)","",Affects transfer method and timeline
+TECH-007,Technical Requirements,Data Change Rate,What is your average daily data change rate?,"Specify in GB/day (e.g., 500 GB/day)","",Affects sync duration and cutover timing
+TECH-008,Technical Requirements,Network Connectivity,Do you have existing AWS connectivity?,"Options: None (need setup), Site-to-Site VPN, AWS Direct Connect, Existing VPC","",Migration network architecture
+TECH-009,Technical Requirements,Network Bandwidth,What is your available network bandwidth?,"Specify in Mbps or Gbps (e.g., 1 Gbps)","",Affects migration timeline and throughput
+TECH-010,Technical Requirements,Migration Strategy,What is your migration strategy preference?,"Options: Rehost (lift-and-shift), Replatform (optimize during migration), Refactor (re-architect), Retire, Retain","",Migration approach and complexity
+TECH-011,Technical Requirements,Virtualization,What virtualization platform are you using?,"Examples: VMware vSphere 6.x/7.x, Microsoft Hyper-V, KVM, Physical servers","",MGN agent compatibility
+TECH-012,Technical Requirements,Backup Solution,What is your current backup solution?,"Examples: Veeam, Commvault, NetBackup, Azure Backup, AWS Backup","",Cloud backup strategy mapping
+TECH-013,Technical Requirements,Storage Types,What storage types are in use?,"Examples: SAN, NAS, DAS, Object storage, File shares","","AWS storage service mapping (EBS EFS S3)"
+TECH-014,Technical Requirements,File Servers,How many file servers and what total capacity?,"Specify count and total capacity (e.g., 5 servers, 50 TB)","",EFS vs FSx sizing
+TECH-015,Technical Requirements,High Availability,What applications require high availability?,"List critical applications and current HA configuration","",Multi-AZ architecture requirements
+TECH-016,Technical Requirements,Disaster Recovery,What is your current disaster recovery setup?,"Describe existing DR solution and RTO/RPO","",Cloud DR architecture planning
+TECH-017,Technical Requirements,Monitoring Tools,What monitoring and management tools are in use?,"Examples: SCOM, Nagios, Datadog, Splunk, New Relic","",CloudWatch integration planning
+TECH-018,Technical Requirements,Dependencies,What external dependencies exist?,"Examples: Third-party APIs, Partner integrations, Legacy mainframe systems","",Hybrid architecture requirements
+SEC-001,Security & Compliance,Data Classification,What is the highest data classification level?,"Levels: Public, Internal, Confidential, Restricted","",Security controls and encryption requirements
+SEC-002,Security & Compliance,Sensitive Data,What sensitive data types do you handle?,"Types: PII, PHI, PCI, Financial data, Trade secrets","",Data protection and compliance requirements
+SEC-003,Security & Compliance,Compliance Standards,What compliance standards must be maintained?,"Common standards: PCI-DSS, HIPAA, SOC 2, ISO 27001, GDPR, FedRAMP, None","",Compliance architecture and audit requirements
+SEC-004,Security & Compliance,Encryption,What encryption requirements apply?,"Requirements: Encryption at rest (AES-256), Encryption in transit (TLS 1.2+)","",AWS KMS and encryption configuration
+SEC-005,Security & Compliance,Access Control,What authentication and authorization are in use?,"Examples: Active Directory, LDAP, SSO (SAML/OIDC), MFA","",IAM and directory services integration
+SEC-006,Security & Compliance,Firewall Security,What is your current firewall/security stack?,"Examples: Palo Alto Networks, Fortinet, Cisco ASA, Check Point","",Security group and NACL mapping
+SEC-007,Security & Compliance,Network Segmentation,What network segmentation exists?,"Describe DMZ, application tiers, data tier separation","",VPC subnet and security group design
+SEC-008,Security & Compliance,Data Residency,Do you have data residency requirements?,"Specify regions or countries (e.g., Must remain in US)","",AWS region selection constraints
+SEC-009,Security & Compliance,Audit Logging,What audit and logging requirements exist?,"Requirements: CloudTrail, Access logs, Change tracking, SIEM integration","",CloudWatch Logs and audit architecture
+SEC-010,Security & Compliance,Security Scanning,What security scanning and vulnerability tools are used?,"Examples: Qualys, Nessus, Rapid7, AWS Inspector","",Cloud security posture management
+OPS-001,Operations & Support,Peak Usage,What are your peak usage times?,"Specify days and times (e.g., 8 AM - 6 PM EST weekdays)","",Migration window planning to minimize impact
+OPS-002,Operations & Support,Business Critical Apps,What applications are business-critical?,"List applications that cannot tolerate downtime","",Migration wave prioritization
+OPS-003,Operations & Support,Maintenance Windows,What maintenance windows are available?,"Specify available windows (e.g., Saturday 12 AM - 6 AM)","",Migration cutover timing
+OPS-004,Operations & Support,Support Coverage,What support coverage do you require?,"Options: Business hours (8x5), Extended (24x5), Full (24x7)","",Post-migration support planning
+OPS-005,Operations & Support,Runbooks,Do you have documented operational runbooks?,"Options: Comprehensive documentation, Basic documentation, None - need creation","",Migration runbook development needs
+OPS-006,Operations & Support,Change Management,What is your change management process?,"Describe approval workflow, CAB process, documentation requirements","",Migration governance and approvals
+OPS-007,Operations & Support,Monitoring,What monitoring and alerting is required post-migration?,"Requirements: Application monitoring, Infrastructure monitoring, Performance dashboards, Alerting","",CloudWatch and monitoring setup
+OPS-008,Operations & Support,Incident Response,What is your incident response process?,"Describe escalation procedures, SLA requirements, on-call rotation","",Cloud operations planning
+OPS-009,Operations & Support,Patching,What is your current patching schedule?,"Describe frequency, maintenance windows, approval process","",AWS Systems Manager patch management
+OPS-010,Operations & Support,Backup Requirements,What are your backup and retention requirements?,"Specify backup frequency, retention period (e.g., Daily backups, 90-day retention)","",AWS Backup configuration
+IMPL-001,Implementation Planning,Resources,Who will be the technical lead for this migration?,"Name, role, contact information","",Technical ownership and project management
+IMPL-002,Implementation Planning,Team Availability,What internal resources are available for migration?,"List team members, roles, time commitment (hours per week)","",Resource planning and timeline feasibility
+IMPL-003,Implementation Planning,AWS Experience,What is your team's experience with AWS?,"Experience levels: No experience, Basic knowledge, Intermediate, Advanced, Expert","",Training and knowledge transfer needs
+IMPL-004,Implementation Planning,Migration Approach,What is your preferred migration approach?,"Options: Wave-based migration, Big bang cutover, Pilot then scale, Continuous migration","",Migration strategy and risk mitigation
+IMPL-005,Implementation Planning,Pilot Phase,Do you want to conduct a pilot migration first?,"Options: Yes - 1-2 servers, Yes - full application stack, No - proceed to production","",Risk mitigation and validation approach
+IMPL-006,Implementation Planning,Parallel Run,Do you require a parallel run period?,"Specify duration if needed (e.g., Run both on-prem and cloud for 2 weeks)","",Validation and rollback planning
+IMPL-007,Implementation Planning,Rollback Plan,What rollback requirements do you have?,"Specify rollback window and criteria (e.g., Must be able to rollback within 48 hours)","",Risk mitigation and safety net
+IMPL-008,Implementation Planning,Training Needs,What training will be needed for teams?,"Types: AWS fundamentals, Migration tools, Cloud operations, Security best practices","",Knowledge transfer scope and timeline
+IMPL-009,Implementation Planning,Documentation,What documentation do you need?,"Requirements: Architecture diagrams, Runbooks, SOPs, As-built documentation","",Deliverable requirements
+IMPL-010,Implementation Planning,Handover,What handover process do you prefer?,"Options: Gradual handover with hypercare, Full handover after validation, Managed services","",Operational transition planning
+RISK-001,Risk & Constraints,Implementation Risks,What are your main concerns about cloud migration?,"Consider: downtime risk, data loss, cost overruns, skills gap, complexity","",Primary risk factors and concerns
+RISK-002,Risk & Constraints,Failure Factors,What could cause this migration to fail?,"Consider: lack of executive support, resource constraints, unclear scope, technical debt","",Failure mode analysis and mitigation
+RISK-003,Risk & Constraints,Data Risks,What are your concerns about data migration?,"Consider: data loss, corruption, downtime during sync, validation","",Data migration risk mitigation
+RISK-004,Risk & Constraints,Application Risks,What application compatibility concerns exist?,"Consider: legacy applications, unsupported OS versions, licensing, custom integrations","",Application assessment and remediation
+RISK-005,Risk & Constraints,Dependencies,What external dependencies exist for this migration?,"Examples: Vendor approvals, Budget approvals, other IT projects, procurement timelines","",Project dependencies and critical path
+RISK-006,Risk & Constraints,Constraints,What constraints must the migration work within?,"Consider: budget limits, timeline, technology standards, regulatory, skills availability","",Migration design boundaries
