@@ -1,0 +1,26 @@
+📋 EXPORT INSTRUCTIONS: Dell VxRail Enterprise Hyperconverged Architecture Diagram
+
+To export architecture-diagram.png from architecture-diagram.drawio:
+
+1. Open architecture-diagram.drawio in app.diagrams.net (or desktop app)
+2. File → Export as → PNG
+3. Configure export settings:
+   - Zoom: 100%
+   - Border Width: 10 pixels
+   - Transparent Background: Checked
+   - Include a copy of my diagram: Unchecked (reduces file size)
+4. Click "Export" and save as: architecture-diagram.png
+5. Verify exported PNG shows:
+   ✓ VMware Enterprise Stack (vSphere 8, vSAN 8, NSX Data Center, SRM, RecoverPoint)
+   ✓ 8-node VxRail P570 all-NVMe cluster (Xeon Platinum, 1TB RAM per node)
+   ✓ vSAN Datastore (246TB raw / 82TB usable with FTT=2 RAID-6)
+   ✓ Dual Dell PowerSwitch Z9264F switches (64-port 100GbE)
+   ✓ NSX micro-segmentation layer
+   ✓ VLAN segmentation and RecoverPoint replication
+   ✓ Mission-critical workloads (Oracle RAC, SAP HANA, SQL Always-On)
+   ✓ ProSupport Enterprise Suite
+6. Replace this .txt file with the exported architecture-diagram.png
+
+💡 Tip: For presentations, export at 200% zoom for higher resolution (adjust border to 20px)
+
+This placeholder file should be replaced with actual PNG export from Draw.io.

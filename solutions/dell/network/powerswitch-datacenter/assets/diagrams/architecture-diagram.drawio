@@ -1,0 +1,181 @@
+<mxfile host="app.diagrams.net">
+  <diagram id="dell-powerswitch-datacenter" name="Dell PowerSwitch Data Center">
+    <mxGraphModel dx="1422" dy="794" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="900">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <!-- Title -->
+        <mxCell id="title" value="Dell PowerSwitch Spine-Leaf Data Center Network Architecture"
+          style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontSize=20;fontStyle=1;"
+          vertex="1" parent="1">
+          <mxGeometry x="250" y="40" width="1100" height="40" as="geometry" />
+        </mxCell>
+
+        <!-- External Layer -->
+        <mxCell id="external-layer" value="External Connectivity"
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=14;fontStyle=1;verticalAlign=top;"
+          vertex="1" parent="1">
+          <mxGeometry x="150" y="120" width="1300" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="internet" value="Internet&#xa;Dual ISP"
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=11;"
+          vertex="1" parent="1">
+          <mxGeometry x="200" y="145" width="150" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="wan" value="WAN Links&#xa;MPLS/SD-WAN"
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=11;"
+          vertex="1" parent="1">
+          <mxGeometry x="380" y="145" width="150" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="border" value="Border Leafs (2x S5296F-ON)&#xa;External Gateway & Firewall Integration"
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=11;fontStyle=1;"
+          vertex="1" parent="1">
+          <mxGeometry x="560" y="145" width="300" height="40" as="geometry" />
+        </mxCell>
+
+        <!-- Spine Layer -->
+        <mxCell id="spine-layer" value="Spine Layer (Core)"
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=14;fontStyle=1;verticalAlign=top;"
+          vertex="1" parent="1">
+          <mxGeometry x="150" y="240" width="1300" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="spine1" value="Spine 1&#xa;Z9432F-ON&#xa;32x 100GbE"
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=11;fontStyle=1;"
+          vertex="1" parent="1">
+          <mxGeometry x="220" y="280" width="140" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="spine2" value="Spine 2&#xa;Z9432F-ON&#xa;32x 100GbE"
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=11;fontStyle=1;"
+          vertex="1" parent="1">
+          <mxGeometry x="400" y="280" width="140" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="spine3" value="Spine 3&#xa;Z9432F-ON&#xa;32x 100GbE"
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=11;fontStyle=1;"
+          vertex="1" parent="1">
+          <mxGeometry x="580" y="280" width="140" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="spine4" value="Spine 4&#xa;Z9432F-ON&#xa;32x 100GbE"
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=11;fontStyle=1;"
+          vertex="1" parent="1">
+          <mxGeometry x="760" y="280" width="140" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="spine-capacity" value="Total Fabric Bandwidth&#xa;1.6Tbps&#xa;Redundant dual-plane"
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontSize=10;fontStyle=1;"
+          vertex="1" parent="1">
+          <mxGeometry x="940" y="280" width="180" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- Fabric Connections -->
+        <mxCell id="fabric-info" value="Each leaf connects to all 4 spines via dual 100GbE uplinks&#xa;3:1 oversubscription ratio (enterprise standard)"
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=10;"
+          vertex="1" parent="1">
+          <mxGeometry x="150" y="400" width="1300" height="40" as="geometry" />
+        </mxCell>
+
+        <!-- Leaf Layer Sample -->
+        <mxCell id="leaf-layer" value="Leaf Layer (Top-of-Rack) - 40 Total Switches"
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=14;fontStyle=1;verticalAlign=top;"
+          vertex="1" parent="1">
+          <mxGeometry x="150" y="480" width="1300" height="160" as="geometry" />
+        </mxCell>
+        <mxCell id="leaf1" value="Leaf 1&#xa;S5248F-ON&#xa;48x 25GbE"
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=10;"
+          vertex="1" parent="1">
+          <mxGeometry x="180" y="520" width="110" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="leaf2" value="Leaf 2&#xa;S5248F-ON&#xa;48x 25GbE"
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=10;"
+          vertex="1" parent="1">
+          <mxGeometry x="310" y="520" width="110" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="leaf3" value="Leaf 3&#xa;S5248F-ON&#xa;48x 25GbE"
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=10;"
+          vertex="1" parent="1">
+          <mxGeometry x="440" y="520" width="110" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="leaf-dots" value="..."
+          style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontSize=24;fontStyle=1;"
+          vertex="1" parent="1">
+          <mxGeometry x="570" y="535" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="leaf38" value="Leaf 38&#xa;S5248F-ON&#xa;48x 25GbE"
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=10;"
+          vertex="1" parent="1">
+          <mxGeometry x="950" y="520" width="110" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="leaf39" value="Leaf 39&#xa;S5248F-ON&#xa;48x 25GbE"
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=10;"
+          vertex="1" parent="1">
+          <mxGeometry x="1080" y="520" width="110" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="leaf40" value="Leaf 40&#xa;S5248F-ON&#xa;48x 25GbE"
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=10;"
+          vertex="1" parent="1">
+          <mxGeometry x="1210" y="520" width="110" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="leaf-capacity" value="1920 server ports total&#xa;48 servers per rack capacity&#xa;25GbE server connectivity"
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontSize=9;"
+          vertex="1" parent="1">
+          <mxGeometry x="180" y="595" width="1140" height="30" as="geometry" />
+        </mxCell>
+
+        <!-- Server Layer -->
+        <mxCell id="server-layer" value="Compute Servers (1920 ports capacity)"
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=14;fontStyle=1;verticalAlign=top;"
+          vertex="1" parent="1">
+          <mxGeometry x="150" y="680" width="650" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="servers" value="Application Servers&#xa;Kubernetes Nodes&#xa;Database Servers&#xa;Storage Nodes"
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=11;align=left;"
+          vertex="1" parent="1">
+          <mxGeometry x="180" y="720" width="590" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- Network Services -->
+        <mxCell id="services-layer" value="Network Services & Management"
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=14;fontStyle=1;verticalAlign=top;"
+          vertex="1" parent="1">
+          <mxGeometry x="850" y="680" width="600" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="smartfabric" value="SmartFabric Services&#xa;Zero-touch provisioning"
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=10;"
+          vertex="1" parent="1">
+          <mxGeometry x="880" y="720" width="170" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="bgp" value="BGP Underlay&#xa;EVPN-VXLAN Overlay"
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=10;"
+          vertex="1" parent="1">
+          <mxGeometry x="1070" y="720" width="170" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="automation" value="Ansible Automation&#xa;Python/REST API"
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontSize=10;"
+          vertex="1" parent="1">
+          <mxGeometry x="1260" y="720" width="160" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- VLANs -->
+        <mxCell id="vlans" value="Network Segmentation: VLAN 10 (Management), VLAN 20 (vMotion), VLAN 30 (Storage/vSAN), VLAN 40 (Production)"
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=10;"
+          vertex="1" parent="1">
+          <mxGeometry x="150" y="830" width="1300" height="40" as="geometry" />
+        </mxCell>
+
+        <!-- Arrows showing spine-leaf connectivity -->
+        <mxCell id="arrow1" value="" style="endArrow=classic;html=1;strokeWidth=1;startArrow=classic;startFill=1;exitX=0.5;exitY=1;entryX=0.25;entryY=0;" edge="1" parent="1" source="spine1" target="leaf1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="arrow2" value="" style="endArrow=classic;html=1;strokeWidth=1;startArrow=classic;startFill=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="1" source="spine2" target="leaf2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="arrow3" value="" style="endArrow=classic;html=1;strokeWidth=1;startArrow=classic;startFill=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="1" source="spine3" target="leaf3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="arrow4" value="" style="endArrow=classic;html=1;strokeWidth=1;startArrow=classic;startFill=1;exitX=0.5;exitY=1;entryX=0.75;entryY=0;" edge="1" parent="1" source="spine4" target="leaf40">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

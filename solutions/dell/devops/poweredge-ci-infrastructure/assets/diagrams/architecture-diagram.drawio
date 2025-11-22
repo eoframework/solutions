@@ -1,0 +1,191 @@
+<mxfile host="app.diagrams.net">
+  <diagram id="dell-ci-infrastructure" name="Dell PowerEdge CI Infrastructure">
+    <mxGraphModel dx="1422" dy="794" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="900">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <!-- Title -->
+        <mxCell id="title" value="Dell PowerEdge CI/CD Infrastructure Architecture"
+          style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontSize=20;fontStyle=1;"
+          vertex="1" parent="1">
+          <mxGeometry x="350" y="40" width="900" height="40" as="geometry" />
+        </mxCell>
+
+        <!-- Developers Layer -->
+        <mxCell id="developers-layer" value="Development Team (50 Developers)"
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=14;fontStyle=1;verticalAlign=top;"
+          vertex="1" parent="1">
+          <mxGeometry x="200" y="120" width="1200" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="git" value="Git Commits&#xa;Feature Branches"
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=11;"
+          vertex="1" parent="1">
+          <mxGeometry x="250" y="150" width="160" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="pr" value="Pull Requests&#xa;Code Review"
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=11;"
+          vertex="1" parent="1">
+          <mxGeometry x="450" y="150" width="160" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="ci-trigger" value="CI Pipeline Trigger&#xa;Automated Builds"
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=11;"
+          vertex="1" parent="1">
+          <mxGeometry x="650" y="150" width="160" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="artifacts" value="Build Artifacts&#xa;Docker Images"
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=11;"
+          vertex="1" parent="1">
+          <mxGeometry x="850" y="150" width="160" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="deploy" value="Deployment&#xa;Staging/Production"
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=11;"
+          vertex="1" parent="1">
+          <mxGeometry x="1050" y="150" width="160" height="50" as="geometry" />
+        </mxCell>
+
+        <!-- GitLab Platform -->
+        <mxCell id="gitlab-layer" value="GitLab CI/CD Platform"
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=14;fontStyle=1;verticalAlign=top;"
+          vertex="1" parent="1">
+          <mxGeometry x="200" y="270" width="600" height="280" as="geometry" />
+        </mxCell>
+        <mxCell id="gitlab-primary" value="GitLab Primary (PowerEdge R650)&#xa;2x Xeon Gold 6430, 256GB RAM&#xa;8TB NVMe storage"
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=11;fontStyle=1;"
+          vertex="1" parent="1">
+          <mxGeometry x="230" y="310" width="250" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="gitlab-replica" value="GitLab Replica (PowerEdge R650)&#xa;Geo Replication HA"
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=10;"
+          vertex="1" parent="1">
+          <mxGeometry x="510" y="310" width="250" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="postgres" value="PostgreSQL Database&#xa;Repository Metadata"
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=10;"
+          vertex="1" parent="1">
+          <mxGeometry x="230" y="400" width="250" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="redis" value="Redis Cache&#xa;Job Queue & Sessions"
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=10;"
+          vertex="1" parent="1">
+          <mxGeometry x="510" y="400" width="250" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="runner-manager" value="GitLab Runner Manager&#xa;Build Job Orchestration"
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=10;"
+          vertex="1" parent="1">
+          <mxGeometry x="230" y="470" width="530" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- Build Farm -->
+        <mxCell id="build-farm-layer" value="Build Farm (8 PowerEdge R650 Runners)"
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=14;fontStyle=1;verticalAlign=top;"
+          vertex="1" parent="1">
+          <mxGeometry x="850" y="270" width="550" height="280" as="geometry" />
+        </mxCell>
+        <mxCell id="runner1" value="Build Runner 1&#xa;64 cores, 256GB RAM"
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=10;"
+          vertex="1" parent="1">
+          <mxGeometry x="880" y="310" width="120" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="runner2" value="Build Runner 2&#xa;64 cores, 256GB RAM"
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=10;"
+          vertex="1" parent="1">
+          <mxGeometry x="1020" y="310" width="120" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="runner3" value="Build Runner 3&#xa;64 cores, 256GB RAM"
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=10;"
+          vertex="1" parent="1">
+          <mxGeometry x="1160" y="310" width="120" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="runner4" value="Build Runner 4&#xa;64 cores, 256GB RAM"
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=10;"
+          vertex="1" parent="1">
+          <mxGeometry x="880" y="380" width="120" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="runner5" value="Build Runner 5&#xa;64 cores, 256GB RAM"
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=10;"
+          vertex="1" parent="1">
+          <mxGeometry x="1020" y="380" width="120" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="runner6" value="Build Runner 6&#xa;64 cores, 256GB RAM"
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=10;"
+          vertex="1" parent="1">
+          <mxGeometry x="1160" y="380" width="120" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="runner7" value="Build Runner 7&#xa;64 cores, 256GB RAM"
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=10;"
+          vertex="1" parent="1">
+          <mxGeometry x="880" y="450" width="120" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="runner8" value="Build Runner 8&#xa;64 cores, 256GB RAM"
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=10;"
+          vertex="1" parent="1">
+          <mxGeometry x="1020" y="450" width="120" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="capacity" value="Total Capacity&#xa;512 cores, 2TB RAM&#xa;50 concurrent builds"
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontSize=10;fontStyle=1;"
+          vertex="1" parent="1">
+          <mxGeometry x="1160" y="450" width="210" height="80" as="geometry" />
+        </mxCell>
+
+        <!-- Storage & Registry -->
+        <mxCell id="storage-layer" value="Artifact Storage & Container Registry"
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=14;fontStyle=1;verticalAlign=top;"
+          vertex="1" parent="1">
+          <mxGeometry x="200" y="600" width="600" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="artifactory" value="JFrog Artifactory Pro&#xa;Maven, npm, Docker Registry&#xa;20TB storage"
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=11;fontStyle=1;"
+          vertex="1" parent="1">
+          <mxGeometry x="230" y="640" width="250" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="powerscale" value="Dell PowerScale F200&#xa;50TB NAS for build artifacts"
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=11;"
+          vertex="1" parent="1">
+          <mxGeometry x="510" y="640" width="250" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- Monitoring -->
+        <mxCell id="monitoring-layer" value="Monitoring & Observability"
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontSize=14;fontStyle=1;verticalAlign=top;"
+          vertex="1" parent="1">
+          <mxGeometry x="850" y="600" width="550" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="prometheus" value="Prometheus&#xa;Build Metrics"
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=11;"
+          vertex="1" parent="1">
+          <mxGeometry x="880" y="640" width="160" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="grafana" value="Grafana&#xa;Performance Dashboards"
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=11;"
+          vertex="1" parent="1">
+          <mxGeometry x="1070" y="640" width="160" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="elk" value="ELK Stack&#xa;Build Log Analysis"
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=11;"
+          vertex="1" parent="1">
+          <mxGeometry x="1260" y="640" width="110" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- Network -->
+        <mxCell id="network" value="Network: Dell PowerSwitch S4148T 48-port 10GbE switch for build farm connectivity"
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=11;"
+          vertex="1" parent="1">
+          <mxGeometry x="200" y="760" width="1200" height="40" as="geometry" />
+        </mxCell>
+
+        <!-- Arrows -->
+        <mxCell id="arrow1" value="Code Push" style="endArrow=classic;html=1;strokeWidth=2;" edge="1" parent="1" source="developers-layer" target="gitlab-layer">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="arrow2" value="Build Jobs" style="endArrow=classic;html=1;strokeWidth=2;" edge="1" parent="1" source="gitlab-layer" target="build-farm-layer">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="arrow3" value="Artifacts" style="endArrow=classic;html=1;strokeWidth=2;" edge="1" parent="1" source="build-farm-layer" target="storage-layer">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

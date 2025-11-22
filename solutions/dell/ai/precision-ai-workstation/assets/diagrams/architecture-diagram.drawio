@@ -1,0 +1,133 @@
+<mxfile host="app.diagrams.net">
+  <diagram id="dell-ai-workstation" name="Dell Precision AI Workstation">
+    <mxGraphModel dx="1422" dy="794" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="900">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <!-- Title -->
+        <mxCell id="title" value="Dell Precision AI Workstation Architecture"
+          style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontSize=20;fontStyle=1;"
+          vertex="1" parent="1">
+          <mxGeometry x="400" y="40" width="800" height="40" as="geometry" />
+        </mxCell>
+
+        <!-- Data Scientists Layer -->
+        <mxCell id="users-layer" value="Data Scientists (10 Users)"
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=14;fontStyle=1;verticalAlign=top;"
+          vertex="1" parent="1">
+          <mxGeometry x="200" y="120" width="1200" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="jupyter" value="Jupyter Lab"
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=12;"
+          vertex="1" parent="1">
+          <mxGeometry x="250" y="150" width="150" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="vscode" value="VS Code"
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=12;"
+          vertex="1" parent="1">
+          <mxGeometry x="440" y="150" width="150" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="tensorboard" value="TensorBoard"
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=12;"
+          vertex="1" parent="1">
+          <mxGeometry x="630" y="150" width="150" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="tools" value="PyTorch / TensorFlow"
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=12;"
+          vertex="1" parent="1">
+          <mxGeometry x="820" y="150" width="180" height="50" as="geometry" />
+        </mxCell>
+
+        <!-- Workstation Layer -->
+        <mxCell id="workstation-layer" value="Dell Precision 7960 Workstation (10 Units)"
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=14;fontStyle=1;verticalAlign=top;"
+          vertex="1" parent="1">
+          <mxGeometry x="200" y="270" width="600" height="280" as="geometry" />
+        </mxCell>
+        <mxCell id="cpu" value="Dual Xeon Gold 6430&#xa;64 cores total"
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=11;"
+          vertex="1" parent="1">
+          <mxGeometry x="230" y="310" width="160" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="gpu" value="NVIDIA RTX A6000&#xa;48GB GPU Memory"
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=11;fontStyle=1;"
+          vertex="1" parent="1">
+          <mxGeometry x="420" y="310" width="160" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="ram" value="512GB DDR5 RAM"
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=11;"
+          vertex="1" parent="1">
+          <mxGeometry x="610" y="310" width="160" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="storage" value="4TB NVMe SSD&#xa;7000MB/s read"
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=11;"
+          vertex="1" parent="1">
+          <mxGeometry x="230" y="380" width="160" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="os" value="Ubuntu 22.04 LTS"
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontSize=11;"
+          vertex="1" parent="1">
+          <mxGeometry x="420" y="380" width="160" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="cuda" value="CUDA 12.2&#xa;cuDNN 8.9"
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=11;"
+          vertex="1" parent="1">
+          <mxGeometry x="610" y="380" width="160" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="network-card" value="10GbE Network"
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=11;"
+          vertex="1" parent="1">
+          <mxGeometry x="230" y="450" width="540" height="80" as="geometry" />
+        </mxCell>
+
+        <!-- Storage Layer -->
+        <mxCell id="storage-layer" value="Shared Dataset Storage"
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=14;fontStyle=1;verticalAlign=top;"
+          vertex="1" parent="1">
+          <mxGeometry x="850" y="270" width="550" height="280" as="geometry" />
+        </mxCell>
+        <mxCell id="powerscale" value="Dell PowerScale F600&#xa;100TB Usable NAS"
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=12;fontStyle=1;"
+          vertex="1" parent="1">
+          <mxGeometry x="880" y="310" width="200" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="nfs" value="NFS/SMB Shares&#xa;Dataset Repository"
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=11;"
+          vertex="1" parent="1">
+          <mxGeometry x="1110" y="310" width="160" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="datasets" value="Training Datasets&#xa;5TB per project"
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=11;"
+          vertex="1" parent="1">
+          <mxGeometry x="880" y="390" width="190" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="models" value="Trained Models&#xa;Checkpoints"
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=11;"
+          vertex="1" parent="1">
+          <mxGeometry x="1110" y="390" width="160" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="switch" value="Dell PowerSwitch S4148T&#xa;48-port 10GbE"
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=11;"
+          vertex="1" parent="1">
+          <mxGeometry x="880" y="460" width="390" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- Monitoring -->
+        <mxCell id="monitoring" value="Monitoring: Datadog (GPU metrics, utilization)"
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontSize=11;"
+          vertex="1" parent="1">
+          <mxGeometry x="200" y="600" width="1200" height="40" as="geometry" />
+        </mxCell>
+
+        <!-- Arrows -->
+        <mxCell id="arrow1" value="" style="endArrow=classic;html=1;strokeWidth=2;" edge="1" parent="1" source="users-layer" target="workstation-layer">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="arrow2" value="10GbE" style="endArrow=classic;html=1;strokeWidth=2;startArrow=classic;startFill=1;" edge="1" parent="1" source="network-card" target="switch">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

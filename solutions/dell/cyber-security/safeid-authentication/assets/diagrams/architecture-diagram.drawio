@@ -1,0 +1,151 @@
+<mxfile host="app.diagrams.net">
+  <diagram id="dell-safeid-auth" name="Dell SafeID Authentication">
+    <mxGraphModel dx="1422" dy="794" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="900">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <!-- Title -->
+        <mxCell id="title" value="Dell SafeID Multi-Factor Authentication Architecture"
+          style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontSize=20;fontStyle=1;"
+          vertex="1" parent="1">
+          <mxGeometry x="350" y="40" width="900" height="40" as="geometry" />
+        </mxCell>
+
+        <!-- Users Layer -->
+        <mxCell id="users-layer" value="Users (500 DoD Personnel)"
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=14;fontStyle=1;verticalAlign=top;"
+          vertex="1" parent="1">
+          <mxGeometry x="200" y="120" width="1200" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="desktop" value="Desktop Users&#xa;Windows 11"
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=11;"
+          vertex="1" parent="1">
+          <mxGeometry x="250" y="150" width="160" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="mobile" value="Mobile Users&#xa;iOS/Android"
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=11;"
+          vertex="1" parent="1">
+          <mxGeometry x="450" y="150" width="160" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="vpn" value="VPN Remote Access&#xa;Cisco AnyConnect"
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=11;"
+          vertex="1" parent="1">
+          <mxGeometry x="650" y="150" width="160" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="web" value="Web Applications&#xa;Browser-based"
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=11;"
+          vertex="1" parent="1">
+          <mxGeometry x="850" y="150" width="160" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="cac" value="CAC/PIV Cards&#xa;Smart Card Readers"
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=11;"
+          vertex="1" parent="1">
+          <mxGeometry x="1050" y="150" width="160" height="50" as="geometry" />
+        </mxCell>
+
+        <!-- MFA Tokens Layer -->
+        <mxCell id="tokens-layer" value="MFA Token Options"
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=14;fontStyle=1;verticalAlign=top;"
+          vertex="1" parent="1">
+          <mxGeometry x="200" y="260" width="600" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="yubikey" value="YubiKey 5 NFC&#xa;FIDO2/WebAuthn&#xa;Primary Token (500 units)"
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=10;fontStyle=1;"
+          vertex="1" parent="1">
+          <mxGeometry x="230" y="300" width="160" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="rsa" value="RSA SecurID&#xa;Hardware Token&#xa;Backup Option"
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=10;"
+          vertex="1" parent="1">
+          <mxGeometry x="420" y="300" width="160" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="mobile-app" value="SafeID Mobile App&#xa;Push Notifications&#xa;TOTP Codes"
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=10;"
+          vertex="1" parent="1">
+          <mxGeometry x="610" y="300" width="160" height="70" as="geometry" />
+        </mxCell>
+
+        <!-- SafeID Platform -->
+        <mxCell id="safeid-layer" value="Dell SafeID Authentication Platform"
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=14;fontStyle=1;verticalAlign=top;"
+          vertex="1" parent="1">
+          <mxGeometry x="850" y="260" width="550" height="280" as="geometry" />
+        </mxCell>
+        <mxCell id="auth-server" value="SafeID Authentication Server&#xa;Dual redundant VM (PowerEdge R650)"
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=11;fontStyle=1;"
+          vertex="1" parent="1">
+          <mxGeometry x="880" y="300" width="240" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="radius" value="RADIUS Server&#xa;Network Access Control"
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=10;"
+          vertex="1" parent="1">
+          <mxGeometry x="1150" y="300" width="220" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="policy" value="Policy Engine&#xa;Adaptive Authentication&#xa;Risk-Based Access"
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=10;"
+          vertex="1" parent="1">
+          <mxGeometry x="880" y="380" width="240" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="reporting" value="Compliance Reporting&#xa;CMMC/NIST 800-63 Audit Logs"
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontSize=10;"
+          vertex="1" parent="1">
+          <mxGeometry x="1150" y="380" width="220" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="sql" value="SQL Server Database&#xa;User Credentials & Audit Trail"
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=10;"
+          vertex="1" parent="1">
+          <mxGeometry x="880" y="460" width="490" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- Integration Layer -->
+        <mxCell id="integration-layer" value="Directory & Identity Integration"
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=14;fontStyle=1;verticalAlign=top;"
+          vertex="1" parent="1">
+          <mxGeometry x="200" y="460" width="600" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="ad" value="Active Directory&#xa;User Directory Sync"
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=11;"
+          vertex="1" parent="1">
+          <mxGeometry x="230" y="500" width="160" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="saml" value="SAML 2.0 / OAuth 2.0&#xa;SSO Integration"
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=11;"
+          vertex="1" parent="1">
+          <mxGeometry x="420" y="500" width="160" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="ldap" value="LDAP/LDAPS&#xa;Directory Queries"
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontSize=11;"
+          vertex="1" parent="1">
+          <mxGeometry x="610" y="500" width="160" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- Protected Resources -->
+        <mxCell id="resources" value="Protected Resources: DoD Applications, File Shares, VPN Gateway, Privileged Access Management"
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=12;fontStyle=1;"
+          vertex="1" parent="1">
+          <mxGeometry x="200" y="650" width="1200" height="50" as="geometry" />
+        </mxCell>
+
+        <!-- Compliance -->
+        <mxCell id="compliance" value="Compliance: CMMC Level 2, NIST 800-63B AAL3, FIPS 140-2, FIDO2 Certified"
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=11;"
+          vertex="1" parent="1">
+          <mxGeometry x="200" y="730" width="1200" height="40" as="geometry" />
+        </mxCell>
+
+        <!-- Arrows -->
+        <mxCell id="arrow1" value="MFA Challenge" style="endArrow=classic;html=1;strokeWidth=2;dashed=1;" edge="1" parent="1" source="users-layer" target="tokens-layer">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="arrow2" value="Authentication" style="endArrow=classic;html=1;strokeWidth=2;startArrow=classic;startFill=1;" edge="1" parent="1" source="tokens-layer" target="safeid-layer">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="arrow3" value="Directory Sync" style="endArrow=classic;html=1;strokeWidth=2;startArrow=classic;startFill=1;" edge="1" parent="1" source="integration-layer" target="safeid-layer">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

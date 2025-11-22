@@ -1,0 +1,115 @@
+<mxfile host="app.diagrams.net">
+  <diagram id="dell-vxrail-hci" name="Dell VxRail HCI">
+    <mxGraphModel dx="1422" dy="794" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="900">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" value="Dell VxRail Hyperconverged Infrastructure"
+          style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontSize=20;fontStyle=1;"
+          vertex="1" parent="1">
+          <mxGeometry x="400" y="40" width="800" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="vmware-layer" value="VMware Stack"
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=14;fontStyle=1;verticalAlign=top;"
+          vertex="1" parent="1">
+          <mxGeometry x="200" y="120" width="1200" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="vsphere" value="vSphere 8&#xa;Enterprise Plus"
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=12;"
+          vertex="1" parent="1">
+          <mxGeometry x="250" y="150" width="200" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="vsan" value="vSAN 8&#xa;Enterprise"
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=12;"
+          vertex="1" parent="1">
+          <mxGeometry x="500" y="150" width="200" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="vcenter" value="vCenter Server"
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=12;"
+          vertex="1" parent="1">
+          <mxGeometry x="750" y="150" width="200" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="vrops" value="vRealize&#xa;Operations"
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontSize=12;"
+          vertex="1" parent="1">
+          <mxGeometry x="1000" y="150" width="180" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="cluster-layer" value="VxRail Cluster (4 Nodes)"
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=14;fontStyle=1;verticalAlign=top;"
+          vertex="1" parent="1">
+          <mxGeometry x="200" y="270" width="600" height="280" as="geometry" />
+        </mxCell>
+        <mxCell id="node1" value="VxRail E560 Node 1&#xa;2x Xeon Gold, 768GB RAM&#xa;15.36TB All-Flash NVMe"
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=11;"
+          vertex="1" parent="1">
+          <mxGeometry x="230" y="310" width="250" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="node2" value="VxRail E560 Node 2&#xa;2x Xeon Gold, 768GB RAM&#xa;15.36TB All-Flash NVMe"
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=11;"
+          vertex="1" parent="1">
+          <mxGeometry x="520" y="310" width="250" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="node3" value="VxRail E560 Node 3&#xa;2x Xeon Gold, 768GB RAM&#xa;15.36TB All-Flash NVMe"
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=11;"
+          vertex="1" parent="1">
+          <mxGeometry x="230" y="400" width="250" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="node4" value="VxRail E560 Node 4&#xa;2x Xeon Gold, 768GB RAM&#xa;15.36TB All-Flash NVMe"
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=11;"
+          vertex="1" parent="1">
+          <mxGeometry x="520" y="400" width="250" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="vsan-storage" value="vSAN Datastore&#xa;61TB raw / 40TB usable (FTT=1)"
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=12;fontStyle=1;"
+          vertex="1" parent="1">
+          <mxGeometry x="230" y="480" width="540" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="network-layer" value="Network Fabric"
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=14;fontStyle=1;verticalAlign=top;"
+          vertex="1" parent="1">
+          <mxGeometry x="850" y="270" width="550" height="280" as="geometry" />
+        </mxCell>
+        <mxCell id="tor1" value="Dell PowerSwitch S5248F-ON&#xa;48-port 25GbE ToR (Primary)"
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=11;"
+          vertex="1" parent="1">
+          <mxGeometry x="880" y="310" width="240" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="tor2" value="Dell PowerSwitch S5248F-ON&#xa;48-port 25GbE ToR (Secondary)"
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=11;"
+          vertex="1" parent="1">
+          <mxGeometry x="1140" y="310" width="240" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="vlan-mgmt" value="VLAN 10: Management"
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontSize=10;"
+          vertex="1" parent="1">
+          <mxGeometry x="880" y="390" width="170" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="vlan-vmotion" value="VLAN 20: vMotion"
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontSize=10;"
+          vertex="1" parent="1">
+          <mxGeometry x="1070" y="390" width="170" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="vlan-vsan" value="VLAN 30: vSAN"
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontSize=10;"
+          vertex="1" parent="1">
+          <mxGeometry x="880" y="450" width="170" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="vlan-vm" value="VLAN 40: VM Production"
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontSize=10;"
+          vertex="1" parent="1">
+          <mxGeometry x="1070" y="450" width="170" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="vms" value="Virtual Machines: 200 VMs (Windows, Linux, SQL Server, Oracle)"
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=12;fontStyle=1;"
+          vertex="1" parent="1">
+          <mxGeometry x="200" y="600" width="1200" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="backup" value="Backup: Veeam Backup & Replication (200 VM licenses)"
+          style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=11;"
+          vertex="1" parent="1">
+          <mxGeometry x="200" y="680" width="1200" height="40" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
