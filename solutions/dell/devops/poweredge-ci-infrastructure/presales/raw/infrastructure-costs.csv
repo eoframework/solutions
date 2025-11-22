@@ -1,0 +1,54 @@
+# Sizing Guidelines
+#WIDTH: 24,36,28,28,28,51
+#ALIGN: left,left,center,center,center,left
+Category,Component,Small (20 devs),Medium (50 devs),Large (100 devs),Notes
+Build Agents,PowerEdge R650 Servers,4 servers,8 servers,16 servers,64 cores 512GB RAM per server
+Concurrent Builds,Build Agent Capacity,32 concurrent,64 concurrent,128 concurrent,8 agents per server average
+Daily Build Volume,Estimated Daily Builds,2000 builds/day,5000 builds/day,10000 builds/day,Based on developer activity patterns
+Artifact Storage,Dell Unity XT Storage,20TB SSD,50TB SSD,100TB SSD,Build artifacts and container images
+Network Infrastructure,PowerSwitch 10GbE,1x 48-port,2x 48-port,4x 48-port,High-speed artifact transfer
+CI/CD Platform,Jenkins or GitLab CI,Self-hosted,Self-hosted,Self-hosted,Open-source or enterprise edition
+
+# Infrastructure Costs
+#WIDTH: 23,30,50,12,16,12,15,12,12,15,30
+#ALIGN: left,left,left,right,left,right,right,right,right,right,left
+Category,Component,Description,Quantity,Unit,Unit Price,Annual Cost,Year 2,Year 3,3-Year Total,Notes
+Hardware,Dell PowerEdge R650,2U server with 2x Xeon Gold 6338 64 cores 512GB RAM 2TB SSD,8,Servers,$15000,$120000,$0,$0,$120000,Build agent farm
+Hardware,Dell Unity XT 380,50TB all-flash SSD storage for artifacts and container images,1,System,$45000,$45000,$0,$0,$45000,Artifact repository storage
+Networking,Dell PowerSwitch S4148T,48-port 10GbE switch for build farm connectivity,2,Switches,$6500,$13000,$0,$0,$13000,Redundant network fabric
+Networking,10GbE SFP+ Transceivers,Fiber optic transceivers for server connectivity,32,Transceivers,$350,$11200,$0,$0,$11200,Network connectivity
+Networking,OM3 Fiber Cables,Multimode fiber patch cables for 10GbE,32,Cables,$35,$1120,$0,$0,$1120,Data center cabling
+Software,Red Hat Enterprise Linux,Enterprise Linux for build agents (8 servers),8,Servers/Annual,$1200,$9600,$9600,$9600,$28800,OS licensing and support
+Software,GitLab Premium Self-Hosted,Self-hosted CI/CD platform for 50 users,50,Users/Annual,$228,$11400,$11400,$11400,$34200,CI/CD platform licensing
+Software,JFrog Artifactory Pro,Artifact repository for Maven npm Docker images,50,Users/Annual,$180,$9000,$9000,$9000,$27000,Package and container registry
+Software,Docker Enterprise,Container runtime for build agents,8,Servers/Annual,$750,$6000,$6000,$6000,$18000,Enterprise container platform
+Software,HashiCorp Vault,Secrets management for CI/CD pipelines,1,Cluster/Annual,$5000,$5000,$5000,$5000,$15000,Secrets and credential management
+Software,SonarQube Data Center,Code quality and security scanning,50,Users/Annual,$150,$7500,$7500,$7500,$22500,Static code analysis
+Support & Maintenance,Dell ProSupport Plus 24x7,Hardware support for PowerEdge and Unity,9,Units/Annual,$1200,$10800,$10800,$10800,$32400,24x7 hardware support
+Support & Maintenance,Network Equipment Support,ProSupport for PowerSwitch networking,2,Switches/Annual,$850,$1700,$1700,$1700,$5100,Switch support contracts
+Professional Services,CI/CD Infrastructure Design,Architecture design and capacity planning,40,Hours,$250,$10000,$0,$0,$10000,Upfront design services
+Professional Services,GitLab Implementation,GitLab installation configuration and CI/CD pipeline setup,80,Hours,$200,$16000,$0,$0,$16000,Platform deployment
+Professional Services,Artifactory Configuration,Artifact repository setup and proxy configuration,40,Hours,$200,$8000,$0,$0,$8000,Artifact management setup
+Professional Services,Migration Services,Migrate CI/CD pipelines from cloud to on-prem,100,Hours,$175,$17500,$0,$0,$17500,Pipeline migration assistance
+Professional Services,DevOps Training,GitLab and Artifactory administration 3-day workshop,4,Students,$2500,$10000,$0,$0,$10000,Team training
+
+# Credits
+#WIDTH: 25,25,15,50
+#ALIGN: left,left,right,left
+Category,Credit Type,Credit Amount,Credit Comments
+Cloud Cost Avoidance,GitHub Actions Baseline,"($113400)",Annual savings vs GitHub Actions at $21/user/month for 50 users ($12600/year) + runner compute ($100800/year estimated for 5000 builds/day)
+Cloud Cost Avoidance,Artifact Egress Fees,"($36000)",Annual savings on artifact download egress at $0.09/GB (assume 400GB/day downloads from cloud artifact storage)
+Operational Efficiency,Developer Productivity Gain,"($50000)",Faster build times (on-prem < 5min queue vs 10-15min cloud) save 30min/developer/week = $50K annual value
+
+# 3-Year Summary
+#WIDTH: 25,15,15,15,12,12,15
+#ALIGN: left,right,right,right,right,right,right
+Category,Year 1 List,Year 1 Credits,Year 1 Net,Year 2,Year 3,3-Year Total
+Hardware,$190320,$0,$190320,$0,$0,$190320
+Networking,$25320,$0,$25320,$0,$0,$25320
+Software,$48500,$0,$48500,$48500,$48500,$145500
+Support & Maintenance,$12500,$0,$12500,$12500,$12500,$37500
+Professional Services,$61500,$0,$61500,$0,$0,$61500
+TOTAL,$338140,$0,$338140,$61000,$61000,$460140
+Cloud Cost Avoidance (Annual),$0,"($149400)","($149400)","($149400)","($149400)","($448200)"
+Net Investment After Savings,$338140,"($149400)",$188740,"($88400)","($88400)",$11940

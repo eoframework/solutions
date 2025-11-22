@@ -1,0 +1,50 @@
+# Sizing Guidelines
+#WIDTH: 24,36,28,28,28,51
+#ALIGN: left,left,center,center,center,left
+Category,Component,Small (20 racks),Medium (40 racks),Large (80 racks),Notes
+Spine Switches,Dell Z9432F-ON 100GbE,2 spines,4 spines,6 spines,Dual-plane redundancy for resiliency
+Leaf Switches,Dell S5248F-ON 25GbE ToR,20 leaf switches,40 leaf switches,80 leaf switches,1 ToR switch per rack typical
+Server Ports,25GbE Server Connectivity,960 ports (48/switch),1920 ports,3840 ports,48 ports per leaf switch
+Uplink Capacity,Spine-Leaf Bandwidth,800Gbps (2 spines),1.6Tbps (4 spines),2.4Tbps (6 spines),100GbE uplinks per leaf to each spine
+Oversubscription Ratio,Bandwidth Allocation,3:1 typical,3:1 typical,3:1 typical,Enterprise standard for cost optimization
+Management Platform,Dell SmartFabric Services,Included,Included,Included,Zero-touch provisioning and lifecycle management
+
+# Infrastructure Costs
+#WIDTH: 23,30,50,12,16,12,15,12,12,15,30
+#ALIGN: left,left,left,right,left,right,right,right,right,right,left
+Category,Component,Description,Quantity,Unit,Unit Price,Annual Cost,Year 2,Year 3,3-Year Total,Notes
+Spine Switches,Dell Z9432F-ON,32-port 100GbE spine switch with OS10 for high-capacity fabric,4,Switches,$95000,$380000,$0,$0,$380000,Redundant spine-leaf architecture
+Leaf Switches,Dell S5248F-ON,48-port 25GbE leaf ToR switch for server connectivity,40,Switches,$18000,$720000,$0,$0,$720000,1 ToR per rack deployment
+Aggregation Switches,Dell S5296F-ON,96-port 25GbE aggregation for border/services,2,Switches,$48000,$96000,$0,$0,$96000,Border leafs for external connectivity
+Optics,100GbE QSFP28 Transceivers,Fiber optic transceivers for spine-leaf interconnects,200,Transceivers,$850,$170000,$0,$0,$170000,High-speed fabric connectivity
+Optics,25GbE SFP28 Transceivers,Fiber optic transceivers for server connectivity,1200,Transceivers,$400,$480000,$0,$0,$480000,Server uplinks (30 per switch average)
+Cabling,25GbE DAC 3m,Direct-attach copper cables for short-reach connections,1200,Cables,$50,$60000,$0,$0,$60000,Cost-effective short-reach cabling
+Cabling,OM4 Fiber Cables,Multimode fiber for spine-leaf and longer runs,200,Cables,$45,$9000,$0,$0,$9000,Long-distance high-speed connectivity
+Software,OS10 Enterprise per Switch,Enterprise OS10 licensing for advanced features,46,Switches,$2500,$115000,$0,$0,$115000,Full OS10 feature set
+Software,Dell SmartFabric Services,Fabric orchestration and zero-touch provisioning for 3 years,1,Subscription,$45000,$45000,$0,$0,$45000,Automated lifecycle management
+Support & Maintenance,ProSupport Plus 24x7,Hardware support for all switches 3-year contract,46,Switches/3-Year,$3600,$0,$0,$0,$165600,24x7 support with 4-hour response
+Professional Services,Network Design,Spine-leaf architecture design and capacity planning,80,Hours,$250,$20000,$0,$0,$20000,Architecture and IP addressing design
+Professional Services,Installation and Configuration,Switch installation OS10 config BGP and VXLAN setup,160,Hours,$200,$32000,$0,$0,$32000,Deployment and configuration services
+Professional Services,Migration Services,Cutover planning and execution from legacy network,120,Hours,$175,$21000,$0,$0,$21000,Migration assistance and validation
+Professional Services,Training,OS10 administration BGP and automation 5-day workshop,4,Students,$3500,$14000,$0,$0,$14000,Network team training
+
+# Credits
+#WIDTH: 25,25,15,50
+#ALIGN: left,left,right,left
+Category,Credit Type,Credit Amount,Credit Comments
+Hardware,Cisco Nexus Cost Avoidance,"($1056000)",Equivalent Cisco Nexus 9000 deployment would cost $2.95M (2.5x Dell PowerSwitch $1.9M hardware cost)
+Operational Savings,Annual Support Cost Reduction,"($84000)",Dell ProSupport 20% less than Cisco SmartNet (18% vs 22% of hardware list annually)
+
+# 3-Year Summary
+#WIDTH: 25,15,15,15,12,12,15
+#ALIGN: left,right,right,right,right,right,right
+Category,Year 1 List,Year 1 Credits,Year 1 Net,Year 2,Year 3,3-Year Total
+Spine Switches,$380000,$0,$380000,$0,$0,$380000
+Leaf Switches,$816000,$0,$816000,$0,$0,$816000
+Optics & Cabling,$719000,$0,$719000,$0,$0,$719000
+Software,$160000,$0,$160000,$0,$0,$160000
+Support & Maintenance (3-Year),$165600,$0,$165600,$0,$0,$165600
+Professional Services,$87000,$0,$87000,$0,$0,$87000
+TOTAL,$2327600,$0,$2327600,$0,$0,$2327600
+Cisco Nexus Alternative,$3383600,$0,$3383600,$0,$0,$3383600
+Dell PowerSwitch Savings,"($1056000)","($1056000)","($1056000)","($1056000)","($1056000)","($1056000)"
