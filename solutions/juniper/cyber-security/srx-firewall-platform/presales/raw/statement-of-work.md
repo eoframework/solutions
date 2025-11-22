@@ -238,7 +238,9 @@ The following activities are explicitly excluded from this SOW:
 ## Architecture Overview
 Multi-zone security architecture with datacenter and branch firewall deployment. SRX4600 HA pair in datacenter with SRX300 firewalls at branch locations.
 
-## Security & Compliance
+---
+
+# Security & Compliance
 
 Enterprise-grade security with IPS, ATP Cloud, SecIntel, and SSL inspection meeting PCI DSS and SOC 2 compliance requirements.
 

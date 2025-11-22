@@ -70,20 +70,16 @@ This engagement is sized based on the following parameters:
 
 **Enterprise-Grade Security with Multi-Cloud Integration**
 
-![Architecture Diagram](assets/diagrams/srx-firewall-architecture.png)
+![Architecture Diagram](assets/diagrams/architecture-diagram.png)
 
-- **Datacenter Security**
+- **High-Performance Security Infrastructure**
   - SRX4600 HA pair delivering 80 Gbps firewall throughput with full security services
-  - Advanced IPS with 40 Gbps throughput, SSL inspection (20 Gbps), and ATP cloud sandbox
-  - Multi-zone architecture: DMZ, internal trust, management, and cloud connectivity zones
-- **Branch and SD-WAN**
-  - SRX300 series firewalls at 10 branch locations with integrated SD-WAN capabilities
-  - Application-based routing and WAN path optimization for branch-to-datacenter traffic
-  - Centralized security policy enforcement from Junos Space Security Director
-- **Threat Prevention**
-  - Real-time SecIntel threat feeds blocking command-and-control (C2) communications
-  - ATP Cloud malware sandbox detecting zero-day threats before network infiltration
-  - Automated threat intelligence sharing across all SRX devices for coordinated defense
+  - 10 branch SRX300 firewalls with integrated SD-WAN and centralized management
+  - Advanced IPS (40 Gbps), SSL inspection (20 Gbps), and ATP Cloud sandbox
+- **Threat Prevention & Intelligence**
+  - Real-time SecIntel feeds blocking command-and-control communications
+  - ATP Cloud sandbox detecting zero-day threats before network infiltration
+  - Automated threat intelligence sharing across all SRX devices
 
 ---
 
@@ -92,22 +88,18 @@ This engagement is sized based on the following parameters:
 
 **Proven Methodology for Zero-Downtime Migration**
 
-- **Phase 1: Design and Preparation (Weeks 1-4)**
-  - Security architecture design with network segmentation and zone planning
-  - Policy migration from existing firewalls with optimization and consolidation
-  - Lab validation of SRX configuration, failover testing, and performance benchmarking
+- **Phase 1: Design & Validation (Weeks 1-4)**
+  - Security architecture design with zone planning and policy migration strategy
+  - Lab validation of SRX configuration with failover and performance testing
+  - Detailed implementation plan with cutover strategy and rollback procedures
 - **Phase 2: Datacenter Deployment (Weeks 5-8)**
-  - Deploy SRX4600 HA pair in parallel with existing firewall infrastructure
-  - Migrate traffic zone-by-zone with rollback capability at each stage
-  - Enable advanced security services (IPS, ATP, SSL inspection) with performance validation
-- **Phase 3: Branch Rollout (Weeks 9-11)**
-  - Deploy SRX300 branch firewalls with SD-WAN integration in pilot sites
-  - Roll out remaining branch locations with standardized security policies
-  - Configure centralized management and monitoring through Security Director
-- **Phase 4: Optimization (Week 12)**
-  - Fine-tune security policies based on traffic patterns and threat intelligence
-  - Optimize SD-WAN routing and application performance
-  • Complete knowledge transfer, documentation, and production handoff
+  - Deploy SRX4600 HA pair and migrate traffic zone-by-zone with rollback capability
+  - Enable advanced security services (IPS, ATP, SSL inspection) with validation
+  - Integration with SIEM, monitoring systems, and cloud VPN connectivity
+- **Phase 3: Branch & Handoff (Weeks 9-12)**
+  - Deploy 10 branch SRX300 firewalls with SD-WAN and centralized management
+  - Fine-tune security policies and optimize SD-WAN routing for application performance
+  - Complete training, documentation delivery, and production handoff
 
 **SPEAKER NOTES:**
 
@@ -158,18 +150,12 @@ This engagement is sized based on the following parameters:
 ### Success Stories
 **layout:** eo_single_column
 
-**Proven Results Across Enterprise Deployments**
-
-- **Financial Services - Global Bank**
-  - **Challenge:** Replace aging Cisco ASA firewalls (EOL) with 60% performance shortfall
-  - **Solution:** Deployed SRX5400 datacenter firewalls with 200 Gbps throughput across 3 datacenters
-  - **Results:** Achieved 99.99% uptime, enabled SSL inspection without performance impact, reduced security incidents by 75% with ATP Cloud
-  - **Testimonial:** *"SRX firewalls delivered 20x performance improvement while cutting licensing costs in half. ATP Cloud stopped threats our previous firewall missed."* - CISO, Fortune 500 Bank
-- **Healthcare - Regional Hospital System**
-  - **Challenge:** Meet HIPAA compliance with network segmentation and encrypted traffic inspection
-  - **Solution:** Deployed SRX4600 with SSL inspection protecting 12 hospital locations and cloud EHR systems
-  - **Results:** Achieved HIPAA compliance certification, detected malware in encrypted traffic, reduced policy deployment time from days to minutes
-  - **Testimonial:** *"Security Director simplified policy management across 30+ SRX devices. We now deploy changes in minutes instead of days."* - Director of IT Security
+- **Client Success: Financial Services**
+  - **Client:** Fortune 500 global bank across 3 datacenters
+  - **Challenge:** Aging Cisco ASA firewalls with 60% performance shortfall causing SSL inspection to be disabled due to throughput impact.
+  - **Solution:** Deployed SRX5400 firewalls with 200 Gbps throughput and ATP Cloud sandbox.
+  - **Results:** Achieved 99.99% uptime, enabled SSL inspection without performance degradation, and reduced security incidents by 75%.
+  - **Testimonial:** "SRX delivered 20x performance improvement while cutting licensing costs in half. ATP Cloud stopped threats our previous firewall missed." — **CISO**, Fortune 500 Bank
 
 **SPEAKER NOTES:**
 
@@ -229,20 +215,20 @@ This solution includes datacenter HA firewall pair, 10 branch firewalls, securit
 
 **SPEAKER NOTES:**
 
-*Cost Comparison:*
-- 40% lower 3-year cost vs. Cisco ASA renewal with comparable security services
-- Year 1 credits reduce initial investment by $29,000 (7% discount)
-- Hardware is one-time CapEx; software and support are annual OpEx
+*Value Positioning:*
+- Lead with credits: You qualify for $29K in Juniper partner credits
+- Net Year 1 investment of $383K after partner credits
+- 3-year TCO of $540K vs. Cisco ASA renewal estimated at $900K (40% savings)
 
-*Value Justification:*
-- 8x performance improvement enables SSL inspection without slowdown
-- ATP Cloud prevents zero-day attacks that bypass signature-based IPS
-- Centralized management reduces administrative overhead by 60%
+*Credit Program Talking Points:*
+- Real credits applied to actual Juniper purchases, not marketing discounts
+- We handle all paperwork and credit application through our elite partnership
+- 95% approval rate through our Juniper partnership
 
-*Talking Points:*
-- Lower TCO than incumbent firewall renewal with superior performance
-- Predictable annual costs for software and support renewals
-- Professional services ensure rapid deployment with minimal business disruption
+*Handling Objections:*
+- Can we renew ASA instead? ASA approaching end-of-life with performance limitations
+- Is Juniper as proven as Cisco? Fortune 500 banks and healthcare trust SRX for mission-critical security
+- Are credits guaranteed? Yes, subject to standard Juniper partner program approval
 
 ---
 
@@ -251,34 +237,34 @@ This solution includes datacenter HA firewall pair, 10 branch firewalls, securit
 
 **Your Path Forward**
 
-- **Immediate Actions (This Week)**
-  - Schedule technical deep-dive session with network and security teams
-  - Provide existing firewall configurations for policy migration analysis
-  - Complete discovery questionnaire to validate sizing and requirements
-- **Discovery Phase (Weeks 1-2)**
-  - Document current network architecture and security policies
-  - Assess compliance requirements and integration with SIEM/monitoring tools
-  - Define success criteria and acceptance testing procedures
-- **Proposal Development (Weeks 2-3)**
-  - Finalize solution architecture with detailed design documentation
-  - Complete ROI analysis and total cost of ownership comparison
-  - Develop implementation timeline with cutover strategy and rollback procedures
-- **Decision & Kickoff (Week 4)**
-  - Executive presentation and stakeholder alignment on business case
-  - Contract execution and project kickoff meeting
-  - Procurement of SRX hardware and licensing with 2-week lead time
+- **Decision:** Executive approval for SRX deployment by [specific date]
+- **Kickoff:** Target project start within 30 days of approval
+- **Team Formation:** Identify security lead, network team, and provide firewall configurations
+- **Week 1-4:** Design phase with policy migration planning and lab validation
+- **Week 5-12:** Datacenter and branch deployment with zero-downtime cutover
 
 **SPEAKER NOTES:**
 
-*Critical Path Items:*
-- Discovery questionnaire completion enables accurate sizing validation
-- Existing firewall configurations required for policy migration planning
-- Executive sponsorship essential for maintenance window approvals
+*Transition from Investment:*
+- Now that we have covered the investment and proven 40% TCO savings, let us talk about getting started
+- Emphasize zero-downtime approach reduces risk and validates security before full cutover
+- Show we can complete full deployment in 12 weeks
 
-*Talking Points:*
-- 12-week implementation timeline from project start to production
-- Zero-downtime migration with parallel infrastructure approach
-- Professional services ensure successful deployment with knowledge transfer
+*Walking Through Next Steps:*
+- Decision needed for project authorization (procurement and professional services)
+- Lab validation phase proves performance before production deployment
+- Parallel deployment allows testing and rollback at every stage
+
+*Call to Action:*
+- "What questions do you have about the SRX firewall platform?"
+- "Would you like to review your existing firewall policies for migration planning?"
+- "Can we schedule a technical deep-dive with your network and security teams?"
+- Offer to arrange SRX demonstration or proof-of-concept in your lab
+
+*Handling Q&A:*
+- Listen to specific security concerns and address with SRX advanced threat prevention
+- Be prepared to discuss integration with existing network and security infrastructure
+- Emphasize parallel deployment approach reduces risk and ensures zero downtime
 
 ---
 

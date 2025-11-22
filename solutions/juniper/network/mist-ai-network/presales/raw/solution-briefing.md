@@ -70,20 +70,16 @@ This engagement is sized based on the following parameters:
 
 **Cloud-Managed WiFi 6E with AI Operations**
 
-![Architecture Diagram](assets/diagrams/mist-ai-network-architecture.png)
+![Architecture Diagram](assets/diagrams/architecture-diagram.png)
 
-- **Mist AI Platform**
+- **Mist AI Wireless Platform**
   - 50 Juniper AP45 WiFi 6E access points delivering 9.6 Gbps tri-band throughput
   - Mist Cloud AI engine with machine learning for anomaly detection and self-healing
-  - Marvis Virtual Network Assistant for conversational troubleshooting ("Why is WiFi slow?")
-- **Wired Assurance**
-  - 4 Juniper EX4400 switches with AI-driven wired network management
-  - Unified dashboard for wireless and wired infrastructure visibility
-  - Automated switch configuration and compliance monitoring
-- **Location Services**
+  - Marvis Virtual Network Assistant for conversational troubleshooting
+- **Location Services & Management**
   - Virtual BLE (vBLE) for indoor positioning without physical beacon hardware
-  - Real-time wayfinding, asset tracking, and occupancy analytics
-  - Integration with mobile apps for visitor navigation and space utilization
+  - Real-time wayfinding, asset tracking, and occupancy analytics for facilities
+  - Unified dashboard for wireless and wired infrastructure with 4 EX4400 switches
 
 ---
 
@@ -92,22 +88,18 @@ This engagement is sized based on the following parameters:
 
 **Proven Methodology for Zero-Disruption Deployment**
 
-- **Phase 1: Design & Site Survey (Weeks 1-2)**
+- **Phase 1: Design & Planning (Weeks 1-2)**
   - Predictive RF site survey using building plans and Mist AI planning tools
   - AP placement design optimizing coverage, capacity, and client experience
   - WLAN architecture design with VLAN segmentation and security policies
-- **Phase 2: Infrastructure Deployment (Weeks 3-5)**
-  - Install EX4400 PoE switches and configure uplinks to existing network
-  - Mount and cable 50 AP45 access points with minimal business disruption
-  - Configure Mist Cloud with SSIDs, VLANs, and security policies
-- **Phase 3: Services Enablement (Week 6)**
-  - Enable Marvis AI for proactive monitoring and conversational troubleshooting
-  - Configure location services with vBLE for wayfinding and asset tracking
-  - Integrate with existing authentication (RADIUS, Active Directory, SSO)
-- **Phase 4: Validation & Handoff (Weeks 7-8)**
-  - RF validation walkthrough testing coverage, throughput, and roaming
-  - Train IT staff on Mist dashboard, Marvis AI usage, and troubleshooting workflows
-  - Complete documentation and transition to operations team with 30-day support
+- **Phase 2: Deployment & Configuration (Weeks 3-6)**
+  - Deploy EX4400 switches and mount 50 AP45 access points with minimal disruption
+  - Configure Mist Cloud with SSIDs, VLANs, authentication, and security policies
+  - Enable Marvis AI and location services with vBLE for wayfinding
+- **Phase 3: Validation & Handoff (Weeks 7-8)**
+  - RF validation testing coverage, throughput, and roaming performance
+  - Train IT staff on Mist dashboard, Marvis AI, and troubleshooting workflows
+  - Complete documentation and transition to operations with 30-day support
 
 **SPEAKER NOTES:**
 
@@ -158,18 +150,12 @@ This engagement is sized based on the following parameters:
 ### Success Stories
 **layout:** eo_single_column
 
-**Proven Results Across Enterprise Deployments**
-
-- **Higher Education - Major University Campus**
-  - **Challenge:** 30K students experiencing poor WiFi coverage with constant troubleshooting and manual RF tuning
-  - **Solution:** Deployed 2,500 Mist APs across 150 buildings with Marvis AI and location services
-  - **Results:** Achieved 99.9% uptime, reduced helpdesk tickets by 75%, enabled campus wayfinding for 10K visitors per month
-  - **Testimonial:** *"Marvis AI answers 'Why is WiFi slow?' in seconds instead of hours of packet captures. Our helpdesk team focuses on strategic projects instead of troubleshooting."* - VP of IT, Public University
-- **Healthcare - Regional Hospital System**
-  - **Challenge:** Mission-critical wireless for medical devices and EHR access with zero tolerance for downtime
-  - **Solution:** Deployed Mist AI wireless with 99.99% SLE tracking and predictive anomaly detection
-  - **Results:** Achieved 99.99% uptime for medical device VLANs, detected and resolved issues before clinical impact, passed HIPAA wireless security audit
-  - **Testimonial:** *"Mist AI predicted AP failures before they impacted patient care. Location services track medical equipment across 5 hospital buildings in real-time."* - CIO, Healthcare System
+- **Client Success: Higher Education**
+  - **Client:** Major university campus with 30,000 students
+  - **Challenge:** Poor WiFi coverage with constant troubleshooting, manual RF tuning, and helpdesk team overwhelmed with wireless connectivity complaints.
+  - **Solution:** Deployed 2,500 Mist APs with Marvis AI and location services.
+  - **Results:** Achieved 99.9% uptime, reduced helpdesk tickets by 75%, and enabled campus wayfinding for 10,000 monthly visitors.
+  - **Testimonial:** "Marvis AI answers 'Why is WiFi slow?' in seconds instead of hours of packet captures. Our team now focuses on strategic projects." — **VP of IT**, Public University
 
 **SPEAKER NOTES:**
 
@@ -229,20 +215,20 @@ This solution includes 50 WiFi 6E access points, 4 PoE switches, Mist Cloud AI m
 
 **SPEAKER NOTES:**
 
-*Cost Comparison:*
-- 40% lower 3-year TCO vs. traditional controller-based wireless with comparable features
-- Year 1 credits reduce initial investment by $15,996 (7% discount)
-- Cloud management eliminates controller hardware CapEx and maintenance OpEx
+*Value Positioning:*
+- Lead with credits: You qualify for $16K in Juniper partner credits
+- Net Year 1 investment of $223K after partner credits
+- 3-year TCO of $305K vs. traditional controller-based wireless estimated at $500K (40% savings)
 
-*Value Justification:*
-- AI-driven operations reduce wireless OpEx by 60% (helpdesk, troubleshooting, RF optimization)
-- Location services monetize wireless infrastructure through space analytics and wayfinding
-- 99.9% uptime SLA protects revenue and productivity vs. legacy wireless downtime
+*Credit Program Talking Points:*
+- Real credits applied to actual Juniper purchases, not marketing discounts
+- We handle all paperwork and credit application through our elite partnership
+- 95% approval rate through our Juniper partnership
 
-*Talking Points:*
-- Predictable annual costs for cloud subscriptions and support
-- No controller refresh cycles or hardware maintenance contracts
-- Professional services ensure rapid deployment with minimal business disruption
+*Handling Objections:*
+- Can we keep our controller? Cloud management eliminates controller maintenance and refresh cycles
+- Is Mist AI as proven as traditional? 10,000+ Mist deployments trust AI-driven wireless operations
+- Are credits guaranteed? Yes, subject to standard Juniper partner program approval
 
 ---
 
@@ -251,34 +237,34 @@ This solution includes 50 WiFi 6E access points, 4 PoE switches, Mist Cloud AI m
 
 **Your Path Forward**
 
-- **Immediate Actions (This Week)**
-  - Schedule technical deep-dive with network team to review Mist AI capabilities and architecture
-  - Provide building floor plans and network documentation for predictive RF site survey
-  - Complete discovery questionnaire to validate sizing and requirements
-- **Design Phase (Weeks 1-2)**
-  - Conduct predictive RF site survey using Mist AI planning tools and building materials analysis
-  - Design WLAN architecture with SSID strategy, VLAN segmentation, and security policies
-  - Define Service Level Expectations (SLEs) for client experience tracking and monitoring
-- **Proposal Development (Weeks 2-3)**
-  - Finalize solution architecture with detailed RF coverage maps and AP placement diagrams
-  - Complete ROI analysis including helpdesk cost reduction and operational efficiency gains
-  - Develop implementation timeline with AP installation schedule and cutover plan
-- **Decision & Kickoff (Week 4)**
-  - Executive presentation and stakeholder alignment on business case and investment
-  - Contract execution and project kickoff meeting with implementation team
-  - Procurement of Mist APs and EX4400 switches with 2-week lead time
+- **Decision:** Executive approval for Mist AI wireless by [specific date]
+- **Kickoff:** Target project start within 30 days of approval
+- **Team Formation:** Identify wireless lead, network team, and provide building floor plans
+- **Week 1-2:** Design phase with RF site survey and WLAN architecture planning
+- **Week 3-8:** AP deployment, Marvis AI activation, and production cutover
 
 **SPEAKER NOTES:**
 
-*Critical Path Items:*
-- Building floor plans (CAD or PDF) required for accurate RF modeling
-- Network documentation (VLANs, DHCP scopes, authentication) for integration planning
-- Executive sponsorship for maintenance windows and legacy AP decommissioning
+*Transition from Investment:*
+- Now that we have covered the investment and proven 40% TCO savings, let us talk about getting started
+- Emphasize 8-week deployment timeline delivers immediate ROI through reduced troubleshooting
+- Show we can achieve 99.9% uptime with AI-driven operations from day one
 
-*Talking Points:*
-- 8-week implementation timeline from project start to full production
-- Zero-downtime deployment with incremental AP replacement approach
-- Professional services ensure successful deployment with comprehensive knowledge transfer
+*Walking Through Next Steps:*
+- Decision needed for project authorization (hardware and professional services)
+- RF site survey phase validates coverage before equipment purchase
+- Incremental deployment allows testing before legacy AP decommissioning
+
+*Call to Action:*
+- "What questions do you have about the Mist AI wireless platform?"
+- "Would you like to schedule an RF site survey to validate coverage requirements?"
+- "Can we arrange a demo of Marvis AI conversational troubleshooting?"
+- Offer to provide proof-of-concept with sample APs for testing
+
+*Handling Q&A:*
+- Listen to specific wireless pain points and address with Mist AI capabilities
+- Be prepared to discuss integration with existing network infrastructure
+- Emphasize AI-driven operations and measurable ROI through reduced troubleshooting time
 
 ---
 

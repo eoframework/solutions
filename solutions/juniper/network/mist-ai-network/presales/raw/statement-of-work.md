@@ -218,7 +218,9 @@ The following activities are explicitly excluded from this SOW:
 ## Architecture Overview
 Cloud-managed WiFi 6E architecture with 50 AP45 access points, Mist AI engine, and location services platform.
 
-## Security & Compliance
+---
+
+# Security & Compliance
 
 Enterprise wireless security with 802.1X RADIUS authentication and basic SOC 2 compliance.
 
