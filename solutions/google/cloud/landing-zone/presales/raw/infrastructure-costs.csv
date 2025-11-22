@@ -1,0 +1,60 @@
+# Sizing Guidelines
+#WIDTH: 24,36,28,28,28,51
+#ALIGN: left,left,center,center,center,left
+Category,Component,Small,Medium,Large,Notes
+Cloud Infrastructure,Number of GCP Projects,10 projects,30 projects,75+ projects,Managed projects within landing zone
+Cloud Infrastructure,Team Count,3-5 teams,6-15 teams,20+ teams,Application teams using the platform
+Cloud Infrastructure,Shared VPC Architecture,Single hub-spoke,Multi-hub regional,Global multi-region,Network complexity and scale
+Cloud Infrastructure,Hybrid Connectivity,Cloud VPN 1 Gbps,Interconnect 10 Gbps,Interconnect 100 Gbps,On-premises connectivity bandwidth
+Cloud Infrastructure,Logging Volume,500 GB/month,2 TB/month,10+ TB/month,Centralized Cloud Logging ingestion
+Software Licenses,Security Command Center,Standard tier,Premium tier,Premium + Chronicle,Security monitoring and threat detection
+Software Licenses,SIEM Integration,None,Chronicle 100 GB/mo,Chronicle 500+ GB/mo,Advanced security analytics
+Support & Maintenance,GCP Support Level,Standard,Enhanced,Premium Support,Support coverage and SLA requirements
+
+# Infrastructure Costs
+#WIDTH: 23,30,50,12,16,12,15,12,12,15,30
+#ALIGN: left,left,left,right,left,right,right,right,right,right,left
+Category,Component,Description,Quantity,Unit,Unit Price,Annual Cost,Year 2,Year 3,3-Year Total,Notes
+Cloud Infrastructure,Shared VPC Network,Hub-spoke VPC network with subnets across 3 regions,3,VPCs/Month,$0,"=D11*F11*12","=G11","=G11","=G11+H11+I11",VPC networking is free
+Cloud Infrastructure,Cloud NAT Gateway,NAT gateway for internet egress (3 regions),3,Gateways/Month,$140,"=D12*F12*12","=G12","=G12","=G12+H12+I12",Managed NAT service
+Cloud Infrastructure,Cloud Interconnect,Dedicated Interconnect 10 Gbps for hybrid connectivity,1,Connection/Month,$2000,"=D13*F13*12","=G13","=G13","=G13+H13+I13",On-premises connectivity
+Cloud Infrastructure,Interconnect VLAN,VLAN attachments for Interconnect (4 attachments),4,Attachments/Month,$100,"=D14*F14*12","=G14","=G14","=G14+H14+I14",VLAN attachment charges
+Cloud Infrastructure,Cloud Load Balancer,Internal HTTP(S) load balancer for shared services,2,Load Balancers/Month,$18,"=D15*F15*12","=G15","=G15","=G15+H15+I15",Internal load balancing
+Cloud Infrastructure,Cloud Armor,DDoS protection and WAF for external services,1,Policy/Month,$500,"=D16*F16*12","=G16","=G16","=G16+H16+I16",Advanced DDoS protection
+Cloud Infrastructure,Cloud IDS,Intrusion Detection System for VPC monitoring,3,Endpoints/Month,$550,"=D17*F17*12","=G17","=G17","=G17+H17+I17",Network threat detection
+Cloud Infrastructure,Cloud Logging,Centralized logging sink (500 GB/month ingestion),500,GB/Month,$2.25,"=D18*F18*12","=G18","=G18","=G18+H18+I18",Log aggregation and retention
+Cloud Infrastructure,Cloud Monitoring,Metrics and monitoring for all projects,1,Service/Month,$350,"=D19*F19*12","=G19","=G19","=G19+H19+I19",Centralized monitoring
+Cloud Infrastructure,Cloud Storage,Log storage and archives (5 TB standard + 10 TB archive),15,TB/Month,$1.50,"=D20*F20*12","=G20","=G20","=G20+H20+I20",Long-term log retention
+Cloud Infrastructure,Cloud DNS,Private DNS zones for internal services (50 zones),50,Zones/Month,$0.20,"=D21*F21*12","=G21","=G21","=G21+H21+I21",Internal DNS management
+Cloud Infrastructure,VPC Flow Logs,Flow logs for network monitoring (200 GB/month),200,GB/Month,$0.50,"=D22*F22*12","=G22","=G22","=G22+H22+I22",Network traffic analysis
+Cloud Infrastructure,Cloud KMS,Encryption key management (100 keys),100,Keys/Month,$0.06,"=D23*F23*12","=G23","=G23","=G23+H23+I23",CMEK key management
+Cloud Infrastructure,Secret Manager,Centralized secrets management (200 secrets),200,Secrets/Month,$0.40,"=D24*F24*12","=G24","=G24","=G24+H24+I24",Secret storage and access
+Cloud Infrastructure,Cloud Build,CI/CD automation for infrastructure (500 builds/month),500,Build Minutes/Month,$0.003,"=D25*F25*12","=G25","=G25","=G25+H25+I25",Infrastructure automation
+Cloud Infrastructure,Artifact Registry,Container and package repository (500 GB storage),500,GB/Month,$0.10,"=D26*F26*12","=G26","=G26","=G26+H26+I26",Centralized artifact storage
+Cloud Infrastructure,Data Transfer Out,Internet egress (1 TB/month average),1000,GB/Month,$0.12,"=D27*F27*12","=G27","=G27","=G27+H27+I27",Outbound data transfer
+Software Licenses,Security Command Center Premium,Advanced threat detection and compliance monitoring,1,Service/Month,$1250,"=D28*F28*12","=G28","=G28","=G28+H28+I28",Premium security features
+Software Licenses,Chronicle SIEM,Security analytics platform (100 GB/month),100,GB/Month,$250,"=D29*F29*12","=G29","=G29","=G29+H29+I29",Advanced SIEM capabilities
+Support & Maintenance,Google Cloud Support Enhanced,Enhanced support (9% of cloud infrastructure spend),1,Service/Month,$1500,"=D30*F30*12","=G30*1.03","=G30*1.06","=G30+H30+I30",9% of cloud costs with 3% annual growth
+Professional Services,Architecture and Design,Landing zone architecture design and documentation,100,Hours,$250,"=D31*F31","=0","=0","=G31",One-time design effort
+Professional Services,Implementation Services,Infrastructure deployment and configuration,160,Hours,$225,"=D32*F32","=0","=0","=G32",Initial implementation
+Professional Services,Security Baseline Configuration,Security controls policy implementation and validation,40,Hours,$250,"=D33*F33","=0","=0","=G33",Security hardening
+Professional Services,Training and Knowledge Transfer,Administrator and developer training,24,Hours,$200,"=D34*F34","=0","=0","=G34",Team enablement
+
+# Credits
+#WIDTH: 25,25,15,50
+#ALIGN: left,left,right,left
+Category,Credit Type,Credit Amount,Credit Comments
+Cloud Infrastructure,GCP Migration Credit,"($10000)",20% Year 1 infrastructure consumption credit
+Software Licenses,Partner Credit,$0,No software credits available
+Support & Maintenance,Program Credit,$0,No support credits available
+Professional Services,Implementation Credit,"($5000)",Partner implementation discount
+
+# 3-Year Summary
+#WIDTH: 25,15,15,15,12,12,15
+#ALIGN: left,right,right,right,right,right,right
+Category,Year 1 List,Year 1 Credits,Year 1 Net,Year 2,Year 3,3-Year Total
+Cloud Infrastructure,$49948,"($10000)",$39948,$51547,$53092,$144587
+Software Licenses,$48000,$0,$48000,$48000,$48000,$144000
+Support & Maintenance,$18000,$0,$18000,$18540,$19096,$55636
+Professional Services,$65000,"($5000)",$60000,$0,$0,$60000
+TOTAL,$180948,"($15000)",$165948,$118087,$120188,$404223
