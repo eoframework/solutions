@@ -1,29 +1,78 @@
-Phase,Work Package,Task Description,Resource Type,Estimated Hours,Rate,Cost Estimate,Dependencies,Risk Level,Notes
-Discovery,Azure Requirements Gathering,Conduct stakeholder interviews for Azure cloud strategy,EO Engineer,40,$150,"=TEXT(E2*F2,""$#,##0"")",,Medium,Focus on governance scalability and business alignment
-Discovery,Current Environment Assessment,Analyze existing infrastructure and Azure readiness,EO Engineer,32,$200,"=TEXT(E3*F3,""$#,##0"")",,Medium,Include identity networking and application assessment
-Discovery,Azure Services Assessment,Evaluate Azure services and landing zone requirements,EO Engineer,24,$200,"=TEXT(E4*F4,""$#,##0"")",,Medium,Focus on management groups policies and compliance
-Discovery,Compliance Review,Assess governance security and regulatory requirements,EO Engineer,16,$175,"=TEXT(E5*F5,""$#,##0"")",,Medium,Include Azure Policy and compliance frameworks
-Planning,Azure Landing Zone Design,Design Azure landing zone architecture and governance model,EO Engineer,48,$200,"=TEXT(E6*F6,""$#,##0"")",,Medium,Include management groups policies and blueprints
-Planning,Identity and Access Design,Design Azure AD integration and access management strategy,EO Engineer,32,$180,"=TEXT(E7*F7,""$#,##0"")",,Medium,Include SSO RBAC conditional access and PIM
-Planning,Network Architecture Design,Design Azure networking security and hybrid connectivity,EO Engineer,24,$175,"=TEXT(E8*F8,""$#,##0"")",,Medium,Include hub-spoke VNet peering and security
-Planning,Project Planning,Develop Azure implementation timeline and resource allocation,EO Engineer,24,$140,"=TEXT(E9*F9,""$#,##0"")",,Medium,Coordinate with infrastructure security and compliance teams
-Development,Management Groups and Subscriptions,Configure Azure management groups subscription structure and policies,EO Engineer,40,$160,"=TEXT(E10*F10,""$#,##0"")",,Medium,Include policy inheritance governance and billing
-Development,Azure Policy Implementation,Implement Azure policies governance controls and compliance,EO Engineer,60,$145,"=TEXT(E11*F11,""$#,##0"")",,Medium,Include policy definitions initiatives and remediation
-Development,Network Infrastructure,Build Azure networking VNet peering and hybrid connectivity,EO Engineer,48,$140,"=TEXT(E12*F12,""$#,##0"")",,Medium,Include ExpressRoute VPN and network security
-Development,Identity and Access Implementation,Implement Azure AD integration access controls and SSO,EO Engineer,40,$155,"=TEXT(E13*F13,""$#,##0"")",,Medium,Include MFA conditional access and privileged access
-Development,Monitoring and Operations,Build Azure monitoring logging alerting and operational tools,EO Engineer,32,$130,"=TEXT(E14*F14,""$#,##0"")",,Medium,Include Azure Monitor Log Analytics and automation
-Testing,Unit Testing,Develop automated tests for all solution components,EO Engineer,32,$120,"=TEXT(E15*F15,""$#,##0"")",,Medium,Include technology-specific testing frameworks
-Testing,Integration Testing,Test system integrations data flows and external dependencies,EO Engineer,40,$120,"=TEXT(E16*F16,""$#,##0"")",,Medium,Include end-to-end workflow validation
-Testing,Performance Testing,Conduct load performance and scalability testing,EO Engineer,24,$140,"=TEXT(E17*F17,""$#,##0"")",,Medium,Include production-like environment and stress testing
-Testing,Security Testing,Perform security assessments penetration testing and compliance validation,EO Engineer,16,$175,"=TEXT(E18*F18,""$#,##0"")",,Medium,Include vulnerability scanning and compliance checks
-Testing,User Acceptance Testing,Coordinate UAT with business users and stakeholders,EO Engineer,32,$150,"=TEXT(E19*F19,""$#,##0"")",,Medium,Include training feedback collection and sign-off
-Deployment,Production Deployment,Deploy solution to production environment with monitoring,EO Engineer,24,$160,"=TEXT(E20*F20,""$#,##0"")",,Medium,Include blue-green deployment rollback and validation
-Deployment,Go-Live Support,Provide comprehensive support during initial production rollout,EO Engineer,48,$110,"=TEXT(E21*F21,""$#,##0"")",,Medium,Include 24/7 support monitoring and issue resolution
-Training,Administrator Training,Train system administrators and technical support teams,EO Engineer,16,$130,"=TEXT(E22*F22,""$#,##0"")",,Medium,Include hands-on technical training and certification
-Training,End User Training,Train business users on solution functionality and workflows,EO Engineer,24,$120,"=TEXT(E23*F23,""$#,##0"")",,Medium,Include role-based training documentation and support
-Training,Documentation,Create comprehensive technical and user documentation,EO Engineer,32,$110,"=TEXT(E24*F24,""$#,##0"")",,Medium,Include runbooks troubleshooting guides and best practices
-Closeout,Knowledge Transfer,Transfer solution ownership to operations and support teams,EO Engineer,16,$140,"=TEXT(E25*F25,""$#,##0"")",,Medium,Include operational procedures escalation and maintenance
-Closeout,Performance Baseline,Establish performance metrics monitoring baselines and SLAs,EO Engineer,8,$130,"=TEXT(E26*F26,""$#,##0"")",,Medium,Include KPI definition monitoring setup and reporting
-Management,Technical Leadership,Quarterback technical oversight and architecture review,EO Quarterback,"=ROUND(SUM(E2:E26)*0.25,0)",$180,"=TEXT(E27*F27,""$#,##0"")",,Medium,25% of engineering effort
-Management,Project Management,Project coordination and management activities,EO Project Manager,"=ROUND(SUM(E2:E26)*0.20,0)",$150,"=TEXT(E28*F28,""$#,##0"")",,Low,20% of engineering effort
-,,,     TOTAL HOURS,1119,   TOTAL COST,"=TEXT(E2*F2+E3*F3+E4*F4+E5*F5+E6*F6+E7*F7+E8*F8+E9*F9+E10*F10+E11*F11+E12*F12+E13*F13+E14*F14+E15*F15+E16*F16+E17*F17+E18*F18+E19*F19+E20*F20+E21*F21+E22*F22+E23*F23+E24*F24+E25*F25+E26*F26+E27*F27+E28*F28,""$#,##0"")",,,Total Openshift Container Platform project cost estimate
+# SCOPE ASSUMPTIONS - BASELINE (MULTIPLIER 1.0),,,,,,,,,,
+#WIDTH: 25,35,33,32,32,39,44
+#ALIGN: left,left,left,left,left,left,left
+Category,Baseline Assumption,Current Scope,Small (1x),Medium (2x),Large (3x),Notes,,,,,
+Solution Scope,Cluster Size,6-node cluster (3 control + 3 workers),6-node cluster,12-node cluster,24+ node cluster,OpenShift cluster sizing for workloads,,,,,
+Solution Scope,Container Capacity,500-1000 containers,500-1000 containers,2000-5000 containers,10000+ containers,Pod and container density,,,,,
+Integration,CI/CD Integrations,OpenShift Pipelines + GitOps,Tekton + ArgoCD,Jenkins + external tools,Complex multi-tool pipelines,Pipeline and deployment automation,,,,,
+Integration,External Systems,LDAP/AD + monitoring,2-3 systems,4-6 systems,8+ systems or complex protocols,Authentication monitoring storage integrations,,,,,
+User Base,Developer Count,50 developers,50 developers,100-200 developers,500+ developers,Platform users and application teams,,,,,
+User Base,User Roles,5 roles,3-5 standard roles,6-8 roles,10+ roles with complex RBAC,Developer admin viewer auditor operator,,,,,
+Data Volume,Application Count,10 initial applications,5-10 apps,20-50 apps,100+ applications,Applications to containerize and migrate,,,,,
+Data Volume,Persistent Storage,20 TB,20 TB,50 TB,200+ TB,Persistent volume storage requirements,,,,,
+Technical Environment,Deployment Platform,VMware vSphere,VMware or bare metal,Multi-cloud (VMware + AWS),Complex multi-cloud hybrid,Infrastructure platform for OpenShift,,,,,
+Technical Environment,Availability Requirements,Multi-AZ HA,Multi-AZ,Multi-region,Global with DR,High availability configuration,,,,,
+Technical Environment,Infrastructure Complexity,Standard 6-node cluster,Standard cluster,Advanced with service mesh,Complex distributed platform,OpenShift platform complexity,,,,,
+Security & Compliance,Security Requirements,RBAC + pod security policies,Basic RBAC,Industry standard (SOC2),Advanced (FedRAMP multi-framework),Container and platform security,,,,,
+Security & Compliance,Compliance Frameworks,SOC2 ISO 27001,1-2 basic standards,2-3 industry standards,Multiple complex frameworks,Compliance and governance requirements,,,,,
+Performance,Service Mesh,Istio for microservices,Optional Istio,Full service mesh,Advanced traffic management,Service mesh complexity,,,,,
+Performance,Monitoring Stack,Prometheus + Grafana,Basic monitoring,Standard observability,Advanced with custom integrations,Platform observability and metrics,,,,,
+Environment,Deployment Environments,3 environments (dev staging prod),2 environments,3 environments,4+ environments with multi-cluster,Environment management for platform,,,,,
+# ESTIMATE SETTINGS,,,,,,,,,,
+#WIDTH: 17,22,14,173
+#ALIGN: left,left,center,left
+Phase,Variable Name,Multiplier,Description / Applies To Tasks,,,,,,,
+Discovery,DISCOVERY_MX,1,"All Discovery phase tasks (Requirements Gathering, Infrastructure Assessment, Application Assessment, Compliance Review)",,,,,,,
+Planning,PLANNING_MX,1,"All Planning phase tasks (OpenShift Design, Network Design, Storage Design, Security Design, Project Planning)",,,,,,,
+Development,DEVELOPMENT_MX,1,"All Development phase tasks (Cluster Deployment, Storage Configuration, CI/CD Setup, Application Migration)",,,,,,,
+Testing,TESTING_MX,1,"All Testing phase tasks (Unit Testing, Integration Testing, Performance Testing, Security Testing, UAT)",,,,,,,
+Deployment,DEPLOYMENT_MX,1,"All Deployment phase tasks (Production Deployment, Go-Live Support)",,,,,,,
+Training,TRAINING_MX,1,"All Training phase tasks (Developer Training, Administrator Training, Documentation)",,,,,,,
+Closeout,CLOSEOUT_MX,1,"All Closeout phase tasks (Knowledge Transfer, Performance Baseline)",,,,,,,
+Management,MANAGEMENT_MX,1.5,Project Management overhead - 10% of actual engineering hours,,,,,,,
+Leadership,LEADERSHIP_MX,1.5,Quarterback/Technical Leadership overhead - 10% of actual engineering hours,,,,,,,
+# Level of Effort,
+#WIDTH: 16,25,58,18,12,14,12,12,15,25,40
+#ALIGN: left,left,left,left,right,center,right,right,right,left,left
+Phase,Work Package,Task Description,Resource Type,Base Hours,Effort Multiplier,Actual Hours,Rate,Cost Estimate,Dependencies,Notes
+Discovery,Requirements Gathering,Conduct stakeholder interviews for OpenShift requirements,EO Engineer,40,='Estimate Settings'!$C$3,=$E33*$F33,$150,"=TEXT($G33*$H33,""$#,##0"")",,Includes platform requirements and application portfolio analysis
+Discovery,Infrastructure Assessment,Analyze current infrastructure and OpenShift platform readiness,EO Engineer,32,='Estimate Settings'!$C$3,=$E34*$F34,$200,"=TEXT($G34*$H34,""$#,##0"")",,Customer must provide infrastructure details and capacity information
+Discovery,Application Assessment,Evaluate applications for containerization and migration priority,EO Engineer,32,='Estimate Settings'!$C$3,=$E35*$F35,$200,"=TEXT($G35*$H35,""$#,##0"")",,Customer must provide application inventory and architecture documentation
+Discovery,Compliance Review,Assess security governance and compliance requirements,EO Engineer,16,='Estimate Settings'!$C$3,=$E36*$F36,$175,"=TEXT($G36*$H36,""$#,##0"")",,Identifies regulatory requirements and security controls
+Planning,OpenShift Architecture Design,Design OpenShift cluster architecture and platform configuration,EO Engineer,48,='Estimate Settings'!$C$4,=$E37*$F37,$200,"=TEXT($G37*$H37,""$#,##0"")",Requirements Gathering,Deliverable: OpenShift architecture with HA control plane and worker nodes
+Planning,Network Architecture Design,Design OVN-Kubernetes SDN networking and ingress strategy,EO Engineer,32,='Estimate Settings'!$C$4,=$E38*$F38,$180,"=TEXT($G38*$H38,""$#,##0"")",OpenShift Architecture Design,Deliverable: Network design with policies and load balancer configuration
+Planning,Storage Design,Design persistent storage with ODF or external storage integration,EO Engineer,24,='Estimate Settings'!$C$4,=$E39*$F39,$175,"=TEXT($G39*$H39,""$#,##0"")",OpenShift Architecture Design,Block file object storage for containerized applications
+Planning,Security Architecture,Design RBAC pod security policies and authentication integration,EO Engineer,24,='Estimate Settings'!$C$4,=$E40*$F40,$175,"=TEXT($G40*$H40,""$#,##0"")",Compliance Review,LDAP/AD integration and security controls design
+Planning,Project Planning,Develop implementation timeline and resource allocation,EO Engineer,24,='Estimate Settings'!$C$4,=$E41*$F41,$140,"=TEXT($G41*$H41,""$#,##0"")",OpenShift Architecture Design,Deliverable: Project plan with phased rollout schedule
+Development,Cluster Deployment,Deploy 6-node OpenShift cluster with HA control plane,EO Engineer,56,='Estimate Settings'!$C$5,=$E42*$F42,$160,"=TEXT($G42*$H42,""$#,##0"")",OpenShift Architecture Design,Includes cluster installation bootstrap and validation
+Development,Storage Configuration,Configure OpenShift Data Foundation or external storage,EO Engineer,40,='Estimate Settings'!$C$5,=$E43*$F43,$150,"=TEXT($G43*$H43,""$#,##0"")",Cluster Deployment,Storage classes persistent volumes and volume snapshots
+Development,Networking Setup,Configure OVN-Kubernetes SDN routes and load balancers,EO Engineer,32,='Estimate Settings'!$C$5,=$E44*$F44,$145,"=TEXT($G44*$H44,""$#,##0"")",Cluster Deployment,Network policies ingress controllers and external access
+Development,Authentication Integration,Integrate LDAP/AD for SSO and configure RBAC,EO Engineer,32,='Estimate Settings'!$C$5,=$E45*$F45,$155,"=TEXT($G45*$H45,""$#,##0"")",Security Architecture,OAuth provider configuration and role bindings
+Development,Monitoring and Logging,Deploy Prometheus Grafana and EFK logging stack,EO Engineer,32,='Estimate Settings'!$C$5,=$E46*$F46,$140,"=TEXT($G46*$H46,""$#,##0"")",Cluster Deployment,Platform and application observability configuration
+Development,CI/CD Pipeline Setup,Configure OpenShift Pipelines (Tekton) and GitOps (ArgoCD),EO Engineer,48,='Estimate Settings'!$C$5,=$E47*$F47,$150,"=TEXT($G47*$H47,""$#,##0"")",Cluster Deployment,Pipeline templates and GitOps workflow automation
+Development,Container Registry,Configure integrated Quay registry with vulnerability scanning,EO Engineer,24,='Estimate Settings'!$C$5,=$E48*$F48,$140,"=TEXT($G48*$H48,""$#,##0"")",Cluster Deployment,Image registry security scanning and retention policies
+Development,Application Containerization,Containerize 10 pilot applications with Dockerfiles and manifests,EO Engineer,80,='Estimate Settings'!$C$5,=$E49*$F49,$130,"=TEXT($G49*$H49,""$#,##0"")",CI/CD Pipeline Setup,Customer must provide application access and development support
+Development,Service Mesh Deployment,Deploy Istio service mesh for microservices traffic management,EO Engineer,32,='Estimate Settings'!$C$5,=$E50*$F50,$155,"=TEXT($G50*$H50,""$#,##0"")",Application Containerization,mTLS traffic routing and observability integration
+Testing,Unit Testing,Develop automated tests for platform components,EO Engineer,24,='Estimate Settings'!$C$6,=$E51*$F51,$120,"=TEXT($G51*$H51,""$#,##0"")",Service Mesh Deployment,Automated validation of cluster configuration
+Testing,Integration Testing,Test application deployments CI/CD workflows and integrations,EO Engineer,40,='Estimate Settings'!$C$6,=$E52*$F52,$120,"=TEXT($G52*$H52,""$#,##0"")",Unit Testing,Customer must provide test scenarios and validation criteria
+Testing,Performance Testing,Test cluster performance with load and capacity testing,EO Engineer,32,='Estimate Settings'!$C$6,=$E53*$F53,$140,"=TEXT($G53*$H53,""$#,##0"")",Integration Testing,Load testing with realistic application workloads
+Testing,Security Testing,Perform security validation of RBAC policies and network controls,EO Engineer,24,='Estimate Settings'!$C$6,=$E54*$F54,$175,"=TEXT($G54*$H54,""$#,##0"")",Performance Testing,Includes vulnerability scanning and compliance validation
+Testing,User Acceptance Testing,Coordinate UAT with development teams and stakeholders,EO Engineer,32,='Estimate Settings'!$C$6,=$E55*$F55,$150,"=TEXT($G55*$H55,""$#,##0"")",Security Testing,Developer validation of platform capabilities and workflows
+Deployment,Production Deployment,Deploy OpenShift platform to production with validation,EO Engineer,32,='Estimate Settings'!$C$7,=$E56*$F56,$160,"=TEXT($G56*$H56,""$#,##0"")",User Acceptance Testing,Production cluster deployment with smoke testing
+Deployment,Go-Live Support,Provide support during initial production application deployments,EO Engineer,80,='Estimate Settings'!$C$7,=$E57*$F57,$110,"=TEXT($G57*$H57,""$#,##0"")",Production Deployment,Daily monitoring rapid issue response during hypercare period
+Training,Developer Training,Train developers on OpenShift containerization and CI/CD,EO Engineer,40,='Estimate Settings'!$C$8,=$E58*$F58,$130,"=TEXT($G58*$H58,""$#,##0"")",Production Deployment,Includes hands-on training with Tekton ArgoCD and platform workflows
+Training,Administrator Training,Train platform administrators on OpenShift operations,EO Engineer,40,='Estimate Settings'!$C$8,=$E59*$F59,$130,"=TEXT($G59*$H59,""$#,##0"")",Developer Training,Platform management monitoring troubleshooting and upgrades
+Training,Documentation,Create runbooks user guides and operational documentation,EO Engineer,32,='Estimate Settings'!$C$8,=$E60*$F60,$110,"=TEXT($G60*$H60,""$#,##0"")",Administrator Training,Deliverable: Operations runbooks troubleshooting guides and procedures
+Closeout,Knowledge Transfer,Transfer platform ownership to operations team,EO Engineer,24,='Estimate Settings'!$C$9,=$E61*$F61,$140,"=TEXT($G61*$H61,""$#,##0"")",Documentation,Comprehensive handover including architecture procedures and escalation
+Closeout,Performance Baseline,Establish platform performance metrics and monitoring baselines,EO Engineer,16,='Estimate Settings'!$C$9,=$E62*$F62,$130,"=TEXT($G62*$H62,""$#,##0"")",Knowledge Transfer,Establishes SLAs performance metrics and operational dashboards
+Management,Technical Leadership,Quarterback technical oversight and architecture review,EO Quarterback,"=ROUND(SUM($G$3:$G$32)*0.10,0)",='Estimate Settings'!$C$11,=$E63*$F63,$200,"=TEXT($G63*$H63,""$#,##0"")",,OpenShift architecture review and technical escalation support
+Management,Project Management,Project coordination planning and management activities,EO Project Manager,"=ROUND(SUM($G$3:$G$32)*0.10,0)",='Estimate Settings'!$C$10,=$E64*$F64,$150,"=TEXT($G64*$H64,""$#,##0"")",,Includes weekly status risk management and stakeholder coordination
+,,,,,TOTAL HOURS,"=SUM($G$3:$G$34)",TOTAL COST,"=TEXT(SUMPRODUCT($G$3:$G$34,$H$3:$H$34),""$#,##0"")",,EO Sales Engineer: Update phase multipliers in Estimate Settings based on cluster size and complexity
+
+# Credits - Applied to Total Cost (Year 1 Only)
+#WIDTH: 27,17,100
+#ALIGN: left,right,left
+Credit Type,Credit Amount,Credit Comments
+Red Hat Partner Services Credit,"($5000)",Red Hat partner credit for OpenShift implementation and architecture services
+Implementation Discount,$0,No implementation discount applicable
+NET PROFESSIONAL SERVICES COST,"=SUMPRODUCT($G$3:$G$34,$H$3:$H$34)-5000",Total Cost minus Red Hat Partner credits

@@ -50,6 +50,15 @@ This engagement is sized based on the following parameters:
 <!-- TABLE_CONFIG: widths=[18, 29, 5, 18, 30] -->
 | Parameter | Scope | | Parameter | Scope |
 |-----------|-------|---|-----------|-------|
+| **Server Count** | 500 servers (Linux/Windows) | | **Deployment Platform** | AWS/Azure cloud infrastructure |
+| **Network Device Count** | 100 network devices | | **Availability Requirements** | HA controller cluster (99.5% uptime) |
+| **Playbook Count** | 100 custom automation playbooks | | **Infrastructure Complexity** | Controller HA + distributed execution nodes |
+| **ITSM Integration** | ServiceNow ticket-driven workflows | | **Security Requirements** | RBAC + credential vault integration |
+| **External Systems** | Monitoring systems + credential vault | | **Compliance Frameworks** | SOC2 ISO 27001 |
+| **Automation Users** | 50 operations staff | | **Execution Capacity** | 100 concurrent job executions |
+| **User Roles** | 5 roles (operator admin developer approver auditor) | | **Automation Orchestration** | Event-driven automation + scheduled jobs |
+| **Automation Executions** | 10000+ job runs per month | | **Deployment Environments** | 2 environments (dev/staging + prod) |
+| **Inventory Management** | 600 managed nodes total | |  |  |
 <!-- END SCOPE_SIZING_TABLE -->
 
 *Note: Changes to these parameters may require scope adjustment and additional investment.*

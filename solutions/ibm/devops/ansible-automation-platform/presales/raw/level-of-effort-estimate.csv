@@ -1,23 +1,81 @@
-Phase,Work Package,Task Description,Resource Type,Estimated Hours,Rate,Cost Estimate,Dependencies,Risk Level,Notes
-Discovery,DevOps Requirements Gathering,Conduct stakeholder interviews for DevOps platform requirements,EO Engineer,40,$150,"=TEXT(E2*F2,""$#,##0"")",,Medium,Focus on CI/CD workflows team needs and toolchain
-Discovery,Current DevOps Assessment,Analyze existing development tools processes and infrastructure,EO Engineer,32,$200,"=TEXT(E3*F3,""$#,##0"")",,Medium,Include source control build systems and deployment processes
-Discovery,Platform Technology Assessment,Evaluate DevOps platform technologies and integration requirements,EO Engineer,24,$200,"=TEXT(E4*F4,""$#,##0"")",,Medium,Focus on tool compatibility scalability and security
-Planning,DevOps Platform Design,Design CI/CD pipeline architecture and platform integration,EO Engineer,48,$200,"=TEXT(E5*F5,""$#,##0"")",,Medium,Include automated testing deployment and monitoring
-Development,CI/CD Pipeline Development,Build configure and optimize CI/CD pipelines,EO Engineer,80,$160,"=TEXT(E6*F6,""$#,##0"")",,Medium,Include automated testing quality gates and deployments
-Development,Platform Integration,Integrate development tools source control and deployment systems,EO Engineer,60,$145,"=TEXT(E7*F7,""$#,##0"")",,Medium,Include security scanning artifact management and notifications
-Development,Automation and Orchestration,Build deployment automation infrastructure orchestration and scaling,EO Engineer,48,$140,"=TEXT(E8*F8,""$#,##0"")",,Medium,Include containerization infrastructure as code and monitoring
-Testing,Unit Testing,Develop automated tests for all solution components,EO Engineer,32,$120,"=TEXT(E9*F9,""$#,##0"")",,Medium,Include technology-specific testing frameworks
-Testing,Integration Testing,Test system integrations data flows and external dependencies,EO Engineer,40,$120,"=TEXT(E10*F10,""$#,##0"")",,Medium,Include end-to-end workflow validation
-Testing,Performance Testing,Conduct load performance and scalability testing,EO Engineer,24,$140,"=TEXT(E11*F11,""$#,##0"")",,Medium,Include production-like environment and stress testing
-Testing,Security Testing,Perform security assessments penetration testing and compliance validation,EO Engineer,16,$175,"=TEXT(E12*F12,""$#,##0"")",,Medium,Include vulnerability scanning and compliance checks
-Testing,User Acceptance Testing,Coordinate UAT with business users and stakeholders,EO Engineer,32,$150,"=TEXT(E13*F13,""$#,##0"")",,Medium,Include training feedback collection and sign-off
-Deployment,Production Deployment,Deploy solution to production environment with monitoring,EO Engineer,24,$160,"=TEXT(E14*F14,""$#,##0"")",,Medium,Include blue-green deployment rollback and validation
-Deployment,Go-Live Support,Provide comprehensive support during initial production rollout,EO Engineer,48,$110,"=TEXT(E15*F15,""$#,##0"")",,Medium,Include 24/7 support monitoring and issue resolution
-Training,Administrator Training,Train system administrators and technical support teams,EO Engineer,16,$130,"=TEXT(E16*F16,""$#,##0"")",,Medium,Include hands-on technical training and certification
-Training,End User Training,Train business users on solution functionality and workflows,EO Engineer,24,$120,"=TEXT(E17*F17,""$#,##0"")",,Medium,Include role-based training documentation and support
-Training,Documentation,Create comprehensive technical and user documentation,EO Engineer,32,$110,"=TEXT(E18*F18,""$#,##0"")",,Medium,Include runbooks troubleshooting guides and best practices
-Closeout,Knowledge Transfer,Transfer solution ownership to operations and support teams,EO Engineer,16,$140,"=TEXT(E19*F19,""$#,##0"")",,Medium,Include operational procedures escalation and maintenance
-Closeout,Performance Baseline,Establish performance metrics monitoring baselines and SLAs,EO Engineer,8,$130,"=TEXT(E20*F20,""$#,##0"")",,Medium,Include KPI definition monitoring setup and reporting
-Management,Technical Leadership,Quarterback technical oversight and architecture review,EO Quarterback,"=ROUND(SUM(E2:E20)*0.25,0)",$180,"=TEXT(E21*F21,""$#,##0"")",,Medium,25% of engineering effort
-Management,Project Management,Project coordination and management activities,EO Project Manager,"=ROUND(SUM(E2:E20)*0.20,0)",$150,"=TEXT(E22*F22,""$#,##0"")",,Low,20% of engineering effort
-,,,     TOTAL HOURS,933,   TOTAL COST,"=TEXT(E2*F2+E3*F3+E4*F4+E5*F5+E6*F6+E7*F7+E8*F8+E9*F9+E10*F10+E11*F11+E12*F12+E13*F13+E14*F14+E15*F15+E16*F16+E17*F17+E18*F18+E19*F19+E20*F20+E21*F21+E22*F22,""$#,##0"")",,,Total Ansible Automation Platform project cost estimate
+# SCOPE ASSUMPTIONS - BASELINE (MULTIPLIER 1.0),,,,,,,,,,
+#WIDTH: 25,35,33,32,32,39,44
+#ALIGN: left,left,left,left,left,left,left
+Category,Baseline Assumption,Current Scope,Small (1x),Medium (2x),Large (3x),Notes,,,,,
+Solution Scope,Server Count,500 servers (Linux/Windows),500 servers,1000 servers,2000+ servers,Managed server inventory size,,,,,
+Solution Scope,Network Device Count,100 network devices,100 devices,200 devices,500+ devices,Routers switches firewalls,,,,,
+Solution Scope,Playbook Count,100 custom automation playbooks,100 playbooks,250 playbooks,500+ playbooks,Server network cloud compliance automation,,,,,
+Integration,ITSM Integration,ServiceNow ticket-driven workflows,ServiceNow,ServiceNow + JIRA,Multiple ITSM platforms complex workflows,Service ticket automation integration,,,,,
+Integration,External Systems,Monitoring systems + credential vault,2-3 systems,4-6 systems,8+ systems or complex integrations,Monitoring vaults CMDBs cloud providers,,,,,
+User Base,Automation Users,50 operations staff,50 users,100-200 users,500+ users,Platform users and automation developers,,,,,
+User Base,User Roles,5 roles (operator admin developer approver auditor),5 standard roles,8-10 roles,15+ roles with complex RBAC,Role-based access control requirements,,,,,
+Data Volume,Automation Executions,10000+ job runs per month,10K jobs/month,50K jobs/month,200K+ jobs/month,Monthly automation job execution volume,,,,,
+Data Volume,Inventory Management,600 managed nodes total,600 nodes,1500 nodes,5000+ nodes,Total managed infrastructure inventory,,,,,
+Technical Environment,Deployment Platform,AWS/Azure cloud infrastructure,Single cloud provider,Multi-cloud (AWS + Azure),Complex hybrid cloud + on-prem,Infrastructure hosting for automation platform,,,,,
+Technical Environment,Availability Requirements,HA controller cluster (99.5% uptime),Multi-node HA,Multi-region HA,Global with DR,Platform availability configuration,,,,,
+Technical Environment,Infrastructure Complexity,Controller HA + distributed execution nodes,Standard HA cluster,Advanced with geo-distributed nodes,Complex multi-region federated platform,Automation platform infrastructure complexity,,,,,
+Security & Compliance,Security Requirements,RBAC + credential vault integration,Basic RBAC + vault,Industry standard (SOC2),Advanced (FedRAMP multi-framework),Platform and automation security,,,,,
+Security & Compliance,Compliance Frameworks,SOC2 ISO 27001,1-2 basic standards,2-3 industry standards,Multiple complex frameworks,Compliance and governance requirements,,,,,
+Performance,Execution Capacity,100 concurrent job executions,100 concurrent jobs,500 concurrent jobs,2000+ concurrent jobs,Platform concurrent automation capacity,,,,,
+Performance,Automation Orchestration,Event-driven automation + scheduled jobs,Basic event-driven,Advanced orchestration,Complex workflow automation,Automation execution patterns,,,,,
+Environment,Deployment Environments,2 environments (dev/staging + prod),2 environments,3 environments,4+ environments multi-cluster,Environment management for automation platform,,,,,
+# ESTIMATE SETTINGS,,,,,,,,,,
+#WIDTH: 17,22,14,173
+#ALIGN: left,left,center,left
+Phase,Variable Name,Multiplier,Description / Applies To Tasks,,,,,,,
+Discovery,DISCOVERY_MX,1,"All Discovery phase tasks (Requirements Gathering, Infrastructure Assessment, Automation Assessment, Compliance Review)",,,,,,,
+Planning,PLANNING_MX,1,"All Planning phase tasks (Automation Platform Design, Network Design, Integration Design, Security Design, Project Planning)",,,,,,,
+Development,DEVELOPMENT_MX,1,"All Development phase tasks (Platform Deployment, Playbook Development, ServiceNow Integration, Event-Driven Automation)",,,,,,,
+Testing,TESTING_MX,1,"All Testing phase tasks (Unit Testing, Integration Testing, Performance Testing, Security Testing, UAT)",,,,,,,
+Deployment,DEPLOYMENT_MX,1,"All Deployment phase tasks (Production Deployment, Go-Live Support)",,,,,,,
+Training,TRAINING_MX,1,"All Training phase tasks (Administrator Training, Developer Training, Documentation)",,,,,,,
+Closeout,CLOSEOUT_MX,1,"All Closeout phase tasks (Knowledge Transfer, Performance Baseline)",,,,,,,
+Management,MANAGEMENT_MX,1.5,Project Management overhead - 10% of actual engineering hours,,,,,,,
+Leadership,LEADERSHIP_MX,1.5,Quarterback/Technical Leadership overhead - 10% of actual engineering hours,,,,,,,
+# Level of Effort,
+#WIDTH: 16,25,58,18,12,14,12,12,15,25,40
+#ALIGN: left,left,left,left,right,center,right,right,right,left,left
+Phase,Work Package,Task Description,Resource Type,Base Hours,Effort Multiplier,Actual Hours,Rate,Cost Estimate,Dependencies,Notes
+Discovery,Requirements Gathering,Conduct stakeholder interviews for automation platform requirements,EO Engineer,40,='Estimate Settings'!$C$3,=$E33*$F33,$150,"=TEXT($G33*$H33,""$#,##0"")",,Includes automation use cases and infrastructure inventory analysis
+Discovery,Infrastructure Assessment,Analyze current IT operations and manual process inefficiencies,EO Engineer,32,='Estimate Settings'!$C$3,=$E34*$F34,$200,"=TEXT($G34*$H34,""$#,##0"")",,Customer must provide infrastructure details and operational workflows
+Discovery,Automation Assessment,Evaluate automation opportunities and prioritize high-value use cases,EO Engineer,32,='Estimate Settings'!$C$3,=$E35*$F35,$200,"=TEXT($G35*$H35,""$#,##0"")",,Customer must provide process documentation and pain points
+Discovery,Compliance Review,Assess security governance and compliance requirements for automation,EO Engineer,16,='Estimate Settings'!$C$3,=$E36*$F36,$175,"=TEXT($G36*$H36,""$#,##0"")",,Identifies regulatory requirements and security controls
+Planning,Automation Platform Design,Design Ansible platform architecture with HA controller and execution nodes,EO Engineer,48,='Estimate Settings'!$C$4,=$E37*$F37,$200,"=TEXT($G37*$H37,""$#,##0"")",Requirements Gathering,Deliverable: Ansible architecture with HA controller cluster and distributed execution
+Planning,Network Architecture Design,Design network connectivity for automation controller and managed infrastructure,EO Engineer,24,='Estimate Settings'!$C$4,=$E38*$F38,$180,"=TEXT($G38*$H38,""$#,##0"")",Automation Platform Design,Deliverable: Network design with firewall rules and connectivity
+Planning,Integration Design,Design ServiceNow integration and event-driven automation workflows,EO Engineer,32,='Estimate Settings'!$C$4,=$E39*$F39,$175,"=TEXT($G39*$H39,""$#,##0"")",Automation Platform Design,ITSM ticket-driven automation and monitoring webhooks
+Planning,Security Architecture,Design RBAC credential vault integration and audit controls,EO Engineer,24,='Estimate Settings'!$C$4,=$E40*$F40,$175,"=TEXT($G40*$H40,""$#,##0"")",Compliance Review,HashiCorp Vault or CyberArk integration and security controls design
+Planning,Project Planning,Develop playbook roadmap timeline and resource allocation,EO Engineer,24,='Estimate Settings'!$C$4,=$E41*$F41,$140,"=TEXT($G41*$H41,""$#,##0"")",Automation Platform Design,Deliverable: Project plan with phased automation rollout schedule
+Development,Platform Deployment,Deploy Ansible Automation Platform with HA controller cluster,EO Engineer,40,='Estimate Settings'!$C$5,=$E42*$F42,$160,"=TEXT($G42*$H42,""$#,##0"")",Automation Platform Design,Includes controller deployment PostgreSQL setup and execution nodes
+Development,Execution Node Configuration,Configure distributed execution nodes for scalable job processing,EO Engineer,24,='Estimate Settings'!$C$5,=$E43*$F43,$150,"=TEXT($G43*$H43,""$#,##0"")",Platform Deployment,4+ execution nodes with auto-scaling and geographic distribution
+Development,Authentication Integration,Integrate LDAP/AD for SSO and configure RBAC teams and organizations,EO Engineer,24,='Estimate Settings'!$C$5,=$E44*$F44,$155,"=TEXT($G44*$H44,""$#,##0"")",Security Architecture,OAuth provider configuration and role-based permissions
+Development,Credential Vault Integration,Integrate HashiCorp Vault or CyberArk for secure credential management,EO Engineer,32,='Estimate Settings'!$C$5,=$E45*$F45,$155,"=TEXT($G45*$H45,""$#,##0"")",Security Architecture,External vault for SSH keys API tokens and secrets
+Development,Private Automation Hub,Deploy and configure Private Automation Hub for organization content,EO Engineer,24,='Estimate Settings'!$C$5,=$E46*$F46,$140,"=TEXT($G46*$H46,""$#,##0"")",Platform Deployment,Organization playbook repository and collection management
+Development,Server Playbooks,Develop 50 server automation playbooks (provisioning patching configuration),EO Engineer,120,='Estimate Settings'!$C$5,=$E47*$F47,$130,"=TEXT($G47*$H47,""$#,##0"")",Platform Deployment,Linux and Windows server automation with idempotency and error handling
+Development,Network Playbooks,Develop 30 network device playbooks (configuration backup compliance),EO Engineer,80,='Estimate Settings'!$C$5,=$E48*$F48,$135,"=TEXT($G48*$H48,""$#,##0"")",Platform Deployment,Cisco Juniper Arista device automation with rollback capabilities
+Development,Compliance Playbooks,Develop 20 compliance and cloud automation playbooks,EO Engineer,60,='Estimate Settings'!$C$5,=$E49*$F49,$130,"=TEXT($G49*$H49,""$#,##0"")",Platform Deployment,Security hardening vulnerability remediation and audit reporting
+Development,ServiceNow Integration,Configure ServiceNow connector for ticket-driven automation workflows,EO Engineer,32,='Estimate Settings'!$C$5,=$E50*$F50,$150,"=TEXT($G50*$H50,""$#,##0"")",Integration Design,Ticket creation job trigger and status update workflows
+Development,Event-Driven Automation,Deploy Event-Driven Ansible for monitoring webhook auto-remediation,EO Engineer,32,='Estimate Settings'!$C$5,=$E51*$F51,$145,"=TEXT($G51*$H51,""$#,##0"")",Platform Deployment,Monitoring system integration for automated incident response
+Development,Self-Service Portal,Configure automation catalog for operations team self-service,EO Engineer,24,='Estimate Settings'!$C$5,=$E52*$F52,$140,"=TEXT($G52*$H52,""$#,##0"")",Platform Deployment,Job templates surveys and approval workflows
+Testing,Unit Testing,Develop automated tests for playbooks with test inventory,EO Engineer,32,='Estimate Settings'!$C$6,=$E53*$F53,$120,"=TEXT($G53*$H53,""$#,##0"")",Server Playbooks,Molecule testing framework and playbook validation
+Testing,Integration Testing,Test ServiceNow integration monitoring webhooks and vault connectivity,EO Engineer,40,='Estimate Settings'!$C$6,=$E54*$F54,$120,"=TEXT($G54*$H54,""$#,##0"")",ServiceNow Integration,Customer must provide test credentials and integration endpoints
+Testing,Performance Testing,Test concurrent job execution capacity and platform scaling,EO Engineer,24,='Estimate Settings'!$C$6,=$E55*$F55,$140,"=TEXT($G55*$H55,""$#,##0"")",Integration Testing,Load testing with 100 concurrent automation jobs
+Testing,Security Testing,Perform RBAC validation credential handling and audit logging verification,EO Engineer,16,='Estimate Settings'!$C$6,=$E56*$F56,$175,"=TEXT($G56*$H56,""$#,##0"")",Performance Testing,Includes vulnerability scanning and compliance validation
+Testing,User Acceptance Testing,Coordinate UAT with operations teams for automation workflows,EO Engineer,32,='Estimate Settings'!$C$6,=$E57*$F57,$150,"=TEXT($G57*$H57,""$#,##0"")",Security Testing,Operations team validation of playbooks and workflows
+Deployment,Production Deployment,Deploy Ansible platform to production with validation and monitoring,EO Engineer,24,='Estimate Settings'!$C$7,=$E58*$F58,$160,"=TEXT($G58*$H58,""$#,##0"")",User Acceptance Testing,Production cluster deployment with smoke testing
+Deployment,Go-Live Support,Provide support during initial production automation rollout,EO Engineer,80,='Estimate Settings'!$C$7,=$E59*$F59,$110,"=TEXT($G59*$H59,""$#,##0"")",Production Deployment,Daily monitoring rapid issue response during hypercare period
+Training,Administrator Training,Train platform administrators on Ansible controller management,EO Engineer,32,='Estimate Settings'!$C$8,=$E60*$F60,$130,"=TEXT($G60*$H60,""$#,##0"")",Production Deployment,Platform management RBAC user administration monitoring troubleshooting
+Training,Developer Training,Train automation developers on playbook development best practices,EO Engineer,32,='Estimate Settings'!$C$8,=$E61*$F61,$130,"=TEXT($G61*$H61,""$#,##0"")",Administrator Training,Playbook authoring testing Git workflows and coding standards
+Training,Documentation,Create playbook catalog runbooks and operational documentation,EO Engineer,24,='Estimate Settings'!$C$8,=$E62*$F62,$110,"=TEXT($G62*$H62,""$#,##0"")",Developer Training,Deliverable: Operations runbooks playbook usage guides and best practices
+Closeout,Knowledge Transfer,Transfer platform ownership to automation and operations teams,EO Engineer,16,='Estimate Settings'!$C$9,=$E63*$F63,$140,"=TEXT($G63*$H63,""$#,##0"")",Documentation,Comprehensive handover including architecture procedures and escalation
+Closeout,Performance Baseline,Establish automation metrics monitoring baselines and KPIs,EO Engineer,8,='Estimate Settings'!$C$9,=$E64*$F64,$130,"=TEXT($G64*$H64,""$#,##0"")",Knowledge Transfer,Establishes SLAs automation success rate and operational dashboards
+Management,Technical Leadership,Quarterback technical oversight and architecture review,EO Quarterback,"=ROUND(SUM($G$3:$G$32)*0.10,0)",='Estimate Settings'!$C$11,=$E65*$F65,$200,"=TEXT($G65*$H65,""$#,##0"")",,Ansible architecture review and technical escalation support
+Management,Project Management,Project coordination planning and management activities,EO Project Manager,"=ROUND(SUM($G$3:$G$32)*0.10,0)",='Estimate Settings'!$C$10,=$E66*$F66,$150,"=TEXT($G66*$H66,""$#,##0"")",,Includes weekly status risk management and stakeholder coordination
+,,,,,TOTAL HOURS,"=SUM($G$3:$G$34)",TOTAL COST,"=TEXT(SUMPRODUCT($G$3:$G$34,$H$3:$H$34),""$#,##0"")",,EO Sales Engineer: Update phase multipliers in Estimate Settings based on server count and playbook complexity
+
+# Credits - Applied to Total Cost (Year 1 Only)
+#WIDTH: 27,17,100
+#ALIGN: left,right,left
+Credit Type,Credit Amount,Credit Comments
+Red Hat Partner Services Credit,($3000),Red Hat partner credit for Ansible platform implementation and playbook development
+AWS/Azure Cloud Credit,($2000),Cloud provider promotional credit for new automation platform workloads
+NET PROFESSIONAL SERVICES COST,"=SUMPRODUCT($G$3:$G$34,$H$3:$H$34)-5000",Total Cost minus Red Hat and cloud partner credits

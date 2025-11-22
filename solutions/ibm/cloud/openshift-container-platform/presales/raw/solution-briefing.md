@@ -50,6 +50,15 @@ This engagement is sized based on the following parameters:
 <!-- TABLE_CONFIG: widths=[18, 29, 5, 18, 30] -->
 | Parameter | Scope | | Parameter | Scope |
 |-----------|-------|---|-----------|-------|
+| **Cluster Size** | 6-node cluster (3 control + 3 workers) | | **Availability Requirements** | Multi-AZ HA |
+| **Container Capacity** | 500-1000 containers | | **Infrastructure Complexity** | Standard 6-node cluster |
+| **CI/CD Integrations** | OpenShift Pipelines + GitOps | | **Security Requirements** | RBAC + pod security policies |
+| **External Systems** | LDAP/AD + monitoring | | **Compliance Frameworks** | SOC2 ISO 27001 |
+| **Developer Count** | 50 developers | | **Service Mesh** | Istio for microservices |
+| **User Roles** | 5 roles | | **Monitoring Stack** | Prometheus + Grafana |
+| **Application Count** | 10 initial applications | | **Deployment Environments** | 3 environments (dev staging prod) |
+| **Persistent Storage** | 20 TB | |  |  |
+| **Deployment Platform** | VMware vSphere | |  |  |
 <!-- END SCOPE_SIZING_TABLE -->
 
 *Note: Changes to these parameters may require scope adjustment and additional investment.*
