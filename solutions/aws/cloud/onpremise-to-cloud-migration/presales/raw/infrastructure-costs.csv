@@ -1,4 +1,6 @@
 # SIZING GUIDELINES - Based on Solution Scope (Default: Small)
+#WIDTH: 24,36,28,28,28,51
+#ALIGN: left,left,center,center,center,left
 Category,Component,Small,Medium,Large,Notes
 Migration Scope,Application Workloads,15-25 applications,50-100 applications,200+ applications,Number of applications to migrate
 Migration Scope,Database Instances,1-2 databases,5-10 databases,20+ databases,Database migration complexity
@@ -10,6 +12,8 @@ Migration Timeline,Migration Duration,4-6 months,9-12 months,18+ months,Full mig
 Support & Maintenance,Support Level,Business hours,24x5 support,24x7 premium,SLA requirements
 
 # INFRASTRUCTURE COSTS - Quantities Default to Small Scope
+#WIDTH: 23,30,50,12,15,12,15,12,12,15,30
+#ALIGN: left,left,left,right,left,right,right,right,right,right,left
 Category,Component,Description,Quantity,Unit,Unit Price,Annual Cost,Year 2,Year 3,3-Year Total,Notes
 Cloud Infrastructure,EC2 Application Tier,t3.large instances for migrated apps,3,Instance/Month,$67.5,"=D11*F11*12","=G11","=G11","=G11+H11+I11",Target application servers
 Cloud Infrastructure,RDS Multi-AZ Database,db.t3.large PostgreSQL managed database,1,Instance/Month,$288,"=D12*F12*12","=G12","=G12","=G12+H12+I12",Migrated database
@@ -33,6 +37,8 @@ Software Licenses,PagerDuty,Professional incident management (3 users),3,Users/M
 Support & Maintenance,AWS Managed Services,Managed services and ongoing optimization (15% of infrastructure),1,Service/Month,$121.83,"=D30*F30*12","=G30","=G30","=G30+H30+I30",Ongoing support
 
 # CREDITS - Applied per Category (Year 1 Only)
+#WIDTH: 25,25,15,50
+#ALIGN: left,left,right,left
 Category,Credit Type,Credit Amount,Credit Comments
 Cloud Infrastructure,AWS MAP Consumption Credit,"($3317)",35% credit on Year 1 cloud infrastructure consumption (excludes one-time data transfer)
 Software Licenses,Partner Credit,$0,No software credits available
@@ -43,6 +49,8 @@ Professional Services,AWS MAP Mobilize Credit,"($5000)",Partial funding - migrat
 Professional Services,AWS MAP Migrate Credit,"($5000)",Partial funding - application lift-and-shift migration
 
 # SUMMARY
+#WIDTH: 25,15,15,15,12,12,15
+#ALIGN: left,right,right,right,right,right,right
 Category,Year 1 List,Year 1 Credits,Year 1 Net,Year 2,Year 3,3-Year Total
 Cloud Infrastructure,$10572,"($3317)",$7255,$10472,$10472,$28199
 Software Licenses,$3132,$0,$3132,$3132,$3132,$9396

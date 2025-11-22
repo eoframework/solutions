@@ -1,4 +1,6 @@
 # SIZING GUIDELINES - Based on Solution Scope (Default: Small)
+#WIDTH: 24,36,28,28,28,51
+#ALIGN: left,left,center,center,center,left
 Category,Component,Small,Medium,Large,Notes
 Cloud Infrastructure,Application Tier,2 web servers,4-6 web servers,10+ web servers,Primary region compute capacity
 Cloud Infrastructure,Database Size,db.t3.large Multi-AZ,db.r5.xlarge Multi-AZ,db.r5.4xlarge Multi-AZ,RDS instance sizing
@@ -9,6 +11,8 @@ Software Licenses,Monitoring Tools,Basic (6 hosts),Standard (15 hosts),Enterpris
 Support & Maintenance,Support Level,Business hours,24x5 support,24x7 premium,SLA requirements
 
 # INFRASTRUCTURE COSTS - Quantities Default to Small Scope
+#WIDTH: 23,30,50,12,15,12,15,12,12,15,30
+#ALIGN: left,left,left,right,left,right,right,right,right,right,left
 Category,Component,Description,Quantity,Unit,Unit Price,Annual Cost,Year 2,Year 3,3-Year Total,Notes
 Cloud Infrastructure,EC2 Primary Web Tier,t3.large instances for web tier (primary),2,Instance/Month,$75,"=D11*F11*12","=G11","=G11","=G11+H11+I11",Primary region compute
 Cloud Infrastructure,EC2 DR Pilot Light,t3.medium on-demand for DR testing,1,Instance/Month,$21,"=D12*F12*12","=G12","=G12","=G12+H12+I12",DR region pilot light
@@ -35,6 +39,8 @@ Software Licenses,PagerDuty,Professional incident management (3 users),3,Users/M
 Support & Maintenance,AWS Managed DR Services,Managed services and quarterly testing (15% of infrastructure),1,Service/Month,$122.25,"=D33*F33*12","=G33","=G33","=G33+H33+I33",Ongoing support
 
 # CREDITS - Applied per Category (Year 1 Only)
+#WIDTH: 25,25,15,50
+#ALIGN: left,left,right,left
 Category,Credit Type,Credit Amount,Credit Comments
 Cloud Infrastructure,AWS DR Program Credit,"($369)",Pilot light infrastructure and DR testing credits
 Software Licenses,Partner Credit,$0,No software credits available
@@ -43,6 +49,8 @@ Hardware/Equipment,Equipment Credit,$0,No hardware credits available
 Professional Services,AWS Partner Services Credit,"($8000)",DR design and testing services
 
 # SUMMARY
+#WIDTH: 25,15,15,15,12,12,15
+#ALIGN: left,right,right,right,right,right,right
 Category,Year 1 List,Year 1 Credits,Year 1 Net,Year 2,Year 3,3-Year Total
 Cloud Infrastructure,$9620,"($369)",$9251,$9620,$9620,$28491
 Software Licenses,$3132,$0,$3132,$3132,$3132,$9396

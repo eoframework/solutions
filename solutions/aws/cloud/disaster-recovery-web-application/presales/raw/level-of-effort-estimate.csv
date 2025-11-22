@@ -1,4 +1,6 @@
 # SCOPE ASSUMPTIONS - BASELINE (MULTIPLIER 1.0),,,,,,,,,,
+#WIDTH: 25,35,33,32,32,39,44
+#ALIGN: left,left,left,left,left,left,left
 Category,Baseline Assumption,Current Scope,Small (1x),Medium (2x),Large (3x),Notes,,,,,
 Solution Scope,Application Tiers,3-tier web application,3-tier web application,5-7 tier microservices,10+ tier distributed system,Application architecture for DR,,,,,
 Solution Scope,RTO/RPO Requirements,RTO 4 hours RPO 1 hour,RTO 4-8 hours RPO 1-4 hours,RTO 1-4 hours RPO 15-60 min,RTO <1 hour RPO <15 min,Recovery time and point objectives,,,,,
@@ -18,6 +20,8 @@ Performance,Recovery Testing,Quarterly DR drills,Annual DR testing,Quarterly DR 
 Environment,Deployment Environments,3 environments (dev staging prod),2 environments,3 environments,4+ environments with DR,Environment DR coverage,,,,,
 ,,,,,,,,,,
 # ESTIMATE SETTINGS - EO Sales Engineer Updates Multipliers Based on Customer Scope,,,,,,,,,,
+#WIDTH: 17,22,14,173
+#ALIGN: left,left,center,left
 Phase,Variable Name,Multiplier,Description / Applies To Tasks,,,,,,,
 Discovery,DISCOVERY_MX,1,All Discovery phase tasks,,,,,,,
 Planning,PLANNING_MX,1,All Planning phase tasks,,,,,,,
@@ -30,6 +34,8 @@ Management,MANAGEMENT_MX,1.5,Project Management overhead,,,,,,,
 Leadership,LEADERSHIP_MX,1.5,Quarterback/Technical Leadership overhead,,,,,,,
 ,,,,,,,,,,
 # Level of Effort,
+#WIDTH: 16,25,58,18,12,14,12,12,15,25,40
+#ALIGN: left,left,left,left,right,center,right,right,right,left,left
 Phase,Work Package,Task Description,Resource Type,Base Hours,Effort Multiplier,Actual Hours,Rate,Cost Estimate,Dependencies,Notes
 Discovery,Cloud Requirements Gathering,Conduct stakeholder interviews for cloud migration/infrastructure,EO Engineer,40,='Estimate Settings'!$C$21,=$E33*$F33,$150,"=TEXT($G33*$H33,""$#,##0"")",,Focus on scalability performance and business objectives
 Discovery,Infrastructure Assessment,Analyze current infrastructure workloads and dependencies,EO Engineer,32,='Estimate Settings'!$C$21,=$E34*$F34,$200,"=TEXT($G34*$H34,""$#,##0"")",,Include application dependencies and performance baselines
