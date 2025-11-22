@@ -77,22 +77,22 @@ This engagement is sized based on the following parameters:
 <!-- TABLE_CONFIG: widths=[25, 35, 40] -->
 | Category | Parameter | Scope |
 |----------|-----------|-------|
-| Solution Scope | Number of Workstations | 10 Dell Precision 7960 units |
-| Solution Scope | GPU Configuration | NVIDIA RTX A6000 48GB |
-| Integration | Data Science Tools | Standard stack (PyTorch TensorFlow) |
-| Integration | Shared Storage | Dell PowerScale F600 100TB NAS |
-| User Base | Data Scientists | 10 concurrent users |
-| User Base | User Roles | 2 roles (data scientist admin) |
-| Data Volume | Dataset Size per Project | 5TB average dataset size |
-| Data Volume | Model Checkpoint Storage | 2TB model storage requirements |
-| Technical Environment | Network Connectivity | 10GbE to shared storage |
-| Technical Environment | Workstation Performance | Dell Precision 7960 dual Xeon Gold |
-| Technical Environment | Operating System | Ubuntu 22.04 LTS with CUDA |
-| Security & Compliance | Access Control | Standard file permissions and SSH |
-| Security & Compliance | Data Classification | Unclassified research data |
-| Performance | Training Performance | Target: 80% GPU utilization average |
-| Performance | Storage Performance | 7000 MB/s NVMe read per workstation |
-| Environment | Deployment Environments | Production only |
+| Solution Scope | Number of Developers | 50 developers with CI/CD access |
+| Solution Scope | Build Agents | 8 Dell PowerEdge R650 build servers |
+| Integration | CI/CD Platform | GitLab Premium self-hosted |
+| Integration | Artifact Repository | JFrog Artifactory Pro |
+| User Base | Build Volume | 5000 builds per day |
+| User Base | Pipeline Complexity | Multi-stage pipelines with tests |
+| Data Volume | Artifact Storage | 20TB artifact capacity |
+| Data Volume | Build Artifacts | Maven npm Docker images |
+| Technical Environment | Build Agent OS | Ubuntu 22.04 LTS with Docker |
+| Technical Environment | Current CI/CD | GitHub Actions cloud runners |
+| Technical Environment | Container Platform | Docker Enterprise with registry |
+| Security & Compliance | Code Sensitivity | Proprietary source code |
+| Security & Compliance | Authentication | SSO with SAML integration |
+| Performance | Build Queue Time | <5 minute average queue time |
+| Performance | Build Duration | 15 minute average build time |
+| Environment | Deployment Strategy | Phased migration by team |
 <!-- END SCOPE_PARAMETERS_TABLE -->
 
 Table: Engagement Scope Parameters

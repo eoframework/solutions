@@ -50,15 +50,15 @@ This engagement is sized based on the following parameters:
 <!-- TABLE_CONFIG: widths=[18, 29, 5, 18, 30] -->
 | Parameter | Scope | | Parameter | Scope |
 |-----------|-------|---|-----------|-------|
-| **Number of Workstations** | 10 Dell Precision 7960 units | | **Workstation Performance** | Dell Precision 7960 dual Xeon Gold |
-| **GPU Configuration** | NVIDIA RTX A6000 48GB | | **Operating System** | Ubuntu 22.04 LTS with CUDA |
-| **Data Science Tools** | Standard stack (PyTorch TensorFlow) | | **Access Control** | Standard file permissions and SSH |
-| **Shared Storage** | Dell PowerScale F600 100TB NAS | | **Data Classification** | Unclassified research data |
-| **Data Scientists** | 10 concurrent users | | **Training Performance** | Target: 80% GPU utilization average |
-| **User Roles** | 2 roles (data scientist admin) | | **Storage Performance** | 7000 MB/s NVMe read per workstation |
-| **Dataset Size per Project** | 5TB average dataset size | | **Deployment Environments** | Production only |
-| **Model Checkpoint Storage** | 2TB model storage requirements | |  |  |
-| **Network Connectivity** | 10GbE to shared storage | |  |  |
+| **Number of Racks** | 40 racks with ToR switches | | **Legacy Infrastructure** | Cisco Nexus 9K and Catalyst switches |
+| **Spine Switches** | 4 Dell Z9432F-ON 100GbE | | **Operating System** | Dell OS10 Enterprise with automation |
+| **Leaf Switches** | 40 Dell S5248F-ON 25GbE ToR | | **Network Segmentation** | VXLAN multi-tenancy |
+| **Network Fabric** | BGP underlay with EVPN-VXLAN overlay | | **Access Control** | TACACS+ centralized authentication |
+| **Network Engineers** | 3-5 network administrators | | **Latency SLA** | <2 microsecond east-west latency |
+| **Automation Maturity** | Ansible playbooks and ZTP | | **Throughput** | 7000 Mbps per server (25GbE NIC) |
+| **Server Ports** | 1920 ports (40 racks × 48 ports) | | **Deployment Approach** | Phased rack-by-rack migration |
+| **Fabric Bandwidth** | 1.6Tbps aggregate throughput | |  |  |
+| **Network Connectivity** | 100GbE spine 25GbE leaf | |  |  |
 <!-- END SCOPE_SIZING_TABLE -->
 
 *Note: Changes to these parameters may require scope adjustment and additional investment.*

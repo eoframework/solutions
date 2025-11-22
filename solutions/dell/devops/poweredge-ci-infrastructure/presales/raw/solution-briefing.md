@@ -50,15 +50,15 @@ This engagement is sized based on the following parameters:
 <!-- TABLE_CONFIG: widths=[18, 29, 5, 18, 30] -->
 | Parameter | Scope | | Parameter | Scope |
 |-----------|-------|---|-----------|-------|
-| **Number of Workstations** | 10 Dell Precision 7960 units | | **Workstation Performance** | Dell Precision 7960 dual Xeon Gold |
-| **GPU Configuration** | NVIDIA RTX A6000 48GB | | **Operating System** | Ubuntu 22.04 LTS with CUDA |
-| **Data Science Tools** | Standard stack (PyTorch TensorFlow) | | **Access Control** | Standard file permissions and SSH |
-| **Shared Storage** | Dell PowerScale F600 100TB NAS | | **Data Classification** | Unclassified research data |
-| **Data Scientists** | 10 concurrent users | | **Training Performance** | Target: 80% GPU utilization average |
-| **User Roles** | 2 roles (data scientist admin) | | **Storage Performance** | 7000 MB/s NVMe read per workstation |
-| **Dataset Size per Project** | 5TB average dataset size | | **Deployment Environments** | Production only |
-| **Model Checkpoint Storage** | 2TB model storage requirements | |  |  |
-| **Network Connectivity** | 10GbE to shared storage | |  |  |
+| **Number of Developers** | 50 developers with CI/CD access | | **Current CI/CD** | GitHub Actions cloud runners |
+| **Build Agents** | 8 Dell PowerEdge R650 build servers | | **Container Platform** | Docker Enterprise with registry |
+| **CI/CD Platform** | GitLab Premium self-hosted | | **Code Sensitivity** | Proprietary source code |
+| **Artifact Repository** | JFrog Artifactory Pro | | **Authentication** | SSO with SAML integration |
+| **Build Volume** | 5000 builds per day | | **Build Queue Time** | <5 minute average queue time |
+| **Pipeline Complexity** | Multi-stage pipelines with tests | | **Build Duration** | 15 minute average build time |
+| **Artifact Storage** | 20TB artifact capacity | | **Deployment Strategy** | Phased migration by team |
+| **Build Artifacts** | Maven npm Docker images | |  |  |
+| **Build Agent OS** | Ubuntu 22.04 LTS with Docker | |  |  |
 <!-- END SCOPE_SIZING_TABLE -->
 
 *Note: Changes to these parameters may require scope adjustment and additional investment.*

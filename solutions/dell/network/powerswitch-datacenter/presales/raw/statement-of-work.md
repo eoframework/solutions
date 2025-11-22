@@ -77,22 +77,22 @@ This engagement is sized based on the following parameters:
 <!-- TABLE_CONFIG: widths=[25, 35, 40] -->
 | Category | Parameter | Scope |
 |----------|-----------|-------|
-| Solution Scope | Number of Workstations | 10 Dell Precision 7960 units |
-| Solution Scope | GPU Configuration | NVIDIA RTX A6000 48GB |
-| Integration | Data Science Tools | Standard stack (PyTorch TensorFlow) |
-| Integration | Shared Storage | Dell PowerScale F600 100TB NAS |
-| User Base | Data Scientists | 10 concurrent users |
-| User Base | User Roles | 2 roles (data scientist admin) |
-| Data Volume | Dataset Size per Project | 5TB average dataset size |
-| Data Volume | Model Checkpoint Storage | 2TB model storage requirements |
-| Technical Environment | Network Connectivity | 10GbE to shared storage |
-| Technical Environment | Workstation Performance | Dell Precision 7960 dual Xeon Gold |
-| Technical Environment | Operating System | Ubuntu 22.04 LTS with CUDA |
-| Security & Compliance | Access Control | Standard file permissions and SSH |
-| Security & Compliance | Data Classification | Unclassified research data |
-| Performance | Training Performance | Target: 80% GPU utilization average |
-| Performance | Storage Performance | 7000 MB/s NVMe read per workstation |
-| Environment | Deployment Environments | Production only |
+| Solution Scope | Number of Racks | 40 racks with ToR switches |
+| Solution Scope | Spine Switches | 4 Dell Z9432F-ON 100GbE |
+| Integration | Leaf Switches | 40 Dell S5248F-ON 25GbE ToR |
+| Integration | Network Fabric | BGP underlay with EVPN-VXLAN overlay |
+| User Base | Network Engineers | 3-5 network administrators |
+| User Base | Automation Maturity | Ansible playbooks and ZTP |
+| Data Volume | Server Ports | 1920 ports (40 racks × 48 ports) |
+| Data Volume | Fabric Bandwidth | 1.6Tbps aggregate throughput |
+| Technical Environment | Network Connectivity | 100GbE spine 25GbE leaf |
+| Technical Environment | Legacy Infrastructure | Cisco Nexus 9K and Catalyst switches |
+| Technical Environment | Operating System | Dell OS10 Enterprise with automation |
+| Security & Compliance | Network Segmentation | VXLAN multi-tenancy |
+| Security & Compliance | Access Control | TACACS+ centralized authentication |
+| Performance | Latency SLA | <2 microsecond east-west latency |
+| Performance | Throughput | 7000 Mbps per server (25GbE NIC) |
+| Environment | Deployment Approach | Phased rack-by-rack migration |
 <!-- END SCOPE_PARAMETERS_TABLE -->
 
 Table: Engagement Scope Parameters

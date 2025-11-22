@@ -25,7 +25,7 @@ eoframework_logo: ../../assets/logos/eo-framework-logo-real.png
 
 ---
 
-## 1. EXECUTIVE SUMMARY
+# Executive Summary
 
 ### 1.1 Project Overview
 This Statement of Work (SOW) outlines the scope, deliverables, timeline, and terms for the implementation of Juniper SRX Firewall Platform for [CLIENT_NAME]. The project will deliver next-generation security infrastructure with 8x performance improvement and 40% cost reduction through deployment of enterprise-grade Juniper SRX firewalls with advanced threat prevention capabilities.
@@ -42,7 +42,26 @@ This Statement of Work (SOW) outlines the scope, deliverables, timeline, and ter
 
 ---
 
-## 2. SCOPE OF WORK
+# Background & Objectives
+
+## Current State
+Current firewall infrastructure based on aging hardware with performance limitations and increasing security requirements.
+
+## Business Objectives
+- Replace aging firewall infrastructure with 8x performance improvement
+- Reduce security licensing costs by 40% while gaining advanced threat prevention
+- Enable seamless multi-cloud security with native AWS, Azure, and GCP integration
+- Achieve 80 Gbps throughput with full IPS and SSL inspection enabled
+
+## Success Metrics
+- 80 Gbps firewall throughput with full security services operational
+- 70% reduction in security incident response time through automated threat intelligence
+- Unified security policy management across 20+ datacenter and branch firewalls
+- 99.9% uptime with sub-second HA failover
+
+---
+
+# Scope of Work
 
 ### 2.0 Engagement Scope Parameters
 
@@ -130,7 +149,9 @@ The following activities are explicitly excluded from this SOW:
 
 ---
 
-## 3. DELIVERABLES
+# Deliverables & Timeline
+
+## Deliverables
 
 ### 3.1 Documentation Deliverables
 | Deliverable | Description | Due Date | Format |
@@ -160,11 +181,7 @@ The following activities are explicitly excluded from this SOW:
 - Technical documentation including architecture diagrams, configuration guides, and operational procedures
 - Recorded training sessions for future reference and new team member onboarding
 
----
-
-## 4. PROJECT TIMELINE & MILESTONES
-
-### 4.1 Project Phases
+## Project Milestones
 | Phase | Duration | Start Date | End Date | Key Milestones |
 |-------|----------|------------|----------|----------------|
 | **Discovery & Planning** | 4 weeks | [DATE] | [DATE] | Architecture designed, Policy migration plan approved, Lab validation completed |
@@ -191,7 +208,7 @@ The following activities are explicitly excluded from this SOW:
 
 ---
 
-## 5. ROLES & RESPONSIBILITIES
+# Roles & Responsibilities
 
 ### 5.1 Vendor Responsibilities ([VENDOR_NAME])
 - **Project Manager:** Overall project coordination, timeline management, and stakeholder communication
@@ -216,7 +233,30 @@ The following activities are explicitly excluded from this SOW:
 
 ---
 
-## 6. COMMERCIAL TERMS
+# Architecture & Design
+
+## Architecture Overview
+Multi-zone security architecture with datacenter and branch firewall deployment. SRX4600 HA pair in datacenter with SRX300 firewalls at branch locations.
+
+## Security & Compliance
+
+Enterprise-grade security with IPS, ATP Cloud, SecIntel, and SSL inspection meeting PCI DSS and SOC 2 compliance requirements.
+
+---
+
+# Testing & Validation
+
+Comprehensive testing including lab validation, performance testing, HA failover testing, and security validation before production deployment.
+
+---
+
+# Handover & Support
+
+Complete knowledge transfer with administrator training, documentation delivery, and 30-day warranty support period.
+
+---
+
+# Investment Summary
 
 ### 6.1 Project Investment
 | Category | Description | Amount |
@@ -248,7 +288,9 @@ Any additional services beyond the scope of this SOW will be quoted separately a
 
 ---
 
-## 7. ACCEPTANCE CRITERIA
+# Terms & Conditions
+
+## Acceptance Criteria
 
 ### 7.1 Technical Acceptance
 The solution will be considered technically accepted when:
@@ -269,11 +311,9 @@ The project will be considered complete when:
 - [x] System operational in production environment with 99.9% uptime validated
 - [x] 30-day warranty period completed with no unresolved critical issues
 
----
+## Assumptions & Constraints
 
-## 8. ASSUMPTIONS & CONSTRAINTS
-
-### 8.1 Assumptions
+### Assumptions
 - Client will provide existing firewall configurations in exportable format for policy migration
 - Datacenter rack space, power (dual circuits), and cooling capacity available for SRX4600
 - Network connectivity and IP addressing plan provided for all deployment locations
@@ -290,11 +330,9 @@ The project will be considered complete when:
 - All activities must comply with client change management and security approval processes
 - Solution must integrate with existing SIEM, monitoring, and network management tools
 
----
+## Risk Management
 
-## 9. RISK MANAGEMENT
-
-### 9.1 Identified Risks
+### Identified Risks
 | Risk | Impact | Probability | Mitigation Strategy |
 |------|--------|-------------|---------------------|
 | **Policy Migration Complexity** | High | Medium | Lab validation with parallel testing environment before production migration |
@@ -311,11 +349,7 @@ Any changes to project scope, timeline, or budget must be documented through for
 - Extended post-deployment support beyond 30-day warranty period
 - Network architecture modifications requiring additional design work
 
----
-
-## 10. TERMS & CONDITIONS
-
-### 10.1 Intellectual Property
+## Intellectual Property
 - Client retains ownership of all security policies, configurations, and business data
 - Vendor retains ownership of proprietary implementation methodologies and automation tools
 - SRX configurations and customizations become client property upon final payment
@@ -335,7 +369,7 @@ Vendor's liability is limited to the total contract value ($382,500). Neither pa
 
 ---
 
-## 11. APPROVAL & SIGNATURES
+# Sign-Off
 
 ### Client Approval ([CLIENT_NAME])
 

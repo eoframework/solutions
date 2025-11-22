@@ -77,22 +77,22 @@ This engagement is sized based on the following parameters:
 <!-- TABLE_CONFIG: widths=[25, 35, 40] -->
 | Category | Parameter | Scope |
 |----------|-----------|-------|
-| Solution Scope | Number of Workstations | 10 Dell Precision 7960 units |
-| Solution Scope | GPU Configuration | NVIDIA RTX A6000 48GB |
-| Integration | Data Science Tools | Standard stack (PyTorch TensorFlow) |
-| Integration | Shared Storage | Dell PowerScale F600 100TB NAS |
-| User Base | Data Scientists | 10 concurrent users |
-| User Base | User Roles | 2 roles (data scientist admin) |
-| Data Volume | Dataset Size per Project | 5TB average dataset size |
-| Data Volume | Model Checkpoint Storage | 2TB model storage requirements |
-| Technical Environment | Network Connectivity | 10GbE to shared storage |
-| Technical Environment | Workstation Performance | Dell Precision 7960 dual Xeon Gold |
-| Technical Environment | Operating System | Ubuntu 22.04 LTS with CUDA |
-| Security & Compliance | Access Control | Standard file permissions and SSH |
-| Security & Compliance | Data Classification | Unclassified research data |
-| Performance | Training Performance | Target: 80% GPU utilization average |
-| Performance | Storage Performance | 7000 MB/s NVMe read per workstation |
-| Environment | Deployment Environments | Production only |
+| Solution Scope | Number of Users | 500 users with MFA tokens |
+| Solution Scope | YubiKey Tokens | YubiKey 5 NFC hardware tokens |
+| Integration | VPN Integration | Cisco AnyConnect RADIUS MFA |
+| Integration | Cloud SSO | Microsoft 365 and AWS SAML SSO |
+| User Base | User Distribution | 80% on-site 20% remote |
+| User Base | Compliance Requirement | CMMC Level 2 certification |
+| Data Volume | Authentication Volume | 10000 daily authentications |
+| Data Volume | Audit Retention | 3 year audit log retention |
+| Technical Environment | Authentication Platform | Dell SafeID Enterprise |
+| Technical Environment | Identity Provider | Active Directory integration |
+| Technical Environment | Operating Systems | Windows 10 11 workstations |
+| Security & Compliance | Phishing Resistance | FIDO2 phishing-resistant MFA |
+| Security & Compliance | Privileged Access | Separate admin YubiKeys |
+| Performance | User Enrollment Time | <5 minute self-service enrollment |
+| Performance | Authentication Time | <2 second YubiKey tap authentication |
+| Environment | Deployment Approach | Phased rollout by department |
 <!-- END SCOPE_PARAMETERS_TABLE -->
 
 Table: Engagement Scope Parameters

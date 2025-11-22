@@ -2,72 +2,75 @@
 #WIDTH: 25,35,33,32,32,39,44
 #ALIGN: left,left,left,left,left,left,left
 Category,Baseline Assumption,Current Scope,Small (1x),Medium (2x),Large (3x),Notes
-Solution Scope,Number of Workstations,10 Dell Precision 7960 units,3 workstations,10 workstations,25+ workstations,AI/ML workstation deployment scale
-Solution Scope,GPU Configuration,NVIDIA RTX A6000 48GB,RTX A5000 24GB,RTX A6000 48GB,RTX A6000 or A100 80GB,GPU memory and compute requirements
-Integration,Data Science Tools,Standard stack (PyTorch TensorFlow),Jupyter only,Full stack (Jupyter VS Code TensorBoard),Advanced MLOps platform,AI/ML framework and tooling complexity
-Integration,Shared Storage,Dell PowerScale F600 100TB NAS,Local storage only,Shared NAS 50-100TB,Enterprise NAS 200TB+ with replication,Centralized dataset and model storage
-User Base,Data Scientists,10 concurrent users,3 users,10 users,25+ users,Active data science team size
-User Base,User Roles,2 roles (data scientist admin),Single role,2-3 roles,Complex role-based access,RBAC and storage permissions
-Data Volume,Dataset Size per Project,5TB average dataset size,1-2TB datasets,5TB datasets,10TB+ datasets,Training data volume requirements
-Data Volume,Model Checkpoint Storage,2TB model storage requirements,500GB checkpoints,2TB checkpoints,5TB+ model versioning,Saved model and checkpoint capacity
-Technical Environment,Network Connectivity,10GbE to shared storage,1GbE standard,10GbE recommended,25GbE or higher,Network bandwidth for data loading
-Technical Environment,Workstation Performance,Dell Precision 7960 dual Xeon Gold,Standard config,High-performance config,Maximum performance with liquid cooling,CPU and system performance tier
-Technical Environment,Operating System,Ubuntu 22.04 LTS with CUDA,Windows only,Ubuntu or CentOS,Multi-OS with custom kernels,OS standardization and support
-Security & Compliance,Access Control,Standard file permissions and SSH,Basic access,LDAP/AD integration,Advanced PAM and audit logging,Authentication and authorization
-Security & Compliance,Data Classification,Unclassified research data,Public data,Sensitive research,Regulated data (HIPAA ITAR),Data sensitivity and compliance
-Performance,Training Performance,Target: 80% GPU utilization average,Best effort,80% utilization,90%+ with job scheduling,GPU efficiency and workload optimization
-Performance,Storage Performance,7000 MB/s NVMe read per workstation,Standard SSD,High-speed NVMe,NVMe RAID arrays,Local storage I/O performance
-Environment,Deployment Environments,Production only,Single environment,Production + dev,Multi-tenant with quotas,Environment separation and management
+Solution Scope,Number of Racks,40 racks with ToR switches,10-20 racks,40 racks,100+ racks,Data center scale and switch quantity
+Solution Scope,Spine Switches,4 Dell Z9432F-ON 100GbE,2 spines (small),4 spines (medium),6-8 spines (large),Core fabric capacity and redundancy
+Integration,Leaf Switches,40 Dell S5248F-ON 25GbE ToR,10-20 leaf,40 leaf,100+ leaf,Top-of-rack switch deployment
+Integration,Network Fabric,BGP underlay with EVPN-VXLAN overlay,VLANs only,BGP + VXLAN,BGP EVPN multi-tenant,Network virtualization complexity
+User Base,Network Engineers,3-5 network administrators,1-2 engineers,3-5 engineers,6+ engineers,Team size for training and support
+User Base,Automation Maturity,Ansible playbooks and ZTP,Manual CLI only,Ansible automation,Full GitOps automation,Network automation adoption
+Data Volume,Server Ports,1920 ports (40 racks × 48 ports),480 ports (10-20 racks),1920 ports (40 racks),4800 ports (100 racks),Total server connectivity requirements
+Data Volume,Fabric Bandwidth,1.6Tbps aggregate throughput,400Gbps (small),1.6Tbps (medium),4Tbps+ (large),Total spine-leaf fabric capacity
+Technical Environment,Network Connectivity,100GbE spine 25GbE leaf,10GbE fabric,25/100GbE fabric,40/100/400GbE fabric,Bandwidth tier selection
+Technical Environment,Legacy Infrastructure,Cisco Nexus 9K and Catalyst switches,Single vendor,Multi-vendor,Complex legacy,Migration complexity from Cisco
+Technical Environment,Operating System,Dell OS10 Enterprise with automation,OS10 Lite,OS10 Enterprise,OS10 + SmartFabric,Software feature requirements
+Security & Compliance,Network Segmentation,VXLAN multi-tenancy,VLANs only,VXLAN overlay,Micro-segmentation,Security architecture complexity
+Security & Compliance,Access Control,TACACS+ centralized authentication,Local accounts,TACACS+ or RADIUS,Certificate + MFA,Network device authentication
+Performance,Latency SLA,<2 microsecond east-west latency,<10ms adequate,<2ms target,<1ms required,Application performance requirements
+Performance,Throughput,7000 Mbps per server (25GbE NIC),1000 Mbps (1GbE),7000 Mbps (25GbE),12500 Mbps (40GbE),Server uplink bandwidth
+Environment,Deployment Approach,Phased rack-by-rack migration,Forklift cutover,Phased migration,Parallel fabric,Migration risk and complexity
 # ESTIMATE SETTINGS
 #WIDTH: 17,22,14,173
 #ALIGN: left,left,center,left
 Phase,Variable Name,Multiplier,Description / Applies To Tasks
-Discovery,DISCOVERY_MX,1,All Discovery phase tasks (Requirements Assessment Hardware Planning Dataset Analysis)
-Planning,PLANNING_MX,1,All Planning phase tasks (Infrastructure Design Storage Architecture Network Design)
-Development,DEVELOPMENT_MX,1,All Development phase tasks (Workstation Deployment GPU Configuration Storage Setup)
-Testing,TESTING_MX,1,All Testing phase tasks (Performance Testing GPU Benchmarking Storage Validation)
-Deployment,DEPLOYMENT_MX,1,All Deployment phase tasks (Production Rollout User Onboarding)
-Training,TRAINING_MX,1,All Training phase tasks (User Training Documentation)
-Closeout,CLOSEOUT_MX,1,All Closeout phase tasks (Knowledge Transfer Performance Baseline)
+Discovery,DISCOVERY_MX,1,All Discovery phase tasks (Network Assessment Rack Inventory Cisco Baseline)
+Planning,PLANNING_MX,1,All Planning phase tasks (Spine-Leaf Design BGP Architecture VXLAN Design)
+Development,DEVELOPMENT_MX,1,All Development phase tasks (Switch Installation OS10 Configuration BGP Setup)
+Testing,TESTING_MX,1,All Testing phase tasks (Performance Testing Failover Validation Throughput)
+Deployment,DEPLOYMENT_MX,1,All Deployment phase tasks (Rack Migration Production Cutover)
+Training,TRAINING_MX,1,All Training phase tasks (OS10 Training BGP/VXLAN Automation)
+Closeout,CLOSEOUT_MX,1,All Closeout phase tasks (Knowledge Transfer Network Baseline)
 Management,MANAGEMENT_MX,1,Project Management overhead - 10% of actual engineering hours
 Leadership,LEADERSHIP_MX,1,Quarterback/Technical Leadership overhead - 10% of actual engineering hours
 # Level of Effort
 #WIDTH: 16,25,58,18,12,14,12,12,15,25,40
 #ALIGN: left,left,left,left,right,center,right,right,right,left,left
 Phase,Work Package,Task Description,Resource Type,Base Hours,Effort Multiplier,Actual Hours,Rate,Cost Estimate,Dependencies,Notes
-Discovery,Requirements Assessment,Assess AI/ML workload requirements and user workflows,EO Engineer,40,1,=E25*F25,$150,"=TEXT(G25*H25,""$#,##0"")",,Includes dataset analysis and GPU sizing for PyTorch/TensorFlow
-Discovery,Hardware Planning,Evaluate Dell Precision and GPU configuration options,EO Engineer,32,='Estimate Settings'!$C$3,=$E26*$F26,$200,"=TEXT($G26*$H26,""$#,##0"")",,Customer must provide representative training workloads for benchmarking
-Discovery,Dataset Analysis,Analyze dataset sizes access patterns and storage needs,EO Engineer,24,='Estimate Settings'!$C$3,=$E27*$F27,$200,"=TEXT($G27*$H27,""$#,##0"")",,Customer must provide dataset inventory and growth projections
-Discovery,Network Assessment,Evaluate network infrastructure for 10GbE connectivity,EO Engineer,16,='Estimate Settings'!$C$3,=$E28*$F28,$175,"=TEXT($G28*$H28,""$#,##0"")",,Identifies network upgrades needed for shared storage access
-Planning,Infrastructure Design,Design Dell Precision workstation and GPU architecture,EO Engineer,40,='Estimate Settings'!$C$4,=$E29*$F29,$200,"=TEXT($G29*$H29,""$#,##0"")",Requirements Assessment,Deliverable: Hardware architecture with GPU and storage design
-Planning,Storage Architecture,Design PowerScale NAS storage and dataset organization,EO Engineer,24,='Estimate Settings'!$C$4,=$E30*$F30,$180,"=TEXT($G30*$H30,""$#,##0"")",Dataset Analysis,Deliverable: Storage capacity plan and NFS/SMB share design
-Planning,Network Design,Design 10GbE network connectivity and switch topology,EO Engineer,24,='Estimate Settings'!$C$4,=$E31*$F31,$175,"=TEXT($G31*$H31,""$#,##0"")",Network Assessment,Network diagram with workstation-to-storage connectivity
-Planning,Project Planning,Develop implementation timeline and procurement schedule,EO Engineer,24,='Estimate Settings'!$C$4,=$E32*$F32,$140,"=TEXT($G32*$H32,""$#,##0"")",Infrastructure Design,Deliverable: Project plan with hardware lead times
-Development,Workstation Procurement,Order Dell Precision 7960 workstations and components,EO Engineer,16,='Estimate Settings'!$C$5,=$E33*$F33,$160,"=TEXT($G33*$H33,""$#,##0"")",Infrastructure Design,Coordinate with Dell sales and track delivery schedule
-Development,GPU Configuration,Install and configure NVIDIA RTX A6000 GPUs with drivers,EO Engineer,40,='Estimate Settings'!$C$5,=$E34*$F34,$160,"=TEXT($G34*$H34,""$#,##0"")",Workstation Procurement,Includes CUDA cuDNN installation and GPU burn-in testing
-Development,Storage Deployment,Deploy Dell PowerScale F600 NAS and configure shares,EO Engineer,48,='Estimate Settings'!$C$5,=$E35*$F35,$170,"=TEXT($G35*$H35,""$#,##0"")",Storage Architecture,Configure NFS/SMB shares with user permissions and quotas
-Development,Operating System Setup,Install Ubuntu 22.04 LTS and AI/ML software stack,EO Engineer,32,='Estimate Settings'!$C$5,=$E36*$F36,$130,"=TEXT($G36*$H36,""$#,##0"")",GPU Configuration,Install PyTorch TensorFlow Jupyter and development tools
-Development,Network Configuration,Configure 10GbE network and storage connectivity,EO Engineer,24,='Estimate Settings'!$C$5,=$E37*$F37,$140,"=TEXT($G37*$H37,""$#,##0"")",Network Design,Includes switch configuration VLAN setup and network validation
-Development,Monitoring Setup,Deploy Datadog for GPU metrics and utilization tracking,EO Engineer,24,='Estimate Settings'!$C$5,=$E38*$F38,$130,"=TEXT($G38*$H38,""$#,##0"")",Operating System Setup,Configure GPU monitoring dashboards and alerting
-Testing,Performance Testing,Benchmark GPU performance with PyTorch/TensorFlow,EO Engineer,24,='Estimate Settings'!$C$6,=$E39*$F39,$140,"=TEXT($G39*$H39,""$#,##0"")",Operating System Setup,Validate GPU utilization and training throughput
-Testing,Storage Performance,Test NAS storage throughput and dataset loading speeds,EO Engineer,16,='Estimate Settings'!$C$6,=$E40*$F40,$120,"=TEXT($G40*$H40,""$#,##0"")",Storage Deployment,Measure read/write performance with large datasets
-Testing,Network Validation,Validate 10GbE network performance and bandwidth,EO Engineer,16,='Estimate Settings'!$C$6,=$E41*$F41,$120,"=TEXT($G41*$H41,""$#,##0"")",Network Configuration,Network throughput testing between workstations and storage
-Testing,End-to-End Testing,Run representative training workloads end-to-end,EO Engineer,24,='Estimate Settings'!$C$6,=$E42*$F42,$130,"=TEXT($G42*$H42,""$#,##0"")",Performance Testing,Customer must provide sample training scripts for validation
-Deployment,Production Rollout,Deploy remaining workstations to production,EO Engineer,24,='Estimate Settings'!$C$7,=$E43*$F43,$160,"=TEXT($G43*$H43,""$#,##0"")",End-to-End Testing,Phased rollout with monitoring and issue tracking
-Deployment,User Onboarding,Onboard data scientists to new workstation environment,EO Engineer,16,='Estimate Settings'!$C$7,=$E44*$F44,$110,"=TEXT($G44*$H44,""$#,##0"")",Production Rollout,Assist with workspace setup and first training runs
-Deployment,Go-Live Support,Provide hypercare support during initial production use,EO Engineer,40,='Estimate Settings'!$C$7,=$E45*$F45,$110,"=TEXT($G45*$H45,""$#,##0"")",User Onboarding,Daily monitoring and rapid issue response
-Training,Data Scientist Training,Train users on GPU workstation usage and best practices,EO Engineer,16,='Estimate Settings'!$C$8,=$E46*$F46,$130,"=TEXT($G46*$H46,""$#,##0"")",Production Rollout,Includes PyTorch/TensorFlow optimization and GPU profiling
-Training,Administrator Training,Train IT staff on workstation and storage management,EO Engineer,16,='Estimate Settings'!$C$8,=$E47*$F47,$120,"=TEXT($G47*$H47,""$#,##0"")",Data Scientist Training,Includes GPU monitoring Datadog and PowerScale administration
-Training,Documentation,Create user guides and operational runbooks,EO Engineer,24,='Estimate Settings'!$C$8,=$E48*$F48,$110,"=TEXT($G48*$H48,""$#,##0"")",Administrator Training,Deliverable: User guides troubleshooting procedures GPU optimization
-Closeout,Knowledge Transfer,Transfer solution ownership to IT operations,EO Engineer,16,='Estimate Settings'!$C$9,=$E49*$F49,$140,"=TEXT($G49*$H49,""$#,##0"")",Documentation,Comprehensive handover including hardware specs and procedures
-Closeout,Performance Baseline,Establish GPU utilization and performance baselines,EO Engineer,8,='Estimate Settings'!$C$9,=$E50*$F50,$130,"=TEXT($G50*$H50,""$#,##0"")",Knowledge Transfer,Establishes GPU efficiency metrics and cost tracking
-Management,Technical Leadership,Quarterback technical oversight and architecture review,EO Quarterback,"=ROUND(SUM($G$3:$G$28)*0.10,0)",='Estimate Settings'!$C$11,=$E51*$F51,$200,"=TEXT($G51*$H51,""$#,##0"")",,Dell Precision architecture review and GPU optimization guidance
-Management,Project Management,Project coordination planning and management activities,EO Project Manager,"=ROUND(SUM($G$3:$G$28)*0.10,0)",='Estimate Settings'!$C$10,=$E52*$F52,$150,"=TEXT($G52*$H52,""$#,##0"")",,Includes status reporting risk management and vendor coordination
-,,,,,TOTAL HOURS,"=SUM($G$3:$G$30)",TOTAL COST,"=TEXT(SUMPRODUCT($G$3:$G$30,$H$3:$H$30),""$#,##0"")",,EO Sales Engineer: Update phase multipliers in Estimate Settings based on deployment scale
+Discovery,Network Assessment,Assess current data center network and Cisco baseline,EO Engineer,40,1,=E25*F25,$150,"=TEXT(G25*H25,""$#,##0"")",,Includes rack inventory and bandwidth analysis
+Discovery,Cisco Cost Analysis,Analyze Cisco SmartNet costs and EOL timeline,EO Engineer,24,='Estimate Settings'!$C$3,=$E26*$F26,$175,"=TEXT($G26*$H26,""$#,##0"")",,Customer must provide Cisco support contracts and quotes
+Discovery,Application Profiling,Profile application bandwidth and latency requirements,EO Engineer,32,='Estimate Settings'!$C$3,=$E27*$F27,$175,"=TEXT($G27*$H27,""$#,##0"")",,Identifies north-south vs east-west traffic patterns
+Discovery,Physical Infrastructure,Survey data center rack space power and cooling,EO Engineer,16,='Estimate Settings'!$C$3,=$E28*$F28,$150,"=TEXT($G28*$H28,""$#,##0"")",,Validates power circuits and HVAC for switch deployment
+Planning,Spine-Leaf Design,Design spine-leaf fabric architecture and topology,EO Engineer,40,='Estimate Settings'!$C$4,=$E29*$F29,$200,"=TEXT($G29*$H29,""$#,##0"")",Network Assessment,Deliverable: Network diagram with spine-leaf topology
+Planning,BGP Architecture,Design BGP underlay with ASN and IP addressing plan,EO Engineer,32,='Estimate Settings'!$C$4,=$E30*$F30,$200,"=TEXT($G30*$H30,""$#,##0"")",Spine-Leaf Design,Deliverable: BGP design with ASN allocation
+Planning,VXLAN Overlay,Design EVPN-VXLAN overlay and tenant segmentation,EO Engineer,32,='Estimate Settings'!$C$4,=$E31*$F31,$200,"=TEXT($G31*$H31,""$#,##0"")",BGP Architecture,VXLAN VNID allocation and L2/L3 gateway design
+Planning,Migration Planning,Develop phased migration plan and cutover runbook,EO Engineer,24,='Estimate Settings'!$C$4,=$E32*$F32,$175,"=TEXT($G32*$H32,""$#,##0"")",Application Profiling,Deliverable: Migration timeline with risk mitigation
+Development,Spine Procurement,Order Dell PowerSwitch Z9432F spine switches and optics,EO Engineer,16,='Estimate Settings'!$C$5,=$E33*$F33,$160,"=TEXT($G33*$H33,""$#,##0"")",Spine-Leaf Design,Coordinate Dell sales and track delivery schedule
+Development,Leaf Procurement,Order Dell PowerSwitch S5248F leaf ToR switches,EO Engineer,16,='Estimate Settings'!$C$5,=$E34*$F34,$160,"=TEXT($G34*$H34,""$#,##0"")",Spine-Leaf Design,40 ToR switches with 100GbE uplink optics
+Development,Spine Installation,Install spine switches in core data center rows,EO Engineer,24,='Estimate Settings'!$C$5,=$E35*$F35,$160,"=TEXT($G35*$H35,""$#,##0"")",Spine Procurement,Rack installation and power connectivity
+Development,Leaf Installation,Install leaf ToR switches in each server rack,EO Engineer,64,='Estimate Settings'!$C$5,=$E36*$F36,$160,"=TEXT($G36*$H36,""$#,##0"")",Leaf Procurement,40 racks × 1 ToR per rack installation and cabling
+Development,OS10 Configuration,Configure Dell OS10 base system and management,EO Engineer,32,='Estimate Settings'!$C$5,=$E37*$F37,$175,"=TEXT($G37*$H37,""$#,##0"")",Spine Installation,Includes hostname IP management VLANs and AAA
+Development,BGP Configuration,Configure BGP underlay routing on spine and leaf,EO Engineer,40,='Estimate Settings'!$C$5,=$E38*$F38,$200,"=TEXT($G38*$H38,""$#,##0"")",OS10 Configuration,BGP peer configuration and route verification
+Development,VXLAN Setup,Deploy EVPN-VXLAN overlay network,EO Engineer,40,='Estimate Settings'!$C$5,=$E39*$F39,$200,"=TEXT($G39*$H39,""$#,##0"")",BGP Configuration,VXLAN VNID tenant configuration and gateway
+Development,Automation Deployment,Configure Ansible playbooks and ZTP for leaf switches,EO Engineer,32,='Estimate Settings'!$C$5,=$E40*$F40,$175,"=TEXT($G40*$H40,""$#,##0"")",VXLAN Setup,SmartFabric Services for zero-touch provisioning
+Testing,Fabric Validation,Validate spine-leaf fabric connectivity and routing,EO Engineer,24,='Estimate Settings'!$C$6,=$E41*$F41,$160,"=TEXT($G41*$H41,""$#,##0"")",VXLAN Setup,BGP adjacency and VXLAN tunnel verification
+Testing,Performance Testing,Benchmark throughput and latency performance,EO Engineer,24,='Estimate Settings'!$C$6,=$E42*$F42,$160,"=TEXT($G42*$H42,""$#,##0"")",Fabric Validation,Iperf testing between racks validates 25GbE bandwidth
+Testing,Failover Testing,Test spine and leaf failover scenarios,EO Engineer,16,='Estimate Settings'!$C$6,=$E43*$F43,$150,"=TEXT($G43*$H43,""$#,##0"")",Fabric Validation,Validate HA and redundancy design
+Testing,Pilot Rack Migration,Migrate pilot rack to validate production readiness,EO Engineer,24,='Estimate Settings'!$C$6,=$E44*$F44,$160,"=TEXT($G44*$H44,""$#,##0"")",Performance Testing,Customer must identify pilot rack and application
+Deployment,Phased Migration,Migrate racks from Cisco to PowerSwitch fabric,EO Engineer,80,='Estimate Settings'!$C$7,=$E45*$F45,$175,"=TEXT($G45*$H45,""$#,##0"")",Pilot Rack Migration,5-10 racks per weekend cutover window
+Deployment,Application Validation,Validate application connectivity post-migration,EO Engineer,32,='Estimate Settings'!$C$7,=$E46*$F46,$150,"=TEXT($G46*$H46,""$#,##0"")",Phased Migration,Application team validation and smoke testing
+Deployment,Cisco Decommission,Decommission legacy Cisco infrastructure,EO Engineer,24,='Estimate Settings'!$C$7,=$E47*$F47,$140,"=TEXT($G47*$H47,""$#,##0"")",Application Validation,Coordinate SmartNet cancellation and RMA
+Deployment,Production Support,Provide hypercare support during migration,EO Engineer,40,='Estimate Settings'!$C$7,=$E48*$F48,$150,"=TEXT($G48*$H48,""$#,##0"")",Phased Migration,Daily monitoring and rapid issue response
+Training,Network Engineer Training,Train network team on OS10 and spine-leaf operations,EO Engineer,24,='Estimate Settings'!$C$8,=$E49*$F49,$175,"=TEXT($G49*$H49,""$#,##0"")",Production Support,OS10 CLI BGP VXLAN troubleshooting
+Training,Automation Training,Train team on Ansible automation and SmartFabric,EO Engineer,16,='Estimate Settings'!$C$8,=$E50*$F50,$175,"=TEXT($G50*$H50,""$#,##0"")",Network Engineer Training,Ansible playbooks ZTP and GitOps workflow
+Training,Documentation,Create network runbooks and troubleshooting guides,EO Engineer,24,='Estimate Settings'!$C$8,=$E51*$F51,$150,"=TEXT($G51*$H51,""$#,##0"")",Automation Training,Deliverable: AS-built docs IP plan BGP design runbooks
+Closeout,Knowledge Transfer,Transfer network ownership to IT operations,EO Engineer,16,='Estimate Settings'!$C$9,=$E52*$F52,$175,"=TEXT($G52*$H52,""$#,##0"")",Documentation,Comprehensive handover including design and procedures
+Closeout,Performance Baseline,Establish network performance baseline and monitoring,EO Engineer,8,='Estimate Settings'!$C$9,=$E53*$F53,$150,"=TEXT($G53*$H53,""$#,##0"")",Knowledge Transfer,Baseline throughput latency and availability metrics
+Management,Technical Leadership,Quarterback technical oversight and architecture review,EO Quarterback,"=ROUND(SUM($G$3:$G$31)*0.10,0)",='Estimate Settings'!$C$11,=$E54*$F54,$200,"=TEXT($G54*$H54,""$#,##0"")",,Spine-leaf architecture review and BGP optimization
+Management,Project Management,Project coordination planning and vendor management,EO Project Manager,"=ROUND(SUM($G$3:$G$31)*0.10,0)",='Estimate Settings'!$C$10,=$E55*$F55,$175,"=TEXT($G55*$H55,""$#,##0"")",,Includes Dell coordination migration planning risk management
+,,,,,TOTAL HOURS,"=SUM($G$3:$G$33)",TOTAL COST,"=TEXT(SUMPRODUCT($G$3:$G$33,$H$3:$H$33),""$#,##0"")",,EO Sales Engineer: Update phase multipliers based on rack count
 # Credits - Applied to Total Cost (Year 1 Only)
 #WIDTH: 27,17,100
 #ALIGN: left,right,left
 Credit Type,Credit Amount,Credit Comments
-Dell Partner Discount,"($15000)",Dell Titanium Partner discount on hardware procurement (negotiate 5-10% on volume orders)
+Dell Partner Discount,"($25000)",Dell Titanium Partner discount on PowerSwitch hardware (negotiate 5-10% on volume orders)
 Implementation Discount,$0,No implementation discount applicable
-NET PROFESSIONAL SERVICES COST,"=SUMPRODUCT($G$3:$G$30,$H$3:$H$30)-15000",Total Cost minus Dell Partner discount
+NET PROFESSIONAL SERVICES COST,"=SUMPRODUCT($G$3:$G$33,$H$3:$H$33)-25000",Total Cost minus Dell Partner discount

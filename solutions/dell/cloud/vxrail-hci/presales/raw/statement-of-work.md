@@ -77,22 +77,22 @@ This engagement is sized based on the following parameters:
 <!-- TABLE_CONFIG: widths=[25, 35, 40] -->
 | Category | Parameter | Scope |
 |----------|-----------|-------|
-| Solution Scope | Number of Workstations | 10 Dell Precision 7960 units |
-| Solution Scope | GPU Configuration | NVIDIA RTX A6000 48GB |
-| Integration | Data Science Tools | Standard stack (PyTorch TensorFlow) |
-| Integration | Shared Storage | Dell PowerScale F600 100TB NAS |
-| User Base | Data Scientists | 10 concurrent users |
-| User Base | User Roles | 2 roles (data scientist admin) |
-| Data Volume | Dataset Size per Project | 5TB average dataset size |
-| Data Volume | Model Checkpoint Storage | 2TB model storage requirements |
-| Technical Environment | Network Connectivity | 10GbE to shared storage |
-| Technical Environment | Workstation Performance | Dell Precision 7960 dual Xeon Gold |
-| Technical Environment | Operating System | Ubuntu 22.04 LTS with CUDA |
-| Security & Compliance | Access Control | Standard file permissions and SSH |
-| Security & Compliance | Data Classification | Unclassified research data |
-| Performance | Training Performance | Target: 80% GPU utilization average |
-| Performance | Storage Performance | 7000 MB/s NVMe read per workstation |
-| Environment | Deployment Environments | Production only |
+| Solution Scope | Cluster Size | 4-node VxRail E560 cluster |
+| Solution Scope | Storage Capacity | 40TB usable all-flash SSD |
+| Integration | vSphere Version | vSphere 8 Enterprise Plus |
+| Integration | Backup Integration | Veeam Backup & Replication |
+| User Base | VM Count | 250 virtual machines |
+| User Base | Admin Team | 3-5 virtualization administrators |
+| Data Volume | Storage Type | All-flash SSD vSAN |
+| Data Volume | VM Size | Average 500GB per VM |
+| Technical Environment | Current Virtualization | VMware vSphere 7.0 on traditional SAN |
+| Technical Environment | Legacy Infrastructure | EMC Unity or NetApp SAN |
+| Technical Environment | Network Fabric | 25GbE ToR switches for vSAN |
+| Security & Compliance | Data Sensitivity | Internal business data |
+| Security & Compliance | Encryption | vSAN encryption at rest |
+| Performance | VM Density | 60 VMs per node average |
+| Performance | vSAN Performance | Mixed workload 10K IOPS per VM |
+| Environment | Migration Approach | Phased vMotion migration |
 <!-- END SCOPE_PARAMETERS_TABLE -->
 
 Table: Engagement Scope Parameters

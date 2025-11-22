@@ -2,72 +2,73 @@
 #WIDTH: 25,35,33,32,32,39,44
 #ALIGN: left,left,left,left,left,left,left
 Category,Baseline Assumption,Current Scope,Small (1x),Medium (2x),Large (3x),Notes
-Solution Scope,Number of Workstations,10 Dell Precision 7960 units,3 workstations,10 workstations,25+ workstations,AI/ML workstation deployment scale
-Solution Scope,GPU Configuration,NVIDIA RTX A6000 48GB,RTX A5000 24GB,RTX A6000 48GB,RTX A6000 or A100 80GB,GPU memory and compute requirements
-Integration,Data Science Tools,Standard stack (PyTorch TensorFlow),Jupyter only,Full stack (Jupyter VS Code TensorBoard),Advanced MLOps platform,AI/ML framework and tooling complexity
-Integration,Shared Storage,Dell PowerScale F600 100TB NAS,Local storage only,Shared NAS 50-100TB,Enterprise NAS 200TB+ with replication,Centralized dataset and model storage
-User Base,Data Scientists,10 concurrent users,3 users,10 users,25+ users,Active data science team size
-User Base,User Roles,2 roles (data scientist admin),Single role,2-3 roles,Complex role-based access,RBAC and storage permissions
-Data Volume,Dataset Size per Project,5TB average dataset size,1-2TB datasets,5TB datasets,10TB+ datasets,Training data volume requirements
-Data Volume,Model Checkpoint Storage,2TB model storage requirements,500GB checkpoints,2TB checkpoints,5TB+ model versioning,Saved model and checkpoint capacity
-Technical Environment,Network Connectivity,10GbE to shared storage,1GbE standard,10GbE recommended,25GbE or higher,Network bandwidth for data loading
-Technical Environment,Workstation Performance,Dell Precision 7960 dual Xeon Gold,Standard config,High-performance config,Maximum performance with liquid cooling,CPU and system performance tier
-Technical Environment,Operating System,Ubuntu 22.04 LTS with CUDA,Windows only,Ubuntu or CentOS,Multi-OS with custom kernels,OS standardization and support
-Security & Compliance,Access Control,Standard file permissions and SSH,Basic access,LDAP/AD integration,Advanced PAM and audit logging,Authentication and authorization
-Security & Compliance,Data Classification,Unclassified research data,Public data,Sensitive research,Regulated data (HIPAA ITAR),Data sensitivity and compliance
-Performance,Training Performance,Target: 80% GPU utilization average,Best effort,80% utilization,90%+ with job scheduling,GPU efficiency and workload optimization
-Performance,Storage Performance,7000 MB/s NVMe read per workstation,Standard SSD,High-speed NVMe,NVMe RAID arrays,Local storage I/O performance
-Environment,Deployment Environments,Production only,Single environment,Production + dev,Multi-tenant with quotas,Environment separation and management
+Solution Scope,Number of Users,500 users with MFA tokens,100-250 users,500 users,1000+ users,User base and token quantity
+Solution Scope,YubiKey Tokens,YubiKey 5 NFC hardware tokens,YubiKey 5 USB-A,YubiKey 5 NFC,YubiKey Bio (biometric),Token type and features
+Integration,VPN Integration,Cisco AnyConnect RADIUS MFA,No VPN,Single VPN platform,Multi-vendor VPN,VPN authentication complexity
+Integration,Cloud SSO,Microsoft 365 and AWS SAML SSO,No cloud SSO,1-3 cloud apps,5+ cloud apps,Cloud application SSO scope
+User Base,User Distribution,80% on-site 20% remote,100% on-site,Hybrid workforce,100% remote,Token shipping and enrollment logistics
+User Base,Compliance Requirement,CMMC Level 2 certification,No compliance,CMMC or NIST 800-63,Multiple standards,Compliance-driven phishing resistance
+Data Volume,Authentication Volume,10000 daily authentications,Low volume,Medium volume,High volume,Authentication platform capacity
+Data Volume,Audit Retention,3 year audit log retention,1 year,3 years,7 years,Compliance and storage requirements
+Technical Environment,Authentication Platform,Dell SafeID Enterprise,SafeID Standard,SafeID Enterprise,HA clustered,Platform tier and HA requirements
+Technical Environment,Identity Provider,Active Directory integration,Local accounts,AD LDAP,Azure AD hybrid,Identity management complexity
+Technical Environment,Operating Systems,Windows 10 11 workstations,Windows only,Windows + Linux,Windows Linux macOS,Platform diversity and support
+Security & Compliance,Phishing Resistance,FIDO2 phishing-resistant MFA,SMS TOTP (not resistant),FIDO2 WebAuthn,FIDO2 + PIV smart card,Compliance and security requirements
+Security & Compliance,Privileged Access,Separate admin YubiKeys,Same tokens,Separate admin tokens,PAM integration,Privileged account protection
+Performance,User Enrollment Time,<5 minute self-service enrollment,IT-assisted (15 min),Self-service (5 min),Zero-touch pre-configured,User onboarding efficiency
+Performance,Authentication Time,<2 second YubiKey tap authentication,<5 sec acceptable,<2 sec target,<1 sec passwordless,User experience and productivity
+Environment,Deployment Approach,Phased rollout by department,Pilot only,Phased (100 users/2 weeks),All at once,Rollout risk and complexity
 # ESTIMATE SETTINGS
 #WIDTH: 17,22,14,173
 #ALIGN: left,left,center,left
 Phase,Variable Name,Multiplier,Description / Applies To Tasks
-Discovery,DISCOVERY_MX,1,All Discovery phase tasks (Requirements Assessment Hardware Planning Dataset Analysis)
-Planning,PLANNING_MX,1,All Planning phase tasks (Infrastructure Design Storage Architecture Network Design)
-Development,DEVELOPMENT_MX,1,All Development phase tasks (Workstation Deployment GPU Configuration Storage Setup)
-Testing,TESTING_MX,1,All Testing phase tasks (Performance Testing GPU Benchmarking Storage Validation)
-Deployment,DEPLOYMENT_MX,1,All Deployment phase tasks (Production Rollout User Onboarding)
-Training,TRAINING_MX,1,All Training phase tasks (User Training Documentation)
-Closeout,CLOSEOUT_MX,1,All Closeout phase tasks (Knowledge Transfer Performance Baseline)
+Discovery,DISCOVERY_MX,1,All Discovery phase tasks (User Assessment Compliance Review Integration Analysis)
+Planning,PLANNING_MX,1,All Planning phase tasks (MFA Architecture YubiKey Selection Integration Design)
+Development,DEVELOPMENT_MX,1,All Development phase tasks (SafeID Deployment Token Distribution Integration)
+Testing,TESTING_MX,1,All Testing phase tasks (Pilot Testing Authentication Validation Failover)
+Deployment,DEPLOYMENT_MX,1,All Deployment phase tasks (User Rollout Enforcement Production)
+Training,TRAINING_MX,1,All Training phase tasks (User Training Help Desk Training)
+Closeout,CLOSEOUT_MX,1,All Closeout phase tasks (Compliance Documentation Knowledge Transfer)
 Management,MANAGEMENT_MX,1,Project Management overhead - 10% of actual engineering hours
 Leadership,LEADERSHIP_MX,1,Quarterback/Technical Leadership overhead - 10% of actual engineering hours
 # Level of Effort
 #WIDTH: 16,25,58,18,12,14,12,12,15,25,40
 #ALIGN: left,left,left,left,right,center,right,right,right,left,left
 Phase,Work Package,Task Description,Resource Type,Base Hours,Effort Multiplier,Actual Hours,Rate,Cost Estimate,Dependencies,Notes
-Discovery,Requirements Assessment,Assess AI/ML workload requirements and user workflows,EO Engineer,40,1,=E25*F25,$150,"=TEXT(G25*H25,""$#,##0"")",,Includes dataset analysis and GPU sizing for PyTorch/TensorFlow
-Discovery,Hardware Planning,Evaluate Dell Precision and GPU configuration options,EO Engineer,32,='Estimate Settings'!$C$3,=$E26*$F26,$200,"=TEXT($G26*$H26,""$#,##0"")",,Customer must provide representative training workloads for benchmarking
-Discovery,Dataset Analysis,Analyze dataset sizes access patterns and storage needs,EO Engineer,24,='Estimate Settings'!$C$3,=$E27*$F27,$200,"=TEXT($G27*$H27,""$#,##0"")",,Customer must provide dataset inventory and growth projections
-Discovery,Network Assessment,Evaluate network infrastructure for 10GbE connectivity,EO Engineer,16,='Estimate Settings'!$C$3,=$E28*$F28,$175,"=TEXT($G28*$H28,""$#,##0"")",,Identifies network upgrades needed for shared storage access
-Planning,Infrastructure Design,Design Dell Precision workstation and GPU architecture,EO Engineer,40,='Estimate Settings'!$C$4,=$E29*$F29,$200,"=TEXT($G29*$H29,""$#,##0"")",Requirements Assessment,Deliverable: Hardware architecture with GPU and storage design
-Planning,Storage Architecture,Design PowerScale NAS storage and dataset organization,EO Engineer,24,='Estimate Settings'!$C$4,=$E30*$F30,$180,"=TEXT($G30*$H30,""$#,##0"")",Dataset Analysis,Deliverable: Storage capacity plan and NFS/SMB share design
-Planning,Network Design,Design 10GbE network connectivity and switch topology,EO Engineer,24,='Estimate Settings'!$C$4,=$E31*$F31,$175,"=TEXT($G31*$H31,""$#,##0"")",Network Assessment,Network diagram with workstation-to-storage connectivity
-Planning,Project Planning,Develop implementation timeline and procurement schedule,EO Engineer,24,='Estimate Settings'!$C$4,=$E32*$F32,$140,"=TEXT($G32*$H32,""$#,##0"")",Infrastructure Design,Deliverable: Project plan with hardware lead times
-Development,Workstation Procurement,Order Dell Precision 7960 workstations and components,EO Engineer,16,='Estimate Settings'!$C$5,=$E33*$F33,$160,"=TEXT($G33*$H33,""$#,##0"")",Infrastructure Design,Coordinate with Dell sales and track delivery schedule
-Development,GPU Configuration,Install and configure NVIDIA RTX A6000 GPUs with drivers,EO Engineer,40,='Estimate Settings'!$C$5,=$E34*$F34,$160,"=TEXT($G34*$H34,""$#,##0"")",Workstation Procurement,Includes CUDA cuDNN installation and GPU burn-in testing
-Development,Storage Deployment,Deploy Dell PowerScale F600 NAS and configure shares,EO Engineer,48,='Estimate Settings'!$C$5,=$E35*$F35,$170,"=TEXT($G35*$H35,""$#,##0"")",Storage Architecture,Configure NFS/SMB shares with user permissions and quotas
-Development,Operating System Setup,Install Ubuntu 22.04 LTS and AI/ML software stack,EO Engineer,32,='Estimate Settings'!$C$5,=$E36*$F36,$130,"=TEXT($G36*$H36,""$#,##0"")",GPU Configuration,Install PyTorch TensorFlow Jupyter and development tools
-Development,Network Configuration,Configure 10GbE network and storage connectivity,EO Engineer,24,='Estimate Settings'!$C$5,=$E37*$F37,$140,"=TEXT($G37*$H37,""$#,##0"")",Network Design,Includes switch configuration VLAN setup and network validation
-Development,Monitoring Setup,Deploy Datadog for GPU metrics and utilization tracking,EO Engineer,24,='Estimate Settings'!$C$5,=$E38*$F38,$130,"=TEXT($G38*$H38,""$#,##0"")",Operating System Setup,Configure GPU monitoring dashboards and alerting
-Testing,Performance Testing,Benchmark GPU performance with PyTorch/TensorFlow,EO Engineer,24,='Estimate Settings'!$C$6,=$E39*$F39,$140,"=TEXT($G39*$H39,""$#,##0"")",Operating System Setup,Validate GPU utilization and training throughput
-Testing,Storage Performance,Test NAS storage throughput and dataset loading speeds,EO Engineer,16,='Estimate Settings'!$C$6,=$E40*$F40,$120,"=TEXT($G40*$H40,""$#,##0"")",Storage Deployment,Measure read/write performance with large datasets
-Testing,Network Validation,Validate 10GbE network performance and bandwidth,EO Engineer,16,='Estimate Settings'!$C$6,=$E41*$F41,$120,"=TEXT($G41*$H41,""$#,##0"")",Network Configuration,Network throughput testing between workstations and storage
-Testing,End-to-End Testing,Run representative training workloads end-to-end,EO Engineer,24,='Estimate Settings'!$C$6,=$E42*$F42,$130,"=TEXT($G42*$H42,""$#,##0"")",Performance Testing,Customer must provide sample training scripts for validation
-Deployment,Production Rollout,Deploy remaining workstations to production,EO Engineer,24,='Estimate Settings'!$C$7,=$E43*$F43,$160,"=TEXT($G43*$H43,""$#,##0"")",End-to-End Testing,Phased rollout with monitoring and issue tracking
-Deployment,User Onboarding,Onboard data scientists to new workstation environment,EO Engineer,16,='Estimate Settings'!$C$7,=$E44*$F44,$110,"=TEXT($G44*$H44,""$#,##0"")",Production Rollout,Assist with workspace setup and first training runs
-Deployment,Go-Live Support,Provide hypercare support during initial production use,EO Engineer,40,='Estimate Settings'!$C$7,=$E45*$F45,$110,"=TEXT($G45*$H45,""$#,##0"")",User Onboarding,Daily monitoring and rapid issue response
-Training,Data Scientist Training,Train users on GPU workstation usage and best practices,EO Engineer,16,='Estimate Settings'!$C$8,=$E46*$F46,$130,"=TEXT($G46*$H46,""$#,##0"")",Production Rollout,Includes PyTorch/TensorFlow optimization and GPU profiling
-Training,Administrator Training,Train IT staff on workstation and storage management,EO Engineer,16,='Estimate Settings'!$C$8,=$E47*$F47,$120,"=TEXT($G47*$H47,""$#,##0"")",Data Scientist Training,Includes GPU monitoring Datadog and PowerScale administration
-Training,Documentation,Create user guides and operational runbooks,EO Engineer,24,='Estimate Settings'!$C$8,=$E48*$F48,$110,"=TEXT($G48*$H48,""$#,##0"")",Administrator Training,Deliverable: User guides troubleshooting procedures GPU optimization
-Closeout,Knowledge Transfer,Transfer solution ownership to IT operations,EO Engineer,16,='Estimate Settings'!$C$9,=$E49*$F49,$140,"=TEXT($G49*$H49,""$#,##0"")",Documentation,Comprehensive handover including hardware specs and procedures
-Closeout,Performance Baseline,Establish GPU utilization and performance baselines,EO Engineer,8,='Estimate Settings'!$C$9,=$E50*$F50,$130,"=TEXT($G50*$H50,""$#,##0"")",Knowledge Transfer,Establishes GPU efficiency metrics and cost tracking
-Management,Technical Leadership,Quarterback technical oversight and architecture review,EO Quarterback,"=ROUND(SUM($G$3:$G$28)*0.10,0)",='Estimate Settings'!$C$11,=$E51*$F51,$200,"=TEXT($G51*$H51,""$#,##0"")",,Dell Precision architecture review and GPU optimization guidance
-Management,Project Management,Project coordination planning and management activities,EO Project Manager,"=ROUND(SUM($G$3:$G$28)*0.10,0)",='Estimate Settings'!$C$10,=$E52*$F52,$150,"=TEXT($G52*$H52,""$#,##0"")",,Includes status reporting risk management and vendor coordination
-,,,,,TOTAL HOURS,"=SUM($G$3:$G$30)",TOTAL COST,"=TEXT(SUMPRODUCT($G$3:$G$30,$H$3:$H$30),""$#,##0"")",,EO Sales Engineer: Update phase multipliers in Estimate Settings based on deployment scale
+Discovery,User Assessment,Assess user count authentication requirements and use cases,EO Engineer,24,1,=E25*F25,$150,"=TEXT(G25*H25,""$#,##0"")",,Includes user segmentation and rollout planning
+Discovery,Compliance Review,Review CMMC NIST 800-63 and phishing-resistance requirements,EO Engineer,16,='Estimate Settings'!$C$3,=$E26*$F26,$175,"=TEXT($G26*$H26,""$#,##0"")",,Customer must provide compliance documentation
+Discovery,Integration Analysis,Analyze VPN cloud SSO and identity provider integrations,EO Engineer,24,='Estimate Settings'!$C$3,=$E27*$F27,$175,"=TEXT($G27*$H27,""$#,##0"")",,Identifies integration scope and complexity
+Discovery,Current State,Document current authentication and password reset costs,EO Engineer,16,='Estimate Settings'!$C$3,=$E28*$F28,$150,"=TEXT($G28*$H28,""$#,##0"")",,Baseline for ROI calculation and cost savings
+Planning,MFA Architecture,Design Dell SafeID architecture with HA and AD integration,EO Engineer,32,='Estimate Settings'!$C$4,=$E29*$F29,$200,"=TEXT($G29*$H29,""$#,##0"")",User Assessment,Deliverable: SafeID architecture with RADIUS and SSO design
+Planning,YubiKey Selection,Select YubiKey model and quantity based on requirements,EO Engineer,16,='Estimate Settings'!$C$4,=$E30*$F30,$150,"=TEXT($G30*$H30,""$#,##0"")",Compliance Review,YubiKey 5 NFC for FIDO2 and NFC mobile support
+Planning,Integration Design,Design VPN RADIUS and cloud SSO integration architecture,EO Engineer,24,='Estimate Settings'!$C$4,=$E31*$F31,$200,"=TEXT($G31*$H31,""$#,##0"")",Integration Analysis,RADIUS for VPN SAML for cloud apps
+Planning,Rollout Planning,Develop phased rollout plan and user communication strategy,EO Engineer,24,='Estimate Settings'!$C$4,=$E32*$F32,$150,"=TEXT($G32*$H32,""$#,##0"")",User Assessment,Deliverable: Rollout timeline by department with milestones
+Development,YubiKey Procurement,Order YubiKey 5 NFC tokens for all users,EO Engineer,8,='Estimate Settings'!$C$5,=$E33*$F33,$140,"=TEXT($G33*$H33,""$#,##0"")",YubiKey Selection,Coordinate Dell/Yubico order and track shipping
+Development,SafeID Deployment,Deploy Dell SafeID authentication servers in HA configuration,EO Engineer,32,='Estimate Settings'!$C$5,=$E34*$F34,$175,"=TEXT($G34*$H34,""$#,##0"")",MFA Architecture,Install SafeID configure AD connector and policies
+Development,VPN Integration,Integrate SafeID with Cisco AnyConnect via RADIUS,EO Engineer,24,='Estimate Settings'!$C$5,=$E35*$F35,$175,"=TEXT($G35*$H35,""$#,##0"")",SafeID Deployment,RADIUS configuration and VPN MFA enforcement
+Development,Cloud SSO Setup,Configure Microsoft 365 and AWS SSO with SAML,EO Engineer,24,='Estimate Settings'!$C$5,=$E36*$F36,$175,"=TEXT($G36*$H36,""$#,##0"")",SafeID Deployment,SAML trust and conditional access policies
+Development,Enrollment Portal,Deploy self-service YubiKey enrollment web portal,EO Engineer,24,='Estimate Settings'!$C$5,=$E37*$F37,$160,"=TEXT($G37*$H37,""$#,##0"")",SafeID Deployment,User portal with video tutorials and FAQ
+Development,Monitoring Setup,Configure authentication monitoring and SIEM integration,EO Engineer,16,='Estimate Settings'!$C$5,=$E38*$F38,$150,"=TEXT($G38*$H38,""$#,##0"")",SafeID Deployment,Dashboards for failed logins and token usage
+Testing,Pilot User Enrollment,Enroll 50 pilot users with YubiKey tokens,EO Engineer,16,='Estimate Settings'!$C$6,=$E39*$F39,$140,"=TEXT($G39*$H39,""$#,##0"")",Enrollment Portal,IT and security team pilot validation
+Testing,Authentication Testing,Test YubiKey authentication across VPN and cloud apps,EO Engineer,16,='Estimate Settings'!$C$6,=$E40*$F40,$150,"=TEXT($G40*$H40,""$#,##0"")",Pilot User Enrollment,Validate FIDO2 authentication and user experience
+Testing,Failover Testing,Test backup authentication and SafeID HA failover,EO Engineer,8,='Estimate Settings'!$C$6,=$E41*$F41,$150,"=TEXT($G41*$H41,""$#,##0"")",Authentication Testing,Validate SMS backup and HA server failover
+Testing,User Feedback,Collect pilot feedback and refine enrollment process,EO Engineer,8,='Estimate Settings'!$C$6,=$E42*$F42,$130,"=TEXT($G42*$H42,""$#,##0"")",Authentication Testing,Customer survey and process improvements
+Deployment,Token Distribution,Distribute YubiKeys to all 500 users,EO Engineer,40,='Estimate Settings'!$C$7,=$E43*$F43,$140,"=TEXT($G43*$H43,""$#,##0"")",YubiKey Procurement,Ship to home addresses for remote workers
+Deployment,User Enrollment,Phased enrollment rollout by department,EO Engineer,48,='Estimate Settings'!$C$7,=$E44*$F44,$140,"=TEXT($G44*$H44,""$#,##0"")",Token Distribution,100 users every 2 weeks with self-service portal
+Deployment,MFA Enforcement,Enforce MFA for VPN and cloud applications,EO Engineer,16,='Estimate Settings'!$C$7,=$E45*$F45,$150,"=TEXT($G45*$H45,""$#,##0"")",User Enrollment,Gradual enforcement after 95% adoption
+Deployment,Hypercare Support,Provide user support during MFA enforcement,EO Engineer,32,='Estimate Settings'!$C$7,=$E46*$F46,$130,"=TEXT($G46*$H46,""$#,##0"")",MFA Enforcement,Help desk support for token issues
+Training,User Training,Train users on YubiKey usage and enrollment,EO Engineer,16,='Estimate Settings'!$C$8,=$E47*$F47,$130,"=TEXT($G47*$H47,""$#,##0"")",Hypercare Support,Video tutorial live webinar and FAQ
+Training,Help Desk Training,Train help desk on YubiKey troubleshooting and token reset,EO Engineer,16,='Estimate Settings'!$C$8,=$E48*$F48,$140,"=TEXT($G48*$H48,""$#,##0"")",User Training,SafeID administration backup auth token replacement
+Training,Documentation,Create user guides and help desk runbooks,EO Engineer,16,='Estimate Settings'!$C$8,=$E49*$F49,$130,"=TEXT($G49*$H49,""$#,##0"")",Help Desk Training,Deliverable: User quick-start guide troubleshooting procedures
+Closeout,Compliance Documentation,Complete CMMC Level 2 compliance documentation,EO Engineer,16,='Estimate Settings'!$C$9,=$E50*$F50,$175,"=TEXT($G50*$H50,""$#,##0"")",Documentation,MFA evidence for CMMC assessor review
+Closeout,Knowledge Transfer,Transfer SafeID ownership to security operations,EO Engineer,8,='Estimate Settings'!$C$9,=$E51*$F51,$150,"=TEXT($G51*$H51,""$#,##0"")",Compliance Documentation,Handover including architecture and procedures
+Management,Technical Leadership,Quarterback technical oversight and compliance guidance,EO Quarterback,"=ROUND(SUM($G$3:$G$29)*0.10,0)",='Estimate Settings'!$C$11,=$E52*$F52,$200,"=TEXT($G52*$H52,""$#,##0"")",,CMMC compliance guidance and architecture review
+Management,Project Management,Project coordination planning and change management,EO Project Manager,"=ROUND(SUM($G$3:$G$29)*0.10,0)",='Estimate Settings'!$C$10,=$E53*$F53,$175,"=TEXT($G53*$H53,""$#,##0"")",,Includes rollout coordination risk management user communication
+,,,,,TOTAL HOURS,"=SUM($G$3:$G$31)",TOTAL COST,"=TEXT(SUMPRODUCT($G$3:$G$31,$H$3:$H$31),""$#,##0"")",,EO Sales Engineer: Update phase multipliers based on user count
 # Credits - Applied to Total Cost (Year 1 Only)
 #WIDTH: 27,17,100
 #ALIGN: left,right,left
 Credit Type,Credit Amount,Credit Comments
-Dell Partner Discount,"($15000)",Dell Titanium Partner discount on hardware procurement (negotiate 5-10% on volume orders)
+Dell Partner Discount,"($10000)",Dell Titanium Partner discount on SafeID software and YubiKey hardware (negotiate 5-10%)
 Implementation Discount,$0,No implementation discount applicable
-NET PROFESSIONAL SERVICES COST,"=SUMPRODUCT($G$3:$G$30,$H$3:$H$30)-15000",Total Cost minus Dell Partner discount
+NET PROFESSIONAL SERVICES COST,"=SUMPRODUCT($G$3:$G$31,$H$3:$H$31)-10000",Total Cost minus Dell Partner discount

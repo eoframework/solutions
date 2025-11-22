@@ -185,6 +185,24 @@ This engagement is sized based on the following parameters:
 
 ---
 
+### Our Partnership Advantage
+**layout:** eo_two_column
+
+**Why Partner with Us for Enterprise Security**
+
+- **What We Bring**
+  - 15+ years delivering enterprise firewall solutions with proven results
+  - 100+ successful Juniper SRX deployments across finance, healthcare, government
+  - Juniper Elite Partner with Advanced Security Specialization
+  - Certified security architects with SRX and threat prevention expertise
+- **Value to You**
+  - Pre-validated security policy templates accelerate deployment
+  - Proven migration methodology reduces risk and downtime
+  - Direct Juniper engineering support through elite partner network
+  - Best practices from 100+ implementations avoid common pitfalls
+
+---
+
 ### Investment Summary
 **layout:** eo_table
 
@@ -225,30 +243,6 @@ This solution includes datacenter HA firewall pair, 10 branch firewalls, securit
 - Lower TCO than incumbent firewall renewal with superior performance
 - Predictable annual costs for software and support renewals
 - Professional services ensure rapid deployment with minimal business disruption
-
----
-
-### Value Proposition
-**layout:** eo_two_column
-
-**Quantified Business Benefits**
-
-- **Performance & Scalability**
-  - 8x throughput improvement (10 Gbps to 80 Gbps) supporting business growth
-  - SSL inspection enabled without performance degradation for encrypted threat detection
-  - 2 million concurrent sessions supporting datacenter consolidation and cloud migration
-- **Cost Optimization**
-  - 40% reduction in 3-year security licensing costs vs. incumbent firewall renewal
-  - Eliminate performance bottlenecks causing expensive WAN circuit upgrades
-  - Reduce security operations overhead by 60% with centralized policy management
-- **Security Enhancement**
-  - 70% faster threat response with automated SecIntel feeds blocking C2 communications
-  - Zero-day malware detection through ATP Cloud sandbox before network compromise
-  - 99.9% uptime with sub-second failover protecting business-critical applications
-- **Operational Excellence**
-  - Single-pane management for 20+ firewalls reducing policy deployment from days to minutes
-  - Automated compliance reporting for PCI DSS and SOC 2 audit requirements
-  - SD-WAN integration optimizing branch application performance and reducing MPLS costs
 
 ---
 

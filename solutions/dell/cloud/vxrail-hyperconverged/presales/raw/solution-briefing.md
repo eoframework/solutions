@@ -50,15 +50,15 @@ This engagement is sized based on the following parameters:
 <!-- TABLE_CONFIG: widths=[18, 29, 5, 18, 30] -->
 | Parameter | Scope | | Parameter | Scope |
 |-----------|-------|---|-----------|-------|
-| **Number of Workstations** | 10 Dell Precision 7960 units | | **Workstation Performance** | Dell Precision 7960 dual Xeon Gold |
-| **GPU Configuration** | NVIDIA RTX A6000 48GB | | **Operating System** | Ubuntu 22.04 LTS with CUDA |
-| **Data Science Tools** | Standard stack (PyTorch TensorFlow) | | **Access Control** | Standard file permissions and SSH |
-| **Shared Storage** | Dell PowerScale F600 100TB NAS | | **Data Classification** | Unclassified research data |
-| **Data Scientists** | 10 concurrent users | | **Training Performance** | Target: 80% GPU utilization average |
-| **User Roles** | 2 roles (data scientist admin) | | **Storage Performance** | 7000 MB/s NVMe read per workstation |
-| **Dataset Size per Project** | 5TB average dataset size | | **Deployment Environments** | Production only |
-| **Model Checkpoint Storage** | 2TB model storage requirements | |  |  |
-| **Network Connectivity** | 10GbE to shared storage | |  |  |
+| **Cluster Size** | 8-node VxRail P570 all-NVMe cluster | | **Network Fabric** | 100GbE spine-leaf network |
+| **Storage Capacity** | 200TB usable all-NVMe | | **vSAN Features** | FTT=2 RAID-6 erasure coding |
+| **vSphere Stack** | vSphere 8 Enterprise Plus with NSX | | **Compliance** | Mission-critical with SOC 2 ISO 27001 |
+| **DR Solution** | VMware SRM with RecoverPoint for VMs | | **Encryption** | vSAN and VM encryption with KMS |
+| **VM Count** | 800 VMs including mission-critical databases | | **Latency SLA** | <1ms storage latency for databases |
+| **Database Workloads** | Oracle RAC SQL Always-On SAP HANA | | **Availability** | 99.99% uptime with N+2 fault tolerance |
+| **Storage Type** | All-NVMe 30.72TB per node | | **DR Requirements** | RPO <5 min RTO <15 min with SRM |
+| **IOPS Requirements** | 100000+ IOPS cluster aggregate | |  |  |
+| **Current Infrastructure** | EMC VMAX or NetApp enterprise SAN | |  |  |
 <!-- END SCOPE_SIZING_TABLE -->
 
 *Note: Changes to these parameters may require scope adjustment and additional investment.*

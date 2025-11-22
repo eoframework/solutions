@@ -185,6 +185,24 @@ This engagement is sized based on the following parameters:
 
 ---
 
+### Our Partnership Advantage
+**layout:** eo_two_column
+
+**Why Partner with Us for AI-Driven Wireless**
+
+- **What We Bring**
+  - 12+ years delivering enterprise wireless solutions with proven results
+  - 75+ successful Mist AI wireless deployments across education, healthcare, hospitality
+  - Juniper Elite Partner with Wireless Specialization and AI Expertise
+  - Certified wireless architects with Mist AI and location services expertise
+- **Value to You**
+  - Pre-built WLAN design templates accelerate deployment
+  - Proven RF site survey methodology ensures optimal coverage
+  - Direct Mist AI engineering support through elite partner network
+  - Best practices from 75+ implementations avoid common pitfalls
+
+---
+
 ### Investment Summary
 **layout:** eo_table
 
@@ -225,30 +243,6 @@ This solution includes 50 WiFi 6E access points, 4 PoE switches, Mist Cloud AI m
 - Predictable annual costs for cloud subscriptions and support
 - No controller refresh cycles or hardware maintenance contracts
 - Professional services ensure rapid deployment with minimal business disruption
-
----
-
-### Value Proposition
-**layout:** eo_two_column
-
-**Quantified Business Benefits**
-
-- **AI-Driven Operations**
-  - 90% reduction in WiFi troubleshooting time with Marvis AI root cause analysis
-  - Proactive anomaly detection resolves issues before user complaints and helpdesk tickets
-  - Conversational AI ("Why is conference room WiFi slow?") replaces hours of packet captures
-- **User Experience Excellence**
-  - 99.9% wireless uptime with AI-driven predictive maintenance and self-healing
-  - Seamless roaming with sub-50ms handoff for VoIP and video applications
-  - Client experience SLEs track successful connects, time to connect, and throughput in real-time
-- **Location-Based Services**
-  - Indoor wayfinding with 1-3 meter accuracy using virtual BLE (no physical beacons)
-  - Real-time asset tracking for equipment, devices, and inventory across facilities
-  - Occupancy analytics and space utilization insights for facility optimization
-- **Operational Efficiency**
-  - 60% reduction in wireless helpdesk tickets through AI self-service troubleshooting
-  - Automated RF optimization eliminates manual channel and power tuning
-  - Cloud management reduces infrastructure footprint and eliminates controller maintenance
 
 ---
 
