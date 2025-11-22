@@ -1,4 +1,6 @@
-# SIZING GUIDELINES - Based on Solution Scope (Default: Small)
+# Sizing Guidelines
+#WIDTH: 24,36,28,28,28,51
+#ALIGN: left,left,center,center,center,left
 Category,Component,Small,Medium,Large,Notes
 Cloud Infrastructure,Sentinel Data Ingestion,100-300 GB/month,300-1000 GB/month,1+ TB/month,Daily security log volume
 Cloud Infrastructure,Log Analytics Volume,100-300 GB/month,300-1000 GB/month,1+ TB/month,Total logging capacity
@@ -11,7 +13,9 @@ Support & Maintenance,Support Level,Business hours,24x5 support,24x7 SOC,Securit
 Professional Services,Implementation Hours,400-600 hours,600-900 hours,1000+ hours,Detection rules and playbooks complexity
 Professional Services,Custom Detection Rules,20-50 rules,50-100 rules,100+ rules,KQL analytics rules
 
-# INFRASTRUCTURE COSTS - Quantities Default to Small Scope
+# Infrastructure Costs
+#WIDTH: 23,30,50,12,15,12,15,12,12,15,30
+#ALIGN: left,left,left,right,left,right,right,right,right,right,left
 Category,Component,Description,Quantity,Unit,Unit Price,Annual Cost,Year 2,Year 3,3-Year Total,Notes
 Cloud Infrastructure,Sentinel Data Ingestion,Data ingestion and analysis,300,GB/Month,$250,"=D11*F11*12","=G11","=G11","=G11+H11+I11",SIEM ingestion
 Cloud Infrastructure,Log Analytics Workspace,Log storage and analytics,300,GB/Month,$230,"=D12*F12*12","=G12","=G12","=G12+H12+I12",Centralized logging
@@ -39,7 +43,9 @@ Professional Services,Training Knowledge Transfer,SOC and security team training
 Professional Services,Project Management,Coordination and stakeholder management,50,Hours,$200,"=D34*F34","=0","=0","=G34",One-time oversight
 Professional Services,Hypercare Support,60 days post-launch operational support,46,Hours,$175,"=D35*F35","=0","=0","=G35",One-time hypercare
 
-# CREDITS - Applied per Category (Year 1 Only)
+# Credits
+#WIDTH: 25,25,15,50
+#ALIGN: left,left,right,left
 Category,Credit Type,Credit Amount,Credit Comments
 Cloud Infrastructure,Azure Sentinel Credit,"($9000)",10% credit on Year 1 Sentinel data ingestion
 Software Licenses,Partner Credit,$0,No software credits available
@@ -47,7 +53,9 @@ Support & Maintenance,Managed Services Credit,"($12000)",Partner managed service
 Hardware/Equipment,Equipment Credit,$0,No hardware credits available
 Professional Services,Partner Credit,$0,No professional services credits available
 
-# SUMMARY
+# 3-Year Summary
+#WIDTH: 25,15,15,15,12,12,15
+#ALIGN: left,right,right,right,right,right,right
 Category,Year 1 List,Year 1 Credits,Year 1 Net,Year 2,Year 3,3-Year Total
 Cloud Infrastructure,$191140,"($9000)",$182140,$191140,$191140,$564420
 Software Licenses,$7400,$0,$7400,$7400,$7400,$22200

@@ -1,4 +1,6 @@
 # SCOPE ASSUMPTIONS - BASELINE (MULTIPLIER 1.0),,,,,,,,,,
+#WIDTH: 25,35,33,32,32,39,44
+#ALIGN: left,left,left,left,left,left,left
 Category,Baseline Assumption,Current Scope,Small (1x),Medium (2x),Large (3x),Notes,,,,
 Solution Scope,Data Connectors,10-15 connectors,10-15 connectors,Enhanced data connectors,Enterprise-scale data connectors,Sizing parameter for Data Connectors,,,,
 Solution Scope,Analytics Rules,50 custom detection rules,50 custom detection rules,Enhanced analytics rules,Enterprise-scale analytics rules,Sizing parameter for Analytics Rules,,,,
@@ -18,6 +20,8 @@ Performance,Query Performance,Standard KQL queries,Standard KQL queries,Enhanced
 Environment,Deployment Environments,2 environments (dev prod),2 environments (dev prod),Enhanced deployment environments,Enterprise-scale deployment environments,Sizing parameter for Deployment Environments,,,,
 ,,,,,,,,,,
 # ESTIMATE SETTINGS - EO Sales Engineer Updates Multipliers Based on Customer Scope,,,,,,,,,,
+#WIDTH: 17,22,14,173
+#ALIGN: left,left,center,left
 Phase,Variable Name,Multiplier,Description / Applies To Tasks,,,,,,,
 Discovery,DISCOVERY_MX,1,All Discovery phase tasks,,,,,,,
 Planning,PLANNING_MX,1,All Planning phase tasks,,,,,,,
@@ -30,6 +34,8 @@ Management,MANAGEMENT_MX,1.5,Project Management overhead,,,,,,,
 Leadership,LEADERSHIP_MX,1.5,Technical Leadership overhead,,,,,,,
 ,,,,,,,,,,
 # Level of Effort
+#WIDTH: 16,25,58,18,12,14,12,12,15,25,40
+#ALIGN: left,left,left,left,right,center,right,right,right,left,left
 Phase,Work Package,Task Description,Resource Type,Base Hours,Effort Multiplier,Actual Hours,Rate,Cost Estimate,Dependencies,Notes
 Discovery,Security Requirements Gathering,Conduct security stakeholder interviews and threat modeling,EO Engineer,40,='Estimate Settings'!$C$24,=$E33*$F33,$150,=TEXT($G33*$H33,""$#,##0""),""$#,
 Discovery,Current Security Assessment,Analyze existing security tools logs and incident response,EO Engineer,32,='Estimate Settings'!$C$24,=$E34*$F34,$200,=TEXT($G34*$H34,""$#,##0""),""$#,
@@ -60,3 +66,10 @@ Closeout,Performance Baseline,Establish performance metrics monitoring baselines
 Management,Technical Leadership,Quarterback technical oversight and architecture review,EO Quarterback,"=ROUND(SUM(E2:E27)*0.25,='Estimate Settings'!$C$31,=$E59*$F59,0)",=TEXT($G59*$H59,""$#,##0""),"=TEXT(E28*F28,##0"")"
 Management,Project Management,Project coordination and management activities,EO Project Manager,"=ROUND(SUM(E2:E27)*0.20,='Estimate Settings'!$C$31,=$E60*$F60,0)",=TEXT($G60*$H60,""$#,##0""),"=TEXT(E29*F29,##0"")"
 ,,,,,TOTAL HOURS,=SUM($G$33:$G$60),TOTAL COST,=TEXT(SUMPRODUCT($G$33:$G$60,$H$33:$H$60),""$#,##0""),,EO Sales Engineer: Update multipliers based on customer scope
+# Credits - Applied to Total Cost (Year 1 Only)
+#WIDTH: 27,17,100
+#ALIGN: left,right,left
+Credit Type,Credit Amount,Credit Comments
+Microsoft Partner Services Credit,$0,No partner credits available
+Implementation Discount,$0,No implementation discount applicable
+NET PROFESSIONAL SERVICES COST,"=SUMPRODUCT($G$40:$G$67,$H$40:$H$67)",Total Cost
