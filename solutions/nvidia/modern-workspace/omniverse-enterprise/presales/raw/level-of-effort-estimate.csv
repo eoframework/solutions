@@ -1,29 +1,86 @@
-Phase,Work Package,Task Description,Resource Type,Estimated Hours,Rate,Cost Estimate,Dependencies,Risk Level,Notes
-Discovery,Azure Requirements Gathering,Conduct stakeholder interviews for Azure cloud strategy,EO Engineer,40,$150,"=TEXT(E2*F2,""$#,##0"")",,Medium,Focus on governance scalability and business alignment
-Discovery,Current Environment Assessment,Analyze existing infrastructure and Azure readiness,EO Engineer,32,$200,"=TEXT(E3*F3,""$#,##0"")",,Medium,Include identity networking and application assessment
-Discovery,Azure Services Assessment,Evaluate Azure services and landing zone requirements,EO Engineer,24,$200,"=TEXT(E4*F4,""$#,##0"")",,Medium,Focus on management groups policies and compliance
-Discovery,Compliance Review,Assess governance security and regulatory requirements,EO Engineer,16,$175,"=TEXT(E5*F5,""$#,##0"")",,Medium,Include Azure Policy and compliance frameworks
-Planning,Azure Landing Zone Design,Design Azure landing zone architecture and governance model,EO Engineer,48,$200,"=TEXT(E6*F6,""$#,##0"")",,Medium,Include management groups policies and blueprints
-Planning,Identity and Access Design,Design Azure AD integration and access management strategy,EO Engineer,32,$180,"=TEXT(E7*F7,""$#,##0"")",,Medium,Include SSO RBAC conditional access and PIM
-Planning,Network Architecture Design,Design Azure networking security and hybrid connectivity,EO Engineer,24,$175,"=TEXT(E8*F8,""$#,##0"")",,Medium,Include hub-spoke VNet peering and security
-Planning,Project Planning,Develop Azure implementation timeline and resource allocation,EO Engineer,24,$140,"=TEXT(E9*F9,""$#,##0"")",,Medium,Coordinate with infrastructure security and compliance teams
-Development,Management Groups and Subscriptions,Configure Azure management groups subscription structure and policies,EO Engineer,40,$160,"=TEXT(E10*F10,""$#,##0"")",,Medium,Include policy inheritance governance and billing
-Development,Azure Policy Implementation,Implement Azure policies governance controls and compliance,EO Engineer,60,$145,"=TEXT(E11*F11,""$#,##0"")",,Medium,Include policy definitions initiatives and remediation
-Development,Network Infrastructure,Build Azure networking VNet peering and hybrid connectivity,EO Engineer,48,$140,"=TEXT(E12*F12,""$#,##0"")",,Medium,Include ExpressRoute VPN and network security
-Development,Identity and Access Implementation,Implement Azure AD integration access controls and SSO,EO Engineer,40,$155,"=TEXT(E13*F13,""$#,##0"")",,Medium,Include MFA conditional access and privileged access
-Development,Monitoring and Operations,Build Azure monitoring logging alerting and operational tools,EO Engineer,32,$130,"=TEXT(E14*F14,""$#,##0"")",,Medium,Include Azure Monitor Log Analytics and automation
-Testing,Unit Testing,Develop automated tests for all solution components,EO Engineer,32,$120,"=TEXT(E15*F15,""$#,##0"")",,Medium,Include technology-specific testing frameworks
-Testing,Integration Testing,Test system integrations data flows and external dependencies,EO Engineer,40,$120,"=TEXT(E16*F16,""$#,##0"")",,Medium,Include end-to-end workflow validation
-Testing,Performance Testing,Conduct load performance and scalability testing,EO Engineer,24,$140,"=TEXT(E17*F17,""$#,##0"")",,Medium,Include production-like environment and stress testing
-Testing,Security Testing,Perform security assessments penetration testing and compliance validation,EO Engineer,16,$175,"=TEXT(E18*F18,""$#,##0"")",,Medium,Include vulnerability scanning and compliance checks
-Testing,User Acceptance Testing,Coordinate UAT with business users and stakeholders,EO Engineer,32,$150,"=TEXT(E19*F19,""$#,##0"")",,Medium,Include training feedback collection and sign-off
-Deployment,Production Deployment,Deploy solution to production environment with monitoring,EO Engineer,24,$160,"=TEXT(E20*F20,""$#,##0"")",,Medium,Include blue-green deployment rollback and validation
-Deployment,Go-Live Support,Provide comprehensive support during initial production rollout,EO Engineer,48,$110,"=TEXT(E21*F21,""$#,##0"")",,Medium,Include 24/7 support monitoring and issue resolution
-Training,Administrator Training,Train system administrators and technical support teams,EO Engineer,16,$130,"=TEXT(E22*F22,""$#,##0"")",,Medium,Include hands-on technical training and certification
-Training,End User Training,Train business users on solution functionality and workflows,EO Engineer,24,$120,"=TEXT(E23*F23,""$#,##0"")",,Medium,Include role-based training documentation and support
-Training,Documentation,Create comprehensive technical and user documentation,EO Engineer,32,$110,"=TEXT(E24*F24,""$#,##0"")",,Medium,Include runbooks troubleshooting guides and best practices
-Closeout,Knowledge Transfer,Transfer solution ownership to operations and support teams,EO Engineer,16,$140,"=TEXT(E25*F25,""$#,##0"")",,Medium,Include operational procedures escalation and maintenance
-Closeout,Performance Baseline,Establish performance metrics monitoring baselines and SLAs,EO Engineer,8,$130,"=TEXT(E26*F26,""$#,##0"")",,Medium,Include KPI definition monitoring setup and reporting
-Management,Technical Leadership,Quarterback technical oversight and architecture review,EO Quarterback,"=ROUND(SUM(E2:E26)*0.25,0)",$180,"=TEXT(E27*F27,""$#,##0"")",,Medium,25% of engineering effort
-Management,Project Management,Project coordination and management activities,EO Project Manager,"=ROUND(SUM(E2:E26)*0.20,0)",$150,"=TEXT(E28*F28,""$#,##0"")",,Low,20% of engineering effort
-,,,     TOTAL HOURS,1119,   TOTAL COST,"=TEXT(E2*F2+E3*F3+E4*F4+E5*F5+E6*F6+E7*F7+E8*F8+E9*F9+E10*F10+E11*F11+E12*F12+E13*F13+E14*F14+E15*F15+E16*F16+E17*F17+E18*F18+E19*F19+E20*F20+E21*F21+E22*F22+E23*F23+E24*F24+E25*F25+E26*F26+E27*F27+E28*F28,""$#,##0"")",,,Total Omniverse Enterprise project cost estimate
+# SCOPE ASSUMPTIONS - BASELINE (MULTIPLIER 1.0)
+#WIDTH: 25,35,33,32,32,39,44
+#ALIGN: left,left,left,left,left,left,left
+Category,Baseline Assumption,Current Scope,Small (1x),Medium (2x),Large (3x),Notes
+Solution Scope,GPU Workstations,50x RTX A6000 workstations,25 workstations,50 workstations,100 workstations,Dell Precision 7960 with RTX A6000 48GB
+Solution Scope,Nucleus Servers,2x Nucleus servers (HA),1 server,2 servers (HA),4 servers (distributed),Primary plus replica for high availability
+Integration,Design Team Size,50 designers and engineers,20-30 users,50-75 users,100+ users,Concurrent Omniverse collaboration users
+Integration,Storage Infrastructure,100 TB USD scene storage,50 TB,100 TB,250 TB,NetApp storage for Universal Scene Description files
+Data Volume,3D Scene Data,Multi-TB project files,25-50 TB,100-200 TB,500+ TB,CAD models textures and rendered assets
+Data Volume,Rendering Workloads,Interactive + batch rendering,Interactive only,Interactive + batch,Film-quality batch farm,RTX ray tracing requirements
+Technical Environment,Network Infrastructure,100 GbE network,10 GbE,100 GbE,100 GbE + InfiniBand,Scene sync and file transfer performance
+Technical Environment,Datacenter Readiness,Standard IT infrastructure,Existing network,Minor upgrades,Purpose-built studio,Nucleus server hosting and network capacity
+Technical Environment,Deployment Model,On-premises deployment,Cloud-hosted,Hybrid on-prem,Edge + cloud sync,Nucleus server location
+Security & Compliance,Data Classification,Proprietary 3D designs,Internal use,Confidential IP,Export-controlled designs,Design file protection requirements
+Security & Compliance,Compliance Requirements,Standard security,Basic controls,SOC2 + IP protection,ITAR + trade secret,Regulatory frameworks for design data
+Performance,Real-Time Collaboration,50 concurrent users,10 users,50 users,100+ users,Simultaneous USD scene editing
+Performance,Rendering Performance,RTX ray tracing,Standard rasterization,RTX real-time,Path tracing + denoising,Interactive rendering quality requirements
+Environment,CAD Tool Connectors,5 primary connectors,2-3 tools,5-7 tools,10+ custom connectors,Revit SolidWorks Rhino Blender Maya Unreal integration
+Environment,Rendering Farm,10 GPU render nodes,No farm,10 nodes,50+ nodes,Batch rendering for final output
+
+# ESTIMATE SETTINGS
+#WIDTH: 17,22,14,173
+#ALIGN: left,left,center,left
+Phase,Variable Name,Multiplier,Description / Applies To Tasks
+Discovery,DISCOVERY_MX,1,"All Discovery phase tasks (Design Requirements, Workflow Analysis, Tool Assessment, Team Planning)"
+Planning,PLANNING_MX,1,"All Planning phase tasks (Omniverse Architecture, Nucleus Design, Network Design, Connector Strategy)"
+Development,DEVELOPMENT_MX,1,"All Development phase tasks (Nucleus Deployment, Workstation Setup, Connector Integration, USD Pipeline, Rendering)"
+Testing,TESTING_MX,1,"All Testing phase tasks (System Validation, Collaboration Testing, Rendering Testing, Performance Tuning)"
+Deployment,DEPLOYMENT_MX,1,"All Deployment phase tasks (Production Handoff, Designer Onboarding, Production Projects)"
+Training,TRAINING_MX,1,"All Training phase tasks (Administrator Training, Designer Training, Documentation)"
+Closeout,CLOSEOUT_MX,1,"All Closeout phase tasks (Knowledge Transfer, Performance Baseline)"
+Management,MANAGEMENT_MX,1,Project Management overhead - 10% of actual engineering hours
+Leadership,LEADERSHIP_MX,1,Technical Leadership overhead - 10% of actual engineering hours
+
+# Level of Effort
+#WIDTH: 16,25,58,18,12,14,12,12,15,25,40
+#ALIGN: left,left,left,left,right,center,right,right,right,left,left
+Phase,Work Package,Task Description,Resource Type,Base Hours,Effort Multiplier,Actual Hours,Rate,Cost Estimate,Dependencies,Notes
+Discovery,Design Requirements,Conduct stakeholder interviews for 3D design and collaboration requirements,EO Engineer,24,='Estimate Settings'!$C$3,=$E38*$F38,$200,"=TEXT($G38*$H38,""$#,##0"")",,Includes USD workflow requirements and rendering needs analysis
+Discovery,Workflow Analysis,Analyze current CAD workflows file formats and collaboration pain points,EO Engineer,32,='Estimate Settings'!$C$3,=$E39*$F39,$200,"=TEXT($G39*$H39,""$#,##0"")",,Customer must provide current design tools and project examples
+Discovery,Tool Assessment,Inventory design tools and assess connector requirements,EO Engineer,24,='Estimate Settings'!$C$3,=$E40*$F40,$200,"=TEXT($G40*$H40,""$#,##0"")",,Identifies Revit SolidWorks Rhino Blender Maya Unreal integration needs
+Discovery,Team Planning,Assess design team size roles and concurrent collaboration requirements,EO Engineer,16,='Estimate Settings'!$C$3,=$E41*$F41,$175,"=TEXT($G41*$H41,""$#,##0"")",,Identifies multi-user USD scene editing patterns and access needs
+Planning,Omniverse Architecture,Design Omniverse Enterprise architecture with Nucleus and workstations,EO Engineer,40,='Estimate Settings'!$C$4,=$E42*$F42,$225,"=TEXT($G42*$H42,""$#,##0"")",Design Requirements,Deliverable: Omniverse architecture diagram with USD collaboration workflow
+Planning,Nucleus Server Design,Design Nucleus server configuration with HA and storage backend,EO Engineer,32,='Estimate Settings'!$C$4,=$E43*$F43,$225,"=TEXT($G43*$H43,""$#,##0"")",Omniverse Architecture,Primary replica servers with NetApp storage integration
+Planning,Network Design,Design 100 GbE network for USD scene sync and large file transfers,EO Engineer,24,='Estimate Settings'!$C$4,=$E44*$F44,$200,"=TEXT($G44*$H44,""$#,##0"")",Nucleus Server Design,High-bandwidth network for real-time collaboration
+Planning,Connector Strategy,Plan CAD tool connector deployment and USD pipeline integration,EO Engineer,32,='Estimate Settings'!$C$4,=$E45*$F45,$225,"=TEXT($G45*$H45,""$#,##0"")",Tool Assessment,Connector installation strategy for Revit SolidWorks Rhino Blender Maya
+Planning,Rendering Architecture,Design RTX rendering strategy with Omniverse Farm for batch jobs,EO Engineer,24,='Estimate Settings'!$C$4,=$E46*$F46,$200,"=TEXT($G46*$H46,""$#,##0"")",Omniverse Architecture,Interactive RTX ray tracing plus farm rendering for final output
+Development,Storage Deployment,Deploy and configure NetApp storage for USD scene data,EO Engineer,40,='Estimate Settings'!$C$5,=$E47*$F47,$200,"=TEXT($G47*$H47,""$#,##0"")",Network Design,100 TB storage cluster NFS configuration and performance tuning
+Development,Nucleus Server Deployment,Install and configure 2x Nucleus servers with HA replication,EO Engineer,48,='Estimate Settings'!$C$5,=$E48*$F48,$225,"=TEXT($G48*$H48,""$#,##0"")",Storage Deployment,Primary replica deployment with automatic failover
+Development,Network Configuration,Configure 100 GbE switches and workstation network connectivity,EO Engineer,32,='Estimate Settings'!$C$5,=$E49*$F49,$200,"=TEXT($G49*$H49,""$#,##0"")",Nucleus Server Deployment,Switch configuration VLAN setup and bandwidth management
+Development,Workstation Deployment,Deploy and configure 50x Dell Precision workstations with RTX A6000,EO Engineer,80,='Estimate Settings'!$C$5,=$E50*$F50,$200,"=TEXT($G50*$H50,""$#,##0"")",Network Configuration,Workstation imaging driver installation and Omniverse client setup
+Development,Revit Connector Integration,Install and configure Autodesk Revit connector for BIM workflows,EO Engineer,32,='Estimate Settings'!$C$5,=$E51*$F51,$225,"=TEXT($G51*$H51,""$#,##0"")",Workstation Deployment,Revit plugin installation USD export settings and live sync configuration
+Development,SolidWorks Connector Integration,Install and configure SolidWorks connector for CAD workflows,EO Engineer,32,='Estimate Settings'!$C$5,=$E52*$F52,$225,"=TEXT($G52*$H52,""$#,##0"")",Workstation Deployment,SolidWorks plugin installation assembly sync and materials mapping
+Development,Rhino Connector Integration,Install and configure Rhino connector for industrial design workflows,EO Engineer,24,='Estimate Settings'!$C$5,=$E53*$F53,$225,"=TEXT($G53*$H53,""$#,##0"")",Workstation Deployment,Rhino plugin installation NURBS to USD conversion
+Development,Blender Integration,Configure Blender USD workflows for 3D modeling and animation,EO Engineer,16,='Estimate Settings'!$C$5,=$E54*$F54,$200,"=TEXT($G54*$H54,""$#,##0"")",Workstation Deployment,Blender USD native support and Omniverse connector setup
+Development,Maya Integration,Install and configure Autodesk Maya connector for animation workflows,EO Engineer,24,='Estimate Settings'!$C$5,=$E55*$F55,$225,"=TEXT($G55*$H55,""$#,##0"")",Workstation Deployment,Maya plugin installation scene sync and rendering integration
+Development,Unreal Engine Integration,Configure Unreal Engine for real-time visualization and VR walkthroughs,EO Engineer,32,='Estimate Settings'!$C$5,=$E56*$F56,$225,"=TEXT($G56*$H56,""$#,##0"")",Workstation Deployment,Unreal USD import live link and RTX ray tracing setup
+Development,USD Pipeline Setup,Configure custom USD pipeline with layers variants and references,EO Engineer,40,='Estimate Settings'!$C$5,=$E57*$F57,$250,"=TEXT($G57*$H57,""$#,##0"")",Unreal Engine Integration,Studio-specific USD schema asset structure and version control
+Development,Rendering Farm Setup,Deploy 10x GPU render nodes for Omniverse Farm batch rendering,EO Engineer,40,='Estimate Settings'!$C$5,=$E58*$F58,$225,"=TEXT($G58*$H58,""$#,##0"")",USD Pipeline Setup,Farm controller configuration job queuing and render output management
+Development,RTX Rendering Configuration,Configure RTX ray tracing settings materials and lighting for quality,EO Engineer,24,='Estimate Settings'!$C$5,=$E59*$F59,$200,"=TEXT($G59*$H59,""$#,##0"")",Rendering Farm Setup,RTX settings MDL materials and physically-based rendering optimization
+Development,Security Configuration,Configure user authentication access controls and project permissions,EO Engineer,24,='Estimate Settings'!$C$5,=$E60*$F60,$200,"=TEXT($G60*$H60,""$#,##0"")",RTX Rendering Configuration,SSO integration role-based access and IP protection
+Testing,System Validation,Validate Nucleus servers workstations and RTX GPU functionality,EO Engineer,24,='Estimate Settings'!$C$6,=$E61*$F61,$175,"=TEXT($G61*$H61,""$#,##0"")",Security Configuration,Server health checks GPU diagnostics and storage validation
+Testing,Collaboration Testing,Test multi-user USD scene editing with concurrent designer access,EO Engineer,32,='Estimate Settings'!$C$6,=$E62*$F62,$200,"=TEXT($G62*$H62,""$#,##0"")",System Validation,Real-time sync conflict resolution and version control testing
+Testing,Connector Testing,Validate all CAD tool connectors with representative design files,EO Engineer,40,='Estimate Settings'!$C$6,=$E63*$F63,$225,"=TEXT($G63*$H63,""$#,##0"")",Collaboration Testing,Customer must provide sample Revit SolidWorks Rhino and Maya files
+Testing,Rendering Testing,Test RTX interactive rendering and Farm batch job performance,EO Engineer,24,='Estimate Settings'!$C$6,=$E64*$F64,$200,"=TEXT($G64*$H64,""$#,##0"")",Connector Testing,Ray tracing quality benchmarks and render farm throughput validation
+Testing,Performance Tuning,Optimize USD scene performance RTX settings and network throughput,EO Engineer,24,='Estimate Settings'!$C$6,=$E65*$F65,$225,"=TEXT($G65*$H65,""$#,##0"")",Rendering Testing,Tune scene complexity LOD settings and collaboration performance
+Deployment,Production Handoff,Transition Omniverse platform to production with monitoring and support,EO Engineer,16,='Estimate Settings'!$C$7,=$E66*$F66,$200,"=TEXT($G66*$H66,""$#,##0"")",Performance Tuning,Production readiness validation and operational procedures documentation
+Deployment,Designer Onboarding,Onboard design teams with Nucleus access connector setup and projects,EO Engineer,40,='Estimate Settings'!$C$7,=$E67*$F67,$175,"=TEXT($G67*$H67,""$#,##0"")",Production Handoff,User account setup project workspace creation and initial collaboration support
+Deployment,Production Project Migration,Migrate first production design projects to Omniverse workflows,EO Engineer,48,='Estimate Settings'!$C$7,=$E68*$F68,$200,"=TEXT($G68*$H68,""$#,##0"")",Designer Onboarding,Assist with CAD model import USD conversion and collaborative editing
+Training,Administrator Training,Train IT administrators on Nucleus server management and troubleshooting,EO Engineer,24,='Estimate Settings'!$C$8,=$E69*$F69,$200,"=TEXT($G69*$H69,""$#,##0"")",Production Handoff,Nucleus administration user management storage monitoring and backup
+Training,Designer Training,Train designers on Omniverse workflows USD collaboration and rendering,EO Engineer,40,='Estimate Settings'!$C$8,=$E70*$F70,$200,"=TEXT($G70*$H70,""$#,##0"")",Administrator Training,CAD connector usage live sync version control RTX rendering and best practices
+Training,Advanced USD Training,Train power users on custom USD pipeline materials and automation,EO Engineer,24,='Estimate Settings'!$C$8,=$E71*$F71,$225,"=TEXT($G71*$H71,""$#,##0"")",Designer Training,USD composition scripting MDL materials and pipeline customization
+Training,Documentation,Create technical documentation workflow guides and best practices,EO Engineer,32,='Estimate Settings'!$C$8,=$E72*$F72,$150,"=TEXT($G72*$H72,""$#,##0"")",Advanced USD Training,Deliverable: Operations runbook connector guides USD workflow documentation
+Closeout,Knowledge Transfer,Transfer Omniverse platform ownership to client IT and design teams,EO Engineer,16,='Estimate Settings'!$C$9,=$E73*$F73,$200,"=TEXT($G73*$H73,""$#,##0"")",Documentation,Comprehensive handover including architecture Nucleus management and support
+Closeout,Performance Baseline,Establish collaboration metrics rendering performance and user adoption KPIs,EO Engineer,16,='Estimate Settings'!$C$9,=$E74*$F74,$175,"=TEXT($G74*$H74,""$#,##0"")",Knowledge Transfer,Establishes concurrent users rendering time and ROI metrics
+Management,Technical Leadership,NVIDIA Omniverse technical oversight and USD architecture review,EO Quarterback,"=ROUND(SUM($G$3:$G$41)*0.10,0)",='Estimate Settings'!$C$11,=$E75*$F75,$250,"=TEXT($G75*$H75,""$#,##0"")",,Omniverse expertise USD pipeline design and technical escalation
+Management,Project Management,Project coordination planning and stakeholder management,EO Project Manager,"=ROUND(SUM($G$3:$G$41)*0.10,0)",='Estimate Settings'!$C$10,=$E76*$F76,$175,"=TEXT($G76*$H76,""$#,##0"")",,Includes weekly status Dell/NVIDIA coordination and risk management
+,,,,,TOTAL HOURS,"=SUM($G$3:$G$41)",TOTAL COST,"=TEXT(SUMPRODUCT($G$3:$G$41,$H$3:$H$41),""$#,##0"")",,EO Sales Engineer: Update phase multipliers in Estimate Settings based on deployment scope
+
+# Credits - Applied to Total Cost (Year 1 Only)
+#WIDTH: 27,17,100
+#ALIGN: left,right,left
+Credit Type,Credit Amount,Credit Comments
+NVIDIA Partner Services Credit,"($12000)",NVIDIA Partner Network credit for Omniverse Enterprise deployment and connector integration
+Implementation Discount,$0,No implementation discount applicable
+NET PROFESSIONAL SERVICES COST,"=SUMPRODUCT($G$3:$G$41,$H$3:$H$41)-12000",Total Cost minus NVIDIA Partner credits

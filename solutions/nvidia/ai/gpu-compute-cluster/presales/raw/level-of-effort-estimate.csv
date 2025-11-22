@@ -1,31 +1,80 @@
-Phase,Work Package,Task Description,Resource Type,Estimated Hours,Rate,Cost Estimate,Dependencies,Risk Level,Notes
-Discovery,AI/ML Requirements Gathering,Conduct stakeholder interviews for AI/ML requirements,EO Engineer,40,$150,"=TEXT(E2*F2,""$#,##0"")",,Medium,Focus on data processing workflows and model requirements
-Discovery,Data Analysis,Analyze current data types processing volumes and AI/ML requirements,EO Engineer,32,$200,"=TEXT(E3*F3,""$#,##0"")",,Medium,Data classification and model training requirements
-Discovery,AWS AI Services Assessment,Evaluate AWS AI/ML services (Textract Comprehend SageMaker),EO Engineer,24,$200,"=TEXT(E4*F4,""$#,##0"")",,Medium,Focus on service selection and integration requirements
-Discovery,Compliance Review,Assess data privacy and AI governance requirements,EO Engineer,16,$175,"=TEXT(E5*F5,""$#,##0"")",,Medium,GDPR HIPAA and AI ethics considerations
-Planning,AI/ML Architecture Design,Design AWS AI/ML pipeline and model architecture,EO Engineer,48,$200,"=TEXT(E6*F6,""$#,##0"")",,Medium,Include data flow model training and inference
-Planning,Data Pipeline Design,Design data ingestion preprocessing and feature engineering,EO Engineer,32,$180,"=TEXT(E7*F7,""$#,##0"")",,Medium,Include real-time and batch processing workflows
-Planning,Model Training Strategy,Design model training validation and deployment strategy,EO Engineer,24,$175,"=TEXT(E8*F8,""$#,##0"")",,Medium,Include MLOps and model lifecycle management
-Planning,Project Planning,Develop AI/ML implementation timeline and resource allocation,EO Engineer,24,$140,"=TEXT(E9*F9,""$#,##0"")",,Medium,Coordinate with data science and engineering teams
-Development,AWS AI Infrastructure Setup,Provision SageMaker Textract Comprehend and supporting services,EO Engineer,40,$160,"=TEXT(E10*F10,""$#,##0"")",,Medium,Multi-environment setup with model endpoints
-Development,Data Pipeline Development,Build data ingestion preprocessing and feature pipelines,EO Engineer,80,$130,"=TEXT(E11*F11,""$#,##0"")",,Medium,Include data validation and quality checks
-Development,Model Development,Develop train and optimize AI/ML models,EO Engineer,60,$170,"=TEXT(E12*F12,""$#,##0"")",,Medium,Include hyperparameter tuning and validation
-Development,Model Deployment,Deploy models to production endpoints with monitoring,EO Engineer,48,$165,"=TEXT(E13*F13,""$#,##0"")",,Medium,Include A/B testing and model versioning
-Development,AI Application Logic,Build application logic for model inference and results processing,EO Engineer,40,$130,"=TEXT(E14*F14,""$#,##0"")",,Medium,Handle various data formats and edge cases
-Development,API Development,Create REST APIs for AI/ML model inference,EO Engineer,32,$125,"=TEXT(E15*F15,""$#,##0"")",,Medium,Include authentication rate limiting and scaling
-Development,User Interface,Build interface for data input model interaction and results,EO Engineer,40,$125,"=TEXT(E16*F16,""$#,##0"")",,Medium,Include visualization and explainable AI features
-Testing,Unit Testing,Develop automated tests for all solution components,EO Engineer,32,$120,"=TEXT(E17*F17,""$#,##0"")",,Medium,Include technology-specific testing frameworks
-Testing,Integration Testing,Test system integrations data flows and external dependencies,EO Engineer,40,$120,"=TEXT(E18*F18,""$#,##0"")",,Medium,Include end-to-end workflow validation
-Testing,Performance Testing,Conduct load performance and scalability testing,EO Engineer,24,$140,"=TEXT(E19*F19,""$#,##0"")",,Medium,Include production-like environment and stress testing
-Testing,Security Testing,Perform security assessments penetration testing and compliance validation,EO Engineer,16,$175,"=TEXT(E20*F20,""$#,##0"")",,Medium,Include vulnerability scanning and compliance checks
-Testing,User Acceptance Testing,Coordinate UAT with business users and stakeholders,EO Engineer,32,$150,"=TEXT(E21*F21,""$#,##0"")",,Medium,Include training feedback collection and sign-off
-Deployment,Production Deployment,Deploy solution to production environment with monitoring,EO Engineer,24,$160,"=TEXT(E22*F22,""$#,##0"")",,Medium,Include blue-green deployment rollback and validation
-Deployment,Go-Live Support,Provide comprehensive support during initial production rollout,EO Engineer,48,$110,"=TEXT(E23*F23,""$#,##0"")",,Medium,Include 24/7 support monitoring and issue resolution
-Training,Administrator Training,Train system administrators and technical support teams,EO Engineer,16,$130,"=TEXT(E24*F24,""$#,##0"")",,Medium,Include hands-on technical training and certification
-Training,End User Training,Train business users on solution functionality and workflows,EO Engineer,24,$120,"=TEXT(E25*F25,""$#,##0"")",,Medium,Include role-based training documentation and support
-Training,Documentation,Create comprehensive technical and user documentation,EO Engineer,32,$110,"=TEXT(E26*F26,""$#,##0"")",,Medium,Include runbooks troubleshooting guides and best practices
-Closeout,Knowledge Transfer,Transfer solution ownership to operations and support teams,EO Engineer,16,$140,"=TEXT(E27*F27,""$#,##0"")",,Medium,Include operational procedures escalation and maintenance
-Closeout,Performance Baseline,Establish performance metrics monitoring baselines and SLAs,EO Engineer,8,$130,"=TEXT(E28*F28,""$#,##0"")",,Medium,Include KPI definition monitoring setup and reporting
-Management,Technical Leadership,Quarterback technical oversight and architecture review,EO Quarterback,"=ROUND(SUM(E2:E28)*0.25,0)",$180,"=TEXT(E29*F29,""$#,##0"")",,Medium,25% of engineering effort
-Management,Project Management,Project coordination and management activities,EO Project Manager,"=ROUND(SUM(E2:E28)*0.20,0)",$150,"=TEXT(E30*F30,""$#,##0"")",,Low,20% of engineering effort
-,,,     TOTAL HOURS,1293,   TOTAL COST,"=TEXT(E2*F2+E3*F3+E4*F4+E5*F5+E6*F6+E7*F7+E8*F8+E9*F9+E10*F10+E11*F11+E12*F12+E13*F13+E14*F14+E15*F15+E16*F16+E17*F17+E18*F18+E19*F19+E20*F20+E21*F21+E22*F22+E23*F23+E24*F24+E25*F25+E26*F26+E27*F27+E28*F28+E29*F29+E30*F30,""$#,##0"")",,,Total Gpu Compute Cluster project cost estimate
+# SCOPE ASSUMPTIONS - BASELINE (MULTIPLIER 1.0)
+#WIDTH: 25,35,33,32,32,39,44
+#ALIGN: left,left,left,left,left,left,left
+Category,Baseline Assumption,Current Scope,Small (1x),Medium (2x),Large (3x),Notes
+Solution Scope,GPU Servers,8x Dell R750xa servers,4 servers (16 GPUs),8 servers (32 GPUs),16 servers (64 GPUs),Dell R750xa with 4x A100 40GB per server
+Solution Scope,AI Workload Type,Distributed training,Single-GPU training,Multi-GPU training,Large-scale distributed,Training complexity and model parallelism
+Integration,Data Science Team Size,20 data scientists,10-15 users,20-30 users,40+ users,Concurrent GPU access and job scheduling
+Integration,Storage Infrastructure,200 TB NetApp storage,100 TB,200 TB,500 TB,NVMe all-flash for datasets and checkpoints
+Data Volume,Training Datasets,Multi-TB datasets,50-100 TB,100-300 TB,500+ TB,Dataset storage and streaming requirements
+Data Volume,Model Checkpointing,Regular checkpointing,Daily,Hourly,Continuous,Storage I/O and capacity impact
+Technical Environment,Network Fabric,100 GbE Ethernet,1 GbE,100 GbE RDMA,InfiniBand,Multi-node distributed training performance
+Technical Environment,Datacenter Readiness,Standard datacenter,Existing racks,Minor upgrades,Major buildout,80 kW power and cooling infrastructure
+Technical Environment,Deployment Model,On-premises datacenter,Colocation,On-prem datacenter,Hybrid cloud,Physical deployment location
+Security & Compliance,Data Classification,Proprietary models,Internal use,Confidential,Highly restricted,Model and dataset protection requirements
+Security & Compliance,Compliance Requirements,Standard security,Basic controls,SOC2,HIPAA + SOC2,Regulatory frameworks for AI workloads
+Performance,GPU Utilization Target,80% utilization,60%+ baseline,80% optimized,90%+ with advanced scheduling,Resource efficiency and ROI
+Performance,Training Time Requirements,Hours to days,Weeks acceptable,Days required,Hours critical,Time-to-insight business impact
+Environment,Software Stack,NVIDIA AI Enterprise,NGC containers only,AI Enterprise + Kubeflow,Custom platform + support,Software licensing and MLOps complexity
+Environment,Management Platform,Kubernetes with GPU Operator,Manual scheduling,Kubernetes + MLOps,Run:ai or DGX Platform,Cluster orchestration complexity
+
+# ESTIMATE SETTINGS
+#WIDTH: 17,22,14,173
+#ALIGN: left,left,center,left
+Phase,Variable Name,Multiplier,Description / Applies To Tasks
+Discovery,DISCOVERY_MX,1,"All Discovery phase tasks (AI Requirements, Workload Analysis, Infrastructure Assessment, Team Planning)"
+Planning,PLANNING_MX,1,"All Planning phase tasks (Cluster Architecture, Network Design, Storage Design, MLOps Platform)"
+Development,DEVELOPMENT_MX,1,"All Development phase tasks (Server Installation, Kubernetes Deployment, GPU Operator, Storage Setup, MLOps Tools)"
+Testing,TESTING_MX,1,"All Testing phase tasks (System Validation, Network Testing, Workload Testing, Performance Tuning)"
+Deployment,DEPLOYMENT_MX,1,"All Deployment phase tasks (Production Handoff, User Onboarding, Production Workloads)"
+Training,TRAINING_MX,1,"All Training phase tasks (Administrator Training, Data Scientist Training, Documentation)"
+Closeout,CLOSEOUT_MX,1,"All Closeout phase tasks (Knowledge Transfer, Performance Baseline)"
+Management,MANAGEMENT_MX,1,Project Management overhead - 10% of actual engineering hours
+Leadership,LEADERSHIP_MX,1,Technical Leadership overhead - 10% of actual engineering hours
+
+# Level of Effort
+#WIDTH: 16,25,58,18,12,14,12,12,15,25,40
+#ALIGN: left,left,left,left,right,center,right,right,right,left,left
+Phase,Work Package,Task Description,Resource Type,Base Hours,Effort Multiplier,Actual Hours,Rate,Cost Estimate,Dependencies,Notes
+Discovery,AI/ML Requirements,Conduct stakeholder interviews for AI workload requirements,EO Engineer,24,='Estimate Settings'!$C$3,=$E38*$F38,$200,"=TEXT($G38*$H38,""$#,##0"")",,Includes distributed training requirements and team needs analysis
+Discovery,Workload Analysis,Analyze AI models frameworks and compute requirements,EO Engineer,32,='Estimate Settings'!$C$3,=$E39*$F39,$200,"=TEXT($G39*$H39,""$#,##0"")",,Customer must provide representative training workloads and model types
+Discovery,Infrastructure Assessment,Evaluate datacenter power cooling network and rack capacity,EO Engineer,32,='Estimate Settings'!$C$3,=$E40*$F40,$200,"=TEXT($G40*$H40,""$#,##0"")",,Customer must provide facility specifications and available capacity
+Discovery,Team Planning,Assess data science team size roles and GPU resource allocation,EO Engineer,16,='Estimate Settings'!$C$3,=$E41*$F41,$175,"=TEXT($G41*$H41,""$#,##0"")",,Identifies multi-user access patterns and Kubernetes scheduling requirements
+Planning,Cluster Architecture Design,Design GPU cluster configuration with compute storage and Kubernetes,EO Engineer,40,='Estimate Settings'!$C$4,=$E42*$F42,$200,"=TEXT($G42*$H42,""$#,##0"")",AI/ML Requirements,Deliverable: Cluster architecture diagram with Dell R750xa servers and A100 GPUs
+Planning,Network Design,Design 100 GbE RDMA network for distributed training,EO Engineer,32,='Estimate Settings'!$C$4,=$E43*$F43,$200,"=TEXT($G43*$H43,""$#,##0"")",Cluster Architecture Design,Mellanox ConnectX-6 NICs and switch topology design
+Planning,Storage Architecture,Design 200 TB NetApp storage for datasets checkpoints and model registry,EO Engineer,24,='Estimate Settings'!$C$4,=$E44*$F44,$200,"=TEXT($G44*$H44,""$#,##0"")",Workload Analysis,NFSv4 high-performance storage for training data streaming
+Planning,MLOps Platform Design,Design Kubeflow pipelines and MLflow experiment tracking platform,EO Engineer,32,='Estimate Settings'!$C$4,=$E45*$F45,$225,"=TEXT($G45*$H45,""$#,##0"")",Cluster Architecture Design,MLOps workflow for model development deployment and monitoring
+Development,Server Installation,Install and configure 8x Dell R750xa servers with A100 GPUs,EO Engineer,64,='Estimate Settings'!$C$5,=$E46*$F46,$200,"=TEXT($G46*$H46,""$#,##0"")",Network Design,Physical installation cabling and BIOS configuration
+Development,Network Configuration,Deploy and configure 100 GbE switches and RDMA networking,EO Engineer,40,='Estimate Settings'!$C$5,=$E47*$F47,$200,"=TEXT($G47*$H47,""$#,##0"")",Server Installation,Switch configuration NIC bonding and RDMA validation
+Development,Storage Deployment,Deploy and configure NetApp AFF A400 storage cluster,EO Engineer,48,='Estimate Settings'!$C$5,=$E48*$F48,$200,"=TEXT($G48*$H48,""$#,##0"")",Network Configuration,Storage cluster installation NFSv4 setup and performance tuning
+Development,Kubernetes Deployment,Install and configure Kubernetes cluster across GPU nodes,EO Engineer,56,='Estimate Settings'!$C$5,=$E49*$F49,$225,"=TEXT($G49*$H49,""$#,##0"")",Storage Deployment,Kubernetes control plane worker nodes and CNI networking
+Development,GPU Operator Setup,Install and configure NVIDIA GPU Operator for GPU scheduling,EO Engineer,40,='Estimate Settings'!$C$5,=$E50*$F50,$225,"=TEXT($G50*$H50,""$#,##0"")",Kubernetes Deployment,GPU device plugin time-slicing and MIG configuration
+Development,NGC Container Integration,Deploy NGC GPU-accelerated containers for PyTorch TensorFlow and RAPIDS,EO Engineer,32,='Estimate Settings'!$C$5,=$E51*$F51,$200,"=TEXT($G51*$H51,""$#,##0"")",GPU Operator Setup,AI framework containers and GPU-optimized libraries
+Development,Kubeflow Deployment,Deploy Kubeflow platform for ML pipelines and experiment tracking,EO Engineer,48,='Estimate Settings'!$C$5,=$E52*$F52,$225,"=TEXT($G52*$H52,""$#,##0"")",NGC Container Integration,Kubeflow pipelines notebooks and Katib hyperparameter tuning
+Development,Triton Inference Setup,Deploy Triton Inference Server for production model serving,EO Engineer,32,='Estimate Settings'!$C$5,=$E53*$F53,$200,"=TEXT($G53*$H53,""$#,##0"")",Kubeflow Deployment,Model repository configuration and inference optimization
+Development,Monitoring Setup,Configure Prometheus Grafana for GPU utilization and job metrics,EO Engineer,24,='Estimate Settings'!$C$5,=$E54*$F54,$175,"=TEXT($G54*$H54,""$#,##0"")",Triton Inference Setup,GPU dashboards alert rules and performance monitoring
+Development,Security Configuration,Configure RBAC network policies and access controls,EO Engineer,24,='Estimate Settings'!$C$5,=$E55*$F55,$200,"=TEXT($G55*$H55,""$#,##0"")",Monitoring Setup,Kubernetes security user authentication and resource quotas
+Testing,System Validation,Validate GPU servers A100 health and hardware functionality,EO Engineer,24,='Estimate Settings'!$C$6,=$E56*$F56,$175,"=TEXT($G56*$H56,""$#,##0"")",Security Configuration,GPU diagnostics memory tests and system health verification
+Testing,Network Performance,Test 100 GbE throughput and RDMA performance,EO Engineer,16,='Estimate Settings'!$C$6,=$E57*$F57,$200,"=TEXT($G57*$H57,""$#,##0"")",System Validation,NCCL bandwidth tests and multi-node communication validation
+Testing,Storage Performance,Test NetApp storage throughput IOPS and NFS performance,EO Engineer,16,='Estimate Settings'!$C$6,=$E58*$F58,$175,"=TEXT($G58*$H58,""$#,##0"")",Network Performance,Dataset streaming tests checkpoint I/O and read/write benchmarks
+Testing,Workload Benchmarking,Run AI/ML benchmark workloads to validate training performance,EO Engineer,32,='Estimate Settings'!$C$6,=$E59*$F59,$200,"=TEXT($G59*$H59,""$#,##0"")",Storage Performance,Customer must provide representative training workloads for validation
+Testing,Performance Tuning,Optimize GPU utilization Kubernetes scheduling and NCCL settings,EO Engineer,24,='Estimate Settings'!$C$6,=$E60*$F60,$225,"=TEXT($G60*$H60,""$#,##0"")",Workload Benchmarking,Tune GPU affinity NCCL parameters and Kubernetes resource limits
+Deployment,Production Handoff,Transition GPU cluster to production with monitoring and support,EO Engineer,16,='Estimate Settings'!$C$7,=$E61*$F61,$200,"=TEXT($G61*$H61,""$#,##0"")",Performance Tuning,Production readiness validation and operational procedures documentation
+Deployment,User Onboarding,Onboard data science teams with Kubernetes namespace and GPU quota setup,EO Engineer,24,='Estimate Settings'!$C$7,=$E62*$F62,$150,"=TEXT($G62*$H62,""$#,##0"")",Production Handoff,User account setup resource allocation and initial job submission support
+Deployment,Production Workload Migration,Migrate initial training workloads to GPU cluster,EO Engineer,32,='Estimate Settings'!$C$7,=$E63*$F63,$175,"=TEXT($G63*$H63,""$#,##0"")",User Onboarding,Assist with first production model training jobs and troubleshooting
+Training,Administrator Training,Train IT administrators on Kubernetes cluster management and GPU operations,EO Engineer,24,='Estimate Settings'!$C$8,=$E64*$F64,$200,"=TEXT($G64*$H64,""$#,##0"")",Production Handoff,Kubernetes administration GPU monitoring and troubleshooting
+Training,Data Scientist Training,Train data scientists on Kubeflow GPU job submission and best practices,EO Engineer,32,='Estimate Settings'!$C$8,=$E65*$F65,$175,"=TEXT($G65*$H65,""$#,##0"")",Administrator Training,Distributed training multi-GPU jobs and MLOps workflows
+Training,Documentation,Create technical documentation runbooks and operational procedures,EO Engineer,32,='Estimate Settings'!$C$8,=$E66*$F66,$150,"=TEXT($G66*$H66,""$#,##0"")",Data Scientist Training,Deliverable: Operations runbook troubleshooting guides and user documentation
+Closeout,Knowledge Transfer,Transfer GPU cluster ownership to client infrastructure team,EO Engineer,16,='Estimate Settings'!$C$9,=$E67*$F67,$200,"=TEXT($G67*$H67,""$#,##0"")",Documentation,Comprehensive handover including architecture Kubernetes GPU management
+Closeout,Performance Baseline,Establish GPU utilization metrics and performance monitoring baselines,EO Engineer,16,='Estimate Settings'!$C$9,=$E68*$F68,$175,"=TEXT($G68*$H68,""$#,##0"")",Knowledge Transfer,Establishes GPU efficiency KPIs training throughput and cost-per-job metrics
+Management,Technical Leadership,NVIDIA GPU infrastructure technical oversight and architecture review,EO Quarterback,"=ROUND(SUM($G$3:$G$37)*0.10,0)",='Estimate Settings'!$C$11,=$E69*$F69,$225,"=TEXT($G69*$H69,""$#,##0"")",,GPU cluster expertise Kubernetes optimization and technical escalation
+Management,Project Management,Project coordination planning and stakeholder management,EO Project Manager,"=ROUND(SUM($G$3:$G$37)*0.10,0)",='Estimate Settings'!$C$10,=$E70*$F70,$175,"=TEXT($G70*$H70,""$#,##0"")",,Includes weekly status Dell/NVIDIA coordination and risk management
+,,,,,TOTAL HOURS,"=SUM($G$3:$G$37)",TOTAL COST,"=TEXT(SUMPRODUCT($G$3:$G$37,$H$3:$H$37),""$#,##0"")",,EO Sales Engineer: Update phase multipliers in Estimate Settings based on cluster deployment scope
+
+# Credits - Applied to Total Cost (Year 1 Only)
+#WIDTH: 27,17,100
+#ALIGN: left,right,left
+Credit Type,Credit Amount,Credit Comments
+NVIDIA Partner Services Credit,"($10000)",NVIDIA Partner Network credit for GPU cluster deployment and AI Enterprise integration
+Implementation Discount,$0,No implementation discount applicable
+NET PROFESSIONAL SERVICES COST,"=SUMPRODUCT($G$3:$G$37,$H$3:$H$37)-10000",Total Cost minus NVIDIA Partner credits
