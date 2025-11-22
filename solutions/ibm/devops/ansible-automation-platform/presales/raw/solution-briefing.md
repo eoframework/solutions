@@ -2,9 +2,9 @@
 presentation_title: Solution Briefing
 solution_name: IBM Red Hat Ansible Automation Platform
 presenter_name: [Presenter Name]
-client_logo: eof-tools/doc-tools/brands/default/assets/logos/client_logo.png
-footer_logo_left: eof-tools/doc-tools/brands/default/assets/logos/consulting_company_logo.png
-footer_logo_right: eof-tools/doc-tools/brands/default/assets/logos/eo-framework-logo-real.png
+client_logo: ../../../../../../eof-tools/converters/brands/default/assets/logos/client_logo.png
+footer_logo_left: ../../../../../../eof-tools/converters/brands/default/assets/logos/consulting_company_logo.png
+footer_logo_right: ../../../../../../eof-tools/converters/brands/default/assets/logos/eo-framework-logo-real.png
 ---
 
 # IBM Red Hat Ansible Automation Platform - Solution Briefing
