@@ -25,24 +25,44 @@ eoframework_logo: ../../assets/logos/eo-framework-logo-real.png
 
 ---
 
-## 1. EXECUTIVE SUMMARY
+# Executive Summary
 
-### 1.1 Project Overview
-This Statement of Work (SOW) outlines the scope, deliverables, timeline, and terms for the implementation of {SOLUTION_NAME} for [CLIENT_NAME]. The project will deliver [PRIMARY_BUSINESS_OUTCOME] through [HIGH_LEVEL_APPROACH].
+## Project Overview
+This Statement of Work (SOW) outlines the scope, deliverables, timeline, and terms for the implementation of Juniper Mist AI Network for [CLIENT_NAME]. The project will deliver AI-driven wireless network delivering 99.9% uptime and 90% troubleshooting time reduction through deployment of Juniper Mist cloud-managed WiFi 6E infrastructure with predictive analytics.
 
-### 1.2 Business Objectives
-- **Primary Goal:** [PRIMARY_BUSINESS_OBJECTIVE]
-- **Success Metrics:** [QUANTIFIED_SUCCESS_CRITERIA]
-- **Expected ROI:** [ROI_PERCENTAGE] over [TIME_PERIOD]
+## Business Objectives
+- Deploy AI-powered wireless network with 50 WiFi 6E access points, Marvis virtual assistant, and location services
+- Achieve 99.9% wireless uptime with AI anomaly detection
+- Reduce wireless helpdesk tickets by 60% through Marvis AI self-service troubleshooting
+- Eliminate manual RF optimization with automated channel and power adjustment
 
-### 1.3 Project Duration
+## Project Duration
 **Start Date:** [PROJECT_START_DATE]
 **End Date:** [PROJECT_END_DATE]
-**Total Duration:** [PROJECT_DURATION] weeks
+**Total Duration:** 8 weeks
 
 ---
 
-## 2. SCOPE OF WORK
+# Background & Objectives
+
+## Current State
+Current wireless infrastructure with poor WiFi coverage, manual troubleshooting, and no visibility into client experience.
+
+## Business Objectives
+- Eliminate 90% of WiFi troubleshooting time with AI root cause analysis
+- Achieve 99.9% wireless uptime with proactive anomaly detection
+- Enable location-based services with virtual Bluetooth LE for wayfinding and asset tracking
+- Reduce wireless helpdesk tickets by 60% through AI-driven self-service
+
+## Success Metrics
+- 99.9% wireless uptime with AI-driven predictive maintenance
+- 60% reduction in wireless helpdesk tickets
+- Zero manual RF optimization with automated channel and power tuning
+- Real-time client experience SLE tracking with measurable improvements
+
+---
+
+# Scope of Work
 
 ### 2.0 Engagement Scope Parameters
 
@@ -73,26 +93,30 @@ This engagement is sized based on the following parameters:
 
 *Note: Changes to these parameters may require scope adjustment and additional investment.*
 
-### 2.1 In-Scope Activities
-The following services and deliverables are included in this SOW:
+## In Scope
 
-#### 2.1.1 Discovery & Planning Phase
-- [ ] Stakeholder interviews and requirements gathering
-- [ ] Current state assessment and technical evaluation
-- [ ] Solution architecture design and documentation
-- [ ] Project planning and resource allocation
-- [ ] Risk assessment and mitigation planning
+#### Discovery & Planning Phase (Weeks 1-2)
+- [x] Wireless requirements assessment analyzing current WiFi coverage and performance
+- [x] Facility assessment reviewing building layouts and coverage requirements
+- [x] RF site survey using Mist AI planning tools for AP placement design
+- [x] WLAN architecture design with SSID strategy and VLAN segmentation
+- [x] Location services design for vBLE indoor positioning and wayfinding
 
-#### 2.1.2 Implementation Phase
-- [ ] Infrastructure provisioning and configuration
-- [ ] Application deployment and customization
-- [ ] System integration and data migration
-- [ ] Security configuration and hardening
-- [ ] Performance optimization and tuning
+#### Implementation Phase (Weeks 3-6)
+- [x] Switch infrastructure deployment with EX4400 PoE switches
+- [x] Mist Cloud configuration with SSIDs, VLANs, and RF policies
+- [x] AP installation deploying 50 Juniper AP45 WiFi 6E access points
+- [x] Authentication integration with RADIUS or Active Directory
+- [x] Marvis AI activation for AI-driven troubleshooting
+- [x] Location services setup with vBLE and wayfinding maps
+- [x] Wired Assurance configuration for unified management
 
-#### 2.1.3 Testing & Validation Phase
-- [ ] Unit and integration testing
-- [ ] Performance and security testing
+#### Testing & Validation Phase (Week 7)
+- [x] RF validation testing with coverage and throughput verification
+- [x] Client connectivity testing across all wireless networks
+- [x] Location services testing for positioning accuracy
+- [x] Performance testing with high-density client load
+- [x] User acceptance testing with IT and business users
 - [ ] User acceptance testing coordination
 - [ ] Bug fixes and issue resolution
 - [ ] Go-live readiness assessment
@@ -118,7 +142,9 @@ The following activities are explicitly excluded from this SOW:
 
 ---
 
-## 3. DELIVERABLES
+# Deliverables & Timeline
+
+## Deliverables
 
 ### 3.1 Documentation Deliverables
 | Deliverable | Description | Due Date | Format |
@@ -146,11 +172,7 @@ The following activities are explicitly excluded from this SOW:
 - Technical documentation and procedures
 - Recorded training sessions for future reference
 
----
-
-## 4. PROJECT TIMELINE & MILESTONES
-
-### 4.1 Project Phases
+## Project Milestones
 | Phase | Duration | Start Date | End Date | Key Milestones |
 |-------|----------|------------|----------|----------------|
 | **Discovery & Planning** | 2 weeks | [DATE] | [DATE] | Requirements approved, Architecture signed-off |
@@ -167,7 +189,7 @@ The following activities are explicitly excluded from this SOW:
 
 ---
 
-## 5. ROLES & RESPONSIBILITIES
+# Roles & Responsibilities
 
 ### 5.1 Vendor Responsibilities ([VENDOR_NAME])
 - **Project Manager:** Overall project coordination and delivery management
@@ -191,7 +213,30 @@ The following activities are explicitly excluded from this SOW:
 
 ---
 
-## 6. COMMERCIAL TERMS
+# Architecture & Design
+
+## Architecture Overview
+Cloud-managed WiFi 6E architecture with 50 AP45 access points, Mist AI engine, and location services platform.
+
+## Security & Compliance
+
+Enterprise wireless security with 802.1X RADIUS authentication and basic SOC 2 compliance.
+
+---
+
+# Testing & Validation
+
+Comprehensive RF validation, client connectivity testing, location services testing, and performance validation.
+
+---
+
+# Handover & Support
+
+Complete knowledge transfer with Mist dashboard training, Marvis AI training, and SLE baseline establishment.
+
+---
+
+# Investment Summary
 
 ### 6.1 Project Investment
 | Category | Description | Amount |
@@ -285,7 +330,17 @@ Vendor's liability is limited to the total contract value. Neither party shall b
 
 ---
 
-## 11. APPROVAL & SIGNATURES
+# Terms & Conditions
+
+## Intellectual Property
+Client retains ownership of wireless configurations and business data. Vendor retains ownership of implementation methodologies.
+
+## Warranty & Support
+30-day warranty on all deliverables from production handoff date.
+
+---
+
+# Sign-Off
 
 ### Client Approval ([CLIENT_NAME])
 
