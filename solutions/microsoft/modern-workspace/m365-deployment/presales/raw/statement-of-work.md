@@ -1,13 +1,23 @@
-# STATEMENT OF WORK (SOW)
-
-**Document Version:** 1.0
-**Date:** [DATE]
-**Prepared by:** [VENDOR_NAME]
-**Client:** [CLIENT_NAME]
-**Project:** {SOLUTION_NAME} Implementation
-**SOW Number:** [SOW_NUMBER]
-
 ---
+# Document Metadata
+document_title: Statement of Work
+technology_provider: Microsoft
+project_name: Microsoft 365 Enterprise Deployment
+client_name: [Client Name]
+client_contact: [Contact Name | Email | Phone]
+consulting_company: [Consulting Company Name]
+consultant_contact: [Contact Name | Email | Phone]
+opportunity_no: [OPP-YYYY-###]
+document_date: [Month DD, YYYY]
+version: 1.0
+client_logo: ../../assets/logos/client_logo.png
+vendor_logo: ../../assets/logos/consulting_company_logo.png
+eoframework_logo: ../../assets/logos/eo-framework-logo-real.png
+---
+
+# Executive Summary
+
+This Statement of Work (SOW) defines the scope, deliverables, roles, and terms for the Microsoft 365 Enterprise Deployment project for [Client Name]. This engagement will deliver a modern cloud collaboration platform transforming workplace productivity through Exchange Online, SharePoint, Teams, and comprehensive security with zero-trust policies and integrated threat protection.
 
 ## 1. EXECUTIVE SUMMARY
 

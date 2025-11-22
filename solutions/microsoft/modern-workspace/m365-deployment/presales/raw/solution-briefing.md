@@ -50,14 +50,6 @@ This engagement is sized based on the following parameters:
 <!-- TABLE_CONFIG: widths=[18, 29, 5, 18, 30] -->
 | Parameter | Scope | | Parameter | Scope |
 |-----------|-------|---|-----------|-------|
-| **Total Users** | 500 M365 E5 users | | **Availability Requirements** | 99.9% (M365 SLA) |
-| **M365 Services** | Exchange SharePoint Teams OneDrive | | **Infrastructure Complexity** | Hybrid Exchange during migration |
-| **Email Migration Volume** | 250 GB total mailbox data | | **Security Requirements** | Zero-trust Conditional Access MFA |
-| **File Migration Volume** | 5 TB SharePoint and OneDrive | | **Compliance Frameworks** | SOC 2 GDPR HIPAA |
-| **Teams Phone Users** | 150 users with PSTN calling | | **Authentication** | Azure AD Connect SSO with MFA |
-| **Audio Conferencing** | 200 users dial-in access | | **Device Management** | Intune MDM for 500 endpoints |
-| **External Sharing** | Controlled external collaboration | | **Deployment Timeline** | 4 months pilot to production |
-| **Support Coverage** | 24x7 user helpdesk support | |  |  |
 <!-- END SCOPE_SIZING_TABLE -->
 
 *Note: Changes to these parameters may require scope adjustment and additional investment.*
@@ -185,8 +177,8 @@ This engagement is sized based on the following parameters:
 | Cost Category | Year 1 List | Year 1 Credits | Year 1 Net | Year 2 | Year 3 | 3-Year Total |
 |---------------|-------------|----------------|------------|--------|--------|--------------|
 | Professional Services | $79,000 | $0 | $79,000 | $0 | $0 | $79,000 |
-| Software Licenses | $399,000 | $0 | $399,000 | $399,000 | $399,000 | $1,197,000 |
 | Cloud Infrastructure | $24,000 | $0 | $24,000 | $24,000 | $24,000 | $72,000 |
+| Software Licenses | $399,000 | $0 | $399,000 | $399,000 | $399,000 | $1,197,000 |
 | Support & Maintenance | $42,744 | $0 | $42,744 | $42,744 | $42,744 | $128,232 |
 | **TOTAL** | **$544,744** | **$0** | **$544,744** | **$465,744** | **$465,744** | **$1,476,232** |
 <!-- END COST_SUMMARY_TABLE -->
@@ -208,6 +200,11 @@ This engagement is sized based on the following parameters:
 - Year 1 includes $79K professional services for migration and security configuration
 - M365 E5 provides comprehensive security compliance and productivity (no add-ons needed)
 - 24x7 support ensures business continuity during migration and post-deployment
+
+*Credit Program Talking Points:*
+- No Microsoft partner credits available for commercial M365 licensing
+- Microsoft FastTrack assistance is free for organizations with 500+ seats
+- Annual commitment provides discount vs month-to-month pricing
 
 *Handling Objections:*
 - Can we use M365 E3? E5 provides advanced security (Defender Purview) and compliance required for your industry

@@ -50,14 +50,6 @@ This engagement is sized based on the following parameters:
 <!-- TABLE_CONFIG: widths=[18, 29, 5, 18, 30] -->
 | Parameter | Scope | | Parameter | Scope |
 |-----------|-------|---|-----------|-------|
-| **CUI User Count** | 50 users accessing CUI | | **Availability Requirements** | 99.9% (GCC High SLA) |
-| **CMMC Level** | Level 2 (Advanced Cyber Hygiene) | | **Infrastructure Complexity** | Azure Gov + M365 GCC High |
-| **NIST 800-171 Controls** | All 110 controls implemented | | **Security Requirements** | FedRAMP High FIPS 140-2 |
-| **Azure Government Workloads** | 4 VMs 2TB storage | | **Compliance Frameworks** | CMMC Level 2 NIST 800-171 |
-| **Total CUI Data Volume** | 2 TB CUI data storage | | **Authentication** | CAC/PIV smart card MFA |
-| **Sentinel SIEM Ingestion** | 100 GB/month logs | | **Assessment Timeline** | 6 months to C3PAO assessment |
-| **M365 Services** | Email SharePoint Teams OneDrive | | **Deployment Environments** | 1 production GCC High tenant |
-| **Support Coverage** | 24x7 managed SOC services | |  |  |
 <!-- END SCOPE_SIZING_TABLE -->
 
 *Note: Changes to these parameters may require scope adjustment and additional investment.*
@@ -185,8 +177,8 @@ This engagement is sized based on the following parameters:
 | Cost Category | Year 1 List | Year 1 Credits | Year 1 Net | Year 2 | Year 3 | 3-Year Total |
 |---------------|-------------|----------------|------------|--------|--------|--------------|
 | Professional Services | $74,400 | $0 | $74,400 | $0 | $0 | $74,400 |
-| Software Licenses | $87,600 | $0 | $87,600 | $87,600 | $87,600 | $262,800 |
 | Cloud Infrastructure | $47,640 | $0 | $47,640 | $47,640 | $47,640 | $142,920 |
+| Software Licenses | $87,600 | $0 | $87,600 | $87,600 | $87,600 | $262,800 |
 | Support & Maintenance | $18,000 | $0 | $18,000 | $18,000 | $18,000 | $54,000 |
 | **TOTAL** | **$227,640** | **$0** | **$227,640** | **$153,240** | **$153,240** | **$534,120** |
 <!-- END COST_SUMMARY_TABLE -->
@@ -208,6 +200,11 @@ This engagement is sized based on the following parameters:
 - Year 1 includes $74K professional services for assessment migration and certification prep
 - M365 GCC High E5 provides comprehensive security and compliance (no add-ons required)
 - 24x7 SOC monitoring included in support for incident response and threat detection
+
+*Credit Program Talking Points:*
+- No Microsoft partner credits available for government licensing (GCC High)
+- Pricing is fixed per user per month with annual commitment discounts
+- Federal pricing is non-negotiable but provides FedRAMP High compliance out-of-box
 
 *Handling Objections:*
 - Can we use commercial M365? No - DoD requires GCC High for CUI (CMMC mandate)
