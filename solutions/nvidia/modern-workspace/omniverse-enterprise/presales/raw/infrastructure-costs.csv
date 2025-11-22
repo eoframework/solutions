@@ -1,7 +1,7 @@
 # Sizing Guidelines
 #WIDTH: 24,36,28,28,28,51
 #ALIGN: left,left,center,center,center,left
-Category,Component,Small (25 Users),Medium (50 Users),Large (100 Users),Notes
+Category,Component,Small,Medium,Large,Notes
 User Workstations,RTX Workstations,25 Dell Precision 7960,50 Dell Precision 7960,100 Dell Precision 7960,RTX A6000 48GB or RTX 6000 Ada
 GPU Configuration,GPU per Workstation,1x RTX A6000 48GB,1x RTX A6000 48GB,1-2x RTX A6000 48GB,48GB VRAM for complex scenes
 Nucleus Servers,Collaboration Servers,1 primary + 1 replica,2 primary + 2 replica,4 primary + 4 replica (HA),USD scene version control

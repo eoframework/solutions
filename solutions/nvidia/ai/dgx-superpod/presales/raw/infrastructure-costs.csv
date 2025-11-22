@@ -1,7 +1,7 @@
 # Sizing Guidelines
 #WIDTH: 24,36,28,28,28,51
 #ALIGN: left,left,center,center,center,left
-Category,Component,Small (4 DGX),Medium (8 DGX),Large (16 DGX),Notes
+Category,Component,Small,Medium,Large,Notes
 GPU Infrastructure,DGX H100 Systems,4 systems (32 GPUs),8 systems (64 GPUs),16 systems (128 GPUs),8x H100 80GB GPUs per system
 AI Performance,FP8 Performance,16 petaFLOPS,32 petaFLOPS,64 petaFLOPS,Tensor Core AI compute
 GPU Memory,Total GPU Memory,2.56 TB,5.12 TB,10.24 TB,80 GB per GPU aggregate

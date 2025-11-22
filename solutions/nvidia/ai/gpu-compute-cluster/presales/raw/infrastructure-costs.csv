@@ -1,7 +1,7 @@
 # Sizing Guidelines
 #WIDTH: 24,36,28,28,28,51
 #ALIGN: left,left,center,center,center,left
-Category,Component,Small (4 Servers),Medium (8 Servers),Large (16 Servers),Notes
+Category,Component,Small,Medium,Large,Notes
 GPU Infrastructure,GPU Count,16 GPUs (4x per server),32 GPUs (4x per server),64 GPUs (4x per server),NVIDIA A100 40GB or 80GB
 GPU Memory,Total GPU Memory,640 GB (40GB) or 1.28 TB (80GB),1.28 TB (40GB) or 2.56 TB (80GB),2.56 TB (40GB) or 5.12 TB (80GB),Aggregate across all GPUs
 Compute Nodes,Server Configuration,4x GPU servers,8x GPU servers,16x GPU servers,Dell R750xa or HPE DL380 Gen11
