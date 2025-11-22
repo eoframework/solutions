@@ -52,13 +52,13 @@ This engagement is sized based on the following parameters:
 |-----------|-------|---|-----------|-------|
 | **Number of GCP Projects** | 10 projects managed | | **Availability Requirements** | Standard (99.9%) |
 | **Team Count** | 5 application teams | | **Infrastructure Complexity** | Hub-spoke VPC with Interconnect |
-| **External System Integrations** | Hybrid with on-premises | | **Security Requirements** | SCC Premium Chronicle SIEM |
-| **Identity Provider** | Cloud Identity Premium | | **Compliance Frameworks** | SOC 2 PCI-DSS |
-| **Hybrid Connectivity** | Dedicated Interconnect 10 Gbps | | **IaC Tooling** | Terraform Cloud Foundation Toolkit |
-| **Total Administrator Users** | 8 platform admins | | **Logging Volume** | 500 GB/month centralized |
-| **Folder Structure** | By environment (dev/staging/prod) | | **Monitoring Strategy** | Cloud Monitoring centralized |
-| **Shared Services** | Logging Monitoring Security VPN | | **Deployment Regions** | 3 GCP regions (multi-regional) |
-| **Network Architecture** | Shared VPC hub-spoke | |  |  |
+| **Hybrid Connectivity** | Dedicated Interconnect 10 Gbps | | **Security Requirements** | SCC Premium Chronicle SIEM |
+| **Network Architecture** | Shared VPC hub-spoke | | **Compliance Frameworks** | SOC 2 PCI-DSS |
+| **Platform Admins** | 8 administrators | | **Project Provisioning Time** | 1 hour with automation |
+| **Folder Structure** | By environment (dev/staging/prod) | | **Security Baseline** | Cloud Foundation Toolkit |
+| **Logging Volume** | 500 GB/month centralized | | **Shared Services** | Logging Monitoring Security VPN |
+| **Project Provisioning** | Manual with Terraform modules | |  |  |
+| **Deployment Regions** | 3 GCP regions (multi-regional) | |  |  |
 <!-- END SCOPE_SIZING_TABLE -->
 
 *Note: Changes to these parameters may require scope adjustment and additional investment.*

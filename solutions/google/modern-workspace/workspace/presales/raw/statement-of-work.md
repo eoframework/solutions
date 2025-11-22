@@ -1,11 +1,24 @@
-# STATEMENT OF WORK (SOW)
+---
+document_title: Statement of Work
+technology_provider: Google Workspace
+project_name: Google Workspace Deployment
+client_name: [Client Name]
+client_contact: [Contact Name | Email | Phone]
+consulting_company: Your Consulting Company
+consultant_contact: [Consultant Name | Email | Phone]
+opportunity_no: OPP-2025-001
+document_date: November 22, 2025
+version: 1.0
+client_logo: ../../assets/logos/client_logo.png
+vendor_logo: ../../assets/logos/consulting_company_logo.png
+eoframework_logo: ../../assets/logos/eo-framework-logo-real.png
+---
 
-**Document Version:** 1.0
-**Date:** [DATE]
-**Prepared by:** [VENDOR_NAME]
-**Client:** [CLIENT_NAME]
-**Project:** {SOLUTION_NAME} Implementation
-**SOW Number:** [SOW_NUMBER]
+# Executive Summary
+
+This Statement of Work (SOW) defines the scope, deliverables, roles, and terms for deploying Google Workspace for [Client Name]. This engagement will migrate 500 users from Microsoft Exchange and on-premises file servers to Google Workspace Business Plus, enabling cloud-based email, collaboration, and productivity with Gmail, Drive, Docs, and Meet.
+
+**Project Duration:** 12 weeks
 
 ---
 

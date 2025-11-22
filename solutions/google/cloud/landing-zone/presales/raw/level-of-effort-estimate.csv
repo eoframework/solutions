@@ -1,29 +1,80 @@
-Phase,Work Package,Task Description,Resource Type,Estimated Hours,Rate,Cost Estimate,Dependencies,Risk Level,Notes
-Discovery,Azure Requirements Gathering,Conduct stakeholder interviews for Azure cloud strategy,EO Engineer,40,$150,"=TEXT(E2*F2,""$#,##0"")",,Medium,Focus on governance scalability and business alignment
-Discovery,Current Environment Assessment,Analyze existing infrastructure and Azure readiness,EO Engineer,32,$200,"=TEXT(E3*F3,""$#,##0"")",,Medium,Include identity networking and application assessment
-Discovery,Azure Services Assessment,Evaluate Azure services and landing zone requirements,EO Engineer,24,$200,"=TEXT(E4*F4,""$#,##0"")",,Medium,Focus on management groups policies and compliance
-Discovery,Compliance Review,Assess governance security and regulatory requirements,EO Engineer,16,$175,"=TEXT(E5*F5,""$#,##0"")",,Medium,Include Azure Policy and compliance frameworks
-Planning,Azure Landing Zone Design,Design Azure landing zone architecture and governance model,EO Engineer,48,$200,"=TEXT(E6*F6,""$#,##0"")",,Medium,Include management groups policies and blueprints
-Planning,Identity and Access Design,Design Azure AD integration and access management strategy,EO Engineer,32,$180,"=TEXT(E7*F7,""$#,##0"")",,Medium,Include SSO RBAC conditional access and PIM
-Planning,Network Architecture Design,Design Azure networking security and hybrid connectivity,EO Engineer,24,$175,"=TEXT(E8*F8,""$#,##0"")",,Medium,Include hub-spoke VNet peering and security
-Planning,Project Planning,Develop Azure implementation timeline and resource allocation,EO Engineer,24,$140,"=TEXT(E9*F9,""$#,##0"")",,Medium,Coordinate with infrastructure security and compliance teams
-Development,Management Groups and Subscriptions,Configure Azure management groups subscription structure and policies,EO Engineer,40,$160,"=TEXT(E10*F10,""$#,##0"")",,Medium,Include policy inheritance governance and billing
-Development,Azure Policy Implementation,Implement Azure policies governance controls and compliance,EO Engineer,60,$145,"=TEXT(E11*F11,""$#,##0"")",,Medium,Include policy definitions initiatives and remediation
-Development,Network Infrastructure,Build Azure networking VNet peering and hybrid connectivity,EO Engineer,48,$140,"=TEXT(E12*F12,""$#,##0"")",,Medium,Include ExpressRoute VPN and network security
-Development,Identity and Access Implementation,Implement Azure AD integration access controls and SSO,EO Engineer,40,$155,"=TEXT(E13*F13,""$#,##0"")",,Medium,Include MFA conditional access and privileged access
-Development,Monitoring and Operations,Build Azure monitoring logging alerting and operational tools,EO Engineer,32,$130,"=TEXT(E14*F14,""$#,##0"")",,Medium,Include Azure Monitor Log Analytics and automation
-Testing,Unit Testing,Develop automated tests for all solution components,EO Engineer,32,$120,"=TEXT(E15*F15,""$#,##0"")",,Medium,Include technology-specific testing frameworks
-Testing,Integration Testing,Test system integrations data flows and external dependencies,EO Engineer,40,$120,"=TEXT(E16*F16,""$#,##0"")",,Medium,Include end-to-end workflow validation
-Testing,Performance Testing,Conduct load performance and scalability testing,EO Engineer,24,$140,"=TEXT(E17*F17,""$#,##0"")",,Medium,Include production-like environment and stress testing
-Testing,Security Testing,Perform security assessments penetration testing and compliance validation,EO Engineer,16,$175,"=TEXT(E18*F18,""$#,##0"")",,Medium,Include vulnerability scanning and compliance checks
-Testing,User Acceptance Testing,Coordinate UAT with business users and stakeholders,EO Engineer,32,$150,"=TEXT(E19*F19,""$#,##0"")",,Medium,Include training feedback collection and sign-off
-Deployment,Production Deployment,Deploy solution to production environment with monitoring,EO Engineer,24,$160,"=TEXT(E20*F20,""$#,##0"")",,Medium,Include blue-green deployment rollback and validation
-Deployment,Go-Live Support,Provide comprehensive support during initial production rollout,EO Engineer,48,$110,"=TEXT(E21*F21,""$#,##0"")",,Medium,Include 24/7 support monitoring and issue resolution
-Training,Administrator Training,Train system administrators and technical support teams,EO Engineer,16,$130,"=TEXT(E22*F22,""$#,##0"")",,Medium,Include hands-on technical training and certification
-Training,End User Training,Train business users on solution functionality and workflows,EO Engineer,24,$120,"=TEXT(E23*F23,""$#,##0"")",,Medium,Include role-based training documentation and support
-Training,Documentation,Create comprehensive technical and user documentation,EO Engineer,32,$110,"=TEXT(E24*F24,""$#,##0"")",,Medium,Include runbooks troubleshooting guides and best practices
-Closeout,Knowledge Transfer,Transfer solution ownership to operations and support teams,EO Engineer,16,$140,"=TEXT(E25*F25,""$#,##0"")",,Medium,Include operational procedures escalation and maintenance
-Closeout,Performance Baseline,Establish performance metrics monitoring baselines and SLAs,EO Engineer,8,$130,"=TEXT(E26*F26,""$#,##0"")",,Medium,Include KPI definition monitoring setup and reporting
-Management,Technical Leadership,Quarterback technical oversight and architecture review,EO Quarterback,"=ROUND(SUM(E2:E26)*0.25,0)",$180,"=TEXT(E27*F27,""$#,##0"")",,Medium,25% of engineering effort
-Management,Project Management,Project coordination and management activities,EO Project Manager,"=ROUND(SUM(E2:E26)*0.20,0)",$150,"=TEXT(E28*F28,""$#,##0"")",,Low,20% of engineering effort
-,,,     TOTAL HOURS,1119,   TOTAL COST,"=TEXT(E2*F2+E3*F3+E4*F4+E5*F5+E6*F6+E7*F7+E8*F8+E9*F9+E10*F10+E11*F11+E12*F12+E13*F13+E14*F14+E15*F15+E16*F16+E17*F17+E18*F18+E19*F19+E20*F20+E21*F21+E22*F22+E23*F23+E24*F24+E25*F25+E26*F26+E27*F27+E28*F28,""$#,##0"")",,,Total Landing Zone project cost estimate
+# SCOPE ASSUMPTIONS - BASELINE (MULTIPLIER 1.0)
+#WIDTH: 25,35,33,32,32,39,44
+#ALIGN: left,left,left,left,left,left,left
+Category,Baseline Assumption,Current Scope,Small (1x),Medium (2x),Large (3x),Notes
+Solution Scope,Number of GCP Projects,10 projects managed,10 projects,30 projects,75+ projects,Projects within landing zone organization
+Solution Scope,Team Count,5 application teams,3-5 teams,6-15 teams,20+ teams,Teams using the platform
+Integration,Hybrid Connectivity,Dedicated Interconnect 10 Gbps,Cloud VPN 1 Gbps,Interconnect 10 Gbps,Interconnect 100 Gbps,On-premises connectivity bandwidth
+Integration,Network Architecture,Shared VPC hub-spoke,Single hub-spoke,Multi-hub regional,Global multi-region,Network complexity and scale
+User Base,Platform Admins,8 administrators,5-8 admins,10-15 admins,20+ admins,Cloud platform operations team
+User Base,Folder Structure,By environment (dev/staging/prod),Simple structure,Multi-level hierarchy,Complex matrix structure,Organization folder design
+Data Volume,Logging Volume,500 GB/month centralized,500 GB/month,2 TB/month,10+ TB/month,Cloud Logging ingestion volume
+Data Volume,Project Provisioning,Manual with Terraform modules,Manual provisioning,Self-service with approval,Fully automated platform,Project creation approach
+Technical Environment,Deployment Regions,3 GCP regions (multi-regional),Single region,2-3 regions,Global multi-region,Geographic distribution
+Technical Environment,Availability Requirements,Standard (99.9%),Standard (99.9%),High availability (99.95%),Mission critical (99.99%+),Platform SLA requirements
+Technical Environment,Infrastructure Complexity,Hub-spoke VPC with Interconnect,Basic networking,Standard hub-spoke,Complex multi-cloud hybrid,GCP landing zone architecture
+Security & Compliance,Security Requirements,SCC Premium Chronicle SIEM,Basic security,Industry standard (SOC2),Advanced (FedRAMP multi-jurisdiction),Security monitoring and controls
+Security & Compliance,Compliance Frameworks,SOC 2 PCI-DSS,1-2 basic standards,2-3 industry standards,Multiple complex frameworks,Regulatory compliance requirements
+Performance,Project Provisioning Time,1 hour with automation,Manual (days),Automated (hours),Self-service (minutes),Project deployment speed
+Performance,Security Baseline,Cloud Foundation Toolkit,Basic baseline,Standard baseline,Advanced custom baseline,Security control enforcement
+Environment,Shared Services,Logging Monitoring Security VPN,Basic services,Standard services,Comprehensive platform,Centralized service offerings
+
+# ESTIMATE SETTINGS
+#WIDTH: 17,22,14,173
+#ALIGN: left,left,center,left
+Phase,Variable Name,Multiplier,Description / Applies To Tasks
+Discovery,DISCOVERY_MX,1,"All Discovery phase tasks (Requirements Gathering, Environment Assessment, GCP Services Assessment, Compliance Review)"
+Planning,PLANNING_MX,1,"All Planning phase tasks (Landing Zone Design, Identity and Access Design, Network Architecture Design, Project Planning)"
+Development,DEVELOPMENT_MX,1,"All Development phase tasks (Organization Setup, Cloud Foundation Toolkit, Network Infrastructure, Security Baseline, Monitoring Setup)"
+Testing,TESTING_MX,1,"All Testing phase tasks (Infrastructure Testing, Policy Testing, Security Testing, Automation Testing)"
+Deployment,DEPLOYMENT_MX,1,"All Deployment phase tasks (Foundation Deployment, Team Onboarding, Go-Live Support)"
+Training,TRAINING_MX,1,"All Training phase tasks (Administrator Training, Platform User Training, Documentation)"
+Closeout,CLOSEOUT_MX,1,"All Closeout phase tasks (Knowledge Transfer, FinOps Setup)"
+Management,MANAGEMENT_MX,1,Project Management overhead - 20% of actual engineering hours
+Leadership,LEADERSHIP_MX,1,Quarterback/Technical Leadership overhead - 25% of actual engineering hours
+
+# Level of Effort
+#WIDTH: 16,25,58,18,12,14,12,12,15,25,40
+#ALIGN: left,left,left,left,right,center,right,right,right,left,left
+Phase,Work Package,Task Description,Resource Type,Base Hours,Effort Multiplier,Actual Hours,Rate,Cost Estimate,Dependencies,Notes
+Discovery,Requirements Gathering,Conduct stakeholder interviews for GCP landing zone requirements,EO Engineer,40,='Estimate Settings'!$C$3,=$E27*$F27,$200,"=TEXT($G27*$H27,""$#,##0"")",,Includes organization structure governance and team requirements
+Discovery,Environment Assessment,Analyze existing GCP setup and on-premises infrastructure,EO Engineer,32,='Estimate Settings'!$C$3,=$E28*$F28,$200,"=TEXT($G28*$H28,""$#,##0"")",,Customer must provide GCP Organization ID and current project inventory
+Discovery,GCP Services Assessment,Evaluate GCP services networking and landing zone requirements,EO Engineer,24,='Estimate Settings'!$C$3,=$E29*$F29,$200,"=TEXT($G29*$H29,""$#,##0"")",,Customer must provide service enablement requirements and quotas
+Discovery,Compliance Review,Assess governance security and regulatory requirements,EO Engineer,16,='Estimate Settings'!$C$3,=$E30*$F30,$175,"=TEXT($G30*$H30,""$#,##0"")",,Identifies compliance standards and organization policy constraints
+Planning,Landing Zone Design,Design GCP landing zone architecture with Cloud Foundation Toolkit,EO Engineer,48,='Estimate Settings'!$C$4,=$E31*$F31,$200,"=TEXT($G31*$H31,""$#,##0"")",Requirements Gathering,Deliverable: Organization hierarchy folder structure and Terraform modules
+Planning,Identity and Access Design,Design Cloud Identity integration and IAM access management,EO Engineer,32,='Estimate Settings'!$C$4,=$E32*$F32,$180,"=TEXT($G32*$H32,""$#,##0"")",Landing Zone Design,Includes SSO organization policies and service account design
+Planning,Network Architecture Design,Design Shared VPC hub-spoke with Dedicated Interconnect,EO Engineer,40,='Estimate Settings'!$C$4,=$E33*$F33,$175,"=TEXT($G33*$H33,""$#,##0"")",Landing Zone Design,Deliverable: Network topology VPC design and hybrid connectivity architecture
+Planning,Project Planning,Develop implementation timeline and resource allocation,EO Engineer,24,='Estimate Settings'!$C$4,=$E34*$F34,$140,"=TEXT($G34*$H34,""$#,##0"")",Landing Zone Design,Deliverable: Project plan with phased team onboarding schedule
+Development,Organization and Billing Setup,Configure GCP Organization folders and billing accounts,EO Engineer,24,='Estimate Settings'!$C$5,=$E35*$F35,$160,"=TEXT($G35*$H35,""$#,##0"")",Landing Zone Design,Includes organization hierarchy billing account structure and IAM
+Development,Cloud Foundation Toolkit Implementation,Build Terraform modules for project provisioning and governance,EO Engineer,72,='Estimate Settings'!$C$5,=$E36*$F36,$150,"=TEXT($G36*$H36,""$#,##0"")",Organization and Billing Setup,Deliverable: Terraform modules for repeatable project deployment
+Development,Shared VPC Network Infrastructure,Build hub-spoke VPC with Cloud NAT and load balancers,EO Engineer,48,='Estimate Settings'!$C$5,=$E37*$F37,$140,"=TEXT($G37*$H37,""$#,##0"")",Network Architecture Design,Includes VPC subnets firewall rules and Cloud NAT gateways
+Development,Dedicated Interconnect Setup,Configure Dedicated Interconnect 10 Gbps to on-premises,EO Engineer,40,='Estimate Settings'!$C$5,=$E38*$F38,$175,"=TEXT($G38*$H38,""$#,##0"")",Shared VPC Network Infrastructure,Customer must coordinate on-premises network team and ISP
+Development,Security Baseline Implementation,Deploy Security Command Center Chronicle and Cloud Armor,EO Engineer,56,='Estimate Settings'!$C$5,=$E39*$F39,$160,"=TEXT($G39*$H39,""$#,##0"")",Cloud Foundation Toolkit Implementation,Includes Cloud IDS SCC Premium and organization policy enforcement
+Development,Organization Policy Configuration,Implement organization policies and resource constraints,EO Engineer,32,='Estimate Settings'!$C$5,=$E40*$F40,$155,"=TEXT($G40*$H40,""$#,##0"")",Security Baseline Implementation,Policy constraints for data residency resource locations and services
+Development,Identity and Access Implementation,Configure Cloud Identity SSO and directory sync,EO Engineer,32,='Estimate Settings'!$C$5,=$E41*$F41,$155,"=TEXT($G41*$H41,""$#,##0"")",Identity and Access Design,Includes SAML SSO setup Google Cloud Directory Sync (GCDS) configuration
+Development,Centralized Logging Setup,Configure Cloud Logging sinks and BigQuery exports,EO Engineer,32,='Estimate Settings'!$C$5,=$E42*$F42,$130,"=TEXT($G42*$H42,""$#,##0"")",Cloud Foundation Toolkit Implementation,Includes log aggregation long-term storage and compliance exports
+Development,Monitoring and Alerting,Build Cloud Monitoring dashboards and alerting policies,EO Engineer,24,='Estimate Settings'!$C$5,=$E43*$F43,$130,"=TEXT($G43*$H43,""$#,##0"")",Centralized Logging Setup,Includes SLO dashboards budget alerts and operational monitoring
+Testing,Infrastructure Testing,Test Terraform modules project provisioning and network connectivity,EO Engineer,32,='Estimate Settings'!$C$6,=$E44*$F44,$120,"=TEXT($G44*$H44,""$#,##0"")",Monitoring and Alerting,Includes automated testing with Terratest and validation scripts
+Testing,Policy and Compliance Testing,Validate organization policies and security controls,EO Engineer,24,='Estimate Settings'!$C$6,=$E45*$F45,$140,"=TEXT($G45*$H45,""$#,##0"")",Organization Policy Configuration,Verify policy enforcement and compliance with security baseline
+Testing,Security Testing,Perform security assessments and penetration testing,EO Engineer,16,='Estimate Settings'!$C$6,=$E46*$F46,$175,"=TEXT($G46*$H46,""$#,##0"")",Security Baseline Implementation,Includes vulnerability scanning and SCC Premium findings review
+Testing,Hybrid Connectivity Testing,Test Dedicated Interconnect and on-premises connectivity,EO Engineer,16,='Estimate Settings'!$C$6,=$E47*$F47,$150,"=TEXT($G47*$H47,""$#,##0"")",Dedicated Interconnect Setup,Customer must coordinate connectivity testing with network team
+Deployment,Foundation Deployment,Deploy landing zone foundation to production,EO Engineer,24,='Estimate Settings'!$C$7,=$E48*$F48,$160,"=TEXT($G48*$H48,""$#,##0"")",Infrastructure Testing,Includes production deployment validation and smoke testing
+Deployment,Pilot Team Onboarding,Onboard 2 pilot teams to validate self-service workflows,EO Engineer,32,='Estimate Settings'!$C$7,=$E49*$F49,$130,"=TEXT($G49*$H49,""$#,##0"")",Foundation Deployment,Includes project provisioning team training and workflow validation
+Deployment,Go-Live Support,Provide support during initial platform operations,EO Engineer,48,='Estimate Settings'!$C$7,=$E50*$F50,$110,"=TEXT($G50*$H50,""$#,##0"")",Pilot Team Onboarding,Includes issue resolution monitoring and operational support
+Training,Administrator Training,Train platform admins on Google Admin console and Terraform,EO Engineer,16,='Estimate Settings'!$C$8,=$E51*$F51,$150,"=TEXT($G51*$H51,""$#,##0"")",Foundation Deployment,Includes hands-on training with Cloud Foundation Toolkit and GAM
+Training,Platform User Training,Train application teams on project provisioning and platform usage,EO Engineer,16,='Estimate Settings'!$C$8,=$E52*$F52,$130,"=TEXT($G52*$H52,""$#,##0"")",Administrator Training,Includes self-service workflows best practices and support procedures
+Training,Documentation,Create runbooks user guides and operational documentation,EO Engineer,24,='Estimate Settings'!$C$8,=$E53*$F53,$110,"=TEXT($G53*$H53,""$#,##0"")",Platform User Training,Deliverable: Administrator runbooks troubleshooting guides platform docs
+Closeout,Knowledge Transfer,Transfer platform ownership to operations team,EO Engineer,16,='Estimate Settings'!$C$9,=$E54*$F54,$140,"=TEXT($G54*$H54,""$#,##0"")",Documentation,Includes operational handoff escalation procedures and maintenance
+Closeout,FinOps Dashboards Setup,Establish cost allocation dashboards and budget controls,EO Engineer,16,='Estimate Settings'!$C$9,=$E55*$F55,$130,"=TEXT($G55*$H55,""$#,##0"")",Knowledge Transfer,Includes BigQuery billing exports cost attribution and forecasting
+Management,Project Management,Project coordination status reporting and stakeholder management,EO Project Manager,"=ROUND(SUM(E27:E55)*0.20,0)",='Estimate Settings'!$C$10,=$E56*$F56,$150,"=TEXT($G56*$H56,""$#,##0"")",,20% of engineering effort for project management overhead
+Management,Technical Leadership,Quarterback oversight architecture review and technical governance,EO Quarterback,"=ROUND(SUM(E27:E55)*0.25,0)",='Estimate Settings'!$C$11,=$E57*$F57,$180,"=TEXT($G57*$H57,""$#,##0"")",,25% of engineering effort for technical leadership
+,,TOTAL,,$E27+$E28+$E29+$E30+$E31+$E32+$E33+$E34+$E35+$E36+$E37+$E38+$E39+$E40+$E41+$E42+$E43+$E44+$E45+$E46+$E47+$E48+$E49+$E50+$E51+$E52+$E53+$E54+$E55,,=$G27+$G28+$G29+$G30+$G31+$G32+$G33+$G34+$G35+$G36+$G37+$G38+$G39+$G40+$G41+$G42+$G43+$G44+$G45+$G46+$G47+$G48+$G49+$G50+$G51+$G52+$G53+$G54+$G55+$G56+$G57,,"=TEXT($G58*$H58,""$#,##0"")",,Total landing zone implementation
+
+# Credits
+#WIDTH: 25,25,15,50
+#ALIGN: left,left,right,left
+Category,Credit Type,Credit Amount,Credit Comments
+Professional Services,Partner Implementation Credit,"($5000)",Google Cloud partner implementation services discount
+Professional Services,Architecture Credit,$0,No additional architecture credits
+Cloud Infrastructure,Migration Credit,"($10000)",20% Year 1 GCP consumption credit for new customers
+Support & Maintenance,Support Credit,$0,No support credits available

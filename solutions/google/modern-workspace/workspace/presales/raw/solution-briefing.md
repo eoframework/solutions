@@ -50,15 +50,6 @@ This engagement is sized based on the following parameters:
 <!-- TABLE_CONFIG: widths=[18, 29, 5, 18, 30] -->
 | Parameter | Scope | | Parameter | Scope |
 |-----------|-------|---|-----------|-------|
-| **User Count** | 500 licensed users | | **Availability Requirements** | 99.9% SLA (Google guaranteed) |
-| **Workspace Edition** | Business Plus ($18/user/mo) | | **Migration Complexity** | Exchange + file servers |
-| **Email Migration** | 500 mailboxes (2.5 TB total) | | **Security Requirements** | DLP mobile management 2SV |
-| **File Migration** | File servers to Drive (3 TB) | | **Compliance Frameworks** | SOC 2 GDPR |
-| **Identity Integration** | SAML SSO with Azure AD | | **Meeting Requirements** | Google Meet 500 participants |
-| **Total Administrator Users** | 5 workspace admins | | **Storage per User** | 5 TB per user included |
-| **Distribution Lists** | 150 groups to migrate | | **Retention Policy** | 7-year retention (Vault) |
-| **Mobile Devices** | 300 mobile devices managed | | **Deployment Approach** | Phased by department |
-| **Training Approach** | Virtual + self-service | |  |  |
 <!-- END SCOPE_SIZING_TABLE -->
 
 *Note: Changes to these parameters may require scope adjustment and additional investment.*
@@ -193,8 +184,6 @@ This engagement is sized based on the following parameters:
 |---------------|-------------|----------------|------------|--------|--------|--------------|
 | Professional Services | $38,400 | ($3,000) | $35,400 | $0 | $0 | $35,400 |
 | Software Licenses | $115,200 | ($10,000) | $105,200 | $115,200 | $115,200 | $335,600 |
-| Support & Maintenance | $0 | $0 | $0 | $0 | $0 | $0 |
-| Cloud Infrastructure | $0 | $0 | $0 | $0 | $0 | $0 |
 | **TOTAL** | **$153,600** | **($13,000)** | **$140,600** | **$115,200** | **$115,200** | **$371,000** |
 <!-- END COST_SUMMARY_TABLE -->
 

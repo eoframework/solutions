@@ -1,11 +1,24 @@
-# STATEMENT OF WORK (SOW)
+---
+document_title: Statement of Work
+technology_provider: Google Cloud
+project_name: Google Cloud Landing Zone
+client_name: [Client Name]
+client_contact: [Contact Name | Email | Phone]
+consulting_company: Your Consulting Company
+consultant_contact: [Consultant Name | Email | Phone]
+opportunity_no: OPP-2025-001
+document_date: November 22, 2025
+version: 1.0
+client_logo: ../../assets/logos/client_logo.png
+vendor_logo: ../../assets/logos/consulting_company_logo.png
+eoframework_logo: ../../assets/logos/eo-framework-logo-real.png
+---
 
-**Document Version:** 1.0
-**Date:** [DATE]
-**Prepared by:** [VENDOR_NAME]
-**Client:** [CLIENT_NAME]
-**Project:** {SOLUTION_NAME} Implementation
-**SOW Number:** [SOW_NUMBER]
+# Executive Summary
+
+This Statement of Work (SOW) defines the scope, deliverables, roles, and terms for implementing a Google Cloud Landing Zone for [Client Name]. This engagement will deliver a secure, scalable multi-project foundation with Cloud Foundation Toolkit automation, enabling 10+ application teams to deploy to GCP with built-in governance, security controls, and compliance.
+
+**Project Duration:** 12 weeks
 
 ---
 
