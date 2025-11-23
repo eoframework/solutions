@@ -170,7 +170,11 @@ Key activities:
 
 # Deliverables & Timeline
 
+This section outlines the key deliverables, project milestones, and timeline for the ISE Secure Access implementation. All deliverables are subject to formal acceptance by designated client stakeholders before proceeding to subsequent phases.
+
 ## Deliverables
+
+The following deliverables will be produced throughout the project lifecycle, with formal acceptance required from designated client stakeholders:
 
 <!-- TABLE_CONFIG: widths=[8, 40, 12, 20, 20] -->
 | # | Deliverable | Type | Due Date | Acceptance By |
@@ -182,6 +186,8 @@ Key activities:
 | 5 | Training Materials | Document | Week 16 | IT Team |
 
 ## Project Milestones
+
+The project will be tracked against the following key milestones, representing major completion points and readiness gates for the next phase:
 
 <!-- TABLE_CONFIG: widths=[20, 55, 25] -->
 | Milestone | Description | Target Date |
@@ -196,7 +202,11 @@ Key activities:
 
 # Roles & Responsibilities
 
+This section defines the roles, responsibilities, and accountabilities for both Vendor and Client teams throughout the project lifecycle using a RACI matrix framework.
+
 ## RACI Matrix
+
+The following RACI matrix defines responsibility assignments for key project activities across Vendor and Client roles:
 
 <!-- TABLE_CONFIG: widths=[28, 11, 11, 11, 11, 9, 9, 10] -->
 | Task/Role | EO PM | EO Quarterback | EO ISE Eng | EO Security | Client Net | Client Sec | SME |
@@ -444,7 +454,11 @@ Upon successful implementation:
 
 # Investment Summary
 
+This section provides a comprehensive breakdown of the total investment required for the ISE Secure Access implementation, including professional services, hardware, software licensing, and ongoing support costs over a 3-year period.
+
 ## Total Investment
+
+The following table summarizes the total cost of ownership for this engagement across all cost categories and years:
 
 <!-- BEGIN COST_SUMMARY_TABLE -->
 <!-- TABLE_CONFIG: widths=[25, 15, 12, 15, 11, 11, 11] -->

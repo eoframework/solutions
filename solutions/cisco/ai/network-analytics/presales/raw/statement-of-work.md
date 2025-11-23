@@ -166,7 +166,11 @@ Key activities:
 
 # Deliverables & Timeline
 
+This section outlines the key deliverables, project milestones, and timeline for the DNA Center Network Analytics implementation. All deliverables are subject to formal acceptance by designated client stakeholders before proceeding to subsequent phases.
+
 ## Deliverables
+
+The following deliverables will be produced throughout the project lifecycle, with formal acceptance required from designated client stakeholders:
 
 <!-- TABLE_CONFIG: widths=[8, 40, 12, 20, 20] -->
 | # | Deliverable | Type | Due Date | Acceptance By |
@@ -178,6 +182,8 @@ Key activities:
 | 5 | Knowledge Transfer Sessions | Live/Recorded | Week 16 | Network Team |
 
 ## Project Milestones
+
+The project will be tracked against the following key milestones, representing major completion points and readiness gates for the next phase:
 
 <!-- TABLE_CONFIG: widths=[20, 55, 25] -->
 | Milestone | Description | Target Date |
@@ -192,7 +198,11 @@ Key activities:
 
 # Roles & Responsibilities
 
+This section defines the roles, responsibilities, and accountabilities for both Vendor and Client teams throughout the project lifecycle using a RACI matrix framework.
+
 ## RACI Matrix
+
+The following RACI matrix defines responsibility assignments for key project activities across Vendor and Client roles:
 
 <!-- TABLE_CONFIG: widths=[28, 11, 11, 11, 11, 9, 9, 10] -->
 | Task/Role | EO PM | EO Quarterback | EO Network Eng | EO Automation | Client Net | Client Ops | SME |
