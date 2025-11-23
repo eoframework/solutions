@@ -27,6 +27,8 @@ eoframework_logo: ../../assets/logos/eo-framework-logo-real.png
 
 # Executive Summary
 
+This section provides a high-level overview of the project scope, business objectives, expected outcomes, and timeline for the Juniper SRX Firewall Platform implementation.
+
 ### 1.1 Project Overview
 This Statement of Work (SOW) outlines the scope, deliverables, timeline, and terms for the implementation of Juniper SRX Firewall Platform for [CLIENT_NAME]. The project will deliver next-generation security infrastructure with 8x performance improvement and 40% cost reduction through deployment of enterprise-grade Juniper SRX firewalls with advanced threat prevention capabilities.
 
@@ -43,6 +45,8 @@ This Statement of Work (SOW) outlines the scope, deliverables, timeline, and ter
 ---
 
 # Background & Objectives
+
+This section outlines the current state of the Client's firewall infrastructure, defines the business objectives driving this initiative, and establishes measurable success metrics for project evaluation.
 
 ## Current State
 Current firewall infrastructure based on aging hardware with performance limitations and increasing security requirements.
@@ -62,6 +66,8 @@ Current firewall infrastructure based on aging hardware with performance limitat
 ---
 
 # Scope of Work
+
+This section defines the detailed scope of work for the SRX Firewall Platform implementation, including all in-scope activities, deliverables, and explicitly excluded items to ensure clear expectations and project boundaries.
 
 ### 2.0 Engagement Scope Parameters
 
@@ -151,6 +157,8 @@ The following activities are explicitly excluded from this SOW:
 
 # Deliverables & Timeline
 
+This section details all project deliverables including documentation, system components, knowledge transfer activities, project milestones, critical dependencies, and timeline for successful completion of the SRX Firewall Platform implementation.
+
 ## Deliverables
 
 ### 3.1 Documentation Deliverables
@@ -235,30 +243,47 @@ The following activities are explicitly excluded from this SOW:
 
 # Architecture & Design
 
+This section outlines the technical architecture, design principles, and infrastructure components for the SRX Firewall Platform implementation.
+
 ## Architecture Overview
-Multi-zone security architecture with datacenter and branch firewall deployment. SRX4600 HA pair in datacenter with SRX300 firewalls at branch locations.
+
+The solution implements a multi-zone security architecture with datacenter and branch firewall deployment. The datacenter deployment features an SRX4600 HA pair providing 80 Gbps throughput with full security services, while branch locations utilize SRX300 firewalls with integrated SD-WAN capabilities. Centralized management is provided through Junos Space Security Director, enabling unified policy management across all devices. The architecture supports high availability with active/passive failover, advanced threat prevention through IPS and ATP Cloud, and seamless multi-cloud VPN connectivity to AWS, Azure, and GCP environments.
 
 ---
 
 # Security & Compliance
 
-Enterprise-grade security with IPS, ATP Cloud, SecIntel, and SSL inspection meeting PCI DSS and SOC 2 compliance requirements.
+This section describes the security controls, compliance frameworks, and regulatory requirements that the SRX Firewall Platform implementation will address.
+
+## Security Framework
+
+The solution implements enterprise-grade security controls including Intrusion Prevention System (IPS) with 40 Gbps inspection throughput, Advanced Threat Prevention (ATP) Cloud sandbox for zero-day malware detection, SecIntel threat intelligence feeds blocking command-and-control communications, and SSL inspection capabilities for encrypted traffic analysis. The platform meets PCI DSS and SOC 2 compliance requirements through comprehensive logging, security event monitoring, and integration with SIEM systems for security event correlation and audit reporting.
 
 ---
 
 # Testing & Validation
 
-Comprehensive testing including lab validation, performance testing, HA failover testing, and security validation before production deployment.
+This section outlines the testing strategy, validation procedures, and acceptance criteria to ensure the SRX Firewall Platform meets all functional, performance, and security requirements before production deployment.
+
+## Testing Strategy
+
+The implementation follows a comprehensive testing approach including lab validation of security policies before production migration, performance testing to validate 80 Gbps throughput with full security services enabled, high availability failover testing to confirm sub-second failover between active and passive firewalls, security validation to verify IPS threat detection and ATP Cloud malware blocking, integration testing with SIEM and monitoring systems, and user acceptance testing with network and security teams. All testing is performed in a dedicated lab environment before any production changes to minimize risk and ensure zero business disruption during cutover.
 
 ---
 
 # Handover & Support
 
-Complete knowledge transfer with administrator training, documentation delivery, and 30-day warranty support period.
+This section defines the knowledge transfer activities, training deliverables, documentation handover, and post-implementation support provided to ensure successful transition to Client operations team.
+
+## Knowledge Transfer and Support
+
+The handover phase includes comprehensive administrator training (2 days, up to 8 participants) covering Junos OS, security policy management, and HA failover procedures, security operations training (1 day, up to 10 participants) covering threat investigation and troubleshooting, complete as-built documentation including network diagrams, zone architecture, and configuration details, operations runbook with standard operating procedures and escalation guidelines, and 30-day warranty support period for issue resolution and optimization assistance. All training sessions will be recorded for future reference and new team member onboarding.
 
 ---
 
 # Investment Summary
+
+This section provides a detailed breakdown of project costs, payment terms, and ongoing annual expenses for the SRX Firewall Platform implementation.
 
 ### 6.1 Project Investment
 | Category | Description | Amount |
@@ -291,6 +316,8 @@ Any additional services beyond the scope of this SOW will be quoted separately a
 ---
 
 # Terms & Conditions
+
+This section establishes the contractual terms, acceptance criteria, assumptions, constraints, risk management approach, and legal provisions governing the SRX Firewall Platform implementation.
 
 ## Acceptance Criteria
 
@@ -372,6 +399,8 @@ Vendor's liability is limited to the total contract value ($382,500). Neither pa
 ---
 
 # Sign-Off
+
+This section provides formal approval signatures from authorized representatives of both Client and Vendor to execute this Statement of Work.
 
 ### Client Approval ([CLIENT_NAME])
 

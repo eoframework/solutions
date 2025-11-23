@@ -73,13 +73,13 @@ This engagement is sized based on the following parameters:
 ![Architecture Diagram](assets/diagrams/architecture-diagram.png)
 
 - **Mist AI Wireless Platform**
-  - 50 Juniper AP45 WiFi 6E access points delivering 9.6 Gbps tri-band throughput
-  - Mist Cloud AI engine with machine learning for anomaly detection and self-healing
+  - 50 AP45 WiFi 6E access points delivering 9.6 Gbps throughput
+  - Mist Cloud AI with machine learning for anomaly detection
   - Marvis Virtual Network Assistant for conversational troubleshooting
 - **Location Services & Management**
-  - Virtual BLE (vBLE) for indoor positioning without physical beacon hardware
-  - Real-time wayfinding, asset tracking, and occupancy analytics for facilities
-  - Unified dashboard for wireless and wired infrastructure with 4 EX4400 switches
+  - Virtual BLE (vBLE) for indoor positioning without beacon hardware
+  - Real-time wayfinding, asset tracking, and occupancy analytics
+  - Unified dashboard for wireless and wired with 4 EX4400 switches
 
 ---
 

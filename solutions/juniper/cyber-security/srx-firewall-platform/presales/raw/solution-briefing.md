@@ -73,9 +73,9 @@ This engagement is sized based on the following parameters:
 ![Architecture Diagram](assets/diagrams/architecture-diagram.png)
 
 - **High-Performance Security Infrastructure**
-  - SRX4600 HA pair delivering 80 Gbps firewall throughput with full security services
-  - 10 branch SRX300 firewalls with integrated SD-WAN and centralized management
-  - Advanced IPS (40 Gbps), SSL inspection (20 Gbps), and ATP Cloud sandbox
+  - SRX4600 HA pair delivering 80 Gbps firewall throughput with security
+  - 10 branch SRX300 firewalls with SD-WAN and centralized management
+  - Advanced IPS (40 Gbps), SSL inspection, and ATP Cloud sandbox
 - **Threat Prevention & Intelligence**
   - Real-time SecIntel feeds blocking command-and-control communications
   - ATP Cloud sandbox detecting zero-day threats before network infiltration
