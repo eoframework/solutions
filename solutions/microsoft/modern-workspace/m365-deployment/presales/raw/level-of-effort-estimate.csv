@@ -1,29 +1,81 @@
-Phase,Work Package,Task Description,Resource Type,Estimated Hours,Rate,Cost Estimate,Dependencies,Risk Level,Notes
-Discovery,Azure Requirements Gathering,Conduct stakeholder interviews for Azure cloud strategy,EO Engineer,40,$150,"=TEXT(E2*F2,""$#,##0"")",,Medium,Focus on governance scalability and business alignment
-Discovery,Current Environment Assessment,Analyze existing infrastructure and Azure readiness,EO Engineer,32,$200,"=TEXT(E3*F3,""$#,##0"")",,Medium,Include identity networking and application assessment
-Discovery,Azure Services Assessment,Evaluate Azure services and landing zone requirements,EO Engineer,24,$200,"=TEXT(E4*F4,""$#,##0"")",,Medium,Focus on management groups policies and compliance
-Discovery,Compliance Review,Assess governance security and regulatory requirements,EO Engineer,16,$175,"=TEXT(E5*F5,""$#,##0"")",,Medium,Include Azure Policy and compliance frameworks
-Planning,Azure Landing Zone Design,Design Azure landing zone architecture and governance model,EO Engineer,48,$200,"=TEXT(E6*F6,""$#,##0"")",,Medium,Include management groups policies and blueprints
-Planning,Identity and Access Design,Design Azure AD integration and access management strategy,EO Engineer,32,$180,"=TEXT(E7*F7,""$#,##0"")",,Medium,Include SSO RBAC conditional access and PIM
-Planning,Network Architecture Design,Design Azure networking security and hybrid connectivity,EO Engineer,24,$175,"=TEXT(E8*F8,""$#,##0"")",,Medium,Include hub-spoke VNet peering and security
-Planning,Project Planning,Develop Azure implementation timeline and resource allocation,EO Engineer,24,$140,"=TEXT(E9*F9,""$#,##0"")",,Medium,Coordinate with infrastructure security and compliance teams
-Development,Management Groups and Subscriptions,Configure Azure management groups subscription structure and policies,EO Engineer,40,$160,"=TEXT(E10*F10,""$#,##0"")",,Medium,Include policy inheritance governance and billing
-Development,Azure Policy Implementation,Implement Azure policies governance controls and compliance,EO Engineer,60,$145,"=TEXT(E11*F11,""$#,##0"")",,Medium,Include policy definitions initiatives and remediation
-Development,Network Infrastructure,Build Azure networking VNet peering and hybrid connectivity,EO Engineer,48,$140,"=TEXT(E12*F12,""$#,##0"")",,Medium,Include ExpressRoute VPN and network security
-Development,Identity and Access Implementation,Implement Azure AD integration access controls and SSO,EO Engineer,40,$155,"=TEXT(E13*F13,""$#,##0"")",,Medium,Include MFA conditional access and privileged access
-Development,Monitoring and Operations,Build Azure monitoring logging alerting and operational tools,EO Engineer,32,$130,"=TEXT(E14*F14,""$#,##0"")",,Medium,Include Azure Monitor Log Analytics and automation
-Testing,Unit Testing,Develop automated tests for all solution components,EO Engineer,32,$120,"=TEXT(E15*F15,""$#,##0"")",,Medium,Include technology-specific testing frameworks
-Testing,Integration Testing,Test system integrations data flows and external dependencies,EO Engineer,40,$120,"=TEXT(E16*F16,""$#,##0"")",,Medium,Include end-to-end workflow validation
-Testing,Performance Testing,Conduct load performance and scalability testing,EO Engineer,24,$140,"=TEXT(E17*F17,""$#,##0"")",,Medium,Include production-like environment and stress testing
-Testing,Security Testing,Perform security assessments penetration testing and compliance validation,EO Engineer,16,$175,"=TEXT(E18*F18,""$#,##0"")",,Medium,Include vulnerability scanning and compliance checks
-Testing,User Acceptance Testing,Coordinate UAT with business users and stakeholders,EO Engineer,32,$150,"=TEXT(E19*F19,""$#,##0"")",,Medium,Include training feedback collection and sign-off
-Deployment,Production Deployment,Deploy solution to production environment with monitoring,EO Engineer,24,$160,"=TEXT(E20*F20,""$#,##0"")",,Medium,Include blue-green deployment rollback and validation
-Deployment,Go-Live Support,Provide comprehensive support during initial production rollout,EO Engineer,48,$110,"=TEXT(E21*F21,""$#,##0"")",,Medium,Include 24/7 support monitoring and issue resolution
-Training,Administrator Training,Train system administrators and technical support teams,EO Engineer,16,$130,"=TEXT(E22*F22,""$#,##0"")",,Medium,Include hands-on technical training and certification
-Training,End User Training,Train business users on solution functionality and workflows,EO Engineer,24,$120,"=TEXT(E23*F23,""$#,##0"")",,Medium,Include role-based training documentation and support
-Training,Documentation,Create comprehensive technical and user documentation,EO Engineer,32,$110,"=TEXT(E24*F24,""$#,##0"")",,Medium,Include runbooks troubleshooting guides and best practices
-Closeout,Knowledge Transfer,Transfer solution ownership to operations and support teams,EO Engineer,16,$140,"=TEXT(E25*F25,""$#,##0"")",,Medium,Include operational procedures escalation and maintenance
-Closeout,Performance Baseline,Establish performance metrics monitoring baselines and SLAs,EO Engineer,8,$130,"=TEXT(E26*F26,""$#,##0"")",,Medium,Include KPI definition monitoring setup and reporting
-Management,Technical Leadership,Quarterback technical oversight and architecture review,EO Quarterback,"=ROUND(SUM(E2:E26)*0.25,0)",$180,"=TEXT(E27*F27,""$#,##0"")",,Medium,25% of engineering effort
-Management,Project Management,Project coordination and management activities,EO Project Manager,"=ROUND(SUM(E2:E26)*0.20,0)",$150,"=TEXT(E28*F28,""$#,##0"")",,Low,20% of engineering effort
-,,,     TOTAL HOURS,1119,   TOTAL COST,"=TEXT(E2*F2+E3*F3+E4*F4+E5*F5+E6*F6+E7*F7+E8*F8+E9*F9+E10*F10+E11*F11+E12*F12+E13*F13+E14*F14+E15*F15+E16*F16+E17*F17+E18*F18+E19*F19+E20*F20+E21*F21+E22*F22+E23*F23+E24*F24+E25*F25+E26*F26+E27*F27+E28*F28,""$#,##0"")",,,Total M365 Deployment project cost estimate
+# SCOPE ASSUMPTIONS - BASELINE (MULTIPLIER 1.0),,,,,,,,,,
+#WIDTH: 25,35,33,32,32,39,44
+#ALIGN: left,left,left,left,left,left,left
+Category,Baseline Assumption,Current Scope,Small (1x),Medium (2x),Large (3x),Notes,,,,,
+User Base,Total Users,500 M365 E5 users,500 users,1000-2000 users,3000+ users,Users requiring Microsoft 365 E5 licenses,,,,,
+User Base,User Roles,5 roles (employee manager admin executive guest),2-3 standard roles,4-6 roles,8+ roles with complex permissions,Employee manager admin executive guest roles,,,,,
+M365 Services,M365 Services,Exchange SharePoint Teams OneDrive,Core services,Core + advanced,Full suite + custom,Microsoft 365 services and features enabled,,,,,
+M365 Services,M365 License,E5 (security compliance productivity),E5 basic,E5 advanced,E5 + add-ons,Microsoft 365 licensing tier and features,,,,,
+M365 Services,Email Migration Volume,250 GB total mailbox data,250 GB,1 TB,5+ TB,Email migration from on-premises Exchange,,,,,
+M365 Services,File Migration Volume,5 TB SharePoint and OneDrive,5 TB,20 TB,100+ TB,File migration from on-premises file servers,,,,,
+M365 Services,Teams Phone Users,150 users with PSTN calling,150 users,300 users,1000+ users,Teams Phone System with PSTN connectivity,,,,,
+M365 Services,Audio Conferencing,200 users dial-in access,200 users,500 users,2000+ users,Teams audio conferencing dial-in capability,,,,,
+M365 Services,External Sharing,Controlled external collaboration,Basic external sharing,Standard guest access,Advanced B2B collaboration,External collaboration and guest access complexity,,,,,
+M365 Services,Support Coverage,24x7 user helpdesk support,Basic 8x5 support,Standard 24x5 support,Premium 24x7 support,User support coverage and SLA,,,,,
+Security & Compliance,Security Requirements,Zero-trust Conditional Access MFA,Basic security,Standard zero-trust,Advanced threat protection,Security architecture and controls complexity,,,,,
+Security & Compliance,Compliance Frameworks,SOC 2 GDPR HIPAA,1-2 basic standards,2-3 industry standards,Multiple complex frameworks,Regulatory compliance requirements,,,,,
+Security & Compliance,Authentication,Azure AD Connect SSO with MFA,Azure AD basic,Azure AD standard,Federated multi-forest,Identity and access management complexity,,,,,
+Security & Compliance,Device Management,Intune MDM for 500 endpoints,Basic MDM,Standard MDM,Advanced endpoint protection,Mobile device and endpoint management,,,,,
+Technical Environment,Availability Requirements,99.9% (M365 SLA),99.9% standard,99.95% high availability,99.99% mission critical,Microsoft 365 service level agreement,,,,,
+Technical Environment,Infrastructure Complexity,Hybrid Exchange during migration,Basic hybrid,Standard hybrid,Complex multi-forest,Hybrid cloud architecture complexity,,,,,
+Technical Environment,Deployment Timeline,4 months pilot to production,4 months,6 months,12+ months,Migration timeline and deployment complexity,,,,,
+Environment,Deployment Environments,2 environments (pilot production),2 environments (pilot production),3 environments (dev staging prod),4+ environments with pipelines,Environment management for Microsoft 365,,,,,
+# ESTIMATE SETTINGS,,,,,,,,,,
+#WIDTH: 17,22,14,173
+#ALIGN: left,left,center,left
+Phase,Variable Name,Multiplier,Description / Applies To Tasks,,,,,,,
+Discovery,DISCOVERY_MX,1,"All Discovery phase tasks (Foundation Setup, Pilot Deployment, Azure AD Connect)",,,,,,,
+Planning,PLANNING_MX,1,"All Planning phase tasks (Email Migration, SharePoint Deployment, Teams Deployment)",,,,,,,
+Development,DEVELOPMENT_MX,1,"All Development phase tasks (Teams Phone, Security Hardening, Compliance Implementation)",,,,,,,
+Testing,TESTING_MX,1,"All Testing phase tasks (Migration Testing, Security Testing, User Acceptance Testing)",,,,,,,
+Deployment,DEPLOYMENT_MX,1,"All Deployment phase tasks (Production Cutover, Hypercare Support, Optimization)",,,,,,,
+Training,TRAINING_MX,1,"All Training phase tasks (Administrator Training, Helpdesk Training, Champions Program)",,,,,,,
+Closeout,CLOSEOUT_MX,1,"All Closeout phase tasks (Knowledge Transfer, Exchange Decommissioning)",,,,,,,
+Management,MANAGEMENT_MX,1,"Project Management overhead - 10% of actual engineering hours",,,,,,,
+Leadership,LEADERSHIP_MX,1,"Quarterback/Technical Leadership overhead - 10% of actual engineering hours",,,,,,,
+# Level of Effort,
+#WIDTH: 16,25,58,18,12,14,12,12,15,25,40
+#ALIGN: left,left,left,left,right,center,right,right,right,left,left
+Phase,Work Package,Task Description,Resource Type,Base Hours,Effort Multiplier,Actual Hours,Rate,Cost Estimate,Dependencies,Notes
+Discovery,M365 Tenant Provisioning,Provision Microsoft 365 E5 tenant and domain verification,EO Engineer,16,='Estimate Settings'!$C$3,=$E33*$F33,$150,"=TEXT($G33*$H33,""$#,##0"")",,Tenant setup licensing and domain configuration
+Discovery,Azure AD Connect Deployment,Deploy Azure AD Connect for identity synchronization and SSO,EO Engineer,32,='Estimate Settings'!$C$3,=$E34*$F34,$180,"=TEXT($G34*$H34,""$#,##0"")",,Identity sync SSO and MFA configuration
+Discovery,Hybrid Exchange Configuration,Configure hybrid Exchange for mailbox coexistence,EO Engineer,24,='Estimate Settings'!$C$3,=$E35*$F35,$175,"=TEXT($G35*$H35,""$#,##0"")",Azure AD Connect Deployment,Hybrid setup enabling email migration
+Discovery,Pilot Migration Planning,Plan pilot migration with 50 users across departments,EO Engineer,16,='Estimate Settings'!$C$3,=$E36*$F36,$150,"=TEXT($G36*$H36,""$#,##0"")",Hybrid Exchange Configuration,Pilot user selection and migration planning
+Planning,Pilot Email Migration,Migrate 50 pilot users to Exchange Online,EO Engineer,32,='Estimate Settings'!$C$4,=$E37*$F37,$160,"=TEXT($G37*$H37,""$#,##0"")",Pilot Migration Planning,Pilot mailbox migration with validation
+Planning,Pilot SharePoint Deployment,Deploy pilot SharePoint sites and file collaboration,EO Engineer,24,='Estimate Settings'!$C$4,=$E38*$F38,$155,"=TEXT($G38*$H38,""$#,##0"")",Pilot Email Migration,SharePoint site structure and pilot deployment
+Planning,Pilot Teams Deployment,Deploy Microsoft Teams for pilot users with collaboration,EO Engineer,16,='Estimate Settings'!$C$4,=$E39*$F39,$150,"=TEXT($G39*$H39,""$#,##0"")",Pilot SharePoint Deployment,Teams channels chat and meetings for pilot
+Planning,Pilot Validation,Validate pilot migration and gather user feedback,EO Engineer,16,='Estimate Settings'!$C$4,=$E40*$F40,$140,"=TEXT($G40*$H40,""$#,##0"")",Pilot Teams Deployment,Pilot user acceptance and lessons learned
+Development,Production Email Migration,Migrate remaining 450 users to Exchange Online in waves,EO Engineer,80,='Estimate Settings'!$C$5,=$E41*$F41,$160,"=TEXT($G41*$H41,""$#,##0"")",Pilot Validation,5 departmental waves with 90 users each
+Development,SharePoint Online Deployment,Deploy SharePoint sites for all departments and projects,EO Engineer,40,='Estimate Settings'!$C$5,=$E42*$F42,$155,"=TEXT($G42*$H42,""$#,##0"")",Production Email Migration,Department and project site provisioning
+Development,OneDrive Deployment,Deploy OneDrive for Business with Known Folder Move,EO Engineer,24,='Estimate Settings'!$C$5,=$E43*$F43,$150,"=TEXT($G43*$H43,""$#,##0"")",SharePoint Online Deployment,OneDrive sync and file migration
+Development,File Migration,Migrate 5TB files from on-premises to SharePoint and OneDrive,EO Engineer,40,='Estimate Settings'!$C$5,=$E44*$F44,$150,"=TEXT($G44*$H44,""$#,##0"")",OneDrive Deployment,File server to SharePoint/OneDrive migration
+Development,Teams Company Deployment,Deploy Teams company-wide with channels and governance,EO Engineer,32,='Estimate Settings'!$C$5,=$E45*$F45,$155,"=TEXT($G45*$H45,""$#,##0"")",File Migration,Company-wide Teams collaboration deployment
+Development,Teams Phone System,Deploy Teams Phone for 150 users with PSTN calling,EO Engineer,40,='Estimate Settings'!$C$5,=$E46*$F46,$170,"=TEXT($G46*$H46,""$#,##0"")",Teams Company Deployment,Teams calling with Direct Routing or Calling Plan
+Development,Audio Conferencing,Configure audio conferencing for 200 users with dial-in,EO Engineer,16,='Estimate Settings'!$C$5,=$E47*$F47,$150,"=TEXT($G47*$H47,""$#,##0"")",Teams Phone System,Teams meeting dial-in access configuration
+Development,Conditional Access,Implement Conditional Access policies with MFA and device compliance,EO Engineer,24,='Estimate Settings'!$C$5,=$E48*$F48,$175,"=TEXT($G48*$H48,""$#,##0"")",Audio Conferencing,Zero-trust security policy implementation
+Development,Defender for Office 365,Deploy Defender with anti-phishing and anti-malware protection,EO Engineer,24,='Estimate Settings'!$C$5,=$E49*$F49,$170,"=TEXT($G49*$H49,""$#,##0"")",Conditional Access,Threat protection and Safe Links/Attachments
+Development,Microsoft Purview,Implement Purview for DLP information protection and retention,EO Engineer,32,='Estimate Settings'!$C$5,=$E50*$F50,$165,"=TEXT($G50*$H50,""$#,##0"")",Defender for Office 365,Data loss prevention and compliance policies
+Development,Intune MDM,Deploy Intune for 500 endpoints with device compliance,EO Engineer,24,='Estimate Settings'!$C$5,=$E51*$F51,$160,"=TEXT($G51*$H51,""$#,##0"")",Microsoft Purview,Mobile device management and app protection
+Testing,Migration Validation,Validate email and file migration with zero data loss,EO Engineer,24,='Estimate Settings'!$C$6,=$E52*$F52,$140,"=TEXT($G52*$H52,""$#,##0"")",Intune MDM,Migration accuracy and data integrity validation
+Testing,Security Testing,Test Conditional Access Defender and DLP policies,EO Engineer,24,='Estimate Settings'!$C$6,=$E53*$F53,$165,"=TEXT($G53*$H53,""$#,##0"")",Migration Validation,Security control effectiveness testing
+Testing,Teams Quality Testing,Test Teams collaboration calling and meeting quality,EO Engineer,16,='Estimate Settings'!$C$6,=$E54*$F54,$150,"=TEXT($G54*$H54,""$#,##0"")",Security Testing,Call quality and user experience validation
+Testing,User Acceptance Testing,Coordinate UAT with business users and stakeholders,EO Engineer,24,='Estimate Settings'!$C$6,=$E55*$F55,$140,"=TEXT($G55*$H55,""$#,##0"")",Teams Quality Testing,Business user validation and sign-off
+Deployment,Production Cutover,Final cutover to Microsoft 365 with decommissioning planning,EO Engineer,16,='Estimate Settings'!$C$7,=$E56*$F56,$160,"=TEXT($G56*$H56,""$#,##0"")",User Acceptance Testing,Production go-live and Exchange decommissioning plan
+Deployment,Hypercare Support,Provide 30-day hypercare support post-production,EO Engineer,40,='Estimate Settings'!$C$7,=$E57*$F57,$130,"=TEXT($G57*$H57,""$#,##0"")",Production Cutover,Post-migration issue resolution and optimization
+Training,Administrator Training,Train IT administrators on M365 Exchange SharePoint Teams,EO Engineer,24,='Estimate Settings'!$C$8,=$E58*$F58,$150,"=TEXT($G58*$H58,""$#,##0"")",Production Cutover,Admin training for ongoing operations
+Training,Helpdesk Training,Train helpdesk on Microsoft 365 user support,EO Engineer,16,='Estimate Settings'!$C$8,=$E59*$F59,$130,"=TEXT($G59*$H59,""$#,##0"")",Administrator Training,Helpdesk support training and procedures
+Training,Champions Program,Establish Champions program with department representatives,EO Engineer,16,='Estimate Settings'!$C$8,=$E60*$F60,$140,"=TEXT($G60*$H60,""$#,##0"")",Helpdesk Training,Champions training for user adoption
+Training,Documentation,Create operations runbook and user guides,EO Engineer,24,='Estimate Settings'!$C$8,=$E61*$F61,$130,"=TEXT($G61*$H61,""$#,##0"")",Champions Program,Technical and user documentation
+Closeout,Knowledge Transfer,Transfer Microsoft 365 operations ownership to client team,EO Engineer,16,='Estimate Settings'!$C$9,=$E62*$F62,$140,"=TEXT($G62*$H62,""$#,##0"")",Documentation,Comprehensive handover of M365 operations
+Closeout,Performance Optimization,Optimize network connectivity Teams QoS and user experience,EO Engineer,16,='Estimate Settings'!$C$9,=$E63*$F63,$150,"=TEXT($G63*$H63,""$#,##0"")",Knowledge Transfer,Performance tuning and optimization recommendations
+Management,Technical Leadership,Quarterback technical oversight and M365 architecture review,EO Quarterback,"=ROUND(SUM($G$33:$G$63)*0.10,0)",='Estimate Settings'!$C$12,=$E64*$F64,$200,"=TEXT($G64*$H64,""$#,##0"")",,M365 architecture and migration coordination
+Management,Project Management,Project coordination and migration management,EO Project Manager,"=ROUND(SUM($G$33:$G$63)*0.10,0)",='Estimate Settings'!$C$11,=$E65*$F65,$150,"=TEXT($G65*$H65,""$#,##0"")",,Stakeholder coordination and timeline management
+,,,,,TOTAL HOURS,"=SUM($G$33:$G$65)",TOTAL COST,"=TEXT(SUMPRODUCT($G$33:$G$65,$H$33:$H$65),""$#,##0"")",,EO Sales Engineer: Update phase multipliers based on M365 migration complexity
+
+# Credits - Applied to Total Cost (Year 1 Only)
+#WIDTH: 27,17,100
+#ALIGN: left,right,left
+Credit Type,Credit Amount,Credit Comments
+Microsoft Partner Services Credit,$0,No Microsoft partner credits available for commercial M365 licensing
+FastTrack Assistance,$0,Microsoft FastTrack assistance is free for 500+ seat organizations
+NET PROFESSIONAL SERVICES COST,"=SUMPRODUCT($G$33:$G$65,$H$33:$H$65)",Total Cost - no partner credits for commercial Microsoft 365

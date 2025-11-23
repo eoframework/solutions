@@ -50,6 +50,15 @@ This engagement is sized based on the following parameters:
 <!-- TABLE_CONFIG: widths=[18, 29, 5, 18, 30] -->
 | Parameter | Scope | | Parameter | Scope |
 |-----------|-------|---|-----------|-------|
+| **Total Users** | 500 M365 E5 users | | **Support Coverage** | 24x7 user helpdesk support |
+| **User Roles** | 5 roles (employee manager admin executive guest) | | **Security Requirements** | Zero-trust Conditional Access MFA |
+| **M365 Services** | Exchange SharePoint Teams OneDrive | | **Compliance Frameworks** | SOC 2 GDPR HIPAA |
+| **M365 License** | E5 (security compliance productivity) | | **Authentication** | Azure AD Connect SSO with MFA |
+| **Email Migration Volume** | 250 GB total mailbox data | | **Device Management** | Intune MDM for 500 endpoints |
+| **File Migration Volume** | 5 TB SharePoint and OneDrive | | **Availability Requirements** | 99.9% (M365 SLA) |
+| **Teams Phone Users** | 150 users with PSTN calling | | **Infrastructure Complexity** | Hybrid Exchange during migration |
+| **Audio Conferencing** | 200 users dial-in access | | **Deployment Timeline** | 4 months pilot to production |
+| **External Sharing** | Controlled external collaboration | | **Deployment Environments** | 2 environments (pilot production) |
 <!-- END SCOPE_SIZING_TABLE -->
 
 *Note: Changes to these parameters may require scope adjustment and additional investment.*

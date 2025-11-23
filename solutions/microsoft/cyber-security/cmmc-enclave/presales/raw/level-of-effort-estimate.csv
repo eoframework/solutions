@@ -1,29 +1,75 @@
-Phase,Work Package,Task Description,Resource Type,Estimated Hours,Rate,Cost Estimate,Dependencies,Risk Level,Notes
-Discovery,Azure Requirements Gathering,Conduct stakeholder interviews for Azure cloud strategy,EO Engineer,40,$150,"=TEXT(E2*F2,""$#,##0"")",,Medium,Focus on governance scalability and business alignment
-Discovery,Current Environment Assessment,Analyze existing infrastructure and Azure readiness,EO Engineer,32,$200,"=TEXT(E3*F3,""$#,##0"")",,Medium,Include identity networking and application assessment
-Discovery,Azure Services Assessment,Evaluate Azure services and landing zone requirements,EO Engineer,24,$200,"=TEXT(E4*F4,""$#,##0"")",,Medium,Focus on management groups policies and compliance
-Discovery,Compliance Review,Assess governance security and regulatory requirements,EO Engineer,16,$175,"=TEXT(E5*F5,""$#,##0"")",,Medium,Include Azure Policy and compliance frameworks
-Planning,Azure Landing Zone Design,Design Azure landing zone architecture and governance model,EO Engineer,48,$200,"=TEXT(E6*F6,""$#,##0"")",,Medium,Include management groups policies and blueprints
-Planning,Identity and Access Design,Design Azure AD integration and access management strategy,EO Engineer,32,$180,"=TEXT(E7*F7,""$#,##0"")",,Medium,Include SSO RBAC conditional access and PIM
-Planning,Network Architecture Design,Design Azure networking security and hybrid connectivity,EO Engineer,24,$175,"=TEXT(E8*F8,""$#,##0"")",,Medium,Include hub-spoke VNet peering and security
-Planning,Project Planning,Develop Azure implementation timeline and resource allocation,EO Engineer,24,$140,"=TEXT(E9*F9,""$#,##0"")",,Medium,Coordinate with infrastructure security and compliance teams
-Development,Management Groups and Subscriptions,Configure Azure management groups subscription structure and policies,EO Engineer,40,$160,"=TEXT(E10*F10,""$#,##0"")",,Medium,Include policy inheritance governance and billing
-Development,Azure Policy Implementation,Implement Azure policies governance controls and compliance,EO Engineer,60,$145,"=TEXT(E11*F11,""$#,##0"")",,Medium,Include policy definitions initiatives and remediation
-Development,Network Infrastructure,Build Azure networking VNet peering and hybrid connectivity,EO Engineer,48,$140,"=TEXT(E12*F12,""$#,##0"")",,Medium,Include ExpressRoute VPN and network security
-Development,Identity and Access Implementation,Implement Azure AD integration access controls and SSO,EO Engineer,40,$155,"=TEXT(E13*F13,""$#,##0"")",,Medium,Include MFA conditional access and privileged access
-Development,Monitoring and Operations,Build Azure monitoring logging alerting and operational tools,EO Engineer,32,$130,"=TEXT(E14*F14,""$#,##0"")",,Medium,Include Azure Monitor Log Analytics and automation
-Testing,Unit Testing,Develop automated tests for all solution components,EO Engineer,32,$120,"=TEXT(E15*F15,""$#,##0"")",,Medium,Include technology-specific testing frameworks
-Testing,Integration Testing,Test system integrations data flows and external dependencies,EO Engineer,40,$120,"=TEXT(E16*F16,""$#,##0"")",,Medium,Include end-to-end workflow validation
-Testing,Performance Testing,Conduct load performance and scalability testing,EO Engineer,24,$140,"=TEXT(E17*F17,""$#,##0"")",,Medium,Include production-like environment and stress testing
-Testing,Security Testing,Perform security assessments penetration testing and compliance validation,EO Engineer,16,$175,"=TEXT(E18*F18,""$#,##0"")",,Medium,Include vulnerability scanning and compliance checks
-Testing,User Acceptance Testing,Coordinate UAT with business users and stakeholders,EO Engineer,32,$150,"=TEXT(E19*F19,""$#,##0"")",,Medium,Include training feedback collection and sign-off
-Deployment,Production Deployment,Deploy solution to production environment with monitoring,EO Engineer,24,$160,"=TEXT(E20*F20,""$#,##0"")",,Medium,Include blue-green deployment rollback and validation
-Deployment,Go-Live Support,Provide comprehensive support during initial production rollout,EO Engineer,48,$110,"=TEXT(E21*F21,""$#,##0"")",,Medium,Include 24/7 support monitoring and issue resolution
-Training,Administrator Training,Train system administrators and technical support teams,EO Engineer,16,$130,"=TEXT(E22*F22,""$#,##0"")",,Medium,Include hands-on technical training and certification
-Training,End User Training,Train business users on solution functionality and workflows,EO Engineer,24,$120,"=TEXT(E23*F23,""$#,##0"")",,Medium,Include role-based training documentation and support
-Training,Documentation,Create comprehensive technical and user documentation,EO Engineer,32,$110,"=TEXT(E24*F24,""$#,##0"")",,Medium,Include runbooks troubleshooting guides and best practices
-Closeout,Knowledge Transfer,Transfer solution ownership to operations and support teams,EO Engineer,16,$140,"=TEXT(E25*F25,""$#,##0"")",,Medium,Include operational procedures escalation and maintenance
-Closeout,Performance Baseline,Establish performance metrics monitoring baselines and SLAs,EO Engineer,8,$130,"=TEXT(E26*F26,""$#,##0"")",,Medium,Include KPI definition monitoring setup and reporting
-Management,Technical Leadership,Quarterback technical oversight and architecture review,EO Quarterback,"=ROUND(SUM(E2:E26)*0.25,0)",$180,"=TEXT(E27*F27,""$#,##0"")",,Medium,25% of engineering effort
-Management,Project Management,Project coordination and management activities,EO Project Manager,"=ROUND(SUM(E2:E26)*0.20,0)",$150,"=TEXT(E28*F28,""$#,##0"")",,Low,20% of engineering effort
-,,,     TOTAL HOURS,1119,   TOTAL COST,"=TEXT(E2*F2+E3*F3+E4*F4+E5*F5+E6*F6+E7*F7+E8*F8+E9*F9+E10*F10+E11*F11+E12*F12+E13*F13+E14*F14+E15*F15+E16*F16+E17*F17+E18*F18+E19*F19+E20*F20+E21*F21+E22*F22+E23*F23+E24*F24+E25*F25+E26*F26+E27*F27+E28*F28,""$#,##0"")",,,Total Cmmc Enclave project cost estimate
+# SCOPE ASSUMPTIONS - BASELINE (MULTIPLIER 1.0),,,,,,,,,,
+#WIDTH: 25,35,33,32,32,39,44
+#ALIGN: left,left,left,left,left,left,left
+Category,Baseline Assumption,Current Scope,Small (1x),Medium (2x),Large (3x),Notes,,,,,
+CMMC Requirements,CMMC Level,Level 2 (Advanced Cyber Hygiene),Level 2,Level 3,Level 4 or 5,CMMC certification level and NIST control requirements,,,,,
+CMMC Requirements,NIST 800-171 Controls,110 security requirements,110 controls,110 + Level 3,Additional Level 4/5 controls,Security control implementation complexity,,,,,
+User Base,CUI User Count,50 users accessing CUI,50 users,100-200 users,300+ users,Users requiring CUI access and GCC High licenses,,,,,
+User Base,User Roles,3 roles (CUI processor admin reviewer),2-3 standard roles,4-6 roles,8+ roles with complex permissions,CUI processor administrator reviewer roles,,,,,
+M365 GCC High,M365 Tenant,GCC High (FedRAMP High),GCC High only,GCC High + DoD,Multiple tenants or complex federation,Microsoft 365 GCC High tenant complexity,,,,,
+M365 GCC High,M365 Services,Exchange SharePoint Teams OneDrive Purview,Core services,Core + advanced,Full suite + custom,GCC High services and features enabled,,,,,
+M365 GCC High,Email Migration Volume,100 GB total mailbox data,100 GB,250 GB,1+ TB,Email migration from commercial or on-premises,,,,,
+M365 GCC High,File Migration Volume,500 GB SharePoint and OneDrive,500 GB,2 TB,10+ TB,File migration to GCC High SharePoint,,,,,
+Azure Government,Azure Gov Resources,5 VMs 2TB storage VNet ExpressRoute,Basic infrastructure,Standard infrastructure,Complex multi-tier,Azure Government compute storage network,,,,,
+Azure Government,Sentinel Capacity,100GB/month log ingestion,100GB/month,250GB/month,1+ TB/month,Sentinel SIEM log ingestion and retention,,,,,
+Azure Government,Defender Coverage,All Azure resources and M365 workloads,Basic coverage,Standard coverage,Advanced threat protection,Defender for Cloud coverage scope,,,,,
+Security & Compliance,Authentication,CAC/PIV smart card with MFA,CAC/PIV basic,CAC/PIV + biometric,Advanced federated identity,DoD smart card authentication complexity,,,,,
+Security & Compliance,Identity Platform,Azure AD GCC High with SSO,Azure AD GCC High,Federated multi-forest,Complex hybrid identity,Identity and access management complexity,,,,,
+Security & Compliance,Data Encryption,FIPS 140-2 encryption at rest and transit,FIPS 140-2 basic,FIPS 140-2 advanced,Custom encryption + HSM,Encryption and cryptographic requirements,,,,,
+Technical Environment,Availability Requirements,99.9% (GCC High SLA),99.9% standard,99.95% high availability,99.99% mission critical,GCC High and Azure Government SLA,,,,,
+Technical Environment,Infrastructure Complexity,Azure Gov + M365 GCC High hybrid,Basic hybrid,Standard hybrid,Complex multi-cloud,Hybrid cloud architecture complexity,,,,,
+Technical Environment,Deployment Regions,Single Azure Gov region (us-gov-virginia),Single region,2 regions,Multi-region global,Azure Government geographic distribution,,,,,
+C3PAO Assessment,Assessment Timeline,Month 6 C3PAO assessment,Month 6,Month 9,Month 12+,CMMC certification timeline,,,,,
+Environment,Deployment Environments,2 environments (dev prod),2 environments (dev prod),3 environments (dev staging prod),4+ environments with pipelines,Environment management for CMMC,,,,,
+# ESTIMATE SETTINGS,,,,,,,,,,
+#WIDTH: 17,22,14,173
+#ALIGN: left,left,center,left
+Phase,Variable Name,Multiplier,Description / Applies To Tasks,,,,,,,
+Discovery,DISCOVERY_MX,1,"All Discovery phase tasks (NIST Gap Assessment, Architecture Design, C3PAO Selection)",,,,,,,
+Planning,PLANNING_MX,1,"All Planning phase tasks (GCC High Deployment, Azure Gov Infrastructure, CAC/PIV Authentication)",,,,,,,
+Development,DEVELOPMENT_MX,1,"All Development phase tasks (Sentinel SIEM, Security Monitoring, CMMC Controls Implementation)",,,,,,,
+Testing,TESTING_MX,1,"All Testing phase tasks (Control Testing, Compliance Validation, C3PAO Preparation)",,,,,,,
+Deployment,DEPLOYMENT_MX,1,"All Deployment phase tasks (Production Deployment, C3PAO Assessment, Certification)",,,,,,,
+Training,TRAINING_MX,1,"All Training phase tasks (ISSO/ISSM Training, Security Operations Training, Documentation)",,,,,,,
+Closeout,CLOSEOUT_MX,1,"All Closeout phase tasks (Knowledge Transfer, Ongoing Compliance Management)",,,,,,,
+Management,MANAGEMENT_MX,1,"Project Management overhead - 10% of actual engineering hours",,,,,,,
+Leadership,LEADERSHIP_MX,1,"Quarterback/Technical Leadership overhead - 10% of actual engineering hours",,,,,,,
+# Level of Effort,
+#WIDTH: 16,25,58,18,12,14,12,12,15,25,40
+#ALIGN: left,left,left,left,right,center,right,right,right,left,left
+Phase,Work Package,Task Description,Resource Type,Base Hours,Effort Multiplier,Actual Hours,Rate,Cost Estimate,Dependencies,Notes
+Discovery,NIST 800-171 Gap Assessment,Conduct comprehensive gap assessment across 14 control families,EO Engineer,40,='Estimate Settings'!$C$3,=$E33*$F33,$175,"=TEXT($G33*$H33,""$#,##0"")",,Evaluate current SPRS score and NIST 800-171 compliance posture
+Discovery,GCC High Architecture Design,Design Microsoft 365 GCC High tenant and services architecture,EO Engineer,32,='Estimate Settings'!$C$3,=$E34*$F34,$200,"=TEXT($G34*$H34,""$#,##0"")",,GCC High tenant Exchange SharePoint Teams OneDrive architecture
+Discovery,Azure Government Design,Design Azure Government infrastructure for CUI workloads,EO Engineer,24,='Estimate Settings'!$C$3,=$E35*$F35,$200,"=TEXT($G35*$H35,""$#,##0"")",,VMs storage networking ExpressRoute design
+Discovery,C3PAO Selection,Research and select CMMC Third-Party Assessment Organization,EO Engineer,16,='Estimate Settings'!$C$3,=$E36*$F36,$150,"=TEXT($G36*$H36,""$#,##0"")",,C3PAO qualification and engagement planning
+Planning,GCC High Tenant Provisioning,Provision and configure Microsoft 365 GCC High tenant,EO Engineer,24,='Estimate Settings'!$C$4,=$E37*$F37,$180,"=TEXT($G37*$H37,""$#,##0"")",GCC High Architecture Design,Domain verification licensing and tenant configuration
+Planning,Exchange Online Deployment,Deploy Exchange Online GCC High with archiving and eDiscovery,EO Engineer,32,='Estimate Settings'!$C$4,=$E38*$F38,$175,"=TEXT($G38*$H38,""$#,##0"")",GCC High Tenant Provisioning,CUI email with 10-year retention and compliance
+Planning,SharePoint Teams Deployment,Deploy SharePoint and Teams for CUI collaboration,EO Engineer,24,='Estimate Settings'!$C$4,=$E39*$F39,$175,"=TEXT($G39*$H39,""$#,##0"")",Exchange Online Deployment,Secure collaboration meeting CMMC requirements
+Planning,Email Migration,Migrate email from commercial or on-premises to GCC High,EO Engineer,16,='Estimate Settings'!$C$4,=$E40*$F40,$160,"=TEXT($G40*$H40,""$#,##0"")",SharePoint Teams Deployment,100GB mailbox migration with zero data loss
+Development,Azure Government Infrastructure,Deploy Azure Government VMs storage networking,EO Engineer,40,='Estimate Settings'!$C$5,=$E41*$F41,$180,"=TEXT($G41*$H41,""$#,##0"")",Azure Government Design,5 VMs 2TB storage VNet ExpressRoute deployment
+Development,CAC/PIV Authentication,Implement CAC/PIV smart card authentication with Azure AD,EO Engineer,32,='Estimate Settings'!$C$5,=$E42*$F42,$190,"=TEXT($G42*$H42,""$#,##0"")",Azure Government Infrastructure,DoD smart card integration with conditional access
+Development,Sentinel SIEM Deployment,Deploy Sentinel SIEM with 100GB/month log ingestion,EO Engineer,40,='Estimate Settings'!$C$5,=$E43*$F43,$185,"=TEXT($G43*$H43,""$#,##0"")",CAC/PIV Authentication,Security monitoring and incident response playbooks
+Development,Defender for Cloud,Deploy Defender for Cloud with CMMC compliance monitoring,EO Engineer,24,='Estimate Settings'!$C$5,=$E44*$F44,$180,"=TEXT($G44*$H44,""$#,##0"")",Sentinel SIEM Deployment,Compliance posture management and vulnerability assessment
+Development,Microsoft Purview,Implement Purview for DLP information protection and retention,EO Engineer,24,='Estimate Settings'!$C$5,=$E45*$F45,$175,"=TEXT($G45*$H45,""$#,##0"")",Defender for Cloud,Data loss prevention and compliance policies
+Testing,NIST Control Testing,Validate all 110 NIST 800-171 security requirements,EO Engineer,40,='Estimate Settings'!$C$6,=$E46*$F46,$170,"=TEXT($G46*$H46,""$#,##0"")",Microsoft Purview,Automated and manual testing of security controls
+Testing,Security Assessment,Conduct vulnerability scanning and penetration testing,EO Engineer,24,='Estimate Settings'!$C$6,=$E47*$F47,$190,"=TEXT($G47*$H47,""$#,##0"")",NIST Control Testing,External threat simulation and insider threat testing
+Testing,Compliance Audit,Internal compliance audit against CMMC Level 2 requirements,EO Engineer,32,='Estimate Settings'!$C$6,=$E48*$F48,$185,"=TEXT($G48*$H48,""$#,##0"")",Security Assessment,Validate all controls before C3PAO assessment
+Deployment,System Security Plan,Develop SSP documenting GCC High and Azure Gov architecture,EO Engineer,24,='Estimate Settings'!$C$7,=$E49*$F49,$175,"=TEXT($G49*$H49,""$#,##0"")",Compliance Audit,CMMC documentation and evidence artifacts
+Deployment,C3PAO Assessment,Support C3PAO assessment and finding remediation,EO Engineer,40,='Estimate Settings'!$C$7,=$E50*$F50,$180,"=TEXT($G50*$H50,""$#,##0"")",System Security Plan,Independent CMMC Level 2 assessment support
+Deployment,CMMC Certification,Complete certification and DoD contract enablement,EO Engineer,16,='Estimate Settings'!$C$7,=$E51*$F51,$150,"=TEXT($G51*$H51,""$#,##0"")",C3PAO Assessment,Final certification approval and documentation
+Training,ISSO/ISSM Training,Train CMMC compliance lead on control management,EO Engineer,16,='Estimate Settings'!$C$8,=$E52*$F52,$160,"=TEXT($G52*$H52,""$#,##0"")",CMMC Certification,NIST 800-171 control management and recertification
+Training,Security Operations Training,Train security team on Sentinel and Defender operations,EO Engineer,16,='Estimate Settings'!$C$8,=$E53*$F53,$150,"=TEXT($G53*$H53,""$#,##0"")",ISSO/ISSM Training,SIEM monitoring and incident response procedures
+Training,Documentation,Create operations runbook and CMMC maintenance procedures,EO Engineer,16,='Estimate Settings'!$C$8,=$E54*$F54,$140,"=TEXT($G54*$H54,""$#,##0"")",Security Operations Training,Ongoing compliance management documentation
+Closeout,Knowledge Transfer,Transfer CMMC compliance ownership to client team,EO Engineer,16,='Estimate Settings'!$C$9,=$E55*$F55,$150,"=TEXT($G55*$H55,""$#,##0"")",Documentation,Comprehensive handover of CMMC operations
+Closeout,Compliance Monitoring Setup,Establish continuous compliance monitoring and reporting,EO Engineer,8,='Estimate Settings'!$C$9,=$E56*$F56,$140,"=TEXT($G56*$H56,""$#,##0"")",Knowledge Transfer,Ongoing NIST 800-171 control monitoring setup
+Management,Technical Leadership,Quarterback technical oversight and CMMC architecture review,EO Quarterback,"=ROUND(SUM($G$33:$G$56)*0.10,0)",='Estimate Settings'!$C$12,=$E57*$F57,$200,"=TEXT($G57*$H57,""$#,##0"")",,CMMC compliance architecture and C3PAO coordination
+Management,Project Management,Project coordination and C3PAO assessment management,EO Project Manager,"=ROUND(SUM($G$33:$G$56)*0.10,0)",='Estimate Settings'!$C$11,=$E58*$F58,$150,"=TEXT($G58*$H58,""$#,##0"")",,Stakeholder coordination and certification timeline management
+,,,,,TOTAL HOURS,"=SUM($G$33:$G$58)",TOTAL COST,"=TEXT(SUMPRODUCT($G$33:$G$58,$H$33:$H$58),""$#,##0"")",,EO Sales Engineer: Update phase multipliers based on CMMC scope complexity
+
+# Credits - Applied to Total Cost (Year 1 Only)
+#WIDTH: 27,17,100
+#ALIGN: left,right,left
+Credit Type,Credit Amount,Credit Comments
+Microsoft Partner Services Credit,$0,No Microsoft partner credits available for government licensing (GCC High)
+Implementation Discount,$0,No implementation discount applicable
+NET PROFESSIONAL SERVICES COST,"=SUMPRODUCT($G$33:$G$58,$H$33:$H$58)",Total Cost - no credits available for GCC High government licensing

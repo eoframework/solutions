@@ -50,6 +50,15 @@ This engagement is sized based on the following parameters:
 <!-- TABLE_CONFIG: widths=[18, 29, 5, 18, 30] -->
 | Parameter | Scope | | Parameter | Scope |
 |-----------|-------|---|-----------|-------|
+| **CMMC Level** | Level 2 (Advanced Cyber Hygiene) | | **Sentinel Capacity** | 100GB/month log ingestion |
+| **NIST 800-171 Controls** | 110 security requirements | | **Defender Coverage** | All Azure resources and M365 workloads |
+| **CUI User Count** | 50 users accessing CUI | | **Authentication** | CAC/PIV smart card with MFA |
+| **User Roles** | 3 roles (CUI processor admin reviewer) | | **Identity Platform** | Azure AD GCC High with SSO |
+| **M365 Tenant** | GCC High (FedRAMP High) | | **Data Encryption** | FIPS 140-2 encryption at rest and transit |
+| **M365 Services** | Exchange SharePoint Teams OneDrive Purview | | **Availability Requirements** | 99.9% (GCC High SLA) |
+| **Email Migration Volume** | 100 GB total mailbox data | | **Infrastructure Complexity** | Azure Gov + M365 GCC High hybrid |
+| **File Migration Volume** | 500 GB SharePoint and OneDrive | | **Deployment Regions** | Single Azure Gov region (us-gov-virginia) |
+| **Azure Gov Resources** | 5 VMs 2TB storage VNet ExpressRoute | | **Assessment Timeline** | Month 6 C3PAO assessment |
 <!-- END SCOPE_SIZING_TABLE -->
 
 *Note: Changes to these parameters may require scope adjustment and additional investment.*
