@@ -74,12 +74,12 @@ This engagement is sized based on the following parameters:
 
 - **GitHub Actions Platform**
   - YAML-based workflow definitions in .github/workflows directory
-  - Self-hosted runners in AWS VPC for private builds and compliance
-  - Reusable workflow templates for .NET Node.js Python Docker standardization
+  - Self-hosted runners in AWS VPC for private builds
+  - Reusable workflow templates for .NET Node.js Python Docker
 - **CI/CD Capabilities**
-  - Matrix builds for multi-version testing across platforms and dependencies
-  - Environment protection rules with required reviewers and deployment gates
-  - OIDC integration for keyless AWS Azure GCP authentication without static credentials
+  - Matrix builds for multi-version testing across platforms
+  - Environment protection rules with required reviewers and gates
+  - OIDC keyless authentication for AWS Azure GCP
 
 ---
 
@@ -150,10 +150,10 @@ This engagement is sized based on the following parameters:
 **layout:** eo_single_column
 
 - **Client Success: Enterprise SaaS Technology Company**
-  - **Client:** Global SaaS provider with 150 developers across 80+ microservices deploying to AWS EKS
+  - **Client:** Global SaaS provider with 150 developers and 80+ microservices
   - **Challenge:** Legacy Jenkins infrastructure costing $800K annually with slow 45-minute build times, frequent deployment failures (30% failure rate), and complex Groovy pipeline maintenance requiring dedicated Jenkins administrators.
-  - **Solution:** Deployed GitHub Actions Enterprise CI/CD with 25 self-hosted runners in AWS VPC, developed 20 reusable workflow templates for Node.js Python .NET, and implemented OIDC for keyless AWS authentication. Integrated CodeQL security scanning and Dependabot.
-  - **Results:** Reduced pipeline execution time from 45 minutes to 8 minutes (5.6x faster), increased deployment frequency from weekly to daily, deployment success rate improved to 96%, and infrastructure costs reduced by 65% ($520K annual savings). Full ROI achieved in 14 months.
+  - **Solution:** Deployed GitHub Actions with self-hosted runners, reusable workflow templates, and OIDC for keyless AWS authentication.
+  - **Results:** Reduced pipeline time from 45 to 8 minutes (5.6x faster), daily deployments vs weekly, 96% success rate, 65% cost reduction ($520K savings). Full ROI in 14 months.
   - **Testimonial:** "GitHub Actions transformed our CI/CD from a bottleneck to an enabler. Developers ship features daily instead of waiting for weekly release windows, and our infrastructure costs dropped dramatically with self-hosted runners." — **Sarah Martinez**, VP of Engineering
 
 ---
@@ -185,7 +185,12 @@ This engagement is sized based on the following parameters:
 <!-- TABLE_CONFIG: widths=[25, 15, 15, 15, 12, 12, 15] -->
 | Cost Category | Year 1 List | Year 1 Credits | Year 1 Net | Year 2 | Year 3 | 3-Year Total |
 |---------------|-------------|----------------|------------|--------|--------|--------------|
-| **TOTAL** | **$0** | **$0** | **$0** | **$0** | **$0** | **$0** |
+| Professional Services | $81,200 | $0 | $81,200 | $0 | $0 | $81,200 |
+| Software Licenses | $210,684 | $0 | $210,684 | $210,684 | $210,684 | $632,052 |
+| Cloud Infrastructure | $646,872 | ($10,000) | $636,872 | $646,872 | $646,872 | $1,930,616 |
+| Third-Party Tools | $30,400 | $0 | $30,400 | $30,400 | $30,400 | $91,200 |
+| Support & Maintenance | $55,000 | $0 | $55,000 | $55,000 | $55,000 | $165,000 |
+| **TOTAL** | **$1,024,156** | **($10,000)** | **$1,014,156** | **$942,956** | **$942,956** | **$2,900,068**| **$0** | **$0** | **$0** | **$0** | **$0** | **$0** |
 <!-- END COST_SUMMARY_TABLE -->
 
 **Investment Highlights:**

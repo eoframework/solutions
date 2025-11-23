@@ -73,11 +73,11 @@ This engagement is sized based on the following parameters:
 ![Architecture Diagram](assets/diagrams/architecture-diagram.png)
 
 - **Code Scanning**
-  - CodeQL semantic analysis engine detecting 300+ CWE vulnerability patterns
-  - SQL injection XSS CSRF authentication bypass path traversal detection
-  - Custom queries for company-specific security policies and framework patterns
+  - CodeQL analysis detecting 300+ CWE vulnerability patterns
+  - SQL injection XSS CSRF authentication bypass path traversal
+  - Custom queries for company-specific security policies
 - **Security Platform**
-  - Secret scanning for API keys passwords tokens with push protection
+  - Secret scanning for API keys passwords with push protection
   - Dependabot for dependency vulnerabilities and automated updates
   - Pull request integration blocking merges on critical vulnerabilities
 
@@ -150,9 +150,9 @@ This engagement is sized based on the following parameters:
 **layout:** eo_single_column
 
 - **Client Success: Financial Services Technology Company**
-  - **Client:** Global fintech processing 2 billion transactions annually with 300 developers across 500+ repositories
+  - **Client:** Global fintech with 300 developers across 500+ repositories
   - **Challenge:** Manual code reviews missing critical vulnerabilities with 15+ security incidents annually costing $2M in remediation. SOC 2 and PCI-DSS compliance gaps creating audit exposure.
-  - **Solution:** Deployed GitHub Advanced Security with CodeQL for automated SAST scanning, secret scanning with push protection, and Dependabot for SCA. Developed 20 custom CodeQL queries for financial regulatory patterns.
+  - **Solution:** Deployed GitHub Advanced Security with CodeQL SAST, secret scanning with push protection, and Dependabot SCA.
   - **Results:** 94% of vulnerabilities detected in pull requests before merge, zero secret leaks in 12 months, and $1.8M annual savings. SOC 2 and PCI-DSS compliance validated with zero audit findings. Full ROI achieved in 10 months.
   - **Testimonial:** "GitHub Advanced Security transformed our security posture from reactive to proactive. CodeQL catches issues our manual reviews missed, and our developers now fix security bugs during development instead of after customer impact." — **Michael Chen**, CISO
 
@@ -185,7 +185,11 @@ This engagement is sized based on the following parameters:
 <!-- TABLE_CONFIG: widths=[25, 15, 15, 15, 12, 12, 15] -->
 | Cost Category | Year 1 List | Year 1 Credits | Year 1 Net | Year 2 | Year 3 | 3-Year Total |
 |---------------|-------------|----------------|------------|--------|--------|--------------|
-| **TOTAL** | **$0** | **$0** | **$0** | **$0** | **$0** | **$0** |
+| Professional Services | $63,800 | $0 | $63,800 | $0 | $0 | $63,800 |
+| Software Licenses | $420,342 | $0 | $420,342 | $420,342 | $420,342 | $1,261,026 |
+| Third-Party Tools | $20,000 | $0 | $20,000 | $20,000 | $20,000 | $60,000 |
+| Support & Maintenance | $67,000 | $0 | $67,000 | $67,000 | $67,000 | $201,000 |
+| **TOTAL** | **$571,142** | **$0** | **$571,142** | **$507,342** | **$507,342** | **$1,585,826**| **$0** | **$0** | **$0** | **$0** | **$0** | **$0** |
 <!-- END COST_SUMMARY_TABLE -->
 
 **Investment Highlights:**
