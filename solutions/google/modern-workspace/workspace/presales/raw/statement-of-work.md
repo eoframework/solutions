@@ -212,6 +212,8 @@ These items are not in scope unless added via change control:
 
 ## Deliverables
 
+The following deliverables will be provided throughout the engagement to ensure successful migration from Exchange and file servers to Google Workspace. Each deliverable includes clear acceptance criteria and ownership.
+
 <!-- TABLE_CONFIG: widths=[8, 40, 12, 20, 20] -->
 | # | Deliverable | Type | Due Date | Acceptance By |
 |---|--------------------------------------|--------------|--------------|-----------------|
@@ -233,6 +235,8 @@ These items are not in scope unless added via change control:
 
 ## Project Milestones
 
+Key milestones mark critical decision points and completion gates throughout the 12-week migration project. Each milestone requires formal sign-off before proceeding to the next phase.
+
 <!-- TABLE_CONFIG: widths=[20, 50, 30] -->
 | Milestone | Description | Target Date |
 |-----------|-------------|-------------|
@@ -251,6 +255,8 @@ These items are not in scope unless added via change control:
 # Roles & Responsibilities
 
 ## RACI Matrix
+
+The RACI matrix defines roles and responsibilities for each major task category. This ensures clear accountability and effective collaboration between Vendor and Client teams throughout the migration engagement.
 
 <!-- TABLE_CONFIG: widths=[28, 11, 11, 11, 11, 9, 9, 10] -->
 | Task/Role | EO PM | EO Quarterback | EO Sales Eng | EO Eng (Migration) | Client IT | Client Business | SME |
@@ -388,6 +394,8 @@ The implementation approach follows Google Workspace migration best practices an
 - Just-in-time training: Train users 1 week before their migration wave
 
 ## Tooling Overview
+
+The migration leverages Google-native tools and proven third-party utilities to ensure successful data migration, identity integration, and ongoing administration. All tools are industry-standard and validated for enterprise deployments.
 
 <!-- TABLE_CONFIG: widths=[25, 35, 40] -->
 | Category | Primary Tools | Purpose |
@@ -691,6 +699,8 @@ Post-hypercare, Client may transition to ongoing managed services:
 **500 User Deployment:** This pricing reflects a migration for 500 users from Exchange and file servers to Google Workspace Business Plus. For larger enterprise deployments (1,000+ users), please request revised pricing.
 
 ## Total Investment
+
+The following table summarizes the total investment required for Google Workspace migration and licensing over a 3-year period. Year 1 includes promotional credits reducing the net investment by $13,000.
 
 <!-- BEGIN COST_SUMMARY_TABLE -->
 <!-- TABLE_CONFIG: widths=[20, 12, 18, 14, 12, 11, 13] -->

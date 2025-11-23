@@ -205,7 +205,11 @@ These items are not in scope unless added via change control:
 
 # Deliverables & Timeline
 
+This section outlines the key deliverables and project timeline for the Omniverse Enterprise implementation, providing a clear view of what will be delivered and when stakeholders can expect each milestone to be completed.
+
 ## Deliverables
+
+The following deliverables will be produced throughout the project lifecycle, with each requiring formal acceptance by the designated stakeholder before proceeding to subsequent phases.
 
 <!-- TABLE_CONFIG: widths=[8, 40, 12, 20, 20] -->
 | # | Deliverable | Type | Due Date | Acceptance By |
@@ -230,6 +234,8 @@ These items are not in scope unless added via change control:
 
 ## Project Milestones
 
+The project will be tracked against the following key milestones, which represent critical decision points and phase completions throughout the implementation.
+
 <!-- TABLE_CONFIG: widths=[20, 50, 30] -->
 | Milestone | Description | Target Date |
 |-----------|-------------|-------------|
@@ -247,7 +253,11 @@ These items are not in scope unless added via change control:
 
 # Roles & Responsibilities
 
+This section defines the organizational structure and accountability framework for the Omniverse Enterprise implementation, ensuring clear ownership and communication channels throughout the project.
+
 ## RACI Matrix
+
+The following matrix defines roles and responsibilities for all major project activities using the RACI model (Responsible, Accountable, Consulted, Informed).
 
 <!-- TABLE_CONFIG: widths=[28, 11, 11, 11, 11, 9, 9, 10] -->
 | Task/Role | EO PM | EO Quarterback | EO Sales Eng | EO Eng (Infra) | Client IT | Client Design | SME |
@@ -408,6 +418,8 @@ The implementation approach follows NVIDIA Omniverse best practices for enterpri
 - Connector rollout: Deploy one CAD connector at a time with validation
 
 ## Tooling Overview
+
+The following tools and technologies will be deployed as part of the Omniverse Enterprise solution, forming an integrated real-time collaboration platform.
 
 <!-- TABLE_CONFIG: widths=[25, 35, 40] -->
 | Category | Primary Tools | Purpose |
@@ -698,6 +710,8 @@ Post-hypercare, Client may transition to ongoing managed services:
 **Enterprise 3D Collaboration Platform:** This pricing reflects an enterprise Omniverse deployment with 50 RTX workstations designed for real-time 3D collaboration supporting architects, engineers, and designers. Total capacity: 50 users, 100 TB USD storage.
 
 ## Total Investment
+
+The table below summarizes the total investment required across all cost categories, including professional services, infrastructure, and ongoing support over a three-year period.
 
 <!-- BEGIN COST_SUMMARY_TABLE -->
 <!-- TABLE_CONFIG: widths=[20, 12, 18, 14, 12, 11, 13] -->

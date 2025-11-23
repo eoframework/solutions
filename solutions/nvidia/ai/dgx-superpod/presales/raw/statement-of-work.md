@@ -200,7 +200,11 @@ These items are not in scope unless added via change control:
 
 # Deliverables & Timeline
 
+This section outlines the key deliverables and project timeline for the DGX SuperPOD implementation, providing a clear view of what will be delivered and when stakeholders can expect each milestone to be completed.
+
 ## Deliverables
+
+The following deliverables will be produced throughout the project lifecycle, with each requiring formal acceptance by the designated stakeholder before proceeding to subsequent phases.
 
 <!-- TABLE_CONFIG: widths=[8, 40, 12, 20, 20] -->
 | # | Deliverable | Type | Due Date | Acceptance By |
@@ -225,6 +229,8 @@ These items are not in scope unless added via change control:
 
 ## Project Milestones
 
+The project will be tracked against the following key milestones, which represent critical decision points and phase completions throughout the implementation.
+
 <!-- TABLE_CONFIG: widths=[20, 50, 30] -->
 | Milestone | Description | Target Date |
 |-----------|-------------|-------------|
@@ -243,7 +249,11 @@ These items are not in scope unless added via change control:
 
 # Roles & Responsibilities
 
+This section defines the organizational structure and accountability framework for the DGX SuperPOD implementation, ensuring clear ownership and communication channels throughout the project.
+
 ## RACI Matrix
+
+The following matrix defines roles and responsibilities for all major project activities using the RACI model (Responsible, Accountable, Consulted, Informed).
 
 <!-- TABLE_CONFIG: widths=[28, 11, 11, 11, 11, 9, 9, 10] -->
 | Task/Role | EO PM | EO Quarterback | EO Sales Eng | EO Eng (Infra) | Client IT | Client AI/ML | SME |
@@ -396,6 +406,8 @@ The implementation approach follows NVIDIA DGX SuperPOD reference architecture a
 - Iterative optimization: Benchmark workloads, tune NCCL settings, optimize throughput
 
 ## Tooling Overview
+
+The following tools and technologies will be deployed as part of the DGX SuperPOD solution, forming an integrated AI infrastructure platform.
 
 <!-- TABLE_CONFIG: widths=[25, 35, 40] -->
 | Category | Primary Tools | Purpose |
@@ -690,6 +702,8 @@ Post-hypercare, Client may transition to ongoing managed services:
 **Enterprise AI Supercomputing Deployment:** This pricing reflects an enterprise-scale DGX SuperPOD deployment with 64 H100 GPUs designed for large-scale model training supporting 50+ data scientists. Total capacity: 32 petaFLOPS FP8, 5.1 TB GPU memory, 1 PB storage.
 
 ## Total Investment
+
+The table below summarizes the total investment required across all cost categories, including professional services, infrastructure, and ongoing support over a three-year period.
 
 <!-- BEGIN COST_SUMMARY_TABLE -->
 <!-- TABLE_CONFIG: widths=[20, 12, 18, 14, 12, 11, 13] -->

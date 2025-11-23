@@ -186,9 +186,7 @@ This engagement is sized based on the following parameters:
 | Cost Category | Year 1 List | Year 1 Credits | Year 1 Net | Year 2 | Year 3 | 3-Year Total |
 |---------------|-------------|----------------|------------|--------|--------|--------------|
 | Professional Services | $38,400 | ($3,000) | $35,400 | $0 | $0 | $35,400 |
-| Cloud Infrastructure | $0 | $0 | $0 | $0 | $0 | $0 |
 | Software Licenses | $115,200 | ($10,000) | $105,200 | $115,200 | $115,200 | $335,600 |
-| Support & Maintenance | $0 | $0 | $0 | $0 | $0 | $0 |
 | **TOTAL** | **$153,600** | **($13,000)** | **$140,600** | **$115,200** | **$115,200** | **$371,000** |
 <!-- END COST_SUMMARY_TABLE -->
 

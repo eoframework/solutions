@@ -208,6 +208,8 @@ These items are not in scope unless added via change control:
 
 ## Deliverables
 
+The following deliverables will be provided throughout the engagement to ensure successful implementation of the Google Cloud Landing Zone. Each deliverable includes clear acceptance criteria and ownership.
+
 <!-- TABLE_CONFIG: widths=[8, 40, 12, 20, 20] -->
 | # | Deliverable | Type | Due Date | Acceptance By |
 |---|--------------------------------------|--------------|--------------|-----------------|
@@ -231,6 +233,8 @@ These items are not in scope unless added via change control:
 
 ## Project Milestones
 
+Key milestones mark critical decision points and completion gates throughout the 12-week implementation. Each milestone requires formal sign-off before proceeding to the next phase.
+
 <!-- TABLE_CONFIG: widths=[20, 50, 30] -->
 | Milestone | Description | Target Date |
 |-----------|-------------|-------------|
@@ -249,6 +253,8 @@ These items are not in scope unless added via change control:
 # Roles & Responsibilities
 
 ## RACI Matrix
+
+The RACI matrix defines roles and responsibilities for each major task category. This ensures clear accountability and effective collaboration between Vendor and Client teams throughout the landing zone implementation.
 
 <!-- TABLE_CONFIG: widths=[28, 11, 11, 11, 11, 9, 9, 10] -->
 | Task/Role | EO PM | EO Quarterback | EO Sales Eng | EO Eng (GCP) | Client IT | Client Security | SME |
@@ -393,6 +399,8 @@ The implementation approach follows GCP landing zone best practices and Cloud Fo
 - Pilot-then-scale: Onboard 2 teams, validate, then expand to all teams
 
 ## Tooling Overview
+
+The implementation leverages Google Cloud-native tools, Terraform automation, and enterprise-grade security monitoring to deliver a scalable, secure landing zone. All tools are industry-standard and validated for enterprise deployments.
 
 <!-- TABLE_CONFIG: widths=[25, 35, 40] -->
 | Category | Primary Tools | Purpose |
@@ -689,6 +697,8 @@ Post-hypercare, Client may transition to ongoing managed services:
 **Small-Medium Scope Implementation:** This pricing reflects a foundation deployment designed for 10 projects across 5 teams with future growth to 30+ projects. For larger enterprise deployments (75+ projects), please request large scope pricing.
 
 ## Total Investment
+
+The following table summarizes the total investment required for Google Cloud Landing Zone implementation and ongoing operations over a 3-year period. Year 1 includes partner credits reducing the net investment by $15,000.
 
 <!-- BEGIN COST_SUMMARY_TABLE -->
 <!-- TABLE_CONFIG: widths=[20, 12, 18, 14, 12, 11, 13] -->
