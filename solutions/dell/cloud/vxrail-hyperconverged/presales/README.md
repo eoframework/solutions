@@ -1,4 +1,4 @@
-# DELL Vxrail Hyperconverged - Presales Resources
+# DELL VxRail Hyperconverged - Presales Resources
 
 ## Solution Overview
 
