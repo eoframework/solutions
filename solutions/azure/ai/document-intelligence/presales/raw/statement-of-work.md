@@ -195,6 +195,8 @@ These items are not in scope unless added via change control:
 
 ## Deliverables
 
+The following deliverables will be provided throughout the engagement, with specified delivery dates and acceptance criteria:
+
 <!-- TABLE_CONFIG: widths=[8, 40, 12, 20, 20] -->
 | # | Deliverable | Type | Due Date | Acceptance By |
 |---|--------------------------------------|--------------|--------------|-----------------|
@@ -216,7 +218,7 @@ These items are not in scope unless added via change control:
 
 ## Project Milestones
 
-## Milestones
+The implementation will be delivered in five phases over 16 weeks, with clear milestones and deliverables at each stage:
 
 <!-- TABLE_CONFIG: widths=[20, 50, 30] -->
 | Milestone | Description | Target Date |

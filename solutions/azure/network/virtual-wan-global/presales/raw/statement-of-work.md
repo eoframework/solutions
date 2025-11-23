@@ -32,7 +32,7 @@ This Statement of Work defines the scope, deliverables, timeline, and terms for 
 
 ## Business Context
 
-**layout:** two_column
+[Client Name] requires a simplified global network architecture to connect distributed branch offices, data centers, and cloud resources. This Azure Virtual WAN implementation will modernize network connectivity through centralized management, automated routing, and integrated security enabling consistent performance and policy enforcement across all locations.
 
 **Simplify Global Network Architecture**
 
@@ -55,9 +55,7 @@ This Statement of Work defines the scope, deliverables, timeline, and terms for 
 
 ## In Scope
 
-**layout:** single
-
-**Phased Migration to Virtual WAN**
+The following services and deliverables are included in this SOW, delivered through a proven three-phase methodology:
 
 - **Phase 1: Assessment & Design (Months 1-2)**
   - Audit current network topology and branch connectivity methods
@@ -101,9 +99,7 @@ These items are not in scope unless added via change control:
 
 ## Project Milestones
 
-**layout:** table
-
-**Path to Unified Global Network**
+The implementation will be delivered in three phases over 6 months, with clear milestones and deliverables at each stage:
 
 <!-- TABLE_CONFIG: widths=[10, 25, 15, 50] -->
 | Phase No | Phase Description | Timeline | Key Deliverables |
@@ -114,6 +110,8 @@ These items are not in scope unless added via change control:
 
 
 ## Key Deliverables
+
+The following deliverables will be provided throughout the engagement, with specified delivery dates and acceptance criteria:
 
 <!-- TABLE_CONFIG: widths=[8, 40, 12, 20, 20] -->
 | # | Deliverable | Type | Due Date | Acceptance By |
@@ -163,9 +161,7 @@ These items are not in scope unless added via change control:
 
 ## Solution Architecture
 
-**layout:** visual
-
-**Azure Virtual WAN: Hub-and-Spoke Global Connectivity**
+The Azure Virtual WAN solution will be architected to provide global network connectivity with centralized routing and security through the following key components:
 
 ![Architecture Diagram](assets/diagrams/architecture-diagram.png)
 

@@ -32,9 +32,9 @@ This Statement of Work defines the scope, deliverables, timeline, and terms for 
 
 ## Business Context
 
-**layout:** two_column
+[Client Name] faces increasing cybersecurity threats and regulatory pressures requiring advanced security monitoring and rapid incident response capabilities. This Microsoft Sentinel implementation will transform security operations through AI-powered threat detection, automated response workflows, and unified visibility across the entire IT environment.
 
-**Transforming Security Operations with Cloud-Native SIEM**
+**Key Opportunities and Success Criteria:**
 
 - **Opportunity**
   - Detect and respond to threats 10x faster with AI-powered analytics and automated response playbooks
@@ -55,9 +55,7 @@ This Statement of Work defines the scope, deliverables, timeline, and terms for 
 
 ## In Scope
 
-**layout:** single
-
-**Proven Methodology for Enterprise Security Success**
+The following services and deliverables are included in this SOW, delivered through a proven three-phase methodology:
 
 - **Phase 1: Foundation (Weeks 1-4)**
   - Deploy Azure Sentinel workspace and configure Log Analytics storage
@@ -104,9 +102,7 @@ These items are not in scope unless added via change control:
 
 ## Project Milestones
 
-**layout:** table
-
-**Path to Value Realization**
+The implementation will be delivered in three phases over 12 weeks, with clear milestones and deliverables at each stage:
 
 <!-- TABLE_CONFIG: widths=[10, 25, 15, 50] -->
 | Phase No | Phase Description | Timeline | Key Deliverables |
@@ -117,6 +113,8 @@ These items are not in scope unless added via change control:
 
 
 ## Key Deliverables
+
+The following deliverables will be provided throughout the engagement, with specified delivery dates and acceptance criteria:
 
 <!-- TABLE_CONFIG: widths=[8, 40, 12, 20, 20] -->
 | # | Deliverable | Type | Due Date | Acceptance By |
@@ -166,9 +164,7 @@ These items are not in scope unless added via change control:
 
 ## Solution Architecture
 
-**layout:** visual
-
-**Cloud-Native Security Intelligence Platform Architecture**
+The Microsoft Sentinel solution will be architected as a cloud-native security intelligence platform with four integrated layers providing comprehensive threat detection, investigation, and response capabilities:
 
 ![Architecture Diagram](assets/diagrams/architecture-diagram.png)
 
