@@ -73,13 +73,13 @@ This engagement is sized based on the following parameters:
 ![Architecture Diagram](assets/diagrams/architecture-diagram.png)
 
 - **Compute Infrastructure**
-  - 8x NVIDIA DGX H100 systems each with 8x H100 80GB Tensor Core GPUs (64 GPUs total)
-  - 32 petaFLOPS FP8 AI performance and 5.12 TB GPU memory for large model training
+  - 8x NVIDIA DGX H100 systems with 8x H100 80GB GPUs (64 total)
+  - 32 petaFLOPS FP8 AI performance and 5.12 TB GPU memory
   - DGX OS with optimized CUDA stack and NGC GPU-accelerated container catalog
 - **High-Performance Architecture**
   - NVIDIA Quantum-2 400 Gbps InfiniBand fabric for multi-node distributed training
-  - 1 PB NVMe all-flash storage with 14 GB/s throughput for dataset streaming
-  - Base Command Manager for orchestration with enterprise 24x7 support and 4-hour SLA
+  - 1 PB NVMe storage with 14 GB/s throughput
+  - Base Command Manager with enterprise 24x7 support and 4-hour SLA
 
 ---
 

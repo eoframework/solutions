@@ -73,13 +73,13 @@ This engagement is sized based on the following parameters:
 ![Architecture Diagram](assets/diagrams/architecture-diagram.png)
 
 - **Compute Infrastructure**
-  - 8x Dell PowerEdge R750xa servers each with 4x NVIDIA A100 40GB GPUs (32 GPUs total)
-  - Dual AMD EPYC 7763 processors (128 cores) and 1 TB RAM per server
+  - 8x Dell PowerEdge R750xa servers with 4x NVIDIA A100 40GB (32 total)
+  - Dual AMD EPYC 7763 processors (128 cores) with 1 TB RAM
   - NVIDIA AI Enterprise software suite with NGC container catalog access
 - **Platform Architecture**
   - Kubernetes 1.28+ with NVIDIA GPU Operator for GPU scheduling and time-slicing
   - 100 GbE RDMA network with NCCL for distributed training communication
-  - NetApp AFF 200 TB storage (3-5 GB/s) with Kubeflow and Triton Inference Server
+  - NetApp AFF 200 TB storage (3-5 GB/s) with Kubeflow and Triton
 
 ---
 

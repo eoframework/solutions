@@ -73,13 +73,13 @@ This engagement is sized based on the following parameters:
 ![Architecture Diagram](assets/diagrams/architecture-diagram.png)
 
 - **Collaboration Infrastructure**
-  - Omniverse Nucleus server cluster (2 servers HA) for centralized USD scene storage and version control
-  - 50x Dell Precision 7960 workstations each with NVIDIA RTX A6000 48GB for real-time ray tracing
+  - Omniverse Nucleus server cluster (2 servers HA) for USD scene storage
+  - 50x Dell Precision 7960 workstations with NVIDIA RTX A6000 48GB GPUs
   - Native connectors for Revit SolidWorks Rhino Blender Maya and Unreal Engine
 - **Platform Capabilities**
   - Real-time collaboration with Git-like branching merging and live sync across tools
   - RTX-accelerated ray tracing for photorealistic rendering and interactive performance
-  - Omniverse Farm (10 nodes) and 100 TB storage (3-5 GB/s) for USD assets
+  - Omniverse Farm (10 nodes) with 100 TB storage (3-5 GB/s)
 
 ---
 
