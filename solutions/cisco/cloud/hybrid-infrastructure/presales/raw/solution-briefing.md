@@ -73,7 +73,7 @@ This engagement is sized based on the following parameters:
 ![Architecture Diagram](assets/diagrams/architecture-diagram.png)
 
 - **Key Components**
-  - 4x HyperFlex HX240c M5 nodes with dual Xeon Gold and 768 GB RAM
+  - 4x HyperFlex HX240c M5 nodes with dual Xeon Gold processors
   - Cisco UCS 6454 Fabric Interconnects with unified 25GbE fabric
   - VMware vSphere 8 with HyperFlex distributed storage and data services
 - **Technology Stack**
