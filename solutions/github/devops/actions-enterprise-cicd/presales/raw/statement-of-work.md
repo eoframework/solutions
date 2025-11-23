@@ -26,6 +26,8 @@ This Statement of Work (SOW) defines the scope, deliverables, roles, and terms f
 
 # Background & Objectives
 
+This section outlines [Client Name]'s current CI/CD platform challenges, the strategic business objectives driving this GitHub Actions implementation, and the key success metrics that will define project outcomes.
+
 ## Current State
 
 [Client Name] currently operates a legacy Jenkins CI/CD infrastructure supporting approximately [X] developers across [Y] applications. Key challenges include:
@@ -57,6 +59,8 @@ This Statement of Work (SOW) defines the scope, deliverables, roles, and terms f
 ---
 
 # Scope of Work
+
+This section defines the specific services, activities, and deliverables included in this engagement, along with the parameters that size the implementation scope and the items explicitly excluded from this SOW.
 
 ## In Scope
 The following services and deliverables are included in this SOW:
@@ -208,6 +212,8 @@ These items are not in scope unless added via change control:
 
 # Deliverables & Timeline
 
+This section provides a comprehensive view of all project deliverables, their due dates, acceptance criteria, and key implementation milestones throughout the engagement lifecycle.
+
 ## Deliverables
 
 <!-- TABLE_CONFIG: widths=[8, 40, 12, 20, 20] -->
@@ -248,7 +254,11 @@ These items are not in scope unless added via change control:
 
 # Roles & Responsibilities
 
+This section defines the roles, responsibilities, and accountability for all project stakeholders using a RACI framework, along with key personnel assignments from both Vendor and Client teams.
+
 ## RACI Matrix
+
+The following RACI matrix clarifies decision-making authority and task ownership across all project activities:
 
 <!-- TABLE_CONFIG: widths=[28, 11, 11, 11, 11, 9, 9, 10] -->
 | Task/Role | EO PM | EO Quarterback | EO Sales Eng | EO Eng (DevOps) | Client IT | Client DevOps | SME |
@@ -286,6 +296,8 @@ These items are not in scope unless added via change control:
 ---
 
 # Architecture & Design
+
+This section describes the GitHub Actions Enterprise CI/CD solution architecture, technical specifications, implementation patterns, integration approach, and data management strategy.
 
 ## Architecture Overview
 The GitHub Actions Enterprise CI/CD solution is designed as a **cloud-native automation platform** leveraging GitHub's integrated workflow engine with self-hosted runner infrastructure. The architecture provides scalable, cost-optimized CI/CD automation with seamless integration into existing AWS deployment infrastructure.
@@ -582,6 +594,8 @@ The implementation follows a **parallel operation then gradual migration** strat
 
 # Handover & Support
 
+This section outlines the knowledge transfer approach, handover artifacts, post-implementation support model, and optional managed services transition to ensure successful operational ownership by the Client team.
+
 ## Handover Artifacts
 - As-Built documentation including architecture diagrams and runner infrastructure
 - Reusable workflow template library with documentation
@@ -759,6 +773,8 @@ Post-hypercare, Client may transition to ongoing managed services:
 ---
 
 # Terms & Conditions
+
+This section defines the contractual terms governing this engagement, including general terms, scope change procedures, intellectual property rights, service levels, liability, and confidentiality obligations.
 
 ## General Terms
 
