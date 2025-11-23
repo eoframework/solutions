@@ -199,6 +199,8 @@ These items are not in scope unless added via change control:
 
 # Deliverables & Timeline
 
+This section outlines the key deliverables, acceptance criteria, and project milestones for the Ansible Automation Platform implementation. All deliverables require formal client acceptance before project closeout.
+
 ## Deliverables
 
 <!-- TABLE_CONFIG: widths=[8, 40, 12, 20, 20] -->
@@ -238,6 +240,8 @@ These items are not in scope unless added via change control:
 ---
 
 # Roles & Responsibilities
+
+This section defines the roles, responsibilities, and accountability framework for the Ansible Automation Platform implementation using a RACI model (Responsible, Accountable, Consulted, Informed). Clear role definitions ensure effective collaboration between Vendor and Client teams throughout the project lifecycle.
 
 ## RACI Matrix
 
@@ -590,6 +594,8 @@ The rollout will be coordinated during approved change windows (recommended: off
 
 # Handover & Support
 
+Following successful implementation and production rollout, this section outlines the handover process, knowledge transfer approach, and post-implementation support to ensure operational readiness. The Vendor will provide comprehensive documentation, training, and hypercare support to enable the Client team to independently manage the Ansible Automation Platform.
+
 ## Handover Artifacts
 - As-Built documentation including architecture diagrams and platform configurations
 - Platform administration documentation (controller management, user administration, troubleshooting)
@@ -773,6 +779,8 @@ Post-hypercare, Client may transition to ongoing managed services:
 ---
 
 # Terms & Conditions
+
+This section outlines the contractual terms, conditions, and policies governing the delivery of services under this Statement of Work. These terms supplement the Master Services Agreement (MSA) or equivalent agreement between the parties.
 
 ## General Terms
 

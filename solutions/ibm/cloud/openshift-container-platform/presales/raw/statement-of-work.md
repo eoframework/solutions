@@ -197,6 +197,8 @@ These items are not in scope unless added via change control:
 
 # Deliverables & Timeline
 
+This section outlines the key deliverables, acceptance criteria, and project milestones for the OpenShift Container Platform implementation. All deliverables require formal client acceptance before project closeout.
+
 ## Deliverables
 
 <!-- TABLE_CONFIG: widths=[8, 40, 12, 20, 20] -->
@@ -236,6 +238,8 @@ These items are not in scope unless added via change control:
 ---
 
 # Roles & Responsibilities
+
+This section defines the roles, responsibilities, and accountability framework for the OpenShift implementation using a RACI model (Responsible, Accountable, Consulted, Informed). Clear role definitions ensure effective collaboration between Vendor and Client teams throughout the project lifecycle.
 
 ## RACI Matrix
 
@@ -584,6 +588,8 @@ The cutover will be executed during pre-approved maintenance windows (recommende
 
 # Handover & Support
 
+Following successful implementation and production deployment, this section outlines the handover process, knowledge transfer approach, and post-implementation support to ensure operational readiness. The Vendor will provide comprehensive documentation, training, and hypercare support to enable the Client team to independently manage the OpenShift platform.
+
 ## Handover Artifacts
 - As-Built documentation including architecture diagrams and cluster configurations
 - Platform administration documentation (cluster operations, upgrades, troubleshooting)
@@ -776,6 +782,8 @@ Post-hypercare, Client may transition to ongoing managed services:
 ---
 
 # Terms & Conditions
+
+This section outlines the contractual terms, conditions, and policies governing the delivery of services under this Statement of Work. These terms supplement the Master Services Agreement (MSA) or equivalent agreement between the parties.
 
 ## General Terms
 
