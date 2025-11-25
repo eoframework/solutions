@@ -107,10 +107,6 @@ Navigate to **`delivery/`** for implementation:
 - **Form Digitization** - Converting paper forms to structured data
 - **Document Classification** - Automatic routing based on content
 
-## License
-
-See [EO Framework License](https://www.eoframework.org/license/)
-
 ---
 
 **[EO Framework](https://eoframework.org)** - Exceptional Outcome Framework
