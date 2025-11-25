@@ -178,7 +178,11 @@ Key activities:
 
 # Deliverables & Timeline
 
+This section outlines all project deliverables and key milestones that will be produced throughout the engagement, along with target dates and acceptance criteria.
+
 ## Deliverables
+
+The following table summarizes the key deliverables for this engagement, including documentation, training, and operational artifacts that will be handed over to the Client team:
 
 <!-- TABLE_CONFIG: widths=[8, 40, 12, 20, 20] -->
 | # | Deliverable | Type | Due Date | Acceptance By |
@@ -191,6 +195,8 @@ Key activities:
 | 6 | Knowledge Transfer Sessions | Live/Recorded | Week 28 | Client Team |
 
 ## Project Milestones
+
+The following milestones represent key checkpoints throughout the project lifecycle, providing clear targets for progress tracking and stakeholder communication:
 
 <!-- TABLE_CONFIG: widths=[20, 55, 25] -->
 | Milestone | Description | Target Date |
@@ -207,6 +213,8 @@ Key activities:
 # Roles & Responsibilities
 
 ## RACI Matrix
+
+The following matrix defines the responsibility assignments for key project activities, clarifying who is Responsible, Accountable, Consulted, and Informed for each task:
 
 <!-- TABLE_CONFIG: widths=[28, 11, 11, 11, 11, 9, 9, 10] -->
 | Task/Role | EO PM | EO Quarterback | EO Sales Eng | EO Eng (Sec) | Client IT | Client Sec | SME |
@@ -240,6 +248,8 @@ Key activities:
 # Architecture & Design
 
 ## Architecture Overview
+
+The following diagram illustrates the high-level architecture for the proposed solution, showing the key components, integrations, and data flows:
 
 ![Solution Architecture](assets/diagrams/architecture-diagram.png)
 
@@ -405,6 +415,8 @@ All infrastructure will be deployed using IaC tools (Terraform/CloudFormation) f
 - Shadow traffic for production validation without impact
 
 ## Tooling Overview
+
+The following table outlines the recommended tooling stack for this implementation, along with alternative options that may be considered based on Client preferences or existing investments:
 
 <!-- TABLE_CONFIG: widths=[30, 35, 35] -->
 | Category | Primary Tools | Alternative Options |
@@ -900,9 +912,7 @@ Critical dependencies that must be satisfied for successful project execution:
 
 ## Total Investment
 
-This section provides a comprehensive overview of the total investment required for this engagement, broken down by cost category and displayed across a 3-year period.
-
-The investment includes all professional services, infrastructure costs, software licenses, and support services required to successfully implement and operate the solution. Credits and discounts have been applied where applicable to reduce Year 1 costs.
+The following table provides a comprehensive overview of the total investment required for this engagement, broken down by cost category and displayed across a 3-year period. The investment includes all professional services, infrastructure costs, software licenses, and support services required to successfully implement and operate the solution. Credits and discounts have been applied where applicable to reduce Year 1 costs.
 
 <!-- BEGIN COST_SUMMARY_TABLE -->
 <!-- TABLE_CONFIG: widths=[25, 15, 12, 15, 11, 11, 11] -->
