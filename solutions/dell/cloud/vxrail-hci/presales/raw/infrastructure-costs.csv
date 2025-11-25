@@ -17,19 +17,16 @@ Category,Component,Description,Quantity,Unit,Unit Price,Annual Cost,Year 2,Year 
 Hardware,VxRail E560 Node,2U server with 2x Xeon Gold 6338 768GB RAM 15.36TB all-flash NVMe,4,Nodes,$45000,$180000,$0,$0,$180000,Base 4-node HCI cluster
 Hardware,VxRail Manager Appliance,Lifecycle management virtual appliance for automated updates,1,License,$0,$0,$0,$0,$0,Included with VxRail purchase
 Hardware,Rack Rails & Cable Arms,Rack mounting hardware for VxRail nodes,4,Kits,$350,$1400,$0,$0,$1400,Physical installation accessories
-Networking,Dell PowerSwitch S5248F-ON,48-port 25GbE ToR switch with OS10 for vSAN and vMotion,2,Switches,$12000,$24000,$0,$0,$24000,Redundant pair for HA fabric
-Networking,25GbE SFP28 Transceivers,Fiber optic transceivers for node-to-switch connectivity,32,Transceivers,$400,$12800,$0,$0,$12800,8 per node × 4 nodes (redundant uplinks)
-Networking,OM4 Fiber Cables,Multimode fiber patch cables for 25GbE connections,32,Cables,$45,$1440,$0,$0,$1440,Short-reach data center cabling
-Software,VMware vSphere Enterprise Plus,Hypervisor per-CPU licensing for advanced features,8,CPU Licenses,$5750,$46000,$0,$0,$46000,2 CPUs per node × 4 nodes
-Software,VMware vSAN Enterprise,Software-defined storage per-CPU licensing with dedup/compression,8,CPU Licenses,$3750,$30000,$0,$0,$30000,Included deduplication and encryption
-Software,VMware vCenter Server Standard,Centralized management for vSphere cluster,1,Instance,$6000,$6000,$0,$0,$6000,One-time perpetual license
-Software,VMware vRealize Operations,Infrastructure monitoring capacity planning and optimization,8,CPU Licenses,$2250,$18000,$18000,$18000,$54000,Annual subscription per CPU
-Software,Veeam Backup & Replication,VM backup and replication for VxRail cluster,200,VM Licenses,$45,$9000,$9000,$9000,$27000,Annual subscription per VM
+Hardware,Dell PowerSwitch S5248F-ON,48-port 25GbE ToR switch with OS10 for vSAN and vMotion,2,Switches,$12000,$24000,$0,$0,$24000,Redundant pair for HA fabric
+Hardware,25GbE SFP28 Transceivers,Fiber optic transceivers for node-to-switch connectivity,32,Transceivers,$400,$12800,$0,$0,$12800,8 per node × 4 nodes (redundant uplinks)
+Hardware,OM4 Fiber Cables,Multimode fiber patch cables for 25GbE connections,32,Cables,$45,$1440,$0,$0,$1440,Short-reach data center cabling
+Software Licenses,VMware vSphere Enterprise Plus,Hypervisor per-CPU licensing for advanced features,8,CPU Licenses,$5750,$46000,$0,$0,$46000,2 CPUs per node × 4 nodes
+Software Licenses,VMware vSAN Enterprise,Software-defined storage per-CPU licensing with dedup/compression,8,CPU Licenses,$3750,$30000,$0,$0,$30000,Included deduplication and encryption
+Software Licenses,VMware vCenter Server Standard,Centralized management for vSphere cluster,1,Instance,$6000,$6000,$0,$0,$6000,One-time perpetual license
+Software Licenses,VMware vRealize Operations,Infrastructure monitoring capacity planning and optimization,8,CPU Licenses,$2250,$18000,$18000,$18000,$54000,Annual subscription per CPU
+Software Licenses,Veeam Backup & Replication,VM backup and replication for VxRail cluster,200,VM Licenses,$45,$9000,$9000,$9000,$27000,Annual subscription per VM
 Support & Maintenance,Dell VxRail ProSupport Plus,24x7 integrated hardware and software support for entire stack,4,Nodes,$6750,$27000,$27000,$27000,$81000,Includes VMware and Dell support
 Support & Maintenance,Network Equipment Support,ProSupport for PowerSwitch networking,2,Switches,$1200,$2400,$2400,$2400,$7200,Switch hardware support contracts
-Professional Services,VxRail Deployment Services,On-site installation network configuration and cluster build,4,Nodes,$5000,$20000,$0,$0,$20000,1 week Dell ProDeploy engagement
-Professional Services,VMware Training,vSphere and vSAN administration 5-day course,2,Students,$3500,$7000,$0,$0,$7000,Hands-on training for IT team
-Professional Services,Migration Services,VM migration planning and execution from legacy infrastructure,1,Project,$15000,$15000,$0,$0,$15000,Professional services for workload migration
 
 # Credits
 #WIDTH: 25,25,15,50
@@ -43,11 +40,10 @@ Operational Savings,Data Center Footprint Reduction,"($24000)",Annual savings fr
 #WIDTH: 25,15,15,15,12,12,15
 #ALIGN: left,right,right,right,right,right,right
 Category,Year 1 List,Year 1 Credits,Year 1 Net,Year 2,Year 3,3-Year Total
-Hardware,$219640,$0,$219640,$0,$0,$219640
-Networking,$38240,$0,$38240,$0,$0,$38240
-Software,$109000,$0,$109000,$27000,$27000,$163000
-Support & Maintenance,$29400,$0,$29400,$29400,$29400,$88200
-Professional Services,$42000,$0,$42000,$0,$0,$42000
+Hardware,$257,880,$0,$257,880,$0,$0,$257,880
+Software Licenses,$109,000,$0,$109,000,$27,000,$27,000,$163,000
+Support & Maintenance,$29,400,$0,$29,400,$29,400,$29,400,$88,200
 TOTAL,$438280,$0,$438280,$56400,$56400,$551080
-Legacy Cost Avoidance,$0,"($189000)","($189000)","($189000)","($189000)","($567000)"
-Net Investment After Savings,$438280,"($189000)",$249280,"($132600)","($132600)","($15920)"
+Legacy Cost Avoidance,$0,($189000),($189000),($189000),($189000),($567000)
+Net Investment After Savings,$438280,($189000),$249280,($132600),($132600),($15920)
+

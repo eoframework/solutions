@@ -704,11 +704,11 @@ The following table summarizes the total investment required for Google Cloud La
 <!-- TABLE_CONFIG: widths=[20, 12, 18, 14, 12, 11, 13] -->
 | Cost Category | Year 1 List | AWS/Partner Credits | Year 1 Net | Year 2 | Year 3 | 3-Year Total |
 |---------------|-------------|---------------------|------------|--------|--------|--------------|
-| Professional Services | $65,000 | ($5,000) | $60,000 | $0 | $0 | $60,000 |
-| Cloud Infrastructure | $49,948 | ($10,000) | $39,948 | $51,547 | $53,092 | $144,587 |
+| Professional Services | $0 | $0 | $0 | $0 | $0 | $0 |
+| Cloud Services | $49,948 | ($10,000) | $39,948 | $51,547 | $53,092 | $144,587 |
 | Software Licenses | $48,000 | $0 | $48,000 | $48,000 | $48,000 | $144,000 |
 | Support & Maintenance | $18,000 | $0 | $18,000 | $18,540 | $19,096 | $55,636 |
-| **TOTAL INVESTMENT** | **$180,948** | **($15,000)** | **$165,948** | **$118,087** | **$120,188** | **$404,223** |
+| **TOTAL INVESTMENT** | **$115,948** | **($10,000)** | **$105,948** | **$118,087** | **$120,188** | **$344,223** |
 <!-- END COST_SUMMARY_TABLE -->
 
 ## Partner Credits

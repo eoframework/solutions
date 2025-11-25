@@ -18,24 +18,20 @@ Category,Component,Description,Quantity,Unit,Unit Price,Annual Cost,Year 2,Year 
 Hardware,VxRail P570 Node,2U all-NVMe server 2x Xeon Platinum 8368 1.5TB RAM 30.72TB NVMe,8,Nodes,$75000,$600000,$0,$0,$600000,Enterprise-grade HCI appliance
 Hardware,VxRail Manager Appliance,Lifecycle management virtual appliance for automated updates,1,License,$0,$0,$0,$0,$0,Included with VxRail purchase
 Hardware,Rack Rails & Cable Arms,Rack mounting hardware for VxRail P570 nodes,8,Kits,$350,$2800,$0,$0,$2800,Physical installation accessories
-Networking,Dell PowerSwitch Z9332F-ON,32-port 100GbE spine switch with OS10 for high-performance fabric,4,Switches,$65000,$260000,$0,$0,$260000,Redundant spine-leaf architecture
-Networking,Dell PowerSwitch S5248F-ON,48-port 25GbE leaf ToR switch for server connectivity,4,Switches,$12000,$48000,$0,$0,$48000,Leaf switches for distributed fabric
-Networking,100GbE QSFP28 Transceivers,Fiber optic transceivers for spine-leaf interconnects,64,Transceivers,$850,$54400,$0,$0,$54400,High-speed fabric connectivity
-Networking,25GbE SFP28 Transceivers,Fiber optic transceivers for node-to-leaf connectivity,64,Transceivers,$400,$25600,$0,$0,$25600,Server uplinks (8 per node × 8 nodes)
-Networking,OM4 Fiber Cables,Multimode fiber patch cables for 25/100GbE connections,128,Cables,$45,$5760,$0,$0,$5760,Data center cabling infrastructure
-Software,VMware vSphere Enterprise Plus,Hypervisor per-CPU licensing for advanced DRS and HA features,16,CPU Licenses,$5750,$92000,$0,$0,$92000,2 CPUs per node × 8 nodes
-Software,VMware vSAN Enterprise,Software-defined storage per-CPU with dedup compression encryption,16,CPU Licenses,$3750,$60000,$0,$0,$60000,vSAN advanced features for enterprise
-Software,VMware vCenter Server Standard,Centralized management for vSphere cluster,1,Instance,$6000,$6000,$0,$0,$6000,One-time perpetual license
-Software,VMware NSX Data Center Enterprise Plus,Network virtualization and micro-segmentation per-CPU,16,CPU Licenses,$4995,$79920,$0,$0,$79920,Zero-trust security and distributed firewall
-Software,VMware vRealize Suite Enterprise,Operations monitoring capacity planning and automation,16,CPU Licenses,$4150,$66400,$66400,$66400,$199200,Annual subscription per CPU
-Software,Dell RecoverPoint for VMs,Multi-site replication and disaster recovery orchestration,8,Nodes,$10000,$80000,$80000,$80000,$240000,Annual subscription for DR solution
-Software,Veeam Backup & Replication Enterprise Plus,Enterprise VM backup with instant recovery,500,VM Licenses,$75,$37500,$37500,$37500,$112500,Annual subscription per VM
+Hardware,Dell PowerSwitch Z9332F-ON,32-port 100GbE spine switch with OS10 for high-performance fabric,4,Switches,$65000,$260000,$0,$0,$260000,Redundant spine-leaf architecture
+Hardware,Dell PowerSwitch S5248F-ON,48-port 25GbE leaf ToR switch for server connectivity,4,Switches,$12000,$48000,$0,$0,$48000,Leaf switches for distributed fabric
+Hardware,100GbE QSFP28 Transceivers,Fiber optic transceivers for spine-leaf interconnects,64,Transceivers,$850,$54400,$0,$0,$54400,High-speed fabric connectivity
+Hardware,25GbE SFP28 Transceivers,Fiber optic transceivers for node-to-leaf connectivity,64,Transceivers,$400,$25600,$0,$0,$25600,Server uplinks (8 per node × 8 nodes)
+Hardware,OM4 Fiber Cables,Multimode fiber patch cables for 25/100GbE connections,128,Cables,$45,$5760,$0,$0,$5760,Data center cabling infrastructure
+Software Licenses,VMware vSphere Enterprise Plus,Hypervisor per-CPU licensing for advanced DRS and HA features,16,CPU Licenses,$5750,$92000,$0,$0,$92000,2 CPUs per node × 8 nodes
+Software Licenses,VMware vSAN Enterprise,Software-defined storage per-CPU with dedup compression encryption,16,CPU Licenses,$3750,$60000,$0,$0,$60000,vSAN advanced features for enterprise
+Software Licenses,VMware vCenter Server Standard,Centralized management for vSphere cluster,1,Instance,$6000,$6000,$0,$0,$6000,One-time perpetual license
+Software Licenses,VMware NSX Data Center Enterprise Plus,Network virtualization and micro-segmentation per-CPU,16,CPU Licenses,$4995,$79920,$0,$0,$79920,Zero-trust security and distributed firewall
+Software Licenses,VMware vRealize Suite Enterprise,Operations monitoring capacity planning and automation,16,CPU Licenses,$4150,$66400,$66400,$66400,$199200,Annual subscription per CPU
+Software Licenses,Dell RecoverPoint for VMs,Multi-site replication and disaster recovery orchestration,8,Nodes,$10000,$80000,$80000,$80000,$240000,Annual subscription for DR solution
+Software Licenses,Veeam Backup & Replication Enterprise Plus,Enterprise VM backup with instant recovery,500,VM Licenses,$75,$37500,$37500,$37500,$112500,Annual subscription per VM
 Support & Maintenance,Dell Mission Critical Services,2-hour response 24x7 with dedicated TAM and escalation,8,Nodes,$12000,$96000,$96000,$96000,$288000,Highest-tier enterprise support
 Support & Maintenance,Network Equipment Support,ProSupport Plus for PowerSwitch spine and leaf switches,8,Switches,$1800,$14400,$14400,$14400,$43200,Switch hardware support contracts
-Professional Services,VxRail Enterprise Deployment,Architecture design on-site installation and configuration,8,Nodes,$8000,$64000,$0,$0,$64000,2 week Dell ProDeploy engagement
-Professional Services,VMware Advanced Training,vSphere vSAN NSX vRealize Operations 10-day course,4,Students,$5000,$20000,$0,$0,$20000,Comprehensive enterprise training
-Professional Services,Database Migration Services,Oracle RAC and SQL Always-On migration planning and execution,1,Project,$50000,$50000,$0,$0,$50000,Professional services for Tier 1 migration
-Professional Services,Disaster Recovery Planning,DR architecture design SRM configuration and failover testing,1,Project,$25000,$25000,$0,$0,$25000,DR solution implementation services
 
 # Credits
 #WIDTH: 25,25,15,50
@@ -50,11 +46,10 @@ Operational Savings,Administrative Labor Savings,"($120000)",Annual savings from
 #WIDTH: 25,15,15,15,12,12,15
 #ALIGN: left,right,right,right,right,right,right
 Category,Year 1 List,Year 1 Credits,Year 1 Net,Year 2,Year 3,3-Year Total
-Hardware,$996560,$0,$996560,$0,$0,$996560
-Networking,$393760,$0,$393760,$0,$0,$393760
-Software,$421820,$0,$421820,$183900,$183900,$789620
-Support & Maintenance,$110400,$0,$110400,$110400,$110400,$331200
-Professional Services,$159000,$0,$159000,$0,$0,$159000
+Hardware,$1,390,320,$0,$1,390,320,$0,$0,$1,390,320
+Software Licenses,$421,820,$0,$421,820,$183,900,$183,900,$789,620
+Support & Maintenance,$110,400,$0,$110,400,$110,400,$110,400,$331,200
 TOTAL,$2081540,$0,$2081540,$294300,$294300,$2670140
-Legacy Cost Avoidance,$0,"($471000)","($471000)","($471000)","($471000)","($1413000)"
-Net Investment After Savings,$2081540,"($471000)",$1610540,"($176700)","($176700)",$1257140
+Legacy Cost Avoidance,$0,($471000),($471000),($471000),($471000),($1413000)
+Net Investment After Savings,$2081540,($471000),$1610540,($176700),($176700),$1257140
+

@@ -185,11 +185,11 @@ This engagement is sized based on the following parameters:
 <!-- TABLE_CONFIG: widths=[25, 15, 15, 15, 12, 12, 15] -->
 | Cost Category | Year 1 List | Year 1 Credits | Year 1 Net | Year 2 | Year 3 | 3-Year Total |
 |---------------|-------------|----------------|------------|--------|--------|--------------|
-| Professional Services | $65,000 | ($5,000) | $60,000 | $0 | $0 | $60,000 |
-| Cloud Infrastructure | $49,948 | ($10,000) | $39,948 | $51,547 | $53,092 | $144,587 |
+| Professional Services | $0 | $0 | $0 | $0 | $0 | $0 |
+| Cloud Services | $49,948 | ($10,000) | $39,948 | $51,547 | $53,092 | $144,587 |
 | Software Licenses | $48,000 | $0 | $48,000 | $48,000 | $48,000 | $144,000 |
 | Support & Maintenance | $18,000 | $0 | $18,000 | $18,540 | $19,096 | $55,636 |
-| **TOTAL** | **$180,948** | **($15,000)** | **$165,948** | **$118,087** | **$120,188** | **$404,223** |
+| **TOTAL** | **$115,948** | **($10,000)** | **$105,948** | **$118,087** | **$120,188** | **$344,223** |
 <!-- END COST_SUMMARY_TABLE -->
 
 **Google Cloud Partner Credits (Year 1 Only):**

@@ -191,12 +191,10 @@ This engagement is sized based on the following parameters:
 <!-- TABLE_CONFIG: widths=[25, 15, 15, 15, 12, 12, 15] -->
 | Cost Category | Year 1 List | Year 1 Credits | Year 1 Net | Year 2 | Year 3 | 3-Year Total |
 |---------------|-------------|----------------|------------|--------|--------|--------------|
-| Professional Services | $42,000 | $0 | $42,000 | $0 | $0 | $42,000 |
-| Hardware | $219,640 | $0 | $219,640 | $0 | $0 | $219,640 |
-| Networking | $38,240 | $0 | $38,240 | $0 | $0 | $38,240 |
-| Software | $109,000 | $0 | $109,000 | $27,000 | $27,000 | $163,000 |
-| Support & Maintenance | $29,400 | $0 | $29,400 | $29,400 | $29,400 | $88,200 |
-| **TOTAL** | **$876,560** | **($378,000)** | **$498,560** | **($265,200)** | **($265,200)** | **($31,840)** |
+| Professional Services | $0 | $0 | $0 | $0 | $0 | $0 |
+| Software Licenses | $109 | $0 | $0 | $109 | $0 | $27 |
+| Support & Maintenance | $29 | $400 | $0 | $29 | $400 | $29 |
+| **TOTAL** | **$438,675** | **($376,720)** | **$60,280** | **($321,205)** | **($320,320)** | **($581,245)** |
 <!-- END COST_SUMMARY_TABLE -->
 
 **Cost Avoidance Analysis:**

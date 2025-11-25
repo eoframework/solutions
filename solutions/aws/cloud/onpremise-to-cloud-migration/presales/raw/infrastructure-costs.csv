@@ -4,10 +4,10 @@
 Category,Component,Small,Medium,Large,Notes
 Migration Scope,Application Workloads,15-25 applications,50-100 applications,200+ applications,Number of applications to migrate
 Migration Scope,Database Instances,1-2 databases,5-10 databases,20+ databases,Database migration complexity
-Cloud Infrastructure,Application Tier,3 t3.large instances,6-8 m5.xlarge instances,15+ m5.2xlarge instances,Target EC2 compute capacity
-Cloud Infrastructure,Database Size,db.t3.large Multi-AZ,db.r5.xlarge Multi-AZ,db.r5.4xlarge Multi-AZ,RDS instance sizing
-Cloud Infrastructure,Storage Volume,1 TB,5 TB,20+ TB,Application data and backups
-Cloud Infrastructure,Migration Data Transfer,2 TB initial transfer,10 TB initial transfer,50+ TB initial transfer,One-time data migration volume
+Cloud Services,Application Tier,3 t3.large instances,6-8 m5.xlarge instances,15+ m5.2xlarge instances,Target EC2 compute capacity
+Cloud Services,Database Size,db.t3.large Multi-AZ,db.r5.xlarge Multi-AZ,db.r5.4xlarge Multi-AZ,RDS instance sizing
+Cloud Services,Storage Volume,1 TB,5 TB,20+ TB,Application data and backups
+Cloud Services,Migration Data Transfer,2 TB initial transfer,10 TB initial transfer,50+ TB initial transfer,One-time data migration volume
 Migration Timeline,Migration Duration,4-6 months,9-12 months,18+ months,Full migration timeline
 Support & Maintenance,Support Level,Business hours,24x5 support,24x7 premium,SLA requirements
 
@@ -15,23 +15,23 @@ Support & Maintenance,Support Level,Business hours,24x5 support,24x7 premium,SLA
 #WIDTH: 23,30,50,12,16,12,15,12,12,15,30
 #ALIGN: left,left,left,right,left,right,right,right,right,right,left
 Category,Component,Description,Quantity,Unit,Unit Price,Annual Cost,Year 2,Year 3,3-Year Total,Notes
-Cloud Infrastructure,EC2 Application Tier,t3.large instances for migrated apps,3,Instance/Month,$67.5,"=D11*F11*12","=G11","=G11","=G11+H11+I11",Target application servers
-Cloud Infrastructure,RDS Multi-AZ Database,db.t3.large PostgreSQL managed database,1,Instance/Month,$288,"=D12*F12*12","=G12","=G12","=G12+H12+I12",Migrated database
-Cloud Infrastructure,S3 Standard Storage,App data and backups (1TB),1000,GB/Month,$0.023,"=D13*F13*12","=G13","=G13","=G13+H13+I13",Object storage
-Cloud Infrastructure,EBS General Purpose SSD,Block storage volumes (500GB),500,GB/Month,$0.1,"=D14*F14*12","=G14","=G14","=G14+H14+I14",Block storage
-Cloud Infrastructure,Application Load Balancer,Load balancing and SSL termination,1,ALB/Month,$22.5,"=D15*F15*12","=G15","=G15","=G15+H15+I15",Load balancing
-Cloud Infrastructure,CloudFront CDN,Static content delivery (200GB/month),200,GB/Month,$0.085,"=D16*F16*12","=G16","=G16","=G16+H16+I16",Content delivery
-Cloud Infrastructure,VPC Networking,Virtual private cloud with subnets,1,Service/Month,$0,"=D17*F17*12","=G17","=G17","=G17+H17+I17",Network infrastructure
-Cloud Infrastructure,NAT Gateway,Outbound internet access (single AZ),1,Gateway/Month,$32.85,"=D18*F18*12","=G18","=G18","=G18+H18+I18",Outbound connectivity
-Cloud Infrastructure,Route 53 DNS,DNS management (2 hosted zones),2,Zones/Month,$0.5,"=D19*F19*12","=G19","=G19","=G19+H19+I19",DNS management
-Cloud Infrastructure,Site-to-Site VPN,Secure VPN for migration connectivity,1,Connection/Month,$36,"=D20*F20*12","=G20","=G20","=G20+H20+I20",Hybrid connectivity
-Cloud Infrastructure,ElastiCache Redis,In-memory caching (cache.t3.medium),1,Instance/Month,$32.5,"=D21*F21*12","=G21","=G21","=G21+H21+I21",Application caching
-Cloud Infrastructure,CloudWatch Logs,Centralized logging (50GB),50,GB/Month,$0.5,"=D22*F22*12","=G22","=G22","=G22+H22+I22",Log management
-Cloud Infrastructure,CloudWatch Metrics,Monitoring (100 custom metrics),100,Metrics/Month,$0.3,"=D23*F23*12","=G23","=G23","=G23+H23+I23",Custom metrics
-Cloud Infrastructure,Systems Manager,Configuration management,1,Service/Month,$0,"=D24*F24*12","=G24","=G24","=G24+H24+I24",Free tier
-Cloud Infrastructure,Secrets Manager,Secure credential storage (10 secrets),10,Secrets/Month,$0.4,"=D25*F25*12","=G25","=G25","=G25+H25+I25",Secrets management
-Cloud Infrastructure,AWS Backup,Automated backup management (500GB),500,GB/Month,$0.05,"=D26*F26*12","=G26","=G26","=G26+H26+I26",Backup service
-Cloud Infrastructure,Data Transfer (Migration),Initial data transfer (2TB one-time),2000,GB,$0.05,"=D27*F27","=$0","=$0","=G27",One-time migration cost
+Cloud Services,EC2 Application Tier,t3.large instances for migrated apps,3,Instance/Month,$67.5,"=D11*F11*12","=G11","=G11","=G11+H11+I11",Target application servers
+Cloud Services,RDS Multi-AZ Database,db.t3.large PostgreSQL managed database,1,Instance/Month,$288,"=D12*F12*12","=G12","=G12","=G12+H12+I12",Migrated database
+Cloud Services,S3 Standard Storage,App data and backups (1TB),1000,GB/Month,$0.023,"=D13*F13*12","=G13","=G13","=G13+H13+I13",Object storage
+Cloud Services,EBS General Purpose SSD,Block storage volumes (500GB),500,GB/Month,$0.1,"=D14*F14*12","=G14","=G14","=G14+H14+I14",Block storage
+Cloud Services,Application Load Balancer,Load balancing and SSL termination,1,ALB/Month,$22.5,"=D15*F15*12","=G15","=G15","=G15+H15+I15",Load balancing
+Cloud Services,CloudFront CDN,Static content delivery (200GB/month),200,GB/Month,$0.085,"=D16*F16*12","=G16","=G16","=G16+H16+I16",Content delivery
+Cloud Services,VPC Networking,Virtual private cloud with subnets,1,Service/Month,$0,"=D17*F17*12","=G17","=G17","=G17+H17+I17",Network infrastructure
+Cloud Services,NAT Gateway,Outbound internet access (single AZ),1,Gateway/Month,$32.85,"=D18*F18*12","=G18","=G18","=G18+H18+I18",Outbound connectivity
+Cloud Services,Route 53 DNS,DNS management (2 hosted zones),2,Zones/Month,$0.5,"=D19*F19*12","=G19","=G19","=G19+H19+I19",DNS management
+Cloud Services,Site-to-Site VPN,Secure VPN for migration connectivity,1,Connection/Month,$36,"=D20*F20*12","=G20","=G20","=G20+H20+I20",Hybrid connectivity
+Cloud Services,ElastiCache Redis,In-memory caching (cache.t3.medium),1,Instance/Month,$32.5,"=D21*F21*12","=G21","=G21","=G21+H21+I21",Application caching
+Cloud Services,CloudWatch Logs,Centralized logging (50GB),50,GB/Month,$0.5,"=D22*F22*12","=G22","=G22","=G22+H22+I22",Log management
+Cloud Services,CloudWatch Metrics,Monitoring (100 custom metrics),100,Metrics/Month,$0.3,"=D23*F23*12","=G23","=G23","=G23+H23+I23",Custom metrics
+Cloud Services,Systems Manager,Configuration management,1,Service/Month,$0,"=D24*F24*12","=G24","=G24","=G24+H24+I24",Free tier
+Cloud Services,Secrets Manager,Secure credential storage (10 secrets),10,Secrets/Month,$0.4,"=D25*F25*12","=G25","=G25","=G25+H25+I25",Secrets management
+Cloud Services,AWS Backup,Automated backup management (500GB),500,GB/Month,$0.05,"=D26*F26*12","=G26","=G26","=G26+H26+I26",Backup service
+Cloud Services,Data Transfer (Migration),Initial data transfer (2TB one-time),2000,GB,$0.05,"=D27*F27","=$0","=$0","=G27",One-time migration cost
 Software Licenses,Datadog Monitoring,Pro monitoring (6 hosts for migrated apps),6,Hosts/Month,$23,"=D28*F28*12","=G28","=G28","=G28+H28+I28",Application monitoring
 Software Licenses,PagerDuty,Professional incident management (3 users),3,Users/Month,$41,"=D29*F29*12","=G29","=G29","=G29+H29+I29",Incident management
 Support & Maintenance,AWS Managed Services,Managed services and ongoing optimization (15% of infrastructure),1,Service/Month,$121.83,"=D30*F30*12","=G30","=G30","=G30+H30+I30",Ongoing support
@@ -40,10 +40,10 @@ Support & Maintenance,AWS Managed Services,Managed services and ongoing optimiza
 #WIDTH: 25,25,15,50
 #ALIGN: left,left,right,left
 Category,Credit Type,Credit Amount,Credit Comments
-Cloud Infrastructure,AWS MAP Consumption Credit,"($3317)",35% credit on Year 1 cloud infrastructure consumption (excludes one-time data transfer)
+Cloud Services,AWS MAP Consumption Credit,"($3317)",35% credit on Year 1 cloud infrastructure consumption (excludes one-time data transfer)
 Software Licenses,Partner Credit,$0,No software credits available
 Support & Maintenance,Program Credit,$0,No support credits available
-Hardware/Equipment,Equipment Credit,$0,No hardware credits available
+Hardware,Equipment Credit,$0,No hardware credits available
 Professional Services,AWS MAP Assessment Credit,"($12000)",100% funded - discovery and assessment phase
 Professional Services,AWS MAP Mobilize Credit,"($5000)",Partial funding - migration strategy and planning
 Professional Services,AWS MAP Migrate Credit,"($5000)",Partial funding - application lift-and-shift migration
@@ -52,8 +52,7 @@ Professional Services,AWS MAP Migrate Credit,"($5000)",Partial funding - applica
 #WIDTH: 25,15,15,15,12,12,15
 #ALIGN: left,right,right,right,right,right,right
 Category,Year 1 List,Year 1 Credits,Year 1 Net,Year 2,Year 3,3-Year Total
-Cloud Infrastructure,$10572,"($3317)",$7255,$10472,$10472,$28199
+Cloud Services,$10572,"($3317)",$7255,$10472,$10472,$28199
 Software Licenses,$3132,$0,$3132,$3132,$3132,$9396
 Support & Maintenance,$1462,$0,$1462,$1462,$1462,$4386
-Professional Services,$125150,"($22000)",$103150,$0,$0,$103150
 TOTAL,$140316,"($25317)",$114999,$15066,$15066,$145131

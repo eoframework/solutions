@@ -692,12 +692,12 @@ Post-hypercare, Client may transition to ongoing managed services:
 <!-- TABLE_CONFIG: widths=[20, 12, 18, 14, 12, 11, 13] -->
 | Cost Category | Year 1 List | AWS/Partner Credits | Year 1 Net | Year 2 | Year 3 | 3-Year Total |
 |---------------|-------------|---------------------|------------|--------|--------|--------------|
-| Professional Services | $90,000 | ($5,000) | $85,000 | $0 | $0 | $85,000 |
-| Cloud Infrastructure | $9,876 | $0 | $9,876 | $9,876 | $9,876 | $29,628 |
-| Hardware/Equipment | $174,000 | ($15,000) | $159,000 | $8,000 | $8,000 | $175,000 |
+| Professional Services | $0 | $0 | $0 | $0 | $0 | $0 |
+| Cloud Services | $9,876 | $0 | $9,876 | $9,876 | $9,876 | $29,628 |
+| Hardware | $174,000 | ($15,000) | $159,000 | $8,000 | $8,000 | $175,000 |
 | Software Licenses | $136,800 | ($20,000) | $116,800 | $136,800 | $136,800 | $390,400 |
 | Support & Maintenance | $52,900 | $0 | $52,900 | $52,900 | $52,900 | $158,700 |
-| **TOTAL INVESTMENT** | **$463,576** | **($40,000)** | **$423,576** | **$207,576** | **$207,576** | **$838,728** |
+| **TOTAL INVESTMENT** | **$373,576** | **($35,000)** | **$338,576** | **$207,576** | **$207,576** | **$753,728** |
 <!-- END COST_SUMMARY_TABLE -->
 
 ## Partner Credits

@@ -2,10 +2,10 @@
 #WIDTH: 24,36,28,28,28,51
 #ALIGN: left,left,center,center,center,left
 Category,Component,Small,Medium,Large,Notes
-Cloud Infrastructure,DevOps Users,5-10 users,10-25 users,50+ users,Active development team size
-Cloud Infrastructure,Pipeline Complexity,5-10 pipelines,10-25 pipelines,50+ pipelines,CI/CD pipeline count
-Cloud Infrastructure,Container Registry Size,50-100 GB,100-500 GB,1+ TB,Docker image storage
-Cloud Infrastructure,Build/Deploy Frequency,10-50 builds/day,50-200 builds/day,500+ builds/day,Deployment velocity
+Cloud Services,DevOps Users,5-10 users,10-25 users,50+ users,Active development team size
+Cloud Services,Pipeline Complexity,5-10 pipelines,10-25 pipelines,50+ pipelines,CI/CD pipeline count
+Cloud Services,Container Registry Size,50-100 GB,100-500 GB,1+ TB,Docker image storage
+Cloud Services,Build/Deploy Frequency,10-50 builds/day,50-200 builds/day,500+ builds/day,Deployment velocity
 Software Licenses,Repository Count,5-20 repos,20-50 repos,100+ repos,Git repository count
 Software Licenses,Stakeholder Users,5-10 users,10-25 users,50+ users,View-only access users
 Support & Maintenance,Support Level,Business hours,24x5 support,24x7 premium,SLA requirements
@@ -17,39 +17,30 @@ Professional Services,IaC Templates,5-10 templates,10-20 templates,30+ templates
 #WIDTH: 20,22,35,10,14,12,14,14,14,16,40
 #ALIGN: left,left,left,right,left,right,right,right,right,right,left
 Category,Component,Description,Quantity,Unit,Unit Price,Annual Cost,Year 2,Year 3,3-Year Total,Notes
-Cloud Infrastructure,Azure DevOps Basic,Basic tier for development team,10,Users/Month,$30,"=D11*F11*12","=G11","=G11","=G11+H11+I11",Development licenses
-Cloud Infrastructure,DevOps Stakeholder,Stakeholder view-only access,5,Users/Month,$0,"=D12*F12*12","=G12","=G12","=G12+H12+I12",Included access
-Cloud Infrastructure,Container Registry,Premium tier for enterprise features,1,Service/Month,$167,"=D13*F13*12","=G13","=G13","=G13+H13+I13",Docker registry
-Cloud Infrastructure,Key Vault,Standard tier for secret management,1,Service/Month,$10,"=D14*F14*12","=G14","=G14","=G14+H14+I14",Secrets management
-Cloud Infrastructure,Monitor Log Analytics,Log Analytics for monitoring,5,GB/Month,$8,"=D15*F15*12","=G15","=G15","=G15+H15+I15",Operational monitoring
-Cloud Infrastructure,App Service,Optional B3 instances for CI/CD,0,Instances/Month,$0,"=D16*F16*12","=G16","=G16","=G16+H16+I16",Optional infrastructure
+Cloud Services,Azure DevOps Basic,Basic tier for development team,10,Users/Month,$30,"=D11*F11*12","=G11","=G11","=G11+H11+I11",Development licenses
+Cloud Services,DevOps Stakeholder,Stakeholder view-only access,5,Users/Month,$0,"=D12*F12*12","=G12","=G12","=G12+H12+I12",Included access
+Cloud Services,Container Registry,Premium tier for enterprise features,1,Service/Month,$167,"=D13*F13*12","=G13","=G13","=G13+H13+I13",Docker registry
+Cloud Services,Key Vault,Standard tier for secret management,1,Service/Month,$10,"=D14*F14*12","=G14","=G14","=G14+H14+I14",Secrets management
+Cloud Services,Monitor Log Analytics,Log Analytics for monitoring,5,GB/Month,$8,"=D15*F15*12","=G15","=G15","=G15+H15+I15",Operational monitoring
+Cloud Services,App Service,Optional B3 instances for CI/CD,0,Instances/Month,$0,"=D16*F16*12","=G16","=G16","=G16+H16+I16",Optional infrastructure
 Support & Maintenance,Managed Services,Ongoing platform optimization,1,Service/Month,$127,"=D17*F17*12","=G17","=G17","=G17+H17+I17",15% of platform cost
 Support & Maintenance,Azure Support,Professional Direct support optional,0,Plan/Month,$0,"=D18*F18*12","=G18","=G18","=G18+H18+I18",Optional upgrade
-Professional Services,Pipeline Templates,CI/CD framework and reusable templates,120,Hours,$200,"=D19*F19","=0","=0","=G19",One-time automation
-Professional Services,Infrastructure as Code,Terraform/ARM IaC setup,90,Hours,$200,"=D20*F20","=0","=0","=G20",One-time IaC templates
-Professional Services,Security Integration,Security policies and compliance integration,60,Hours,$200,"=D21*F21","=0","=0","=G21",One-time security setup
-Professional Services,Training Knowledge Transfer,Admin and end-user training,40,Hours,$175,"=D22*F22","=0","=0","=G22",One-time training
-Professional Services,Project Management,Project coordination and stakeholder management,50,Hours,$200,"=D23*F23","=0","=0","=G23",One-time oversight
-Professional Services,Discovery Assessment,Current state analysis and requirements,30,Hours,$200,"=D24*F24","=0","=0","=G24",One-time assessment
-Professional Services,Security Assessment,Security audit and hardening recommendations,40,Hours,$225,"=D25*F25","=0","=0","=G25",One-time security audit
-Professional Services,Hypercare Support,30 days post-launch production stabilization,80,Hours,$175,"=D26*F26","=0","=0","=G26",One-time hypercare
 
 # Credits
 #WIDTH: 25,30,20,75
 #ALIGN: left,left,right,left
 Category,Credit Type,Credit Amount,Credit Comments
-Cloud Infrastructure,Azure DevOps Credit,$0,No infrastructure credits available
+Cloud Services,Azure DevOps Credit,$0,No infrastructure credits available
 Software Licenses,Partner Credit,$0,No software credits available
 Support & Maintenance,Program Credit,$0,No support credits available
-Hardware/Equipment,Equipment Credit,$0,No hardware credits available
+Hardware,Equipment Credit,$0,No hardware credits available
 Professional Services,Partner Services Credit,"($8000)",Azure or Microsoft partner services credit
 
 # 3-Year Summary
 #WIDTH: 25,15,18,15,15,15,15
 #ALIGN: left,right,right,right,right,right,right
 Category,Year 1 List,Year 1 Credits,Year 1 Net,Year 2,Year 3,3-Year Total
-Cloud Infrastructure,$6200,$0,$6200,$6200,$6200,$18600
+Cloud Services,$6200,$0,$6200,$6200,$6200,$18600
 Software Licenses,$0,$0,$0,$0,$0,$0
 Support & Maintenance,$1524,$0,$1524,$1524,$1524,$4572
-Professional Services,$100000,"($8000)",$92000,$0,$0,$92000
 TOTAL,$107724,"($8000)",$99724,$7724,$7724,$115172

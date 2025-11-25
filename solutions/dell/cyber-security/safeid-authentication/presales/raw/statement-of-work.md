@@ -333,13 +333,12 @@ After the 6-week engagement:
 <!-- TABLE_CONFIG: widths=[25, 15, 15, 15, 12, 12, 15] -->
 | Cost Category | Year 1 List | AWS/Partner Credits | Year 1 Net | Year 2 | Year 3 | 3-Year Total |
 |---------------|-------------|---------------------|------------|--------|--------|--------------|
-| Professional Services | $43,000 | $0 | $43,000 | $0 | $0 | $43,000 |
+| Professional Services | $0 | $0 | $0 | $0 | $0 | $0 |
 | Hardware | $52,500 | $0 | $52,500 | $0 | $0 | $52,500 |
-| Integration | $30,000 | $0 | $30,000 | $0 | $0 | $30,000 |
 | Net Investment After Savings | $198,750 | ($25,000) | $173,750 | $48,250 | $48,250 | $270,250 |
-| Software | $60,000 | $0 | $60,000 | $60,000 | $60,000 | $180,000 |
+| Software Licenses | $30,000 | $0 | $30,000 | $0 | $0 | $30,000 |
 | Support & Maintenance | $13,250 | $0 | $13,250 | $13,250 | $13,250 | $39,750 |
-| **TOTAL INVESTMENT** | **$397,500** | **($50,000)** | **$347,500** | **$96,500** | **$96,500** | **$540,500** |
+| **TOTAL INVESTMENT** | **$294,500** | **($50,000)** | **$244,500** | **$36,500** | **$36,500** | **$317,500** |
 <!-- END COST_SUMMARY_TABLE -->
 
 Table: Total Investment Summary

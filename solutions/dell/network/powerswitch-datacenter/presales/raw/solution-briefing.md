@@ -193,14 +193,10 @@ This engagement is sized based on the following parameters:
 <!-- TABLE_CONFIG: widths=[25, 15, 15, 15, 12, 12, 15] -->
 | Cost Category | Year 1 List | Year 1 Credits | Year 1 Net | Year 2 | Year 3 | 3-Year Total |
 |---------------|-------------|----------------|------------|--------|--------|--------------|
-| Professional Services | $87,000 | $0 | $87,000 | $0 | $0 | $87,000 |
+| Professional Services | $0 | $0 | $0 | $0 | $0 | $0 |
 | Cisco Nexus Alternative | $3,383,600 | $0 | $3,383,600 | $0 | $0 | $3,383,600 |
-| Leaf Switches | $816,000 | $0 | $816,000 | $0 | $0 | $816,000 |
-| Optics & Cabling | $719,000 | $0 | $719,000 | $0 | $0 | $719,000 |
-| Software | $160,000 | $0 | $160,000 | $0 | $0 | $160,000 |
-| Spine Switches | $380,000 | $0 | $380,000 | $0 | $0 | $380,000 |
-| Support & Maintenance (3-Year) | $165,600 | $0 | $165,600 | $0 | $0 | $165,600 |
-| **TOTAL** | **$4,655,200** | **($1,056,000)** | **$4,655,200** | **($1,056,000)** | **($1,056,000)** | **$4,655,200** |
+| Hardware | $1 | $915 | $0 | $0 | $1 | $915 |
+| **TOTAL** | **$2,327,926** | **($1,054,485)** | **$2,327,600** | **($1,055,675)** | **($1,055,399)** | **$216,526** |
 <!-- END COST_SUMMARY_TABLE -->
 
 **Cisco Nexus Cost Comparison:**

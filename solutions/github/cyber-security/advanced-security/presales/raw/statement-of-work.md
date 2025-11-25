@@ -696,6 +696,7 @@ Post-hypercare, Client may transition to ongoing managed services:
 <!-- TABLE_CONFIG: widths=[20, 12, 18, 14, 12, 11, 13] -->
 | Cost Category | Year 1 List | AWS/Partner Credits | Year 1 Net | Year 2 | Year 3 | 3-Year Total |
 |---------------|-------------|---------------------|------------|--------|--------|--------------|
+| Professional Services | $0 | $0 | $0 | $0 | $0 | $0 |
 | **TOTAL INVESTMENT** | **$0** | **$0** | **$0** | **$0** | **$0** | **$0** |
 <!-- END COST_SUMMARY_TABLE -->
 

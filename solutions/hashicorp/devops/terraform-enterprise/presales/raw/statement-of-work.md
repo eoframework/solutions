@@ -677,12 +677,11 @@ Post-hypercare, Client may transition to ongoing managed services:
 <!-- TABLE_CONFIG: widths=[20, 12, 18, 14, 12, 11, 13] -->
 | Cost Category | Year 1 List | AWS/Partner Credits | Year 1 Net | Year 2 | Year 3 | 3-Year Total |
 |---------------|-------------|---------------------|------------|--------|--------|--------------|
-| Professional Services | $125,000 | $0 | $125,000 | $0 | $0 | $125,000 |
-| Cloud Infrastructure | $35,916 | ($12,000) | $23,916 | $35,916 | $35,916 | $95,748 |
-| HashiCorp Licenses | $29,500 | ($10,000) | $19,500 | $29,500 | $29,500 | $78,500 |
+| Professional Services | $0 | $0 | $0 | $0 | $0 | $0 |
+| Cloud Services | $35,916 | ($12,000) | $23,916 | $35,916 | $35,916 | $95,748 |
 | Software Licenses | $34,260 | $0 | $34,260 | $34,260 | $34,260 | $102,780 |
 | Support & Maintenance | $58,400 | $0 | $58,400 | $58,400 | $58,400 | $175,200 |
-| **TOTAL INVESTMENT** | **$283,076** | **($22,000)** | **$261,076** | **$158,076** | **$158,076** | **$577,228** |
+| **TOTAL INVESTMENT** | **$128,576** | **($12,000)** | **$116,576** | **$128,576** | **$128,576** | **$373,728** |
 <!-- END COST_SUMMARY_TABLE -->
 
 ## Partner Credits

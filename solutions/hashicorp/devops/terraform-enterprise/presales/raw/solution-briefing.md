@@ -176,12 +176,11 @@ This engagement is sized based on the following parameters:
 <!-- TABLE_CONFIG: widths=[25, 15, 15, 15, 12, 12, 15] -->
 | Cost Category | Year 1 List | Year 1 Credits | Year 1 Net | Year 2 | Year 3 | 3-Year Total |
 |---------------|-------------|----------------|------------|--------|--------|--------------|
-| Professional Services | $125,000 | $0 | $125,000 | $0 | $0 | $125,000 |
-| Cloud Infrastructure | $35,916 | ($12,000) | $23,916 | $35,916 | $35,916 | $95,748 |
-| HashiCorp Licenses | $29,500 | ($10,000) | $19,500 | $29,500 | $29,500 | $78,500 |
+| Professional Services | $0 | $0 | $0 | $0 | $0 | $0 |
+| Cloud Services | $35,916 | ($12,000) | $23,916 | $35,916 | $35,916 | $95,748 |
 | Software Licenses | $34,260 | $0 | $34,260 | $34,260 | $34,260 | $102,780 |
 | Support & Maintenance | $58,400 | $0 | $58,400 | $58,400 | $58,400 | $175,200 |
-| **TOTAL** | **$283,076** | **($22,000)** | **$261,076** | **$158,076** | **$158,076** | **$577,228** |
+| **TOTAL** | **$128,576** | **($12,000)** | **$116,576** | **$128,576** | **$128,576** | **$373,728** |
 <!-- END COST_SUMMARY_TABLE -->
 
 **SPEAKER NOTES:**

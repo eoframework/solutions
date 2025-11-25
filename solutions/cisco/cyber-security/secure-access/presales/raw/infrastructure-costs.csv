@@ -16,27 +16,19 @@ Support Level,SmartNet,8x5xNBD,24x7x4,24x7x2,Hardware replacement SLA
 Category,Component,Description,Quantity,Unit,Unit Price,Annual Cost,Year 2,Year 3,3-Year Total,Notes
 Hardware,Cisco ISE 3615 Appliance,Primary ISE node (3000 endpoint capacity),1,Appliance,$40000,$40000,$0,$0,$40000,Primary policy service node
 Hardware,Cisco ISE 3615 Secondary,Secondary ISE for high availability,1,Appliance,$40000,$40000,$0,$0,$40000,HA redundancy and failover
-Software,ISE Plus 3000 Endpoint License,Includes TrustSec BYOD profiling (3000 endpoints),1,License/Year,$50000,"=D13*F13","=G13","=G13","=G13+H13+I13",NAC and segmentation features
-Software,ISE Device Admin License,TACACS+ for network device admin (500 devices),500,Devices/Year,$50,"=D14*F14","=G14","=G14","=G14+H14+I14",Network device AAA (optional)
-Integration,Active Directory Connector,AD integration (included with ISE),1,Integration,$0,"=D15*F15","=G15","=G15","=G15+H15+I15",Identity source integration
-Support,Cisco SmartNet 8x5xNBD,Hardware support for ISE appliances,2,Appliances/Year,$8000,"=D16*F16","=G16","=G16","=G16+H16+I16",Business hours support NBD replacement
-Support,Software Subscription & Support,ISE software updates and technical support,1,Subscription/Year,$15000,"=D17*F17","=G17","=G17","=G17+H17+I17",Annual software maintenance
-Professional Services,Design & Requirements Workshop,Access policy design and requirements gathering,40,Hours,$225,"=D18*F18","=G18*0","=G18*0","=G18+H18+I18",Policy framework and architecture
-Professional Services,ISE Deployment & Configuration,Appliance deployment and base configuration,80,Hours,$225,"=D19*F19","=G19*0","=G19*0","=G19+H19+I19",Installation and initial setup
-Professional Services,Policy Configuration,802.1X authentication and TrustSec policies,60,Hours,$200,"=D20*F20","=G20*0","=G20*0","=G20+H20+I20",Authentication authorization policies
-Professional Services,BYOD & Guest Portal Setup,Self-service BYOD and guest portals,40,Hours,$200,"=D21*F21","=G21*0","=G21*0","=G21+H21+I21",Portal customization and workflows
-Professional Services,Network Infrastructure Integration,Switch and wireless controller integration,50,Hours,$200,"=D22*F22","=G22*0","=G22*0","=G22+H22+I22",802.1X enablement on network devices
-Professional Services,Active Directory Integration,AD connector setup and testing,30,Hours,$200,"=D23*F23","=G23*0","=G23*0","=G23+H23+I23",Identity source configuration
-Professional Services,Testing & Validation,Pilot testing and policy validation,40,Hours,$175,"=D24*F24","=G24*0","=G24*0","=G24+H24+I24",User acceptance testing
-Professional Services,Training,Administrator and helpdesk training,24,Hours,$175,"=D25*F25","=G25*0","=G25*0","=G25+H25+I25",Knowledge transfer and enablement
+Software Licenses,ISE Plus 3000 Endpoint License,Includes TrustSec BYOD profiling (3000 endpoints),1,License/Year,$50000,"=D13*F13","=G13","=G13","=G13+H13+I13",NAC and segmentation features
+Software Licenses,ISE Device Admin License,TACACS+ for network device admin (500 devices),500,Devices/Year,$50,"=D14*F14","=G14","=G14","=G14+H14+I14",Network device AAA (optional)
+Software Licenses,Active Directory Connector,AD integration (included with ISE),1,Integration,$0,"=D15*F15","=G15","=G15","=G15+H15+I15",Identity source integration
+Support & Maintenance,Cisco SmartNet 8x5xNBD,Hardware support for ISE appliances,2,Appliances/Year,$8000,"=D16*F16","=G16","=G16","=G16+H16+I16",Business hours support NBD replacement
+Support & Maintenance,Software Subscription & Support,ISE software updates and technical support,1,Subscription/Year,$15000,"=D17*F17","=G17","=G17","=G17+H17+I17",Annual software maintenance
 
 # Credits
 #WIDTH: 25,25,15,50
 #ALIGN: left,left,right,left
 Category,Credit Type,Credit Amount,Credit Comments
 Hardware,Trade-In Credit,$0,No hardware trade-in available
-Software,Security Promotion,"($10000)",Year 1 ISE license 20% discount promotion
-Support,Support Renewal,$0,No support renewal credits
+Software Licenses,Security Promotion,"($10000)",Year 1 ISE license 20% discount promotion
+Support & Maintenance,Support Renewal,$0,No support renewal credits
 Professional Services,Implementation Credit,$0,No services credits available
 
 # 3-Year Summary
@@ -44,7 +36,6 @@ Professional Services,Implementation Credit,$0,No services credits available
 #ALIGN: left,right,right,right,right,right,right
 Category,Year 1 List,Year 1 Credits,Year 1 Net,Year 2,Year 3,3-Year Total
 Hardware,$80000,$0,$80000,$0,$0,$80000
-Software,$75000,"($10000)",$65000,$75000,$75000,$215000
-Support,$31000,$0,$31000,$31000,$31000,$93000
-Professional Services,$82200,$0,$82200,$0,$0,$82200
+Software Licenses,$75000,"($10000)",$65000,$75000,$75000,$215000
+Support & Maintenance,$31000,$0,$31000,$31000,$31000,$93000
 TOTAL,$268200,"($10000)",$258200,$106000,$106000,$470200

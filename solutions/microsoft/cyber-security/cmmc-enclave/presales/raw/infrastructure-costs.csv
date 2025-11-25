@@ -2,10 +2,10 @@
 #WIDTH: 24,36,28,28,28,51
 #ALIGN: left,left,center,center,center,left
 Category,Component,Small,Medium,Large,Notes
-Cloud Infrastructure,CUI User Count,25 users,50 users,100+ users,Number of users accessing CUI data
-Cloud Infrastructure,Azure Government Compute,2 VMs (4 vCPU 16GB),4 VMs (8 vCPU 32GB),8+ VMs (16 vCPU 64GB),Virtual machines for workload hosting
-Cloud Infrastructure,Storage Volume,500 GB,2 TB,10+ TB,Azure Government storage for CUI data
-Cloud Infrastructure,Sentinel SIEM Ingestion,50 GB/month,100 GB/month,250+ GB/month,Security log ingestion and analysis
+Cloud Services,CUI User Count,25 users,50 users,100+ users,Number of users accessing CUI data
+Cloud Services,Azure Government Compute,2 VMs (4 vCPU 16GB),4 VMs (8 vCPU 32GB),8+ VMs (16 vCPU 64GB),Virtual machines for workload hosting
+Cloud Services,Storage Volume,500 GB,2 TB,10+ TB,Azure Government storage for CUI data
+Cloud Services,Sentinel SIEM Ingestion,50 GB/month,100 GB/month,250+ GB/month,Security log ingestion and analysis
 Software Licenses,M365 GCC High License,E3 licensing,E5 licensing,E5 + add-ons,Email collaboration and compliance
 Software Licenses,Defender for Cloud,Standard CSPM,Premium CSPM + CWP,Premium + DevOps Security,Cloud security posture management
 Support & Maintenance,Support Level,Business hours,24x5 support,24x7 premium SOC,Security operations and support coverage
@@ -16,28 +16,23 @@ Support & Maintenance,Support Level,Business hours,24x5 support,24x7 premium SOC
 Category,Component,Description,Quantity,Unit,Unit Price,Annual Cost,Year 2,Year 3,3-Year Total,Notes
 Software Licenses,Microsoft 365 GCC High E5,E5 licenses for CUI users (50 users × $96/month),50,Users/Month,$96,"=D11*F11*12","=G11","=G11","=G11+H11+I11",Includes advanced compliance and security
 Software Licenses,Azure AD Premium P2,Azure AD Premium P2 (included in E5),0,Users/Month,$0,$0,$0,$0,$0,Included in M365 E5 licensing
-Cloud Infrastructure,Azure Government VMs,4 VMs D4s_v3 (4 vCPU 16GB each) for workloads,4,VMs/Month,$264,"=D13*F13*12","=G13","=G13","=G13+H13+I13",CUI workload hosting
-Cloud Infrastructure,Azure Government Storage,Premium SSD 2TB + Standard storage 5TB,1,Service/Month,$520,"=D14*F14*12","=G14","=G14","=G14+H14+I14",CUI data storage with geo-redundancy
-Cloud Infrastructure,Azure Government Networking,ExpressRoute 1Gbps circuit + VPN Gateway,1,Service/Month,$1250,"=D15*F15*12","=G15","=G15","=G15+H15+I15",Secure connectivity to Azure Gov
-Cloud Infrastructure,Azure Backup,VM backup with GRS retention,1,Service/Month,$380,"=D16*F16*12","=G16","=G16","=G16+H16+I16",Disaster recovery and compliance
+Cloud Services,Azure Government VMs,4 VMs D4s_v3 (4 vCPU 16GB each) for workloads,4,VMs/Month,$264,"=D13*F13*12","=G13","=G13","=G13+H13+I13",CUI workload hosting
+Cloud Services,Azure Government Storage,Premium SSD 2TB + Standard storage 5TB,1,Service/Month,$520,"=D14*F14*12","=G14","=G14","=G14+H14+I14",CUI data storage with geo-redundancy
+Cloud Services,Azure Government Networking,ExpressRoute 1Gbps circuit + VPN Gateway,1,Service/Month,$1250,"=D15*F15*12","=G15","=G15","=G15+H15+I15",Secure connectivity to Azure Gov
+Cloud Services,Azure Backup,VM backup with GRS retention,1,Service/Month,$380,"=D16*F16*12","=G16","=G16","=G16+H16+I16",Disaster recovery and compliance
 Software Licenses,Defender for Cloud,Premium CSPM for 50 resources,50,Resources/Month,$20,"=D17*F17*12","=G17","=G17","=G17+H17+I17",CMMC compliance posture management
 Software Licenses,Sentinel SIEM,100 GB/month log ingestion and analytics,100,GB/Month,$25,"=D18*F18*12","=G18","=G18","=G18+H18+I18",Security monitoring and incident response
 Software Licenses,Microsoft Defender for Endpoint,Endpoint protection (included in E5),0,Endpoints/Month,$0,$0,$0,$0,$0,Included in M365 E5 licensing
 Software Licenses,Microsoft Purview,Information Protection and DLP (included in E5),0,Users/Month,$0,$0,$0,$0,$0,Included in M365 E5 licensing
-Cloud Infrastructure,Azure Monitor,Logs and Metrics (50GB logs + 100 metrics),1,Service/Month,$420,"=D21*F21*12","=G21","=G21","=G21+H21+I21",Monitoring and alerting for compliance
-Cloud Infrastructure,Azure Key Vault,HSM-backed key management for CMMC,1,Service/Month,$145,"=D22*F22*12","=G22","=G22","=G22+H22+I22",FIPS 140-2 encryption key management
+Cloud Services,Azure Monitor,Logs and Metrics (50GB logs + 100 metrics),1,Service/Month,$420,"=D21*F21*12","=G21","=G21","=G21+H21+I21",Monitoring and alerting for compliance
+Cloud Services,Azure Key Vault,HSM-backed key management for CMMC,1,Service/Month,$145,"=D22*F22*12","=G22","=G22","=G22+H22+I22",FIPS 140-2 encryption key management
 Support & Maintenance,Microsoft Unified Support,Premier Support (15% of M365 + Azure),1,Service/Month,$1500,"=D23*F23*12","=G23","=G23","=G23+H23+I23",24x7 support for production environment
-Professional Services,CMMC Assessment Support,C3PAO assessment preparation (60 hours @ $250),60,Hours,$250,$15000,$0,$0,$15000,Year 1 only - CMMC Level 2 assessment
-Professional Services,Environment Setup,GCC High tenant and Azure Gov setup (120 hours @ $225),120,Hours,$225,$27000,$0,$0,$27000,Year 1 only - initial deployment
-Professional Services,NIST 800-171 Implementation,Security controls implementation (80 hours @ $225),80,Hours,$225,$18000,$0,$0,$18000,Year 1 only - compliance configuration
-Professional Services,Migration Services,Email and data migration to GCC High (40 hours @ $200),40,Hours,$200,$8000,$0,$0,$8000,Year 1 only - data migration
-Professional Services,Training & Documentation,Administrator and user training (32 hours @ $200),32,Hours,$200,$6400,$0,$0,$6400,Year 1 only - knowledge transfer
 
 # Credits
 #WIDTH: 25,25,15,50
 #ALIGN: left,left,right,left
 Category,Credit Type,Credit Amount,Credit Comments
-Cloud Infrastructure,Azure Government Credit,$0,No Azure Gov credits available for GCC High
+Cloud Services,Azure Government Credit,$0,No Azure Gov credits available for GCC High
 Software Licenses,Microsoft Partner Credit,$0,No partner credits for government licensing
 Support & Maintenance,Program Credit,$0,No support credits available
 Professional Services,FastTrack Assistance,$0,Microsoft FastTrack included for 150+ seats (not applicable)
@@ -46,8 +41,7 @@ Professional Services,FastTrack Assistance,$0,Microsoft FastTrack included for 1
 #WIDTH: 25,15,15,15,12,12,15
 #ALIGN: left,right,right,right,right,right,right
 Category,Year 1 List,Year 1 Credits,Year 1 Net,Year 2,Year 3,3-Year Total
-Cloud Infrastructure,$47640,$0,$47640,$47640,$47640,$142920
+Cloud Services,$47640,$0,$47640,$47640,$47640,$142920
 Software Licenses,$87600,$0,$87600,$87600,$87600,$262800
 Support & Maintenance,$18000,$0,$18000,$18000,$18000,$54000
-Professional Services,$74400,$0,$74400,$0,$0,$74400
 TOTAL,$227640,$0,$227640,$153240,$153240,$534120

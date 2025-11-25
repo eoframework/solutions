@@ -193,13 +193,11 @@ This engagement is sized based on the following parameters:
 <!-- TABLE_CONFIG: widths=[25, 15, 15, 15, 12, 12, 15] -->
 | Cost Category | Year 1 List | Year 1 Credits | Year 1 Net | Year 2 | Year 3 | 3-Year Total |
 |---------------|-------------|----------------|------------|--------|--------|--------------|
-| Professional Services | $61,500 | $0 | $61,500 | $0 | $0 | $61,500 |
-| Hardware | $190,320 | $0 | $190,320 | $0 | $0 | $190,320 |
+| Professional Services | $0 | $0 | $0 | $0 | $0 | $0 |
 | Net Investment After Savings | $338,140 | ($149,400) | $188,740 | ($88,400) | ($88,400) | $11,940 |
-| Networking | $25,320 | $0 | $25,320 | $0 | $0 | $25,320 |
-| Software | $48,500 | $0 | $48,500 | $48,500 | $48,500 | $145,500 |
-| Support & Maintenance | $12,500 | $0 | $12,500 | $12,500 | $12,500 | $37,500 |
-| **TOTAL** | **$676,280** | **($298,800)** | **$377,480** | **($176,800)** | **($176,800)** | **$23,880** |
+| Software Licenses | $48 | $500 | $0 | $48 | $500 | $48 |
+| Support & Maintenance | $12 | $500 | $0 | $12 | $500 | $12 |
+| **TOTAL** | **$338,415** | **($297,160)** | **$39,340** | **($237,525)** | **($236,160)** | **($434,345)** |
 <!-- END COST_SUMMARY_TABLE -->
 
 **Cloud Cost Avoidance Analysis:**

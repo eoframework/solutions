@@ -8,7 +8,7 @@ High Availability,Secondary Appliance,Optional,Recommended,Required,HA redundanc
 Software Licensing,DNA License Tier,Essentials,Advantage,Advantage,Feature set and automation capabilities
 AI Analytics,AI Network Analytics,Basic,Standard,Advanced,Predictive insights and anomaly detection
 SD-Access,Fabric-Enabled Devices,20-50 devices,50-100 devices,100-200+ devices,Software Defined Access fabric devices
-Support,Cisco SmartNet,8x5x4,24x7x4,24x7x2,Hardware replacement SLA
+Support & Maintenance,Cisco SmartNet,8x5x4,24x7x4,24x7x2,Hardware replacement SLA
 
 # Infrastructure Costs
 #WIDTH: 23,30,50,12,15,12,15,12,12,15,30
@@ -16,25 +16,18 @@ Support,Cisco SmartNet,8x5x4,24x7x4,24x7x2,Hardware replacement SLA
 Category,Component,Description,Quantity,Unit,Unit Price,Annual Cost,Year 2,Year 3,3-Year Total,Notes
 Hardware,Cisco DNA Center Appliance,DN2-HW-APL for 200 devices,1,Appliance,$60000,$60000,$0,$0,$60000,One-time hardware purchase
 Hardware,DNA Center HA Secondary,DN2-HW-APL secondary for high availability,1,Appliance,$60000,$60000,$0,$0,$60000,Optional HA redundancy
-Software,DNA Advantage License,Per-device annual subscription (200 devices),200,Devices/Year,$300,"=D11*F11","=G11","=G11","=G11+H11+I11",Network automation and assurance
-Software,AI Network Analytics,AI/ML analytics per device (200 devices),200,Devices/Year,$150,"=D12*F12","=G12","=G12","=G12+H12+I12",Predictive analytics and insights
-Software,SD-Access License,Fabric-enabled device licenses (100 devices),100,Devices/Year,$200,"=D13*F13","=G13","=G13","=G13+H13+I13",Software Defined Access fabric
-Support,Cisco SmartNet 24x7x4,Hardware support for appliances (2 units),2,Appliances/Year,$9000,"=D14*F14","=G14","=G14","=G14+H14+I14",24x7 support with 4-hour replacement
-Professional Services,Network Discovery & Assessment,Current state analysis and device inventory,40,Hours,$225,"=D15*F15","=G15*0","=G15*0","=G15+H15+I15",Network assessment and planning
-Professional Services,DNA Center Deployment,Appliance installation and initial configuration,60,Hours,$225,"=D16*F16","=G16*0","=G16*0","=G16+H16+I16",Deployment and setup
-Professional Services,Device Onboarding,Onboard 200 devices into DNA Center,80,Hours,$200,"=D17*F17","=G17*0","=G17*0","=G17+H17+I17",Device discovery and integration
-Professional Services,Policy & Automation Setup,Network policies templates and automation workflows,60,Hours,$200,"=D18*F18","=G18*0","=G18*0","=G18+H18+I18",Automation configuration
-Professional Services,AI Analytics Configuration,Assurance and insights configuration,40,Hours,$225,"=D19*F19","=G19*0","=G19*0","=G19+H19+I19",AI/ML analytics setup
-Professional Services,SD-Access Fabric Design,Optional fabric design for 100 devices,40,Hours,$250,"=D20*F20","=G20*0","=G20*0","=G20+H20+I20",SD-Access architecture (optional)
-Professional Services,Training,Administrator and operations training,32,Hours,$175,"=D21*F21","=G21*0","=G21*0","=G21+H21+I21",Team enablement and knowledge transfer
+Software Licenses,DNA Advantage License,Per-device annual subscription (200 devices),200,Devices/Year,$300,"=D11*F11","=G11","=G11","=G11+H11+I11",Network automation and assurance
+Software Licenses,AI Network Analytics,AI/ML analytics per device (200 devices),200,Devices/Year,$150,"=D12*F12","=G12","=G12","=G12+H12+I12",Predictive analytics and insights
+Software Licenses,SD-Access License,Fabric-enabled device licenses (100 devices),100,Devices/Year,$200,"=D13*F13","=G13","=G13","=G13+H13+I13",Software Defined Access fabric
+Support & Maintenance,Cisco SmartNet 24x7x4,Hardware support for appliances (2 units),2,Appliances/Year,$9000,"=D14*F14","=G14","=G14","=G14+H14+I14",24x7 support with 4-hour replacement
 
 # Credits
 #WIDTH: 25,25,15,50
 #ALIGN: left,left,right,left
 Category,Credit Type,Credit Amount,Credit Comments
 Hardware,Hardware Trade-In,$0,No hardware trade-in credits available
-Software,DNA License Promotion,"($20000)",Year 1 DNA license 33% discount promotion
-Support,SmartNet Renewal,$0,No support renewal credits
+Software Licenses,DNA License Promotion,"($20000)",Year 1 DNA license 33% discount promotion
+Support & Maintenance,SmartNet Renewal,$0,No support renewal credits
 Professional Services,Implementation Credit,$0,No services credits available
 
 # 3-Year Summary
@@ -42,7 +35,6 @@ Professional Services,Implementation Credit,$0,No services credits available
 #ALIGN: left,right,right,right,right,right,right
 Category,Year 1 List,Year 1 Credits,Year 1 Net,Year 2,Year 3,3-Year Total
 Hardware,$120000,$0,$120000,$0,$0,$120000
-Software,$110000,"($20000)",$90000,$110000,$110000,$310000
-Support,$18000,$0,$18000,$18000,$18000,$54000
-Professional Services,$85100,$0,$85100,$0,$0,$85100
+Software Licenses,$110000,"($20000)",$90000,$110000,$110000,$310000
+Support & Maintenance,$18000,$0,$18000,$18000,$18000,$54000
 TOTAL,$333100,"($20000)",$313100,$128000,$128000,$569100

@@ -706,9 +706,9 @@ The following table summarizes the total investment required for Google Workspac
 <!-- TABLE_CONFIG: widths=[20, 12, 18, 14, 12, 11, 13] -->
 | Cost Category | Year 1 List | AWS/Partner Credits | Year 1 Net | Year 2 | Year 3 | 3-Year Total |
 |---------------|-------------|---------------------|------------|--------|--------|--------------|
-| Professional Services | $38,400 | ($3,000) | $35,400 | $0 | $0 | $35,400 |
+| Professional Services | $0 | $0 | $0 | $0 | $0 | $0 |
 | Software Licenses | $115,200 | ($10,000) | $105,200 | $115,200 | $115,200 | $335,600 |
-| **TOTAL INVESTMENT** | **$153,600** | **($13,000)** | **$140,600** | **$115,200** | **$115,200** | **$371,000** |
+| **TOTAL INVESTMENT** | **$115,200** | **($10,000)** | **$105,200** | **$115,200** | **$115,200** | **$335,600** |
 <!-- END COST_SUMMARY_TABLE -->
 
 ## Partner Credits

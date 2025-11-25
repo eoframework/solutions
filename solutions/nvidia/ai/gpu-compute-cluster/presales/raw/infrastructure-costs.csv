@@ -29,17 +29,6 @@ Software Licenses,Monitoring Tools,Datadog or Prometheus stack (20 nodes),20,Nod
 Support & Maintenance,Dell ProSupport Plus,24x7 hardware support with next-day replacement,8,Systems/Year,$8000,"=$8*$8000","=$64000","=$64000","=$192000",Server support contract
 Support & Maintenance,NVIDIA Enterprise Support,Software support for AI Enterprise suite,1,Contract/Year,$40000,"=$1*$40000","=$40000","=$40000","=$120000",NVIDIA software support
 Support & Maintenance,NetApp Support,Hardware and software maintenance,1,System/Year,$18000,"=$1*$18000","=$18000","=$18000","=$54000",Storage support
-Professional Services,Cluster Design & Architecture,Solution architecture and deployment planning,80,Hours,$225,"=$80*$225","=$0","=$0","=$18000",Pre-deployment design
-Professional Services,Server Installation & Config,Hardware installation and GPU driver setup,120,Hours,$200,"=$120*$200","=$0","=$0","=$24000",System deployment
-Professional Services,Network Configuration,100 GbE fabric and RDMA setup,60,Hours,$200,"=$60*$200","=$0","=$0","=$12000",Network infrastructure
-Professional Services,Storage Configuration,NetApp deployment and NFS optimization,40,Hours,$200,"=$40*$200","=$0","=$0","=$8000",Storage integration
-Professional Services,Kubernetes Deployment,K8s cluster NVIDIA GPU Operator and scheduling,80,Hours,$225,"=$80*$225","=$0","=$0","=$18000",Container orchestration
-Professional Services,MLOps Platform Setup,Kubeflow or Run:ai deployment and configuration,60,Hours,$225,"=$60*$225","=$0","=$0","=$13500",ML workflow platform
-Professional Services,Monitoring & Observability,Prometheus Grafana GPU metrics dashboards,40,Hours,$175,"=$40*$175","=$0","=$0","=$7000",Monitoring setup
-Professional Services,Administrator Training,Cluster management Kubernetes GPU troubleshooting,32,Hours,$200,"=$32*$200","=$0","=$0","=$6400",Admin knowledge transfer
-Professional Services,User Training,Data scientist onboarding job submission best practices,24,Hours,$200,"=$24*$200","=$0","=$0","=$4800",End-user training
-Professional Services,Performance Tuning,Benchmark testing and workload optimization,40,Hours,$225,"=$40*$225","=$0","=$0","=$9000",Performance optimization
-Professional Services,Project Management,End-to-end project coordination,120,Hours,$175,"=$120*$175","=$0","=$0","=$21000",Implementation oversight
 
 # Credits
 #WIDTH: 25,25,15,50
@@ -57,5 +46,4 @@ Category,Year 1 List,Year 1 Credits,Year 1 Net,Year 2,Year 3,3-Year Total
 Hardware,$896000,"($32000)",$864000,$0,$0,$864000
 Software Licenses,$160520,"($12000)",$148520,$166120,$166120,$480760
 Support & Maintenance,$122000,$0,$122000,$122000,$122000,$366000
-Professional Services,$141700,$0,$141700,$0,$0,$141700
 TOTAL,$1320220,"($44000)",$1276220,$288120,$288120,$1852460

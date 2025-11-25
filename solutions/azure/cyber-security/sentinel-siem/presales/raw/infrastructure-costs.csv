@@ -2,10 +2,10 @@
 #WIDTH: 24,36,28,28,28,51
 #ALIGN: left,left,center,center,center,left
 Category,Component,Small,Medium,Large,Notes
-Cloud Infrastructure,Sentinel Data Ingestion,100-300 GB/month,300-1000 GB/month,1+ TB/month,Daily security log volume
-Cloud Infrastructure,Log Analytics Volume,100-300 GB/month,300-1000 GB/month,1+ TB/month,Total logging capacity
-Cloud Infrastructure,Defender for Cloud Servers,50-100 servers,100-500 servers,500+ servers,Protected server count
-Cloud Infrastructure,Automation Runbooks,5-10 playbooks,10-25 playbooks,25+ playbooks,SOAR automation complexity
+Cloud Services,Sentinel Data Ingestion,100-300 GB/month,300-1000 GB/month,1+ TB/month,Daily security log volume
+Cloud Services,Log Analytics Volume,100-300 GB/month,300-1000 GB/month,1+ TB/month,Total logging capacity
+Cloud Services,Defender for Cloud Servers,50-100 servers,100-500 servers,500+ servers,Protected server count
+Cloud Services,Automation Runbooks,5-10 playbooks,10-25 playbooks,25+ playbooks,SOAR automation complexity
 Software Licenses,Data Connector Count,5-10 connectors,10-25 connectors,25+ connectors,Integrated security sources
 Software Licenses,External SIEM Integrations,0-2 systems,2-5 systems,5+ systems,Third-party integrations
 Support & Maintenance,SOC Team Size,1-3 analysts,3-8 analysts,8+ analysts,Security operations team
@@ -17,48 +17,35 @@ Professional Services,Custom Detection Rules,20-50 rules,50-100 rules,100+ rules
 #WIDTH: 23,30,50,12,15,12,15,12,12,15,30
 #ALIGN: left,left,left,right,left,right,right,right,right,right,left
 Category,Component,Description,Quantity,Unit,Unit Price,Annual Cost,Year 2,Year 3,3-Year Total,Notes
-Cloud Infrastructure,Sentinel Data Ingestion,Data ingestion and analysis,300,GB/Month,$250,"=D11*F11*12","=G11","=G11","=G11+H11+I11",SIEM ingestion
-Cloud Infrastructure,Log Analytics Workspace,Log storage and analytics,300,GB/Month,$230,"=D12*F12*12","=G12","=G12","=G12+H12+I12",Centralized logging
-Cloud Infrastructure,Defender for Cloud,Server protection,100,Servers/Month,$7.08,"=D13*F13*12","=G13","=G13","=G13+H13+I13",Endpoint security
-Cloud Infrastructure,Automation Runbooks,Logic Apps for SOAR automation,1,Service/Month,$400,"=D14*F14*12","=G14","=G14","=G14+H14+I14",Incident response
-Cloud Infrastructure,Azure Monitor,Application Insights and diagnostics,200,GB/Month,$1,"=D15*F15*12","=G15","=G15","=G15+H15+I15",Additional monitoring
-Cloud Infrastructure,NSG Flow Logs,Network Security Group flow logs,1,Service/Month,$100,"=D16*F16*12","=G16","=G16","=G16+H16+I16",Network monitoring
-Cloud Infrastructure,Storage Account,Long-term log archival,500,GB/Month,$0.10,"=D17*F17*12","=G17","=G17","=G17+H17+I17",Compliance retention
-Cloud Infrastructure,Private Endpoint,Secure connectivity to Log Analytics,1,Endpoint/Month,$25,"=D18*F18*12","=G18","=G18","=G18+H18+I18",Network security
-Cloud Infrastructure,Key Vault,Security credentials management,1,Service/Month,$5,"=D19*F19*12","=G19","=G19","=G19+H19+I19",Secrets management
-Cloud Infrastructure,NAT Gateway,Secure outbound connectivity,1,Gateway/Month,$40,"=D20*F20*12","=G20","=G20","=G20+H20+I20",Network security
+Cloud Services,Sentinel Data Ingestion,Data ingestion and analysis,300,GB/Month,$250,"=D11*F11*12","=G11","=G11","=G11+H11+I11",SIEM ingestion
+Cloud Services,Log Analytics Workspace,Log storage and analytics,300,GB/Month,$230,"=D12*F12*12","=G12","=G12","=G12+H12+I12",Centralized logging
+Cloud Services,Defender for Cloud,Server protection,100,Servers/Month,$7.08,"=D13*F13*12","=G13","=G13","=G13+H13+I13",Endpoint security
+Cloud Services,Automation Runbooks,Logic Apps for SOAR automation,1,Service/Month,$400,"=D14*F14*12","=G14","=G14","=G14+H14+I14",Incident response
+Cloud Services,Azure Monitor,Application Insights and diagnostics,200,GB/Month,$1,"=D15*F15*12","=G15","=G15","=G15+H15+I15",Additional monitoring
+Cloud Services,NSG Flow Logs,Network Security Group flow logs,1,Service/Month,$100,"=D16*F16*12","=G16","=G16","=G16+H16+I16",Network monitoring
+Cloud Services,Storage Account,Long-term log archival,500,GB/Month,$0.10,"=D17*F17*12","=G17","=G17","=G17+H17+I17",Compliance retention
+Cloud Services,Private Endpoint,Secure connectivity to Log Analytics,1,Endpoint/Month,$25,"=D18*F18*12","=G18","=G18","=G18+H18+I18",Network security
+Cloud Services,Key Vault,Security credentials management,1,Service/Month,$5,"=D19*F19*12","=G19","=G19","=G19+H19+I19",Secrets management
+Cloud Services,NAT Gateway,Secure outbound connectivity,1,Gateway/Month,$40,"=D20*F20*12","=G20","=G20","=G20+H20+I20",Network security
 Software Licenses,SOAR Playbooks,Logic Apps automation licenses,1,Service/Month,$200,"=D21*F21*12","=G21","=G21","=G21+H21+I21",Incident automation
 Software Licenses,Third-party Connectors,External SIEM connector licenses,1,Service/Month,$417,"=D22*F22*12","=G22","=G22","=G22+H22+I22",External integrations
 Support & Maintenance,Managed Services,Sentinel monitoring and support,1,Service/Month,$1619,"=D23*F23*12","=G23","=G23","=G23+H23+I23",10% of cloud infrastructure
-Professional Services,Discovery Requirements,Security assessment and requirements,60,Hours,$225,"=D24*F24","=0","=0","=G24",One-time assessment
-Professional Services,Architecture Design,Sentinel architecture and design,80,Hours,$225,"=D25*F25","=0","=0","=G25",One-time design
-Professional Services,Infrastructure Deployment,Azure Sentinel setup and Log Analytics,60,Hours,$200,"=D26*F26","=0","=0","=G26",One-time deployment
-Professional Services,Analytics Rules Configuration,KQL queries and detection rules,80,Hours,$225,"=D27*F27","=0","=0","=G27",One-time rules creation
-Professional Services,SOAR Playbook Development,Incident response automation playbooks,100,Hours,$200,"=D28*F28","=0","=0","=G28",One-time automation
-Professional Services,Data Connector Configuration,Office 365 Azure AD Defender integration,40,Hours,$200,"=D29*F29","=0","=0","=G29",One-time integration
-Professional Services,Threat Hunting Analytics,Custom detection models development,40,Hours,$225,"=D30*F30","=0","=0","=G30",One-time threat hunting
-Professional Services,Integration API Setup,External SIEM and systems integration,30,Hours,$175,"=D31*F31","=0","=0","=G31",One-time API setup
-Professional Services,Testing Security Validation,Functionality and threat testing,30,Hours,$175,"=D32*F32","=0","=0","=G32",One-time validation
-Professional Services,Training Knowledge Transfer,SOC and security team training,57,Hours,$175,"=D33*F33","=0","=0","=G33",One-time training
-Professional Services,Project Management,Coordination and stakeholder management,50,Hours,$200,"=D34*F34","=0","=0","=G34",One-time oversight
-Professional Services,Hypercare Support,60 days post-launch operational support,46,Hours,$175,"=D35*F35","=0","=0","=G35",One-time hypercare
 
 # Credits
 #WIDTH: 25,25,15,50
 #ALIGN: left,left,right,left
 Category,Credit Type,Credit Amount,Credit Comments
-Cloud Infrastructure,Azure Sentinel Credit,"($9000)",10% credit on Year 1 Sentinel data ingestion
+Cloud Services,Azure Sentinel Credit,"($9000)",10% credit on Year 1 Sentinel data ingestion
 Software Licenses,Partner Credit,$0,No software credits available
 Support & Maintenance,Managed Services Credit,"($12000)",Partner managed services discount Year 1
-Hardware/Equipment,Equipment Credit,$0,No hardware credits available
+Hardware,Equipment Credit,$0,No hardware credits available
 Professional Services,Partner Credit,$0,No professional services credits available
 
 # 3-Year Summary
 #WIDTH: 25,15,15,15,12,12,15
 #ALIGN: left,right,right,right,right,right,right
 Category,Year 1 List,Year 1 Credits,Year 1 Net,Year 2,Year 3,3-Year Total
-Cloud Infrastructure,$191140,"($9000)",$182140,$191140,$191140,$564420
+Cloud Services,$191140,"($9000)",$182140,$191140,$191140,$564420
 Software Licenses,$7400,$0,$7400,$7400,$7400,$22200
 Support & Maintenance,$19428,"($12000)",$7428,$19428,$19428,$46284
-Professional Services,$137000,$0,$137000,$0,$0,$137000
 TOTAL,$354968,"($21000)",$333968,$217968,$217968,$769904

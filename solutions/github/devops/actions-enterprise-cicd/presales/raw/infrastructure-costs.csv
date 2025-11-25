@@ -21,26 +21,16 @@ Software Licenses,GitHub Enterprise Cloud,Enterprise Cloud with GitHub Actions (
 Software Licenses,GitHub Actions Minutes,Included compute minutes per month,50000,Minutes/Month,$0,"=D12*F12*12","=G12","=G12","=G12+H12+I12",Included with Enterprise Cloud
 Software Licenses,GitHub Packages Storage,Package registry storage for Docker npm Maven (200 GB),200,GB/Month,$0.25,"=D13*F13*12","=G13","=G13","=G13+H13+I13",Container and package artifacts
 Software Licenses,GitHub LFS Storage,Large file storage for binaries and assets (100 GB),100,GB/Month,$0.07,"=D14*F14*12","=G14","=G14","=G14+H14+I14",Binary build artifacts
-Cloud Infrastructure,Self-Hosted Runners EC2,c5.2xlarge instances for Linux builds (20 runners 24x7),20,Instances/Month,$2520,"=D15*F15*12","=G15","=G15","=G15+H15+I15",8 vCPU 16 GB RAM per runner
-Cloud Infrastructure,Runner Storage EBS,GP3 SSD storage 500 GB per runner,20,Volumes/Month,$120,"=D16*F16*12","=G16","=G16","=G16+H16+I16",Build cache and workspace storage
-Cloud Infrastructure,NAT Gateway,NAT Gateway for runner internet access (2 AZs),2,Gateways/Month,$394,"=D17*F17*12","=G17","=G17","=G17+H17+I17",Outbound connectivity
-Cloud Infrastructure,Data Transfer Out,Outbound data transfer for artifacts and deployments (500 GB),500,GB/Month,$0.09,"=D18*F18*12","=G18","=G18","=G18+H18+I18",AWS data egress charges
-Cloud Infrastructure,Elastic Load Balancer,Application Load Balancer for runner management,1,ALB/Month,$223,"=D19*F19*12","=G19","=G19","=G19+H19+I19",Runner pool load balancing
-Cloud Infrastructure,CloudWatch Logs,Logs and metrics for runner monitoring (100 GB),100,GB/Month,$0.5,"=D20*F20*12","=G20","=G20","=G20+H20+I20",Runner operational visibility
-Professional Services,CI/CD Platform Assessment,Current state Jenkins/GitLab CI evaluation,40,Hours,$225,"=D21*F21","=0","=0","=G21+H21+I21",Migration complexity analysis
-Professional Services,GitHub Actions Migration,Migrate Jenkins/GitLab pipelines to GitHub Actions,80,Hours,$225,"=D22*F22","=0","=0","=G22+H22+I22",Pipeline conversion and testing
-Professional Services,Reusable Workflow Development,Build workflow templates for .NET Node.js Python Docker,60,Hours,$200,"=D23*F23","=0","=0","=G23+H23+I23",Standardized pipeline library
-Professional Services,Self-Hosted Runner Setup,Deploy and configure runner infrastructure in AWS VPC,40,Hours,$200,"=D24*F24","=0","=0","=G24+H24+I24",EC2 ASG networking security
-Professional Services,OIDC Integration,Configure OIDC for AWS Azure GCP keyless auth,40,Hours,$225,"=D25*F25","=0","=0","=G25+H25+I25",Federated identity setup
-Professional Services,Environment Configuration,Set up dev test staging production environments,30,Hours,$200,"=D26*F26","=0","=0","=G26+H26+I26",Secrets protection rules approvals
-Professional Services,Security Integration,Integrate CodeQL Dependabot container scanning,24,Hours,$225,"=D27*F27","=0","=0","=G27+H27+I27",Security automation in pipelines
-Professional Services,Monitoring Setup,Configure Datadog New Relic for pipeline monitoring,20,Hours,$200,"=D28*F28","=0","=0","=G28+H28+I28",CI/CD observability
-Professional Services,DevOps Engineer Training,Train platform engineers on Actions workflow authoring,32,Hours,$175,"=D29*F29","=0","=0","=G29+H29+I29",4 days hands-on training
-Professional Services,Developer Training,Train developers on using Actions and workflows,24,Hours,$175,"=D30*F30","=0","=0","=G30+H30+I30",3 days enablement workshops
-Third-Party Tools,Artifact Repository,JFrog Artifactory Cloud (100 users),100,Users/Year,$125,"=D31*F31","=G31","=G31","=G31+H31+I31",Universal artifact management
-Third-Party Tools,Container Registry,Harbor enterprise container registry (1 TB),1,Service/Year,$8000,"=D32*F32","=G32","=G32","=G32+H32+I32",Private Docker registry
-Third-Party Tools,Monitoring,Datadog Infrastructure + APM (20 hosts),20,Hosts/Month,$31,"=D33*F33*12","=G33","=G33","=G33+H33+I33",Runner and deployment monitoring
-Third-Party Tools,Notification,PagerDuty Professional (5 users),5,Users/Month,$41,"=D34*F34*12","=G34","=G34","=G34+H34+I34",Pipeline failure alerts
+Cloud Services,Self-Hosted Runners EC2,c5.2xlarge instances for Linux builds (20 runners 24x7),20,Instances/Month,$2520,"=D15*F15*12","=G15","=G15","=G15+H15+I15",8 vCPU 16 GB RAM per runner
+Cloud Services,Runner Storage EBS,GP3 SSD storage 500 GB per runner,20,Volumes/Month,$120,"=D16*F16*12","=G16","=G16","=G16+H16+I16",Build cache and workspace storage
+Cloud Services,NAT Gateway,NAT Gateway for runner internet access (2 AZs),2,Gateways/Month,$394,"=D17*F17*12","=G17","=G17","=G17+H17+I17",Outbound connectivity
+Cloud Services,Data Transfer Out,Outbound data transfer for artifacts and deployments (500 GB),500,GB/Month,$0.09,"=D18*F18*12","=G18","=G18","=G18+H18+I18",AWS data egress charges
+Cloud Services,Elastic Load Balancer,Application Load Balancer for runner management,1,ALB/Month,$223,"=D19*F19*12","=G19","=G19","=G19+H19+I19",Runner pool load balancing
+Cloud Services,CloudWatch Logs,Logs and metrics for runner monitoring (100 GB),100,GB/Month,$0.5,"=D20*F20*12","=G20","=G20","=G20+H20+I20",Runner operational visibility
+Software Licenses,Artifact Repository,JFrog Artifactory Cloud (100 users),100,Users/Year,$125,"=D31*F31","=G31","=G31","=G31+H31+I31",Universal artifact management
+Software Licenses,Container Registry,Harbor enterprise container registry (1 TB),1,Service/Year,$8000,"=D32*F32","=G32","=G32","=G32+H32+I32",Private Docker registry
+Software Licenses,Monitoring,Datadog Infrastructure + APM (20 hosts),20,Hosts/Month,$31,"=D33*F33*12","=G33","=G33","=G33+H33+I33",Runner and deployment monitoring
+Software Licenses,Notification,PagerDuty Professional (5 users),5,Users/Month,$41,"=D34*F34*12","=G34","=G34","=G34+H34+I34",Pipeline failure alerts
 Support & Maintenance,GitHub Premium Support,24x7 premium support with 1-hour response SLA,1,Service/Year,$25000,"=D35*F35","=G35","=G35","=G35+H35+I35",Enterprise-grade support
 Support & Maintenance,Runner Managed Services,Ongoing runner infrastructure management and optimization,1,Service/Year,$30000,"=D36*F36","=G36","=G36","=G36+H36+I36",Platform maintenance and updates
 
@@ -49,17 +39,16 @@ Support & Maintenance,Runner Managed Services,Ongoing runner infrastructure mana
 #ALIGN: left,left,right,left
 Category,Credit Type,Credit Amount,Credit Comments
 Software Licenses,GitHub Actions Credit,$0,No discounts applied - list pricing
-Cloud Infrastructure,AWS Migration Credit,"($10000)",One-time AWS migration credit for runner infrastructure
+Cloud Services,AWS Migration Credit,"($10000)",One-time AWS migration credit for runner infrastructure
 Professional Services,Implementation Credit,$0,No professional services credits
-Third-Party Tools,Partner Credit,$0,No third-party tool credits
+Software Licenses,Partner Credit,$0,No third-party tool credits
 
 # 3-Year Summary
 #WIDTH: 25,15,15,15,12,12,15
 #ALIGN: left,right,right,right,right,right,right
 Category,Year 1 List,Year 1 Credits,Year 1 Net,Year 2,Year 3,3-Year Total
 Software Licenses,"=SUM(G11:G14)","=0","=G51-H51","=SUM(H11:H14)","=SUM(I11:I14)","=J51+K51+L51"
-Cloud Infrastructure,"=SUM(G15:G20)","=($10000)","=G52-H52","=SUM(H15:H20)","=SUM(I15:I20)","=J52+K52+L52"
-Professional Services,"=SUM(G21:G30)","=0","=G53-H53","=SUM(H21:H30)","=SUM(I21:I30)","=J53+K53+L53"
-Third-Party Tools,"=SUM(G31:G34)","=0","=G54-H54","=SUM(H31:H34)","=SUM(I31:I34)","=J54+K54+L54"
+Cloud Services,"=SUM(G15:G20)","=($10000)","=G52-H52","=SUM(H15:H20)","=SUM(I15:I20)","=J52+K52+L52"
+Software Licenses,"=SUM(G31:G34)","=0","=G54-H54","=SUM(H31:H34)","=SUM(I31:I34)","=J54+K54+L54"
 Support & Maintenance,"=SUM(G35:G36)","=0","=G55-H55","=SUM(H35:H36)","=SUM(I35:I36)","=J55+K55+L55"
 **TOTAL INVESTMENT**,"=SUM(G51:G55)","=SUM(H51:H55)","=SUM(I51:I55)","=SUM(J51:J55)","=SUM(K51:K55)","=SUM(L51:L55)"

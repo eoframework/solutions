@@ -2,11 +2,11 @@
 #WIDTH: 24,36,28,28,28,51
 #ALIGN: left,left,center,center,center,left
 Category,Component,Small,Medium,Large,Notes
-Cloud Infrastructure,Concurrent Users,50-100 users,100-250 users,500+ users,Simultaneous active users
-Cloud Infrastructure,Host Pool Type,Pooled multi-session,Mixed pooled+personal,Personal desktops,Session host deployment model
-Cloud Infrastructure,Session Host VMs,8-20 VMs,20-50 VMs,100+ VMs,Total session host count
-Cloud Infrastructure,VM Size,D4s_v5 (4 vCPU 16GB),D8s_v5 (8 vCPU 32GB),D16s_v5+ (16+ vCPU),Per-VM compute capacity
-Cloud Infrastructure,Profile Storage,500 GB - 1 TB,1-5 TB,10+ TB,FSLogix profile containers
+Cloud Services,Concurrent Users,50-100 users,100-250 users,500+ users,Simultaneous active users
+Cloud Services,Host Pool Type,Pooled multi-session,Mixed pooled+personal,Personal desktops,Session host deployment model
+Cloud Services,Session Host VMs,8-20 VMs,20-50 VMs,100+ VMs,Total session host count
+Cloud Services,VM Size,D4s_v5 (4 vCPU 16GB),D8s_v5 (8 vCPU 32GB),D16s_v5+ (16+ vCPU),Per-VM compute capacity
+Cloud Services,Profile Storage,500 GB - 1 TB,1-5 TB,10+ TB,FSLogix profile containers
 Software Licenses,M365 License Tier,M365 E3,M365 E5,M365 E5 + CAL,User licensing requirements
 Software Licenses,Graphics Workloads,Standard office,Light CAD/graphics,GPU-intensive workloads,Application requirements
 Support & Maintenance,Support Level,Business hours,24x5 support,24x7 premium,SLA requirements
@@ -17,35 +17,27 @@ Professional Services,User Migration Count,50-100 users,100-250 users,500+ users
 #WIDTH: 20,22,35,10,14,12,14,14,14,16,40
 #ALIGN: left,left,left,right,left,right,right,right,right,right,left
 Category,Component,Description,Quantity,Unit,Unit Price,Annual Cost,Year 2,Year 3,3-Year Total,Notes
-Cloud Infrastructure,Session Host VMs,Windows 11 Multi-Session D4s_v5 for pooled desktops,20,VMs/Month,$120,"=D11*F11*12","=G11","=G11","=G11+H11+I11",100 users shared hosting
-Cloud Infrastructure,Azure Files Premium,FSLogix user profiles storage,500,GB/Month,$1.60,"=D12*F12*12","=G12","=G12","=G12+H12+I12",Profile and Office containers
-Cloud Infrastructure,Azure Monitor,Diagnostics logs and performance metrics,1,Service/Month,$100,"=D13*F13*12","=G13","=G13","=G13+H13+I13",Operational monitoring
+Cloud Services,Session Host VMs,Windows 11 Multi-Session D4s_v5 for pooled desktops,20,VMs/Month,$120,"=D11*F11*12","=G11","=G11","=G11+H11+I11",100 users shared hosting
+Cloud Services,Azure Files Premium,FSLogix user profiles storage,500,GB/Month,$1.60,"=D12*F12*12","=G12","=G12","=G12+H12+I12",Profile and Office containers
+Cloud Services,Azure Monitor,Diagnostics logs and performance metrics,1,Service/Month,$100,"=D13*F13*12","=G13","=G13","=G13+H13+I13",Operational monitoring
 Software Licenses,Microsoft 365 E3,Office apps and security capabilities,100,Users/Year,$240,"=D14*F14","=G14","=G14","=G14+H14+I14",Productivity suite
 Support & Maintenance,AVD Monitoring,Azure support and AVD monitoring,1,Service/Month,$432,"=D15*F15*12","=G15","=G15","=G15+H15+I15",15% of cloud infrastructure
-Professional Services,Discovery Assessment,Requirements gathering and analysis,30,Hours,$250,"=D16*F16","=0","=0","=G16",One-time evaluation
-Professional Services,Architecture Design,AVD architecture and documentation,60,Hours,$250,"=D17*F17","=0","=0","=G17",One-time design
-Professional Services,Infrastructure Deployment,Azure environment setup and security configuration,80,Hours,$250,"=D18*F18","=0","=0","=G18",One-time infrastructure
-Professional Services,AVD Session Host Deployment,VM configuration and FSLogix setup,40,Hours,$225,"=D19*F19","=0","=0","=G19",One-time session hosts
-Professional Services,Migration Services,User profile migration and connectivity testing,50,Hours,$250,"=D20*F20","=0","=0","=G20",One-time migration
-Professional Services,Training Knowledge Transfer,Administrator and user training,32,Hours,$200,"=D21*F21","=0","=0","=G21",One-time enablement
-Professional Services,Project Management Hypercare,Coordination and 30-day post-launch support,40,Hours,$200,"=D22*F22","=0","=0","=G22",One-time hypercare
 
 # Credits
 #WIDTH: 25,30,20,75
 #ALIGN: left,left,right,left
 Category,Credit Type,Credit Amount,Credit Comments
-Cloud Infrastructure,Azure Credit,$0,No infrastructure credits available
+Cloud Services,Azure Credit,$0,No infrastructure credits available
 Software Licenses,Partner Credit,$0,No software credits available
 Support & Maintenance,Program Credit,$0,No support credits available
-Hardware/Equipment,Equipment Credit,$0,No hardware credits available
+Hardware,Equipment Credit,$0,No hardware credits available
 Professional Services,Azure Partner Services Credit,"($10000)",Applied to architecture infrastructure and migration services
 
 # 3-Year Summary
 #WIDTH: 25,15,18,15,15,15,15
 #ALIGN: left,right,right,right,right,right,right
 Category,Year 1 List,Year 1 Credits,Year 1 Net,Year 2,Year 3,3-Year Total
-Cloud Infrastructure,$39600,$0,$39600,$39600,$39600,$118800
+Cloud Services,$39600,$0,$39600,$39600,$39600,$118800
 Software Licenses,$24000,$0,$24000,$24000,$24000,$72000
 Support & Maintenance,$5184,$0,$5184,$5184,$5184,$15552
-Professional Services,$78400,"($10000)",$68400,$0,$0,$68400
 TOTAL,$147184,"($10000)",$137184,$68784,$68784,$274752

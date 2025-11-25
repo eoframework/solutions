@@ -713,11 +713,11 @@ The table below summarizes the total investment required across all cost categor
 <!-- TABLE_CONFIG: widths=[20, 12, 18, 14, 12, 11, 13] -->
 | Cost Category | Year 1 List | AWS/Partner Credits | Year 1 Net | Year 2 | Year 3 | 3-Year Total |
 |---------------|-------------|---------------------|------------|--------|--------|--------------|
-| Professional Services | $141,700 | $0 | $141,700 | $0 | $0 | $141,700 |
+| Professional Services | $0 | $0 | $0 | $0 | $0 | $0 |
 | Hardware | $896,000 | ($32,000) | $864,000 | $0 | $0 | $864,000 |
 | Software Licenses | $160,520 | ($12,000) | $148,520 | $166,120 | $166,120 | $480,760 |
 | Support & Maintenance | $122,000 | $0 | $122,000 | $122,000 | $122,000 | $366,000 |
-| **TOTAL INVESTMENT** | **$1,320,220** | **($44,000)** | **$1,276,220** | **$288,120** | **$288,120** | **$1,852,460** |
+| **TOTAL INVESTMENT** | **$1,178,520** | **($44,000)** | **$1,134,520** | **$288,120** | **$288,120** | **$1,710,760** |
 <!-- END COST_SUMMARY_TABLE -->
 
 ## Partner Credits

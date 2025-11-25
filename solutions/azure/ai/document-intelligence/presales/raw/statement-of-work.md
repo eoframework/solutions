@@ -595,11 +595,11 @@ A Go-Live Readiness Checklist will be delivered including:
 <!-- TABLE_CONFIG: widths=[20, 12, 23, 13, 10, 10, 12] -->
 | Cost Category | Year 1 List | AWS/Partner Credits | Year 1 Net | Year 2 | Year 3 | 3-Year Total |
 |---------------|-------------|---------------------|------------|--------|--------|--------------|
-| Professional Services | $82,250 | ($10,000) | $72,250 | $0 | $0 | $72,250 |
-| Cloud Infrastructure | $18,528 | ($3,690) | $14,838 | $18,528 | $18,528 | $51,894 |
+| Professional Services | $0 | $0 | $0 | $0 | $0 | $0 |
+| Cloud Services | $18,528 | ($3,690) | $14,838 | $18,528 | $18,528 | $51,894 |
 | Software Licenses | $2,904 | $0 | $2,904 | $2,904 | $2,904 | $8,712 |
 | Support & Maintenance | $2,676 | $0 | $2,676 | $2,676 | $2,676 | $8,028 |
-| **TOTAL INVESTMENT** | **$106,358** | **($13,690)** | **$92,668** | **$24,108** | **$24,108** | **$140,884** |
+| **TOTAL INVESTMENT** | **$24,108** | **($3,690)** | **$20,418** | **$24,108** | **$24,108** | **$68,634** |
 <!-- END COST_SUMMARY_TABLE -->
 
 ## Azure Partner Credits

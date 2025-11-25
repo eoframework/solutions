@@ -472,12 +472,12 @@ The following table summarizes the total cost of ownership for this engagement a
 <!-- TABLE_CONFIG: widths=[25, 15, 12, 15, 11, 11, 11] -->
 | Cost Category | Year 1 List | AWS/Partner Credits | Year 1 Net | Year 2 | Year 3 | 3-Year Total |
 |---------------|-------------|---------------------|------------|--------|--------|--------------|
-| Professional Services | $80,200 | $0 | $80,200 | $0 | $0 | $80,200 |
+| Professional Services | $0 | $0 | $0 | $0 | $0 | $0 |
+| Connectivity | $103,800 | ($12,000) | $91,800 | $103,800 | $103,800 | $299,400 |
 | Hardware | $136,500 | ($8,000) | $128,500 | $0 | $0 | $128,500 |
-| Software | $59,200 | ($15,000) | $44,200 | $59,200 | $59,200 | $162,600 |
-| Support | $16,200 | $0 | $16,200 | $16,200 | $16,200 | $48,600 |
-| WAN Circuits | $103,800 | ($12,000) | $91,800 | $103,800 | $103,800 | $299,400 |
-| **TOTAL INVESTMENT** | **$395,900** | **($35,000)** | **$360,900** | **$179,200** | **$179,200** | **$719,300** |
+| Software Licenses | $59,200 | ($15,000) | $44,200 | $59,200 | $59,200 | $162,600 |
+| Support & Maintenance | $16,200 | $0 | $16,200 | $16,200 | $16,200 | $48,600 |
+| **TOTAL INVESTMENT** | **$315,700** | **($35,000)** | **$280,700** | **$179,200** | **$179,200** | **$639,100** |
 <!-- END COST_SUMMARY_TABLE -->
 
 ## Partner Credits

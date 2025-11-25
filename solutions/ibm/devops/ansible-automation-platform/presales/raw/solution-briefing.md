@@ -185,11 +185,11 @@ This engagement is sized based on the following parameters:
 <!-- TABLE_CONFIG: widths=[25, 15, 15, 15, 12, 12, 15] -->
 | Cost Category | Year 1 List | Year 1 Credits | Year 1 Net | Year 2 | Year 3 | 3-Year Total |
 |---------------|-------------|----------------|------------|--------|--------|--------------|
-| Professional Services | $73,600 | ($3,000) | $70,600 | $0 | $0 | $70,600 |
-| Cloud Infrastructure | $26,520 | ($2,000) | $24,520 | $26,520 | $26,520 | $77,560 |
+| Professional Services | $0 | $0 | $0 | $0 | $0 | $0 |
+| Cloud Services | $26,520 | ($2,000) | $24,520 | $26,520 | $26,520 | $77,560 |
 | Software Licenses | $115,000 | ($10,000) | $105,000 | $115,000 | $115,000 | $335,000 |
 | Support & Maintenance | $17,652 | $0 | $17,652 | $17,652 | $17,652 | $52,956 |
-| **TOTAL** | **$232,772** | **($15,000)** | **$217,772** | **$159,172** | **$159,172** | **$536,116** |
+| **TOTAL** | **$159,172** | **($12,000)** | **$147,172** | **$159,172** | **$159,172** | **$465,516** |
 <!-- END COST_SUMMARY_TABLE -->
 
 **Red Hat Partner Incentives (Year 1 Only):**

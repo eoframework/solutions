@@ -190,11 +190,11 @@ This engagement is sized based on the following parameters:
 <!-- TABLE_CONFIG: widths=[25, 15, 15, 15, 12, 12, 15] -->
 | Cost Category | Year 1 List | Year 1 Credits | Year 1 Net | Year 2 | Year 3 | 3-Year Total |
 |---------------|-------------|----------------|------------|--------|--------|--------------|
-| Professional Services | $86,250 | $0 | $86,250 | $0 | $0 | $86,250 |
-| Cloud Infrastructure | $5,580 | ($1,000) | $4,580 | $5,580 | $5,580 | $15,740 |
-| Software | $1,427 | $0 | $1,427 | $1,427 | $1,427 | $4,281 |
-| Support | $500 | $0 | $500 | $500 | $500 | $1,500 |
-| **TOTAL** | **$93,757** | **($1,000)** | **$92,757** | **$7,507** | **$7,507** | **$107,771** |
+| Professional Services | $0 | $0 | $0 | $0 | $0 | $0 |
+| Cloud Services | $5,580 | ($1,000) | $4,580 | $5,580 | $5,580 | $15,740 |
+| Software Licenses | $1,427 | $0 | $1,427 | $1,427 | $1,427 | $4,281 |
+| Support & Maintenance | $500 | $0 | $500 | $500 | $500 | $1,500 |
+| **TOTAL** | **$7,507** | **($1,000)** | **$6,507** | **$7,507** | **$7,507** | **$21,521** |
 <!-- END COST_SUMMARY_TABLE -->
 
 **Cloud Hosting Credits (Year 1 Only):**

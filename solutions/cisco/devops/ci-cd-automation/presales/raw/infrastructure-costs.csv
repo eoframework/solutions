@@ -14,40 +14,31 @@ Team Size,Network Engineers,3-5 engineers,5-10 engineers,10-20+ engineers,User l
 #WIDTH: 23,30,50,12,15,12,15,12,12,15,30
 #ALIGN: left,left,left,right,left,right,right,right,right,right,left
 Category,Component,Description,Quantity,Unit,Unit Price,Annual Cost,Year 2,Year 3,3-Year Total,Notes
-Software,GitLab Premium Self-Hosted,Git and CI/CD platform (5 users),5,Users/Year,$228,"=D11*F11","=G11","=G11","=G11+H11+I11",Version control and pipelines
-Software,NetBox IPAM,Open source IPAM/DCIM (self-hosted),1,Instance/Year,$0,"=D12*F12","=G12","=G12","=G12+H12+I12",Network source of truth
-Software,Ansible AWX,Open source automation controller (self-hosted),1,Instance/Year,$0,"=D13*F13","=G13","=G13","=G13+H13+I13",Optional automation platform
-Software,Cisco CML (VIRL),Network simulation and testing lab (20 nodes),1,License/Year,$199,"=D14*F14","=G14","=G14","=G14+H14+I14",Pre-deployment testing environment
-Cloud Infrastructure,GitLab Runner VMs,Medium VMs for CI/CD pipelines (2 runners),2,VMs/Month,$100,"=D15*F15*12","=G15","=G15","=G15+H15+I15",Pipeline execution infrastructure
-Cloud Infrastructure,NetBox Hosting,VM for NetBox database and application,1,VM/Month,$50,"=D16*F16*12","=G16","=G16","=G16+H16+I16",IPAM hosting infrastructure
-Cloud Infrastructure,Ansible AWX Hosting,Optional AWX controller hosting,1,VM/Month,$150,"=D17*F17*12","=G17","=G17","=G17+H17+I17",Automation controller (optional)
-Cloud Infrastructure,Backup Storage,S3-compatible storage for config backups (500GB),500,GB/Year,$2.76,"=D18*F18","=G18","=G18","=G18+H18+I18",Git repository and backup storage
-Support,GitLab Support,Technical support for GitLab Premium,1,Instance/Year,$500,"=D19*F19","=G19","=G19","=G19+H19+I19",Platform support and updates
-Support,Ansible Support,Community support (included with AWX),1,Instance/Year,$0,"=D20*F20","=G20","=G20","=G20+H20+I20",Open source community support
-Professional Services,Automation Assessment,Current state analysis and automation roadmap,40,Hours,$225,"=D21*F21","=G21*0","=G21*0","=G21+H21+I21",Discovery and planning phase
-Professional Services,Ansible Playbook Development,Configuration templates for 100 devices (6 playbooks),120,Hours,$200,"=D22*F22","=G22*0","=G22*0","=G22+H22+I22",VLAN ACL interface routing playbooks
-Professional Services,Terraform Module Development,IaC modules for ACI DCNM Meraki (optional),80,Hours,$225,"=D23*F23","=G23*0","=G23*0","=G23+H23+I23",Infrastructure as Code development
-Professional Services,CI/CD Pipeline Setup,GitLab pipeline configuration and testing,60,Hours,$200,"=D24*F24","=G24*0","=G24*0","=G24+H24+I24",Automated deployment workflows
-Professional Services,NetBox IPAM Setup,Inventory import and IPAM configuration,40,Hours,$200,"=D25*F25","=G25*0","=G25*0","=G25+H25+I25",Source of truth configuration
-Professional Services,Testing & Validation,Pre-deployment testing and rollback procedures,40,Hours,$200,"=D26*F26","=G26*0","=G26*0","=G26+H26+I26",Quality assurance and validation
-Professional Services,Integration Services,ITSM ServiceNow and monitoring integration,30,Hours,$225,"=D27*F27","=G27*0","=G27*0","=G27+H27+I27",Third-party system integration
-Professional Services,Training,Team enablement and knowledge transfer,40,Hours,$175,"=D28*F28","=G28*0","=G28*0","=G28+H28+I28",Ansible Terraform Git CI/CD training
+Software Licenses,GitLab Premium Self-Hosted,Git and CI/CD platform (5 users),5,Users/Year,$228,"=D11*F11","=G11","=G11","=G11+H11+I11",Version control and pipelines
+Software Licenses,NetBox IPAM,Open source IPAM/DCIM (self-hosted),1,Instance/Year,$0,"=D12*F12","=G12","=G12","=G12+H12+I12",Network source of truth
+Software Licenses,Ansible AWX,Open source automation controller (self-hosted),1,Instance/Year,$0,"=D13*F13","=G13","=G13","=G13+H13+I13",Optional automation platform
+Software Licenses,Cisco CML (VIRL),Network simulation and testing lab (20 nodes),1,License/Year,$199,"=D14*F14","=G14","=G14","=G14+H14+I14",Pre-deployment testing environment
+Cloud Services,GitLab Runner VMs,Medium VMs for CI/CD pipelines (2 runners),2,VMs/Month,$100,"=D15*F15*12","=G15","=G15","=G15+H15+I15",Pipeline execution infrastructure
+Cloud Services,NetBox Hosting,VM for NetBox database and application,1,VM/Month,$50,"=D16*F16*12","=G16","=G16","=G16+H16+I16",IPAM hosting infrastructure
+Cloud Services,Ansible AWX Hosting,Optional AWX controller hosting,1,VM/Month,$150,"=D17*F17*12","=G17","=G17","=G17+H17+I17",Automation controller (optional)
+Cloud Services,Backup Storage,S3-compatible storage for config backups (500GB),500,GB/Year,$2.76,"=D18*F18","=G18","=G18","=G18+H18+I18",Git repository and backup storage
+Support & Maintenance,GitLab Support,Technical support for GitLab Premium,1,Instance/Year,$500,"=D19*F19","=G19","=G19","=G19+H19+I19",Platform support and updates
+Support & Maintenance,Ansible Support,Community support (included with AWX),1,Instance/Year,$0,"=D20*F20","=G20","=G20","=G20+H20+I20",Open source community support
 
 # Credits
 #WIDTH: 25,25,15,50
 #ALIGN: left,left,right,left
 Category,Credit Type,Credit Amount,Credit Comments
-Software,GitLab License Credit,$0,No software credits available
-Cloud Infrastructure,Cloud Hosting Credit,"($1000)",Year 1 infrastructure hosting credit
-Support,Support Services Credit,$0,No support credits available
+Software Licenses,GitLab License Credit,$0,No software credits available
+Cloud Services,Cloud Hosting Credit,"($1000)",Year 1 infrastructure hosting credit
+Support & Maintenance,Support Services Credit,$0,No support credits available
 Professional Services,Implementation Credit,$0,No services credits available
 
 # 3-Year Summary
 #WIDTH: 25,15,15,15,12,12,15
 #ALIGN: left,right,right,right,right,right,right
 Category,Year 1 List,Year 1 Credits,Year 1 Net,Year 2,Year 3,3-Year Total
-Software,$1427,$0,$1427,$1427,$1427,$4281
-Cloud Infrastructure,$5580,"($1000)",$4580,$5580,$5580,$15740
-Support,$500,$0,$500,$500,$500,$1500
-Professional Services,$86250,$0,$86250,$0,$0,$86250
+Software Licenses,$1427,$0,$1427,$1427,$1427,$4281
+Cloud Services,$5580,"($1000)",$4580,$5580,$5580,$15740
+Support & Maintenance,$500,$0,$500,$500,$500,$1500
 TOTAL,$93757,"($1000)",$92757,$7507,$7507,$107771

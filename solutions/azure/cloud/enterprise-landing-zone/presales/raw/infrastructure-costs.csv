@@ -2,12 +2,12 @@
 #WIDTH: 24,36,28,28,28,51
 #ALIGN: left,left,center,center,center,left
 Category,Component,Small,Medium,Large,Notes
-Cloud Infrastructure,Subscriptions,5-10 subscriptions,10-25 subscriptions,50+ subscriptions,Total Azure subscriptions to manage
-Cloud Infrastructure,Management Groups,2-3 levels,4-5 levels,6+ levels deep,Organizational hierarchy complexity
-Cloud Infrastructure,Virtual WAN Hubs,1-2 regional hubs,2-3 regional hubs,4+ global hubs,Network connectivity points
-Cloud Infrastructure,ExpressRoute Circuits,1 circuit,2 circuits,4+ circuits,Hybrid connectivity requirements
-Cloud Infrastructure,Connected VNets,5-10 VNets,10-25 VNets,50+ VNets,Virtual networks in hub-spoke
-Cloud Infrastructure,Log Analytics Volume,100-500 GB/month,500 GB - 2 TB/month,2+ TB/month,Centralized logging capacity
+Cloud Services,Subscriptions,5-10 subscriptions,10-25 subscriptions,50+ subscriptions,Total Azure subscriptions to manage
+Cloud Services,Management Groups,2-3 levels,4-5 levels,6+ levels deep,Organizational hierarchy complexity
+Cloud Services,Virtual WAN Hubs,1-2 regional hubs,2-3 regional hubs,4+ global hubs,Network connectivity points
+Cloud Services,ExpressRoute Circuits,1 circuit,2 circuits,4+ circuits,Hybrid connectivity requirements
+Cloud Services,Connected VNets,5-10 VNets,10-25 VNets,50+ VNets,Virtual networks in hub-spoke
+Cloud Services,Log Analytics Volume,100-500 GB/month,500 GB - 2 TB/month,2+ TB/month,Centralized logging capacity
 Software Licenses,Azure Sentinel Volume,50-200 GB/month,200-500 GB/month,1+ TB/month,SIEM data ingestion
 Software Licenses,Defender for Cloud Scope,Standard tier,Premium tier,Enterprise tier,Security coverage level
 Support & Maintenance,Support Level,Business hours,24x5 support,24x7 premium,SLA requirements
@@ -17,14 +17,14 @@ Professional Services,Implementation Hours,400-500 hours,500-800 hours,1000+ hou
 #WIDTH: 23,30,50,12,15,12,15,12,12,15,30
 #ALIGN: left,left,left,right,left,right,right,right,right,right,left
 Category,Component,Description,Quantity,Unit,Unit Price,Annual Cost,Year 2,Year 3,3-Year Total,Notes
-Cloud Infrastructure,Virtual WAN,Premium tier for global connectivity,2,Hubs/Month,$260,"=D11*F11*12","=G11","=G11","=G11+H11+I11",Regional network hubs
-Cloud Infrastructure,Azure Firewall,Premium tier for advanced threat protection,2,Instances/Month,$625,"=D12*F12*12","=G12","=G12","=G12+H12+I12",Network security
-Cloud Infrastructure,DDoS Protection,Standard network-wide DDoS protection,1,Service/Month,$250,"=D13*F13*12","=G13","=G13","=G13+H13+I13",DDoS mitigation
-Cloud Infrastructure,Private DNS Zones,DNS hosting for private endpoints,20,Zones/Month,$0.50,"=D14*F14*12","=G14","=G14","=G14+H14+I14",Private DNS
-Cloud Infrastructure,Azure Bastion,Secure RDP/SSH access,2,Instances/Month,$75,"=D15*F15*12","=G15","=G15","=G15+H15+I15",Secure access
-Cloud Infrastructure,Log Analytics,Centralized logging,500,GB/Month,$2.25,"=D16*F16*12","=G16","=G16","=G16+H16+I16",Operational logging
-Cloud Infrastructure,Virtual Network,Hub and spoke VNets,10,VNets/Month,$0,"=D17*F17*12","=G17","=G17","=G17+H17+I17",Network infrastructure
-Cloud Infrastructure,ExpressRoute,Hybrid connectivity,1,Circuit/Month,$1500,"=D18*F18*12","=G18","=G18","=G18+H18+I18",1 Gbps circuit
+Cloud Services,Virtual WAN,Premium tier for global connectivity,2,Hubs/Month,$260,"=D11*F11*12","=G11","=G11","=G11+H11+I11",Regional network hubs
+Cloud Services,Azure Firewall,Premium tier for advanced threat protection,2,Instances/Month,$625,"=D12*F12*12","=G12","=G12","=G12+H12+I12",Network security
+Cloud Services,DDoS Protection,Standard network-wide DDoS protection,1,Service/Month,$250,"=D13*F13*12","=G13","=G13","=G13+H13+I13",DDoS mitigation
+Cloud Services,Private DNS Zones,DNS hosting for private endpoints,20,Zones/Month,$0.50,"=D14*F14*12","=G14","=G14","=G14+H14+I14",Private DNS
+Cloud Services,Azure Bastion,Secure RDP/SSH access,2,Instances/Month,$75,"=D15*F15*12","=G15","=G15","=G15+H15+I15",Secure access
+Cloud Services,Log Analytics,Centralized logging,500,GB/Month,$2.25,"=D16*F16*12","=G16","=G16","=G16+H16+I16",Operational logging
+Cloud Services,Virtual Network,Hub and spoke VNets,10,VNets/Month,$0,"=D17*F17*12","=G17","=G17","=G17+H17+I17",Network infrastructure
+Cloud Services,ExpressRoute,Hybrid connectivity,1,Circuit/Month,$1500,"=D18*F18*12","=G18","=G18","=G18+H18+I18",1 Gbps circuit
 Software Licenses,Azure Monitor,Application and infrastructure monitoring,1,Service/Month,$300,"=D19*F19*12","=G19","=G19","=G19+H19+I19",Monitoring platform
 Software Licenses,Azure Sentinel,SIEM/SOAR for security operations,200,GB/Month,$75,"=D20*F20*12","=G20","=G20","=G20+H20+I20",Security monitoring
 Software Licenses,Azure Policy,Governance and compliance enforcement,1,Service/Month,$0,"=D21*F21*12","=G21","=G21","=G21+H21+I21",Included service
@@ -32,29 +32,22 @@ Software Licenses,Defender for Cloud,Standard tier for all subscriptions,1,Servi
 Support & Maintenance,Azure Support,Professional Direct support plan,1,Plan/Month,$1000,"=D23*F23*12","=G23","=G23","=G23+H23+I23",Technical support
 Support & Maintenance,Governance Optimization,Quarterly reviews and policy updates,40,Hours/Year,$200,"=D24*F24","=G24","=G24","=G24+H24+I24",Ongoing governance
 Support & Maintenance,Security Operations,Monthly security reviews and threat hunting,24,Hours/Year,$200,"=D25*F25","=G25","=G25","=G25+H25+I25",Security support
-Professional Services,Enterprise Architecture,Landing zone architecture and governance framework,120,Hours,$225,"=D26*F26","=0","=0","=G26",One-time design
-Professional Services,Landing Zone Implementation,Management groups subscription structure networking policies,240,Hours,$200,"=D27*F27","=0","=0","=G27",One-time implementation
-Professional Services,Security Compliance Setup,Azure Policy Azure Sentinel RBAC configuration,80,Hours,$200,"=D28*F28","=0","=0","=G28",One-time setup
-Professional Services,Network Implementation,Hub-spoke topology Azure Firewall Private DNS zones,120,Hours,$200,"=D29*F29","=0","=0","=G29",One-time network build
-Professional Services,Identity Access Management,Azure AD integration RBAC design Conditional Access,60,Hours,$200,"=D30*F30","=0","=0","=G30",One-time IAM setup
-Professional Services,Training Knowledge Transfer,Admin training and operational runbooks,40,Hours,$175,"=D31*F31","=0","=0","=G31",One-time training
 
 # Credits
 #WIDTH: 25,25,15,50
 #ALIGN: left,left,right,left
 Category,Credit Type,Credit Amount,Credit Comments
-Cloud Infrastructure,Azure Credit,$0,No infrastructure credits available
+Cloud Services,Azure Credit,$0,No infrastructure credits available
 Software Licenses,Partner Credit,$0,No software credits available
 Support & Maintenance,Program Credit,$0,No support credits available
-Hardware/Equipment,Equipment Credit,$0,No hardware credits available
+Hardware,Equipment Credit,$0,No hardware credits available
 Professional Services,Microsoft Partner Services Credit,"($15000)",Applied to architecture and security setup services
 
 # 3-Year Summary
 #WIDTH: 25,15,15,15,12,12,15
 #ALIGN: left,right,right,right,right,right,right
 Category,Year 1 List,Year 1 Credits,Year 1 Net,Year 2,Year 3,3-Year Total
-Cloud Infrastructure,$56620,$0,$56620,$56620,$56620,$169860
+Cloud Services,$56620,$0,$56620,$56620,$56620,$169860
 Software Licenses,$30600,$0,$30600,$30600,$30600,$91800
 Support & Maintenance,$24800,$0,$24800,$24800,$24800,$74400
-Professional Services,$134000,"($15000)",$119000,$0,$0,$119000
 TOTAL,$245020,"($15000)",$230020,$112020,$112020,$454060

@@ -290,11 +290,11 @@ The implementation will follow industry best practices with:
 <!-- TABLE_CONFIG: widths=[20, 12, 23, 13, 10, 10, 12] -->
 | Cost Category | Year 1 List | AWS/Partner Credits | Year 1 Net | Year 2 | Year 3 | 3-Year Total |
 |---------------|-------------|---------------------|------------|--------|--------|--------------|
-| Professional Services | $78,400 | ($10,000) | $68,400 | $0 | $0 | $68,400 |
-| Cloud Infrastructure | $39,600 | $0 | $39,600 | $39,600 | $39,600 | $118,800 |
+| Professional Services | $0 | $0 | $0 | $0 | $0 | $0 |
+| Cloud Services | $39,600 | $0 | $39,600 | $39,600 | $39,600 | $118,800 |
 | Software Licenses | $24,000 | $0 | $24,000 | $24,000 | $24,000 | $72,000 |
 | Support & Maintenance | $5,184 | $0 | $5,184 | $5,184 | $5,184 | $15,552 |
-| **TOTAL INVESTMENT** | **$147,184** | **($10,000)** | **$137,184** | **$68,784** | **$68,784** | **$274,752** |
+| **TOTAL INVESTMENT** | **$68,784** | **$0** | **$68,784** | **$68,784** | **$68,784** | **$206,352** |
 <!-- END COST_SUMMARY_TABLE -->
 
 ---

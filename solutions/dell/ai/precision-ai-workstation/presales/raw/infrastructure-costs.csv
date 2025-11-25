@@ -22,23 +22,20 @@ Hardware,Dell PowerScale F600,100TB usable NAS for shared datasets with 10GbE co
 Hardware,Dell PowerSwitch S4148T,48-port 10GbE switch for workstation cluster fabric,1,Units,$6500,$6500,$0,$0,$6500,High-speed network connectivity
 Hardware,10GbE Network Adapters,Dual-port 10GbE network cards for workstations,10,Units,$450,$4500,$0,$0,$4500,Network connectivity for PowerScale access
 Hardware,Rack Cabinet & PDU,42U rack cabinet with redundant PDUs for data center deployment,1,Units,$3500,$3500,$0,$0,$3500,Physical infrastructure (if rack-mount needed)
-Software,Ubuntu Pro Subscription,Enterprise Linux support and security updates per workstation,10,Annual,$500,$5000,$5000,$5000,$15000,Extended security maintenance and compliance
-Software,NVIDIA AI Enterprise,Enterprise AI software suite with GPU optimization and support,10,Annual,$3600,$36000,$36000,$36000,$108000,Includes TensorRT NGC catalog and vGPU
-Software,Datadog Infrastructure Monitoring,Infrastructure and GPU monitoring (10 hosts),10,Hosts/Month,$23,$2760,$2760,$2760,$8280,APM and infrastructure monitoring
-Software,JupyterHub Enterprise,Multi-user Jupyter notebook server with authentication,10,Users/Annual,$150,$1500,$1500,$1500,$4500,Centralized development environment (optional)
+Software Licenses,Ubuntu Pro Subscription,Enterprise Linux support and security updates per workstation,10,Annual,$500,$5000,$5000,$5000,$15000,Extended security maintenance and compliance
+Software Licenses,NVIDIA AI Enterprise,Enterprise AI software suite with GPU optimization and support,10,Annual,$3600,$36000,$36000,$36000,$108000,Includes TensorRT NGC catalog and vGPU
+Software Licenses,Datadog Infrastructure Monitoring,Infrastructure and GPU monitoring (10 hosts),10,Hosts/Month,$23,$2760,$2760,$2760,$8280,APM and infrastructure monitoring
+Software Licenses,JupyterHub Enterprise,Multi-user Jupyter notebook server with authentication,10,Users/Annual,$150,$1500,$1500,$1500,$4500,Centralized development environment (optional)
 Support & Maintenance,Dell ProSupport Plus,24x7 hardware support with next business day on-site for workstations,10,Annual,$1200,$12000,$12000,$12000,$36000,Hardware warranty and support
 Support & Maintenance,PowerScale ProSupport Plus,24x7 support for storage array with 4-hour response,1,Annual,$12000,$12000,$12000,$12000,$36000,Includes firmware updates and phone support
 Support & Maintenance,Network Equipment Support,ProSupport for PowerSwitch networking equipment,1,Annual,$850,$850,$850,$850,$2550,Switch hardware support
-Professional Services,Dell ProDeploy Services,Rack installation OS setup ML framework installation,10,Units,$2000,$20000,$0,$0,$20000,One-time professional deployment services
-Professional Services,Data Scientist Training,CUDA optimization distributed training GPU profiling best practices,1,Workshop,$8000,$8000,$0,$0,$8000,2-day hands-on training workshop
-Professional Services,Infrastructure Design,Solution architecture design and capacity planning consultation,40,Hours,$250,$10000,$0,$0,$10000,Upfront architecture and design services
 
 # Credits
 #WIDTH: 25,25,15,50
 #ALIGN: left,left,right,left
 Category,Credit Type,Credit Amount,Credit Comments
 Hardware,Dell Partner Discount,"($59175)",15% partner discount applied to hardware purchases (workstations GPUs storage networking)
-Software,NVIDIA AI Enterprise Promo,"($10800)",First-year 30% discount on NVIDIA AI Enterprise subscription (10 licenses)
+Software Licenses,NVIDIA AI Enterprise Promo,"($10800)",First-year 30% discount on NVIDIA AI Enterprise subscription (10 licenses)
 Professional Services,Dell ProDeploy Credit,"($4000)",Deployment services credit with qualifying hardware purchase
 Support & Maintenance,No Credits Available,$0,Support contracts at standard pricing
 
@@ -47,7 +44,6 @@ Support & Maintenance,No Credits Available,$0,Support contracts at standard pric
 #ALIGN: left,right,right,right,right,right,right
 Category,Year 1 List,Year 1 Credits,Year 1 Net,Year 2,Year 3,3-Year Total
 Hardware,$306000,"($59175)",$246825,$0,$0,$246825
-Software,$45260,"($10800)",$34460,$45260,$45260,$125980
+Software Licenses,$45260,"($10800)",$34460,$45260,$45260,$125980
 Support & Maintenance,$24850,$0,$24850,$24850,$24850,$74550
-Professional Services,$38000,"($4000)",$34000,$0,$0,$34000
 TOTAL,$414110,"($73975)",$340135,$70110,$70110,$481355

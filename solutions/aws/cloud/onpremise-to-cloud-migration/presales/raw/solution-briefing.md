@@ -189,11 +189,11 @@ This engagement is sized based on the following parameters:
 <!-- TABLE_CONFIG: widths=[25, 15, 15, 15, 12, 12, 15] -->
 | Cost Category | Year 1 List | Year 1 Credits | Year 1 Net | Year 2 | Year 3 | 3-Year Total |
 |---------------|-------------|----------------|------------|--------|--------|--------------|
-| Professional Services | $125,150 | ($22,000) | $103,150 | $0 | $0 | $103,150 |
-| Cloud Infrastructure | $10,572 | ($3,317) | $7,255 | $10,472 | $10,472 | $28,199 |
+| Professional Services | $0 | $0 | $0 | $0 | $0 | $0 |
+| Cloud Services | $10,572 | ($3,317) | $7,255 | $10,472 | $10,472 | $28,199 |
 | Software Licenses | $3,132 | $0 | $3,132 | $3,132 | $3,132 | $9,396 |
 | Support & Maintenance | $1,462 | $0 | $1,462 | $1,462 | $1,462 | $4,386 |
-| **TOTAL** | **$140,316** | **($25,317)** | **$114,999** | **$15,066** | **$15,066** | **$145,131** |
+| **TOTAL** | **$15,166** | **($3,317)** | **$11,849** | **$15,066** | **$15,066** | **$41,981** |
 <!-- END COST_SUMMARY_TABLE -->
 
 **AWS MAP Program Credits Breakdown (Year 1 Only):**

@@ -185,11 +185,8 @@ This engagement is sized based on the following parameters:
 <!-- TABLE_CONFIG: widths=[25, 15, 15, 15, 12, 12, 15] -->
 | Cost Category | Year 1 List | Year 1 Credits | Year 1 Net | Year 2 | Year 3 | 3-Year Total |
 |---------------|-------------|----------------|------------|--------|--------|--------------|
-| Professional Services | $63,800 | $0 | $63,800 | $0 | $0 | $63,800 |
-| Software Licenses | $420,342 | $0 | $420,342 | $420,342 | $420,342 | $1,261,026 |
-| Third-Party Tools | $20,000 | $0 | $20,000 | $20,000 | $20,000 | $60,000 |
-| Support & Maintenance | $67,000 | $0 | $67,000 | $67,000 | $67,000 | $201,000 |
-| **TOTAL** | **$571,142** | **$0** | **$571,142** | **$507,342** | **$507,342** | **$1,585,826**| **$0** | **$0** | **$0** | **$0** | **$0** | **$0** |
+| Professional Services | $0 | $0 | $0 | $0 | $0 | $0 |
+| **TOTAL** | **$0** | **$0** | **$0** | **$0** | **$0** | **$0** |
 <!-- END COST_SUMMARY_TABLE -->
 
 **Investment Highlights:**
