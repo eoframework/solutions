@@ -46,3 +46,4 @@ node_modules/
 # They are the final products for consumers, generated from raw/ source files
 # Both raw source files and generated outputs are version controlled
 CLAUDE.md
+~$*
