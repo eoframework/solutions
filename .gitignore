@@ -45,3 +45,4 @@ node_modules/
 # Note: Generated output files (.docx, .xlsx, .pptx) ARE committed to the repository
 # They are the final products for consumers, generated from raw/ source files
 # Both raw source files and generated outputs are version controlled
+CLAUDE.md
