@@ -1,72 +1,109 @@
 # Microsoft 365 Deployment
 
-**Provider:** Microsoft
-**Category:** Modern Workspace
-**Version:** 1.0.0
-**Status:** In Review
+**Provider:** MICROSOFT | **Category:** Modern Workspace | **Version:** 1.0.0 | **Status:** Production Ready
 
-## Solution Description
+## Solution Overview
 
 Organizations moving to Microsoft 365 face complexity in migrating email, enabling collaboration tools, and training users on new applications. Deployments often miss important configurations for security, compliance, and backup. Without proper planning, migrations disrupt users and businesses don't realize the full value of Microsoft 365 capabilities.
 
 This solution provides a structured approach to deploy Microsoft 365 across the organization. It includes migration planning, email and data migration procedures, security baseline configurations, and user adoption materials. The solution covers Exchange Online, SharePoint, Teams, OneDrive, and security features with templates and automation to accelerate deployment while maintaining security standards.
 
+### Key Benefits
 
-## 📥 Access This Solution
+| Benefit | Impact |
+|---------|--------|
+| User Productivity | Enhanced collaboration |
+| Security | Zero-trust architecture |
+| Management | Unified endpoint control |
 
-### Quick Download
+### Core Technologies
 
-**Option 1: Using Helper Script**
+- **Microsoft 365**
+- **Microsoft Intune**
+- **Azure AD**
+- **Microsoft Teams**
+
+## Solution Structure
+
+```
+m365-deployment/
+├── presales/                    # Business case & sales materials
+│   ├── raw/                     # Source files (markdown, CSV)
+│   ├── solution-briefing.pptx   # Executive presentation
+│   ├── statement-of-work.docx   # Formal SOW document
+│   ├── discovery-questionnaire.xlsx
+│   ├── level-of-effort-estimate.xlsx
+│   └── infrastructure-costs.xlsx
+├── delivery/                    # Implementation resources
+│   ├── implementation-guide.md  # Step-by-step deployment
+│   ├── configuration-templates.md
+│   ├── testing-procedures.md
+│   ├── operations-runbook.md
+│   └── scripts/                 # Deployment automation
+├── assets/                      # Logos and images
+│   └── logos/
+└── metadata.yml                 # Solution metadata
+```
+
+## Getting Started
+
+### Download This Solution
+
+**Option 1: Git Sparse Checkout (Recommended)**
+```bash
+git clone --filter=blob:none --sparse https://github.com/eoframework/solutions.git
+cd solutions
+git sparse-checkout set solutions/microsoft/modern-workspace/m365-deployment
+cd solutions/microsoft/modern-workspace/m365-deployment
+```
+
+**Option 2: Download Script**
 ```bash
 curl -O https://raw.githubusercontent.com/eoframework/solutions/main/support/tools/download-solution.sh
 chmod +x download-solution.sh
 ./download-solution.sh microsoft/modern-workspace/m365-deployment
 ```
 
-**Option 2: Git Sparse Checkout (Recommended)**
-```bash
-# Clone with sparse checkout
-git clone --filter=blob:none --sparse https://github.com/eoframework/solutions.git
-cd solutions
+**Option 3: Browse Online**
+[View on GitHub](https://github.com/eoframework/solutions/tree/main/solutions/microsoft/modern-workspace/m365-deployment)
 
-# Checkout this specific solution
-git sparse-checkout set solutions/microsoft/modern-workspace/m365-deployment
+### For Presales Teams
 
-# View the solution
-cd solutions/microsoft/modern-workspace/m365-deployment
-ls -la
-```
+Navigate to **`presales/`** for customer engagement materials:
 
-**Option 3: Browse on GitHub**
-- View online: https://github.com/eoframework/solutions/tree/main/solutions/microsoft/modern-workspace/m365-deployment
+| Document | Purpose |
+|----------|---------|
+| `solution-briefing.pptx` | Executive presentation with business case |
+| `statement-of-work.docx` | Formal project scope and terms |
+| `discovery-questionnaire.xlsx` | Customer requirements gathering |
+| `level-of-effort-estimate.xlsx` | Resource and cost estimation |
+| `infrastructure-costs.xlsx` | 3-year infrastructure cost breakdown |
 
-## 🚀 Getting Started
+### For Delivery Teams
 
-### 1. Download the Solution
-Use one of the download options above to get the complete solution package.
+Navigate to **`delivery/`** for implementation:
 
-### 2. Pre-Sales Activities
-Navigate to **`presales/`** for business case development and stakeholder engagement:
-- Business case materials and ROI calculators
-- Executive presentations and solution briefs
-- Level of Effort (LOE) estimates
-- Statement of Work (SOW) templates
+1. Review `implementation-guide.md` for prerequisites and steps
+2. Use `configuration-templates.md` for environment setup
+3. Execute scripts in `scripts/` for automated deployment
+4. Follow `testing-procedures.md` for validation
+5. Reference `operations-runbook.md` for ongoing operations
 
-### 3. Delivery and Implementation
-Navigate to **`delivery/`** for project execution:
-- Project plan and communication plan
-- Requirements documentation
-- Implementation guides and configuration templates
-- **`scripts/`** folder - Deployment automation (Bash, Python, Terraform, PowerShell)
-  - See [`delivery/scripts/README.md`](delivery/scripts/README.md) for detailed deployment instructions
+## Prerequisites
 
-### 4. Customize for Your Needs
-All templates and configuration files can be modified to meet your specific requirements.
+- MICROSOFT Account
+- Administrative Access
+- Python 3.8+
+- PowerShell
+- Microsoft Graph
 
-## 📄 License
+## Use Cases
 
-For license information see: <a href="https://www.eoframework.org/license/" target="_blank">https://www.eoframework.org/license/</a>
+- **Remote Work Enablement** - Secure remote access
+- **Collaboration** - Team productivity tools
+- **Device Management** - Endpoint management and security
+- **Identity Management** - Single sign-on and MFA
 
 ---
 
-**<a href="https://eoframework.org" target="_blank">EO Framework™</a>** - Exceptional Outcome Framework
+**[EO Framework](https://eoframework.org)** - Exceptional Outcome Framework

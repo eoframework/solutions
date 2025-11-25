@@ -1,72 +1,108 @@
 # Mist AI Network
 
-**Provider:** Juniper
-**Category:** Network
-**Version:** 1.0.0
-**Status:** In Review
+**Provider:** JUNIPER | **Category:** Network | **Version:** 1.0.0 | **Status:** Production Ready
 
-## Solution Description
+## Solution Overview
 
 Wireless networks are critical infrastructure, but troubleshooting connectivity issues is time-consuming and reactive. Network teams receive vague complaints like "WiFi is slow" without tools to identify root causes quickly. Planning WiFi coverage requires specialized expertise, and changes made in one area can impact other locations unexpectedly.
 
 This solution uses Juniper Mist AI-driven wireless networking with machine learning to optimize performance and troubleshoot issues automatically. It provides real-time visibility into user experience, identifies problems before users report them, and recommends fixes. The solution simplifies WiFi planning with AI-powered coverage analysis and automates routine network operations.
 
+### Key Benefits
 
-## 📥 Access This Solution
+| Benefit | Impact |
+|---------|--------|
+| Network Performance | Improved throughput |
+| Management | Centralized control |
+| Reliability | 99.99% availability |
 
-### Quick Download
+### Core Technologies
 
-**Option 1: Using Helper Script**
+- **Juniper Mist AI**
+- **Juniper EX Series**
+- **Juniper Apstra**
+- **Juniper Marvis**
+
+## Solution Structure
+
+```
+mist-ai-network/
+├── presales/                    # Business case & sales materials
+│   ├── raw/                     # Source files (markdown, CSV)
+│   ├── solution-briefing.pptx   # Executive presentation
+│   ├── statement-of-work.docx   # Formal SOW document
+│   ├── discovery-questionnaire.xlsx
+│   ├── level-of-effort-estimate.xlsx
+│   └── infrastructure-costs.xlsx
+├── delivery/                    # Implementation resources
+│   ├── implementation-guide.md  # Step-by-step deployment
+│   ├── configuration-templates.md
+│   ├── testing-procedures.md
+│   ├── operations-runbook.md
+│   └── scripts/                 # Deployment automation
+├── assets/                      # Logos and images
+│   └── logos/
+└── metadata.yml                 # Solution metadata
+```
+
+## Getting Started
+
+### Download This Solution
+
+**Option 1: Git Sparse Checkout (Recommended)**
+```bash
+git clone --filter=blob:none --sparse https://github.com/eoframework/solutions.git
+cd solutions
+git sparse-checkout set solutions/juniper/network/mist-ai-network
+cd solutions/juniper/network/mist-ai-network
+```
+
+**Option 2: Download Script**
 ```bash
 curl -O https://raw.githubusercontent.com/eoframework/solutions/main/support/tools/download-solution.sh
 chmod +x download-solution.sh
 ./download-solution.sh juniper/network/mist-ai-network
 ```
 
-**Option 2: Git Sparse Checkout (Recommended)**
-```bash
-# Clone with sparse checkout
-git clone --filter=blob:none --sparse https://github.com/eoframework/solutions.git
-cd solutions
+**Option 3: Browse Online**
+[View on GitHub](https://github.com/eoframework/solutions/tree/main/solutions/juniper/network/mist-ai-network)
 
-# Checkout this specific solution
-git sparse-checkout set solutions/juniper/network/mist-ai-network
+### For Presales Teams
 
-# View the solution
-cd solutions/juniper/network/mist-ai-network
-ls -la
-```
+Navigate to **`presales/`** for customer engagement materials:
 
-**Option 3: Browse on GitHub**
-- View online: https://github.com/eoframework/solutions/tree/main/solutions/juniper/network/mist-ai-network
+| Document | Purpose |
+|----------|---------|
+| `solution-briefing.pptx` | Executive presentation with business case |
+| `statement-of-work.docx` | Formal project scope and terms |
+| `discovery-questionnaire.xlsx` | Customer requirements gathering |
+| `level-of-effort-estimate.xlsx` | Resource and cost estimation |
+| `infrastructure-costs.xlsx` | 3-year infrastructure cost breakdown |
 
-## 🚀 Getting Started
+### For Delivery Teams
 
-### 1. Download the Solution
-Use one of the download options above to get the complete solution package.
+Navigate to **`delivery/`** for implementation:
 
-### 2. Pre-Sales Activities
-Navigate to **`presales/`** for business case development and stakeholder engagement:
-- Business case materials and ROI calculators
-- Executive presentations and solution briefs
-- Level of Effort (LOE) estimates
-- Statement of Work (SOW) templates
+1. Review `implementation-guide.md` for prerequisites and steps
+2. Use `configuration-templates.md` for environment setup
+3. Execute scripts in `scripts/` for automated deployment
+4. Follow `testing-procedures.md` for validation
+5. Reference `operations-runbook.md` for ongoing operations
 
-### 3. Delivery and Implementation
-Navigate to **`delivery/`** for project execution:
-- Project plan and communication plan
-- Requirements documentation
-- Implementation guides and configuration templates
-- **`scripts/`** folder - Deployment automation (Bash, Python, Terraform, PowerShell)
-  - See [`delivery/scripts/README.md`](delivery/scripts/README.md) for detailed deployment instructions
+## Prerequisites
 
-### 4. Customize for Your Needs
-All templates and configuration files can be modified to meet your specific requirements.
+- JUNIPER Account
+- Administrative Access
+- Python 3.8+
+- Ansible
 
-## 📄 License
+## Use Cases
 
-For license information see: <a href="https://www.eoframework.org/license/" target="_blank">https://www.eoframework.org/license/</a>
+- **Network Modernization** - Legacy infrastructure upgrade
+- **SD-WAN Deployment** - Software-defined networking
+- **Network Security** - Segmentation and access control
+- **Performance Optimization** - Bandwidth and latency improvement
 
 ---
 
-**<a href="https://eoframework.org" target="_blank">EO Framework™</a>** - Exceptional Outcome Framework
+**[EO Framework](https://eoframework.org)** - Exceptional Outcome Framework

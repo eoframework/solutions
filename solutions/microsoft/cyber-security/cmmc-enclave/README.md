@@ -1,72 +1,109 @@
 # CMMC Enclave
 
-**Provider:** Microsoft
-**Category:** Cyber Security
-**Version:** 1.0.0
-**Status:** In Review
+**Provider:** MICROSOFT | **Category:** Cyber Security | **Version:** 1.0.0 | **Status:** Production Ready
 
-## Solution Description
+## Solution Overview
 
 Defense contractors must comply with CMMC (Cybersecurity Maturity Model Certification) requirements to protect Controlled Unclassified Information (CUI). Meeting these requirements means implementing specific security controls, maintaining audit trails, and proving compliance. Building a compliant environment from scratch is complex and time-consuming without clear guidance on required configurations.
 
 This solution creates a secure enclave within Microsoft 365 and Azure that meets CMMC Level 2 requirements. It implements required security controls, configures audit logging, restricts data access, and provides compliance reporting. The enclave isolates CUI data and ensures only authorized users can access it through compliant methods.
 
+### Key Benefits
 
-## 📥 Access This Solution
+| Benefit | Impact |
+|---------|--------|
+| Threat Detection | Real-time monitoring |
+| Compliance | Automated policy enforcement |
+| Incident Response | Reduced MTTR |
 
-### Quick Download
+### Core Technologies
 
-**Option 1: Using Helper Script**
+- **Microsoft Defender**
+- **Microsoft Sentinel**
+- **Azure AD**
+- **Microsoft Purview**
+
+## Solution Structure
+
+```
+cmmc-enclave/
+├── presales/                    # Business case & sales materials
+│   ├── raw/                     # Source files (markdown, CSV)
+│   ├── solution-briefing.pptx   # Executive presentation
+│   ├── statement-of-work.docx   # Formal SOW document
+│   ├── discovery-questionnaire.xlsx
+│   ├── level-of-effort-estimate.xlsx
+│   └── infrastructure-costs.xlsx
+├── delivery/                    # Implementation resources
+│   ├── implementation-guide.md  # Step-by-step deployment
+│   ├── configuration-templates.md
+│   ├── testing-procedures.md
+│   ├── operations-runbook.md
+│   └── scripts/                 # Deployment automation
+├── assets/                      # Logos and images
+│   └── logos/
+└── metadata.yml                 # Solution metadata
+```
+
+## Getting Started
+
+### Download This Solution
+
+**Option 1: Git Sparse Checkout (Recommended)**
+```bash
+git clone --filter=blob:none --sparse https://github.com/eoframework/solutions.git
+cd solutions
+git sparse-checkout set solutions/microsoft/cyber-security/cmmc-enclave
+cd solutions/microsoft/cyber-security/cmmc-enclave
+```
+
+**Option 2: Download Script**
 ```bash
 curl -O https://raw.githubusercontent.com/eoframework/solutions/main/support/tools/download-solution.sh
 chmod +x download-solution.sh
 ./download-solution.sh microsoft/cyber-security/cmmc-enclave
 ```
 
-**Option 2: Git Sparse Checkout (Recommended)**
-```bash
-# Clone with sparse checkout
-git clone --filter=blob:none --sparse https://github.com/eoframework/solutions.git
-cd solutions
+**Option 3: Browse Online**
+[View on GitHub](https://github.com/eoframework/solutions/tree/main/solutions/microsoft/cyber-security/cmmc-enclave)
 
-# Checkout this specific solution
-git sparse-checkout set solutions/microsoft/cyber-security/cmmc-enclave
+### For Presales Teams
 
-# View the solution
-cd solutions/microsoft/cyber-security/cmmc-enclave
-ls -la
-```
+Navigate to **`presales/`** for customer engagement materials:
 
-**Option 3: Browse on GitHub**
-- View online: https://github.com/eoframework/solutions/tree/main/solutions/microsoft/cyber-security/cmmc-enclave
+| Document | Purpose |
+|----------|---------|
+| `solution-briefing.pptx` | Executive presentation with business case |
+| `statement-of-work.docx` | Formal project scope and terms |
+| `discovery-questionnaire.xlsx` | Customer requirements gathering |
+| `level-of-effort-estimate.xlsx` | Resource and cost estimation |
+| `infrastructure-costs.xlsx` | 3-year infrastructure cost breakdown |
 
-## 🚀 Getting Started
+### For Delivery Teams
 
-### 1. Download the Solution
-Use one of the download options above to get the complete solution package.
+Navigate to **`delivery/`** for implementation:
 
-### 2. Pre-Sales Activities
-Navigate to **`presales/`** for business case development and stakeholder engagement:
-- Business case materials and ROI calculators
-- Executive presentations and solution briefs
-- Level of Effort (LOE) estimates
-- Statement of Work (SOW) templates
+1. Review `implementation-guide.md` for prerequisites and steps
+2. Use `configuration-templates.md` for environment setup
+3. Execute scripts in `scripts/` for automated deployment
+4. Follow `testing-procedures.md` for validation
+5. Reference `operations-runbook.md` for ongoing operations
 
-### 3. Delivery and Implementation
-Navigate to **`delivery/`** for project execution:
-- Project plan and communication plan
-- Requirements documentation
-- Implementation guides and configuration templates
-- **`scripts/`** folder - Deployment automation (Bash, Python, Terraform, PowerShell)
-  - See [`delivery/scripts/README.md`](delivery/scripts/README.md) for detailed deployment instructions
+## Prerequisites
 
-### 4. Customize for Your Needs
-All templates and configuration files can be modified to meet your specific requirements.
+- MICROSOFT Account
+- Administrative Access
+- Python 3.8+
+- PowerShell
+- Microsoft Graph
 
-## 📄 License
+## Use Cases
 
-For license information see: <a href="https://www.eoframework.org/license/" target="_blank">https://www.eoframework.org/license/</a>
+- **Threat Detection** - Real-time security monitoring
+- **Access Control** - Identity and access management
+- **Compliance** - Regulatory compliance automation
+- **Incident Response** - Security event management
 
 ---
 
-**<a href="https://eoframework.org" target="_blank">EO Framework™</a>** - Exceptional Outcome Framework
+**[EO Framework](https://eoframework.org)** - Exceptional Outcome Framework
