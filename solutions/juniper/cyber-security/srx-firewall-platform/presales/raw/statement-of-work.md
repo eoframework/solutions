@@ -14,17 +14,6 @@ vendor_logo: ../../assets/logos/consulting_company_logo.png
 eoframework_logo: ../../assets/logos/eo-framework-logo-real.png
 ---
 
-# STATEMENT OF WORK (SOW)
-
-**Document Version:** 1.0
-**Date:** [DATE]
-**Prepared by:** [VENDOR_NAME]
-**Client:** [CLIENT_NAME]
-**Project:** Juniper SRX Firewall Platform Implementation
-**SOW Number:** [SOW_NUMBER]
-
----
-
 # Executive Summary
 
 This section provides a high-level overview of the project scope, business objectives, expected outcomes, and timeline for the Juniper SRX Firewall Platform implementation.
