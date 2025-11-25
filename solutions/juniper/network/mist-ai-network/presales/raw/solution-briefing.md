@@ -200,11 +200,11 @@ This solution includes 50 WiFi 6E access points, 4 PoE switches, Mist Cloud AI m
 <!-- TABLE_CONFIG: widths=[25, 15, 15, 15, 12, 12, 15] -->
 | Cost Category | Year 1 List | Year 1 Credits | Year 1 Net | Year 2 | Year 3 | 3-Year Total |
 |---------------|-------------|----------------|------------|--------|--------|--------------|
-| Professional Services | $81,000 | $0 | $81,000 | $0 | $0 | $81,000 |
+| Professional Services | $0 | $0 | $0 | $0 | $0 | $0 |
 | Hardware | $116,600 | ($5,580) | $111,020 | $0 | $0 | $111,020 |
-| Software | $31,400 | ($7,500) | $23,900 | $31,400 | $31,400 | $86,700 |
+| Software Licenses | $31,400 | ($7,500) | $23,900 | $31,400 | $31,400 | $86,700 |
 | Support & Maintenance | $9,720 | ($2,916) | $6,804 | $9,720 | $9,720 | $26,244 |
-| **TOTAL** | **$238,720** | **($15,996)** | **$222,724** | **$41,120** | **$41,120** | **$304,964** |
+| **TOTAL** | **$157,720** | **($15,996)** | **$141,724** | **$41,120** | **$41,120** | **$223,964** |
 <!-- END COST_SUMMARY_TABLE -->
 
 **Investment Breakdown:**

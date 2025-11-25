@@ -200,11 +200,11 @@ This solution includes datacenter HA firewall pair, 10 branch firewalls, securit
 <!-- TABLE_CONFIG: widths=[25, 15, 15, 15, 12, 12, 15] -->
 | Cost Category | Year 1 List | Year 1 Credits | Year 1 Net | Year 2 | Year 3 | 3-Year Total |
 |---------------|-------------|----------------|------------|--------|--------|--------------|
-| Professional Services | $101,300 | $0 | $101,300 | $0 | $0 | $101,300 |
+| Professional Services | $0 | $0 | $0 | $0 | $0 | $0 |
 | Hardware | $164,200 | ($8,000) | $156,200 | $0 | $0 | $156,200 |
-| Software | $98,000 | ($7,500) | $90,500 | $30,600 | $30,600 | $151,700 |
+| Software Licenses | $98,000 | ($7,500) | $90,500 | $30,600 | $30,600 | $151,700 |
 | Support & Maintenance | $48,000 | ($13,500) | $34,500 | $48,000 | $48,000 | $130,500 |
-| **TOTAL** | **$411,500** | **($29,000)** | **$382,500** | **$78,600** | **$78,600** | **$539,700** |
+| **TOTAL** | **$310,200** | **($29,000)** | **$281,200** | **$78,600** | **$78,600** | **$438,400** |
 <!-- END COST_SUMMARY_TABLE -->
 
 **Investment Breakdown:**

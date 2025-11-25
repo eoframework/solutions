@@ -21,39 +21,28 @@ Hardware,Juniper SRX4600 Datacenter,Next-gen firewall 80 Gbps throughput with IP
 Hardware,Juniper SRX300 Branch,Compact branch firewall 1 Gbps throughput with security services,10,Device,$2500,$0,$0,$0,$25000,Branch office protection
 Hardware,Power Supplies,Redundant AC power supplies for SRX4600,4,Power Supply,$800,$0,$0,$0,$3200,HA redundancy
 Hardware,Transceivers,10G SFP+ optics for connectivity,24,Transceiver,$250,$0,$0,$0,$6000,Network connectivity modules
-Software,Security Director Licenses,Centralized policy management for 20+ SRX devices,1,License,$15000,$0,$0,$0,$15000,One-time perpetual license
-Software,IPS Signature Subscription,Advanced IPS threat prevention 3-year subscription,2,Subscription/Year,$7500,$15000,$15000,$15000,$45000,SRX4600 pair IPS annual renewal
-Software,SecIntel Threat Feeds,Cloud-based threat intelligence feeds 3-year subscription,2,Subscription/Year,$3000,$6000,$6000,$6000,$18000,Real-time threat intelligence
-Software,ATP Cloud,Advanced threat prevention cloud sandbox and analysis,1,Subscription/Year,$6000,$6000,$6000,$6000,$18000,Zero-day malware protection
-Software,Content Security,Web filtering and anti-malware 3-year subscription,12,Subscription/Year,$300,$3600,$3600,$3600,$10800,URL filtering for all devices
-Software,SSL Proxy License,SSL/TLS inspection license for SRX4600 pair,2,License,$5000,$0,$0,$0,$10000,Encrypted traffic inspection
+Software Licenses,Security Director Licenses,Centralized policy management for 20+ SRX devices,1,License,$15000,$0,$0,$0,$15000,One-time perpetual license
+Software Licenses,IPS Signature Subscription,Advanced IPS threat prevention 3-year subscription,2,Subscription/Year,$7500,$15000,$15000,$15000,$45000,SRX4600 pair IPS annual renewal
+Software Licenses,SecIntel Threat Feeds,Cloud-based threat intelligence feeds 3-year subscription,2,Subscription/Year,$3000,$6000,$6000,$6000,$18000,Real-time threat intelligence
+Software Licenses,ATP Cloud,Advanced threat prevention cloud sandbox and analysis,1,Subscription/Year,$6000,$6000,$6000,$6000,$18000,Zero-day malware protection
+Software Licenses,Content Security,Web filtering and anti-malware 3-year subscription,12,Subscription/Year,$300,$3600,$3600,$3600,$10800,URL filtering for all devices
+Software Licenses,SSL Proxy License,SSL/TLS inspection license for SRX4600 pair,2,License,$5000,$0,$0,$0,$10000,Encrypted traffic inspection
 Support & Maintenance,Juniper Support Premium,24x7 JTAC support with 4-hour hardware replacement,12,Device/Year,$3750,$45000,$45000,$45000,$135000,Premium support for all devices
 Support & Maintenance,Security Director Support,Annual support and updates for Security Director,1,Subscription/Year,$3000,$3000,$3000,$3000,$9000,Management platform support
-Professional Services,Site Survey and Design,Security architecture design and implementation planning,80,Hours,$225,$18000,$0,$0,$18000,Solution architecture and design
-Professional Services,Hardware Installation,Rack mount cabling and initial configuration,40,Hours,$200,$8000,$0,$0,$8000,Physical installation services
-Professional Services,Configuration Services,SRX configuration policy migration and testing,120,Hours,$225,$27000,$0,$0,$27000,Security policy implementation
-Professional Services,Integration Services,SIEM integration VPN setup and network integration,60,Hours,$225,$13500,$0,$0,$13500,Third-party system integration
-Professional Services,Testing and Validation,Performance testing security validation and failover testing,40,Hours,$225,$9000,$0,$0,$9000,Pre-production validation
-Professional Services,Training - Administrator,SRX administration and Junos OS training (2 days),16,Hours,$200,$3200,$0,$0,$3200,Technical team enablement
-Professional Services,Training - Security Operations,Security policy management and operations training (1 day),8,Hours,$200,$1600,$0,$0,$1600,SOC team training
-Professional Services,Deployment Support,On-site go-live support and knowledge transfer,40,Hours,$225,$9000,$0,$0,$9000,Deployment assistance
-Professional Services,Project Management,Project coordination and stakeholder management,80,Hours,$150,$12000,$0,$0,$12000,Overall project delivery
 
 # Credits
 #WIDTH: 25,25,15,50
 #ALIGN: left,left,right,left
 Category,Credit Type,Credit Amount,Credit Comments
 Hardware,Volume Discount,"($8000)",5% hardware discount for multi-site deployment
-Software,First Year IPS Credit,"($7500)",50% Year 1 IPS subscription promotional discount
+Software Licenses,First Year IPS Credit,"($7500)",50% Year 1 IPS subscription promotional discount
 Support & Maintenance,Multi-Year Support Credit,"($13500)",10% discount for 3-year support commitment
-Professional Services,Partner Credit,$0,No professional services credits available
 
 # 3-Year Summary
 #WIDTH: 25,15,15,15,12,12,15
 #ALIGN: left,right,right,right,right,right,right
 Category,Year 1 List,Year 1 Credits,Year 1 Net,Year 2,Year 3,3-Year Total
 Hardware,$164200,"($8000)",$156200,$0,$0,$156200
-Software,$98000,"($7500)",$90500,$30600,$30600,$151700
+Software Licenses,$98000,"($7500)",$90500,$30600,$30600,$151700
 Support & Maintenance,$48000,"($13500)",$34500,$48000,$48000,$130500
-Professional Services,$101300,$0,$101300,$0,$0,$101300
-TOTAL,$411500,"($29000)",$382500,$78600,$78600,$539700
+TOTAL,$310200,"($29000)",$281200,$78600,$78600,$438400
