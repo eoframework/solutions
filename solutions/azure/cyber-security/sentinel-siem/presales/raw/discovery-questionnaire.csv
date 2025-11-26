@@ -1,34 +1,46 @@
-Category,Question,Response_Type,Required,Options,Description,Impact
-Business Context,What is your current annual security incident volume?,Number,Yes,,Number of security incidents detected and investigated annually,High
-Business Context,What are your primary security threats and concerns?,Multiple Choice,Yes,"Ransomware,Insider threats,Data exfiltration,Compliance violations,APT attacks,Lateral movement,Zero-day exploits,Other",Current security threat landscape and priorities,High
-Business Context,What are your security and compliance mandates?,Multiple Choice,Yes,"HIPAA,PCI-DSS,GDPR,SOC 2,ISO 27001,NIST Cybersecurity Framework,Industry-specific regulations,Other",Regulatory and compliance requirements,High
-Business Context,What is your current annual security operations budget?,Number,Yes,,Total spend on security tools personnel and infrastructure,High
-Business Context,What are your primary business drivers for SIEM investment?,Multiple Choice,Yes,"Reduce incident response time,Improve threat detection,Meet compliance requirements,Achieve cost optimization,Enable advanced threat hunting,Consolidate security tools,Improve visibility,Other",Key motivations for implementing SIEM solution,High
-Business Context,What are your specific security goals and KPIs?,Text,Yes,,Quantified targets for MTTR mean time to respond detection accuracy,High
-Technology Infrastructure,What security tools are you currently using?,Multiple Choice,No,"Endpoint Detection Response,Intrusion Detection,Firewall,Proxy,Data Loss Prevention,Web Application Firewall,Others",Current security tool stack for integration planning,Medium
-Technology Infrastructure,What are your current data sources for security monitoring?,Multiple Choice,Yes,"Firewalls,Intrusion Detection Systems,Endpoint Detection Response,Cloud Platforms,Identity Management,Databases,Applications,Network Devices,Email Systems,Other",Sources to integrate with SIEM,High
-Technology Infrastructure,How do you currently monitor Azure cloud environments?,Multiple Choice,Yes,"Manual log collection,Third-party SIEM,Cloud-native monitoring,Azure Monitor only,No visibility,Other",Azure security monitoring capabilities,High
-Technology Infrastructure,How do you currently manage security incidents?,Multiple Choice,Yes,"Manual process,Ticketing system,SOAR platform,Workflow automation,Paper-based,Combination of tools,Other",Incident management methodology,Medium
-Technology Infrastructure,What is your team's technical expertise level?,Scale,Yes,"High,Medium,Low",Experience levels for training and support planning,Medium
-Technical Requirements,What are your security analytics requirements?,Multiple Choice,Yes,"Real-time alerting,Anomaly detection,Behavioral analytics,Threat intelligence integration,Custom rules,Forensic analysis,Compliance reporting,Other",Analytics capabilities needed,High
-Technical Requirements,What are your SOAR automation requirements?,Multiple Choice,Yes,"Incident response automation,Threat intelligence enrichment,False positive reduction,Integration with external systems,Custom playbooks,Other",SOAR and automation needs,Medium
-Technical Requirements,What is your preferred deployment approach?,Multiple Choice,Yes,"Public cloud,Hybrid cloud,On-premises,No preference",Infrastructure and deployment preferences,High
-Technical Requirements,What are your data residency and compliance requirements?,Text,Yes,,Geographic regulatory and data sovereignty requirements,High
-Technical Requirements,What are your security and access control requirements?,Multiple Choice,Yes,"Single sign-on,Multi-factor authentication,Role-based access control,Data encryption,Network isolation,Audit logging,Privileged access management,Other",Security and compliance needs,High
-Technical Requirements,What are your performance and scalability requirements?,Text,Yes,,Data volumes ingestion rates and growth projections,High
-Technical Requirements,What third-party integrations are required?,Text,Yes,,Specific security tools platforms and systems needing integration,High
-Organizational,Who will be involved in the solution implementation?,Text,Yes,,Security team IT infrastructure compliance stakeholders,Medium
-Organizational,What is your team's current security expertise?,Scale,Yes,"High,Medium,Low",Skill levels in SIEM and security operations,Medium
-Organizational,What training and support will be needed?,Text,Yes,,SOC analyst security engineer operational support needs,Medium
-Organizational,What is your preferred implementation timeline?,Text,Yes,,Project start phases and go-live timelines,High
-Organizational,How do you want to approach implementation?,Multiple Choice,Yes,"Big bang deployment,Phased by data source,Phased by use case,Parallel with existing SIEM,Pilot program,Other",Implementation strategy and risk management,Medium
-Organizational,How will you measure solution success?,Text,Yes,,Key performance indicators and success metrics,High
-Budget,What is your total project budget range?,Range,Yes,"$200K-$500K,$500K-$1M,$1M-$2.5M,$2.5M+",Available investment for solution implementation,High
-Budget,What is your annual operational budget?,Range,Yes,"$100K-$300K,$300K-$600K,$600K-$1M,$1M+",Ongoing operational and licensing budget,Medium
-Budget,How do you evaluate technology investments?,Multiple Choice,Yes,"Total Cost of Ownership,Return on Investment,Risk Reduction Value,Operational Efficiency,Business case development,Other",Investment evaluation criteria,Medium
-Budget,What are your cost optimization priorities?,Multiple Choice,Yes,"Minimize upfront costs,Optimize ongoing costs,Flexible scaling,Predictable costs,Maximum security value for budget",Cost management preferences,Medium
-Success Criteria,What are your target improvements for MTTR?,Text,Yes,,Expected mean time to respond reduction target,High
-Success Criteria,What are your target improvements for threat detection rate?,Text,Yes,,Expected improvement in threats detected automatically,High
-Success Criteria,What are your compliance reporting requirements?,Text,Yes,,Specific compliance reports and audit trail needs,High
-Success Criteria,What are your primary concerns about implementation?,Multiple Choice,Yes,"Complexity of implementation,User adoption by SOC team,Data integration challenges,Performance under load,Vendor lock-in,Skill gaps,Budget overruns,Other",Implementation risks and concerns,Medium
-Success Criteria,What risk mitigation strategies are important?,Multiple Choice,Yes,"Comprehensive pilot testing,Phased implementation,Extensive training,Strong vendor support,Performance guarantees,SLA commitments",Risk management preferences,Medium
+Question ID,Category,Sub-Category,Question,Guidance,Customer Response,Notes
+BUS-001,Business Requirements,Business Context,What is your current annual security incident volume?,,,High
+BUS-002,Business Requirements,Business Context,What are your primary security threats and concerns?,"Ransomware,Insider threats,Data exfiltration,Compliance violations,APT attacks,Lateral movement,Zero-day exploits,Other",,High
+BUS-003,Business Requirements,Business Context,What are your security and compliance mandates?,"HIPAA,PCI-DSS,GDPR,SOC 2,ISO 27001,NIST Cybersecurity Framework,Industry-specific regulations,Other",,High
+BUS-004,Business Requirements,Business Context,What is your current annual security operations budget?,,,High
+BUS-005,Business Requirements,Business Context,What are your primary business drivers for SIEM investment?,"Reduce incident response time,Improve threat detection,Meet compliance requirements,Achieve cost optimization,Enable advanced threat hunting,Consolidate security tools,Improve visibility,Other",,High
+BUS-006,Business Requirements,Business Context,What are your specific security goals and KPIs?,,,High
+TECH-001,Technical Requirements,Technology Infrastructure,What security tools are you currently using?,"Endpoint Detection Response,Intrusion Detection,Firewall,Proxy,Data Loss Prevention,Web Application Firewall,Others",,Medium
+TECH-002,Technical Requirements,Technology Infrastructure,What are your current data sources for security monitoring?,"Firewalls,Intrusion Detection Systems,Endpoint Detection Response,Cloud Platforms,Identity Management,Databases,Applications,Network Devices,Email Systems,Other",,High
+TECH-003,Technical Requirements,Technology Infrastructure,How do you currently monitor Azure cloud environments?,"Manual log collection,Third-party SIEM,Cloud-native monitoring,Azure Monitor only,No visibility,Other",,High
+TECH-004,Technical Requirements,Technology Infrastructure,How do you currently manage security incidents?,"Manual process,Ticketing system,SOAR platform,Workflow automation,Paper-based,Combination of tools,Other",,Medium
+TECH-005,Technical Requirements,Technology Infrastructure,What is your team's technical expertise level?,"High,Medium,Low",,Medium
+TECH-006,Technical Requirements,Technical Requirements,What are your security analytics requirements?,"Real-time alerting,Anomaly detection,Behavioral analytics,Threat intelligence integration,Custom rules,Forensic analysis,Compliance reporting,Other",,High
+TECH-007,Technical Requirements,Technical Requirements,What are your SOAR automation requirements?,"Incident response automation,Threat intelligence enrichment,False positive reduction,Integration with external systems,Custom playbooks,Other",,Medium
+TECH-008,Technical Requirements,Technical Requirements,What is your preferred deployment approach?,"Public cloud,Hybrid cloud,On-premises,No preference",,High
+TECH-009,Technical Requirements,Technical Requirements,What are your data residency and compliance requirements?,,,High
+TECH-010,Technical Requirements,Technical Requirements,What are your security and access control requirements?,"Single sign-on,Multi-factor authentication,Role-based access control,Data encryption,Network isolation,Audit logging,Privileged access management,Other",,High
+TECH-011,Technical Requirements,Technical Requirements,What are your performance and scalability requirements?,,,High
+TECH-012,Technical Requirements,Technical Requirements,What third-party integrations are required?,,,High
+IMPL-001,Implementation Planning,Organizational,Who will be involved in the solution implementation?,,,Medium
+IMPL-002,Implementation Planning,Organizational,What is your team's current security expertise?,"High,Medium,Low",,Medium
+IMPL-003,Implementation Planning,Organizational,What training and support will be needed?,,,Medium
+IMPL-004,Implementation Planning,Organizational,What is your preferred implementation timeline?,,,High
+IMPL-005,Implementation Planning,Organizational,How do you want to approach implementation?,"Big bang deployment,Phased by data source,Phased by use case,Parallel with existing SIEM,Pilot program,Other",,Medium
+IMPL-006,Implementation Planning,Organizational,How will you measure solution success?,,,High
+BUS-007,Business Requirements,Budget,What is your total project budget range?,"$200K-$500K,$500K-$1M,$1M-$2.5M,$2.5M+",,High
+BUS-008,Business Requirements,Budget,What is your annual operational budget?,"$100K-$300K,$300K-$600K,$600K-$1M,$1M+",,Medium
+BUS-009,Business Requirements,Budget,How do you evaluate technology investments?,"Total Cost of Ownership,Return on Investment,Risk Reduction Value,Operational Efficiency,Business case development,Other",,Medium
+BUS-010,Business Requirements,Budget,What are your cost optimization priorities?,"Minimize upfront costs,Optimize ongoing costs,Flexible scaling,Predictable costs,Maximum security value for budget",,Medium
+RISK-001,Risk & Constraints,Success Criteria,What are your target improvements for MTTR?,,,High
+RISK-002,Risk & Constraints,Success Criteria,What are your target improvements for threat detection rate?,,,High
+RISK-003,Risk & Constraints,Success Criteria,What are your compliance reporting requirements?,,,High
+RISK-004,Risk & Constraints,Success Criteria,What are your primary concerns about implementation?,"Complexity of implementation,User adoption by SOC team,Data integration challenges,Performance under load,Vendor lock-in,Skill gaps,Budget overruns,Other",,Medium
+RISK-005,Risk & Constraints,Success Criteria,What risk mitigation strategies are important?,"Comprehensive pilot testing,Phased implementation,Extensive training,Strong vendor support,Performance guarantees,SLA commitments",,Medium
+SEC-001,Security & Compliance,Data Classification,What is the highest data classification level for your security data?,"Levels: Public, Internal, Confidential, Restricted",,Determines encryption and access requirements
+SEC-002,Security & Compliance,Sensitive Data,What sensitive data types will Sentinel process?,"Types: PII, PHI, Financial, Security logs, Threat intelligence",,Data protection requirements
+SEC-003,Security & Compliance,Compliance Standards,What compliance standards must Sentinel meet?,"Common: SOC 2, ISO 27001, HIPAA, PCI DSS, GDPR, FedRAMP",,Compliance controls
+SEC-004,Security & Compliance,Access Control,What authentication requirements apply to Sentinel?,"Options: SSO, MFA, RBAC, Azure AD integration",,Identity management
+SEC-005,Security & Compliance,Audit Logging,What audit and logging requirements do you have?,"Access logs, Audit trail, Activity tracking",,Compliance reporting
+SEC-006,Security & Compliance,Data Retention,What are your log retention requirements?,Specify retention period for different log types,,Data lifecycle management
+OPS-001,Operations & Support,Availability,What uptime requirements do you have for Sentinel?,"Common targets: 99.5%, 99.9%, 99.99%",,SLA requirements
+OPS-002,Operations & Support,Support Coverage,What support coverage do you require?,"Options: 8x5, 24x5, 24x7 SOC coverage",,Support staffing
+OPS-003,Operations & Support,Monitoring,What monitoring and alerting is required for Sentinel itself?,"Health metrics, Ingestion alerts, Query performance",,Operational visibility
+OPS-004,Operations & Support,Incident Response,What is your incident response process?,"SOC workflow, escalation procedures, playbooks",,IR requirements
+OPS-005,Operations & Support,Maintenance,What maintenance windows are acceptable?,"Scheduled updates, rule changes, workbook updates",,Change management
+OPS-006,Operations & Support,Capacity Planning,How will you monitor and manage log ingestion costs?,"Ingestion monitoring, cost alerts, optimization",,Cost management

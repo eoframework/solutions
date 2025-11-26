@@ -1,50 +1,74 @@
 Question ID,Category,Sub-Category,Question,Guidance,Customer Response,Notes
-PROJ-001,Project Information,Basic Details,What is the solution name?,"","",Internal project reference
-PROJ-002,Project Information,Basic Details,What is your company name?,"","",Client identification
-PROJ-003,Project Information,Basic Details,Who is the primary stakeholder for this project?,"","",Main point of contact
-PROJ-004,Project Information,Basic Details,What is the stakeholder's role?,"","",Decision-making authority
-PROJ-005,Project Information,Basic Details,What is today's date?,"","",Questionnaire completion date
-BUS-001,Business Requirements,Current State,What is the current challenge or pain point this solution aims to address?,"Common challenges: Performance issues, scalability limitations, security concerns, cost optimization, compliance requirements","",Primary business driver
-BUS-002,Business Requirements,Current State,What systems or processes are currently in place?,"","",Current state assessment
-BUS-003,Business Requirements,Current State,What is working well with the current setup?,"","",Strengths to preserve
-BUS-004,Business Requirements,Current State,What are the specific limitations or failures?,"","",Pain points to address
-BUS-005,Business Requirements,Objectives,What are the primary business goals for this project?,"Common goals: Reduce operational costs, improve performance, enhance security, enable scalability, ensure compliance, accelerate time-to-market","",Business objectives
-BUS-006,Business Requirements,Objectives,What does success look like? (Measurable outcomes),"","",Success criteria definition
-BUS-007,Business Requirements,Timeline,What is the expected timeline for implementation?,"Typical ranges: 0-3 months, 3-6 months, 6-12 months, 12+ months","",Project timeline expectations
-BUS-008,Business Requirements,Budget,What is the approved budget range?,"Common ranges: $0-50K, $50K-250K, $250K-1M, $1M+","",Budget constraints
-BUS-009,Business Requirements,Stakeholders,Who are the key stakeholders and decision makers?,"","",Stakeholder mapping
-BUS-010,Business Requirements,Success Metrics,How will you measure the success of this project?,"","",KPI definition
-TECH-001,Technical Requirements,Infrastructure,What is your current technology infrastructure?,"","",Current tech stack
-TECH-002,Technical Requirements,Infrastructure,What cloud platforms do you currently use?,"Common platforms: AWS, Azure, Google Cloud, on-premises, hybrid","",Cloud strategy
-TECH-003,Technical Requirements,Integration,What systems need to integrate with this solution?,"","",Integration requirements
-TECH-004,Technical Requirements,Integration,What data sources need to be connected?,"","",Data integration needs
-TECH-005,Technical Requirements,Performance,What are your performance requirements?,"","",Performance expectations
-TECH-006,Technical Requirements,Performance,How many concurrent users do you expect?,"Typical ranges: 1-50, 51-500, 501-5000, 5000+","",User capacity planning
-TECH-007,Technical Requirements,Security,What are your security requirements?,"Common requirements: Basic authentication, multi-factor authentication, single sign-on, RBAC, advanced encryption","",Security needs
-TECH-008,Technical Requirements,Security,What compliance standards must be met?,"Common standards: SOC 2, ISO 27001, HIPAA, PCI DSS, GDPR, FedRAMP","",Compliance requirements
-TECH-009,Technical Requirements,Data,What types of data will the system handle?,"Common types: Customer data, financial data, healthcare data, personal data, public data, proprietary data","",Data classification
-TECH-010,Technical Requirements,Data,What are your data retention requirements?,"","",Data lifecycle management
-TECH-011,Technical Requirements,Availability,What are your uptime requirements?,"Common targets: 99%, 99.5%, 99.9%, 99.95%, 99.99%","",SLA requirements
-TECH-012,Technical Requirements,Disaster Recovery,What are your disaster recovery requirements?,"","",Business continuity needs
-ORG-001,Organizational,Resources,Who will be the technical lead for this project?,"","",Technical ownership
-ORG-002,Organizational,Resources,What internal resources are available for this project?,"","",Team availability
-ORG-003,Organizational,Resources,What are the skill levels of your technical team?,"Typical levels: Beginner, intermediate, advanced, expert","",Training needs assessment
-ORG-004,Organizational,Change Management,How do you typically handle technology changes?,"","",Change readiness
-ORG-005,Organizational,Change Management,What training and support will be needed?,"","",Enablement requirements
-ORG-006,Organizational,Governance,What approval processes are required?,"","",Decision-making process
-ORG-007,Organizational,Governance,Who has final approval authority?,"","",Decision authority
-ORG-008,Organizational,Communication,How do you prefer project communication?,"Common channels: Email, Slack, Teams, weekly meetings, bi-weekly meetings, monthly meetings","",Communication preferences
-PROJ-010,Project Constraints,Timing,Are there any critical business dates or deadlines?,"","",Timeline constraints
-PROJ-011,Project Constraints,Timing,Are there any blackout periods when work cannot be done?,"","",Implementation restrictions
-PROJ-012,Project Constraints,Budget,Are there any budget constraints or considerations?,"","",Financial constraints
-PROJ-013,Project Constraints,Technical,Are there any technical constraints or limitations?,"","",Technical limitations
-PROJ-014,Project Constraints,Regulatory,Are there any regulatory or compliance constraints?,"","",Regulatory requirements
-RISK-001,Risk Assessment,Implementation,What are your main concerns about this implementation?,"","",Primary concerns
-RISK-002,Risk Assessment,Implementation,What could cause this project to fail?,"","",Failure modes
-RISK-003,Risk Assessment,Business,What business risks are you trying to mitigate?,"","",Business risk factors
-RISK-004,Risk Assessment,Technical,What technical risks are you most concerned about?,"","",Technical risk factors
-RISK-005,Risk Assessment,Organizational,What organizational challenges do you anticipate?,"","",Change management risks
-FUTURE-001,Future State,Vision,What is your long-term vision for this solution?,"","",Future roadmap
-FUTURE-002,Future State,Growth,How do you expect your needs to grow over time?,"","",Scalability planning
-FUTURE-003,Future State,Integration,What future integrations might be needed?,"","",Future integration needs
-FUTURE-004,Future State,Features,What additional features might you need in the future?,"","",Future feature requirements
+BUS-001,Business Requirements,Basic Details,What is the solution name?,,,Internal project reference
+BUS-002,Business Requirements,Basic Details,What is your company name?,,,Client identification
+BUS-003,Business Requirements,Basic Details,Who is the primary stakeholder for this project?,,,Main point of contact
+BUS-004,Business Requirements,Basic Details,What is the stakeholder's role?,,,Decision-making authority
+BUS-005,Business Requirements,Basic Details,What is today's date?,,,Questionnaire completion date
+BUS-006,Business Requirements,Current State,What is the current challenge or pain point this solution aims to address?,"Common challenges: Performance issues, scalability limitations, security concerns, cost optimization, compliance requirements",,Primary business driver
+BUS-007,Business Requirements,Current State,What systems or processes are currently in place?,,,Current state assessment
+BUS-008,Business Requirements,Current State,What is working well with the current setup?,,,Strengths to preserve
+BUS-009,Business Requirements,Current State,What are the specific limitations or failures?,,,Pain points to address
+BUS-010,Business Requirements,Objectives,What are the primary business goals for this project?,"Common goals: Reduce operational costs, improve performance, enhance security, enable scalability, ensure compliance, accelerate time-to-market",,Business objectives
+BUS-011,Business Requirements,Objectives,What does success look like? (Measurable outcomes),,,Success criteria definition
+BUS-012,Business Requirements,Timeline,What is the expected timeline for implementation?,"Typical ranges: 0-3 months, 3-6 months, 6-12 months, 12+ months",,Project timeline expectations
+BUS-013,Business Requirements,Budget,What is the approved budget range?,"Common ranges: $0-50K, $50K-250K, $250K-1M, $1M+",,Budget constraints
+BUS-014,Business Requirements,Stakeholders,Who are the key stakeholders and decision makers?,,,Stakeholder mapping
+BUS-015,Business Requirements,Success Metrics,How will you measure the success of this project?,,,KPI definition
+TECH-001,Technical Requirements,Infrastructure,What is your current technology infrastructure?,,,Current tech stack
+TECH-002,Technical Requirements,Infrastructure,What cloud platforms do you currently use?,"Common platforms: AWS, Azure, Google Cloud, on-premises, hybrid",,Cloud strategy
+TECH-003,Technical Requirements,Integration,What systems need to integrate with this solution?,,,Integration requirements
+TECH-004,Technical Requirements,Integration,What data sources need to be connected?,,,Data integration needs
+TECH-005,Technical Requirements,Performance,What are your performance requirements?,,,Performance expectations
+TECH-006,Technical Requirements,Performance,How many concurrent users do you expect?,"Typical ranges: 1-50, 51-500, 501-5000, 5000+",,User capacity planning
+TECH-007,Technical Requirements,Security,What are your security requirements?,"Common requirements: Basic authentication, multi-factor authentication, single sign-on, RBAC, advanced encryption",,Security needs
+TECH-008,Technical Requirements,Security,What compliance standards must be met?,"Common standards: SOC 2, ISO 27001, HIPAA, PCI DSS, GDPR, FedRAMP",,Compliance requirements
+TECH-009,Technical Requirements,Data,What types of data will the system handle?,"Common types: Customer data, financial data, healthcare data, personal data, public data, proprietary data",,Data classification
+TECH-010,Technical Requirements,Data,What are your data retention requirements?,,,Data lifecycle management
+TECH-011,Technical Requirements,Availability,What are your uptime requirements?,"Common targets: 99%, 99.5%, 99.9%, 99.95%, 99.99%",,SLA requirements
+TECH-012,Technical Requirements,Disaster Recovery,What are your disaster recovery requirements?,,,Business continuity needs
+BUS-016,Business Requirements,Resources,Who will be the technical lead for this project?,,,Technical ownership
+BUS-017,Business Requirements,Resources,What internal resources are available for this project?,,,Team availability
+BUS-018,Business Requirements,Resources,What are the skill levels of your technical team?,"Typical levels: Beginner, intermediate, advanced, expert",,Training needs assessment
+BUS-019,Business Requirements,Change Management,How do you typically handle technology changes?,,,Change readiness
+BUS-020,Business Requirements,Change Management,What training and support will be needed?,,,Enablement requirements
+BUS-021,Business Requirements,Governance,What approval processes are required?,,,Decision-making process
+BUS-022,Business Requirements,Governance,Who has final approval authority?,,,Decision authority
+BUS-023,Business Requirements,Communication,How do you prefer project communication?,"Common channels: Email, Slack, Teams, weekly meetings, bi-weekly meetings, monthly meetings",,Communication preferences
+BUS-024,Business Requirements,Timing,Are there any critical business dates or deadlines?,,,Timeline constraints
+BUS-025,Business Requirements,Timing,Are there any blackout periods when work cannot be done?,,,Implementation restrictions
+BUS-026,Business Requirements,Budget,Are there any budget constraints or considerations?,,,Financial constraints
+BUS-027,Business Requirements,Technical,Are there any technical constraints or limitations?,,,Technical limitations
+BUS-028,Business Requirements,Regulatory,Are there any regulatory or compliance constraints?,,,Regulatory requirements
+RISK-001,Risk & Constraints,Implementation,What are your main concerns about this implementation?,,,Primary concerns
+RISK-002,Risk & Constraints,Implementation,What could cause this project to fail?,,,Failure modes
+RISK-003,Risk & Constraints,Business,What business risks are you trying to mitigate?,,,Business risk factors
+RISK-004,Risk & Constraints,Technical,What technical risks are you most concerned about?,,,Technical risk factors
+RISK-005,Risk & Constraints,Organizational,What organizational challenges do you anticipate?,,,Change management risks
+BUS-029,Business Requirements,Vision,What is your long-term vision for this solution?,,,Future roadmap
+BUS-030,Business Requirements,Growth,How do you expect your needs to grow over time?,,,Scalability planning
+BUS-031,Business Requirements,Integration,What future integrations might be needed?,,,Future integration needs
+BUS-032,Business Requirements,Features,What additional features might you need in the future?,,,Future feature requirements
+SEC-001,Security & Compliance,Data Classification,What is the highest data classification level for your data?,"Levels: Public, Internal, Confidential, Restricted",,Determines encryption and access control requirements
+SEC-002,Security & Compliance,Sensitive Data,What sensitive data types are present?,"Types: PII, PHI, Financial, Credit cards, SSNs, None",,Data protection requirements
+SEC-003,Security & Compliance,Compliance Standards,What compliance standards must be met?,"Common: SOC 2, ISO 27001, HIPAA, PCI DSS, GDPR, FedRAMP",,Compliance controls and audit requirements
+SEC-004,Security & Compliance,Encryption,What encryption requirements apply?,"At rest (AES-256), In transit (TLS 1.2+), Key management",,Security architecture requirements
+SEC-005,Security & Compliance,Access Control,What authentication and authorization requirements apply?,"Options: SSO, MFA, RBAC, IAM integration",,Identity and access management
+SEC-006,Security & Compliance,Audit Logging,What audit and logging requirements do you have?,"Access logs, Audit trail, Data lineage tracking",,Compliance reporting needs
+SEC-007,Security & Compliance,Data Retention,What are your data retention requirements?,Specify retention period and deletion procedures,,Data lifecycle management
+SEC-008,Security & Compliance,Data Residency,Do you require data residency in specific regions?,Specify regions or countries,,Geographic data sovereignty
+OPS-001,Operations & Support,Availability,What uptime requirements do you have?,"Common targets: 99%, 99.5%, 99.9%, 99.99%",,SLA requirements
+OPS-002,Operations & Support,RTO/RPO,What are your Recovery Time and Recovery Point Objectives?,"RTO: Max downtime, RPO: Max data loss",,Disaster recovery requirements
+OPS-003,Operations & Support,Support Coverage,What support coverage do you require?,"Options: 8x5, 24x5, 24x7",,Support staffing needs
+OPS-004,Operations & Support,Monitoring,What monitoring and alerting is required?,"Metrics, Error notifications, Dashboards, Alarms",,Operational visibility
+OPS-005,Operations & Support,Error Handling,How should errors and exceptions be handled?,"Options: Auto retry, Manual review, Notifications, API callback",,Exception management
+OPS-006,Operations & Support,Backup,What backup and disaster recovery procedures are required?,"Backup frequency, retention, recovery procedures",,Data protection strategy
+OPS-007,Operations & Support,Maintenance,What maintenance windows are acceptable?,Scheduled downtime windows for updates and patches,,Change management
+OPS-008,Operations & Support,Escalation,What is the escalation path for critical issues?,Define escalation contacts and response times,,Incident management
+IMPL-001,Implementation Planning,Project Lead,Who will be the technical lead for this project?,"Name, role, contact information",,Technical ownership
+IMPL-002,Implementation Planning,Team Availability,What internal resources are available?,"Team members, roles, time commitment",,Resource planning
+IMPL-003,Implementation Planning,Experience Level,What is your team experience with this technology?,"Levels: None, Basic, Intermediate, Advanced, Expert",,Training needs
+IMPL-004,Implementation Planning,Migration Approach,What is your preferred migration approach?,"Options: Phased, Pilot then scale, Big bang, Parallel run",,Implementation strategy
+IMPL-005,Implementation Planning,Timeline,What is your expected implementation timeline?,Specify key milestones and deadlines,,Project schedule
+IMPL-006,Implementation Planning,Change Management,How will you handle the transition?,"Communication, training, rollout plan",,User adoption
+IMPL-007,Implementation Planning,Training Needs,What training will be needed?,"Admin training, End-user training, Documentation",,Knowledge transfer
+IMPL-008,Implementation Planning,Testing,What testing approach do you prefer?,"Options: Internal UAT, Pilot users, Staged rollout",,Validation requirements

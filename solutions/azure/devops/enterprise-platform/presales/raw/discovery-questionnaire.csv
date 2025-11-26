@@ -1,52 +1,68 @@
 Question ID,Category,Sub-Category,Question,Guidance,Customer Response,Notes
-PROJ-001,Project Information,Basic Details,What is the solution name?,"","",Internal project reference
-PROJ-002,Project Information,Basic Details,What is your company name?,"","",Client identification
-PROJ-003,Project Information,Basic Details,Who is the primary stakeholder for this DevOps project?,"","",Main point of contact
-PROJ-004,Project Information,Basic Details,What is the stakeholder's role and decision-making authority?,"","",Decision-making authority
-PROJ-005,Project Information,Basic Details,What is today's date?,"","",Questionnaire completion date
-BUS-001,Business Requirements,Current State,What are your main software delivery challenges?,"Common challenges: Slow release cycles, Manual deployment processes, Quality issues in production, Poor visibility into pipelines, Inefficient testing, Deployment failures, Lack of automation","",Primary business driver
-BUS-002,Business Requirements,Current State,What is your current deployment process?,"","",Current state assessment
-BUS-003,Business Requirements,Current State,How often do you currently deploy to production?,"Common frequencies: Weekly, Monthly, Quarterly, Multiple times per day, Ad-hoc, Not regularly","",Release cadence assessment
-BUS-004,Business Requirements,Current State,What tools and systems are currently in place for CI/CD?,"Common tools: Jenkins, GitLab, GitHub Actions, Azure DevOps, BitBucket, Manual processes, Mix of tools","",Current tooling inventory
-BUS-005,Business Requirements,Objectives,What are your primary business goals for implementing DevOps?,"Common goals: Accelerate time-to-market, Improve software quality, Reduce manual effort, Enable continuous deployment, Improve team collaboration, Better visibility and traceability","",Business objectives
-BUS-006,Business Requirements,Objectives,What does success look like? (Measurable outcomes),"Examples: Deploy 10x per day, 99.9% deployment success rate, 50% faster releases, Zero-downtime deployments, 90% test automation","",Success criteria definition
-BUS-007,Business Requirements,Timeline,What is your expected timeline for DevOps platform implementation?,"Typical ranges: 0-3 months, 3-6 months, 6-12 months, 12+ months","",Project timeline expectations
-BUS-008,Business Requirements,Budget,What is the approved budget range for this DevOps solution?,"Common ranges: $0-50K, $50K-250K, $250K-1M, $1M+","",Budget constraints
-BUS-009,Business Requirements,Stakeholders,Who are the key stakeholders and decision makers?,"Roles: CTO, VP Engineering, Release Manager, Development Team Lead, Operations Manager","",Stakeholder mapping
-BUS-010,Business Requirements,Success Metrics,How will you measure DevOps success?,"Examples: Deployment frequency, Lead time for changes, Mean time to recovery, Change failure rate, Test automation coverage","",KPI definition
-TECH-001,Technical Requirements,Infrastructure,What is your current technology infrastructure?,"","",Current tech stack
-TECH-002,Technical Requirements,Cloud,What cloud platforms do you currently use?,"Common platforms: Azure, AWS, Google Cloud, On-premises, Hybrid, Multi-cloud","",Cloud strategy and existing footprint
-TECH-003,Technical Requirements,Source Control,What source control systems do you use?,"Common systems: Git (GitHub/GitLab), Azure Repos, Azure DevOps, Bitbucket, TFVC, SVN, Mix of systems","",Source control requirements
-TECH-004,Technical Requirements,Build,What build tools and frameworks do you use?,"Common tools: MSBuild, Maven, Gradle, npm, Docker, Terraform, CloudFormation, Ansible","",Build and infrastructure as code tools
-TECH-005,Technical Requirements,Testing,What types of testing do you perform?,"Common types: Unit testing, Integration testing, Functional testing, Performance testing, Security testing, Manual testing","",Testing strategy and automation needs
-TECH-006,Technical Requirements,Deployment,What deployment targets do you need to support?,"Common targets: Azure VMs, Azure Kubernetes Service (AKS), Azure App Service, On-premises servers, Multi-region, Multi-cloud","",Deployment environment requirements
-TECH-007,Technical Requirements,Integration,What systems need to integrate with the DevOps platform?,"Common integrations: Jira, Slack, Teams, ServiceNow, SonarQube, HashiCorp, Third-party monitoring","",Integration requirements
-TECH-008,Technical Requirements,Security,What are your security requirements?,"Common requirements: Secrets management, RBAC, Audit logging, IP whitelisting, Private agents, Network isolation","",Security and compliance needs
-TECH-009,Technical Requirements,Compliance,What compliance standards must be met?,"Common standards: SOC 2, ISO 27001, HIPAA, PCI DSS, GDPR, FedRAMP, Internal policies","",Compliance requirements
-TECH-010,Technical Requirements,Performance,What are your performance expectations?,"Examples: Build times < 10 minutes, Deploy in < 5 minutes, Handle 100+ pipeline runs/day, Support 500+ developers","",Performance and scalability needs
-TECH-011,Technical Requirements,Availability,What are your uptime requirements for the DevOps platform?,"Common targets: 99%, 99.5%, 99.9%, 99.95%, 99.99%","",SLA and availability needs
-TECH-012,Technical Requirements,Disaster Recovery,What are your disaster recovery requirements?,"Examples: RPO < 1 hour, RTO < 4 hours, Multi-region failover, Backup strategy","",Business continuity needs
-ORG-001,Organizational,Resources,Who will be the technical lead for this DevOps project?,"","",Technical ownership
-ORG-002,Organizational,Resources,How many developers are on your engineering team?,"Range: 1-10, 11-50, 51-200, 200+","",Team size and scaling needs
-ORG-003,Organizational,Resources,What internal resources are available for DevOps implementation?,"Examples: Full-time engineers, Part-time support, 1 DevOps engineer, Mix of skills, None available","",Team availability and skills
-ORG-004,Organizational,Skills,What is the current DevOps and CI/CD skill level of your team?,"Typical levels: Beginner, Intermediate, Advanced, Expert, Mixed","",Training and enablement needs
-ORG-005,Organizational,Training,What training and support will be needed?,"Examples: Hands-on workshops, Documentation, Video tutorials, Coaching, Knowledge transfer sessions","",Enablement and training requirements
-ORG-006,Organizational,Change Management,How do you typically handle technology changes?,"Approaches: Agile/iterative, Big-bang migration, Phased rollout, Pilot-first, Gradual adoption","",Change management readiness
-ORG-007,Organizational,Governance,What approval processes are required?,"Examples: Architecture review, Security review, Change control board, CAB approval, Release committee","",Decision-making process
-ORG-008,Organizational,Communication,How do you prefer project communication?,"Common channels: Email, Slack, Teams, Weekly meetings, Bi-weekly meetings, Monthly meetings, Daily standups","",Communication preferences
-PROJ-010,Project Constraints,Timing,Are there any critical business dates or deadlines?,"Examples: Quarter-end freeze, Holiday blackout, Earnings release, Major product launch","",Timeline constraints
-PROJ-011,Project Constraints,Blackouts,Are there any blackout periods when changes cannot be deployed?,"Examples: Production freeze dates, Holiday periods, End-of-month, Fiscal year-end","",Deployment constraints
-PROJ-012,Project Constraints,Budget,Are there budget constraints or cost optimization needs?,"Examples: CapEx vs OpEx preference, Budget caps, Multi-year funding approved","",Financial constraints
-PROJ-013,Project Constraints,Technical,Are there technical constraints or legacy system limitations?,"Examples: Monolithic applications, Legacy mainframe systems, On-premises-only deployment, Air-gapped networks","",Technical limitations
-PROJ-014,Project Constraints,Regulatory,Are there regulatory or compliance constraints that impact deployment?,"Examples: Data residency, Export controls, Audit requirements, Change management policies","",Regulatory requirements
-RISK-001,Risk Assessment,Implementation,What are your main concerns about implementing a DevOps platform?,"Common concerns: Tool complexity, Team adoption, Migration risks, Production stability, Cost overruns","",Primary implementation concerns
-RISK-002,Risk Assessment,Failure Modes,What could cause this DevOps project to fail?,"Examples: Lack of leadership support, Team resistance, Poor tool selection, Inadequate training, Unrealistic timeline","",Failure modes and blockers
-RISK-003,Risk Assessment,Organizational,What organizational challenges do you anticipate?,"Examples: Siloed teams, Resistance to change, Skill gaps, Resource constraints, Competing priorities","",Change management and organizational risks
-RISK-004,Risk Assessment,Technical,What technical risks are you most concerned about?,"Examples: Tool stability, Integration complexity, Security vulnerabilities, Performance degradation, Vendor lock-in","",Technical risk factors
-RISK-005,Risk Assessment,Business,What business risks are you trying to mitigate?,"Examples: Quality failures, Deployment bottlenecks, Security breaches, Compliance violations, Slow time-to-market","",Business risk factors
-FUTURE-001,Future State,Vision,What is your long-term vision for software delivery?,"Examples: Continuous deployment, Zero-downtime deployments, Cross-cloud support, Full automation, Enterprise scale","",Future roadmap and vision
-FUTURE-002,Future State,Growth,How do you expect your development needs to grow over time?,"Examples: Team size doubling, New products, Geographic expansion, International teams, Multi-cloud strategy","",Scalability and growth planning
-FUTURE-003,Future State,Integration,What future integrations might be needed?,"Examples: Advanced monitoring, Cost management, Policy compliance, Advanced analytics, AI-driven optimization","",Future integration needs
-FUTURE-004,Future State,Features,What additional features might you need in the future?,"Examples: Blue-green deployments, Canary deployments, GitOps, FinOps, Advanced security scanning","",Future feature requirements
-VENDOR-001,Vendor Selection,Experience,What Azure DevOps and CI/CD implementation experience do you expect?,"Examples: 10+ years experience, Azure certifications, Case studies, Reference customers, Specialized practice","",Partner requirements
-VENDOR-002,Vendor Selection,Support,What ongoing support do you expect post-implementation?,"Examples: 24/7 support, Managed services, Training updates, Platform optimization, Strategic consulting","",Post-implementation support expectations
+BUS-001,Business Requirements,Basic Details,What is the solution name?,,,Internal project reference
+BUS-002,Business Requirements,Basic Details,What is your company name?,,,Client identification
+BUS-003,Business Requirements,Basic Details,Who is the primary stakeholder for this DevOps project?,,,Main point of contact
+BUS-004,Business Requirements,Basic Details,What is the stakeholder's role and decision-making authority?,,,Decision-making authority
+BUS-005,Business Requirements,Basic Details,What is today's date?,,,Questionnaire completion date
+BUS-006,Business Requirements,Current State,What are your main software delivery challenges?,"Common challenges: Slow release cycles, Manual deployment processes, Quality issues in production, Poor visibility into pipelines, Inefficient testing, Deployment failures, Lack of automation",,Primary business driver
+BUS-007,Business Requirements,Current State,What is your current deployment process?,,,Current state assessment
+BUS-008,Business Requirements,Current State,How often do you currently deploy to production?,"Common frequencies: Weekly, Monthly, Quarterly, Multiple times per day, Ad-hoc, Not regularly",,Release cadence assessment
+BUS-009,Business Requirements,Current State,What tools and systems are currently in place for CI/CD?,"Common tools: Jenkins, GitLab, GitHub Actions, Azure DevOps, BitBucket, Manual processes, Mix of tools",,Current tooling inventory
+BUS-010,Business Requirements,Objectives,What are your primary business goals for implementing DevOps?,"Common goals: Accelerate time-to-market, Improve software quality, Reduce manual effort, Enable continuous deployment, Improve team collaboration, Better visibility and traceability",,Business objectives
+BUS-011,Business Requirements,Objectives,What does success look like? (Measurable outcomes),"Examples: Deploy 10x per day, 99.9% deployment success rate, 50% faster releases, Zero-downtime deployments, 90% test automation",,Success criteria definition
+BUS-012,Business Requirements,Timeline,What is your expected timeline for DevOps platform implementation?,"Typical ranges: 0-3 months, 3-6 months, 6-12 months, 12+ months",,Project timeline expectations
+BUS-013,Business Requirements,Budget,What is the approved budget range for this DevOps solution?,"Common ranges: $0-50K, $50K-250K, $250K-1M, $1M+",,Budget constraints
+BUS-014,Business Requirements,Stakeholders,Who are the key stakeholders and decision makers?,"Roles: CTO, VP Engineering, Release Manager, Development Team Lead, Operations Manager",,Stakeholder mapping
+BUS-015,Business Requirements,Success Metrics,How will you measure DevOps success?,"Examples: Deployment frequency, Lead time for changes, Mean time to recovery, Change failure rate, Test automation coverage",,KPI definition
+TECH-001,Technical Requirements,Infrastructure,What is your current technology infrastructure?,,,Current tech stack
+TECH-002,Technical Requirements,Cloud,What cloud platforms do you currently use?,"Common platforms: Azure, AWS, Google Cloud, On-premises, Hybrid, Multi-cloud",,Cloud strategy and existing footprint
+TECH-003,Technical Requirements,Source Control,What source control systems do you use?,"Common systems: Git (GitHub/GitLab), Azure Repos, Azure DevOps, Bitbucket, TFVC, SVN, Mix of systems",,Source control requirements
+TECH-004,Technical Requirements,Build,What build tools and frameworks do you use?,"Common tools: MSBuild, Maven, Gradle, npm, Docker, Terraform, CloudFormation, Ansible",,Build and infrastructure as code tools
+TECH-005,Technical Requirements,Testing,What types of testing do you perform?,"Common types: Unit testing, Integration testing, Functional testing, Performance testing, Security testing, Manual testing",,Testing strategy and automation needs
+TECH-006,Technical Requirements,Deployment,What deployment targets do you need to support?,"Common targets: Azure VMs, Azure Kubernetes Service (AKS), Azure App Service, On-premises servers, Multi-region, Multi-cloud",,Deployment environment requirements
+TECH-007,Technical Requirements,Integration,What systems need to integrate with the DevOps platform?,"Common integrations: Jira, Slack, Teams, ServiceNow, SonarQube, HashiCorp, Third-party monitoring",,Integration requirements
+TECH-008,Technical Requirements,Security,What are your security requirements?,"Common requirements: Secrets management, RBAC, Audit logging, IP whitelisting, Private agents, Network isolation",,Security and compliance needs
+TECH-009,Technical Requirements,Compliance,What compliance standards must be met?,"Common standards: SOC 2, ISO 27001, HIPAA, PCI DSS, GDPR, FedRAMP, Internal policies",,Compliance requirements
+TECH-010,Technical Requirements,Performance,What are your performance expectations?,"Examples: Build times < 10 minutes, Deploy in < 5 minutes, Handle 100+ pipeline runs/day, Support 500+ developers",,Performance and scalability needs
+TECH-011,Technical Requirements,Availability,What are your uptime requirements for the DevOps platform?,"Common targets: 99%, 99.5%, 99.9%, 99.95%, 99.99%",,SLA and availability needs
+TECH-012,Technical Requirements,Disaster Recovery,What are your disaster recovery requirements?,"Examples: RPO < 1 hour, RTO < 4 hours, Multi-region failover, Backup strategy",,Business continuity needs
+BUS-016,Business Requirements,Resources,Who will be the technical lead for this DevOps project?,,,Technical ownership
+BUS-017,Business Requirements,Resources,How many developers are on your engineering team?,"Range: 1-10, 11-50, 51-200, 200+",,Team size and scaling needs
+BUS-018,Business Requirements,Resources,What internal resources are available for DevOps implementation?,"Examples: Full-time engineers, Part-time support, 1 DevOps engineer, Mix of skills, None available",,Team availability and skills
+BUS-019,Business Requirements,Skills,What is the current DevOps and CI/CD skill level of your team?,"Typical levels: Beginner, Intermediate, Advanced, Expert, Mixed",,Training and enablement needs
+BUS-020,Business Requirements,Training,What training and support will be needed?,"Examples: Hands-on workshops, Documentation, Video tutorials, Coaching, Knowledge transfer sessions",,Enablement and training requirements
+BUS-021,Business Requirements,Change Management,How do you typically handle technology changes?,"Approaches: Agile/iterative, Big-bang migration, Phased rollout, Pilot-first, Gradual adoption",,Change management readiness
+BUS-022,Business Requirements,Governance,What approval processes are required?,"Examples: Architecture review, Security review, Change control board, CAB approval, Release committee",,Decision-making process
+BUS-023,Business Requirements,Communication,How do you prefer project communication?,"Common channels: Email, Slack, Teams, Weekly meetings, Bi-weekly meetings, Monthly meetings, Daily standups",,Communication preferences
+BUS-024,Business Requirements,Timing,Are there any critical business dates or deadlines?,"Examples: Quarter-end freeze, Holiday blackout, Earnings release, Major product launch",,Timeline constraints
+BUS-025,Business Requirements,Blackouts,Are there any blackout periods when changes cannot be deployed?,"Examples: Production freeze dates, Holiday periods, End-of-month, Fiscal year-end",,Deployment constraints
+BUS-026,Business Requirements,Budget,Are there budget constraints or cost optimization needs?,"Examples: CapEx vs OpEx preference, Budget caps, Multi-year funding approved",,Financial constraints
+BUS-027,Business Requirements,Technical,Are there technical constraints or legacy system limitations?,"Examples: Monolithic applications, Legacy mainframe systems, On-premises-only deployment, Air-gapped networks",,Technical limitations
+BUS-028,Business Requirements,Regulatory,Are there regulatory or compliance constraints that impact deployment?,"Examples: Data residency, Export controls, Audit requirements, Change management policies",,Regulatory requirements
+RISK-001,Risk & Constraints,Implementation,What are your main concerns about implementing a DevOps platform?,"Common concerns: Tool complexity, Team adoption, Migration risks, Production stability, Cost overruns",,Primary implementation concerns
+RISK-002,Risk & Constraints,Failure Modes,What could cause this DevOps project to fail?,"Examples: Lack of leadership support, Team resistance, Poor tool selection, Inadequate training, Unrealistic timeline",,Failure modes and blockers
+RISK-003,Risk & Constraints,Organizational,What organizational challenges do you anticipate?,"Examples: Siloed teams, Resistance to change, Skill gaps, Resource constraints, Competing priorities",,Change management and organizational risks
+RISK-004,Risk & Constraints,Technical,What technical risks are you most concerned about?,"Examples: Tool stability, Integration complexity, Security vulnerabilities, Performance degradation, Vendor lock-in",,Technical risk factors
+RISK-005,Risk & Constraints,Business,What business risks are you trying to mitigate?,"Examples: Quality failures, Deployment bottlenecks, Security breaches, Compliance violations, Slow time-to-market",,Business risk factors
+BUS-029,Business Requirements,Vision,What is your long-term vision for software delivery?,"Examples: Continuous deployment, Zero-downtime deployments, Cross-cloud support, Full automation, Enterprise scale",,Future roadmap and vision
+BUS-030,Business Requirements,Growth,How do you expect your development needs to grow over time?,"Examples: Team size doubling, New products, Geographic expansion, International teams, Multi-cloud strategy",,Scalability and growth planning
+BUS-031,Business Requirements,Integration,What future integrations might be needed?,"Examples: Advanced monitoring, Cost management, Policy compliance, Advanced analytics, AI-driven optimization",,Future integration needs
+BUS-032,Business Requirements,Features,What additional features might you need in the future?,"Examples: Blue-green deployments, Canary deployments, GitOps, FinOps, Advanced security scanning",,Future feature requirements
+IMPL-001,Implementation Planning,Experience,What Azure DevOps and CI/CD implementation experience do you expect?,"Examples: 10+ years experience, Azure certifications, Case studies, Reference customers, Specialized practice",,Partner requirements
+IMPL-002,Implementation Planning,Support,What ongoing support do you expect post-implementation?,"Examples: 24/7 support, Managed services, Training updates, Platform optimization, Strategic consulting",,Post-implementation support expectations
+SEC-001,Security & Compliance,Data Classification,What is the highest data classification level for your data?,"Levels: Public, Internal, Confidential, Restricted",,Determines encryption and access control requirements
+SEC-002,Security & Compliance,Sensitive Data,What sensitive data types are present?,"Types: PII, PHI, Financial, Credit cards, SSNs, None",,Data protection requirements
+SEC-003,Security & Compliance,Compliance Standards,What compliance standards must be met?,"Common: SOC 2, ISO 27001, HIPAA, PCI DSS, GDPR, FedRAMP",,Compliance controls and audit requirements
+SEC-004,Security & Compliance,Encryption,What encryption requirements apply?,"At rest (AES-256), In transit (TLS 1.2+), Key management",,Security architecture requirements
+SEC-005,Security & Compliance,Access Control,What authentication and authorization requirements apply?,"Options: SSO, MFA, RBAC, IAM integration",,Identity and access management
+SEC-006,Security & Compliance,Audit Logging,What audit and logging requirements do you have?,"Access logs, Audit trail, Data lineage tracking",,Compliance reporting needs
+SEC-007,Security & Compliance,Data Retention,What are your data retention requirements?,Specify retention period and deletion procedures,,Data lifecycle management
+SEC-008,Security & Compliance,Data Residency,Do you require data residency in specific regions?,Specify regions or countries,,Geographic data sovereignty
+OPS-001,Operations & Support,Availability,What uptime requirements do you have?,"Common targets: 99%, 99.5%, 99.9%, 99.99%",,SLA requirements
+OPS-002,Operations & Support,RTO/RPO,What are your Recovery Time and Recovery Point Objectives?,"RTO: Max downtime, RPO: Max data loss",,Disaster recovery requirements
+OPS-003,Operations & Support,Support Coverage,What support coverage do you require?,"Options: 8x5, 24x5, 24x7",,Support staffing needs
+OPS-004,Operations & Support,Monitoring,What monitoring and alerting is required?,"Metrics, Error notifications, Dashboards, Alarms",,Operational visibility
+OPS-005,Operations & Support,Error Handling,How should errors and exceptions be handled?,"Options: Auto retry, Manual review, Notifications, API callback",,Exception management
+OPS-006,Operations & Support,Backup,What backup and disaster recovery procedures are required?,"Backup frequency, retention, recovery procedures",,Data protection strategy
+OPS-007,Operations & Support,Maintenance,What maintenance windows are acceptable?,Scheduled downtime windows for updates and patches,,Change management
+OPS-008,Operations & Support,Escalation,What is the escalation path for critical issues?,Define escalation contacts and response times,,Incident management
