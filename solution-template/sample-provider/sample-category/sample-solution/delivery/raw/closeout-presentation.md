@@ -1,325 +1,279 @@
-# Project Closeout Presentation
+---
+presentation_title: Project Closeout
+solution_name: Sample Solution
+presenter_name: Project Manager
+presenter_email: pm@company.com
+presenter_phone: 555-123-4567
+presentation_date: "[DATE]"
+client_name: "[CLIENT]"
+client_logo: ../../../assets/logos/client-logo.png
+footer_logo_left: ../../../assets/logos/company-logo.png
+footer_logo_right: ../../../assets/logos/eo-framework-logo.png
+---
 
-## Presentation Information
-**Project Name:** [Project Name]
-**Presentation Date:** [Date]
-**Duration:** 60-90 minutes
-**Presenter:** Project Manager
-**Audience:** Executive Sponsors, Steering Committee, Key Stakeholders
+# Sample Solution - Project Closeout
+
+## Slide Deck Structure
+**10 Slides - Fixed Format**
 
 ---
 
-## Slide Deck Outline
+### Slide 1: Title Slide
+**layout:** eo_title_slide
 
-### **Slide 1: Title Slide**
-- Project Name and Logo
-- "Project Closeout Presentation"
-- Presentation Date
-- Project Manager and Core Team Names
-- Company/Organization Branding
-
-### **Slide 2: Agenda**
-- Project Overview and Objectives
-- Delivery Summary and Achievements
-- Benefits Realization and Value Delivered
-- Lessons Learned and Best Practices
-- Recommendations and Next Steps
-- Team Recognition and Appreciation
-- Q&A Session
+**Presentation Title:** Project Closeout
+**Subtitle:** Sample Solution
+**Presenter:** Project Manager | [DATE]
 
 ---
 
-## **Section 1: Project Overview (5-10 slides)**
+### Agenda
+**layout:** eo_single_column
 
-### **Slide 3: Project Charter Recap**
-- **Original Business Problem:** [Problem statement]
-- **Project Objectives:** [Key objectives achieved]
-- **Success Criteria:** [How success was measured]
-- **Project Scope:** [What was included/excluded]
-- **Initial Timeline:** [Original vs. actual timeline]
+**Project Closeout Overview**
 
-### **Slide 4: Project Scope Delivered**
-| Scope Element | Planned | Delivered | Status | Notes |
-|---------------|---------|-----------|---------|-------|
-| [Functional Area 1] | [Original scope] | [What was delivered] | ✅ Complete | [Any variances] |
-| [Functional Area 2] | [Original scope] | [What was delivered] | ✅ Complete | [Any variances] |
-| [Functional Area 3] | [Original scope] | [What was delivered] | ⚠️ Modified | [Scope changes] |
+- **Project Summary**
+  - Overview of original objectives and success criteria
+- **Delivery Achievements**
+  - What was delivered and key milestones reached
+- **Benefits Realized**
+  - Quantified business value and ROI metrics
+- **Lessons Learned**
+  - What went well and challenges overcome
+- **Recommendations**
+  - Next steps and ongoing support plan
+- **Team Recognition**
+  - Acknowledgment of key contributors
 
-### **Slide 5: Project Timeline Summary**
-- **Project Duration:** [Actual duration vs. planned]
-- **Key Milestones Achieved:**
-  - Project Kickoff: [Date]
-  - Design Approval: [Date]
-  - Development Complete: [Date]
-  - Testing Complete: [Date]
-  - Go-Live: [Date]
-  - Project Closure: [Date]
-- **Critical Path Impact:** [Any delays and resolutions]
+**SPEAKER NOTES:**
 
-### **Slide 6: Budget and Resource Summary**
-- **Total Project Budget:** [Approved budget]
-- **Actual Expenditure:** [Final cost]
-- **Budget Variance:** [Over/under budget with explanation]
-- **Resource Utilization:** [Team size and effort]
-- **Cost Per Deliverable:** [Cost efficiency metrics]
+*Talking Points:*
+- Presentation will take approximately 45 minutes
+- Time for Q&A at the end
+- Detailed documentation available for reference
 
 ---
 
-## **Section 2: Delivery Summary (10-15 slides)**
+### Project Overview
+**layout:** eo_two_column
 
-### **Slide 7: Solution Architecture Overview**
-- High-level architecture diagram
-- Key components and technologies
-- Integration points and data flow
-- Security and compliance features
-- Scalability and performance characteristics
+**Original Business Case and Objectives**
 
-### **Slide 8: Key Features Delivered**
-| Feature | Business Value | User Impact | Technical Complexity | Status |
-|---------|----------------|-------------|---------------------|---------|
-| [Feature 1] | [Value proposition] | [User benefit] | [Complexity level] | ✅ Delivered |
-| [Feature 2] | [Value proposition] | [User benefit] | [Complexity level] | ✅ Delivered |
-| [Feature 3] | [Value proposition] | [User benefit] | [Complexity level] | ✅ Delivered |
+- **Business Problem**
+  - Manual processes causing 40+ hours/week overhead
+  - Error rates impacting customer satisfaction
+  - Inability to scale with business growth
+- **Objectives**
+  - Automate workflows, reduce processing time by 75%
+  - Achieve 95%+ accuracy in automated processes
+  - Enable scalability without adding headcount
+- **Success Criteria**
+  - ROI achieved within 12 months
+  - User adoption rate of 90%+
+  - Zero critical defects at go-live
 
-### **Slide 9: Quality Metrics**
-- **Code Quality:**
-  - Code coverage: [Percentage]
-  - Static analysis score: [Score]
-  - Security scan results: [Clean/Issues resolved]
-- **Testing Results:**
-  - Test cases executed: [Number]
-  - Pass rate: [Percentage]
-  - Defects found and resolved: [Numbers]
-- **Performance Metrics:**
-  - Response time: [Actual vs. target]
-  - Throughput: [Actual vs. target]
-  - Availability: [Uptime percentage]
+**SPEAKER NOTES:**
 
-### **Slide 10: Go-Live Results**
-- **Deployment Success:** [Smooth/Issues encountered]
-- **System Stability:** [Post-deployment performance]
-- **User Adoption:** [Usage statistics and feedback]
-- **Support Tickets:** [Volume and resolution times]
-- **Business Continuity:** [No disruption achieved]
-
-### **Slide 11: Training and Knowledge Transfer**
-- **Training Sessions Delivered:** [Number and attendance]
-- **User Competency:** [Assessment results]
-- **Documentation Provided:** [Comprehensive user guides]
-- **Support Model:** [Ongoing support structure]
-- **Knowledge Transfer:** [To operations and support teams]
+*Talking Points:*
+- Remind stakeholders of the original business case
+- Project duration: 18 weeks (on schedule)
+- Total investment: $850,000
 
 ---
 
-## **Section 3: Benefits Realization (5-8 slides)**
+### Delivery Summary
+**layout:** eo_table
 
-### **Slide 12: Business Value Delivered**
-| Benefit Category | Target | Achieved | Measurement Method | Timeline to Full Benefit |
-|------------------|--------|----------|-------------------|-------------------------|
-| Cost Savings | [Target amount] | [Actual/Projected] | [How measured] | [Timeline] |
-| Revenue Enhancement | [Target amount] | [Actual/Projected] | [How measured] | [Timeline] |
-| Efficiency Gains | [Target %] | [Actual %] | [How measured] | [Timeline] |
-| Risk Reduction | [Risk level] | [Achieved level] | [How measured] | [Timeline] |
+**All Deliverables Completed On Time**
 
-### **Slide 13: ROI Analysis**
-- **Total Investment:** [Project cost + ongoing costs]
-- **Annual Benefits:** [Quantified annual value]
-- **Payback Period:** [Time to break even]
-- **Net Present Value:** [NPV calculation]
-- **ROI Percentage:** [Return on investment]
-- **Benefits Realization Timeline:** [When benefits are expected]
+<!-- TABLE_CONFIG: widths=[30, 20, 20, 30] -->
+| Deliverable | Planned | Delivered | Status |
+|-------------|---------|-----------|--------|
+| **Core Platform** | Week 10 | Week 10 | Complete |
+| **Integrations** | Week 14 | Week 13 | Complete (early) |
+| **Training** | Week 16 | Week 16 | Complete |
+| **Go-Live** | Week 18 | Week 18 | Complete |
 
-### **Slide 14: Operational Improvements**
-- **Process Efficiency:** [Before vs. after metrics]
-- **User Productivity:** [Productivity gains achieved]
-- **Data Quality:** [Improvement in data accuracy]
-- **Compliance:** [Enhanced compliance posture]
-- **Customer Satisfaction:** [User feedback scores]
+**SPEAKER NOTES:**
 
-### **Slide 15: Strategic Value**
-- **Technology Modernization:** [Platform improvements]
-- **Competitive Advantage:** [Market positioning]
-- **Innovation Enablement:** [Future capabilities enabled]
-- **Organizational Capability:** [Skills and knowledge gained]
-- **Foundation for Growth:** [Scalability achieved]
+*Key Highlights:*
+- All deliverables completed on time or early
+- Integration work completed a week ahead of schedule
+- No scope changes required during implementation
+- Smooth go-live with zero production incidents
 
 ---
 
-## **Section 4: Lessons Learned (5-7 slides)**
+### Quality Metrics
+**layout:** eo_single_column
 
-### **Slide 16: What Went Well**
-- **Project Management:** [Effective practices]
-- **Team Collaboration:** [Successful teamwork elements]
-- **Technical Approach:** [Successful technical decisions]
-- **Stakeholder Engagement:** [Effective communication]
-- **Risk Management:** [Successful risk mitigation]
+**Exceeding Quality Targets Across All Metrics**
 
-### **Slide 17: Challenges Overcome**
-| Challenge | Impact | Resolution | Prevention for Future |
-|-----------|--------|------------|----------------------|
-| [Challenge 1] | [Business/technical impact] | [How resolved] | [Future prevention] |
-| [Challenge 2] | [Business/technical impact] | [How resolved] | [Future prevention] |
-| [Challenge 3] | [Business/technical impact] | [How resolved] | [Future prevention] |
+- **Test Coverage**
+  - 94% code coverage achieved (target: 80%)
+- **Test Execution**
+  - 847 of 847 test cases executed (100%)
+- **Defect Performance**
+  - Zero critical defects at go-live
+- **System Uptime**
+  - 99.97% availability (target: 99.9%)
+- **Response Time**
+  - 1.2 seconds average (target: 2 seconds)
 
-### **Slide 18: Key Learnings**
-- **Technical Lessons:**
-  - [Technology choice insights]
-  - [Architecture decisions that worked well]
-  - [Development approaches that were effective]
-- **Process Lessons:**
-  - [Project management insights]
-  - [Communication strategies that worked]
-  - [Change management effectiveness]
-- **Organizational Lessons:**
-  - [Team dynamics insights]
-  - [Stakeholder management learnings]
-  - [Training and adoption insights]
+**SPEAKER NOTES:**
 
-### **Slide 19: Best Practices Established**
-- **Methodology Improvements:** [Process enhancements]
-- **Tool and Technology Standards:** [New standards established]
-- **Communication Protocols:** [Effective communication patterns]
-- **Quality Assurance:** [QA practices that worked]
-- **Documentation Standards:** [Documentation improvements]
+*Talking Points:*
+- Quality was a key focus throughout the project
+- Zero critical defects is testament to rigorous testing
+- Performance metrics exceed all SLA requirements
 
 ---
 
-## **Section 5: Recommendations and Next Steps (3-5 slides)**
+### Benefits Realized
+**layout:** eo_table
 
-### **Slide 20: Immediate Recommendations**
-- **Operational Excellence:**
-  - [Monitoring and maintenance recommendations]
-  - [Performance optimization opportunities]
-  - [Security enhancement suggestions]
-- **User Adoption:**
-  - [Additional training needs]
-  - [Change management continuation]
-  - [User feedback incorporation]
+**Exceeding Business Value Projections**
 
-### **Slide 21: Future Enhancement Opportunities**
-| Enhancement | Business Value | Complexity | Timeline | Priority |
-|-------------|----------------|------------|----------|----------|
-| [Enhancement 1] | [Value proposition] | [Low/Med/High] | [Timeline] | [High/Med/Low] |
-| [Enhancement 2] | [Value proposition] | [Low/Med/High] | [Timeline] | [High/Med/Low] |
-| [Enhancement 3] | [Value proposition] | [Low/Med/High] | [Timeline] | [High/Med/Low] |
+<!-- TABLE_CONFIG: widths=[30, 20, 25, 25] -->
+| Benefit Category | Target | Achieved | Status |
+|------------------|--------|----------|--------|
+| **Time Savings** | 40 hrs/week | 45 hrs/week | Exceeded |
+| **Error Reduction** | 80% | 92% | Exceeded |
+| **Processing Speed** | 75% faster | 85% faster | Exceeded |
+| **Annual Savings** | $400K | $450K projected | On Track |
 
-### **Slide 22: Transition to Operations**
-- **Operational Handover:** [Complete transition plan]
-- **Support Structure:** [Ongoing support model]
-- **Monitoring and Maintenance:** [Operational procedures]
-- **Change Management:** [Future change processes]
-- **Continuous Improvement:** [Feedback and enhancement process]
+**SPEAKER NOTES:**
+
+*Key Metrics:*
+- Benefits already exceeding projections
+- Full ROI expected within 10 months vs. 12-month target
+- User satisfaction scores averaging 4.6/5.0
+- 95% user adoption rate achieved
 
 ---
 
-## **Section 6: Team Recognition (2-3 slides)**
+### Lessons Learned
+**layout:** eo_two_column
 
-### **Slide 23: Core Team Appreciation**
-- **Project Manager:** [Name and key contributions]
-- **Solution Architect:** [Name and key contributions]
-- **Technical Lead:** [Name and key contributions]
-- **Business Analyst:** [Name and key contributions]
-- **QA Lead:** [Name and key contributions]
-- **DevOps Engineer:** [Name and key contributions]
+**Continuous Improvement Insights**
 
-### **Slide 24: Extended Team Recognition**
-- **Development Team:** [Team members and contributions]
-- **Business Stakeholders:** [Key stakeholders and support]
-- **Infrastructure Team:** [Support provided]
-- **Security Team:** [Security guidance and support]
-- **Executive Sponsors:** [Leadership and support]
+- **What Went Well**
+  - Early stakeholder engagement drove alignment
+  - Agile methodology enabled rapid iteration
+  - Strong vendor partnership accelerated delivery
+  - Comprehensive testing prevented production issues
+- **Challenges Overcome**
+  - Legacy data migration resolved with phased approach
+  - User adoption concerns addressed with enhanced training
+  - Integration complexity solved with middleware solution
+- **Recommendations for Future**
+  - Invest more in change management upfront
+  - Allocate additional time for data migration
+  - Include super-users in testing earlier
 
-### **Slide 25: Team Success Factors**
-- **Collaboration:** [Cross-functional teamwork]
-- **Innovation:** [Creative problem solving]
-- **Dedication:** [Commitment to excellence]
-- **Adaptability:** [Flexibility in face of challenges]
-- **Knowledge Sharing:** [Learning and growth]
+**SPEAKER NOTES:**
 
----
-
-## **Section 7: Project Closure (2-3 slides)**
-
-### **Slide 26: Project Success Declaration**
-- **Objectives Achieved:** [Summary of success]
-- **Value Delivered:** [Quantified benefits]
-- **Quality Standards:** [Quality measures met]
-- **Stakeholder Satisfaction:** [Satisfaction scores]
-- **On-Time/Budget Delivery:** [Schedule and budget performance]
-
-### **Slide 27: Formal Project Closure**
-- **Project Charter Fulfilled:** [Objectives met]
-- **Deliverables Accepted:** [Stakeholder sign-off]
-- **Resources Released:** [Team transition]
-- **Documentation Complete:** [Knowledge preservation]
-- **Lessons Captured:** [Organizational learning]
-
-### **Slide 28: Thank You and Q&A**
-- **Appreciation:** [Thank stakeholders and team]
-- **Contact Information:** [Future contact details]
-- **Q&A Session:** [Questions and answers]
-- **Next Steps:** [Follow-up actions]
+*Talking Points:*
+- Key learning: invest more in change management upfront
+- User training was expanded based on early feedback
+- These insights captured in lessons learned document
 
 ---
 
-## **Presentation Delivery Guidelines**
+### Recommendations
+**layout:** eo_single_column
 
-### **Preparation Checklist**
-- [ ] Gather all project metrics and data
-- [ ] Collect stakeholder feedback and testimonials
-- [ ] Prepare financial analysis and ROI calculations
-- [ ] Create visual aids and charts
-- [ ] Practice presentation delivery
-- [ ] Prepare for potential questions
-- [ ] Coordinate with team members for Q&A support
+**Path Forward for Sustained Success**
 
-### **Presentation Best Practices**
-- **Executive Summary:** Lead with key achievements and value
-- **Data-Driven:** Use metrics and facts to support statements
-- **Visual Appeal:** Include charts, graphs, and diagrams
-- **Storytelling:** Present as a journey from problem to solution
-- **Balanced View:** Acknowledge challenges and how they were overcome
-- **Future Focus:** End with recommendations and next steps
+- **Immediate (This Month)**
+  - Establish monthly performance review cadence
+  - Complete operational handover documentation
+- **Short-term (Next Quarter)**
+  - Plan Phase 2 enhancements based on user feedback
+  - Implement quick-win features from backlog
+- **Long-term (Next Year)**
+  - Evaluate mobile app extension opportunity
+  - Consider AI/ML enhancements for automation
+- **Operational**
+  - Maintain dedicated support for 90 days (hypercare)
+  - 15 enhancement features prioritized in backlog
 
-### **Audience Engagement**
-- **Interactive Elements:** Include polls or discussion points
-- **Success Stories:** Share specific user testimonials
-- **Live Demo:** Show key features if appropriate
-- **Recognition:** Acknowledge all contributors
-- **Clear Call-to-Action:** Define next steps for stakeholders
+**SPEAKER NOTES:**
 
-### **Follow-Up Actions**
-- [ ] Distribute presentation slides to all attendees
-- [ ] Send project summary report
-- [ ] Schedule transition meetings
-- [ ] Document any new actions identified
-- [ ] Archive project documentation
-- [ ] Conduct final team celebration
+*Talking Points:*
+- Support team prepared to handle ongoing needs
+- Phase 2 planning can begin in 30 days
+- Enhancement backlog available for roadmap discussions
 
 ---
 
-## **Appendices**
+### Team Recognition
+**layout:** eo_single_column
 
-### **A. Detailed Metrics Dashboard**
-- [Include detailed performance metrics]
-- [Quality metrics and trends]
-- [User adoption statistics]
-- [Financial performance data]
+**Acknowledging Outstanding Contributions**
 
-### **B. Stakeholder Feedback Summary**
-- [Compiled feedback from all stakeholder groups]
-- [User satisfaction surveys]
-- [Executive feedback]
-- [Improvement suggestions]
+- **Solution Architect:** Jane Smith
+  - Outstanding technical leadership and architecture decisions
+- **Technical Lead:** John Doe
+  - Exceptional delivery quality and team mentorship
+- **Business Analyst:** Sarah Johnson
+  - Stakeholder alignment and requirements excellence
+- **QA Lead:** Mike Wilson
+  - Zero defects achievement through rigorous testing
+- **DevOps Engineer:** Lisa Chen
+  - Flawless deployments and infrastructure automation
 
-### **C. Project Artifacts**
-- [List of all project deliverables]
-- [Documentation repository location]
-- [Source code and deployment guides]
-- [Training materials and resources]
+Special thanks to executive sponsors and all business stakeholders for their partnership throughout this engagement.
 
-### **D. Transition Documentation**
-- [Operational handover checklist]
-- [Support contact information]
-- [Escalation procedures]
-- [Change management process]
+**SPEAKER NOTES:**
+
+*Talking Points:*
+- Take time to recognize each team member's contribution
+- This project succeeded because of exceptional teamwork
+- Client team members were instrumental to success
+
+---
+
+### Next Steps
+**layout:** eo_single_column
+
+**Transition and Support Plan**
+
+- **This Week**
+  - Complete operational handover documentation
+  - Final knowledge transfer sessions
+- **Next 30 Days**
+  - Hypercare support period with dedicated team
+  - Daily standup calls for issue resolution
+- **Next 60 Days**
+  - Transition to standard support model
+  - Monthly performance review meetings
+- **Next 90 Days**
+  - First quarterly business review
+  - Benefits realization assessment
+- **Ongoing**
+  - Continuous improvement program
+  - Enhancement roadmap execution
+
+**SPEAKER NOTES:**
+
+*Talking Points:*
+- The transition plan ensures continuity of support
+- First quarterly review will measure sustained benefits
+- Enhancement backlog ready for prioritization discussions
+
+---
+
+### Thank You
+**layout:** eo_thank_you
+
+Questions?
+
+Contact: pm@company.com | 555-123-4567
+
+**SPEAKER NOTES:**
+
+*Talking Points:*
+- Open the floor for questions
+- Have backup slides ready for detailed technical questions
+- Offer to schedule follow-up sessions for deep dives

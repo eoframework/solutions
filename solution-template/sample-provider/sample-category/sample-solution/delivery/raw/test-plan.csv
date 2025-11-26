@@ -1,57 +1,31 @@
-Test ID,Test Category,Test Type,Test Name,Description,Pre-conditions,Test Steps,Expected Results,Priority,Environment,Assigned Tester,Status,Execution Date,Actual Results,Pass/Fail,Notes,Requirements Traced
-TEST-001,Functional,Unit,User Authentication,Validate user login with valid credentials,"Valid user account exists, System is running","1. Navigate to login page
-2. Enter valid username and password
-3. Click login button","User is authenticated and redirected to dashboard",High,Unit Test,Developer,Not Started,[DATE],,,"Test framework configured, Mock data ready",REQ-001
-TEST-002,Functional,Unit,Invalid Login Attempt,Validate system response to invalid credentials,"System is running","1. Navigate to login page
-2. Enter invalid username/password
-3. Click login button","Error message displayed, user not authenticated",High,Unit Test,Developer,Not Started,[DATE],,,"Error handling validation",REQ-001
-TEST-003,Functional,Integration,Data Import Process,Validate CSV data import functionality,"Test data file prepared, System configured","1. Navigate to import page
-2. Select test CSV file
-3. Execute import process
-4. Verify data in system","Data successfully imported without errors",High,Integration Test,QA Engineer,Not Started,[DATE],,,"Integration environment ready",REQ-002
-TEST-004,Functional,Integration,Data Export Process,Validate export functionality in multiple formats,"Sample data exists in system","1. Navigate to export page
-2. Select data range
-3. Choose export format (CSV/Excel)
-4. Execute export","File generated with correct data and format",Medium,Integration Test,QA Engineer,Not Started,[DATE],,,"Export formats supported",REQ-002
-TEST-005,Functional,System,Dashboard Real-time Updates,Validate live data updates on dashboard,"System running with data feed active","1. Open dashboard
-2. Monitor data refresh
-3. Verify timestamp updates
-4. Check data accuracy","Dashboard updates every 30 seconds with current data",High,System Test,QA Engineer,Not Started,[DATE],,,"Real-time data feed configured",REQ-003
-TEST-006,Functional,System,Custom Report Generation,Validate custom report creation and generation,"User logged in with report permissions","1. Navigate to reports section
-2. Select custom report option
-3. Configure report parameters
-4. Generate report","Custom report generated with selected parameters",Medium,System Test,Business Analyst,Not Started,[DATE],,,"Report engine configured",REQ-003
-TEST-007,Non-Functional,Performance,System Availability,Validate 99.9% uptime requirement,"Production-like environment, Monitoring tools active","1. Run system for test period
-2. Monitor uptime metrics
-3. Calculate availability percentage","System maintains 99.9% availability",Critical,Performance Test,Performance Engineer,Not Started,[DATE],,,"Monitoring and alerting configured",REQ-004
-TEST-008,Non-Functional,Performance,Response Time,Validate 2-second response time requirement,"Load testing tools configured","1. Execute load test with 1000 concurrent users
-2. Measure response times
-3. Analyze performance metrics","95% of requests complete within 2 seconds",Critical,Performance Test,Performance Engineer,Not Started,[DATE],,,"Load testing environment ready",REQ-005
-TEST-009,Security,Integration,Data Encryption,Validate data encryption at rest and in transit,"Security tools configured","1. Monitor data transmission
-2. Verify encryption protocols
-3. Check data storage encryption
-4. Validate certificate usage","All data encrypted using industry standards",Critical,Integration Test,Security Engineer,Not Started,[DATE],,,"Security scanning tools ready",REQ-006
-TEST-010,Integration,System,CRM Integration,Validate bidirectional sync with CRM system,"CRM test environment available","1. Create record in solution
-2. Verify sync to CRM
-3. Update record in CRM
-4. Verify sync back to solution","Data syncs correctly in both directions",High,System Test,Integration Specialist,Not Started,[DATE],,,"CRM test API configured",REQ-007
-TEST-011,Integration,System,SSO Authentication,Validate Single Sign-On integration,"SSO test environment configured","1. Access system via SSO
-2. Verify user authentication
-3. Check role mapping
-4. Test session management","Users authenticate via SSO with correct permissions",High,System Test,Identity Engineer,Not Started,[DATE],,,"SSO test environment ready",REQ-008
-TEST-012,Compliance,System,GDPR Data Handling,Validate GDPR compliance for data operations,"Test data with PII elements","1. Test data collection consent
-2. Verify data processing logs
-3. Test data deletion request
-4. Validate data portability","All GDPR requirements met with proper controls",Critical,System Test,Compliance Officer,Not Started,[DATE],,,"GDPR compliance tools configured",REQ-009
-TEST-013,Operational,System,Backup and Recovery,Validate automated backup and recovery procedures,"Backup system configured","1. Trigger automated backup
-2. Simulate system failure
-3. Execute recovery process
-4. Verify data integrity","System recovers within 4-hour RTO with no data loss",High,System Test,Operations Engineer,Not Started,[DATE],,,"Backup infrastructure ready",REQ-010
-TEST-014,Functional,UAT,Multi-language Support,Validate interface in multiple languages,"Language packs installed","1. Switch to Spanish interface
-2. Navigate through application
-3. Switch to French interface
-4. Verify translations","Interface displays correctly in all supported languages",Low,UAT,Localization Tester,Not Started,[DATE],,,"Language packs configured",REQ-011
-TEST-015,Functional,UAT,Mobile Application,Validate mobile app functionality,"Mobile test devices available","1. Install mobile app
-2. Test core functionality
-3. Verify responsive design
-4. Test offline capabilities","Mobile app provides core functionality with good UX",Medium,UAT,Mobile Tester,Not Started,[DATE],,,"Mobile test environment ready",REQ-012
+# Functional Tests
+#WIDTH: 10,14,26,33,26,38,33,10,12
+#ALIGN: left,left,left,left,left,left,left,center,center
+Test ID,Test Type,Test Name,Description,Pre-conditions,Test Steps,Expected Results,Priority,Status
+FT-001,Unit,User Authentication,Validate user login with valid credentials,Valid user account exists; System is running,1. Navigate to login page; 2. Enter valid username and password; 3. Click login button,User authenticated and redirected to dashboard,High,Not Started
+FT-002,Unit,Invalid Login Attempt,Validate system response to invalid credentials,System is running,1. Navigate to login page; 2. Enter invalid username/password; 3. Click login button,Error message displayed and user not authenticated,High,Not Started
+FT-003,Integration,Data Import Process,Validate CSV data import functionality,Test data file prepared; System configured,1. Navigate to import page; 2. Select test CSV file; 3. Execute import process; 4. Verify data in system,Data successfully imported without errors,High,Not Started
+FT-004,Integration,Data Export Process,Validate export functionality in multiple formats,Sample data exists in system,1. Navigate to export page; 2. Select data range; 3. Choose export format (CSV/Excel); 4. Execute export,File generated with correct data and format,Medium,Not Started
+FT-005,System,Dashboard Real-time Updates,Validate live data updates on dashboard,System running with data feed active,1. Open dashboard; 2. Monitor data refresh; 3. Verify timestamp updates; 4. Check data accuracy,Dashboard updates every 30 seconds with current data,High,Not Started
+FT-006,System,Custom Report Generation,Validate custom report creation and generation,User logged in with report permissions,1. Navigate to reports section; 2. Select custom report option; 3. Configure report parameters; 4. Generate report,Custom report generated with selected parameters,Medium,Not Started
+
+# Non-Functional Tests
+#WIDTH: 10,14,22,38,30,44,38,10,12
+#ALIGN: left,left,left,left,left,left,left,center,center
+Test ID,Test Type,Test Name,Description,Pre-conditions,Test Steps,Expected Results,Priority,Status
+NFT-001,Performance,System Availability,Validate 99.9% uptime requirement,Production-like environment; Monitoring tools active,1. Run system for test period; 2. Monitor uptime metrics; 3. Calculate availability percentage,System maintains 99.9% availability,Critical,Not Started
+NFT-002,Performance,Response Time,Validate 2-second response time requirement,Load testing tools configured,1. Execute load test with 1000 concurrent users; 2. Measure response times; 3. Analyze performance metrics,95% of requests complete within 2 seconds,Critical,Not Started
+NFT-003,Security,Data Encryption,Validate data encryption at rest and in transit,Security tools configured,1. Monitor data transmission; 2. Verify encryption protocols; 3. Check data storage encryption; 4. Validate certificate usage,All data encrypted using industry standards,Critical,Not Started
+NFT-004,Security,Access Control,Validate role-based access control,Test users with different roles created,1. Test role-based access; 2. Verify permission boundaries; 3. Test privilege escalation; 4. Validate audit logging,Access controls properly enforced with full audit trail,Critical,Not Started
+NFT-005,Reliability,Backup and Recovery,Validate automated backup and recovery procedures,Backup system configured,1. Trigger automated backup; 2. Simulate system failure; 3. Execute recovery process; 4. Verify data integrity,System recovers within 4-hour RTO with no data loss,High,Not Started
+
+# User Acceptance Tests
+#WIDTH: 10,20,29,33,26,38,33,10,12
+#ALIGN: left,left,left,left,left,left,left,center,center
+Test ID,Test Type,Test Name,Description,Pre-conditions,Test Steps,Expected Results,Priority,Status
+UAT-001,Business Process,End-to-End Order Processing,Validate complete order workflow from creation to delivery,Test environment ready; Sample data loaded,1. Create new order; 2. Process payment; 3. Track fulfillment; 4. Complete delivery,Order flows through all stages successfully,High,Not Started
+UAT-002,User Interface,Multi-language Support,Validate interface displays correctly in multiple languages,Language packs installed,1. Switch to Spanish interface; 2. Navigate through application; 3. Switch to French interface; 4. Verify translations,Interface displays correctly in all supported languages,Low,Not Started
+UAT-003,User Interface,Mobile Application,Validate mobile app functionality and responsiveness,Mobile test devices available,1. Install mobile app; 2. Test core functionality; 3. Verify responsive design; 4. Test offline capabilities,Mobile app provides core functionality with good UX,Medium,Not Started
+UAT-004,Business Process,CRM Integration,Validate bidirectional data sync with CRM system,CRM test environment available,1. Create record in solution; 2. Verify sync to CRM; 3. Update record in CRM; 4. Verify sync back to solution,Data syncs correctly in both directions,High,Not Started
+UAT-005,Business Process,SSO Authentication,Validate Single Sign-On integration with identity provider,SSO test environment configured,1. Access system via SSO; 2. Verify user authentication; 3. Check role mapping; 4. Test session management,Users authenticate via SSO with correct permissions,High,Not Started
+

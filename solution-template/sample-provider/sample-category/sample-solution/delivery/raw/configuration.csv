@@ -1,3 +1,5 @@
+#WIDTH: 25,15,12,30,45,10,12,33,16,20,26,39,12
+#ALIGN: left,left,center,left,left,center,left,left,center,left,left,left,center
 Parameter Name,Category,Environment,Default Value,Description,Required,Data Type,Validation Rules,Security Level,Owner Team,Dependencies,Notes,Last Updated
 APP_NAME,Application,All,[Solution Name],Application identifier for logging and monitoring,Yes,String,Max 50 characters,Public,Development,None,Used in logs and metrics,[DATE]
 APP_VERSION,Application,All,1.0.0,Current application version,Yes,String,Semantic versioning format,Public,Development,None,Updated with each release,[DATE]
