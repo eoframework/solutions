@@ -316,6 +316,8 @@ Key architectural components include:
 
 ## Scope Specifications
 
+This engagement is scoped according to the following specifications:
+
 **Compute & Processing:**
 - AWS Lambda: 500K GB-seconds/month allocation (sufficient for 50K pages)
 - AWS Step Functions: 100K state transitions/month
@@ -412,6 +414,9 @@ The following table outlines the recommended tooling stack for this implementati
 ## Data Management
 
 ### Data Strategy
+
+The data management approach follows industry best practices:
+
 - Document ingestion via multiple channels (S3 upload, API, batch processing)
 - Automated classification and extraction using AI/ML services
 - Metadata storage in DynamoDB for fast retrieval
@@ -496,6 +501,9 @@ Governance processes ensure consistent management of the solution:
 | Production | Live document processing | [AWS Region] | Operations team, authorized users |
 
 ### Access Policies
+
+Access control policies are defined as follows:
+
 - Multi-factor authentication (MFA) required for all AWS console access
 - API access via authentication tokens (AWS Cognito or IAM)
 - Administrator Access: Full AWS console and API access for implementation team during project
@@ -685,6 +693,9 @@ Post-hypercare, Client may transition to ongoing managed services:
 ## Assumptions
 
 ### General Assumptions
+
+This engagement is based on the following general assumptions:
+
 - Client will provide representative document samples for ML model training (minimum 1,000 documents per type)
 - Document quality is sufficient for OCR and AI processing (readable text, minimum 150 DPI)
 - Existing AWS infrastructure meets minimum requirements for AI/ML services
@@ -701,6 +712,9 @@ Post-hypercare, Client may transition to ongoing managed services:
 ## Dependencies
 
 ### Project Dependencies
+
+The following dependencies must be satisfied for successful project execution:
+
 - AWS Account Access: Client provides AWS account access with appropriate permissions (Textract, Comprehend, SageMaker, S3, Lambda, API Gateway, CloudWatch)
 - Document Samples: Client provides representative document samples across all document types for ML model training and testing
 - Training Data Labeling: Client SMEs available to label documents and validate extraction rules
@@ -717,6 +731,8 @@ Post-hypercare, Client may transition to ongoing managed services:
 ---
 
 # Investment Summary
+
+This section provides a comprehensive overview of the engagement investment:
 
 **Small Scope Implementation:** This pricing reflects a department-level deployment designed for 50,000 pages/month processing capacity with 50-100 users. For larger enterprise deployments, please request medium or large scope pricing.
 

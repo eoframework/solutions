@@ -37,6 +37,9 @@ This Statement of Work (SOW) defines the scope, deliverables, roles, and terms f
 - **Compliance Risk:** No automated policy enforcement increasing audit exposure and configuration drift
 
 ## Business Objectives
+
+The following objectives define the key business outcomes this engagement will deliver:
+
 - **Unify Multi-Cloud Infrastructure:** Implement HashiCorp Terraform Cloud for centralized infrastructure as code across AWS, Azure, and GCP with consistent workflows, eliminating cloud-specific tooling fragmentation
 - **Automate Policy Enforcement:** Deploy Sentinel policies for automated governance, security, and cost controls enforcing compliance across all cloud environments before infrastructure changes reach production
 - **Centralize Secrets Management:** Implement HashiCorp Vault for unified secrets management with dynamic cloud credentials, automated rotation, and encryption as a service across all platforms
@@ -45,6 +48,9 @@ This Statement of Work (SOW) defines the scope, deliverables, roles, and terms f
 - **Enable Service Mesh:** Deploy HashiCorp Consul service mesh for secure cross-cloud service discovery and communication enabling future hybrid and multi-cloud application architectures
 
 ## Success Metrics
+
+The following metrics will be used to measure project success:
+
 - 75%+ reduction in infrastructure provisioning time (from baseline 5-7 days to 1-2 days)
 - 95%+ policy compliance rate across all cloud environments measured monthly
 - 60% reduction in infrastructure operations costs within 18 months
@@ -193,6 +199,8 @@ These items are not in scope unless added via change control:
 
 ## Deliverables
 
+The following table summarizes the key deliverables for this engagement:
+
 <!-- TABLE_CONFIG: widths=[8, 40, 12, 20, 20] -->
 | # | Deliverable | Type | Due Date | Acceptance By |
 |---|--------------------------------------|--------------|--------------|-----------------|
@@ -213,6 +221,8 @@ These items are not in scope unless added via change control:
 ---
 
 ## Project Milestones
+
+The following milestones represent key checkpoints throughout the project lifecycle:
 
 <!-- TABLE_CONFIG: widths=[20, 50, 30] -->
 | Milestone | Description | Target Date |
@@ -237,6 +247,8 @@ This section outlines the roles and responsibilities for both the Vendor and Cli
 
 ## RACI Matrix
 
+The following matrix defines the responsibility assignments for key project activities:
+
 <!-- TABLE_CONFIG: widths=[28, 11, 11, 11, 11, 9, 9, 10] -->
 | Task/Role | EO PM | EO Quarterback | EO Sales Eng | EO Eng (DevOps) | Client IT | Client Security | SME |
 |-----------|-------|----------------|--------------|-----------------|-----------|-----------------|-----|
@@ -254,6 +266,8 @@ This section outlines the roles and responsibilities for both the Vendor and Cli
 **Legend:** R = Responsible | A = Accountable | C = Consulted | I = Informed
 
 ## Key Personnel
+
+The following personnel will be assigned to this engagement:
 
 **Vendor Team:**
 - EO Project Manager: Overall delivery accountability and stakeholder management
@@ -300,6 +314,8 @@ Key architectural components include:
 - Integration Layer (VCS, CI/CD, monitoring, and change management systems)
 
 ## Scope Specifications
+
+This engagement is scoped according to the following specifications:
 
 **Platform Infrastructure:**
 - Terraform Cloud: Kubernetes-based deployment on AWS EKS (3 nodes, t3.xlarge)
@@ -373,12 +389,17 @@ All critical data and configurations are protected through:
 The implementation approach follows HashiCorp best practices and proven methodologies for multi-cloud platform deployments.
 
 ## Example Implementation Patterns
+
+The following patterns will guide the implementation approach:
+
 - Phased workspace migration: Pilot with 25 workspaces, validate, then expand to 100+
 - Parallel operation: Run Terraform Cloud alongside existing OSS during transition
 - Progressive policy enforcement: Start with advisory policies, transition to mandatory
 - Iterative optimization: Continuous improvement based on platform usage patterns
 
 ## Tooling Overview
+
+The following table outlines the recommended tooling stack for this implementation:
 
 <!-- TABLE_CONFIG: widths=[25, 35, 40] -->
 | Category | Primary Tools | Purpose |
@@ -396,6 +417,9 @@ The implementation approach follows HashiCorp best practices and proven methodol
 ## Data Management
 
 ### Data Strategy
+
+The data management approach follows industry best practices:
+
 - Centralized Terraform state storage in Terraform Cloud with encryption
 - State locking and consistency guarantees eliminating conflicts
 - Workspace isolation with granular RBAC for state access
@@ -419,6 +443,9 @@ The implementation approach follows HashiCorp best practices and proven methodol
 The implementation and target environment will be architected and validated to meet the Client's security, compliance, and governance requirements. Vendor will adhere to industry-standard security frameworks and HashiCorp platform best practices.
 
 ## Identity & Access Management
+
+The solution implements comprehensive identity and access controls:
+
 - Role-based access control (RBAC) for all Terraform Cloud workspaces
 - Integration with SSO/SAML for centralized authentication
 - HashiCorp Vault dynamic credentials for cloud provider access (AWS, Azure, GCP)
@@ -427,6 +454,9 @@ The implementation and target environment will be architected and validated to m
 - API token management with expiration and rotation policies
 
 ## Monitoring & Threat Detection
+
+Security monitoring capabilities include:
+
 - Comprehensive audit logging in Terraform Cloud for all infrastructure changes
 - HashiCorp Vault audit logs for all secrets access and authentication
 - CloudWatch monitoring for platform health and security metrics
@@ -435,6 +465,9 @@ The implementation and target environment will be architected and validated to m
 - Drift detection for infrastructure configuration compliance
 
 ## Compliance & Auditing
+
+The solution supports the following compliance frameworks:
+
 - SOC2 compliance: HashiCorp products are SOC2 certified, platform architecture follows SOC2 principles
 - ISO27001 compliance: Security controls aligned with ISO27001 framework requirements
 - Sentinel policies enforcing regulatory compliance requirements
@@ -442,6 +475,9 @@ The implementation and target environment will be architected and validated to m
 - Audit trail preservation for all infrastructure changes (minimum 1 year retention)
 
 ## Encryption & Key Management
+
+Data protection is implemented through encryption at all layers:
+
 - All Terraform state encrypted at rest using AWS KMS customer-managed keys
 - All platform communication encrypted in transit using TLS 1.3
 - HashiCorp Vault encryption as a service for application secrets
@@ -450,6 +486,9 @@ The implementation and target environment will be architected and validated to m
 - Secure key management using AWS KMS with audit logging via CloudTrail
 
 ## Governance
+
+Governance processes ensure consistent management of the solution:
+
 - Sentinel policies enforcing infrastructure standards across all cloud providers
 - Mandatory policy checks before infrastructure changes are applied
 - Cost governance policies preventing resource over-provisioning
@@ -473,6 +512,9 @@ The HashiCorp Multi-Cloud Platform will support three primary workspace environm
 | Production | Live infrastructure provisioning | AWS, Azure, GCP | Operations team, approval-gated runs |
 
 ### Access Policies
+
+Access control policies are defined as follows:
+
 - Single Sign-On (SSO) via SAML for all Terraform Cloud access
 - Multi-factor authentication (MFA) required for all users
 - API access via team tokens with automatic expiration
@@ -491,6 +533,9 @@ The HashiCorp Multi-Cloud Platform will support three primary workspace environm
 Comprehensive testing and validation will take place throughout the implementation lifecycle to ensure functionality, performance, security, and policy compliance of the HashiCorp Multi-Cloud Platform.
 
 ## Functional Validation
+
+Functional testing ensures all features work as designed:
+
 - End-to-end workspace execution across all cloud providers (AWS, Azure, GCP)
 - VCS-triggered run validation via GitHub webhooks
 - Sentinel policy enforcement testing across all policy sets
@@ -500,6 +545,9 @@ Comprehensive testing and validation will take place throughout the implementati
 - Cost estimation accuracy for infrastructure changes
 
 ## Performance & Load Testing
+
+Performance validation ensures the solution meets SLA requirements:
+
 - Concurrent run capacity testing (15 simultaneous runs)
 - State locking and consistency validation under concurrent access
 - Workspace migration performance benchmarking
@@ -507,6 +555,9 @@ Comprehensive testing and validation will take place throughout the implementati
 - HashiCorp Vault performance under load
 
 ## Security Testing
+
+Security validation ensures protection against threats:
+
 - RBAC validation across all user roles and workspace permissions
 - Vault dynamic credential security and rotation testing
 - TLS encryption verification for all platform communication
@@ -515,6 +566,9 @@ Comprehensive testing and validation will take place throughout the implementati
 - Penetration testing of platform infrastructure (optional)
 
 ## Policy Compliance Testing
+
+Policy compliance testing validates adherence to security standards:
+
 - Sentinel policy effectiveness testing across security, cost, and compliance domains
 - Policy violation detection and enforcement validation
 - Compliance framework alignment verification (SOC2, ISO27001)
@@ -522,6 +576,9 @@ Comprehensive testing and validation will take place throughout the implementati
 - Tagging enforcement validation
 
 ## Multi-Cloud Integration Testing
+
+Multi-cloud integration testing validates cross-platform connectivity:
+
 - Infrastructure provisioning validation across AWS, Azure, GCP
 - Cross-cloud networking and Consul service mesh connectivity
 - Cloud provider credential rotation and dynamic generation
@@ -529,6 +586,9 @@ Comprehensive testing and validation will take place throughout the implementati
 - Integration with cloud-native services (IAM, RBAC, networking)
 
 ## User Acceptance Testing (UAT)
+
+UAT is performed in coordination with Client business stakeholders:
+
 - Performed in coordination with Client infrastructure and security teams
 - Test workspaces and sample Terraform configurations provided by Vendor
 - Policy compliance validation against business-defined acceptance criteria
@@ -573,6 +633,9 @@ The implementation follows a **progressive migration** strategy where workspaces
 The cutover will be coordinated with Client infrastructure teams with documented rollback procedures available for each migration wave if critical issues arise.
 
 ## Cutover Checklist
+
+The following checklist will guide the cutover execution:
+
 - Pre-migration validation: Workspace inventory, state file integrity checks
 - Terraform Cloud platform validated and monitoring operational
 - Vault integration tested with dynamic credential generation
@@ -585,6 +648,9 @@ The cutover will be coordinated with Client infrastructure teams with documented
 - Daily monitoring during hypercare period (4 weeks)
 
 ## Rollback Strategy
+
+Comprehensive rollback procedures in case of critical issues:
+
 - Documented rollback triggers (persistent run failures, state corruption, security incident)
 - Rollback procedures: Restore Terraform OSS state files, revert to local/S3 backend
 - Root cause analysis and platform fixes before retry
@@ -598,6 +664,9 @@ The cutover will be coordinated with Client infrastructure teams with documented
 # Handover & Support
 
 ## Handover Artifacts
+
+The following artifacts will be delivered upon project completion:
+
 - As-built documentation including architecture diagrams, platform configurations, and network topology
 - Sentinel policy library with documentation on policy logic and enforcement rules
 - Workspace organization documentation with naming conventions and RBAC model
@@ -608,6 +677,9 @@ The cutover will be coordinated with Client infrastructure teams with documented
 - Integration documentation for VCS, CI/CD, monitoring, and change management systems
 
 ## Knowledge Transfer
+
+Knowledge transfer ensures the Client team can effectively operate the solution:
+
 - Live knowledge transfer sessions for platform administrators and DevOps teams (3 full-day sessions)
 - HashiCorp Terraform Cloud administration training with workspace management, RBAC, and monitoring
 - HashiCorp Vault administration training covering secrets engines, dynamic credentials, and policies
@@ -658,6 +730,9 @@ Post-hypercare, Client may transition to ongoing managed services:
 ## Assumptions
 
 ### General Assumptions
+
+This engagement is based on the following general assumptions:
+
 - Client will provide access to AWS, Azure, GCP environments with appropriate permissions for platform deployment
 - Existing Terraform code is compatible with Terraform Cloud (OSS versions 0.12+)
 - Client technical team will be available for requirements validation, workspace migration support, and approvals
@@ -672,6 +747,9 @@ Post-hypercare, Client may transition to ongoing managed services:
 ## Dependencies
 
 ### Project Dependencies
+
+The following dependencies must be satisfied for successful project execution:
+
 - Cloud Access: Client provides AWS, Azure, GCP account access with appropriate permissions for Terraform, Vault, Consul deployment
 - Terraform Code: Client provides existing Terraform configurations and state files for migration assessment
 - VCS Access: GitHub repository access and webhook configuration permissions
@@ -689,9 +767,13 @@ Post-hypercare, Client may transition to ongoing managed services:
 
 # Investment Summary
 
+This section provides a comprehensive overview of the engagement investment:
+
 **Medium Scope Implementation:** This pricing reflects an enterprise deployment designed for 100 Terraform workspaces across 3 cloud providers (AWS, Azure, GCP) with 50 platform users and comprehensive governance. For smaller department-level or larger enterprise deployments, please request small or large scope pricing.
 
 ## Total Investment
+
+The following table provides a comprehensive overview of the total investment required for this engagement:
 
 <!-- BEGIN COST_SUMMARY_TABLE -->
 <!-- TABLE_CONFIG: widths=[20, 12, 18, 14, 12, 11, 13] -->
@@ -766,6 +848,8 @@ Post-hypercare, Client may transition to ongoing managed services:
 
 ## Invoicing & Expenses
 
+Invoicing and expense policies for this engagement:
+
 ### Invoicing
 - Milestone-based invoicing per Payment Terms above
 - Net 30 payment terms
@@ -789,33 +873,54 @@ Post-hypercare, Client may transition to ongoing managed services:
 All services will be delivered in accordance with the executed Master Services Agreement (MSA) or equivalent contractual document between Vendor and Client.
 
 ## Scope Changes
+
+Change control procedures for this engagement:
+
 - Changes to workspace count, cloud providers, policy requirements, or timeline require formal change requests
 - Change requests may impact project timeline and budget
 
 ## Intellectual Property
+
+Intellectual property rights are defined as follows:
+
 - Client retains ownership of all Terraform configurations, infrastructure code, and business data
 - Vendor retains ownership of proprietary HashiCorp implementation methodologies and frameworks
 - Sentinel policies and platform configurations become Client property upon final payment
 - HashiCorp platform infrastructure code transfers to Client
 
 ## Service Levels
+
+Service level commitments for this engagement:
+
 - Platform uptime: 99.9% measured monthly
 - 30-day warranty on all deliverables from go-live date
 - Post-warranty support available under separate managed services agreement
 
 ## Liability
+
+Liability terms and limitations:
+
 - Performance guarantees apply only to platform components within Vendor control
 - HashiCorp product functionality and availability governed by HashiCorp SLAs
 - Liability caps as agreed in MSA
 
 ## Confidentiality
+
+Confidentiality obligations for both parties:
+
 - Both parties agree to maintain strict confidentiality of business data, infrastructure configurations, and proprietary implementation methodologies
 - All exchanged artifacts under NDA protection
 
 ## Termination
+
+Termination provisions for this engagement:
+
 - Mutually terminable per MSA terms, subject to payment for completed work
 
 ## Governing Law
+
+This agreement shall be governed by the laws of [State/Region].
+
 - Agreement governed under the laws of [State/Region]
 
 ---

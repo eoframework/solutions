@@ -36,6 +36,8 @@ This Statement of Work (SOW) defines the scope, deliverables, roles, and terms f
 
 ## Business Objectives
 
+The following objectives define the key business outcomes this engagement will deliver:
+
 - **Implement Disaster Recovery:** Deploy AWS-native disaster recovery solution with pilot light strategy for 5-10 critical applications, protecting business operations from regional outages
 - **Achieve Recovery Targets:** Achieve 4-hour RTO and 1-hour RPO through cross-region replication and automated backup, minimizing business disruption and data loss
 - **Enable Automated Failover:** Establish automated failover capabilities with DNS-based traffic management (Route 53), eliminating manual recovery delays
@@ -44,6 +46,8 @@ This Statement of Work (SOW) defines the scope, deliverables, roles, and terms f
 - **Foundation for Expansion:** Enable foundation for expanding DR coverage to additional applications and workloads beyond initial scope
 
 ## Success Metrics
+
+Success will be measured against the following quantifiable metrics:
 
 - 4-hour RTO and 1-hour RPO validated through quarterly disaster recovery testing
 - 95% success rate on planned DR failover exercises
@@ -200,6 +204,8 @@ Key activities:
 
 ## Deliverables
 
+The following table lists all deliverables for this engagement with their acceptance criteria:
+
 <!-- TABLE_CONFIG: widths=[8, 40, 12, 20, 20] -->
 | # | Deliverable | Type | Due Date | Acceptance By |
 |---|-------------|------|----------|---------------|
@@ -217,6 +223,8 @@ Key activities:
 
 ## Project Milestones
 
+Key milestones mark critical checkpoints throughout the engagement:
+
 <!-- TABLE_CONFIG: widths=[20, 55, 25] -->
 | Milestone | Description | Target Date |
 |-----------|-------------|-------------|
@@ -233,6 +241,8 @@ Key activities:
 
 ## RACI Matrix
 
+The following matrix defines responsibilities for key project activities:
+
 <!-- TABLE_CONFIG: widths=[28, 11, 11, 11, 11, 9, 9, 10] -->
 | Task/Role | EO PM | EO Quarterback | EO Sales Eng | EO Eng (DR) | Client IT | Client Sponsor | SME |
 |-----------|-------|----------------|--------------|-------------|-----------|----------------|-----|
@@ -248,6 +258,8 @@ Key activities:
 **Legend:** R = Responsible | A = Accountable | C = Consulted | I = Informed
 
 ## Key Personnel
+
+The following personnel will be assigned to this engagement:
 
 **Vendor Team:**
 - EO Project Manager: Overall delivery accountability and timeline management
@@ -429,6 +441,8 @@ All infrastructure will be deployed using CloudFormation/Terraform for consisten
 
 ## Example Implementation Patterns
 
+The following patterns illustrate proven approaches for DR implementation:
+
 **Phased Rollout:**
 - Phase 1: Implement DR for highest-priority application (pilot)
 - Phase 2: Expand to remaining critical applications
@@ -447,6 +461,8 @@ All infrastructure will be deployed using CloudFormation/Terraform for consisten
 - Comprehensive runbooks with step-by-step procedures
 
 ## Tooling Overview
+
+The following tools and technologies will be used for this implementation:
 
 <!-- TABLE_CONFIG: widths=[30, 35, 35] -->
 | Category | Primary Tools | Alternative Options |
@@ -482,6 +498,8 @@ All infrastructure will be deployed using CloudFormation/Terraform for consisten
 
 ## Identity & Access Management
 
+Identity and access controls ensure secure operations across both regions:
+
 - IAM roles and policies with least-privilege access in both regions
 - Multi-factor authentication (MFA) required for AWS console access
 - Role-based access control (RBAC) for DR operations
@@ -490,6 +508,8 @@ All infrastructure will be deployed using CloudFormation/Terraform for consisten
 
 ## Monitoring & Threat Detection
 
+Comprehensive monitoring ensures security visibility across the DR infrastructure:
+
 - CloudTrail logging enabled in both regions for audit trail
 - AWS Config for configuration compliance monitoring
 - CloudWatch monitoring for security metrics and anomalies
@@ -497,6 +517,8 @@ All infrastructure will be deployed using CloudFormation/Terraform for consisten
 - Automated alerts for unauthorized access attempts
 
 ## Compliance & Auditing
+
+The solution addresses the following compliance and audit requirements:
 
 - SOC 2 Type II compliance requirements addressed
 - HIPAA controls (if applicable) implemented in both regions
@@ -510,6 +532,8 @@ All infrastructure will be deployed using CloudFormation/Terraform for consisten
 - Regular DR testing documentation for audit requirements
 
 ## Governance
+
+Governance controls ensure proper oversight of the DR environment:
 
 **Change Management:**
 - Formal change request process for DR infrastructure modifications
@@ -530,6 +554,8 @@ All infrastructure will be deployed using CloudFormation/Terraform for consisten
 
 ## Encryption & Key Management
 
+Data protection is ensured through comprehensive encryption controls:
+
 - KMS encryption for data at-rest (EBS, RDS, S3) in both regions
 - TLS 1.2+ for data in-transit between regions
 - Cross-region KMS key replication for DR scenarios
@@ -548,6 +574,8 @@ All infrastructure will be deployed using CloudFormation/Terraform for consisten
 | Production (DR) | Disaster recovery standby | Operations team, emergency access | Replicated production data |
 
 ### Access Policies
+
+The following access policies govern system usage:
 
 **Administrative Access:**
 - Multi-factor authentication (MFA) required for all AWS console access
@@ -1011,6 +1039,8 @@ Components:
 
 ## Payment Terms
 
+This section outlines the pricing model and payment schedule for the engagement:
+
 **Pricing Model:** Fixed price with milestone-based payments
 
 **Payment Schedule:**
@@ -1024,6 +1054,8 @@ Components:
 **Expenses:** Travel and incidental expenses reimbursable at cost with prior written approval.
 
 ## Invoicing & Expenses
+
+Invoicing and expense policies for this engagement:
 
 ### Invoicing Process
 
@@ -1084,6 +1116,8 @@ Examples requiring change requests:
 
 ## Intellectual Property
 
+Intellectual property rights are allocated as follows:
+
 - Client retains ownership of all business data, application code, and configurations
 - Vendor retains proprietary DR methodologies, frameworks, and automation tools
 - DR infrastructure configurations and runbooks become Client property upon final payment
@@ -1091,6 +1125,8 @@ Examples requiring change requests:
 - Pre-existing IP remains with original owner
 
 ## Service Levels
+
+The following service level commitments apply to this engagement:
 
 - RTO and RPO guarantees apply only to in-scope applications and infrastructure
 - DR testing success rate: 95%+ for planned quarterly exercises
@@ -1100,6 +1136,8 @@ Examples requiring change requests:
 
 ## Liability
 
+Liability terms and limitations for this engagement:
+
 - Liability capped as defined in MSA
 - RTO/RPO validation based on planned testing scenarios; actual disaster recovery times may vary
 - Performance may be impacted by factors outside Vendor control (AWS service outages, network issues, etc.)
@@ -1108,6 +1146,8 @@ Examples requiring change requests:
 
 ## Confidentiality
 
+Confidentiality obligations govern information exchanged during this engagement:
+
 - All exchanged artifacts under NDA protection
 - DR plans and business continuity procedures considered highly confidential
 - Client data handled per security requirements
@@ -1115,6 +1155,8 @@ Examples requiring change requests:
 - Confidentiality obligations survive contract termination
 
 ## Termination
+
+The following termination provisions apply to this engagement:
 
 - Either party may terminate with 30 days written notice
 - Payment due for all completed work and accepted milestones

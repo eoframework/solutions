@@ -65,6 +65,8 @@ An enterprise landing zone provides the structured foundation needed to prevent 
 
 ## Objectives
 
+The following objectives define the key business outcomes this engagement will deliver:
+
 - Establish Foundation: Implement Azure Enterprise-Scale Landing Zone architecture per Cloud Adoption Framework best practices
 - Design Governance: Create management group hierarchy and Azure Policy framework for automated compliance enforcement
 - Implement Networking: Deploy hub-spoke topology with Azure Firewall, ExpressRoute, and Private DNS for secure communication
@@ -75,6 +77,8 @@ An enterprise landing zone provides the structured foundation needed to prevent 
 - Transfer Knowledge: Provide comprehensive training and operational runbooks for day-2 operations
 
 ## Success Metrics
+
+Success will be measured against the following quantifiable metrics:
 
 - Management group hierarchy deployed with clear ownership and policy assignment
 - Azure Policy framework enforces 95%+ compliance across all subscriptions
@@ -283,6 +287,8 @@ The implementation will be delivered in three phases over 12 weeks, with clear m
 
 # Roles & Responsibilities
 
+This section defines the roles and responsibilities for both the Vendor and Client teams throughout this engagement.
+
 <!-- TABLE_CONFIG: widths=[24, 10, 10, 10, 10, 10, 10, 8, 8] -->
 | Task/Role | Vendor PM | Vendor Architect | Vendor Security | Vendor Network | Vendor Developer | Client IT | Client Security | Client Network |
 |-----------|-----------|------------------|-----------------|-----------------|-----------------|-----------|-----------------|--------------|
@@ -444,12 +450,16 @@ The implementation approach follows Azure Cloud Adoption Framework (CAF) best pr
 
 ## Implementation Approach
 
+The following approach will guide the implementation of this solution:
+
 - Phased deployment: Foundation (weeks 1-4), Platform (weeks 5-8), Operations (weeks 9-12)
 - Iterative design with stakeholder feedback at each phase milestone
 - Risk mitigation: Change control process for all deployments
 - Communication: Weekly status updates and stakeholder reviews
 
 ## Tooling Overview
+
+The following table outlines the recommended tooling stack for this implementation:
 
 <!-- TABLE_CONFIG: widths=[25, 35, 40] -->
 | Category | Primary Tools | Purpose |
@@ -469,6 +479,8 @@ The implementation approach follows Azure Cloud Adoption Framework (CAF) best pr
 
 ## Data Strategy
 
+The following data management approach will be implemented:
+
 - Centralized logging via Log Analytics Workspace
 - Diagnostic settings configured on all Azure resources
 - Activity Logs captured for audit trail
@@ -478,6 +490,8 @@ The implementation approach follows Azure Cloud Adoption Framework (CAF) best pr
 - Data classification applied to sensitive resources
 
 ## Security & Compliance
+
+The solution incorporates the following security and compliance controls:
 
 - Encryption enabled for all data at rest and in transit
 - Personally identifiable information (PII) handling per compliance requirements
@@ -497,6 +511,8 @@ The implementation and target environment will be architected and validated to m
 
 ## Identity & Access Management
 
+Identity and access controls ensure secure operations:
+
 - Azure AD-based identity for all users and service principals
 - Multi-factor authentication (MFA) required for all administrative access
 - Conditional Access policies enforcing access requirements by location, device, and risk
@@ -507,6 +523,8 @@ The implementation and target environment will be architected and validated to m
 - Service principal and managed identity usage for application authentication
 
 ## Monitoring & Threat Detection
+
+Comprehensive monitoring ensures security visibility across the infrastructure:
 
 - Azure Sentinel SIEM with 15+ data connectors activated
 - Defender for Cloud continuous compliance and threat assessment
@@ -519,6 +537,8 @@ The implementation and target environment will be architected and validated to m
 
 ## Compliance & Auditing
 
+The solution addresses the following compliance and audit requirements:
+
 - Azure Policy enforces compliance across all subscriptions
 - Defender for Cloud compliance benchmarks: CIS, PCI-DSS, SOC 2
 - Audit logging of all administrative activities via Azure Activity Logs
@@ -529,6 +549,8 @@ The implementation and target environment will be architected and validated to m
 
 ## Encryption & Key Management
 
+Data protection is ensured through comprehensive encryption controls:
+
 - Encryption at rest using Azure Storage Service Encryption (SSE) and transparent data encryption (TDE)
 - Encryption in transit using TLS 1.2+ for all data movement
 - Azure Key Vault for centralized key and secret management
@@ -537,6 +559,8 @@ The implementation and target environment will be architected and validated to m
 - Key access auditing and monitoring
 
 ## Governance
+
+Governance controls ensure proper oversight of the environment:
 
 - Azure Policy framework with 50+ policies for enforcement
 - Change control: All infrastructure changes require formal change request
@@ -553,6 +577,8 @@ The implementation and target environment will be architected and validated to m
 
 ## Environments
 
+The following environments will be used:
+
 <!-- TABLE_CONFIG: widths=[25, 35, 20, 20] -->
 | Environment | Purpose | Azure Region | Lifecycle |
 |-------------|---------|------------|-----------------|
@@ -563,6 +589,8 @@ The implementation and target environment will be architected and validated to m
 | Development | Development and testing | Primary Region | Ephemeral |
 
 ## Access Policies
+
+The following access policies govern system usage:
 
 - Multi-factor authentication (MFA) required for all Azure portal access
 - API access via Azure AD managed identities or service principals
@@ -586,6 +614,8 @@ Comprehensive testing and validation will take place throughout the implementati
 
 ## Functional Validation
 
+Functional validation ensures the solution meets all requirements:
+
 - Management group hierarchy deployed correctly with policy assignment
 - Azure Policy rules enforcing compliance across subscriptions
 - Hub-spoke network connectivity functioning with expected latency
@@ -596,6 +626,8 @@ Comprehensive testing and validation will take place throughout the implementati
 - Backup and restore procedures functioning correctly
 
 ## Security & Compliance Testing
+
+Security and compliance testing validates adherence to requirements:
 
 - Validation of encryption (data at rest and in transit)
 - Access control testing (RBAC policies, Conditional Access)
@@ -608,6 +640,8 @@ Comprehensive testing and validation will take place throughout the implementati
 
 ## Performance & Capacity Testing
 
+Performance and capacity testing validates system scalability:
+
 - Network latency between hubs and spokes (<50ms target)
 - Firewall throughput and rule processing performance
 - Log Analytics Workspace ingestion and query performance
@@ -617,6 +651,8 @@ Comprehensive testing and validation will take place throughout the implementati
 
 ## Operational Readiness Testing
 
+Operational readiness testing validates production preparedness:
+
 - Operational runbook procedures tested by operations team
 - Alert escalation procedures validated
 - Incident response playbook execution tested
@@ -625,6 +661,8 @@ Comprehensive testing and validation will take place throughout the implementati
 - Administrative access procedures validated
 
 ## User Acceptance Testing (UAT)
+
+User acceptance testing validates business requirements:
 
 - IT operations team validates landing zone management procedures
 - Security team validates threat detection and incident response
@@ -649,6 +687,8 @@ A Go-Live Readiness Checklist will be delivered including:
 
 ## Cutover Checklist
 
+The following checklist ensures successful cutover:
+
 - Pre-cutover validation: Final testing and operational team certification
 - Stakeholder approval for production deployment
 - Hypercare support team mobilized and on-call
@@ -659,6 +699,8 @@ A Go-Live Readiness Checklist will be delivered including:
 - Rollback procedures documented and rehearsed
 
 ## Rollback Strategy
+
+The following rollback procedures will be used if needed:
 
 - Documented rollback triggers: Policy enforcement failure, network connectivity loss, security controls failure
 - Rollback procedures: Terraform/ARM template rollback, policy suspension with approval, resource recreation
@@ -675,6 +717,8 @@ A Go-Live Readiness Checklist will be delivered including:
 
 ## Handover Artifacts
 
+The following artifacts will be delivered to the Client:
+
 - As-Built documentation including architecture diagrams and configurations
 - Management group and policy framework documentation
 - Network topology and firewall rule documentation
@@ -686,6 +730,8 @@ A Go-Live Readiness Checklist will be delivered including:
 - Training materials and recorded sessions
 
 ## Knowledge Transfer
+
+Knowledge transfer ensures the Client team can effectively manage and operate the solution:
 
 - Live knowledge transfer sessions for administrators and operations team
 - Azure platform management training (management groups, policies, subscriptions)
@@ -701,6 +747,8 @@ A Go-Live Readiness Checklist will be delivered including:
 ## Assumptions
 
 ## General Assumptions
+
+The following general assumptions apply to this engagement:
 
 - Client will provide current state information for assessment (resource inventory, organizational structure, compliance requirements)
 - Azure AD is deployed and available for identity configuration
@@ -720,6 +768,8 @@ A Go-Live Readiness Checklist will be delivered including:
 
 ## Project Dependencies
 
+The following dependencies must be satisfied for successful delivery:
+
 - Azure Account Access: Client provides Azure account with appropriate permissions (Owner/Contributor on root management group)
 - Subscription Quota: Azure subscription limits are sufficient for landing zone design (minimum 50 subscriptions capacity)
 - Network Planning: Client provides network design requirements, IP addressing scheme, hybrid connectivity details
@@ -738,9 +788,13 @@ A Go-Live Readiness Checklist will be delivered including:
 
 # Investment Summary
 
+This section provides a comprehensive overview of the engagement investment:
+
 **Enterprise-Scale Implementation:** This pricing reflects an enterprise-scale deployment designed to support multiple business units and 20+ application subscriptions with centralized governance and security. For pilot or smaller deployments, please request small scope pricing.
 
 ## Total Investment
+
+The following table provides a comprehensive overview of the total investment required for this engagement:
 
 <!-- BEGIN COST_SUMMARY_TABLE -->
 <!-- TABLE_CONFIG: widths=[20, 12, 23, 13, 10, 10, 12] -->
@@ -801,6 +855,8 @@ Detailed breakdown including Azure service consumption and sizing is provided in
 
 ### Payment Schedule
 
+Payments are structured around project milestones to align investment with delivered value:
+
 - 25% upon SOW execution and project kickoff ($65,625 on Year 1 list, $54,255 net after Year 1 credit)
 - 30% upon completion of Discovery & Architecture phase ($79,506 on list, $63,006 net)
 - 30% upon completion of Platform Implementation phase ($79,506 on list, $63,006 net)
@@ -809,6 +865,8 @@ Detailed breakdown including Azure service consumption and sizing is provided in
 ---
 
 ## Invoicing & Expenses
+
+Invoicing and expense policies for this engagement:
 
 ### Invoicing
 
@@ -836,11 +894,15 @@ All services will be delivered in accordance with the executed Master Services A
 
 ## Scope Changes
 
+Scope changes are managed through the following process:
+
 - Changes to management group structure, policy framework, network design, or timeline require formal change requests
 - Change requests may impact project timeline and budget
 - Azure resource additions (additional subscriptions, regions) are scope changes
 
 ## Intellectual Property
+
+Intellectual property rights are allocated as follows:
 
 - Client retains ownership of all business data, applications, and workload content
 - Vendor retains ownership of proprietary landing zone templates, policy frameworks, and methodologies
@@ -848,6 +910,8 @@ All services will be delivered in accordance with the executed Master Services A
 - Infrastructure code and automation scripts transfer to Client upon project completion
 
 ## Service Levels
+
+The following service level commitments apply to this engagement:
 
 - Azure platform availability: 99.9% for hub services (Firewall, DNS, routing)
 - Azure Sentinel detection latency: <5 minutes for critical events
@@ -858,6 +922,8 @@ All services will be delivered in accordance with the executed Master Services A
 
 ## Liability
 
+Liability terms and limitations for this engagement:
+
 - Azure platform SLAs apply to cloud infrastructure components
 - Policy and governance configuration warranty applies to CAF-aligned deployments
 - Performance may vary with non-standard workload types or configurations
@@ -866,16 +932,22 @@ All services will be delivered in accordance with the executed Master Services A
 
 ## Confidentiality
 
+Confidentiality obligations govern information exchanged during this engagement:
+
 - Both parties agree to maintain strict confidentiality of business data, organizational structure, and proprietary information
 - All exchanged artifacts under NDA protection
 - Security findings and recommendations treated as confidential
 
 ## Termination
 
+The following termination provisions apply to this engagement:
+
 - Mutually terminable per MSA terms, subject to payment for completed work and deliverables
 - Client owns all completed infrastructure and configurations upon termination
 
 ## Governing Law
+
+This agreement is governed by the following legal framework:
 
 - Agreement governed under the laws of [State/Region]
 

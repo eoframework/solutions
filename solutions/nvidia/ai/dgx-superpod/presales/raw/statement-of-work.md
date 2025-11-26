@@ -36,6 +36,9 @@ This Statement of Work (SOW) defines the scope, deliverables, roles, and terms f
 - **Data Sovereignty:** Sensitive training data must remain on-premises for regulatory compliance
 
 ## Business Objectives
+
+The following objectives define the key business outcomes this engagement will deliver:
+
 - **Deploy AI Supercomputer:** Implement 8x DGX H100 SuperPOD with 64 H100 GPUs delivering 32 petaFLOPS FP8 performance for large-scale model training
 - **Reduce Training Time:** Accelerate LLM training by 10x through multi-node distributed training with InfiniBand networking (GPT-3 scale models in weeks vs months)
 - **Lower AI Costs:** Reduce cloud GPU spending by 70% through owned infrastructure, achieving ROI in 2.3 years vs AWS baseline
@@ -44,6 +47,9 @@ This Statement of Work (SOW) defines the scope, deliverables, roles, and terms f
 - **Foundation for Innovation:** Establish foundation for next-generation AI products including generative AI, drug discovery, and autonomous systems
 
 ## Success Metrics
+
+The following metrics will be used to measure project success:
+
 - 32 petaFLOPS FP8 AI performance operational and validated
 - Train GPT-3 scale model (175B parameters) in <90 days (vs 12+ months on cloud)
 - Achieve 80%+ GPU utilization across research teams
@@ -273,6 +279,8 @@ The following matrix defines roles and responsibilities for all major project ac
 
 ## Key Personnel
 
+The following personnel will be assigned to this engagement:
+
 **Vendor Team:**
 - EO Project Manager: Overall delivery accountability
 - EO Quarterback: Technical design and oversight
@@ -318,6 +326,8 @@ Key architectural components include:
 - Management Layer (Slurm scheduler, monitoring, user management)
 
 ## Scope Specifications
+
+This engagement is scoped according to the following specifications:
 
 **Compute & GPU Performance:**
 - 8x DGX H100 systems (64x H100 80GB GPUs total)
@@ -401,6 +411,9 @@ All critical data and configurations are protected through:
 The implementation approach follows NVIDIA DGX SuperPOD reference architecture and proven methodologies for enterprise AI infrastructure.
 
 ## Example Implementation Patterns
+
+The following patterns will guide the implementation approach:
+
 - Phased deployment: Install and validate 2 DGX systems first, then expand to 8
 - Parallel environments: Maintain existing cloud GPU access during on-premises ramp-up
 - Iterative optimization: Benchmark workloads, tune NCCL settings, optimize throughput
@@ -426,6 +439,9 @@ The following tools and technologies will be deployed as part of the DGX SuperPO
 ## Data Management
 
 ### Data Strategy
+
+The data management approach follows industry best practices:
+
 - High-performance parallel file system for shared datasets
 - GPUDirect Storage for direct GPU-to-storage data transfers
 - Automated data lifecycle management (hot/warm/cold tiering)
@@ -448,6 +464,9 @@ The following tools and technologies will be deployed as part of the DGX SuperPO
 The implementation and target environment will be architected and validated to meet the Client's security, compliance, and governance requirements. Vendor will adhere to industry-standard security frameworks and NVIDIA DGX SuperPOD best practices.
 
 ## Identity & Access Management
+
+The solution implements comprehensive identity and access controls:
+
 - LDAP/Active Directory integration for user authentication
 - Role-based access control (RBAC) for GPU resource allocation
 - Multi-factor authentication (MFA) for administrative access
@@ -455,6 +474,9 @@ The implementation and target environment will be architected and validated to m
 - Isolated user environments with resource quotas
 
 ## Monitoring & Threat Detection
+
+Security monitoring capabilities include:
+
 - Centralized logging for all system and application events
 - Intrusion detection system (IDS) for network monitoring
 - Automated alerts for unauthorized access attempts
@@ -462,6 +484,9 @@ The implementation and target environment will be architected and validated to m
 - Regular security patch management and vulnerability scanning
 
 ## Compliance & Auditing
+
+The solution supports the following compliance frameworks:
+
 - SOC 2 certified infrastructure components
 - Data residency controls for regulatory compliance
 - Comprehensive audit trail for all system access and GPU usage
@@ -469,6 +494,9 @@ The implementation and target environment will be architected and validated to m
 - Documented security policies and procedures
 
 ## Encryption & Key Management
+
+Data protection is implemented through encryption at all layers:
+
 - Encryption at rest for all storage volumes
 - TLS 1.3 encryption for all network communications
 - Secure key management with hardware security modules (optional)
@@ -476,6 +504,9 @@ The implementation and target environment will be architected and validated to m
 - Regular encryption key rotation
 
 ## Governance
+
+Governance processes ensure consistent management of the solution:
+
 - Change control: All infrastructure changes require formal approval
 - Resource quotas: GPU allocation policies per user/team
 - Access reviews: Quarterly review of user access and permissions
@@ -495,6 +526,9 @@ The implementation and target environment will be architected and validated to m
 | Validation | Pre-production workload testing | 8 GPUs (reserved capacity) | QA and AI teams |
 
 ### Access Policies
+
+Access control policies are defined as follows:
+
 - Multi-factor authentication (MFA) required for administrative access
 - SSH key-based authentication for DGX system access
 - Administrator Access: Full system access for infrastructure team
@@ -511,6 +545,9 @@ The implementation and target environment will be architected and validated to m
 Comprehensive testing and validation will take place throughout the implementation lifecycle to ensure functionality, performance, security, and reliability of the DGX SuperPOD infrastructure.
 
 ## Functional Validation
+
+Functional testing ensures all features work as designed:
+
 - End-to-end AI training workflow validation
 - Multi-GPU distributed training functionality
 - Storage access and throughput validation
@@ -519,6 +556,9 @@ Comprehensive testing and validation will take place throughout the implementati
 - NGC container deployment and execution
 
 ## Performance & Load Testing
+
+Performance validation ensures the solution meets SLA requirements:
+
 - Single-node multi-GPU performance benchmarking (8 H100s)
 - Multi-node distributed training scaling (64 GPUs)
 - InfiniBand fabric bandwidth and latency validation
@@ -527,6 +567,9 @@ Comprehensive testing and validation will take place throughout the implementati
 - Concurrent multi-user workload testing
 
 ## Security Testing
+
+Security validation ensures protection against threats:
+
 - Access control and authentication validation
 - Network segmentation and firewall rules testing
 - Encryption validation (data at rest and in transit)
@@ -534,6 +577,9 @@ Comprehensive testing and validation will take place throughout the implementati
 - Compliance validation (SOC2, data residency)
 
 ## Disaster Recovery & Resilience Tests
+
+DR testing validates backup and recovery capabilities:
+
 - InfiniBand failover and redundancy validation
 - Storage RAID failure and rebuild testing
 - DGX system failure and job recovery
@@ -541,6 +587,9 @@ Comprehensive testing and validation will take place throughout the implementati
 - Power failure and UPS testing
 
 ## User Acceptance Testing (UAT)
+
+UAT is performed in coordination with Client business stakeholders:
+
 - Performed in coordination with Client data science team
 - Real AI workloads executed on DGX SuperPOD
 - Performance validation against baseline (cloud GPU)
@@ -582,6 +631,9 @@ The implementation follows a **parallel processing** strategy where the new DGX 
 The cutover will be executed during a pre-approved maintenance window (recommended: weekend) with cloud GPU resources available as fallback if critical issues arise.
 
 ## Cutover Checklist
+
+The following checklist will guide the cutover execution:
+
 - Pre-cutover validation: Performance benchmarks passed, UAT sign-off
 - Production environment validated and monitoring operational
 - Fallback procedures documented (cloud GPU access maintained)
@@ -592,6 +644,9 @@ The cutover will be executed during a pre-approved maintenance window (recommend
 - Daily monitoring during hypercare period (4 weeks)
 
 ## Rollback Strategy
+
+Comprehensive rollback procedures in case of critical issues:
+
 - Documented rollback triggers (GPU failures, InfiniBand issues, storage unavailability)
 - Rollback procedures: Redirect workloads to cloud GPU instances
 - Root cause analysis and fix validation before retry
@@ -605,6 +660,9 @@ The cutover will be executed during a pre-approved maintenance window (recommend
 # Handover & Support
 
 ## Handover Artifacts
+
+The following artifacts will be delivered upon project completion:
+
 - As-Built documentation including architecture diagrams, network topology, and system configurations
 - DGX SuperPOD operations runbook with troubleshooting procedures
 - InfiniBand fabric configuration and performance tuning guide
@@ -614,6 +672,9 @@ The cutover will be executed during a pre-approved maintenance window (recommend
 - Performance optimization recommendations
 
 ## Knowledge Transfer
+
+Knowledge transfer ensures the Client team can effectively operate the solution:
+
 - Live knowledge transfer sessions for administrators and data scientists
 - DGX system administration training (hardware, OS, updates)
 - InfiniBand fabric management and troubleshooting
@@ -666,6 +727,9 @@ Post-hypercare, Client may transition to ongoing managed services:
 ## Assumptions
 
 ### General Assumptions
+
+This engagement is based on the following general assumptions:
+
 - Datacenter facility has adequate power capacity (500 kW) and cooling (50-ton capacity)
 - Physical space for 8 DGX systems in standard server racks is available
 - Client will provide adequate security for physical access to datacenter
@@ -682,6 +746,9 @@ Post-hypercare, Client may transition to ongoing managed services:
 ## Dependencies
 
 ### Project Dependencies
+
+The following dependencies must be satisfied for successful project execution:
+
 - Datacenter Readiness: Power, cooling, and physical space prepared before hardware delivery
 - Hardware Procurement: DGX H100 systems, InfiniBand switches ordered with 12-16 week lead time
 - Network Infrastructure: InfiniBand cabling and management network in place
@@ -698,6 +765,8 @@ Post-hypercare, Client may transition to ongoing managed services:
 ---
 
 # Investment Summary
+
+This section provides a comprehensive overview of the engagement investment:
 
 **Enterprise AI Supercomputing Deployment:** This pricing reflects an enterprise-scale DGX SuperPOD deployment with 64 H100 GPUs designed for large-scale model training supporting 50+ data scientists. Total capacity: 32 petaFLOPS FP8, 5.1 TB GPU memory, 1 PB storage.
 
@@ -773,6 +842,8 @@ The table below summarizes the total investment required across all cost categor
 
 ## Invoicing & Expenses
 
+Invoicing and expense policies for this engagement:
+
 ### Invoicing
 - Milestone-based invoicing per Payment Terms above
 - Net 30 payment terms
@@ -796,17 +867,26 @@ The table below summarizes the total investment required across all cost categor
 All services will be delivered in accordance with the executed Master Services Agreement (MSA) or equivalent contractual document between Vendor and Client.
 
 ## Scope Changes
+
+Change control procedures for this engagement:
+
 - Changes to GPU count, InfiniBand topology, storage capacity, or timeline require formal change requests
 - Hardware lead times (12-16 weeks) may impact change request feasibility
 - Change requests may impact project timeline and budget
 
 ## Intellectual Property
+
+Intellectual property rights are defined as follows:
+
 - Client retains ownership of all training data, models, and AI applications
 - Vendor retains ownership of proprietary deployment methodologies
 - NVIDIA retains ownership of DGX OS, Base Command, and NGC content
 - Custom configurations and scripts transfer to Client upon final payment
 
 ## Service Levels
+
+Service level commitments for this engagement:
+
 - DGX SuperPOD availability: 99.5% uptime during business hours
 - GPU compute performance: 32 petaFLOPS FP8 validated
 - InfiniBand latency: <2 microseconds GPU-to-GPU
@@ -815,20 +895,32 @@ All services will be delivered in accordance with the executed Master Services A
 - Post-warranty support available under separate managed services agreement
 
 ## Liability
+
+Liability terms and limitations:
+
 - Performance guarantees apply to NVIDIA-validated benchmark workloads
 - Custom AI workload performance may vary based on implementation
 - Hardware warranty and support provided by NVIDIA per standard terms
 - Liability caps as agreed in MSA
 
 ## Confidentiality
+
+Confidentiality obligations for both parties:
+
 - Both parties agree to maintain strict confidentiality of business data, AI models, and proprietary methodologies
 - All exchanged artifacts under NDA protection
 
 ## Termination
+
+Termination provisions for this engagement:
+
 - Mutually terminable per MSA terms, subject to payment for completed work
 - Hardware procurement is non-refundable once ordered (12-16 week lead time)
 
 ## Governing Law
+
+This agreement shall be governed by the laws of [State/Region].
+
 - Agreement governed under the laws of [State/Region]
 
 ---

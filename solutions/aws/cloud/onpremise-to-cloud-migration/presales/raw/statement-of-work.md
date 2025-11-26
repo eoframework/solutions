@@ -38,6 +38,8 @@ This Statement of Work (SOW) defines the scope, deliverables, roles, and terms f
 
 ## Business Objectives
 
+The following objectives define the key business outcomes this engagement will deliver:
+
 - **Migrate Production Workloads:** Execute phased migration of 5-10 core applications to AWS using proven lift-and-shift and replatform strategies, eliminating aging infrastructure constraints
 - **Reduce Infrastructure Costs:** Achieve 30-40% infrastructure cost reduction through cloud economics and right-sizing, eliminating costly hardware refresh cycles
 - **Improve Operational Agility:** Enable rapid provisioning and scaling of resources to support business growth, reducing procurement cycles from months to minutes
@@ -47,6 +49,8 @@ This Statement of Work (SOW) defines the scope, deliverables, roles, and terms f
 - **Modernize Operations:** Implement DevOps practices with Infrastructure-as-Code and automated deployment following AWS Well-Architected Framework
 
 ## Success Metrics
+
+Success will be measured against the following quantifiable metrics:
 
 - Complete migration of all in-scope applications within 9 months with zero data loss
 - Achieve 30-40% infrastructure cost reduction within 12 months of migration completion
@@ -63,6 +67,8 @@ This Statement of Work (SOW) defines the scope, deliverables, roles, and terms f
 # Scope of Work
 
 ## In Scope
+
+The following items are included within the scope of this engagement:
 
 **layout:** single
 
@@ -210,6 +216,8 @@ These items are not in scope unless added via change control:
 
 ## Deliverables
 
+The following table summarizes the key deliverables for this engagement:
+
 <!-- TABLE_CONFIG: widths=[8, 40, 12, 20, 20] -->
 | # | Deliverable | Type | Due Date | Acceptance By |
 |---|-------------|------|----------|---------------|
@@ -227,6 +235,8 @@ These items are not in scope unless added via change control:
 
 ## Project Milestones
 
+The following milestones represent key checkpoints throughout the project lifecycle:
+
 <!-- TABLE_CONFIG: widths=[10, 25, 15, 50] -->
 | Phase No | Phase Description | Timeline | Key Deliverables |
 |----------|-------------------|----------|------------------|
@@ -241,6 +251,8 @@ These items are not in scope unless added via change control:
 # Roles & Responsibilities
 
 ## RACI Matrix
+
+The following matrix defines the responsibility assignments for key project activities:
 
 <!-- TABLE_CONFIG: widths=[28, 11, 11, 11, 11, 9, 9, 10] -->
 | Task/Role | EO PM | EO Quarterback | EO Sales Eng | EO Eng (Migration) | Client PM | Client Tech Lead | Client Ops |
@@ -264,6 +276,8 @@ These items are not in scope unless added via change control:
 **Legend:** R = Responsible | A = Accountable | C = Consulted | I = Informed
 
 ## Key Personnel
+
+The following personnel will be assigned to this engagement:
 
 **Vendor Team:**
 - EO Project Manager (EO PM): Overall delivery accountability, milestone tracking, stakeholder communication
@@ -548,6 +562,8 @@ The migration deployment follows AWS Migration Acceleration Program (MAP) method
 
 ## Example Implementation Patterns
 
+The following patterns illustrate proven approaches for implementation:
+
 **Phased Rollout Approach:**
 - Discovery Sprint (Weeks 1-2): Inventory all applications, map dependencies, identify integration points
 - Design Sprint (Weeks 3-4): Document target AWS architecture, network connectivity, security controls
@@ -579,6 +595,8 @@ The migration deployment follows AWS Migration Acceleration Program (MAP) method
 - Provide fallback path if unexpected issues require temporary repatriation
 
 ## Tooling Overview
+
+The following table outlines the recommended tooling stack for this implementation:
 
 <!-- TABLE_CONFIG: widths=[25, 35, 40] -->
 | Category | Primary Tools | Purpose |
@@ -636,6 +654,8 @@ The AWS cloud environment will be architected and validated to meet the Client's
 
 ## Identity & Access Management
 
+Identity and access controls ensure secure operations:
+
 - AWS IAM Identity Center (successor to AWS SSO): Centralized identity management with federation to on-premise Active Directory
 - Role-Based Access Control (RBAC): Least-privilege IAM roles and policies for all users and AWS services
 - Multi-Factor Authentication (MFA): Required for all AWS console access and privileged operations
@@ -646,6 +666,8 @@ The AWS cloud environment will be architected and validated to meet the Client's
 - Privileged Access Management: Break-glass emergency access procedures with comprehensive audit logging
 
 ## Monitoring & Threat Detection
+
+Comprehensive monitoring ensures security visibility across the infrastructure:
 
 - AWS CloudTrail: Comprehensive API audit logging for all AWS account activity
   - Multi-region trail capturing all management and data events
@@ -671,6 +693,8 @@ The AWS cloud environment will be architected and validated to meet the Client's
 
 ## Compliance & Auditing
 
+The solution addresses the following compliance and audit requirements:
+
 - Compliance Frameworks: SOC 2 Type II controls maintained from on-premise to AWS environment
 - AWS Config: Continuous compliance monitoring and resource configuration tracking
   - Automated evaluation of AWS Config Rules against compliance standards
@@ -692,6 +716,8 @@ The AWS cloud environment will be architected and validated to meet the Client's
   - Compliance gap analysis and remediation tracking
 
 ## Governance
+
+Governance controls ensure proper oversight of the environment:
 
 **Change Management:**
 - Formal change request process for all production environment modifications
@@ -747,6 +773,8 @@ The AWS cloud environment will be architected and validated to meet the Client's
 
 ## Encryption & Key Management
 
+Data protection is ensured through comprehensive encryption controls:
+
 **Data Encryption:**
 - Data at Rest: All storage encrypted using AWS KMS with customer-managed keys (CMKs)
   - EBS volumes: Encrypted by default with per-volume unique keys
@@ -794,6 +822,8 @@ The AWS cloud environment will be architected and validated to meet the Client's
 | Production | Live operational environment for migrated applications | Operations team, authorized application users | Production data |
 
 ### Access Policies
+
+The following access policies govern system usage:
 
 **Administrative Access:**
 - Multi-factor authentication (MFA) required for all AWS console access
@@ -1595,6 +1625,8 @@ Critical dependencies that must be satisfied for successful migration execution:
 
 ## Invoicing & Expenses
 
+Invoicing and expense policies for this engagement:
+
 ### Invoicing Process
 
 **Invoice Submission:**
@@ -1661,6 +1693,8 @@ Any changes to migration scope (additional applications, infrastructure expansio
 
 ## Intellectual Property
 
+Intellectual property rights are allocated as follows:
+
 - **Client IP:** Client retains ownership of all business data, application code, configurations, and documentation specific to their environment
 - **Vendor IP:** Vendor retains ownership of proprietary migration methodologies, frameworks, tools, accelerators, and pre-existing IP
 - **Developed IP:** Custom configurations, Infrastructure-as-Code, scripts, and documentation developed during engagement transfer to Client upon final payment
@@ -1669,12 +1703,16 @@ Any changes to migration scope (additional applications, infrastructure expansio
 
 ## Service Levels
 
+The following service level commitments apply to this engagement:
+
 - **Migration Execution:** Deliverables provided per agreed milestone schedule with formal acceptance criteria
 - **Hypercare Period:** 4 weeks per migration wave with defined response times (4-hour critical, 1-day non-critical)
 - **Extended Support:** Available via managed services contract beyond hypercare period (separate agreement and pricing)
 - **Best-Effort Basis:** Services provided on commercially reasonable best-effort basis unless specific SLAs defined in MSA
 
 ## Liability
+
+Liability terms and limitations for this engagement:
 
 - Liability capped as defined in Master Services Agreement
 - Excludes gross negligence, willful misconduct, or intellectual property infringement claims
@@ -1683,12 +1721,16 @@ Any changes to migration scope (additional applications, infrastructure expansio
 
 ## Confidentiality
 
+Confidentiality obligations govern information exchanged during this engagement:
+
 - All exchanged artifacts under NDA protection per MSA confidentiality terms
 - Client data handled per security requirements and confidentiality obligations
 - No disclosure to third parties without prior written consent (except as required by law)
 - Vendor may reference Client as case study or reference (with Client approval)
 
 ## Termination
+
+The following termination provisions apply to this engagement:
 
 - Either party may terminate with 30 days written notice per MSA termination provisions
 - Payment due for all completed work through termination date

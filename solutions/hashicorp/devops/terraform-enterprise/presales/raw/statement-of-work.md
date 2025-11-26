@@ -37,6 +37,9 @@ This Statement of Work (SOW) defines the scope, deliverables, roles, and terms f
 - **Compliance Risk:** No automated policy enforcement increasing audit exposure and security misconfigurations
 
 ## Business Objectives
+
+The following objectives define the key business outcomes this engagement will deliver:
+
 - **Centralize Infrastructure as Code:** Implement Terraform Enterprise for unified workspace management with centralized state storage, eliminating locking conflicts and enabling team collaboration
 - **Automate Policy Enforcement:** Deploy Sentinel policies for automated security, compliance, and cost governance enforced before infrastructure changes reach production environments
 - **Enable Self-Service Provisioning:** Implement VCS-driven workflows with approval gates enabling self-service infrastructure provisioning while maintaining governance controls
@@ -45,6 +48,9 @@ This Statement of Work (SOW) defines the scope, deliverables, roles, and terms f
 - **Ensure Compliance:** Achieve 100% policy compliance across all infrastructure changes through mandatory Sentinel policy enforcement with audit trail
 
 ## Success Metrics
+
+The following metrics will be used to measure project success:
+
 - 80%+ reduction in infrastructure provisioning time (from baseline 5 days to 1 day)
 - 100% policy compliance rate across all infrastructure changes
 - 70% reduction in infrastructure operations costs within 12 months
@@ -162,6 +168,8 @@ These items are not in scope unless added via change control:
 
 ## Deliverables
 
+The following table summarizes the key deliverables for this engagement:
+
 <!-- TABLE_CONFIG: widths=[8, 40, 12, 20, 20] -->
 | # | Deliverable | Type | Due Date | Acceptance By |
 |---|--------------------------------------|--------------|--------------|-----------------|
@@ -182,6 +190,8 @@ These items are not in scope unless added via change control:
 ---
 
 ## Project Milestones
+
+The following milestones represent key checkpoints throughout the project lifecycle:
 
 <!-- TABLE_CONFIG: widths=[20, 50, 30] -->
 | Milestone | Description | Target Date |
@@ -205,6 +215,8 @@ This section outlines the roles and responsibilities for both the Vendor and Cli
 
 ## RACI Matrix
 
+The following matrix defines the responsibility assignments for key project activities:
+
 <!-- TABLE_CONFIG: widths=[28, 11, 11, 11, 11, 9, 9, 10] -->
 | Task/Role | EO PM | EO Quarterback | EO Sales Eng | EO Eng (DevOps) | Client IT | Client Security | SME |
 |-----------|-------|----------------|--------------|-----------------|-----------|-----------------|-----|
@@ -222,6 +234,8 @@ This section outlines the roles and responsibilities for both the Vendor and Cli
 **Legend:** R = Responsible | A = Accountable | C = Consulted | I = Informed
 
 ## Key Personnel
+
+The following personnel will be assigned to this engagement:
 
 **Vendor Team:**
 - EO Project Manager: Overall delivery accountability and stakeholder management
@@ -268,6 +282,8 @@ Key architectural components include:
 - Module Registry (Private module registry for infrastructure code reusability)
 
 ## Scope Specifications
+
+This engagement is scoped according to the following specifications:
 
 **Platform Infrastructure:**
 - Terraform Enterprise: Kubernetes-based deployment on AWS EKS (3 nodes, t3.large)
@@ -344,12 +360,17 @@ All critical data and configurations are protected through:
 The implementation approach follows HashiCorp best practices and proven methodologies for Terraform Enterprise deployments.
 
 ## Example Implementation Patterns
+
+The following patterns will guide the implementation approach:
+
 - Phased workspace migration: Pilot with non-production workspaces, validate, then migrate production
 - Parallel operation: Run Terraform Enterprise alongside existing OSS during transition period
 - Progressive policy enforcement: Start with advisory policies, transition to mandatory after team training
 - Iterative optimization: Continuous improvement based on platform usage and feedback
 
 ## Tooling Overview
+
+The following table outlines the recommended tooling stack for this implementation:
 
 <!-- TABLE_CONFIG: widths=[25, 35, 40] -->
 | Category | Primary Tools | Purpose |
@@ -366,6 +387,9 @@ The implementation approach follows HashiCorp best practices and proven methodol
 ## Data Management
 
 ### Data Strategy
+
+The data management approach follows industry best practices:
+
 - Centralized Terraform state storage in Terraform Enterprise with encryption at rest
 - State locking and consistency guarantees eliminating concurrent modification conflicts
 - Workspace isolation with granular RBAC for state access control
@@ -389,6 +413,9 @@ The implementation approach follows HashiCorp best practices and proven methodol
 The implementation and target environment will be architected and validated to meet the Client's security, compliance, and governance requirements. Vendor will adhere to industry-standard security frameworks and HashiCorp Terraform Enterprise best practices.
 
 ## Identity & Access Management
+
+The solution implements comprehensive identity and access controls:
+
 - Role-based access control (RBAC) for all Terraform Enterprise workspaces and operations
 - Integration with SSO/SAML for centralized authentication and identity management
 - HashiCorp Vault dynamic AWS credentials for automated infrastructure provisioning
@@ -397,6 +424,9 @@ The implementation and target environment will be architected and validated to m
 - API token management with expiration policies and rotation requirements
 
 ## Monitoring & Threat Detection
+
+Security monitoring capabilities include:
+
 - Comprehensive audit logging in Terraform Enterprise for all infrastructure changes
 - HashiCorp Vault audit logs for all secrets access and dynamic credential generation
 - CloudWatch monitoring for platform health, performance, and security metrics
@@ -405,6 +435,9 @@ The implementation and target environment will be architected and validated to m
 - Drift detection for infrastructure configuration compliance monitoring
 
 ## Compliance & Auditing
+
+The solution supports the following compliance frameworks:
+
 - SOC2 compliance: Terraform Enterprise is SOC2 certified, platform architecture follows SOC2 principles
 - ISO27001 compliance: Security controls aligned with ISO27001 framework requirements
 - Sentinel policies enforcing regulatory compliance requirements (HIPAA, PCI DSS if applicable)
@@ -412,6 +445,9 @@ The implementation and target environment will be architected and validated to m
 - Audit trail preservation for all infrastructure changes (minimum 1 year retention)
 
 ## Encryption & Key Management
+
+Data protection is implemented through encryption at all layers:
+
 - All Terraform state encrypted at rest using AWS KMS customer-managed keys
 - All platform communication encrypted in transit using TLS 1.3
 - HashiCorp Vault encryption as a service for application secrets
@@ -420,6 +456,9 @@ The implementation and target environment will be architected and validated to m
 - Secure key management using AWS KMS with audit logging via CloudTrail
 
 ## Governance
+
+Governance processes ensure consistent management of the solution:
+
 - Sentinel policies enforcing infrastructure standards across all AWS deployments
 - Mandatory policy checks before infrastructure changes are applied to production
 - Cost governance policies preventing resource over-provisioning and budget overruns
@@ -443,6 +482,9 @@ The HashiCorp Terraform Enterprise platform will support three primary workspace
 | Production | Live infrastructure provisioning and changes | Production AWS account or VPCs | Operations team, approval-gated runs |
 
 ### Access Policies
+
+Access control policies are defined as follows:
+
 - Single Sign-On (SSO) via SAML for all Terraform Enterprise access
 - Multi-factor authentication (MFA) required for all users
 - API access via team tokens with automatic expiration and rotation
@@ -462,6 +504,9 @@ The HashiCorp Terraform Enterprise platform will support three primary workspace
 Comprehensive testing and validation will take place throughout the implementation lifecycle to ensure functionality, performance, security, and policy compliance of the HashiCorp Terraform Enterprise platform.
 
 ## Functional Validation
+
+Functional testing ensures all features work as designed:
+
 - End-to-end workspace execution for AWS infrastructure provisioning
 - VCS-triggered run validation via GitHub webhooks and pull request workflows
 - Sentinel policy enforcement testing across all policy sets and severity levels
@@ -472,6 +517,9 @@ Comprehensive testing and validation will take place throughout the implementati
 - Drift detection and notification functionality
 
 ## Performance & Load Testing
+
+Performance validation ensures the solution meets SLA requirements:
+
 - Concurrent run capacity testing (10 simultaneous runs)
 - State locking and consistency validation under concurrent workspace access
 - Workspace migration performance benchmarking for state file transfers
@@ -479,6 +527,9 @@ Comprehensive testing and validation will take place throughout the implementati
 - RDS performance under Terraform state read/write load
 
 ## Security Testing
+
+Security validation ensures protection against threats:
+
 - RBAC validation across all user roles and workspace permissions
 - Vault dynamic credential security, scoping, and rotation testing
 - TLS encryption verification for all platform communication
@@ -487,6 +538,9 @@ Comprehensive testing and validation will take place throughout the implementati
 - Penetration testing of platform infrastructure (optional)
 
 ## Policy Compliance Testing
+
+Policy compliance testing validates adherence to security standards:
+
 - Sentinel policy effectiveness testing across security, cost, and compliance domains
 - Policy violation detection and enforcement validation (hard mandatory vs advisory)
 - Compliance framework alignment verification (SOC2, ISO27001)
@@ -494,6 +548,9 @@ Comprehensive testing and validation will take place throughout the implementati
 - Tagging enforcement validation for resource compliance
 
 ## AWS Integration Testing
+
+AWS integration testing validates cloud service connectivity:
+
 - Infrastructure provisioning validation across AWS services (VPC, EC2, RDS, EKS, etc.)
 - Dynamic AWS credential generation and permission scoping via Vault
 - Multi-account AWS deployment validation (if applicable)
@@ -501,6 +558,9 @@ Comprehensive testing and validation will take place throughout the implementati
 - Integration with AWS-native services (IAM, CloudWatch, CloudTrail)
 
 ## User Acceptance Testing (UAT)
+
+UAT is performed in coordination with Client business stakeholders:
+
 - Performed in coordination with Client infrastructure and DevOps teams
 - Test workspaces and sample Terraform configurations provided by Vendor
 - Policy compliance validation against business-defined acceptance criteria
@@ -550,6 +610,9 @@ The implementation follows a **progressive migration** strategy where workspaces
 The cutover will be coordinated with Client infrastructure teams with documented rollback procedures available for each migration wave if critical issues arise.
 
 ## Cutover Checklist
+
+The following checklist will guide the cutover execution:
+
 - Pre-migration validation: Complete workspace inventory and state file integrity checks
 - Terraform Enterprise platform validated and monitoring operational
 - Vault integration tested with dynamic AWS credential generation
@@ -564,6 +627,9 @@ The cutover will be coordinated with Client infrastructure teams with documented
 - Daily monitoring during hypercare period (4 weeks)
 
 ## Rollback Strategy
+
+Comprehensive rollback procedures in case of critical issues:
+
 - Documented rollback triggers (persistent run failures, state corruption, data loss, security incident)
 - Rollback procedures: Restore Terraform OSS state files to original S3/local locations, revert workspace configurations
 - Root cause analysis and platform fixes required before migration retry
@@ -577,6 +643,9 @@ The cutover will be coordinated with Client infrastructure teams with documented
 # Handover & Support
 
 ## Handover Artifacts
+
+The following artifacts will be delivered upon project completion:
+
 - As-built documentation including architecture diagrams, platform configurations, and network topology
 - Sentinel policy library with detailed documentation on policy logic, enforcement rules, and exceptions
 - Workspace organization documentation with naming conventions, team assignments, and RBAC model
@@ -587,6 +656,9 @@ The cutover will be coordinated with Client infrastructure teams with documented
 - Integration documentation for VCS, CI/CD, monitoring, and HashiCorp Vault
 
 ## Knowledge Transfer
+
+Knowledge transfer ensures the Client team can effectively operate the solution:
+
 - Live knowledge transfer sessions for platform administrators and infrastructure teams (2 full-day sessions)
 - Terraform Enterprise administration training covering workspace management, RBAC, VCS integration, and monitoring
 - Sentinel policy development training with hands-on exercises for creating and testing policies
@@ -638,6 +710,9 @@ Post-hypercare, Client may transition to ongoing managed services:
 ## Assumptions
 
 ### General Assumptions
+
+This engagement is based on the following general assumptions:
+
 - Client will provide access to AWS environment with appropriate permissions for Terraform Enterprise deployment
 - Existing Terraform code is compatible with Terraform Enterprise (Terraform version 0.12+)
 - Client technical team will be available for requirements validation, workspace migration support, and approvals
@@ -652,6 +727,9 @@ Post-hypercare, Client may transition to ongoing managed services:
 ## Dependencies
 
 ### Project Dependencies
+
+The following dependencies must be satisfied for successful project execution:
+
 - AWS Access: Client provides AWS account access with appropriate permissions for EKS, RDS, S3, KMS, IAM provisioning
 - Terraform Code: Client provides existing Terraform configurations and state files for migration assessment
 - VCS Access: GitHub repository access and webhook configuration permissions for automated runs
@@ -669,9 +747,13 @@ Post-hypercare, Client may transition to ongoing managed services:
 
 # Investment Summary
 
+This section provides a comprehensive overview of the engagement investment:
+
 **Small Scope Implementation:** This pricing reflects a department-level deployment designed for 50 Terraform workspaces managing AWS infrastructure with 25 platform users and comprehensive governance. For larger enterprise deployments, please request medium or large scope pricing.
 
 ## Total Investment
+
+The following table provides a comprehensive overview of the total investment required for this engagement:
 
 <!-- BEGIN COST_SUMMARY_TABLE -->
 <!-- TABLE_CONFIG: widths=[20, 12, 18, 14, 12, 11, 13] -->
@@ -745,6 +827,8 @@ Post-hypercare, Client may transition to ongoing managed services:
 
 ## Invoicing & Expenses
 
+Invoicing and expense policies for this engagement:
+
 ### Invoicing
 - Milestone-based invoicing per Payment Terms above
 - Net 30 payment terms
@@ -768,33 +852,54 @@ Post-hypercare, Client may transition to ongoing managed services:
 All services will be delivered in accordance with the executed Master Services Agreement (MSA) or equivalent contractual document between Vendor and Client.
 
 ## Scope Changes
+
+Change control procedures for this engagement:
+
 - Changes to workspace count, policy requirements, AWS scope, or timeline require formal change requests
 - Change requests may impact project timeline and budget
 
 ## Intellectual Property
+
+Intellectual property rights are defined as follows:
+
 - Client retains ownership of all Terraform configurations, infrastructure code, and business data
 - Vendor retains ownership of proprietary Terraform Enterprise implementation methodologies and frameworks
 - Sentinel policies and platform configurations become Client property upon final payment
 - Terraform Enterprise infrastructure code and configurations transfer to Client
 
 ## Service Levels
+
+Service level commitments for this engagement:
+
 - Platform uptime: 99.9% measured monthly
 - 30-day warranty on all deliverables from go-live date
 - Post-warranty support available under separate managed services agreement
 
 ## Liability
+
+Liability terms and limitations:
+
 - Performance guarantees apply only to platform components within Vendor control
 - HashiCorp Terraform Enterprise product functionality and availability governed by HashiCorp SLAs
 - Liability caps as agreed in MSA
 
 ## Confidentiality
+
+Confidentiality obligations for both parties:
+
 - Both parties agree to maintain strict confidentiality of business data, infrastructure configurations, and proprietary implementation methodologies
 - All exchanged artifacts under NDA protection
 
 ## Termination
+
+Termination provisions for this engagement:
+
 - Mutually terminable per MSA terms, subject to payment for completed work
 
 ## Governing Law
+
+This agreement shall be governed by the laws of [State/Region].
+
 - Agreement governed under the laws of [State/Region]
 
 ---

@@ -39,6 +39,9 @@ This section outlines [Client Name]'s current security posture, the strategic bu
 - **Security Debt:** Estimated $2M+ in accumulated security debt across legacy codebases
 
 ## Business Objectives
+
+The following objectives define the key business outcomes this engagement will deliver:
+
 - **Shift Security Left:** Implement automated security scanning in pull requests using CodeQL, secret scanning, and Dependabot to detect vulnerabilities during development before production deployment
 - **Improve Vulnerability Detection:** Achieve 95%+ vulnerability detection rate in pull requests through automated CodeQL analysis scanning for 300+ CWE patterns across all programming languages
 - **Prevent Secret Leaks:** Eliminate credential exposure with real-time secret scanning and push protection, preventing API keys and passwords from reaching repositories
@@ -47,6 +50,9 @@ This section outlines [Client Name]'s current security posture, the strategic bu
 - **Accelerate Secure Development:** Enable developers to fix security issues during development instead of post-deployment, reducing remediation costs by 100x
 
 ## Success Metrics
+
+The following metrics will be used to measure project success:
+
 - 95%+ of vulnerabilities detected in pull requests before merge
 - Zero secret leaks to production repositories in 12 months
 - 70% reduction in security remediation costs within 12 months
@@ -214,6 +220,8 @@ This section provides a comprehensive view of all project deliverables, their du
 
 ## Deliverables
 
+The following table summarizes the key deliverables for this engagement:
+
 <!-- TABLE_CONFIG: widths=[8, 40, 12, 20, 20] -->
 | # | Deliverable | Type | Due Date | Acceptance By |
 |---|--------------------------------------|--------------|--------------|-----------------|
@@ -234,6 +242,8 @@ This section provides a comprehensive view of all project deliverables, their du
 ---
 
 ## Project Milestones
+
+The following milestones represent key checkpoints throughout the project lifecycle:
 
 <!-- TABLE_CONFIG: widths=[20, 50, 30] -->
 | Milestone | Description | Target Date |
@@ -275,6 +285,8 @@ The following RACI matrix clarifies decision-making authority and task ownership
 **Legend:** R = Responsible | A = Accountable | C = Consulted | I = Informed
 
 ## Key Personnel
+
+The following personnel will be assigned to this engagement:
 
 **Vendor Team:**
 - EO Project Manager: Overall delivery accountability
@@ -325,6 +337,8 @@ Key architectural components include:
 - Integration Layer (GitHub Actions, SIEM, Issue Tracking, Notifications)
 
 ## Scope Specifications
+
+This engagement is scoped according to the following specifications:
 
 **GitHub Platform:**
 - GitHub Enterprise Cloud with Advanced Security enabled
@@ -402,11 +416,16 @@ All repositories protected through organization-wide security policies:
 The implementation approach follows GitHub Advanced Security best practices and proven methodologies for DevSecOps adoption.
 
 ## Example Implementation Patterns
+
+The following patterns will guide the implementation approach:
+
 - Phased rollout: Pilot with 5-10 repositories, then expand organization-wide
 - Parallel processing: Run GHAS alongside existing security tools before full cutover
 - Iterative tuning: Continuous CodeQL query refinement based on false positive feedback
 
 ## Tooling Overview
+
+The following table outlines the recommended tooling stack for this implementation:
 
 <!-- TABLE_CONFIG: widths=[25, 35, 40] -->
 | Category | Primary Tools | Purpose |
@@ -424,6 +443,9 @@ The implementation approach follows GitHub Advanced Security best practices and 
 ## Data Management
 
 ### Data Strategy
+
+The data management approach follows industry best practices:
+
 - Security scanning results stored in GitHub Security tab per repository
 - Alert data retained according to GitHub retention policies
 - Custom CodeQL queries version-controlled in dedicated repository
@@ -447,6 +469,9 @@ The implementation approach follows GitHub Advanced Security best practices and 
 The implementation and target environment will be architected and validated to meet the Client's security, compliance, and governance requirements. Vendor will adhere to industry-standard security frameworks and GitHub Advanced Security best practices.
 
 ## Identity & Access Management
+
+The solution implements comprehensive identity and access controls:
+
 - SAML SSO integration with existing identity provider
 - GitHub organization and team-based access control
 - Role-based access for security policies (administrators, security team, developers)
@@ -454,6 +479,9 @@ The implementation and target environment will be architected and validated to m
 - Service accounts for SIEM and issue tracking integrations
 
 ## Monitoring & Threat Detection
+
+Security monitoring capabilities include:
+
 - GitHub audit log monitoring for security policy changes
 - Security alert monitoring via GitHub Security Overview dashboard
 - SIEM integration for centralized security event analysis
@@ -461,6 +489,9 @@ The implementation and target environment will be architected and validated to m
 - Integration with existing SOC for incident response
 
 ## Compliance & Auditing
+
+The solution supports the following compliance frameworks:
+
 - SOC 2 compliance: GitHub Enterprise Cloud is SOC 2 Type II certified
 - PCI-DSS compliance: Automated code scanning satisfies secure coding requirements
 - HIPAA compliance: Security controls for protected health information in code
@@ -468,6 +499,9 @@ The implementation and target environment will be architected and validated to m
 - Continuous compliance monitoring via automated scanning
 
 ## Encryption & Key Management
+
+Data protection is implemented through encryption at all layers:
+
 - Code scanned in ephemeral environments (not persisted outside GitHub)
 - All data encrypted in transit using TLS 1.2+
 - Alert data encrypted at rest in GitHub's infrastructure
@@ -475,6 +509,9 @@ The implementation and target environment will be architected and validated to m
 - GitHub-managed encryption keys (no client key management required)
 
 ## Governance
+
+Governance processes ensure consistent management of the solution:
+
 - Change control: Security policy changes require approval workflow
 - CodeQL query governance: Custom queries code-reviewed and version-controlled
 - Access reviews: Quarterly review of GitHub organization and team access
@@ -494,6 +531,9 @@ The implementation and target environment will be architected and validated to m
 | Production | Production code repositories | [Org Name] | All developers, security team |
 
 ### Access Policies
+
+Access control policies are defined as follows:
+
 - SAML SSO required for all GitHub access
 - Multi-factor authentication (MFA) enforced for all users
 - Organization Owner Access: Full GitHub administration (limited to 2-3 administrators)
@@ -510,6 +550,9 @@ The implementation and target environment will be architected and validated to m
 Comprehensive testing and validation will take place throughout the implementation lifecycle to ensure functionality, performance, security, and accuracy of the GitHub Advanced Security solution.
 
 ## Functional Validation
+
+Functional testing ensures all features work as designed:
+
 - End-to-end code scanning workflow validation for all languages
 - CodeQL vulnerability detection accuracy against known CVE database
 - Secret scanning detection rate validation with test secrets
@@ -518,12 +561,18 @@ Comprehensive testing and validation will take place throughout the implementati
 - Security dashboard and reporting functionality
 
 ## Performance & Load Testing
+
+Performance validation ensures the solution meets SLA requirements:
+
 - Pull request scan duration validation (<15 minutes target)
 - Concurrent pull request scanning capacity testing
 - Repository-wide scan performance for large codebases
 - SIEM integration latency and throughput testing
 
 ## Security Testing
+
+Security validation ensures protection against threats:
+
 - CodeQL detection coverage validation (95%+ target)
 - False positive rate measurement and tuning
 - Secret scanning accuracy with partner and custom patterns
@@ -531,12 +580,18 @@ Comprehensive testing and validation will take place throughout the implementati
 - Audit logging completeness verification
 
 ## Integration Testing
+
+Integration testing validates connectivity and data flow between systems:
+
 - GitHub Actions workflow integration validation
 - SIEM integration (Splunk, Azure Sentinel) data flow testing
 - Issue tracking integration (JIRA, ServiceNow) ticket creation
 - Notification delivery (Slack, Teams, Email, PagerDuty)
 
 ## User Acceptance Testing (UAT)
+
+UAT is performed in coordination with Client business stakeholders:
+
 - Performed in coordination with Client security team and developers
 - Pilot repositories and sample vulnerabilities provided by Vendor
 - Detection accuracy validation against business-defined acceptance criteria
@@ -572,6 +627,9 @@ The implementation follows a **pilot-validate-expand** strategy where GHAS is fi
 4. **Hypercare Period (4 weeks post-rollout):** Daily monitoring, rapid issue resolution, and optimization to ensure stable security operations.
 
 ## Rollout Checklist
+
+The following checklist will guide the rollout execution:
+
 - Pre-rollout validation: Pilot repository results meet 95%+ detection accuracy
 - CodeQL queries tuned for acceptable false positive rate (<10%)
 - Security policies configured and tested
@@ -583,6 +641,9 @@ The implementation follows a **pilot-validate-expand** strategy where GHAS is fi
 - Daily monitoring during hypercare period (4 weeks)
 
 ## Rollback Strategy
+
+Comprehensive rollback procedures in case of critical issues:
+
 - Documented rollback triggers (excessive false positives, performance issues, critical bugs)
 - Rollback procedures: Disable GHAS for affected repositories, revert to existing security tools
 - Root cause analysis and resolution before retry
@@ -598,6 +659,9 @@ The implementation follows a **pilot-validate-expand** strategy where GHAS is fi
 This section outlines the knowledge transfer approach, handover artifacts, post-implementation support model, and optional managed services transition to ensure successful operational ownership by the Client team.
 
 ## Handover Artifacts
+
+The following artifacts will be delivered upon project completion:
+
 - As-Built documentation including architecture diagrams and GHAS configuration
 - Custom CodeQL query library with documentation and usage examples
 - Operations runbook with alert triage and remediation procedures
@@ -606,6 +670,9 @@ This section outlines the knowledge transfer approach, handover artifacts, post-
 - Security champion playbook and enablement materials
 
 ## Knowledge Transfer
+
+Knowledge transfer ensures the Client team can effectively operate the solution:
+
 - Live knowledge transfer sessions for security team and administrators
 - GHAS administration training (security policies, custom queries, alert management)
 - CodeQL query development workshop for advanced customization
@@ -654,6 +721,9 @@ Post-hypercare, Client may transition to ongoing managed services:
 ## Assumptions
 
 ### General Assumptions
+
+This engagement is based on the following general assumptions:
+
 - Client has GitHub Enterprise Cloud subscription or will procure as part of this engagement
 - All source code repositories are hosted on GitHub (or will be migrated)
 - Development teams use pull request workflows for code review
@@ -671,6 +741,9 @@ Post-hypercare, Client may transition to ongoing managed services:
 ## Dependencies
 
 ### Project Dependencies
+
+The following dependencies must be satisfied for successful project execution:
+
 - GitHub Organization Access: Client provides GitHub organization owner access for GHAS configuration
 - Repository Inventory: Complete list of repositories requiring security scanning
 - Language Inventory: Documentation of all programming languages and frameworks in use
@@ -688,9 +761,13 @@ Post-hypercare, Client may transition to ongoing managed services:
 
 # Investment Summary
 
+This section provides a comprehensive overview of the engagement investment:
+
 **Medium Scope Implementation:** This pricing reflects an enterprise deployment designed for 100 developers with 200 repositories across multiple programming languages. For smaller team deployments or larger enterprise-wide rollouts, please request small or large scope pricing.
 
 ## Total Investment
+
+The following table provides a comprehensive overview of the total investment required for this engagement:
 
 <!-- BEGIN COST_SUMMARY_TABLE -->
 <!-- TABLE_CONFIG: widths=[20, 12, 18, 14, 12, 11, 13] -->
@@ -753,6 +830,8 @@ Post-hypercare, Client may transition to ongoing managed services:
 
 ## Invoicing & Expenses
 
+Invoicing and expense policies for this engagement:
+
 ### Invoicing
 - Milestone-based invoicing per Payment Terms above
 - Net 30 payment terms
@@ -777,35 +856,56 @@ This section defines the contractual terms governing this engagement, including 
 All services will be delivered in accordance with the executed Master Services Agreement (MSA) or equivalent contractual document between Vendor and Client.
 
 ## Scope Changes
+
+Change control procedures for this engagement:
+
 - Changes to repository count, language support, or integration scope require formal change requests
 - Change requests may impact project timeline and budget
 
 ## Intellectual Property
+
+Intellectual property rights are defined as follows:
+
 - Client retains ownership of all source code and security vulnerability data
 - Vendor retains ownership of proprietary security methodologies and frameworks
 - Custom CodeQL queries become Client property upon final payment
 - GHAS configurations and security policies transfer to Client
 
 ## Service Levels
+
+Service level commitments for this engagement:
+
 - Vulnerability detection accuracy: 95%+ on production codebases
 - Pull request scan duration: <15 minutes for typical repositories
 - 30-day warranty on all deliverables from go-live date
 - Post-warranty support available under separate managed services agreement
 
 ## Liability
+
+Liability terms and limitations:
+
 - Detection accuracy guarantees apply only to languages and vulnerability types supported by CodeQL
 - False positive rates may vary based on codebase complexity and patterns
 - Ongoing query tuning recommended as code patterns evolve
 - Liability caps as agreed in MSA
 
 ## Confidentiality
+
+Confidentiality obligations for both parties:
+
 - Both parties agree to maintain strict confidentiality of source code, vulnerability data, and proprietary security techniques
 - All exchanged artifacts under NDA protection
 
 ## Termination
+
+Termination provisions for this engagement:
+
 - Mutually terminable per MSA terms, subject to payment for completed work
 
 ## Governing Law
+
+This agreement shall be governed by the laws of [State/Region].
+
 - Agreement governed under the laws of [State/Region]
 
 ---

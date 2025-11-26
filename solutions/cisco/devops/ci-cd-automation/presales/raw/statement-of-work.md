@@ -1,5 +1,4 @@
 ---
-# Document Metadata (Simplified)
 document_title: Statement of Work
 technology_provider: Cisco Systems
 project_name: Cisco Network CI/CD Automation
@@ -36,6 +35,8 @@ This Statement of Work (SOW) defines the scope, deliverables, roles, and terms f
 
 ## Business Objectives
 
+The following objectives define the key business outcomes this engagement will deliver:
+
 - **Eliminate Manual Errors:** Reduce configuration error rate from 15% to under 2% through automated validation
 - **Accelerate Provisioning:** Enable 95% faster device provisioning (15 minutes vs 4-6 hours) with zero-touch deployment
 - **Achieve Compliance:** Implement complete Git audit trails meeting PCI DSS and compliance requirements
@@ -44,6 +45,8 @@ This Statement of Work (SOW) defines the scope, deliverables, roles, and terms f
 - **Reduce Labor Costs:** Save $47K annually through automated deployment and reduced troubleshooting
 
 ## Success Metrics
+
+Success will be measured against the following quantifiable metrics:
 
 - 85% reduction in configuration errors (15% → <2%)
 - 95% faster device provisioning (4-6 hours → 15 minutes)
@@ -56,6 +59,8 @@ This Statement of Work (SOW) defines the scope, deliverables, roles, and terms f
 # Scope of Work
 
 ## In Scope
+
+The following items are included within the scope of this engagement:
 
 - Network automation assessment and tool selection
 - GitLab deployment and CI/CD runner infrastructure
@@ -221,6 +226,8 @@ The following RACI matrix defines responsibility assignments for key project act
 
 ## Key Personnel
 
+The following personnel will be assigned to this engagement:
+
 **Vendor Team:**
 - EO Project Manager: Overall delivery accountability
 - EO Quarterback: Technical design and architecture oversight
@@ -238,6 +245,8 @@ The following RACI matrix defines responsibility assignments for key project act
 # Architecture & Design
 
 ## Architecture Overview
+
+The following diagram illustrates the high-level architecture for the proposed solution:
 
 ![Solution Architecture](../../assets/diagrams/architecture-diagram.png)
 
@@ -287,6 +296,8 @@ The deployment follows a crawl-walk-run approach:
 
 ## Identity & Access Management
 
+Identity and access controls ensure secure operations:
+
 - Role-based access control (RBAC) in GitLab
 - SSH key-based authentication for Git operations
 - Multi-factor authentication (MFA) for privileged access
@@ -294,12 +305,16 @@ The deployment follows a crawl-walk-run approach:
 
 ## Secrets Management
 
+Secrets and credentials are managed through secure mechanisms:
+
 - HashiCorp Vault or GitLab secrets for credentials
 - Encrypted secrets at rest and in-transit
 - Automatic credential rotation
 - Audit logging for all secret access
 
 ## Compliance & Auditing
+
+The solution addresses the following compliance and audit requirements:
 
 - Complete Git audit trail (who, what, when, why)
 - Change tracking and approval workflows
@@ -382,6 +397,8 @@ Upon successful implementation:
 
 ## Knowledge Transfer
 
+Knowledge transfer ensures the Client team can effectively manage and operate the solution:
+
 **Training Sessions:**
 - 40 hours of hands-on training
 - Ansible fundamentals and best practices
@@ -414,6 +431,8 @@ Upon successful implementation:
 ## Assumptions
 
 ### General Assumptions
+
+The following general assumptions apply to this engagement:
 
 **Client Responsibilities:**
 - Client will provide access to network devices and lab environment
@@ -462,6 +481,8 @@ The following table summarizes the total cost of ownership for this engagement a
 
 ## Payment Terms
 
+This section outlines the pricing model and payment schedule for the engagement:
+
 **Pricing Model:** Fixed price with milestone-based payments
 
 **Payment Schedule:**
@@ -486,11 +507,15 @@ Any changes to scope, schedule, or cost require a formal Change Request approved
 
 ## Intellectual Property
 
+Intellectual property rights are allocated as follows:
+
 - Client retains ownership of playbooks, templates, and configurations
 - Vendor retains proprietary methodologies and accelerators
 - Open source tools used under their respective licenses
 
 ## Confidentiality
+
+Confidentiality obligations govern information exchanged during this engagement:
 
 - All artifacts under NDA protection
 - Client credentials and data secured per security requirements

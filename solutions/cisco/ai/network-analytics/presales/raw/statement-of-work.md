@@ -1,5 +1,4 @@
 ---
-# Document Metadata (Simplified)
 document_title: Statement of Work
 technology_provider: Cisco Systems
 project_name: Cisco DNA Center Network Analytics
@@ -36,6 +35,8 @@ This Statement of Work (SOW) defines the scope, deliverables, roles, and terms f
 
 ## Business Objectives
 
+The following objectives define the key business outcomes this engagement will deliver:
+
 - **Transform to Proactive Operations:** Deploy AI-powered analytics to predict network failures 14 days in advance, reducing unplanned downtime by 90%
 - **Reduce Troubleshooting Time:** Achieve 75% reduction in mean time to repair (MTTR) from 4-6 hours to under 1 hour through AI root cause analysis
 - **Automate Device Provisioning:** Enable zero-touch provisioning reducing switch deployment time from 4 hours to 15 minutes
@@ -44,6 +45,8 @@ This Statement of Work (SOW) defines the scope, deliverables, roles, and terms f
 - **Operational Efficiency:** Reduce network management overhead by 60% through centralized DNA Center orchestration
 
 ## Success Metrics
+
+Success will be measured against the following quantifiable metrics:
 
 - 75% reduction in network troubleshooting time (MTTR < 1 hour)
 - 99.9% network uptime SLA achievement
@@ -56,6 +59,8 @@ This Statement of Work (SOW) defines the scope, deliverables, roles, and terms f
 # Scope of Work
 
 ## In Scope
+
+The following items are included within the scope of this engagement:
 
 - Network discovery and assessment of 200 devices
 - DNA Center appliance deployment with HA configuration
@@ -219,6 +224,8 @@ The following RACI matrix defines responsibility assignments for key project act
 
 ## Key Personnel
 
+The following personnel will be assigned to this engagement:
+
 **Vendor Team:**
 - EO Project Manager: Overall delivery accountability
 - EO Quarterback: Technical design and architecture oversight
@@ -236,6 +243,8 @@ The following RACI matrix defines responsibility assignments for key project act
 # Architecture & Design
 
 ## Architecture Overview
+
+The following diagram illustrates the high-level architecture for the proposed solution:
 
 ![Solution Architecture](../../assets/diagrams/architecture-diagram.png)
 
@@ -371,6 +380,8 @@ The deployment follows a phased approach with pilot validation:
 
 ## Identity & Access Management
 
+Identity and access controls ensure secure operations:
+
 - Role-based access control (RBAC) for DNA Center administrators
 - Active Directory integration with LDAP for authentication
 - Multi-factor authentication (MFA) for privileged access
@@ -378,12 +389,16 @@ The deployment follows a phased approach with pilot validation:
 
 ## Monitoring & Threat Detection
 
+Comprehensive monitoring ensures security visibility across the infrastructure:
+
 - Real-time security monitoring through DNA Center assurance
 - Encrypted management protocols (SSH, HTTPS, NETCONF/TLS)
 - Anomaly detection for unusual device or network behavior
 - Integration with SIEM for security analytics (optional)
 
 ## Compliance & Auditing
+
+The solution addresses the following compliance and audit requirements:
 
 - Configuration compliance validation against baselines
 - Automated drift detection and remediation
@@ -397,6 +412,8 @@ The deployment follows a phased approach with pilot validation:
 - Automated compliance remediation
 
 ## Encryption & Key Management
+
+Data protection is ensured through comprehensive encryption controls:
 
 - TLS 1.2+ for all DNA Center communications
 - SSH for device management
@@ -604,6 +621,8 @@ This section provides a comprehensive overview of the total investment required 
 
 ## Payment Terms
 
+This section outlines the pricing model and payment schedule for the engagement:
+
 **Pricing Model:** Fixed price with milestone-based payments
 
 **Payment Schedule:**
@@ -628,11 +647,15 @@ Any changes to scope, schedule, or cost require a formal Change Request approved
 
 ## Intellectual Property
 
+Intellectual property rights are allocated as follows:
+
 - Client retains ownership of all deliverables, configurations, and documentation
 - Vendor retains proprietary methodologies, tools, and accelerators
 - Pre-existing IP remains with original owner
 
 ## Confidentiality
+
+Confidentiality obligations govern information exchanged during this engagement:
 
 - All exchanged artifacts under NDA protection
 - Client data handled per security requirements

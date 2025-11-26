@@ -36,6 +36,9 @@ This Statement of Work (SOW) defines the scope, deliverables, roles, and terms f
 - **Inefficient Utilization:** Cloud GPU utilization averaging 30% due to manual allocation and job scheduling
 
 ## Business Objectives
+
+The following objectives define the key business outcomes this engagement will deliver:
+
 - **Deploy GPU Cluster:** Implement 8-server GPU cluster with 32 A100 40GB GPUs for distributed AI training and inference workloads
 - **Enable MLOps Workflows:** Deploy Kubernetes with NVIDIA GPU Operator for containerized AI workflows, automated scaling, and production model serving
 - **Reduce Costs:** Replace cloud GPU spending with owned infrastructure, achieving ROI in 2.4 years vs AWS p3.8xlarge baseline
@@ -44,6 +47,9 @@ This Statement of Work (SOW) defines the scope, deliverables, roles, and terms f
 - **Standardize Platform:** Establish standardized MLOps platform with Kubeflow, MLflow, and Triton Inference Server for team-wide adoption
 
 ## Success Metrics
+
+The following metrics will be used to measure project success:
+
 - 32 A100 GPUs operational with Kubernetes orchestration
 - Reduce model training time by 10x vs CPU baseline (BERT model: 3 days to 7 hours)
 - Achieve 80%+ GPU utilization across data science team
@@ -274,6 +280,8 @@ The following matrix defines roles and responsibilities for all major project ac
 
 ## Key Personnel
 
+The following personnel will be assigned to this engagement:
+
 **Vendor Team:**
 - EO Project Manager: Overall delivery accountability
 - EO Quarterback: Technical design and oversight
@@ -320,6 +328,8 @@ Key architectural components include:
 - Observability Layer (Prometheus, Grafana, ELK stack)
 
 ## Scope Specifications
+
+This engagement is scoped according to the following specifications:
 
 **Compute & GPU Performance:**
 - 8x GPU servers (Dell R750xa or HPE DL380 Gen11)
@@ -408,6 +418,9 @@ All critical data and configurations are protected through:
 The implementation approach follows Kubernetes and NVIDIA GPU best practices for enterprise GPU clusters.
 
 ## Example Implementation Patterns
+
+The following patterns will guide the implementation approach:
+
 - Phased deployment: Install infrastructure first, then Kubernetes, then MLOps tools
 - Namespace isolation: Separate namespaces for dev, staging, production
 - GitOps: All configurations managed via Git with automated deployment
@@ -435,6 +448,9 @@ The following tools and technologies will be deployed as part of the GPU Compute
 ## Data Management
 
 ### Data Strategy
+
+The data management approach follows industry best practices:
+
 - Shared NFS storage for datasets accessible from all GPU nodes
 - Model registry in MLflow for versioned model artifacts
 - Container registry for Docker images
@@ -457,6 +473,9 @@ The following tools and technologies will be deployed as part of the GPU Compute
 The implementation and target environment will be architected and validated to meet the Client's security, compliance, and governance requirements. Vendor will adhere to industry-standard security frameworks and Kubernetes best practices.
 
 ## Identity & Access Management
+
+The solution implements comprehensive identity and access controls:
+
 - LDAP/Active Directory integration via OAuth2 proxy
 - Kubernetes RBAC for namespace and resource access control
 - Multi-factor authentication (MFA) for cluster access
@@ -464,6 +483,9 @@ The implementation and target environment will be architected and validated to m
 - Isolated user namespaces with resource quotas
 
 ## Monitoring & Threat Detection
+
+Security monitoring capabilities include:
+
 - Centralized logging for all Kubernetes and application events
 - Network policies for pod-to-pod communication control
 - Automated alerts for unauthorized access attempts
@@ -471,6 +493,9 @@ The implementation and target environment will be architected and validated to m
 - Regular security patch management and CVE scanning
 
 ## Compliance & Auditing
+
+The solution supports the following compliance frameworks:
+
 - SOC 2 certified infrastructure components
 - Data residency controls for regulatory compliance
 - Comprehensive audit trail for all cluster access and GPU usage
@@ -478,6 +503,9 @@ The implementation and target environment will be architected and validated to m
 - Documented security policies and procedures
 
 ## Encryption & Key Management
+
+Data protection is implemented through encryption at all layers:
+
 - TLS 1.3 encryption for all Kubernetes API communications
 - Encryption at rest for storage volumes
 - Secrets management via Kubernetes secrets or Vault
@@ -485,6 +513,9 @@ The implementation and target environment will be architected and validated to m
 - Regular encryption key rotation
 
 ## Governance
+
+Governance processes ensure consistent management of the solution:
+
 - Change control: All infrastructure changes via GitOps pull requests
 - Resource quotas: GPU allocation policies per namespace/team
 - Access reviews: Quarterly review of user access and permissions
@@ -504,6 +535,9 @@ The implementation and target environment will be architected and validated to m
 | Production | Production model serving | Kubernetes namespace (prod) | All authorized users |
 
 ### Access Policies
+
+Access control policies are defined as follows:
+
 - Multi-factor authentication (MFA) required for cluster access
 - SSH key-based authentication for server access
 - Administrator Access: Full cluster access for infrastructure team
@@ -520,6 +554,9 @@ The implementation and target environment will be architected and validated to m
 Comprehensive testing and validation will take place throughout the implementation lifecycle to ensure functionality, performance, security, and reliability of the GPU cluster.
 
 ## Functional Validation
+
+Functional testing ensures all features work as designed:
+
 - End-to-end training workflow validation via Kubeflow
 - Multi-GPU distributed training functionality
 - GPU scheduling and time-slicing validation
@@ -528,6 +565,9 @@ Comprehensive testing and validation will take place throughout the implementati
 - User authentication and RBAC validation
 
 ## Performance & Load Testing
+
+Performance validation ensures the solution meets SLA requirements:
+
 - Single-GPU and multi-GPU performance benchmarking
 - Distributed training scaling (up to 32 GPUs)
 - Network bandwidth and RDMA performance validation
@@ -536,6 +576,9 @@ Comprehensive testing and validation will take place throughout the implementati
 - Inference performance testing with Triton
 
 ## Security Testing
+
+Security validation ensures protection against threats:
+
 - Access control and authentication validation
 - Network policy and namespace isolation testing
 - Encryption validation (data at rest and in transit)
@@ -543,6 +586,9 @@ Comprehensive testing and validation will take place throughout the implementati
 - Compliance validation (SOC2, data residency)
 
 ## Disaster Recovery & Resilience Tests
+
+DR testing validates backup and recovery capabilities:
+
 - Kubernetes node failure and pod rescheduling
 - Storage failover and RAID rebuild testing
 - GPU server failure and workload recovery
@@ -550,6 +596,9 @@ Comprehensive testing and validation will take place throughout the implementati
 - Kubernetes cluster upgrade testing
 
 ## User Acceptance Testing (UAT)
+
+UAT is performed in coordination with Client business stakeholders:
+
 - Performed in coordination with Client data science team
 - Real AI workloads executed on GPU cluster
 - Performance validation against baseline
@@ -589,6 +638,9 @@ The implementation follows a **parallel processing** strategy where the new GPU 
 4. **Hypercare Period (4 weeks post-cutover):** Daily monitoring, rapid issue resolution, and workflow optimization.
 
 ## Cutover Checklist
+
+The following checklist will guide the cutover execution:
+
 - Pre-cutover validation: Performance benchmarks passed, UAT sign-off
 - Kubernetes cluster validated and monitoring operational
 - Fallback procedures documented (cloud GPU access maintained)
@@ -599,6 +651,9 @@ The implementation follows a **parallel processing** strategy where the new GPU 
 - Daily monitoring during hypercare period (4 weeks)
 
 ## Rollback Strategy
+
+Comprehensive rollback procedures in case of critical issues:
+
 - Documented rollback triggers (cluster instability, GPU failures, performance issues)
 - Rollback procedures: Redirect workloads to cloud GPU instances
 - Root cause analysis and fix validation before retry
@@ -612,6 +667,9 @@ The implementation follows a **parallel processing** strategy where the new GPU 
 # Handover & Support
 
 ## Handover Artifacts
+
+The following artifacts will be delivered upon project completion:
+
 - As-Built documentation including architecture diagrams, Kubernetes configs, and network topology
 - GPU cluster operations runbook with troubleshooting procedures
 - Kubernetes administration guide and best practices
@@ -620,6 +678,9 @@ The implementation follows a **parallel processing** strategy where the new GPU 
 - Performance optimization recommendations
 
 ## Knowledge Transfer
+
+Knowledge transfer ensures the Client team can effectively operate the solution:
+
 - Live knowledge transfer sessions for administrators and data scientists
 - Kubernetes cluster administration training
 - GPU Operator and device plugin configuration
@@ -672,6 +733,9 @@ Post-hypercare, Client may transition to ongoing managed services:
 ## Assumptions
 
 ### General Assumptions
+
+This engagement is based on the following general assumptions:
+
 - Datacenter facility has adequate power and cooling capacity
 - Physical space for 8 GPU servers in standard server racks is available
 - Network infrastructure supports 100 GbE connectivity
@@ -686,6 +750,9 @@ Post-hypercare, Client may transition to ongoing managed services:
 ## Dependencies
 
 ### Project Dependencies
+
+The following dependencies must be satisfied for successful project execution:
+
 - Datacenter Readiness: Power, cooling, and space prepared before hardware delivery
 - Hardware Procurement: GPU servers ordered with 8-10 week lead time
 - Network Infrastructure: 100 GbE network infrastructure in place
@@ -702,6 +769,8 @@ Post-hypercare, Client may transition to ongoing managed services:
 ---
 
 # Investment Summary
+
+This section provides a comprehensive overview of the engagement investment:
 
 **Mid-Scale GPU Cluster Deployment:** This pricing reflects a mid-scale GPU cluster with 32 A100 GPUs designed for distributed training and MLOps supporting 20-25 data scientists. Total capacity: 5 petaFLOPS FP16, 1.3 TB GPU memory, 200 TB storage.
 
@@ -777,6 +846,8 @@ The table below summarizes the total investment required across all cost categor
 
 ## Invoicing & Expenses
 
+Invoicing and expense policies for this engagement:
+
 ### Invoicing
 - Milestone-based invoicing per Payment Terms above
 - Net 30 payment terms
@@ -800,37 +871,58 @@ The table below summarizes the total investment required across all cost categor
 All services will be delivered in accordance with the executed Master Services Agreement (MSA) or equivalent contractual document between Vendor and Client.
 
 ## Scope Changes
+
+Change control procedures for this engagement:
+
 - Changes to GPU count, server specifications, or timeline require formal change requests
 - Hardware lead times (8-10 weeks) may impact change request feasibility
 - Change requests may impact project timeline and budget
 
 ## Intellectual Property
+
+Intellectual property rights are defined as follows:
+
 - Client retains ownership of all training data, models, and applications
 - Vendor retains ownership of proprietary deployment methodologies
 - NVIDIA retains ownership of software and tools
 - Custom configurations and scripts transfer to Client upon final payment
 
 ## Service Levels
+
+Service level commitments for this engagement:
+
 - GPU cluster availability: 99.5% uptime during business hours
 - Kubernetes cluster uptime: 99.5% validated
 - 30-day warranty on all deliverables from go-live date
 - Post-warranty support available under separate managed services agreement
 
 ## Liability
+
+Liability terms and limitations:
+
 - Performance guarantees apply to standard benchmark workloads
 - Custom workload performance may vary
 - Hardware warranty provided by Dell/HPE/NetApp per standard terms
 - Liability caps as agreed in MSA
 
 ## Confidentiality
+
+Confidentiality obligations for both parties:
+
 - Both parties agree to maintain strict confidentiality of business data and methodologies
 - All exchanged artifacts under NDA protection
 
 ## Termination
+
+Termination provisions for this engagement:
+
 - Mutually terminable per MSA terms, subject to payment for completed work
 - Hardware procurement is non-refundable once ordered (8-10 week lead time)
 
 ## Governing Law
+
+This agreement shall be governed by the laws of [State/Region].
+
 - Agreement governed under the laws of [State/Region]
 
 ---

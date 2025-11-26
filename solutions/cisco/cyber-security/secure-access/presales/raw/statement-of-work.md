@@ -1,5 +1,4 @@
 ---
-# Document Metadata (Simplified)
 document_title: Statement of Work
 technology_provider: Cisco Systems
 project_name: Cisco ISE Secure Network Access
@@ -36,6 +35,8 @@ This Statement of Work (SOW) defines the scope, deliverables, roles, and terms f
 
 ## Business Objectives
 
+The following objectives define the key business outcomes this engagement will deliver:
+
 - **Eliminate Unauthorized Access:** Deploy 802.1X authentication achieving 100% device authentication compliance
 - **Enable Zero Trust:** Implement TrustSec micro-segmentation reducing lateral threat movement by 85%
 - **Automate BYOD:** Self-service onboarding reducing helpdesk tickets by 70% and provisioning time to 5 minutes
@@ -44,6 +45,8 @@ This Statement of Work (SOW) defines the scope, deliverables, roles, and terms f
 - **Reduce Security Incidents:** 90% reduction in network security breaches through mandatory authentication
 
 ## Success Metrics
+
+Success will be measured against the following quantifiable metrics:
 
 - 100% device authentication compliance (wired and wireless)
 - 90% reduction in unauthorized access incidents
@@ -56,6 +59,8 @@ This Statement of Work (SOW) defines the scope, deliverables, roles, and terms f
 # Scope of Work
 
 ## In Scope
+
+The following items are included within the scope of this engagement:
 
 - Network assessment for 802.1X readiness (switches and WLCs)
 - ISE appliance deployment (primary + secondary HA)
@@ -223,6 +228,8 @@ The following RACI matrix defines responsibility assignments for key project act
 
 ## Key Personnel
 
+The following personnel will be assigned to this engagement:
+
 **Vendor Team:**
 - EO Project Manager: Overall delivery accountability
 - EO Quarterback: Technical design and architecture oversight
@@ -240,6 +247,8 @@ The following RACI matrix defines responsibility assignments for key project act
 # Architecture & Design
 
 ## Architecture Overview
+
+The following diagram illustrates the high-level architecture for the proposed solution:
 
 ![Solution Architecture](../../assets/diagrams/architecture-diagram.png)
 
@@ -290,12 +299,16 @@ The deployment follows a phased rollout approach:
 
 ## Identity & Access Management
 
+Identity and access controls ensure secure operations:
+
 - 802.1X authentication with EAP-TLS or PEAP-MSCHAPv2
 - Active Directory integration for centralized identity
 - Multi-factor authentication (MFA) for administrative access to ISE
 - Role-based access control (RBAC) for ISE administrators
 
 ## Authentication Methods
+
+The solution supports the following authentication methods:
 
 - **802.1X (EAP):** Corporate users and domain-joined devices
 - **MAC Authentication Bypass (MAB):** Printers, IoT devices, legacy systems
@@ -304,12 +317,16 @@ The deployment follows a phased rollout approach:
 
 ## TrustSec Micro-Segmentation
 
+The TrustSec micro-segmentation implementation includes the following components:
+
 - Security Group Tags (SGT) for dynamic device classification
 - Policy matrix for group-based access control
 - Inline tagging on switches and enforcement at network edge
 - Scalable segmentation without VLANs
 
 ## Compliance & Auditing
+
+The solution addresses the following compliance and audit requirements:
 
 - Complete audit trail (who, what device, when, where)
 - Authentication success/failure logging
@@ -397,6 +414,8 @@ Upon successful implementation:
 
 ## Knowledge Transfer
 
+Knowledge transfer ensures the Client team can effectively manage and operate the solution:
+
 **Training Sessions:**
 - 24 hours for ISE administrators
 - 16 hours for helpdesk staff
@@ -431,6 +450,8 @@ Upon successful implementation:
 ## Assumptions
 
 ### General Assumptions
+
+The following general assumptions apply to this engagement:
 
 **Client Responsibilities:**
 - Client will provide access to switches and wireless LAN controllers
@@ -479,6 +500,8 @@ The following table summarizes the total cost of ownership for this engagement a
 
 ## Payment Terms
 
+This section outlines the pricing model and payment schedule for the engagement:
+
 **Pricing Model:** Fixed price with milestone-based payments
 
 **Payment Schedule:**
@@ -503,11 +526,15 @@ Any changes to scope, schedule, or cost require a formal Change Request approved
 
 ## Intellectual Property
 
+Intellectual property rights are allocated as follows:
+
 - Client retains ownership of all deliverables and configurations
 - Vendor retains proprietary methodologies and tools
 - Pre-existing IP remains with original owner
 
 ## Confidentiality
+
+Confidentiality obligations govern information exchanged during this engagement:
 
 - All artifacts under NDA protection
 - Client data handled per security requirements

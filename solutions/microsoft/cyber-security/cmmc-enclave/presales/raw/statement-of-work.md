@@ -1,5 +1,4 @@
 ---
-# Document Metadata
 document_title: Statement of Work
 technology_provider: Microsoft
 project_name: CMMC GCC High Enclave
@@ -37,6 +36,9 @@ This Statement of Work (SOW) defines the scope, deliverables, roles, and terms f
 - **Security Control Implementation:** Need comprehensive security baseline including CAC/PIV authentication, encryption, audit logging, and incident response
 
 ## Business Objectives
+
+The following objectives define the key business outcomes this engagement will deliver:
+
 - **Achieve CMMC Level 2 Certification:** Implement FedRAMP High cloud environment meeting all 110 NIST 800-171 security requirements enabling DoD contract pursuit
 - **Deploy GCC High Enclave:** Establish Microsoft 365 GCC High tenant with Exchange Online, SharePoint Online, Teams, and OneDrive for secure CUI collaboration
 - **Implement Azure Government Infrastructure:** Deploy Azure Government cloud infrastructure for CUI workloads with compute, storage, networking, and security services
@@ -45,6 +47,9 @@ This Statement of Work (SOW) defines the scope, deliverables, roles, and terms f
 - **Pass C3PAO Assessment:** Successfully complete independent CMMC Third-Party Assessment Organization evaluation and achieve certification
 
 ## Success Metrics
+
+The following metrics will be used to measure project success:
+
 - CMMC Level 2 certification achieved within 6 months enabling DoD contract pursuit
 - All 110 NIST 800-171 security requirements implemented and validated with automated compliance monitoring
 - 50 users onboarded to GCC High with zero CUI data loss during migration from commercial systems
@@ -273,6 +278,8 @@ The following RACI matrix defines roles and responsibilities for all major proje
 
 ## Key Personnel
 
+The following personnel will be assigned to this engagement:
+
 **Vendor Team:**
 - EO Project Manager: Overall delivery accountability and C3PAO coordination
 - EO Quarterback: Technical design and CMMC architecture oversight
@@ -318,6 +325,8 @@ Key architectural components include:
 - Compliance Layer (CMMC controls monitoring, audit logging, incident response)
 
 ## Scope Specifications
+
+This engagement is scoped according to the following specifications:
 
 **Microsoft 365 GCC High:**
 - 50 user licenses (M365 E5 GCC High)
@@ -386,6 +395,9 @@ All CUI data and configurations are protected through:
 The implementation approach follows CMMC compliance best practices and NIST 800-171 control implementation methodologies.
 
 ## Example Implementation Patterns
+
+The following patterns will guide the implementation approach:
+
 - Phased security control implementation: Identity → Encryption → Monitoring → Incident Response
 - Parallel commercial and GCC High operation during migration validation period
 - Iterative compliance validation: Internal audit before C3PAO assessment
@@ -410,6 +422,9 @@ The CMMC GCC High Enclave implementation leverages Microsoft cloud services and 
 ## Data Management
 
 ### Data Strategy
+
+The data management approach follows industry best practices:
+
 - CUI classification and labeling using Microsoft Purview sensitivity labels
 - Automated DLP policies preventing unauthorized CUI sharing
 - Email and file migration from commercial M365 with CUI validation
@@ -432,6 +447,9 @@ The CMMC GCC High Enclave implementation leverages Microsoft cloud services and 
 The implementation and target environment will be architected and validated to meet CMMC Level 2 requirements, implementing all 110 NIST 800-171 security controls. Vendor will adhere to FedRAMP High security standards and DoD cybersecurity frameworks.
 
 ## Identity & Access Management
+
+The solution implements comprehensive identity and access controls:
+
 - Azure AD GCC High with CAC/PIV smart card authentication (NIST 800-171 IA family)
 - Multi-factor authentication (MFA) enforced for all users via Conditional Access
 - Role-based access control (RBAC) with least-privilege access (3 roles: CUI processor, admin, reviewer)
@@ -439,6 +457,9 @@ The implementation and target environment will be architected and validated to m
 - Account lifecycle management with automated provisioning and deprovisioning
 
 ## Monitoring & Threat Detection
+
+Security monitoring capabilities include:
+
 - Sentinel SIEM with 100GB/month log ingestion for comprehensive security monitoring
 - Automated incident response playbooks for common threat scenarios
 - Defender for Cloud continuous compliance monitoring and vulnerability assessment
@@ -446,6 +467,9 @@ The implementation and target environment will be architected and validated to m
 - Security alerts delivered via email, SMS, and Teams notifications (<15 minute response time)
 
 ## Compliance & Auditing
+
+The solution supports the following compliance frameworks:
+
 - CMMC Level 2 compliance: All 110 NIST 800-171 security requirements implemented
 - FedRAMP High: GCC High and Azure Government environments meet DoD authorization standards
 - NIST SP 800-53 Rev 5: Moderate impact baseline controls implemented
@@ -453,6 +477,9 @@ The implementation and target environment will be architected and validated to m
 - Audit logging for all CUI access, configuration changes, and administrative actions (90-day retention)
 
 ## Encryption & Key Management
+
+Data protection is implemented through encryption at all layers:
+
 - FIPS 140-2 validated encryption for all CUI data at rest and in transit
 - Azure Key Vault for centralized encryption key management
 - TLS 1.2+ for all network communications
@@ -460,6 +487,9 @@ The implementation and target environment will be architected and validated to m
 - Encryption key rotation policies aligned to NIST SP 800-57 requirements
 
 ## Governance
+
+Governance processes ensure consistent management of the solution:
+
 - Change control: All security control changes require ISSO approval and C3PAO notification
 - Incident response: Documented procedures for security incidents aligned to NIST SP 800-61
 - Vulnerability management: Monthly vulnerability scans with 30-day remediation SLA for high/critical findings
@@ -478,6 +508,9 @@ The implementation and target environment will be architected and validated to m
 | Production | Live CUI processing and storage | M365 GCC High + Azure Gov | CUI users, administrators, ISSO |
 
 ### Access Policies
+
+Access control policies are defined as follows:
+
 - CAC/PIV smart card authentication required for all users (no username/password access)
 - MFA enforced via Conditional Access for all cloud access
 - Administrator Access: Full M365 and Azure access for implementation team during project
@@ -493,6 +526,9 @@ The implementation and target environment will be architected and validated to m
 Comprehensive testing and validation will take place throughout the implementation lifecycle to ensure NIST 800-171 security controls are properly implemented and CMMC Level 2 requirements are met.
 
 ## Functional Validation
+
+Functional testing ensures all features work as designed:
+
 - End-to-end CUI workflow validation (email, document collaboration, file sharing)
 - CAC/PIV authentication validation across all M365 and Azure services
 - Conditional Access policy testing (MFA, device compliance, location restrictions)
@@ -500,12 +536,18 @@ Comprehensive testing and validation will take place throughout the implementati
 - eDiscovery and retention policy functional testing
 
 ## Performance & Load Testing
+
+Performance validation ensures the solution meets SLA requirements:
+
 - Email migration performance (100GB mailbox data)
 - File migration throughput (500GB SharePoint/OneDrive)
 - Sentinel log ingestion capacity (100GB/month sustained load)
 - Concurrent user capacity (50 users)
 
 ## Security Testing
+
+Security validation ensures protection against threats:
+
 - NIST 800-171 control validation (all 110 security requirements)
 - Penetration testing of Azure Government VMs and network perimeter
 - CAC/PIV authentication bypass testing
@@ -513,12 +555,18 @@ Comprehensive testing and validation will take place throughout the implementati
 - Vulnerability scanning of all Azure resources
 
 ## Disaster Recovery & Resilience Tests
+
+DR testing validates backup and recovery capabilities:
+
 - Azure VM backup and restore validation
 - Exchange Online mailbox recovery testing
 - SharePoint document recovery from recycle bin
 - RTO/RPO validation (4-hour RTO, 1-hour RPO targets)
 
 ## User Acceptance Testing (UAT)
+
+UAT is performed in coordination with Client business stakeholders:
+
 - Performed in coordination with CUI users and business stakeholders
 - Test environment provided by Vendor (GCC High pilot tenant)
 - CAC/PIV authentication user experience validation
@@ -558,6 +606,9 @@ The implementation follows a **pilot-then-production** strategy where a small gr
 The cutover will be executed during pre-approved weekend maintenance windows with documented rollback procedures available if critical migration issues arise.
 
 ## Cutover Checklist
+
+The following checklist will guide the cutover execution:
+
 - Pre-cutover validation: All security controls implemented, internal audit complete
 - GCC High environment validated and CAC/PIV authentication operational
 - Rollback procedures documented and rehearsed
@@ -568,6 +619,9 @@ The cutover will be executed during pre-approved weekend maintenance windows wit
 - Daily monitoring during hypercare period (4 weeks)
 
 ## Rollback Strategy
+
+Comprehensive rollback procedures in case of critical issues:
+
 - Documented rollback triggers (>5% data loss, CAC/PIV authentication failure, critical security control failure)
 - Rollback procedures: Revert email routing to source system, restore file access
 - Root cause analysis and fix validation before retry
@@ -581,6 +635,9 @@ The cutover will be executed during pre-approved weekend maintenance windows wit
 # Handover & Support
 
 ## Handover Artifacts
+
+The following artifacts will be delivered upon project completion:
+
 - As-Built documentation including GCC High architecture, Azure Government infrastructure, and security control implementation
 - System Security Plan (SSP) with NIST 800-171 control narratives and evidence artifacts
 - Operations runbook with incident response procedures, vulnerability management, and compliance monitoring
@@ -589,6 +646,9 @@ The cutover will be executed during pre-approved weekend maintenance windows wit
 - C3PAO assessment evidence package and certification documentation
 
 ## Knowledge Transfer
+
+Knowledge transfer ensures the Client team can effectively operate the solution:
+
 - Live knowledge transfer sessions for ISSO/ISSM and security operations team
 - Microsoft 365 GCC High administration training (Exchange, SharePoint, Teams, Purview)
 - Azure Government infrastructure management training
@@ -637,6 +697,9 @@ Post-hypercare, Client may transition to ongoing CMMC managed services:
 ## Assumptions
 
 ### General Assumptions
+
+This engagement is based on the following general assumptions:
+
 - Client will provide representative CUI documents for DLP policy configuration and migration testing
 - Existing user identities can be synchronized to Azure AD GCC High (no complex multi-forest Active Directory)
 - CAC/PIV smart cards are available for all 50 CUI users with certificates issued by DoD PKI
@@ -652,6 +715,9 @@ Post-hypercare, Client may transition to ongoing CMMC managed services:
 ## Dependencies
 
 ### Project Dependencies
+
+The following dependencies must be satisfied for successful project execution:
+
 - Azure/M365 Access: Client provides Global Administrator access to M365 tenant and Azure subscription for GCC High and Azure Government provisioning
 - CAC/PIV Cards: All 50 CUI users have valid CAC/PIV smart cards issued by DoD PKI (certificates not expired)
 - CUI Migration Data: Client provides access to source email and file systems for migration (commercial M365 or on-premises Exchange/file servers)
@@ -668,6 +734,8 @@ Post-hypercare, Client may transition to ongoing CMMC managed services:
 ---
 
 # Investment Summary
+
+This section provides a comprehensive overview of the engagement investment:
 
 **Small Scope Implementation:** This pricing reflects a 50-user CMMC Level 2 deployment designed for small defense contractors pursuing DoD contracts. For larger organizations (100-200 users or Level 3 requirements), please request medium or large scope pricing.
 
@@ -735,6 +803,8 @@ The following table summarizes the 3-year total cost of ownership for the CMMC G
 
 ## Invoicing & Expenses
 
+Invoicing and expense policies for this engagement:
+
 ### Invoicing
 - Milestone-based invoicing per Payment Terms above
 - Net 30 payment terms
@@ -757,16 +827,25 @@ The following table summarizes the 3-year total cost of ownership for the CMMC G
 All services will be delivered in accordance with the executed Master Services Agreement (MSA) or equivalent contractual document between Vendor and Client.
 
 ## Scope Changes
+
+Change control procedures for this engagement:
+
 - Changes to CMMC level (Level 3/4/5), user count, CUI workload scope, or security requirements require formal change requests
 - Change requests may impact project timeline, budget, and C3PAO assessment schedule
 
 ## Intellectual Property
+
+Intellectual property rights are defined as follows:
+
 - Client retains ownership of all CUI data and business information
 - Vendor retains ownership of proprietary CMMC implementation methodologies and frameworks
 - GCC High and Azure Government configurations become Client property upon final payment
 - System Security Plan (SSP) and compliance documentation transfer to Client upon certification
 
 ## Service Levels
+
+Service level commitments for this engagement:
+
 - CMMC Level 2 certification: All 110 NIST 800-171 controls implemented and validated
 - C3PAO assessment: Pass all assessment objectives with zero open findings (POA&Ms acceptable per CMMC requirements)
 - System uptime: 99.9% for GCC High and Azure Government (per Microsoft SLA)
@@ -774,19 +853,31 @@ All services will be delivered in accordance with the executed Master Services A
 - Post-hypercare managed services available under separate agreement
 
 ## Liability
+
+Liability terms and limitations:
+
 - CMMC certification timeline dependent on C3PAO availability and DoD Cyber AB approval processes
 - Performance may vary based on CUI document types and complexity beyond initial scope
 - Ongoing compliance monitoring recommended as NIST 800-171 requirements evolve
 - Liability caps as agreed in MSA
 
 ## Confidentiality
+
+Confidentiality obligations for both parties:
+
 - Both parties agree to maintain strict confidentiality of CUI data, business information, and CMMC implementation details
 - All exchanged artifacts under NDA protection and NIST 800-171 safeguarding requirements
 
 ## Termination
+
+Termination provisions for this engagement:
+
 - Mutually terminable per MSA terms, subject to payment for completed work and C3PAO commitments
 
 ## Governing Law
+
+This agreement shall be governed by the laws of [State/Region].
+
 - Agreement governed under the laws of [State/Region]
 
 ---

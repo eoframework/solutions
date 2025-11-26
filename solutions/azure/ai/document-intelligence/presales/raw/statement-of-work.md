@@ -36,6 +36,9 @@ This Statement of Work (SOW) defines the scope, deliverables, roles, and terms f
 - **Compliance Risk:** Manual processes increase audit exposure and data security concerns
 
 ## Business Objectives
+
+The following objectives define the key business outcomes this engagement will deliver:
+
 - **Automate Document Processing:** Implement automated document processing using Azure AI services (Document Intelligence, Text Analytics) to eliminate manual data entry and classification
 - **Improve Accuracy:** Achieve 95%+ data extraction accuracy through AI and human-in-the-loop review, reducing costly rework and compliance risks
 - **Reduce Processing Time:** Reduce manual processing time by 80-90% through intelligent automation, improving throughput from hours to minutes per document
@@ -44,6 +47,9 @@ This Statement of Work (SOW) defines the scope, deliverables, roles, and terms f
 - **Foundation for Growth:** Enable foundation for expanding automation across additional document types and business processes beyond initial scope
 
 ## Success Metrics
+
+The following metrics will be used to measure project success:
+
 - 95%+ data extraction accuracy measured against validation dataset
 - 90% reduction in document processing time (from baseline)
 - 70% reduction in document operations costs within 12 months
@@ -237,6 +243,8 @@ The implementation will be delivered in five phases over 16 weeks, with clear mi
 
 # Roles & Responsibilities
 
+This section defines the roles and responsibilities for both the Vendor and Client teams throughout this engagement.
+
 <!-- TABLE_CONFIG: widths=[34, 11, 11, 11, 11, 11, 11] -->
 | Task/Role | Vendor PM | Vendor Architect | Vendor AI Engineer | Vendor Dev | Client IT | Client Business |
 |-----------|-----------|------------------|-------------------|-----------|-----------|-----------------|
@@ -358,11 +366,16 @@ All critical data and configurations are protected through:
 The implementation approach follows Azure AI best practices and proven methodologies for document processing solutions.
 
 ## Example Implementation Patterns
+
+The following patterns will guide the implementation approach:
+
 - Phased rollout: Pilot with single document type, then expand
 - Parallel processing: Run Document Intelligence alongside manual processes before full cutover
 - Iterative model training: Continuous improvement of AI models based on production data
 
 ## Tooling Overview
+
+The following table outlines the recommended tooling stack for this implementation:
 
 <!-- TABLE_CONFIG: widths=[25, 35, 40] -->
 | Category | Primary Tools | Purpose |
@@ -380,6 +393,9 @@ The implementation approach follows Azure AI best practices and proven methodolo
 ## Data Management
 
 ## Data Strategy
+
+The data management approach follows industry best practices:
+
 - Document ingestion via multiple channels (Blob Storage upload, API, batch processing)
 - Automated classification and extraction using Azure AI services
 - Metadata storage in Cosmos DB for fast retrieval
@@ -387,6 +403,9 @@ The implementation approach follows Azure AI best practices and proven methodolo
 - Data validation and quality checks at each processing stage
 
 ## Security & Compliance
+
+The implementation and target environment will be architected and validated to meet the Client's security, compliance, and governance requirements.
+
 - Encryption enabled for data in-transit and at-rest
 - PII/PHI detection and masking using Azure Cognitive Services Text Analytics
 - Document retention policies aligned with regulatory requirements
@@ -402,6 +421,9 @@ The implementation approach follows Azure AI best practices and proven methodolo
 The implementation and target environment will be architected and validated to meet the Client's security, compliance, and governance requirements. Vendor will adhere to industry-standard security frameworks and Azure AI best practices.
 
 ## Identity & Access Management
+
+The solution implements comprehensive identity and access controls:
+
 - Azure AD-based authentication with managed identities for service-to-service authentication
 - Multi-factor authentication (MFA) required for Azure portal access
 - Role-based access control (RBAC) with least-privilege access for all Azure services
@@ -409,6 +431,9 @@ The implementation and target environment will be architected and validated to m
 - API authentication using Azure AD or managed identities
 
 ## Monitoring & Threat Detection
+
+Security monitoring capabilities include:
+
 - Azure Monitor logging enabled for all API calls and document access
 - Application Insights for system health and performance metrics
 - Distributed tracing for document processing workflow analysis
@@ -416,6 +441,9 @@ The implementation and target environment will be architected and validated to m
 - Integration with Microsoft Defender for Cloud for centralized security findings
 
 ## Compliance & Auditing
+
+The solution supports the following compliance frameworks:
+
 - SOC 2 certified Azure services, architecture follows SOC 2 security principles
 - GDPR compliance: Data residency controls, right-to-deletion capabilities, audit trail
 - HIPAA compliance (if applicable): HIPAA-eligible services, BAA with Microsoft, encryption, access controls
@@ -423,6 +451,9 @@ The implementation and target environment will be architected and validated to m
 - Continuous compliance monitoring using Azure Policy
 
 ## Encryption & Key Management
+
+Data protection is implemented through encryption at all layers:
+
 - All documents encrypted at rest using Azure Storage Service Encryption with Azure Key Vault
 - All data encrypted in transit using TLS 1.2+
 - Document storage in Blob Storage with server-side encryption enabled
@@ -430,6 +461,9 @@ The implementation and target environment will be architected and validated to m
 - Secure key management using Azure Key Vault with audit logging
 
 ## Governance
+
+Governance processes ensure consistent management of the solution:
+
 - Change control: All changes to document types, extraction rules, or integrations require formal change request
 - AI model governance: Model versions tracked, performance monitored, retraining process documented
 - Access reviews: Quarterly review of Azure RBAC roles and user access
@@ -442,6 +476,8 @@ The implementation and target environment will be architected and validated to m
 
 ## Environments
 
+The following environments will be provisioned for this engagement:
+
 | Environment | Purpose | Azure Region | Access |
 |-------------|---------|------------|--------|
 | Development | AI model training, pipeline development | [Azure Region] | Development team |
@@ -449,6 +485,9 @@ The implementation and target environment will be architected and validated to m
 | Production | Live document processing | [Azure Region] | Operations team, authorized users |
 
 ## Access Policies
+
+Access control policies are defined as follows:
+
 - Multi-factor authentication (MFA) required for all Azure portal access
 - API access via Azure AD authentication tokens or managed identities
 - Administrator Access: Full Azure portal and API access for implementation team during project
@@ -465,6 +504,9 @@ The implementation and target environment will be architected and validated to m
 Comprehensive testing and validation will take place throughout the implementation lifecycle to ensure functionality, performance, security, and accuracy of the AI-powered document processing solution.
 
 ## Functional Validation
+
+Functional testing ensures all features work as designed:
+
 - End-to-end document processing workflow validation
 - Validation of document classification accuracy across all document types
 - Validation of data extraction accuracy against business requirements
@@ -473,12 +515,18 @@ Comprehensive testing and validation will take place throughout the implementati
 - Web interface functional testing
 
 ## Performance & Load Testing
+
+Performance validation ensures the solution meets SLA requirements:
+
 - Benchmark testing with target document volumes ([X,000] documents/month)
 - Stress testing to identify capacity limits and auto-scaling behavior
 - Latency validation (target: <5 minutes per document)
 - Concurrent processing capacity testing
 
 ## Security Testing
+
+Security validation ensures protection against threats:
+
 - Validation of encryption (data at rest and in transit)
 - Access control testing (Azure RBAC policies, API authentication)
 - Compliance validation (HIPAA, GDPR, SOC 2 as applicable)
@@ -486,11 +534,17 @@ Comprehensive testing and validation will take place throughout the implementati
 - Penetration testing (optional)
 
 ## Disaster Recovery & Resilience Tests
+
+DR testing validates backup and recovery capabilities:
+
 - Backup and restore validation
 - Failover testing (if cross-region replication configured)
 - RTO/RPO validation
 
 ## User Acceptance Testing (UAT)
+
+UAT is performed in coordination with Client business stakeholders:
+
 - Performed in coordination with Client business stakeholders
 - Test environment and sample documents provided by Vendor
 - Accuracy validation against business-defined acceptance criteria
@@ -512,6 +566,9 @@ A Go-Live Readiness Checklist will be delivered including:
 ## Cutover Plan
 
 ## Cutover Checklist
+
+The following checklist will guide the cutover execution:
+
 - Pre-cutover validation: Final UAT sign-off, accuracy validation (95%+)
 - Production environment validated and monitoring operational
 - Rollback procedures documented and rehearsed
@@ -522,6 +579,9 @@ A Go-Live Readiness Checklist will be delivered including:
 - Daily monitoring during hypercare period (4 weeks)
 
 ## Rollback Strategy
+
+Comprehensive rollback procedures in case of critical issues:
+
 - Documented rollback triggers (accuracy <90%, critical integration failure, security incident)
 - Rollback procedures: Disable Document Intelligence routing, revert to manual processing
 - Root cause analysis and fix validation before retry
@@ -535,6 +595,9 @@ A Go-Live Readiness Checklist will be delivered including:
 # Handover & Support
 
 ## Handover Artifacts
+
+The following artifacts will be delivered upon project completion:
+
 - As-Built documentation including architecture diagrams and Azure service configurations
 - AI model documentation (training data, accuracy metrics, version history)
 - Operations runbook with troubleshooting procedures
@@ -543,6 +606,9 @@ A Go-Live Readiness Checklist will be delivered including:
 - Integration documentation and API specifications
 
 ## Knowledge Transfer
+
+Knowledge transfer ensures the Client team can effectively operate the solution:
+
 - Live knowledge transfer sessions for administrators and operations team
 - Azure service management training (Document Intelligence, Text Analytics, Functions, Cosmos DB)
 - AI model monitoring and maintenance training
@@ -554,6 +620,9 @@ A Go-Live Readiness Checklist will be delivered including:
 ## Assumptions
 
 ## General Assumptions
+
+This engagement is based on the following general assumptions:
+
 - Client will provide representative document samples for AI model training (minimum 1,000 documents per type)
 - Document quality is sufficient for OCR and AI processing (readable text, minimum 150 DPI)
 - Existing Azure infrastructure meets minimum requirements for AI services
@@ -570,6 +639,9 @@ A Go-Live Readiness Checklist will be delivered including:
 ## Dependencies
 
 ## Project Dependencies
+
+The following dependencies must be satisfied for successful project execution:
+
 - Azure Subscription Access: Client provides Azure subscription access with appropriate permissions (Document Intelligence, Cognitive Services, Functions, Blob Storage, Cosmos DB, API Management, Monitor)
 - Document Samples: Client provides representative document samples across all document types for AI model training and testing
 - Training Data Labeling: Client SMEs available to label documents and validate extraction rules
@@ -587,9 +659,13 @@ A Go-Live Readiness Checklist will be delivered including:
 
 # Investment Summary
 
+This section provides a comprehensive overview of the engagement investment:
+
 **Small Scope Implementation:** This pricing reflects a department-level deployment designed for 50,000 pages/month processing capacity with 50-100 users. For larger enterprise deployments, please request medium or large scope pricing.
 
 ## Total Investment
+
+The following table provides a comprehensive overview of the total investment required for this engagement:
 
 <!-- BEGIN COST_SUMMARY_TABLE -->
 <!-- TABLE_CONFIG: widths=[20, 12, 23, 13, 10, 10, 12] -->
@@ -655,6 +731,8 @@ A Go-Live Readiness Checklist will be delivered including:
 
 ## Invoicing & Expenses
 
+Invoicing and expense policies for this engagement:
+
 ### Invoicing
 - Milestone-based invoicing per Payment Terms above
 - Net 30 payment terms
@@ -675,35 +753,56 @@ A Go-Live Readiness Checklist will be delivered including:
 All services will be delivered in accordance with the executed Master Services Agreement (MSA) or equivalent contractual document between Vendor and Client.
 
 ## Scope Changes
+
+Change control procedures for this engagement:
+
 - Changes to document types, extraction requirements, integration scope, or timeline require formal change requests
 - Change requests may impact project timeline and budget
 
 ## Intellectual Property
+
+Intellectual property rights are defined as follows:
+
 - Client retains ownership of all business data and document content
 - Vendor retains ownership of proprietary AI methodologies and frameworks
 - Custom AI models and configurations become Client property upon final payment
 - Azure service configurations and infrastructure code transfer to Client
 
 ## Service Levels
+
+Service level commitments for this engagement:
+
 - Document processing accuracy: 95%+ on production dataset
 - System uptime: 99.5% during business hours
 - 30-day warranty on all deliverables from go-live date
 - Post-warranty support available under separate managed services agreement
 
 ## Liability
+
+Liability terms and limitations:
+
 - Model accuracy guarantees apply only to document types and quality levels within training dataset scope
 - Performance may vary with significantly different document characteristics
 - Ongoing model retraining recommended as document patterns evolve
 - Liability caps as agreed in MSA
 
 ## Confidentiality
+
+Confidentiality obligations for both parties:
+
 - Both parties agree to maintain strict confidentiality of business data, document content, and proprietary AI techniques
 - All exchanged artifacts under NDA protection
 
 ## Termination
+
+Termination provisions for this engagement:
+
 - Mutually terminable per MSA terms, subject to payment for completed work
 
 ## Governing Law
+
+This agreement shall be governed by the laws of [State/Region].
+
 - Agreement governed under the laws of [State/Region]
 
 ---

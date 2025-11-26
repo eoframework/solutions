@@ -41,12 +41,18 @@ This section outlines the current state of the Client's firewall infrastructure,
 Current firewall infrastructure based on aging hardware with performance limitations and increasing security requirements.
 
 ## Business Objectives
+
+The following objectives define the key business outcomes this engagement will deliver:
+
 - Replace aging firewall infrastructure with 8x performance improvement
 - Reduce security licensing costs by 40% while gaining advanced threat prevention
 - Enable seamless multi-cloud security with native AWS, Azure, and GCP integration
 - Achieve 80 Gbps throughput with full IPS and SSL inspection enabled
 
 ## Success Metrics
+
+The following metrics will be used to measure project success:
+
 - 80 Gbps firewall throughput with full security services operational
 - 70% reduction in security incident response time through automated threat intelligence
 - Unified security policy management across 20+ datacenter and branch firewalls
@@ -179,6 +185,9 @@ This section details all project deliverables including documentation, system co
 - Recorded training sessions for future reference and new team member onboarding
 
 ## Project Milestones
+
+The following milestones represent key checkpoints throughout the project lifecycle:
+
 | Phase | Duration | Start Date | End Date | Key Milestones |
 |-------|----------|------------|----------|----------------|
 | **Discovery & Planning** | 4 weeks | [DATE] | [DATE] | Architecture designed, Policy migration plan approved, Lab validation completed |
@@ -332,6 +341,9 @@ The project will be considered complete when:
 ## Assumptions & Constraints
 
 ### Assumptions
+
+This engagement is based on the following assumptions:
+
 - Client will provide existing firewall configurations in exportable format for policy migration
 - Datacenter rack space, power (dual circuits), and cooling capacity available for SRX4600
 - Network connectivity and IP addressing plan provided for all deployment locations
@@ -368,6 +380,9 @@ Any changes to project scope, timeline, or budget must be documented through for
 - Network architecture modifications requiring additional design work
 
 ## Intellectual Property
+
+Intellectual property rights are defined as follows:
+
 - Client retains ownership of all security policies, configurations, and business data
 - Vendor retains ownership of proprietary implementation methodologies and automation tools
 - SRX configurations and customizations become client property upon final payment

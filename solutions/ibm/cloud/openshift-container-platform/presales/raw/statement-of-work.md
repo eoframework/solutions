@@ -37,6 +37,9 @@ This Statement of Work (SOW) defines the scope, deliverables, roles, and terms f
 - **Operational Overhead:** Operations team spending 80% of time on repetitive manual tasks
 
 ## Business Objectives
+
+The following objectives define the key business outcomes this engagement will deliver:
+
 - **Accelerate Application Delivery:** Deploy enterprise Kubernetes platform enabling containerized applications with CI/CD pipelines, reducing deployment time from weeks to hours
 - **Improve Resource Utilization:** Achieve 50-60% infrastructure utilization through container orchestration and workload optimization
 - **Enable Developer Self-Service:** Provide developer self-service capabilities for application deployment reducing infrastructure ticket queues by 80%
@@ -45,6 +48,9 @@ This Statement of Work (SOW) defines the scope, deliverables, roles, and terms f
 - **Reduce Infrastructure Costs:** Achieve 30-40% infrastructure cost reduction through consolidation and improved utilization
 
 ## Success Metrics
+
+The following metrics will be used to measure project success:
+
 - 10x improvement in deployment frequency (weekly to daily deployments)
 - 50% reduction in operational overhead measured by incident tickets and manual tasks
 - 50-60% average infrastructure utilization across cluster
@@ -201,6 +207,8 @@ This section outlines the key deliverables, acceptance criteria, and project mil
 
 ## Deliverables
 
+The following table summarizes the key deliverables for this engagement:
+
 <!-- TABLE_CONFIG: widths=[8, 40, 12, 20, 20] -->
 | # | Deliverable | Type | Due Date | Acceptance By |
 |---|--------------------------------------|--------------|--------------|-----------------|
@@ -221,6 +229,8 @@ This section outlines the key deliverables, acceptance criteria, and project mil
 ---
 
 ## Project Milestones
+
+The following milestones represent key checkpoints throughout the project lifecycle:
 
 <!-- TABLE_CONFIG: widths=[20, 50, 30] -->
 | Milestone | Description | Target Date |
@@ -243,6 +253,8 @@ This section defines the roles, responsibilities, and accountability framework f
 
 ## RACI Matrix
 
+The following matrix defines the responsibility assignments for key project activities:
+
 <!-- TABLE_CONFIG: widths=[28, 11, 11, 11, 11, 9, 9, 10] -->
 | Task/Role | EO PM | EO Quarterback | EO Sales Eng | EO Eng | Client IT | Client DevOps | SME |
 |-----------|-------|----------------|--------------|--------|-----------|---------------|-----|
@@ -260,6 +272,8 @@ This section defines the roles, responsibilities, and accountability framework f
 **Legend:** R = Responsible | A = Accountable | C = Consulted | I = Informed
 
 ## Key Personnel
+
+The following personnel will be assigned to this engagement:
 
 **Vendor Team:**
 - EO Project Manager: Overall delivery accountability
@@ -307,6 +321,8 @@ Key architectural components include:
 - Observability Layer (Prometheus, Grafana, OpenShift Logging with EFK stack)
 
 ## Scope Specifications
+
+This engagement is scoped according to the following specifications:
 
 **Compute & Processing:**
 - Control Plane Nodes: 3 nodes (8 vCPU, 32GB RAM each) for high availability
@@ -384,11 +400,16 @@ All critical data and configurations are protected through:
 The implementation approach follows Red Hat best practices and proven methodologies for OpenShift deployments.
 
 ## Example Implementation Patterns
+
+The following patterns will guide the implementation approach:
+
 - Phased rollout: Start with pilot applications, then expand to broader portfolio
 - Parallel infrastructure: Run OpenShift alongside VM infrastructure during transition
 - Progressive containerization: Containerize applications incrementally by complexity
 
 ## Tooling Overview
+
+The following table outlines the recommended tooling stack for this implementation:
 
 <!-- TABLE_CONFIG: widths=[25, 35, 40] -->
 | Category | Primary Tools | Purpose |
@@ -407,6 +428,9 @@ The implementation approach follows Red Hat best practices and proven methodolog
 ## Data Management
 
 ### Data Strategy
+
+The data management approach follows industry best practices:
+
 - Persistent storage for stateful applications using Persistent Volume Claims (PVCs)
 - Storage classes for different performance/availability tiers (block, file, object)
 - Volume snapshots for application data protection and recovery
@@ -429,6 +453,9 @@ The implementation approach follows Red Hat best practices and proven methodolog
 The implementation and target environment will be architected and validated to meet the Client's security, compliance, and governance requirements. Vendor will adhere to industry-standard security frameworks and Red Hat OpenShift best practices.
 
 ## Identity & Access Management
+
+The solution implements comprehensive identity and access controls:
+
 - Role-Based Access Control (RBAC) with granular permissions for cluster resources
 - LDAP/AD integration for Single Sign-On (SSO) with enterprise directory
 - OAuth authentication for API and web console access
@@ -437,6 +464,9 @@ The implementation and target environment will be architected and validated to m
 - Pod security policies and security context constraints for container security
 
 ## Monitoring & Threat Detection
+
+Security monitoring capabilities include:
+
 - OpenShift audit logging for all API requests and resource changes
 - Prometheus alerts for security events and anomalous behavior
 - Advanced Cluster Security (ACS) for vulnerability management and runtime threat detection
@@ -444,6 +474,9 @@ The implementation and target environment will be architected and validated to m
 - Integration with SIEM systems for centralized security monitoring (if required)
 
 ## Compliance & Auditing
+
+The solution supports the following compliance frameworks:
+
 - SOC 2 certified OpenShift platform, architecture follows SOC 2 security principles
 - ISO 27001 compliance: Access controls, audit logging, encryption
 - GDPR compliance (if applicable): Data residency controls, audit trail, secure deletion
@@ -451,6 +484,9 @@ The implementation and target environment will be architected and validated to m
 - Continuous compliance monitoring using OpenShift compliance operator
 
 ## Encryption & Key Management
+
+Data protection is implemented through encryption at all layers:
+
 - All container images encrypted at rest in Quay registry
 - Persistent volumes encrypted using storage provider encryption
 - etcd cluster encrypted at rest and in transit
@@ -459,6 +495,9 @@ The implementation and target environment will be architected and validated to m
 - Secret management using OpenShift secrets with encryption at rest
 
 ## Governance
+
+Governance processes ensure consistent management of the solution:
+
 - Change control: All cluster configuration changes require formal change request
 - Image governance: Only approved container images from trusted registries allowed
 - Access reviews: Quarterly review of RBAC policies and user permissions
@@ -478,6 +517,9 @@ The implementation and target environment will be architected and validated to m
 | Production | Live application workloads | Production cluster with HA | Operations team, authorized users |
 
 ### Access Policies
+
+Access control policies are defined as follows:
+
 - Multi-factor authentication (MFA) required for cluster administrator access
 - API access via OAuth tokens with RBAC permissions
 - Administrator Access: Full cluster admin rights for platform team during project
@@ -494,6 +536,9 @@ The implementation and target environment will be architected and validated to m
 Comprehensive testing and validation will take place throughout the implementation lifecycle to ensure functionality, performance, security, and reliability of the OpenShift Container Platform.
 
 ## Functional Validation
+
+Functional testing ensures all features work as designed:
+
 - End-to-end application deployment workflow validation
 - Validation of container orchestration and scheduling
 - CI/CD pipeline functional testing (build, test, deploy workflows)
@@ -502,6 +547,9 @@ Comprehensive testing and validation will take place throughout the implementati
 - Storage provisioning and persistent volume testing
 
 ## Performance & Load Testing
+
+Performance validation ensures the solution meets SLA requirements:
+
 - Benchmark testing with target workload (500-1000 pods)
 - Stress testing to identify cluster capacity limits
 - Auto-scaling validation (horizontal pod autoscaler testing)
@@ -509,6 +557,9 @@ Comprehensive testing and validation will take place throughout the implementati
 - Storage performance testing (IOPS and throughput validation)
 
 ## Security Testing
+
+Security validation ensures protection against threats:
+
 - Validation of RBAC policies and access controls
 - Network policy testing for pod isolation
 - Pod security policy validation
@@ -517,6 +568,9 @@ Comprehensive testing and validation will take place throughout the implementati
 - Compliance validation (SOC2, ISO 27001 as applicable)
 
 ## Disaster Recovery & Resilience Tests
+
+DR testing validates backup and recovery capabilities:
+
 - etcd cluster backup and restore validation
 - Node failure testing and pod rescheduling
 - Persistent volume snapshot and restore testing
@@ -524,6 +578,9 @@ Comprehensive testing and validation will take place throughout the implementati
 - RTO/RPO validation
 
 ## User Acceptance Testing (UAT)
+
+UAT is performed in coordination with Client business stakeholders:
+
 - Performed in coordination with Client development and operations teams
 - Test environment and sample applications provided by Vendor
 - Developer workflow validation (containerization, deployment, monitoring)
@@ -566,6 +623,9 @@ The implementation follows a **parallel infrastructure** strategy where the new 
 The cutover will be executed during pre-approved maintenance windows (recommended: weekend deployments for production applications) with documented rollback procedures available if critical issues arise.
 
 ## Cutover Checklist
+
+The following checklist will guide the cutover execution:
+
 - Pre-cutover validation: Final UAT sign-off, performance validation, security approval
 - Production OpenShift cluster validated and monitoring operational
 - Rollback procedures documented and rehearsed for each application
@@ -576,6 +636,9 @@ The cutover will be executed during pre-approved maintenance windows (recommende
 - Daily monitoring during hypercare period (4 weeks)
 
 ## Rollback Strategy
+
+Comprehensive rollback procedures in case of critical issues:
+
 - Documented rollback triggers (application failure, performance degradation, security incident)
 - Rollback procedures: Restore application to VM infrastructure, preserve data integrity
 - Root cause analysis and issue resolution before retry
@@ -591,6 +654,9 @@ The cutover will be executed during pre-approved maintenance windows (recommende
 Following successful implementation and production deployment, this section outlines the handover process, knowledge transfer approach, and post-implementation support to ensure operational readiness. The Vendor will provide comprehensive documentation, training, and hypercare support to enable the Client team to independently manage the OpenShift platform.
 
 ## Handover Artifacts
+
+The following artifacts will be delivered upon project completion:
+
 - As-Built documentation including architecture diagrams and cluster configurations
 - Platform administration documentation (cluster operations, upgrades, troubleshooting)
 - Operations runbook with troubleshooting procedures and escalation paths
@@ -600,6 +666,9 @@ Following successful implementation and production deployment, this section outl
 - Containerization playbooks and application deployment templates
 
 ## Knowledge Transfer
+
+Knowledge transfer ensures the Client team can effectively operate the solution:
+
 - Live knowledge transfer sessions for platform administrators and operations team
 - OpenShift platform administration training (40 hours covering cluster management, upgrades, monitoring, troubleshooting)
 - Developer training (40 hours covering containerization, CI/CD pipelines, GitOps workflows, debugging)
@@ -650,6 +719,9 @@ Post-hypercare, Client may transition to ongoing managed services:
 ## Assumptions
 
 ### General Assumptions
+
+This engagement is based on the following general assumptions:
+
 - Client will provide access to infrastructure (VMware vSphere or bare metal) for cluster deployment
 - Existing infrastructure meets minimum requirements for OpenShift cluster nodes (compute, memory, storage, network)
 - Network connectivity and firewall rules can be configured for OpenShift cluster communication
@@ -665,6 +737,9 @@ Post-hypercare, Client may transition to ongoing managed services:
 ## Dependencies
 
 ### Project Dependencies
+
+The following dependencies must be satisfied for successful project execution:
+
 - Infrastructure Access: Client provides VMware vSphere access or bare metal servers for cluster deployment within 1 week of project start
 - Network Connectivity: Network team configures required firewall rules and load balancer access for cluster communication
 - LDAP/AD Integration: Client provides LDAP/AD connection details and service account for SSO integration
@@ -684,9 +759,13 @@ Post-hypercare, Client may transition to ongoing managed services:
 
 # Investment Summary
 
+This section provides a comprehensive overview of the engagement investment:
+
 **Small Scope Implementation:** This pricing reflects a department-level deployment designed for 6-node OpenShift cluster supporting 50 developers and 500 containerized applications. For larger enterprise deployments, please request medium or large scope pricing.
 
 ## Total Investment
+
+The following table provides a comprehensive overview of the total investment required for this engagement:
 
 <!-- BEGIN COST_SUMMARY_TABLE -->
 <!-- TABLE_CONFIG: widths=[20, 12, 18, 14, 12, 11, 13] -->
@@ -765,6 +844,8 @@ Post-hypercare, Client may transition to ongoing managed services:
 
 ## Invoicing & Expenses
 
+Invoicing and expense policies for this engagement:
+
 ### Invoicing
 - Milestone-based invoicing per Payment Terms above
 - Net 30 payment terms from invoice date
@@ -790,38 +871,59 @@ This section outlines the contractual terms, conditions, and policies governing 
 All services will be delivered in accordance with the executed Master Services Agreement (MSA) or equivalent contractual document between Vendor and Client.
 
 ## Scope Changes
+
+Change control procedures for this engagement:
+
 - Changes to cluster size, application count, integration scope, or timeline require formal change requests
 - Change requests may impact project timeline and budget
 - All change requests require written approval from both parties before implementation
 
 ## Intellectual Property
+
+Intellectual property rights are defined as follows:
+
 - Client retains ownership of all business data, application code, and containerized applications
 - Vendor retains ownership of proprietary containerization methodologies and automation frameworks
 - OpenShift platform configurations and infrastructure-as-code transfer to Client upon final payment
 - Custom container images and CI/CD pipelines become Client property
 
 ## Service Levels
+
+Service level commitments for this engagement:
+
 - OpenShift platform availability: 99.5% uptime SLA for production cluster during business hours
 - 30-day warranty on all deliverables from go-live date
 - Defect resolution included at no additional cost during warranty period
 - Post-warranty support available under separate managed services agreement
 
 ## Liability
+
+Liability terms and limitations:
+
 - Platform performance guarantees apply to specified cluster sizing and workload patterns
 - Performance may vary with significantly different workload characteristics or scaling beyond scope
 - Ongoing capacity planning and cluster scaling recommended as workload grows
 - Liability caps as agreed in Master Services Agreement
 
 ## Confidentiality
+
+Confidentiality obligations for both parties:
+
 - Both parties agree to maintain strict confidentiality of business data, application code, and proprietary platform configurations
 - All exchanged artifacts under NDA protection
 - Red Hat intellectual property protected under Red Hat licensing terms
 
 ## Termination
+
+Termination provisions for this engagement:
+
 - Mutually terminable per MSA terms, subject to payment for completed work and expenses incurred
 - Client retains ownership of all work products and deliverables completed through termination date
 
 ## Governing Law
+
+This agreement shall be governed by the laws of [State/Region].
+
 - Agreement governed under the laws of [State/Region]
 - Disputes resolved per MSA dispute resolution procedures
 

@@ -1,5 +1,4 @@
 ---
-# Document Metadata (Simplified)
 document_title: Statement of Work
 technology_provider: Cisco Systems
 project_name: Cisco HyperFlex Hybrid Infrastructure
@@ -36,6 +35,8 @@ This Statement of Work (SOW) defines the scope, deliverables, roles, and terms f
 
 ## Business Objectives
 
+The following objectives define the key business outcomes this engagement will deliver:
+
 - **Consolidate Infrastructure:** Reduce data center footprint by 70% from 42U to 8U rack space with 4-node HyperFlex cluster
 - **Accelerate VM Provisioning:** Enable 90% faster deployments (10 minutes vs 4-8 hours) with integrated platform
 - **Reduce Capital Costs:** Achieve 50% CapEx savings ($294K HyperFlex vs $600K traditional)
@@ -44,6 +45,8 @@ This Statement of Work (SOW) defines the scope, deliverables, roles, and terms f
 - **Enable Growth:** Scalable platform supporting 200-400 VMs with room for expansion
 
 ## Success Metrics
+
+Success will be measured against the following quantifiable metrics:
 
 - 70% data center space reduction (42U → 8U)
 - 90% faster VM provisioning (4-8 hours → 10 minutes)
@@ -56,6 +59,8 @@ This Statement of Work (SOW) defines the scope, deliverables, roles, and terms f
 # Scope of Work
 
 ## In Scope
+
+The following items are included within the scope of this engagement:
 
 - Infrastructure assessment and VM workload analysis
 - HyperFlex sizing and architecture design with HA redundancy
@@ -224,6 +229,8 @@ The following RACI matrix defines responsibility assignments for key project act
 
 ## Key Personnel
 
+The following personnel will be assigned to this engagement:
+
 **Vendor Team:**
 - EO Project Manager: Overall delivery accountability
 - EO Quarterback: Technical design and architecture oversight
@@ -241,6 +248,8 @@ The following RACI matrix defines responsibility assignments for key project act
 # Architecture & Design
 
 ## Architecture Overview
+
+The following diagram illustrates the high-level architecture for the proposed solution:
 
 ![Solution Architecture](../../assets/diagrams/architecture-diagram.png)
 
@@ -308,6 +317,8 @@ The deployment follows a conservative phased migration approach:
 
 ## Identity & Access Management
 
+Identity and access controls ensure secure operations:
+
 - Role-based access control (RBAC) for vCenter and Intersight
 - Active Directory integration for authentication
 - Multi-factor authentication (MFA) for administrative access
@@ -315,12 +326,16 @@ The deployment follows a conservative phased migration approach:
 
 ## Data Protection
 
+The following data protection measures will be implemented:
+
 - Self-encrypting NVMe drives for data-at-rest encryption
 - VMware VM encryption for sensitive workloads
 - Veeam backup with immutable snapshots
 - Cross-site replication for disaster recovery (optional)
 
 ## Compliance & Auditing
+
+The solution addresses the following compliance and audit requirements:
 
 - Configuration compliance scanning
 - Audit trails for all infrastructure changes
@@ -407,6 +422,8 @@ Upon successful implementation:
 
 ## Knowledge Transfer
 
+Knowledge transfer ensures the Client team can effectively manage and operate the solution:
+
 **Training Sessions:**
 - 24 hours of hands-on training
 - HyperFlex architecture and operations
@@ -441,6 +458,8 @@ Upon successful implementation:
 ## Assumptions
 
 ### General Assumptions
+
+The following general assumptions apply to this engagement:
 
 **Client Responsibilities:**
 - Client will provide data center rack space, power, and cooling
@@ -489,6 +508,8 @@ The following table summarizes the total cost of ownership for this engagement a
 
 ## Payment Terms
 
+This section outlines the pricing model and payment schedule for the engagement:
+
 **Pricing Model:** Fixed price with milestone-based payments
 
 **Payment Schedule:**
@@ -513,11 +534,15 @@ Any changes to scope, schedule, or cost require a formal Change Request approved
 
 ## Intellectual Property
 
+Intellectual property rights are allocated as follows:
+
 - Client retains ownership of all deliverables and configurations
 - Vendor retains proprietary methodologies and tools
 - Pre-existing IP remains with original owner
 
 ## Confidentiality
+
+Confidentiality obligations govern information exchanged during this engagement:
 
 - All artifacts under NDA protection
 - Client data handled per security requirements

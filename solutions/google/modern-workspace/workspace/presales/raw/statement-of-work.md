@@ -37,6 +37,9 @@ This Statement of Work (SOW) defines the scope, deliverables, roles, and terms f
 - **No Disaster Recovery:** Single datacenter with 48-hour RTO exposing business continuity risk
 
 ## Business Objectives
+
+The following objectives define the key business outcomes this engagement will deliver:
+
 - **Modernize Productivity Suite:** Migrate 500 users from Exchange and file servers to Google Workspace (Gmail, Drive, Docs, Meet) eliminating on-premises infrastructure
 - **Enable Real-Time Collaboration:** Replace email attachments and file locking with Google Docs real-time co-editing supporting remote-first workforce
 - **Reduce IT Costs:** Eliminate $180K hardware refresh, reduce ongoing support costs by 40% ($120K annually), and redirect 2 FTE to higher-value projects
@@ -45,6 +48,9 @@ This Statement of Work (SOW) defines the scope, deliverables, roles, and terms f
 - **Foundation for AI:** Enable future AI capabilities with Gemini for Workspace (post-migration add-on)
 
 ## Success Metrics
+
+The following metrics will be used to measure project success:
+
 - 95%+ user adoption within 90 days measured by daily active usage
 - Zero data loss during email (2.5 TB) and file (3 TB) migration
 - 40% reduction in IT support costs ($120K annually) within 12 months
@@ -275,6 +281,8 @@ The RACI matrix defines roles and responsibilities for each major task category.
 
 ## Key Personnel
 
+The following personnel will be assigned to this engagement:
+
 **Vendor Team:**
 - EO Project Manager: Overall delivery accountability
 - EO Quarterback: Technical design and migration oversight
@@ -321,6 +329,8 @@ Key architectural components include:
 - Administration Layer (Admin Console, Audit Logs, Reports)
 
 ## Scope Specifications
+
+This engagement is scoped according to the following specifications:
 
 **User Base:**
 - 500 Google Workspace Business Plus licenses ($18/user/month)
@@ -389,6 +399,9 @@ Data protection through Google's infrastructure:
 The implementation approach follows Google Workspace migration best practices and proven methodologies.
 
 ## Example Implementation Patterns
+
+The following patterns will guide the implementation approach:
+
 - Phased rollout: Pilot with 25 users, then 5 waves of 95 users each
 - Coexistence period: 4 weeks parallel operation with Exchange before decommissioning
 - Just-in-time training: Train users 1 week before their migration wave
@@ -413,6 +426,9 @@ The migration leverages Google-native tools and proven third-party utilities to 
 ## Data Management
 
 ### Data Strategy
+
+The data management approach follows industry best practices:
+
 - Email migration via GWMT with label preservation
 - File migration with permission mapping (file server ACLs to Drive sharing)
 - Calendar migration preserving all appointments and recurring events
@@ -435,6 +451,9 @@ The migration leverages Google-native tools and proven third-party utilities to 
 The implementation and target environment will be architected and validated to meet the Client's security, compliance, and governance requirements. Vendor will adhere to Google Workspace security frameworks and industry best practices.
 
 ## Identity & Access Management
+
+The solution implements comprehensive identity and access controls:
+
 - Cloud Identity Premium with SAML SSO integration with Azure AD
 - 2-Step Verification (2SV) enforced for all user accounts
 - Security keys for high-value accounts (executives, admins)
@@ -443,6 +462,9 @@ The implementation and target environment will be architected and validated to m
 - Admin roles with least-privilege access
 
 ## Monitoring & Threat Detection
+
+Security monitoring capabilities include:
+
 - Security investigation tool for threat detection and response
 - Alert center for security and compliance notifications
 - Audit logs for all administrative and data access events
@@ -450,6 +472,9 @@ The implementation and target environment will be architected and validated to m
 - Integration with SIEM for centralized security operations (optional)
 
 ## Compliance & Auditing
+
+The solution supports the following compliance frameworks:
+
 - SOC 2 certified Google Workspace infrastructure
 - GDPR compliance: Data residency controls, right-to-deletion, audit trail
 - HIPAA compliance (if applicable): BAA with Google, encryption, access controls
@@ -457,12 +482,18 @@ The implementation and target environment will be architected and validated to m
 - Continuous compliance monitoring via Admin Console reports
 
 ## Encryption & Key Management
+
+Data protection is implemented through encryption at all layers:
+
 - All data encrypted at rest using Google-managed encryption keys
 - All data encrypted in transit using TLS 1.2+
 - Customer-managed encryption keys (CMEK) available via Enterprise Plus edition
 - Drive Client-Side Encryption for sensitive files (optional)
 
 ## Governance
+
+Governance processes ensure consistent management of the solution:
+
 - Data Loss Prevention (DLP) policies for sensitive content
 - Mobile device management policies (require passcode, remote wipe)
 - External sharing controls (allow with warnings, block, or allow freely)
@@ -482,6 +513,9 @@ The implementation and target environment will be architected and validated to m
 | Pilot | Initial 25-user validation group | IT and early adopters |
 
 ### Access Policies
+
+Access control policies are defined as follows:
+
 - 2-Step Verification (2SV) required for all users
 - SAML SSO via Azure AD for seamless authentication
 - Administrator Access: Super Admin for IT team (MFA required)
@@ -497,6 +531,9 @@ The implementation and target environment will be architected and validated to m
 Comprehensive testing and validation will take place throughout the migration lifecycle to ensure functionality, data integrity, security, and user readiness.
 
 ## Functional Validation
+
+Functional testing ensures all features work as designed:
+
 - Email migration accuracy (100% of mailboxes migrated with folder structure)
 - File migration accuracy (100% of files migrated with permissions)
 - Calendar and contacts migration validation
@@ -505,12 +542,18 @@ Comprehensive testing and validation will take place throughout the migration li
 - Mobile app functionality on iOS and Android
 
 ## Performance & Load Testing
+
+Performance validation ensures the solution meets SLA requirements:
+
 - Email delivery performance validation
 - File sync performance (Drive File Stream)
 - Google Meet video quality and capacity testing (500 participants)
 - Concurrent user load testing (500 users logging in simultaneously)
 
 ## Security Testing
+
+Security validation ensures protection against threats:
+
 - DLP policy enforcement validation
 - Mobile device management policy testing
 - External sharing control validation
@@ -518,11 +561,17 @@ Comprehensive testing and validation will take place throughout the migration li
 - 2SV enforcement validation
 
 ## Disaster Recovery & Resilience Tests
+
+DR testing validates backup and recovery capabilities:
+
 - Backup and restore validation (third-party backup if implemented)
 - Data recovery from Google Vault
 - Account recovery procedures
 
 ## User Acceptance Testing (UAT)
+
+UAT is performed in coordination with Client business stakeholders:
+
 - Performed with pilot group (25 users)
 - Email, calendar, file access validation
 - Collaboration workflow testing (Docs real-time editing)
@@ -578,6 +627,9 @@ The implementation follows a **phased migration** strategy with 5 waves of appro
 The cutover will be executed during approved maintenance windows (weekends recommended) with documented rollback procedures available if critical issues arise.
 
 ## Cutover Checklist
+
+The following checklist will guide the cutover execution:
+
 - Pre-cutover validation: Pilot success, data integrity confirmed
 - Workspace environment validated and security policies active
 - Rollback procedures documented (revert MX records, maintain Exchange)
@@ -589,6 +641,9 @@ The cutover will be executed during approved maintenance windows (weekends recom
 - Daily health checks during hypercare (4 weeks)
 
 ## Rollback Strategy
+
+Comprehensive rollback procedures in case of critical issues:
+
 - Documented rollback triggers (>10% mailbox failures, critical data loss, authentication failures)
 - Rollback procedures: Revert MX records to Exchange, maintain coexistence
 - Root cause analysis and fix validation before retry
@@ -602,6 +657,9 @@ The cutover will be executed during approved maintenance windows (weekends recom
 # Handover & Support
 
 ## Handover Artifacts
+
+The following artifacts will be delivered upon project completion:
+
 - Migration completion report with statistics (mailboxes, files, users migrated)
 - Google Workspace configuration documentation (SSO, DLP, Vault, mobile policies)
 - Operations runbook with troubleshooting procedures
@@ -611,6 +669,9 @@ The cutover will be executed during approved maintenance windows (weekends recom
 - Post-migration optimization recommendations
 
 ## Knowledge Transfer
+
+Knowledge transfer ensures the Client team can effectively operate the solution:
+
 - Live knowledge transfer sessions for IT administrators
 - Google Admin Console management training
 - Google Vault and eDiscovery training
@@ -662,6 +723,9 @@ Post-hypercare, Client may transition to ongoing managed services:
 ## Assumptions
 
 ### General Assumptions
+
+This engagement is based on the following general assumptions:
+
 - Client will provide Exchange admin access and file server access for migration assessment
 - Network bandwidth sufficient for 2.5 TB email + 3 TB file migration over 8-week period
 - Azure AD tenant available for SAML SSO integration with metadata provided
@@ -679,6 +743,9 @@ Post-hypercare, Client may transition to ongoing managed services:
 ## Dependencies
 
 ### Project Dependencies
+
+The following dependencies must be satisfied for successful project execution:
+
 - Google Workspace Account: Client provides billing information for Google Workspace subscription
 - Exchange Access: Client provides Exchange admin credentials and mailbox access for migration
 - File Server Access: Client provides file server admin access and migration source paths
@@ -695,6 +762,8 @@ Post-hypercare, Client may transition to ongoing managed services:
 ---
 
 # Investment Summary
+
+This section provides a comprehensive overview of the engagement investment:
 
 **500 User Deployment:** This pricing reflects a migration for 500 users from Exchange and file servers to Google Workspace Business Plus. For larger enterprise deployments (1,000+ users), please request revised pricing.
 
@@ -759,6 +828,8 @@ The following table summarizes the total investment required for Google Workspac
 
 ## Invoicing & Expenses
 
+Invoicing and expense policies for this engagement:
+
 ### Invoicing
 - Milestone-based invoicing per Payment Terms above
 - Net 30 payment terms
@@ -780,34 +851,55 @@ The following table summarizes the total investment required for Google Workspac
 All services will be delivered in accordance with the executed Master Services Agreement (MSA) or equivalent contractual document between Vendor and Client.
 
 ## Scope Changes
+
+Change control procedures for this engagement:
+
 - Changes to user count, migration volumes, or timeline require formal change requests
 - Change requests may impact project timeline and budget
 
 ## Intellectual Property
+
+Intellectual property rights are defined as follows:
+
 - Client retains ownership of all business data (emails, files, contacts)
 - Vendor retains ownership of proprietary methodologies and migration tools
 - Google Workspace configurations become Client property upon final payment
 
 ## Service Levels
+
+Service level commitments for this engagement:
+
 - Migration data integrity: 100% of emails and files migrated with zero data loss
 - Google Workspace uptime: 99.9% SLA (guaranteed by Google)
 - 30-day warranty on all migration deliverables from go-live date
 - Post-warranty support available under separate managed services agreement
 
 ## Liability
+
+Liability terms and limitations:
+
 - Migration follows Google Workspace best practices and proven methodologies
 - Performance may vary based on network bandwidth and Exchange server performance
 - Ongoing user training recommended as Google Workspace features evolve
 - Liability caps as agreed in MSA
 
 ## Confidentiality
+
+Confidentiality obligations for both parties:
+
 - Both parties agree to maintain strict confidentiality of business data and proprietary techniques
 - All exchanged artifacts under NDA protection
 
 ## Termination
+
+Termination provisions for this engagement:
+
 - Mutually terminable per MSA terms, subject to payment for completed work
 
 ## Governing Law
+
+This agreement shall be governed by the laws of [State/Region].
+
 - Agreement governed under the laws of [State/Region]
 
 ---

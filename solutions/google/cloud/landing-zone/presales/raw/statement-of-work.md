@@ -37,6 +37,9 @@ This Statement of Work (SOW) defines the scope, deliverables, roles, and terms f
 - **Compliance Exposure:** Unable to demonstrate SOC 2 or PCI-DSS compliance without landing zone foundation
 
 ## Business Objectives
+
+The following objectives define the key business outcomes this engagement will deliver:
+
 - **Establish Cloud Foundation:** Implement GCP Organization with folder hierarchy, Cloud Foundation Toolkit, and governance automation to enable secure multi-team adoption
 - **Accelerate Project Provisioning:** Reduce project creation time from 6-8 weeks to under 1 hour using Terraform automation and self-service workflows
 - **Enforce Security Baseline:** Deploy Security Command Center Premium, Chronicle SIEM, and organization policies to ensure 100% compliance with SOC 2 and PCI-DSS
@@ -45,6 +48,9 @@ This Statement of Work (SOW) defines the scope, deliverables, roles, and terms f
 - **Foundation for Growth:** Enable platform supporting 10 initial projects scaling to 75+ projects across 20+ teams without re-architecture
 
 ## Success Metrics
+
+The following metrics will be used to measure project success:
+
 - Project provisioning time reduced from 6-8 weeks to <1 hour (95% reduction)
 - 100% compliance with SOC 2 and PCI-DSS security controls within 90 days
 - Zero security misconfigurations through enforced organization policies and Cloud Foundation Toolkit
@@ -273,6 +279,8 @@ The RACI matrix defines roles and responsibilities for each major task category.
 
 ## Key Personnel
 
+The following personnel will be assigned to this engagement:
+
 **Vendor Team:**
 - EO Project Manager: Overall delivery accountability
 - EO Quarterback: Technical design and oversight
@@ -321,6 +329,8 @@ Key architectural components include:
 - Observability Layer (Cloud Logging, Cloud Monitoring, FinOps Dashboards)
 
 ## Scope Specifications
+
+This engagement is scoped according to the following specifications:
 
 **Organization & Governance:**
 - GCP Organization with 3-tier folder hierarchy (dev/staging/prod)
@@ -394,6 +404,9 @@ All critical configurations are protected through:
 The implementation approach follows GCP landing zone best practices and Cloud Foundation Toolkit patterns.
 
 ## Example Implementation Patterns
+
+The following patterns will guide the implementation approach:
+
 - Phased rollout: Foundation → Security → Automation → Team Onboarding
 - Parallel environments: Build dev/staging/prod folders simultaneously
 - Pilot-then-scale: Onboard 2 teams, validate, then expand to all teams
@@ -418,6 +431,9 @@ The implementation leverages Google Cloud-native tools, Terraform automation, an
 ## Data Management
 
 ### Data Strategy
+
+The data management approach follows industry best practices:
+
 - Centralized log aggregation via Cloud Logging sinks
 - BigQuery exports for long-term retention and analytics
 - VPC Flow Logs for network traffic analysis
@@ -440,6 +456,9 @@ The implementation leverages Google Cloud-native tools, Terraform automation, an
 The implementation and target environment will be architected and validated to meet the Client's security, compliance, and governance requirements. Vendor will adhere to Google Cloud security frameworks and enterprise best practices.
 
 ## Identity & Access Management
+
+The solution implements comprehensive identity and access controls:
+
 - Cloud Identity Premium with SAML SSO integration
 - Multi-factor authentication (2SV/MFA) required for all administrator access
 - Role-based access control (RBAC) with principle of least privilege
@@ -448,6 +467,9 @@ The implementation and target environment will be architected and validated to m
 - Just-in-time access for privileged operations
 
 ## Monitoring & Threat Detection
+
+Security monitoring capabilities include:
+
 - Security Command Center Premium for continuous security monitoring
 - Chronicle SIEM for advanced threat detection and incident response
 - Cloud Audit Logs enabled for all administrative and data access events
@@ -456,6 +478,9 @@ The implementation and target environment will be architected and validated to m
 - Integration with SIEM for centralized security operations
 
 ## Compliance & Auditing
+
+The solution supports the following compliance frameworks:
+
 - SOC 2 compliance through enforced organization policies and security controls
 - PCI DSS compliance for payment data workloads with network segmentation
 - GDPR compliance: Data residency controls, right-to-deletion, audit trail
@@ -464,6 +489,9 @@ The implementation and target environment will be architected and validated to m
 - Quarterly compliance reviews and audit support
 
 ## Encryption & Key Management
+
+Data protection is implemented through encryption at all layers:
+
 - All data encrypted at rest using customer-managed encryption keys (CMEK)
 - Cloud KMS for centralized key management with automatic rotation
 - All data encrypted in transit using TLS 1.2+
@@ -472,6 +500,9 @@ The implementation and target environment will be architected and validated to m
 - Hardware security modules (Cloud HSM) for sensitive workloads (optional)
 
 ## Governance
+
+Governance processes ensure consistent management of the solution:
+
 - Organization policies enforcing 50+ security and compliance constraints
 - Resource location restrictions for data residency requirements
 - Service enablement controls preventing unauthorized API usage
@@ -493,6 +524,9 @@ The implementation and target environment will be architected and validated to m
 | Production | Live production workloads | production/ | Operations team, authorized users |
 
 ### Access Policies
+
+Access control policies are defined as follows:
+
 - Multi-factor authentication (2SV) required for all Google Cloud console access
 - API access via service accounts with workload identity
 - Administrator Access: Full organization access for platform team during project
@@ -509,6 +543,9 @@ The implementation and target environment will be architected and validated to m
 Comprehensive testing and validation will take place throughout the implementation lifecycle to ensure functionality, security, compliance, and scalability of the landing zone foundation.
 
 ## Functional Validation
+
+Functional testing ensures all features work as designed:
+
 - End-to-end project provisioning workflow testing
 - Shared VPC network connectivity validation
 - Hybrid connectivity testing via Dedicated Interconnect
@@ -517,12 +554,18 @@ Comprehensive testing and validation will take place throughout the implementati
 - Cloud Foundation Toolkit module validation
 
 ## Performance & Load Testing
+
+Performance validation ensures the solution meets SLA requirements:
+
 - Project provisioning performance (target: <1 hour)
 - Network throughput testing (Interconnect 10 Gbps validation)
 - Concurrent project creation testing
 - Logging ingestion capacity testing (500 GB/month)
 
 ## Security Testing
+
+Security validation ensures protection against threats:
+
 - Validation of organization policy constraints
 - Security Command Center findings review
 - IAM privilege escalation testing
@@ -531,12 +574,18 @@ Comprehensive testing and validation will take place throughout the implementati
 - Compliance validation (SOC 2, PCI-DSS controls)
 
 ## Disaster Recovery & Resilience Tests
+
+DR testing validates backup and recovery capabilities:
+
 - Infrastructure-as-code rollback testing
 - Interconnect failover validation
 - Multi-region network resilience testing
 - RTO/RPO validation
 
 ## User Acceptance Testing (UAT)
+
+UAT is performed in coordination with Client business stakeholders:
+
 - Performed in coordination with Client platform team
 - Pilot team project provisioning validation
 - Security and compliance sign-off
@@ -580,6 +629,9 @@ The implementation follows a **pilot-then-scale** strategy where 2 application t
 The cutover will be executed during a pre-approved maintenance window (recommended: weekend) with documented rollback procedures available if critical issues arise.
 
 ## Cutover Checklist
+
+The following checklist will guide the cutover execution:
+
 - Pre-cutover validation: Final UAT sign-off, security validation
 - Foundation environment validated and monitoring operational
 - Rollback procedures documented (Terraform destroy, folder cleanup)
@@ -590,6 +642,9 @@ The cutover will be executed during a pre-approved maintenance window (recommend
 - Daily monitoring during hypercare period (4 weeks)
 
 ## Rollback Strategy
+
+Comprehensive rollback procedures in case of critical issues:
+
 - Documented rollback triggers (security violation, critical infrastructure failure)
 - Rollback procedures: Terraform destroy, organization cleanup
 - Root cause analysis and fix validation before retry
@@ -603,6 +658,9 @@ The cutover will be executed during a pre-approved maintenance window (recommend
 # Handover & Support
 
 ## Handover Artifacts
+
+The following artifacts will be delivered upon project completion:
+
 - As-Built documentation including architecture diagrams and Terraform code
 - Cloud Foundation Toolkit module documentation with customization guide
 - Operations runbook with troubleshooting procedures
@@ -612,6 +670,9 @@ The cutover will be executed during a pre-approved maintenance window (recommend
 - Network diagrams showing Shared VPC and Interconnect topology
 
 ## Knowledge Transfer
+
+Knowledge transfer ensures the Client team can effectively operate the solution:
+
 - Live knowledge transfer sessions for platform administrators
 - Google Admin Console and IAM management training
 - Cloud Foundation Toolkit customization and module development training
@@ -663,6 +724,9 @@ Post-hypercare, Client may transition to ongoing managed services:
 ## Assumptions
 
 ### General Assumptions
+
+This engagement is based on the following general assumptions:
+
 - Client will provide access to existing GCP Organization or approve creation of new organization
 - On-premises network team available for Interconnect coordination and testing
 - Client technical team available for requirements validation, testing, and approvals
@@ -678,6 +742,9 @@ Post-hypercare, Client may transition to ongoing managed services:
 ## Dependencies
 
 ### Project Dependencies
+
+The following dependencies must be satisfied for successful project execution:
+
 - GCP Organization Access: Client provides organization admin access or approves creation of new organization
 - Billing Account: Client provides billing account for GCP resource provisioning
 - Network Planning: On-premises network team provides IP addressing, BGP ASN, and Interconnect requirements
@@ -693,6 +760,8 @@ Post-hypercare, Client may transition to ongoing managed services:
 ---
 
 # Investment Summary
+
+This section provides a comprehensive overview of the engagement investment:
 
 **Small-Medium Scope Implementation:** This pricing reflects a foundation deployment designed for 10 projects across 5 teams with future growth to 30+ projects. For larger enterprise deployments (75+ projects), please request large scope pricing.
 
@@ -766,6 +835,8 @@ The following table summarizes the total investment required for Google Cloud La
 
 ## Invoicing & Expenses
 
+Invoicing and expense policies for this engagement:
+
 ### Invoicing
 - Milestone-based invoicing per Payment Terms above
 - Net 30 payment terms
@@ -787,35 +858,56 @@ The following table summarizes the total investment required for Google Cloud La
 All services will be delivered in accordance with the executed Master Services Agreement (MSA) or equivalent contractual document between Vendor and Client.
 
 ## Scope Changes
+
+Change control procedures for this engagement:
+
 - Changes to project count, folder structure, network architecture, or timeline require formal change requests
 - Change requests may impact project timeline and budget
 
 ## Intellectual Property
+
+Intellectual property rights are defined as follows:
+
 - Client retains ownership of all business data and configurations
 - Vendor retains ownership of proprietary methodologies and frameworks
 - Cloud Foundation Toolkit modules and configurations become Client property upon final payment
 - Infrastructure-as-code and Terraform modules transfer to Client
 
 ## Service Levels
+
+Service level commitments for this engagement:
+
 - Project provisioning time: <1 hour for standard projects via Terraform automation
 - Platform uptime: 99.9% during business hours (SLA from GCP services)
 - 30-day warranty on all deliverables from go-live date
 - Post-warranty support available under separate managed services agreement
 
 ## Liability
+
+Liability terms and limitations:
+
 - Architecture follows Google Cloud best practices and Cloud Foundation Toolkit patterns
 - Performance may vary based on GCP service availability and client network configuration
 - Ongoing platform maintenance recommended as GCP services evolve
 - Liability caps as agreed in MSA
 
 ## Confidentiality
+
+Confidentiality obligations for both parties:
+
 - Both parties agree to maintain strict confidentiality of business data, configurations, and proprietary techniques
 - All exchanged artifacts under NDA protection
 
 ## Termination
+
+Termination provisions for this engagement:
+
 - Mutually terminable per MSA terms, subject to payment for completed work
 
 ## Governing Law
+
+This agreement shall be governed by the laws of [State/Region].
+
 - Agreement governed under the laws of [State/Region]
 
 ---

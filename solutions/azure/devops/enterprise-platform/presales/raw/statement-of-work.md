@@ -126,6 +126,8 @@ The following deliverables will be provided throughout the engagement, with spec
 
 ## RACI Matrix
 
+The following matrix defines the responsibility assignments for key project activities:
+
 <!-- TABLE_CONFIG: widths=[34, 11, 11, 11, 11, 11, 11] -->
 | Task/Deliverable | Vendor PM | Vendor Arch | Vendor Eng | Client IT | Client Mgmt | SME |
 |------------------|-----------|-------------|------------|-----------|-------------|-----|
@@ -140,6 +142,8 @@ The following deliverables will be provided throughout the engagement, with spec
 **Legend:** R = Responsible | A = Accountable | C = Consulted | I = Informed
 
 ## Key Personnel
+
+The following personnel will be assigned to this engagement:
 
 **Vendor Team:**
 - Project Manager: Overall delivery accountability
@@ -191,6 +195,8 @@ The implementation will follow industry best practices with:
 
 ## Identity & Access Management
 
+Identity and access controls ensure secure operations:
+
 - Role-based access control (RBAC) implementation
 - Least-privilege principle enforcement
 - Multi-factor authentication (MFA) required
@@ -199,6 +205,8 @@ The implementation will follow industry best practices with:
 
 ## Monitoring & Threat Detection
 
+Comprehensive monitoring ensures security visibility across the infrastructure:
+
 - Real-time security monitoring and alerting
 - Audit logging for all administrative actions
 - Anomaly detection and behavioral analysis
@@ -206,6 +214,8 @@ The implementation will follow industry best practices with:
 - Compliance reporting dashboards
 
 ## Compliance & Governance
+
+The following compliance and governance controls will be implemented:
 
 - Industry standard compliance frameworks (SOC 2, ISO 27001)
 - Data classification and protection policies
@@ -218,6 +228,8 @@ The implementation will follow industry best practices with:
 # Testing & Validation
 
 ## Testing Strategy
+
+The following testing approach ensures solution quality and reliability:
 
 **Functional Validation:**
 - End-to-end workflow testing
@@ -239,6 +251,8 @@ The implementation will follow industry best practices with:
 
 ## Go-Live Readiness
 
+The following criteria must be met before production deployment:
+
 - [ ] All functional tests passed
 - [ ] Performance benchmarks achieved
 - [ ] Security validation complete
@@ -251,6 +265,8 @@ The implementation will follow industry best practices with:
 # Handover & Support
 
 ## Knowledge Transfer
+
+Knowledge transfer ensures the Client team can effectively manage and operate the solution:
 
 **Training Sessions:**
 - 3x live knowledge transfer sessions (recorded)
@@ -286,6 +302,8 @@ The implementation will follow industry best practices with:
 
 # Investment Summary
 
+This section provides a comprehensive overview of the engagement investment.
+
 <!-- BEGIN COST_SUMMARY_TABLE -->
 <!-- TABLE_CONFIG: widths=[20, 12, 23, 13, 10, 10, 12] -->
 | Cost Category | Year 1 List | AWS/Partner Credits | Year 1 Net | Year 2 | Year 3 | 3-Year Total |
@@ -312,11 +330,15 @@ Any changes to scope, schedule, or cost require a formal Change Request approved
 
 ## Intellectual Property
 
+Intellectual property rights are allocated as follows:
+
 - Client retains ownership of all configurations and documentation specific to their environment
 - Vendor retains proprietary methodologies, tools, and accelerators
 - Pre-existing IP remains with original owner
 
 ## Service Levels
+
+The following service level commitments apply to this engagement:
 
 - Deliverables provided per agreed schedule
 - Hypercare period: 4 weeks with defined response times
@@ -324,11 +346,15 @@ Any changes to scope, schedule, or cost require a formal Change Request approved
 
 ## Confidentiality
 
+Confidentiality obligations govern information exchanged during this engagement:
+
 - All exchanged artifacts under NDA protection
 - Client data handled per security requirements
 - No disclosure to third parties without consent
 
 ## Termination
+
+The following termination provisions apply to this engagement:
 
 - Either party may terminate with 30 days written notice
 - Payment due for all completed work

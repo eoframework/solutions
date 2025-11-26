@@ -36,6 +36,9 @@ This Statement of Work (SOW) defines the scope, deliverables, roles, and terms f
 - **Remote Collaboration Limits:** Remote teams cannot effectively collaborate on 3D designs in real-time
 
 ## Business Objectives
+
+The following objectives define the key business outcomes this engagement will deliver:
+
 - **Enable Real-Time Collaboration:** Deploy Omniverse Enterprise platform enabling 50 engineers to work simultaneously on same 3D scene with live updates
 - **Eliminate File Conversion:** Implement Universal Scene Description (USD) workflows connecting native CAD tools (Revit, SolidWorks, Rhino, Blender, Maya) without file conversion
 - **Accelerate Rendering:** Reduce rendering time by 90% through RTX real-time ray tracing (8 hours to 45 minutes per scene)
@@ -44,6 +47,9 @@ This Statement of Work (SOW) defines the scope, deliverables, roles, and terms f
 - **Build Digital Twins:** Establish foundation for factory simulation and optimization with Omniverse-powered digital twins
 
 ## Success Metrics
+
+The following metrics will be used to measure project success:
+
 - 50 RTX workstations operational with Omniverse Enterprise licenses
 - Enable real-time collaboration: 10+ users simultaneously editing same USD scene
 - Reduce rendering time by 90% vs CPU baseline (8 hours to 45 minutes)
@@ -277,6 +283,8 @@ The following matrix defines roles and responsibilities for all major project ac
 
 ## Key Personnel
 
+The following personnel will be assigned to this engagement:
+
 **Vendor Team:**
 - EO Project Manager: Overall delivery accountability
 - EO Quarterback: Technical design and oversight
@@ -323,6 +331,8 @@ Key architectural components include:
 - Network Layer (100 GbE backbone, 10 GbE to workstations)
 
 ## Scope Specifications
+
+This engagement is scoped according to the following specifications:
 
 **Workstations & Rendering:**
 - 50x Dell Precision 7960 Tower Workstations
@@ -413,6 +423,9 @@ All critical data and configurations are protected through:
 The implementation approach follows NVIDIA Omniverse best practices for enterprise deployments.
 
 ## Example Implementation Patterns
+
+The following patterns will guide the implementation approach:
+
 - Phased deployment: Deploy Nucleus first, then pilot workstations, then full rollout
 - Pilot teams: Start with 5-10 designers to validate workflows before full deployment
 - Connector rollout: Deploy one CAD connector at a time with validation
@@ -439,6 +452,9 @@ The following tools and technologies will be deployed as part of the Omniverse E
 ## Data Management
 
 ### Data Strategy
+
+The data management approach follows industry best practices:
+
 - Centralized USD scene storage on Nucleus servers
 - Version control and branching for 3D assets (Git-like)
 - Asset library for shared materials and components
@@ -461,6 +477,9 @@ The following tools and technologies will be deployed as part of the Omniverse E
 The implementation and target environment will be architected and validated to meet the Client's security, compliance, and governance requirements. Vendor will adhere to industry-standard security frameworks and NVIDIA Omniverse best practices.
 
 ## Identity & Access Management
+
+The solution implements comprehensive identity and access controls:
+
 - Active Directory integration for user authentication
 - Role-based access control (RBAC) for USD scene access
 - Multi-factor authentication (MFA) for Nucleus server access
@@ -468,6 +487,9 @@ The implementation and target environment will be architected and validated to m
 - Project-based access controls for sensitive designs
 
 ## Monitoring & Threat Detection
+
+Security monitoring capabilities include:
+
 - Centralized logging for all Nucleus server events
 - Automated alerts for unauthorized access attempts
 - Network monitoring for anomalous traffic patterns
@@ -475,6 +497,9 @@ The implementation and target environment will be architected and validated to m
 - Security scanning for Nucleus server vulnerabilities
 
 ## Compliance & Auditing
+
+The solution supports the following compliance frameworks:
+
 - SOC 2 certified infrastructure components
 - Intellectual property protection controls
 - Comprehensive audit trail for all scene access and edits
@@ -482,6 +507,9 @@ The implementation and target environment will be architected and validated to m
 - Documented security policies and procedures
 
 ## Encryption & Key Management
+
+Data protection is implemented through encryption at all layers:
+
 - TLS 1.3 encryption for all Nucleus communications
 - Encryption at rest for USD scene storage
 - Secure key management for workstation access
@@ -489,6 +517,9 @@ The implementation and target environment will be architected and validated to m
 - Regular encryption key rotation
 
 ## Governance
+
+Governance processes ensure consistent management of the solution:
+
 - Change control: All Nucleus configuration changes require approval
 - Access reviews: Quarterly review of user access and permissions
 - Project access policies: Confidential projects with restricted access
@@ -508,6 +539,9 @@ The implementation and target environment will be architected and validated to m
 | Pilot | Pre-production workflow validation | Dedicated pilot projects | Pilot user group |
 
 ### Access Policies
+
+Access control policies are defined as follows:
+
 - Multi-factor authentication (MFA) required for Nucleus admin access
 - Active Directory authentication for workstation and Nucleus access
 - Administrator Access: Full Nucleus management for IT team
@@ -523,6 +557,9 @@ The implementation and target environment will be architected and validated to m
 Comprehensive testing and validation will take place throughout the implementation lifecycle to ensure functionality, performance, security, and reliability of the Omniverse platform.
 
 ## Functional Validation
+
+Functional testing ensures all features work as designed:
+
 - End-to-end USD collaboration workflow validation
 - Multi-user simultaneous editing of same scene
 - CAD Connector functionality with representative files
@@ -531,6 +568,9 @@ Comprehensive testing and validation will take place throughout the implementati
 - User authentication and access control validation
 
 ## Performance & Load Testing
+
+Performance validation ensures the solution meets SLA requirements:
+
 - Single-user and multi-user collaboration performance
 - RTX rendering performance benchmarking (vs CPU baseline)
 - Storage throughput testing for large USD scenes
@@ -539,6 +579,9 @@ Comprehensive testing and validation will take place throughout the implementati
 - Omniverse Farm rendering performance (if deployed)
 
 ## Security Testing
+
+Security validation ensures protection against threats:
+
 - Access control and authentication validation
 - Encryption validation (data at rest and in transit)
 - Intellectual property protection testing
@@ -546,6 +589,9 @@ Comprehensive testing and validation will take place throughout the implementati
 - Vulnerability scanning and penetration testing
 
 ## Disaster Recovery & Resilience Tests
+
+DR testing validates backup and recovery capabilities:
+
 - Nucleus failover and HA validation
 - Storage failover and RAID rebuild testing
 - Backup and restore validation
@@ -553,6 +599,9 @@ Comprehensive testing and validation will take place throughout the implementati
 - Workstation failure and recovery
 
 ## User Acceptance Testing (UAT)
+
+UAT is performed in coordination with Client business stakeholders:
+
 - Performed in coordination with Client design team
 - Real design workflows executed on Omniverse
 - CAD Connector validation with production files
@@ -592,6 +641,9 @@ The implementation follows a **pilot-first** strategy with gradual rollout:
 4. **Hypercare Period (4 weeks post-rollout):** Daily monitoring, rapid issue resolution, and workflow optimization.
 
 ## Cutover Checklist
+
+The following checklist will guide the cutover execution:
+
 - Pre-cutover validation: Pilot team sign-off, UAT completion
 - Nucleus infrastructure validated and monitoring operational
 - Workstations deployed and configured
@@ -601,6 +653,9 @@ The implementation follows a **pilot-first** strategy with gradual rollout:
 - Daily monitoring during hypercare period (4 weeks)
 
 ## Rollback Strategy
+
+Comprehensive rollback procedures in case of critical issues:
+
 - Documented rollback triggers (Nucleus failures, data corruption, performance issues)
 - Rollback procedures: Revert to existing CAD workflows
 - Root cause analysis and fix validation before retry
@@ -614,6 +669,9 @@ The implementation follows a **pilot-first** strategy with gradual rollout:
 # Handover & Support
 
 ## Handover Artifacts
+
+The following artifacts will be delivered upon project completion:
+
 - As-Built documentation including architecture diagrams, Nucleus configs, and network topology
 - Omniverse operations runbook with troubleshooting procedures
 - Nucleus administration guide and best practices
@@ -623,6 +681,9 @@ The implementation follows a **pilot-first** strategy with gradual rollout:
 - Performance optimization recommendations
 
 ## Knowledge Transfer
+
+Knowledge transfer ensures the Client team can effectively operate the solution:
+
 - Live knowledge transfer sessions for administrators and designers
 - Nucleus server administration training
 - Workstation configuration and troubleshooting
@@ -676,6 +737,9 @@ Post-hypercare, Client may transition to ongoing managed services:
 ## Assumptions
 
 ### General Assumptions
+
+This engagement is based on the following general assumptions:
+
 - Datacenter facility has adequate space and power for Nucleus servers
 - Workstation locations have adequate space and power infrastructure
 - Network infrastructure supports 10 GbE to workstations, 100 GbE for servers
@@ -690,6 +754,9 @@ Post-hypercare, Client may transition to ongoing managed services:
 ## Dependencies
 
 ### Project Dependencies
+
+The following dependencies must be satisfied for successful project execution:
+
 - Datacenter Readiness: Power and space for Nucleus servers
 - Workstation Locations: Space prepared for 50 workstations
 - Network Infrastructure: 10 GbE to workstations, 100 GbE backbone
@@ -706,6 +773,8 @@ Post-hypercare, Client may transition to ongoing managed services:
 ---
 
 # Investment Summary
+
+This section provides a comprehensive overview of the engagement investment:
 
 **Enterprise 3D Collaboration Platform:** This pricing reflects an enterprise Omniverse deployment with 50 RTX workstations designed for real-time 3D collaboration supporting architects, engineers, and designers. Total capacity: 50 users, 100 TB USD storage.
 
@@ -780,6 +849,8 @@ The table below summarizes the total investment required across all cost categor
 
 ## Invoicing & Expenses
 
+Invoicing and expense policies for this engagement:
+
 ### Invoicing
 - Milestone-based invoicing per Payment Terms above
 - Net 30 payment terms
@@ -803,38 +874,59 @@ The table below summarizes the total investment required across all cost categor
 All services will be delivered in accordance with the executed Master Services Agreement (MSA) or equivalent contractual document between Vendor and Client.
 
 ## Scope Changes
+
+Change control procedures for this engagement:
+
 - Changes to workstation count, Nucleus capacity, or timeline require formal change requests
 - Hardware lead times (8-10 weeks) may impact change request feasibility
 - Change requests may impact project timeline and budget
 
 ## Intellectual Property
+
+Intellectual property rights are defined as follows:
+
 - Client retains ownership of all 3D designs, USD scenes, and assets
 - Vendor retains ownership of proprietary deployment methodologies
 - NVIDIA retains ownership of Omniverse software and tools
 - Custom USD workflows and scripts transfer to Client upon final payment
 
 ## Service Levels
+
+Service level commitments for this engagement:
+
 - Nucleus server availability: 99.5% uptime during business hours
 - RTX workstation availability: 99% operational
 - 30-day warranty on all deliverables from go-live date
 - Post-warranty support available under separate managed services agreement
 
 ## Liability
+
+Liability terms and limitations:
+
 - Performance guarantees apply to NVIDIA-validated benchmark workflows
 - Custom USD workflow performance may vary
 - Hardware warranty provided by Dell/NetApp per standard terms
 - Liability caps as agreed in MSA
 
 ## Confidentiality
+
+Confidentiality obligations for both parties:
+
 - Both parties agree to maintain strict confidentiality of designs, USD scenes, and methodologies
 - All exchanged artifacts under NDA protection
 - Intellectual property protection for Client designs
 
 ## Termination
+
+Termination provisions for this engagement:
+
 - Mutually terminable per MSA terms, subject to payment for completed work
 - Hardware procurement is non-refundable once ordered (8-10 week lead time)
 
 ## Governing Law
+
+This agreement shall be governed by the laws of [State/Region].
+
 - Agreement governed under the laws of [State/Region]
 
 ---

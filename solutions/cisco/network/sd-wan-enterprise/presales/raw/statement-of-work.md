@@ -1,5 +1,4 @@
 ---
-# Document Metadata (Simplified)
 document_title: Statement of Work
 technology_provider: Cisco Systems
 project_name: Cisco SD-WAN Enterprise
@@ -36,6 +35,8 @@ This Statement of Work (SOW) defines the scope, deliverables, roles, and terms f
 
 ## Business Objectives
 
+The following objectives define the key business outcomes this engagement will deliver:
+
 - **Reduce WAN Costs:** Achieve 60% cost reduction by replacing $300K MPLS with $176K SD-WAN (broadband + LTE)
 - **Accelerate Site Deployment:** Enable 95% faster provisioning (2 hours vs 8 weeks) with zero-touch router deployment
 - **Optimize Cloud Access:** Direct internet breakout improving Office 365 performance by 50%
@@ -44,6 +45,8 @@ This Statement of Work (SOW) defines the scope, deliverables, roles, and terms f
 - **Enable Flexibility:** Agile WAN with dual circuits (broadband + LTE) and automatic failover
 
 ## Success Metrics
+
+Success will be measured against the following quantifiable metrics:
 
 - 60% WAN cost reduction ($300K → $176K annually)
 - 95% faster site deployment (8 weeks → 2 hours)
@@ -56,6 +59,8 @@ This Statement of Work (SOW) defines the scope, deliverables, roles, and terms f
 # Scope of Work
 
 ## In Scope
+
+The following items are included within the scope of this engagement:
 
 - Current WAN assessment (MPLS circuits, bandwidth, application analysis)
 - SD-WAN architecture design with hub-spoke topology
@@ -224,6 +229,8 @@ The following RACI matrix defines responsibility assignments for key project act
 
 ## Key Personnel
 
+The following personnel will be assigned to this engagement:
+
 **Vendor Team:**
 - EO Project Manager: Overall delivery accountability
 - EO Quarterback: Technical design and architecture oversight
@@ -241,6 +248,8 @@ The following RACI matrix defines responsibility assignments for key project act
 # Architecture & Design
 
 ## Architecture Overview
+
+The following diagram illustrates the high-level architecture for the proposed solution:
 
 ![Solution Architecture](../../assets/diagrams/architecture-diagram.png)
 
@@ -292,6 +301,8 @@ The deployment follows a conservative phased approach:
 
 ## Identity & Access Management
 
+Identity and access controls ensure secure operations:
+
 - Role-based access control (RBAC) for vManage administrators
 - Multi-factor authentication (MFA) for privileged access
 - Integration with Active Directory/LDAP (optional)
@@ -299,12 +310,16 @@ The deployment follows a conservative phased approach:
 
 ## WAN Security
 
+WAN security is ensured through the following controls:
+
 - IPsec encryption for all SD-WAN tunnels
 - Zone-based firewall on branch routers
 - Application visibility and control
 - Umbrella DNS security (optional add-on)
 
 ## Compliance & Auditing
+
+The solution addresses the following compliance and audit requirements:
 
 - Configuration change tracking via vManage
 - Template-based deployment ensuring consistency
@@ -390,6 +405,8 @@ Upon successful implementation:
 
 ## Knowledge Transfer
 
+Knowledge transfer ensures the Client team can effectively manage and operate the solution:
+
 **Training Sessions:**
 - 24 hours of hands-on training
 - vManage operations and monitoring
@@ -424,6 +441,8 @@ Upon successful implementation:
 
 ### General Assumptions
 
+The following general assumptions apply to this engagement:
+
 **Client Responsibilities:**
 - Client will order broadband and LTE circuits for all 25 sites (8-12 week lead time)
 - Client will provide data center rack space and power for controllers
@@ -445,6 +464,8 @@ Upon successful implementation:
 ## Dependencies
 
 ### Project Dependencies
+
+The following dependencies must be satisfied for successful delivery:
 
 **Access & Infrastructure:**
 - Data center rack space and power for controllers and hub routers (Week 1)
@@ -490,6 +511,8 @@ The following table summarizes the total cost of ownership for this engagement a
 
 ## Payment Terms
 
+This section outlines the pricing model and payment schedule for the engagement:
+
 **Pricing Model:** Fixed price with milestone-based payments
 
 **Payment Schedule:**
@@ -514,11 +537,15 @@ Any changes to scope, schedule, or cost require a formal Change Request approved
 
 ## Intellectual Property
 
+Intellectual property rights are allocated as follows:
+
 - Client retains ownership of all deliverables and configurations
 - Vendor retains proprietary methodologies and tools
 - Pre-existing IP remains with original owner
 
 ## Confidentiality
+
+Confidentiality obligations govern information exchanged during this engagement:
 
 - All artifacts under NDA protection
 - Client data handled per security requirements

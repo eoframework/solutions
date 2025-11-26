@@ -36,6 +36,9 @@ This Statement of Work (SOW) defines the scope, deliverables, roles, and terms f
 - **Productivity Loss:** Dataset download waits and network latency reducing data scientist productivity
 
 ## Business Objectives
+
+The following objectives define the key business outcomes this engagement will deliver:
+
 - **Reduce Cloud Costs:** Eliminate cloud GPU spend through on-premises Dell Precision workstations with RTX A6000 GPUs achieving 60-70% cost reduction vs AWS p4d baseline
 - **Improve Training Performance:** Reduce model training time by 50% through local NVMe storage eliminating dataset transfer latency and providing dedicated 48GB GPU memory per workstation
 - **Enable Data Sovereignty:** Keep all AI training datasets on-premises to meet compliance requirements and eliminate cloud data residency concerns
@@ -44,6 +47,9 @@ This Statement of Work (SOW) defines the scope, deliverables, roles, and terms f
 - **Foundation for AI Platform:** Build foundation for expanding AI infrastructure to support distributed training and MLOps capabilities
 
 ## Success Metrics
+
+The following metrics will be used to measure project success:
+
 - 60%+ reduction in AI infrastructure costs within 12 months (vs cloud baseline)
 - 50% reduction in model training time (vs current cloud performance)
 - 100% data sovereignty compliance (all datasets on-premises)
@@ -160,6 +166,8 @@ Key activities:
 
 ## Deliverables
 
+The following table summarizes the key deliverables for this engagement:
+
 <!-- TABLE_CONFIG: widths=[8, 40, 12, 20, 20] -->
 | # | Deliverable | Type | Due Date | Acceptance By |
 |---|-------------|------|----------|---------------|
@@ -170,6 +178,8 @@ Key activities:
 | 5 | As-Built Documentation | Document | Week 6 | IT Operations |
 
 ## Project Milestones
+
+The following milestones represent key checkpoints throughout the project lifecycle:
 
 <!-- TABLE_CONFIG: widths=[20, 55, 25] -->
 | Milestone | Description | Target Date |
@@ -185,6 +195,9 @@ Key activities:
 # Roles & Responsibilities
 
 ## Client Responsibilities
+
+The Client is responsible for the following:
+
 - Provide data center space with adequate power and cooling
 - Install rack cabinets and PDUs (if rack-mount configuration)
 - Provide 10GbE network infrastructure and VLAN configuration
@@ -194,6 +207,9 @@ Key activities:
 - Participate in knowledge transfer and training sessions
 
 ## Vendor Responsibilities
+
+The Vendor is responsible for the following:
+
 - Coordinate Dell hardware procurement and delivery
 - Install and configure Ubuntu, CUDA, and ML frameworks
 - Configure PowerScale NAS with NFS shares and permissions
@@ -236,12 +252,16 @@ The Dell Precision AI Workstation infrastructure consists of three layers:
 
 ## Network Design
 
+The network architecture includes the following components:
+
 - 10GbE network fabric connecting workstations to PowerScale NAS
 - Dedicated storage VLAN for dataset traffic isolation
 - 1GbE management network for out-of-band access
 - Firewall rules for SSH access and monitoring agents
 
 ## Data Flow
+
+Data flows through the solution as follows:
 
 1. Data scientists access workstations via SSH or remote desktop
 2. Training datasets stored centrally on PowerScale NAS (NFS mounts)
@@ -255,18 +275,27 @@ The Dell Precision AI Workstation infrastructure consists of three layers:
 # Security & Compliance
 
 ## Access Control
+
+Access control measures include:
+
 - SSH key-based authentication for workstation access
 - LDAP/Active Directory integration for centralized user management
 - Sudo access restricted to administrators
 - File-level permissions on PowerScale NAS shares
 
 ## Data Protection
+
+Data protection measures include:
+
 - Encryption at rest: LUKS encryption on workstation NVMe drives
 - Encryption in transit: TLS for all network communication
 - PowerScale snapshots for data recovery
 - No sensitive data transmitted to cloud services
 
 ## Compliance
+
+Compliance requirements and controls include:
+
 - Data sovereignty: All training data remains on-premises
 - Audit logging: SSH access logs and file access audit trail
 - Patch management: Monthly security updates for Ubuntu and NVIDIA drivers
@@ -276,12 +305,18 @@ The Dell Precision AI Workstation infrastructure consists of three layers:
 # Testing & Validation
 
 ## Performance Testing
+
+Performance testing validates system behavior under load:
+
 - **GPU Benchmark:** PyTorch and TensorFlow training performance vs specifications
 - **Storage Throughput:** NVMe local storage and PowerScale NAS read/write speeds
 - **Network Bandwidth:** 10GbE connectivity validation between workstations and storage
 - **End-to-End Training:** Sample model training with representative datasets
 
 ## Acceptance Criteria
+
+The following acceptance criteria will be used to validate deliverables:
+
 - GPU utilization achieves 80%+ during training workloads
 - Local NVMe storage achieves 7000MB/s+ read performance
 - PowerScale NAS achieves 1GB/s+ aggregate throughput
@@ -294,6 +329,9 @@ The Dell Precision AI Workstation infrastructure consists of three layers:
 # Handover & Support
 
 ## Knowledge Transfer
+
+Knowledge transfer ensures the Client team can effectively operate the solution:
+
 - 2-day hands-on training workshop for data scientists
   - CUDA optimization techniques
   - Distributed training best practices
@@ -304,6 +342,9 @@ The Dell Precision AI Workstation infrastructure consists of three layers:
   - Datadog monitoring and alerting
 
 ## Documentation
+
+The following documentation will be provided:
+
 - Solution architecture diagram
 - Installation and configuration runbooks
 - GPU optimization best practices guide
@@ -311,6 +352,9 @@ The Dell Precision AI Workstation infrastructure consists of three layers:
 - PowerScale backup and recovery procedures
 
 ## Support Period
+
+Post-implementation support is defined as follows:
+
 - 6-week hypercare support during initial deployment
 - Email and phone support during business hours
 - Remote troubleshooting for technical issues
@@ -328,6 +372,8 @@ After the 6-week engagement:
 # Investment Summary
 
 ## Total Investment
+
+The following table provides a comprehensive overview of the total investment required for this engagement:
 
 <!-- BEGIN COST_SUMMARY_TABLE -->
 <!-- TABLE_CONFIG: widths=[25, 15, 15, 15, 12, 12, 15] -->
@@ -348,6 +394,9 @@ Professional services cost: $34,000 (after $4,000 Dell ProDeploy credit)
 *Detailed breakdown available in Level of Effort estimate.*
 
 ## Payment Terms
+
+Payment terms for this engagement are as follows:
+
 - 25% upon SOW signature
 - 50% upon hardware delivery (Week 3)
 - 25% upon final acceptance (Week 6)
@@ -360,6 +409,9 @@ Professional services cost: $34,000 (after $4,000 Dell ProDeploy credit)
 Changes to scope, timeline, or deliverables require written change order approved by both parties. Changes may impact timeline and investment.
 
 ## Assumptions
+
+This engagement is based on the following assumptions:
+
 - Client provides data center space with adequate power and cooling
 - Client network infrastructure supports 10GbE connectivity
 - Dell hardware delivered within 2-3 weeks of purchase order
@@ -367,18 +419,27 @@ Changes to scope, timeline, or deliverables require written change order approve
 - Representative training datasets provided for validation
 
 ## Client Obligations
+
+The Client is obligated to provide the following:
+
 - Timely decision-making and approvals
 - Access to facilities and systems
 - Availability of technical resources
 - Hardware purchase order approval within 1 week
 
 ## Risk Factors
+
+The following risk factors have been identified:
+
 - Hardware delivery delays may impact timeline
 - Power or cooling constraints may require facility upgrades
 - Network infrastructure limitations may reduce performance
 - Dataset migration may take longer for multi-terabyte volumes
 
 ## Warranty
+
+Warranty terms for this engagement:
+
 - Dell ProSupport Plus provides hardware warranty and support
 - Professional services guaranteed for 30 days post-acceptance
 - Software configuration supported during 6-week hypercare period

@@ -37,6 +37,9 @@ This Statement of Work (SOW) defines the scope, deliverables, roles, and terms f
 - **Compliance Challenges:** Manual audit processes and inconsistent security configurations
 
 ## Business Objectives
+
+The following objectives define the key business outcomes this engagement will deliver:
+
 - **Automate IT Operations:** Implement Ansible Automation Platform for 500 servers and 100 network devices with 100 custom playbooks eliminating manual configuration tasks
 - **Eliminate Configuration Drift:** Achieve zero configuration drift violations through standardized automation and continuous compliance
 - **Accelerate Network Operations:** Reduce network configuration time from 2 days to 30 minutes through automated device management
@@ -45,6 +48,9 @@ This Statement of Work (SOW) defines the scope, deliverables, roles, and terms f
 - **Improve Compliance:** Automate compliance validation and remediation for security and regulatory requirements
 
 ## Success Metrics
+
+The following metrics will be used to measure project success:
+
 - 90% reduction in manual configuration effort measured by task time
 - Zero configuration drift violations across managed infrastructure
 - 95% reduction in network change implementation time (2 days to 30 minutes)
@@ -203,6 +209,8 @@ This section outlines the key deliverables, acceptance criteria, and project mil
 
 ## Deliverables
 
+The following table summarizes the key deliverables for this engagement:
+
 <!-- TABLE_CONFIG: widths=[8, 40, 12, 20, 20] -->
 | # | Deliverable | Type | Due Date | Acceptance By |
 |---|--------------------------------------|--------------|--------------|-----------------|
@@ -223,6 +231,8 @@ This section outlines the key deliverables, acceptance criteria, and project mil
 ---
 
 ## Project Milestones
+
+The following milestones represent key checkpoints throughout the project lifecycle:
 
 <!-- TABLE_CONFIG: widths=[20, 50, 30] -->
 | Milestone | Description | Target Date |
@@ -245,6 +255,8 @@ This section defines the roles, responsibilities, and accountability framework f
 
 ## RACI Matrix
 
+The following matrix defines the responsibility assignments for key project activities:
+
 <!-- TABLE_CONFIG: widths=[28, 11, 11, 11, 11, 9, 9, 10] -->
 | Task/Role | EO PM | EO Quarterback | EO Sales Eng | EO Eng | Client IT | Client Ops | SME |
 |-----------|-------|----------------|--------------|--------|-----------|------------|-----|
@@ -262,6 +274,8 @@ This section defines the roles, responsibilities, and accountability framework f
 **Legend:** R = Responsible | A = Accountable | C = Consulted | I = Informed
 
 ## Key Personnel
+
+The following personnel will be assigned to this engagement:
 
 **Vendor Team:**
 - EO Project Manager: Overall delivery accountability
@@ -309,6 +323,8 @@ Key architectural components include:
 - Observability Layer (Job logging, metrics collection, audit trail)
 
 ## Scope Specifications
+
+This engagement is scoped according to the following specifications:
 
 **Automation Controller:**
 - Controller Nodes: 2 nodes (8 vCPU, 16GB RAM each) in HA cluster
@@ -388,11 +404,16 @@ All critical data and configurations are protected through:
 The implementation approach follows Red Hat best practices and proven methodologies for Ansible deployments.
 
 ## Example Implementation Patterns
+
+The following patterns will guide the implementation approach:
+
 - Phased playbook development: Start with read-only tasks, then configuration changes
 - Pilot-first approach: Validate automation with test systems before production rollout
 - Check mode validation: Dry-run all playbooks before execution for safety
 
 ## Tooling Overview
+
+The following table outlines the recommended tooling stack for this implementation:
 
 <!-- TABLE_CONFIG: widths=[25, 35, 40] -->
 | Category | Primary Tools | Purpose |
@@ -411,6 +432,9 @@ The implementation approach follows Red Hat best practices and proven methodolog
 ## Data Management
 
 ### Data Strategy
+
+The data management approach follows industry best practices:
+
 - Centralized inventory management for all managed servers and network devices
 - Dynamic inventory integration with CMDBs and cloud providers
 - Credential management with vault integration for secret protection
@@ -433,6 +457,9 @@ The implementation approach follows Red Hat best practices and proven methodolog
 The implementation and target environment will be architected and validated to meet the Client's security, compliance, and governance requirements. Vendor will adhere to industry-standard security frameworks and Red Hat Ansible best practices.
 
 ## Identity & Access Management
+
+The solution implements comprehensive identity and access controls:
+
 - Role-Based Access Control (RBAC) with Teams, Organizations, and granular permissions
 - LDAP/AD integration for Single Sign-On (SSO) with enterprise directory
 - OAuth and API token authentication for programmatic access
@@ -441,6 +468,9 @@ The implementation and target environment will be architected and validated to m
 - Service account management for automation integrations
 
 ## Monitoring & Threat Detection
+
+Security monitoring capabilities include:
+
 - Audit logging for all automation executions and configuration changes
 - Job execution monitoring with success/failure alerting
 - Credential access tracking and rotation monitoring
@@ -448,6 +478,9 @@ The implementation and target environment will be architected and validated to m
 - Anomalous automation pattern detection and alerting
 
 ## Compliance & Auditing
+
+The solution supports the following compliance frameworks:
+
 - SOC 2 compliant Ansible platform, architecture follows SOC 2 security principles
 - ISO 27001 compliance: Access controls, audit logging, change management
 - GDPR compliance (if applicable): Data handling controls, audit trail
@@ -455,6 +488,9 @@ The implementation and target environment will be architected and validated to m
 - Compliance validation playbooks for automated security checks
 
 ## Encryption & Key Management
+
+Data protection is implemented through encryption at all layers:
+
 - All credentials encrypted at rest in PostgreSQL database
 - External credential vault integration (HashiCorp Vault or CyberArk)
 - SSH key management for Linux server authentication
@@ -463,6 +499,9 @@ The implementation and target environment will be architected and validated to m
 - TLS 1.2+ for all API and web UI communication
 
 ## Governance
+
+Governance processes ensure consistent management of the solution:
+
 - Change control: All playbook changes require Git commit and approval workflow
 - Playbook governance: Code review and testing before production deployment
 - Access reviews: Quarterly review of RBAC policies and user permissions
@@ -481,6 +520,9 @@ The implementation and target environment will be architected and validated to m
 | Production | Live automation operations | Production HA controller cluster | Operations team, authorized automation users |
 
 ### Access Policies
+
+Access control policies are defined as follows:
+
 - Multi-factor authentication (MFA) required for administrator access
 - API access via OAuth tokens with RBAC permissions
 - Administrator Access: Full platform admin rights for automation team during project
@@ -497,6 +539,9 @@ The implementation and target environment will be architected and validated to m
 Comprehensive testing and validation will take place throughout the implementation lifecycle to ensure functionality, performance, security, and reliability of the Ansible Automation Platform.
 
 ## Functional Validation
+
+Functional testing ensures all features work as designed:
+
 - End-to-end automation workflow validation (job submission to completion)
 - Playbook idempotency testing (re-execution safety and convergence)
 - ServiceNow integration testing (ticket-driven job triggers and status updates)
@@ -505,6 +550,9 @@ Comprehensive testing and validation will take place throughout the implementati
 - Credential management testing (vault integration and secret handling)
 
 ## Performance & Load Testing
+
+Performance validation ensures the solution meets SLA requirements:
+
 - Benchmark testing with target concurrent job capacity (100 concurrent executions)
 - Stress testing to identify platform capacity limits
 - Job execution performance validation (execution time and resource utilization)
@@ -512,6 +560,9 @@ Comprehensive testing and validation will take place throughout the implementati
 - Database performance testing (job history queries and reporting)
 
 ## Security Testing
+
+Security validation ensures protection against threats:
+
 - Validation of RBAC policies and team-based access controls
 - Credential handling and vault integration testing
 - SSH/WinRM authentication testing for managed infrastructure
@@ -519,6 +570,9 @@ Comprehensive testing and validation will take place throughout the implementati
 - Audit logging validation for compliance requirements
 
 ## Disaster Recovery & Resilience Tests
+
+DR testing validates backup and recovery capabilities:
+
 - PostgreSQL database backup and restore validation
 - Controller node failure testing and HA failover
 - Execution node failure and job rescheduling validation
@@ -526,6 +580,9 @@ Comprehensive testing and validation will take place throughout the implementati
 - RTO/RPO validation
 
 ## User Acceptance Testing (UAT)
+
+UAT is performed in coordination with Client business stakeholders:
+
 - Performed in coordination with Client operations teams
 - Test environment and sample automation workflows provided by Vendor
 - Automation workflow validation (provisioning, configuration, compliance)
@@ -572,6 +629,9 @@ The implementation follows a **progressive automation enablement** strategy wher
 The rollout will be coordinated during approved change windows (recommended: off-hours deployments for production automation) with documented rollback procedures available if issues arise.
 
 ## Cutover Checklist
+
+The following checklist will guide the cutover execution:
+
 - Pre-rollout validation: Final UAT sign-off, playbook testing completion, security approval
 - Production automation platform validated and monitoring operational
 - Rollback procedures documented for each automation category
@@ -582,6 +642,9 @@ The rollout will be coordinated during approved change windows (recommended: off
 - Daily monitoring during hypercare period (4 weeks)
 
 ## Rollback Strategy
+
+Comprehensive rollback procedures in case of critical issues:
+
 - Documented rollback triggers (high failure rate, operational impact, security incident)
 - Rollback procedures: Disable automation playbooks, revert to manual processes
 - Root cause analysis and playbook fixes before re-enablement
@@ -597,6 +660,9 @@ The rollout will be coordinated during approved change windows (recommended: off
 Following successful implementation and production rollout, this section outlines the handover process, knowledge transfer approach, and post-implementation support to ensure operational readiness. The Vendor will provide comprehensive documentation, training, and hypercare support to enable the Client team to independently manage the Ansible Automation Platform.
 
 ## Handover Artifacts
+
+The following artifacts will be delivered upon project completion:
+
 - As-Built documentation including architecture diagrams and platform configurations
 - Platform administration documentation (controller management, user administration, troubleshooting)
 - Operations runbook with troubleshooting procedures and escalation paths
@@ -606,6 +672,9 @@ Following successful implementation and production rollout, this section outline
 - Automation best practices guide and development standards
 
 ## Knowledge Transfer
+
+Knowledge transfer ensures the Client team can effectively operate the solution:
+
 - Live knowledge transfer sessions for platform administrators and automation developers
 - Ansible platform administration training (32 hours covering platform management, RBAC, monitoring, troubleshooting)
 - Automation developer training (32 hours covering playbook development, testing, Git workflows, best practices)
@@ -656,6 +725,9 @@ Post-hypercare, Client may transition to ongoing managed services:
 ## Assumptions
 
 ### General Assumptions
+
+This engagement is based on the following general assumptions:
+
 - Client will provide access to infrastructure (AWS/Azure cloud or on-premises) for platform deployment
 - Existing infrastructure meets network and firewall requirements for Ansible automation (SSH, WinRM, API access)
 - SSH/WinRM access and credentials available for managed servers and network devices
@@ -671,6 +743,9 @@ Post-hypercare, Client may transition to ongoing managed services:
 ## Dependencies
 
 ### Project Dependencies
+
+The following dependencies must be satisfied for successful project execution:
+
 - Infrastructure Access: Client provides AWS/Azure cloud access or on-premises infrastructure for platform deployment within 1 week of project start
 - Network Connectivity: Network team configures firewall rules for automation controller and execution node access to managed infrastructure
 - LDAP/AD Integration: Client provides LDAP/AD connection details and service account for SSO integration
@@ -691,9 +766,13 @@ Post-hypercare, Client may transition to ongoing managed services:
 
 # Investment Summary
 
+This section provides a comprehensive overview of the engagement investment:
+
 **Small Scope Implementation:** This pricing reflects a department-level deployment designed for automation platform managing 500 servers and 100 network devices with 100 custom playbooks. For larger enterprise deployments, please request medium or large scope pricing.
 
 ## Total Investment
+
+The following table provides a comprehensive overview of the total investment required for this engagement:
 
 <!-- BEGIN COST_SUMMARY_TABLE -->
 <!-- TABLE_CONFIG: widths=[20, 12, 18, 14, 12, 11, 13] -->
@@ -763,6 +842,8 @@ Post-hypercare, Client may transition to ongoing managed services:
 
 ## Invoicing & Expenses
 
+Invoicing and expense policies for this engagement:
+
 ### Invoicing
 - Milestone-based invoicing per Payment Terms above
 - Net 30 payment terms from invoice date
@@ -787,38 +868,59 @@ This section outlines the contractual terms, conditions, and policies governing 
 All services will be delivered in accordance with the executed Master Services Agreement (MSA) or equivalent contractual document between Vendor and Client.
 
 ## Scope Changes
+
+Change control procedures for this engagement:
+
 - Changes to managed node count, playbook count, integration scope, or timeline require formal change requests
 - Change requests may impact project timeline and budget
 - All change requests require written approval from both parties before implementation
 
 ## Intellectual Property
+
+Intellectual property rights are defined as follows:
+
 - Client retains ownership of all business data, infrastructure configurations, and automation workflows
 - Vendor retains ownership of proprietary automation methodologies and frameworks
 - Custom automation playbooks and platform configurations transfer to Client upon final payment
 - Ansible playbook source code becomes Client property
 
 ## Service Levels
+
+Service level commitments for this engagement:
+
 - Ansible platform availability: 99.5% uptime SLA for production controller during business hours
 - 30-day warranty on all deliverables from go-live date
 - Defect resolution included at no additional cost during warranty period
 - Post-warranty support available under separate managed services agreement
 
 ## Liability
+
+Liability terms and limitations:
+
 - Automation success rate targets apply to validated playbooks on standard infrastructure configurations
 - Performance may vary with non-standard infrastructure or configurations outside testing scope
 - Ongoing playbook maintenance and updates recommended as infrastructure evolves
 - Liability caps as agreed in Master Services Agreement
 
 ## Confidentiality
+
+Confidentiality obligations for both parties:
+
 - Both parties agree to maintain strict confidentiality of business data, infrastructure details, and proprietary automation content
 - All exchanged artifacts under NDA protection
 - Red Hat intellectual property protected under Red Hat licensing terms
 
 ## Termination
+
+Termination provisions for this engagement:
+
 - Mutually terminable per MSA terms, subject to payment for completed work and expenses incurred
 - Client retains ownership of all work products and deliverables completed through termination date
 
 ## Governing Law
+
+This agreement shall be governed by the laws of [State/Region].
+
 - Agreement governed under the laws of [State/Region]
 - Disputes resolved per MSA dispute resolution procedures
 
