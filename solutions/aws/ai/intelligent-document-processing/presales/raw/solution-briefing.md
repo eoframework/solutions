@@ -2,9 +2,9 @@
 presentation_title: Solution Briefing
 solution_name: AWS Intelligent Document Processing
 presenter_name: [Presenter Name]
-client_logo: eof-tools/doc-tools/brands/default/assets/logos/client_logo.png
-footer_logo_left: eof-tools/doc-tools/brands/default/assets/logos/consulting_company_logo.png
-footer_logo_right: eof-tools/doc-tools/brands/default/assets/logos/eo-framework-logo-real.png
+client_logo: ../../assets/logos/client_logo.png
+footer_logo_left: ../../assets/logos/consulting_company_logo.png
+footer_logo_right: ../../assets/logos/eo-framework-logo-real.png
 ---
 
 # AWS Intelligent Document Processing - Solution Briefing
