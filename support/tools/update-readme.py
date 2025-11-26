@@ -1,12 +1,144 @@
 #!/usr/bin/env python3
 """
 Update solution README files to the new standardized format.
+
+Updates:
+- Solution root README.md
+- presales/README.md
+- delivery/README.md
 """
 
 import yaml
 from pathlib import Path
 
 SOLUTIONS_ROOT = Path(__file__).parent.parent.parent / "solutions"
+
+
+# Standard presales README content (same for all solutions)
+PRESALES_README = """# Presales Resources
+
+This folder contains all presales materials for customer engagement and business case development.
+
+## Documents
+
+### Source Files (`raw/`)
+
+| File | Purpose | Output |
+|------|---------|--------|
+| `solution-briefing.md` | Executive presentation content | `solution-briefing.pptx` |
+| `statement-of-work.md` | Project scope and terms | `statement-of-work.docx` |
+| `discovery-questionnaire.csv` | Requirements gathering | `discovery-questionnaire.xlsx` |
+| `level-of-effort-estimate.csv` | Resource and cost estimation | `level-of-effort-estimate.xlsx` |
+| `infrastructure-costs.csv` | 3-year infrastructure costs | `infrastructure-costs.xlsx` |
+
+### Generated Files
+
+The `.pptx`, `.docx`, and `.xlsx` files are generated from source files using [eof-tools](https://github.com/eoframework/eof-tools). To regenerate:
+
+```bash
+cd /path/to/eof-tools
+python3 converters/presales/solution-presales-converter.py \\
+  --solution-path /path/to/this/solution
+```
+
+## How to Use
+
+### For Discovery
+
+1. Start with `discovery-questionnaire.xlsx` to gather customer requirements
+2. Review responses to understand scope and constraints
+3. Use findings to customize other documents
+
+### For Business Case
+
+1. Review `solution-briefing.pptx` for executive presentation
+2. Customize slides with customer-specific information
+3. Use `infrastructure-costs.xlsx` for financial discussions
+
+### For Proposal
+
+1. Customize `statement-of-work.docx` with customer details
+2. Update pricing in `level-of-effort-estimate.xlsx`
+3. Include `infrastructure-costs.xlsx` for total cost of ownership
+
+## Customization
+
+All source files in `raw/` can be edited:
+- **Markdown files** - Edit in any text editor
+- **CSV files** - Edit in Excel or text editor
+- Regenerate outputs after making changes
+
+---
+
+**[EO Framework](https://eoframework.org)** - Exceptional Outcome Framework
+"""
+
+# Standard delivery README content (same for all solutions)
+DELIVERY_README = """# Delivery Resources
+
+This folder contains all implementation and operational materials for project delivery.
+
+## Documents
+
+| File | Purpose |
+|------|---------|
+| `implementation-guide.md` | Step-by-step deployment procedures |
+| `configuration-templates.md` | Configuration examples and templates |
+| `testing-procedures.md` | Testing framework and validation steps |
+| `operations-runbook.md` | Day-to-day operations and maintenance |
+| `training-materials.md` | User and administrator training content |
+
+## Scripts
+
+The `scripts/` directory contains deployment automation:
+
+```
+scripts/
+├── bash/           # Shell scripts for setup and configuration
+├── python/         # Python automation scripts
+├── terraform/      # Infrastructure as Code (if applicable)
+└── README.md       # Script execution instructions
+```
+
+See [`scripts/README.md`](scripts/README.md) for detailed usage instructions.
+
+## Implementation Workflow
+
+### 1. Planning
+
+- Review `implementation-guide.md` for prerequisites
+- Verify access and permissions
+- Prepare environment variables
+
+### 2. Deployment
+
+```bash
+cd scripts/
+# Follow instructions in scripts/README.md
+```
+
+### 3. Validation
+
+- Execute tests from `testing-procedures.md`
+- Verify all components are operational
+- Document any issues
+
+### 4. Handover
+
+- Complete training using `training-materials.md`
+- Review `operations-runbook.md` with operations team
+- Establish support procedures
+
+## Quick Links
+
+- [Implementation Guide](implementation-guide.md) - Start here
+- [Scripts README](scripts/README.md) - Deployment automation
+- [Operations Runbook](operations-runbook.md) - Ongoing operations
+
+---
+
+**[EO Framework](https://eoframework.org)** - Exceptional Outcome Framework
+"""
 
 # Provider-specific technology mappings
 PROVIDER_TECHNOLOGIES = {
@@ -324,33 +456,86 @@ Navigate to **`delivery/`** for implementation:
     return readme
 
 
+def update_presales_readme(solution_path: Path) -> bool:
+    """Update presales/README.md with standard content."""
+    presales_path = solution_path / "presales"
+    if not presales_path.exists():
+        return False
+
+    readme_path = presales_path / "README.md"
+    with open(readme_path, 'w') as f:
+        f.write(PRESALES_README)
+    return True
+
+
+def update_delivery_readme(solution_path: Path) -> bool:
+    """Update delivery/README.md with standard content."""
+    delivery_path = solution_path / "delivery"
+    if not delivery_path.exists():
+        return False
+
+    readme_path = delivery_path / "README.md"
+    with open(readme_path, 'w') as f:
+        f.write(DELIVERY_README)
+    return True
+
+
 def main():
     """Update all solution READMEs."""
+    import argparse
+
+    parser = argparse.ArgumentParser(description="Update solution README files")
+    parser.add_argument("--root-only", action="store_true", help="Only update root READMEs")
+    parser.add_argument("--presales-only", action="store_true", help="Only update presales READMEs")
+    parser.add_argument("--delivery-only", action="store_true", help="Only update delivery READMEs")
+    parser.add_argument("--all", action="store_true", help="Update all READMEs (default)")
+    args = parser.parse_args()
+
+    # Default to all if no specific flag
+    update_root = args.root_only or args.all or not (args.presales_only or args.delivery_only)
+    update_presales = args.presales_only or args.all or not (args.root_only or args.delivery_only)
+    update_delivery = args.delivery_only or args.all or not (args.root_only or args.presales_only)
+
     solutions = list(SOLUTIONS_ROOT.glob("*/*/*"))
     solutions = [s for s in solutions if s.is_dir() and (s / "metadata.yml").exists()]
 
-    updated = 0
-    skipped = 0
+    root_updated = 0
+    presales_updated = 0
+    delivery_updated = 0
 
     for solution_path in sorted(solutions):
-        # Skip AWS IDP as it's already done
-        if "intelligent-document-processing" in str(solution_path):
-            print(f"Skipping {solution_path.name} (already updated)")
-            skipped += 1
-            continue
+        solution_name = solution_path.name
 
-        readme_content = generate_readme(solution_path)
-        if readme_content:
-            readme_path = solution_path / "README.md"
-            with open(readme_path, 'w') as f:
-                f.write(readme_content)
-            print(f"Updated {solution_path.name}")
-            updated += 1
-        else:
-            print(f"Skipped {solution_path.name} (no metadata)")
-            skipped += 1
+        # Update root README
+        if update_root:
+            # Skip AWS IDP root as it's the manually crafted reference
+            if "intelligent-document-processing" not in str(solution_path):
+                readme_content = generate_readme(solution_path)
+                if readme_content:
+                    readme_path = solution_path / "README.md"
+                    with open(readme_path, 'w') as f:
+                        f.write(readme_content)
+                    root_updated += 1
 
-    print(f"\nDone! Updated: {updated}, Skipped: {skipped}")
+        # Update presales README
+        if update_presales:
+            if update_presales_readme(solution_path):
+                presales_updated += 1
+
+        # Update delivery README
+        if update_delivery:
+            if update_delivery_readme(solution_path):
+                delivery_updated += 1
+
+        print(f"Updated {solution_name}")
+
+    print(f"\nDone!")
+    if update_root:
+        print(f"  Root READMEs: {root_updated}")
+    if update_presales:
+        print(f"  Presales READMEs: {presales_updated}")
+    if update_delivery:
+        print(f"  Delivery READMEs: {delivery_updated}")
 
 
 if __name__ == "__main__":

@@ -1,105 +1,64 @@
-# HashiCorp Multi-Cloud Platform - Delivery Documentation
+# Delivery Resources
 
-## ☁️ **Solution Overview**
+This folder contains all implementation and operational materials for project delivery.
 
-HashiCorp Multi-Cloud Platform solution providing unified infrastructure automation, security, and application delivery across multiple cloud providers. This delivery package includes comprehensive deployment, configuration, and operational documentation for enterprise multi-cloud implementations.
+## Documents
 
-### 🎯 **Solution Capabilities**
-- **Infrastructure as Code**: Terraform for declarative infrastructure provisioning across clouds
-- **Service Mesh**: Consul for service discovery, configuration, and secure communication
-- **Secrets Management**: Vault for centralized secret storage and dynamic credentials
-- **Application Deployment**: Nomad for container and application orchestration
-- **Multi-Cloud Governance**: Consistent policies and workflows across AWS, Azure, and GCP
+| File | Purpose |
+|------|---------|
+| `implementation-guide.md` | Step-by-step deployment procedures |
+| `configuration-templates.md` | Configuration examples and templates |
+| `testing-procedures.md` | Testing framework and validation steps |
+| `operations-runbook.md` | Day-to-day operations and maintenance |
+| `training-materials.md` | User and administrator training content |
 
-### 📊 **Business Outcomes**
-- **70% Reduction** in infrastructure provisioning time through automation
-- **90% Improvement** in security posture with centralized secrets management
-- **60% Faster** application deployment with standardized workflows
-- **Multi-Cloud Flexibility** avoiding vendor lock-in with consistent tooling
-- **10-12 Week** typical deployment timeline for enterprise multi-cloud transformation
+## Scripts
 
-### Solution Metadata
-```yaml
-solution_name: "multi-cloud-platform"
-provider: "hashicorp"
-category: "cloud"
-complexity: "advanced"
-deployment_time: "10-12 weeks"
+The `scripts/` directory contains deployment automation:
+
+```
+scripts/
+├── bash/           # Shell scripts for setup and configuration
+├── python/         # Python automation scripts
+├── terraform/      # Infrastructure as Code (if applicable)
+└── README.md       # Script execution instructions
 ```
 
-## 🏛️ **Technical Architecture**
+See [`scripts/README.md`](scripts/README.md) for detailed usage instructions.
 
-### **Core HashiCorp Stack**
-- **Terraform Enterprise**: Infrastructure as Code platform with state management
-- **Vault Enterprise**: Secrets management and encryption as a service
-- **Consul Enterprise**: Service mesh and service discovery platform
-- **Nomad Enterprise**: Container orchestration and application scheduling
-- **Boundary**: Secure remote access and privileged session management
+## Implementation Workflow
 
-### **Multi-Cloud Architecture**
-- **Cloud Abstraction**: Consistent infrastructure patterns across AWS, Azure, and GCP
-- **State Management**: Centralized Terraform state with backend encryption
-- **Policy as Code**: Sentinel policies for governance and compliance
-- **Workflow Integration**: CI/CD pipeline integration with infrastructure automation
+### 1. Planning
 
-### **Security Framework**
-- **Zero Trust Architecture**: Identity-based security with dynamic credentials
-- **Encryption**: Transit and at-rest encryption for all platform communications
-- **Policy Enforcement**: Consistent security policies across cloud environments
-- **Audit and Compliance**: Comprehensive logging and compliance reporting
+- Review `implementation-guide.md` for prerequisites
+- Verify access and permissions
+- Prepare environment variables
 
-## 📋 **Delivery Documents**
+### 2. Deployment
 
-### **Architecture and Design**
-- [`detailed-design.md`](./detailed-design.md) - Comprehensive multi-cloud architecture and design specifications
-- [`architecture.md`](./architecture.md) - High-level platform architecture overview
-- [`requirements-specification.csv`](./requirements-specification.csv) - Functional and technical requirements
+```bash
+cd scripts/
+# Follow instructions in scripts/README.md
+```
 
-### **Implementation and Deployment**
-- [`implementation-guide.md`](./implementation-guide.md) - Step-by-step platform deployment procedures
-- [`prerequisites.md`](./prerequisites.md) - Cloud account, networking, and security requirements
-- [`project-plan.csv`](./project-plan.csv) - Detailed implementation timeline and milestones
+### 3. Validation
 
-### **Operations and Support**
-- [`troubleshooting.md`](./troubleshooting.md) - Common issues and resolution procedures
-- [`communication-plan.csv`](./communication-plan.csv) - Stakeholder communication strategy
-- [`training-plan.csv`](./training-plan.csv) - Platform operations and developer training program
+- Execute tests from `testing-procedures.md`
+- Verify all components are operational
+- Document any issues
 
-## 🚀 **Getting Started**
+### 4. Handover
 
-### **Prerequisites Review**
-1. Review [`prerequisites.md`](./prerequisites.md) for cloud accounts, networking, and access requirements
-2. Validate HashiCorp Enterprise licensing and feature availability
-3. Confirm multi-cloud connectivity and security requirements
+- Complete training using `training-materials.md`
+- Review `operations-runbook.md` with operations team
+- Establish support procedures
 
-### **Implementation Planning**
-1. Review [`project-plan.csv`](./project-plan.csv) for timeline and resource allocation
-2. Execute [`communication-plan.csv`](./communication-plan.csv) for stakeholder alignment
-3. Prepare cloud infrastructure per [`implementation-guide.md`](./implementation-guide.md)
+## Quick Links
 
-### **Deployment Execution**
-1. Follow [`implementation-guide.md`](./implementation-guide.md) for HashiCorp platform deployment
-2. Configure Terraform, Vault, and Consul across cloud environments
-3. Validate infrastructure automation and security policies
-
-## 🛡️ **Support and Maintenance**
-
-### **HashiCorp Support Integration**
-- **Enterprise Support**: Priority support with SLA guarantees and escalation
-- **Professional Services**: Implementation, training, and optimization services
-- **Community Resources**: Documentation, training, and best practices
-
-### **Operational Excellence**
-- **Platform Monitoring**: Infrastructure health, policy compliance, and performance metrics
-- **Security Operations**: Secrets rotation, access management, and audit compliance
-- **Cost Optimization**: Multi-cloud resource optimization and usage analytics
+- [Implementation Guide](implementation-guide.md) - Start here
+- [Scripts README](scripts/README.md) - Deployment automation
+- [Operations Runbook](operations-runbook.md) - Ongoing operations
 
 ---
 
-## 📞 **Support Contacts**
-
-- **HashiCorp Enterprise Support**: Priority enterprise support and escalation procedures
-- **Implementation Team**: EO Framework delivery team and HashiCorp Professional Services
-- **Documentation**: Comprehensive delivery documentation in this repository
-
-*This delivery documentation follows EO Framework™ standards for enterprise multi-cloud platform deployment.*
+**[EO Framework](https://eoframework.org)** - Exceptional Outcome Framework
