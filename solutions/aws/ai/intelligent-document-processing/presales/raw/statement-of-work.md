@@ -774,11 +774,16 @@ The following table provides a comprehensive overview of the total investment re
 
 ## Payment Terms
 
+This section outlines the pricing model and payment schedule for the engagement:
+
 ### Pricing Model
 - Fixed price or Time & Materials (T&M)
 - Milestone-based payments per Deliverables table
 
 ### Payment Schedule
+
+Payments are structured around project milestones to align investment with delivered value:
+
 - 25% upon SOW execution and project kickoff
 - 30% upon completion of Discovery & Planning phase
 - 30% upon completion of Implementation and Testing
