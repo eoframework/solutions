@@ -41,7 +41,7 @@ M7,Go-Live,[START_DATE+87],Solution deployed to production; validation complete,
 M8,Project Closure,[START_DATE+128],Hypercare complete; project formally closed with lessons learned,Project Manager,Not Started
 
 # RACI Matrix
-#WIDTH: 30,8,8,8,8,8,8,8,8
+#WIDTH: 30,10,10,10,10,10,10,10,10
 #ALIGN: left,center,center,center,center,center,center,center,center
 Task/Deliverable,PM,SA,BA,TL,QA,DevOps,SecArch,Client
 Project Charter,A,C,C,I,I,I,I,C
