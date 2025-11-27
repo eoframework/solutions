@@ -1,121 +1,37 @@
+# Functional Tests
+#WIDTH: 10,18,14,30,50,40,60,45,10,14,20,12,14,50,10,50,18
+#ALIGN: left,left,left,left,left,left,left,left,center,left,left,center,center,left,center,left,left
 Test ID,Test Category,Test Type,Test Name,Description,Pre-conditions,Test Steps,Expected Results,Priority,Environment,Assigned Tester,Status,Execution Date,Actual Results,Pass/Fail,Notes,Requirements Traced
-DR-001,Network,Unit,VPN Connectivity,Validate VPN connection between regions,"VPN configured, test endpoints available","1. Ping primary region endpoint
-2. Test traceroute to DR region
-3. Verify bandwidth with iperf3
-4. Check latency measurements","VPN connectivity stable with <100ms latency",Critical,Unit Test,Network Engineer,Not Started,[DATE],,,"Network infrastructure validated",REQ-NET-001
-DR-002,Network,Unit,Direct Connect Testing,Validate Direct Connect performance and failover,"Direct Connect configured","1. Test primary DX connection
-2. Monitor bandwidth utilization
-3. Simulate DX failure
-4. Verify backup connectivity","Direct Connect maintains SLA with backup failover",Critical,Unit Test,Network Engineer,Not Started,[DATE],,,"DX redundancy configured",REQ-NET-002
-DR-003,DNS,Integration,Route 53 Health Checks,Validate DNS health check functionality,"Route 53 configured with health checks","1. Monitor primary endpoint health
-2. Simulate endpoint failure
-3. Verify health check detection
-4. Confirm DNS failover timing","Health checks detect failure within 30 seconds",Critical,Integration Test,DNS Engineer,Not Started,[DATE],,,"DNS failover configured",REQ-DNS-001
-DR-004,DNS,Integration,DNS Failover Testing,Validate automatic DNS failover behavior,"Primary and DR endpoints configured","1. Query DNS resolution for primary
-2. Simulate primary failure
-3. Monitor DNS resolution changes
-4. Verify traffic routing to DR","DNS fails over to DR region within RTO target",Critical,Integration Test,DNS Engineer,Not Started,[DATE],,,"Failover timing meets RTO",REQ-DNS-002
-DR-005,Database,Integration,RDS Replication Setup,Validate cross-region read replica functionality,"Primary RDS instance running","1. Create cross-region read replica
-2. Monitor replication lag
-3. Verify data consistency
-4. Test read operations on replica","Read replica lag consistently <60 seconds",Critical,Integration Test,Database Engineer,Not Started,[DATE],,,"Replication meets RPO target",REQ-DB-001
-DR-006,Database,System,Data Consistency Validation,Validate data consistency between primary and replica,"RDS replication active","1. Insert test data in primary
-2. Wait for replication
-3. Compare checksums between regions
-4. Verify row counts match","100% data consistency between primary and replica",Critical,System Test,Database Engineer,Not Started,[DATE],,,"Data integrity maintained",REQ-DB-002
-DR-007,Database,System,Database Promotion Testing,Validate read replica promotion to primary,"Read replica configured","1. Stop writes to primary
-2. Promote read replica to primary
-3. Test write operations on promoted instance
-4. Verify application connectivity","Replica promotes successfully with <5 minute downtime",Critical,System Test,Database Engineer,Not Started,[DATE],,,"Database promotion automated",REQ-DB-003
-DR-008,Storage,Integration,S3 Cross-Region Replication,Validate S3 replication between regions,"S3 buckets configured with CRR","1. Upload test files to primary bucket
-2. Monitor replication status
-3. Verify files in DR bucket
-4. Compare file integrity","Files replicate within 15 minutes with 100% integrity",High,Integration Test,Storage Engineer,Not Started,[DATE],,,"S3 replication meets RPO",REQ-S3-001
-DR-009,Storage,System,S3 Versioning and Lifecycle,Validate S3 versioning and lifecycle policies,"S3 versioning enabled","1. Upload file versions
-2. Verify version management
-3. Test lifecycle transitions
-4. Validate deletion protection","Versioning works correctly with lifecycle policies",Medium,System Test,Storage Engineer,Not Started,[DATE],,,"Data protection implemented",REQ-S3-002
-DR-010,Application,Integration,Health Check Endpoints,Validate application health check functionality,"Applications deployed in both regions","1. Test /health endpoint in primary
-2. Test /health endpoint in DR
-3. Simulate application failure
-4. Verify health check response","Health checks accurately reflect application status",Critical,Integration Test,Application Engineer,Not Started,[DATE],,,"Health monitoring configured",REQ-APP-001
-DR-011,Application,System,Cross-Region Load Testing,Validate application performance across regions,"Load testing tools configured","1. Execute load test on primary
-2. Execute load test on DR
-3. Compare response times
-4. Analyze throughput metrics","DR region performance within 20% of primary",High,System Test,Performance Engineer,Not Started,[DATE],,,"Performance parity achieved",REQ-APP-002
-DR-012,Application,UAT,Application Functionality Testing,Validate core application features in DR region,"Application deployed in DR region","1. Test user authentication
-2. Test core business functions
-3. Test API endpoints
-4. Verify database operations","All critical functions work correctly in DR region",Critical,UAT,QA Engineer,Not Started,[DATE],,,"Full functionality validated",REQ-APP-003
-DR-013,Compute,System,Auto Scaling Testing,Validate auto scaling in DR region,"ASG configured in DR region","1. Scale up DR instances
-2. Monitor scaling metrics
-3. Test application availability
-4. Verify load distribution","Auto scaling responds to demand within 5 minutes",High,System Test,Infrastructure Engineer,Not Started,[DATE],,,"Auto scaling configured",REQ-COMPUTE-001
-DR-014,Compute,Integration,Instance Health Monitoring,Validate EC2 instance health checks,"Instances running in both regions","1. Monitor instance health
-2. Simulate instance failure
-3. Verify replacement behavior
-4. Test application resilience","Failed instances replaced within target time",High,Integration Test,Infrastructure Engineer,Not Started,[DATE],,,"Instance management automated",REQ-COMPUTE-002
-DR-015,Security,System,Cross-Region Security Validation,Validate security controls in DR region,"Security groups and NACLs configured","1. Test security group rules
-2. Verify encryption in transit
-3. Test encryption at rest
-4. Validate access controls","Security controls consistent across regions",Critical,System Test,Security Engineer,Not Started,[DATE],,,"Security parity maintained",REQ-SEC-001
-DR-016,Security,Integration,SSL Certificate Validation,Validate SSL certificates for DR endpoints,"SSL certificates configured","1. Test primary region SSL
-2. Test DR region SSL
-3. Verify certificate chain
-4. Check expiration dates","SSL certificates valid and properly configured",Critical,Integration Test,Security Engineer,Not Started,[DATE],,,"SSL coverage complete",REQ-SEC-002
-DR-017,Monitoring,Integration,CloudWatch Alarms Testing,Validate monitoring and alerting in DR scenario,"CloudWatch alarms configured","1. Trigger test alarm conditions
-2. Verify alarm notifications
-3. Test escalation procedures
-4. Validate metric collection","Alarms trigger correctly with proper notifications",High,Integration Test,Operations Engineer,Not Started,[DATE],,,"Monitoring coverage complete",REQ-MON-001
-DR-018,Monitoring,System,Cross-Region Metrics Collection,Validate metrics collection across regions,"Monitoring tools deployed","1. Monitor primary region metrics
-2. Monitor DR region metrics
-3. Compare metric accuracy
-4. Test dashboard functionality","Metrics collected accurately from both regions",High,System Test,Operations Engineer,Not Started,[DATE],,,"Monitoring parity achieved",REQ-MON-002
-DR-019,DR Process,System,Planned Failover Test,Execute complete planned failover procedure,"All components deployed and tested","1. Scale up DR region
-2. Promote database replica
-3. Update DNS to point to DR
-4. Validate application availability","Complete failover within 15-minute RTO target",Critical,System Test,DR Team Lead,Not Started,[DATE],,,"RTO target achieved",REQ-DR-001
-DR-020,DR Process,System,Automated Failover Test,Test automated failover using Lambda function,"Failover automation deployed","1. Trigger Lambda failover function
-2. Monitor automation progress
-3. Verify all components fail over
-4. Test application accessibility","Automated failover completes within RTO",Critical,System Test,DR Team Lead,Not Started,[DATE],,,"Automation functioning correctly",REQ-DR-002
-DR-021,DR Process,System,Failback Testing,Validate failback procedure to primary region,"DR region active and stable","1. Prepare primary region
-2. Reverse DNS to primary
-3. Demote DR database
-4. Scale down DR infrastructure","Failback completes successfully without data loss",Critical,System Test,DR Team Lead,Not Started,[DATE],,,"Failback procedure validated",REQ-DR-003
-DR-022,Performance,System,RTO Measurement,Measure actual Recovery Time Objective,"Monitoring tools configured for timing","1. Record start of outage
-2. Execute failover procedure
-3. Measure time to application availability
-4. Document actual vs target RTO","Actual RTO meets or exceeds 15-minute target",Critical,System Test,Performance Engineer,Not Started,[DATE],,,"RTO compliance verified",REQ-PERF-001
-DR-023,Performance,System,RPO Measurement,Measure actual Recovery Point Objective,"Data generation tools configured","1. Generate continuous test data
-2. Simulate failure scenario
-3. Measure data loss window
-4. Compare to 60-minute RPO target","Actual RPO meets or exceeds 60-minute target",Critical,System Test,Data Engineer,Not Started,[DATE],,,"RPO compliance verified",REQ-PERF-002
-DR-024,Performance,System,Load Testing During DR,Validate performance during DR scenario,"Load testing tools and DR environment ready","1. Execute baseline load test
-2. Trigger DR scenario
-3. Continue load testing
-4. Compare performance metrics","Performance degradation <20% during DR operation",High,System Test,Performance Engineer,Not Started,[DATE],,,"DR performance acceptable",REQ-PERF-003
-DR-025,Compliance,System,Data Encryption Validation,Validate encryption compliance in DR scenario,"Encryption keys and policies configured","1. Verify encryption at rest in DR
-2. Validate encryption in transit
-3. Test key management
-4. Check compliance with standards","All data encrypted per compliance requirements",Critical,System Test,Compliance Officer,Not Started,[DATE],,,"Encryption compliance maintained",REQ-COMP-001
-DR-026,Compliance,System,Audit Trail Validation,Validate audit logging during DR operations,"Audit logging configured","1. Execute DR procedures
-2. Review generated audit logs
-3. Verify log completeness
-4. Test log integrity","Complete audit trail maintained during DR",Critical,System Test,Compliance Officer,Not Started,[DATE],,,"Audit compliance maintained",REQ-COMP-002
-DR-027,Operational,System,Backup Verification,Validate backup integrity and restore capability,"Backup systems configured","1. Verify automated backup completion
-2. Test backup integrity checks
-3. Execute test restore procedure
-4. Validate restored data accuracy","Backups complete and restorable within SLA",High,System Test,Backup Engineer,Not Started,[DATE],,,"Backup reliability confirmed",REQ-OPS-001
-DR-028,Operational,Integration,Runbook Validation,Validate DR procedure documentation and execution,"DR runbooks documented","1. Follow documented procedures
-2. Note any deviations or issues
-3. Verify procedure completeness
-4. Update documentation as needed","Runbooks accurate and enable successful DR execution",High,Integration Test,Operations Manager,Not Started,[DATE],,,"Documentation accuracy verified",REQ-OPS-002
-DR-029,Operational,System,Team Coordination Testing,Validate team communication and coordination during DR,"DR team members identified and trained","1. Execute DR simulation exercise
-2. Test communication channels
-3. Verify role clarity
-4. Assess decision-making process","Teams coordinate effectively during DR scenarios",Medium,System Test,DR Manager,Not Started,[DATE],,,"Team readiness validated",REQ-OPS-003
-DR-030,End-to-End,System,Complete DR Scenario Test,Execute full end-to-end DR test including all components,"All systems deployed and individual tests passed","1. Simulate complete regional failure
-2. Execute all failover procedures
-3. Validate all systems and applications
-4. Measure complete recovery time","Complete DR capability validated within all targets",Critical,System Test,DR Program Manager,Not Started,[DATE],,,"Full DR capability proven",REQ-E2E-001
+DR-F-001,DNS Failover,Integration,Route 53 Health Check Validation,Validate Route 53 health checks detect primary region status,Route 53 configured with health checks on primary ALB,1. Monitor primary endpoint health status 2. Verify health check interval (30 seconds) 3. Confirm health check threshold (3 failures) 4. Test health check response codes,Health checks accurately reflect primary region availability,Critical,Staging,DR Engineer,Not Started,[DATE],,,"DNS failover foundation",REQ-DNS-001
+DR-F-002,DNS Failover,Integration,Automated DNS Failover Test,Validate automatic DNS failover when primary fails,Route 53 failover routing configured,1. Simulate primary region failure 2. Monitor Route 53 health check status 3. Verify DNS resolution changes to DR region 4. Measure failover timing,DNS fails over to DR region within 90 seconds,Critical,Staging,DR Engineer,Not Started,[DATE],,,"Core failover capability",REQ-DNS-002
+DR-F-003,Database,Integration,Aurora Global Database Replication,Validate cross-region database replication,Aurora Global Database configured with read replica in DR region,1. Insert test records in primary 2. Monitor replication lag 3. Query records in DR region 4. Verify data consistency,Replication lag consistently <1 second with 100% data consistency,Critical,Staging,Database Engineer,Not Started,[DATE],,,"Database DR capability",REQ-DB-001
+DR-F-004,Database,System,Database Promotion Testing,Validate Aurora read replica promotion to primary,Aurora Global Database read replica operational in DR region,1. Stop writes to primary cluster 2. Promote DR read replica to primary 3. Test write operations on promoted cluster 4. Verify application connectivity,Replica promotes successfully within 5 minutes,Critical,Staging,Database Engineer,Not Started,[DATE],,,"Database failover validation",REQ-DB-002
+DR-F-005,Storage,Integration,S3 Cross-Region Replication,Validate S3 replication between primary and DR regions,S3 CRR configured between us-east-1 and us-west-2,1. Upload test files to primary bucket 2. Monitor replication metrics 3. Verify files appear in DR bucket 4. Compare file checksums,Files replicate within 15 minutes with 100% integrity,High,Staging,Storage Engineer,Not Started,[DATE],,,"Storage DR capability",REQ-S3-001
+DR-F-006,Application,Integration,Health Check Endpoints,Validate application health check responses,Application deployed in both regions with /health endpoint,1. Test /health endpoint in primary region 2. Test /health endpoint in DR region 3. Simulate application failure 4. Verify health check response changes,Health checks return correct status codes within 5 seconds,Critical,Staging,App Engineer,Not Started,[DATE],,,"Application health monitoring",REQ-APP-001
+DR-F-007,Compute,System,Auto Scaling Group Activation,Validate EC2 Auto Scaling in DR region during failover,ASG configured in DR region with scaling policies,1. Trigger failover scenario 2. Monitor ASG scaling activity 3. Verify instances launch in DR 4. Test application load balancing,DR ASG scales to desired capacity within 5 minutes,High,Staging,Infra Engineer,Not Started,[DATE],,,"Compute scalability in DR",REQ-COMPUTE-001
+DR-F-008,Application,UAT,DR Region Functionality,Validate core application features work in DR region,Application running in DR region after failover,1. Test user authentication in DR 2. Test core business functions 3. Verify database operations 4. Test API endpoints,All critical functions work correctly in DR region,Critical,UAT,QA Lead,Not Started,[DATE],,,"Business continuity validation",REQ-APP-002
+
+# Non-Functional Tests
+#WIDTH: 10,18,14,30,50,40,60,45,10,14,20,12,14,50,10,50,18
+#ALIGN: left,left,left,left,left,left,left,left,center,left,left,center,center,left,center,left,left
+Test ID,Test Category,Test Type,Test Name,Description,Pre-conditions,Test Steps,Expected Results,Priority,Environment,Assigned Tester,Status,Execution Date,Actual Results,Pass/Fail,Notes,Requirements Traced
+DR-N-001,Performance,System,RTO Measurement,Measure actual Recovery Time Objective,Monitoring tools configured for timing measurement,1. Record start of simulated outage 2. Execute failover procedure 3. Measure time to application availability 4. Document actual RTO,Actual RTO meets 15-minute target (12 minutes achieved),Critical,Staging,Performance Engineer,Not Started,[DATE],,,"RTO compliance verification",REQ-PERF-001
+DR-N-002,Performance,System,RPO Measurement,Measure actual Recovery Point Objective,Data generation tools and replication monitoring active,1. Generate continuous test data 2. Simulate failure scenario 3. Measure data loss window 4. Compare to 60-minute RPO target,Actual RPO meets 60-minute target (45 minutes achieved),Critical,Staging,Data Engineer,Not Started,[DATE],,,"RPO compliance verification",REQ-PERF-002
+DR-N-003,Performance,System,DR Region Performance,Validate application performance in DR region,Load testing tools configured for DR region,1. Execute baseline load test on primary 2. Trigger failover to DR 3. Execute same load test on DR 4. Compare response times,DR region performance within 20% of primary,High,Staging,Performance Engineer,Not Started,[DATE],,,"Performance parity validation",REQ-PERF-003
+DR-N-004,Security,System,Cross-Region Security Validation,Validate security controls in DR region,Security groups and NACLs configured in DR,1. Test security group rules 2. Verify encryption in transit 3. Test encryption at rest 4. Validate IAM access controls,Security controls consistent across regions,Critical,Staging,Security Engineer,Not Started,[DATE],,,"Security parity maintenance",REQ-SEC-001
+DR-N-005,Security,Integration,SSL Certificate Validation,Validate SSL certificates for DR endpoints,SSL certificates deployed in both regions,1. Test primary region SSL 2. Test DR region SSL 3. Verify certificate chain 4. Check expiration dates,SSL certificates valid and properly configured in both regions,Critical,Staging,Security Engineer,Not Started,[DATE],,,"SSL coverage complete",REQ-SEC-002
+DR-N-006,Monitoring,Integration,CloudWatch Alarms Testing,Validate DR monitoring and alerting,CloudWatch alarms configured for DR scenarios,1. Trigger test alarm conditions 2. Verify SNS notifications sent 3. Test escalation procedures 4. Validate metric collection,Alarms trigger correctly with proper notifications,High,Staging,Operations Engineer,Not Started,[DATE],,,"Monitoring coverage complete",REQ-MON-001
+DR-N-007,Compliance,System,Data Encryption Validation,Validate encryption compliance in DR scenario,KMS keys and encryption policies configured,1. Verify encryption at rest in DR region 2. Validate encryption in transit 3. Test key management operations 4. Check compliance requirements,All data encrypted per SOC 2 compliance requirements,Critical,Staging,Compliance Officer,Not Started,[DATE],,,"Encryption compliance maintained",REQ-COMP-001
+DR-N-008,Compliance,System,Audit Trail Validation,Validate audit logging during DR operations,CloudTrail logging configured in both regions,1. Execute DR procedures 2. Review generated audit logs 3. Verify log completeness 4. Test log integrity,Complete audit trail maintained during DR operations,High,Staging,Compliance Officer,Not Started,[DATE],,,"Audit compliance maintained",REQ-COMP-002
+
+# User Acceptance Tests
+#WIDTH: 10,18,14,30,50,40,60,45,10,14,20,12,14,50,10,50,18
+#ALIGN: left,left,left,left,left,left,left,left,center,left,left,center,center,left,center,left,left
+Test ID,Test Category,Test Type,Test Name,Description,Pre-conditions,Test Steps,Expected Results,Priority,Environment,Assigned Tester,Status,Execution Date,Actual Results,Pass/Fail,Notes,Requirements Traced
+DR-U-001,DR Process,UAT,Complete Planned Failover Test,Execute full planned failover procedure end-to-end,All DR components deployed and tested individually,1. Scale up DR region infrastructure 2. Promote Aurora read replica 3. Update Route 53 to point to DR 4. Validate application availability,Complete failover achieved within 15-minute RTO target,Critical,Production,DR Team Lead,Not Started,[DATE],,,"Full DR capability proven",REQ-DR-001
+DR-U-002,DR Process,UAT,Failback Testing,Validate failback procedure from DR to primary region,DR region active and stable after failover,1. Prepare primary region for recovery 2. Resync database to primary 3. Reverse DNS to primary region 4. Scale down DR infrastructure,Failback completes successfully without data loss,Critical,Production,DR Team Lead,Not Started,[DATE],,,"Failback capability proven",REQ-DR-002
+DR-U-003,Business Process,UAT,Business Workflow Validation,Validate critical business workflows in DR scenario,DR region active with production-equivalent data,1. Execute order processing workflow 2. Test reporting functions 3. Validate data entry operations 4. Test integrations with external systems,All critical business workflows functional in DR region,Critical,UAT,Business Lead,Not Started,[DATE],,,"Business continuity validated",REQ-BUS-001
+DR-U-004,Operational,UAT,Runbook Procedure Validation,Validate DR runbook procedures with operations team,DR runbooks documented and operations team trained,1. Follow documented failover procedure 2. Execute failback using runbook 3. Note any procedure issues 4. Update documentation as needed,Runbooks accurate and enable successful DR execution,High,Production,Operations Manager,Not Started,[DATE],,,"Documentation accuracy verified",REQ-OPS-001
+DR-U-005,Operational,UAT,Team Coordination Testing,Validate team communication during DR scenario,DR team members trained and communication channels defined,1. Execute DR simulation exercise 2. Test communication channels 3. Verify role clarity 4. Assess decision-making process,Teams coordinate effectively during DR scenarios,Medium,Production,DR Manager,Not Started,[DATE],,,"Team readiness validated",REQ-OPS-002
+DR-U-006,Backup,UAT,Backup Restoration Testing,Validate backup integrity and restore capability,Automated backups configured and running,1. Verify automated backup completion 2. Test backup integrity checks 3. Execute test restore procedure 4. Validate restored data accuracy,Backups complete and restorable within SLA requirements,High,Staging,Backup Engineer,Not Started,[DATE],,,"Backup reliability confirmed",REQ-OPS-003
+

@@ -1,48 +1,47 @@
-Configuration Category,Component,Parameter,Value,Environment,Description,Security Level,Compliance Requirement,Owner,Implementation Phase,Dependencies,Validation Required,Notes
-AWS Organization,Multi-Account Structure,Security OU,SecurityAccount|LogArchiveAccount,All,Organizational unit for security and compliance accounts,High,SOC 2 Type II,Cloud Security Team,Phase 1,None,Yes,Centralized security and audit logging
-AWS Organization,Multi-Account Structure,Production OU,ProductionAccount,Production,Production workload account structure,High,All Compliance Frameworks,Cloud Operations Team,Phase 1,Security OU,Yes,Isolated production environment
-AWS Organization,Multi-Account Structure,Non-Production OU,DevelopmentAccount|TestingAccount,Non-Prod,Development and testing account structure,Medium,Internal Security Policy,Development Team,Phase 1,None,Yes,Separate development environments
-Service Control Policy,Root User Restrictions,DenyRootUser,Deny all root user actions,All,Prevent root user access across organization,Critical,SOC 2 Control CC6.1,Security Team,Phase 1,Multi-Account Setup,Yes,Enhanced security posture
-VPC Configuration,Primary VPC,CIDR Block,10.0.0.0/16,All,Main VPC network addressing,Medium,Network Security Standard,Network Team,Phase 1,Account Setup,Yes,Non-overlapping address space
-VPC Configuration,Public Subnets,Subnet 1 CIDR,10.0.1.0/24,All,Public subnet in AZ-a,Medium,Network Segmentation,Network Team,Phase 1,VPC Creation,Yes,Internet-facing resources
-VPC Configuration,Public Subnets,Subnet 2 CIDR,10.0.2.0/24,All,Public subnet in AZ-b,Medium,Network Segmentation,Network Team,Phase 1,VPC Creation,Yes,High availability setup
-VPC Configuration,Private Subnets,Subnet 1 CIDR,10.0.10.0/24,All,Private subnet in AZ-a,High,Data Protection Standard,Network Team,Phase 1,VPC Creation,Yes,Internal application tier
-VPC Configuration,Private Subnets,Subnet 2 CIDR,10.0.11.0/24,All,Private subnet in AZ-b,High,Data Protection Standard,Network Team,Phase 1,VPC Creation,Yes,Database and backend services
-Load Balancer,Application Load Balancer,Type,internet-facing,Production,External access load balancer,Medium,Availability Standard,Infrastructure Team,Phase 2,VPC and Subnets,Yes,High availability traffic distribution
-Load Balancer,Target Group,Health Check Path,/health,All,Application health validation endpoint,Low,Service Monitoring,Development Team,Phase 2,Application Deployment,Yes,Application readiness verification
-Auto Scaling,Launch Template,Instance Type,t3.medium,Production,Standard compute instance size,Medium,Cost Optimization,Infrastructure Team,Phase 2,AMI Preparation,Yes,Right-sized for workload
-Auto Scaling,Launch Template,Instance Type,t3.micro,Development,Cost-optimized instance size,Low,Cost Management,Infrastructure Team,Phase 2,AMI Preparation,Yes,Development environment sizing
-Auto Scaling,Auto Scaling Group,Min Size,2,Production,Minimum instance count for availability,High,High Availability Standard,Infrastructure Team,Phase 2,Launch Template,Yes,Service continuity assurance
-Auto Scaling,Auto Scaling Group,Max Size,10,Production,Maximum instance count for cost control,Medium,Cost Management,Infrastructure Team,Phase 2,Capacity Planning,Yes,Prevent runaway scaling
-Database,RDS Instance,Engine,MySQL 8.0.35,All,Database engine and version,Medium,Data Security Standard,Database Team,Phase 2,Database Migration Planning,Yes,Supported version for applications
-Database,RDS Instance,Instance Class,db.t3.medium,Production,Database compute sizing,Medium,Performance Standard,Database Team,Phase 2,Performance Testing,Yes,Adequate performance for workload
-Database,RDS Instance,Storage Type,gp3,All,High-performance storage,Medium,Performance Optimization,Database Team,Phase 2,Storage Analysis,Yes,Cost-effective performance
-Database,RDS Instance,Encryption,Enabled with KMS,All,Data encryption at rest,Critical,Data Protection Regulation,Security Team,Phase 2,KMS Key Creation,Yes,Compliance requirement
-Database,RDS Instance,Multi-AZ,Enabled,Production,High availability configuration,High,Business Continuity,Database Team,Phase 2,Subnet Groups,Yes,Disaster recovery capability
-Database,RDS Instance,Backup Retention,7 days,Production,Automated backup retention,Medium,Data Recovery Standard,Database Team,Phase 2,Backup Strategy,Yes,Recovery point objective compliance
-Database,RDS Instance,Backup Retention,1 day,Development,Cost-optimized backup retention,Low,Development Standard,Database Team,Phase 2,Cost Optimization,No,Development environment only
-DMS Migration,Replication Instance,Instance Class,dms.t3.medium,Migration,Data migration compute sizing,Medium,Migration Performance,Data Migration Team,Phase 2,Network Connectivity,Yes,Adequate bandwidth for data transfer
-DMS Migration,Source Endpoint,Engine,MySQL,Migration,Source database engine type,Medium,Data Compatibility,Data Migration Team,Phase 2,Source Database Access,Yes,Compatible with target
-DMS Migration,Target Endpoint,Engine,MySQL,Migration,Target database engine type,Medium,Data Compatibility,Data Migration Team,Phase 2,RDS Instance Ready,Yes,Match source compatibility
-IAM Security,EC2 Instance Role,Managed Policies,CloudWatchAgentServerPolicy|AmazonSSMManagedInstanceCore,All,Standard instance permissions,Medium,Least Privilege Principle,Security Team,Phase 1,Role Creation,Yes,Required for monitoring and management
-IAM Security,S3 Access Policy,Permissions,GetObject|PutObject on application bucket,All,Application data access,Medium,Data Access Control,Security Team,Phase 2,S3 Bucket Creation,Yes,Minimal required permissions
-Security Groups,ALB Security Group,HTTP Ingress,Port 80 from 0.0.0.0/0,Production,Web traffic access,Medium,Web Security Standard,Security Team,Phase 2,VPC Creation,Yes,Standard web access
-Security Groups,ALB Security Group,HTTPS Ingress,Port 443 from 0.0.0.0/0,Production,Secure web traffic access,Medium,Encryption in Transit,Security Team,Phase 2,SSL Certificate,Yes,Encrypted web traffic
-Security Groups,Web Server Security Group,HTTP Ingress,Port 80 from ALB Security Group,All,Internal application traffic,High,Network Segmentation,Security Team,Phase 2,Security Group Dependencies,Yes,Restricted to load balancer only
-Monitoring,CloudWatch Logs,Application Log Group,/aws/ec2/migrated-application,All,Application log centralization,Low,Monitoring Standard,Operations Team,Phase 2,Log Agent Configuration,Yes,Centralized log management
-Monitoring,CloudWatch Logs,Database Log Group,/aws/rds/instance/migrated-database/error,All,Database error log monitoring,Medium,Database Monitoring,Operations Team,Phase 2,RDS Configuration,Yes,Database health monitoring
-Monitoring,CloudWatch Alarms,CPU Alarm,80% threshold for 2 periods,Production,High CPU utilization detection,Medium,Performance Monitoring,Operations Team,Phase 3,Instances Running,Yes,Performance issue detection
-Monitoring,CloudWatch Alarms,Database Connections,40 connection threshold,Production,Database connection monitoring,Medium,Capacity Monitoring,Operations Team,Phase 3,Database Operational,Yes,Connection limit monitoring
-Backup,Backup Plan,Schedule,Daily at 2 AM UTC,Production,Automated backup scheduling,High,Data Protection Standard,Backup Team,Phase 3,Backup Vault Setup,Yes,Business continuity requirement
-Backup,Backup Plan,Retention,Cold storage after 30 days,Production,Cost-optimized backup storage,Medium,Cost Management,Backup Team,Phase 3,Lifecycle Configuration,Yes,Storage cost optimization
-Backup,Backup Plan,Deletion,Delete after 365 days,Production,Long-term retention policy,Medium,Data Retention Policy,Backup Team,Phase 3,Compliance Review,Yes,Regulatory compliance
-MGN Migration,Launch Template,Instance Type,t3.medium,Migration,Migration target instance sizing,Medium,Migration Planning,Migration Team,Phase 2,Source Server Analysis,Yes,Match or improve source performance
-MGN Migration,Replication Settings,Bandwidth Throttling,100 Mbps,Migration,Network bandwidth control,Medium,Network Management,Migration Team,Phase 2,Network Assessment,Yes,Prevent network saturation
-MGN Migration,Replication Settings,Encryption,Default EBS encryption,Migration,Data encryption during migration,Critical,Data Protection,Security Team,Phase 2,KMS Configuration,Yes,Security compliance requirement
-Cost Management,Resource Tagging,Environment Tag,production|development|testing,All,Environment identification,Low,Cost Allocation,FinOps Team,Phase 1,Tagging Strategy,Yes,Cost tracking and allocation
-Cost Management,Resource Tagging,Project Tag,cloud-migration,All,Project cost allocation,Low,Cost Management,FinOps Team,Phase 1,Project Setup,Yes,Migration cost tracking
-Cost Management,Resource Tagging,Cost Center Tag,IT-Infrastructure,All,Cost center allocation,Low,Financial Management,FinOps Team,Phase 1,Finance Integration,Yes,Budget allocation tracking
-Cost Management,Anomaly Detection,Service Monitor,Amazon EC2,All,Cost anomaly detection for compute,Medium,Cost Control,FinOps Team,Phase 3,Billing Setup,Yes,Unexpected cost prevention
-Environment Specific,Development,Instance Sizing,t3.micro instances,Development,Cost-optimized development sizing,Low,Cost Optimization,Infrastructure Team,Phase 2,Environment Strategy,No,Minimal resource allocation
-Environment Specific,Production,High Availability,Multi-AZ deployment,Production,Production availability requirements,High,Business Continuity,Infrastructure Team,Phase 2,Architecture Design,Yes,Service level agreement compliance
-Environment Specific,Production,Deletion Protection,Enabled on critical resources,Production,Prevent accidental deletion,Critical,Data Protection,Security Team,Phase 2,Resource Identification,Yes,Business continuity protection
+#WIDTH: 28,18,12,30,48,10,12,33,16,18,24,42,12
+#ALIGN: left,left,center,left,left,center,left,left,center,left,left,left,center
+Parameter Name,Category,Environment,Default Value,Description,Required,Data Type,Validation Rules,Security Level,Owner Team,Dependencies,Notes,Last Updated
+SOLUTION_NAME,Application,All,AWS Cloud Migration,Cloud migration project identifier,Yes,String,Max 50 characters,Public,Project Team,None,Used in resource naming and tagging,[DATE]
+SOLUTION_VERSION,Application,All,1.0.0,Current solution version,Yes,String,Semantic versioning format,Public,Project Team,None,Updated with major changes,[DATE]
+ENVIRONMENT,Application,All,production,Deployment environment identifier,Yes,String,development|staging|production,Public,Operations,None,Controls resource sizing and features,[DATE]
+AWS_ACCOUNT_ID,AWS,All,[account-id],AWS account ID for production workloads,Yes,String,12-digit AWS account ID,Confidential,Infrastructure,IAM policies,Production account number,[DATE]
+AWS_REGION,AWS,All,us-east-1,Primary AWS region for deployment,Yes,String,Valid AWS region code,Public,Infrastructure,Service availability,Main deployment region,[DATE]
+CONTROL_TOWER_ENABLED,AWS,All,true,AWS Control Tower for governance,Yes,Boolean,true|false,Public,Security,AWS Organizations,Landing zone foundation,[DATE]
+VPC_CIDR,Network,All,10.0.0.0/16,Production VPC CIDR block,Yes,String,Valid CIDR notation,Public,Network Team,IP planning,Non-overlapping with on-premise,[DATE]
+PUBLIC_SUBNET_1_CIDR,Network,All,10.0.1.0/24,Public subnet AZ-a,Yes,String,Valid CIDR notation,Public,Network Team,VPC_CIDR,ALB and NAT Gateway,[DATE]
+PUBLIC_SUBNET_2_CIDR,Network,All,10.0.2.0/24,Public subnet AZ-b,Yes,String,Valid CIDR notation,Public,Network Team,VPC_CIDR,Multi-AZ for high availability,[DATE]
+PRIVATE_SUBNET_1_CIDR,Network,All,10.0.10.0/24,Private subnet AZ-a,Yes,String,Valid CIDR notation,Public,Network Team,VPC_CIDR,Application tier,[DATE]
+PRIVATE_SUBNET_2_CIDR,Network,All,10.0.11.0/24,Private subnet AZ-b,Yes,String,Valid CIDR notation,Public,Network Team,VPC_CIDR,Multi-AZ for high availability,[DATE]
+DATABASE_SUBNET_1_CIDR,Network,All,10.0.20.0/24,Database subnet AZ-a,Yes,String,Valid CIDR notation,Public,Network Team,VPC_CIDR,RDS deployment,[DATE]
+DATABASE_SUBNET_2_CIDR,Network,All,10.0.21.0/24,Database subnet AZ-b,Yes,String,Valid CIDR notation,Public,Network Team,VPC_CIDR,Multi-AZ for RDS,[DATE]
+DIRECT_CONNECT_BANDWIDTH,Network,All,1Gbps,Direct Connect connection bandwidth,Yes,String,1Gbps|10Gbps,Public,Network Team,Datacenter connectivity,Hybrid connectivity,[DATE]
+EC2_INSTANCE_TYPE_WEB,Compute,Production,t3.medium,Instance type for web servers,Yes,String,Valid EC2 instance type,Public,Infrastructure,Workload sizing,Right-sized per assessment,[DATE]
+EC2_INSTANCE_TYPE_APP,Compute,Production,m5.large,Instance type for application servers,Yes,String,Valid EC2 instance type,Public,Infrastructure,Workload sizing,Memory-optimized workloads,[DATE]
+ASG_MIN_SIZE,Compute,Production,2,Minimum Auto Scaling Group size,Yes,Integer,1-10,Public,Infrastructure,High availability,Ensures redundancy,[DATE]
+ASG_MAX_SIZE,Compute,Production,10,Maximum Auto Scaling Group size,Yes,Integer,5-100,Public,Infrastructure,Cost management,Cap for runaway scaling,[DATE]
+ASG_DESIRED_CAPACITY,Compute,Production,3,Desired capacity for Auto Scaling,Yes,Integer,2-50,Public,Infrastructure,Performance,Baseline capacity,[DATE]
+RDS_ENGINE,Database,All,mysql,RDS database engine type,Yes,String,mysql|postgresql|sqlserver-se,Public,Database Team,Application compatibility,Match source databases,[DATE]
+RDS_ENGINE_VERSION,Database,All,8.0.35,RDS database engine version,Yes,String,Valid RDS version,Public,Database Team,RDS_ENGINE,Latest stable version,[DATE]
+RDS_INSTANCE_CLASS,Database,Production,db.r5.large,RDS instance class,Yes,String,Valid DB instance class,Public,Database Team,Performance requirements,Right-sized for workload,[DATE]
+RDS_MULTI_AZ,Database,Production,true,Enable Multi-AZ deployment,Yes,Boolean,true|false,Public,Database Team,High availability,Required for production,[DATE]
+RDS_STORAGE_TYPE,Database,All,gp3,RDS storage type,Yes,String,gp2|gp3|io1,Public,Database Team,Performance requirements,Cost-effective performance,[DATE]
+RDS_STORAGE_SIZE_GB,Database,Production,100,RDS storage size in GB,Yes,Integer,20-16384,Public,Database Team,Data volume,Initial size with auto-growth,[DATE]
+RDS_BACKUP_RETENTION,Database,Production,7,Backup retention in days,Yes,Integer,1-35,Public,Database Team,Recovery requirements,7 days for compliance,[DATE]
+S3_BUCKET_DATA,Storage,All,[bucket-name]-data,S3 bucket for application data,Yes,String,Valid S3 bucket name,Confidential,Storage Team,Application access,Must be globally unique,[DATE]
+S3_VERSIONING,Storage,All,Enabled,S3 bucket versioning status,Yes,String,Enabled|Suspended,Public,Storage Team,Data protection,Required for compliance,[DATE]
+S3_LIFECYCLE_DAYS_GLACIER,Storage,All,90,Days before transition to Glacier,Yes,Integer,30-365,Public,Storage Team,Cost optimization,Archive after 90 days,[DATE]
+KMS_KEY_ALIAS,Security,All,alias/migration-cmk,KMS key alias for encryption,Yes,String,Valid KMS alias format,Confidential,Security Team,Encryption requirements,Central encryption key,[DATE]
+KMS_KEY_ROTATION,Security,All,true,Enable automatic KMS key rotation,Yes,Boolean,true|false,Public,Security Team,Compliance,Annual rotation,[DATE]
+IAM_ROLE_EC2,Security,All,[role-name]-ec2-role,IAM role for EC2 instances,Yes,String,Valid IAM role name,Confidential,Security Team,EC2 instances,Instance profile,[DATE]
+IAM_POLICY_BOUNDARY,Security,All,arn:aws:iam::aws:policy/PowerUserAccess,IAM permissions boundary,Yes,String,Valid IAM policy ARN,Public,Security Team,IAM governance,Prevent privilege escalation,[DATE]
+CLOUDWATCH_LOG_GROUP,Monitoring,All,/aws/migration/application,CloudWatch log group for app logs,Yes,String,Valid log group name,Public,Operations,CloudWatch setup,Centralized logging,[DATE]
+CLOUDWATCH_RETENTION_DAYS,Monitoring,All,90,CloudWatch log retention in days,Yes,Integer,30-365,Public,Operations,Cost management,Balance cost and compliance,[DATE]
+CLOUDWATCH_DASHBOARD,Monitoring,All,migration-operations,CloudWatch dashboard name,Yes,String,Valid dashboard name,Public,Operations,Dashboard creation,Operational visibility,[DATE]
+SNS_TOPIC_ALERTS,Monitoring,All,[topic-arn],SNS topic for operational alerts,Yes,String,Valid SNS topic ARN,Confidential,Operations,SNS configuration,PagerDuty integration,[DATE]
+DMS_INSTANCE_CLASS,Migration,All,dms.t3.medium,DMS replication instance class,Yes,String,Valid DMS instance class,Public,Migration Team,Database size,Sized for migration workload,[DATE]
+MGN_REPLICATION_SERVER_TYPE,Migration,All,t3.small,AWS MGN replication server type,Yes,String,Valid EC2 instance type,Public,Migration Team,Replication capacity,Cost-optimized,[DATE]
+TAGS_ENVIRONMENT,Tagging,All,production,Environment tag for all resources,Yes,String,Valid environment name,Public,Operations,Cost tracking,Consistent tagging,[DATE]
+TAGS_PROJECT,Tagging,All,cloud-migration,Project tag for cost allocation,Yes,String,Valid project identifier,Public,Operations,Cost tracking,Migration project ID,[DATE]
+TAGS_COST_CENTER,Tagging,All,[cost-center],Cost center tag for billing,Yes,String,Valid cost center code,Confidential,Finance,Cost allocation,Chargeback reporting,[DATE]
+TAGS_MIGRATION_WAVE,Tagging,All,wave-0,Migration wave identifier,Yes,String,wave-0|wave-1|wave-2|wave-3,Public,Migration Team,Wave tracking,Track migration progress,[DATE]
+
