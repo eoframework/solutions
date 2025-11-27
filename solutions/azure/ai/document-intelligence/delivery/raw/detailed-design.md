@@ -1,312 +1,507 @@
-# Azure AI Document Intelligence - Detailed Technical Design
-
-## 📐 **Architecture Overview**
-
-Comprehensive technical design for intelligent document processing using Azure AI Document Intelligence and supporting services for automated data extraction, validation, and integration workflows.
-
-### 🎯 **Design Principles**
-- **🔒 Security First**: Defense-in-depth security architecture with Zero Trust principles
-- **📈 Scalability**: Horizontal and vertical scaling capabilities with auto-scaling
-- **🔄 Reliability**: High availability and disaster recovery with 99.9% uptime SLA
-- **⚡ Performance**: Optimized for production workloads with sub-5-second processing
-- **🛡️ Compliance**: Industry standard compliance frameworks (SOC 2, ISO 27001, HIPAA)
-- **💡 Innovation**: Modern cloud-native design patterns with serverless compute
-
-## 🏗️ **Solution Architecture Diagram**
-
-```
-┌─────────────────────────────────────────────────────────────────────────────────┐
-│                           Azure AI Document Intelligence                         │
-│                              Solution Architecture                               │
-└─────────────────────────────────────────────────────────────────────────────────┘
-
-┌─────────────────┐    ┌──────────────────┐    ┌─────────────────────────────────┐
-│   Document      │    │    Azure API     │    │        Processing Layer        │
-│    Sources      │───▶│   Management     │───▶│                                 │
-│                 │    │                  │    │  ┌─────────────────────────────┐│
-│ • Web Upload    │    │ • Authentication │    │  │     Azure Functions        ││
-│ • Email         │    │ • Rate Limiting  │    │  │   (Serverless Compute)      ││
-│ • File Shares   │    │ • Monitoring     │    │  │                             ││
-│ • APIs          │    │ • SSL/TLS        │    │  │ • Document Orchestration    ││
-└─────────────────┘    └──────────────────┘    │  │ • Business Logic            ││
-                                               │  │ • Validation Rules          ││
-                                               │  │ • Error Handling            ││
-                                               │  └─────────────────────────────┘│
-                                               └─────────────────────────────────┘
-                                                              │
-                               ┌──────────────────────────────┼──────────────────────────────┐
-                               │                              │                              │
-                               ▼                              ▼                              ▼
-                    ┌─────────────────────┐       ┌─────────────────────┐       ┌─────────────────────┐
-                    │   Azure Storage     │       │  Form Recognizer    │       │  Computer Vision    │
-                    │     Account         │       │      Service        │       │      Service        │
-                    │                     │       │                     │       │                     │
-                    │ • Input Documents   │       │ • Pre-built Models  │       │ • OCR Processing    │
-                    │ • Processed Results │       │ • Custom Models     │       │ • Layout Analysis   │
-                    │ • Failed Items      │       │ • Document Analysis │       │ • Text Recognition  │
-                    │ • Audit Logs        │       │ • Data Extraction   │       │ • Image Processing  │
-                    │ • Backup Data       │       │ • Field Confidence  │       │ • Quality Assessment│
-                    └─────────────────────┘       └─────────────────────┘       └─────────────────────┘
-                               │
-                               ▼
-                    ┌─────────────────────┐
-                    │    Azure Key        │
-                    │      Vault          │
-                    │                     │
-                    │ • API Keys          │
-                    │ • Connection Strings│
-                    │ • Certificates      │
-                    │ • Encryption Keys   │
-                    └─────────────────────┘
-
-┌─────────────────────────────────────────────────────────────────────────────────┐
-│                            Integration Layer                                    │
-├─────────────────┬─────────────────┬─────────────────┬─────────────────────────┤
-│   ERP Systems   │  Document Mgmt  │  Business Apps  │    Notification         │
-│                 │                 │                 │      Services           │
-│ • SAP          │ • SharePoint    │ • Power Platform│ • Logic Apps            │
-│ • Oracle       │ • Box           │ • Dynamics 365  │ • Event Grid            │
-│ • Dynamics     │ • OneDrive      │ • Custom Apps   │ • Service Bus           │
-│ • Custom ERP   │ • File Shares   │ • Workflows     │ • Email Notifications   │
-└─────────────────┴─────────────────┴─────────────────┴─────────────────────────┘
-
-┌─────────────────────────────────────────────────────────────────────────────────┐
-│                         Monitoring & Operations                                 │
-├─────────────────┬─────────────────┬─────────────────┬─────────────────────────┤
-│ Azure Monitor   │ Application     │   Log Analytics │      Azure Security     │
-│                 │    Insights     │                 │        Center           │
-│ • Metrics       │ • Performance   │ • Query Logs    │ • Security Monitoring  │
-│ • Alerts        │ • Dependencies  │ • Custom Views  │ • Compliance Tracking  │
-│ • Dashboards    │ • Failures      │ • Reporting     │ • Threat Detection      │
-│ • Automation    │ • User Activity │ • Analytics     │ • Vulnerability Mgmt    │
-└─────────────────┴─────────────────┴─────────────────┴─────────────────────────┘
-```
-
-## 🔄 **Data Flow Architecture**
-
-### **Document Processing Workflow**
-1. **📥 Document Ingestion**
-   - Documents uploaded via API, web interface, or automated systems
-   - Initial validation for file type, size, and format compatibility
-   - Secure storage in Azure Storage with encryption at rest
-   - Audit trail creation and metadata tagging
-
-2. **🔍 Document Analysis**
-   - Form Recognizer service analyzes document structure and content
-   - Pre-built models identify standard document types (invoices, receipts, etc.)
-   - Custom models process organization-specific document formats
-   - Confidence scores and validation metrics calculated
-
-3. **⚙️ Data Processing**
-   - Extracted data validated against business rules and constraints
-   - Data transformation and normalization applied
-   - Integration with external systems for validation (e.g., vendor databases)
-   - Quality assurance checks and error handling procedures
-
-4. **📤 Results Distribution**
-   - Processed data formatted for target systems and applications
-   - Integration APIs called to update downstream systems
-   - Notification services inform users of processing completion
-   - Original documents archived with processing metadata
-
-5. **📊 Monitoring & Reporting**
-   - Performance metrics collected and analyzed
-   - Processing statistics and trends reported
-   - Error rates and quality metrics tracked
-   - Audit logs maintained for compliance requirements
-
-## 🔐 **Security Architecture**
-
-### **Defense-in-Depth Security Model**
-
-#### **🌐 Network Security**
-- **Virtual Network (VNet)**: Isolated network environment with subnet segmentation
-- **Network Security Groups**: Traffic filtering rules for inbound and outbound access
-- **Private Endpoints**: Secure connectivity to Azure services without internet exposure
-- **Azure Firewall**: Application-layer filtering and network traffic monitoring
-- **DDoS Protection**: Standard protection against distributed denial-of-service attacks
-
-#### **🔑 Identity & Access Management**
-- **Azure Active Directory**: Enterprise identity provider with conditional access
-- **Managed Identity**: System-assigned identities for service-to-service authentication
-- **Role-Based Access Control (RBAC)**: Granular permissions based on user roles
-- **Privileged Identity Management (PIM)**: Just-in-time access for administrative tasks
-- **Multi-Factor Authentication (MFA)**: Additional security layer for user authentication
-
-#### **🛡️ Data Protection**
-- **Encryption at Rest**: AES-256 encryption for all stored data and backups
-- **Encryption in Transit**: TLS 1.2+ for all network communications
-- **Customer-Managed Keys**: Azure Key Vault integration for encryption key management
-- **Data Classification**: Automated tagging and handling of sensitive information
-- **Data Loss Prevention (DLP)**: Policies to prevent unauthorized data exfiltration
-
-#### **🔍 Security Monitoring**
-- **Azure Security Center**: Centralized security management and monitoring
-- **Azure Sentinel**: SIEM solution for threat detection and response
-- **Microsoft Defender**: Advanced threat protection for cloud workloads
-- **Security Baselines**: CIS benchmarks and Azure security best practices
-- **Compliance Dashboard**: Real-time compliance status and reporting
-
-### **Compliance Framework**
-- **SOC 2 Type II**: Security, availability, processing integrity, confidentiality, privacy
-- **ISO 27001**: Information security management system certification
-- **PCI DSS**: Payment card industry data security standards (if applicable)
-- **GDPR**: Data protection and privacy regulations compliance
-- **HIPAA**: Healthcare information privacy and security (if applicable)
-- **Industry-Specific**: Additional compliance requirements based on use case
-
-## 📊 **Scalability & Performance Design**
-
-### **Horizontal Scaling Architecture**
-- **Azure Functions**: Auto-scaling serverless compute based on demand
-- **Storage Account**: Geo-redundant storage with automatic failover capability
-- **Form Recognizer**: Regional deployment with load balancing across instances
-- **API Management**: Multi-region deployment with traffic distribution
-- **Database Scaling**: Read replicas and partitioning for high-volume scenarios
-
-### **Performance Optimization**
-- **Content Delivery Network (CDN)**: Global distribution for static content and APIs
-- **Caching Strategies**: Multi-tier caching (Redis, in-memory, browser caching)
-- **Database Optimization**: Indexing, query optimization, and connection pooling
-- **Asynchronous Processing**: Message queues for long-running operations
-- **Resource Right-Sizing**: Automated scaling based on performance metrics
-
-### **Capacity Planning**
-- **Baseline Performance**: 500+ documents per hour per processing unit
-- **Peak Load Handling**: 3x baseline capacity with auto-scaling triggers
-- **Storage Growth**: 20% annual growth projection with automated expansion
-- **Network Bandwidth**: Redundant connectivity with 99.9% availability
-- **Monitoring Thresholds**: Proactive scaling based on CPU, memory, and queue depth
-
-## 🔄 **High Availability & Disaster Recovery**
-
-### **Availability Design**
-- **Multi-Zone Deployment**: Resources distributed across availability zones
-- **Redundancy Elimination**: No single points of failure in critical path
-- **Health Monitoring**: Automated health checks with failover triggers
-- **Load Distribution**: Traffic routing across healthy instances
-- **Service Dependencies**: Graceful degradation for dependent service failures
-
-### **Disaster Recovery Strategy**
-- **RTO Target**: Recovery Time Objective < 4 hours for full service restoration
-- **RPO Target**: Recovery Point Objective < 1 hour for data consistency
-- **Backup Strategy**: Automated daily backups with 30-day retention
-- **Geo-Replication**: Cross-region replication for critical data
-- **Failover Procedures**: Documented and tested recovery procedures
-
-### **Business Continuity Planning**
-- **Service Level Agreements**: 99.9% uptime with penalty clauses
-- **Incident Response**: 24/7 monitoring with escalation procedures
-- **Communication Plan**: Stakeholder notification during outages
-- **Recovery Testing**: Quarterly disaster recovery drills and validation
-- **Documentation**: Runbooks for common failure scenarios
-
-## 🔗 **Integration Architecture**
-
-### **API-First Design**
-- **RESTful APIs**: Industry-standard HTTP/JSON interfaces
-- **OpenAPI Specification**: Comprehensive API documentation and validation
-- **SDK Support**: Native libraries for .NET, Python, Java, Node.js
-- **Rate Limiting**: Configurable throttling to prevent system overload
-- **Versioning Strategy**: Backward-compatible API evolution
-
-### **Enterprise Integration Patterns**
-- **Event-Driven Architecture**: Asynchronous processing with message queues
-- **Service Mesh**: Inter-service communication with observability
-- **Circuit Breaker**: Fault tolerance for external service dependencies
-- **Retry Logic**: Exponential backoff for transient failures
-- **Dead Letter Queues**: Error handling for failed message processing
-
-### **Data Integration**
-- **Real-time Synchronization**: Change data capture for immediate updates
-- **Batch Processing**: Scheduled bulk data transfer for efficiency
-- **Data Transformation**: ETL processes for format and schema conversion
-- **Conflict Resolution**: Data merge strategies for duplicate records
-- **Audit Trails**: Complete lineage tracking for data governance
-
-## 📈 **Performance Monitoring & Analytics**
-
-### **Key Performance Indicators (KPIs)**
-- **Processing Throughput**: Documents processed per hour/minute
-- **Response Time**: End-to-end processing latency (P50, P95, P99)
-- **Accuracy Metrics**: Data extraction confidence scores and validation rates
-- **System Availability**: Uptime percentage and service availability
-- **Error Rates**: Processing failures, system errors, and user errors
-
-### **Monitoring Stack**
-- **Azure Monitor**: Comprehensive monitoring platform with metrics and logs
-- **Application Insights**: Application performance monitoring and analytics
-- **Log Analytics**: Centralized logging with query and analysis capabilities
-- **Grafana Dashboards**: Custom visualizations for operations teams
-- **Power BI Integration**: Business intelligence reporting and analytics
-
-### **Alerting Strategy**
-- **Proactive Monitoring**: Threshold-based alerts for performance degradation
-- **Anomaly Detection**: Machine learning-based pattern recognition
-- **Escalation Procedures**: Multi-tier notification system
-- **SLA Monitoring**: Automated tracking of service level commitments
-- **Cost Optimization**: Budget alerts and resource utilization monitoring
-
-## 💰 **Cost Optimization**
-
-### **Resource Optimization**
-- **Right-Sizing**: Automated scaling based on actual usage patterns
-- **Reserved Capacity**: Cost savings for predictable workloads
-- **Spot Instances**: Lower-cost compute for non-critical batch processing
-- **Storage Tiering**: Automatic data lifecycle management
-- **Network Optimization**: Traffic routing to minimize data transfer costs
-
-### **Operational Efficiency**
-- **Automation**: Infrastructure as Code (IaC) for consistent deployments
-- **DevOps Integration**: CI/CD pipelines for efficient development lifecycle
-- **Resource Tagging**: Cost allocation and chargeback capabilities
-- **Usage Analytics**: Regular reviews and optimization recommendations
-- **Governance Policies**: Automated compliance with cost control measures
-
-## 🧪 **Testing & Validation Strategy**
-
-### **Testing Framework**
-- **Unit Testing**: Individual component functionality validation
-- **Integration Testing**: End-to-end workflow verification
-- **Performance Testing**: Load testing with realistic document volumes
-- **Security Testing**: Vulnerability assessment and penetration testing
-- **User Acceptance Testing**: Business process validation with stakeholders
-
-### **Quality Assurance**
-- **Automated Testing**: CI/CD integration for regression testing
-- **Test Data Management**: Synthetic data generation for privacy compliance
-- **Environment Consistency**: Infrastructure as Code for test environments
-- **Performance Benchmarking**: Baseline measurements for comparison
-- **Documentation Testing**: Verification of deployment and operational procedures
-
-## 📋 **Implementation Considerations**
-
-### **Deployment Strategy**
-- **Phased Rollout**: Gradual implementation with validation at each phase
-- **Blue-Green Deployment**: Zero-downtime updates with instant rollback
-- **Feature Flags**: Controlled feature activation and A/B testing
-- **Environment Promotion**: Consistent deployment across dev/test/prod
-- **Rollback Procedures**: Quick recovery from deployment issues
-
-### **Operational Requirements**
-- **24/7 Monitoring**: Continuous oversight of system health and performance
-- **Incident Management**: Structured response to system issues and outages
-- **Change Management**: Controlled updates with proper approval processes
-- **Documentation**: Comprehensive runbooks and operational procedures
-- **Training**: Staff preparation for ongoing system maintenance
-
-### **Migration Planning**
-- **Current State Assessment**: Analysis of existing document processing workflows
-- **Data Migration**: Secure transfer of historical documents and metadata
-- **System Integration**: Connectivity with existing enterprise applications
-- **User Training**: Preparation for new processes and interfaces
-- **Parallel Processing**: Side-by-side operation during transition period
-
+---
+document_title: Detailed Design Document
+solution_name: Azure Document Intelligence
+document_version: "1.0"
+author: "[ARCHITECT]"
+last_updated: "[DATE]"
+technology_provider: microsoft-azure
+client_name: "[CLIENT]"
+client_logo: ../../assets/logos/client_logo.png
+vendor_logo: ../../assets/logos/consulting_company_logo.png
+eoframework_logo: ../../assets/logos/eo-framework-logo-real.png
 ---
 
-**📍 Design Version**: 2.0
-**Last Updated**: January 2025
-**Review Status**: ✅ Validated by Solution Architecture Team
-**Next Review**: Quarterly or upon major platform updates
+# Executive Summary
 
-**Next Steps**: Review [Implementation Guide](implementation-guide.md) for deployment procedures or [Prerequisites](implementation-guide.md#prerequisites) for environment preparation requirements.
+This document provides the comprehensive technical design for the Azure Document Intelligence implementation. It covers the target-state architecture, security controls, data design, integration patterns, and implementation approach required for successful deployment of intelligent document processing capabilities.
+
+## Purpose
+
+Define the technical architecture and design specifications that will guide the implementation team through deployment, configuration, and validation of the Azure Document Intelligence solution for automated document extraction and processing.
+
+## Scope
+
+**In-scope:**
+- Azure Document Intelligence service configuration and model training
+- Document processing pipeline with Azure Functions
+- Integration with ERP and CRM systems via REST APIs
+- Security controls including private endpoints and managed identities
+- Monitoring and operational procedures with Azure Monitor
+
+**Out-of-scope:**
+- End-user training (covered in Implementation Guide)
+- Ongoing support procedures (covered in Operations Runbook)
+- Custom application development beyond processing pipeline
+
+## Assumptions & Constraints
+
+The following assumptions underpin the design and must be validated during implementation.
+
+- Azure subscription with Contributor access available and configured
+- Network connectivity to client ERP and CRM systems established
+- Document types (invoices, receipts, forms) confirmed during discovery
+- 4-hour RTO, 1-hour RPO requirements apply per SOW
+- Single region deployment (East US) as specified in Statement of Work
+
+## References
+
+This document should be read in conjunction with the following related materials.
+
+- Statement of Work (SOW) - Azure Document Intelligence Implementation
+- Discovery Questionnaire responses
+- Azure Document Intelligence best practices documentation
+- Client security standards and compliance requirements
+
+# Business Context
+
+This section establishes the business drivers, success criteria, and compliance requirements that shape the technical design decisions.
+
+## Business Drivers
+
+The solution addresses the following key business objectives identified during discovery.
+
+- **Processing Efficiency:** Reduce manual document processing time by 80-90%
+- **Extraction Accuracy:** Achieve 95%+ accuracy in data extraction from documents
+- **Cost Optimization:** Reduce document processing costs by 70% through automation
+- **Scalability:** Support 4x growth in document volume without re-architecture
+- **Compliance:** Maintain full audit trail and SOC 2 compliance
+
+## Workload Criticality & SLA Expectations
+
+The following service level targets define the operational requirements for the production environment and guide infrastructure sizing decisions.
+
+<!-- TABLE_CONFIG: widths=[25, 25, 25, 25] -->
+| Metric | Target | Measurement | Priority |
+|--------|--------|-------------|----------|
+| Availability | 99.5% | Azure Monitor uptime | Critical |
+| Processing Time | < 5 minutes | End-to-end latency | High |
+| Extraction Accuracy | 95%+ | Field-level validation | Critical |
+| RTO | 4 hours | DR testing | Critical |
+| RPO | 1 hour | Backup verification | Critical |
+
+## Compliance & Regulatory Factors
+
+The solution must adhere to the following regulatory and compliance requirements.
+
+- SOC 2 Type II compliance required for all components handling document data
+- Data residency requirements mandate primary storage in East US region
+- Audit logging required for all document processing and administrative actions
+- Encryption at rest and in transit mandatory for all data flows
+- 7-year document retention policy with lifecycle management
+
+## Success Criteria
+
+Project success will be measured against the following criteria at go-live.
+
+- All functional requirements from SOW implemented and validated
+- 95%+ extraction accuracy achieved across invoice, receipt, and form document types
+- Performance targets met under load testing conditions (2,000 docs/month capacity)
+- Security controls pass client security review
+- Operations team trained and capable of independent support
+
+# Current-State Assessment
+
+This section documents the existing environment that the solution will integrate with or replace.
+
+## Application Landscape
+
+The current environment consists of manual document processing workflows that will be automated with the new solution.
+
+<!-- TABLE_CONFIG: widths=[25, 30, 25, 20] -->
+| Application | Purpose | Technology | Status |
+|-------------|---------|------------|--------|
+| ERP System | Invoice and payment processing | REST API | Integration point |
+| CRM System | Customer and document records | REST API | Integration point |
+| Manual Processing | Document data entry | Manual workflow | To be automated |
+
+## Infrastructure Inventory
+
+The current infrastructure consists of manual processes that will be replaced by cloud-native Azure services.
+
+<!-- TABLE_CONFIG: widths=[20, 15, 35, 30] -->
+| Component | Quantity | Specifications | Notes |
+|-----------|----------|----------------|-------|
+| Document Processing Staff | 3 | Manual data entry operators | To be reallocated |
+| File Storage | 1 | On-premises file shares | To be migrated |
+| ERP Integration | 1 | Existing API endpoints | Integration target |
+
+## Dependencies & Integration Points
+
+The current environment has the following external dependencies that must be considered during implementation.
+
+- ERP system REST API for invoice data transmission
+- CRM system REST API for document metadata storage
+- Azure Active Directory for user authentication
+- Network connectivity between Azure and client systems
+
+## Network Topology
+
+Current network topology includes:
+- Client corporate network with VPN connectivity
+- Azure subscription in East US region
+- Private endpoint connectivity for Azure services
+- Network security groups for traffic control
+
+## Security Posture
+
+The current security controls provide a baseline that will be enhanced in the target architecture.
+
+- Azure AD for identity management with conditional access
+- Network security groups for perimeter control
+- TLS encryption for data in transit
+- Regular security assessments and penetration testing
+
+## Performance Baseline
+
+Current system performance metrics establish the baseline for improvement targets.
+
+- Manual processing time: 12-15 minutes per document average
+- Manual accuracy rate: 92-95% with human error
+- Monthly document volume: 500-1,000 documents
+- Error correction rate: 8-12% of documents require rework
+
+# Solution Architecture
+
+The target architecture leverages Azure cognitive services and serverless compute to deliver scalable, reliable document processing with minimal operational overhead.
+
+![Solution Architecture](../../assets/diagrams/architecture-diagram.png)
+
+## Architecture Principles
+
+The following principles guide all architectural decisions throughout the solution design.
+
+- **Cloud-Native Design:** Leverage Azure managed services to reduce operational burden
+- **Security by Design:** Implement defense in depth with Zero Trust principles
+- **Serverless First:** Use Azure Functions for event-driven, scalable processing
+- **Infrastructure as Code:** All infrastructure defined in Bicep templates and version-controlled
+- **Observability:** Comprehensive monitoring, logging, and alerting with Azure Monitor
+
+## Architecture Patterns
+
+The solution implements the following architectural patterns to address scalability and reliability requirements.
+
+- **Primary Pattern:** Event-driven serverless processing with Azure Functions
+- **Data Pattern:** Document storage with metadata in Cosmos DB
+- **Integration Pattern:** REST APIs with retry logic and dead-letter queues
+- **Deployment Pattern:** Blue-green with Infrastructure as Code automation
+
+## Component Design
+
+The solution comprises the following logical components, each with specific responsibilities and scaling characteristics.
+
+<!-- TABLE_CONFIG: widths=[18, 25, 22, 18, 17] -->
+| Component | Purpose | Technology | Dependencies | Scaling |
+|-----------|---------|------------|--------------|---------|
+| API Management | Request routing, authentication | Azure API Management | Azure AD | Managed |
+| Processing Engine | Document orchestration | Azure Functions Premium | Doc Intelligence | Horizontal |
+| AI/ML Services | OCR and extraction | Azure Document Intelligence | None | Managed |
+| Document Storage | Input and processed docs | Azure Blob Storage | Key Vault | Managed |
+| Metadata Store | Processing state, results | Azure Cosmos DB | Key Vault | Serverless |
+| Secrets Management | API keys, connection strings | Azure Key Vault | Azure AD | Managed |
+
+## Technology Stack
+
+The technology stack has been selected based on requirements for scalability, maintainability, and alignment with Azure best practices.
+
+<!-- TABLE_CONFIG: widths=[25, 35, 40] -->
+| Layer | Technology | Rationale |
+|-------|------------|-----------|
+| AI/ML | Azure Document Intelligence | Pre-built and custom models for document extraction |
+| Compute | Azure Functions Premium (EP1) | Serverless with VNet integration support |
+| Storage | Azure Blob Storage | Scalable document storage with lifecycle policies |
+| Database | Azure Cosmos DB Serverless | Flexible schema for metadata with auto-scaling |
+| Monitoring | Azure Monitor + App Insights | Integrated monitoring, logging, and alerting |
+| Security | Azure Key Vault + Managed Identity | Centralized secrets with passwordless auth |
+
+# Security & Compliance
+
+This section details the security controls, compliance mappings, and governance mechanisms implemented in the solution.
+
+## Identity & Access Management
+
+Access control follows a zero-trust model with Azure AD integration and managed identities.
+
+- **Authentication:** Azure AD with OAuth 2.0 for user and service authentication
+- **Authorization:** Role-based access control (RBAC) with least privilege
+- **MFA:** Required for all administrative access via Azure AD conditional access
+- **Service Accounts:** User-assigned managed identities for all Azure service authentication
+
+### Role Definitions
+
+The following roles define access levels within the system, following the principle of least privilege.
+
+<!-- TABLE_CONFIG: widths=[20, 40, 40] -->
+| Role | Permissions | Scope |
+|------|-------------|-------|
+| Administrator | Full system access, configuration changes | All Azure resources |
+| Operator | Monitor dashboards, basic troubleshooting | Production environment |
+| Reviewer | Human review queue access, correction submission | Review application |
+| User | Document submission only | API and upload interface |
+
+## Secrets Management
+
+All sensitive credentials are managed through Azure Key Vault with managed identity access.
+
+- Azure Key Vault for all API keys, connection strings, and certificates
+- Automatic rotation for Document Intelligence API keys (90-day cycle)
+- Managed identity access eliminates stored credentials in code
+- No secrets in code repositories or configuration files
+
+## Network Security
+
+Network security implements defense-in-depth with private endpoints and network isolation.
+
+- **VNet Integration:** Azure Functions deployed with VNet integration
+- **Private Endpoints:** All Azure services accessed via private endpoints
+- **Network Security Groups:** Deny-by-default with explicit allow rules
+- **No Public Access:** Storage and Cosmos DB public access disabled
+
+## Data Protection
+
+Data protection controls ensure confidentiality and integrity throughout the document lifecycle.
+
+- **Encryption at Rest:** Azure Storage Service Encryption with customer-managed keys
+- **Encryption in Transit:** TLS 1.2+ for all communications
+- **Key Management:** Azure Key Vault with customer-controlled key rotation
+- **Data Classification:** Documents tagged with sensitivity levels
+
+## Compliance Mappings
+
+The following table maps compliance requirements to specific implementation controls.
+
+<!-- TABLE_CONFIG: widths=[25, 35, 40] -->
+| Framework | Requirement | Implementation |
+|-----------|-------------|----------------|
+| SOC 2 | Access control | Azure AD RBAC, MFA, audit logging |
+| SOC 2 | Encryption | AES-256 at rest, TLS 1.2 in transit |
+| SOC 2 | Audit logging | Azure Monitor, Log Analytics retention |
+| GDPR | Data residency | East US region deployment only |
+| GDPR | Right to erasure | Automated data deletion workflows |
+
+## Audit Logging & SIEM Integration
+
+Comprehensive audit logging supports security monitoring and compliance requirements.
+
+- All authentication events logged to Log Analytics workspace
+- Document processing events captured with full metadata
+- Administrative actions logged with user context and timestamp
+- Log retention: 90 days hot storage, 365 days archive
+- Azure Monitor alerts for security-relevant events
+
+# Data Architecture
+
+This section defines the data model, storage strategy, migration approach, and governance controls for the solution.
+
+## Data Model
+
+### Conceptual Model
+
+The solution manages the following core entities:
+- **Documents:** Uploaded documents with metadata and processing state
+- **Extraction Results:** Structured data extracted from documents
+- **Processing Events:** Audit trail of all processing activities
+- **Configurations:** System settings and model configurations
+
+### Logical Model
+
+The logical data model defines the primary entities and their relationships within the system.
+
+<!-- TABLE_CONFIG: widths=[20, 25, 30, 25] -->
+| Entity | Key Attributes | Relationships | Volume |
+|--------|----------------|---------------|--------|
+| Document | ID, type, status, uploaded_at | Has many ExtractionResults | 2,000/month |
+| ExtractionResult | ID, document_id, fields, confidence | Belongs to Document | 2,000/month |
+| ProcessingEvent | ID, document_id, event_type, timestamp | References Document | 10,000/month |
+| Configuration | ID, model_id, threshold, updated_at | None | < 100 |
+
+## Data Flow Design
+
+1. **Ingestion:** Documents uploaded to input Blob Storage container via API or direct upload
+2. **Trigger:** Blob trigger fires Azure Function for document processing
+3. **Analysis:** Document Intelligence service extracts text and structured data
+4. **Routing:** Confidence check determines automatic approval or human review
+5. **Integration:** Approved data transmitted to ERP/CRM via REST APIs
+6. **Archive:** Processed documents moved to archive container with lifecycle policies
+
+## Data Migration Strategy
+
+Data migration follows a phased approach to minimize risk and ensure data integrity.
+
+- **Approach:** Net-new implementation with no historical document migration required
+- **Validation:** Sample document testing during UAT phase
+- **Rollback:** Manual fallback available throughout transition period
+- **Cutover:** Phased cutover with parallel processing during transition
+
+## Data Governance
+
+Data governance policies ensure proper handling, retention, and quality management.
+
+- **Classification:** Documents classified by type (invoice, receipt, form)
+- **Retention:** 7 years in archive storage with lifecycle policies
+- **Quality:** Automated validation rules with confidence thresholds
+- **Access:** Role-based with full audit logging
+
+# Integration Design
+
+This section documents the integration patterns, APIs, and external system connections.
+
+## External System Integrations
+
+The solution integrates with the following external systems using standardized protocols and error handling.
+
+<!-- TABLE_CONFIG: widths=[18, 15, 15, 15, 22, 15] -->
+| System | Type | Protocol | Format | Error Handling | SLA |
+|--------|------|----------|--------|----------------|-----|
+| ERP System | Real-time | REST/HTTPS | JSON | Retry with backoff | 99.5% |
+| CRM System | Batch | REST/HTTPS | JSON | Dead letter queue | 99.5% |
+| Human Review | Real-time | Internal API | JSON | Queue persistence | 99.9% |
+| Azure AD | Real-time | OAuth 2.0 | JWT | Failover to cache | 99.99% |
+
+## API Design
+
+### API Standards
+
+All APIs follow RESTful design principles with OpenAPI 3.0 documentation.
+
+- **Authentication:** OAuth 2.0 bearer tokens via Azure AD
+- **Versioning:** URL path versioning (v1, v2)
+- **Rate Limiting:** 1,000 requests per minute per client
+- **Error Handling:** Standard HTTP status codes with JSON error bodies
+
+### API Endpoints
+
+The following endpoints are exposed for document processing operations.
+
+<!-- TABLE_CONFIG: widths=[25, 15, 35, 25] -->
+| Endpoint | Method | Purpose | Response |
+|----------|--------|---------|----------|
+| /api/v1/documents | POST | Submit document for processing | Document ID, status |
+| /api/v1/documents/{id} | GET | Get document processing status | Status, metadata |
+| /api/v1/documents/{id}/results | GET | Get extraction results | Extracted data |
+| /api/v1/documents | GET | List documents with filters | Document list |
+
+## Integration Error Handling
+
+Integration error handling ensures resilience and data consistency.
+
+- **Retry Policy:** Exponential backoff with 3 retries (1s, 5s, 30s)
+- **Circuit Breaker:** Open after 5 consecutive failures, half-open after 60s
+- **Dead Letter Queue:** Failed messages retained for 7 days for analysis
+- **Alerting:** Immediate notification on integration failure patterns
+
+# Infrastructure & Operations
+
+This section defines the infrastructure components, deployment approach, and operational procedures.
+
+## Infrastructure Components
+
+### Compute Resources
+
+<!-- TABLE_CONFIG: widths=[25, 25, 25, 25] -->
+| Resource | SKU | Configuration | Purpose |
+|----------|-----|---------------|---------|
+| Azure Functions | Premium EP1 | VNet integrated, 1-10 instances | Document processing |
+| App Service Plan | Premium V3 | Reserved capacity for Functions | Compute hosting |
+
+### Storage Resources
+
+<!-- TABLE_CONFIG: widths=[25, 25, 25, 25] -->
+| Resource | SKU | Configuration | Purpose |
+|----------|-----|---------------|---------|
+| Blob Storage | Standard GRS | Hot/Cool/Archive tiers | Document storage |
+| Cosmos DB | Serverless | Point-in-time recovery | Metadata storage |
+| Key Vault | Standard | Soft delete enabled | Secrets management |
+
+### AI/ML Resources
+
+<!-- TABLE_CONFIG: widths=[25, 25, 25, 25] -->
+| Resource | SKU | Configuration | Purpose |
+|----------|-----|---------------|---------|
+| Document Intelligence | S0 | Standard tier | OCR and extraction |
+| Custom Models | Included | 3 document types trained | Form processing |
+
+## High Availability Design
+
+The solution implements high availability through Azure managed service capabilities.
+
+- **Azure Functions:** Auto-scaling with health probes
+- **Storage:** GRS replication with automatic failover
+- **Cosmos DB:** Multi-region write capability (single region per SOW)
+- **Document Intelligence:** Azure-managed high availability
+
+## Disaster Recovery
+
+Disaster recovery procedures ensure business continuity in the event of regional failure.
+
+- **RTO:** 4 hours for full service restoration
+- **RPO:** 1 hour for data consistency
+- **Backup:** Daily automated backups with 30-day retention
+- **Recovery:** Infrastructure as Code enables rapid rebuild from Bicep templates
+
+## Monitoring Strategy
+
+Comprehensive monitoring ensures operational visibility and proactive issue detection.
+
+- **Azure Monitor:** Infrastructure metrics, alerts, and dashboards
+- **Application Insights:** Application performance monitoring
+- **Log Analytics:** Centralized logging with KQL queries
+- **Alerting:** Email and Teams notifications for critical events
+
+# Implementation Approach
+
+This section outlines the phased implementation strategy for the solution.
+
+## Implementation Phases
+
+The implementation follows a phased approach with validation gates at each stage.
+
+<!-- TABLE_CONFIG: widths=[15, 35, 25, 25] -->
+| Phase | Activities | Duration | Exit Criteria |
+|-------|------------|----------|---------------|
+| Phase 1 | Foundation and model training | 6 weeks | AI models trained with 90%+ accuracy |
+| Phase 2 | Pipeline development and integration | 5 weeks | End-to-end processing working |
+| Phase 3 | Optimization and production deployment | 5 weeks | Go-live with 95%+ accuracy |
+
+## Deployment Strategy
+
+Deployment follows Infrastructure as Code principles with Bicep templates.
+
+- **Environment Promotion:** Dev to staging to production with same templates
+- **Feature Flags:** Controlled feature activation during rollout
+- **Rollback:** Quick recovery via Bicep redeployment
+- **Validation:** Automated testing at each promotion stage
+
+## Migration Approach
+
+Migration follows a phased cutover strategy to minimize risk.
+
+- **Parallel Processing:** Run manual and automated in parallel during transition
+- **Gradual Shift:** 25% to 75% to 100% automated over 3 weeks
+- **Fallback:** Manual processing available throughout transition
+- **Validation:** Daily accuracy checks during cutover period
+
+# Appendices
+
+## Appendix A: Azure Resource Naming Convention
+
+All Azure resources follow the naming convention: `{resource-type}-{solution}-{environment}-{region}-{instance}`
+
+Example: `func-docintel-prod-eus-001`
+
+## Appendix B: Network Architecture Details
+
+### IP Address Allocation
+
+<!-- TABLE_CONFIG: widths=[30, 30, 40] -->
+| Subnet | CIDR | Purpose |
+|--------|------|---------|
+| Functions | 10.0.1.0/24 | Azure Functions VNet integration |
+| Private Endpoints | 10.0.2.0/24 | Private endpoint connections |
+
+## Appendix C: Glossary
+
+- **Document Intelligence:** Azure AI service for document OCR and extraction
+- **Pre-built Model:** Microsoft-trained model for common document types
+- **Custom Model:** Client-trained model for organization-specific documents
+- **Confidence Score:** AI certainty level for extracted field values (0-100%)
+- **Human Review:** Manual verification process for low-confidence extractions

@@ -1,90 +1,61 @@
-Component,Parameter,Environment,Value,Data_Type,Required,Description,Validation_Rule,Default_Value
-Azure Subscription,Subscription ID,All,{SUBSCRIPTION_ID},String,Yes,Azure subscription identifier for resource deployment,GUID format,None
-Azure Subscription,Tenant ID,All,{TENANT_ID},String,Yes,Azure AD tenant identifier for authentication,GUID format,None
-Azure Subscription,Location,All,East US 2,String,Yes,Primary Azure region for resource deployment,Valid Azure region,East US 2
-Resource Naming,Solution Prefix,All,docintel,String,Yes,Prefix for resource naming convention,3-8 lowercase alphanumeric,docintel
-Resource Naming,Environment,Dev,dev,String,Yes,Environment designation for naming,dev|test|stage|prod,dev
-Resource Naming,Environment,Test,test,String,Yes,Environment designation for naming,dev|test|stage|prod,test
-Resource Naming,Environment,Prod,prod,String,Yes,Environment designation for naming,dev|test|stage|prod,prod
-Resource Naming,Location Short,All,eus2,String,Yes,Short code for location in naming,Valid location code,eus2
-Form Recognizer,Service Name,All,fr-{prefix}-{env}-{location}-001,String,Yes,Form Recognizer service name,Azure naming rules,Generated
-Form Recognizer,SKU,Dev,F0,String,Yes,Service tier for development,F0|S0,F0
-Form Recognizer,SKU,Test,F0,String,Yes,Service tier for testing,F0|S0,F0
-Form Recognizer,SKU,Prod,S0,String,Yes,Service tier for production,F0|S0,S0
-Form Recognizer,Custom Domain,Dev,false,Boolean,No,Enable custom subdomain,true|false,false
-Form Recognizer,Custom Domain,Test,false,Boolean,No,Enable custom subdomain,true|false,false
-Form Recognizer,Custom Domain,Prod,true,Boolean,No,Enable custom subdomain,true|false,true
-Storage Account,Account Name,All,st{prefix}{env}{random},String,Yes,Storage account name,3-24 lowercase alphanumeric,Generated
-Storage Account,Account Type,All,StorageV2,String,Yes,Storage account kind,StorageV2,StorageV2
-Storage Account,Replication,Dev,Standard_LRS,String,Yes,Storage replication type,Standard_LRS|Standard_GRS,Standard_LRS
-Storage Account,Replication,Test,Standard_LRS,String,Yes,Storage replication type,Standard_LRS|Standard_GRS,Standard_LRS
-Storage Account,Replication,Prod,Standard_GRS,String,Yes,Storage replication type,Standard_LRS|Standard_GRS,Standard_GRS
-Storage Account,Access Tier,All,Hot,String,Yes,Default access tier for blobs,Hot|Cool,Hot
-Storage Account,HTTPS Only,All,true,Boolean,Yes,Require secure transfer,true|false,true
-Storage Account,TLS Version,All,TLS1_2,String,Yes,Minimum TLS version,TLS1_2,TLS1_2
-Storage Account,Public Access,All,false,Boolean,Yes,Allow blob public access,true|false,false
-Storage Containers,Input Container,All,input-documents,String,Yes,Container for incoming documents,Valid container name,input-documents
-Storage Containers,Processed Container,All,processed-documents,String,Yes,Container for processed documents,Valid container name,processed-documents
-Storage Containers,Failed Container,All,failed-documents,String,Yes,Container for failed documents,Valid container name,failed-documents
-Storage Containers,Archive Container,All,archive-documents,String,No,Container for archived documents,Valid container name,archive-documents
-Key Vault,Vault Name,All,kv-{prefix}-{env}-{location}-001,String,Yes,Key Vault name,Azure naming rules,Generated
-Key Vault,SKU,All,Standard,String,Yes,Key Vault pricing tier,Standard|Premium,Standard
-Key Vault,Soft Delete,Dev,false,Boolean,No,Enable soft delete,true|false,false
-Key Vault,Soft Delete,Test,true,Boolean,No,Enable soft delete,true|false,true
-Key Vault,Soft Delete,Prod,true,Boolean,Yes,Enable soft delete,true|false,true
-Key Vault,Purge Protection,Dev,false,Boolean,No,Enable purge protection,true|false,false
-Key Vault,Purge Protection,Prod,true,Boolean,Yes,Enable purge protection,true|false,true
-Key Vault,Retention Days,All,90,Integer,Yes,Soft delete retention period,7-90 days,90
-Function App,App Name,All,func-{prefix}-{env}-{location}-001,String,Yes,Function app name,Azure naming rules,Generated
-Function App,Runtime,All,python,String,Yes,Function runtime stack,python|dotnet|node,python
-Function App,Runtime Version,All,3.9,String,Yes,Runtime version,Valid version number,3.9
-Function App,Plan Type,Dev,Consumption,String,Yes,Hosting plan type,Consumption|Premium|Dedicated,Consumption
-Function App,Plan Type,Test,Premium,String,Yes,Hosting plan type,Consumption|Premium|Dedicated,Premium
-Function App,Plan Type,Prod,Premium,String,Yes,Hosting plan type,Consumption|Premium|Dedicated,Premium
-Function App,Plan SKU,Test,EP1,String,No,Plan SKU for Premium,EP1|EP2|EP3,EP1
-Function App,Plan SKU,Prod,EP2,String,No,Plan SKU for Premium,EP1|EP2|EP3,EP2
-Function App,Always On,Dev,false,Boolean,No,Keep function app warm,true|false,false
-Function App,Always On,Prod,true,Boolean,No,Keep function app warm,true|false,true
-Computer Vision,Service Name,All,cv-{prefix}-{env}-{location}-001,String,No,Computer Vision service name,Azure naming rules,Generated
-Computer Vision,SKU,Dev,F0,String,No,Service tier for development,F0|S0|S1,F0
-Computer Vision,SKU,Test,S0,String,No,Service tier for testing,F0|S0|S1,S0
-Computer Vision,SKU,Prod,S1,String,No,Service tier for production,F0|S0|S1,S1
-Log Analytics,Workspace Name,All,log-{prefix}-{env}-{location}-001,String,Yes,Log Analytics workspace name,Azure naming rules,Generated
-Log Analytics,SKU,All,PerGB2018,String,Yes,Pricing tier,PerGB2018,PerGB2018
-Log Analytics,Retention,Dev,30,Integer,Yes,Data retention in days,30-730 days,30
-Log Analytics,Retention,Test,90,Integer,Yes,Data retention in days,30-730 days,90
-Log Analytics,Retention,Prod,90,Integer,Yes,Data retention in days,30-730 days,90
-Application Insights,Name,All,ai-{prefix}-{env}-{location}-001,String,Yes,Application Insights name,Azure naming rules,Generated
-Application Insights,Type,All,web,String,Yes,Application type,web,web
-Application Insights,Sampling Rate,Dev,100,Integer,No,Telemetry sampling percentage,1-100,100
-Application Insights,Sampling Rate,Prod,25,Integer,No,Telemetry sampling percentage,1-100,25
-API Management,Service Name,All,apim-{prefix}-{env}-{location}-001,String,No,API Management service name,Azure naming rules,Generated
-API Management,SKU,Dev,Developer,String,No,Service tier,Developer|Basic|Standard|Premium,Developer
-API Management,SKU,Test,Basic,String,No,Service tier,Developer|Basic|Standard|Premium,Basic
-API Management,SKU,Prod,Standard,String,No,Service tier,Developer|Basic|Standard|Premium,Standard
-API Management,Publisher Email,All,{ADMIN_EMAIL},String,No,Publisher contact email,Valid email format,None
-API Management,Publisher Name,All,Document Intelligence Team,String,No,Publisher organization name,Any string,Document Intelligence Team
-Processing Settings,Max Pages Per Document,All,10,Integer,Yes,Maximum pages to process per document,1-50,10
-Processing Settings,Processing Timeout,All,300,Integer,Yes,Processing timeout in seconds,30-600,300
-Processing Settings,Retry Attempts,All,3,Integer,Yes,Number of retry attempts for failures,1-5,3
-Processing Settings,Confidence Threshold,All,0.8,Float,Yes,Minimum confidence score for acceptance,0.1-1.0,0.8
-Processing Settings,Batch Size,All,10,Integer,Yes,Number of documents to process in batch,1-100,10
-Monitoring Settings,Alert Email,All,{ALERT_EMAIL},String,Yes,Email for monitoring alerts,Valid email format,None
-Monitoring Settings,Health Check Interval,All,300,Integer,Yes,Health check frequency in seconds,60-3600,300
-Monitoring Settings,Log Level,Dev,DEBUG,String,Yes,Logging verbosity level,DEBUG|INFO|WARN|ERROR,DEBUG
-Monitoring Settings,Log Level,Prod,INFO,String,Yes,Logging verbosity level,DEBUG|INFO|WARN|ERROR,INFO
-Monitoring Settings,Metric Collection,All,true,Boolean,Yes,Enable custom metrics collection,true|false,true
-Security Settings,Enable Private Endpoints,Dev,false,Boolean,No,Use private endpoints for services,true|false,false
-Security Settings,Enable Private Endpoints,Prod,true,Boolean,No,Use private endpoints for services,true|false,true
-Security Settings,Network Access,Dev,All,String,Yes,Network access policy,All|Selected|Private,All
-Security Settings,Network Access,Prod,Selected,String,Yes,Network access policy,All|Selected|Private,Selected
-Security Settings,Managed Identity,All,true,Boolean,Yes,Enable managed identity authentication,true|false,true
-Security Settings,RBAC Authorization,All,true,Boolean,Yes,Use RBAC for Key Vault access,true|false,true
-Backup Settings,Enable Backup,Prod,true,Boolean,No,Enable automated backups,true|false,true
-Backup Settings,Backup Retention,Prod,30,Integer,No,Backup retention in days,7-365,30
-Backup Settings,Geo Backup,Prod,true,Boolean,No,Enable geo-redundant backup,true|false,true
-Scaling Settings,Auto Scale,Prod,true,Boolean,No,Enable auto-scaling,true|false,true
-Scaling Settings,Min Instances,Prod,2,Integer,No,Minimum number of instances,1-10,2
-Scaling Settings,Max Instances,Prod,10,Integer,No,Maximum number of instances,1-100,10
-Scaling Settings,Scale Out Threshold,Prod,80,Integer,No,CPU threshold for scaling out,50-95,80
-Scaling Settings,Scale In Threshold,Prod,30,Integer,No,CPU threshold for scaling in,10-50,30
+#WIDTH: 25,15,12,30,45,10,12,33,16,20,26,39,12
+#ALIGN: left,left,center,left,left,center,left,left,center,left,left,left,center
+Parameter Name,Category,Environment,Default Value,Description,Required,Data Type,Validation Rules,Security Level,Owner Team,Dependencies,Notes,Last Updated
+AZURE_SUBSCRIPTION_ID,Application,All,[SUBSCRIPTION_ID],Azure subscription identifier for resource deployment,Yes,String,GUID format,Confidential,Infrastructure,None,Required for all Azure deployments,[DATE]
+AZURE_TENANT_ID,Application,All,[TENANT_ID],Azure AD tenant identifier for authentication,Yes,String,GUID format,Confidential,Infrastructure,Azure AD,Required for Entra ID integration,[DATE]
+AZURE_REGION,Application,All,eastus,Primary Azure region for resource deployment,Yes,String,Valid Azure region,Public,Infrastructure,None,Single region deployment per SOW,[DATE]
+SOLUTION_PREFIX,Application,All,docintel,Prefix for all Azure resource naming,Yes,String,3-8 lowercase alphanumeric,Public,Infrastructure,None,Used in resource naming convention,[DATE]
+APP_ENVIRONMENT,Application,All,production,Deployment environment identifier,Yes,String,development|staging|production,Public,Operations,None,Controls feature flags and logging,[DATE]
+LOG_LEVEL,Application,Development,DEBUG,Logging verbosity level for Functions,Yes,String,DEBUG|INFO|WARN|ERROR,Public,Development,App Insights,Set to INFO for production,[DATE]
+LOG_LEVEL,Application,Production,INFO,Logging verbosity level for Functions,Yes,String,DEBUG|INFO|WARN|ERROR,Public,Operations,App Insights,Reduces noise in production,[DATE]
+DOC_INTEL_ENDPOINT,Application,All,[endpoint-url],Azure Document Intelligence service endpoint,Yes,String,Valid HTTPS URL,Confidential,AI Team,Key Vault,Stored in Key Vault,[DATE]
+DOC_INTEL_KEY,Application,All,[api-key],Azure Document Intelligence API key,Yes,String,32 character key,Secret,AI Team,Key Vault,Rotate every 90 days,[DATE]
+DOC_INTEL_MODEL_INVOICE,Application,All,prebuilt-invoice,Pre-built model ID for invoice processing,Yes,String,Valid model ID,Public,AI Team,Doc Intelligence,Microsoft pre-built model,[DATE]
+DOC_INTEL_MODEL_RECEIPT,Application,All,prebuilt-receipt,Pre-built model ID for receipt processing,Yes,String,Valid model ID,Public,AI Team,Doc Intelligence,Microsoft pre-built model,[DATE]
+DOC_INTEL_MODEL_CUSTOM,Application,All,[custom-model-id],Custom trained model ID for forms,Yes,String,Valid model ID,Public,AI Team,Doc Intelligence,Trained on client documents,[DATE]
+CONFIDENCE_THRESHOLD,Application,All,0.85,Minimum confidence score for auto-approval,Yes,Float,0.1-1.0,Public,AI Team,None,Below threshold routes to review,[DATE]
+STORAGE_ACCOUNT_NAME,Database,All,st[prefix][env][random],Storage account name for documents,Yes,String,3-24 lowercase alphanumeric,Confidential,Infrastructure,None,Auto-generated name,[DATE]
+STORAGE_CONNECTION_STRING,Database,All,[connection-string],Storage account connection string,Yes,String,Valid connection string,Secret,Infrastructure,Key Vault,Stored in Key Vault,[DATE]
+STORAGE_INPUT_CONTAINER,Database,All,input-documents,Container for incoming documents,Yes,String,Valid container name,Public,Infrastructure,Storage Account,Landing zone for uploads,[DATE]
+STORAGE_PROCESSED_CONTAINER,Database,All,processed-documents,Container for successfully processed docs,Yes,String,Valid container name,Public,Infrastructure,Storage Account,Post-processing storage,[DATE]
+STORAGE_FAILED_CONTAINER,Database,All,failed-documents,Container for failed processing attempts,Yes,String,Valid container name,Public,Infrastructure,Storage Account,For manual review,[DATE]
+STORAGE_ARCHIVE_CONTAINER,Database,All,archive-documents,Container for long-term retention,Yes,String,Valid container name,Public,Infrastructure,Storage Account,Cool/Archive tier,[DATE]
+COSMOS_ENDPOINT,Database,All,[cosmos-endpoint],Cosmos DB account endpoint URL,Yes,String,Valid HTTPS URL,Confidential,Infrastructure,Key Vault,Stored in Key Vault,[DATE]
+COSMOS_KEY,Database,All,[cosmos-key],Cosmos DB primary access key,Yes,String,Base64 encoded key,Secret,Infrastructure,Key Vault,Rotate every 90 days,[DATE]
+COSMOS_DATABASE,Database,All,documentprocessing,Cosmos DB database name,Yes,String,Valid database name,Public,Infrastructure,Cosmos DB,Single database for solution,[DATE]
+COSMOS_CONTAINER_METADATA,Database,All,document-metadata,Container for document metadata,Yes,String,Valid container name,Public,Infrastructure,Cosmos DB,Partition by document ID,[DATE]
+COSMOS_CONTAINER_RESULTS,Database,All,extraction-results,Container for extraction results,Yes,String,Valid container name,Public,Infrastructure,Cosmos DB,Partition by document ID,[DATE]
+KEYVAULT_NAME,Security,All,kv-[prefix]-[env]-001,Key Vault name for secrets,Yes,String,Azure naming rules,Confidential,Security Team,None,Centralized secrets store,[DATE]
+KEYVAULT_URI,Security,All,[keyvault-uri],Key Vault URI endpoint,Yes,String,Valid HTTPS URL,Confidential,Security Team,Key Vault,Used by managed identity,[DATE]
+MANAGED_IDENTITY_CLIENT_ID,Security,All,[client-id],User-assigned managed identity client ID,Yes,String,GUID format,Confidential,Security Team,Azure AD,For service authentication,[DATE]
+ENCRYPTION_KEY_NAME,Security,All,doc-encryption-key,Key Vault key name for encryption,Yes,String,Valid key name,Confidential,Security Team,Key Vault,Customer-managed key,[DATE]
+RBAC_ADMIN_GROUP,Security,All,[admin-group-id],Azure AD group ID for administrators,Yes,String,GUID format,Confidential,Security Team,Azure AD,Full access to solution,[DATE]
+RBAC_REVIEWER_GROUP,Security,All,[reviewer-group-id],Azure AD group ID for document reviewers,Yes,String,GUID format,Confidential,Security Team,Azure AD,Review queue access only,[DATE]
+RBAC_USER_GROUP,Security,All,[user-group-id],Azure AD group ID for end users,Yes,String,GUID format,Confidential,Security Team,Azure AD,Document submission only,[DATE]
+ERP_ENDPOINT,Integration,All,[erp-api-url],ERP system API endpoint for integration,Yes,String,Valid HTTPS URL,Confidential,Integration Team,Network,Firewall rules required,[DATE]
+ERP_API_KEY,Integration,All,[erp-api-key],API key for ERP system authentication,Yes,String,Provider format,Secret,Integration Team,Key Vault,Provided by ERP team,[DATE]
+ERP_TIMEOUT,Integration,All,30000,ERP API call timeout in milliseconds,Yes,Integer,5000-120000,Public,Integration Team,None,Adjust based on ERP response,[DATE]
+CRM_ENDPOINT,Integration,All,[crm-api-url],CRM system API endpoint for integration,Yes,String,Valid HTTPS URL,Confidential,Integration Team,Network,Firewall rules required,[DATE]
+CRM_API_KEY,Integration,All,[crm-api-key],API key for CRM system authentication,Yes,String,Provider format,Secret,Integration Team,Key Vault,Provided by CRM team,[DATE]
+CRM_TIMEOUT,Integration,All,30000,CRM API call timeout in milliseconds,Yes,Integer,5000-120000,Public,Integration Team,None,Adjust based on CRM response,[DATE]
+SERVICE_BUS_CONNECTION,Integration,All,[servicebus-conn],Service Bus connection string for messaging,Yes,String,Valid connection string,Secret,Integration Team,Key Vault,For async processing,[DATE]
+SERVICE_BUS_QUEUE,Integration,All,document-processing,Queue name for document processing,Yes,String,Valid queue name,Public,Integration Team,Service Bus,Primary processing queue,[DATE]
+APPINSIGHTS_CONNECTION,Monitoring,All,[appinsights-conn],Application Insights connection string,Yes,String,Valid connection string,Confidential,Operations,Key Vault,For telemetry and logging,[DATE]
+LOG_ANALYTICS_WORKSPACE,Monitoring,All,[workspace-id],Log Analytics workspace ID,Yes,String,GUID format,Confidential,Operations,None,Centralized logging,[DATE]
+ALERT_EMAIL,Monitoring,All,[alert-email],Email address for critical alerts,Yes,String,Valid email format,Confidential,Operations,None,Operations team distribution,[DATE]
+ALERT_WEBHOOK,Monitoring,All,[webhook-url],Webhook URL for alert notifications,No,String,Valid HTTPS URL,Confidential,Operations,None,Teams/Slack integration,[DATE]
+HEALTH_CHECK_INTERVAL,Monitoring,All,300,Health check frequency in seconds,Yes,Integer,60-3600,Public,Operations,None,Every 5 minutes default,[DATE]
+VNET_CIDR,Network,All,10.0.0.0/16,Virtual network CIDR block,Yes,String,Valid CIDR notation,Public,Network Team,None,Plan for future growth,[DATE]
+SUBNET_FUNCTIONS,Network,All,10.0.1.0/24,Subnet for Azure Functions,Yes,String,Valid CIDR notation,Public,Network Team,VNET,Delegated to Functions,[DATE]
+SUBNET_PRIVATE_ENDPOINTS,Network,All,10.0.2.0/24,Subnet for private endpoints,Yes,String,Valid CIDR notation,Public,Network Team,VNET,Cognitive Services endpoints,[DATE]
+PRIVATE_ENDPOINT_ENABLED,Network,Development,false,Enable private endpoints for services,Yes,Boolean,true|false,Public,Network Team,VNET,Optional for dev,[DATE]
+PRIVATE_ENDPOINT_ENABLED,Network,Production,true,Enable private endpoints for services,Yes,Boolean,true|false,Public,Network Team,VNET,Required for production,[DATE]
+BACKUP_RETENTION_DAYS,Operations,All,30,Backup retention period in days,Yes,Integer,7-365,Public,Operations,None,Compliance requirement,[DATE]
+BLOB_RETENTION_HOT,Operations,All,30,Days in hot tier before transition,Yes,Integer,7-90,Public,Operations,Storage Account,Based on access patterns,[DATE]
+BLOB_RETENTION_COOL,Operations,All,60,Days in cool tier before archive,Yes,Integer,30-180,Public,Operations,Storage Account,Cost optimization,[DATE]
+BLOB_RETENTION_TOTAL,Operations,All,2555,Total retention in days (7 years),Yes,Integer,365-3650,Public,Operations,Storage Account,Compliance requirement,[DATE]
+FUNCTION_PLAN_TYPE,Operations,Development,Consumption,Function App hosting plan type,Yes,String,Consumption|Premium,Public,Operations,None,Cost effective for dev,[DATE]
+FUNCTION_PLAN_TYPE,Operations,Production,Premium,Function App hosting plan type,Yes,String,Consumption|Premium,Public,Operations,None,Required for VNet integration,[DATE]
+FUNCTION_PLAN_SKU,Operations,Production,EP1,Premium plan SKU,Yes,String,EP1|EP2|EP3,Public,Operations,None,Right-sized for 2K docs/month,[DATE]
+AUTOSCALE_MIN_INSTANCES,Operations,Production,1,Minimum Function instances,Yes,Integer,1-10,Public,Operations,None,Always-on for responsiveness,[DATE]
+AUTOSCALE_MAX_INSTANCES,Operations,Production,10,Maximum Function instances,Yes,Integer,5-100,Public,Operations,None,Handle peak processing,[DATE]
