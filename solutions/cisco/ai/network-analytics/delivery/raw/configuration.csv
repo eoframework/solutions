@@ -1,10 +1,67 @@
-Component,Parameter,Environment,Value,Data_Type,Required,Description,Validation_Rule,Default_Value
-Solution Configuration,Solution Name,All,Enterprise Solution,String,Yes,Solution identifier,Valid solution name,Enterprise Solution
-Environment,Environment Type,Dev,Development,String,Yes,Environment designation,dev|test|prod,dev
-Environment,Environment Type,Test,Test,String,Yes,Environment designation,dev|test|prod,test
-Environment,Environment Type,Prod,Production,String,Yes,Environment designation,dev|test|prod,prod
-Network Configuration,Network Mode,All,Enterprise,String,Yes,Network configuration mode,Basic|Standard|Enterprise,Enterprise
-Security Configuration,Security Level,All,High,String,Yes,Security configuration level,Low|Medium|High,High
-Performance Configuration,Performance Tier,All,Standard,String,Yes,Performance configuration tier,Basic|Standard|Premium,Standard
-Monitoring Configuration,Monitoring Enabled,All,true,Boolean,Yes,Enable comprehensive monitoring,true|false,true
-Backup Configuration,Backup Enabled,All,true,Boolean,Yes,Enable automated backups,true|false,true
+#WIDTH: 28,18,12,30,48,10,12,33,16,18,24,42,12
+#ALIGN: left,left,center,left,left,center,left,left,center,left,left,left,center
+Parameter Name,Category,Environment,Default Value,Description,Required,Data Type,Validation Rules,Security Level,Owner Team,Dependencies,Notes,Last Updated
+DNAC_PRIMARY_IP,DNA Center,All,10.100.1.10,Primary DNA Center appliance management IP,Yes,String,Valid IPv4 address,Confidential,Network Team,Network connectivity,Management VLAN access required,[DATE]
+DNAC_SECONDARY_IP,DNA Center,All,10.100.1.11,Secondary DNA Center appliance management IP (HA),Yes,String,Valid IPv4 address,Confidential,Network Team,Network connectivity,HA pair for redundancy,[DATE]
+DNAC_VIP,DNA Center,All,10.100.1.12,DNA Center Virtual IP for HA failover,Yes,String,Valid IPv4 address,Confidential,Network Team,HA Configuration,Clients connect to VIP,[DATE]
+DNAC_CLUSTER_NAME,DNA Center,All,dnac-cluster-prod,DNA Center cluster identifier,Yes,String,Alphanumeric max 32 chars,Public,Network Team,None,Used in logging and alerts,[DATE]
+DNAC_ADMIN_USER,DNA Center,All,admin,DNA Center administrative username,Yes,String,Valid username format,Confidential,Security Team,AD Integration,Local admin for initial setup,[DATE]
+DNAC_FQDN,DNA Center,All,dnac.client.local,DNA Center fully qualified domain name,Yes,String,Valid FQDN format,Public,Network Team,DNS Configuration,Used for SSL certificate,[DATE]
+DNAC_VERSION,DNA Center,All,2.3.5.x,DNA Center software version,Yes,String,Semantic versioning,Public,Network Team,Cisco support,Minimum for AI Analytics features,[DATE]
+DNAC_LICENSE_TIER,Licensing,All,DNA Advantage,DNA Center license tier,Yes,String,Essentials|Advantage|Premier,Public,Network Team,Cisco Smart License,Required for AI Analytics,[DATE]
+DNAC_DEVICE_COUNT,Licensing,All,200,Number of licensed network devices,Yes,Integer,1-500 for medium appliance,Public,Network Team,Appliance capacity,Scope per SOW,[DATE]
+DNAC_AI_ANALYTICS_ENABLED,Licensing,All,true,Enable AI Network Analytics subscription,Yes,Boolean,true|false,Public,Network Team,DNA Advantage license,Required for predictive insights,[DATE]
+AD_SERVER_PRIMARY,Active Directory,All,10.100.2.10,Primary Active Directory server IP,Yes,String,Valid IPv4 address,Confidential,Security Team,Network connectivity,LDAP authentication,[DATE]
+AD_SERVER_SECONDARY,Active Directory,All,10.100.2.11,Secondary Active Directory server IP,No,String,Valid IPv4 address,Confidential,Security Team,Network connectivity,LDAP failover,[DATE]
+AD_DOMAIN,Active Directory,All,client.local,Active Directory domain name,Yes,String,Valid domain format,Confidential,Security Team,None,For user authentication,[DATE]
+AD_BASE_DN,Active Directory,All,DC=client DC=local,LDAP Base Distinguished Name,Yes,String,Valid DN format,Confidential,Security Team,AD_DOMAIN,User search base,[DATE]
+AD_BIND_USER,Active Directory,All,svc_dnac_ldap,LDAP service account username,Yes,String,Valid username,Secret,Security Team,AD account created,Read-only access to AD,[DATE]
+AD_GROUP_ADMIN,Active Directory,All,DNA-Center-Admins,AD group for DNA Center administrators,Yes,String,Valid AD group name,Confidential,Security Team,AD group created,Full admin access,[DATE]
+AD_GROUP_VIEWER,Active Directory,All,DNA-Center-Viewers,AD group for DNA Center read-only users,Yes,String,Valid AD group name,Confidential,Security Team,AD group created,Dashboard view only,[DATE]
+SERVICENOW_INSTANCE,ServiceNow,All,[instance].service-now.com,ServiceNow instance URL,Yes,String,Valid ServiceNow URL,Confidential,Integration Team,ServiceNow license,ITSM integration target,[DATE]
+SERVICENOW_USER,ServiceNow,All,svc_dnac_snow,ServiceNow integration service account,Yes,String,Valid username,Confidential,Integration Team,ServiceNow account,API access required,[DATE]
+SERVICENOW_TABLE,ServiceNow,All,incident,ServiceNow table for incident creation,Yes,String,Valid table name,Public,Integration Team,None,Auto ticket creation,[DATE]
+SERVICENOW_PRIORITY_MAPPING,ServiceNow,All,Critical:1 High:2 Medium:3 Low:4,DNA Center to ServiceNow priority mapping,Yes,String,Colon-separated mapping,Public,Integration Team,None,Severity translation,[DATE]
+NETBOX_URL,NetBox,All,https://netbox.client.local,NetBox IPAM instance URL,Yes,String,Valid HTTPS URL,Confidential,Integration Team,NetBox instance,IPAM integration target,[DATE]
+NETBOX_API_TOKEN,NetBox,All,[api-token],NetBox API authentication token,Yes,String,Valid API token,Secret,Integration Team,NetBox account,Read/write access,[DATE]
+NETBOX_SYNC_INTERVAL,NetBox,All,15,NetBox sync interval in minutes,Yes,Integer,5-60,Public,Integration Team,None,Inventory synchronization,[DATE]
+SYSLOG_SERVER,Monitoring,All,10.100.3.10,Centralized syslog server IP,Yes,String,Valid IPv4 address,Confidential,Operations Team,Network connectivity,Log aggregation,[DATE]
+SYSLOG_PORT,Monitoring,All,514,Syslog UDP port,Yes,Integer,1-65535,Public,Operations Team,Firewall rules,Standard syslog port,[DATE]
+SYSLOG_FACILITY,Monitoring,All,local7,Syslog facility for DNA Center logs,Yes,String,Valid syslog facility,Public,Operations Team,None,Log categorization,[DATE]
+NTP_SERVER_PRIMARY,Infrastructure,All,10.100.4.10,Primary NTP server IP,Yes,String,Valid IPv4 address,Confidential,Infrastructure Team,Network connectivity,Time synchronization critical,[DATE]
+NTP_SERVER_SECONDARY,Infrastructure,All,10.100.4.11,Secondary NTP server IP,No,String,Valid IPv4 address,Confidential,Infrastructure Team,Network connectivity,NTP failover,[DATE]
+DNS_SERVER_PRIMARY,Infrastructure,All,10.100.5.10,Primary DNS server IP,Yes,String,Valid IPv4 address,Confidential,Infrastructure Team,Network connectivity,Name resolution required,[DATE]
+DNS_SERVER_SECONDARY,Infrastructure,All,10.100.5.11,Secondary DNS server IP,No,String,Valid IPv4 address,Confidential,Infrastructure Team,Network connectivity,DNS failover,[DATE]
+SMTP_SERVER,Notifications,All,smtp.client.local,SMTP server for email notifications,Yes,String,Valid hostname or IP,Confidential,Infrastructure Team,SMTP relay,Alert notifications,[DATE]
+SMTP_PORT,Notifications,All,587,SMTP server port,Yes,Integer,25|587|465,Public,Infrastructure Team,None,TLS recommended,[DATE]
+SMTP_FROM_ADDRESS,Notifications,All,dnac-alerts@client.local,Email sender address for alerts,Yes,String,Valid email format,Public,Operations Team,None,Alert source identification,[DATE]
+ALERT_EMAIL_RECIPIENTS,Notifications,All,network-ops@client.local,Email recipients for critical alerts,Yes,String,Comma-separated emails,Confidential,Operations Team,None,NOC distribution list,[DATE]
+DEVICE_CREDENTIAL_CLI,Device Access,All,network_admin,CLI username for device access,Yes,String,Valid username,Secret,Network Team,Device accounts,NETCONF/SSH access,[DATE]
+DEVICE_CREDENTIAL_SNMP_RO,Device Access,All,public_ro_string,SNMP read-only community string,Yes,String,Min 8 characters,Secret,Network Team,Device SNMP config,Telemetry collection,[DATE]
+DEVICE_CREDENTIAL_SNMP_RW,Device Access,All,private_rw_string,SNMP read-write community string,Yes,String,Min 12 characters,Secret,Network Team,Device SNMP config,Device management,[DATE]
+DEVICE_ENABLE_SECRET,Device Access,All,[enable-secret],Device enable/privilege password,Yes,String,Min 12 characters,Secret,Network Team,Device config,Privileged mode access,[DATE]
+AI_CONFIDENCE_THRESHOLD,AI Analytics,All,0.85,Minimum confidence score for AI predictions,Yes,Float,0.0-1.0,Public,Network Team,AI Analytics enabled,Below triggers human review,[DATE]
+AI_ANOMALY_SENSITIVITY,AI Analytics,All,Medium,Anomaly detection sensitivity level,Yes,String,Low|Medium|High,Public,Network Team,AI Analytics enabled,Balance accuracy vs alerts,[DATE]
+AI_BASELINE_LEARNING_DAYS,AI Analytics,All,14,Days to establish AI performance baseline,Yes,Integer,7-30,Public,Network Team,AI Analytics enabled,Initial learning period,[DATE]
+AI_PREDICTIVE_HORIZON_DAYS,AI Analytics,All,14,Days ahead for failure prediction,Yes,Integer,7-30,Public,Network Team,AI Analytics enabled,Per SOW specification,[DATE]
+POLICY_VLAN_RANGE,Automation,All,100-999,Valid VLAN ID range for automation,Yes,String,VLAN range format,Public,Network Team,None,Policy template parameter,[DATE]
+POLICY_DEPLOYMENT_MODE,Automation,All,Staged,Policy deployment strategy,Yes,String,Immediate|Staged|Manual,Public,Network Team,None,Risk mitigation approach,[DATE]
+POLICY_COMPLIANCE_CHECK_INTERVAL,Automation,All,60,Compliance check interval in minutes,Yes,Integer,15-1440,Public,Network Team,None,Drift detection frequency,[DATE]
+BACKUP_RETENTION_DAYS,Operations,All,30,DNA Center backup retention period,Yes,Integer,7-365,Public,Operations Team,Storage capacity,Compliance requirement,[DATE]
+BACKUP_SCHEDULE,Operations,All,02:00,Daily backup time (24-hour format),Yes,String,HH:MM format,Public,Operations Team,None,Off-hours execution,[DATE]
+BACKUP_LOCATION,Operations,All,/backup/dnac/,Backup storage path,Yes,String,Valid path,Confidential,Operations Team,Storage availability,Local or NFS mount,[DATE]
+HA_FAILOVER_THRESHOLD,High Availability,All,60,Seconds before HA failover triggered,Yes,Integer,30-300,Public,Network Team,HA Configuration,Balance stability vs speed,[DATE]
+HA_HEARTBEAT_INTERVAL,High Availability,All,5,HA heartbeat interval in seconds,Yes,Integer,1-30,Public,Network Team,HA Configuration,Health monitoring,[DATE]
+SSL_CERTIFICATE_PATH,Security,All,/etc/ssl/dnac/server.crt,SSL certificate file path,Yes,String,Valid file path,Confidential,Security Team,SSL certificate,HTTPS encryption,[DATE]
+SSL_KEY_PATH,Security,All,/etc/ssl/dnac/server.key,SSL private key file path,Yes,String,Valid file path,Secret,Security Team,SSL certificate,Keep secure,[DATE]
+SSL_EXPIRY_WARNING_DAYS,Security,All,30,Days before SSL expiry to alert,Yes,Integer,14-90,Public,Security Team,None,Certificate renewal reminder,[DATE]
+SESSION_TIMEOUT_MINUTES,Security,All,30,Web session timeout in minutes,Yes,Integer,5-480,Public,Security Team,None,Security policy compliance,[DATE]
+MAX_LOGIN_ATTEMPTS,Security,All,5,Maximum failed login attempts before lockout,Yes,Integer,3-10,Public,Security Team,None,Brute force protection,[DATE]
+AUDIT_LOG_RETENTION_DAYS,Compliance,All,365,Audit log retention period in days,Yes,Integer,90-730,Public,Compliance Team,Storage capacity,Regulatory requirement,[DATE]
+APP_MONITORING_O365,Application,All,true,Enable Office 365 application monitoring,Yes,Boolean,true|false,Public,Network Team,O365 API access,Per SOW scope,[DATE]
+APP_MONITORING_WEBEX,Application,All,true,Enable Webex application monitoring,Yes,Boolean,true|false,Public,Network Team,Webex API access,Per SOW scope,[DATE]
+APP_MONITORING_SAP,Application,All,true,Enable SAP application monitoring,Yes,Boolean,true|false,Public,Network Team,SAP endpoint access,Per SOW scope,[DATE]
+APP_SLA_LATENCY_MS,Application,All,100,Application latency SLA threshold in ms,Yes,Integer,10-1000,Public,Network Team,None,Performance alerting,[DATE]
+APP_SLA_JITTER_MS,Application,All,30,Application jitter SLA threshold in ms,Yes,Integer,5-100,Public,Network Team,None,Voice/video quality,[DATE]
+APP_SLA_PACKET_LOSS_PCT,Application,All,1.0,Application packet loss SLA threshold %,Yes,Float,0.1-5.0,Public,Network Team,None,Quality threshold,[DATE]
+
