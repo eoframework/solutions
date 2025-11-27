@@ -6,9 +6,9 @@ presenter_email: pm@company.com
 presenter_phone: 555-123-4567
 presentation_date: "[DATE]"
 client_name: "[CLIENT]"
-client_logo: ../../../assets/logos/client-logo.png
-footer_logo_left: ../../../assets/logos/company-logo.png
-footer_logo_right: ../../../assets/logos/eo-framework-logo.png
+client_logo: ../../assets/logos/client_logo.png
+footer_logo_left: ../../assets/logos/consulting_company_logo.png
+footer_logo_right: ../../assets/logos/eo-framework-logo-real.png
 ---
 
 # Sample Solution - Project Closeout
@@ -22,258 +22,247 @@ footer_logo_right: ../../../assets/logos/eo-framework-logo.png
 **layout:** eo_title_slide
 
 **Presentation Title:** Project Closeout
-**Subtitle:** Sample Solution
+**Subtitle:** Sample Solution Implementation Complete
 **Presenter:** Project Manager | [DATE]
 
 ---
 
-### Agenda
+### Executive Summary
 **layout:** eo_single_column
 
-**Project Closeout Overview**
+**Project Successfully Delivered**
 
-- **Project Summary**
-  - Overview of original objectives and success criteria
-- **Delivery Achievements**
-  - What was delivered and key milestones reached
-- **Benefits Realized**
-  - Quantified business value and ROI metrics
-- **Lessons Learned**
-  - What went well and challenges overcome
-- **Recommendations**
-  - Next steps and ongoing support plan
-- **Team Recognition**
-  - Acknowledgment of key contributors
+- **Project Duration:** 18 weeks (on schedule)
+- **Budget:** $850,000 (on budget, no overruns)
+- **Go-Live Date:** [DATE] (as planned)
+- **Key Achievement:** Zero critical defects at production launch
+- **Business Impact:** 45 hours/week time savings, 92% error reduction
+- **ROI Status:** On track for 10-month payback (vs. 12-month target)
 
 **SPEAKER NOTES:**
 
 *Talking Points:*
-- Presentation will take approximately 45 minutes
-- Time for Q&A at the end
-- Detailed documentation available for reference
+- Open with confidence - project delivered on time, on budget
+- Highlight zero critical defects as quality achievement
+- Business impact already exceeding projections
+- Set positive tone for remainder of presentation
 
 ---
 
-### Project Overview
-**layout:** eo_two_column
+### Solution Architecture
+**layout:** eo_visual_content
 
-**Original Business Case and Objectives**
+**What We Built Together**
 
-- **Business Problem**
-  - Manual processes causing 40+ hours/week overhead
-  - Error rates impacting customer satisfaction
-  - Inability to scale with business growth
-- **Objectives**
-  - Automate workflows, reduce processing time by 75%
-  - Achieve 95%+ accuracy in automated processes
-  - Enable scalability without adding headcount
-- **Success Criteria**
-  - ROI achieved within 12 months
-  - User adoption rate of 90%+
-  - Zero critical defects at go-live
+![Solution Architecture](../../assets/diagrams/architecture-diagram.png)
+
+- **Infrastructure Layer**
+  - Cloud platform with multi-AZ deployment for high availability
+  - Auto-scaling compute resources handling 10,000+ concurrent users
+  - Managed database with automated backups and disaster recovery
+- **Application Layer**
+  - Containerized microservices with Kubernetes orchestration
+  - RESTful APIs with OAuth 2.0 authentication
+  - Real-time event processing and workflow automation
+- **Integration Layer**
+  - Connected to 5 enterprise systems (ERP, CRM, HR, Finance, BI)
+  - Automated data synchronization with 15-minute refresh cycles
 
 **SPEAKER NOTES:**
 
 *Talking Points:*
-- Remind stakeholders of the original business case
-- Project duration: 18 weeks (on schedule)
-- Total investment: $850,000
+- Walk through the architecture from bottom to top
+- Highlight key design decisions and why they matter
+- Emphasize scalability and reliability built into the foundation
+- This architecture supports future growth and enhancements
 
 ---
 
-### Delivery Summary
+### Deliverables Inventory
 **layout:** eo_table
 
-**All Deliverables Completed On Time**
+**Complete Documentation & Automation Package**
 
-<!-- TABLE_CONFIG: widths=[30, 20, 20, 30] -->
-| Deliverable | Planned | Delivered | Status |
-|-------------|---------|-----------|--------|
-| **Core Platform** | Week 10 | Week 10 | Complete |
-| **Integrations** | Week 14 | Week 13 | Complete (early) |
-| **Training** | Week 16 | Week 16 | Complete |
-| **Go-Live** | Week 18 | Week 18 | Complete |
-
-**SPEAKER NOTES:**
-
-*Key Highlights:*
-- All deliverables completed on time or early
-- Integration work completed a week ahead of schedule
-- No scope changes required during implementation
-- Smooth go-live with zero production incidents
-
----
-
-### Quality Metrics
-**layout:** eo_single_column
-
-**Exceeding Quality Targets Across All Metrics**
-
-- **Test Coverage**
-  - 94% code coverage achieved (target: 80%)
-- **Test Execution**
-  - 847 of 847 test cases executed (100%)
-- **Defect Performance**
-  - Zero critical defects at go-live
-- **System Uptime**
-  - 99.97% availability (target: 99.9%)
-- **Response Time**
-  - 1.2 seconds average (target: 2 seconds)
+<!-- TABLE_CONFIG: widths=[30, 45, 25] -->
+| Deliverable | Purpose | Location |
+|-------------|---------|----------|
+| **Detailed Design Document** | Architecture decisions, data models, integration specifications | `/delivery/detailed-design.docx` |
+| **Implementation Guide** | Step-by-step deployment procedures with validation | `/delivery/implementation-guide.docx` |
+| **Project Plan** | Timeline, milestones, resource allocation | `/delivery/project-plan.xlsx` |
+| **Test Plan & Results** | Test cases, execution results, quality metrics | `/delivery/test-plan.xlsx` |
+| **Terraform Modules** | Infrastructure as Code for all cloud resources | `/delivery/scripts/terraform/` |
+| **Ansible Playbooks** | Configuration management and application deployment | `/delivery/scripts/ansible/` |
+| **Runbook & SOPs** | Operational procedures for day-2 operations | `/delivery/runbook.docx` |
+| **Training Materials** | User guides, admin guides, video tutorials | `/delivery/training/` |
 
 **SPEAKER NOTES:**
 
 *Talking Points:*
-- Quality was a key focus throughout the project
-- Zero critical defects is testament to rigorous testing
-- Performance metrics exceed all SLA requirements
+- All deliverables have been reviewed and accepted
+- Infrastructure as Code enables repeatable deployments
+- Documentation supports knowledge transfer and ongoing operations
+- Training materials ensure team self-sufficiency
+
+---
+
+### Quality & Performance
+**layout:** eo_two_column
+
+**Exceeding All Quality Targets**
+
+- **Testing Metrics**
+  - Test Coverage: 94% (target: 80%)
+  - Test Cases Executed: 847/847 (100%)
+  - Critical Defects at Go-Live: 0
+  - Defect Escape Rate: 0.2% (target: <2%)
+- **Performance Metrics**
+  - System Uptime: 99.97% (target: 99.9%)
+  - Average Response Time: 1.2s (target: <2s)
+  - Peak Load Handling: 12,000 users (target: 10,000)
+  - Database Query Performance: 45ms avg (target: <100ms)
+
+**SPEAKER NOTES:**
+
+*Talking Points:*
+- Quality was embedded throughout the delivery process
+- Zero critical defects demonstrates rigorous testing approach
+- Performance exceeds SLA requirements with headroom for growth
+- These metrics establish baseline for ongoing monitoring
 
 ---
 
 ### Benefits Realized
 **layout:** eo_table
 
-**Exceeding Business Value Projections**
+**Delivering Measurable Business Value**
 
-<!-- TABLE_CONFIG: widths=[30, 20, 25, 25] -->
-| Benefit Category | Target | Achieved | Status |
+<!-- TABLE_CONFIG: widths=[30, 20, 20, 30] -->
+| Benefit Category | Target | Achieved | Impact |
 |------------------|--------|----------|--------|
-| **Time Savings** | 40 hrs/week | 45 hrs/week | Exceeded |
-| **Error Reduction** | 80% | 92% | Exceeded |
-| **Processing Speed** | 75% faster | 85% faster | Exceeded |
-| **Annual Savings** | $400K | $450K projected | On Track |
+| **Weekly Time Savings** | 40 hours | 45 hours | 5 FTEs reallocated to strategic work |
+| **Error Reduction** | 80% | 92% | Customer complaints down 85% |
+| **Processing Speed** | 75% faster | 85% faster | Same-day resolution now standard |
+| **Annual Cost Savings** | $400K | $450K projected | ROI in 10 months vs 12-month target |
+| **User Adoption** | 90% | 95% | Exceeded adoption targets |
+| **Customer Satisfaction** | 4.0/5.0 | 4.6/5.0 | NPS increased by 25 points |
 
 **SPEAKER NOTES:**
 
-*Key Metrics:*
-- Benefits already exceeding projections
-- Full ROI expected within 10 months vs. 12-month target
-- User satisfaction scores averaging 4.6/5.0
-- 95% user adoption rate achieved
+*Talking Points:*
+- Benefits are already being realized post go-live
+- Time savings translate directly to cost reduction
+- Customer satisfaction improvement validates business case
+- Full ROI expected 2 months ahead of schedule
 
 ---
 
-### Lessons Learned
+### Lessons Learned & Recommendations
 **layout:** eo_two_column
 
-**Continuous Improvement Insights**
+**Insights for Continuous Improvement**
 
-- **What Went Well**
-  - Early stakeholder engagement drove alignment
-  - Agile methodology enabled rapid iteration
-  - Strong vendor partnership accelerated delivery
-  - Comprehensive testing prevented production issues
+- **What Worked Well**
+  - Early stakeholder engagement ensured alignment throughout
+  - Agile methodology enabled rapid iteration and feedback
+  - Infrastructure as Code reduced deployment errors to zero
+  - Comprehensive testing prevented production incidents
+  - Weekly demos kept business engaged and informed
 - **Challenges Overcome**
-  - Legacy data migration resolved with phased approach
-  - User adoption concerns addressed with enhanced training
-  - Integration complexity solved with middleware solution
-- **Recommendations for Future**
-  - Invest more in change management upfront
-  - Allocate additional time for data migration
-  - Include super-users in testing earlier
+  - Legacy data migration: Resolved with phased approach
+  - User adoption concerns: Enhanced training program
+  - Integration complexity: Middleware abstraction layer
+- **Recommendations**
+  - Invest in Phase 2 enhancements based on user feedback
+  - Implement AI/ML features for predictive analytics
+  - Expand mobile capabilities for field workforce
+  - Establish quarterly business reviews to track ROI
+  - Consider disaster recovery site in secondary region
 
 **SPEAKER NOTES:**
 
 *Talking Points:*
-- Key learning: invest more in change management upfront
-- User training was expanded based on early feedback
-- These insights captured in lessons learned document
+- Lessons learned documented for future projects
+- Challenges were addressed proactively without impacting timeline
+- Recommendations provide roadmap for continued value realization
+- Phase 2 planning can begin immediately if desired
 
 ---
 
-### Recommendations
-**layout:** eo_single_column
+### Support Transition
+**layout:** eo_bullet_points
 
-**Path Forward for Sustained Success**
+**Ensuring Operational Continuity**
 
-- **Immediate (This Month)**
-  - Establish monthly performance review cadence
-  - Complete operational handover documentation
-- **Short-term (Next Quarter)**
-  - Plan Phase 2 enhancements based on user feedback
-  - Implement quick-win features from backlog
-- **Long-term (Next Year)**
-  - Evaluate mobile app extension opportunity
-  - Consider AI/ML enhancements for automation
-- **Operational**
-  - Maintain dedicated support for 90 days (hypercare)
-  - 15 enhancement features prioritized in backlog
-
-**SPEAKER NOTES:**
-
-*Talking Points:*
-- Support team prepared to handle ongoing needs
-- Phase 2 planning can begin in 30 days
-- Enhancement backlog available for roadmap discussions
-
----
-
-### Team Recognition
-**layout:** eo_single_column
-
-**Acknowledging Outstanding Contributions**
-
-- **Solution Architect:** Jane Smith
-  - Outstanding technical leadership and architecture decisions
-- **Technical Lead:** John Doe
-  - Exceptional delivery quality and team mentorship
-- **Business Analyst:** Sarah Johnson
-  - Stakeholder alignment and requirements excellence
-- **QA Lead:** Mike Wilson
-  - Zero defects achievement through rigorous testing
-- **DevOps Engineer:** Lisa Chen
-  - Flawless deployments and infrastructure automation
-
-Special thanks to executive sponsors and all business stakeholders for their partnership throughout this engagement.
-
-**SPEAKER NOTES:**
-
-*Talking Points:*
-- Take time to recognize each team member's contribution
-- This project succeeded because of exceptional teamwork
-- Client team members were instrumental to success
-
----
-
-### Next Steps
-**layout:** eo_single_column
-
-**Transition and Support Plan**
-
-- **This Week**
-  - Complete operational handover documentation
-  - Final knowledge transfer sessions
-- **Next 30 Days**
-  - Hypercare support period with dedicated team
-  - Daily standup calls for issue resolution
-- **Next 60 Days**
-  - Transition to standard support model
+- **Hypercare Period (Days 1-30)**
+  - Dedicated support team available 24/7
+  - Daily standup calls at 9:00 AM for issue triage
+  - 4-hour response SLA for critical issues
+  - Direct escalation path to implementation team
+- **Transition Period (Days 31-60)**
+  - Shift to standard support model with 8-hour response SLA
+  - Weekly check-in calls transitioning to bi-weekly
+  - Knowledge transfer sessions for operations team
+- **Steady State (Day 61+)**
   - Monthly performance review meetings
-- **Next 90 Days**
-  - First quarterly business review
-  - Benefits realization assessment
-- **Ongoing**
-  - Continuous improvement program
-  - Enhancement roadmap execution
+  - Quarterly business reviews for benefits tracking
+  - Enhancement backlog with 15 prioritized features
+- **Escalation Contacts**
+  - L1 Support: support@company.com | 555-HELP
+  - L2 Technical: techsupport@company.com
+  - Account Manager: am@company.com | 555-123-4567
 
 **SPEAKER NOTES:**
 
 *Talking Points:*
-- The transition plan ensures continuity of support
-- First quarterly review will measure sustained benefits
+- Support structure ensures no disruption to operations
+- Hypercare provides safety net during initial production period
+- Clear escalation path for any issues that arise
 - Enhancement backlog ready for prioritization discussions
+
+---
+
+### Acknowledgments & Next Steps
+**layout:** eo_single_column
+
+**Partnership That Delivered Results**
+
+Special thanks to the joint project team whose collaboration made this success possible:
+- Executive sponsors for unwavering support and decisive leadership
+- Business stakeholders for clear requirements and timely feedback
+- Technical teams for exceptional delivery quality and problem-solving
+- Change management team for driving 95% user adoption
+
+**Immediate Next Steps:**
+
+- **This Week:** Final documentation handover and knowledge transfer completion
+- **Next 30 Days:** Hypercare support with daily standups
+- **Next Quarter:** Phase 2 planning workshop and enhancement prioritization
+- **Ongoing:** Monthly performance reviews and quarterly business reviews
+
+**SPEAKER NOTES:**
+
+*Talking Points:*
+- Acknowledge the partnership - success was a team effort
+- Keep next steps concrete and actionable
+- Emphasize continued engagement and support
+- Offer to schedule Phase 2 planning session
 
 ---
 
 ### Thank You
 **layout:** eo_thank_you
 
-Questions?
+Questions & Discussion
 
-Contact: pm@company.com | 555-123-4567
+**Your Project Team:**
+- Project Manager: pm@company.com | 555-123-4567
+- Technical Lead: tech@company.com | 555-123-4568
+- Account Manager: am@company.com | 555-123-4569
 
 **SPEAKER NOTES:**
 
 *Talking Points:*
-- Open the floor for questions
-- Have backup slides ready for detailed technical questions
-- Offer to schedule follow-up sessions for deep dives
+- Open the floor for questions and discussion
+- Have backup detail slides ready for deep-dive questions
+- Offer to schedule follow-up sessions for specific topics
+- End on positive note - celebrate the successful delivery together
