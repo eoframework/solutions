@@ -1,514 +1,1112 @@
-# Implementation Guide
-
-## Project Information
-**Solution Name:** AWS Intelligent Document Processing  
-**Client:** [Client Name]  
-**Implementation Version:** 1.0  
-**Document Date:** [Date]  
-**Project Manager:** [Name]  
-**Technical Lead:** [Name]  
-
+---
+document_title: Implementation Guide
+solution_name: AWS Intelligent Document Processing
+document_version: "1.0"
+author: "[TECH_LEAD]"
+last_updated: "[DATE]"
+technology_provider: aws
+client_name: "[CLIENT]"
+client_logo: ../../assets/logos/client_logo.png
+vendor_logo: ../../assets/logos/consulting_company_logo.png
+eoframework_logo: ../../assets/logos/eo-framework-logo-real.png
 ---
 
-## Executive Summary
+# Executive Summary
 
-### Project Overview
-This implementation guide provides step-by-step procedures for deploying the AWS Intelligent Document Processing solution, enabling automated document analysis, data extraction, and workflow integration using AI/ML services.
+This Implementation Guide provides comprehensive deployment procedures for the AWS Intelligent Document Processing (IDP) solution. The guide covers infrastructure provisioning, AWS AI service configuration (Textract, Comprehend, A2I), and integration setup using Infrastructure as Code (IaC) automation.
 
-### Implementation Scope
-- **In Scope:** Document processing automation, AI model deployment, system integration
-- **Out of Scope:** Legacy system migration, custom model development (Phase 1)
-- **Dependencies:** AWS account setup, client system APIs, user training
+## Document Purpose
 
-### Timeline Overview
-- **Project Duration:** 6 months
-- **Go-Live Date:** [Target date]
-- **Key Milestones:** Infrastructure (Month 2), AI Services (Month 4), Full Deployment (Month 6)
+This document serves as the primary technical reference for the implementation team, providing step-by-step procedures for deploying the IDP solution on AWS. All commands and procedures have been validated against target AWS environments.
 
----
+## Implementation Approach
 
-## Prerequisites
+The implementation follows a serverless-first, infrastructure-as-code methodology using Terraform for AWS resource provisioning, Python scripts for AI service configuration, and AWS native tools for deployment orchestration. The approach ensures repeatable, auditable deployments across all environments.
 
-### Technical Prerequisites
-- [ ] AWS Enterprise Account with appropriate service limits and administrative access
-- [ ] VPC setup with public/private subnets across 2+ AZs
-- [ ] IAM roles and policies configured for AI services (Textract, Comprehend, SageMaker, Bedrock)
-- [ ] Network connectivity between client and AWS environments with sufficient bandwidth
-- [ ] SSL certificates for API endpoints and secure communications
-- [ ] Service quotas validated for Amazon Textract, Comprehend, and SageMaker
-- [ ] Security access controls and firewall configurations approved
-- [ ] Compute resources sized for expected AI/ML workloads
-- [ ] Storage capacity for document repositories and model artifacts
+## Automation Framework Overview
 
-### Skills and Expertise Requirements
-- [ ] **Lead Architect**: 5+ years cloud architecture experience with AI/ML solutions
-- [ ] **Implementation Engineers**: 3+ years AWS experience with hands-on ML and Python/Node.js skills
-- [ ] **Security Specialist**: 3+ years security and compliance experience
-- [ ] **Operations Team**: 2+ years production support experience with AWS services
-- [ ] Team members trained on AWS AI services and document processing workflows
+The following automation technologies are included in this delivery.
 
-### Organizational Prerequisites
-- [ ] Project team assigned with clear roles and responsibilities
-- [ ] Executive sponsorship confirmed with change management support
-- [ ] Budget approved for implementation and operational costs ($75K-$200K implementation + ongoing operational costs)
-- [ ] Document samples available for testing and validation (1,000+ labeled documents per type)
-- [ ] Integration specifications for existing systems and APIs
-- [ ] Compliance frameworks identified (SOC 2, ISO 27001, GDPR, HIPAA as applicable)
-- [ ] Security policies and data classification requirements documented
+<!-- TABLE_CONFIG: widths=[20, 30, 25, 25] -->
+| Technology | Purpose | Location | Prerequisites |
+|------------|---------|----------|---------------|
+| Terraform | Infrastructure provisioning | `scripts/terraform/` | Terraform 1.6+, AWS CLI |
+| Python | AI service configuration & automation | `scripts/python/` | Python 3.10+, pip |
+| Bash | Linux/Unix automation | `scripts/bash/` | Bash 4.0+ |
 
-### Environmental Setup
-- [ ] Development environment configured for initial testing with AI service access
-- [ ] Testing environment prepared for integration validation and model training
-- [ ] Staging environment ready for user acceptance testing with production-like data
-- [ ] Production environment provisioned with monitoring, logging, and alerting
-- [ ] Backup and disaster recovery infrastructure prepared
-- [ ] Network connectivity tested including VPN/dedicated connections
+## Scope Summary
 
-### Planning and Documentation Requirements
-- [ ] Current state architecture documented including existing document processing workflows
-- [ ] Network topology and security diagrams prepared
-- [ ] Integration requirements and dependencies mapped
-- [ ] Risk assessment completed with mitigation strategies
-- [ ] Change management and approval processes established
-- [ ] User acceptance testing procedures and criteria defined
-- [ ] CI/CD pipeline configured for automated deployment
+### In Scope
 
----
+The following components are deployed using the automation framework.
 
-## Implementation Phases
+- AWS infrastructure (VPC, S3, Lambda, API Gateway, DynamoDB)
+- AI services (Amazon Textract, Amazon Comprehend, Amazon A2I)
+- Document processing pipeline configuration
+- Security controls and IAM policies
+- Monitoring, alerting, and dashboards
+- API integration and testing
 
-### Phase 1: Infrastructure Foundation (Months 1-2)
+### Out of Scope
 
-#### Objectives
-- Establish secure, scalable AWS infrastructure
-- Configure core services and networking
-- Implement security baseline and monitoring
+The following items are excluded from automated deployment.
 
-#### Activities
-| Activity | Owner | Duration | Dependencies |
-|----------|-------|----------|-------------|
-| AWS Account Setup | DevOps Team | 3 days | AWS Enterprise Agreement |
-| VPC and Network Configuration | Network Team | 5 days | Security requirements |
-| IAM Roles and Policies | Security Team | 3 days | Access requirements |
-| S3 Buckets and Lifecycle Policies | DevOps Team | 2 days | Data retention policies |
-| CloudWatch and Monitoring Setup | Operations Team | 4 days | Monitoring requirements |
+- Custom ML model development (not in scope)
+- Third-party system integration development (client responsibility)
+- End-user training (covered separately)
+- Ongoing managed services operations
 
-#### Deliverables
-- [ ] AWS infrastructure deployed and documented
-- [ ] Security baseline implemented and validated
-- [ ] Network connectivity tested and confirmed
-- [ ] Monitoring and alerting operational
-- [ ] Infrastructure documentation complete
+## Timeline Overview
 
-#### Success Criteria
-- All infrastructure components pass security scan
-- Network connectivity achieves <50ms latency
-- Monitoring captures all required metrics
-- Security controls meet compliance requirements
+The implementation follows a phased deployment approach with validation gates.
 
-### Phase 2: AI Services Deployment (Months 3-4)
+<!-- TABLE_CONFIG: widths=[15, 30, 30, 25] -->
+| Phase | Activities | Duration | Exit Criteria |
+|-------|------------|----------|---------------|
+| 1 | Prerequisites & AWS Account Setup | 1 week | AWS account configured, IAM ready |
+| 2 | Foundation Infrastructure | 3 weeks | VPC, S3, IAM deployed |
+| 3 | AI Services Configuration | 4 weeks | Textract, Comprehend, A2I configured |
+| 4 | Pipeline & API Development | 3 weeks | End-to-end pipeline operational |
+| 5 | Integration & Testing | 3 weeks | All tests passing, security validated |
+| 6 | Go-Live & Hypercare | 4 weeks | Production stable, team trained |
 
-#### Objectives
-- Deploy and configure Amazon Textract for OCR
-- Implement Amazon Comprehend for NLP analysis
-- Set up Amazon A2I for human review workflows
-- Validate AI accuracy with sample documents
+**Total Implementation:** 18 weeks (~4.5 months) + hypercare = 6 months
 
-#### Activities
-| Activity | Owner | Duration | Dependencies |
-|----------|-------|----------|-------------|
-| Textract Configuration | AI Team | 5 days | Document samples |
-| Comprehend Setup | AI Team | 3 days | Entity requirements |
-| A2I Workflow Implementation | AI Team | 7 days | Review process design |
-| Lambda Function Development | Development Team | 10 days | Business logic |
-| Accuracy Testing and Validation | QA Team | 5 days | Test documents |
+# Prerequisites
 
-#### Deliverables
-- [ ] Textract configured for document types
-- [ ] Comprehend entities and sentiment analysis operational
-- [ ] A2I workflows for quality assurance deployed
-- [ ] Lambda orchestration functions implemented
-- [ ] AI accuracy validation completed
+This section documents all requirements that must be satisfied before infrastructure deployment can begin.
 
-#### Success Criteria
-- Textract achieves >99% accuracy on machine-printed text
-- Comprehend correctly identifies required entities
-- A2I workflows process low-confidence documents
-- Processing time averages <30 seconds per document
+## Tool Installation
 
-### Phase 3: System Integration (Months 5-6)
+The following tools must be installed on the deployment workstation before proceeding.
 
-#### Objectives
-- Integrate with existing ERP and CRM systems
-- Implement end-to-end automation workflows
-- Deploy production monitoring and operations
-- Complete user training and knowledge transfer
+### Required Tools Checklist
 
-#### Activities
-| Activity | Owner | Duration | Dependencies |
-|----------|-------|----------|-------------|
-| API Gateway Configuration | Integration Team | 5 days | System specifications |
-| ERP/CRM Integration Development | Integration Team | 15 days | Client system access |
-| End-to-End Testing | QA Team | 10 days | Complete system |
-| Production Deployment | DevOps Team | 5 days | Testing completion |
-| User Training and Handover | Training Team | 10 days | Documentation |
+Use the following checklist to verify all required tools are installed.
 
-#### Deliverables
-- [ ] API integrations with all required systems
-- [ ] End-to-end automation workflows operational
-- [ ] Production environment deployed and validated
-- [ ] User training completed and documented
-- [ ] Operations procedures implemented
+- [ ] **AWS CLI v2** >= 2.13 - AWS service management
+- [ ] **Terraform** >= 1.6.0 - Infrastructure provisioning
+- [ ] **Python** >= 3.10 - AI service automation scripts
+- [ ] **Git** - Source code management
+- [ ] **jq** - JSON processing for scripts
 
-#### Success Criteria
-- All system integrations pass acceptance testing
-- End-to-end workflows process documents without manual intervention
-- Production environment meets all performance requirements
-- Users demonstrate proficiency in system operation
+### AWS CLI Installation
 
----
+Install and configure the AWS CLI.
 
-## Technical Implementation Details
-
-### Infrastructure Configuration
-
-#### VPC and Networking
 ```bash
-# VPC Configuration
-aws ec2 create-vpc --cidr-block 10.0.0.0/16 --tag-specifications 'ResourceType=vpc,Tags=[{Key=Name,Value=IDP-Production}]'
+# macOS (using Homebrew)
+brew install awscli
 
-# Public Subnets
-aws ec2 create-subnet --vpc-id vpc-12345678 --cidr-block 10.0.1.0/24 --availability-zone us-east-1a
-aws ec2 create-subnet --vpc-id vpc-12345678 --cidr-block 10.0.2.0/24 --availability-zone us-east-1b
+# Windows (using MSI installer)
+# Download from https://aws.amazon.com/cli/
 
-# Private Subnets
-aws ec2 create-subnet --vpc-id vpc-12345678 --cidr-block 10.0.10.0/24 --availability-zone us-east-1a
-aws ec2 create-subnet --vpc-id vpc-12345678 --cidr-block 10.0.11.0/24 --availability-zone us-east-1b
+# Linux (using pip)
+pip3 install awscli --upgrade
+
+# Verify installation
+aws --version
 ```
 
-#### S3 Bucket Configuration
-```json
-{
-  "Rules": [
-    {
-      "ID": "DocumentLifecycle",
-      "Status": "Enabled",
-      "Transitions": [
-        {
-          "Days": 30,
-          "StorageClass": "STANDARD_IA"
-        },
-        {
-          "Days": 90,
-          "StorageClass": "GLACIER"
-        }
-      ]
-    }
-  ]
+### Terraform Installation
+
+Install Terraform using the appropriate method for your operating system.
+
+```bash
+# macOS (using Homebrew)
+brew install terraform
+
+# Windows (using Chocolatey)
+choco install terraform
+
+# Linux (manual installation)
+wget https://releases.hashicorp.com/terraform/1.6.0/terraform_1.6.0_linux_amd64.zip
+unzip terraform_1.6.0_linux_amd64.zip
+sudo mv terraform /usr/local/bin/
+
+# Verify installation
+terraform version
+```
+
+### Python Environment Setup
+
+Set up Python environment for AI service scripts.
+
+```bash
+# Verify Python version
+python3 --version
+
+# Create virtual environment
+python3 -m venv venv
+source venv/bin/activate  # Linux/Mac
+# venv\Scripts\activate   # Windows
+
+# Install required packages
+pip install boto3 pandas
+pip install -r scripts/python/requirements.txt
+```
+
+## AWS Account Configuration
+
+Configure AWS authentication and verify required permissions.
+
+### AWS Authentication
+
+Configure AWS CLI profiles for each deployment environment.
+
+```bash
+# Configure production profile
+aws configure --profile idp-production
+# Enter: AWS Access Key ID, Secret Access Key, Region (us-east-1), Output format (json)
+
+# Configure development profile
+aws configure --profile idp-development
+
+# Verify authentication
+aws sts get-caller-identity --profile idp-production
+
+# Set default profile for session
+export AWS_PROFILE=idp-production
+```
+
+### Required IAM Permissions
+
+The deployment user/role requires the following permissions.
+
+- **IAM:** CreateRole, AttachRolePolicy, CreatePolicy
+- **S3:** CreateBucket, PutObject, GetObject, DeleteObject
+- **Lambda:** CreateFunction, UpdateFunctionCode, InvokeFunction
+- **API Gateway:** CreateRestApi, CreateResource, CreateMethod
+- **DynamoDB:** CreateTable, PutItem, GetItem, Query
+- **Textract:** AnalyzeDocument, StartDocumentAnalysis
+- **Comprehend:** DetectEntities, DetectPiiEntities
+- **A2I:** CreateHumanTaskUi, CreateFlowDefinition
+- **CloudWatch:** PutMetricData, CreateDashboard, PutMetricAlarm
+- **SNS:** CreateTopic, Subscribe, Publish
+- **KMS:** CreateKey, Encrypt, Decrypt
+- **Step Functions:** CreateStateMachine, StartExecution
+
+### Service Quotas Validation
+
+Verify AWS service quotas are sufficient for deployment.
+
+```bash
+# Check Lambda concurrent executions quota
+aws service-quotas get-service-quota \
+  --service-code lambda \
+  --quota-code L-B99A9384
+
+# Request quota increase if needed
+aws service-quotas request-service-quota-increase \
+  --service-code lambda \
+  --quota-code L-B99A9384 \
+  --desired-value 500
+```
+
+## Prerequisite Validation
+
+Run the prerequisite validation script to verify all requirements.
+
+```bash
+# Navigate to scripts directory
+cd delivery/scripts/
+
+# Run prerequisite validation
+./validate-prerequisites.sh
+
+# Or manually verify each component
+aws --version
+terraform version
+python3 --version
+aws sts get-caller-identity
+```
+
+### Validation Checklist
+
+Complete this checklist before proceeding to environment setup.
+
+- [ ] AWS CLI v2 installed and accessible in PATH
+- [ ] AWS credentials configured with appropriate permissions
+- [ ] Terraform installed and accessible
+- [ ] Python 3.10+ installed with pip
+- [ ] Required Python packages installed
+- [ ] Network connectivity to AWS APIs verified
+
+# Environment Setup
+
+This section covers the initial setup of Terraform state management and environment-specific configurations.
+
+## Terraform Directory Structure
+
+The Terraform automation follows a modular structure for IDP components.
+
+```
+delivery/scripts/terraform/
+├── environments/
+│   ├── production/
+│   │   ├── terraform.tf            # Backend & version configuration
+│   │   ├── providers.tf            # AWS provider settings
+│   │   ├── main.tf                 # Infrastructure deployment
+│   │   ├── variables.tf            # Variable definitions
+│   │   ├── outputs.tf              # Output definitions
+│   │   ├── deploy.sh               # Deployment automation script
+│   │   └── config/
+│   │       ├── project.tfvars      # Project identity
+│   │       ├── networking.tfvars   # Network configuration
+│   │       ├── security.tfvars     # Security settings
+│   │       └── ai-services.tfvars  # AI service configuration
+│   └── test/
+├── modules/
+│   └── aws/
+│       ├── networking/             # VPC, subnets, endpoints
+│       ├── security/               # IAM, KMS, security groups
+│       ├── storage/                # S3 buckets, DynamoDB
+│       ├── compute/                # Lambda, Step Functions
+│       ├── api/                    # API Gateway
+│       ├── ai-services/            # Textract, Comprehend, A2I
+│       └── monitoring/             # CloudWatch, alarms
+└── docs/
+    └── TERRAFORM_SETUP_GUIDE.md
+```
+
+## Backend State Configuration
+
+Configure remote state storage before initializing Terraform.
+
+### AWS S3 Backend Setup
+
+Initialize the S3 backend for storing Terraform state.
+
+```bash
+# Navigate to Terraform scripts directory
+cd delivery/scripts/terraform/scripts/
+
+# Run backend initialization script
+./init-backend-aws.sh idp-solution us-east-1 production
+
+# Expected output:
+# - S3 bucket created: idp-solution-terraform-state-us-east-1
+# - DynamoDB table created: idp-solution-terraform-locks
+# - Encryption enabled on S3 bucket
+# - Versioning enabled on S3 bucket
+```
+
+## Environment Configuration
+
+Configure environment-specific settings in the tfvars files.
+
+### Project Configuration
+
+Edit the project configuration file with your deployment settings.
+
+```bash
+# Navigate to production environment
+cd delivery/scripts/terraform/environments/production/
+
+# Edit project configuration
+vim config/project.tfvars
+```
+
+Configure the following settings in `config/project.tfvars`:
+
+```hcl
+# Project Identity
+project_name = "intelligent-document-processing"
+environment  = "production"
+owner_email  = "project-team@company.com"
+cost_center  = "IDP-PROJECT"
+
+# AWS Configuration
+aws_profile = "idp-production"
+aws_region  = "us-east-1"
+
+# Tagging
+tags = {
+  Project     = "intelligent-document-processing"
+  Environment = "production"
+  Owner       = "project-team"
+  CostCenter  = "IDP-PROJECT"
 }
 ```
 
-### AI Service Configuration
+### AI Services Configuration
 
-#### Amazon Textract Setup
-```python
-import boto3
+Configure AI service settings in `config/ai-services.tfvars`.
 
-def configure_textract():
-    textract = boto3.client('textract')
-    
-    # Document analysis configuration
-    response = textract.analyze_document(
-        Document={'S3Object': {'Bucket': 'document-bucket', 'Name': 'sample.pdf'}},
-        FeatureTypes=['TABLES', 'FORMS']
-    )
-    
-    return response
+```hcl
+# Amazon Textract Configuration
+textract_enabled = true
+
+# Amazon Comprehend Configuration
+comprehend_enabled = true
+comprehend_pii_detection = true
+
+# Amazon A2I Configuration (Human Review)
+a2i_enabled = true
+a2i_workforce_type = "private"  # private or public
+
+# Processing Configuration
+confidence_threshold = 0.85
+max_document_size_mb = 25
+supported_formats = ["pdf", "png", "jpg", "tiff"]
 ```
 
-#### Amazon Comprehend Integration
-```python
-def setup_comprehend_entity_recognition():
-    comprehend = boto3.client('comprehend')
-    
-    # Custom entity recognizer
-    response = comprehend.create_entity_recognizer(
-        RecognizerName='DocumentEntityRecognizer',
-        LanguageCode='en',
-        DataAccessRoleArn='arn:aws:iam::account:role/ComprehendRole',
-        InputDataConfig={
-            'EntityTypes': [
-                {'Type': 'INVOICE_NUMBER'},
-                {'Type': 'VENDOR_NAME'},
-                {'Type': 'AMOUNT'}
-            ],
-            'Documents': {'S3Uri': 's3://training-data/documents/'},
-            'Annotations': {'S3Uri': 's3://training-data/annotations/'}
-        }
-    )
-    
-    return response
-```
+## Environment Initialization
 
-### Deployment Procedures
+Initialize Terraform for the target environment.
 
-#### CloudFormation Deployment
-```yaml
-# infrastructure.yaml
-AWSTemplateFormatVersion: '2010-09-09'
-Description: 'AWS Intelligent Document Processing Infrastructure'
-
-Resources:
-  DocumentBucket:
-    Type: AWS::S3::Bucket
-    Properties:
-      BucketName: !Sub 'idp-documents-${AWS::AccountId}'
-      VersioningConfiguration:
-        Status: Enabled
-      PublicAccessBlockConfiguration:
-        BlockPublicAcls: true
-        BlockPublicPolicy: true
-        IgnorePublicAcls: true
-        RestrictPublicBuckets: true
-
-  ProcessingRole:
-    Type: AWS::IAM::Role
-    Properties:
-      AssumeRolePolicyDocument:
-        Version: '2012-10-17'
-        Statement:
-          - Effect: Allow
-            Principal:
-              Service: lambda.amazonaws.com
-            Action: sts:AssumeRole
-      ManagedPolicyArns:
-        - arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
-        - arn:aws:iam::aws:policy/AmazonTextractFullAccess
-        - arn:aws:iam::aws:policy/ComprehendFullAccess
-```
-
-#### Deployment Commands
 ```bash
-# Deploy infrastructure
-aws cloudformation deploy \
-  --template-file infrastructure.yaml \
-  --stack-name idp-infrastructure \
-  --capabilities CAPABILITY_IAM \
-  --parameter-overrides Environment=production
+# Navigate to production environment
+cd delivery/scripts/terraform/environments/production/
 
-# Deploy Lambda functions
-sam deploy --guided --stack-name idp-processing
+# Initialize Terraform
+./deploy.sh init
+
+# Validate configuration
+./deploy.sh validate
+
+# Format check
+./deploy.sh fmt
 ```
 
----
+# Infrastructure Deployment
 
-## Testing Strategy
+This section covers the phased deployment of AWS infrastructure for the IDP solution.
 
-### Unit Testing
-```python
-import pytest
-from document_processor import DocumentProcessor
+## Deployment Overview
 
-def test_document_classification():
-    processor = DocumentProcessor()
-    result = processor.classify_document('sample_invoice.pdf')
-    assert result['document_type'] == 'INVOICE'
-    assert result['confidence'] > 0.95
+Infrastructure deployment follows a dependency-ordered sequence.
 
-def test_data_extraction():
-    processor = DocumentProcessor()
-    result = processor.extract_data('sample_invoice.pdf')
-    assert 'invoice_number' in result
-    assert 'vendor_name' in result
-    assert 'total_amount' in result
-```
+<!-- TABLE_CONFIG: widths=[15, 25, 35, 25] -->
+| Phase | Layer | Components | Dependencies |
+|-------|-------|------------|--------------|
+| 1 | Networking | VPC, Subnets, VPC Endpoints, NAT Gateway | None |
+| 2 | Security | IAM Roles, KMS Keys, Security Groups | Networking |
+| 3 | Storage | S3 Buckets, DynamoDB Tables | Security |
+| 4 | Compute | Lambda Functions, Step Functions | Storage |
+| 5 | API | API Gateway, Cognito | Compute |
+| 6 | AI Services | Textract, Comprehend, A2I | All above |
+| 7 | Monitoring | CloudWatch, Alarms, Dashboards | All above |
 
-### Integration Testing
+## Phase 1: Networking Layer
+
+Deploy the foundational networking infrastructure.
+
+### Networking Components
+
+The networking module deploys the following resources.
+
+- Virtual Private Cloud (VPC) with /16 CIDR
+- Private subnets across 2 availability zones
+- VPC Endpoints for S3, DynamoDB, Textract, Comprehend
+- NAT Gateway for Lambda external access
+- VPC Flow Logs for network monitoring
+
+### Deployment Steps
+
 ```bash
-#!/bin/bash
-# integration_test.sh
+# Navigate to production environment
+cd delivery/scripts/terraform/environments/production/
 
-echo "Running integration tests..."
+# Plan networking deployment
+./deploy.sh plan
+
+# Review the plan output for networking resources
+# Apply networking infrastructure
+./deploy.sh apply
+```
+
+### Networking Validation
+
+```bash
+# Verify VPC created
+aws ec2 describe-vpcs \
+  --filters "Name=tag:Project,Values=intelligent-document-processing" \
+  --query "Vpcs[*].[VpcId,CidrBlock,State]" \
+  --output table
+
+# Verify VPC endpoints created
+aws ec2 describe-vpc-endpoints \
+  --filters "Name=tag:Project,Values=intelligent-document-processing" \
+  --query "VpcEndpoints[*].[ServiceName,State]" \
+  --output table
+```
+
+## Phase 2: Security Layer
+
+Deploy security controls including IAM roles and KMS keys.
+
+### Security Components
+
+- IAM roles for Lambda, Step Functions
+- KMS customer-managed key for data encryption
+- Security groups for Lambda
+- Secrets Manager for API keys and credentials
+
+### Deployment Steps
+
+```bash
+# Plan security deployment
+./deploy.sh plan
+
+# Apply security infrastructure
+./deploy.sh apply
+```
+
+### Security Validation
+
+```bash
+# Verify IAM roles created
+aws iam list-roles \
+  --query "Roles[?contains(RoleName, 'idp')].[RoleName,Arn]" \
+  --output table
+
+# Verify KMS key created
+aws kms list-aliases \
+  --query "Aliases[?contains(AliasName, 'idp')].[AliasName,TargetKeyId]" \
+  --output table
+```
+
+## Phase 3: Storage Layer
+
+Deploy S3 buckets and DynamoDB tables.
+
+### Storage Components
+
+- S3 bucket for document uploads (with encryption)
+- S3 bucket for processing results
+- DynamoDB table for document metadata
+- DynamoDB table for processing jobs
+
+### Deployment Steps
+
+```bash
+# Apply storage infrastructure
+./deploy.sh apply
+```
+
+### Storage Validation
+
+```bash
+# Verify S3 buckets created
+aws s3 ls | grep idp
+
+# Verify bucket encryption
+aws s3api get-bucket-encryption --bucket idp-documents-production
+
+# Verify DynamoDB tables
+aws dynamodb list-tables --query "TableNames[?contains(@, 'idp')]"
+```
+
+## Phase 4: Compute Layer
+
+Deploy Lambda functions and Step Functions.
+
+### Compute Components
+
+- Lambda function for document processing orchestration
+- Lambda function for Textract processing
+- Lambda function for Comprehend analysis
+- Lambda function for A2I human review integration
+- Lambda function for results aggregation
+- Step Functions state machine for workflow orchestration
+
+### Deployment Steps
+
+```bash
+# Apply compute infrastructure
+./deploy.sh apply
+```
+
+### Compute Validation
+
+```bash
+# Verify Lambda functions
+aws lambda list-functions \
+  --query "Functions[?contains(FunctionName, 'idp')].[FunctionName,Runtime,MemorySize]" \
+  --output table
+
+# Verify Step Functions state machine
+aws stepfunctions list-state-machines \
+  --query "stateMachines[?contains(name, 'idp')].[name,stateMachineArn]" \
+  --output table
+```
+
+## Phase 5: API Layer
+
+Deploy API Gateway and Cognito authentication.
+
+### API Components
+
+- REST API Gateway with resource definitions
+- Cognito User Pool for authentication
+- API Gateway authorizers
+- Usage plans and API keys
+
+### Deployment Steps
+
+```bash
+# Apply API infrastructure
+./deploy.sh apply
+```
+
+### API Validation
+
+```bash
+# Verify API Gateway
+aws apigateway get-rest-apis \
+  --query "items[?contains(name, 'idp')].[name,id]" \
+  --output table
+
+# Get API endpoint
+API_ID=$(terraform output -raw api_gateway_id)
+echo "API Endpoint: https://${API_ID}.execute-api.us-east-1.amazonaws.com/v1"
+```
+
+## Phase 6: AI Services Configuration
+
+Configure AWS AI services for document processing.
+
+### Amazon Textract Configuration
+
+Configure Textract for document analysis.
+
+```bash
+# Test Textract with sample document
+aws textract analyze-document \
+  --document '{"S3Object":{"Bucket":"idp-documents-production","Name":"samples/sample-invoice.pdf"}}' \
+  --feature-types '["FORMS","TABLES"]' \
+  --query "Blocks[?BlockType=='KEY_VALUE_SET']"
+```
+
+### Amazon Comprehend Configuration
+
+Configure Comprehend for entity extraction and PII detection.
+
+```bash
+# Test entity detection
+aws comprehend detect-entities \
+  --language-code en \
+  --text "Invoice #12345 from Acme Corp for $5,000"
+
+# Test PII detection
+aws comprehend detect-pii-entities \
+  --language-code en \
+  --text "John Smith, SSN 123-45-6789, john@example.com"
+```
+
+### Amazon A2I Configuration (Human Review)
+
+Configure Amazon A2I for human review workflows.
+
+```bash
+# Navigate to Python scripts
+cd delivery/scripts/python/
+
+# Activate virtual environment
+source venv/bin/activate
+
+# Configure A2I human task UI
+python3 configure_a2i.py \
+  --environment production \
+  --workforce private \
+  --review-threshold 0.85
+
+# Create A2I flow definition
+python3 create_flow_definition.py \
+  --environment production \
+  --task-type document-review
+```
+
+### AI Services Validation
+
+```bash
+# Test end-to-end document processing
+python3 test_pipeline.py \
+  --document samples/sample-invoice.pdf \
+  --expected-type invoice
+
+# Verify extraction accuracy
+python3 validate_extraction.py \
+  --test-data samples/test-documents/ \
+  --expected-results samples/expected-results.json
+```
+
+## Phase 7: Monitoring Layer
+
+Deploy CloudWatch monitoring and alerting.
+
+### Monitoring Components
+
+- CloudWatch dashboard for IDP metrics
+- CloudWatch alarms for critical metrics
+- CloudWatch Logs for Lambda and API Gateway
+- X-Ray tracing for distributed debugging
+
+### Deployment Steps
+
+```bash
+# Apply monitoring infrastructure
+./deploy.sh apply
+```
+
+### Monitoring Validation
+
+```bash
+# Verify CloudWatch dashboard
+aws cloudwatch list-dashboards \
+  --query "DashboardEntries[?contains(DashboardName, 'idp')].[DashboardName]" \
+  --output table
+
+# Verify alarms configured
+aws cloudwatch describe-alarms \
+  --alarm-name-prefix "idp" \
+  --query "MetricAlarms[*].[AlarmName,StateValue]" \
+  --output table
+```
+
+# Application Configuration
+
+This section covers post-infrastructure configuration for the IDP pipeline.
+
+## Pipeline Configuration
+
+Configure the document processing pipeline.
+
+### Step Functions Workflow
+
+The processing workflow includes the following steps.
+
+1. **Document Validation:** Validate document format and size
+2. **OCR Processing:** Extract text using Textract
+3. **Entity Extraction:** Extract entities using Comprehend
+4. **PII Detection:** Detect and redact PII using Comprehend
+5. **Confidence Check:** Evaluate confidence against threshold (85%)
+6. **Human Review:** Route low-confidence documents to A2I
+7. **Results Storage:** Store results in DynamoDB and S3
+8. **Notification:** Send completion notification via SNS
+
+### Configuration Deployment
+
+```bash
+# Navigate to Python scripts
+cd delivery/scripts/python/
+
+# Configure pipeline settings
+python3 configure.py \
+  --environment production \
+  --component pipeline \
+  --config-file config/pipeline-config.json
+
+# Validate configuration
+python3 validate.py \
+  --environment production \
+  --test-suite configuration
+```
+
+## API Configuration
+
+Configure API Gateway and authentication.
+
+### API Endpoints
+
+The following API endpoints are deployed.
+
+<!-- TABLE_CONFIG: widths=[15, 35, 20, 30] -->
+| Method | Endpoint | Auth | Description |
+|--------|----------|------|-------------|
+| POST | /v1/documents | Cognito JWT | Upload document for processing |
+| GET | /v1/documents/{id} | Cognito JWT | Get document status and results |
+| GET | /v1/documents/{id}/extractions | Cognito JWT | Get extracted data |
+| GET | /v1/documents | Cognito JWT | List documents |
+| DELETE | /v1/documents/{id} | Cognito JWT | Delete document |
+
+### API Testing
+
+```bash
+# Get API endpoint
+API_ENDPOINT=$(terraform output -raw api_endpoint)
+
+# Get authentication token
+TOKEN=$(aws cognito-idp admin-initiate-auth \
+  --user-pool-id $USER_POOL_ID \
+  --client-id $CLIENT_ID \
+  --auth-flow ADMIN_NO_SRP_AUTH \
+  --auth-parameters USERNAME=test,PASSWORD=TestPass123! \
+  --query "AuthenticationResult.IdToken" --output text)
 
 # Test document upload
-aws s3 cp test_documents/ s3://document-bucket/test/ --recursive
+curl -X POST "${API_ENDPOINT}/documents" \
+  -H "Authorization: Bearer ${TOKEN}" \
+  -H "Content-Type: application/json" \
+  -d '{"document_name":"test.pdf","content_type":"application/pdf"}'
 
-# Test processing pipeline
-python test_pipeline.py
-
-# Validate results
-python validate_extraction.py
+# Test document status
+curl -X GET "${API_ENDPOINT}/documents/{document_id}" \
+  -H "Authorization: Bearer ${TOKEN}"
 ```
 
-### Performance Testing
-```python
-import concurrent.futures
-import time
+# Integration Testing
 
-def load_test_document_processing():
-    def process_document(doc_path):
-        # Simulate document processing
-        start_time = time.time()
-        result = process_single_document(doc_path)
-        end_time = time.time()
-        return end_time - start_time
-    
-    documents = ['doc1.pdf', 'doc2.pdf'] * 50  # 100 documents
-    
-    with concurrent.futures.ThreadPoolExecutor(max_workers=10) as executor:
-        results = list(executor.map(process_document, documents))
-    
-    avg_time = sum(results) / len(results)
-    print(f"Average processing time: {avg_time:.2f} seconds")
+This section covers integration testing procedures.
+
+## Test Environment Preparation
+
+Prepare test data and environment.
+
+```bash
+# Navigate to Python scripts
+cd delivery/scripts/python/
+
+# Load test documents
+python3 configure.py \
+  --environment production \
+  --component test-data \
+  --action load
+
+# Verify test data loaded
+aws s3 ls s3://idp-documents-production/test-data/
 ```
 
----
+## Integration Test Execution
 
-## Security Implementation
+### Functional Tests
 
-### IAM Policies
-```json
-{
-  "Version": "2012-10-17",
-  "Statement": [
-    {
-      "Effect": "Allow",
-      "Action": [
-        "textract:AnalyzeDocument",
-        "textract:DetectDocumentText",
-        "comprehend:DetectEntities",
-        "comprehend:DetectSentiment"
-      ],
-      "Resource": "*"
-    },
-    {
-      "Effect": "Allow",
-      "Action": [
-        "s3:GetObject",
-        "s3:PutObject"
-      ],
-      "Resource": "arn:aws:s3:::document-bucket/*"
-    }
-  ]
-}
+```bash
+# Execute functional tests
+python3 validate.py \
+  --environment production \
+  --test-suite functional \
+  --verbose \
+  --report
+
+# Review results
+cat reports/functional-test-results.json | jq '.summary'
 ```
 
-### Encryption Configuration
-```yaml
-# S3 Bucket Encryption
-ServerSideEncryptionConfiguration:
-  Rules:
-    - ServerSideEncryptionByDefault:
-        SSEAlgorithm: aws:kms
-        KMSMasterKeyID: !Ref DocumentEncryptionKey
-      BucketKeyEnabled: true
+### AI Service Accuracy Tests
 
-# DynamoDB Encryption
-SSESpecification:
-  SSEEnabled: true
-  KMSMasterKeyId: !Ref DatabaseEncryptionKey
+```bash
+# Test Textract extraction accuracy
+python3 validate.py \
+  --environment production \
+  --test-suite textract-accuracy \
+  --document-types invoice,contract,form
+
+# Test Comprehend entity extraction
+python3 validate.py \
+  --environment production \
+  --test-suite comprehend-accuracy
 ```
 
----
+### Performance Tests
 
-## Quality Assurance
+```bash
+# Execute load test
+python3 validate.py \
+  --environment production \
+  --test-suite performance \
+  --documents 100 \
+  --duration 3600 \
+  --report
 
-### Code Quality Gates
-- **Code Coverage**: Minimum 80% test coverage
-- **Security Scan**: No critical vulnerabilities
-- **Performance**: Sub-30 second processing time
-- **Documentation**: Complete API and operational docs
+# Review performance metrics
+cat reports/performance-test-results.json | jq '.latency_p95'
+```
 
-### Acceptance Criteria
-- [ ] All functional requirements implemented and tested
-- [ ] Performance requirements met (accuracy >99%, speed <30s)
-- [ ] Security requirements validated
-- [ ] Integration with all specified systems complete
-- [ ] User acceptance testing passed
-- [ ] Operations documentation complete
+## Test Success Criteria
 
----
+Complete this checklist before proceeding.
 
-## Deployment Checklist
+- [ ] All functional tests passing (> 95% pass rate)
+- [ ] Textract extraction accuracy > 95%
+- [ ] Comprehend entity extraction accuracy > 90%
+- [ ] Processing latency < 30 seconds p95
+- [ ] No critical security findings
+- [ ] API response time < 2 seconds
+- [ ] A2I human review workflow operational
 
-### Pre-Deployment
-- [ ] Infrastructure deployed and tested
-- [ ] Application code deployed to staging
-- [ ] Integration testing completed
-- [ ] Performance testing passed
-- [ ] Security testing completed
-- [ ] User acceptance testing signed off
-- [ ] Operations procedures documented
-- [ ] Backup and recovery tested
+# Security Validation
 
-### Deployment Day
-- [ ] Final code deployment to production
-- [ ] Database migration (if required)
-- [ ] DNS cutover and validation
-- [ ] Smoke testing of critical paths
-- [ ] Performance monitoring activated
-- [ ] User notification sent
-- [ ] Support team briefed
+This section covers security validation procedures.
 
-### Post-Deployment
-- [ ] Production monitoring confirmed
-- [ ] Performance metrics validated
-- [ ] User feedback collected
-- [ ] Issue log maintained
-- [ ] Knowledge transfer completed
-- [ ] Project closure documentation
+## Security Scan Execution
 
----
+### Infrastructure Security Scan
 
-## Implementation Troubleshooting
+```bash
+# Navigate to Terraform directory
+cd delivery/scripts/terraform/
 
-### Common Implementation Issues
+# Run tfsec scan
+tfsec . --minimum-severity MEDIUM --format json > reports/tfsec-results.json
 
-#### Configuration Issues
-**Symptoms:** Service startup errors, parameter validation failures, deployment failures
-**Quick Resolution:**
-- Validate configuration against provided templates in configuration.csv
-- Check AWS service quotas and limits
-- Verify IAM roles and permissions for AI services
-- Review CloudFormation/CDK deployment logs
+# Review critical findings
+cat reports/tfsec-results.json | jq '.results[] | select(.severity == "CRITICAL")'
+```
 
-#### AI/ML Service Integration Issues
-**Symptoms:** Model endpoints not accessible, accuracy below targets, processing timeouts
-**Quick Resolution:**
-- Verify SageMaker endpoint status and auto-scaling configuration
-- Check Textract and Comprehend service limits and quotas
-- Validate document formats and size limits
-- Review model training data quality and coverage
+### IAM Policy Validation
 
-#### Network and Connectivity Issues
-**Symptoms:** API timeouts, SSL certificate errors, DNS resolution failures
-**Quick Resolution:**
-- Test network connectivity between environments
-- Verify security group rules for AI service endpoints
-- Check VPC endpoints and NAT Gateway configurations
-- Validate SSL certificate installation and expiration
+```bash
+# Verify least privilege policies
+aws iam simulate-principal-policy \
+  --policy-source-arn arn:aws:iam::${ACCOUNT_ID}:role/idp-lambda-role \
+  --action-names s3:* \
+  --resource-arns arn:aws:s3:::*
 
-#### Performance Issues
-**Symptoms:** Slow document processing, high latency, timeout errors
-**Quick Resolution:**
-- Scale Lambda concurrency and memory allocation
-- Optimize SageMaker endpoint auto-scaling policies
-- Review DynamoDB read/write capacity settings
-- Implement CloudFront caching for static resources
+# Check for overly permissive policies
+python3 validate.py \
+  --environment production \
+  --test-suite iam-security
+```
 
-### Escalation Procedures
-- **Level 1 Issues** (< 2 hours): Configuration, permission, basic connectivity
-- **Level 2 Issues** (2-4 hours): Performance optimization, complex integrations
-- **Level 3 Issues** (> 4 hours): Architecture changes, security incidents
+## Compliance Validation
 
-**Required Information for Escalation:**
-- Detailed error messages and symptoms
-- Environment details and recent changes
-- Relevant log excerpts from CloudWatch
-- Current system metrics and performance data
+### Encryption Validation
 
----
+```bash
+# Verify S3 encryption
+aws s3api get-bucket-encryption --bucket idp-documents-production
 
-**Document Version**: 1.0
-**Last Updated**: January 2025
-**Maintained By**: AI Solutions Implementation Team
+# Verify DynamoDB encryption
+aws dynamodb describe-table \
+  --table-name idp-documents \
+  --query "Table.SSEDescription"
+
+# Verify Lambda environment encryption
+aws lambda get-function-configuration \
+  --function-name idp-document-processor \
+  --query "KMSKeyArn"
+```
+
+### Audit Logging Validation
+
+```bash
+# Verify CloudTrail enabled
+aws cloudtrail describe-trails \
+  --query "trailList[?Name=='idp-audit-trail']"
+
+# Verify API Gateway access logging
+aws apigateway get-stage \
+  --rest-api-id $API_ID \
+  --stage-name v1 \
+  --query "accessLogSettings"
+```
+
+## Security Validation Checklist
+
+- [ ] Infrastructure security scan completed
+- [ ] No critical vulnerabilities identified
+- [ ] All data encrypted at rest (S3, DynamoDB)
+- [ ] All data encrypted in transit (TLS 1.2+)
+- [ ] IAM roles follow least privilege
+- [ ] CloudTrail logging enabled
+- [ ] VPC Flow Logs enabled
+- [ ] No secrets in code or configuration
+
+# Migration & Cutover
+
+This section covers production cutover procedures.
+
+## Pre-Migration Checklist
+
+- [ ] All infrastructure deployed and validated
+- [ ] AI services achieving target accuracy (95%+)
+- [ ] All integration tests passing
+- [ ] Security validation completed
+- [ ] Rollback plan documented
+- [ ] Stakeholder approval obtained
+- [ ] Maintenance window scheduled
+
+## Production Cutover
+
+### DNS and API Cutover
+
+```bash
+# Update DNS to point to new API Gateway (if applicable)
+aws route53 change-resource-record-sets \
+  --hosted-zone-id $HOSTED_ZONE_ID \
+  --change-batch file://dns-cutover.json
+
+# Verify DNS propagation
+dig api.idp.company.com +short
+```
+
+### Traffic Validation
+
+```bash
+# Monitor API Gateway metrics
+aws cloudwatch get-metric-statistics \
+  --namespace AWS/ApiGateway \
+  --metric-name Count \
+  --dimensions Name=ApiName,Value=idp-api \
+  --start-time $(date -u -d '5 minutes ago' +%Y-%m-%dT%H:%M:%SZ) \
+  --end-time $(date -u +%Y-%m-%dT%H:%M:%SZ) \
+  --period 60 \
+  --statistics Sum
+
+# Check application health
+curl -s "${API_ENDPOINT}/health" | jq
+```
+
+## Rollback Procedures
+
+If critical issues are identified, execute rollback.
+
+```bash
+# Revert DNS to previous infrastructure (if applicable)
+aws route53 change-resource-record-sets \
+  --hosted-zone-id $HOSTED_ZONE_ID \
+  --change-batch file://dns-rollback.json
+
+# Rollback Lambda functions
+aws lambda update-alias \
+  --function-name idp-document-processor \
+  --name live \
+  --function-version $PREVIOUS_VERSION
+
+# Verify rollback successful
+curl -s "${API_ENDPOINT}/health" | jq
+```
+
+# Operational Handover
+
+This section covers the transition to ongoing operations.
+
+## Monitoring Dashboard Access
+
+### CloudWatch Dashboard
+
+```bash
+# Get dashboard URL
+DASHBOARD_URL="https://console.aws.amazon.com/cloudwatch/home?region=us-east-1#dashboards:name=idp-production"
+echo "Dashboard URL: ${DASHBOARD_URL}"
+```
+
+### Key Metrics to Monitor
+
+<!-- TABLE_CONFIG: widths=[25, 25, 25, 25] -->
+| Metric | Threshold | Alert Severity | Response |
+|--------|-----------|----------------|----------|
+| Processing Latency | > 30s p95 | Warning | Investigate pipeline |
+| Extraction Accuracy | < 90% | Warning | Review samples |
+| Lambda Errors | > 5% | Critical | Check logs |
+| API 5xx Errors | > 1% | Critical | Immediate investigation |
+| Queue Depth | > 500 | Warning | Scale resources |
+
+## Support Transition
+
+### Support Model
+
+<!-- TABLE_CONFIG: widths=[15, 30, 25, 30] -->
+| Tier | Responsibility | Team | Response Time |
+|------|---------------|------|---------------|
+| L1 | Initial triage, known issues | Client Help Desk | 15 minutes |
+| L2 | Technical troubleshooting | Client IT Support | 1 hour |
+| L3 | Complex issues, AI problems | Vendor Support | 4 hours |
+| L4 | Engineering escalation | Vendor Engineering | Next business day |
+
+### Escalation Contacts
+
+<!-- TABLE_CONFIG: widths=[25, 25, 30, 20] -->
+| Role | Name | Email | Phone |
+|------|------|-------|-------|
+| Technical Lead | [NAME] | tech@company.com | [PHONE] |
+| Project Manager | [NAME] | pm@company.com | [PHONE] |
+| Emergency | On-Call | oncall@company.com | [PHONE] |
+
+# Training Program
+
+This section documents the training program for the IDP solution.
+
+## Training Overview
+
+Training ensures all user groups achieve competency with the IDP solution.
+
+### Training Schedule
+
+<!-- TABLE_CONFIG: widths=[10, 28, 17, 10, 15, 20] -->
+| ID | Module Name | Audience | Hours | Format | Prerequisites |
+|----|-------------|----------|-------|--------|---------------|
+| TRN-001 | IDP Architecture Overview | Administrators | 2 | ILT | None |
+| TRN-002 | AWS AI Services Overview | IT Team | 3 | Hands-On | TRN-001 |
+| TRN-003 | Infrastructure Management | DevOps | 3 | Hands-On | TRN-001 |
+| TRN-004 | Human Review Workflow | Reviewers | 2 | Hands-On | None |
+| TRN-005 | API Integration | Developers | 2 | Hands-On | TRN-001 |
+| TRN-006 | Monitoring & Troubleshooting | IT Support | 2 | ILT | TRN-003 |
+| TRN-007 | End User Training | Business Users | 1 | VILT | None |
+
+## Training Materials
+
+The following training materials are provided.
+
+- Quick Start Guide (one-page reference)
+- API Documentation with examples
+- Administrator Guide (technical reference)
+- Video recordings of training sessions
+- Hands-on lab exercises
+- FAQ document
+
+# Appendices
+
+## Appendix A: Environment Reference
+
+### Production Environment
+
+<!-- TABLE_CONFIG: widths=[25, 35, 40] -->
+| Parameter | Value | Description |
+|-----------|-------|-------------|
+| Environment Name | production | Primary production environment |
+| AWS Region | us-east-1 | Primary deployment region |
+| VPC CIDR | 10.0.0.0/16 | Virtual network address space |
+| Lambda Concurrency | 50 reserved | Reserved concurrent executions |
+| API Rate Limit | 100 req/min | Per-client throttling |
+
+## Appendix B: Troubleshooting Guide
+
+### Common Issues and Resolutions
+
+<!-- TABLE_CONFIG: widths=[25, 35, 40] -->
+| Issue | Possible Cause | Resolution |
+|-------|---------------|------------|
+| Textract timeout | Large document | Split document or use async API |
+| Low accuracy | Poor document quality | Improve scan quality, adjust confidence threshold |
+| Lambda timeout | Complex document | Increase timeout or optimize code |
+| API 429 errors | Rate limiting | Request quota increase |
+| A2I task not created | Configuration error | Verify flow definition and workforce |
+
+### Diagnostic Commands
+
+```bash
+# Check Lambda errors
+aws logs filter-log-events \
+  --log-group-name /aws/lambda/idp-document-processor \
+  --filter-pattern "ERROR"
+
+# Check Step Functions executions
+aws stepfunctions list-executions \
+  --state-machine-arn $STATE_MACHINE_ARN \
+  --status-filter FAILED
+
+# Check API Gateway errors
+aws logs filter-log-events \
+  --log-group-name /aws/api-gateway/idp-api \
+  --filter-pattern "5"
+
+# Check A2I human tasks
+aws sagemaker-a2i-runtime list-human-loops \
+  --flow-definition-arn $FLOW_DEFINITION_ARN
+```
+
+## Appendix C: AWS Service Limits
+
+### Relevant Service Quotas
+
+<!-- TABLE_CONFIG: widths=[30, 25, 25, 20] -->
+| Service | Quota | Default | Recommended |
+|---------|-------|---------|-------------|
+| Lambda Concurrent Executions | L-B99A9384 | 1,000 | 500 |
+| Textract API TPS | L-E2B3C7F0 | 10 | 25 |
+| Comprehend API TPS | L-34BEDC5F | 25 | 50 |
+| API Gateway TPS | L-8A5B8E43 | 10,000 | 10,000 |
+| A2I Human Loops | N/A | 100 concurrent | 100 |

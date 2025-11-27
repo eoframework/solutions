@@ -28,7 +28,7 @@ Closure,Project Documentation,10 days,[START_DATE+90],[START_DATE+100],All Deliv
 Closure,Project Closure,2 days,[START_DATE+126],[START_DATE+128],Hypercare Complete,Project Manager,Not Started
 
 # Milestones
-#WIDTH: 10,25,18,77,28,17
+#WIDTH: 14,25,20,77,28,17
 #ALIGN: left,left,center,left,left,center
 Milestone ID,Milestone Name,Target Date,Success Criteria,Owner,Status
 M1,Project Kickoff,[START_DATE],All stakeholders attended kickoff meeting; project charter approved,Project Manager,Not Started
