@@ -1,46 +1,98 @@
-Phase,Task ID,Task Name,Duration (Days),Start Date,End Date,Dependencies,Assigned To,Status,Progress %,Critical Path,Risk Level,Notes,Delivery_Documents
-Phase 1: Planning and Assessment,T001,Project Initiation and Team Assembly,5,2025-02-01,2025-02-07,,EO Engineer,Not Started,0%,Yes,Low,Kick-off meeting and resource allocation,project-plan.csv
-Phase 1: Planning and Assessment,T002,Current State Assessment,10,2025-02-08,2025-02-21,T001,EO Quarterback,Not Started,0%,Yes,Medium,Document existing infrastructure and applications,N/A
-Phase 1: Planning and Assessment,T003,Requirements Gathering and Analysis,7,2025-02-08,2025-02-16,T001,EO Sales Engineer,Not Started,0%,No,Low,Business and technical requirements documentation,requirements-specification.csv
-Phase 1: Planning and Assessment,T004,Risk Assessment and Mitigation Planning,5,2025-02-17,2025-02-23,T002 T003,EO Engineer,Not Started,0%,No,Medium,Identify and plan for project risks,N/A
-Phase 1: Planning and Assessment,T005,Azure Tenant and Subscription Planning,10,2025-02-22,2025-03-07,T002,EO Quarterback,Not Started,0%,Yes,Medium,Plan management group hierarchy and subscriptions,N/A
-Phase 1: Planning and Assessment,T006,Network Architecture Design,12,2025-02-22,2025-03-09,T002,EO Quarterback,Not Started,0%,Yes,High,Design hub-spoke topology and addressing,detailed-design.md
-Phase 1: Planning and Assessment,T007,Security Architecture Design,10,2025-02-24,2025-03-07,T002,EO Quarterback,Not Started,0%,Yes,High,Design security controls and compliance framework,detailed-design.md
-Phase 1: Planning and Assessment,T008,Governance Framework Design,8,2025-03-01,2025-03-10,T005,EO Engineer,Not Started,0%,No,Medium,Design policies and governance structure,detailed-design.md
-Phase 2: Foundation Setup,T009,Azure AD Tenant Configuration,7,2025-03-10,2025-03-18,T005 T007,EO Engineer,Not Started,0%,Yes,High,Configure tenant settings and conditional access,N/A
-Phase 2: Foundation Setup,T010,Management Group Hierarchy Deployment,5,2025-03-11,2025-03-17,T005,EO Engineer,Not Started,0%,Yes,Medium,Deploy management group structure,implementation-guide.md
-Phase 2: Foundation Setup,T011,Azure Policy Framework Deployment,8,2025-03-18,2025-03-27,T008 T010,EO Engineer,Not Started,0%,Yes,High,Deploy enterprise policies and initiatives,implementation-guide.md
-Phase 2: Foundation Setup,T012,RBAC and Access Control Configuration,6,2025-03-19,2025-03-26,T009,EO Engineer,Not Started,0%,No,High,Configure role-based access controls,N/A
-Phase 2: Foundation Setup,T013,Subscription Provisioning and Organization,5,2025-03-17,2025-03-23,T010,EO Engineer,Not Started,0%,No,Medium,Create and organize platform subscriptions,N/A
-Phase 2: Foundation Setup,T014,Billing and Cost Management Setup,4,2025-03-24,2025-03-27,T013,EO Engineer,Not Started,0%,No,Low,Configure budgets and cost allocation,N/A
-Phase 3: Platform Services,T015,Identity Platform Deployment,10,2025-03-28,2025-04-10,T009 T011,EO Engineer,Not Started,0%,Yes,High,Deploy identity infrastructure and services,implementation-guide.md
-Phase 3: Platform Services,T016,Management Platform Deployment,8,2025-03-28,2025-04-07,T011 T013,EO Engineer,Not Started,0%,Yes,Medium,Deploy monitoring and management services,implementation-guide.md
-Phase 3: Platform Services,T017,Hub Network Infrastructure Deployment,12,2025-04-01,2025-04-16,T006 T011,EO Engineer,Not Started,0%,Yes,High,Deploy hub VNet and core network services,implementation-guide.md
-Phase 3: Platform Services,T018,Azure Firewall Configuration,6,2025-04-17,2025-04-24,T017,EO Engineer,Not Started,0%,Yes,High,Configure firewall rules and policies,N/A
-Phase 3: Platform Services,T019,VPN Gateway and Connectivity Setup,8,2025-04-17,2025-04-28,T017,EO Engineer,Not Started,0%,No,Medium,Configure site-to-site VPN connectivity,N/A
-Phase 3: Platform Services,T020,Key Vault and Secrets Management,5,2025-04-08,2025-04-14,T015,EO Engineer,Not Started,0%,No,High,Deploy enterprise key management,N/A
-Phase 3: Platform Services,T021,Backup and Recovery Services,6,2025-04-08,2025-04-15,T016,EO Engineer,Not Started,0%,No,Medium,Configure backup policies and procedures,N/A
-Phase 4: Security Implementation,T022,Security Center and Defender Configuration,7,2025-04-25,2025-05-03,T018 T020,EO Engineer,Not Started,0%,Yes,High,Enable advanced threat protection,N/A
-Phase 4: Security Implementation,T023,Azure Sentinel Deployment,10,2025-04-29,2025-05-12,T016 T022,EO Engineer,Not Started,0%,No,High,Deploy SIEM and security analytics,implementation-guide.md
-Phase 4: Security Implementation,T024,Compliance and Governance Validation,8,2025-05-04,2025-05-13,T011 T022,EO Engineer,Not Started,0%,No,Medium,Validate regulatory compliance,N/A
-Phase 4: Security Implementation,T025,Security Testing and Validation,10,2025-05-06,2025-05-19,T022 T023,EO Engineer,Not Started,0%,No,High,Penetration testing and vulnerability assessment,test-plan.csv
-Phase 5: Landing Zone Deployment,T026,Corporate Landing Zone Template,8,2025-05-14,2025-05-23,T017 T022,EO Engineer,Not Started,0%,Yes,Medium,Deploy corporate workload landing zone,N/A
-Phase 5: Landing Zone Deployment,T027,Online Landing Zone Template,10,2025-05-14,2025-05-27,T017 T022,EO Engineer,Not Started,0%,Yes,Medium,Deploy internet-facing landing zone,N/A
-Phase 5: Landing Zone Deployment,T028,Spoke Network Connectivity,12,2025-05-24,2025-06-08,T026 T027,EO Engineer,Not Started,0%,Yes,Medium,Configure spoke VNet connectivity,N/A
-Phase 5: Landing Zone Deployment,T029,Application Security Controls,8,2025-05-28,2025-06-06,T027,EO Engineer,Not Started,0%,No,High,Configure application-layer security,N/A
-Phase 5: Landing Zone Deployment,T030,Landing Zone Testing and Validation,10,2025-06-09,2025-06-22,T028 T029,EO Engineer,Not Started,0%,Yes,Medium,End-to-end testing of landing zones,test-plan.csv
-Phase 6: Monitoring and Operations,T031,Monitoring and Alerting Configuration,8,2025-06-16,2025-06-25,T016 T030,EO Engineer,Not Started,0%,No,Medium,Configure comprehensive monitoring,N/A
-Phase 6: Monitoring and Operations,T032,Log Analytics and Reporting Setup,6,2025-06-16,2025-06-23,T016,EO Engineer,Not Started,0%,No,Low,Configure log analytics and dashboards,N/A
-Phase 6: Monitoring and Operations,T033,Automation and Runbook Development,10,2025-06-24,2025-07-07,T031,EO Engineer,Not Started,0%,No,Medium,Develop operational automation,N/A
-Phase 6: Monitoring and Operations,T034,Disaster Recovery Testing,8,2025-06-26,2025-07-07,T021 T030,EO Engineer,Not Started,0%,No,High,Test backup and recovery procedures,test-plan.csv
-Phase 6: Monitoring and Operations,T035,Performance Optimization,7,2025-07-08,2025-07-16,T030 T031,EO Engineer,Not Started,0%,No,Low,Optimize platform performance,N/A
-Phase 7: Training and Handover,T036,Technical Documentation Completion,8,2025-07-08,2025-07-17,T033,EO Engineer,Not Started,0%,No,Low,Complete all technical documentation,implementation-guide.md,troubleshooting.md
-Phase 7: Training and Handover,T037,Operations Team Training,10,2025-07-17,2025-07-30,T033 T036,EO Engineer,Not Started,0%,Yes,Medium,Train operations and support teams,training-plan.csv
-Phase 7: Training and Handover,T038,User Training and Onboarding,12,2025-07-18,2025-08-04,T036,EO Engineer,Not Started,0%,No,Low,Train end users and administrators,training-plan.csv
-Phase 7: Training and Handover,T039,Go-Live Readiness Assessment,5,2025-07-31,2025-08-06,T037,EO Project Manager,Not Started,0%,Yes,Medium,Final readiness assessment,N/A
-Phase 7: Training and Handover,T040,Production Deployment,3,2025-08-07,2025-08-11,T039,EO Engineer,Not Started,0%,Yes,High,Execute production go-live,implementation-guide.md
-Phase 8: Post-Implementation,T041,Hypercare and Support Period,30,2025-08-12,2025-09-22,T040,EO Engineer,Not Started,0%,No,Medium,Intensive support post go-live,N/A
-Phase 8: Post-Implementation,T042,Performance Monitoring and Optimization,14,2025-08-12,2025-08-29,T040,EO Engineer,Not Started,0%,No,Low,Monitor and optimize performance,N/A
-Phase 8: Post-Implementation,T043,User Feedback Collection and Analysis,21,2025-08-12,2025-09-09,T040,EO Sales Engineer,Not Started,0%,No,Low,Collect and analyze user feedback,requirements-specification.csv
-Phase 8: Post-Implementation,T044,Lessons Learned and Knowledge Transfer,7,2025-09-23,2025-10-01,T041,EO Project Manager,Not Started,0%,No,Low,Document lessons learned,communication-plan.csv
-Phase 8: Post-Implementation,T045,Project Closure and Handover,5,2025-10-02,2025-10-08,T044,EO Engineer,Not Started,0%,No,Low,Formal project closure,project-plan.csv
+# Project Timeline
+#WIDTH: 12,36,13,19,19,26,24,14
+#ALIGN: left,left,center,center,center,left,left,center
+Phase,Task,Duration,Start Date,End Date,Dependencies,Owner,Status
+Discovery,Project Kickoff and Charter,1 day,2025-01-15,2025-01-15,None,Project Manager,Not Started
+Discovery,Current State Assessment,5 days,2025-01-16,2025-01-22,Project Kickoff,Cloud Architect,Not Started
+Discovery,Organizational Structure Analysis,3 days,2025-01-20,2025-01-22,Assessment Started,Business Analyst,Not Started
+Discovery,Compliance Requirements Gathering,3 days,2025-01-20,2025-01-22,Assessment Started,Security Architect,Not Started
+Discovery,Network Topology Assessment,3 days,2025-01-23,2025-01-27,Current State Complete,Network Engineer,Not Started
+Discovery,Identity and Access Assessment,3 days,2025-01-23,2025-01-27,Current State Complete,Identity Architect,Not Started
+Design,Management Group Hierarchy Design,5 days,2025-01-28,2025-02-03,All Assessments Complete,Cloud Architect,Not Started
+Design,Azure Policy Framework Design,5 days,2025-02-03,2025-02-07,MG Design Complete,Governance Lead,Not Started
+Design,Hub-Spoke Network Design,5 days,2025-02-03,2025-02-07,Network Assessment,Network Engineer,Not Started
+Design,Identity and RBAC Strategy,3 days,2025-02-06,2025-02-10,Identity Assessment,Identity Architect,Not Started
+Design,Security Baseline Design,5 days,2025-02-10,2025-02-14,Policy Framework Draft,Security Architect,Not Started
+Design,Architecture Design Document,5 days,2025-02-10,2025-02-14,All Designs Complete,Cloud Architect,Not Started
+Build,Management Group Hierarchy Deployment,3 days,2025-02-17,2025-02-19,Design Approved,Cloud Architect,Not Started
+Build,Platform Subscriptions Creation,2 days,2025-02-20,2025-02-21,MG Hierarchy Complete,Cloud Architect,Not Started
+Build,Azure Policy Framework Deployment,5 days,2025-02-24,2025-02-28,Subscriptions Created,Governance Lead,Not Started
+Build,Hub Virtual Network Deployment,3 days,2025-03-03,2025-03-05,Platform Subscriptions,Network Engineer,Not Started
+Build,Azure Firewall Configuration,3 days,2025-03-06,2025-03-10,Hub VNet Complete,Network Engineer,Not Started
+Build,ExpressRoute Circuit Provisioning,5 days,2025-03-10,2025-03-14,Firewall Complete,Network Engineer,Not Started
+Build,Private DNS Zones Configuration,2 days,2025-03-13,2025-03-14,Hub VNet Complete,Network Engineer,Not Started
+Build,Azure Bastion Deployment,2 days,2025-03-17,2025-03-18,Hub VNet Complete,Security Engineer,Not Started
+Build,Log Analytics Workspace Setup,2 days,2025-03-17,2025-03-18,Platform Subscriptions,Operations Engineer,Not Started
+Build,Azure Sentinel Deployment,3 days,2025-03-19,2025-03-21,Log Analytics Complete,Security Engineer,Not Started
+Build,Defender for Cloud Activation,2 days,2025-03-24,2025-03-25,Sentinel Complete,Security Engineer,Not Started
+Build,Data Connector Configuration,3 days,2025-03-26,2025-03-28,Sentinel Complete,Security Engineer,Not Started
+Build,Azure AD Integration,3 days,2025-03-31,2025-04-02,Platform Complete,Identity Architect,Not Started
+Build,RBAC Role Assignments,3 days,2025-04-03,2025-04-07,Azure AD Complete,Identity Architect,Not Started
+Build,Conditional Access Policies,3 days,2025-04-08,2025-04-10,Azure AD Complete,Identity Architect,Not Started
+Build,Subscription Vending Automation,5 days,2025-04-08,2025-04-14,All Platform Complete,DevOps Engineer,Not Started
+Build,Monitoring Dashboards Creation,3 days,2025-04-14,2025-04-16,All Monitoring Complete,Operations Engineer,Not Started
+Test,Functional Testing,5 days,2025-04-17,2025-04-23,All Build Complete,QA Engineer,Not Started
+Test,Security Testing,5 days,2025-04-21,2025-04-25,Functional Testing Started,Security Tester,Not Started
+Test,Compliance Validation,3 days,2025-04-24,2025-04-28,Security Testing,Compliance Lead,Not Started
+Test,Performance Testing,3 days,2025-04-28,2025-04-30,Functional Complete,Performance Engineer,Not Started
+Test,User Acceptance Testing,5 days,2025-05-01,2025-05-07,All Testing Complete,Business Users,Not Started
+Deploy,Pre-Production Validation,3 days,2025-05-08,2025-05-12,UAT Complete,QA Lead,Not Started
+Deploy,Production Cutover,2 days,2025-05-13,2025-05-14,Validation Complete,Deployment Team,Not Started
+Deploy,Go-Live Support,5 days,2025-05-15,2025-05-21,Cutover Complete,Support Team,Not Started
+Training,Training Material Development,10 days,2025-04-28,2025-05-09,UAT Started,Training Team,Not Started
+Training,Platform Administrator Training,3 days,2025-05-12,2025-05-14,Materials Ready,Training Team,Not Started
+Training,Security Operations Training,2 days,2025-05-15,2025-05-16,Materials Ready,Training Team,Not Started
+Training,Network Operations Training,2 days,2025-05-19,2025-05-20,Materials Ready,Training Team,Not Started
+Training,Governance Training,2 days,2025-05-21,2025-05-22,Materials Ready,Training Team,Not Started
+Closure,Hypercare Support,30 days,2025-05-15,2025-06-18,Go-Live,Support Team,Not Started
+Closure,Project Documentation,5 days,2025-06-16,2025-06-20,Hypercare,Project Manager,Not Started
+Closure,Project Closure,2 days,2025-06-23,2025-06-24,Documentation Complete,Project Manager,Not Started
+
+# Milestones
+#WIDTH: 14,25,20,77,28,17
+#ALIGN: left,left,center,left,left,center
+Milestone ID,Milestone Name,Target Date,Success Criteria,Owner,Status
+M1,Project Kickoff,2025-01-15,Kickoff meeting held; project charter signed; team assigned and onboarded,Project Manager,Not Started
+M2,Assessment Complete,2025-01-27,Current state documented; all assessments complete; requirements validated,Cloud Architect,Not Started
+M3,Architecture Approved,2025-02-14,Architecture design document signed off; security review passed; network design approved,Cloud Architect,Not Started
+M4,Platform Foundation Ready,2025-02-28,Management groups deployed; platform subscriptions created; policy framework active,Cloud Architect,Not Started
+M5,Network Infrastructure Ready,2025-03-14,Hub-spoke topology operational; Azure Firewall configured; ExpressRoute provisioned,Network Engineer,Not Started
+M6,Security Monitoring Active,2025-03-28,Azure Sentinel operational with 15+ connectors; Defender for Cloud enabled,Security Engineer,Not Started
+M7,Identity Integration Complete,2025-04-10,Azure AD integrated; RBAC configured; Conditional Access policies active,Identity Architect,Not Started
+M8,Testing Complete,2025-05-07,All test cases passed; compliance validated; UAT signed off; zero P1/P2 defects,QA Lead,Not Started
+M9,Go-Live,2025-05-14,Production deployment complete; platform operational; monitoring active,Project Manager,Not Started
+M10,Project Closure,2025-06-24,Hypercare complete; documentation delivered; knowledge transfer done; lessons captured,Project Manager,Not Started
+
+# RACI Matrix
+#WIDTH: 30,10,10,10,10,10,10,10,10
+#ALIGN: left,center,center,center,center,center,center,center,center
+Task/Deliverable,PM,Cloud Arch,Security,Network,Identity,DevOps,Client IT,Client Sec
+Project Charter and Kickoff,A,C,C,C,C,I,C,C
+Current State Assessment,A,R,C,C,C,I,C,C
+Architecture Design Document,A,R,C,C,C,I,I,I
+Management Group Hierarchy,A,R,C,I,C,C,I,I
+Azure Policy Framework,A,C,R,C,C,C,I,C
+Hub-Spoke Network Design,A,C,C,R,I,C,I,I
+Azure Firewall Configuration,A,C,C,R,I,C,I,C
+ExpressRoute Provisioning,A,C,I,R,I,C,C,I
+Azure Sentinel Deployment,A,C,R,C,I,C,I,C
+Defender for Cloud Setup,A,C,R,I,I,C,I,C
+Azure AD Integration,A,C,C,I,R,C,C,C
+RBAC Configuration,A,C,C,I,R,C,C,C
+Conditional Access Policies,A,C,R,I,R,I,I,C
+Subscription Vending Automation,A,C,I,I,I,R,I,I
+Monitoring and Dashboards,A,C,C,C,I,R,C,I
+
+# Communications Plan
+#WIDTH: 23,19,38,45,19,20
+#ALIGN: left,left,left,left,left,center
+Meeting Type,Frequency,Participants,Purpose,Owner,Day/Time
+Project Kickoff,Once,All stakeholders and project team,Launch project and align on objectives and governance approach,Project Manager,Day 1 10:00
+Steering Committee,Bi-weekly,Executive sponsors and PMO,Strategic direction and issue escalation for enterprise transformation,Project Manager,Alternate Tuesdays 14:00
+Status Meeting,Weekly,Core project team,Review progress and address blockers across all workstreams,Project Manager,Mondays 10:00
+Technical Review,Weekly,Cloud architect and technical leads,Architecture decisions and technical design validation,Cloud Architect,Wednesdays 14:00
+Security Review,Weekly,Security architect and security team,Security controls review and compliance validation,Security Architect,Thursdays 11:00
+Network Design Review,Weekly,Network engineer and network team,Network topology and connectivity status,Network Engineer,Fridays 10:00
+Governance Review,Bi-weekly,Governance lead and compliance team,Policy framework review and compliance status,Governance Lead,Alternate Thursdays 14:00
+Go-Live Readiness,Daily (Week -1),Go-live team and stakeholders,Go-live preparation and cutover checklist review,Project Manager,Daily 09:00
+Hypercare Standup,Daily (30 days),Support team and client operations,Post-go-live issues and platform stabilization,Support Lead,Daily 09:30
