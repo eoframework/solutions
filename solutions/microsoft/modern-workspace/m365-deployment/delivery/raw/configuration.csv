@@ -1,10 +1,33 @@
-Component,Parameter,Environment,Value,Data_Type,Required,Description,Validation_Rule,Default_Value
-Solution Configuration,Solution Name,All,Enterprise Solution,String,Yes,Solution identifier,Valid solution name,Enterprise Solution
-Environment,Environment Type,Dev,Development,String,Yes,Environment designation,dev|test|prod,dev
-Environment,Environment Type,Test,Test,String,Yes,Environment designation,dev|test|prod,test
-Environment,Environment Type,Prod,Production,String,Yes,Environment designation,dev|test|prod,prod
-Network Configuration,Network Mode,All,Enterprise,String,Yes,Network configuration mode,Basic|Standard|Enterprise,Enterprise
-Security Configuration,Security Level,All,High,String,Yes,Security configuration level,Low|Medium|High,High
-Performance Configuration,Performance Tier,All,Standard,String,Yes,Performance configuration tier,Basic|Standard|Premium,Standard
-Monitoring Configuration,Monitoring Enabled,All,true,Boolean,Yes,Enable comprehensive monitoring,true|false,true
-Backup Configuration,Backup Enabled,All,true,Boolean,Yes,Enable automated backups,true|false,true
+#WIDTH: 25,15,12,30,45,10,12,33,16,20,26,39,12
+#ALIGN: left,left,center,left,left,center,left,left,center,left,left,left,center
+Parameter Name,Category,Environment,Default Value,Description,Required,Data Type,Validation Rules,Security Level,Owner Team,Dependencies,Notes,Last Updated
+M365_TENANT_NAME,M365 Tenant,All,[tenant].onmicrosoft.com,M365 tenant primary domain,Yes,String,Valid M365 domain,Confidential,M365 Team,None,Created during tenant provisioning,[DATE]
+M365_LICENSE_SKU,M365 Tenant,All,SPE_E5,M365 E5 license SKU,Yes,String,Valid license SKU,Confidential,M365 Team,License procurement,500 users x $66.50/user/month,[DATE]
+CUSTOM_DOMAIN,M365 Tenant,All,[domain.com],Client custom domain,Yes,String,Valid domain format,Public,M365 Team,DNS access,Verify via TXT record,[DATE]
+USER_COUNT,M365 Tenant,All,500,Total user count,Yes,Integer,1-10000,Public,M365 Team,License count,500 users per SOW,[DATE]
+AZURE_AD_CONNECT_SERVER,Identity,All,[server.domain.local],Azure AD Connect server FQDN,Yes,String,Valid server name,Confidential,Identity Team,Windows Server,Windows Server 2019 required,[DATE]
+PASSWORD_HASH_SYNC,Identity,All,true,Enable password hash synchronization,Yes,Boolean,true|false,Secret,Identity Team,Azure AD Connect,Enables SSO,[DATE]
+SEAMLESS_SSO,Identity,All,true,Enable seamless single sign-on,Yes,Boolean,true|false,Confidential,Identity Team,Azure AD Connect,Domain-joined devices,[DATE]
+MFA_REQUIRED,Security,All,true,Require MFA for all users,Yes,Boolean,true|false,Confidential,Security Team,Azure AD Premium,Zero-trust requirement,[DATE]
+CONDITIONAL_ACCESS_ENABLED,Security,All,true,Enable Conditional Access policies,Yes,Boolean,true|false,Confidential,Security Team,Azure AD P2,15 policies configured,[DATE]
+DEVICE_COMPLIANCE_REQUIRED,Security,All,true,Require compliant devices,Yes,Boolean,true|false,Confidential,Security Team,Intune MDM,500 devices enrolled,[DATE]
+DEFENDER_O365_ENABLED,Security,All,true,Enable Defender for Office 365,Yes,Boolean,true|false,Confidential,Security Team,M365 E5,Safe Links and Attachments,[DATE]
+DLP_ENABLED,Compliance,All,true,Enable DLP policies,Yes,Boolean,true|false,Confidential,Compliance Team,M365 E5,Protect PII,[DATE]
+RETENTION_YEARS_EMAIL,Compliance,All,7,Email retention period in years,Yes,Integer,1-10,Confidential,Compliance Team,Purview,SOC 2/HIPAA requirement,[DATE]
+RETENTION_YEARS_FILES,Compliance,All,5,Document retention period in years,Yes,Integer,1-10,Confidential,Compliance Team,Purview,SOC 2/HIPAA requirement,[DATE]
+TEAMS_PHONE_USERS,Telephony,All,150,Users with Teams Phone System,Yes,Integer,1-500,Public,Teams Team,Direct Routing,PSTN calling enabled,[DATE]
+AUDIO_CONFERENCING_USERS,Telephony,All,200,Users with audio conferencing,Yes,Integer,1-500,Public,Teams Team,M365 E5,Dial-in access,[DATE]
+DIRECT_ROUTING_SBC,Telephony,All,sbc.domain.com,Session Border Controller FQDN,Yes,String,Valid FQDN,Confidential,Teams Team,PSTN provider,SIP signaling port 5067,[DATE]
+INTUNE_DEVICES,Device Management,All,500,Devices enrolled in Intune,Yes,Integer,1-1000,Public,MDM Team,Intune,Windows/iOS/Android,[DATE]
+EXPRESSROUTE_ENABLED,Network,All,false,ExpressRoute for M365,No,Boolean,true|false,Confidential,Network Team,ISP circuit,Optional optimization,[DATE]
+EMAIL_MIGRATION_GB,Migration,All,250,Total email data to migrate (GB),Yes,Integer,1-10000,Public,Migration Team,Hybrid Exchange,500 mailboxes,[DATE]
+FILE_MIGRATION_TB,Migration,All,5,Total file data to migrate (TB),Yes,Integer,1-100,Public,Migration Team,ShareGate,Department file shares,[DATE]
+PILOT_USERS,Migration,All,50,Pilot migration user count,Yes,Integer,10-100,Public,Migration Team,Hybrid Exchange,10 users per department,[DATE]
+MIGRATION_WAVE_SIZE,Migration,All,90,Users per production wave,Yes,Integer,50-150,Public,Migration Team,Hybrid Exchange,5 waves total,[DATE]
+SHAREPOINT_SITES,SharePoint,All,5,Number of department sites,Yes,Integer,1-50,Public,SharePoint Team,SharePoint Online,One per department,[DATE]
+SHAREPOINT_STORAGE_TB,SharePoint,All,5,Total SharePoint storage (TB),Yes,Integer,1-25,Public,SharePoint Team,SharePoint Online,Scalable to 25TB+,[DATE]
+ONEDRIVE_STORAGE_TB_USER,SharePoint,All,1,OneDrive storage per user (TB),Yes,Integer,1-5,Public,SharePoint Team,OneDrive,Expandable to 5TB,[DATE]
+TEAMS_GOVERNANCE_ENABLED,Teams,All,true,Enable Teams governance policies,Yes,Boolean,true|false,Confidential,Teams Team,Teams Admin,Channel creation restricted,[DATE]
+EXTERNAL_SHARING,Collaboration,All,restricted,External sharing policy,Yes,String,disabled|restricted|open,Confidential,M365 Team,SharePoint Admin,Controlled guest access,[DATE]
+AUDIT_LOG_RETENTION_DAYS,Operations,All,90,Audit log retention in days,Yes,Integer,90-365,Confidential,Operations Team,M365 E5,Compliance requirement,[DATE]
+

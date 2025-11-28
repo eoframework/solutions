@@ -1,6 +1,31 @@
-Test_Phase,Test_Category,Test_ID,Test_Name,Description,Prerequisites,Expected_Result,Priority,Duration,Responsible_Team
-Functional Testing,Core Functionality,FT001,Basic Functionality Test,Verify core solution functionality,Solution deployed and configured,All core functions operational,High,60 minutes,QA Team
-Functional Testing,Integration Testing,FT002,System Integration Test,Validate integration with existing systems,Integration points configured,All integrations functional,High,90 minutes,Integration Team
-Performance Testing,Load Testing,PT001,Performance Load Test,Test solution under expected load,Performance test environment ready,Performance meets specifications,High,120 minutes,Performance Team
-Security Testing,Security Validation,ST001,Security Configuration Test,Validate security controls and configurations,Security policies applied,All security controls operational,High,90 minutes,Security Team
-User Acceptance,Business Validation,UAT001,User Acceptance Test,Validate solution meets business requirements,User training completed,Business requirements satisfied,Medium,180 minutes,Business Users
+# Functional Tests
+#WIDTH: 10,14,26,33,26,38,33,10,12
+#ALIGN: left,left,left,left,left,left,left,center,center
+Test ID,Test Type,Test Name,Description,Pre-conditions,Test Steps,Expected Results,Priority,Status
+FT-001,Unit,CAC/PIV Authentication,Validate CAC smart card login to GCC High,Valid CAC with current certificate; Azure AD configured,1. Insert CAC card; 2. Enter PIN; 3. Access M365 portal; 4. Verify authentication logs,User authenticated via certificate; Sign-in log shows CAC auth,Critical,Not Started
+FT-002,Unit,PIV Card Authentication,Validate PIV smart card login to GCC High,Valid PIV card; Certificate mapped to Azure AD UPN,1. Insert PIV card; 2. Enter PIN; 3. Access SharePoint; 4. Verify certificate validation,User authenticated via PIV; No password prompt,Critical,Not Started
+FT-003,Integration,Conditional Access Enforcement,Validate CA policies block non-compliant access,CA policies configured; Test device non-compliant,1. Attempt access from non-compliant device; 2. Verify block message; 3. Check audit log,Access denied with compliance error; Event logged,Critical,Not Started
+FT-004,Integration,Sensitivity Label Application,Validate CUI labels apply to documents,Sensitivity labels published; User licensed,1. Create Word document; 2. Apply CUI label; 3. Share externally; 4. Verify block,CUI label applied; External sharing blocked by DLP,High,Not Started
+FT-005,System,Email Migration Validation,Validate email migrated to GCC High correctly,Pilot mailbox migrated; User authenticated,1. Login to Exchange Online; 2. Verify inbox messages; 3. Check sent items; 4. Verify calendar,All messages migrated; No data loss; Calendar intact,High,Not Started
+FT-006,System,SharePoint CUI Library Access,Validate CUI document library permissions,SharePoint site configured; User in CUI group,1. Access CUI library; 2. Upload document; 3. Apply label; 4. Verify metadata,Document uploaded; CUI label applied; Access logged,High,Not Started
+
+# Non-Functional Tests
+#WIDTH: 10,14,22,38,30,44,38,10,12
+#ALIGN: left,left,left,left,left,left,left,center,center
+Test ID,Test Type,Test Name,Description,Pre-conditions,Test Steps,Expected Results,Priority,Status
+NFT-001,Security,Sentinel Alert Response,Validate <15 min alert response SLA,Sentinel operational; Test alert rule configured,1. Trigger test security event; 2. Verify alert generated; 3. Measure time to alert,Alert generated within 15 minutes of event,Critical,Not Started
+NFT-002,Security,FIPS 140-2 Encryption Validation,Validate data encrypted with FIPS-validated modules,Azure Key Vault configured; Storage account deployed,1. Create test blob; 2. Verify SSE encryption; 3. Check Key Vault key type,Data encrypted at rest with AES-256; FIPS validated,Critical,Not Started
+NFT-003,Security,CAC Failed Login Lockout,Validate account lockout after failed CAC attempts,CAC authentication configured; Test user account,1. Attempt 5 failed logins; 2. Verify lockout; 3. Check Sentinel alert,Account locked after 5 failures; Alert generated,High,Not Started
+NFT-004,Compliance,NIST 800-171 AU-2 Logging,Validate audit events logged per AU-2 requirements,Sentinel connectors enabled; M365 audit log active,1. Perform login; 2. Access CUI document; 3. Verify logs in Sentinel,Login and document access logged with user context,Critical,Not Started
+NFT-005,Reliability,M365 GCC High Availability,Validate 99.9% SLA during production use,GCC High tenant operational; Monitoring enabled,1. Monitor service health for 30 days; 2. Track any outages; 3. Calculate availability,Availability >= 99.9% during monitoring period,High,Not Started
+
+# User Acceptance Tests
+#WIDTH: 10,20,29,33,26,38,33,10,12
+#ALIGN: left,left,left,left,left,left,left,center,center
+Test ID,Test Type,Test Name,Description,Pre-conditions,Test Steps,Expected Results,Priority,Status
+UAT-001,Business Process,CUI Document Workflow,Validate end-to-end CUI document handling,User trained; CUI library configured,1. Create CUI document; 2. Apply sensitivity label; 3. Share with team; 4. Verify access log,Document created and shared securely; All access logged,High,Not Started
+UAT-002,Business Process,CAC Authentication Workflow,Validate CAC login meets user experience needs,CAC middleware installed; User trained,1. User logs in with CAC; 2. Access email; 3. Access Teams; 4. Rate experience,Login seamless; All apps accessible; User satisfied,High,Not Started
+UAT-003,User Interface,Teams Secure Collaboration,Validate Teams meets collaboration requirements,Teams configured; External sharing disabled,1. Create Teams meeting; 2. Share CUI document; 3. Chat with team; 4. Verify encryption,Collaboration functional; CUI protected; User satisfied,Medium,Not Started
+UAT-004,Business Process,Sentinel Security Monitoring,Validate ISSO can monitor security posture,Sentinel dashboards configured; ISSO trained,1. ISSO accesses dashboard; 2. Reviews compliance score; 3. Drills into alerts,Dashboards accessible; Compliance visible; Actionable alerts,High,Not Started
+UAT-005,Business Process,Incident Response Workflow,Validate IR playbook execution,Playbooks deployed; SOC trained,1. Trigger test incident; 2. Playbook executes; 3. SOC reviews; 4. Incident closed,Playbook automated response; SOC notification; Incident tracked,High,Not Started
+

@@ -1,6 +1,31 @@
-Test_Phase,Test_Category,Test_ID,Test_Name,Description,Prerequisites,Expected_Result,Priority,Duration,Responsible_Team
-Functional Testing,Core Functionality,FT001,Basic Functionality Test,Verify core solution functionality,Solution deployed and configured,All core functions operational,High,60 minutes,QA Team
-Functional Testing,Integration Testing,FT002,System Integration Test,Validate integration with existing systems,Integration points configured,All integrations functional,High,90 minutes,Integration Team
-Performance Testing,Load Testing,PT001,Performance Load Test,Test solution under expected load,Performance test environment ready,Performance meets specifications,High,120 minutes,Performance Team
-Security Testing,Security Validation,ST001,Security Configuration Test,Validate security controls and configurations,Security policies applied,All security controls operational,High,90 minutes,Security Team
-User Acceptance,Business Validation,UAT001,User Acceptance Test,Validate solution meets business requirements,User training completed,Business requirements satisfied,Medium,180 minutes,Business Users
+# Functional Tests
+#WIDTH: 10,14,26,33,26,38,33,10,12
+#ALIGN: left,left,left,left,left,left,left,center,center
+Test ID,Test Type,Test Name,Description,Pre-conditions,Test Steps,Expected Results,Priority,Status
+FT-001,Unit,Email Migration Validation,Verify mailbox migrated correctly to Exchange Online,Mailbox migrated; User authenticated,1. Login to Outlook; 2. Verify inbox; 3. Check sent items; 4. Verify calendar,All messages present; Folder structure preserved; Calendar intact,Critical,Not Started
+FT-002,Unit,OneDrive Sync Validation,Verify Known Folder Move syncs user files,KFM configured; OneDrive client installed,1. Login to Windows; 2. Check OneDrive status; 3. Verify Desktop/Documents sync,Files syncing; Green checkmarks; Files accessible,Critical,Not Started
+FT-003,Integration,Teams Chat & Meetings,Verify Teams collaboration functionality,Teams deployed; User licensed,1. Send chat message; 2. Start meeting; 3. Share screen; 4. Record meeting,Chat delivered; Meeting functional; Recording saved,High,Not Started
+FT-004,Integration,Teams Phone Calling,Verify PSTN calling via Teams Phone System,Phone number assigned; Direct Routing configured,1. Make outbound call; 2. Receive inbound call; 3. Check voicemail,Calls connect; Audio clear; Voicemail transcribed,High,Not Started
+FT-005,System,SharePoint Site Permissions,Verify SharePoint permissions mapped correctly,SharePoint site created; Permissions configured,1. Access site as owner; 2. Access as member; 3. Test external sharing,Permissions enforced; External sharing blocked per policy,High,Not Started
+FT-006,System,Hybrid Exchange Mail Flow,Verify email flows between on-prem and cloud,Hybrid Exchange configured; Both mailboxes active,1. Send email on-prem to cloud; 2. Send cloud to on-prem; 3. Verify delivery,Email delivered both directions; No delays,Critical,Not Started
+
+# Non-Functional Tests
+#WIDTH: 10,14,22,38,30,44,38,10,12
+#ALIGN: left,left,left,left,left,left,left,center,center
+Test ID,Test Type,Test Name,Description,Pre-conditions,Test Steps,Expected Results,Priority,Status
+NFT-001,Security,MFA Enforcement Validation,Verify MFA required for all M365 access,Conditional Access policy enabled; MFA configured,1. Attempt login without MFA; 2. Verify MFA prompt; 3. Complete MFA,Access blocked without MFA; MFA prompt displayed; Access granted after MFA,Critical,Not Started
+NFT-002,Security,Conditional Access Device Compliance,Verify non-compliant devices blocked,CA policy enabled; Test device non-compliant,1. Access M365 from non-compliant device; 2. Verify block message,Access denied; Compliance error displayed; Event logged,Critical,Not Started
+NFT-003,Security,DLP Policy Validation,Verify DLP blocks sensitive data sharing,DLP policy enabled; Test document with SSN,1. Create document with SSN; 2. Attempt external sharing; 3. Verify block,External sharing blocked; DLP tip displayed; Admin notified,High,Not Started
+NFT-004,Performance,Teams Call Quality,Verify acceptable call quality metrics,Teams Phone deployed; QoS configured,1. Make test call; 2. Monitor call quality dashboard; 3. Check MOS score,MOS score > 3.5; Jitter < 30ms; Packet loss < 1%,High,Not Started
+NFT-005,Reliability,Service Availability,Verify M365 services meet 99.9% SLA,M365 tenant operational; Monitoring enabled,1. Monitor service health for 30 days; 2. Track incidents; 3. Calculate uptime,Availability >= 99.9%; No critical outages,High,Not Started
+
+# User Acceptance Tests
+#WIDTH: 10,20,29,33,26,38,33,10,12
+#ALIGN: left,left,left,left,left,left,left,center,center
+Test ID,Test Type,Test Name,Description,Pre-conditions,Test Steps,Expected Results,Priority,Status
+UAT-001,Business Process,End-to-End Email Workflow,Validate email workflow meets business needs,User migrated; Outlook configured,1. Send email with attachment; 2. Reply with tracked changes; 3. Schedule meeting,Email workflow seamless; User satisfied with experience,High,Not Started
+UAT-002,Business Process,Document Collaboration,Validate real-time co-authoring in SharePoint,SharePoint site created; Users have access,1. Open document; 2. Co-author with colleague; 3. Check version history,Co-authoring functional; Versions tracked; User satisfied,High,Not Started
+UAT-003,User Interface,Teams Meeting Experience,Validate Teams meetings meet user expectations,Teams deployed; User trained,1. Join scheduled meeting; 2. Share screen; 3. Use chat during meeting,Meeting experience positive; All features functional,Medium,Not Started
+UAT-004,Business Process,Mobile Email Access,Validate Outlook mobile meets business needs,Intune enrolled; Outlook mobile installed,1. Access email on mobile; 2. View calendar; 3. Join Teams meeting,Mobile access seamless; User can work remotely,High,Not Started
+UAT-005,Business Process,Security Policy Experience,Validate security policies don't impede work,CA policies enabled; MFA enrolled,1. Login with MFA; 2. Access from compliant device; 3. Share document,Security transparent; No workflow disruption; User satisfied,Medium,Not Started
+

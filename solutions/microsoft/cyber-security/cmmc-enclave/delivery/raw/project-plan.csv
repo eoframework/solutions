@@ -1,51 +1,29 @@
-Task ID,Task Name,Phase,Start Date,End Date,Duration (Days),Predecessor,Assigned To,Status,Priority,Dependencies,Deliverables,Success Criteria
-1,Project Initiation and Charter Development,Planning,2024-01-15,2024-02-15,31,,Project Manager,Completed,Critical,Executive sponsorship,CMMC Project Charter and Executive Approval,Executive approval and CISO endorsement
-2,CMMC Requirements Analysis and Gap Assessment,Planning,2024-01-22,2024-03-22,60,1,CMMC Compliance Lead,Completed,Critical,Current security posture audit,CMMC Level 3 Gap Analysis Report,100% CMMC requirement identification
-3,Regulatory and Legal Compliance Review,Planning,2024-02-01,2024-03-15,43,1,Legal Counsel,Completed,High,DoD contract review,Legal compliance framework and recommendations,Legal risk mitigation strategy approved
-4,Security Architecture Design and Planning,Planning,2024-02-15,2024-04-15,60,2,Security Architect,Completed,Critical,Gap assessment completion,Secure Enclave Architecture Design,Architecture review board approval
-5,Risk Assessment and Threat Modeling,Planning,2024-02-22,2024-04-22,60,2,Risk Manager,Completed,High,Threat landscape analysis,Comprehensive Risk Register and Mitigation Plan,Risk acceptance by executive team
-6,Budget Planning and Resource Allocation,Planning,2024-02-01,2024-03-15,43,1,Finance Manager,Completed,High,Budget approval process,Financial plan and resource allocation matrix,CFO budget approval
-7,Procurement of Security Technologies,Implementation,2024-03-15,2024-05-15,61,4,Procurement Manager,Completed,High,Vendor security assessment,Microsoft security stack and compliance tools,Technology procurement and delivery
-8,Microsoft Azure AD Premium Implementation,Implementation,2024-04-01,2024-06-01,61,7,Identity Management Team,Completed,Critical,Azure licensing,Azure AD Premium P2 with Conditional Access,Identity framework operational
-9,Microsoft Defender Deployment,Implementation,2024-04-15,2024-07-15,91,7,Endpoint Security Team,Completed,Critical,Endpoint inventory,Microsoft Defender for Endpoint on all systems,100% endpoint protection coverage
-10,Network Segmentation and Zero Trust Implementation,Implementation,2024-05-01,2024-08-01,92,4,Network Security Team,Completed,Critical,Network architecture approval,Segmented network with micro-segmentation,Network segmentation validation
-11,Data Classification and Protection Implementation,Implementation,2024-05-15,2024-08-15,92,7,Data Protection Team,Completed,Critical,Data inventory completion,Microsoft Purview Information Protection,Data classification and labeling operational
-12,Privileged Access Management (PAM) Setup,Implementation,2024-06-01,2024-08-31,91,8,PAM Team,Completed,Critical,Identity platform readiness,Azure AD PIM and privileged access controls,PAM controls operational and tested
-13,Security Monitoring and SIEM Integration,Implementation,2024-06-15,2024-09-15,92,9,SOC Team,Completed,Critical,Security tool deployment,24/7 SOC integration and monitoring capabilities,Security monitoring operational
-14,Vulnerability Management System Implementation,Implementation,2024-07-01,2024-09-30,91,9,Vulnerability Management Team,Completed,High,Security tool integration,Automated vulnerability scanning and remediation,Vulnerability management process operational
-15,Incident Response Framework Development,Implementation,2024-07-15,2024-10-15,92,13,Incident Response Team,Completed,Critical,SOC operational,IR playbooks and automated response capabilities,Incident response procedures validated
-16,Security Policy Development and Documentation,Implementation,2024-05-01,2024-08-31,122,5,Policy Management Team,Completed,High,Risk assessment completion,127 CMMC-aligned security policies,Policy framework approved and published
-17,Staff Security Training Program Development,Implementation,2024-06-01,2024-09-30,121,16,Training Development Team,Completed,High,Policy completion,Role-based cybersecurity training curriculum,Training program approved and ready
-18,Physical Security Controls Implementation,Implementation,2024-07-01,2024-09-30,91,4,Physical Security Team,Completed,Medium,Facility assessment,Enhanced physical security measures,Physical security controls validated
-19,Backup and Disaster Recovery Implementation,Implementation,2024-07-15,2024-10-31,108,4,Business Continuity Team,Completed,High,Architecture completion,Comprehensive backup and DR capabilities,DR testing successful
-20,Supply Chain Security Assessment,Implementation,2024-08-01,2024-11-01,92,5,Supply Chain Team,Completed,Medium,Vendor inventory,Vendor security assessments and compliance,Supply chain risk mitigation
-21,Configuration Management and Hardening,Implementation,2024-08-15,2024-11-15,92,10,Configuration Management Team,Completed,High,Network segmentation,System hardening and configuration baselines,Security baseline compliance achieved
-22,Encryption Implementation,Implementation,2024-08-01,2024-10-31,91,11,Encryption Team,Completed,Critical,Data protection readiness,AES-256 encryption for data at rest and in transit,Encryption validation completed
-23,Penetration Testing and Security Assessment,Testing,2024-09-01,2024-11-30,90,15,External Security Assessors,Completed,Critical,Security controls operational,Independent security testing and validation,Security assessment passed
-24,CMMC Level 3 Compliance Testing,Testing,2024-09-15,2024-12-15,91,23,CMMC Assessment Team,Completed,Critical,Security implementation complete,Comprehensive CMMC compliance validation,CMMC Level 3 compliance achieved
-25,User Acceptance Testing for Security Controls,Testing,2024-10-01,2024-12-15,75,17,User Acceptance Team,Completed,High,Training completion,User workflow validation with security controls,User acceptance criteria met
-26,Security Operations Center (SOC) Testing,Testing,2024-10-15,2024-12-31,77,13,SOC Operations Team,Completed,Critical,SOC deployment,24/7 monitoring and response capability testing,SOC operational requirements met
-27,Business Continuity and Disaster Recovery Testing,Testing,2024-11-01,2025-01-15,75,19,BC Testing Team,Completed,High,DR implementation,Comprehensive DR testing and validation,DR RTO and RPO targets achieved
-28,Executive and Leadership Security Briefings,Training,2024-09-01,2024-11-30,90,17,Executive Training Team,Completed,Critical,Training program readiness,Executive cybersecurity awareness and governance,100% executive training completion
-29,Security Awareness Training Rollout,Training,2024-10-01,2025-01-31,122,17,Security Training Team,Completed,High,Training platform readiness,Organization-wide security awareness training,100% staff training certification
-30,Specialized Role-Based Security Training,Training,2024-10-15,2025-02-15,123,28,Specialized Training Team,Completed,High,Role identification,Advanced security training for key roles,95% specialized role training completion
-31,Security Champion Program Launch,Training,2024-11-01,2025-02-28,119,29,Security Champion Lead,Completed,Medium,Training completion,Security champion network and ongoing education,Security champion network operational
-32,Pre-Production Security Validation,Deployment,2024-12-01,2025-01-15,45,24,Security Validation Team,Completed,Critical,CMMC compliance achieved,Pre-production security control validation,Security validation checklist completed
-33,Production Environment Hardening,Deployment,2024-12-15,2025-02-15,62,32,Production Security Team,Completed,Critical,Security validation,Production environment security implementation,Production security baseline achieved
-34,CMMC Enclave Go-Live,Deployment,2025-01-15,2025-02-01,17,33,Project Manager,Completed,Critical,All preparations completed,Live CMMC-compliant production environment,Successful production launch with zero incidents
-35,Post-Deployment Security Monitoring,Operations,2025-01-15,2025-04-15,90,34,Security Operations Team,In Progress,Critical,Production deployment,Continuous security monitoring and alerting,Security KPI targets achieved
-36,Hypercare Security Support Period,Support,2025-01-15,2025-04-30,105,34,Security Support Team,In Progress,Critical,Production deployment,Intensive security support and incident response,Security incident response targets met
-37,CMMC Compliance Maintenance Program,Operations,2025-02-01,Ongoing,Ongoing,34,Compliance Operations Team,In Progress,Critical,CMMC certification,Ongoing compliance monitoring and reporting,Continuous CMMC compliance maintained
-38,Security Metrics and KPI Reporting,Operations,2025-02-01,Ongoing,Ongoing,35,Security Analytics Team,In Progress,High,Monitoring operational,Regular security performance reporting,Monthly security dashboard delivery
-39,Quarterly Security Assessments,Operations,2025-04-01,Ongoing,Quarterly,37,Security Assessment Team,Planned,High,Compliance program operational,Quarterly independent security assessments,Quarterly assessment completion and remediation
-40,Annual CMMC Recertification Preparation,Operations,2025-10-01,2025-12-31,91,37,CMMC Certification Team,Planned,Critical,Annual compliance cycle,Annual CMMC assessment preparation and execution,Successful CMMC recertification
-41,Security Technology Refresh Planning,Operations,2025-06-01,2025-09-30,121,35,Technology Planning Team,Planned,Medium,Technology lifecycle assessment,Security technology refresh and upgrade planning,Technology currency maintenance
-42,Advanced Threat Protection Enhancement,Enhancement,2025-03-01,2025-06-30,121,36,Advanced Security Team,Planned,Medium,Hypercare completion,Advanced AI-powered security capabilities,Enhanced threat detection and response
-43,Supply Chain Security Program Expansion,Enhancement,2025-05-01,2025-08-31,122,20,Supply Chain Security Team,Planned,Medium,Initial assessment completion,Extended supply chain security requirements,Supply chain security program maturity
-44,Security Automation and Orchestration,Enhancement,2025-04-01,2025-07-31,122,38,Security Automation Team,Planned,Medium,Metrics program operational,SOAR implementation and workflow automation,Security process automation achieved
-45,CMMC Level 4 Readiness Assessment,Enhancement,2025-07-01,2025-10-31,122,39,CMMC Advanced Team,Planned,Low,Level 3 certification maintenance,CMMC Level 4 gap analysis and planning,Level 4 readiness assessment completed
-46,Zero Trust Architecture Extension,Enhancement,2025-06-01,2025-12-31,213,42,Zero Trust Team,Planned,Medium,Advanced threat protection,Extended zero trust across all business systems,Zero trust maturity advancement
-47,Quantum-Safe Cryptography Preparation,Enhancement,2025-09-01,2026-03-31,211,22,Cryptography Team,Planned,Low,Current encryption operational,Post-quantum cryptography readiness planning,Quantum-safe cryptography roadmap
-48,Global Security Operations Center,Enhancement,2025-08-01,2026-02-28,211,44,Global SOC Team,Planned,Low,Security automation operational,24/7 global security operations capability,Global SOC operational capability
-49,AI-Powered Security Analytics,Enhancement,2025-10-01,2026-04-30,211,46,AI Security Team,Planned,Low,Zero trust extension,Machine learning-based security analytics and prediction,AI security analytics operational
-50,Security Culture Transformation Program,Enhancement,2025-11-01,Ongoing,Ongoing,31,Security Culture Team,Planned,Medium,Champion program maturity,Advanced security culture and behavior change,Security culture maturity assessment
+# Phase 1: Gap Assessment & Design
+#WIDTH: 14,20,45,25,18,18
+#ALIGN: left,left,left,left,center,center
+Milestone ID,Target Date,Milestone,Deliverables,Owner,Status
+MS-1.1,[DATE+2w],NIST 800-171 Gap Assessment Complete,Gap assessment report; Initial SPRS score,Security Architect,Not Started
+MS-1.2,[DATE+4w],System Security Plan Draft Complete,SSP with 110 control narratives; Evidence mapping,ISSO/ISSM,Not Started
+MS-1.3,[DATE+6w],GCC High Architecture Finalized,Detailed design document; Network diagrams; Cost model,Solution Architect,Not Started
+MS-1.4,[DATE+8w],Phase 1 Design Approval,Signed design approval; ExpressRoute ordered,Project Manager,Not Started
+
+# Phase 2: GCC High Deployment
+#WIDTH: 14,20,45,25,18,18
+#ALIGN: left,left,left,left,center,center
+Milestone ID,Target Date,Milestone,Deliverables,Owner,Status
+MS-2.1,[DATE+10w],M365 GCC High Tenant Configured,Tenant configured; Conditional Access policies; DLP,M365 Engineer,Not Started
+MS-2.2,[DATE+12w],Azure Government Resources Deployed,VNet deployed; Key Vault; Sentinel workspace,Azure Engineer,Not Started
+MS-2.3,[DATE+13w],Pilot Migration Complete (10 Users),10 users migrated; CAC/PIV validated; Pilot report,Migration Lead,Not Started
+MS-2.4,[DATE+16w],Production Migration Complete (50 Users),All 50 users migrated; Email/files migrated; DNS cutover,Migration Lead,Not Started
+MS-2.5,[DATE+17w],Sentinel SIEM Operational,Data connectors enabled; Playbooks deployed; Dashboards,Security Engineer,Not Started
+
+# Phase 3: CMMC Preparation
+#WIDTH: 14,20,45,25,18,18
+#ALIGN: left,left,left,left,center,center
+Milestone ID,Target Date,Milestone,Deliverables,Owner,Status
+MS-3.1,[DATE+20w],Pre-Assessment Validation Complete,All 110 controls validated; Evidence package complete,ISSO/ISSM,Not Started
+MS-3.2,[DATE+21w],C3PAO Readiness Review,Pre-assessment completed; Remediation items addressed,Security Architect,Not Started
+MS-3.3,[DATE+24w],C3PAO Assessment Complete,Assessment completed; Findings documented,C3PAO,Not Started
+MS-3.4,[DATE+25w],CMMC Level 2 Certification Achieved,CMMC certificate issued; SPRS score +110 submitted,Project Manager,Not Started
+MS-3.5,[DATE+26w],Hypercare Complete and Handover,30-day hypercare complete; Training delivered; Runbooks,Project Manager,Not Started
+
