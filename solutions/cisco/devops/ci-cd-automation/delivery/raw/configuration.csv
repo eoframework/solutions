@@ -1,10 +1,52 @@
-Component,Parameter,Environment,Value,Data_Type,Required,Description,Validation_Rule,Default_Value
-Solution Configuration,Solution Name,All,Enterprise Solution,String,Yes,Solution identifier,Valid solution name,Enterprise Solution
-Environment,Environment Type,Dev,Development,String,Yes,Environment designation,dev|test|prod,dev
-Environment,Environment Type,Test,Test,String,Yes,Environment designation,dev|test|prod,test
-Environment,Environment Type,Prod,Production,String,Yes,Environment designation,dev|test|prod,prod
-Network Configuration,Network Mode,All,Enterprise,String,Yes,Network configuration mode,Basic|Standard|Enterprise,Enterprise
-Security Configuration,Security Level,All,High,String,Yes,Security configuration level,Low|Medium|High,High
-Performance Configuration,Performance Tier,All,Standard,String,Yes,Performance configuration tier,Basic|Standard|Premium,Standard
-Monitoring Configuration,Monitoring Enabled,All,true,Boolean,Yes,Enable comprehensive monitoring,true|false,true
-Backup Configuration,Backup Enabled,All,true,Boolean,Yes,Enable automated backups,true|false,true
+#WIDTH: 28,18,12,30,48,10,12,33,16,18,24,42,12
+#ALIGN: left,left,center,left,left,center,left,left,center,left,left,left,center
+Parameter Name,Category,Environment,Default Value,Description,Required,Data Type,Validation Rules,Security Level,Owner Team,Dependencies,Notes,Last Updated
+DNAC_HOSTNAME,Cisco DNA Center,All,dnac.client.local,DNA Center appliance hostname,Yes,String,Valid FQDN,Confidential,Network Team,Network connectivity,Management interface,[DATE]
+DNAC_API_VERSION,Cisco DNA Center,All,v2,DNA Center API version,Yes,String,v1|v2,Public,Network Team,DNAC_HOSTNAME,Use v2 for latest features,[DATE]
+DNAC_ADMIN_USER,Cisco DNA Center,All,dnac-admin,DNA Center administrative username,Yes,String,Valid username,Confidential,Network Team,DNAC deployment,Initial admin account,[DATE]
+DNAC_SSL_VERIFY,Cisco DNA Center,All,true,Verify SSL certificates for API calls,Yes,Boolean,true|false,Public,Network Team,Valid certificates,Disable only for testing,[DATE]
+DNAC_TIMEOUT,Cisco DNA Center,All,30,API request timeout in seconds,Yes,Integer,10-300,Public,Network Team,None,Increase for large operations,[DATE]
+NSO_HOSTNAME,Cisco NSO,All,nso.client.local,Network Services Orchestrator hostname,Yes,String,Valid FQDN,Confidential,Network Team,Network connectivity,REST/RESTCONF interface,[DATE]
+NSO_PORT,Cisco NSO,All,8443,NSO RESTCONF API port,Yes,Integer,Valid port number,Public,Network Team,Firewall rules,HTTPS port,[DATE]
+NSO_ADMIN_USER,Cisco NSO,All,nso-admin,NSO administrative username,Yes,String,Valid username,Confidential,Network Team,NSO deployment,Admin access,[DATE]
+NSO_NED_PACKAGES,Cisco NSO,All,cisco-ios cisco-nxos cisco-asa,Network Element Drivers installed,Yes,String,Space-separated NED names,Public,Network Team,NED licensing,Per device type,[DATE]
+NSO_COMMIT_MODE,Cisco NSO,All,commit-queue,Transaction commit mode,Yes,String,sync|commit-queue,Public,Network Team,None,Async recommended,[DATE]
+GITLAB_URL,GitLab,All,https://gitlab.client.local,GitLab Enterprise server URL,Yes,String,Valid HTTPS URL,Confidential,DevOps Team,Network connectivity,Self-hosted instance,[DATE]
+GITLAB_API_VERSION,GitLab,All,v4,GitLab API version,Yes,String,v4,Public,DevOps Team,GITLAB_URL,Current stable API,[DATE]
+GITLAB_RUNNER_TAG,GitLab,All,cisco-automation,Runner tag for automation jobs,Yes,String,Valid runner tag,Public,DevOps Team,Runner configuration,Dedicated runners,[DATE]
+GITLAB_ARTIFACT_EXPIRY,GitLab,All,30 days,Pipeline artifact retention period,Yes,String,Valid duration,Public,DevOps Team,Storage capacity,Adjust per storage,[DATE]
+JENKINS_URL,Jenkins,All,https://jenkins.client.local,Jenkins automation server URL,Yes,String,Valid HTTPS URL,Confidential,DevOps Team,Network connectivity,Blue Ocean enabled,[DATE]
+JENKINS_ADMIN_USER,Jenkins,All,jenkins-admin,Jenkins administrative username,Yes,String,Valid username,Confidential,DevOps Team,Jenkins deployment,Pipeline admin,[DATE]
+JENKINS_SHARED_LIB,Jenkins,All,cisco-pipeline-lib,Shared library for Cisco pipelines,Yes,String,Valid library name,Public,DevOps Team,Library repo,Common functions,[DATE]
+ANSIBLE_INVENTORY,Ansible,All,/etc/ansible/cisco_inventory,Ansible inventory file path,Yes,String,Valid file path,Confidential,DevOps Team,File system access,Dynamic inventory,[DATE]
+ANSIBLE_COLLECTIONS,Ansible,All,cisco.ios cisco.nxos cisco.asa,Required Ansible collections,Yes,String,Space-separated collection names,Public,DevOps Team,Ansible Galaxy,Latest versions,[DATE]
+ANSIBLE_VAULT_ID,Ansible,All,cisco_vault,Ansible Vault identity for secrets,Yes,String,Valid vault ID,Secret,DevOps Team,Vault password file,Encrypted credentials,[DATE]
+ANSIBLE_CALLBACK,Ansible,All,json,Ansible output callback plugin,Yes,String,json|yaml|minimal,Public,DevOps Team,None,JSON for parsing,[DATE]
+TERRAFORM_BACKEND,Terraform,All,gitlab,Terraform state backend type,Yes,String,local|s3|gitlab|consul,Public,DevOps Team,Backend access,GitLab recommended,[DATE]
+TERRAFORM_WORKSPACE,Terraform,All,default,Default Terraform workspace,Yes,String,Valid workspace name,Public,DevOps Team,Backend configured,Per environment,[DATE]
+TF_CISCO_PROVIDER,Terraform,All,CiscoDevNet/aci,Cisco ACI Terraform provider,Yes,String,Valid provider name,Public,DevOps Team,Provider registry,Latest version,[DATE]
+TF_VAR_PARALLELISM,Terraform,All,10,Terraform parallelism limit,Yes,Integer,1-50,Public,DevOps Team,None,Adjust per resources,[DATE]
+VAULT_ADDR,HashiCorp Vault,All,https://vault.client.local,HashiCorp Vault server address,Yes,String,Valid HTTPS URL,Confidential,Security Team,Network connectivity,Secrets management,[DATE]
+VAULT_AUTH_METHOD,HashiCorp Vault,All,approle,Vault authentication method,Yes,String,token|approle|ldap,Public,Security Team,Auth backend,AppRole for automation,[DATE]
+VAULT_SECRET_PATH,HashiCorp Vault,All,secret/cisco,Vault secret path for Cisco creds,Yes,String,Valid path,Confidential,Security Team,Secret engine,KV v2 engine,[DATE]
+NETBOX_URL,NetBox,All,https://netbox.client.local,NetBox DCIM/IPAM server URL,Yes,String,Valid HTTPS URL,Confidential,Network Team,Network connectivity,Source of truth,[DATE]
+NETBOX_API_TOKEN,NetBox,All,[api-token],NetBox API authentication token,Yes,String,Valid API token,Secret,Network Team,User account,Read/write access,[DATE]
+PROMETHEUS_URL,Monitoring,All,https://prometheus.client.local,Prometheus metrics server URL,Yes,String,Valid HTTPS URL,Confidential,Operations Team,Network connectivity,Metrics collection,[DATE]
+GRAFANA_URL,Monitoring,All,https://grafana.client.local,Grafana visualization URL,Yes,String,Valid HTTPS URL,Confidential,Operations Team,Prometheus data,Dashboards,[DATE]
+ALERTMANAGER_URL,Monitoring,All,https://alertmanager.client.local,Alertmanager notification URL,Yes,String,Valid HTTPS URL,Confidential,Operations Team,Alert rules,PagerDuty integration,[DATE]
+SPLUNK_HEC_URL,Logging,All,https://splunk.client.local:8088,Splunk HTTP Event Collector URL,Yes,String,Valid HTTPS URL,Confidential,Security Team,Network connectivity,Log aggregation,[DATE]
+SPLUNK_HEC_TOKEN,Logging,All,[hec-token],Splunk HEC authentication token,Yes,String,Valid HEC token,Secret,Security Team,HEC input,Pipeline logs,[DATE]
+DOCKER_REGISTRY,Container,All,registry.client.local,Private Docker registry hostname,Yes,String,Valid hostname,Confidential,DevOps Team,Registry deployed,Harbor registry,[DATE]
+DOCKER_NAMESPACE,Container,All,cisco-automation,Docker image namespace,Yes,String,Valid namespace,Public,DevOps Team,DOCKER_REGISTRY,Organization prefix,[DATE]
+K8S_CLUSTER_NAME,Kubernetes,All,cisco-devops,Kubernetes cluster name,Yes,String,Valid cluster name,Confidential,DevOps Team,K8s deployed,Runner cluster,[DATE]
+K8S_NAMESPACE,Kubernetes,All,ci-cd-automation,Default Kubernetes namespace,Yes,String,Valid namespace,Public,DevOps Team,K8S_CLUSTER_NAME,Pipeline namespace,[DATE]
+SERVICENOW_URL,ITSM,All,https://client.service-now.com,ServiceNow instance URL,Yes,String,Valid HTTPS URL,Confidential,Operations Team,ServiceNow license,ITSM integration,[DATE]
+SERVICENOW_USER,ITSM,All,svc_cicd_automation,ServiceNow integration account,Yes,String,Valid username,Confidential,Operations Team,User created,API access,[DATE]
+PIPELINE_TIMEOUT,Pipeline,All,3600,Default pipeline timeout in seconds,Yes,Integer,300-7200,Public,DevOps Team,None,1 hour default,[DATE]
+PIPELINE_RETRY_COUNT,Pipeline,All,3,Number of retries on failure,Yes,Integer,0-5,Public,DevOps Team,None,Exponential backoff,[DATE]
+APPROVAL_REQUIRED,Pipeline,All,true,Require approval for production,Yes,Boolean,true|false,Public,DevOps Team,Approver groups,Change control,[DATE]
+NOTIFICATION_CHANNEL,Notifications,All,#cicd-alerts,Slack channel for notifications,Yes,String,Valid channel name,Confidential,DevOps Team,Slack integration,Pipeline alerts,[DATE]
+SMTP_SERVER,Notifications,All,smtp.client.local,SMTP server for email notifications,Yes,String,Valid hostname,Confidential,Operations Team,Mail relay,Report delivery,[DATE]
+LOG_RETENTION_DAYS,Operations,All,90,Pipeline log retention in days,Yes,Integer,30-365,Public,Operations Team,Storage capacity,Compliance requirement,[DATE]
+BACKUP_SCHEDULE,Operations,All,0 2 * * *,Configuration backup cron schedule,Yes,String,Valid cron expression,Public,Operations Team,Backup storage,Daily at 2 AM,[DATE]
+
