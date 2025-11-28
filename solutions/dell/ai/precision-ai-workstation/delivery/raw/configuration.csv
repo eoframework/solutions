@@ -1,10 +1,35 @@
-Component,Parameter,Environment,Value,Data_Type,Required,Description,Validation_Rule,Default_Value
-Dell Infrastructure,Solution Name,All,Dell Enterprise Solution,String,Yes,Dell solution identifier,Valid solution name,Dell Enterprise Solution
-Hardware Configuration,Server Model,All,PowerEdge R750,String,Yes,Dell server model for deployment,Valid PowerEdge model,PowerEdge R750
-Hardware Configuration,Memory Configuration,All,128GB DDR4,String,Yes,Server memory specification,Valid memory config,128GB DDR4
-Hardware Configuration,Storage Configuration,All,NVMe SSD 1TB,String,Yes,Primary storage configuration,Valid storage config,NVMe SSD 1TB
-Network Configuration,Network Interface,All,25GbE Dual Port,String,Yes,Network interface specification,Valid network config,25GbE Dual Port
-Dell Management,iDRAC Version,All,iDRAC9,String,Yes,Integrated Dell Remote Access Controller,Valid iDRAC version,iDRAC9
-Dell Management,OpenManage Version,All,3.10.0,String,Yes,Dell OpenManage Enterprise version,Valid version number,3.10.0
-Security Configuration,TPM Module,All,TPM 2.0,String,Yes,Trusted Platform Module specification,TPM 1.2|TPM 2.0,TPM 2.0
-Security Configuration,Secure Boot,All,Enabled,Boolean,Yes,UEFI Secure Boot configuration,true|false,true
+#WIDTH: 28,16,14,24,40,10,12,30,14,18,24,36,14
+#ALIGN: left,left,center,left,left,center,left,left,center,left,left,left,center
+Parameter Name,Category,Environment,Default Value,Description,Required,Data Type,Validation Rules,Security Level,Owner Team,Dependencies,Notes,Last Updated
+WORKSTATION_COUNT,Hardware,All,10,Number of Dell Precision 7960 workstations,Yes,Integer,1-50,Public,Infrastructure,Data center space,Scale based on team size,[DATE]
+GPU_MODEL,Hardware,All,RTX A6000,NVIDIA GPU model installed in workstations,Yes,String,Valid NVIDIA model,Public,Infrastructure,CUDA compatibility,48GB GDDR6 memory,[DATE]
+GPU_MEMORY_GB,Hardware,All,48,GPU memory per workstation in gigabytes,Yes,Integer,24-80,Public,Infrastructure,GPU model,Supports large model training,[DATE]
+CPU_MODEL,Hardware,All,Xeon Gold 6430,Intel processor model in each workstation,Yes,String,Valid Xeon model,Public,Infrastructure,Motherboard,Dual socket 64 cores total,[DATE]
+RAM_GB,Hardware,All,512,System RAM per workstation in gigabytes,Yes,Integer,128-1024,Public,Infrastructure,CPU model,DDR5 for preprocessing,[DATE]
+NVME_SIZE_TB,Hardware,All,4,Local NVMe SSD capacity per workstation in TB,Yes,Integer,2-8,Public,Infrastructure,None,7000 MB/s read performance,[DATE]
+POWERSCALE_MODEL,Storage,All,F600,Dell PowerScale NAS appliance model,Yes,String,Valid PowerScale model,Public,Storage,Network infrastructure,All-flash for performance,[DATE]
+POWERSCALE_CAPACITY_TB,Storage,All,100,PowerScale usable capacity in terabytes,Yes,Integer,50-500,Public,Storage,License,Expandable to 500TB,[DATE]
+NFS_VERSION,Storage,All,4.1,NFS protocol version for PowerScale shares,Yes,String,3|4|4.1|4.2,Public,Storage,Client OS support,Use 4.1 for best performance,[DATE]
+STORAGE_VLAN_ID,Network,All,200,VLAN ID for storage network traffic,Yes,Integer,1-4094,Confidential,Network,Switch configuration,Isolate storage traffic,[DATE]
+MGMT_VLAN_ID,Network,All,100,VLAN ID for management network,Yes,Integer,1-4094,Confidential,Network,Switch configuration,iDRAC and SSH access,[DATE]
+NETWORK_SPEED_GBPS,Network,All,10,Network speed to PowerScale in Gbps,Yes,Integer,1-100,Public,Network,NIC and switch,10GbE standard deployment,[DATE]
+JUMBO_FRAMES_MTU,Network,All,9000,MTU size for jumbo frames on storage network,Yes,Integer,1500-9216,Public,Network,All network devices,Required for NFS performance,[DATE]
+OS_VERSION,Software,All,Ubuntu 22.04 LTS,Operating system version on workstations,Yes,String,Valid Ubuntu version,Public,Systems,NVIDIA driver support,Long-term support release,[DATE]
+NVIDIA_DRIVER_VERSION,Software,All,535.86.05,NVIDIA driver version for GPU support,Yes,String,Valid driver version,Public,Systems,CUDA version,Tested with Ubuntu 22.04,[DATE]
+CUDA_VERSION,Software,All,12.2,NVIDIA CUDA toolkit version,Yes,String,Valid CUDA version,Public,ML Engineering,Driver version,PyTorch TensorFlow compatible,[DATE]
+CUDNN_VERSION,Software,All,8.9,NVIDIA cuDNN library version,Yes,String,Valid cuDNN version,Public,ML Engineering,CUDA version,Deep learning optimization,[DATE]
+PYTORCH_VERSION,Software,All,2.1,PyTorch framework version,Yes,String,Valid PyTorch version,Public,Data Science,CUDA version,Primary ML framework,[DATE]
+TENSORFLOW_VERSION,Software,All,2.14,TensorFlow framework version,Yes,String,Valid TF version,Public,Data Science,CUDA version,Secondary ML framework,[DATE]
+CONDA_VERSION,Software,All,23.10,Miniconda package manager version,Yes,String,Valid Conda version,Public,Data Science,None,Environment management,[DATE]
+JUPYTER_PORT,Application,All,8888,Default port for Jupyter Lab server,Yes,Integer,1024-65535,Public,Data Science,None,Access via SSH tunnel,[DATE]
+DATADOG_API_KEY,Monitoring,All,[api-key],Datadog API key for agent authentication,Yes,String,Valid API key format,Secret,Operations,Datadog account,Obtain from Datadog console,[DATE]
+DATADOG_SITE,Monitoring,All,datadoghq.com,Datadog site for data ingestion,Yes,String,Valid Datadog site,Public,Operations,API key,US or EU site,[DATE]
+GPU_TEMP_ALERT_C,Monitoring,All,80,GPU temperature threshold for alerts in Celsius,Yes,Integer,60-90,Public,Operations,Monitoring agent,Alert before throttling,[DATE]
+GPU_UTIL_TARGET_PCT,Monitoring,All,80,Target GPU utilization percentage,Yes,Integer,50-100,Public,Operations,Monitoring agent,80% per SOW target,[DATE]
+SSH_PORT,Security,All,22,SSH server port for remote access,Yes,Integer,1-65535,Public,Security,Firewall rules,Standard SSH port,[DATE]
+SSH_KEY_TYPE,Security,All,ed25519,SSH key algorithm for authentication,Yes,String,rsa|ed25519|ecdsa,Public,Security,SSH client,Modern secure algorithm,[DATE]
+USER_QUOTA_TB,Security,All,10,Default storage quota per user in TB,Yes,Integer,1-50,Public,Storage,PowerScale quotas,Adjustable per user,[DATE]
+BACKUP_RETENTION_DAYS,Operations,All,30,PowerScale snapshot retention in days,Yes,Integer,7-365,Public,Storage,Snapshot policy,Balance cost and recovery,[DATE]
+SNAPSHOT_FREQUENCY_HOURS,Operations,All,4,PowerScale snapshot frequency in hours,Yes,Integer,1-24,Public,Storage,Snapshot policy,4-hour RPO achieved,[DATE]
+ADMIN_GROUP,Security,All,ai-admins,Linux group for administrator access,Yes,String,Valid group name,Confidential,Security,LDAP integration,Sudo access granted,[DATE]
+USER_GROUP,Security,All,data-scientists,Linux group for data scientist access,Yes,String,Valid group name,Confidential,Security,LDAP integration,Standard user access,[DATE]

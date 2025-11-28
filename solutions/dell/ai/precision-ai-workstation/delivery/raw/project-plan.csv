@@ -1,43 +1,75 @@
-Task_ID,Phase,Task_Name,Description,Start_Date,End_Date,Duration_Days,Predecessor,Resource_Assignment,Effort_Hours,Milestone,Status,Risk_Level,Dependencies,Delivery_Documents
-TASK-001,Phase 1,Project Kickoff and Planning,Project initiation meeting and planning session,2024-02-01,2024-02-02,2,,EO Project Manager,16,Project Kickoff,Planned,Low,Executive approval,project-plan.csv
-TASK-002,Phase 1,Requirements Validation,Validate and refine technical and business requirements,2024-02-03,2024-02-07,5,TASK-001,EO Sales Engineer,40,Requirements Approved,Planned,Medium,Stakeholder availability,requirements-specification.csv
-TASK-003,Phase 1,Architecture Design Review,Review and finalize solution architecture,2024-02-08,2024-02-14,7,TASK-002,EO Quarterback,56,Architecture Approved,Planned,Medium,Technical review board,detailed-design.md
-TASK-004,Phase 1,Azure Subscription Preparation,Prepare Azure subscription and initial resource groups,2024-02-15,2024-02-16,2,TASK-003,EO Engineer,16,Azure Environment Ready,Planned,Low,Subscription access,N/A
-TASK-005,Phase 1,Log Analytics Workspace Deployment,Deploy and configure Log Analytics workspace for Sentinel,2024-02-17,2024-02-19,3,TASK-004,EO Engineer,24,Workspace Deployed,Planned,Low,Azure permissions,implementation-guide.md
-TASK-006,Phase 1,Azure Sentinel Enablement,Enable Azure Sentinel on Log Analytics workspace,2024-02-20,2024-02-21,2,TASK-005,EO Engineer,16,Sentinel Enabled,Planned,Low,Workspace configuration,N/A
-TASK-007,Phase 2,Azure AD Data Connector Configuration,Configure Azure Active Directory data connector,2024-02-22,2024-02-23,2,TASK-006,EO Engineer,16,AAD Integration Complete,Planned,Medium,AAD admin permissions,N/A
-TASK-008,Phase 2,Azure Security Center Integration,Integrate Azure Security Center with Sentinel,2024-02-24,2024-02-26,3,TASK-007,EO Engineer,24,ASC Integration Complete,Planned,Medium,ASC configuration,N/A
-TASK-009,Phase 2,Microsoft 365 Defender Integration,Configure M365 Defender data connector,2024-02-27,2024-03-01,3,TASK-008,EO Engineer,24,M365 Integration Complete,Planned,Medium,M365 E5 licensing,N/A
-TASK-010,Phase 2,Windows Security Events Configuration,Deploy Azure Monitor Agent and configure security events,2024-03-02,2024-03-06,5,TASK-009,EO Engineer,40,Windows Events Configured,Planned,High,Server access and permissions,N/A
-TASK-011,Phase 2,Syslog Data Collection Setup,Configure syslog collection for network devices,2024-03-07,2024-03-12,6,TASK-010,EO Engineer,48,Syslog Collection Configured,Planned,High,Network device access,N/A
-TASK-012,Phase 2,CEF Data Source Integration,Configure Common Event Format data sources,2024-03-13,2024-03-19,7,TASK-011,EO Engineer,56,CEF Sources Configured,Planned,High,Third-party tool APIs,N/A
-TASK-013,Phase 3,Built-in Analytics Rules Deployment,Deploy and configure built-in detection rules,2024-03-20,2024-03-22,3,TASK-012,EO Sales Engineer,24,Built-in Rules Deployed,Planned,Medium,Data source validation,implementation-guide.md
-TASK-014,Phase 3,Custom Detection Rules Development,Develop organization-specific detection analytics,2024-03-23,2024-04-02,11,TASK-013,EO Sales Engineer,88,Custom Rules Deployed,Planned,High,Threat intelligence feeds,N/A
-TASK-015,Phase 3,Machine Learning Analytics Configuration,Configure ML-powered behavioral analytics,2024-04-03,2024-04-09,7,TASK-014,EO Sales Engineer,56,ML Analytics Enabled,Planned,High,Sufficient data volume,N/A
-TASK-016,Phase 3,Analytics Rules Testing and Tuning,Test and optimize detection rules for accuracy,2024-04-10,2024-04-16,7,TASK-015,EO Sales Engineer,56,Rules Optimized,Planned,Medium,Test data availability,test-plan.csv
-TASK-017,Phase 4,Incident Configuration Setup,Configure incident creation and management settings,2024-04-17,2024-04-19,3,TASK-016,EO Engineer,24,Incident Configuration Complete,Planned,Low,ITSM integration,N/A
-TASK-018,Phase 4,Automated Response Playbooks Development,Develop Logic Apps for automated incident response,2024-04-20,2024-05-01,12,TASK-017,EO Engineer,96,Playbooks Deployed,Planned,High,Integration APIs,N/A
-TASK-019,Phase 4,User Account Disable Automation,Create automated user account disable playbook,2024-05-02,2024-05-06,5,TASK-018,EO Engineer,40,Account Automation Complete,Planned,Medium,Identity management API,N/A
-TASK-020,Phase 4,Email Security Response Automation,Develop automated email security response actions,2024-05-07,2024-05-13,7,TASK-019,EO Engineer,56,Email Automation Complete,Planned,Medium,Email security API,N/A
-TASK-021,Phase 5,Threat Intelligence Integration,Configure threat intelligence data connectors,2024-05-14,2024-05-16,3,TASK-020,EO Sales Engineer,24,TI Integration Complete,Planned,Medium,TI feed subscriptions,N/A
-TASK-022,Phase 5,Watchlists and IoC Management Setup,Create and populate security watchlists,2024-05-17,2024-05-21,5,TASK-021,EO Sales Engineer,40,Watchlists Configured,Planned,Low,IoC data sources,N/A
-TASK-023,Phase 5,Advanced Hunting Queries Development,Develop advanced threat hunting queries,2024-05-22,2024-05-28,7,TASK-022,EO Sales Engineer,56,Hunting Queries Ready,Planned,Medium,KQL expertise,N/A
-TASK-024,Phase 5,Threat Hunting Platform Configuration,Configure threat hunting workspace and tools,2024-05-29,2024-06-04,7,TASK-023,EO Sales Engineer,56,Hunting Platform Ready,Planned,Low,Platform access,N/A
-TASK-025,Phase 6,Security Operations Workbook Development,Create comprehensive SOC dashboard workbook,2024-06-05,2024-06-11,7,TASK-024,EO Sales Engineer,56,SOC Dashboard Complete,Planned,Low,Data visualization requirements,N/A
-TASK-026,Phase 6,Executive Reporting Workbook Creation,Develop executive security reporting dashboard,2024-06-12,2024-06-18,7,TASK-025,EO Sales Engineer,56,Executive Dashboard Complete,Planned,Low,Executive requirements,N/A
-TASK-027,Phase 6,Compliance Reporting Automation,Configure automated compliance reporting,2024-06-19,2024-06-25,7,TASK-026,EO Sales Engineer,56,Compliance Reporting Ready,Planned,Medium,Compliance frameworks,N/A
-TASK-028,Phase 7,Security Team Training Program,Conduct comprehensive security team training,2024-06-26,2024-07-10,15,TASK-027,EO Engineer,120,Team Training Complete,Planned,Medium,Training materials,training-plan.csv
-TASK-029,Phase 7,Administrator Certification Training,Provide advanced administrator training,2024-07-11,2024-07-17,7,TASK-028,EO Engineer,56,Admin Training Complete,Planned,Low,Certification requirements,training-plan.csv
-TASK-030,Phase 7,End-User Security Training,Conduct security awareness training for end users,2024-07-18,2024-07-24,7,TASK-029,EO Engineer,56,End-User Training Complete,Planned,Low,Training content,training-plan.csv
-TASK-031,Phase 8,Performance Testing and Optimization,Conduct performance testing and optimization,2024-07-25,2024-07-31,7,TASK-030,EO Engineer,56,Performance Optimized,Planned,High,Load testing tools,test-plan.csv
-TASK-032,Phase 8,Security Testing and Validation,Perform security testing and penetration testing,2024-08-01,2024-08-07,7,TASK-031,EO Engineer,56,Security Testing Complete,Planned,High,Security testing tools,test-plan.csv
-TASK-033,Phase 8,User Acceptance Testing,Conduct user acceptance testing with security team,2024-08-08,2024-08-14,7,TASK-032,EO Engineer,56,UAT Complete,Planned,Medium,User availability,test-plan.csv
-TASK-034,Phase 8,Documentation Completion,Finalize all technical and operational documentation,2024-08-15,2024-08-21,7,TASK-033,EO Engineer,56,Documentation Complete,Planned,Low,SME availability,implementation-guide.md,troubleshooting.md
-TASK-035,Phase 9,Parallel Operations Setup,Configure parallel operations with legacy SIEM,2024-08-22,2024-08-28,7,TASK-034,EO Engineer,56,Parallel Operations Ready,Planned,High,Legacy SIEM access,N/A
-TASK-036,Phase 9,Gradual Data Migration,Migrate historical security data to Sentinel,2024-08-29,2024-09-11,14,TASK-035,EO Engineer,112,Data Migration Complete,Planned,High,Data export capabilities,N/A
-TASK-037,Phase 9,Monitoring and Alerting Cutover,Cutover primary monitoring to Azure Sentinel,2024-09-12,2024-09-18,7,TASK-036,EO Engineer,56,Monitoring Cutover Complete,Planned,High,Change management approval,N/A
-TASK-038,Phase 9,Legacy SIEM Decommission Planning,Plan and prepare legacy SIEM decommissioning,2024-09-19,2024-09-25,7,TASK-037,EO Quarterback,56,Decommission Plan Ready,Planned,Medium,Stakeholder approval,N/A
-TASK-039,Phase 10,Go-Live and Stabilization,Execute go-live and monitor system stability,2024-09-26,2024-10-02,7,TASK-038,EO Project Manager,56,Go-Live Complete,Planned,High,All team availability,N/A
-TASK-040,Phase 10,Post-Implementation Support,Provide hypercare support and issue resolution,2024-10-03,2024-10-16,14,TASK-039,EO Engineer,112,Hypercare Support Complete,Planned,Medium,Support procedures,implementation-guide.md
-TASK-041,Phase 10,Performance Optimization,Fine-tune performance based on production usage,2024-10-17,2024-10-23,7,TASK-040,EO Engineer,56,Performance Tuned,Planned,Medium,Performance metrics,N/A
-TASK-042,Phase 10,Project Closure and Handover,Complete project closure and operational handover,2024-10-24,2024-10-30,7,TASK-041,EO Project Manager,56,Project Closed,Planned,Low,Operational team readiness,project-plan.csv
+# Project Timeline
+#WIDTH: 14,36,10,14,14,28,22,12
+#ALIGN: left,left,center,center,center,left,left,center
+Phase,Task,Duration,Start Date,End Date,Dependencies,Owner,Status
+Planning,Project Kickoff,1 day,Week 1 Day 1,Week 1 Day 1,None,Project Manager,Not Started
+Planning,Data Center Assessment,2 days,Week 1 Day 1,Week 1 Day 2,Project Kickoff,Infrastructure Architect,Not Started
+Planning,Power and Cooling Validation,2 days,Week 1 Day 2,Week 1 Day 3,Data Center Assessment,Facilities Team,Not Started
+Planning,Network Infrastructure Review,2 days,Week 1 Day 2,Week 1 Day 3,Data Center Assessment,Network Engineer,Not Started
+Planning,Hardware Specifications Finalize,2 days,Week 1 Day 3,Week 1 Day 4,All Assessments,Solutions Architect,Not Started
+Planning,Dell Purchase Order Submission,1 day,Week 1 Day 5,Week 1 Day 5,Hardware Specs Approved,Procurement,Not Started
+Planning,PowerScale NAS Configuration Design,3 days,Week 1 Day 3,Week 2 Day 1,Network Review,Storage Architect,Not Started
+Planning,Data Center Preparation,5 days,Week 1 Day 5,Week 2 Day 5,PO Submitted,Facilities Team,Not Started
+Deployment,Hardware Delivery and Inventory,1 day,Week 3 Day 1,Week 3 Day 1,Dell Delivery,IT Team,Not Started
+Deployment,Dell ProDeploy Installation,3 days,Week 3 Day 1,Week 3 Day 3,Hardware Delivery,Dell ProDeploy,Not Started
+Deployment,Network Cabling and VLAN Config,2 days,Week 3 Day 2,Week 3 Day 3,ProDeploy Start,Network Engineer,Not Started
+Deployment,Ubuntu 22.04 LTS Installation,2 days,Week 3 Day 4,Week 3 Day 5,ProDeploy Complete,Systems Engineer,Not Started
+Deployment,NVIDIA Driver Installation,2 days,Week 3 Day 5,Week 4 Day 1,Ubuntu Installed,Systems Engineer,Not Started
+Deployment,CUDA and cuDNN Configuration,2 days,Week 4 Day 1,Week 4 Day 2,NVIDIA Drivers,ML Engineer,Not Started
+Deployment,PowerScale NAS Configuration,2 days,Week 4 Day 1,Week 4 Day 2,Network Complete,Storage Engineer,Not Started
+Deployment,NFS Mount Configuration,1 day,Week 4 Day 3,Week 4 Day 3,PowerScale Ready,Systems Engineer,Not Started
+Deployment,ML Framework Installation,2 days,Week 4 Day 3,Week 4 Day 4,CUDA Complete,ML Engineer,Not Started
+Deployment,Datadog Monitoring Setup,2 days,Week 4 Day 4,Week 4 Day 5,All Systems,DevOps Engineer,Not Started
+Validation,GPU Performance Benchmarking,2 days,Week 5 Day 1,Week 5 Day 2,All Deployment,ML Engineer,Not Started
+Validation,Storage Throughput Validation,1 day,Week 5 Day 2,Week 5 Day 2,Benchmarking Start,Storage Engineer,Not Started
+Validation,End-to-End Training Test,2 days,Week 5 Day 3,Week 5 Day 4,All Benchmarks,Data Scientist,Not Started
+Validation,Dataset Migration from Cloud,3 days,Week 5 Day 2,Week 5 Day 4,Storage Validated,Data Engineer,Not Started
+Training,Data Scientist Workshop Day 1,1 day,Week 5 Day 4,Week 5 Day 4,E2E Test Complete,Training Lead,Not Started
+Training,Data Scientist Workshop Day 2,1 day,Week 5 Day 5,Week 5 Day 5,Workshop Day 1,Training Lead,Not Started
+Training,Administrator Training,1 day,Week 6 Day 1,Week 6 Day 1,Workshop Complete,Training Lead,Not Started
+Closure,Production Go-Live,1 day,Week 6 Day 2,Week 6 Day 2,All Training,Project Manager,Not Started
+Closure,Documentation Finalization,2 days,Week 6 Day 2,Week 6 Day 3,Go-Live,Technical Writer,Not Started
+Closure,Project Acceptance Sign-off,1 day,Week 6 Day 4,Week 6 Day 4,Documentation,Project Manager,Not Started
+Closure,Hypercare Handover,1 day,Week 6 Day 5,Week 6 Day 5,Acceptance,Project Manager,Not Started
+
+# Milestones
+#WIDTH: 14,20,20,80,26,14
+#ALIGN: left,left,center,left,left,center
+Milestone ID,Milestone Name,Target Date,Success Criteria,Owner,Status
+M1,Hardware Ordered,Week 2,Dell purchase order submitted and confirmed; delivery date scheduled,Project Manager,Not Started
+M2,Hardware Delivered,Week 3,All 10 workstations and PowerScale NAS delivered and inventoried,IT Lead,Not Started
+M3,Infrastructure Ready,Week 4,All workstations operational with Ubuntu CUDA and ML frameworks,Solutions Architect,Not Started
+M4,Validation Complete,Week 5,GPU benchmarks passed; storage throughput validated; E2E training successful,ML Engineer,Not Started
+M5,Training Complete,Week 6,All data scientists and administrators trained and certified competent,Training Lead,Not Started
+M6,Project Closure,Week 6,Production go-live complete; documentation accepted; support transitioned,Project Manager,Not Started
+
+# RACI Matrix
+#WIDTH: 36,8,8,8,8,8,8,8,8
+#ALIGN: left,center,center,center,center,center,center,center,center
+Task/Deliverable,PM,SA,Infra,NetEng,MLEng,DS Lead,IT,Client
+Project Charter and Kickoff,A,C,C,I,I,I,C,I
+Data Center Assessment,A,C,R,C,I,I,C,C
+Hardware Specifications,A,R,C,C,C,C,I,I
+Dell Procurement,A,C,I,I,I,I,R,C
+Ubuntu and NVIDIA Installation,A,C,R,I,C,I,C,I
+CUDA and ML Framework Setup,A,C,C,I,R,C,I,I
+PowerScale NAS Configuration,A,C,R,C,I,I,C,I
+Network and VLAN Configuration,A,C,C,R,I,I,C,I
+GPU Performance Validation,A,C,I,I,R,C,I,I
+Data Scientist Training,A,I,I,I,R,C,I,C
+Administrator Training,A,I,R,C,C,I,C,C
+Production Go-Live Approval,A,C,C,C,C,C,C,R
+Documentation Delivery,A,R,C,C,C,C,C,I
+
+# Communications Plan
+#WIDTH: 24,14,44,44,20,18
+#ALIGN: left,left,left,left,left,center
+Meeting Type,Frequency,Participants,Purpose,Owner,Day/Time
+Project Kickoff,Once,All stakeholders PM SA IT Lead DS Lead,Launch project and align on objectives and timeline,Project Manager,Week 1 Day 1
+Steering Committee,Weekly,Executive sponsors PM IT Director,Strategic direction budget updates and issue escalation,Project Manager,Fridays 10:00
+Daily Standup,Daily,Core project team,Review progress blockers and daily priorities,Project Manager,Daily 09:00
+Technical Review,Weekly,SA Infrastructure Network ML Engineers,Technical design decisions and implementation issues,Solutions Architect,Wednesdays 14:00
+Deployment Checkpoint,Daily,Deployment team Dell ProDeploy,Hardware installation and configuration progress,IT Lead,Daily 11:00
+Validation Review,Daily,ML Engineer DS Lead QA,Benchmark results and validation testing progress,ML Engineer,Week 5 Daily
+Training Coordination,Weekly,Training Lead DS Lead IT Lead,Training schedule logistics and materials review,Training Lead,Mondays 15:00
+Go-Live Readiness,Daily,All stakeholders,Go-live preparation checklist and readiness assessment,Project Manager,Week 6 Daily 09:00

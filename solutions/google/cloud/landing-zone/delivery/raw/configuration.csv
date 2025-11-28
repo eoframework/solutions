@@ -1,10 +1,63 @@
-Component,Parameter,Environment,Value,Data_Type,Required,Description,Validation_Rule,Default_Value
-Solution Configuration,Solution Name,All,Enterprise Solution,String,Yes,Solution identifier,Valid solution name,Enterprise Solution
-Environment,Environment Type,Dev,Development,String,Yes,Environment designation,dev|test|prod,dev
-Environment,Environment Type,Test,Test,String,Yes,Environment designation,dev|test|prod,test
-Environment,Environment Type,Prod,Production,String,Yes,Environment designation,dev|test|prod,prod
-Network Configuration,Network Mode,All,Enterprise,String,Yes,Network configuration mode,Basic|Standard|Enterprise,Enterprise
-Security Configuration,Security Level,All,High,String,Yes,Security configuration level,Low|Medium|High,High
-Performance Configuration,Performance Tier,All,Standard,String,Yes,Performance configuration tier,Basic|Standard|Premium,Standard
-Monitoring Configuration,Monitoring Enabled,All,true,Boolean,Yes,Enable comprehensive monitoring,true|false,true
-Backup Configuration,Backup Enabled,All,true,Boolean,Yes,Enable automated backups,true|false,true
+#WIDTH: 28,18,12,30,48,10,12,33,16,18,24,42,12
+#ALIGN: left,left,center,left,left,center,left,left,center,left,left,left,center
+Parameter Name,Category,Environment,Default Value,Description,Required,Data Type,Validation Rules,Security Level,Owner Team,Dependencies,Notes,Last Updated
+ORGANIZATION_ID,GCP Organization,All,[ORG_ID],GCP Organization resource identifier,Yes,String,12-digit numeric ID,Confidential,Infrastructure,None,Required for all deployments,[DATE]
+ORGANIZATION_DOMAIN,GCP Organization,All,example.com,Primary domain for Cloud Identity,Yes,String,Valid domain name,Public,Infrastructure,Cloud Identity,Domain verified in GCP,[DATE]
+BILLING_ACCOUNT_ID,GCP Organization,All,[BILLING_ACCOUNT_ID],Billing account for all projects,Yes,String,Format 01XXXX-XXXXXX-XXXXXX,Confidential,Finance,Organization setup,Must have billing admin access,[DATE]
+FOLDER_DEV_ID,Folder Hierarchy,Development,[FOLDER_ID],Development environment folder,Yes,String,Folder resource ID,Public,Infrastructure,Organization,Created during foundation phase,[DATE]
+FOLDER_STAGING_ID,Folder Hierarchy,Staging,[FOLDER_ID],Staging environment folder,Yes,String,Folder resource ID,Public,Infrastructure,Organization,Created during foundation phase,[DATE]
+FOLDER_PROD_ID,Folder Hierarchy,Production,[FOLDER_ID],Production environment folder,Yes,String,Folder resource ID,Public,Infrastructure,Organization,Created during foundation phase,[DATE]
+FOLDER_SHARED_ID,Folder Hierarchy,All,[FOLDER_ID],Shared services folder,Yes,String,Folder resource ID,Public,Infrastructure,Organization,Hosts shared infrastructure projects,[DATE]
+HOST_PROJECT_ID,Shared VPC,All,host-vpc-project,Shared VPC host project ID,Yes,String,Valid project ID format,Public,Network,Organization,Must be unique within organization,[DATE]
+VPC_NETWORK_NAME,Shared VPC,All,shared-vpc,Shared VPC network name,Yes,String,Alphanumeric with hyphens,Public,Network,Host project,Primary network for all workloads,[DATE]
+VPC_ROUTING_MODE,Shared VPC,All,GLOBAL,VPC routing mode,Yes,String,GLOBAL or REGIONAL,Public,Network,VPC network,Global enables cross-region routing,[DATE]
+SUBNET_DEV_USC1_CIDR,Network,Development,10.0.1.0/24,Development subnet CIDR us-central1,Yes,String,Valid CIDR notation,Public,Network,VPC network,Development workloads primary region,[DATE]
+SUBNET_STAGING_USC1_CIDR,Network,Staging,10.0.2.0/24,Staging subnet CIDR us-central1,Yes,String,Valid CIDR notation,Public,Network,VPC network,Staging workloads primary region,[DATE]
+SUBNET_PROD_USC1_CIDR,Network,Production,10.0.3.0/24,Production subnet CIDR us-central1,Yes,String,Valid CIDR notation,Public,Network,VPC network,Production workloads primary region,[DATE]
+SUBNET_SHARED_USC1_CIDR,Network,All,10.0.10.0/24,Shared services subnet CIDR us-central1,Yes,String,Valid CIDR notation,Public,Network,VPC network,Shared infrastructure services,[DATE]
+SUBNET_DEV_USE1_CIDR,Network,Development,10.1.1.0/24,Development subnet CIDR us-east1,Yes,String,Valid CIDR notation,Public,Network,VPC network,Development workloads DR region,[DATE]
+SUBNET_STAGING_USE1_CIDR,Network,Staging,10.1.2.0/24,Staging subnet CIDR us-east1,Yes,String,Valid CIDR notation,Public,Network,VPC network,Staging workloads DR region,[DATE]
+SUBNET_PROD_USE1_CIDR,Network,Production,10.1.3.0/24,Production subnet CIDR us-east1,Yes,String,Valid CIDR notation,Public,Network,VPC network,Production workloads DR region,[DATE]
+SUBNET_DEV_USW1_CIDR,Network,Development,10.2.1.0/24,Development subnet CIDR us-west1,Yes,String,Valid CIDR notation,Public,Network,VPC network,Development workloads West region,[DATE]
+SUBNET_STAGING_USW1_CIDR,Network,Staging,10.2.2.0/24,Staging subnet CIDR us-west1,Yes,String,Valid CIDR notation,Public,Network,VPC network,Staging workloads West region,[DATE]
+SUBNET_PROD_USW1_CIDR,Network,Production,10.2.3.0/24,Production subnet CIDR us-west1,Yes,String,Valid CIDR notation,Public,Network,VPC network,Production workloads West region,[DATE]
+INTERCONNECT_TYPE,Interconnect,All,DEDICATED,Interconnect connection type,Yes,String,DEDICATED or PARTNER,Public,Network,ISP coordination,Dedicated for 10 Gbps requirements,[DATE]
+INTERCONNECT_BANDWIDTH,Interconnect,All,10 Gbps,Total interconnect bandwidth,Yes,String,1G to 100G,Public,Network,ISP coordination,Matches SOW requirements,[DATE]
+INTERCONNECT_LOCATION,Interconnect,All,iad-zone1-1,Interconnect colocation facility,Yes,String,Valid GCP interconnect location,Public,Network,ISP coordination,ISP must have presence at location,[DATE]
+VLAN_ATTACHMENT_COUNT,Interconnect,All,4,Number of VLAN attachments for HA,Yes,Integer,2 to 8,Public,Network,Interconnect,Provides redundancy for failover,[DATE]
+BGP_ASN_GCP,Interconnect,All,16550,Google Cloud BGP ASN,Yes,Integer,16550 (Google default),Public,Network,Interconnect,Fixed Google ASN,[DATE]
+BGP_ASN_ONPREM,Interconnect,All,[CLIENT_ASN],On-premises router BGP ASN,Yes,Integer,Valid private ASN,Confidential,Network,On-prem network,Client provides BGP ASN,[DATE]
+INTERCONNECT_TARGET_LATENCY,Interconnect,All,<5ms,Target round-trip latency,Yes,String,Milliseconds,Public,Network,Interconnect,Performance SLA target,[DATE]
+CLOUD_NAT_GATEWAY_COUNT,Cloud NAT,All,3,Number of NAT gateways per region,Yes,Integer,1 to 3,Public,Network,VPC network,One per region for HA,[DATE]
+CLOUD_NAT_LOGGING_ENABLED,Cloud NAT,All,true,Enable NAT logging,Yes,Boolean,true or false,Public,Network,Cloud NAT,Required for troubleshooting,[DATE]
+CLOUD_IDENTITY_LICENSE,Identity,All,Premium,Cloud Identity license tier,Yes,String,Free or Premium,Public,Security,Organization,Premium required for SAML SSO,[DATE]
+SAML_SSO_ENABLED,Identity,All,true,Enable SAML SSO integration,Yes,Boolean,true or false,Public,Security,Cloud Identity,Required for enterprise auth,[DATE]
+IDP_TYPE,Identity,All,[ADFS/Azure AD/Okta],Identity provider type,Yes,String,ADFS or Azure AD or Okta,Public,Security,IdP configuration,Client IdP platform,[DATE]
+MFA_ENFORCEMENT,Identity,All,ENFORCED,2-step verification policy,Yes,String,OFF or OPTIONAL or ENFORCED,Public,Security,Cloud Identity,Required for admin accounts,[DATE]
+ADMIN_COUNT,Identity,All,8,Number of platform administrators,Yes,Integer,1 to 50,Public,Security,Cloud Identity,Initial admin user count,[DATE]
+SCC_TIER,Security,All,Premium,Security Command Center tier,Yes,String,Standard or Premium,Public,Security,Organization,Premium for full features,[DATE]
+SCC_ASSET_DISCOVERY,Security,All,true,Enable asset discovery,Yes,Boolean,true or false,Public,Security,SCC configuration,Required for inventory,[DATE]
+CHRONICLE_INGESTION_VOLUME,Security,All,100 GB/month,Monthly log ingestion volume,Yes,String,GB/month,Public,Security,Chronicle license,Matches SOW allocation,[DATE]
+CHRONICLE_RETENTION,Security,All,12 months,Log retention period,Yes,String,1 to 12 months,Public,Security,Chronicle license,Compliance requirement,[DATE]
+ORG_POLICY_LOCATION,Organization Policy,All,in:us-locations,Allowed resource locations,Yes,String,Location policy value,Public,Security,Organization,US data residency requirement,[DATE]
+ORG_POLICY_EXTERNAL_IP,Organization Policy,All,Deny all,VM external IP policy,Yes,String,Allow or Deny,Public,Security,Organization,Security baseline requirement,[DATE]
+ORG_POLICY_SA_KEYS,Organization Policy,All,Disabled,Service account key creation policy,Yes,String,Enabled or Disabled,Public,Security,Organization,Security best practice,[DATE]
+ORG_POLICY_COUNT,Organization Policy,All,50+,Total organization policies enforced,Yes,Integer,Minimum 50,Public,Security,Organization,SOW commitment,[DATE]
+KMS_KEYRING_NAME,Encryption,All,landing-zone-keyring,Cloud KMS key ring name,Yes,String,Alphanumeric with hyphens,Public,Security,KMS project,Centralized key management,[DATE]
+KMS_KEYRING_LOCATION,Encryption,All,us,Key ring location,Yes,String,Valid KMS location,Public,Security,KMS project,Multi-region for HA,[DATE]
+KMS_KEY_COUNT,Encryption,All,6,Number of encryption keys,Yes,Integer,Per environment,Public,Security,KMS keyring,Two keys per environment,[DATE]
+KMS_KEY_ROTATION,Encryption,All,90 days,Automatic key rotation period,Yes,String,30 to 365 days,Public,Security,KMS keys,Compliance requirement,[DATE]
+LOGGING_SINK_TYPE,Logging,All,BigQuery,Log export destination type,Yes,String,BigQuery or Cloud Storage or Pub/Sub,Public,Operations,Logging project,BigQuery for analytics,[DATE]
+LOGGING_RETENTION_DAYS,Logging,All,365,Cloud Logging retention days,Yes,Integer,30 to 3650,Public,Operations,Cloud Logging,Compliance requirement,[DATE]
+LOGGING_BIGQUERY_RETENTION,Logging,All,7 years,BigQuery export retention,Yes,String,1 to 10 years,Public,Operations,BigQuery,Audit compliance,[DATE]
+LOGGING_VOLUME,Logging,All,500 GB/month,Expected monthly log volume,Yes,String,GB/month,Public,Operations,Cloud Logging,Capacity planning,[DATE]
+MONITORING_DASHBOARD_COUNT,Monitoring,All,4,Number of monitoring dashboards,Yes,Integer,1 to 10,Public,Operations,Cloud Monitoring,Platform health visibility,[DATE]
+MONITORING_ALERT_COUNT,Monitoring,All,5,Number of alert policies,Yes,Integer,1 to 20,Public,Operations,Cloud Monitoring,Critical alerts defined,[DATE]
+FLOW_LOGS_PROD_SAMPLING,VPC Flow Logs,Production,1.0,Flow log sampling rate for prod,Yes,Float,0.0 to 1.0,Public,Network,VPC subnets,Full visibility in production,[DATE]
+FLOW_LOGS_STAGING_SAMPLING,VPC Flow Logs,Staging,0.5,Flow log sampling rate for staging,Yes,Float,0.0 to 1.0,Public,Network,VPC subnets,Reduced for cost,[DATE]
+FLOW_LOGS_DEV_ENABLED,VPC Flow Logs,Development,false,Enable flow logs for development,No,Boolean,true or false,Public,Network,VPC subnets,Disabled for cost,[DATE]
+TERRAFORM_VERSION,Automation,All,1.5+,Minimum Terraform version,Yes,String,Semantic versioning,Public,Development,Workstation,Cloud Foundation Toolkit compatibility,[DATE]
+TERRAFORM_STATE_BUCKET,Automation,All,terraform-state-[ORG_ID],Terraform state bucket name,Yes,String,Valid bucket name,Public,Development,GCS bucket,Globally unique name required,[DATE]
+PROJECT_PROVISIONING_TARGET,Automation,All,<1 hour,Target project provisioning time,Yes,String,Time duration,Public,Development,CFT modules,SOW commitment,[DATE]
+INITIAL_PROJECT_COUNT,Automation,All,10,Initial projects to provision,Yes,Integer,1 to 100,Public,Development,CFT modules,SOW scope,[DATE]
+TEAM_COUNT,Automation,All,5,Number of application teams,Yes,Integer,1 to 50,Public,Development,Projects,SOW scope,[DATE]
