@@ -1,562 +1,541 @@
-# Azure Sentinel SIEM - Project Closeout Presentation
+---
+presentation_title: Project Closeout
+solution_name: Dell PowerSwitch Datacenter Networking
+presenter_name: Project Manager
+presenter_email: pm@yourcompany.com
+presenter_phone: 555-123-4567
+presentation_date: "[DATE]"
+client_name: "[CLIENT]"
+client_logo: ../../assets/logos/client_logo.png
+footer_logo_left: ../../assets/logos/consulting_company_logo.png
+footer_logo_right: ../../assets/logos/eo-framework-logo-real.png
+---
 
-## Executive Summary
+# Dell PowerSwitch Datacenter Networking - Project Closeout
 
-### Project Overview
-The Azure Sentinel SIEM implementation has successfully delivered a comprehensive security information and event management solution that transforms our organization's cybersecurity posture. This enterprise-grade implementation provides 99% threat detection accuracy, automated compliance reporting, and real-time security operations capabilities.
-
-### Key Achievements
-- **Security Enhancement**: Achieved 99% threat detection accuracy with automated response capabilities
-- **Compliance Automation**: Implemented comprehensive compliance monitoring and reporting
-- **Operational Efficiency**: Reduced security incident response time by 75%
-- **Cost Optimization**: Delivered 35% cost savings compared to legacy SIEM solutions
-- **Scalability**: Deployed cloud-native architecture supporting unlimited growth
+## Slide Deck Structure
+**10 Slides - Fixed Format**
 
 ---
 
-## Business Value Delivered
+### Slide 1: Title Slide
+**layout:** eo_title_slide
 
-### Primary Business Outcomes
-
-#### 🛡️ Enhanced Security Posture
-- **Threat Detection**: 99% accuracy in identifying security threats and anomalies
-- **Response Time**: Average security incident response reduced from 4 hours to 60 minutes
-- **False Positives**: Reduced false positive alerts by 85% through AI-powered analytics
-- **Coverage**: 100% visibility across cloud, hybrid, and on-premises environments
-- **Compliance**: Automated compliance monitoring for SOC 2, HIPAA, PCI DSS, and GDPR
-
-#### 💰 Financial Impact
-- **Cost Reduction**: 35% reduction in total security operations costs
-- **License Optimization**: Pay-per-use model reduces fixed licensing costs by 40%
-- **Resource Efficiency**: 50% reduction in manual security analysis tasks
-- **Downtime Prevention**: Prevented potential $2.3M in business disruption costs
-- **Audit Costs**: Reduced compliance audit preparation time by 70%
-
-#### 🚀 Operational Excellence
-- **Automation**: 80% of routine security tasks now automated
-- **Integration**: Seamless integration with 25+ enterprise security tools
-- **Scalability**: Cloud-native architecture supports 10x current data volumes
-- **Reliability**: 99.9% service availability with automated failover
-- **Performance**: Sub-second query response times for security investigations
+**Presentation Title:** Project Closeout
+**Subtitle:** Enterprise Spine-Leaf Fabric Deployed
+**Presenter:** Project Manager | [DATE]
 
 ---
 
-## Technical Implementation Success
+### Executive Summary
+**layout:** eo_bullet_points
 
-### Architecture Delivered
+**Modern Datacenter Network Transformation Complete**
 
-#### Core Platform Components
-- **Azure Sentinel**: Primary SIEM platform with advanced analytics capabilities
-- **Log Analytics Workspace**: Centralized log collection and analysis engine
-- **Kusto Query Language (KQL)**: Advanced query and analysis capabilities
-- **Azure Monitor**: Comprehensive monitoring and alerting infrastructure
-- **Azure Security Center**: Unified security management and advanced threat protection
+- **Project Duration:** 6 weeks, on schedule
+- **Budget:** $1.85M delivered on budget
+- **Go-Live Date:** Week 6 as planned
+- **Quality:** Zero network outages at launch
+- **Fabric Scale:** 4 spine + 40 leaf switches
+- **Port Capacity:** 1920 server ports at 25GbE
+- **Throughput:** 1.6Tbps aggregate achieved
 
-#### Integration Ecosystem
-- **Microsoft 365 Defender**: Endpoint detection and response integration
-- **Azure Active Directory**: Identity and access management integration
-- **Azure Key Vault**: Secrets and certificate management integration
-- **Azure Automation**: Automated response and remediation workflows
-- **Third-party Tools**: 25+ security tool integrations via REST APIs
+**SPEAKER NOTES:**
 
-#### Data Processing Capabilities
-- **Daily Ingestion**: 500GB+ of security telemetry processed daily
-- **Real-time Processing**: Stream analytics for immediate threat detection
-- **Historical Analysis**: 24-month data retention for threat hunting
-- **Machine Learning**: AI-powered behavioral analytics and anomaly detection
-- **Custom Analytics**: 50+ custom detection rules tailored to business requirements
+*Opening Statement:*
+Good [morning/afternoon]. Today we're celebrating the successful completion of the Dell PowerSwitch Datacenter Networking implementation. This project has transformed [Client Name]'s network infrastructure from legacy Cisco Nexus to a modern BGP/EVPN-VXLAN spine-leaf fabric.
 
-### Security Features Implemented
+*Key Talking Points:*
 
-#### Advanced Threat Detection
-- **User and Entity Behavior Analytics (UEBA)**: AI-powered behavioral analysis
-- **Threat Intelligence**: Integration with Microsoft and third-party threat feeds
-- **Custom Detection Rules**: Business-specific threat detection logic
-- **Hunting Queries**: Proactive threat hunting capabilities
-- **Incident Correlation**: Automated incident correlation and timeline analysis
+**Project Duration - 6 Weeks:**
+- Phase 1 (Weeks 1-2): Assessment, design, and procurement
+- Phase 2 (Weeks 3-4): Spine deployment and core configuration
+- Phase 3 (Weeks 5-6): Leaf rollout and rack migrations
+- All milestones achieved on schedule
 
-#### Compliance and Governance
-- **Regulatory Frameworks**: SOC 2, HIPAA, PCI DSS, GDPR compliance monitoring
-- **Audit Trails**: Comprehensive audit logging and retention policies
-- **Data Classification**: Automated data sensitivity classification and protection
-- **Access Controls**: Role-based access control with least privilege principles
-- **Retention Policies**: Automated data lifecycle management and retention
+**Infrastructure Delivered:**
+- 4 Dell Z9432F-ON spine switches (100GbE)
+- 40 Dell S5248F-ON leaf switches (25GbE ToR)
+- BGP underlay with EVPN-VXLAN overlay
+- Dell OS10 Enterprise with automation
+- 1920 server ports across 40 racks
 
----
+**Performance Achievement:**
+- 1.6Tbps aggregate fabric throughput
+- <2 microsecond east-west latency
+- Zero packet loss under full load
+- TACACS+ centralized authentication
 
-## Implementation Methodology
-
-### Project Execution Timeline
-
-#### Phase 1: Foundation Setup (Weeks 1-2)
-- ✅ **Azure Environment**: Deployed secure Azure landing zone architecture
-- ✅ **Identity Management**: Configured Azure AD with conditional access policies
-- ✅ **Network Security**: Implemented network segmentation and firewall rules
-- ✅ **Baseline Monitoring**: Established core monitoring and alerting capabilities
-- ✅ **Security Policies**: Defined and implemented enterprise security policies
-
-#### Phase 2: Core SIEM Implementation (Weeks 3-4)
-- ✅ **Sentinel Deployment**: Configured Azure Sentinel with optimized workspace settings
-- ✅ **Data Connectors**: Implemented 25+ data connectors for comprehensive visibility
-- ✅ **Analytics Rules**: Deployed and customized 150+ detection rules
-- ✅ **Workbooks**: Created custom dashboards for security operations center
-- ✅ **Automation**: Implemented automated response playbooks for common scenarios
-
-#### Phase 3: Integration and Customization (Weeks 5-6)
-- ✅ **Tool Integration**: Integrated existing security tools via APIs and connectors
-- ✅ **Custom Analytics**: Developed business-specific threat detection rules
-- ✅ **SOAR Integration**: Implemented security orchestration and automated response
-- ✅ **Threat Hunting**: Deployed advanced hunting queries and investigation procedures
-- ✅ **Machine Learning**: Configured AI-powered behavioral analytics and anomaly detection
-
-#### Phase 4: Testing and Validation (Weeks 7-8)
-- ✅ **Functional Testing**: Validated all security use cases and detection scenarios
-- ✅ **Performance Testing**: Verified platform performance under peak load conditions
-- ✅ **Security Testing**: Conducted penetration testing and vulnerability assessments
-- ✅ **Integration Testing**: Validated end-to-end workflows and automated responses
-- ✅ **User Acceptance**: Completed testing with security operations team
-
-#### Phase 5: Go-Live and Optimization (Weeks 9-10)
-- ✅ **Production Deployment**: Migrated to production with zero-downtime cutover
-- ✅ **Team Training**: Delivered comprehensive training to security operations team
-- ✅ **Performance Tuning**: Optimized queries and alert thresholds based on baseline data
-- ✅ **Documentation**: Completed operations runbooks and troubleshooting guides
-- ✅ **Hypercare Support**: Provided intensive 24/7 support during initial go-live period
-
-### Quality Assurance Results
-
-#### Testing Outcomes
-- **Functional Testing**: 100% of security use cases validated successfully
-- **Performance Testing**: Achieved sub-second response times for 95% of queries
-- **Security Testing**: Zero critical vulnerabilities identified in penetration testing
-- **Integration Testing**: All 25+ integrations functioning optimally
-- **User Acceptance**: 98% user satisfaction score from security operations team
-
-#### Compliance Validation
-- **SOC 2 Type II**: All controls implemented and validated
-- **HIPAA**: Healthcare data protection requirements fully satisfied
-- **PCI DSS**: Payment card industry compliance controls verified
-- **GDPR**: Data privacy and protection requirements implemented
-- **ISO 27001**: Information security management standards compliance
+*Transition:*
+"Let me walk you through the network architecture..."
 
 ---
 
-## Risk Management and Mitigation
+### Solution Architecture
+**layout:** eo_visual_content
 
-### Risk Mitigation Strategies Executed
+**What We Built Together**
 
-#### Technical Risk Management
-- **Proof of Concept**: Successfully validated solution with real-world security scenarios
-- **Phased Implementation**: Gradual rollout minimized business disruption risk
-- **Parallel Operations**: Maintained legacy SIEM during transition period
-- **Automated Backups**: Implemented comprehensive backup and disaster recovery procedures
-- **Performance Monitoring**: Continuous monitoring prevents performance degradation
+![Solution Architecture](assets/diagrams/architecture-diagram.png)
 
-#### Business Risk Management
-- **Change Management**: Comprehensive change management program ensured user adoption
-- **Training Program**: Extensive training minimized operational disruption
-- **Communication Plan**: Regular stakeholder updates maintained project visibility
-- **Vendor Support**: 24/7 Microsoft support available for critical issues
-- **Documentation**: Complete documentation ensures business continuity
+- **Spine Layer**
+  - 4x Dell Z9432F-ON switches
+  - 32x 400GbE QSFP-DD ports each
+  - Full mesh ECMP connectivity
+- **Leaf Layer**
+  - 40x Dell S5248F-ON ToR switches
+  - 48x 25GbE + 6x 100GbE uplinks
+  - One per rack deployment
+- **Overlay Network**
+  - BGP underlay routing protocol
+  - EVPN-VXLAN for L2/L3 services
+  - Multi-tenancy with VRF isolation
 
-#### Security Risk Management
-- **Zero Trust Architecture**: Implemented comprehensive zero trust security model
-- **Incident Response**: Automated incident response procedures reduce exposure time
-- **Threat Intelligence**: Real-time threat intelligence feeds enhance protection
-- **Vulnerability Management**: Automated vulnerability scanning and remediation
-- **Compliance Monitoring**: Continuous compliance monitoring prevents violations
+**SPEAKER NOTES:**
 
-### Issues Resolved
+*Architecture Overview:*
 
-#### Technical Challenges Overcome
-- **Data Volume**: Optimized ingestion pipelines to handle 500GB+ daily data volumes
-- **Query Performance**: Implemented KQL optimization achieving sub-second response times
-- **Integration Complexity**: Successfully integrated 25+ diverse security tools
-- **Alert Tuning**: Reduced false positives by 85% through machine learning optimization
-- **Scalability**: Designed architecture to support 10x current data volumes
+**Spine Layer - Z9432F-ON:**
+- 4 spine switches for N+1 redundancy
+- 32x 400GbE QSFP-DD ports per switch
+- 128 ports total for leaf connectivity
+- Full mesh with 4-way ECMP
+- Non-blocking switching fabric
 
-#### Business Challenges Addressed
-- **User Adoption**: Achieved 98% user adoption through comprehensive training program
-- **Process Changes**: Successfully transformed security operations workflows
-- **Stakeholder Alignment**: Maintained executive support throughout implementation
-- **Budget Management**: Delivered project 15% under budget through efficient resource utilization
-- **Timeline Adherence**: Completed implementation 1 week ahead of original schedule
+**Leaf Layer - S5248F-ON:**
+- 40 ToR switches (one per rack)
+- 48x 25GbE SFP28 server ports
+- 6x 100GbE QSFP28 uplinks to spine
+- Dell OS10 Enterprise with ZTP
+- BGP ASN per leaf for routing
 
----
+**Overlay Design - EVPN-VXLAN:**
+- BGP underlay for reachability
+- EVPN for MAC/IP advertisement
+- VXLAN for L2 extension across racks
+- Type-5 routes for L3 VPN services
+- Symmetric IRB for routing
 
-## Financial Return on Investment
+**Network Automation:**
+- Zero Touch Provisioning (ZTP) enabled
+- Ansible playbooks for configuration
+- TACACS+ for centralized AAA
+- SNMP and streaming telemetry
 
-### Investment Summary
-
-#### Implementation Costs
-- **Platform Licensing**: $180,000 annually (pay-per-use model)
-- **Implementation Services**: $125,000 (one-time professional services)
-- **Training and Change Management**: $35,000 (comprehensive user enablement)
-- **Integration Development**: $45,000 (custom connector development)
-- **Total First-Year Investment**: $385,000
-
-#### Operational Savings
-
-#### Year 1 Benefits
-- **Legacy SIEM Elimination**: $275,000 (eliminated legacy licensing and maintenance)
-- **Staff Productivity**: $180,000 (50% reduction in manual security tasks)
-- **Incident Response**: $95,000 (75% faster incident response times)
-- **Compliance Efficiency**: $65,000 (70% reduction in audit preparation time)
-- **Total Year 1 Benefits**: $615,000
-
-#### 3-Year Financial Projection
-- **Total Investment**: $685,000 (including ongoing operational costs)
-- **Total Benefits**: $1,950,000 (cumulative savings and value creation)
-- **Net Present Value**: $1,265,000
-- **Return on Investment**: 285%
-- **Payback Period**: 7.5 months
-
-### Cost Optimization Strategies
-
-#### Licensing Optimization
-- **Pay-per-Use Model**: 40% reduction in fixed licensing costs
-- **Data Retention**: Optimized data retention policies reduce storage costs
-- **Query Optimization**: Efficient KQL queries minimize compute costs
-- **Automation**: Reduced manual tasks decrease operational overhead
-- **Cloud Native**: Eliminated hardware and maintenance costs
-
-#### Operational Efficiency
-- **Automated Response**: 80% of security tasks now automated
-- **Self-Service Analytics**: Empowered users reduce IT support requirements
-- **Proactive Monitoring**: Prevents costly security incidents and downtime
-- **Streamlined Processes**: Optimized workflows increase team productivity
-- **Integrated Tools**: Consolidated security stack reduces complexity and costs
+*Transition:*
+"Now let me show you the complete deliverables..."
 
 ---
 
-## User Adoption and Training Success
+### Deliverables Inventory
+**layout:** eo_table
 
-### Training Program Results
+**Complete Documentation & Infrastructure Package**
 
-#### Training Delivery Statistics
-- **Security Analysts**: 25 analysts completed advanced SIEM training (40 hours each)
-- **SOC Managers**: 5 managers completed leadership and governance training (24 hours each)
-- **IT Administrators**: 15 administrators completed platform management training (32 hours each)
-- **Executives**: 8 executives completed strategic overview sessions (4 hours each)
-- **Total Training Hours**: 1,336 hours delivered across all user groups
+<!-- TABLE_CONFIG: widths=[30, 45, 25] -->
+| Deliverable | Purpose | Location |
+|-------------|---------|----------|
+| **Solution Architecture** | Spine-leaf design with BGP topology | `/delivery/detailed-design.docx` |
+| **Implementation Guide** | Switch deployment and migration runbooks | `/delivery/implementation-guide.docx` |
+| **Project Plan** | Timeline, milestones, RACI matrix | `/delivery/project-plan.xlsx` |
+| **Test Results** | Throughput, latency, failover testing | `/delivery/test-plan.xlsx` |
+| **Configuration Guide** | OS10, BGP, EVPN parameters | `/delivery/configuration.xlsx` |
+| **Ansible Playbooks** | Network automation scripts | `/delivery/ansible-playbooks/` |
+| **Admin Operations Guide** | Day-2 operations procedures | `/delivery/admin-guide.docx` |
+| **Migration Runbook** | Rack-by-rack cutover steps | `/delivery/migration-runbook.docx` |
 
-#### Competency Assessment Results
-- **Security Analysts**: 96% achieved advanced proficiency in threat hunting and investigation
-- **SOC Managers**: 100% achieved competency in incident management and reporting
-- **IT Administrators**: 93% achieved proficiency in platform configuration and maintenance
-- **End Users**: 89% achieved basic proficiency in security awareness and reporting
-- **Overall Satisfaction**: 98% training satisfaction score across all participants
+**SPEAKER NOTES:**
 
-### User Adoption Metrics
+*Deliverables Deep Dive:*
 
-#### Adoption Timeline
-- **Week 1**: 45% user adoption (early adopters and power users)
-- **Week 4**: 78% user adoption (majority of security operations team)
-- **Week 8**: 92% user adoption (broad organizational adoption)
-- **Week 12**: 98% user adoption (near-universal platform utilization)
-- **Sustained Usage**: 96% daily active users after 6 months
+**1. Solution Architecture Document:**
+- Physical and logical topology diagrams
+- BGP underlay design with ASN scheme
+- EVPN-VXLAN overlay configuration
+- IP addressing and VLAN mapping
+- Security zones and ACL policies
 
-#### Productivity Improvements
-- **Query Execution**: 75% improvement in security investigation efficiency
-- **Incident Response**: 60% faster mean time to resolution
-- **Report Generation**: 85% reduction in manual reporting tasks
-- **Threat Hunting**: 90% improvement in threat detection accuracy
-- **Compliance Reporting**: 70% reduction in audit preparation time
+**2. Ansible Playbooks:**
+- Switch provisioning automation
+- BGP neighbor configuration
+- VXLAN VNI deployment
+- VLAN and VRF creation
+- Configuration backup and restore
 
-### Change Management Success
+**3. Admin Operations Guide:**
+- Switch replacement procedures
+- BGP troubleshooting commands
+- EVPN route verification
+- Fabric expansion steps
+- Firmware upgrade process
 
-#### Communication Effectiveness
-- **Executive Updates**: Monthly executive briefings maintained leadership support
-- **Team Communications**: Weekly team updates ensured transparent progress reporting
-- **User Feedback**: Bi-weekly user feedback sessions drove continuous improvement
-- **Success Stories**: Quarterly success story sharing reinforced value proposition
-- **Knowledge Sharing**: Established communities of practice for ongoing knowledge transfer
+**4. Training Delivered:**
+| Session | Attendees | Duration |
+|---------|-----------|----------|
+| OS10 Administration | 4 NetOps | 8 hours |
+| BGP/EVPN Deep Dive | 3 architects | 8 hours |
+| Ansible Automation | 4 engineers | 4 hours |
+| Troubleshooting Workshop | 5 NetOps | 4 hours |
 
-#### Organizational Readiness
-- **Process Documentation**: Updated 100% of security operation procedures
-- **Role Definition**: Clarified roles and responsibilities for all team members
-- **Performance Metrics**: Established new KPIs aligned with platform capabilities
-- **Governance Structure**: Implemented platform governance and oversight procedures
-- **Continuous Improvement**: Established feedback loops for ongoing optimization
-
----
-
-## Post-Implementation Support Model
-
-### Support Structure Implementation
-
-#### Support Tiers Established
-- **Level 1 Support**: Internal IT team handles basic operational issues and user questions
-- **Level 2 Support**: Security operations team manages platform configuration and optimization
-- **Level 3 Support**: Microsoft Premier Support provides vendor-level technical assistance
-- **Level 4 Support**: External consultants available for complex customization and enhancement
-- **Business Support**: Internal business analysts manage process optimization and requirements evolution
-
-#### Service Level Agreements
-
-#### Platform Availability
-- **Uptime Target**: 99.9% platform availability (maximum 8.77 hours downtime annually)
-- **Achieved Uptime**: 99.95% (exceeded target by 4.3 hours annually)
-- **Incident Response**: Critical issues resolved within 4 hours, standard issues within 24 hours
-- **Planned Maintenance**: Monthly maintenance windows during low-usage periods
-- **Disaster Recovery**: 15-minute recovery time objective, 1-hour recovery point objective
-
-#### Performance Standards
-- **Query Response**: 95% of queries complete within 3 seconds
-- **Data Ingestion**: Real-time processing with maximum 5-minute latency
-- **Alert Generation**: Security alerts generated within 30 seconds of event detection
-- **Report Generation**: Standard reports complete within 2 minutes
-- **Dashboard Loading**: Security dashboards load within 5 seconds
-
-### Continuous Improvement Program
-
-#### Optimization Initiatives
-- **Monthly Performance Reviews**: Regular assessment of platform performance and optimization opportunities
-- **Quarterly Feature Updates**: Implementation of new Azure Sentinel features and capabilities
-- **Semi-Annual Architecture Reviews**: Evaluation of architecture changes and scalability improvements
-- **Annual Strategy Assessment**: Review of business requirements and strategic alignment
-- **Ongoing Training**: Continuous skill development and certification programs
-
-#### Enhancement Pipeline
-- **User Feedback Integration**: Monthly incorporation of user suggestions and improvement requests
-- **Technology Updates**: Quarterly evaluation and implementation of new security technologies
-- **Process Optimization**: Continuous refinement of security operations procedures
-- **Integration Expansion**: Ongoing addition of new security tools and data sources
-- **Analytics Enhancement**: Regular improvement of detection rules and threat hunting capabilities
+*Transition:*
+"Let's look at network performance..."
 
 ---
 
-## Future Roadmap and Recommendations
+### Quality & Performance
+**layout:** eo_two_column
 
-### 6-Month Enhancement Plan
+**Exceeding All Network Targets**
 
-#### Technical Enhancements
-- **Advanced Analytics**: Implement additional machine learning models for behavioral analysis
-- **SOAR Expansion**: Extend security orchestration to additional business processes
-- **Cloud Security**: Enhanced cloud workload protection and container security monitoring
-- **Identity Protection**: Advanced identity threat detection and response capabilities
-- **Threat Intelligence**: Integration with additional threat intelligence sources
+- **Throughput Metrics**
+  - Aggregate: 1.6Tbps achieved
+  - Per-Server: 25Gbps line rate
+  - Spine Utilization: 45% average
+  - No Congestion: Zero drops
+  - Oversubscription: 3:1 ratio
+- **Latency & Reliability**
+  - East-West: 1.8us (target: <2us)
+  - Failover Time: <50ms convergence
+  - Availability: 99.999% uptime
+  - Packet Loss: 0.0000% measured
+  - ECMP Balance: Even distribution
 
-#### Process Improvements
-- **Automation Expansion**: Automate additional routine security operations tasks
-- **Metrics Enhancement**: Implement advanced security metrics and KPI dashboards
-- **Integration Deepening**: Enhance existing tool integrations with additional capabilities
-- **Workflow Optimization**: Streamline security incident response and investigation workflows
-- **Training Evolution**: Develop advanced training modules for emerging threats and technologies
+**SPEAKER NOTES:**
 
-### 12-Month Strategic Initiatives
+*Performance Deep Dive:*
 
-#### Platform Evolution
-- **Multi-Cloud Security**: Extend coverage to additional cloud platforms (AWS, Google Cloud)
-- **OT Security**: Expand monitoring to operational technology and IoT environments
-- **Zero Trust Enhancement**: Implement advanced zero trust security capabilities
-- **Privacy Controls**: Enhanced data privacy and protection controls for global compliance
-- **AI/ML Advancement**: Implement next-generation artificial intelligence and machine learning capabilities
+**Throughput Performance:**
 
-#### Business Expansion
-- **Managed Services**: Evaluate managed security services for 24/7 operations
-- **Global Deployment**: Extend platform to international offices and subsidiaries
-- **Partner Integration**: Integrate security operations with key business partners
-- **Regulatory Expansion**: Implement additional regulatory compliance frameworks
-- **Executive Reporting**: Advanced executive dashboards and business intelligence capabilities
+*Aggregate Bandwidth - 1.6Tbps:*
+- 4 spine x 32 ports x 400GbE = 51.2Tbps raw
+- Leaf uplinks: 40 x 6 x 100GbE = 24Tbps
+- Practical capacity: 1.6Tbps sustained
+- Headroom for 3x growth
 
-### Success Metrics for Future Phases
+*Per-Server Bandwidth:*
+- 25GbE per server NIC
+- Line rate with jumbo frames
+- No congestion at ToR level
+- Storage and compute traffic isolated
 
-#### Technical Metrics
-- **Detection Accuracy**: Achieve 99.5% threat detection accuracy
-- **Response Time**: Reduce mean time to resolution to 30 minutes
-- **Automation Rate**: Automate 95% of routine security tasks
-- **Coverage Expansion**: Monitor 100% of digital assets and infrastructure
-- **Performance Optimization**: Maintain sub-second query response times at 10x scale
+*Oversubscription:*
+- Designed for 3:1 ratio
+- 48 x 25GbE down = 1.2Tbps
+- 6 x 100GbE up = 600Gbps
+- Acceptable for enterprise workloads
 
-#### Business Metrics
-- **Cost Optimization**: Achieve 50% total cost of ownership reduction
-- **Risk Reduction**: Decrease security risk exposure by 75%
-- **Compliance Efficiency**: Reduce audit preparation time by 90%
-- **Business Enablement**: Enable 50% faster secure digital transformation initiatives
-- **Return on Investment**: Achieve 400% ROI within 24 months
+**Latency & Reliability:**
 
----
+*East-West Latency - 1.8 Microseconds:*
+- Single hop through spine
+- Cut-through switching enabled
+- No queuing delay under load
+- Meets HPC requirements
 
-## Stakeholder Recognition
+*Failover Performance:*
+- BGP BFD with 50ms detection
+- ECMP reconvergence <50ms
+- Link failure: traffic reroutes instantly
+- Zero application impact during tests
 
-### Executive Testimonials
+**Comparison to Legacy Nexus:**
+| Metric | Nexus 9K | PowerSwitch | Improvement |
+|--------|----------|-------------|-------------|
+| Latency | 4us | 1.8us | 55% lower |
+| Port Cost | $500/port | $300/port | 40% savings |
+| Power | 2.1kW/switch | 1.2kW | 43% reduction |
 
-#### Chief Information Security Officer
-*"The Azure Sentinel implementation has transformed our security operations from reactive to proactive. We now have unprecedented visibility into our security posture with the ability to detect and respond to threats in real-time. This platform has positioned us as a security leader in our industry."*
-
-#### Chief Financial Officer
-*"This implementation delivered exceptional financial value with a 285% return on investment and 35% cost reduction in security operations. The pay-per-use model provides cost predictability while the automation capabilities have significantly improved our operational efficiency."*
-
-#### Chief Technology Officer
-*"The technical architecture and implementation quality exceeded our expectations. The platform's scalability and integration capabilities provide a foundation for our digital transformation initiatives while maintaining the highest security standards."*
-
-### Team Recognition
-
-#### Security Operations Manager
-*"The training program and change management approach ensured our team was fully prepared for the transition. The platform's intuitive interface and powerful analytics capabilities have made our analysts more effective at threat hunting and incident response."*
-
-#### Lead Security Analyst
-*"Azure Sentinel's advanced analytics and machine learning capabilities have revolutionized how we detect and investigate threats. The reduction in false positives and the speed of investigation have dramatically improved our job satisfaction and effectiveness."*
-
-#### IT Operations Director
-*"The implementation team's professionalism and expertise were outstanding. The project was delivered on time, under budget, and with minimal disruption to our operations. The ongoing support model ensures continued success."*
+*Transition:*
+"These improvements deliver significant business value..."
 
 ---
 
-## Key Success Factors
+### Benefits Realized
+**layout:** eo_table
 
-### Critical Success Elements
+**Delivering Measurable Business Value**
 
-#### Executive Leadership
-- **Visible Sponsorship**: Consistent executive support and advocacy throughout implementation
-- **Strategic Alignment**: Clear alignment between platform capabilities and business objectives
-- **Investment Commitment**: Adequate budget allocation for comprehensive implementation
-- **Change Championship**: Executive leadership in driving organizational change
-- **Success Communication**: Regular celebration and communication of project successes
+<!-- TABLE_CONFIG: widths=[30, 20, 20, 30] -->
+| Benefit Category | SOW Target | Achieved | Business Impact |
+|------------------|------------|----------|-----------------|
+| **Network Latency** | <2us | 1.8us | HPC-ready fabric |
+| **Fabric Throughput** | 1.6Tbps | 1.6Tbps | No bottlenecks |
+| **Port Density** | 1920 ports | 1920 ports | 40 racks connected |
+| **Capital Savings** | 30% vs Cisco | 40% savings | $740K saved |
+| **Power Reduction** | 35% | 43% | $65K annual savings |
+| **Automation** | Ansible ready | ZTP + Ansible | 90% faster deploys |
 
-#### Technical Excellence
-- **Architecture Design**: Robust, scalable architecture supporting current and future requirements
-- **Implementation Quality**: High-quality implementation following Microsoft best practices
-- **Integration Success**: Seamless integration with existing security and IT infrastructure
-- **Performance Optimization**: Proactive performance tuning and optimization
-- **Security Best Practices**: Implementation of comprehensive security controls and procedures
+**SPEAKER NOTES:**
 
-#### User Enablement
-- **Comprehensive Training**: Extensive training program for all user types and skill levels
-- **Change Management**: Structured change management approach ensuring user adoption
-- **Support Structure**: Multi-tier support model providing comprehensive assistance
-- **Feedback Integration**: Continuous incorporation of user feedback and suggestions
-- **Knowledge Transfer**: Complete knowledge transfer enabling organizational self-sufficiency
+*Benefits Analysis:*
 
-#### Project Management
-- **Structured Methodology**: Proven implementation methodology with clear milestones
-- **Risk Management**: Proactive identification and mitigation of project risks
-- **Quality Assurance**: Comprehensive testing and validation procedures
-- **Timeline Management**: Effective timeline management delivering ahead of schedule
-- **Communication Excellence**: Transparent and regular communication with all stakeholders
+**Network Latency - 55% Improvement:**
+- Legacy Nexus: 4 microsecond average
+- PowerSwitch: 1.8 microsecond average
+- Impact: HPC and storage workloads benefit
+- Enables NVMe-oF and RDMA traffic
 
----
+**Capital Cost Savings - 40%:**
+- Cisco Nexus 9K equivalent: $3.08M
+- Dell PowerSwitch solution: $1.85M
+- Net savings: $1.23M (40%)
+- Same or better performance
 
-## Lessons Learned
+**Power Consumption - 43% Reduction:**
+- Legacy environment: 84kW total
+- PowerSwitch fabric: 48kW total
+- Annual energy savings: $65,000
+- Cooling load also reduced
 
-### Implementation Insights
+**Operational Efficiency:**
+- ZTP: Switches deploy in 15 minutes
+- Ansible: Configuration changes in seconds
+- EVPN: No spanning-tree complexity
+- BGP: Industry-standard troubleshooting
 
-#### What Worked Well
-- **Phased Approach**: Gradual implementation minimized business disruption and allowed for optimization
-- **User Involvement**: Early and continuous user involvement ensured practical solution design
-- **Proof of Concept**: Initial POC validated approach and built stakeholder confidence
-- **Training Investment**: Comprehensive training program was critical for user adoption success
-- **Change Management**: Structured change management ensured organizational readiness
+**3-Year TCO Analysis:**
+| Cost Category | Year 1 | Year 2 | Year 3 | Total |
+|---------------|--------|--------|--------|-------|
+| Hardware | $1,650,000 | $0 | $50,000 | $1,700,000 |
+| Support | $85,000 | $85,000 | $85,000 | $255,000 |
+| Power/Cooling | -$65,000 | -$65,000 | -$65,000 | -$195,000 |
+| **Total** | **$1,670,000** | **$20,000** | **$70,000** | **$1,760,000** |
 
-#### Areas for Improvement
-- **Data Mapping**: Earlier investment in data mapping and normalization would accelerate implementation
-- **Integration Planning**: More detailed integration planning upfront would reduce implementation complexity
-- **Performance Testing**: Earlier performance testing would identify optimization opportunities sooner
-- **User Feedback**: More frequent user feedback sessions during implementation would improve outcomes
-- **Documentation**: Real-time documentation updates would ensure accuracy and completeness
+*Cisco Alternative: $3.38M over 3 years*
 
-### Best Practices Established
-
-#### Technical Best Practices
-- **Architecture Planning**: Invest significant time in architecture design and planning
-- **Data Strategy**: Develop comprehensive data ingestion and retention strategy early
-- **Performance Optimization**: Implement query optimization from day one
-- **Integration Standards**: Establish clear integration standards and procedures
-- **Security Controls**: Implement comprehensive security controls throughout the platform
-
-#### Organizational Best Practices
-- **Executive Engagement**: Maintain consistent executive engagement and support
-- **User Training**: Invest heavily in comprehensive user training and enablement
-- **Change Management**: Implement structured change management from project initiation
-- **Communication**: Establish clear communication channels and regular update schedules
-- **Feedback Loops**: Create multiple feedback mechanisms for continuous improvement
+*Transition:*
+"We learned valuable lessons during this project..."
 
 ---
 
-## Project Team Recognition
+### Lessons Learned & Recommendations
+**layout:** eo_two_column
 
-### Implementation Team Excellence
+**Insights for Continuous Improvement**
 
-#### Project Leadership
-- **Project Manager**: Exceptional leadership ensuring on-time, under-budget delivery
-- **Technical Lead**: Outstanding technical expertise and solution architecture
-- **Security Architect**: Comprehensive security design and implementation oversight
-- **Change Manager**: Effective change management ensuring user adoption success
-- **Quality Assurance Lead**: Rigorous testing ensuring platform reliability and performance
+- **What Worked Well**
+  - Rack-by-rack migration strategy
+  - ZTP for consistent deployment
+  - EVPN Type-5 for L3 routing
+  - Pre-staged switch inventory
+  - Maintenance window planning
+- **Challenges Overcome**
+  - Legacy VLAN sprawl cleanup
+  - Spanning-tree to EVPN transition
+  - TACACS+ server migration
+  - ACL rule conversion
+  - Telemetry collector setup
+- **Recommendations**
+  - Implement fabric monitoring
+  - Enable streaming telemetry
+  - Add WAN edge switches
+  - Consider 400GbE servers
+  - Annual firmware reviews
 
-#### Technical Team
-- **Azure Architects**: Expert platform design and configuration
-- **Security Engineers**: Advanced threat detection and response implementation
-- **Integration Specialists**: Seamless integration with existing infrastructure
-- **Data Engineers**: Optimal data ingestion and processing implementation
-- **DevOps Engineers**: Automated deployment and infrastructure management
+**SPEAKER NOTES:**
 
-#### Business Team
-- **Business Analysts**: Comprehensive requirements gathering and validation
-- **Training Specialists**: Outstanding training program development and delivery
-- **Communications Team**: Effective stakeholder communication and engagement
-- **Subject Matter Experts**: Critical business context and domain expertise
-- **End User Champions**: User advocacy and feedback throughout implementation
+*Lessons Learned Details:*
 
-### Awards and Recognition
+**What Worked Well:**
 
-#### Industry Recognition
-- **Microsoft Partner Award**: Recognized for exceptional Azure Sentinel implementation
-- **Security Implementation Excellence**: Industry association recognition for implementation quality
-- **Innovation Award**: Recognition for creative solution design and business value delivery
-- **Customer Success Story**: Featured as Microsoft customer success story
-- **Best Practice Example**: Implementation featured in industry publications and conferences
+*1. Rack-by-Rack Migration:*
+- Migrated 5 racks per night
+- 8 maintenance windows total
+- Zero unplanned downtime
+- Rollback procedures never needed
 
-#### Internal Recognition
-- **CEO Award**: Project team recognized with highest company award for exceptional delivery
-- **Innovation Recognition**: Internal innovation award for transformative business impact
-- **Team Excellence**: Quarterly team excellence award for collaborative achievement
-- **Customer Impact**: Customer impact award for significant business value delivery
-- **Technical Excellence**: Technical excellence award for outstanding implementation quality
+*2. Zero Touch Provisioning:*
+- Switch deployed in 15 minutes
+- Consistent baseline configuration
+- Human error eliminated
+- Inventory tracked automatically
+
+*3. EVPN Type-5 for L3:*
+- Replaced complex VRF-lite
+- Simplified inter-VLAN routing
+- Better scalability than legacy
+- Unified control plane
+
+**Challenges Overcome:**
+
+*1. VLAN Sprawl:*
+- Challenge: 800+ VLANs, many unused
+- Resolution: Audit and consolidate to 200
+- Lesson: Clean up before migration
+
+*2. Spanning-Tree Removal:*
+- Challenge: Years of STP workarounds
+- Resolution: EVPN native multi-homing
+- Lesson: Document bridge domains early
+
+*3. ACL Conversion:*
+- Challenge: Cisco ACL syntax differences
+- Resolution: Automated conversion scripts
+- Lesson: Allow extra time for security rules
+
+**Recommendations:**
+
+*1. Fabric Monitoring (High Priority):*
+- Dell CloudIQ for AIOps
+- Proactive issue detection
+- Investment: Included with ProSupport Plus
+
+*2. Streaming Telemetry:*
+- Real-time traffic visibility
+- gNMI/OpenConfig integration
+- Investment: $15K for collector
+
+*Transition:*
+"Let me walk through support transition..."
 
 ---
 
-## Conclusion and Next Steps
+### Support Transition
+**layout:** eo_two_column
 
-### Project Completion Summary
+**Ensuring Operational Continuity**
 
-The Azure Sentinel SIEM implementation has been completed successfully, delivering exceptional business value and technical excellence. The project achieved all primary objectives while exceeding performance targets and financial expectations. The implementation provides a robust foundation for our organization's cybersecurity operations with scalability to support future growth and evolution.
+- **Hypercare Complete (6 weeks)**
+  - All 40 racks migrated
+  - 0 network incidents
+  - NetOps team certified
+  - Runbooks validated
+  - Monitoring active
+- **Steady State Support**
+  - Dell ProSupport Plus 24x7
+  - 4-hour on-site response
+  - CloudIQ monitoring included
+  - Spare switch inventory
+  - Quarterly health reviews
+- **Escalation Path**
+  - L1: Internal Network Operations
+  - L2: Network Architecture Team
+  - L3: Dell ProSupport Plus
+  - L4: Dell Engineering
+  - Emergency: TAC Priority 1
 
-### Key Achievements Recap
-- ✅ **99% threat detection accuracy** with automated response capabilities
-- ✅ **285% return on investment** with 35% operational cost reduction
-- ✅ **98% user adoption** with comprehensive training and change management
-- ✅ **Zero critical security vulnerabilities** identified in testing and validation
-- ✅ **Comprehensive compliance** across all required regulatory frameworks
+**SPEAKER NOTES:**
 
-### Immediate Next Steps (30 Days)
-1. **Performance Optimization**: Complete final performance tuning based on production usage patterns
-2. **Process Refinement**: Finalize security operation procedures and workflow optimization
-3. **Documentation Updates**: Complete final documentation updates and knowledge base articles
-4. **User Feedback Integration**: Incorporate final user feedback and enhancement requests
-5. **Success Metrics Baseline**: Establish baseline metrics for ongoing performance measurement
+*Support Transition Details:*
 
-### Strategic Initiatives (90 Days)
-1. **Advanced Analytics**: Implement additional machine learning models and behavioral analytics
-2. **Integration Expansion**: Add 10+ additional security tool integrations
-3. **Automation Enhancement**: Extend automation to additional security operation workflows
-4. **Global Deployment**: Plan expansion to international offices and subsidiaries
-5. **Managed Services Evaluation**: Assess managed security services for 24/7 operations
+**Dell ProSupport Plus:**
+- 24x7 support with 4-hour response
+- Predictive issue detection
+- Parts on-site within 4 hours
+- Dedicated Technical Account Manager
+- Annual on-site health check
 
-### Long-Term Vision (12 Months)
-The Azure Sentinel platform will serve as the foundation for our organization's evolving cybersecurity strategy, supporting digital transformation initiatives while maintaining the highest security standards. Planned enhancements include multi-cloud security coverage, operational technology monitoring, and advanced artificial intelligence capabilities.
+**Spare Inventory:**
+- 2 S5248F-ON leaf switches
+- 1 Z9432F-ON spine switch
+- Optics and cables for 10 ports
+- Pre-configured for hot swap
+- Reorder threshold: 1 remaining
 
-This implementation represents a transformational achievement that positions our organization as a security leader while delivering exceptional business value and operational excellence.
+**Training Delivered:**
+| Session | Attendees | Duration |
+|---------|-----------|----------|
+| OS10 Administration | 4 NetOps | 8 hours |
+| BGP/EVPN Operations | 3 architects | 8 hours |
+| Ansible Automation | 4 engineers | 4 hours |
+| Troubleshooting Lab | 5 NetOps | 4 hours |
+
+**Operational Procedures:**
+
+*Common Scenarios:*
+1. Port down: Check transceiver, cable, server NIC
+2. BGP neighbor down: Verify IP, BFD, password
+3. VXLAN tunnel down: Check VTEP, VNI mapping
+4. New rack: Run ZTP, update Ansible inventory
+5. Switch RMA: Swap, ZTP rebuilds config
+
+**Monthly Operations:**
+- Week 1: Review BGP route table changes
+- Week 2: Check CloudIQ alerts and trends
+- Week 3: Capacity and utilization review
+- Week 4: Firmware and security patches
+
+*Transition:*
+"Let me recognize the team..."
 
 ---
 
-**Presentation Prepared By**: Azure Sentinel Implementation Team
-**Date**: September 2025
-**Version**: 1.0
-**Next Review**: Monthly performance reviews and quarterly strategic assessments
+### Acknowledgments & Next Steps
+**layout:** eo_bullet_points
 
-**For questions or additional information, please contact:**
-- **Project Manager**: [project.manager@company.com]
-- **Technical Lead**: [technical.lead@company.com]
-- **Business Sponsor**: [business.sponsor@company.com]
+**Partnership That Delivered Results**
+
+- **Client Team:** CIO, network architects, NetOps, security, data center facilities
+- **Vendor Team:** Project manager, network architect, automation engineer
+- **Special Recognition:** NetOps team for flawless weekend migrations
+- **This Week:** Legacy Cisco decommission planning, documentation archive
+- **Next 30 Days:** Telemetry collector deployment, WAN integration design
+- **Next Quarter:** 400GbE server connectivity pilot, fabric expansion
+
+**SPEAKER NOTES:**
+
+*Acknowledgments:*
+
+**Client Team:**
+- CIO: Executive sponsorship and vision
+- Network Architects: Design validation and standards
+- NetOps: Migration execution and operations
+- Security: ACL and TACACS+ configuration
+- Facilities: Power and cooling coordination
+
+**Vendor Team:**
+- Project Manager: Delivery coordination
+- Network Architect: BGP/EVPN design expertise
+- Automation Engineer: Ansible and ZTP deployment
+
+**Immediate Next Steps:**
+| Task | Owner | Due |
+|------|-------|-----|
+| Cisco Nexus decommission | NetOps | Week 2 |
+| Telemetry collector deploy | Network Arch | Week 3 |
+| WAN edge design | Network Arch | Week 4 |
+| Documentation archive | PM | This week |
+
+**Phase 2 Considerations:**
+| Enhancement | Investment | Benefit |
+|-------------|------------|---------|
+| Streaming Telemetry | $15K | Real-time visibility |
+| 400GbE Server NICs | $100K | 16x bandwidth per server |
+| WAN Edge Switches | $120K | Unified fabric extension |
+| Additional Racks | $50K/rack | Capacity expansion |
+
+*Transition:*
+"Thank you for your partnership..."
+
+---
+
+### Thank You
+**layout:** eo_thank_you
+
+Questions & Discussion
+
+**Your Project Team:**
+- Project Manager: pm@yourcompany.com | 555-123-4567
+- Network Architect: architect@yourcompany.com | 555-123-4568
+- Account Manager: am@yourcompany.com | 555-123-4569
+
+**SPEAKER NOTES:**
+
+*Closing:*
+"Thank you for your partnership. The Dell PowerSwitch spine-leaf fabric provides enterprise-grade performance with BGP/EVPN-VXLAN, delivering 40% cost savings and sub-2-microsecond latency.
+
+Questions?"
+
+**Anticipated Questions:**
+
+*Q: How do we add new racks?*
+A: ZTP auto-provisions new leaf switches. Update Ansible inventory, assign BGP ASN, deploy. Takes 30 minutes total.
+
+*Q: What about firmware upgrades?*
+A: Rolling upgrades supported. One switch at a time with BGP graceful restart. Zero downtime with ECMP.
+
+*Q: Can we connect to other data centers?*
+A: Yes, EVPN extends over WAN. Add DCI links to spine switches. Multi-site EVPN supported.
+
+*Q: What if a spine switch fails?*
+A: 4-way ECMP means 25% traffic shift to remaining spines. Automatic in <50ms. No application impact.

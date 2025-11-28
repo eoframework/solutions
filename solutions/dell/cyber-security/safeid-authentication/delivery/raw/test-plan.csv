@@ -1,7 +1,36 @@
-Test_Phase,Test_Category,Test_ID,Test_Name,Description,Prerequisites,Expected_Result,Priority,Duration,Responsible_Team
-Hardware Testing,Component Validation,HW001,Hardware POST Test,Verify all hardware components pass Power-On Self Test,Hardware installed and connected,All components pass POST without errors,High,30 minutes,Hardware Team
-Hardware Testing,Performance Testing,HW002,CPU Performance Validation,Validate CPU performance meets specifications,System fully operational,CPU benchmarks within 5% of specifications,High,60 minutes,Performance Team
-Hardware Testing,Memory Testing,HW003,Memory Stress Test,Comprehensive memory testing under load,Hardware configuration complete,Memory passes all stress tests without errors,High,120 minutes,QA Team
-Network Testing,Connectivity Testing,NET001,Network Interface Validation,Test all network interfaces and connectivity,Network configuration complete,All interfaces operational with expected throughput,High,45 minutes,Network Team
-Management Testing,Dell Integration,MGMT001,iDRAC Functionality Test,Validate iDRAC management capabilities,iDRAC configured and accessible,All management functions operational,Medium,60 minutes,Systems Team
-Security Testing,Security Validation,SEC001,TPM and Secure Boot Test,Verify security features are properly configured,Security policies applied,Security features operational and compliant,High,30 minutes,Security Team
+# Functional Tests
+#WIDTH: 10,14,28,38,30,44,38,10,12
+#ALIGN: left,left,left,left,left,left,left,center,center
+Test ID,Test Type,Test Name,Description,Pre-conditions,Test Steps,Expected Results,Priority,Status
+FT-001,Unit,SafeID Server Installation,Validate SafeID Enterprise server installation and startup,Server hardware provisioned,1. Install SafeID software; 2. Configure database; 3. Start services; 4. Verify admin console access,SafeID admin console accessible with all services running,High,Not Started
+FT-002,Unit,Active Directory Integration,Validate SafeID syncs with Active Directory users and groups,AD connection configured,1. Configure LDAP connection; 2. Test sync; 3. Verify user import; 4. Check group mapping,500 users synced from AD with correct group assignments,High,Not Started
+FT-003,Unit,RADIUS Server Configuration,Validate RADIUS authentication service is operational,SafeID server running,1. Configure RADIUS listener; 2. Add VPN as client; 3. Test authentication; 4. Verify logging,RADIUS responds to authentication requests with MFA,High,Not Started
+FT-004,Integration,YubiKey FIDO2 Enrollment,Validate user can self-enroll YubiKey via portal,Self-service portal deployed,1. Access enrollment portal; 2. Insert YubiKey; 3. Follow enrollment wizard; 4. Confirm registration,YubiKey registered to user with FIDO2 credentials,High,Not Started
+FT-005,Integration,Cisco AnyConnect VPN MFA,Validate VPN authentication with YubiKey FIDO2,VPN RADIUS integration complete,1. Launch AnyConnect; 2. Enter credentials; 3. Tap YubiKey when prompted; 4. Verify connection,VPN connects after successful YubiKey tap,Critical,Not Started
+FT-006,Integration,Microsoft 365 SAML SSO,Validate M365 login with YubiKey authentication,SAML IdP configured for M365,1. Access M365 portal; 2. Redirect to SafeID; 3. Authenticate with YubiKey; 4. Return to M365,User logged into M365 after YubiKey authentication,Critical,Not Started
+FT-007,Integration,AWS IAM Identity Center,Validate AWS console access with FIDO2,AWS SAML federation configured,1. Access AWS console; 2. Select SAML provider; 3. Authenticate with YubiKey; 4. Assume role,User accesses AWS with federated FIDO2 authentication,High,Not Started
+FT-008,System,Lost Token Recovery,Validate help desk can issue temporary token,User has lost YubiKey,1. Help desk disables lost key; 2. Issues temp token; 3. User authenticates; 4. New key enrolled,User regains access with temporary then permanent token,High,Not Started
+
+# Non-Functional Tests
+#WIDTH: 10,14,26,38,30,48,42,10,12
+#ALIGN: left,left,left,left,left,left,left,center,center
+Test ID,Test Type,Test Name,Description,Pre-conditions,Test Steps,Expected Results,Priority,Status
+NFT-001,Performance,Authentication Latency,Validate FIDO2 authentication completes within target time,Users enrolled with YubiKeys,1. Measure tap-to-auth time; 2. Test 100 authentications; 3. Calculate average; 4. Check 99th percentile,Average authentication time under 2 seconds,Critical,Not Started
+NFT-002,Performance,Enrollment Time,Validate self-service enrollment completes quickly,Portal operational,1. Time enrollment process; 2. Test 50 enrollments; 3. Calculate average; 4. Check user experience,Average enrollment time under 5 minutes per user,High,Not Started
+NFT-003,Performance,Concurrent Authentications,Validate system handles peak authentication load,500 users enrolled,1. Simulate 100 concurrent auths; 2. Monitor response times; 3. Check for failures; 4. Verify logging,100 concurrent authentications succeed without degradation,High,Not Started
+NFT-004,Reliability,Server Failover,Validate HA failover for SafeID servers,HA pair configured,1. Fail primary server; 2. Monitor failover; 3. Test authentication; 4. Measure recovery time,Failover completes within 30 seconds with no auth failures,High,Not Started
+NFT-005,Security,Phishing Resistance,Validate FIDO2 prevents credential phishing,FIDO2 enforcement enabled,1. Attempt phishing simulation; 2. Verify origin binding; 3. Check cryptographic challenge; 4. Confirm rejection,FIDO2 rejects authentication to non-origin domains,Critical,Not Started
+NFT-006,Security,Token Theft Protection,Validate stolen YubiKey requires PIN,PIN policy enforced,1. Attempt auth without PIN; 2. Verify PIN prompt; 3. Test incorrect PIN lockout; 4. Confirm security,Stolen YubiKey cannot authenticate without user PIN,Critical,Not Started
+NFT-007,Compliance,Audit Logging,Validate 3-year audit log retention configured,Logging enabled,1. Verify log configuration; 2. Check retention settings; 3. Test log search; 4. Validate CMMC evidence,All authentication events logged with 3-year retention,High,Not Started
+NFT-008,Compliance,CMMC Level 2 Requirements,Validate MFA requirements for CMMC compliance,Full deployment complete,1. Verify IA.2.078 network MFA; 2. Verify IA.2.079 privileged MFA; 3. Document evidence; 4. Prepare audit,All CMMC Level 2 MFA controls satisfied,Critical,Not Started
+
+# User Acceptance Tests
+#WIDTH: 10,14,30,38,30,48,42,10,12
+#ALIGN: left,left,left,left,left,left,left,center,center
+Test ID,Test Type,Test Name,Description,Pre-conditions,Test Steps,Expected Results,Priority,Status
+UAT-001,Business Process,VPN Remote Access Workflow,Validate end-to-end remote access with YubiKey,User enrolled with YubiKey,1. Connect from home network; 2. Launch VPN client; 3. Authenticate with YubiKey; 4. Access resources,Remote user connects via VPN with FIDO2 MFA,Critical,Not Started
+UAT-002,Business Process,M365 Daily Login,Validate daily M365 access experience,User enrolled with YubiKey,1. Access Outlook web; 2. Authenticate with YubiKey; 3. Check SSO to Teams SharePoint; 4. Measure time,User accesses M365 apps with single FIDO2 authentication,High,Not Started
+UAT-003,Business Process,Mobile NFC Authentication,Validate YubiKey NFC works with mobile devices,YubiKey 5 NFC token,1. Access M365 on mobile; 2. Tap YubiKey via NFC; 3. Verify authentication; 4. Check app access,Mobile authentication works with YubiKey NFC tap,High,Not Started
+UAT-004,User Interface,Self-Service Enrollment,Validate user can enroll without IT assistance,Portal access granted,1. Access enrollment URL; 2. Login with password; 3. Register YubiKey; 4. Test authentication,User completes self-enrollment in under 5 minutes,High,Not Started
+UAT-005,User Interface,PIN Recovery,Validate user can reset YubiKey PIN,User has forgotten PIN,1. Access PIN reset portal; 2. Verify identity; 3. Reset PIN; 4. Test authentication,User resets PIN and authenticates successfully,Medium,Not Started
+UAT-006,Business Process,Privileged Admin Access,Validate admin YubiKey for privileged operations,Admin enrolled with separate key,1. Access admin console; 2. Authenticate with admin YubiKey; 3. Perform admin action; 4. Verify audit log,Admin actions require separate privileged YubiKey,Critical,Not Started

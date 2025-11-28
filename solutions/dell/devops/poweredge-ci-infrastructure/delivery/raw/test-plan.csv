@@ -1,7 +1,37 @@
-Test_Phase,Test_Category,Test_ID,Test_Name,Description,Prerequisites,Expected_Result,Priority,Duration,Responsible_Team
-Hardware Testing,Component Validation,HW001,Hardware POST Test,Verify all hardware components pass Power-On Self Test,Hardware installed and connected,All components pass POST without errors,High,30 minutes,Hardware Team
-Hardware Testing,Performance Testing,HW002,CPU Performance Validation,Validate CPU performance meets specifications,System fully operational,CPU benchmarks within 5% of specifications,High,60 minutes,Performance Team
-Hardware Testing,Memory Testing,HW003,Memory Stress Test,Comprehensive memory testing under load,Hardware configuration complete,Memory passes all stress tests without errors,High,120 minutes,QA Team
-Network Testing,Connectivity Testing,NET001,Network Interface Validation,Test all network interfaces and connectivity,Network configuration complete,All interfaces operational with expected throughput,High,45 minutes,Network Team
-Management Testing,Dell Integration,MGMT001,iDRAC Functionality Test,Validate iDRAC management capabilities,iDRAC configured and accessible,All management functions operational,Medium,60 minutes,Systems Team
-Security Testing,Security Validation,SEC001,TPM and Secure Boot Test,Verify security features are properly configured,Security policies applied,Security features operational and compliant,High,30 minutes,Security Team
+# Functional Tests
+#WIDTH: 10,14,28,38,30,44,38,10,12
+#ALIGN: left,left,left,left,left,left,left,center,center
+Test ID,Test Type,Test Name,Description,Pre-conditions,Test Steps,Expected Results,Priority,Status
+FT-001,Unit,GitLab Server Installation,Validate GitLab Premium server installation and startup,Server hardware provisioned,1. Install GitLab Omnibus; 2. Configure PostgreSQL; 3. Start services; 4. Verify admin console access,GitLab admin console accessible with all services running,High,Not Started
+FT-002,Unit,GitLab Runner Registration,Validate GitLab Runner registration on build servers,GitLab server running,1. Install GitLab Runner; 2. Register with GitLab; 3. Configure executor; 4. Verify runner status,8 runners registered and active in GitLab admin,High,Not Started
+FT-003,Unit,Docker Enterprise Installation,Validate Docker Enterprise on all build agents,Ubuntu installed on agents,1. Install Docker; 2. Configure daemon; 3. Enable BuildKit; 4. Test container builds,Docker operational on all 8 build servers,High,Not Started
+FT-004,Integration,JFrog Artifactory Setup,Validate JFrog Artifactory Pro installation and repos,Server provisioned,1. Install Artifactory; 2. Create Maven repo; 3. Create npm repo; 4. Create Docker registry,All artifact repositories operational with 20TB storage,High,Not Started
+FT-005,Integration,SAML SSO Integration,Validate SSO login to GitLab via corporate IdP,SAML IdP configured,1. Configure SAML provider; 2. Test user login; 3. Verify group mapping; 4. Check permissions,50 developers authenticate via SAML SSO,Critical,Not Started
+FT-006,Integration,Pipeline Execution,Validate end-to-end CI/CD pipeline execution,All infrastructure ready,1. Clone test repo; 2. Trigger pipeline; 3. Execute all stages; 4. Push artifacts,Multi-stage pipeline completes with artifacts in Artifactory,Critical,Not Started
+FT-007,Integration,Docker Registry Push,Validate Docker image builds and registry push,Docker and Artifactory ready,1. Build Docker image; 2. Tag image; 3. Push to registry; 4. Verify in Artifactory,Docker images stored in JFrog Docker registry,High,Not Started
+FT-008,System,Jenkins Migration,Validate pipeline migration from Jenkins to GitLab,Legacy pipelines documented,1. Convert Jenkinsfile to gitlab-ci; 2. Test equivalent; 3. Validate outputs; 4. Compare results,Migrated pipelines produce identical artifacts,High,Not Started
+
+# Non-Functional Tests
+#WIDTH: 10,14,26,38,30,48,42,10,12
+#ALIGN: left,left,left,left,left,left,left,center,center
+Test ID,Test Type,Test Name,Description,Pre-conditions,Test Steps,Expected Results,Priority,Status
+NFT-001,Performance,Build Throughput,Validate system handles 5000 builds per day capacity,All runners operational,1. Generate build load; 2. Monitor throughput; 3. Measure queue times; 4. Check resource usage,5000+ builds processed per day with <5 min queue time,Critical,Not Started
+NFT-002,Performance,Concurrent Builds,Validate 24 concurrent build execution capacity,All 8 runners ready,1. Trigger 24 parallel builds; 2. Monitor CPU memory; 3. Check completion times; 4. Verify no failures,24 concurrent builds complete without resource exhaustion,High,Not Started
+NFT-003,Performance,Artifact Storage,Validate 20TB artifact storage and retrieval speed,Artifactory with storage,1. Store 100GB test artifacts; 2. Measure upload speed; 3. Test retrieval; 4. Verify integrity,Artifact operations achieve 500MB/s+ throughput,High,Not Started
+NFT-004,Reliability,Runner Failover,Validate job redistribution on runner failure,Multiple runners active,1. Disable one runner; 2. Trigger builds; 3. Verify redistribution; 4. Check completion,Jobs automatically redistribute to available runners,High,Not Started
+NFT-005,Security,Registry Vulnerability Scan,Validate Docker image vulnerability scanning,Images in registry,1. Push test image; 2. Trigger scan; 3. Review vulnerabilities; 4. Verify policy enforcement,Vulnerability scanning identifies CVEs before deployment,Critical,Not Started
+NFT-006,Security,Secret Management,Validate secure credential storage in GitLab,CI/CD variables configured,1. Store secrets; 2. Reference in pipeline; 3. Verify masking; 4. Check audit logs,Secrets masked in logs and securely injected,Critical,Not Started
+NFT-007,Compliance,Build Audit Trail,Validate complete audit logging for compliance,Logging enabled,1. Execute builds; 2. Review audit logs; 3. Verify user actions; 4. Test log retention,All CI/CD activities logged with user attribution,High,Not Started
+NFT-008,Compliance,Artifact Retention,Validate artifact retention policies per compliance,Retention configured,1. Set retention policy; 2. Wait expiration; 3. Verify cleanup; 4. Check protected artifacts,Artifacts retained per policy with automatic cleanup,Medium,Not Started
+
+# User Acceptance Tests
+#WIDTH: 10,14,30,38,30,48,42,10,12
+#ALIGN: left,left,left,left,left,left,left,center,center
+Test ID,Test Type,Test Name,Description,Pre-conditions,Test Steps,Expected Results,Priority,Status
+UAT-001,Business Process,Java Maven Build,Validate Java team Maven build workflow,Maven repo in Artifactory,1. Clone Java project; 2. Trigger pipeline; 3. Run unit tests; 4. Deploy to Artifactory,Java artifacts built tested and published to Maven repo,Critical,Not Started
+UAT-002,Business Process,Node.js npm Build,Validate frontend team npm build workflow,npm registry in Artifactory,1. Clone Node project; 2. Install dependencies; 3. Run tests; 4. Publish package,Node packages built tested and published to npm repo,High,Not Started
+UAT-003,Business Process,Docker Container Build,Validate containerized application build,Docker registry ready,1. Clone app repo; 2. Build Docker image; 3. Scan vulnerabilities; 4. Push to registry,Container images built scanned and stored in registry,Critical,Not Started
+UAT-004,User Interface,GitLab MR Workflow,Validate merge request CI integration,Developer access granted,1. Create branch; 2. Push changes; 3. Open MR; 4. Review pipeline status,MR shows pipeline status and blocks merge on failure,High,Not Started
+UAT-005,User Interface,Pipeline Visualization,Validate pipeline DAG visualization and logs,Pipelines executed,1. View pipeline graph; 2. Expand job details; 3. Review logs; 4. Download artifacts,Developers can visualize and debug pipelines,Medium,Not Started
+UAT-006,Business Process,Multi-Stage Deploy,Validate multi-environment deployment pipeline,All stages configured,1. Trigger release; 2. Deploy to staging; 3. Run integration tests; 4. Promote to prod,Multi-stage pipeline promotes through environments,Critical,Not Started
+

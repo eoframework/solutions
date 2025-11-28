@@ -1,7 +1,36 @@
-Test_Phase,Test_Category,Test_ID,Test_Name,Description,Prerequisites,Expected_Result,Priority,Duration,Responsible_Team
-Hardware Testing,Component Validation,HW001,Hardware POST Test,Verify all hardware components pass Power-On Self Test,Hardware installed and connected,All components pass POST without errors,High,30 minutes,Hardware Team
-Hardware Testing,Performance Testing,HW002,CPU Performance Validation,Validate CPU performance meets specifications,System fully operational,CPU benchmarks within 5% of specifications,High,60 minutes,Performance Team
-Hardware Testing,Memory Testing,HW003,Memory Stress Test,Comprehensive memory testing under load,Hardware configuration complete,Memory passes all stress tests without errors,High,120 minutes,QA Team
-Network Testing,Connectivity Testing,NET001,Network Interface Validation,Test all network interfaces and connectivity,Network configuration complete,All interfaces operational with expected throughput,High,45 minutes,Network Team
-Management Testing,Dell Integration,MGMT001,iDRAC Functionality Test,Validate iDRAC management capabilities,iDRAC configured and accessible,All management functions operational,Medium,60 minutes,Systems Team
-Security Testing,Security Validation,SEC001,TPM and Secure Boot Test,Verify security features are properly configured,Security policies applied,Security features operational and compliant,High,30 minutes,Security Team
+# Functional Tests
+#WIDTH: 10,14,28,38,30,44,38,10,12
+#ALIGN: left,left,left,left,left,left,left,center,center
+Test ID,Test Type,Test Name,Description,Pre-conditions,Test Steps,Expected Results,Priority,Status
+FT-001,Unit,VxRail P570 Node Power-On,Validate all 8 VxRail P570 nodes power on and complete POST,Hardware racked and cabled,1. Power on each node; 2. Verify POST completes; 3. Check iDRAC status; 4. Verify all NVMe drives detected,All nodes POST with 16TB NVMe storage detected per node,High,Not Started
+FT-002,Unit,ESXi 8 Host Detection,Validate ESXi 8 installed and operational on each P570 node,VxRail Manager initialized,1. Access VxRail Manager; 2. Verify each host status; 3. Check ESXi version; 4. Validate 2TB RAM per node,All 8 ESXi hosts showing online with 16TB total RAM,High,Not Started
+FT-003,Unit,vSAN 8 All-NVMe Disk Groups,Validate vSAN disk groups created with all-NVMe storage,ESXi hosts operational,1. Access vCenter vSAN UI; 2. Verify disk groups per host; 3. Check NVMe tier; 4. Verify erasure coding,Each node shows NVMe disk group with FTT=2 policy,High,Not Started
+FT-004,Integration,8-Node vSphere Cluster,Validate vSphere cluster created with all VxRail P570 hosts,vCenter deployed,1. Access vCenter; 2. Navigate to cluster; 3. Verify all 8 hosts; 4. Check HA and DRS status,Cluster shows 8 hosts with HA DRS and vSAN enabled,High,Not Started
+FT-005,Integration,vSAN 200TB Datastore,Validate 200TB vSAN datastore available to all hosts,vSAN disk groups created,1. Check vSAN datastore; 2. Verify 200TB capacity; 3. Check mount status; 4. Test write operation,200TB vSAN datastore accessible from all 8 hosts,High,Not Started
+FT-006,Integration,NSX-T Microsegmentation,Validate NSX-T configured with security policies,Network VLANs configured,1. Check NSX Manager; 2. Verify distributed firewall; 3. Test microsegmentation rules; 4. Validate logging,NSX-T DFW active with database security zones,High,Not Started
+FT-007,System,Oracle RAC Deployment,Validate Oracle RAC deploys and operates on vSAN,vSAN datastore available,1. Deploy Oracle RAC VMs; 2. Configure ASM on vSAN; 3. Test RAC failover; 4. Validate witness placement,Oracle RAC operational with sub-ms storage latency,Critical,Not Started
+FT-008,System,VMware SRM Configuration,Validate SRM configured with RecoverPoint for VMs,SRM server connected,1. Configure SRM pairing; 2. Create protection groups; 3. Create recovery plans; 4. Verify replication,SRM shows protection groups with RPO <5 min,High,Not Started
+
+# Non-Functional Tests
+#WIDTH: 10,14,26,38,30,48,42,10,12
+#ALIGN: left,left,left,left,left,left,left,center,center
+Test ID,Test Type,Test Name,Description,Pre-conditions,Test Steps,Expected Results,Priority,Status
+NFT-001,Performance,vSAN IOPS Benchmark,Validate vSAN cluster achieves 125000+ IOPS performance,Cluster operational with test VMs,1. Deploy HCIBench appliance; 2. Configure 4K random workload; 3. Run 60-minute test; 4. Record results,vSAN achieves 125000+ IOPS with all-NVMe storage,Critical,Not Started
+NFT-002,Performance,vSAN Sub-ms Latency,Validate vSAN read and write latency under 1ms,HCIBench deployed,1. Configure latency-focused workload; 2. Run 70% read 30% write; 3. Measure average latency; 4. Check 99th percentile,Average latency 0.4ms with 99th percentile under 0.8ms,Critical,Not Started
+NFT-003,Performance,Oracle RAC Performance,Validate Oracle database performance on vSAN,Oracle RAC deployed,1. Run SLOB benchmark; 2. Measure transaction throughput; 3. Check wait events; 4. Compare to legacy,Oracle achieves 45000 IOPS per database instance,Critical,Not Started
+NFT-004,Performance,100GbE Network Throughput,Validate 100GbE network achieves expected throughput,Network cabling complete,1. Run iperf3 between hosts; 2. Test vSAN network bandwidth; 3. Measure aggregate throughput; 4. Check packet loss,100GbE links achieve 95+ Gbps with zero packet loss,High,Not Started
+NFT-005,Reliability,vSphere HA Failover,Validate HA restarts VMs after simulated host failure,HA enabled on cluster,1. Power off one ESXi host; 2. Monitor VM restart; 3. Measure failover time; 4. Verify accessibility,VMs restart on remaining hosts within 90 seconds,Critical,Not Started
+NFT-006,Reliability,vSAN N+2 Rebuild,Validate vSAN rebuilds data after dual disk failure,vSAN healthy with FTT=2,1. Simulate dual disk failure; 2. Monitor rebuild progress; 3. Verify data integrity; 4. Confirm capacity,vSAN rebuilds data automatically with zero data loss,High,Not Started
+NFT-007,Reliability,DR Failover Test,Validate SRM failover completes within RTO target,SRM configured and tested,1. Initiate planned failover; 2. Monitor recovery progress; 3. Measure RTO; 4. Validate application access,DR failover completes within 15 minutes RTO target,Critical,Not Started
+NFT-008,Security,vSAN Encryption Verify,Validate vSAN encryption at rest with external KMS,KMS integration complete,1. Check vSAN encryption status; 2. Verify KMS integration; 3. Test key rotation; 4. Validate audit logging,vSAN encryption operational with external KMS,High,Not Started
+
+# User Acceptance Tests
+#WIDTH: 10,14,30,38,30,48,42,10,12
+#ALIGN: left,left,left,left,left,left,left,center,center
+Test ID,Test Type,Test Name,Description,Pre-conditions,Test Steps,Expected Results,Priority,Status
+UAT-001,Business Process,Database Migration Workflow,Validate end-to-end database migration from legacy SAN,Legacy and VxRail connected,1. Select production database; 2. Initiate Oracle Data Guard; 3. Monitor sync; 4. Perform switchover,Database migrates to vSAN with zero data loss,Critical,Not Started
+UAT-002,Business Process,Multi-Database Migration,Validate batch migration of Oracle SQL and SAP HANA,Migration scripts ready,1. Execute migration runbook; 2. Monitor all databases; 3. Track completion; 4. Verify all operational,All databases migrate successfully within maintenance window,Critical,Not Started
+UAT-003,Business Process,Database Performance Validation,Validate database performance after migration to VxRail,Databases migrated to VxRail,1. Run production queries; 2. Compare to legacy baseline; 3. Check response times; 4. Validate user experience,Database performance 2.5x better than legacy SAN,High,Not Started
+UAT-004,User Interface,vCenter Database Management,Validate DBAs can manage database VMs via vCenter,vCenter access granted,1. Log in to vCenter; 2. Access database VM; 3. Modify resources; 4. Take snapshot; 5. Check vSAN policy,All database VM operations complete successfully,Medium,Not Started
+UAT-005,User Interface,VxRail Manager Operations,Validate VxRail Manager lifecycle management functions,VxRail Manager access,1. Access VxRail Manager; 2. View cluster health; 3. Check software versions; 4. Review support status,VxRail Manager displays health and enables LCM,Medium,Not Started
+UAT-006,Business Process,DR Failover and Failback,Validate complete DR cycle with database recovery,SRM recovery plans ready,1. Initiate DR failover; 2. Validate databases online; 3. Run application tests; 4. Execute failback,Complete DR cycle with RPO <5min and RTO <15min,Critical,Not Started

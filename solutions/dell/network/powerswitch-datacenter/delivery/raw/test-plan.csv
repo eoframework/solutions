@@ -1,7 +1,37 @@
-Test_Phase,Test_Category,Test_ID,Test_Name,Description,Prerequisites,Expected_Result,Priority,Duration,Responsible_Team
-Hardware Testing,Component Validation,HW001,Hardware POST Test,Verify all hardware components pass Power-On Self Test,Hardware installed and connected,All components pass POST without errors,High,30 minutes,Hardware Team
-Hardware Testing,Performance Testing,HW002,CPU Performance Validation,Validate CPU performance meets specifications,System fully operational,CPU benchmarks within 5% of specifications,High,60 minutes,Performance Team
-Hardware Testing,Memory Testing,HW003,Memory Stress Test,Comprehensive memory testing under load,Hardware configuration complete,Memory passes all stress tests without errors,High,120 minutes,QA Team
-Network Testing,Connectivity Testing,NET001,Network Interface Validation,Test all network interfaces and connectivity,Network configuration complete,All interfaces operational with expected throughput,High,45 minutes,Network Team
-Management Testing,Dell Integration,MGMT001,iDRAC Functionality Test,Validate iDRAC management capabilities,iDRAC configured and accessible,All management functions operational,Medium,60 minutes,Systems Team
-Security Testing,Security Validation,SEC001,TPM and Secure Boot Test,Verify security features are properly configured,Security policies applied,Security features operational and compliant,High,30 minutes,Security Team
+# Functional Tests
+#WIDTH: 10,14,28,38,30,44,38,10,12
+#ALIGN: left,left,left,left,left,left,left,center,center
+Test ID,Test Type,Test Name,Description,Pre-conditions,Test Steps,Expected Results,Priority,Status
+FT-001,Unit,Spine Switch Installation,Validate Dell Z9432F-ON spine switch boot and initialization,Switch hardware racked,1. Power on switch; 2. Verify POST; 3. Configure OS10; 4. Verify management access,All 4 spine switches operational with OS10 Enterprise,High,Not Started
+FT-002,Unit,Leaf Switch Installation,Validate Dell S5248F-ON leaf switch deployment,Spine switches ready,1. Power on switch; 2. Apply ZTP config; 3. Verify uplinks; 4. Check LLDP neighbors,All 40 leaf switches operational with spine connectivity,High,Not Started
+FT-003,Unit,BGP Underlay Configuration,Validate eBGP peering between spine and leaf,All switches deployed,1. Configure eBGP; 2. Verify peer status; 3. Check route tables; 4. Test convergence,BGP sessions established with full route propagation,High,Not Started
+FT-004,Integration,EVPN-VXLAN Overlay,Validate EVPN control plane and VXLAN data plane,BGP underlay operational,1. Configure EVPN; 2. Create VNIs; 3. Verify VTEP; 4. Test MAC learning,EVPN routes exchanged with VXLAN encapsulation working,Critical,Not Started
+FT-005,Integration,VLAN Extension Across Fabric,Validate Layer 2 VLAN stretching via VXLAN,EVPN overlay ready,1. Create VLAN; 2. Map to VNI; 3. Test across racks; 4. Verify MAC table,VLANs extend across all 40 racks via VXLAN fabric,Critical,Not Started
+FT-006,Integration,TACACS+ Authentication,Validate AAA integration for switch management,AAA server configured,1. Configure TACACS+; 2. Test user login; 3. Verify authorization; 4. Check accounting,Network admins authenticate via centralized AAA,High,Not Started
+FT-007,Integration,Ansible Automation,Validate Ansible playbook execution for config,Ansible control node ready,1. Run deployment playbook; 2. Verify config changes; 3. Test rollback; 4. Check idempotency,Ansible automates switch configuration consistently,High,Not Started
+FT-008,System,Server Port Connectivity,Validate 25GbE server connections to leaf switches,Servers cabled to leafs,1. Verify link state; 2. Check speed negotiation; 3. Test VLAN access; 4. Verify throughput,1920 server ports operational at 25GbE,Critical,Not Started
+
+# Non-Functional Tests
+#WIDTH: 10,14,26,38,30,48,42,10,12
+#ALIGN: left,left,left,left,left,left,left,center,center
+Test ID,Test Type,Test Name,Description,Pre-conditions,Test Steps,Expected Results,Priority,Status
+NFT-001,Performance,Fabric Throughput,Validate 1.6Tbps aggregate fabric bandwidth,All switches operational,1. Generate traffic load; 2. Measure throughput; 3. Check all paths; 4. Verify no drops,1.6Tbps+ aggregate throughput across fabric,Critical,Not Started
+NFT-002,Performance,East-West Latency,Validate sub-2 microsecond intra-rack latency,Fabric fully deployed,1. Deploy latency test tools; 2. Measure server-to-server; 3. Test across racks; 4. Document results,East-west latency under 2 microseconds,Critical,Not Started
+NFT-003,Performance,Server Port Throughput,Validate 25GbE line rate per server port,Server connections ready,1. Test individual ports; 2. Measure throughput; 3. Check for errors; 4. Verify all 1920 ports,Each server port achieves 7000 Mbps throughput,High,Not Started
+NFT-004,Reliability,Spine Failover,Validate traffic redistribution on spine failure,Multi-path fabric ready,1. Fail one spine; 2. Monitor traffic; 3. Verify convergence; 4. Check no packet loss,Traffic redistributes within 50ms with zero loss,High,Not Started
+NFT-005,Reliability,Leaf Uplink Failover,Validate ECMP path failover on link failure,Multiple uplinks active,1. Fail one uplink; 2. Monitor flows; 3. Verify rebalancing; 4. Check session continuity,ECMP rebalances traffic without session disruption,High,Not Started
+NFT-006,Security,Port Security,Validate MAC address limiting and storm control,Security policies defined,1. Configure MAC limits; 2. Test storm control; 3. Verify violations; 4. Check logging,Security policies prevent unauthorized access,High,Not Started
+NFT-007,Compliance,Configuration Backup,Validate automated configuration backup,Backup system configured,1. Trigger backup; 2. Verify storage; 3. Test restore; 4. Check integrity,All switch configs backed up with version control,Medium,Not Started
+NFT-008,Compliance,Network Audit Logging,Validate comprehensive audit trail,Logging enabled,1. Review syslog; 2. Check TACACS+ logs; 3. Verify config changes; 4. Test retention,All network changes logged with user attribution,High,Not Started
+
+# User Acceptance Tests
+#WIDTH: 10,14,30,38,30,48,42,10,12
+#ALIGN: left,left,left,left,left,left,left,center,center
+Test ID,Test Type,Test Name,Description,Pre-conditions,Test Steps,Expected Results,Priority,Status
+UAT-001,Business Process,Database Cluster Traffic,Validate Oracle RAC heartbeat across fabric,Database cluster deployed,1. Test cluster communication; 2. Verify heartbeat; 3. Check failover; 4. Measure latency,Database cluster operates with sub-ms latency,Critical,Not Started
+UAT-002,Business Process,Storage Network Traffic,Validate iSCSI and NFS storage connectivity,Storage arrays connected,1. Test iSCSI paths; 2. Verify NFS mounts; 3. Check multipath; 4. Measure throughput,Storage traffic achieves required bandwidth,Critical,Not Started
+UAT-003,Business Process,VMotion Migration,Validate VMware vMotion across fabric,vSphere cluster ready,1. Initiate vMotion; 2. Monitor traffic; 3. Verify completion; 4. Check VM availability,VMotion completes without VM downtime,High,Not Started
+UAT-004,User Interface,OS10 CLI Management,Validate network admin daily operations,Admin access granted,1. Login via SSH; 2. Check interface status; 3. Review logs; 4. Execute show commands,Admins can monitor and troubleshoot fabric,High,Not Started
+UAT-005,User Interface,OpenManage Enterprise,Validate centralized switch management,OME deployed,1. Access dashboard; 2. View inventory; 3. Check alerts; 4. Deploy firmware,OME provides single pane of glass management,Medium,Not Started
+UAT-006,Business Process,Multi-Tenant Isolation,Validate VXLAN tenant separation,Multiple tenants configured,1. Create tenant VNIs; 2. Test isolation; 3. Verify no cross-talk; 4. Check policies,Tenants isolated with no traffic leakage,Critical,Not Started
+

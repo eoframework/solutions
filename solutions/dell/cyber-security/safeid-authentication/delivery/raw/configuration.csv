@@ -1,10 +1,32 @@
-Component,Parameter,Environment,Value,Data_Type,Required,Description,Validation_Rule,Default_Value
-Dell Infrastructure,Solution Name,All,Dell Enterprise Solution,String,Yes,Dell solution identifier,Valid solution name,Dell Enterprise Solution
-Hardware Configuration,Server Model,All,PowerEdge R750,String,Yes,Dell server model for deployment,Valid PowerEdge model,PowerEdge R750
-Hardware Configuration,Memory Configuration,All,128GB DDR4,String,Yes,Server memory specification,Valid memory config,128GB DDR4
-Hardware Configuration,Storage Configuration,All,NVMe SSD 1TB,String,Yes,Primary storage configuration,Valid storage config,NVMe SSD 1TB
-Network Configuration,Network Interface,All,25GbE Dual Port,String,Yes,Network interface specification,Valid network config,25GbE Dual Port
-Dell Management,iDRAC Version,All,iDRAC9,String,Yes,Integrated Dell Remote Access Controller,Valid iDRAC version,iDRAC9
-Dell Management,OpenManage Version,All,3.10.0,String,Yes,Dell OpenManage Enterprise version,Valid version number,3.10.0
-Security Configuration,TPM Module,All,TPM 2.0,String,Yes,Trusted Platform Module specification,TPM 1.2|TPM 2.0,TPM 2.0
-Security Configuration,Secure Boot,All,Enabled,Boolean,Yes,UEFI Secure Boot configuration,true|false,true
+Parameter Name,Category,Environment,Default Value,Description,Required,Data Type,Validation Rules,Security Level,Owner Team,Dependencies,Notes,Last Updated
+SAFEID_SOLUTION_NAME,Application,All,Dell SafeID Enterprise Authentication,Dell SafeID solution identifier,Yes,String,Max 50 characters,Public,Security Team,None,Used in portal and documentation,[DATE]
+SAFEID_VERSION,Application,All,4.2,SafeID Enterprise server version,Yes,String,Valid SafeID version,Public,Security Team,None,Major.minor format,[DATE]
+SAFEID_SERVER_COUNT,SafeID Infrastructure,All,2,Number of SafeID servers for HA,Yes,Integer,1-4,Public,Security Team,Load balancer,Active-passive HA configuration,[DATE]
+SAFEID_DATABASE,SafeID Infrastructure,All,PostgreSQL 15,SafeID database platform,Yes,String,Valid database,Public,Security Team,Database server,Enterprise database required,[DATE]
+USER_COUNT,User Base,All,500,Total number of users to enroll,Yes,Integer,1-10000,Public,IT Security,AD user count,All employees with MFA,[DATE]
+YUBIKEY_MODEL,Hardware Tokens,All,YubiKey 5 NFC,YubiKey hardware token model,Yes,String,Valid YubiKey model,Public,Security Team,Token procurement,NFC for mobile support,[DATE]
+YUBIKEY_QUANTITY,Hardware Tokens,All,525,Total YubiKeys to procure (500 + 25 spares),Yes,Integer,User count + 5%,Public,Procurement,User count,Include spare inventory,[DATE]
+ADMIN_YUBIKEY_COUNT,Hardware Tokens,All,10,Separate admin YubiKeys for privileged access,Yes,Integer,5-20,Public,Security Team,Privileged users,Dedicated admin tokens,[DATE]
+AUTH_PROTOCOL,Authentication,All,FIDO2 WebAuthn,Primary authentication protocol,Yes,String,FIDO2|TOTP|PIV,Public,Security Team,YubiKey capability,Phishing-resistant protocol,[DATE]
+FIDO2_ORIGIN,Authentication,All,[login.domain.com],FIDO2 relying party origin,Yes,String,Valid FQDN,Public,Security Team,DNS configuration,Origin binding for phishing resistance,[DATE]
+PIN_POLICY_ENABLED,Authentication,All,true,Require PIN for YubiKey use,Yes,Boolean,true|false,Confidential,Security Team,Token security,Protects against token theft,[DATE]
+PIN_MIN_LENGTH,Authentication,All,6,Minimum PIN length,Yes,Integer,4-8,Confidential,Security Team,PIN policy,Balance security and usability,[DATE]
+AD_INTEGRATION,Directory,All,LDAP,Active Directory integration method,Yes,String,LDAP|LDAPS,Public,AD Admin,AD configuration,Secure LDAP recommended,[DATE]
+AD_BASE_DN,Directory,All,[DC=domain DC=com],Active Directory base DN for user sync,Yes,String,Valid DN,Public,AD Admin,AD structure,User container path,[DATE]
+AD_SYNC_INTERVAL,Directory,All,15,AD sync interval in minutes,Yes,Integer,5-60,Public,AD Admin,AD connection,Balance freshness and load,[DATE]
+RADIUS_ENABLED,Network Integration,All,true,Enable RADIUS for VPN MFA,Yes,Boolean,true|false,Public,Network Team,VPN configuration,Cisco AnyConnect integration,[DATE]
+RADIUS_PORT,Network Integration,All,1812,RADIUS authentication port,Yes,Integer,1024-65535,Public,Network Team,Firewall rules,Standard RADIUS port,[DATE]
+RADIUS_SECRET,Network Integration,All,[generated],RADIUS shared secret,Yes,String,Min 16 characters,Confidential,Network Team,VPN configuration,Securely generated,[DATE]
+SAML_IDP_ENABLED,Cloud Integration,All,true,Enable SAML Identity Provider,Yes,Boolean,true|false,Public,Security Team,Cloud SSO,M365 and AWS integration,[DATE]
+SAML_ENTITY_ID,Cloud Integration,All,[https://safeid.domain.com],SAML IdP entity identifier,Yes,String,Valid URI,Public,Security Team,SAML configuration,Unique IdP identifier,[DATE]
+M365_TENANT_ID,Cloud Integration,All,[tenant-guid],Microsoft 365 tenant ID,Yes,String,Valid GUID,Confidential,Cloud Team,M365 configuration,Azure AD tenant,[DATE]
+AWS_ACCOUNT_ID,Cloud Integration,All,[aws-account-id],AWS account ID for federation,Yes,String,12-digit account,Confidential,Cloud Team,AWS configuration,IAM Identity Center,[DATE]
+VPN_INTEGRATION,Network Integration,All,Cisco AnyConnect,VPN platform for MFA integration,Yes,String,Valid VPN platform,Public,Network Team,RADIUS configuration,RADIUS authentication,[DATE]
+AUDIT_LOG_RETENTION,Compliance,All,1095,Audit log retention in days (3 years),Yes,Integer,365-1825,Public,Security Team,Compliance requirements,CMMC Level 2 requirement,[DATE]
+CMMC_LEVEL,Compliance,All,Level 2,Target CMMC compliance level,Yes,String,Level 1|Level 2|Level 3,Public,Security Team,Compliance scope,DoD contract requirement,[DATE]
+ENROLLMENT_PORTAL_URL,User Experience,All,[https://enroll.domain.com],Self-service enrollment portal URL,Yes,String,Valid HTTPS URL,Public,Security Team,DNS and certificate,User-facing enrollment,[DATE]
+ENROLLMENT_TIMEOUT,User Experience,All,300,Enrollment session timeout in seconds,Yes,Integer,120-600,Public,Security Team,Session security,5-minute timeout,[DATE]
+HELPDESK_PORTAL_URL,Operations,All,[https://helpdesk.domain.com],Help desk token management portal,Yes,String,Valid HTTPS URL,Public,IT Security,DNS and certificate,Token recovery and management,[DATE]
+TEMP_TOKEN_VALIDITY,Operations,All,24,Temporary token validity in hours,Yes,Integer,1-72,Public,IT Security,Recovery process,24-hour temp access,[DATE]
+HA_FAILOVER_ENABLED,Operations,All,true,Enable automatic HA failover,Yes,Boolean,true|false,Public,Security Team,HA configuration,Automatic failover,[DATE]
+BACKUP_SCHEDULE,Operations,All,Daily 02:00,Database backup schedule,Yes,String,Valid cron expression,Public,IT Operations,Backup infrastructure,Daily backups,[DATE]

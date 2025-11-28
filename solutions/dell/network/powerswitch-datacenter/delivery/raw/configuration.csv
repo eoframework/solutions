@@ -1,10 +1,33 @@
-Component,Parameter,Environment,Value,Data_Type,Required,Description,Validation_Rule,Default_Value
-Dell Infrastructure,Solution Name,All,Dell Enterprise Solution,String,Yes,Dell solution identifier,Valid solution name,Dell Enterprise Solution
-Hardware Configuration,Server Model,All,PowerEdge R750,String,Yes,Dell server model for deployment,Valid PowerEdge model,PowerEdge R750
-Hardware Configuration,Memory Configuration,All,128GB DDR4,String,Yes,Server memory specification,Valid memory config,128GB DDR4
-Hardware Configuration,Storage Configuration,All,NVMe SSD 1TB,String,Yes,Primary storage configuration,Valid storage config,NVMe SSD 1TB
-Network Configuration,Network Interface,All,25GbE Dual Port,String,Yes,Network interface specification,Valid network config,25GbE Dual Port
-Dell Management,iDRAC Version,All,iDRAC9,String,Yes,Integrated Dell Remote Access Controller,Valid iDRAC version,iDRAC9
-Dell Management,OpenManage Version,All,3.10.0,String,Yes,Dell OpenManage Enterprise version,Valid version number,3.10.0
-Security Configuration,TPM Module,All,TPM 2.0,String,Yes,Trusted Platform Module specification,TPM 1.2|TPM 2.0,TPM 2.0
-Security Configuration,Secure Boot,All,Enabled,Boolean,Yes,UEFI Secure Boot configuration,true|false,true
+Parameter Name,Category,Environment,Default Value,Description,Required,Data Type,Validation Rules,Security Level,Owner Team,Dependencies,Notes,Last Updated
+NETWORK_SOLUTION_NAME,Application,All,Dell PowerSwitch Datacenter Fabric,Dell network solution identifier,Yes,String,Max 50 characters,Public,Network Team,None,Used in documentation and management,[DATE]
+OS10_VERSION,Application,All,10.5.4,Dell OS10 Enterprise version,Yes,String,Valid OS10 version,Public,Network Team,None,Enterprise edition for BGP/EVPN,[DATE]
+SPINE_SWITCH_MODEL,Spine Layer,All,Dell Z9432F-ON,Spine switch model,Yes,String,Valid PowerSwitch model,Public,Network Team,Fabric design,32x400GbE or 128x100GbE ports,[DATE]
+SPINE_SWITCH_COUNT,Spine Layer,All,4,Number of spine switches,Yes,Integer,2-8,Public,Network Team,Redundancy requirements,4-way spine for full redundancy,[DATE]
+SPINE_PORT_CONFIG,Spine Layer,All,100GbE,Spine port speed configuration,Yes,String,100GbE|400GbE,Public,Network Team,Leaf requirements,Breakout to 100GbE for leaf uplinks,[DATE]
+LEAF_SWITCH_MODEL,Leaf Layer,All,Dell S5248F-ON,ToR leaf switch model,Yes,String,Valid PowerSwitch model,Public,Network Team,Server connectivity,48x25GbE + 8x100GbE ports,[DATE]
+LEAF_SWITCH_COUNT,Leaf Layer,All,40,Number of leaf switches (1 per rack),Yes,Integer,10-100,Public,Network Team,Rack count,40 racks with ToR switches,[DATE]
+LEAF_UPLINK_COUNT,Leaf Layer,All,4,Number of 100GbE uplinks per leaf,Yes,Integer,2-8,Public,Network Team,Spine connectivity,4 uplinks to 4 spines,[DATE]
+SERVER_PORT_COUNT,Leaf Layer,All,48,Server-facing ports per leaf switch,Yes,Integer,24-48,Public,Network Team,Host density,25GbE server connectivity,[DATE]
+TOTAL_SERVER_PORTS,Capacity,All,1920,Total server ports in fabric,Yes,Integer,100-5000,Public,Network Team,Infrastructure sizing,40 leafs × 48 ports,[DATE]
+FABRIC_BANDWIDTH_TBPS,Performance,All,1.6,Aggregate fabric bandwidth in Tbps,Yes,Float,0.4-6.4,Public,Network Team,Throughput requirements,1.6Tbps aggregate capacity,[DATE]
+EAST_WEST_LATENCY_US,Performance,All,2,Target east-west latency in microseconds,Yes,Integer,1-10,Public,Network Team,Application requirements,<2 microsecond SLA,[DATE]
+BGP_UNDERLAY_ASN_SPINE,Routing,All,65000,Spine BGP ASN for underlay,Yes,Integer,64512-65534,Public,Network Team,BGP design,Private ASN range,[DATE]
+BGP_UNDERLAY_ASN_LEAF,Routing,All,65001-65040,Leaf BGP ASN range for underlay,Yes,String,Valid ASN range,Public,Network Team,BGP design,Unique ASN per leaf,[DATE]
+EVPN_OVERLAY_ENABLED,Overlay,All,true,Enable EVPN control plane,Yes,Boolean,true|false,Public,Network Team,VXLAN requirements,Type-2 and Type-5 routes,[DATE]
+VXLAN_VNI_RANGE,Overlay,All,10000-19999,VXLAN VNI range for tenants,Yes,String,Valid VNI range,Public,Network Team,Multi-tenancy,10000 VNI capacity,[DATE]
+VLAN_COUNT,Network Segmentation,All,500,Number of VLANs supported,Yes,Integer,100-4000,Public,Network Team,Segmentation requirements,Extended via VXLAN,[DATE]
+TACACS_SERVER,Authentication,All,[tacacs.domain.com],TACACS+ server address,Yes,String,Valid FQDN,Confidential,Security Team,AAA integration,Centralized authentication,[DATE]
+TACACS_SECRET,Authentication,All,[generated],TACACS+ shared secret,Yes,String,Min 16 characters,Confidential,Security Team,AAA configuration,Securely generated,[DATE]
+SSH_ACCESS_ENABLED,Management,All,true,Enable SSH management access,Yes,Boolean,true|false,Public,Network Team,Remote management,SSHv2 only,[DATE]
+SNMP_VERSION,Monitoring,All,SNMPv3,SNMP version for monitoring,Yes,String,v2c|v3,Public,Network Team,NMS integration,SNMPv3 for security,[DATE]
+SYSLOG_SERVER,Logging,All,[syslog.domain.com],Centralized syslog server,Yes,String,Valid FQDN,Public,Network Team,Log aggregation,All switch logs,[DATE]
+NTP_SERVER,Time Sync,All,[ntp.domain.com],NTP server address,Yes,String,Valid FQDN,Public,Network Team,Time synchronization,Required for logging,[DATE]
+ZTP_ENABLED,Automation,All,true,Enable Zero Touch Provisioning,Yes,Boolean,true|false,Public,Network Team,Deployment automation,DHCP-based provisioning,[DATE]
+ANSIBLE_AUTOMATION,Automation,All,true,Enable Ansible automation,Yes,Boolean,true|false,Public,Network Team,Configuration management,Playbook-driven config,[DATE]
+OPENMANAGE_ENABLED,Management,All,true,Enable OpenManage Enterprise integration,Yes,Boolean,true|false,Public,Network Team,Centralized management,Firmware and monitoring,[DATE]
+CONFIG_BACKUP_SCHEDULE,Operations,All,Daily 02:00,Switch configuration backup schedule,Yes,String,Valid cron expression,Public,IT Operations,Backup infrastructure,Daily config backups,[DATE]
+STORM_CONTROL_ENABLED,Security,All,true,Enable broadcast storm control,Yes,Boolean,true|false,Public,Security Team,Network protection,Prevent broadcast storms,[DATE]
+MAC_LIMIT_PER_PORT,Security,All,100,Maximum MAC addresses per port,Yes,Integer,10-1000,Public,Security Team,Port security,Prevent MAC flooding,[DATE]
+LEGACY_NETWORK,Migration,All,Cisco Nexus 9K,Legacy network platform,Yes,String,Valid platform name,Public,Network Team,Migration planning,Phased migration from Cisco,[DATE]
+DELL_PROSUPPORT_LEVEL,Support,All,Mission Critical,Dell ProSupport tier,Yes,String,Basic|ProSupport|Mission Critical,Confidential,Support Team,SLA requirements,24x7 with 2-hour response,[DATE]
+
