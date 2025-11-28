@@ -1,27 +1,103 @@
-Task ID,Phase,Task Name,Description,Owner,Start Date,End Date,Duration Days,Predecessor Tasks,Status,Progress %,Priority,Milestone,Dependencies,Deliverables,Effort Hours,Notes
-PRJ-001,Planning,Project Kickoff,Formal project initiation and team alignment,Project Manager,[START_DATE],[START_DATE+1],1,,Not Started,0,Critical,Yes,Stakeholder availability,Project charter and team assignments,8,Executive sponsor approval required
-PRJ-002,Planning,Requirements Gathering,Collect and document detailed business and technical requirements,Business Analyst,[START_DATE+1],[START_DATE+5],4,PRJ-001,Not Started,0,High,No,Stakeholder interviews,Requirements specification document,32,Include all stakeholder groups
-PRJ-003,Planning,Solution Architecture Design,Design technical architecture and integration approach,Solution Architect,[START_DATE+3],[START_DATE+10],7,PRJ-002,Not Started,0,High,Yes,Technical requirements,Architecture documentation and diagrams,56,Review with technical governance board
-PRJ-004,Planning,Infrastructure Planning,Plan and design infrastructure requirements,Infrastructure Architect,[START_DATE+8],[START_DATE+15],7,PRJ-003,Not Started,0,High,No,Architecture design,Infrastructure specification and sizing,40,Include capacity planning and scaling
-PRJ-005,Planning,Risk Assessment,Identify and assess project risks with mitigation strategies,Risk Manager,[START_DATE+10],[START_DATE+12],2,PRJ-003,Not Started,0,Medium,No,Project scope,Risk register and mitigation plans,16,Regular risk review meetings scheduled
-PRJ-006,Design,Detailed Design,Create detailed technical specifications and design documents,Technical Lead,[START_DATE+15],[START_DATE+25],10,PRJ-004,Not Started,0,High,Yes,Architecture approval,Detailed technical specifications,80,Include interface specifications
-PRJ-007,Design,Security Design,Design security controls and compliance framework,Security Architect,[START_DATE+18],[START_DATE+23],5,PRJ-003,Not Started,0,High,No,Architecture design,Security design document,40,Compliance review required
-PRJ-008,Design,Integration Design,Design integration points and data flow,Integration Specialist,[START_DATE+20],[START_DATE+27],7,PRJ-006,Not Started,0,High,No,Technical specifications,Integration specification document,56,API documentation and testing approach
-PRJ-009,Build,Environment Setup,Provision and configure development and test environments,DevOps Engineer,[START_DATE+25],[START_DATE+32],7,PRJ-004,Not Started,0,High,Yes,Infrastructure approval,Development and test environments,56,Automated provisioning preferred
-PRJ-010,Build,Core Development,Develop core application functionality and features,Development Team,[START_DATE+30],[START_DATE+50],20,PRJ-006,Not Started,0,Critical,No,Environment setup,Core application components,320,Follow coding standards and best practices
-PRJ-011,Build,Integration Development,Develop integration components and APIs,Integration Developer,[START_DATE+35],[START_DATE+47],12,PRJ-008,Not Started,0,High,No,Core development started,Integration components and APIs,96,Include error handling and monitoring
-PRJ-012,Build,Security Implementation,Implement security controls and authentication,Security Developer,[START_DATE+38],[START_DATE+48],10,PRJ-007,Not Started,0,High,No,Security design approval,Security implementation,80,Security testing throughout development
-PRJ-013,Test,Unit Testing,Execute comprehensive unit testing of all components,Development Team,[START_DATE+40],[START_DATE+52],12,PRJ-010,Not Started,0,High,No,Core development,Unit test results and coverage reports,96,Achieve minimum 80% code coverage
-PRJ-014,Test,Integration Testing,Test integration points and data flow,QA Engineer,[START_DATE+50],[START_DATE+60],10,PRJ-011,Not Started,0,High,No,Integration development,Integration test results,80,Include negative testing scenarios
-PRJ-015,Test,System Testing,End-to-end system testing and validation,QA Team,[START_DATE+55],[START_DATE+70],15,PRJ-013,Not Started,0,Critical,Yes,Unit testing completion,System test results and defect reports,120,Include performance and load testing
-PRJ-016,Test,Security Testing,Comprehensive security testing and vulnerability assessment,Security Tester,[START_DATE+60],[START_DATE+67],7,PRJ-012,Not Started,0,High,No,Security implementation,Security test results and remediation plan,56,External security audit may be required
-PRJ-017,Test,User Acceptance Testing,Business user testing and sign-off,Business Users,[START_DATE+70],[START_DATE+80],10,PRJ-015,Not Started,0,Critical,Yes,System testing completion,UAT results and business sign-off,40,Include training for test users
-PRJ-018,Deploy,Production Environment Setup,Provision and configure production infrastructure,Infrastructure Team,[START_DATE+75],[START_DATE+82],7,PRJ-009,Not Started,0,High,No,Environment specifications,Production environment ready,56,Include monitoring and alerting setup
-PRJ-019,Deploy,Pre-Deployment Testing,Final testing in production-like environment,QA Lead,[START_DATE+80],[START_DATE+85],5,PRJ-017,Not Started,0,High,No,UAT completion,Pre-deployment test results,40,Smoke testing and final validation
-PRJ-020,Deploy,Production Deployment,Deploy solution to production environment,Deployment Team,[START_DATE+85],[START_DATE+87],2,PRJ-018,Not Started,0,Critical,Yes,Production environment ready,Deployed production system,16,Follow change management procedures
-PRJ-021,Deploy,Post-Deployment Validation,Validate production deployment and functionality,Operations Team,[START_DATE+87],[START_DATE+89],2,PRJ-020,Not Started,0,High,No,Production deployment,Production validation report,16,Include performance monitoring validation
-PRJ-022,Deploy,User Training Delivery,Deliver training to end users and administrators,Training Team,[START_DATE+75],[START_DATE+90],15,PRJ-017,Not Started,0,High,No,UAT completion,Training completion certificates,60,Include hands-on practical sessions
-PRJ-023,Deploy,Go-Live Support,Provide intensive support during initial production use,Support Team,[START_DATE+89],[START_DATE+96],7,PRJ-021,Not Started,0,High,No,Production validation,Go-live support reports,56,24/7 support for first week
-PRJ-024,Closure,Hypercare Period,Extended support and monitoring during stabilization,Support Team,[START_DATE+96],[START_DATE+126],30,PRJ-023,Not Started,0,Medium,No,Go-live completion,Hypercare completion report,120,Monitor system stability and user adoption
-PRJ-025,Closure,Project Documentation,Finalize all project documentation and handover,Project Manager,[START_DATE+90],[START_DATE+100],10,PRJ-022,Not Started,0,Medium,No,All deliverables complete,Complete project documentation package,40,Include lessons learned and recommendations
-PRJ-026,Closure,Project Closure,Formal project closure and team release,Project Manager,[START_DATE+126],[START_DATE+128],2,PRJ-024,Not Started,0,Medium,Yes,Hypercare completion,Project closure report and sign-off,8,Celebrate project success with team
+# Project Timeline
+#WIDTH: 14,38,11,13,13,28,22,14
+#ALIGN: left,left,center,center,center,left,left,center
+Phase,Task,Duration,Start Date,End Date,Dependencies,Owner,Status
+Discovery,Project Kickoff and Charter,1 day,[START_DATE],[START_DATE+1],None,Project Manager,Not Started
+Discovery,CI/CD Platform Assessment,5 days,[START_DATE+1],[START_DATE+6],Project Kickoff,DevOps Engineer,Not Started
+Discovery,Jenkins/GitLab Pipeline Inventory,4 days,[START_DATE+3],[START_DATE+7],Platform Assessment,Business Analyst,Not Started
+Discovery,Application Technology Analysis (.NET Node Python),4 days,[START_DATE+5],[START_DATE+9],Pipeline Inventory,Technical Lead,Not Started
+Discovery,Self-Hosted Runner Sizing and VPC Design,3 days,[START_DATE+7],[START_DATE+10],Platform Assessment,Infrastructure Lead,Not Started
+Planning,GitHub Actions Architecture Design,5 days,[START_DATE+10],[START_DATE+15],Runner Sizing Complete,Solution Architect,Not Started
+Planning,Reusable Workflow Template Strategy,4 days,[START_DATE+12],[START_DATE+16],Architecture Design,Technical Lead,Not Started
+Planning,OIDC AWS Integration Design,3 days,[START_DATE+14],[START_DATE+17],Architecture Design,Security Architect,Not Started
+Planning,Migration Plan and Pilot Selection,4 days,[START_DATE+15],[START_DATE+19],Template Strategy,DevOps Lead,Not Started
+Build,AWS VPC and Networking Setup,5 days,[START_DATE+19],[START_DATE+24],Migration Plan,Infrastructure Engineer,Not Started
+Build,Self-Hosted Runner Infrastructure (Terraform),7 days,[START_DATE+22],[START_DATE+29],VPC Setup Complete,Infrastructure Engineer,Not Started
+Build,Auto-Scaling Group Configuration,4 days,[START_DATE+27],[START_DATE+31],Runner Infrastructure,DevOps Engineer,Not Started
+Build,OIDC Provider Configuration in AWS IAM,3 days,[START_DATE+29],[START_DATE+32],ASG Configuration,Security Engineer,Not Started
+Build,GitHub Enterprise Cloud Organization Setup,3 days,[START_DATE+30],[START_DATE+33],OIDC Configuration,GitHub Administrator,Not Started
+Pilot,Pilot Application Selection (10 apps),2 days,[START_DATE+33],[START_DATE+35],Enterprise Setup,DevOps Lead,Not Started
+Pilot,Reusable Workflow Development (Initial Set),7 days,[START_DATE+35],[START_DATE+42],Pilot Selection,DevOps Engineer,Not Started
+Pilot,.NET Build and Deploy Workflow,3 days,[START_DATE+38],[START_DATE+41],Initial Workflows,DevOps Engineer,Not Started
+Pilot,Node.js Build and Deploy Workflow,3 days,[START_DATE+40],[START_DATE+43],.NET Workflow,DevOps Engineer,Not Started
+Pilot,Docker Build and Push Workflow,3 days,[START_DATE+42],[START_DATE+45],Node.js Workflow,DevOps Engineer,Not Started
+Pilot,Pilot Application Migration,10 days,[START_DATE+42],[START_DATE+52],Docker Workflow,DevOps Team,Not Started
+Pilot,Container Registry Integration (Packages/ECR),4 days,[START_DATE+48],[START_DATE+52],Pilot Migration,DevOps Engineer,Not Started
+Pilot,Pilot Performance Validation,5 days,[START_DATE+52],[START_DATE+57],Registry Integration,Technical Lead,Not Started
+Expand,Complete Reusable Workflow Library (15 templates),10 days,[START_DATE+57],[START_DATE+67],Pilot Validation,DevOps Team,Not Started
+Expand,Migration Wave 1 (15 applications),7 days,[START_DATE+62],[START_DATE+69],Workflow Library,DevOps Team,Not Started
+Expand,Migration Wave 2 (15 applications),7 days,[START_DATE+69],[START_DATE+76],Wave 1 Complete,DevOps Team,Not Started
+Expand,Migration Wave 3 (10 applications),5 days,[START_DATE+76],[START_DATE+81],Wave 2 Complete,DevOps Team,Not Started
+Expand,Kubernetes (EKS) Deployment Automation,7 days,[START_DATE+67],[START_DATE+74],Workflow Library,DevOps Engineer,Not Started
+Expand,Monitoring Integration (Datadog/CloudWatch),5 days,[START_DATE+74],[START_DATE+79],EKS Automation,DevOps Engineer,Not Started
+Expand,Notification Setup (Slack/Teams/PagerDuty),3 days,[START_DATE+77],[START_DATE+80],Monitoring Integration,DevOps Engineer,Not Started
+Test,End-to-End Workflow Validation,7 days,[START_DATE+81],[START_DATE+88],All Migrations Complete,QA Lead,Not Started
+Test,Performance Testing (<10 min pipeline),5 days,[START_DATE+85],[START_DATE+90],E2E Validation,Performance Engineer,Not Started
+Test,Concurrent Build Capacity Testing,4 days,[START_DATE+87],[START_DATE+91],Performance Testing,Performance Engineer,Not Started
+Test,Deployment Success Rate Validation,5 days,[START_DATE+88],[START_DATE+93],Capacity Testing,QA Lead,Not Started
+Test,User Acceptance Testing,7 days,[START_DATE+90],[START_DATE+97],Rate Validation,Business Users,Not Started
+Deploy,Production Environment Protection Rules,3 days,[START_DATE+97],[START_DATE+100],UAT Complete,DevOps Lead,Not Started
+Deploy,DevOps Engineer Training (15 engineers),5 days,[START_DATE+97],[START_DATE+102],UAT Complete,Training Lead,Not Started
+Deploy,Developer Overview Training (100 devs),10 days,[START_DATE+100],[START_DATE+110],Engineer Training,Training Lead,Not Started
+Deploy,Go-Live and Jenkins Parallel Operation,5 days,[START_DATE+110],[START_DATE+115],Training Complete,Project Manager,Not Started
+Closure,Hypercare Support (30 days),30 days,[START_DATE+115],[START_DATE+145],Go-Live,Support Team,Not Started
+Closure,Knowledge Transfer Sessions,7 days,[START_DATE+118],[START_DATE+125],Hypercare Started,Technical Lead,Not Started
+Closure,Operations Runbook Validation,5 days,[START_DATE+125],[START_DATE+130],Knowledge Transfer,DevOps Lead,Not Started
+Closure,Project Documentation Finalization,5 days,[START_DATE+130],[START_DATE+135],Runbook Validation,Project Manager,Not Started
+Closure,Project Closure and Lessons Learned,3 days,[START_DATE+145],[START_DATE+148],Hypercare Complete,Project Manager,Not Started
+
+# Milestones
+#WIDTH: 14,30,20,62,28,17
+#ALIGN: left,left,center,left,left,center
+Milestone ID,Milestone Name,Target Date,Success Criteria,Owner,Status
+M1,Project Kickoff,[START_DATE],Stakeholders aligned; project charter approved; GitHub org access confirmed,Project Manager,Not Started
+M2,Assessment Complete,[START_DATE+19],Pipeline inventory complete; application analysis done; runner sizing validated,DevOps Lead,Not Started
+M3,Infrastructure Ready,[START_DATE+33],Self-hosted runners operational; OIDC configured; ASG auto-scaling working,Infrastructure Lead,Not Started
+M4,Pilot Migration Complete,[START_DATE+57],10 pilot apps migrated; <10 min build time; 95%+ success rate validated,Technical Lead,Not Started
+M5,Workflow Library Complete,[START_DATE+67],15 reusable workflow templates deployed; all tech stacks covered,DevOps Lead,Not Started
+M6,Organization-Wide Migration,[START_DATE+81],All 50 applications migrated from Jenkins to GitHub Actions,DevOps Lead,Not Started
+M7,Testing Complete,[START_DATE+97],Performance targets met; UAT passed; deployment success rate >95%,QA Lead,Not Started
+M8,Go-Live,[START_DATE+115],Production deployment; developers trained; Jenkins parallel operation,Project Manager,Not Started
+M9,Project Closure,[START_DATE+148],Hypercare complete; knowledge transfer done; lessons learned documented,Project Manager,Not Started
+
+# RACI Matrix
+#WIDTH: 38,8,8,8,8,8,8,8,8,8
+#ALIGN: left,center,center,center,center,center,center,center,center,center
+Task/Deliverable,PM,SA,BA,TL,Dev,QA,DevOps,Infra,Client
+Project Charter & Kickoff,A,C,C,I,I,I,I,I,C
+CI/CD Platform Assessment,A,C,R,I,I,I,R,C,C
+Jenkins Pipeline Inventory,A,I,R,C,I,I,C,I,C
+GitHub Actions Architecture,A,R,I,C,I,I,C,C,I
+Self-Hosted Runner Design,A,C,I,C,I,I,R,R,I
+AWS VPC Infrastructure,A,C,I,I,I,I,C,R,I
+OIDC AWS Integration,A,C,I,C,I,I,R,C,I
+GitHub Enterprise Configuration,A,C,I,C,I,I,R,I,I
+Reusable Workflow Development,A,C,I,R,C,I,R,I,I
+Pilot Application Migration,A,C,C,R,C,I,R,I,C
+Container Registry Integration,A,C,I,C,I,I,R,C,I
+EKS Deployment Automation,A,C,I,C,I,I,R,C,I
+Monitoring Integration,A,C,I,C,I,I,R,C,I
+Organization-Wide Migration,A,C,C,R,C,I,R,I,C
+Performance Testing,R,I,I,C,I,R,C,I,I
+User Acceptance Testing,A,I,C,C,I,R,I,I,R
+DevOps Training,A,I,R,R,I,I,R,I,C
+Developer Training,A,I,R,I,I,I,C,I,C
+Go-Live Approval,A,C,C,C,C,C,C,C,R
+Hypercare Support,A,I,I,C,C,I,R,C,I
+
+# Communications Plan
+#WIDTH: 28,15,42,50,22,18
+#ALIGN: left,left,left,left,left,center
+Meeting Type,Frequency,Participants,Purpose,Owner,Day/Time
+Project Kickoff,Once,All stakeholders,Launch project and align on GitHub Actions migration objectives,Project Manager,Day 1
+Steering Committee,Bi-weekly,Executive sponsors and PMO,Strategic direction and issue escalation,Project Manager,Alternate Tuesdays
+Project Status Meeting,Weekly,Core project team,Review progress across all workstreams,Project Manager,Mondays 10:00
+Technical Architecture Review,Weekly,Technical leads and architects,GitHub Actions design decisions and runner infrastructure,Solution Architect,Wednesdays 14:00
+Migration Standup,Daily,DevOps and development teams,Application migration progress and blockers,DevOps Lead,Daily 09:30
+Infrastructure Review,Weekly,Infrastructure and DevOps teams,Runner health auto-scaling and AWS infrastructure,Infrastructure Lead,Tuesdays 11:00
+Risk & Issue Review,Bi-weekly,PM and Risk Manager,Risk assessment and mitigation tracking,Project Manager,Alternate Fridays
+QA & Testing Review,Weekly,QA DevOps and Development teams,Test progress and deployment success metrics,QA Lead,Thursdays 11:00
+Developer Feedback Session,Weekly,Developers and DevOps team,Workflow experience and pipeline performance feedback,Technical Lead,Thursdays 14:00
+Go-Live Readiness,Daily (2 weeks pre),Go-live team,Deployment preparation and checklist review,Project Manager,Daily 09:00
+Post Go-Live Review,Weekly (first month),Support and DevOps teams,Production stability and performance monitoring,Support Lead,Mondays 11:00
+

@@ -1,10 +1,57 @@
-Component,Parameter,Environment,Value,Data_Type,Required,Description,Validation_Rule,Default_Value
-Solution Configuration,Solution Name,All,Enterprise Solution,String,Yes,Solution identifier,Valid solution name,Enterprise Solution
-Environment,Environment Type,Dev,Development,String,Yes,Environment designation,dev|test|prod,dev
-Environment,Environment Type,Test,Test,String,Yes,Environment designation,dev|test|prod,test
-Environment,Environment Type,Prod,Production,String,Yes,Environment designation,dev|test|prod,prod
-Network Configuration,Network Mode,All,Enterprise,String,Yes,Network configuration mode,Basic|Standard|Enterprise,Enterprise
-Security Configuration,Security Level,All,High,String,Yes,Security configuration level,Low|Medium|High,High
-Performance Configuration,Performance Tier,All,Standard,String,Yes,Performance configuration tier,Basic|Standard|Premium,Standard
-Monitoring Configuration,Monitoring Enabled,All,true,Boolean,Yes,Enable comprehensive monitoring,true|false,true
-Backup Configuration,Backup Enabled,All,true,Boolean,Yes,Enable automated backups,true|false,true
+#WIDTH: 32,18,12,28,48,10,12,30,16,20,26,40,12
+#ALIGN: left,left,center,left,left,center,left,left,center,left,left,left,center
+Parameter Name,Category,Environment,Default Value,Description,Required,Data Type,Validation Rules,Security Level,Owner Team,Dependencies,Notes,Last Updated
+GHAS_SOLUTION_NAME,Application,All,GitHub Advanced Security,Solution identifier for logging and metrics,Yes,String,Max 50 characters,Public,Security Team,None,Used in dashboards and reports,[DATE]
+GHAS_VERSION,Application,All,1.0.0,Current GHAS deployment version,Yes,String,Semantic versioning format,Public,Security Team,None,Updated with configuration changes,[DATE]
+GHAS_ENVIRONMENT,Application,All,development,Deployment environment identifier,Yes,String,development|staging|production,Public,Security Team,None,Controls policy enforcement levels,[DATE]
+GITHUB_ENTERPRISE_URL,GitHub,All,https://github.com,GitHub Enterprise Cloud base URL,Yes,String,Valid HTTPS URL,Public,GitHub Admin,None,Enterprise Cloud uses github.com,[DATE]
+GITHUB_ORG_NAME,GitHub,All,[organization-name],GitHub organization name,Yes,String,Valid GitHub org name,Confidential,GitHub Admin,Enterprise license,Primary organization for GHAS,[DATE]
+GITHUB_ENTERPRISE_LICENSE,GitHub,All,[license-id],GitHub Enterprise Cloud license identifier,Yes,String,Valid license ID,Secret,GitHub Admin,Billing,100 users licensed per SOW,[DATE]
+GHAS_LICENSE_COMMITTERS,GitHub,All,80,GitHub Advanced Security active committers,Yes,Integer,1-1000,Confidential,GitHub Admin,Billing,90-day rolling count per GitHub,[DATE]
+GITHUB_API_TOKEN,GitHub,All,[github-pat-token],GitHub personal access token for API access,Yes,String,ghp_* format,Secret,Security Team,Org admin scope,Rotate quarterly,[DATE]
+SAML_IDP_ENTITY_ID,Authentication,All,[idp-entity-id],SAML Identity Provider entity ID,Yes,String,Valid entity ID URI,Confidential,Identity Team,IdP configuration,Corporate identity provider,[DATE]
+SAML_SSO_URL,Authentication,All,[sso-login-url],SAML Single Sign-On URL,Yes,String,Valid HTTPS URL,Confidential,Identity Team,IdP configuration,Login endpoint URL,[DATE]
+SAML_CERTIFICATE,Authentication,All,[base64-certificate],SAML signing certificate from IdP,Yes,String,Valid X.509 cert base64,Secret,Identity Team,IdP configuration,Certificate for signature validation,[DATE]
+MFA_ENFORCEMENT,Authentication,All,required,Multi-factor authentication requirement,Yes,String,required|optional,Public,Security Team,SAML configuration,Required for all GitHub users,[DATE]
+CODEQL_LANGUAGES,Code Scanning,All,"javascript,python,java,csharp,go",Languages enabled for CodeQL analysis,Yes,String,Comma-separated language list,Public,Security Team,CodeQL support,5 languages per SOW scope,[DATE]
+CODEQL_QUERY_SUITES,Code Scanning,All,security-extended,CodeQL query suite for scanning,Yes,String,default|security-extended|security-and-quality,Public,Security Team,CodeQL configuration,Extended security coverage,[DATE]
+CODEQL_SCHEDULE,Code Scanning,All,"0 2 * * *",Cron schedule for full repository scans,Yes,String,Valid cron expression,Public,Security Team,GitHub Actions,Daily at 2 AM UTC,[DATE]
+CODEQL_TIMEOUT_MINUTES,Code Scanning,All,60,Maximum CodeQL scan duration in minutes,Yes,Integer,15-120,Public,Security Team,Performance requirements,Extended for large repositories,[DATE]
+CODEQL_RAM_MB,Code Scanning,All,4096,Memory allocation for CodeQL analysis,Yes,Integer,2048-16384,Public,Security Team,Performance requirements,Default GitHub-hosted runner,[DATE]
+CODEQL_THREADS,Code Scanning,All,2,CPU threads for CodeQL analysis,Yes,Integer,1-4,Public,Security Team,Performance requirements,GitHub-hosted runner limit,[DATE]
+CUSTOM_QUERIES_REPO,Code Scanning,All,[org]/codeql-custom-queries,Repository containing custom CodeQL queries,Yes,String,Valid repo path,Confidential,Security Team,Custom queries,15 custom queries per SOW,[DATE]
+CUSTOM_QUERIES_PATH,Code Scanning,All,queries,Path to custom queries in repository,Yes,String,Valid directory path,Public,Security Team,Custom queries repo,Query directory location,[DATE]
+SECRET_SCANNING_ENABLED,Secret Scanning,All,true,Enable secret scanning for repositories,Yes,Boolean,true|false,Public,Security Team,GHAS license,Organization-wide enablement,[DATE]
+PUSH_PROTECTION_ENABLED,Secret Scanning,All,true,Enable push protection to block secrets,Yes,Boolean,true|false,Public,Security Team,Secret scanning,Real-time secret blocking,[DATE]
+SECRET_SCANNING_CUSTOM_PATTERNS,Secret Scanning,All,5,Number of custom secret patterns,Yes,Integer,0-100,Public,Security Team,Secret scanning,Proprietary API patterns,[DATE]
+SECRET_BYPASS_WORKFLOW,Secret Scanning,All,require-approval,Push protection bypass workflow,Yes,String,require-approval|self-approve,Confidential,Security Team,Push protection,Manager approval required,[DATE]
+DEPENDABOT_ENABLED,Dependency Scanning,All,true,Enable Dependabot vulnerability alerts,Yes,Boolean,true|false,Public,Security Team,GitHub configuration,Automated dependency scanning,[DATE]
+DEPENDABOT_SECURITY_UPDATES,Dependency Scanning,All,true,Enable Dependabot security update PRs,Yes,Boolean,true|false,Public,Security Team,Dependabot alerts,Auto-generated fix PRs,[DATE]
+DEPENDABOT_VERSION_UPDATES,Dependency Scanning,All,false,Enable Dependabot version updates,Yes,Boolean,true|false,Public,Security Team,Dependabot alerts,Disabled per SOW scope,[DATE]
+DEPENDABOT_SCHEDULE,Dependency Scanning,All,daily,Dependabot check frequency,Yes,String,daily|weekly|monthly,Public,Security Team,Dependabot config,Daily vulnerability checks,[DATE]
+BRANCH_PROTECTION_ENABLED,Security Policies,All,true,Enable branch protection rules,Yes,Boolean,true|false,Public,Security Team,Repository settings,Required for security gates,[DATE]
+REQUIRE_CODEQL_PASS,Security Policies,All,true,Require CodeQL check to pass before merge,Yes,Boolean,true|false,Public,Security Team,Branch protection,Block merges on critical findings,[DATE]
+REQUIRE_REVIEWS,Security Policies,All,1,Number of required PR approvals,Yes,Integer,0-6,Public,Security Team,Branch protection,Security review requirement,[DATE]
+DISMISS_STALE_REVIEWS,Security Policies,All,true,Dismiss approvals on new commits,Yes,Boolean,true|false,Public,Security Team,Branch protection,Re-review after changes,[DATE]
+VULNERABILITY_SLA_CRITICAL,Security Policies,All,24,Critical vulnerability SLA in hours,Yes,Integer,1-168,Public,Security Team,Vulnerability management,24-hour remediation per SOW,[DATE]
+VULNERABILITY_SLA_HIGH,Security Policies,All,168,High vulnerability SLA in hours,Yes,Integer,24-720,Public,Security Team,Vulnerability management,7-day remediation per SOW,[DATE]
+VULNERABILITY_SLA_MEDIUM,Security Policies,All,720,Medium vulnerability SLA in hours,Yes,Integer,168-2160,Public,Security Team,Vulnerability management,30-day remediation per SOW,[DATE]
+VULNERABILITY_SLA_LOW,Security Policies,All,2160,Low vulnerability SLA in hours,Yes,Integer,720-8760,Public,Security Team,Vulnerability management,90-day remediation per SOW,[DATE]
+CONFIDENCE_THRESHOLD,AI/ML,All,0.85,Minimum confidence for auto-processing,Yes,Float,0.0-1.0,Public,Security Team,Detection accuracy,Below threshold routes to review,[DATE]
+DETECTION_ACCURACY_TARGET,AI/ML,All,0.95,Target detection accuracy rate,Yes,Float,0.80-0.99,Public,Security Team,Quality assurance,95%+ per presales SOW,[DATE]
+FALSE_POSITIVE_THRESHOLD,AI/ML,All,0.10,Maximum acceptable false positive rate,Yes,Float,0.01-0.20,Public,Security Team,Quality assurance,<10% per presales SOW,[DATE]
+SIEM_WEBHOOK_URL,Integration,All,[siem-webhook-endpoint],SIEM webhook URL for alerts,Yes,String,Valid HTTPS URL,Secret,Integration Team,SIEM platform,Splunk or Azure Sentinel,[DATE]
+SIEM_WEBHOOK_SECRET,Integration,All,[webhook-secret],Shared secret for webhook validation,Yes,String,Min 32 characters,Secret,Integration Team,SIEM webhook,HMAC signature validation,[DATE]
+SIEM_EVENT_TYPES,Integration,All,"code-scanning,secret-scanning,dependabot",Event types to forward to SIEM,Yes,String,Comma-separated event list,Confidential,Integration Team,SIEM webhook,Security alert events,[DATE]
+JIRA_BASE_URL,Integration,All,[jira-instance-url],JIRA instance base URL,Yes,String,Valid HTTPS URL,Confidential,Integration Team,JIRA license,Vulnerability ticket creation,[DATE]
+JIRA_PROJECT_KEY,Integration,All,[project-key],JIRA project key for security tickets,Yes,String,Valid project key,Confidential,Integration Team,JIRA project,Security backlog project,[DATE]
+JIRA_API_TOKEN,Integration,All,[jira-api-token],JIRA API token for authentication,Yes,String,Valid API token,Secret,Integration Team,JIRA user,Service account token,[DATE]
+SLACK_WEBHOOK_URL,Notifications,All,[slack-webhook-url],Slack webhook for security notifications,No,String,Valid Slack webhook URL,Secret,Integration Team,Slack workspace,Critical alerts channel,[DATE]
+TEAMS_WEBHOOK_URL,Notifications,All,[teams-webhook-url],Microsoft Teams webhook URL,No,String,Valid Teams webhook URL,Secret,Integration Team,Teams channel,Security team channel,[DATE]
+PAGERDUTY_ROUTING_KEY,Notifications,All,[pagerduty-key],PagerDuty routing key for incidents,No,String,Valid routing key,Secret,Integration Team,PagerDuty service,Critical incident escalation,[DATE]
+AUDIT_LOG_RETENTION_DAYS,Monitoring,All,365,GitHub audit log retention period,Yes,Integer,90-730,Public,Security Team,Compliance requirements,1-year retention for SOC 2,[DATE]
+CLOUDWATCH_LOG_GROUP,Monitoring,All,/ghas/security-alerts,CloudWatch log group for alerts,No,String,Valid log group name,Confidential,Operations Team,AWS integration,Optional AWS logging,[DATE]
+METRICS_ENABLED,Monitoring,All,true,Enable security metrics collection,Yes,Boolean,true|false,Public,Security Team,Monitoring tools,Dashboard metrics,[DATE]
+ALERT_EMAIL_RECIPIENTS,Notifications,All,[security-team-dl],Email distribution for critical alerts,Yes,String,Valid email addresses,Confidential,Security Team,Email service,Security team distribution,[DATE]
+SECURITY_OVERVIEW_ENABLED,Monitoring,All,true,Enable GitHub Security Overview dashboard,Yes,Boolean,true|false,Public,Security Team,GitHub Enterprise,Organization-wide visibility,[DATE]
+
