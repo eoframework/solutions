@@ -1,6 +1,60 @@
-Test_Phase,Test_Category,Test_ID,Test_Name,Description,Prerequisites,Expected_Result,Priority,Duration,Responsible_Team
-Functional Testing,Core Functionality,FT001,Basic Functionality Test,Verify core solution functionality,Solution deployed and configured,All core functions operational,High,60 minutes,QA Team
-Functional Testing,Integration Testing,FT002,System Integration Test,Validate integration with existing systems,Integration points configured,All integrations functional,High,90 minutes,Integration Team
-Performance Testing,Load Testing,PT001,Performance Load Test,Test solution under expected load,Performance test environment ready,Performance meets specifications,High,120 minutes,Performance Team
-Security Testing,Security Validation,ST001,Security Configuration Test,Validate security controls and configurations,Security policies applied,All security controls operational,High,90 minutes,Security Team
-User Acceptance,Business Validation,UAT001,User Acceptance Test,Validate solution meets business requirements,User training completed,Business requirements satisfied,Medium,180 minutes,Business Users
+# Functional Tests
+#WIDTH: 12,18,18,32,55,55,55,12,14,18,14,12,35,28
+#ALIGN: left,left,left,left,left,left,left,center,left,left,center,center,left,left
+Test ID,Test Category,Test Type,Test Name,Description,Pre-conditions,Expected Results,Priority,Environment,Assigned Tester,Status,Pass/Fail,Notes,Requirements Traced
+FT-001,Platform,Integration,Terraform Cloud VCS Integration,Verify GitHub webhook triggers Terraform Cloud runs on commit,TFC operational and GitHub connected,Commit triggers plan within 30 seconds,High,Staging,Platform Team,Not Started,,Validate webhook delivery and run queue,SOW-VCS-001
+FT-002,Platform,Integration,Workspace State Management,Verify state locking prevents concurrent modifications,Workspace with active run,Second run queues until first completes,High,Staging,Platform Team,Not Started,,Test concurrent run handling,SOW-STATE-001
+FT-003,Platform,Functional,Remote State Migration,Verify state migration from S3 to Terraform Cloud,Existing S3 state file available,State migrated with zero resource drift,Critical,Staging,Migration Team,Not Started,,Validate resource count and attributes,SOW-MIGRATE-001
+FT-004,Vault,Integration,AWS Dynamic Credentials,Verify Vault generates valid AWS credentials,Vault AWS secrets engine configured,Credentials valid for AWS API calls,Critical,Staging,Security Team,Not Started,,Test credential generation and TTL,SOW-VAULT-001
+FT-005,Vault,Integration,Azure Dynamic Credentials,Verify Vault generates valid Azure credentials,Vault Azure secrets engine configured,Service principal credentials valid,Critical,Staging,Security Team,Not Started,,Test Azure resource access,SOW-VAULT-002
+FT-006,Vault,Integration,GCP Dynamic Credentials,Verify Vault generates valid GCP credentials,Vault GCP secrets engine configured,Service account credentials valid,Critical,Staging,Security Team,Not Started,,Test GCP resource access,SOW-VAULT-003
+FT-007,Sentinel,Functional,Security Policy Enforcement,Verify security policies block non-compliant infrastructure,Security policy set attached to workspace,Non-compliant plan fails policy check,Critical,Staging,Security Team,Not Started,,Test encryption and network rules,SOW-POLICY-001
+FT-008,Sentinel,Functional,Cost Policy Enforcement,Verify cost policies prevent over-provisioning,Cost policy set attached to workspace,Oversized resources fail policy check,High,Staging,Platform Team,Not Started,,Test instance sizing limits,SOW-POLICY-002
+FT-009,Sentinel,Functional,Tagging Policy Enforcement,Verify tagging policies require mandatory tags,Tagging policy set active,Resources without tags fail policy,High,Staging,Platform Team,Not Started,,Test required tag validation,SOW-POLICY-003
+FT-010,Platform,Functional,Self-Service Workspace Creation,Verify operators can create workspaces via UI,Operator role assigned to user,Workspace created with proper settings,Medium,Staging,Platform Team,Not Started,,Test RBAC for workspace creation,SOW-RBAC-001
+FT-011,Platform,Integration,ServiceNow Approval Integration,Verify production changes trigger ServiceNow approval,ServiceNow integration configured,Approval request created in ServiceNow,High,Staging,Integration Team,Not Started,,Test approval workflow,SOW-INT-001
+FT-012,Platform,Integration,Slack Notification Integration,Verify run status notifications sent to Slack,Slack webhook configured,Run status posted to channel,Medium,Staging,Platform Team,Not Started,,Test notification content,SOW-INT-002
+FT-013,Consul,Functional,Service Discovery Registration,Verify services register in Consul catalog,Consul agent deployed with service,Service visible in Consul UI and API,High,Staging,Platform Team,Not Started,,Test service registration,SOW-CONSUL-001
+FT-014,Consul,Functional,Consul Connect Encryption,Verify service-to-service encryption via Connect,Consul Connect enabled for services,mTLS certificates issued and traffic encrypted,High,Staging,Security Team,Not Started,,Test certificate issuance,SOW-CONSUL-002
+FT-015,Platform,Functional,Drift Detection,Verify drift detection identifies manual changes,Resource modified outside Terraform,Drift detected and reported in workspace,Medium,Staging,Platform Team,Not Started,,Test drift detection accuracy,SOW-DRIFT-001
+FT-016,Platform,Functional,Scheduled Runs,Verify scheduled runs execute at configured time,Workspace with schedule configured,Run executes at scheduled time,Medium,Staging,Platform Team,Not Started,,Test schedule reliability,SOW-SCHED-001
+FT-017,Platform,Functional,Private Module Registry,Verify modules publish and consume from registry,Module published to registry,Workspace can reference private module,Medium,Staging,Platform Team,Not Started,,Test module versioning,SOW-MODULE-001
+FT-018,Platform,Integration,Multi-Cloud Provisioning,Verify single workspace provisions across clouds,Workspace with AWS Azure GCP providers,Resources created in all three clouds,High,Staging,Platform Team,Not Started,,Test cross-cloud execution,SOW-MULTI-001
+
+# Non-Functional Tests
+#WIDTH: 12,18,18,32,55,55,55,12,14,18,14,12,35,28
+#ALIGN: left,left,left,left,left,left,left,center,left,left,center,center,left,left
+Test ID,Test Category,Test Type,Test Name,Description,Pre-conditions,Expected Results,Priority,Environment,Assigned Tester,Status,Pass/Fail,Notes,Requirements Traced
+NFT-001,Performance,Load,Concurrent Run Capacity,Verify platform handles 15 concurrent runs,Platform operational with test workspaces,15 runs execute without queue timeout,Critical,Performance,QA Team,Not Started,,Test run queue capacity,SOW-PERF-001
+NFT-002,Performance,Load,Vault Credential Generation,Verify Vault handles credential requests under load,Vault operational with secrets engines,100 credential requests per minute,High,Performance,Security Team,Not Started,,Test Vault throughput,SOW-PERF-002
+NFT-003,Performance,Response,API Response Time,Verify API response times meet SLA,Platform under normal load,API responses under 2 seconds p95,High,Performance,QA Team,Not Started,,Test API latency,SOW-PERF-003
+NFT-004,Performance,Load,State File Operations,Verify large state file operations complete,Workspace with 500+ resources,State operations complete under 30 seconds,Medium,Performance,QA Team,Not Started,,Test state file handling,SOW-PERF-004
+NFT-005,Availability,Failover,EKS Node Failure Recovery,Verify platform recovers from node failure,Platform operational on 3-node EKS,Service restored within 5 minutes,Critical,DR,Operations Team,Not Started,,Test EKS auto-healing,SOW-HA-001
+NFT-006,Availability,Failover,Vault HA Failover,Verify Vault fails over to standby node,Vault HA cluster operational,Failover completes within 30 seconds,Critical,DR,Security Team,Not Started,,Test Vault HA behavior,SOW-HA-002
+NFT-007,Availability,Failover,RDS Failover,Verify RDS fails over to standby,RDS Multi-AZ operational,Database available within 2 minutes,Critical,DR,Operations Team,Not Started,,Test RDS failover,SOW-HA-003
+NFT-008,Security,Penetration,Platform Security Assessment,Verify platform security controls,Platform operational with auth,No critical vulnerabilities identified,Critical,Security,Security Team,Not Started,,External security scan,SOW-SEC-001
+NFT-009,Security,Access,RBAC Enforcement,Verify role permissions enforced,Users with different roles,Users can only access permitted resources,Critical,Staging,Security Team,Not Started,,Test all role boundaries,SOW-SEC-002
+NFT-010,Security,Audit,Audit Log Completeness,Verify all actions logged,Platform operational with users,All authentication and changes logged,High,Staging,Security Team,Not Started,,Test audit coverage,SOW-SEC-003
+NFT-011,Security,Encryption,Data Encryption Validation,Verify encryption at rest and in transit,Platform operational,All data encrypted per policy,Critical,Staging,Security Team,Not Started,,Test TLS and KMS,SOW-SEC-004
+NFT-012,Disaster Recovery,Backup,Backup and Restore,Verify backup and restore procedures,Backups configured and running,Full restore completes within RTO,High,DR,Operations Team,Not Started,,Test DR procedures,SOW-DR-001
+NFT-013,Scalability,Scale,Workspace Scaling,Verify platform scales to 100+ workspaces,Platform with initial workspaces,100 workspaces operational,High,Performance,QA Team,Not Started,,Test workspace limits,SOW-SCALE-001
+NFT-014,Compliance,Audit,SOC2 Control Validation,Verify SOC2 controls implemented,Platform operational,All SOC2 controls pass audit,High,Production,Compliance Team,Not Started,,Map controls to requirements,SOW-COMP-001
+NFT-015,Compliance,Audit,ISO27001 Control Validation,Verify ISO27001 controls implemented,Platform operational,All ISO27001 controls pass audit,High,Production,Compliance Team,Not Started,,Map controls to requirements,SOW-COMP-002
+NFT-016,Monitoring,Alerting,Alert Configuration Validation,Verify alerts trigger appropriately,Monitoring configured with alerts,Alerts fire for simulated conditions,Medium,Staging,Operations Team,Not Started,,Test alert accuracy,SOW-MON-001
+
+# User Acceptance Tests
+#WIDTH: 12,18,18,32,55,55,55,12,14,18,14,12,35,28
+#ALIGN: left,left,left,left,left,left,left,center,left,left,center,center,left,left
+Test ID,Test Category,Test Type,Test Name,Description,Pre-conditions,Expected Results,Priority,Environment,Assigned Tester,Status,Pass/Fail,Notes,Requirements Traced
+UAT-001,Workflow,End-to-End,Infrastructure Provisioning Workflow,Verify complete workflow from code commit to resource,VCS connected and policies active,Infrastructure provisioned via GitOps,Critical,UAT,DevOps Team,Not Started,,Test full provisioning flow,SOW-UAT-001
+UAT-002,Workflow,End-to-End,Self-Service Workspace Creation,Verify operators can self-serve workspace creation,Operator role and training complete,Workspace created without admin help,High,UAT,Infrastructure Team,Not Started,,Test self-service capability,SOW-UAT-002
+UAT-003,Workflow,End-to-End,Credential Retrieval Workflow,Verify dynamic credentials accessible in runs,Vault integration and policies active,Terraform run uses dynamic credentials,Critical,UAT,DevOps Team,Not Started,,Test credential injection,SOW-UAT-003
+UAT-004,Workflow,End-to-End,Policy Violation Handling,Verify users understand policy failure feedback,Sentinel policies active,Users can interpret and fix violations,High,UAT,DevOps Team,Not Started,,Test policy feedback clarity,SOW-UAT-004
+UAT-005,Workflow,End-to-End,Production Change Approval,Verify approval workflow for production changes,ServiceNow integration active,Change approved before apply,Critical,UAT,Operations Team,Not Started,,Test approval workflow,SOW-UAT-005
+UAT-006,Operations,End-to-End,Run Troubleshooting,Verify operators can diagnose failed runs,Operator access and training,Issue identified from logs and state,High,UAT,Operations Team,Not Started,,Test troubleshooting capability,SOW-UAT-006
+UAT-007,Operations,End-to-End,Workspace State Recovery,Verify state recovery from backup,Backup procedures documented,State recovered from backup,High,UAT,Operations Team,Not Started,,Test recovery procedures,SOW-UAT-007
+UAT-008,Security,End-to-End,Vault Secret Access,Verify operators can manage Vault paths,Vault access and training,Secrets created and rotated,High,UAT,Security Team,Not Started,,Test Vault administration,SOW-UAT-008
+UAT-009,Governance,End-to-End,Compliance Reporting,Verify compliance reports generated,Sentinel policies and dashboards,Compliance status visible in dashboard,Medium,UAT,Compliance Team,Not Started,,Test reporting accuracy,SOW-UAT-009
+UAT-010,Governance,End-to-End,Cost Visibility,Verify cost estimation accuracy,Cost policies active,Cost estimates match actual spend,Medium,UAT,Finance Team,Not Started,,Test cost estimation,SOW-UAT-010
+UAT-011,Training,Validation,Administrator Competency,Verify admins can perform all platform tasks,Admin training complete,All admin tasks completed independently,High,UAT,IT Team,Not Started,,Competency assessment,SOW-UAT-011
+UAT-012,Training,Validation,Operator Competency,Verify operators can perform daily tasks,Operator training complete,All operator tasks completed,High,UAT,DevOps Team,Not Started,,Competency assessment,SOW-UAT-012

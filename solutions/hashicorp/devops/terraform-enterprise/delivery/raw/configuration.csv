@@ -1,10 +1,36 @@
-Component,Parameter,Environment,Value,Data_Type,Required,Description,Validation_Rule,Default_Value
-Solution Configuration,Solution Name,All,Enterprise Solution,String,Yes,Solution identifier,Valid solution name,Enterprise Solution
-Environment,Environment Type,Dev,Development,String,Yes,Environment designation,dev|test|prod,dev
-Environment,Environment Type,Test,Test,String,Yes,Environment designation,dev|test|prod,test
-Environment,Environment Type,Prod,Production,String,Yes,Environment designation,dev|test|prod,prod
-Network Configuration,Network Mode,All,Enterprise,String,Yes,Network configuration mode,Basic|Standard|Enterprise,Enterprise
-Security Configuration,Security Level,All,High,String,Yes,Security configuration level,Low|Medium|High,High
-Performance Configuration,Performance Tier,All,Standard,String,Yes,Performance configuration tier,Basic|Standard|Premium,Standard
-Monitoring Configuration,Monitoring Enabled,All,true,Boolean,Yes,Enable comprehensive monitoring,true|false,true
-Backup Configuration,Backup Enabled,All,true,Boolean,Yes,Enable automated backups,true|false,true
+#WIDTH: 28,18,14,30,45,10,14,35,16,22,28,42,14
+#ALIGN: left,left,center,left,left,center,left,left,center,left,left,left,center
+Parameter Name,Category,Environment,Default Value,Description,Required,Data Type,Validation Rules,Security Level,Owner Team,Dependencies,Notes,Last Updated
+TFE_ORGANIZATION,Terraform Enterprise,All,[organization-name],Terraform Enterprise organization name,Yes,String,Valid organization name,Public,Platform Team,None,Must be unique across TFE,[DATE]
+TFE_HOSTNAME,Terraform Enterprise,All,[tfe-hostname].example.com,Terraform Enterprise hostname,Yes,String,Valid hostname,Public,Platform Team,DNS configuration,Use FQDN with TLS,[DATE]
+TFE_LICENSE,Terraform Enterprise,All,[license-file-path],Path to Terraform Enterprise license,Yes,String,Valid file path,Secret,Platform Team,HashiCorp license,Store securely,[DATE]
+TFE_ADMIN_EMAIL,Terraform Enterprise,All,admin@example.com,Initial admin user email,Yes,String,Valid email address,Confidential,Platform Team,None,For initial setup,[DATE]
+TFE_ENCRYPTION_KEY,Terraform Enterprise,All,[encryption-key],Terraform Enterprise encryption key,Yes,String,32+ character random,Secret,Security Team,KMS,Store in secrets manager,[DATE]
+AWS_REGION,AWS,All,us-east-1,Primary AWS region for TFE deployment,Yes,String,Valid AWS region,Public,Infrastructure Team,AWS account,EKS deployment region,[DATE]
+AWS_ACCOUNT_ID,AWS,All,[aws-account-id],AWS account ID for TFE platform,Yes,String,12-digit account ID,Confidential,Infrastructure Team,AWS account,Platform account,[DATE]
+EKS_CLUSTER_NAME,AWS,All,tfe-platform-cluster,EKS cluster name for Terraform Enterprise,Yes,String,Valid EKS cluster name,Public,Infrastructure Team,AWS account,3-node cluster,[DATE]
+EKS_NODE_INSTANCE_TYPE,AWS,All,t3.large,EKS worker node instance type,Yes,String,Valid EC2 instance type,Public,Infrastructure Team,EKS cluster,2 vCPU 8GB,[DATE]
+EKS_NODE_COUNT,AWS,Prod,3,Number of EKS worker nodes,Yes,Integer,3-10,Public,Infrastructure Team,EKS cluster,HA requires 3+,[DATE]
+RDS_INSTANCE_CLASS,AWS,Prod,db.t3.medium,RDS instance class for TFE state,Yes,String,Valid RDS instance class,Public,Infrastructure Team,AWS account,2 vCPU 4GB,[DATE]
+RDS_STORAGE_GB,AWS,Prod,50,RDS allocated storage in GB,Yes,Integer,20-500,Public,Infrastructure Team,RDS instance,Scale as needed,[DATE]
+RDS_DATABASE_NAME,AWS,All,tfe_state,PostgreSQL database name,Yes,String,Valid database name,Confidential,Infrastructure Team,RDS instance,TFE state backend,[DATE]
+RDS_USERNAME,AWS,All,tfe_admin,RDS master username,Yes,String,Valid username,Secret,Infrastructure Team,RDS instance,Store in Vault,[DATE]
+RDS_PASSWORD,AWS,All,[database-password],RDS master password,Yes,String,Min 16 chars complex,Secret,Infrastructure Team,RDS instance,Store in Vault,[DATE]
+VPC_CIDR,Network,All,10.50.0.0/16,VPC CIDR block for TFE platform,Yes,String,Valid CIDR notation,Public,Network Team,IP planning,256 addresses minimum,[DATE]
+PRIVATE_SUBNET_CIDRS,Network,All,10.50.10.0/24;10.50.11.0/24,Private subnet CIDR blocks,Yes,String,Valid CIDR list,Public,Network Team,VPC CIDR,Multi-AZ deployment,[DATE]
+PUBLIC_SUBNET_CIDRS,Network,All,10.50.1.0/24;10.50.2.0/24,Public subnet CIDR blocks,Yes,String,Valid CIDR list,Public,Network Team,VPC CIDR,ALB deployment,[DATE]
+VAULT_ADDR,HashiCorp Vault,All,https://vault.example.com:8200,Vault address for dynamic credentials,Yes,String,Valid HTTPS URL,Confidential,Security Team,Vault deployment,Use internal DNS,[DATE]
+VAULT_ROLE,HashiCorp Vault,All,tfe-aws-credentials,Vault role for AWS credentials,Yes,String,Valid role name,Confidential,Security Team,Vault AWS engine,1-hour TTL,[DATE]
+VAULT_AWS_PATH,HashiCorp Vault,All,aws/creds/tfe-role,Vault path for AWS credentials,Yes,String,Valid Vault path,Confidential,Security Team,Vault configuration,Dynamic credentials,[DATE]
+GITHUB_ORG,VCS,All,[github-org],GitHub organization name,Yes,String,Valid org name,Public,Platform Team,GitHub access,Enterprise or Cloud,[DATE]
+GITHUB_OAUTH_TOKEN,VCS,All,[oauth-token],GitHub OAuth token for VCS integration,Yes,String,Valid OAuth token,Secret,Platform Team,GitHub OAuth App,Configure in TFE,[DATE]
+GITHUB_WEBHOOK_SECRET,VCS,All,[webhook-secret],GitHub webhook secret for TFE,Yes,String,32+ character random,Secret,Platform Team,TFE VCS integration,Generate securely,[DATE]
+DATADOG_API_KEY,Monitoring,All,[datadog-api-key],Datadog API key for metrics,Yes,String,Valid API key,Secret,Operations Team,Datadog account,Create dedicated key,[DATE]
+PAGERDUTY_SERVICE_KEY,Monitoring,All,[pagerduty-key],PagerDuty service integration key,Yes,String,Valid service key,Secret,Operations Team,PagerDuty service,Critical alerts,[DATE]
+SLACK_WEBHOOK_URL,Notifications,All,[slack-webhook],Slack webhook URL for notifications,Yes,String,Valid Slack webhook URL,Secret,Operations Team,Slack workspace,Run notifications,[DATE]
+SSO_SAML_METADATA_URL,Security,All,[saml-metadata-url],SAML IdP metadata URL for SSO,Yes,String,Valid HTTPS URL,Confidential,Security Team,Identity provider,Enterprise SSO,[DATE]
+BACKUP_RETENTION_DAYS,Operations,Prod,7,Backup retention period in days,Yes,Integer,7-30,Public,Operations Team,Backup storage,RDS snapshots,[DATE]
+LOG_RETENTION_DAYS,Operations,Prod,90,Log retention period in days,Yes,Integer,30-365,Public,Operations Team,CloudWatch,Audit requirements,[DATE]
+TFE_CONCURRENT_RUNS,Terraform Enterprise,Prod,10,Maximum concurrent Terraform runs,Yes,Integer,1-50,Public,Platform Team,EKS capacity,Size workers accordingly,[DATE]
+TFE_WORKSPACE_COUNT,Terraform Enterprise,All,50,Target workspace count for platform,Yes,Integer,1-500,Public,Platform Team,License,Matches SOW scope,[DATE]
+SENTINEL_POLICY_COUNT,Governance,All,40,Target Sentinel policy count,Yes,Integer,1-100,Public,Security Team,Policy repository,Security and cost and compliance,[DATE]
