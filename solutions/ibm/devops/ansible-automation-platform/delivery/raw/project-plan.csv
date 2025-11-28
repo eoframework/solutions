@@ -1,21 +1,92 @@
-Phase,Task,Description,Start Date,End Date,Duration,Dependencies,Assigned To,Status,Deliverables,Risks,Mitigation
-"Phase 1: Foundation","P1.1 - Project Initiation","Project charter, stakeholder alignment, and Red Hat partnership establishment","2025-01-02","2025-01-08","7 days","None","Project Manager","Completed","Project Charter, Partnership Agreement","Resource availability","Early commitment processes"
-"Phase 1: Foundation","P1.2 - Infrastructure Assessment","Assessment of current infrastructure and automation readiness","2025-01-06","2025-01-15","10 days","P1.1","Infrastructure Architect","Completed","Infrastructure Assessment, Automation Readiness","Complex legacy systems","Phased automation approach"
-"Phase 1: Foundation","P1.3 - Platform Architecture Design","Design Ansible Automation Platform architecture and deployment strategy","2025-01-13","2025-01-22","10 days","P1.2","Solution Architect","Completed","Architecture Design, Deployment Plan","Architecture complexity","Red Hat best practices"
-"Phase 1: Foundation","P1.4 - Security Framework Design","Design security controls and compliance framework","2025-01-20","2025-01-29","10 days","P1.3","Security Architect","Completed","Security Architecture, Compliance Framework","Security requirements","Security expert consultation"
-"Phase 1: Foundation","P1.5 - Automation Strategy","Define automation strategy and governance model","2025-01-27","2025-02-05","10 days","P1.4","Automation Lead","Completed","Automation Strategy, Governance Model","Strategy alignment","Stakeholder collaboration"
-"Phase 2: Platform Setup","P2.1 - Infrastructure Provisioning","Provision infrastructure for Ansible Automation Platform","2025-02-03","2025-02-10","8 days","P1.5","Infrastructure Engineer","Completed","Platform Infrastructure, Network Setup","Infrastructure dependencies","Cloud-agnostic approach"
-"Phase 2: Platform Setup","P2.2 - Platform Installation","Install and configure Ansible Automation Platform","2025-02-08","2025-02-15","8 days","P2.1","Platform Engineer","Completed","AAP Installation, Base Configuration","Installation complexity","Red Hat support engagement"
-"Phase 2: Platform Setup","P2.3 - Authentication Integration","Integrate with corporate identity provider and configure RBAC","2025-02-12","2025-02-19","8 days","P2.2","Identity Engineer","Completed","LDAP Integration, RBAC Configuration","Identity integration","Identity team collaboration"
-"Phase 2: Platform Setup","P2.4 - Automation Hub Setup","Configure private automation hub and content management","2025-02-16","2025-02-23","8 days","P2.3","Hub Administrator","Completed","Automation Hub, Content Repository","Content management","Content curation process"
-"Phase 2: Platform Setup","P2.5 - Monitoring Integration","Deploy monitoring and logging for platform operations","2025-02-20","2025-02-27","8 days","P2.4","Monitoring Engineer","Completed","Monitoring Stack, Alert Configuration","Monitoring coverage","Comprehensive monitoring strategy"
-"Phase 3: Automation Development","P3.1 - Automation Standards","Define automation standards and development framework","2025-02-24","2025-03-05","10 days","P2.5","Automation Architect","Completed","Automation Standards, Development Framework","Standards adoption","Developer training program"
-"Phase 3: Automation Development","P3.2 - Core Playbooks","Develop core automation playbooks and roles","2025-03-03","2025-03-12","10 days","P3.1","Automation Developer","Completed","Core Playbook Library, Role Collection","Playbook complexity","Modular development approach"
-"Phase 3: Automation Development","P3.3 - Job Templates","Create job templates and workflow automation","2025-03-10","2025-03-19","10 days","P3.2","Template Engineer","Completed","Job Templates, Workflow Configuration","Template complexity","Template standardization"
-"Phase 3: Automation Development","P3.4 - Inventory Management","Configure dynamic inventory and host management","2025-03-17","2025-03-26","10 days","P3.3","Inventory Manager","Completed","Dynamic Inventory, Host Configuration","Inventory accuracy","Automated inventory sync"
-"Phase 3: Automation Development","P3.5 - Testing Framework","Implement automation testing and validation framework","2025-03-24","2025-04-02","10 days","P3.4","Test Engineer","Completed","Testing Framework, Validation Suite","Test coverage","Comprehensive test strategy"
-"Ongoing Operations","O1 - Automation Operations","Continuous automation execution and platform operations","2025-04-01","Ongoing","Continuous","P3.5","Operations Team","Active","Operations Reports","Platform issues","Proactive monitoring"
-"Ongoing Operations","O2 - Content Development","Ongoing automation content development and enhancement","2025-04-01","Ongoing","Continuous","P3.5","Development Team","Active","Content Updates","Content quality","Regular reviews"
-"Ongoing Operations","O3 - Platform Maintenance","Regular platform maintenance and updates","2025-04-01","Ongoing","Continuous","P3.5","Platform Team","Active","Maintenance Reports","Platform stability","Vendor support"
-"Ongoing Operations","O4 - Training Programs","Ongoing training and certification programs","2025-04-01","Ongoing","Continuous","P3.5","Training Team","Active","Training Reports","Skill gaps","Continuous learning"
-"Ongoing Operations","O5 - Performance Optimization","Continuous performance monitoring and optimization","2025-04-01","Ongoing","Continuous","P3.5","Performance Team","Active","Performance Reports","Performance degradation","Regular optimization"
+# Project Timeline
+#WIDTH: 12,36,13,19,19,26,24,14
+#ALIGN: left,left,center,center,center,left,left,center
+Phase,Task,Duration,Start Date,End Date,Dependencies,Owner,Status
+Discovery,Project Kickoff,2 days,Week 1,Week 1,None,Project Manager,Complete
+Discovery,IT Operations Assessment,5 days,Week 1,Week 2,Project Kickoff,Business Analyst,Complete
+Discovery,Automation Opportunity Analysis,5 days,Week 2,Week 3,Operations Assessment,Automation Architect,Complete
+Discovery,Platform Requirements Gathering,5 days,Week 2,Week 3,Operations Assessment,Solution Architect,Complete
+Discovery,Architecture Design Sign-off,3 days,Week 3,Week 3,Requirements Gathering,Solution Architect,Complete
+Platform,Cloud Infrastructure Provisioning,5 days,Week 4,Week 5,Architecture Sign-off,Cloud Engineer,Complete
+Platform,Controller Cluster Deployment,5 days,Week 5,Week 6,Infrastructure Provisioning,Platform Engineer,Complete
+Platform,Execution Node Setup (4 nodes),3 days,Week 5,Week 6,Controller Deployment,Platform Engineer,Complete
+Platform,PostgreSQL HA Configuration,3 days,Week 5,Week 6,Controller Deployment,Database Engineer,Complete
+Platform,Private Automation Hub Setup,3 days,Week 6,Week 6,Controller Deployment,Platform Engineer,Complete
+Platform,LDAP/AD SSO Integration,5 days,Week 6,Week 7,Hub Setup,Security Architect,Complete
+Platform,RBAC Configuration,3 days,Week 7,Week 7,SSO Integration,Security Architect,Complete
+Integration,HashiCorp Vault Integration,5 days,Week 7,Week 8,RBAC Configuration,Integration Engineer,Complete
+Integration,ServiceNow Connector Setup,5 days,Week 8,Week 9,Vault Integration,Integration Engineer,Complete
+Integration,Monitoring Webhook Configuration,3 days,Week 9,Week 9,ServiceNow Setup,Integration Engineer,Complete
+Integration,Git Repository Integration,3 days,Week 9,Week 10,Monitoring Setup,DevOps Engineer,Complete
+Development,Playbook Standards Definition,5 days,Week 8,Week 9,Platform Ready,Automation Architect,Complete
+Development,Server Playbooks (25),10 days,Week 9,Week 11,Standards Definition,Automation Engineer,Complete
+Development,Server Playbooks (25 more),10 days,Week 11,Week 13,First 25 Complete,Automation Engineer,Complete
+Development,Network Playbooks (30),10 days,Week 11,Week 14,Standards Definition,Network Automation,Complete
+Development,Cloud/Compliance Playbooks (20),10 days,Week 13,Week 16,Server Playbooks Done,Automation Engineer,Complete
+Development,Self-Service Portal Config,5 days,Week 14,Week 15,Playbooks Development,Platform Engineer,Complete
+Development,Event-Driven Automation Setup,5 days,Week 15,Week 16,Portal Configuration,Automation Engineer,Complete
+Test,Functional Testing,7 days,Week 16,Week 17,All Playbooks Complete,QA Team,Complete
+Test,Performance Testing,5 days,Week 17,Week 18,Functional Testing,Performance Engineer,Complete
+Test,Security Testing,5 days,Week 17,Week 18,Functional Testing,Security Team,Complete
+Test,User Acceptance Testing,5 days,Week 18,Week 19,Performance Testing,Business Users,Complete
+Test,Go-Live Readiness Review,2 days,Week 19,Week 20,UAT Complete,Project Manager,Complete
+Deploy,Production Automation Enablement,5 days,Week 20,Week 20,Go-Live Readiness,Deployment Team,Complete
+Deploy,Phased Rollout Execution,10 days,Week 20,Week 22,Initial Enablement,Operations Team,Complete
+Training,Administrator Training,5 days,Week 18,Week 19,Platform Testing,Training Team,Complete
+Training,Developer Training,5 days,Week 19,Week 20,Admin Training,Training Team,Complete
+Closure,Hypercare Support,20 days,Week 21,Week 24,Production Rollout,Support Team,Complete
+Closure,Documentation Finalization,5 days,Week 23,Week 24,Hypercare Start,Project Manager,Complete
+Closure,Project Closeout Meeting,1 day,Week 24,Week 24,Documentation Complete,Project Manager,Complete
+
+# Milestones
+#WIDTH: 14,25,20,77,28,17
+#ALIGN: left,left,center,left,left,center
+Milestone ID,Milestone Name,Target Date,Success Criteria,Owner,Status
+M1,Assessment Complete,Week 3,Assessment delivered; architecture approved; playbook roadmap defined,Automation Architect,Complete
+M2,Platform Deployed,Week 6,HA controller operational; execution nodes active; integrations configured,Platform Engineer,Complete
+M3,50 Playbooks Ready,Week 12,50 playbooks developed; tested in dev; ready for production,Automation Engineer,Complete
+M4,100 Playbooks Complete,Week 16,All 100 playbooks developed; integration testing complete; documented,Automation Lead,Complete
+M5,Testing Complete,Week 19,All test phases passed; zero critical defects; UAT signed off,QA Lead,Complete
+M6,Go-Live,Week 20,Production automation enabled; self-service operational; monitoring active,Project Manager,Complete
+M7,Project Closure,Week 24,Hypercare complete; training delivered; documentation handed over,Project Manager,Complete
+
+# RACI Matrix
+#WIDTH: 30,10,10,10,10,10,10,10,10
+#ALIGN: left,center,center,center,center,center,center,center,center
+Task/Deliverable,PM,Architect,DevOps,SecArch,QA,Ops,NetEng,Client
+Project Charter,A,C,I,I,I,I,I,C
+Architecture Design,A,R,C,C,I,I,C,I
+Security Design,A,C,I,R,I,I,I,C
+Platform Deployment,A,C,R,I,I,I,I,I
+RBAC Configuration,A,C,C,R,I,I,I,C
+Vault Integration,A,C,R,R,I,I,I,I
+ServiceNow Integration,A,C,R,I,I,C,I,C
+Server Playbooks,A,C,R,I,I,C,I,C
+Network Playbooks,A,C,R,I,I,I,R,C
+Compliance Playbooks,A,C,R,R,I,I,I,C
+Functional Testing,A,I,C,I,R,C,I,C
+Security Testing,A,I,I,R,C,I,I,I
+UAT Execution,A,I,I,I,R,C,I,R
+Administrator Training,A,C,R,I,I,R,I,R
+Developer Training,A,R,R,I,I,C,I,R
+Production Rollout,A,C,R,C,C,R,C,C
+Hypercare Support,A,C,R,I,I,C,C,I
+Documentation,A,R,C,C,I,I,I,I
+Project Closure,R,C,I,I,I,I,I,A
+
+# Communications Plan
+#WIDTH: 23,19,38,45,19,20
+#ALIGN: left,left,left,left,left,center
+Meeting Type,Frequency,Participants,Purpose,Owner,Day/Time
+Project Kickoff,Once,All stakeholders,Launch project and align on objectives,Project Manager,Week 1 Day 1
+Steering Committee,Bi-weekly,Executive sponsors and PMO,Strategic direction and issue escalation,Project Manager,Alternate Tuesdays 14:00
+Status Meeting,Weekly,Core project team,Review progress and address blockers,Project Manager,Mondays 10:00
+Technical Review,Weekly,Technical leads and architects,Architecture decisions and technical issues,Automation Architect,Wednesdays 14:00
+Security Review,Bi-weekly,Security and compliance team,Security posture and policy validation,Security Architect,Alternate Thursdays 11:00
+Playbook Review,Weekly,Development and operations teams,Playbook demo and feedback collection,Automation Lead,Fridays 15:00
+QA Sync,Weekly,QA and Development teams,Test progress and defect triage,QA Lead,Thursdays 11:00
+Training Coordination,Weekly (during training),Training team and participants,Training logistics and feedback,Training Lead,Mondays 09:00
+Go-Live Readiness,Daily (2 weeks pre),Go-live team,Go-live preparation and checklist,Project Manager,Daily 09:00
+Hypercare Check-in,Daily (first 2 weeks),Support team and operations,Post-go-live health check and issues,Support Lead,Daily 09:00
+Project Closeout,Once,All stakeholders,Project review and formal closure,Project Manager,Week 24
+
