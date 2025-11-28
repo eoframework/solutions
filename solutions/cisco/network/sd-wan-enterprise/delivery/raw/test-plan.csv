@@ -1,6 +1,53 @@
-Test_Phase,Test_Category,Test_ID,Test_Name,Description,Prerequisites,Expected_Result,Priority,Duration,Responsible_Team
-Functional Testing,Core Functionality,FT001,Basic Functionality Test,Verify core solution functionality,Solution deployed and configured,All core functions operational,High,60 minutes,QA Team
-Functional Testing,Integration Testing,FT002,System Integration Test,Validate integration with existing systems,Integration points configured,All integrations functional,High,90 minutes,Integration Team
-Performance Testing,Load Testing,PT001,Performance Load Test,Test solution under expected load,Performance test environment ready,Performance meets specifications,High,120 minutes,Performance Team
-Security Testing,Security Validation,ST001,Security Configuration Test,Validate security controls and configurations,Security policies applied,All security controls operational,High,90 minutes,Security Team
-User Acceptance,Business Validation,UAT001,User Acceptance Test,Validate solution meets business requirements,User training completed,Business requirements satisfied,Medium,180 minutes,Business Users
+# Functional Tests
+#WIDTH: 10,22,38,52,15,12
+#ALIGN: center,left,left,left,center,center
+Test ID,Test Name,Description,Expected Result,Priority,Duration
+FT-001,vManage Cluster Health,Verify vManage cluster operational status and node synchronization,All 3 vManage nodes healthy with synchronized databases,Critical,30 min
+FT-002,vSmart Controller Connectivity,Validate vSmart HA pair control connections to vManage,Both vSmart controllers connected and distributing policies,Critical,20 min
+FT-003,vBond Orchestrator Function,Test vBond device authentication and NAT traversal,vEdge devices authenticate and establish tunnels via vBond,Critical,20 min
+FT-004,vEdge Device Onboarding,Validate zero-touch provisioning for new vEdge devices,Devices auto-provision with correct templates and policies,High,45 min
+FT-005,OMP Route Advertisement,Test OMP route propagation across SD-WAN fabric,Routes advertised and received at all sites within 30 seconds,Critical,25 min
+FT-006,IPsec Tunnel Establishment,Verify IPsec data plane tunnels between sites,Full mesh tunnels established with correct encryption,Critical,30 min
+FT-007,TLOC Color Assignment,Test transport locator color configuration and routing,Traffic routes correctly based on TLOC color preferences,High,20 min
+FT-008,Application Recognition,Validate DPI engine application identification accuracy,Applications correctly identified and classified,High,35 min
+FT-009,App-Aware Routing Policy,Test application-based traffic steering decisions,Traffic follows defined application-aware policies,High,40 min
+FT-010,QoS Policy Enforcement,Verify QoS markings and queue assignments per policy,Voice/video traffic prioritized with correct DSCP values,High,30 min
+FT-011,SLA Class Application,Test SLA-based path selection for business-critical apps,Traffic uses paths meeting defined SLA thresholds,High,35 min
+FT-012,VPN Segmentation,Validate traffic isolation between VPN segments,No traffic leakage between isolated VPN segments,Critical,25 min
+FT-013,Zone-Based Firewall,Test firewall rules and inter-zone traffic control,Traffic blocked/permitted per zone-based policy rules,High,40 min
+FT-014,IPS Threat Detection,Verify IPS engine detects and blocks known threats,Malicious traffic detected and blocked with alerts,High,45 min
+FT-015,URL Filtering,Test web content filtering and category blocking,Blocked categories denied with user notification,Medium,30 min
+FT-016,Cloud OnRamp AWS,Validate AWS Direct Connect integration and routing,AWS traffic routes via Cloud OnRamp with optimization,High,35 min
+FT-017,Cloud OnRamp Azure,Test Azure ExpressRoute connectivity and failover,Azure workloads accessible via dedicated connection,High,35 min
+FT-018,SaaS Optimization O365,Verify Microsoft 365 direct internet breakout,M365 traffic bypasses backhaul with improved latency,High,30 min
+FT-019,Template Push to vEdge,Test configuration template deployment to edge devices,Templates applied successfully without service impact,High,25 min
+FT-020,Centralized Policy Update,Validate policy updates propagate to all devices,Policy changes effective at all sites within 60 seconds,High,20 min
+
+# Non-Functional Tests
+#WIDTH: 10,24,40,48,15,12
+#ALIGN: center,left,left,left,center,center
+Test ID,Test Name,Description,Expected Result,Priority,Duration
+NF-001,Dual Transport Failover,Simulate MPLS failure and verify Internet failover,Traffic fails over to Internet within 3 seconds,Critical,45 min
+NF-002,vSmart Controller Failover,Test control plane HA by failing primary vSmart,Secondary vSmart assumes control within 5 seconds,Critical,30 min
+NF-003,vManage Node Failure,Simulate vManage node failure in cluster,Remaining nodes maintain operations with no data loss,Critical,40 min
+NF-004,BFD Session Recovery,Test BFD rapid failure detection and recovery,BFD detects failure and triggers reroute within 1 second,High,25 min
+NF-005,Throughput Benchmark,Measure aggregate throughput across SD-WAN fabric,Sustained 10 Gbps throughput at hub sites achieved,High,60 min
+NF-006,Latency Measurement,Validate latency SLA for voice and video traffic,Voice latency under 150ms with less than 1% jitter,High,45 min
+NF-007,Concurrent Tunnel Scale,Test maximum concurrent IPsec tunnels per device,Support 8000 tunnels per vEdge without degradation,High,50 min
+NF-008,Policy Scale Test,Validate system performance with maximum policies,25 app policies and 12 security zones perform correctly,Medium,40 min
+NF-009,Software Upgrade Procedure,Test software upgrade with minimal service impact,Upgrade completes with less than 30 seconds traffic loss,High,90 min
+NF-010,Configuration Rollback,Verify rollback capability for failed changes,Configuration rolls back within 60 seconds on failure,High,30 min
+NF-011,DR Site Activation,Test disaster recovery site activation procedure,DR site active within 15 minutes of primary failure,Critical,120 min
+NF-012,Certificate Renewal,Validate automated certificate renewal process,Certificates renew without manual intervention or outage,Medium,45 min
+
+# User Acceptance Tests
+#WIDTH: 10,26,42,46,15,12
+#ALIGN: center,left,left,left,center,center
+Test ID,Test Name,Description,Expected Result,Priority,Duration
+UAT-001,vManage Dashboard Access,Network team validates dashboard usability and views,Team can navigate and interpret all dashboard widgets,High,60 min
+UAT-002,Template Creation Workflow,Validate self-service template creation process,Engineers create and deploy templates independently,High,90 min
+UAT-003,Troubleshooting Tools,Test vManage troubleshooting and diagnostic tools,NOC can diagnose issues using built-in tools,High,75 min
+UAT-004,Voice Quality Validation,Business users validate voice call quality over SD-WAN,Voice calls clear with no perceptible quality issues,Critical,60 min
+UAT-005,Video Conference Testing,Validate video conference quality and reliability,Video conferences maintain HD quality throughout,High,45 min
+UAT-006,Application Performance,Business validates critical application performance,ERP and CRM applications perform at or above baseline,High,90 min
+

@@ -1,27 +1,96 @@
-Task ID,Phase,Task Name,Description,Owner,Start Date,End Date,Duration Days,Predecessor Tasks,Status,Progress %,Priority,Milestone,Dependencies,Deliverables,Effort Hours,Notes
-PRJ-001,Planning,Project Kickoff,Formal project initiation and team alignment,Project Manager,[START_DATE],[START_DATE+1],1,,Not Started,0,Critical,Yes,Stakeholder availability,Project charter and team assignments,8,Executive sponsor approval required
-PRJ-002,Planning,Requirements Gathering,Collect and document detailed business and technical requirements,Business Analyst,[START_DATE+1],[START_DATE+5],4,PRJ-001,Not Started,0,High,No,Stakeholder interviews,Requirements specification document,32,Include all stakeholder groups
-PRJ-003,Planning,Solution Architecture Design,Design technical architecture and integration approach,Solution Architect,[START_DATE+3],[START_DATE+10],7,PRJ-002,Not Started,0,High,Yes,Technical requirements,Architecture documentation and diagrams,56,Review with technical governance board
-PRJ-004,Planning,Infrastructure Planning,Plan and design infrastructure requirements,Infrastructure Architect,[START_DATE+8],[START_DATE+15],7,PRJ-003,Not Started,0,High,No,Architecture design,Infrastructure specification and sizing,40,Include capacity planning and scaling
-PRJ-005,Planning,Risk Assessment,Identify and assess project risks with mitigation strategies,Risk Manager,[START_DATE+10],[START_DATE+12],2,PRJ-003,Not Started,0,Medium,No,Project scope,Risk register and mitigation plans,16,Regular risk review meetings scheduled
-PRJ-006,Design,Detailed Design,Create detailed technical specifications and design documents,Technical Lead,[START_DATE+15],[START_DATE+25],10,PRJ-004,Not Started,0,High,Yes,Architecture approval,Detailed technical specifications,80,Include interface specifications
-PRJ-007,Design,Security Design,Design security controls and compliance framework,Security Architect,[START_DATE+18],[START_DATE+23],5,PRJ-003,Not Started,0,High,No,Architecture design,Security design document,40,Compliance review required
-PRJ-008,Design,Integration Design,Design integration points and data flow,Integration Specialist,[START_DATE+20],[START_DATE+27],7,PRJ-006,Not Started,0,High,No,Technical specifications,Integration specification document,56,API documentation and testing approach
-PRJ-009,Build,Environment Setup,Provision and configure development and test environments,DevOps Engineer,[START_DATE+25],[START_DATE+32],7,PRJ-004,Not Started,0,High,Yes,Infrastructure approval,Development and test environments,56,Automated provisioning preferred
-PRJ-010,Build,Core Development,Develop core application functionality and features,Development Team,[START_DATE+30],[START_DATE+50],20,PRJ-006,Not Started,0,Critical,No,Environment setup,Core application components,320,Follow coding standards and best practices
-PRJ-011,Build,Integration Development,Develop integration components and APIs,Integration Developer,[START_DATE+35],[START_DATE+47],12,PRJ-008,Not Started,0,High,No,Core development started,Integration components and APIs,96,Include error handling and monitoring
-PRJ-012,Build,Security Implementation,Implement security controls and authentication,Security Developer,[START_DATE+38],[START_DATE+48],10,PRJ-007,Not Started,0,High,No,Security design approval,Security implementation,80,Security testing throughout development
-PRJ-013,Test,Unit Testing,Execute comprehensive unit testing of all components,Development Team,[START_DATE+40],[START_DATE+52],12,PRJ-010,Not Started,0,High,No,Core development,Unit test results and coverage reports,96,Achieve minimum 80% code coverage
-PRJ-014,Test,Integration Testing,Test integration points and data flow,QA Engineer,[START_DATE+50],[START_DATE+60],10,PRJ-011,Not Started,0,High,No,Integration development,Integration test results,80,Include negative testing scenarios
-PRJ-015,Test,System Testing,End-to-end system testing and validation,QA Team,[START_DATE+55],[START_DATE+70],15,PRJ-013,Not Started,0,Critical,Yes,Unit testing completion,System test results and defect reports,120,Include performance and load testing
-PRJ-016,Test,Security Testing,Comprehensive security testing and vulnerability assessment,Security Tester,[START_DATE+60],[START_DATE+67],7,PRJ-012,Not Started,0,High,No,Security implementation,Security test results and remediation plan,56,External security audit may be required
-PRJ-017,Test,User Acceptance Testing,Business user testing and sign-off,Business Users,[START_DATE+70],[START_DATE+80],10,PRJ-015,Not Started,0,Critical,Yes,System testing completion,UAT results and business sign-off,40,Include training for test users
-PRJ-018,Deploy,Production Environment Setup,Provision and configure production infrastructure,Infrastructure Team,[START_DATE+75],[START_DATE+82],7,PRJ-009,Not Started,0,High,No,Environment specifications,Production environment ready,56,Include monitoring and alerting setup
-PRJ-019,Deploy,Pre-Deployment Testing,Final testing in production-like environment,QA Lead,[START_DATE+80],[START_DATE+85],5,PRJ-017,Not Started,0,High,No,UAT completion,Pre-deployment test results,40,Smoke testing and final validation
-PRJ-020,Deploy,Production Deployment,Deploy solution to production environment,Deployment Team,[START_DATE+85],[START_DATE+87],2,PRJ-018,Not Started,0,Critical,Yes,Production environment ready,Deployed production system,16,Follow change management procedures
-PRJ-021,Deploy,Post-Deployment Validation,Validate production deployment and functionality,Operations Team,[START_DATE+87],[START_DATE+89],2,PRJ-020,Not Started,0,High,No,Production deployment,Production validation report,16,Include performance monitoring validation
-PRJ-022,Deploy,User Training Delivery,Deliver training to end users and administrators,Training Team,[START_DATE+75],[START_DATE+90],15,PRJ-017,Not Started,0,High,No,UAT completion,Training completion certificates,60,Include hands-on practical sessions
-PRJ-023,Deploy,Go-Live Support,Provide intensive support during initial production use,Support Team,[START_DATE+89],[START_DATE+96],7,PRJ-021,Not Started,0,High,No,Production validation,Go-live support reports,56,24/7 support for first week
-PRJ-024,Closure,Hypercare Period,Extended support and monitoring during stabilization,Support Team,[START_DATE+96],[START_DATE+126],30,PRJ-023,Not Started,0,Medium,No,Go-live completion,Hypercare completion report,120,Monitor system stability and user adoption
-PRJ-025,Closure,Project Documentation,Finalize all project documentation and handover,Project Manager,[START_DATE+90],[START_DATE+100],10,PRJ-022,Not Started,0,Medium,No,All deliverables complete,Complete project documentation package,40,Include lessons learned and recommendations
-PRJ-026,Closure,Project Closure,Formal project closure and team release,Project Manager,[START_DATE+126],[START_DATE+128],2,PRJ-024,Not Started,0,Medium,Yes,Hypercare completion,Project closure report and sign-off,8,Celebrate project success with team
+# Project Timeline
+#WIDTH: 12,36,13,19,19,26,24,14
+#ALIGN: left,left,center,center,center,left,left,center
+Phase,Task,Duration,Start Date,End Date,Dependencies,Owner,Status
+Discovery,Project Kickoff,1 day,[START_DATE],[START_DATE+1],None,EO Project Manager,Not Started
+Discovery,Network Assessment,5 days,[START_DATE+1],[START_DATE+6],Project Kickoff,EO Network Architect,Not Started
+Discovery,Site Survey and Inventory,4 days,[START_DATE+4],[START_DATE+8],Network Assessment,EO Network Engineer,Not Started
+Discovery,Application Traffic Analysis,4 days,[START_DATE+6],[START_DATE+10],Site Survey,EO Network Architect,Not Started
+Discovery,SD-WAN Design Workshop,3 days,[START_DATE+9],[START_DATE+12],Traffic Analysis,EO Network Architect,Not Started
+Foundation,vManage Cluster Deployment,4 days,[START_DATE+12],[START_DATE+16],Discovery Complete,EO Network Engineer,Not Started
+Foundation,vSmart Controller Setup,3 days,[START_DATE+15],[START_DATE+18],vManage Deployment,EO Network Engineer,Not Started
+Foundation,vBond Orchestrator Setup,2 days,[START_DATE+17],[START_DATE+19],vSmart Setup,EO Network Engineer,Not Started
+Foundation,Certificate Authority Config,2 days,[START_DATE+18],[START_DATE+20],vBond Setup,EO Security Engineer,Not Started
+Foundation,Control Plane Validation,2 days,[START_DATE+20],[START_DATE+22],Certificate Config,EO Network Engineer,Not Started
+Policy,Application-Aware Policies,5 days,[START_DATE+22],[START_DATE+27],Control Plane Ready,EO Network Architect,Not Started
+Policy,QoS Profile Configuration,4 days,[START_DATE+25],[START_DATE+29],App Policies,EO Network Engineer,Not Started
+Policy,Security Policy Design,4 days,[START_DATE+27],[START_DATE+31],QoS Profiles,EO Security Engineer,Not Started
+Policy,SLA Class Definition,3 days,[START_DATE+30],[START_DATE+33],Security Policies,EO Network Architect,Not Started
+Policy,Cloud OnRamp Configuration,4 days,[START_DATE+32],[START_DATE+36],SLA Classes,EO Network Engineer,Not Started
+Deployment,Pilot Site Migration (5),5 days,[START_DATE+36],[START_DATE+41],Policies Complete,EO Network Engineer,Not Started
+Deployment,Wave 1: Hub Sites (10),5 days,[START_DATE+41],[START_DATE+46],Pilot Complete,EO Network Engineer,Not Started
+Deployment,Wave 2: Regional Sites (35),7 days,[START_DATE+46],[START_DATE+53],Wave 1 Complete,EO Network Engineer,Not Started
+Deployment,Wave 3: Branch Sites (50),10 days,[START_DATE+53],[START_DATE+63],Wave 2 Complete,EO Network Engineer,Not Started
+Deployment,Wave 4: Remote Sites (50),10 days,[START_DATE+63],[START_DATE+73],Wave 3 Complete,EO Network Engineer,Not Started
+Testing,Functional Testing,5 days,[START_DATE+73],[START_DATE+78],Wave 4 Complete,EO QA Engineer,Not Started
+Testing,Failover Testing,4 days,[START_DATE+76],[START_DATE+80],Functional Testing,EO Network Engineer,Not Started
+Testing,Performance Testing,4 days,[START_DATE+78],[START_DATE+82],Failover Testing,EO QA Engineer,Not Started
+Testing,Security Validation,3 days,[START_DATE+80],[START_DATE+83],Performance Testing,EO Security Engineer,Not Started
+Testing,User Acceptance Testing,4 days,[START_DATE+82],[START_DATE+86],Security Validation,Client Network Team,Not Started
+Training,Network Engineer Training,8 hours,[START_DATE+83],[START_DATE+84],Security Validation,EO Network Architect,Not Started
+Training,NOC Operator Training,8 hours,[START_DATE+84],[START_DATE+85],Engineer Training,EO Network Architect,Not Started
+Training,Security Team Training,4 hours,[START_DATE+85],[START_DATE+86],NOC Training,EO Security Engineer,Not Started
+Go-Live,MPLS Circuit Cutover,3 days,[START_DATE+86],[START_DATE+89],UAT Complete,EO Network Engineer,Not Started
+Go-Live,Production Go-Live,2 days,[START_DATE+89],[START_DATE+91],Cutover Complete,EO Project Manager,Not Started
+Support,Hypercare Week 1,7 days,[START_DATE+91],[START_DATE+98],Go-Live,EO Network Engineer,Not Started
+Support,Hypercare Week 2,7 days,[START_DATE+98],[START_DATE+105],Hypercare Week 1,EO Network Engineer,Not Started
+Closure,Performance Optimization,3 days,[START_DATE+102],[START_DATE+105],Hypercare Week 2,EO Network Architect,Not Started
+Closure,Knowledge Transfer,2 days,[START_DATE+105],[START_DATE+107],Optimization,EO Project Manager,Not Started
+Closure,Documentation Delivery,2 days,[START_DATE+107],[START_DATE+109],Knowledge Transfer,EO Network Architect,Not Started
+Closure,Project Closure,1 day,[START_DATE+109],[START_DATE+110],Documentation,EO Project Manager,Not Started
+
+# Milestones
+#WIDTH: 14,30,20,62,28,17
+#ALIGN: left,left,center,left,left,center
+Milestone ID,Milestone Name,Target Date,Success Criteria,Owner,Status
+M1,Design Complete,[START_DATE+12],SD-WAN architecture approved; Site inventory complete; Policy framework defined,EO Network Architect,Not Started
+M2,Control Plane Ready,[START_DATE+22],vManage cluster operational; vSmart HA active; Certificate authority configured,EO Network Engineer,Not Started
+M3,Policies Deployed,[START_DATE+36],25 app policies active; QoS profiles validated; Security zones configured,EO Network Architect,Not Started
+M4,Sites Migrated,[START_DATE+73],150 sites on SD-WAN; MPLS circuits decommissioned; Cloud onramps active,EO Network Engineer,Not Started
+M5,Testing Complete,[START_DATE+86],Functional tests passed; Failover validated; Security assessment cleared,EO QA Engineer,Not Started
+M6,Go-Live,[START_DATE+91],Production operational; 99.99% availability target; NOC monitoring active,EO Project Manager,Not Started
+M7,Hypercare Complete,[START_DATE+110],Support transition done; Team trained (1680 hrs); Documentation delivered,EO Project Manager,Not Started
+
+# RACI Matrix
+#WIDTH: 35,8,8,8,8,8,8,8,8
+#ALIGN: left,center,center,center,center,center,center,center,center
+Task/Deliverable,PM,NetArch,NetEng,SecEng,QA,NOC,AppOwners,Client
+Project Charter and Kickoff,A,C,I,I,I,I,I,C
+SD-WAN Architecture Design,A,R,C,C,I,I,I,I
+Site Survey and Inventory,A,C,R,I,I,I,I,C
+vManage Cluster Deployment,A,C,R,I,I,I,I,I
+vSmart Controller Setup,A,C,R,I,I,I,I,I
+Application Policy Design,A,R,C,I,I,I,C,I
+QoS Profile Configuration,A,C,R,I,I,I,C,I
+Security Policy Implementation,A,C,C,R,I,I,I,I
+Cloud OnRamp Configuration,A,C,R,I,I,I,I,I
+Pilot Site Migration,A,C,R,I,C,I,I,I
+Wave Deployments,A,C,R,I,I,I,I,C
+Functional Testing,A,I,C,I,R,I,I,I
+Failover Testing,A,C,R,I,C,I,I,I
+Security Validation,A,C,C,R,C,I,I,I
+User Acceptance Testing,A,I,C,I,C,I,R,A
+NOC Operator Training,A,R,C,I,I,R,I,I
+MPLS Cutover,A,C,R,I,I,C,I,C
+Production Go-Live,A,C,R,C,C,C,I,R
+Hypercare Support,A,C,R,C,C,R,I,I
+Knowledge Transfer,A,R,C,C,I,C,I,C
+Documentation Delivery,A,R,C,C,I,C,I,I
+
+# Communications Plan
+#WIDTH: 25,15,40,50,22,18
+#ALIGN: left,left,left,left,left,center
+Meeting Type,Frequency,Participants,Purpose,Owner,Day/Time
+Project Kickoff,Once,All stakeholders,Launch project and align on SD-WAN transformation objectives,EO Project Manager,Day 1
+Steering Committee,Bi-weekly,Executive sponsors and IT leadership,Strategic direction and network investment decisions,EO Project Manager,Alternate Tuesdays
+Project Status Meeting,Weekly,Core project team,Review progress and address blockers across workstreams,EO Project Manager,Mondays 10:00
+Architecture Review,Weekly,Network architects and engineers,SD-WAN design decisions and policy configuration,EO Network Architect,Wednesdays 14:00
+Migration Standup,Daily,Migration team,Site migration progress and deployment issues,EO Network Engineer,Daily 09:30
+NOC Coordination,Weekly,NOC and network team,Monitoring setup and incident procedures,EO Network Engineer,Thursdays 11:00
+Security Review,Bi-weekly,Security and network teams,Security policies and compliance validation,EO Security Engineer,Alternate Fridays
+Site Readiness,Weekly,Site coordinators,Site preparation and cutover scheduling,EO Project Manager,Fridays 14:00
+Risk and Issue Review,Bi-weekly,PM and Risk Manager,Risk assessment and mitigation tracking,EO Project Manager,Alternate Fridays
+Go-Live Readiness,Daily (2 wks pre),Go-live team,Deployment preparation and cutover checklist,EO Project Manager,Daily 09:00
+Hypercare Review,Daily (hypercare),Support and operations,Network stability and issue resolution,EO Network Engineer,Daily 10:00
+Project Closeout,Once,All stakeholders,Hypercare completion and operational handoff,EO Project Manager,Week 16
+
