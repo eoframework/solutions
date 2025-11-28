@@ -1,6 +1,52 @@
-Test_Phase,Test_Category,Test_ID,Test_Name,Description,Prerequisites,Expected_Result,Priority,Duration,Responsible_Team
-Functional Testing,Core Functionality,FT001,Basic Functionality Test,Verify core solution functionality,Solution deployed and configured,All core functions operational,High,60 minutes,QA Team
-Functional Testing,Integration Testing,FT002,System Integration Test,Validate integration with existing systems,Integration points configured,All integrations functional,High,90 minutes,Integration Team
-Performance Testing,Load Testing,PT001,Performance Load Test,Test solution under expected load,Performance test environment ready,Performance meets specifications,High,120 minutes,Performance Team
-Security Testing,Security Validation,ST001,Security Configuration Test,Validate security controls and configurations,Security policies applied,All security controls operational,High,90 minutes,Security Team
-User Acceptance,Business Validation,UAT001,User Acceptance Test,Validate solution meets business requirements,User training completed,Business requirements satisfied,Medium,180 minutes,Business Users
+# Functional Tests
+#WIDTH: 10,30,65,40,45,10,15,20
+#ALIGN: center,left,left,left,left,center,center,left
+Test ID,Test Name,Description,Prerequisites,Expected Result,Priority,Duration,Owner
+FT-001,AP Cloud Connectivity,Verify all 50 APs connect to Mist Cloud and appear in dashboard,APs installed and powered,All APs show connected status with green LED,Critical,30 min,Wireless Engineer
+FT-002,Corporate SSID Authentication,Test 802.1X authentication with valid AD credentials on Corporate SSID,RADIUS configured and SSID enabled,User authenticates and receives Corporate VLAN IP,Critical,15 min,Wireless Engineer
+FT-003,Guest Portal Functionality,Verify guest captive portal displays and accepts terms of service,Guest SSID enabled with portal configured,User sees portal and gains access after acceptance,High,15 min,Wireless Engineer
+FT-004,IoT SSID PSK Authentication,Test PSK authentication on IoT SSID with correct passphrase,IoT SSID enabled with PSK configured,Device connects and receives IoT VLAN IP,High,10 min,Wireless Engineer
+FT-005,VLAN Assignment Verification,Verify clients receive correct VLAN based on SSID connection,All SSIDs configured with VLAN mappings,Corporate=VLAN200 Guest=VLAN300 IoT=VLAN400,Critical,20 min,Network Engineer
+FT-006,DHCP IP Assignment,Verify DHCP assigns IPs from correct scope for each VLAN,DHCP scopes configured for all VLANs,Clients receive IPs from correct DHCP range,Critical,15 min,Network Engineer
+FT-007,DNS Resolution,Test DNS resolution from wireless clients on all SSIDs,DNS servers configured and accessible,Internal and external DNS queries resolve correctly,High,10 min,Network Engineer
+FT-008,Internet Connectivity,Verify internet access from all wireless networks,Firewall rules configured for wireless VLANs,Clients can browse internet and access cloud services,High,10 min,Network Engineer
+FT-009,Marvis AI Query Response,Test Marvis conversational interface with sample troubleshooting query,Marvis AI activated for site,Marvis returns relevant insights for query,High,15 min,Wireless Engineer
+FT-010,SLE Dashboard Display,Verify SLE metrics display correctly in Mist dashboard,APs operational with client traffic,SLE categories show data for connections coverage capacity,High,10 min,Wireless Engineer
+FT-011,Location Services Positioning,Test indoor positioning accuracy using mobile device,vBLE enabled and floor plans calibrated,Device location accurate within 3-5 meters,Medium,30 min,Wireless Engineer
+FT-012,Wayfinding Navigation,Verify wayfinding provides directions to configured destinations,Wayfinding maps created with destinations,App displays correct navigation path to destination,Medium,20 min,Wireless Engineer
+FT-013,Wired Assurance Switch View,Verify EX4400 switches appear in Mist Wired Assurance dashboard,Switches claimed to Mist organization,All 4 switches show connected with port status,High,10 min,Network Engineer
+FT-014,AP Firmware Auto-Update,Verify APs update firmware during scheduled maintenance window,Auto-upgrade enabled with schedule set,APs update to latest firmware without manual intervention,Medium,60 min,Wireless Engineer
+FT-015,RADIUS Failover,Test failover to secondary RADIUS server when primary unavailable,Secondary RADIUS configured,Authentication continues via secondary server,High,20 min,Security Engineer
+
+# Non-Functional Tests
+#WIDTH: 10,30,65,40,45,10,15,20
+#ALIGN: center,left,left,left,left,center,center,left
+Test ID,Test Name,Description,Prerequisites,Expected Result,Priority,Duration,Owner
+NF-001,RF Coverage Validation,Walk test to verify signal strength meets -67 dBm minimum,All APs operational,Coverage exceeds -67 dBm in all required areas,Critical,120 min,QA Engineer
+NF-002,5 GHz Throughput Test,Measure single-client throughput on 5 GHz using iPerf3,Test client with WiFi 6 support,Throughput exceeds 500 Mbps single stream,High,30 min,QA Engineer
+NF-003,6 GHz Throughput Test,Measure throughput on 6 GHz band using WiFi 6E client,Test client with WiFi 6E support,Throughput exceeds 1 Gbps with 160 MHz channel,High,30 min,QA Engineer
+NF-004,Roaming Performance Test,Measure handoff time while walking between APs during voice call,Test client with voice application active,Roaming completes in less than 150ms with no call drop,Critical,45 min,QA Engineer
+NF-005,High Density Client Test,Connect 50+ clients to single AP and measure performance,Multiple test devices available,AP maintains stability with 50 concurrent clients,High,60 min,QA Engineer
+NF-006,Video Conferencing Quality,Test video call quality across multiple APs with roaming,Video conferencing application (Teams/Zoom),Video quality maintains HD with no artifacts during roam,High,30 min,QA Engineer
+NF-007,Channel Utilization Check,Verify RF optimization distributes clients across channels,Multiple clients connected across APs,No channel exceeds 60% utilization,Medium,20 min,Wireless Engineer
+NF-008,PoE Power Verification,Verify all APs receive adequate PoE power from switches,APs connected to EX4400 switches,All APs show full power with Class 6 PoE,High,15 min,Network Engineer
+NF-009,Mist Cloud Latency,Measure dashboard responsiveness and API response time,Active Mist Cloud session,Dashboard loads within 3 seconds API responds within 500ms,Medium,15 min,Wireless Engineer
+NF-010,Location Accuracy Test,Measure positioning accuracy at 10 different building locations,vBLE calibration completed,Average accuracy within 3 meters across all test points,Medium,45 min,QA Engineer
+NF-011,SLE Baseline Validation,Verify SLE metrics meet target thresholds over 24-hour period,Production traffic flowing through network,Successful Connect SLE exceeds 99% target,Critical,24 hrs,Wireless Engineer
+NF-012,Switch Uplink Redundancy,Test failover when primary switch uplink is disconnected,Redundant uplinks configured,Traffic continues via secondary uplink within 1 second,High,15 min,Network Engineer
+
+# User Acceptance Tests
+#WIDTH: 10,30,65,40,45,10,15,20
+#ALIGN: center,left,left,left,left,center,center,left
+Test ID,Test Name,Description,Prerequisites,Expected Result,Priority,Duration,Owner
+UAT-001,Employee WiFi Connection,Employee connects laptop to Corporate SSID and accesses resources,Corporate SSID operational,Employee connects and accesses internal applications,Critical,15 min,Business User
+UAT-002,Guest WiFi Experience,Visitor connects to Guest WiFi and accepts portal terms,Guest SSID with portal enabled,Guest connects within 30 seconds of portal acceptance,High,10 min,Business User
+UAT-003,Conference Room Coverage,Verify WiFi coverage and video quality in all conference rooms,APs covering conference areas,Video calls work without quality issues in all rooms,Critical,60 min,Business User
+UAT-004,Mobile Device Roaming,Walk through building while on video call without disconnection,Mobile device on Corporate SSID,Call maintains quality throughout building walk,High,30 min,Business User
+UAT-005,Marvis Self-Service Query,IT admin uses Marvis to troubleshoot simulated user complaint,Marvis AI enabled for admin,Admin identifies root cause using natural language query,Medium,20 min,IT Admin
+UAT-006,Dashboard Navigation,IT admin navigates Mist dashboard to view AP health and clients,Admin trained on dashboard,Admin locates required information within 2 minutes,Medium,15 min,IT Admin
+UAT-007,Helpdesk Ticket Resolution,Helpdesk uses SLE data to diagnose connectivity complaint,Helpdesk trained on SLE interpretation,Helpdesk identifies issue using SLE failure reason,Medium,20 min,Helpdesk Staff
+UAT-008,Wayfinding Mobile Test,Employee uses wayfinding app to navigate to meeting room,Wayfinding configured with destinations,Employee successfully navigates using app directions,Medium,15 min,Business User
+UAT-009,Legacy AP Cutover Impact,Verify no service disruption during legacy AP decommissioning,Cutover plan approved and scheduled,Users experience no connectivity loss during cutover,Critical,120 min,Network Manager
+UAT-010,Post-Cutover Validation,Verify all wireless services operational after legacy removal,Legacy APs decommissioned,All users connected to new infrastructure with no complaints,Critical,60 min,Network Manager
+

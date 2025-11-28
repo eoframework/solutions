@@ -1,10 +1,49 @@
-Component,Parameter,Environment,Value,Data_Type,Required,Description,Validation_Rule,Default_Value
-Solution Configuration,Solution Name,All,Enterprise Solution,String,Yes,Solution identifier,Valid solution name,Enterprise Solution
-Environment,Environment Type,Dev,Development,String,Yes,Environment designation,dev|test|prod,dev
-Environment,Environment Type,Test,Test,String,Yes,Environment designation,dev|test|prod,test
-Environment,Environment Type,Prod,Production,String,Yes,Environment designation,dev|test|prod,prod
-Network Configuration,Network Mode,All,Enterprise,String,Yes,Network configuration mode,Basic|Standard|Enterprise,Enterprise
-Security Configuration,Security Level,All,High,String,Yes,Security configuration level,Low|Medium|High,High
-Performance Configuration,Performance Tier,All,Standard,String,Yes,Performance configuration tier,Basic|Standard|Premium,Standard
-Monitoring Configuration,Monitoring Enabled,All,true,Boolean,Yes,Enable comprehensive monitoring,true|false,true
-Backup Configuration,Backup Enabled,All,true,Boolean,Yes,Enable automated backups,true|false,true
+#WIDTH: 25,15,12,30,45,10,12,33,16,20,26,39,12
+#ALIGN: left,left,center,left,left,center,left,left,center,left,left,left,center
+Parameter Name,Category,Environment,Default Value,Description,Required,Data Type,Validation Rules,Security Level,Owner Team,Dependencies,Notes,Last Updated
+MIST_ORG_ID,Cloud,All,[ORG_ID],Mist Cloud organization identifier,Yes,String,Valid UUID format,Confidential,Wireless Team,Mist subscription,Obtained from Mist portal,[DATE]
+MIST_API_TOKEN,Cloud,All,[API_TOKEN],Mist Cloud API authentication token,Yes,String,Valid API token,Secret,Wireless Team,Org admin access,Rotate annually,[DATE]
+MIST_SITE_NAME,Cloud,All,[SITE_NAME],Mist site name for building,Yes,String,Alphanumeric with spaces,Public,Wireless Team,Organization created,Must be unique within org,[DATE]
+MIST_COUNTRY_CODE,Cloud,All,US,Country code for regulatory domain,Yes,String,Valid ISO country code,Public,Wireless Team,None,Affects available channels,[DATE]
+MIST_TIMEZONE,Cloud,All,America/New_York,Timezone for scheduled operations,Yes,String,Valid IANA timezone,Public,Wireless Team,None,Affects auto-upgrade schedule,[DATE]
+SSID_CORPORATE,WLAN,All,[CLIENT]-Corporate,Corporate employee SSID name,Yes,String,Valid SSID 1-32 chars,Public,Wireless Team,RADIUS configured,802.1X authentication,[DATE]
+SSID_GUEST,WLAN,All,[CLIENT]-Guest,Guest visitor SSID name,Yes,String,Valid SSID 1-32 chars,Public,Wireless Team,Portal configured,Captive portal authentication,[DATE]
+SSID_IOT,WLAN,All,[CLIENT]-IoT,IoT device SSID name,Yes,String,Valid SSID 1-32 chars,Public,Wireless Team,PSK configured,Hidden SSID optional,[DATE]
+VLAN_MGMT_ID,Network,All,100,Management VLAN for APs,Yes,Integer,1-4094,Public,Network Team,Switch configuration,AP management traffic,[DATE]
+VLAN_CORPORATE_ID,Network,All,200,Corporate wireless client VLAN,Yes,Integer,1-4094,Public,Network Team,DHCP scope configured,Employee wireless clients,[DATE]
+VLAN_GUEST_ID,Network,All,300,Guest wireless client VLAN,Yes,Integer,1-4094,Public,Network Team,DHCP scope configured,Guest isolation required,[DATE]
+VLAN_IOT_ID,Network,All,400,IoT device VLAN,Yes,Integer,1-4094,Public,Network Team,DHCP scope configured,Segmented from corporate,[DATE]
+MGMT_SUBNET,Network,All,10.10.100.0/24,AP management subnet,Yes,IP Address,Valid IPv4 CIDR,Confidential,Network Team,DHCP configured,AP DHCP addresses,[DATE]
+CORPORATE_SUBNET,Network,All,10.10.200.0/23,Corporate client subnet,Yes,IP Address,Valid IPv4 CIDR,Confidential,Network Team,DHCP configured,Supports 500 clients,[DATE]
+GUEST_SUBNET,Network,All,10.10.300.0/24,Guest client subnet,Yes,IP Address,Valid IPv4 CIDR,Confidential,Network Team,DHCP configured,Internet only access,[DATE]
+IOT_SUBNET,Network,All,10.10.400.0/24,IoT device subnet,Yes,IP Address,Valid IPv4 CIDR,Confidential,Network Team,DHCP configured,Limited network access,[DATE]
+RADIUS_PRIMARY_IP,Authentication,Production,[RADIUS_IP],Primary RADIUS server IP,Yes,IP Address,Valid IPv4 address,Confidential,Security Team,RADIUS operational,802.1X authentication,[DATE]
+RADIUS_SECONDARY_IP,Authentication,Production,[RADIUS_BACKUP_IP],Secondary RADIUS server IP,Yes,IP Address,Valid IPv4 address,Confidential,Security Team,RADIUS operational,Failover server,[DATE]
+RADIUS_SECRET,Authentication,All,[RADIUS_SECRET],RADIUS shared secret,Yes,String,Min 32 characters,Secret,Security Team,Matched on RADIUS,Rotate quarterly,[DATE]
+RADIUS_AUTH_PORT,Authentication,All,1812,RADIUS authentication port,Yes,Integer,1-65535,Public,Security Team,Firewall rules,Standard RADIUS port,[DATE]
+RADIUS_ACCT_PORT,Authentication,All,1813,RADIUS accounting port,Yes,Integer,1-65535,Public,Security Team,Firewall rules,Standard accounting port,[DATE]
+IOT_PSK,Authentication,All,[IOT_PASSPHRASE],IoT SSID pre-shared key,Yes,String,Min 12 characters,Secret,Wireless Team,IoT SSID configured,Distribute to IoT admins,[DATE]
+RF_24_CHANNELS,RF,All,1;6;11,Allowed 2.4 GHz channels,Yes,String,Valid channel list,Public,Wireless Team,RF policy,Non-overlapping channels,[DATE]
+RF_24_POWER_MIN,RF,All,8,Minimum 2.4 GHz power dBm,Yes,Integer,0-21,Public,Wireless Team,RF policy,Auto power adjustment,[DATE]
+RF_24_POWER_MAX,RF,All,18,Maximum 2.4 GHz power dBm,Yes,Integer,0-21,Public,Wireless Team,RF policy,Limit interference,[DATE]
+RF_5_CHANNELS,RF,All,36;40;44;48;149;153;157;161,Allowed 5 GHz channels,Yes,String,Valid channel list,Public,Wireless Team,RF policy,UNII-1 and UNII-3,[DATE]
+RF_5_POWER_MIN,RF,All,10,Minimum 5 GHz power dBm,Yes,Integer,0-23,Public,Wireless Team,RF policy,Auto power adjustment,[DATE]
+RF_5_POWER_MAX,RF,All,23,Maximum 5 GHz power dBm,Yes,Integer,0-23,Public,Wireless Team,RF policy,Maximum coverage,[DATE]
+RF_6_POWER_MIN,RF,All,12,Minimum 6 GHz power dBm,Yes,Integer,0-24,Public,Wireless Team,RF policy,WiFi 6E band,[DATE]
+RF_6_POWER_MAX,RF,All,24,Maximum 6 GHz power dBm,Yes,Integer,0-24,Public,Wireless Team,RF policy,Maximum power,[DATE]
+SLE_CONNECT_TARGET,SLE,All,99,Successful connect SLE target %,Yes,Integer,0-100,Public,Wireless Team,SLE monitoring,Primary KPI target,[DATE]
+SLE_COVERAGE_TARGET,SLE,All,95,Coverage SLE target %,Yes,Integer,0-100,Public,Wireless Team,SLE monitoring,RF coverage metric,[DATE]
+SLE_CAPACITY_TARGET,SLE,All,95,Capacity SLE target %,Yes,Integer,0-100,Public,Wireless Team,SLE monitoring,Utilization metric,[DATE]
+SLE_ROAMING_TARGET,SLE,All,95,Roaming SLE target %,Yes,Integer,0-100,Public,Wireless Team,SLE monitoring,Mobility metric,[DATE]
+LOCATION_ACCURACY,Location,All,3-5,Target location accuracy meters,Yes,String,Valid range,Public,Wireless Team,vBLE enabled,Indoor positioning,[DATE]
+VBLE_ENABLED,Location,All,true,Enable vBLE location services,Yes,Boolean,true|false,Public,Wireless Team,AP45 with vBLE,Wayfinding feature,[DATE]
+NTP_SERVER_1,System,All,10.10.100.20,Primary NTP server,Yes,IP Address,Valid IPv4 address,Public,Network Team,Network connectivity,Time synchronization,[DATE]
+NTP_SERVER_2,System,All,10.10.100.21,Secondary NTP server,Yes,IP Address,Valid IPv4 address,Public,Network Team,Network connectivity,Backup NTP source,[DATE]
+DNS_SERVER_1,System,All,10.10.100.10,Primary DNS server,Yes,IP Address,Valid IPv4 address,Public,Network Team,Network connectivity,Name resolution,[DATE]
+DNS_SERVER_2,System,All,10.10.100.11,Secondary DNS server,Yes,IP Address,Valid IPv4 address,Public,Network Team,Network connectivity,Backup DNS source,[DATE]
+SWITCH_MGMT_VLAN,Switch,All,100,EX4400 management VLAN,Yes,Integer,1-4094,Public,Network Team,VLAN configured,Switch management,[DATE]
+SWITCH_NATIVE_VLAN,Switch,All,100,Native VLAN for AP ports,Yes,Integer,1-4094,Public,Network Team,Port configuration,Untagged AP traffic,[DATE]
+POE_BUDGET_PER_SWITCH,Switch,All,1440,PoE power budget watts,Yes,Integer,0-2000,Public,Network Team,EX4400-48P,30W per AP max,[DATE]
+UPGRADE_SCHEDULE,Operations,All,02:00-06:00,Auto-upgrade window,Yes,String,Valid time range,Public,Wireless Team,Auto-upgrade enabled,Low traffic period,[DATE]
+FIRMWARE_VERSION,Operations,All,Latest,Target firmware version,Yes,String,Valid version or Latest,Public,Wireless Team,Mist Cloud,Auto-managed,[DATE]
+

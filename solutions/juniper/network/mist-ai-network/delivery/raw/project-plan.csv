@@ -1,43 +1,84 @@
-Task_ID,Phase,Task_Name,Description,Start_Date,End_Date,Duration_Days,Predecessor,Resource_Assignment,Effort_Hours,Milestone,Status,Risk_Level,Dependencies,Delivery_Documents
-TASK-001,Phase 1,Project Kickoff and Planning,Project initiation meeting and planning session,2024-02-01,2024-02-02,2,,EO Project Manager,16,Project Kickoff,Planned,Low,Executive approval,project-plan.csv
-TASK-002,Phase 1,Requirements Validation,Validate and refine technical and business requirements,2024-02-03,2024-02-07,5,TASK-001,EO Sales Engineer,40,Requirements Approved,Planned,Medium,Stakeholder availability,requirements-specification.csv
-TASK-003,Phase 1,Architecture Design Review,Review and finalize solution architecture,2024-02-08,2024-02-14,7,TASK-002,EO Quarterback,56,Architecture Approved,Planned,Medium,Technical review board,detailed-design.md
-TASK-004,Phase 1,Azure Subscription Preparation,Prepare Azure subscription and initial resource groups,2024-02-15,2024-02-16,2,TASK-003,EO Engineer,16,Azure Environment Ready,Planned,Low,Subscription access,N/A
-TASK-005,Phase 1,Log Analytics Workspace Deployment,Deploy and configure Log Analytics workspace for Sentinel,2024-02-17,2024-02-19,3,TASK-004,EO Engineer,24,Workspace Deployed,Planned,Low,Azure permissions,implementation-guide.md
-TASK-006,Phase 1,Azure Sentinel Enablement,Enable Azure Sentinel on Log Analytics workspace,2024-02-20,2024-02-21,2,TASK-005,EO Engineer,16,Sentinel Enabled,Planned,Low,Workspace configuration,N/A
-TASK-007,Phase 2,Azure AD Data Connector Configuration,Configure Azure Active Directory data connector,2024-02-22,2024-02-23,2,TASK-006,EO Engineer,16,AAD Integration Complete,Planned,Medium,AAD admin permissions,N/A
-TASK-008,Phase 2,Azure Security Center Integration,Integrate Azure Security Center with Sentinel,2024-02-24,2024-02-26,3,TASK-007,EO Engineer,24,ASC Integration Complete,Planned,Medium,ASC configuration,N/A
-TASK-009,Phase 2,Microsoft 365 Defender Integration,Configure M365 Defender data connector,2024-02-27,2024-03-01,3,TASK-008,EO Engineer,24,M365 Integration Complete,Planned,Medium,M365 E5 licensing,N/A
-TASK-010,Phase 2,Windows Security Events Configuration,Deploy Azure Monitor Agent and configure security events,2024-03-02,2024-03-06,5,TASK-009,EO Engineer,40,Windows Events Configured,Planned,High,Server access and permissions,N/A
-TASK-011,Phase 2,Syslog Data Collection Setup,Configure syslog collection for network devices,2024-03-07,2024-03-12,6,TASK-010,EO Engineer,48,Syslog Collection Configured,Planned,High,Network device access,N/A
-TASK-012,Phase 2,CEF Data Source Integration,Configure Common Event Format data sources,2024-03-13,2024-03-19,7,TASK-011,EO Engineer,56,CEF Sources Configured,Planned,High,Third-party tool APIs,N/A
-TASK-013,Phase 3,Built-in Analytics Rules Deployment,Deploy and configure built-in detection rules,2024-03-20,2024-03-22,3,TASK-012,EO Sales Engineer,24,Built-in Rules Deployed,Planned,Medium,Data source validation,implementation-guide.md
-TASK-014,Phase 3,Custom Detection Rules Development,Develop organization-specific detection analytics,2024-03-23,2024-04-02,11,TASK-013,EO Sales Engineer,88,Custom Rules Deployed,Planned,High,Threat intelligence feeds,N/A
-TASK-015,Phase 3,Machine Learning Analytics Configuration,Configure ML-powered behavioral analytics,2024-04-03,2024-04-09,7,TASK-014,EO Sales Engineer,56,ML Analytics Enabled,Planned,High,Sufficient data volume,N/A
-TASK-016,Phase 3,Analytics Rules Testing and Tuning,Test and optimize detection rules for accuracy,2024-04-10,2024-04-16,7,TASK-015,EO Sales Engineer,56,Rules Optimized,Planned,Medium,Test data availability,test-plan.csv
-TASK-017,Phase 4,Incident Configuration Setup,Configure incident creation and management settings,2024-04-17,2024-04-19,3,TASK-016,EO Engineer,24,Incident Configuration Complete,Planned,Low,ITSM integration,N/A
-TASK-018,Phase 4,Automated Response Playbooks Development,Develop Logic Apps for automated incident response,2024-04-20,2024-05-01,12,TASK-017,EO Engineer,96,Playbooks Deployed,Planned,High,Integration APIs,N/A
-TASK-019,Phase 4,User Account Disable Automation,Create automated user account disable playbook,2024-05-02,2024-05-06,5,TASK-018,EO Engineer,40,Account Automation Complete,Planned,Medium,Identity management API,N/A
-TASK-020,Phase 4,Email Security Response Automation,Develop automated email security response actions,2024-05-07,2024-05-13,7,TASK-019,EO Engineer,56,Email Automation Complete,Planned,Medium,Email security API,N/A
-TASK-021,Phase 5,Threat Intelligence Integration,Configure threat intelligence data connectors,2024-05-14,2024-05-16,3,TASK-020,EO Sales Engineer,24,TI Integration Complete,Planned,Medium,TI feed subscriptions,N/A
-TASK-022,Phase 5,Watchlists and IoC Management Setup,Create and populate security watchlists,2024-05-17,2024-05-21,5,TASK-021,EO Sales Engineer,40,Watchlists Configured,Planned,Low,IoC data sources,N/A
-TASK-023,Phase 5,Advanced Hunting Queries Development,Develop advanced threat hunting queries,2024-05-22,2024-05-28,7,TASK-022,EO Sales Engineer,56,Hunting Queries Ready,Planned,Medium,KQL expertise,N/A
-TASK-024,Phase 5,Threat Hunting Platform Configuration,Configure threat hunting workspace and tools,2024-05-29,2024-06-04,7,TASK-023,EO Sales Engineer,56,Hunting Platform Ready,Planned,Low,Platform access,N/A
-TASK-025,Phase 6,Security Operations Workbook Development,Create comprehensive SOC dashboard workbook,2024-06-05,2024-06-11,7,TASK-024,EO Sales Engineer,56,SOC Dashboard Complete,Planned,Low,Data visualization requirements,N/A
-TASK-026,Phase 6,Executive Reporting Workbook Creation,Develop executive security reporting dashboard,2024-06-12,2024-06-18,7,TASK-025,EO Sales Engineer,56,Executive Dashboard Complete,Planned,Low,Executive requirements,N/A
-TASK-027,Phase 6,Compliance Reporting Automation,Configure automated compliance reporting,2024-06-19,2024-06-25,7,TASK-026,EO Sales Engineer,56,Compliance Reporting Ready,Planned,Medium,Compliance frameworks,N/A
-TASK-028,Phase 7,Security Team Training Program,Conduct comprehensive security team training,2024-06-26,2024-07-10,15,TASK-027,EO Engineer,120,Team Training Complete,Planned,Medium,Training materials,training-plan.csv
-TASK-029,Phase 7,Administrator Certification Training,Provide advanced administrator training,2024-07-11,2024-07-17,7,TASK-028,EO Engineer,56,Admin Training Complete,Planned,Low,Certification requirements,training-plan.csv
-TASK-030,Phase 7,End-User Security Training,Conduct security awareness training for end users,2024-07-18,2024-07-24,7,TASK-029,EO Engineer,56,End-User Training Complete,Planned,Low,Training content,training-plan.csv
-TASK-031,Phase 8,Performance Testing and Optimization,Conduct performance testing and optimization,2024-07-25,2024-07-31,7,TASK-030,EO Engineer,56,Performance Optimized,Planned,High,Load testing tools,test-plan.csv
-TASK-032,Phase 8,Security Testing and Validation,Perform security testing and penetration testing,2024-08-01,2024-08-07,7,TASK-031,EO Engineer,56,Security Testing Complete,Planned,High,Security testing tools,test-plan.csv
-TASK-033,Phase 8,User Acceptance Testing,Conduct user acceptance testing with security team,2024-08-08,2024-08-14,7,TASK-032,EO Engineer,56,UAT Complete,Planned,Medium,User availability,test-plan.csv
-TASK-034,Phase 8,Documentation Completion,Finalize all technical and operational documentation,2024-08-15,2024-08-21,7,TASK-033,EO Engineer,56,Documentation Complete,Planned,Low,SME availability,implementation-guide.md,troubleshooting.md
-TASK-035,Phase 9,Parallel Operations Setup,Configure parallel operations with legacy SIEM,2024-08-22,2024-08-28,7,TASK-034,EO Engineer,56,Parallel Operations Ready,Planned,High,Legacy SIEM access,N/A
-TASK-036,Phase 9,Gradual Data Migration,Migrate historical security data to Sentinel,2024-08-29,2024-09-11,14,TASK-035,EO Engineer,112,Data Migration Complete,Planned,High,Data export capabilities,N/A
-TASK-037,Phase 9,Monitoring and Alerting Cutover,Cutover primary monitoring to Azure Sentinel,2024-09-12,2024-09-18,7,TASK-036,EO Engineer,56,Monitoring Cutover Complete,Planned,High,Change management approval,N/A
-TASK-038,Phase 9,Legacy SIEM Decommission Planning,Plan and prepare legacy SIEM decommissioning,2024-09-19,2024-09-25,7,TASK-037,EO Quarterback,56,Decommission Plan Ready,Planned,Medium,Stakeholder approval,N/A
-TASK-039,Phase 10,Go-Live and Stabilization,Execute go-live and monitor system stability,2024-09-26,2024-10-02,7,TASK-038,EO Project Manager,56,Go-Live Complete,Planned,High,All team availability,N/A
-TASK-040,Phase 10,Post-Implementation Support,Provide hypercare support and issue resolution,2024-10-03,2024-10-16,14,TASK-039,EO Engineer,112,Hypercare Support Complete,Planned,Medium,Support procedures,implementation-guide.md
-TASK-041,Phase 10,Performance Optimization,Fine-tune performance based on production usage,2024-10-17,2024-10-23,7,TASK-040,EO Engineer,56,Performance Tuned,Planned,Medium,Performance metrics,N/A
-TASK-042,Phase 10,Project Closure and Handover,Complete project closure and operational handover,2024-10-24,2024-10-30,7,TASK-041,EO Project Manager,56,Project Closed,Planned,Low,Operational team readiness,project-plan.csv
+# Project Timeline
+#WIDTH: 12,36,13,19,19,26,24,14
+#ALIGN: left,left,center,center,center,left,left,center
+Phase,Task,Duration,Start Date,End Date,Dependencies,Owner,Status
+Phase 1,Project Kickoff,1 day,[START_DATE],[START_DATE+1],None,Project Manager,Not Started
+Phase 1,Requirements Gathering,3 days,[START_DATE+1],[START_DATE+4],Project Kickoff,Wireless Architect,Not Started
+Phase 1,Building Floor Plan Review,2 days,[START_DATE+2],[START_DATE+4],Requirements Gathering,Wireless Architect,Not Started
+Phase 1,RF Site Survey (Predictive),3 days,[START_DATE+4],[START_DATE+7],Floor Plan Review,Wireless Engineer,Not Started
+Phase 1,AP Placement Design,2 days,[START_DATE+7],[START_DATE+9],RF Site Survey,Wireless Architect,Not Started
+Phase 1,WLAN Architecture Design,2 days,[START_DATE+9],[START_DATE+11],AP Placement,Wireless Architect,Not Started
+Phase 1,Design Review and Approval,2 days,[START_DATE+11],[START_DATE+13],WLAN Architecture,Network Manager,Not Started
+Phase 2,EX4400 Switch Deployment,2 days,[START_DATE+13],[START_DATE+15],Design Approval,Network Engineer,Not Started
+Phase 2,Switch Configuration (Wired Assurance),2 days,[START_DATE+15],[START_DATE+17],Switch Deployment,Network Engineer,Not Started
+Phase 2,Mist Cloud Organization Setup,1 day,[START_DATE+15],[START_DATE+16],Design Approval,Wireless Engineer,Not Started
+Phase 2,Site and Floor Plan Upload,1 day,[START_DATE+16],[START_DATE+17],Mist Cloud Setup,Wireless Engineer,Not Started
+Phase 2,AP45 Installation (Floor 1),2 days,[START_DATE+17],[START_DATE+19],Switch Config,Field Engineer,Not Started
+Phase 2,AP45 Installation (Floor 2),2 days,[START_DATE+19],[START_DATE+21],Floor 1 Complete,Field Engineer,Not Started
+Phase 2,AP45 Installation (Floor 3),2 days,[START_DATE+21],[START_DATE+23],Floor 2 Complete,Field Engineer,Not Started
+Phase 2,AP45 Installation (Floor 4),2 days,[START_DATE+23],[START_DATE+25],Floor 3 Complete,Field Engineer,Not Started
+Phase 2,AP45 Installation (Floor 5),2 days,[START_DATE+25],[START_DATE+27],Floor 4 Complete,Field Engineer,Not Started
+Phase 2,SSID and VLAN Configuration,2 days,[START_DATE+27],[START_DATE+29],All APs Installed,Wireless Engineer,Not Started
+Phase 2,RF Policy Configuration,1 day,[START_DATE+29],[START_DATE+30],SSID Config,Wireless Engineer,Not Started
+Phase 2,802.1X RADIUS Integration,2 days,[START_DATE+30],[START_DATE+32],SSID Config,Security Engineer,Not Started
+Phase 2,Guest Portal Configuration,1 day,[START_DATE+32],[START_DATE+33],RADIUS Integration,Wireless Engineer,Not Started
+Phase 3,Marvis AI Activation,1 day,[START_DATE+33],[START_DATE+34],Guest Portal,Wireless Engineer,Not Started
+Phase 3,SLE Baseline Configuration,1 day,[START_DATE+34],[START_DATE+35],Marvis Activation,Wireless Architect,Not Started
+Phase 3,Location Services (vBLE) Setup,2 days,[START_DATE+35],[START_DATE+37],SLE Baseline,Wireless Engineer,Not Started
+Phase 3,Wayfinding Map Creation,2 days,[START_DATE+37],[START_DATE+39],vBLE Setup,Wireless Engineer,Not Started
+Phase 3,Wired Assurance Activation,1 day,[START_DATE+39],[START_DATE+40],Marvis Activation,Network Engineer,Not Started
+Phase 3,SIEM Integration (Syslog),1 day,[START_DATE+40],[START_DATE+41],Wired Assurance,Security Engineer,Not Started
+Phase 4,RF Validation Testing,2 days,[START_DATE+41],[START_DATE+43],SIEM Integration,QA Engineer,Not Started
+Phase 4,Client Connectivity Testing,2 days,[START_DATE+43],[START_DATE+45],RF Validation,QA Engineer,Not Started
+Phase 4,Roaming Performance Testing,1 day,[START_DATE+45],[START_DATE+46],Connectivity Testing,QA Engineer,Not Started
+Phase 4,SLE Validation,1 day,[START_DATE+46],[START_DATE+47],Roaming Testing,QA Engineer,Not Started
+Phase 4,Location Services Testing,1 day,[START_DATE+47],[START_DATE+48],SLE Validation,QA Engineer,Not Started
+Phase 4,User Acceptance Testing,2 days,[START_DATE+48],[START_DATE+50],Location Testing,Network Manager,Not Started
+Phase 4,Legacy AP Cutover,2 days,[START_DATE+50],[START_DATE+52],UAT Complete,Network Engineer,Not Started
+Phase 4,Administrator Training,1 day,[START_DATE+52],[START_DATE+53],Legacy Cutover,Training Lead,Not Started
+Phase 4,Documentation Finalization,2 days,[START_DATE+53],[START_DATE+55],Admin Training,Technical Writer,Not Started
+Phase 4,Project Closure,1 day,[START_DATE+55],[START_DATE+56],Documentation,Project Manager,Not Started
+
+# Milestones
+#WIDTH: 14,25,20,77,28,17
+#ALIGN: left,left,center,left,left,center
+Milestone ID,Milestone Name,Target Date,Success Criteria,Owner,Status
+M1,Project Kickoff,[START_DATE],Kickoff meeting completed; project charter signed; resources confirmed,Project Manager,Not Started
+M2,RF Design Approved,[START_DATE+13],Site survey complete; AP placement approved; WLAN architecture finalized,Wireless Architect,Not Started
+M3,Infrastructure Deployed,[START_DATE+33],50 APs installed; switches configured; Mist Cloud operational,Network Engineer,Not Started
+M4,AI Services Active,[START_DATE+41],Marvis AI operational; location services enabled; SLEs configured,Wireless Engineer,Not Started
+M5,Testing Complete,[START_DATE+52],RF validation passed; 99% SLE achieved; UAT approved,QA Engineer,Not Started
+M6,Project Closure,[START_DATE+56],Training complete; documentation delivered; warranty started,Project Manager,Not Started
+
+# RACI Matrix
+#WIDTH: 30,10,10,10,10,10,10,10,10
+#ALIGN: left,center,center,center,center,center,center,center,center
+Task/Deliverable,PM,WA,WE,NE,SE,QA,TL,Client
+Project Charter,A,C,I,I,I,I,I,C
+RF Site Survey,A,R,C,I,I,I,I,I
+WLAN Architecture,A,R,C,C,C,I,I,I
+Switch Deployment,A,I,I,R,I,I,I,I
+AP Installation,A,C,R,C,I,I,I,I
+SSID Configuration,A,C,R,I,C,I,I,I
+RADIUS Integration,A,C,C,I,R,I,I,I
+Marvis AI Activation,A,C,R,I,I,I,I,I
+Location Services,A,C,R,I,I,I,I,I
+RF Validation Testing,A,C,C,I,I,R,I,I
+SLE Validation,A,C,C,I,I,R,I,I
+User Acceptance Testing,A,C,I,I,I,C,I,R
+Administrator Training,A,I,I,I,I,I,R,R
+Documentation,A,C,C,C,C,C,R,I
+Project Closeout,A,C,C,C,C,C,C,R
+
+# Communications Plan
+#WIDTH: 23,19,38,45,19,20
+#ALIGN: left,left,left,left,left,center
+Meeting Type,Frequency,Participants,Purpose,Owner,Day/Time
+Project Kickoff,Once,All stakeholders and project team,Launch project and align on objectives and timeline,Project Manager,Day 1
+Steering Committee,Weekly,Executive sponsors and PM,Strategic oversight and escalation resolution,Project Manager,Fridays 14:00
+Status Meeting,Weekly,Core project team,Review progress and address blockers and risks,Project Manager,Mondays 10:00
+Technical Review,Weekly,Wireless architect and engineers,Design decisions and technical issue resolution,Wireless Architect,Wednesdays 14:00
+Installation Sync,Daily (Week 3-5),Field engineers and network team,AP installation coordination and issue resolution,Field Engineer,Daily 08:00
+Testing Review,Daily (Week 7),QA and wireless engineers,Testing progress and defect resolution,QA Engineer,Daily 09:00
+Training Sessions,Per schedule,Administrators and helpdesk,Knowledge transfer and skill development,Training Lead,Per schedule
+Go-Live Readiness,Daily (Week 8),Go-live team and stakeholders,Final validation and cutover checklist review,Project Manager,Daily 09:00

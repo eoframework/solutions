@@ -1,31 +1,81 @@
-Phase,Task,Description,Start Date,End Date,Duration,Dependencies,Assigned To,Status,Deliverables,Risks,Mitigation
-"Phase 1: Planning","P1.1 - Project Initiation","Project charter, security requirements, and Juniper partnership","2025-01-02","2025-01-08","7 days","None","Project Manager","Completed","Project Charter, Security Strategy","Requirements complexity","Security expert consultation"
-"Phase 1: Planning","P1.2 - Security Assessment","Current security posture and network architecture assessment","2025-01-06","2025-01-17","12 days","P1.1","Security Architect","Completed","Security Assessment, Gap Analysis","Legacy security complexity","Phased security transformation"
-"Phase 1: Planning","P1.3 - Network Design","SRX firewall architecture and network security design","2025-01-15","2025-01-26","12 days","P1.2","Network Architect","Completed","Network Design, Security Architecture","Design complexity","Juniper expert guidance"
-"Phase 1: Planning","P1.4 - Policy Framework","Security policy framework and compliance requirements","2025-01-24","2025-02-04","12 days","P1.3","Policy Manager","Completed","Policy Framework, Compliance Plan","Policy complexity","Regulatory expert input"
-"Phase 1: Planning","P1.5 - Implementation Planning","Detailed implementation plan and resource allocation","2025-02-02","2025-02-13","12 days","P1.4","Implementation Manager","Completed","Implementation Plan, Resource Plan","Resource availability","Early resource commitment"
-"Phase 2: Infrastructure","P2.1 - Hardware Procurement","Procurement and delivery of SRX firewall hardware","2025-02-11","2025-02-25","15 days","P1.5","Procurement Manager","Completed","Hardware Delivery, Equipment Setup","Hardware availability","Early vendor engagement"
-"Phase 2: Infrastructure","P2.2 - Data Center Preparation","Data center preparation and rack installation","2025-02-23","2025-03-06","12 days","P2.1","Facilities Engineer","Completed","Infrastructure Setup, Power and Cooling","Facility readiness","Parallel preparation work"
-"Phase 2: Infrastructure","P2.3 - Network Infrastructure","Network infrastructure and connectivity setup","2025-03-04","2025-03-15","12 days","P2.2","Network Engineer","Completed","Network Infrastructure, Connectivity","Network complexity","Expert network support"
-"Phase 2: Infrastructure","P2.4 - Security Infrastructure","Security infrastructure and monitoring setup","2025-03-13","2025-03-24","12 days","P2.3","Security Engineer","Completed","Security Infrastructure, Monitoring","Security complexity","Security team collaboration"
-"Phase 2: Infrastructure","P2.5 - Testing Environment","Testing environment setup and validation","2025-03-22","2025-04-02","12 days","P2.4","Test Engineer","Completed","Test Environment, Validation Procedures","Test complexity","Comprehensive test planning"
-"Phase 3: Platform Deployment","P3.1 - SRX Installation","Installation and initial configuration of SRX firewalls","2025-03-31","2025-04-11","12 days","P2.5","SRX Engineer","Completed","SRX Installation, Base Configuration","Configuration complexity","Juniper support engagement"
-"Phase 3: Platform Deployment","P3.2 - Clustering Setup","High availability clustering configuration","2025-04-09","2025-04-20","12 days","P3.1","Clustering Engineer","Completed","HA Clustering, Failover Configuration","Clustering complexity","HA testing validation"
-"Phase 3: Platform Deployment","P3.3 - Security Services","Advanced security services configuration","2025-04-18","2025-04-29","12 days","P3.2","Security Services Engineer","Completed","IPS/IDS, Anti-malware, Content Filtering","Service complexity","Service-by-service approach"
-"Phase 3: Platform Deployment","P3.4 - Policy Implementation","Security policy implementation and testing","2025-04-27","2025-05-08","12 days","P3.3","Policy Engineer","Completed","Security Policies, Rule Implementation","Policy complexity","Phased policy deployment"
-"Phase 3: Platform Deployment","P3.5 - Integration Setup","Integration with existing security and network tools","2025-05-06","2025-05-17","12 days","P3.4","Integration Engineer","Completed","Tool Integrations, API Configuration","Integration complexity","API-first approach"
-"Phase 4: Testing and Validation","P4.1 - Functional Testing","Comprehensive functional testing of security features","2025-05-15","2025-05-26","12 days","P3.5","Functional Tester","Completed","Functional Test Results, Feature Validation","Test coverage","Comprehensive test scenarios"
-"Phase 4: Testing and Validation","P4.2 - Performance Testing","Performance and throughput testing","2025-05-24","2025-06-04","12 days","P4.1","Performance Tester","Completed","Performance Test Results, Capacity Baseline","Performance requirements","Performance optimization"
-"Phase 4: Testing and Validation","P4.3 - Security Testing","Security testing and penetration testing","2025-06-02","2025-06-13","12 days","P4.2","Security Tester","Completed","Security Test Results, Vulnerability Assessment","Security vulnerabilities","Immediate remediation"
-"Phase 4: Testing and Validation","P4.4 - Integration Testing","End-to-end integration testing","2025-06-11","2025-06-22","12 days","P4.3","Integration Tester","Completed","Integration Test Results, Workflow Validation","Integration issues","Systematic testing"
-"Phase 4: Testing and Validation","P4.5 - User Acceptance Testing","User acceptance testing with security and network teams","2025-06-20","2025-07-01","12 days","P4.4","UAT Coordinator","Completed","UAT Results, User Sign-off","User acceptance","User feedback integration"
-"Phase 5: Production Deployment","P5.1 - Production Preparation","Production environment preparation and cutover planning","2025-06-29","2025-07-10","12 days","P4.5","Production Manager","Completed","Production Environment, Cutover Plan","Production readiness","Comprehensive readiness validation"
-"Phase 5: Production Deployment","P5.2 - Staged Deployment","Staged production deployment and traffic migration","2025-07-08","2025-07-19","12 days","P5.1","Deployment Manager","Completed","Production Deployment, Traffic Migration","Migration risks","Staged migration approach"
-"Phase 5: Production Deployment","P5.3 - Monitoring Activation","Activate comprehensive monitoring and alerting","2025-07-17","2025-07-28","12 days","P5.2","Monitoring Engineer","Completed","Monitoring Activation, Alert Configuration","Monitoring coverage","24/7 monitoring setup"
-"Phase 5: Production Deployment","P5.4 - Training Delivery","Comprehensive training for security and operations teams","2025-07-26","2025-08-06","12 days","P5.3","Training Manager","Completed","Training Delivery, Certification","Training effectiveness","Hands-on training approach"
-"Phase 5: Production Deployment","P5.5 - Knowledge Transfer","Knowledge transfer to operations and security teams","2025-08-04","2025-08-15","12 days","P5.4","Knowledge Manager","Completed","Knowledge Transfer, Documentation","Knowledge gaps","Structured transfer process"
-"Ongoing Operations","O1 - Security Operations","24/7 security operations and threat monitoring","2025-08-17","Ongoing","Continuous","P5.5","Security Operations","Active","Security Reports","Security threats","24/7 security monitoring"
-"Ongoing Operations","O2 - Platform Maintenance","Regular platform maintenance and updates","2025-08-17","Ongoing","Continuous","P5.5","Platform Team","Active","Maintenance Reports","Platform stability","Proactive maintenance"
-"Ongoing Operations","O3 - Policy Management","Ongoing security policy management and optimization","2025-08-17","Ongoing","Continuous","P5.5","Policy Team","Active","Policy Reports","Policy effectiveness","Regular policy reviews"
-"Ongoing Operations","O4 - Performance Monitoring","Continuous performance monitoring and optimization","2025-08-17","Ongoing","Continuous","P5.5","Performance Team","Active","Performance Reports","Performance degradation","Proactive optimization"
-"Ongoing Operations","O5 - Compliance Management","Ongoing compliance monitoring and audit preparation","2025-08-17","Ongoing","Continuous","P5.5","Compliance Team","Active","Compliance Reports","Compliance drift","Automated compliance monitoring"
+# Project Timeline
+#WIDTH: 12,36,13,19,19,26,24,14
+#ALIGN: left,left,center,center,center,left,left,center
+Phase,Task,Duration,Start Date,End Date,Dependencies,Owner,Status
+Phase 1,Project Kickoff,1 day,[START_DATE],[START_DATE+1],None,Project Manager,Not Started
+Phase 1,Current State Discovery,5 days,[START_DATE+1],[START_DATE+6],Project Kickoff,Security Architect,Not Started
+Phase 1,Policy Export and Analysis,5 days,[START_DATE+4],[START_DATE+9],Current State Discovery,Security Engineer,Not Started
+Phase 1,Lab Environment Setup,5 days,[START_DATE+6],[START_DATE+11],Policy Export,Network Engineer,Not Started
+Phase 1,Architecture Design Review,3 days,[START_DATE+9],[START_DATE+12],Lab Environment Setup,Solution Architect,Not Started
+Phase 1,Policy Migration Testing (Lab),7 days,[START_DATE+12],[START_DATE+19],Architecture Design Review,Security Engineer,Not Started
+Phase 1,Security Director Deployment,3 days,[START_DATE+15],[START_DATE+18],Lab Environment Setup,Platform Engineer,Not Started
+Phase 1,Integration Testing (Lab),5 days,[START_DATE+19],[START_DATE+24],Policy Migration Testing,QA Engineer,Not Started
+Phase 2,SRX4600 Hardware Installation,2 days,[START_DATE+24],[START_DATE+26],Integration Testing,Network Engineer,Not Started
+Phase 2,Chassis Cluster Configuration,2 days,[START_DATE+26],[START_DATE+28],Hardware Installation,Network Engineer,Not Started
+Phase 2,Zone and Interface Configuration,3 days,[START_DATE+28],[START_DATE+31],Chassis Cluster Config,Security Engineer,Not Started
+Phase 2,Security Services Activation,3 days,[START_DATE+31],[START_DATE+34],Zone Configuration,Security Engineer,Not Started
+Phase 2,Policy Deployment (Datacenter),5 days,[START_DATE+34],[START_DATE+39],Security Services,Security Engineer,Not Started
+Phase 2,VPN Configuration,3 days,[START_DATE+37],[START_DATE+40],Policy Deployment,Network Engineer,Not Started
+Phase 2,SIEM Integration,2 days,[START_DATE+39],[START_DATE+41],Policy Deployment,Integration Engineer,Not Started
+Phase 2,Zone Migration (DMZ),3 days,[START_DATE+41],[START_DATE+44],SIEM Integration,Network Engineer,Not Started
+Phase 2,Zone Migration (Internal),3 days,[START_DATE+44],[START_DATE+47],Zone Migration DMZ,Network Engineer,Not Started
+Phase 2,HA Failover Testing,2 days,[START_DATE+47],[START_DATE+49],Zone Migration Internal,QA Engineer,Not Started
+Phase 2,Performance Validation,3 days,[START_DATE+49],[START_DATE+52],HA Failover Testing,Performance Engineer,Not Started
+Phase 3,Branch Site 1-2 Deployment,3 days,[START_DATE+52],[START_DATE+55],Performance Validation,Field Engineer,Not Started
+Phase 3,Branch Site 3-4 Deployment,3 days,[START_DATE+55],[START_DATE+58],Branch 1-2 Complete,Field Engineer,Not Started
+Phase 3,Branch Site 5-6 Deployment,3 days,[START_DATE+58],[START_DATE+61],Branch 3-4 Complete,Field Engineer,Not Started
+Phase 3,Branch Site 7-8 Deployment,3 days,[START_DATE+61],[START_DATE+64],Branch 5-6 Complete,Field Engineer,Not Started
+Phase 3,Branch Site 9-10 Deployment,3 days,[START_DATE+64],[START_DATE+67],Branch 7-8 Complete,Field Engineer,Not Started
+Phase 3,SD-WAN Configuration,3 days,[START_DATE+67],[START_DATE+70],All Branches Complete,Network Engineer,Not Started
+Phase 3,Branch VPN Validation,2 days,[START_DATE+70],[START_DATE+72],SD-WAN Configuration,QA Engineer,Not Started
+Phase 4,Security Optimization,3 days,[START_DATE+72],[START_DATE+75],Branch VPN Validation,Security Engineer,Not Started
+Phase 4,Documentation Finalization,3 days,[START_DATE+75],[START_DATE+78],Security Optimization,Technical Writer,Not Started
+Phase 4,Administrator Training,2 days,[START_DATE+78],[START_DATE+80],Documentation Complete,Training Lead,Not Started
+Phase 4,Operations Training,2 days,[START_DATE+80],[START_DATE+82],Administrator Training,Training Lead,Not Started
+Phase 4,Knowledge Transfer,2 days,[START_DATE+82],[START_DATE+84],Operations Training,Technical Lead,Not Started
+Phase 4,Project Closure,1 day,[START_DATE+84],[START_DATE+85],Knowledge Transfer,Project Manager,Not Started
+
+# Milestones
+#WIDTH: 14,25,20,77,28,17
+#ALIGN: left,left,center,left,left,center
+Milestone ID,Milestone Name,Target Date,Success Criteria,Owner,Status
+M1,Project Kickoff,[START_DATE],Kickoff meeting completed; project charter signed; resources confirmed,Project Manager,Not Started
+M2,Lab Validation,[START_DATE+24],Policy migration validated in lab; integration testing passed; architecture approved,Solution Architect,Not Started
+M3,Datacenter Go-Live,[START_DATE+52],SRX4600 HA operational; traffic migrated; performance validated at 80 Gbps,Network Engineer,Not Started
+M4,Branch Deployment,[START_DATE+72],All 10 SRX300 deployed; VPN tunnels operational; SD-WAN configured,Field Engineer,Not Started
+M5,Training Complete,[START_DATE+82],Admin and ops training delivered; certification achieved; handover ready,Training Lead,Not Started
+M6,Project Closure,[START_DATE+85],Documentation complete; warranty started; closeout presentation delivered,Project Manager,Not Started
+
+# RACI Matrix
+#WIDTH: 30,10,10,10,10,10,10,10,10
+#ALIGN: left,center,center,center,center,center,center,center,center
+Task/Deliverable,PM,SA,NE,SE,QA,TL,FE,Client
+Project Charter,A,C,I,I,I,C,I,C
+Architecture Design,A,R,C,C,I,C,I,I
+Policy Migration Plan,A,C,I,R,C,C,I,I
+Lab Environment Setup,A,C,R,C,C,I,I,I
+SRX4600 Installation,A,C,R,C,I,C,I,I
+Security Services Config,A,C,I,R,C,C,I,I
+Zone Migration,A,C,R,R,I,C,I,C
+Branch Deployment,A,C,C,I,I,C,R,I
+VPN Configuration,A,C,R,C,C,C,I,I
+SIEM Integration,A,C,I,R,C,C,I,I
+Performance Testing,A,I,C,C,R,I,I,I
+HA Failover Testing,A,C,C,C,R,C,I,I
+Training Delivery,A,I,I,I,I,R,I,R
+Documentation,A,C,C,C,C,R,C,I
+Go-Live Approval,A,C,C,C,C,C,I,R
+Project Closeout,A,C,C,C,C,C,C,R
+
+# Communications Plan
+#WIDTH: 23,19,38,45,19,20
+#ALIGN: left,left,left,left,left,center
+Meeting Type,Frequency,Participants,Purpose,Owner,Day/Time
+Project Kickoff,Once,All stakeholders and project team,Launch project and align on objectives and timeline,Project Manager,Day 1
+Steering Committee,Bi-weekly,Executive sponsors and PMO,Strategic oversight and escalation resolution,Project Manager,Alternate Tuesdays
+Status Meeting,Weekly,Core project team,Review progress and address blockers and risks,Project Manager,Mondays 10:00
+Technical Review,Weekly,Technical leads and architects,Design decisions and technical issue resolution,Solution Architect,Wednesdays 14:00
+Cutover Planning,Daily (Week 5-8),Migration team and operations,Coordinate zone migrations and validate traffic,Network Engineer,Daily 09:00
+Branch Deployment,Daily (Week 9-11),Field and network engineers,Branch deployment status and issue resolution,Field Engineer,Daily 08:00
+Training Sessions,Per schedule,Training participants,Knowledge transfer and skill development,Training Lead,Per schedule
+Go-Live Readiness,Daily (Week 12),Go-live team and stakeholders,Final validation and go-live checklist review,Project Manager,Daily 09:00

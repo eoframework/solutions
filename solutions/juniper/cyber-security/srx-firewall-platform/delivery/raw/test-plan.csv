@@ -1,6 +1,31 @@
-Test_Phase,Test_Category,Test_ID,Test_Name,Description,Prerequisites,Expected_Result,Priority,Duration,Responsible_Team
-Functional Testing,Core Functionality,FT001,Basic Functionality Test,Verify core solution functionality,Solution deployed and configured,All core functions operational,High,60 minutes,QA Team
-Functional Testing,Integration Testing,FT002,System Integration Test,Validate integration with existing systems,Integration points configured,All integrations functional,High,90 minutes,Integration Team
-Performance Testing,Load Testing,PT001,Performance Load Test,Test solution under expected load,Performance test environment ready,Performance meets specifications,High,120 minutes,Performance Team
-Security Testing,Security Validation,ST001,Security Configuration Test,Validate security controls and configurations,Security policies applied,All security controls operational,High,90 minutes,Security Team
-User Acceptance,Business Validation,UAT001,User Acceptance Test,Validate solution meets business requirements,User training completed,Business requirements satisfied,Medium,180 minutes,Business Users
+# Functional Tests
+#WIDTH: 10,14,26,33,26,38,33,10,12
+#ALIGN: left,left,left,left,left,left,left,center,center
+Test ID,Test Type,Test Name,Description,Pre-conditions,Test Steps,Expected Results,Priority,Status
+FT-001,Unit,Firewall Policy Permit,Validate permitted traffic flows through firewall policy,SRX4600 operational; test VMs deployed,1. Initiate HTTP traffic from internal to DMZ; 2. Capture session table; 3. Verify traffic logged,Traffic permitted; session established; log entry created,High,Not Started
+FT-002,Unit,Firewall Policy Deny,Validate denied traffic is blocked by policy,SRX4600 operational; deny policy configured,1. Initiate blocked traffic type; 2. Monitor session table; 3. Check deny logs,Traffic blocked; no session created; deny log generated,High,Not Started
+FT-003,Unit,IPS Signature Detection,Validate IPS detects known attack signatures,IPS enabled; signature database current,1. Generate test attack traffic; 2. Monitor IPS alerts; 3. Verify blocking action,Attack detected; alert generated; traffic blocked,High,Not Started
+FT-004,Integration,ATP Cloud Malware Detection,Validate ATP Cloud sandbox integration,ATP Cloud configured; internet connectivity,1. Download EICAR test file; 2. Monitor ATP verdict; 3. Verify file blocked,Malware detected; ATP verdict received; download blocked,High,Not Started
+FT-005,Integration,SecIntel C2 Blocking,Validate SecIntel blocks C2 communications,SecIntel feeds active; test C2 domain,1. Attempt connection to test C2 domain; 2. Monitor SecIntel logs; 3. Verify blocking,C2 connection blocked; SecIntel alert generated,High,Not Started
+FT-006,System,Security Director Policy Push,Validate centralized policy deployment,Security Director configured; SRX registered,1. Create policy in Security Director; 2. Deploy to SRX; 3. Verify policy active,Policy deployed successfully; active on SRX device,Medium,Not Started
+
+# Non-Functional Tests
+#WIDTH: 10,14,22,38,30,44,38,10,12
+#ALIGN: left,left,left,left,left,left,left,center,center
+Test ID,Test Type,Test Name,Description,Pre-conditions,Test Steps,Expected Results,Priority,Status
+NFT-001,Performance,Firewall Throughput,Validate 80 Gbps firewall throughput specification,iperf servers deployed; 100GbE connectivity,1. Configure iperf client/server; 2. Run throughput test 60 seconds; 3. Record sustained rate,Sustained throughput >= 80 Gbps with < 1% loss,Critical,Not Started
+NFT-002,Performance,IPS Throughput,Validate 40 Gbps IPS throughput with inspection,IPS enabled; traffic generator ready,1. Enable IPS on all policies; 2. Run throughput test; 3. Measure inspection rate,IPS throughput >= 40 Gbps with full inspection,Critical,Not Started
+NFT-003,Performance,HA Failover Time,Validate sub-second failover for HA cluster,HA cluster operational; traffic flowing,1. Establish baseline traffic; 2. Trigger failover; 3. Measure interruption duration,Failover completes in < 1 second; traffic resumes,Critical,Not Started
+NFT-004,Security,VPN Encryption,Validate AES-256-GCM encryption for VPN tunnels,VPN tunnels established; packet capture ready,1. Establish VPN session; 2. Capture encrypted packets; 3. Verify encryption algorithm,All VPN traffic encrypted with AES-256-GCM,Critical,Not Started
+NFT-005,Reliability,Session Persistence,Validate sessions survive HA failover,Active sessions established; HA cluster ready,1. Establish 1000 TCP sessions; 2. Trigger failover; 3. Verify session continuity,All sessions persist through failover; no drops,High,Not Started
+
+# User Acceptance Tests
+#WIDTH: 10,20,29,33,26,38,33,10,12
+#ALIGN: left,left,left,left,left,left,left,center,center
+Test ID,Test Type,Test Name,Description,Pre-conditions,Test Steps,Expected Results,Priority,Status
+UAT-001,Business Process,Policy Migration Accuracy,Validate all legacy policies migrated correctly,Policy migration complete; legacy config available,1. Compare legacy vs SRX policies; 2. Test sample traffic flows; 3. Verify no gaps,100% policy accuracy; all traffic flows match legacy,High,Not Started
+UAT-002,Business Process,Site-to-Site VPN Connectivity,Validate VPN tunnels to all branch sites,VPN configuration complete; branch sites online,1. Verify tunnel status all 30 tunnels; 2. Test bidirectional traffic; 3. Measure latency,All tunnels UP; traffic flows bidirectionally; latency < 50ms,High,Not Started
+UAT-003,User Interface,Security Director Dashboard,Validate monitoring dashboard functionality,Security Director operational; devices connected,1. Access dashboard; 2. Verify device status display; 3. Test alert generation,Dashboard displays real-time status; alerts functional,Medium,Not Started
+UAT-004,Business Process,SSL VPN Remote Access,Validate SSL VPN for remote user connectivity,SSL VPN configured; test user accounts ready,1. Connect via Juniper Secure Connect; 2. Access internal resources; 3. Verify MFA,Users authenticate with MFA; access internal resources,High,Not Started
+UAT-005,Business Process,SIEM Log Integration,Validate security logs forwarded to Splunk,Syslog configured; Splunk collector operational,1. Generate security events; 2. Search Splunk for events; 3. Verify event format,Events received in Splunk within 30 seconds; correct format,High,Not Started
+
