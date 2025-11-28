@@ -1,56 +1,42 @@
-Config_ID,Component,Configuration_Item,Value,Environment,Owner,Category,Description,Dependencies,Security_Level,Last_Updated,Status
-CONFIG-001,Azure DevOps,Organization Name,contoso-enterprise-devops,Production,Platform Admin,Organization,Primary Azure DevOps organization for enterprise,,Public,2025-01-15,Configured
-CONFIG-002,Azure DevOps,Organization URL,https://dev.azure.com/contoso-enterprise-devops,Production,Platform Admin,Organization,Organization access URL,,Public,2025-01-15,Configured
-CONFIG-003,Azure DevOps,Process Template,Enterprise Agile Process,Production,Process Admin,Process,Custom process template based on Agile,CONFIG-001,Internal,2025-01-20,Configured
-CONFIG-004,Azure DevOps,User Access Levels,Basic: 150 users | Basic+Test: 25 users,Production,User Admin,Licensing,User license allocation across organization,CONFIG-001,Internal,2025-01-25,Configured
-CONFIG-005,Azure DevOps,Parallel Jobs,Microsoft-hosted: 10 | Self-hosted: 5,Production,Pipeline Admin,Pipeline,Concurrent job execution capacity,CONFIG-001,Internal,2025-01-25,Configured
-CONFIG-006,Azure DevOps,Extensions,"SonarCloud | WhiteSource | Terraform | ARM",Production,Extension Admin,Extensions,Required marketplace extensions installed,CONFIG-001,Internal,2025-02-01,Configured
-CONFIG-007,Azure AD,Tenant ID,12345678-1234-1234-1234-123456789012,Production,Identity Admin,Identity,Azure AD tenant identifier for SSO integration,,Confidential,2025-01-10,Configured
-CONFIG-008,Azure AD,Application Registration,Azure DevOps Enterprise App,Production,Identity Admin,Identity,App registration for Azure DevOps SSO,CONFIG-007,Confidential,2025-01-15,Configured
-CONFIG-009,Azure AD,Security Groups,"DevOps-Admins | DevOps-Users | DevOps-Viewers",Production,Identity Admin,Security,Azure AD security groups for role-based access,CONFIG-007,Internal,2025-01-20,Configured
-CONFIG-010,Azure AD,Conditional Access,MFA Required for DevOps Access,Production,Security Admin,Security,Multi-factor authentication enforcement,CONFIG-007,Internal,2025-01-22,Configured
-CONFIG-011,Azure Key Vault,Vault Name,kv-devops-enterprise-prod,Production,Security Admin,Security,Primary secrets management vault,,Confidential,2025-01-25,Configured
-CONFIG-012,Azure Key Vault,Access Policies,"DevOps Service Principal: Get/List Secrets",Production,Security Admin,Security,Service principal access for CI/CD pipelines,CONFIG-011,Confidential,2025-01-28,Configured
-CONFIG-013,Azure Key Vault,Secrets,"Database-ConnectionString | API-Keys | Certificates",Production,Security Admin,Security,Stored secrets for application configuration,CONFIG-011,Confidential,2025-02-01,Configured
-CONFIG-014,Azure Container Registry,Registry Name,acrdevopsenterprise,Production,Platform Admin,Platform,Container image storage and scanning,,Internal,2025-02-01,Configured
-CONFIG-015,Azure Container Registry,Security Scanning,Enabled with Quarantine Policy,Production,Security Admin,Security,Automatic vulnerability scanning for images,CONFIG-014,Internal,2025-02-03,Configured
-CONFIG-016,Azure Container Registry,Retention Policy,30 days for untagged images,Production,Platform Admin,Platform,Image lifecycle management,CONFIG-014,Internal,2025-02-05,Configured
-CONFIG-017,Azure Kubernetes Service,Cluster Name,aks-devops-enterprise-prod,Production,Platform Admin,Platform,Primary Kubernetes cluster for deployments,,Internal,2025-02-05,Configured
-CONFIG-018,Azure Kubernetes Service,Node Pool Configuration,3 nodes | Standard_D4s_v3 | Auto-scaling 3-10,Production,Platform Admin,Platform,Worker node configuration and scaling,CONFIG-017,Internal,2025-02-08,Configured
-CONFIG-019,Azure Kubernetes Service,RBAC Configuration,Enabled with Azure AD Integration,Production,Security Admin,Security,Role-based access control integration,CONFIG-017,Internal,2025-02-10,Configured
-CONFIG-020,Azure Kubernetes Service,Network Policy,Calico with Network Segmentation,Production,Network Admin,Network,Network security and micro-segmentation,CONFIG-017,Internal,2025-02-12,Configured
-CONFIG-021,Azure Virtual Network,VNet Name,vnet-devops-enterprise,Production,Network Admin,Network,Primary virtual network for DevOps resources,,Internal,2025-01-30,Configured
-CONFIG-022,Azure Virtual Network,Subnet Configuration,"DevOps: 10.0.1.0/24 | AKS: 10.0.2.0/23 | Data: 10.0.4.0/24",Production,Network Admin,Network,Network segmentation for different tiers,CONFIG-021,Internal,2025-02-01,Configured
-CONFIG-023,Azure Virtual Network,Network Security Groups,Restrictive rules with minimal required access,Production,Security Admin,Security,Network-level security controls,CONFIG-022,Internal,2025-02-03,Configured
-CONFIG-024,Azure Application Insights,Resource Name,appi-devops-enterprise,Production,Monitoring Admin,Monitoring,Application performance monitoring,,Internal,2025-02-08,Configured
-CONFIG-025,Azure Application Insights,Data Retention,90 days with extended analytics,Production,Monitoring Admin,Monitoring,Telemetry data retention policy,CONFIG-024,Internal,2025-02-10,Configured
-CONFIG-026,Azure Application Insights,Alert Rules,"High CPU | Memory | Error Rate | Response Time",Production,Monitoring Admin,Monitoring,Proactive alerting for performance issues,CONFIG-024,Internal,2025-02-12,Configured
-CONFIG-027,Azure Log Analytics,Workspace Name,law-devops-enterprise,Production,Monitoring Admin,Monitoring,Centralized logging and analytics,,Internal,2025-02-08,Configured
-CONFIG-028,Azure Log Analytics,Data Sources,"Activity Logs | Diagnostic Logs | Custom Logs",Production,Monitoring Admin,Monitoring,Log collection configuration,CONFIG-027,Internal,2025-02-10,Configured
-CONFIG-029,Azure Log Analytics,Retention Policy,180 days with archive to storage,Production,Monitoring Admin,Monitoring,Log data retention and archival,CONFIG-027,Internal,2025-02-12,Configured
-CONFIG-030,Build Agents,Microsoft-hosted Configuration,Ubuntu Latest | Windows Latest | macOS Latest,Production,Pipeline Admin,Pipeline,Hosted agent pool configuration,CONFIG-005,Internal,2025-02-15,Configured
-CONFIG-031,Build Agents,Self-hosted Pool,Enterprise-Agents with Docker and Kubernetes tools,Production,Pipeline Admin,Pipeline,Custom agent pool with specialized tools,CONFIG-005,Internal,2025-02-18,Configured
-CONFIG-032,Build Agents,Agent Capabilities,"Docker | Kubernetes CLI | Terraform | PowerShell | Python",Production,Pipeline Admin,Pipeline,Required tools and capabilities on agents,CONFIG-031,Internal,2025-02-20,Configured
-CONFIG-033,Service Connections,Azure Resource Manager,Production Subscription Connection,Production,Pipeline Admin,Pipeline,ARM connection for resource deployment,,Confidential,2025-02-15,Configured
-CONFIG-034,Service Connections,Azure Container Registry,ACR Service Connection,Production,Pipeline Admin,Pipeline,Connection for image push/pull operations,CONFIG-014,Confidential,2025-02-18,Configured
-CONFIG-035,Service Connections,Kubernetes Service Connection,AKS Cluster Service Connection,Production,Pipeline Admin,Pipeline,Connection for Kubernetes deployments,CONFIG-017,Confidential,2025-02-20,Configured
-CONFIG-036,Variable Groups,Global Variables,Environment: Production | Region: East US,Production,Pipeline Admin,Pipeline,Shared variables across pipelines,,Internal,2025-02-20,Configured
-CONFIG-037,Variable Groups,Database Variables,Connection strings from Key Vault,Production,Pipeline Admin,Pipeline,Database connection configuration,CONFIG-012,Confidential,2025-02-22,Configured
-CONFIG-038,Variable Groups,API Variables,API endpoints and authentication keys,Production,Pipeline Admin,Pipeline,External API integration settings,CONFIG-012,Confidential,2025-02-25,Configured
-CONFIG-039,Branch Policies,Main Branch Protection,Minimum 2 reviewers | Build validation | Work item linking,Production,Repo Admin,Repository,Protection rules for main branch,,Internal,2025-02-25,Configured
-CONFIG-040,Branch Policies,Release Branch Protection,Minimum 1 reviewer | Build validation | Path-based rules,Production,Repo Admin,Repository,Protection rules for release branches,,Internal,2025-02-28,Configured
-CONFIG-041,Environments,Development Environment,Auto-approval with deployment gates,Development,Environment Admin,Deployment,Development deployment target,CONFIG-033,Internal,2025-03-01,Configured
-CONFIG-042,Environments,Test Environment,Manual approval with 1 approver,Test,Environment Admin,Deployment,Test deployment target with approvals,CONFIG-033,Internal,2025-03-03,Configured
-CONFIG-043,Environments,Production Environment,Manual approval with 2 approvers + business approval,Production,Environment Admin,Deployment,Production deployment target with strict approvals,CONFIG-033,Internal,2025-03-05,Configured
-CONFIG-044,Security Scanning,SonarCloud Integration,Quality Gate: 80% coverage | 0 blocker issues,Production,Security Admin,Security,Static code analysis configuration,CONFIG-006,Internal,2025-03-01,Configured
-CONFIG-045,Security Scanning,WhiteSource Configuration,Block builds with critical vulnerabilities,Production,Security Admin,Security,Dependency vulnerability scanning,CONFIG-006,Internal,2025-03-03,Configured
-CONFIG-046,Security Scanning,Container Scanning,Quarantine images with high/critical vulnerabilities,Production,Security Admin,Security,Container image security scanning,CONFIG-015,Internal,2025-03-05,Configured
-CONFIG-047,Artifacts,Package Feeds,Enterprise-Packages with upstream sources,Production,Artifact Admin,Artifacts,Package management and dependency resolution,,Internal,2025-03-05,Configured
-CONFIG-048,Artifacts,Retention Policy,Keep 50 latest versions with 6-month retention,Production,Artifact Admin,Artifacts,Artifact lifecycle management,CONFIG-047,Internal,2025-03-08,Configured
-CONFIG-049,Test Plans,Test Configurations,"Chrome Latest | Edge Latest | Mobile Browsers",Production,Test Admin,Testing,Browser test configuration matrix,,Internal,2025-03-08,Configured
-CONFIG-050,Test Plans,Test Environments,"Development | Test | Staging environments",Production,Test Admin,Testing,Test execution environments,CONFIG-041,Internal,2025-03-10,Configured
-CONFIG-051,Notifications,Team Notifications,"Build failures | Deployment approvals | Work item updates",Production,Notification Admin,Communication,Team notification preferences,,Internal,2025-03-10,Configured
-CONFIG-052,Notifications,Email Templates,Branded templates with company styling,Production,Notification Admin,Communication,Customized notification templates,CONFIG-051,Internal,2025-03-12,Configured
-CONFIG-053,Dashboards,Executive Dashboard,"Project progress | Key metrics | Risk indicators",Production,Dashboard Admin,Reporting,High-level executive visibility,,Internal,2025-03-12,Configured
-CONFIG-054,Dashboards,Team Dashboard,"Sprint progress | Build status | Quality metrics",Production,Dashboard Admin,Reporting,Team-level operational dashboard,,Internal,2025-03-15,Configured
-CONFIG-055,API Management,API Gateway Configuration,Rate limiting | Authentication | Logging enabled,Production,API Admin,Integration,Centralized API management,,Internal,2025-03-15,Configured
+#WIDTH: 25,15,12,30,45,10,12,33,16,20,26,39,12
+#ALIGN: left,left,center,left,left,center,left,left,center,left,left,left,center
+Parameter Name,Category,Environment,Default Value,Description,Required,Data Type,Validation Rules,Security Level,Owner Team,Dependencies,Notes,Last Updated
+AZURE_SUBSCRIPTION_ID,Application,All,[SUBSCRIPTION_ID],Azure subscription identifier for DevOps resources,Yes,String,GUID format,Confidential,Infrastructure,None,Required for all Azure deployments,[DATE]
+AZURE_TENANT_ID,Application,All,[TENANT_ID],Azure AD tenant identifier for authentication,Yes,String,GUID format,Confidential,Infrastructure,Azure AD,Required for SSO integration,[DATE]
+AZURE_REGION,Application,All,eastus,Primary Azure region for resource deployment,Yes,String,Valid Azure region,Public,Infrastructure,None,Must support all required services,[DATE]
+SOLUTION_PREFIX,Application,All,devops,Prefix for all Azure resource naming,Yes,String,3-8 lowercase alphanumeric,Public,Infrastructure,None,Used in resource naming convention,[DATE]
+RESOURCE_GROUP_NAME,Application,All,rg-devops-[env]-001,Resource group for DevOps platform resources,Yes,String,Azure naming rules,Public,Infrastructure,Subscription,Contains all platform components,[DATE]
+DEVOPS_ORG_NAME,Platform,All,contoso-enterprise-devops,Azure DevOps organization name,Yes,String,Valid org name format,Public,DevOps,Azure AD,Primary DevOps organization,[DATE]
+DEVOPS_ORG_URL,Platform,All,https://dev.azure.com/[ORG],Azure DevOps organization URL,Yes,String,Valid HTTPS URL,Public,DevOps,DEVOPS_ORG_NAME,Organization access URL,[DATE]
+DEVOPS_PROCESS_TEMPLATE,Platform,All,Agile,Azure DevOps process template,Yes,String,Agile|Scrum|CMMI|Basic,Public,DevOps,None,Default process for new projects,[DATE]
+DEVOPS_PARALLEL_JOBS_HOSTED,Platform,All,10,Microsoft-hosted parallel job count,Yes,Integer,1-100,Public,DevOps,None,Concurrent build capacity,[DATE]
+DEVOPS_PARALLEL_JOBS_SELF,Platform,All,5,Self-hosted parallel job count,Yes,Integer,1-50,Public,DevOps,None,Custom agent capacity,[DATE]
+ACR_NAME,Platform,All,acrdevops[env]001,Azure Container Registry name,Yes,String,Azure naming rules,Public,DevOps,Resource Group,Container image storage,[DATE]
+ACR_SKU,Platform,All,Premium,Container Registry pricing tier,Yes,String,Basic|Standard|Premium,Public,DevOps,None,Premium for geo-replication,[DATE]
+ACR_VULNERABILITY_SCAN,Security,All,true,Enable container vulnerability scanning,Yes,Boolean,true|false,Public,Security,ACR_NAME,Security scanning for images,[DATE]
+AKS_CLUSTER_NAME,Platform,All,aks-devops-[env]-001,Azure Kubernetes Service cluster name,Yes,String,Azure naming rules,Public,DevOps,Resource Group,Container orchestration platform,[DATE]
+AKS_NODE_COUNT,Platform,Development,3,Initial AKS node count for development,Yes,Integer,1-10,Public,DevOps,None,Minimum nodes for dev workloads,[DATE]
+AKS_NODE_COUNT,Platform,Production,5,Initial AKS node count for production,Yes,Integer,3-20,Public,DevOps,None,Production node baseline,[DATE]
+AKS_NODE_SIZE,Platform,All,Standard_D4s_v3,AKS node VM size,Yes,String,Valid VM size,Public,DevOps,None,4 vCPU 16GB RAM nodes,[DATE]
+AKS_AUTOSCALE_MIN,Platform,Production,3,Minimum nodes for autoscaling,Yes,Integer,1-10,Public,DevOps,AKS_CLUSTER_NAME,Autoscaler minimum,[DATE]
+AKS_AUTOSCALE_MAX,Platform,Production,10,Maximum nodes for autoscaling,Yes,Integer,5-50,Public,DevOps,AKS_CLUSTER_NAME,Autoscaler maximum,[DATE]
+KEYVAULT_NAME,Security,All,kv-devops-[env]-001,Key Vault for secrets management,Yes,String,Azure naming rules,Confidential,Security,Resource Group,Secrets and certificates,[DATE]
+KEYVAULT_SKU,Security,All,standard,Key Vault pricing tier,Yes,String,standard|premium,Public,Security,None,Standard for most scenarios,[DATE]
+LOG_ANALYTICS_WORKSPACE,Monitoring,All,law-devops-[env]-001,Log Analytics workspace name,Yes,String,Azure naming rules,Public,Monitoring,Resource Group,Centralized logging,[DATE]
+LOG_ANALYTICS_RETENTION,Monitoring,Development,30,Log retention in days for development,Yes,Integer,30-730,Public,Monitoring,None,Cost optimization for dev,[DATE]
+LOG_ANALYTICS_RETENTION,Monitoring,Production,90,Log retention in days for production,Yes,Integer,30-730,Public,Monitoring,None,Production retention policy,[DATE]
+APP_INSIGHTS_NAME,Monitoring,All,appi-devops-[env]-001,Application Insights resource name,Yes,String,Azure naming rules,Public,Monitoring,Resource Group,APM for applications,[DATE]
+VNET_NAME,Network,All,vnet-devops-[env]-001,Virtual network name,Yes,String,Azure naming rules,Public,Network,Resource Group,Network isolation,[DATE]
+VNET_ADDRESS_SPACE,Network,All,10.0.0.0/16,Virtual network address space,Yes,String,Valid CIDR,Public,Network,None,Network address range,[DATE]
+SUBNET_AKS,Network,All,10.0.1.0/23,AKS subnet address range,Yes,String,Valid CIDR,Public,Network,VNET_NAME,Kubernetes cluster subnet,[DATE]
+SUBNET_AGENTS,Network,All,10.0.3.0/24,Build agent subnet address range,Yes,String,Valid CIDR,Public,Network,VNET_NAME,Self-hosted agent subnet,[DATE]
+SONARCLOUD_ORG,Integration,All,[SONARCLOUD_ORG],SonarCloud organization key,No,String,Valid org key,Confidential,Security,None,Code quality scanning,[DATE]
+SONARCLOUD_TOKEN,Integration,All,[SONARCLOUD_TOKEN],SonarCloud authentication token,No,String,Valid token,Secret,Security,SONARCLOUD_ORG,Stored in Key Vault,[DATE]
+WHITESOURCE_ORG,Integration,All,[WHITESOURCE_ORG],WhiteSource organization key,No,String,Valid org key,Confidential,Security,None,Dependency scanning,[DATE]
+WHITESOURCE_TOKEN,Integration,All,[WHITESOURCE_TOKEN],WhiteSource authentication token,No,String,Valid token,Secret,Security,WHITESOURCE_ORG,Stored in Key Vault,[DATE]
+TEAMS_WEBHOOK_URL,Integration,All,[TEAMS_WEBHOOK],Microsoft Teams webhook for notifications,No,String,Valid HTTPS URL,Confidential,Integration,None,Pipeline notifications,[DATE]
+SERVICENOW_ENDPOINT,Integration,All,[SERVICENOW_URL],ServiceNow instance URL for ticketing,No,String,Valid HTTPS URL,Confidential,Integration,None,ITSM integration,[DATE]
+ALERT_EMAIL,Operations,All,[ALERT_EMAIL],Email for platform alerts,Yes,String,Valid email format,Confidential,Operations,None,Operations team distribution list,[DATE]
+DEVOPS_ADMIN_GROUP,Security,All,[ADMIN_GROUP_ID],Azure AD group for DevOps admins,Yes,String,GUID format,Confidential,Security,Azure AD,Project Collection Admin role,[DATE]
+DEVOPS_USER_GROUP,Security,All,[USER_GROUP_ID],Azure AD group for DevOps users,Yes,String,GUID format,Confidential,Security,Azure AD,Basic access level,[DATE]
+
