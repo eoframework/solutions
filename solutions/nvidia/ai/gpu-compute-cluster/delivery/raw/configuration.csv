@@ -1,10 +1,51 @@
-Component,Parameter,Environment,Value,Data_Type,Required,Description,Validation_Rule,Default_Value
-Solution Configuration,Solution Name,All,Enterprise Solution,String,Yes,Solution identifier,Valid solution name,Enterprise Solution
-Environment,Environment Type,Dev,Development,String,Yes,Environment designation,dev|test|prod,dev
-Environment,Environment Type,Test,Test,String,Yes,Environment designation,dev|test|prod,test
-Environment,Environment Type,Prod,Production,String,Yes,Environment designation,dev|test|prod,prod
-Network Configuration,Network Mode,All,Enterprise,String,Yes,Network configuration mode,Basic|Standard|Enterprise,Enterprise
-Security Configuration,Security Level,All,High,String,Yes,Security configuration level,Low|Medium|High,High
-Performance Configuration,Performance Tier,All,Standard,String,Yes,Performance configuration tier,Basic|Standard|Premium,Standard
-Monitoring Configuration,Monitoring Enabled,All,true,Boolean,Yes,Enable comprehensive monitoring,true|false,true
-Backup Configuration,Backup Enabled,All,true,Boolean,Yes,Enable automated backups,true|false,true
+#WIDTH: 28,16,14,24,40,10,12,30,16,18,24,35,12
+#ALIGN: left,left,center,left,left,center,left,left,center,left,left,left,center
+Parameter Name,Category,Environment,Default Value,Description,Required,Data Type,Validation Rules,Security Level,Owner Team,Dependencies,Notes,Last Updated
+CLUSTER_NAME,Application,All,gpu-cluster-prod,Kubernetes cluster identifier,Yes,String,Max 30 alphanumeric chars,Public,Platform Team,None,Used in kubectl context,[DATE]
+GPU_SERVER_COUNT,Hardware,All,8,Number of GPU servers in cluster,Yes,Integer,1-32,Public,Hardware Team,Rack capacity,Dell R750xa servers,[DATE]
+GPU_MODEL,Hardware,All,A100 40GB,NVIDIA GPU model specification,Yes,String,Valid NVIDIA GPU model,Public,Hardware Team,Performance requirements,PCIe form factor,[DATE]
+GPU_COUNT_PER_SERVER,Hardware,All,4,Number of A100 GPUs per server,Yes,Integer,1-8,Public,Hardware Team,Server model,Fixed for R750xa,[DATE]
+TOTAL_GPU_COUNT,Hardware,All,32,Total GPUs across all servers,Yes,Integer,Calculated,Public,GPU Team,GPU_COUNT_PER_SERVER,8 servers x 4 GPUs,[DATE]
+GPU_MEMORY_GB,Hardware,All,40,GPU memory in GB per GPU,Yes,Integer,40,Public,GPU Team,Model size support,1.28 TB total cluster,[DATE]
+SERVER_RAM_GB,Hardware,All,1024,System RAM per server in GB,Yes,Integer,512-2048,Public,Hardware Team,Data preprocessing,1 TB per server,[DATE]
+SERVER_CPU_CORES,Hardware,All,128,CPU cores per server,Yes,Integer,64-256,Public,Hardware Team,Dual Xeon Platinum,Multi-processing,[DATE]
+NETWORK_SPEED_GBE,Network,All,100,Network port speed in Gbps,Yes,Integer,25-100,Public,Network Team,Distributed training,RoCE enabled,[DATE]
+NETWORK_MTU,Network,All,9000,Network MTU for jumbo frames,Yes,Integer,1500-9216,Public,Network Team,RoCE performance,Required for RDMA,[DATE]
+ROCE_ENABLED,Network,All,true,Enable RDMA over Converged Ethernet,Yes,Boolean,true|false,Public,Network Team,NCCL performance,GPU communication,[DATE]
+STORAGE_SYSTEM,Storage,All,NetApp AFF,Shared storage platform,Yes,String,Valid storage platform,Public,Storage Team,Dataset storage,NVMe all-flash,[DATE]
+STORAGE_CAPACITY_TB,Storage,All,200,Shared storage capacity in TB,Yes,Integer,100-1000,Public,Storage Team,Dataset requirements,Expandable,[DATE]
+STORAGE_THROUGHPUT_GBS,Storage,All,10,Target storage throughput GB/s,Yes,Integer,5-50,Public,Storage Team,Training I/O,Sustained read/write,[DATE]
+STORAGE_MOUNT_PATH,Storage,All,/shared,NFS mount point for shared storage,Yes,String,Valid Unix path,Public,Storage Team,All nodes,Dataset and model storage,[DATE]
+K8S_VERSION,Platform,All,1.28.4,Kubernetes version,Yes,String,Valid K8s version,Public,Platform Team,GPU Operator compatibility,Latest stable,[DATE]
+K8S_CONTROL_PLANE_COUNT,Platform,All,3,Number of control plane nodes,Yes,Integer,1-5,Public,Platform Team,HA requirement,Odd number for quorum,[DATE]
+K8S_WORKER_NODE_COUNT,Platform,All,8,Number of GPU worker nodes,Yes,Integer,Matches GPU servers,Public,Platform Team,GPU_SERVER_COUNT,All servers as workers,[DATE]
+K8S_CNI_PLUGIN,Platform,All,Calico,Container network plugin,Yes,String,Calico|Cilium|Flannel,Public,Network Team,Network policy,Enterprise networking,[DATE]
+GPU_OPERATOR_VERSION,Platform,All,v23.9.0,NVIDIA GPU Operator version,Yes,String,Valid operator version,Public,GPU Team,Driver management,Latest stable,[DATE]
+GPU_DRIVER_VERSION,Platform,All,535.129.03,NVIDIA GPU driver version,Yes,String,Valid driver version,Public,GPU Team,CUDA compatibility,Production driver,[DATE]
+CUDA_VERSION,Software,All,12.2,CUDA toolkit version,Yes,String,Valid CUDA version,Public,Software Team,GPU_DRIVER_VERSION,Framework compatibility,[DATE]
+DEVICE_PLUGIN_ENABLED,Platform,All,true,Enable GPU device plugin,Yes,Boolean,true|false,Public,GPU Team,GPU scheduling,Managed by Operator,[DATE]
+TIME_SLICING_ENABLED,Platform,All,true,Enable GPU time-slicing,Yes,Boolean,true|false,Public,GPU Team,Resource sharing,Multi-tenant support,[DATE]
+TIME_SLICING_REPLICAS,Platform,All,4,Virtual GPUs per physical GPU,Yes,Integer,2-10,Public,GPU Team,User density,4 users per GPU,[DATE]
+CONTAINER_RUNTIME,Platform,All,containerd,Container runtime,Yes,String,containerd|docker|cri-o,Public,Platform Team,GPU Operator,NVIDIA Container Toolkit,[DATE]
+NGC_REGISTRY_URL,Software,All,nvcr.io,NVIDIA NGC container registry,Yes,String,Valid registry URL,Public,AI Team,Container images,Official containers,[DATE]
+KUBEFLOW_VERSION,MLOps,All,1.8.0,Kubeflow version,Yes,String,Valid Kubeflow version,Public,MLOps Team,ML pipelines,Latest stable,[DATE]
+KUBEFLOW_NAMESPACE,MLOps,All,kubeflow,Kubeflow installation namespace,Yes,String,Valid namespace,Public,MLOps Team,Isolation,System namespace,[DATE]
+MLFLOW_VERSION,MLOps,All,2.9.0,MLflow version,Yes,String,Valid MLflow version,Public,MLOps Team,Experiment tracking,Latest stable,[DATE]
+MLFLOW_TRACKING_URI,MLOps,All,http://mlflow:5000,MLflow tracking server URI,Yes,String,Valid URI,Public,MLOps Team,Experiment logging,Internal service,[DATE]
+MLFLOW_ARTIFACT_PATH,MLOps,All,/shared/mlflow/artifacts,MLflow artifact storage path,Yes,String,Valid path,Public,MLOps Team,Model storage,On shared storage,[DATE]
+TRITON_VERSION,MLOps,All,24.01,Triton Inference Server version,Yes,String,Valid Triton version,Public,AI Team,Model serving,NGC container,[DATE]
+TRITON_MODEL_REPOSITORY,MLOps,All,/shared/models/triton,Triton model repository path,Yes,String,Valid path,Public,AI Team,Model deployment,On shared storage,[DATE]
+JUPYTERHUB_ENABLED,Development,All,true,Enable JupyterHub for data science,Yes,Boolean,true|false,Public,AI Team,Interactive development,GPU notebooks,[DATE]
+JUPYTERHUB_NAMESPACE,Development,All,jupyterhub,JupyterHub namespace,Yes,String,Valid namespace,Public,AI Team,User isolation,Per-user pods,[DATE]
+DEFAULT_GPU_LIMIT,Platform,All,1,Default GPU limit per pod,Yes,Integer,1-4,Public,Platform Team,Resource management,Prevent monopolization,[DATE]
+MAX_GPU_PER_USER,Platform,All,8,Maximum GPUs per user,Yes,Integer,4-32,Public,Platform Team,Fair sharing,Team allocation,[DATE]
+LDAP_ENABLED,Security,All,true,Enable LDAP authentication,Yes,Boolean,true|false,Confidential,Security Team,User management,Central auth,[DATE]
+LDAP_SERVER_URL,Security,All,[ldap-server-url],LDAP server endpoint,Yes,String,Valid LDAP URL,Secret,Security Team,Directory service,AD integration,[DATE]
+RBAC_ENABLED,Security,All,true,Enable Kubernetes RBAC,Yes,Boolean,true|false,Public,Security Team,Access control,Required,[DATE]
+NETWORK_POLICY_ENABLED,Security,All,true,Enable Kubernetes network policies,Yes,Boolean,true|false,Public,Security Team,Namespace isolation,Calico policies,[DATE]
+PROMETHEUS_ENABLED,Monitoring,All,true,Enable Prometheus monitoring,Yes,Boolean,true|false,Public,Operations,Metrics collection,GPU metrics,[DATE]
+GRAFANA_ENABLED,Monitoring,All,true,Enable Grafana dashboards,Yes,Boolean,true|false,Public,Operations,Visualization,Pre-built dashboards,[DATE]
+DCGM_EXPORTER_ENABLED,Monitoring,All,true,Enable NVIDIA DCGM exporter,Yes,Boolean,true|false,Public,GPU Team,GPU monitoring,GPU Operator managed,[DATE]
+GPU_UTIL_ALERT_THRESHOLD,Monitoring,All,90,GPU utilization alert threshold %,Yes,Integer,80-99,Public,Operations,Resource management,High util alert,[DATE]
+BACKUP_ENABLED,Operations,All,true,Enable automated backups,Yes,Boolean,true|false,Public,Operations,Data protection,etcd and PV,[DATE]
+MAINTENANCE_WINDOW,Operations,All,Sunday 02:00-06:00 UTC,Weekly maintenance window,Yes,String,Valid time range,Public,Operations,Updates,Low-usage period,[DATE]

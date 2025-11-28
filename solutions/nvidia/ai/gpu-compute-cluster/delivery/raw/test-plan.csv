@@ -1,6 +1,46 @@
-Test_Phase,Test_Category,Test_ID,Test_Name,Description,Prerequisites,Expected_Result,Priority,Duration,Responsible_Team
-Functional Testing,Core Functionality,FT001,Basic Functionality Test,Verify core solution functionality,Solution deployed and configured,All core functions operational,High,60 minutes,QA Team
-Functional Testing,Integration Testing,FT002,System Integration Test,Validate integration with existing systems,Integration points configured,All integrations functional,High,90 minutes,Integration Team
-Performance Testing,Load Testing,PT001,Performance Load Test,Test solution under expected load,Performance test environment ready,Performance meets specifications,High,120 minutes,Performance Team
-Security Testing,Security Validation,ST001,Security Configuration Test,Validate security controls and configurations,Security policies applied,All security controls operational,High,90 minutes,Security Team
-User Acceptance,Business Validation,UAT001,User Acceptance Test,Validate solution meets business requirements,User training completed,Business requirements satisfied,Medium,180 minutes,Business Users
+# Functional Tests
+#WIDTH: 10,14,26,33,26,38,33,10,12
+#ALIGN: left,left,left,left,left,left,left,center,center
+Test ID,Test Type,Test Name,Description,Pre-conditions,Test Steps,Expected Results,Priority,Status
+FT-001,Unit,GPU Detection Validation,Verify all 32 A100 GPUs are detected across 8 servers,Servers powered on; drivers installed,1. SSH to each server; 2. Run nvidia-smi; 3. Verify 4 GPUs per server,All 32 A100 40GB GPUs visible with correct memory,Critical,Not Started
+FT-002,Unit,GPU Memory Validation,Verify each A100 GPU reports 40GB memory,GPUs detected,1. Run nvidia-smi -q; 2. Check memory per GPU; 3. Verify all report 40GB,All GPUs report 40960 MiB memory,Critical,Not Started
+FT-003,Unit,CUDA Toolkit Validation,Verify CUDA toolkit installation and functionality,Drivers installed,1. Run nvcc --version; 2. Compile sample CUDA program; 3. Execute on GPU,CUDA 12.x installed; sample program runs successfully,High,Not Started
+FT-004,Integration,Kubernetes Node Registration,Verify all 8 GPU worker nodes register with control plane,K8s cluster deployed,1. Run kubectl get nodes; 2. Verify 8 workers Ready; 3. Check GPU resources,All 8 worker nodes in Ready state,Critical,Not Started
+FT-005,Integration,GPU Operator Installation,Verify NVIDIA GPU Operator deploys successfully,Kubernetes ready,1. Deploy GPU Operator via Helm; 2. Check operator pods; 3. Verify driver daemonset,GPU Operator pods running; drivers deployed to all nodes,Critical,Not Started
+FT-006,Integration,GPU Device Plugin,Verify GPU device plugin exposes GPU resources,GPU Operator installed,1. Check device plugin pods; 2. Verify nvidia.com/gpu resources; 3. Test allocation,32 nvidia.com/gpu resources available in cluster,Critical,Not Started
+FT-007,Integration,GPU Time-Slicing,Verify GPU time-slicing configuration works,Device plugin configured,1. Configure time-slicing; 2. Deploy test pods; 3. Verify GPU sharing,Multiple pods share single GPU via time-slicing,High,Not Started
+FT-008,System,Pod GPU Scheduling,Verify Kubernetes schedules pods to GPU nodes correctly,GPU resources available,1. Submit pod requesting GPU; 2. Check scheduling; 3. Verify GPU access in pod,Pod scheduled to GPU node; nvidia-smi works in container,Critical,Not Started
+FT-009,System,NGC Container Execution,Verify NGC containers run with GPU access,Container registry configured,1. Pull NGC PyTorch container; 2. Run with GPU; 3. Execute GPU workload,Container runs; CUDA operations succeed,High,Not Started
+FT-010,System,Kubeflow Pipeline Execution,Verify Kubeflow pipelines execute with GPU resources,Kubeflow installed,1. Create pipeline with GPU step; 2. Submit pipeline; 3. Verify GPU allocation,Pipeline executes; GPU resources allocated correctly,High,Not Started
+FT-011,System,MLflow Experiment Tracking,Verify MLflow tracks experiments from GPU training,MLflow deployed,1. Run training with MLflow logging; 2. Check MLflow UI; 3. Verify metrics,Experiments tracked; metrics and artifacts stored,High,Not Started
+FT-012,System,Triton Model Serving,Verify Triton Inference Server serves models,Triton deployed,1. Deploy model to Triton; 2. Send inference request; 3. Verify response,Model serves requests; correct inference response,High,Not Started
+
+# Non-Functional Tests
+#WIDTH: 10,14,22,38,30,44,38,10,12
+#ALIGN: left,left,left,left,left,left,left,center,center
+Test ID,Test Type,Test Name,Description,Pre-conditions,Test Steps,Expected Results,Priority,Status
+NFT-001,Performance,Single GPU Benchmark,Validate single A100 GPU achieves expected performance,GPU accessible,1. Run ResNet-50 inference benchmark; 2. Measure throughput; 3. Compare to baseline,Throughput matches A100 specifications,Critical,Not Started
+NFT-002,Performance,Multi-GPU Scaling Test,Validate training scales across multiple GPUs,Multiple GPUs available,1. Run DDP training 1/2/4/8 GPUs; 2. Measure scaling efficiency; 3. Compare to linear,Near-linear scaling efficiency (>85%) at 8 GPUs,Critical,Not Started
+NFT-003,Performance,Distributed Training (32 GPU),Validate distributed training across all 32 GPUs,All nodes ready,1. Run Horovod training across 32 GPUs; 2. Measure throughput; 3. Validate convergence,Training completes; near-linear scaling achieved,Critical,Not Started
+NFT-004,Performance,Network Bandwidth Test,Validate 100 GbE network achieves expected throughput,Network configured,1. Run iperf3 between nodes; 2. Measure bandwidth; 3. Test RoCE latency,Bandwidth >90 Gbps; low latency for NCCL,Critical,Not Started
+NFT-005,Performance,Storage Throughput Test,Validate NetApp storage achieves 10+ GB/s throughput,Storage mounted,1. Run fio benchmark; 2. Measure read/write throughput; 3. Test parallel I/O,Sustained throughput >10 GB/s for training I/O,Critical,Not Started
+NFT-006,Performance,GPU Utilization Target,Validate cluster achieves 80%+ GPU utilization,Workloads running,1. Monitor GPU utilization over 24 hours; 2. Calculate average; 3. Analyze patterns,Average GPU utilization >80% with active workloads,High,Not Started
+NFT-007,Performance,Model Inference Latency,Validate Triton achieves <50ms p99 latency,Triton serving model,1. Send inference requests; 2. Measure p99 latency; 3. Test under load,p99 latency <50ms for target model,High,Not Started
+NFT-008,Reliability,Cluster Uptime Validation,Validate Kubernetes cluster achieves 99.5% uptime,Cluster operational,1. Monitor uptime over test period; 2. Record any outages; 3. Calculate availability,Cluster availability >99.5%,High,Not Started
+NFT-009,Reliability,Node Failure Recovery,Validate Kubernetes recovers workloads on node failure,Pods running on multiple nodes,1. Simulate node failure; 2. Verify pod rescheduling; 3. Check workload continuity,Pods rescheduled to healthy nodes; workloads continue,High,Not Started
+NFT-010,Reliability,GPU Operator Recovery,Validate GPU Operator recovers from failures,GPU Operator running,1. Kill GPU Operator pod; 2. Verify automatic restart; 3. Check GPU availability,Operator restarts; GPU resources remain available,Medium,Not Started
+NFT-011,Security,RBAC Validation,Validate Kubernetes RBAC restricts namespace access,RBAC configured,1. Test user access to assigned namespace; 2. Test unauthorized namespace; 3. Verify denial,Users access only authorized namespaces,High,Not Started
+NFT-012,Security,Network Policy Validation,Validate network policies isolate namespaces,Network policies applied,1. Test pod-to-pod in same namespace; 2. Test cross-namespace; 3. Verify isolation,Cross-namespace traffic blocked per policy,Medium,Not Started
+
+# User Acceptance Tests
+#WIDTH: 10,20,29,33,26,38,33,10,12
+#ALIGN: left,left,left,left,left,left,left,center,center
+Test ID,Test Type,Test Name,Description,Pre-conditions,Test Steps,Expected Results,Priority,Status
+UAT-001,Business Process,Data Scientist Workflow,Validate end-to-end data scientist workflow,User account created; namespace ready,1. Login to JupyterHub; 2. Create notebook; 3. Train model with GPU; 4. Log to MLflow,Complete workflow successful; GPU training works,Critical,Not Started
+UAT-002,Business Process,Distributed Training Job,Validate multi-GPU distributed training with PyTorch DDP,Cluster operational,1. Prepare DDP training script; 2. Submit as Kubernetes job; 3. Monitor training; 4. Check results,Training scales across GPUs; model converges,Critical,Not Started
+UAT-003,Business Process,Kubeflow Pipeline,Validate Kubeflow pipeline for ML workflow,Kubeflow ready,1. Create pipeline in Kubeflow; 2. Submit pipeline run; 3. Monitor execution; 4. Check outputs,Pipeline executes successfully; outputs correct,High,Not Started
+UAT-004,Business Process,Model Deployment to Triton,Validate model deployment and serving workflow,Model trained; Triton ready,1. Export model; 2. Deploy to Triton; 3. Test inference endpoint; 4. Validate predictions,Model serves correctly; predictions accurate,High,Not Started
+UAT-005,Business Process,Experiment Tracking,Validate MLflow experiment tracking workflow,MLflow ready,1. Run training with MLflow; 2. Compare experiments; 3. Register model; 4. Version model,Experiments tracked; model versioned in registry,High,Not Started
+UAT-006,User Interface,JupyterHub Usability,Validate JupyterHub meets data scientist needs,JupyterHub deployed,1. Login and create notebook; 2. Request GPU resources; 3. Run GPU code; 4. Save work,JupyterHub usable; GPU access seamless,Medium,Not Started
+UAT-007,User Interface,Kubeflow Dashboard,Validate Kubeflow dashboard usability,Kubeflow deployed,1. Access Kubeflow dashboard; 2. Navigate pipelines; 3. View experiment results,Dashboard intuitive; all features accessible,Medium,Not Started
+UAT-008,Business Process,Team Collaboration,Validate multi-user collaboration on shared resources,Multiple users configured,1. Multiple users submit jobs; 2. Verify fair scheduling; 3. Check resource isolation,Fair GPU allocation; namespace isolation working,High,Not Started
