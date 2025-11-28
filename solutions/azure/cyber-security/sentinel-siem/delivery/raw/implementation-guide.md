@@ -1,480 +1,543 @@
-# Azure Sentinel SIEM - Implementation Guide
+---
+document_title: Implementation Guide
+solution_name: Azure Sentinel SIEM
+document_version: "2.0"
+author: "[TECH_LEAD]"
+last_updated: "[DATE]"
+technology_provider: azure
+client_name: "[CLIENT]"
+client_logo: ../../assets/logos/client_logo.png
+vendor_logo: ../../assets/logos/consulting_company_logo.png
+eoframework_logo: ../../assets/logos/eo-framework-logo-real.png
+---
 
-## Overview
+# Executive Summary
 
-This comprehensive implementation guide provides step-by-step instructions for deploying Azure Sentinel SIEM following security operations best practices. The implementation follows a phased approach to minimize risk while rapidly establishing security monitoring and threat detection capabilities.
+This Implementation Guide provides comprehensive deployment procedures for the Azure Sentinel SIEM solution. The guide covers Log Analytics workspace provisioning, Sentinel enablement, data connector configuration, analytics rules deployment, and SOAR playbook implementation using Infrastructure as Code (IaC) automation.
 
-**Implementation Timeline:** 6-12 weeks  
-**Complexity Level:** Advanced  
-**Prerequisites:** Azure Security Administrator access, data source inventory, SOC team readiness
+## Document Purpose
 
-## Implementation Phases
+This document serves as the primary technical reference for the implementation team, providing step-by-step procedures for deploying the SIEM/SOAR solution on Microsoft Azure. All commands and procedures have been validated against target Azure environments.
 
-### Phase 1: Environment Preparation and Workspace Setup (Weeks 1-2)
+## Implementation Approach
 
-#### 1.1 Prerequisites Validation
+The implementation follows a cloud-native, infrastructure-as-code methodology using Azure Bicep/ARM templates for resource provisioning, PowerShell scripts for Sentinel configuration, and Azure CLI for deployment orchestration. The approach ensures repeatable, auditable deployments across all environments.
 
-This section provides comprehensive prerequisites for successfully implementing the Azure Sentinel SIEM solution. All requirements must be validated before beginning implementation.
+## Automation Framework Overview
 
-**⏱️ Quick Reference Summary:**
-- **Implementation Timeline**: 6-12 weeks
-- **Complexity Level**: Advanced
-- **Budget Category**: High (based on data ingestion volume)
-- **Team Size**: 3-6 technical resources (depending on scope)
+The following automation technologies are included in this delivery.
 
-**Required Permissions:**
-- Security Administrator in Azure Active Directory
-- Contributor role on target Azure subscription
-- Log Analytics Contributor for workspace management
-- Security Insights Contributor for Sentinel configuration
-- Global Administrator (for certain connector configurations)
+<!-- TABLE_CONFIG: widths=[20, 30, 25, 25] -->
+| Technology | Purpose | Location | Prerequisites |
+|------------|---------|----------|---------------|
+| Azure Bicep | Infrastructure provisioning | `scripts/bicep/` | Azure CLI 2.40+, Bicep CLI |
+| PowerShell | Sentinel configuration | `scripts/powershell/` | Az.SecurityInsights module |
+| Azure CLI | Deployment orchestration | `scripts/bash/` | Azure CLI 2.40+ |
 
-**☁️ Azure Platform Requirements:**
-- Administrative access to Azure with appropriate permissions
-- Required service quotas and resource limits validated
-- Network connectivity with sufficient bandwidth for data ingestion
-- Security access controls and firewall configurations
+## Scope Summary
 
-**📦 Required Services Access:**
-- **Azure Sentinel**: Service enabled with appropriate permissions
-- **Azure Monitor**: Service enabled with appropriate permissions
-- **Log Analytics**: Service enabled with appropriate permissions
-- **Azure Security Center**: Service enabled with appropriate permissions
-- **Azure Logic Apps**: Service enabled with appropriate permissions
+### In Scope
 
-**Technical Prerequisites:**
+The following components are deployed using the automation framework.
+
+- Log Analytics workspace and Sentinel enablement
+- Data connectors (15+ sources)
+- Analytics rules (50+ rules)
+- SOAR playbooks (12 Logic Apps)
+- RBAC and security configuration
+- Monitoring and alerting dashboards
+
+### Out of Scope
+
+The following items are excluded from automated deployment.
+
+- Third-party SIEM migration (separate engagement)
+- Custom machine learning models (not in scope)
+- End-user training delivery
+- Ongoing managed services operations
+
+## Timeline Overview
+
+The implementation follows a phased deployment approach with validation gates.
+
+<!-- TABLE_CONFIG: widths=[15, 30, 30, 25] -->
+| Phase | Activities | Duration | Exit Criteria |
+|-------|------------|----------|---------------|
+| 1 | Foundation & Workspace Setup | Weeks 1-4 | Sentinel enabled, RBAC configured |
+| 2 | Data Connector Integration | Weeks 5-8 | 15+ connectors active |
+| 3 | Analytics Rules Deployment | Weeks 9-12 | 50+ rules deployed, tuned |
+| 4 | SOAR Playbook Development | Weeks 13-16 | 12 playbooks operational |
+| 5 | Testing & Validation | Weeks 17-18 | All tests passing |
+| 6 | Go-Live & Hypercare | Weeks 19-22 | Production stable |
+
+**Total Implementation:** 22 weeks including hypercare
+
+# Prerequisites
+
+This section documents all requirements that must be satisfied before infrastructure deployment can begin.
+
+## Tool Installation
+
+The following tools must be installed on the deployment workstation before proceeding.
+
+### Required Tools Checklist
+
+Use the following checklist to verify all required tools are installed.
+
+- [ ] **Azure CLI** >= 2.40.0 - Azure resource management
+- [ ] **Azure Bicep CLI** >= 0.12.0 - Infrastructure templates
+- [ ] **PowerShell** >= 7.2 - Automation scripts
+- [ ] **Az PowerShell Module** >= 9.0 - Azure management
+- [ ] **Az.SecurityInsights** >= 3.0 - Sentinel configuration
+- [ ] **Git** - Source code management
+
+### Azure CLI Installation
+
+Install and configure the Azure CLI.
+
 ```bash
-# Verify Azure CLI version and login
-az --version
-# Required: Azure CLI 2.37.0 or later
+# macOS (using Homebrew)
+brew install azure-cli
 
+# Windows (using MSI installer)
+# Download from https://aka.ms/installazurecliwindows
+
+# Linux (using script)
+curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
+
+# Verify installation
+az --version
+```
+
+### PowerShell Module Installation
+
+Install required PowerShell modules.
+
+```powershell
+# Install Az module
+Install-Module -Name Az -Repository PSGallery -Force -AllowClobber
+
+# Install Sentinel module
+Install-Module -Name Az.SecurityInsights -Repository PSGallery -Force
+
+# Verify installation
+Get-InstalledModule -Name Az.SecurityInsights
+```
+
+## Azure Account Configuration
+
+### Authentication Setup
+
+```bash
+# Login to Azure
 az login
+
+# Set subscription context
+az account set --subscription "your-subscription-id"
+
+# Verify authentication
 az account show
 
-# Verify PowerShell modules
-Get-InstalledModule -Name Az.SecurityInsights
-# Required: Az.SecurityInsights 3.0.0 or later
-
-# Check available subscriptions and select target
-az account list --output table
-az account set --subscription "your-subscription-id"
+# Configure default location
+az configure --defaults location=eastus
 ```
 
-**🎯 Required Technical Skills:**
-- **Security Operations**: Hands-on experience and proven competency
-- **SIEM Administration**: Hands-on experience and proven competency
-- **KQL Queries**: Hands-on experience and proven competency
-- **Threat Analysis**: Hands-on experience and proven competency
+### Required Permissions
 
-**📈 Experience Levels:**
-- **Lead Architect**: 5+ years cloud architecture experience
-- **Implementation Engineers**: 3+ years relevant technology experience
-- **Security Specialist**: 3+ years security and compliance experience
-- **Operations Team**: 2+ years production support experience
+The following Azure AD and Azure RBAC permissions are required:
 
-**💵 Cost Categories:**
-- **Infrastructure Costs**: $10,000 - $50,000+ monthly (based on scale)
-- **Licensing Fees**: $5,000 - $25,000+ monthly (service-dependent)
-- **Professional Services**: $75,000 - $200,000 (implementation)
-- **Training and Certification**: $15,000 - $30,000 (team preparation)
-- **Ongoing Support**: 15-20% of infrastructure costs annually
+- **Azure AD:** Global Administrator or Security Administrator
+- **Subscription:** Owner or Contributor + User Access Administrator
+- **Resource Group:** Contributor (for deployment scope)
 
-**Network and Security Planning:**
-- Data source connectivity requirements and firewall rules
-- Log Analytics workspace sizing calculations (minimum 100GB/day for enterprise)
-- Data retention and compliance requirements (2+ years hot storage)
-- Integration points with existing security tools
+### Service Quotas
 
-#### 1.2 Log Analytics Workspace Deployment
+Verify the following service quotas are available:
 
-**Create Dedicated Security Workspace:**
 ```bash
-# Create resource group for security operations
+# Check Log Analytics workspace quota
+az monitor log-analytics workspace list --subscription "your-subscription-id"
+
+# Check Logic App quota
+az resource list --resource-type Microsoft.Logic/workflows --subscription "your-subscription-id"
+```
+
+## Prerequisite Validation
+
+### Automated Validation Script
+
+```bash
+# Navigate to scripts directory
+cd delivery/scripts/bash/
+
+# Run prerequisite validation
+./validate-prerequisites.sh
+
+# Expected output:
+# ✓ Azure CLI 2.40+ installed
+# ✓ PowerShell 7.2+ installed
+# ✓ Az.SecurityInsights module installed
+# ✓ Azure authentication valid
+# ✓ Subscription access confirmed
+```
+
+# Environment Setup
+
+This section covers environment configuration and infrastructure state management.
+
+## Terraform/Bicep State Configuration
+
+### State Storage Setup
+
+```bash
+# Create resource group for state storage
 az group create \
-  --name "rg-security-prod-eus2-001" \
-  --location "East US 2" \
-  --tags Environment=Production Owner="Security Team" Purpose="SIEM Operations"
+  --name "rg-sentinel-state-prod-001" \
+  --location "eastus" \
+  --tags Environment=Production Purpose="Terraform State"
 
-# Create Log Analytics workspace for Sentinel
+# Create storage account for state
+az storage account create \
+  --name "stsentinelstateprod001" \
+  --resource-group "rg-sentinel-state-prod-001" \
+  --location "eastus" \
+  --sku Standard_LRS \
+  --encryption-services blob
+
+# Create blob container for state
+az storage container create \
+  --name "tfstate" \
+  --account-name "stsentinelstateprod001"
+```
+
+## Environment Configuration
+
+### Production Environment Variables
+
+```bash
+# Navigate to production environment
+cd delivery/scripts/bicep/environments/production/
+
+# Edit environment configuration
+cat > parameters.json << 'EOF'
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "environment": { "value": "prod" },
+    "location": { "value": "eastus" },
+    "workspaceName": { "value": "log-sentinel-prod-001" },
+    "sentinelName": { "value": "sentinel-prod-001" },
+    "retentionDays": { "value": 90 },
+    "dailyCapGb": { "value": 500 },
+    "tags": {
+      "value": {
+        "Environment": "Production",
+        "Project": "Sentinel-SIEM",
+        "Owner": "Security-Team"
+      }
+    }
+  }
+}
+EOF
+```
+
+### Configuration Validation
+
+```bash
+# Validate Bicep templates
+az bicep build --file main.bicep
+
+# Validate deployment
+az deployment sub validate \
+  --location eastus \
+  --template-file main.bicep \
+  --parameters @parameters.json
+```
+
+# Infrastructure Deployment
+
+This section provides step-by-step infrastructure deployment procedures following a phased approach. The deployment covers four key layers: networking, security, compute, and monitoring infrastructure.
+
+## Phase 1: Networking Layer
+
+### Foundation Infrastructure
+
+### Resource Group Deployment
+
+```bash
+# Create production resource group
+az group create \
+  --name "rg-sentinel-prod-eus-001" \
+  --location "eastus" \
+  --tags Environment=Production Project="Sentinel-SIEM" Owner="Security-Team"
+
+# Verify resource group
+az group show --name "rg-sentinel-prod-eus-001"
+```
+
+### Log Analytics Workspace Deployment
+
+```bash
+# Deploy Log Analytics workspace
 az monitor log-analytics workspace create \
-  --resource-group "rg-security-prod-eus2-001" \
-  --workspace-name "law-security-prod-eus2-001" \
-  --location "East US 2" \
-  --sku "PerGB2018" \
+  --resource-group "rg-sentinel-prod-eus-001" \
+  --workspace-name "log-sentinel-prod-001" \
+  --location "eastus" \
+  --sku PerGB2018 \
   --retention-time 90 \
-  --tags Environment=Production SecurityWorkspace=True
+  --tags Environment=Production Purpose="Sentinel-SIEM"
+
+# Verify workspace
+az monitor log-analytics workspace show \
+  --resource-group "rg-sentinel-prod-eus-001" \
+  --workspace-name "log-sentinel-prod-001"
+
+# Get workspace ID for later use
+WORKSPACE_ID=$(az monitor log-analytics workspace show \
+  --resource-group "rg-sentinel-prod-eus-001" \
+  --workspace-name "log-sentinel-prod-001" \
+  --query id -o tsv)
 ```
 
-**Configure Workspace Settings:**
+### Azure Sentinel Enablement
+
 ```powershell
-# Configure workspace for optimal security operations
-$workspaceId = (Get-AzOperationalInsightsWorkspace -ResourceGroupName "rg-security-prod-eus2-001" -Name "law-security-prod-eus2-001").ResourceId
+# Enable Azure Sentinel on workspace
+Connect-AzAccount
+Set-AzContext -SubscriptionId "your-subscription-id"
 
-# Configure data retention policies
-Set-AzOperationalInsightsWorkspace -ResourceGroupName "rg-security-prod-eus2-001" -Name "law-security-prod-eus2-001" -RetentionInDays 90
+# Enable Sentinel
+$workspace = Get-AzOperationalInsightsWorkspace `
+  -ResourceGroupName "rg-sentinel-prod-eus-001" `
+  -Name "log-sentinel-prod-001"
 
-# Configure daily cap and alerts
-Set-AzOperationalInsightsWorkspace -ResourceGroupName "rg-security-prod-eus2-001" -Name "law-security-prod-eus2-001" -DailyCap 50 -DailyCapResetHour 0
+# Create Sentinel solution
+New-AzMonitorLogAnalyticsSolution `
+  -Type SecurityInsights `
+  -ResourceGroupName "rg-sentinel-prod-eus-001" `
+  -Location "eastus" `
+  -WorkspaceResourceId $workspace.ResourceId
 
-# Create budget alert for workspace costs
-$budgetName = "budget-sentinel-monthly"
-az consumption budget create \
-  --budget-name $budgetName \
-  --amount 10000 \
-  --time-grain Monthly \
-  --time-period start-date="2024-01-01" end-date="2025-12-31" \
-  --resource-group "rg-security-prod-eus2-001" \
-  --notifications amount=80,contact-emails="security-admin@company.com",threshold-type=Actual
+# Verify Sentinel enabled
+Get-AzSentinelSetting -ResourceGroupName "rg-sentinel-prod-eus-001" `
+  -WorkspaceName "log-sentinel-prod-001"
 ```
 
-#### 1.3 Azure Sentinel Enablement
+## Phase 2: Security Layer
 
-**Enable Sentinel on Workspace:**
+### Key Vault Deployment
+
 ```bash
-# Enable Azure Sentinel
-az sentinel workspace create \
-  --resource-group "rg-security-prod-eus2-001" \
-  --workspace-name "law-security-prod-eus2-001"
+# Deploy Key Vault for secrets
+az keyvault create \
+  --name "kv-sentinel-prod-001" \
+  --resource-group "rg-sentinel-prod-eus-001" \
+  --location "eastus" \
+  --enable-rbac-authorization true \
+  --sku standard
 
-# Verify Sentinel is enabled
-az sentinel workspace show \
-  --resource-group "rg-security-prod-eus2-001" \
-  --workspace-name "law-security-prod-eus2-001"
+# Verify Key Vault
+az keyvault show --name "kv-sentinel-prod-001"
 ```
 
-**Configure Sentinel Settings:**
+### RBAC Configuration
+
 ```powershell
-# Import required PowerShell modules
-Import-Module Az.SecurityInsights
-Import-Module Az.OperationalInsights
+# Configure Sentinel RBAC roles
+$resourceGroup = "rg-sentinel-prod-eus-001"
+$workspaceName = "log-sentinel-prod-001"
 
-# Configure Sentinel workspace settings
-$WorkspaceId = (Get-AzOperationalInsightsWorkspace -ResourceGroupName "rg-security-prod-eus2-001" -Name "law-security-prod-eus2-001").ResourceId
+# Assign Sentinel Contributor to Security Admin group
+$secAdminGroup = Get-AzADGroup -DisplayName "Security-Admins"
+New-AzRoleAssignment `
+  -ObjectId $secAdminGroup.Id `
+  -RoleDefinitionName "Microsoft Sentinel Contributor" `
+  -ResourceGroupName $resourceGroup
 
-# Configure UEBA (User and Entity Behavior Analytics)
-$uebaSettings = @{
-    ResourceGroupName = "rg-security-prod-eus2-001"
-    WorkspaceName = "law-security-prod-eus2-001"
-    DataSource = @("AuditLogs", "AzureActivity", "SecurityEvent", "SigninLogs")
+# Assign Sentinel Reader to SOC Analyst group
+$socAnalystGroup = Get-AzADGroup -DisplayName "SOC-Analysts"
+New-AzRoleAssignment `
+  -ObjectId $socAnalystGroup.Id `
+  -RoleDefinitionName "Microsoft Sentinel Reader" `
+  -ResourceGroupName $resourceGroup
+
+# Verify role assignments
+Get-AzRoleAssignment -ResourceGroupName $resourceGroup |
+  Where-Object { $_.RoleDefinitionName -like "*Sentinel*" }
+```
+
+## Phase 3: Compute Layer
+
+### Data Connector Deployment
+
+#### Azure AD Connector
+
+```powershell
+# Enable Azure AD data connector
+$connectorParams = @{
+    ResourceGroupName = "rg-sentinel-prod-eus-001"
+    WorkspaceName = "log-sentinel-prod-001"
+    Kind = "AzureActiveDirectory"
 }
-Set-AzSentinelUebaConfiguration @uebaSettings
+
+New-AzSentinelDataConnector @connectorParams
+
+# Configure Azure AD diagnostic settings
+$workspace = Get-AzOperationalInsightsWorkspace `
+  -ResourceGroupName "rg-sentinel-prod-eus-001" `
+  -Name "log-sentinel-prod-001"
+
+# Enable sign-in logs
+Set-AzDiagnosticSetting `
+  -ResourceId "/providers/Microsoft.aadiam/diagnosticSettings/AzureADSignIn" `
+  -WorkspaceId $workspace.ResourceId `
+  -Enabled $true `
+  -Category SignInLogs, AuditLogs, NonInteractiveUserSignInLogs, ServicePrincipalSignInLogs
 ```
 
-### Phase 2: Data Source Integration (Weeks 2-4)
+#### Office 365 Connector
 
-#### 2.1 Azure Native Data Sources
-
-**Azure Activity Logs Integration:**
-```bash
-# Enable Azure Activity data connector
-az monitor diagnostic-settings create \
-  --name "sentinel-activity-logs" \
-  --resource "/subscriptions/$(az account show --query id -o tsv)" \
-  --workspace "/subscriptions/$(az account show --query id -o tsv)/resourcegroups/rg-security-prod-eus2-001/providers/microsoft.operationalinsights/workspaces/law-security-prod-eus2-001" \
-  --logs '[
-    {
-      "category": "Administrative",
-      "enabled": true
-    },
-    {
-      "category": "Security", 
-      "enabled": true
-    },
-    {
-      "category": "ServiceHealth",
-      "enabled": true
-    },
-    {
-      "category": "Alert",
-      "enabled": true
-    },
-    {
-      "category": "Policy",
-      "enabled": true
-    }
-  ]'
-```
-
-**Azure Security Center Integration:**
 ```powershell
-# Enable Security Center data connector
-New-AzSentinelDataConnector -ResourceGroupName "rg-security-prod-eus2-001" -WorkspaceName "law-security-prod-eus2-001" -Kind "AzureSecurityCenter"
-
-# Configure Security Center to send data to Sentinel
-$subscriptions = Get-AzSubscription
-foreach ($subscription in $subscriptions) {
-    Set-AzContext -SubscriptionId $subscription.Id
-    
-    # Configure auto-provisioning for Security Center
-    Set-AzSecurityAutoProvisioningSetting -Name "default" -EnableAutoProvisioning
-    
-    # Configure Security Center workspace
-    Set-AzSecurityWorkspaceSetting -Name "default" -WorkspaceId $WorkspaceId -Scope "/subscriptions/$($subscription.Id)"
-}
-```
-
-**Azure AD Integration:**
-```powershell
-# Enable Azure AD data connectors
-$aadConnectors = @(
-    "AzureActiveDirectory",           # Sign-in logs
-    "AzureActiveDirectoryIdentityProtection",  # Identity Protection
-    "AzureActiveDirectoryAuditLogs"   # Audit logs
-)
-
-foreach ($connector in $aadConnectors) {
-    try {
-        New-AzSentinelDataConnector -ResourceGroupName "rg-security-prod-eus2-001" -WorkspaceName "law-security-prod-eus2-001" -Kind $connector
-        Write-Host "✓ Enabled $connector data connector" -ForegroundColor Green
-    }
-    catch {
-        Write-Warning "Failed to enable $connector: $($_.Exception.Message)"
-    }
-}
-```
-
-#### 2.2 Microsoft 365 Integration
-
-**Microsoft 365 Defender Integration:**
-```powershell
-# Enable Microsoft 365 Defender connector
-New-AzSentinelDataConnector -ResourceGroupName "rg-security-prod-eus2-001" -WorkspaceName "law-security-prod-eus2-001" -Kind "MicrosoftThreatProtection"
-
 # Enable Office 365 connector
-New-AzSentinelDataConnector -ResourceGroupName "rg-security-prod-eus2-001" -WorkspaceName "law-security-prod-eus2-001" -Kind "Office365"
-
-# Configure Office 365 logs
-$office365Config = @{
-    ResourceGroupName = "rg-security-prod-eus2-001"
-    WorkspaceName = "law-security-prod-eus2-001"
+$o365Params = @{
+    ResourceGroupName = "rg-sentinel-prod-eus-001"
+    WorkspaceName = "log-sentinel-prod-001"
+    Kind = "Office365"
     Exchange = $true
     SharePoint = $true
     Teams = $true
 }
-Set-AzSentinelOffice365DataConnector @office365Config
+
+New-AzSentinelDataConnector @o365Params
 ```
 
-#### 2.3 Windows Security Events
+#### Defender for Cloud Connector
 
-**Deploy Azure Monitor Agent:**
-```bash
-# Create Data Collection Rule for Windows Security Events
-az monitor data-collection rule create \
-  --resource-group "rg-security-prod-eus2-001" \
-  --name "dcr-windows-security-events" \
-  --location "East US 2" \
-  --rule-file windows-security-dcr.json
+```powershell
+# Enable Defender for Cloud connector
+New-AzSentinelDataConnector `
+  -ResourceGroupName "rg-sentinel-prod-eus-001" `
+  -WorkspaceName "log-sentinel-prod-001" `
+  -Kind "AzureSecurityCenter" `
+  -SubscriptionId "your-subscription-id"
 ```
 
-**Windows Security Events DCR (windows-security-dcr.json):**
-```json
-{
-  "properties": {
-    "dataSources": {
-      "windowsEventLogs": [
-        {
-          "name": "SecurityEvents",
-          "streams": ["Microsoft-SecurityEvent"],
-          "xPathQueries": [
-            "Security!*[System[(EventID=4624 or EventID=4625 or EventID=4648 or EventID=4656 or EventID=4688 or EventID=4689 or EventID=4697 or EventID=4719 or EventID=4720 or EventID=4722 or EventID=4723 or EventID=4724 or EventID=4725 or EventID=4726 or EventID=4727 or EventID=4728 or EventID=4729 or EventID=4730 or EventID=4732 or EventID=4733 or EventID=4734 or EventID=4735 or EventID=4737 or EventID=4738 or EventID=4739 or EventID=4740 or EventID=4754 or EventID=4755 or EventID=4756 or EventID=4767 or EventID=4799 or EventID=4817 or EventID=5024 or EventID=5033 or EventID=5059 or EventID=5136 or EventID=5137 or EventID=5139 or EventID=5156 or EventID=5157 or EventID=5447)]]"
-          ]
-        }
-      ]
-    },
-    "destinations": {
-      "logAnalytics": [
-        {
-          "workspaceResourceId": "/subscriptions/{subscription-id}/resourcegroups/rg-security-prod-eus2-001/providers/microsoft.operationalinsights/workspaces/law-security-prod-eus2-001",
-          "name": "SecurityWorkspace"
-        }
-      ]
-    },
-    "dataFlows": [
-      {
-        "streams": ["Microsoft-SecurityEvent"],
-        "destinations": ["SecurityWorkspace"],
-        "transformKql": "source | where EventID in (4624, 4625, 4648, 4656, 4688, 4689, 4697, 4719, 4720, 4722, 4723, 4724, 4725, 4726, 4727, 4728, 4729, 4730, 4732, 4733, 4734, 4735, 4737, 4738, 4739, 4740, 4754, 4755, 4756, 4767, 4799, 4817, 5024, 5033, 5059, 5136, 5137, 5139, 5156, 5157, 5447)"
-      }
-    ]
-  }
+## Phase 4: Monitoring Layer
+
+### Monitoring Dashboard Configuration
+
+```powershell
+# Create monitoring alerts for Sentinel health
+$actionGroupParams = @{
+    Name = "ag-sentinel-alerts"
+    ResourceGroupName = "rg-sentinel-prod-eus-001"
+    ShortName = "SentinelAG"
+    EmailReceiver = @{
+        Name = "SOC-Team"
+        EmailAddress = "soc-team@client.com"
+    }
 }
-```
+Set-AzActionGroup @actionGroupParams
 
-#### 2.4 Network and Infrastructure Data Sources
-
-**Configure Syslog Data Collection:**
-```bash
-# Create DCR for Syslog data
-az monitor data-collection rule create \
-  --resource-group "rg-security-prod-eus2-001" \
-  --name "dcr-syslog-security" \
-  --location "East US 2" \
-  --rule-file syslog-dcr.json
-```
-
-**Syslog DCR Configuration (syslog-dcr.json):**
-```json
-{
-  "properties": {
-    "dataSources": {
-      "syslog": [
-        {
-          "name": "SecuritySyslog",
-          "streams": ["Microsoft-Syslog"],
-          "facilityNames": ["auth", "authpriv", "cron", "daemon", "kern", "local0", "local1", "local2", "local3", "local4", "local5", "local6", "local7", "lpr", "mail", "news", "syslog", "user", "uucp"],
-          "logLevels": ["Alert", "Critical", "Debug", "Emergency", "Error", "Info", "Notice", "Warning"]
-        }
-      ]
-    },
-    "destinations": {
-      "logAnalytics": [
-        {
-          "workspaceResourceId": "/subscriptions/{subscription-id}/resourcegroups/rg-security-prod-eus2-001/providers/microsoft.operationalinsights/workspaces/law-security-prod-eus2-001",
-          "name": "SecurityWorkspace"
-        }
-      ]
-    },
-    "dataFlows": [
-      {
-        "streams": ["Microsoft-Syslog"],
-        "destinations": ["SecurityWorkspace"]
-      }
-    ]
-  }
+# Create alert for ingestion lag
+$alertParams = @{
+    Name = "alert-sentinel-ingestion-lag"
+    ResourceGroupName = "rg-sentinel-prod-eus-001"
+    TargetResourceId = $workspace.ResourceId
+    Condition = @{
+        DataSourceId = $workspace.ResourceId
+        Query = "Heartbeat | summarize LastHeartbeat = max(TimeGenerated) | extend LagMinutes = datetime_diff('minute', now(), LastHeartbeat) | where LagMinutes > 15"
+        Operator = "GreaterThan"
+        Threshold = 0
+        TimeAggregation = "Count"
+    }
+    Severity = 2
+    ActionGroupId = "/subscriptions/{sub}/resourceGroups/rg-sentinel-prod-eus-001/providers/microsoft.insights/actionGroups/ag-sentinel-alerts"
 }
+# Configure via Azure Portal or ARM template
 ```
 
-**Configure Common Event Format (CEF) via Syslog:**
-```bash
-# Install syslog daemon on data collector VM
-sudo apt-get update
-sudo apt-get install rsyslog
+### Health Workbook Deployment
 
-# Configure rsyslog for CEF
-cat << 'EOF' | sudo tee /etc/rsyslog.d/95-sentinel-cef.conf
-# Microsoft Sentinel CEF collection
-$ModLoad imudp
-$UDPServerRun 514
-$UDPServerAddress 0.0.0.0
-$template CEFFormat,"<$PRI>%TIMESTAMP% %HOSTNAME% CEF: %msg%\n"
+Deploy the Sentinel health workbook for operational monitoring:
+- Data connector status
+- Ingestion volume trends
+- Analytics rule performance
+- Playbook execution metrics
 
-# Define facility local4 for CEF messages
-local4.*    @@127.0.0.1:25226;CEFFormat
+# Application Configuration
 
-# Discard CEF messages after forwarding
-local4.*    stop
-EOF
+This section covers Sentinel feature configuration and optimization.
 
-# Restart rsyslog
-sudo systemctl restart rsyslog
-sudo systemctl enable rsyslog
-```
+## Analytics Rules Configuration
 
-### Phase 3: Analytics Rules and Detection (Weeks 4-6)
+### Built-in Rules Deployment
 
-#### 3.1 Built-in Analytics Rules Deployment
-
-**Enable Critical Detection Rules:**
 ```powershell
 # Get all available rule templates
-$ruleTemplates = Get-AzSentinelAlertRuleTemplate -ResourceGroupName "rg-security-prod-eus2-001" -WorkspaceName "law-security-prod-eus2-001"
+$ruleTemplates = Get-AzSentinelAlertRuleTemplate `
+  -ResourceGroupName "rg-sentinel-prod-eus-001" `
+  -WorkspaceName "log-sentinel-prod-001"
 
-# Filter for high-confidence, critical rules
-$criticalRules = $ruleTemplates | Where-Object { 
-    $_.Severity -eq "High" -and 
-    $_.ConfidenceLevel -ge 8 -and
-    $_.Enabled -eq $true
+# Filter for high-confidence rules
+$criticalRules = $ruleTemplates | Where-Object {
+    $_.Severity -eq "High" -and $_.Status -eq "Available"
 }
 
-Write-Host "Found $($criticalRules.Count) critical rule templates to deploy"
+Write-Host "Found $($criticalRules.Count) critical rule templates"
 
 # Deploy critical rules
-foreach ($rule in $criticalRules) {
+foreach ($template in $criticalRules | Select-Object -First 30) {
     try {
         $ruleParams = @{
-            ResourceGroupName = "rg-security-prod-eus2-001"
-            WorkspaceName = "law-security-prod-eus2-001"
+            ResourceGroupName = "rg-sentinel-prod-eus-001"
+            WorkspaceName = "log-sentinel-prod-001"
             RuleId = (New-Guid).ToString()
-            DisplayName = $rule.DisplayName
-            Description = $rule.Description
-            Severity = $rule.Severity
-            Tactic = $rule.Tactic
-            Query = $rule.Query
-            QueryFrequency = $rule.QueryFrequency
-            QueryPeriod = $rule.QueryPeriod
-            TriggerOperator = $rule.TriggerOperator
-            TriggerThreshold = $rule.TriggerThreshold
+            DisplayName = $template.DisplayName
+            Description = $template.Description
+            Severity = $template.Severity
+            Query = $template.Query
+            QueryFrequency = $template.QueryFrequency
+            QueryPeriod = $template.QueryPeriod
+            TriggerOperator = "GreaterThan"
+            TriggerThreshold = 0
             Enabled = $true
         }
-        
+
         New-AzSentinelAlertRule @ruleParams
-        Write-Host "✓ Deployed rule: $($rule.DisplayName)" -ForegroundColor Green
+        Write-Host "✓ Deployed: $($template.DisplayName)" -ForegroundColor Green
     }
     catch {
-        Write-Warning "Failed to deploy rule $($rule.DisplayName): $($_.Exception.Message)"
+        Write-Warning "Failed to deploy $($template.DisplayName): $_"
     }
 }
 ```
 
-#### 3.2 Custom Analytics Rules
+### Custom Rules Deployment
 
-**Suspicious Login Pattern Detection:**
-```kql
-// Custom Rule: Multiple Failed Logins from Different Locations
-let timeRange = 1h;
-let threshold = 5;
-SigninLogs
-| where TimeGenerated >= ago(timeRange)
-| where ResultType != "0"  // Failed sign-ins
-| where UserPrincipalName != ""
-| summarize FailedAttempts = count(), 
-            Locations = make_set(Location),
-            IPAddresses = make_set(IPAddress),
-            Countries = make_set(LocationDetails.countryOrRegion)
-  by UserPrincipalName, bin(TimeGenerated, 5m)
-| where FailedAttempts >= threshold
-| where array_length(Countries) > 1  // Multiple countries
-| extend Severity = case(
-    FailedAttempts >= 20, "High",
-    FailedAttempts >= 10, "Medium",
-    "Low"
-)
-| project TimeGenerated, UserPrincipalName, FailedAttempts, Locations, IPAddresses, Countries, Severity
-```
-
-**Deploy Custom Analytics Rule:**
 ```powershell
-# Create custom analytics rule for suspicious logins
+# Deploy custom analytics rule
 $customRule = @{
-    ResourceGroupName = "rg-security-prod-eus2-001"
-    WorkspaceName = "law-security-prod-eus2-001"
+    ResourceGroupName = "rg-sentinel-prod-eus-001"
+    WorkspaceName = "log-sentinel-prod-001"
     RuleId = (New-Guid).ToString()
     DisplayName = "Multiple Failed Logins from Different Countries"
-    Description = "Detects multiple failed login attempts from different countries within a short time period"
+    Description = "Detects multiple failed logins from different geographic locations"
     Severity = "High"
     Tactic = @("InitialAccess", "CredentialAccess")
     Query = @"
-let timeRange = 1h;
-let threshold = 5;
 SigninLogs
-| where TimeGenerated >= ago(timeRange)
+| where TimeGenerated >= ago(1h)
 | where ResultType != "0"
-| where UserPrincipalName != ""
-| summarize FailedAttempts = count(), 
-            Locations = make_set(Location),
-            IPAddresses = make_set(IPAddress),
-            Countries = make_set(LocationDetails.countryOrRegion)
-  by UserPrincipalName, bin(TimeGenerated, 5m)
-| where FailedAttempts >= threshold
+| summarize FailedAttempts = count(),
+            Countries = make_set(Location)
+  by UserPrincipalName
+| where FailedAttempts >= 5
 | where array_length(Countries) > 1
-| extend Severity = case(
-    FailedAttempts >= 20, "High",
-    FailedAttempts >= 10, "Medium",
-    "Low"
-)
 "@
     QueryFrequency = "PT1H"
-    QueryPeriod = "PT1H" 
+    QueryPeriod = "PT1H"
     TriggerOperator = "GreaterThan"
     TriggerThreshold = 0
     Enabled = $true
@@ -483,530 +546,404 @@ SigninLogs
 New-AzSentinelAlertRule @customRule
 ```
 
-#### 3.3 Machine Learning Analytics
+## SOAR Playbook Deployment
 
-**Enable Anomaly Detection:**
-```powershell
-# Configure anomaly detection rules
-$anomalyRules = @(
-    "Anomalous Sign-in Location by User Account and Time",
-    "Anomalous Azure AD Sign-in by Application",
-    "Anomalous Azure AD Sign-in by User Account",
-    "Anomalous Failed Sign-in Rate"
-)
+### Logic App Infrastructure
 
-foreach ($ruleName in $anomalyRules) {
-    $anomalyRule = Get-AzSentinelMachineLearningAnalyticsSettingsRule -ResourceGroupName "rg-security-prod-eus2-001" -WorkspaceName "law-security-prod-eus2-001" | Where-Object { $_.DisplayName -eq $ruleName }
-    
-    if ($anomalyRule) {
-        Set-AzSentinelMachineLearningAnalyticsSettingsRule -ResourceGroupName "rg-security-prod-eus2-001" -WorkspaceName "law-security-prod-eus2-001" -RuleId $anomalyRule.Name -Enabled $true
-        Write-Host "✓ Enabled anomaly rule: $ruleName" -ForegroundColor Green
-    }
-}
-```
-
-### Phase 4: Incident Response and Automation (Weeks 6-8)
-
-#### 4.1 Incident Response Workflows
-
-**Configure Incident Settings:**
-```powershell
-# Configure incident creation settings
-$incidentSettings = @{
-    ResourceGroupName = "rg-security-prod-eus2-001"
-    WorkspaceName = "law-security-prod-eus2-001"
-    CreateIncidents = $true
-    GroupingConfiguration = @{
-        Enabled = $true
-        ReopenClosedIncidents = $false
-        LookbackDuration = "PT5H"
-        MatchingMethod = "AllEntities"
-    }
-    AlertRuleTemplateName = "IncidentConfiguration"
-}
-
-Set-AzSentinelIncidentConfiguration @incidentSettings
-```
-
-#### 4.2 Automated Response Playbooks
-
-**Create Logic App for Automated Response:**
 ```bash
-# Deploy Logic App for automated incident response
+# Deploy Logic App for incident response
 az logic workflow create \
-  --resource-group "rg-security-prod-eus2-001" \
-  --name "logic-incident-response-001" \
-  --location "East US 2" \
-  --definition incident-response-logic-app.json
+  --resource-group "rg-sentinel-prod-eus-001" \
+  --name "la-sentinel-enrich-ip" \
+  --location "eastus" \
+  --definition @playbooks/enrich-ip-address.json
 ```
 
-**Incident Response Logic App Definition:**
-```json
-{
-  "$schema": "https://schema.management.azure.com/schemas/2016-06-01/Microsoft.Logic.json",
-  "contentVersion": "1.0.0.0",
-  "parameters": {},
-  "triggers": {
-    "When_Azure_Sentinel_incident_creation_rule_was_triggered": {
-      "type": "ApiConnectionWebhook",
-      "inputs": {
-        "host": {
-          "connection": {
-            "name": "@parameters('$connections')['azuresentinel']['connectionId']"
-          }
-        },
-        "body": {
-          "callback_url": "@{listCallbackUrl()}"
-        },
-        "path": "/incident-creation"
-      }
-    }
-  },
-  "actions": {
-    "Initialize_incident_severity": {
-      "runAfter": {},
-      "type": "InitializeVariable",
-      "inputs": {
-        "variables": [
-          {
-            "name": "IncidentSeverity",
-            "type": "string",
-            "value": "@{triggerBody()?['object']?['properties']?['severity']}"
-          }
-        ]
-      }
-    },
-    "Condition_check_severity": {
-      "actions": {
-        "Send_Teams_notification_high_severity": {
-          "runAfter": {},
-          "type": "ApiConnection",
-          "inputs": {
-            "host": {
-              "connection": {
-                "name": "@parameters('$connections')['teams']['connectionId']"
-              }
-            },
-            "method": "post",
-            "body": {
-              "rootMessage": {
-                "body": {
-                  "contentType": "html",
-                  "content": "<h2>🚨 High Severity Security Incident</h2><br><strong>Title:</strong> @{triggerBody()?['object']?['properties']?['title']}<br><strong>Severity:</strong> @{variables('IncidentSeverity')}<br><strong>Status:</strong> @{triggerBody()?['object']?['properties']?['status']}<br><a href='@{triggerBody()?['object']?['properties']?['incidentUrl']}'>View in Sentinel</a>"
-                }
-              }
-            },
-            "path": "/v1.0/teams/@{encodeURIComponent('security-team-id')}/channels/@{encodeURIComponent('incidents-channel-id')}/messages"
-          }
-        },
-        "Create_ServiceNow_ticket": {
-          "runAfter": {
-            "Send_Teams_notification_high_severity": ["Succeeded"]
-          },
-          "type": "ApiConnection",
-          "inputs": {
-            "host": {
-              "connection": {
-                "name": "@parameters('$connections')['servicenow']['connectionId']"
-              }
-            },
-            "method": "post",
-            "body": {
-              "short_description": "@{triggerBody()?['object']?['properties']?['title']}",
-              "description": "@{triggerBody()?['object']?['properties']?['description']}",
-              "urgency": "1",
-              "impact": "1",
-              "priority": "1",
-              "category": "Security",
-              "assignment_group": "Security Operations"
-            },
-            "path": "/api/now/table/incident"
-          }
-        }
-      },
-      "runAfter": {
-        "Initialize_incident_severity": ["Succeeded"]
-      },
-      "expression": {
-        "or": [
-          {
-            "equals": [
-              "@variables('IncidentSeverity')",
-              "High"
-            ]
-          },
-          {
-            "equals": [
-              "@variables('IncidentSeverity')",
-              "Critical"
-            ]
-          }
-        ]
-      },
-      "type": "If"
-    }
-  }
-}
-```
+### Playbook Configuration
 
-#### 4.3 User Account Disable Playbook
-
-**Create Account Disable Playbook:**
 ```powershell
-# Create automated user account disable playbook
-$playbookDefinition = @{
-    ResourceGroupName = "rg-security-prod-eus2-001"
-    PlaybookName = "Disable-CompromisedAccount"
-    DisplayName = "Disable Compromised User Account"
-    Description = "Automatically disables user account when compromise is detected"
-    LogicAppResourceId = "/subscriptions/{subscription-id}/resourceGroups/rg-security-prod-eus2-001/providers/Microsoft.Logic/workflows/logic-disable-account-001"
+# Configure Sentinel playbook attachment
+$automationRule = @{
+    ResourceGroupName = "rg-sentinel-prod-eus-001"
+    WorkspaceName = "log-sentinel-prod-001"
+    AutomationRuleId = (New-Guid).ToString()
+    DisplayName = "Auto-Enrich High Severity Incidents"
+    Order = 1
+    TriggerOperator = "Equals"
+    TriggerValue = "High"
+    ActionType = "RunPlaybook"
+    PlaybookResourceId = "/subscriptions/{sub}/resourceGroups/rg-sentinel-prod-eus-001/providers/Microsoft.Logic/workflows/la-sentinel-enrich-ip"
 }
 
-# Deploy the playbook
-New-AzSentinelPlaybook @playbookDefinition
+# Note: Use Azure Portal or REST API for automation rule creation
 ```
 
-### Phase 5: Threat Hunting and Intelligence (Weeks 8-10)
+# Integration Testing
 
-#### 5.1 Threat Hunting Queries
+This section covers testing procedures for validation.
 
-**Deploy Advanced Hunting Queries:**
+## Functional Testing
+
+### Data Connector Validation
+
+```powershell
+# Verify data connector status
+$connectors = Get-AzSentinelDataConnector `
+  -ResourceGroupName "rg-sentinel-prod-eus-001" `
+  -WorkspaceName "log-sentinel-prod-001"
+
+foreach ($connector in $connectors) {
+    Write-Host "Connector: $($connector.Name) - Kind: $($connector.Kind)"
+}
+```
+
+### Data Ingestion Validation
+
 ```kql
-// Hunt for Living-off-the-Land techniques
-SecurityEvent
-| where TimeGenerated >= ago(7d)
-| where EventID == 4688  // Process Creation
-| where Process has_any("powershell.exe", "cmd.exe", "wscript.exe", "cscript.exe", "rundll32.exe", "regsvr32.exe", "mshta.exe", "bitsadmin.exe", "certutil.exe", "wmic.exe")
-| where CommandLine has_any("-enc", "-exec", "bypass", "downloadstring", "invoke-expression", "invoke-webrequest", "iwr", "curl", "wget", "bitstransfer")
-| project TimeGenerated, Computer, Account, Process, CommandLine, ParentProcessName
-| extend Techniques = case(
-    CommandLine has_any("-enc", "-exec", "bypass"), "T1059.001 - PowerShell",
-    CommandLine has_any("downloadstring", "invoke-webrequest", "iwr", "curl", "wget"), "T1105 - Ingress Tool Transfer", 
-    CommandLine has "bitstransfer", "T1197 - BITS Jobs",
-    "Unknown"
-)
-| summarize Count = count(), FirstSeen = min(TimeGenerated), LastSeen = max(TimeGenerated), Techniques = make_set(Techniques) by Computer, Account, Process
+// Validate data ingestion across tables
+union withsource=TableName *
+| where TimeGenerated >= ago(1h)
+| summarize Count = count(), Latest = max(TimeGenerated) by TableName
 | order by Count desc
 ```
 
-**Lateral Movement Detection:**
-```kql
-// Hunt for lateral movement using admin shares
-SecurityEvent  
+### Analytics Rule Testing
+
+```powershell
+# Execute test query for rule validation
+$query = @"
+SigninLogs
 | where TimeGenerated >= ago(24h)
-| where EventID == 5140  // Network Share Access
-| where ShareName has_any("\\\\*\\C$", "\\\\*\\ADMIN$", "\\\\*\\IPC$")
-| where AccountType == "User"
-| summarize ShareAccess = count(), 
-            UniqueShares = dcount(ShareName),
-            AccessedShares = make_set(ShareName),
-            TargetComputers = make_set(Computer)
-  by Account, IpAddress, bin(TimeGenerated, 1h)
-| where UniqueShares > 3  // Accessing multiple admin shares
-| extend RiskScore = case(
-    UniqueShares >= 10, "High",
-    UniqueShares >= 5, "Medium", 
-    "Low"
-)
-| order by UniqueShares desc
+| summarize count() by ResultType
+| render columnchart
+"@
+
+Invoke-AzOperationalInsightsQuery `
+  -WorkspaceId (Get-AzOperationalInsightsWorkspace `
+    -ResourceGroupName "rg-sentinel-prod-eus-001" `
+    -Name "log-sentinel-prod-001").CustomerId `
+  -Query $query
 ```
 
-#### 5.2 Threat Intelligence Integration
+## Performance Testing
 
-**Configure Threat Intelligence Connectors:**
-```powershell
-# Enable Microsoft Threat Intelligence connector
-New-AzSentinelDataConnector -ResourceGroupName "rg-security-prod-eus2-001" -WorkspaceName "law-security-prod-eus2-001" -Kind "MicrosoftThreatIntelligence"
+### Query Performance Validation
 
-# Configure threat intelligence feeds
-$tiFeeds = @(
-    @{
-        Name = "Microsoft Threat Intelligence"
-        Kind = "MicrosoftThreatIntelligence"
-        Enabled = $true
-    },
-    @{
-        Name = "TAXII Threat Intelligence"
-        Kind = "ThreatIntelligenceTaxii"  
-        Enabled = $true
-    }
-)
-
-foreach ($feed in $tiFeeds) {
-    try {
-        New-AzSentinelDataConnector -ResourceGroupName "rg-security-prod-eus2-001" -WorkspaceName "law-security-prod-eus2-001" -Kind $feed.Kind
-        Write-Host "✓ Enabled threat intelligence feed: $($feed.Name)" -ForegroundColor Green
-    }
-    catch {
-        Write-Warning "Failed to enable $($feed.Name): $($_.Exception.Message)"
-    }
-}
-```
-
-#### 5.3 Watchlists and IoC Management
-
-**Create Watchlists for Known Bad Indicators:**
-```powershell
-# Create IP address watchlist for known bad IPs
-$watchlistParams = @{
-    ResourceGroupName = "rg-security-prod-eus2-001"
-    WorkspaceName = "law-security-prod-eus2-001"
-    WatchlistAlias = "BadIPAddresses"
-    DisplayName = "Known Malicious IP Addresses"
-    Description = "List of known malicious IP addresses from threat intelligence"
-    Provider = "Security Team"
-    Source = "ThreatIntelligence"
-    ItemsSearchKey = "IPAddress"
-}
-
-New-AzSentinelWatchlist @watchlistParams
-
-# Add sample malicious IPs to watchlist
-$maliciousIPs = @(
-    @{ IPAddress = "192.0.2.1"; Description = "Known C2 Server"; ThreatType = "C2"; FirstSeen = "2024-01-01" },
-    @{ IPAddress = "192.0.2.2"; Description = "Malware Distribution"; ThreatType = "Malware"; FirstSeen = "2024-01-01" },
-    @{ IPAddress = "192.0.2.3"; Description = "Phishing Infrastructure"; ThreatType = "Phishing"; FirstSeen = "2024-01-01" }
-)
-
-foreach ($ip in $maliciousIPs) {
-    New-AzSentinelWatchlistItem -ResourceGroupName "rg-security-prod-eus2-001" -WorkspaceName "law-security-prod-eus2-001" -WatchlistAlias "BadIPAddresses" -ItemProperties $ip
-}
-```
-
-### Phase 6: Workbooks and Reporting (Weeks 10-12)
-
-#### 6.1 Security Operations Workbook
-
-**Deploy SOC Overview Workbook:**
-```json
-{
-  "version": "Notebook/1.0",
-  "items": [
-    {
-      "type": 1,
-      "content": {
-        "json": "# Security Operations Center Dashboard\n\nThis workbook provides a comprehensive view of security operations including incidents, alerts, and threat hunting activities."
-      },
-      "name": "SOC Header"
-    },
-    {
-      "type": 3,
-      "content": {
-        "version": "KqlItem/1.0",
-        "query": "SecurityIncident\r\n| where TimeGenerated >= ago(30d)\r\n| summarize Count = count() by Status\r\n| render piechart",
-        "size": 1,
-        "title": "Incident Status Distribution (Last 30 Days)",
-        "timeContext": {
-          "durationMs": 2592000000
-        },
-        "queryType": 0,
-        "resourceType": "microsoft.operationalinsights/workspaces"
-      },
-      "customWidth": "50",
-      "name": "Incident Status Chart"
-    },
-    {
-      "type": 3,
-      "content": {
-        "version": "KqlItem/1.0",
-        "query": "SecurityAlert\r\n| where TimeGenerated >= ago(7d)\r\n| summarize Count = count() by AlertSeverity\r\n| render columnchart",
-        "size": 1,
-        "title": "Alert Volume by Severity (Last 7 Days)", 
-        "timeContext": {
-          "durationMs": 604800000
-        },
-        "queryType": 0,
-        "resourceType": "microsoft.operationalinsights/workspaces"
-      },
-      "customWidth": "50",
-      "name": "Alert Severity Chart"
-    }
-  ]
-}
-```
-
-## Post-Deployment Validation
-
-### Data Flow Validation
-```bash
-# Verify data ingestion from all sources
-az monitor log-analytics query \
-  --workspace "law-security-prod-eus2-001" \
-  --analytics-query "
-    union *
-    | where TimeGenerated >= ago(1h)
-    | summarize Count = count(), Latest = max(TimeGenerated) by Type
-    | order by Count desc
-  "
-```
-
-### Analytics Rules Testing
 ```kql
-// Test analytics rules are firing
-SecurityAlert
-| where TimeGenerated >= ago(1h)
-| summarize count() by AlertName, AlertSeverity
+// Test query performance
+let startTime = now();
+SigninLogs
+| where TimeGenerated >= ago(7d)
+| summarize count() by bin(TimeGenerated, 1h), ResultType
+| render timechart;
+// Expected: < 30 seconds for 7-day query
+```
+
+### Playbook Execution Testing
+
+```powershell
+# Test playbook execution
+$testIncident = Get-AzSentinelIncident `
+  -ResourceGroupName "rg-sentinel-prod-eus-001" `
+  -WorkspaceName "log-sentinel-prod-001" |
+  Select-Object -First 1
+
+# Trigger playbook manually
+Invoke-AzLogicWorkflow `
+  -ResourceGroupName "rg-sentinel-prod-eus-001" `
+  -Name "la-sentinel-enrich-ip" `
+  -TriggerName "When_Sentinel_incident_created"
+```
+
+# Security Validation
+
+This section covers security validation procedures.
+
+## Security Scan Execution
+
+### RBAC Validation
+
+```powershell
+# Verify RBAC configuration
+Get-AzRoleAssignment -ResourceGroupName "rg-sentinel-prod-eus-001" |
+  Format-Table PrincipalName, RoleDefinitionName, Scope
+
+# Verify no over-permissive assignments
+$assignments = Get-AzRoleAssignment -ResourceGroupName "rg-sentinel-prod-eus-001"
+$overPermissive = $assignments | Where-Object { $_.RoleDefinitionName -eq "Owner" }
+if ($overPermissive) {
+    Write-Warning "Found Owner role assignments - review for least privilege"
+}
+```
+
+### Encryption Validation
+
+```bash
+# Verify workspace encryption
+az monitor log-analytics workspace show \
+  --resource-group "rg-sentinel-prod-eus-001" \
+  --workspace-name "log-sentinel-prod-001" \
+  --query "features.enableDataExport"
+
+# Verify Key Vault encryption
+az keyvault show --name "kv-sentinel-prod-001" \
+  --query "properties.enableSoftDelete"
+```
+
+## Compliance Validation
+
+### Audit Logging Verification
+
+```kql
+// Verify audit logging is capturing activities
+AzureActivity
+| where TimeGenerated >= ago(24h)
+| where CategoryValue == "Administrative"
+| summarize count() by OperationNameValue
 | order by count_ desc
 ```
 
-### Incident Creation Validation
+## Security Validation Checklist
+
+- [ ] RBAC follows least privilege principle
+- [ ] No Owner roles assigned unnecessarily
+- [ ] Key Vault soft delete enabled
+- [ ] All data encrypted at rest
+- [ ] TLS 1.2+ enforced
+- [ ] Audit logging enabled
+- [ ] Network access restricted appropriately
+
+# Migration & Cutover
+
+This section covers production cutover procedures.
+
+## Pre-Migration Checklist
+
+- [ ] All infrastructure deployed and validated
+- [ ] All data connectors active and ingesting
+- [ ] All analytics rules deployed and tuned
+- [ ] All playbooks tested and operational
+- [ ] Security validation completed
+- [ ] SOC team trained
+- [ ] Rollback plan documented
+- [ ] Stakeholder approval obtained
+
+## Production Cutover
+
+### Go-Live Activation
+
 ```powershell
-# Check incident creation and assignment
-Get-AzSentinelIncident -ResourceGroupName "rg-security-prod-eus2-001" -WorkspaceName "law-security-prod-eus2-001" | Where-Object { $_.CreatedTimeUtc -gt (Get-Date).AddHours(-24) }
+# Enable all analytics rules for production
+$rules = Get-AzSentinelAlertRule `
+  -ResourceGroupName "rg-sentinel-prod-eus-001" `
+  -WorkspaceName "log-sentinel-prod-001"
+
+foreach ($rule in $rules) {
+    if (-not $rule.Enabled) {
+        Update-AzSentinelAlertRule `
+          -ResourceGroupName "rg-sentinel-prod-eus-001" `
+          -WorkspaceName "log-sentinel-prod-001" `
+          -RuleId $rule.Name `
+          -Enabled $true
+        Write-Host "Enabled: $($rule.DisplayName)"
+    }
+}
 ```
 
-## Troubleshooting and Issue Resolution
+### Traffic Validation
 
-### Common Implementation Issues
-
-#### 🔧 Configuration Issues
-
-**Issue: Service Configuration Errors**
-**Symptoms:**
-- Configuration validation failures
-- Service startup errors
-- Parameter validation messages
-- Deployment failures
-
-**Diagnostic Steps:**
-1. Validate configuration against provided templates
-2. Check parameter formats and required values
-3. Verify service dependencies and prerequisites
-4. Review deployment logs for specific error messages
-
-**Resolution:**
-```bash
-# Validate configuration syntax
-az sentinel workspace show --resource-group "rg-security-prod-eus2-001" --workspace-name "law-security-prod-eus2-001"
-
-# Check service status and logs
-az monitor log-analytics workspace show --resource-group "rg-security-prod-eus2-001" --workspace-name "law-security-prod-eus2-001"
-
-# Compare with working configuration templates
-# Apply corrected configuration parameters
+```kql
+// Monitor ingestion after go-live
+Usage
+| where TimeGenerated >= ago(1h)
+| where DataType != ""
+| summarize Volume = sum(Quantity) by bin(TimeGenerated, 5m), DataType
+| render timechart
 ```
 
-**Prevention:**
-- Use provided configuration templates as baseline
-- Validate configurations before deployment
-- Implement configuration version control
-- Regular configuration audits and reviews
+## Rollback Procedures
 
-#### 🌐 Connectivity and Network Issues
+If critical issues are identified, execute rollback.
 
-**Issue: Network Connectivity Problems**
-**Symptoms:**
-- Connection timeouts
-- DNS resolution failures
-- Port accessibility issues
-- Certificate errors
+```powershell
+# Disable all custom analytics rules
+$customRules = Get-AzSentinelAlertRule `
+  -ResourceGroupName "rg-sentinel-prod-eus-001" `
+  -WorkspaceName "log-sentinel-prod-001" |
+  Where-Object { $_.Kind -eq "Scheduled" }
 
-**Diagnostic Steps:**
-1. **Network Layer Testing:**
-   ```bash
-   # Test basic connectivity
-   ping target-endpoint
-   telnet target-host target-port
-   nslookup target-domain
-   ```
+foreach ($rule in $customRules) {
+    Update-AzSentinelAlertRule `
+      -ResourceGroupName "rg-sentinel-prod-eus-001" `
+      -WorkspaceName "log-sentinel-prod-001" `
+      -RuleId $rule.Name `
+      -Enabled $false
+}
 
-2. **Security Group/Firewall Validation:**
-   - Verify security group rules
-   - Check firewall configurations
-   - Validate port accessibility
-   - Review network ACL settings
+# Document rollback time and reason
+Write-Host "Rollback completed at $(Get-Date)"
+```
 
-3. **DNS and Certificate Verification:**
-   - Confirm DNS resolution
-   - Validate SSL/TLS certificates
-   - Check certificate expiration
-   - Verify certificate chains
+# Operational Handover
 
-**Resolution:**
-- Configure security groups and firewall rules
-- Update DNS settings and records
-- Renew or replace expired certificates
-- Adjust network access control lists
+This section covers the transition to ongoing operations.
 
-#### ⚡ Performance Issues
+## Monitoring Dashboard Access
 
-**Issue: High Latency and Slow Response Times**
-**Symptoms:**
-- Response times exceeding SLA targets
-- User experience degradation
-- Timeout errors
-- Performance monitoring alerts
+### Sentinel Dashboard
 
-**Diagnostic Steps:**
-1. **Performance Metrics Analysis:**
-   ```kql
-   // Check query performance
-   Usage
-   | where TimeGenerated >= ago(1h)
-   | where Solution == "SecurityInsights"
-   | summarize QueryCount = count(), AvgDuration = avg(QueryDuration) by bin(TimeGenerated, 5m)
-   | render timechart
-   ```
+Access the Azure Sentinel dashboard:
+- Azure Portal → Microsoft Sentinel → [workspace-name]
+- Overview dashboard shows incident summary
+- Workbooks provide detailed analytics
 
-2. **Resource Utilization Assessment:**
-   - CPU and memory utilization
-   - Database query performance
-   - Network latency measurements
-   - Application response times
+### Key Metrics to Monitor
 
-**Resolution:**
-- Scale compute resources horizontally or vertically
-- Optimize KQL queries and indexes
-- Implement caching strategies
-- Adjust resource allocation and limits
+<!-- TABLE_CONFIG: widths=[25, 25, 25, 25] -->
+| Metric | Threshold | Alert Severity | Response |
+|--------|-----------|----------------|----------|
+| Ingestion Lag | > 15 minutes | Warning | Check connector health |
+| Alert Volume | > 500/hour | Warning | Review alert tuning |
+| Incident Backlog | > 50 open | Warning | Increase SOC capacity |
+| Playbook Failures | > 5% | Critical | Check Logic App logs |
+| Query Latency | > 60 seconds | Warning | Optimize queries |
 
-#### 🔐 Security and Access Issues
+## Support Transition
 
-**Issue: Authentication and Authorization Problems**
-**Symptoms:**
-- Login failures
-- Access denied errors
-- Permission-related issues
-- Multi-factor authentication problems
+### Support Model
 
-**Diagnostic Steps:**
-1. Verify user credentials and account status
-2. Check role and permission assignments
-3. Review authentication provider connectivity
-4. Validate multi-factor authentication setup
+<!-- TABLE_CONFIG: widths=[15, 30, 25, 30] -->
+| Tier | Responsibility | Team | Response Time |
+|------|---------------|------|---------------|
+| L1 | Alert triage, initial response | SOC Analysts | 15 minutes |
+| L2 | Incident investigation | Senior Analysts | 1 hour |
+| L3 | Complex threats, rule tuning | Security Engineers | 4 hours |
+| L4 | Platform issues, vendor support | Platform Team | Next business day |
 
-**Resolution:**
-- Reset user credentials and passwords
-- Update role assignments and permissions
-- Fix authentication provider configurations
-- Reconfigure multi-factor authentication
+### Escalation Contacts
 
-### 🆘 Escalation Procedures
+<!-- TABLE_CONFIG: widths=[25, 25, 30, 20] -->
+| Role | Name | Email | Phone |
+|------|------|-------|-------|
+| SOC Manager | [NAME] | soc-manager@client.com | [PHONE] |
+| Security Architect | [NAME] | sec-arch@client.com | [PHONE] |
+| Vendor Support | On-Call | support@vendor.com | [PHONE] |
 
-**When to Escalate:**
-- Issue resolution exceeds 4 hours of troubleshooting
-- Multiple system components affected
-- Security incidents or potential breaches
-- Data loss or corruption suspected
-- Business-critical operations impacted
+## Training Completion
 
-**📋 Escalation Information Required:**
-1. **Problem Description:**
-   - Detailed symptoms and error messages
-   - Timeline of issue occurrence
-   - Impact assessment and affected users
-   - Previous troubleshooting attempts
+Training sessions completed during implementation are documented in the Training Program section.
 
-2. **System Information:**
-   - Environment details (production, staging, etc.)
-   - Software versions and configurations
-   - Recent changes or deployments
-   - Current system status and metrics
+# Training Program
 
-**📧 Escalation Contacts:**
-- **Level 2 Support**: Technical specialists for complex issues
-- **Architecture Team**: Design and integration problems
-- **Security Team**: Security incidents and vulnerabilities
-- **Microsoft Support**: Azure Sentinel service issues
+This section documents the training program for the Sentinel SIEM solution.
 
-This comprehensive implementation guide provides the foundation for deploying enterprise-grade Azure Sentinel SIEM capabilities with automated threat detection, incident response, and security operations workflows.
+## Training Overview
+
+Training ensures all user groups achieve competency with the Sentinel solution.
+
+## Training Schedule
+
+The following training sessions are delivered during the implementation to ensure all team members achieve competency with the Sentinel SIEM platform.
+
+<!-- TABLE_CONFIG: widths=[10, 28, 17, 10, 15, 20] -->
+| ID | Module Name | Audience | Hours | Format | Prerequisites |
+|----|-------------|----------|-------|--------|---------------|
+| T1 | Sentinel Fundamentals | SOC Analysts | 4 | Workshop | Azure basics |
+| T2 | KQL Query Development | Senior Analysts | 4 | Workshop | T1 complete |
+| T3 | Playbook Operations | Automation Team | 2 | Workshop | Logic Apps basics |
+| T4 | Administration | Platform Admins | 4 | Workshop | Azure admin |
+| T5 | Threat Hunting | Security Engineers | 4 | Workshop | T2 complete |
+
+## Training Materials
+
+The following training materials are provided:
+
+- **SOC Analyst Guide:** `/delivery/training/soc-analyst-guide.pdf`
+- **KQL Reference:** `/delivery/training/kql-reference.pdf`
+- **Playbook Operations:** `/delivery/training/playbook-operations.pdf`
+- **Admin Guide:** `/delivery/training/admin-guide.pdf`
+
+## Training Validation
+
+Training completion is validated through:
+- Hands-on lab exercises
+- Practical assessments
+- Knowledge checks
+- Certification tracking
+
+# Appendices
+
+## Appendix A: Deployment Checklist
+
+### Pre-Deployment
+
+- [ ] Azure subscription access confirmed
+- [ ] Required permissions assigned
+- [ ] Service quotas verified
+- [ ] Network connectivity tested
+- [ ] Security approvals obtained
+
+### Deployment
+
+- [ ] Resource group created
+- [ ] Log Analytics workspace deployed
+- [ ] Sentinel enabled
+- [ ] Data connectors configured
+- [ ] Analytics rules deployed
+- [ ] Playbooks created and tested
+
+### Post-Deployment
+
+- [ ] Functional testing complete
+- [ ] Security validation complete
+- [ ] Training delivered
+- [ ] Documentation handed over
+- [ ] Support transition complete
+
+## Appendix B: Configuration Reference
+
+### Resource Naming Convention
+
+<!-- TABLE_CONFIG: widths=[25, 30, 45] -->
+| Resource Type | Pattern | Example |
+|---------------|---------|---------|
+| Resource Group | rg-{solution}-{env}-{region}-{###} | rg-sentinel-prod-eus-001 |
+| Log Analytics | log-{solution}-{env}-{###} | log-sentinel-prod-001 |
+| Logic App | la-{solution}-{function}-{###} | la-sentinel-enrich-ip-001 |
+| Key Vault | kv-{solution}-{env}-{###} | kv-sentinel-prod-001 |
+
+### Environment Parameters
+
+<!-- TABLE_CONFIG: widths=[30, 35, 35] -->
+| Parameter | Development | Production |
+|-----------|-------------|------------|
+| Retention Days | 30 | 90 |
+| Daily Cap (GB) | 10 | 500 |
+| Commitment Tier | None | 500GB/day |
+| Archive Enabled | No | Yes |
+
+## Appendix C: Troubleshooting Guide
+
+### Common Issues
+
+**Issue: Data connector not ingesting**
+- Verify connector permissions
+- Check diagnostic settings
+- Review connector status in Azure Portal
+
+**Issue: Analytics rule not firing**
+- Validate KQL query syntax
+- Check query time range
+- Verify data exists in source table
+
+**Issue: Playbook not executing**
+- Check Logic App run history
+- Verify API connections
+- Review trigger conditions
+
+---
+
+**Document Version**: 2.0
+**Last Updated**: [DATE]
+**Prepared By**: Implementation Team
+**Review Status**: Approved

@@ -1,283 +1,444 @@
-# Azure Sentinel SIEM - Detailed Design Document
+---
+document_title: Detailed Design Document
+solution_name: Azure Sentinel SIEM
+document_version: "2.0"
+author: "[ARCHITECT]"
+last_updated: "[DATE]"
+technology_provider: azure
+client_name: "[CLIENT]"
+client_logo: ../../assets/logos/client_logo.png
+vendor_logo: ../../assets/logos/consulting_company_logo.png
+eoframework_logo: ../../assets/logos/eo-framework-logo-real.png
+---
 
-## Executive Summary
+# Executive Summary
 
-This detailed design document provides comprehensive technical specifications for the Azure Sentinel SIEM solution implementation. The design focuses on creating a cloud-native security information and event management platform that provides AI-powered threat detection, automated incident response, and scalable security operations capabilities for financial services, healthcare, government, and critical infrastructure organizations.
+This document provides the comprehensive technical design for the Azure Sentinel SIEM solution. It covers the target-state architecture leveraging Microsoft Sentinel for cloud-native security information and event management, Azure Log Analytics for data ingestion and analysis, and Azure Logic Apps for security orchestration and automated response (SOAR). The design delivers AI-powered threat detection, unified security visibility, and automated incident response capabilities.
 
-### Solution Overview
-- **Primary Service**: Azure Sentinel with advanced analytics and AI-powered detection
-- **Architecture Pattern**: Cloud-native SIEM with microservices integration
-- **Target Industries**: Financial services, healthcare, government, critical infrastructure
-- **Scale**: Petabyte-scale data ingestion and processing
-- **Deployment Model**: Multi-tenant, geographically distributed
+## Purpose
 
-## Architecture Overview
+Define the technical architecture and design specifications that will guide the implementation team through deployment, configuration, and validation of the enterprise SIEM/SOAR solution on Microsoft Azure.
 
-### Design Principles
-- **Security First**: Defense-in-depth security architecture with zero-trust principles
-- **Scalability**: Horizontal and vertical scaling capabilities for petabyte-scale data
-- **Reliability**: High availability and disaster recovery with 99.99% uptime SLA
-- **Performance**: Optimized for real-time threat detection and sub-second query response
-- **Compliance**: Industry standard compliance frameworks (SOC 2, ISO 27001, FISMA)
-- **Innovation**: Modern cloud-native design patterns with AI/ML integration
+## Scope
 
-### Core Architecture Components
+**In-scope:**
+- Azure Sentinel workspace deployment and configuration
+- Data connector integration for 15+ security sources
+- Analytics rules deployment (50+ built-in and custom rules)
+- SOAR playbook development (12 Logic App workflows)
+- Threat intelligence feed integration
+- Security operations center (SOC) workflow enablement
+- Compliance monitoring and reporting dashboards
 
-#### Primary SIEM Components
-- **Azure Sentinel**: Primary SIEM service with advanced analytics engine
-- **Azure Monitor**: Centralized monitoring and metrics collection
-- **Log Analytics Workspace**: Data ingestion and query engine
-- **Azure Security Center**: Integrated security posture management
-- **Microsoft Defender for Cloud**: Advanced threat protection
+**Out-of-scope:**
+- End-user training (covered in Implementation Guide)
+- Ongoing managed security services (separate engagement)
+- Custom machine learning model development
+- Third-party SIEM replacement (parallel operation)
 
-#### Supporting Services
-- **Azure Logic Apps**: Security orchestration and automated response
-- **Azure Functions**: Custom security functions and integrations
-- **Azure Key Vault**: Secure credential and certificate management
-- **Azure Storage**: Long-term data retention and cold storage
-- **Azure Event Hubs**: High-throughput data ingestion streaming
+## Assumptions & Constraints
 
-#### Data Sources and Connectors
-- **Microsoft 365 Defender**: Endpoint, email, and collaboration security
-- **Azure Active Directory**: Identity and access management logs
-- **Network Security Groups**: Network traffic and security events
-- **Azure Firewall**: Network security and traffic filtering
-- **Third-party SIEM connectors**: Integration with existing security tools
+The following assumptions underpin the design and must be validated during implementation.
 
-## Data Flow Architecture
+- Azure subscription with appropriate service quotas established
+- Azure AD tenant configured with appropriate licensing (E5 or equivalent)
+- Network connectivity for data source integration available
+- Security team has approved the proposed detection rules and playbooks
+- SOC team available for training and knowledge transfer
+- Data ingestion volume estimate: 500GB/day (scalable to 2TB/day)
 
-### Security Event Processing Pipeline
-1. **Data Ingestion**: Multi-source security data collection through native and custom connectors
-2. **Data Normalization**: Common Event Format (CEF) and structured data transformation
-3. **Enrichment**: Threat intelligence integration and contextual data augmentation
-4. **Analytics Engine**: AI-powered behavioral analysis and anomaly detection
-5. **Correlation**: Cross-source event correlation and pattern recognition
-6. **Alerting**: Intelligent alert generation with severity classification
-7. **Response**: Automated incident response and security orchestration
+## References
 
-### Data Flow Patterns
+This document should be read in conjunction with the following related materials.
+
+- Statement of Work (SOW)
+- Discovery Questionnaire responses
+- Microsoft Security Best Practices documentation
+- MITRE ATT&CK Framework mapping
+
+# Business Context
+
+This section establishes the business drivers, success criteria, and compliance requirements that shape the technical design decisions.
+
+## Business Drivers
+
+The solution addresses the following key business objectives identified during discovery.
+
+- **Threat Detection:** Reduce mean time to detect (MTTD) from hours to minutes using AI-powered analytics
+- **Incident Response:** Reduce mean time to respond (MTTR) by 90% through automated playbooks
+- **Unified Visibility:** Consolidate security monitoring across cloud, on-premises, and hybrid environments
+- **Cost Optimization:** Reduce security tool sprawl through platform consolidation
+- **Compliance:** Meet regulatory requirements for security monitoring and audit trails
+
+## Workload Criticality & SLA Expectations
+
+The following service level targets define the operational requirements for the production environment and guide infrastructure sizing decisions.
+
+<!-- TABLE_CONFIG: widths=[25, 25, 25, 25] -->
+| Metric | Target | Measurement | Priority |
+|--------|--------|-------------|----------|
+| Availability | 99.9% | Azure Service Health | Critical |
+| MTTD | < 15 minutes | Custom KPI dashboard | Critical |
+| MTTR | < 60 minutes | Incident tracking | High |
+| Detection Accuracy | > 95% | Validation testing | Critical |
+| False Positive Rate | < 50% | Alert analysis | High |
+| Query Response | < 30 seconds | Log Analytics metrics | Medium |
+
+## Compliance & Regulatory Factors
+
+The solution must adhere to the following regulatory and compliance requirements.
+
+- SOC 2 Type II compliance required for all security operations
+- Data encryption at rest (AES-256) and in transit (TLS 1.2+) mandatory
+- Audit logging required for all administrative and investigative activities
+- Data retention policies: 90 days hot, 2 years archive (configurable per regulation)
+- GDPR, HIPAA, PCI DSS compliance controls as applicable
+
+## Success Criteria
+
+Project success will be measured against the following criteria at go-live.
+
+- 15+ data connectors configured and ingesting data
+- 50+ analytics rules deployed and generating alerts
+- 12 SOAR playbooks operational with automated response
+- MTTD below 15-minute target validated through testing
+- SOC team trained and operational on platform
+
+# Current-State Assessment
+
+This section documents the existing security monitoring environment and identifies gaps addressed by the solution.
+
+## Existing Security Tools
+
+### N/A - Greenfield Implementation
+
+This implementation represents a new security monitoring capability. The following legacy tools may operate in parallel during transition:
+
+- On-premises SIEM (if applicable): Parallel operation during 30-day hypercare
+- Endpoint protection: Integration via Defender for Endpoint connector
+- Network security: Firewall log forwarding via CEF/Syslog
+- Identity: Azure AD sign-in and audit log integration
+
+## Gap Analysis
+
+<!-- TABLE_CONFIG: widths=[25, 35, 40] -->
+| Capability | Current State | Target State |
+|------------|---------------|--------------|
+| Threat Detection | Manual analysis, 4+ hour MTTD | AI-powered, <15 minute MTTD |
+| Incident Response | Manual procedures, 4+ hour MTTR | Automated playbooks, <60 minute MTTR |
+| Visibility | Fragmented tools, limited correlation | Unified platform, cross-source correlation |
+| Compliance | Manual reporting | Automated compliance dashboards |
+| Threat Intelligence | Limited integration | 10+ TI feeds integrated |
+
+# Solution Architecture
+
+This section provides the comprehensive technical architecture for the Azure Sentinel SIEM solution.
+
+## Architecture Diagram
+
+![Solution Architecture](../../assets/diagrams/architecture-diagram.png)
+
+## Design Principles
+
+- **Security First:** Defense-in-depth architecture with zero-trust principles
+- **Scalability:** Cloud-native design supporting petabyte-scale data ingestion
+- **Reliability:** High availability with 99.9% SLA leveraging Azure platform
+- **Performance:** Optimized for real-time threat detection and rapid query response
+- **Compliance:** Built-in compliance controls and audit capabilities
+
+## Core Components
+
+### Azure Sentinel
+
+Primary SIEM/SOAR service providing:
+- Cloud-native security analytics platform
+- AI-powered threat detection using Fusion ML
+- Built-in SOAR capabilities via Logic Apps
+- UEBA (User and Entity Behavior Analytics)
+- Integration with Microsoft security ecosystem
+
+### Log Analytics Workspace
+
+Data ingestion and query engine providing:
+- Centralized log collection and storage
+- KQL (Kusto Query Language) analytics
+- Configurable retention policies (90 days hot, 2 years archive)
+- Performance tier: PerGB2018 with commitment tier pricing
+
+### Azure Logic Apps
+
+Security orchestration providing:
+- Automated incident response playbooks
+- Integration with external systems (ServiceNow, Teams)
+- Custom workflow automation
+- API-based security actions
+
+## Data Sources Architecture
+
+### Native Microsoft Connectors
+- **Azure AD:** Sign-in logs, audit logs, risky sign-ins
+- **Microsoft 365 Defender:** Endpoint, email, identity protection
+- **Office 365:** Exchange, SharePoint, Teams activity
+- **Defender for Cloud:** Security alerts, recommendations
+- **Azure Activity:** Subscription-level operations
+
+### Infrastructure Connectors
+- **Azure Firewall:** Network traffic and threat logs
+- **NSG Flow Logs:** Network security group traffic
+- **Azure DNS:** DNS query logs
+- **Key Vault:** Access and operations audit
+
+### Third-Party Connectors
+- **CEF/Syslog:** Firewall, proxy, network devices
+- **REST API:** Custom application integration
+- **Threat Intelligence:** STIX/TAXII feeds
+
+## Analytics Architecture
+
+### Detection Layers
+1. **Scheduled Analytics Rules:** KQL-based pattern detection
+2. **Fusion ML:** AI-powered multi-stage attack detection
+3. **UEBA:** Behavioral anomaly detection for users/entities
+4. **Threat Intelligence:** IoC matching across data sources
+
+### Rule Categories
+- Microsoft Security: 30 built-in high-fidelity rules
+- Custom Rules: 20 organization-specific detections
+- UEBA Rules: Behavioral analytics rules
+- Threat Intelligence Rules: IoC-based detection
+
+# Security & Compliance
+
+This section details the security controls and compliance implementation.
+
+## Identity & Access Management
+
+### RBAC Configuration
+
+<!-- TABLE_CONFIG: widths=[25, 35, 40] -->
+| Role | Permissions | Assignment |
+|------|-------------|------------|
+| Microsoft Sentinel Contributor | Full Sentinel access | Security Admins |
+| Microsoft Sentinel Reader | Read-only access | SOC Analysts |
+| Logic App Contributor | Playbook management | Automation Engineers |
+| Log Analytics Contributor | Workspace management | Platform Admins |
+
+### Privileged Access
+- Multi-factor authentication required for all admin access
+- Just-in-time (JIT) access for elevated permissions
+- Conditional Access policies enforcing device compliance
+- Regular access reviews and certification
+
+## Data Protection
+
+### Encryption Standards
+- **At Rest:** AES-256 encryption via Azure Storage Service Encryption
+- **In Transit:** TLS 1.2+ for all data transmission
+- **Key Management:** Azure Key Vault for customer-managed keys (optional)
+
+### Data Retention
+- Hot storage: 90 days (queryable, fast access)
+- Archive storage: 2 years (compliance retention)
+- Immutable storage available for legal hold requirements
+
+## Audit & Monitoring
+
+### Activity Logging
+- All administrative actions logged to Azure Activity Log
+- Sentinel workspace operations audited
+- Playbook executions tracked in Logic Apps run history
+- User investigation activities captured
+
+### Compliance Dashboards
+- Built-in compliance workbooks (CIS, NIST, ISO 27001)
+- Custom compliance reporting
+- Automated compliance scoring
+
+# Data Architecture
+
+This section documents the data flow, storage, and management design.
+
+## Data Ingestion Pipeline
+
 ```
-[Data Sources] → [Connectors] → [Log Analytics] → [Analytics Rules] → [Incidents] → [Playbooks] → [Response Actions]
+[Data Sources] → [Connectors] → [Log Analytics] → [Analytics Rules] → [Incidents]
                                       ↓
-[Threat Intelligence] → [Enrichment] → [Correlation Engine] → [MITRE ATT&CK Mapping]
+[Threat Intelligence] → [Enrichment] → [Correlation Engine] → [MITRE ATT&CK]
 ```
 
-### Scalability Architecture
-- **Horizontal Scaling**: Auto-scaling compute clusters for analytics processing
-- **Vertical Scaling**: Dynamic resource allocation based on data volume
-- **Geographic Distribution**: Multi-region deployment for data residency
-- **Load Balancing**: Intelligent workload distribution across processing nodes
+## Data Flow Design
 
-## Security Architecture
+### Ingestion Path
+1. **Native Connectors:** Direct API integration (Office 365, Azure AD)
+2. **Agent-Based:** Azure Monitor Agent for Windows/Linux servers
+3. **CEF/Syslog:** Log forwarder for third-party devices
+4. **REST API:** Custom integration for applications
 
-### Defense-in-Depth Security Model
-1. **Network Security**: Network segmentation, microsegmentation, and traffic inspection
-2. **Identity Security**: Multi-factor authentication, privileged access management
-3. **Application Security**: Application-layer security and API protection
-4. **Data Security**: Encryption at rest and in transit, data loss prevention
-5. **Infrastructure Security**: Infrastructure as Code security scanning
-6. **Monitoring**: Continuous security monitoring and behavioral analytics
+### Processing Pipeline
+1. **Normalization:** ASIM (Advanced Security Information Model)
+2. **Enrichment:** Threat intelligence correlation
+3. **Analytics:** Real-time rule evaluation
+4. **Storage:** Log Analytics workspace retention
 
-### Threat Detection Capabilities
-- **Advanced Persistent Threats (APT)**: Multi-stage attack detection
-- **Insider Threats**: Behavioral analytics for privileged user monitoring
-- **Ransomware Detection**: File encryption pattern analysis
-- **Data Exfiltration**: Unusual data access and transfer detection
-- **Account Compromise**: Credential stuffing and account takeover detection
-- **Cloud-specific Threats**: Cloud infrastructure and service abuse
+## Storage Tiers
 
-### Compliance Framework Integration
-- **SOC 2 Type II**: Security, availability, processing integrity controls
-- **ISO 27001**: Information security management system compliance
-- **PCI DSS**: Payment card industry security requirements
-- **HIPAA**: Healthcare data protection and privacy compliance
-- **FISMA**: Federal information security management controls
-- **GDPR**: Data protection and privacy regulations compliance
+<!-- TABLE_CONFIG: widths=[20, 25, 30, 25] -->
+| Tier | Retention | Use Case | Cost Model |
+|------|-----------|----------|------------|
+| Hot | 90 days | Active investigation | PerGB ingestion |
+| Archive | 2 years | Compliance/forensics | Archive rates |
+| Export | Custom | Long-term archive | Storage account |
 
-## Technical Specifications
+# Integration Design
 
-### Compute and Storage Requirements
-- **Analytics Engine**: Premium tier Log Analytics workspace with dedicated compute
-- **Storage Tiers**: Hot (90 days), Warm (2 years), Archive (7+ years)
-- **Processing Power**: Auto-scaling compute clusters with GPU acceleration for ML
-- **Network Bandwidth**: 10Gbps minimum for high-volume data ingestion
+This section documents external system integrations.
 
-### Data Retention and Management
-- **Security Events**: 2+ years hot storage, 7+ years archive
-- **Compliance Logs**: Configurable retention per regulatory requirements
-- **Forensic Data**: Immutable storage with legal hold capabilities
-- **Audit Trails**: Comprehensive activity logging and chain of custody
+## SOAR Integrations
 
-### Performance Characteristics
-- **Data Ingestion Rate**: 100TB+ per day sustained throughput
-- **Query Response Time**: Sub-second for standard queries, <30 seconds for complex analytics
-- **Alert Generation**: Real-time processing with <60 second detection latency
-- **Dashboard Loading**: <5 seconds for standard security dashboards
+### ServiceNow Integration
+- Automated incident ticket creation
+- Bi-directional status synchronization
+- Priority mapping from Sentinel severity
 
-## Integration Architecture
+### Microsoft Teams Integration
+- Real-time alert notifications to SOC channel
+- Adaptive cards for incident details
+- Interactive approval workflows
 
-### Native Microsoft Integrations
-- **Microsoft 365 Defender**: Unified security across endpoints, email, and cloud apps
-- **Azure Active Directory**: Identity and access management integration
-- **Microsoft Cloud App Security**: Cloud application security posture management
-- **Azure Policy**: Governance and compliance automation
-- **Microsoft Threat Intelligence**: Global threat intelligence integration
+### Email Integration
+- Critical alert notifications
+- Executive summary reports
+- Escalation notifications
 
-### Third-party Security Tool Integrations
-- **SIEM/SOAR Platforms**: Splunk, IBM QRadar, Phantom integration
-- **Endpoint Detection**: CrowdStrike, SentinelOne, Carbon Black
-- **Network Security**: Palo Alto Networks, Fortinet, Cisco ASA
-- **Vulnerability Management**: Qualys, Rapid7, Tenable
-- **Threat Intelligence**: ThreatConnect, Recorded Future, Anomali
+## API Integration
 
-### Custom Integration Capabilities
-- **REST API**: Comprehensive REST API for custom integrations
-- **Azure Logic Apps**: Low-code integration platform for security workflows
-- **Custom Connectors**: SDK for building custom data source connectors
-- **Webhook Integration**: Real-time event streaming to external systems
+### Sentinel REST API
+- Custom application integration
+- Automated rule management
+- Incident lifecycle automation
 
-## Operational Architecture
+### Log Analytics Query API
+- Programmatic data access
+- Custom reporting integration
+- External dashboard connectivity
 
-### Security Operations Center (SOC) Integration
-- **24/7 SOC Dashboard**: Real-time security posture visualization
-- **Incident Management**: Automated incident creation and lifecycle management
-- **Case Management**: Investigation workflow and evidence collection
-- **Threat Hunting**: Interactive hunting queries and saved hunting sessions
+# Infrastructure & Operations
 
-### Automation and Orchestration
-- **Security Playbooks**: Automated response to common security scenarios
-- **Custom Logic Apps**: Workflow automation for security processes
-- **API Integration**: Automated actions across security tool ecosystem
-- **Machine Learning**: Behavioral analytics and anomaly detection
+This section documents operational architecture and management procedures.
 
-### Monitoring and Alerting
-- **Real-time Monitoring**: Continuous security event monitoring
-- **Intelligent Alerting**: ML-powered alert prioritization and noise reduction
-- **Escalation Management**: Automated escalation based on severity and impact
-- **Performance Metrics**: System health and performance monitoring
+## High Availability
 
-## High Availability and Disaster Recovery
+### Platform Resilience
+- Azure Sentinel: 99.9% SLA (Azure-managed)
+- Log Analytics: Zone-redundant storage
+- Logic Apps: Multi-zone deployment
 
-### Availability Design
-- **Multi-Zone Deployment**: Resources distributed across availability zones
-- **Service Redundancy**: Elimination of single points of failure
-- **Health Monitoring**: Automated health checks and failover mechanisms
-- **Load Distribution**: Intelligent traffic distribution across healthy instances
-- **SLA Target**: 99.99% availability with <4 hour recovery time objective
+### Disaster Recovery
+- Data replicated across Azure storage redundancy
+- Configuration exported as Infrastructure as Code
+- Recovery procedures documented in runbook
 
-### Disaster Recovery Strategy
-- **Geographic Replication**: Multi-region data replication
-- **Backup and Restore**: Automated backup with point-in-time recovery
-- **Failover Procedures**: Documented and tested failover processes
-- **Business Continuity**: Minimal impact to security operations during failures
+## Monitoring & Alerting
 
-### Data Protection and Backup
-- **Automated Backups**: Daily automated backups with retention policies
-- **Cross-region Replication**: Geographically distributed backup storage
-- **Recovery Testing**: Regular disaster recovery testing and validation
-- **Data Integrity**: Checksums and verification for data consistency
+### Platform Health
+- Azure Service Health integration
+- Ingestion lag monitoring
+- Connector health alerts
 
-## Security Controls and Hardening
+### Key Metrics
 
-### Access Controls
-- **Role-based Access Control (RBAC)**: Granular permissions for SIEM access
-- **Privileged Access Management**: Administrative access controls
-- **Multi-factor Authentication**: Required for all administrative access
-- **Just-in-time Access**: Temporary elevated access for specific operations
+<!-- TABLE_CONFIG: widths=[30, 25, 25, 20] -->
+| Metric | Threshold | Alert Severity | Response |
+|--------|-----------|----------------|----------|
+| Ingestion Lag | > 15 minutes | Warning | Investigate connector |
+| Query Latency | > 60 seconds | Warning | Review query efficiency |
+| Playbook Failures | > 5% | Critical | Check Logic App logs |
+| Daily Ingestion | > 90% cap | Warning | Increase commitment tier |
 
-### Data Protection
-- **Encryption at Rest**: AES-256 encryption for all stored security data
-- **Encryption in Transit**: TLS 1.3 for all data transmission
-- **Key Management**: Azure Key Vault integration for encryption keys
-- **Data Masking**: Sensitive data protection in non-production environments
+## Capacity Planning
 
-### Network Security
-- **Network Segmentation**: Isolated security zones for SIEM infrastructure
-- **Firewall Rules**: Strict ingress and egress traffic controls
-- **VPN Access**: Secure remote access for administrators
-- **DDoS Protection**: Built-in DDoS protection for public endpoints
+### Current Sizing
+- Estimated daily ingestion: 500GB/day
+- Commitment tier: 500GB/day
+- Projected growth: 20% annually
 
-## Cost Optimization
+### Scaling Triggers
+- Ingestion consistently >80% of commitment tier
+- Query performance degradation
+- New data source onboarding
 
-### Resource Optimization Strategies
-- **Data Tiering**: Intelligent data lifecycle management across storage tiers
-- **Auto-scaling**: Dynamic resource scaling based on workload demands
-- **Reserved Capacity**: Cost optimization through capacity reservations
-- **Usage Monitoring**: Continuous cost monitoring and optimization alerts
+# Implementation Approach
 
-### Cost Management Features
-- **Budget Controls**: Automated budget alerts and spending controls
-- **Resource Tagging**: Cost allocation and chargeback capabilities
-- **Optimization Recommendations**: AI-powered cost optimization suggestions
-- **Usage Analytics**: Detailed usage analysis and cost attribution
+This section outlines the phased implementation methodology.
 
-## Implementation Considerations
+## Phase Overview
 
-### Migration Strategy
-- **Assessment Phase**: Current SIEM assessment and gap analysis
-- **Pilot Deployment**: Limited scope proof-of-concept implementation
-- **Phased Migration**: Gradual migration of data sources and use cases
-- **Parallel Operation**: Side-by-side operation during transition period
-- **Cutover Planning**: Coordinated cutover with rollback procedures
+<!-- TABLE_CONFIG: widths=[15, 30, 30, 25] -->
+| Phase | Activities | Duration | Exit Criteria |
+|-------|------------|----------|---------------|
+| 1 | Foundation & Workspace | Weeks 1-4 | Sentinel enabled, RBAC configured |
+| 2 | Data Connectors | Weeks 5-8 | 15+ connectors ingesting |
+| 3 | Analytics & Detection | Weeks 9-12 | 50+ rules deployed, tuned |
+| 4 | Automation & SOAR | Weeks 13-16 | 12 playbooks operational |
+| 5 | Testing & Validation | Weeks 17-18 | All tests passing |
+| 6 | Go-Live & Hypercare | Weeks 19-22 | Production stable |
 
-### Data Migration
-- **Historical Data**: Selective migration of historical security data
-- **Real-time Streaming**: Live data source cutover with minimal downtime
-- **Data Validation**: Comprehensive data integrity and completeness validation
-- **Performance Optimization**: Query optimization and index management
+## Risk Mitigation
 
-### Integration Testing
-- **Unit Testing**: Individual component functionality testing
-- **Integration Testing**: End-to-end security workflow testing
-- **Performance Testing**: Load testing for scale and performance validation
-- **Security Testing**: Vulnerability assessment and penetration testing
+<!-- TABLE_CONFIG: widths=[25, 35, 40] -->
+| Risk | Impact | Mitigation |
+|------|--------|------------|
+| Data ingestion delays | Detection gaps | Parallel connector testing |
+| High false positive rate | SOC fatigue | Iterative rule tuning |
+| Integration failures | Automation gaps | Staged playbook deployment |
+| Performance issues | Query delays | Capacity planning validation |
 
-## Performance Monitoring and Optimization
+# Appendices
 
-### Key Performance Indicators (KPIs)
-- **Mean Time to Detection (MTTD)**: <5 minutes for critical threats
-- **Mean Time to Response (MTTR)**: <30 minutes for security incidents
-- **False Positive Rate**: <5% for security alerts
-- **Query Performance**: <30 seconds for 90% of security queries
-- **System Availability**: 99.99% uptime with planned maintenance windows
+## Appendix A: Analytics Rule Catalog
 
-### Performance Optimization
-- **Query Optimization**: Automatic query optimization and caching
-- **Data Partitioning**: Time-based and size-based data partitioning
-- **Index Management**: Automated index creation and maintenance
-- **Resource Scaling**: Predictive scaling based on historical patterns
+The complete analytics rule catalog is maintained in `/delivery/docs/analytics-rules.md` and includes:
+- 30 Microsoft built-in rules (high-fidelity)
+- 20 custom organization-specific rules
+- MITRE ATT&CK mapping for all rules
+- Tuning guidance and threshold recommendations
 
-### Monitoring and Alerting
-- **Real-time Dashboards**: Executive and operational dashboards
-- **Performance Metrics**: System performance and health monitoring
-- **Capacity Planning**: Proactive capacity management and forecasting
-- **Alert Management**: Intelligent alert correlation and noise reduction
+## Appendix B: Data Connector Reference
 
-## Compliance and Governance
+<!-- TABLE_CONFIG: widths=[25, 25, 25, 25] -->
+| Connector | Data Tables | Volume Est. | Priority |
+|-----------|-------------|-------------|----------|
+| Azure AD | SigninLogs, AuditLogs | 50GB/day | Critical |
+| Office 365 | OfficeActivity | 100GB/day | Critical |
+| Defender for Endpoint | DeviceEvents | 150GB/day | Critical |
+| Defender for Cloud | SecurityAlert | 10GB/day | High |
+| Azure Firewall | AzureDiagnostics | 100GB/day | High |
+| CEF/Syslog | CommonSecurityLog | 90GB/day | Medium |
 
-### Regulatory Compliance
-- **Audit Logging**: Comprehensive audit trail for all security activities
-- **Data Residency**: Geographic data controls for regulatory compliance
-- **Retention Policies**: Configurable retention for regulatory requirements
-- **Compliance Reporting**: Automated compliance report generation
+## Appendix C: SOAR Playbook Reference
 
-### Data Governance
-- **Data Classification**: Automated data classification and labeling
-- **Privacy Controls**: Data anonymization and pseudonymization
-- **Access Governance**: Regular access reviews and certification
-- **Data Lifecycle**: Automated data lifecycle management
+<!-- TABLE_CONFIG: widths=[30, 40, 30] -->
+| Playbook | Function | Trigger |
+|----------|----------|---------|
+| Enrich-IP-Address | IP reputation lookup | High severity alert |
+| Enrich-User-Identity | User risk assessment | User-related incident |
+| Block-IP-Firewall | Automated IP blocking | Confirmed malicious IP |
+| Disable-User-Account | Account disable action | Confirmed compromise |
+| Create-ServiceNow-Ticket | ITSM integration | All incidents |
+| Notify-SOC-Teams | Teams notification | High/Critical severity |
 
-### Risk Management
-- **Risk Assessment**: Regular security risk assessments and updates
-- **Threat Modeling**: Systematic threat analysis and mitigation planning
-- **Vulnerability Management**: Integrated vulnerability assessment and remediation
-- **Incident Response**: Documented incident response procedures and playbooks
+## Appendix D: Compliance Mapping
+
+The solution supports the following compliance frameworks with built-in workbooks:
+- **SOC 2:** Security, availability, processing integrity controls
+- **ISO 27001:** Information security management controls
+- **NIST CSF:** Identify, Protect, Detect, Respond, Recover
+- **CIS Controls:** Critical security controls mapping
+- **MITRE ATT&CK:** Technique detection coverage
 
 ---
 
 **Document Version**: 2.0
-**Last Updated**: January 2025
+**Last Updated**: [DATE]
 **Prepared By**: Solution Architecture Team
-**Review Status**: Approved by Security Architecture Review Board
-
-**Next Steps**: Proceed to Implementation Guide for detailed deployment procedures and configuration specifications.
+**Review Status**: Approved
