@@ -1,7 +1,35 @@
-Test_Phase,Test_Category,Test_ID,Test_Name,Description,Prerequisites,Expected_Result,Priority,Duration,Responsible_Team
-Hardware Testing,Component Validation,HW001,Hardware POST Test,Verify all hardware components pass Power-On Self Test,Hardware installed and connected,All components pass POST without errors,High,30 minutes,Hardware Team
-Hardware Testing,Performance Testing,HW002,CPU Performance Validation,Validate CPU performance meets specifications,System fully operational,CPU benchmarks within 5% of specifications,High,60 minutes,Performance Team
-Hardware Testing,Memory Testing,HW003,Memory Stress Test,Comprehensive memory testing under load,Hardware configuration complete,Memory passes all stress tests without errors,High,120 minutes,QA Team
-Network Testing,Connectivity Testing,NET001,Network Interface Validation,Test all network interfaces and connectivity,Network configuration complete,All interfaces operational with expected throughput,High,45 minutes,Network Team
-Management Testing,Dell Integration,MGMT001,iDRAC Functionality Test,Validate iDRAC management capabilities,iDRAC configured and accessible,All management functions operational,Medium,60 minutes,Systems Team
-Security Testing,Security Validation,SEC001,TPM and Secure Boot Test,Verify security features are properly configured,Security policies applied,Security features operational and compliant,High,30 minutes,Security Team
+# Functional Tests
+#WIDTH: 10,14,28,38,30,44,38,10,12
+#ALIGN: left,left,left,left,left,left,left,center,center
+Test ID,Test Type,Test Name,Description,Pre-conditions,Test Steps,Expected Results,Priority,Status
+FT-001,Unit,VxRail Node Power-On,Validate all 4 VxRail E560 nodes power on and complete POST,Hardware racked and cabled,1. Power on each node; 2. Verify POST completes; 3. Check iDRAC status; 4. Verify all components detected,All nodes POST successfully with all components healthy,High,Not Started
+FT-002,Unit,ESXi Host Detection,Validate ESXi 8 installed and operational on each node,VxRail Manager initialized,1. Access VxRail Manager; 2. Verify each host status; 3. Check ESXi version; 4. Validate vmkernel ports,All 4 ESXi hosts showing online with correct version,High,Not Started
+FT-003,Unit,vSAN Disk Group Creation,Validate vSAN disk groups created with cache and capacity tiers,ESXi hosts operational,1. Access vCenter vSAN UI; 2. Verify disk groups per host; 3. Check cache tier; 4. Check capacity tier,Each node shows disk group with cache and capacity disks,High,Not Started
+FT-004,Integration,vCenter Cluster Formation,Validate vSphere cluster created with all VxRail hosts,vCenter deployed,1. Access vCenter; 2. Navigate to cluster; 3. Verify all 4 hosts; 4. Check HA and DRS status,Cluster shows 4 hosts with HA and DRS enabled,High,Not Started
+FT-005,Integration,vSAN Datastore Creation,Validate vSAN datastore available to all hosts,vSAN disk groups created,1. Check vSAN datastore in vCenter; 2. Verify capacity; 3. Check mount status; 4. Test write operation,40TB vSAN datastore accessible from all hosts,High,Not Started
+FT-006,Integration,Distributed Switch Config,Validate VDS configured with proper port groups,Network VLANs configured,1. Check VDS in vCenter; 2. Verify port groups; 3. Test VM network connectivity; 4. Validate uplinks,VDS with management vMotion vSAN and VM port groups,High,Not Started
+FT-007,System,VM Deployment,Validate VMs can be deployed to vSAN datastore,vSAN datastore available,1. Deploy test VM; 2. Select vSAN storage; 3. Power on VM; 4. Validate network,VM deploys and operates on vSAN storage successfully,High,Not Started
+FT-008,System,Veeam Backup Integration,Validate Veeam can backup VMs from VxRail cluster,Veeam server connected,1. Add VxRail vCenter to Veeam; 2. Create backup job; 3. Run backup; 4. Verify completion,Veeam successfully backs up VMs from vSAN datastore,Medium,Not Started
+
+# Non-Functional Tests
+#WIDTH: 10,14,26,38,30,48,42,10,12
+#ALIGN: left,left,left,left,left,left,left,center,center
+Test ID,Test Type,Test Name,Description,Pre-conditions,Test Steps,Expected Results,Priority,Status
+NFT-001,Performance,vSAN IOPS Benchmark,Validate vSAN cluster achieves target IOPS performance,Cluster operational with VMs,1. Deploy HCIBench appliance; 2. Configure 4K random workload; 3. Run 30-minute test; 4. Record results,vSAN achieves 10000+ IOPS per VM with mixed workload,Critical,Not Started
+NFT-002,Performance,vSAN Latency Test,Validate vSAN read and write latency meets targets,HCIBench deployed,1. Configure latency-focused workload; 2. Run 70% read 30% write; 3. Measure average latency; 4. Check 99th percentile,Average latency under 2ms with 99th percentile under 5ms,Critical,Not Started
+NFT-003,Performance,vMotion Throughput,Validate vMotion can migrate VMs at acceptable speed,VMs running on cluster,1. Initiate vMotion of 10GB VM; 2. Measure migration time; 3. Test concurrent migrations; 4. Validate no service disruption,vMotion completes in under 30 seconds for 10GB VM,High,Not Started
+NFT-004,Performance,Network Throughput,Validate 25GbE network achieves expected throughput,Network cabling complete,1. Run iperf3 between hosts; 2. Test vSAN network bandwidth; 3. Measure aggregate throughput; 4. Check for packet loss,25GbE links achieve 24+ Gbps with zero packet loss,High,Not Started
+NFT-005,Reliability,vSphere HA Failover,Validate HA restarts VMs after simulated host failure,HA enabled on cluster,1. Power off one ESXi host; 2. Monitor VM restart on other hosts; 3. Measure failover time; 4. Verify VM accessibility,VMs restart on remaining hosts within 2 minutes,Critical,Not Started
+NFT-006,Reliability,vSAN Rebuild Test,Validate vSAN rebuilds data after disk failure simulation,vSAN healthy,1. Simulate disk failure via maintenance; 2. Monitor rebuild progress; 3. Verify data integrity; 4. Confirm capacity restoration,vSAN rebuilds data automatically with zero data loss,High,Not Started
+NFT-007,Security,vSAN Encryption Verify,Validate vSAN encryption at rest is enabled and functional,Encryption configured,1. Check vSAN encryption status; 2. Verify KMS integration; 3. Test key rotation; 4. Validate audit logging,vSAN encryption operational with KMS integration,High,Not Started
+
+# User Acceptance Tests
+#WIDTH: 10,14,30,38,30,48,42,10,12
+#ALIGN: left,left,left,left,left,left,left,center,center
+Test ID,Test Type,Test Name,Description,Pre-conditions,Test Steps,Expected Results,Priority,Status
+UAT-001,Business Process,VM Migration Workflow,Validate end-to-end VM migration from legacy SAN,Legacy and VxRail connected,1. Select production VM; 2. Initiate Storage vMotion; 3. Monitor migration progress; 4. Validate application functionality,VM migrates to vSAN with zero downtime and full functionality,High,Not Started
+UAT-002,Business Process,Multi-VM Migration Batch,Validate batch migration of 50 VMs in single maintenance window,Migration script ready,1. Run PowerCLI migration script; 2. Monitor 50 VMs migrating; 3. Track completion status; 4. Verify all VMs operational,All 50 VMs migrate successfully within 4-hour window,High,Not Started
+UAT-003,Business Process,Application Performance Post-Migration,Validate application performance after migration to VxRail,VMs migrated to VxRail,1. Run application benchmarks; 2. Compare to legacy baseline; 3. Check database response times; 4. Validate user experience,Application performance equal to or better than legacy SAN,High,Not Started
+UAT-004,User Interface,vCenter VM Management,Validate administrators can manage VMs via vCenter,vCenter access granted,1. Log in to vCenter; 2. Create new VM; 3. Modify VM settings; 4. Perform vMotion; 5. Take snapshot,All VM management operations complete successfully,Medium,Not Started
+UAT-005,User Interface,VxRail Manager Operations,Validate VxRail Manager lifecycle management functions,VxRail Manager access,1. Access VxRail Manager; 2. View cluster health; 3. Check software versions; 4. Review support tunnel status,VxRail Manager displays health and enables management,Medium,Not Started
+UAT-006,Business Process,Backup and Restore Test,Validate VM backup and restore with Veeam,Veeam jobs configured,1. Run backup of test VM; 2. Delete test VM; 3. Restore VM from backup; 4. Validate data integrity,VM restores successfully with all data intact,Medium,Not Started
