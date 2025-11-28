@@ -1,36 +1,81 @@
-Phase,Task,Description,Start Date,End Date,Duration,Dependencies,Assigned To,Status,Deliverables,Risks,Mitigation
-"Phase 1: Planning","P1.1 - Project Initiation","Project charter, stakeholder alignment, and Google partnership establishment","2025-01-02","2025-01-08","7 days","None","Project Manager","Completed","Project Charter, Stakeholder Matrix","Stakeholder alignment","Executive sponsorship"
-"Phase 1: Planning","P1.2 - Current State Assessment","Assessment of existing collaboration tools and user requirements","2025-01-06","2025-01-15","10 days","P1.1","Business Analyst","Completed","Current State Report, Requirements Analysis","Complex requirements","User interview process"
-"Phase 1: Planning","P1.3 - Migration Strategy","Design migration strategy and timeline for Google Workspace","2025-01-13","2025-01-22","10 days","P1.2","Migration Architect","Completed","Migration Strategy, Timeline Plan","Migration complexity","Phased migration approach"
-"Phase 1: Planning","P1.4 - Security Framework","Design security architecture and compliance framework","2025-01-20","2025-01-29","10 days","P1.3","Security Architect","Completed","Security Architecture, Compliance Plan","Security requirements","Google security consultation"
-"Phase 1: Planning","P1.5 - Change Management Strategy","Develop comprehensive change management and training strategy","2025-01-27","2025-02-05","10 days","P1.4","Change Manager","Completed","Change Strategy, Training Plan","User resistance","User-centric approach"
-"Phase 2: Infrastructure Setup","P2.1 - Google Workspace Setup","Configure Google Workspace tenant and administrative controls","2025-02-03","2025-02-10","8 days","P1.5","Google Administrator","Completed","Workspace Tenant, Admin Configuration","Configuration complexity","Google expert support"
-"Phase 2: Infrastructure Setup","P2.2 - Identity Integration","Integrate with Active Directory and configure single sign-on","2025-02-08","2025-02-15","8 days","P2.1","Identity Engineer","Completed","SSO Integration, Directory Sync","Identity complexity","Identity team collaboration"
-"Phase 2: Infrastructure Setup","P2.3 - Security Configuration","Configure security policies, DLP, and compliance controls","2025-02-12","2025-02-19","8 days","P2.2","Security Engineer","Completed","Security Policies, DLP Configuration","Policy complexity","Gradual policy rollout"
-"Phase 2: Infrastructure Setup","P2.4 - Mobile Device Management","Configure mobile device management and security policies","2025-02-16","2025-02-23","8 days","P2.3","MDM Administrator","Completed","MDM Configuration, Mobile Policies","Device compatibility","Multi-platform testing"
-"Phase 2: Infrastructure Setup","P2.5 - Integration Framework","Setup integrations with existing enterprise applications","2025-02-20","2025-02-27","8 days","P2.4","Integration Engineer","Completed","Application Integrations, API Configuration","Integration challenges","API-first approach"
-"Phase 3: Pilot Deployment","P3.1 - Pilot Group Selection","Select and prepare pilot user groups for initial deployment","2025-02-24","2025-03-03","8 days","P2.5","Pilot Coordinator","Completed","Pilot Group, User Selection","Pilot representation","Diverse user group selection"
-"Phase 3: Pilot Deployment","P3.2 - Pilot Migration","Migrate pilot users to Google Workspace with full support","2025-03-01","2025-03-10","10 days","P3.1","Migration Engineer","Completed","Pilot Migration, User Accounts","Migration issues","Comprehensive testing"
-"Phase 3: Pilot Deployment","P3.3 - Pilot Training","Deliver intensive training to pilot users and collect feedback","2025-03-08","2025-03-17","10 days","P3.2","Training Manager","Completed","Pilot Training, User Feedback","Training effectiveness","Interactive training approach"
-"Phase 3: Pilot Deployment","P3.4 - Pilot Optimization","Optimize configuration based on pilot feedback and performance","2025-03-15","2025-03-24","10 days","P3.3","Optimization Engineer","Completed","Configuration Optimization, Performance Tuning","Optimization complexity","Data-driven optimization"
-"Phase 3: Pilot Deployment","P3.5 - Pilot Validation","Validate pilot success and prepare for full deployment","2025-03-22","2025-03-31","10 days","P3.4","Validation Manager","Completed","Pilot Success Report, Deployment Plan","Validation criteria","Clear success metrics"
-"Phase 4: Training and Preparation","P4.1 - Training Content Development","Develop comprehensive training materials and resources","2025-03-29","2025-04-07","10 days","P3.5","Content Developer","Completed","Training Materials, E-Learning Content","Content quality","Subject matter expert review"
-"Phase 4: Training and Preparation","P4.2 - Trainer Preparation","Train internal trainers and establish champion network","2025-04-05","2025-04-14","10 days","P4.1","Training Coordinator","Completed","Trainer Certification, Champion Network","Trainer readiness","Train-the-trainer program"
-"Phase 4: Training and Preparation","P4.3 - Support Infrastructure","Establish help desk and support procedures for deployment","2025-04-12","2025-04-21","10 days","P4.2","Support Manager","Completed","Support Infrastructure, Help Desk Setup","Support capacity","Scaled support model"
-"Phase 4: Training and Preparation","P4.4 - Communication Campaign","Launch comprehensive communication campaign for deployment","2025-04-19","2025-04-28","10 days","P4.3","Communications Manager","Completed","Communication Campaign, Awareness Materials","Message clarity","Multi-channel communication"
-"Phase 4: Training and Preparation","P4.5 - Final Preparations","Complete final preparations and readiness validation","2025-04-26","2025-05-05","10 days","P4.4","Deployment Manager","Completed","Deployment Readiness, Final Checklist","Readiness gaps","Comprehensive readiness review"
-"Phase 5: Migration Execution","P5.1 - Wave 1 Migration","Migrate first wave of users (early adopters and champions)","2025-05-03","2025-05-12","10 days","P4.5","Migration Team","Completed","Wave 1 Migration, User Accounts","Migration complexity","Experienced user support"
-"Phase 5: Migration Execution","P5.2 - Wave 2 Migration","Migrate second wave of users (department by department)","2025-05-10","2025-05-19","10 days","P5.1","Migration Team","Completed","Wave 2 Migration, Department Rollout","Scale challenges","Parallel migration streams"
-"Phase 5: Migration Execution","P5.3 - Wave 3 Migration","Migrate remaining users with intensive support","2025-05-17","2025-05-26","10 days","P5.2","Migration Team","Completed","Wave 3 Migration, Full User Base","Support capacity","Enhanced support coverage"
-"Phase 5: Migration Execution","P5.4 - Data Migration","Complete data migration and validation for all users","2025-05-24","2025-06-02","10 days","P5.3","Data Engineer","Completed","Data Migration, Validation Report","Data integrity","Comprehensive validation"
-"Phase 5: Migration Execution","P5.5 - Legacy Decommission","Decommission legacy collaboration systems","2025-05-31","2025-06-09","10 days","P5.4","Decommission Manager","Completed","Legacy System Shutdown, Archive Procedures","System dependencies","Thorough dependency analysis"
-"Phase 6: Optimization and Support","P6.1 - User Adoption Support","Intensive user adoption support and troubleshooting","2025-06-07","2025-06-16","10 days","P5.5","Adoption Manager","Completed","Adoption Support, User Success","Adoption challenges","Proactive user support"
-"Phase 6: Optimization and Support","P6.2 - Performance Optimization","Optimize system performance and user experience","2025-06-14","2025-06-23","10 days","P6.1","Performance Engineer","Completed","Performance Optimization, Tuning Report","Performance issues","Continuous monitoring"
-"Phase 6: Optimization and Support","P6.3 - Advanced Training","Deliver advanced training for power users and administrators","2025-06-21","2025-06-30","10 days","P6.2","Advanced Trainer","Completed","Advanced Training, Power User Certification","Training complexity","Hands-on training labs"
-"Phase 6: Optimization and Support","P6.4 - Integration Enhancement","Enhance and optimize enterprise application integrations","2025-06-28","2025-07-07","10 days","P6.3","Integration Specialist","Completed","Integration Enhancements, API Optimization","Integration stability","Thorough testing protocols"
-"Phase 6: Optimization and Support","P6.5 - Success Measurement","Measure project success and document lessons learned","2025-07-05","2025-07-14","10 days","P6.4","Success Manager","Completed","Success Report, Lessons Learned","Metric accuracy","Comprehensive measurement framework"
-"Ongoing Operations","O1 - User Support","Ongoing user support and help desk operations","2025-07-16","Ongoing","Continuous","P6.5","Support Team","Active","Support Reports","Support quality","Continuous improvement"
-"Ongoing Operations","O2 - System Administration","Ongoing Google Workspace administration and maintenance","2025-07-16","Ongoing","Continuous","P6.5","Admin Team","Active","Admin Reports","System stability","Proactive monitoring"
-"Ongoing Operations","O3 - Security Monitoring","Continuous security monitoring and compliance management","2025-07-16","Ongoing","Continuous","P6.5","Security Team","Active","Security Reports","Security threats","24/7 monitoring"
-"Ongoing Operations","O4 - Training Programs","Ongoing training and skill development programs","2025-07-16","Ongoing","Continuous","P6.5","Training Team","Active","Training Reports","Skill gaps","Continuous learning"
-"Ongoing Operations","O5 - Platform Evolution","Continuous platform enhancement and feature adoption","2025-07-16","Ongoing","Continuous","P6.5","Platform Team","Active","Evolution Reports","Technology changes","Regular roadmap reviews"
+# Project Timeline
+#WIDTH: 12,36,13,19,19,26,24,14
+#ALIGN: left,left,center,center,center,left,left,center
+Phase,Task,Duration,Start Date,End Date,Dependencies,Owner,Status
+Planning,Project Kickoff and Stakeholder Alignment,2 days,Week 1 Day 1,Week 1 Day 2,None,Project Manager,Not Started
+Planning,Exchange Environment Assessment,3 days,Week 1 Day 2,Week 1 Day 5,Project Kickoff,Migration Architect,Not Started
+Planning,File Server Inventory and Analysis,3 days,Week 1 Day 3,Week 2 Day 1,Project Kickoff,Migration Engineer,Not Started
+Planning,Migration Strategy and Wave Planning,3 days,Week 2 Day 1,Week 2 Day 3,Assessment Complete,Migration Architect,Not Started
+Planning,Change Management Strategy,3 days,Week 2 Day 3,Week 3 Day 1,Migration Strategy,Change Manager,Not Started
+Setup,Google Workspace Tenant Configuration,3 days,Week 3 Day 1,Week 3 Day 3,Planning Complete,Google Administrator,Not Started
+Setup,Domain Verification and MX Planning,2 days,Week 3 Day 3,Week 3 Day 5,Tenant Configuration,Google Administrator,Not Started
+Setup,Azure AD SAML SSO Integration,4 days,Week 3 Day 4,Week 4 Day 3,Domain Verification,Identity Engineer,Not Started
+Setup,Google Cloud Directory Sync Setup,3 days,Week 4 Day 1,Week 4 Day 3,SSO Integration,Identity Engineer,Not Started
+Setup,Data Loss Prevention Policy Configuration,3 days,Week 4 Day 1,Week 4 Day 3,Tenant Configuration,Security Engineer,Not Started
+Setup,Google Vault Retention Configuration,2 days,Week 4 Day 3,Week 4 Day 5,DLP Configuration,Security Engineer,Not Started
+Setup,Mobile Device Management Setup,3 days,Week 4 Day 3,Week 5 Day 1,Security Policies,MDM Administrator,Not Started
+Pilot,Pilot User Selection (25 users),2 days,Week 4 Day 4,Week 5 Day 1,Setup Complete,Pilot Coordinator,Not Started
+Pilot,Pilot Mailbox Migration (25 mailboxes),3 days,Week 5 Day 1,Week 5 Day 3,Pilot Selection,Migration Engineer,Not Started
+Pilot,Pilot File Migration,2 days,Week 5 Day 3,Week 5 Day 5,Mailbox Migration,Migration Engineer,Not Started
+Pilot,Pilot Training Sessions,2 days,Week 5 Day 3,Week 5 Day 5,Pilot Migration,Training Manager,Not Started
+Pilot,Pilot Feedback and Optimization,3 days,Week 5 Day 5,Week 6 Day 3,Pilot Training,Pilot Coordinator,Not Started
+Migration,Wave 1 Sales Migration (95 users),5 days,Week 6 Day 1,Week 6 Day 5,Pilot Complete,Migration Team,Not Started
+Migration,Wave 1 Training Sessions,2 days,Week 6 Day 4,Week 7 Day 1,Wave 1 Migration,Training Manager,Not Started
+Migration,Wave 2 Marketing Migration (95 users),5 days,Week 7 Day 1,Week 7 Day 5,Wave 1 Complete,Migration Team,Not Started
+Migration,Wave 2 Training Sessions,2 days,Week 7 Day 4,Week 8 Day 1,Wave 2 Migration,Training Manager,Not Started
+Migration,Wave 3 Operations Migration (95 users),5 days,Week 8 Day 1,Week 8 Day 5,Wave 2 Complete,Migration Team,Not Started
+Migration,Wave 3 Training Sessions,2 days,Week 8 Day 4,Week 9 Day 1,Wave 3 Migration,Training Manager,Not Started
+Migration,Wave 4 Finance Migration (95 users),5 days,Week 9 Day 1,Week 9 Day 5,Wave 3 Complete,Migration Team,Not Started
+Migration,Wave 4 Training Sessions,2 days,Week 9 Day 4,Week 10 Day 1,Wave 4 Migration,Training Manager,Not Started
+Migration,Wave 5 Executive Migration (95 users),5 days,Week 10 Day 1,Week 10 Day 5,Wave 4 Complete,Migration Team,Not Started
+Migration,MX Record Cutover,1 day,Week 10 Day 5,Week 10 Day 5,All Waves Complete,Google Administrator,Not Started
+Training,Administrator Training Sessions,3 days,Week 11 Day 1,Week 11 Day 3,Migration Complete,Training Manager,Not Started
+Training,Change Champion Enablement,2 days,Week 11 Day 3,Week 11 Day 5,Admin Training,Change Manager,Not Started
+Training,Advanced Feature Training,2 days,Week 11 Day 5,Week 12 Day 2,Champion Training,Training Manager,Not Started
+Closure,Documentation Finalization,3 days,Week 12 Day 1,Week 12 Day 3,All Training,Project Manager,Not Started
+Closure,Go-Live Readiness Review,1 day,Week 12 Day 4,Week 12 Day 4,Documentation,Project Manager,Not Started
+Closure,Project Closure,1 day,Week 12 Day 5,Week 12 Day 5,Readiness Review,Project Manager,Not Started
+Hypercare,Daily Health Checks and Support,14 days,Week 13 Day 1,Week 14 Day 5,Project Closure,Support Team,Not Started
+Hypercare,Issue Resolution and Optimization,14 days,Week 13 Day 1,Week 14 Day 5,Project Closure,Support Team,Not Started
+
+# Milestones
+#WIDTH: 14,25,20,77,28,17
+#ALIGN: left,left,center,left,left,center
+Milestone ID,Milestone Name,Target Date,Success Criteria,Owner,Status
+M1,Project Kickoff,Week 1,Stakeholders aligned and project charter approved,Project Manager,Not Started
+M2,Environment Configured,Week 4,Google Workspace tenant SSO and security policies active,Google Administrator,Not Started
+M3,Pilot Complete,Week 6,25 pilot users migrated and validated with positive feedback,Pilot Coordinator,Not Started
+M4,All Users Migrated,Week 10,500 mailboxes and 3 TB files migrated with zero data loss,Migration Team,Not Started
+M5,Training Complete,Week 11,Admin and end-user training delivered with 90%+ attendance,Training Manager,Not Started
+M6,MX Cutover,Week 10,Email routing switched to Gmail with Exchange decommissioned,Google Administrator,Not Started
+M7,Project Closure,Week 12,All deliverables accepted and documentation complete,Project Manager,Not Started
+M8,Hypercare Complete,Week 16,30-day support period complete with team self-sufficient,Support Team,Not Started
+
+# RACI Matrix
+#WIDTH: 30,10,10,10,10,10,10,10,10
+#ALIGN: left,center,center,center,center,center,center,center,center
+Task/Deliverable,PM,Architect,Migration,Security,Training,Support,Change,Client
+Project Charter and Kickoff,A,C,I,I,I,I,R,R
+Migration Assessment Report,C,R,R,C,I,I,I,A
+Google Workspace Configuration,C,R,C,R,I,I,I,C
+SSO and Directory Sync Setup,C,R,C,R,I,I,I,C
+Security Policies (DLP Vault),C,C,I,R,I,I,I,A
+Pilot Migration (25 users),A,C,R,C,C,I,C,C
+Wave 1-5 Migrations,A,C,R,C,C,C,C,C
+End-User Training Sessions,A,C,I,I,R,C,R,C
+Administrator Training,A,C,C,C,R,C,I,R
+Change Champion Enablement,A,I,I,I,C,I,R,R
+Hypercare Support,A,C,C,C,C,R,C,C
+
+# Communications Plan
+#WIDTH: 23,19,38,45,19,20
+#ALIGN: left,left,left,left,left,center
+Meeting Type,Frequency,Participants,Purpose,Owner,Day/Time
+Project Kickoff,Once,All stakeholders and project team,Launch project and align on scope timeline and roles,Project Manager,Week 1 Day 1
+Steering Committee,Bi-weekly,Executive sponsors PM and leads,Strategic decisions escalations and milestone approval,Project Manager,Alternate Thursdays
+Weekly Status Meeting,Weekly,Core project team and client leads,Review progress risks blockers and next week priorities,Project Manager,Mondays 10:00 AM
+Migration Wave Planning,Weekly,Migration team and department leads,Coordinate upcoming wave and resolve dependencies,Migration Architect,Tuesdays 2:00 PM
+Training Coordination,Weekly,Training team and change champions,Plan training sessions and review feedback,Training Manager,Wednesdays 3:00 PM
+Go-Live Readiness,Daily (Week 10),Go-live team and stakeholders,Pre-cutover checklist and issue triage,Project Manager,Daily 9:00 AM
+Hypercare Standup,Daily (Weeks 13-14),Support team and client IT,Daily health check and issue resolution,Support Team,Daily 9:30 AM
+Project Closeout,Once,All stakeholders and project team,Formal closure lessons learned and handover,Project Manager,Week 12 Day 5

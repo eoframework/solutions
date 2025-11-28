@@ -1,10 +1,53 @@
-Component,Parameter,Environment,Value,Data_Type,Required,Description,Validation_Rule,Default_Value
-Solution Configuration,Solution Name,All,Enterprise Solution,String,Yes,Solution identifier,Valid solution name,Enterprise Solution
-Environment,Environment Type,Dev,Development,String,Yes,Environment designation,dev|test|prod,dev
-Environment,Environment Type,Test,Test,String,Yes,Environment designation,dev|test|prod,test
-Environment,Environment Type,Prod,Production,String,Yes,Environment designation,dev|test|prod,prod
-Network Configuration,Network Mode,All,Enterprise,String,Yes,Network configuration mode,Basic|Standard|Enterprise,Enterprise
-Security Configuration,Security Level,All,High,String,Yes,Security configuration level,Low|Medium|High,High
-Performance Configuration,Performance Tier,All,Standard,String,Yes,Performance configuration tier,Basic|Standard|Premium,Standard
-Monitoring Configuration,Monitoring Enabled,All,true,Boolean,Yes,Enable comprehensive monitoring,true|false,true
-Backup Configuration,Backup Enabled,All,true,Boolean,Yes,Enable automated backups,true|false,true
+#WIDTH: 28,18,12,30,48,10,12,33,16,18,24,42,12
+#ALIGN: left,left,center,left,left,center,left,left,center,left,left,left,center
+Parameter Name,Category,Environment,Default Value,Description,Required,Data Type,Validation Rules,Security Level,Owner Team,Dependencies,Notes,Last Updated
+WORKSPACE_DOMAIN,Google Workspace,All,[domain.com],Primary domain for Google Workspace tenant,Yes,String,Valid domain name,Public,IT Admin,Domain verification,Must be verified in Google Admin,[DATE]
+WORKSPACE_EDITION,Google Workspace,All,Business Plus,Google Workspace subscription edition,Yes,String,Business Starter|Business Standard|Business Plus|Enterprise,Public,IT Admin,Licensing,500 user deployment,[DATE]
+USER_COUNT,Google Workspace,All,500,Total number of Google Workspace users,Yes,Integer,1-unlimited,Public,IT Admin,Licensing,Per SOW scope,[DATE]
+STORAGE_PER_USER,Google Workspace,All,5 TB,Storage allocation per user,Yes,String,Based on edition,Public,IT Admin,Edition selection,Business Plus allocation,[DATE]
+ADMIN_CONSOLE_URL,Google Workspace,All,admin.google.com,Google Admin Console URL,Yes,String,Valid URL,Public,IT Admin,Internet access,Primary admin interface,[DATE]
+ORGANIZATION_UNIT_ROOT,Identity,All,/,Root organizational unit path,Yes,String,Valid OU path,Public,IT Admin,Tenant setup,Top-level OU,[DATE]
+OU_SALES,Identity,All,/Sales,Sales department organizational unit,Yes,String,Valid OU path,Public,IT Admin,Root OU,95 users,[DATE]
+OU_MARKETING,Identity,All,/Marketing,Marketing department organizational unit,Yes,String,Valid OU path,Public,IT Admin,Root OU,95 users,[DATE]
+OU_OPERATIONS,Identity,All,/Operations,Operations department organizational unit,Yes,String,Valid OU path,Public,IT Admin,Root OU,95 users,[DATE]
+OU_FINANCE,Identity,All,/Finance,Finance department organizational unit,Yes,String,Valid OU path,Public,IT Admin,Root OU,95 users,[DATE]
+OU_EXECUTIVE,Identity,All,/Executive,Executive department organizational unit,Yes,String,Valid OU path,Public,IT Admin,Root OU,95 users,[DATE]
+SSO_ENABLED,Identity,All,true,Enable SAML SSO authentication,Yes,Boolean,true or false,Public,Security,IdP configuration,Azure AD integration,[DATE]
+SSO_IDP_TYPE,Identity,All,Azure AD,Identity provider for SAML SSO,Yes,String,Azure AD|Okta|ADFS|Google,Public,Security,IdP setup,Corporate IdP,[DATE]
+SSO_ENTITY_ID,Identity,All,[entity-id],SAML entity ID for SSO configuration,Yes,String,Valid URI,Confidential,Security,IdP metadata,From Azure AD,[DATE]
+SSO_LOGIN_URL,Identity,All,[login-url],SAML login URL from identity provider,Yes,String,Valid URL,Public,Security,IdP metadata,From Azure AD,[DATE]
+SSO_CERTIFICATE,Identity,All,[certificate],SAML signing certificate from IdP,Yes,String,Valid X.509 certificate,Confidential,Security,IdP metadata,Base64 encoded,[DATE]
+GCDS_ENABLED,Identity,All,true,Enable Google Cloud Directory Sync,Yes,Boolean,true or false,Public,IT Admin,Azure AD,Automated provisioning,[DATE]
+GCDS_SYNC_INTERVAL,Identity,All,4 hours,Directory sync interval,Yes,String,1-24 hours,Public,IT Admin,GCDS setup,Balance freshness and load,[DATE]
+GCDS_USER_FILTER,Identity,All,[LDAP filter],LDAP filter for user sync,Yes,String,Valid LDAP filter,Public,IT Admin,GCDS setup,Scope users to sync,[DATE]
+TWO_STEP_VERIFICATION,Security,All,Enforced,2-Step Verification enforcement policy,Yes,String,Off|Optional|Enforced,Public,Security,User accounts,Required for all users,[DATE]
+TWO_STEP_METHODS,Security,All,Any,Allowed 2SV methods,Yes,String,Any|Security Key Only|Phone Only,Public,Security,2SV policy,Flexible methods,[DATE]
+DLP_ENABLED,Security,All,true,Enable Data Loss Prevention policies,Yes,Boolean,true or false,Public,Security,Workspace setup,Sensitive data protection,[DATE]
+DLP_PII_DETECTION,Security,All,true,Enable PII detection in DLP,Yes,Boolean,true or false,Public,Security,DLP setup,SSN credit card etc,[DATE]
+DLP_FINANCIAL_DETECTION,Security,All,true,Enable financial data detection,Yes,Boolean,true or false,Public,Security,DLP setup,Bank account numbers,[DATE]
+DLP_ACTION,Security,All,Warn and Block,Default DLP action for violations,Yes,String,Warn|Block|Warn and Block,Public,Security,DLP setup,Balance security and usability,[DATE]
+VAULT_ENABLED,Security,All,true,Enable Google Vault for retention,Yes,Boolean,true or false,Public,Security,Workspace setup,Compliance requirement,[DATE]
+VAULT_RETENTION_PERIOD,Security,All,7 years,Default retention period for Vault,Yes,String,1-10 years or custom,Public,Legal,Vault setup,Per SOW requirement,[DATE]
+VAULT_GMAIL_RETENTION,Security,All,true,Enable Gmail retention in Vault,Yes,Boolean,true or false,Public,Legal,Vault setup,Email archival,[DATE]
+VAULT_DRIVE_RETENTION,Security,All,true,Enable Drive retention in Vault,Yes,Boolean,true or false,Public,Legal,Vault setup,File archival,[DATE]
+MDM_ENABLED,Security,All,true,Enable Mobile Device Management,Yes,Boolean,true or false,Public,Security,Workspace setup,Device security,[DATE]
+MDM_POLICY_TYPE,Security,All,Advanced,MDM policy type,Yes,String,Basic|Advanced,Public,Security,MDM setup,Full device management,[DATE]
+MDM_REQUIRE_PASSCODE,Security,All,true,Require device passcode,Yes,Boolean,true or false,Public,Security,MDM policy,6+ digit PIN,[DATE]
+MDM_REMOTE_WIPE,Security,All,true,Enable remote wipe capability,Yes,Boolean,true or false,Public,Security,MDM policy,Lost device protection,[DATE]
+MDM_MANAGED_DEVICES,Security,All,300,Expected managed device count,Yes,Integer,1-unlimited,Public,IT Admin,MDM setup,60% of users,[DATE]
+GMAIL_ENABLED,Applications,All,true,Enable Gmail for users,Yes,Boolean,true or false,Public,IT Admin,Workspace setup,Primary email,[DATE]
+GMAIL_STORAGE,Applications,All,30 GB,Gmail storage per user,Yes,String,Based on edition,Public,IT Admin,Edition,Business Plus allocation,[DATE]
+DRIVE_ENABLED,Applications,All,true,Enable Google Drive for users,Yes,Boolean,true or false,Public,IT Admin,Workspace setup,File storage,[DATE]
+DRIVE_SHARED_DRIVES,Applications,All,15,Number of Shared Drives to create,Yes,Integer,1-unlimited,Public,IT Admin,Drive setup,Team collaboration,[DATE]
+EXTERNAL_SHARING,Applications,All,Allowlisted domains,External sharing policy for Drive,Yes,String,Off|Anyone|Allowlisted domains,Public,Security,Drive setup,Controlled sharing,[DATE]
+MEET_ENABLED,Applications,All,true,Enable Google Meet for users,Yes,Boolean,true or false,Public,IT Admin,Workspace setup,Video conferencing,[DATE]
+MEET_RECORDING,Applications,All,true,Enable Meet recording capability,Yes,Boolean,true or false,Public,IT Admin,Meet setup,Meeting recordings,[DATE]
+CHAT_ENABLED,Applications,All,true,Enable Google Chat for users,Yes,Boolean,true or false,Public,IT Admin,Workspace setup,Team messaging,[DATE]
+MIGRATION_TOOL,Migration,All,GWMT,Primary email migration tool,Yes,String,GWMT|Third-party,Public,Migration,Tool selection,Google native tool,[DATE]
+MIGRATION_SOURCE,Migration,All,Exchange 2016,Source email system,Yes,String,Exchange|Office 365|Other,Public,Migration,Assessment,On-premises Exchange,[DATE]
+MAILBOX_COUNT,Migration,All,500,Total mailboxes to migrate,Yes,Integer,1-unlimited,Public,Migration,Assessment,Per SOW scope,[DATE]
+EMAIL_DATA_VOLUME,Migration,All,2.5 TB,Total email data volume,Yes,String,Size in TB,Public,Migration,Assessment,Average 5 GB per mailbox,[DATE]
+FILE_DATA_VOLUME,Migration,All,3 TB,Total file data volume to migrate,Yes,String,Size in TB,Public,Migration,Assessment,From file servers,[DATE]
+DISTRIBUTION_LISTS,Migration,All,150,Distribution lists to migrate,Yes,Integer,1-unlimited,Public,Migration,Assessment,Convert to Google Groups,[DATE]
+COEXISTENCE_PERIOD,Migration,All,4 weeks,Exchange coexistence duration,Yes,String,Weeks,Public,Migration,Planning,Parallel operation,[DATE]
+MIGRATION_WAVES,Migration,All,5,Number of migration waves,Yes,Integer,1-10,Public,Migration,Planning,95 users per wave,[DATE]
