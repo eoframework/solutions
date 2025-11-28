@@ -1,10 +1,51 @@
-Component,Parameter,Environment,Value,Data_Type,Required,Description,Validation_Rule,Default_Value
-Solution Configuration,Solution Name,All,Enterprise Solution,String,Yes,Solution identifier,Valid solution name,Enterprise Solution
-Environment,Environment Type,Dev,Development,String,Yes,Environment designation,dev|test|prod,dev
-Environment,Environment Type,Test,Test,String,Yes,Environment designation,dev|test|prod,test
-Environment,Environment Type,Prod,Production,String,Yes,Environment designation,dev|test|prod,prod
-Network Configuration,Network Mode,All,Enterprise,String,Yes,Network configuration mode,Basic|Standard|Enterprise,Enterprise
-Security Configuration,Security Level,All,High,String,Yes,Security configuration level,Low|Medium|High,High
-Performance Configuration,Performance Tier,All,Standard,String,Yes,Performance configuration tier,Basic|Standard|Premium,Standard
-Monitoring Configuration,Monitoring Enabled,All,true,Boolean,Yes,Enable comprehensive monitoring,true|false,true
-Backup Configuration,Backup Enabled,All,true,Boolean,Yes,Enable automated backups,true|false,true
+#WIDTH: 28,18,12,30,48,10,12,33,16,18,24,42,12
+#ALIGN: left,left,center,left,left,center,left,left,center,left,left,left,center
+Parameter Name,Category,Environment,Default Value,Description,Required,Data Type,Validation Rules,Security Level,Owner Team,Dependencies,Notes,Last Updated
+DUO_API_HOSTNAME,Cisco Duo,All,api-xxxxxxxx.duosecurity.com,Duo API hostname for authentication,Yes,String,Valid Duo API hostname,Confidential,Security Team,Duo account,From Duo Admin Panel,[DATE]
+DUO_INTEGRATION_KEY,Cisco Duo,All,[integration-key],Duo application integration key,Yes,String,Valid integration key format,Secret,Security Team,DUO_API_HOSTNAME,Per application type,[DATE]
+DUO_SECRET_KEY,Cisco Duo,All,[secret-key],Duo application secret key,Yes,String,Valid secret key format,Secret,Security Team,DUO_INTEGRATION_KEY,Securely stored,[DATE]
+DUO_ADMIN_HOSTNAME,Cisco Duo,All,admin-xxxxxxxx.duosecurity.com,Duo admin API hostname,Yes,String,Valid admin API hostname,Confidential,Security Team,Duo account,For user management,[DATE]
+DUO_ENROLLMENT_METHOD,Cisco Duo,All,self-service,User enrollment method,Yes,String,self-service|admin-initiated,Public,Security Team,None,Self-service recommended,[DATE]
+DUO_POLICY_DEFAULT,Cisco Duo,All,adaptive,Default authentication policy,Yes,String,allow|deny|adaptive,Public,Security Team,None,Risk-based authentication,[DATE]
+DUO_DEVICE_TRUST,Cisco Duo,All,enabled,Enable device health verification,Yes,Boolean,true|false,Public,Security Team,Endpoint agents,Requires Duo Health App,[DATE]
+UMBRELLA_ORG_ID,Cisco Umbrella,All,[org-id],Umbrella organization identifier,Yes,String,Valid org ID,Confidential,Security Team,Umbrella account,From dashboard,[DATE]
+UMBRELLA_API_KEY,Cisco Umbrella,All,[api-key],Umbrella API key for integration,Yes,String,Valid API key format,Secret,Security Team,UMBRELLA_ORG_ID,Management API,[DATE]
+UMBRELLA_SECRET,Cisco Umbrella,All,[api-secret],Umbrella API secret,Yes,String,Valid secret format,Secret,Security Team,UMBRELLA_API_KEY,Securely stored,[DATE]
+UMBRELLA_POLICY_DEFAULT,Cisco Umbrella,All,block-malware,Default DNS security policy,Yes,String,Valid policy name,Public,Security Team,None,Block known threats,[DATE]
+UMBRELLA_SWG_ENABLED,Cisco Umbrella,All,true,Enable Secure Web Gateway,Yes,Boolean,true|false,Public,Security Team,Cloud connector,Full proxy inspection,[DATE]
+UMBRELLA_ROAMING_CLIENT,Cisco Umbrella,All,true,Deploy roaming client to endpoints,Yes,Boolean,true|false,Public,Security Team,Endpoint access,Off-network protection,[DATE]
+ISE_PRIMARY_PAN,Cisco ISE,All,ise-pan-01.client.local,Primary Policy Administration Node,Yes,String,Valid FQDN,Confidential,Network Team,Network connectivity,Management interface,[DATE]
+ISE_SECONDARY_PAN,Cisco ISE,All,ise-pan-02.client.local,Secondary PAN for HA,No,String,Valid FQDN,Confidential,Network Team,ISE_PRIMARY_PAN,High availability,[DATE]
+ISE_PSN_NODES,Cisco ISE,All,ise-psn-01.client.local ise-psn-02.client.local,Policy Service Nodes,Yes,String,Space-separated FQDNs,Confidential,Network Team,ISE_PRIMARY_PAN,RADIUS authentication,[DATE]
+ISE_ADMIN_USER,Cisco ISE,All,ise-admin,ISE administrative username,Yes,String,Valid username,Confidential,Network Team,ISE deployment,Initial admin,[DATE]
+ISE_RADIUS_SECRET,Cisco ISE,All,[radius-secret],RADIUS shared secret,Yes,String,Min 16 characters,Secret,Network Team,Network devices,Per device group,[DATE]
+ISE_AD_JOIN_POINT,Cisco ISE,All,client.local,Active Directory join point,Yes,String,Valid AD domain,Confidential,Network Team,AD connectivity,For identity lookup,[DATE]
+ISE_GUEST_PORTAL,Cisco ISE,All,enabled,Enable guest access portal,Yes,Boolean,true|false,Public,Network Team,ISE deployment,Sponsor-based access,[DATE]
+ISE_POSTURE_POLICY,Cisco ISE,All,corporate-compliance,Default posture assessment policy,Yes,String,Valid policy name,Public,Security Team,ISE_PRIMARY_PAN,Endpoint compliance,[DATE]
+ANYCONNECT_HEADEND,Cisco AnyConnect,All,vpn.client.local,AnyConnect VPN headend FQDN,Yes,String,Valid FQDN,Confidential,Network Team,ASA/FTD device,Public DNS required,[DATE]
+ANYCONNECT_GROUP_URL,Cisco AnyConnect,All,https://vpn.client.local/secure-access,Connection profile URL,Yes,String,Valid HTTPS URL,Confidential,Network Team,ANYCONNECT_HEADEND,User connection URL,[DATE]
+ANYCONNECT_PROFILE,Cisco AnyConnect,All,secure-access-profile,VPN connection profile name,Yes,String,Valid profile name,Public,Network Team,VPN config,XML profile,[DATE]
+ANYCONNECT_POSTURE,Cisco AnyConnect,All,enabled,Enable posture assessment module,Yes,Boolean,true|false,Public,Security Team,ISE integration,Endpoint compliance,[DATE]
+ANYCONNECT_UMBRELLA,Cisco AnyConnect,All,enabled,Enable Umbrella roaming module,Yes,Boolean,true|false,Public,Security Team,Umbrella config,DNS protection,[DATE]
+SECUREX_TENANT,Cisco SecureX,All,[tenant-id],SecureX tenant identifier,Yes,String,Valid tenant ID,Confidential,Security Team,SecureX account,From admin console,[DATE]
+SECUREX_API_CLIENT,Cisco SecureX,All,[client-id],SecureX API client ID,Yes,String,Valid client ID,Confidential,Security Team,SECUREX_TENANT,For API access,[DATE]
+SECUREX_API_SECRET,Cisco SecureX,All,[client-secret],SecureX API client secret,Yes,String,Valid secret format,Secret,Security Team,SECUREX_API_CLIENT,Securely stored,[DATE]
+SECUREX_DASHBOARD_URL,Cisco SecureX,All,securex.cisco.com,SecureX dashboard URL,Yes,String,Valid URL,Public,Security Team,SECUREX_TENANT,SOC dashboard,[DATE]
+AD_DOMAIN,Active Directory,All,client.local,Active Directory domain name,Yes,String,Valid domain format,Confidential,Security Team,None,User authentication,[DATE]
+AD_SERVER_PRIMARY,Active Directory,All,10.100.2.10,Primary AD domain controller,Yes,String,Valid IPv4 address,Confidential,Security Team,Network connectivity,LDAPS recommended,[DATE]
+AD_SERVER_SECONDARY,Active Directory,All,10.100.2.11,Secondary AD domain controller,No,String,Valid IPv4 address,Confidential,Security Team,Network connectivity,Failover,[DATE]
+AD_SERVICE_ACCOUNT,Active Directory,All,svc_cisco_security,Service account for Cisco products,Yes,String,Valid username,Confidential,Security Team,AD account created,Read access to AD,[DATE]
+AD_BIND_DN,Active Directory,All,CN=svc_cisco_security OU=ServiceAccounts DC=client DC=local,LDAP bind distinguished name,Yes,String,Valid DN format,Confidential,Security Team,AD_SERVICE_ACCOUNT,For LDAP queries,[DATE]
+AD_USER_GROUP,Active Directory,All,Cisco-Secure-Access-Users,AD group for authorized users,Yes,String,Valid group name,Public,Security Team,AD group created,User scope,[DATE]
+SAML_IDP_ENTITY,SAML/SSO,All,https://idp.client.local/saml,SAML Identity Provider entity ID,Yes,String,Valid URI,Confidential,Security Team,IdP configuration,Metadata exchange,[DATE]
+SAML_SSO_URL,SAML/SSO,All,https://idp.client.local/saml/sso,SAML SSO endpoint URL,Yes,String,Valid HTTPS URL,Confidential,Security Team,SAML_IDP_ENTITY,Authentication endpoint,[DATE]
+SAML_CERTIFICATE,SAML/SSO,All,[base64-cert],SAML signing certificate,Yes,String,Valid X.509 certificate,Secret,Security Team,IdP certificate,For signature validation,[DATE]
+SIEM_SERVER,Monitoring,All,siem.client.local,SIEM server hostname,Yes,String,Valid hostname or IP,Confidential,Security Team,Network connectivity,Log aggregation,[DATE]
+SIEM_PORT,Monitoring,All,514,Syslog port for SIEM,Yes,Integer,Valid port number,Public,Security Team,Firewall rules,UDP or TCP,[DATE]
+SIEM_PROTOCOL,Monitoring,All,tcp-tls,Syslog transport protocol,Yes,String,udp|tcp|tcp-tls,Public,Security Team,Certificate config,TLS recommended,[DATE]
+SYSLOG_FACILITY,Monitoring,All,local0,Syslog facility code,Yes,String,Valid syslog facility,Public,Security Team,SIEM configuration,Log categorization,[DATE]
+NTP_SERVER_PRIMARY,Infrastructure,All,10.100.4.10,Primary NTP server,Yes,String,Valid IPv4 address,Confidential,Infrastructure Team,Network connectivity,Time synchronization,[DATE]
+DNS_SERVER_PRIMARY,Infrastructure,All,10.100.5.10,Primary DNS server,Yes,String,Valid IPv4 address,Confidential,Infrastructure Team,Network connectivity,Name resolution,[DATE]
+ALERT_EMAIL_RECIPIENTS,Notifications,All,security-ops@client.local,Email recipients for security alerts,Yes,String,Valid email addresses,Confidential,Security Team,SMTP relay,SOC distribution,[DATE]
+CISCO_SMARTNET_CONTRACT,Support,All,[contract-number],Cisco SmartNet contract number,Yes,String,Valid contract ID,Confidential,Support Team,Vendor relationship,24x7 support,[DATE]
+
