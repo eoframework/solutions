@@ -1,35 +1,91 @@
-Task ID,Phase,Task Name,Description,Owner,Start Date,End Date,Duration Days,Predecessor Tasks,Status,Progress %,Priority,Milestone,Dependencies,Deliverables,Delivery_Documents,Effort Hours,Notes
-AVD-001,Discovery,Project Kickoff,AVD project initiation and modern workplace team alignment,EO Project Manager,[START_DATE],[START_DATE+1],1,,Not Started,0,Critical,Yes,Stakeholder availability,AVD project charter and team assignments,8,Executive sponsor approval for modern workplace initiative,
-AVD-002,Discovery,Current State Assessment,Analyze existing VDI infrastructure and user requirements,EO Sales Engineer,[START_DATE+1],[START_DATE+5],4,AVD-001,Not Started,0,High,No,Current infrastructure access,Current state assessment and user analysis,32,Document existing desktop environment and pain points,
-AVD-003,Discovery,Azure Environment Assessment,Evaluate Azure subscription and service availability,EO Engineer,[START_DATE+3],[START_DATE+8],5,AVD-002,Not Started,0,High,No,Azure subscription access,Azure environment readiness assessment,40,Focus on AVD service availability and networking,
-AVD-004,Discovery,Network Connectivity Review,Assess network bandwidth and connectivity requirements,EO Engineer,[START_DATE+5],[START_DATE+10],5,AVD-002,Not Started,0,High,No,Network documentation,Network readiness assessment,32,Include ExpressRoute and VPN options,
-AVD-005,Planning,AVD Solution Architecture,Design Azure Virtual Desktop architecture and host pools,EO Quarterback,[START_DATE+8],[START_DATE+18],10,AVD-003,Not Started,0,Critical,Yes,Environment assessment,AVD solution architecture document,80,Include multi-session and personal desktop options,
-AVD-006,Planning,Application Assessment,Analyze applications for virtualization and packaging,EO Quarterback,[START_DATE+12],[START_DATE+20],8,AVD-005,Not Started,0,High,No,Application inventory,Application compatibility and packaging plan,64,Include MSIX app attach strategy,
-AVD-007,Planning,User Profile Strategy,Design FSLogix profile management and user data strategy,EO Quarterback,[START_DATE+15],[START_DATE+22],7,AVD-002,Not Started,0,High,Yes,User analysis complete,Profile management design document,56,Include profile containers and search indexing,
-AVD-008,Planning,Security Architecture,Design conditional access and zero trust security model,EO Engineer,[START_DATE+18],[START_DATE+25],7,AVD-005,Not Started,0,High,No,Architecture design,Security design and compliance framework,56,Azure AD integration and MFA implementation,
-AVD-009,Infrastructure,Azure Infrastructure Setup,Provision Azure subscription and core networking services,EO Engineer,[START_DATE+25],[START_DATE+35],10,AVD-005,Not Started,0,High,Yes,Architecture approval,Azure infrastructure foundation,80,Virtual networks subnets and security groups,
-AVD-010,Infrastructure,Host Pool Configuration,Configure AVD host pools and session host VMs,EO Engineer,[START_DATE+30],[START_DATE+40],10,AVD-009,Not Started,0,High,No,Azure infrastructure,Configured host pools and session hosts,80,Include auto-scaling and load balancing,
-AVD-011,Development,Golden Image Creation,Build and optimize Windows 11 multi-session images,EO Engineer,[START_DATE+35],[START_DATE+50],15,AVD-006,Not Started,0,Critical,No,Application assessment,Optimized Windows 11 golden images,120,Include performance optimizations and application pre-staging,
-AVD-012,Development,Application Packaging,Package applications using MSIX app attach technology,EO Engineer,[START_DATE+25],[START_DATE+45],20,AVD-006,Not Started,0,High,No,Application inventory,MSIX application packages,160,Include application testing and validation,
-AVD-013,Development,Profile Container Setup,Configure FSLogix profile containers and storage,EO Engineer,[START_DATE+45],[START_DATE+55],10,AVD-007,Not Started,0,High,Yes,Profile strategy approved,FSLogix profile configuration,80,Include Azure Files integration and optimization,
-AVD-014,Development,Network Optimization,Implement network optimization and connectivity solutions,EO Engineer,[START_DATE+40],[START_DATE+50],10,AVD-004,Not Started,0,High,No,Network assessment,Network optimization implementation,80,Include ExpressRoute and traffic optimization,
-AVD-015,Development,Monitoring Configuration,Configure Azure Monitor and AVD Insights dashboards,EO Engineer,[START_DATE+50],[START_DATE+60],10,AVD-010,Not Started,0,High,No,Host pool configuration,Monitoring and alerting configuration,80,Include performance baselines and alerting,
-AVD-016,Development,Security Implementation,Implement conditional access and security policies,EO Engineer,[START_DATE+55],[START_DATE+65],10,AVD-008,Not Started,0,High,No,Security design,Security controls implementation,80,Include MFA and device compliance policies,
-AVD-017,Development,User Access Configuration,Configure user assignments and application access,EO Engineer,[START_DATE+60],[START_DATE+70],10,AVD-013,Not Started,0,High,No,Profile configuration,User access and application assignments,80,Include role-based access and app groups,
-AVD-018,Testing,Infrastructure Testing,Test host pool performance and scaling capabilities,EO Engineer,[START_DATE+65],[START_DATE+75],10,AVD-015,Not Started,0,High,No,Monitoring configuration,Infrastructure test results,80,Include load testing and auto-scaling validation,
-AVD-019,Testing,Application Testing,Test application performance and user experience,EO Engineer,[START_DATE+75],[START_DATE+85],10,AVD-012,Not Started,0,High,No,Application packaging,Application performance test results,80,Include application launch times and functionality,
-AVD-020,Testing,User Experience Testing,Test end-to-end user login and desktop experience,EO Engineer,[START_DATE+80],[START_DATE+87],7,AVD-017,Not Started,0,High,No,User access configuration,User experience test results,56,Include login performance and session quality,
-AVD-021,Testing,Security Testing,Validate security controls and compliance requirements,EO Engineer,[START_DATE+70],[START_DATE+85],15,AVD-016,Not Started,0,Critical,Yes,Security implementation,Security validation report,120,Include penetration testing and compliance audit,
-AVD-022,Testing,Performance Testing,Test system performance with realistic user loads,EO Engineer,[START_DATE+85],[START_DATE+92],7,AVD-020,Not Started,0,High,No,User experience testing,Performance test results and optimization,56,Include concurrent user testing and resource utilization,
-AVD-023,Testing,User Acceptance Testing,Business user testing of virtual desktop workflows,EO Sales Engineer,[START_DATE+90],[START_DATE+100],10,AVD-021,Not Started,0,Critical,Yes,Security validation complete,UAT results and business sign-off,40,Include realistic business scenarios and workflows,
-AVD-024,Deployment,Production Environment Setup,Deploy AVD solution to production Azure environment,EO Engineer,[START_DATE+95],[START_DATE+102],7,AVD-009,Not Started,0,High,No,Infrastructure foundation,Production AVD environment,56,Include production host pools and networking,
-AVD-025,Deployment,Application Deployment,Deploy MSIX packages to production host pools,EO Engineer,[START_DATE+100],[START_DATE+105],5,AVD-024,Not Started,0,High,No,Production environment,Production application deployment,40,Include staged application rollout,
-AVD-026,Deployment,Production Validation,Validate production deployment and user access,EO Engineer,[START_DATE+105],[START_DATE+107],2,AVD-025,Not Started,0,High,Yes,Application deployment,Production validation report,16,Include end-to-end user workflow validation,
-AVD-027,Training,Administrator Training,Train IT administrators on AVD management and operations,EO Engineer,[START_DATE+95],[START_DATE+105],10,AVD-023,Not Started,0,Medium,No,UAT completion,Administrator training completion,40,Include Azure portal management and troubleshooting,
-AVD-028,Training,End User Training,Train users on virtual desktop access and applications,EO Engineer,[START_DATE+105],[START_DATE+112],7,AVD-026,Not Started,0,High,No,Production validation,User training completion certificates,35,Include device setup and virtual desktop workflows,
-AVD-029,Training,Documentation Delivery,Create user guides and technical documentation,EO Engineer,[START_DATE+100],[START_DATE+115],15,AVD-026,Not Started,0,Medium,No,Production validation,Complete AVD documentation package,60,Include quick start guides and troubleshooting,
-AVD-030,Go-Live,Production Go-Live,Launch AVD solution for production user access,EO Project Manager,[START_DATE+112],[START_DATE+114],2,AVD-028,Not Started,0,Critical,Yes,Training completion,AVD production go-live,16,Monitor user adoption and performance metrics,
-AVD-031,Support,Go-Live Support,Provide intensive support during initial production use,EO Engineer,[START_DATE+114],[START_DATE+121],7,AVD-030,Not Started,0,High,No,Production go-live,Go-live support reports,56,Monitor user experience and system performance,
-AVD-032,Support,Performance Monitoring,Monitor virtual desktop performance and user satisfaction,EO Engineer,[START_DATE+121],[START_DATE+151],30,AVD-031,Not Started,0,Medium,No,Go-live support,Performance monitoring baseline,60,Establish performance SLAs and user satisfaction metrics,
-AVD-033,Closure,Knowledge Transfer,Transfer AVD solution ownership to client operations team,EO Project Manager,[START_DATE+140],[START_DATE+150],10,AVD-029,Not Started,0,Medium,No,Documentation complete,Knowledge transfer completion,40,Include operational procedures and escalation paths,
-AVD-034,Closure,Project Closure,Formal AVD project closure and lessons learned,EO Project Manager,[START_DATE+151],[START_DATE+153],2,AVD-032,Not Started,0,Medium,Yes,Performance baseline,AVD project closure report,8,Document modern workplace best practices and recommendations,
+# Project Timeline
+#WIDTH: 12,36,13,19,19,26,24,14
+#ALIGN: left,left,center,center,center,left,left,center
+Phase,Task,Duration,Start Date,End Date,Dependencies,Owner,Status
+Discovery,Project Kickoff,1 day,[START_DATE],[START_DATE+1],None,EO Project Manager,Not Started
+Discovery,Current State Assessment,4 days,[START_DATE+1],[START_DATE+5],Project Kickoff,EO Sales Engineer,Not Started
+Discovery,Azure Environment Assessment,5 days,[START_DATE+3],[START_DATE+8],Current State Assessment,EO Engineer,Not Started
+Discovery,Network Connectivity Review,5 days,[START_DATE+5],[START_DATE+10],Current State Assessment,EO Engineer,Not Started
+Planning,AVD Solution Architecture,10 days,[START_DATE+8],[START_DATE+18],Azure Environment Assessment,EO Quarterback,Not Started
+Planning,Application Assessment,8 days,[START_DATE+12],[START_DATE+20],AVD Solution Architecture,EO Quarterback,Not Started
+Planning,User Profile Strategy,7 days,[START_DATE+15],[START_DATE+22],Current State Assessment,EO Quarterback,Not Started
+Planning,Security Architecture,7 days,[START_DATE+18],[START_DATE+25],AVD Solution Architecture,EO Engineer,Not Started
+Infrastructure,Azure Infrastructure Setup,10 days,[START_DATE+25],[START_DATE+35],AVD Solution Architecture,EO Engineer,Not Started
+Infrastructure,Host Pool Configuration,10 days,[START_DATE+30],[START_DATE+40],Azure Infrastructure Setup,EO Engineer,Not Started
+Development,Golden Image Creation,15 days,[START_DATE+35],[START_DATE+50],Application Assessment,EO Engineer,Not Started
+Development,Application Packaging,20 days,[START_DATE+25],[START_DATE+45],Application Assessment,EO Engineer,Not Started
+Development,Profile Container Setup,10 days,[START_DATE+45],[START_DATE+55],User Profile Strategy,EO Engineer,Not Started
+Development,Network Optimization,10 days,[START_DATE+40],[START_DATE+50],Network Connectivity Review,EO Engineer,Not Started
+Development,Monitoring Configuration,10 days,[START_DATE+50],[START_DATE+60],Host Pool Configuration,EO Engineer,Not Started
+Development,Security Implementation,10 days,[START_DATE+55],[START_DATE+65],Security Architecture,EO Engineer,Not Started
+Development,User Access Configuration,10 days,[START_DATE+60],[START_DATE+70],Profile Container Setup,EO Engineer,Not Started
+Testing,Infrastructure Testing,10 days,[START_DATE+65],[START_DATE+75],Monitoring Configuration,EO Engineer,Not Started
+Testing,Application Testing,10 days,[START_DATE+75],[START_DATE+85],Application Packaging,EO Engineer,Not Started
+Testing,User Experience Testing,7 days,[START_DATE+80],[START_DATE+87],User Access Configuration,EO Engineer,Not Started
+Testing,Security Testing,15 days,[START_DATE+70],[START_DATE+85],Security Implementation,EO Engineer,Not Started
+Testing,Performance Testing,7 days,[START_DATE+85],[START_DATE+92],User Experience Testing,EO Engineer,Not Started
+Testing,User Acceptance Testing,10 days,[START_DATE+90],[START_DATE+100],Security Testing,EO Sales Engineer,Not Started
+Deployment,Production Environment Setup,7 days,[START_DATE+95],[START_DATE+102],Azure Infrastructure Setup,EO Engineer,Not Started
+Deployment,Application Deployment,5 days,[START_DATE+100],[START_DATE+105],Production Environment Setup,EO Engineer,Not Started
+Deployment,Production Validation,2 days,[START_DATE+105],[START_DATE+107],Application Deployment,EO Engineer,Not Started
+Training,Administrator Training,10 days,[START_DATE+95],[START_DATE+105],User Acceptance Testing,EO Engineer,Not Started
+Training,End User Training,7 days,[START_DATE+105],[START_DATE+112],Production Validation,EO Engineer,Not Started
+Training,Documentation Delivery,15 days,[START_DATE+100],[START_DATE+115],Production Validation,EO Engineer,Not Started
+Go-Live,Production Go-Live,2 days,[START_DATE+112],[START_DATE+114],End User Training,EO Project Manager,Not Started
+Support,Go-Live Support,7 days,[START_DATE+114],[START_DATE+121],Production Go-Live,EO Engineer,Not Started
+Support,Performance Monitoring,30 days,[START_DATE+121],[START_DATE+151],Go-Live Support,EO Engineer,Not Started
+Closure,Knowledge Transfer,10 days,[START_DATE+140],[START_DATE+150],Documentation Delivery,EO Project Manager,Not Started
+Closure,Project Closure,2 days,[START_DATE+151],[START_DATE+153],Performance Monitoring,EO Project Manager,Not Started
+
+# Milestones
+#WIDTH: 14,25,20,77,28,17
+#ALIGN: left,left,center,left,left,center
+Milestone ID,Milestone Name,Target Date,Success Criteria,Owner,Status
+MS-001,Project Kickoff Complete,[START_DATE+1],Project charter approved and team assembled,EO Project Manager,Not Started
+MS-002,Solution Architecture Approved,[START_DATE+18],Architecture design signed off by stakeholders,EO Quarterback,Not Started
+MS-003,Profile Strategy Approved,[START_DATE+22],FSLogix profile management design approved,EO Quarterback,Not Started
+MS-004,Azure Infrastructure Ready,[START_DATE+35],Virtual network and core services operational,EO Engineer,Not Started
+MS-005,Profile Containers Configured,[START_DATE+55],FSLogix containers tested and validated,EO Engineer,Not Started
+MS-006,Security Validation Complete,[START_DATE+85],Security controls tested and compliance verified,EO Engineer,Not Started
+MS-007,UAT Sign-off,[START_DATE+100],Business users approve virtual desktop experience,EO Sales Engineer,Not Started
+MS-008,Production Validation Complete,[START_DATE+107],Production environment validated and ready,EO Engineer,Not Started
+MS-009,Production Go-Live,[START_DATE+114],AVD solution live with user access,EO Project Manager,Not Started
+MS-010,Project Closure,[START_DATE+153],All deliverables accepted and project closed,EO Project Manager,Not Started
+
+# RACI Matrix
+#WIDTH: 30,10,10,10,10,10,10,10,10
+#ALIGN: left,center,center,center,center,center,center,center,center
+Task/Deliverable,PM,Arch,Eng,Sec,QA,Client IT,Client Sec,Sponsor
+Solution Architecture,C,A,R,C,I,C,I,I
+Infrastructure Setup,C,R,R,C,I,C,I,I
+Configuration & Tuning,A,R,R,C,I,C,I,I
+Integration Development,C,A,R,C,I,C,I,I
+Testing & Validation,R,R,R,C,A,C,C,I
+Security Implementation,C,R,R,A,C,C,A,I
+Knowledge Transfer,A,C,C,I,I,A,I,R
+Project Management,A,I,I,I,I,C,I,R
+Application Packaging,C,R,A,I,C,C,I,I
+User Profile Management,C,R,A,I,C,C,I,I
+Monitoring Setup,C,R,A,I,C,C,I,I
+Network Optimization,C,A,R,C,I,C,I,I
+User Access Control,C,R,R,A,I,C,A,I
+Performance Testing,R,C,R,I,A,C,I,I
+Go-Live Support,A,C,R,C,C,C,I,R
+
+# Communications Plan
+#WIDTH: 23,19,38,45,19,20
+#ALIGN: left,left,left,left,left,center
+Meeting Type,Frequency,Participants,Purpose,Owner,Day/Time
+Executive Status Report,Weekly,Executive Sponsors,AVD project status and decisions,EO Project Manager,Fridays 2PM
+Steering Committee,Bi-weekly,Steering Committee Members,Strategic direction and scope decisions,EO Project Manager,Every other Monday 10AM
+Development Team Standup,Daily,Core Development Team,Daily coordination and impediment removal,EO Quarterback,Daily 9AM
+Architecture Review,Weekly,Technical and Infrastructure Teams,Architecture decisions and optimization,EO Quarterback,Wednesdays 2PM
+Risk Review,Bi-weekly,Risk Management Team,Risk monitoring and mitigation,EO Quarterback,Every other Thursday 3PM
+Business User Feedback,Weekly,Desktop Users and Managers,Requirements validation and feedback,EO Sales Engineer,Tuesdays 1PM
+Sprint Review,Bi-weekly,Development Team,Infrastructure progress demonstration,EO Quarterback,Every other Friday 10AM
+Microsoft Support Call,Weekly,Microsoft Technical Teams,Service optimization coordination,EO Engineer,Thursdays 11AM
+User Experience Review,Weekly,QA and User Representatives,Performance and satisfaction validation,EO Quarterback,Wednesdays 10AM
+Change Control Board,As Needed,Change Control Board Members,Configuration change approvals,EO Engineer,As Required
+Security Review,Monthly,Security and Compliance Teams,Security posture and compliance,EO Quarterback,First Monday 2PM
+Go-Live Preparation,Daily (Pre-Launch),Go-Live Team,Production deployment readiness,EO Project Manager,Daily 8AM
+Post-Implementation Review,Monthly (Post-Launch),Project and Operations Teams,Performance review and optimization,EO Quarterback,Monthly 1PM

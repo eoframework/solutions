@@ -1,3 +1,5 @@
+#WIDTH: 25,15,12,30,45,10,12,33,16,20,26,39,12
+#ALIGN: left,left,center,left,left,center,left,left,center,left,left,left,center
 Parameter Name,Category,Environment,Default Value,Description,Required,Data Type,Validation Rules,Security Level,Owner Team,Dependencies,Notes,Last Updated
 AVD_SOLUTION_NAME,Application,All,Azure Virtual Desktop,AVD solution identifier for logging and monitoring,Yes,String,Max 50 characters,Public,Modern Workspace,None,Used in Azure Monitor logs and metrics,[DATE]
 AVD_VERSION,Application,All,1.0.0,Current AVD solution version,Yes,String,Semantic versioning format,Public,Modern Workspace,None,Updated with image and configuration releases,[DATE]
