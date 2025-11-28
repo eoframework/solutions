@@ -1,35 +1,98 @@
-Task ID,Phase,Task Name,Description,Owner,Start Date,End Date,Duration Days,Predecessor Tasks,Status,Progress %,Priority,Milestone,Dependencies,Deliverables,Delivery_Documents,Effort Hours,Notes
-VWN-001,Discovery,Project Kickoff,Virtual WAN project initiation and global network team alignment,EO Project Manager,[START_DATE],[START_DATE+1],1,,Not Started,0,Critical,Yes,Stakeholder availability,Virtual WAN project charter and team assignments,8,Executive sponsor approval for network transformation,
-VWN-002,Discovery,Current Network Assessment,Analyze existing network infrastructure and connectivity requirements,EO Sales Engineer,[START_DATE+1],[START_DATE+8],7,VWN-001,Not Started,0,High,No,Current network access,Current state network assessment and requirements,56,Document existing MPLS WAN and pain points,
-VWN-003,Discovery,Azure Environment Assessment,Evaluate Azure subscription and Virtual WAN service availability,EO Engineer,[START_DATE+3],[START_DATE+10],7,VWN-002,Not Started,0,High,No,Azure subscription access,Azure environment readiness assessment,40,Focus on Virtual WAN service quotas and regions,
-VWN-004,Discovery,Site Survey and Requirements,Assess branch sites and connectivity requirements,EO Engineer,[START_DATE+5],[START_DATE+15],10,VWN-002,Not Started,0,High,No,Site access coordination,Site assessment and connectivity requirements,80,Include bandwidth needs and equipment inventory,
-VWN-005,Planning,Virtual WAN Architecture Design,Design global Virtual WAN hub and spoke architecture,EO Quarterback,[START_DATE+10],[START_DATE+22],12,VWN-003,Not Started,0,Critical,Yes,Environment assessment,Virtual WAN architecture document,96,Include hub placement and regional optimization,
-VWN-006,Planning,Network Topology Design,Design hub-and-spoke topology and routing policies,EO Quarterback,[START_DATE+15],[START_DATE+25],10,VWN-005,Not Started,0,High,No,Architecture design,Network topology and routing design,80,Include traffic engineering and optimization,
-VWN-007,Planning,Security Architecture Design,Design Azure Firewall and network security integration,EO Quarterback,[START_DATE+18],[START_DATE+28],10,VWN-002,Not Started,0,High,Yes,Security requirements,Security architecture design document,80,Include firewall policies and threat protection,
-VWN-008,Planning,ExpressRoute Planning,Plan ExpressRoute circuits and global reach connectivity,EO Engineer,[START_DATE+20],[START_DATE+30],10,VWN-005,Not Started,0,High,No,Architecture design,ExpressRoute design and circuit planning,64,Include redundancy and bandwidth requirements,
-VWN-009,Infrastructure,Azure Infrastructure Setup,Provision Azure subscription and Virtual WAN service,EO Engineer,[START_DATE+30],[START_DATE+37],7,VWN-005,Not Started,0,High,Yes,Architecture approval,Azure Virtual WAN foundation,56,Include virtual networks and resource groups,
-VWN-010,Infrastructure,Virtual WAN Hub Deployment,Deploy regional Virtual WAN hubs and configurations,EO Engineer,[START_DATE+35],[START_DATE+50],15,VWN-009,Not Started,0,Critical,No,Azure infrastructure,Configured Virtual WAN hubs,120,Include hub gateways and routing configuration,
-VWN-011,Infrastructure,ExpressRoute Circuit Provisioning,Order and provision ExpressRoute circuits with providers,EO Engineer,[START_DATE+25],[START_DATE+65],40,VWN-008,Not Started,0,High,No,Circuit ordering,ExpressRoute circuit delivery,80,Lead time dependent on ISP providers,
-VWN-012,Infrastructure,Azure Firewall Deployment,Deploy and configure Azure Firewall in Virtual WAN hubs,EO Engineer,[START_DATE+45],[START_DATE+55],10,VWN-010,Not Started,0,High,No,Hub deployment,Azure Firewall configuration,80,Include security rules and policies,
-VWN-013,Development,Site-to-Site VPN Configuration,Configure site-to-site VPN connections for branch offices,EO Engineer,[START_DATE+50],[START_DATE+70],20,VWN-004,Not Started,0,Critical,No,Site requirements,VPN gateway configurations,160,Include redundant tunnels and optimization,
-VWN-014,Development,ExpressRoute Integration,Integrate ExpressRoute circuits with Virtual WAN hubs,EO Engineer,[START_DATE+65],[START_DATE+75],10,VWN-011,Not Started,0,High,Yes,Circuit delivery,ExpressRoute hub integration,80,Include Global Reach configuration,
-VWN-015,Development,Routing Policy Implementation,Implement traffic routing and optimization policies,EO Engineer,[START_DATE+55],[START_DATE+68],13,VWN-006,Not Started,0,High,No,Topology design,Routing policy configuration,104,Include hub-to-hub and branch routing,
-VWN-016,Development,Security Policy Implementation,Implement firewall rules and security policies,EO Engineer,[START_DATE+60],[START_DATE+70],10,VWN-012,Not Started,0,High,No,Firewall deployment,Security policy implementation,80,Include threat intelligence and logging,
-VWN-017,Development,Monitoring Configuration,Configure Network Watcher and monitoring solutions,EO Engineer,[START_DATE+70],[START_DATE+80],10,VWN-010,Not Started,0,High,No,Hub deployment,Monitoring and alerting configuration,80,Include performance baselines and dashboards,
-VWN-018,Testing,Hub Connectivity Testing,Test inter-hub connectivity and routing functionality,EO Engineer,[START_DATE+75],[START_DATE+85],10,VWN-015,Not Started,0,High,No,Routing implementation,Hub connectivity test results,80,Include latency and throughput validation,
-VWN-019,Testing,Site Connectivity Testing,Test branch site connectivity and application access,EO Engineer,[START_DATE+80],[START_DATE+95],15,VWN-013,Not Started,0,High,No,VPN configuration,Site connectivity test results,120,Include application performance testing,
-VWN-020,Testing,Performance Testing,Test network performance under realistic traffic loads,EO Engineer,[START_DATE+85],[START_DATE+92],7,VWN-017,Not Started,0,High,No,Monitoring configuration,Performance test results,56,Include bandwidth and latency measurements,
-VWN-021,Testing,Security Testing,Validate firewall rules and threat protection capabilities,EO Engineer,[START_DATE+75],[START_DATE+90],15,VWN-016,Not Started,0,Critical,Yes,Security implementation,Security validation report,120,Include penetration testing and compliance,
-VWN-022,Testing,Failover Testing,Test network redundancy and failover capabilities,EO Engineer,[START_DATE+90],[START_DATE+97],7,VWN-020,Not Started,0,High,No,Performance testing,Failover test results and procedures,56,Include ExpressRoute and VPN failover,
-VWN-023,Testing,User Acceptance Testing,Business validation of network performance and applications,EO Sales Engineer,[START_DATE+95],[START_DATE+105],10,VWN-021,Not Started,0,Critical,Yes,Security validation,UAT results and business sign-off,40,Include real business application scenarios,
-VWN-024,Deployment,Production Cutover Planning,Plan production network cutover and migration procedures,EO Engineer,[START_DATE+100],[START_DATE+107],7,VWN-009,Not Started,0,High,No,Infrastructure foundation,Production cutover plan,56,Include rollback procedures and timing,
-VWN-025,Deployment,Site Migration Execution,Execute phased migration of branch sites to Virtual WAN,EO Engineer,[START_DATE+105],[START_DATE+125],20,VWN-024,Not Started,0,Critical,No,Cutover planning,Site migration completion,160,Staged approach to minimize business impact,
-VWN-026,Deployment,Production Validation,Validate production network performance and functionality,EO Engineer,[START_DATE+125],[START_DATE+127],2,VWN-025,Not Started,0,High,Yes,Site migration,Production validation report,16,Include end-to-end connectivity validation,
-VWN-027,Training,Network Administrator Training,Train IT staff on Virtual WAN management and operations,EO Engineer,[START_DATE+110],[START_DATE+120],10,VWN-023,Not Started,0,Medium,No,UAT completion,Administrator training completion,40,Include Azure portal and troubleshooting,
-VWN-028,Training,Network Operations Training,Train NOC staff on monitoring and incident response,EO Engineer,[START_DATE+120],[START_DATE+127],7,VWN-026,Not Started,0,High,No,Production validation,Operations training completion,35,Include monitoring dashboards and procedures,
-VWN-029,Training,Documentation Delivery,Create network documentation and operational procedures,EO Engineer,[START_DATE+115],[START_DATE+130],15,VWN-026,Not Started,0,Medium,No,Production validation,Complete network documentation package,60,Include topology diagrams and runbooks,
-VWN-030,Go-Live,Production Go-Live,Complete production cutover and network go-live,EO Project Manager,[START_DATE+127],[START_DATE+129],2,VWN-028,Not Started,0,Critical,Yes,Training completion,Virtual WAN production go-live,16,Monitor network performance and connectivity,
-VWN-031,Support,Go-Live Support,Provide intensive support during initial production period,EO Engineer,[START_DATE+129],[START_DATE+136],7,VWN-030,Not Started,0,High,No,Production go-live,Go-live support reports,56,Monitor network performance and user experience,
-VWN-032,Support,Performance Monitoring,Monitor network performance and optimization opportunities,EO Engineer,[START_DATE+136],[START_DATE+166],30,VWN-031,Not Started,0,Medium,No,Go-live support,Performance monitoring baseline,60,Establish network SLAs and optimization targets,
-VWN-033,Closure,Knowledge Transfer,Transfer Virtual WAN ownership to client network operations,EO Project Manager,[START_DATE+150],[START_DATE+160],10,VWN-029,Not Started,0,Medium,No,Documentation complete,Knowledge transfer completion,40,Include operational procedures and escalation,
-VWN-034,Closure,Project Closure,Formal Virtual WAN project closure and lessons learned,EO Project Manager,[START_DATE+166],[START_DATE+168],2,VWN-032,Not Started,0,Medium,Yes,Performance baseline,Virtual WAN project closure report,8,Document network transformation best practices,
+# Project Timeline
+#WIDTH: 12,36,13,19,19,26,24,14
+#ALIGN: left,left,center,center,center,left,left,center
+Phase,Task,Duration,Start Date,End Date,Dependencies,Owner,Status
+Discovery,Project Kickoff and Network Assessment,1 day,[START_DATE],[START_DATE+1],None,Project Manager,Not Started
+Discovery,Current Network Infrastructure Assessment,7 days,[START_DATE+1],[START_DATE+8],Project Kickoff,Network Architect,Not Started
+Discovery,Azure Environment and Service Availability Assessment,7 days,[START_DATE+3],[START_DATE+10],Current Network Assessment,Cloud Engineer,Not Started
+Discovery,Branch Site Survey and Connectivity Requirements,10 days,[START_DATE+5],[START_DATE+15],Current Network Assessment,Network Engineer,Not Started
+Planning,Virtual WAN Hub Architecture Design,12 days,[START_DATE+10],[START_DATE+22],Azure Environment Assessment,Network Architect,Not Started
+Planning,Hub-and-Spoke Topology and Routing Design,10 days,[START_DATE+15],[START_DATE+25],Architecture Design,Network Architect,Not Started
+Planning,Security Architecture and Firewall Design,10 days,[START_DATE+18],[START_DATE+28],Current Network Assessment,Security Architect,Not Started
+Planning,ExpressRoute Circuit Planning and Design,10 days,[START_DATE+20],[START_DATE+30],Architecture Design,Network Engineer,Not Started
+Infrastructure,Azure Virtual WAN Foundation Setup,7 days,[START_DATE+30],[START_DATE+37],Architecture Design,Cloud Engineer,Not Started
+Infrastructure,Regional Virtual WAN Hub Deployment,15 days,[START_DATE+35],[START_DATE+50],Foundation Setup,Cloud Engineer,Not Started
+Infrastructure,ExpressRoute Circuit Provisioning,40 days,[START_DATE+25],[START_DATE+65],ExpressRoute Planning,Network Engineer,Not Started
+Infrastructure,Azure Firewall Deployment and Configuration,10 days,[START_DATE+45],[START_DATE+55],Hub Deployment,Security Engineer,Not Started
+Development,Site-to-Site VPN Gateway Configuration,20 days,[START_DATE+50],[START_DATE+70],Site Survey Complete,Network Engineer,Not Started
+Development,ExpressRoute Circuit Hub Integration,10 days,[START_DATE+65],[START_DATE+75],Circuit Provisioning,Network Engineer,Not Started
+Development,Traffic Routing and Optimization Policies,13 days,[START_DATE+55],[START_DATE+68],Topology Design,Network Engineer,Not Started
+Development,Firewall Rules and Security Policy Implementation,10 days,[START_DATE+60],[START_DATE+70],Firewall Deployment,Security Engineer,Not Started
+Development,Network Monitoring and Analytics Configuration,10 days,[START_DATE+70],[START_DATE+80],Hub Deployment,Cloud Engineer,Not Started
+Testing,Hub-to-Hub Connectivity and Routing Tests,10 days,[START_DATE+75],[START_DATE+85],Routing Policies,Network Engineer,Not Started
+Testing,Branch Site Connectivity and Application Tests,15 days,[START_DATE+80],[START_DATE+95],VPN Configuration,Network Engineer,Not Started
+Testing,Network Performance and Load Testing,7 days,[START_DATE+85],[START_DATE+92],Monitoring Configuration,Performance Engineer,Not Started
+Testing,Security Validation and Firewall Testing,15 days,[START_DATE+75],[START_DATE+90],Security Implementation,Security Engineer,Not Started
+Testing,Failover and Redundancy Testing,7 days,[START_DATE+90],[START_DATE+97],Performance Testing,Network Engineer,Not Started
+Testing,User Acceptance Testing and Business Validation,10 days,[START_DATE+95],[START_DATE+105],Security Validation,Business Analyst,Not Started
+Deployment,Production Cutover Planning and Preparation,7 days,[START_DATE+100],[START_DATE+107],Foundation Setup,Project Manager,Not Started
+Deployment,Phased Site Migration to Virtual WAN,20 days,[START_DATE+105],[START_DATE+125],Cutover Planning,Network Engineer,Not Started
+Deployment,Production Network Validation,2 days,[START_DATE+125],[START_DATE+127],Site Migration,Network Engineer,Not Started
+Training,Network Administrator Training Program,10 days,[START_DATE+110],[START_DATE+120],UAT Complete,Training Specialist,Not Started
+Training,Network Operations Center Staff Training,7 days,[START_DATE+120],[START_DATE+127],Production Validation,Training Specialist,Not Started
+Training,Technical Documentation and Runbooks,15 days,[START_DATE+115],[START_DATE+130],Production Validation,Technical Writer,Not Started
+Go-Live,Production Go-Live and Network Cutover,2 days,[START_DATE+127],[START_DATE+129],Training Complete,Project Manager,Not Started
+Support,Intensive Go-Live Support Period,7 days,[START_DATE+129],[START_DATE+136],Production Go-Live,Support Team,Not Started
+Support,Performance Monitoring and Optimization,30 days,[START_DATE+136],[START_DATE+166],Go-Live Support,Network Engineer,Not Started
+Closure,Knowledge Transfer to Operations Team,10 days,[START_DATE+150],[START_DATE+160],Documentation Complete,Project Manager,Not Started
+Closure,Project Closure and Lessons Learned,2 days,[START_DATE+166],[START_DATE+168],Performance Baseline,Project Manager,Not Started
+
+# Milestones
+#WIDTH: 14,25,20,77,28,17
+#ALIGN: left,left,center,left,left,center
+Milestone ID,Milestone Name,Target Date,Success Criteria,Owner,Status
+MS-001,Project Kickoff Complete,[START_DATE+1],Project charter signed; team mobilized; stakeholders aligned,Project Manager,Pending
+MS-002,Architecture Design Approved,[START_DATE+22],Virtual WAN hub design validated; routing topology finalized; security architecture approved,Network Architect,Pending
+MS-003,Infrastructure Foundation Ready,[START_DATE+37],Azure Virtual WAN deployed; resource groups configured; subscriptions prepared,Cloud Engineer,Pending
+MS-004,Hub Deployment Complete,[START_DATE+50],All regional hubs operational; VPN gateways configured; ExpressRoute gateways ready,Cloud Engineer,Pending
+MS-005,Security Implementation Complete,[START_DATE+70],Azure Firewall deployed; security policies active; threat protection enabled,Security Engineer,Pending
+MS-006,ExpressRoute Integration Complete,[START_DATE+75],ExpressRoute circuits connected; Global Reach configured; routing validated,Network Engineer,Pending
+MS-007,Security Validation Passed,[START_DATE+90],Firewall rules tested; threat detection verified; compliance validated,Security Engineer,Pending
+MS-008,User Acceptance Testing Complete,[START_DATE+105],Business validation passed; performance metrics achieved; stakeholder sign-off obtained,Business Analyst,Pending
+MS-009,Production Cutover Complete,[START_DATE+127],All sites migrated; production traffic flowing; network performance validated,Project Manager,Pending
+MS-010,Project Closure,[START_DATE+168],Knowledge transfer complete; documentation delivered; project closed,Project Manager,Pending
+
+# RACI Matrix
+#WIDTH: 30,10,10,10,10,10,10,10,10
+#ALIGN: left,center,center,center,center,center,center,center,center
+Task/Deliverable,PM,Arch,Eng,Sec,QA,Client IT,Client Sec,Sponsor
+Project Kickoff and Charter,A,C,C,C,I,R,I,R
+Current Network Assessment,C,R,R,C,I,A,C,I
+Virtual WAN Architecture Design,C,A,R,C,I,C,I,I
+Security Architecture Design,C,C,R,A,I,C,R,I
+Azure Infrastructure Setup,C,R,A,C,I,C,I,I
+Virtual Hub Deployment,R,R,A,C,I,C,I,I
+ExpressRoute Provisioning,C,R,A,I,I,C,I,I
+Azure Firewall Configuration,C,C,R,A,I,C,C,I
+VPN Gateway Configuration,C,R,A,C,I,C,I,I
+Routing Policy Implementation,C,R,A,I,I,C,I,I
+Security Policy Implementation,C,C,R,A,I,C,A,I
+Monitoring Configuration,C,R,A,I,I,C,I,I
+Connectivity Testing,R,R,A,C,R,C,I,I
+Security Validation Testing,R,C,R,A,A,C,R,I
+Performance Testing,R,C,A,I,R,C,I,I
+User Acceptance Testing,C,I,C,I,R,A,C,I
+Production Cutover Planning,A,R,R,C,I,C,I,R
+Site Migration Execution,R,C,A,C,I,C,I,I
+Network Administrator Training,C,R,R,C,I,A,I,I
+NOC Staff Training,C,R,R,I,I,A,I,I
+Documentation Delivery,R,R,A,C,C,A,I,I
+Knowledge Transfer,R,R,R,C,I,A,I,I
+Production Go-Live,A,R,R,C,I,C,I,R
+Go-Live Support,R,C,A,C,I,C,I,I
+Project Closure,A,C,I,I,I,C,I,R
+
+# Communications Plan
+#WIDTH: 23,19,38,45,19,20
+#ALIGN: left,left,left,left,left,center
+Meeting Type,Frequency,Participants,Purpose,Owner,Day/Time
+Project Kickoff,One-time,All stakeholders and project team,Align on objectives and deliverables,Project Manager,[TBD]
+Weekly Status Meeting,Weekly,PM | Arch | Eng | Client IT Lead,Review progress and address issues,Project Manager,Mondays 10am
+Steering Committee,Bi-weekly,PM | Sponsor | Client Management | Arch,Executive updates and decisions,Project Manager,Thursdays 2pm
+Technical Design Review,As needed,Arch | Eng | Sec | Client IT,Review and approve technical designs,Network Architect,[TBD]
+Security Review,Bi-weekly,Sec | Client Sec | PM | Arch,Security compliance and validation,Security Architect,Wednesdays 11am
+Testing Status,Weekly,QA | Eng | PM | Client IT,Testing progress and issue resolution,QA Lead,Fridays 9am
+Training Sessions,As scheduled,Training Lead | Client IT | Operations,Knowledge transfer and training,Training Specialist,[TBD]
+Go-Live Readiness,Daily during cutover,PM | Arch | Eng | Client IT | Sponsor,Production readiness validation,Project Manager,[TBD]
+Post-Go-Live Support,Daily for 2 weeks,Support Team | Client IT | NOC,Monitor production and resolve issues,Support Lead,[TBD]
+Project Retrospective,One-time at closure,All project team members,Lessons learned and best practices,Project Manager,[TBD]
