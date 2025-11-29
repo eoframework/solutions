@@ -98,6 +98,30 @@ output "rds_database_name" {
 }
 
 # =============================================================================
+# Well-Architected Module Outputs
+# =============================================================================
+
+output "config_rules_enabled" {
+  description = "Whether AWS Config rules are enabled"
+  value       = var.enable_config_rules
+}
+
+output "backup_vault_arn" {
+  description = "AWS Backup vault ARN"
+  value       = var.enable_backup_plans ? module.backup_plans[0].vault_arn : null
+}
+
+output "backup_plan_id" {
+  description = "AWS Backup plan ID"
+  value       = var.enable_backup_plans ? module.backup_plans[0].backup_plan_id : null
+}
+
+output "monthly_budget_name" {
+  description = "Monthly cost budget name"
+  value       = var.enable_budgets ? module.budgets[0].monthly_budget_name : null
+}
+
+# =============================================================================
 # Deployment Summary
 # =============================================================================
 
