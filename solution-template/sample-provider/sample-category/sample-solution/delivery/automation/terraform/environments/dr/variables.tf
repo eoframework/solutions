@@ -25,6 +25,12 @@ variable "solution_abbr" {
   }
 }
 
+variable "org_prefix" {
+  description = "Organization prefix for globally unique resource names (e.g., S3 buckets)"
+  type        = string
+  default     = ""
+}
+
 variable "provider_name" {
   description = "Provider name (e.g., dell, aws, microsoft)"
   type        = string
@@ -616,4 +622,289 @@ variable "enable_xray_tracing" {
   description = "Enable AWS X-Ray tracing"
   type        = bool
   default     = true  # DR: enabled for debugging
+}
+
+# =============================================================================
+# WELL-ARCHITECTED FRAMEWORK CONFIGURATION (DR FOCUSED)
+# =============================================================================
+# DR-specific governance emphasizing data protection and cost monitoring.
+# Security controls (WAF, GuardDuty) are managed at the primary site.
+
+#------------------------------------------------------------------------------
+# Operational Excellence: AWS Config (OPTIONAL)
+#------------------------------------------------------------------------------
+
+variable "enable_config_rules" {
+  description = "Enable AWS Config for compliance monitoring"
+  type        = bool
+  default     = false  # Optional for DR
+}
+
+variable "enable_config_recorder" {
+  description = "Enable AWS Config recorder"
+  type        = bool
+  default     = false
+}
+
+variable "config_bucket_name" {
+  description = "S3 bucket for Config delivery (auto-generated if empty)"
+  type        = string
+  default     = ""
+}
+
+variable "config_retention_days" {
+  description = "Config log retention in days"
+  type        = number
+  default     = 365
+
+  validation {
+    condition     = var.config_retention_days >= 90 && var.config_retention_days <= 3653
+    error_message = "Config retention must be between 90 and 3653 days."
+  }
+}
+
+#------------------------------------------------------------------------------
+# Reliability: AWS Backup (CRITICAL for DR)
+#------------------------------------------------------------------------------
+
+variable "enable_backup_plans" {
+  description = "Enable AWS Backup for centralized backup management"
+  type        = bool
+  default     = true  # CRITICAL for DR
+}
+
+variable "backup_daily_schedule" {
+  description = "Daily backup schedule (cron expression, UTC)"
+  type        = string
+  default     = "cron(0 5 * * ? *)"
+}
+
+variable "backup_daily_retention" {
+  description = "Daily backup retention in days"
+  type        = number
+  default     = 30
+
+  validation {
+    condition     = var.backup_daily_retention >= 1 && var.backup_daily_retention <= 365
+    error_message = "Daily backup retention must be between 1 and 365 days."
+  }
+}
+
+variable "backup_weekly_schedule" {
+  description = "Weekly backup schedule (cron expression, UTC)"
+  type        = string
+  default     = "cron(0 5 ? * SUN *)"
+}
+
+variable "backup_weekly_retention" {
+  description = "Weekly backup retention in days"
+  type        = number
+  default     = 90
+
+  validation {
+    condition     = var.backup_weekly_retention >= 7 && var.backup_weekly_retention <= 365
+    error_message = "Weekly backup retention must be between 7 and 365 days."
+  }
+}
+
+variable "enable_monthly_backup" {
+  description = "Enable monthly backup schedule"
+  type        = bool
+  default     = true
+}
+
+variable "backup_monthly_schedule" {
+  description = "Monthly backup schedule (cron expression, UTC)"
+  type        = string
+  default     = "cron(0 5 1 * ? *)"
+}
+
+variable "backup_monthly_retention" {
+  description = "Monthly backup retention in days"
+  type        = number
+  default     = 365
+
+  validation {
+    condition     = var.backup_monthly_retention >= 30 && var.backup_monthly_retention <= 3653
+    error_message = "Monthly backup retention must be between 30 and 3653 days."
+  }
+}
+
+variable "backup_cold_storage_days" {
+  description = "Days before moving monthly backups to cold storage"
+  type        = number
+  default     = 90
+
+  validation {
+    condition     = var.backup_cold_storage_days >= 7 && var.backup_cold_storage_days <= 365
+    error_message = "Cold storage transition must be between 7 and 365 days."
+  }
+}
+
+variable "dr_kms_key_arn" {
+  description = "KMS key ARN in DR region for backup vault encryption"
+  type        = string
+  default     = ""
+}
+
+variable "backup_resource_arns" {
+  description = "Specific resource ARNs to include in backup"
+  type        = list(string)
+  default     = []
+}
+
+variable "enable_continuous_backup" {
+  description = "Enable continuous backup for point-in-time recovery"
+  type        = bool
+  default     = false
+}
+
+variable "enable_windows_vss" {
+  description = "Enable Windows VSS for application-consistent backups"
+  type        = bool
+  default     = false
+}
+
+variable "enable_backup_vault_lock" {
+  description = "Enable vault lock for compliance (WORM)"
+  type        = bool
+  default     = false
+}
+
+variable "vault_lock_min_retention" {
+  description = "Minimum retention days for vault lock"
+  type        = number
+  default     = 7
+}
+
+variable "vault_lock_max_retention" {
+  description = "Maximum retention days for vault lock"
+  type        = number
+  default     = 365
+}
+
+variable "vault_lock_changeable_days" {
+  description = "Days before vault lock becomes immutable"
+  type        = number
+  default     = 3
+}
+
+#------------------------------------------------------------------------------
+# Cost Optimization: AWS Budgets
+#------------------------------------------------------------------------------
+
+variable "enable_budgets" {
+  description = "Enable AWS Budgets for cost alerting"
+  type        = bool
+  default     = true  # Enabled for DR cost monitoring
+}
+
+variable "monthly_budget_amount" {
+  description = "Monthly budget limit in USD"
+  type        = number
+  default     = 500  # Lower than prod (standby mode)
+
+  validation {
+    condition     = var.monthly_budget_amount > 0 && var.monthly_budget_amount <= 10000000
+    error_message = "Monthly budget must be between $1 and $10,000,000."
+  }
+}
+
+variable "budget_alert_thresholds" {
+  description = "Percentage thresholds for budget alerts"
+  type        = list(number)
+  default     = [50, 80, 100]
+
+  validation {
+    condition     = alltrue([for t in var.budget_alert_thresholds : t >= 1 && t <= 200])
+    error_message = "Alert thresholds must be between 1 and 200 percent."
+  }
+}
+
+variable "budget_forecast_threshold" {
+  description = "Forecasted cost threshold percentage"
+  type        = number
+  default     = 100
+
+  validation {
+    condition     = var.budget_forecast_threshold >= 50 && var.budget_forecast_threshold <= 200
+    error_message = "Forecast threshold must be between 50 and 200 percent."
+  }
+}
+
+variable "budget_alert_emails" {
+  description = "Email addresses for budget alerts"
+  type        = list(string)
+  default     = []
+}
+
+variable "budget_cost_filter_tags" {
+  description = "Filter costs by tags (map of tag key to value)"
+  type        = map(string)
+  default     = null
+}
+
+variable "enable_service_budgets" {
+  description = "Enable service-specific budgets"
+  type        = bool
+  default     = false
+}
+
+variable "ec2_budget_amount" {
+  description = "Monthly EC2 budget in USD (0 to disable)"
+  type        = number
+  default     = 0
+}
+
+variable "rds_budget_amount" {
+  description = "Monthly RDS budget in USD (0 to disable)"
+  type        = number
+  default     = 0
+}
+
+variable "data_transfer_budget_amount" {
+  description = "Monthly data transfer budget in USD (0 to disable)"
+  type        = number
+  default     = 0
+}
+
+variable "enable_usage_budget" {
+  description = "Enable EC2 usage hours budget"
+  type        = bool
+  default     = false
+}
+
+variable "ec2_usage_hours_limit" {
+  description = "Maximum EC2 hours per month"
+  type        = number
+  default     = 1000
+}
+
+variable "enable_budget_actions" {
+  description = "Enable automated budget actions"
+  type        = bool
+  default     = false  # Never auto-actions in DR
+}
+
+variable "budget_action_approval" {
+  description = "Approval model for budget actions (AUTOMATIC or MANUAL)"
+  type        = string
+  default     = "MANUAL"  # Always MANUAL for DR
+
+  validation {
+    condition     = contains(["AUTOMATIC", "MANUAL"], var.budget_action_approval)
+    error_message = "Budget action approval must be AUTOMATIC or MANUAL."
+  }
+}
+
+variable "budget_action_threshold" {
+  description = "Threshold percentage to trigger budget action"
+  type        = number
+  default     = 150  # Higher threshold for DR
+}
+
+variable "budget_ec2_instances_to_stop" {
+  description = "EC2 instance IDs to stop when budget exceeded"
+  type        = list(string)
+  default     = []  # Leave empty for DR
 }

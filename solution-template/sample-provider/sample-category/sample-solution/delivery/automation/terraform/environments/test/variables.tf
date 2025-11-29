@@ -25,6 +25,12 @@ variable "solution_abbr" {
   }
 }
 
+variable "org_prefix" {
+  description = "Organization prefix for globally unique resource names (e.g., S3 buckets)"
+  type        = string
+  default     = ""
+}
+
 variable "provider_name" {
   description = "Provider name (e.g., dell, aws, microsoft)"
   type        = string
@@ -515,4 +521,125 @@ variable "db_deletion_protection" {
   description = "Enable deletion protection"
   type        = bool
   default     = false  # Test: disabled for easy teardown
+}
+
+# =============================================================================
+# WELL-ARCHITECTED FRAMEWORK CONFIGURATION (MINIMAL FOR TEST)
+# =============================================================================
+# Most governance features disabled for test environments.
+# Enable selectively as needed for testing specific features.
+
+#------------------------------------------------------------------------------
+# Operational Excellence: AWS Config (OPTIONAL)
+#------------------------------------------------------------------------------
+
+variable "enable_config_rules" {
+  description = "Enable AWS Config for compliance monitoring"
+  type        = bool
+  default     = false  # Test: disabled
+}
+
+variable "enable_config_recorder" {
+  description = "Enable AWS Config recorder"
+  type        = bool
+  default     = false  # Test: disabled
+}
+
+variable "config_bucket_name" {
+  description = "S3 bucket for Config delivery (auto-generated if empty)"
+  type        = string
+  default     = ""
+}
+
+variable "config_retention_days" {
+  description = "Config log retention in days"
+  type        = number
+  default     = 90  # Minimum if enabled
+
+  validation {
+    condition     = var.config_retention_days >= 90 && var.config_retention_days <= 3653
+    error_message = "Config retention must be between 90 and 3653 days."
+  }
+}
+
+variable "enable_config_security_rules" {
+  description = "Enable security-focused Config rules"
+  type        = bool
+  default     = false  # Test: disabled
+}
+
+#------------------------------------------------------------------------------
+# Reliability: AWS Backup (OPTIONAL)
+#------------------------------------------------------------------------------
+
+variable "enable_backup_plans" {
+  description = "Enable AWS Backup for centralized backup management"
+  type        = bool
+  default     = false  # Test: disabled - data is ephemeral
+}
+
+variable "backup_daily_schedule" {
+  description = "Daily backup schedule (cron expression, UTC)"
+  type        = string
+  default     = "cron(0 5 * * ? *)"  # 5 AM UTC daily
+}
+
+variable "backup_daily_retention" {
+  description = "Daily backup retention in days"
+  type        = number
+  default     = 7  # Test: minimal retention
+
+  validation {
+    condition     = var.backup_daily_retention >= 1 && var.backup_daily_retention <= 35
+    error_message = "Daily backup retention must be between 1 and 35 days."
+  }
+}
+
+#------------------------------------------------------------------------------
+# Cost Optimization: AWS Budgets (RECOMMENDED)
+#------------------------------------------------------------------------------
+
+variable "enable_budgets" {
+  description = "Enable AWS Budgets for cost alerting"
+  type        = bool
+  default     = true  # Test: ENABLED to catch runaway costs
+}
+
+variable "monthly_budget_amount" {
+  description = "Monthly budget limit in USD"
+  type        = number
+  default     = 100  # Test: low threshold
+
+  validation {
+    condition     = var.monthly_budget_amount > 0 && var.monthly_budget_amount <= 10000000
+    error_message = "Monthly budget must be between $1 and $10,000,000."
+  }
+}
+
+variable "budget_alert_thresholds" {
+  description = "Percentage thresholds for budget alerts"
+  type        = list(number)
+  default     = [50, 80, 100]
+
+  validation {
+    condition     = alltrue([for t in var.budget_alert_thresholds : t >= 1 && t <= 200])
+    error_message = "Alert thresholds must be between 1 and 200 percent."
+  }
+}
+
+variable "budget_forecast_threshold" {
+  description = "Forecasted cost threshold percentage"
+  type        = number
+  default     = 100
+
+  validation {
+    condition     = var.budget_forecast_threshold >= 50 && var.budget_forecast_threshold <= 200
+    error_message = "Forecast threshold must be between 50 and 200 percent."
+  }
+}
+
+variable "budget_alert_emails" {
+  description = "Email addresses for budget alerts"
+  type        = list(string)
+  default     = []
 }

@@ -26,6 +26,17 @@ variable "solution_abbr" {
   }
 }
 
+variable "org_prefix" {
+  description = "Organization prefix for globally unique resource names (e.g., S3 buckets)"
+  type        = string
+  default     = ""
+
+  validation {
+    condition     = var.org_prefix == "" || can(regex("^[a-z0-9][a-z0-9-]{1,18}[a-z0-9]$", var.org_prefix))
+    error_message = "Organization prefix must be 3-20 lowercase alphanumeric characters with hyphens."
+  }
+}
+
 variable "provider_name" {
   description = "Provider name (e.g., dell, aws, microsoft)"
   type        = string

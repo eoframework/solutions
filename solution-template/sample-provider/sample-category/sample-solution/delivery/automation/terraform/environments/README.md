@@ -96,27 +96,52 @@ aws sso login --profile mycompany-prod
 
 ### 4. Remote State Backend (Required for Team Collaboration)
 
-Create S3 bucket and DynamoDB table for Terraform state:
+The bootstrap scripts automate creation of S3 bucket and DynamoDB table for Terraform state.
 
-```bash
-# Create S3 bucket for state storage
-aws s3 mb s3://mycompany-terraform-state --region us-east-1
+#### Step 1: Configure org_prefix
 
-# Enable versioning
-aws s3api put-bucket-versioning \
-  --bucket mycompany-terraform-state \
-  --versioning-configuration Status=Enabled
+Edit `main.tfvars` in your target environment to set `org_prefix`:
 
-# Create DynamoDB table for state locking
-aws dynamodb create-table \
-  --table-name terraform-state-locks \
-  --attribute-definitions AttributeName=LockID,AttributeType=S \
-  --key-schema AttributeName=LockID,KeyType=HASH \
-  --billing-mode PAY_PER_REQUEST \
-  --region us-east-1
+```hcl
+# Required for globally unique S3 bucket names
+org_prefix    = "acme"           # Your organization prefix
+solution_abbr = "vxr"            # Solution abbreviation
+aws_region    = "us-east-1"      # Target region
 ```
 
-Then update `providers.tf` in each environment with your backend configuration.
+#### Step 2: Run Bootstrap Script
+
+```bash
+# Option A: Bash script (Linux/macOS/WSL)
+chmod +x setup/setup-backend.sh
+./setup/setup-backend.sh prod
+
+# Option B: Python script (cross-platform)
+pip install boto3
+python setup/setup-backend.py prod
+```
+
+The bootstrap script creates:
+- **S3 Bucket**: `{org_prefix}-{solution_abbr}-{env}-terraform-state`
+- **DynamoDB Table**: `{org_prefix}-{solution_abbr}-{env}-terraform-locks`
+- **backend.tfvars**: Configuration file in the environment directory
+
+#### Step 3: Initialize Terraform
+
+```bash
+cd environments/prod
+terraform init -backend-config=backend.tfvars
+```
+
+#### Backend Naming Convention
+
+| Resource | Pattern | Example |
+|----------|---------|---------|
+| S3 Bucket | `{org}-{abbr}-{env}-terraform-state` | `acme-vxr-prod-terraform-state` |
+| DynamoDB | `{org}-{abbr}-{env}-terraform-locks` | `acme-vxr-prod-terraform-locks` |
+| State Key | `terraform.tfstate` | `terraform.tfstate` |
+
+See `setup/README.md` for detailed documentation.
 
 ### 5. Required IAM Permissions
 

@@ -14,18 +14,23 @@ terraform {
   required_version = ">= 1.6.0"
 
   # Remote state storage in S3
-  # Configure via: terraform init -backend-config=backend.hcl
-  # Or set values directly below for single-team use
+  #
+  # SETUP: Run bootstrap script to create S3 bucket and DynamoDB table:
+  #   ../setup/setup-backend.sh test
+  #   OR
+  #   python ../setup/setup-backend.py test
+  #
+  # This creates backend.tfvars, then initialize with:
+  #   terraform init -backend-config=backend.tfvars
+  #
+  # Naming Convention:
+  #   S3 Bucket:      {org_prefix}-{solution_abbr}-test-terraform-state
+  #   DynamoDB Table: {org_prefix}-{solution_abbr}-test-terraform-locks
+  #   State Key:      terraform.tfstate
+  #
   backend "s3" {
-    # Required - configure these for your environment:
-    # bucket         = "mycompany-terraform-state"
-    # key            = "solutions/sample-solution/test/terraform.tfstate"
-    # region         = "us-east-1"
-    # dynamodb_table = "terraform-state-locks"
-    # encrypt        = true
-    #
-    # Optional - if using AWS profiles:
-    # profile        = "mycompany-test"
+    # Backend values loaded from backend.tfvars via -backend-config flag
+    # See setup/README.md for setup instructions
   }
 
   required_providers {

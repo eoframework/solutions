@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Production Environment - Terraform Deployment Script
-# Uses main.tfvars for configuration
+# Uses config/*.tfvars files for configuration
 
 set -e
 
@@ -24,13 +24,7 @@ echo -e "${CYAN}═════════════════════�
 build_var_files() {
     VAR_FILES=""
 
-    # Load main.tfvars if exists
-    if [ -f "main.tfvars" ]; then
-        VAR_FILES="-var-file=main.tfvars"
-        echo -e "${GREEN}   ✓ main.tfvars${NC}"
-    fi
-
-    # Load any additional tfvars files in config/ if directory exists
+    # Load all tfvars files from config/ directory (primary source)
     if [ -d "config" ]; then
         for file in config/*.tfvars; do
             if [ -f "$file" ]; then
@@ -38,6 +32,18 @@ build_var_files() {
                 echo -e "${GREEN}   ✓ $file${NC}"
             fi
         done
+    fi
+
+    # Load well-architected.tfvars if exists
+    if [ -f "well-architected.tfvars" ]; then
+        VAR_FILES="$VAR_FILES -var-file=well-architected.tfvars"
+        echo -e "${GREEN}   ✓ well-architected.tfvars${NC}"
+    fi
+
+    # Fallback: Load main.tfvars if config/ not present (legacy support)
+    if [ ! -d "config" ] && [ -f "main.tfvars" ]; then
+        VAR_FILES="-var-file=main.tfvars"
+        echo -e "${GREEN}   ✓ main.tfvars (legacy)${NC}"
     fi
 
     echo ""
