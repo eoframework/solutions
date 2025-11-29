@@ -1,180 +1,102 @@
-# Terraform Backend Bootstrap
+# Terraform Backend Setup
 
-This directory contains scripts to create the AWS resources required for Terraform remote state storage before running `terraform init`.
+Scripts to create AWS resources for Terraform remote state storage.
 
 ## Overview
 
-Terraform remote state with S3 backend requires:
-- **S3 Bucket** - Stores the state file with versioning and encryption
-- **DynamoDB Table** - Provides state locking to prevent concurrent modifications
+Terraform remote state requires:
+- **S3 Bucket** - Stores state file with versioning and encryption
+- **DynamoDB Table** - Provides state locking
 
-These resources must exist *before* Terraform can use them, creating a chicken-and-egg problem. The bootstrap scripts solve this by creating the backend resources using AWS CLI/SDK.
+These must exist before `terraform init`, so these scripts create them via AWS CLI.
 
 ## Naming Convention
-
-Resources are named to be globally unique and solution/environment specific:
 
 | Resource | Pattern | Example |
 |----------|---------|---------|
 | S3 Bucket | `{org_prefix}-{solution_abbr}-{env}-terraform-state` | `acme-vxr-prod-terraform-state` |
 | DynamoDB Table | `{org_prefix}-{solution_abbr}-{env}-terraform-locks` | `acme-vxr-prod-terraform-locks` |
-| State Key | `terraform.tfstate` | `terraform.tfstate` |
 
 ## Prerequisites
 
-1. **AWS Credentials** - Configure via `aws configure` or environment variables
-2. **org_prefix** - Must be set in `environments/{env}/main.tfvars`
-3. **Bash script**: AWS CLI and jq installed
-4. **Python script**: Python 3.8+ and boto3 (`pip install boto3`)
+1. AWS CLI configured (`aws configure`)
+2. `org_prefix` set in `environments/{env}/config/project.tfvars`
 
 ## Configuration
 
-Before running bootstrap, ensure your `main.tfvars` has the required values:
+Ensure `config/project.tfvars` has:
 
 ```hcl
-# Required for bootstrap
 solution_abbr = "vxr"           # 3-4 char abbreviation
-org_prefix    = "acme"          # Organization prefix for uniqueness
-aws_region    = "us-east-1"     # Target region
-
-# Optional
-aws_profile   = "mycompany"     # AWS CLI profile name
+org_prefix    = "acme"          # REQUIRED for unique S3 bucket names
+aws_region    = "us-east-1"
 ```
 
 ## Usage
 
-### Option 1: Bash Script (Linux/macOS/WSL)
+### Linux/Mac
 
 ```bash
-# From any directory - specify environment
-./setup/setup-backend.sh prod
+# Specify environment
+./setup/state-backend.sh prod
 
-# From within environment directory - auto-detects
+# Or auto-detect from current directory
 cd environments/prod
-../../setup/setup-backend.sh
-
-# Make executable first if needed
-chmod +x setup/setup-backend.sh
+../../setup/state-backend.sh
 ```
 
-### Option 2: Python Script (Cross-platform)
+### Windows
 
-```bash
-# Install boto3 if not present
-pip install boto3
-
-# From any directory - specify environment
-python setup/setup-backend.py prod
-
-# From within environment directory - auto-detects
-cd environments/prod
-python ../../setup/setup-backend.py
+```cmd
+setup\state-backend.bat prod
 ```
 
 ## What Gets Created
 
-The bootstrap scripts create:
-
-1. **S3 Bucket** with:
-   - Versioning enabled
-   - Server-side encryption (AES-256)
-   - Public access blocked (all settings)
-   - Tags for identification
-
-2. **DynamoDB Table** with:
-   - `LockID` (String) as hash key
-   - Pay-per-request billing mode
-   - Tags for identification
-
+1. **S3 Bucket** with versioning, AES-256 encryption, public access blocked
+2. **DynamoDB Table** with `LockID` key, pay-per-request billing
 3. **backend.tfvars** file in the environment directory
 
-## After Bootstrap
+## After Setup
 
-1. The script outputs the backend configuration to add to `providers.tf`:
-
-```hcl
-terraform {
-  backend "s3" {
-    bucket         = "acme-vxr-prod-terraform-state"
-    key            = "terraform.tfstate"
-    region         = "us-east-1"
-    dynamodb_table = "acme-vxr-prod-terraform-locks"
-    encrypt        = true
-  }
-}
-```
-
-2. Or use the generated `backend.tfvars`:
+Initialize Terraform with the generated backend config:
 
 ```bash
 cd environments/prod
 terraform init -backend-config=backend.tfvars
 ```
 
-## Idempotent Operation
+Or use `deploy.sh`:
 
-Both scripts are idempotent - they can be run multiple times safely:
-- Existing buckets/tables are detected and skipped
-- Configuration is always applied (versioning, encryption, etc.)
-- `backend.tfvars` is regenerated each run
+```bash
+cd environments/prod
+./deploy.sh init
+```
 
 ## Multi-Environment Setup
 
-Run bootstrap for each environment separately:
+Run for each environment:
 
 ```bash
-# Production (us-east-1)
-./setup/setup-backend.sh prod
-
-# Test (us-east-1, same region as prod is fine)
-./setup/setup-backend.sh test
-
-# DR (us-west-2, different region for true DR)
-./setup/setup-backend.sh dr
+./setup/state-backend.sh prod
+./setup/state-backend.sh test
+./setup/state-backend.sh dr
 ```
 
-Each environment gets isolated state storage.
-
-## Cleanup
-
-To remove backend resources (use with caution!):
-
-```bash
-# Empty the bucket first (required before deletion)
-aws s3 rm s3://acme-vxr-prod-terraform-state --recursive
-
-# Delete the bucket
-aws s3api delete-bucket --bucket acme-vxr-prod-terraform-state
-
-# Delete the DynamoDB table
-aws dynamodb delete-table --table-name acme-vxr-prod-terraform-locks
-```
-
-**Warning**: Deleting state storage will lose all Terraform state. Ensure you have backups and no active infrastructure before cleanup.
+Each gets isolated state storage.
 
 ## Troubleshooting
 
-### "org_prefix not found or empty"
-Set `org_prefix` in your `main.tfvars`:
+### "org_prefix not found"
+Set in `config/project.tfvars`:
 ```hcl
 org_prefix = "mycompany"
 ```
 
 ### "AWS credentials not configured"
-Configure AWS CLI:
 ```bash
 aws configure
-# or
-export AWS_ACCESS_KEY_ID=...
-export AWS_SECRET_ACCESS_KEY=...
 ```
 
 ### "Bucket name already exists"
-S3 bucket names are globally unique. Either:
-- Use a more specific `org_prefix`
-- The bucket may already be created (check ownership)
-
-### Permission denied on script
-```bash
-chmod +x setup/setup-backend.sh
-```
+S3 names are globally unique. Use a more specific `org_prefix`.
