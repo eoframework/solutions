@@ -1,6 +1,0 @@
-# Sample Python Dependencies
-# Add your required packages here
-
-requests>=2.25.0
-pyyaml>=5.4.0
-click>=8.0.0

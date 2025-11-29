@@ -1,43 +1,195 @@
-#WIDTH: 25,15,12,30,45,10,12,33,16,20,26,39,12
-#ALIGN: left,left,center,left,left,center,left,left,center,left,left,left,center
-Parameter Name,Category,Environment,Default Value,Description,Required,Data Type,Validation Rules,Security Level,Owner Team,Dependencies,Notes,Last Updated
-APP_NAME,Application,All,[Solution Name],Application identifier for logging and monitoring,Yes,String,Max 50 characters,Public,Development,None,Used in logs and metrics,[DATE]
-APP_VERSION,Application,All,1.0.0,Current application version,Yes,String,Semantic versioning format,Public,Development,None,Updated with each release,[DATE]
-APP_ENVIRONMENT,Application,All,development,Deployment environment identifier,Yes,String,development|staging|production,Public,Operations,None,Controls feature flags and logging,[DATE]
-APP_PORT,Application,All,8080,Port number for application server,Yes,Integer,1024-65535,Public,Infrastructure,Network configuration,Ensure no port conflicts,[DATE]
-APP_LOG_LEVEL,Application,All,info,Logging verbosity level,Yes,String,debug|info|warn|error,Public,Operations,Monitoring tools,Production should use warn or error,[DATE]
-DB_HOST,Database,All,[database-host],Database server hostname or IP,Yes,String,Valid hostname or IP,Confidential,Database Team,Network connectivity,Use FQDN for production,[DATE]
-DB_PORT,Database,All,5432,Database server port,Yes,Integer,1-65535,Public,Database Team,Firewall rules,PostgreSQL default port,[DATE]
-DB_NAME,Database,All,[database-name],Database name to connect to,Yes,String,Valid database identifier,Confidential,Database Team,Database creation,Must exist before deployment,[DATE]
-DB_USERNAME,Database,All,[username],Database connection username,Yes,String,Valid username format,Secret,Database Team,User creation,Use service account,[DATE]
-DB_PASSWORD,Database,All,[password],Database connection password,Yes,String,Min 12 chars with complexity,Secret,Database Team,User creation,Store in secrets manager,[DATE]
-DB_SSL_MODE,Database,Production,require,SSL connection requirement,Yes,String,disable|allow|prefer|require,Confidential,Security Team,SSL certificates,Always require for production,[DATE]
-DB_POOL_MIN,Database,All,5,Minimum database connections in pool,Yes,Integer,1-100,Public,Database Team,DB_POOL_MAX,Tune based on load patterns,[DATE]
-DB_POOL_MAX,Database,All,20,Maximum database connections in pool,Yes,Integer,5-500,Public,Database Team,DB_POOL_MIN,Monitor connection usage,[DATE]
-CACHE_HOST,Cache,All,[cache-host],Redis cache server hostname,Yes,String,Valid hostname or IP,Confidential,Infrastructure,Network connectivity,Use Redis cluster for HA,[DATE]
-CACHE_PORT,Cache,All,6379,Redis cache server port,Yes,Integer,1-65535,Public,Infrastructure,Firewall rules,Redis default port,[DATE]
-CACHE_PASSWORD,Cache,All,[password],Redis authentication password,No,String,Min 8 characters,Secret,Infrastructure,Redis configuration,Optional if Redis AUTH disabled,[DATE]
-CACHE_TTL,Cache,All,3600,Default cache time-to-live in seconds,Yes,Integer,60-86400,Public,Development,Cache strategy,Tune based on data patterns,[DATE]
-JWT_SECRET,Security,All,[jwt-secret-key],Secret key for JWT token signing,Yes,String,Min 32 chars base64,Secret,Security Team,Authentication,Rotate regularly,[DATE]
-ENCRYPTION_KEY,Security,All,[encryption-key],Key for data encryption at rest,Yes,String,256-bit key base64,Secret,Security Team,Encryption service,Use key management service,[DATE]
-API_KEY,Security,All,[api-key],API authentication key,Yes,String,UUID or secure random,Secret,API Team,External services,Unique per environment,[DATE]
-CORS_ORIGINS,Security,All,[allowed-origins],Allowed CORS origins,Yes,String,Comma-separated URLs,Confidential,Security Team,Frontend domains,Restrict to known domains,[DATE]
-SERVICE_ENDPOINT,Integration,All,[external-service-url],External service API endpoint,Yes,String,Valid HTTPS URL,Confidential,Integration Team,Service availability,Use load balancer URL,[DATE]
-SERVICE_API_KEY,Integration,All,[service-api-key],API key for external service,Yes,String,Provider-specific format,Secret,Integration Team,Service registration,Obtain from service provider,[DATE]
-SERVICE_TIMEOUT,Integration,All,30000,Service call timeout in milliseconds,Yes,Integer,1000-300000,Public,Integration Team,Network latency,Adjust based on SLA,[DATE]
-METRICS_ENABLED,Monitoring,All,true,Enable metrics collection,Yes,Boolean,true|false,Public,Operations,Monitoring tools,Always enable for production,[DATE]
-HEALTH_CHECK_PATH,Monitoring,All,/health,Health check endpoint path,Yes,String,Valid URL path,Public,Operations,Load balancer,Must return 200 for healthy,[DATE]
-PROMETHEUS_PORT,Monitoring,All,9090,Port for Prometheus metrics,Yes,Integer,1024-65535,Public,Operations,Monitoring stack,Ensure port availability,[DATE]
-VPC_CIDR,Network,All,10.0.0.0/16,VPC CIDR block,Yes,String,Valid CIDR notation,Public,Network Team,IP planning,Plan for future growth,[DATE]
-PUBLIC_SUBNET_1,Network,All,10.0.1.0/24,First public subnet CIDR,Yes,String,Valid CIDR notation,Public,Network Team,VPC_CIDR,Must be within VPC CIDR,[DATE]
-PUBLIC_SUBNET_2,Network,All,10.0.2.0/24,Second public subnet CIDR,Yes,String,Valid CIDR notation,Public,Network Team,VPC_CIDR,Different AZ from subnet 1,[DATE]
-PRIVATE_SUBNET_1,Network,All,10.0.10.0/24,First private subnet CIDR,Yes,String,Valid CIDR notation,Public,Network Team,VPC_CIDR,Must be within VPC CIDR,[DATE]
-PRIVATE_SUBNET_2,Network,All,10.0.11.0/24,Second private subnet CIDR,Yes,String,Valid CIDR notation,Public,Network Team,VPC_CIDR,Different AZ from subnet 1,[DATE]
-DB_SUBNET_1,Network,All,10.0.20.0/24,First database subnet CIDR,Yes,String,Valid CIDR notation,Public,Network Team,VPC_CIDR,Isolated database tier,[DATE]
-DB_SUBNET_2,Network,All,10.0.21.0/24,Second database subnet CIDR,Yes,String,Valid CIDR notation,Public,Network Team,VPC_CIDR,Different AZ from subnet 1,[DATE]
-BACKUP_RETENTION,Operations,All,30,Backup retention period in days,Yes,Integer,7-365,Public,Operations,Backup strategy,Comply with data policies,[DATE]
-BACKUP_SCHEDULE,Operations,All,0 2 * * *,Backup schedule in cron format,Yes,String,Valid cron expression,Public,Operations,Backup service,Daily at 2 AM UTC,[DATE]
-LOG_RETENTION,Operations,All,90,Log retention period in days,Yes,Integer,30-365,Public,Operations,Log management,Balance cost and compliance,[DATE]
-SCALING_MIN_INSTANCES,Operations,All,2,Minimum number of instances,Yes,Integer,1-10,Public,Operations,Load balancer,Ensure high availability,[DATE]
-SCALING_MAX_INSTANCES,Operations,All,10,Maximum number of instances,Yes,Integer,5-100,Public,Operations,Cost management,Set based on peak load,[DATE]
-SCALING_TARGET_CPU,Operations,All,70,CPU threshold for auto-scaling,Yes,Integer,50-90,Public,Operations,Performance monitoring,Tune based on application behavior,[DATE]
+#SHEET: project
+#DESCRIPTION: Project identity, cloud provider configuration, and resource tagging
+#TFVARS: project.tfvars
+#WIDTH: 25,20,12,30,45,10,12,30
+#ALIGN: left,left,center,left,left,center,left,left
+Parameter Name,Terraform Variable,Environment,Default Value,Description,Required,Data Type,Validation Rules
+project_name,project_name,All,[solution-name],Unique project name for resource naming,Yes,String,Lowercase alphanumeric with hyphens
+aws_profile,aws_profile,Production,production,AWS CLI profile for authentication,Yes,String,Valid AWS CLI profile name
+aws_profile,aws_profile,Test,test,AWS CLI profile for authentication,Yes,String,Valid AWS CLI profile name
+aws_region,aws_region,All,us-east-1,Primary AWS region for deployment,Yes,String,Valid AWS region code
+azure_subscription_id,azure_subscription_id,All,[subscription-id],Azure subscription ID,No,String,Valid UUID format
+azure_location,azure_location,All,East US,Primary Azure location,No,String,Valid Azure location
+gcp_project_id,gcp_project_id,All,[gcp-project],Google Cloud project ID,No,String,Valid GCP project ID
+gcp_region,gcp_region,All,us-central1,Primary GCP region,No,String,Valid GCP region
+enable_aws_resources,enable_aws_resources,All,true,Enable AWS resource deployment,Yes,Boolean,true|false
+enable_azure_resources,enable_azure_resources,All,false,Enable Azure resource deployment,Yes,Boolean,true|false
+enable_gcp_resources,enable_gcp_resources,All,false,Enable GCP resource deployment,Yes,Boolean,true|false
+tag_business_unit,additional_tags.BusinessUnit,All,[business-unit],Business unit for cost allocation,Yes,String,Organization-specific value
+tag_cost_center,additional_tags.CostCenter,All,[cost-center],Cost center code,Yes,String,Organization-specific format
+tag_owner,additional_tags.Owner,All,[owner-email],Resource owner email,Yes,String,Valid email address
+tag_compliance,additional_tags.Compliance,All,SOX,Compliance frameworks,No,String,Comma-separated frameworks
+
+#SHEET: networking
+#DESCRIPTION: VPC, subnet, DNS, and network connectivity configuration
+#TFVARS: networking.tfvars
+#WIDTH: 25,20,12,30,45,10,12,30
+#ALIGN: left,left,center,left,left,center,left,left
+Parameter Name,Terraform Variable,Environment,Default Value,Description,Required,Data Type,Validation Rules
+vpc_cidr,vpc_cidr,All,10.0.0.0/16,VPC CIDR block,Yes,String,Valid CIDR /16 to /24
+public_subnet_1,public_subnet_cidrs[0],All,10.0.1.0/24,First public subnet CIDR,Yes,String,Within VPC CIDR
+public_subnet_2,public_subnet_cidrs[1],All,10.0.2.0/24,Second public subnet CIDR,Yes,String,Within VPC CIDR
+public_subnet_3,public_subnet_cidrs[2],All,10.0.3.0/24,Third public subnet CIDR,Yes,String,Within VPC CIDR
+private_subnet_1,private_subnet_cidrs[0],All,10.0.16.0/20,First private subnet CIDR,Yes,String,Within VPC CIDR
+private_subnet_2,private_subnet_cidrs[1],All,10.0.32.0/20,Second private subnet CIDR,Yes,String,Within VPC CIDR
+private_subnet_3,private_subnet_cidrs[2],All,10.0.48.0/20,Third private subnet CIDR,Yes,String,Within VPC CIDR
+database_subnet_1,database_subnet_cidrs[0],All,10.0.64.0/24,First database subnet CIDR,No,String,Within VPC CIDR
+database_subnet_2,database_subnet_cidrs[1],All,10.0.65.0/24,Second database subnet CIDR,No,String,Within VPC CIDR
+enable_dns_hostnames,enable_dns_hostnames,All,true,Enable DNS hostnames in VPC,Yes,Boolean,true|false
+enable_dns_support,enable_dns_support,All,true,Enable DNS support in VPC,Yes,Boolean,true|false
+enable_nat_gateway,enable_nat_gateway,All,true,Enable NAT Gateway for private subnets,Yes,Boolean,true|false
+single_nat_gateway,single_nat_gateway,Production,false,Use single NAT Gateway (cost vs HA),Yes,Boolean,true|false
+single_nat_gateway,single_nat_gateway,Test,true,Use single NAT Gateway (cost vs HA),Yes,Boolean,true|false
+enable_flow_logs,enable_flow_logs,All,true,Enable VPC Flow Logs,Yes,Boolean,true|false
+flow_log_retention_days,flow_log_retention_days,Production,90,Flow log retention in days,Yes,Integer,7-365
+flow_log_retention_days,flow_log_retention_days,Test,30,Flow log retention in days,Yes,Integer,7-365
+
+#SHEET: security
+#DESCRIPTION: Security groups, encryption, IAM, and access control configuration
+#TFVARS: security.tfvars
+#WIDTH: 25,20,12,30,45,10,12,30
+#ALIGN: left,left,center,left,left,center,left,left
+Parameter Name,Terraform Variable,Environment,Default Value,Description,Required,Data Type,Validation Rules
+allowed_https_cidrs,allowed_https_cidrs,Production,[restricted-cidrs],CIDR blocks allowed HTTPS access,Yes,List(String),Valid CIDR notation
+allowed_https_cidrs,allowed_https_cidrs,Test,["0.0.0.0/0"],CIDR blocks allowed HTTPS access,Yes,List(String),Valid CIDR notation
+allowed_http_cidrs,allowed_http_cidrs,All,["0.0.0.0/0"],CIDR blocks allowed HTTP access,Yes,List(String),Valid CIDR notation
+allowed_ssh_cidrs,allowed_ssh_cidrs,All,[],CIDR blocks allowed SSH access,No,List(String),Valid CIDR notation
+enable_ssh_access,enable_ssh_access,Production,false,Enable SSH access to instances,Yes,Boolean,true|false
+enable_ssh_access,enable_ssh_access,Test,true,Enable SSH access to instances,Yes,Boolean,true|false
+enable_kms_encryption,enable_kms_encryption,All,true,Enable KMS encryption for resources,Yes,Boolean,true|false
+kms_deletion_window,kms_deletion_window,All,30,KMS key deletion window in days,Yes,Integer,7-30
+enable_key_rotation,enable_key_rotation,All,true,Enable automatic KMS key rotation,Yes,Boolean,true|false
+enable_instance_profile,enable_instance_profile,All,true,Create IAM instance profile,Yes,Boolean,true|false
+enable_ssm_access,enable_ssm_access,All,true,Enable SSM Session Manager access,Yes,Boolean,true|false
+require_imdsv2,require_imdsv2,All,true,Require IMDSv2 for instance metadata,Yes,Boolean,true|false
+metadata_hop_limit,metadata_hop_limit,All,1,Metadata response hop limit,Yes,Integer,1-64
+enable_waf,enable_waf,Production,true,Enable AWS WAF on ALB,Yes,Boolean,true|false
+enable_waf,enable_waf,Test,false,Enable AWS WAF on ALB,Yes,Boolean,true|false
+waf_rate_limit,waf_rate_limit,All,2000,WAF rate limit per IP (5-min window),Yes,Integer,100-10000
+enable_guardduty,enable_guardduty,Production,true,Enable Amazon GuardDuty,Yes,Boolean,true|false
+enable_guardduty,enable_guardduty,Test,false,Enable Amazon GuardDuty,Yes,Boolean,true|false
+enable_cloudtrail,enable_cloudtrail,All,true,Enable CloudTrail API logging,Yes,Boolean,true|false
+cloudtrail_retention_days,cloudtrail_retention_days,Production,365,CloudTrail log retention in days,Yes,Integer,90-2555
+cloudtrail_retention_days,cloudtrail_retention_days,Test,90,CloudTrail log retention in days,Yes,Integer,90-2555
+
+#SHEET: compute
+#DESCRIPTION: EC2 instances, Auto Scaling, and load balancer configuration
+#TFVARS: compute.tfvars
+#WIDTH: 25,20,12,30,45,10,12,30
+#ALIGN: left,left,center,left,left,center,left,left
+Parameter Name,Terraform Variable,Environment,Default Value,Description,Required,Data Type,Validation Rules
+enable_ec2_instances,enable_ec2_instances,All,true,Enable EC2 instance deployment,Yes,Boolean,true|false
+instance_type,instance_type,Production,m6i.large,EC2 instance type,Yes,String,Valid EC2 instance type
+instance_type,instance_type,Test,t3.medium,EC2 instance type,Yes,String,Valid EC2 instance type
+use_latest_ami,use_latest_ami,All,true,Use latest Amazon Linux 2023 AMI,Yes,Boolean,true|false
+root_volume_size,root_volume_size,Production,100,Root volume size in GB,Yes,Integer,20-16384
+root_volume_size,root_volume_size,Test,50,Root volume size in GB,Yes,Integer,20-16384
+root_volume_type,root_volume_type,All,gp3,Root volume type,Yes,String,gp3|gp2|io1|io2
+root_volume_iops,root_volume_iops,All,3000,Root volume IOPS (gp3/io1/io2),Yes,Integer,3000-16000
+root_volume_throughput,root_volume_throughput,All,125,Root volume throughput MB/s (gp3),Yes,Integer,125-1000
+enable_detailed_monitoring,enable_detailed_monitoring,Production,true,Enable detailed CloudWatch monitoring,Yes,Boolean,true|false
+enable_detailed_monitoring,enable_detailed_monitoring,Test,false,Enable detailed CloudWatch monitoring,Yes,Boolean,true|false
+enable_auto_scaling,enable_auto_scaling,All,true,Enable Auto Scaling Group,Yes,Boolean,true|false
+asg_min_size,asg_min_size,Production,2,ASG minimum instance count,Yes,Integer,1-100
+asg_min_size,asg_min_size,Test,1,ASG minimum instance count,Yes,Integer,1-100
+asg_max_size,asg_max_size,Production,10,ASG maximum instance count,Yes,Integer,1-100
+asg_max_size,asg_max_size,Test,3,ASG maximum instance count,Yes,Integer,1-100
+asg_desired_capacity,asg_desired_capacity,Production,3,ASG desired instance count,Yes,Integer,1-100
+asg_desired_capacity,asg_desired_capacity,Test,1,ASG desired instance count,Yes,Integer,1-100
+health_check_grace_period,health_check_grace_period,All,300,Health check grace period seconds,Yes,Integer,60-7200
+scale_up_threshold,scale_up_threshold,All,70,CPU % to trigger scale up,Yes,Integer,50-90
+scale_down_threshold,scale_down_threshold,All,30,CPU % to trigger scale down,Yes,Integer,10-50
+enable_alb,enable_alb,All,true,Enable Application Load Balancer,Yes,Boolean,true|false
+alb_internal,alb_internal,All,false,Make ALB internal (not internet-facing),Yes,Boolean,true|false
+enable_lb_deletion_protection,enable_lb_deletion_protection,Production,true,Enable ALB deletion protection,Yes,Boolean,true|false
+enable_lb_deletion_protection,enable_lb_deletion_protection,Test,false,Enable ALB deletion protection,Yes,Boolean,true|false
+health_check_path,health_check_path,All,/health,Health check endpoint path,Yes,String,Valid URL path starting with /
+health_check_interval,health_check_interval,All,30,Health check interval seconds,Yes,Integer,5-300
+health_check_timeout,health_check_timeout,All,5,Health check timeout seconds,Yes,Integer,2-120
+healthy_threshold,healthy_threshold,All,2,Consecutive healthy checks required,Yes,Integer,2-10
+unhealthy_threshold,unhealthy_threshold,All,3,Consecutive unhealthy checks before marking unhealthy,Yes,Integer,2-10
+
+#SHEET: monitoring
+#DESCRIPTION: CloudWatch, logging, alerting, and observability configuration
+#TFVARS: monitoring.tfvars
+#WIDTH: 25,20,12,30,45,10,12,30
+#ALIGN: left,left,center,left,left,center,left,left
+Parameter Name,Terraform Variable,Environment,Default Value,Description,Required,Data Type,Validation Rules
+log_retention_days,log_retention_days,Production,90,CloudWatch log retention in days,Yes,Integer,1-3653
+log_retention_days,log_retention_days,Test,30,CloudWatch log retention in days,Yes,Integer,1-3653
+enable_container_insights,enable_container_insights,Production,true,Enable Container Insights (ECS/EKS),No,Boolean,true|false
+enable_container_insights,enable_container_insights,Test,false,Enable Container Insights (ECS/EKS),No,Boolean,true|false
+alarm_email,alarm_email,All,[alarm-email],Email for CloudWatch alarm notifications,No,String,Valid email address
+enable_dashboard,enable_dashboard,Production,true,Create CloudWatch dashboard,No,Boolean,true|false
+enable_dashboard,enable_dashboard,Test,false,Create CloudWatch dashboard,No,Boolean,true|false
+metrics_namespace,metrics_namespace,All,[solution-name],Custom metrics namespace,No,String,Valid namespace string
+enable_xray_tracing,enable_xray_tracing,Production,true,Enable AWS X-Ray tracing,No,Boolean,true|false
+enable_xray_tracing,enable_xray_tracing,Test,false,Enable AWS X-Ray tracing,No,Boolean,true|false
+
+#SHEET: database
+#DESCRIPTION: RDS, database connectivity, and data tier configuration
+#TFVARS: database.tfvars
+#WIDTH: 25,20,12,30,45,10,12,30
+#ALIGN: left,left,center,left,left,center,left,left
+Parameter Name,Terraform Variable,Environment,Default Value,Description,Required,Data Type,Validation Rules
+enable_rds,enable_rds,All,false,Enable RDS database deployment,Yes,Boolean,true|false
+db_engine,db_engine,All,postgres,Database engine type,Yes,String,postgres|mysql|mariadb|oracle|sqlserver
+db_engine_version,db_engine_version,All,15.4,Database engine version,Yes,String,Valid engine version
+db_instance_class,db_instance_class,Production,db.r6g.large,RDS instance class,Yes,String,Valid RDS instance class
+db_instance_class,db_instance_class,Test,db.t3.medium,RDS instance class,Yes,String,Valid RDS instance class
+db_allocated_storage,db_allocated_storage,Production,100,Initial storage in GB,Yes,Integer,20-65536
+db_allocated_storage,db_allocated_storage,Test,20,Initial storage in GB,Yes,Integer,20-65536
+db_max_allocated_storage,db_max_allocated_storage,Production,500,Maximum storage autoscaling in GB,Yes,Integer,20-65536
+db_max_allocated_storage,db_max_allocated_storage,Test,50,Maximum storage autoscaling in GB,Yes,Integer,20-65536
+db_multi_az,db_multi_az,Production,true,Enable Multi-AZ deployment,Yes,Boolean,true|false
+db_multi_az,db_multi_az,Test,false,Enable Multi-AZ deployment,Yes,Boolean,true|false
+db_backup_retention,db_backup_retention,Production,30,Backup retention period in days,Yes,Integer,0-35
+db_backup_retention,db_backup_retention,Test,7,Backup retention period in days,Yes,Integer,0-35
+db_backup_window,db_backup_window,All,03:00-04:00,Preferred backup window (UTC),Yes,String,hh:mm-hh:mm format
+db_maintenance_window,db_maintenance_window,All,sun:04:00-sun:05:00,Preferred maintenance window,Yes,String,ddd:hh:mm-ddd:hh:mm
+db_deletion_protection,db_deletion_protection,Production,true,Enable deletion protection,Yes,Boolean,true|false
+db_deletion_protection,db_deletion_protection,Test,false,Enable deletion protection,Yes,Boolean,true|false
+db_storage_encrypted,db_storage_encrypted,All,true,Enable storage encryption,Yes,Boolean,true|false
+db_performance_insights,db_performance_insights,Production,true,Enable Performance Insights,Yes,Boolean,true|false
+db_performance_insights,db_performance_insights,Test,false,Enable Performance Insights,Yes,Boolean,true|false
+
+#SHEET: cache
+#DESCRIPTION: ElastiCache Redis/Memcached configuration
+#TFVARS: cache.tfvars
+#WIDTH: 25,20,12,30,45,10,12,30
+#ALIGN: left,left,center,left,left,center,left,left
+Parameter Name,Terraform Variable,Environment,Default Value,Description,Required,Data Type,Validation Rules
+enable_elasticache,enable_elasticache,All,false,Enable ElastiCache deployment,Yes,Boolean,true|false
+cache_engine,cache_engine,All,redis,Cache engine type,Yes,String,redis|memcached
+cache_engine_version,cache_engine_version,All,7.0,Cache engine version,Yes,String,Valid engine version
+cache_node_type,cache_node_type,Production,cache.r6g.large,ElastiCache node type,Yes,String,Valid node type
+cache_node_type,cache_node_type,Test,cache.t3.micro,ElastiCache node type,Yes,String,Valid node type
+cache_num_nodes,cache_num_nodes,Production,2,Number of cache nodes,Yes,Integer,1-6
+cache_num_nodes,cache_num_nodes,Test,1,Number of cache nodes,Yes,Integer,1-6
+cache_automatic_failover,cache_automatic_failover,Production,true,Enable automatic failover,Yes,Boolean,true|false
+cache_automatic_failover,cache_automatic_failover,Test,false,Enable automatic failover,Yes,Boolean,true|false
+cache_at_rest_encryption,cache_at_rest_encryption,All,true,Enable at-rest encryption,Yes,Boolean,true|false
+cache_transit_encryption,cache_transit_encryption,All,true,Enable in-transit encryption,Yes,Boolean,true|false
+cache_snapshot_retention,cache_snapshot_retention,Production,7,Snapshot retention in days,Yes,Integer,0-35
+cache_snapshot_retention,cache_snapshot_retention,Test,1,Snapshot retention in days,Yes,Integer,0-35
+cache_snapshot_window,cache_snapshot_window,All,05:00-06:00,Preferred snapshot window (UTC),Yes,String,hh:mm-hh:mm format
+
+#SHEET: application
+#DESCRIPTION: Application-specific configuration and environment variables
+#TFVARS: application.tfvars
+#WIDTH: 25,20,12,30,45,10,12,30
+#ALIGN: left,left,center,left,left,center,left,left
+Parameter Name,Terraform Variable,Environment,Default Value,Description,Required,Data Type,Validation Rules
+app_name,app_name,All,[solution-name],Application identifier,Yes,String,Max 50 characters
+app_version,app_version,All,1.0.0,Application version,Yes,String,Semantic versioning
+app_port,app_port,All,8080,Application server port,Yes,Integer,1024-65535
+app_log_level,app_log_level,Production,warn,Application log level,Yes,String,debug|info|warn|error
+app_log_level,app_log_level,Test,debug,Application log level,Yes,String,debug|info|warn|error
+app_health_path,app_health_path,All,/health,Application health check path,Yes,String,Valid URL path
+app_metrics_path,app_metrics_path,All,/metrics,Prometheus metrics endpoint,No,String,Valid URL path
+app_enable_debug,app_enable_debug,Production,false,Enable debug mode,Yes,Boolean,true|false
+app_enable_debug,app_enable_debug,Test,true,Enable debug mode,Yes,Boolean,true|false
+app_cors_origins,app_cors_origins,Production,[allowed-origins],Allowed CORS origins,No,List(String),Comma-separated URLs
+app_cors_origins,app_cors_origins,Test,["*"],Allowed CORS origins,No,List(String),Comma-separated URLs
+app_rate_limit,app_rate_limit,All,1000,API rate limit per minute,No,Integer,100-10000
+app_session_timeout,app_session_timeout,All,3600,Session timeout in seconds,No,Integer,300-86400

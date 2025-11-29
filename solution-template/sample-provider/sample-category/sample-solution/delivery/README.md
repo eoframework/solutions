@@ -23,6 +23,7 @@ Implementation materials for the **Sample Solution**.
 1. Read `detailed-design.md` for architecture understanding
 2. Follow `implementation-guide.md` for deployment steps
 3. Configure using `configuration.csv` parameters
+4. Deploy using automation in `automation/` folder
 
 **For QA Teams**
 1. Execute tests from `test-plan.csv`
@@ -32,16 +33,40 @@ Implementation materials for the **Sample Solution**.
 
 ```
 delivery/
-├── raw/                    # Source files (CSV, Markdown)
-│   ├── project-plan.csv    # Timeline + Milestones + RACI + Comms
-│   ├── detailed-design.md  # Technical design document
-│   ├── implementation-guide.md  # Deployment procedures + Training
-│   ├── configuration.csv   # Configuration parameters
-│   ├── test-plan.csv       # Test cases (3 sections)
-│   └── closeout-presentation.md  # Closeout slides
-├── scripts/                # Automation tools
-│   └── terraform/          # Infrastructure as Code
-└── README.md               # This file
+├── raw/                        # Source files (CSV, Markdown)
+│   ├── project-plan.csv        # Timeline + Milestones + RACI + Comms
+│   ├── detailed-design.md      # Technical design document
+│   ├── implementation-guide.md # Deployment procedures + Training
+│   ├── configuration.csv       # Configuration parameters
+│   ├── test-plan.csv           # Test cases (3 sections)
+│   └── closeout-presentation.md # Closeout slides
+├── automation/                 # Deployment automation
+│   ├── terraform/              # Option A: Terraform (standardized)
+│   │   ├── environments/       # production, test, disaster-recovery
+│   │   ├── modules/            # AWS, Azure, GCP modules
+│   │   └── scripts/            # Helper scripts
+│   └── platform-native/        # Option B: Best-fit tooling
+│       └── {tool}/             # Ansible, PowerShell, Bicep, etc.
+└── *.pptx, *.xlsx, *.docx      # Generated Office files
+```
+
+## Deployment Automation
+
+Two automation approaches are available in `automation/`:
+
+| Approach | Folder | When to Use |
+|----------|--------|-------------|
+| **Terraform** | `automation/terraform/` | Multi-cloud, standardized IaC, state management |
+| **Platform-Native** | `automation/platform-native/` | Vendor-specific tooling, first-party support |
+
+See [automation/README.md](automation/README.md) for detailed guidance on choosing an approach.
+
+### Quick Deploy (Terraform)
+```bash
+cd automation/terraform/environments/production/
+./deploy.sh init
+./deploy.sh plan
+./deploy.sh apply
 ```
 
 ## Conversion

@@ -1,53 +1,132 @@
 # Solution Template
 
-This directory contains the master template for creating new EO Framework™ solutions. Use this template as the foundation for all new solution contributions.
+This directory contains the master template for creating new EO Framework solutions. Use this template as the foundation for all new solution contributions.
 
 ## Purpose
 
 The solution template provides:
-- **Standardized structure** for all EO Framework™ solutions
+- **Standardized structure** for all EO Framework solutions
 - **Pre-configured files** for presales and delivery documentation
 - **Automation scaffolding** for deployment scripts across multiple platforms
+- **Provider best practices** integration (AWS Well-Architected, Azure, GCP)
 - **Consistent format** ensuring quality and compatibility across the repository
 
 ## Template Structure
 
 ```
 sample-provider/sample-category/sample-solution/
-├── README.md                   # Solution overview
-├── metadata.yml                # Solution metadata and classification
-├── presales/                   # Pre-sales materials
-│   ├── README.md
-│   ├── business-case.docx
-│   ├── executive-presentation.pptx
-│   ├── statement-of-work.docx
-│   ├── roi-calculator.xlsx
-│   ├── requirements-questionnaire.xlsx
-│   └── level-of-effort-estimate.xlsx
-└── delivery/                   # Implementation and delivery materials
-    ├── README.md
-    ├── detailed-design.docx
-    ├── implementation-guide.docx
-    ├── closeout-presentation.pptx
-    ├── requirements.xlsx
-    ├── project-plan.xlsx
-    ├── communication-plan.xlsx
-    ├── configuration.xlsx
-    ├── roles.xlsx
-    ├── test-plan.xlsx
-    ├── training-plan.xlsx
-    └── scripts/                # Automation scripts
-        ├── README.md
-        ├── terraform/          # Infrastructure as Code
-        ├── ansible/            # Configuration management
-        ├── python/             # Python automation
-        ├── bash/               # Bash scripts
-        └── powershell/         # PowerShell scripts
+├── README.md                    # Solution overview
+├── metadata.yml                 # Solution metadata and classification
+├── assets/
+│   ├── diagrams/               # Architecture diagrams
+│   └── logos/                  # Branding assets
+├── presales/                    # Pre-sales materials
+│   ├── raw/                    # Source files (CSV, MD)
+│   └── *.xlsx, *.pptx, *.docx  # Generated Office files
+└── delivery/                    # Implementation and delivery
+    ├── raw/                    # Source files (CSV, MD)
+    ├── *.xlsx, *.pptx, *.docx  # Generated Office files
+    └── automation/             # Infrastructure as Code
+        ├── terraform/          # Standard automation (cross-platform)
+        ├── cloudformation/     # Native automation (AWS)
+        ├── bicep/              # Native automation (Azure)
+        └── helm/               # Native automation (Kubernetes)
 ```
 
-## Required Files
+## Automation Framework
 
-Every solution must include these files:
+### Standard vs Native Automation
+
+The template supports two automation approaches:
+
+| Approach | Tool | Best For |
+|----------|------|----------|
+| **Standard** | Terraform | Multi-cloud, complex infrastructure, consistent tooling |
+| **Native** | CloudFormation/Bicep/Helm | Single-cloud, latest features, team expertise |
+
+### Terraform Structure (Standard)
+
+```
+delivery/automation/terraform/
+├── environments/               # Environment-specific configurations
+│   ├── prod/                   # Production (full HA, multi-AZ)
+│   │   ├── main.tf             # Module composition
+│   │   ├── main.tfvars         # Solution identity
+│   │   ├── well-architected.tf # Governance modules
+│   │   ├── well-architected.tfvars
+│   │   ├── providers.tf        # Provider configuration
+│   │   ├── variables.tf        # Variable definitions
+│   │   └── outputs.tf          # Output definitions
+│   ├── test/                   # Test (minimal resources)
+│   └── dr/                     # Disaster Recovery (cross-region)
+├── modules/
+│   ├── aws/                    # AWS resource modules
+│   │   ├── vpc/
+│   │   ├── alb/
+│   │   ├── rds/
+│   │   └── well-architected/   # AWS Six Pillars
+│   │       ├── operational-excellence/
+│   │       ├── security/
+│   │       ├── reliability/
+│   │       └── cost-optimization/
+│   ├── azure/                  # Azure resource modules
+│   ├── gcp/                    # GCP resource modules
+│   └── solution/               # Solution-specific compositions
+└── scripts/
+```
+
+### Provider Best Practices Integration
+
+All automation implements provider-specific architectural frameworks:
+
+#### AWS Well-Architected (Six Pillars)
+
+| Pillar | Module | Purpose |
+|--------|--------|---------|
+| Operational Excellence | `config-rules` | AWS Config for compliance monitoring |
+| Security | `guardduty` | Threat detection and response |
+| Reliability | `backup-plans` | Centralized backup management |
+| Performance Efficiency | `compute-optimizer` | Right-sizing recommendations |
+| Cost Optimization | `budgets` | Cost alerting and auto-remediation |
+| Sustainability | - | Via right-sizing in other modules |
+
+#### Azure Well-Architected
+
+| Pillar | Module | Purpose |
+|--------|--------|---------|
+| Reliability | `backup` | Azure Backup and recovery |
+| Security | `defender` | Microsoft Defender integration |
+| Cost Optimization | `budgets` | Cost Management alerts |
+| Operational Excellence | `monitor` | Azure Monitor and diagnostics |
+
+### EO Framework Standards
+
+All automation must follow:
+
+1. **Naming Convention**: `{solution_abbr}-{environment}-{resource}`
+   - Example: `vxr-prod-vpc`, `sfi-test-rds`
+
+2. **Required Tags**:
+   ```hcl
+   tags = {
+     Solution     = "vxrail-hyperconverged"
+     SolutionAbbr = "vxr"
+     Environment  = "prod"
+     ManagedBy    = "terraform"
+     CostCenter   = "CC-12345"
+     Owner        = "team@company.com"
+   }
+   ```
+
+3. **Environment Characteristics**:
+   | Feature | prod | test | dr |
+   |---------|------|------|-----|
+   | Multi-AZ | Yes | No | Yes |
+   | Deletion Protection | Yes | No | Yes |
+   | Backup | Full | Daily only | Cross-region |
+   | Security | Full | Basic | Full |
+
+## Required Files
 
 ### Core Files
 
@@ -56,50 +135,115 @@ Every solution must include these files:
 | `README.md` | Solution overview and navigation hub |
 | `metadata.yml` | Structured metadata for catalogs and discovery |
 
-### Presales Files
+### Presales Files (presales/raw/)
 
 | File | Purpose |
 |------|---------|
-| `presales/README.md` | Pre-sales process and materials overview |
-| `presales/business-case.docx` | ROI analysis and business justification |
-| `presales/executive-presentation.pptx` | Executive stakeholder presentation |
-| `presales/statement-of-work.docx` | Statement of work template |
-| `presales/roi-calculator.xlsx` | Financial impact calculator |
-| `presales/requirements-questionnaire.xlsx` | Discovery and assessment framework |
-| `presales/level-of-effort-estimate.xlsx` | Effort estimation template |
+| `statement-of-work.md` | Scope, timeline, budget, deliverables |
+| `solution-briefing.md` | Architecture, services, pricing |
+| `discovery-questionnaire.csv` | Client requirements assessment |
+| `level-of-effort.csv` | Effort estimation |
+| `infrastructure-costs.csv` | Infrastructure cost breakdown |
 
-### Delivery Files
+### Delivery Files (delivery/raw/)
 
 | File | Purpose |
 |------|---------|
-| `delivery/README.md` | Implementation process overview |
-| `delivery/detailed-design.docx` | Detailed technical design |
-| `delivery/implementation-guide.docx` | Step-by-step deployment procedures |
-| `delivery/closeout-presentation.pptx` | Project closeout presentation |
-| `delivery/requirements.xlsx` | Detailed requirements matrix |
-| `delivery/project-plan.xlsx` | Implementation project plan |
-| `delivery/communication-plan.xlsx` | Stakeholder communication plan |
-| `delivery/configuration.xlsx` | Configuration specifications |
-| `delivery/roles.xlsx` | Team roles and responsibilities |
-| `delivery/test-plan.xlsx` | Testing strategy and plan |
-| `delivery/training-plan.xlsx` | User training plan |
-| `delivery/scripts/README.md` | Automation scripts overview |
+| `detailed-design.md` | Technical architecture and design |
+| `implementation-guide.md` | Deployment procedures and training |
+| `project-plan.csv` | Timeline, milestones, RACI |
+| `configuration.csv` | Environment configuration parameters |
+| `test-plan.csv` | Testing procedures and cases |
+| `closeout-presentation.md` | Project completion presentation |
 
-## Script Types
+### Automation Files (delivery/automation/terraform/)
 
-The template includes scaffolding for multiple automation platforms:
+| File | Purpose |
+|------|---------|
+| `environments/*/main.tf` | Module composition |
+| `environments/*/main.tfvars` | Solution identity variables |
+| `environments/*/well-architected.tf` | Governance modules |
+| `environments/*/well-architected.tfvars` | Governance settings |
+| `environments/*/providers.tf` | Provider and backend configuration |
+| `environments/*/variables.tf` | Variable definitions with validation |
 
-| Script Type | Purpose | Use Cases |
-|-------------|---------|-----------|
-| `terraform/` | Infrastructure as Code | Cloud resource provisioning, infrastructure deployment, multi-cloud environments |
-| `ansible/` | Configuration management | Server configuration, application deployment, post-deployment configuration |
-| `python/` | Custom automation | Complex business logic, API integrations, data processing, custom workflows |
-| `bash/` | Linux/Unix automation | System administration, deployment scripts, startup/shutdown procedures |
-| `powershell/` | Windows automation | Windows server management, Active Directory, Azure automation, Windows-specific tasks |
+## Creating a New Solution
+
+### Step 1: Clone Template
+
+```bash
+# Copy template structure
+cp -r solution-template/sample-provider/sample-category/sample-solution/ \
+      solutions/{provider}/{category}/{solution-name}/
+```
+
+### Step 2: Configure Solution Identity
+
+Edit `delivery/automation/terraform/environments/prod/main.tfvars`:
+
+```hcl
+solution_name = "my-solution"
+solution_abbr = "mysol"
+provider_name = "aws"
+category_name = "cloud"
+
+aws_region  = "us-east-1"
+cost_center = "CC-12345"
+owner_email = "team@company.com"
+```
+
+### Step 3: Configure Well-Architected Settings
+
+Edit `delivery/automation/terraform/environments/prod/well-architected.tfvars`:
+
+```hcl
+# Operational Excellence
+enable_config_rules = true
+
+# Reliability
+enable_backup_plans = true
+backup_daily_retention = 30
+enable_backup_cross_region = true
+
+# Cost Optimization
+enable_budgets = true
+monthly_budget_amount = 5000
+budget_alert_emails = ["finance@company.com"]
+```
+
+### Step 4: Validate Configuration
+
+```bash
+# Validate automation
+python eof-tools/automation/scripts/validate-automation.py \
+    solutions/{provider}/{category}/{solution-name}/
+
+# Terraform validation
+cd solutions/{provider}/{category}/{solution-name}/delivery/automation/terraform/environments/prod
+terraform validate
+terraform fmt -check
+```
+
+### Step 5: Deploy
+
+```bash
+cd environments/prod
+./deploy.sh init
+./deploy.sh plan
+./deploy.sh apply
+```
+
+## Naming Conventions
+
+- **Provider names:** lowercase, hyphenated (e.g., `aws`, `dell`, `microsoft`)
+- **Category names:** lowercase, hyphenated (e.g., `ai`, `cloud`, `cyber-security`)
+- **Solution names:** lowercase, hyphenated, descriptive (e.g., `vxrail-hyperconverged`)
+- **Solution abbreviation:** 3-4 lowercase alphanumeric (e.g., `vxr`, `sfi`)
+- **File names:** lowercase with standard extensions (`.md`, `.csv`, `.tf`)
 
 ## Solution Categories
 
-Solutions must be organized under one of these six standardized categories:
+Solutions must be organized under one of these categories:
 
 - **ai** - Artificial Intelligence & Machine Learning
 - **cloud** - Cloud Infrastructure & Platforms
@@ -108,60 +252,32 @@ Solutions must be organized under one of these six standardized categories:
 - **modern-workspace** - Digital Workplace & Collaboration
 - **network** - Network Infrastructure & Connectivity
 
-## Creating a New Solution
+## Documentation Reference
 
-### Option 1: Automated (Recommended)
+- **Automation Framework**: `eof-tools/automation/docs/AUTOMATION_FRAMEWORK.md`
+- **Terraform Standards**: `eof-tools/automation/docs/TERRAFORM_STANDARDS.md`
+- **Well-Architected Integration**: `eof-tools/automation/docs/WELL_ARCHITECTED_INTEGRATION.md`
+- **Delivery Specification**: `eof-tools/generators/delivery/prompts/SPECIFICATION.md`
 
-Use the clone script to automatically generate a new solution:
+## Workflow
 
-```bash
-python3 support/tools/clone-solution-template.py \
-  --provider "your-provider" \
-  --category "cloud" \
-  --solution "your-solution-name" \
-  --author-name "Your Name" \
-  --author-email "your.email@company.com"
 ```
-
-This will:
-- Create the complete directory structure
-- Replace all template variables with your values
-- Generate a ready-to-customize solution template
-
-### Option 2: Manual
-
-1. **Copy the template structure:**
-   ```bash
-   cp -r solution-template/sample-provider/sample-category/sample-solution/ \
-         solutions/your-provider/your-category/your-solution/
-   ```
-
-2. **Update metadata.yml** with your solution details
-
-3. **Customize all template files** by replacing placeholder content
-
-4. **Validate the structure:**
-   ```bash
-   python3 support/tools/validate-template.py \
-     --path solutions/your-provider/your-category/your-solution/
-   ```
-
-## Naming Conventions
-
-- **Provider names:** lowercase, hyphenated (e.g., `aws`, `hashicorp`, `dell`)
-- **Category names:** lowercase, hyphenated (e.g., `ai`, `cyber-security`, `modern-workspace`)
-- **Solution names:** lowercase, hyphenated, descriptive (e.g., `enterprise-landing-zone`, `intelligent-document-processing`)
-- **File names:** lowercase with standard extensions (`.md`, `.yml`, `.csv`, `.pptx`)
-
-## Next Steps
-
-1. **Create your solution** using the automated script
-2. **Customize the content** to match your specific solution
-3. **Validate the structure** using the validation tool
-4. **Submit for review** via pull request
+┌─────────────────┐     ┌─────────────────┐     ┌─────────────────┐
+│   Presales      │     │   Delivery      │     │   Automation    │
+│   SOW/Config    │────▶│ configuration   │────▶│   Terraform     │
+│                 │     │     .csv        │     │   .tfvars       │
+└─────────────────┘     └─────────────────┘     └─────────────────┘
+                                                        │
+                                                        ▼
+                                                ┌─────────────────┐
+                                                │  Provider Best  │
+                                                │   Practices +   │
+                                                │  EO Standards   │
+                                                └─────────────────┘
+```
 
 ## Support
 
-- **Tools:** See `support/tools/` for automation scripts
-- **Documentation:** See `support/docs/` for detailed standards and guidelines
-- **Issues:** Report problems via [GitHub Issues](https://github.com/eoframework/solutions/issues)
+- **Tools:** See `eof-tools/automation/` for automation scripts
+- **Documentation:** See `eof-tools/automation/docs/` for detailed standards
+- **Validation:** Run `validate-automation.py` before committing
