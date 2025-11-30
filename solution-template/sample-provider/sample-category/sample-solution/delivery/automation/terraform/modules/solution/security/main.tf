@@ -47,25 +47,32 @@ resource "aws_guardduty_detector" "main" {
   enable                       = true
   finding_publishing_frequency = "FIFTEEN_MINUTES"
 
-  datasources {
-    s3_logs {
-      enable = true
-    }
-    kubernetes {
-      audit_logs {
-        enable = false
-      }
-    }
-    malware_protection {
-      scan_ec2_instance_with_findings {
-        ebs_volumes {
-          enable = true
-        }
-      }
-    }
-  }
-
   tags = local.common_tags
+}
+
+#------------------------------------------------------------------------------
+# GuardDuty Detector Features (replaces deprecated datasources block)
+#------------------------------------------------------------------------------
+
+resource "aws_guardduty_detector_feature" "s3_data_events" {
+  count       = var.security.enable_guardduty ? 1 : 0
+  detector_id = aws_guardduty_detector.main[0].id
+  name        = "S3_DATA_EVENTS"
+  status      = "ENABLED"
+}
+
+resource "aws_guardduty_detector_feature" "eks_audit_logs" {
+  count       = var.security.enable_guardduty ? 1 : 0
+  detector_id = aws_guardduty_detector.main[0].id
+  name        = "EKS_AUDIT_LOGS"
+  status      = "DISABLED"
+}
+
+resource "aws_guardduty_detector_feature" "ebs_malware_protection" {
+  count       = var.security.enable_guardduty ? 1 : 0
+  detector_id = aws_guardduty_detector.main[0].id
+  name        = "EBS_MALWARE_PROTECTION"
+  status      = "ENABLED"
 }
 
 #------------------------------------------------------------------------------

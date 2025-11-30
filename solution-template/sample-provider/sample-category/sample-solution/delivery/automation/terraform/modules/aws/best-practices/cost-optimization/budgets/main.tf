@@ -203,7 +203,7 @@ resource "aws_budgets_budget_action" "stop_ec2" {
     ssm_action_definition {
       action_sub_type = "STOP_EC2_INSTANCES"
       instance_ids    = var.budget.ec2_instances_to_stop
-      region          = data.aws_region.current.name
+      region          = data.aws_region.current.id
     }
   }
 

@@ -19,25 +19,29 @@ resource "aws_guardduty_detector" "main" {
   enable                       = true
   finding_publishing_frequency = var.guardduty.finding_publishing_frequency
 
-  datasources {
-    s3_logs {
-      enable = var.guardduty.enable_s3_protection
-    }
-    kubernetes {
-      audit_logs {
-        enable = var.guardduty.enable_eks_protection
-      }
-    }
-    malware_protection {
-      scan_ec2_instance_with_findings {
-        ebs_volumes {
-          enable = var.guardduty.enable_malware_protection
-        }
-      }
-    }
-  }
-
   tags = merge(var.common_tags, { Name = "${var.name_prefix}-guardduty", Pillar = "Security" })
+}
+
+#------------------------------------------------------------------------------
+# GuardDuty Detector Features (replaces deprecated datasources block)
+#------------------------------------------------------------------------------
+
+resource "aws_guardduty_detector_feature" "s3_data_events" {
+  detector_id = aws_guardduty_detector.main.id
+  name        = "S3_DATA_EVENTS"
+  status      = var.guardduty.enable_s3_protection ? "ENABLED" : "DISABLED"
+}
+
+resource "aws_guardduty_detector_feature" "eks_audit_logs" {
+  detector_id = aws_guardduty_detector.main.id
+  name        = "EKS_AUDIT_LOGS"
+  status      = var.guardduty.enable_eks_protection ? "ENABLED" : "DISABLED"
+}
+
+resource "aws_guardduty_detector_feature" "ebs_malware_protection" {
+  detector_id = aws_guardduty_detector.main.id
+  name        = "EBS_MALWARE_PROTECTION"
+  status      = var.guardduty.enable_malware_protection ? "ENABLED" : "DISABLED"
 }
 
 #------------------------------------------------------------------------------
@@ -124,7 +128,7 @@ resource "aws_s3_bucket_policy" "findings" {
         Condition = {
           StringEquals = {
             "aws:SourceAccount" = data.aws_caller_identity.current.account_id
-            "aws:SourceArn"     = "arn:aws:guardduty:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:detector/${aws_guardduty_detector.main.id}"
+            "aws:SourceArn"     = "arn:aws:guardduty:${data.aws_region.current.id}:${data.aws_caller_identity.current.account_id}:detector/${aws_guardduty_detector.main.id}"
           }
         }
       },
@@ -137,7 +141,7 @@ resource "aws_s3_bucket_policy" "findings" {
         Condition = {
           StringEquals = {
             "aws:SourceAccount" = data.aws_caller_identity.current.account_id
-            "aws:SourceArn"     = "arn:aws:guardduty:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:detector/${aws_guardduty_detector.main.id}"
+            "aws:SourceArn"     = "arn:aws:guardduty:${data.aws_region.current.id}:${data.aws_caller_identity.current.account_id}:detector/${aws_guardduty_detector.main.id}"
           }
         }
       },

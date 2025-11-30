@@ -57,7 +57,7 @@ module "cloudwatch" {
         height = 6
         properties = {
           title  = "ALB Request Count"
-          region = data.aws_region.current.name
+          region = data.aws_region.current.id
           metrics = [
             ["AWS/ApplicationELB", "RequestCount", "LoadBalancer", local.alb_name, { stat = "Sum", period = 60 }]
           ]
@@ -71,7 +71,7 @@ module "cloudwatch" {
         height = 6
         properties = {
           title  = "ALB Response Time"
-          region = data.aws_region.current.name
+          region = data.aws_region.current.id
           metrics = [
             ["AWS/ApplicationELB", "TargetResponseTime", "LoadBalancer", local.alb_name, { stat = "Average", period = 60 }]
           ]
@@ -85,7 +85,7 @@ module "cloudwatch" {
         height = 6
         properties = {
           title  = "ALB HTTP Errors"
-          region = data.aws_region.current.name
+          region = data.aws_region.current.id
           metrics = [
             ["AWS/ApplicationELB", "HTTPCode_ELB_4XX_Count", "LoadBalancer", local.alb_name, { stat = "Sum", period = 60, color = "#ff7f0e" }],
             ["AWS/ApplicationELB", "HTTPCode_ELB_5XX_Count", "LoadBalancer", local.alb_name, { stat = "Sum", period = 60, color = "#d62728" }]
@@ -104,7 +104,7 @@ module "cloudwatch" {
         height = 6
         properties = {
           title  = "ASG Instance Count"
-          region = data.aws_region.current.name
+          region = data.aws_region.current.id
           metrics = [
             ["AWS/AutoScaling", "GroupDesiredCapacity", "AutoScalingGroupName", var.asg_name, { stat = "Average", period = 60 }],
             ["AWS/AutoScaling", "GroupInServiceInstances", "AutoScalingGroupName", var.asg_name, { stat = "Average", period = 60 }]
@@ -119,7 +119,7 @@ module "cloudwatch" {
         height = 6
         properties = {
           title  = "EC2 CPU Utilization"
-          region = data.aws_region.current.name
+          region = data.aws_region.current.id
           metrics = [
             ["AWS/EC2", "CPUUtilization", "AutoScalingGroupName", var.asg_name, { stat = "Average", period = 60 }]
           ]
@@ -133,7 +133,7 @@ module "cloudwatch" {
         height = 6
         properties = {
           title  = "EC2 Network"
-          region = data.aws_region.current.name
+          region = data.aws_region.current.id
           metrics = [
             ["AWS/EC2", "NetworkIn", "AutoScalingGroupName", var.asg_name, { stat = "Sum", period = 60 }],
             ["AWS/EC2", "NetworkOut", "AutoScalingGroupName", var.asg_name, { stat = "Sum", period = 60 }]
@@ -152,7 +152,7 @@ module "cloudwatch" {
         height = 6
         properties = {
           title  = "RDS CPU Utilization"
-          region = data.aws_region.current.name
+          region = data.aws_region.current.id
           metrics = [
             ["AWS/RDS", "CPUUtilization", "DBInstanceIdentifier", var.rds_identifier, { stat = "Average", period = 60 }]
           ]
@@ -166,7 +166,7 @@ module "cloudwatch" {
         height = 6
         properties = {
           title  = "RDS Connections"
-          region = data.aws_region.current.name
+          region = data.aws_region.current.id
           metrics = [
             ["AWS/RDS", "DatabaseConnections", "DBInstanceIdentifier", var.rds_identifier, { stat = "Average", period = 60 }]
           ]
@@ -180,7 +180,7 @@ module "cloudwatch" {
         height = 6
         properties = {
           title  = "RDS Free Storage"
-          region = data.aws_region.current.name
+          region = data.aws_region.current.id
           metrics = [
             ["AWS/RDS", "FreeStorageSpace", "DBInstanceIdentifier", var.rds_identifier, { stat = "Average", period = 60 }]
           ]
@@ -198,7 +198,7 @@ module "cloudwatch" {
         height = 6
         properties = {
           title  = "Cache CPU Utilization"
-          region = data.aws_region.current.name
+          region = data.aws_region.current.id
           metrics = [
             ["AWS/ElastiCache", "CPUUtilization", "CacheClusterId", var.cache_cluster_id, { stat = "Average", period = 60 }]
           ]
@@ -212,7 +212,7 @@ module "cloudwatch" {
         height = 6
         properties = {
           title  = "Cache Hit Rate"
-          region = data.aws_region.current.name
+          region = data.aws_region.current.id
           metrics = [
             ["AWS/ElastiCache", "CacheHitRate", "CacheClusterId", var.cache_cluster_id, { stat = "Average", period = 60 }]
           ]
@@ -226,7 +226,7 @@ module "cloudwatch" {
         height = 6
         properties = {
           title  = "Cache Memory Usage"
-          region = data.aws_region.current.name
+          region = data.aws_region.current.id
           metrics = [
             ["AWS/ElastiCache", "DatabaseMemoryUsagePercentage", "CacheClusterId", var.cache_cluster_id, { stat = "Average", period = 60 }]
           ]
