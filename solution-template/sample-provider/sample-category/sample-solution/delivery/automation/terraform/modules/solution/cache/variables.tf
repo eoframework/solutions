@@ -1,4 +1,5 @@
 # Solution Cache Module - Variables
+# Accepts grouped object variables from environment configuration
 
 #------------------------------------------------------------------------------
 # Context from Core Module
@@ -15,12 +16,12 @@ variable "common_tags" {
 }
 
 variable "elasticache_subnet_group_name" {
-  description = "ElastiCache subnet group name (from core module elasticache_subnet_group_name)"
+  description = "ElastiCache subnet group name (from core module)"
   type        = string
 }
 
 variable "security_group_ids" {
-  description = "Security group IDs (from core module cache_security_group_id)"
+  description = "Security group IDs (from core module)"
   type        = list(string)
 }
 
@@ -31,96 +32,40 @@ variable "kms_key_arn" {
 }
 
 #------------------------------------------------------------------------------
-# Cache Engine Configuration
+# Cache Configuration (from cache.tfvars)
 #------------------------------------------------------------------------------
 
-variable "cache_engine_version" {
-  description = "Redis engine version"
-  type        = string
-  default     = "7.0"
-}
-
-variable "cache_node_type" {
-  description = "ElastiCache node type"
-  type        = string
-  default     = "cache.t3.micro"
-}
-
-variable "cache_num_nodes" {
-  description = "Number of cache nodes"
-  type        = number
-  default     = 1
-}
-
-variable "cache_parameters" {
-  description = "Cache parameter group parameters"
-  type = list(object({
-    name  = string
-    value = string
-  }))
-  default = []
-}
-
-#------------------------------------------------------------------------------
-# High Availability
-#------------------------------------------------------------------------------
-
-variable "cache_automatic_failover" {
-  description = "Enable automatic failover"
-  type        = bool
-  default     = false
+variable "cache" {
+  description = "ElastiCache configuration"
+  type = object({
+    enabled                    = bool
+    # Engine Configuration
+    engine                     = string
+    engine_version             = string
+    port                       = optional(number, 6379)
+    # Instance Configuration
+    node_type                  = string
+    num_nodes                  = number
+    # High Availability
+    automatic_failover         = bool
+    # Encryption
+    at_rest_encryption         = bool
+    transit_encryption         = bool
+    # Backup Configuration
+    snapshot_retention         = number
+    snapshot_window            = string
+    # Maintenance Configuration
+    maintenance_window         = optional(string, "sun:06:00-sun:07:00")
+    auto_minor_version_upgrade = optional(bool, true)
+    # Cluster Mode (Redis only)
+    cluster_mode_enabled       = optional(bool, false)
+    cluster_mode_replicas      = optional(number, 1)
+    cluster_mode_shards        = optional(number, 1)
+  })
 }
 
 #------------------------------------------------------------------------------
-# Encryption
-#------------------------------------------------------------------------------
-
-variable "cache_at_rest_encryption" {
-  description = "Enable at-rest encryption"
-  type        = bool
-  default     = true
-}
-
-variable "cache_transit_encryption" {
-  description = "Enable in-transit encryption"
-  type        = bool
-  default     = true
-}
-
-#------------------------------------------------------------------------------
-# Maintenance and Backup
-#------------------------------------------------------------------------------
-
-variable "cache_maintenance_window" {
-  description = "Preferred maintenance window"
-  type        = string
-  default     = "sun:05:00-sun:06:00"
-}
-
-variable "cache_snapshot_retention" {
-  description = "Snapshot retention in days"
-  type        = number
-  default     = 1
-}
-
-variable "cache_snapshot_window" {
-  description = "Preferred snapshot window (UTC)"
-  type        = string
-  default     = "03:00-04:00"
-}
-
-#------------------------------------------------------------------------------
-# Notifications
-#------------------------------------------------------------------------------
-
-variable "notification_topic_arn" {
-  description = "SNS topic ARN for ElastiCache notifications"
-  type        = string
-  default     = ""
-}
-
-#------------------------------------------------------------------------------
-# Alarms
+# Alarms Configuration
 #------------------------------------------------------------------------------
 
 variable "enable_alarms" {

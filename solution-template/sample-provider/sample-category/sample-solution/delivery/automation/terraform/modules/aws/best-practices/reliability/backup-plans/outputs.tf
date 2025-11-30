@@ -17,12 +17,12 @@ output "vault_recovery_points" {
 
 output "dr_vault_name" {
   description = "DR backup vault name"
-  value       = var.enable_cross_region_copy ? aws_backup_vault.dr[0].name : null
+  value       = var.backup.enable_cross_region ? aws_backup_vault.dr[0].name : null
 }
 
 output "dr_vault_arn" {
   description = "DR backup vault ARN"
-  value       = var.enable_cross_region_copy ? aws_backup_vault.dr[0].arn : null
+  value       = var.backup.enable_cross_region ? aws_backup_vault.dr[0].arn : null
 }
 
 output "backup_plan_id" {

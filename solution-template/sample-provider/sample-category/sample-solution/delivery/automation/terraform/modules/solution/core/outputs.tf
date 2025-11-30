@@ -74,22 +74,22 @@ output "cache_security_group_id" {
 
 output "alb_arn" {
   description = "ALB ARN"
-  value       = var.enable_alb ? module.alb[0].alb_arn : null
+  value       = var.alb.enabled ? module.alb[0].alb_arn : null
 }
 
 output "alb_dns_name" {
   description = "ALB DNS name"
-  value       = var.enable_alb ? module.alb[0].alb_dns_name : null
+  value       = var.alb.enabled ? module.alb[0].alb_dns_name : null
 }
 
 output "alb_zone_id" {
   description = "ALB hosted zone ID"
-  value       = var.enable_alb ? module.alb[0].alb_zone_id : null
+  value       = var.alb.enabled ? module.alb[0].alb_zone_id : null
 }
 
 output "target_group_arn" {
   description = "Target group ARN"
-  value       = var.enable_alb ? module.alb[0].target_group_arn : null
+  value       = var.alb.enabled ? module.alb[0].target_group_arn : null
 }
 
 #------------------------------------------------------------------------------
@@ -98,17 +98,17 @@ output "target_group_arn" {
 
 output "asg_name" {
   description = "Auto Scaling Group name"
-  value       = var.enable_auto_scaling ? module.asg[0].asg_name : null
+  value       = var.compute.enable_auto_scaling ? module.asg[0].asg_name : null
 }
 
 output "asg_arn" {
   description = "Auto Scaling Group ARN"
-  value       = var.enable_auto_scaling ? module.asg[0].asg_arn : null
+  value       = var.compute.enable_auto_scaling ? module.asg[0].asg_arn : null
 }
 
 output "launch_template_id" {
   description = "Launch template ID"
-  value       = var.enable_auto_scaling ? module.asg[0].launch_template_id : null
+  value       = var.compute.enable_auto_scaling ? module.asg[0].launch_template_id : null
 }
 
 #------------------------------------------------------------------------------
@@ -117,12 +117,12 @@ output "launch_template_id" {
 
 output "instance_role_arn" {
   description = "Instance IAM role ARN"
-  value       = var.enable_instance_profile ? aws_iam_role.instances[0].arn : null
+  value       = var.security.enable_instance_profile ? aws_iam_role.instances[0].arn : null
 }
 
 output "instance_profile_arn" {
   description = "Instance profile ARN"
-  value       = var.enable_instance_profile ? aws_iam_instance_profile.instances[0].arn : null
+  value       = var.security.enable_instance_profile ? aws_iam_instance_profile.instances[0].arn : null
 }
 
 #------------------------------------------------------------------------------

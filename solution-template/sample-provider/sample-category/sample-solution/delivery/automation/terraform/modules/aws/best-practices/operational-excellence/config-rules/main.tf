@@ -4,46 +4,54 @@
 # Implements compliance monitoring and drift detection using AWS Config.
 # Includes managed rules for common security and operational best practices.
 
+data "aws_caller_identity" "current" {}
+data "aws_region" "current" {}
+
+locals {
+  create_recorder = var.config_rules.create_recorder
+  create_bucket   = local.create_recorder && var.config_bucket_name == ""
+}
+
 #------------------------------------------------------------------------------
 # AWS Config Recorder & Delivery Channel
 #------------------------------------------------------------------------------
 
 resource "aws_config_configuration_recorder" "main" {
-  count = var.create_recorder ? 1 : 0
+  count = local.create_recorder ? 1 : 0
 
   name     = "${var.name_prefix}-config-recorder"
   role_arn = aws_iam_role.config[0].arn
 
   recording_group {
-    all_supported = var.record_all_resources
-    include_global_resource_types = var.include_global_resources
+    all_supported                 = var.config_rules.record_all_resources
+    include_global_resource_types = var.config_rules.include_global_resources
 
     dynamic "exclusion_by_resource_types" {
-      for_each = length(var.excluded_resource_types) > 0 ? [1] : []
+      for_each = length(var.config_rules.excluded_resource_types) > 0 ? [1] : []
       content {
-        resource_types = var.excluded_resource_types
+        resource_types = var.config_rules.excluded_resource_types
       }
     }
   }
 }
 
 resource "aws_config_delivery_channel" "main" {
-  count = var.create_recorder ? 1 : 0
+  count = local.create_recorder ? 1 : 0
 
   name           = "${var.name_prefix}-config-delivery"
   s3_bucket_name = var.config_bucket_name != "" ? var.config_bucket_name : aws_s3_bucket.config[0].id
-  s3_key_prefix  = var.config_s3_prefix
+  s3_key_prefix  = var.config_rules.config_s3_prefix
   sns_topic_arn  = var.sns_topic_arn
 
   snapshot_delivery_properties {
-    delivery_frequency = var.delivery_frequency
+    delivery_frequency = var.config_rules.delivery_frequency
   }
 
   depends_on = [aws_config_configuration_recorder.main]
 }
 
 resource "aws_config_configuration_recorder_status" "main" {
-  count = var.create_recorder ? 1 : 0
+  count = local.create_recorder ? 1 : 0
 
   name       = aws_config_configuration_recorder.main[0].name
   is_enabled = true
@@ -56,8 +64,7 @@ resource "aws_config_configuration_recorder_status" "main" {
 #------------------------------------------------------------------------------
 
 resource "aws_s3_bucket" "config" {
-  count = var.create_recorder && var.config_bucket_name == "" ? 1 : 0
-
+  count  = local.create_bucket ? 1 : 0
   bucket = "${var.name_prefix}-config-${data.aws_caller_identity.current.account_id}"
 
   tags = merge(var.common_tags, {
@@ -67,17 +74,16 @@ resource "aws_s3_bucket" "config" {
 }
 
 resource "aws_s3_bucket_versioning" "config" {
-  count = var.create_recorder && var.config_bucket_name == "" ? 1 : 0
-
+  count  = local.create_bucket ? 1 : 0
   bucket = aws_s3_bucket.config[0].id
+
   versioning_configuration {
     status = "Enabled"
   }
 }
 
 resource "aws_s3_bucket_server_side_encryption_configuration" "config" {
-  count = var.create_recorder && var.config_bucket_name == "" ? 1 : 0
-
+  count  = local.create_bucket ? 1 : 0
   bucket = aws_s3_bucket.config[0].id
 
   rule {
@@ -89,8 +95,7 @@ resource "aws_s3_bucket_server_side_encryption_configuration" "config" {
 }
 
 resource "aws_s3_bucket_public_access_block" "config" {
-  count = var.create_recorder && var.config_bucket_name == "" ? 1 : 0
-
+  count  = local.create_bucket ? 1 : 0
   bucket = aws_s3_bucket.config[0].id
 
   block_public_acls       = true
@@ -100,8 +105,7 @@ resource "aws_s3_bucket_public_access_block" "config" {
 }
 
 resource "aws_s3_bucket_lifecycle_configuration" "config" {
-  count = var.create_recorder && var.config_bucket_name == "" ? 1 : 0
-
+  count  = local.create_bucket ? 1 : 0
   bucket = aws_s3_bucket.config[0].id
 
   rule {
@@ -109,7 +113,7 @@ resource "aws_s3_bucket_lifecycle_configuration" "config" {
     status = "Enabled"
 
     expiration {
-      days = var.config_retention_days
+      days = var.config_rules.retention_days
     }
 
     noncurrent_version_expiration {
@@ -119,34 +123,26 @@ resource "aws_s3_bucket_lifecycle_configuration" "config" {
 }
 
 resource "aws_s3_bucket_policy" "config" {
-  count = var.create_recorder && var.config_bucket_name == "" ? 1 : 0
-
+  count  = local.create_bucket ? 1 : 0
   bucket = aws_s3_bucket.config[0].id
+
   policy = jsonencode({
     Version = "2012-10-17"
     Statement = [
       {
-        Sid    = "AWSConfigBucketPermissionsCheck"
-        Effect = "Allow"
-        Principal = {
-          Service = "config.amazonaws.com"
-        }
-        Action   = "s3:GetBucketAcl"
-        Resource = aws_s3_bucket.config[0].arn
-        Condition = {
-          StringEquals = {
-            "AWS:SourceAccount" = data.aws_caller_identity.current.account_id
-          }
-        }
+        Sid       = "AWSConfigBucketPermissionsCheck"
+        Effect    = "Allow"
+        Principal = { Service = "config.amazonaws.com" }
+        Action    = "s3:GetBucketAcl"
+        Resource  = aws_s3_bucket.config[0].arn
+        Condition = { StringEquals = { "AWS:SourceAccount" = data.aws_caller_identity.current.account_id } }
       },
       {
-        Sid    = "AWSConfigBucketDelivery"
-        Effect = "Allow"
-        Principal = {
-          Service = "config.amazonaws.com"
-        }
-        Action   = "s3:PutObject"
-        Resource = "${aws_s3_bucket.config[0].arn}/*"
+        Sid       = "AWSConfigBucketDelivery"
+        Effect    = "Allow"
+        Principal = { Service = "config.amazonaws.com" }
+        Action    = "s3:PutObject"
+        Resource  = "${aws_s3_bucket.config[0].arn}/*"
         Condition = {
           StringEquals = {
             "s3:x-amz-acl"      = "bucket-owner-full-control"
@@ -163,18 +159,15 @@ resource "aws_s3_bucket_policy" "config" {
 #------------------------------------------------------------------------------
 
 resource "aws_iam_role" "config" {
-  count = var.create_recorder ? 1 : 0
-
-  name = "${var.name_prefix}-config-role"
+  count = local.create_recorder ? 1 : 0
+  name  = "${var.name_prefix}-config-role"
 
   assume_role_policy = jsonencode({
     Version = "2012-10-17"
     Statement = [{
-      Action = "sts:AssumeRole"
-      Effect = "Allow"
-      Principal = {
-        Service = "config.amazonaws.com"
-      }
+      Action    = "sts:AssumeRole"
+      Effect    = "Allow"
+      Principal = { Service = "config.amazonaws.com" }
     }]
   })
 
@@ -182,32 +175,23 @@ resource "aws_iam_role" "config" {
 }
 
 resource "aws_iam_role_policy_attachment" "config" {
-  count = var.create_recorder ? 1 : 0
-
+  count      = local.create_recorder ? 1 : 0
   role       = aws_iam_role.config[0].name
   policy_arn = "arn:aws:iam::aws:policy/service-role/AWS_ConfigRole"
 }
 
 resource "aws_iam_role_policy" "config_s3" {
-  count = var.create_recorder ? 1 : 0
-
-  name = "${var.name_prefix}-config-s3-policy"
-  role = aws_iam_role.config[0].id
+  count = local.create_recorder ? 1 : 0
+  name  = "${var.name_prefix}-config-s3-policy"
+  role  = aws_iam_role.config[0].id
 
   policy = jsonencode({
     Version = "2012-10-17"
     Statement = [{
-      Effect = "Allow"
-      Action = [
-        "s3:PutObject",
-        "s3:PutObjectAcl"
-      ]
+      Effect   = "Allow"
+      Action   = ["s3:PutObject", "s3:PutObjectAcl"]
       Resource = var.config_bucket_name != "" ? "arn:aws:s3:::${var.config_bucket_name}/*" : "${aws_s3_bucket.config[0].arn}/*"
-      Condition = {
-        StringLike = {
-          "s3:x-amz-acl" = "bucket-owner-full-control"
-        }
-      }
+      Condition = { StringLike = { "s3:x-amz-acl" = "bucket-owner-full-control" } }
     }]
   })
 }
@@ -217,8 +201,7 @@ resource "aws_iam_role_policy" "config_s3" {
 #------------------------------------------------------------------------------
 
 resource "aws_config_config_rule" "encrypted_volumes" {
-  count = var.enable_security_rules ? 1 : 0
-
+  count       = var.config_rules.enable_security_rules ? 1 : 0
   name        = "${var.name_prefix}-encrypted-volumes"
   description = "Checks if attached EBS volumes are encrypted"
 
@@ -227,17 +210,12 @@ resource "aws_config_config_rule" "encrypted_volumes" {
     source_identifier = "ENCRYPTED_VOLUMES"
   }
 
-  tags = merge(var.common_tags, {
-    Pillar = "Security"
-    Rule   = "encrypted-volumes"
-  })
-
+  tags       = merge(var.common_tags, { Pillar = "Security", Rule = "encrypted-volumes" })
   depends_on = [aws_config_configuration_recorder.main]
 }
 
 resource "aws_config_config_rule" "rds_encryption" {
-  count = var.enable_security_rules ? 1 : 0
-
+  count       = var.config_rules.enable_security_rules ? 1 : 0
   name        = "${var.name_prefix}-rds-storage-encrypted"
   description = "Checks if RDS instances have storage encryption enabled"
 
@@ -246,17 +224,12 @@ resource "aws_config_config_rule" "rds_encryption" {
     source_identifier = "RDS_STORAGE_ENCRYPTED"
   }
 
-  tags = merge(var.common_tags, {
-    Pillar = "Security"
-    Rule   = "rds-storage-encrypted"
-  })
-
+  tags       = merge(var.common_tags, { Pillar = "Security", Rule = "rds-storage-encrypted" })
   depends_on = [aws_config_configuration_recorder.main]
 }
 
 resource "aws_config_config_rule" "s3_bucket_ssl" {
-  count = var.enable_security_rules ? 1 : 0
-
+  count       = var.config_rules.enable_security_rules ? 1 : 0
   name        = "${var.name_prefix}-s3-bucket-ssl-requests-only"
   description = "Checks if S3 buckets require SSL for requests"
 
@@ -265,17 +238,12 @@ resource "aws_config_config_rule" "s3_bucket_ssl" {
     source_identifier = "S3_BUCKET_SSL_REQUESTS_ONLY"
   }
 
-  tags = merge(var.common_tags, {
-    Pillar = "Security"
-    Rule   = "s3-bucket-ssl-requests-only"
-  })
-
+  tags       = merge(var.common_tags, { Pillar = "Security", Rule = "s3-bucket-ssl-requests-only" })
   depends_on = [aws_config_configuration_recorder.main]
 }
 
 resource "aws_config_config_rule" "vpc_flow_logs" {
-  count = var.enable_security_rules ? 1 : 0
-
+  count       = var.config_rules.enable_security_rules ? 1 : 0
   name        = "${var.name_prefix}-vpc-flow-logs-enabled"
   description = "Checks if VPC flow logs are enabled"
 
@@ -284,21 +252,13 @@ resource "aws_config_config_rule" "vpc_flow_logs" {
     source_identifier = "VPC_FLOW_LOGS_ENABLED"
   }
 
-  input_parameters = jsonencode({
-    trafficType = "ALL"
-  })
-
-  tags = merge(var.common_tags, {
-    Pillar = "Security"
-    Rule   = "vpc-flow-logs-enabled"
-  })
-
-  depends_on = [aws_config_configuration_recorder.main]
+  input_parameters = jsonencode({ trafficType = "ALL" })
+  tags             = merge(var.common_tags, { Pillar = "Security", Rule = "vpc-flow-logs-enabled" })
+  depends_on       = [aws_config_configuration_recorder.main]
 }
 
 resource "aws_config_config_rule" "root_mfa" {
-  count = var.enable_security_rules && var.include_global_resources ? 1 : 0
-
+  count       = var.config_rules.enable_security_rules && var.config_rules.include_global_resources ? 1 : 0
   name        = "${var.name_prefix}-root-account-mfa-enabled"
   description = "Checks if root account has MFA enabled"
 
@@ -307,11 +267,7 @@ resource "aws_config_config_rule" "root_mfa" {
     source_identifier = "ROOT_ACCOUNT_MFA_ENABLED"
   }
 
-  tags = merge(var.common_tags, {
-    Pillar = "Security"
-    Rule   = "root-account-mfa-enabled"
-  })
-
+  tags       = merge(var.common_tags, { Pillar = "Security", Rule = "root-account-mfa-enabled" })
   depends_on = [aws_config_configuration_recorder.main]
 }
 
@@ -320,8 +276,7 @@ resource "aws_config_config_rule" "root_mfa" {
 #------------------------------------------------------------------------------
 
 resource "aws_config_config_rule" "rds_multi_az" {
-  count = var.enable_reliability_rules ? 1 : 0
-
+  count       = var.config_rules.enable_reliability_rules ? 1 : 0
   name        = "${var.name_prefix}-rds-multi-az-support"
   description = "Checks if RDS instances have Multi-AZ enabled"
 
@@ -330,17 +285,12 @@ resource "aws_config_config_rule" "rds_multi_az" {
     source_identifier = "RDS_MULTI_AZ_SUPPORT"
   }
 
-  tags = merge(var.common_tags, {
-    Pillar = "Reliability"
-    Rule   = "rds-multi-az-support"
-  })
-
+  tags       = merge(var.common_tags, { Pillar = "Reliability", Rule = "rds-multi-az-support" })
   depends_on = [aws_config_configuration_recorder.main]
 }
 
 resource "aws_config_config_rule" "elb_cross_zone" {
-  count = var.enable_reliability_rules ? 1 : 0
-
+  count       = var.config_rules.enable_reliability_rules ? 1 : 0
   name        = "${var.name_prefix}-elb-cross-zone-enabled"
   description = "Checks if ELB has cross-zone load balancing enabled"
 
@@ -349,17 +299,12 @@ resource "aws_config_config_rule" "elb_cross_zone" {
     source_identifier = "ELB_CROSS_ZONE_LOAD_BALANCING_ENABLED"
   }
 
-  tags = merge(var.common_tags, {
-    Pillar = "Reliability"
-    Rule   = "elb-cross-zone-enabled"
-  })
-
+  tags       = merge(var.common_tags, { Pillar = "Reliability", Rule = "elb-cross-zone-enabled" })
   depends_on = [aws_config_configuration_recorder.main]
 }
 
 resource "aws_config_config_rule" "db_backup" {
-  count = var.enable_reliability_rules ? 1 : 0
-
+  count       = var.config_rules.enable_reliability_rules ? 1 : 0
   name        = "${var.name_prefix}-db-instance-backup-enabled"
   description = "Checks if RDS instances have automated backups enabled"
 
@@ -368,16 +313,9 @@ resource "aws_config_config_rule" "db_backup" {
     source_identifier = "DB_INSTANCE_BACKUP_ENABLED"
   }
 
-  input_parameters = jsonencode({
-    backupRetentionMinimum = var.min_backup_retention_days
-  })
-
-  tags = merge(var.common_tags, {
-    Pillar = "Reliability"
-    Rule   = "db-instance-backup-enabled"
-  })
-
-  depends_on = [aws_config_configuration_recorder.main]
+  input_parameters = jsonencode({ backupRetentionMinimum = var.config_rules.min_backup_retention_days })
+  tags             = merge(var.common_tags, { Pillar = "Reliability", Rule = "db-instance-backup-enabled" })
+  depends_on       = [aws_config_configuration_recorder.main]
 }
 
 #------------------------------------------------------------------------------
@@ -385,8 +323,7 @@ resource "aws_config_config_rule" "db_backup" {
 #------------------------------------------------------------------------------
 
 resource "aws_config_config_rule" "cloudwatch_alarm_action" {
-  count = var.enable_operational_rules ? 1 : 0
-
+  count       = var.config_rules.enable_operational_rules ? 1 : 0
   name        = "${var.name_prefix}-cloudwatch-alarm-action-check"
   description = "Checks if CloudWatch alarms have actions configured"
 
@@ -395,17 +332,12 @@ resource "aws_config_config_rule" "cloudwatch_alarm_action" {
     source_identifier = "CLOUDWATCH_ALARM_ACTION_CHECK"
   }
 
-  tags = merge(var.common_tags, {
-    Pillar = "OperationalExcellence"
-    Rule   = "cloudwatch-alarm-action-check"
-  })
-
+  tags       = merge(var.common_tags, { Pillar = "OperationalExcellence", Rule = "cloudwatch-alarm-action-check" })
   depends_on = [aws_config_configuration_recorder.main]
 }
 
 resource "aws_config_config_rule" "cloudtrail_enabled" {
-  count = var.enable_operational_rules ? 1 : 0
-
+  count       = var.config_rules.enable_operational_rules ? 1 : 0
   name        = "${var.name_prefix}-cloudtrail-enabled"
   description = "Checks if CloudTrail is enabled in the account"
 
@@ -414,11 +346,7 @@ resource "aws_config_config_rule" "cloudtrail_enabled" {
     source_identifier = "CLOUD_TRAIL_ENABLED"
   }
 
-  tags = merge(var.common_tags, {
-    Pillar = "OperationalExcellence"
-    Rule   = "cloudtrail-enabled"
-  })
-
+  tags       = merge(var.common_tags, { Pillar = "OperationalExcellence", Rule = "cloudtrail-enabled" })
   depends_on = [aws_config_configuration_recorder.main]
 }
 
@@ -427,8 +355,7 @@ resource "aws_config_config_rule" "cloudtrail_enabled" {
 #------------------------------------------------------------------------------
 
 resource "aws_config_config_rule" "ebs_optimized" {
-  count = var.enable_cost_rules ? 1 : 0
-
+  count       = var.config_rules.enable_cost_rules ? 1 : 0
   name        = "${var.name_prefix}-ebs-optimized-instance"
   description = "Checks if EBS optimization is enabled for supported instances"
 
@@ -437,17 +364,6 @@ resource "aws_config_config_rule" "ebs_optimized" {
     source_identifier = "EBS_OPTIMIZED_INSTANCE"
   }
 
-  tags = merge(var.common_tags, {
-    Pillar = "CostOptimization"
-    Rule   = "ebs-optimized-instance"
-  })
-
+  tags       = merge(var.common_tags, { Pillar = "CostOptimization", Rule = "ebs-optimized-instance" })
   depends_on = [aws_config_configuration_recorder.main]
 }
-
-#------------------------------------------------------------------------------
-# Data Sources
-#------------------------------------------------------------------------------
-
-data "aws_caller_identity" "current" {}
-data "aws_region" "current" {}

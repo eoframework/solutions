@@ -82,7 +82,7 @@ output "private_route_table_ids" {
 
 output "flow_log_group_name" {
   description = "VPC Flow Logs CloudWatch log group name"
-  value       = var.enable_flow_logs ? aws_cloudwatch_log_group.flow_logs[0].name : null
+  value       = var.network.enable_flow_logs ? aws_cloudwatch_log_group.flow_logs[0].name : null
 }
 
 output "availability_zones" {

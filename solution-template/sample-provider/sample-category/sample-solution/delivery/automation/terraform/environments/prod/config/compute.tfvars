@@ -1,5 +1,5 @@
 #------------------------------------------------------------------------------
-# Compute Configuration
+# Compute Configuration - PRODUCTION Environment
 #------------------------------------------------------------------------------
 # Compute infrastructure settings including EC2, Auto Scaling, and Load Balancing.
 # These values are typically derived from the delivery configuration.csv
@@ -13,14 +13,42 @@ compute = {
   instance_type  = "t3.medium"      # Production: appropriately sized
   use_latest_ami = true             # Use latest Amazon Linux 2023 AMI
 
-  # Root volume configuration
+  # AMI Configuration (when use_latest_ami = true)
+  ami_filter_name       = "al2023-ami-*-x86_64"  # Amazon Linux 2023
+  ami_virtualization    = "hvm"
+  ami_owner             = "amazon"
+
+  # Custom AMI (when use_latest_ami = false)
+  # ami_id = "ami-0123456789abcdef0"
+
+  #----------------------------------------------------------------------------
+  # Root Volume Configuration
+  #----------------------------------------------------------------------------
   root_volume_size       = 50       # GB
   root_volume_type       = "gp3"
   root_volume_iops       = 3000
   root_volume_throughput = 125      # MB/s
+  root_volume_encrypted  = true
+  root_volume_device     = "/dev/xvda"
+  delete_on_termination  = true
 
-  # Monitoring
+  #----------------------------------------------------------------------------
+  # Instance Monitoring
+  #----------------------------------------------------------------------------
   enable_detailed_monitoring = true # Production: detailed CloudWatch metrics
+
+  #----------------------------------------------------------------------------
+  # Instance Network
+  #----------------------------------------------------------------------------
+  associate_public_ip = false       # Private instances only
+
+  #----------------------------------------------------------------------------
+  # Instance Metadata Service
+  #----------------------------------------------------------------------------
+  metadata_http_endpoint = "enabled"
+  metadata_http_tokens   = "required"  # IMDSv2 required
+  metadata_hop_limit     = 1
+  metadata_tags_enabled  = "enabled"
 
   #----------------------------------------------------------------------------
   # Auto Scaling Group Configuration
@@ -32,27 +60,36 @@ compute = {
 
   # Health check
   health_check_grace_period = 300   # seconds
+  health_check_type         = "ELB" # EC2 or ELB
 
-  # Scaling thresholds
+  # ASG Behavior
+  default_cooldown       = 300      # seconds between scaling activities
+  termination_policies   = ["Default"]  # OldestInstance, NewestInstance, etc.
+  suspended_processes    = []       # Processes to suspend
+
+  #----------------------------------------------------------------------------
+  # Instance Refresh (Rolling Updates)
+  #----------------------------------------------------------------------------
+  instance_refresh_strategy     = "Rolling"  # Rolling or Blue/Green
+  instance_refresh_min_healthy  = 50         # Minimum healthy percentage
+  instance_refresh_warmup       = 300        # Instance warmup seconds
+
+  #----------------------------------------------------------------------------
+  # Launch Template
+  #----------------------------------------------------------------------------
+  launch_template_version = "$Latest"  # $Latest, $Default, or specific version
+
+  #----------------------------------------------------------------------------
+  # Scaling Policies
+  #----------------------------------------------------------------------------
   scale_up_threshold   = 70         # CPU % to trigger scale up
   scale_down_threshold = 30         # CPU % to trigger scale down
-}
+  scale_up_adjustment  = 2          # Instances to add
+  scale_down_adjustment = -1        # Instances to remove
+  scaling_cooldown     = 300        # Cooldown between scaling actions
 
-alb = {
   #----------------------------------------------------------------------------
-  # Application Load Balancer Configuration
+  # Resource Tags for Instances/Volumes
   #----------------------------------------------------------------------------
-  enabled                    = true
-  internal                   = false    # Internet-facing
-  enable_deletion_protection = true     # Production: enabled
-
-  # TLS Configuration (uncomment and set for HTTPS)
-  # acm_certificate_arn = "arn:aws:acm:us-east-1:123456789012:certificate/xxxxx"
-
-  # Health check settings
-  health_check_path     = "/health"
-  health_check_interval = 30        # seconds
-  health_check_timeout  = 5         # seconds
-  healthy_threshold     = 2         # consecutive checks
-  unhealthy_threshold   = 3         # consecutive checks
+  propagate_tags_at_launch = true
 }

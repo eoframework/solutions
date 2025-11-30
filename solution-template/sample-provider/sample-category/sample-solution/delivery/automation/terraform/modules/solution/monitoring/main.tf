@@ -5,10 +5,6 @@
 #
 # Uses generic AWS CloudWatch module for reusable components.
 
-terraform {
-  required_version = ">= 1.6.0"
-}
-
 locals {
   name_prefix = var.name_prefix
   common_tags = var.common_tags
@@ -37,20 +33,20 @@ module "cloudwatch" {
     {
       application = {
         name           = "/aws/application/${local.name_prefix}"
-        retention_days = var.log_retention_days
+        retention_days = var.monitoring.log_retention_days
       }
     },
-    var.enable_container_insights ? {
+    var.monitoring.enable_container_insights ? {
       ecs = {
         name           = "/aws/ecs/${local.name_prefix}"
-        retention_days = var.log_retention_days
+        retention_days = var.monitoring.log_retention_days
       }
     } : {}
   )
 
   # Dashboard
-  create_dashboard = var.enable_dashboard
-  dashboard_widgets = var.enable_dashboard ? concat(
+  create_dashboard = var.monitoring.enable_dashboard
+  dashboard_widgets = var.monitoring.enable_dashboard ? concat(
     # ALB Metrics (if ALB exists)
     var.alb_arn != "" ? [
       {
@@ -245,7 +241,7 @@ module "cloudwatch" {
 #------------------------------------------------------------------------------
 
 resource "aws_xray_sampling_rule" "main" {
-  count = var.enable_xray_tracing ? 1 : 0
+  count = var.monitoring.enable_xray_tracing ? 1 : 0
 
   rule_name      = "${local.name_prefix}-sampling"
   priority       = 1000

@@ -27,84 +27,10 @@ variable "target_group_arns" {
   default     = []
 }
 
-#------------------------------------------------------------------------------
-# Instance Configuration
-#------------------------------------------------------------------------------
-
-variable "instance_type" {
-  description = "EC2 instance type"
-  type        = string
-  default     = "t3.medium"
-}
-
-variable "use_latest_ami" {
-  description = "Use latest Amazon Linux 2023 AMI"
-  type        = bool
-  default     = true
-}
-
-variable "ami_id" {
-  description = "AMI ID (required if use_latest_ami is false)"
-  type        = string
-  default     = ""
-}
-
-variable "key_name" {
-  description = "SSH key pair name"
-  type        = string
-  default     = null
-}
-
-variable "instance_profile_name" {
+variable "iam_instance_profile_name" {
   description = "IAM instance profile name"
   type        = string
   default     = ""
-}
-
-variable "associate_public_ip" {
-  description = "Associate public IP address"
-  type        = bool
-  default     = false
-}
-
-variable "user_data_base64" {
-  description = "Base64 encoded user data script"
-  type        = string
-  default     = null
-}
-
-#------------------------------------------------------------------------------
-# EBS Configuration
-#------------------------------------------------------------------------------
-
-variable "root_volume_size" {
-  description = "Root volume size in GB"
-  type        = number
-  default     = 50
-}
-
-variable "root_volume_type" {
-  description = "Root volume type"
-  type        = string
-  default     = "gp3"
-}
-
-variable "root_volume_iops" {
-  description = "Root volume IOPS (for gp3/io1/io2)"
-  type        = number
-  default     = 3000
-}
-
-variable "root_volume_throughput" {
-  description = "Root volume throughput in MB/s (for gp3)"
-  type        = number
-  default     = 125
-}
-
-variable "enable_ebs_encryption" {
-  description = "Enable EBS encryption"
-  type        = bool
-  default     = true
 }
 
 variable "kms_key_arn" {
@@ -113,162 +39,77 @@ variable "kms_key_arn" {
   default     = null
 }
 
-#------------------------------------------------------------------------------
-# Metadata Configuration
-#------------------------------------------------------------------------------
-
-variable "require_imdsv2" {
-  description = "Require IMDSv2 for instance metadata"
-  type        = bool
-  default     = true
-}
-
-variable "metadata_hop_limit" {
-  description = "Metadata response hop limit"
-  type        = number
-  default     = 1
-}
-
-variable "enable_detailed_monitoring" {
-  description = "Enable detailed CloudWatch monitoring"
-  type        = bool
-  default     = false
-}
-
-#------------------------------------------------------------------------------
-# ASG Configuration
-#------------------------------------------------------------------------------
-
-variable "min_size" {
-  description = "Minimum number of instances"
-  type        = number
-  default     = 1
-}
-
-variable "max_size" {
-  description = "Maximum number of instances"
-  type        = number
-  default     = 3
-}
-
-variable "desired_capacity" {
-  description = "Desired number of instances"
-  type        = number
-  default     = 1
-}
-
 variable "health_check_type" {
   description = "Health check type (EC2 or ELB)"
   type        = string
   default     = "EC2"
 }
 
-variable "health_check_grace_period" {
-  description = "Health check grace period in seconds"
-  type        = number
-  default     = 300
-}
+#------------------------------------------------------------------------------
+# Compute Configuration (grouped object)
+#------------------------------------------------------------------------------
 
-variable "default_cooldown" {
-  description = "Default cooldown in seconds"
-  type        = number
-  default     = 300
-}
-
-variable "termination_policies" {
-  description = "Termination policies"
-  type        = list(string)
-  default     = ["Default"]
-}
-
-variable "instance_refresh_min_healthy" {
-  description = "Minimum healthy percentage during instance refresh"
-  type        = number
-  default     = 50
+variable "compute" {
+  description = "EC2 and Auto Scaling configuration"
+  type = object({
+    # EC2 Instance Configuration
+    instance_type              = string
+    use_latest_ami             = bool
+    ami_filter_name            = optional(string, "al2023-ami-*-x86_64")
+    ami_virtualization         = optional(string, "hvm")
+    ami_owner                  = optional(string, "amazon")
+    # Root Volume Configuration
+    root_volume_size           = number
+    root_volume_type           = string
+    root_volume_iops           = number
+    root_volume_throughput     = number
+    root_volume_encrypted      = optional(bool, true)
+    root_volume_device         = optional(string, "/dev/xvda")
+    delete_on_termination      = optional(bool, true)
+    # Instance Monitoring & Network
+    enable_detailed_monitoring = bool
+    associate_public_ip        = optional(bool, false)
+    # Instance Metadata Service
+    metadata_http_endpoint     = optional(string, "enabled")
+    metadata_http_tokens       = optional(string, "required")
+    metadata_hop_limit         = optional(number, 1)
+    metadata_tags_enabled      = optional(string, "enabled")
+    # Auto Scaling Group Configuration
+    enable_auto_scaling        = bool
+    asg_min_size               = number
+    asg_max_size               = number
+    asg_desired_capacity       = number
+    health_check_grace_period  = number
+    health_check_type          = optional(string, "ELB")
+    default_cooldown           = optional(number, 300)
+    termination_policies       = optional(list(string), ["Default"])
+    suspended_processes        = optional(list(string), [])
+    # Instance Refresh
+    instance_refresh_strategy    = optional(string, "Rolling")
+    instance_refresh_min_healthy = optional(number, 50)
+    instance_refresh_warmup      = optional(number, 300)
+    # Launch Template
+    launch_template_version    = optional(string, "$Latest")
+    # Scaling Policies
+    scale_up_threshold         = number
+    scale_down_threshold       = number
+    scale_up_adjustment        = optional(number, 2)
+    scale_down_adjustment      = optional(number, -1)
+    scaling_cooldown           = optional(number, 300)
+    # Tags
+    propagate_tags_at_launch   = optional(bool, true)
+  })
 }
 
 #------------------------------------------------------------------------------
-# Warm Pool Configuration
+# Security Configuration (subset for ASG)
 #------------------------------------------------------------------------------
 
-variable "enable_warm_pool" {
-  description = "Enable warm pool"
-  type        = bool
-  default     = false
-}
-
-variable "warm_pool_state" {
-  description = "Warm pool instance state"
-  type        = string
-  default     = "Stopped"
-}
-
-variable "warm_pool_min_size" {
-  description = "Warm pool minimum size"
-  type        = number
-  default     = 0
-}
-
-variable "warm_pool_max_size" {
-  description = "Warm pool maximum size"
-  type        = number
-  default     = 2
-}
-
-#------------------------------------------------------------------------------
-# Scaling Policy Configuration
-#------------------------------------------------------------------------------
-
-variable "enable_scaling_policies" {
-  description = "Enable CPU-based scaling policies"
-  type        = bool
-  default     = true
-}
-
-variable "scale_up_threshold" {
-  description = "CPU percentage to trigger scale up"
-  type        = number
-  default     = 70
-}
-
-variable "scale_down_threshold" {
-  description = "CPU percentage to trigger scale down"
-  type        = number
-  default     = 30
-}
-
-variable "scale_up_adjustment" {
-  description = "Number of instances to add when scaling up"
-  type        = number
-  default     = 1
-}
-
-variable "scale_down_adjustment" {
-  description = "Number of instances to remove when scaling down (negative)"
-  type        = number
-  default     = -1
-}
-
-variable "scale_up_cooldown" {
-  description = "Scale up cooldown in seconds"
-  type        = number
-  default     = 300
-}
-
-variable "scale_down_cooldown" {
-  description = "Scale down cooldown in seconds"
-  type        = number
-  default     = 300
-}
-
-variable "alarm_evaluation_periods" {
-  description = "Number of periods for alarm evaluation"
-  type        = number
-  default     = 2
-}
-
-variable "alarm_period" {
-  description = "Alarm period in seconds"
-  type        = number
-  default     = 120
+variable "security" {
+  description = "Security configuration for instances"
+  type = object({
+    require_imdsv2        = bool
+    metadata_hop_limit    = number
+    enable_kms_encryption = bool
+  })
 }

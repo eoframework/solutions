@@ -52,14 +52,27 @@ terraform {
 # For CI/CD pipelines, use environment variables or IAM roles
 
 provider "aws" {
-  region = var.aws_region
+  region = var.aws.region
 
   # Optional: Use named profile from ~/.aws/credentials
   # Leave empty/null to use default credential chain
-  profile = var.aws_profile != "" ? var.aws_profile : null
+  profile = try(var.aws.profile, null) != "" ? var.aws.profile : null
 
   # Common tags applied to ALL resources automatically
   # These are populated from main.tfvars via locals
+  default_tags {
+    tags = local.common_tags
+  }
+}
+
+# DR Provider for Cross-Region Backup
+# Used by backup-plans module for disaster recovery copies
+provider "aws" {
+  alias  = "dr"
+  region = try(var.aws.dr_region, "us-west-2")
+
+  profile = try(var.aws.profile, null) != "" ? var.aws.profile : null
+
   default_tags {
     tags = local.common_tags
   }

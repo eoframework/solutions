@@ -1,4 +1,5 @@
 # Solution Database Module - Variables
+# Accepts grouped object variables from environment configuration
 
 #------------------------------------------------------------------------------
 # Context from Core Module
@@ -20,12 +21,12 @@ variable "environment" {
 }
 
 variable "db_subnet_group_name" {
-  description = "DB subnet group name (from core module db_subnet_group_name)"
+  description = "DB subnet group name (from core module)"
   type        = string
 }
 
 variable "security_group_ids" {
-  description = "Security group IDs (from core module database_security_group_id)"
+  description = "Security group IDs (from core module)"
   type        = list(string)
 }
 
@@ -36,153 +37,65 @@ variable "kms_key_arn" {
 }
 
 #------------------------------------------------------------------------------
-# Database Engine Configuration
+# Database Configuration (from database.tfvars)
 #------------------------------------------------------------------------------
 
-variable "db_engine" {
-  description = "Database engine type"
-  type        = string
-  default     = "postgres"
-
-  validation {
-    condition     = contains(["postgres", "mysql", "mariadb"], var.db_engine)
-    error_message = "db_engine must be one of: postgres, mysql, mariadb"
-  }
-}
-
-variable "db_engine_version" {
-  description = "Database engine version"
-  type        = string
-  default     = "15.4"
-}
-
-variable "db_instance_class" {
-  description = "RDS instance class"
-  type        = string
-  default     = "db.t3.medium"
-}
-
-variable "db_parameters" {
-  description = "Database parameter group parameters"
-  type = list(object({
-    name         = string
-    value        = string
-    apply_method = optional(string, "pending-reboot")
-  }))
-  default = []
-}
-
-#------------------------------------------------------------------------------
-# Storage Configuration
-#------------------------------------------------------------------------------
-
-variable "db_allocated_storage" {
-  description = "Initial allocated storage in GB"
-  type        = number
-  default     = 20
-}
-
-variable "db_max_allocated_storage" {
-  description = "Maximum storage for autoscaling in GB"
-  type        = number
-  default     = 100
-}
-
-variable "db_storage_type" {
-  description = "Storage type"
-  type        = string
-  default     = "gp3"
-}
-
-variable "db_storage_encrypted" {
-  description = "Enable storage encryption"
-  type        = bool
-  default     = true
+variable "database" {
+  description = "RDS database configuration"
+  type = object({
+    # Enable/Disable
+    enabled                       = optional(bool, true)
+    # Engine Configuration
+    engine                        = string
+    engine_version                = string
+    instance_class                = string
+    # Storage Configuration
+    allocated_storage             = number
+    max_allocated_storage         = number
+    storage_type                  = optional(string, "gp3")
+    storage_iops                  = optional(number, 3000)
+    storage_throughput            = optional(number, 125)
+    storage_encrypted             = bool
+    # Database Identity
+    name                          = string
+    username                      = string
+    # High Availability
+    multi_az                      = bool
+    # Backup Configuration
+    backup_retention              = number
+    backup_window                 = string
+    maintenance_window            = string
+    # Performance & Monitoring
+    performance_insights          = bool
+    performance_insights_retention = optional(number, 7)
+    # Logging Configuration
+    log_exports_postgres          = optional(list(string), ["postgresql", "upgrade"])
+    log_exports_mysql             = optional(list(string), ["error", "slowquery", "general"])
+    # Version Management
+    auto_minor_version_upgrade    = optional(bool, true)
+    allow_major_version_upgrade   = optional(bool, false)
+    # Protection
+    deletion_protection           = bool
+    skip_final_snapshot           = optional(bool, false)
+    copy_tags_to_snapshot         = optional(bool, true)
+    # Network
+    publicly_accessible           = optional(bool, false)
+  })
 }
 
 #------------------------------------------------------------------------------
-# Database Configuration
+# Sensitive Variables (not in tfvars)
 #------------------------------------------------------------------------------
-
-variable "db_name" {
-  description = "Database name"
-  type        = string
-  default     = "appdb"
-}
-
-variable "db_username" {
-  description = "Master username"
-  type        = string
-  default     = "dbadmin"
-  sensitive   = true
-}
 
 variable "db_password" {
-  description = "Master password"
+  description = "Master password (set via environment variable TF_VAR_db_password)"
   type        = string
   sensitive   = true
+  default     = ""
 }
 
 #------------------------------------------------------------------------------
-# High Availability
-#------------------------------------------------------------------------------
-
-variable "db_multi_az" {
-  description = "Enable Multi-AZ deployment"
-  type        = bool
-  default     = false
-}
-
-#------------------------------------------------------------------------------
-# Backup Configuration
-#------------------------------------------------------------------------------
-
-variable "db_backup_retention" {
-  description = "Backup retention period in days"
-  type        = number
-  default     = 7
-}
-
-variable "db_backup_window" {
-  description = "Preferred backup window (UTC)"
-  type        = string
-  default     = "03:00-04:00"
-}
-
-variable "db_maintenance_window" {
-  description = "Preferred maintenance window"
-  type        = string
-  default     = "sun:04:00-sun:05:00"
-}
-
-#------------------------------------------------------------------------------
-# Monitoring
-#------------------------------------------------------------------------------
-
-variable "db_performance_insights" {
-  description = "Enable Performance Insights"
-  type        = bool
-  default     = false
-}
-
-variable "db_cloudwatch_logs_exports" {
-  description = "CloudWatch log exports"
-  type        = list(string)
-  default     = ["postgresql", "upgrade"]
-}
-
-#------------------------------------------------------------------------------
-# Protection
-#------------------------------------------------------------------------------
-
-variable "db_deletion_protection" {
-  description = "Enable deletion protection"
-  type        = bool
-  default     = false
-}
-
-#------------------------------------------------------------------------------
-# Alarms
+# Alarms Configuration
 #------------------------------------------------------------------------------
 
 variable "enable_alarms" {
@@ -195,10 +108,4 @@ variable "alarm_sns_topic_arn" {
   description = "SNS topic ARN for alarm notifications"
   type        = string
   default     = ""
-}
-
-variable "db_max_connections_threshold" {
-  description = "Threshold for database connections alarm"
-  type        = number
-  default     = 100
 }

@@ -21,89 +21,41 @@ variable "security_group_ids" {
   type        = list(string)
 }
 
-variable "engine_version" {
-  description = "Redis engine version"
-  type        = string
-  default     = "7.0"
-}
-
-variable "node_type" {
-  description = "Node type"
-  type        = string
-  default     = "cache.t3.micro"
-}
-
-variable "num_cache_clusters" {
-  description = "Number of cache clusters"
-  type        = number
-  default     = 1
-}
-
-variable "port" {
-  description = "Port"
-  type        = number
-  default     = 6379
-}
-
-variable "parameters" {
-  description = "Cache parameters"
-  type = list(object({
-    name  = string
-    value = string
-  }))
-  default = []
-}
-
-variable "automatic_failover_enabled" {
-  description = "Enable automatic failover"
-  type        = bool
-  default     = false
-}
-
-variable "at_rest_encryption_enabled" {
-  description = "Enable at-rest encryption"
-  type        = bool
-  default     = true
-}
-
-variable "transit_encryption_enabled" {
-  description = "Enable in-transit encryption"
-  type        = bool
-  default     = true
-}
-
 variable "kms_key_arn" {
   description = "KMS key ARN for encryption"
   type        = string
   default     = null
 }
 
-variable "maintenance_window" {
-  description = "Maintenance window"
-  type        = string
-  default     = "sun:05:00-sun:06:00"
-}
+#------------------------------------------------------------------------------
+# Cache Configuration (grouped object)
+#------------------------------------------------------------------------------
 
-variable "snapshot_retention_limit" {
-  description = "Snapshot retention in days"
-  type        = number
-  default     = 1
-}
-
-variable "snapshot_window" {
-  description = "Snapshot window"
-  type        = string
-  default     = "03:00-04:00"
-}
-
-variable "auto_minor_version_upgrade" {
-  description = "Auto minor version upgrade"
-  type        = bool
-  default     = true
-}
-
-variable "notification_topic_arn" {
-  description = "SNS topic ARN for notifications"
-  type        = string
-  default     = null
+variable "cache" {
+  description = "ElastiCache configuration"
+  type = object({
+    enabled                    = bool
+    # Engine Configuration
+    engine                     = string
+    engine_version             = string
+    port                       = optional(number, 6379)
+    # Instance Configuration
+    node_type                  = string
+    num_nodes                  = number
+    # High Availability
+    automatic_failover         = bool
+    # Encryption
+    at_rest_encryption         = bool
+    transit_encryption         = bool
+    # Backup Configuration
+    snapshot_retention         = number
+    snapshot_window            = string
+    # Maintenance Configuration
+    maintenance_window         = optional(string, "sun:06:00-sun:07:00")
+    auto_minor_version_upgrade = optional(bool, true)
+    # Cluster Mode (Redis only)
+    cluster_mode_enabled       = optional(bool, false)
+    cluster_mode_replicas      = optional(number, 1)
+    cluster_mode_shards        = optional(number, 1)
+  })
 }

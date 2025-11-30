@@ -26,156 +26,37 @@ variable "security_group_ids" {
   type        = list(string)
 }
 
-variable "internal" {
-  description = "Whether ALB is internal (not internet-facing)"
-  type        = bool
-  default     = false
-}
-
-variable "enable_deletion_protection" {
-  description = "Enable deletion protection"
-  type        = bool
-  default     = false
-}
-
-variable "idle_timeout" {
-  description = "Idle timeout in seconds"
-  type        = number
-  default     = 60
-}
-
-variable "drop_invalid_header_fields" {
-  description = "Drop invalid header fields"
-  type        = bool
-  default     = true
-}
-
-variable "access_logs_bucket" {
-  description = "S3 bucket for access logs (empty to disable)"
-  type        = string
-  default     = ""
-}
-
-variable "access_logs_prefix" {
-  description = "S3 prefix for access logs"
-  type        = string
-  default     = "alb-logs"
-}
-
-#------------------------------------------------------------------------------
-# Target Group Configuration
-#------------------------------------------------------------------------------
-
 variable "target_port" {
-  description = "Target port"
+  description = "Target port (from application configuration)"
   type        = number
-  default     = 80
-}
-
-variable "target_protocol" {
-  description = "Target protocol"
-  type        = string
-  default     = "HTTP"
-}
-
-variable "target_type" {
-  description = "Target type (instance, ip, lambda)"
-  type        = string
-  default     = "instance"
-}
-
-variable "deregistration_delay" {
-  description = "Deregistration delay in seconds"
-  type        = number
-  default     = 300
 }
 
 #------------------------------------------------------------------------------
-# Health Check Configuration
+# ALB Configuration (grouped object)
 #------------------------------------------------------------------------------
 
-variable "health_check_path" {
-  description = "Health check path"
-  type        = string
-  default     = "/health"
-}
-
-variable "health_check_port" {
-  description = "Health check port"
-  type        = string
-  default     = "traffic-port"
-}
-
-variable "health_check_protocol" {
-  description = "Health check protocol"
-  type        = string
-  default     = "HTTP"
-}
-
-variable "health_check_interval" {
-  description = "Health check interval in seconds"
-  type        = number
-  default     = 30
-}
-
-variable "health_check_timeout" {
-  description = "Health check timeout in seconds"
-  type        = number
-  default     = 5
-}
-
-variable "health_check_healthy_threshold" {
-  description = "Healthy threshold count"
-  type        = number
-  default     = 2
-}
-
-variable "health_check_unhealthy_threshold" {
-  description = "Unhealthy threshold count"
-  type        = number
-  default     = 3
-}
-
-variable "health_check_matcher" {
-  description = "Health check response matcher"
-  type        = string
-  default     = "200-299"
-}
-
-#------------------------------------------------------------------------------
-# Stickiness Configuration
-#------------------------------------------------------------------------------
-
-variable "enable_stickiness" {
-  description = "Enable session stickiness"
-  type        = bool
-  default     = false
-}
-
-variable "stickiness_duration" {
-  description = "Stickiness duration in seconds"
-  type        = number
-  default     = 86400
-}
-
-#------------------------------------------------------------------------------
-# SSL/TLS Configuration
-#------------------------------------------------------------------------------
-
-variable "certificate_arn" {
-  description = "ACM certificate ARN for HTTPS (empty for HTTP only)"
-  type        = string
-  default     = ""
-}
-
-variable "additional_certificate_arns" {
-  description = "Additional ACM certificate ARNs for multiple domains"
-  type        = list(string)
-  default     = []
-}
-
-variable "ssl_policy" {
-  description = "SSL policy for HTTPS listener"
-  type        = string
-  default     = "ELBSecurityPolicy-TLS13-1-2-2021-06"
+variable "alb" {
+  description = "Application Load Balancer configuration"
+  type = object({
+    enabled                    = bool
+    internal                   = bool
+    enable_deletion_protection = bool
+    # TLS/SSL Configuration
+    certificate_arn            = optional(string, "")
+    ssl_policy                 = optional(string, "ELBSecurityPolicy-TLS13-1-2-2021-06")
+    # ALB Behavior Settings
+    idle_timeout_seconds       = optional(number, 60)
+    deregistration_delay       = optional(number, 300)
+    drop_invalid_header_fields = optional(bool, true)
+    # HTTP to HTTPS Redirect
+    redirect_http_to_https     = optional(bool, true)
+    redirect_status_code       = optional(string, "HTTP_301")
+    # Health Check Configuration
+    health_check_path          = string
+    health_check_interval      = number
+    health_check_timeout       = number
+    healthy_threshold          = number
+    unhealthy_threshold        = number
+    health_check_matcher       = optional(string, "200-299")
+  })
 }

@@ -47,5 +47,5 @@ output "http_listener_arn" {
 
 output "https_listener_arn" {
   description = "HTTPS listener ARN (null if no certificate)"
-  value       = var.certificate_arn != "" ? aws_lb_listener.https[0].arn : null
+  value       = var.alb.certificate_arn != "" ? aws_lb_listener.https[0].arn : null
 }

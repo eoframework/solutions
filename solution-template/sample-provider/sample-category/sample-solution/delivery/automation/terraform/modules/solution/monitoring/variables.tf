@@ -1,4 +1,5 @@
 # Solution Monitoring Module - Variables
+# Accepts grouped object variables from environment configuration
 
 #------------------------------------------------------------------------------
 # Context from Core Module
@@ -59,53 +60,44 @@ variable "kms_key_arn" {
 }
 
 #------------------------------------------------------------------------------
-# Log Configuration
+# Monitoring Configuration (from monitoring.tfvars)
 #------------------------------------------------------------------------------
 
-variable "log_retention_days" {
-  description = "CloudWatch log retention in days"
-  type        = number
-  default     = 30
+variable "monitoring" {
+  description = "CloudWatch and observability configuration"
+  type = object({
+    # CloudWatch Logs
+    log_retention_days           = number
+    # CloudWatch Dashboard & Insights
+    enable_dashboard             = bool
+    enable_container_insights    = bool
+    # CloudWatch Alarm Defaults
+    alarm_evaluation_periods     = optional(number, 2)
+    alarm_period_seconds         = optional(number, 300)
+    alarm_treat_missing_data     = optional(string, "missing")
+    # Dashboard Widget Settings
+    dashboard_widget_width       = optional(number, 8)
+    dashboard_widget_height      = optional(number, 6)
+    # X-Ray Tracing Configuration
+    enable_xray_tracing          = bool
+    xray_sampling                = optional(object({
+      priority       = optional(number, 1000)
+      reservoir_size = optional(number, 1)
+      fixed_rate     = optional(number, 0.05)
+      url_path       = optional(string, "*")
+      http_method    = optional(string, "*")
+      service_type   = optional(string, "*")
+      host           = optional(string, "*")
+    }), {})
+  })
 }
 
-variable "enable_container_insights" {
-  description = "Enable Container Insights log group"
-  type        = bool
-  default     = false
-}
-
 #------------------------------------------------------------------------------
-# Dashboard Configuration
-#------------------------------------------------------------------------------
-
-variable "enable_dashboard" {
-  description = "Create CloudWatch dashboard"
-  type        = bool
-  default     = false
-}
-
-#------------------------------------------------------------------------------
-# Alerting Configuration
+# Alerting Configuration (optional - not typically in tfvars)
 #------------------------------------------------------------------------------
 
 variable "alarm_email" {
   description = "Email address for alarm notifications"
-  type        = string
-  default     = ""
-}
-
-#------------------------------------------------------------------------------
-# X-Ray Configuration
-#------------------------------------------------------------------------------
-
-variable "enable_xray_tracing" {
-  description = "Enable AWS X-Ray tracing"
-  type        = bool
-  default     = false
-}
-
-variable "metrics_namespace" {
-  description = "Custom metrics namespace"
   type        = string
   default     = ""
 }

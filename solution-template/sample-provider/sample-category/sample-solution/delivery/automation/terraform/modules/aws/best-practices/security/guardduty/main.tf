@@ -4,38 +4,40 @@
 # Implements intelligent threat detection using GuardDuty.
 # Monitors for malicious activity and unauthorized behavior.
 
+data "aws_caller_identity" "current" {}
+data "aws_region" "current" {}
+
+locals {
+  create_bucket = var.guardduty.enable_s3_export && var.findings_bucket_arn == ""
+}
+
 #------------------------------------------------------------------------------
 # GuardDuty Detector
 #------------------------------------------------------------------------------
 
 resource "aws_guardduty_detector" "main" {
   enable                       = true
-  finding_publishing_frequency = var.finding_publishing_frequency
+  finding_publishing_frequency = var.guardduty.finding_publishing_frequency
 
   datasources {
     s3_logs {
-      enable = var.enable_s3_protection
+      enable = var.guardduty.enable_s3_protection
     }
-
     kubernetes {
       audit_logs {
-        enable = var.enable_eks_protection
+        enable = var.guardduty.enable_eks_protection
       }
     }
-
     malware_protection {
       scan_ec2_instance_with_findings {
         ebs_volumes {
-          enable = var.enable_malware_protection
+          enable = var.guardduty.enable_malware_protection
         }
       }
     }
   }
 
-  tags = merge(var.common_tags, {
-    Name   = "${var.name_prefix}-guardduty"
-    Pillar = "Security"
-  })
+  tags = merge(var.common_tags, { Name = "${var.name_prefix}-guardduty", Pillar = "Security" })
 }
 
 #------------------------------------------------------------------------------
@@ -43,8 +45,7 @@ resource "aws_guardduty_detector" "main" {
 #------------------------------------------------------------------------------
 
 resource "aws_guardduty_publishing_destination" "s3" {
-  count = var.enable_s3_export ? 1 : 0
-
+  count           = var.guardduty.enable_s3_export ? 1 : 0
   detector_id     = aws_guardduty_detector.main.id
   destination_arn = var.findings_bucket_arn != "" ? var.findings_bucket_arn : aws_s3_bucket.findings[0].arn
   kms_key_arn     = var.kms_key_arn
@@ -57,28 +58,23 @@ resource "aws_guardduty_publishing_destination" "s3" {
 #------------------------------------------------------------------------------
 
 resource "aws_s3_bucket" "findings" {
-  count = var.enable_s3_export && var.findings_bucket_arn == "" ? 1 : 0
-
+  count  = local.create_bucket ? 1 : 0
   bucket = "${var.name_prefix}-guardduty-findings-${data.aws_caller_identity.current.account_id}"
 
-  tags = merge(var.common_tags, {
-    Name    = "${var.name_prefix}-guardduty-findings"
-    Purpose = "GuardDutyFindings"
-  })
+  tags = merge(var.common_tags, { Name = "${var.name_prefix}-guardduty-findings", Purpose = "GuardDutyFindings" })
 }
 
 resource "aws_s3_bucket_versioning" "findings" {
-  count = var.enable_s3_export && var.findings_bucket_arn == "" ? 1 : 0
-
+  count  = local.create_bucket ? 1 : 0
   bucket = aws_s3_bucket.findings[0].id
+
   versioning_configuration {
     status = "Enabled"
   }
 }
 
 resource "aws_s3_bucket_server_side_encryption_configuration" "findings" {
-  count = var.enable_s3_export && var.findings_bucket_arn == "" ? 1 : 0
-
+  count  = local.create_bucket ? 1 : 0
   bucket = aws_s3_bucket.findings[0].id
 
   rule {
@@ -90,8 +86,7 @@ resource "aws_s3_bucket_server_side_encryption_configuration" "findings" {
 }
 
 resource "aws_s3_bucket_public_access_block" "findings" {
-  count = var.enable_s3_export && var.findings_bucket_arn == "" ? 1 : 0
-
+  count  = local.create_bucket ? 1 : 0
   bucket = aws_s3_bucket.findings[0].id
 
   block_public_acls       = true
@@ -101,35 +96,31 @@ resource "aws_s3_bucket_public_access_block" "findings" {
 }
 
 resource "aws_s3_bucket_lifecycle_configuration" "findings" {
-  count = var.enable_s3_export && var.findings_bucket_arn == "" ? 1 : 0
-
+  count  = local.create_bucket ? 1 : 0
   bucket = aws_s3_bucket.findings[0].id
 
   rule {
     id     = "expire-old-findings"
     status = "Enabled"
-
     expiration {
-      days = var.findings_retention_days
+      days = var.guardduty.findings_retention_days
     }
   }
 }
 
 resource "aws_s3_bucket_policy" "findings" {
-  count = var.enable_s3_export && var.findings_bucket_arn == "" ? 1 : 0
-
+  count  = local.create_bucket ? 1 : 0
   bucket = aws_s3_bucket.findings[0].id
+
   policy = jsonencode({
     Version = "2012-10-17"
     Statement = [
       {
-        Sid    = "AllowGuardDutyGetBucketLocation"
-        Effect = "Allow"
-        Principal = {
-          Service = "guardduty.amazonaws.com"
-        }
-        Action   = "s3:GetBucketLocation"
-        Resource = aws_s3_bucket.findings[0].arn
+        Sid       = "AllowGuardDutyGetBucketLocation"
+        Effect    = "Allow"
+        Principal = { Service = "guardduty.amazonaws.com" }
+        Action    = "s3:GetBucketLocation"
+        Resource  = aws_s3_bucket.findings[0].arn
         Condition = {
           StringEquals = {
             "aws:SourceAccount" = data.aws_caller_identity.current.account_id
@@ -138,13 +129,11 @@ resource "aws_s3_bucket_policy" "findings" {
         }
       },
       {
-        Sid    = "AllowGuardDutyPutObject"
-        Effect = "Allow"
-        Principal = {
-          Service = "guardduty.amazonaws.com"
-        }
-        Action   = "s3:PutObject"
-        Resource = "${aws_s3_bucket.findings[0].arn}/*"
+        Sid       = "AllowGuardDutyPutObject"
+        Effect    = "Allow"
+        Principal = { Service = "guardduty.amazonaws.com" }
+        Action    = "s3:PutObject"
+        Resource  = "${aws_s3_bucket.findings[0].arn}/*"
         Condition = {
           StringEquals = {
             "aws:SourceAccount" = data.aws_caller_identity.current.account_id
@@ -153,18 +142,12 @@ resource "aws_s3_bucket_policy" "findings" {
         }
       },
       {
-        Sid    = "DenyUnencryptedUploads"
-        Effect = "Deny"
-        Principal = {
-          Service = "guardduty.amazonaws.com"
-        }
-        Action   = "s3:PutObject"
-        Resource = "${aws_s3_bucket.findings[0].arn}/*"
-        Condition = {
-          StringNotEquals = {
-            "s3:x-amz-server-side-encryption" = "aws:kms"
-          }
-        }
+        Sid       = "DenyUnencryptedUploads"
+        Effect    = "Deny"
+        Principal = { Service = "guardduty.amazonaws.com" }
+        Action    = "s3:PutObject"
+        Resource  = "${aws_s3_bucket.findings[0].arn}/*"
+        Condition = { StringNotEquals = { "s3:x-amz-server-side-encryption" = "aws:kms" } }
       }
     ]
   })
@@ -175,8 +158,7 @@ resource "aws_s3_bucket_policy" "findings" {
 #------------------------------------------------------------------------------
 
 resource "aws_cloudwatch_event_rule" "high_severity" {
-  count = var.enable_alerts ? 1 : 0
-
+  count       = var.guardduty.enable_alerts ? 1 : 0
   name        = "${var.name_prefix}-guardduty-high-severity"
   description = "Capture high severity GuardDuty findings"
 
@@ -184,9 +166,7 @@ resource "aws_cloudwatch_event_rule" "high_severity" {
     source      = ["aws.guardduty"]
     detail-type = ["GuardDuty Finding"]
     detail = {
-      severity = [
-        { numeric = [">=", var.alert_severity_threshold] }
-      ]
+      severity = [{ numeric = [">=", var.guardduty.alert_severity_threshold] }]
     }
   })
 
@@ -194,8 +174,7 @@ resource "aws_cloudwatch_event_rule" "high_severity" {
 }
 
 resource "aws_cloudwatch_event_target" "sns" {
-  count = var.enable_alerts && var.sns_topic_arn != "" ? 1 : 0
-
+  count     = var.guardduty.enable_alerts && var.sns_topic_arn != "" ? 1 : 0
   rule      = aws_cloudwatch_event_rule.high_severity[0].name
   target_id = "SendToSNS"
   arn       = var.sns_topic_arn
@@ -226,15 +205,13 @@ EOF
 #------------------------------------------------------------------------------
 
 resource "aws_guardduty_ipset" "trusted" {
-  count = var.trusted_ip_list_key != "" ? 1 : 0
-
+  count       = var.guardduty.trusted_ip_list_key != "" ? 1 : 0
   activate    = true
   detector_id = aws_guardduty_detector.main.id
   format      = "TXT"
-  location    = "s3://${var.trusted_ip_list_bucket}/${var.trusted_ip_list_key}"
+  location    = "s3://${var.guardduty.trusted_ip_list_bucket}/${var.guardduty.trusted_ip_list_key}"
   name        = "${var.name_prefix}-trusted-ips"
-
-  tags = var.common_tags
+  tags        = var.common_tags
 }
 
 #------------------------------------------------------------------------------
@@ -242,20 +219,11 @@ resource "aws_guardduty_ipset" "trusted" {
 #------------------------------------------------------------------------------
 
 resource "aws_guardduty_threatintelset" "custom" {
-  count = var.threat_intel_list_key != "" ? 1 : 0
-
+  count       = var.guardduty.threat_intel_list_key != "" ? 1 : 0
   activate    = true
   detector_id = aws_guardduty_detector.main.id
   format      = "TXT"
-  location    = "s3://${var.threat_intel_list_bucket}/${var.threat_intel_list_key}"
+  location    = "s3://${var.guardduty.threat_intel_list_bucket}/${var.guardduty.threat_intel_list_key}"
   name        = "${var.name_prefix}-threat-intel"
-
-  tags = var.common_tags
+  tags        = var.common_tags
 }
-
-#------------------------------------------------------------------------------
-# Data Sources
-#------------------------------------------------------------------------------
-
-data "aws_caller_identity" "current" {}
-data "aws_region" "current" {}

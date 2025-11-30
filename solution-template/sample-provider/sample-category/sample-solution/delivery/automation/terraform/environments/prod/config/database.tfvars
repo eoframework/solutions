@@ -1,5 +1,5 @@
 #------------------------------------------------------------------------------
-# Database Configuration
+# Database Configuration - PRODUCTION Environment
 #------------------------------------------------------------------------------
 # RDS database infrastructure settings.
 # These values are typically derived from the delivery configuration.csv
@@ -8,6 +8,11 @@
 
 database = {
   #----------------------------------------------------------------------------
+  # Enable/Disable Database
+  #----------------------------------------------------------------------------
+  enabled = true
+
+  #----------------------------------------------------------------------------
   # RDS Engine Configuration
   #----------------------------------------------------------------------------
   engine         = "postgres"
@@ -15,10 +20,13 @@ database = {
   instance_class = "db.t3.medium"   # Production: appropriately sized
 
   #----------------------------------------------------------------------------
-  # Storage
+  # Storage Configuration
   #----------------------------------------------------------------------------
   allocated_storage     = 100       # GB initial
   max_allocated_storage = 500       # GB max (autoscaling)
+  storage_type          = "gp3"     # gp2, gp3, io1, io2
+  storage_iops          = 3000      # Only for io1/io2/gp3
+  storage_throughput    = 125       # MB/s, only for gp3
   storage_encrypted     = true      # Production: always enabled
 
   #----------------------------------------------------------------------------
@@ -43,10 +51,33 @@ database = {
   #----------------------------------------------------------------------------
   # Performance & Monitoring
   #----------------------------------------------------------------------------
-  performance_insights = true       # Production: enabled
+  performance_insights           = true       # Production: enabled
+  performance_insights_retention = 7          # days (7 free, 731 paid)
+
+  #----------------------------------------------------------------------------
+  # Logging Configuration
+  #----------------------------------------------------------------------------
+  # PostgreSQL logs to export to CloudWatch
+  log_exports_postgres = ["postgresql", "upgrade"]
+
+  # MySQL logs to export to CloudWatch
+  log_exports_mysql = ["error", "slowquery", "general"]
+
+  #----------------------------------------------------------------------------
+  # Version Management
+  #----------------------------------------------------------------------------
+  auto_minor_version_upgrade = true   # Auto-apply minor version updates
+  allow_major_version_upgrade = false # Require manual major version upgrades
 
   #----------------------------------------------------------------------------
   # Protection
   #----------------------------------------------------------------------------
-  deletion_protection = true        # Production: enabled
+  deletion_protection   = true        # Production: enabled
+  skip_final_snapshot   = false       # Production: always create final snapshot
+  copy_tags_to_snapshot = true        # Copy tags to snapshots
+
+  #----------------------------------------------------------------------------
+  # Network
+  #----------------------------------------------------------------------------
+  publicly_accessible = false         # Production: never public
 }

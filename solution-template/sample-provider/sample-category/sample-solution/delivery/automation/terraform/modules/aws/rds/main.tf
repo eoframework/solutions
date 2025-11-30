@@ -1,14 +1,12 @@
 # Generic AWS RDS Module
-# Creates RDS instance with parameter group and optional read replica
+# Creates RDS instance with parameter group
 
-terraform {
-  required_version = ">= 1.6.0"
-  required_providers {
-    aws = {
-      source  = "hashicorp/aws"
-      version = ">= 5.0"
-    }
-  }
+locals {
+  # Derive parameter group family from engine and version
+  param_family = var.database.engine == "postgres" ? "postgres${split(".", var.database.engine_version)[0]}" : "mysql${split(".", var.database.engine_version)[0]}"
+
+  # Use configured log exports or derive from engine
+  log_exports = var.database.engine == "postgres" ? var.database.log_exports_postgres : var.database.log_exports_mysql
 }
 
 #------------------------------------------------------------------------------
@@ -17,20 +15,9 @@ terraform {
 
 resource "aws_db_parameter_group" "this" {
   name   = "${var.name_prefix}-db-params"
-  family = var.parameter_group_family
+  family = local.param_family
 
-  dynamic "parameter" {
-    for_each = var.parameters
-    content {
-      name         = parameter.value.name
-      value        = parameter.value.value
-      apply_method = lookup(parameter.value, "apply_method", "pending-reboot")
-    }
-  }
-
-  tags = merge(var.tags, {
-    Name = "${var.name_prefix}-db-params"
-  })
+  tags = merge(var.tags, { Name = "${var.name_prefix}-db-params" })
 
   lifecycle {
     create_before_destroy = true
@@ -45,53 +32,52 @@ resource "aws_db_instance" "this" {
   identifier = "${var.name_prefix}-db"
 
   # Engine
-  engine               = var.engine
-  engine_version       = var.engine_version
-  instance_class       = var.instance_class
+  engine               = var.database.engine
+  engine_version       = var.database.engine_version
+  instance_class       = var.database.instance_class
   parameter_group_name = aws_db_parameter_group.this.name
 
   # Storage
-  allocated_storage     = var.allocated_storage
-  max_allocated_storage = var.max_allocated_storage
-  storage_type          = var.storage_type
-  storage_encrypted     = var.storage_encrypted
-  kms_key_id            = var.storage_encrypted ? var.kms_key_arn : null
+  allocated_storage     = var.database.allocated_storage
+  max_allocated_storage = var.database.max_allocated_storage
+  storage_type          = var.database.storage_type
+  iops                  = var.database.storage_type == "gp3" || var.database.storage_type == "io1" || var.database.storage_type == "io2" ? var.database.storage_iops : null
+  storage_throughput    = var.database.storage_type == "gp3" ? var.database.storage_throughput : null
+  storage_encrypted     = var.database.storage_encrypted
+  kms_key_id            = var.database.storage_encrypted ? var.kms_key_arn : null
 
   # Network
   db_subnet_group_name   = var.db_subnet_group_name
   vpc_security_group_ids = var.security_group_ids
-  port                   = var.port
-  publicly_accessible    = var.publicly_accessible
+  publicly_accessible    = var.database.publicly_accessible
 
   # Database
-  db_name  = var.db_name
-  username = var.username
-  password = var.password
+  db_name  = var.database.name
+  username = var.database.username
+  password = var.db_password
 
   # High Availability
-  multi_az = var.multi_az
+  multi_az = var.database.multi_az
 
   # Backup
-  backup_retention_period = var.backup_retention_period
-  backup_window           = var.backup_window
-  maintenance_window      = var.maintenance_window
-  copy_tags_to_snapshot   = true
+  backup_retention_period = var.database.backup_retention
+  backup_window           = var.database.backup_window
+  maintenance_window      = var.database.maintenance_window
+  copy_tags_to_snapshot   = var.database.copy_tags_to_snapshot
 
   # Monitoring
-  performance_insights_enabled          = var.performance_insights_enabled
-  performance_insights_retention_period = var.performance_insights_enabled ? var.performance_insights_retention_period : null
-  enabled_cloudwatch_logs_exports       = var.cloudwatch_logs_exports
+  performance_insights_enabled          = var.database.performance_insights
+  performance_insights_retention_period = var.database.performance_insights ? var.database.performance_insights_retention : null
+  enabled_cloudwatch_logs_exports       = local.log_exports
 
   # Protection
-  deletion_protection       = var.deletion_protection
-  skip_final_snapshot       = var.skip_final_snapshot
-  final_snapshot_identifier = var.skip_final_snapshot ? null : "${var.name_prefix}-db-final-snapshot"
+  deletion_protection       = var.database.deletion_protection
+  skip_final_snapshot       = var.database.skip_final_snapshot
+  final_snapshot_identifier = !var.database.skip_final_snapshot ? "${var.name_prefix}-db-final-snapshot" : null
 
   # Upgrades
-  auto_minor_version_upgrade  = var.auto_minor_version_upgrade
-  allow_major_version_upgrade = var.allow_major_version_upgrade
+  auto_minor_version_upgrade  = var.database.auto_minor_version_upgrade
+  allow_major_version_upgrade = var.database.allow_major_version_upgrade
 
-  tags = merge(var.tags, {
-    Name = "${var.name_prefix}-db"
-  })
+  tags = merge(var.tags, { Name = "${var.name_prefix}-db" })
 }

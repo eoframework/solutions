@@ -18,15 +18,15 @@ output "application_log_group_arn" {
 
 output "ecs_log_group_name" {
   description = "ECS log group name"
-  value       = var.enable_container_insights ? module.cloudwatch.log_group_names["ecs"] : null
+  value       = var.monitoring.enable_container_insights ? module.cloudwatch.log_group_names["ecs"] : null
 }
 
 output "dashboard_name" {
   description = "CloudWatch dashboard name"
-  value       = var.enable_dashboard ? "${var.name_prefix}-dashboard" : null
+  value       = var.monitoring.enable_dashboard ? "${var.name_prefix}-dashboard" : null
 }
 
 output "dashboard_arn" {
   description = "CloudWatch dashboard ARN"
-  value       = var.enable_dashboard ? module.cloudwatch.dashboard_arn : null
+  value       = var.monitoring.enable_dashboard ? module.cloudwatch.dashboard_arn : null
 }

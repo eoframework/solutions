@@ -32,10 +32,10 @@ output "launch_template_latest_version" {
 
 output "scale_up_policy_arn" {
   description = "Scale up policy ARN"
-  value       = var.enable_scaling_policies ? aws_autoscaling_policy.scale_up[0].arn : null
+  value       = var.compute.enable_auto_scaling ? aws_autoscaling_policy.scale_up[0].arn : null
 }
 
 output "scale_down_policy_arn" {
   description = "Scale down policy ARN"
-  value       = var.enable_scaling_policies ? aws_autoscaling_policy.scale_down[0].arn : null
+  value       = var.compute.enable_auto_scaling ? aws_autoscaling_policy.scale_down[0].arn : null
 }

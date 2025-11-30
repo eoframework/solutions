@@ -163,6 +163,11 @@ module "monitoring" {
 module "best_practices" {
   source = "../../modules/solution/best-practices"
 
+  providers = {
+    aws    = aws
+    aws.dr = aws.dr
+  }
+
   name_prefix   = local.name_prefix
   common_tags   = local.common_tags
   environment   = local.environment
