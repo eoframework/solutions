@@ -1,202 +1,85 @@
 #------------------------------------------------------------------------------
-# Best Practices Configuration - PRODUCTION Environment
+# AWS Well-Architected Best Practices - Backup, Budgets, Config Rules, GuardDuty - PROD Environment
 #------------------------------------------------------------------------------
-# Aligned with AWS Well-Architected Framework 6 pillars:
+# Generated from configuration on 2025-11-30 15:48:17
 #
-# IN THIS FILE:
-#   Cost Optimization     - Budgets, alerts, cold storage tiering
-#   Reliability           - Backup plans, retention policies, DR
-#   Operational Excellence - AWS Config, compliance monitoring
-#
-# IN OTHER CONFIG FILES (cross-reference):
-#   Security              - See security.tfvars (WAF, GuardDuty, KMS, IAM)
-#   Performance Efficiency - See compute.tfvars (instance types, scaling)
-#                           See cache.tfvars (caching layer)
-#   Sustainability        - Achieved via right-sizing in compute.tfvars
-#                           Consider Graviton instances for lower carbon
+# To regenerate: python generate-tfvars.py /path/to/solution
 #------------------------------------------------------------------------------
-
-config_rules = {
-  #----------------------------------------------------------------------------
-  # Operational Excellence: AWS Config Rules
-  #----------------------------------------------------------------------------
-  enabled          = true
-  enable_recorder  = true
-  # bucket_name    = ""        # Auto-generated: {name_prefix}-config
-  retention_days   = 365
-
-  #----------------------------------------------------------------------------
-  # Rule Categories - Toggle by category
-  #----------------------------------------------------------------------------
-  enable_security_rules     = true    # Encryption, access controls
-  enable_reliability_rules  = true    # Multi-AZ, backups
-  enable_operational_rules  = true    # CloudTrail, CloudWatch
-  enable_cost_rules         = true    # EBS optimization
-
-  #----------------------------------------------------------------------------
-  # Rule Parameters
-  #----------------------------------------------------------------------------
-  min_backup_retention_days = 7       # Minimum backup retention for compliance
-
-  #----------------------------------------------------------------------------
-  # Config Recorder Settings
-  #----------------------------------------------------------------------------
-  record_all_resources      = true
-  include_global_resources  = true
-  excluded_resource_types   = []
-  delivery_frequency        = "TwentyFour_Hours"  # One_Hour, Three_Hours, Six_Hours, Twelve_Hours, TwentyFour_Hours
-}
-
-guardduty_enhanced = {
-  #----------------------------------------------------------------------------
-  # Security: Enhanced GuardDuty
-  #----------------------------------------------------------------------------
-  # Note: Basic GuardDuty may already be enabled via the security module.
-  # Set enabled = true for additional protections like S3 protection,
-  # EKS protection, and malware scanning.
-  enabled                   = false    # Set true if not using security module
-  enable_eks_protection     = false    # Enable if using EKS
-  enable_malware_protection = true
-  # findings_bucket         = ""       # Auto-generated if empty
-  severity_threshold        = 7        # Alert on High/Critical only (1-10)
-
-  #----------------------------------------------------------------------------
-  # Findings Export
-  #----------------------------------------------------------------------------
-  enable_s3_export          = true
-  findings_retention_days   = 365
-}
 
 backup = {
-  #----------------------------------------------------------------------------
-  # Reliability: AWS Backup
-  #----------------------------------------------------------------------------
-  enabled = true
-
-  #----------------------------------------------------------------------------
-  # Daily Backups
-  #----------------------------------------------------------------------------
-  daily_schedule   = "cron(0 5 * * ? *)"     # 5 AM UTC daily
-  daily_retention  = 30                       # days
-
-  #----------------------------------------------------------------------------
-  # Weekly Backups
-  #----------------------------------------------------------------------------
-  enable_weekly    = true
-  weekly_schedule  = "cron(0 5 ? * SUN *)"   # Sunday 5 AM UTC
-  weekly_retention = 90                       # days
-
-  #----------------------------------------------------------------------------
-  # Monthly Backups
-  #----------------------------------------------------------------------------
-  enable_monthly     = true
-  monthly_schedule   = "cron(0 5 1 * ? *)"   # 1st of month 5 AM UTC
-  monthly_retention  = 365                    # days
-  cold_storage_days  = 90                     # Move to cold storage after 90 days
-
-  #----------------------------------------------------------------------------
-  # Cross-Region DR
-  #----------------------------------------------------------------------------
-  enable_cross_region = false
-  dr_retention        = 30
-  # dr_kms_key_arn    = ""        # Required if cross-region enabled
-
-  #----------------------------------------------------------------------------
-  # Resource Selection
-  #----------------------------------------------------------------------------
-  enable_tag_selection = true
-  backup_tag_key       = "Backup"
-  backup_tag_value     = "true"
-  resource_arns        = []       # Specific ARNs to backup (in addition to tagged)
-
-  #----------------------------------------------------------------------------
-  # Advanced Options
-  #----------------------------------------------------------------------------
-  enable_continuous  = false      # Point-in-time recovery (RDS, S3)
-  enable_windows_vss = false      # Windows application-consistent backups
-  enable_s3_backup   = false      # S3 bucket backup support
-  enable_vault_policy = true      # Vault access policy
-
-  #----------------------------------------------------------------------------
-  # Compliance (WORM - Write Once Read Many)
-  #----------------------------------------------------------------------------
-  enable_vault_lock          = false
-  vault_lock_min_retention   = 7
-  vault_lock_max_retention   = 365
-  vault_lock_changeable_days = 3
-
-  #----------------------------------------------------------------------------
-  # Notifications
-  #----------------------------------------------------------------------------
-  notification_events = [
-    "BACKUP_JOB_STARTED",
-    "BACKUP_JOB_COMPLETED",
-    "BACKUP_JOB_FAILED",
-    "RESTORE_JOB_STARTED",
-    "RESTORE_JOB_COMPLETED",
-    "RESTORE_JOB_FAILED"
-  ]
+  backup_tag_key = "Backup"  # Backup tag key
+  backup_tag_value = "true"  # Backup tag value
+  cold_storage_days = 90  # Days before cold storage transition
+  daily_retention = 30  # Daily backup retention (days)
+  daily_schedule = "cron(0 5 * * ? *)"  # Daily backup schedule (cron)
+  dr_retention = 30  # DR backup retention (days)
+  enable_continuous = false  # Enable continuous backup
+  enable_cross_region = false  # Enable cross-region backup copy
+  enable_monthly = true  # Enable Monthly
+  enable_s3_backup = false  # Enable S3 Backup
+  enable_tag_selection = true  # Enable tag-based resource selection
+  enable_vault_lock = false  # Enable vault lock
+  enable_vault_policy = true  # Enable vault policy
+  enable_weekly = true  # Enable Weekly
+  enable_windows_vss = false  # Enable Windows Vss
+  enabled = true  # Enable this resource
+  monthly_retention = 365  # Monthly backup retention (days)
+  monthly_schedule = "cron(0 5 1 * ? *)"  # Monthly backup schedule (cron)
+  notification_events = ["BACKUP_JOB_STARTED", "BACKUP_JOB_COMPLETED", "BACKUP_JOB_FAILED", "RESTORE_JOB_STARTED", "RESTORE_JOB_COMPLETED", "RESTORE_JOB_FAILED"]  # Backup notification events
+  resource_arns = []  # Specific resource ARNs to backup
+  vault_lock_changeable_days = 3  # Vault Lock Changeable Days
+  vault_lock_max_retention = 365  # Vault Lock Max Retention
+  vault_lock_min_retention = 7  # Vault Lock Min Retention
+  weekly_retention = 90  # Weekly backup retention (days)
+  weekly_schedule = "cron(0 5 ? * SUN *)"  # Weekly backup schedule (cron)
 }
 
 budget = {
-  #----------------------------------------------------------------------------
-  # Cost Optimization: AWS Budgets
-  #----------------------------------------------------------------------------
-  enabled = true
+  action_approval = "MANUAL"  # Budget action approval mode
+  action_threshold = 100  # Budget action threshold (%)
+  alert_emails = []  # Budget alert email addresses
+  alert_thresholds = "[50, 80, 100]"  # TODO: Replace with actual value  # Budget alert threshold percentages
+  budget_currency = "USD"  # Budget currency
+  budget_time_unit = "MONTHLY"  # Budget time unit
+  data_transfer_budget_amount = 0  # Data transfer monthly budget (USD)
+  ec2_budget_amount = 0  # EC2 monthly budget (USD)
+  ec2_instances_to_stop = []  # Ec2 Instances To Stop
+  ec2_usage_hours_limit = 1000  # EC2 monthly usage limit (hours)
+  enable_actions = false  # Enable budget actions
+  enable_cost_budget = true  # Enable cost budget
+  enable_forecast_alert = true  # Enable forecast alerts
+  enable_service_budgets = false  # Enable per-service budgets
+  enable_usage_budget = false  # Enable usage budget
+  enabled = true  # Enable this resource
+  forecast_threshold = 100  # Forecast alert threshold (%)
+  monthly_amount = 1000  # Monthly budget limit (USD)
+  notification_comparison = "GREATER_THAN"  # Notification Comparison
+  notification_threshold_type = "PERCENTAGE"  # Notification Threshold Type
+  notification_type = "ACTUAL"  # Notification Type
+  rds_budget_amount = 0  # RDS monthly budget (USD)
+  service_alert_threshold = 80  # Service Alert Threshold
+}
 
-  #----------------------------------------------------------------------------
-  # Monthly Cost Budget
-  #----------------------------------------------------------------------------
-  enable_cost_budget = true
-  monthly_amount     = 1000               # Adjust to expected monthly spend
-  budget_currency    = "USD"
-  budget_time_unit   = "MONTHLY"          # MONTHLY, QUARTERLY, ANNUALLY
+config_rules = {
+  delivery_frequency = "TwentyFour_Hours"  # Delivery Frequency
+  enable_cost_rules = true  # Enable Cost Rules
+  enable_operational_rules = true  # Enable Operational Rules
+  enable_recorder = true  # Enable Recorder
+  enable_reliability_rules = true  # Enable Reliability Rules
+  enable_security_rules = true  # Enable Security Rules
+  enabled = true  # Enable this resource
+  excluded_resource_types = []  # Excluded Resource Types
+  include_global_resources = true  # Include Global Resources
+  min_backup_retention_days = 7  # Min Backup Retention Days
+  record_all_resources = true  # Record All Resources
+  retention_days = 365  # Retention Days
+}
 
-  #----------------------------------------------------------------------------
-  # Alert Thresholds
-  #----------------------------------------------------------------------------
-  alert_thresholds   = [50, 80, 100]      # Alert at 50%, 80%, 100%
-  enable_forecast_alert = true
-  forecast_threshold = 100                 # Alert if forecast exceeds 100%
-
-  #----------------------------------------------------------------------------
-  # Notification Settings
-  #----------------------------------------------------------------------------
-  notification_comparison    = "GREATER_THAN"
-  notification_threshold_type = "PERCENTAGE"
-  notification_type          = "ACTUAL"    # ACTUAL or FORECASTED
-
-  #----------------------------------------------------------------------------
-  # Alert Recipients
-  #----------------------------------------------------------------------------
-  alert_emails = [
-    # "finance@example.com",
-    # "team-lead@example.com"
-  ]
-
-  #----------------------------------------------------------------------------
-  # Service-Specific Budgets
-  #----------------------------------------------------------------------------
-  enable_service_budgets      = false
-  ec2_budget_amount           = 0         # 0 = disabled
-  rds_budget_amount           = 0
-  data_transfer_budget_amount = 0
-  service_alert_threshold     = 80        # Percentage for service budgets
-
-  #----------------------------------------------------------------------------
-  # Usage Budget
-  #----------------------------------------------------------------------------
-  enable_usage_budget   = false
-  ec2_usage_hours_limit = 1000
-
-  #----------------------------------------------------------------------------
-  # Budget Actions - Automated Cost Control
-  #----------------------------------------------------------------------------
-  # WARNING: Use with caution in production!
-  enable_actions     = false
-  action_approval    = "MANUAL"           # MANUAL or AUTOMATIC
-  action_threshold   = 100
-  ec2_instances_to_stop = [
-    # "i-1234567890abcdef0"   # Non-critical instances to stop
-  ]
+guardduty_enhanced = {
+  enable_eks_protection = false  # Enable EKS audit log protection
+  enable_malware_protection = true  # Enable EBS malware protection
+  enable_s3_export = true  # Enable findings export to S3
+  enabled = false  # Enable this resource
+  findings_retention_days = 365  # Findings retention (days)
+  severity_threshold = 7  # Severity Threshold
 }

@@ -1,92 +1,39 @@
 #------------------------------------------------------------------------------
-# Monitoring Configuration - PRODUCTION Environment
+# Monitoring Configuration - CloudWatch, SNS - PROD Environment
 #------------------------------------------------------------------------------
-# Monitoring and observability settings including CloudWatch and X-Ray.
-# These values are typically derived from the delivery configuration.csv
-# under the "Monitoring" or "Observability" sections.
+# Generated from configuration on 2025-11-30 15:48:18
+#
+# To regenerate: python generate-tfvars.py /path/to/solution
 #------------------------------------------------------------------------------
-
-monitoring = {
-  #----------------------------------------------------------------------------
-  # CloudWatch Logs
-  #----------------------------------------------------------------------------
-  log_retention_days = 90              # Production: 90 days retention
-
-  #----------------------------------------------------------------------------
-  # CloudWatch Dashboard & Insights
-  #----------------------------------------------------------------------------
-  enable_dashboard          = true     # Production: enabled
-  enable_container_insights = true     # Production: enabled (for ECS/EKS)
-
-  #----------------------------------------------------------------------------
-  # CloudWatch Alarm Defaults
-  #----------------------------------------------------------------------------
-  alarm_evaluation_periods = 2         # Number of periods to evaluate
-  alarm_period_seconds     = 300       # Period duration (5 minutes)
-  alarm_treat_missing_data = "missing" # missing, notBreaching, breaching
-
-  #----------------------------------------------------------------------------
-  # Dashboard Widget Settings
-  #----------------------------------------------------------------------------
-  dashboard_widget_width  = 8
-  dashboard_widget_height = 6
-
-  #----------------------------------------------------------------------------
-  # Alert Notifications
-  #----------------------------------------------------------------------------
-  # alarm_email = "ops-team@example.com"
-
-  #----------------------------------------------------------------------------
-  # X-Ray Tracing Configuration
-  #----------------------------------------------------------------------------
-  enable_xray_tracing = true           # Production: enabled for debugging
-
-  xray_sampling = {
-    priority       = 1000              # Rule priority (lower = higher priority)
-    reservoir_size = 1                 # Fixed requests per second to sample
-    fixed_rate     = 0.05              # 5% sampling rate
-    url_path       = "*"               # URL path pattern to match
-    http_method    = "*"               # HTTP method to match
-    service_type   = "*"               # Service type to match
-    host           = "*"               # Host pattern to match
-  }
-}
-
-#------------------------------------------------------------------------------
-# Resource-Specific Alarm Thresholds
-#------------------------------------------------------------------------------
-# These thresholds can be tuned per environment (test: relaxed, prod: strict)
 
 alarm_thresholds = {
-  #----------------------------------------------------------------------------
-  # Database (RDS) Alarms
-  #----------------------------------------------------------------------------
-  db_cpu_percent            = 80       # CPU utilization threshold
-  db_storage_bytes          = 10737418240  # 10 GB free storage threshold
-  db_connections            = 100      # Max connections threshold
-  db_read_latency_seconds   = 0.02     # 20ms read latency threshold
-  db_write_latency_seconds  = 0.05     # 50ms write latency threshold
+  alb_4xx_count = 100  # Alb 4Xx Count
+  alb_5xx_count = 10  # Alb 5Xx Count
+  alb_response_time_seconds = "1.0"  # Alb Response Time Seconds
+  alb_unhealthy_hosts = 1  # Alb Unhealthy Hosts
+  cache_connections = 500  # Cache Connections
+  cache_cpu_percent = 75  # Cache Cpu Percent
+  cache_evictions = 1000  # Cache Evictions
+  cache_memory_percent = 80  # Cache Memory Percent
+  db_connections = 100  # Db Connections
+  db_cpu_percent = 80  # Db Cpu Percent
+  db_read_latency_seconds = "0.02"  # Db Read Latency Seconds
+  db_storage_bytes = 10737418240  # Db Storage Bytes
+  db_write_latency_seconds = "0.05"  # Db Write Latency Seconds
+  ec2_cpu_percent = 80  # Ec2 Cpu Percent
+  ec2_disk_percent = 80  # Ec2 Disk Percent
+  ec2_memory_percent = 85  # Ec2 Memory Percent
+}
 
-  #----------------------------------------------------------------------------
-  # Cache (ElastiCache) Alarms
-  #----------------------------------------------------------------------------
-  cache_cpu_percent         = 75       # CPU utilization threshold
-  cache_memory_percent      = 80       # Memory utilization threshold
-  cache_evictions           = 1000     # Evictions threshold
-  cache_connections         = 500      # Current connections threshold
-
-  #----------------------------------------------------------------------------
-  # Compute (EC2/ASG) Alarms
-  #----------------------------------------------------------------------------
-  ec2_cpu_percent           = 80       # CPU utilization threshold
-  ec2_memory_percent        = 85       # Memory utilization threshold (requires agent)
-  ec2_disk_percent          = 80       # Disk utilization threshold (requires agent)
-
-  #----------------------------------------------------------------------------
-  # ALB Alarms
-  #----------------------------------------------------------------------------
-  alb_5xx_count             = 10       # 5xx errors threshold
-  alb_4xx_count             = 100      # 4xx errors threshold
-  alb_response_time_seconds = 1.0      # Target response time threshold
-  alb_unhealthy_hosts       = 1        # Unhealthy host count threshold
+monitoring = {
+  alarm_evaluation_periods = 2  # Alarm Evaluation Periods
+  alarm_period_seconds = 300  # Alarm Period Seconds
+  alarm_treat_missing_data = "missing"  # Alarm Treat Missing Data
+  dashboard_widget_height = 6  # Dashboard Widget Height
+  dashboard_widget_width = 8  # Dashboard Widget Width
+  enable_container_insights = true  # Enable Container Insights
+  enable_dashboard = true  # Create CloudWatch dashboard
+  enable_xray_tracing = true  # Enable AWS X-Ray tracing
+  log_retention_days = 90  # CloudWatch log retention (days)
+  xray_sampling = { priority = 1000, reservoir_size = 1, fixed_rate = 0.05, url_path = "*", http_method = "*", service_type = "*", host = "*" }  # Xray Sampling
 }

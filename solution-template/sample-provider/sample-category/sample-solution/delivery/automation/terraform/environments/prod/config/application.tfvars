@@ -1,43 +1,26 @@
 #------------------------------------------------------------------------------
-# Application Configuration - PRODUCTION Environment
+# Application Configuration - PROD Environment
 #------------------------------------------------------------------------------
-# Application-specific settings and environment variables.
-# Generated from: delivery/raw/configuration.csv #SHEET: application
+# Generated from configuration on 2025-11-30 15:48:17
+#
+# To regenerate: python generate-tfvars.py /path/to/solution
 #------------------------------------------------------------------------------
 
 application = {
-  #----------------------------------------------------------------------------
-  # Application Identity
-  #----------------------------------------------------------------------------
-  name    = "sample-solution"            # Must match solution_name
-  version = "1.0.0"                      # Semantic versioning
+  enable_debug = false  # Enable Debug
+  health_path = "/health"  # Health Path
+  log_level = "warn"  # Log Level
+  metrics_path = "/metrics"  # Metrics Path
+  name = "sample-solution"  # Solution name for resource naming
+  port = 8080  # Cache port number
+  rate_limit = 1000  # Rate Limit
+  session_timeout = 3600  # Session Timeout
+  version = "1.0.0"  # Version
+}
 
-  #----------------------------------------------------------------------------
-  # Server Configuration
-  #----------------------------------------------------------------------------
-  port = 8080                            # Application server port
-
-  #----------------------------------------------------------------------------
-  # Logging & Debugging
-  #----------------------------------------------------------------------------
-  log_level    = "warn"                  # Production: warn or error only
-  enable_debug = false                   # Production: disabled
-
-  #----------------------------------------------------------------------------
-  # Endpoints
-  #----------------------------------------------------------------------------
-  health_path  = "/health"               # Health check endpoint
-  metrics_path = "/metrics"              # Prometheus metrics endpoint
-
-  #----------------------------------------------------------------------------
-  # Security
-  #----------------------------------------------------------------------------
-  # CORS origins - restrict to known frontend domains
-  # cors_origins = ["https://app.example.com", "https://www.example.com"]
-
-  #----------------------------------------------------------------------------
-  # Rate Limiting
-  #----------------------------------------------------------------------------
-  rate_limit      = 1000                 # Requests per minute per client
-  session_timeout = 3600                 # Session timeout in seconds (1 hour)
+solution = {
+  abbr = "smp"  # Solution abbreviation (3-4 chars)
+  category_name = "sample-category"  # Solution category
+  name = "sample-solution"  # Solution name for resource naming
+  provider_name = "sample-provider"  # Provider organization name
 }
