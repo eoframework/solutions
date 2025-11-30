@@ -45,7 +45,7 @@ resource "aws_guardduty_detector" "main" {
   count = var.security.enable_guardduty ? 1 : 0
 
   enable                       = true
-  finding_publishing_frequency = "FIFTEEN_MINUTES"
+  finding_publishing_frequency = var.security.guardduty_finding_frequency
 
   tags = local.common_tags
 }
@@ -58,21 +58,21 @@ resource "aws_guardduty_detector_feature" "s3_data_events" {
   count       = var.security.enable_guardduty ? 1 : 0
   detector_id = aws_guardduty_detector.main[0].id
   name        = "S3_DATA_EVENTS"
-  status      = "ENABLED"
+  status      = var.security.guardduty_s3_protection ? "ENABLED" : "DISABLED"
 }
 
 resource "aws_guardduty_detector_feature" "eks_audit_logs" {
   count       = var.security.enable_guardduty ? 1 : 0
   detector_id = aws_guardduty_detector.main[0].id
   name        = "EKS_AUDIT_LOGS"
-  status      = "DISABLED"
+  status      = var.security.guardduty_eks_protection ? "ENABLED" : "DISABLED"
 }
 
 resource "aws_guardduty_detector_feature" "ebs_malware_protection" {
   count       = var.security.enable_guardduty ? 1 : 0
   detector_id = aws_guardduty_detector.main[0].id
   name        = "EBS_MALWARE_PROTECTION"
-  status      = "ENABLED"
+  status      = var.security.guardduty_malware_protection ? "ENABLED" : "DISABLED"
 }
 
 #------------------------------------------------------------------------------
@@ -84,14 +84,14 @@ resource "aws_cloudtrail" "main" {
 
   name                          = "${local.name_prefix}-trail"
   s3_bucket_name                = aws_s3_bucket.cloudtrail[0].id
-  include_global_service_events = true
-  is_multi_region_trail         = true
-  enable_log_file_validation    = true
+  include_global_service_events = var.security.cloudtrail_include_global_events
+  is_multi_region_trail         = var.security.cloudtrail_is_multi_region
+  enable_log_file_validation    = var.security.cloudtrail_enable_log_validation
   kms_key_id                    = var.security.enable_kms_encryption ? module.kms[0].key_arn : null
 
   event_selector {
-    read_write_type           = "All"
-    include_management_events = true
+    read_write_type           = var.security.cloudtrail_event_read_write_type
+    include_management_events = var.security.cloudtrail_include_management_events
   }
 
   tags = local.common_tags
@@ -121,7 +121,7 @@ resource "aws_s3_bucket_server_side_encryption_configuration" "cloudtrail" {
 
   rule {
     apply_server_side_encryption_by_default {
-      sse_algorithm     = var.security.enable_kms_encryption ? "aws:kms" : "AES256"
+      sse_algorithm     = var.security.enable_kms_encryption ? var.security.s3_encryption_algorithm : "AES256"
       kms_master_key_id = var.security.enable_kms_encryption ? module.kms[0].key_arn : null
     }
   }
@@ -131,10 +131,10 @@ resource "aws_s3_bucket_public_access_block" "cloudtrail" {
   count  = var.security.enable_cloudtrail ? 1 : 0
   bucket = aws_s3_bucket.cloudtrail[0].id
 
-  block_public_acls       = true
-  block_public_policy     = true
-  ignore_public_acls      = true
-  restrict_public_buckets = true
+  block_public_acls       = var.security.s3_block_public_acls
+  block_public_policy     = var.security.s3_block_public_policy
+  ignore_public_acls      = var.security.s3_ignore_public_acls
+  restrict_public_buckets = var.security.s3_restrict_public_buckets
 }
 
 resource "aws_s3_bucket_lifecycle_configuration" "cloudtrail" {
@@ -150,7 +150,7 @@ resource "aws_s3_bucket_lifecycle_configuration" "cloudtrail" {
     }
 
     noncurrent_version_expiration {
-      noncurrent_days = 30
+      noncurrent_days = var.security.s3_noncurrent_version_days
     }
   }
 }
