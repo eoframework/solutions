@@ -6,34 +6,44 @@
 # under the "Security" or "Access Control" sections.
 #------------------------------------------------------------------------------
 
-#------------------------------------------------------------------------------
-# Network Access Controls
-#------------------------------------------------------------------------------
+security = {
+  #----------------------------------------------------------------------------
+  # Network Access Controls
+  #----------------------------------------------------------------------------
+  # CIDR blocks allowed HTTPS/HTTP access to ALB
+  allowed_https_cidrs = ["0.0.0.0/0"]
+  allowed_http_cidrs  = ["0.0.0.0/0"]
 
-# CIDR blocks allowed HTTPS/HTTP access to ALB
-allowed_https_cidrs = ["0.0.0.0/0"]
-allowed_http_cidrs  = ["0.0.0.0/0"]
+  # SSH access (Production: typically restricted or disabled)
+  enable_ssh_access = false
+  allowed_ssh_cidrs = []           # Empty = no SSH access
 
-# SSH access (Production: typically restricted or disabled)
-enable_ssh_access  = false
-allowed_ssh_cidrs  = []           # Empty = no SSH access
+  #----------------------------------------------------------------------------
+  # Instance Security
+  #----------------------------------------------------------------------------
+  # IAM Instance Profile
+  enable_instance_profile = true
 
-#------------------------------------------------------------------------------
-# Instance Security
-#------------------------------------------------------------------------------
+  # SSM Session Manager (preferred over SSH)
+  enable_ssm_access = true
 
-# IAM Instance Profile
-enable_instance_profile = true
+  # Instance Metadata Service v2 (required for security)
+  require_imdsv2     = true
+  metadata_hop_limit = 1
 
-# SSM Session Manager (preferred over SSH)
-enable_ssm_access = true
+  #----------------------------------------------------------------------------
+  # Encryption
+  #----------------------------------------------------------------------------
+  enable_kms_encryption = true      # Production: always enabled
+  kms_deletion_window   = 30
+  enable_key_rotation   = true
 
-# Instance Metadata Service v2 (required for security)
-require_imdsv2     = true
-metadata_hop_limit = 1
-
-#------------------------------------------------------------------------------
-# Encryption
-#------------------------------------------------------------------------------
-
-enable_kms_encryption = true      # Production: always enabled
+  #----------------------------------------------------------------------------
+  # AWS Security Services
+  #----------------------------------------------------------------------------
+  enable_waf                = true
+  waf_rate_limit            = 2000
+  enable_guardduty          = true
+  enable_cloudtrail         = true
+  cloudtrail_retention_days = 365
+}

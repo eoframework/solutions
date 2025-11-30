@@ -6,28 +6,26 @@
 # under the "Monitoring" or "Observability" sections.
 #------------------------------------------------------------------------------
 
-#------------------------------------------------------------------------------
-# CloudWatch Logs
-#------------------------------------------------------------------------------
+monitoring = {
+  #----------------------------------------------------------------------------
+  # CloudWatch Logs
+  #----------------------------------------------------------------------------
+  log_retention_days = 90              # Production: 90 days retention
 
-log_retention_days = 90              # Production: 90 days retention
+  #----------------------------------------------------------------------------
+  # CloudWatch Dashboard & Insights
+  #----------------------------------------------------------------------------
+  enable_dashboard          = true     # Production: enabled
+  enable_container_insights = true     # Production: enabled (for ECS/EKS)
 
-#------------------------------------------------------------------------------
-# CloudWatch Dashboard & Insights
-#------------------------------------------------------------------------------
+  #----------------------------------------------------------------------------
+  # CloudWatch Alarms
+  #----------------------------------------------------------------------------
+  # Alert notifications (set email for alarm notifications)
+  # alarm_email = "ops-team@example.com"
 
-enable_dashboard          = true     # Production: enabled
-enable_container_insights = true     # Production: enabled (for ECS/EKS)
-
-#------------------------------------------------------------------------------
-# CloudWatch Alarms
-#------------------------------------------------------------------------------
-
-# Alert notifications (set email for alarm notifications)
-# alarm_email = "ops-team@example.com"
-
-#------------------------------------------------------------------------------
-# X-Ray Tracing
-#------------------------------------------------------------------------------
-
-enable_xray_tracing = true           # Production: enabled for debugging
+  #----------------------------------------------------------------------------
+  # X-Ray Tracing
+  #----------------------------------------------------------------------------
+  enable_xray_tracing = true           # Production: enabled for debugging
+}
