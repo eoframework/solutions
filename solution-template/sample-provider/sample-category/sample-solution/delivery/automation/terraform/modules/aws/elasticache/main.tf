@@ -39,6 +39,7 @@ resource "aws_elasticache_replication_group" "this" {
   at_rest_encryption_enabled = var.cache.at_rest_encryption
   transit_encryption_enabled = var.cache.transit_encryption
   kms_key_id                 = var.cache.at_rest_encryption ? var.kms_key_arn : null
+  auth_token                 = var.cache.transit_encryption ? var.auth_token : null
 
   maintenance_window         = var.cache.maintenance_window
   snapshot_retention_limit   = var.cache.snapshot_retention

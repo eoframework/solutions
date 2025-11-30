@@ -51,6 +51,8 @@ variable "cache" {
     # Encryption
     at_rest_encryption         = bool
     transit_encryption         = bool
+    # Authentication (secret reference - NOT the actual token)
+    auth_token_param_name      = optional(string, "cache/auth-token")
     # Backup Configuration
     snapshot_retention         = number
     snapshot_window            = string

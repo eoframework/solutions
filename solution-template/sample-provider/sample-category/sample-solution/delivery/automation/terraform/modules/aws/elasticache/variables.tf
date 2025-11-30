@@ -27,6 +27,13 @@ variable "kms_key_arn" {
   default     = null
 }
 
+variable "auth_token" {
+  description = "Auth token for Redis authentication (from SSM Parameter Store)"
+  type        = string
+  default     = null
+  sensitive   = true
+}
+
 #------------------------------------------------------------------------------
 # Cache Configuration (grouped object)
 #------------------------------------------------------------------------------

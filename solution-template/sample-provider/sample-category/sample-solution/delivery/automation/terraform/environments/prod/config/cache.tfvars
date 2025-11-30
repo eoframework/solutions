@@ -7,20 +7,56 @@
 #------------------------------------------------------------------------------
 
 cache = {
-  at_rest_encryption = true  # At Rest Encryption
-  auto_minor_version_upgrade = true  # Enable auto minor version upgrade
-  automatic_failover = true  # Automatic Failover
-  cluster_mode_enabled = false  # Cluster Mode Enabled
-  cluster_mode_replicas = 1  # Cluster Mode Replicas
-  cluster_mode_shards = 1  # Cluster Mode Shards
-  enabled = true  # Enable this resource
-  engine = "redis"  # Database engine type
-  engine_version = "7.0"  # Database engine version
-  maintenance_window = "sun:06:00-sun:07:00"  # Preferred maintenance window
-  node_type = "cache.r6g.large"  # ElastiCache node type
-  num_nodes = 2  # Num Nodes
-  port = 6379  # Cache port number
-  snapshot_retention = 7  # Snapshot Retention
-  snapshot_window = "05:00-06:00"  # Preferred snapshot window
-  transit_encryption = true  # Transit Encryption
+  #----------------------------------------------------------------------------
+  # Enable/Disable
+  #----------------------------------------------------------------------------
+  enabled = true
+
+  #----------------------------------------------------------------------------
+  # Engine Configuration
+  #----------------------------------------------------------------------------
+  engine         = "redis"
+  engine_version = "7.0"
+  port           = 6379
+
+  #----------------------------------------------------------------------------
+  # Instance Configuration
+  #----------------------------------------------------------------------------
+  node_type = "cache.r6g.large"
+  num_nodes = 2
+
+  #----------------------------------------------------------------------------
+  # High Availability
+  #----------------------------------------------------------------------------
+  automatic_failover = true
+
+  #----------------------------------------------------------------------------
+  # Encryption
+  #----------------------------------------------------------------------------
+  at_rest_encryption = true
+  transit_encryption = true
+
+  # Authentication: Reference to SSM Parameter Store (NOT the actual token)
+  # Full parameter path: /${name_prefix}/${auth_token_param_name}
+  # Created by: setup/secrets module
+  auth_token_param_name = "cache/auth-token"
+
+  #----------------------------------------------------------------------------
+  # Backup Configuration
+  #----------------------------------------------------------------------------
+  snapshot_retention = 7
+  snapshot_window    = "05:00-06:00"
+
+  #----------------------------------------------------------------------------
+  # Maintenance Configuration
+  #----------------------------------------------------------------------------
+  maintenance_window         = "sun:06:00-sun:07:00"
+  auto_minor_version_upgrade = true
+
+  #----------------------------------------------------------------------------
+  # Cluster Mode (Redis only)
+  #----------------------------------------------------------------------------
+  cluster_mode_enabled  = false
+  cluster_mode_replicas = 1
+  cluster_mode_shards   = 1
 }

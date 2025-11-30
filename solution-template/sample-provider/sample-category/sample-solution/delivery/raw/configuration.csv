@@ -10,6 +10,10 @@ application.port,Application,Production,8080,Cache port number,Yes,Integer,Valid
 application.rate_limit,Application,Production,1000,Rate Limit,Yes,Integer,Valid integer,Public,Development,,From application object,2025-11-30
 application.session_timeout,Application,Production,3600,Session Timeout,Yes,Integer,Valid integer,Public,Development,,From application object,2025-11-30
 application.version,Application,Production,1.0.0,Version,Yes,String,Valid string value,Public,Development,,From application object,2025-11-30
+solution.abbr,Application,Production,smp,Solution abbreviation (3-4 chars),Yes,String,Valid string value,Public,Development,,From solution object,2025-11-30
+solution.category_name,Application,Production,sample-category,Solution category,Yes,String,Valid string value,Public,Development,,From solution object,2025-11-30
+solution.name,Application,Production,sample-solution,Solution name for resource naming,Yes,String,Valid string value,Public,Development,,From solution object,2025-11-30
+solution.provider_name,Application,Production,sample-provider,Provider organization name,Yes,String,Valid string value,Public,Development,,From solution object,2025-11-30
 backup.backup_tag_key,Best Practices,Production,Backup,Backup tag key,Yes,String,Valid string value,Public,Operations,,From backup object,2025-11-30
 backup.backup_tag_value,Best Practices,Production,true,Backup tag value,Yes,String,Valid string value,Public,Operations,,From backup object,2025-11-30
 backup.cold_storage_days,Best Practices,Production,90,Days before cold storage transition,Yes,Integer,Positive integer (days),Public,Operations,,From backup object,2025-11-30
@@ -38,7 +42,7 @@ backup.weekly_schedule,Best Practices,Production,cron(0 5 ? * SUN *),Weekly back
 budget.action_approval,Best Practices,Production,MANUAL,Budget action approval mode,Yes,String,Valid string value,Public,Operations,,From budget object,2025-11-30
 budget.action_threshold,Best Practices,Production,100,Budget action threshold (%),Yes,Integer,Percentage (0-100),Public,Operations,,From budget object,2025-11-30
 budget.alert_emails,Best Practices,Production,[],Budget alert email addresses,No,List,Valid email address,Confidential,Operations,,From budget object,2025-11-30
-budget.alert_thresholds,Best Practices,Production,"[50, 80, 100]",Budget alert threshold percentages,Yes,List(Number),Percentage (0-100),Public,Operations,,From budget object,2025-11-30
+budget.alert_thresholds,Best Practices,Production,"[50, 80, 100]",Budget alert threshold percentages,Yes,String,Percentage (0-100),Public,Operations,,From budget object,2025-11-30
 budget.budget_currency,Best Practices,Production,USD,Budget currency,Yes,String,Valid string value,Public,Operations,,From budget object,2025-11-30
 budget.budget_time_unit,Best Practices,Production,MONTHLY,Budget time unit,Yes,String,Valid string value,Public,Operations,,From budget object,2025-11-30
 budget.data_transfer_budget_amount,Best Practices,Production,0,Data transfer monthly budget (USD),Yes,Integer,Valid integer,Public,Operations,,From budget object,2025-11-30
@@ -77,6 +81,7 @@ guardduty_enhanced.enabled,Best Practices,Production,false,Enable this resource,
 guardduty_enhanced.findings_retention_days,Best Practices,Production,365,Findings retention (days),Yes,Integer,Positive integer (days),Public,Operations,,From guardduty_enhanced object,2025-11-30
 guardduty_enhanced.severity_threshold,Best Practices,Production,7,Severity Threshold,Yes,Integer,Valid integer,Public,Operations,,From guardduty_enhanced object,2025-11-30
 cache.at_rest_encryption,Cache,Production,true,At Rest Encryption,Yes,Boolean,true|false,Public,Infrastructure,,From cache object,2025-11-30
+cache.auth_token_param_name,Cache,Production,cache/auth-token,Auth Token Param Name,Yes,String,Valid string value,Secret,Infrastructure,,From cache object,2025-11-30
 cache.auto_minor_version_upgrade,Cache,Production,true,Enable auto minor version upgrade,Yes,Boolean,true|false,Public,Infrastructure,,From cache object,2025-11-30
 cache.automatic_failover,Cache,Production,true,Automatic Failover,Yes,Boolean,true|false,Public,Infrastructure,,From cache object,2025-11-30
 cache.cluster_mode_enabled,Cache,Production,false,Cluster Mode Enabled,Yes,Boolean,true|false,Public,Infrastructure,,From cache object,2025-11-30
@@ -146,6 +151,7 @@ database.maintenance_window,Database,Production,sun:04:00-sun:05:00,Preferred ma
 database.max_allocated_storage,Database,Production,500,Maximum storage autoscaling (GB),Yes,Integer,Valid integer,Public,Infrastructure,,From database object,2025-11-30
 database.multi_az,Database,Production,true,Enable Multi-AZ deployment,Yes,Boolean,true|false,Public,Infrastructure,,From database object,2025-11-30
 database.name,Database,Production,appdb,Solution name for resource naming,Yes,String,Valid string value,Public,Infrastructure,,From database object,2025-11-30
+database.password_secret_name,Database,Production,db-password,Password Secret Name,Yes,String,Valid string value,Secret,Infrastructure,,From database object,2025-11-30
 database.performance_insights,Database,Production,true,Performance Insights,Yes,Boolean,true|false,Public,Infrastructure,,From database object,2025-11-30
 database.performance_insights_retention,Database,Production,7,Performance Insights retention (days),Yes,Integer,Positive integer (days),Public,Infrastructure,,From database object,2025-11-30
 database.publicly_accessible,Database,Production,false,Allow public access,Yes,Boolean,true|false,Public,Infrastructure,,From database object,2025-11-30
@@ -157,7 +163,7 @@ database.storage_type,Database,Production,gp3,Storage type (gp3/gp2/io1),Yes,Str
 database.username,Database,Production,dbadmin,Username,Yes,String,Valid string value,Public,Infrastructure,,From database object,2025-11-30
 alarm_thresholds.alb_4xx_count,Monitoring,Production,100,Alb 4Xx Count,Yes,Integer,Valid integer,Public,Operations,,From alarm_thresholds object,2025-11-30
 alarm_thresholds.alb_5xx_count,Monitoring,Production,10,Alb 5Xx Count,Yes,Integer,Valid integer,Public,Operations,,From alarm_thresholds object,2025-11-30
-alarm_thresholds.alb_response_time_seconds,Monitoring,Production,1.0,Alb Response Time Seconds,Yes,Float,Valid decimal number,Public,Operations,,From alarm_thresholds object,2025-11-30
+alarm_thresholds.alb_response_time_seconds,Monitoring,Production,1.0,Alb Response Time Seconds,Yes,String,Valid string value,Public,Operations,,From alarm_thresholds object,2025-11-30
 alarm_thresholds.alb_unhealthy_hosts,Monitoring,Production,1,Alb Unhealthy Hosts,Yes,Integer,Valid integer,Public,Operations,,From alarm_thresholds object,2025-11-30
 alarm_thresholds.cache_connections,Monitoring,Production,500,Cache Connections,Yes,Integer,Valid integer,Public,Operations,,From alarm_thresholds object,2025-11-30
 alarm_thresholds.cache_cpu_percent,Monitoring,Production,75,Cache Cpu Percent,Yes,Integer,Valid integer,Public,Operations,,From alarm_thresholds object,2025-11-30
@@ -165,9 +171,9 @@ alarm_thresholds.cache_evictions,Monitoring,Production,1000,Cache Evictions,Yes,
 alarm_thresholds.cache_memory_percent,Monitoring,Production,80,Cache Memory Percent,Yes,Integer,Valid integer,Public,Operations,,From alarm_thresholds object,2025-11-30
 alarm_thresholds.db_connections,Monitoring,Production,100,Db Connections,Yes,Integer,Valid integer,Public,Operations,,From alarm_thresholds object,2025-11-30
 alarm_thresholds.db_cpu_percent,Monitoring,Production,80,Db Cpu Percent,Yes,Integer,Valid integer,Public,Operations,,From alarm_thresholds object,2025-11-30
-alarm_thresholds.db_read_latency_seconds,Monitoring,Production,0.02,Db Read Latency Seconds,Yes,Float,Valid decimal number,Public,Operations,,From alarm_thresholds object,2025-11-30
+alarm_thresholds.db_read_latency_seconds,Monitoring,Production,0.02,Db Read Latency Seconds,Yes,String,Valid string value,Public,Operations,,From alarm_thresholds object,2025-11-30
 alarm_thresholds.db_storage_bytes,Monitoring,Production,10737418240,Db Storage Bytes,Yes,Integer,Valid integer,Public,Operations,,From alarm_thresholds object,2025-11-30
-alarm_thresholds.db_write_latency_seconds,Monitoring,Production,0.05,Db Write Latency Seconds,Yes,Float,Valid decimal number,Public,Operations,,From alarm_thresholds object,2025-11-30
+alarm_thresholds.db_write_latency_seconds,Monitoring,Production,0.05,Db Write Latency Seconds,Yes,String,Valid string value,Public,Operations,,From alarm_thresholds object,2025-11-30
 alarm_thresholds.ec2_cpu_percent,Monitoring,Production,80,Ec2 Cpu Percent,Yes,Integer,Valid integer,Public,Operations,,From alarm_thresholds object,2025-11-30
 alarm_thresholds.ec2_disk_percent,Monitoring,Production,80,Ec2 Disk Percent,Yes,Integer,Valid integer,Public,Operations,,From alarm_thresholds object,2025-11-30
 alarm_thresholds.ec2_memory_percent,Monitoring,Production,85,Ec2 Memory Percent,Yes,Integer,Valid integer,Public,Operations,,From alarm_thresholds object,2025-11-30
@@ -217,10 +223,6 @@ aws.region,Project,Production,us-east-1,Primary AWS region,Yes,String,Valid stri
 ownership.cost_center,Project,Production,CC-00000,Cost center for billing,Yes,String,Valid string value,Public,Infrastructure,,From ownership object,2025-11-30
 ownership.owner_email,Project,Production,team@example.com,Owner email for notifications,Yes,String,Valid email address,Confidential,Infrastructure,,From ownership object,2025-11-30
 ownership.project_code,Project,Production,PRJ-SAMPLE,Project tracking code,Yes,String,Valid string value,Public,Infrastructure,,From ownership object,2025-11-30
-solution.abbr,Project,Production,smp,Solution abbreviation (3-4 chars),Yes,String,Valid string value,Public,Infrastructure,,From solution object,2025-11-30
-solution.category_name,Project,Production,sample-category,Solution category,Yes,String,Valid string value,Public,Infrastructure,,From solution object,2025-11-30
-solution.name,Project,Production,sample-solution,Solution name for resource naming,Yes,String,Valid string value,Public,Infrastructure,,From solution object,2025-11-30
-solution.provider_name,Project,Production,sample-provider,Provider organization name,Yes,String,Valid string value,Public,Infrastructure,,From solution object,2025-11-30
 security.allowed_http_cidrs,Security,Production,"[""0.0.0.0/0""]",CIDR blocks allowed HTTP access,Yes,List(String),Valid CIDR notation,Confidential,Security,,From security object,2025-11-30
 security.allowed_https_cidrs,Security,Production,"[""0.0.0.0/0""]",CIDR blocks allowed HTTPS access,Yes,List(String),Valid CIDR notation,Confidential,Security,,From security object,2025-11-30
 security.allowed_ssh_cidrs,Security,Production,[],CIDR blocks allowed SSH access,No,List,Valid CIDR notation,Confidential,Security,,From security object,2025-11-30

@@ -7,30 +7,74 @@
 #------------------------------------------------------------------------------
 
 database = {
-  allocated_storage = 100  # Initial storage (GB)
-  allow_major_version_upgrade = false  # Allow Major Version Upgrade
-  auto_minor_version_upgrade = true  # Enable auto minor version upgrade
-  backup_retention = 30  # Backup Retention
-  backup_window = "03:00-04:00"  # Preferred backup window
-  copy_tags_to_snapshot = true  # Copy Tags To Snapshot
-  deletion_protection = true  # Enable deletion protection
-  enabled = true  # Enable this resource
-  engine = "postgres"  # Database engine type
-  engine_version = "15.4"  # Database engine version
-  instance_class = "db.t3.medium"  # RDS instance class
-  log_exports_mysql = ["error", "slowquery", "general"]  # Log Exports Mysql
-  log_exports_postgres = ["postgresql", "upgrade"]  # Log Exports Postgres
-  maintenance_window = "sun:04:00-sun:05:00"  # Preferred maintenance window
-  max_allocated_storage = 500  # Maximum storage autoscaling (GB)
-  multi_az = true  # Enable Multi-AZ deployment
-  name = "appdb"  # Solution name for resource naming
-  performance_insights = true  # Performance Insights
-  performance_insights_retention = 7  # Performance Insights retention (days)
-  publicly_accessible = false  # Allow public access
-  skip_final_snapshot = false  # Skip final snapshot on deletion
-  storage_encrypted = true  # Storage Encrypted
-  storage_iops = 3000  # Provisioned IOPS
-  storage_throughput = 125  # Storage throughput (gp3)
-  storage_type = "gp3"  # Storage type (gp3/gp2/io1)
-  username = "dbadmin"  # Username
+  #----------------------------------------------------------------------------
+  # Enable/Disable
+  #----------------------------------------------------------------------------
+  enabled = true
+
+  #----------------------------------------------------------------------------
+  # Engine Configuration
+  #----------------------------------------------------------------------------
+  engine         = "postgres"
+  engine_version = "15.4"
+  instance_class = "db.t3.medium"
+
+  #----------------------------------------------------------------------------
+  # Storage Configuration
+  #----------------------------------------------------------------------------
+  allocated_storage     = 100   # Initial storage (GB)
+  max_allocated_storage = 500   # Maximum storage autoscaling (GB)
+  storage_type          = "gp3"
+  storage_iops          = 3000
+  storage_throughput    = 125
+  storage_encrypted     = true
+
+  #----------------------------------------------------------------------------
+  # Database Identity
+  #----------------------------------------------------------------------------
+  name     = "appdb"
+  username = "dbadmin"
+
+  # Credentials: Reference to Secrets Manager (NOT the actual password)
+  # Full secret name: ${name_prefix}-${password_secret_name}
+  # Created by: setup/secrets module
+  password_secret_name = "db-password"
+
+  #----------------------------------------------------------------------------
+  # High Availability
+  #----------------------------------------------------------------------------
+  multi_az = true
+
+  #----------------------------------------------------------------------------
+  # Backup Configuration
+  #----------------------------------------------------------------------------
+  backup_retention   = 30
+  backup_window      = "03:00-04:00"
+  maintenance_window = "sun:04:00-sun:05:00"
+
+  #----------------------------------------------------------------------------
+  # Performance & Monitoring
+  #----------------------------------------------------------------------------
+  performance_insights           = true
+  performance_insights_retention = 7
+  log_exports_postgres           = ["postgresql", "upgrade"]
+  log_exports_mysql              = ["error", "slowquery", "general"]
+
+  #----------------------------------------------------------------------------
+  # Version Management
+  #----------------------------------------------------------------------------
+  auto_minor_version_upgrade  = true
+  allow_major_version_upgrade = false
+
+  #----------------------------------------------------------------------------
+  # Protection
+  #----------------------------------------------------------------------------
+  deletion_protection   = true
+  skip_final_snapshot   = false
+  copy_tags_to_snapshot = true
+
+  #----------------------------------------------------------------------------
+  # Network
+  #----------------------------------------------------------------------------
+  publicly_accessible = false
 }

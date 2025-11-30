@@ -59,6 +59,8 @@ variable "database" {
     # Database Identity
     name                          = string
     username                      = string
+    # Credentials (secret reference - NOT the actual password)
+    password_secret_name          = optional(string, "db-password")
     # High Availability
     multi_az                      = bool
     # Backup Configuration
@@ -81,17 +83,6 @@ variable "database" {
     # Network
     publicly_accessible           = optional(bool, false)
   })
-}
-
-#------------------------------------------------------------------------------
-# Sensitive Variables (not in tfvars)
-#------------------------------------------------------------------------------
-
-variable "db_password" {
-  description = "Master password (set via environment variable TF_VAR_db_password)"
-  type        = string
-  sensitive   = true
-  default     = ""
 }
 
 #------------------------------------------------------------------------------

@@ -4,6 +4,18 @@
 locals {
   name_prefix = var.name_prefix
   common_tags = var.common_tags
+
+  # Construct full secret name from prefix and suffix
+  db_password_secret_name = "${var.name_prefix}-${var.database.password_secret_name}"
+}
+
+#------------------------------------------------------------------------------
+# Retrieve Database Password from Secrets Manager
+#------------------------------------------------------------------------------
+
+data "aws_secretsmanager_secret_version" "db_password" {
+  count     = var.database.enabled ? 1 : 0
+  secret_id = local.db_password_secret_name
 }
 
 #------------------------------------------------------------------------------
@@ -19,7 +31,7 @@ module "rds" {
   db_subnet_group_name = var.db_subnet_group_name
   security_group_ids   = var.security_group_ids
   kms_key_arn          = var.kms_key_arn
-  db_password          = var.db_password
+  db_password          = var.database.enabled ? data.aws_secretsmanager_secret_version.db_password[0].secret_string : ""
   database             = var.database
 }
 
