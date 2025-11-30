@@ -404,6 +404,69 @@ variable "app_port" {
 }
 
 # =============================================================================
+# APPLICATION CONFIGURATION (from application.tfvars)
+# =============================================================================
+
+variable "app_name" {
+  description = "Application name (should match solution_name)"
+  type        = string
+  default     = ""
+}
+
+variable "app_version" {
+  description = "Application version (semantic versioning)"
+  type        = string
+  default     = "1.0.0"
+}
+
+variable "app_log_level" {
+  description = "Application log level"
+  type        = string
+  default     = "warn"  # DR: same as production
+
+  validation {
+    condition     = contains(["trace", "debug", "info", "warn", "error", "fatal"], var.app_log_level)
+    error_message = "Log level must be: trace, debug, info, warn, error, or fatal."
+  }
+}
+
+variable "app_enable_debug" {
+  description = "Enable application debug mode"
+  type        = bool
+  default     = false  # DR: disabled (matches prod)
+}
+
+variable "app_health_path" {
+  description = "Health check endpoint path"
+  type        = string
+  default     = "/health"
+}
+
+variable "app_metrics_path" {
+  description = "Metrics endpoint path"
+  type        = string
+  default     = "/metrics"
+}
+
+variable "app_cors_origins" {
+  description = "Allowed CORS origins"
+  type        = list(string)
+  default     = []  # DR: same as production
+}
+
+variable "app_rate_limit" {
+  description = "Rate limit (requests per minute per client)"
+  type        = number
+  default     = 1000
+}
+
+variable "app_session_timeout" {
+  description = "Session timeout in seconds"
+  type        = number
+  default     = 3600
+}
+
+# =============================================================================
 # DATABASE CONFIGURATION
 # =============================================================================
 
@@ -524,8 +587,25 @@ variable "db_deletion_protection" {
 }
 
 # =============================================================================
-# CACHE CONFIGURATION
+# CACHE CONFIGURATION (from cache.tfvars)
 # =============================================================================
+
+variable "enable_elasticache" {
+  description = "Enable ElastiCache Redis deployment"
+  type        = bool
+  default     = true  # DR: enabled (matches prod)
+}
+
+variable "cache_engine" {
+  description = "Cache engine type"
+  type        = string
+  default     = "redis"
+
+  validation {
+    condition     = contains(["redis", "memcached"], var.cache_engine)
+    error_message = "Cache engine must be: redis or memcached."
+  }
+}
 
 variable "cache_engine_version" {
   description = "Redis engine version"
@@ -625,9 +705,9 @@ variable "enable_xray_tracing" {
 }
 
 # =============================================================================
-# WELL-ARCHITECTED FRAMEWORK CONFIGURATION (DR FOCUSED)
+# BEST PRACTICES CONFIGURATION (DR FOCUSED)
 # =============================================================================
-# DR-specific governance emphasizing data protection and cost monitoring.
+# DR-specific best practices emphasizing data protection and cost monitoring.
 # Security controls (WAF, GuardDuty) are managed at the primary site.
 
 #------------------------------------------------------------------------------

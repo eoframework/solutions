@@ -404,6 +404,69 @@ variable "app_port" {
 }
 
 # =============================================================================
+# APPLICATION CONFIGURATION (from application.tfvars)
+# =============================================================================
+
+variable "app_name" {
+  description = "Application name (should match solution_name)"
+  type        = string
+  default     = ""
+}
+
+variable "app_version" {
+  description = "Application version (semantic versioning)"
+  type        = string
+  default     = "1.0.0"
+}
+
+variable "app_log_level" {
+  description = "Application log level"
+  type        = string
+  default     = "debug"  # Test: verbose logging
+
+  validation {
+    condition     = contains(["trace", "debug", "info", "warn", "error", "fatal"], var.app_log_level)
+    error_message = "Log level must be: trace, debug, info, warn, error, or fatal."
+  }
+}
+
+variable "app_enable_debug" {
+  description = "Enable application debug mode"
+  type        = bool
+  default     = true  # Test: enabled
+}
+
+variable "app_health_path" {
+  description = "Health check endpoint path"
+  type        = string
+  default     = "/health"
+}
+
+variable "app_metrics_path" {
+  description = "Metrics endpoint path"
+  type        = string
+  default     = "/metrics"
+}
+
+variable "app_cors_origins" {
+  description = "Allowed CORS origins"
+  type        = list(string)
+  default     = ["*"]  # Test: allow all
+}
+
+variable "app_rate_limit" {
+  description = "Rate limit (requests per minute per client)"
+  type        = number
+  default     = 1000
+}
+
+variable "app_session_timeout" {
+  description = "Session timeout in seconds"
+  type        = number
+  default     = 3600
+}
+
+# =============================================================================
 # DATABASE CONFIGURATION
 # =============================================================================
 
@@ -524,9 +587,93 @@ variable "db_deletion_protection" {
 }
 
 # =============================================================================
-# WELL-ARCHITECTED FRAMEWORK CONFIGURATION (MINIMAL FOR TEST)
+# CACHE CONFIGURATION (from cache.tfvars)
 # =============================================================================
-# Most governance features disabled for test environments.
+
+variable "enable_elasticache" {
+  description = "Enable ElastiCache Redis deployment"
+  type        = bool
+  default     = false  # Test: disabled by default
+}
+
+variable "cache_engine" {
+  description = "Cache engine type"
+  type        = string
+  default     = "redis"
+
+  validation {
+    condition     = contains(["redis", "memcached"], var.cache_engine)
+    error_message = "Cache engine must be: redis or memcached."
+  }
+}
+
+variable "cache_engine_version" {
+  description = "Redis engine version"
+  type        = string
+  default     = "7.0"
+}
+
+variable "cache_node_type" {
+  description = "ElastiCache node type"
+  type        = string
+  default     = "cache.t3.micro"  # Test: smallest instance
+
+  validation {
+    condition     = can(regex("^cache\\.[a-z0-9]+\\.[a-z0-9]+$", var.cache_node_type))
+    error_message = "ElastiCache node type must be valid format."
+  }
+}
+
+variable "cache_num_nodes" {
+  description = "Number of cache nodes"
+  type        = number
+  default     = 1  # Test: single node
+
+  validation {
+    condition     = var.cache_num_nodes >= 1 && var.cache_num_nodes <= 6
+    error_message = "Cache nodes must be between 1 and 6."
+  }
+}
+
+variable "cache_automatic_failover" {
+  description = "Enable automatic failover"
+  type        = bool
+  default     = false  # Test: disabled (single node)
+}
+
+variable "cache_at_rest_encryption" {
+  description = "Enable at-rest encryption"
+  type        = bool
+  default     = false  # Test: disabled for simplicity
+}
+
+variable "cache_transit_encryption" {
+  description = "Enable in-transit encryption"
+  type        = bool
+  default     = false  # Test: disabled for simplicity
+}
+
+variable "cache_snapshot_retention" {
+  description = "Snapshot retention in days"
+  type        = number
+  default     = 1  # Test: minimal retention
+
+  validation {
+    condition     = var.cache_snapshot_retention >= 0 && var.cache_snapshot_retention <= 35
+    error_message = "Cache snapshot retention must be between 0 and 35 days."
+  }
+}
+
+variable "cache_snapshot_window" {
+  description = "Preferred snapshot window (UTC)"
+  type        = string
+  default     = "05:00-06:00"
+}
+
+# =============================================================================
+# BEST PRACTICES CONFIGURATION (MINIMAL FOR TEST)
+# =============================================================================
+# Most best practices features disabled for test environments.
 # Enable selectively as needed for testing specific features.
 
 #------------------------------------------------------------------------------

@@ -1,10 +1,17 @@
 #------------------------------------------------------------------------------
-# AWS Well-Architected Framework Configuration - TEST ENVIRONMENT
+# Best Practices Configuration - TEST ENVIRONMENT
 #------------------------------------------------------------------------------
-# Minimal governance for test environments:
-# - Most features DISABLED to reduce costs and complexity
-# - Only budget alerts enabled by default for cost visibility
-# - Enable specific features as needed for testing
+# Aligned with AWS Well-Architected Framework 6 pillars:
+#
+# IN THIS FILE (minimal for test):
+#   Cost Optimization     - Budget alerts only (catch runaway costs)
+#   Reliability           - Disabled (test data is ephemeral)
+#   Operational Excellence - Disabled (reduce complexity)
+#
+# IN OTHER CONFIG FILES (cross-reference):
+#   Security              - See security.tfvars
+#   Performance Efficiency - See compute.tfvars, cache.tfvars
+#   Sustainability        - Use smaller instances in compute.tfvars
 #------------------------------------------------------------------------------
 
 #------------------------------------------------------------------------------

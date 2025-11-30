@@ -783,8 +783,118 @@ variable "db_deletion_protection" {
 }
 
 # =============================================================================
+# APPLICATION CONFIGURATION (from application.tfvars)
+# =============================================================================
+
+variable "app_name" {
+  description = "Application name (should match solution_name)"
+  type        = string
+  default     = ""
+
+  validation {
+    condition     = var.app_name == "" || can(regex("^[a-z0-9][a-z0-9-]{2,48}[a-z0-9]$", var.app_name))
+    error_message = "Application name must be 4-50 lowercase alphanumeric characters with hyphens."
+  }
+}
+
+variable "app_version" {
+  description = "Application version (semantic versioning)"
+  type        = string
+  default     = "1.0.0"
+
+  validation {
+    condition     = can(regex("^[0-9]+\\.[0-9]+\\.[0-9]+", var.app_version))
+    error_message = "Application version must use semantic versioning (e.g., 1.0.0)."
+  }
+}
+
+variable "app_log_level" {
+  description = "Application log level"
+  type        = string
+  default     = "warn"
+
+  validation {
+    condition     = contains(["trace", "debug", "info", "warn", "error", "fatal"], var.app_log_level)
+    error_message = "Log level must be: trace, debug, info, warn, error, or fatal."
+  }
+}
+
+variable "app_enable_debug" {
+  description = "Enable application debug mode"
+  type        = bool
+  default     = false
+}
+
+variable "app_health_path" {
+  description = "Health check endpoint path"
+  type        = string
+  default     = "/health"
+
+  validation {
+    condition     = can(regex("^/", var.app_health_path))
+    error_message = "Health path must start with /."
+  }
+}
+
+variable "app_metrics_path" {
+  description = "Metrics endpoint path"
+  type        = string
+  default     = "/metrics"
+
+  validation {
+    condition     = can(regex("^/", var.app_metrics_path))
+    error_message = "Metrics path must start with /."
+  }
+}
+
+variable "app_cors_origins" {
+  description = "Allowed CORS origins"
+  type        = list(string)
+  default     = []
+}
+
+variable "app_rate_limit" {
+  description = "Rate limit (requests per minute per client)"
+  type        = number
+  default     = 1000
+
+  validation {
+    condition     = var.app_rate_limit >= 0 && var.app_rate_limit <= 100000
+    error_message = "Rate limit must be between 0 and 100,000."
+  }
+}
+
+variable "app_session_timeout" {
+  description = "Session timeout in seconds"
+  type        = number
+  default     = 3600
+
+  validation {
+    condition     = var.app_session_timeout >= 60 && var.app_session_timeout <= 86400
+    error_message = "Session timeout must be between 60 seconds and 24 hours (86400 seconds)."
+  }
+}
+
+# =============================================================================
 # CACHE CONFIGURATION (from cache.tfvars)
 # =============================================================================
+
+variable "enable_elasticache" {
+  description = "Enable ElastiCache Redis deployment"
+  type        = bool
+  default     = true
+}
+
+variable "cache_engine" {
+  description = "Cache engine type"
+  type        = string
+  default     = "redis"
+
+  validation {
+    condition     = contains(["redis", "memcached"], var.cache_engine)
+    error_message = "Cache engine must be: redis or memcached."
+  }
+}
 
 variable "cache_engine_version" {
   description = "Redis engine version"
@@ -904,10 +1014,10 @@ variable "enable_xray_tracing" {
 }
 
 # =============================================================================
-# WELL-ARCHITECTED FRAMEWORK CONFIGURATION
+# BEST PRACTICES CONFIGURATION
 # =============================================================================
-# These settings enable AWS Well-Architected pillar-specific resources
-# for governance, compliance, and operational excellence.
+# Cost optimization, reliability, and compliance settings.
+# These are vendor-agnostic best practices applicable across providers.
 
 #------------------------------------------------------------------------------
 # Operational Excellence: AWS Config

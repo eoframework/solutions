@@ -24,7 +24,8 @@ echo -e "${CYAN}═════════════════════�
 build_var_files() {
     VAR_FILES=""
 
-    # Load all tfvars files from config/ directory (primary source)
+    # Load all tfvars files from config/ directory
+    # Files are loaded alphabetically which determines override order
     if [ -d "config" ]; then
         for file in config/*.tfvars; do
             if [ -f "$file" ]; then
@@ -32,12 +33,6 @@ build_var_files() {
                 echo -e "${GREEN}   ✓ $file${NC}"
             fi
         done
-    fi
-
-    # Load well-architected.tfvars if exists
-    if [ -f "well-architected.tfvars" ]; then
-        VAR_FILES="$VAR_FILES -var-file=well-architected.tfvars"
-        echo -e "${GREEN}   ✓ well-architected.tfvars${NC}"
     fi
 
     # Fallback: Load main.tfvars if config/ not present (legacy support)

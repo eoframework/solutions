@@ -1,15 +1,19 @@
 #------------------------------------------------------------------------------
-# AWS Well-Architected Framework Configuration
+# Best Practices Configuration
 #------------------------------------------------------------------------------
-# This file configures governance and compliance resources aligned with
-# the AWS Well-Architected Framework six pillars:
+# Aligned with AWS Well-Architected Framework 6 pillars:
 #
-# 1. Operational Excellence - AWS Config for compliance monitoring
-# 2. Security - Enhanced GuardDuty for threat detection
-# 3. Reliability - AWS Backup for centralized backup management
-# 4. Performance Efficiency - (handled via compute/cache modules)
-# 5. Cost Optimization - AWS Budgets for cost alerting
-# 6. Sustainability - (handled via right-sizing in other modules)
+# IN THIS FILE:
+#   Cost Optimization     - Budgets, alerts, cold storage tiering
+#   Reliability           - Backup plans, retention policies, DR
+#   Operational Excellence - AWS Config, compliance monitoring
+#
+# IN OTHER CONFIG FILES (cross-reference):
+#   Security              - See security.tfvars (WAF, GuardDuty, KMS, IAM)
+#   Performance Efficiency - See compute.tfvars (instance types, scaling)
+#                           See cache.tfvars (caching layer)
+#   Sustainability        - Achieved via right-sizing in compute.tfvars
+#                           Consider Graviton instances for lower carbon
 #------------------------------------------------------------------------------
 
 #------------------------------------------------------------------------------

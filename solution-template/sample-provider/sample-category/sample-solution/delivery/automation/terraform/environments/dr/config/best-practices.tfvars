@@ -1,12 +1,17 @@
 #------------------------------------------------------------------------------
-# AWS Well-Architected Framework Configuration - DR ENVIRONMENT
+# Best Practices Configuration - DR ENVIRONMENT
 #------------------------------------------------------------------------------
-# DR-focused governance emphasizing:
-# - Data protection and backup (CRITICAL)
-# - Cost monitoring for standby infrastructure
-# - Compliance monitoring (OPTIONAL - can mirror primary)
+# Aligned with AWS Well-Architected Framework 6 pillars:
 #
-# Note: Security controls (WAF, GuardDuty) are managed at primary site.
+# IN THIS FILE (DR-focused):
+#   Cost Optimization     - Budget monitoring for standby costs
+#   Reliability           - CRITICAL: Backup, cross-region replication
+#   Operational Excellence - Optional (can mirror primary)
+#
+# IN OTHER CONFIG FILES (cross-reference):
+#   Security              - See security.tfvars (managed at primary site)
+#   Performance Efficiency - See compute.tfvars (standby capacity)
+#   Sustainability        - Minimal standby = lower carbon footprint
 #------------------------------------------------------------------------------
 
 #------------------------------------------------------------------------------
