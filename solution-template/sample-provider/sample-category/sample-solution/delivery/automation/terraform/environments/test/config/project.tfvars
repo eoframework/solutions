@@ -1,17 +1,17 @@
 #------------------------------------------------------------------------------
-# Project Configuration - TEST Environment
+# Project Configuration - Tags, Naming - TEST Environment
+#------------------------------------------------------------------------------
+# Generated from configuration on 2025-11-30 17:01:06
+#
+# To regenerate: python generate-tfvars.py /path/to/solution
 #------------------------------------------------------------------------------
 
-solution_name = "sample-solution"
-solution_abbr = "smp"
-# org_prefix  = "acme"
+aws = {
+  region = "us-east-1"  # Primary AWS region
+}
 
-provider_name = "sample-provider"
-category_name = "sample-category"
-
-aws_region     = "us-east-1"
-# aws_profile  = "mycompany-test"
-
-cost_center   = "CC-00000"
-owner_email   = "team@example.com"
-project_code  = "PRJ-SAMPLE"
+ownership = {
+  cost_center = "CC-00000"  # Cost center for billing
+  owner_email = "team@example.com"  # Owner email for notifications
+  project_code = "PRJ-SAMPLE"  # Project tracking code
+}

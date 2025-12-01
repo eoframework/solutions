@@ -1,29 +1,13 @@
 #------------------------------------------------------------------------------
-# Secrets Setup - Variables
+# Secrets Module - Variables
 #------------------------------------------------------------------------------
-
-#------------------------------------------------------------------------------
-# AWS Configuration
-#------------------------------------------------------------------------------
-
-variable "aws_region" {
-  description = "AWS region for secrets"
-  type        = string
-  default     = "us-east-1"
-}
-
-variable "aws_profile" {
-  description = "AWS CLI profile name (optional)"
-  type        = string
-  default     = ""
-}
 
 #------------------------------------------------------------------------------
 # Naming Configuration
 #------------------------------------------------------------------------------
 
 variable "name_prefix" {
-  description = "Name prefix for all secrets (e.g., prod-sample)"
+  description = "Name prefix for all secrets (e.g., prod-smp, test-smp)"
   type        = string
 
   validation {
@@ -32,15 +16,14 @@ variable "name_prefix" {
   }
 }
 
-variable "environment" {
-  description = "Environment name (prod, test, dr)"
-  type        = string
-  default     = "prod"
+variable "tags" {
+  description = "Tags to apply to all resources"
+  type        = map(string)
+  default     = {}
 }
 
 #------------------------------------------------------------------------------
 # Secret Name Suffixes
-# These suffixes are appended to name_prefix to form the full secret name
 #------------------------------------------------------------------------------
 
 variable "db_password_secret_suffix" {

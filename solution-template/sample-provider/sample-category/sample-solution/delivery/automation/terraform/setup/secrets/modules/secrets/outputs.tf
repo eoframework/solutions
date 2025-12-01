@@ -1,7 +1,6 @@
 #------------------------------------------------------------------------------
-# Secrets Setup - Outputs
+# Secrets Module - Outputs
 #------------------------------------------------------------------------------
-# These outputs provide the secret names/paths for use in main infrastructure.
 # Note: Actual secret VALUES are never exposed in outputs.
 #------------------------------------------------------------------------------
 

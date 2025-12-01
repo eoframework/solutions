@@ -1,46 +1,27 @@
 #------------------------------------------------------------------------------
-# Cache Configuration - TEST Environment
+# Cache Configuration - ElastiCache - TEST Environment
 #------------------------------------------------------------------------------
-# ElastiCache configuration for test environment.
-# Generated from: delivery/raw/configuration.csv #SHEET: cache
+# Generated from configuration on 2025-11-30 17:01:06
 #
-# NOTE: Cache module is NOT included in test environment by default.
-# These settings are provided for reference if cache is enabled for testing.
+# To regenerate: python generate-tfvars.py /path/to/solution
 #------------------------------------------------------------------------------
 
-#------------------------------------------------------------------------------
-# ElastiCache Deployment
-#------------------------------------------------------------------------------
-
-enable_elasticache = false              # Test: disabled by default
-
-# Engine configuration
-cache_engine         = "redis"
-cache_engine_version = "7.0"
-
-#------------------------------------------------------------------------------
-# Instance Configuration (if enabled)
-#------------------------------------------------------------------------------
-
-cache_node_type = "cache.t3.micro"      # Test: smallest instance
-cache_num_nodes = 1                      # Test: single node
-
-#------------------------------------------------------------------------------
-# High Availability
-#------------------------------------------------------------------------------
-
-cache_automatic_failover = false         # Test: disabled (single node)
-
-#------------------------------------------------------------------------------
-# Encryption
-#------------------------------------------------------------------------------
-
-cache_at_rest_encryption  = false        # Test: disabled for simplicity
-cache_transit_encryption  = false        # Test: disabled for simplicity
-
-#------------------------------------------------------------------------------
-# Backup Configuration
-#------------------------------------------------------------------------------
-
-cache_snapshot_retention = 1             # Test: minimal retention
-cache_snapshot_window    = "05:00-06:00"
+cache = {
+  at_rest_encryption = true  # At Rest Encryption
+  auth_token_param_name = "cache/auth-token"  # Auth Token Param Name
+  auto_minor_version_upgrade = true  # Enable auto minor version upgrade
+  automatic_failover = false  # Automatic Failover
+  cluster_mode_enabled = false  # Cluster Mode Enabled
+  cluster_mode_replicas = 1  # Cluster Mode Replicas
+  cluster_mode_shards = 1  # Cluster Mode Shards
+  enabled = true  # Enable this resource
+  engine = "redis"  # Database engine type
+  engine_version = "7.0"  # Database engine version
+  maintenance_window = "sun:06:00-sun:07:00"  # Preferred maintenance window
+  node_type = "cache.t3.micro"  # ElastiCache node type
+  num_nodes = 1  # Num Nodes
+  port = 6379  # Cache port number
+  snapshot_retention = 1  # Snapshot Retention
+  snapshot_window = "05:00-06:00"  # Preferred snapshot window
+  transit_encryption = true  # Transit Encryption
+}

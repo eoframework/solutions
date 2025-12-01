@@ -1,44 +1,9 @@
 #------------------------------------------------------------------------------
-# Secrets Setup Module
+# Secrets Module
 #------------------------------------------------------------------------------
-# Pre-provisions secrets in AWS Secrets Manager and SSM Parameter Store.
-# Run this ONCE before deploying main infrastructure.
-#
-# Usage:
-#   cd setup/secrets
-#   terraform init
-#   terraform apply -var="name_prefix=prod-sample"
-#
-# Secrets are created with random values that can be rotated later.
+# Provisions secrets in AWS Secrets Manager and SSM Parameter Store.
+# Called by environment-specific configurations (prod, test).
 #------------------------------------------------------------------------------
-
-terraform {
-  required_version = ">= 1.6.0"
-  required_providers {
-    aws = {
-      source  = "hashicorp/aws"
-      version = ">= 5.0"
-    }
-    random = {
-      source  = "hashicorp/random"
-      version = ">= 3.0"
-    }
-  }
-}
-
-provider "aws" {
-  region  = var.aws_region
-  profile = var.aws_profile != "" ? var.aws_profile : null
-
-  default_tags {
-    tags = {
-      Project     = var.name_prefix
-      Environment = var.environment
-      ManagedBy   = "Terraform"
-      Purpose     = "Secrets"
-    }
-  }
-}
 
 #------------------------------------------------------------------------------
 # Data Sources
@@ -57,9 +22,7 @@ resource "aws_kms_key" "secrets" {
   deletion_window_in_days = 30
   enable_key_rotation     = true
 
-  tags = {
-    Name = "${var.name_prefix}-secrets-key"
-  }
+  tags = merge(var.tags, { Name = "${var.name_prefix}-secrets-key" })
 }
 
 resource "aws_kms_alias" "secrets" {
@@ -90,10 +53,10 @@ resource "aws_secretsmanager_secret" "db_password" {
   kms_key_id              = var.create_kms_key ? aws_kms_key.secrets[0].arn : null
   recovery_window_in_days = var.secret_recovery_window
 
-  tags = {
+  tags = merge(var.tags, {
     Name      = "${var.name_prefix}-db-password"
     Component = "Database"
-  }
+  })
 }
 
 resource "aws_secretsmanager_secret_version" "db_password" {
@@ -120,10 +83,10 @@ resource "aws_ssm_parameter" "cache_auth_token" {
   value       = random_password.cache_auth_token[0].result
   key_id      = var.create_kms_key ? aws_kms_key.secrets[0].arn : null
 
-  tags = {
+  tags = merge(var.tags, {
     Name      = "${var.name_prefix}-cache-auth-token"
     Component = "Cache"
-  }
+  })
 }
 
 #------------------------------------------------------------------------------
@@ -143,10 +106,10 @@ resource "aws_secretsmanager_secret" "api_key" {
   kms_key_id              = var.create_kms_key ? aws_kms_key.secrets[0].arn : null
   recovery_window_in_days = var.secret_recovery_window
 
-  tags = {
+  tags = merge(var.tags, {
     Name      = "${var.name_prefix}-api-key"
     Component = "Application"
-  }
+  })
 }
 
 resource "aws_secretsmanager_secret_version" "api_key" {

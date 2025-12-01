@@ -1,4 +1,4 @@
-# Test Environment Outputs
+# Production Environment Outputs
 
 # =============================================================================
 # Naming & Identity
@@ -21,12 +21,17 @@ output "name_prefix" {
 
 output "solution_name" {
   description = "Solution name"
-  value       = var.solution_name
+  value       = var.solution.name
 }
 
 output "solution_abbr" {
   description = "Solution abbreviation"
-  value       = var.solution_abbr
+  value       = var.solution.abbr
+}
+
+output "common_tags" {
+  description = "Common tags applied to all resources"
+  value       = local.common_tags
 }
 
 # =============================================================================
@@ -74,6 +79,30 @@ output "asg_name" {
 }
 
 # =============================================================================
+# Security Module Outputs
+# =============================================================================
+
+output "kms_key_arn" {
+  description = "KMS key ARN"
+  value       = module.security.kms_key_arn
+}
+
+output "waf_web_acl_arn" {
+  description = "WAF Web ACL ARN"
+  value       = module.security.waf_web_acl_arn
+}
+
+output "guardduty_detector_id" {
+  description = "GuardDuty detector ID"
+  value       = module.security.guardduty_detector_id
+}
+
+output "cloudtrail_arn" {
+  description = "CloudTrail ARN"
+  value       = module.security.cloudtrail_arn
+}
+
+# =============================================================================
 # Database Module Outputs
 # =============================================================================
 
@@ -98,27 +127,70 @@ output "rds_database_name" {
 }
 
 # =============================================================================
-# Well-Architected Module Outputs
+# Cache Module Outputs
+# =============================================================================
+
+output "cache_endpoint" {
+  description = "ElastiCache endpoint"
+  value       = var.cache.enabled ? module.cache[0].cache_endpoint : null
+}
+
+output "cache_port" {
+  description = "ElastiCache port"
+  value       = var.cache.enabled ? module.cache[0].cache_port : null
+}
+
+output "cache_connection_string" {
+  description = "Redis connection string"
+  value       = var.cache.enabled ? module.cache[0].cache_connection_string : null
+}
+
+# =============================================================================
+# Monitoring Module Outputs
+# =============================================================================
+
+output "sns_topic_arn" {
+  description = "SNS topic ARN for alarms"
+  value       = module.monitoring.sns_topic_arn
+}
+
+output "dashboard_name" {
+  description = "CloudWatch dashboard name"
+  value       = module.monitoring.dashboard_name
+}
+
+output "application_log_group" {
+  description = "Application log group name"
+  value       = module.monitoring.application_log_group_name
+}
+
+# =============================================================================
+# Best Practices Module Outputs
 # =============================================================================
 
 output "config_rules_enabled" {
   description = "Whether AWS Config rules are enabled"
-  value       = var.enable_config_rules
+  value       = var.config_rules.enabled
 }
 
 output "backup_vault_arn" {
   description = "AWS Backup vault ARN"
-  value       = var.enable_backup_plans ? module.backup_plans[0].vault_arn : null
+  value       = var.backup.enabled ? module.best_practices.backup_vault_arn : null
 }
 
 output "backup_plan_id" {
   description = "AWS Backup plan ID"
-  value       = var.enable_backup_plans ? module.backup_plans[0].backup_plan_id : null
+  value       = var.backup.enabled ? module.best_practices.backup_plan_id : null
 }
 
 output "monthly_budget_name" {
   description = "Monthly cost budget name"
-  value       = var.enable_budgets ? module.budgets[0].monthly_budget_name : null
+  value       = var.budget.enabled ? module.best_practices.monthly_budget_name : null
+}
+
+output "guardduty_enhanced_enabled" {
+  description = "Whether enhanced GuardDuty is enabled"
+  value       = var.guardduty_enhanced.enabled
 }
 
 # =============================================================================
@@ -126,29 +198,29 @@ output "monthly_budget_name" {
 # =============================================================================
 
 output "deployment_summary" {
-  description = "Test deployment summary"
+  description = "Deployment summary"
   value = {
     # Identity
-    solution_name    = var.solution_name
-    solution_abbr    = var.solution_abbr
+    solution_name    = var.solution.name
+    solution_abbr    = var.solution.abbr
     environment      = local.environment
     environment_name = lookup(local.env_display_name, local.environment, local.environment)
     name_prefix      = local.name_prefix
-    region           = var.aws_region
+    region           = var.aws.region
 
     # Ownership
-    cost_center  = var.cost_center
-    owner        = var.owner_email
-    project_code = var.project_code
+    cost_center  = var.ownership.cost_center
+    owner        = var.ownership.owner_email
+    project_code = var.ownership.project_code
 
     # Resources
-    vpc_id       = module.core.vpc_id
-    alb_dns_name = module.core.alb_dns_name
-    rds_endpoint = module.database.rds_endpoint
+    vpc_id         = module.core.vpc_id
+    alb_dns_name   = module.core.alb_dns_name
+    rds_endpoint   = module.database.rds_endpoint
+    cache_endpoint = var.cache.enabled ? module.cache[0].cache_endpoint : null
 
-    # Modules deployed (test has fewer modules)
-    deployed_modules = ["core", "database"]
-    excluded_modules = ["cache", "security", "monitoring"]
+    # Modules deployed
+    deployed_modules = ["core", "security", "database", "cache", "monitoring", "best_practices"]
 
     # Timestamp
     deployment_time = timestamp()

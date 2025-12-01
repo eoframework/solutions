@@ -1,47 +1,26 @@
 #------------------------------------------------------------------------------
 # Application Configuration - TEST Environment
 #------------------------------------------------------------------------------
-# Application-specific settings for test environment.
-# Generated from: delivery/raw/configuration.csv #SHEET: application
+# Generated from configuration on 2025-11-30 17:01:06
+#
+# To regenerate: python generate-tfvars.py /path/to/solution
 #------------------------------------------------------------------------------
 
-#------------------------------------------------------------------------------
-# Application Identity
-#------------------------------------------------------------------------------
+application = {
+  enable_debug = true  # Enable Debug
+  health_path = "/health"  # Health Path
+  log_level = "debug"  # Log Level
+  metrics_path = "/metrics"  # Metrics Path
+  name = "sample-solution"  # Solution name for resource naming
+  port = 8080  # Cache port number
+  rate_limit = 1000  # Rate Limit
+  session_timeout = 3600  # Session Timeout
+  version = "1.0.0"  # Version
+}
 
-app_name    = "sample-solution"         # Must match solution_name
-app_version = "1.0.0"                   # Semantic versioning
-
-#------------------------------------------------------------------------------
-# Server Configuration
-#------------------------------------------------------------------------------
-
-app_port = 8080                         # Application server port
-
-#------------------------------------------------------------------------------
-# Logging & Debugging
-#------------------------------------------------------------------------------
-
-app_log_level    = "debug"              # Test: verbose logging
-app_enable_debug = true                 # Test: debug enabled
-
-#------------------------------------------------------------------------------
-# Endpoints
-#------------------------------------------------------------------------------
-
-app_health_path  = "/health"            # Health check endpoint
-app_metrics_path = "/metrics"           # Prometheus metrics endpoint
-
-#------------------------------------------------------------------------------
-# Security
-#------------------------------------------------------------------------------
-
-# CORS origins - allow all for testing
-app_cors_origins = ["*"]
-
-#------------------------------------------------------------------------------
-# Rate Limiting
-#------------------------------------------------------------------------------
-
-app_rate_limit      = 1000              # Requests per minute per client
-app_session_timeout = 3600              # Session timeout in seconds (1 hour)
+solution = {
+  abbr = "smp"  # Solution abbreviation (3-4 chars)
+  category_name = "sample-category"  # Solution category
+  name = "sample-solution"  # Solution name for resource naming
+  provider_name = "sample-provider"  # Provider organization name
+}

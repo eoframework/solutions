@@ -36,6 +36,18 @@ __pycache__/
 # Node modules (if any)
 node_modules/
 
+# Terraform
+.terraform/
+.terraform.lock.hcl
+*.tfstate
+*.tfstate.backup
+*.tfplan
+crash.log
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+
 # Temporary files
 *.tmp
 *.temp
@@ -47,3 +59,15 @@ node_modules/
 # Both raw source files and generated outputs are version controlled
 CLAUDE.md
 ~$*
+
+# Terraform
+.terraform/
+.terraform.lock.hcl
+*.tfstate
+*.tfstate.backup
+*.tfplan
+crash.log
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
