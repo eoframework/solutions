@@ -1,102 +1,75 @@
-# Terraform Backend Setup
+# Terraform Setup
 
-Scripts to create AWS resources for Terraform remote state storage.
+This directory contains prerequisite infrastructure that must be deployed before the main Terraform environments.
 
-## Overview
+## Directory Structure
 
-Terraform remote state requires:
-- **S3 Bucket** - Stores state file with versioning and encryption
-- **DynamoDB Table** - Provides state locking
+```
+setup/
+├── backend/     # Remote state infrastructure (S3 + DynamoDB)
+└── secrets/     # Secrets management (Secrets Manager + SSM Parameter Store)
+```
 
-These must exist before `terraform init`, so these scripts create them via AWS CLI.
+## Deployment Sequence
 
-## Naming Convention
+Run these setup modules in order before deploying the main environments:
 
-| Resource | Pattern | Example |
-|----------|---------|---------|
-| S3 Bucket | `{org_prefix}-{solution_abbr}-{env}-terraform-state` | `acme-vxr-prod-terraform-state` |
-| DynamoDB Table | `{org_prefix}-{solution_abbr}-{env}-terraform-locks` | `acme-vxr-prod-terraform-locks` |
+### Step 1: Backend (Remote State)
+
+Creates the S3 bucket and DynamoDB table for Terraform remote state storage.
+
+```bash
+cd backend/
+
+# Linux/macOS
+./state-backend.sh prod   # For production
+./state-backend.sh test   # For test
+
+# Windows
+state-backend.bat prod
+state-backend.bat test
+```
+
+This generates `backend.tfvars` in each environment directory for state configuration.
+
+### Step 2: Secrets
+
+Provisions application secrets in AWS Secrets Manager and SSM Parameter Store.
+
+```bash
+cd secrets/environments/prod
+terraform init
+terraform plan
+terraform apply
+
+cd ../test
+terraform init
+terraform plan
+terraform apply
+```
+
+### Step 3: Main Environments
+
+After setup is complete, deploy the main infrastructure:
+
+```bash
+cd ../../environments/prod
+terraform init -backend-config=backend.tfvars
+terraform plan -var-file=config/project.tfvars -var-file=config/networking.tfvars ...
+terraform apply
+```
 
 ## Prerequisites
 
-1. AWS CLI configured (`aws configure`)
-2. `org_prefix` set in `environments/{env}/config/project.tfvars`
+- AWS CLI configured with appropriate credentials
+- Terraform >= 1.6.0
+- Sufficient IAM permissions for S3, DynamoDB, Secrets Manager, and SSM
 
-## Configuration
+## Environment Isolation
 
-Ensure `config/project.tfvars` has:
+Each environment (prod, test) maintains separate:
+- Remote state buckets and lock tables
+- Secrets and parameter values
+- Infrastructure resources
 
-```hcl
-solution_abbr = "vxr"           # 3-4 char abbreviation
-org_prefix    = "acme"          # REQUIRED for unique S3 bucket names
-aws_region    = "us-east-1"
-```
-
-## Usage
-
-### Linux/Mac
-
-```bash
-# Specify environment
-./setup/state-backend.sh prod
-
-# Or auto-detect from current directory
-cd environments/prod
-../../setup/state-backend.sh
-```
-
-### Windows
-
-```cmd
-setup\state-backend.bat prod
-```
-
-## What Gets Created
-
-1. **S3 Bucket** with versioning, AES-256 encryption, public access blocked
-2. **DynamoDB Table** with `LockID` key, pay-per-request billing
-3. **backend.tfvars** file in the environment directory
-
-## After Setup
-
-Initialize Terraform with the generated backend config:
-
-```bash
-cd environments/prod
-terraform init -backend-config=backend.tfvars
-```
-
-Or use `deploy.sh`:
-
-```bash
-cd environments/prod
-./deploy.sh init
-```
-
-## Multi-Environment Setup
-
-Run for each environment:
-
-```bash
-./setup/state-backend.sh prod
-./setup/state-backend.sh test
-./setup/state-backend.sh dr
-```
-
-Each gets isolated state storage.
-
-## Troubleshooting
-
-### "org_prefix not found"
-Set in `config/project.tfvars`:
-```hcl
-org_prefix = "mycompany"
-```
-
-### "AWS credentials not configured"
-```bash
-aws configure
-```
-
-### "Bucket name already exists"
-S3 names are globally unique. Use a more specific `org_prefix`.
+This ensures complete isolation between environments.
