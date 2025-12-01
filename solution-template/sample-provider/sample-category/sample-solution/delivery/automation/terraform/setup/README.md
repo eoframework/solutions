@@ -6,8 +6,13 @@ This directory contains prerequisite infrastructure that must be deployed before
 
 ```
 setup/
-├── backend/     # Remote state infrastructure (S3 + DynamoDB)
-└── secrets/     # Secrets management (Secrets Manager + SSM Parameter Store)
+├── backend/           # Remote state infrastructure (S3 + DynamoDB)
+│   ├── state-backend.sh
+│   └── state-backend.bat
+└── secrets/           # Secrets management (Secrets Manager + SSM Parameter Store)
+    ├── modules/secrets/
+    ├── prod/
+    └── test/
 ```
 
 ## Deployment Sequence
@@ -37,7 +42,7 @@ This generates `backend.tfvars` in each environment directory for state configur
 Provisions application secrets in AWS Secrets Manager and SSM Parameter Store.
 
 ```bash
-cd secrets/environments/prod
+cd secrets/prod
 terraform init
 terraform plan
 terraform apply

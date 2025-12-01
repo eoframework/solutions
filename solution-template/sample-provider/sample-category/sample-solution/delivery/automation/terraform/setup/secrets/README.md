@@ -11,11 +11,10 @@ setup/secrets/
 │       ├── main.tf
 │       ├── variables.tf
 │       └── outputs.tf
-├── environments/
-│   ├── prod/              # Production secrets
-│   │   └── main.tf
-│   └── test/              # Test secrets
-│       └── main.tf
+├── prod/                  # Production secrets
+│   └── main.tf
+├── test/                  # Test secrets
+│   └── main.tf
 └── README.md
 ```
 
@@ -40,7 +39,7 @@ setup/secrets/
 ### Deploy Production Secrets
 
 ```bash
-cd setup/secrets/environments/prod
+cd setup/secrets/prod
 terraform init
 terraform apply
 ```
@@ -48,7 +47,7 @@ terraform apply
 ### Deploy Test Secrets
 
 ```bash
-cd setup/secrets/environments/test
+cd setup/secrets/test
 terraform init
 terraform apply
 ```
@@ -146,14 +145,14 @@ resource "aws_secretsmanager_secret_rotation" "db_password" {
 ### Test Environment
 
 ```bash
-cd setup/secrets/environments/test
+cd setup/secrets/test
 terraform destroy
 ```
 
 ### Production Environment
 
 ```bash
-cd setup/secrets/environments/prod
+cd setup/secrets/prod
 terraform destroy
 ```
 

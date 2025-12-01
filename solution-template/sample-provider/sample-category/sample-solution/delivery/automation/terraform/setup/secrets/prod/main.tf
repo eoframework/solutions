@@ -1,10 +1,10 @@
 #------------------------------------------------------------------------------
-# Secrets Setup - TEST Environment
+# Secrets Setup - PROD Environment
 #------------------------------------------------------------------------------
 # Pre-provisions secrets before deploying main infrastructure.
 #
 # Usage:
-#   cd setup/secrets/environments/test
+#   cd setup/secrets/prod
 #   terraform init
 #   terraform apply
 #------------------------------------------------------------------------------
@@ -49,8 +49,8 @@ provider "aws" {
 
   default_tags {
     tags = {
-      Project     = "test-smp"
-      Environment = "test"
+      Project     = "prod-smp"
+      Environment = "prod"
       ManagedBy   = "Terraform"
       Purpose     = "Secrets"
     }
@@ -62,21 +62,21 @@ provider "aws" {
 #------------------------------------------------------------------------------
 
 module "secrets" {
-  source = "../../modules/secrets"
+  source = "../modules/secrets"
 
-  name_prefix = "test-smp"
+  name_prefix = "prod-smp"
 
-  # Feature flags - Test settings (cost-optimized)
-  create_kms_key        = false  # Use AWS managed key for test
+  # Feature flags - Production settings
+  create_kms_key        = true
   create_db_secret      = true
   create_cache_secret   = true
   create_api_key_secret = false
 
   # Secret configuration
-  secret_recovery_window = 0  # Immediate deletion for test
+  secret_recovery_window = 7  # 7 days for production
 
   tags = {
-    Environment = "test"
+    Environment = "prod"
     Solution    = "sample-solution"
   }
 }
