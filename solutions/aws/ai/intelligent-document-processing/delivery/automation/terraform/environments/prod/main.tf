@@ -1,15 +1,13 @@
 #------------------------------------------------------------------------------
-# IDP Production Environment - Lean Architecture
+# IDP Production Environment
 #------------------------------------------------------------------------------
-# Serverless document processing with AI services
-# Refactored for minimal verbosity using grouped variables
-# All infrastructure defined via modules - no inline resources
+# Intelligent Document Processing - Serverless document processing with
+# AWS Textract, Comprehend, and Step Functions orchestration
 #------------------------------------------------------------------------------
 
 #------------------------------------------------------------------------------
 # Locals
 #------------------------------------------------------------------------------
-
 locals {
   environment = basename(path.module)
   name_prefix = "${var.solution.abbr}-${local.environment}"
@@ -17,7 +15,6 @@ locals {
   #----------------------------------------------------------------------------
   # Shared Configuration Objects
   #----------------------------------------------------------------------------
-
   project = {
     name        = var.solution.abbr
     environment = local.environment
@@ -39,34 +36,25 @@ locals {
   #----------------------------------------------------------------------------
   # Lambda Configuration (shared by document_processing, human_review, idp_api)
   #----------------------------------------------------------------------------
-
   lambda = {
     runtime       = var.application.lambda_runtime
     packages      = var.lambda_packages
     source_hashes = var.lambda_source_hashes
-  }
-
-  #----------------------------------------------------------------------------
-  # AI Services Configuration (grouped for document_processing)
-  #----------------------------------------------------------------------------
-
-  ai_services = {
-    textract   = var.textract
-    comprehend = var.comprehend
   }
 }
 
 #------------------------------------------------------------------------------
 # Data Sources
 #------------------------------------------------------------------------------
-
 data "aws_caller_identity" "current" {}
 data "aws_region" "current" {}
 
+#===============================================================================
+# FOUNDATION - Core infrastructure that other modules depend on
+#===============================================================================
 #------------------------------------------------------------------------------
 # Security (KMS + Lambda VPC Security Group)
 #------------------------------------------------------------------------------
-
 module "security" {
   source = "../../modules/solution/security"
 
@@ -78,83 +66,8 @@ module "security" {
 }
 
 #------------------------------------------------------------------------------
-# Storage (S3 + DynamoDB)
-#------------------------------------------------------------------------------
-
-module "storage" {
-  source = "../../modules/solution/storage"
-
-  project        = local.project
-  aws_account_id = data.aws_caller_identity.current.account_id
-  storage        = var.storage
-  database       = var.database
-  kms_key_arn    = module.security.kms_key_arn
-  common_tags    = local.common_tags
-
-  processing_trigger_lambda_arn = module.document_processing.lambda_arns.validate_document
-}
-
-#------------------------------------------------------------------------------
-# Document Processing (Textract + Comprehend + Step Functions)
-#------------------------------------------------------------------------------
-
-module "document_processing" {
-  source = "../../modules/solution/document-processing"
-
-  project      = local.project
-  lambda       = local.lambda
-  vpc          = module.security.lambda_vpc
-  storage      = module.storage.outputs
-  ai_services  = local.ai_services
-  human_review = var.human_review.enabled ? module.human_review[0].outputs : null
-  logging      = var.logging
-  monitoring   = var.monitoring
-  kms_key_arn  = module.security.kms_key_arn
-  common_tags  = local.common_tags
-}
-
-#------------------------------------------------------------------------------
-# Human Review (A2I)
-#------------------------------------------------------------------------------
-
-module "human_review" {
-  source = "../../modules/solution/human-review"
-  count  = var.human_review.enabled ? 1 : 0
-
-  project            = local.project
-  lambda             = local.lambda
-  vpc                = module.security.lambda_vpc
-  storage            = module.storage.outputs
-  step_functions_arn = module.document_processing.state_machine_arn
-  a2i                = var.human_review
-  kms_key_arn        = module.security.kms_key_arn
-  common_tags        = local.common_tags
-}
-
-#------------------------------------------------------------------------------
-# IDP API (REST interface for document upload, status, and results)
-#------------------------------------------------------------------------------
-
-module "idp_api" {
-  source = "../../modules/solution/api"
-
-  project               = local.project
-  lambda                = local.lambda
-  vpc                   = module.security.lambda_vpc
-  storage               = module.storage.outputs
-  state_machine_arn     = module.document_processing.state_machine_arn
-  cognito_user_pool_arn = var.auth.enabled ? module.auth[0].user_pool_arn : null
-  api                   = var.api
-  logging               = var.logging
-  monitoring            = var.monitoring
-  kms_key_arn           = module.security.kms_key_arn
-  common_tags           = local.common_tags
-}
-
-#------------------------------------------------------------------------------
 # Authentication (Cognito)
 #------------------------------------------------------------------------------
-
 module "auth" {
   source = "../../modules/aws/cognito"
   count  = var.auth.enabled ? 1 : 0
@@ -183,10 +96,134 @@ module "auth" {
   }
 }
 
+#===============================================================================
+# CORE SOLUTION - Primary solution components for document processing
+#===============================================================================
 #------------------------------------------------------------------------------
-# DR Infrastructure (Consolidated Vault + Replication)
+# Storage (S3 + DynamoDB)
 #------------------------------------------------------------------------------
+module "storage" {
+  source = "../../modules/solution/storage"
 
+  project        = local.project
+  aws_account_id = data.aws_caller_identity.current.account_id
+  storage        = var.storage
+  database       = var.database
+  kms_key_arn    = module.security.kms_key_arn
+  common_tags    = local.common_tags
+
+  depends_on = [module.security]
+}
+
+#------------------------------------------------------------------------------
+# Human Review (A2I) - Created before document_processing to avoid circular deps
+#------------------------------------------------------------------------------
+module "human_review" {
+  source = "../../modules/solution/human-review"
+  count  = var.human_review.enabled ? 1 : 0
+
+  project     = local.project
+  lambda      = local.lambda
+  vpc         = module.security.lambda_vpc
+  storage     = module.storage.outputs
+  a2i         = var.human_review
+  kms_key_arn = module.security.kms_key_arn
+  common_tags = local.common_tags
+
+  depends_on = [module.security, module.storage]
+}
+
+#------------------------------------------------------------------------------
+# Document Processing (Textract + Comprehend + Step Functions)
+#------------------------------------------------------------------------------
+module "document_processing" {
+  source = "../../modules/solution/document-processing"
+
+  project      = local.project
+  lambda       = local.lambda
+  vpc          = module.security.lambda_vpc
+  storage      = module.storage.outputs
+  ai_services  = { textract = var.textract, comprehend = var.comprehend }
+  human_review = var.human_review.enabled ? module.human_review[0].outputs : null
+  logging      = var.logging
+  monitoring   = var.monitoring
+  kms_key_arn  = module.security.kms_key_arn
+  common_tags  = local.common_tags
+
+  depends_on = [module.security, module.storage, module.human_review]
+}
+
+#------------------------------------------------------------------------------
+# IDP API (REST interface for document upload, status, and results)
+#------------------------------------------------------------------------------
+module "idp_api" {
+  source = "../../modules/solution/api"
+
+  project               = local.project
+  lambda                = local.lambda
+  vpc                   = module.security.lambda_vpc
+  storage               = module.storage.outputs
+  state_machine_arn     = module.document_processing.state_machine_arn
+  cognito_user_pool_arn = var.auth.enabled ? module.auth[0].user_pool_arn : null
+  api                   = var.api
+  logging               = var.logging
+  monitoring            = var.monitoring
+  kms_key_arn           = module.security.kms_key_arn
+  common_tags           = local.common_tags
+
+  depends_on = [module.security, module.auth, module.storage, module.document_processing]
+}
+
+#===============================================================================
+# INTEGRATIONS - Wiring between modules (avoids circular dependencies)
+#===============================================================================
+#------------------------------------------------------------------------------
+# SSM Parameter: Step Functions ARN (for human_review Lambda to lookup at runtime)
+#------------------------------------------------------------------------------
+resource "aws_ssm_parameter" "step_functions_arn" {
+  count = var.human_review.enabled ? 1 : 0
+
+  name        = module.human_review[0].ssm_step_functions_arn_path
+  description = "Document processing Step Functions state machine ARN"
+  type        = "String"
+  value       = module.document_processing.state_machine_arn
+
+  tags = local.common_tags
+
+  depends_on = [module.document_processing]
+}
+
+#------------------------------------------------------------------------------
+# S3 → Lambda Trigger (document upload triggers processing)
+#------------------------------------------------------------------------------
+resource "aws_lambda_permission" "s3_invoke" {
+  statement_id  = "AllowS3Invoke"
+  action        = "lambda:InvokeFunction"
+  function_name = module.document_processing.lambda_arns.validate_document
+  principal     = "s3.amazonaws.com"
+  source_arn    = module.storage.documents_bucket_arn
+
+  depends_on = [module.document_processing]
+}
+
+resource "aws_s3_bucket_notification" "document_upload" {
+  bucket = module.storage.documents_bucket_id
+
+  lambda_function {
+    lambda_function_arn = module.document_processing.lambda_arns.validate_document
+    events              = ["s3:ObjectCreated:*"]
+    filter_prefix       = "uploads/"
+  }
+
+  depends_on = [aws_lambda_permission.s3_invoke]
+}
+
+#===============================================================================
+# OPERATIONS - Disaster recovery, compliance, and observability
+#===============================================================================
+#------------------------------------------------------------------------------
+# DR Infrastructure (Vault + Cross-Region Replication)
+#------------------------------------------------------------------------------
 module "dr" {
   source = "../../modules/solution/dr"
   count  = var.dr.vault_enabled || var.dr.replication_enabled ? 1 : 0
@@ -202,12 +239,13 @@ module "dr" {
   sns_topic_arn = var.monitoring.sns_topic_arn
   dr            = var.dr
   common_tags   = local.common_tags
+
+  depends_on = [module.security, module.storage]
 }
 
 #------------------------------------------------------------------------------
 # Best Practices (Budget + Config Rules + GuardDuty)
 #------------------------------------------------------------------------------
-
 module "best_practices" {
   source = "../../modules/solution/best-practices"
 
@@ -229,12 +267,13 @@ module "best_practices" {
     enable_malware_protection = var.guardduty.enable_malware_protection
     severity_threshold        = var.guardduty.severity_threshold
   }
+
+  depends_on = [module.security]
 }
 
 #------------------------------------------------------------------------------
 # Monitoring (CloudWatch Alarms)
 #------------------------------------------------------------------------------
-
 module "monitoring" {
   source = "../../modules/solution/monitoring"
   count  = var.monitoring.enable_alarms ? 1 : 0
@@ -247,4 +286,6 @@ module "monitoring" {
   }
   monitoring  = var.monitoring
   common_tags = local.common_tags
+
+  depends_on = [module.idp_api, module.document_processing]
 }

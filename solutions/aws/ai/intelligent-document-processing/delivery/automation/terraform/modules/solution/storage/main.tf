@@ -65,16 +65,6 @@ module "documents_bucket" {
     }
   ] : []
 
-  # Lambda notifications for document processing trigger
-  lambda_notifications = var.processing_trigger_lambda_arn != null ? [
-    {
-      lambda_function_arn = var.processing_trigger_lambda_arn
-      events              = ["s3:ObjectCreated:*"]
-      filter_prefix       = "uploads/"
-      filter_suffix       = ""
-    }
-  ] : []
-
   common_tags = var.common_tags
 }
 

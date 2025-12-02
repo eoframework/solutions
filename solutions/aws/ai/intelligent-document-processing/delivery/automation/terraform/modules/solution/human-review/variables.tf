@@ -69,12 +69,13 @@ variable "storage" {
 }
 
 #------------------------------------------------------------------------------
-# Step Functions Reference
+# Step Functions Reference (optional - can be wired after creation)
 #------------------------------------------------------------------------------
 
 variable "step_functions_arn" {
-  description = "ARN of the document processing Step Functions state machine"
+  description = "ARN of the document processing Step Functions state machine (optional)"
   type        = string
+  default     = null
 }
 
 #------------------------------------------------------------------------------

@@ -87,3 +87,12 @@ output "outputs" {
     queue_arn = module.review_queue.queue_arn
   }
 }
+
+#------------------------------------------------------------------------------
+# SSM Parameter Path (for wiring Step Functions ARN after creation)
+#------------------------------------------------------------------------------
+
+output "ssm_step_functions_arn_path" {
+  description = "SSM parameter path where Step Functions ARN should be stored"
+  value       = local.ssm_step_functions_arn_path
+}

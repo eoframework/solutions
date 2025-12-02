@@ -6,9 +6,13 @@
 #------------------------------------------------------------------------------
 
 data "aws_region" "current" {}
+data "aws_caller_identity" "current" {}
 
 locals {
   name_prefix = "${var.project.name}-${var.project.environment}"
+
+  # SSM parameter path for Step Functions ARN (populated by main.tf after document_processing is created)
+  ssm_step_functions_arn_path = "/${var.project.name}/${var.project.environment}/step-functions/document-processing-arn"
 }
 
 #------------------------------------------------------------------------------
@@ -50,9 +54,9 @@ module "lambda_process_review" {
   source_code_hash = var.lambda.source_hashes.process_review
 
   environment_variables = {
-    RESULTS_TABLE       = var.storage.results_table_name
-    DOCUMENTS_BUCKET    = var.storage.documents_bucket_name
-    STEP_FUNCTIONS_ARN  = var.step_functions_arn
+    RESULTS_TABLE                = var.storage.results_table_name
+    DOCUMENTS_BUCKET             = var.storage.documents_bucket_name
+    SSM_STEP_FUNCTIONS_ARN_PATH  = local.ssm_step_functions_arn_path
   }
 
   vpc_subnet_ids         = var.vpc.subnet_ids
@@ -190,9 +194,11 @@ resource "aws_iam_role_policy" "lambda_dynamodb" {
 }
 
 # Step Functions access for completing task tokens
+# Uses wildcard for state machines in this account/region since ARN is resolved at runtime via SSM
 resource "aws_iam_role_policy" "lambda_sfn" {
   for_each = toset([
-    module.lambda_complete_task.role_name
+    module.lambda_complete_task.role_name,
+    module.lambda_process_review.role_name
   ])
 
   name = "step-functions-access"
@@ -208,7 +214,28 @@ resource "aws_iam_role_policy" "lambda_sfn" {
           "states:SendTaskFailure",
           "states:SendTaskHeartbeat"
         ]
-        Resource = var.step_functions_arn
+        Resource = "arn:aws:states:${data.aws_region.current.id}:${data.aws_caller_identity.current.account_id}:stateMachine:${local.name_prefix}-*"
+      }
+    ]
+  })
+}
+
+# SSM Parameter Store access for reading Step Functions ARN
+resource "aws_iam_role_policy" "lambda_ssm" {
+  for_each = toset([
+    module.lambda_process_review.role_name
+  ])
+
+  name = "ssm-access"
+  role = each.value
+
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Effect   = "Allow"
+        Action   = "ssm:GetParameter"
+        Resource = "arn:aws:ssm:${data.aws_region.current.id}:${data.aws_caller_identity.current.account_id}:parameter${local.ssm_step_functions_arn_path}"
       }
     ]
   })

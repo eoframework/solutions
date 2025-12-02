@@ -78,15 +78,6 @@ variable "database" {
   default = {}
 }
 
-#------------------------------------------------------------------------------
-# Lambda Trigger
-#------------------------------------------------------------------------------
-
-variable "processing_trigger_lambda_arn" {
-  description = "Lambda ARN to trigger on document upload"
-  type        = string
-  default     = null
-}
 
 #------------------------------------------------------------------------------
 # Security

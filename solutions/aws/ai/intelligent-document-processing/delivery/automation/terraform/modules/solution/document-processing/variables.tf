@@ -73,11 +73,11 @@ variable "storage" {
 }
 
 #------------------------------------------------------------------------------
-# Human Review References (optional)
+# Human Review References (optional - can be wired after creation)
 #------------------------------------------------------------------------------
 
 variable "human_review" {
-  description = "Human review module outputs (null if disabled)"
+  description = "Human review queue outputs (null if disabled, can be passed after human_review module creation)"
   type = object({
     queue_url = string
     queue_arn = string
