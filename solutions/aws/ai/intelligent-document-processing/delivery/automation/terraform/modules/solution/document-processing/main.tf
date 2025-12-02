@@ -3,6 +3,14 @@
 #------------------------------------------------------------------------------
 # Orchestrates Textract OCR and Comprehend NLP for document processing
 # Includes Step Functions workflow for async processing pipeline
+#
+# AI Services Approach:
+# This module uses Textract and Comprehend built-in APIs (pay-per-use) via SDK
+# calls from Lambda functions. No custom models or endpoints are provisioned.
+#
+# For solutions requiring custom AI models, see:
+# - modules/aws/comprehend - Custom document classifiers, entity recognizers, flywheels
+# - modules/aws/textract - Custom adapters for domain-specific layouts, query templates
 #------------------------------------------------------------------------------
 
 locals {
