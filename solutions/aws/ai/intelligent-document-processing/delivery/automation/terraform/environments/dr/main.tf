@@ -1,52 +1,38 @@
 #------------------------------------------------------------------------------
-# IDP DR Environment - Full Restoration Infrastructure
+# IDP Disaster Recovery Environment
 #------------------------------------------------------------------------------
-# Composes: storage + document-processing + human-review + api + auth
-#
-# This DR deployment provides FULL functionality when failover is triggered:
-# - S3 bucket with replicated documents from production
-# - DynamoDB tables restored from cross-region backup
-# - Lambda functions for document processing
-# - Step Functions for orchestration
-# - API Gateway REST API
-# - Cognito for authentication
-# - A2I for human review
+# Intelligent Document Processing - Standby infrastructure for failover
+# Receives replicated data from production via S3 CRR and AWS Backup
 #
 # DR Strategy:
-# - S3: Documents continuously replicated via CRR from production
+# - S3: Documents continuously replicated from production via CRR
 # - DynamoDB: Tables restored from AWS Backup (cross-region copy)
 # - Compute: Lambda functions deployed fresh (stateless)
 # - API: New API Gateway endpoint with same functionality
-# - Auth: Cognito user pool replicated or recreated
+# - Auth: Cognito user pool (users may need re-registration)
 #
-# See providers.tf for Terraform/AWS provider configuration
 # See README.md for DR runbook and failover procedures
 #------------------------------------------------------------------------------
 
 #------------------------------------------------------------------------------
-# Naming Standards & Common Tags
+# Locals
 #------------------------------------------------------------------------------
-
 locals {
-  # Auto-discover environment from folder name (prod, test, dr)
   environment = basename(path.module)
-
-  # Environment display names for human-readable outputs
-  env_display_name = {
-    prod = "Production"
-    test = "Test"
-    dr   = "Disaster Recovery"
-  }
-
-  # Standardized naming prefix: {solution_abbr}-{environment}
   name_prefix = "${var.solution.abbr}-${local.environment}"
 
-  # Common tags applied to ALL resources via provider default_tags
+  #----------------------------------------------------------------------------
+  # Shared Configuration Objects
+  #----------------------------------------------------------------------------
+  project = {
+    name        = var.solution.abbr
+    environment = local.environment
+  }
+
   common_tags = {
     Solution     = var.solution.name
     SolutionAbbr = var.solution.abbr
     Environment  = local.environment
-    EnvDisplay   = lookup(local.env_display_name, local.environment, local.environment)
     Provider     = var.solution.provider_name
     Category     = var.solution.category_name
     Region       = var.aws.region
@@ -59,408 +45,242 @@ locals {
     Standby      = "true"
   }
 
-  # Project configuration for modules
-  project = {
-    name        = var.solution.abbr
-    environment = local.environment
+  #----------------------------------------------------------------------------
+  # Lambda Configuration (shared by document_processing, human_review, idp_api)
+  #----------------------------------------------------------------------------
+  lambda = {
+    runtime       = var.application.lambda_runtime
+    packages      = var.lambda_packages
+    source_hashes = var.lambda_source_hashes
   }
 }
 
 #------------------------------------------------------------------------------
 # Data Sources
 #------------------------------------------------------------------------------
-
 data "aws_caller_identity" "current" {}
-
 data "aws_region" "current" {}
 
+#===============================================================================
+# FOUNDATION - Core infrastructure that other modules depend on
+#===============================================================================
 #------------------------------------------------------------------------------
-# KMS Key for Encryption (DR Region)
+# Security (KMS + Lambda VPC Security Group)
 #------------------------------------------------------------------------------
-# Note: This is the same key created by dr_vault module in prod.
-# If dr_vault was deployed from prod, this key already exists.
-# Otherwise, we create a new key for DR encryption.
+module "security" {
+  source = "../../modules/solution/security"
 
-resource "aws_kms_key" "main" {
-  description             = "${local.name_prefix} encryption key"
-  deletion_window_in_days = var.security.kms_deletion_window_days
-  enable_key_rotation     = var.security.enable_kms_key_rotation
-
-  tags = local.common_tags
-}
-
-resource "aws_kms_alias" "main" {
-  name          = "alias/${local.name_prefix}"
-  target_key_id = aws_kms_key.main.key_id
+  project            = local.project
+  security           = var.security
+  lambda_vpc_enabled = var.application.lambda_vpc_enabled
+  network            = var.network
+  common_tags        = local.common_tags
 }
 
 #------------------------------------------------------------------------------
-# Storage Module (S3 + DynamoDB)
-#------------------------------------------------------------------------------
-# DR Strategy:
-# - S3: Uses replicated bucket (created by dr_vault module from prod)
-#   OR creates new bucket if starting fresh
-# - DynamoDB: Creates tables that can be restored from backup
-#
-# IMPORTANT: For failover, DynamoDB tables must be restored from backup
-# before using the system. See README.md for restore procedures.
-
-module "storage" {
-  source = "../../modules/solution/storage"
-
-  project        = local.project
-  aws_account_id = data.aws_caller_identity.current.account_id
-
-  storage = var.storage
-
-  database = var.database
-
-  # Trigger document processing on upload
-  processing_trigger_lambda_arn = module.document_processing.lambda_arns.validate_document
-
-  kms_key_arn = aws_kms_key.main.arn
-
-  common_tags = local.common_tags
-}
-
-#------------------------------------------------------------------------------
-# Document Processing Module (Textract + Comprehend + Step Functions)
-#------------------------------------------------------------------------------
-
-module "document_processing" {
-  source = "../../modules/solution/document-processing"
-
-  project = local.project
-
-  lambda_runtime = var.application.lambda_runtime
-
-  # Lambda deployment packages (placeholders - to be built by CI/CD)
-  lambda_packages = {
-    start_analysis      = var.lambda_packages.start_analysis
-    process_textract    = var.lambda_packages.process_textract
-    comprehend_analysis = var.lambda_packages.comprehend_analysis
-    validate_document   = var.lambda_packages.validate_document
-    finalize_results    = var.lambda_packages.finalize_results
-  }
-
-  lambda_source_hashes = {
-    start_analysis      = var.lambda_source_hashes.start_analysis
-    process_textract    = var.lambda_source_hashes.process_textract
-    comprehend_analysis = var.lambda_source_hashes.comprehend_analysis
-    validate_document   = var.lambda_source_hashes.validate_document
-    finalize_results    = var.lambda_source_hashes.finalize_results
-  }
-
-  # VPC configuration (optional - for VPC-bound Lambda)
-  vpc_subnet_ids         = var.application.lambda_vpc_enabled ? var.network.private_subnet_ids : null
-  vpc_security_group_ids = var.application.lambda_vpc_enabled ? [aws_security_group.lambda[0].id] : []
-
-  # Storage references
-  documents_bucket_name = module.storage.documents_bucket_name
-  documents_bucket_arn  = module.storage.documents_bucket_arn
-  results_table_name    = module.storage.results_table_name
-  results_table_arn     = module.storage.results_table_arn
-
-  # Human review queue (for low-confidence results)
-  human_review_queue_url = var.human_review.enabled ? module.human_review[0].review_queue_url : null
-  human_review_queue_arn = var.human_review.enabled ? module.human_review[0].review_queue_arn : null
-
-  # AI service configurations
-  textract   = var.textract
-  comprehend = var.comprehend
-
-  logging    = var.logging
-  monitoring = var.monitoring
-
-  kms_key_arn = aws_kms_key.main.arn
-
-  common_tags = local.common_tags
-}
-
-#------------------------------------------------------------------------------
-# Human Review Module (A2I)
-#------------------------------------------------------------------------------
-
-module "human_review" {
-  source = "../../modules/solution/human-review"
-  count  = var.human_review.enabled ? 1 : 0
-
-  project = local.project
-
-  lambda_runtime = var.application.lambda_runtime
-
-  lambda_packages = {
-    process_review = var.lambda_packages.process_review
-    create_task    = var.lambda_packages.create_task
-    complete_task  = var.lambda_packages.complete_task
-  }
-
-  lambda_source_hashes = {
-    process_review = var.lambda_source_hashes.process_review
-    create_task    = var.lambda_source_hashes.create_task
-    complete_task  = var.lambda_source_hashes.complete_task
-  }
-
-  vpc_subnet_ids         = var.application.lambda_vpc_enabled ? var.network.private_subnet_ids : null
-  vpc_security_group_ids = var.application.lambda_vpc_enabled ? [aws_security_group.lambda[0].id] : []
-
-  # Storage references
-  documents_bucket_name = module.storage.documents_bucket_name
-  documents_bucket_arn  = module.storage.documents_bucket_arn
-  results_table_name    = module.storage.results_table_name
-  results_table_arn     = module.storage.results_table_arn
-
-  # Step Functions reference
-  step_functions_arn = module.document_processing.state_machine_arn
-
-  # A2I configuration
-  a2i = var.human_review
-
-  kms_key_arn = aws_kms_key.main.arn
-
-  common_tags = local.common_tags
-}
-
-#------------------------------------------------------------------------------
-# API Module (API Gateway + Lambda)
-#------------------------------------------------------------------------------
-
-module "api" {
-  source = "../../modules/solution/api"
-
-  project = local.project
-
-  lambda_runtime = var.application.lambda_runtime
-
-  lambda_packages = {
-    upload  = var.lambda_packages.api_upload
-    status  = var.lambda_packages.api_status
-    results = var.lambda_packages.api_results
-    list    = var.lambda_packages.api_list
-    delete  = var.lambda_packages.api_delete
-    health  = var.lambda_packages.api_health
-  }
-
-  lambda_source_hashes = {
-    upload  = var.lambda_source_hashes.api_upload
-    status  = var.lambda_source_hashes.api_status
-    results = var.lambda_source_hashes.api_results
-    list    = var.lambda_source_hashes.api_list
-    delete  = var.lambda_source_hashes.api_delete
-    health  = var.lambda_source_hashes.api_health
-  }
-
-  vpc_subnet_ids         = var.application.lambda_vpc_enabled ? var.network.private_subnet_ids : null
-  vpc_security_group_ids = var.application.lambda_vpc_enabled ? [aws_security_group.lambda[0].id] : []
-
-  # Storage references
-  documents_bucket_name = module.storage.documents_bucket_name
-  documents_bucket_arn  = module.storage.documents_bucket_arn
-  results_table_name    = module.storage.results_table_name
-  results_table_arn     = module.storage.results_table_arn
-
-  # Step Functions reference
-  state_machine_arn = module.document_processing.state_machine_arn
-
-  # Authentication
-  cognito_user_pool_arn = var.auth.enabled ? module.auth[0].user_pool_arn : null
-
-  # API configuration
-  api = var.api
-
-  logging    = var.logging
-  monitoring = var.monitoring
-
-  kms_key_arn = aws_kms_key.main.arn
-
-  common_tags = local.common_tags
-}
-
-#------------------------------------------------------------------------------
-# Authentication Module (Cognito)
+# Authentication (Cognito)
 #------------------------------------------------------------------------------
 # Note: Cognito user pools cannot be replicated across regions.
-# DR options:
-# 1. Create new user pool and have users re-register
-# 2. Export/import users via CLI before failover
-# 3. Use external IdP (Okta, Auth0) that works across regions
-
+# DR options: re-register users, export/import via CLI, or use external IdP
+#------------------------------------------------------------------------------
 module "auth" {
   source = "../../modules/aws/cognito"
   count  = var.auth.enabled ? 1 : 0
 
   user_pool_name = "${local.name_prefix}-users"
+  auth           = var.auth
+  common_tags    = local.common_tags
 
-  # Username configuration
-  username_attributes      = var.auth.username_attributes
-  auto_verified_attributes = var.auth.auto_verified_attributes
-
-  # Password policy
-  password_minimum_length    = var.auth.password_minimum_length
-  password_require_lowercase = var.auth.password_require_lowercase
-  password_require_numbers   = var.auth.password_require_numbers
-  password_require_symbols   = var.auth.password_require_symbols
-  password_require_uppercase = var.auth.password_require_uppercase
-
-  # MFA
-  mfa_configuration = var.auth.mfa_configuration
-
-  # Advanced security
-  advanced_security_mode = var.auth.advanced_security_mode
-
-  # Domain
-  domain = var.auth.domain
-
-  # Clients
   clients = {
     web = {
-      generate_secret = false
-      explicit_auth_flows = [
-        "ALLOW_USER_SRP_AUTH",
-        "ALLOW_REFRESH_TOKEN_AUTH"
-      ]
-      callback_urls = var.auth.callback_urls
-      logout_urls   = var.auth.logout_urls
+      generate_secret     = false
+      explicit_auth_flows = ["ALLOW_USER_SRP_AUTH", "ALLOW_REFRESH_TOKEN_AUTH"]
+      callback_urls       = var.auth.callback_urls
+      logout_urls         = var.auth.logout_urls
     }
     api = {
-      generate_secret = true
-      explicit_auth_flows = [
-        "ALLOW_USER_PASSWORD_AUTH",
-        "ALLOW_REFRESH_TOKEN_AUTH"
-      ]
+      generate_secret     = true
+      explicit_auth_flows = ["ALLOW_USER_PASSWORD_AUTH", "ALLOW_REFRESH_TOKEN_AUTH"]
     }
   }
 
-  # User groups
   user_groups = {
-    admins = {
-      description = "IDP Administrators"
-      precedence  = 1
-    }
-    reviewers = {
-      description = "Human Review Team"
-      precedence  = 2
-    }
-    users = {
-      description = "Standard Users"
-      precedence  = 3
-    }
+    admins    = { description = "IDP Administrators", precedence = 1 }
+    reviewers = { description = "Human Review Team", precedence = 2 }
+    users     = { description = "Standard Users", precedence = 3 }
   }
+}
 
+#===============================================================================
+# CORE SOLUTION - Primary solution components for document processing
+#===============================================================================
+#------------------------------------------------------------------------------
+# Storage (S3 + DynamoDB)
+#------------------------------------------------------------------------------
+# DR: S3 receives replicated docs, DynamoDB needs restore from backup
+#------------------------------------------------------------------------------
+module "storage" {
+  source = "../../modules/solution/storage"
+
+  project        = local.project
+  aws_account_id = data.aws_caller_identity.current.account_id
+  storage        = var.storage
+  database       = var.database
+  kms_key_arn    = module.security.kms_key_arn
+  common_tags    = local.common_tags
+
+  depends_on = [module.security]
+}
+
+#------------------------------------------------------------------------------
+# Human Review (A2I) - Created before document_processing to avoid circular deps
+#------------------------------------------------------------------------------
+module "human_review" {
+  source = "../../modules/solution/human-review"
+  count  = var.human_review.enabled ? 1 : 0
+
+  project     = local.project
+  lambda      = local.lambda
+  vpc         = module.security.lambda_vpc
+  storage     = module.storage.outputs
+  a2i         = var.human_review
+  kms_key_arn = module.security.kms_key_arn
   common_tags = local.common_tags
+
+  depends_on = [module.security, module.storage]
 }
 
 #------------------------------------------------------------------------------
-# Lambda VPC Security Group (optional)
+# Document Processing (Textract + Comprehend + Step Functions)
 #------------------------------------------------------------------------------
+module "document_processing" {
+  source = "../../modules/solution/document-processing"
 
-resource "aws_security_group" "lambda" {
-  count = var.application.lambda_vpc_enabled ? 1 : 0
+  project      = local.project
+  lambda       = local.lambda
+  vpc          = module.security.lambda_vpc
+  storage      = module.storage.outputs
+  ai_services  = { textract = var.textract, comprehend = var.comprehend }
+  human_review = var.human_review.enabled ? module.human_review[0].outputs : null
+  logging      = var.logging
+  monitoring   = var.monitoring
+  kms_key_arn  = module.security.kms_key_arn
+  common_tags  = local.common_tags
 
-  name        = "${local.name_prefix}-lambda-sg"
-  description = "Security group for Lambda functions"
-  vpc_id      = var.network.vpc_id
-
-  egress {
-    from_port   = 0
-    to_port     = 0
-    protocol    = "-1"
-    cidr_blocks = ["0.0.0.0/0"]
-    description = "Allow all outbound traffic"
-  }
-
-  tags = merge(local.common_tags, {
-    Name = "${local.name_prefix}-lambda-sg"
-  })
+  depends_on = [module.security, module.storage, module.human_review]
 }
 
 #------------------------------------------------------------------------------
-# CloudWatch Alarms
+# IDP API (REST interface for document upload, status, and results)
 #------------------------------------------------------------------------------
+module "idp_api" {
+  source = "../../modules/solution/api"
 
-resource "aws_cloudwatch_metric_alarm" "api_errors" {
-  count = var.monitoring.enable_alarms ? 1 : 0
+  project               = local.project
+  lambda                = local.lambda
+  vpc                   = module.security.lambda_vpc
+  storage               = module.storage.outputs
+  state_machine_arn     = module.document_processing.state_machine_arn
+  cognito_user_pool_arn = var.auth.enabled ? module.auth[0].user_pool_arn : null
+  api                   = var.api
+  logging               = var.logging
+  monitoring            = var.monitoring
+  kms_key_arn           = module.security.kms_key_arn
+  common_tags           = local.common_tags
 
-  alarm_name          = "${local.name_prefix}-api-5xx-errors"
-  comparison_operator = "GreaterThanThreshold"
-  evaluation_periods  = 2
-  metric_name         = "5XXError"
-  namespace           = "AWS/ApiGateway"
-  period              = 300
-  statistic           = "Sum"
-  threshold           = var.monitoring.api_error_threshold
-  alarm_description   = "API Gateway 5XX errors exceeded threshold"
+  depends_on = [module.security, module.auth, module.storage, module.document_processing]
+}
 
-  dimensions = {
-    ApiName = module.api.api_id
-    Stage   = var.api.stage_name
-  }
+#===============================================================================
+# INTEGRATIONS - Wiring between modules (avoids circular dependencies)
+#===============================================================================
+#------------------------------------------------------------------------------
+# SSM Parameter: Step Functions ARN (for human_review Lambda to lookup at runtime)
+#------------------------------------------------------------------------------
+resource "aws_ssm_parameter" "step_functions_arn" {
+  count = var.human_review.enabled ? 1 : 0
 
-  alarm_actions = var.monitoring.sns_topic_arn != null ? [var.monitoring.sns_topic_arn] : []
+  name        = module.human_review[0].ssm_step_functions_arn_path
+  description = "Document processing Step Functions state machine ARN"
+  type        = "String"
+  value       = module.document_processing.state_machine_arn
 
   tags = local.common_tags
+
+  depends_on = [module.document_processing]
 }
 
-resource "aws_cloudwatch_metric_alarm" "step_functions_failed" {
-  count = var.monitoring.enable_alarms ? 1 : 0
+#------------------------------------------------------------------------------
+# S3 → Lambda Trigger (document upload triggers processing)
+#------------------------------------------------------------------------------
+resource "aws_lambda_permission" "s3_invoke" {
+  statement_id  = "AllowS3Invoke"
+  action        = "lambda:InvokeFunction"
+  function_name = module.document_processing.lambda_arns.validate_document
+  principal     = "s3.amazonaws.com"
+  source_arn    = module.storage.documents_bucket_arn
 
-  alarm_name          = "${local.name_prefix}-sfn-failed-executions"
-  comparison_operator = "GreaterThanThreshold"
-  evaluation_periods  = 1
-  metric_name         = "ExecutionsFailed"
-  namespace           = "AWS/States"
-  period              = 300
-  statistic           = "Sum"
-  threshold           = var.monitoring.sfn_failure_threshold
-  alarm_description   = "Step Functions execution failures exceeded threshold"
+  depends_on = [module.document_processing]
+}
 
-  dimensions = {
-    StateMachineArn = module.document_processing.state_machine_arn
+resource "aws_s3_bucket_notification" "document_upload" {
+  bucket = module.storage.documents_bucket_id
+
+  lambda_function {
+    lambda_function_arn = module.document_processing.lambda_arns.validate_document
+    events              = ["s3:ObjectCreated:*"]
+    filter_prefix       = "uploads/"
   }
 
-  alarm_actions = var.monitoring.sns_topic_arn != null ? [var.monitoring.sns_topic_arn] : []
+  depends_on = [aws_lambda_permission.s3_invoke]
+}
 
-  tags = local.common_tags
+#===============================================================================
+# OPERATIONS - Observability and compliance (DR does not replicate further)
+#===============================================================================
+#------------------------------------------------------------------------------
+# Best Practices (Budget + Config Rules + GuardDuty)
+#------------------------------------------------------------------------------
+module "best_practices" {
+  source = "../../modules/solution/best-practices"
+
+  providers = {
+    aws    = aws
+    aws.dr = aws.dr
+  }
+
+  name_prefix   = local.name_prefix
+  environment   = local.environment
+  kms_key_arn   = module.security.kms_key_arn
+  sns_topic_arn = var.monitoring.sns_topic_arn != null ? var.monitoring.sns_topic_arn : ""
+  common_tags   = local.common_tags
+
+  budget       = var.budget
+  config_rules = var.config_rules
+  guardduty_enhanced = {
+    enabled                   = var.guardduty.enabled
+    enable_malware_protection = var.guardduty.enable_malware_protection
+    severity_threshold        = var.guardduty.severity_threshold
+  }
+
+  depends_on = [module.security]
 }
 
 #------------------------------------------------------------------------------
-# DR Status Outputs
+# Monitoring (CloudWatch Alarms)
 #------------------------------------------------------------------------------
-# These outputs help operators verify DR readiness
+module "monitoring" {
+  source = "../../modules/solution/monitoring"
+  count  = var.monitoring.enable_alarms ? 1 : 0
 
-output "dr_status" {
-  description = "DR environment status summary"
-  value = {
-    environment = local.environment
-    region      = data.aws_region.current.id
-    status      = "STANDBY"
-
-    # S3 documents (replicated from prod)
-    documents_bucket = module.storage.documents_bucket_name
-    documents_bucket_arn = module.storage.documents_bucket_arn
-
-    # DynamoDB tables (need restore from backup for failover)
-    results_table = module.storage.results_table_name
-    jobs_table    = module.storage.jobs_table_name
-
-    # API endpoint (available after failover)
-    api_endpoint = module.api.invoke_url
-
-    # Processing
+  project = local.project
+  resources = {
+    api_id            = module.idp_api.api_id
+    api_stage         = var.api.stage_name
     state_machine_arn = module.document_processing.state_machine_arn
-
-    # Auth
-    cognito_enabled    = var.auth.enabled
-    user_pool_id       = var.auth.enabled ? module.auth[0].user_pool_id : null
-
-    # Failover checklist
-    failover_checklist = [
-      "1. Verify S3 documents are replicated (check bucket contents)",
-      "2. Restore DynamoDB tables from backup (AWS Backup console)",
-      "3. Update DNS to point to DR API endpoint",
-      "4. Notify users if Cognito re-registration is needed",
-      "5. Test document upload and processing",
-      "6. Monitor CloudWatch for errors"
-    ]
   }
+  monitoring  = var.monitoring
+  common_tags = local.common_tags
+
+  depends_on = [module.idp_api, module.document_processing]
 }

@@ -84,8 +84,8 @@ variable "storage" {
     document_expiration_days           = optional(number, 365)
     noncurrent_version_expiration_days = optional(number, 30)
     # Direct upload settings
-    enable_direct_upload   = optional(bool, true)
-    cors_allowed_origins   = optional(list(string), ["*"])
+    enable_direct_upload = optional(bool, true)
+    cors_allowed_origins = optional(list(string), ["*"])
     # Output bucket
     create_output_bucket   = optional(bool, true)
     output_expiration_days = optional(number, 30)
@@ -101,9 +101,9 @@ variable "database" {
   description = "DynamoDB configuration"
   type = object({
     # Capacity mode
-    billing_mode   = optional(string, "PAY_PER_REQUEST")
-    read_capacity  = optional(number, 5)
-    write_capacity = optional(number, 5)
+    billing_mode       = optional(string, "PAY_PER_REQUEST")
+    read_capacity      = optional(number, 5)
+    write_capacity     = optional(number, 5)
     gsi_read_capacity  = optional(number, 5)
     gsi_write_capacity = optional(number, 5)
     # Features
@@ -315,36 +315,46 @@ variable "logging" {
 variable "monitoring" {
   description = "Monitoring and alerting configuration"
   type = object({
-    xray_enabled          = optional(bool, true)
-    enable_alarms         = optional(bool, true)
-    sns_topic_arn         = optional(string)
-    api_error_threshold   = optional(number, 10)
+    xray_enabled  = optional(bool, true)
+    enable_alarms = optional(bool, true)
+    sns_topic_arn = optional(string)
+    # API Gateway thresholds
+    api_error_threshold = optional(number, 10)
+    api_4xx_threshold   = optional(number, 100)
+    api_latency_p95_ms  = optional(number, 2000)
+    # Step Functions thresholds
     sfn_failure_threshold = optional(number, 5)
+    # Lambda thresholds
+    lambda_error_rate_percent = optional(number, 5)
+    lambda_duration_p95_ms    = optional(number, 60000)
   })
   default = {}
 }
 
 #------------------------------------------------------------------------------
-# DR Configuration (dr.tfvars) - DR Environment Settings
+# DR Configuration (dr.tfvars)
+#------------------------------------------------------------------------------
+# Note: In DR environment, this controls local DR settings (not replication)
+# The DR environment IS the replication destination from production
 #------------------------------------------------------------------------------
 
 variable "dr" {
-  description = "Disaster Recovery configuration for DR environment"
+  description = "Disaster Recovery configuration - strategy, replication, vault, and backup settings"
   type = object({
     # Master DR toggle and strategy
-    enabled       = optional(bool, true)
-    strategy      = optional(string, "ACTIVE_PASSIVE")
-    rto_minutes   = optional(number, 240)
-    rpo_minutes   = optional(number, 60)
-    failover_mode = optional(string, "manual")
+    enabled       = optional(bool, false)
+    strategy      = optional(string, "ACTIVE_PASSIVE") # ACTIVE_PASSIVE, ACTIVE_ACTIVE, BACKUP_ONLY
+    rto_minutes   = optional(number, 240)              # Recovery Time Objective
+    rpo_minutes   = optional(number, 60)               # Recovery Point Objective
+    failover_mode = optional(string, "manual")         # manual, automatic
 
-    # Cross-region replication settings
-    replication_enabled             = optional(bool, false)  # DR doesn't replicate further
+    # Cross-region replication settings (typically disabled in DR env)
+    replication_enabled             = optional(bool, false)
     storage_replication_class       = optional(string, "STANDARD")
     enable_replication_time_control = optional(bool, true)
 
-    # DR vault settings
-    vault_enabled                            = optional(bool, true)
+    # DR vault settings (typically disabled in DR env - we ARE the vault)
+    vault_enabled                            = optional(bool, false)
     vault_kms_deletion_window_days           = optional(number, 30)
     vault_transition_to_ia_days              = optional(number, 30)
     vault_noncurrent_version_expiration_days = optional(number, 90)
@@ -357,10 +367,63 @@ variable "dr" {
     weekly_backup_retention_days = optional(number, 90)
 
     # DR operations
-    test_schedule      = optional(string, "cron(0 2 ? * SUN *)")
+    test_schedule      = optional(string, "")
     notification_email = optional(string, "")
   })
   default = {
-    enabled = true
+    enabled = false
+  }
+}
+
+#------------------------------------------------------------------------------
+# Best Practices - Cost Optimization (best-practices.tfvars)
+#------------------------------------------------------------------------------
+
+variable "budget" {
+  description = "AWS Budgets configuration for cost management"
+  type = object({
+    enabled               = optional(bool, true)
+    monthly_amount        = optional(number, 1500)
+    alert_thresholds      = optional(list(number), [50, 80, 100])
+    enable_forecast_alert = optional(bool, true)
+    alert_emails          = optional(list(string), [])
+  })
+  default = {
+    enabled = false
+  }
+}
+
+#------------------------------------------------------------------------------
+# Best Practices - Operational Excellence (best-practices.tfvars)
+#------------------------------------------------------------------------------
+
+variable "config_rules" {
+  description = "AWS Config rules for compliance monitoring"
+  type = object({
+    enabled                  = optional(bool, true)
+    enable_recorder          = optional(bool, true)
+    retention_days           = optional(number, 365)
+    enable_security_rules    = optional(bool, true)
+    enable_reliability_rules = optional(bool, true)
+  })
+  default = {
+    enabled = false
+  }
+}
+
+#------------------------------------------------------------------------------
+# Best Practices - Security (best-practices.tfvars)
+#------------------------------------------------------------------------------
+
+variable "guardduty" {
+  description = "GuardDuty threat detection configuration"
+  type = object({
+    enabled                   = optional(bool, true)
+    enable_s3_protection      = optional(bool, true)
+    enable_malware_protection = optional(bool, true)
+    severity_threshold        = optional(number, 7)
+  })
+  default = {
+    enabled = false
   }
 }
