@@ -1,69 +1,139 @@
-#WIDTH: 28,18,12,30,48,10,12,33,16,18,24,42,12
-#ALIGN: left,left,center,left,left,center,left,left,center,left,left,left,center
-Parameter Name,Category,Environment,Default Value,Description,Required,Data Type,Validation Rules,Security Level,Owner Team,Dependencies,Notes,Last Updated
-IDP_SOLUTION_NAME,Application,All,AWS Intelligent Document Processing,IDP solution identifier for logging and monitoring,Yes,String,Max 50 characters,Public,Development,None,Used in CloudWatch logs and metrics,[DATE]
-IDP_VERSION,Application,All,1.0.0,Current IDP solution version,Yes,String,Semantic versioning format,Public,Development,None,Updated with releases,[DATE]
-IDP_ENVIRONMENT,Application,All,development,Deployment environment identifier,Yes,String,development|staging|production,Public,Operations,None,Controls feature flags and logging,[DATE]
-AWS_REGION,AWS,All,us-east-1,Primary AWS region for IDP services,Yes,String,Valid AWS region code,Public,Infrastructure,Service availability,Must support Textract Comprehend and A2I,[DATE]
-AWS_ACCOUNT_ID,AWS,All,[account-id],AWS account ID for cross-service references,Yes,String,12-digit AWS account ID,Confidential,Infrastructure,IAM policies,Used for ARN construction,[DATE]
-AWS_DR_REGION,AWS,Production,us-west-2,Disaster recovery AWS region,No,String,Valid AWS region code,Public,Infrastructure,DR strategy,Cross-region replication target,[DATE]
-TEXTRACT_ENDPOINT,AWS AI Services,All,textract.[region].amazonaws.com,Amazon Textract service endpoint,Yes,String,Valid AWS service endpoint,Public,AI/ML Team,AWS_REGION,Regional service endpoint,[DATE]
-TEXTRACT_ASYNC_ENABLED,AWS AI Services,All,true,Enable async Textract processing for large documents,Yes,Boolean,true|false,Public,AI/ML Team,S3 bucket,Required for documents >5 pages,[DATE]
-TEXTRACT_FEATURES,AWS AI Services,All,"FORMS,TABLES",Textract feature types to enable,Yes,String,FORMS|TABLES|QUERIES,Public,AI/ML Team,Textract endpoint,Extract forms and tables,[DATE]
-COMPREHEND_ENDPOINT,AWS AI Services,All,comprehend.[region].amazonaws.com,Amazon Comprehend service endpoint,Yes,String,Valid AWS service endpoint,Public,AI/ML Team,AWS_REGION,Regional service endpoint,[DATE]
-COMPREHEND_PII_ENABLED,AWS AI Services,All,true,Enable PII detection and redaction,Yes,Boolean,true|false,Public,AI/ML Team,Comprehend endpoint,Required for compliance,[DATE]
-COMPREHEND_LANGUAGE,AWS AI Services,All,en,Default language for Comprehend analysis,Yes,String,Valid language code,Public,AI/ML Team,Comprehend endpoint,English documents,[DATE]
-A2I_ENABLED,AWS AI Services,All,true,Enable Amazon A2I human review workflows,Yes,Boolean,true|false,Public,AI/ML Team,A2I configuration,Human-in-the-loop for low confidence,[DATE]
-A2I_FLOW_DEFINITION_ARN,AWS AI Services,All,[flow-definition-arn],A2I flow definition ARN for human review,Yes,String,Valid A2I flow definition ARN,Confidential,AI/ML Team,A2I setup,Document review workflow,[DATE]
-A2I_WORKFORCE_ARN,AWS AI Services,All,[workforce-arn],A2I private workforce ARN,Yes,String,Valid workforce ARN,Confidential,AI/ML Team,A2I setup,Private workforce for reviews,[DATE]
-A2I_TASK_UI_ARN,AWS AI Services,All,[task-ui-arn],A2I human task UI template ARN,Yes,String,Valid task UI ARN,Confidential,AI/ML Team,A2I setup,Review interface template,[DATE]
-S3_BUCKET_DOCUMENTS,Storage,All,[document-bucket-name],S3 bucket for document uploads,Yes,String,Valid S3 bucket name,Confidential,Infrastructure,Bucket creation,Must be globally unique,[DATE]
-S3_BUCKET_RESULTS,Storage,All,[results-bucket-name],S3 bucket for processing results,Yes,String,Valid S3 bucket name,Confidential,Infrastructure,Bucket creation,Must be globally unique,[DATE]
-S3_LIFECYCLE_DAYS,Storage,All,90,Days before transitioning to S3 Standard-IA,Yes,Integer,30-365,Public,Infrastructure,Cost management,Optimize storage costs,[DATE]
-S3_GLACIER_DAYS,Storage,All,365,Days before transitioning to S3 Glacier,Yes,Integer,180-730,Public,Infrastructure,Cost management,Archive old documents,[DATE]
-DYNAMODB_TABLE_DOCUMENTS,Storage,All,idp-documents,DynamoDB table for document metadata,Yes,String,Valid DynamoDB table name,Public,Infrastructure,Table creation,Primary metadata store,[DATE]
-DYNAMODB_TABLE_JOBS,Storage,All,idp-processing-jobs,DynamoDB table for processing jobs,Yes,String,Valid DynamoDB table name,Public,Infrastructure,Table creation,Job tracking and status,[DATE]
-LAMBDA_TIMEOUT,Lambda,All,300,Lambda function timeout in seconds,Yes,Integer,1-900,Public,Development,Processing complexity,Adjust based on document size,[DATE]
-LAMBDA_MEMORY,Lambda,All,1024,Lambda function memory in MB,Yes,Integer,128-10240,Public,Development,Performance requirements,Tune for cost and performance,[DATE]
-LAMBDA_RESERVED_CONCURRENCY,Lambda,All,100,Reserved Lambda concurrency,Yes,Integer,0-1000,Public,Operations,Cost management,Prevent runaway costs,[DATE]
-LAMBDA_PROVISIONED_CONCURRENCY,Lambda,Production,25,Provisioned Lambda concurrency,No,Integer,0-500,Public,Operations,Performance optimization,Reduce cold starts,[DATE]
-STEP_FUNCTIONS_ARN,Orchestration,All,[state-machine-arn],Step Functions state machine ARN,Yes,String,Valid Step Functions ARN,Confidential,Development,State machine creation,Document processing workflow,[DATE]
-API_GATEWAY_STAGE,API,All,v1,API Gateway deployment stage,Yes,String,Valid stage name,Public,Development,API versioning,Version API endpoints,[DATE]
-API_THROTTLE_BURST,API,All,1000,API Gateway burst throttle limit,Yes,Integer,0-10000,Public,Infrastructure,Rate limiting,Prevent API abuse,[DATE]
-API_THROTTLE_RATE,API,All,500,API Gateway steady-state throttle rate,Yes,Integer,0-10000,Public,Infrastructure,Rate limiting,Requests per second limit,[DATE]
-COGNITO_USER_POOL_ID,Authentication,All,[user-pool-id],Cognito User Pool ID for authentication,Yes,String,Valid Cognito User Pool ID,Confidential,Security Team,Cognito setup,User authentication,[DATE]
-COGNITO_CLIENT_ID,Authentication,All,[client-id],Cognito App Client ID,Yes,String,Valid Cognito client ID,Confidential,Security Team,User Pool creation,API authentication,[DATE]
-DOCUMENT_MAX_SIZE_MB,Processing,All,25,Maximum document size in MB,Yes,Integer,1-100,Public,AI/ML Team,Textract limits,AWS Textract limitation,[DATE]
-DOCUMENT_FORMATS,Processing,All,"PDF,JPEG,PNG,TIFF",Supported document formats,Yes,String,Comma-separated format list,Public,AI/ML Team,Textract capabilities,Based on AWS service support,[DATE]
-PROCESSING_TIMEOUT,Processing,All,600,Document processing timeout in seconds,Yes,Integer,60-3600,Public,AI/ML Team,Document complexity,Timeout for complete processing,[DATE]
-BATCH_SIZE,Processing,All,50,Number of documents per batch processing,Yes,Integer,1-100,Public,Development,Resource limits,Optimize for throughput,[DATE]
-CONFIDENCE_THRESHOLD,AI/ML,All,0.85,Minimum confidence score for auto-processing,Yes,Float,0.0-1.0,Public,AI/ML Team,Extraction accuracy,Below threshold routes to A2I human review,[DATE]
-ACCURACY_TARGET,AI/ML,All,0.95,Target extraction accuracy,Yes,Float,0.80-0.99,Public,AI/ML Team,Quality assurance,95% accuracy target per presales,[DATE]
-DOCUMENT_TYPES,AI/ML,All,"invoice,purchase_order,contract",Supported document classification types,Yes,String,Comma-separated type list,Public,AI/ML Team,Document scope,2-3 document types per presales scope,[DATE]
-KMS_KEY_ID,Security,All,[kms-key-id],KMS key for data encryption,Yes,String,Valid KMS key ID or ARN,Secret,Security Team,KMS key creation,For S3 and Lambda encryption,[DATE]
-IAM_ROLE_LAMBDA,Security,All,[lambda-execution-role],IAM role for Lambda functions,Yes,String,Valid IAM role ARN,Confidential,Security Team,IAM configuration,Principle of least privilege,[DATE]
-IAM_ROLE_TEXTRACT,Security,All,[textract-service-role],IAM role for Textract async jobs,Yes,String,Valid IAM role ARN,Confidential,Security Team,IAM configuration,Textract service permissions,[DATE]
-IAM_ROLE_A2I,Security,All,[a2i-execution-role],IAM role for A2I human review,Yes,String,Valid IAM role ARN,Confidential,Security Team,IAM configuration,A2I service permissions,[DATE]
-CORS_ALLOWED_ORIGINS,Security,All,"https://[domain].com",Allowed CORS origins for API,Yes,String,Comma-separated HTTPS URLs,Confidential,Security Team,Frontend domains,Restrict to known domains,[DATE]
-VPC_ID,Network,All,[vpc-id],VPC ID for Lambda and endpoints,Yes,String,Valid VPC ID,Confidential,Network Team,VPC creation,Isolated network environment,[DATE]
-VPC_CIDR,Network,All,10.0.0.0/16,VPC CIDR block,Yes,String,Valid CIDR notation,Public,Network Team,IP planning,Plan for future growth,[DATE]
-PRIVATE_SUBNET_IDS,Network,All,"[subnet-1],[subnet-2]",Private subnet IDs for Lambda,Yes,String,Comma-separated subnet IDs,Confidential,Network Team,VPC_ID,Multiple AZs for HA,[DATE]
-SECURITY_GROUP_ID,Network,All,[security-group-id],Security group for Lambda functions,Yes,String,Valid security group ID,Confidential,Security Team,VPC_ID,Restrict network access,[DATE]
-VPC_ENDPOINT_S3,Network,All,[vpce-s3-id],VPC endpoint for S3 access,Yes,String,Valid VPC endpoint ID,Confidential,Network Team,VPC_ID,Private S3 access,[DATE]
-VPC_ENDPOINT_DYNAMODB,Network,All,[vpce-dynamodb-id],VPC endpoint for DynamoDB access,Yes,String,Valid VPC endpoint ID,Confidential,Network Team,VPC_ID,Private DynamoDB access,[DATE]
-VPC_ENDPOINT_TEXTRACT,Network,All,[vpce-textract-id],VPC endpoint for Textract access,Yes,String,Valid VPC endpoint ID,Confidential,Network Team,VPC_ID,Private Textract access,[DATE]
-VPC_ENDPOINT_COMPREHEND,Network,All,[vpce-comprehend-id],VPC endpoint for Comprehend access,Yes,String,Valid VPC endpoint ID,Confidential,Network Team,VPC_ID,Private Comprehend access,[DATE]
-CLOUDWATCH_LOG_GROUP,Monitoring,All,/aws/idp/application,CloudWatch log group for application logs,Yes,String,Valid log group name,Public,Operations,CloudWatch configuration,Centralized logging,[DATE]
-CLOUDWATCH_LOG_LEVEL,Monitoring,All,INFO,CloudWatch logging level,Yes,String,DEBUG|INFO|WARN|ERROR,Public,Operations,CloudWatch configuration,Production should use WARN or ERROR,[DATE]
-CLOUDWATCH_RETENTION_DAYS,Monitoring,All,30,CloudWatch log retention period,Yes,Integer,1-365,Public,Operations,Cost management,Balance cost and troubleshooting needs,[DATE]
-CLOUDWATCH_DASHBOARD,Monitoring,All,idp-production,CloudWatch dashboard name,Yes,String,Valid dashboard name,Public,Operations,Dashboard creation,Operational visibility,[DATE]
-XRAY_TRACING_ENABLED,Monitoring,All,true,Enable AWS X-Ray distributed tracing,Yes,Boolean,true|false,Public,Operations,X-Ray service,Essential for debugging,[DATE]
-SNS_TOPIC_ALERTS,Notifications,All,[sns-topic-arn],SNS topic for operational alerts,Yes,String,Valid SNS topic ARN,Confidential,Operations,SNS configuration,Alert on system events,[DATE]
-SNS_TOPIC_PROCESSING,Notifications,All,[sns-topic-arn],SNS topic for processing notifications,No,String,Valid SNS topic ARN,Confidential,Operations,SNS configuration,Notify on document completion,[DATE]
-SQS_DLQ_ARN,Error Handling,All,[sqs-dlq-arn],SQS dead letter queue for failed processing,Yes,String,Valid SQS queue ARN,Confidential,Development,SQS configuration,Error recovery mechanism,[DATE]
-RETRY_ATTEMPTS,Error Handling,All,3,Number of retry attempts for failures,Yes,Integer,0-10,Public,Development,Error handling,Prevent infinite loops,[DATE]
-RETRY_BACKOFF_BASE_MS,Error Handling,All,1000,Base retry backoff delay in milliseconds,Yes,Integer,100-60000,Public,Development,Rate limiting,Exponential backoff base,[DATE]
-BACKUP_ENABLED,Operations,All,true,Enable automated backups,Yes,Boolean,true|false,Public,Operations,Backup strategy,Data protection,[DATE]
-BACKUP_RETENTION_DAYS,Operations,All,30,Backup retention period in days,Yes,Integer,7-365,Public,Operations,Compliance requirements,Based on data policies,[DATE]
-COST_ALLOCATION_TAGS,Operations,All,"Environment=Production,Project=IDP,CostCenter=AI",Cost allocation tags for resources,Yes,String,Key=Value pairs,Public,Operations,Billing management,Track project costs,[DATE]
-
+#WIDTH:  45,14,50,50,50,45,8,12,27,14,14,12,30,12
+#ALIGN:  left,left,left,left,left,left,center,left,left,center,left,left,left,center
+Parameter Name,Category,Production,Test,DR,Description,Required,Data Type,Validation Rules,Security Level,Owner Team,Dependencies,Notes,Last Updated
+solution.name,Project,intelligent-document-processing,intelligent-document-processing,intelligent-document-processing,Solution name for resource naming,Yes,String,Valid string value,Public,Development,,IDP solution identifier,2025-12-01
+solution.abbr,Project,idp,idp,idp,Solution abbreviation (3-4 chars),Yes,String,Valid string value,Public,Development,,Used in resource naming prefix,2025-12-01
+solution.provider_name,Project,aws,aws,aws,Provider organization name,Yes,String,Valid string value,Public,Development,,AWS provider,2025-12-01
+solution.category_name,Project,ai,ai,ai,Solution category,Yes,String,Valid string value,Public,Development,,AI category,2025-12-01
+aws.region,Project,us-east-1,us-east-1,us-west-2,Primary AWS region,Yes,String,Valid region,Public,Infrastructure,,From SOW AWS_REGION,2025-12-01
+aws.dr_region,Project,us-west-2,us-west-2,us-east-1,DR region,Yes,String,Valid region,Public,Infrastructure,,From SOW AWS_DR_REGION,2025-12-01
+aws.profile,Project,,,,AWS CLI profile (optional),No,String,Valid profile,Confidential,Infrastructure,,Leave empty for default,2025-12-01
+ownership.cost_center,Project,CC-IDP-001,CC-IDP-001,CC-IDP-001,Cost center,Yes,String,Valid string,Public,Infrastructure,,From SOW COST_ALLOCATION_TAGS,2025-12-01
+ownership.owner_email,Project,idp-team@example.com,idp-team@example.com,idp-team@example.com,Owner email,Yes,String,Valid email,Confidential,Infrastructure,,Team notifications,2025-12-01
+ownership.project_code,Project,PRJ-IDP-2025,PRJ-IDP-2025,PRJ-IDP-2025,Project code,Yes,String,Valid string,Public,Infrastructure,,Tracking code,2025-12-01
+network.vpc_id,Networking,,,,VPC ID for Lambda VPC mode (optional),No,String,Valid VPC ID,Confidential,Networking,,Only if lambda_vpc_enabled=true,2025-12-01
+network.private_subnet_ids,Networking,[],[],[],Private subnet IDs for Lambda VPC mode,No,List(String),Valid subnet IDs,Confidential,Networking,,Only if lambda_vpc_enabled=true,2025-12-01
+security.kms_deletion_window_days,Security,30,7,30,KMS key deletion window (days),Yes,Integer,7-30,Public,Security,,Protection period,2025-12-01
+security.enable_kms_key_rotation,Security,true,true,true,Enable KMS key rotation,Yes,Boolean,true|false,Public,Security,,Security best practice,2025-12-01
+auth.enabled,Security,true,true,true,Enable Cognito authentication,Yes,Boolean,true|false,Public,Security,,API auth,2025-12-01
+auth.username_attributes,Security,"[""email""]","[""email""]","[""email""]",Username attributes,Yes,List(String),Valid attributes,Public,Security,,Email login,2025-12-01
+auth.auto_verified_attributes,Security,"[""email""]","[""email""]","[""email""]",Auto-verified attributes,Yes,List(String),Valid attributes,Public,Security,,Email verification,2025-12-01
+auth.password_minimum_length,Security,12,8,12,Minimum password length,Yes,Integer,8-99,Public,Security,,Password policy,2025-12-01
+auth.password_require_lowercase,Security,true,true,true,Require lowercase,Yes,Boolean,true|false,Public,Security,,Password policy,2025-12-01
+auth.password_require_numbers,Security,true,true,true,Require numbers,Yes,Boolean,true|false,Public,Security,,Password policy,2025-12-01
+auth.password_require_symbols,Security,true,false,true,Require symbols,Yes,Boolean,true|false,Public,Security,,Password policy,2025-12-01
+auth.password_require_uppercase,Security,true,true,true,Require uppercase,Yes,Boolean,true|false,Public,Security,,Password policy,2025-12-01
+auth.mfa_configuration,Security,OPTIONAL,OFF,OPTIONAL,MFA configuration,Yes,String,OFF|OPTIONAL|ON,Public,Security,,Multi-factor auth,2025-12-01
+auth.advanced_security_mode,Security,AUDIT,OFF,AUDIT,Advanced security mode,Yes,String,OFF|AUDIT|ENFORCED,Public,Security,,Threat detection,2025-12-01
+auth.domain,Security,,,,Cognito domain prefix,No,String,Valid domain,Public,Security,,Custom domain,2025-12-01
+auth.callback_urls,Security,[],[],[],OAuth callback URLs,No,List(String),Valid URLs,Public,Security,,OAuth config,2025-12-01
+auth.logout_urls,Security,[],[],[],OAuth logout URLs,No,List(String),Valid URLs,Public,Security,,OAuth config,2025-12-01
+application.lambda_runtime,Application,python3.11,python3.11,python3.11,Lambda runtime,Yes,String,Valid runtime,Public,Development,,Python 3.11,2025-12-01
+application.lambda_vpc_enabled,Application,false,false,false,Enable Lambda VPC mode,Yes,Boolean,true|false,Public,Development,,Requires network.vpc_id and network.private_subnet_ids,2025-12-01
+storage.force_destroy,Storage,false,true,false,Allow S3 bucket destruction,Yes,Boolean,true|false,Public,Infrastructure,,Test only,2025-12-01
+storage.versioning_enabled,Storage,true,true,true,Enable S3 versioning,Yes,Boolean,true|false,Public,Infrastructure,,DR requirement,2025-12-01
+storage.transition_to_ia_days,Storage,30,30,30,Transition to S3-IA (days),Yes,Integer,Positive integer,Public,Infrastructure,,Cost optimization,2025-12-01
+storage.transition_to_glacier_days,Storage,90,60,90,Transition to Glacier (days),Yes,Integer,Positive integer,Public,Infrastructure,,Long-term storage,2025-12-01
+storage.document_expiration_days,Storage,365,90,365,Document expiration (days),Yes,Integer,Positive integer,Public,Infrastructure,,Data retention,2025-12-01
+storage.noncurrent_version_expiration_days,Storage,30,7,30,Noncurrent version expiration,Yes,Integer,Positive integer,Public,Infrastructure,,Version cleanup,2025-12-01
+storage.enable_direct_upload,Storage,true,true,true,Enable direct S3 upload,Yes,Boolean,true|false,Public,Infrastructure,,Presigned URLs,2025-12-01
+storage.cors_allowed_origins,Storage,"[""*""]","[""*""]","[""*""]",CORS allowed origins,Yes,List(String),Valid origins,Public,Infrastructure,,API access,2025-12-01
+storage.create_output_bucket,Storage,true,true,true,Create output bucket,Yes,Boolean,true|false,Public,Infrastructure,,Processed results,2025-12-01
+storage.output_expiration_days,Storage,30,7,30,Output expiration (days),Yes,Integer,Positive integer,Public,Infrastructure,,Results retention,2025-12-01
+database.billing_mode,Database,PAY_PER_REQUEST,PAY_PER_REQUEST,PAY_PER_REQUEST,DynamoDB billing mode,Yes,String,PAY_PER_REQUEST|PROVISIONED,Public,Infrastructure,,On-demand for variable load,2025-12-01
+database.read_capacity,Database,5,5,5,DynamoDB read capacity (PROVISIONED),Yes,Integer,Positive integer,Public,Infrastructure,,Only for PROVISIONED,2025-12-01
+database.write_capacity,Database,5,5,5,DynamoDB write capacity (PROVISIONED),Yes,Integer,Positive integer,Public,Infrastructure,,Only for PROVISIONED,2025-12-01
+database.gsi_read_capacity,Database,5,5,5,GSI read capacity (PROVISIONED),Yes,Integer,Positive integer,Public,Infrastructure,,Only for PROVISIONED,2025-12-01
+database.gsi_write_capacity,Database,5,5,5,GSI write capacity (PROVISIONED),Yes,Integer,Positive integer,Public,Infrastructure,,Only for PROVISIONED,2025-12-01
+database.ttl_enabled,Database,true,true,true,Enable TTL,Yes,Boolean,true|false,Public,Infrastructure,,Auto-expire old records,2025-12-01
+database.point_in_time_recovery,Database,true,false,true,Enable point-in-time recovery,Yes,Boolean,true|false,Public,Infrastructure,,PITR backup,2025-12-01
+database.stream_enabled,Database,false,false,false,Enable DynamoDB streams,Yes,Boolean,true|false,Public,Infrastructure,,Event processing,2025-12-01
+database.stream_view_type,Database,NEW_AND_OLD_IMAGES,NEW_AND_OLD_IMAGES,NEW_AND_OLD_IMAGES,Stream view type,Yes,String,Valid stream type,Public,Infrastructure,,If streams enabled,2025-12-01
+database.enable_autoscaling,Database,false,false,false,Enable autoscaling,Yes,Boolean,true|false,Public,Infrastructure,,Only for PROVISIONED,2025-12-01
+database.autoscaling_min_read,Database,5,5,5,Autoscaling min read,Yes,Integer,Positive integer,Public,Infrastructure,,Only for PROVISIONED,2025-12-01
+database.autoscaling_max_read,Database,100,50,100,Autoscaling max read,Yes,Integer,Positive integer,Public,Infrastructure,,Only for PROVISIONED,2025-12-01
+database.autoscaling_min_write,Database,5,5,5,Autoscaling min write,Yes,Integer,Positive integer,Public,Infrastructure,,Only for PROVISIONED,2025-12-01
+database.autoscaling_max_write,Database,100,50,100,Autoscaling max write,Yes,Integer,Positive integer,Public,Infrastructure,,Only for PROVISIONED,2025-12-01
+database.autoscaling_target_utilization,Database,70,70,70,Autoscaling target utilization,Yes,Integer,0-100,Public,Infrastructure,,Target percentage,2025-12-01
+textract.supported_document_types,Application,"[""pdf"", ""png"", ""jpg"", ""jpeg"", ""tiff""]","[""pdf"", ""png"", ""jpg"", ""jpeg"", ""tiff""]","[""pdf"", ""png"", ""jpg"", ""jpeg"", ""tiff""]",Supported document types,Yes,List(String),Valid types,Public,AI/ML Team,,Textract supported formats,2025-12-01
+textract.max_file_size_mb,Application,50,50,50,Maximum file size (MB),Yes,Integer,1-100,Public,AI/ML Team,,Textract limit,2025-12-01
+textract.confidence_threshold,Application,80,80,80,Minimum confidence for auto-processing,Yes,Integer,0-100,Public,AI/ML Team,,Below routes to human review,2025-12-01
+textract.polling_interval_seconds,Application,30,30,30,Async polling interval,Yes,Integer,1-300,Public,AI/ML Team,,Check job status,2025-12-01
+textract.max_polling_attempts,Application,20,20,20,Max polling attempts,Yes,Integer,1-100,Public,AI/ML Team,,Timeout protection,2025-12-01
+textract.enable_tables,Application,true,true,true,Enable table extraction,Yes,Boolean,true|false,Public,AI/ML Team,,Extract tables,2025-12-01
+textract.enable_forms,Application,true,true,true,Enable form extraction,Yes,Boolean,true|false,Public,AI/ML Team,,Extract forms,2025-12-01
+textract.enable_queries,Application,false,false,false,Enable queries feature,Yes,Boolean,true|false,Public,AI/ML Team,,Custom queries,2025-12-01
+textract.enable_signatures,Application,false,false,false,Enable signature detection,Yes,Boolean,true|false,Public,AI/ML Team,,Signature detection,2025-12-01
+textract.enable_expense,Application,false,false,false,Enable expense analysis,Yes,Boolean,true|false,Public,AI/ML Team,,Receipt/invoice,2025-12-01
+textract.enable_id,Application,false,false,false,Enable ID analysis,Yes,Boolean,true|false,Public,AI/ML Team,,ID documents,2025-12-01
+comprehend.enable_pii_detection,Application,true,true,true,Enable PII detection,Yes,Boolean,true|false,Public,AI/ML Team,,Compliance requirement,2025-12-01
+comprehend.enable_entity_detection,Application,true,true,true,Enable entity detection,Yes,Boolean,true|false,Public,AI/ML Team,,Named entities,2025-12-01
+comprehend.enable_key_phrases,Application,true,true,true,Enable key phrase extraction,Yes,Boolean,true|false,Public,AI/ML Team,,Key phrases,2025-12-01
+comprehend.enable_sentiment,Application,false,false,false,Enable sentiment analysis,Yes,Boolean,true|false,Public,AI/ML Team,,Document sentiment,2025-12-01
+comprehend.language_code,Application,en,en,en,Default language code,Yes,String,Valid language,Public,AI/ML Team,,English,2025-12-01
+comprehend.pii_entity_types,Application,"[""ALL""]","[""ALL""]","[""ALL""]",PII entity types to detect,Yes,List(String),Valid types,Public,AI/ML Team,,All PII types,2025-12-01
+human_review.enabled,Application,true,false,true,Enable A2I human review,Yes,Boolean,true|false,Public,AI/ML Team,,Human-in-the-loop,2025-12-01
+human_review.use_private_workforce,Application,true,true,true,Use private workforce,Yes,Boolean,true|false,Public,AI/ML Team,,Internal reviewers,2025-12-01
+human_review.workteam_arn,Application,,,,SageMaker workteam ARN,No,String,Valid ARN,Confidential,AI/ML Team,,Private team ARN,2025-12-01
+human_review.task_price_usd,Application,0.05,0.05,0.05,Task price (USD),Yes,String,Valid number,Public,AI/ML Team,,Per task cost,2025-12-01
+human_review.task_title,Application,Document Review Task,Document Review Task,Document Review Task,Task title,Yes,String,Valid string,Public,AI/ML Team,,Shown to workers,2025-12-01
+human_review.task_description,Application,Review the extracted document data and verify accuracy,Review the extracted document data and verify accuracy,Review the extracted document data and verify accuracy,Task description,Yes,String,Valid string,Public,AI/ML Team,,Worker instructions,2025-12-01
+human_review.task_count,Application,1,1,1,Workers per task,Yes,Integer,1-10,Public,AI/ML Team,,Redundancy,2025-12-01
+human_review.task_availability_seconds,Application,43200,43200,43200,Task availability (seconds),Yes,Integer,Positive integer,Public,AI/ML Team,,12 hours,2025-12-01
+human_review.confidence_threshold,Application,80,80,80,Confidence threshold,Yes,Integer,0-100,Public,AI/ML Team,,Route to review,2025-12-01
+human_review.custom_ui_template,Application,,,,Custom UI template,No,String,Valid path,Public,AI/ML Team,,Optional custom UI,2025-12-01
+api.version,Application,1.0.0,1.0.0,1.0.0,API version,Yes,String,Semantic versioning,Public,Development,,API versioning,2025-12-01
+api.stage_name,Application,v1,v1,v1,API Gateway stage,Yes,String,Valid stage,Public,Development,,Deployment stage,2025-12-01
+api.endpoint_type,Application,REGIONAL,REGIONAL,REGIONAL,API endpoint type,Yes,String,REGIONAL|EDGE|PRIVATE,Public,Development,,Regional API,2025-12-01
+api.enable_cors,Application,true,true,true,Enable CORS,Yes,Boolean,true|false,Public,Development,,Cross-origin access,2025-12-01
+api.max_file_size_mb,Application,50,50,50,Max upload size (MB),Yes,Integer,1-100,Public,Development,,Request limit,2025-12-01
+api.default_page_size,Application,20,20,20,Default pagination size,Yes,Integer,1-100,Public,Development,,List results,2025-12-01
+api.throttling_burst_limit,Application,1000,100,1000,API burst limit,Yes,Integer,0-10000,Public,Development,,From SOW,2025-12-01
+api.throttling_rate_limit,Application,500,50,500,API steady-state rate,Yes,Integer,0-10000,Public,Development,,From SOW,2025-12-01
+api.allowed_content_types,Application,"[""application/pdf"", ""image/png"", ""image/jpeg"", ""image/tiff""]","[""application/pdf"", ""image/png"", ""image/jpeg"", ""image/tiff""]","[""application/pdf"", ""image/png"", ""image/jpeg"", ""image/tiff""]",Allowed content types,Yes,List(String),Valid types,Public,Development,,Upload validation,2025-12-01
+logging.retention_days,Monitoring,30,7,30,CloudWatch log retention,Yes,Integer,Positive integer,Public,Operations,,Log retention,2025-12-01
+logging.step_functions_log_level,Monitoring,ERROR,ALL,ERROR,Step Functions log level,Yes,String,ALL|ERROR|FATAL|OFF,Public,Operations,,SFN logging,2025-12-01
+logging.api_gateway_log_level,Monitoring,INFO,INFO,INFO,API Gateway log level,Yes,String,OFF|ERROR|INFO,Public,Operations,,API logging,2025-12-01
+logging.data_trace_enabled,Monitoring,false,true,false,Enable data tracing,Yes,Boolean,true|false,Public,Operations,,Request/response logs,2025-12-01
+monitoring.xray_enabled,Monitoring,true,true,true,Enable X-Ray tracing,Yes,Boolean,true|false,Public,Operations,,Distributed tracing,2025-12-01
+monitoring.enable_alarms,Monitoring,true,false,true,Enable CloudWatch alarms,Yes,Boolean,true|false,Public,Operations,,Alert notifications,2025-12-01
+monitoring.sns_topic_arn,Monitoring,,,,SNS topic for alerts,No,String,Valid ARN,Confidential,Operations,,Alert destination,2025-12-01
+monitoring.api_error_threshold,Monitoring,10,50,10,API 5xx error threshold,Yes,Integer,Positive integer,Public,Operations,,Alert trigger,2025-12-01
+monitoring.api_4xx_threshold,Monitoring,100,200,100,API 4xx error threshold,Yes,Integer,Positive integer,Public,Operations,,Client error alert,2025-12-01
+monitoring.api_latency_p95_ms,Monitoring,2000,5000,2000,API p95 latency threshold (ms),Yes,Integer,Positive integer,Public,Operations,,<2 sec target,2025-12-01
+monitoring.sfn_failure_threshold,Monitoring,5,20,5,Step Functions failure threshold,Yes,Integer,Positive integer,Public,Operations,,Alert trigger,2025-12-01
+monitoring.lambda_error_rate_percent,Monitoring,5,10,5,Lambda error rate threshold (%),Yes,Integer,0-100,Public,Operations,,Alert on errors,2025-12-01
+monitoring.lambda_duration_p95_ms,Monitoring,60000,60000,60000,Lambda p95 duration threshold (ms),Yes,Integer,Positive integer,Public,Operations,,Performance alert,2025-12-01
+dr.enabled,DR,true,false,true,Enable DR infrastructure,Yes,Boolean,true|false,Public,Operations,,Master DR toggle,2025-12-01
+dr.strategy,DR,ACTIVE_PASSIVE,BACKUP_ONLY,ACTIVE_PASSIVE,DR strategy,Yes,String,ACTIVE_PASSIVE|ACTIVE_ACTIVE|BACKUP_ONLY,Public,Operations,,Recovery approach,2025-12-01
+dr.rto_minutes,DR,240,480,240,Recovery Time Objective (minutes),Yes,Integer,Positive integer,Public,Operations,,Target recovery time,2025-12-01
+dr.rpo_minutes,DR,60,1440,60,Recovery Point Objective (minutes),Yes,Integer,Positive integer,Public,Operations,,Max data loss window,2025-12-01
+dr.failover_mode,DR,manual,manual,manual,Failover mode,Yes,String,manual|automatic,Public,Operations,,Manual for safety,2025-12-01
+dr.replication_enabled,DR,true,false,false,Enable cross-region replication,Yes,Boolean,true|false,Public,Operations,,S3 CRR and DynamoDB,2025-12-01
+dr.storage_replication_class,DR,STANDARD,STANDARD,STANDARD,DR storage class,Yes,String,Valid class,Public,Operations,,S3 storage class,2025-12-01
+dr.enable_replication_time_control,DR,true,true,true,Enable replication time control,Yes,Boolean,true|false,Public,Operations,,Predictable replication,2025-12-01
+dr.vault_enabled,DR,true,false,true,Enable DR backup vault,Yes,Boolean,true|false,Public,Operations,,DR vault in DR region,2025-12-01
+dr.vault_kms_deletion_window_days,DR,30,30,30,DR KMS deletion window,Yes,Integer,7-30,Public,Operations,,Protection period,2025-12-01
+dr.vault_transition_to_ia_days,DR,30,30,30,DR vault transition to IA,Yes,Integer,Positive integer,Public,Operations,,Cost optimization,2025-12-01
+dr.vault_noncurrent_version_expiration_days,DR,90,90,90,DR vault noncurrent expiration,Yes,Integer,Positive integer,Public,Operations,,Version cleanup,2025-12-01
+dr.vault_enable_lock,DR,false,false,false,Enable vault lock (WORM),Yes,Boolean,true|false,Public,Operations,,Compliance WORM,2025-12-01
+dr.backup_retention_days,DR,30,30,30,DR backup retention (days),Yes,Integer,Positive integer,Public,Operations,,DR vault retention,2025-12-01
+dr.backup_local_retention_days,DR,7,7,7,Local backup retention,Yes,Integer,Positive integer,Public,Operations,,Source vault retention,2025-12-01
+dr.enable_weekly_backup,DR,true,false,true,Enable DR weekly backup,Yes,Boolean,true|false,Public,Operations,,Long retention,2025-12-01
+dr.weekly_backup_retention_days,DR,90,90,90,DR weekly retention,Yes,Integer,Positive integer,Public,Operations,,3 months,2025-12-01
+dr.test_schedule,DR,"cron(0 2 ? * SUN *)","","cron(0 2 ? * SUN *)",DR test schedule,No,String,Valid cron,Public,Operations,,Weekly DR test,2025-12-01
+dr.notification_email,DR,dr-alerts@example.com,dr-alerts@example.com,dr-alerts@example.com,DR notification email,No,String,Valid email,Confidential,Operations,,Alert notifications,2025-12-01
+budget.enabled,Best Practices,true,false,true,[Cost Optimization] Enable AWS Budgets tracking,Yes,Boolean,true|false,Public,Operations,,Proactive cost monitoring for AI services,2025-12-01
+budget.monthly_amount,Best Practices,1500,500,1500,[Cost Optimization] Monthly budget limit (USD),Yes,Integer,Valid integer,Public,Operations,,Based on SOW cost estimates,2025-12-01
+budget.alert_thresholds,Best Practices,"[50, 80, 100]","[80, 100]","[50, 80, 100]",[Cost Optimization] Budget alert thresholds (%),Yes,List(Number),0-100,Public,Operations,,Multi-tier alerts,2025-12-01
+budget.enable_forecast_alert,Best Practices,true,false,true,[Cost Optimization] Enable forecasted spend alerts,Yes,Boolean,true|false,Public,Operations,,ML-based spend forecasting,2025-12-01
+budget.alert_emails,Best Practices,[],[],[],[Cost Optimization] Alert email addresses,No,List(String),Valid emails,Confidential,Operations,,Additional email recipients,2025-12-01
+config_rules.enabled,Best Practices,true,false,true,[Operational Excellence] Enable AWS Config rules,Yes,Boolean,true|false,Public,Operations,,Compliance monitoring and drift detection,2025-12-01
+config_rules.enable_recorder,Best Practices,true,true,true,[Operational Excellence] Enable Config recorder,Yes,Boolean,true|false,Public,Operations,,Records configuration changes,2025-12-01
+config_rules.retention_days,Best Practices,365,90,365,[Operational Excellence] Config history retention (days),Yes,Integer,Positive integer,Public,Operations,,One-year retention for audits,2025-12-01
+config_rules.enable_security_rules,Best Practices,true,true,true,[Operational Excellence] Enable security compliance rules,Yes,Boolean,true|false,Public,Operations,,S3 encryption KMS rotation checks,2025-12-01
+config_rules.enable_reliability_rules,Best Practices,true,false,true,[Operational Excellence] Enable reliability compliance rules,Yes,Boolean,true|false,Public,Operations,,Backup and versioning checks,2025-12-01
+guardduty.enabled,Best Practices,true,false,true,[Security] Enable GuardDuty threat detection,Yes,Boolean,true|false,Public,Operations,,ML-based threat detection,2025-12-01
+guardduty.enable_s3_protection,Best Practices,true,true,true,[Security] Enable S3 data event monitoring,Yes,Boolean,true|false,Public,Operations,,Detects suspicious S3 access,2025-12-01
+guardduty.enable_malware_protection,Best Practices,true,false,true,[Security] Enable S3 malware protection,Yes,Boolean,true|false,Public,Operations,,Scans uploaded documents for malware,2025-12-01
+guardduty.severity_threshold,Best Practices,7,7,7,[Security] Minimum alert severity threshold (1-10),Yes,Integer,1-10,Public,Operations,,7+ filters to high/critical findings,2025-12-01
