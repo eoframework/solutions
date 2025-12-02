@@ -18,7 +18,6 @@ locals {
 #------------------------------------------------------------------------------
 # SQS Queue for Human Review Tasks
 #------------------------------------------------------------------------------
-
 module "review_queue" {
   source = "../../aws/sqs"
 
@@ -39,7 +38,6 @@ module "review_queue" {
 #------------------------------------------------------------------------------
 # Lambda: Process Human Review Results
 #------------------------------------------------------------------------------
-
 module "lambda_process_review" {
   source = "../../aws/lambda"
 
@@ -76,7 +74,6 @@ resource "aws_lambda_event_source_mapping" "review_queue" {
 #------------------------------------------------------------------------------
 # Lambda: Create Human Review Task
 #------------------------------------------------------------------------------
-
 module "lambda_create_task" {
   source = "../../aws/lambda"
 
@@ -108,7 +105,6 @@ module "lambda_create_task" {
 #------------------------------------------------------------------------------
 # Lambda: Complete Step Functions Task
 #------------------------------------------------------------------------------
-
 module "lambda_complete_task" {
   source = "../../aws/lambda"
 
@@ -135,7 +131,6 @@ module "lambda_complete_task" {
 #------------------------------------------------------------------------------
 # IAM Policies for Lambda Functions
 #------------------------------------------------------------------------------
-
 # S3 access
 resource "aws_iam_role_policy" "lambda_s3" {
   for_each = toset([
@@ -286,7 +281,6 @@ resource "aws_iam_role_policy" "lambda_sqs" {
 #------------------------------------------------------------------------------
 # A2I Flow Definition - Private Workforce
 #------------------------------------------------------------------------------
-
 resource "aws_sagemaker_flow_definition" "private" {
   count = var.a2i.use_private_workforce ? 1 : 0
 
@@ -314,7 +308,6 @@ resource "aws_sagemaker_flow_definition" "private" {
 #------------------------------------------------------------------------------
 # A2I Flow Definition - Public Workforce (MTurk)
 #------------------------------------------------------------------------------
-
 resource "aws_sagemaker_flow_definition" "public" {
   count = var.a2i.use_private_workforce ? 0 : 1
 
@@ -350,7 +343,6 @@ resource "aws_sagemaker_flow_definition" "public" {
 #------------------------------------------------------------------------------
 # A2I Human Task UI (Worker Interface)
 #------------------------------------------------------------------------------
-
 resource "aws_sagemaker_human_task_ui" "this" {
   human_task_ui_name = "${local.name_prefix}-document-review-ui"
 
@@ -395,7 +387,6 @@ EOF
 #------------------------------------------------------------------------------
 # IAM Role for A2I
 #------------------------------------------------------------------------------
-
 resource "aws_iam_role" "a2i" {
   name = "${local.name_prefix}-a2i-role"
 
@@ -463,7 +454,6 @@ resource "aws_iam_role_policy" "a2i_kms" {
 #------------------------------------------------------------------------------
 # SNS Topic for A2I Notifications
 #------------------------------------------------------------------------------
-
 resource "aws_sns_topic" "a2i_notifications" {
   name              = "${local.name_prefix}-a2i-notifications"
   kms_master_key_id = var.kms_key_arn

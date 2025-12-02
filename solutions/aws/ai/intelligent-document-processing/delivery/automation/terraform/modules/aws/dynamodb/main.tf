@@ -93,7 +93,6 @@ resource "aws_dynamodb_table" "this" {
 #------------------------------------------------------------------------------
 # Auto Scaling (for PROVISIONED mode)
 #------------------------------------------------------------------------------
-
 resource "aws_appautoscaling_target" "read" {
   count = var.billing_mode == "PROVISIONED" && var.enable_autoscaling ? 1 : 0
 

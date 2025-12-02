@@ -33,7 +33,6 @@ resource "aws_sfn_state_machine" "this" {
 #------------------------------------------------------------------------------
 # IAM Role for Step Functions
 #------------------------------------------------------------------------------
-
 resource "aws_iam_role" "sfn" {
   name = "${var.name}-sfn-role"
 
@@ -56,7 +55,6 @@ resource "aws_iam_role" "sfn" {
 #------------------------------------------------------------------------------
 # IAM Policy for Lambda Invocations
 #------------------------------------------------------------------------------
-
 resource "aws_iam_role_policy" "lambda_invoke" {
   count = length(var.lambda_arns) > 0 ? 1 : 0
 
@@ -78,7 +76,6 @@ resource "aws_iam_role_policy" "lambda_invoke" {
 #------------------------------------------------------------------------------
 # IAM Policy for DynamoDB Access
 #------------------------------------------------------------------------------
-
 resource "aws_iam_role_policy" "dynamodb" {
   count = length(var.dynamodb_table_arns) > 0 ? 1 : 0
 
@@ -107,7 +104,6 @@ resource "aws_iam_role_policy" "dynamodb" {
 #------------------------------------------------------------------------------
 # IAM Policy for S3 Access
 #------------------------------------------------------------------------------
-
 resource "aws_iam_role_policy" "s3" {
   count = length(var.s3_bucket_arns) > 0 ? 1 : 0
 
@@ -138,7 +134,6 @@ resource "aws_iam_role_policy" "s3" {
 #------------------------------------------------------------------------------
 # IAM Policy for Textract
 #------------------------------------------------------------------------------
-
 resource "aws_iam_role_policy" "textract" {
   count = var.enable_textract ? 1 : 0
 
@@ -169,7 +164,6 @@ resource "aws_iam_role_policy" "textract" {
 #------------------------------------------------------------------------------
 # IAM Policy for Comprehend
 #------------------------------------------------------------------------------
-
 resource "aws_iam_role_policy" "comprehend" {
   count = var.enable_comprehend ? 1 : 0
 
@@ -198,7 +192,6 @@ resource "aws_iam_role_policy" "comprehend" {
 #------------------------------------------------------------------------------
 # IAM Policy for SQS
 #------------------------------------------------------------------------------
-
 resource "aws_iam_role_policy" "sqs" {
   count = length(var.sqs_queue_arns) > 0 ? 1 : 0
 
@@ -225,7 +218,6 @@ resource "aws_iam_role_policy" "sqs" {
 #------------------------------------------------------------------------------
 # IAM Policy for SNS
 #------------------------------------------------------------------------------
-
 resource "aws_iam_role_policy" "sns" {
   count = length(var.sns_topic_arns) > 0 ? 1 : 0
 
@@ -247,7 +239,6 @@ resource "aws_iam_role_policy" "sns" {
 #------------------------------------------------------------------------------
 # IAM Policy for CloudWatch Logs
 #------------------------------------------------------------------------------
-
 resource "aws_iam_role_policy" "logs" {
   name = "${var.name}-logs"
   role = aws_iam_role.sfn.id
@@ -276,7 +267,6 @@ resource "aws_iam_role_policy" "logs" {
 #------------------------------------------------------------------------------
 # IAM Policy for X-Ray Tracing
 #------------------------------------------------------------------------------
-
 resource "aws_iam_role_policy" "xray" {
   count = var.xray_tracing_enabled ? 1 : 0
 
@@ -303,7 +293,6 @@ resource "aws_iam_role_policy" "xray" {
 #------------------------------------------------------------------------------
 # CloudWatch Log Group
 #------------------------------------------------------------------------------
-
 resource "aws_cloudwatch_log_group" "sfn" {
   name              = "/aws/vendedlogs/states/${var.name}"
   retention_in_days = var.log_retention_days
@@ -315,7 +304,6 @@ resource "aws_cloudwatch_log_group" "sfn" {
 #------------------------------------------------------------------------------
 # Additional Custom IAM Policies
 #------------------------------------------------------------------------------
-
 resource "aws_iam_role_policy" "custom" {
   for_each = var.custom_policies
 

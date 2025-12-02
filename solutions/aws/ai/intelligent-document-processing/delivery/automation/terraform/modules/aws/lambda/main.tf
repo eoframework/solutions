@@ -8,7 +8,6 @@
 #------------------------------------------------------------------------------
 # IAM Role for Lambda Execution
 #------------------------------------------------------------------------------
-
 resource "aws_iam_role" "lambda" {
   name = "${var.function_name}-role"
 
@@ -53,7 +52,6 @@ resource "aws_iam_role_policy_attachment" "lambda_xray" {
 #------------------------------------------------------------------------------
 # Lambda Function
 #------------------------------------------------------------------------------
-
 resource "aws_lambda_function" "this" {
   function_name = var.function_name
   description   = var.description
@@ -119,7 +117,6 @@ resource "aws_lambda_function" "this" {
 #------------------------------------------------------------------------------
 # CloudWatch Log Group (created before Lambda to control retention)
 #------------------------------------------------------------------------------
-
 resource "aws_cloudwatch_log_group" "this" {
   name              = "/aws/lambda/${var.function_name}"
   retention_in_days = var.log_retention_days
@@ -131,7 +128,6 @@ resource "aws_cloudwatch_log_group" "this" {
 #------------------------------------------------------------------------------
 # Lambda Permission (for triggers like S3, API Gateway, etc.)
 #------------------------------------------------------------------------------
-
 resource "aws_lambda_permission" "triggers" {
   for_each = var.permissions
 
@@ -145,7 +141,6 @@ resource "aws_lambda_permission" "triggers" {
 #------------------------------------------------------------------------------
 # Provisioned Concurrency (optional)
 #------------------------------------------------------------------------------
-
 resource "aws_lambda_provisioned_concurrency_config" "this" {
   count = var.provisioned_concurrent_executions > 0 ? 1 : 0
 
@@ -157,7 +152,6 @@ resource "aws_lambda_provisioned_concurrency_config" "this" {
 #------------------------------------------------------------------------------
 # Event Source Mappings (for SQS, DynamoDB Streams, etc.)
 #------------------------------------------------------------------------------
-
 resource "aws_lambda_event_source_mapping" "this" {
   for_each = var.event_source_mappings
 

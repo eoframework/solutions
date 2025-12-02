@@ -23,7 +23,6 @@ resource "aws_api_gateway_rest_api" "this" {
 #------------------------------------------------------------------------------
 # API Resources (paths)
 #------------------------------------------------------------------------------
-
 resource "aws_api_gateway_resource" "this" {
   for_each = var.resources
 
@@ -35,7 +34,6 @@ resource "aws_api_gateway_resource" "this" {
 #------------------------------------------------------------------------------
 # API Methods
 #------------------------------------------------------------------------------
-
 resource "aws_api_gateway_method" "this" {
   for_each = var.methods
 
@@ -51,7 +49,6 @@ resource "aws_api_gateway_method" "this" {
 #------------------------------------------------------------------------------
 # Lambda Integrations
 #------------------------------------------------------------------------------
-
 resource "aws_api_gateway_integration" "this" {
   for_each = var.methods
 
@@ -68,7 +65,6 @@ resource "aws_api_gateway_integration" "this" {
 #------------------------------------------------------------------------------
 # CORS (OPTIONS method)
 #------------------------------------------------------------------------------
-
 resource "aws_api_gateway_method" "options" {
   for_each = var.enable_cors ? var.resources : {}
 
@@ -130,7 +126,6 @@ resource "aws_api_gateway_integration_response" "options" {
 #------------------------------------------------------------------------------
 # Cognito Authorizer
 #------------------------------------------------------------------------------
-
 resource "aws_api_gateway_authorizer" "cognito" {
   count = var.cognito_user_pool_arn != null ? 1 : 0
 
@@ -144,7 +139,6 @@ resource "aws_api_gateway_authorizer" "cognito" {
 #------------------------------------------------------------------------------
 # Deployment & Stage
 #------------------------------------------------------------------------------
-
 resource "aws_api_gateway_deployment" "this" {
   rest_api_id = aws_api_gateway_rest_api.this.id
 
@@ -195,7 +189,6 @@ resource "aws_api_gateway_stage" "this" {
 #------------------------------------------------------------------------------
 # CloudWatch Log Group for API Gateway
 #------------------------------------------------------------------------------
-
 resource "aws_cloudwatch_log_group" "api" {
   name              = "/aws/api-gateway/${var.api_name}"
   retention_in_days = var.log_retention_days
@@ -207,7 +200,6 @@ resource "aws_cloudwatch_log_group" "api" {
 #------------------------------------------------------------------------------
 # Throttling Settings
 #------------------------------------------------------------------------------
-
 resource "aws_api_gateway_method_settings" "this" {
   rest_api_id = aws_api_gateway_rest_api.this.id
   stage_name  = aws_api_gateway_stage.this.stage_name

@@ -13,7 +13,6 @@ locals {
 #------------------------------------------------------------------------------
 # API Gateway Alarms
 #------------------------------------------------------------------------------
-
 resource "aws_cloudwatch_metric_alarm" "api_5xx_errors" {
   count = local.enabled ? 1 : 0
 
@@ -80,7 +79,6 @@ resource "aws_cloudwatch_metric_alarm" "api_latency" {
 #------------------------------------------------------------------------------
 # Step Functions Alarms
 #------------------------------------------------------------------------------
-
 resource "aws_cloudwatch_metric_alarm" "sfn_failed_executions" {
   count = local.enabled ? 1 : 0
 

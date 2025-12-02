@@ -12,7 +12,6 @@ locals {
 #------------------------------------------------------------------------------
 # API Lambda Functions
 #------------------------------------------------------------------------------
-
 # Lambda: Upload document
 module "lambda_upload" {
   source = "../../aws/lambda"
@@ -167,7 +166,6 @@ module "lambda_health" {
 #------------------------------------------------------------------------------
 # IAM Policies for Lambda Functions
 #------------------------------------------------------------------------------
-
 # S3 access for upload/results/delete Lambda
 resource "aws_iam_role_policy" "lambda_s3" {
   for_each = toset([
@@ -255,7 +253,6 @@ resource "aws_iam_role_policy" "lambda_sfn" {
 #------------------------------------------------------------------------------
 # API Gateway
 #------------------------------------------------------------------------------
-
 module "api_gateway" {
   source = "../../aws/api-gateway"
 
@@ -369,7 +366,6 @@ module "api_gateway" {
 #------------------------------------------------------------------------------
 # Lambda Permissions for API Gateway
 #------------------------------------------------------------------------------
-
 resource "aws_lambda_permission" "api_gateway" {
   for_each = {
     upload  = module.lambda_upload.function_name

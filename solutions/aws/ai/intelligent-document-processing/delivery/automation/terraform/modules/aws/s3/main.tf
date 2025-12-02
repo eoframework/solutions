@@ -20,7 +20,6 @@ resource "aws_s3_bucket" "this" {
 #------------------------------------------------------------------------------
 # Versioning
 #------------------------------------------------------------------------------
-
 resource "aws_s3_bucket_versioning" "this" {
   bucket = aws_s3_bucket.this.id
 
@@ -32,7 +31,6 @@ resource "aws_s3_bucket_versioning" "this" {
 #------------------------------------------------------------------------------
 # Server-Side Encryption
 #------------------------------------------------------------------------------
-
 resource "aws_s3_bucket_server_side_encryption_configuration" "this" {
   bucket = aws_s3_bucket.this.id
 
@@ -48,7 +46,6 @@ resource "aws_s3_bucket_server_side_encryption_configuration" "this" {
 #------------------------------------------------------------------------------
 # Public Access Block
 #------------------------------------------------------------------------------
-
 resource "aws_s3_bucket_public_access_block" "this" {
   bucket = aws_s3_bucket.this.id
 
@@ -61,7 +58,6 @@ resource "aws_s3_bucket_public_access_block" "this" {
 #------------------------------------------------------------------------------
 # Lifecycle Rules
 #------------------------------------------------------------------------------
-
 resource "aws_s3_bucket_lifecycle_configuration" "this" {
   count  = length(var.lifecycle_rules) > 0 ? 1 : 0
   bucket = aws_s3_bucket.this.id
@@ -118,7 +114,6 @@ resource "aws_s3_bucket_lifecycle_configuration" "this" {
 #------------------------------------------------------------------------------
 # CORS Configuration (for web uploads)
 #------------------------------------------------------------------------------
-
 resource "aws_s3_bucket_cors_configuration" "this" {
   count  = length(var.cors_rules) > 0 ? 1 : 0
   bucket = aws_s3_bucket.this.id
@@ -138,7 +133,6 @@ resource "aws_s3_bucket_cors_configuration" "this" {
 #------------------------------------------------------------------------------
 # Lambda Notifications (for document processing triggers)
 #------------------------------------------------------------------------------
-
 resource "aws_s3_bucket_notification" "this" {
   count  = length(var.lambda_notifications) > 0 ? 1 : 0
   bucket = aws_s3_bucket.this.id
@@ -159,7 +153,6 @@ resource "aws_s3_bucket_notification" "this" {
 #------------------------------------------------------------------------------
 # Bucket Policy
 #------------------------------------------------------------------------------
-
 resource "aws_s3_bucket_policy" "this" {
   count  = var.bucket_policy != null ? 1 : 0
   bucket = aws_s3_bucket.this.id

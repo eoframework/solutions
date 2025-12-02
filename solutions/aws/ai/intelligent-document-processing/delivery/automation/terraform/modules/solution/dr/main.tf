@@ -19,7 +19,6 @@ locals {
 #------------------------------------------------------------------------------
 # Data Sources
 #------------------------------------------------------------------------------
-
 data "aws_caller_identity" "current" {}
 data "aws_region" "current" {}
 data "aws_region" "dr" {
@@ -33,7 +32,6 @@ data "aws_region" "dr" {
 #------------------------------------------------------------------------------
 # KMS Key for DR Region Encryption
 #------------------------------------------------------------------------------
-
 resource "aws_kms_key" "dr" {
   count    = local.vault_enabled ? 1 : 0
   provider = aws.dr
@@ -98,7 +96,6 @@ resource "aws_kms_alias" "dr" {
 #------------------------------------------------------------------------------
 # DR S3 Bucket (Replication Destination)
 #------------------------------------------------------------------------------
-
 resource "aws_s3_bucket" "dr_documents" {
   count    = local.vault_enabled ? 1 : 0
   provider = aws.dr
@@ -172,7 +169,6 @@ resource "aws_s3_bucket_lifecycle_configuration" "dr_documents" {
 #------------------------------------------------------------------------------
 # DR Backup Vault
 #------------------------------------------------------------------------------
-
 resource "aws_backup_vault" "dr" {
   count    = local.vault_enabled ? 1 : 0
   provider = aws.dr
@@ -193,7 +189,6 @@ resource "aws_backup_vault_lock_configuration" "dr" {
 #------------------------------------------------------------------------------
 # DR Restore Role
 #------------------------------------------------------------------------------
-
 resource "aws_iam_role" "dr_restore" {
   count    = local.vault_enabled ? 1 : 0
   provider = aws.dr
@@ -275,7 +270,6 @@ resource "aws_iam_role_policy" "dr_restore_s3" {
 #------------------------------------------------------------------------------
 # DR SNS Topic
 #------------------------------------------------------------------------------
-
 resource "aws_sns_topic" "dr_notifications" {
   count    = local.vault_enabled ? 1 : 0
   provider = aws.dr
@@ -305,7 +299,6 @@ resource "aws_backup_vault_notifications" "dr" {
 #------------------------------------------------------------------------------
 # S3 Cross-Region Replication
 #------------------------------------------------------------------------------
-
 resource "aws_iam_role" "s3_replication" {
   count = local.replication_enabled ? 1 : 0
 
@@ -423,7 +416,6 @@ resource "aws_s3_bucket_replication_configuration" "documents" {
 #------------------------------------------------------------------------------
 # DynamoDB Replication Role
 #------------------------------------------------------------------------------
-
 resource "aws_iam_role" "dynamodb_replication" {
   count = local.replication_enabled ? 1 : 0
 
@@ -476,7 +468,6 @@ resource "aws_iam_role_policy" "dynamodb_replication" {
 #------------------------------------------------------------------------------
 # AWS Backup (Source Region)
 #------------------------------------------------------------------------------
-
 resource "aws_backup_vault" "source" {
   count = local.replication_enabled ? 1 : 0
 
@@ -611,7 +602,6 @@ resource "aws_backup_vault_notifications" "source" {
 #------------------------------------------------------------------------------
 # Replication Monitoring Alarms
 #------------------------------------------------------------------------------
-
 resource "aws_cloudwatch_metric_alarm" "s3_replication_latency" {
   count = local.replication_enabled ? 1 : 0
 

@@ -9,7 +9,6 @@
 #------------------------------------------------------------------------------
 # KMS Key for Encryption
 #------------------------------------------------------------------------------
-
 resource "aws_kms_key" "main" {
   description             = "${var.project.name}-${var.project.environment} encryption key"
   deletion_window_in_days = var.security.kms_deletion_window_days
@@ -26,7 +25,6 @@ resource "aws_kms_alias" "main" {
 #------------------------------------------------------------------------------
 # Lambda VPC Security Group (optional)
 #------------------------------------------------------------------------------
-
 resource "aws_security_group" "lambda" {
   count = var.lambda_vpc_enabled ? 1 : 0
 

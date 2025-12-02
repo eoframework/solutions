@@ -45,7 +45,6 @@ resource "aws_sqs_queue" "this" {
 #------------------------------------------------------------------------------
 # Queue Policy
 #------------------------------------------------------------------------------
-
 resource "aws_sqs_queue_policy" "this" {
   count = var.queue_policy != null || length(var.allowed_principals) > 0 ? 1 : 0
 
@@ -152,7 +151,6 @@ data "aws_iam_policy_document" "queue_policy" {
 #------------------------------------------------------------------------------
 # Dead Letter Queue (optional, created if enabled)
 #------------------------------------------------------------------------------
-
 resource "aws_sqs_queue" "dlq" {
   count = var.create_dlq ? 1 : 0
 
@@ -174,7 +172,6 @@ resource "aws_sqs_queue" "dlq" {
 #------------------------------------------------------------------------------
 # Update main queue with DLQ reference (when DLQ is created by this module)
 #------------------------------------------------------------------------------
-
 resource "aws_sqs_queue_redrive_policy" "this" {
   count = var.create_dlq ? 1 : 0
 

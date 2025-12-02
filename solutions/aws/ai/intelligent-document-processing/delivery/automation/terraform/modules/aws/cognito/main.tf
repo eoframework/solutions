@@ -8,7 +8,6 @@
 # Local Variables - Resolve grouped vs individual variables
 #------------------------------------------------------------------------------
 # When var.auth is provided, use it; otherwise fall back to individual variables
-
 locals {
   # Use grouped auth config if provided, otherwise use individual variables
   auth = var.auth != null ? var.auth : {
@@ -156,7 +155,6 @@ resource "aws_cognito_user_pool" "this" {
 #------------------------------------------------------------------------------
 # User Pool Domain
 #------------------------------------------------------------------------------
-
 resource "aws_cognito_user_pool_domain" "this" {
   count = local.auth.domain != null && local.auth.domain != "" ? 1 : 0
 
@@ -168,7 +166,6 @@ resource "aws_cognito_user_pool_domain" "this" {
 #------------------------------------------------------------------------------
 # User Pool Client
 #------------------------------------------------------------------------------
-
 resource "aws_cognito_user_pool_client" "this" {
   for_each = var.clients
 
@@ -215,7 +212,6 @@ resource "aws_cognito_user_pool_client" "this" {
 #------------------------------------------------------------------------------
 # Resource Server (for custom scopes)
 #------------------------------------------------------------------------------
-
 resource "aws_cognito_resource_server" "this" {
   for_each = var.resource_servers
 
@@ -235,7 +231,6 @@ resource "aws_cognito_resource_server" "this" {
 #------------------------------------------------------------------------------
 # User Groups
 #------------------------------------------------------------------------------
-
 resource "aws_cognito_user_group" "this" {
   for_each = var.user_groups
 

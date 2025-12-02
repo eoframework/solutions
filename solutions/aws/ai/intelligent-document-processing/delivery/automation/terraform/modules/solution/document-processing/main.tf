@@ -24,7 +24,6 @@ locals {
 #------------------------------------------------------------------------------
 # Document Processing Lambda Functions
 #------------------------------------------------------------------------------
-
 # Lambda: Start document analysis (triggers Textract)
 module "lambda_start_analysis" {
   source = "../../aws/lambda"
@@ -163,7 +162,6 @@ module "lambda_finalize_results" {
 #------------------------------------------------------------------------------
 # SNS Topic for Textract Async Notifications
 #------------------------------------------------------------------------------
-
 resource "aws_sns_topic" "textract_notifications" {
   name              = "${local.name_prefix}-textract-notifications"
   kms_master_key_id = var.kms_key_arn
@@ -193,7 +191,6 @@ resource "aws_sns_topic_policy" "textract_notifications" {
 #------------------------------------------------------------------------------
 # IAM Role for Textract Service
 #------------------------------------------------------------------------------
-
 resource "aws_iam_role" "textract" {
   name = "${local.name_prefix}-textract-role"
 
@@ -250,7 +247,6 @@ resource "aws_iam_role_policy" "textract_sns" {
 #------------------------------------------------------------------------------
 # Lambda IAM Policies for AWS AI Services
 #------------------------------------------------------------------------------
-
 # Textract permissions for Lambda functions
 resource "aws_iam_role_policy" "lambda_textract" {
   for_each = toset([
@@ -393,7 +389,6 @@ resource "aws_iam_role_policy" "lambda_sns" {
 #------------------------------------------------------------------------------
 # Step Functions State Machine
 #------------------------------------------------------------------------------
-
 module "step_functions" {
   source = "../../aws/step-functions"
 
