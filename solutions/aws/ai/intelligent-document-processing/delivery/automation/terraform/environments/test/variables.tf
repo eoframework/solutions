@@ -81,8 +81,8 @@ variable "storage" {
     document_expiration_days           = optional(number, 365)
     noncurrent_version_expiration_days = optional(number, 30)
     # Direct upload settings
-    enable_direct_upload   = optional(bool, true)
-    cors_allowed_origins   = optional(list(string), ["*"])
+    enable_direct_upload = optional(bool, true)
+    cors_allowed_origins = optional(list(string), ["*"])
     # Output bucket
     create_output_bucket   = optional(bool, true)
     output_expiration_days = optional(number, 30)
@@ -98,9 +98,9 @@ variable "database" {
   description = "DynamoDB configuration"
   type = object({
     # Capacity mode
-    billing_mode   = optional(string, "PAY_PER_REQUEST")
-    read_capacity  = optional(number, 5)
-    write_capacity = optional(number, 5)
+    billing_mode       = optional(string, "PAY_PER_REQUEST")
+    read_capacity      = optional(number, 5)
+    write_capacity     = optional(number, 5)
     gsi_read_capacity  = optional(number, 5)
     gsi_write_capacity = optional(number, 5)
     # Features
@@ -312,13 +312,13 @@ variable "logging" {
 variable "monitoring" {
   description = "Monitoring and alerting configuration"
   type = object({
-    xray_enabled          = optional(bool, true)
-    enable_alarms         = optional(bool, true)
-    sns_topic_arn         = optional(string)
+    xray_enabled  = optional(bool, true)
+    enable_alarms = optional(bool, true)
+    sns_topic_arn = optional(string)
     # API Gateway thresholds
-    api_error_threshold   = optional(number, 10)
-    api_4xx_threshold     = optional(number, 100)
-    api_latency_p95_ms    = optional(number, 2000)
+    api_error_threshold = optional(number, 10)
+    api_4xx_threshold   = optional(number, 100)
+    api_latency_p95_ms  = optional(number, 2000)
     # Step Functions thresholds
     sfn_failure_threshold = optional(number, 5)
     # Lambda thresholds
@@ -337,10 +337,10 @@ variable "dr" {
   type = object({
     # Master DR toggle and strategy
     enabled       = optional(bool, false)
-    strategy      = optional(string, "ACTIVE_PASSIVE")  # ACTIVE_PASSIVE, ACTIVE_ACTIVE, BACKUP_ONLY
-    rto_minutes   = optional(number, 240)               # Recovery Time Objective
-    rpo_minutes   = optional(number, 60)                # Recovery Point Objective
-    failover_mode = optional(string, "manual")          # manual, automatic
+    strategy      = optional(string, "ACTIVE_PASSIVE") # ACTIVE_PASSIVE, ACTIVE_ACTIVE, BACKUP_ONLY
+    rto_minutes   = optional(number, 240)              # Recovery Time Objective
+    rpo_minutes   = optional(number, 60)               # Recovery Point Objective
+    failover_mode = optional(string, "manual")         # manual, automatic
 
     # Cross-region replication settings
     replication_enabled             = optional(bool, false)
@@ -348,16 +348,16 @@ variable "dr" {
     enable_replication_time_control = optional(bool, true)
 
     # DR vault settings
-    vault_enabled                          = optional(bool, false)
-    vault_kms_deletion_window_days         = optional(number, 30)
-    vault_transition_to_ia_days            = optional(number, 30)
+    vault_enabled                            = optional(bool, false)
+    vault_kms_deletion_window_days           = optional(number, 30)
+    vault_transition_to_ia_days              = optional(number, 30)
     vault_noncurrent_version_expiration_days = optional(number, 90)
-    vault_enable_lock                      = optional(bool, false)
+    vault_enable_lock                        = optional(bool, false)
 
     # DR backup settings
-    backup_retention_days       = optional(number, 30)
-    backup_local_retention_days = optional(number, 7)
-    enable_weekly_backup        = optional(bool, true)
+    backup_retention_days        = optional(number, 30)
+    backup_local_retention_days  = optional(number, 7)
+    enable_weekly_backup         = optional(bool, true)
     weekly_backup_retention_days = optional(number, 90)
 
     # DR operations
@@ -394,9 +394,9 @@ variable "budget" {
 variable "config_rules" {
   description = "AWS Config rules for compliance monitoring"
   type = object({
-    enabled              = optional(bool, true)
-    enable_recorder      = optional(bool, true)
-    retention_days       = optional(number, 365)
+    enabled                  = optional(bool, true)
+    enable_recorder          = optional(bool, true)
+    retention_days           = optional(number, 365)
     enable_security_rules    = optional(bool, true)
     enable_reliability_rules = optional(bool, true)
   })
