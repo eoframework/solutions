@@ -1,32 +1,45 @@
 #------------------------------------------------------------------------------
-# Monitoring Configuration - DR Environment
+# Monitoring Configuration - CloudWatch, SNS - DR Environment
 #------------------------------------------------------------------------------
-# DR monitoring settings. Critical for visibility during failover operations.
-# All monitoring features should be enabled for DR.
-#------------------------------------------------------------------------------
-
-#------------------------------------------------------------------------------
-# CloudWatch Logs
+# Enabled for DR visibility and alerting.
 #------------------------------------------------------------------------------
 
-log_retention_days = 90               # DR: Match production retention
+alarm_thresholds = {
+  alb_4xx_count             = 100
+  alb_5xx_count             = 10
+  alb_response_time_seconds = 1.0
+  alb_unhealthy_hosts       = 1
+  cache_connections         = 500
+  cache_cpu_percent         = 75
+  cache_evictions           = 1000
+  cache_memory_percent      = 80
+  db_connections            = 100
+  db_cpu_percent            = 80
+  db_read_latency_seconds   = 0.02
+  db_storage_bytes          = 10737418240
+  db_write_latency_seconds  = 0.05
+  ec2_cpu_percent           = 80
+  ec2_disk_percent          = 80
+  ec2_memory_percent        = 85
+}
 
-#------------------------------------------------------------------------------
-# CloudWatch Dashboard & Insights
-#------------------------------------------------------------------------------
-
-enable_dashboard          = true      # DR: Enabled for visibility
-enable_container_insights = true      # DR: Enabled (for ECS/EKS)
-
-#------------------------------------------------------------------------------
-# CloudWatch Alarms
-#------------------------------------------------------------------------------
-
-# Alert notifications (CRITICAL for DR)
-# alarm_email = "ops-team@example.com"
-
-#------------------------------------------------------------------------------
-# X-Ray Tracing
-#------------------------------------------------------------------------------
-
-enable_xray_tracing = true            # DR: Enabled for debugging failover issues
+monitoring = {
+  alarm_evaluation_periods  = 2
+  alarm_period_seconds      = 300
+  alarm_treat_missing_data  = "missing"
+  dashboard_widget_height   = 6
+  dashboard_widget_width    = 8
+  enable_container_insights = true
+  enable_dashboard          = true
+  enable_xray_tracing       = true
+  log_retention_days        = 90
+  xray_sampling = {
+    priority       = 1000
+    reservoir_size = 1
+    fixed_rate     = 0.05
+    url_path       = "*"
+    http_method    = "*"
+    service_type   = "*"
+    host           = "*"
+  }
+}

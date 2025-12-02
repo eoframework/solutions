@@ -1,386 +1,299 @@
-# DR Environment - Disaster Recovery Deployment
-#
-# Composes: core + database + cache + monitoring
-#
-# This is a DR deployment with:
-# - VPC, ALB, ASG in alternate region (core)
-# - RDS with Multi-AZ and cross-region read replica support (database)
-# - ElastiCache Redis cluster (cache)
-# - CloudWatch monitoring for DR alerting (monitoring)
-# - NO WAF/GuardDuty (managed at primary site)
-#
-# See providers.tf for Terraform/AWS provider configuration
-# See README.md for prerequisites and setup instructions
-
 #------------------------------------------------------------------------------
-# Naming Standards & Common Tags
+# Sample Solution Disaster Recovery Environment
 #------------------------------------------------------------------------------
-# All resources use consistent naming: {solution_abbr}-{environment}-{resource}
-# Environment is auto-discovered from folder name or can be overridden
+# Standby infrastructure for failover in alternate region:
+# - VPC, ALB, ASG (core infrastructure - standby capacity)
+# - RDS restored from cross-region backup (database tier)
+# - ElastiCache Redis (rebuilt fresh on failover)
+# - DR vault receives backup copies from production
+# - Minimal security features (WAF/GuardDuty managed at prod)
+#
+# DR Strategy:
+# - AWS Backup copies EC2 AMIs and RDS snapshots to this region
+# - On failover: restore RDS, launch EC2 from AMI, update DNS
+# - ElastiCache rebuilds and warms from database
 #------------------------------------------------------------------------------
 
+#------------------------------------------------------------------------------
+# Locals
+#------------------------------------------------------------------------------
 locals {
-  # Auto-discover environment from folder name (prod, test, dr)
-  auto_environment = basename(path.module)
+  environment = basename(path.module)
+  name_prefix = "${var.solution.abbr}-${local.environment}"
 
-  # Use explicit variable if set, otherwise auto-discover
-  environment = var.environment != "" ? var.environment : local.auto_environment
-
-  # Environment display names for human-readable outputs
+  # Environment display name mapping
   env_display_name = {
     prod = "Production"
     test = "Test"
     dr   = "Disaster Recovery"
   }
 
-  # Standardized naming prefix: {solution_abbr}-{environment}
-  # Example: vxr-dr, sfi-dr, pci-dr
-  name_prefix = "${var.solution_abbr}-${local.environment}"
+  #----------------------------------------------------------------------------
+  # Shared Configuration Objects
+  #----------------------------------------------------------------------------
+  project = {
+    name        = var.solution.abbr
+    environment = local.environment
+  }
 
-  # Common tags applied to ALL resources via provider default_tags
   common_tags = {
-    Solution     = var.solution_name
-    SolutionAbbr = var.solution_abbr
+    Solution     = var.solution.name
+    SolutionAbbr = var.solution.abbr
     Environment  = local.environment
-    EnvDisplay   = lookup(local.env_display_name, local.environment, local.environment)
-    Provider     = var.provider_name
-    Category     = var.category_name
-    Region       = var.aws_region
+    Provider     = var.solution.provider_name
+    Category     = var.solution.category_name
+    Region       = var.aws.region
     ManagedBy    = "terraform"
-    CostCenter   = var.cost_center
-    Owner        = var.owner_email
-    ProjectCode  = var.project_code
+    CostCenter   = var.ownership.cost_center
+    Owner        = var.ownership.owner_email
+    ProjectCode  = var.ownership.project_code
     # DR-specific tags
     Purpose      = "DisasterRecovery"
     Standby      = "true"
   }
-
-  # Merge with any additional custom tags
-  all_tags = merge(local.common_tags, var.additional_tags)
 }
 
 #------------------------------------------------------------------------------
-# Core Infrastructure (Required)
+# Data Sources
 #------------------------------------------------------------------------------
+data "aws_caller_identity" "current" {}
+data "aws_region" "current" {}
 
+#===============================================================================
+# FOUNDATION - Core infrastructure that other modules depend on
+#===============================================================================
+#------------------------------------------------------------------------------
+# Core Infrastructure (VPC, ALB, ASG - Standby)
+#------------------------------------------------------------------------------
 module "core" {
   source = "../../modules/solution/core"
 
-  # Naming (using standardized prefix from locals)
   name_prefix     = local.name_prefix
-  project_name    = var.solution_name
+  project_name    = var.solution.name
   environment     = local.environment
-  additional_tags = local.all_tags
-
-  # Networking (mirror production topology)
-  vpc_cidr              = var.vpc_cidr
-  public_subnet_cidrs   = var.public_subnet_cidrs
-  private_subnet_cidrs  = var.private_subnet_cidrs
-  database_subnet_cidrs = var.database_subnet_cidrs
-  enable_dns_hostnames  = var.enable_dns_hostnames
-  enable_dns_support    = var.enable_dns_support
-  enable_nat_gateway    = var.enable_nat_gateway
-  single_nat_gateway    = var.single_nat_gateway
-  enable_flow_logs      = var.enable_flow_logs
-  flow_log_retention_days = var.flow_log_retention_days
-
-  # Security
-  allowed_https_cidrs     = var.allowed_https_cidrs
-  allowed_http_cidrs      = var.allowed_http_cidrs
-  allowed_ssh_cidrs       = var.allowed_ssh_cidrs
-  enable_ssh_access       = var.enable_ssh_access
-  enable_kms_encryption   = var.enable_kms_encryption
-  enable_instance_profile = var.enable_instance_profile
-  enable_ssm_access       = var.enable_ssm_access
-  require_imdsv2          = var.require_imdsv2
-  metadata_hop_limit      = var.metadata_hop_limit
-
-  # Compute (same as production for failover capability)
-  instance_type              = var.instance_type
-  use_latest_ami             = var.use_latest_ami
-  root_volume_size           = var.root_volume_size
-  root_volume_type           = var.root_volume_type
-  root_volume_iops           = var.root_volume_iops
-  root_volume_throughput     = var.root_volume_throughput
-  enable_detailed_monitoring = var.enable_detailed_monitoring
-
-  # Auto Scaling (reduced capacity in standby mode)
-  enable_auto_scaling       = var.enable_auto_scaling
-  asg_min_size              = var.asg_min_size
-  asg_max_size              = var.asg_max_size
-  asg_desired_capacity      = var.asg_desired_capacity
-  health_check_grace_period = var.health_check_grace_period
-  scale_up_threshold        = var.scale_up_threshold
-  scale_down_threshold      = var.scale_down_threshold
-
-  # Load Balancer
-  enable_alb                    = var.enable_alb
-  alb_internal                  = var.alb_internal
-  enable_lb_deletion_protection = var.enable_lb_deletion_protection
-  acm_certificate_arn           = var.acm_certificate_arn
-  health_check_path             = var.health_check_path
-  health_check_interval         = var.health_check_interval
-  health_check_timeout          = var.health_check_timeout
-  healthy_threshold             = var.healthy_threshold
-  unhealthy_threshold           = var.unhealthy_threshold
-
-  # Application
-  app_port = var.app_port
+  additional_tags = local.common_tags
+  network         = var.network
+  security        = var.security
+  compute         = var.compute
+  alb             = var.alb
+  application     = var.application
+  kms_key_arn     = module.security.kms_key_arn
 }
 
 #------------------------------------------------------------------------------
-# Database (RDS - DR Configuration with Read Replica Support)
+# Security (KMS for DR Region - WAF association in INTEGRATIONS)
 #------------------------------------------------------------------------------
+module "security" {
+  source = "../../modules/solution/security"
 
+  name_prefix = local.name_prefix
+  common_tags = local.common_tags
+  security    = var.security
+}
+
+#===============================================================================
+# CORE SOLUTION - Primary solution components
+#===============================================================================
+#------------------------------------------------------------------------------
+# Database (RDS - Restored from Backup, alarms in INTEGRATIONS)
+#------------------------------------------------------------------------------
 module "database" {
   source = "../../modules/solution/database"
 
   name_prefix          = local.name_prefix
-  common_tags          = local.all_tags
+  common_tags          = local.common_tags
   environment          = local.environment
   db_subnet_group_name = module.core.db_subnet_group_name
   security_group_ids   = [module.core.database_security_group_id]
-
-  # Engine (must match production for replication)
-  db_engine         = var.db_engine
-  db_engine_version = var.db_engine_version
-  db_instance_class = var.db_instance_class
-
-  # Storage (same as production)
-  db_allocated_storage     = var.db_allocated_storage
-  db_max_allocated_storage = var.db_max_allocated_storage
-  db_storage_encrypted     = var.db_storage_encrypted
-
-  # Database
-  db_name     = var.db_name
-  db_username = var.db_username
-  db_password = var.db_password
-
-  # High Availability (enabled for DR)
-  db_multi_az = var.db_multi_az
-
-  # Backup (same as production for recovery)
-  db_backup_retention   = var.db_backup_retention
-  db_backup_window      = var.db_backup_window
-  db_maintenance_window = var.db_maintenance_window
-
-  # Monitoring
-  db_performance_insights = var.db_performance_insights
-
-  # Protection (enabled for DR)
-  db_deletion_protection = var.db_deletion_protection
-
-  # Alarms
-  enable_alarms       = true
-  alarm_sns_topic_arn = module.monitoring.sns_topic_arn
+  kms_key_arn          = module.security.kms_key_arn
+  database             = var.database
 }
 
 #------------------------------------------------------------------------------
-# Cache (ElastiCache Redis - DR Configuration)
+# Cache (ElastiCache Redis - Rebuilt on Failover, alarms in INTEGRATIONS)
 #------------------------------------------------------------------------------
-
 module "cache" {
   source = "../../modules/solution/cache"
+  count  = var.cache.enabled ? 1 : 0
 
-  name_prefix        = local.name_prefix
-  common_tags        = local.all_tags
-  subnet_ids         = module.core.private_subnet_ids
-  security_group_ids = [module.core.cache_security_group_id]
-
-  # Engine (same as production)
-  cache_engine_version = var.cache_engine_version
-  cache_node_type      = var.cache_node_type
-  cache_num_nodes      = var.cache_num_nodes
-
-  # High Availability
-  cache_automatic_failover = var.cache_automatic_failover
-
-  # Encryption
-  cache_at_rest_encryption = var.cache_at_rest_encryption
-  cache_transit_encryption = var.cache_transit_encryption
-
-  # Maintenance
-  cache_snapshot_retention = var.cache_snapshot_retention
-  cache_snapshot_window    = var.cache_snapshot_window
-
-  # Alarms
-  enable_alarms       = true
-  alarm_sns_topic_arn = module.monitoring.sns_topic_arn
+  name_prefix                   = local.name_prefix
+  common_tags                   = local.common_tags
+  elasticache_subnet_group_name = module.core.elasticache_subnet_group_name
+  security_group_ids            = [module.core.cache_security_group_id]
+  kms_key_arn                   = module.security.kms_key_arn
+  cache                         = var.cache
 }
 
+#===============================================================================
+# OPERATIONS - Monitoring, compliance, and DR vault
+#===============================================================================
 #------------------------------------------------------------------------------
 # Monitoring (CloudWatch - DR Alerting)
 #------------------------------------------------------------------------------
-
 module "monitoring" {
   source = "../../modules/solution/monitoring"
 
-  name_prefix  = local.name_prefix
-  common_tags  = local.all_tags
-  project_name = var.solution_name
-  environment  = local.environment
-
-  # Resource references
+  name_prefix      = local.name_prefix
+  common_tags      = local.common_tags
+  project_name     = var.solution.name
+  environment      = local.environment
+  kms_key_arn      = module.security.kms_key_arn
   alb_arn          = module.core.alb_arn
   asg_name         = module.core.asg_name
   rds_identifier   = module.database.rds_identifier
-  cache_cluster_id = module.cache.cache_replication_group_id
-
-  # Logging
-  log_retention_days        = var.log_retention_days
-  enable_container_insights = var.enable_container_insights
-
-  # Dashboard (enabled for DR visibility)
-  enable_dashboard = var.enable_dashboard
-
-  # Alerting (critical for DR)
-  alarm_email = var.alarm_email
-
-  # X-Ray
-  enable_xray_tracing = var.enable_xray_tracing
+  cache_cluster_id = var.cache.enabled ? module.cache[0].cache_replication_group_id : ""
+  monitoring       = var.monitoring
 }
 
-# NOTE: Security module (WAF, GuardDuty) is NOT included in DR environment.
-# Security controls are managed at the primary site level.
-# CloudTrail can be added if cross-region audit logging is required.
+#------------------------------------------------------------------------------
+# Best Practices (Config Rules, Budgets - No GuardDuty/Cross-Region Backup)
+#------------------------------------------------------------------------------
+module "best_practices" {
+  source = "../../modules/solution/best-practices"
+
+  providers = {
+    aws    = aws
+    aws.dr = aws  # DR points to itself (no further cross-region)
+  }
+
+  name_prefix        = local.name_prefix
+  common_tags        = local.common_tags
+  environment        = local.environment
+  kms_key_arn        = module.security.kms_key_arn
+  sns_topic_arn      = module.monitoring.sns_topic_arn
+  config_rules       = var.config_rules
+  guardduty_enhanced = var.guardduty_enhanced
+  backup             = var.backup
+  budget             = var.budget
+}
 
 #------------------------------------------------------------------------------
-# Well-Architected Framework: Operational Excellence (AWS Config - OPTIONAL)
+# Disaster Recovery Vault (Receives Backup Copies from Production)
 #------------------------------------------------------------------------------
-# Enable if DR region requires independent compliance monitoring
+module "dr" {
+  source = "../../modules/solution/dr"
+  count  = var.dr.enabled ? 1 : 0
 
-module "config_rules" {
-  source = "../../modules/aws/well-architected/operational-excellence/config-rules"
-  count  = var.enable_config_rules ? 1 : 0
-
-  name_prefix = local.name_prefix
-  common_tags = local.all_tags
-
-  # Config Recorder
-  enable_config_recorder = var.enable_config_recorder
-
-  # S3 for Config delivery
-  config_bucket_name       = var.config_bucket_name != "" ? var.config_bucket_name : "${local.name_prefix}-config"
-  config_bucket_prefix     = "config"
-  config_retention_days    = var.config_retention_days
-  enable_bucket_versioning = true
-  enable_bucket_encryption = true
-
-  # Rule categories - focus on reliability for DR
-  enable_security_rules    = true
-  enable_reliability_rules = true
-  enable_operational_rules = true
-  enable_cost_rules        = false
-
-  # Notifications via monitoring module
+  name_prefix   = local.name_prefix
+  environment   = local.environment
+  common_tags   = local.common_tags
+  kms_key_arn   = module.security.kms_key_arn
   sns_topic_arn = module.monitoring.sns_topic_arn
+  dr_region     = var.aws.dr_region
+  dr            = var.dr
+}
+
+#===============================================================================
+# INTEGRATIONS - Cross-module connections that break circular dependencies
+#===============================================================================
+#------------------------------------------------------------------------------
+# WAF to ALB Association (connects security → core)
+#------------------------------------------------------------------------------
+resource "aws_wafv2_web_acl_association" "alb" {
+  count = var.security.enable_waf && var.alb.enabled ? 1 : 0
+
+  resource_arn = module.core.alb_arn
+  web_acl_arn  = module.security.waf_web_acl_arn
 }
 
 #------------------------------------------------------------------------------
-# Well-Architected Framework: Reliability (AWS Backup - CRITICAL)
+# Database CloudWatch Alarms (connects database → monitoring)
 #------------------------------------------------------------------------------
-# Backup is essential for DR - receives cross-region copies from production
+resource "aws_cloudwatch_metric_alarm" "db_cpu" {
+  count               = var.monitoring.enable_dashboard ? 1 : 0
+  alarm_name          = "${local.name_prefix}-db-cpu-high"
+  comparison_operator = "GreaterThanOrEqualToThreshold"
+  evaluation_periods  = 2
+  metric_name         = "CPUUtilization"
+  namespace           = "AWS/RDS"
+  period              = 300
+  statistic           = "Average"
+  threshold           = 80
+  alarm_description   = "Database CPU utilization is high"
+  dimensions          = { DBInstanceIdentifier = module.database.rds_identifier }
+  alarm_actions       = [module.monitoring.sns_topic_arn]
+  tags                = local.common_tags
+}
 
-module "backup_plans" {
-  source = "../../modules/aws/well-architected/reliability/backup-plans"
-  count  = var.enable_backup_plans ? 1 : 0
+resource "aws_cloudwatch_metric_alarm" "db_storage" {
+  count               = var.monitoring.enable_dashboard ? 1 : 0
+  alarm_name          = "${local.name_prefix}-db-storage-low"
+  comparison_operator = "LessThanOrEqualToThreshold"
+  evaluation_periods  = 2
+  metric_name         = "FreeStorageSpace"
+  namespace           = "AWS/RDS"
+  period              = 300
+  statistic           = "Average"
+  threshold           = 10737418240 # 10 GB
+  alarm_description   = "Database free storage space is low"
+  dimensions          = { DBInstanceIdentifier = module.database.rds_identifier }
+  alarm_actions       = [module.monitoring.sns_topic_arn]
+  tags                = local.common_tags
+}
 
-  name_prefix = local.name_prefix
-  common_tags = local.all_tags
-
-  # Encryption (uses DR region's KMS key)
-  kms_key_arn    = var.dr_kms_key_arn
-  dr_kms_key_arn = null  # DR doesn't copy to another region
-
-  # Daily backup (local DR backups)
-  daily_backup_schedule = var.backup_daily_schedule
-  daily_retention_days  = var.backup_daily_retention
-
-  # Weekly backup
-  enable_weekly_backup   = true
-  weekly_backup_schedule = var.backup_weekly_schedule
-  weekly_retention_days  = var.backup_weekly_retention
-
-  # Monthly backup (archive)
-  enable_monthly_backup     = var.enable_monthly_backup
-  monthly_backup_schedule   = var.backup_monthly_schedule
-  monthly_retention_days    = var.backup_monthly_retention
-  monthly_cold_storage_days = var.backup_cold_storage_days
-
-  # No outbound cross-region copy (DR is the destination)
-  enable_cross_region_copy = false
-
-  # Resource selection
-  enable_tag_based_selection = true
-  backup_tag_key             = "Backup"
-  backup_tag_value           = "true"
-  resource_arns              = var.backup_resource_arns
-
-  # Additional features
-  enable_continuous_backup = var.enable_continuous_backup
-  enable_windows_vss       = var.enable_windows_vss
-
-  # Compliance (vault lock for immutable backups)
-  enable_vault_lock          = var.enable_backup_vault_lock
-  vault_lock_min_retention   = var.vault_lock_min_retention
-  vault_lock_max_retention   = var.vault_lock_max_retention
-  vault_lock_changeable_days = var.vault_lock_changeable_days
-
-  # Notifications via monitoring module
-  sns_topic_arn = module.monitoring.sns_topic_arn
-  notification_events = [
-    "BACKUP_JOB_STARTED",
-    "BACKUP_JOB_COMPLETED",
-    "BACKUP_JOB_FAILED",
-    "RESTORE_JOB_STARTED",
-    "RESTORE_JOB_COMPLETED",
-    "RESTORE_JOB_FAILED",
-    "COPY_JOB_STARTED",
-    "COPY_JOB_SUCCESSFUL",
-    "COPY_JOB_FAILED"
-  ]
+resource "aws_cloudwatch_metric_alarm" "db_connections" {
+  count               = var.monitoring.enable_dashboard ? 1 : 0
+  alarm_name          = "${local.name_prefix}-db-connections-high"
+  comparison_operator = "GreaterThanOrEqualToThreshold"
+  evaluation_periods  = 2
+  metric_name         = "DatabaseConnections"
+  namespace           = "AWS/RDS"
+  period              = 300
+  statistic           = "Average"
+  threshold           = 100
+  alarm_description   = "Database connection count is high"
+  dimensions          = { DBInstanceIdentifier = module.database.rds_identifier }
+  alarm_actions       = [module.monitoring.sns_topic_arn]
+  tags                = local.common_tags
 }
 
 #------------------------------------------------------------------------------
-# Well-Architected Framework: Cost Optimization (AWS Budgets)
+# Cache CloudWatch Alarms (connects cache → monitoring)
 #------------------------------------------------------------------------------
-# Monitor DR infrastructure costs
+resource "aws_cloudwatch_metric_alarm" "cache_cpu" {
+  count               = var.cache.enabled && var.monitoring.enable_dashboard ? 1 : 0
+  alarm_name          = "${local.name_prefix}-cache-cpu-high"
+  comparison_operator = "GreaterThanOrEqualToThreshold"
+  evaluation_periods  = 2
+  metric_name         = "CPUUtilization"
+  namespace           = "AWS/ElastiCache"
+  period              = 300
+  statistic           = "Average"
+  threshold           = 75
+  alarm_description   = "Cache CPU utilization is high"
+  dimensions          = { CacheClusterId = module.cache[0].cache_replication_group_id }
+  alarm_actions       = [module.monitoring.sns_topic_arn]
+  tags                = local.common_tags
+}
 
-module "budgets" {
-  source = "../../modules/aws/well-architected/cost-optimization/budgets"
-  count  = var.enable_budgets ? 1 : 0
+resource "aws_cloudwatch_metric_alarm" "cache_memory" {
+  count               = var.cache.enabled && var.monitoring.enable_dashboard ? 1 : 0
+  alarm_name          = "${local.name_prefix}-cache-memory-high"
+  comparison_operator = "GreaterThanOrEqualToThreshold"
+  evaluation_periods  = 2
+  metric_name         = "DatabaseMemoryUsagePercentage"
+  namespace           = "AWS/ElastiCache"
+  period              = 300
+  statistic           = "Average"
+  threshold           = 80
+  alarm_description   = "Cache memory usage is high"
+  dimensions          = { CacheClusterId = module.cache[0].cache_replication_group_id }
+  alarm_actions       = [module.monitoring.sns_topic_arn]
+  tags                = local.common_tags
+}
 
-  name_prefix = local.name_prefix
-  common_tags = local.all_tags
-  environment = local.environment
-
-  # Monthly cost budget
-  enable_cost_budget    = true
-  monthly_budget_amount = var.monthly_budget_amount
-  alert_thresholds      = var.budget_alert_thresholds
-  enable_forecast_alert = true
-  forecast_threshold    = var.budget_forecast_threshold
-
-  # Alert recipients
-  alert_emails   = var.budget_alert_emails
-  sns_topic_arns = [module.monitoring.sns_topic_arn]
-
-  # Budget filters (optional)
-  cost_filter_tags = var.budget_cost_filter_tags
-
-  # Service-specific budgets
-  enable_service_budgets      = var.enable_service_budgets
-  ec2_budget_amount           = var.ec2_budget_amount
-  rds_budget_amount           = var.rds_budget_amount
-  data_transfer_budget_amount = var.data_transfer_budget_amount
-
-  # Usage budget
-  enable_usage_budget   = var.enable_usage_budget
-  ec2_usage_hours_limit = var.ec2_usage_hours_limit
-
-  # Budget actions (auto-remediation - use with caution in DR)
-  enable_budget_actions    = var.enable_budget_actions
-  budget_action_approval   = var.budget_action_approval
-  action_threshold         = var.budget_action_threshold
-  ec2_instance_ids_to_stop = var.budget_ec2_instances_to_stop
+resource "aws_cloudwatch_metric_alarm" "cache_evictions" {
+  count               = var.cache.enabled && var.monitoring.enable_dashboard ? 1 : 0
+  alarm_name          = "${local.name_prefix}-cache-evictions-high"
+  comparison_operator = "GreaterThanOrEqualToThreshold"
+  evaluation_periods  = 2
+  metric_name         = "Evictions"
+  namespace           = "AWS/ElastiCache"
+  period              = 300
+  statistic           = "Sum"
+  threshold           = 1000
+  alarm_description   = "Cache eviction rate is high"
+  dimensions          = { CacheClusterId = module.cache[0].cache_replication_group_id }
+  alarm_actions       = [module.monitoring.sns_topic_arn]
+  tags                = local.common_tags
 }

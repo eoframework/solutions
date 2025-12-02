@@ -226,16 +226,12 @@ resource "aws_wafv2_web_acl" "this" {
   })
 }
 
-#------------------------------------------------------------------------------
-# Web ACL Association (for ALB)
-#------------------------------------------------------------------------------
-
-resource "aws_wafv2_web_acl_association" "this" {
-  count = var.resource_arn != "" ? 1 : 0
-
-  resource_arn = var.resource_arn
-  web_acl_arn  = aws_wafv2_web_acl.this.arn
-}
+# NOTE: Web ACL Association removed from this module to avoid circular dependencies
+# Association should be done in environment main.tf INTEGRATIONS section using:
+#   resource "aws_wafv2_web_acl_association" "alb" {
+#     resource_arn = module.core.alb_arn
+#     web_acl_arn  = module.security.waf_web_acl_arn
+#   }
 
 #------------------------------------------------------------------------------
 # WAF Logging (optional)

@@ -35,54 +35,6 @@ module "rds" {
   database             = var.database
 }
 
-#------------------------------------------------------------------------------
-# CloudWatch Alarms
-#------------------------------------------------------------------------------
-
-resource "aws_cloudwatch_metric_alarm" "db_cpu" {
-  count               = var.enable_alarms ? 1 : 0
-  alarm_name          = "${local.name_prefix}-db-cpu-high"
-  comparison_operator = "GreaterThanOrEqualToThreshold"
-  evaluation_periods  = 2
-  metric_name         = "CPUUtilization"
-  namespace           = "AWS/RDS"
-  period              = 300
-  statistic           = "Average"
-  threshold           = 80
-  alarm_description   = "Database CPU utilization is high"
-  dimensions          = { DBInstanceIdentifier = module.rds.db_instance_identifier }
-  alarm_actions       = var.alarm_sns_topic_arn != "" ? [var.alarm_sns_topic_arn] : []
-  tags                = local.common_tags
-}
-
-resource "aws_cloudwatch_metric_alarm" "db_storage" {
-  count               = var.enable_alarms ? 1 : 0
-  alarm_name          = "${local.name_prefix}-db-storage-low"
-  comparison_operator = "LessThanOrEqualToThreshold"
-  evaluation_periods  = 2
-  metric_name         = "FreeStorageSpace"
-  namespace           = "AWS/RDS"
-  period              = 300
-  statistic           = "Average"
-  threshold           = 10737418240 # 10 GB
-  alarm_description   = "Database free storage space is low"
-  dimensions          = { DBInstanceIdentifier = module.rds.db_instance_identifier }
-  alarm_actions       = var.alarm_sns_topic_arn != "" ? [var.alarm_sns_topic_arn] : []
-  tags                = local.common_tags
-}
-
-resource "aws_cloudwatch_metric_alarm" "db_connections" {
-  count               = var.enable_alarms ? 1 : 0
-  alarm_name          = "${local.name_prefix}-db-connections-high"
-  comparison_operator = "GreaterThanOrEqualToThreshold"
-  evaluation_periods  = 2
-  metric_name         = "DatabaseConnections"
-  namespace           = "AWS/RDS"
-  period              = 300
-  statistic           = "Average"
-  threshold           = 100
-  alarm_description   = "Database connection count is high"
-  dimensions          = { DBInstanceIdentifier = module.rds.db_instance_identifier }
-  alarm_actions       = var.alarm_sns_topic_arn != "" ? [var.alarm_sns_topic_arn] : []
-  tags                = local.common_tags
-}
+# NOTE: CloudWatch alarms removed from this module to avoid circular dependencies
+# Database alarms should be created in environment main.tf INTEGRATIONS section
+# This allows monitoring module to be created first, then database, then alarms

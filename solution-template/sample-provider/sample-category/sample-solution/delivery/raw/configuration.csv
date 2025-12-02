@@ -1,261 +1,278 @@
-#WIDTH: 45,14,50,50,45,8,12,27,14,14,12,30,12
-#ALIGN: left,left,left,left,left,center,left,left,center,left,left,left,center
-Parameter Name,Category,Production,Test,Description,Required,Data Type,Validation Rules,Security Level,Owner Team,Dependencies,Notes,Last Updated
-application.enable_debug,Application,false,true,Enable Debug,Yes,Boolean,true|false,Public,Development,,From application object,2025-11-30
-application.health_path,Application,/health,/health,Health Path,Yes,String,Valid string value,Public,Development,,From application object,2025-11-30
-application.log_level,Application,warn,debug,Log Level,Yes,String,Valid string value,Public,Development,,From application object,2025-11-30
-application.metrics_path,Application,/metrics,/metrics,Metrics Path,Yes,String,Valid string value,Public,Development,,From application object,2025-11-30
-application.name,Application,sample-solution,sample-solution,Solution name for resource naming,Yes,String,Valid string value,Public,Development,,From application object,2025-11-30
-application.port,Application,8080,8080,Cache port number,Yes,Integer,Valid port number (1-65535),Public,Development,,From application object,2025-11-30
-application.rate_limit,Application,1000,1000,Rate Limit,Yes,Integer,Valid integer,Public,Development,,From application object,2025-11-30
-application.session_timeout,Application,3600,3600,Session Timeout,Yes,Integer,Valid integer,Public,Development,,From application object,2025-11-30
-application.version,Application,1.0.0,1.0.0,Version,Yes,String,Valid string value,Public,Development,,From application object,2025-11-30
-solution.abbr,Application,smp,smp,Solution abbreviation (3-4 chars),Yes,String,Valid string value,Public,Development,,From solution object,2025-11-30
-solution.category_name,Application,sample-category,sample-category,Solution category,Yes,String,Valid string value,Public,Development,,From solution object,2025-11-30
-solution.name,Application,sample-solution,sample-solution,Solution name for resource naming,Yes,String,Valid string value,Public,Development,,From solution object,2025-11-30
-solution.provider_name,Application,sample-provider,sample-provider,Provider organization name,Yes,String,Valid string value,Public,Development,,From solution object,2025-11-30
-backup.backup_tag_key,Best Practices,Backup,Backup,Backup tag key,Yes,String,Valid string value,Public,Operations,,From backup object,2025-11-30
-backup.backup_tag_value,Best Practices,true,true,Backup tag value,Yes,String,Valid string value,Public,Operations,,From backup object,2025-11-30
-backup.cold_storage_days,Best Practices,90,90,Days before cold storage transition,Yes,Integer,Positive integer (days),Public,Operations,,From backup object,2025-11-30
-backup.daily_retention,Best Practices,30,7,Daily backup retention (days),Yes,Integer,Positive integer (days),Public,Operations,,From backup object,2025-11-30
-backup.daily_schedule,Best Practices,cron(0 5 * * ? *),cron(0 5 * * ? *),Daily backup schedule (cron),Yes,String,Valid cron expression,Public,Operations,,From backup object,2025-11-30
-backup.dr_retention,Best Practices,30,30,DR backup retention (days),Yes,Integer,Positive integer (days),Public,Operations,,From backup object,2025-11-30
-backup.enable_continuous,Best Practices,false,false,Enable continuous backup,Yes,Boolean,true|false,Public,Operations,,From backup object,2025-11-30
-backup.enable_cross_region,Best Practices,false,false,Enable cross-region backup copy,Yes,Boolean,true|false,Public,Operations,,From backup object,2025-11-30
-backup.enable_monthly,Best Practices,true,true,Enable Monthly,Yes,Boolean,true|false,Public,Operations,,From backup object,2025-11-30
-backup.enable_s3_backup,Best Practices,false,false,Enable S3 Backup,Yes,Boolean,true|false,Public,Operations,,From backup object,2025-11-30
-backup.enable_tag_selection,Best Practices,true,true,Enable tag-based resource selection,Yes,Boolean,true|false,Public,Operations,,From backup object,2025-11-30
-backup.enable_vault_lock,Best Practices,false,false,Enable vault lock,Yes,Boolean,true|false,Public,Operations,,From backup object,2025-11-30
-backup.enable_vault_policy,Best Practices,true,true,Enable vault policy,Yes,Boolean,true|false,Public,Operations,,From backup object,2025-11-30
-backup.enable_weekly,Best Practices,true,true,Enable Weekly,Yes,Boolean,true|false,Public,Operations,,From backup object,2025-11-30
-backup.enable_windows_vss,Best Practices,false,false,Enable Windows Vss,Yes,Boolean,true|false,Public,Operations,,From backup object,2025-11-30
-backup.enabled,Best Practices,true,false,Enable this resource,Yes,Boolean,true|false,Public,Operations,,From backup object,2025-11-30
-backup.monthly_retention,Best Practices,365,30,Monthly backup retention (days),Yes,Integer,Positive integer (days),Public,Operations,,From backup object,2025-11-30
-backup.monthly_schedule,Best Practices,cron(0 5 1 * ? *),cron(0 5 1 * ? *),Monthly backup schedule (cron),Yes,String,Valid cron expression,Public,Operations,,From backup object,2025-11-30
-backup.notification_events,Best Practices,"[""BACKUP_JOB_STARTED"", ""BACKUP_JOB_COMPLETED"", ""BACKUP_JOB_FAILED"", ""RESTORE_JOB_STARTED"", ""RESTORE_JOB_COMPLETED"", ""RESTORE_JOB_FAILED""]","[""BACKUP_JOB_STARTED"", ""BACKUP_JOB_COMPLETED"", ""BACKUP_JOB_FAILED"", ""RESTORE_JOB_STARTED"", ""RESTORE_JOB_COMPLETED"", ""RESTORE_JOB_FAILED""]",Backup notification events,Yes,List(String),Valid list of strings,Public,Operations,,From backup object,2025-11-30
-backup.resource_arns,Best Practices,[],[],Specific resource ARNs to backup,No,List,Valid AWS ARN,Confidential,Operations,,From backup object,2025-11-30
-backup.vault_lock_changeable_days,Best Practices,3,3,Vault Lock Changeable Days,Yes,Integer,Positive integer (days),Public,Operations,,From backup object,2025-11-30
-backup.vault_lock_max_retention,Best Practices,365,365,Vault Lock Max Retention,Yes,Integer,Positive integer (days),Public,Operations,,From backup object,2025-11-30
-backup.vault_lock_min_retention,Best Practices,7,7,Vault Lock Min Retention,Yes,Integer,Positive integer (days),Public,Operations,,From backup object,2025-11-30
-backup.weekly_retention,Best Practices,90,14,Weekly backup retention (days),Yes,Integer,Positive integer (days),Public,Operations,,From backup object,2025-11-30
-backup.weekly_schedule,Best Practices,cron(0 5 ? * SUN *),cron(0 5 ? * SUN *),Weekly backup schedule (cron),Yes,String,Valid cron expression,Public,Operations,,From backup object,2025-11-30
-budget.action_approval,Best Practices,MANUAL,MANUAL,Budget action approval mode,Yes,String,Valid string value,Public,Operations,,From budget object,2025-11-30
-budget.action_threshold,Best Practices,100,100,Budget action threshold (%),Yes,Integer,Percentage (0-100),Public,Operations,,From budget object,2025-11-30
-budget.alert_emails,Best Practices,[],[],Budget alert email addresses,No,List,Valid email address,Confidential,Operations,,From budget object,2025-11-30
-budget.alert_thresholds,Best Practices,"[50, 80, 100]","[50, 80, 100]",Budget alert threshold percentages,Yes,String,Percentage (0-100),Public,Operations,,From budget object,2025-11-30
-budget.budget_currency,Best Practices,USD,USD,Budget currency,Yes,String,Valid string value,Public,Operations,,From budget object,2025-11-30
-budget.budget_time_unit,Best Practices,MONTHLY,MONTHLY,Budget time unit,Yes,String,Valid string value,Public,Operations,,From budget object,2025-11-30
-budget.data_transfer_budget_amount,Best Practices,0,0,Data transfer monthly budget (USD),Yes,Integer,Valid integer,Public,Operations,,From budget object,2025-11-30
-budget.ec2_budget_amount,Best Practices,0,0,EC2 monthly budget (USD),Yes,Integer,Valid integer,Public,Operations,,From budget object,2025-11-30
-budget.ec2_instances_to_stop,Best Practices,[],[],Ec2 Instances To Stop,No,List,Valid list,Public,Operations,,From budget object,2025-11-30
-budget.ec2_usage_hours_limit,Best Practices,1000,1000,EC2 monthly usage limit (hours),Yes,Integer,Valid integer,Public,Operations,,From budget object,2025-11-30
-budget.enable_actions,Best Practices,false,false,Enable budget actions,Yes,Boolean,true|false,Public,Operations,,From budget object,2025-11-30
-budget.enable_cost_budget,Best Practices,true,true,Enable cost budget,Yes,Boolean,true|false,Public,Operations,,From budget object,2025-11-30
-budget.enable_forecast_alert,Best Practices,true,true,Enable forecast alerts,Yes,Boolean,true|false,Public,Operations,,From budget object,2025-11-30
-budget.enable_service_budgets,Best Practices,false,false,Enable per-service budgets,Yes,Boolean,true|false,Public,Operations,,From budget object,2025-11-30
-budget.enable_usage_budget,Best Practices,false,false,Enable usage budget,Yes,Boolean,true|false,Public,Operations,,From budget object,2025-11-30
-budget.enabled,Best Practices,true,false,Enable this resource,Yes,Boolean,true|false,Public,Operations,,From budget object,2025-11-30
-budget.forecast_threshold,Best Practices,100,100,Forecast alert threshold (%),Yes,Integer,Percentage (0-100),Public,Operations,,From budget object,2025-11-30
-budget.monthly_amount,Best Practices,1000,1000,Monthly budget limit (USD),Yes,Integer,Valid integer,Public,Operations,,From budget object,2025-11-30
-budget.notification_comparison,Best Practices,GREATER_THAN,GREATER_THAN,Notification Comparison,Yes,String,Valid string value,Public,Operations,,From budget object,2025-11-30
-budget.notification_threshold_type,Best Practices,PERCENTAGE,PERCENTAGE,Notification Threshold Type,Yes,String,Percentage (0-100),Public,Operations,,From budget object,2025-11-30
-budget.notification_type,Best Practices,ACTUAL,ACTUAL,Notification Type,Yes,String,Valid string value,Public,Operations,,From budget object,2025-11-30
-budget.rds_budget_amount,Best Practices,0,0,RDS monthly budget (USD),Yes,Integer,Valid integer,Public,Operations,,From budget object,2025-11-30
-budget.service_alert_threshold,Best Practices,80,80,Service Alert Threshold,Yes,Integer,Percentage (0-100),Public,Operations,,From budget object,2025-11-30
-config_rules.delivery_frequency,Best Practices,TwentyFour_Hours,TwentyFour_Hours,Delivery Frequency,Yes,String,Valid string value,Public,Operations,,From config_rules object,2025-11-30
-config_rules.enable_cost_rules,Best Practices,true,true,Enable Cost Rules,Yes,Boolean,true|false,Public,Operations,,From config_rules object,2025-11-30
-config_rules.enable_operational_rules,Best Practices,true,true,Enable Operational Rules,Yes,Boolean,true|false,Public,Operations,,From config_rules object,2025-11-30
-config_rules.enable_recorder,Best Practices,true,true,Enable Recorder,Yes,Boolean,true|false,Public,Operations,,From config_rules object,2025-11-30
-config_rules.enable_reliability_rules,Best Practices,true,true,Enable Reliability Rules,Yes,Boolean,true|false,Public,Operations,,From config_rules object,2025-11-30
-config_rules.enable_security_rules,Best Practices,true,true,Enable Security Rules,Yes,Boolean,true|false,Public,Operations,,From config_rules object,2025-11-30
-config_rules.enabled,Best Practices,true,false,Enable this resource,Yes,Boolean,true|false,Public,Operations,,From config_rules object,2025-11-30
-config_rules.excluded_resource_types,Best Practices,[],[],Excluded Resource Types,No,List,Valid list,Public,Operations,,From config_rules object,2025-11-30
-config_rules.include_global_resources,Best Practices,true,true,Include Global Resources,Yes,Boolean,true|false,Public,Operations,,From config_rules object,2025-11-30
-config_rules.min_backup_retention_days,Best Practices,7,7,Min Backup Retention Days,Yes,Integer,Positive integer (days),Public,Operations,,From config_rules object,2025-11-30
-config_rules.record_all_resources,Best Practices,true,true,Record All Resources,Yes,Boolean,true|false,Public,Operations,,From config_rules object,2025-11-30
-config_rules.retention_days,Best Practices,365,365,Retention Days,Yes,Integer,Positive integer (days),Public,Operations,,From config_rules object,2025-11-30
-guardduty_enhanced.enable_eks_protection,Best Practices,false,false,Enable EKS audit log protection,Yes,Boolean,true|false,Public,Operations,,From guardduty_enhanced object,2025-11-30
-guardduty_enhanced.enable_malware_protection,Best Practices,true,true,Enable EBS malware protection,Yes,Boolean,true|false,Public,Operations,,From guardduty_enhanced object,2025-11-30
-guardduty_enhanced.enable_s3_export,Best Practices,true,true,Enable findings export to S3,Yes,Boolean,Valid port number (1-65535),Public,Operations,,From guardduty_enhanced object,2025-11-30
-guardduty_enhanced.enabled,Best Practices,false,false,Enable this resource,Yes,Boolean,true|false,Public,Operations,,From guardduty_enhanced object,2025-11-30
-guardduty_enhanced.findings_retention_days,Best Practices,365,365,Findings retention (days),Yes,Integer,Positive integer (days),Public,Operations,,From guardduty_enhanced object,2025-11-30
-guardduty_enhanced.severity_threshold,Best Practices,7,7,Severity Threshold,Yes,Integer,Valid integer,Public,Operations,,From guardduty_enhanced object,2025-11-30
-cache.at_rest_encryption,Cache,true,true,At Rest Encryption,Yes,Boolean,true|false,Public,Infrastructure,,From cache object,2025-11-30
-cache.auth_token_param_name,Cache,cache/auth-token,cache/auth-token,Auth Token Param Name,Yes,String,Valid string value,Secret,Infrastructure,,From cache object,2025-11-30
-cache.auto_minor_version_upgrade,Cache,true,true,Enable auto minor version upgrade,Yes,Boolean,true|false,Public,Infrastructure,,From cache object,2025-11-30
-cache.automatic_failover,Cache,true,false,Automatic Failover,Yes,Boolean,true|false,Public,Infrastructure,,From cache object,2025-11-30
-cache.cluster_mode_enabled,Cache,false,false,Cluster Mode Enabled,Yes,Boolean,true|false,Public,Infrastructure,,From cache object,2025-11-30
-cache.cluster_mode_replicas,Cache,1,1,Cluster Mode Replicas,Yes,Integer,Valid integer,Public,Infrastructure,,From cache object,2025-11-30
-cache.cluster_mode_shards,Cache,1,1,Cluster Mode Shards,Yes,Integer,Valid integer,Public,Infrastructure,,From cache object,2025-11-30
-cache.enabled,Cache,true,true,Enable this resource,Yes,Boolean,true|false,Public,Infrastructure,,From cache object,2025-11-30
-cache.engine,Cache,redis,redis,Database engine type,Yes,String,Valid string value,Public,Infrastructure,,From cache object,2025-11-30
-cache.engine_version,Cache,7.0,7.0,Database engine version,Yes,String,Valid string value,Public,Infrastructure,,From cache object,2025-11-30
-cache.maintenance_window,Cache,sun:06:00-sun:07:00,sun:06:00-sun:07:00,Preferred maintenance window,Yes,String,Valid string value,Public,Infrastructure,,From cache object,2025-11-30
-cache.node_type,Cache,cache.r6g.large,cache.t3.micro,ElastiCache node type,Yes,String,Valid string value,Public,Infrastructure,,From cache object,2025-11-30
-cache.num_nodes,Cache,2,1,Num Nodes,Yes,Integer,Valid integer,Public,Infrastructure,,From cache object,2025-11-30
-cache.port,Cache,6379,6379,Cache port number,Yes,Integer,Valid port number (1-65535),Public,Infrastructure,,From cache object,2025-11-30
-cache.snapshot_retention,Cache,7,1,Snapshot Retention,Yes,Integer,Positive integer (days),Public,Infrastructure,,From cache object,2025-11-30
-cache.snapshot_window,Cache,05:00-06:00,05:00-06:00,Preferred snapshot window,Yes,String,Valid string value,Public,Infrastructure,,From cache object,2025-11-30
-cache.transit_encryption,Cache,true,true,Transit Encryption,Yes,Boolean,true|false,Public,Infrastructure,,From cache object,2025-11-30
-compute.ami_filter_name,Compute,al2023-ami-*-x86_64,al2023-ami-*-x86_64,Ami Filter Name,Yes,String,Valid string value,Public,Infrastructure,,From compute object,2025-11-30
-compute.ami_owner,Compute,amazon,amazon,AMI owner (amazon/self),Yes,String,Valid string value,Public,Infrastructure,,From compute object,2025-11-30
-compute.ami_virtualization,Compute,hvm,hvm,Ami Virtualization,Yes,String,Valid string value,Public,Infrastructure,,From compute object,2025-11-30
-compute.asg_desired_capacity,Compute,3,3,ASG desired instance count,Yes,Integer,Valid integer,Public,Infrastructure,,From compute object,2025-11-30
-compute.asg_max_size,Compute,10,10,ASG maximum instance count,Yes,Integer,Valid integer,Public,Infrastructure,,From compute object,2025-11-30
-compute.asg_min_size,Compute,2,2,ASG minimum instance count,Yes,Integer,Valid integer,Public,Infrastructure,,From compute object,2025-11-30
-compute.associate_public_ip,Compute,false,false,Associate Public Ip,Yes,Boolean,true|false,Public,Infrastructure,,From compute object,2025-11-30
-compute.default_cooldown,Compute,300,300,Default Cooldown,Yes,Integer,Valid integer,Public,Infrastructure,,From compute object,2025-11-30
-compute.delete_on_termination,Compute,true,true,Delete On Termination,Yes,Boolean,true|false,Public,Infrastructure,,From compute object,2025-11-30
-compute.enable_auto_scaling,Compute,true,true,Enable Auto Scaling Group,Yes,Boolean,true|false,Public,Infrastructure,,From compute object,2025-11-30
-compute.enable_detailed_monitoring,Compute,true,true,Enable detailed CloudWatch monitoring,Yes,Boolean,true|false,Public,Infrastructure,,From compute object,2025-11-30
-compute.health_check_grace_period,Compute,300,300,Health Check Grace Period,Yes,Integer,Valid integer,Public,Infrastructure,,From compute object,2025-11-30
-compute.health_check_type,Compute,ELB,ELB,Health Check Type,Yes,String,Valid string value,Public,Infrastructure,,From compute object,2025-11-30
-compute.instance_refresh_min_healthy,Compute,50,50,Instance Refresh Min Healthy,Yes,Integer,Valid integer,Public,Infrastructure,,From compute object,2025-11-30
-compute.instance_refresh_strategy,Compute,Rolling,Rolling,Instance Refresh Strategy,Yes,String,Valid string value,Public,Infrastructure,,From compute object,2025-11-30
-compute.instance_refresh_warmup,Compute,300,300,Instance Refresh Warmup,Yes,Integer,Valid integer,Public,Infrastructure,,From compute object,2025-11-30
-compute.instance_type,Compute,t3.medium,t3.small,EC2 instance type,Yes,String,Valid string value,Public,Infrastructure,,From compute object,2025-11-30
-compute.launch_template_version,Compute,$Latest,$Latest,Launch Template Version,Yes,String,Valid string value,Public,Infrastructure,,From compute object,2025-11-30
-compute.metadata_hop_limit,Compute,1,1,IMDS hop limit,Yes,Integer,Valid integer,Public,Infrastructure,,From compute object,2025-11-30
-compute.metadata_http_endpoint,Compute,enabled,enabled,Metadata Http Endpoint,Yes,String,Valid string value,Public,Infrastructure,,From compute object,2025-11-30
-compute.metadata_http_tokens,Compute,required,required,Metadata Http Tokens,Yes,String,Valid string value,Secret,Infrastructure,,From compute object,2025-11-30
-compute.metadata_tags_enabled,Compute,enabled,enabled,Metadata Tags Enabled,Yes,String,Valid string value,Public,Infrastructure,,From compute object,2025-11-30
-compute.propagate_tags_at_launch,Compute,true,true,Propagate Tags At Launch,Yes,Boolean,true|false,Public,Infrastructure,,From compute object,2025-11-30
-compute.root_volume_device,Compute,/dev/xvda,/dev/xvda,Root Volume Device,Yes,String,Valid string value,Public,Infrastructure,,From compute object,2025-11-30
-compute.root_volume_encrypted,Compute,true,true,Encrypt root volume,Yes,Boolean,true|false,Public,Infrastructure,,From compute object,2025-11-30
-compute.root_volume_iops,Compute,3000,3000,Root volume IOPS (io1/io2),Yes,Integer,Valid integer,Public,Infrastructure,,From compute object,2025-11-30
-compute.root_volume_size,Compute,50,50,Root volume size (GB),Yes,Integer,Valid integer,Public,Infrastructure,,From compute object,2025-11-30
-compute.root_volume_throughput,Compute,125,125,Root volume throughput (gp3),Yes,Integer,Valid integer,Public,Infrastructure,,From compute object,2025-11-30
-compute.root_volume_type,Compute,gp3,gp3,Root volume type (gp3/gp2/io1),Yes,String,Valid string value,Public,Infrastructure,,From compute object,2025-11-30
-compute.scale_down_adjustment,Compute,-1,-1,Instances to remove on scale down,Yes,Integer,Valid integer,Public,Infrastructure,,From compute object,2025-11-30
-compute.scale_down_threshold,Compute,30,30,CPU threshold for scale down (%),Yes,Integer,Percentage (0-100),Public,Infrastructure,,From compute object,2025-11-30
-compute.scale_up_adjustment,Compute,2,2,Instances to add on scale up,Yes,Integer,Valid integer,Public,Infrastructure,,From compute object,2025-11-30
-compute.scale_up_threshold,Compute,70,70,CPU threshold for scale up (%),Yes,Integer,Percentage (0-100),Public,Infrastructure,,From compute object,2025-11-30
-compute.scaling_cooldown,Compute,300,300,Scaling Cooldown,Yes,Integer,Valid integer,Public,Infrastructure,,From compute object,2025-11-30
-compute.suspended_processes,Compute,[],[],Suspended Processes,No,List,Valid list,Public,Infrastructure,,From compute object,2025-11-30
-compute.termination_policies,Compute,"[""Default""]","[""Default""]",Termination Policies,Yes,List(String),Valid list of strings,Public,Infrastructure,,From compute object,2025-11-30
-compute.use_latest_ami,Compute,true,true,Use latest Amazon Linux 2023 AMI,Yes,Boolean,true|false,Public,Infrastructure,,From compute object,2025-11-30
-database.allocated_storage,Database,100,20,Initial storage (GB),Yes,Integer,Valid integer,Public,Infrastructure,,From database object,2025-11-30
-database.allow_major_version_upgrade,Database,false,false,Allow Major Version Upgrade,Yes,Boolean,true|false,Public,Infrastructure,,From database object,2025-11-30
-database.auto_minor_version_upgrade,Database,true,true,Enable auto minor version upgrade,Yes,Boolean,true|false,Public,Infrastructure,,From database object,2025-11-30
-database.backup_retention,Database,30,7,Backup Retention,Yes,Integer,Positive integer (days),Public,Infrastructure,,From database object,2025-11-30
-database.backup_window,Database,03:00-04:00,03:00-04:00,Preferred backup window,Yes,String,Valid string value,Public,Infrastructure,,From database object,2025-11-30
-database.copy_tags_to_snapshot,Database,true,true,Copy Tags To Snapshot,Yes,Boolean,true|false,Public,Infrastructure,,From database object,2025-11-30
-database.deletion_protection,Database,true,false,Enable deletion protection,Yes,Boolean,true|false,Public,Infrastructure,,From database object,2025-11-30
-database.enabled,Database,true,true,Enable this resource,Yes,Boolean,true|false,Public,Infrastructure,,From database object,2025-11-30
-database.engine,Database,postgres,postgres,Database engine type,Yes,String,Valid string value,Public,Infrastructure,,From database object,2025-11-30
-database.engine_version,Database,15.4,15.4,Database engine version,Yes,String,Valid string value,Public,Infrastructure,,From database object,2025-11-30
-database.instance_class,Database,db.t3.medium,db.t3.small,RDS instance class,Yes,String,Valid string value,Public,Infrastructure,,From database object,2025-11-30
-database.log_exports_mysql,Database,"[""error"", ""slowquery"", ""general""]","[""error"", ""slowquery"", ""general""]",Log Exports Mysql,Yes,List(String),Valid port number (1-65535),Public,Infrastructure,,From database object,2025-11-30
-database.log_exports_postgres,Database,"[""postgresql"", ""upgrade""]","[""postgresql"", ""upgrade""]",Log Exports Postgres,Yes,List(String),Valid port number (1-65535),Public,Infrastructure,,From database object,2025-11-30
-database.maintenance_window,Database,sun:04:00-sun:05:00,sun:04:00-sun:05:00,Preferred maintenance window,Yes,String,Valid string value,Public,Infrastructure,,From database object,2025-11-30
-database.max_allocated_storage,Database,500,50,Maximum storage autoscaling (GB),Yes,Integer,Valid integer,Public,Infrastructure,,From database object,2025-11-30
-database.multi_az,Database,true,false,Enable Multi-AZ deployment,Yes,Boolean,true|false,Public,Infrastructure,,From database object,2025-11-30
-database.name,Database,appdb,appdb,Solution name for resource naming,Yes,String,Valid string value,Public,Infrastructure,,From database object,2025-11-30
-database.password_secret_name,Database,db-password,db-password,Password Secret Name,Yes,String,Valid string value,Secret,Infrastructure,,From database object,2025-11-30
-database.performance_insights,Database,true,false,Performance Insights,Yes,Boolean,true|false,Public,Infrastructure,,From database object,2025-11-30
-database.performance_insights_retention,Database,7,7,Performance Insights retention (days),Yes,Integer,Positive integer (days),Public,Infrastructure,,From database object,2025-11-30
-database.publicly_accessible,Database,false,false,Allow public access,Yes,Boolean,true|false,Public,Infrastructure,,From database object,2025-11-30
-database.skip_final_snapshot,Database,false,false,Skip final snapshot on deletion,Yes,Boolean,true|false,Public,Infrastructure,,From database object,2025-11-30
-database.storage_encrypted,Database,true,true,Storage Encrypted,Yes,Boolean,true|false,Public,Infrastructure,,From database object,2025-11-30
-database.storage_iops,Database,3000,0,Provisioned IOPS,Yes,Integer,Valid integer,Public,Infrastructure,,From database object,2025-11-30
-database.storage_throughput,Database,125,0,Storage throughput (gp3),Yes,Integer,Valid integer,Public,Infrastructure,,From database object,2025-11-30
-database.storage_type,Database,gp3,gp3,Storage type (gp3/gp2/io1),Yes,String,Valid string value,Public,Infrastructure,,From database object,2025-11-30
-database.username,Database,dbadmin,dbadmin,Username,Yes,String,Valid string value,Public,Infrastructure,,From database object,2025-11-30
-alarm_thresholds.alb_4xx_count,Monitoring,100,100,Alb 4Xx Count,Yes,Integer,Valid integer,Public,Operations,,From alarm_thresholds object,2025-11-30
-alarm_thresholds.alb_5xx_count,Monitoring,10,10,Alb 5Xx Count,Yes,Integer,Valid integer,Public,Operations,,From alarm_thresholds object,2025-11-30
-alarm_thresholds.alb_response_time_seconds,Monitoring,1.0,1.0,Alb Response Time Seconds,Yes,String,Valid string value,Public,Operations,,From alarm_thresholds object,2025-11-30
-alarm_thresholds.alb_unhealthy_hosts,Monitoring,1,1,Alb Unhealthy Hosts,Yes,Integer,Valid integer,Public,Operations,,From alarm_thresholds object,2025-11-30
-alarm_thresholds.cache_connections,Monitoring,500,500,Cache Connections,Yes,Integer,Valid integer,Public,Operations,,From alarm_thresholds object,2025-11-30
-alarm_thresholds.cache_cpu_percent,Monitoring,75,75,Cache Cpu Percent,Yes,Integer,Valid integer,Public,Operations,,From alarm_thresholds object,2025-11-30
-alarm_thresholds.cache_evictions,Monitoring,1000,1000,Cache Evictions,Yes,Integer,Valid integer,Public,Operations,,From alarm_thresholds object,2025-11-30
-alarm_thresholds.cache_memory_percent,Monitoring,80,80,Cache Memory Percent,Yes,Integer,Valid integer,Public,Operations,,From alarm_thresholds object,2025-11-30
-alarm_thresholds.db_connections,Monitoring,100,100,Db Connections,Yes,Integer,Valid integer,Public,Operations,,From alarm_thresholds object,2025-11-30
-alarm_thresholds.db_cpu_percent,Monitoring,80,80,Db Cpu Percent,Yes,Integer,Valid integer,Public,Operations,,From alarm_thresholds object,2025-11-30
-alarm_thresholds.db_read_latency_seconds,Monitoring,0.02,0.02,Db Read Latency Seconds,Yes,String,Valid string value,Public,Operations,,From alarm_thresholds object,2025-11-30
-alarm_thresholds.db_storage_bytes,Monitoring,10737418240,10737418240,Db Storage Bytes,Yes,Integer,Valid integer,Public,Operations,,From alarm_thresholds object,2025-11-30
-alarm_thresholds.db_write_latency_seconds,Monitoring,0.05,0.05,Db Write Latency Seconds,Yes,String,Valid string value,Public,Operations,,From alarm_thresholds object,2025-11-30
-alarm_thresholds.ec2_cpu_percent,Monitoring,80,80,Ec2 Cpu Percent,Yes,Integer,Valid integer,Public,Operations,,From alarm_thresholds object,2025-11-30
-alarm_thresholds.ec2_disk_percent,Monitoring,80,80,Ec2 Disk Percent,Yes,Integer,Valid integer,Public,Operations,,From alarm_thresholds object,2025-11-30
-alarm_thresholds.ec2_memory_percent,Monitoring,85,85,Ec2 Memory Percent,Yes,Integer,Valid integer,Public,Operations,,From alarm_thresholds object,2025-11-30
-monitoring.alarm_evaluation_periods,Monitoring,2,1,Alarm Evaluation Periods,Yes,Integer,Valid integer,Public,Operations,,From monitoring object,2025-11-30
-monitoring.alarm_period_seconds,Monitoring,300,300,Alarm Period Seconds,Yes,Integer,Valid integer,Public,Operations,,From monitoring object,2025-11-30
-monitoring.alarm_treat_missing_data,Monitoring,missing,missing,Alarm Treat Missing Data,Yes,String,Valid string value,Public,Operations,,From monitoring object,2025-11-30
-monitoring.dashboard_widget_height,Monitoring,6,6,Dashboard Widget Height,Yes,Integer,Valid integer,Public,Operations,,From monitoring object,2025-11-30
-monitoring.dashboard_widget_width,Monitoring,8,8,Dashboard Widget Width,Yes,Integer,Valid integer,Public,Operations,,From monitoring object,2025-11-30
-monitoring.enable_container_insights,Monitoring,true,true,Enable Container Insights,Yes,Boolean,true|false,Public,Operations,,From monitoring object,2025-11-30
-monitoring.enable_dashboard,Monitoring,true,true,Create CloudWatch dashboard,Yes,Boolean,true|false,Public,Operations,,From monitoring object,2025-11-30
-monitoring.enable_xray_tracing,Monitoring,true,true,Enable AWS X-Ray tracing,Yes,Boolean,true|false,Public,Operations,,From monitoring object,2025-11-30
-monitoring.log_retention_days,Monitoring,90,7,CloudWatch log retention (days),Yes,Integer,Positive integer (days),Public,Operations,,From monitoring object,2025-11-30
-monitoring.xray_sampling,Monitoring,"{ priority = 1000, reservoir_size = 1, fixed_rate = 0.05, url_path = ""*"", http_method = ""*"", service_type = ""*"", host = ""*"" }","{ priority = 1000, reservoir_size = 1, fixed_rate = 0.05, url_path = ""*"", http_method = ""*"", service_type = ""*"", host = ""*"" }",Xray Sampling,Yes,Map,Valid key-value map,Public,Operations,,From monitoring object,2025-11-30
-alb.deregistration_delay,Networking,300,300,Target deregistration delay (seconds),Yes,Integer,Valid integer,Public,Networking,,From alb object,2025-11-30
-alb.drop_invalid_header_fields,Networking,true,true,Drop invalid HTTP headers,Yes,Boolean,true|false,Public,Networking,,From alb object,2025-11-30
-alb.enable_deletion_protection,Networking,true,true,Enable deletion protection,Yes,Boolean,true|false,Public,Networking,,From alb object,2025-11-30
-alb.enabled,Networking,true,true,Enable this resource,Yes,Boolean,true|false,Public,Networking,,From alb object,2025-11-30
-alb.health_check_interval,Networking,30,30,Health check interval (seconds),Yes,Integer,Valid integer,Public,Networking,,From alb object,2025-11-30
-alb.health_check_matcher,Networking,200-299,200-299,HTTP status codes for healthy response,Yes,String,Valid string value,Public,Networking,,From alb object,2025-11-30
-alb.health_check_path,Networking,/health,/health,Health check endpoint path,Yes,String,Valid string value,Public,Networking,,From alb object,2025-11-30
-alb.health_check_timeout,Networking,5,5,Health check timeout (seconds),Yes,Integer,Valid integer,Public,Networking,,From alb object,2025-11-30
-alb.healthy_threshold,Networking,2,2,Consecutive healthy checks required,Yes,Integer,Percentage (0-100),Public,Networking,,From alb object,2025-11-30
-alb.idle_timeout_seconds,Networking,60,60,Connection idle timeout (seconds),Yes,Integer,Valid integer,Public,Networking,,From alb object,2025-11-30
-alb.internal,Networking,false,false,Internal load balancer (not internet-facing),Yes,Boolean,true|false,Public,Networking,,From alb object,2025-11-30
-alb.redirect_http_to_https,Networking,true,true,Redirect HTTP to HTTPS,Yes,Boolean,true|false,Public,Networking,,From alb object,2025-11-30
-alb.redirect_status_code,Networking,HTTP_301,HTTP_301,HTTP redirect status code,Yes,String,Valid string value,Public,Networking,,From alb object,2025-11-30
-alb.ssl_policy,Networking,ELBSecurityPolicy-TLS13-1-2-2021-06,ELBSecurityPolicy-TLS13-1-2-2021-06,SSL/TLS security policy,Yes,String,Valid string value,Public,Networking,,From alb object,2025-11-30
-alb.unhealthy_threshold,Networking,3,3,Consecutive unhealthy checks required,Yes,Integer,Percentage (0-100),Public,Networking,,From alb object,2025-11-30
-network.database_subnet_cidrs,Networking,"[""10.0.100.0/24"", ""10.0.110.0/24"", ""10.0.120.0/24""]","[""10.0.100.0/24"", ""10.0.110.0/24"", ""10.0.120.0/24""]",Database subnet CIDR blocks,Yes,List(String),Valid CIDR notation,Confidential,Networking,,From network object,2025-11-30
-network.enable_dns_hostnames,Networking,true,true,Enable DNS hostnames in VPC,Yes,Boolean,true|false,Public,Networking,,From network object,2025-11-30
-network.enable_dns_support,Networking,true,true,Enable DNS support in VPC,Yes,Boolean,Valid port number (1-65535),Public,Networking,,From network object,2025-11-30
-network.enable_flow_logs,Networking,true,true,Enable VPC Flow Logs,Yes,Boolean,true|false,Public,Networking,,From network object,2025-11-30
-network.enable_nat_gateway,Networking,true,true,Enable NAT Gateway for private subnets,Yes,Boolean,true|false,Public,Networking,,From network object,2025-11-30
-network.flow_log_aggregation_interval,Networking,60,60,Flow log aggregation interval (seconds),Yes,Integer,Valid integer,Public,Networking,,From network object,2025-11-30
-network.flow_log_destination_type,Networking,cloud-watch-logs,cloud-watch-logs,Flow log destination (cloud-watch-logs/s3),Yes,String,Valid string value,Public,Networking,,From network object,2025-11-30
-network.flow_log_retention_days,Networking,90,90,Flow log retention period in days,Yes,Integer,Positive integer (days),Public,Networking,,From network object,2025-11-30
-network.flow_log_traffic_type,Networking,ALL,ALL,Flow log traffic type (ALL/ACCEPT/REJECT),Yes,String,Valid string value,Public,Networking,,From network object,2025-11-30
-network.http_port,Networking,80,80,HTTP port number,Yes,Integer,Valid port number (1-65535),Public,Networking,,From network object,2025-11-30
-network.https_port,Networking,443,443,HTTPS port number,Yes,Integer,Valid port number (1-65535),Public,Networking,,From network object,2025-11-30
-network.map_public_ip_on_launch,Networking,true,true,Auto-assign public IPs in public subnets,Yes,Boolean,true|false,Public,Networking,,From network object,2025-11-30
-network.private_subnet_cidrs,Networking,"[""10.0.10.0/24"", ""10.0.20.0/24"", ""10.0.30.0/24""]","[""10.0.10.0/24"", ""10.0.20.0/24"", ""10.0.30.0/24""]",Private subnet CIDR blocks,Yes,List(String),Valid CIDR notation,Confidential,Networking,,From network object,2025-11-30
-network.public_subnet_cidrs,Networking,"[""10.0.1.0/24"", ""10.0.2.0/24"", ""10.0.3.0/24""]","[""10.0.1.0/24"", ""10.0.2.0/24"", ""10.0.3.0/24""]",Public subnet CIDR blocks,Yes,List(String),Valid CIDR notation,Confidential,Networking,,From network object,2025-11-30
-network.single_nat_gateway,Networking,false,false,Use single NAT (cost) vs HA NAT (reliability),Yes,Boolean,true|false,Public,Networking,,From network object,2025-11-30
-network.ssh_port,Networking,22,22,SSH port number,Yes,Integer,Valid port number (1-65535),Public,Networking,,From network object,2025-11-30
-network.vpc_cidr,Networking,10.0.0.0/16,10.0.0.0/16,VPC CIDR block,Yes,String,Valid CIDR notation,Confidential,Networking,,From network object,2025-11-30
-aws.region,Project,us-east-1,us-east-1,Primary AWS region,Yes,String,Valid string value,Public,Infrastructure,,From aws object,2025-11-30
-ownership.cost_center,Project,CC-00000,CC-00000,Cost center for billing,Yes,String,Valid string value,Public,Infrastructure,,From ownership object,2025-11-30
-ownership.owner_email,Project,team@example.com,team@example.com,Owner email for notifications,Yes,String,Valid email address,Confidential,Infrastructure,,From ownership object,2025-11-30
-ownership.project_code,Project,PRJ-SAMPLE,PRJ-SAMPLE,Project tracking code,Yes,String,Valid string value,Public,Infrastructure,,From ownership object,2025-11-30
-security.allowed_http_cidrs,Security,"[""0.0.0.0/0""]","[""0.0.0.0/0""]",CIDR blocks allowed HTTP access,Yes,List(String),Valid CIDR notation,Confidential,Security,,From security object,2025-11-30
-security.allowed_https_cidrs,Security,"[""0.0.0.0/0""]","[""0.0.0.0/0""]",CIDR blocks allowed HTTPS access,Yes,List(String),Valid CIDR notation,Confidential,Security,,From security object,2025-11-30
-security.allowed_ssh_cidrs,Security,[],[],CIDR blocks allowed SSH access,No,List,Valid CIDR notation,Confidential,Security,,From security object,2025-11-30
-security.cache_port,Security,6379,6379,Cache port number,Yes,Integer,Valid port number (1-65535),Public,Security,,From security object,2025-11-30
-security.cloudtrail_enable_log_validation,Security,true,true,Enable log file validation,Yes,Boolean,true|false,Public,Security,,From security object,2025-11-30
-security.cloudtrail_event_read_write_type,Security,All,All,Event types to log (All/ReadOnly/WriteOnly),Yes,String,Valid string value,Public,Security,,From security object,2025-11-30
-security.cloudtrail_include_global_events,Security,true,true,Include global service events,Yes,Boolean,true|false,Public,Security,,From security object,2025-11-30
-security.cloudtrail_include_management_events,Security,true,true,Include management events,Yes,Boolean,true|false,Public,Security,,From security object,2025-11-30
-security.cloudtrail_is_multi_region,Security,true,true,Enable multi-region trail,Yes,Boolean,true|false,Public,Security,,From security object,2025-11-30
-security.cloudtrail_retention_days,Security,365,30,CloudTrail log retention (days),Yes,Integer,Positive integer (days),Public,Security,,From security object,2025-11-30
-security.db_port,Security,5432,5432,Database port number,Yes,Integer,Valid port number (1-65535),Public,Security,,From security object,2025-11-30
-security.enable_cloudtrail,Security,true,false,Enable CloudTrail API logging,Yes,Boolean,true|false,Public,Security,,From security object,2025-11-30
-security.enable_guardduty,Security,true,false,Enable Amazon GuardDuty threat detection,Yes,Boolean,true|false,Public,Security,,From security object,2025-11-30
-security.enable_instance_profile,Security,true,true,Enable IAM instance profile,Yes,Boolean,true|false,Public,Security,,From security object,2025-11-30
-security.enable_key_rotation,Security,true,true,Enable automatic KMS key rotation,Yes,Boolean,true|false,Public,Security,,From security object,2025-11-30
-security.enable_kms_encryption,Security,true,true,Enable KMS encryption for resources,Yes,Boolean,true|false,Public,Security,,From security object,2025-11-30
-security.enable_ssh_access,Security,false,false,Enable SSH access to instances,Yes,Boolean,true|false,Public,Security,,From security object,2025-11-30
-security.enable_ssm_access,Security,true,true,Enable SSM Session Manager access,Yes,Boolean,true|false,Public,Security,,From security object,2025-11-30
-security.enable_waf,Security,true,false,Enable AWS WAF on ALB,Yes,Boolean,true|false,Public,Security,,From security object,2025-11-30
-security.guardduty_eks_protection,Security,false,false,Enable GuardDuty EKS protection,Yes,Boolean,true|false,Public,Security,,From security object,2025-11-30
-security.guardduty_finding_frequency,Security,FIFTEEN_MINUTES,FIFTEEN_MINUTES,GuardDuty finding publishing frequency,Yes,String,Valid string value,Public,Security,,From security object,2025-11-30
-security.guardduty_malware_protection,Security,true,true,Enable GuardDuty malware protection,Yes,Boolean,true|false,Public,Security,,From security object,2025-11-30
-security.guardduty_s3_protection,Security,true,true,Enable GuardDuty S3 protection,Yes,Boolean,true|false,Public,Security,,From security object,2025-11-30
-security.guardduty_severity_threshold,Security,7,7,GuardDuty alert severity threshold (1-10),Yes,Integer,Valid integer,Public,Security,,From security object,2025-11-30
-security.kms_deletion_window,Security,30,30,KMS key deletion window (days),Yes,Integer,Valid integer,Public,Security,,From security object,2025-11-30
-security.metadata_hop_limit,Security,1,1,IMDS hop limit,Yes,Integer,Valid integer,Public,Security,,From security object,2025-11-30
-security.require_imdsv2,Security,true,true,Require Instance Metadata Service v2,Yes,Boolean,true|false,Public,Security,,From security object,2025-11-30
-security.s3_block_public_acls,Security,true,true,Block public ACLs on S3 buckets,Yes,Boolean,true|false,Public,Security,,From security object,2025-11-30
-security.s3_block_public_policy,Security,true,true,Block public policies on S3 buckets,Yes,Boolean,true|false,Public,Security,,From security object,2025-11-30
-security.s3_encryption_algorithm,Security,aws:kms,aws:kms,S3 server-side encryption algorithm,Yes,String,Valid string value,Public,Security,,From security object,2025-11-30
-security.s3_ignore_public_acls,Security,true,true,Ignore public ACLs on S3 buckets,Yes,Boolean,true|false,Public,Security,,From security object,2025-11-30
-security.s3_noncurrent_version_days,Security,30,30,S3 noncurrent version retention (days),Yes,Integer,Positive integer (days),Public,Security,,From security object,2025-11-30
-security.s3_restrict_public_buckets,Security,true,true,Restrict public bucket policies,Yes,Boolean,true|false,Public,Security,,From security object,2025-11-30
-security.waf_ip_address_version,Security,IPV4,IPV4,WAF IP address version (IPV4/IPV6),Yes,String,Valid string value,Public,Security,,From security object,2025-11-30
-security.waf_rate_limit,Security,2000,10000,WAF rate limit per IP (5-min window),Yes,Integer,Valid integer,Public,Security,,From security object,2025-11-30
-security.waf_rule_priorities,Security,"{ rate_limit = 1, blocked_ip = 2, geo_block = 3, common_rules = 10, sqli = 20, bad_inputs = 30 }","{ rate_limit = 1, blocked_ip = 2, geo_block = 3, common_rules = 10, sqli = 20, bad_inputs = 30 }",WAF rule priority mappings,Yes,Map,Valid key-value map,Public,Security,,From security object,2025-11-30
+#WIDTH: 45,14,50,50,50,45,8,12,27,14,14,12,30,12
+#ALIGN: left,left,left,left,left,left,center,left,left,center,left,left,left,center
+Parameter Name,Category,Production,Test,DR,Description,Required,Data Type,Validation Rules,Security Level,Owner Team,Dependencies,Notes,Last Updated
+application.enable_debug,Application,false,true,false,Enable Debug,Yes,Boolean,true|false,Public,Development,,From application object,2025-11-30
+application.health_path,Application,/health,/health,/health,Health Path,Yes,String,Valid string value,Public,Development,,From application object,2025-11-30
+application.log_level,Application,warn,debug,warn,Log Level,Yes,String,Valid string value,Public,Development,,From application object,2025-11-30
+application.metrics_path,Application,/metrics,/metrics,/metrics,Metrics Path,Yes,String,Valid string value,Public,Development,,From application object,2025-11-30
+application.name,Application,sample-solution,sample-solution,sample-solution,Solution name for resource naming,Yes,String,Valid string value,Public,Development,,From application object,2025-11-30
+application.port,Application,8080,8080,8080,Cache port number,Yes,Integer,Valid port number (1-65535),Public,Development,,From application object,2025-11-30
+application.rate_limit,Application,1000,1000,1000,Rate Limit,Yes,Integer,Valid integer,Public,Development,,From application object,2025-11-30
+application.session_timeout,Application,3600,3600,3600,Session Timeout,Yes,Integer,Valid integer,Public,Development,,From application object,2025-11-30
+application.version,Application,1.0.0,1.0.0,1.0.0,Version,Yes,String,Valid string value,Public,Development,,From application object,2025-11-30
+solution.abbr,Application,smp,smp,smp,Solution abbreviation (3-4 chars),Yes,String,Valid string value,Public,Development,,From solution object,2025-11-30
+solution.category_name,Application,sample-category,sample-category,sample-category,Solution category,Yes,String,Valid string value,Public,Development,,From solution object,2025-11-30
+solution.name,Application,sample-solution,sample-solution,sample-solution,Solution name for resource naming,Yes,String,Valid string value,Public,Development,,From solution object,2025-11-30
+solution.provider_name,Application,sample-provider,sample-provider,sample-provider,Provider organization name,Yes,String,Valid string value,Public,Development,,From solution object,2025-11-30
+backup.backup_tag_key,Best Practices,Backup,Backup,Backup,Backup tag key,Yes,String,Valid string value,Public,Operations,,From backup object,2025-11-30
+backup.backup_tag_value,Best Practices,true,true,true,Backup tag value,Yes,String,Valid string value,Public,Operations,,From backup object,2025-11-30
+backup.cold_storage_days,Best Practices,90,90,90,Days before cold storage transition,Yes,Integer,Positive integer (days),Public,Operations,,From backup object,2025-11-30
+backup.daily_retention,Best Practices,30,7,30,Daily backup retention (days),Yes,Integer,Positive integer (days),Public,Operations,,From backup object,2025-11-30
+backup.daily_schedule,Best Practices,cron(0 5 * * ? *),cron(0 5 * * ? *),cron(0 5 * * ? *),Daily backup schedule (cron),Yes,String,Valid cron expression,Public,Operations,,From backup object,2025-11-30
+backup.dr_retention,Best Practices,30,30,30,DR backup retention (days),Yes,Integer,Positive integer (days),Public,Operations,,From backup object,2025-11-30
+backup.enable_continuous,Best Practices,false,false,false,Enable continuous backup,Yes,Boolean,true|false,Public,Operations,,From backup object,2025-11-30
+backup.enable_cross_region,Best Practices,false,false,false,Enable cross-region backup copy,Yes,Boolean,true|false,Public,Operations,,From backup object,2025-11-30
+backup.enable_monthly,Best Practices,true,true,true,Enable Monthly,Yes,Boolean,true|false,Public,Operations,,From backup object,2025-11-30
+backup.enable_s3_backup,Best Practices,false,false,false,Enable S3 Backup,Yes,Boolean,true|false,Public,Operations,,From backup object,2025-11-30
+backup.enable_tag_selection,Best Practices,true,true,true,Enable tag-based resource selection,Yes,Boolean,true|false,Public,Operations,,From backup object,2025-11-30
+backup.enable_vault_lock,Best Practices,false,false,false,Enable vault lock,Yes,Boolean,true|false,Public,Operations,,From backup object,2025-11-30
+backup.enable_vault_policy,Best Practices,true,true,true,Enable vault policy,Yes,Boolean,true|false,Public,Operations,,From backup object,2025-11-30
+backup.enable_weekly,Best Practices,true,true,true,Enable Weekly,Yes,Boolean,true|false,Public,Operations,,From backup object,2025-11-30
+backup.enable_windows_vss,Best Practices,false,false,false,Enable Windows Vss,Yes,Boolean,true|false,Public,Operations,,From backup object,2025-11-30
+backup.enabled,Best Practices,true,false,false,Enable this resource,Yes,Boolean,true|false,Public,Operations,,From backup object,2025-11-30
+backup.monthly_retention,Best Practices,365,30,365,Monthly backup retention (days),Yes,Integer,Positive integer (days),Public,Operations,,From backup object,2025-11-30
+backup.monthly_schedule,Best Practices,cron(0 5 1 * ? *),cron(0 5 1 * ? *),cron(0 5 1 * ? *),Monthly backup schedule (cron),Yes,String,Valid cron expression,Public,Operations,,From backup object,2025-11-30
+backup.notification_events,Best Practices,"[""BACKUP_JOB_STARTED"", ""BACKUP_JOB_COMPLETED"", ""BACKUP_JOB_FAILED"", ""RESTORE_JOB_STARTED"", ""RESTORE_JOB_COMPLETED"", ""RESTORE_JOB_FAILED""]","[""BACKUP_JOB_STARTED"", ""BACKUP_JOB_COMPLETED"", ""BACKUP_JOB_FAILED"", ""RESTORE_JOB_STARTED"", ""RESTORE_JOB_COMPLETED"", ""RESTORE_JOB_FAILED""]","[""BACKUP_JOB_STARTED"", ""BACKUP_JOB_COMPLETED"", ""BACKUP_JOB_FAILED"", ""RESTORE_JOB_STARTED"", ""RESTORE_JOB_COMPLETED"", ""RESTORE_JOB_FAILED""]",Backup notification events,Yes,List(String),Valid list of strings,Public,Operations,,From backup object,2025-11-30
+backup.resource_arns,Best Practices,[],[],[],Specific resource ARNs to backup,No,List,Valid AWS ARN,Confidential,Operations,,From backup object,2025-11-30
+backup.vault_lock_changeable_days,Best Practices,3,3,3,Vault Lock Changeable Days,Yes,Integer,Positive integer (days),Public,Operations,,From backup object,2025-11-30
+backup.vault_lock_max_retention,Best Practices,365,365,365,Vault Lock Max Retention,Yes,Integer,Positive integer (days),Public,Operations,,From backup object,2025-11-30
+backup.vault_lock_min_retention,Best Practices,7,7,7,Vault Lock Min Retention,Yes,Integer,Positive integer (days),Public,Operations,,From backup object,2025-11-30
+backup.weekly_retention,Best Practices,90,14,90,Weekly backup retention (days),Yes,Integer,Positive integer (days),Public,Operations,,From backup object,2025-11-30
+backup.weekly_schedule,Best Practices,cron(0 5 ? * SUN *),cron(0 5 ? * SUN *),cron(0 5 ? * SUN *),Weekly backup schedule (cron),Yes,String,Valid cron expression,Public,Operations,,From backup object,2025-11-30
+budget.action_approval,Best Practices,MANUAL,MANUAL,MANUAL,Budget action approval mode,Yes,String,Valid string value,Public,Operations,,From budget object,2025-11-30
+budget.action_threshold,Best Practices,100,100,100,Budget action threshold (%),Yes,Integer,Percentage (0-100),Public,Operations,,From budget object,2025-11-30
+budget.alert_emails,Best Practices,[],[],[],Budget alert email addresses,No,List,Valid email address,Confidential,Operations,,From budget object,2025-11-30
+budget.alert_thresholds,Best Practices,"[50, 80, 100]","[50, 80, 100]","[50, 80, 100]",Budget alert threshold percentages,Yes,String,Percentage (0-100),Public,Operations,,From budget object,2025-11-30
+budget.budget_currency,Best Practices,USD,USD,USD,Budget currency,Yes,String,Valid string value,Public,Operations,,From budget object,2025-11-30
+budget.budget_time_unit,Best Practices,MONTHLY,MONTHLY,MONTHLY,Budget time unit,Yes,String,Valid string value,Public,Operations,,From budget object,2025-11-30
+budget.data_transfer_budget_amount,Best Practices,0,0,0,Data transfer monthly budget (USD),Yes,Integer,Valid integer,Public,Operations,,From budget object,2025-11-30
+budget.ec2_budget_amount,Best Practices,0,0,0,EC2 monthly budget (USD),Yes,Integer,Valid integer,Public,Operations,,From budget object,2025-11-30
+budget.ec2_instances_to_stop,Best Practices,[],[],[],Ec2 Instances To Stop,No,List,Valid list,Public,Operations,,From budget object,2025-11-30
+budget.ec2_usage_hours_limit,Best Practices,1000,1000,1000,EC2 monthly usage limit (hours),Yes,Integer,Valid integer,Public,Operations,,From budget object,2025-11-30
+budget.enable_actions,Best Practices,false,false,false,Enable budget actions,Yes,Boolean,true|false,Public,Operations,,From budget object,2025-11-30
+budget.enable_cost_budget,Best Practices,true,true,true,Enable cost budget,Yes,Boolean,true|false,Public,Operations,,From budget object,2025-11-30
+budget.enable_forecast_alert,Best Practices,true,true,true,Enable forecast alerts,Yes,Boolean,true|false,Public,Operations,,From budget object,2025-11-30
+budget.enable_service_budgets,Best Practices,false,false,false,Enable per-service budgets,Yes,Boolean,true|false,Public,Operations,,From budget object,2025-11-30
+budget.enable_usage_budget,Best Practices,false,false,false,Enable usage budget,Yes,Boolean,true|false,Public,Operations,,From budget object,2025-11-30
+budget.enabled,Best Practices,true,false,true,Enable this resource,Yes,Boolean,true|false,Public,Operations,,From budget object,2025-11-30
+budget.forecast_threshold,Best Practices,100,100,100,Forecast alert threshold (%),Yes,Integer,Percentage (0-100),Public,Operations,,From budget object,2025-11-30
+budget.monthly_amount,Best Practices,1000,1000,1000,Monthly budget limit (USD),Yes,Integer,Valid integer,Public,Operations,,From budget object,2025-11-30
+budget.notification_comparison,Best Practices,GREATER_THAN,GREATER_THAN,GREATER_THAN,Notification Comparison,Yes,String,Valid string value,Public,Operations,,From budget object,2025-11-30
+budget.notification_threshold_type,Best Practices,PERCENTAGE,PERCENTAGE,PERCENTAGE,Notification Threshold Type,Yes,String,Percentage (0-100),Public,Operations,,From budget object,2025-11-30
+budget.notification_type,Best Practices,ACTUAL,ACTUAL,ACTUAL,Notification Type,Yes,String,Valid string value,Public,Operations,,From budget object,2025-11-30
+budget.rds_budget_amount,Best Practices,0,0,0,RDS monthly budget (USD),Yes,Integer,Valid integer,Public,Operations,,From budget object,2025-11-30
+budget.service_alert_threshold,Best Practices,80,80,80,Service Alert Threshold,Yes,Integer,Percentage (0-100),Public,Operations,,From budget object,2025-11-30
+config_rules.delivery_frequency,Best Practices,TwentyFour_Hours,TwentyFour_Hours,TwentyFour_Hours,Delivery Frequency,Yes,String,Valid string value,Public,Operations,,From config_rules object,2025-11-30
+config_rules.enable_cost_rules,Best Practices,true,true,true,Enable Cost Rules,Yes,Boolean,true|false,Public,Operations,,From config_rules object,2025-11-30
+config_rules.enable_operational_rules,Best Practices,true,true,true,Enable Operational Rules,Yes,Boolean,true|false,Public,Operations,,From config_rules object,2025-11-30
+config_rules.enable_recorder,Best Practices,true,true,true,Enable Recorder,Yes,Boolean,true|false,Public,Operations,,From config_rules object,2025-11-30
+config_rules.enable_reliability_rules,Best Practices,true,true,true,Enable Reliability Rules,Yes,Boolean,true|false,Public,Operations,,From config_rules object,2025-11-30
+config_rules.enable_security_rules,Best Practices,true,true,true,Enable Security Rules,Yes,Boolean,true|false,Public,Operations,,From config_rules object,2025-11-30
+config_rules.enabled,Best Practices,true,false,true,Enable this resource,Yes,Boolean,true|false,Public,Operations,,From config_rules object,2025-11-30
+config_rules.excluded_resource_types,Best Practices,[],[],[],Excluded Resource Types,No,List,Valid list,Public,Operations,,From config_rules object,2025-11-30
+config_rules.include_global_resources,Best Practices,true,true,true,Include Global Resources,Yes,Boolean,true|false,Public,Operations,,From config_rules object,2025-11-30
+config_rules.min_backup_retention_days,Best Practices,7,7,7,Min Backup Retention Days,Yes,Integer,Positive integer (days),Public,Operations,,From config_rules object,2025-11-30
+config_rules.record_all_resources,Best Practices,true,true,true,Record All Resources,Yes,Boolean,true|false,Public,Operations,,From config_rules object,2025-11-30
+config_rules.retention_days,Best Practices,365,365,365,Retention Days,Yes,Integer,Positive integer (days),Public,Operations,,From config_rules object,2025-11-30
+guardduty_enhanced.enable_eks_protection,Best Practices,false,false,false,Enable EKS audit log protection,Yes,Boolean,true|false,Public,Operations,,From guardduty_enhanced object,2025-11-30
+guardduty_enhanced.enable_malware_protection,Best Practices,true,true,true,Enable EBS malware protection,Yes,Boolean,true|false,Public,Operations,,From guardduty_enhanced object,2025-11-30
+guardduty_enhanced.enable_s3_export,Best Practices,true,true,true,Enable findings export to S3,Yes,Boolean,Valid port number (1-65535),Public,Operations,,From guardduty_enhanced object,2025-11-30
+guardduty_enhanced.enabled,Best Practices,false,false,false,Enable this resource,Yes,Boolean,true|false,Public,Operations,,From guardduty_enhanced object,2025-11-30
+guardduty_enhanced.findings_retention_days,Best Practices,365,365,365,Findings retention (days),Yes,Integer,Positive integer (days),Public,Operations,,From guardduty_enhanced object,2025-11-30
+guardduty_enhanced.severity_threshold,Best Practices,7,7,7,Severity Threshold,Yes,Integer,Valid integer,Public,Operations,,From guardduty_enhanced object,2025-11-30
+cache.at_rest_encryption,Cache,true,true,true,At Rest Encryption,Yes,Boolean,true|false,Public,Infrastructure,,From cache object,2025-11-30
+cache.auth_token_param_name,Cache,cache/auth-token,cache/auth-token,cache/auth-token,Auth Token Param Name,Yes,String,Valid string value,Secret,Infrastructure,,From cache object,2025-11-30
+cache.auto_minor_version_upgrade,Cache,true,true,true,Enable auto minor version upgrade,Yes,Boolean,true|false,Public,Infrastructure,,From cache object,2025-11-30
+cache.automatic_failover,Cache,true,false,true,Automatic Failover,Yes,Boolean,true|false,Public,Infrastructure,,From cache object,2025-11-30
+cache.cluster_mode_enabled,Cache,false,false,false,Cluster Mode Enabled,Yes,Boolean,true|false,Public,Infrastructure,,From cache object,2025-11-30
+cache.cluster_mode_replicas,Cache,1,1,1,Cluster Mode Replicas,Yes,Integer,Valid integer,Public,Infrastructure,,From cache object,2025-11-30
+cache.cluster_mode_shards,Cache,1,1,1,Cluster Mode Shards,Yes,Integer,Valid integer,Public,Infrastructure,,From cache object,2025-11-30
+cache.enabled,Cache,true,true,true,Enable this resource,Yes,Boolean,true|false,Public,Infrastructure,,From cache object,2025-11-30
+cache.engine,Cache,redis,redis,redis,Database engine type,Yes,String,Valid string value,Public,Infrastructure,,From cache object,2025-11-30
+cache.engine_version,Cache,7.0,7.0,7.0,Database engine version,Yes,String,Valid string value,Public,Infrastructure,,From cache object,2025-11-30
+cache.maintenance_window,Cache,sun:06:00-sun:07:00,sun:06:00-sun:07:00,sun:06:00-sun:07:00,Preferred maintenance window,Yes,String,Valid string value,Public,Infrastructure,,From cache object,2025-11-30
+cache.node_type,Cache,cache.r6g.large,cache.t3.micro,cache.r6g.large,ElastiCache node type,Yes,String,Valid string value,Public,Infrastructure,,From cache object,2025-11-30
+cache.num_nodes,Cache,2,1,2,Num Nodes,Yes,Integer,Valid integer,Public,Infrastructure,,From cache object,2025-11-30
+cache.port,Cache,6379,6379,6379,Cache port number,Yes,Integer,Valid port number (1-65535),Public,Infrastructure,,From cache object,2025-11-30
+cache.snapshot_retention,Cache,7,1,7,Snapshot Retention,Yes,Integer,Positive integer (days),Public,Infrastructure,,From cache object,2025-11-30
+cache.snapshot_window,Cache,05:00-06:00,05:00-06:00,05:00-06:00,Preferred snapshot window,Yes,String,Valid string value,Public,Infrastructure,,From cache object,2025-11-30
+cache.transit_encryption,Cache,true,true,true,Transit Encryption,Yes,Boolean,true|false,Public,Infrastructure,,From cache object,2025-11-30
+compute.ami_filter_name,Compute,al2023-ami-*-x86_64,al2023-ami-*-x86_64,al2023-ami-*-x86_64,Ami Filter Name,Yes,String,Valid string value,Public,Infrastructure,,From compute object,2025-11-30
+compute.ami_owner,Compute,amazon,amazon,amazon,AMI owner (amazon/self),Yes,String,Valid string value,Public,Infrastructure,,From compute object,2025-11-30
+compute.ami_virtualization,Compute,hvm,hvm,hvm,Ami Virtualization,Yes,String,Valid string value,Public,Infrastructure,,From compute object,2025-11-30
+compute.asg_desired_capacity,Compute,3,3,3,ASG desired instance count,Yes,Integer,Valid integer,Public,Infrastructure,,From compute object,2025-11-30
+compute.asg_max_size,Compute,10,10,10,ASG maximum instance count,Yes,Integer,Valid integer,Public,Infrastructure,,From compute object,2025-11-30
+compute.asg_min_size,Compute,2,2,2,ASG minimum instance count,Yes,Integer,Valid integer,Public,Infrastructure,,From compute object,2025-11-30
+compute.associate_public_ip,Compute,false,false,false,Associate Public Ip,Yes,Boolean,true|false,Public,Infrastructure,,From compute object,2025-11-30
+compute.default_cooldown,Compute,300,300,300,Default Cooldown,Yes,Integer,Valid integer,Public,Infrastructure,,From compute object,2025-11-30
+compute.delete_on_termination,Compute,true,true,true,Delete On Termination,Yes,Boolean,true|false,Public,Infrastructure,,From compute object,2025-11-30
+compute.enable_auto_scaling,Compute,true,true,true,Enable Auto Scaling Group,Yes,Boolean,true|false,Public,Infrastructure,,From compute object,2025-11-30
+compute.enable_detailed_monitoring,Compute,true,true,true,Enable detailed CloudWatch monitoring,Yes,Boolean,true|false,Public,Infrastructure,,From compute object,2025-11-30
+compute.health_check_grace_period,Compute,300,300,300,Health Check Grace Period,Yes,Integer,Valid integer,Public,Infrastructure,,From compute object,2025-11-30
+compute.health_check_type,Compute,ELB,ELB,ELB,Health Check Type,Yes,String,Valid string value,Public,Infrastructure,,From compute object,2025-11-30
+compute.instance_refresh_min_healthy,Compute,50,50,50,Instance Refresh Min Healthy,Yes,Integer,Valid integer,Public,Infrastructure,,From compute object,2025-11-30
+compute.instance_refresh_strategy,Compute,Rolling,Rolling,Rolling,Instance Refresh Strategy,Yes,String,Valid string value,Public,Infrastructure,,From compute object,2025-11-30
+compute.instance_refresh_warmup,Compute,300,300,300,Instance Refresh Warmup,Yes,Integer,Valid integer,Public,Infrastructure,,From compute object,2025-11-30
+compute.instance_type,Compute,t3.medium,t3.small,t3.medium,EC2 instance type,Yes,String,Valid string value,Public,Infrastructure,,From compute object,2025-11-30
+compute.launch_template_version,Compute,$Latest,$Latest,$Latest,Launch Template Version,Yes,String,Valid string value,Public,Infrastructure,,From compute object,2025-11-30
+compute.metadata_hop_limit,Compute,1,1,1,IMDS hop limit,Yes,Integer,Valid integer,Public,Infrastructure,,From compute object,2025-11-30
+compute.metadata_http_endpoint,Compute,enabled,enabled,enabled,Metadata Http Endpoint,Yes,String,Valid string value,Public,Infrastructure,,From compute object,2025-11-30
+compute.metadata_http_tokens,Compute,required,required,required,Metadata Http Tokens,Yes,String,Valid string value,Secret,Infrastructure,,From compute object,2025-11-30
+compute.metadata_tags_enabled,Compute,enabled,enabled,enabled,Metadata Tags Enabled,Yes,String,Valid string value,Public,Infrastructure,,From compute object,2025-11-30
+compute.propagate_tags_at_launch,Compute,true,true,true,Propagate Tags At Launch,Yes,Boolean,true|false,Public,Infrastructure,,From compute object,2025-11-30
+compute.root_volume_device,Compute,/dev/xvda,/dev/xvda,/dev/xvda,Root Volume Device,Yes,String,Valid string value,Public,Infrastructure,,From compute object,2025-11-30
+compute.root_volume_encrypted,Compute,true,true,true,Encrypt root volume,Yes,Boolean,true|false,Public,Infrastructure,,From compute object,2025-11-30
+compute.root_volume_iops,Compute,3000,3000,3000,Root volume IOPS (io1/io2),Yes,Integer,Valid integer,Public,Infrastructure,,From compute object,2025-11-30
+compute.root_volume_size,Compute,50,50,50,Root volume size (GB),Yes,Integer,Valid integer,Public,Infrastructure,,From compute object,2025-11-30
+compute.root_volume_throughput,Compute,125,125,125,Root volume throughput (gp3),Yes,Integer,Valid integer,Public,Infrastructure,,From compute object,2025-11-30
+compute.root_volume_type,Compute,gp3,gp3,gp3,Root volume type (gp3/gp2/io1),Yes,String,Valid string value,Public,Infrastructure,,From compute object,2025-11-30
+compute.scale_down_adjustment,Compute,-1,-1,-1,Instances to remove on scale down,Yes,Integer,Valid integer,Public,Infrastructure,,From compute object,2025-11-30
+compute.scale_down_threshold,Compute,30,30,30,CPU threshold for scale down (%),Yes,Integer,Percentage (0-100),Public,Infrastructure,,From compute object,2025-11-30
+compute.scale_up_adjustment,Compute,2,2,2,Instances to add on scale up,Yes,Integer,Valid integer,Public,Infrastructure,,From compute object,2025-11-30
+compute.scale_up_threshold,Compute,70,70,70,CPU threshold for scale up (%),Yes,Integer,Percentage (0-100),Public,Infrastructure,,From compute object,2025-11-30
+compute.scaling_cooldown,Compute,300,300,300,Scaling Cooldown,Yes,Integer,Valid integer,Public,Infrastructure,,From compute object,2025-11-30
+compute.suspended_processes,Compute,[],[],[],Suspended Processes,No,List,Valid list,Public,Infrastructure,,From compute object,2025-11-30
+compute.termination_policies,Compute,"[""Default""]","[""Default""]","[""Default""]",Termination Policies,Yes,List(String),Valid list of strings,Public,Infrastructure,,From compute object,2025-11-30
+compute.use_latest_ami,Compute,true,true,true,Use latest Amazon Linux 2023 AMI,Yes,Boolean,true|false,Public,Infrastructure,,From compute object,2025-11-30
+database.allocated_storage,Database,100,20,100,Initial storage (GB),Yes,Integer,Valid integer,Public,Infrastructure,,From database object,2025-11-30
+database.allow_major_version_upgrade,Database,false,false,false,Allow Major Version Upgrade,Yes,Boolean,true|false,Public,Infrastructure,,From database object,2025-11-30
+database.auto_minor_version_upgrade,Database,true,true,true,Enable auto minor version upgrade,Yes,Boolean,true|false,Public,Infrastructure,,From database object,2025-11-30
+database.backup_retention,Database,30,7,30,Backup Retention,Yes,Integer,Positive integer (days),Public,Infrastructure,,From database object,2025-11-30
+database.backup_window,Database,03:00-04:00,03:00-04:00,03:00-04:00,Preferred backup window,Yes,String,Valid string value,Public,Infrastructure,,From database object,2025-11-30
+database.copy_tags_to_snapshot,Database,true,true,true,Copy Tags To Snapshot,Yes,Boolean,true|false,Public,Infrastructure,,From database object,2025-11-30
+database.deletion_protection,Database,true,false,true,Enable deletion protection,Yes,Boolean,true|false,Public,Infrastructure,,From database object,2025-11-30
+database.enabled,Database,true,true,true,Enable this resource,Yes,Boolean,true|false,Public,Infrastructure,,From database object,2025-11-30
+database.engine,Database,postgres,postgres,postgres,Database engine type,Yes,String,Valid string value,Public,Infrastructure,,From database object,2025-11-30
+database.engine_version,Database,15.4,15.4,15.4,Database engine version,Yes,String,Valid string value,Public,Infrastructure,,From database object,2025-11-30
+database.instance_class,Database,db.t3.medium,db.t3.small,db.t3.medium,RDS instance class,Yes,String,Valid string value,Public,Infrastructure,,From database object,2025-11-30
+database.log_exports_mysql,Database,"[""error"", ""slowquery"", ""general""]","[""error"", ""slowquery"", ""general""]","[""error"", ""slowquery"", ""general""]",Log Exports Mysql,Yes,List(String),Valid port number (1-65535),Public,Infrastructure,,From database object,2025-11-30
+database.log_exports_postgres,Database,"[""postgresql"", ""upgrade""]","[""postgresql"", ""upgrade""]","[""postgresql"", ""upgrade""]",Log Exports Postgres,Yes,List(String),Valid port number (1-65535),Public,Infrastructure,,From database object,2025-11-30
+database.maintenance_window,Database,sun:04:00-sun:05:00,sun:04:00-sun:05:00,sun:04:00-sun:05:00,Preferred maintenance window,Yes,String,Valid string value,Public,Infrastructure,,From database object,2025-11-30
+database.max_allocated_storage,Database,500,50,500,Maximum storage autoscaling (GB),Yes,Integer,Valid integer,Public,Infrastructure,,From database object,2025-11-30
+database.multi_az,Database,true,false,true,Enable Multi-AZ deployment,Yes,Boolean,true|false,Public,Infrastructure,,From database object,2025-11-30
+database.name,Database,appdb,appdb,appdb,Solution name for resource naming,Yes,String,Valid string value,Public,Infrastructure,,From database object,2025-11-30
+database.password_secret_name,Database,db-password,db-password,db-password,Password Secret Name,Yes,String,Valid string value,Secret,Infrastructure,,From database object,2025-11-30
+database.performance_insights,Database,true,false,true,Performance Insights,Yes,Boolean,true|false,Public,Infrastructure,,From database object,2025-11-30
+database.performance_insights_retention,Database,7,7,7,Performance Insights retention (days),Yes,Integer,Positive integer (days),Public,Infrastructure,,From database object,2025-11-30
+database.publicly_accessible,Database,false,false,false,Allow public access,Yes,Boolean,true|false,Public,Infrastructure,,From database object,2025-11-30
+database.skip_final_snapshot,Database,false,false,false,Skip final snapshot on deletion,Yes,Boolean,true|false,Public,Infrastructure,,From database object,2025-11-30
+database.storage_encrypted,Database,true,true,true,Storage Encrypted,Yes,Boolean,true|false,Public,Infrastructure,,From database object,2025-11-30
+database.storage_iops,Database,3000,0,3000,Provisioned IOPS,Yes,Integer,Valid integer,Public,Infrastructure,,From database object,2025-11-30
+database.storage_throughput,Database,125,0,125,Storage throughput (gp3),Yes,Integer,Valid integer,Public,Infrastructure,,From database object,2025-11-30
+database.storage_type,Database,gp3,gp3,gp3,Storage type (gp3/gp2/io1),Yes,String,Valid string value,Public,Infrastructure,,From database object,2025-11-30
+database.username,Database,dbadmin,dbadmin,dbadmin,Username,Yes,String,Valid string value,Public,Infrastructure,,From database object,2025-11-30
+alarm_thresholds.alb_4xx_count,Monitoring,100,100,100,Alb 4Xx Count,Yes,Integer,Valid integer,Public,Operations,,From alarm_thresholds object,2025-11-30
+alarm_thresholds.alb_5xx_count,Monitoring,10,10,10,Alb 5Xx Count,Yes,Integer,Valid integer,Public,Operations,,From alarm_thresholds object,2025-11-30
+alarm_thresholds.alb_response_time_seconds,Monitoring,1.0,1.0,1.0,Alb Response Time Seconds,Yes,String,Valid string value,Public,Operations,,From alarm_thresholds object,2025-11-30
+alarm_thresholds.alb_unhealthy_hosts,Monitoring,1,1,1,Alb Unhealthy Hosts,Yes,Integer,Valid integer,Public,Operations,,From alarm_thresholds object,2025-11-30
+alarm_thresholds.cache_connections,Monitoring,500,500,500,Cache Connections,Yes,Integer,Valid integer,Public,Operations,,From alarm_thresholds object,2025-11-30
+alarm_thresholds.cache_cpu_percent,Monitoring,75,75,75,Cache Cpu Percent,Yes,Integer,Valid integer,Public,Operations,,From alarm_thresholds object,2025-11-30
+alarm_thresholds.cache_evictions,Monitoring,1000,1000,1000,Cache Evictions,Yes,Integer,Valid integer,Public,Operations,,From alarm_thresholds object,2025-11-30
+alarm_thresholds.cache_memory_percent,Monitoring,80,80,80,Cache Memory Percent,Yes,Integer,Valid integer,Public,Operations,,From alarm_thresholds object,2025-11-30
+alarm_thresholds.db_connections,Monitoring,100,100,100,Db Connections,Yes,Integer,Valid integer,Public,Operations,,From alarm_thresholds object,2025-11-30
+alarm_thresholds.db_cpu_percent,Monitoring,80,80,80,Db Cpu Percent,Yes,Integer,Valid integer,Public,Operations,,From alarm_thresholds object,2025-11-30
+alarm_thresholds.db_read_latency_seconds,Monitoring,0.02,0.02,0.02,Db Read Latency Seconds,Yes,String,Valid string value,Public,Operations,,From alarm_thresholds object,2025-11-30
+alarm_thresholds.db_storage_bytes,Monitoring,10737418240,10737418240,10737418240,Db Storage Bytes,Yes,Integer,Valid integer,Public,Operations,,From alarm_thresholds object,2025-11-30
+alarm_thresholds.db_write_latency_seconds,Monitoring,0.05,0.05,0.05,Db Write Latency Seconds,Yes,String,Valid string value,Public,Operations,,From alarm_thresholds object,2025-11-30
+alarm_thresholds.ec2_cpu_percent,Monitoring,80,80,80,Ec2 Cpu Percent,Yes,Integer,Valid integer,Public,Operations,,From alarm_thresholds object,2025-11-30
+alarm_thresholds.ec2_disk_percent,Monitoring,80,80,80,Ec2 Disk Percent,Yes,Integer,Valid integer,Public,Operations,,From alarm_thresholds object,2025-11-30
+alarm_thresholds.ec2_memory_percent,Monitoring,85,85,85,Ec2 Memory Percent,Yes,Integer,Valid integer,Public,Operations,,From alarm_thresholds object,2025-11-30
+monitoring.alarm_evaluation_periods,Monitoring,2,1,2,Alarm Evaluation Periods,Yes,Integer,Valid integer,Public,Operations,,From monitoring object,2025-11-30
+monitoring.alarm_period_seconds,Monitoring,300,300,300,Alarm Period Seconds,Yes,Integer,Valid integer,Public,Operations,,From monitoring object,2025-11-30
+monitoring.alarm_treat_missing_data,Monitoring,missing,missing,missing,Alarm Treat Missing Data,Yes,String,Valid string value,Public,Operations,,From monitoring object,2025-11-30
+monitoring.dashboard_widget_height,Monitoring,6,6,6,Dashboard Widget Height,Yes,Integer,Valid integer,Public,Operations,,From monitoring object,2025-11-30
+monitoring.dashboard_widget_width,Monitoring,8,8,8,Dashboard Widget Width,Yes,Integer,Valid integer,Public,Operations,,From monitoring object,2025-11-30
+monitoring.enable_container_insights,Monitoring,true,true,true,Enable Container Insights,Yes,Boolean,true|false,Public,Operations,,From monitoring object,2025-11-30
+monitoring.enable_dashboard,Monitoring,true,true,true,Create CloudWatch dashboard,Yes,Boolean,true|false,Public,Operations,,From monitoring object,2025-11-30
+monitoring.enable_xray_tracing,Monitoring,true,true,true,Enable AWS X-Ray tracing,Yes,Boolean,true|false,Public,Operations,,From monitoring object,2025-11-30
+monitoring.log_retention_days,Monitoring,90,7,90,CloudWatch log retention (days),Yes,Integer,Positive integer (days),Public,Operations,,From monitoring object,2025-11-30
+monitoring.xray_sampling,Monitoring,"{ priority = 1000, reservoir_size = 1, fixed_rate = 0.05, url_path = ""*"", http_method = ""*"", service_type = ""*"", host = ""*"" }","{ priority = 1000, reservoir_size = 1, fixed_rate = 0.05, url_path = ""*"", http_method = ""*"", service_type = ""*"", host = ""*"" }","{ priority = 1000, reservoir_size = 1, fixed_rate = 0.05, url_path = ""*"", http_method = ""*"", service_type = ""*"", host = ""*"" }",Xray Sampling,Yes,Map,Valid key-value map,Public,Operations,,From monitoring object,2025-11-30
+alb.deregistration_delay,Networking,300,300,300,Target deregistration delay (seconds),Yes,Integer,Valid integer,Public,Networking,,From alb object,2025-11-30
+alb.drop_invalid_header_fields,Networking,true,true,true,Drop invalid HTTP headers,Yes,Boolean,true|false,Public,Networking,,From alb object,2025-11-30
+alb.enable_deletion_protection,Networking,true,true,true,Enable deletion protection,Yes,Boolean,true|false,Public,Networking,,From alb object,2025-11-30
+alb.enabled,Networking,true,true,true,Enable this resource,Yes,Boolean,true|false,Public,Networking,,From alb object,2025-11-30
+alb.health_check_interval,Networking,30,30,30,Health check interval (seconds),Yes,Integer,Valid integer,Public,Networking,,From alb object,2025-11-30
+alb.health_check_matcher,Networking,200-299,200-299,200-299,HTTP status codes for healthy response,Yes,String,Valid string value,Public,Networking,,From alb object,2025-11-30
+alb.health_check_path,Networking,/health,/health,/health,Health check endpoint path,Yes,String,Valid string value,Public,Networking,,From alb object,2025-11-30
+alb.health_check_timeout,Networking,5,5,5,Health check timeout (seconds),Yes,Integer,Valid integer,Public,Networking,,From alb object,2025-11-30
+alb.healthy_threshold,Networking,2,2,2,Consecutive healthy checks required,Yes,Integer,Percentage (0-100),Public,Networking,,From alb object,2025-11-30
+alb.idle_timeout_seconds,Networking,60,60,60,Connection idle timeout (seconds),Yes,Integer,Valid integer,Public,Networking,,From alb object,2025-11-30
+alb.internal,Networking,false,false,false,Internal load balancer (not internet-facing),Yes,Boolean,true|false,Public,Networking,,From alb object,2025-11-30
+alb.redirect_http_to_https,Networking,true,true,true,Redirect HTTP to HTTPS,Yes,Boolean,true|false,Public,Networking,,From alb object,2025-11-30
+alb.redirect_status_code,Networking,HTTP_301,HTTP_301,HTTP_301,HTTP redirect status code,Yes,String,Valid string value,Public,Networking,,From alb object,2025-11-30
+alb.ssl_policy,Networking,ELBSecurityPolicy-TLS13-1-2-2021-06,ELBSecurityPolicy-TLS13-1-2-2021-06,ELBSecurityPolicy-TLS13-1-2-2021-06,SSL/TLS security policy,Yes,String,Valid string value,Public,Networking,,From alb object,2025-11-30
+alb.unhealthy_threshold,Networking,3,3,3,Consecutive unhealthy checks required,Yes,Integer,Percentage (0-100),Public,Networking,,From alb object,2025-11-30
+network.database_subnet_cidrs,Networking,"[""10.0.100.0/24"", ""10.0.110.0/24"", ""10.0.120.0/24""]","[""10.0.100.0/24"", ""10.0.110.0/24"", ""10.0.120.0/24""]","[""10.0.100.0/24"", ""10.0.110.0/24"", ""10.0.120.0/24""]",Database subnet CIDR blocks,Yes,List(String),Valid CIDR notation,Confidential,Networking,,From network object,2025-11-30
+network.enable_dns_hostnames,Networking,true,true,true,Enable DNS hostnames in VPC,Yes,Boolean,true|false,Public,Networking,,From network object,2025-11-30
+network.enable_dns_support,Networking,true,true,true,Enable DNS support in VPC,Yes,Boolean,Valid port number (1-65535),Public,Networking,,From network object,2025-11-30
+network.enable_flow_logs,Networking,true,true,true,Enable VPC Flow Logs,Yes,Boolean,true|false,Public,Networking,,From network object,2025-11-30
+network.enable_nat_gateway,Networking,true,true,true,Enable NAT Gateway for private subnets,Yes,Boolean,true|false,Public,Networking,,From network object,2025-11-30
+network.flow_log_aggregation_interval,Networking,60,60,60,Flow log aggregation interval (seconds),Yes,Integer,Valid integer,Public,Networking,,From network object,2025-11-30
+network.flow_log_destination_type,Networking,cloud-watch-logs,cloud-watch-logs,cloud-watch-logs,Flow log destination (cloud-watch-logs/s3),Yes,String,Valid string value,Public,Networking,,From network object,2025-11-30
+network.flow_log_retention_days,Networking,90,90,90,Flow log retention period in days,Yes,Integer,Positive integer (days),Public,Networking,,From network object,2025-11-30
+network.flow_log_traffic_type,Networking,ALL,ALL,ALL,Flow log traffic type (ALL/ACCEPT/REJECT),Yes,String,Valid string value,Public,Networking,,From network object,2025-11-30
+network.http_port,Networking,80,80,80,HTTP port number,Yes,Integer,Valid port number (1-65535),Public,Networking,,From network object,2025-11-30
+network.https_port,Networking,443,443,443,HTTPS port number,Yes,Integer,Valid port number (1-65535),Public,Networking,,From network object,2025-11-30
+network.map_public_ip_on_launch,Networking,true,true,true,Auto-assign public IPs in public subnets,Yes,Boolean,true|false,Public,Networking,,From network object,2025-11-30
+network.private_subnet_cidrs,Networking,"[""10.0.10.0/24"", ""10.0.20.0/24"", ""10.0.30.0/24""]","[""10.0.10.0/24"", ""10.0.20.0/24"", ""10.0.30.0/24""]","[""10.0.10.0/24"", ""10.0.20.0/24"", ""10.0.30.0/24""]",Private subnet CIDR blocks,Yes,List(String),Valid CIDR notation,Confidential,Networking,,From network object,2025-11-30
+network.public_subnet_cidrs,Networking,"[""10.0.1.0/24"", ""10.0.2.0/24"", ""10.0.3.0/24""]","[""10.0.1.0/24"", ""10.0.2.0/24"", ""10.0.3.0/24""]","[""10.0.1.0/24"", ""10.0.2.0/24"", ""10.0.3.0/24""]",Public subnet CIDR blocks,Yes,List(String),Valid CIDR notation,Confidential,Networking,,From network object,2025-11-30
+network.single_nat_gateway,Networking,false,false,false,Use single NAT (cost) vs HA NAT (reliability),Yes,Boolean,true|false,Public,Networking,,From network object,2025-11-30
+network.ssh_port,Networking,22,22,22,SSH port number,Yes,Integer,Valid port number (1-65535),Public,Networking,,From network object,2025-11-30
+network.vpc_cidr,Networking,10.0.0.0/16,10.0.0.0/16,10.0.0.0/16,VPC CIDR block,Yes,String,Valid CIDR notation,Confidential,Networking,,From network object,2025-11-30
+aws.region,Project,us-east-1,us-east-1,us-west-2,Primary AWS region,Yes,String,Valid string value,Public,Infrastructure,,From aws object,2025-11-30
+ownership.cost_center,Project,CC-00000,CC-00000,CC-00000,Cost center for billing,Yes,String,Valid string value,Public,Infrastructure,,From ownership object,2025-11-30
+ownership.owner_email,Project,team@example.com,team@example.com,team@example.com,Owner email for notifications,Yes,String,Valid email address,Confidential,Infrastructure,,From ownership object,2025-11-30
+ownership.project_code,Project,PRJ-SAMPLE,PRJ-SAMPLE,PRJ-SAMPLE,Project tracking code,Yes,String,Valid string value,Public,Infrastructure,,From ownership object,2025-11-30
+security.allowed_http_cidrs,Security,"[""0.0.0.0/0""]","[""0.0.0.0/0""]","[""0.0.0.0/0""]",CIDR blocks allowed HTTP access,Yes,List(String),Valid CIDR notation,Confidential,Security,,From security object,2025-11-30
+security.allowed_https_cidrs,Security,"[""0.0.0.0/0""]","[""0.0.0.0/0""]","[""0.0.0.0/0""]",CIDR blocks allowed HTTPS access,Yes,List(String),Valid CIDR notation,Confidential,Security,,From security object,2025-11-30
+security.allowed_ssh_cidrs,Security,[],[],[],CIDR blocks allowed SSH access,No,List,Valid CIDR notation,Confidential,Security,,From security object,2025-11-30
+security.cache_port,Security,6379,6379,6379,Cache port number,Yes,Integer,Valid port number (1-65535),Public,Security,,From security object,2025-11-30
+security.cloudtrail_enable_log_validation,Security,true,true,true,Enable log file validation,Yes,Boolean,true|false,Public,Security,,From security object,2025-11-30
+security.cloudtrail_event_read_write_type,Security,All,All,All,Event types to log (All/ReadOnly/WriteOnly),Yes,String,Valid string value,Public,Security,,From security object,2025-11-30
+security.cloudtrail_include_global_events,Security,true,true,true,Include global service events,Yes,Boolean,true|false,Public,Security,,From security object,2025-11-30
+security.cloudtrail_include_management_events,Security,true,true,true,Include management events,Yes,Boolean,true|false,Public,Security,,From security object,2025-11-30
+security.cloudtrail_is_multi_region,Security,true,true,true,Enable multi-region trail,Yes,Boolean,true|false,Public,Security,,From security object,2025-11-30
+security.cloudtrail_retention_days,Security,365,30,365,CloudTrail log retention (days),Yes,Integer,Positive integer (days),Public,Security,,From security object,2025-11-30
+security.db_port,Security,5432,5432,5432,Database port number,Yes,Integer,Valid port number (1-65535),Public,Security,,From security object,2025-11-30
+security.enable_cloudtrail,Security,true,false,false,Enable CloudTrail API logging,Yes,Boolean,true|false,Public,Security,,From security object,2025-11-30
+security.enable_guardduty,Security,true,false,true,Enable Amazon GuardDuty threat detection,Yes,Boolean,true|false,Public,Security,,From security object,2025-11-30
+security.enable_instance_profile,Security,true,true,true,Enable IAM instance profile,Yes,Boolean,true|false,Public,Security,,From security object,2025-11-30
+security.enable_key_rotation,Security,true,true,true,Enable automatic KMS key rotation,Yes,Boolean,true|false,Public,Security,,From security object,2025-11-30
+security.enable_kms_encryption,Security,true,true,true,Enable KMS encryption for resources,Yes,Boolean,true|false,Public,Security,,From security object,2025-11-30
+security.enable_ssh_access,Security,false,false,false,Enable SSH access to instances,Yes,Boolean,true|false,Public,Security,,From security object,2025-11-30
+security.enable_ssm_access,Security,true,true,true,Enable SSM Session Manager access,Yes,Boolean,true|false,Public,Security,,From security object,2025-11-30
+security.enable_waf,Security,true,false,false,Enable AWS WAF on ALB,Yes,Boolean,true|false,Public,Security,,From security object,2025-11-30
+security.guardduty_eks_protection,Security,false,false,false,Enable GuardDuty EKS protection,Yes,Boolean,true|false,Public,Security,,From security object,2025-11-30
+security.guardduty_finding_frequency,Security,FIFTEEN_MINUTES,FIFTEEN_MINUTES,FIFTEEN_MINUTES,GuardDuty finding publishing frequency,Yes,String,Valid string value,Public,Security,,From security object,2025-11-30
+security.guardduty_malware_protection,Security,true,true,true,Enable GuardDuty malware protection,Yes,Boolean,true|false,Public,Security,,From security object,2025-11-30
+security.guardduty_s3_protection,Security,true,true,true,Enable GuardDuty S3 protection,Yes,Boolean,true|false,Public,Security,,From security object,2025-11-30
+security.guardduty_severity_threshold,Security,7,7,7,GuardDuty alert severity threshold (1-10),Yes,Integer,Valid integer,Public,Security,,From security object,2025-11-30
+security.kms_deletion_window,Security,30,30,30,KMS key deletion window (days),Yes,Integer,Valid integer,Public,Security,,From security object,2025-11-30
+security.metadata_hop_limit,Security,1,1,1,IMDS hop limit,Yes,Integer,Valid integer,Public,Security,,From security object,2025-11-30
+security.require_imdsv2,Security,true,true,true,Require Instance Metadata Service v2,Yes,Boolean,true|false,Public,Security,,From security object,2025-11-30
+security.s3_block_public_acls,Security,true,true,true,Block public ACLs on S3 buckets,Yes,Boolean,true|false,Public,Security,,From security object,2025-11-30
+security.s3_block_public_policy,Security,true,true,true,Block public policies on S3 buckets,Yes,Boolean,true|false,Public,Security,,From security object,2025-11-30
+security.s3_encryption_algorithm,Security,aws:kms,aws:kms,aws:kms,S3 server-side encryption algorithm,Yes,String,Valid string value,Public,Security,,From security object,2025-11-30
+security.s3_ignore_public_acls,Security,true,true,true,Ignore public ACLs on S3 buckets,Yes,Boolean,true|false,Public,Security,,From security object,2025-11-30
+security.s3_noncurrent_version_days,Security,30,30,30,S3 noncurrent version retention (days),Yes,Integer,Positive integer (days),Public,Security,,From security object,2025-11-30
+security.s3_restrict_public_buckets,Security,true,true,true,Restrict public bucket policies,Yes,Boolean,true|false,Public,Security,,From security object,2025-11-30
+security.waf_ip_address_version,Security,IPV4,IPV4,IPV4,WAF IP address version (IPV4/IPV6),Yes,String,Valid string value,Public,Security,,From security object,2025-11-30
+security.waf_rate_limit,Security,2000,10000,2000,WAF rate limit per IP (5-min window),Yes,Integer,Valid integer,Public,Security,,From security object,2025-11-30
+security.waf_rule_priorities,Security,"{ rate_limit = 1, blocked_ip = 2, geo_block = 3, common_rules = 10, sqli = 20, bad_inputs = 30 }","{ rate_limit = 1, blocked_ip = 2, geo_block = 3, common_rules = 10, sqli = 20, bad_inputs = 30 }","{ rate_limit = 1, blocked_ip = 2, geo_block = 3, common_rules = 10, sqli = 20, bad_inputs = 30 }",WAF rule priority mappings,Yes,Map,Valid key-value map,Public,Security,,From security object,2025-11-30
+dr.enabled,DR,true,false,false,Enable DR infrastructure,Yes,Boolean,true|false,Public,Operations,,Master DR toggle,2025-12-02
+dr.strategy,DR,ACTIVE_PASSIVE,BACKUP_ONLY,ACTIVE_PASSIVE,DR strategy,Yes,String,ACTIVE_PASSIVE|ACTIVE_ACTIVE|BACKUP_ONLY,Public,Operations,,Recovery approach,2025-12-02
+dr.rto_minutes,DR,240,480,240,Recovery Time Objective (minutes),Yes,Integer,Positive integer,Public,Operations,,Target recovery time,2025-12-02
+dr.rpo_minutes,DR,60,1440,60,Recovery Point Objective (minutes),Yes,Integer,Positive integer,Public,Operations,,Max data loss window,2025-12-02
+dr.failover_mode,DR,manual,manual,manual,Failover mode,Yes,String,manual|automatic,Public,Operations,,Manual for safety,2025-12-02
+dr.replication_enabled,DR,true,false,false,Enable cross-region replication,Yes,Boolean,true|false,Public,Operations,,S3 CRR and RDS replication,2025-12-02
+dr.vault_enabled,DR,true,false,true,Enable DR backup vault,Yes,Boolean,true|false,Public,Operations,,DR vault in DR region,2025-12-02
+dr.vault_kms_deletion_window_days,DR,30,30,30,DR KMS deletion window,Yes,Integer,7-30,Public,Operations,,Protection period,2025-12-02
+dr.vault_transition_to_ia_days,DR,30,30,30,DR vault transition to IA,Yes,Integer,Positive integer,Public,Operations,,Cost optimization,2025-12-02
+dr.vault_noncurrent_version_expiration_days,DR,90,90,90,DR vault noncurrent expiration,Yes,Integer,Positive integer,Public,Operations,,Version cleanup,2025-12-02
+dr.vault_enable_lock,DR,false,false,false,Enable vault lock (WORM),Yes,Boolean,true|false,Public,Operations,,Compliance WORM,2025-12-02
+dr.backup_retention_days,DR,30,30,30,DR backup retention (days),Yes,Integer,Positive integer,Public,Operations,,DR vault retention,2025-12-02
+dr.backup_local_retention_days,DR,7,7,7,Local backup retention,Yes,Integer,Positive integer,Public,Operations,,Source vault retention,2025-12-02
+dr.enable_weekly_backup,DR,true,false,true,Enable DR weekly backup,Yes,Boolean,true|false,Public,Operations,,Long retention,2025-12-02
+dr.weekly_backup_retention_days,DR,90,90,90,DR weekly retention,Yes,Integer,Positive integer,Public,Operations,,3 months,2025-12-02
+dr.test_schedule,DR,"cron(0 2 ? * SUN *)","","cron(0 2 ? * SUN *)",DR test schedule,No,String,Valid cron,Public,Operations,,Weekly DR test,2025-12-02
+dr.notification_email,DR,dr-alerts@example.com,dr-alerts@example.com,dr-alerts@example.com,DR notification email,No,String,Valid email,Confidential,Operations,,Alert notifications,2025-12-02

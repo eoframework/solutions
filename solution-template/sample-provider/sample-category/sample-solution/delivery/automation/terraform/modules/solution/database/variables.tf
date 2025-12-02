@@ -85,18 +85,4 @@ variable "database" {
   })
 }
 
-#------------------------------------------------------------------------------
-# Alarms Configuration
-#------------------------------------------------------------------------------
-
-variable "enable_alarms" {
-  description = "Enable CloudWatch alarms"
-  type        = bool
-  default     = true
-}
-
-variable "alarm_sns_topic_arn" {
-  description = "SNS topic ARN for alarm notifications"
-  type        = string
-  default     = ""
-}
+# NOTE: Alarm variables removed - alarms created in environment INTEGRATIONS section

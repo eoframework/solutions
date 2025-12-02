@@ -1,59 +1,63 @@
 #------------------------------------------------------------------------------
-# Compute Configuration - DR Environment
+# Compute Configuration - EC2, ASG - DR Environment
 #------------------------------------------------------------------------------
-# DR compute settings. Same instance types as production for failover capability.
-# Reduced capacity in standby mode to minimize costs.
-#------------------------------------------------------------------------------
-
-#------------------------------------------------------------------------------
-# EC2 Instance Configuration (Match Production for Failover)
+# DR DIFFERENCES:
+# - ASG min/desired: 1 (minimal standby capacity)
+# - ASG max: Same as production (for failover)
+# - Instance type: Same as production (failover capability)
 #------------------------------------------------------------------------------
 
-instance_type  = "t3.medium"          # DR: Same as production
-use_latest_ami = true                 # Use latest Amazon Linux 2023 AMI
+compute = {
+  # EC2 Instance Configuration
+  ami_filter_name    = "al2023-ami-*-x86_64"
+  ami_owner          = "amazon"
+  ami_virtualization = "hvm"
+  instance_type      = "t3.medium"
+  use_latest_ami     = true
 
-# Root volume configuration (same as production)
-root_volume_size       = 50           # GB
-root_volume_type       = "gp3"
-root_volume_iops       = 3000
-root_volume_throughput = 125          # MB/s
+  # Root Volume Configuration
+  root_volume_size       = 50
+  root_volume_type       = "gp3"
+  root_volume_iops       = 3000
+  root_volume_throughput = 125
+  root_volume_encrypted  = true
+  root_volume_device     = "/dev/xvda"
+  delete_on_termination  = true
 
-# Monitoring
-enable_detailed_monitoring = true     # DR: Enabled for visibility
+  # Instance Monitoring & Network
+  enable_detailed_monitoring = true
+  associate_public_ip        = false
 
-#------------------------------------------------------------------------------
-# Auto Scaling Group Configuration (Reduced Standby Capacity)
-#------------------------------------------------------------------------------
+  # Instance Metadata Service
+  metadata_http_endpoint = "enabled"
+  metadata_http_tokens   = "required"
+  metadata_hop_limit     = 1
+  metadata_tags_enabled  = "enabled"
 
-enable_auto_scaling    = true
-asg_min_size           = 1            # DR: Minimal standby capacity
-asg_max_size           = 10           # DR: Same max as production for failover
-asg_desired_capacity   = 1            # DR: Minimal until failover activated
+  # Auto Scaling Group (DR STANDBY MODE)
+  enable_auto_scaling       = true
+  asg_min_size              = 1
+  asg_max_size              = 10
+  asg_desired_capacity      = 1
+  health_check_grace_period = 300
+  health_check_type         = "ELB"
+  default_cooldown          = 300
+  termination_policies      = ["Default"]
+  suspended_processes       = []
 
-# Health check
-health_check_grace_period = 300       # seconds
+  # Instance Refresh
+  instance_refresh_strategy    = "Rolling"
+  instance_refresh_min_healthy = 50
+  instance_refresh_warmup      = 300
+  launch_template_version      = "$Latest"
 
-# Scaling thresholds
-scale_up_threshold   = 70             # CPU % to trigger scale up
-scale_down_threshold = 30             # CPU % to trigger scale down
+  # Scaling Policies
+  scale_up_threshold    = 70
+  scale_down_threshold  = 30
+  scale_up_adjustment   = 2
+  scale_down_adjustment = -1
+  scaling_cooldown      = 300
 
-#------------------------------------------------------------------------------
-# Application Load Balancer Configuration
-#------------------------------------------------------------------------------
-
-enable_alb                    = true
-alb_internal                  = false # Internet-facing for failover
-enable_lb_deletion_protection = true  # DR: Enabled for protection
-
-# Health check settings
-health_check_path     = "/health"
-health_check_interval = 30            # seconds
-health_check_timeout  = 5             # seconds
-healthy_threshold     = 2             # consecutive checks
-unhealthy_threshold   = 3             # consecutive checks
-
-# Application port
-app_port = 8080
-
-# TLS Configuration (use DR region certificate)
-# acm_certificate_arn = "arn:aws:acm:us-west-2:123456789012:certificate/xxxxx"
+  # Tags
+  propagate_tags_at_launch = true
+}

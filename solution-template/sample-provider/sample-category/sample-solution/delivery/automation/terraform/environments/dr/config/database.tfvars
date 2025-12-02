@@ -1,57 +1,53 @@
 #------------------------------------------------------------------------------
-# Database Configuration - DR Environment
+# Database Configuration - RDS - DR Environment
 #------------------------------------------------------------------------------
-# DR database settings. Must match production configuration for replication
-# and failover compatibility.
-#------------------------------------------------------------------------------
-
-#------------------------------------------------------------------------------
-# RDS Database Configuration (Match Production)
+# Same as production for failover compatibility.
+# RDS restored from AWS Backup snapshot when failover triggered.
 #------------------------------------------------------------------------------
 
-db_engine         = "postgres"        # Must match production
-db_engine_version = "15.4"            # Must match production
-db_instance_class = "db.t3.medium"    # Same as production for failover
+database = {
+  enabled = true
 
-# Storage (same as production)
-db_allocated_storage     = 100        # GB initial
-db_max_allocated_storage = 500        # GB max (autoscaling)
-db_storage_encrypted     = true       # Always enabled for DR
+  # Engine Configuration (MUST MATCH PRODUCTION)
+  engine         = "postgres"
+  engine_version = "15.4"
+  instance_class = "db.t3.medium"
 
-# Database identity (same as production for seamless failover)
-db_name     = "appdb"
-db_username = "dbadmin"
-# db_password = ""                    # Set via environment variable or secrets manager
+  # Storage Configuration
+  allocated_storage     = 100
+  max_allocated_storage = 500
+  storage_type          = "gp3"
+  storage_iops          = 3000
+  storage_throughput    = 125
+  storage_encrypted     = true
 
-# High Availability
-db_multi_az = true                    # DR: Always enabled for HA
+  # Database Identity
+  name     = "appdb"
+  username = "dbadmin"
 
-# Backup Configuration (same as production)
-db_backup_retention    = 30           # days
-db_backup_window       = "03:00-04:00"
-db_maintenance_window  = "sun:04:00-sun:05:00"
+  # High Availability
+  multi_az = true
 
-# Performance & Monitoring
-db_performance_insights = true        # DR: Enabled for visibility
+  # Backup Configuration
+  backup_retention   = 30
+  backup_window      = "03:00-04:00"
+  maintenance_window = "sun:04:00-sun:05:00"
 
-# Protection
-db_deletion_protection = true         # DR: Always enabled
+  # Performance & Monitoring
+  performance_insights           = true
+  performance_insights_retention = 7
+  log_exports_postgres           = ["postgresql", "upgrade"]
+  log_exports_mysql              = ["error", "slowquery", "general"]
 
-#------------------------------------------------------------------------------
-# ElastiCache (Redis) Configuration
-#------------------------------------------------------------------------------
+  # Version Management
+  auto_minor_version_upgrade  = true
+  allow_major_version_upgrade = false
 
-cache_engine_version = "7.0"
-cache_node_type      = "cache.t3.medium"
-cache_num_nodes      = 2              # DR: HA configuration
+  # Protection
+  deletion_protection   = true
+  skip_final_snapshot   = false
+  copy_tags_to_snapshot = true
 
-# High Availability
-cache_automatic_failover = true       # DR: Enabled for HA
-
-# Encryption
-cache_at_rest_encryption  = true      # DR: Enabled
-cache_transit_encryption  = true      # DR: Enabled
-
-# Backup
-cache_snapshot_retention = 7          # days
-cache_snapshot_window    = "05:00-06:00"
+  # Network
+  publicly_accessible = false
+}

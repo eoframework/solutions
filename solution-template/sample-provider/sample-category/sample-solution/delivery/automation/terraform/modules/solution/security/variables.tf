@@ -15,11 +15,7 @@ variable "common_tags" {
   type        = map(string)
 }
 
-variable "alb_arn" {
-  description = "ALB ARN for WAF association (from core module)"
-  type        = string
-  default     = ""
-}
+# NOTE: alb_arn removed - WAF to ALB association done in environment INTEGRATIONS section
 
 #------------------------------------------------------------------------------
 # Security Configuration (from security.tfvars)

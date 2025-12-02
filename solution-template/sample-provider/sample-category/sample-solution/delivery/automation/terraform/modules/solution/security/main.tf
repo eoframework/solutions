@@ -24,17 +24,18 @@ module "kms" {
 }
 
 #------------------------------------------------------------------------------
-# AWS WAF v2
+# AWS WAF v2 (Web ACL only - association done in INTEGRATIONS section)
 #------------------------------------------------------------------------------
 
 module "waf" {
   source = "../../aws/waf"
   count  = var.security.enable_waf ? 1 : 0
 
-  name_prefix  = local.name_prefix
-  tags         = local.common_tags
-  resource_arn = var.alb_arn
-  rate_limit   = var.security.waf_rate_limit
+  name_prefix = local.name_prefix
+  tags        = local.common_tags
+  rate_limit  = var.security.waf_rate_limit
+  # NOTE: resource_arn intentionally not passed here to avoid circular dependency
+  # WAF to ALB association is done in environment main.tf INTEGRATIONS section
 }
 
 #------------------------------------------------------------------------------

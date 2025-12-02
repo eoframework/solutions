@@ -478,3 +478,39 @@ variable "budget" {
     ec2_instances_to_stop        = list(string)
   })
 }
+
+#------------------------------------------------------------------------------
+# DR Configuration (dr.tfvars)
+#------------------------------------------------------------------------------
+variable "dr" {
+  description = "Disaster Recovery configuration - strategy, replication, vault, and backup settings"
+  type = object({
+    # Master DR toggle and strategy
+    enabled       = optional(bool, false)
+    strategy      = optional(string, "ACTIVE_PASSIVE")
+    rto_minutes   = optional(number, 240)
+    rpo_minutes   = optional(number, 60)
+    failover_mode = optional(string, "manual")
+
+    # Cross-region replication settings (production)
+    replication_enabled = optional(bool, false)
+
+    # DR vault settings (DR environment)
+    vault_enabled     = optional(bool, false)
+    vault_enable_lock = optional(bool, false)
+
+    # Backup retention settings
+    backup_retention_days        = optional(number, 30)
+    backup_local_retention_days  = optional(number, 7)
+    enable_weekly_backup         = optional(bool, true)
+    weekly_backup_retention_days = optional(number, 90)
+
+    # DR operations
+    test_schedule      = optional(string, "")
+    notification_email = optional(string, "")
+  })
+
+  default = {
+    enabled = false
+  }
+}

@@ -52,18 +52,31 @@ terraform {
 # 2. Shared credentials file with profile: ~/.aws/credentials
 # 3. IAM role (when running on EC2/ECS/Lambda)
 #
-# For local development, set aws_profile in main.tfvars
+# For local development, set aws.profile in project.tfvars
 # For CI/CD pipelines, use environment variables or IAM roles
 
 provider "aws" {
-  region = var.aws_region
+  region = var.aws.region
 
   # Optional: Use named profile from ~/.aws/credentials
   # Leave empty/null to use default credential chain
-  profile = var.aws_profile != "" ? var.aws_profile : null
+  profile = try(var.aws.profile, null) != "" ? var.aws.profile : null
 
   # Common tags applied to ALL resources automatically
-  # These are populated from main.tfvars via locals
+  # These are populated from config/*.tfvars via locals
+  default_tags {
+    tags = local.common_tags
+  }
+}
+
+# DR Provider pointing back to Production region (for reading prod state, etc.)
+# In DR, this points back to the production region
+provider "aws" {
+  alias  = "dr"
+  region = try(var.aws.dr_region, "us-east-1")  # DR region points back to prod
+
+  profile = try(var.aws.profile, null) != "" ? var.aws.profile : null
+
   default_tags {
     tags = local.common_tags
   }

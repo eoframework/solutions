@@ -1,45 +1,39 @@
 #------------------------------------------------------------------------------
-# Cache Configuration - DR Environment
+# Cache Configuration - ElastiCache - DR Environment
 #------------------------------------------------------------------------------
-# ElastiCache configuration for disaster recovery.
-# Generated from: delivery/raw/configuration.csv #SHEET: cache
-#
-# DR configuration matches production for failover compatibility.
+# Same as production for failover compatibility.
+# Cache created fresh in DR - warms from database after failover.
 #------------------------------------------------------------------------------
 
-#------------------------------------------------------------------------------
-# ElastiCache Deployment
-#------------------------------------------------------------------------------
+cache = {
+  enabled = true
 
-enable_elasticache = true               # DR: enabled (matches prod)
+  # Engine Configuration
+  engine         = "redis"
+  engine_version = "7.0"
+  port           = 6379
 
-# Engine configuration (must match production)
-cache_engine         = "redis"
-cache_engine_version = "7.0"
+  # Instance Configuration
+  node_type = "cache.r6g.large"
+  num_nodes = 2
 
-#------------------------------------------------------------------------------
-# Instance Configuration
-#------------------------------------------------------------------------------
+  # High Availability
+  automatic_failover = true
 
-cache_node_type = "cache.r6g.large"     # DR: same as production
-cache_num_nodes = 2                      # DR: HA configuration
+  # Encryption
+  at_rest_encryption = true
+  transit_encryption = true
 
-#------------------------------------------------------------------------------
-# High Availability
-#------------------------------------------------------------------------------
+  # Backup Configuration
+  snapshot_retention = 7
+  snapshot_window    = "05:00-06:00"
 
-cache_automatic_failover = true          # DR: enabled for HA
+  # Maintenance Configuration
+  maintenance_window         = "sun:06:00-sun:07:00"
+  auto_minor_version_upgrade = true
 
-#------------------------------------------------------------------------------
-# Encryption
-#------------------------------------------------------------------------------
-
-cache_at_rest_encryption  = true         # DR: enabled (matches prod)
-cache_transit_encryption  = true         # DR: enabled (matches prod)
-
-#------------------------------------------------------------------------------
-# Backup Configuration
-#------------------------------------------------------------------------------
-
-cache_snapshot_retention = 7             # DR: same as production
-cache_snapshot_window    = "05:00-06:00"
+  # Cluster Mode
+  cluster_mode_enabled  = false
+  cluster_mode_replicas = 1
+  cluster_mode_shards   = 1
+}
