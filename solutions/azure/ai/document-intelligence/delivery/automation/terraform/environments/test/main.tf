@@ -207,96 +207,28 @@ module "dr" {
 # INTEGRATIONS - Cross-module connections (avoids circular dependencies)
 #===============================================================================
 #------------------------------------------------------------------------------
-# Storage Event Trigger (connects storage → processing)
+# Integrations (Event Grid, Metric Alerts)
 #------------------------------------------------------------------------------
-resource "azurerm_eventgrid_event_subscription" "blob_created" {
-  name  = "${local.name_prefix}-blob-trigger"
-  scope = module.storage.storage_account_id
+module "integrations" {
+  source = "../../modules/solution/integrations"
 
-  azure_function_endpoint {
-    function_id = "${module.processing.function_app_id}/functions/ProcessDocument"
-  }
-
-  included_event_types = ["Microsoft.Storage.BlobCreated"]
-
-  subject_filter {
-    subject_begins_with = "/blobServices/default/containers/${var.storage.input_container}/"
-  }
-
-  depends_on = [module.processing]
-}
-
-#------------------------------------------------------------------------------
-# Cosmos DB Alerts (connects storage → monitoring)
-#------------------------------------------------------------------------------
-resource "azurerm_monitor_metric_alert" "cosmos_ru_consumption" {
-  count               = var.monitoring.enable_alerts ? 1 : 0
-  name                = "${local.name_prefix}-cosmos-ru-high"
+  name_prefix         = local.name_prefix
   resource_group_name = module.core.resource_group_name
-  scopes              = [module.storage.cosmos_account_id]
-  description         = "Cosmos DB RU consumption is high"
-  severity            = 2
+  common_tags         = local.common_tags
 
-  criteria {
-    metric_namespace = "Microsoft.DocumentDB/databaseAccounts"
-    metric_name      = "NormalizedRUConsumption"
-    aggregation      = "Maximum"
-    operator         = "GreaterThan"
-    threshold        = 80
-  }
+  # Storage integration
+  storage_account_id = module.storage.storage_account_id
+  input_container    = var.storage.input_container
 
-  action {
-    action_group_id = module.monitoring.action_group_id
-  }
+  # Processing integration
+  function_app_id = module.processing.function_app_id
 
-  tags = local.common_tags
-}
+  # Database integration
+  cosmos_account_id = module.storage.cosmos_account_id
 
-#------------------------------------------------------------------------------
-# Function App Alerts (connects processing → monitoring)
-#------------------------------------------------------------------------------
-resource "azurerm_monitor_metric_alert" "function_errors" {
-  count               = var.monitoring.enable_alerts ? 1 : 0
-  name                = "${local.name_prefix}-function-errors"
-  resource_group_name = module.core.resource_group_name
-  scopes              = [module.processing.function_app_id]
-  description         = "Function App error rate is high"
-  severity            = 1
+  # Monitoring integration
+  action_group_id = module.monitoring.action_group_id
+  enable_alerts   = var.monitoring.enable_alerts
 
-  criteria {
-    metric_namespace = "Microsoft.Web/sites"
-    metric_name      = "Http5xx"
-    aggregation      = "Total"
-    operator         = "GreaterThan"
-    threshold        = 10
-  }
-
-  action {
-    action_group_id = module.monitoring.action_group_id
-  }
-
-  tags = local.common_tags
-}
-
-resource "azurerm_monitor_metric_alert" "function_latency" {
-  count               = var.monitoring.enable_alerts ? 1 : 0
-  name                = "${local.name_prefix}-function-latency"
-  resource_group_name = module.core.resource_group_name
-  scopes              = [module.processing.function_app_id]
-  description         = "Function App response time is high"
-  severity            = 2
-
-  criteria {
-    metric_namespace = "Microsoft.Web/sites"
-    metric_name      = "HttpResponseTime"
-    aggregation      = "Average"
-    operator         = "GreaterThan"
-    threshold        = 5000
-  }
-
-  action {
-    action_group_id = module.monitoring.action_group_id
-  }
-
-  tags = local.common_tags
+  depends_on = [module.processing, module.monitoring]
 }

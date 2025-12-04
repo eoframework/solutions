@@ -89,7 +89,7 @@ output "logic_app_url" {
 #------------------------------------------------------------------------------
 output "application_insights_connection_string" {
   description = "Application Insights connection string"
-  value       = module.monitoring.application_insights_connection_string
+  value       = module.processing.application_insights_connection_string
   sensitive   = true
 }
 
@@ -117,11 +117,11 @@ output "dr_storage_account_name" {
 output "environment_summary" {
   description = "Summary of the deployed environment"
   value = {
-    environment     = local.environment
-    region          = var.azure.region
-    dr_enabled      = var.dr.enabled
-    private_endpoints = var.network.private_endpoint_enabled
-    function_sku    = var.compute.function_plan_sku
-    cosmos_tier     = var.cosmos.offer_type
+    environment       = local.environment
+    region            = var.azure.region
+    dr_enabled        = var.dr.enabled
+    private_endpoints = var.network.enable_private_endpoints
+    function_sku      = var.compute.function_plan_sku
+    cosmos_tier       = var.database.cosmos_offer_type
   }
 }
