@@ -1,46 +1,113 @@
-#WIDTH: 30,14,30,30,30,45,8,12,30,14,14,12,35,12
+#WIDTH: 45,14,50,50,50,55,8,12,35,14,14,12,40,12
 #ALIGN: left,left,left,left,left,left,center,left,left,center,left,left,left,center
 Parameter Name,Category,Production,Test,DR,Description,Required,Data Type,Validation Rules,Security Level,Owner Team,Dependencies,Notes,Last Updated
-solution.name,Application,mist-ai-network,mist-ai-network,mist-ai-network,Solution name for resource naming,Yes,String,Valid string value,Public,Wireless Team,,From solution object,2025-12-03
-solution.abbr,Application,mist,mist,mist,Solution abbreviation (3-4 chars),Yes,String,Valid string value,Public,Wireless Team,,From solution object,2025-12-03
-solution.provider_name,Application,juniper,juniper,juniper,Provider organization name,Yes,String,Valid string value,Public,Wireless Team,,From solution object,2025-12-03
-solution.category_name,Application,network,network,network,Solution category,Yes,String,Valid string value,Public,Wireless Team,,From solution object,2025-12-03
-mist.country_code,Cloud,US,US,US,Country code for regulatory domain,Yes,String,Valid ISO country code,Public,Wireless Team,None,Affects available channels,2025-12-03
-mist.timezone,Cloud,America/New_York,America/New_York,America/New_York,Timezone for scheduled operations,Yes,String,Valid IANA timezone,Public,Wireless Team,None,Affects auto-upgrade schedule,2025-12-03
-wlan.ssid_corporate,WLAN,Corp-WiFi,Test-Corp,DR-Corp-WiFi,Corporate employee SSID name,Yes,String,Valid SSID 1-32 chars,Public,Wireless Team,RADIUS configured,802.1X authentication,2025-12-03
-wlan.ssid_guest,WLAN,Guest-WiFi,Test-Guest,DR-Guest-WiFi,Guest visitor SSID name,Yes,String,Valid SSID 1-32 chars,Public,Wireless Team,Portal configured,Captive portal authentication,2025-12-03
-wlan.ssid_iot,WLAN,IoT-Network,,DR-IoT-Network,IoT device SSID name,No,String,Valid SSID 1-32 chars,Public,Wireless Team,PSK configured,Hidden SSID optional,2025-12-03
-network.vlan_mgmt_id,Network,100,100,100,Management VLAN for APs,Yes,Integer,1-4094,Public,Network Team,Switch configuration,AP management traffic,2025-12-03
-network.vlan_corporate_id,Network,200,200,200,Corporate wireless client VLAN,Yes,Integer,1-4094,Public,Network Team,DHCP scope configured,Employee wireless clients,2025-12-03
-network.vlan_guest_id,Network,300,300,300,Guest wireless client VLAN,Yes,Integer,1-4094,Public,Network Team,DHCP scope configured,Guest isolation required,2025-12-03
-network.vlan_iot_id,Network,400,400,400,IoT device VLAN,Yes,Integer,1-4094,Public,Network Team,DHCP scope configured,Segmented from corporate,2025-12-03
-network.mgmt_subnet,Network,10.10.100.0/24,10.100.100.0/24,10.200.100.0/24,AP management subnet,Yes,IP Address,Valid IPv4 CIDR,Confidential,Network Team,DHCP configured,AP DHCP addresses,2025-12-03
-network.corporate_subnet,Network,10.10.200.0/23,10.100.200.0/24,10.200.200.0/23,Corporate client subnet,Yes,IP Address,Valid IPv4 CIDR,Confidential,Network Team,DHCP configured,Supports 500 clients,2025-12-03
-network.guest_subnet,Network,10.10.4.0/24,10.100.4.0/24,10.200.4.0/24,Guest client subnet,Yes,IP Address,Valid IPv4 CIDR,Confidential,Network Team,DHCP configured,Internet only access,2025-12-03
-network.iot_subnet,Network,10.10.5.0/24,10.100.5.0/24,10.200.5.0/24,IoT device subnet,Yes,IP Address,Valid IPv4 CIDR,Confidential,Network Team,DHCP configured,Limited network access,2025-12-03
-radius.enabled,Authentication,true,false,true,Enable RADIUS authentication,Yes,Boolean,true|false,Public,Security Team,RADIUS operational,802.1X authentication,2025-12-03
-radius.auth_port,Authentication,1812,1812,1812,RADIUS authentication port,Yes,Integer,1-65535,Public,Security Team,Firewall rules,Standard RADIUS port,2025-12-03
-radius.acct_port,Authentication,1813,1813,1813,RADIUS accounting port,Yes,Integer,1-65535,Public,Security Team,Firewall rules,Standard accounting port,2025-12-03
-rf.24_channels,RF,"1;6;11","1;6;11","1;6;11",Allowed 2.4 GHz channels,Yes,String,Valid channel list,Public,Wireless Team,RF policy,Non-overlapping channels,2025-12-03
-rf.24_power_min,RF,8,8,8,Minimum 2.4 GHz power dBm,Yes,Integer,0-21,Public,Wireless Team,RF policy,Auto power adjustment,2025-12-03
-rf.24_power_max,RF,18,15,18,Maximum 2.4 GHz power dBm,Yes,Integer,0-21,Public,Wireless Team,RF policy,Limit interference,2025-12-03
-rf.5_channels,RF,"36;40;44;48;149;153;157;161","36;40;44;48","36;40;44;48;149;153;157;161",Allowed 5 GHz channels,Yes,String,Valid channel list,Public,Wireless Team,RF policy,UNII-1 and UNII-3,2025-12-03
-rf.5_power_min,RF,10,10,10,Minimum 5 GHz power dBm,Yes,Integer,0-23,Public,Wireless Team,RF policy,Auto power adjustment,2025-12-03
-rf.5_power_max,RF,23,20,23,Maximum 5 GHz power dBm,Yes,Integer,0-23,Public,Wireless Team,RF policy,Maximum coverage,2025-12-03
-rf.6_power_min,RF,12,12,12,Minimum 6 GHz power dBm,Yes,Integer,0-24,Public,Wireless Team,RF policy,WiFi 6E band,2025-12-03
-rf.6_power_max,RF,24,24,24,Maximum 6 GHz power dBm,Yes,Integer,0-24,Public,Wireless Team,RF policy,Maximum power,2025-12-03
-sle.connect_target,SLE,99,95,99,Successful connect SLE target %,Yes,Integer,0-100,Public,Wireless Team,SLE monitoring,Primary KPI target,2025-12-03
-sle.coverage_target,SLE,95,90,95,Coverage SLE target %,Yes,Integer,0-100,Public,Wireless Team,SLE monitoring,RF coverage metric,2025-12-03
-sle.capacity_target,SLE,95,90,95,Capacity SLE target %,Yes,Integer,0-100,Public,Wireless Team,SLE monitoring,Utilization metric,2025-12-03
-sle.roaming_target,SLE,95,90,95,Roaming SLE target %,Yes,Integer,0-100,Public,Wireless Team,SLE monitoring,Mobility metric,2025-12-03
-location.accuracy,Location,3-5,3-5,3-5,Target location accuracy meters,Yes,String,Valid range,Public,Wireless Team,vBLE enabled,Indoor positioning,2025-12-03
-location.vble_enabled,Location,true,false,true,Enable vBLE location services,Yes,Boolean,true|false,Public,Wireless Team,AP45 with vBLE,Wayfinding feature,2025-12-03
-system.ntp_server_1,System,10.10.100.20,10.100.100.20,10.200.100.20,Primary NTP server,Yes,IP Address,Valid IPv4 address,Public,Network Team,Network connectivity,Time synchronization,2025-12-03
-system.ntp_server_2,System,10.10.100.21,10.100.100.21,10.200.100.21,Secondary NTP server,Yes,IP Address,Valid IPv4 address,Public,Network Team,Network connectivity,Backup NTP source,2025-12-03
-system.dns_server_1,System,10.10.100.10,10.100.100.10,10.200.100.10,Primary DNS server,Yes,IP Address,Valid IPv4 address,Public,Network Team,Network connectivity,Name resolution,2025-12-03
-system.dns_server_2,System,10.10.100.11,10.100.100.11,10.200.100.11,Secondary DNS server,Yes,IP Address,Valid IPv4 address,Public,Network Team,Network connectivity,Backup DNS source,2025-12-03
-switch.mgmt_vlan,Switch,100,100,100,EX4400 management VLAN,Yes,Integer,1-4094,Public,Network Team,VLAN configured,Switch management,2025-12-03
-switch.native_vlan,Switch,100,100,100,Native VLAN for AP ports,Yes,Integer,1-4094,Public,Network Team,Port configuration,Untagged AP traffic,2025-12-03
-switch.poe_budget,Switch,1440,720,1440,PoE power budget watts,Yes,Integer,0-2000,Public,Network Team,EX4400-48P,30W per AP max,2025-12-03
-operations.upgrade_schedule,Operations,02:00-06:00,02:00-06:00,02:00-06:00,Auto-upgrade window,Yes,String,Valid time range,Public,Wireless Team,Auto-upgrade enabled,Low traffic period,2025-12-03
-operations.firmware_version,Operations,Latest,Latest,Latest,Target firmware version,Yes,String,Valid version or Latest,Public,Wireless Team,Mist Cloud,Auto-managed,2025-12-03
+solution.name,Project,mist-ai-network,mist-ai-network,mist-ai-network,Solution name for resource naming,Yes,String,Valid string value,Public,Wireless Team,,Mist AI Network solution identifier,2025-12-04
+solution.abbr,Project,mist,mist,mist,Solution abbreviation (3-4 chars),Yes,String,3-4 alphanumeric chars,Public,Wireless Team,,Used in resource naming prefix,2025-12-04
+solution.provider_name,Project,juniper,juniper,juniper,Provider organization name,Yes,String,Valid string value,Public,Wireless Team,,Juniper Networks provider,2025-12-04
+solution.category_name,Project,network,network,network,Solution category,Yes,String,Valid string value,Public,Wireless Team,,Network category,2025-12-04
+ownership.cost_center,Project,CC-MIST-001,CC-MIST-001,CC-MIST-001,Cost center code,Yes,String,Valid cost center,Public,Finance,,Cost allocation tracking,2025-12-04
+ownership.owner_email,Project,wireless-team@example.com,wireless-team@example.com,wireless-team@example.com,Owner email for notifications,Yes,String,Valid email,Confidential,Wireless Team,,Team notifications,2025-12-04
+ownership.project_code,Project,PRJ-MIST-2025,PRJ-MIST-2025,PRJ-MIST-2025,Project tracking code,Yes,String,Valid string,Public,Wireless Team,,Project management tracking,2025-12-04
+mist.org_id,Cloud,[vault:mist_org_id],[vault:mist_org_id],[vault:mist_org_id],Mist organization ID,Yes,String,Valid UUID,Secret,Wireless Team,Mist account,From Mist dashboard,2025-12-04
+mist.api_token,Cloud,[vault:mist_api_token],[vault:mist_api_token],[vault:mist_api_token],Mist API token,Yes,String,Valid API token,Secret,Wireless Team,mist.org_id,API authentication,2025-12-04
+mist.cloud_region,Cloud,Global 01,Global 01,Global 01,Mist Cloud region,Yes,String,Valid region,Public,Wireless Team,,Primary cloud region,2025-12-04
+mist.country_code,Cloud,US,US,US,Country code for regulatory domain,Yes,String,Valid ISO country code,Public,Wireless Team,,Affects available channels,2025-12-04
+mist.timezone,Cloud,America/New_York,America/New_York,America/Los_Angeles,Timezone for scheduled operations,Yes,String,Valid IANA timezone,Public,Wireless Team,,Affects auto-upgrade schedule,2025-12-04
+site.name,Site,headquarters,test-lab,dr-site,Site name in Mist,Yes,String,Valid string,Public,Wireless Team,,Site identifier,2025-12-04
+site.address,Site,"123 Corporate Drive, NYC","456 Test Lab Ave","789 DR Center Blvd",Physical site address,Yes,String,Valid address,Public,Wireless Team,,Location tracking,2025-12-04
+site.latitude,Site,40.7128,40.7500,34.0522,Site latitude coordinate,Yes,Float,Valid latitude,Public,Wireless Team,,GPS location,2025-12-04
+site.longitude,Site,-74.0060,-73.9000,-118.2437,Site longitude coordinate,Yes,Float,Valid longitude,Public,Wireless Team,,GPS location,2025-12-04
+site.rf_template,Site,enterprise-high-density,lab-basic,enterprise-high-density,RF template to apply,Yes,String,Valid template name,Public,Wireless Team,Mist templates,RF configuration,2025-12-04
+site.network_template,Site,enterprise-standard,lab-basic,enterprise-standard,Network template to apply,Yes,String,Valid template name,Public,Wireless Team,Mist templates,VLAN/Network config,2025-12-04
+wlan.ssid_corporate,WLAN,Corp-WiFi,Test-Corp,DR-Corp-WiFi,Corporate employee SSID name,Yes,String,Valid SSID 1-32 chars,Public,Wireless Team,RADIUS configured,802.1X authentication,2025-12-04
+wlan.ssid_corporate_enabled,WLAN,true,true,true,Enable corporate SSID,Yes,Boolean,true|false,Public,Wireless Team,,Main employee network,2025-12-04
+wlan.ssid_corporate_hidden,WLAN,false,false,false,Hide corporate SSID from broadcast,Yes,Boolean,true|false,Public,Wireless Team,,Visible SSID,2025-12-04
+wlan.ssid_corporate_band,WLAN,dual,dual,dual,Corporate SSID frequency bands,Yes,String,2.4|5|6|dual|all,Public,Wireless Team,,2.4GHz and 5GHz,2025-12-04
+wlan.ssid_corporate_vlan_id,WLAN,200,200,200,Corporate SSID VLAN,Yes,Integer,1-4094,Public,Network Team,VLAN configured,Employee traffic VLAN,2025-12-04
+wlan.ssid_guest,WLAN,Guest-WiFi,Test-Guest,DR-Guest-WiFi,Guest visitor SSID name,Yes,String,Valid SSID 1-32 chars,Public,Wireless Team,Portal configured,Captive portal authentication,2025-12-04
+wlan.ssid_guest_enabled,WLAN,true,true,true,Enable guest SSID,Yes,Boolean,true|false,Public,Wireless Team,,Guest network,2025-12-04
+wlan.ssid_guest_hidden,WLAN,false,false,false,Hide guest SSID from broadcast,Yes,Boolean,true|false,Public,Wireless Team,,Visible SSID,2025-12-04
+wlan.ssid_guest_band,WLAN,dual,dual,dual,Guest SSID frequency bands,Yes,String,2.4|5|6|dual|all,Public,Wireless Team,,2.4GHz and 5GHz,2025-12-04
+wlan.ssid_guest_vlan_id,WLAN,300,300,300,Guest SSID VLAN,Yes,Integer,1-4094,Public,Network Team,VLAN configured,Isolated guest VLAN,2025-12-04
+wlan.ssid_guest_portal_enabled,WLAN,true,true,true,Enable captive portal for guest,Yes,Boolean,true|false,Public,Wireless Team,,Portal authentication,2025-12-04
+wlan.ssid_guest_portal_expire_hours,WLAN,24,4,24,Guest portal session expiration hours,Yes,Integer,1-168,Public,Wireless Team,wlan.ssid_guest_portal_enabled,Session timeout,2025-12-04
+wlan.ssid_iot,WLAN,IoT-Network,,DR-IoT-Network,IoT device SSID name,No,String,Valid SSID 1-32 chars,Public,Wireless Team,PSK configured,Hidden SSID optional,2025-12-04
+wlan.ssid_iot_enabled,WLAN,true,false,true,Enable IoT SSID,Yes,Boolean,true|false,Public,Wireless Team,,IoT network,2025-12-04
+wlan.ssid_iot_hidden,WLAN,true,true,true,Hide IoT SSID from broadcast,Yes,Boolean,true|false,Public,Wireless Team,,Security measure,2025-12-04
+wlan.ssid_iot_band,WLAN,2.4,2.4,2.4,IoT SSID frequency band,Yes,String,2.4|5|6|dual|all,Public,Wireless Team,,2.4GHz for IoT compatibility,2025-12-04
+wlan.ssid_iot_vlan_id,WLAN,400,400,400,IoT SSID VLAN,Yes,Integer,1-4094,Public,Network Team,VLAN configured,Isolated IoT VLAN,2025-12-04
+network.vlan_mgmt_id,Network,100,100,100,Management VLAN for APs,Yes,Integer,1-4094,Public,Network Team,Switch configuration,AP management traffic,2025-12-04
+network.vlan_corporate_id,Network,200,200,200,Corporate wireless client VLAN,Yes,Integer,1-4094,Public,Network Team,DHCP scope configured,Employee wireless clients,2025-12-04
+network.vlan_guest_id,Network,300,300,300,Guest wireless client VLAN,Yes,Integer,1-4094,Public,Network Team,DHCP scope configured,Guest isolation required,2025-12-04
+network.vlan_iot_id,Network,400,400,400,IoT device VLAN,Yes,Integer,1-4094,Public,Network Team,DHCP scope configured,Segmented from corporate,2025-12-04
+network.mgmt_subnet,Network,10.10.100.0/24,10.100.100.0/24,10.200.100.0/24,AP management subnet,Yes,String,Valid IPv4 CIDR,Confidential,Network Team,DHCP configured,AP DHCP addresses,2025-12-04
+network.corporate_subnet,Network,10.10.200.0/23,10.100.200.0/24,10.200.200.0/23,Corporate client subnet,Yes,String,Valid IPv4 CIDR,Confidential,Network Team,DHCP configured,Supports 500 clients,2025-12-04
+network.guest_subnet,Network,10.10.4.0/24,10.100.4.0/24,10.200.4.0/24,Guest client subnet,Yes,String,Valid IPv4 CIDR,Confidential,Network Team,DHCP configured,Internet only access,2025-12-04
+network.iot_subnet,Network,10.10.5.0/24,10.100.5.0/24,10.200.5.0/24,IoT device subnet,Yes,String,Valid IPv4 CIDR,Confidential,Network Team,DHCP configured,Limited network access,2025-12-04
+network.default_gateway,Network,10.10.100.1,10.100.100.1,10.200.100.1,Default gateway for management,Yes,String,Valid IPv4 address,Public,Network Team,Router configured,Core router gateway,2025-12-04
+radius.enabled,Authentication,true,false,true,Enable RADIUS authentication,Yes,Boolean,true|false,Public,Security Team,RADIUS operational,802.1X authentication,2025-12-04
+radius.server_1,Authentication,10.10.100.50,10.100.100.50,10.200.100.50,Primary RADIUS server IP,Yes,String,Valid IPv4 address,Confidential,Security Team,radius.enabled,Primary NPS/ISE,2025-12-04
+radius.server_2,Authentication,10.10.100.51,10.100.100.51,10.200.100.51,Secondary RADIUS server IP,No,String,Valid IPv4 address,Confidential,Security Team,radius.enabled,Backup NPS/ISE,2025-12-04
+radius.auth_port,Authentication,1812,1812,1812,RADIUS authentication port,Yes,Integer,1-65535,Public,Security Team,Firewall rules,Standard RADIUS port,2025-12-04
+radius.acct_port,Authentication,1813,1813,1813,RADIUS accounting port,Yes,Integer,1-65535,Public,Security Team,Firewall rules,Standard accounting port,2025-12-04
+radius.secret,Authentication,[vault:radius_secret],[vault:radius_secret],[vault:radius_secret],RADIUS shared secret,Yes,String,Valid string,Secret,Security Team,radius.enabled,Encrypted in Mist,2025-12-04
+radius.coa_enabled,Authentication,true,false,true,Enable RADIUS CoA (Change of Authorization),Yes,Boolean,true|false,Public,Security Team,radius.enabled,Dynamic policy changes,2025-12-04
+rf.band_steering_enabled,RF,true,true,true,Enable band steering to 5GHz,Yes,Boolean,true|false,Public,Wireless Team,,Prefer 5GHz band,2025-12-04
+rf.band_steering_mode,RF,prefer5,prefer5,prefer5,Band steering mode,Yes,String,prefer5|balance|force5,Public,Wireless Team,rf.band_steering_enabled,Soft steering to 5GHz,2025-12-04
+rf.client_load_balancing,RF,true,false,true,Enable client load balancing,Yes,Boolean,true|false,Public,Wireless Team,,Distribute clients across APs,2025-12-04
+rf.24_channels,RF,"1;6;11","1;6;11","1;6;11",Allowed 2.4 GHz channels,Yes,String,Valid channel list,Public,Wireless Team,RF policy,Non-overlapping channels,2025-12-04
+rf.24_power_min,RF,8,8,8,Minimum 2.4 GHz power dBm,Yes,Integer,0-21,Public,Wireless Team,RF policy,Auto power adjustment,2025-12-04
+rf.24_power_max,RF,18,15,18,Maximum 2.4 GHz power dBm,Yes,Integer,0-21,Public,Wireless Team,RF policy,Limit interference,2025-12-04
+rf.24_bandwidth,RF,20,20,20,2.4 GHz channel width MHz,Yes,Integer,20|40,Public,Wireless Team,RF policy,20MHz recommended,2025-12-04
+rf.5_channels,RF,"36;40;44;48;149;153;157;161","36;40;44;48","36;40;44;48;149;153;157;161",Allowed 5 GHz channels,Yes,String,Valid channel list,Public,Wireless Team,RF policy,UNII-1 and UNII-3,2025-12-04
+rf.5_power_min,RF,10,10,10,Minimum 5 GHz power dBm,Yes,Integer,0-23,Public,Wireless Team,RF policy,Auto power adjustment,2025-12-04
+rf.5_power_max,RF,23,20,23,Maximum 5 GHz power dBm,Yes,Integer,0-23,Public,Wireless Team,RF policy,Maximum coverage,2025-12-04
+rf.5_bandwidth,RF,40,20,40,5 GHz channel width MHz,Yes,Integer,20|40|80|160,Public,Wireless Team,RF policy,40MHz for balance,2025-12-04
+rf.6_enabled,RF,true,false,true,Enable 6 GHz band (WiFi 6E),Yes,Boolean,true|false,Public,Wireless Team,AP model support,WiFi 6E support,2025-12-04
+rf.6_power_min,RF,12,12,12,Minimum 6 GHz power dBm,Yes,Integer,0-24,Public,Wireless Team,rf.6_enabled,WiFi 6E band,2025-12-04
+rf.6_power_max,RF,24,24,24,Maximum 6 GHz power dBm,Yes,Integer,0-24,Public,Wireless Team,rf.6_enabled,Maximum power,2025-12-04
+rf.6_bandwidth,RF,80,40,80,6 GHz channel width MHz,Yes,Integer,20|40|80|160|320,Public,Wireless Team,rf.6_enabled,80MHz for capacity,2025-12-04
+sle.enabled,SLE,true,true,true,Enable SLE monitoring,Yes,Boolean,true|false,Public,Wireless Team,,Service Level Experience,2025-12-04
+sle.connect_target,SLE,99,95,99,Successful connect SLE target %,Yes,Integer,0-100,Public,Wireless Team,sle.enabled,Primary KPI target,2025-12-04
+sle.throughput_target,SLE,95,90,95,Throughput SLE target %,Yes,Integer,0-100,Public,Wireless Team,sle.enabled,Performance metric,2025-12-04
+sle.coverage_target,SLE,95,90,95,Coverage SLE target %,Yes,Integer,0-100,Public,Wireless Team,sle.enabled,RF coverage metric,2025-12-04
+sle.capacity_target,SLE,95,90,95,Capacity SLE target %,Yes,Integer,0-100,Public,Wireless Team,sle.enabled,Utilization metric,2025-12-04
+sle.roaming_target,SLE,95,90,95,Roaming SLE target %,Yes,Integer,0-100,Public,Wireless Team,sle.enabled,Mobility metric,2025-12-04
+sle.ap_availability_target,SLE,99.9,99,99.9,AP availability SLE target %,Yes,Float,0-100,Public,Wireless Team,sle.enabled,Uptime metric,2025-12-04
+location.enabled,Location,true,false,true,Enable location services,Yes,Boolean,true|false,Public,Wireless Team,AP model support,Indoor positioning,2025-12-04
+location.accuracy,Location,3-5,3-5,3-5,Target location accuracy meters,Yes,String,Valid range,Public,Wireless Team,location.enabled,Indoor positioning,2025-12-04
+location.vble_enabled,Location,true,false,true,Enable vBLE location services,Yes,Boolean,true|false,Public,Wireless Team,AP45 with vBLE,Wayfinding feature,2025-12-04
+location.asset_tracking_enabled,Location,true,false,true,Enable BLE asset tracking,Yes,Boolean,true|false,Public,Wireless Team,BLE tags deployed,Asset location,2025-12-04
+location.wayfinding_enabled,Location,true,false,true,Enable wayfinding feature,Yes,Boolean,true|false,Public,Wireless Team,Floor plans configured,Navigation feature,2025-12-04
+switch.enabled,Switch,true,true,true,Enable Mist switch management,Yes,Boolean,true|false,Public,Network Team,EX switches adopted,Juniper EX management,2025-12-04
+switch.mgmt_vlan,Switch,100,100,100,EX switch management VLAN,Yes,Integer,1-4094,Public,Network Team,VLAN configured,Switch management,2025-12-04
+switch.native_vlan,Switch,100,100,100,Native VLAN for AP ports,Yes,Integer,1-4094,Public,Network Team,Port configuration,Untagged AP traffic,2025-12-04
+switch.poe_budget,Switch,1440,720,1440,PoE power budget watts,Yes,Integer,0-2000,Public,Network Team,EX4400-48P,30W per AP max,2025-12-04
+switch.port_profile_ap,Switch,ap-access,ap-access,ap-access,Port profile for AP ports,Yes,String,Valid profile name,Public,Network Team,switch.enabled,AP port configuration,2025-12-04
+switch.port_profile_uplink,Switch,uplink-trunk,uplink-trunk,uplink-trunk,Port profile for uplink ports,Yes,String,Valid profile name,Public,Network Team,switch.enabled,Uplink configuration,2025-12-04
+marvis.enabled,Marvis,true,true,true,Enable Marvis AI assistant,Yes,Boolean,true|false,Public,Wireless Team,,AI troubleshooting,2025-12-04
+marvis.actions_enabled,Marvis,true,false,true,Enable Marvis Actions,Yes,Boolean,true|false,Public,Wireless Team,marvis.enabled,Automated remediation,2025-12-04
+marvis.recommendations_enabled,Marvis,true,true,true,Enable Marvis recommendations,Yes,Boolean,true|false,Public,Wireless Team,marvis.enabled,Proactive insights,2025-12-04
+system.ntp_server_1,System,10.10.100.20,10.100.100.20,10.200.100.20,Primary NTP server,Yes,String,Valid IPv4 address,Public,Network Team,Network connectivity,Time synchronization,2025-12-04
+system.ntp_server_2,System,10.10.100.21,10.100.100.21,10.200.100.21,Secondary NTP server,Yes,String,Valid IPv4 address,Public,Network Team,Network connectivity,Backup NTP source,2025-12-04
+system.dns_server_1,System,10.10.100.10,10.100.100.10,10.200.100.10,Primary DNS server,Yes,String,Valid IPv4 address,Public,Network Team,Network connectivity,Name resolution,2025-12-04
+system.dns_server_2,System,10.10.100.11,10.100.100.11,10.200.100.11,Secondary DNS server,Yes,String,Valid IPv4 address,Public,Network Team,Network connectivity,Backup DNS source,2025-12-04
+system.proxy_enabled,System,false,false,false,Enable outbound proxy for Mist Cloud,Yes,Boolean,true|false,Public,Network Team,,Proxy for cloud access,2025-12-04
+system.proxy_server,System,,,, Proxy server address,No,String,Valid URL,Public,Network Team,system.proxy_enabled,HTTP proxy,2025-12-04
+operations.auto_upgrade_enabled,Operations,true,true,true,Enable automatic firmware upgrades,Yes,Boolean,true|false,Public,Wireless Team,,Auto-update firmware,2025-12-04
+operations.upgrade_schedule,Operations,02:00-06:00,02:00-06:00,02:00-06:00,Auto-upgrade window,Yes,String,Valid time range,Public,Wireless Team,operations.auto_upgrade_enabled,Low traffic period,2025-12-04
+operations.upgrade_day,Operations,Sunday,Saturday,Sunday,Preferred upgrade day,Yes,String,Day of week,Public,Wireless Team,operations.auto_upgrade_enabled,Weekend maintenance,2025-12-04
+operations.firmware_version,Operations,Latest,Latest,Latest,Target firmware version,Yes,String,Valid version or Latest,Public,Wireless Team,Mist Cloud,Auto-managed,2025-12-04
+operations.config_backup_enabled,Operations,true,false,true,Enable configuration backup,Yes,Boolean,true|false,Public,Operations Team,,Site config backup,2025-12-04
+operations.config_backup_retention_days,Operations,90,30,90,Config backup retention days,Yes,Integer,7-365,Public,Operations Team,operations.config_backup_enabled,3 months retention,2025-12-04
+monitoring.enabled,Monitoring,true,true,true,Enable monitoring integration,Yes,Boolean,true|false,Public,Operations Team,,Health monitoring,2025-12-04
+monitoring.webhook_enabled,Monitoring,true,false,true,Enable webhook notifications,Yes,Boolean,true|false,Public,Operations Team,monitoring.enabled,Event notifications,2025-12-04
+monitoring.webhook_url,Monitoring,https://hooks.example.com/mist/prod,,https://hooks.example.com/mist/dr,Webhook destination URL,No,String,Valid HTTPS URL,Confidential,Operations Team,monitoring.webhook_enabled,Integration endpoint,2025-12-04
+monitoring.email_alerts_enabled,Monitoring,true,true,true,Enable email alerts,Yes,Boolean,true|false,Public,Operations Team,monitoring.enabled,Email notifications,2025-12-04
+monitoring.email_recipients,Monitoring,wireless-ops@example.com,wireless-ops@example.com,wireless-ops@example.com,Alert email recipients,Yes,String,Valid email list,Confidential,Operations Team,monitoring.email_alerts_enabled,Comma-separated,2025-12-04
+monitoring.syslog_enabled,Monitoring,true,true,true,Enable syslog forwarding,Yes,Boolean,true|false,Public,Security Team,SIEM configured,Log forwarding,2025-12-04
+monitoring.syslog_server,Monitoring,10.10.100.60,10.100.100.60,10.200.100.60,Syslog server IP,Yes,String,Valid IPv4 address,Confidential,Security Team,monitoring.syslog_enabled,SIEM collector,2025-12-04
+dr.enabled,DR,true,false,false,Enable DR configuration sync,Yes,Boolean,true|false,Public,Operations Team,,Disaster recovery,2025-12-04
+dr.failover_site,DR,dr-site,,headquarters,DR failover site name,No,String,Valid site name,Public,Operations Team,dr.enabled,Failover destination,2025-12-04
+dr.rto_minutes,DR,30,120,30,Recovery Time Objective minutes,Yes,Integer,15-240,Public,Operations Team,dr.enabled,Target recovery time,2025-12-04
+dr.rpo_minutes,DR,5,30,5,Recovery Point Objective minutes,Yes,Integer,1-60,Public,Operations Team,dr.enabled,Max config loss window,2025-12-04

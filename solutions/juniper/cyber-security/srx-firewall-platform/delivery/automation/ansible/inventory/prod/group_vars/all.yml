@@ -1,7 +1,11 @@
 ---
+#------------------------------------------------------------------------------
 # Production Environment Variables - SRX Firewall Platform
-# Derived from configuration.csv - Production column
-# Do not edit manually - regenerate with generate_ansible_vars.py
+#------------------------------------------------------------------------------
+# Generated from configuration.csv - Production column
+# To regenerate: python generate-ansible-vars.py /path/to/solution
+# DO NOT EDIT manually - changes will be overwritten on regeneration
+#------------------------------------------------------------------------------
 
 #==============================================================================
 # SOLUTION IDENTIFICATION
@@ -9,7 +13,14 @@
 solution:
   name: srx-firewall-platform
   abbr: srx
+  provider_name: juniper
+  category_name: cyber-security
   environment: prod
+
+ownership:
+  cost_center: CC-SRX-001
+  owner_email: network-security@example.com
+  project_code: PRJ-SRX-2025
 
 #==============================================================================
 # CLUSTER CONFIGURATION
@@ -17,7 +28,12 @@ solution:
 cluster:
   enabled: true
   id: 1
+  redundancy_group_count: 2
   fabric_interface: et-0/0/0
+  control_interface: em0
+  preempt_enabled: false
+  heartbeat_interval: 1000
+  heartbeat_threshold: 3
   node0:
     mgmt_ip: "10.0.0.1/24"
     priority: 200
@@ -30,14 +46,26 @@ cluster:
 #==============================================================================
 network:
   zones:
-    dmz:
+    trust:
       interface: reth1.100
+      description: "Trust - Internal trusted network"
+      host_inbound_services:
+        - https
+        - ssh
+        - ping
+    untrust:
+      interface: reth0.0
+      description: "Untrust - Internet-facing interface"
+      host_inbound_services:
+        - ike
+    dmz:
+      interface: reth2.200
       description: "DMZ - Public-facing services"
       host_inbound_services:
         - https
         - ping
     internal:
-      interface: reth2.200
+      interface: reth3.300
       description: "Internal - Corporate network"
       host_inbound_services:
         - https
@@ -51,47 +79,131 @@ network:
         - ping
 
   subnets:
+    trust: "10.10.0.0/24"
     dmz: "192.168.1.0/24"
-    internal: "10.10.0.0/24"
+    internal: "10.20.0.0/24"
+    management: "10.0.0.0/24"
+  default_gateway: "10.0.0.254"
 
 #==============================================================================
-# SECURITY SERVICES
+# SECURITY SCREEN CONFIGURATION
+#==============================================================================
+security:
+  screen:
+    profile: production-screen
+    syn_flood_threshold: 512
+    icmp_flood_threshold: 1000
+    udp_flood_threshold: 1000
+  utm:
+    enabled: true
+    antivirus_enabled: true
+    web_filtering_enabled: true
+    antispam_enabled: false
+
+#==============================================================================
+# IPS/IDP CONFIGURATION
 #==============================================================================
 ips:
   enabled: true
   policy_name: Production-IDP
   action: drop-connection
   update_interval: 24
+  notification_enabled: true
 
+#==============================================================================
+# ATP CLOUD CONFIGURATION
+#==============================================================================
 atp:
   enabled: true
   cloud_url: "https://atp.juniper.net"
   verdict_action: block
+  fallback_action: permit
+  file_types:
+    - exe
+    - dll
+    - pdf
+    - doc
+    - docx
+    - xls
+    - xlsx
+    - zip
 
+#==============================================================================
+# SECINTEL THREAT INTELLIGENCE
+#==============================================================================
 secintel:
   enabled: true
-  cc_feed_url: "https://secintel.juniper.net/feeds/cc"
+  cc_feed_enabled: true
+  infected_host_feed_enabled: true
+  dns_feed_enabled: true
   refresh_interval: 1800
+  action: block-drop
 
 #==============================================================================
 # VPN CONFIGURATION
 #==============================================================================
 vpn:
+  enabled: true
+  mode: policy-based
   ike:
+    version: 2
     dh_group: group20
     encryption: aes-256-gcm
-    authentication: sha384
+    authentication: sha-384
     lifetime: 28800
   ipsec:
     encryption: aes-256-gcm
-    authentication: sha384
+    authentication: sha-384
     lifetime: 3600
     pfs_group: group20
+  dpd:
+    enabled: true
+    interval: 10
+    threshold: 5
+
+#==============================================================================
+# SYSLOG INTEGRATION
+#==============================================================================
+syslog:
+  enabled: true
+  servers:
+    - "10.0.0.50"
+    - "10.0.0.51"
+  format: sd-syslog
+  port: 514
+  protocol: udp
+  facility: local0
+  severity: info
+
+#==============================================================================
+# TACACS+ AUTHENTICATION
+#==============================================================================
+tacacs:
+  enabled: true
+  servers:
+    - "10.0.0.60"
+    - "10.0.0.61"
+  port: 49
+  timeout: 5
+  accounting_enabled: true
+
+#==============================================================================
+# SNMP MONITORING
+#==============================================================================
+snmp:
+  enabled: true
+  version: v3
+  trap_servers:
+    - "10.0.0.70"
+    - "10.0.0.71"
 
 #==============================================================================
 # SYSTEM CONFIGURATION
 #==============================================================================
 system:
+  hostnames:
+    node0: srx-prod-fw01
+    node1: srx-prod-fw02
   ntp_servers:
     - "10.0.0.20"
     - "10.0.0.21"
@@ -99,18 +211,9 @@ system:
     - "10.0.0.10"
     - "10.0.0.11"
   domain_name: "corp.example.com"
-
-#==============================================================================
-# INTEGRATION
-#==============================================================================
-syslog:
-  enabled: true
-  format: sd-syslog
-  port: 514
-
-tacacs:
-  enabled: true
-  port: 49
+  timezone: "America/New_York"
+  login_banner: "Authorized access only. All activity is monitored."
+  max_config_rollbacks: 50
 
 #==============================================================================
 # MANAGEMENT
@@ -118,3 +221,47 @@ tacacs:
 management:
   security_director:
     enabled: true
+    ip: "10.0.0.100"
+  junos_space_enabled: false
+  netconf:
+    enabled: true
+    port: 830
+  rest_api:
+    enabled: true
+    port: 3443
+
+#==============================================================================
+# BACKUP CONFIGURATION
+#==============================================================================
+backup:
+  enabled: true
+  schedule: "0 2 * * *"
+  retention_days: 90
+  destination: "scp://backup@10.0.0.80:/backups/srx/prod"
+  encryption_enabled: true
+
+#==============================================================================
+# MONITORING THRESHOLDS
+#==============================================================================
+monitoring:
+  enabled: true
+  health_check_interval: 60
+  cpu:
+    warning_threshold: 70
+    critical_threshold: 90
+  memory:
+    warning_threshold: 70
+    critical_threshold: 90
+  session:
+    warning_threshold: 70
+    critical_threshold: 85
+
+#==============================================================================
+# DISASTER RECOVERY
+#==============================================================================
+dr:
+  enabled: true
+  sync_method: manual
+  rto_minutes: 60
+  rpo_minutes: 15
+  test_schedule: "0 3 * * 0"

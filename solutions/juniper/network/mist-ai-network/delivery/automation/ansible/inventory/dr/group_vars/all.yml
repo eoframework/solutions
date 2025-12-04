@@ -1,86 +1,196 @@
 ---
+#------------------------------------------------------------------------------
 # DR Environment Variables - Mist AI Network
+#------------------------------------------------------------------------------
+# Generated from configuration.csv - DR column
+# To regenerate: python generate-ansible-vars.py /path/to/solution
+# DO NOT EDIT manually - changes will be overwritten on regeneration
+#------------------------------------------------------------------------------
 
+#==============================================================================
+# SOLUTION IDENTIFICATION
+#==============================================================================
 solution:
   name: mist-ai-network
   abbr: mist
+  provider_name: juniper
+  category_name: network
   environment: dr
 
+ownership:
+  cost_center: CC-MIST-001
+  owner_email: wireless-team@example.com
+  project_code: PRJ-MIST-2025
+
+#==============================================================================
+# MIST CLOUD CONFIGURATION
+#==============================================================================
 mist:
   api_url: "https://api.mist.com/api/v1"
+  cloud_region: "Global 01"
   country_code: US
-  timezone: "America/New_York"
+  timezone: "America/Los_Angeles"
+  # org_id and api_token in secrets.yml
 
+#==============================================================================
+# SITE CONFIGURATION
+#==============================================================================
 site:
-  name: "DR Site"
+  name: dr-site
+  address: "789 DR Center Blvd"
+  latitude: 34.0522
+  longitude: -118.2437
+  rf_template: enterprise-high-density
+  network_template: enterprise-standard
 
+#==============================================================================
+# WLAN CONFIGURATION
+#==============================================================================
 wlans:
   corporate:
-    ssid: "DR-Corp-WiFi"
-    auth_type: eap
+    ssid: DR-Corp-WiFi
+    enabled: true
+    hidden: false
+    band: dual
     vlan_id: 200
-    band: both
-    enabled: true
+    auth:
+      type: eap
+      radius_enabled: true
   guest:
-    ssid: "DR-Guest-WiFi"
-    auth_type: psk
-    vlan_id: 300
-    band: both
+    ssid: DR-Guest-WiFi
     enabled: true
+    hidden: false
+    band: dual
+    vlan_id: 300
+    auth:
+      type: psk
+      portal_enabled: true
+      portal_expire_hours: 24
   iot:
-    ssid: "DR-IoT-Network"
-    auth_type: psk
-    vlan_id: 400
-    band: "2.4"
+    ssid: DR-IoT-Network
     enabled: true
     hidden: true
+    band: "2.4"
+    vlan_id: 400
+    auth:
+      type: psk
 
-vlans:
-  management:
-    id: 100
-    name: "MGMT"
-    subnet: "10.200.100.0/24"
-  corporate:
-    id: 200
-    name: "Corporate"
-    subnet: "10.200.200.0/23"
-  guest:
-    id: 300
-    name: "Guest"
-    subnet: "10.200.300.0/24"
-  iot:
-    id: 400
-    name: "IoT"
-    subnet: "10.200.400.0/24"
+#==============================================================================
+# NETWORK / VLAN CONFIGURATION
+#==============================================================================
+network:
+  vlans:
+    management:
+      id: 100
+      name: MGMT
+      subnet: "10.200.100.0/24"
+    corporate:
+      id: 200
+      name: Corporate
+      subnet: "10.200.200.0/23"
+    guest:
+      id: 300
+      name: Guest
+      subnet: "10.200.4.0/24"
+    iot:
+      id: 400
+      name: IoT
+      subnet: "10.200.5.0/24"
+  default_gateway: "10.200.100.1"
 
+#==============================================================================
+# RADIUS CONFIGURATION
+#==============================================================================
 radius:
   enabled: true
+  servers:
+    - "10.200.100.50"
+    - "10.200.100.51"
   auth_port: 1812
   acct_port: 1813
+  coa_enabled: true
+  # secret in secrets.yml
 
+#==============================================================================
+# RF CONFIGURATION
+#==============================================================================
 rf:
+  band_steering:
+    enabled: true
+    mode: prefer5
+  client_load_balancing: true
   band_24:
-    channels: [1, 6, 11]
+    channels:
+      - 1
+      - 6
+      - 11
     power_min: 8
     power_max: 18
+    bandwidth: 20
   band_5:
-    channels: [36, 40, 44, 48, 149, 153, 157, 161]
+    channels:
+      - 36
+      - 40
+      - 44
+      - 48
+      - 149
+      - 153
+      - 157
+      - 161
     power_min: 10
     power_max: 23
+    bandwidth: 40
   band_6:
+    enabled: true
     power_min: 12
     power_max: 24
+    bandwidth: 80
 
+#==============================================================================
+# SLE TARGETS
+#==============================================================================
 sle:
+  enabled: true
   connect_target: 99
+  throughput_target: 95
   coverage_target: 95
   capacity_target: 95
   roaming_target: 95
+  ap_availability_target: 99.9
 
+#==============================================================================
+# LOCATION SERVICES
+#==============================================================================
 location:
   enabled: true
   accuracy: "3-5"
+  vble_enabled: true
+  asset_tracking_enabled: true
+  wayfinding_enabled: true
 
+#==============================================================================
+# SWITCH CONFIGURATION
+#==============================================================================
+switch:
+  enabled: true
+  mgmt_vlan: 100
+  native_vlan: 100
+  poe_budget: 1440
+  port_profiles:
+    ap: ap-access
+    uplink: uplink-trunk
+
+#==============================================================================
+# MARVIS AI
+#==============================================================================
+marvis:
+  enabled: true
+  actions_enabled: true
+  recommendations_enabled: true
+
+#==============================================================================
+# SYSTEM CONFIGURATION
+#==============================================================================
 system:
   ntp_servers:
     - "10.200.100.20"
@@ -88,8 +198,42 @@ system:
   dns_servers:
     - "10.200.100.10"
     - "10.200.100.11"
+  proxy:
+    enabled: false
 
-switch:
-  mgmt_vlan: 100
-  native_vlan: 100
-  poe_budget: 1440
+#==============================================================================
+# OPERATIONS
+#==============================================================================
+operations:
+  auto_upgrade:
+    enabled: true
+    schedule: "02:00-06:00"
+    day: Sunday
+    firmware_version: Latest
+  config_backup:
+    enabled: true
+    retention_days: 90
+
+#==============================================================================
+# MONITORING
+#==============================================================================
+monitoring:
+  enabled: true
+  webhook:
+    enabled: true
+    url: "https://hooks.example.com/mist/dr"
+  email_alerts:
+    enabled: true
+    recipients: "wireless-ops@example.com"
+  syslog:
+    enabled: true
+    server: "10.200.100.60"
+
+#==============================================================================
+# DISASTER RECOVERY (This IS the DR site)
+#==============================================================================
+dr:
+  enabled: false
+  failover_site: headquarters
+  rto_minutes: 30
+  rpo_minutes: 5

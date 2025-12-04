@@ -1,47 +1,125 @@
-#WIDTH: 30,14,30,30,30,45,8,12,30,14,14,12,35,12
+#WIDTH: 45,14,50,50,50,55,8,12,35,14,14,12,40,12
 #ALIGN: left,left,left,left,left,left,center,left,left,center,left,left,left,center
 Parameter Name,Category,Production,Test,DR,Description,Required,Data Type,Validation Rules,Security Level,Owner Team,Dependencies,Notes,Last Updated
-solution.name,Application,srx-firewall-platform,srx-firewall-platform,srx-firewall-platform,Solution name for resource naming,Yes,String,Valid string value,Public,Network Team,,From solution object,2025-12-03
-solution.abbr,Application,srx,srx,srx,Solution abbreviation (3-4 chars),Yes,String,Valid string value,Public,Network Team,,From solution object,2025-12-03
-solution.provider_name,Application,juniper,juniper,juniper,Provider organization name,Yes,String,Valid string value,Public,Network Team,,From solution object,2025-12-03
-solution.category_name,Application,cyber-security,cyber-security,cyber-security,Solution category,Yes,String,Valid string value,Public,Network Team,,From solution object,2025-12-03
-cluster.enabled,Cluster,true,false,true,Enable chassis cluster (HA),Yes,Boolean,true|false,Public,Network Team,,High availability mode,2025-12-03
-cluster.id,Cluster,1,99,2,Chassis cluster identifier for HA pair,Yes,Integer,1-15,Public,Network Team,None,Must be unique per cluster,2025-12-03
-cluster.node0_mgmt_ip,Cluster,10.0.0.1/24,10.100.0.1/24,10.200.0.1/24,Management IP for cluster node 0,Yes,IP Address,Valid IPv4 CIDR,Confidential,Network Team,Management network,Primary node management,2025-12-03
-cluster.node1_mgmt_ip,Cluster,10.0.0.2/24,,10.200.0.2/24,Management IP for cluster node 1,No,IP Address,Valid IPv4 CIDR,Confidential,Network Team,Management network,Secondary node management,2025-12-03
-cluster.fabric_interface,Cluster,et-0/0/0,ge-0/0/0,et-0/0/0,Fabric interconnect interface,Yes,String,Valid interface name,Public,Network Team,Physical cabling,Direct connection between nodes,2025-12-03
-cluster.node0_priority,Cluster,200,200,200,Redundancy group 0 priority for node 0,Yes,Integer,1-254,Public,Network Team,HA configuration,Higher value is primary,2025-12-03
-cluster.node1_priority,Cluster,100,100,100,Redundancy group 0 priority for node 1,Yes,Integer,1-254,Public,Network Team,HA configuration,Lower value is secondary,2025-12-03
-network.zone_dmz_interface,Network,reth1.100,ge-0/0/1.100,reth1.100,DMZ zone interface assignment,Yes,String,Valid reth interface,Public,Network Team,VLAN 100,Public-facing services zone,2025-12-03
-network.zone_internal_interface,Network,reth2.200,ge-0/0/2.200,reth2.200,Internal zone interface assignment,Yes,String,Valid reth interface,Public,Network Team,VLAN 200,Corporate internal network,2025-12-03
-network.zone_vpn_interface,Network,st0.0,st0.0,st0.0,VPN zone tunnel interface,Yes,String,Valid st interface,Public,Network Team,VPN configuration,Site-to-site VPN termination,2025-12-03
-network.dmz_subnet,Network,192.168.1.0/24,192.168.100.0/24,192.168.200.0/24,DMZ network subnet,Yes,IP Address,Valid IPv4 CIDR,Public,Network Team,Zone configuration,Web servers and public services,2025-12-03
-network.internal_subnet,Network,10.10.0.0/24,10.100.0.0/24,10.200.0.0/24,Internal network subnet,Yes,IP Address,Valid IPv4 CIDR,Public,Network Team,Zone configuration,Corporate LAN segment,2025-12-03
-ips.enabled,Security,true,true,true,Enable IPS/IDP,Yes,Boolean,true|false,Public,Security Team,IPS license,Intrusion prevention,2025-12-03
-ips.policy_name,Security,Production-IDP,Test-IDP,DR-IDP,IPS policy name,Yes,String,Valid policy name,Public,Security Team,IPS license,Recommended signature group,2025-12-03
-ips.action,Security,drop-connection,drop-connection,drop-connection,Default IPS action for threats,Yes,String,drop-connection|drop-packet|none,Public,Security Team,IPS configuration,Block and log threats,2025-12-03
-ips.update_interval,Security,24,24,24,IPS signature update interval hours,Yes,Integer,1-168,Public,Security Team,Internet connectivity,Daily signature updates,2025-12-03
-atp.enabled,Security,true,false,true,Enable ATP Cloud,Yes,Boolean,true|false,Public,Security Team,ATP license,Advanced threat prevention,2025-12-03
-atp.cloud_url,Security,https://atp.juniper.net,https://atp.juniper.net,https://atp.juniper.net,ATP Cloud service endpoint,Yes,URL,Valid HTTPS URL,Public,Security Team,Internet connectivity,Juniper ATP Cloud service,2025-12-03
-atp.verdict_action,Security,block,block,block,Action for malware verdict,Yes,String,block|permit|quarantine,Public,Security Team,ATP configuration,Block confirmed malware,2025-12-03
-secintel.enabled,Security,true,false,true,Enable SecIntel feeds,Yes,Boolean,true|false,Public,Security Team,SecIntel license,Threat intelligence,2025-12-03
-secintel.cc_feed_url,Security,https://secintel.juniper.net/feeds/cc,https://secintel.juniper.net/feeds/cc,https://secintel.juniper.net/feeds/cc,SecIntel C2 feed URL,Yes,URL,Valid HTTPS URL,Public,Security Team,SecIntel license,Command and control blocking,2025-12-03
-secintel.refresh_interval,Security,1800,1800,1800,SecIntel feed refresh seconds,Yes,Integer,300-86400,Public,Security Team,Internet connectivity,30-minute refresh interval,2025-12-03
-vpn.enabled,VPN,true,true,true,Enable VPN configuration,Yes,Boolean,true|false,Public,Security Team,VPN license,Site-to-site VPN,2025-12-03
-vpn.ike_dh_group,VPN,group20,group20,group20,IKE Diffie-Hellman group,Yes,String,group14|group19|group20|group21,Public,Security Team,VPN configuration,384-bit ECDH,2025-12-03
-vpn.ike_encryption,VPN,aes-256-gcm,aes-256-gcm,aes-256-gcm,IKE encryption algorithm,Yes,String,aes-256-gcm|aes-256-cbc,Public,Security Team,VPN configuration,GCM for authenticated encryption,2025-12-03
-vpn.ike_lifetime,VPN,28800,28800,28800,IKE lifetime in seconds,Yes,Integer,3600-86400,Public,Security Team,VPN configuration,8 hours,2025-12-03
-vpn.ipsec_encryption,VPN,aes-256-gcm,aes-256-gcm,aes-256-gcm,IPsec encryption algorithm,Yes,String,aes-256-gcm|aes-256-cbc,Public,Security Team,VPN configuration,GCM for authenticated encryption,2025-12-03
-vpn.ipsec_lifetime,VPN,3600,3600,3600,IPsec lifetime in seconds,Yes,Integer,900-28800,Public,Security Team,VPN configuration,1 hour,2025-12-03
-vpn.pfs_group,VPN,group20,group20,group20,Perfect forward secrecy group,Yes,String,group14|group19|group20,Public,Security Team,VPN configuration,Match IKE DH group,2025-12-03
-syslog.enabled,Integration,true,true,true,Enable syslog forwarding,Yes,Boolean,true|false,Public,Security Team,SIEM configured,Log forwarding,2025-12-03
-syslog.format,Integration,sd-syslog,sd-syslog,sd-syslog,Syslog message format,Yes,String,sd-syslog|syslog,Public,Security Team,SIEM configuration,Structured data format,2025-12-03
-syslog.port,Integration,514,514,514,Syslog destination port,Yes,Integer,1-65535,Public,Security Team,Firewall rules,Standard syslog port,2025-12-03
-tacacs.enabled,Integration,true,false,true,Enable TACACS+ authentication,Yes,Boolean,true|false,Public,Security Team,AAA infrastructure,Admin authentication,2025-12-03
-tacacs.port,Integration,49,49,49,TACACS+ server port,Yes,Integer,1-65535,Public,Security Team,AAA infrastructure,Standard TACACS+ port,2025-12-03
-system.ntp_server_1,System,10.0.0.20,10.100.0.20,10.200.0.20,Primary NTP server,Yes,IP Address,Valid IPv4 address,Public,Network Team,Network connectivity,Time synchronization,2025-12-03
-system.ntp_server_2,System,10.0.0.21,10.100.0.21,10.200.0.21,Secondary NTP server,Yes,IP Address,Valid IPv4 address,Public,Network Team,Network connectivity,Backup NTP source,2025-12-03
-system.dns_server_1,System,10.0.0.10,10.100.0.10,10.200.0.10,Primary DNS server,Yes,IP Address,Valid IPv4 address,Public,Network Team,Network connectivity,Name resolution,2025-12-03
-system.dns_server_2,System,10.0.0.11,10.100.0.11,10.200.0.11,Secondary DNS server,Yes,IP Address,Valid IPv4 address,Public,Network Team,Network connectivity,Backup DNS source,2025-12-03
-system.domain_name,System,corp.example.com,test.corp.example.com,dr.corp.example.com,DNS domain name,Yes,String,Valid domain name,Public,Network Team,DNS configuration,Corporate domain,2025-12-03
-management.security_director_enabled,Management,true,false,true,Enable Security Director management,Yes,Boolean,true|false,Public,Platform Team,SD infrastructure,Centralized management,2025-12-03
+solution.name,Project,srx-firewall-platform,srx-firewall-platform,srx-firewall-platform,Solution name for resource naming,Yes,String,Valid string value,Public,Network Team,,SRX Firewall solution identifier,2025-12-04
+solution.abbr,Project,srx,srx,srx,Solution abbreviation (3-4 chars),Yes,String,3-4 alphanumeric chars,Public,Network Team,,Used in resource naming prefix,2025-12-04
+solution.provider_name,Project,juniper,juniper,juniper,Provider organization name,Yes,String,Valid string value,Public,Network Team,,Juniper Networks provider,2025-12-04
+solution.category_name,Project,cyber-security,cyber-security,cyber-security,Solution category,Yes,String,Valid string value,Public,Network Team,,Security category,2025-12-04
+ownership.cost_center,Project,CC-SRX-001,CC-SRX-001,CC-SRX-001,Cost center code,Yes,String,Valid cost center,Public,Finance,,Cost allocation tracking,2025-12-04
+ownership.owner_email,Project,network-security@example.com,network-security@example.com,network-security@example.com,Owner email for notifications,Yes,String,Valid email,Confidential,Network Team,,Team notifications,2025-12-04
+ownership.project_code,Project,PRJ-SRX-2025,PRJ-SRX-2025,PRJ-SRX-2025,Project tracking code,Yes,String,Valid string,Public,Network Team,,Project management tracking,2025-12-04
+cluster.enabled,Cluster,true,false,true,Enable chassis cluster (HA),Yes,Boolean,true|false,Public,Network Team,,High availability mode,2025-12-04
+cluster.id,Cluster,1,99,2,Chassis cluster identifier for HA pair,Yes,Integer,1-15,Public,Network Team,,Must be unique per cluster,2025-12-04
+cluster.redundancy_group_count,Cluster,2,1,2,Number of redundancy groups,Yes,Integer,1-128,Public,Network Team,cluster.enabled,RG0 for RE RG1+ for interfaces,2025-12-04
+cluster.node0_mgmt_ip,Cluster,10.0.0.1/24,10.100.0.1/24,10.200.0.1/24,Management IP for cluster node 0,Yes,String,Valid IPv4 CIDR,Confidential,Network Team,Management network,Primary node management,2025-12-04
+cluster.node1_mgmt_ip,Cluster,10.0.0.2/24,,10.200.0.2/24,Management IP for cluster node 1,No,String,Valid IPv4 CIDR,Confidential,Network Team,Management network,Secondary node management (HA only),2025-12-04
+cluster.fabric_interface,Cluster,et-0/0/0,ge-0/0/0,et-0/0/0,Fabric interconnect interface,Yes,String,Valid interface name,Public,Network Team,Physical cabling,Direct connection between nodes,2025-12-04
+cluster.control_interface,Cluster,em0,em0,em0,Cluster control link interface,Yes,String,Valid interface name,Public,Network Team,Physical cabling,Heartbeat and sync traffic,2025-12-04
+cluster.node0_priority,Cluster,200,200,200,Redundancy group 0 priority for node 0,Yes,Integer,1-254,Public,Network Team,cluster.enabled,Higher value is primary,2025-12-04
+cluster.node1_priority,Cluster,100,100,100,Redundancy group 0 priority for node 1,Yes,Integer,1-254,Public,Network Team,cluster.enabled,Lower value is secondary,2025-12-04
+cluster.preempt_enabled,Cluster,false,false,false,Enable automatic failback to primary,Yes,Boolean,true|false,Public,Network Team,cluster.enabled,Manual failback recommended,2025-12-04
+cluster.heartbeat_interval,Cluster,1000,1000,1000,Heartbeat interval in milliseconds,Yes,Integer,100-10000,Public,Network Team,cluster.enabled,1 second default,2025-12-04
+cluster.heartbeat_threshold,Cluster,3,3,3,Missed heartbeats before failover,Yes,Integer,1-100,Public,Network Team,cluster.enabled,3 seconds detection time,2025-12-04
+network.zone_trust_interface,Network,reth1.100,ge-0/0/1.100,reth1.100,Trust zone interface assignment,Yes,String,Valid reth/ge interface,Public,Network Team,VLAN 100,Internal trusted network,2025-12-04
+network.zone_untrust_interface,Network,reth0.0,ge-0/0/0.0,reth0.0,Untrust zone interface assignment,Yes,String,Valid reth/ge interface,Public,Network Team,WAN connection,Internet-facing interface,2025-12-04
+network.zone_dmz_interface,Network,reth2.200,ge-0/0/2.200,reth2.200,DMZ zone interface assignment,Yes,String,Valid reth/ge interface,Public,Network Team,VLAN 200,Public-facing services zone,2025-12-04
+network.zone_internal_interface,Network,reth3.300,ge-0/0/3.300,reth3.300,Internal zone interface assignment,Yes,String,Valid reth/ge interface,Public,Network Team,VLAN 300,Corporate internal network,2025-12-04
+network.zone_vpn_interface,Network,st0.0,st0.0,st0.0,VPN zone tunnel interface,Yes,String,Valid st interface,Public,Network Team,VPN configuration,Site-to-site VPN termination,2025-12-04
+network.trust_subnet,Network,10.10.0.0/24,10.100.0.0/24,10.200.0.0/24,Trust zone network subnet,Yes,String,Valid IPv4 CIDR,Public,Network Team,Zone configuration,Internal trusted network,2025-12-04
+network.dmz_subnet,Network,192.168.1.0/24,192.168.100.0/24,192.168.200.0/24,DMZ network subnet,Yes,String,Valid IPv4 CIDR,Public,Network Team,Zone configuration,Web servers and public services,2025-12-04
+network.internal_subnet,Network,10.20.0.0/24,10.120.0.0/24,10.220.0.0/24,Internal network subnet,Yes,String,Valid IPv4 CIDR,Public,Network Team,Zone configuration,Corporate LAN segment,2025-12-04
+network.management_subnet,Network,10.0.0.0/24,10.100.0.0/24,10.200.0.0/24,Management network subnet,Yes,String,Valid IPv4 CIDR,Confidential,Network Team,Out-of-band management,Device management access,2025-12-04
+network.default_gateway,Network,10.0.0.254,10.100.0.254,10.200.0.254,Default gateway IP,Yes,String,Valid IPv4 address,Public,Network Team,Network routing,Upstream router,2025-12-04
+security.screen_profile,Security,production-screen,test-screen,dr-screen,Security screen profile name,Yes,String,Valid profile name,Public,Security Team,,DoS protection profile,2025-12-04
+security.screen_syn_flood_threshold,Security,512,256,512,SYN flood packets per second threshold,Yes,Integer,100-1000000,Public,Security Team,security.screen_profile,DDoS mitigation,2025-12-04
+security.screen_icmp_flood_threshold,Security,1000,500,1000,ICMP flood packets per second threshold,Yes,Integer,100-1000000,Public,Security Team,security.screen_profile,ICMP flood protection,2025-12-04
+security.screen_udp_flood_threshold,Security,1000,500,1000,UDP flood packets per second threshold,Yes,Integer,100-1000000,Public,Security Team,security.screen_profile,UDP flood protection,2025-12-04
+security.utm_enabled,Security,true,true,true,Enable UTM (Unified Threat Management),Yes,Boolean,true|false,Public,Security Team,UTM license,Web filtering and antivirus,2025-12-04
+security.utm_antivirus_enabled,Security,true,false,true,Enable UTM antivirus scanning,Yes,Boolean,true|false,Public,Security Team,security.utm_enabled,Sophos/Kaspersky engine,2025-12-04
+security.utm_web_filtering_enabled,Security,true,true,true,Enable UTM web filtering,Yes,Boolean,true|false,Public,Security Team,security.utm_enabled,URL category filtering,2025-12-04
+security.utm_antispam_enabled,Security,false,false,false,Enable UTM anti-spam,Yes,Boolean,true|false,Public,Security Team,security.utm_enabled,Email spam filtering,2025-12-04
+ips.enabled,Security,true,true,true,Enable IPS/IDP,Yes,Boolean,true|false,Public,Security Team,IPS license,Intrusion prevention system,2025-12-04
+ips.policy_name,Security,Production-IDP,Test-IDP,DR-IDP,IPS policy name,Yes,String,Valid policy name,Public,Security Team,ips.enabled,Signature-based detection,2025-12-04
+ips.action,Security,drop-connection,drop-connection,drop-connection,Default IPS action for threats,Yes,String,drop-connection|drop-packet|close-client|close-server|none,Public,Security Team,ips.enabled,Block and log threats,2025-12-04
+ips.update_interval,Security,24,24,24,IPS signature update interval hours,Yes,Integer,1-168,Public,Security Team,Internet connectivity,Daily signature updates,2025-12-04
+ips.notification_enabled,Security,true,true,true,Enable IPS attack notifications,Yes,Boolean,true|false,Public,Security Team,ips.enabled,Alert on detected attacks,2025-12-04
+atp.enabled,Security,true,false,true,Enable ATP Cloud,Yes,Boolean,true|false,Public,Security Team,ATP license,Advanced threat prevention,2025-12-04
+atp.cloud_url,Security,https://atp.juniper.net,https://atp.juniper.net,https://atp.juniper.net,ATP Cloud service endpoint,Yes,String,Valid HTTPS URL,Public,Security Team,Internet connectivity,Juniper ATP Cloud service,2025-12-04
+atp.verdict_action,Security,block,block,block,Action for malware verdict,Yes,String,block|permit|quarantine,Public,Security Team,atp.enabled,Block confirmed malware,2025-12-04
+atp.fallback_action,Security,permit,permit,permit,Action when ATP Cloud unreachable,Yes,String,block|permit,Public,Security Team,atp.enabled,Fail-open during outage,2025-12-04
+atp.file_types,Security,"[""exe"", ""dll"", ""pdf"", ""doc"", ""docx"", ""xls"", ""xlsx"", ""zip""]","[""exe"", ""dll""]","[""exe"", ""dll"", ""pdf"", ""doc"", ""docx"", ""xls"", ""xlsx"", ""zip""]",File types for ATP analysis,Yes,List(String),Valid file extensions,Public,Security Team,atp.enabled,Common malware vectors,2025-12-04
+secintel.enabled,Security,true,false,true,Enable SecIntel threat intelligence feeds,Yes,Boolean,true|false,Public,Security Team,SecIntel license,Threat intelligence,2025-12-04
+secintel.cc_feed_enabled,Security,true,true,true,Enable Command and Control feed,Yes,Boolean,true|false,Public,Security Team,secintel.enabled,Block C2 communication,2025-12-04
+secintel.infected_host_feed_enabled,Security,true,true,true,Enable infected host feed,Yes,Boolean,true|false,Public,Security Team,secintel.enabled,Detect compromised hosts,2025-12-04
+secintel.dns_feed_enabled,Security,true,true,true,Enable DNS threat feed,Yes,Boolean,true|false,Public,Security Team,secintel.enabled,Malicious DNS blocking,2025-12-04
+secintel.refresh_interval,Security,1800,1800,1800,SecIntel feed refresh seconds,Yes,Integer,300-86400,Public,Security Team,Internet connectivity,30-minute refresh interval,2025-12-04
+secintel.action,Security,block-drop,block-drop,block-drop,Action for SecIntel matches,Yes,String,block-drop|block-close|permit,Public,Security Team,secintel.enabled,Block and drop traffic,2025-12-04
+vpn.enabled,VPN,true,true,true,Enable VPN configuration,Yes,Boolean,true|false,Public,Security Team,,Site-to-site VPN,2025-12-04
+vpn.mode,VPN,policy-based,policy-based,policy-based,VPN mode type,Yes,String,policy-based|route-based,Public,Security Team,vpn.enabled,Policy-based for simplicity,2025-12-04
+vpn.ike_version,VPN,2,2,2,IKE version (1 or 2),Yes,Integer,1|2,Public,Security Team,vpn.enabled,IKEv2 recommended,2025-12-04
+vpn.ike_dh_group,VPN,group20,group20,group20,IKE Diffie-Hellman group,Yes,String,group14|group19|group20|group21,Public,Security Team,vpn.enabled,384-bit ECDH,2025-12-04
+vpn.ike_encryption,VPN,aes-256-gcm,aes-256-gcm,aes-256-gcm,IKE encryption algorithm,Yes,String,aes-256-gcm|aes-256-cbc|aes-128-gcm,Public,Security Team,vpn.enabled,GCM for authenticated encryption,2025-12-04
+vpn.ike_authentication,VPN,sha-384,sha-384,sha-384,IKE authentication algorithm,Yes,String,sha-256|sha-384|sha-512,Public,Security Team,vpn.enabled,SHA-384 for FIPS compliance,2025-12-04
+vpn.ike_lifetime,VPN,28800,28800,28800,IKE SA lifetime in seconds,Yes,Integer,3600-86400,Public,Security Team,vpn.enabled,8 hours,2025-12-04
+vpn.ipsec_encryption,VPN,aes-256-gcm,aes-256-gcm,aes-256-gcm,IPsec encryption algorithm,Yes,String,aes-256-gcm|aes-256-cbc|aes-128-gcm,Public,Security Team,vpn.enabled,GCM for authenticated encryption,2025-12-04
+vpn.ipsec_authentication,VPN,sha-384,sha-384,sha-384,IPsec authentication algorithm,Yes,String,sha-256|sha-384|sha-512,Public,Security Team,vpn.enabled,SHA-384 for FIPS compliance,2025-12-04
+vpn.ipsec_lifetime,VPN,3600,3600,3600,IPsec SA lifetime in seconds,Yes,Integer,900-28800,Public,Security Team,vpn.enabled,1 hour,2025-12-04
+vpn.pfs_group,VPN,group20,group20,group20,Perfect forward secrecy group,Yes,String,group14|group19|group20|group21,Public,Security Team,vpn.enabled,Match IKE DH group,2025-12-04
+vpn.dpd_enabled,VPN,true,true,true,Enable Dead Peer Detection,Yes,Boolean,true|false,Public,Security Team,vpn.enabled,Detect tunnel failures,2025-12-04
+vpn.dpd_interval,VPN,10,10,10,DPD probe interval seconds,Yes,Integer,1-60,Public,Security Team,vpn.dpd_enabled,10 second probes,2025-12-04
+vpn.dpd_threshold,VPN,5,5,5,DPD missed probes before failover,Yes,Integer,1-10,Public,Security Team,vpn.dpd_enabled,50 second detection,2025-12-04
+syslog.enabled,Integration,true,true,true,Enable syslog forwarding,Yes,Boolean,true|false,Public,Security Team,SIEM configured,Log forwarding,2025-12-04
+syslog.server_1,Integration,10.0.0.50,10.100.0.50,10.200.0.50,Primary syslog server IP,Yes,String,Valid IPv4 address,Confidential,Security Team,syslog.enabled,Primary SIEM collector,2025-12-04
+syslog.server_2,Integration,10.0.0.51,10.100.0.51,10.200.0.51,Secondary syslog server IP,No,String,Valid IPv4 address,Confidential,Security Team,syslog.enabled,Backup SIEM collector,2025-12-04
+syslog.format,Integration,sd-syslog,sd-syslog,sd-syslog,Syslog message format,Yes,String,sd-syslog|syslog,Public,Security Team,syslog.enabled,Structured data format,2025-12-04
+syslog.port,Integration,514,514,514,Syslog destination port,Yes,Integer,1-65535,Public,Security Team,Firewall rules,Standard syslog port,2025-12-04
+syslog.protocol,Integration,udp,udp,udp,Syslog transport protocol,Yes,String,udp|tcp|tls,Public,Security Team,syslog.enabled,UDP for performance,2025-12-04
+syslog.facility,Integration,local0,local0,local0,Syslog facility,Yes,String,local0-local7,Public,Security Team,SIEM configuration,Log categorization,2025-12-04
+syslog.severity,Integration,info,debug,info,Minimum syslog severity,Yes,String,emergency|alert|critical|error|warning|notice|info|debug,Public,Security Team,syslog.enabled,Info level recommended,2025-12-04
+tacacs.enabled,Integration,true,false,true,Enable TACACS+ authentication,Yes,Boolean,true|false,Public,Security Team,AAA infrastructure,Admin authentication,2025-12-04
+tacacs.server_1,Integration,10.0.0.60,10.100.0.60,10.200.0.60,Primary TACACS+ server IP,Yes,String,Valid IPv4 address,Confidential,Security Team,tacacs.enabled,Primary AAA server,2025-12-04
+tacacs.server_2,Integration,10.0.0.61,10.100.0.61,10.200.0.61,Secondary TACACS+ server IP,No,String,Valid IPv4 address,Confidential,Security Team,tacacs.enabled,Backup AAA server,2025-12-04
+tacacs.port,Integration,49,49,49,TACACS+ server port,Yes,Integer,1-65535,Public,Security Team,tacacs.enabled,Standard TACACS+ port,2025-12-04
+tacacs.timeout,Integration,5,5,5,TACACS+ server timeout seconds,Yes,Integer,1-60,Public,Security Team,tacacs.enabled,Connection timeout,2025-12-04
+tacacs.accounting_enabled,Integration,true,false,true,Enable TACACS+ command accounting,Yes,Boolean,true|false,Public,Security Team,tacacs.enabled,Audit trail,2025-12-04
+snmp.enabled,Integration,true,true,true,Enable SNMP monitoring,Yes,Boolean,true|false,Public,Operations Team,NMS configured,Network monitoring,2025-12-04
+snmp.version,Integration,v3,v3,v3,SNMP version,Yes,String,v2c|v3,Public,Operations Team,snmp.enabled,SNMPv3 for security,2025-12-04
+snmp.community,Integration,,,,[vault:snmp_community] SNMPv2c community string,No,String,Valid string,Secret,Operations Team,snmp.version=v2c,Only for SNMPv2c,2025-12-04
+snmp.trap_server_1,Integration,10.0.0.70,10.100.0.70,10.200.0.70,Primary SNMP trap destination,Yes,String,Valid IPv4 address,Confidential,Operations Team,snmp.enabled,NMS server,2025-12-04
+snmp.trap_server_2,Integration,10.0.0.71,10.100.0.71,10.200.0.71,Secondary SNMP trap destination,No,String,Valid IPv4 address,Confidential,Operations Team,snmp.enabled,Backup NMS server,2025-12-04
+system.hostname_node0,System,srx-prod-fw01,srx-test-fw01,srx-dr-fw01,Hostname for node 0,Yes,String,Valid hostname,Public,Network Team,,Primary firewall hostname,2025-12-04
+system.hostname_node1,System,srx-prod-fw02,,srx-dr-fw02,Hostname for node 1,No,String,Valid hostname,Public,Network Team,cluster.enabled,Secondary firewall hostname,2025-12-04
+system.ntp_server_1,System,10.0.0.20,10.100.0.20,10.200.0.20,Primary NTP server,Yes,String,Valid IPv4 address,Public,Network Team,Network connectivity,Time synchronization,2025-12-04
+system.ntp_server_2,System,10.0.0.21,10.100.0.21,10.200.0.21,Secondary NTP server,Yes,String,Valid IPv4 address,Public,Network Team,Network connectivity,Backup NTP source,2025-12-04
+system.dns_server_1,System,10.0.0.10,10.100.0.10,10.200.0.10,Primary DNS server,Yes,String,Valid IPv4 address,Public,Network Team,Network connectivity,Name resolution,2025-12-04
+system.dns_server_2,System,10.0.0.11,10.100.0.11,10.200.0.11,Secondary DNS server,Yes,String,Valid IPv4 address,Public,Network Team,Network connectivity,Backup DNS source,2025-12-04
+system.domain_name,System,corp.example.com,test.corp.example.com,dr.corp.example.com,DNS domain name,Yes,String,Valid domain name,Public,Network Team,DNS configuration,Corporate domain,2025-12-04
+system.timezone,System,America/New_York,America/New_York,America/Los_Angeles,System timezone,Yes,String,Valid IANA timezone,Public,Network Team,,Log timestamp timezone,2025-12-04
+system.login_banner,System,Authorized access only. All activity is monitored.,Authorized access only - TEST ENVIRONMENT,Authorized access only - DR ENVIRONMENT,Login banner message,Yes,String,Valid string,Public,Security Team,,Legal warning banner,2025-12-04
+system.root_authentication,System,[vault:root_password],[vault:root_password],[vault:root_password],Root authentication method,Yes,String,Valid auth,Secret,Security Team,,Root password or SSH key,2025-12-04
+system.max_config_rollbacks,System,50,20,50,Maximum configuration rollbacks stored,Yes,Integer,5-100,Public,Operations Team,,Configuration history,2025-12-04
+management.security_director_enabled,Management,true,false,true,Enable Security Director management,Yes,Boolean,true|false,Public,Platform Team,SD infrastructure,Centralized management,2025-12-04
+management.security_director_ip,Management,10.0.0.100,,10.200.0.100,Security Director server IP,No,String,Valid IPv4 address,Confidential,Platform Team,management.security_director_enabled,SD server address,2025-12-04
+management.junos_space_enabled,Management,false,false,false,Enable Junos Space management,Yes,Boolean,true|false,Public,Platform Team,Junos Space infrastructure,Alternative management,2025-12-04
+management.netconf_enabled,Management,true,true,true,Enable NETCONF for automation,Yes,Boolean,true|false,Public,Operations Team,,Ansible automation support,2025-12-04
+management.netconf_port,Management,830,830,830,NETCONF SSH port,Yes,Integer,1-65535,Public,Operations Team,management.netconf_enabled,Standard NETCONF port,2025-12-04
+management.rest_api_enabled,Management,true,true,true,Enable REST API,Yes,Boolean,true|false,Public,Operations Team,,API automation support,2025-12-04
+management.rest_api_port,Management,3443,3443,3443,REST API HTTPS port,Yes,Integer,1-65535,Public,Operations Team,management.rest_api_enabled,API endpoint port,2025-12-04
+backup.enabled,Backup,true,false,true,Enable configuration backups,Yes,Boolean,true|false,Public,Operations Team,,Configuration backup,2025-12-04
+backup.schedule,Backup,0 2 * * *,0 2 * * 0,0 2 * * *,Backup cron schedule,Yes,String,Valid cron expression,Public,Operations Team,backup.enabled,Daily at 2 AM,2025-12-04
+backup.retention_days,Backup,90,30,90,Backup retention period days,Yes,Integer,7-365,Public,Operations Team,backup.enabled,3 months retention,2025-12-04
+backup.destination,Backup,scp://backup@10.0.0.80:/backups/srx/prod,scp://backup@10.100.0.80:/backups/srx/test,scp://backup@10.200.0.80:/backups/srx/dr,Backup destination URL,Yes,String,Valid SCP/FTP URL,Confidential,Operations Team,backup.enabled,Backup server path,2025-12-04
+backup.encryption_enabled,Backup,true,false,true,Enable backup encryption,Yes,Boolean,true|false,Public,Security Team,backup.enabled,Encrypt backup files,2025-12-04
+monitoring.enabled,Monitoring,true,true,true,Enable monitoring integration,Yes,Boolean,true|false,Public,Operations Team,,Health monitoring,2025-12-04
+monitoring.health_check_interval,Monitoring,60,60,60,Health check interval seconds,Yes,Integer,30-300,Public,Operations Team,monitoring.enabled,1 minute intervals,2025-12-04
+monitoring.cpu_threshold_warning,Monitoring,70,80,70,CPU warning threshold percent,Yes,Integer,50-95,Public,Operations Team,monitoring.enabled,Warning alert level,2025-12-04
+monitoring.cpu_threshold_critical,Monitoring,90,95,90,CPU critical threshold percent,Yes,Integer,75-99,Public,Operations Team,monitoring.enabled,Critical alert level,2025-12-04
+monitoring.memory_threshold_warning,Monitoring,70,80,70,Memory warning threshold percent,Yes,Integer,50-95,Public,Operations Team,monitoring.enabled,Warning alert level,2025-12-04
+monitoring.memory_threshold_critical,Monitoring,90,95,90,Memory critical threshold percent,Yes,Integer,75-99,Public,Operations Team,monitoring.enabled,Critical alert level,2025-12-04
+monitoring.session_threshold_warning,Monitoring,70,80,70,Session table warning threshold percent,Yes,Integer,50-95,Public,Operations Team,monitoring.enabled,Session capacity warning,2025-12-04
+monitoring.session_threshold_critical,Monitoring,85,95,85,Session table critical threshold percent,Yes,Integer,75-99,Public,Operations Team,monitoring.enabled,Session capacity critical,2025-12-04
+dr.enabled,DR,true,false,false,Enable DR configuration sync,Yes,Boolean,true|false,Public,Operations Team,,Disaster recovery,2025-12-04
+dr.sync_method,DR,manual,manual,manual,DR sync method,Yes,String,manual|automatic,Public,Operations Team,dr.enabled,Manual sync recommended,2025-12-04
+dr.rto_minutes,DR,60,240,60,Recovery Time Objective minutes,Yes,Integer,15-480,Public,Operations Team,dr.enabled,Target recovery time,2025-12-04
+dr.rpo_minutes,DR,15,60,15,Recovery Point Objective minutes,Yes,Integer,5-60,Public,Operations Team,dr.enabled,Max data loss window,2025-12-04
+dr.test_schedule,DR,0 3 * * 0,,0 3 * * 0,DR test schedule (cron),No,String,Valid cron expression,Public,Operations Team,dr.enabled,Weekly Sunday 3 AM,2025-12-04

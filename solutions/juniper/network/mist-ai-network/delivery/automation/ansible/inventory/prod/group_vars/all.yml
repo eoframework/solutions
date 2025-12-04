@@ -1,7 +1,11 @@
 ---
+#------------------------------------------------------------------------------
 # Production Environment Variables - Mist AI Network
-# Derived from configuration.csv - Production column
-# Do not edit manually - regenerate with generate_ansible_vars.py
+#------------------------------------------------------------------------------
+# Generated from configuration.csv - Production column
+# To regenerate: python generate-ansible-vars.py /path/to/solution
+# DO NOT EDIT manually - changes will be overwritten on regeneration
+#------------------------------------------------------------------------------
 
 #==============================================================================
 # SOLUTION IDENTIFICATION
@@ -9,134 +13,227 @@
 solution:
   name: mist-ai-network
   abbr: mist
+  provider_name: juniper
+  category_name: network
   environment: prod
+
+ownership:
+  cost_center: CC-MIST-001
+  owner_email: wireless-team@example.com
+  project_code: PRJ-MIST-2025
 
 #==============================================================================
 # MIST CLOUD CONFIGURATION
 #==============================================================================
 mist:
   api_url: "https://api.mist.com/api/v1"
-  # org_id set in secrets.yml
+  cloud_region: "Global 01"
   country_code: US
   timezone: "America/New_York"
+  # org_id and api_token in secrets.yml
 
 #==============================================================================
 # SITE CONFIGURATION
 #==============================================================================
 site:
-  name: "{{ site_name | default('Main Campus') }}"
-  address: "{{ site_address | default('123 Main Street') }}"
-  latitude: "{{ site_latitude | default(40.7128) }}"
-  longitude: "{{ site_longitude | default(-74.0060) }}"
+  name: headquarters
+  address: "123 Corporate Drive, NYC"
+  latitude: 40.7128
+  longitude: -74.0060
+  rf_template: enterprise-high-density
+  network_template: enterprise-standard
 
 #==============================================================================
 # WLAN CONFIGURATION
 #==============================================================================
 wlans:
   corporate:
-    ssid: "{{ ssid_corporate | default('Corp-WiFi') }}"
-    auth_type: eap
-    vlan_id: "{{ vlan_corporate_id | default(200) }}"
-    band: both
+    ssid: Corp-WiFi
     enabled: true
+    hidden: false
+    band: dual
+    vlan_id: 200
+    auth:
+      type: eap
+      radius_enabled: true
   guest:
-    ssid: "{{ ssid_guest | default('Guest-WiFi') }}"
-    auth_type: psk
-    vlan_id: "{{ vlan_guest_id | default(300) }}"
-    band: both
+    ssid: Guest-WiFi
     enabled: true
-    portal_enabled: true
+    hidden: false
+    band: dual
+    vlan_id: 300
+    auth:
+      type: psk
+      portal_enabled: true
+      portal_expire_hours: 24
   iot:
-    ssid: "{{ ssid_iot | default('IoT-Network') }}"
-    auth_type: psk
-    vlan_id: "{{ vlan_iot_id | default(400) }}"
-    band: "2.4"
+    ssid: IoT-Network
     enabled: true
     hidden: true
+    band: "2.4"
+    vlan_id: 400
+    auth:
+      type: psk
 
 #==============================================================================
 # NETWORK / VLAN CONFIGURATION
 #==============================================================================
-vlans:
-  management:
-    id: "{{ vlan_mgmt_id | default(100) }}"
-    name: "MGMT"
-    subnet: "{{ mgmt_subnet | default('10.10.100.0/24') }}"
-  corporate:
-    id: "{{ vlan_corporate_id | default(200) }}"
-    name: "Corporate"
-    subnet: "{{ corporate_subnet | default('10.10.200.0/23') }}"
-  guest:
-    id: "{{ vlan_guest_id | default(300) }}"
-    name: "Guest"
-    subnet: "{{ guest_subnet | default('10.10.300.0/24') }}"
-  iot:
-    id: "{{ vlan_iot_id | default(400) }}"
-    name: "IoT"
-    subnet: "{{ iot_subnet | default('10.10.400.0/24') }}"
+network:
+  vlans:
+    management:
+      id: 100
+      name: MGMT
+      subnet: "10.10.100.0/24"
+    corporate:
+      id: 200
+      name: Corporate
+      subnet: "10.10.200.0/23"
+    guest:
+      id: 300
+      name: Guest
+      subnet: "10.10.4.0/24"
+    iot:
+      id: 400
+      name: IoT
+      subnet: "10.10.5.0/24"
+  default_gateway: "10.10.100.1"
 
 #==============================================================================
 # RADIUS CONFIGURATION
 #==============================================================================
 radius:
   enabled: true
-  auth_port: "{{ radius_auth_port | default(1812) }}"
-  acct_port: "{{ radius_acct_port | default(1813) }}"
+  servers:
+    - "10.10.100.50"
+    - "10.10.100.51"
+  auth_port: 1812
+  acct_port: 1813
+  coa_enabled: true
+  # secret in secrets.yml
 
 #==============================================================================
 # RF CONFIGURATION
 #==============================================================================
 rf:
+  band_steering:
+    enabled: true
+    mode: prefer5
+  client_load_balancing: true
   band_24:
-    channels: [1, 6, 11]
-    power_min: "{{ rf_24_power_min | default(8) }}"
-    power_max: "{{ rf_24_power_max | default(18) }}"
+    channels:
+      - 1
+      - 6
+      - 11
+    power_min: 8
+    power_max: 18
+    bandwidth: 20
   band_5:
-    channels: [36, 40, 44, 48, 149, 153, 157, 161]
-    power_min: "{{ rf_5_power_min | default(10) }}"
-    power_max: "{{ rf_5_power_max | default(23) }}"
+    channels:
+      - 36
+      - 40
+      - 44
+      - 48
+      - 149
+      - 153
+      - 157
+      - 161
+    power_min: 10
+    power_max: 23
+    bandwidth: 40
   band_6:
-    power_min: "{{ rf_6_power_min | default(12) }}"
-    power_max: "{{ rf_6_power_max | default(24) }}"
+    enabled: true
+    power_min: 12
+    power_max: 24
+    bandwidth: 80
 
 #==============================================================================
 # SLE TARGETS
 #==============================================================================
 sle:
-  connect_target: "{{ sle_connect_target | default(99) }}"
-  coverage_target: "{{ sle_coverage_target | default(95) }}"
-  capacity_target: "{{ sle_capacity_target | default(95) }}"
-  roaming_target: "{{ sle_roaming_target | default(95) }}"
+  enabled: true
+  connect_target: 99
+  throughput_target: 95
+  coverage_target: 95
+  capacity_target: 95
+  roaming_target: 95
+  ap_availability_target: 99.9
 
 #==============================================================================
 # LOCATION SERVICES
 #==============================================================================
 location:
-  enabled: "{{ vble_enabled | default(true) }}"
-  accuracy: "{{ location_accuracy | default('3-5') }}"
+  enabled: true
+  accuracy: "3-5"
+  vble_enabled: true
+  asset_tracking_enabled: true
+  wayfinding_enabled: true
+
+#==============================================================================
+# SWITCH CONFIGURATION
+#==============================================================================
+switch:
+  enabled: true
+  mgmt_vlan: 100
+  native_vlan: 100
+  poe_budget: 1440
+  port_profiles:
+    ap: ap-access
+    uplink: uplink-trunk
+
+#==============================================================================
+# MARVIS AI
+#==============================================================================
+marvis:
+  enabled: true
+  actions_enabled: true
+  recommendations_enabled: true
 
 #==============================================================================
 # SYSTEM CONFIGURATION
 #==============================================================================
 system:
   ntp_servers:
-    - "{{ ntp_server_1 | default('10.10.100.20') }}"
-    - "{{ ntp_server_2 | default('10.10.100.21') }}"
+    - "10.10.100.20"
+    - "10.10.100.21"
   dns_servers:
-    - "{{ dns_server_1 | default('10.10.100.10') }}"
-    - "{{ dns_server_2 | default('10.10.100.11') }}"
-
-#==============================================================================
-# SWITCH CONFIGURATION
-#==============================================================================
-switch:
-  mgmt_vlan: "{{ switch_mgmt_vlan | default(100) }}"
-  native_vlan: "{{ switch_native_vlan | default(100) }}"
-  poe_budget: "{{ poe_budget_per_switch | default(1440) }}"
+    - "10.10.100.10"
+    - "10.10.100.11"
+  proxy:
+    enabled: false
 
 #==============================================================================
 # OPERATIONS
 #==============================================================================
 operations:
-  upgrade_window: "{{ upgrade_schedule | default('02:00-06:00') }}"
-  firmware_version: "{{ firmware_version | default('Latest') }}"
+  auto_upgrade:
+    enabled: true
+    schedule: "02:00-06:00"
+    day: Sunday
+    firmware_version: Latest
+  config_backup:
+    enabled: true
+    retention_days: 90
+
+#==============================================================================
+# MONITORING
+#==============================================================================
+monitoring:
+  enabled: true
+  webhook:
+    enabled: true
+    url: "https://hooks.example.com/mist/prod"
+  email_alerts:
+    enabled: true
+    recipients: "wireless-ops@example.com"
+  syslog:
+    enabled: true
+    server: "10.10.100.60"
+
+#==============================================================================
+# DISASTER RECOVERY
+#==============================================================================
+dr:
+  enabled: true
+  failover_site: dr-site
+  rto_minutes: 30
+  rpo_minutes: 5

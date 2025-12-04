@@ -1,7 +1,11 @@
 ---
+#------------------------------------------------------------------------------
 # Test Environment Variables - SRX Firewall Platform
-# Derived from configuration.csv - Test column
-# Do not edit manually - regenerate with generate_ansible_vars.py
+#------------------------------------------------------------------------------
+# Generated from configuration.csv - Test column
+# To regenerate: python generate-ansible-vars.py /path/to/solution
+# DO NOT EDIT manually - changes will be overwritten on regeneration
+#------------------------------------------------------------------------------
 
 #==============================================================================
 # SOLUTION IDENTIFICATION
@@ -9,72 +13,187 @@
 solution:
   name: srx-firewall-platform
   abbr: srx
+  provider_name: juniper
+  category_name: cyber-security
   environment: test
 
+ownership:
+  cost_center: CC-SRX-001
+  owner_email: network-security@example.com
+  project_code: PRJ-SRX-2025
+
 #==============================================================================
-# CLUSTER CONFIGURATION
+# CLUSTER CONFIGURATION (Standalone in Test)
 #==============================================================================
 cluster:
   enabled: false
   id: 99
+  redundancy_group_count: 1
+  fabric_interface: ge-0/0/0
+  control_interface: em0
+  preempt_enabled: false
+  heartbeat_interval: 1000
+  heartbeat_threshold: 3
+  node0:
+    mgmt_ip: "10.100.0.1/24"
+    priority: 200
 
 #==============================================================================
 # NETWORK CONFIGURATION
 #==============================================================================
 network:
   zones:
-    dmz:
+    trust:
       interface: ge-0/0/1.100
-      description: "DMZ - Test environment"
-      host_inbound_services:
-        - https
-        - ping
-    internal:
-      interface: ge-0/0/2.200
-      description: "Internal - Test network"
+      description: "Trust - Test internal network"
       host_inbound_services:
         - https
         - ssh
         - ping
+    untrust:
+      interface: ge-0/0/0.0
+      description: "Untrust - Test internet-facing"
+      host_inbound_services:
+        - ike
+    dmz:
+      interface: ge-0/0/2.200
+      description: "DMZ - Test public-facing services"
+      host_inbound_services:
+        - https
+        - ping
+    internal:
+      interface: ge-0/0/3.300
+      description: "Internal - Test corporate network"
+      host_inbound_services:
+        - https
+        - ssh
+        - ping
+    vpn:
+      interface: st0.0
+      description: "VPN - Test tunnels"
+      host_inbound_services:
+        - ike
+        - ping
 
   subnets:
+    trust: "10.100.0.0/24"
     dmz: "192.168.100.0/24"
-    internal: "10.100.0.0/24"
+    internal: "10.120.0.0/24"
+    management: "10.100.0.0/24"
+  default_gateway: "10.100.0.254"
 
 #==============================================================================
-# SECURITY SERVICES
+# SECURITY SCREEN CONFIGURATION
+#==============================================================================
+security:
+  screen:
+    profile: test-screen
+    syn_flood_threshold: 256
+    icmp_flood_threshold: 500
+    udp_flood_threshold: 500
+  utm:
+    enabled: true
+    antivirus_enabled: false
+    web_filtering_enabled: true
+    antispam_enabled: false
+
+#==============================================================================
+# IPS/IDP CONFIGURATION
 #==============================================================================
 ips:
   enabled: true
   policy_name: Test-IDP
   action: drop-connection
   update_interval: 24
+  notification_enabled: true
 
+#==============================================================================
+# ATP CLOUD CONFIGURATION (Disabled in Test)
+#==============================================================================
 atp:
   enabled: false
+  cloud_url: "https://atp.juniper.net"
+  verdict_action: block
+  fallback_action: permit
+  file_types:
+    - exe
+    - dll
 
+#==============================================================================
+# SECINTEL THREAT INTELLIGENCE (Disabled in Test)
+#==============================================================================
 secintel:
   enabled: false
+  cc_feed_enabled: true
+  infected_host_feed_enabled: true
+  dns_feed_enabled: true
+  refresh_interval: 1800
+  action: block-drop
 
 #==============================================================================
 # VPN CONFIGURATION
 #==============================================================================
 vpn:
+  enabled: true
+  mode: policy-based
   ike:
+    version: 2
     dh_group: group20
     encryption: aes-256-gcm
-    authentication: sha384
+    authentication: sha-384
     lifetime: 28800
   ipsec:
     encryption: aes-256-gcm
-    authentication: sha384
+    authentication: sha-384
     lifetime: 3600
     pfs_group: group20
+  dpd:
+    enabled: true
+    interval: 10
+    threshold: 5
+
+#==============================================================================
+# SYSLOG INTEGRATION
+#==============================================================================
+syslog:
+  enabled: true
+  servers:
+    - "10.100.0.50"
+    - "10.100.0.51"
+  format: sd-syslog
+  port: 514
+  protocol: udp
+  facility: local0
+  severity: debug
+
+#==============================================================================
+# TACACS+ AUTHENTICATION (Disabled in Test)
+#==============================================================================
+tacacs:
+  enabled: false
+  servers:
+    - "10.100.0.60"
+    - "10.100.0.61"
+  port: 49
+  timeout: 5
+  accounting_enabled: false
+
+#==============================================================================
+# SNMP MONITORING
+#==============================================================================
+snmp:
+  enabled: true
+  version: v3
+  trap_servers:
+    - "10.100.0.70"
+    - "10.100.0.71"
 
 #==============================================================================
 # SYSTEM CONFIGURATION
 #==============================================================================
 system:
+  hostnames:
+    node0: srx-test-fw01
   ntp_servers:
     - "10.100.0.20"
     - "10.100.0.21"
@@ -82,17 +201,9 @@ system:
     - "10.100.0.10"
     - "10.100.0.11"
   domain_name: "test.corp.example.com"
-
-#==============================================================================
-# INTEGRATION
-#==============================================================================
-syslog:
-  enabled: true
-  format: sd-syslog
-  port: 514
-
-tacacs:
-  enabled: false
+  timezone: "America/New_York"
+  login_banner: "Authorized access only - TEST ENVIRONMENT"
+  max_config_rollbacks: 20
 
 #==============================================================================
 # MANAGEMENT
@@ -100,3 +211,45 @@ tacacs:
 management:
   security_director:
     enabled: false
+  junos_space_enabled: false
+  netconf:
+    enabled: true
+    port: 830
+  rest_api:
+    enabled: true
+    port: 3443
+
+#==============================================================================
+# BACKUP CONFIGURATION (Reduced in Test)
+#==============================================================================
+backup:
+  enabled: false
+  schedule: "0 2 * * 0"
+  retention_days: 30
+  destination: "scp://backup@10.100.0.80:/backups/srx/test"
+  encryption_enabled: false
+
+#==============================================================================
+# MONITORING THRESHOLDS (Relaxed in Test)
+#==============================================================================
+monitoring:
+  enabled: true
+  health_check_interval: 60
+  cpu:
+    warning_threshold: 80
+    critical_threshold: 95
+  memory:
+    warning_threshold: 80
+    critical_threshold: 95
+  session:
+    warning_threshold: 80
+    critical_threshold: 95
+
+#==============================================================================
+# DISASTER RECOVERY (Disabled in Test)
+#==============================================================================
+dr:
+  enabled: false
+  sync_method: manual
+  rto_minutes: 240
+  rpo_minutes: 60
