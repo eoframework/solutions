@@ -121,7 +121,7 @@ function Main {
 
         # Step 6: Generate Monitoring Report
         Write-CMCLog "Step 6: Generating Monitoring Report..." -Level INFO
-        $reportPath = Join-Path $scriptRoot '..\..\..\..\reports'
+        $reportPath = Join-Path $scriptRoot '..\..\reports'
         if (-not (Test-Path $reportPath)) {
             New-Item -ItemType Directory -Path $reportPath -Force | Out-Null
         }

@@ -1,11 +1,11 @@
 #Requires -Version 7.0
 <#
 .SYNOPSIS
-    Installs required PowerShell modules for CMMC GCC High Enclave deployment.
+    Installs required PowerShell modules for Microsoft 365 Enterprise Deployment.
 
 .DESCRIPTION
     This script installs all required PowerShell modules for deploying and configuring
-    Microsoft 365 GCC High and Azure Government environments for CMMC Level 2 compliance.
+    Microsoft 365 E5 with Exchange Online, SharePoint, Teams, and security services.
 
 .EXAMPLE
     .\requirements.ps1
@@ -37,21 +37,20 @@ $ErrorActionPreference = 'Stop'
 $RequiredModules = @(
     @{ Name = 'Microsoft.Graph'; MinVersion = '2.0.0' }
     @{ Name = 'Microsoft.Graph.Authentication'; MinVersion = '2.0.0' }
+    @{ Name = 'Microsoft.Graph.Users'; MinVersion = '2.0.0' }
+    @{ Name = 'Microsoft.Graph.Groups'; MinVersion = '2.0.0' }
     @{ Name = 'Microsoft.Graph.Identity.DirectoryManagement'; MinVersion = '2.0.0' }
     @{ Name = 'Microsoft.Graph.Identity.SignIns'; MinVersion = '2.0.0' }
     @{ Name = 'Microsoft.Graph.DeviceManagement'; MinVersion = '2.0.0' }
-    @{ Name = 'Az'; MinVersion = '11.0.0' }
-    @{ Name = 'Az.Accounts'; MinVersion = '2.0.0' }
-    @{ Name = 'Az.Resources'; MinVersion = '6.0.0' }
-    @{ Name = 'Az.Monitor'; MinVersion = '4.0.0' }
-    @{ Name = 'Az.OperationalInsights'; MinVersion = '3.0.0' }
-    @{ Name = 'Az.SecurityInsights'; MinVersion = '3.0.0' }
     @{ Name = 'ExchangeOnlineManagement'; MinVersion = '3.0.0' }
+    @{ Name = 'Microsoft.Online.SharePoint.PowerShell'; MinVersion = '16.0.0' }
+    @{ Name = 'MicrosoftTeams'; MinVersion = '5.0.0' }
+    @{ Name = 'Az.Accounts'; MinVersion = '2.0.0' }
     @{ Name = 'Pester'; MinVersion = '5.0.0' }
 )
 
-Write-Host "CMMC GCC High Enclave - Module Installation" -ForegroundColor Cyan
-Write-Host "============================================" -ForegroundColor Cyan
+Write-Host "Microsoft 365 Enterprise Deployment - Module Installation" -ForegroundColor Cyan
+Write-Host "==========================================================" -ForegroundColor Cyan
 Write-Host ""
 
 # Check PowerShell version
@@ -101,7 +100,7 @@ foreach ($module in $RequiredModules) {
 }
 
 Write-Host ""
-Write-Host "============================================" -ForegroundColor Cyan
+Write-Host "==========================================================" -ForegroundColor Cyan
 Write-Host "Summary:" -ForegroundColor Cyan
 Write-Host "  Installed/Updated: $installedCount" -ForegroundColor $(if ($installedCount -gt 0) { 'Green' } else { 'Gray' })
 Write-Host "  Already Current:   $skippedCount" -ForegroundColor $(if ($skippedCount -gt 0) { 'Green' } else { 'Gray' })
@@ -114,12 +113,18 @@ if ($failedCount -gt 0) {
 }
 
 Write-Host "Next steps:" -ForegroundColor Cyan
-Write-Host "  1. Connect to Azure Government:" -ForegroundColor White
-Write-Host "     Connect-AzAccount -Environment AzureUSGovernment" -ForegroundColor Gray
+Write-Host "  1. Connect to Microsoft Graph:" -ForegroundColor White
+Write-Host "     Connect-MgGraph -Scopes 'User.ReadWrite.All','Group.ReadWrite.All'" -ForegroundColor Gray
 Write-Host ""
-Write-Host "  2. Connect to Microsoft Graph (GCC High):" -ForegroundColor White
-Write-Host "     Connect-MgGraph -Environment USGov -Scopes 'Policy.ReadWrite.ConditionalAccess'" -ForegroundColor Gray
+Write-Host "  2. Connect to Exchange Online:" -ForegroundColor White
+Write-Host "     Connect-ExchangeOnline" -ForegroundColor Gray
 Write-Host ""
-Write-Host "  3. Run deployment:" -ForegroundColor White
-Write-Host "     .\powershell\scripts\prod\Deploy-CMMC.ps1 -ConfigPath .\powershell\config\prod.psd1" -ForegroundColor Gray
+Write-Host "  3. Connect to SharePoint Online:" -ForegroundColor White
+Write-Host "     Connect-SPOService -Url https://[tenant]-admin.sharepoint.com" -ForegroundColor Gray
+Write-Host ""
+Write-Host "  4. Connect to Microsoft Teams:" -ForegroundColor White
+Write-Host "     Connect-MicrosoftTeams" -ForegroundColor Gray
+Write-Host ""
+Write-Host "  5. Run deployment:" -ForegroundColor White
+Write-Host "     .\scripts\Deploy-M365.ps1 -ConfigPath .\config\prod.psd1" -ForegroundColor Gray
 Write-Host ""

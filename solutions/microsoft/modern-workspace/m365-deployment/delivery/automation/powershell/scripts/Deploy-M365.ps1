@@ -141,7 +141,7 @@ function Write-M365Log {
 function Start-M365LogSession {
     param([string]$SessionName)
 
-    $logDir = Join-Path $scriptRoot '..\..\..\logs'
+    $logDir = Join-Path $scriptRoot '..\..\logs'
     if (-not (Test-Path $logDir)) {
         New-Item -ItemType Directory -Path $logDir -Force | Out-Null
     }
@@ -311,7 +311,7 @@ function Invoke-IdentityPhase {
     if ($Config.identity.conditional_access_enabled) {
         Write-M365Log "Deploying Conditional Access policies..." -Level INFO
 
-        $caConfigPath = Join-Path $scriptRoot '..\..\..\..\config\conditional-access'
+        $caConfigPath = Join-Path $scriptRoot '..\..\config\conditional-access'
         if (Test-Path $caConfigPath) {
             $caPolicies = Get-ChildItem -Path $caConfigPath -Filter '*.json'
             foreach ($policy in $caPolicies) {
@@ -422,7 +422,7 @@ function Invoke-Validation {
 
     Write-M365Log "Running deployment validation..." -Level INFO
 
-    $validationScript = Join-Path $scriptRoot '..\..\..\..\tests\validation\Validate-Deployment.ps1'
+    $validationScript = Join-Path $scriptRoot '..\..\tests\validation\Validate-Deployment.ps1'
     if (Test-Path $validationScript) {
         & $validationScript -ConfigPath $ConfigPath
     }

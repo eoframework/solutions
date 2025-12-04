@@ -100,7 +100,7 @@ function Main {
         $baseline = New-CMCSecurityBaseline -Config $config
 
         # Backup baseline for potential rollback
-        $backupDir = Join-Path $scriptRoot '..\..\..\..\backups' (Get-Date -Format 'yyyy-MM-dd')
+        $backupDir = Join-Path $scriptRoot '..\..\backups' (Get-Date -Format 'yyyy-MM-dd')
         if (-not (Test-Path $backupDir)) {
             New-Item -ItemType Directory -Path $backupDir -Force | Out-Null
         }

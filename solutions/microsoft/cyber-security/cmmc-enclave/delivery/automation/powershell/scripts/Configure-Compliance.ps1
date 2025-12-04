@@ -112,7 +112,7 @@ function Main {
 
         # Step 6: Generate Compliance Report
         Write-CMCLog "Step 6: Generating Compliance Report..." -Level INFO
-        $reportPath = Join-Path $scriptRoot '..\..\..\..\reports'
+        $reportPath = Join-Path $scriptRoot '..\..\reports'
         if (-not (Test-Path $reportPath)) {
             New-Item -ItemType Directory -Path $reportPath -Force | Out-Null
         }

@@ -1,4 +1,4 @@
-# Microsoft 365 Enterprise Deployment - Platform-Native Automation
+# Microsoft 365 Enterprise Deployment - PowerShell Automation
 
 PowerShell-based automation for deploying and configuring Microsoft 365 E5 with Exchange Online, SharePoint, Teams, and comprehensive security.
 
@@ -9,6 +9,23 @@ This automation implements a complete Microsoft 365 enterprise deployment using:
 - **Exchange Online Management** for email and hybrid configuration
 - **SharePoint Online Management** for site provisioning
 - **Microsoft Teams PowerShell** for Teams configuration
+
+## Architecture
+
+```
+powershell/
+├── requirements.ps1    # Installs external dependencies (Microsoft modules from PSGallery)
+├── modules/            # Custom reusable functions (solution-specific code)
+├── scripts/            # Entry points that orchestrate the modules
+└── config/             # Environment configurations (prod, test, dr)
+```
+
+| Component | Purpose | Run When |
+|-----------|---------|----------|
+| `requirements.ps1` | Installs Microsoft.Graph, ExchangeOnlineManagement, SharePoint, Teams from PSGallery | Once (or when updating modules) |
+| `modules/` | Custom functions that wrap Microsoft APIs (M365-Identity, M365-Exchange, etc.) | Imported automatically by scripts |
+| `scripts/` | Deployment orchestrators that call module functions | Each deployment |
+| `config/` | Environment-specific settings (.psd1 files) | Referenced by scripts |
 
 ## Prerequisites
 
@@ -48,48 +65,34 @@ M365_ADMIN_UPN=admin@company.com
 ## Directory Structure
 
 ```
-platform-native/
+powershell/
 ├── README.md                           # This file
 ├── requirements.ps1                    # Module installation script
-├── powershell/
-│   ├── modules/
-│   │   ├── M365-Common/               # Shared functions and utilities
-│   │   │   ├── M365-Common.psd1
-│   │   │   └── M365-Common.psm1
-│   │   ├── M365-Identity/             # Azure AD and authentication
-│   │   │   ├── M365-Identity.psd1
-│   │   │   └── M365-Identity.psm1
-│   │   ├── M365-Exchange/             # Exchange Online configuration
-│   │   │   ├── M365-Exchange.psd1
-│   │   │   └── M365-Exchange.psm1
-│   │   ├── M365-SharePoint/           # SharePoint Online configuration
-│   │   │   ├── M365-SharePoint.psd1
-│   │   │   └── M365-SharePoint.psm1
-│   │   ├── M365-Teams/                # Teams and voice configuration
-│   │   │   ├── M365-Teams.psd1
-│   │   │   └── M365-Teams.psm1
-│   │   └── M365-Security/             # Security and compliance
-│   │       ├── M365-Security.psd1
-│   │       └── M365-Security.psm1
-│   ├── scripts/
-│   │   ├── prod/
-│   │   │   ├── Deploy-M365.ps1         # Main deployment orchestrator
-│   │   │   ├── Configure-Identity.ps1   # Azure AD and MFA
-│   │   │   ├── Configure-Exchange.ps1   # Exchange Online setup
-│   │   │   ├── Configure-SharePoint.ps1 # SharePoint provisioning
-│   │   │   ├── Configure-Teams.ps1      # Teams and voice
-│   │   │   ├── Configure-Security.ps1   # Defender and compliance
-│   │   │   ├── Migrate-Email.ps1        # Email migration
-│   │   │   └── Migrate-Files.ps1        # File migration
-│   │   ├── test/
-│   │   │   └── Deploy-M365.ps1
-│   │   └── dr/
-│   │       └── Deploy-M365.ps1
-│   └── config/
-│       ├── prod.psd1                   # Production configuration
-│       ├── test.psd1                   # Test configuration
-│       └── dr.psd1                     # DR configuration
+├── modules/
+│   ├── M365-Common/                   # Shared functions and utilities
+│   │   ├── M365-Common.psd1
+│   │   └── M365-Common.psm1
+│   ├── M365-Identity/                 # Azure AD and authentication
+│   │   ├── M365-Identity.psd1
+│   │   └── M365-Identity.psm1
+│   ├── M365-Exchange/                 # Exchange Online configuration
+│   │   ├── M365-Exchange.psd1
+│   │   └── M365-Exchange.psm1
+│   ├── M365-SharePoint/               # SharePoint Online configuration
+│   │   ├── M365-SharePoint.psd1
+│   │   └── M365-SharePoint.psm1
+│   ├── M365-Teams/                    # Teams and voice configuration
+│   │   ├── M365-Teams.psd1
+│   │   └── M365-Teams.psm1
+│   └── M365-Security/                 # Security and compliance
+│       ├── M365-Security.psd1
+│       └── M365-Security.psm1
+├── scripts/
+│   └── Deploy-M365.ps1                 # Main deployment orchestrator
 ├── config/
+│   ├── prod.psd1                       # Production configuration
+│   ├── test.psd1                       # Test configuration
+│   ├── dr.psd1                         # DR configuration
 │   ├── conditional-access/
 │   │   ├── CA001-RequireMFA-AllUsers.json
 │   │   ├── CA002-BlockLegacyAuth.json
@@ -104,11 +107,6 @@ platform-native/
 │   │   ├── safe-links-policy.json
 │   │   ├── safe-attachments-policy.json
 │   │   └── anti-phishing-policy.json
-│   ├── purview/
-│   │   ├── dlp-pii-policy.json
-│   │   ├── retention-policy-email.json
-│   │   ├── retention-policy-files.json
-│   │   └── sensitivity-labels.json
 │   ├── sharepoint/
 │   │   ├── hub-sites.json
 │   │   ├── site-templates.json
@@ -141,72 +139,43 @@ Connect-ExchangeOnline
 Connect-SPOService -Url https://[tenant]-admin.sharepoint.com
 
 # 3. Deploy to production
-.\powershell\scripts\prod\Deploy-M365.ps1 -ConfigPath .\powershell\config\prod.psd1
+.\scripts\Deploy-M365.ps1 -ConfigPath .\config\prod.psd1
 
 # 4. Validate deployment
 .\tests\validation\Validate-Deployment.ps1
 ```
 
-### Phased Deployment
+### Environment Deployment
 
-1. **Foundation Setup (Week 1-4)**
-   ```powershell
-   .\powershell\scripts\prod\Configure-Identity.ps1 -ConfigPath .\powershell\config\prod.psd1
-   ```
-   - Azure AD Connect deployment
-   - Single Sign-On configuration
-   - Conditional Access policies
-   - MFA enrollment
-
-2. **Pilot Migration (Week 4-6)**
-   ```powershell
-   .\powershell\scripts\prod\Migrate-Email.ps1 -ConfigPath .\powershell\config\prod.psd1 -Pilot
-   ```
-   - 50 pilot users
-   - Hybrid Exchange validation
-   - OneDrive Known Folder Move
-
-3. **Production Migration (Week 7-12)**
-   ```powershell
-   .\powershell\scripts\prod\Migrate-Email.ps1 -ConfigPath .\powershell\config\prod.psd1 -Wave 1
-   ```
-   - 5 waves of 90 users
-   - Weekend migration windows
-   - Department-by-department
-
-4. **Teams & Security (Week 12-15)**
-   ```powershell
-   .\powershell\scripts\prod\Configure-Teams.ps1 -ConfigPath .\powershell\config\prod.psd1
-   .\powershell\scripts\prod\Configure-Security.ps1 -ConfigPath .\powershell\config\prod.psd1
-   ```
-   - Teams deployment
-   - Phone System configuration
-   - Defender for Office 365
-   - Purview DLP policies
-
-## Migration
-
-### Email Migration
+Scripts are environment-agnostic. Pass the appropriate config file:
 
 ```powershell
-# Pilot migration (50 users)
-.\powershell\scripts\prod\Migrate-Email.ps1 -ConfigPath .\config\prod.psd1 -Pilot
+# Production
+.\scripts\Deploy-M365.ps1 -ConfigPath .\config\prod.psd1
 
-# Production wave 1 (90 users)
-.\powershell\scripts\prod\Migrate-Email.ps1 -ConfigPath .\config\prod.psd1 -Wave 1
+# Test
+.\scripts\Deploy-M365.ps1 -ConfigPath .\config\test.psd1
 
-# Check migration status
-.\powershell\scripts\prod\Migrate-Email.ps1 -ConfigPath .\config\prod.psd1 -Status
+# DR
+.\scripts\Deploy-M365.ps1 -ConfigPath .\config\dr.psd1
 ```
 
-### File Migration
+### Phased Deployment
+
+The `Deploy-M365.ps1` script supports phased deployment via the `-Phase` parameter:
 
 ```powershell
-# Migrate department files to SharePoint
-.\powershell\scripts\prod\Migrate-Files.ps1 -ConfigPath .\config\prod.psd1 -Department "Finance"
+# Deploy only Identity phase
+.\scripts\Deploy-M365.ps1 -ConfigPath .\config\prod.psd1 -Phase Identity
 
-# Enable OneDrive Known Folder Move
-.\powershell\scripts\prod\Migrate-Files.ps1 -ConfigPath .\config\prod.psd1 -EnableKFM
+# Deploy only Exchange phase
+.\scripts\Deploy-M365.ps1 -ConfigPath .\config\prod.psd1 -Phase Exchange
+
+# Deploy only Teams phase
+.\scripts\Deploy-M365.ps1 -ConfigPath .\config\prod.psd1 -Phase Teams
+
+# Deploy all phases (default)
+.\scripts\Deploy-M365.ps1 -ConfigPath .\config\prod.psd1 -Phase All
 ```
 
 ## Configuration Files

@@ -194,7 +194,7 @@ function Invoke-IdentityPhase {
     Write-CMCLog "Configuring identity and authentication..." -Level INFO
 
     # Deploy Conditional Access policies
-    $caConfigPath = Join-Path $scriptRoot '..\..\..\..\config\conditional-access'
+    $caConfigPath = Join-Path $scriptRoot '..\..\config\conditional-access'
 
     if (Test-Path $caConfigPath) {
         $caPolicies = Get-ChildItem -Path $caConfigPath -Filter '*.json'

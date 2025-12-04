@@ -1,4 +1,4 @@
-# CMMC GCC High Enclave - Platform-Native Automation
+# CMMC GCC High Enclave - PowerShell Automation
 
 PowerShell-based automation for deploying and configuring Microsoft 365 GCC High and Azure Government environments for CMMC Level 2 compliance.
 
@@ -9,12 +9,29 @@ This automation implements all 110 NIST 800-171 security controls required for C
 - **Azure PowerShell** for Azure Government infrastructure
 - **JSON templates** for Conditional Access and Intune policies
 
+## Architecture
+
+```
+powershell/
+├── requirements.ps1    # Installs external dependencies (Microsoft modules from PSGallery)
+├── modules/            # Custom reusable functions (solution-specific code)
+├── scripts/            # Entry points that orchestrate the modules
+└── config/             # Environment configurations (prod, test, dr)
+```
+
+| Component | Purpose | Run When |
+|-----------|---------|----------|
+| `requirements.ps1` | Installs Microsoft.Graph, Az, ExchangeOnlineManagement from PSGallery | Once (or when updating modules) |
+| `modules/` | Custom functions that wrap Microsoft APIs (CMMC-Security, CMMC-Compliance, etc.) | Imported automatically by scripts |
+| `scripts/` | Deployment orchestrators that call module functions | Each deployment |
+| `config/` | Environment-specific settings (.psd1 files) | Referenced by scripts |
+
 ## Prerequisites
 
 ### PowerShell Modules
 
 ```powershell
-# Run requirements.ps1 to install all required modules
+# Run requirements.ps1 to install all required modules (one-time setup)
 .\requirements.ps1
 
 # Or install manually:
@@ -45,65 +62,41 @@ M365_GCC_HIGH_TENANT=<tenant>.onmicrosoft.us
 ## Directory Structure
 
 ```
-platform-native/
+powershell/
 ├── README.md                           # This file
 ├── requirements.ps1                    # Module installation script
-├── powershell/
-│   ├── modules/
-│   │   ├── CMMC-Common/               # Shared functions and utilities
-│   │   │   ├── CMMC-Common.psd1
-│   │   │   └── CMMC-Common.psm1
-│   │   ├── CMMC-Identity/             # Azure AD and authentication
-│   │   │   ├── CMMC-Identity.psd1
-│   │   │   └── CMMC-Identity.psm1
-│   │   ├── CMMC-Security/             # Security controls and Defender
-│   │   │   ├── CMMC-Security.psd1
-│   │   │   └── CMMC-Security.psm1
-│   │   ├── CMMC-Compliance/           # Purview and compliance
-│   │   │   ├── CMMC-Compliance.psd1
-│   │   │   └── CMMC-Compliance.psm1
-│   │   └── CMMC-Monitoring/           # Sentinel and monitoring
-│   │       ├── CMMC-Monitoring.psd1
-│   │       └── CMMC-Monitoring.psm1
-│   ├── scripts/
-│   │   ├── prod/
-│   │   │   ├── Deploy-CMMC.ps1        # Main deployment orchestrator
-│   │   │   ├── Configure-Identity.ps1  # CAC/PIV and Conditional Access
-│   │   │   ├── Configure-Security.ps1  # Defender and security controls
-│   │   │   ├── Configure-Compliance.ps1 # Purview DLP and retention
-│   │   │   ├── Configure-Monitoring.ps1 # Sentinel and alerts
-│   │   │   └── Validate-Controls.ps1   # NIST 800-171 validation
-│   │   ├── test/
-│   │   │   └── Deploy-CMMC.ps1
-│   │   └── dr/
-│   │       └── Deploy-CMMC.ps1
-│   └── config/
-│       ├── prod.psd1                   # Production configuration
-│       ├── test.psd1                   # Test configuration
-│       └── dr.psd1                     # DR configuration
+├── modules/
+│   ├── CMMC-Common/                   # Shared functions and utilities
+│   │   ├── CMMC-Common.psd1
+│   │   └── CMMC-Common.psm1
+│   ├── CMMC-Identity/                 # Azure AD and authentication
+│   │   ├── CMMC-Identity.psd1
+│   │   └── CMMC-Identity.psm1
+│   ├── CMMC-Security/                 # Security controls and Defender
+│   │   ├── CMMC-Security.psd1
+│   │   └── CMMC-Security.psm1
+│   ├── CMMC-Compliance/               # Purview and compliance
+│   │   ├── CMMC-Compliance.psd1
+│   │   └── CMMC-Compliance.psm1
+│   └── CMMC-Monitoring/               # Sentinel and monitoring
+│       ├── CMMC-Monitoring.psd1
+│       └── CMMC-Monitoring.psm1
+├── scripts/
+│   ├── Deploy-CMMC.ps1                # Main deployment orchestrator
+│   ├── Configure-Security.ps1          # Defender and security controls
+│   ├── Configure-Compliance.ps1        # Purview DLP and retention
+│   ├── Configure-Monitoring.ps1        # Sentinel and alerts
+│   └── Validate-Controls.ps1           # NIST 800-171 validation
 ├── config/
-│   ├── conditional-access/
-│   │   ├── CA001-RequireMFAAdmins.json
-│   │   ├── CA002-BlockLegacyAuth.json
-│   │   ├── CA003-RequireCompliantDevice.json
-│   │   ├── CA004-RequireCACPIV.json
-│   │   └── CA005-BlockHighRiskSignIn.json
-│   ├── intune/
-│   │   ├── device-compliance-windows.json
-│   │   ├── device-compliance-mobile.json
-│   │   └── app-protection-policy.json
-│   ├── purview/
-│   │   ├── dlp-cui-policy.json
-│   │   ├── retention-policy.json
-│   │   └── sensitivity-labels.json
-│   └── sentinel/
-│       ├── analytics-rules/
-│       │   ├── cui-data-exfiltration.json
-│       │   ├── failed-authentication.json
-│       │   └── privilege-escalation.json
-│       └── playbooks/
-│           ├── incident-response.json
-│           └── block-compromised-user.json
+│   ├── prod.psd1                       # Production configuration
+│   ├── test.psd1                       # Test configuration
+│   ├── dr.psd1                         # DR configuration
+│   └── conditional-access/
+│       ├── CA001-RequireMFAAdmins.json
+│       ├── CA002-BlockLegacyAuth.json
+│       ├── CA003-RequireCompliantDevice.json
+│       ├── CA004-RequireCACPIV.json
+│       └── CA005-BlockHighRiskSignIn.json
 └── tests/
     ├── Pester/
     │   ├── CMMC-Identity.Tests.ps1
@@ -126,41 +119,48 @@ Connect-AzAccount -Environment AzureUSGovernment
 Connect-MgGraph -Environment USGov -Scopes "Policy.ReadWrite.ConditionalAccess","DeviceManagementConfiguration.ReadWrite.All"
 
 # 3. Deploy to production
-.\powershell\scripts\prod\Deploy-CMMC.ps1 -ConfigPath .\powershell\config\prod.psd1
+.\scripts\Deploy-CMMC.ps1 -ConfigPath .\config\prod.psd1
 
 # 4. Validate NIST 800-171 controls
-.\powershell\scripts\prod\Validate-Controls.ps1 -OutputPath .\reports\compliance-report.html
+.\scripts\Validate-Controls.ps1 -ConfigPath .\config\prod.psd1
+```
+
+### Environment Deployment
+
+Scripts are environment-agnostic. Pass the appropriate config file:
+
+```powershell
+# Production
+.\scripts\Deploy-CMMC.ps1 -ConfigPath .\config\prod.psd1
+
+# Test
+.\scripts\Deploy-CMMC.ps1 -ConfigPath .\config\test.psd1
+
+# DR
+.\scripts\Deploy-CMMC.ps1 -ConfigPath .\config\dr.psd1
 ```
 
 ### Step-by-Step Deployment
 
-1. **Configure Identity and Authentication**
+1. **Configure Security Controls**
    ```powershell
-   .\powershell\scripts\prod\Configure-Identity.ps1 -ConfigPath .\powershell\config\prod.psd1
-   ```
-   - Deploys Conditional Access policies
-   - Configures CAC/PIV authentication
-   - Sets up MFA enforcement
-
-2. **Configure Security Controls**
-   ```powershell
-   .\powershell\scripts\prod\Configure-Security.ps1 -ConfigPath .\powershell\config\prod.psd1
+   .\scripts\Configure-Security.ps1 -ConfigPath .\config\prod.psd1
    ```
    - Deploys Defender for Office 365
    - Configures Defender for Cloud
    - Enables threat protection
 
-3. **Configure Compliance**
+2. **Configure Compliance**
    ```powershell
-   .\powershell\scripts\prod\Configure-Compliance.ps1 -ConfigPath .\powershell\config\prod.psd1
+   .\scripts\Configure-Compliance.ps1 -ConfigPath .\config\prod.psd1
    ```
    - Deploys DLP policies for CUI protection
    - Configures retention policies
    - Creates sensitivity labels
 
-4. **Configure Monitoring**
+3. **Configure Monitoring**
    ```powershell
-   .\powershell\scripts\prod\Configure-Monitoring.ps1 -ConfigPath .\powershell\config\prod.psd1
+   .\scripts\Configure-Monitoring.ps1 -ConfigPath .\config\prod.psd1
    ```
    - Deploys Sentinel workspace
    - Configures analytics rules
