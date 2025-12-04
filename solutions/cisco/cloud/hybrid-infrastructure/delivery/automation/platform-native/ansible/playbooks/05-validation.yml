@@ -1,0 +1,140 @@
+---
+#------------------------------------------------------------------------------
+# Phase 3: Validation - Go-Live Validation and Testing
+#------------------------------------------------------------------------------
+# This playbook handles validation including:
+#   - Cluster health
+#   - Storage capacity
+#   - vSphere integration
+#   - Reporting
+#------------------------------------------------------------------------------
+
+- name: Phase 3 - Go-Live Validation
+  hosts: localhost
+  gather_facts: no
+  tags: [validation]
+
+  vars_files:
+    - "{{ playbook_dir }}/../vars/generated/project.yml"
+    - "{{ playbook_dir }}/../vars/generated/hyperflex.yml"
+    - "{{ playbook_dir }}/../vars/generated/vmware.yml"
+    - "{{ playbook_dir }}/../vars/generated/intersight.yml"
+    - "{{ playbook_dir }}/../vars/secrets.yml"
+
+  tasks:
+    #--------------------------------------------------------------------------
+    # Cluster Health
+    #--------------------------------------------------------------------------
+    - name: Get HyperFlex cluster health
+      ansible.builtin.uri:
+        url: "https://{{ hyperflex.cluster_ip }}/api/v1/cluster/health"
+        method: GET
+        user: "{{ hyperflex.admin_user }}"
+        password: "{{ vault_hx_admin_password }}"
+        force_basic_auth: yes
+        validate_certs: "{{ hyperflex.ssl_verify }}"
+      register: hx_health
+      ignore_errors: yes
+
+    - name: Display cluster health
+      ansible.builtin.debug:
+        msg: "HyperFlex Health: {{ hx_health.json | default('Check response') }}"
+        verbosity: 1
+
+    #--------------------------------------------------------------------------
+    # Storage Capacity
+    #--------------------------------------------------------------------------
+    - name: Get storage capacity
+      ansible.builtin.uri:
+        url: "https://{{ hyperflex.cluster_ip }}/api/v1/cluster/capacity"
+        method: GET
+        user: "{{ hyperflex.admin_user }}"
+        password: "{{ vault_hx_admin_password }}"
+        force_basic_auth: yes
+        validate_certs: "{{ hyperflex.ssl_verify }}"
+      register: hx_capacity
+      ignore_errors: yes
+
+    - name: Display storage capacity
+      ansible.builtin.debug:
+        msg: "Storage Capacity: {{ hx_capacity.json | default('Check response') }}"
+        verbosity: 1
+
+    #--------------------------------------------------------------------------
+    # Node Status
+    #--------------------------------------------------------------------------
+    - name: Get node status
+      ansible.builtin.uri:
+        url: "https://{{ hyperflex.cluster_ip }}/api/v1/nodes"
+        method: GET
+        user: "{{ hyperflex.admin_user }}"
+        password: "{{ vault_hx_admin_password }}"
+        force_basic_auth: yes
+        validate_certs: "{{ hyperflex.ssl_verify }}"
+      register: hx_nodes
+      ignore_errors: yes
+
+    - name: Display node information
+      ansible.builtin.debug:
+        msg: "HyperFlex Nodes: {{ hx_nodes.json | default('Check response') }}"
+        verbosity: 1
+
+    #--------------------------------------------------------------------------
+    # vSphere Verification
+    #--------------------------------------------------------------------------
+    - name: Display vSphere verification steps
+      ansible.builtin.debug:
+        msg: |
+          vSphere Verification:
+          1. Verify ESXi hosts in cluster: {{ vmware.cluster_name }}
+          2. Verify HyperFlex datastores mounted
+          3. Verify DVS configuration: {{ vmware.dvs_name }}
+          4. Test VM creation and migration
+
+    #--------------------------------------------------------------------------
+    # Validation Report
+    #--------------------------------------------------------------------------
+    - name: Generate validation report
+      ansible.builtin.set_fact:
+        validation_report: |
+          ============================================================
+          CISCO HYPERFLEX HYBRID INFRASTRUCTURE - VALIDATION REPORT
+          ============================================================
+          Date: {{ lookup('pipe', 'date -Iseconds') }}
+          Solution: {{ solution.name }}
+          HyperFlex Cluster: {{ hyperflex.cluster_name }} ({{ hyperflex.cluster_ip }})
+
+          CLUSTER SUMMARY
+          ----------------
+          Node Count: {{ hyperflex.node_count }}
+          Cluster Type: {{ hyperflex.cluster_type }}
+          Replication Factor: {{ hyperflex.replication_factor }}
+
+          STORAGE FEATURES
+          ----------------
+          Deduplication: {{ hyperflex.deduplication }}
+          Compression: {{ hyperflex.compression }}
+
+          VSPHERE INTEGRATION
+          -------------------
+          vCenter: {{ vmware.vcenter_ip }}
+          Datacenter: {{ vmware.datacenter }}
+          Cluster: {{ vmware.cluster_name }}
+
+          INTERSIGHT STATUS
+          -----------------
+          Connected: {{ 'Yes' if intersight.enabled else 'No' }}
+          License Tier: {{ intersight.license_tier }}
+
+          VALIDATION STATUS: REVIEW REQUIRED
+          ============================================================
+
+    - name: Display validation report
+      ansible.builtin.debug:
+        msg: "{{ validation_report }}"
+
+    - name: Save validation report to file
+      ansible.builtin.copy:
+        content: "{{ validation_report }}"
+        dest: "{{ playbook_dir }}/../logs/validation_report_{{ lookup('pipe', 'date +%Y%m%d_%H%M%S') }}.txt"
+      delegate_to: localhost

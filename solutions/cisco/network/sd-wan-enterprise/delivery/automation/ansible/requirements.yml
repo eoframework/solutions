@@ -1,0 +1,11 @@
+---
+# Ansible Collection Requirements for Cisco SD-WAN
+# Install: ansible-galaxy collection install -r requirements.yml
+
+collections:
+  - name: cisco.ios
+    version: ">=5.0.0"
+  - name: ansible.netcommon
+    version: ">=5.0.0"
+  - name: ansible.utils
+    version: ">=2.0.0"

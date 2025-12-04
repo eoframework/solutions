@@ -1,0 +1,14 @@
+#------------------------------------------------------------------------------
+# GitLab Configuration
+#------------------------------------------------------------------------------
+# Generated from configuration.csv
+#
+# To regenerate: python generate-ansible-vars.py /path/to/solution
+# DO NOT EDIT - Changes will be overwritten on regeneration
+#------------------------------------------------------------------------------
+
+gitlab:
+  version: "16.8 Premium"
+  server_count: 2
+  database: "PostgreSQL 15"
+  hostname: "[gitlab.domain.com]"

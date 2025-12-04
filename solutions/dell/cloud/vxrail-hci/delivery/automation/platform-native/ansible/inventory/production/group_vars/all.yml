@@ -1,0 +1,177 @@
+# Dell VxRail HCI - Production Variables
+# Generated from configuration.csv - Production column
+# EO Framework - Dell Cloud Solutions
+
+---
+#=============================================================================
+# PROJECT METADATA
+#=============================================================================
+solution:
+  name: vxrail-hci
+  abbr: vxr
+  provider: dell
+  category: cloud
+
+environment: production
+datacenter_name: "{{ datacenter_name | default('Primary Datacenter') }}"
+
+#=============================================================================
+# VXRAIL CLUSTER CONFIGURATION
+#=============================================================================
+vxrail:
+  solution_name: "Dell VxRail Hyperconverged Infrastructure"
+  version: "8.0.100"
+  cluster_name: "vxrail-cluster-prod"
+  node_count: 4
+  node_model: "E560"
+  generation: "E560"
+
+#=============================================================================
+# DELL HARDWARE SPECIFICATIONS
+#=============================================================================
+hardware:
+  chassis_model: "R660"
+  cpu:
+    model: "Intel Xeon Gold 6330"
+    count_per_node: 2
+    cores_per_cpu: 28
+    ghz: 2.0
+  memory:
+    per_node_gb: 384
+    type: "DDR4-3200"
+
+#=============================================================================
+# VSAN STORAGE CONFIGURATION
+#=============================================================================
+vsan:
+  # Cache tier
+  cache:
+    disk_model: "1.6TB NVMe SSD"
+    disk_count: 2
+    tier: "cache"
+
+  # Capacity tier
+  capacity:
+    disk_model: "7.68TB NVMe SSD"
+    disk_count: 6
+    tier: "capacity"
+
+  # Storage policies
+  storage_policy: "RAID-5 (Erasure Coding)"
+
+  # Space efficiency
+  compression_enabled: true
+  deduplication_enabled: true
+  encryption_enabled: true
+
+  # vSAN version
+  version: "8.0 U2"
+
+#=============================================================================
+# NETWORK CONFIGURATION
+#=============================================================================
+network:
+  # VxRail node networking
+  node:
+    ports_10gbe: 4
+    ports_25gbe: 2
+
+  # Top-of-rack switch
+  switch:
+    model: "S5248F-ON"
+    uplink_speed: "100GbE"
+
+  # VLANs
+  vlans:
+    management: 10
+    vmotion: 20
+    vsan: 30
+    vm_network: 100
+
+#=============================================================================
+# VMWARE CONFIGURATION
+#=============================================================================
+vmware:
+  vcenter:
+    version: "8.0 U2"
+    datacenter: "VxRail-Datacenter-Prod"
+    cluster: "VxRail-Cluster-Prod"
+
+  esxi:
+    version: "8.0 U2"
+
+  vsan:
+    version: "8.0 U2"
+
+  nsx:
+    enabled: false
+
+  vcf:
+    enabled: false
+
+#=============================================================================
+# DELL MANAGEMENT
+#=============================================================================
+dell_management:
+  idrac:
+    version: "iDRAC9"
+    enterprise_license: true
+
+  openmanage:
+    enterprise_version: "4.0.1"
+    vcenter_integration: true
+
+#=============================================================================
+# SECURITY CONFIGURATION
+#=============================================================================
+security:
+  tpm_version: "TPM 2.0"
+  secure_boot: true
+  encryption:
+    at_rest: "enabled"
+    in_transit: "enabled"
+  firmware_security_mode: "strict"
+
+#=============================================================================
+# BACKUP AND DATA PROTECTION
+#=============================================================================
+backup:
+  solution: "Dell PowerProtect Data Manager"
+  target_storage: "Dell PowerProtect DD"
+  retention_policy: "Daily-30d Monthly-12m"
+  frequency: "Daily incremental"
+
+#=============================================================================
+# MONITORING AND SUPPORT
+#=============================================================================
+monitoring:
+  solution: "Dell CloudIQ"
+  support_assist: "enabled"
+  secure_remote_services: "enabled"
+  prosupport_plus: true
+  performance_monitoring: "enabled"
+
+#=============================================================================
+# OPERATIONS
+#=============================================================================
+operations:
+  lifecycle_management: "automated"
+  patch_schedule: "Monthly maintenance window"
+  maintenance_window: "Sunday 02:00-06:00 UTC"
+  capacity_planning_threshold: 80
+
+#=============================================================================
+# DISASTER RECOVERY
+#=============================================================================
+disaster_recovery:
+  enabled: true
+  rpo_minutes: 15
+  rto_hours: 4
+  replication_target: "dr-site"
+
+#=============================================================================
+# CLOUD INTEGRATION
+#=============================================================================
+cloud_integration:
+  dell_technologies_cloud: "disabled"
+  vmware_cloud_on_dell_emc: "disabled"

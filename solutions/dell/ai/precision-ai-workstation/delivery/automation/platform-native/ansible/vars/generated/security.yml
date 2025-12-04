@@ -1,0 +1,16 @@
+#------------------------------------------------------------------------------
+# Security Configuration
+#------------------------------------------------------------------------------
+# Generated from configuration.csv
+#
+# To regenerate: python generate-ansible-vars.py /path/to/solution
+# DO NOT EDIT - Changes will be overwritten on regeneration
+#------------------------------------------------------------------------------
+
+security:
+  ssh_port: 22
+  ssh_key_type: "ed25519"
+  firewall_enabled: true
+  admin_group: "ai-admins"
+  user_group: "data-scientists"
+  user_quota_tb: 10

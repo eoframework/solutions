@@ -1,0 +1,6 @@
+---
+# Dell SafeID LDAP Integration - Default Variables
+
+ldap_timeout: 30
+ldap_page_size: 1000
+ldap_ssl_verify: true

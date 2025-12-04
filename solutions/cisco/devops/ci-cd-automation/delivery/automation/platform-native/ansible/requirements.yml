@@ -1,0 +1,33 @@
+---
+#------------------------------------------------------------------------------
+# Ansible Galaxy Requirements
+#------------------------------------------------------------------------------
+# Install with: ansible-galaxy install -r requirements.yml
+#------------------------------------------------------------------------------
+
+collections:
+  # Cisco Collections
+  - name: cisco.dnac
+    version: ">=6.0.0"
+  - name: cisco.ios
+    version: ">=5.0.0"
+  - name: cisco.nxos
+    version: ">=5.0.0"
+  - name: cisco.asa
+    version: ">=4.0.0"
+
+  # Infrastructure Collections
+  - name: community.general
+    version: ">=7.0.0"
+  - name: ansible.posix
+    version: ">=1.5.0"
+
+  # CI/CD Platform Collections
+  - name: community.docker
+    version: ">=3.0.0"
+  - name: kubernetes.core
+    version: ">=2.4.0"
+
+  # HashiCorp Collection
+  - name: community.hashi_vault
+    version: ">=5.0.0"

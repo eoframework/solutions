@@ -1,0 +1,12 @@
+#------------------------------------------------------------------------------
+# Monitoring Configuration
+#------------------------------------------------------------------------------
+# Generated from configuration.csv
+#
+# To regenerate: python generate-ansible-vars.py /path/to/solution
+# DO NOT EDIT - Changes will be overwritten on regeneration
+#------------------------------------------------------------------------------
+
+monitoring:
+  solution: "Prometheus Grafana"
+  alertmanager_enabled: true

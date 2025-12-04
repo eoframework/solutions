@@ -1,0 +1,82 @@
+---
+# site.yml - Master playbook for SRX Firewall Platform deployment
+# Orchestrates all roles in correct dependency order
+
+- name: Deploy SRX Firewall Platform
+  hosts: srx_firewalls
+  gather_facts: no
+  connection: netconf
+
+  vars_files:
+    - "{{ playbook_dir }}/../vars/common.yml"
+    - "{{ playbook_dir }}/../vars/secrets.yml"
+
+  pre_tasks:
+    - name: Display deployment information
+      ansible.builtin.debug:
+        msg: >
+          Deploying {{ solution.name }} ({{ solution.abbr }})
+          to {{ solution.environment }} environment
+
+    - name: Gather device facts
+      junipernetworks.junos.junos_facts:
+        gather_subset:
+          - default
+          - hardware
+      register: device_facts
+
+    - name: Display device information
+      ansible.builtin.debug:
+        msg: >
+          Device: {{ device_facts.ansible_facts.ansible_net_hostname }}
+          Model: {{ device_facts.ansible_facts.ansible_net_model }}
+          Version: {{ device_facts.ansible_facts.ansible_net_version }}
+
+  #============================================================================
+  # FOUNDATION - Base system configuration
+  #============================================================================
+  roles:
+    - role: junos-base
+      tags: [base, foundation]
+
+  #============================================================================
+  # CORE SECURITY - Zones, policies, security services
+  #============================================================================
+    - role: junos-security
+      tags: [security, core]
+
+  #============================================================================
+  # ROUTING - Network routing configuration
+  #============================================================================
+    - role: junos-routing
+      tags: [routing]
+
+  #============================================================================
+  # VPN - IPSec VPN tunnels (conditional)
+  #============================================================================
+    - role: junos-vpn
+      when: vpn.enabled | default(false)
+      tags: [vpn]
+
+  post_tasks:
+    - name: Commit configuration with confirmation
+      junipernetworks.junos.junos_config:
+        confirm_commit: yes
+        comment: "Ansible deployment - {{ solution.environment }}"
+      register: commit_result
+
+    - name: Display commit status
+      ansible.builtin.debug:
+        msg: "Configuration committed successfully"
+      when: commit_result.changed
+
+    - name: Save rescue configuration
+      junipernetworks.junos.junos_command:
+        commands:
+          - request system configuration rescue save
+      when: commit_result.changed
+
+  handlers:
+    - name: Commit pending changes
+      junipernetworks.junos.junos_config:
+        confirm_commit: yes

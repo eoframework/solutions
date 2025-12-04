@@ -1,0 +1,29 @@
+# Ansible Galaxy Requirements
+# Dell SafeID Authentication Solution
+# EO Framework - Dell Cyber Security Solutions
+
+---
+collections:
+  # Community general collection for various modules
+  - name: community.general
+    version: ">=7.0.0"
+
+  # Community crypto for certificate management
+  - name: community.crypto
+    version: ">=2.0.0"
+
+  # Ansible POSIX utilities
+  - name: ansible.posix
+    version: ">=1.5.0"
+
+  # Ansible utilities
+  - name: ansible.utils
+    version: ">=2.0.0"
+
+  # Community MySQL for database management
+  - name: community.mysql
+    version: ">=3.0.0"
+
+  # Community PostgreSQL for database management
+  - name: community.postgresql
+    version: ">=3.0.0"

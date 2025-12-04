@@ -1,0 +1,27 @@
+---
+#------------------------------------------------------------------------------
+# Ansible Galaxy Requirements - Cisco ISE Secure Access
+#------------------------------------------------------------------------------
+# Install with: ansible-galaxy install -r requirements.yml
+#------------------------------------------------------------------------------
+
+collections:
+  # Cisco ISE Collection - Identity Services Engine
+  - name: cisco.ise
+    version: ">=2.5.0"
+    source: https://galaxy.ansible.com
+
+  # Cisco IOS Collection - Network device management
+  - name: cisco.ios
+    version: ">=6.0.0"
+    source: https://galaxy.ansible.com
+
+  # Ansible Network Common
+  - name: ansible.netcommon
+    version: ">=5.0.0"
+    source: https://galaxy.ansible.com
+
+  # Ansible Utils
+  - name: ansible.utils
+    version: ">=2.9.0"
+    source: https://galaxy.ansible.com

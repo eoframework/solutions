@@ -1,46 +1,47 @@
-#WIDTH: 25,15,12,30,45,10,12,33,16,20,26,39,12
-#ALIGN: left,left,center,left,left,center,left,left,center,left,left,left,center
-Parameter Name,Category,Environment,Default Value,Description,Required,Data Type,Validation Rules,Security Level,Owner Team,Dependencies,Notes,Last Updated
-OCP_CLUSTER_NAME,Cluster,All,ocp-prod,OpenShift cluster identifier for console and API access,Yes,String,Max 63 chars lowercase alphanumeric,Public,Platform Team,DNS configuration,Must be unique within DNS domain,[DATE]
-OCP_BASE_DOMAIN,Cluster,All,example.com,Base domain for cluster DNS and routing,Yes,String,Valid DNS domain format,Public,Network Team,DNS zone management,Wildcard DNS required for routes,[DATE]
-OCP_VERSION,Cluster,All,4.14.10,Red Hat OpenShift Container Platform version,Yes,String,4.x.x format,Public,Platform Team,Red Hat subscription,LTS version recommended for production,[DATE]
-OCP_API_ENDPOINT,Cluster,Production,https://api.ocp-prod.example.com:6443,OpenShift API server endpoint URL,Yes,String,Valid HTTPS URL,Public,Platform Team,Network connectivity,Load balanced endpoint,[DATE]
-OCP_CONSOLE_URL,Cluster,Production,https://console-openshift-console.apps.ocp-prod.example.com,OpenShift web console URL,Yes,String,Valid HTTPS URL,Public,Platform Team,OCP_BASE_DOMAIN,User-facing dashboard,[DATE]
-CONTROL_PLANE_NODES,Cluster,Production,3,Number of control plane (master) nodes,Yes,Integer,1|3|5,Public,Infrastructure Team,Hardware provisioning,Odd number for etcd quorum,[DATE]
-WORKER_NODES,Cluster,Production,3,Number of worker nodes for application workloads,Yes,Integer,Minimum 2,Public,Infrastructure Team,Hardware provisioning,Scale based on workload requirements,[DATE]
-CONTROL_PLANE_CPU,Compute,Production,8,vCPU cores per control plane node,Yes,Integer,Minimum 4,Public,Infrastructure Team,Hypervisor capacity,8 cores for production clusters,[DATE]
-CONTROL_PLANE_MEMORY,Compute,Production,32,Memory (GB) per control plane node,Yes,Integer,Minimum 16,Public,Infrastructure Team,Hypervisor capacity,32GB minimum for production,[DATE]
-WORKER_NODE_CPU,Compute,Production,16,vCPU cores per worker node,Yes,Integer,Minimum 4,Public,Infrastructure Team,Hypervisor capacity,Size based on container density,[DATE]
-WORKER_NODE_MEMORY,Compute,Production,64,Memory (GB) per worker node,Yes,Integer,Minimum 8,Public,Infrastructure Team,Hypervisor capacity,64GB for high-density workloads,[DATE]
-OCP_NETWORK_TYPE,Network,All,OVNKubernetes,OpenShift network plugin type,Yes,String,OVNKubernetes|OpenShiftSDN,Public,Network Team,None,OVN recommended for new clusters,[DATE]
-POD_NETWORK_CIDR,Network,All,10.128.0.0/14,CIDR block for pod networking,Yes,String,Valid CIDR notation,Public,Network Team,No overlap with existing networks,Default OpenShift pod network,[DATE]
-SERVICE_NETWORK_CIDR,Network,All,172.30.0.0/16,CIDR block for service networking,Yes,String,Valid CIDR notation,Public,Network Team,No overlap with existing networks,Default OpenShift service network,[DATE]
-CLUSTER_NETWORK_MTU,Network,All,1400,Maximum transmission unit for cluster network,Yes,Integer,1200-9000,Public,Network Team,Infrastructure MTU,Adjust for overlay overhead,[DATE]
-ODF_STORAGE_SIZE,Storage,Production,20TB,Total storage capacity for OpenShift Data Foundation,Yes,String,TB format,Public,Storage Team,Hardware storage,Persistent volume storage pool,[DATE]
-STORAGE_CLASS_BLOCK,Storage,All,ocs-storagecluster-ceph-rbd,Storage class for block storage PVCs,Yes,String,Valid storage class name,Public,Storage Team,ODF deployment,RBD for databases and stateful apps,[DATE]
-STORAGE_CLASS_FILE,Storage,All,ocs-storagecluster-cephfs,Storage class for file storage PVCs,Yes,String,Valid storage class name,Public,Storage Team,ODF deployment,CephFS for shared file access,[DATE]
-LDAP_URL,Authentication,Production,ldaps://ldap.example.com:636,Corporate LDAP/AD server URL,Yes,String,Valid LDAPS URL,Confidential,Security Team,Network connectivity,Use LDAPS for encrypted connection,[DATE]
-LDAP_BIND_DN,Authentication,Production,"CN=ocp-svc;OU=ServiceAccounts;DC=example;DC=com",LDAP service account distinguished name,Yes,String,Valid LDAP DN format,Confidential,Security Team,LDAP user creation,Read-only service account,[DATE]
-LDAP_BIND_PASSWORD,Authentication,Production,[LDAP_BIND_PASSWORD],LDAP service account password,Yes,String,Minimum 16 characters,Secret,Security Team,LDAP user creation,Store in OpenShift Secret,[DATE]
-LDAP_USER_SEARCH_BASE,Authentication,Production,"OU=Users;DC=example;DC=com",LDAP base DN for user searches,Yes,String,Valid LDAP DN format,Confidential,Security Team,LDAP structure,Scope users to specific OU,[DATE]
-LDAP_GROUP_SEARCH_BASE,Authentication,Production,"OU=Groups;DC=example;DC=com",LDAP base DN for group searches,Yes,String,Valid LDAP DN format,Confidential,Security Team,LDAP structure,Map groups to RBAC roles,[DATE]
-OAUTH_TIMEOUT,Authentication,All,86400,OAuth token timeout in seconds,Yes,Integer,3600-604800,Public,Security Team,None,24 hours default,[DATE]
-PROMETHEUS_RETENTION,Monitoring,Production,15d,Prometheus metrics retention period,Yes,String,Valid time duration,Public,Operations Team,Storage capacity,Balance retention vs storage cost,[DATE]
-ALERTMANAGER_CONFIG,Monitoring,Production,pagerduty,Alertmanager notification target,Yes,String,pagerduty|slack|email,Confidential,Operations Team,External service config,PagerDuty for production alerts,[DATE]
-PAGERDUTY_SERVICE_KEY,Monitoring,Production,[PAGERDUTY_SERVICE_KEY],PagerDuty integration service key,Yes,String,32-character hex string,Secret,Operations Team,PagerDuty account,Store in OpenShift Secret,[DATE]
-GRAFANA_ADMIN_PASSWORD,Monitoring,Production,[GRAFANA_ADMIN_PASSWORD],Grafana administrator password,Yes,String,Minimum 12 characters,Secret,Operations Team,None,Store in OpenShift Secret,[DATE]
-EFK_LOG_RETENTION,Logging,Production,7d,Elasticsearch log retention period,Yes,String,Valid time duration,Public,Operations Team,Storage capacity,7 days hot storage default,[DATE]
-ELASTICSEARCH_STORAGE,Logging,Production,500Gi,Elasticsearch storage per node,Yes,String,Valid storage size,Public,Operations Team,Storage class,Size based on log volume,[DATE]
-QUAY_HOSTNAME,Registry,Production,quay.apps.ocp-prod.example.com,Quay container registry hostname,Yes,String,Valid hostname,Public,Platform Team,OCP_BASE_DOMAIN,Internal registry for CI/CD,[DATE]
-QUAY_ADMIN_PASSWORD,Registry,Production,[QUAY_ADMIN_PASSWORD],Quay administrator password,Yes,String,Minimum 12 characters,Secret,Platform Team,None,Store in Quay config,[DATE]
-QUAY_STORAGE_SIZE,Registry,Production,1TB,Quay image storage capacity,Yes,String,Valid storage size,Public,Platform Team,Storage class,Size based on image count,[DATE]
-ARGOCD_ADMIN_PASSWORD,GitOps,Production,[ARGOCD_ADMIN_PASSWORD],ArgoCD administrator password,Yes,String,Minimum 12 characters,Secret,DevOps Team,None,Store in OpenShift Secret,[DATE]
-ARGOCD_REPO_URL,GitOps,Production,https://github.com/company/gitops-config,ArgoCD Git repository URL,Yes,String,Valid Git URL,Public,DevOps Team,Git access,Contains application manifests,[DATE]
-ARGOCD_REPO_CREDENTIALS,GitOps,Production,[GIT_TOKEN],Git repository authentication token,Yes,String,Valid token format,Secret,DevOps Team,Git PAT creation,Store in ArgoCD Secret,[DATE]
-TEKTON_DEFAULT_SA,Pipelines,All,pipeline,Default service account for Tekton pipelines,Yes,String,Valid SA name,Public,DevOps Team,RBAC configuration,Standard pipeline service account,[DATE]
-PIPELINE_TIMEOUT,Pipelines,All,1h,Default pipeline execution timeout,Yes,String,Valid time duration,Public,DevOps Team,None,Adjust based on build complexity,[DATE]
-ISTIO_ENABLED,ServiceMesh,Production,true,Enable Istio service mesh,Yes,Boolean,true|false,Public,Platform Team,None,Required for distributed tracing,[DATE]
-ISTIO_MTLS_MODE,ServiceMesh,Production,STRICT,Istio mutual TLS mode,Yes,String,STRICT|PERMISSIVE|DISABLE,Confidential,Security Team,Certificate management,STRICT for production security,[DATE]
-BACKUP_SCHEDULE,Operations,Production,0 2 * * *,ETCD backup schedule in cron format,Yes,String,Valid cron expression,Public,Operations Team,Storage for backups,Daily at 2 AM local time,[DATE]
-BACKUP_RETENTION,Operations,Production,30,Backup retention period in days,Yes,Integer,7-365,Public,Operations Team,Storage capacity,30 days for compliance,[DATE]
-
+#WIDTH: 25,15,35,25,25,25,45,10,12,16,20
+#ALIGN: left,left,left,left,left,left,left,center,left,center,left
+Parameter Name,Category,Description,Production,Test,DR,Validation Rules,Required,Data Type,Security Level,Notes
+ocp_cluster_name,Cluster,OpenShift cluster identifier,ocp-prod,ocp-test,ocp-dr,Max 63 chars lowercase alphanumeric,Yes,String,Public,Must be unique within DNS domain
+ocp_base_domain,Cluster,Base domain for cluster DNS and routing,example.com,example.com,example.com,Valid DNS domain format,Yes,String,Public,Wildcard DNS required for routes
+ocp_version,Cluster,Red Hat OpenShift Container Platform version,4.14.10,4.14.10,4.14.10,4.x.x format,Yes,String,Public,LTS version recommended for production
+ocp_api_endpoint,Cluster,OpenShift API server endpoint URL,https://api.ocp-prod.example.com:6443,https://api.ocp-test.example.com:6443,https://api.ocp-dr.example.com:6443,Valid HTTPS URL,Yes,String,Public,Load balanced endpoint
+ocp_console_url,Cluster,OpenShift web console URL,https://console-openshift-console.apps.ocp-prod.example.com,https://console-openshift-console.apps.ocp-test.example.com,https://console-openshift-console.apps.ocp-dr.example.com,Valid HTTPS URL,Yes,String,Public,User-facing dashboard
+control_plane_nodes,Cluster,Number of control plane (master) nodes,3,3,3,1|3|5,Yes,Integer,Public,Odd number for etcd quorum
+worker_nodes,Cluster,Number of worker nodes for workloads,3,2,3,Minimum 2,Yes,Integer,Public,Scale based on workload
+control_plane_cpu,Compute,vCPU cores per control plane node,8,4,8,Minimum 4,Yes,Integer,Public,8 cores for production
+control_plane_memory,Compute,Memory (GB) per control plane node,32,16,32,Minimum 16,Yes,Integer,Public,32GB minimum for production
+worker_node_cpu,Compute,vCPU cores per worker node,16,8,16,Minimum 4,Yes,Integer,Public,Size based on container density
+worker_node_memory,Compute,Memory (GB) per worker node,64,32,64,Minimum 8,Yes,Integer,Public,64GB for high-density workloads
+ocp_network_type,Network,OpenShift network plugin type,OVNKubernetes,OVNKubernetes,OVNKubernetes,OVNKubernetes|OpenShiftSDN,Yes,String,Public,OVN recommended for new clusters
+pod_network_cidr,Network,CIDR block for pod networking,10.128.0.0/14,10.128.0.0/14,10.128.0.0/14,Valid CIDR notation,Yes,String,Public,Default OpenShift pod network
+service_network_cidr,Network,CIDR block for service networking,172.30.0.0/16,172.30.0.0/16,172.30.0.0/16,Valid CIDR notation,Yes,String,Public,Default OpenShift service network
+cluster_network_mtu,Network,Maximum transmission unit for cluster,1400,1400,1400,1200-9000,Yes,Integer,Public,Adjust for overlay overhead
+odf_storage_size,Storage,Total ODF storage capacity,20TB,5TB,20TB,TB format,Yes,String,Public,Persistent volume storage pool
+storage_class_block,Storage,Storage class for block storage PVCs,ocs-storagecluster-ceph-rbd,ocs-storagecluster-ceph-rbd,ocs-storagecluster-ceph-rbd,Valid storage class name,Yes,String,Public,RBD for databases
+storage_class_file,Storage,Storage class for file storage PVCs,ocs-storagecluster-cephfs,ocs-storagecluster-cephfs,ocs-storagecluster-cephfs,Valid storage class name,Yes,String,Public,CephFS for shared file access
+ldap_enabled,Authentication,Enable LDAP/AD integration,true,false,true,true|false,Yes,Boolean,Public,SSO with enterprise directory
+ldap_url,Authentication,Corporate LDAP/AD server URL,ldaps://ldap.example.com:636,ldaps://ldap.example.com:636,ldaps://ldap.example.com:636,Valid LDAPS URL,Yes,String,Confidential,Use LDAPS for encryption
+ldap_bind_dn,Authentication,LDAP service account DN,CN=ocp-svc;OU=ServiceAccounts;DC=example;DC=com,CN=ocp-svc;OU=ServiceAccounts;DC=example;DC=com,CN=ocp-svc;OU=ServiceAccounts;DC=example;DC=com,Valid LDAP DN format,Yes,String,Confidential,Read-only service account
+ldap_user_search_base,Authentication,LDAP base DN for user searches,OU=Users;DC=example;DC=com,OU=Users;DC=example;DC=com,OU=Users;DC=example;DC=com,Valid LDAP DN format,Yes,String,Confidential,Scope users to specific OU
+ldap_group_search_base,Authentication,LDAP base DN for group searches,OU=Groups;DC=example;DC=com,OU=Groups;DC=example;DC=com,OU=Groups;DC=example;DC=com,Valid LDAP DN format,Yes,String,Confidential,Map groups to RBAC roles
+oauth_timeout,Authentication,OAuth token timeout in seconds,86400,86400,86400,3600-604800,Yes,Integer,Public,24 hours default
+prometheus_enabled,Monitoring,Enable Prometheus monitoring,true,true,true,true|false,Yes,Boolean,Public,Required for observability
+prometheus_retention,Monitoring,Prometheus metrics retention period,15d,7d,15d,Valid time duration,Yes,String,Public,Balance retention vs storage
+alertmanager_config,Monitoring,Alertmanager notification target,pagerduty,email,pagerduty,pagerduty|slack|email,Yes,String,Confidential,PagerDuty for production
+grafana_enabled,Monitoring,Enable Grafana dashboards,true,true,true,true|false,Yes,Boolean,Public,Visualization dashboards
+efk_enabled,Logging,Enable EFK logging stack,true,true,true,true|false,Yes,Boolean,Public,Centralized logging
+efk_log_retention,Logging,Elasticsearch log retention period,7d,3d,7d,Valid time duration,Yes,String,Public,7 days hot storage default
+elasticsearch_storage,Logging,Elasticsearch storage per node,500Gi,100Gi,500Gi,Valid storage size,Yes,String,Public,Size based on log volume
+quay_enabled,Registry,Enable Quay container registry,true,false,true,true|false,Yes,Boolean,Public,Internal registry for CI/CD
+quay_hostname,Registry,Quay container registry hostname,quay.apps.ocp-prod.example.com,quay.apps.ocp-test.example.com,quay.apps.ocp-dr.example.com,Valid hostname,Yes,String,Public,Internal registry
+quay_storage_size,Registry,Quay image storage capacity,1TB,100Gi,1TB,Valid storage size,Yes,String,Public,Size based on image count
+argocd_enabled,GitOps,Enable ArgoCD for GitOps,true,true,true,true|false,Yes,Boolean,Public,Declarative deployment
+argocd_repo_url,GitOps,ArgoCD Git repository URL,https://github.com/company/gitops-config,https://github.com/company/gitops-config,https://github.com/company/gitops-config,Valid Git URL,Yes,String,Public,Application manifests
+tekton_enabled,Pipelines,Enable OpenShift Pipelines,true,true,true,true|false,Yes,Boolean,Public,Cloud-native CI/CD
+tekton_default_sa,Pipelines,Default service account for pipelines,pipeline,pipeline,pipeline,Valid SA name,Yes,String,Public,Standard pipeline SA
+pipeline_timeout,Pipelines,Default pipeline execution timeout,1h,1h,1h,Valid time duration,Yes,String,Public,Adjust based on complexity
+istio_enabled,ServiceMesh,Enable Istio service mesh,true,false,true,true|false,Yes,Boolean,Public,Required for distributed tracing
+istio_mtls_mode,ServiceMesh,Istio mutual TLS mode,STRICT,PERMISSIVE,STRICT,STRICT|PERMISSIVE|DISABLE,Yes,String,Confidential,STRICT for production
+backup_enabled,Operations,Enable automated backups,true,false,true,true|false,Yes,Boolean,Public,Platform data protection
+backup_schedule,Operations,ETCD backup schedule in cron format,0 2 * * *,0 2 * * *,0 2 * * *,Valid cron expression,Yes,String,Public,Daily at 2 AM local time
+backup_retention,Operations,Backup retention period in days,30,7,30,7-365,Yes,Integer,Public,30 days for compliance

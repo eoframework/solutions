@@ -1,0 +1,24 @@
+#------------------------------------------------------------------------------
+# Fabric Configuration
+#------------------------------------------------------------------------------
+# Generated from configuration.csv
+#
+# To regenerate: python generate-ansible-vars.py /path/to/solution
+# DO NOT EDIT - Changes will be overwritten on regeneration
+#------------------------------------------------------------------------------
+
+fabric:
+  spine:
+    switch_model: "Z9432F-ON"
+    switch_count: 4
+    port_config: "100GbE"
+  leaf:
+    switch_model: "S5248F-ON"
+    switch_count: 40
+    uplink_count: 4
+    server_port_count: 48
+  capacity:
+    total_server_ports: 1920
+    bandwidth_tbps: 1.6
+  performance:
+    east_west_latency_us: 2

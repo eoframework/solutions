@@ -1,0 +1,17 @@
+#------------------------------------------------------------------------------
+# User Base Configuration
+#------------------------------------------------------------------------------
+# Generated from configuration.csv
+#
+# To regenerate: python generate-ansible-vars.py /path/to/solution
+# DO NOT EDIT - Changes will be overwritten on regeneration
+#------------------------------------------------------------------------------
+
+users:
+  count: 500
+  yubikey_model: "YubiKey 5 NFC"
+  yubikey_quantity: 525
+  admin_yubikey_count: 10
+  enrollment:
+    portal_url: "https://enroll.company.com"
+    session_timeout: 300

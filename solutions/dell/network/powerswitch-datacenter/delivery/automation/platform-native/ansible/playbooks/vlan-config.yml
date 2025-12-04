@@ -1,0 +1,87 @@
+# Dell PowerSwitch Datacenter - VLAN Configuration
+# EO Framework - Dell Network Solutions
+# Configures VLANs across the fabric
+
+---
+- name: Configure VLANs
+  hosts: leaf_switches
+  gather_facts: false
+  tags: [vlan]
+
+  tasks:
+    #=========================================================================
+    # CREATE VLANS
+    #=========================================================================
+    - name: Create VLANs
+      dellemc.os10.os10_config:
+        lines:
+          - "interface vlan {{ item.id }}"
+          - " description {{ item.description }}"
+          - " no shutdown"
+      loop: "{{ vlans | default([]) }}"
+      tags: [vlan-create]
+
+    #=========================================================================
+    # CONFIGURE SVI INTERFACES
+    #=========================================================================
+    - name: Configure SVI interfaces with anycast gateway
+      dellemc.os10.os10_config:
+        lines:
+          - "interface vlan {{ item.id }}"
+          - " ip address {{ item.gateway }}"
+          - " ip virtual-router address {{ item.gateway | regex_replace('/.*', '') }}"
+          - " no shutdown"
+      loop: "{{ vlans | default([]) }}"
+      when: item.gateway is defined
+      tags: [svi]
+
+    #=========================================================================
+    # VXLAN VNI MAPPING (if enabled)
+    #=========================================================================
+    - name: Map VLANs to VNIs
+      dellemc.os10.os10_config:
+        lines:
+          - "interface nve1"
+          - " member vni {{ evpn.vni_range_start | int + item.id | int }}"
+          - "  vlan {{ item.id }}"
+          - "  ingress-replication"
+      loop: "{{ vlans | default([]) }}"
+      when: evpn.enabled | default(false)
+      tags: [vxlan-vni]
+
+    #=========================================================================
+    # TRUNK CONFIGURATION
+    #=========================================================================
+    - name: Configure trunk ports with all VLANs
+      dellemc.os10.os10_config:
+        lines:
+          - "interface ethernet1/1/{{ item }}"
+          - " switchport trunk allowed vlan {{ vlans | map(attribute='id') | join(',') }}"
+      loop: "{{ range(1, 49) | list }}"
+      tags: [trunk]
+
+    #=========================================================================
+    # SAVE CONFIGURATION
+    #=========================================================================
+    - name: Save running configuration
+      dellemc.os10.os10_config:
+        save: true
+      tags: [save]
+
+    #=========================================================================
+    # VERIFICATION
+    #=========================================================================
+    - name: Verify VLAN configuration
+      dellemc.os10.os10_command:
+        commands:
+          - show vlan brief
+      register: vlan_verification
+      tags: [verify]
+
+    - name: Display VLAN verification
+      ansible.builtin.debug:
+        msg: |
+          Switch: {{ inventory_hostname }}
+          VLANs configured: {{ vlans | length }}
+          {{ vlan_verification.stdout[0] }}
+      tags: [verify]

@@ -1,0 +1,27 @@
+---
+#------------------------------------------------------------------------------
+# Ansible Galaxy Requirements - Cisco HyperFlex Hybrid Infrastructure
+#------------------------------------------------------------------------------
+# Install with: ansible-galaxy install -r requirements.yml
+#------------------------------------------------------------------------------
+
+collections:
+  # Cisco Intersight Collection - Cloud management
+  - name: cisco.intersight
+    version: ">=1.0.0"
+    source: https://galaxy.ansible.com
+
+  # Cisco UCS Collection - Fabric Interconnect and compute
+  - name: cisco.ucs
+    version: ">=1.0.0"
+    source: https://galaxy.ansible.com
+
+  # VMware Collection - vSphere integration
+  - name: community.vmware
+    version: ">=3.0.0"
+    source: https://galaxy.ansible.com
+
+  # Ansible Utils
+  - name: ansible.utils
+    version: ">=2.9.0"
+    source: https://galaxy.ansible.com

@@ -1,0 +1,65 @@
+---
+#------------------------------------------------------------------------------
+# Phase 4: Operations - Monitoring and Logging
+#------------------------------------------------------------------------------
+
+- name: Phase 4 - Operations Configuration
+  hosts: localhost
+  gather_facts: yes
+  vars_files:
+    - ../vars/generated/project.yml
+    - ../vars/generated/monitoring.yml
+    - ../vars/generated/logging.yml
+    - ../vars/generated/notifications.yml
+    - ../vars/generated/operations.yml
+    - ../vars/secrets.yml
+
+  pre_tasks:
+    - name: Display phase information
+      ansible.builtin.debug:
+        msg:
+          - "=============================================="
+          - "Phase 4: Operations Configuration"
+          - "=============================================="
+          - "- Prometheus metrics collection"
+          - "- Grafana dashboard provisioning"
+          - "- Splunk log forwarding"
+          - "- Alert notification channels"
+          - "=============================================="
+
+  roles:
+    - role: prometheus-config
+      tags: [prometheus, metrics]
+    - role: grafana-dashboards
+      tags: [grafana, visualization]
+    - role: splunk-integration
+      tags: [splunk, logging]
+    - role: alerting-setup
+      tags: [alerts, notifications]
+
+  post_tasks:
+    - name: Verify Prometheus connectivity
+      ansible.builtin.uri:
+        url: "{{ monitoring.prometheus_url }}/-/healthy"
+        method: GET
+        validate_certs: true
+        status_code: 200
+        timeout: 30
+      register: prometheus_check
+      ignore_errors: yes
+
+    - name: Verify Grafana connectivity
+      ansible.builtin.uri:
+        url: "{{ monitoring.grafana_url }}/api/health"
+        method: GET
+        validate_certs: true
+        status_code: 200
+        timeout: 30
+      register: grafana_check
+      ignore_errors: yes
+
+    - name: Operations health summary
+      ansible.builtin.debug:
+        msg:
+          - "Prometheus: {{ 'HEALTHY' if prometheus_check is succeeded else 'CHECK REQUIRED' }}"
+          - "Grafana: {{ 'HEALTHY' if grafana_check is succeeded else 'CHECK REQUIRED' }}"

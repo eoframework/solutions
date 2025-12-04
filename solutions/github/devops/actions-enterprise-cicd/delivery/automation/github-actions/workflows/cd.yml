@@ -1,0 +1,128 @@
+name: CD Pipeline
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Target environment'
+        required: true
+        type: choice
+        options:
+          - production
+          - staging
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  #=============================================================================
+  # Deploy to Environment
+  #=============================================================================
+  deploy:
+    name: Deploy to ${{ inputs.environment || 'production' }}
+    runs-on: self-hosted
+    environment: ${{ inputs.environment || 'production' }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Configure AWS credentials via OIDC
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ secrets.AWS_DEPLOY_ROLE }}
+          aws-region: ${{ vars.AWS_REGION }}
+          role-session-name: GitHubActions-${{ github.run_id }}
+
+      - name: Download build artifacts
+        uses: actions/download-artifact@v3
+        with:
+          name: build-${{ github.sha }}
+          path: dist/
+
+      - name: Login to Amazon ECR
+        id: ecr-login
+        uses: aws-actions/amazon-ecr-login@v2
+
+      - name: Build and push Docker image
+        env:
+          ECR_REGISTRY: ${{ steps.ecr-login.outputs.registry }}
+          ECR_REPOSITORY: ${{ github.event.repository.name }}
+          IMAGE_TAG: ${{ github.sha }}
+        run: |
+          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
+          docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+          docker tag $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG $ECR_REGISTRY/$ECR_REPOSITORY:latest
+          docker push $ECR_REGISTRY/$ECR_REPOSITORY:latest
+
+      - name: Update EKS kubeconfig
+        run: |
+          aws eks update-kubeconfig \
+            --name ${{ vars.EKS_CLUSTER_NAME }} \
+            --region ${{ vars.AWS_REGION }}
+
+      - name: Deploy to Kubernetes
+        env:
+          IMAGE_TAG: ${{ github.sha }}
+        run: |
+          kubectl set image deployment/${{ github.event.repository.name }} \
+            app=${{ steps.ecr-login.outputs.registry }}/${{ github.event.repository.name }}:$IMAGE_TAG \
+            --namespace=${{ inputs.environment || 'production' }}
+
+          kubectl rollout status deployment/${{ github.event.repository.name }} \
+            --namespace=${{ inputs.environment || 'production' }} \
+            --timeout=5m
+
+      - name: Run smoke tests
+        run: |
+          # Add smoke test commands here
+          echo "Running smoke tests..."
+
+      - name: Send deployment notification
+        if: always()
+        uses: slackapi/slack-github-action@v1
+        with:
+          webhook: ${{ secrets.SLACK_WEBHOOK_URL }}
+          payload: |
+            {
+              "text": "Deployment ${{ job.status }}",
+              "blocks": [
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": "*Deployment: ${{ job.status }}*\n*Environment:* ${{ inputs.environment || 'production' }}\n*Repository:* ${{ github.repository }}\n*Commit:* ${{ github.sha }}\n*Deployed by:* ${{ github.actor }}"
+                  }
+                }
+              ]
+            }
+
+  #=============================================================================
+  # Post-Deployment Validation
+  #=============================================================================
+  validate:
+    name: Validate Deployment
+    runs-on: self-hosted
+    needs: deploy
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ secrets.AWS_DEPLOY_ROLE }}
+          aws-region: ${{ vars.AWS_REGION }}
+
+      - name: Run health checks
+        run: |
+          # Add health check commands
+          echo "Running health checks..."
+
+      - name: Send validation results
+        if: always()
+        run: |
+          echo "Deployment validation: ${{ job.status }}"

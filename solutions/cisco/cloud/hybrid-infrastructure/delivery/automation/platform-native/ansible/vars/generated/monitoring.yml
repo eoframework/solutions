@@ -1,0 +1,12 @@
+#------------------------------------------------------------------------------
+# Monitoring Configuration
+#------------------------------------------------------------------------------
+# Generated from configuration.csv on 2025-12-02 23:53:44
+#
+# To regenerate: python generate-ansible-vars.py /path/to/solution
+# DO NOT EDIT - Changes will be overwritten on regeneration
+#------------------------------------------------------------------------------
+
+monitoring:
+  snmp_community: '{{ vault_snmp_community }}'
+  syslog_server: 10.100.3.10

@@ -1,0 +1,71 @@
+---
+#------------------------------------------------------------------------------
+# Cisco DNA Center Network Analytics - Master Playbook
+#------------------------------------------------------------------------------
+# This is the main orchestration playbook that imports all phase playbooks.
+#
+# Usage:
+#   Full deployment:   ansible-playbook playbooks/site.yml
+#   Specific phase:    ansible-playbook playbooks/01-foundation.yml
+#   With vault:        ansible-playbook playbooks/site.yml --ask-vault-pass
+#
+# Tags:
+#   foundation     - Phase 1: Initial DNA Center setup
+#   discovery      - Phase 1: Device discovery and inventory
+#   policies       - Phase 2: Policy and template deployment
+#   integration    - Phase 2: External system integrations
+#   validation     - Phase 3: Go-live validation and testing
+#------------------------------------------------------------------------------
+
+- name: DNA Center Network Analytics - Full Deployment
+  hosts: localhost
+  gather_facts: no
+
+  vars_files:
+    - "{{ playbook_dir }}/../vars/generated/project.yml"
+    - "{{ playbook_dir }}/../vars/generated/dnac.yml"
+    - "{{ playbook_dir }}/../vars/secrets.yml"
+
+  pre_tasks:
+    - name: Display deployment information
+      ansible.builtin.debug:
+        msg: |
+          ============================================================
+          DNA Center Network Analytics Deployment
+          ============================================================
+          Solution: {{ solution.name }}
+          DNA Center: {{ dnac.fqdn }} ({{ dnac.vip }})
+          Target Devices: {{ deployment.production_device_count }}
+          ============================================================
+
+    - name: Verify DNA Center connectivity
+      ansible.builtin.uri:
+        url: "https://{{ dnac.vip }}/dna/system/api/v1/auth/token"
+        method: POST
+        user: "{{ dnac.admin_user }}"
+        password: "{{ vault_dnac_admin_password }}"
+        force_basic_auth: yes
+        validate_certs: "{{ dnac.ssl_verify }}"
+        status_code: 200
+      register: dnac_auth
+      tags: [always]
+
+- name: Phase 1 - Foundation
+  ansible.builtin.import_playbook: 01-foundation.yml
+  tags: [foundation]
+
+- name: Phase 1 - Discovery
+  ansible.builtin.import_playbook: 02-discovery.yml
+  tags: [discovery]
+
+- name: Phase 2 - Policies
+  ansible.builtin.import_playbook: 03-policies.yml
+  tags: [policies]
+
+- name: Phase 2 - Integration
+  ansible.builtin.import_playbook: 04-integration.yml
+  tags: [integration]
+
+- name: Phase 3 - Validation
+  ansible.builtin.import_playbook: 05-validation.yml
+  tags: [validation]

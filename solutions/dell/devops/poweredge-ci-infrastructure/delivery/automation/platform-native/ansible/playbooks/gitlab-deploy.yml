@@ -1,0 +1,135 @@
+# Dell PowerEdge CI Infrastructure - GitLab Deployment
+# EO Framework - Dell DevOps Solutions
+# Deploys GitLab servers and database infrastructure
+
+---
+- name: GitLab Infrastructure Deployment
+  hosts: localhost
+  gather_facts: true
+  tags: [always]
+
+  tasks:
+    - name: Display GitLab deployment banner
+      ansible.builtin.debug:
+        msg: |
+          ================================================================
+          GitLab Infrastructure Deployment
+          ================================================================
+          GitLab Version: {{ gitlab.version }}
+          HA Enabled: {{ gitlab.ha_enabled }}
+          Server Count: {{ groups['gitlab_servers'] | default([]) | length }}
+          ================================================================
+
+#=============================================================================
+# DATABASE LAYER
+#=============================================================================
+- name: "DATABASE: PostgreSQL Database Setup"
+  hosts: database_servers
+  become: true
+  gather_facts: true
+  tags: [database, postgres]
+
+  pre_tasks:
+    - name: Display database configuration
+      ansible.builtin.debug:
+        msg: |
+          Configuring {{ inventory_hostname }}
+          Role: {{ db_role | default('standalone') }}
+          PostgreSQL Version: {{ postgres_version }}
+          Patroni Enabled: {{ patroni_enabled | default(false) }}
+
+    - name: Update package cache
+      ansible.builtin.apt:
+        update_cache: yes
+        cache_valid_time: 3600
+      when: ansible_os_family == "Debian"
+
+    - name: Update package cache (RHEL)
+      ansible.builtin.yum:
+        update_cache: yes
+      when: ansible_os_family == "RedHat"
+
+  tasks:
+    - name: Install PostgreSQL dependencies
+      ansible.builtin.package:
+        name:
+          - postgresql
+          - postgresql-contrib
+          - python3-psycopg2
+        state: present
+
+    - name: Create GitLab database user
+      community.postgresql.postgresql_user:
+        name: gitlab
+        password: "{{ gitlab_db_password | default('changeme') }}"
+        state: present
+      become_user: postgres
+      when: db_role == "primary" or db_role == "standalone"
+
+    - name: Create GitLab database
+      community.postgresql.postgresql_db:
+        name: gitlabhq_production
+        owner: gitlab
+        encoding: UTF-8
+        state: present
+      become_user: postgres
+      when: db_role == "primary" or db_role == "standalone"
+
+#=============================================================================
+# GITLAB APPLICATION LAYER
+#=============================================================================
+- name: "APPLICATION: GitLab Server Setup"
+  hosts: gitlab_servers
+  become: true
+  gather_facts: true
+  tags: [gitlab, application]
+  roles:
+    - role: gitlab-server
+
+  pre_tasks:
+    - name: Display GitLab server configuration
+      ansible.builtin.debug:
+        msg: |
+          Configuring {{ inventory_hostname }}
+          Role: {{ gitlab_role | default('standalone') }}
+          GitLab Version: {{ gitlab.version }}
+          External URL: {{ gitlab.external_url }}
+
+  post_tasks:
+    - name: Wait for GitLab to be ready
+      ansible.builtin.uri:
+        url: "{{ gitlab.external_url }}/-/health"
+        status_code: 200
+        validate_certs: no
+      register: result
+      until: result.status == 200
+      retries: 30
+      delay: 10
+      when: gitlab_role == "primary" or gitlab_role == "standalone"
+
+    - name: Display GitLab access information
+      ansible.builtin.debug:
+        msg: |
+          GitLab is ready!
+          URL: {{ gitlab.external_url }}
+          Initial root password: Check /etc/gitlab/initial_root_password
+      when: gitlab_role == "primary" or gitlab_role == "standalone"
+
+#=============================================================================
+# SUMMARY
+#=============================================================================
+- name: GitLab Deployment Summary
+  hosts: localhost
+  gather_facts: false
+  tags: [always]
+
+  tasks:
+    - name: Display deployment summary
+      ansible.builtin.debug:
+        msg: |
+          ================================================================
+          GitLab Deployment Complete
+          ================================================================
+          Database Servers: {{ groups['database_servers'] | default([]) | length }}
+          GitLab Servers: {{ groups['gitlab_servers'] | default([]) | length }}
+          ================================================================

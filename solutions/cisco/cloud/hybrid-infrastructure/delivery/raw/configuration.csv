@@ -1,53 +1,66 @@
-#WIDTH: 28,18,12,30,48,10,12,33,16,18,24,42,12
-#ALIGN: left,left,center,left,left,center,left,left,center,left,left,left,center
-Parameter Name,Category,Environment,Default Value,Description,Required,Data Type,Validation Rules,Security Level,Owner Team,Dependencies,Notes,Last Updated
-HX_CLUSTER_NAME,HyperFlex,All,hx-cluster-prod,HyperFlex cluster identifier,Yes,String,Alphanumeric max 32 chars,Public,HCI Team,None,Used in Intersight and vCenter,[DATE]
-HX_NODE_COUNT,HyperFlex,All,4,Number of HyperFlex nodes in cluster,Yes,Integer,3-8 for standard cluster,Public,HCI Team,Capacity planning,Per SOW scope,[DATE]
-HX_NODE_MODEL,HyperFlex,All,HX240c M5,HyperFlex node hardware model,Yes,String,Valid HX model,Public,HCI Team,Hardware procurement,All-flash NVMe configuration,[DATE]
-HX_REPLICATION_FACTOR,HyperFlex,All,3,Data replication factor for protection,Yes,Integer,2-3,Public,HCI Team,Storage capacity,RF3 for production workloads,[DATE]
-HX_USABLE_CAPACITY_TB,HyperFlex,All,20,Usable storage capacity in TB,Yes,Integer,Based on cluster size,Public,HCI Team,Node count,After dedup/compression,[DATE]
-HX_DEDUP_ENABLED,HyperFlex,All,true,Enable inline deduplication,Yes,Boolean,true|false,Public,HCI Team,None,Improves storage efficiency,[DATE]
-HX_COMPRESSION_ENABLED,HyperFlex,All,true,Enable inline compression,Yes,Boolean,true|false,Public,HCI Team,None,Improves storage efficiency,[DATE]
-HX_MGMT_IP,HyperFlex,All,10.100.1.20,HyperFlex cluster management IP,Yes,String,Valid IPv4 address,Confidential,HCI Team,Network connectivity,Management VLAN access,[DATE]
-HX_DATA_IP_RANGE,HyperFlex,All,10.100.10.0/24,HyperFlex data network IP range,Yes,String,Valid CIDR notation,Confidential,HCI Team,Network design,Storage traffic network,[DATE]
-FI_PRIMARY_IP,Fabric Interconnect,All,10.100.1.10,UCS Fabric Interconnect A IP,Yes,String,Valid IPv4 address,Confidential,Network Team,Network connectivity,Management interface,[DATE]
-FI_SECONDARY_IP,Fabric Interconnect,All,10.100.1.11,UCS Fabric Interconnect B IP,Yes,String,Valid IPv4 address,Confidential,Network Team,Network connectivity,HA pair,[DATE]
-FI_MODEL,Fabric Interconnect,All,UCS 6454,Fabric Interconnect model,Yes,String,Valid FI model,Public,Network Team,Hardware procurement,48x25GbE + 6x100GbE,[DATE]
-FI_CLUSTER_MODE,Fabric Interconnect,All,cluster,FI clustering mode,Yes,String,standalone|cluster,Public,Network Team,High availability,Always cluster for HA,[DATE]
-FI_UPLINK_SPEED,Fabric Interconnect,All,25GbE,Uplink port speed to network,Yes,String,10GbE|25GbE|100GbE,Public,Network Team,Network capacity,Match upstream switches,[DATE]
-INTERSIGHT_ENDPOINT,Cisco Intersight,All,intersight.com,Cisco Intersight cloud endpoint,Yes,String,Valid FQDN,Public,HCI Team,Internet connectivity,SaaS management portal,[DATE]
-INTERSIGHT_ACCOUNT_ID,Cisco Intersight,All,[account-id],Intersight account identifier,Yes,String,Valid account ID,Confidential,HCI Team,Account creation,From Intersight portal,[DATE]
-INTERSIGHT_API_KEY,Cisco Intersight,All,[api-key],Intersight API authentication key,Yes,String,Valid API key format,Secret,HCI Team,INTERSIGHT_ACCOUNT_ID,For automation,[DATE]
-INTERSIGHT_CLAIM_CODE,Cisco Intersight,All,[claim-code],Device connector claim code,Yes,String,Valid claim code,Secret,HCI Team,Device registration,One-time use,[DATE]
-VCENTER_FQDN,VMware,All,vcenter.client.local,vCenter Server FQDN,Yes,String,Valid FQDN,Confidential,Virtualization Team,DNS configuration,SSO domain,[DATE]
-VCENTER_IP,VMware,All,10.100.1.30,vCenter Server IP address,Yes,String,Valid IPv4 address,Confidential,Virtualization Team,Network connectivity,Management network,[DATE]
-VCENTER_VERSION,VMware,All,8.0 U2,vCenter Server version,Yes,String,8.x version,Public,Virtualization Team,Compatibility,Latest supported,[DATE]
-VCENTER_ADMIN_USER,VMware,All,administrator@vsphere.local,vCenter SSO admin username,Yes,String,Valid SSO user,Confidential,Virtualization Team,SSO configuration,Initial admin,[DATE]
-ESXI_VERSION,VMware,All,8.0 U2,ESXi hypervisor version,Yes,String,8.x version,Public,Virtualization Team,VCENTER_VERSION,Match vCenter,[DATE]
-VMWARE_LICENSE_KEY,VMware,All,[license-key],VMware Enterprise Plus license,Yes,String,Valid license format,Secret,Virtualization Team,License procurement,Per SOW scope,[DATE]
-VMWARE_HA_ENABLED,VMware,All,true,Enable vSphere High Availability,Yes,Boolean,true|false,Public,Virtualization Team,Cluster created,Required for resilience,[DATE]
-VMWARE_DRS_ENABLED,VMware,All,true,Enable Distributed Resource Scheduler,Yes,Boolean,true|false,Public,Virtualization Team,VMWARE_HA_ENABLED,Load balancing,[DATE]
-VMWARE_DRS_LEVEL,VMware,All,FullyAutomated,DRS automation level,Yes,String,Manual|PartiallyAutomated|FullyAutomated,Public,Virtualization Team,VMWARE_DRS_ENABLED,Automatic vMotion,[DATE]
-VEEAM_SERVER_IP,Backup,All,10.100.1.40,Veeam Backup Server IP,Yes,String,Valid IPv4 address,Confidential,Backup Team,Network connectivity,Backup infrastructure,[DATE]
-VEEAM_VERSION,Backup,All,12.0,Veeam Backup version,Yes,String,Valid version,Public,Backup Team,Compatibility,HyperFlex plugin support,[DATE]
-VEEAM_RETENTION_DAILY,Backup,All,30,Daily backup retention in days,Yes,Integer,7-90,Public,Backup Team,Storage planning,Per SOW scope,[DATE]
-VEEAM_RETENTION_MONTHLY,Backup,All,12,Monthly backup retention in months,Yes,Integer,6-24,Public,Backup Team,Compliance,Long-term retention,[DATE]
-VEEAM_BACKUP_WINDOW,Backup,All,22:00-06:00,Backup window in 24-hour format,Yes,String,HH:MM-HH:MM format,Public,Backup Team,Business hours,Off-peak hours,[DATE]
-AD_SERVER_PRIMARY,Active Directory,All,10.100.2.10,Primary AD server IP,Yes,String,Valid IPv4 address,Confidential,Security Team,Network connectivity,LDAP authentication,[DATE]
-AD_SERVER_SECONDARY,Active Directory,All,10.100.2.11,Secondary AD server IP,No,String,Valid IPv4 address,Confidential,Security Team,Network connectivity,Failover,[DATE]
-AD_DOMAIN,Active Directory,All,client.local,Active Directory domain name,Yes,String,Valid domain format,Confidential,Security Team,None,User authentication,[DATE]
-AD_SERVICE_ACCOUNT,Active Directory,All,svc_vcenter_ldap,AD service account for vCenter,Yes,String,Valid username,Confidential,Security Team,AD account created,Read access to AD,[DATE]
-NTP_SERVER_PRIMARY,Infrastructure,All,10.100.4.10,Primary NTP server IP,Yes,String,Valid IPv4 address,Confidential,Infrastructure Team,Network connectivity,Time sync critical,[DATE]
-NTP_SERVER_SECONDARY,Infrastructure,All,10.100.4.11,Secondary NTP server IP,No,String,Valid IPv4 address,Confidential,Infrastructure Team,Network connectivity,NTP failover,[DATE]
-DNS_SERVER_PRIMARY,Infrastructure,All,10.100.5.10,Primary DNS server IP,Yes,String,Valid IPv4 address,Confidential,Infrastructure Team,Network connectivity,Name resolution,[DATE]
-DNS_SERVER_SECONDARY,Infrastructure,All,10.100.5.11,Secondary DNS server IP,No,String,Valid IPv4 address,Confidential,Infrastructure Team,Network connectivity,DNS failover,[DATE]
-MGMT_VLAN_ID,Network,All,100,Management VLAN ID,Yes,Integer,1-4094,Public,Network Team,Switch configuration,Management traffic,[DATE]
-VMOTION_VLAN_ID,Network,All,101,vMotion VLAN ID,Yes,Integer,1-4094,Public,Network Team,Switch configuration,Live migration traffic,[DATE]
-STORAGE_VLAN_ID,Network,All,102,Storage VLAN ID,Yes,Integer,1-4094,Public,Network Team,Switch configuration,HyperFlex data traffic,[DATE]
-VM_NETWORK_VLAN_RANGE,Network,All,200-250,VM network VLAN range,Yes,String,VLAN range format,Public,Network Team,Switch configuration,Guest VM networks,[DATE]
-SYSLOG_SERVER,Monitoring,All,10.100.3.10,Centralized syslog server IP,Yes,String,Valid IPv4 address,Confidential,Operations Team,Network connectivity,Log aggregation,[DATE]
-SNMP_COMMUNITY,Monitoring,All,[snmp-community],SNMP community string,Yes,String,Min 8 characters,Secret,Operations Team,SNMP configuration,Monitoring access,[DATE]
-SMTP_SERVER,Notifications,All,smtp.client.local,SMTP server for notifications,Yes,String,Valid hostname or IP,Confidential,Infrastructure Team,SMTP relay,Alert notifications,[DATE]
-ALERT_EMAIL_RECIPIENTS,Notifications,All,infra-ops@client.local,Email recipients for alerts,Yes,String,Valid email addresses,Confidential,Operations Team,None,NOC distribution,[DATE]
-CISCO_SMARTNET_CONTRACT,Support,All,[contract-number],Cisco SmartNet contract number,Yes,String,Valid contract ID,Confidential,Support Team,Vendor relationship,24x7 support,[DATE]
-VMWARE_SUPPORT_CONTRACT,Support,All,[contract-number],VMware support contract number,Yes,String,Valid contract ID,Confidential,Support Team,Vendor relationship,Production support,[DATE]
+#WIDTH:  45,14,50,50,50,50,45,8,12,27,14,14,12,30,12
+#ALIGN:  left,left,left,left,left,left,left,center,left,left,center,left,left,left,center
+Parameter Name,Category,Production,Test,DR,Description,Required,Data Type,Validation Rules,Security Level,Owner Team,Dependencies,Notes,Last Updated
+solution.name,Project,cisco-hyperflex-hybrid-infrastructure,cisco-hyperflex-hybrid-infrastructure,cisco-hyperflex-hybrid-infrastructure,Solution name for resource naming,Yes,String,Valid string value,Public,Development,,HyperFlex HCI solution,2025-12-01
+solution.abbr,Project,hx,hx,hx,Solution abbreviation (3-4 chars),Yes,String,3-4 alphanumeric,Public,Development,,Used in resource naming prefix,2025-12-01
+solution.provider_name,Project,cisco,cisco,cisco,Provider organization name,Yes,String,Valid string value,Public,Development,,Cisco provider,2025-12-01
+solution.category_name,Project,cloud,cloud,cloud,Solution category,Yes,String,Valid string value,Public,Development,,Cloud/HCI category,2025-12-01
+hyperflex.cluster_name,HyperFlex,hx-cluster-prod,hx-cluster-test,hx-cluster-dr,HyperFlex cluster identifier,Yes,String,Alphanumeric max 32 chars,Public,HCI Team,,Used in Intersight and vCenter,2025-12-01
+hyperflex.node_count,HyperFlex,4,3,4,Number of HyperFlex nodes in cluster,Yes,Integer,3-8,Public,HCI Team,Capacity planning,Per SOW scope,2025-12-01
+hyperflex.node_model,HyperFlex,HX240c M5,HX220c M5,HX240c M5,HyperFlex node hardware model,Yes,String,Valid HX model,Public,HCI Team,Hardware procurement,All-flash NVMe configuration,2025-12-01
+hyperflex.replication_factor,HyperFlex,3,3,3,Data replication factor for protection,Yes,Integer,2-3,Public,HCI Team,Storage capacity,RF3 for production workloads,2025-12-01
+hyperflex.usable_capacity_tb,HyperFlex,20,10,20,Usable storage capacity in TB,Yes,Integer,Based on cluster size,Public,HCI Team,Node count,After dedup/compression,2025-12-01
+hyperflex.dedup_enabled,HyperFlex,true,true,true,Enable inline deduplication,Yes,Boolean,true|false,Public,HCI Team,,Improves storage efficiency,2025-12-01
+hyperflex.compression_enabled,HyperFlex,true,true,true,Enable inline compression,Yes,Boolean,true|false,Public,HCI Team,,Improves storage efficiency,2025-12-01
+hyperflex.mgmt_ip,HyperFlex,10.100.1.20,10.101.1.20,10.102.1.20,HyperFlex cluster management IP,Yes,String,Valid IPv4 address,Confidential,HCI Team,Network connectivity,Management VLAN access,2025-12-01
+hyperflex.data_ip_range,HyperFlex,10.100.10.0/24,10.101.10.0/24,10.102.10.0/24,HyperFlex data network IP range,Yes,String,Valid CIDR notation,Confidential,HCI Team,Network design,Storage traffic network,2025-12-01
+hyperflex.admin_user,HyperFlex,hxadmin,hxadmin,hxadmin,HyperFlex administrative username,Yes,String,Valid username,Confidential,HCI Team,,Initial admin,2025-12-01
+hyperflex.admin_password,HyperFlex,[vault:hyperflex_admin_password_prod],[vault:hyperflex_admin_password_test],[vault:hyperflex_admin_password_dr],HyperFlex admin password,Yes,String,Min 12 characters,Secret,Security Team,,Stored in Ansible Vault,2025-12-01
+fabric_interconnect.primary_ip,Fabric Interconnect,10.100.1.10,10.101.1.10,10.102.1.10,UCS Fabric Interconnect A IP,Yes,String,Valid IPv4 address,Confidential,Network Team,Network connectivity,Management interface,2025-12-01
+fabric_interconnect.secondary_ip,Fabric Interconnect,10.100.1.11,10.101.1.11,10.102.1.11,UCS Fabric Interconnect B IP,Yes,String,Valid IPv4 address,Confidential,Network Team,Network connectivity,HA pair,2025-12-01
+fabric_interconnect.model,Fabric Interconnect,UCS 6454,UCS 6454,UCS 6454,Fabric Interconnect model,Yes,String,Valid FI model,Public,Network Team,Hardware procurement,48x25GbE + 6x100GbE,2025-12-01
+fabric_interconnect.cluster_mode,Fabric Interconnect,cluster,cluster,cluster,FI clustering mode,Yes,String,standalone|cluster,Public,Network Team,High availability,Always cluster for HA,2025-12-01
+fabric_interconnect.uplink_speed,Fabric Interconnect,25GbE,10GbE,25GbE,Uplink port speed to network,Yes,String,10GbE|25GbE|100GbE,Public,Network Team,Network capacity,Match upstream switches,2025-12-01
+fabric_interconnect.admin_password,Fabric Interconnect,[vault:fi_admin_password_prod],[vault:fi_admin_password_test],[vault:fi_admin_password_dr],Fabric Interconnect admin password,Yes,String,Min 12 characters,Secret,Security Team,,Stored in Ansible Vault,2025-12-01
+intersight.endpoint,Cisco Intersight,intersight.com,intersight.com,intersight.com,Cisco Intersight cloud endpoint,Yes,String,Valid FQDN,Public,HCI Team,Internet connectivity,SaaS management portal,2025-12-01
+intersight.account_id,Cisco Intersight,[account-id-prod],[account-id-test],[account-id-dr],Intersight account identifier,Yes,String,Valid account ID,Confidential,HCI Team,Account creation,From Intersight portal,2025-12-01
+intersight.api_key,Cisco Intersight,[vault:intersight_api_key_prod],[vault:intersight_api_key_test],[vault:intersight_api_key_dr],Intersight API authentication key,Yes,String,Valid API key format,Secret,HCI Team,intersight.account_id,For automation,2025-12-01
+intersight.secret_key,Cisco Intersight,[vault:intersight_secret_key_prod],[vault:intersight_secret_key_test],[vault:intersight_secret_key_dr],Intersight API secret key,Yes,String,Valid secret format,Secret,HCI Team,intersight.api_key,Stored in Ansible Vault,2025-12-01
+intersight.claim_code,Cisco Intersight,[vault:intersight_claim_code_prod],[vault:intersight_claim_code_test],[vault:intersight_claim_code_dr],Device connector claim code,Yes,String,Valid claim code,Secret,HCI Team,Device registration,One-time use,2025-12-01
+vmware.vcenter_fqdn,VMware,vcenter-prod.client.local,vcenter-test.client.local,vcenter-dr.client.local,vCenter Server FQDN,Yes,String,Valid FQDN,Confidential,Virtualization Team,DNS configuration,SSO domain,2025-12-01
+vmware.vcenter_ip,VMware,10.100.1.30,10.101.1.30,10.102.1.30,vCenter Server IP address,Yes,String,Valid IPv4 address,Confidential,Virtualization Team,Network connectivity,Management network,2025-12-01
+vmware.vcenter_version,VMware,8.0 U2,8.0 U2,8.0 U2,vCenter Server version,Yes,String,8.x version,Public,Virtualization Team,Compatibility,Latest supported,2025-12-01
+vmware.vcenter_admin_user,VMware,administrator@vsphere.local,administrator@vsphere.local,administrator@vsphere.local,vCenter SSO admin username,Yes,String,Valid SSO user,Confidential,Virtualization Team,SSO configuration,Initial admin,2025-12-01
+vmware.vcenter_admin_password,VMware,[vault:vcenter_admin_password_prod],[vault:vcenter_admin_password_test],[vault:vcenter_admin_password_dr],vCenter admin password,Yes,String,Min 12 characters,Secret,Security Team,,Stored in Ansible Vault,2025-12-01
+vmware.esxi_version,VMware,8.0 U2,8.0 U2,8.0 U2,ESXi hypervisor version,Yes,String,8.x version,Public,Virtualization Team,vmware.vcenter_version,Match vCenter,2025-12-01
+vmware.esxi_root_password,VMware,[vault:esxi_root_password_prod],[vault:esxi_root_password_test],[vault:esxi_root_password_dr],ESXi root password,Yes,String,Min 12 characters,Secret,Security Team,,Stored in Ansible Vault,2025-12-01
+vmware.license_key,VMware,[vault:vmware_license_key_prod],[vault:vmware_license_key_test],[vault:vmware_license_key_dr],VMware Enterprise Plus license,Yes,String,Valid license format,Secret,Virtualization Team,License procurement,Per SOW scope,2025-12-01
+vmware.ha_enabled,VMware,true,true,true,Enable vSphere High Availability,Yes,Boolean,true|false,Public,Virtualization Team,Cluster created,Required for resilience,2025-12-01
+vmware.drs_enabled,VMware,true,true,true,Enable Distributed Resource Scheduler,Yes,Boolean,true|false,Public,Virtualization Team,vmware.ha_enabled,Load balancing,2025-12-01
+vmware.drs_level,VMware,FullyAutomated,FullyAutomated,FullyAutomated,DRS automation level,Yes,String,Manual|PartiallyAutomated|FullyAutomated,Public,Virtualization Team,vmware.drs_enabled,Automatic vMotion,2025-12-01
+backup.veeam_server_ip,Backup,10.100.1.40,10.101.1.40,10.102.1.40,Veeam Backup Server IP,Yes,String,Valid IPv4 address,Confidential,Backup Team,Network connectivity,Backup infrastructure,2025-12-01
+backup.veeam_version,Backup,12.0,12.0,12.0,Veeam Backup version,Yes,String,Valid version,Public,Backup Team,Compatibility,HyperFlex plugin support,2025-12-01
+backup.retention_daily,Backup,30,14,30,Daily backup retention in days,Yes,Integer,7-90,Public,Backup Team,Storage planning,Per SOW scope,2025-12-01
+backup.retention_monthly,Backup,12,6,12,Monthly backup retention in months,Yes,Integer,6-24,Public,Backup Team,Compliance,Long-term retention,2025-12-01
+backup.window,Backup,22:00-06:00,22:00-06:00,22:00-06:00,Backup window in 24-hour format,Yes,String,HH:MM-HH:MM format,Public,Backup Team,Business hours,Off-peak hours,2025-12-01
+integrations.ad.server_primary,Integrations,10.100.2.10,10.101.2.10,10.102.2.10,Primary AD server IP,Yes,String,Valid IPv4 address,Confidential,Security Team,Network connectivity,LDAP authentication,2025-12-01
+integrations.ad.server_secondary,Integrations,10.100.2.11,10.101.2.11,10.102.2.11,Secondary AD server IP,No,String,Valid IPv4 address,Confidential,Security Team,Network connectivity,Failover,2025-12-01
+integrations.ad.domain,Integrations,client.local,client.local,client.local,Active Directory domain name,Yes,String,Valid domain format,Confidential,Security Team,,User authentication,2025-12-01
+integrations.ad.service_account,Integrations,svc_vcenter_ldap,svc_vcenter_ldap_test,svc_vcenter_ldap_dr,AD service account for vCenter,Yes,String,Valid username,Confidential,Security Team,AD account created,Read access to AD,2025-12-01
+integrations.ad.service_password,Integrations,[vault:ad_service_password_prod],[vault:ad_service_password_test],[vault:ad_service_password_dr],AD service account password,Yes,String,Min 12 characters,Secret,Security Team,,Stored in Ansible Vault,2025-12-01
+network.mgmt_vlan_id,Network,100,110,120,Management VLAN ID,Yes,Integer,1-4094,Public,Network Team,Switch configuration,Management traffic,2025-12-01
+network.vmotion_vlan_id,Network,101,111,121,vMotion VLAN ID,Yes,Integer,1-4094,Public,Network Team,Switch configuration,Live migration traffic,2025-12-01
+network.storage_vlan_id,Network,102,112,122,Storage VLAN ID,Yes,Integer,1-4094,Public,Network Team,Switch configuration,HyperFlex data traffic,2025-12-01
+network.vm_network_vlan_range,Network,200-250,300-350,400-450,VM network VLAN range,Yes,String,VLAN range format,Public,Network Team,Switch configuration,Guest VM networks,2025-12-01
+infrastructure.ntp_primary,Infrastructure,10.100.4.10,10.101.4.10,10.102.4.10,Primary NTP server IP,Yes,String,Valid IPv4 address,Confidential,Infrastructure Team,Network connectivity,Time sync critical,2025-12-01
+infrastructure.ntp_secondary,Infrastructure,10.100.4.11,10.101.4.11,10.102.4.11,Secondary NTP server IP,No,String,Valid IPv4 address,Confidential,Infrastructure Team,Network connectivity,NTP failover,2025-12-01
+infrastructure.dns_primary,Infrastructure,10.100.5.10,10.101.5.10,10.102.5.10,Primary DNS server IP,Yes,String,Valid IPv4 address,Confidential,Infrastructure Team,Network connectivity,Name resolution,2025-12-01
+infrastructure.dns_secondary,Infrastructure,10.100.5.11,10.101.5.11,10.102.5.11,Secondary DNS server IP,No,String,Valid IPv4 address,Confidential,Infrastructure Team,Network connectivity,DNS failover,2025-12-01
+monitoring.syslog_server,Monitoring,10.100.3.10,10.101.3.10,10.102.3.10,Centralized syslog server IP,Yes,String,Valid IPv4 address,Confidential,Operations Team,Network connectivity,Log aggregation,2025-12-01
+monitoring.snmp_community,Monitoring,[vault:snmp_community_prod],[vault:snmp_community_test],[vault:snmp_community_dr],SNMP community string,Yes,String,Min 8 characters,Secret,Operations Team,SNMP configuration,Monitoring access,2025-12-01
+notifications.smtp_server,Notifications,smtp.client.local,smtp.client.local,smtp.client.local,SMTP server for notifications,Yes,String,Valid hostname or IP,Confidential,Infrastructure Team,SMTP relay,Alert notifications,2025-12-01
+notifications.alert_recipients,Notifications,infra-ops@client.local,infra-test@client.local,infra-dr@client.local,Email recipients for alerts,Yes,String,Valid email addresses,Confidential,Operations Team,,NOC distribution,2025-12-01
+support.cisco_smartnet,Support,[contract-number-prod],[contract-number-test],[contract-number-dr],Cisco SmartNet contract number,Yes,String,Valid contract ID,Confidential,Support Team,Vendor relationship,24x7 support,2025-12-01
+support.vmware_contract,Support,[contract-number-prod],[contract-number-test],[contract-number-dr],VMware support contract number,Yes,String,Valid contract ID,Confidential,Support Team,Vendor relationship,Production support,2025-12-01
+support.tac_severity,Support,2,3,2,Default TAC case severity,Yes,Integer,1-4,Public,Support Team,SmartNet contract,1=Critical 4=Low,2025-12-01
+support.escalation_contact,Support,infra-escalation@client.local,infra-test@client.local,infra-dr@client.local,Escalation contact email,Yes,String,Valid email,Confidential,Operations Team,,After-hours escalation,2025-12-01

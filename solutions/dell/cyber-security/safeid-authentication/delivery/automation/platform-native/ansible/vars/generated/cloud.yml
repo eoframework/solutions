@@ -1,0 +1,14 @@
+#------------------------------------------------------------------------------
+# Cloud Integration Configuration
+#------------------------------------------------------------------------------
+# Generated from configuration.csv
+#
+# To regenerate: python generate-ansible-vars.py /path/to/solution
+# DO NOT EDIT - Changes will be overwritten on regeneration
+#------------------------------------------------------------------------------
+
+cloud:
+  microsoft365:
+    tenant_id: "00000000-0000-0000-0000-000000000000"
+  aws:
+    account_id: "000000000000"

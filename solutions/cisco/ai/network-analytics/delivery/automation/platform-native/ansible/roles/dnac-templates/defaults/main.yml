@@ -1,0 +1,9 @@
+---
+#------------------------------------------------------------------------------
+# Default variables for dnac-templates role
+#------------------------------------------------------------------------------
+
+# Template deployment settings
+dnac_template_version: "latest"
+dnac_template_validation: true
+dnac_template_backup: true

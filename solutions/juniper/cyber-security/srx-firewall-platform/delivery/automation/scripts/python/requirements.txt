@@ -1,0 +1,21 @@
+# Python dependencies for SRX automation
+# Install: pip install -r requirements.txt
+
+# Juniper PyEZ
+junos-eznc>=2.6.0
+ncclient>=0.6.13
+
+# Ansible support
+ansible>=8.0.0
+paramiko>=3.0.0
+
+# Configuration management
+jinja2>=3.1.0
+pyyaml>=6.0
+
+# CSV processing (for configuration.csv)
+pandas>=2.0.0
+
+# Utilities
+requests>=2.31.0
+netaddr>=0.9.0

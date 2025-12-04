@@ -1,0 +1,54 @@
+---
+# Dell SafeID Authentication - Backup and Recovery Role
+# EO Framework - Dell Cyber Security Solutions
+
+- name: Install backup tools
+  ansible.builtin.package:
+    name:
+      - rsync
+      - tar
+      - gzip
+    state: present
+
+- name: Create backup directory
+  ansible.builtin.file:
+    path: "{{ operations.backup.destination }}"
+    state: directory
+    owner: safeid
+    group: safeid
+    mode: '0700'
+  when: operations.backup.enabled | default(false)
+
+- name: Configure backup settings
+  ansible.builtin.template:
+    src: backup.conf.j2
+    dest: /etc/safeid/backup.conf
+    owner: safeid
+    group: safeid
+    mode: '0600'
+
+- name: Create backup script
+  ansible.builtin.template:
+    src: backup.sh.j2
+    dest: /usr/local/bin/safeid-backup.sh
+    owner: root
+    group: root
+    mode: '0755'
+
+- name: Configure backup schedule
+  ansible.builtin.cron:
+    name: "SafeID backup"
+    minute: "0"
+    hour: "2"
+    job: "/usr/local/bin/safeid-backup.sh"
+    user: safeid
+  when: operations.backup.enabled | default(false)
+
+- name: Configure HA replication
+  ansible.builtin.template:
+    src: ha-replication.conf.j2
+    dest: /etc/safeid/ha-replication.conf
+    owner: safeid
+    group: safeid
+    mode: '0600'
+  when: safeid.ha.enabled | default(false)

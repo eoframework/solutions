@@ -1,0 +1,25 @@
+# Ansible Galaxy Requirements
+# Dell PowerSwitch Datacenter Solution
+# EO Framework - Dell Network Solutions
+
+---
+collections:
+  # Dell OS10 Enterprise collection for PowerSwitch automation
+  - name: dellemc.os10
+    version: ">=1.1.0"
+
+  # Dell OpenManage for hardware monitoring
+  - name: dellemc.openmanage
+    version: ">=7.0.0"
+
+  # Ansible network utilities
+  - name: ansible.netcommon
+    version: ">=5.0.0"
+
+  # Ansible utilities
+  - name: ansible.utils
+    version: ">=2.0.0"
+
+  # Community general collection
+  - name: community.general
+    version: ">=7.0.0"

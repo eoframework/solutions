@@ -1,0 +1,6 @@
+---
+# Dell SafeID Token Management - Default Variables
+
+yubikey_default_model: "YubiKey 5 NFC"
+enrollment_timeout: 300
+temp_token_validity: 24

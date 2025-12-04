@@ -1,56 +1,67 @@
-Parameter Name,Category,Environment,Default Value,Description,Required,Data Type,Validation Rules,Security Level,Owner Team,Dependencies,Notes,Last Updated
-VXRAIL_SOLUTION_NAME,Application,All,Dell VxRail Hyperconverged Infrastructure,Dell VxRail HCI solution identifier,Yes,String,Max 50 characters,Public,VxRail Team,None,Used in vCenter and VxRail Manager,[DATE]
-VXRAIL_VERSION,Application,All,8.0.100,VxRail software version,Yes,String,Valid VxRail version,Public,VxRail Team,None,Major.minor.patch format,[DATE]
-VXRAIL_CLUSTER_NAME,VxRail Cluster,All,[vxrail-cluster],VxRail cluster identifier,Yes,String,Valid cluster name,Public,VxRail Team,vSphere configuration,Unique cluster naming,[DATE]
-VXRAIL_NODE_COUNT,VxRail Hardware,All,4,Number of VxRail nodes in cluster,Yes,Integer,3-64,Public,Hardware Team,Rack planning,Minimum 3 for HCI,[DATE]
-VXRAIL_NODE_MODEL,VxRail Hardware,All,E560,VxRail appliance model,Yes,String,Valid VxRail model,Public,Hardware Team,Performance requirements,All-flash configuration,[DATE]
-VXRAIL_GENERATION,VxRail Hardware,All,E560,VxRail generation designation,Yes,String,Valid generation code,Public,Hardware Team,Hardware lifecycle,Latest generation nodes,[DATE]
-POWEREDGE_CHASSIS_MODEL,Dell Hardware,All,R660,Underlying PowerEdge chassis model,Yes,String,Valid PowerEdge model,Public,Hardware Team,Server specifications,1U rack server chassis,[DATE]
-CPU_MODEL,Dell Hardware,All,Intel Xeon Gold 6330,Processor model per node,Yes,String,Valid CPU model,Public,Hardware Team,Performance planning,28-core 2.0GHz processor,[DATE]
-CPU_COUNT_PER_NODE,Dell Hardware,All,2,Number of CPUs per VxRail node,Yes,Integer,1-4,Public,Hardware Team,Processing requirements,Dual socket configuration,[DATE]
-MEMORY_PER_NODE_GB,Dell Hardware,All,384,System memory per node in GB,Yes,Integer,192-1536,Public,Hardware Team,Workload requirements,Plan for VM density,[DATE]
-MEMORY_TYPE,Dell Hardware,All,DDR4-3200,Memory technology and speed,Yes,String,Valid memory spec,Public,Hardware Team,Performance optimization,Latest DDR4 specification,[DATE]
-VSAN_CACHE_DISK_MODEL,vSAN Storage,All,1.6TB NVMe SSD,vSAN cache tier disk specification,Yes,String,Valid SSD model,Public,Storage Team,vSAN architecture,High-endurance NVMe,[DATE]
-VSAN_CACHE_DISK_COUNT,vSAN Storage,All,2,Number of cache disks per node,Yes,Integer,1-4,Public,Storage Team,vSAN design,Redundancy for cache tier,[DATE]
-VSAN_CAPACITY_DISK_MODEL,vSAN Storage,All,7.68TB NVMe SSD,vSAN capacity tier disk specification,Yes,String,Valid SSD model,Public,Storage Team,Capacity planning,All-flash capacity disks,[DATE]
-VSAN_CAPACITY_DISK_COUNT,vSAN Storage,All,6,Number of capacity disks per node,Yes,Integer,4-12,Public,Storage Team,Storage capacity,Balance capacity and cost,[DATE]
-VSAN_STORAGE_POLICY,vSAN Storage,All,RAID-5 (Erasure Coding),Default vSAN storage policy,Yes,String,Valid vSAN policy,Public,Storage Team,Data protection,FTT=1 with erasure coding,[DATE]
-VSAN_COMPRESSION_ENABLED,vSAN Storage,All,true,Enable vSAN compression,Yes,Boolean,true|false,Public,Storage Team,Space efficiency,Reduce storage footprint,[DATE]
-VSAN_DEDUPLICATION_ENABLED,vSAN Storage,All,true,Enable vSAN deduplication,Yes,Boolean,true|false,Public,Storage Team,Space efficiency,Reduce duplicate data,[DATE]
-VSAN_ENCRYPTION_ENABLED,vSAN Storage,All,true,Enable vSAN encryption at rest,Yes,Boolean,true|false,Public,Security Team,Data protection,Hardware-based encryption,[DATE]
-NETWORK_10GBE_PORTS,Dell Networking,All,4,Number of 10GbE ports per node,Yes,Integer,2-8,Public,Network Team,Network bandwidth,Management and vMotion traffic,[DATE]
-NETWORK_25GBE_PORTS,Dell Networking,All,2,Number of 25GbE ports per node,Yes,Integer,0-4,Public,Network Team,High-speed storage,vSAN and VM traffic,[DATE]
-NETWORK_SWITCH_MODEL,Dell Networking,All,S5248F-ON,Top-of-rack switch model,Yes,String,Valid Dell switch model,Public,Network Team,Network infrastructure,48x25GbE + 6x100GbE switch,[DATE]
-NETWORK_UPLINK_SPEED,Dell Networking,All,100GbE,Uplink speed from TOR switches,Yes,String,Valid uplink speed,Public,Network Team,North-south bandwidth,Data center connectivity,[DATE]
-IDRAC_VERSION,Dell Management,All,iDRAC9,iDRAC out-of-band management version,Yes,String,Valid iDRAC version,Public,Infrastructure,Server management,Enterprise license,[DATE]
-IDRAC_ENTERPRISE_LICENSE,Dell Management,All,true,iDRAC Enterprise license enabled,Yes,Boolean,true|false,Confidential,Infrastructure,Advanced management features,Full feature set,[DATE]
-OPENMANAGE_ENTERPRISE_VERSION,Dell Management,All,4.0.1,OpenManage Enterprise version,Yes,String,Valid OME version,Public,Dell Team,Centralized management,Latest stable release,[DATE]
-OPENMANAGE_INTEGRATION_VCENTER,Dell Management,All,true,OpenManage integration with vCenter,Yes,Boolean,true|false,Public,Dell Team,Unified management,Single pane of glass,[DATE]
-VMWARE_VCENTER_VERSION,VMware,All,8.0 U2,VMware vCenter Server version,Yes,String,Valid vCenter version,Public,VMware Team,VxRail compatibility,Supported version matrix,[DATE]
-VMWARE_ESXI_VERSION,VMware,All,8.0 U2,VMware ESXi hypervisor version,Yes,String,Valid ESXi version,Public,VMware Team,VMWARE_VCENTER_VERSION,Hypervisor compatibility,[DATE]
-VMWARE_VSAN_VERSION,VMware,All,8.0 U2,VMware vSAN version,Yes,String,Valid vSAN version,Public,VMware Team,Storage cluster,HCI storage layer,[DATE]
-VMWARE_NSX_ENABLED,VMware,All,false,Enable VMware NSX networking,No,Boolean,true|false,Public,Network Team,Software-defined networking,Advanced networking features,[DATE]
-VMWARE_VCF_ENABLED,VMware,All,false,Enable VMware Cloud Foundation,No,Boolean,true|false,Public,VMware Team,Private cloud platform,Full stack automation,[DATE]
-TPM_VERSION,Security,All,TPM 2.0,Trusted Platform Module version,Yes,String,TPM 1.2|TPM 2.0,Public,Security Team,Hardware trust,Secure boot foundation,[DATE]
-SECURE_BOOT_ENABLED,Security,All,true,UEFI Secure Boot configuration,Yes,Boolean,true|false,Public,Security Team,Boot integrity,Prevent unauthorized boot,[DATE]
-ENCRYPTION_AT_REST,Security,All,enabled,Data encryption at rest,Yes,String,enabled|disabled,Confidential,Security Team,vSAN encryption,Hardware-accelerated encryption,[DATE]
-ENCRYPTION_IN_TRANSIT,Security,All,enabled,Data encryption in transit,Yes,String,enabled|disabled,Confidential,Security Team,Network security,TLS for all communications,[DATE]
-FIRMWARE_SECURITY_MODE,Security,All,strict,Firmware security enforcement,Yes,String,strict|standard|permissive,Confidential,Security Team,Supply chain security,Verified firmware only,[DATE]
-BACKUP_SOLUTION,Operations,All,Dell PowerProtect Data Manager,Primary backup solution,Yes,String,Valid backup platform,Public,Backup Team,Data protection,Dell integrated backup,[DATE]
-BACKUP_TARGET_STORAGE,Operations,All,Dell PowerProtect DD,Backup target storage,Yes,String,Valid storage target,Public,Backup Team,Backup infrastructure,Deduplication appliance,[DATE]
-BACKUP_RETENTION_POLICY,Operations,All,Daily-30d Monthly-12m,Backup retention schedule,Yes,String,Valid retention policy,Public,Backup Team,Compliance requirements,Balanced retention,[DATE]
-BACKUP_FREQUENCY,Operations,All,Daily incremental,Backup frequency schedule,Yes,String,Valid backup schedule,Public,Backup Team,RTO/RPO requirements,Continuous data protection,[DATE]
-MONITORING_SOLUTION,Monitoring,All,Dell CloudIQ,Primary monitoring platform,Yes,String,Valid monitoring tool,Public,Monitoring Team,Proactive monitoring,AI-driven insights,[DATE]
-DELL_SUPPORT_ASSIST,Monitoring,All,enabled,Dell SupportAssist automation,Yes,String,enabled|disabled,Public,Support Team,Proactive support,Automated case creation,[DATE]
-DELL_SECURE_REMOTE_SERVICES,Support,All,enabled,Dell Secure Remote Services,Yes,String,enabled|disabled,Confidential,Support Team,Remote diagnostics,Secure support tunnel,[DATE]
-DELL_PROSUPPORT_PLUS,Support,All,true,Dell ProSupport Plus coverage,Yes,Boolean,true|false,Confidential,Support Team,Premium support,24x7 mission critical,[DATE]
-LIFECYCLE_MANAGEMENT,Operations,All,automated,Lifecycle management mode,Yes,String,automated|manual,Public,Operations,Software updates,VxRail LCM automation,[DATE]
-PATCH_MANAGEMENT_SCHEDULE,Operations,All,Monthly maintenance window,Patch management schedule,Yes,String,Valid schedule,Public,Operations,Security updates,Coordinated patching,[DATE]
-CAPACITY_PLANNING_THRESHOLD,Operations,All,80,Storage capacity alert threshold %,Yes,Integer,70-90,Public,Operations,Proactive planning,Trigger expansion planning,[DATE]
-PERFORMANCE_MONITORING,Operations,All,enabled,Performance monitoring and alerting,Yes,String,enabled|disabled,Public,Operations,SLA management,Real-time performance tracking,[DATE]
-DISASTER_RECOVERY_ENABLED,Operations,Production,true,Disaster recovery configuration,Yes,Boolean,true|false,Public,DR Team,Business continuity,Site-to-site replication,[DATE]
-DR_RPO_MINUTES,Operations,Production,15,Recovery Point Objective in minutes,Yes,Integer,5-60,Public,DR Team,Data loss tolerance,Near-synchronous replication,[DATE]
-DR_RTO_HOURS,Operations,Production,4,Recovery Time Objective in hours,Yes,Integer,1-24,Public,DR Team,Service restoration,Automated failover,[DATE]
-MAINTENANCE_WINDOW,Operations,All,Sunday 02:00-06:00 UTC,Weekly maintenance window,Yes,String,Valid time range,Public,Operations,Change management,Minimal business impact,[DATE]
-DELL_TECHNOLOGIES_CLOUD,Cloud Integration,All,disabled,Dell Technologies Cloud integration,No,String,enabled|disabled,Public,Cloud Team,Hybrid cloud,Multi-cloud management,[DATE]
-VMWARE_CLOUD_ON_DELL_EMC,Cloud Integration,All,disabled,VMware Cloud on Dell EMC,No,String,enabled|disabled,Public,Cloud Team,As-a-service model,Consumption-based pricing,[DATE]
+#WIDTH: 45,14,30,30,30,45,8,12,27,14,14,12,30,12
+#ALIGN: left,left,left,left,left,left,center,left,left,center,left,left,left,center
+Parameter Name,Category,Production,Test,DR,Description,Required,Data Type,Validation Rules,Security Level,Owner Team,Dependencies,Notes,Last Updated
+solution.name,Project,vxrail-hci,vxrail-hci,vxrail-hci,Solution name for resource naming,Yes,String,Valid string value,Public,VxRail Team,,VxRail HCI solution identifier,2025-12-03
+solution.abbr,Project,vxh,vxh,vxh,Solution abbreviation (3-4 chars),Yes,String,Valid string value,Public,VxRail Team,,Used in resource naming prefix,2025-12-03
+solution.provider_name,Project,dell,dell,dell,Provider organization name,Yes,String,Valid string value,Public,VxRail Team,,Dell provider,2025-12-03
+solution.category_name,Project,cloud,cloud,cloud,Solution category,Yes,String,Valid string value,Public,VxRail Team,,Cloud category,2025-12-03
+datacenter.name,Project,Primary Datacenter,Lab Environment,DR Datacenter,Datacenter facility name,Yes,String,Valid string,Public,Infrastructure,,Physical location name,2025-12-03
+ownership.cost_center,Project,CC-VXRAIL-001,CC-VXRAIL-001,CC-VXRAIL-001,Cost center,Yes,String,Valid string,Public,Infrastructure,,From SOW cost allocation,2025-12-03
+ownership.owner_email,Project,vxrail-team@company.com,vxrail-team@company.com,vxrail-team@company.com,Owner email,Yes,String,Valid email,Confidential,Infrastructure,,Team notifications,2025-12-03
+vxrail.version,VxRail Software,8.0.100,8.0.100,8.0.100,VxRail software version,Yes,String,Valid VxRail version,Public,VxRail Team,,Major.minor.patch format,2025-12-03
+vxrail.cluster_name,VxRail Cluster,[vxrail-prod-cluster],[vxrail-test-cluster],[vxrail-dr-cluster],VxRail cluster identifier,Yes,String,Valid cluster name,Public,VxRail Team,,Unique cluster naming,2025-12-03
+vxrail.node_count,VxRail Hardware,4,3,4,Number of VxRail nodes in cluster,Yes,Integer,3-64,Public,Hardware Team,,Minimum 3 for HCI,2025-12-03
+vxrail.node_model,VxRail Hardware,E560,E560,E560,VxRail appliance model,Yes,String,Valid VxRail model,Public,Hardware Team,,All-flash configuration,2025-12-03
+vxrail.manager_ip,VxRail Management,[10.10.3.100],[10.20.3.100],[10.30.3.100],VxRail Manager IP address,Yes,String,Valid IP address,Confidential,VxRail Team,,API endpoint,2025-12-03
+hardware.poweredge_chassis,Dell Hardware,R660,R660,R660,Underlying PowerEdge chassis model,Yes,String,Valid PowerEdge model,Public,Hardware Team,,1U rack server chassis,2025-12-03
+hardware.cpu_model,Dell Hardware,Intel Xeon Gold 6330,Intel Xeon Gold 6330,Intel Xeon Gold 6330,Processor model per node,Yes,String,Valid CPU model,Public,Hardware Team,,28-core 2.0GHz processor,2025-12-03
+hardware.cpu_count_per_node,Dell Hardware,2,2,2,Number of CPUs per VxRail node,Yes,Integer,1-4,Public,Hardware Team,,Dual socket configuration,2025-12-03
+hardware.memory_per_node_gb,Dell Hardware,384,384,384,System memory per node in GB,Yes,Integer,192-1536,Public,Hardware Team,,Plan for VM density,2025-12-03
+hardware.memory_type,Dell Hardware,DDR4-3200,DDR4-3200,DDR4-3200,Memory technology and speed,Yes,String,Valid memory spec,Public,Hardware Team,,Latest DDR4 specification,2025-12-03
+vsan.cache_disk_model,vSAN Storage,1.6TB NVMe SSD,1.6TB NVMe SSD,1.6TB NVMe SSD,vSAN cache tier disk specification,Yes,String,Valid SSD model,Public,Storage Team,,High-endurance NVMe,2025-12-03
+vsan.cache_disk_count,vSAN Storage,2,2,2,Number of cache disks per node,Yes,Integer,1-4,Public,Storage Team,,Redundancy for cache tier,2025-12-03
+vsan.capacity_disk_model,vSAN Storage,7.68TB NVMe SSD,7.68TB NVMe SSD,7.68TB NVMe SSD,vSAN capacity tier disk specification,Yes,String,Valid SSD model,Public,Storage Team,,All-flash capacity disks,2025-12-03
+vsan.capacity_disk_count,vSAN Storage,6,4,6,Number of capacity disks per node,Yes,Integer,4-12,Public,Storage Team,,Balance capacity and cost,2025-12-03
+vsan.storage_policy,vSAN Storage,RAID-5 (Erasure Coding),RAID-1,RAID-5 (Erasure Coding),Default vSAN storage policy,Yes,String,Valid vSAN policy,Public,Storage Team,,FTT=1 with erasure coding,2025-12-03
+vsan.compression_enabled,vSAN Storage,true,true,true,Enable vSAN compression,Yes,Boolean,true|false,Public,Storage Team,,Reduce storage footprint,2025-12-03
+vsan.deduplication_enabled,vSAN Storage,true,false,true,Enable vSAN deduplication,Yes,Boolean,true|false,Public,Storage Team,,Reduce duplicate data,2025-12-03
+vsan.encryption_enabled,vSAN Storage,true,false,true,Enable vSAN encryption at rest,Yes,Boolean,true|false,Public,Security Team,,Hardware-based encryption,2025-12-03
+network.10gbe_ports,Dell Networking,4,4,4,Number of 10GbE ports per node,Yes,Integer,2-8,Public,Network Team,,Management and vMotion traffic,2025-12-03
+network.25gbe_ports,Dell Networking,2,2,2,Number of 25GbE ports per node,Yes,Integer,0-4,Public,Network Team,,vSAN and VM traffic,2025-12-03
+network.switch_model,Dell Networking,S5248F-ON,S5248F-ON,S5248F-ON,Top-of-rack switch model,Yes,String,Valid Dell switch model,Public,Network Team,,48x25GbE + 6x100GbE switch,2025-12-03
+network.uplink_speed,Dell Networking,100GbE,25GbE,100GbE,Uplink speed from TOR switches,Yes,String,Valid uplink speed,Public,Network Team,,Data center connectivity,2025-12-03
+network.mgmt_vlan,Networking,100,110,120,Management network VLAN,Yes,Integer,1-4094,Confidential,Network Team,,ESXi management,2025-12-03
+network.vmotion_vlan,Networking,200,210,220,vMotion network VLAN,Yes,Integer,1-4094,Confidential,Network Team,,Live migration traffic,2025-12-03
+network.vsan_vlan,Networking,300,310,320,vSAN network VLAN,Yes,Integer,1-4094,Confidential,Network Team,,Storage traffic,2025-12-03
+network.vm_network_vlan,Networking,400,410,420,VM network VLAN,Yes,Integer,1-4094,Confidential,Network Team,,Production VM traffic,2025-12-03
+idrac.version,Dell Management,iDRAC9,iDRAC9,iDRAC9,iDRAC out-of-band management version,Yes,String,Valid iDRAC version,Public,Infrastructure,,Enterprise license,2025-12-03
+idrac.enterprise_license,Dell Management,true,true,true,iDRAC Enterprise license enabled,Yes,Boolean,true|false,Confidential,Infrastructure,,Full feature set,2025-12-03
+openmanage.version,Dell Management,4.0.1,4.0.1,4.0.1,OpenManage Enterprise version,Yes,String,Valid OME version,Public,Dell Team,,Latest stable release,2025-12-03
+openmanage.vcenter_integration,Dell Management,true,true,true,OpenManage integration with vCenter,Yes,Boolean,true|false,Public,Dell Team,,Single pane of glass,2025-12-03
+vmware.vcenter_version,VMware,8.0 U2,8.0 U2,8.0 U2,VMware vCenter Server version,Yes,String,Valid vCenter version,Public,VMware Team,,Supported version matrix,2025-12-03
+vmware.esxi_version,VMware,8.0 U2,8.0 U2,8.0 U2,VMware ESXi hypervisor version,Yes,String,Valid ESXi version,Public,VMware Team,,Hypervisor compatibility,2025-12-03
+vmware.vsan_version,VMware,8.0 U2,8.0 U2,8.0 U2,VMware vSAN version,Yes,String,Valid vSAN version,Public,VMware Team,,HCI storage layer,2025-12-03
+vmware.nsx_enabled,VMware,false,false,false,Enable VMware NSX networking,No,Boolean,true|false,Public,Network Team,,Software-defined networking,2025-12-03
+vmware.vcf_enabled,VMware,false,false,false,Enable VMware Cloud Foundation,No,Boolean,true|false,Public,VMware Team,,Private cloud platform,2025-12-03
+security.tpm_version,Security,TPM 2.0,TPM 2.0,TPM 2.0,Trusted Platform Module version,Yes,String,TPM 1.2|TPM 2.0,Public,Security Team,,Secure boot foundation,2025-12-03
+security.secure_boot_enabled,Security,true,true,true,UEFI Secure Boot configuration,Yes,Boolean,true|false,Public,Security Team,,Prevent unauthorized boot,2025-12-03
+security.encryption_at_rest,Security,enabled,disabled,enabled,Data encryption at rest,Yes,String,enabled|disabled,Confidential,Security Team,,Hardware-accelerated encryption,2025-12-03
+security.encryption_in_transit,Security,enabled,enabled,enabled,Data encryption in transit,Yes,String,enabled|disabled,Confidential,Security Team,,TLS for all communications,2025-12-03
+security.firmware_security_mode,Security,strict,standard,strict,Firmware security enforcement,Yes,String,strict|standard|permissive,Confidential,Security Team,,Verified firmware only,2025-12-03
+backup.solution,Operations,Dell PowerProtect Data Manager,Dell PowerProtect Data Manager,Dell PowerProtect Data Manager,Primary backup solution,Yes,String,Valid backup platform,Public,Backup Team,,Dell integrated backup,2025-12-03
+backup.target_storage,Operations,Dell PowerProtect DD,Dell PowerProtect DD,Dell PowerProtect DD,Backup target storage,Yes,String,Valid storage target,Public,Backup Team,,Deduplication appliance,2025-12-03
+backup.retention_policy,Operations,Daily-30d Monthly-12m,Daily-7d,Daily-30d Monthly-12m,Backup retention schedule,Yes,String,Valid retention policy,Public,Backup Team,,Compliance requirements,2025-12-03
+backup.frequency,Operations,Daily incremental,Daily incremental,Daily incremental,Backup frequency schedule,Yes,String,Valid backup schedule,Public,Backup Team,,RTO/RPO requirements,2025-12-03
+monitoring.solution,Monitoring,Dell CloudIQ,Dell CloudIQ,Dell CloudIQ,Primary monitoring platform,Yes,String,Valid monitoring tool,Public,Monitoring Team,,AI-driven insights,2025-12-03
+monitoring.support_assist,Monitoring,enabled,enabled,enabled,Dell SupportAssist automation,Yes,String,enabled|disabled,Public,Support Team,,Automated case creation,2025-12-03
+monitoring.secure_remote_services,Support,enabled,disabled,enabled,Dell Secure Remote Services,Yes,String,enabled|disabled,Confidential,Support Team,,Remote diagnostics,2025-12-03
+support.prosupport_plus,Support,true,false,true,Dell ProSupport Plus coverage,Yes,Boolean,true|false,Confidential,Support Team,,24x7 mission critical,2025-12-03
+operations.lifecycle_management,Operations,automated,manual,automated,Lifecycle management mode,Yes,String,automated|manual,Public,Operations,,VxRail LCM automation,2025-12-03
+operations.patch_schedule,Operations,Monthly maintenance window,Quarterly,Monthly maintenance window,Patch management schedule,Yes,String,Valid schedule,Public,Operations,,Coordinated patching,2025-12-03
+operations.capacity_threshold,Operations,80,85,80,Storage capacity alert threshold %,Yes,Integer,70-90,Public,Operations,,Trigger expansion planning,2025-12-03
+operations.maintenance_window,Operations,Sunday 02:00-06:00 UTC,Saturday 02:00-06:00 UTC,Sunday 02:00-06:00 UTC,Weekly maintenance window,Yes,String,Valid time range,Public,Operations,,Minimal business impact,2025-12-03
+dr.enabled,DR,true,false,true,Disaster recovery configuration,Yes,Boolean,true|false,Public,DR Team,,Business continuity,2025-12-03
+dr.rpo_minutes,DR,15,n/a,15,Recovery Point Objective in minutes,No,Integer,5-60,Public,DR Team,,Near-synchronous replication,2025-12-03
+dr.rto_hours,DR,4,n/a,4,Recovery Time Objective in hours,No,Integer,1-24,Public,DR Team,,Automated failover,2025-12-03
+dr.purpose,DR,primary,lab,standby,Site purpose designation,Yes,String,primary|lab|standby,Public,Operations,,DR role,2025-12-03
+dr.failover_mode,DR,manual,n/a,manual,Failover mode,Yes,String,manual|automatic,Public,Operations,,Manual for safety,2025-12-03

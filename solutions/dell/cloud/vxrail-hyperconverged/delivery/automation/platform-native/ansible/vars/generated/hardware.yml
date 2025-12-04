@@ -1,0 +1,15 @@
+#------------------------------------------------------------------------------
+# Hardware Configuration
+#------------------------------------------------------------------------------
+# Generated from configuration.csv
+#
+# To regenerate: python generate-ansible-vars.py /path/to/solution
+# DO NOT EDIT - Changes will be overwritten on regeneration
+#------------------------------------------------------------------------------
+
+hardware:
+  poweredge_chassis: "R760"
+  cpu_model: "Intel Xeon Platinum 8380"
+  cpu_count_per_node: 2
+  memory_per_node_gb: 2048
+  memory_type: "DDR5-4800"

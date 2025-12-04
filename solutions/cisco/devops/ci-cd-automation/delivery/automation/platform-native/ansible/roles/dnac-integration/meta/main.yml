@@ -1,0 +1,17 @@
+---
+galaxy_info:
+  role_name: dnac-integration
+  author: EO Framework
+  description: Cisco DNA Center integration for CI/CD automation
+  company: Enterprise Orchestration
+  license: proprietary
+  min_ansible_version: "2.12"
+  platforms:
+    - name: Generic
+      versions: [all]
+  galaxy_tags:
+    - cisco
+    - dnac
+    - automation
+
+dependencies: []

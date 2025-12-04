@@ -1,0 +1,142 @@
+---
+#------------------------------------------------------------------------------
+# Phase 1: Foundation - DNA Center Initial Setup
+#------------------------------------------------------------------------------
+# This playbook handles initial DNA Center configuration including:
+#   - Site hierarchy creation
+#   - Credential management
+#   - Global settings
+#   - LDAP/AD integration
+#------------------------------------------------------------------------------
+
+- name: Phase 1 - Foundation Setup
+  hosts: localhost
+  gather_facts: no
+  tags: [foundation]
+
+  vars_files:
+    - "{{ playbook_dir }}/../vars/generated/project.yml"
+    - "{{ playbook_dir }}/../vars/generated/dnac.yml"
+    - "{{ playbook_dir }}/../vars/generated/integrations.yml"
+    - "{{ playbook_dir }}/../vars/generated/licensing.yml"
+    - "{{ playbook_dir }}/../vars/generated/devices.yml"
+    - "{{ playbook_dir }}/../vars/secrets.yml"
+
+  tasks:
+    #--------------------------------------------------------------------------
+    # Authentication
+    #--------------------------------------------------------------------------
+    - name: Authenticate to DNA Center
+      cisco.dnac.dnac_auth:
+        dnac_host: "{{ dnac.vip }}"
+        dnac_username: "{{ dnac.admin_user }}"
+        dnac_password: "{{ vault_dnac_admin_password }}"
+        dnac_verify: "{{ dnac.ssl_verify }}"
+      register: dnac_auth
+
+    #--------------------------------------------------------------------------
+    # Site Hierarchy
+    #--------------------------------------------------------------------------
+    - name: Create Global site area
+      cisco.dnac.site_create:
+        dnac_host: "{{ dnac.vip }}"
+        dnac_auth: "{{ dnac_auth.dnac_auth }}"
+        site:
+          area:
+            name: "Global"
+            parentName: ""
+      register: global_site
+
+    - name: Create site hierarchy from deployment configuration
+      cisco.dnac.site_create:
+        dnac_host: "{{ dnac.vip }}"
+        dnac_auth: "{{ dnac_auth.dnac_auth }}"
+        site:
+          area:
+            name: "{{ item }}"
+            parentName: "Global"
+      loop: "{{ deployment.pilot_site_names.split(',') }}"
+      register: site_results
+
+    #--------------------------------------------------------------------------
+    # Device Credentials
+    #--------------------------------------------------------------------------
+    - name: Create CLI credentials
+      cisco.dnac.device_credential_create:
+        dnac_host: "{{ dnac.vip }}"
+        dnac_auth: "{{ dnac_auth.dnac_auth }}"
+        globalCredentialType: "CLI"
+        cliCredential:
+          - username: "{{ devices.cli_username }}"
+            password: "{{ vault_device_cli_password }}"
+            enablePassword: "{{ vault_device_enable_secret }}"
+            description: "Network Device CLI Credentials"
+      register: cli_credential
+
+    - name: Create SNMPv3 credentials
+      cisco.dnac.device_credential_create:
+        dnac_host: "{{ dnac.vip }}"
+        dnac_auth: "{{ dnac_auth.dnac_auth }}"
+        globalCredentialType: "SNMPV3"
+        snmpV3:
+          - username: "snmpv3user"
+            authType: "SHA"
+            authPassword: "{{ vault_snmp_ro_community }}"
+            privacyType: "AES128"
+            privacyPassword: "{{ vault_snmp_rw_community }}"
+            snmpMode: "AUTHPRIV"
+            description: "SNMPv3 Credentials"
+      when: devices.snmp_version == "v3"
+
+    #--------------------------------------------------------------------------
+    # LDAP/AD Integration
+    #--------------------------------------------------------------------------
+    - name: Configure LDAP authentication
+      ansible.builtin.uri:
+        url: "https://{{ dnac.vip }}/dna/system/api/v1/auth/ldap"
+        method: POST
+        headers:
+          x-auth-token: "{{ dnac_auth.dnac_auth }}"
+        body_format: json
+        body:
+          ldapServer: "{{ integrations.ad.server_primary }}"
+          domain: "{{ integrations.ad.domain }}"
+          bindDN: "{{ integrations.ad.bind_user }}"
+          bindPassword: "{{ vault_ad_bind_password }}"
+          baseDN: "{{ integrations.ad.base_dn }}"
+          adminGroup: "{{ integrations.ad.group_admin }}"
+        validate_certs: "{{ dnac.ssl_verify }}"
+        status_code: [200, 201, 202]
+      register: ldap_config
+
+    #--------------------------------------------------------------------------
+    # Global Settings
+    #--------------------------------------------------------------------------
+    - name: Configure NTP servers
+      ansible.builtin.uri:
+        url: "https://{{ dnac.vip }}/dna/intent/api/v1/time-settings"
+        method: PUT
+        headers:
+          x-auth-token: "{{ dnac_auth.dnac_auth }}"
+        body_format: json
+        body:
+          ntpServer:
+            - "{{ infrastructure.ntp_primary }}"
+            - "{{ infrastructure.ntp_secondary | default(infrastructure.ntp_primary) }}"
+        validate_certs: "{{ dnac.ssl_verify }}"
+        status_code: [200, 202]
+
+    #--------------------------------------------------------------------------
+    # Summary
+    #--------------------------------------------------------------------------
+    - name: Foundation setup summary
+      ansible.builtin.debug:
+        msg: |
+          ============================================================
+          Phase 1 - Foundation Setup Complete
+          ============================================================
+          Sites Created: {{ site_results.results | length }}
+          CLI Credentials: Configured
+          SNMPv3: {{ 'Configured' if devices.snmp_version == 'v3' else 'Skipped' }}
+          LDAP Integration: {{ 'Configured' if ldap_config.status == 200 else 'Check Settings' }}
+          ============================================================

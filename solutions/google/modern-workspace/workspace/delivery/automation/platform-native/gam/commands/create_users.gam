@@ -1,0 +1,12 @@
+# GAM Commands - Create Users
+# EO Framework - Google Workspace Solution
+#
+# Usage: gam batch create_users.gam
+# Requires: users.csv in templates folder with columns:
+#   email, firstName, lastName, password, orgUnitPath, changePasswordAtNextLogin
+
+# Create users from CSV
+gam csv ../templates/users.csv gam create user ~email firstname ~firstName lastname ~lastName password ~password org ~orgUnitPath changepassword ~changePasswordAtNextLogin
+
+# Verify user creation
+gam print users query "orgUnitPath=/Sales OR orgUnitPath=/Marketing OR orgUnitPath=/Operations OR orgUnitPath=/Finance OR orgUnitPath=/Executive"

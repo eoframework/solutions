@@ -1,0 +1,44 @@
+---
+# Dell SafeID Authentication - SafeID Appliance Role
+# EO Framework - Dell Cyber Security Solutions
+
+- name: Install SafeID prerequisites
+  ansible.builtin.package:
+    name:
+      - python3
+      - python3-pip
+      - postgresql-client
+      - openssl
+      - curl
+    state: present
+
+- name: Create SafeID directories
+  ansible.builtin.file:
+    path: "{{ item }}"
+    state: directory
+    owner: safeid
+    group: safeid
+    mode: '0755'
+  loop:
+    - /etc/safeid
+    - /var/lib/safeid
+    - /var/log/safeid
+    - /etc/safeid/ssl
+
+- name: Configure SafeID appliance settings
+  ansible.builtin.template:
+    src: safeid.conf.j2
+    dest: /etc/safeid/safeid.conf
+    owner: safeid
+    group: safeid
+    mode: '0600'
+  notify: restart safeid
+
+- name: Configure SSL certificates
+  ansible.builtin.include_tasks: configure-ssl.yml
+
+- name: Start SafeID service
+  ansible.builtin.service:
+    name: safeid
+    state: started
+    enabled: true

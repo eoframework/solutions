@@ -1,0 +1,52 @@
+---
+# Dell SafeID Authentication - SAML IdP Configuration Role
+# EO Framework - Dell Cyber Security Solutions
+
+- name: Install SAML dependencies
+  ansible.builtin.package:
+    name:
+      - python3-lxml
+      - xmlsec1
+      - xmlsec1-openssl
+    state: present
+
+- name: Create SAML configuration directory
+  ansible.builtin.file:
+    path: /etc/safeid/saml
+    state: directory
+    owner: safeid
+    group: safeid
+    mode: '0755'
+
+- name: Configure SAML IdP settings
+  ansible.builtin.template:
+    src: saml-idp.conf.j2
+    dest: /etc/safeid/saml-idp.conf
+    owner: safeid
+    group: safeid
+    mode: '0600'
+  notify: restart safeid-saml
+
+- name: Generate SAML signing key
+  community.crypto.openssl_privatekey:
+    path: /etc/safeid/ssl/saml-signing.key
+    size: "{{ saml.certificate.key_size }}"
+    owner: safeid
+    group: safeid
+    mode: '0600'
+
+- name: Configure SAML service providers
+  ansible.builtin.template:
+    src: saml-sp.conf.j2
+    dest: "/etc/safeid/saml/sp-{{ item.name | lower | replace(' ', '-') }}.conf"
+    owner: safeid
+    group: safeid
+    mode: '0600'
+  loop: "{{ saml.service_providers }}"
+  notify: restart safeid-saml
+
+- name: Start SAML service
+  ansible.builtin.service:
+    name: safeid-saml
+    state: started
+    enabled: true

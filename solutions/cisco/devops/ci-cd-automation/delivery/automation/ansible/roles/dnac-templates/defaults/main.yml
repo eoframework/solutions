@@ -1,0 +1,8 @@
+---
+# Default variables for DNA Center Templates role
+
+dnac_template_dir: /opt/dnac-templates
+dnac_api_url: https://dnac.client.local
+dnac_api_version: v2
+dnac_ssl_verify: true
+dnac_timeout: 30

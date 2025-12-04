@@ -1,0 +1,65 @@
+# Dell SafeID Authentication - LDAP/AD Integration
+# EO Framework - Dell Cyber Security Solutions
+
+---
+- name: Configure LDAP/Active Directory Integration
+  hosts: safeid_servers
+  gather_facts: true
+  become: true
+  tags: [ldap, integration]
+  when: ldap.enabled | default(false)
+
+  pre_tasks:
+    - name: Display LDAP configuration
+      ansible.builtin.debug:
+        msg: |
+          Configuring LDAP Integration
+          Protocol: {{ ldap.integration }}
+          Base DN: {{ ldap.base_dn }}
+          Sync Interval: {{ ldap.sync.interval }} minutes
+
+  roles:
+    - role: safeid-ldap
+      tags: [ldap-config]
+
+  tasks:
+    - name: Test LDAP connectivity
+      ansible.builtin.command: >
+        ldapsearch -x -H {{ 'ldaps' if ldap.integration == 'LDAPS' else 'ldap' }}://{{ ldap.servers[0].server }}:{{ ldap.servers[0].port }}
+        -D "{{ ldap.bind_dn }}"
+        -w "{{ ldap_bind_password }}"
+        -b "{{ ldap.base_dn }}"
+        -s base
+        "(objectClass=*)"
+      register: ldap_test
+      changed_when: false
+      no_log: true
+
+    - name: Verify LDAP connection successful
+      ansible.builtin.assert:
+        that:
+          - ldap_test.rc == 0
+        fail_msg: "LDAP connection test failed"
+        success_msg: "LDAP connection successful"
+
+    - name: Initialize user synchronization
+      ansible.builtin.command: safeid-cli ldap sync --initial
+      when: server_role == "primary"
+      register: sync_result
+
+    - name: Display sync results
+      ansible.builtin.debug:
+        var: sync_result.stdout_lines
+      when: server_role == "primary"
+
+  post_tasks:
+    - name: Verify users imported from LDAP
+      ansible.builtin.command: safeid-cli user count
+      register: user_count
+      changed_when: false
+      when: server_role == "primary"
+
+    - name: Display user count
+      ansible.builtin.debug:
+        msg: "Total users imported: {{ user_count.stdout }}"
+      when: server_role == "primary"

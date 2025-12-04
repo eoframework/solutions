@@ -1,0 +1,179 @@
+# Dell PowerSwitch Datacenter - DR Variables
+# Generated from configuration.csv - DR column
+# EO Framework - Dell Network Solutions
+
+---
+#=============================================================================
+# PROJECT METADATA
+#=============================================================================
+solution:
+  name: powerswitch-datacenter
+  abbr: psd
+  provider: dell
+  category: network
+
+environment: dr
+datacenter_name: "DR Datacenter"
+
+#=============================================================================
+# NETWORK FABRIC DESIGN (50% of Production)
+#=============================================================================
+fabric:
+  # Spine layer
+  spine:
+    switch_model: Z9432F-ON
+    switch_count: 2
+    port_config: 100GbE
+    bgp_asn: 65200
+
+  # Leaf layer
+  leaf:
+    switch_model: S5248F-ON
+    switch_count: 20
+    server_port_count: 48
+    uplink_count: 4
+    uplink_speed: 100GbE
+
+  # Capacity (50% of production)
+  total_server_ports: 960
+  fabric_bandwidth_tbps: 0.8
+
+#=============================================================================
+# BGP UNDERLAY CONFIGURATION
+#=============================================================================
+bgp:
+  spine_asn: 65200
+  leaf_asn_start: 65201
+  leaf_asn_end: 65220
+  router_id_prefix: "10.255.253"
+
+  # BGP timers
+  keepalive: 3
+  holdtime: 9
+
+  # Address families
+  address_families:
+    - ipv4_unicast
+
+#=============================================================================
+# EVPN/VXLAN OVERLAY
+#=============================================================================
+evpn:
+  enabled: true
+  vni_range_start: 10000
+  vni_range_end: 19999
+
+#=============================================================================
+# VLAN CONFIGURATION
+#=============================================================================
+vlans:
+  - id: 10
+    name: MGMT
+    description: "Management Network"
+    gateway: "10.30.10.1/24"
+  - id: 20
+    name: SERVERS
+    description: "Server Network"
+    gateway: "10.30.20.1/24"
+  - id: 30
+    name: STORAGE
+    description: "Storage Network"
+    gateway: "10.30.30.1/24"
+  - id: 40
+    name: VMOTION
+    description: "vMotion Network"
+    gateway: "10.30.40.1/24"
+  - id: 100
+    name: PROD_APP
+    description: "Production Applications"
+    gateway: "10.30.100.1/24"
+
+vlan_count: 500
+
+#=============================================================================
+# MANAGEMENT & MONITORING
+#=============================================================================
+management:
+  # NTP
+  ntp_servers:
+    - "{{ ntp_server | default('ntp.domain.com') }}"
+
+  # Syslog
+  syslog_servers:
+    - server: "{{ syslog_server | default('syslog.domain.com') }}"
+      facility: local0
+      level: informational
+
+  # SNMP
+  snmp:
+    version: v3
+    location: "DR Datacenter"
+    contact: "netops@company.com"
+
+  # OpenManage Enterprise
+  openmanage_enabled: true
+
+#=============================================================================
+# AUTHENTICATION
+#=============================================================================
+authentication:
+  # TACACS+
+  tacacs:
+    enabled: true
+    servers:
+      - "{{ tacacs_server | default('tacacs.domain.com') }}"
+
+  # SSH
+  ssh:
+    enabled: true
+    version: 2
+
+  # Local accounts (fallback)
+  local_users:
+    - username: admin
+      privilege: 15
+
+#=============================================================================
+# SECURITY
+#=============================================================================
+security:
+  storm_control:
+    enabled: true
+    broadcast_level: 10
+    multicast_level: 10
+    unicast_level: 10
+
+  mac_limit_per_port: 100
+
+  ztp_enabled: true
+
+#=============================================================================
+# OPERATIONS
+#=============================================================================
+operations:
+  config_backup:
+    schedule: "Daily 02:00"
+    retention_days: 30
+
+  ansible_automation: true
+
+#=============================================================================
+# DR-SPECIFIC SETTINGS
+#=============================================================================
+dr:
+  purpose: standby
+  failover_mode: manual
+  sync_with_production: true
+
+#=============================================================================
+# SUPPORT
+#=============================================================================
+support:
+  dell_prosupport_level: "Mission Critical"
+
+#=============================================================================
+# PERFORMANCE TARGETS
+#=============================================================================
+performance:
+  east_west_latency_us: 2
+  target_bandwidth_tbps: 0.8

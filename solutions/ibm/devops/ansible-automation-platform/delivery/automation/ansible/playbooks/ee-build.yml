@@ -1,0 +1,81 @@
+---
+# Execution Environment Build Playbook
+# Builds custom execution environments for specific automation use cases
+#
+# Usage:
+#   ansible-playbook playbooks/ee-build.yml -e ee_name=ee-network
+#
+# Prerequisites:
+#   - ansible-builder installed
+#   - Container runtime (podman or docker)
+#   - Registry credentials for pushing images
+
+- name: Build Execution Environment
+  hosts: localhost
+  gather_facts: true
+  connection: local
+
+  vars:
+    ee_name: "{{ ee_name | default('ee-base') }}"
+    ee_base_path: "{{ playbook_dir }}/../../execution-environments"
+    registry_url: "{{ lookup('env', 'EE_REGISTRY') | default('quay.io') }}"
+    registry_namespace: "{{ lookup('env', 'EE_NAMESPACE') | default('company') }}"
+    push_to_registry: "{{ push | default(true) }}"
+
+  tasks:
+    #==========================================================================
+    # VALIDATION
+    #==========================================================================
+    - name: Check ansible-builder is installed
+      ansible.builtin.command: ansible-builder --version
+      register: builder_version
+      changed_when: false
+      failed_when: builder_version.rc != 0
+
+    - name: Check execution environment definition exists
+      ansible.builtin.stat:
+        path: "{{ ee_base_path }}/{{ ee_name }}/execution-environment.yml"
+      register: ee_definition
+      failed_when: not ee_definition.stat.exists
+
+    #==========================================================================
+    # BUILD
+    #==========================================================================
+    - name: Build execution environment
+      ansible.builtin.command:
+        cmd: >
+          ansible-builder build
+          --tag {{ registry_url }}/{{ registry_namespace }}/{{ ee_name }}:latest
+          --tag {{ registry_url }}/{{ registry_namespace }}/{{ ee_name }}:{{ ansible_date_time.date }}
+          --container-runtime podman
+          --verbosity 2
+        chdir: "{{ ee_base_path }}/{{ ee_name }}"
+      register: build_result
+
+    - name: Display build output
+      ansible.builtin.debug:
+        var: build_result.stdout_lines
+
+    #==========================================================================
+    # PUSH
+    #==========================================================================
+    - name: Push execution environment to registry
+      ansible.builtin.command:
+        cmd: >
+          podman push {{ registry_url }}/{{ registry_namespace }}/{{ ee_name }}:{{ item }}
+      loop:
+        - latest
+        - "{{ ansible_date_time.date }}"
+      when: push_to_registry | bool
+
+    #==========================================================================
+    # SUMMARY
+    #==========================================================================
+    - name: Display build summary
+      ansible.builtin.debug:
+        msg: |
+          Execution Environment build complete:
+          - Name: {{ ee_name }}
+          - Image: {{ registry_url }}/{{ registry_namespace }}/{{ ee_name }}
+          - Tags: latest, {{ ansible_date_time.date }}
+          - Pushed to registry: {{ push_to_registry }}

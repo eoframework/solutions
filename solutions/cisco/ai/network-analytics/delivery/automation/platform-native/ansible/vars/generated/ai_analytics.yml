@@ -1,0 +1,15 @@
+#------------------------------------------------------------------------------
+# Ai Analytics Configuration
+#------------------------------------------------------------------------------
+# Generated from configuration.csv on 2025-12-02 23:53:43
+#
+# To regenerate: python generate-ansible-vars.py /path/to/solution
+# DO NOT EDIT - Changes will be overwritten on regeneration
+#------------------------------------------------------------------------------
+
+ai_analytics:
+  anomaly_sensitivity: Medium
+  auto_remediation: false
+  baseline_learning_days: 14
+  confidence_threshold: 0.85
+  predictive_horizon_days: 14

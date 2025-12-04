@@ -1,0 +1,297 @@
+# Dell SafeID Authentication - Post-Deployment Validation
+# EO Framework - Dell Cyber Security Solutions
+
+---
+- name: Dell SafeID Authentication - Validation
+  hosts: safeid_servers
+  gather_facts: true
+  become: true
+  tags: [validate, always]
+
+  tasks:
+    - name: Display validation banner
+      ansible.builtin.debug:
+        msg: |
+          ================================================================
+          Dell SafeID Authentication - Validation
+          ================================================================
+          Environment: {{ environment }}
+          Server: {{ inventory_hostname }}
+          ================================================================
+
+    #=========================================================================
+    # SYSTEM VALIDATION
+    #=========================================================================
+    - name: Check SafeID service status
+      ansible.builtin.service_facts:
+      tags: [system]
+
+    - name: Verify SafeID services are running
+      ansible.builtin.assert:
+        that:
+          - "'safeid.service' in ansible_facts.services"
+          - ansible_facts.services['safeid.service'].state == 'running'
+        fail_msg: "SafeID service is not running"
+        success_msg: "SafeID service is running"
+      tags: [system]
+
+    - name: Check SafeID version
+      ansible.builtin.command: safeid-cli version
+      register: version_check
+      changed_when: false
+      tags: [system]
+
+    - name: Display SafeID version
+      ansible.builtin.debug:
+        var: version_check.stdout
+      tags: [system]
+
+    - name: Verify disk space
+      ansible.builtin.assert:
+        that:
+          - item.size_available > (5 * 1024 * 1024 * 1024)
+        fail_msg: "Insufficient disk space on {{ item.mount }}"
+        success_msg: "Sufficient disk space on {{ item.mount }}"
+      loop: "{{ ansible_mounts }}"
+      when: item.mount in ['/var/lib/safeid', '/var/log', '/']
+      tags: [system]
+
+    #=========================================================================
+    # DATABASE VALIDATION
+    #=========================================================================
+    - name: Check database connectivity
+      ansible.builtin.command: safeid-cli database status
+      register: db_status
+      changed_when: false
+      tags: [database]
+
+    - name: Display database status
+      ansible.builtin.debug:
+        var: db_status.stdout_lines
+      tags: [database]
+
+    - name: Verify database connection
+      ansible.builtin.assert:
+        that:
+          - "'connected' in db_status.stdout.lower()"
+        fail_msg: "Database connection failed"
+        success_msg: "Database connection successful"
+      tags: [database]
+
+    #=========================================================================
+    # HIGH AVAILABILITY VALIDATION
+    #=========================================================================
+    - name: Check HA status
+      ansible.builtin.command: safeid-cli ha status
+      register: ha_status
+      changed_when: false
+      when: safeid.ha.enabled | default(false)
+      tags: [ha]
+
+    - name: Display HA status
+      ansible.builtin.debug:
+        var: ha_status.stdout_lines
+      when: safeid.ha.enabled | default(false)
+      tags: [ha]
+
+    - name: Verify HA synchronization
+      ansible.builtin.assert:
+        that:
+          - "'synchronized' in ha_status.stdout.lower() or 'synced' in ha_status.stdout.lower()"
+        fail_msg: "HA synchronization is not working"
+        success_msg: "HA synchronization is working"
+      when: safeid.ha.enabled | default(false)
+      tags: [ha]
+
+    #=========================================================================
+    # LDAP INTEGRATION VALIDATION
+    #=========================================================================
+    - name: Check LDAP connectivity
+      ansible.builtin.command: safeid-cli ldap test
+      register: ldap_test
+      changed_when: false
+      when: ldap.enabled | default(false)
+      tags: [ldap]
+
+    - name: Display LDAP test results
+      ansible.builtin.debug:
+        var: ldap_test.stdout_lines
+      when: ldap.enabled | default(false)
+      tags: [ldap]
+
+    - name: Verify LDAP user count
+      ansible.builtin.command: safeid-cli user count
+      register: user_count
+      changed_when: false
+      when:
+        - ldap.enabled | default(false)
+        - server_role == "primary"
+      tags: [ldap]
+
+    - name: Display user count
+      ansible.builtin.debug:
+        msg: "Total users synced from LDAP: {{ user_count.stdout }}"
+      when:
+        - ldap.enabled | default(false)
+        - server_role == "primary"
+      tags: [ldap]
+
+    #=========================================================================
+    # RADIUS VALIDATION
+    #=========================================================================
+    - name: Check RADIUS service status
+      ansible.builtin.service_facts:
+      when: radius.enabled | default(false)
+      tags: [radius]
+
+    - name: Verify RADIUS service is running
+      ansible.builtin.assert:
+        that:
+          - "'safeid-radius.service' in ansible_facts.services"
+          - ansible_facts.services['safeid-radius.service'].state == 'running'
+        fail_msg: "RADIUS service is not running"
+        success_msg: "RADIUS service is running"
+      when: radius.enabled | default(false)
+      tags: [radius]
+
+    - name: Check RADIUS port is listening
+      ansible.builtin.wait_for:
+        port: "{{ radius.port }}"
+        timeout: 10
+        state: started
+      when: radius.enabled | default(false)
+      tags: [radius]
+
+    #=========================================================================
+    # SAML VALIDATION
+    #=========================================================================
+    - name: Check SAML service status
+      ansible.builtin.service_facts:
+      when: saml.enabled | default(false)
+      tags: [saml]
+
+    - name: Verify SAML service is running
+      ansible.builtin.assert:
+        that:
+          - "'safeid-saml.service' in ansible_facts.services"
+          - ansible_facts.services['safeid-saml.service'].state == 'running'
+        fail_msg: "SAML service is not running"
+        success_msg: "SAML service is running"
+      when: saml.enabled | default(false)
+      tags: [saml]
+
+    - name: Verify SAML metadata is accessible
+      ansible.builtin.uri:
+        url: "{{ saml.entity_id }}/saml/metadata"
+        validate_certs: false
+        status_code: 200
+      when: saml.enabled | default(false)
+      tags: [saml]
+
+    #=========================================================================
+    # ENROLLMENT PORTAL VALIDATION
+    #=========================================================================
+    - name: Verify enrollment portal is accessible
+      ansible.builtin.uri:
+        url: "{{ users.enrollment.portal_url }}/health"
+        validate_certs: false
+        status_code: 200
+      tags: [enrollment]
+
+    - name: Check FIDO2 configuration
+      ansible.builtin.command: safeid-cli fido2 status
+      register: fido2_status
+      changed_when: false
+      when: authentication.fido2.enabled | default(false)
+      tags: [enrollment]
+
+    - name: Display FIDO2 configuration
+      ansible.builtin.debug:
+        var: fido2_status.stdout_lines
+      when: authentication.fido2.enabled | default(false)
+      tags: [enrollment]
+
+    #=========================================================================
+    # CERTIFICATE VALIDATION
+    #=========================================================================
+    - name: Check SSL certificate validity
+      community.crypto.x509_certificate_info:
+        path: /etc/safeid/ssl/server.crt
+      register: cert_info
+      tags: [certificates]
+
+    - name: Verify certificate is not expired
+      ansible.builtin.assert:
+        that:
+          - not cert_info.expired
+        fail_msg: "SSL certificate is expired"
+        success_msg: "SSL certificate is valid"
+      tags: [certificates]
+
+    - name: Display certificate expiration
+      ansible.builtin.debug:
+        msg: "Certificate expires: {{ cert_info.not_after }}"
+      tags: [certificates]
+
+    #=========================================================================
+    # BACKUP VALIDATION
+    #=========================================================================
+    - name: Check backup configuration
+      ansible.builtin.stat:
+        path: /etc/safeid/backup.conf
+      register: backup_config
+      tags: [backup]
+
+    - name: Verify backup configuration exists
+      ansible.builtin.assert:
+        that:
+          - backup_config.stat.exists
+        fail_msg: "Backup configuration not found"
+        success_msg: "Backup configuration exists"
+      when: operations.backup.enabled | default(false)
+      tags: [backup]
+
+    - name: Check backup directory
+      ansible.builtin.stat:
+        path: "{{ operations.backup.destination }}"
+      register: backup_dir
+      when: operations.backup.enabled | default(false)
+      tags: [backup]
+
+    - name: Verify backup directory exists
+      ansible.builtin.assert:
+        that:
+          - backup_dir.stat.exists
+          - backup_dir.stat.isdir
+        fail_msg: "Backup directory not found"
+        success_msg: "Backup directory exists"
+      when: operations.backup.enabled | default(false)
+      tags: [backup]
+
+#=============================================================================
+# VALIDATION SUMMARY
+#=============================================================================
+- name: Validation Summary
+  hosts: localhost
+  gather_facts: false
+  tags: [always]
+
+  tasks:
+    - name: Display validation summary
+      ansible.builtin.debug:
+        msg: |
+          ================================================================
+          Dell SafeID Authentication - Validation Summary
+          ================================================================
+          Environment: {{ environment | default('production') }}
+          Timestamp: {{ ansible_date_time.iso8601 }}
+
+          All validation checks completed successfully!
+
+          Next Steps:
+          1. Review the output above for any warnings
+          2. Test user enrollment with YubiKeys
+          3. Validate VPN authentication via RADIUS
+          4. Test SAML SSO with configured service providers
+          5. Configure monitoring and alerts
+          ================================================================

@@ -1,0 +1,9 @@
+---
+#------------------------------------------------------------------------------
+# Default variables for dnac-auth role
+#------------------------------------------------------------------------------
+
+# Authentication retry settings
+dnac_auth_retries: 3
+dnac_auth_delay: 5
+dnac_auth_timeout: 30

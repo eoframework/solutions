@@ -1,0 +1,30 @@
+#------------------------------------------------------------------------------
+# Integrations Configuration
+#------------------------------------------------------------------------------
+# Generated from configuration.csv on 2025-12-02 23:53:43
+#
+# To regenerate: python generate-ansible-vars.py /path/to/solution
+# DO NOT EDIT - Changes will be overwritten on regeneration
+#------------------------------------------------------------------------------
+
+integrations:
+  ad:
+    base_dn: DC=client,DC=local
+    bind_password: '{{ vault_ad_bind_password }}'
+    bind_user: svc_dnac_ldap
+    domain: client.local
+    group_admin: DNA-Center-Admins
+    group_viewer: DNA-Center-Viewers
+    server_primary: 10.100.2.10
+    server_secondary: 10.100.2.11
+  netbox:
+    api_token: '{{ vault_netbox_api_token }}'
+    site_prefix: DNAC-
+    sync_interval: 15
+    url: https://netbox.client.local
+  servicenow:
+    instance: '[instance].service-now.com'
+    password: '{{ vault_servicenow_password }}'
+    priority_mapping: Critical:1,High:2,Medium:3,Low:4
+    table: incident
+    user: svc_dnac_snow

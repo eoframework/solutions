@@ -1,0 +1,12 @@
+#------------------------------------------------------------------------------
+# User Base Configuration
+#------------------------------------------------------------------------------
+# Generated from configuration.csv
+#
+# To regenerate: python generate-ansible-vars.py /path/to/solution
+# DO NOT EDIT - Changes will be overwritten on regeneration
+#------------------------------------------------------------------------------
+
+users:
+  developer_count: 50
+  team_count: 12

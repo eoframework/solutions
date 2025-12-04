@@ -1,0 +1,99 @@
+---
+#------------------------------------------------------------------------------
+# Phase 1: Cluster - HyperFlex Cluster Deployment
+#------------------------------------------------------------------------------
+# This playbook handles HyperFlex cluster configuration including:
+#   - Cluster creation/verification
+#   - Node configuration
+#   - Storage controller VMs
+#   - Cluster networking
+#------------------------------------------------------------------------------
+
+- name: Phase 1 - HyperFlex Cluster
+  hosts: localhost
+  gather_facts: no
+  tags: [cluster]
+
+  vars_files:
+    - "{{ playbook_dir }}/../vars/generated/project.yml"
+    - "{{ playbook_dir }}/../vars/generated/hyperflex.yml"
+    - "{{ playbook_dir }}/../vars/generated/vmware.yml"
+    - "{{ playbook_dir }}/../vars/secrets.yml"
+
+  tasks:
+    #--------------------------------------------------------------------------
+    # Cluster Verification
+    #--------------------------------------------------------------------------
+    - name: Get HyperFlex cluster info
+      ansible.builtin.uri:
+        url: "https://{{ hyperflex.cluster_ip }}/api/v1/cluster"
+        method: GET
+        user: "{{ hyperflex.admin_user }}"
+        password: "{{ vault_hx_admin_password }}"
+        force_basic_auth: yes
+        validate_certs: "{{ hyperflex.ssl_verify }}"
+      register: hx_cluster
+      ignore_errors: yes
+
+    - name: Display cluster status
+      ansible.builtin.debug:
+        msg: "HyperFlex Cluster: {{ hx_cluster.json | default('Not accessible - verify credentials') }}"
+        verbosity: 1
+
+    #--------------------------------------------------------------------------
+    # Cluster Configuration
+    #--------------------------------------------------------------------------
+    - name: Display HyperFlex cluster configuration
+      ansible.builtin.debug:
+        msg: |
+          HyperFlex Cluster Configuration:
+          - Cluster Name: {{ hyperflex.cluster_name }}
+          - Cluster IP: {{ hyperflex.cluster_ip }}
+          - Node Count: {{ hyperflex.node_count }}
+          - Cluster Type: {{ hyperflex.cluster_type }}
+
+          Storage Configuration:
+          - Deduplication: {{ hyperflex.deduplication }}
+          - Compression: {{ hyperflex.compression }}
+          - Replication Factor: {{ hyperflex.replication_factor }}
+
+    #--------------------------------------------------------------------------
+    # vSphere Integration
+    #--------------------------------------------------------------------------
+    - name: Display vSphere configuration
+      ansible.builtin.debug:
+        msg: |
+          vSphere Integration:
+          - vCenter: {{ vmware.vcenter_ip }}
+          - Datacenter: {{ vmware.datacenter }}
+          - Cluster Name: {{ vmware.cluster_name }}
+          - Distributed Switch: {{ vmware.dvs_name }}
+
+    #--------------------------------------------------------------------------
+    # Node Verification
+    #--------------------------------------------------------------------------
+    - name: Display node configuration
+      ansible.builtin.debug:
+        msg: |
+          Node Configuration:
+          - Expected Nodes: {{ hyperflex.node_count }}
+          - Node Type: HyperFlex HX-Series
+
+          Note: Node inventory should be verified via:
+          - HyperFlex Connect UI
+          - Cisco Intersight (if connected)
+
+    #--------------------------------------------------------------------------
+    # Summary
+    #--------------------------------------------------------------------------
+    - name: Cluster deployment summary
+      ansible.builtin.debug:
+        msg: |
+          ============================================================
+          Phase 1 - HyperFlex Cluster Complete
+          ============================================================
+          Cluster: {{ hyperflex.cluster_name }}
+          Nodes: {{ hyperflex.node_count }}
+          Replication Factor: {{ hyperflex.replication_factor }}
+          vSphere Integration: {{ vmware.vcenter_ip }}
+          ============================================================

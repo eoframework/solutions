@@ -1,0 +1,111 @@
+---
+# junos-vpn/tasks/main.yml - IPSec VPN configuration
+
+#==============================================================================
+# IKE CONFIGURATION
+#==============================================================================
+- name: Configure IKE proposal
+  junipernetworks.junos.junos_config:
+    lines:
+      - "set security ike proposal ike-prop-{{ solution.environment }} authentication-method pre-shared-keys"
+      - "set security ike proposal ike-prop-{{ solution.environment }} dh-group {{ vpn.ike.dh_group }}"
+      - "set security ike proposal ike-prop-{{ solution.environment }} authentication-algorithm {{ vpn.ike.authentication }}"
+      - "set security ike proposal ike-prop-{{ solution.environment }} encryption-algorithm {{ vpn.ike.encryption }}"
+      - "set security ike proposal ike-prop-{{ solution.environment }} lifetime-seconds {{ vpn.ike.lifetime }}"
+
+- name: Configure IKE policy
+  junipernetworks.junos.junos_config:
+    lines:
+      - "set security ike policy ike-policy-{{ solution.environment }} mode main"
+      - "set security ike policy ike-policy-{{ solution.environment }} proposals ike-prop-{{ solution.environment }}"
+      - "set security ike policy ike-policy-{{ solution.environment }} pre-shared-key ascii-text \"{{ vpn_psk }}\""
+  no_log: true
+
+- name: Configure IKE gateway
+  junipernetworks.junos.junos_config:
+    lines:
+      - "set security ike gateway {{ item.name }} ike-policy ike-policy-{{ solution.environment }}"
+      - "set security ike gateway {{ item.name }} address {{ item.peer_address }}"
+      - "set security ike gateway {{ item.name }} external-interface {{ item.external_interface }}"
+      - "set security ike gateway {{ item.name }} local-identity inet {{ item.local_identity }}"
+      - "set security ike gateway {{ item.name }} remote-identity inet {{ item.remote_identity }}"
+      - "set security ike gateway {{ item.name }} version v2-only"
+  loop: "{{ vpn_gateways | default([]) }}"
+  when: vpn_gateways is defined
+
+#==============================================================================
+# IPSEC CONFIGURATION
+#==============================================================================
+- name: Configure IPsec proposal
+  junipernetworks.junos.junos_config:
+    lines:
+      - "set security ipsec proposal ipsec-prop-{{ solution.environment }} protocol esp"
+      - "set security ipsec proposal ipsec-prop-{{ solution.environment }} authentication-algorithm {{ vpn.ipsec.authentication }}"
+      - "set security ipsec proposal ipsec-prop-{{ solution.environment }} encryption-algorithm {{ vpn.ipsec.encryption }}"
+      - "set security ipsec proposal ipsec-prop-{{ solution.environment }} lifetime-seconds {{ vpn.ipsec.lifetime }}"
+
+- name: Configure IPsec policy
+  junipernetworks.junos.junos_config:
+    lines:
+      - "set security ipsec policy ipsec-policy-{{ solution.environment }} perfect-forward-secrecy keys {{ vpn.ipsec.pfs_group }}"
+      - "set security ipsec policy ipsec-policy-{{ solution.environment }} proposals ipsec-prop-{{ solution.environment }}"
+
+- name: Configure IPsec VPN
+  junipernetworks.junos.junos_config:
+    lines:
+      - "set security ipsec vpn {{ item.name }} bind-interface {{ item.tunnel_interface }}"
+      - "set security ipsec vpn {{ item.name }} ike gateway {{ item.ike_gateway }}"
+      - "set security ipsec vpn {{ item.name }} ike ipsec-policy ipsec-policy-{{ solution.environment }}"
+      - "set security ipsec vpn {{ item.name }} establish-tunnels immediately"
+  loop: "{{ vpn_tunnels | default([]) }}"
+  when: vpn_tunnels is defined
+
+#==============================================================================
+# TUNNEL INTERFACES
+#==============================================================================
+- name: Configure tunnel interfaces
+  junipernetworks.junos.junos_config:
+    lines:
+      - "set interfaces {{ item.interface }} unit 0 family inet address {{ item.local_address }}"
+  loop: "{{ vpn_tunnels | default([]) }}"
+  when: vpn_tunnels is defined
+
+#==============================================================================
+# VPN TRAFFIC SELECTORS
+#==============================================================================
+- name: Configure traffic selectors
+  junipernetworks.junos.junos_config:
+    lines:
+      - "set security ipsec vpn {{ item.vpn_name }} traffic-selector {{ item.name }} local-ip {{ item.local_network }}"
+      - "set security ipsec vpn {{ item.vpn_name }} traffic-selector {{ item.name }} remote-ip {{ item.remote_network }}"
+  loop: "{{ vpn_traffic_selectors | default([]) }}"
+  when: vpn_traffic_selectors is defined
+
+#==============================================================================
+# VPN MONITORING
+#==============================================================================
+- name: Configure VPN monitoring
+  junipernetworks.junos.junos_config:
+    lines:
+      - "set security ipsec vpn {{ item.name }} vpn-monitor source-interface {{ item.source_interface }}"
+      - "set security ipsec vpn {{ item.name }} vpn-monitor destination-ip {{ item.monitor_destination }}"
+      - "set security ipsec vpn {{ item.name }} vpn-monitor optimized"
+  loop: "{{ vpn_tunnels | default([]) }}"
+  when:
+    - vpn_tunnels is defined
+    - item.enable_monitoring | default(true)
+
+#==============================================================================
+# VPN ZONE POLICIES
+#==============================================================================
+- name: Configure VPN zone policies
+  junipernetworks.junos.junos_config:
+    lines:
+      - "set security policies from-zone vpn to-zone internal policy allow-vpn-to-internal match source-address any"
+      - "set security policies from-zone vpn to-zone internal policy allow-vpn-to-internal match destination-address any"
+      - "set security policies from-zone vpn to-zone internal policy allow-vpn-to-internal match application any"
+      - "set security policies from-zone vpn to-zone internal policy allow-vpn-to-internal then permit"
+      - "set security policies from-zone internal to-zone vpn policy allow-internal-to-vpn match source-address any"
+      - "set security policies from-zone internal to-zone vpn policy allow-internal-to-vpn match destination-address any"
+      - "set security policies from-zone internal to-zone vpn policy allow-internal-to-vpn match application any"
+      - "set security policies from-zone internal to-zone vpn policy allow-internal-to-vpn then permit"

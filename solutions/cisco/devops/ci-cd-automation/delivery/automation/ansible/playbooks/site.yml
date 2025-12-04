@@ -1,0 +1,46 @@
+---
+# Site-wide Playbook - Orchestrates all automation tasks
+# Usage: ansible-playbook -i inventory/prod/hosts.yml playbooks/site.yml
+
+- name: Cisco Network CI/CD Automation - Complete Deployment
+  hosts: localhost
+  gather_facts: no
+  vars_files:
+    - ../vars/generated/project.yml
+    - ../vars/generated/gitlab.yml
+    - ../vars/generated/jenkins.yml
+  tasks:
+    - name: Display deployment information
+      debug:
+        msg:
+          - "Starting Cisco Network CI/CD Automation Deployment"
+          - "Environment: {{ environment | default('production') }}"
+          - "Timestamp: {{ ansible_date_time.iso8601 }}"
+
+# Phase 1: GitOps Infrastructure Setup
+- name: Phase 1 - Setup CI/CD Pipeline Infrastructure
+  import_playbook: pipeline-setup.yml
+  tags: [phase1, pipeline, infrastructure]
+
+# Phase 2: Network Device Configuration
+- name: Phase 2 - Configure Network Devices
+  import_playbook: network-config.yml
+  tags: [phase2, network, config]
+
+# Phase 3: Validation and Testing
+- name: Phase 3 - Validate Deployment
+  import_playbook: validation.yml
+  tags: [phase3, validation, testing]
+
+# Post-deployment Summary
+- name: Post-Deployment Summary
+  hosts: localhost
+  gather_facts: no
+  tasks:
+    - name: Display completion summary
+      debug:
+        msg:
+          - "Cisco Network CI/CD Automation Deployment Complete"
+          - "Environment: {{ environment | default('production') }}"
+          - "Completed at: {{ ansible_date_time.iso8601 }}"
+          - "Review logs for detailed results"

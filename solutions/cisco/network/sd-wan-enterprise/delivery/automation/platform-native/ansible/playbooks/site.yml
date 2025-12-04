@@ -1,0 +1,74 @@
+---
+#------------------------------------------------------------------------------
+# Cisco SD-WAN Enterprise - Master Playbook
+#------------------------------------------------------------------------------
+# This is the main orchestration playbook that imports all phase playbooks.
+#
+# Usage:
+#   Full deployment:   ansible-playbook playbooks/site.yml
+#   Specific phase:    ansible-playbook playbooks/01-foundation.yml
+#   With vault:        ansible-playbook playbooks/site.yml --ask-vault-pass
+#
+# Tags:
+#   foundation     - Phase 1: Controller infrastructure
+#   fabric         - Phase 1: SD-WAN fabric and overlay
+#   policies       - Phase 2: QoS, security, and routing policies
+#   integration    - Phase 2: Cloud OnRamp, SaaS integrations
+#   validation     - Phase 3: Go-live validation and testing
+#------------------------------------------------------------------------------
+
+- name: SD-WAN Enterprise - Full Deployment
+  hosts: localhost
+  gather_facts: no
+
+  vars_files:
+    - "{{ playbook_dir }}/../vars/generated/project.yml"
+    - "{{ playbook_dir }}/../vars/generated/vmanage.yml"
+    - "{{ playbook_dir }}/../vars/generated/vsmart.yml"
+    - "{{ playbook_dir }}/../vars/generated/vbond.yml"
+    - "{{ playbook_dir }}/../vars/secrets.yml"
+
+  pre_tasks:
+    - name: Display deployment information
+      ansible.builtin.debug:
+        msg: |
+          ============================================================
+          Cisco SD-WAN Enterprise Deployment
+          ============================================================
+          Solution: {{ solution.name }}
+          vManage: {{ vmanage.fqdn }} ({{ vmanage.primary_ip }})
+          vSmart: {{ vsmart.primary_ip }}
+          vBond: {{ vbond.primary_ip }}
+          ============================================================
+
+    - name: Verify vManage connectivity
+      ansible.builtin.uri:
+        url: "https://{{ vmanage.primary_ip }}/dataservice/system/device/controllers"
+        method: GET
+        user: "{{ vmanage.admin_user }}"
+        password: "{{ vault_vmanage_admin_password }}"
+        force_basic_auth: yes
+        validate_certs: "{{ vmanage.ssl_verify }}"
+        status_code: [200, 401]
+      register: vmanage_connectivity
+      tags: [always]
+
+- name: Phase 1 - Foundation
+  ansible.builtin.import_playbook: 01-foundation.yml
+  tags: [foundation]
+
+- name: Phase 1 - Fabric
+  ansible.builtin.import_playbook: 02-fabric.yml
+  tags: [fabric]
+
+- name: Phase 2 - Policies
+  ansible.builtin.import_playbook: 03-policies.yml
+  tags: [policies]
+
+- name: Phase 2 - Integration
+  ansible.builtin.import_playbook: 04-integration.yml
+  tags: [integration]
+
+- name: Phase 3 - Validation
+  ansible.builtin.import_playbook: 05-validation.yml
+  tags: [validation]

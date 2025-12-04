@@ -1,0 +1,21 @@
+#------------------------------------------------------------------------------
+# Project Configuration
+#------------------------------------------------------------------------------
+# Generated from configuration.csv
+#
+# To regenerate: python generate-ansible-vars.py /path/to/solution
+# DO NOT EDIT - Changes will be overwritten on regeneration
+#------------------------------------------------------------------------------
+
+solution:
+  name: poweredge-ci-infrastructure
+  abbr: peci
+  provider_name: dell
+  category_name: devops
+
+datacenter:
+  name: "Primary Datacenter"
+
+ownership:
+  cost_center: CC-DEVOPS-001
+  owner_email: devops-team@company.com

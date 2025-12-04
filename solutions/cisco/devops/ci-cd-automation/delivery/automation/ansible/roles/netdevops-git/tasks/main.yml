@@ -1,0 +1,128 @@
+---
+# NetDevOps Git Role - Configure Git repository structure for network automation
+# This role sets up Git workflows, branch protection, and repository structure
+
+- name: Ensure Git is installed
+  package:
+    name: git
+    state: present
+  become: yes
+  tags: [git, install]
+
+- name: Create network automation repository structure
+  file:
+    path: "{{ item }}"
+    state: directory
+    mode: '0755'
+  loop:
+    - "{{ git_repo_path }}/network-configs"
+    - "{{ git_repo_path }}/templates"
+    - "{{ git_repo_path }}/playbooks"
+    - "{{ git_repo_path }}/inventory"
+    - "{{ git_repo_path }}/scripts"
+    - "{{ git_repo_path }}/.gitlab-ci"
+  tags: [git, structure]
+
+- name: Initialize Git repository
+  command: git init
+  args:
+    chdir: "{{ git_repo_path }}"
+    creates: "{{ git_repo_path }}/.git"
+  tags: [git, init]
+
+- name: Configure Git user
+  command: "{{ item }}"
+  args:
+    chdir: "{{ git_repo_path }}"
+  loop:
+    - git config user.name "Network Automation"
+    - git config user.email "netops@client.local"
+  tags: [git, config]
+
+- name: Create .gitignore file
+  copy:
+    dest: "{{ git_repo_path }}/.gitignore"
+    content: |
+      # Ansible
+      *.retry
+      *.log
+      .vault_pass.txt
+
+      # Secrets and credentials
+      secrets.yml
+      vault.yml
+      *_vault.yml
+      credentials.yml
+
+      # Backups
+      backups/
+      *.bak
+
+      # Python
+      __pycache__/
+      *.py[cod]
+      venv/
+      .venv/
+
+      # IDE
+      .vscode/
+      .idea/
+      *.swp
+
+      # Temporary files
+      tmp/
+      temp/
+      *.tmp
+    mode: '0644'
+  tags: [git, gitignore]
+
+- name: Create README for network automation repository
+  copy:
+    dest: "{{ git_repo_path }}/README.md"
+    content: |
+      # Cisco Network Automation Repository
+
+      This repository contains network automation playbooks, templates, and configurations
+      for Cisco network devices using Ansible and GitOps workflows.
+
+      ## Directory Structure
+
+      - `network-configs/` - Device-specific configurations
+      - `templates/` - Jinja2 templates for configuration generation
+      - `playbooks/` - Ansible playbooks for automation tasks
+      - `inventory/` - Device inventory files
+      - `scripts/` - Helper scripts and utilities
+
+      ## Usage
+
+      See individual directory READMEs for detailed usage instructions.
+
+      ## CI/CD Pipeline
+
+      This repository uses GitLab CI/CD for automated testing and deployment.
+      All changes must go through merge request approval process.
+    mode: '0644'
+  tags: [git, readme]
+
+- name: Create GitLab CI configuration
+  template:
+    src: gitlab-ci.yml.j2
+    dest: "{{ git_repo_path }}/.gitlab-ci.yml"
+    mode: '0644'
+  tags: [git, gitlab-ci]
+
+- name: Add remote origin (if configured)
+  command: git remote add origin {{ git_remote_url }}
+  args:
+    chdir: "{{ git_repo_path }}"
+  when: git_remote_url is defined
+  ignore_errors: yes
+  tags: [git, remote]
+
+- name: Display Git repository setup summary
+  debug:
+    msg:
+      - "Git repository initialized at: {{ git_repo_path }}"
+      - "Repository structure created"
+      - "GitLab CI configuration added"
+      - "Ready for network automation workflows"

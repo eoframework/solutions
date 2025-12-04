@@ -1,0 +1,123 @@
+---
+#------------------------------------------------------------------------------
+# Phase 1: Fabric - SD-WAN Fabric and Overlay Configuration
+#------------------------------------------------------------------------------
+# This playbook handles fabric configuration including:
+#   - Transport configuration (MPLS, Internet, LTE)
+#   - VPN configuration
+#   - OMP routing
+#   - BFD settings
+#------------------------------------------------------------------------------
+
+- name: Phase 1 - SD-WAN Fabric
+  hosts: localhost
+  gather_facts: no
+  tags: [fabric]
+
+  vars_files:
+    - "{{ playbook_dir }}/../vars/generated/project.yml"
+    - "{{ playbook_dir }}/../vars/generated/vmanage.yml"
+    - "{{ playbook_dir }}/../vars/generated/sdwan_fabric.yml"
+    - "{{ playbook_dir }}/../vars/generated/transport.yml"
+    - "{{ playbook_dir }}/../vars/generated/bfd.yml"
+    - "{{ playbook_dir }}/../vars/generated/vedge.yml"
+    - "{{ playbook_dir }}/../vars/secrets.yml"
+
+  tasks:
+    #--------------------------------------------------------------------------
+    # vManage Authentication
+    #--------------------------------------------------------------------------
+    - name: Authenticate to vManage
+      ansible.builtin.uri:
+        url: "https://{{ vmanage.primary_ip }}/j_security_check"
+        method: POST
+        body_format: form-urlencoded
+        body:
+          j_username: "{{ vmanage.admin_user }}"
+          j_password: "{{ vault_vmanage_admin_password }}"
+        validate_certs: "{{ vmanage.ssl_verify }}"
+        status_code: 200
+      register: vmanage_auth
+
+    #--------------------------------------------------------------------------
+    # Transport Configuration
+    #--------------------------------------------------------------------------
+    - name: Display transport configuration
+      ansible.builtin.debug:
+        msg: |
+          Transport Configuration:
+          - MPLS Enabled: {{ transport.mpls_enabled }}
+          - Internet Enabled: {{ transport.internet_enabled }}
+          - LTE Enabled: {{ transport.lte_enabled }}
+
+          Transport Colors:
+          - MPLS: mpls
+          - Internet: biz-internet, public-internet
+          - LTE: lte
+
+    #--------------------------------------------------------------------------
+    # VPN Configuration
+    #--------------------------------------------------------------------------
+    - name: Display VPN configuration
+      ansible.builtin.debug:
+        msg: |
+          VPN Configuration:
+          - VPN 0 (Transport): Management and control traffic
+          - VPN 512 (Management): Out-of-band management
+          - Service VPNs: Customer defined
+
+          Service VPN Design:
+          - Corporate: VPN 10
+          - Guest: VPN 20
+          - Voice: VPN 30
+
+    #--------------------------------------------------------------------------
+    # OMP Configuration
+    #--------------------------------------------------------------------------
+    - name: Display OMP settings
+      ansible.builtin.debug:
+        msg: |
+          OMP (Overlay Management Protocol):
+          - Graceful Restart: {{ sdwan_fabric.omp_graceful_restart }}
+          - Overlay AS: {{ sdwan_fabric.overlay_as | default('65000') }}
+          - ECMP Limit: {{ sdwan_fabric.ecmp_limit | default(4) }}
+
+    #--------------------------------------------------------------------------
+    # BFD Configuration
+    #--------------------------------------------------------------------------
+    - name: Display BFD settings
+      ansible.builtin.debug:
+        msg: |
+          BFD Configuration:
+          - Multiplier: {{ bfd.multiplier }}
+          - Poll Interval: {{ bfd.poll_interval }} ms
+          - App Aware Routing Multiplier: {{ bfd.app_route_multiplier }}
+
+    #--------------------------------------------------------------------------
+    # Device Templates
+    #--------------------------------------------------------------------------
+    - name: Display template configuration
+      ansible.builtin.debug:
+        msg: |
+          Device Template Strategy:
+          - Feature Templates: Reusable configuration blocks
+          - Device Templates: Combine feature templates per device type
+
+          Template Types:
+          1. Hub Router Template (Data Center)
+          2. Branch Router Template (Remote Sites)
+          3. Transit Router Template (Regional)
+
+    #--------------------------------------------------------------------------
+    # Summary
+    #--------------------------------------------------------------------------
+    - name: Fabric configuration summary
+      ansible.builtin.debug:
+        msg: |
+          ============================================================
+          Phase 1 - SD-WAN Fabric Complete
+          ============================================================
+          Transports: MPLS={{ transport.mpls_enabled }}, Internet={{ transport.internet_enabled }}, LTE={{ transport.lte_enabled }}
+          OMP Graceful Restart: {{ sdwan_fabric.omp_graceful_restart }}
+          BFD Multiplier: {{ bfd.multiplier }}
+          ============================================================

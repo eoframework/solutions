@@ -1,0 +1,13 @@
+#------------------------------------------------------------------------------
+# Authentication Configuration
+#------------------------------------------------------------------------------
+# Generated from configuration.csv
+#
+# To regenerate: python generate-ansible-vars.py /path/to/solution
+# DO NOT EDIT - Changes will be overwritten on regeneration
+#------------------------------------------------------------------------------
+
+authentication:
+  tacacs_enabled: true
+  tacacs_server: "[tacacs.domain.com]"
+  ssh_enabled: true

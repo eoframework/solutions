@@ -1,0 +1,158 @@
+# Dell PowerSwitch Datacenter - Test Variables
+# Generated from configuration.csv - Test column
+# EO Framework - Dell Network Solutions
+
+---
+#=============================================================================
+# PROJECT METADATA
+#=============================================================================
+solution:
+  name: powerswitch-datacenter
+  abbr: psd
+  provider: dell
+  category: network
+
+environment: test
+datacenter_name: "Lab Environment"
+
+#=============================================================================
+# NETWORK FABRIC DESIGN (Reduced for Lab)
+#=============================================================================
+fabric:
+  # Spine layer
+  spine:
+    switch_model: S5248F-ON
+    switch_count: 2
+    port_config: 25GbE
+    bgp_asn: 65100
+
+  # Leaf layer
+  leaf:
+    switch_model: S5248F-ON
+    switch_count: 4
+    server_port_count: 48
+    uplink_count: 2
+    uplink_speed: 25GbE
+
+  # Capacity
+  total_server_ports: 192
+  fabric_bandwidth_tbps: 0.2
+
+#=============================================================================
+# BGP UNDERLAY CONFIGURATION
+#=============================================================================
+bgp:
+  spine_asn: 65100
+  leaf_asn_start: 65101
+  leaf_asn_end: 65102
+  router_id_prefix: "10.255.254"
+
+  # BGP timers
+  keepalive: 3
+  holdtime: 9
+
+  # Address families
+  address_families:
+    - ipv4_unicast
+
+#=============================================================================
+# EVPN/VXLAN OVERLAY
+#=============================================================================
+evpn:
+  enabled: false  # Disabled for lab
+
+#=============================================================================
+# VLAN CONFIGURATION (Reduced for Lab)
+#=============================================================================
+vlans:
+  - id: 10
+    name: MGMT
+    description: "Management Network"
+    gateway: "10.20.10.1/24"
+  - id: 20
+    name: SERVERS
+    description: "Server Network"
+    gateway: "10.20.20.1/24"
+  - id: 100
+    name: TEST_APP
+    description: "Test Applications"
+    gateway: "10.20.100.1/24"
+
+vlan_count: 50
+
+#=============================================================================
+# MANAGEMENT & MONITORING
+#=============================================================================
+management:
+  # NTP
+  ntp_servers:
+    - "{{ ntp_server | default('ntp.domain.com') }}"
+
+  # Syslog
+  syslog_servers:
+    - server: "{{ syslog_server | default('syslog.domain.com') }}"
+      facility: local0
+      level: debugging  # More verbose for lab
+
+  # SNMP
+  snmp:
+    version: v3
+    location: "Lab Environment"
+    contact: "netops@company.com"
+
+  # OpenManage Enterprise
+  openmanage_enabled: false
+
+#=============================================================================
+# AUTHENTICATION
+#=============================================================================
+authentication:
+  # TACACS+ - Disabled for lab
+  tacacs:
+    enabled: false
+
+  # SSH
+  ssh:
+    enabled: true
+    version: 2
+
+  # Local accounts
+  local_users:
+    - username: admin
+      privilege: 15
+    - username: labuser
+      privilege: 5
+
+#=============================================================================
+# SECURITY (Relaxed for Lab)
+#=============================================================================
+security:
+  storm_control:
+    enabled: false
+
+  mac_limit_per_port: 1000
+
+  ztp_enabled: true
+
+#=============================================================================
+# OPERATIONS
+#=============================================================================
+operations:
+  config_backup:
+    schedule: "Weekly"
+    retention_days: 7
+
+  ansible_automation: true
+
+#=============================================================================
+# SUPPORT
+#=============================================================================
+support:
+  dell_prosupport_level: "ProSupport"
+
+#=============================================================================
+# PERFORMANCE TARGETS
+#=============================================================================
+performance:
+  east_west_latency_us: 5
+  target_bandwidth_tbps: 0.2

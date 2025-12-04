@@ -1,0 +1,76 @@
+---
+#------------------------------------------------------------------------------
+# Role: ise-trustsec
+# Purpose: Configure Cisco TrustSec Security Group Tags (SGT)
+#------------------------------------------------------------------------------
+
+- name: Create Security Groups (SGTs)
+  cisco.ise.sgt:
+    ise_hostname: "{{ ise.primary_pan }}"
+    ise_username: "{{ ise.admin_user }}"
+    ise_password: "{{ vault_ise_admin_password }}"
+    ise_verify: "{{ ise.ssl_verify | default(false) }}"
+    name: "{{ item.name }}"
+    description: "{{ item.description }}"
+    value: "{{ item.tag_value }}"
+    propogateToApic: "{{ item.propagate_to_aci | default(false) }}"
+    state: present
+  loop: "{{ security_groups | default(default_security_groups) }}"
+  register: sgt_result
+
+- name: Create Security Group ACLs (SGACLs)
+  cisco.ise.sg_acl:
+    ise_hostname: "{{ ise.primary_pan }}"
+    ise_username: "{{ ise.admin_user }}"
+    ise_password: "{{ vault_ise_admin_password }}"
+    ise_verify: "{{ ise.ssl_verify | default(false) }}"
+    name: "{{ item.name }}"
+    description: "{{ item.description }}"
+    aclcontent: "{{ item.acl_content }}"
+    state: present
+  loop: "{{ security_group_acls | default([]) }}"
+  register: sgacl_result
+
+- name: Create TrustSec Matrix (Egress Policy)
+  cisco.ise.egress_matrix_cell:
+    ise_hostname: "{{ ise.primary_pan }}"
+    ise_username: "{{ ise.admin_user }}"
+    ise_password: "{{ vault_ise_admin_password }}"
+    ise_verify: "{{ ise.ssl_verify | default(false) }}"
+    sourceSgtId: "{{ item.source_sgt_id }}"
+    destinationSgtId: "{{ item.dest_sgt_id }}"
+    matrixCellStatus: "{{ item.status | default('ENABLED') }}"
+    sgacls:
+      - "{{ item.sgacl }}"
+    state: present
+  loop: "{{ trustsec_matrix | default([]) }}"
+  register: matrix_result
+
+- name: Display TrustSec configuration status
+  ansible.builtin.debug:
+    msg: |
+      TrustSec Configuration Status:
+      - Security Groups (SGTs): {{ sgt_result.results | length | default(0) }}
+      - SGACLs: {{ sgacl_result.results | length | default(0) }}
+      - Matrix Cells: {{ matrix_result.results | length | default(0) }}
+
+# Default security groups if none specified
+default_security_groups:
+  - name: "Employees"
+    description: "Corporate employees"
+    tag_value: 10
+  - name: "Contractors"
+    description: "External contractors"
+    tag_value: 20
+  - name: "Guests"
+    description: "Guest network users"
+    tag_value: 30
+  - name: "IoT_Devices"
+    description: "IoT and OT devices"
+    tag_value: 40
+  - name: "Servers"
+    description: "Data center servers"
+    tag_value: 100
+  - name: "Quarantine"
+    description: "Non-compliant devices"
+    tag_value: 999

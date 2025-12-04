@@ -1,0 +1,121 @@
+---
+#------------------------------------------------------------------------------
+# Phase 2: Integration - External System Integrations
+#------------------------------------------------------------------------------
+# This playbook handles integrations including:
+#   - ServiceNow ITSM
+#   - NetBox IPAM
+#   - Syslog/SIEM
+#------------------------------------------------------------------------------
+
+- name: Phase 2 - External Integrations
+  hosts: localhost
+  gather_facts: no
+  tags: [integration]
+
+  vars_files:
+    - "{{ playbook_dir }}/../vars/generated/project.yml"
+    - "{{ playbook_dir }}/../vars/generated/dnac.yml"
+    - "{{ playbook_dir }}/../vars/generated/integrations.yml"
+    - "{{ playbook_dir }}/../vars/generated/monitoring.yml"
+    - "{{ playbook_dir }}/../vars/generated/notifications.yml"
+    - "{{ playbook_dir }}/../vars/secrets.yml"
+
+  tasks:
+    #--------------------------------------------------------------------------
+    # Authentication
+    #--------------------------------------------------------------------------
+    - name: Authenticate to DNA Center
+      cisco.dnac.dnac_auth:
+        dnac_host: "{{ dnac.vip }}"
+        dnac_username: "{{ dnac.admin_user }}"
+        dnac_password: "{{ vault_dnac_admin_password }}"
+        dnac_verify: "{{ dnac.ssl_verify }}"
+      register: dnac_auth
+
+    #--------------------------------------------------------------------------
+    # ServiceNow Integration
+    #--------------------------------------------------------------------------
+    - name: Configure ServiceNow integration
+      ansible.builtin.uri:
+        url: "https://{{ dnac.vip }}/dna/intent/api/v1/integration/servicenow"
+        method: POST
+        headers:
+          x-auth-token: "{{ dnac_auth.dnac_auth }}"
+        body_format: json
+        body:
+          instanceName: "{{ integrations.servicenow.instance }}"
+          username: "{{ integrations.servicenow.user }}"
+          password: "{{ vault_servicenow_password }}"
+          tableName: "{{ integrations.servicenow.table }}"
+        validate_certs: "{{ dnac.ssl_verify }}"
+        status_code: [200, 201, 202]
+      register: snow_integration
+      when: integrations.servicenow.instance != "[instance].service-now.com"
+
+    #--------------------------------------------------------------------------
+    # Syslog Configuration
+    #--------------------------------------------------------------------------
+    - name: Configure syslog destination
+      ansible.builtin.uri:
+        url: "https://{{ dnac.vip }}/dna/intent/api/v1/event/syslog-config"
+        method: POST
+        headers:
+          x-auth-token: "{{ dnac_auth.dnac_auth }}"
+        body_format: json
+        body:
+          name: "SIEM Integration"
+          description: "Syslog to SIEM server"
+          host: "{{ monitoring.syslog_server }}"
+          port: "{{ monitoring.syslog_port }}"
+          protocol: "UDP"
+        validate_certs: "{{ dnac.ssl_verify }}"
+        status_code: [200, 201, 202]
+      register: syslog_config
+
+    #--------------------------------------------------------------------------
+    # Email Notifications
+    #--------------------------------------------------------------------------
+    - name: Configure SMTP settings
+      ansible.builtin.uri:
+        url: "https://{{ dnac.vip }}/dna/intent/api/v1/event/email-config"
+        method: POST
+        headers:
+          x-auth-token: "{{ dnac_auth.dnac_auth }}"
+        body_format: json
+        body:
+          primarySMTPConfig:
+            hostName: "{{ notifications.smtp_server }}"
+            port: "{{ notifications.smtp_port }}"
+            fromEmail: "{{ notifications.smtp_from }}"
+        validate_certs: "{{ dnac.ssl_verify }}"
+        status_code: [200, 201, 202]
+      register: smtp_config
+
+    #--------------------------------------------------------------------------
+    # NetBox Integration (via Webhook or custom script)
+    #--------------------------------------------------------------------------
+    - name: Display NetBox integration info
+      ansible.builtin.debug:
+        msg: |
+          NetBox Integration:
+          - URL: {{ integrations.netbox.url }}
+          - Sync Interval: {{ integrations.netbox.sync_interval }} minutes
+          - Site Prefix: {{ integrations.netbox.site_prefix }}
+
+          Note: NetBox sync can be automated via webhook or scheduled script.
+
+    #--------------------------------------------------------------------------
+    # Summary
+    #--------------------------------------------------------------------------
+    - name: Integration summary
+      ansible.builtin.debug:
+        msg: |
+          ============================================================
+          Phase 2 - External Integrations Complete
+          ============================================================
+          ServiceNow: {{ 'Configured' if snow_integration is defined else 'Skipped' }}
+          Syslog: Configured ({{ monitoring.syslog_server }}:{{ monitoring.syslog_port }})
+          SMTP: Configured ({{ notifications.smtp_server }})
+          NetBox: Manual configuration required
+          ============================================================

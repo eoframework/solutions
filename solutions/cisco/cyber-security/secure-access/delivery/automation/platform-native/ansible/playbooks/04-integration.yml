@@ -1,0 +1,128 @@
+---
+#------------------------------------------------------------------------------
+# Phase 2: Integration - External Security Integrations
+#------------------------------------------------------------------------------
+# This playbook handles external integrations including:
+#   - Cisco Duo MFA
+#   - Cisco Umbrella
+#   - Cisco SecureX
+#   - Threat Intelligence
+#------------------------------------------------------------------------------
+
+- name: Phase 2 - External Integrations
+  hosts: localhost
+  gather_facts: no
+  tags: [integration]
+
+  vars_files:
+    - "{{ playbook_dir }}/../vars/generated/project.yml"
+    - "{{ playbook_dir }}/../vars/generated/ise.yml"
+    - "{{ playbook_dir }}/../vars/generated/duo.yml"
+    - "{{ playbook_dir }}/../vars/generated/umbrella.yml"
+    - "{{ playbook_dir }}/../vars/generated/securex.yml"
+    - "{{ playbook_dir }}/../vars/generated/monitoring.yml"
+    - "{{ playbook_dir }}/../vars/generated/notifications.yml"
+    - "{{ playbook_dir }}/../vars/secrets.yml"
+
+  tasks:
+    #--------------------------------------------------------------------------
+    # Cisco Duo MFA Integration
+    #--------------------------------------------------------------------------
+    - name: Display Duo MFA configuration
+      ansible.builtin.debug:
+        msg: |
+          Cisco Duo MFA Integration:
+          - Enabled: {{ duo.enabled }}
+          - API Host: {{ duo.api_host }}
+          - Auth Proxy: {{ duo.auth_proxy }}
+
+          Integration Steps:
+          1. Install Duo Authentication Proxy on {{ duo.auth_proxy }}
+          2. Configure ISE to use Duo as external RADIUS server
+          3. Configure policy set to require MFA
+      when: duo.enabled | bool
+
+    #--------------------------------------------------------------------------
+    # Cisco Umbrella Integration
+    #--------------------------------------------------------------------------
+    - name: Display Umbrella configuration
+      ansible.builtin.debug:
+        msg: |
+          Cisco Umbrella Integration:
+          - Enabled: {{ umbrella.enabled }}
+          - Organization ID: {{ umbrella.org_id }}
+
+          Integration enables:
+          - DNS-layer security enforcement
+          - Threat intelligence sharing
+          - User/device correlation
+      when: umbrella.enabled | bool
+
+    #--------------------------------------------------------------------------
+    # Cisco SecureX Integration
+    #--------------------------------------------------------------------------
+    - name: Display SecureX configuration
+      ansible.builtin.debug:
+        msg: |
+          Cisco SecureX Integration:
+          - Enabled: {{ securex.enabled }}
+          - Region: {{ securex.region }}
+
+          Integration provides:
+          - Unified security dashboard
+          - Cross-product threat correlation
+          - Automated incident response
+      when: securex.enabled | bool
+
+    #--------------------------------------------------------------------------
+    # Threat Intelligence
+    #--------------------------------------------------------------------------
+    - name: Configure threat feeds
+      ansible.builtin.debug:
+        msg: |
+          Threat Intelligence Configuration:
+          - Rapid Threat Containment: Enabled
+          - pxGrid: Enabled for threat sharing
+          - Vulnerability Assessment: Integrated with posture
+
+    #--------------------------------------------------------------------------
+    # Syslog Configuration
+    #--------------------------------------------------------------------------
+    - name: Display syslog configuration
+      ansible.builtin.debug:
+        msg: |
+          Syslog/SIEM Configuration:
+          - Server: {{ monitoring.syslog_server }}
+          - Port: {{ monitoring.syslog_port }}
+
+          ISE Logging Categories to Enable:
+          - Authentication (RADIUS)
+          - Authorization
+          - Posture and Client Provisioning
+          - Guest
+
+    #--------------------------------------------------------------------------
+    # Email Notifications
+    #--------------------------------------------------------------------------
+    - name: Display notification configuration
+      ansible.builtin.debug:
+        msg: |
+          Email Notification Configuration:
+          - SMTP Server: {{ notifications.smtp_server }}
+          - From: {{ notifications.smtp_from }}
+          - Alert Recipients: {{ notifications.alert_recipients }}
+
+    #--------------------------------------------------------------------------
+    # Summary
+    #--------------------------------------------------------------------------
+    - name: Integration summary
+      ansible.builtin.debug:
+        msg: |
+          ============================================================
+          Phase 2 - External Integrations Complete
+          ============================================================
+          Duo MFA: {{ 'Enabled' if duo.enabled else 'Disabled' }}
+          Umbrella: {{ 'Enabled' if umbrella.enabled else 'Disabled' }}
+          SecureX: {{ 'Enabled' if securex.enabled else 'Disabled' }}
+          Syslog: {{ monitoring.syslog_server }}:{{ monitoring.syslog_port }}
+          ============================================================

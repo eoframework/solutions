@@ -1,0 +1,48 @@
+---
+# SD-WAN Policies Role
+# Manages security policies, routing policies, and QoS
+
+- name: Display policy deployment info
+  debug:
+    msg: "Deploying SD-WAN policies for {{ sdwan_organization }}"
+
+- name: Define default QoS policy
+  set_fact:
+    default_qos_policy:
+      name: "Default_QoS_Policy"
+      description: "Application-aware QoS policy"
+      sequences:
+        - sequence_id: 10
+          name: "Voice_Priority"
+          match:
+            app_list: "Voice_Applications"
+          actions:
+            - type: "set"
+              parameter: "dscp"
+              value: "{{ qos.classes[0].dscp }}"
+        - sequence_id: 20
+          name: "Business_Critical"
+          match:
+            app_list: "Business_Critical"
+          actions:
+            - type: "set"
+              parameter: "dscp"
+              value: "{{ qos.classes[2].dscp }}"
+        - sequence_id: 30
+          name: "Best_Effort"
+          actions:
+            - type: "set"
+              parameter: "dscp"
+              value: "{{ qos.classes[3].dscp }}"
+
+- name: Define default security policy
+  set_fact:
+    default_security_policy:
+      name: "Default_Security_Policy"
+      description: "Zone-based firewall policy"
+      zones: "{{ firewall.zones }}"
+      policies: "{{ firewall.policies }}"
+
+- name: Display policy status
+  debug:
+    msg: "Policy definitions prepared for deployment"

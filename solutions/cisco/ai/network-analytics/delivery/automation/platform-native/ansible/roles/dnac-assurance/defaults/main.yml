@@ -1,0 +1,9 @@
+---
+#------------------------------------------------------------------------------
+# Default variables for dnac-assurance role
+#------------------------------------------------------------------------------
+
+# Assurance settings
+dnac_assurance_enable_ai: true
+dnac_assurance_notification_level: "critical"
+dnac_assurance_integration_timeout: 60

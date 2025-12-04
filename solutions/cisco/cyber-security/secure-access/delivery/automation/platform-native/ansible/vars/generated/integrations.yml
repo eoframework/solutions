@@ -1,0 +1,18 @@
+#------------------------------------------------------------------------------
+# Integrations Configuration
+#------------------------------------------------------------------------------
+# Generated from configuration.csv on 2025-12-02 23:53:45
+#
+# To regenerate: python generate-ansible-vars.py /path/to/solution
+# DO NOT EDIT - Changes will be overwritten on regeneration
+#------------------------------------------------------------------------------
+
+integrations:
+  ad:
+    bind_dn: CN=svc_cisco_security,OU=ServiceAccounts,DC=client,DC=local
+    domain: client.local
+    server_primary: 10.100.2.10
+    server_secondary: 10.100.2.11
+    service_account: svc_cisco_security
+    service_password: '{{ vault_ad_service_password }}'
+    user_group: Cisco-Secure-Access-Users

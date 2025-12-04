@@ -1,60 +1,50 @@
-#WIDTH: 25,15,12,30,45,10,12,33,16,20,26,39,12
-#ALIGN: left,left,center,left,left,center,left,left,center,left,left,left,center
-Parameter Name,Category,Environment,Default Value,Description,Required,Data Type,Validation Rules,Security Level,Owner Team,Dependencies,Notes,Last Updated
-AZURE_SUBSCRIPTION_ID,Application,All,[SUBSCRIPTION_ID],Azure subscription identifier for resource deployment,Yes,String,GUID format,Confidential,Infrastructure,None,Required for all Azure deployments,[DATE]
-AZURE_TENANT_ID,Application,All,[TENANT_ID],Azure AD tenant identifier for authentication,Yes,String,GUID format,Confidential,Infrastructure,Azure AD,Required for Entra ID integration,[DATE]
-AZURE_PRIMARY_REGION,Application,All,eastus,Primary Azure region for hub deployment,Yes,String,Valid Azure region,Public,Infrastructure,None,Hub deployment location,[DATE]
-AZURE_SECONDARY_REGION,Application,All,westus2,Secondary Azure region for DR hub,Yes,String,Valid Azure region,Public,Infrastructure,None,DR and multi-region support,[DATE]
-SOLUTION_PREFIX,Application,All,alz,Prefix for all Azure resource naming,Yes,String,3-8 lowercase alphanumeric,Public,Infrastructure,None,Azure Landing Zone prefix,[DATE]
-MANAGEMENT_GROUP_ROOT,Application,All,[TENANT_ROOT_GROUP],Root management group for hierarchy,Yes,String,Management group ID,Confidential,Governance,Azure AD,Top-level governance scope,[DATE]
-MANAGEMENT_GROUP_PLATFORM,Application,All,mg-platform,Platform management group name,Yes,String,Valid MG name,Public,Governance,Root MG,Shared services subscriptions,[DATE]
-MANAGEMENT_GROUP_LANDINGZONES,Application,All,mg-landingzones,Landing zones management group name,Yes,String,Valid MG name,Public,Governance,Root MG,Workload subscriptions,[DATE]
-MANAGEMENT_GROUP_CORP,Application,All,mg-corp,Corporate landing zone management group,Yes,String,Valid MG name,Public,Governance,LZ MG,Internal workloads,[DATE]
-MANAGEMENT_GROUP_ONLINE,Application,All,mg-online,Online landing zone management group,Yes,String,Valid MG name,Public,Governance,LZ MG,Public-facing workloads,[DATE]
-SUBSCRIPTION_CONNECTIVITY,Application,All,[SUBSCRIPTION_ID],Connectivity subscription for hub resources,Yes,String,GUID format,Confidential,Network,Platform MG,Hub network resources,[DATE]
-SUBSCRIPTION_IDENTITY,Application,All,[SUBSCRIPTION_ID],Identity subscription for AD services,Yes,String,GUID format,Confidential,Identity,Platform MG,Identity services,[DATE]
-SUBSCRIPTION_MANAGEMENT,Application,All,[SUBSCRIPTION_ID],Management subscription for monitoring,Yes,String,GUID format,Confidential,Operations,Platform MG,Monitoring and logging,[DATE]
-VNET_HUB_PRIMARY_CIDR,Network,All,10.0.0.0/16,Primary hub VNet CIDR block,Yes,String,Valid CIDR notation,Public,Network,None,Plan for expansion,[DATE]
-VNET_HUB_SECONDARY_CIDR,Network,All,10.1.0.0/16,Secondary hub VNet CIDR block,Yes,String,Valid CIDR notation,Public,Network,None,DR region hub,[DATE]
-SUBNET_FIREWALL,Network,All,10.0.0.0/26,Azure Firewall subnet,Yes,String,Valid CIDR /26 minimum,Public,Network,Hub VNet,AzureFirewallSubnet required,[DATE]
-SUBNET_GATEWAY,Network,All,10.0.1.0/27,Gateway subnet for ExpressRoute/VPN,Yes,String,Valid CIDR /27 minimum,Public,Network,Hub VNet,GatewaySubnet required,[DATE]
-SUBNET_BASTION,Network,All,10.0.2.0/27,Azure Bastion subnet,Yes,String,Valid CIDR /27 minimum,Public,Network,Hub VNet,AzureBastionSubnet required,[DATE]
-SUBNET_MANAGEMENT,Network,All,10.0.3.0/24,Management subnet for jump servers,Yes,String,Valid CIDR notation,Public,Network,Hub VNet,Admin access resources,[DATE]
-FIREWALL_SKU,Network,Development,Standard,Azure Firewall SKU tier,Yes,String,Standard|Premium,Public,Network,None,Standard for dev cost savings,[DATE]
-FIREWALL_SKU,Network,Production,Premium,Azure Firewall SKU tier,Yes,String,Standard|Premium,Public,Network,None,Premium for TLS inspection,[DATE]
-EXPRESSROUTE_SKU,Network,Production,Standard,ExpressRoute circuit SKU,Yes,String,Standard|Premium,Confidential,Network,Carrier,Based on peering requirements,[DATE]
-EXPRESSROUTE_BANDWIDTH,Network,Production,1000,ExpressRoute bandwidth in Mbps,Yes,Integer,50|100|200|500|1000|2000|5000|10000,Public,Network,Carrier,1 Gbps per SOW,[DATE]
-EXPRESSROUTE_PEERING,Network,Production,AzurePrivatePeering,ExpressRoute peering type,Yes,String,AzurePrivatePeering|MicrosoftPeering,Public,Network,None,Private for hybrid connectivity,[DATE]
-DDOS_PROTECTION_ENABLED,Network,Development,false,Enable DDoS Protection Standard,Yes,Boolean,true|false,Public,Security,None,Cost optimization for dev,[DATE]
-DDOS_PROTECTION_ENABLED,Network,Production,true,Enable DDoS Protection Standard,Yes,Boolean,true|false,Public,Security,None,Required for production,[DATE]
-KEYVAULT_NAME,Security,All,kv-[prefix]-[env]-001,Key Vault name for secrets,Yes,String,Azure naming rules,Confidential,Security,None,Centralized secrets store,[DATE]
-KEYVAULT_SKU,Security,All,Standard,Key Vault pricing tier,Yes,String,Standard|Premium,Public,Security,None,Premium for HSM-backed keys,[DATE]
-KEYVAULT_SOFT_DELETE,Security,All,true,Enable soft delete for Key Vault,Yes,Boolean,true|false,Public,Security,None,Required for production,[DATE]
-KEYVAULT_PURGE_PROTECTION,Security,Production,true,Enable purge protection,Yes,Boolean,true|false,Public,Security,None,Prevents accidental deletion,[DATE]
-MANAGED_IDENTITY_NAME,Security,All,id-[prefix]-[env]-001,User-assigned managed identity name,Yes,String,Azure naming rules,Confidential,Security,Azure AD,For service authentication,[DATE]
-AZURE_AD_ADMIN_GROUP,Security,All,[ADMIN_GROUP_ID],Azure AD group for platform admins,Yes,String,GUID format,Confidential,Identity,Azure AD,Full platform access,[DATE]
-AZURE_AD_READER_GROUP,Security,All,[READER_GROUP_ID],Azure AD group for read-only access,Yes,String,GUID format,Confidential,Identity,Azure AD,Audit and compliance access,[DATE]
-CONDITIONAL_ACCESS_ENABLED,Security,Production,true,Enable Conditional Access policies,Yes,Boolean,true|false,Public,Identity,Azure AD P2,Required for zero trust,[DATE]
-MFA_ENFORCEMENT,Security,All,enabled,MFA enforcement for all admins,Yes,String,enabled|disabled,Public,Identity,Azure AD,Required for all admin access,[DATE]
-PIM_ENABLED,Security,Production,true,Enable Privileged Identity Management,Yes,Boolean,true|false,Public,Identity,Azure AD P2,Just-in-time access,[DATE]
-SENTINEL_WORKSPACE,Monitoring,All,log-sentinel-[prefix]-001,Azure Sentinel workspace name,Yes,String,Azure naming rules,Confidential,Security,None,SIEM workspace,[DATE]
-SENTINEL_SKU,Monitoring,All,PerGB2018,Sentinel pricing tier,Yes,String,PerGB2018,Public,Security,None,Pay-per-GB model,[DATE]
-SENTINEL_RETENTION,Monitoring,Development,30,Log retention in days,Yes,Integer,30-730,Public,Security,None,Cost optimization for dev,[DATE]
-SENTINEL_RETENTION,Monitoring,Production,90,Log retention in days,Yes,Integer,30-730,Public,Security,None,90 days per compliance,[DATE]
-SENTINEL_DATA_CONNECTORS,Monitoring,All,15,Number of data connectors enabled,Yes,Integer,1-50,Public,Security,None,Per SOW scope,[DATE]
-LOG_ANALYTICS_WORKSPACE,Monitoring,All,log-[prefix]-[env]-001,Log Analytics workspace name,Yes,String,Azure naming rules,Confidential,Operations,None,Centralized logging,[DATE]
-LOG_ANALYTICS_SKU,Monitoring,All,PerGB2018,Log Analytics pricing tier,Yes,String,PerGB2018,Public,Operations,None,Pay-per-GB model,[DATE]
-LOG_ANALYTICS_RETENTION,Monitoring,Production,90,Log retention in days,Yes,Integer,30-730,Public,Operations,None,90 days per compliance,[DATE]
-LOG_ANALYTICS_CAPACITY,Monitoring,Production,500,Daily ingestion capacity in GB,Yes,Integer,100-5000,Public,Operations,None,500 GB/day per SOW,[DATE]
-DEFENDER_CLOUD_TIER,Security,Development,Free,Defender for Cloud pricing tier,Yes,String,Free|Standard,Public,Security,None,Cost optimization for dev,[DATE]
-DEFENDER_CLOUD_TIER,Security,Production,Standard,Defender for Cloud pricing tier,Yes,String,Free|Standard,Public,Security,None,Full protection,[DATE]
-BASTION_SKU,Security,All,Standard,Azure Bastion SKU,Yes,String,Basic|Standard,Public,Security,Hub VNet,Standard for features,[DATE]
-BASTION_SCALE_UNITS,Security,Production,2,Bastion scale units for capacity,Yes,Integer,2-50,Public,Security,Bastion,2 per SOW for HA,[DATE]
-POLICY_INITIATIVES,Governance,All,50,Number of policy assignments,Yes,Integer,1-200,Public,Governance,None,50+ per SOW scope,[DATE]
-TAG_ENFORCEMENT,Governance,All,true,Enforce mandatory resource tags,Yes,Boolean,true|false,Public,Governance,None,Required for cost allocation,[DATE]
-REQUIRED_TAGS,Governance,All,CostCenter Owner Environment Application,Mandatory tag list,Yes,String,Space-separated tag names,Public,Governance,None,Tags required on resources,[DATE]
-SUBSCRIPTION_VENDING_ENABLED,Governance,Production,true,Enable subscription vending automation,Yes,Boolean,true|false,Public,Governance,None,Self-service provisioning,[DATE]
-BACKUP_RETENTION_DAYS,Operations,All,30,Default backup retention period,Yes,Integer,7-365,Public,Operations,None,Compliance requirement,[DATE]
-GEO_REDUNDANT_BACKUP,Operations,Production,true,Enable geo-redundant backups,Yes,Boolean,true|false,Public,Operations,None,DR requirement,[DATE]
-ALERT_EMAIL,Operations,All,[ALERT_EMAIL],Email for critical alerts,Yes,String,Valid email format,Confidential,Operations,None,Operations team distribution,[DATE]
-ALERT_WEBHOOK,Operations,All,[WEBHOOK_URL],Webhook for alert notifications,No,String,Valid HTTPS URL,Confidential,Operations,None,Teams/Slack integration,[DATE]
+#WIDTH: 45,18,50,50,50,50,8,12,30,14
+#ALIGN: left,left,left,left,left,left,center,left,left,center
+Parameter Name,Category,Production,Test,DR,Description,Required,Data Type,Validation Rules,Security Level
+solution.name,Project,Azure Enterprise Landing Zone,Azure Enterprise Landing Zone,Azure Enterprise Landing Zone,Solution display name,Yes,String,Max 50 characters,Public
+solution.abbr,Project,alz,alz,alz,Solution abbreviation for resource naming,Yes,String,Max 10 characters,Public
+solution.provider_name,Project,azure,azure,azure,Cloud provider name,Yes,String,aws|azure|gcp,Public
+solution.category_name,Project,cloud,cloud,cloud,Solution category,Yes,String,Valid category,Public
+azure.subscription_id,Project,[SUBSCRIPTION_ID],[SUBSCRIPTION_ID],[SUBSCRIPTION_ID],Azure subscription identifier,Yes,String,GUID format,Confidential
+azure.tenant_id,Project,[TENANT_ID],[TENANT_ID],[TENANT_ID],Azure AD tenant identifier,Yes,String,GUID format,Confidential
+azure.region,Project,eastus,eastus,westus2,Primary Azure region,Yes,String,Valid Azure region,Public
+azure.secondary_region,Project,westus2,westus2,centralus,Secondary Azure region for DR,Yes,String,Valid Azure region,Public
+ownership.cost_center,Project,CC-CLOUD-001,CC-CLOUD-001,CC-CLOUD-001,Cost center for billing,Yes,String,CC format,Public
+ownership.owner_email,Project,platform-team@company.com,dev-team@company.com,platform-team@company.com,Team email for ownership,Yes,String,Valid email,Public
+ownership.project_code,Project,PRJ-ALZ-2025,PRJ-ALZ-2025,PRJ-ALZ-2025,Project tracking code,Yes,String,PRJ format,Public
+governance.management_group_root,Governance,[TENANT_ROOT_GROUP],[TENANT_ROOT_GROUP],[TENANT_ROOT_GROUP],Root management group ID,Yes,String,Management group ID,Confidential
+governance.management_group_platform,Governance,mg-platform,mg-platform,mg-platform,Platform management group name,Yes,String,Valid MG name,Public
+governance.management_group_landingzones,Governance,mg-landingzones,mg-landingzones,mg-landingzones,Landing zones management group name,Yes,String,Valid MG name,Public
+governance.management_group_corp,Governance,mg-corp,mg-corp,mg-corp,Corporate landing zone management group,Yes,String,Valid MG name,Public
+governance.management_group_online,Governance,mg-online,mg-online,mg-online,Online landing zone management group,Yes,String,Valid MG name,Public
+governance.subscription_vending_enabled,Governance,true,false,true,Enable subscription vending automation,Yes,Boolean,true|false,Public
+governance.policy_initiatives_count,Governance,50,30,50,Number of policy assignments,Yes,Integer,1-200,Public
+governance.tag_enforcement,Governance,true,true,true,Enforce mandatory resource tags,Yes,Boolean,true|false,Public
+network.vnet_hub_primary_cidr,Network,10.0.0.0/16,10.10.0.0/16,10.20.0.0/16,Primary hub VNet CIDR block,Yes,String,Valid CIDR,Public
+network.vnet_hub_secondary_cidr,Network,10.1.0.0/16,10.11.0.0/16,10.21.0.0/16,Secondary hub VNet CIDR block,Yes,String,Valid CIDR,Public
+network.subnet_firewall,Network,10.0.0.0/26,10.10.0.0/26,10.20.0.0/26,Azure Firewall subnet,Yes,String,Valid CIDR /26,Public
+network.subnet_gateway,Network,10.0.1.0/27,10.10.1.0/27,10.20.1.0/27,Gateway subnet for ExpressRoute/VPN,Yes,String,Valid CIDR /27,Public
+network.subnet_bastion,Network,10.0.2.0/27,10.10.2.0/27,10.20.2.0/27,Azure Bastion subnet,Yes,String,Valid CIDR /27,Public
+network.subnet_management,Network,10.0.3.0/24,10.10.3.0/24,10.20.3.0/24,Management subnet for jump servers,Yes,String,Valid CIDR,Public
+network.firewall_sku,Network,Premium,Standard,Premium,Azure Firewall SKU tier,Yes,String,Standard|Premium,Public
+network.expressroute_sku,Network,Standard,Standard,Standard,ExpressRoute circuit SKU,Yes,String,Standard|Premium,Public
+network.expressroute_bandwidth,Network,1000,500,1000,ExpressRoute bandwidth in Mbps,Yes,Integer,50-10000,Public
+network.ddos_protection_enabled,Network,true,false,true,Enable DDoS Protection Standard,Yes,Boolean,true|false,Public
+security.keyvault_sku,Security,Standard,Standard,Standard,Key Vault pricing tier,Yes,String,Standard|Premium,Public
+security.keyvault_soft_delete,Security,true,true,true,Enable soft delete for Key Vault,Yes,Boolean,true|false,Public
+security.keyvault_purge_protection,Security,true,false,true,Enable purge protection,Yes,Boolean,true|false,Public
+security.admin_group_id,Security,[ADMIN_GROUP_ID],[ADMIN_GROUP_ID],[ADMIN_GROUP_ID],Azure AD group for platform admins,Yes,String,GUID format,Confidential
+security.reader_group_id,Security,[READER_GROUP_ID],[READER_GROUP_ID],[READER_GROUP_ID],Azure AD group for read-only access,Yes,String,GUID format,Confidential
+security.conditional_access_enabled,Security,true,false,true,Enable Conditional Access policies,Yes,Boolean,true|false,Public
+security.pim_enabled,Security,true,false,true,Enable Privileged Identity Management,Yes,Boolean,true|false,Public
+security.defender_cloud_tier,Security,Standard,Free,Standard,Defender for Cloud pricing tier,Yes,String,Free|Standard,Public
+security.bastion_sku,Security,Standard,Standard,Standard,Azure Bastion SKU,Yes,String,Basic|Standard,Public
+security.bastion_scale_units,Security,2,2,2,Bastion scale units for capacity,Yes,Integer,2-50,Public
+monitoring.log_analytics_sku,Monitoring,PerGB2018,PerGB2018,PerGB2018,Log Analytics pricing tier,Yes,String,PerGB2018,Public
+monitoring.log_retention_days,Monitoring,90,30,90,Log retention in days,Yes,Integer,30-730,Public
+monitoring.log_daily_capacity_gb,Monitoring,500,100,500,Daily ingestion capacity in GB,Yes,Integer,100-5000,Public
+monitoring.sentinel_enabled,Monitoring,true,true,true,Enable Azure Sentinel,Yes,Boolean,true|false,Public
+monitoring.sentinel_retention_days,Monitoring,90,30,90,Sentinel log retention in days,Yes,Integer,30-730,Public
+monitoring.alert_email,Monitoring,security-alerts@company.com,test-alerts@company.com,dr-alerts@company.com,Email for critical alerts,Yes,String,Valid email,Confidential
+operations.backup_retention_days,Operations,30,30,30,Default backup retention period,Yes,Integer,7-365,Public
+operations.geo_redundant_backup,Operations,true,false,true,Enable geo-redundant backups,Yes,Boolean,true|false,Public

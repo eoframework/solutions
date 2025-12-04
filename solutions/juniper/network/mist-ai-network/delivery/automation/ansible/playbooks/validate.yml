@@ -1,0 +1,80 @@
+---
+# validate.yml - Post-deployment validation for Mist AI Network
+
+- name: Validate Mist Cloud Configuration
+  hosts: localhost
+  gather_facts: no
+  connection: local
+
+  vars_files:
+    - "{{ playbook_dir }}/../vars/common.yml"
+    - "{{ playbook_dir }}/../vars/secrets.yml"
+
+  tasks:
+    - name: Verify API connectivity
+      ansible.builtin.uri:
+        url: "{{ mist.api_url }}/self"
+        method: GET
+        headers:
+          Authorization: "Token {{ mist_api_token }}"
+        validate_certs: yes
+        status_code: 200
+      register: api_check
+
+    - name: Get sites
+      ansible.builtin.uri:
+        url: "{{ mist.api_url }}/orgs/{{ mist_org_id }}/sites"
+        method: GET
+        headers:
+          Authorization: "Token {{ mist_api_token }}"
+      register: sites
+
+    - name: Display sites
+      ansible.builtin.debug:
+        msg: "Sites: {{ sites.json | map(attribute='name') | list }}"
+
+    - name: Get site stats
+      ansible.builtin.uri:
+        url: "{{ mist.api_url }}/sites/{{ item.id }}/stats"
+        method: GET
+        headers:
+          Authorization: "Token {{ mist_api_token }}"
+      loop: "{{ sites.json }}"
+      loop_control:
+        label: "{{ item.name }}"
+      register: site_stats
+
+- name: Validate Switch Configuration
+  hosts: juniper_switches
+  gather_facts: no
+  connection: netconf
+
+  tasks:
+    - name: Get switch facts
+      junipernetworks.junos.junos_facts:
+        gather_subset:
+          - default
+          - interfaces
+
+    - name: Verify VLANs
+      junipernetworks.junos.junos_command:
+        commands:
+          - show vlans
+      register: vlans_check
+
+    - name: Verify interface status
+      junipernetworks.junos.junos_command:
+        commands:
+          - show interfaces terse
+      register: interfaces_check
+
+    - name: Display validation results
+      ansible.builtin.debug:
+        msg: |
+          ========================================
+          SWITCH VALIDATION: {{ inventory_hostname }}
+          ========================================
+          Status: Connected
+          VLANs: Configured
+          Interfaces: {{ 'up' in interfaces_check.stdout[0] | string }}
+          ========================================

@@ -1,0 +1,23 @@
+---
+#------------------------------------------------------------------------------
+# Role metadata for dnac-discovery
+#------------------------------------------------------------------------------
+
+galaxy_info:
+  author: EO Framework
+  description: DNA Center device discovery and inventory
+  company: EO Framework Solutions
+  license: MIT
+  min_ansible_version: "2.14"
+  platforms:
+    - name: GenericLinux
+      versions:
+        - all
+  galaxy_tags:
+    - cisco
+    - dnac
+    - networking
+    - discovery
+
+dependencies:
+  - role: dnac-auth

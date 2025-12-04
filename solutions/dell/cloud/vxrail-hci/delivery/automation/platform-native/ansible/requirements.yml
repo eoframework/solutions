@@ -1,0 +1,29 @@
+# Ansible Galaxy Requirements
+# Dell VxRail HCI Solution
+# EO Framework - Dell Cloud Solutions
+
+---
+collections:
+  # Dell OpenManage for hardware management and automation
+  - name: dellemc.openmanage
+    version: ">=9.0.0"
+
+  # VMware community collection for vCenter, ESXi, vSAN automation
+  - name: community.vmware
+    version: ">=4.0.0"
+
+  # VMware general collection
+  - name: vmware.vmware
+    version: ">=1.0.0"
+
+  # Ansible utilities
+  - name: ansible.utils
+    version: ">=2.0.0"
+
+  # Ansible POSIX collection for Linux host management
+  - name: ansible.posix
+    version: ">=1.0.0"
+
+  # Community general collection
+  - name: community.general
+    version: ">=8.0.0"

@@ -1,0 +1,151 @@
+---
+# Network Configuration Playbook - Deploy configurations to Cisco devices
+# Usage: ansible-playbook -i inventory/prod/hosts.yml playbooks/network-config.yml
+
+- name: Network Device Configuration
+  hosts: network_devices
+  gather_facts: no
+  vars_files:
+    - ../vars/generated/cisco_dna_center.yml
+    - ../vars/generated/nso.yml
+    - ../vars/generated/netbox.yml
+    - ../vars/secrets.yml
+  tasks:
+    - name: Phase 2 - Network Configuration
+      debug:
+        msg: "Starting network device configuration deployment"
+
+# Backup existing configurations
+- name: Backup Network Device Configurations
+  hosts: network_devices
+  gather_facts: no
+  tasks:
+    - name: Create backup directory
+      file:
+        path: "../backups/{{ inventory_hostname }}/{{ ansible_date_time.date }}"
+        state: directory
+        mode: '0755'
+      delegate_to: localhost
+      tags: [backup]
+
+    - name: Backup running configuration
+      cisco.ios.ios_config:
+        backup: yes
+        backup_options:
+          filename: "{{ inventory_hostname }}_{{ ansible_date_time.date }}.cfg"
+          dir_path: "../backups/{{ inventory_hostname }}/{{ ansible_date_time.date }}"
+      when: ansible_network_os == 'ios'
+      tags: [backup, ios]
+
+    - name: Backup NX-OS configuration
+      cisco.nxos.nxos_config:
+        backup: yes
+        backup_options:
+          filename: "{{ inventory_hostname }}_{{ ansible_date_time.date }}.cfg"
+          dir_path: "../backups/{{ inventory_hostname }}/{{ ansible_date_time.date }}"
+      when: ansible_network_os == 'nxos'
+      tags: [backup, nxos]
+
+# Deploy DNA Center Templates
+- name: Deploy DNA Center Configuration Templates
+  hosts: dnac_controllers
+  gather_facts: no
+  roles:
+    - role: dnac-templates
+      tags: [dnac, templates]
+
+# Apply Network Configurations
+- name: Apply Network Device Configurations
+  hosts: network_devices
+  gather_facts: no
+  tasks:
+    - name: Apply IOS configuration from template
+      cisco.ios.ios_config:
+        src: "../config/network-configs/{{ inventory_hostname }}.cfg"
+        backup: no
+        save_when: changed
+      when:
+        - ansible_network_os == 'ios'
+        - config_file_exists | default(false)
+      tags: [config, ios]
+
+    - name: Apply NX-OS configuration from template
+      cisco.nxos.nxos_config:
+        src: "../config/network-configs/{{ inventory_hostname }}.cfg"
+        backup: no
+        save_when: changed
+      when:
+        - ansible_network_os == 'nxos'
+        - config_file_exists | default(false)
+      tags: [config, nxos]
+
+# VLAN Configuration Example
+- name: Configure VLANs
+  hosts: ios_devices
+  gather_facts: no
+  tasks:
+    - name: Ensure VLANs exist
+      cisco.ios.ios_vlans:
+        config:
+          - vlan_id: 10
+            name: DATA
+            state: active
+          - vlan_id: 20
+            name: VOICE
+            state: active
+          - vlan_id: 30
+            name: GUEST
+            state: active
+        state: merged
+      tags: [vlans]
+
+# Interface Configuration Example
+- name: Configure Interfaces
+  hosts: ios_devices
+  gather_facts: no
+  tasks:
+    - name: Configure access ports
+      cisco.ios.ios_l2_interfaces:
+        config:
+          - name: GigabitEthernet0/1
+            mode: access
+            access:
+              vlan: 10
+          - name: GigabitEthernet0/2
+            mode: access
+            access:
+              vlan: 20
+        state: merged
+      tags: [interfaces]
+
+# Save Configurations
+- name: Save Network Device Configurations
+  hosts: network_devices
+  gather_facts: no
+  tasks:
+    - name: Save IOS configuration
+      cisco.ios.ios_command:
+        commands:
+          - write memory
+      when: ansible_network_os == 'ios'
+      tags: [save]
+
+    - name: Save NX-OS configuration
+      cisco.nxos.nxos_command:
+        commands:
+          - copy running-config startup-config
+      when: ansible_network_os == 'nxos'
+      tags: [save]
+
+# Summary
+- name: Network Configuration Summary
+  hosts: localhost
+  gather_facts: no
+  tasks:
+    - name: Display configuration summary
+      debug:
+        msg:
+          - "Network device configuration complete"
+          - "Configurations backed up and deployed"
+          - "DNA Center templates applied (if applicable)"
+          - "Next step: Run validation playbook to verify deployment"

@@ -1,0 +1,14 @@
+#------------------------------------------------------------------------------
+# Project Configuration
+#------------------------------------------------------------------------------
+# Generated from configuration.csv on 2025-12-02 23:53:43
+#
+# To regenerate: python generate-ansible-vars.py /path/to/solution
+# DO NOT EDIT - Changes will be overwritten on regeneration
+#------------------------------------------------------------------------------
+
+solution:
+  abbr: dnac
+  category_name: ai
+  name: cisco-dna-center-network-analytics
+  provider_name: cisco

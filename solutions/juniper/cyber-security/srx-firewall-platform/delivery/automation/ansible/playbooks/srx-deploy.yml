@@ -1,0 +1,50 @@
+---
+# srx-deploy.yml - Initial SRX Firewall deployment
+# Configures base settings, zones, and policies
+
+- name: Configure Juniper SRX Firewalls
+  hosts: srx_firewalls
+  gather_facts: no
+  connection: netconf
+
+  vars_files:
+    - "{{ playbook_dir }}/../vars/common.yml"
+    - "{{ playbook_dir }}/../vars/secrets.yml"
+
+  pre_tasks:
+    - name: Get current configuration
+      junipernetworks.junos.junos_facts:
+        gather_subset:
+          - config
+      register: current_config
+
+    - name: Backup current configuration
+      junipernetworks.junos.junos_config:
+        backup: yes
+        backup_options:
+          filename: "{{ inventory_hostname }}_{{ lookup('pipe', 'date +%Y%m%d_%H%M%S') }}.conf"
+          dir_path: "{{ playbook_dir }}/../backups"
+      tags: [backup]
+
+  roles:
+    - role: junos-base
+      tags: [base]
+    - role: junos-security
+      tags: [security]
+    - role: junos-routing
+      tags: [routing]
+    - role: junos-vpn
+      when: vpn.enabled | default(false)
+      tags: [vpn]
+
+  post_tasks:
+    - name: Commit configuration
+      junipernetworks.junos.junos_config:
+        confirm_commit: yes
+
+    - name: Verify connectivity
+      junipernetworks.junos.junos_ping:
+        dest: "{{ item }}"
+        count: 3
+      loop: "{{ verification_targets | default([]) }}"
+      when: verification_targets is defined

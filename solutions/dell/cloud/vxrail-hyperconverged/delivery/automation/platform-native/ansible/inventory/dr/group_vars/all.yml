@@ -1,0 +1,124 @@
+# Dell VxRail Enterprise - DR Variables
+# Generated from configuration.csv - DR column
+# EO Framework - Dell Cloud Solutions
+
+---
+#=============================================================================
+# PROJECT METADATA
+#=============================================================================
+solution:
+  name: vxrail-hyperconverged
+  abbr: vxe
+  provider: dell
+  category: cloud
+
+environment: dr
+datacenter_name: "DR Datacenter"
+
+#=============================================================================
+# VXRAIL CONFIGURATION
+#=============================================================================
+vxrail:
+  version: "8.0.200"
+  cluster_name: "{{ vxrail_cluster_name | default('vxrail-enterprise-dr') }}"
+  node_count: 8
+  node_model: P570
+  manager_ip: "{{ vxrail_manager_ip | default('10.30.3.100') }}"
+
+#=============================================================================
+# HARDWARE CONFIGURATION
+#=============================================================================
+hardware:
+  poweredge_chassis: R760
+  cpu_model: "Intel Xeon Platinum 8380"
+  cpu_count_per_node: 2
+  memory_per_node_gb: 2048
+  memory_type: DDR5-4800
+
+#=============================================================================
+# VSAN STORAGE CONFIGURATION
+#=============================================================================
+vsan:
+  storage_type: All-NVMe
+  capacity_per_node_tb: 30.72
+  total_usable_tb: 200
+  storage_policy: "FTT=2 Erasure Coding"
+  compression_enabled: true
+  deduplication_enabled: true
+  encryption_enabled: true
+  kms_server: "{{ kms_server | default('kms.domain.com') }}"
+
+#=============================================================================
+# NETWORK CONFIGURATION
+#=============================================================================
+network:
+  spine_100gbe_count: 4
+  leaf_25gbe_count: 2
+  vsan_bandwidth: "100GbE"
+  vlans:
+    management: 120
+    vmotion: 220
+    vsan: 320
+    vm_network: 420
+    nsx_overlay: 520
+
+#=============================================================================
+# NSX-T CONFIGURATION
+#=============================================================================
+nsx:
+  enabled: true
+  version: "4.1"
+  manager_count: 3
+  edge_count: 2
+  vip: "{{ nsx_vip | default('10.30.3.25') }}"
+
+#=============================================================================
+# VMWARE CONFIGURATION
+#=============================================================================
+vmware:
+  vcenter_version: "8.0 U2"
+  esxi_version: "8.0 U2"
+  vsan_version: "8.0 U2"
+  srm_enabled: true
+  srm_version: "8.7"
+  vcenter_hostname: "{{ vcenter_hostname | default('vcenter-dr.domain.com') }}"
+
+#=============================================================================
+# DATABASE CONFIGURATION (OPTIONAL)
+#=============================================================================
+database:
+  oracle_rac_nodes: 4
+  sql_always_on_nodes: 3
+  sap_hana_memory_gb: 1024
+
+#=============================================================================
+# SECURITY CONFIGURATION
+#=============================================================================
+security:
+  tpm_version: "TPM 2.0"
+  secure_boot_enabled: true
+  encryption_at_rest: enabled
+  encryption_in_transit: enabled
+
+#=============================================================================
+# SUPPORT CONFIGURATION
+#=============================================================================
+support:
+  prosupport_level: "Mission Critical"
+
+#=============================================================================
+# DR CONFIGURATION
+#=============================================================================
+dr:
+  enabled: true
+  rpo_minutes: 5
+  rto_minutes: 15
+  purpose: standby
+  failover_mode: automatic
+
+#=============================================================================
+# OPERATIONS CONFIGURATION
+#=============================================================================
+operations:
+  lifecycle_management: automated
+  maintenance_window: "Sunday 02:00-06:00 UTC"

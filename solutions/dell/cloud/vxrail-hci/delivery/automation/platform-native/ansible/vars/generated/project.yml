@@ -1,0 +1,21 @@
+#------------------------------------------------------------------------------
+# Project Configuration
+#------------------------------------------------------------------------------
+# Generated from configuration.csv
+#
+# To regenerate: python generate-ansible-vars.py /path/to/solution
+# DO NOT EDIT - Changes will be overwritten on regeneration
+#------------------------------------------------------------------------------
+
+solution:
+  name: vxrail-hci
+  abbr: vxh
+  provider_name: dell
+  category_name: cloud
+
+datacenter:
+  name: "Primary Datacenter"
+
+ownership:
+  cost_center: CC-VXRAIL-001
+  owner_email: vxrail-team@company.com

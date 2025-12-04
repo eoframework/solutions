@@ -1,0 +1,17 @@
+#------------------------------------------------------------------------------
+# SafeID Infrastructure Configuration
+#------------------------------------------------------------------------------
+# Generated from configuration.csv
+#
+# To regenerate: python generate-ansible-vars.py /path/to/solution
+# DO NOT EDIT - Changes will be overwritten on regeneration
+#------------------------------------------------------------------------------
+
+safeid:
+  version: "4.2"
+  server_count: 2
+  database: "PostgreSQL 15"
+  ha:
+    enabled: true
+    failover_automatic: true
+    sync_interval: 30

@@ -1,0 +1,74 @@
+---
+# mist-site/tasks/main.yml - Site configuration
+
+- name: Get existing sites
+  ansible.builtin.uri:
+    url: "{{ mist.api_url }}/orgs/{{ mist_org_id }}/sites"
+    method: GET
+    headers:
+      Authorization: "Token {{ mist_api_token }}"
+  register: existing_sites
+
+- name: Check if site exists
+  ansible.builtin.set_fact:
+    current_site: "{{ existing_sites.json | selectattr('name', 'equalto', site.name) | list | first | default(none) }}"
+
+- name: Create new site
+  ansible.builtin.uri:
+    url: "{{ mist.api_url }}/orgs/{{ mist_org_id }}/sites"
+    method: POST
+    headers:
+      Authorization: "Token {{ mist_api_token }}"
+      Content-Type: application/json
+    body_format: json
+    body:
+      name: "{{ site.name }}"
+      timezone: "{{ mist.timezone }}"
+      country_code: "{{ mist.country_code }}"
+      address: "{{ site.address | default('') }}"
+      latlng:
+        lat: "{{ site.latitude | default(0) | float }}"
+        lng: "{{ site.longitude | default(0) | float }}"
+    status_code: [200, 201]
+  register: new_site
+  when: current_site is none
+
+- name: Update existing site
+  ansible.builtin.uri:
+    url: "{{ mist.api_url }}/sites/{{ current_site.id }}"
+    method: PUT
+    headers:
+      Authorization: "Token {{ mist_api_token }}"
+      Content-Type: application/json
+    body_format: json
+    body:
+      name: "{{ site.name }}"
+      timezone: "{{ mist.timezone }}"
+      country_code: "{{ mist.country_code }}"
+    status_code: [200, 201]
+  when: current_site is not none
+
+- name: Set site ID fact
+  ansible.builtin.set_fact:
+    site_id: "{{ current_site.id if current_site else new_site.json.id }}"
+
+- name: Configure site settings
+  ansible.builtin.uri:
+    url: "{{ mist.api_url }}/sites/{{ site_id }}/setting"
+    method: PUT
+    headers:
+      Authorization: "Token {{ mist_api_token }}"
+      Content-Type: application/json
+    body_format: json
+    body:
+      auto_upgrade:
+        enabled: true
+        version: "{{ operations.firmware_version | default('default') }}"
+      engagement:
+        enabled: "{{ location.enabled | default(false) }}"
+      persist_config_on_device: true
+    status_code: [200, 201]
+
+- name: Display site information
+  ansible.builtin.debug:
+    msg: "Site '{{ site.name }}' configured with ID: {{ site_id }}"

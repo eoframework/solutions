@@ -1,0 +1,16 @@
+#------------------------------------------------------------------------------
+# Operations Configuration
+#------------------------------------------------------------------------------
+# Generated from configuration.csv
+#
+# To regenerate: python generate-ansible-vars.py /path/to/solution
+# DO NOT EDIT - Changes will be overwritten on regeneration
+#------------------------------------------------------------------------------
+
+operations:
+  backup_enabled: true
+  backup_retention_days: 30
+  snapshot_frequency_hours: 4
+  auto_updates_enabled: false
+  update_day: "Sunday"
+  update_time: "02:00"

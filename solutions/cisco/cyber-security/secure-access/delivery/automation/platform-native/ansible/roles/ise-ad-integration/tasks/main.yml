@@ -1,0 +1,71 @@
+---
+#------------------------------------------------------------------------------
+# Role: ise-ad-integration
+# Purpose: Configure Active Directory integration with ISE
+#------------------------------------------------------------------------------
+
+- name: Create Active Directory join point
+  cisco.ise.active_directory:
+    ise_hostname: "{{ ise.primary_pan }}"
+    ise_username: "{{ ise.admin_user }}"
+    ise_password: "{{ vault_ise_admin_password }}"
+    ise_verify: "{{ ise.ssl_verify | default(false) }}"
+    name: "{{ integrations.ad.domain }}"
+    description: "Active Directory integration for {{ solution.name }}"
+    domain: "{{ integrations.ad.domain }}"
+    adScopesNames: "Default_Scope"
+    state: present
+  register: ad_joinpoint
+
+- name: Configure AD connection settings
+  cisco.ise.active_directory:
+    ise_hostname: "{{ ise.primary_pan }}"
+    ise_username: "{{ ise.admin_user }}"
+    ise_password: "{{ vault_ise_admin_password }}"
+    ise_verify: "{{ ise.ssl_verify | default(false) }}"
+    id: "{{ ad_joinpoint.ise_response.id }}"
+    adAttributes:
+      attributes:
+        - name: "department"
+          type: "STRING"
+          internalName: "department"
+          defaultValue: ""
+    state: present
+  when: ad_joinpoint is succeeded
+
+- name: Join ISE to Active Directory
+  cisco.ise.active_directory_join_domain:
+    ise_hostname: "{{ ise.primary_pan }}"
+    ise_username: "{{ ise.admin_user }}"
+    ise_password: "{{ vault_ise_admin_password }}"
+    ise_verify: "{{ ise.ssl_verify | default(false) }}"
+    id: "{{ ad_joinpoint.ise_response.id }}"
+    additionalData:
+      - name: "username"
+        value: "{{ integrations.ad.service_account }}"
+      - name: "password"
+        value: "{{ vault_ad_service_password }}"
+  register: ad_join
+  when: join_ad | default(true)
+
+- name: Configure AD groups for authorization
+  cisco.ise.active_directory_groups_by_domain:
+    ise_hostname: "{{ ise.primary_pan }}"
+    ise_username: "{{ ise.admin_user }}"
+    ise_password: "{{ vault_ise_admin_password }}"
+    ise_verify: "{{ ise.ssl_verify | default(false) }}"
+    id: "{{ ad_joinpoint.ise_response.id }}"
+    additionalData:
+      - name: "domain"
+        value: "{{ integrations.ad.domain }}"
+  register: ad_groups
+
+- name: Display AD integration status
+  ansible.builtin.debug:
+    msg: |
+      Active Directory Integration Status:
+      - Domain: {{ integrations.ad.domain }}
+      - Primary DC: {{ integrations.ad.server_primary }}
+      - Secondary DC: {{ integrations.ad.server_secondary | default('Not configured') }}
+      - Join Status: {{ 'Joined' if ad_join.changed else 'Already joined or skipped' }}
+      - User Group: {{ integrations.ad.user_group }}

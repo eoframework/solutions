@@ -1,0 +1,59 @@
+---
+#------------------------------------------------------------------------------
+# Role: dnac-discovery
+# Purpose: Network device discovery and inventory management
+#------------------------------------------------------------------------------
+
+- name: Get existing discovery jobs
+  cisco.dnac.discovery_info:
+    dnac_host: "{{ dnac.vip }}"
+    dnac_auth: "{{ dnac_auth_token }}"
+  register: existing_discoveries
+
+- name: Display existing discoveries
+  ansible.builtin.debug:
+    var: existing_discoveries
+    verbosity: 1
+
+- name: Get all network devices
+  cisco.dnac.network_device_info:
+    dnac_host: "{{ dnac.vip }}"
+    dnac_auth: "{{ dnac_auth_token }}"
+  register: all_devices
+
+- name: Display discovered device count
+  ansible.builtin.debug:
+    msg: "Discovered {{ all_devices.dnac_response | default([]) | length }} devices"
+
+- name: Get device health
+  ansible.builtin.uri:
+    url: "https://{{ dnac.vip }}/dna/intent/api/v1/device-health"
+    method: GET
+    headers:
+      x-auth-token: "{{ dnac_auth_token }}"
+    validate_certs: "{{ dnac.ssl_verify }}"
+  register: device_health
+
+- name: Analyze device health
+  ansible.builtin.set_fact:
+    healthy_devices: "{{ device_health.json.response | selectattr('overallHealth', 'equalto', 10) | list | length }}"
+    total_devices: "{{ device_health.json.response | length }}"
+  when: device_health.json.response is defined
+
+- name: Discovery summary
+  ansible.builtin.debug:
+    msg: |
+      ============================================================
+      DNA Center Device Discovery Complete
+      ============================================================
+      Total Devices: {{ all_devices.dnac_response | default([]) | length }}
+      Healthy Devices: {{ healthy_devices | default('N/A') }}
+      Target (Pilot): {{ deployment.pilot_device_count }}
+      Target (Production): {{ deployment.production_device_count }}
+      ============================================================
+
+- name: Save device inventory to file
+  ansible.builtin.copy:
+    content: "{{ all_devices.dnac_response | to_nice_yaml }}"
+    dest: "{{ playbook_dir }}/../logs/device_inventory_{{ ansible_date_time.iso8601_basic_short }}.yml"
+  when: all_devices.dnac_response is defined and all_devices.dnac_response | length > 0

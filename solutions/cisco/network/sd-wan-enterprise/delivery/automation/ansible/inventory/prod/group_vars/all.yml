@@ -1,0 +1,207 @@
+---
+# Global variables for Cisco SD-WAN Enterprise - Production
+
+# Deployment Configuration
+deployment:
+  organization: "{{ sdwan_organization }}"
+  domain_id: "{{ sdwan_domain_id }}"
+  timeout: 600
+  retry_count: 3
+  backup_enabled: true
+  pilot_site_count: 5
+  production_site_count: 50
+
+# Network Configuration
+network:
+  control_plane_vrf: 0
+  transport_gateway: true
+  nat_transparent: false
+  port_hopping: true
+  control_plane_dscp: 48
+
+# Security Configuration
+security:
+  ipsec_integrity: "ip-esp"
+  ipsec_encryption: "aes-256-cbc"
+  ipsec_authentication: "sha256-hmac"
+  certificate_lifetime: 365
+  rekey_timer: 86400
+  fw_inspection_mode: stateful
+  ips_enabled: true
+  url_filtering: true
+  amp_enabled: true
+
+# Quality of Service
+qos:
+  classes:
+    - name: "voice"
+      bandwidth_percent: 20
+      priority: "strict-priority"
+      dscp: 46
+    - name: "video"
+      bandwidth_percent: 25
+      priority: "priority"
+      dscp: 34
+    - name: "business-data"
+      bandwidth_percent: 35
+      priority: "guaranteed"
+      dscp: 26
+    - name: "best-effort"
+      bandwidth_percent: 20
+      priority: "best-effort"
+      dscp: 0
+
+# Application Awareness
+applications:
+  saas_optimization_enabled: true
+  custom_apps:
+    - name: "ERP-System"
+      server_ip: "10.100.1.50"
+      port: 8080
+      protocol: "tcp"
+      dscp: 26
+      priority: "high"
+    - name: "CRM-Database"
+      server_ip: "10.100.1.51"
+      port: 1521
+      protocol: "tcp"
+      dscp: 34
+      priority: "high"
+  saas_apps:
+    office365:
+      priority: "high"
+      dscp: 34
+    webex:
+      priority: "critical"
+      dscp: 46
+    salesforce:
+      priority: "high"
+      dscp: 26
+    zoom:
+      priority: "high"
+      dscp: 34
+
+# Monitoring and Analytics
+monitoring:
+  netflow_enabled: true
+  cflowd_template_timeout: 60
+  flow_export_interval: 60
+  sla_classes:
+    - name: "VOICE"
+      loss_threshold: 1
+      latency_threshold: 150
+      jitter_threshold: 30
+    - name: "VIDEO"
+      loss_threshold: 3
+      latency_threshold: 400
+      jitter_threshold: 50
+    - name: "DATA"
+      loss_threshold: 10
+      latency_threshold: 1000
+      jitter_threshold: 100
+
+# High Availability
+high_availability:
+  bfd_enabled: true
+  bfd_hello_interval: 60000
+  bfd_detect_multiplier: 3
+  graceful_restart: true
+  graceful_restart_timer: 120
+
+# Routing Configuration
+routing:
+  ospf:
+    enabled: true
+    areas:
+      - area_id: 0
+        area_type: "standard"
+        networks:
+          - "192.168.0.0/16"
+    redistribute:
+      - protocol: "connected"
+      - protocol: "static"
+  bgp:
+    enabled: true
+    local_as: 65001
+    router_id: "auto"
+    graceful_restart: true
+
+# Cloud OnRamp
+cloud_onramp:
+  aws_enabled: true
+  aws_region: us-east-1
+  azure_enabled: true
+  azure_region: eastus
+  gcp_enabled: false
+
+# Site Lists (for policies)
+site_lists:
+  - name: "Branch_Sites"
+    description: "All branch office sites"
+    sites:
+      - "200-299"
+  - name: "Hub_Sites"
+    description: "Hub and data center sites"
+    sites:
+      - "300-399"
+  - name: "Pilot_Sites"
+    description: "Pilot deployment sites"
+    sites:
+      - "200-204"
+
+# Application Lists (for policies)
+application_lists:
+  - name: "Business_Critical"
+    description: "Business critical applications"
+    applications:
+      - "microsoft-office365"
+      - "salesforce"
+      - "webex"
+      - "zoom"
+      - "ERP-System"
+      - "CRM-Database"
+  - name: "Voice_Applications"
+    description: "Voice and UC applications"
+    applications:
+      - "webex"
+      - "zoom"
+      - "skype"
+      - "microsoft-teams"
+  - name: "Video_Applications"
+    description: "Video conferencing applications"
+    applications:
+      - "webex"
+      - "zoom"
+      - "microsoft-teams"
+  - name: "Recreational"
+    description: "Non-business applications"
+    applications:
+      - "youtube"
+      - "facebook"
+      - "netflix"
+      - "instagram"
+
+# Firewall Zones
+firewall:
+  zones:
+    - name: "LAN_ZONE"
+      interfaces: ["GigabitEthernet0/0/2"]
+    - name: "WAN_ZONE"
+      interfaces: ["GigabitEthernet0/0/0", "GigabitEthernet0/0/1"]
+  policies:
+    - name: "LAN_TO_WAN"
+      from_zone: "LAN_ZONE"
+      to_zone: "WAN_ZONE"
+      action: "accept"
+      logging: true
+    - name: "WAN_TO_LAN"
+      from_zone: "WAN_ZONE"
+      to_zone: "LAN_ZONE"
+      action: "drop"
+      logging: true
+
+# Backup Configuration
+backup:
+  enabled: true
+  retention_days: 30
+  schedule: daily

@@ -1,0 +1,6 @@
+---
+# Dell SafeID Backup Configuration - Default Variables
+
+backup_retention_days: 30
+backup_compression: true
+backup_encryption: true

@@ -1,0 +1,76 @@
+---
+# SD-WAN Validation Role
+# Pre-deployment and post-deployment validation
+
+- name: Display validation banner
+  debug:
+    msg: "Running SD-WAN deployment validation"
+
+- name: Validate vManage connectivity
+  wait_for:
+    host: "{{ vmanage_host }}"
+    port: 443
+    timeout: 30
+  delegate_to: localhost
+  register: vmanage_check
+  failed_when: false
+
+- name: Validate vBond connectivity
+  wait_for:
+    host: "{{ groups['vbond'][0] }}"
+    port: 12346
+    timeout: 30
+  delegate_to: localhost
+  register: vbond_check
+  failed_when: false
+  when: groups['vbond'] is defined and groups['vbond'] | length > 0
+
+- name: Validate vSmart connectivity
+  wait_for:
+    host: "{{ item }}"
+    port: 830
+    timeout: 30
+  delegate_to: localhost
+  loop: "{{ groups['vsmart'] | default([]) }}"
+  register: vsmart_check
+  failed_when: false
+
+- name: Check control connections
+  cisco.ios.ios_command:
+    commands:
+      - show control connections
+  register: control_connections
+  when: inventory_hostname in groups.get('vedge', [])
+  vars:
+    ansible_network_os: ios
+  failed_when: false
+
+- name: Check OMP peers
+  cisco.ios.ios_command:
+    commands:
+      - show omp peers
+  register: omp_peers
+  when: inventory_hostname in groups.get('vedge', []) or inventory_hostname in groups.get('vsmart', [])
+  vars:
+    ansible_network_os: ios
+  failed_when: false
+
+- name: Check BFD sessions
+  cisco.ios.ios_command:
+    commands:
+      - show bfd sessions
+  register: bfd_sessions
+  when: inventory_hostname in groups.get('vedge', [])
+  vars:
+    ansible_network_os: ios
+  failed_when: false
+
+- name: Validation summary
+  debug:
+    msg: |
+      Validation Results:
+      - vManage: {{ 'UP' if vmanage_check.failed is false else 'DOWN' }}
+      - vBond: {{ 'UP' if vbond_check.failed is false else 'DOWN' }}
+      - vSmart: {{ 'UP' if vsmart_check.failed is false else 'CHECK FAILED' }}
+  delegate_to: localhost
+  run_once: true

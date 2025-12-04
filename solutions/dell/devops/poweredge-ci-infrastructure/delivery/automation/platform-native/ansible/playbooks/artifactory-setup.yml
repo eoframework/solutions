@@ -1,0 +1,147 @@
+# Dell PowerEdge CI Infrastructure - Artifactory Setup
+# EO Framework - Dell DevOps Solutions
+# Deploys and configures JFrog Artifactory
+
+---
+- name: Artifactory Setup
+  hosts: artifactory_servers
+  become: true
+  gather_facts: true
+  tags: [artifactory]
+  roles:
+    - role: artifactory
+
+  pre_tasks:
+    - name: Display Artifactory setup banner
+      ansible.builtin.debug:
+        msg: |
+          ================================================================
+          JFrog Artifactory Setup
+          ================================================================
+          Server: {{ inventory_hostname }}
+          Version: {{ artifactory.version }}
+          Storage: {{ artifact_storage_tb }}TB
+          ================================================================
+
+    - name: Install required packages
+      ansible.builtin.package:
+        name:
+          - java-11-openjdk
+          - curl
+          - wget
+        state: present
+
+  tasks:
+    - name: Create Artifactory user
+      ansible.builtin.user:
+        name: artifactory
+        system: yes
+        create_home: no
+        shell: /bin/false
+
+    - name: Create Artifactory directories
+      ansible.builtin.file:
+        path: "{{ item }}"
+        state: directory
+        owner: artifactory
+        group: artifactory
+        mode: '0755'
+      loop:
+        - /opt/jfrog/artifactory
+        - /var/opt/jfrog/artifactory
+        - /var/opt/jfrog/artifactory/data
+
+    - name: Download Artifactory
+      ansible.builtin.get_url:
+        url: "https://releases.jfrog.io/artifactory/artifactory-pro/org/artifactory/pro/jfrog-artifactory-pro/[RELEASE]/jfrog-artifactory-pro-[RELEASE]-linux.tar.gz"
+        dest: /tmp/artifactory.tar.gz
+        mode: '0644'
+      when: false  # Placeholder - actual URL should be templated
+
+    - name: Configure Artifactory system.yaml
+      ansible.builtin.template:
+        src: templates/artifactory-system.yaml.j2
+        dest: /var/opt/jfrog/artifactory/etc/system.yaml
+        owner: artifactory
+        group: artifactory
+        mode: '0644'
+      notify: restart artifactory
+
+    - name: Enable Artifactory service
+      ansible.builtin.systemd:
+        name: artifactory
+        enabled: yes
+        state: started
+
+  post_tasks:
+    - name: Wait for Artifactory to be ready
+      ansible.builtin.uri:
+        url: "http://localhost:8082/artifactory/api/system/ping"
+        status_code: 200
+      register: result
+      until: result.status == 200
+      retries: 30
+      delay: 10
+
+    - name: Configure Maven repository
+      ansible.builtin.uri:
+        url: "http://localhost:8082/artifactory/api/repositories/{{ item.key }}"
+        method: PUT
+        body_format: json
+        body:
+          key: "{{ item.key }}"
+          rclass: "{{ item.type }}"
+          packageType: "{{ item.package_type }}"
+          url: "{{ item.url | default(omit) }}"
+        user: admin
+        password: "{{ artifactory_admin_password | default('password') }}"
+        force_basic_auth: yes
+        status_code: [200, 201]
+      loop:
+        - key: maven-remote
+          type: remote
+          package_type: maven
+          url: https://repo.maven.apache.org/maven2
+        - key: npm-remote
+          type: remote
+          package_type: npm
+          url: https://registry.npmjs.org
+        - key: docker-local
+          type: local
+          package_type: docker
+      when: artifactory.repositories[item.key.split('-')[0]].enabled | default(false)
+      no_log: true
+
+    - name: Display Artifactory access information
+      ansible.builtin.debug:
+        msg: |
+          Artifactory is ready!
+          URL: http://{{ ansible_host }}:8082/artifactory
+          Default credentials: admin / password (CHANGE IMMEDIATELY)
+
+  handlers:
+    - name: restart artifactory
+      ansible.builtin.systemd:
+        name: artifactory
+        state: restarted
+
+#=============================================================================
+# SUMMARY
+#=============================================================================
+- name: Artifactory Setup Summary
+  hosts: localhost
+  gather_facts: false
+  tags: [always]
+
+  tasks:
+    - name: Display setup summary
+      ansible.builtin.debug:
+        msg: |
+          ================================================================
+          Artifactory Setup Complete
+          ================================================================
+          Artifactory Servers: {{ groups['artifactory_servers'] | length }}
+          Maven Repository: {{ artifactory.repositories.maven.enabled | default(false) }}
+          NPM Repository: {{ artifactory.repositories.npm.enabled | default(false) }}
+          Docker Registry: {{ artifactory.repositories.docker.enabled | default(false) }}
+          ================================================================

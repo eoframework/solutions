@@ -1,0 +1,15 @@
+#------------------------------------------------------------------------------
+# VxRail Software Configuration
+#------------------------------------------------------------------------------
+# Generated from configuration.csv
+#
+# To regenerate: python generate-ansible-vars.py /path/to/solution
+# DO NOT EDIT - Changes will be overwritten on regeneration
+#------------------------------------------------------------------------------
+
+vxrail:
+  version: "8.0.200"
+  cluster_name: "[vxrail-enterprise-prod]"
+  node_count: 8
+  node_model: "P570"
+  manager_ip: "[10.10.3.100]"

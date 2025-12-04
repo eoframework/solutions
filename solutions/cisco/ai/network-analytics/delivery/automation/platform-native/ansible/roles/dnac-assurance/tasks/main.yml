@@ -1,0 +1,102 @@
+---
+#------------------------------------------------------------------------------
+# Role: dnac-assurance
+# Purpose: DNA Center Assurance configuration and integration setup
+#------------------------------------------------------------------------------
+
+- name: Configure ServiceNow integration
+  ansible.builtin.uri:
+    url: "https://{{ dnac.vip }}/dna/intent/api/v1/integration/servicenow"
+    method: POST
+    headers:
+      x-auth-token: "{{ dnac_auth_token }}"
+    body_format: json
+    body:
+      instanceUrl: "{{ integrations.servicenow.instance }}"
+      username: "{{ integrations.servicenow.user }}"
+      password: "{{ vault_servicenow_password }}"
+      table: "{{ integrations.servicenow.table }}"
+      priorityMapping: "{{ integrations.servicenow.priority_mapping }}"
+    validate_certs: "{{ dnac.ssl_verify }}"
+    status_code: [200, 201, 202]
+  register: servicenow_integration
+  when: integrations.servicenow.instance is defined
+
+- name: Configure NetBox IPAM integration
+  ansible.builtin.uri:
+    url: "https://{{ dnac.vip }}/dna/intent/api/v1/integration/ipam"
+    method: POST
+    headers:
+      x-auth-token: "{{ dnac_auth_token }}"
+    body_format: json
+    body:
+      provider: "NetBox"
+      url: "{{ integrations.netbox.url }}"
+      apiToken: "{{ vault_netbox_api_token }}"
+      syncInterval: "{{ integrations.netbox.sync_interval }}"
+      sitePrefix: "{{ integrations.netbox.site_prefix }}"
+    validate_certs: "{{ dnac.ssl_verify }}"
+    status_code: [200, 201, 202]
+  register: netbox_integration
+  when: integrations.netbox.url is defined
+
+- name: Configure syslog integration
+  ansible.builtin.uri:
+    url: "https://{{ dnac.vip }}/dna/intent/api/v1/syslog-config"
+    method: POST
+    headers:
+      x-auth-token: "{{ dnac_auth_token }}"
+    body_format: json
+    body:
+      syslogServer: "{{ monitoring.syslog_server }}"
+      syslogPort: "{{ monitoring.syslog_port }}"
+      facility: "{{ monitoring.syslog_facility }}"
+      severity: "{{ monitoring.syslog_severity }}"
+    validate_certs: "{{ dnac.ssl_verify }}"
+    status_code: [200, 201, 202]
+  register: syslog_integration
+
+- name: Configure SMTP for notifications
+  ansible.builtin.uri:
+    url: "https://{{ dnac.vip }}/dna/intent/api/v1/email-config"
+    method: POST
+    headers:
+      x-auth-token: "{{ dnac_auth_token }}"
+    body_format: json
+    body:
+      smtpServer: "{{ notifications.smtp_server }}"
+      smtpPort: "{{ notifications.smtp_port }}"
+      fromAddress: "{{ notifications.smtp_from }}"
+      recipients: "{{ notifications.alert_recipients }}"
+    validate_certs: "{{ dnac.ssl_verify }}"
+    status_code: [200, 201, 202]
+  register: smtp_config
+
+- name: Configure backup settings
+  ansible.builtin.uri:
+    url: "https://{{ dnac.vip }}/dna/intent/api/v1/backup-config"
+    method: POST
+    headers:
+      x-auth-token: "{{ dnac_auth_token }}"
+    body_format: json
+    body:
+      schedule: "{{ backup.schedule }}"
+      retentionDays: "{{ backup.retention_days }}"
+      location: "{{ backup.location }}"
+      encryptionEnabled: "{{ backup.encryption_enabled }}"
+    validate_certs: "{{ dnac.ssl_verify }}"
+    status_code: [200, 201, 202]
+  register: backup_config
+
+- name: Assurance setup summary
+  ansible.builtin.debug:
+    msg: |
+      ============================================================
+      DNA Center Assurance Setup Complete
+      ============================================================
+      ServiceNow: {{ 'Configured' if servicenow_integration.status in [200, 201, 202] else 'Skipped' }}
+      NetBox IPAM: {{ 'Configured' if netbox_integration.status in [200, 201, 202] else 'Skipped' }}
+      Syslog: {{ 'Configured' if syslog_integration.status in [200, 201, 202] else 'Failed' }}
+      SMTP: {{ 'Configured' if smtp_config.status in [200, 201, 202] else 'Failed' }}
+      Backup: {{ 'Configured' if backup_config.status in [200, 201, 202] else 'Failed' }}
+      ============================================================

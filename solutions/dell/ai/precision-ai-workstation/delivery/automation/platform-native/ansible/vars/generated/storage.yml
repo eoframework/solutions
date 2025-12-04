@@ -1,0 +1,18 @@
+#------------------------------------------------------------------------------
+# Storage Configuration
+#------------------------------------------------------------------------------
+# Generated from configuration.csv
+#
+# To regenerate: python generate-ansible-vars.py /path/to/solution
+# DO NOT EDIT - Changes will be overwritten on regeneration
+#------------------------------------------------------------------------------
+
+storage:
+  powerscale_model: "F600"
+  powerscale_capacity_tb: 100
+  powerscale_hostname: "[powerscale.domain.com]"
+  nfs_version: "4.1"
+  nfs_mount_point: "/mnt/powerscale"
+  nfs_export_datasets: "/ifs/ai/datasets"
+  nfs_export_models: "/ifs/ai/models"
+  nfs_export_shared: "/ifs/ai/shared"

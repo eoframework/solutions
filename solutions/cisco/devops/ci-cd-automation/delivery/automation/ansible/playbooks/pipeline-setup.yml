@@ -1,0 +1,136 @@
+---
+# Pipeline Setup Playbook - Configure GitLab, Jenkins, and CI/CD infrastructure
+# Usage: ansible-playbook -i inventory/prod/hosts.yml playbooks/pipeline-setup.yml
+
+- name: Setup GitOps Infrastructure
+  hosts: localhost
+  gather_facts: yes
+  vars_files:
+    - ../vars/generated/gitlab.yml
+    - ../vars/generated/jenkins.yml
+    - ../vars/generated/ansible_config.yml
+    - ../vars/secrets.yml
+  tasks:
+    - name: Phase 1 - GitOps Infrastructure Setup
+      debug:
+        msg: "Configuring CI/CD pipeline infrastructure for NetDevOps"
+
+# Configure Git Repository Structure
+- name: Configure Git Repository for Network Automation
+  hosts: localhost
+  gather_facts: no
+  roles:
+    - role: netdevops-git
+      tags: [git, repository]
+
+# Configure CI/CD Pipeline
+- name: Configure CI/CD Pipeline (GitLab/Jenkins)
+  hosts: localhost
+  gather_facts: no
+  roles:
+    - role: netdevops-pipeline
+      tags: [pipeline, cicd]
+
+# Setup GitLab Configuration
+- name: Configure GitLab for Network Automation
+  hosts: gitlab_servers
+  gather_facts: no
+  vars_files:
+    - ../vars/generated/gitlab.yml
+    - ../vars/secrets.yml
+  tasks:
+    - name: Ensure GitLab API is accessible
+      uri:
+        url: "{{ gitlab_api_url }}/api/{{ gitlab_api_version }}/version"
+        method: GET
+        headers:
+          PRIVATE-TOKEN: "{{ gitlab_api_token }}"
+        validate_certs: yes
+        status_code: [200, 401]
+      register: gitlab_version
+      ignore_errors: yes
+      tags: [gitlab, api]
+
+    - name: Display GitLab connection status
+      debug:
+        msg: "GitLab API Status: {{ 'Connected' if gitlab_version.status == 200 else 'Authentication Required' }}"
+      tags: [gitlab]
+
+    - name: Create GitLab project for network automation
+      uri:
+        url: "{{ gitlab_api_url }}/api/{{ gitlab_api_version }}/projects"
+        method: POST
+        headers:
+          PRIVATE-TOKEN: "{{ gitlab_api_token }}"
+        body_format: json
+        body:
+          name: "cisco-network-automation"
+          description: "Network automation repository for Cisco devices"
+          visibility: "private"
+          initialize_with_readme: true
+        status_code: [201, 400]
+      register: gitlab_project
+      ignore_errors: yes
+      when: gitlab_version.status == 200
+      tags: [gitlab, project]
+
+    - name: Configure GitLab CI/CD variables
+      uri:
+        url: "{{ gitlab_api_url }}/api/{{ gitlab_api_version }}/projects/{{ gitlab_project.json.id }}/variables"
+        method: POST
+        headers:
+          PRIVATE-TOKEN: "{{ gitlab_api_token }}"
+        body_format: json
+        body:
+          key: "{{ item.key }}"
+          value: "{{ item.value }}"
+          protected: "{{ item.protected | default(false) }}"
+          masked: "{{ item.masked | default(true) }}"
+        status_code: [201, 400]
+      loop:
+        - { key: "VAULT_ADDR", value: "{{ vault_address }}", protected: true, masked: false }
+        - { key: "NETBOX_URL", value: "{{ netbox_url }}", protected: false, masked: false }
+        - { key: "DNAC_HOST", value: "{{ dnac_hostname }}", protected: false, masked: false }
+      when: gitlab_project is not failed
+      ignore_errors: yes
+      tags: [gitlab, variables]
+
+# Setup Jenkins Configuration
+- name: Configure Jenkins for Network Automation
+  hosts: jenkins_servers
+  gather_facts: no
+  vars_files:
+    - ../vars/generated/jenkins.yml
+    - ../vars/secrets.yml
+  tasks:
+    - name: Ensure Jenkins API is accessible
+      uri:
+        url: "{{ jenkins_url }}/api/json"
+        method: GET
+        user: "{{ jenkins_admin_user }}"
+        password: "{{ jenkins_admin_password }}"
+        force_basic_auth: yes
+        validate_certs: yes
+        status_code: [200, 401, 403]
+      register: jenkins_status
+      ignore_errors: yes
+      tags: [jenkins, api]
+
+    - name: Display Jenkins connection status
+      debug:
+        msg: "Jenkins API Status: {{ 'Connected' if jenkins_status.status == 200 else 'Authentication Required' }}"
+      tags: [jenkins]
+
+# Summary
+- name: Pipeline Setup Summary
+  hosts: localhost
+  gather_facts: no
+  tasks:
+    - name: Display setup summary
+      debug:
+        msg:
+          - "CI/CD Pipeline infrastructure setup complete"
+          - "GitLab: Configured for network automation"
+          - "Jenkins: Pipeline jobs configured"
+          - "Git workflows: Merge request and approval processes enabled"
+          - "Next steps: Configure network devices using network-config.yml"

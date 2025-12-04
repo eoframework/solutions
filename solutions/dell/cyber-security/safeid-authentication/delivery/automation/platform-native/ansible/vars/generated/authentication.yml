@@ -1,0 +1,19 @@
+#------------------------------------------------------------------------------
+# Authentication Configuration
+#------------------------------------------------------------------------------
+# Generated from configuration.csv
+#
+# To regenerate: python generate-ansible-vars.py /path/to/solution
+# DO NOT EDIT - Changes will be overwritten on regeneration
+#------------------------------------------------------------------------------
+
+authentication:
+  protocol: "FIDO2 WebAuthn"
+  fido2:
+    origin: "login.company.com"
+    rpid: "company.com"
+  pin:
+    enabled: true
+    min_length: 6
+    max_length: 8
+    complexity_required: true

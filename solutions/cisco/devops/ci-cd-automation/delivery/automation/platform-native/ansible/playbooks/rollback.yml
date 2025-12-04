@@ -1,0 +1,149 @@
+---
+#------------------------------------------------------------------------------
+# Rollback Playbook - Cisco Network CI/CD Automation
+#------------------------------------------------------------------------------
+# This playbook reverts the CI/CD automation configuration to a known good state.
+#
+# Usage:
+#   ansible-playbook -i inventory/prod/hosts.yml playbooks/rollback.yml
+#   ansible-playbook -i inventory/prod/hosts.yml playbooks/rollback.yml --tags "gitlab"
+#------------------------------------------------------------------------------
+
+- name: Cisco Network CI/CD Automation - Rollback
+  hosts: localhost
+  gather_facts: yes
+  vars_files:
+    - ../vars/generated/project.yml
+    - ../vars/generated/gitlab.yml
+    - ../vars/generated/jenkins.yml
+    - ../vars/generated/operations.yml
+    - ../vars/secrets.yml
+
+  vars:
+    rollback_timestamp: "{{ ansible_date_time.iso8601 }}"
+    rollback_backup_dir: "/tmp/cicd-rollback-{{ ansible_date_time.epoch }}"
+
+  pre_tasks:
+    - name: Display rollback warning
+      ansible.builtin.debug:
+        msg:
+          - "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
+          - "WARNING: ROLLBACK OPERATION"
+          - "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
+          - "This will revert CI/CD configuration to"
+          - "the last known good state."
+          - ""
+          - "Timestamp: {{ rollback_timestamp }}"
+          - "Environment: {{ deployment_environment | default('production') }}"
+          - "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
+
+    - name: Create rollback backup directory
+      ansible.builtin.file:
+        path: "{{ rollback_backup_dir }}"
+        state: directory
+        mode: '0750'
+
+  tasks:
+    #--------------------------------------------------------------------------
+    # GitLab Rollback
+    #--------------------------------------------------------------------------
+    - name: Export current GitLab CI/CD variables (backup)
+      ansible.builtin.shell: |
+        curl -s -H "PRIVATE-TOKEN: {{ vault_gitlab_api_token }}" \
+          "{{ gitlab.url }}/api/v4/projects/{{ item }}/variables" > \
+          {{ rollback_backup_dir }}/gitlab_vars_{{ item }}.json
+      loop: "{{ gitlab_project_ids | default([]) }}"
+      tags: [gitlab]
+      no_log: true
+      ignore_errors: yes
+
+    - name: Disable GitLab pipelines for rollback
+      ansible.builtin.uri:
+        url: "{{ gitlab.url }}/api/v4/projects/{{ item }}/pipelines"
+        method: POST
+        headers:
+          PRIVATE-TOKEN: "{{ vault_gitlab_api_token }}"
+        body_format: json
+        body:
+          ref: "main"
+          variables:
+            - key: "ROLLBACK_MODE"
+              value: "true"
+        validate_certs: true
+        status_code: [201, 400]
+        timeout: 60
+      loop: "{{ gitlab_project_ids | default([]) }}"
+      tags: [gitlab]
+      ignore_errors: yes
+
+    #--------------------------------------------------------------------------
+    # Jenkins Rollback
+    #--------------------------------------------------------------------------
+    - name: Disable Jenkins jobs during rollback
+      ansible.builtin.uri:
+        url: "{{ jenkins.url }}/job/{{ item }}/disable"
+        method: POST
+        user: "{{ jenkins.admin_user }}"
+        password: "{{ vault_jenkins_admin_password }}"
+        force_basic_auth: yes
+        validate_certs: true
+        status_code: [200, 302]
+        timeout: 30
+      loop: "{{ jenkins_job_names | default([]) }}"
+      tags: [jenkins]
+      ignore_errors: yes
+
+    #--------------------------------------------------------------------------
+    # NSO Rollback
+    #--------------------------------------------------------------------------
+    - name: Trigger NSO rollback to last transaction
+      ansible.builtin.uri:
+        url: "https://{{ nso.hostname }}:{{ nso.port }}/restconf/operations/tailf-rollback:rollback"
+        method: POST
+        user: "{{ nso.admin_user }}"
+        password: "{{ vault_nso_admin_password }}"
+        force_basic_auth: yes
+        headers:
+          Content-Type: "application/yang-data+json"
+        body_format: json
+        body:
+          input:
+            id: "latest"
+        validate_certs: true
+        status_code: [200, 204]
+        timeout: 120
+      tags: [nso]
+      ignore_errors: yes
+      when: nso is defined
+
+    #--------------------------------------------------------------------------
+    # Create Rollback Record
+    #--------------------------------------------------------------------------
+    - name: Create rollback record
+      ansible.builtin.copy:
+        content: |
+          {
+            "rollback_timestamp": "{{ rollback_timestamp }}",
+            "environment": "{{ deployment_environment | default('production') }}",
+            "initiated_by": "{{ ansible_user_id }}",
+            "backup_location": "{{ rollback_backup_dir }}",
+            "status": "completed"
+          }
+        dest: "{{ rollback_backup_dir }}/rollback_record.json"
+        mode: '0640'
+
+  post_tasks:
+    - name: Display rollback completion
+      ansible.builtin.debug:
+        msg:
+          - "=============================================="
+          - "Rollback Complete"
+          - "=============================================="
+          - "Backup saved to: {{ rollback_backup_dir }}"
+          - ""
+          - "Manual verification required:"
+          - "  1. Check GitLab pipeline status"
+          - "  2. Verify Jenkins job states"
+          - "  3. Confirm NSO service health"
+          - "  4. Review monitoring dashboards"
+          - "=============================================="

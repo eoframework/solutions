@@ -1,0 +1,67 @@
+---
+# Global variables for Cisco SD-WAN Enterprise - DR
+# DR environment mirrors production configuration with DR-specific values
+
+# Deployment Configuration
+deployment:
+  organization: "{{ sdwan_organization }}"
+  domain_id: 2
+  timeout: 600
+  retry_count: 3
+  backup_enabled: true
+  pilot_site_count: 3
+  production_site_count: 10
+
+# Network Configuration (same as prod)
+network:
+  control_plane_vrf: 0
+  transport_gateway: true
+  nat_transparent: false
+  port_hopping: true
+  control_plane_dscp: 48
+
+# Security Configuration (same as prod)
+security:
+  ipsec_integrity: "ip-esp"
+  ipsec_encryption: "aes-256-cbc"
+  ipsec_authentication: "sha256-hmac"
+  certificate_lifetime: 365
+  rekey_timer: 86400
+  fw_inspection_mode: stateful
+  ips_enabled: true
+  url_filtering: true
+  amp_enabled: true
+
+# Quality of Service (same as prod)
+qos:
+  classes:
+    - name: "voice"
+      bandwidth_percent: 20
+      priority: "strict-priority"
+      dscp: 46
+    - name: "video"
+      bandwidth_percent: 25
+      priority: "priority"
+      dscp: 34
+    - name: "business-data"
+      bandwidth_percent: 35
+      priority: "guaranteed"
+      dscp: 26
+    - name: "best-effort"
+      bandwidth_percent: 20
+      priority: "best-effort"
+      dscp: 0
+
+# Cloud OnRamp (DR region)
+cloud_onramp:
+  aws_enabled: true
+  aws_region: us-west-2
+  azure_enabled: true
+  azure_region: westus2
+  gcp_enabled: false
+
+# Backup Configuration
+backup:
+  enabled: true
+  retention_days: 30
+  schedule: daily

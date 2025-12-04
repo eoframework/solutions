@@ -1,36 +1,72 @@
-#WIDTH: 28,18,14,30,45,10,14,35,16,22,28,42,14
-#ALIGN: left,left,center,left,left,center,left,left,center,left,left,left,center
-Parameter Name,Category,Environment,Default Value,Description,Required,Data Type,Validation Rules,Security Level,Owner Team,Dependencies,Notes,Last Updated
-TFE_ORGANIZATION,Terraform Enterprise,All,[organization-name],Terraform Enterprise organization name,Yes,String,Valid organization name,Public,Platform Team,None,Must be unique across TFE,[DATE]
-TFE_HOSTNAME,Terraform Enterprise,All,[tfe-hostname].example.com,Terraform Enterprise hostname,Yes,String,Valid hostname,Public,Platform Team,DNS configuration,Use FQDN with TLS,[DATE]
-TFE_LICENSE,Terraform Enterprise,All,[license-file-path],Path to Terraform Enterprise license,Yes,String,Valid file path,Secret,Platform Team,HashiCorp license,Store securely,[DATE]
-TFE_ADMIN_EMAIL,Terraform Enterprise,All,admin@example.com,Initial admin user email,Yes,String,Valid email address,Confidential,Platform Team,None,For initial setup,[DATE]
-TFE_ENCRYPTION_KEY,Terraform Enterprise,All,[encryption-key],Terraform Enterprise encryption key,Yes,String,32+ character random,Secret,Security Team,KMS,Store in secrets manager,[DATE]
-AWS_REGION,AWS,All,us-east-1,Primary AWS region for TFE deployment,Yes,String,Valid AWS region,Public,Infrastructure Team,AWS account,EKS deployment region,[DATE]
-AWS_ACCOUNT_ID,AWS,All,[aws-account-id],AWS account ID for TFE platform,Yes,String,12-digit account ID,Confidential,Infrastructure Team,AWS account,Platform account,[DATE]
-EKS_CLUSTER_NAME,AWS,All,tfe-platform-cluster,EKS cluster name for Terraform Enterprise,Yes,String,Valid EKS cluster name,Public,Infrastructure Team,AWS account,3-node cluster,[DATE]
-EKS_NODE_INSTANCE_TYPE,AWS,All,t3.large,EKS worker node instance type,Yes,String,Valid EC2 instance type,Public,Infrastructure Team,EKS cluster,2 vCPU 8GB,[DATE]
-EKS_NODE_COUNT,AWS,Prod,3,Number of EKS worker nodes,Yes,Integer,3-10,Public,Infrastructure Team,EKS cluster,HA requires 3+,[DATE]
-RDS_INSTANCE_CLASS,AWS,Prod,db.t3.medium,RDS instance class for TFE state,Yes,String,Valid RDS instance class,Public,Infrastructure Team,AWS account,2 vCPU 4GB,[DATE]
-RDS_STORAGE_GB,AWS,Prod,50,RDS allocated storage in GB,Yes,Integer,20-500,Public,Infrastructure Team,RDS instance,Scale as needed,[DATE]
-RDS_DATABASE_NAME,AWS,All,tfe_state,PostgreSQL database name,Yes,String,Valid database name,Confidential,Infrastructure Team,RDS instance,TFE state backend,[DATE]
-RDS_USERNAME,AWS,All,tfe_admin,RDS master username,Yes,String,Valid username,Secret,Infrastructure Team,RDS instance,Store in Vault,[DATE]
-RDS_PASSWORD,AWS,All,[database-password],RDS master password,Yes,String,Min 16 chars complex,Secret,Infrastructure Team,RDS instance,Store in Vault,[DATE]
-VPC_CIDR,Network,All,10.50.0.0/16,VPC CIDR block for TFE platform,Yes,String,Valid CIDR notation,Public,Network Team,IP planning,256 addresses minimum,[DATE]
-PRIVATE_SUBNET_CIDRS,Network,All,10.50.10.0/24;10.50.11.0/24,Private subnet CIDR blocks,Yes,String,Valid CIDR list,Public,Network Team,VPC CIDR,Multi-AZ deployment,[DATE]
-PUBLIC_SUBNET_CIDRS,Network,All,10.50.1.0/24;10.50.2.0/24,Public subnet CIDR blocks,Yes,String,Valid CIDR list,Public,Network Team,VPC CIDR,ALB deployment,[DATE]
-VAULT_ADDR,HashiCorp Vault,All,https://vault.example.com:8200,Vault address for dynamic credentials,Yes,String,Valid HTTPS URL,Confidential,Security Team,Vault deployment,Use internal DNS,[DATE]
-VAULT_ROLE,HashiCorp Vault,All,tfe-aws-credentials,Vault role for AWS credentials,Yes,String,Valid role name,Confidential,Security Team,Vault AWS engine,1-hour TTL,[DATE]
-VAULT_AWS_PATH,HashiCorp Vault,All,aws/creds/tfe-role,Vault path for AWS credentials,Yes,String,Valid Vault path,Confidential,Security Team,Vault configuration,Dynamic credentials,[DATE]
-GITHUB_ORG,VCS,All,[github-org],GitHub organization name,Yes,String,Valid org name,Public,Platform Team,GitHub access,Enterprise or Cloud,[DATE]
-GITHUB_OAUTH_TOKEN,VCS,All,[oauth-token],GitHub OAuth token for VCS integration,Yes,String,Valid OAuth token,Secret,Platform Team,GitHub OAuth App,Configure in TFE,[DATE]
-GITHUB_WEBHOOK_SECRET,VCS,All,[webhook-secret],GitHub webhook secret for TFE,Yes,String,32+ character random,Secret,Platform Team,TFE VCS integration,Generate securely,[DATE]
-DATADOG_API_KEY,Monitoring,All,[datadog-api-key],Datadog API key for metrics,Yes,String,Valid API key,Secret,Operations Team,Datadog account,Create dedicated key,[DATE]
-PAGERDUTY_SERVICE_KEY,Monitoring,All,[pagerduty-key],PagerDuty service integration key,Yes,String,Valid service key,Secret,Operations Team,PagerDuty service,Critical alerts,[DATE]
-SLACK_WEBHOOK_URL,Notifications,All,[slack-webhook],Slack webhook URL for notifications,Yes,String,Valid Slack webhook URL,Secret,Operations Team,Slack workspace,Run notifications,[DATE]
-SSO_SAML_METADATA_URL,Security,All,[saml-metadata-url],SAML IdP metadata URL for SSO,Yes,String,Valid HTTPS URL,Confidential,Security Team,Identity provider,Enterprise SSO,[DATE]
-BACKUP_RETENTION_DAYS,Operations,Prod,7,Backup retention period in days,Yes,Integer,7-30,Public,Operations Team,Backup storage,RDS snapshots,[DATE]
-LOG_RETENTION_DAYS,Operations,Prod,90,Log retention period in days,Yes,Integer,30-365,Public,Operations Team,CloudWatch,Audit requirements,[DATE]
-TFE_CONCURRENT_RUNS,Terraform Enterprise,Prod,10,Maximum concurrent Terraform runs,Yes,Integer,1-50,Public,Platform Team,EKS capacity,Size workers accordingly,[DATE]
-TFE_WORKSPACE_COUNT,Terraform Enterprise,All,50,Target workspace count for platform,Yes,Integer,1-500,Public,Platform Team,License,Matches SOW scope,[DATE]
-SENTINEL_POLICY_COUNT,Governance,All,40,Target Sentinel policy count,Yes,Integer,1-100,Public,Security Team,Policy repository,Security and cost and compliance,[DATE]
+#WIDTH: 45,14,50,50,50,45,8,12,27,14,14,12,30,12
+#ALIGN: left,left,left,left,left,left,center,left,left,center,left,left,left,center
+Parameter Name,Category,Production,Test,DR,Description,Required,Data Type,Validation Rules,Security Level,Owner Team,Dependencies,Notes,Last Updated
+solution.name,Application,terraform-enterprise,terraform-enterprise,terraform-enterprise,Solution name for resource naming,Yes,String,Valid string value,Public,Platform Team,,From solution object,2025-12-03
+solution.abbr,Application,tfe,tfe,tfe,Solution abbreviation (3-4 chars),Yes,String,Valid string value,Public,Platform Team,,From solution object,2025-12-03
+solution.provider_name,Application,hashicorp,hashicorp,hashicorp,Provider organization name,Yes,String,Valid string value,Public,Platform Team,,From solution object,2025-12-03
+solution.category_name,Application,devops,devops,devops,Solution category,Yes,String,Valid string value,Public,Platform Team,,From solution object,2025-12-03
+tfe.organization,TFE Platform,client-organization,client-organization,client-organization,TFE organization name,Yes,String,Valid organization name,Public,Platform Team,,Must be unique across TFE,2025-12-03
+tfe.hostname,TFE Platform,tfe.client.example.com,tfe-test.client.example.com,tfe-dr.client.example.com,TFE hostname (FQDN),Yes,String,Valid hostname,Public,Platform Team,,Use FQDN with TLS,2025-12-03
+tfe.license_path,TFE Platform,/secrets/tfe-license.rli,/secrets/tfe-license.rli,/secrets/tfe-license.rli,Path to TFE license file,Yes,String,Valid file path,Secret,Platform Team,,Store securely,2025-12-03
+tfe.admin_email,TFE Platform,admin@example.com,admin@example.com,admin@example.com,Initial admin user email,Yes,String,Valid email address,Confidential,Platform Team,,For initial setup,2025-12-03
+tfe.operational_mode,TFE Platform,active-active,standalone,active-active,TFE operational mode,Yes,String,standalone|mounted-disk|active-active,Public,Platform Team,,Enterprise modes,2025-12-03
+tfe.concurrent_runs,TFE Platform,10,5,10,Maximum concurrent Terraform runs,Yes,Integer,1-50,Public,Platform Team,,Size workers accordingly,2025-12-03
+tfe.workspace_count,TFE Platform,50,25,50,Target workspace count for platform,Yes,Integer,1-500,Public,Platform Team,,Matches SOW scope,2025-12-03
+tfe.user_count,TFE Platform,25,15,25,Number of platform users,Yes,Integer,1-500,Public,Platform Team,,License capacity,2025-12-03
+aws.region,Project,us-east-1,us-east-1,us-west-2,Primary AWS region,Yes,String,Valid AWS region,Public,Infrastructure Team,,EKS deployment region,2025-12-03
+aws.dr_region,Project,us-west-2,us-west-2,us-east-1,DR AWS region for failover,Yes,String,Valid AWS region,Public,Infrastructure Team,,Cross-region DR,2025-12-03
+aws.account_id,Project,123456789012,123456789012,123456789012,AWS account ID for platform,Yes,String,12-digit account ID,Confidential,Infrastructure Team,,Platform account,2025-12-03
+ownership.cost_center,Project,CC-TFE-001,CC-TFE-001,CC-TFE-001,Cost center for billing,Yes,String,Valid string value,Public,Finance,,From ownership object,2025-12-03
+ownership.owner_email,Project,platform-team@example.com,platform-team@example.com,platform-team@example.com,Owner email for notifications,Yes,String,Valid email address,Confidential,Platform Team,,From ownership object,2025-12-03
+ownership.project_code,Project,PRJ-TFE-001,PRJ-TFE-001,PRJ-TFE-001,Project tracking code,Yes,String,Valid string value,Public,Platform Team,,From ownership object,2025-12-03
+network.vpc_cidr,Networking,10.50.0.0/16,10.51.0.0/16,10.52.0.0/16,VPC CIDR block for platform,Yes,String,Valid CIDR notation,Confidential,Network Team,,256 addresses minimum,2025-12-03
+network.private_subnet_cidrs,Networking,"[""10.50.10.0/24"", ""10.50.11.0/24"", ""10.50.12.0/24""]","[""10.51.10.0/24"", ""10.51.11.0/24""]","[""10.52.10.0/24"", ""10.52.11.0/24"", ""10.52.12.0/24""]",Private subnet CIDR blocks,Yes,List(String),Valid CIDR list,Confidential,Network Team,,Multi-AZ deployment,2025-12-03
+network.public_subnet_cidrs,Networking,"[""10.50.1.0/24"", ""10.50.2.0/24"", ""10.50.3.0/24""]","[""10.51.1.0/24"", ""10.51.2.0/24""]","[""10.52.1.0/24"", ""10.52.2.0/24"", ""10.52.3.0/24""]",Public subnet CIDR blocks,Yes,List(String),Valid CIDR list,Confidential,Network Team,,ALB deployment,2025-12-03
+network.enable_nat_gateway,Networking,true,true,true,Enable NAT Gateway for private subnets,Yes,Boolean,true|false,Public,Network Team,,Internet access,2025-12-03
+network.single_nat_gateway,Networking,false,true,false,Use single NAT (cost) vs HA NAT (reliability),Yes,Boolean,true|false,Public,Network Team,,Cost optimization,2025-12-03
+network.enable_flow_logs,Networking,true,false,true,Enable VPC Flow Logs,Yes,Boolean,true|false,Public,Network Team,,Network monitoring,2025-12-03
+network.flow_log_retention_days,Networking,90,30,90,Flow log retention period in days,Yes,Integer,Positive integer (days),Public,Network Team,,Audit requirements,2025-12-03
+compute.eks_cluster_name,Compute,tfe-prod-cluster,tfe-test-cluster,tfe-dr-cluster,EKS cluster name for TFE,Yes,String,Valid EKS cluster name,Public,Infrastructure Team,,3-node cluster,2025-12-03
+compute.eks_node_instance_type,Compute,t3.large,t3.medium,t3.large,EKS worker node instance type,Yes,String,Valid EC2 instance type,Public,Infrastructure Team,,2 vCPU 8GB minimum,2025-12-03
+compute.eks_node_count,Compute,3,2,3,Number of EKS worker nodes,Yes,Integer,1-10,Public,Infrastructure Team,,HA requires 3+,2025-12-03
+compute.eks_node_min_count,Compute,2,1,2,Minimum EKS worker nodes for autoscaling,Yes,Integer,1-10,Public,Infrastructure Team,,Minimum capacity,2025-12-03
+compute.eks_node_max_count,Compute,6,3,6,Maximum EKS worker nodes for autoscaling,Yes,Integer,1-20,Public,Infrastructure Team,,Scale limit,2025-12-03
+database.rds_instance_class,Database,db.t3.medium,db.t3.small,db.t3.medium,RDS instance class for TFE state,Yes,String,Valid RDS instance class,Public,Infrastructure Team,,2 vCPU 4GB,2025-12-03
+database.rds_storage_gb,Database,50,20,50,RDS allocated storage in GB,Yes,Integer,20-500,Public,Infrastructure Team,,Scale as needed,2025-12-03
+database.rds_database_name,Database,tfe_state,tfe_state,tfe_state,PostgreSQL database name,Yes,String,Valid database name,Confidential,Infrastructure Team,,TFE state backend,2025-12-03
+database.rds_multi_az,Database,true,false,true,Enable RDS Multi-AZ,Yes,Boolean,true|false,Public,Infrastructure Team,,High availability,2025-12-03
+database.rds_backup_retention,Database,7,1,7,RDS backup retention days,Yes,Integer,1-35,Public,Infrastructure Team,,Backup policy,2025-12-03
+database.rds_deletion_protection,Database,true,false,true,Enable RDS deletion protection,Yes,Boolean,true|false,Public,Infrastructure Team,,Safety setting,2025-12-03
+vault.enabled,HashiCorp Vault,true,false,true,Enable HashiCorp Vault integration,Yes,Boolean,true|false,Public,Security Team,,Dynamic credentials,2025-12-03
+vault.aws_role,HashiCorp Vault,tfe-aws-credentials,tfe-aws-credentials,tfe-aws-credentials,Vault role for AWS credentials,Yes,String,Valid role name,Confidential,Security Team,,1-hour TTL,2025-12-03
+vault.aws_path,HashiCorp Vault,aws/creds/tfe-role,aws/creds/tfe-role,aws/creds/tfe-role,Vault path for AWS credentials,Yes,String,Valid Vault path,Confidential,Security Team,,Dynamic credentials,2025-12-03
+security.enable_kms_encryption,Security,true,true,true,Enable KMS encryption for resources,Yes,Boolean,true|false,Public,Security Team,,From security object,2025-12-03
+security.kms_deletion_window,Security,30,7,30,KMS key deletion window (days),Yes,Integer,7-30,Public,Security Team,,Protection period,2025-12-03
+security.enable_waf,Security,true,false,false,Enable AWS WAF on ALB,Yes,Boolean,true|false,Public,Security Team,,Web application firewall,2025-12-03
+security.waf_rate_limit,Security,2000,10000,2000,WAF rate limit per IP (5-min window),Yes,Integer,Valid integer,Public,Security Team,,Rate limiting,2025-12-03
+security.enable_guardduty,Security,true,false,true,Enable Amazon GuardDuty threat detection,Yes,Boolean,true|false,Public,Security Team,,Threat detection,2025-12-03
+security.enable_cloudtrail,Security,true,false,false,Enable CloudTrail API logging,Yes,Boolean,true|false,Public,Security Team,,API audit trail,2025-12-03
+security.sso_enabled,Security,true,true,true,Enable SSO/SAML authentication,Yes,Boolean,true|false,Public,Security Team,,Enterprise SSO,2025-12-03
+security.mfa_required,Security,true,true,true,Require multi-factor authentication,Yes,Boolean,true|false,Public,Security Team,,MFA enforcement,2025-12-03
+integration.github_org,VCS Integration,client-org,client-org,client-org,GitHub organization name,Yes,String,Valid org name,Public,Platform Team,,Enterprise or Cloud,2025-12-03
+integration.github_vcs_enabled,VCS Integration,true,true,true,Enable GitHub VCS integration,Yes,Boolean,true|false,Public,Platform Team,,GitOps workflows,2025-12-03
+integration.slack_enabled,Notifications,true,false,true,Enable Slack notifications,Yes,Boolean,true|false,Public,Operations Team,,Run notifications,2025-12-03
+integration.pagerduty_enabled,Notifications,true,false,true,Enable PagerDuty integration,Yes,Boolean,true|false,Public,Operations Team,,Critical alerts,2025-12-03
+sentinel.enabled,Sentinel,true,false,true,Enable Sentinel policy enforcement,Yes,Boolean,true|false,Public,Security Team,,Policy as code,2025-12-03
+sentinel.policy_count,Sentinel,40,10,40,Target Sentinel policy count,Yes,Integer,1-100,Public,Security Team,,Security and cost and compliance,2025-12-03
+sentinel.enforcement_level,Sentinel,hard-mandatory,advisory,hard-mandatory,Default policy enforcement level,Yes,String,advisory|soft-mandatory|hard-mandatory,Public,Security Team,,Policy strictness,2025-12-03
+monitoring.enable_dashboard,Monitoring,true,true,true,Create CloudWatch dashboard,Yes,Boolean,true|false,Public,Operations Team,,Platform KPIs,2025-12-03
+monitoring.log_retention_days,Monitoring,90,7,90,CloudWatch log retention (days),Yes,Integer,Positive integer (days),Public,Operations Team,,Audit requirements,2025-12-03
+monitoring.datadog_enabled,Monitoring,true,false,true,Enable Datadog integration,Yes,Boolean,true|false,Public,Operations Team,,Advanced monitoring,2025-12-03
+backup.enabled,Backup,true,false,true,Enable AWS Backup,Yes,Boolean,true|false,Public,Operations Team,,From backup object,2025-12-03
+backup.daily_retention,Backup,7,1,7,Daily backup retention (days),Yes,Integer,Positive integer (days),Public,Operations Team,,RDS snapshots,2025-12-03
+backup.weekly_retention,Backup,30,0,30,Weekly backup retention (days),Yes,Integer,Positive integer (days),Public,Operations Team,,Weekly snapshots,2025-12-03
+backup.enable_cross_region,Backup,true,false,false,Enable cross-region backup copy,Yes,Boolean,true|false,Public,Operations Team,,DR backups,2025-12-03
+dr.enabled,DR,true,false,true,Enable DR infrastructure,Yes,Boolean,true|false,Public,Operations Team,,Disaster recovery,2025-12-03
+dr.strategy,DR,ACTIVE_PASSIVE,BACKUP_ONLY,ACTIVE_PASSIVE,DR strategy,Yes,String,ACTIVE_PASSIVE|ACTIVE_ACTIVE|BACKUP_ONLY,Public,Operations Team,,Recovery approach,2025-12-03
+dr.rto_minutes,DR,240,480,240,Recovery Time Objective (minutes),Yes,Integer,Positive integer,Public,Operations Team,,4-hour RTO,2025-12-03
+dr.rpo_minutes,DR,60,1440,60,Recovery Point Objective (minutes),Yes,Integer,Positive integer,Public,Operations Team,,1-hour RPO,2025-12-03
+dr.failover_mode,DR,manual,manual,manual,Failover mode,Yes,String,manual|automatic,Public,Operations Team,,Manual for safety,2025-12-03
+budget.enabled,Budget,true,false,true,Enable AWS Budgets,Yes,Boolean,true|false,Public,Finance,,Cost governance,2025-12-03
+budget.monthly_amount,Budget,5000,1000,2500,Monthly budget limit (USD),Yes,Integer,Valid integer,Public,Finance,,Budget threshold,2025-12-03
+budget.alert_thresholds,Budget,"[50, 80, 100]","[80, 100]","[50, 80, 100]",Budget alert threshold percentages,Yes,List(Number),Percentage (0-100),Public,Finance,,Alert levels,2025-12-03

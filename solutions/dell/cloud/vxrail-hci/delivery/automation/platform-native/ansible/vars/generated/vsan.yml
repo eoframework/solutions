@@ -1,0 +1,18 @@
+#------------------------------------------------------------------------------
+# vSAN Storage Configuration
+#------------------------------------------------------------------------------
+# Generated from configuration.csv
+#
+# To regenerate: python generate-ansible-vars.py /path/to/solution
+# DO NOT EDIT - Changes will be overwritten on regeneration
+#------------------------------------------------------------------------------
+
+vsan:
+  cache_disk_model: "1.6TB NVMe SSD"
+  cache_disk_count: 2
+  capacity_disk_model: "7.68TB NVMe SSD"
+  capacity_disk_count: 6
+  storage_policy: "RAID-5 (Erasure Coding)"
+  compression_enabled: true
+  deduplication_enabled: true
+  encryption_enabled: true

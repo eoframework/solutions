@@ -1,0 +1,14 @@
+---
+#------------------------------------------------------------------------------
+# Role: vmware-integration
+# Default variables
+#------------------------------------------------------------------------------
+
+vmware:
+  vcenter_fqdn: ""
+  vcenter_admin_user: "administrator@vsphere.local"
+  datacenter_name: "Datacenter"
+  ha_enabled: true
+  drs_enabled: true
+  drs_level: fullyAutomated
+  ssl_verify: false

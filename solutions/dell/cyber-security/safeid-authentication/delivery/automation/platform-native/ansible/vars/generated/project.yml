@@ -1,0 +1,14 @@
+#------------------------------------------------------------------------------
+# Project Configuration
+#------------------------------------------------------------------------------
+# Generated from configuration.csv
+#
+# To regenerate: python generate-ansible-vars.py /path/to/solution
+# DO NOT EDIT - Changes will be overwritten on regeneration
+#------------------------------------------------------------------------------
+
+solution:
+  name: "Dell SafeID Enterprise Authentication"
+  abbr: SIA
+  provider: Dell
+  category: "Cyber Security"

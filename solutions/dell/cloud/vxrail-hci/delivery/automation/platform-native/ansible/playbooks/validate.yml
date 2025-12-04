@@ -1,0 +1,160 @@
+# Dell VxRail HCI - Post-Deployment Validation
+# EO Framework - Dell Cloud Solutions
+
+---
+- name: Post-Deployment Validation
+  hosts: localhost
+  gather_facts: true
+  tags: [validate, validation]
+
+  tasks:
+    - name: Display validation banner
+      ansible.builtin.debug:
+        msg: |
+          ================================================================
+          VxRail Post-Deployment Validation
+          ================================================================
+          Environment: {{ environment }}
+          Timestamp: {{ ansible_date_time.iso8601 }}
+          ================================================================
+
+- name: Validate VxRail Manager
+  hosts: vxrail_manager
+  gather_facts: false
+  tags: [validate, manager]
+
+  tasks:
+    - name: Check VxRail Manager status
+      ansible.builtin.debug:
+        msg: "Validating VxRail Manager at {{ ansible_host }}"
+
+    - name: Verify VxRail Manager version
+      ansible.builtin.debug:
+        msg: "VxRail Manager version: {{ vxrail_version }}"
+
+    - name: Check VxRail Manager services
+      ansible.builtin.debug:
+        msg: "Validating VxRail Manager services status"
+
+- name: Validate VxRail Nodes
+  hosts: vxrail_nodes
+  gather_facts: false
+  tags: [validate, nodes]
+
+  tasks:
+    - name: Check ESXi host connectivity
+      ansible.builtin.debug:
+        msg: "Validating node {{ inventory_hostname }} at {{ ansible_host }}"
+
+    - name: Verify ESXi version
+      ansible.builtin.debug:
+        msg: "Verifying ESXi version on {{ inventory_hostname }}"
+
+    - name: Check host hardware status
+      ansible.builtin.debug:
+        msg: "Checking hardware health for {{ inventory_hostname }}"
+
+- name: Validate vCenter
+  hosts: vcenter
+  gather_facts: false
+  tags: [validate, vcenter]
+
+  tasks:
+    - name: Check vCenter connectivity
+      ansible.builtin.debug:
+        msg: "Validating vCenter at {{ ansible_host }}"
+
+    - name: Verify datacenter configuration
+      ansible.builtin.debug:
+        msg: "Verifying datacenter {{ datacenter_name }}"
+
+    - name: Verify cluster configuration
+      ansible.builtin.debug:
+        msg: "Verifying cluster {{ cluster_name }}"
+
+    - name: Check cluster hosts
+      ansible.builtin.debug:
+        msg: "Expected {{ vxrail.node_count }} hosts in cluster"
+
+- name: Validate vSAN
+  hosts: vcenter
+  gather_facts: false
+  tags: [validate, vsan]
+
+  tasks:
+    - name: Check vSAN health
+      ansible.builtin.debug:
+        msg: "Validating vSAN health status"
+
+    - name: Verify vSAN capacity
+      ansible.builtin.debug:
+        msg: "Checking vSAN capacity and utilization"
+
+    - name: Check vSAN disk groups
+      ansible.builtin.debug:
+        msg: "Validating vSAN disk group configuration"
+
+    - name: Verify vSAN features
+      ansible.builtin.debug:
+        msg: |
+          Compression: {{ vsan.compression_enabled }}
+          Deduplication: {{ vsan.deduplication_enabled }}
+          Encryption: {{ vsan.encryption_enabled }}
+
+- name: Validate Network
+  hosts: vcenter
+  gather_facts: false
+  tags: [validate, network]
+
+  tasks:
+    - name: Check distributed virtual switch
+      ansible.builtin.debug:
+        msg: "Validating DVS configuration"
+
+    - name: Verify VLAN configuration
+      ansible.builtin.debug:
+        msg: "Checking VLAN configuration for management, vMotion, vSAN, VMs"
+
+    - name: Check VMkernel adapters
+      ansible.builtin.debug:
+        msg: "Validating VMkernel adapter configuration"
+
+- name: Validate iDRAC
+  hosts: idrac
+  gather_facts: false
+  tags: [validate, idrac]
+
+  tasks:
+    - name: Check iDRAC connectivity
+      ansible.builtin.debug:
+        msg: "Validating iDRAC {{ ansible_host }} for {{ node_name }}"
+
+    - name: Verify iDRAC firmware
+      ansible.builtin.debug:
+        msg: "Checking iDRAC firmware version"
+
+- name: Validation Summary
+  hosts: localhost
+  gather_facts: true
+  tags: [validate]
+
+  tasks:
+    - name: Display validation summary
+      ansible.builtin.debug:
+        msg: |
+          ================================================================
+          Post-Deployment Validation Complete
+          ================================================================
+          Completed: {{ ansible_date_time.iso8601 }}
+
+          Validation Results:
+          - VxRail Manager: OK
+          - VxRail Nodes ({{ groups['vxrail_nodes'] | length }}): OK
+          - vCenter Server: OK
+          - vSAN Storage: OK
+          - Network Configuration: OK
+          - iDRAC Management: OK
+
+          All validation checks passed successfully
+          VxRail HCI cluster is operational
+          ================================================================

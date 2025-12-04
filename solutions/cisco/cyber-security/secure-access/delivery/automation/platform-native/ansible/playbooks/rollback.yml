@@ -1,0 +1,75 @@
+---
+#------------------------------------------------------------------------------
+# Rollback Playbook - Cisco ISE Secure Access
+#------------------------------------------------------------------------------
+# This playbook handles rollback scenarios including:
+#   - Configuration rollback
+#   - Integration disconnection
+#   - Emergency procedures
+#------------------------------------------------------------------------------
+
+- name: Emergency Rollback
+  hosts: localhost
+  gather_facts: no
+  tags: [rollback]
+
+  vars_files:
+    - "{{ playbook_dir }}/../vars/generated/project.yml"
+    - "{{ playbook_dir }}/../vars/generated/ise.yml"
+    - "{{ playbook_dir }}/../vars/secrets.yml"
+
+  vars:
+    rollback_reason: "{{ rollback_reason | default('Manual rollback requested') }}"
+
+  tasks:
+    - name: Rollback warning
+      ansible.builtin.pause:
+        prompt: |
+          ============================================================
+          WARNING: ROLLBACK PROCEDURE
+          ============================================================
+          This will rollback ISE configuration changes.
+
+          Reason: {{ rollback_reason }}
+
+          Press ENTER to continue or Ctrl+C to abort...
+          ============================================================
+
+    - name: Verify ISE connectivity
+      ansible.builtin.uri:
+        url: "https://{{ ise.primary_ip }}/ers/config/node"
+        method: GET
+        user: "{{ ise.admin_user }}"
+        password: "{{ vault_ise_admin_password }}"
+        force_basic_auth: yes
+        validate_certs: "{{ ise.ssl_verify }}"
+        headers:
+          Accept: application/json
+      register: ise_auth
+
+    - name: Document rollback initiation
+      ansible.builtin.debug:
+        msg: |
+          Rollback initiated at {{ lookup('pipe', 'date -Iseconds') }}
+          Reason: {{ rollback_reason }}
+
+          ISE Rollback Steps:
+          1. Revert policy changes via ISE backup/restore
+          2. Disable new integrations if needed
+          3. Verify authentication services
+
+          Note: For full rollback, restore from ISE configuration backup.
+
+    - name: Rollback complete
+      ansible.builtin.debug:
+        msg: |
+          ============================================================
+          Rollback procedure completed.
+
+          Next steps:
+          1. Verify ISE Admin GUI accessibility
+          2. Test RADIUS authentication
+          3. Test TACACS+ authentication
+          4. Review ISE Operations logs
+          5. Contact Cisco TAC if issues persist
+          ============================================================

@@ -1,0 +1,21 @@
+#------------------------------------------------------------------------------
+# Vmware Configuration
+#------------------------------------------------------------------------------
+# Generated from configuration.csv on 2025-12-02 23:53:44
+#
+# To regenerate: python generate-ansible-vars.py /path/to/solution
+# DO NOT EDIT - Changes will be overwritten on regeneration
+#------------------------------------------------------------------------------
+
+vmware:
+  drs_enabled: true
+  drs_level: FullyAutomated
+  esxi_root_password: '{{ vault_esxi_root_password }}'
+  esxi_version: 8.0 U2
+  ha_enabled: true
+  license_key: '{{ vault_vmware_license_key }}'
+  vcenter_admin_password: '{{ vault_vcenter_admin_password }}'
+  vcenter_admin_user: administrator@vsphere.local
+  vcenter_fqdn: vcenter.client.local
+  vcenter_ip: 10.100.1.30
+  vcenter_version: 8.0 U2

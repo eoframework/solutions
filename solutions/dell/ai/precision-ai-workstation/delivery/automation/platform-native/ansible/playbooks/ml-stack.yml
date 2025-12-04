@@ -1,0 +1,49 @@
+# Dell Precision AI Workstation - ML Stack Playbook
+# EO Framework - Dell AI Solutions
+# PyTorch, TensorFlow, and data science tools
+
+---
+- name: Install ML Framework Stack
+  hosts: ai_workstations
+  gather_facts: true
+  become: true
+  tags: [ml, frameworks]
+
+  pre_tasks:
+    - name: Display ML stack configuration
+      ansible.builtin.debug:
+        msg: |
+          Installing ML frameworks on {{ inventory_hostname }}
+          PyTorch: {{ software.pytorch_version }}
+          TensorFlow: {{ software.tensorflow_version }}
+          Conda: {{ software.conda_version }}
+
+  roles:
+    #=========================================================================
+    # DATA SCIENCE STACK
+    #=========================================================================
+    - role: data-science-stack
+      tags: [python, conda, jupyter]
+
+  post_tasks:
+    - name: Verify PyTorch installation
+      ansible.builtin.shell: |
+        python3 -c "import torch; print(f'PyTorch {torch.__version__}'); print(f'CUDA available: {torch.cuda.is_available()}')"
+      register: pytorch_check
+      changed_when: false
+      become: false
+
+    - name: Display PyTorch verification
+      ansible.builtin.debug:
+        var: pytorch_check.stdout_lines
+
+    - name: Verify TensorFlow installation
+      ansible.builtin.shell: |
+        python3 -c "import tensorflow as tf; print(f'TensorFlow {tf.__version__}'); print(f'GPUs available: {len(tf.config.list_physical_devices(\"GPU\"))}')"
+      register: tensorflow_check
+      changed_when: false
+      become: false
+
+    - name: Display TensorFlow verification
+      ansible.builtin.debug:
+        var: tensorflow_check.stdout_lines

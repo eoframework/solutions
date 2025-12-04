@@ -1,51 +1,65 @@
-#WIDTH: 28,18,12,30,48,10,12,33,16,18,24,42,12
-#ALIGN: left,left,center,left,left,center,left,left,center,left,left,left,center
-Parameter Name,Category,Environment,Default Value,Description,Required,Data Type,Validation Rules,Security Level,Owner Team,Dependencies,Notes,Last Updated
-DUO_API_HOSTNAME,Cisco Duo,All,api-xxxxxxxx.duosecurity.com,Duo API hostname for authentication,Yes,String,Valid Duo API hostname,Confidential,Security Team,Duo account,From Duo Admin Panel,[DATE]
-DUO_INTEGRATION_KEY,Cisco Duo,All,[integration-key],Duo application integration key,Yes,String,Valid integration key format,Secret,Security Team,DUO_API_HOSTNAME,Per application type,[DATE]
-DUO_SECRET_KEY,Cisco Duo,All,[secret-key],Duo application secret key,Yes,String,Valid secret key format,Secret,Security Team,DUO_INTEGRATION_KEY,Securely stored,[DATE]
-DUO_ADMIN_HOSTNAME,Cisco Duo,All,admin-xxxxxxxx.duosecurity.com,Duo admin API hostname,Yes,String,Valid admin API hostname,Confidential,Security Team,Duo account,For user management,[DATE]
-DUO_ENROLLMENT_METHOD,Cisco Duo,All,self-service,User enrollment method,Yes,String,self-service|admin-initiated,Public,Security Team,None,Self-service recommended,[DATE]
-DUO_POLICY_DEFAULT,Cisco Duo,All,adaptive,Default authentication policy,Yes,String,allow|deny|adaptive,Public,Security Team,None,Risk-based authentication,[DATE]
-DUO_DEVICE_TRUST,Cisco Duo,All,enabled,Enable device health verification,Yes,Boolean,true|false,Public,Security Team,Endpoint agents,Requires Duo Health App,[DATE]
-UMBRELLA_ORG_ID,Cisco Umbrella,All,[org-id],Umbrella organization identifier,Yes,String,Valid org ID,Confidential,Security Team,Umbrella account,From dashboard,[DATE]
-UMBRELLA_API_KEY,Cisco Umbrella,All,[api-key],Umbrella API key for integration,Yes,String,Valid API key format,Secret,Security Team,UMBRELLA_ORG_ID,Management API,[DATE]
-UMBRELLA_SECRET,Cisco Umbrella,All,[api-secret],Umbrella API secret,Yes,String,Valid secret format,Secret,Security Team,UMBRELLA_API_KEY,Securely stored,[DATE]
-UMBRELLA_POLICY_DEFAULT,Cisco Umbrella,All,block-malware,Default DNS security policy,Yes,String,Valid policy name,Public,Security Team,None,Block known threats,[DATE]
-UMBRELLA_SWG_ENABLED,Cisco Umbrella,All,true,Enable Secure Web Gateway,Yes,Boolean,true|false,Public,Security Team,Cloud connector,Full proxy inspection,[DATE]
-UMBRELLA_ROAMING_CLIENT,Cisco Umbrella,All,true,Deploy roaming client to endpoints,Yes,Boolean,true|false,Public,Security Team,Endpoint access,Off-network protection,[DATE]
-ISE_PRIMARY_PAN,Cisco ISE,All,ise-pan-01.client.local,Primary Policy Administration Node,Yes,String,Valid FQDN,Confidential,Network Team,Network connectivity,Management interface,[DATE]
-ISE_SECONDARY_PAN,Cisco ISE,All,ise-pan-02.client.local,Secondary PAN for HA,No,String,Valid FQDN,Confidential,Network Team,ISE_PRIMARY_PAN,High availability,[DATE]
-ISE_PSN_NODES,Cisco ISE,All,ise-psn-01.client.local ise-psn-02.client.local,Policy Service Nodes,Yes,String,Space-separated FQDNs,Confidential,Network Team,ISE_PRIMARY_PAN,RADIUS authentication,[DATE]
-ISE_ADMIN_USER,Cisco ISE,All,ise-admin,ISE administrative username,Yes,String,Valid username,Confidential,Network Team,ISE deployment,Initial admin,[DATE]
-ISE_RADIUS_SECRET,Cisco ISE,All,[radius-secret],RADIUS shared secret,Yes,String,Min 16 characters,Secret,Network Team,Network devices,Per device group,[DATE]
-ISE_AD_JOIN_POINT,Cisco ISE,All,client.local,Active Directory join point,Yes,String,Valid AD domain,Confidential,Network Team,AD connectivity,For identity lookup,[DATE]
-ISE_GUEST_PORTAL,Cisco ISE,All,enabled,Enable guest access portal,Yes,Boolean,true|false,Public,Network Team,ISE deployment,Sponsor-based access,[DATE]
-ISE_POSTURE_POLICY,Cisco ISE,All,corporate-compliance,Default posture assessment policy,Yes,String,Valid policy name,Public,Security Team,ISE_PRIMARY_PAN,Endpoint compliance,[DATE]
-ANYCONNECT_HEADEND,Cisco AnyConnect,All,vpn.client.local,AnyConnect VPN headend FQDN,Yes,String,Valid FQDN,Confidential,Network Team,ASA/FTD device,Public DNS required,[DATE]
-ANYCONNECT_GROUP_URL,Cisco AnyConnect,All,https://vpn.client.local/secure-access,Connection profile URL,Yes,String,Valid HTTPS URL,Confidential,Network Team,ANYCONNECT_HEADEND,User connection URL,[DATE]
-ANYCONNECT_PROFILE,Cisco AnyConnect,All,secure-access-profile,VPN connection profile name,Yes,String,Valid profile name,Public,Network Team,VPN config,XML profile,[DATE]
-ANYCONNECT_POSTURE,Cisco AnyConnect,All,enabled,Enable posture assessment module,Yes,Boolean,true|false,Public,Security Team,ISE integration,Endpoint compliance,[DATE]
-ANYCONNECT_UMBRELLA,Cisco AnyConnect,All,enabled,Enable Umbrella roaming module,Yes,Boolean,true|false,Public,Security Team,Umbrella config,DNS protection,[DATE]
-SECUREX_TENANT,Cisco SecureX,All,[tenant-id],SecureX tenant identifier,Yes,String,Valid tenant ID,Confidential,Security Team,SecureX account,From admin console,[DATE]
-SECUREX_API_CLIENT,Cisco SecureX,All,[client-id],SecureX API client ID,Yes,String,Valid client ID,Confidential,Security Team,SECUREX_TENANT,For API access,[DATE]
-SECUREX_API_SECRET,Cisco SecureX,All,[client-secret],SecureX API client secret,Yes,String,Valid secret format,Secret,Security Team,SECUREX_API_CLIENT,Securely stored,[DATE]
-SECUREX_DASHBOARD_URL,Cisco SecureX,All,securex.cisco.com,SecureX dashboard URL,Yes,String,Valid URL,Public,Security Team,SECUREX_TENANT,SOC dashboard,[DATE]
-AD_DOMAIN,Active Directory,All,client.local,Active Directory domain name,Yes,String,Valid domain format,Confidential,Security Team,None,User authentication,[DATE]
-AD_SERVER_PRIMARY,Active Directory,All,10.100.2.10,Primary AD domain controller,Yes,String,Valid IPv4 address,Confidential,Security Team,Network connectivity,LDAPS recommended,[DATE]
-AD_SERVER_SECONDARY,Active Directory,All,10.100.2.11,Secondary AD domain controller,No,String,Valid IPv4 address,Confidential,Security Team,Network connectivity,Failover,[DATE]
-AD_SERVICE_ACCOUNT,Active Directory,All,svc_cisco_security,Service account for Cisco products,Yes,String,Valid username,Confidential,Security Team,AD account created,Read access to AD,[DATE]
-AD_BIND_DN,Active Directory,All,CN=svc_cisco_security OU=ServiceAccounts DC=client DC=local,LDAP bind distinguished name,Yes,String,Valid DN format,Confidential,Security Team,AD_SERVICE_ACCOUNT,For LDAP queries,[DATE]
-AD_USER_GROUP,Active Directory,All,Cisco-Secure-Access-Users,AD group for authorized users,Yes,String,Valid group name,Public,Security Team,AD group created,User scope,[DATE]
-SAML_IDP_ENTITY,SAML/SSO,All,https://idp.client.local/saml,SAML Identity Provider entity ID,Yes,String,Valid URI,Confidential,Security Team,IdP configuration,Metadata exchange,[DATE]
-SAML_SSO_URL,SAML/SSO,All,https://idp.client.local/saml/sso,SAML SSO endpoint URL,Yes,String,Valid HTTPS URL,Confidential,Security Team,SAML_IDP_ENTITY,Authentication endpoint,[DATE]
-SAML_CERTIFICATE,SAML/SSO,All,[base64-cert],SAML signing certificate,Yes,String,Valid X.509 certificate,Secret,Security Team,IdP certificate,For signature validation,[DATE]
-SIEM_SERVER,Monitoring,All,siem.client.local,SIEM server hostname,Yes,String,Valid hostname or IP,Confidential,Security Team,Network connectivity,Log aggregation,[DATE]
-SIEM_PORT,Monitoring,All,514,Syslog port for SIEM,Yes,Integer,Valid port number,Public,Security Team,Firewall rules,UDP or TCP,[DATE]
-SIEM_PROTOCOL,Monitoring,All,tcp-tls,Syslog transport protocol,Yes,String,udp|tcp|tcp-tls,Public,Security Team,Certificate config,TLS recommended,[DATE]
-SYSLOG_FACILITY,Monitoring,All,local0,Syslog facility code,Yes,String,Valid syslog facility,Public,Security Team,SIEM configuration,Log categorization,[DATE]
-NTP_SERVER_PRIMARY,Infrastructure,All,10.100.4.10,Primary NTP server,Yes,String,Valid IPv4 address,Confidential,Infrastructure Team,Network connectivity,Time synchronization,[DATE]
-DNS_SERVER_PRIMARY,Infrastructure,All,10.100.5.10,Primary DNS server,Yes,String,Valid IPv4 address,Confidential,Infrastructure Team,Network connectivity,Name resolution,[DATE]
-ALERT_EMAIL_RECIPIENTS,Notifications,All,security-ops@client.local,Email recipients for security alerts,Yes,String,Valid email addresses,Confidential,Security Team,SMTP relay,SOC distribution,[DATE]
-CISCO_SMARTNET_CONTRACT,Support,All,[contract-number],Cisco SmartNet contract number,Yes,String,Valid contract ID,Confidential,Support Team,Vendor relationship,24x7 support,[DATE]
-
+#WIDTH:  45,14,30,30,30,45,8,12,27,14,14,12,30,12
+#ALIGN:  left,left,left,left,left,left,center,left,left,center,left,left,left,center
+Parameter Name,Category,Production,Test,DR,Description,Required,Data Type,Validation Rules,Security Level,Owner Team,Dependencies,Notes,Last Updated
+solution.name,Project,cisco-ise-secure-access,cisco-ise-secure-access,cisco-ise-secure-access,Solution name for resource naming,Yes,String,Valid string value,Public,Development,,ISE Secure Access solution,2025-12-01
+solution.abbr,Project,ise,ise,ise,Solution abbreviation (3-4 chars),Yes,String,3-4 alphanumeric,Public,Development,,Used in resource naming prefix,2025-12-01
+solution.provider_name,Project,cisco,cisco,cisco,Provider organization name,Yes,String,Valid string value,Public,Development,,Cisco provider,2025-12-01
+solution.category_name,Project,cyber-security,cyber-security,cyber-security,Solution category,Yes,String,Valid string value,Public,Development,,Cyber Security category,2025-12-01
+duo.api_hostname,Cisco Duo,api-prod.duosecurity.com,api-test.duosecurity.com,api-prod.duosecurity.com,Duo API hostname for authentication,Yes,String,Valid Duo API hostname,Confidential,Security Team,Duo account,From Duo Admin Panel,2025-12-01
+duo.integration_key,Cisco Duo,[vault:duo_integration_key_prod],[vault:duo_integration_key_test],[vault:duo_integration_key_dr],Duo application integration key,Yes,String,Valid integration key format,Secret,Security Team,duo.api_hostname,Per application type,2025-12-01
+duo.secret_key,Cisco Duo,[vault:duo_secret_key_prod],[vault:duo_secret_key_test],[vault:duo_secret_key_dr],Duo application secret key,Yes,String,Valid secret key format,Secret,Security Team,duo.integration_key,Stored in Ansible Vault,2025-12-01
+duo.admin_hostname,Cisco Duo,admin-prod.duosecurity.com,admin-test.duosecurity.com,admin-prod.duosecurity.com,Duo admin API hostname,Yes,String,Valid admin API hostname,Confidential,Security Team,Duo account,For user management,2025-12-01
+duo.enrollment_method,Cisco Duo,self-service,self-service,self-service,User enrollment method,Yes,String,self-service|admin-initiated,Public,Security Team,,Self-service recommended,2025-12-01
+duo.policy_default,Cisco Duo,adaptive,allow,adaptive,Default authentication policy,Yes,String,allow|deny|adaptive,Public,Security Team,,Risk-based authentication,2025-12-01
+duo.device_trust,Cisco Duo,true,false,true,Enable device health verification,Yes,Boolean,true|false,Public,Security Team,Endpoint agents,Requires Duo Health App,2025-12-01
+umbrella.org_id,Cisco Umbrella,[org-id-prod],[org-id-test],[org-id-prod],Umbrella organization identifier,Yes,String,Valid org ID,Confidential,Security Team,Umbrella account,From dashboard,2025-12-01
+umbrella.api_key,Cisco Umbrella,[vault:umbrella_api_key_prod],[vault:umbrella_api_key_test],[vault:umbrella_api_key_dr],Umbrella API key for integration,Yes,String,Valid API key format,Secret,Security Team,umbrella.org_id,Management API,2025-12-01
+umbrella.secret,Cisco Umbrella,[vault:umbrella_secret_prod],[vault:umbrella_secret_test],[vault:umbrella_secret_dr],Umbrella API secret,Yes,String,Valid secret format,Secret,Security Team,umbrella.api_key,Stored in Ansible Vault,2025-12-01
+umbrella.policy_default,Cisco Umbrella,block-malware,allow-all,block-malware,Default DNS security policy,Yes,String,Valid policy name,Public,Security Team,,Block known threats,2025-12-01
+umbrella.swg_enabled,Cisco Umbrella,true,false,true,Enable Secure Web Gateway,Yes,Boolean,true|false,Public,Security Team,Cloud connector,Full proxy inspection,2025-12-01
+umbrella.roaming_client,Cisco Umbrella,true,true,true,Deploy roaming client to endpoints,Yes,Boolean,true|false,Public,Security Team,Endpoint access,Off-network protection,2025-12-01
+ise.primary_pan,Cisco ISE,ise-pan-01-prod.client.local,ise-pan-01-test.client.local,ise-pan-01-dr.client.local,Primary Policy Administration Node,Yes,String,Valid FQDN,Confidential,Network Team,Network connectivity,Management interface,2025-12-01
+ise.secondary_pan,Cisco ISE,ise-pan-02-prod.client.local,ise-pan-02-test.client.local,ise-pan-02-dr.client.local,Secondary PAN for HA,No,String,Valid FQDN,Confidential,Network Team,ise.primary_pan,High availability,2025-12-01
+ise.psn_nodes,Cisco ISE,"ise-psn-01-prod.client.local,ise-psn-02-prod.client.local","ise-psn-01-test.client.local","ise-psn-01-dr.client.local,ise-psn-02-dr.client.local",Policy Service Nodes,Yes,String,Comma-separated FQDNs,Confidential,Network Team,ise.primary_pan,RADIUS authentication,2025-12-01
+ise.admin_user,Cisco ISE,ise-admin,ise-admin,ise-admin,ISE administrative username,Yes,String,Valid username,Confidential,Network Team,ISE deployment,Initial admin,2025-12-01
+ise.admin_password,Cisco ISE,[vault:ise_admin_password_prod],[vault:ise_admin_password_test],[vault:ise_admin_password_dr],ISE administrative password,Yes,String,Min 12 characters,Secret,Security Team,,Stored in Ansible Vault,2025-12-01
+ise.radius_secret,Cisco ISE,[vault:ise_radius_secret_prod],[vault:ise_radius_secret_test],[vault:ise_radius_secret_dr],RADIUS shared secret,Yes,String,Min 16 characters,Secret,Network Team,Network devices,Per device group,2025-12-01
+ise.ad_join_point,Cisco ISE,client.local,testlab.local,client.local,Active Directory join point,Yes,String,Valid AD domain,Confidential,Network Team,AD connectivity,For identity lookup,2025-12-01
+ise.guest_portal,Cisco ISE,true,true,true,Enable guest access portal,Yes,Boolean,true|false,Public,Network Team,ISE deployment,Sponsor-based access,2025-12-01
+ise.posture_policy,Cisco ISE,corporate-compliance,test-compliance,corporate-compliance,Default posture assessment policy,Yes,String,Valid policy name,Public,Security Team,ise.primary_pan,Endpoint compliance,2025-12-01
+ise.version,Cisco ISE,3.3,3.3,3.3,ISE software version,Yes,String,Semantic versioning,Public,Network Team,Cisco support,Minimum for features,2025-12-01
+anyconnect.headend,Cisco AnyConnect,vpn-prod.client.local,vpn-test.client.local,vpn-dr.client.local,AnyConnect VPN headend FQDN,Yes,String,Valid FQDN,Confidential,Network Team,ASA/FTD device,Public DNS required,2025-12-01
+anyconnect.group_url,Cisco AnyConnect,https://vpn-prod.client.local/secure-access,https://vpn-test.client.local/secure-access,https://vpn-dr.client.local/secure-access,Connection profile URL,Yes,String,Valid HTTPS URL,Confidential,Network Team,anyconnect.headend,User connection URL,2025-12-01
+anyconnect.profile,Cisco AnyConnect,secure-access-profile,test-access-profile,secure-access-profile,VPN connection profile name,Yes,String,Valid profile name,Public,Network Team,VPN config,XML profile,2025-12-01
+anyconnect.posture,Cisco AnyConnect,true,false,true,Enable posture assessment module,Yes,Boolean,true|false,Public,Security Team,ISE integration,Endpoint compliance,2025-12-01
+anyconnect.umbrella,Cisco AnyConnect,true,true,true,Enable Umbrella roaming module,Yes,Boolean,true|false,Public,Security Team,Umbrella config,DNS protection,2025-12-01
+securex.tenant,Cisco SecureX,[tenant-id-prod],[tenant-id-test],[tenant-id-prod],SecureX tenant identifier,Yes,String,Valid tenant ID,Confidential,Security Team,SecureX account,From admin console,2025-12-01
+securex.api_client,Cisco SecureX,[vault:securex_api_client_prod],[vault:securex_api_client_test],[vault:securex_api_client_dr],SecureX API client ID,Yes,String,Valid client ID,Secret,Security Team,securex.tenant,For API access,2025-12-01
+securex.api_secret,Cisco SecureX,[vault:securex_api_secret_prod],[vault:securex_api_secret_test],[vault:securex_api_secret_dr],SecureX API client secret,Yes,String,Valid secret format,Secret,Security Team,securex.api_client,Stored in Ansible Vault,2025-12-01
+securex.dashboard_url,Cisco SecureX,securex.cisco.com,securex.cisco.com,securex.cisco.com,SecureX dashboard URL,Yes,String,Valid URL,Public,Security Team,securex.tenant,SOC dashboard,2025-12-01
+integrations.ad.domain,Integrations,client.local,testlab.local,client.local,Active Directory domain name,Yes,String,Valid domain format,Confidential,Security Team,,User authentication,2025-12-01
+integrations.ad.server_primary,Integrations,10.100.2.10,10.200.2.10,10.150.2.10,Primary AD domain controller,Yes,String,Valid IPv4 address,Confidential,Security Team,Network connectivity,LDAPS recommended,2025-12-01
+integrations.ad.server_secondary,Integrations,10.100.2.11,10.200.2.11,10.150.2.11,Secondary AD domain controller,No,String,Valid IPv4 address,Confidential,Security Team,Network connectivity,Failover,2025-12-01
+integrations.ad.service_account,Integrations,svc_cisco_security,svc_cisco_test,svc_cisco_security,Service account for Cisco products,Yes,String,Valid username,Confidential,Security Team,AD account created,Read access to AD,2025-12-01
+integrations.ad.service_password,Integrations,[vault:ad_service_password_prod],[vault:ad_service_password_test],[vault:ad_service_password_dr],AD service account password,Yes,String,Min 12 characters,Secret,Security Team,,Stored in Ansible Vault,2025-12-01
+integrations.ad.bind_dn,Integrations,"CN=svc_cisco_security,OU=ServiceAccounts,DC=client,DC=local","CN=svc_cisco_test,OU=ServiceAccounts,DC=testlab,DC=local","CN=svc_cisco_security,OU=ServiceAccounts,DC=client,DC=local",LDAP bind distinguished name,Yes,String,Valid DN format,Confidential,Security Team,integrations.ad.service_account,For LDAP queries,2025-12-01
+integrations.ad.user_group,Integrations,Cisco-Secure-Access-Users,Cisco-Test-Users,Cisco-Secure-Access-Users,AD group for authorized users,Yes,String,Valid group name,Public,Security Team,AD group created,User scope,2025-12-01
+saml.idp_entity,SAML/SSO,https://idp.client.local/saml,https://idp-test.testlab.local/saml,https://idp.client.local/saml,SAML Identity Provider entity ID,Yes,String,Valid URI,Confidential,Security Team,IdP configuration,Metadata exchange,2025-12-01
+saml.sso_url,SAML/SSO,https://idp.client.local/saml/sso,https://idp-test.testlab.local/saml/sso,https://idp.client.local/saml/sso,SAML SSO endpoint URL,Yes,String,Valid HTTPS URL,Confidential,Security Team,saml.idp_entity,Authentication endpoint,2025-12-01
+saml.certificate,SAML/SSO,[vault:saml_certificate_prod],[vault:saml_certificate_test],[vault:saml_certificate_dr],SAML signing certificate,Yes,String,Valid X.509 certificate,Secret,Security Team,IdP certificate,For signature validation,2025-12-01
+monitoring.siem_server,Monitoring,siem-prod.client.local,siem-test.testlab.local,siem-dr.client.local,SIEM server hostname,Yes,String,Valid hostname or IP,Confidential,Security Team,Network connectivity,Log aggregation,2025-12-01
+monitoring.siem_port,Monitoring,514,514,514,Syslog port for SIEM,Yes,Integer,Valid port number,Public,Security Team,Firewall rules,UDP or TCP,2025-12-01
+monitoring.siem_protocol,Monitoring,tcp-tls,tcp,tcp-tls,Syslog transport protocol,Yes,String,udp|tcp|tcp-tls,Public,Security Team,Certificate config,TLS recommended,2025-12-01
+monitoring.syslog_facility,Monitoring,local0,local1,local0,Syslog facility code,Yes,String,Valid syslog facility,Public,Security Team,SIEM configuration,Log categorization,2025-12-01
+infrastructure.ntp_primary,Infrastructure,10.100.4.10,10.200.4.10,10.150.4.10,Primary NTP server,Yes,String,Valid IPv4 address,Confidential,Infrastructure Team,Network connectivity,Time synchronization,2025-12-01
+infrastructure.ntp_secondary,Infrastructure,10.100.4.11,10.200.4.11,10.150.4.11,Secondary NTP server,No,String,Valid IPv4 address,Confidential,Infrastructure Team,Network connectivity,NTP failover,2025-12-01
+infrastructure.dns_primary,Infrastructure,10.100.5.10,10.200.5.10,10.150.5.10,Primary DNS server,Yes,String,Valid IPv4 address,Confidential,Infrastructure Team,Network connectivity,Name resolution,2025-12-01
+infrastructure.dns_secondary,Infrastructure,10.100.5.11,10.200.5.11,10.150.5.11,Secondary DNS server,No,String,Valid IPv4 address,Confidential,Infrastructure Team,Network connectivity,DNS failover,2025-12-01
+notifications.alert_recipients,Notifications,security-ops@client.local,security-test@testlab.local,security-ops@client.local,Email recipients for security alerts,Yes,String,Valid email addresses,Confidential,Security Team,SMTP relay,SOC distribution,2025-12-01
+notifications.smtp_server,Notifications,smtp-prod.client.local,smtp-test.testlab.local,smtp-dr.client.local,SMTP server for notifications,Yes,String,Valid hostname or IP,Confidential,Infrastructure Team,SMTP relay,Alert notifications,2025-12-01
+support.smartnet_contract,Support,[contract-number-prod],[contract-number-test],[contract-number-prod],Cisco SmartNet contract number,Yes,String,Valid contract ID,Confidential,Support Team,Vendor relationship,24x7 support,2025-12-01
+support.tac_severity,Support,2,3,2,Default TAC case severity,Yes,Integer,1-4,Public,Support Team,SmartNet contract,1=Critical 4=Low,2025-12-01
+support.escalation_contact,Support,security-escalation@client.local,test-escalation@testlab.local,security-escalation@client.local,Escalation contact email,Yes,String,Valid email,Confidential,Operations Team,,After-hours escalation,2025-12-01
+deployment.pilot_user_count,Deployment,100,50,100,Number of users in pilot phase,Yes,Integer,50-500,Public,Security Team,Phase 1,Initial validation,2025-12-01
+deployment.production_user_count,Deployment,5000,500,5000,Total users for production deployment,Yes,Integer,500-50000,Public,Security Team,Full scope,Per SOW,2025-12-01
+deployment.pilot_sites,Deployment,"HQ-Campus,Remote-Office-1","Test-Lab","DR-Site,Remote-Office-2",Sites included in pilot deployment,Yes,String,Comma-separated names,Public,Network Team,Site planning,Primary locations,2025-12-01

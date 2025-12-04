@@ -1,0 +1,18 @@
+#------------------------------------------------------------------------------
+# Network Configuration
+#------------------------------------------------------------------------------
+# Generated from configuration.csv
+#
+# To regenerate: python generate-ansible-vars.py /path/to/solution
+# DO NOT EDIT - Changes will be overwritten on regeneration
+#------------------------------------------------------------------------------
+
+network:
+  100gbe_spine: 4
+  25gbe_leaf: 2
+  vsan_bandwidth: "100GbE"
+  mgmt_vlan: 100
+  vmotion_vlan: 200
+  vsan_vlan: 300
+  vm_network_vlan: 400
+  nsx_overlay_vlan: 500

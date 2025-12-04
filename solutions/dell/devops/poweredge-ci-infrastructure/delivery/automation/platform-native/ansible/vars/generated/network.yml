@@ -1,0 +1,13 @@
+#------------------------------------------------------------------------------
+# Network Configuration
+#------------------------------------------------------------------------------
+# Generated from configuration.csv
+#
+# To regenerate: python generate-ansible-vars.py /path/to/solution
+# DO NOT EDIT - Changes will be overwritten on regeneration
+#------------------------------------------------------------------------------
+
+network:
+  gitlab_vlan: 100
+  build_agent_vlan: 200
+  storage_vlan: 300

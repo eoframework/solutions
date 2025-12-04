@@ -1,0 +1,108 @@
+# Default values for app-template
+# Override per environment in values-{env}.yaml
+
+# Application metadata
+app:
+  name: my-app
+  version: "1.0.0"
+  namespace: default
+
+# Container image
+image:
+  repository: quay.apps.ocp-prod.example.com/myapp
+  tag: latest
+  pullPolicy: IfNotPresent
+  pullSecrets: []
+
+# Replica configuration
+replicaCount: 2
+
+# Resource limits
+resources:
+  limits:
+    cpu: 1000m
+    memory: 1Gi
+  requests:
+    cpu: 500m
+    memory: 512Mi
+
+# Autoscaling
+autoscaling:
+  enabled: true
+  minReplicas: 2
+  maxReplicas: 10
+  targetCPUUtilizationPercentage: 70
+  targetMemoryUtilizationPercentage: 80
+
+# Service configuration
+service:
+  type: ClusterIP
+  port: 8080
+  targetPort: 8080
+
+# Route/Ingress configuration
+route:
+  enabled: true
+  host: ""  # Leave empty for auto-generated
+  tls:
+    enabled: true
+    termination: edge
+    insecureEdgeTerminationPolicy: Redirect
+
+# Health checks
+probes:
+  liveness:
+    enabled: true
+    path: /health/live
+    initialDelaySeconds: 30
+    periodSeconds: 10
+  readiness:
+    enabled: true
+    path: /health/ready
+    initialDelaySeconds: 5
+    periodSeconds: 5
+
+# Environment variables
+env: []
+# - name: ENV_VAR
+#   value: "value"
+
+# ConfigMap and Secret references
+envFrom: []
+# - configMapRef:
+#     name: my-config
+# - secretRef:
+#     name: my-secret
+
+# Persistent storage
+persistence:
+  enabled: false
+  storageClass: ocs-storagecluster-ceph-rbd
+  size: 10Gi
+  accessModes:
+    - ReadWriteOnce
+
+# Security context
+securityContext:
+  runAsNonRoot: true
+  allowPrivilegeEscalation: false
+  capabilities:
+    drop:
+      - ALL
+
+# Pod disruption budget
+podDisruptionBudget:
+  enabled: true
+  minAvailable: 1
+
+# Service mesh integration
+serviceMesh:
+  enabled: false
+  mtls: STRICT
+
+# Monitoring
+monitoring:
+  enabled: true
+  path: /metrics
+  port: 8080
+  interval: 30s

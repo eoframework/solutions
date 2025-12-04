@@ -1,0 +1,56 @@
+---
+# Cisco SD-WAN Edge Device Provisioning
+# Provisions branch and hub vEdge routers
+
+- name: Provision vEdge Devices
+  hosts: vedge
+  gather_facts: false
+  serial: 5
+  roles:
+    - role: sdwan-edge
+
+  tasks:
+    - name: Configure vEdge system parameters
+      cisco.ios.ios_config:
+        lines:
+          - system
+          - system-ip {{ system_ip }}
+          - site-id {{ site_id }}
+          - organization-name {{ sdwan_organization }}
+          - vbond {{ groups['vbond'][0] }}
+        save_when: modified
+      vars:
+        ansible_network_os: ios
+
+    - name: Configure WAN interfaces
+      cisco.ios.ios_config:
+        lines:
+          - interface {{ item.interface }}
+          - tunnel-interface
+          - encapsulation {{ item.encapsulation | default('ipsec') }}
+          - color {{ item.color }}
+          - bandwidth {{ item.bandwidth }}
+          - no shutdown
+        save_when: modified
+      loop: "{{ wan_interfaces }}"
+      when: wan_interfaces is defined
+
+    - name: Configure LAN interfaces
+      cisco.ios.ios_config:
+        lines:
+          - interface {{ item.interface }}
+          - ip address {{ item.ip_address }} {{ item.subnet_mask }}
+          - no shutdown
+        save_when: modified
+      loop: "{{ lan_interfaces }}"
+      when: lan_interfaces is defined
+
+    - name: Verify control connections
+      cisco.ios.ios_command:
+        commands:
+          - show control connections
+      register: control_status
+
+    - name: Display device status
+      debug:
+        msg: "vEdge {{ inventory_hostname }} provisioned - Site {{ site_id }}"

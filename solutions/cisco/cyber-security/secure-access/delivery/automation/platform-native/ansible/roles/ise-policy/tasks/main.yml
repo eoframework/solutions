@@ -1,0 +1,75 @@
+---
+#------------------------------------------------------------------------------
+# Role: ise-policy
+# Purpose: Configure ISE authentication and authorization policies
+#------------------------------------------------------------------------------
+
+- name: Create network device groups
+  cisco.ise.network_device_group:
+    ise_hostname: "{{ ise.primary_pan }}"
+    ise_username: "{{ ise.admin_user }}"
+    ise_password: "{{ vault_ise_admin_password }}"
+    ise_verify: "{{ ise.ssl_verify | default(false) }}"
+    name: "{{ item.name }}"
+    description: "{{ item.description }}"
+    othername: "{{ item.type }}"
+    state: present
+  loop: "{{ network_device_groups | default([]) }}"
+  register: ndg_result
+
+- name: Add network devices (switches, APs, WLCs)
+  cisco.ise.network_device:
+    ise_hostname: "{{ ise.primary_pan }}"
+    ise_username: "{{ ise.admin_user }}"
+    ise_password: "{{ vault_ise_admin_password }}"
+    ise_verify: "{{ ise.ssl_verify | default(false) }}"
+    name: "{{ item.name }}"
+    description: "{{ item.description | default('') }}"
+    NetworkDeviceIPList:
+      - ipaddress: "{{ item.ip }}"
+        mask: 32
+    authenticationSettings:
+      radiusSharedSecret: "{{ vault_ise_radius_secret }}"
+      enableKeyWrap: false
+    NetworkDeviceGroupList:
+      - "{{ item.device_group | default('All Device Types#All Device Types') }}"
+    state: present
+  loop: "{{ network_devices | default([]) }}"
+  register: nd_result
+
+- name: Create authorization profiles
+  cisco.ise.authorization_profile:
+    ise_hostname: "{{ ise.primary_pan }}"
+    ise_username: "{{ ise.admin_user }}"
+    ise_password: "{{ vault_ise_admin_password }}"
+    ise_verify: "{{ ise.ssl_verify | default(false) }}"
+    name: "{{ item.name }}"
+    description: "{{ item.description }}"
+    accessType: "{{ item.access_type | default('ACCESS_ACCEPT') }}"
+    authzProfileType: "SWITCH"
+    vlan:
+      nameID: "{{ item.vlan_name | default('') }}"
+      tagID: "{{ item.vlan_id | default(0) }}"
+    state: present
+  loop: "{{ authorization_profiles | default([]) }}"
+  register: authz_profiles
+
+- name: Create authentication policy
+  cisco.ise.device_administration_authentication_rules:
+    ise_hostname: "{{ ise.primary_pan }}"
+    ise_username: "{{ ise.admin_user }}"
+    ise_password: "{{ vault_ise_admin_password }}"
+    ise_verify: "{{ ise.ssl_verify | default(false) }}"
+    policyId: "Default"
+    state: present
+  register: authn_policy
+  when: configure_authn_policy | default(true)
+
+- name: Display policy configuration status
+  ansible.builtin.debug:
+    msg: |
+      ISE Policy Configuration Status:
+      - Network Device Groups: {{ ndg_result.results | length | default(0) }}
+      - Network Devices: {{ nd_result.results | length | default(0) }}
+      - Authorization Profiles: {{ authz_profiles.results | length | default(0) }}
+      - Authentication Policy: {{ 'Configured' if configure_authn_policy | default(true) else 'Skipped' }}

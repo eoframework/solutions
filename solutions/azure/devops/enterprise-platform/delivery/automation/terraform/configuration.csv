@@ -1,0 +1,80 @@
+#WIDTH: 25,15,25,25,25,45,10,12,33,16
+#ALIGN: left,left,left,left,left,left,center,left,left,center
+Parameter Name,Category,Production,Test,DR,Description,Required,Data Type,Validation Rules,Security Level
+# ===== PROJECT CONFIGURATION =====
+AZURE_SUBSCRIPTION_ID,Project,[SUBSCRIPTION_ID],[SUBSCRIPTION_ID],[SUBSCRIPTION_ID],Azure subscription identifier for resource deployment,Yes,String,GUID format,Confidential
+AZURE_TENANT_ID,Project,[TENANT_ID],[TENANT_ID],[TENANT_ID],Azure AD tenant identifier for authentication,Yes,String,GUID format,Confidential
+AZURE_REGION,Project,eastus,eastus,westus2,Primary Azure region for resource deployment,Yes,String,Valid Azure region,Public
+AZURE_DR_REGION,Project,westus2,westus2,eastus,DR region for failover,Yes,String,Valid Azure region,Public
+SOLUTION_NAME,Project,Azure DevOps Enterprise Platform,Azure DevOps Enterprise Platform,Azure DevOps Enterprise Platform,Solution display name,Yes,String,Any text,Public
+SOLUTION_ABBR,Project,azdo-ent,azdo-ent,azdo-ent,Solution abbreviation for resource naming,Yes,String,3-12 lowercase,Public
+SOLUTION_PROVIDER,Project,azure,azure,azure,Cloud provider name,Yes,String,aws|azure|gcp,Public
+SOLUTION_CATEGORY,Project,devops,devops,devops,Solution category,Yes,String,Valid category,Public
+COST_CENTER,Project,CC-DEVOPS-001,CC-DEVOPS-001,CC-DEVOPS-001,Cost center for billing,Yes,String,CC format,Public
+OWNER_EMAIL,Project,devops-team@company.com,dev-team@company.com,devops-team@company.com,Team email for ownership,Yes,String,Valid email,Public
+PROJECT_CODE,Project,PRJ-AZDO-2025,PRJ-AZDO-2025,PRJ-AZDO-2025,Project tracking code,Yes,String,PRJ format,Public
+# ===== NETWORK CONFIGURATION =====
+VNET_CIDR,Network,10.1.0.0/16,10.2.0.0/16,10.3.0.0/16,Virtual network CIDR block,Yes,String,Valid CIDR,Public
+SUBNET_APPSERVICE,Network,10.1.1.0/24,10.2.1.0/24,10.3.1.0/24,Subnet for App Service,Yes,String,Valid CIDR,Public
+SUBNET_PRIVATE_ENDPOINTS,Network,10.1.2.0/24,10.2.2.0/24,10.3.2.0/24,Subnet for private endpoints,Yes,String,Valid CIDR,Public
+PRIVATE_ENDPOINT_ENABLED,Network,true,false,true,Enable private endpoints for services,Yes,Boolean,true|false,Public
+# ===== SECURITY CONFIGURATION =====
+ENABLE_PRIVATE_ENDPOINTS,Security,true,false,true,Enable private endpoints for PaaS services,Yes,Boolean,true|false,Public
+ENABLE_CUSTOMER_MANAGED_KEY,Security,true,false,true,Use customer-managed key for encryption,Yes,Boolean,true|false,Public
+ADMIN_GROUP_ID,Security,[ADMIN_GROUP_ID],[ADMIN_GROUP_ID],[ADMIN_GROUP_ID],Azure AD group for administrators,Yes,String,GUID format,Confidential
+CONTRIBUTOR_GROUP_ID,Security,[CONTRIBUTOR_GROUP_ID],[CONTRIBUTOR_GROUP_ID],[CONTRIBUTOR_GROUP_ID],Azure AD group for contributors,Yes,String,GUID format,Confidential
+READER_GROUP_ID,Security,[READER_GROUP_ID],[READER_GROUP_ID],[READER_GROUP_ID],Azure AD group for readers,Yes,String,GUID format,Confidential
+# ===== AZURE DEVOPS CONFIGURATION =====
+DEVOPS_ORGANIZATION_URL,DevOps,https://dev.azure.com/[ORG],https://dev.azure.com/[ORG],https://dev.azure.com/[ORG],Azure DevOps organization URL,Yes,String,Valid URL,Public
+DEVOPS_ORGANIZATION_NAME,DevOps,[ORGANIZATION_NAME],[ORGANIZATION_NAME],[ORGANIZATION_NAME],Azure DevOps organization name,Yes,String,Valid name,Public
+DEVOPS_PROJECT_NAME,DevOps,EnterpriseDevOps-Prod,EnterpriseDevOps-Test,EnterpriseDevOps-DR,Azure DevOps project name,Yes,String,Valid name,Public
+DEVOPS_PROJECT_DESCRIPTION,DevOps,Enterprise DevOps Platform - Production,Enterprise DevOps Platform - Test,Enterprise DevOps Platform - DR,Project description,Yes,String,Any text,Public
+DEVOPS_VERSION_CONTROL,DevOps,Git,Git,Git,Version control system,Yes,String,Git|TFVC,Public
+DEVOPS_WORK_ITEM_TEMPLATE,DevOps,Agile,Agile,Agile,Work item process template,Yes,String,Agile|Scrum|CMMI,Public
+DEVOPS_ENABLE_REPOS,DevOps,true,true,true,Enable Azure Repos,Yes,Boolean,true|false,Public
+DEVOPS_ENABLE_PIPELINES,DevOps,true,true,true,Enable Azure Pipelines,Yes,Boolean,true|false,Public
+DEVOPS_ENABLE_ARTIFACTS,DevOps,true,true,true,Enable Azure Artifacts,Yes,Boolean,true|false,Public
+DEVOPS_ENABLE_TEST_PLANS,DevOps,true,false,true,Enable Azure Test Plans,Yes,Boolean,true|false,Public
+# ===== SERVICE CONNECTIONS CONFIGURATION =====
+SERVICE_CONNECTION_AZURE_RM_ENABLED,ServiceConnections,true,true,true,Enable Azure RM service connection,Yes,Boolean,true|false,Public
+SERVICE_PRINCIPAL_ID,ServiceConnections,[SERVICE_PRINCIPAL_ID],[SERVICE_PRINCIPAL_ID],[SERVICE_PRINCIPAL_ID],Service principal application ID,Yes,String,GUID format,Confidential
+SERVICE_PRINCIPAL_KEY,ServiceConnections,[SERVICE_PRINCIPAL_KEY],[SERVICE_PRINCIPAL_KEY],[SERVICE_PRINCIPAL_KEY],Service principal secret,Yes,String,Secure string,Secret
+# ===== PIPELINES CONFIGURATION =====
+PIPELINES_ENABLE_CI,Pipelines,true,true,true,Enable continuous integration,Yes,Boolean,true|false,Public
+PIPELINES_ENABLE_CD,Pipelines,true,true,true,Enable continuous deployment,Yes,Boolean,true|false,Public
+PIPELINES_BUILD_AGENTS_POOL,Pipelines,Azure Pipelines,Azure Pipelines,Azure Pipelines,Build agents pool name,Yes,String,Valid pool name,Public
+PIPELINES_ENABLE_PR_BUILD,Pipelines,true,true,true,Enable pull request builds,Yes,Boolean,true|false,Public
+# ===== COMPUTE CONFIGURATION =====
+APP_SERVICE_PLAN_SKU,Compute,P1v3,B1,P1v3,App Service Plan SKU,Yes,String,B1|S1|P1v3|P2v3,Public
+APP_SERVICE_PLAN_TIER,Compute,PremiumV3,Basic,PremiumV3,App Service Plan tier,Yes,String,Basic|Standard|PremiumV3,Public
+AUTOSCALE_ENABLED,Compute,true,false,true,Enable autoscaling,Yes,Boolean,true|false,Public
+AUTOSCALE_MIN_INSTANCES,Compute,2,1,2,Minimum App Service instances,Yes,Integer,1-10,Public
+AUTOSCALE_MAX_INSTANCES,Compute,10,2,10,Maximum App Service instances,Yes,Integer,1-30,Public
+DEPLOYMENT_SLOTS_ENABLED,Compute,true,false,true,Enable deployment slots,Yes,Boolean,true|false,Public
+# ===== APPLICATION CONFIGURATION =====
+APP_ENVIRONMENT,Application,production,development,disaster-recovery,Deployment environment identifier,Yes,String,Valid env name,Public
+LOG_LEVEL,Application,INFO,DEBUG,INFO,Logging verbosity level,Yes,String,DEBUG|INFO|WARN|ERROR,Public
+RUNTIME_STACK,Application,node,node,node,Application runtime stack,Yes,String,node|python|dotnet,Public
+RUNTIME_VERSION,Application,20-lts,20-lts,20-lts,Runtime version,Yes,String,Valid version,Public
+# ===== MONITORING CONFIGURATION =====
+ENABLE_ALERTS,Monitoring,true,false,true,Enable monitoring alerts,Yes,Boolean,true|false,Public
+ENABLE_DASHBOARD,Monitoring,true,false,true,Enable Azure dashboard,Yes,Boolean,true|false,Public
+LOG_RETENTION_DAYS,Monitoring,90,30,90,Log retention in days,Yes,Integer,30-730,Public
+ALERT_EMAIL,Monitoring,devops-alerts@company.com,dev-team@company.com,devops-alerts@company.com,Email for critical alerts,Yes,String,Valid email,Confidential
+HEALTH_CHECK_INTERVAL,Monitoring,300,600,300,Health check frequency in seconds,Yes,Integer,60-3600,Public
+# ===== BACKUP CONFIGURATION =====
+BACKUP_ENABLED,Backup,true,false,true,Enable backup services,Yes,Boolean,true|false,Public
+BACKUP_RETENTION_DAYS,Backup,30,7,30,Backup retention in days,Yes,Integer,7-365,Public
+# ===== BUDGET CONFIGURATION =====
+BUDGET_ENABLED,Budget,true,true,true,Enable cost budgets,Yes,Boolean,true|false,Public
+BUDGET_MONTHLY_AMOUNT,Budget,5000,1000,2500,Monthly budget in USD,Yes,Integer,100-100000,Public
+BUDGET_ALERT_THRESHOLDS,Budget,"80,90,100","90,100","80,90,100",Alert thresholds as percentages,Yes,String,Comma-separated,Public
+BUDGET_NOTIFICATION_EMAIL,Budget,finance@company.com,dev-team@company.com,finance@company.com,Email for budget alerts,Yes,String,Valid email,Confidential
+# ===== POLICY CONFIGURATION =====
+ENABLE_SECURITY_POLICIES,Policy,true,false,true,Enable Azure security policies,Yes,Boolean,true|false,Public
+ENABLE_COST_POLICIES,Policy,true,true,true,Enable cost management policies,Yes,Boolean,true|false,Public
+ENABLE_OPERATIONAL_POLICIES,Policy,true,false,true,Enable operational policies,Yes,Boolean,true|false,Public
+# ===== DISASTER RECOVERY CONFIGURATION =====
+DR_ENABLED,DR,true,false,false,Enable disaster recovery,Yes,Boolean,true|false,Public
+DR_REPLICATION_ENABLED,DR,true,false,false,Enable resource replication,Yes,Boolean,true|false,Public
+DR_FAILOVER_PRIORITY,DR,1,0,0,Failover priority (0=disabled),Yes,Integer,0-2,Public

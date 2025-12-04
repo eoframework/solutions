@@ -1,39 +1,37 @@
-#WIDTH: 25,15,12,30,45,10,12,33,16,20,26,39,12
-#ALIGN: left,left,center,left,left,center,left,left,center,left,left,left,center
-Parameter Name,Category,Environment,Default Value,Description,Required,Data Type,Validation Rules,Security Level,Owner Team,Dependencies,Notes,Last Updated
-AAP_CONTROLLER_URL,Platform,Production,https://aap.example.com,Automation Controller web UI and API URL,Yes,String,Valid HTTPS URL,Public,Platform Team,Load balancer,HA endpoint via load balancer,[DATE]
-AAP_CONTROLLER_NODES,Platform,Production,2,Number of controller nodes in HA cluster,Yes,Integer,2|3,Public,Platform Team,Infrastructure,2 nodes minimum for HA,[DATE]
-AAP_EXECUTION_NODES,Platform,Production,4,Number of execution nodes for job processing,Yes,Integer,Minimum 2,Public,Platform Team,Infrastructure,Scale based on concurrent jobs,[DATE]
-CONTROLLER_CPU,Compute,Production,8,vCPU cores per controller node,Yes,Integer,Minimum 4,Public,Infrastructure Team,Cloud capacity,8 cores for production,[DATE]
-CONTROLLER_MEMORY,Compute,Production,16,Memory (GB) per controller node,Yes,Integer,Minimum 8,Public,Infrastructure Team,Cloud capacity,16GB minimum for production,[DATE]
-EXECUTION_NODE_CPU,Compute,Production,8,vCPU cores per execution node,Yes,Integer,Minimum 4,Public,Infrastructure Team,Cloud capacity,8 cores per execution node,[DATE]
-EXECUTION_NODE_MEMORY,Compute,Production,16,Memory (GB) per execution node,Yes,Integer,Minimum 8,Public,Infrastructure Team,Cloud capacity,16GB for job processing,[DATE]
-POSTGRES_HOST,Database,Production,aap-db.example.com,PostgreSQL database hostname,Yes,String,Valid hostname,Confidential,Database Team,RDS or managed DB,Managed HA database,[DATE]
-POSTGRES_PORT,Database,Production,5432,PostgreSQL database port,Yes,Integer,1024-65535,Public,Database Team,None,Standard PostgreSQL port,[DATE]
-POSTGRES_DATABASE,Database,Production,awx,PostgreSQL database name,Yes,String,Valid DB name,Public,Database Team,Postgres instance,AAP database,[DATE]
-POSTGRES_USERNAME,Database,Production,awx,PostgreSQL service account,Yes,String,Valid username,Confidential,Database Team,DB user creation,Read/write access,[DATE]
-POSTGRES_PASSWORD,Database,Production,[POSTGRES_PASSWORD],PostgreSQL password,Yes,String,Minimum 16 chars,Secret,Database Team,DB user creation,Store in Vault,[DATE]
-LDAP_URL,Authentication,Production,ldaps://ldap.example.com:636,Corporate LDAP/AD server URL,Yes,String,Valid LDAPS URL,Confidential,Security Team,Network connectivity,Use LDAPS for encryption,[DATE]
-LDAP_BIND_DN,Authentication,Production,"CN=aap-svc;OU=ServiceAccounts;DC=example;DC=com",LDAP service account DN,Yes,String,Valid LDAP DN,Confidential,Security Team,LDAP user creation,Read-only service account,[DATE]
-LDAP_BIND_PASSWORD,Authentication,Production,[LDAP_BIND_PASSWORD],LDAP service account password,Yes,String,Minimum 16 chars,Secret,Security Team,LDAP user creation,Store in Vault,[DATE]
-LDAP_USER_SEARCH,Authentication,Production,"OU=Users;DC=example;DC=com",LDAP user search base DN,Yes,String,Valid LDAP DN,Confidential,Security Team,LDAP structure,Scope to user OU,[DATE]
-LDAP_GROUP_SEARCH,Authentication,Production,"OU=Groups;DC=example;DC=com",LDAP group search base DN,Yes,String,Valid LDAP DN,Confidential,Security Team,LDAP structure,Map to AAP teams,[DATE]
-VAULT_URL,Credentials,Production,https://vault.example.com:8200,HashiCorp Vault server URL,Yes,String,Valid HTTPS URL,Confidential,Security Team,Network connectivity,Credential vault integration,[DATE]
-VAULT_ROLE_ID,Credentials,Production,[VAULT_ROLE_ID],Vault AppRole role ID,Yes,String,UUID format,Secret,Security Team,Vault configuration,Store securely,[DATE]
-VAULT_SECRET_ID,Credentials,Production,[VAULT_SECRET_ID],Vault AppRole secret ID,Yes,String,UUID format,Secret,Security Team,Vault configuration,Rotate regularly,[DATE]
-SERVICENOW_INSTANCE,Integration,Production,company.service-now.com,ServiceNow instance hostname,Yes,String,Valid hostname,Public,Integration Team,ServiceNow subscription,ITSM integration,[DATE]
-SERVICENOW_USERNAME,Integration,Production,aap_integration,ServiceNow integration user,Yes,String,Valid username,Confidential,Integration Team,ServiceNow user,API access only,[DATE]
-SERVICENOW_PASSWORD,Integration,Production,[SERVICENOW_PASSWORD],ServiceNow integration password,Yes,String,Minimum 12 chars,Secret,Integration Team,ServiceNow user,Store in Vault,[DATE]
-GIT_REPO_URL,Content,Production,https://github.com/company/ansible-playbooks,Playbook Git repository URL,Yes,String,Valid Git URL,Public,DevOps Team,Git access,Automation content,[DATE]
-GIT_CREDENTIALS,Content,Production,[GIT_TOKEN],Git repository access token,Yes,String,Valid token,Secret,DevOps Team,Git PAT,Store in Vault,[DATE]
-AUTOMATION_HUB_URL,Content,Production,https://hub.example.com,Private Automation Hub URL,Yes,String,Valid HTTPS URL,Public,Platform Team,Hub deployment,Organization content,[DATE]
-LOG_AGGREGATOR_HOST,Monitoring,Production,splunk.example.com,Log aggregator hostname,Yes,String,Valid hostname,Public,Operations Team,Splunk/ELK,Centralized logging,[DATE]
-LOG_AGGREGATOR_PORT,Monitoring,Production,9997,Log aggregator port,Yes,Integer,1024-65535,Public,Operations Team,Network config,Splunk forwarder port,[DATE]
-PAGERDUTY_KEY,Monitoring,Production,[PAGERDUTY_KEY],PagerDuty integration key,Yes,String,32-char hex,Secret,Operations Team,PagerDuty account,Job failure alerts,[DATE]
-MAX_CONCURRENT_JOBS,Performance,Production,100,Maximum concurrent job executions,Yes,Integer,10-500,Public,Platform Team,Execution nodes,Scale with nodes,[DATE]
-JOB_TIMEOUT,Performance,Production,3600,Default job timeout in seconds,Yes,Integer,60-86400,Public,Platform Team,None,1 hour default,[DATE]
-MANAGED_SERVER_COUNT,Inventory,Production,500,Number of managed servers,Yes,Integer,Positive integer,Public,Operations Team,Inventory sync,Linux and Windows,[DATE]
-MANAGED_NETWORK_COUNT,Inventory,Production,100,Number of managed network devices,Yes,Integer,Positive integer,Public,Network Team,Inventory sync,Cisco Juniper Arista,[DATE]
-BACKUP_SCHEDULE,Operations,Production,0 2 * * *,Backup schedule in cron format,Yes,String,Valid cron,Public,Operations Team,Storage,Daily at 2 AM,[DATE]
-BACKUP_RETENTION,Operations,Production,30,Backup retention in days,Yes,Integer,7-365,Public,Operations Team,Storage capacity,30 days for compliance,[DATE]
-
+#WIDTH: 25,15,35,25,25,25,45,10,12,16,20
+#ALIGN: left,left,left,left,left,left,left,center,left,center,left
+Parameter Name,Category,Description,Production,Test,DR,Validation Rules,Required,Data Type,Security Level,Notes
+aap_controller_url,Platform,Automation Controller web UI and API URL,https://aap.example.com,https://aap-test.example.com,https://aap-dr.example.com,Valid HTTPS URL,Yes,String,Public,HA endpoint via load balancer
+aap_controller_nodes,Platform,Number of controller nodes in HA cluster,2,1,2,1|2|3,Yes,Integer,Public,2 nodes minimum for HA
+aap_execution_nodes,Platform,Number of execution nodes for job processing,4,2,4,Minimum 2,Yes,Integer,Public,Scale based on concurrent jobs
+controller_cpu,Compute,vCPU cores per controller node,8,4,8,Minimum 4,Yes,Integer,Public,8 cores for production
+controller_memory,Compute,Memory (GB) per controller node,16,8,16,Minimum 8,Yes,Integer,Public,16GB for production
+execution_node_cpu,Compute,vCPU cores per execution node,8,4,8,Minimum 4,Yes,Integer,Public,8 cores per execution node
+execution_node_memory,Compute,Memory (GB) per execution node,16,8,16,Minimum 8,Yes,Integer,Public,16GB for job processing
+postgres_host,Database,PostgreSQL database hostname,aap-db.example.com,aap-test-db.example.com,aap-dr-db.example.com,Valid hostname,Yes,String,Confidential,Managed HA database
+postgres_port,Database,PostgreSQL database port,5432,5432,5432,1024-65535,Yes,Integer,Public,Standard PostgreSQL port
+postgres_database,Database,PostgreSQL database name,awx,awx_test,awx,Valid DB name,Yes,String,Public,AAP database
+postgres_username,Database,PostgreSQL service account,awx,awx,awx,Valid username,Yes,String,Confidential,Read/write access
+ldap_enabled,Authentication,Enable LDAP/AD integration,true,false,true,true|false,Yes,Boolean,Public,SSO with enterprise directory
+ldap_url,Authentication,Corporate LDAP/AD server URL,ldaps://ldap.example.com:636,ldaps://ldap.example.com:636,ldaps://ldap.example.com:636,Valid LDAPS URL,Yes,String,Confidential,Use LDAPS for encryption
+ldap_bind_dn,Authentication,LDAP service account DN,CN=aap-svc;OU=ServiceAccounts;DC=example;DC=com,CN=aap-svc;OU=ServiceAccounts;DC=example;DC=com,CN=aap-svc;OU=ServiceAccounts;DC=example;DC=com,Valid LDAP DN,Yes,String,Confidential,Read-only service account
+ldap_user_search,Authentication,LDAP user search base DN,OU=Users;DC=example;DC=com,OU=Users;DC=example;DC=com,OU=Users;DC=example;DC=com,Valid LDAP DN,Yes,String,Confidential,Scope to user OU
+ldap_group_search,Authentication,LDAP group search base DN,OU=Groups;DC=example;DC=com,OU=Groups;DC=example;DC=com,OU=Groups;DC=example;DC=com,Valid LDAP DN,Yes,String,Confidential,Map to AAP teams
+vault_enabled,Credentials,Enable HashiCorp Vault integration,true,false,true,true|false,Yes,Boolean,Public,Credential vault integration
+vault_url,Credentials,HashiCorp Vault server URL,https://vault.example.com:8200,https://vault.example.com:8200,https://vault.example.com:8200,Valid HTTPS URL,Yes,String,Confidential,Vault server endpoint
+servicenow_enabled,Integration,Enable ServiceNow integration,true,false,true,true|false,Yes,Boolean,Public,ITSM integration
+servicenow_instance,Integration,ServiceNow instance hostname,company.service-now.com,company.service-now.com,company.service-now.com,Valid hostname,Yes,String,Public,ITSM instance
+servicenow_username,Integration,ServiceNow integration user,aap_integration,aap_integration,aap_integration,Valid username,Yes,String,Confidential,API access only
+git_repo_url,Content,Playbook Git repository URL,https://github.com/company/ansible-playbooks,https://github.com/company/ansible-playbooks,https://github.com/company/ansible-playbooks,Valid Git URL,Yes,String,Public,Automation content
+automation_hub_url,Content,Private Automation Hub URL,https://hub.example.com,https://hub-test.example.com,https://hub.example.com,Valid HTTPS URL,Yes,String,Public,Organization content
+log_aggregator_enabled,Monitoring,Enable log aggregation,true,true,true,true|false,Yes,Boolean,Public,Centralized logging
+log_aggregator_host,Monitoring,Log aggregator hostname,splunk.example.com,splunk.example.com,splunk.example.com,Valid hostname,Yes,String,Public,Splunk/ELK endpoint
+log_aggregator_port,Monitoring,Log aggregator port,9997,9997,9997,1024-65535,Yes,Integer,Public,Splunk forwarder port
+pagerduty_enabled,Monitoring,Enable PagerDuty integration,true,false,true,true|false,Yes,Boolean,Public,Job failure alerts
+max_concurrent_jobs,Performance,Maximum concurrent job executions,100,25,100,10-500,Yes,Integer,Public,Scale with nodes
+job_timeout,Performance,Default job timeout in seconds,3600,3600,3600,60-86400,Yes,Integer,Public,1 hour default
+managed_server_count,Inventory,Number of managed servers,500,100,500,Positive integer,Yes,Integer,Public,Linux and Windows
+managed_network_count,Inventory,Number of managed network devices,100,20,100,Positive integer,Yes,Integer,Public,Cisco Juniper Arista
+backup_enabled,Operations,Enable automated backups,true,false,true,true|false,Yes,Boolean,Public,Platform data protection
+backup_schedule,Operations,Backup schedule in cron format,0 2 * * *,0 2 * * *,0 2 * * *,Valid cron expression,Yes,String,Public,Daily at 2 AM
+backup_retention,Operations,Backup retention in days,30,7,30,7-365,Yes,Integer,Public,30 days for compliance

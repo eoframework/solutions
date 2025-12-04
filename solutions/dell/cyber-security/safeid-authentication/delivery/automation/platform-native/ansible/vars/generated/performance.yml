@@ -1,0 +1,14 @@
+#------------------------------------------------------------------------------
+# Performance Configuration
+#------------------------------------------------------------------------------
+# Generated from configuration.csv
+#
+# To regenerate: python generate-ansible-vars.py /path/to/solution
+# DO NOT EDIT - Changes will be overwritten on regeneration
+#------------------------------------------------------------------------------
+
+performance:
+  validation_timeout: 30
+  max_concurrent_validations: 1000
+  max_sessions: 5000
+  session_timeout: 3600

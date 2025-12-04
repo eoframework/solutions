@@ -1,0 +1,9 @@
+# Ansible Collections for Base EE
+---
+collections:
+  - name: ansible.posix
+  - name: community.general
+  - name: community.crypto
+  - name: redhat.rhel_system_roles
+  - name: ansible.netcommon
+  - name: ansible.utils

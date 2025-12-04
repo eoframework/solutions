@@ -1,0 +1,26 @@
+# Google Workspace Admin SDK Python Dependencies
+# EO Framework Google Workspace Solution
+
+# Google API Client Libraries
+google-api-python-client>=2.100.0
+google-auth>=2.23.0
+google-auth-oauthlib>=1.1.0
+google-auth-httplib2>=0.1.1
+
+# Workspace Admin SDK
+google-workspace>=0.1.0
+
+# Configuration and CLI
+pyyaml>=6.0.1
+click>=8.1.7
+
+# Data handling
+pandas>=2.1.0
+
+# Logging and output
+colorama>=0.4.6
+rich>=13.6.0
+
+# HTTP requests
+httplib2>=0.22.0
+requests>=2.31.0

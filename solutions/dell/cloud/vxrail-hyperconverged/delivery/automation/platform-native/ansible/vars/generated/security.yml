@@ -1,0 +1,14 @@
+#------------------------------------------------------------------------------
+# Security Configuration
+#------------------------------------------------------------------------------
+# Generated from configuration.csv
+#
+# To regenerate: python generate-ansible-vars.py /path/to/solution
+# DO NOT EDIT - Changes will be overwritten on regeneration
+#------------------------------------------------------------------------------
+
+security:
+  tpm_version: "TPM 2.0"
+  secure_boot_enabled: true
+  encryption_at_rest: "enabled"
+  encryption_in_transit: "enabled"

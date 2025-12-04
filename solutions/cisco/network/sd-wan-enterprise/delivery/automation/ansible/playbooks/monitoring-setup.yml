@@ -1,0 +1,75 @@
+---
+# Cisco SD-WAN Monitoring Setup
+# Configures monitoring, logging, and analytics
+
+- name: Configure Monitoring
+  hosts: vmanage
+  gather_facts: false
+  tasks:
+    - name: Configure syslog server
+      uri:
+        url: "https://{{ inventory_hostname }}:443/dataservice/settings/configuration/device"
+        method: POST
+        user: "{{ vmanage_admin_user }}"
+        password: "{{ vmanage_admin_password }}"
+        validate_certs: false
+        body_format: json
+        body:
+          syslogServer:
+            - vpn: 0
+              server: "{{ monitoring_syslog_server }}"
+              sourceInterface: "mgmt0"
+              priority: "informational"
+        status_code: [200, 201]
+      delegate_to: localhost
+
+    - name: Configure SNMP
+      uri:
+        url: "https://{{ inventory_hostname }}:443/dataservice/template/feature"
+        method: POST
+        user: "{{ vmanage_admin_user }}"
+        password: "{{ vmanage_admin_password }}"
+        validate_certs: false
+        body_format: json
+        body:
+          templateName: "SNMP_Template"
+          templateType: "snmp"
+          templateDefinition:
+            version: "{{ monitoring_snmp_version }}"
+            community: "{{ monitoring_snmp_community }}"
+        status_code: [200, 201]
+      delegate_to: localhost
+
+    - name: Enable NetFlow
+      uri:
+        url: "https://{{ inventory_hostname }}:443/dataservice/settings/configuration/netflow"
+        method: POST
+        user: "{{ vmanage_admin_user }}"
+        password: "{{ vmanage_admin_password }}"
+        validate_certs: false
+        body_format: json
+        body:
+          enabled: "{{ monitoring.netflow_enabled | default(true) }}"
+          collector: "{{ monitoring_netflow_collector }}"
+          exportInterval: "{{ monitoring.cflowd_interval | default(60) }}"
+        status_code: [200, 201]
+      delegate_to: localhost
+      when: monitoring.netflow_enabled | default(false)
+
+- name: Configure Device Monitoring
+  hosts: vedge
+  gather_facts: false
+  tasks:
+    - name: Configure syslog on devices
+      cisco.ios.ios_config:
+        lines:
+          - logging host {{ monitoring_syslog_server }}
+          - logging source-interface mgmt0
+          - logging trap informational
+        save_when: modified
+      vars:
+        ansible_network_os: ios
+
+    - name: Display monitoring status
+      debug:
+        msg: "Monitoring configured on {{ inventory_hostname }}"

@@ -1,0 +1,285 @@
+# Dell PowerEdge CI Infrastructure - Validation Playbook
+# EO Framework - Dell DevOps Solutions
+# Post-deployment validation and health checks
+
+---
+- name: Infrastructure Validation
+  hosts: localhost
+  gather_facts: true
+  tags: [always]
+
+  tasks:
+    - name: Display validation banner
+      ansible.builtin.debug:
+        msg: |
+          ================================================================
+          Dell PowerEdge CI Infrastructure Validation
+          ================================================================
+          Environment: {{ environment | default('production') }}
+          Timestamp: {{ ansible_date_time.iso8601 }}
+          ================================================================
+
+#=============================================================================
+# SERVER CONNECTIVITY
+#=============================================================================
+- name: "VALIDATION: Server Connectivity"
+  hosts: poweredge_servers
+  gather_facts: false
+  tags: [validate, connectivity]
+
+  tasks:
+    - name: Ping all servers
+      ansible.builtin.ping:
+      register: ping_result
+
+    - name: Display connectivity status
+      ansible.builtin.debug:
+        msg: "{{ inventory_hostname }}: Connected"
+      when: ping_result is succeeded
+
+#=============================================================================
+# GITLAB VALIDATION
+#=============================================================================
+- name: "VALIDATION: GitLab Health Check"
+  hosts: gitlab_servers
+  become: true
+  gather_facts: false
+  tags: [validate, gitlab]
+
+  tasks:
+    - name: Check GitLab service status
+      ansible.builtin.systemd:
+        name: gitlab-runsvdir
+        state: started
+      check_mode: yes
+      register: gitlab_service
+
+    - name: Verify GitLab health endpoint
+      ansible.builtin.uri:
+        url: "{{ gitlab.external_url }}/-/health"
+        status_code: 200
+        validate_certs: no
+      register: gitlab_health
+      ignore_errors: yes
+
+    - name: Display GitLab health status
+      ansible.builtin.debug:
+        msg: |
+          GitLab Server: {{ inventory_hostname }}
+          Service Status: {{ 'Running' if gitlab_service is succeeded else 'Not Running' }}
+          Health Check: {{ 'Healthy' if gitlab_health is succeeded else 'Failed' }}
+
+#=============================================================================
+# DATABASE VALIDATION
+#=============================================================================
+- name: "VALIDATION: Database Health Check"
+  hosts: database_servers
+  become: true
+  gather_facts: false
+  tags: [validate, database]
+
+  tasks:
+    - name: Check PostgreSQL service status
+      ansible.builtin.systemd:
+        name: postgresql
+        state: started
+      check_mode: yes
+      register: postgres_service
+
+    - name: Test database connection
+      community.postgresql.postgresql_ping:
+        db: gitlabhq_production
+      become_user: postgres
+      register: db_ping
+      ignore_errors: yes
+
+    - name: Display database status
+      ansible.builtin.debug:
+        msg: |
+          Database Server: {{ inventory_hostname }}
+          Role: {{ db_role | default('standalone') }}
+          PostgreSQL Service: {{ 'Running' if postgres_service is succeeded else 'Not Running' }}
+          Database Connection: {{ 'Success' if db_ping is succeeded else 'Failed' }}
+
+#=============================================================================
+# BUILD AGENT VALIDATION
+#=============================================================================
+- name: "VALIDATION: Build Agent Health Check"
+  hosts: build_agents
+  become: true
+  gather_facts: false
+  tags: [validate, build-agents]
+
+  tasks:
+    - name: Check Docker service status
+      ansible.builtin.systemd:
+        name: docker
+        state: started
+      check_mode: yes
+      register: docker_service
+
+    - name: Check GitLab Runner service status
+      ansible.builtin.systemd:
+        name: gitlab-runner
+        state: started
+      check_mode: yes
+      register: runner_service
+
+    - name: Verify Docker functionality
+      ansible.builtin.command: docker ps
+      register: docker_ps
+      changed_when: false
+      ignore_errors: yes
+
+    - name: Get GitLab Runner status
+      ansible.builtin.command: gitlab-runner list
+      register: runner_list
+      changed_when: false
+      ignore_errors: yes
+
+    - name: Display build agent status
+      ansible.builtin.debug:
+        msg: |
+          Build Agent: {{ inventory_hostname }}
+          Docker Service: {{ 'Running' if docker_service is succeeded else 'Not Running' }}
+          Runner Service: {{ 'Running' if runner_service is succeeded else 'Not Running' }}
+          Docker Functional: {{ 'Yes' if docker_ps.rc == 0 else 'No' }}
+          Runners Configured: {{ runner_list.stdout_lines | length if runner_list.rc == 0 else 0 }}
+
+#=============================================================================
+# ARTIFACTORY VALIDATION
+#=============================================================================
+- name: "VALIDATION: Artifactory Health Check"
+  hosts: artifactory_servers
+  become: true
+  gather_facts: false
+  tags: [validate, artifactory]
+
+  tasks:
+    - name: Check Artifactory service status
+      ansible.builtin.systemd:
+        name: artifactory
+        state: started
+      check_mode: yes
+      register: artifactory_service
+      ignore_errors: yes
+
+    - name: Verify Artifactory ping endpoint
+      ansible.builtin.uri:
+        url: "http://localhost:8082/artifactory/api/system/ping"
+        status_code: 200
+      register: artifactory_ping
+      ignore_errors: yes
+
+    - name: Display Artifactory status
+      ansible.builtin.debug:
+        msg: |
+          Artifactory Server: {{ inventory_hostname }}
+          Service Status: {{ 'Running' if artifactory_service is succeeded else 'Not Running' }}
+          API Response: {{ 'OK' if artifactory_ping is succeeded else 'Failed' }}
+
+#=============================================================================
+# MONITORING VALIDATION
+#=============================================================================
+- name: "VALIDATION: Monitoring Stack Health Check"
+  hosts: monitoring_servers
+  become: true
+  gather_facts: false
+  tags: [validate, monitoring]
+
+  tasks:
+    - name: Check Prometheus service status
+      ansible.builtin.systemd:
+        name: prometheus
+        state: started
+      check_mode: yes
+      register: prometheus_service
+
+    - name: Check Grafana service status
+      ansible.builtin.systemd:
+        name: grafana-server
+        state: started
+      check_mode: yes
+      register: grafana_service
+      when: monitoring.grafana.enabled | default(false)
+
+    - name: Verify Prometheus endpoint
+      ansible.builtin.uri:
+        url: "http://localhost:9090/-/ready"
+        status_code: 200
+      register: prometheus_ready
+      ignore_errors: yes
+
+    - name: Verify Grafana endpoint
+      ansible.builtin.uri:
+        url: "http://localhost:{{ monitoring.grafana.port }}/api/health"
+        status_code: 200
+      register: grafana_health
+      ignore_errors: yes
+      when: monitoring.grafana.enabled | default(false)
+
+    - name: Display monitoring status
+      ansible.builtin.debug:
+        msg: |
+          Monitoring Server: {{ inventory_hostname }}
+          Prometheus Service: {{ 'Running' if prometheus_service is succeeded else 'Not Running' }}
+          Prometheus Endpoint: {{ 'Ready' if prometheus_ready is succeeded else 'Not Ready' }}
+          Grafana Service: {{ 'Running' if grafana_service is succeeded else 'Not Running' }}
+          Grafana Endpoint: {{ 'Healthy' if grafana_health is succeeded else 'Not Healthy' }}
+
+#=============================================================================
+# NODE EXPORTER VALIDATION
+#=============================================================================
+- name: "VALIDATION: Node Exporter Health Check"
+  hosts: poweredge_servers
+  become: true
+  gather_facts: false
+  tags: [validate, node-exporter]
+
+  tasks:
+    - name: Check Node Exporter service status
+      ansible.builtin.systemd:
+        name: node_exporter
+        state: started
+      check_mode: yes
+      register: node_exporter_service
+
+    - name: Verify Node Exporter metrics endpoint
+      ansible.builtin.uri:
+        url: "http://localhost:{{ monitoring.node_exporter.port }}/metrics"
+        status_code: 200
+      register: node_exporter_metrics
+      ignore_errors: yes
+
+    - name: Display Node Exporter status
+      ansible.builtin.debug:
+        msg: "{{ inventory_hostname }}: Node Exporter {{ 'Running' if node_exporter_service is succeeded and node_exporter_metrics is succeeded else 'Failed' }}"
+
+#=============================================================================
+# VALIDATION SUMMARY
+#=============================================================================
+- name: Validation Summary
+  hosts: localhost
+  gather_facts: false
+  tags: [always]
+
+  tasks:
+    - name: Display validation summary
+      ansible.builtin.debug:
+        msg: |
+          ================================================================
+          Validation Summary
+          ================================================================
+          Environment: {{ environment | default('production') }}
+
+          Infrastructure Components:
+          - GitLab Servers: {{ groups['gitlab_servers'] | default([]) | length }}
+          - Database Servers: {{ groups['database_servers'] | default([]) | length }}
+          - Build Agents: {{ groups['build_agents'] | default([]) | length }}
+          - Artifactory Servers: {{ groups['artifactory_servers'] | default([]) | length }}
+          - Monitoring Servers: {{ groups['monitoring_servers'] | default([]) | length }}
+
+          Total Servers: {{ groups['poweredge_servers'] | default([]) | length }}
+
+          Review the validation results above for any failures.
+          ================================================================

@@ -1,0 +1,41 @@
+# Ansible Galaxy Requirements
+# Dell VxRail Hyperconverged (Enterprise) Solution
+# EO Framework - Dell Cloud Solutions
+
+---
+collections:
+  # Dell OpenManage for VxRail and iDRAC automation
+  - name: dellemc.openmanage
+    version: ">=9.0.0"
+
+  # VMware community collection for vCenter, ESXi, NSX
+  - name: community.vmware
+    version: ">=4.0.0"
+
+  # VMware validated content collection
+  - name: vmware.vmware
+    version: ">=1.0.0"
+
+  # Ansible POSIX utilities
+  - name: ansible.posix
+    version: ">=1.5.0"
+
+  # Ansible network utilities
+  - name: ansible.netcommon
+    version: ">=5.0.0"
+
+  # Ansible utilities
+  - name: ansible.utils
+    version: ">=2.0.0"
+
+  # Community general collection
+  - name: community.general
+    version: ">=7.0.0"
+
+  # Community MySQL collection for database
+  - name: community.mysql
+    version: ">=3.0.0"
+
+  # Community PostgreSQL collection for database
+  - name: community.postgresql
+    version: ">=3.0.0"

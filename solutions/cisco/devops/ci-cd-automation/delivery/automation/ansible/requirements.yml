@@ -1,0 +1,41 @@
+---
+# Ansible Collections
+collections:
+  # Cisco Network Automation Collections
+  - name: cisco.ios
+    version: ">=5.0.0"
+  - name: cisco.nxos
+    version: ">=5.0.0"
+  - name: cisco.asa
+    version: ">=4.0.0"
+  - name: cisco.dnac
+    version: ">=6.0.0"
+  - name: cisco.iosxr
+    version: ">=5.0.0"
+  - name: cisco.nso
+    version: ">=1.0.0"
+
+  # Community Collections
+  - name: community.general
+    version: ">=7.0.0"
+  - name: community.network
+    version: ">=5.0.0"
+  - name: ansible.netcommon
+    version: ">=5.0.0"
+  - name: ansible.utils
+    version: ">=2.0.0"
+
+  # GitLab and CI/CD
+  - name: community.general
+    version: ">=7.0.0"
+
+  # NetBox Integration
+  - name: netbox.netbox
+    version: ">=3.0.0"
+
+# Ansible Roles from Galaxy (optional)
+roles:
+  - name: geerlingguy.gitlab
+    version: "3.2.0"
+  - name: geerlingguy.git
+    version: "3.0.0"

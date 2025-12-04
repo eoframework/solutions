@@ -1,0 +1,15 @@
+---
+#------------------------------------------------------------------------------
+# Role: hx-storage
+# Default variables
+#------------------------------------------------------------------------------
+
+hyperflex:
+  usable_capacity_tb: 20
+  replication_factor: 3
+  dedup_enabled: true
+  compression_enabled: true
+  ssl_verify: false
+
+backup:
+  datastore_name: "Backup-Datastore"

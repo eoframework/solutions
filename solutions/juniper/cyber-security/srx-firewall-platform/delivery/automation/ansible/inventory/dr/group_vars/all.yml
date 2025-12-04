@@ -1,0 +1,120 @@
+---
+# DR Environment Variables - SRX Firewall Platform
+# Derived from configuration.csv - DR column
+# Do not edit manually - regenerate with generate_ansible_vars.py
+
+#==============================================================================
+# SOLUTION IDENTIFICATION
+#==============================================================================
+solution:
+  name: srx-firewall-platform
+  abbr: srx
+  environment: dr
+
+#==============================================================================
+# CLUSTER CONFIGURATION
+#==============================================================================
+cluster:
+  enabled: true
+  id: 2
+  fabric_interface: et-0/0/0
+  node0:
+    mgmt_ip: "10.200.0.1/24"
+    priority: 200
+  node1:
+    mgmt_ip: "10.200.0.2/24"
+    priority: 100
+
+#==============================================================================
+# NETWORK CONFIGURATION
+#==============================================================================
+network:
+  zones:
+    dmz:
+      interface: reth1.100
+      description: "DMZ - DR Public-facing services"
+      host_inbound_services:
+        - https
+        - ping
+    internal:
+      interface: reth2.200
+      description: "Internal - DR Corporate network"
+      host_inbound_services:
+        - https
+        - ssh
+        - ping
+    vpn:
+      interface: st0.0
+      description: "VPN - DR Site-to-site tunnels"
+      host_inbound_services:
+        - ike
+        - ping
+
+  subnets:
+    dmz: "192.168.200.0/24"
+    internal: "10.200.0.0/24"
+
+#==============================================================================
+# SECURITY SERVICES
+#==============================================================================
+ips:
+  enabled: true
+  policy_name: DR-IDP
+  action: drop-connection
+  update_interval: 24
+
+atp:
+  enabled: true
+  cloud_url: "https://atp.juniper.net"
+  verdict_action: block
+
+secintel:
+  enabled: true
+  cc_feed_url: "https://secintel.juniper.net/feeds/cc"
+  refresh_interval: 1800
+
+#==============================================================================
+# VPN CONFIGURATION
+#==============================================================================
+vpn:
+  ike:
+    dh_group: group20
+    encryption: aes-256-gcm
+    authentication: sha384
+    lifetime: 28800
+  ipsec:
+    encryption: aes-256-gcm
+    authentication: sha384
+    lifetime: 3600
+    pfs_group: group20
+
+#==============================================================================
+# SYSTEM CONFIGURATION
+#==============================================================================
+system:
+  ntp_servers:
+    - "10.200.0.20"
+    - "10.200.0.21"
+  dns_servers:
+    - "10.200.0.10"
+    - "10.200.0.11"
+  domain_name: "dr.corp.example.com"
+
+#==============================================================================
+# INTEGRATION
+#==============================================================================
+syslog:
+  enabled: true
+  format: sd-syslog
+  port: 514
+
+tacacs:
+  enabled: true
+  port: 49
+
+#==============================================================================
+# MANAGEMENT
+#==============================================================================
+management:
+  security_director:
+    enabled: true

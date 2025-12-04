@@ -1,0 +1,63 @@
+# Dell VxRail HCI - Network Configuration
+# EO Framework - Dell Cloud Solutions
+
+---
+- name: VxRail Network Configuration
+  hosts: vcenter
+  gather_facts: false
+  tags: [network, networking]
+
+  tasks:
+    - name: Display network configuration banner
+      ansible.builtin.debug:
+        msg: |
+          ================================================================
+          VxRail Network Configuration
+          ================================================================
+          Environment: {{ environment }}
+          Switch Model: {{ network.switch.model }}
+          Uplink Speed: {{ network.switch.uplink_speed }}
+          10GbE Ports: {{ network.node.ports_10gbe }}
+          25GbE Ports: {{ network.node.ports_25gbe }}
+          ================================================================
+
+    - name: Configure management VLAN
+      ansible.builtin.debug:
+        msg: "Configuring management VLAN {{ network.vlans.management }}"
+
+    - name: Configure vMotion VLAN
+      ansible.builtin.debug:
+        msg: "Configuring vMotion VLAN {{ network.vlans.vmotion }}"
+
+    - name: Configure vSAN VLAN
+      ansible.builtin.debug:
+        msg: "Configuring vSAN VLAN {{ network.vlans.vsan }}"
+
+    - name: Configure VM network VLAN
+      ansible.builtin.debug:
+        msg: "Configuring VM network VLAN {{ network.vlans.vm_network }}"
+
+    - name: Configure VMkernel adapters
+      ansible.builtin.debug:
+        msg: "Configuring VMkernel adapters for management, vMotion, vSAN"
+
+    - name: Configure network redundancy
+      ansible.builtin.debug:
+        msg: "Configuring network teaming and failover policies"
+
+- name: Network Configuration Summary
+  hosts: localhost
+  gather_facts: false
+  tags: [network]
+
+  tasks:
+    - name: Display network summary
+      ansible.builtin.debug:
+        msg: |
+          ================================================================
+          Network Configuration Complete
+          ================================================================
+          VLANs configured
+          VMkernel adapters configured
+          Network redundancy enabled
+          ================================================================

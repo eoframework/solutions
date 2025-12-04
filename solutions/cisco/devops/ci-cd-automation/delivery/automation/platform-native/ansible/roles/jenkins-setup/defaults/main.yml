@@ -1,0 +1,15 @@
+---
+#------------------------------------------------------------------------------
+# Role: jenkins-setup - Default Variables
+#------------------------------------------------------------------------------
+
+# Jenkins job naming convention
+jenkins_job_prefix: "cisco-netdevops"
+
+# Required Jenkins plugins
+jenkins_required_plugins:
+  - ansible
+  - git
+  - pipeline
+  - credentials
+  - slack

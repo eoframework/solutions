@@ -1,0 +1,13 @@
+#------------------------------------------------------------------------------
+# Performance Configuration
+#------------------------------------------------------------------------------
+# Generated from configuration.csv
+#
+# To regenerate: python generate-ansible-vars.py /path/to/solution
+# DO NOT EDIT - Changes will be overwritten on regeneration
+#------------------------------------------------------------------------------
+
+performance:
+  target_gpu_util_pct: 80
+  target_nvme_read_mbps: 7000
+  target_powerscale_mbps: 1000

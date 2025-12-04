@@ -1,0 +1,123 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "environment": {
+      "value": "test"
+    },
+    "location": {
+      "value": "eastus"
+    },
+    "solutionPrefix": {
+      "value": "sentinel"
+    },
+    "resourceGroupName": {
+      "value": "rg-sentinel-test-001"
+    },
+    "logAnalyticsWorkspaceName": {
+      "value": "log-sentinel-test-001"
+    },
+    "logAnalyticsSku": {
+      "value": "PerGB2018"
+    },
+    "logAnalyticsRetentionDays": {
+      "value": 30
+    },
+    "dailyIngestionCapGb": {
+      "value": 5
+    },
+    "archiveRetentionDays": {
+      "value": 365
+    },
+    "sentinelTier": {
+      "value": "Standard"
+    },
+    "enableOffice365Connector": {
+      "value": true
+    },
+    "enableAzureADConnector": {
+      "value": true
+    },
+    "enableAzureActivityConnector": {
+      "value": true
+    },
+    "enableDefenderCloudConnector": {
+      "value": false
+    },
+    "enableDefenderEndpointConnector": {
+      "value": false
+    },
+    "enableDefenderIdentityConnector": {
+      "value": false
+    },
+    "enableDefenderO365Connector": {
+      "value": false
+    },
+    "enableCEFConnector": {
+      "value": false
+    },
+    "enableDNSConnector": {
+      "value": false
+    },
+    "builtInRulesCount": {
+      "value": 10
+    },
+    "customRulesCount": {
+      "value": 5
+    },
+    "enableUEBA": {
+      "value": false
+    },
+    "threatIntelFeedsCount": {
+      "value": 3
+    },
+    "playbookCount": {
+      "value": 5
+    },
+    "enableAutoEnrichment": {
+      "value": true
+    },
+    "enableAutoContainment": {
+      "value": false
+    },
+    "enableAutoTicketing": {
+      "value": false
+    },
+    "keyVaultName": {
+      "value": "kv-sentinel-test-001"
+    },
+    "serviceNowEndpoint": {
+      "value": ""
+    },
+    "serviceNowApiUser": {
+      "value": ""
+    },
+    "serviceNowApiPassword": {
+      "value": ""
+    },
+    "teamsWebhookUrl": {
+      "value": "[TEAMS_WEBHOOK_TEST]"
+    },
+    "alertEmail": {
+      "value": "[ALERT_EMAIL_TEST]"
+    },
+    "socAdGroupId": {
+      "value": "[SOC_GROUP_ID_TEST]"
+    },
+    "socAdminGroupId": {
+      "value": "[ADMIN_GROUP_ID_TEST]"
+    },
+    "tags": {
+      "value": {
+        "Solution": "Microsoft Sentinel SIEM",
+        "Environment": "Test",
+        "ManagedBy": "Bicep",
+        "CostCenter": "Security Operations",
+        "DataClassification": "Internal",
+        "Purpose": "Testing and Validation",
+        "Owner": "Security Team",
+        "LastUpdated": "2025-12-03"
+      }
+    }
+  }
+}

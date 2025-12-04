@@ -1,0 +1,10 @@
+---
+#------------------------------------------------------------------------------
+# Role: ise-policy
+# Default variables
+#------------------------------------------------------------------------------
+
+network_device_groups: []
+network_devices: []
+authorization_profiles: []
+configure_authn_policy: true

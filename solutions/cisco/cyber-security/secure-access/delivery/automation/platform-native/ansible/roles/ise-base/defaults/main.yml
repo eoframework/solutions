@@ -1,0 +1,14 @@
+---
+#------------------------------------------------------------------------------
+# Role: ise-base
+# Default variables
+#------------------------------------------------------------------------------
+
+ise:
+  primary_pan: ""
+  secondary_pan: ""
+  admin_user: "admin"
+  version: "3.3"
+  ssl_verify: false
+
+configure_system: false

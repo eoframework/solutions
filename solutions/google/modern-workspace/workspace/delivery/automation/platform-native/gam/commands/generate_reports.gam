@@ -1,0 +1,31 @@
+# GAM Commands - Generate Reports
+# EO Framework - Google Workspace Solution
+#
+# Usage: gam batch generate_reports.gam
+
+# User report
+gam print users allfields > reports/users_report.csv
+
+# Group report
+gam print groups allfields > reports/groups_report.csv
+
+# Drive usage report
+gam report drive > reports/drive_usage.csv
+
+# Gmail usage report
+gam report gmail > reports/gmail_usage.csv
+
+# Login activity report
+gam report login > reports/login_activity.csv
+
+# Admin activity report
+gam report admin > reports/admin_activity.csv
+
+# Mobile devices report
+gam print mobile > reports/mobile_devices.csv
+
+# Chrome devices report
+gam print cros allfields > reports/chrome_devices.csv
+
+# Org units report
+gam print orgs > reports/org_units.csv

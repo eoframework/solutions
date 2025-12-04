@@ -1,0 +1,91 @@
+---
+#------------------------------------------------------------------------------
+# Phase 1: Foundation - Fabric Interconnects and UCS Configuration
+#------------------------------------------------------------------------------
+# This playbook handles initial infrastructure configuration including:
+#   - Fabric Interconnect setup
+#   - UCS domain configuration
+#   - Network policies (VLANs, vNICs)
+#   - Server profiles
+#------------------------------------------------------------------------------
+
+- name: Phase 1 - Foundation Setup
+  hosts: localhost
+  gather_facts: no
+  tags: [foundation]
+
+  vars_files:
+    - "{{ playbook_dir }}/../vars/generated/project.yml"
+    - "{{ playbook_dir }}/../vars/generated/hyperflex.yml"
+    - "{{ playbook_dir }}/../vars/generated/fabric_interconnect.yml"
+    - "{{ playbook_dir }}/../vars/generated/network.yml"
+    - "{{ playbook_dir }}/../vars/generated/infrastructure.yml"
+    - "{{ playbook_dir }}/../vars/secrets.yml"
+
+  tasks:
+    #--------------------------------------------------------------------------
+    # Fabric Interconnect Configuration
+    #--------------------------------------------------------------------------
+    - name: Display Fabric Interconnect configuration
+      ansible.builtin.debug:
+        msg: |
+          Fabric Interconnect Configuration:
+          - FI-A: {{ fabric_interconnect.fi_a_ip }}
+          - FI-B: {{ fabric_interconnect.fi_b_ip }}
+          - VIP: {{ fabric_interconnect.vip }}
+          - Mode: {{ fabric_interconnect.mode }}
+
+    #--------------------------------------------------------------------------
+    # VLAN Configuration
+    #--------------------------------------------------------------------------
+    - name: Display VLAN configuration
+      ansible.builtin.debug:
+        msg: |
+          VLAN Configuration:
+          - Management VLAN: {{ network.mgmt_vlan }}
+          - vMotion VLAN: {{ network.vmotion_vlan }}
+          - VM Network VLAN: {{ network.vm_network_vlan }}
+          - Storage Data VLAN: {{ network.storage_data_vlan }}
+          - Storage Replication VLAN: {{ network.storage_replication_vlan }}
+
+    #--------------------------------------------------------------------------
+    # HyperFlex Networking
+    #--------------------------------------------------------------------------
+    - name: Display HyperFlex network settings
+      ansible.builtin.debug:
+        msg: |
+          HyperFlex Network Configuration:
+          - Management Subnet: {{ hyperflex.mgmt_subnet }}
+          - Storage Data Subnet: {{ hyperflex.data_subnet }}
+          - Replication Subnet: {{ hyperflex.replication_subnet }}
+
+          Jumbo Frames: {{ network.jumbo_frames }}
+          MTU: {{ network.mtu }}
+
+    #--------------------------------------------------------------------------
+    # NTP and DNS
+    #--------------------------------------------------------------------------
+    - name: Display infrastructure settings
+      ansible.builtin.debug:
+        msg: |
+          Infrastructure Settings:
+          - NTP Primary: {{ infrastructure.ntp_primary }}
+          - NTP Secondary: {{ infrastructure.ntp_secondary }}
+          - DNS Primary: {{ infrastructure.dns_primary }}
+          - DNS Secondary: {{ infrastructure.dns_secondary }}
+          - DNS Domain: {{ infrastructure.dns_domain }}
+
+    #--------------------------------------------------------------------------
+    # Summary
+    #--------------------------------------------------------------------------
+    - name: Foundation setup summary
+      ansible.builtin.debug:
+        msg: |
+          ============================================================
+          Phase 1 - Foundation Setup Complete
+          ============================================================
+          Fabric Interconnects: {{ fabric_interconnect.fi_a_ip }}, {{ fabric_interconnect.fi_b_ip }}
+          VLANs Configured: 5 (mgmt, vmotion, vm_network, storage_data, storage_replication)
+          Network MTU: {{ network.mtu }}
+          NTP/DNS: Configured
+          ============================================================

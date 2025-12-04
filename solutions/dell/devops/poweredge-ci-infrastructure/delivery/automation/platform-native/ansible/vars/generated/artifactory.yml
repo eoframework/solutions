@@ -1,0 +1,18 @@
+#------------------------------------------------------------------------------
+# Artifactory Configuration
+#------------------------------------------------------------------------------
+# Generated from configuration.csv
+#
+# To regenerate: python generate-ansible-vars.py /path/to/solution
+# DO NOT EDIT - Changes will be overwritten on regeneration
+#------------------------------------------------------------------------------
+
+artifactory:
+  version: "JFrog Artifactory Pro 7.x"
+  storage_tb: 20
+  hostname: "[artifactory.domain.com]"
+
+repos:
+  maven_enabled: true
+  npm_enabled: true
+  docker_enabled: true

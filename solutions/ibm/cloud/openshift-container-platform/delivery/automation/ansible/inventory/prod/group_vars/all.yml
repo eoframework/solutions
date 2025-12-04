@@ -1,0 +1,121 @@
+# OpenShift Production Configuration
+# Generated from configuration.csv - Production column
+# Do not edit manually - regenerate with generate-ansible-vars.py
+---
+#==============================================================================
+# CLUSTER
+#==============================================================================
+ocp_cluster_name: ocp-prod
+ocp_base_domain: example.com
+ocp_version: "4.14.10"
+ocp_api_endpoint: https://api.ocp-prod.example.com:6443
+ocp_console_url: https://console-openshift-console.apps.ocp-prod.example.com
+control_plane_nodes: 3
+worker_nodes: 3
+
+#==============================================================================
+# COMPUTE
+#==============================================================================
+control_plane_cpu: 8
+control_plane_memory: 32
+worker_node_cpu: 16
+worker_node_memory: 64
+
+#==============================================================================
+# NETWORK
+#==============================================================================
+ocp_network_type: OVNKubernetes
+pod_network_cidr: "10.128.0.0/14"
+service_network_cidr: "172.30.0.0/16"
+cluster_network_mtu: 1400
+
+#==============================================================================
+# STORAGE
+#==============================================================================
+odf_storage_size: 20TB
+storage_class_block: ocs-storagecluster-ceph-rbd
+storage_class_file: ocs-storagecluster-cephfs
+
+#==============================================================================
+# AUTHENTICATION
+#==============================================================================
+ldap_enabled: true
+ldap_url: ldaps://ldap.example.com:636
+ldap_bind_dn: "CN=ocp-svc,OU=ServiceAccounts,DC=example,DC=com"
+ldap_user_search_base: "OU=Users,DC=example,DC=com"
+ldap_group_search_base: "OU=Groups,DC=example,DC=com"
+ldap_admin_group: ocp-admins
+ldap_developer_group: ocp-developers
+oauth_timeout: 86400
+
+# Secrets (retrieve from vault or environment)
+ldap_bind_password: "{{ lookup('env', 'LDAP_BIND_PASSWORD') }}"
+
+#==============================================================================
+# MONITORING
+#==============================================================================
+prometheus_enabled: true
+prometheus_retention: 15d
+alertmanager_config: pagerduty
+grafana_enabled: true
+
+# Secrets
+pagerduty_service_key: "{{ lookup('env', 'PAGERDUTY_SERVICE_KEY') }}"
+grafana_admin_password: "{{ lookup('env', 'GRAFANA_ADMIN_PASSWORD') }}"
+
+#==============================================================================
+# LOGGING
+#==============================================================================
+efk_enabled: true
+efk_log_retention: 7d
+elasticsearch_storage: 500Gi
+
+#==============================================================================
+# REGISTRY
+#==============================================================================
+quay_enabled: true
+quay_hostname: quay.apps.ocp-prod.example.com
+quay_storage_size: 1TB
+
+# Secrets
+quay_admin_password: "{{ lookup('env', 'QUAY_ADMIN_PASSWORD') }}"
+
+#==============================================================================
+# GITOPS
+#==============================================================================
+argocd_enabled: true
+argocd_repo_url: https://github.com/company/gitops-config
+
+# Secrets
+argocd_admin_password: "{{ lookup('env', 'ARGOCD_ADMIN_PASSWORD') }}"
+git_credentials: "{{ lookup('env', 'GIT_TOKEN') }}"
+
+#==============================================================================
+# PIPELINES
+#==============================================================================
+tekton_enabled: true
+tekton_default_sa: pipeline
+pipeline_timeout: 1h
+
+#==============================================================================
+# SERVICE MESH
+#==============================================================================
+istio_enabled: true
+istio_mtls_mode: STRICT
+
+#==============================================================================
+# OPERATIONS
+#==============================================================================
+backup_enabled: true
+backup_schedule: "0 2 * * *"
+backup_retention: 30
+
+#==============================================================================
+# SECURITY
+#==============================================================================
+encrypt_etcd: true
+enforce_pod_security: true
+restricted_namespaces:
+  - production
+  - staging
+compliance_operator_enabled: false

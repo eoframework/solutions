@@ -1,0 +1,23 @@
+#------------------------------------------------------------------------------
+# Operations Configuration
+#------------------------------------------------------------------------------
+# Generated from configuration.csv
+#
+# To regenerate: python generate-ansible-vars.py /path/to/solution
+# DO NOT EDIT - Changes will be overwritten on regeneration
+#------------------------------------------------------------------------------
+
+operations:
+  helpdesk:
+    portal_url: "https://helpdesk.company.com"
+    temp_token_validity: 24
+  backup:
+    enabled: true
+    schedule: "Daily 02:00"
+    retention_days: 30
+    destination: "/backup/safeid"
+    include_database: true
+    include_config: true
+  monitoring:
+    snmp_enabled: true
+    health_check_interval: 60

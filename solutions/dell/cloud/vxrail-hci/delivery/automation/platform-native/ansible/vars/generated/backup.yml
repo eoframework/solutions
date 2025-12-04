@@ -1,0 +1,14 @@
+#------------------------------------------------------------------------------
+# Backup Configuration
+#------------------------------------------------------------------------------
+# Generated from configuration.csv
+#
+# To regenerate: python generate-ansible-vars.py /path/to/solution
+# DO NOT EDIT - Changes will be overwritten on regeneration
+#------------------------------------------------------------------------------
+
+backup:
+  solution: "Dell PowerProtect Data Manager"
+  target_storage: "Dell PowerProtect DD"
+  retention_policy: "Daily-30d Monthly-12m"
+  frequency: "Daily incremental"

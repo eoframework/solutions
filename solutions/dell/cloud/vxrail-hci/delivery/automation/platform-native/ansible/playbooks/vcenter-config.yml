@@ -1,0 +1,62 @@
+# Dell VxRail HCI - vCenter Configuration
+# EO Framework - Dell Cloud Solutions
+
+---
+- name: vCenter Server Configuration
+  hosts: vcenter
+  gather_facts: false
+  tags: [vcenter]
+
+  tasks:
+    - name: Display vCenter configuration banner
+      ansible.builtin.debug:
+        msg: |
+          ================================================================
+          vCenter Server Configuration
+          ================================================================
+          vCenter: {{ ansible_host }}
+          Version: {{ vcenter_version }}
+          Datacenter: {{ datacenter_name }}
+          Cluster: {{ cluster_name }}
+          ================================================================
+
+    - name: Execute vCenter configuration role
+      ansible.builtin.include_role:
+        name: vmware-vcenter
+      vars:
+        vcenter_hostname: "{{ ansible_host }}"
+        vcenter_datacenter: "{{ datacenter_name }}"
+        vcenter_cluster: "{{ cluster_name }}"
+
+    - name: Configure datacenter settings
+      ansible.builtin.debug:
+        msg: "Datacenter {{ datacenter_name }} configuration tasks"
+
+    - name: Configure cluster settings
+      ansible.builtin.debug:
+        msg: "Cluster {{ cluster_name }} configuration tasks"
+
+    - name: Configure distributed virtual switch
+      ansible.builtin.debug:
+        msg: "DVS configuration tasks for VxRail networking"
+
+    - name: Configure port groups
+      ansible.builtin.debug:
+        msg: "Port group configuration for management, vMotion, vSAN, VMs"
+
+- name: vCenter Configuration Summary
+  hosts: localhost
+  gather_facts: false
+  tags: [vcenter]
+
+  tasks:
+    - name: Display configuration summary
+      ansible.builtin.debug:
+        msg: |
+          ================================================================
+          vCenter Configuration Complete
+          ================================================================
+          vCenter configured successfully
+          Datacenter and cluster settings applied
+          Networking configured
+          ================================================================

@@ -1,0 +1,44 @@
+# Production values for OpenShift applications
+# Override defaults for production environment
+
+# Increased replicas for HA
+replicaCount: 3
+
+# Production resources
+resources:
+  limits:
+    cpu: 2000m
+    memory: 2Gi
+  requests:
+    cpu: 1000m
+    memory: 1Gi
+
+# Production autoscaling
+autoscaling:
+  enabled: true
+  minReplicas: 3
+  maxReplicas: 20
+  targetCPUUtilizationPercentage: 70
+
+# Production route with custom domain
+route:
+  enabled: true
+  tls:
+    enabled: true
+    termination: edge
+    insecureEdgeTerminationPolicy: Redirect
+
+# Service mesh enabled in production
+serviceMesh:
+  enabled: true
+  mtls: STRICT
+
+# Monitoring enabled
+monitoring:
+  enabled: true
+  interval: 15s
+
+# Pod disruption budget for HA
+podDisruptionBudget:
+  enabled: true
+  minAvailable: 2

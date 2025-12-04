@@ -1,0 +1,17 @@
+---
+#------------------------------------------------------------------------------
+# Role: hyperflex-cluster
+# Default variables
+#------------------------------------------------------------------------------
+
+hyperflex:
+  cluster_name: ""
+  cluster_description: "HyperFlex Cluster deployed via EO Framework"
+  mgmt_platform: FI
+  mgmt_ip: ""
+  node_count: 4
+  replication_factor: 3
+  dedup_enabled: true
+  compression_enabled: true
+
+cluster_action: Validate

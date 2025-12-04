@@ -1,0 +1,83 @@
+# Dell SafeID Authentication - RADIUS Configuration
+# EO Framework - Dell Cyber Security Solutions
+
+---
+- name: Configure RADIUS Authentication
+  hosts: safeid_servers
+  gather_facts: true
+  become: true
+  tags: [radius, integration]
+  when: radius.enabled | default(false)
+
+  pre_tasks:
+    - name: Display RADIUS configuration
+      ansible.builtin.debug:
+        msg: |
+          Configuring RADIUS Authentication
+          Port: {{ radius.port }}
+          Accounting Port: {{ radius.accounting_port }}
+          Clients: {{ radius.clients | length }}
+
+  roles:
+    - role: safeid-radius
+      tags: [radius-config]
+
+  tasks:
+    - name: Configure RADIUS service
+      ansible.builtin.template:
+        src: radius.conf.j2
+        dest: /etc/safeid/radius.conf
+        owner: safeid
+        group: safeid
+        mode: '0600'
+      notify: restart safeid-radius
+
+    - name: Configure RADIUS clients
+      ansible.builtin.template:
+        src: radius-clients.conf.j2
+        dest: /etc/safeid/radius-clients.conf
+        owner: safeid
+        group: safeid
+        mode: '0600'
+      notify: restart safeid-radius
+
+    - name: Enable RADIUS service
+      ansible.builtin.service:
+        name: safeid-radius
+        state: started
+        enabled: true
+
+    - name: Configure firewall for RADIUS
+      ansible.posix.firewalld:
+        port: "{{ item }}/udp"
+        permanent: true
+        state: enabled
+        immediate: true
+      loop:
+        - "{{ radius.port }}"
+        - "{{ radius.accounting_port }}"
+
+  post_tasks:
+    - name: Verify RADIUS service is listening
+      ansible.builtin.wait_for:
+        port: "{{ radius.port }}"
+        timeout: 30
+        state: started
+
+    - name: Test RADIUS authentication
+      ansible.builtin.command: >
+        radtest test password {{ ansible_host }} {{ radius.port }} testing123
+      register: radius_test
+      changed_when: false
+      ignore_errors: true
+      delegate_to: localhost
+
+    - name: Display RADIUS test results
+      ansible.builtin.debug:
+        var: radius_test.stdout_lines
+
+  handlers:
+    - name: restart safeid-radius
+      ansible.builtin.service:
+        name: safeid-radius
+        state: restarted

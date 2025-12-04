@@ -1,0 +1,66 @@
+---
+#------------------------------------------------------------------------------
+# Rollback Playbook
+#------------------------------------------------------------------------------
+# This playbook handles rollback scenarios including:
+#   - Configuration rollback
+#   - Integration disconnection
+#   - Emergency procedures
+#------------------------------------------------------------------------------
+
+- name: Emergency Rollback
+  hosts: localhost
+  gather_facts: no
+  tags: [rollback]
+
+  vars_files:
+    - "{{ playbook_dir }}/../vars/generated/project.yml"
+    - "{{ playbook_dir }}/../vars/generated/dnac.yml"
+    - "{{ playbook_dir }}/../vars/secrets.yml"
+
+  vars:
+    rollback_reason: "{{ rollback_reason | default('Manual rollback requested') }}"
+
+  tasks:
+    - name: Rollback warning
+      ansible.builtin.pause:
+        prompt: |
+          ============================================================
+          WARNING: ROLLBACK PROCEDURE
+          ============================================================
+          This will rollback DNA Center configuration changes.
+
+          Reason: {{ rollback_reason }}
+
+          Press ENTER to continue or Ctrl+C to abort...
+          ============================================================
+
+    - name: Authenticate to DNA Center
+      cisco.dnac.dnac_auth:
+        dnac_host: "{{ dnac.vip }}"
+        dnac_username: "{{ dnac.admin_user }}"
+        dnac_password: "{{ vault_dnac_admin_password }}"
+        dnac_verify: "{{ dnac.ssl_verify }}"
+      register: dnac_auth
+
+    - name: Document rollback initiation
+      ansible.builtin.debug:
+        msg: |
+          Rollback initiated at {{ ansible_date_time.iso8601 | default(lookup('pipe', 'date -Iseconds')) }}
+          Reason: {{ rollback_reason }}
+
+          Note: Manual intervention may be required for complete rollback.
+          Contact Cisco TAC if issues persist.
+
+    - name: Rollback complete
+      ansible.builtin.debug:
+        msg: |
+          ============================================================
+          Rollback procedure completed.
+
+          Next steps:
+          1. Verify DNA Center accessibility
+          2. Check device connectivity
+          3. Review logs for any remaining issues
+          4. Contact support if needed
+          ============================================================

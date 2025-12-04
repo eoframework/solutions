@@ -1,0 +1,95 @@
+---
+#------------------------------------------------------------------------------
+# Role: switch-dot1x
+# Purpose: Configure 802.1X on Cisco network switches
+#------------------------------------------------------------------------------
+
+- name: Configure global AAA settings
+  cisco.ios.ios_config:
+    lines:
+      - aaa new-model
+      - aaa authentication dot1x default group radius
+      - aaa authorization network default group radius
+      - aaa accounting dot1x default start-stop group radius
+    save_when: changed
+  delegate_to: "{{ inventory_hostname }}"
+  when: configure_aaa | default(true)
+
+- name: Configure RADIUS server
+  cisco.ios.ios_config:
+    lines:
+      - radius server ISE-PRIMARY
+      - address ipv4 {{ ise.primary_pan }} auth-port 1812 acct-port 1813
+      - key {{ vault_ise_radius_secret }}
+      - radius server ISE-SECONDARY
+      - address ipv4 {{ ise.secondary_pan }} auth-port 1812 acct-port 1813
+      - key {{ vault_ise_radius_secret }}
+    parents: []
+    save_when: changed
+  delegate_to: "{{ inventory_hostname }}"
+  when: ise.secondary_pan is defined
+
+- name: Configure RADIUS server group
+  cisco.ios.ios_config:
+    lines:
+      - aaa group server radius ISE-SERVERS
+      - server name ISE-PRIMARY
+      - server name ISE-SECONDARY
+    save_when: changed
+  delegate_to: "{{ inventory_hostname }}"
+
+- name: Enable global 802.1X
+  cisco.ios.ios_config:
+    lines:
+      - dot1x system-auth-control
+      - dot1x critical eapol
+    save_when: changed
+  delegate_to: "{{ inventory_hostname }}"
+
+- name: Configure access ports for 802.1X
+  cisco.ios.ios_config:
+    lines:
+      - switchport mode access
+      - switchport access vlan {{ item.vlan | default(1) }}
+      - authentication port-control auto
+      - authentication periodic
+      - authentication timer reauthenticate server
+      - dot1x pae authenticator
+      - spanning-tree portfast
+      - spanning-tree bpduguard enable
+    parents: "interface {{ item.interface }}"
+    save_when: changed
+  loop: "{{ dot1x_interfaces | default([]) }}"
+  delegate_to: "{{ inventory_hostname }}"
+
+- name: Configure MAB fallback
+  cisco.ios.ios_config:
+    lines:
+      - authentication order dot1x mab
+      - authentication priority dot1x mab
+      - mab
+    parents: "interface {{ item.interface }}"
+    save_when: changed
+  loop: "{{ dot1x_interfaces | default([]) }}"
+  delegate_to: "{{ inventory_hostname }}"
+  when: enable_mab_fallback | default(true)
+
+- name: Configure CoA (Change of Authorization)
+  cisco.ios.ios_config:
+    lines:
+      - aaa server radius dynamic-author
+      - client {{ ise.primary_pan }} server-key {{ vault_ise_radius_secret }}
+      - client {{ ise.secondary_pan }} server-key {{ vault_ise_radius_secret }}
+    save_when: changed
+  delegate_to: "{{ inventory_hostname }}"
+  when: enable_coa | default(true)
+
+- name: Display 802.1X configuration status
+  ansible.builtin.debug:
+    msg: |
+      802.1X Configuration Status:
+      - Switch: {{ inventory_hostname }}
+      - RADIUS Servers: {{ ise.primary_pan }}, {{ ise.secondary_pan | default('N/A') }}
+      - Configured Interfaces: {{ dot1x_interfaces | length | default(0) }}
+      - MAB Fallback: {{ 'Enabled' if enable_mab_fallback | default(true) else 'Disabled' }}
+      - CoA: {{ 'Enabled' if enable_coa | default(true) else 'Disabled' }}

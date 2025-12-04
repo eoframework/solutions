@@ -1,0 +1,18 @@
+#------------------------------------------------------------------------------
+# vSAN Storage Configuration
+#------------------------------------------------------------------------------
+# Generated from configuration.csv
+#
+# To regenerate: python generate-ansible-vars.py /path/to/solution
+# DO NOT EDIT - Changes will be overwritten on regeneration
+#------------------------------------------------------------------------------
+
+vsan:
+  storage_type: "All-NVMe"
+  capacity_per_node_tb: 30.72
+  total_usable_tb: 200
+  storage_policy: "FTT=2 Erasure Coding"
+  compression_enabled: true
+  deduplication_enabled: true
+  encryption_enabled: true
+  kms_server: "[kms.domain.com]"

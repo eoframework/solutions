@@ -1,0 +1,58 @@
+---
+# Cisco SD-WAN Enterprise - Master Playbook
+# This is the main playbook that orchestrates the entire SD-WAN deployment
+
+- name: Cisco SD-WAN Enterprise Deployment
+  hosts: localhost
+  gather_facts: true
+  tasks:
+    - name: Display deployment banner
+      debug:
+        msg: |
+          ================================================================
+          Cisco SD-WAN Enterprise Deployment Starting
+          Environment: {{ environment | default('production') }}
+          Timestamp: {{ ansible_date_time.iso8601 }}
+          Organization: {{ sdwan_organization }}
+          Domain ID: {{ sdwan_domain_id }}
+          ================================================================
+
+- name: Pre-deployment Validation
+  import_playbook: ../roles/sdwan-validation/tasks/main.yml
+  tags: ['validation', 'pre-check']
+
+- name: Deploy SD-WAN Controllers
+  import_playbook: controllers-deploy.yml
+  tags: ['controllers', 'infrastructure']
+
+- name: Deploy Device Templates
+  import_playbook: templates-deploy.yml
+  tags: ['templates', 'configuration']
+
+- name: Deploy SD-WAN Policies
+  import_playbook: policies-deploy.yml
+  tags: ['policies', 'qos', 'security']
+
+- name: Provision Edge Devices
+  import_playbook: edge-provision.yml
+  tags: ['edge', 'devices']
+
+- name: Configure Monitoring
+  import_playbook: monitoring-setup.yml
+  tags: ['monitoring', 'observability']
+
+- name: Post-deployment Validation
+  import_playbook: ../roles/sdwan-validation/tasks/main.yml
+  tags: ['validation', 'post-check']
+
+- name: Generate Deployment Report
+  hosts: localhost
+  gather_facts: false
+  tasks:
+    - name: Deployment complete
+      debug:
+        msg: |
+          ================================================================
+          Cisco SD-WAN Enterprise Deployment Complete
+          Duration: {{ ansible_date_time.iso8601 }}
+          ================================================================

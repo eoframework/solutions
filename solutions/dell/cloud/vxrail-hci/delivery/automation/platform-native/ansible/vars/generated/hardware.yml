@@ -1,0 +1,15 @@
+#------------------------------------------------------------------------------
+# Hardware Configuration
+#------------------------------------------------------------------------------
+# Generated from configuration.csv
+#
+# To regenerate: python generate-ansible-vars.py /path/to/solution
+# DO NOT EDIT - Changes will be overwritten on regeneration
+#------------------------------------------------------------------------------
+
+hardware:
+  poweredge_chassis: "R660"
+  cpu_model: "Intel Xeon Gold 6330"
+  cpu_count_per_node: 2
+  memory_per_node_gb: 384
+  memory_type: "DDR4-3200"

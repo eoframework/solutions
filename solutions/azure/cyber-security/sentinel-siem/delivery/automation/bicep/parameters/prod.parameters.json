@@ -1,0 +1,123 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "environment": {
+      "value": "prod"
+    },
+    "location": {
+      "value": "eastus"
+    },
+    "solutionPrefix": {
+      "value": "sentinel"
+    },
+    "resourceGroupName": {
+      "value": "rg-sentinel-prod-001"
+    },
+    "logAnalyticsWorkspaceName": {
+      "value": "log-sentinel-prod-001"
+    },
+    "logAnalyticsSku": {
+      "value": "PerGB2018"
+    },
+    "logAnalyticsRetentionDays": {
+      "value": 90
+    },
+    "dailyIngestionCapGb": {
+      "value": 500
+    },
+    "archiveRetentionDays": {
+      "value": 730
+    },
+    "sentinelTier": {
+      "value": "Standard"
+    },
+    "enableOffice365Connector": {
+      "value": true
+    },
+    "enableAzureADConnector": {
+      "value": true
+    },
+    "enableAzureActivityConnector": {
+      "value": true
+    },
+    "enableDefenderCloudConnector": {
+      "value": true
+    },
+    "enableDefenderEndpointConnector": {
+      "value": true
+    },
+    "enableDefenderIdentityConnector": {
+      "value": true
+    },
+    "enableDefenderO365Connector": {
+      "value": true
+    },
+    "enableCEFConnector": {
+      "value": true
+    },
+    "enableDNSConnector": {
+      "value": true
+    },
+    "builtInRulesCount": {
+      "value": 30
+    },
+    "customRulesCount": {
+      "value": 20
+    },
+    "enableUEBA": {
+      "value": true
+    },
+    "threatIntelFeedsCount": {
+      "value": 10
+    },
+    "playbookCount": {
+      "value": 12
+    },
+    "enableAutoEnrichment": {
+      "value": true
+    },
+    "enableAutoContainment": {
+      "value": true
+    },
+    "enableAutoTicketing": {
+      "value": true
+    },
+    "keyVaultName": {
+      "value": "kv-sentinel-prod-001"
+    },
+    "serviceNowEndpoint": {
+      "value": "[SERVICENOW_URL]"
+    },
+    "serviceNowApiUser": {
+      "value": "[SERVICE_ACCOUNT]"
+    },
+    "serviceNowApiPassword": {
+      "value": "[STORED_IN_KEYVAULT]"
+    },
+    "teamsWebhookUrl": {
+      "value": "[TEAMS_WEBHOOK]"
+    },
+    "alertEmail": {
+      "value": "[ALERT_EMAIL]"
+    },
+    "socAdGroupId": {
+      "value": "[SOC_GROUP_ID]"
+    },
+    "socAdminGroupId": {
+      "value": "[ADMIN_GROUP_ID]"
+    },
+    "tags": {
+      "value": {
+        "Solution": "Microsoft Sentinel SIEM",
+        "Environment": "Production",
+        "ManagedBy": "Bicep",
+        "CostCenter": "Security Operations",
+        "DataClassification": "Confidential",
+        "Compliance": "SOC2-HIPAA-PCI",
+        "Owner": "Security Team",
+        "LastUpdated": "2025-12-03"
+      }
+    }
+  }
+}

@@ -1,0 +1,14 @@
+#------------------------------------------------------------------------------
+# Deployment Configuration
+#------------------------------------------------------------------------------
+# Generated from configuration.csv on 2025-12-02 23:53:43
+#
+# To regenerate: python generate-ansible-vars.py /path/to/solution
+# DO NOT EDIT - Changes will be overwritten on regeneration
+#------------------------------------------------------------------------------
+
+deployment:
+  pilot_device_count: 50
+  pilot_site_names: HQ-Building-A,HQ-Building-B
+  production_device_count: 200
+  production_site_count: 5

@@ -1,0 +1,107 @@
+---
+#------------------------------------------------------------------------------
+# Phase 1: Foundation - SD-WAN Controller Infrastructure
+#------------------------------------------------------------------------------
+# This playbook handles controller infrastructure including:
+#   - vManage configuration
+#   - vSmart setup
+#   - vBond orchestrator
+#   - Certificate management
+#------------------------------------------------------------------------------
+
+- name: Phase 1 - Foundation Setup
+  hosts: localhost
+  gather_facts: no
+  tags: [foundation]
+
+  vars_files:
+    - "{{ playbook_dir }}/../vars/generated/project.yml"
+    - "{{ playbook_dir }}/../vars/generated/vmanage.yml"
+    - "{{ playbook_dir }}/../vars/generated/vsmart.yml"
+    - "{{ playbook_dir }}/../vars/generated/vbond.yml"
+    - "{{ playbook_dir }}/../vars/generated/infrastructure.yml"
+    - "{{ playbook_dir }}/../vars/generated/deployment.yml"
+    - "{{ playbook_dir }}/../vars/secrets.yml"
+
+  tasks:
+    #--------------------------------------------------------------------------
+    # vManage Configuration
+    #--------------------------------------------------------------------------
+    - name: Display vManage configuration
+      ansible.builtin.debug:
+        msg: |
+          vManage Configuration:
+          - Primary IP: {{ vmanage.primary_ip }}
+          - FQDN: {{ vmanage.fqdn }}
+          - Admin User: {{ vmanage.admin_user }}
+          - SSL Verify: {{ vmanage.ssl_verify }}
+
+          Cluster Configuration:
+          - Mode: {{ vmanage.cluster_mode | default('standalone') }}
+          - Nodes: {{ vmanage.cluster_nodes | default(1) }}
+
+    #--------------------------------------------------------------------------
+    # vSmart Configuration
+    #--------------------------------------------------------------------------
+    - name: Display vSmart configuration
+      ansible.builtin.debug:
+        msg: |
+          vSmart Configuration:
+          - Primary IP: {{ vsmart.primary_ip }}
+          - Secondary IP: {{ vsmart.secondary_ip | default('N/A') }}
+          - OMP Hold Time: {{ vsmart.omp_hold_time }} seconds
+          - OMP Graceful Restart: {{ vsmart.omp_graceful_restart }}
+
+    #--------------------------------------------------------------------------
+    # vBond Configuration
+    #--------------------------------------------------------------------------
+    - name: Display vBond configuration
+      ansible.builtin.debug:
+        msg: |
+          vBond Configuration:
+          - Primary IP: {{ vbond.primary_ip }}
+          - Secondary IP: {{ vbond.secondary_ip | default('N/A') }}
+          - Port: {{ vbond.port }}
+
+          vBond is the orchestrator for edge device onboarding.
+
+    #--------------------------------------------------------------------------
+    # Certificate Management
+    #--------------------------------------------------------------------------
+    - name: Display certificate configuration
+      ansible.builtin.debug:
+        msg: |
+          Certificate Configuration:
+          - Enterprise Root CA should be configured
+          - Controller certificates must be signed
+          - Edge devices use certificate-based authentication
+
+          Note: Certificate operations require vManage GUI or API.
+
+    #--------------------------------------------------------------------------
+    # Infrastructure Settings
+    #--------------------------------------------------------------------------
+    - name: Display infrastructure settings
+      ansible.builtin.debug:
+        msg: |
+          Infrastructure Settings:
+          - NTP Primary: {{ infrastructure.ntp_primary }}
+          - NTP Secondary: {{ infrastructure.ntp_secondary }}
+          - DNS Primary: {{ infrastructure.dns_primary }}
+          - DNS Secondary: {{ infrastructure.dns_secondary }}
+          - DNS Domain: {{ infrastructure.dns_domain }}
+
+    #--------------------------------------------------------------------------
+    # Summary
+    #--------------------------------------------------------------------------
+    - name: Foundation setup summary
+      ansible.builtin.debug:
+        msg: |
+          ============================================================
+          Phase 1 - Foundation Setup Complete
+          ============================================================
+          vManage: {{ vmanage.primary_ip }}
+          vSmart: {{ vsmart.primary_ip }}
+          vBond: {{ vbond.primary_ip }}
+          NTP/DNS: Configured
+          ============================================================

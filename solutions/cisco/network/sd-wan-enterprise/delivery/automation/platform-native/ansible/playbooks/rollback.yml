@@ -1,0 +1,85 @@
+---
+#------------------------------------------------------------------------------
+# Rollback Playbook - Cisco SD-WAN Enterprise
+#------------------------------------------------------------------------------
+# This playbook handles rollback scenarios including:
+#   - Template rollback
+#   - Policy deactivation
+#   - Emergency procedures
+#------------------------------------------------------------------------------
+
+- name: Emergency Rollback
+  hosts: localhost
+  gather_facts: no
+  tags: [rollback]
+
+  vars_files:
+    - "{{ playbook_dir }}/../vars/generated/project.yml"
+    - "{{ playbook_dir }}/../vars/generated/vmanage.yml"
+    - "{{ playbook_dir }}/../vars/secrets.yml"
+
+  vars:
+    rollback_reason: "{{ rollback_reason | default('Manual rollback requested') }}"
+
+  tasks:
+    - name: Rollback warning
+      ansible.builtin.pause:
+        prompt: |
+          ============================================================
+          WARNING: ROLLBACK PROCEDURE
+          ============================================================
+          This will document rollback steps for SD-WAN configuration.
+
+          Reason: {{ rollback_reason }}
+
+          Press ENTER to continue or Ctrl+C to abort...
+          ============================================================
+
+    - name: Verify vManage connectivity
+      ansible.builtin.uri:
+        url: "https://{{ vmanage.primary_ip }}/dataservice/system/device/controllers"
+        method: GET
+        user: "{{ vmanage.admin_user }}"
+        password: "{{ vault_vmanage_admin_password }}"
+        force_basic_auth: yes
+        validate_certs: "{{ vmanage.ssl_verify }}"
+      register: vmanage_auth
+      ignore_errors: yes
+
+    - name: Document rollback initiation
+      ansible.builtin.debug:
+        msg: |
+          Rollback initiated at {{ lookup('pipe', 'date -Iseconds') }}
+          Reason: {{ rollback_reason }}
+
+          SD-WAN Rollback Options:
+
+          1. Template Rollback:
+             - vManage: Configuration > Templates > Device Templates
+             - Select device, click "..." > "Change Device Template"
+             - Attach previous template version
+
+          2. Policy Deactivation:
+             - vManage: Configuration > Policies
+             - Select policy, click "Deactivate"
+
+          3. Configuration Rollback (per device):
+             - vManage: Configuration > Devices
+             - Select device > Configuration > Rollback
+             - Choose previous configuration version
+
+          4. Emergency: Contact Cisco TAC
+
+    - name: Rollback complete
+      ansible.builtin.debug:
+        msg: |
+          ============================================================
+          Rollback procedure documented.
+
+          Next steps:
+          1. Verify vManage accessibility
+          2. Check controller connectivity
+          3. Verify edge device status
+          4. Monitor BFD and OMP sessions
+          5. Contact Cisco TAC if issues persist
+          ============================================================

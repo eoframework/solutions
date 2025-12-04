@@ -1,0 +1,50 @@
+---
+# Cisco SD-WAN Device Template Deployment
+# Deploys device templates and feature templates via vManage
+
+- name: Deploy Device Templates
+  hosts: vmanage
+  gather_facts: false
+  roles:
+    - role: sdwan-templates
+
+  tasks:
+    - name: Create feature templates
+      uri:
+        url: "https://{{ inventory_hostname }}:443/dataservice/template/feature"
+        method: POST
+        user: "{{ vmanage_admin_user }}"
+        password: "{{ vmanage_admin_password }}"
+        validate_certs: false
+        body_format: json
+        body:
+          templateName: "{{ item.name }}"
+          templateDescription: "{{ item.description }}"
+          templateType: "{{ item.type }}"
+          templateDefinition: "{{ item.definition }}"
+        status_code: [200, 201]
+      delegate_to: localhost
+      loop: "{{ feature_templates | default([]) }}"
+      register: feature_template_result
+
+    - name: Create device templates
+      uri:
+        url: "https://{{ inventory_hostname }}:443/dataservice/template/device"
+        method: POST
+        user: "{{ vmanage_admin_user }}"
+        password: "{{ vmanage_admin_password }}"
+        validate_certs: false
+        body_format: json
+        body:
+          templateName: "{{ item.name }}"
+          templateDescription: "{{ item.description }}"
+          deviceType: "{{ item.device_type }}"
+          generalTemplates: "{{ item.general_templates }}"
+        status_code: [200, 201]
+      delegate_to: localhost
+      loop: "{{ device_templates | default([]) }}"
+      register: device_template_result
+
+    - name: Display template deployment status
+      debug:
+        msg: "Device templates deployed successfully"

@@ -1,0 +1,117 @@
+---
+# security_policies.yml - Security policy definitions
+# Used by security-policies.yml playbook
+
+#==============================================================================
+# SECURITY POLICIES
+#==============================================================================
+security_policies:
+  #----------------------------------------------------------------------------
+  # Internal to DMZ
+  #----------------------------------------------------------------------------
+  - from_zone: internal
+    to_zone: dmz
+    policies:
+      - name: allow-internal-to-dmz
+        match:
+          source_address: any
+          destination_address: any
+          application: any
+        action: permit
+        logging: true
+
+  #----------------------------------------------------------------------------
+  # Internal to Untrust (Internet)
+  #----------------------------------------------------------------------------
+  - from_zone: internal
+    to_zone: untrust
+    policies:
+      - name: allow-web-traffic
+        match:
+          source_address: any
+          destination_address: any
+          application:
+            - junos-http
+            - junos-https
+            - junos-dns-udp
+        action: permit
+        logging: false
+
+  #----------------------------------------------------------------------------
+  # DMZ to Untrust (Internet)
+  #----------------------------------------------------------------------------
+  - from_zone: dmz
+    to_zone: untrust
+    policies:
+      - name: allow-dmz-outbound
+        match:
+          source_address: any
+          destination_address: any
+          application:
+            - junos-https
+            - junos-dns-udp
+            - junos-ntp
+        action: permit
+        logging: false
+
+  #----------------------------------------------------------------------------
+  # Untrust to DMZ (Inbound services)
+  #----------------------------------------------------------------------------
+  - from_zone: untrust
+    to_zone: dmz
+    policies:
+      - name: allow-inbound-https
+        match:
+          source_address: any
+          destination_address: dmz-servers
+          application: junos-https
+        action: permit
+        logging: true
+        count: true
+
+  #----------------------------------------------------------------------------
+  # VPN to Internal
+  #----------------------------------------------------------------------------
+  - from_zone: vpn
+    to_zone: internal
+    policies:
+      - name: allow-vpn-to-internal
+        match:
+          source_address: any
+          destination_address: any
+          application: any
+        action: permit
+        logging: true
+
+  #----------------------------------------------------------------------------
+  # Internal to VPN
+  #----------------------------------------------------------------------------
+  - from_zone: internal
+    to_zone: vpn
+    policies:
+      - name: allow-internal-to-vpn
+        match:
+          source_address: any
+          destination_address: any
+          application: any
+        action: permit
+        logging: true
+
+#==============================================================================
+# APPLICATION DEFINITIONS
+#==============================================================================
+custom_applications: []
+
+#==============================================================================
+# APPLICATION SETS
+#==============================================================================
+application_sets:
+  - name: web-services
+    applications:
+      - junos-http
+      - junos-https
+  - name: management-services
+    applications:
+      - junos-ssh
+      - junos-ping
+      - junos-snmp

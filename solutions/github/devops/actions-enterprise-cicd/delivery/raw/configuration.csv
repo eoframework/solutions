@@ -1,54 +1,57 @@
-#WIDTH: 32,18,12,28,48,10,12,30,16,20,26,40,12
-#ALIGN: left,left,center,left,left,center,left,left,center,left,left,left,center
-Parameter Name,Category,Environment,Default Value,Description,Required,Data Type,Validation Rules,Security Level,Owner Team,Dependencies,Notes,Last Updated
-CICD_SOLUTION_NAME,Application,All,GitHub Actions Enterprise CI/CD,Solution identifier for logging and metrics,Yes,String,Max 50 characters,Public,DevOps Team,None,Used in dashboards and reports,[DATE]
-CICD_VERSION,Application,All,1.0.0,Current CI/CD platform version,Yes,String,Semantic versioning format,Public,DevOps Team,None,Updated with configuration changes,[DATE]
-CICD_ENVIRONMENT,Application,All,development,Deployment environment identifier,Yes,String,development|staging|production,Public,DevOps Team,None,Controls workflow behavior,[DATE]
-GITHUB_ENTERPRISE_URL,GitHub,All,https://github.com,GitHub Enterprise Cloud base URL,Yes,String,Valid HTTPS URL,Public,GitHub Admin,None,Enterprise Cloud uses github.com,[DATE]
-GITHUB_ORG_NAME,GitHub,All,[organization-name],GitHub organization name,Yes,String,Valid GitHub org name,Confidential,GitHub Admin,Enterprise license,Primary organization for CI/CD,[DATE]
-GITHUB_ENTERPRISE_LICENSE,GitHub,All,[license-id],GitHub Enterprise Cloud license identifier,Yes,String,Valid license ID,Secret,GitHub Admin,Billing,100 users licensed per SOW,[DATE]
-GITHUB_ACTIONS_MINUTES,GitHub,All,50000,Included GitHub Actions minutes per month,Yes,Integer,1000-100000,Confidential,GitHub Admin,Billing,50K minutes included,[DATE]
-GITHUB_API_TOKEN,GitHub,All,[github-pat-token],GitHub personal access token for API access,Yes,String,ghp_* format,Secret,DevOps Team,Org admin scope,Rotate quarterly,[DATE]
-AWS_ACCOUNT_ID_DEV,AWS,Development,[aws-dev-account-id],AWS account ID for development environment,Yes,String,12-digit AWS account,Confidential,Infrastructure Team,AWS IAM,Development VPC,[DATE]
-AWS_ACCOUNT_ID_STAGING,AWS,Staging,[aws-staging-account-id],AWS account ID for staging environment,Yes,String,12-digit AWS account,Confidential,Infrastructure Team,AWS IAM,Staging VPC,[DATE]
-AWS_ACCOUNT_ID_PROD,AWS,Production,[aws-prod-account-id],AWS account ID for production environment,Yes,String,12-digit AWS account,Confidential,Infrastructure Team,AWS IAM,Production VPC,[DATE]
-AWS_REGION,AWS,All,us-east-1,Primary AWS region for runner infrastructure,Yes,String,Valid AWS region code,Public,Infrastructure Team,None,Closest to GitHub for latency,[DATE]
-RUNNER_VPC_ID,AWS,All,[vpc-id],VPC ID for self-hosted runners,Yes,String,vpc-* format,Confidential,Infrastructure Team,AWS networking,Private subnets only,[DATE]
-RUNNER_SUBNET_IDS,AWS,All,[subnet-id-1|subnet-id-2],Subnet IDs for runner auto-scaling group,Yes,String,Pipe-separated subnet IDs,Confidential,Infrastructure Team,VPC configuration,Multi-AZ deployment,[DATE]
-RUNNER_SECURITY_GROUP_ID,AWS,All,[sg-id],Security group ID for runner instances,Yes,String,sg-* format,Confidential,Infrastructure Team,VPC configuration,Outbound only,[DATE]
-RUNNER_INSTANCE_TYPE_LINUX,Runners,All,c5.2xlarge,EC2 instance type for Linux runners,Yes,String,Valid EC2 instance type,Public,Infrastructure Team,AWS pricing,8 vCPU 16GB RAM,[DATE]
-RUNNER_INSTANCE_TYPE_WINDOWS,Runners,All,c5.2xlarge,EC2 instance type for Windows runners,Yes,String,Valid EC2 instance type,Public,Infrastructure Team,AWS pricing,8 vCPU 16GB RAM,[DATE]
-RUNNER_COUNT_LINUX,Runners,All,16,Number of Linux runner instances,Yes,Integer,1-50,Public,Infrastructure Team,Capacity planning,80% of runner fleet,[DATE]
-RUNNER_COUNT_WINDOWS,Runners,All,4,Number of Windows runner instances,Yes,Integer,1-20,Public,Infrastructure Team,Capacity planning,20% of runner fleet,[DATE]
-RUNNER_ASG_MIN_LINUX,Runners,All,8,Minimum Linux runners in auto-scaling group,Yes,Integer,1-20,Public,Infrastructure Team,ASG configuration,50% of desired capacity,[DATE]
-RUNNER_ASG_MAX_LINUX,Runners,All,24,Maximum Linux runners in auto-scaling group,Yes,Integer,10-50,Public,Infrastructure Team,ASG configuration,150% of desired capacity,[DATE]
-RUNNER_ASG_MIN_WINDOWS,Runners,All,2,Minimum Windows runners in auto-scaling group,Yes,Integer,1-10,Public,Infrastructure Team,ASG configuration,50% of desired capacity,[DATE]
-RUNNER_ASG_MAX_WINDOWS,Runners,All,6,Maximum Windows runners in auto-scaling group,Yes,Integer,2-20,Public,Infrastructure Team,ASG configuration,150% of desired capacity,[DATE]
-RUNNER_SCALE_UP_THRESHOLD,Runners,All,5,Queue depth threshold to scale up runners,Yes,Integer,1-20,Public,Infrastructure Team,CloudWatch alarm,Triggers scale-up action,[DATE]
-RUNNER_SCALE_DOWN_COOLDOWN,Runners,All,900,Seconds to wait before scaling down (15 min),Yes,Integer,300-1800,Public,Infrastructure Team,ASG cooldown,Prevents thrashing,[DATE]
-RUNNER_AMI_LINUX,Runners,All,[ami-linux-id],AMI ID for Linux runner instances,Yes,String,ami-* format,Confidential,Infrastructure Team,Custom AMI,Ubuntu 22.04 based,[DATE]
-RUNNER_AMI_WINDOWS,Runners,All,[ami-windows-id],AMI ID for Windows runner instances,Yes,String,ami-* format,Confidential,Infrastructure Team,Custom AMI,Server 2022 based,[DATE]
-OIDC_PROVIDER_ARN,Authentication,All,[oidc-provider-arn],GitHub OIDC provider ARN in AWS IAM,Yes,String,Valid ARN format,Confidential,Security Team,AWS IAM,Keyless authentication,[DATE]
-OIDC_ROLE_DEV,Authentication,Development,github-actions-dev-deploy,IAM role name for dev deployments,Yes,String,Valid IAM role name,Confidential,Security Team,OIDC provider,Least privilege scoped,[DATE]
-OIDC_ROLE_STAGING,Authentication,Staging,github-actions-staging-deploy,IAM role name for staging deployments,Yes,String,Valid IAM role name,Confidential,Security Team,OIDC provider,Least privilege scoped,[DATE]
-OIDC_ROLE_PROD,Authentication,Production,github-actions-prod-deploy,IAM role name for production deployments,Yes,String,Valid IAM role name,Confidential,Security Team,OIDC provider,Highest restriction,[DATE]
-ECR_REGISTRY_URL,Container,All,[account].dkr.ecr.[region].amazonaws.com,AWS ECR registry URL,Yes,String,Valid ECR URL,Confidential,DevOps Team,AWS ECR,Production images,[DATE]
-GHCR_REGISTRY_URL,Container,All,ghcr.io/[org],GitHub Container Registry URL,Yes,String,Valid GHCR URL,Confidential,DevOps Team,GitHub Packages,Dev/staging images,[DATE]
-IMAGE_RETENTION_DAYS,Container,All,90,Container image retention in days,Yes,Integer,30-365,Public,DevOps Team,Storage costs,Lifecycle policy,[DATE]
-EKS_CLUSTER_NAME_DEV,Kubernetes,Development,[eks-dev-cluster],EKS cluster name for development,Yes,String,Valid cluster name,Confidential,Infrastructure Team,EKS,Development deployments,[DATE]
-EKS_CLUSTER_NAME_STAGING,Kubernetes,Staging,[eks-staging-cluster],EKS cluster name for staging,Yes,String,Valid cluster name,Confidential,Infrastructure Team,EKS,Staging deployments,[DATE]
-EKS_CLUSTER_NAME_PROD,Kubernetes,Production,[eks-prod-cluster],EKS cluster name for production,Yes,String,Valid cluster name,Confidential,Infrastructure Team,EKS,Production deployments,[DATE]
-WORKFLOW_TEMPLATE_REPO,Workflows,All,[org]/.github,Repository containing reusable workflows,Yes,String,Valid repo path,Public,DevOps Team,Workflow library,15 templates,[DATE]
-WORKFLOW_BUILD_TIMEOUT,Workflows,All,30,Default workflow timeout in minutes,Yes,Integer,10-120,Public,DevOps Team,Performance SLA,Prevents runaway jobs,[DATE]
-WORKFLOW_ARTIFACT_RETENTION,Workflows,All,7,Workflow artifact retention in days,Yes,Integer,1-90,Public,DevOps Team,Storage costs,GitHub artifact storage,[DATE]
-CACHE_KEY_PREFIX,Workflows,All,[org]-cache,Prefix for workflow cache keys,Yes,String,Alphanumeric with hyphens,Public,DevOps Team,Cache management,Dependency caching,[DATE]
-ENVIRONMENT_REVIEWERS_PROD,Governance,Production,2,Required reviewers for production deploy,Yes,Integer,1-6,Public,DevOps Team,Environment rules,Manual approval gate,[DATE]
-ENVIRONMENT_WAIT_TIMER,Governance,Production,0,Wait timer in minutes before deploy,Yes,Integer,0-43200,Public,DevOps Team,Environment rules,Optional delay,[DATE]
-DATADOG_API_KEY,Monitoring,All,[datadog-api-key],Datadog API key for metrics,Yes,String,Valid API key,Secret,DevOps Team,Datadog license,Workflow metrics,[DATE]
-DATADOG_APP_KEY,Monitoring,All,[datadog-app-key],Datadog application key,Yes,String,Valid app key,Secret,DevOps Team,Datadog license,Dashboard access,[DATE]
-PAGERDUTY_INTEGRATION_KEY,Monitoring,All,[pagerduty-key],PagerDuty integration key for alerts,Yes,String,Valid routing key,Secret,DevOps Team,PagerDuty service,Critical alerts,[DATE]
-SLACK_WEBHOOK_URL,Notifications,All,[slack-webhook-url],Slack webhook for build notifications,No,String,Valid Slack webhook URL,Secret,DevOps Team,Slack workspace,Build success/failure,[DATE]
-TEAMS_WEBHOOK_URL,Notifications,All,[teams-webhook-url],Microsoft Teams webhook URL,No,String,Valid Teams webhook URL,Secret,DevOps Team,Teams channel,Build notifications,[DATE]
-PIPELINE_TARGET_DURATION,Performance,All,600,Target pipeline duration in seconds (10 min),Yes,Integer,300-1800,Public,DevOps Team,SLA monitoring,Performance target per SOW,[DATE]
-DEPLOYMENT_SUCCESS_TARGET,Performance,All,0.95,Target deployment success rate (95%),Yes,Float,0.80-0.99,Public,DevOps Team,SLA monitoring,Success rate per SOW,[DATE]
-
+#WIDTH: 45,14,50,50,50,45,8,12,27,14,14,12,30,12
+#ALIGN: left,left,left,left,left,left,center,left,left,center,left,left,left,center
+Parameter Name,Category,Production,Test,DR,Description,Required,Data Type,Validation Rules,Security Level,Owner Team,Dependencies,Notes,Last Updated
+solution.name,Project,github-actions-enterprise-cicd,github-actions-enterprise-cicd,github-actions-enterprise-cicd,Solution name for resource naming,Yes,String,Valid string value,Public,DevOps Team,,CI/CD solution identifier,2025-12-03
+solution.abbr,Project,ghacicd,ghacicd,ghacicd,Solution abbreviation (3-6 chars),Yes,String,3-8 lowercase,Public,DevOps Team,,Used in resource naming,2025-12-03
+solution.version,Project,1.0.0,1.0.0,1.0.0,Current platform version,Yes,String,Semantic versioning,Public,DevOps Team,,Release version,2025-12-03
+solution.provider_name,Project,github,github,github,Provider organization name,Yes,String,Valid string value,Public,DevOps Team,,GitHub provider,2025-12-03
+solution.category_name,Project,devops,devops,devops,Solution category,Yes,String,Valid string value,Public,DevOps Team,,DevOps category,2025-12-03
+ownership.cost_center,Project,CC-DEVOPS-001,CC-DEVOPS-001,CC-DEVOPS-001,Cost center for billing,Yes,String,CC format,Public,DevOps Team,,Billing allocation,2025-12-03
+ownership.owner_email,Project,devops-team@company.com,dev-team@company.com,devops-team@company.com,Team email for ownership,Yes,String,Valid email,Confidential,DevOps Team,,Alert notifications,2025-12-03
+ownership.project_code,Project,PRJ-GHACICD-2025,PRJ-GHACICD-2025,PRJ-GHACICD-2025,Project tracking code,Yes,String,PRJ format,Public,DevOps Team,,Tracking code,2025-12-03
+github.enterprise_url,GitHub,https://github.com,https://github.com,https://github.com,GitHub Enterprise Cloud base URL,Yes,String,Valid HTTPS URL,Public,GitHub Admin,,Enterprise Cloud,2025-12-03
+github.organization_name,GitHub,[organization-name],[organization-name],[organization-name],GitHub organization name,Yes,String,Valid GitHub org name,Confidential,GitHub Admin,,Primary organization,2025-12-03
+github.enterprise_license,GitHub,[license-id],[license-id],[license-id],GitHub Enterprise Cloud license ID,Yes,String,Valid license ID,Secret,GitHub Admin,,100 users licensed,2025-12-03
+github.actions_minutes,GitHub,50000,10000,50000,Included Actions minutes/month,Yes,Integer,1000-100000,Confidential,GitHub Admin,,Monthly allocation,2025-12-03
+auth.api_token,Authentication,[github-pat-token],[github-pat-token],[github-pat-token],GitHub PAT for API access,Yes,String,ghp_* format,Secret,DevOps Team,,Rotate quarterly,2025-12-03
+aws.account_id,AWS,[aws-prod-account-id],[aws-test-account-id],[aws-dr-account-id],AWS account ID for environment,Yes,String,12-digit AWS account,Confidential,Infrastructure Team,,Per-environment,2025-12-03
+aws.region,AWS,us-east-1,us-east-1,us-west-2,Primary AWS region,Yes,String,Valid AWS region,Public,Infrastructure Team,,DR in different region,2025-12-03
+runners.vpc_id,Runners,[vpc-prod-id],[vpc-test-id],[vpc-dr-id],VPC ID for self-hosted runners,Yes,String,vpc-* format,Confidential,Infrastructure Team,,Private subnets only,2025-12-03
+runners.subnet_ids,Runners,"[subnet-prod-1,subnet-prod-2]","[subnet-test-1]","[subnet-dr-1,subnet-dr-2]",Subnet IDs for runner ASG,Yes,String,Comma-separated,Confidential,Infrastructure Team,,Multi-AZ for prod/dr,2025-12-03
+runners.security_group_id,Runners,[sg-prod-id],[sg-test-id],[sg-dr-id],Security group ID for runners,Yes,String,sg-* format,Confidential,Infrastructure Team,,Outbound only,2025-12-03
+runners.instance_type_linux,Runners,c5.2xlarge,t3.large,c5.2xlarge,EC2 instance type for Linux,Yes,String,Valid EC2 type,Public,Infrastructure Team,,Smaller for test,2025-12-03
+runners.instance_type_windows,Runners,c5.2xlarge,t3.large,c5.2xlarge,EC2 instance type for Windows,Yes,String,Valid EC2 type,Public,Infrastructure Team,,Smaller for test,2025-12-03
+runners.count_linux,Runners,16,2,4,Number of Linux runners,Yes,Integer,1-50,Public,Infrastructure Team,,Minimal for test/DR,2025-12-03
+runners.count_windows,Runners,4,1,1,Number of Windows runners,Yes,Integer,1-20,Public,Infrastructure Team,,Minimal for test/DR,2025-12-03
+runners.asg_min_linux,Runners,8,1,1,Minimum Linux runners in ASG,Yes,Integer,1-20,Public,Infrastructure Team,,Standby for DR,2025-12-03
+runners.asg_max_linux,Runners,24,4,12,Maximum Linux runners in ASG,Yes,Integer,10-50,Public,Infrastructure Team,,Limited for test,2025-12-03
+runners.asg_min_windows,Runners,2,0,0,Minimum Windows runners in ASG,Yes,Integer,0-10,Public,Infrastructure Team,,None for test/DR,2025-12-03
+runners.asg_max_windows,Runners,6,2,4,Maximum Windows runners in ASG,Yes,Integer,2-20,Public,Infrastructure Team,,Limited for test/DR,2025-12-03
+runners.scale_up_threshold,Runners,5,3,5,Queue depth to scale up,Yes,Integer,1-20,Public,Infrastructure Team,,Lower for test,2025-12-03
+runners.scale_down_cooldown,Runners,900,600,900,Seconds before scale down,Yes,Integer,300-1800,Public,Infrastructure Team,,Faster for test,2025-12-03
+runners.ami_linux,Runners,[ami-linux-prod],[ami-linux-test],[ami-linux-dr],AMI ID for Linux runners,Yes,String,ami-* format,Confidential,Infrastructure Team,,Ubuntu 22.04 based,2025-12-03
+runners.ami_windows,Runners,[ami-windows-prod],[ami-windows-test],[ami-windows-dr],AMI ID for Windows runners,Yes,String,ami-* format,Confidential,Infrastructure Team,,Server 2022 based,2025-12-03
+oidc.provider_arn,Authentication,[oidc-prod-arn],[oidc-test-arn],[oidc-dr-arn],GitHub OIDC provider ARN,Yes,String,Valid ARN format,Confidential,Security Team,,Per-account OIDC,2025-12-03
+oidc.role_deploy,Authentication,github-actions-prod-deploy,github-actions-test-deploy,github-actions-dr-deploy,IAM role name for deployments,Yes,String,Valid IAM role name,Confidential,Security Team,,Per environment,2025-12-03
+container.ecr_registry_url,Container,[account-prod].dkr.ecr.us-east-1.amazonaws.com,[account-test].dkr.ecr.us-east-1.amazonaws.com,[account-dr].dkr.ecr.us-west-2.amazonaws.com,AWS ECR registry URL,Yes,String,Valid ECR URL,Confidential,DevOps Team,,Per-account registry,2025-12-03
+container.ghcr_registry_url,Container,ghcr.io/[org],ghcr.io/[org],ghcr.io/[org],GitHub Container Registry URL,Yes,String,Valid GHCR URL,Confidential,DevOps Team,,Shared registry,2025-12-03
+container.image_retention_days,Container,90,30,90,Container image retention (days),Yes,Integer,30-365,Public,DevOps Team,,Shorter for test,2025-12-03
+kubernetes.eks_cluster_name,Kubernetes,[eks-prod-cluster],[eks-test-cluster],[eks-dr-cluster],EKS cluster name,Yes,String,Valid cluster name,Confidential,Infrastructure Team,,Deployment target,2025-12-03
+workflows.template_repo,Workflows,[org]/.github,[org]/.github,[org]/.github,Reusable workflow repository,Yes,String,Valid repo path,Public,DevOps Team,,15 templates,2025-12-03
+workflows.build_timeout,Workflows,30,20,30,Default workflow timeout (minutes),Yes,Integer,10-120,Public,DevOps Team,,Shorter for test,2025-12-03
+workflows.artifact_retention,Workflows,30,7,30,Artifact retention (days),Yes,Integer,1-90,Public,DevOps Team,,Shorter for test,2025-12-03
+workflows.cache_key_prefix,Workflows,[org]-prod-cache,[org]-test-cache,[org]-dr-cache,Prefix for cache keys,Yes,String,Alphanumeric with hyphens,Public,DevOps Team,,Environment-specific,2025-12-03
+governance.branch_protection_enabled,Governance,true,false,true,Enable branch protection,Yes,Boolean,true|false,Public,DevOps Team,,Required for prod/DR,2025-12-03
+governance.environment_reviewers_count,Governance,2,0,2,Required reviewers for deploy,Yes,Integer,0-6,Public,DevOps Team,,Manual approval,2025-12-03
+governance.environment_wait_timer,Governance,0,0,0,Wait timer before deploy (minutes),Yes,Integer,0-43200,Public,DevOps Team,,Optional delay,2025-12-03
+security.enable_security_scanning,Security,true,true,true,Enable CodeQL and Dependabot,Yes,Boolean,true|false,Public,Security Team,,All environments,2025-12-03
+security.enable_secret_scanning,Security,true,true,true,Enable secret scanning,Yes,Boolean,true|false,Public,Security Team,,All environments,2025-12-03
+monitoring.datadog_api_key,Monitoring,[dd-api-key],[dd-api-key],[dd-api-key],Datadog API key for metrics,Yes,String,Valid API key,Secret,DevOps Team,,Shared monitoring,2025-12-03
+monitoring.datadog_app_key,Monitoring,[dd-app-key],[dd-app-key],[dd-app-key],Datadog application key,Yes,String,Valid app key,Secret,DevOps Team,,Dashboard access,2025-12-03
+monitoring.pagerduty_integration_key,Monitoring,[pd-prod-key],[pd-test-key],[pd-dr-key],PagerDuty integration key,Yes,String,Valid routing key,Secret,DevOps Team,,Per-environment,2025-12-03
+notifications.slack_webhook_url,Notifications,[slack-prod-webhook],[slack-test-webhook],[slack-dr-webhook],Slack webhook for notifications,No,String,Valid Slack webhook,Secret,DevOps Team,,Per-environment,2025-12-03
+notifications.teams_webhook_url,Notifications,[teams-prod-webhook],[teams-test-webhook],[teams-dr-webhook],Teams webhook URL,No,String,Valid Teams webhook,Secret,DevOps Team,,Per-environment,2025-12-03
+performance.pipeline_target_duration,Performance,600,300,600,Target pipeline duration (seconds),Yes,Integer,300-1800,Public,DevOps Team,,10 min for prod/DR,2025-12-03
+performance.deployment_success_target,Performance,0.95,0.90,0.95,Target deployment success rate,Yes,Float,0.80-0.99,Public,DevOps Team,,Lower for test,2025-12-03
+dr.enabled,DR,true,false,true,Enable DR configuration,Yes,Boolean,true|false,Public,DevOps Team,,DR toggle,2025-12-03
+dr.failover_priority,DR,1,0,0,Failover priority (0=disabled),Yes,Integer,0-2,Public,DevOps Team,,Priority ranking,2025-12-03

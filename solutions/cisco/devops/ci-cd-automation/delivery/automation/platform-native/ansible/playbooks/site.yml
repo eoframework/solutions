@@ -1,0 +1,90 @@
+---
+#------------------------------------------------------------------------------
+# Cisco Network CI/CD Automation - Site Playbook
+#------------------------------------------------------------------------------
+# Complete deployment orchestration for multi-environment CI/CD automation
+#
+# Usage:
+#   Production: ansible-playbook -i inventory/prod/hosts.yml playbooks/site.yml
+#   Test:       ansible-playbook -i inventory/test/hosts.yml playbooks/site.yml
+#   DR:         ansible-playbook -i inventory/dr/hosts.yml playbooks/site.yml
+#
+# Tag-based execution:
+#   ansible-playbook -i inventory/prod/hosts.yml playbooks/site.yml --tags "phase1"
+#------------------------------------------------------------------------------
+
+- name: Cisco Network CI/CD Automation - Initialize Deployment
+  hosts: localhost
+  gather_facts: yes
+  vars_files:
+    - ../vars/generated/project.yml
+    - ../vars/secrets.yml
+  tasks:
+    - name: Display deployment information
+      ansible.builtin.debug:
+        msg:
+          - "=============================================="
+          - "Cisco Network CI/CD Automation Deployment"
+          - "=============================================="
+          - "Environment: {{ deployment_environment | default('production') }}"
+          - "Timestamp: {{ ansible_date_time.iso8601 }}"
+          - "Ansible Version: {{ ansible_version.full }}"
+          - "=============================================="
+
+#------------------------------------------------------------------------------
+# PHASE 1: FOUNDATION - GitOps and Pipeline Infrastructure
+#------------------------------------------------------------------------------
+- name: Phase 1 - Foundation Setup
+  import_playbook: 01-foundation.yml
+  tags: [phase1, foundation, infrastructure]
+
+#------------------------------------------------------------------------------
+# PHASE 2: CORE - Network Orchestration Platform
+#------------------------------------------------------------------------------
+- name: Phase 2 - Core Platform Configuration
+  import_playbook: 02-core.yml
+  tags: [phase2, core, platform]
+
+#------------------------------------------------------------------------------
+# PHASE 3: INTEGRATIONS - External System Connections
+#------------------------------------------------------------------------------
+- name: Phase 3 - Integrations Setup
+  import_playbook: 03-integrations.yml
+  tags: [phase3, integrations]
+
+#------------------------------------------------------------------------------
+# PHASE 4: OPERATIONS - Monitoring and Logging
+#------------------------------------------------------------------------------
+- name: Phase 4 - Operations Configuration
+  import_playbook: 04-operations.yml
+  tags: [phase4, operations, monitoring]
+
+#------------------------------------------------------------------------------
+# PHASE 5: VALIDATION - Testing and Verification
+#------------------------------------------------------------------------------
+- name: Phase 5 - Validation and Testing
+  import_playbook: 05-validation.yml
+  tags: [phase5, validation, testing]
+
+#------------------------------------------------------------------------------
+# POST-DEPLOYMENT SUMMARY
+#------------------------------------------------------------------------------
+- name: Post-Deployment Summary
+  hosts: localhost
+  gather_facts: no
+  tasks:
+    - name: Display completion summary
+      ansible.builtin.debug:
+        msg:
+          - "=============================================="
+          - "Deployment Complete"
+          - "=============================================="
+          - "Environment: {{ deployment_environment | default('production') }}"
+          - "Status: SUCCESS"
+          - "=============================================="
+          - "Next Steps:"
+          - "  1. Verify GitLab/Jenkins pipeline health"
+          - "  2. Test sample network automation job"
+          - "  3. Review monitoring dashboards"
+          - "  4. Document any deviations"
+          - "=============================================="

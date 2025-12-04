@@ -1,28 +1,44 @@
-Parameter Name,Category,Environment,Default Value,Description,Required,Data Type,Validation Rules,Security Level,Owner Team,Dependencies,Notes,Last Updated
-VWAN_SOLUTION_NAME,Application,All,Azure Virtual WAN Global,Virtual WAN solution identifier for monitoring,Yes,String,Max 50 characters,Public,Network,None,Used in Azure Monitor and network logs,[DATE]
-VWAN_VERSION,Application,All,1.0.0,Current Virtual WAN solution version,Yes,String,Semantic versioning format,Public,Network,None,Updated with configuration releases,[DATE]
-AZURE_SUBSCRIPTION_ID,Azure,All,[subscription-id],Azure subscription ID for resource deployment,Yes,String,Valid Azure subscription GUID,Confidential,Infrastructure,Resource access,Used for resource deployment,[DATE]
-AZURE_PRIMARY_REGION,Azure,All,East US,Primary Azure region for hub deployment,Yes,String,Valid Azure region name,Public,Infrastructure,Service availability,Main hub location,[DATE]
-AZURE_SECONDARY_REGION,Azure,All,West US 2,Secondary Azure region for redundancy,Yes,String,Valid Azure region name,Public,Infrastructure,Service availability,Backup hub location,[DATE]
-AZURE_TERTIARY_REGION,Azure,All,North Europe,Tertiary Azure region for global coverage,No,String,Valid Azure region name,Public,Infrastructure,Service availability,Optional additional hub,[DATE]
-RESOURCE_GROUP_NAME,Azure,All,[rg-vwan-global],Resource group for Virtual WAN resources,Yes,String,Valid Azure resource group name,Public,Infrastructure,Subscription access,Contains all VWAN components,[DATE]
-VIRTUAL_WAN_NAME,Network,All,[vwan-global-001],Virtual WAN resource name,Yes,String,Valid Azure resource name,Public,Network,Resource group,Core Virtual WAN resource,[DATE]
-VIRTUAL_HUB_PRIMARY_NAME,Network,All,[vhub-primary-001],Primary virtual hub name,Yes,String,Valid Azure resource name,Public,Network,Virtual WAN,Main connectivity hub,[DATE]
-VIRTUAL_HUB_SECONDARY_NAME,Network,All,[vhub-secondary-001],Secondary virtual hub name,Yes,String,Valid Azure resource name,Public,Network,Virtual WAN,Backup connectivity hub,[DATE]
-HUB_ADDRESS_PREFIX_PRIMARY,Network,All,10.0.0.0/24,Address prefix for primary hub,Yes,String,Valid CIDR notation,Public,Network,IP planning,Must not overlap with other networks,[DATE]
-HUB_ADDRESS_PREFIX_SECONDARY,Network,All,10.1.0.0/24,Address prefix for secondary hub,Yes,String,Valid CIDR notation,Public,Network,IP planning,Must not overlap with other networks,[DATE]
-VPN_GATEWAY_SCALE_UNIT,Network,All,2,VPN gateway scale units,Yes,Integer,Min 1 Max 40,Public,Network,Performance requirements,Determines VPN throughput,[DATE]
-EXPRESSROUTE_GATEWAY_SCALE_UNIT,Network,All,1,ExpressRoute gateway scale units,Yes,Integer,Min 1 Max 10,Public,Network,Performance requirements,Determines ER throughput,[DATE]
-SITE_TO_SITE_VPN_ENABLED,Network,All,true,Enable Site-to-Site VPN connectivity,Yes,Boolean,true/false,Public,Network,VPN requirements,For branch office connectivity,[DATE]
-POINT_TO_SITE_VPN_ENABLED,Network,All,true,Enable Point-to-Site VPN connectivity,Yes,Boolean,true/false,Public,Network,Remote access requirements,For remote user connectivity,[DATE]
-EXPRESSROUTE_ENABLED,Network,All,true,Enable ExpressRoute connectivity,Yes,Boolean,true/false,Public,Network,ER requirements,For dedicated connectivity,[DATE]
-ROUTING_PREFERENCE,Network,All,Microsoft Network,Routing preference for traffic,Yes,String,Microsoft Network/Internet,Public,Network,Performance optimization,Affects traffic routing,[DATE]
-BGP_ASN_HUB_PRIMARY,Network,All,65515,BGP ASN for primary hub,Yes,Integer,Valid private ASN,Public,Network,BGP configuration,Must be unique in network,[DATE]
-BGP_ASN_HUB_SECONDARY,Network,All,65516,BGP ASN for secondary hub,Yes,Integer,Valid private ASN,Public,Network,BGP configuration,Must be unique in network,[DATE]
-FIREWALL_ENABLED,Security,All,true,Enable Azure Firewall in hubs,Yes,Boolean,true/false,Public,Security,Security requirements,For traffic inspection and filtering,[DATE]
-FIREWALL_POLICY_NAME,Security,All,[fw-policy-global],Azure Firewall policy name,Yes,String,Valid Azure resource name,Public,Security,Firewall enabled,Central firewall rule management,[DATE]
-DNS_SERVERS,Network,All,[168.63.129.16],DNS server addresses,Yes,String,Valid IP addresses comma-separated,Public,Network,Name resolution,Default Azure DNS,[DATE]
-TRAFFIC_ANALYTICS_ENABLED,Monitoring,All,true,Enable traffic analytics,Yes,Boolean,true/false,Public,Monitoring,Log Analytics workspace,For network traffic insights,[DATE]
-LOG_ANALYTICS_WORKSPACE_ID,Monitoring,All,[workspace-id],Log Analytics workspace for monitoring,Yes,String,Valid workspace GUID,Confidential,Monitoring,Workspace creation,For Virtual WAN monitoring,[DATE]
-PEERING_ENABLED,Network,All,true,Enable virtual network peering,Yes,Boolean,true/false,Public,Network,VNet connectivity,For spoke VNet connections,[DATE]
-SECURITY_PARTNER_PROVIDER,Security,All,None,Third-party security provider,No,String,Valid provider name,Public,Security,Partner integration,Optional security partner,[DATE]
+#WIDTH: 45,18,50,50,50,50,8,12,30,14
+#ALIGN: left,left,left,left,left,left,center,left,left,center
+Parameter Name,Category,Production,Test,DR,Description,Required,Data Type,Validation Rules,Security Level
+solution.name,Project,Azure Virtual WAN Global,Azure Virtual WAN Global,Azure Virtual WAN Global,Solution display name for tagging,Yes,String,Max 50 characters,Public
+solution.abbr,Project,vwan-global,vwan-global,vwan-global,Solution abbreviation for resource naming,Yes,String,Max 15 characters,Public
+solution.provider_name,Project,azure,azure,azure,Cloud provider name,Yes,String,aws|azure|gcp,Public
+solution.category_name,Project,network,network,network,Solution category,Yes,String,Valid category,Public
+azure.subscription_id,Project,[SUBSCRIPTION_ID],[SUBSCRIPTION_ID],[SUBSCRIPTION_ID],Azure subscription identifier,Yes,String,GUID format,Confidential
+azure.tenant_id,Project,[TENANT_ID],[TENANT_ID],[TENANT_ID],Azure AD tenant identifier,Yes,String,GUID format,Confidential
+azure.region,Project,eastus,eastus,westus2,Primary Azure region for deployment,Yes,String,Valid Azure region,Public
+azure.secondary_region,Project,westus2,westus2,eastus,Secondary region for multi-region deployment,Yes,String,Valid Azure region,Public
+ownership.cost_center,Project,CC-NET-001,CC-NET-001,CC-NET-001,Cost center for billing,Yes,String,CC format,Public
+ownership.owner_email,Project,network-team@company.com,dev-team@company.com,network-team@company.com,Team email for ownership,Yes,String,Valid email,Public
+ownership.project_code,Project,PRJ-VWAN-2025,PRJ-VWAN-2025,PRJ-VWAN-2025,Project tracking code,Yes,String,PRJ format,Public
+vwan.type,VWAN,Standard,Standard,Standard,Virtual WAN type (Basic or Standard),Yes,String,Basic|Standard,Public
+vwan.allow_branch_to_branch,VWAN,true,true,true,Allow branch to branch traffic,Yes,Boolean,true|false,Public
+vwan.office365_breakout,VWAN,Optimize,None,Optimize,Office365 local breakout category,Yes,String,None|Optimize|OptimizeAndAllow|All,Public
+vwan.hub_sku,VWAN,Standard,Standard,Standard,Virtual Hub SKU,Yes,String,Basic|Standard,Public
+vwan.hub_routing_preference,VWAN,ExpressRoute,ExpressRoute,ExpressRoute,Hub routing preference,Yes,String,ExpressRoute|VpnGateway|ASPath,Public
+vwan.enable_secondary_hub,VWAN,true,false,true,Enable secondary hub for multi-region,Yes,Boolean,true|false,Public
+vwan.primary_hub_prefix,VWAN,10.0.0.0/23,10.10.0.0/23,10.2.0.0/23,Address prefix for primary hub,Yes,String,Valid CIDR,Public
+vwan.secondary_hub_prefix,VWAN,10.1.0.0/23,,10.3.0.0/23,Address prefix for secondary hub,No,String,Valid CIDR,Public
+vwan.create_custom_route_tables,VWAN,false,false,false,Create custom route tables for hubs,Yes,Boolean,true|false,Public
+connectivity.enable_vpn_gateway,Connectivity,true,true,true,Enable VPN Gateway in hubs,Yes,Boolean,true|false,Public
+connectivity.vpn_gateway_scale_unit,Connectivity,2,1,1,VPN Gateway scale units (defines throughput),Yes,Integer,1-100,Public
+connectivity.vpn_routing_preference,Connectivity,Microsoft Network,Microsoft Network,Microsoft Network,VPN Gateway routing preference,Yes,String,Microsoft Network|Internet,Public
+connectivity.vpn_bgp_asn,Connectivity,65515,65515,65515,BGP ASN for VPN Gateway,Yes,Integer,Valid ASN,Public
+connectivity.vpn_bgp_peer_weight,Connectivity,0,0,0,BGP peer weight,Yes,Integer,0-100,Public
+connectivity.enable_expressroute_gateway,Connectivity,true,false,true,Enable ExpressRoute Gateway in hubs,Yes,Boolean,true|false,Public
+connectivity.er_gateway_scale_units,Connectivity,2,1,1,ExpressRoute Gateway scale units,Yes,Integer,1-10,Public
+connectivity.er_allow_non_vwan_traffic,Connectivity,false,false,false,Allow non-VWAN traffic through ER Gateway,Yes,Boolean,true|false,Public
+security.enable_firewall,Security,true,false,true,Enable Azure Firewall in hubs,Yes,Boolean,true|false,Public
+security.firewall_sku_tier,Security,Standard,Standard,Standard,Azure Firewall SKU tier,Yes,String,Standard|Premium|Basic,Public
+security.firewall_public_ip_count,Security,2,1,1,Number of public IPs for firewall,Yes,Integer,1-100,Public
+security.create_firewall_policy,Security,true,false,true,Create firewall policy,Yes,Boolean,true|false,Public
+security.share_firewall_policy,Security,true,false,true,Share policy between primary and secondary,Yes,Boolean,true|false,Public
+security.dns_proxy_enabled,Security,true,false,true,Enable DNS proxy in firewall,Yes,Boolean,true|false,Public
+security.threat_intelligence_mode,Security,Alert,Off,Alert,Threat intelligence mode,Yes,String,Alert|Deny|Off,Public
+security.intrusion_detection_mode,Security,Alert,Off,Alert,Intrusion detection mode (Premium SKU),Yes,String,Alert|Deny|Off,Public
+monitoring.log_analytics_sku,Monitoring,PerGB2018,PerGB2018,PerGB2018,Log Analytics Workspace SKU,Yes,String,Free|PerNode|PerGB2018,Public
+monitoring.log_retention_days,Monitoring,90,30,90,Log retention in days,Yes,Integer,30-730,Public
+monitoring.enable_alerts,Monitoring,true,false,true,Enable monitoring alerts,Yes,Boolean,true|false,Public
+monitoring.alert_email,Monitoring,ops-team@company.com,dev-team@company.com,ops-team@company.com,Email address for alerts,Yes,String,Valid email,Confidential
+monitoring.enable_network_watcher,Monitoring,true,false,true,Enable Network Watcher,Yes,Boolean,true|false,Public

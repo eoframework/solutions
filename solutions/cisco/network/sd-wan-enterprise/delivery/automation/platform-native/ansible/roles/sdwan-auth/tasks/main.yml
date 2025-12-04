@@ -1,0 +1,50 @@
+---
+# SD-WAN Authentication Role
+# Handles vManage API authentication and session management
+
+- name: Test vManage connectivity
+  uri:
+    url: "https://{{ vmanage_host }}:{{ vmanage_port }}/dataservice/client/server"
+    method: GET
+    validate_certs: false
+    status_code: [200, 302]
+  delegate_to: localhost
+  register: vmanage_health
+  until: vmanage_health.status in [200, 302]
+  retries: 5
+  delay: 10
+
+- name: Authenticate to vManage
+  uri:
+    url: "https://{{ vmanage_host }}:{{ vmanage_port }}/j_security_check"
+    method: POST
+    validate_certs: false
+    body_format: form-urlencoded
+    body:
+      j_username: "{{ vmanage_admin_user }}"
+      j_password: "{{ vmanage_admin_password }}"
+    status_code: [200, 302]
+  delegate_to: localhost
+  register: vmanage_auth
+  no_log: true
+
+- name: Get vManage session token
+  uri:
+    url: "https://{{ vmanage_host }}:{{ vmanage_port }}/dataservice/client/token"
+    method: GET
+    validate_certs: false
+    headers:
+      Cookie: "{{ vmanage_auth.set_cookie }}"
+  delegate_to: localhost
+  register: vmanage_token
+  when: vmanage_auth is succeeded
+
+- name: Set authentication facts
+  set_fact:
+    vmanage_session_cookie: "{{ vmanage_auth.set_cookie }}"
+    vmanage_session_token: "{{ vmanage_token.json }}"
+  when: vmanage_token is defined
+
+- name: Display authentication status
+  debug:
+    msg: "Successfully authenticated to vManage at {{ vmanage_host }}"

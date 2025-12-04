@@ -1,0 +1,12 @@
+#------------------------------------------------------------------------------
+# iDRAC Configuration
+#------------------------------------------------------------------------------
+# Generated from configuration.csv
+#
+# To regenerate: python generate-ansible-vars.py /path/to/solution
+# DO NOT EDIT - Changes will be overwritten on regeneration
+#------------------------------------------------------------------------------
+
+idrac:
+  version: "iDRAC9"
+  enterprise_license: true

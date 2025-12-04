@@ -1,0 +1,9 @@
+---
+#------------------------------------------------------------------------------
+# Default variables for dnac-site role
+#------------------------------------------------------------------------------
+
+# Site hierarchy defaults
+dnac_site_create_global: true
+dnac_site_wait_for_completion: true
+dnac_site_timeout: 300

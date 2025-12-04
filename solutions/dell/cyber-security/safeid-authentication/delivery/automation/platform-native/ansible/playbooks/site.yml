@@ -1,0 +1,107 @@
+---
+#------------------------------------------------------------------------------
+# Dell SafeID Authentication - Master Playbook
+#------------------------------------------------------------------------------
+# This is the main orchestration playbook for SafeID deployment.
+#
+# Usage:
+#   Full deployment:   ansible-playbook playbooks/site.yml --ask-vault-pass
+#   Specific phase:    ansible-playbook playbooks/safeid-deploy.yml
+#
+# Tags:
+#   foundation    - SafeID appliance deployment
+#   integration   - LDAP, RADIUS, SAML configuration
+#   operations    - Token management and enrollment
+#   validation    - Post-deployment verification
+#------------------------------------------------------------------------------
+
+- name: Dell SafeID Authentication - Master Deployment
+  hosts: localhost
+  gather_facts: true
+  tags: [always]
+
+  vars_files:
+    - "{{ playbook_dir }}/../vars/generated/project.yml"
+    - "{{ playbook_dir }}/../vars/generated/safeid.yml"
+    - "{{ playbook_dir }}/../vars/generated/users.yml"
+    - "{{ playbook_dir }}/../vars/generated/authentication.yml"
+    - "{{ playbook_dir }}/../vars/generated/ldap.yml"
+    - "{{ playbook_dir }}/../vars/generated/radius.yml"
+    - "{{ playbook_dir }}/../vars/generated/saml.yml"
+    - "{{ playbook_dir }}/../vars/secrets.yml"
+
+  tasks:
+    - name: Display deployment banner
+      ansible.builtin.debug:
+        msg: |
+          ================================================================
+          Dell SafeID Enterprise Authentication Deployment
+          ================================================================
+          Solution: {{ solution.name }} ({{ solution.abbr }})
+          Environment: {{ environment | default('production') }}
+          SafeID Version: {{ safeid.version }}
+          Servers: {{ safeid.server_count }} (HA: {{ safeid.ha.enabled }})
+          Users: {{ users.count }}
+          Auth Protocol: {{ authentication.protocol }}
+          Timestamp: {{ ansible_date_time.iso8601 }}
+          ================================================================
+
+#=============================================================================
+# FOUNDATION - SafeID Appliance Deployment
+#=============================================================================
+- name: "FOUNDATION: SafeID Appliance Deployment"
+  import_playbook: safeid-deploy.yml
+  tags: [foundation, deploy]
+
+#=============================================================================
+# INTEGRATION - Directory and Authentication Services
+#=============================================================================
+- name: "INTEGRATION: LDAP/AD Integration"
+  import_playbook: ldap-integration.yml
+  tags: [integration, ldap]
+
+- name: "INTEGRATION: RADIUS Configuration"
+  import_playbook: radius-config.yml
+  tags: [integration, radius]
+
+- name: "INTEGRATION: SAML IdP Configuration"
+  import_playbook: saml-config.yml
+  tags: [integration, saml]
+
+#=============================================================================
+# OPERATIONS - Token Management and Enrollment
+#=============================================================================
+- name: "OPERATIONS: Token Enrollment"
+  import_playbook: token-enrollment.yml
+  tags: [operations, tokens]
+
+#=============================================================================
+# VALIDATION - Post-Deployment Checks
+#=============================================================================
+- name: "VALIDATION: Post-Deployment Verification"
+  import_playbook: validate.yml
+  tags: [validation, validate]
+
+#=============================================================================
+# SUMMARY
+#=============================================================================
+- name: Deployment Summary
+  hosts: localhost
+  gather_facts: true
+  tags: [always]
+
+  tasks:
+    - name: Display completion summary
+      ansible.builtin.debug:
+        msg: |
+          ================================================================
+          Dell SafeID Authentication Deployment Complete
+          ================================================================
+          Environment: {{ environment | default('production') }}
+          Completed: {{ ansible_date_time.iso8601 }}
+          SafeID Servers: {{ groups['safeid_servers'] | default([]) | length }}
+          Database Servers: {{ groups['database_servers'] | default([]) | length }}
+          LDAP Integration: {{ ldap.enabled | default(false) }}
+          RADIUS Integration: {{ radius.enabled | default(false) }}
+          SAML IdP: {{ saml.enabled | default(false) }}
+          ================================================================

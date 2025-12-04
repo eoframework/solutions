@@ -1,0 +1,13 @@
+---
+#------------------------------------------------------------------------------
+# Role: hx-validation
+# Default variables
+#------------------------------------------------------------------------------
+
+validation:
+  check_intersight: true
+  check_vsphere: true
+  check_storage: true
+  check_ha: true
+  check_drs: true
+  generate_report: true

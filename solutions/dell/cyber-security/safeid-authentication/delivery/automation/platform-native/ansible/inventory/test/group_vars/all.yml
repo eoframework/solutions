@@ -1,0 +1,192 @@
+# Dell SafeID Authentication - Test Variables
+# Generated from configuration.csv - Test column
+# EO Framework - Dell Cyber Security Solutions
+
+---
+#=============================================================================
+# PROJECT METADATA
+#=============================================================================
+solution:
+  name: safeid-authentication
+  abbr: sia
+  provider: dell
+  category: cyber-security
+
+environment: test
+
+#=============================================================================
+# SAFEID APPLICATION
+#=============================================================================
+safeid:
+  solution_name: "Dell SafeID Enterprise Authentication"
+  version: "4.2"
+  server_count: 1
+  database: "PostgreSQL 15"
+
+  # Server configuration
+  servers:
+    primary:
+      hostname: safeid-test-01
+      ip: 10.21.1.10
+
+  # High availability (disabled in test)
+  ha:
+    enabled: false
+
+#=============================================================================
+# USER BASE (reduced for testing)
+#=============================================================================
+users:
+  count: 50
+  yubikey_model: "YubiKey 5 NFC"
+  yubikey_quantity: 55
+  admin_yubikey_count: 5
+
+  # Enrollment settings
+  enrollment:
+    portal_url: "https://enroll-test.company.com"
+    session_timeout: 300
+    self_service_enabled: true
+
+#=============================================================================
+# AUTHENTICATION CONFIGURATION
+#=============================================================================
+authentication:
+  protocol: "FIDO2 WebAuthn"
+
+  fido2:
+    enabled: true
+    origin: "login-test.company.com"
+    rpid: "company.com"
+
+  pin:
+    enabled: true
+    min_length: 6
+    max_length: 8
+    complexity_required: true
+
+  fallback:
+    totp_enabled: true
+    backup_codes_enabled: true
+
+#=============================================================================
+# LDAP/ACTIVE DIRECTORY INTEGRATION
+#=============================================================================
+ldap:
+  integration: "LDAP"
+  enabled: true
+
+  servers:
+    - server: "ad-test.company.com"
+      port: 389
+      use_ssl: false
+
+  base_dn: "DC=test,DC=company,DC=com"
+  user_container: "OU=Users,DC=test,DC=company,DC=com"
+  group_container: "OU=Groups,DC=test,DC=company,DC=com"
+
+  sync:
+    enabled: true
+    interval: 30
+    sync_users: true
+    sync_groups: true
+
+  bind_dn: "CN=SafeID Service,OU=Service Accounts,DC=test,DC=company,DC=com"
+
+#=============================================================================
+# RADIUS CONFIGURATION
+#=============================================================================
+radius:
+  enabled: true
+  port: 1812
+  accounting_port: 1813
+
+  clients:
+    - name: "Test VPN Gateway"
+      ip: "10.21.5.10"
+      protocol: "PAP"
+
+  vpn:
+    platform: "Cisco AnyConnect"
+    mfa_required: true
+    push_notification: true
+
+#=============================================================================
+# SAML IDENTITY PROVIDER
+#=============================================================================
+saml:
+  enabled: true
+  entity_id: "https://safeid-test.company.com"
+
+  certificate:
+    key_size: 2048
+    validity_days: 365
+    algorithm: "SHA256"
+
+  service_providers:
+    - name: "Test M365"
+      entity_id: "urn:federation:MicrosoftOnline"
+      acs_url: "https://login.microsoftonline.com/login.srf"
+      tenant_id: "00000000-0000-0000-0000-000000000000"
+
+#=============================================================================
+# COMPLIANCE
+#=============================================================================
+compliance:
+  audit:
+    enabled: true
+    retention_days: 90
+    siem_integration: false
+
+  cmmc:
+    level: "Level 2"
+    controls_enabled: true
+    reporting_enabled: true
+
+#=============================================================================
+# OPERATIONS
+#=============================================================================
+operations:
+  backup:
+    enabled: true
+    schedule: "Daily 03:00"
+    retention_days: 7
+    destination: "/backup/safeid"
+    include_database: true
+    include_config: true
+
+  helpdesk:
+    portal_url: "https://helpdesk-test.company.com"
+    temp_token_validity: 24
+    self_service_recovery: true
+
+  monitoring:
+    snmp_enabled: false
+    nagios_checks: false
+    health_check_interval: 120
+
+#=============================================================================
+# SECURITY
+#=============================================================================
+security:
+  tls:
+    min_version: "1.2"
+    ciphers: "HIGH:!aNULL:!MD5"
+    certificate_path: "/etc/safeid/ssl"
+
+  firewall:
+    ssh_allowed_ips:
+      - "10.21.0.0/16"
+    https_allowed_ips:
+      - "10.21.0.0/16"
+    radius_allowed_ips:
+      - "10.21.5.0/24"
+
+#=============================================================================
+# PERFORMANCE
+#=============================================================================
+performance:
+  validation_timeout: 30
+  max_concurrent_validations: 100
+  max_sessions: 500
+  session_timeout: 3600

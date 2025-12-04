@@ -1,0 +1,128 @@
+---
+#------------------------------------------------------------------------------
+# Phase 2: Integration - Cloud OnRamp and SaaS Integrations
+#------------------------------------------------------------------------------
+# This playbook handles integrations including:
+#   - Cloud OnRamp for IaaS (AWS, Azure, GCP)
+#   - Cloud OnRamp for SaaS
+#   - Direct Internet Access (DIA)
+#   - Monitoring integrations
+#------------------------------------------------------------------------------
+
+- name: Phase 2 - External Integrations
+  hosts: localhost
+  gather_facts: no
+  tags: [integration]
+
+  vars_files:
+    - "{{ playbook_dir }}/../vars/generated/project.yml"
+    - "{{ playbook_dir }}/../vars/generated/vmanage.yml"
+    - "{{ playbook_dir }}/../vars/generated/cloud_onramp.yml"
+    - "{{ playbook_dir }}/../vars/generated/saas.yml"
+    - "{{ playbook_dir }}/../vars/generated/monitoring.yml"
+    - "{{ playbook_dir }}/../vars/generated/notifications.yml"
+    - "{{ playbook_dir }}/../vars/secrets.yml"
+
+  tasks:
+    #--------------------------------------------------------------------------
+    # Cloud OnRamp for IaaS
+    #--------------------------------------------------------------------------
+    - name: Display Cloud OnRamp IaaS configuration
+      ansible.builtin.debug:
+        msg: |
+          Cloud OnRamp for IaaS:
+          - AWS Enabled: {{ cloud_onramp.aws_enabled }}
+          - Azure Enabled: {{ cloud_onramp.azure_enabled }}
+          - GCP Enabled: {{ cloud_onramp.gcp_enabled }}
+
+          IaaS Integration Features:
+          - Automated cloud gateway deployment
+          - Dynamic routing with cloud workloads
+          - Consistent security policy
+      when: cloud_onramp.aws_enabled or cloud_onramp.azure_enabled or cloud_onramp.gcp_enabled
+
+    #--------------------------------------------------------------------------
+    # Cloud OnRamp for SaaS
+    #--------------------------------------------------------------------------
+    - name: Display Cloud OnRamp SaaS configuration
+      ansible.builtin.debug:
+        msg: |
+          Cloud OnRamp for SaaS:
+          - Office 365: {{ saas.o365_enabled }}
+          - Salesforce: {{ saas.salesforce_enabled }}
+          - Webex: {{ saas.webex_enabled }}
+
+          SaaS Optimization:
+          - Direct cloud access from branches
+          - Dynamic path selection based on performance
+          - Integrated with Microsoft 365 Network Connectivity Test
+      when: saas.o365_enabled or saas.salesforce_enabled or saas.webex_enabled
+
+    #--------------------------------------------------------------------------
+    # Direct Internet Access (DIA)
+    #--------------------------------------------------------------------------
+    - name: Display DIA configuration
+      ansible.builtin.debug:
+        msg: |
+          Direct Internet Access (DIA):
+          - Enabled at Branches: {{ saas.dia_enabled | default(true) }}
+          - Security: Cloud-delivered (Umbrella) or local ZBFW
+
+          DIA Benefits:
+          - Reduced backhauling to DC
+          - Improved SaaS performance
+          - Bandwidth optimization
+
+    #--------------------------------------------------------------------------
+    # Monitoring Integration
+    #--------------------------------------------------------------------------
+    - name: Display monitoring configuration
+      ansible.builtin.debug:
+        msg: |
+          Monitoring Configuration:
+          - Syslog Server: {{ monitoring.syslog_server }}:{{ monitoring.syslog_port }}
+          - SNMP Trap Server: {{ monitoring.snmp_trap_server }}
+
+          vManage Built-in Monitoring:
+          - Device Dashboard
+          - Network Dashboard
+          - Application Visibility
+
+    #--------------------------------------------------------------------------
+    # ThousandEyes Integration
+    #--------------------------------------------------------------------------
+    - name: Display ThousandEyes integration
+      ansible.builtin.debug:
+        msg: |
+          ThousandEyes Integration:
+          - Embedded agents in vEdge/cEdge
+          - End-to-end visibility
+          - SaaS performance monitoring
+
+          Note: Requires ThousandEyes license and vManage integration.
+
+    #--------------------------------------------------------------------------
+    # Email Notifications
+    #--------------------------------------------------------------------------
+    - name: Display notification configuration
+      ansible.builtin.debug:
+        msg: |
+          Email Notification Configuration:
+          - SMTP Server: {{ notifications.smtp_server }}
+          - From: {{ notifications.smtp_from }}
+          - Alert Recipients: {{ notifications.alert_recipients }}
+
+    #--------------------------------------------------------------------------
+    # Summary
+    #--------------------------------------------------------------------------
+    - name: Integration summary
+      ansible.builtin.debug:
+        msg: |
+          ============================================================
+          Phase 2 - External Integrations Complete
+          ============================================================
+          Cloud OnRamp IaaS: AWS={{ cloud_onramp.aws_enabled }}, Azure={{ cloud_onramp.azure_enabled }}
+          Cloud OnRamp SaaS: O365={{ saas.o365_enabled }}, Webex={{ saas.webex_enabled }}
+          DIA: {{ saas.dia_enabled | default(true) }}
+          Syslog: {{ monitoring.syslog_server }}:{{ monitoring.syslog_port }}
+          ============================================================

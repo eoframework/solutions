@@ -1,0 +1,177 @@
+# Dell VxRail HCI - Test Variables
+# Generated from configuration.csv - Test column
+# EO Framework - Dell Cloud Solutions
+
+---
+#=============================================================================
+# PROJECT METADATA
+#=============================================================================
+solution:
+  name: vxrail-hci
+  abbr: vxr
+  provider: dell
+  category: cloud
+
+environment: test
+datacenter_name: "{{ datacenter_name | default('Test Lab') }}"
+
+#=============================================================================
+# VXRAIL CLUSTER CONFIGURATION
+#=============================================================================
+vxrail:
+  solution_name: "Dell VxRail Hyperconverged Infrastructure"
+  version: "8.0.100"
+  cluster_name: "vxrail-cluster-test"
+  node_count: 3  # Reduced for test environment
+  node_model: "E560"
+  generation: "E560"
+
+#=============================================================================
+# DELL HARDWARE SPECIFICATIONS
+#=============================================================================
+hardware:
+  chassis_model: "R660"
+  cpu:
+    model: "Intel Xeon Gold 6330"
+    count_per_node: 2
+    cores_per_cpu: 28
+    ghz: 2.0
+  memory:
+    per_node_gb: 256  # Reduced for test environment
+    type: "DDR4-3200"
+
+#=============================================================================
+# VSAN STORAGE CONFIGURATION
+#=============================================================================
+vsan:
+  # Cache tier
+  cache:
+    disk_model: "1.6TB NVMe SSD"
+    disk_count: 2
+    tier: "cache"
+
+  # Capacity tier
+  capacity:
+    disk_model: "3.84TB NVMe SSD"  # Smaller capacity for test
+    disk_count: 4  # Fewer disks for test
+    tier: "capacity"
+
+  # Storage policies
+  storage_policy: "RAID-5 (Erasure Coding)"
+
+  # Space efficiency
+  compression_enabled: true
+  deduplication_enabled: true
+  encryption_enabled: false  # Disabled for test performance
+
+  # vSAN version
+  version: "8.0 U2"
+
+#=============================================================================
+# NETWORK CONFIGURATION
+#=============================================================================
+network:
+  # VxRail node networking
+  node:
+    ports_10gbe: 4
+    ports_25gbe: 2
+
+  # Top-of-rack switch
+  switch:
+    model: "S5248F-ON"
+    uplink_speed: "100GbE"
+
+  # VLANs
+  vlans:
+    management: 110
+    vmotion: 120
+    vsan: 130
+    vm_network: 200
+
+#=============================================================================
+# VMWARE CONFIGURATION
+#=============================================================================
+vmware:
+  vcenter:
+    version: "8.0 U2"
+    datacenter: "VxRail-Datacenter-Test"
+    cluster: "VxRail-Cluster-Test"
+
+  esxi:
+    version: "8.0 U2"
+
+  vsan:
+    version: "8.0 U2"
+
+  nsx:
+    enabled: false
+
+  vcf:
+    enabled: false
+
+#=============================================================================
+# DELL MANAGEMENT
+#=============================================================================
+dell_management:
+  idrac:
+    version: "iDRAC9"
+    enterprise_license: true
+
+  openmanage:
+    enterprise_version: "4.0.1"
+    vcenter_integration: true
+
+#=============================================================================
+# SECURITY CONFIGURATION
+#=============================================================================
+security:
+  tpm_version: "TPM 2.0"
+  secure_boot: false  # Disabled for test flexibility
+  encryption:
+    at_rest: "disabled"
+    in_transit: "enabled"
+  firmware_security_mode: "standard"  # Relaxed for test
+
+#=============================================================================
+# BACKUP AND DATA PROTECTION
+#=============================================================================
+backup:
+  solution: "Dell PowerProtect Data Manager"
+  target_storage: "Dell PowerProtect DD"
+  retention_policy: "Daily-7d"  # Shorter retention for test
+  frequency: "Daily incremental"
+
+#=============================================================================
+# MONITORING AND SUPPORT
+#=============================================================================
+monitoring:
+  solution: "Dell CloudIQ"
+  support_assist: "enabled"
+  secure_remote_services: "disabled"  # Disabled for test
+  prosupport_plus: false
+  performance_monitoring: "enabled"
+
+#=============================================================================
+# OPERATIONS
+#=============================================================================
+operations:
+  lifecycle_management: "manual"  # Manual control in test
+  patch_schedule: "As needed"
+  maintenance_window: "Anytime"
+  capacity_planning_threshold: 70
+
+#=============================================================================
+# DISASTER RECOVERY
+#=============================================================================
+disaster_recovery:
+  enabled: false  # DR not required for test
+  rpo_minutes: 60
+  rto_hours: 8
+  replication_target: "none"
+
+#=============================================================================
+# CLOUD INTEGRATION
+#=============================================================================
+cloud_integration:
+  dell_technologies_cloud: "disabled"
+  vmware_cloud_on_dell_emc: "disabled"

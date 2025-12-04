@@ -1,0 +1,7 @@
+---
+# Dell SafeID RADIUS Configuration - Default Variables
+
+radius_default_port: 1812
+radius_default_accounting_port: 1813
+radius_timeout: 30
+radius_retries: 3

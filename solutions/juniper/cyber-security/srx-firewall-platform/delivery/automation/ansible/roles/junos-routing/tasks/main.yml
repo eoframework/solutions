@@ -1,0 +1,99 @@
+---
+# junos-routing/tasks/main.yml - Routing configuration
+
+#==============================================================================
+# STATIC ROUTES
+#==============================================================================
+- name: Configure default route
+  junipernetworks.junos.junos_config:
+    lines:
+      - "set routing-options static route 0.0.0.0/0 next-hop {{ default_gateway }}"
+  when: default_gateway is defined
+
+- name: Configure static routes
+  junipernetworks.junos.junos_config:
+    lines:
+      - "set routing-options static route {{ item.destination }} next-hop {{ item.next_hop }}"
+  loop: "{{ static_routes | default([]) }}"
+  when: static_routes is defined
+
+#==============================================================================
+# ROUTING INSTANCES
+#==============================================================================
+- name: Configure management routing instance
+  junipernetworks.junos.junos_config:
+    lines:
+      - "set routing-instances mgmt_junos routing-options static route 0.0.0.0/0 next-hop {{ mgmt_gateway }}"
+  when: mgmt_gateway is defined
+
+#==============================================================================
+# BGP CONFIGURATION
+#==============================================================================
+- name: Configure BGP
+  when: bgp_enabled | default(false)
+  block:
+    - name: Set BGP AS number
+      junipernetworks.junos.junos_config:
+        lines:
+          - "set routing-options autonomous-system {{ bgp_local_as }}"
+
+    - name: Configure BGP group
+      junipernetworks.junos.junos_config:
+        lines:
+          - "set protocols bgp group {{ item.group_name }} type {{ item.type }}"
+          - "set protocols bgp group {{ item.group_name }} local-address {{ item.local_address }}"
+          - "set protocols bgp group {{ item.group_name }} peer-as {{ item.peer_as }}"
+          - "set protocols bgp group {{ item.group_name }} neighbor {{ item.neighbor }}"
+      loop: "{{ bgp_peers | default([]) }}"
+
+    - name: Configure BGP export policy
+      junipernetworks.junos.junos_config:
+        lines:
+          - "set policy-options policy-statement bgp-export term 1 from protocol direct"
+          - "set policy-options policy-statement bgp-export term 1 then accept"
+          - "set protocols bgp group {{ item.group_name }} export bgp-export"
+      loop: "{{ bgp_peers | default([]) }}"
+      when: item.export_policy | default(true)
+
+#==============================================================================
+# OSPF CONFIGURATION
+#==============================================================================
+- name: Configure OSPF
+  when: ospf_enabled | default(false)
+  block:
+    - name: Set OSPF router ID
+      junipernetworks.junos.junos_config:
+        lines:
+          - "set routing-options router-id {{ ospf_router_id }}"
+
+    - name: Configure OSPF areas
+      junipernetworks.junos.junos_config:
+        lines:
+          - "set protocols ospf area {{ item.area }} interface {{ item.interface }}"
+      loop: "{{ ospf_interfaces | default([]) }}"
+
+    - name: Configure OSPF authentication
+      junipernetworks.junos.junos_config:
+        lines:
+          - "set protocols ospf area {{ item.area }} interface {{ item.interface }} authentication md5 1 key \"{{ item.auth_key }}\""
+      loop: "{{ ospf_interfaces | default([]) }}"
+      when: item.auth_key is defined
+      no_log: true
+
+#==============================================================================
+# ROUTING POLICY
+#==============================================================================
+- name: Configure prefix lists
+  junipernetworks.junos.junos_config:
+    lines:
+      - "set policy-options prefix-list {{ item.name }} {{ item.prefix }}"
+  loop: "{{ prefix_lists | default([]) }}"
+  when: prefix_lists is defined
+
+- name: Configure route filters
+  junipernetworks.junos.junos_config:
+    lines:
+      - "set policy-options policy-statement {{ item.policy_name }} term {{ item.term }} from route-filter {{ item.prefix }} {{ item.match_type }}"
+      - "set policy-options policy-statement {{ item.policy_name }} term {{ item.term }} then {{ item.action }}"
+  loop: "{{ route_filters | default([]) }}"
+  when: route_filters is defined

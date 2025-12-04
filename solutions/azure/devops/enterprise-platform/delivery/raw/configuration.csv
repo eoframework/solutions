@@ -1,42 +1,50 @@
-#WIDTH: 25,15,12,30,45,10,12,33,16,20,26,39,12
-#ALIGN: left,left,center,left,left,center,left,left,center,left,left,left,center
-Parameter Name,Category,Environment,Default Value,Description,Required,Data Type,Validation Rules,Security Level,Owner Team,Dependencies,Notes,Last Updated
-AZURE_SUBSCRIPTION_ID,Application,All,[SUBSCRIPTION_ID],Azure subscription identifier for DevOps resources,Yes,String,GUID format,Confidential,Infrastructure,None,Required for all Azure deployments,[DATE]
-AZURE_TENANT_ID,Application,All,[TENANT_ID],Azure AD tenant identifier for authentication,Yes,String,GUID format,Confidential,Infrastructure,Azure AD,Required for SSO integration,[DATE]
-AZURE_REGION,Application,All,eastus,Primary Azure region for resource deployment,Yes,String,Valid Azure region,Public,Infrastructure,None,Must support all required services,[DATE]
-SOLUTION_PREFIX,Application,All,devops,Prefix for all Azure resource naming,Yes,String,3-8 lowercase alphanumeric,Public,Infrastructure,None,Used in resource naming convention,[DATE]
-RESOURCE_GROUP_NAME,Application,All,rg-devops-[env]-001,Resource group for DevOps platform resources,Yes,String,Azure naming rules,Public,Infrastructure,Subscription,Contains all platform components,[DATE]
-DEVOPS_ORG_NAME,Platform,All,contoso-enterprise-devops,Azure DevOps organization name,Yes,String,Valid org name format,Public,DevOps,Azure AD,Primary DevOps organization,[DATE]
-DEVOPS_ORG_URL,Platform,All,https://dev.azure.com/[ORG],Azure DevOps organization URL,Yes,String,Valid HTTPS URL,Public,DevOps,DEVOPS_ORG_NAME,Organization access URL,[DATE]
-DEVOPS_PROCESS_TEMPLATE,Platform,All,Agile,Azure DevOps process template,Yes,String,Agile|Scrum|CMMI|Basic,Public,DevOps,None,Default process for new projects,[DATE]
-DEVOPS_PARALLEL_JOBS_HOSTED,Platform,All,10,Microsoft-hosted parallel job count,Yes,Integer,1-100,Public,DevOps,None,Concurrent build capacity,[DATE]
-DEVOPS_PARALLEL_JOBS_SELF,Platform,All,5,Self-hosted parallel job count,Yes,Integer,1-50,Public,DevOps,None,Custom agent capacity,[DATE]
-ACR_NAME,Platform,All,acrdevops[env]001,Azure Container Registry name,Yes,String,Azure naming rules,Public,DevOps,Resource Group,Container image storage,[DATE]
-ACR_SKU,Platform,All,Premium,Container Registry pricing tier,Yes,String,Basic|Standard|Premium,Public,DevOps,None,Premium for geo-replication,[DATE]
-ACR_VULNERABILITY_SCAN,Security,All,true,Enable container vulnerability scanning,Yes,Boolean,true|false,Public,Security,ACR_NAME,Security scanning for images,[DATE]
-AKS_CLUSTER_NAME,Platform,All,aks-devops-[env]-001,Azure Kubernetes Service cluster name,Yes,String,Azure naming rules,Public,DevOps,Resource Group,Container orchestration platform,[DATE]
-AKS_NODE_COUNT,Platform,Development,3,Initial AKS node count for development,Yes,Integer,1-10,Public,DevOps,None,Minimum nodes for dev workloads,[DATE]
-AKS_NODE_COUNT,Platform,Production,5,Initial AKS node count for production,Yes,Integer,3-20,Public,DevOps,None,Production node baseline,[DATE]
-AKS_NODE_SIZE,Platform,All,Standard_D4s_v3,AKS node VM size,Yes,String,Valid VM size,Public,DevOps,None,4 vCPU 16GB RAM nodes,[DATE]
-AKS_AUTOSCALE_MIN,Platform,Production,3,Minimum nodes for autoscaling,Yes,Integer,1-10,Public,DevOps,AKS_CLUSTER_NAME,Autoscaler minimum,[DATE]
-AKS_AUTOSCALE_MAX,Platform,Production,10,Maximum nodes for autoscaling,Yes,Integer,5-50,Public,DevOps,AKS_CLUSTER_NAME,Autoscaler maximum,[DATE]
-KEYVAULT_NAME,Security,All,kv-devops-[env]-001,Key Vault for secrets management,Yes,String,Azure naming rules,Confidential,Security,Resource Group,Secrets and certificates,[DATE]
-KEYVAULT_SKU,Security,All,standard,Key Vault pricing tier,Yes,String,standard|premium,Public,Security,None,Standard for most scenarios,[DATE]
-LOG_ANALYTICS_WORKSPACE,Monitoring,All,law-devops-[env]-001,Log Analytics workspace name,Yes,String,Azure naming rules,Public,Monitoring,Resource Group,Centralized logging,[DATE]
-LOG_ANALYTICS_RETENTION,Monitoring,Development,30,Log retention in days for development,Yes,Integer,30-730,Public,Monitoring,None,Cost optimization for dev,[DATE]
-LOG_ANALYTICS_RETENTION,Monitoring,Production,90,Log retention in days for production,Yes,Integer,30-730,Public,Monitoring,None,Production retention policy,[DATE]
-APP_INSIGHTS_NAME,Monitoring,All,appi-devops-[env]-001,Application Insights resource name,Yes,String,Azure naming rules,Public,Monitoring,Resource Group,APM for applications,[DATE]
-VNET_NAME,Network,All,vnet-devops-[env]-001,Virtual network name,Yes,String,Azure naming rules,Public,Network,Resource Group,Network isolation,[DATE]
-VNET_ADDRESS_SPACE,Network,All,10.0.0.0/16,Virtual network address space,Yes,String,Valid CIDR,Public,Network,None,Network address range,[DATE]
-SUBNET_AKS,Network,All,10.0.1.0/23,AKS subnet address range,Yes,String,Valid CIDR,Public,Network,VNET_NAME,Kubernetes cluster subnet,[DATE]
-SUBNET_AGENTS,Network,All,10.0.3.0/24,Build agent subnet address range,Yes,String,Valid CIDR,Public,Network,VNET_NAME,Self-hosted agent subnet,[DATE]
-SONARCLOUD_ORG,Integration,All,[SONARCLOUD_ORG],SonarCloud organization key,No,String,Valid org key,Confidential,Security,None,Code quality scanning,[DATE]
-SONARCLOUD_TOKEN,Integration,All,[SONARCLOUD_TOKEN],SonarCloud authentication token,No,String,Valid token,Secret,Security,SONARCLOUD_ORG,Stored in Key Vault,[DATE]
-WHITESOURCE_ORG,Integration,All,[WHITESOURCE_ORG],WhiteSource organization key,No,String,Valid org key,Confidential,Security,None,Dependency scanning,[DATE]
-WHITESOURCE_TOKEN,Integration,All,[WHITESOURCE_TOKEN],WhiteSource authentication token,No,String,Valid token,Secret,Security,WHITESOURCE_ORG,Stored in Key Vault,[DATE]
-TEAMS_WEBHOOK_URL,Integration,All,[TEAMS_WEBHOOK],Microsoft Teams webhook for notifications,No,String,Valid HTTPS URL,Confidential,Integration,None,Pipeline notifications,[DATE]
-SERVICENOW_ENDPOINT,Integration,All,[SERVICENOW_URL],ServiceNow instance URL for ticketing,No,String,Valid HTTPS URL,Confidential,Integration,None,ITSM integration,[DATE]
-ALERT_EMAIL,Operations,All,[ALERT_EMAIL],Email for platform alerts,Yes,String,Valid email format,Confidential,Operations,None,Operations team distribution list,[DATE]
-DEVOPS_ADMIN_GROUP,Security,All,[ADMIN_GROUP_ID],Azure AD group for DevOps admins,Yes,String,GUID format,Confidential,Security,Azure AD,Project Collection Admin role,[DATE]
-DEVOPS_USER_GROUP,Security,All,[USER_GROUP_ID],Azure AD group for DevOps users,Yes,String,GUID format,Confidential,Security,Azure AD,Basic access level,[DATE]
-
+#WIDTH: 45,18,50,50,50,50,8,12,30,14
+#ALIGN: left,left,left,left,left,left,center,left,left,center
+Parameter Name,Category,Production,Test,DR,Description,Required,Data Type,Validation Rules,Security Level
+solution.name,Project,Azure DevOps Enterprise Platform,Azure DevOps Enterprise Platform,Azure DevOps Enterprise Platform,Solution display name,Yes,String,Max 50 characters,Public
+solution.abbr,Project,devops,devops,devops,Solution abbreviation for resource naming,Yes,String,Max 10 characters,Public
+solution.provider_name,Project,azure,azure,azure,Cloud provider name,Yes,String,aws|azure|gcp,Public
+solution.category_name,Project,devops,devops,devops,Solution category,Yes,String,Valid category,Public
+azure.subscription_id,Project,[SUBSCRIPTION_ID],[SUBSCRIPTION_ID],[SUBSCRIPTION_ID],Azure subscription identifier,Yes,String,GUID format,Confidential
+azure.tenant_id,Project,[TENANT_ID],[TENANT_ID],[TENANT_ID],Azure AD tenant identifier,Yes,String,GUID format,Confidential
+azure.region,Project,eastus,eastus,westus2,Primary Azure region,Yes,String,Valid Azure region,Public
+azure.dr_region,Project,westus2,westus2,eastus,DR region for failover,Yes,String,Valid Azure region,Public
+ownership.cost_center,Project,CC-DEV-001,CC-DEV-001,CC-DEV-001,Cost center for billing,Yes,String,CC format,Public
+ownership.owner_email,Project,devops-team@company.com,dev-team@company.com,devops-team@company.com,Team email for ownership,Yes,String,Valid email,Public
+ownership.project_code,Project,PRJ-DEVOPS-2025,PRJ-DEVOPS-2025,PRJ-DEVOPS-2025,Project tracking code,Yes,String,PRJ format,Public
+network.vnet_cidr,Network,10.0.0.0/16,10.1.0.0/16,10.2.0.0/16,Virtual network CIDR block,Yes,String,Valid CIDR,Public
+network.subnet_aks,Network,10.0.1.0/23,10.1.1.0/23,10.2.1.0/23,Subnet for AKS cluster,Yes,String,Valid CIDR,Public
+network.subnet_agents,Network,10.0.3.0/24,10.1.3.0/24,10.2.3.0/24,Subnet for self-hosted agents,Yes,String,Valid CIDR,Public
+network.enable_private_endpoints,Network,true,false,true,Enable private endpoints for services,Yes,Boolean,true|false,Public
+platform.devops_org_name,Platform,contoso-enterprise-devops,contoso-test-devops,contoso-dr-devops,Azure DevOps organization name,Yes,String,Valid org name,Public
+platform.devops_process_template,Platform,Agile,Agile,Agile,Azure DevOps process template,Yes,String,Agile|Scrum|CMMI|Basic,Public
+platform.parallel_jobs_hosted,Platform,10,5,5,Microsoft-hosted parallel job count,Yes,Integer,1-100,Public
+platform.parallel_jobs_self,Platform,5,2,2,Self-hosted parallel job count,Yes,Integer,1-50,Public
+acr.name_suffix,ACR,001,001,001,Container Registry name suffix,Yes,String,Valid suffix,Public
+acr.sku,ACR,Premium,Standard,Premium,Container Registry pricing tier,Yes,String,Basic|Standard|Premium,Public
+acr.vulnerability_scan,ACR,true,false,true,Enable container vulnerability scanning,Yes,Boolean,true|false,Public
+acr.geo_replication,ACR,true,false,true,Enable geo-replication,Yes,Boolean,true|false,Public
+aks.node_count,AKS,5,3,3,Initial AKS node count,Yes,Integer,1-20,Public
+aks.node_size,AKS,Standard_D4s_v3,Standard_D2s_v3,Standard_D4s_v3,AKS node VM size,Yes,String,Valid VM size,Public
+aks.autoscale_min,AKS,3,1,2,Minimum nodes for autoscaling,Yes,Integer,1-10,Public
+aks.autoscale_max,AKS,10,5,5,Maximum nodes for autoscaling,Yes,Integer,5-50,Public
+aks.kubernetes_version,AKS,1.28,1.28,1.28,Kubernetes version,Yes,String,Valid K8s version,Public
+security.keyvault_sku,Security,standard,standard,standard,Key Vault pricing tier,Yes,String,standard|premium,Public
+security.admin_group_id,Security,[ADMIN_GROUP_ID],[ADMIN_GROUP_ID],[ADMIN_GROUP_ID],Azure AD group for administrators,Yes,String,GUID format,Confidential
+security.user_group_id,Security,[USER_GROUP_ID],[USER_GROUP_ID],[USER_GROUP_ID],Azure AD group for users,Yes,String,GUID format,Confidential
+monitoring.log_analytics_sku,Monitoring,PerGB2018,PerGB2018,PerGB2018,Log Analytics Workspace SKU,Yes,String,Free|PerNode|PerGB2018,Public
+monitoring.log_retention_days,Monitoring,90,30,90,Log retention in days,Yes,Integer,30-730,Public
+monitoring.enable_alerts,Monitoring,true,false,true,Enable monitoring alerts,Yes,Boolean,true|false,Public
+monitoring.alert_email,Monitoring,ops-team@company.com,dev-team@company.com,ops-team@company.com,Email for critical alerts,Yes,String,Valid email,Confidential
+monitoring.enable_app_insights,Monitoring,true,true,true,Enable Application Insights,Yes,Boolean,true|false,Public
+integration.sonarcloud_org,Integration,[SONARCLOUD_ORG],[SONARCLOUD_ORG],[SONARCLOUD_ORG],SonarCloud organization key,No,String,Valid org key,Confidential
+integration.teams_webhook_enabled,Integration,true,false,true,Enable Microsoft Teams notifications,Yes,Boolean,true|false,Public
+integration.servicenow_enabled,Integration,true,false,true,Enable ServiceNow integration,Yes,Boolean,true|false,Public
+backup.enabled,Backup,true,false,true,Enable backup services,Yes,Boolean,true|false,Public
+backup.retention_days,Backup,30,7,30,Backup retention in days,Yes,Integer,7-365,Public
+budget.enabled,Budget,true,true,true,Enable cost budgets,Yes,Boolean,true|false,Public
+budget.monthly_amount,Budget,10000,3000,5000,Monthly budget in USD,Yes,Integer,100-100000,Public
+budget.alert_thresholds,Budget,"[50,80,100]","[80,100]","[50,80,100]",Alert thresholds as percentages,Yes,List(Number),Valid percentages,Public
+budget.notification_email,Budget,finance@company.com,dev-team@company.com,finance@company.com,Email for budget alerts,Yes,String,Valid email,Confidential
+dr.enabled,DR,true,false,false,Enable disaster recovery,Yes,Boolean,true|false,Public
+dr.replication_enabled,DR,true,false,false,Enable geo-replication,Yes,Boolean,true|false,Public

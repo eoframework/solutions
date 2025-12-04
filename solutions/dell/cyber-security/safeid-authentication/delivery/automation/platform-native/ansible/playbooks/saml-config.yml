@@ -1,0 +1,101 @@
+# Dell SafeID Authentication - SAML IdP Configuration
+# EO Framework - Dell Cyber Security Solutions
+
+---
+- name: Configure SAML Identity Provider
+  hosts: safeid_servers
+  gather_facts: true
+  become: true
+  tags: [saml, integration]
+  when: saml.enabled | default(false)
+
+  pre_tasks:
+    - name: Display SAML configuration
+      ansible.builtin.debug:
+        msg: |
+          Configuring SAML Identity Provider
+          Entity ID: {{ saml.entity_id }}
+          Service Providers: {{ saml.service_providers | length }}
+
+  roles:
+    - role: safeid-saml
+      tags: [saml-config]
+
+  tasks:
+    - name: Generate SAML signing certificate
+      community.crypto.openssl_privatekey:
+        path: /etc/safeid/ssl/saml-signing.key
+        size: "{{ saml.certificate.key_size }}"
+        mode: '0600'
+        owner: safeid
+        group: safeid
+
+    - name: Generate SAML certificate signing request
+      community.crypto.openssl_csr:
+        path: /etc/safeid/ssl/saml-signing.csr
+        privatekey_path: /etc/safeid/ssl/saml-signing.key
+        common_name: "{{ saml.entity_id }}"
+        organization_name: "{{ solution.name }}"
+
+    - name: Generate self-signed SAML certificate
+      community.crypto.x509_certificate:
+        path: /etc/safeid/ssl/saml-signing.crt
+        privatekey_path: /etc/safeid/ssl/saml-signing.key
+        csr_path: /etc/safeid/ssl/saml-signing.csr
+        provider: selfsigned
+        selfsigned_digest: "{{ saml.certificate.algorithm }}"
+        selfsigned_not_after: "+{{ saml.certificate.validity_days }}d"
+        owner: safeid
+        group: safeid
+        mode: '0644'
+
+    - name: Configure SAML IdP settings
+      ansible.builtin.template:
+        src: saml-idp.conf.j2
+        dest: /etc/safeid/saml-idp.conf
+        owner: safeid
+        group: safeid
+        mode: '0600'
+      notify: restart safeid-saml
+
+    - name: Configure service providers
+      ansible.builtin.template:
+        src: saml-sp.conf.j2
+        dest: "/etc/safeid/saml-sp-{{ item.name | lower | replace(' ', '-') }}.conf"
+        owner: safeid
+        group: safeid
+        mode: '0600'
+      loop: "{{ saml.service_providers }}"
+      notify: restart safeid-saml
+
+    - name: Enable SAML service
+      ansible.builtin.service:
+        name: safeid-saml
+        state: started
+        enabled: true
+
+  post_tasks:
+    - name: Retrieve SAML metadata
+      ansible.builtin.uri:
+        url: "{{ saml.entity_id }}/saml/metadata"
+        return_content: true
+      register: saml_metadata
+      when: server_role == "primary"
+
+    - name: Save SAML metadata to file
+      ansible.builtin.copy:
+        content: "{{ saml_metadata.content }}"
+        dest: "/tmp/safeid-saml-metadata-{{ environment }}.xml"
+      delegate_to: localhost
+      when: server_role == "primary"
+
+    - name: Display SAML metadata location
+      ansible.builtin.debug:
+        msg: "SAML IdP metadata saved to /tmp/safeid-saml-metadata-{{ environment }}.xml"
+      when: server_role == "primary"
+
+  handlers:
+    - name: restart safeid-saml
+      ansible.builtin.service:
+        name: safeid-saml
+        state: restarted

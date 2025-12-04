@@ -1,0 +1,15 @@
+#------------------------------------------------------------------------------
+# Anyconnect Configuration
+#------------------------------------------------------------------------------
+# Generated from configuration.csv on 2025-12-02 23:53:45
+#
+# To regenerate: python generate-ansible-vars.py /path/to/solution
+# DO NOT EDIT - Changes will be overwritten on regeneration
+#------------------------------------------------------------------------------
+
+anyconnect:
+  group_url: https://vpn.client.local/secure-access
+  headend: vpn.client.local
+  posture: true
+  profile: secure-access-profile
+  umbrella: true

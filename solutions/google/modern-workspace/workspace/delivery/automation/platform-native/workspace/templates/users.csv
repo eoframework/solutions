@@ -1,0 +1,15 @@
+email,firstName,lastName,password,orgUnitPath,changePasswordAtNextLogin
+# Sample user import template
+# Replace with actual user data before running
+#
+# Columns:
+#   email - User's primary email address
+#   firstName - User's first name
+#   lastName - User's last name
+#   password - Initial password (min 8 chars)
+#   orgUnitPath - Organizational unit path (e.g., /Sales)
+#   changePasswordAtNextLogin - true/false
+#
+# Example entries:
+# john.doe@example.com,John,Doe,TempPass123!,/Sales,true
+# jane.smith@example.com,Jane,Smith,TempPass123!,/Marketing,true

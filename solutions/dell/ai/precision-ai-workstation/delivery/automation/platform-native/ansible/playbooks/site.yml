@@ -1,0 +1,104 @@
+---
+#------------------------------------------------------------------------------
+# Dell Precision AI Workstation - Master Playbook
+#------------------------------------------------------------------------------
+# This is the main orchestration playbook that imports all phase playbooks.
+#
+# Usage:
+#   Full deployment:   ansible-playbook playbooks/site.yml
+#   Specific phase:    ansible-playbook playbooks/workstation-provision.yml
+#   With vault:        ansible-playbook playbooks/site.yml --ask-vault-pass
+#
+# Tags:
+#   foundation     - Phase 1: Workstation provisioning
+#   core           - Phase 2: GPU and ML stack installation
+#   integration    - Phase 3: Storage and monitoring
+#   validation     - Phase 4: Post-deployment verification
+#------------------------------------------------------------------------------
+
+- name: Dell Precision AI Workstation - Master Deployment
+  hosts: localhost
+  gather_facts: true
+  tags: [always]
+
+  vars_files:
+    - "{{ playbook_dir }}/../vars/generated/project.yml"
+    - "{{ playbook_dir }}/../vars/generated/hardware.yml"
+    - "{{ playbook_dir }}/../vars/generated/storage.yml"
+    - "{{ playbook_dir }}/../vars/generated/network.yml"
+    - "{{ playbook_dir }}/../vars/generated/software.yml"
+    - "{{ playbook_dir }}/../vars/secrets.yml"
+
+  tasks:
+    - name: Display deployment banner
+      ansible.builtin.debug:
+        msg: |
+          ================================================================
+          Dell Precision AI Workstation Deployment
+          ================================================================
+          Solution: {{ solution.name }} ({{ solution.abbr }})
+          Environment: {{ environment | default('production') }}
+          Workstations: {{ hardware.workstation_count }}
+          GPU: {{ hardware.gpu_model }} ({{ hardware.gpu_memory_gb }}GB)
+          Storage: {{ storage.powerscale_model }} ({{ storage.powerscale_capacity_tb }}TB)
+          Timestamp: {{ ansible_date_time.iso8601 }}
+          ================================================================
+
+#=============================================================================
+# FOUNDATION - Workstation Provisioning
+#=============================================================================
+- name: "FOUNDATION: Workstation Provisioning"
+  import_playbook: workstation-provision.yml
+  tags: [foundation, provision]
+
+#=============================================================================
+# CORE - GPU and ML Stack
+#=============================================================================
+- name: "CORE: NVIDIA Driver and CUDA Installation"
+  import_playbook: nvidia-drivers.yml
+  tags: [core, nvidia, gpu]
+
+- name: "CORE: ML Framework Stack Installation"
+  import_playbook: ml-stack.yml
+  tags: [core, ml, frameworks]
+
+#=============================================================================
+# INTEGRATION - Storage and Networking
+#=============================================================================
+- name: "INTEGRATION: PowerScale NFS Mount Configuration"
+  import_playbook: powerscale-mount.yml
+  tags: [integration, storage, nfs]
+
+#=============================================================================
+# OPERATIONS - Monitoring and Management
+#=============================================================================
+- name: "OPERATIONS: Monitoring Setup"
+  import_playbook: monitoring-setup.yml
+  tags: [operations, monitoring]
+
+#=============================================================================
+# VALIDATION - Post-Deployment Checks
+#=============================================================================
+- name: "VALIDATION: Post-Deployment Verification"
+  import_playbook: validate.yml
+  tags: [validation, validate]
+
+#=============================================================================
+# SUMMARY
+#=============================================================================
+- name: Deployment Summary
+  hosts: localhost
+  gather_facts: true
+  tags: [always]
+
+  tasks:
+    - name: Display completion summary
+      ansible.builtin.debug:
+        msg: |
+          ================================================================
+          Dell Precision AI Workstation Deployment Complete
+          ================================================================
+          Environment: {{ environment | default('production') }}
+          Completed: {{ ansible_date_time.iso8601 }}
+          Workstations Configured: {{ groups['ai_workstations'] | default([]) | length }}
+          ================================================================

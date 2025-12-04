@@ -1,0 +1,13 @@
+#------------------------------------------------------------------------------
+# Security Configuration
+#------------------------------------------------------------------------------
+# Generated from configuration.csv
+#
+# To regenerate: python generate-ansible-vars.py /path/to/solution
+# DO NOT EDIT - Changes will be overwritten on regeneration
+#------------------------------------------------------------------------------
+
+security:
+  vulnerability_scanning: true
+  secret_backend: "GitLab CI Variables"
+  audit_log_retention_days: 365

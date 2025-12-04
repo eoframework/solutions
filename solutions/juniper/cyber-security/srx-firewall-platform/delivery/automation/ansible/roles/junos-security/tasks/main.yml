@@ -1,0 +1,135 @@
+---
+# junos-security/tasks/main.yml - Security zones, policies, and services
+
+#==============================================================================
+# SECURITY ZONES
+#==============================================================================
+- name: Configure security zones
+  junipernetworks.junos.junos_config:
+    lines:
+      - "set security zones security-zone {{ item.key }} description \"{{ item.value.description }}\""
+      - "set security zones security-zone {{ item.key }} interfaces {{ item.value.interface }}"
+  loop: "{{ network.zones | dict2items }}"
+  loop_control:
+    label: "{{ item.key }}"
+
+- name: Configure zone host-inbound services
+  junipernetworks.junos.junos_config:
+    lines:
+      - "set security zones security-zone {{ item.0.key }} host-inbound-traffic system-services {{ item.1 }}"
+  with_subelements:
+    - "{{ network.zones | dict2items }}"
+    - value.host_inbound_services
+  loop_control:
+    label: "{{ item.0.key }} - {{ item.1 }}"
+
+#==============================================================================
+# DEFAULT SECURITY POLICIES
+#==============================================================================
+- name: Configure default deny policy
+  junipernetworks.junos.junos_config:
+    lines:
+      - "set security policies default-policy deny-all"
+
+- name: Configure internal to DMZ policy
+  junipernetworks.junos.junos_config:
+    lines:
+      - "set security policies from-zone internal to-zone dmz policy allow-internal-to-dmz match source-address any"
+      - "set security policies from-zone internal to-zone dmz policy allow-internal-to-dmz match destination-address any"
+      - "set security policies from-zone internal to-zone dmz policy allow-internal-to-dmz match application any"
+      - "set security policies from-zone internal to-zone dmz policy allow-internal-to-dmz then permit"
+      - "set security policies from-zone internal to-zone dmz policy allow-internal-to-dmz then log session-init session-close"
+
+- name: Configure DMZ to untrust policy
+  junipernetworks.junos.junos_config:
+    lines:
+      - "set security policies from-zone dmz to-zone untrust policy allow-dmz-to-internet match source-address any"
+      - "set security policies from-zone dmz to-zone untrust policy allow-dmz-to-internet match destination-address any"
+      - "set security policies from-zone dmz to-zone untrust policy allow-dmz-to-internet match application junos-https"
+      - "set security policies from-zone dmz to-zone untrust policy allow-dmz-to-internet match application junos-http"
+      - "set security policies from-zone dmz to-zone untrust policy allow-dmz-to-internet match application junos-dns-udp"
+      - "set security policies from-zone dmz to-zone untrust policy allow-dmz-to-internet then permit"
+
+#==============================================================================
+# IPS/IDP CONFIGURATION
+#==============================================================================
+- name: Configure IPS
+  when: ips.enabled | default(false)
+  block:
+    - name: Enable IDP policy
+      junipernetworks.junos.junos_config:
+        lines:
+          - "set security idp active-policy {{ ips.policy_name }}"
+          - "set security idp idp-policy {{ ips.policy_name }} rulebase-ips rule 1 match from-zone any"
+          - "set security idp idp-policy {{ ips.policy_name }} rulebase-ips rule 1 match to-zone any"
+          - "set security idp idp-policy {{ ips.policy_name }} rulebase-ips rule 1 match source-address any"
+          - "set security idp idp-policy {{ ips.policy_name }} rulebase-ips rule 1 match destination-address any"
+          - "set security idp idp-policy {{ ips.policy_name }} rulebase-ips rule 1 match application default"
+          - "set security idp idp-policy {{ ips.policy_name }} rulebase-ips rule 1 match attacks predefined-attack-groups \"Recommended\""
+          - "set security idp idp-policy {{ ips.policy_name }} rulebase-ips rule 1 then action {{ ips.action }}"
+          - "set security idp idp-policy {{ ips.policy_name }} rulebase-ips rule 1 then notification log-attacks"
+
+    - name: Configure IDP signature updates
+      junipernetworks.junos.junos_config:
+        lines:
+          - "set security idp security-package automatic enable"
+          - "set security idp security-package automatic interval {{ ips.update_interval }}"
+
+#==============================================================================
+# ATP (ADVANCED THREAT PREVENTION)
+#==============================================================================
+- name: Configure ATP Cloud
+  when: atp.enabled | default(false)
+  junipernetworks.junos.junos_config:
+    lines:
+      - "set services advanced-anti-malware policy default-policy verdict-threshold 7"
+      - "set services advanced-anti-malware policy default-policy http action {{ atp.verdict_action }}"
+      - "set services advanced-anti-malware policy default-policy http inspection-profile default"
+      - "set services advanced-anti-malware default-policy default-policy"
+
+#==============================================================================
+# SECINTEL (THREAT INTELLIGENCE)
+#==============================================================================
+- name: Configure SecIntel
+  when: secintel.enabled | default(false)
+  junipernetworks.junos.junos_config:
+    lines:
+      - "set services security-intelligence profile secintel-cc category CC"
+      - "set services security-intelligence profile secintel-cc rule secintel-cc-rule match threat-level 7"
+      - "set services security-intelligence profile secintel-cc rule secintel-cc-rule then action block drop"
+      - "set services security-intelligence profile secintel-cc rule secintel-cc-rule then action block log"
+      - "set services security-intelligence policy secintel-policy secintel-cc"
+      - "set services security-intelligence default-policy secintel-policy"
+
+#==============================================================================
+# SCREEN OPTIONS (DDOS PROTECTION)
+#==============================================================================
+- name: Configure screen options
+  junipernetworks.junos.junos_config:
+    lines:
+      - "set security screen ids-option untrust-screen icmp ping-death"
+      - "set security screen ids-option untrust-screen icmp ip-sweep"
+      - "set security screen ids-option untrust-screen ip source-route-option"
+      - "set security screen ids-option untrust-screen ip tear-drop"
+      - "set security screen ids-option untrust-screen tcp syn-flood alarm-threshold 1024"
+      - "set security screen ids-option untrust-screen tcp syn-flood attack-threshold 200"
+      - "set security screen ids-option untrust-screen tcp syn-flood source-threshold 1024"
+      - "set security screen ids-option untrust-screen tcp syn-flood destination-threshold 2048"
+      - "set security screen ids-option untrust-screen tcp syn-flood timeout 20"
+      - "set security screen ids-option untrust-screen tcp land"
+      - "set security screen ids-option untrust-screen tcp winnuke"
+
+- name: Apply screen to untrust zone
+  junipernetworks.junos.junos_config:
+    lines:
+      - "set security zones security-zone untrust screen untrust-screen"
+
+#==============================================================================
+# FLOW SETTINGS
+#==============================================================================
+- name: Configure security flow settings
+  junipernetworks.junos.junos_config:
+    lines:
+      - "set security flow tcp-mss all-tcp mss 1350"
+      - "set security flow tcp-session strict-syn-check"
+      - "set security flow tcp-session tcp-initial-timeout 20"

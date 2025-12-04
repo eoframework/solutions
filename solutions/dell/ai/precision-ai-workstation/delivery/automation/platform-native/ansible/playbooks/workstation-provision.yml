@@ -1,0 +1,44 @@
+# Dell Precision AI Workstation - Provisioning Playbook
+# EO Framework - Dell AI Solutions
+# Base workstation configuration and OS setup
+
+---
+- name: Provision AI Workstations
+  hosts: ai_workstations
+  gather_facts: true
+  become: true
+  tags: [provision]
+
+  pre_tasks:
+    - name: Display workstation info
+      ansible.builtin.debug:
+        msg: "Provisioning {{ inventory_hostname }} ({{ description }})"
+
+  roles:
+    #=========================================================================
+    # BIOS CONFIGURATION (via iDRAC)
+    #=========================================================================
+    - role: dell-precision-bios
+      tags: [bios, idrac]
+      vars:
+        idrac_ip: "{{ idrac_host }}"
+
+    #=========================================================================
+    # BASE OS CONFIGURATION
+    #=========================================================================
+    - role: ubuntu-base
+      tags: [os, base]
+
+  post_tasks:
+    - name: Reboot workstation if required
+      ansible.builtin.reboot:
+        reboot_timeout: 600
+      when: reboot_required | default(false)
+
+    - name: Wait for workstation to come back online
+      ansible.builtin.wait_for_connection:
+        timeout: 300
+      when: reboot_required | default(false)
+
+    - name: Verify workstation is operational
+      ansible.builtin.ping:

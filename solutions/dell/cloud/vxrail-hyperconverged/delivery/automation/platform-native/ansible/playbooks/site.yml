@@ -1,0 +1,134 @@
+---
+#------------------------------------------------------------------------------
+# Dell VxRail Enterprise - Master Playbook
+#------------------------------------------------------------------------------
+# This is the main orchestration playbook for enterprise VxRail deployments.
+#
+# Usage:
+#   Full deployment:   ansible-playbook playbooks/site.yml --ask-vault-pass
+#   Specific phase:    ansible-playbook playbooks/vxrail-deploy.yml
+#
+# Tags:
+#   foundation    - Pre-deployment validation
+#   core          - VxRail, vCenter, vSAN deployment
+#   networking    - NSX-T deployment
+#   dr            - Site Recovery Manager
+#   database      - Database setup
+#   operations    - Monitoring and management
+#   validation    - Post-deployment verification
+#------------------------------------------------------------------------------
+
+- name: Dell VxRail Enterprise - Master Deployment
+  hosts: localhost
+  gather_facts: true
+  tags: [always]
+
+  vars_files:
+    - "{{ playbook_dir }}/../vars/generated/project.yml"
+    - "{{ playbook_dir }}/../vars/generated/vxrail.yml"
+    - "{{ playbook_dir }}/../vars/generated/hardware.yml"
+    - "{{ playbook_dir }}/../vars/generated/vsan.yml"
+    - "{{ playbook_dir }}/../vars/generated/network.yml"
+    - "{{ playbook_dir }}/../vars/generated/nsx.yml"
+    - "{{ playbook_dir }}/../vars/generated/vmware.yml"
+    - "{{ playbook_dir }}/../vars/secrets.yml"
+
+  tasks:
+    - name: Display deployment banner
+      ansible.builtin.debug:
+        msg: |
+          ================================================================
+          Dell VxRail Enterprise Hyperconverged Deployment
+          ================================================================
+          Solution: {{ solution.name }} ({{ solution.abbr }})
+          Environment: {{ environment | default('production') }}
+          VxRail Version: {{ vxrail.version }}
+          Cluster: {{ vxrail.cluster_name }}
+          Nodes: {{ vxrail.node_count }} x {{ vxrail.node_model }}
+          vSAN: {{ vsan.total_usable_tb }}TB ({{ vsan.storage_policy }})
+          NSX-T: {{ nsx.enabled }} (v{{ nsx.version }})
+          Timestamp: {{ ansible_date_time.iso8601 }}
+          ================================================================
+
+#=============================================================================
+# FOUNDATION - Pre-Deployment Validation
+#=============================================================================
+- name: "FOUNDATION: Pre-Deployment Validation"
+  import_playbook: vxrail-precheck.yml
+  tags: [foundation, precheck]
+
+#=============================================================================
+# CORE - VxRail Cluster Deployment
+#=============================================================================
+- name: "CORE: VxRail Cluster Deployment"
+  import_playbook: vxrail-deploy.yml
+  tags: [core, vxrail]
+
+- name: "CORE: vCenter Configuration"
+  import_playbook: vcenter-config.yml
+  tags: [core, vcenter]
+
+- name: "CORE: vSAN Configuration"
+  import_playbook: vsan-config.yml
+  tags: [core, vsan]
+
+#=============================================================================
+# NETWORKING - NSX-T Deployment
+#=============================================================================
+- name: "NETWORKING: NSX-T Deployment"
+  import_playbook: nsx-deploy.yml
+  tags: [networking, nsx]
+  when: nsx.enabled | default(false)
+
+#=============================================================================
+# DR - Site Recovery Manager
+#=============================================================================
+- name: "DR: Site Recovery Manager Configuration"
+  import_playbook: srm-config.yml
+  tags: [dr, srm]
+  when: vmware.srm_enabled | default(false)
+
+#=============================================================================
+# DATABASE - Optional Database Setup
+#=============================================================================
+- name: "DATABASE: Database Deployment"
+  import_playbook: database-setup.yml
+  tags: [database, optional]
+  when: database is defined
+
+#=============================================================================
+# OPERATIONS - Monitoring and Management
+#=============================================================================
+- name: "OPERATIONS: Monitoring Setup"
+  import_playbook: monitoring-setup.yml
+  tags: [operations, monitoring]
+
+#=============================================================================
+# VALIDATION - Post-Deployment Checks
+#=============================================================================
+- name: "VALIDATION: Post-Deployment Verification"
+  import_playbook: validate.yml
+  tags: [validation, validate]
+
+#=============================================================================
+# SUMMARY
+#=============================================================================
+- name: Deployment Summary
+  hosts: localhost
+  gather_facts: true
+  tags: [always]
+
+  tasks:
+    - name: Display completion summary
+      ansible.builtin.debug:
+        msg: |
+          ================================================================
+          Dell VxRail Enterprise Deployment Complete
+          ================================================================
+          Environment: {{ environment | default('production') }}
+          Completed: {{ ansible_date_time.iso8601 }}
+          VxRail Cluster: {{ vxrail.cluster_name }}
+          Node Count: {{ vxrail.node_count }}
+          NSX-T Enabled: {{ nsx.enabled | default(false) }}
+          SRM Enabled: {{ vmware.srm_enabled | default(false) }}
+          ================================================================

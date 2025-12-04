@@ -1,0 +1,23 @@
+# Ansible Collections for Network EE
+---
+collections:
+  # Core networking
+  - name: ansible.netcommon
+  - name: ansible.utils
+
+  # Cisco
+  - name: cisco.ios
+  - name: cisco.nxos
+  - name: cisco.iosxr
+  - name: cisco.asa
+
+  # Juniper
+  - name: junipernetworks.junos
+
+  # Arista
+  - name: arista.eos
+
+  # General
+  - name: community.network
+  - name: ansible.posix
+  - name: community.general

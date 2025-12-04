@@ -1,0 +1,15 @@
+#------------------------------------------------------------------------------
+# Build Infrastructure Configuration
+#------------------------------------------------------------------------------
+# Generated from configuration.csv
+#
+# To regenerate: python generate-ansible-vars.py /path/to/solution
+# DO NOT EDIT - Changes will be overwritten on regeneration
+#------------------------------------------------------------------------------
+
+build:
+  agent_count: 8
+  agent_model: "PowerEdge R650"
+  cpu_model: "Intel Xeon Gold 6338"
+  memory_per_agent_gb: 256
+  storage_per_agent_tb: 2

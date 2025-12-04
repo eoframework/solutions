@@ -1,0 +1,112 @@
+---
+#------------------------------------------------------------------------------
+# Phase 1: Foundation - ISE Cluster Setup and Initial Configuration
+#------------------------------------------------------------------------------
+# This playbook handles initial ISE configuration including:
+#   - Cluster node verification
+#   - Certificate management
+#   - Network device groups
+#   - Global settings
+#------------------------------------------------------------------------------
+
+- name: Phase 1 - Foundation Setup
+  hosts: localhost
+  gather_facts: no
+  tags: [foundation]
+
+  vars_files:
+    - "{{ playbook_dir }}/../vars/generated/project.yml"
+    - "{{ playbook_dir }}/../vars/generated/ise.yml"
+    - "{{ playbook_dir }}/../vars/generated/infrastructure.yml"
+    - "{{ playbook_dir }}/../vars/generated/deployment.yml"
+    - "{{ playbook_dir }}/../vars/secrets.yml"
+
+  tasks:
+    #--------------------------------------------------------------------------
+    # ISE Connectivity Check
+    #--------------------------------------------------------------------------
+    - name: Verify ISE ERS API is accessible
+      ansible.builtin.uri:
+        url: "https://{{ ise.primary_ip }}/ers/config/node"
+        method: GET
+        user: "{{ ise.admin_user }}"
+        password: "{{ vault_ise_admin_password }}"
+        force_basic_auth: yes
+        validate_certs: "{{ ise.ssl_verify }}"
+        headers:
+          Accept: application/json
+      register: ise_nodes
+
+    - name: Display cluster status
+      ansible.builtin.debug:
+        msg: "ISE Cluster Nodes: {{ ise_nodes.json | default('Response received') }}"
+        verbosity: 1
+
+    #--------------------------------------------------------------------------
+    # Network Device Groups
+    #--------------------------------------------------------------------------
+    - name: Create location-based network device group
+      cisco.ise.network_device_group:
+        ise_hostname: "{{ ise.primary_ip }}"
+        ise_username: "{{ ise.admin_user }}"
+        ise_password: "{{ vault_ise_admin_password }}"
+        ise_verify: "{{ ise.ssl_verify }}"
+        state: present
+        name: "Location#All Locations#{{ item }}"
+        description: "Network devices at {{ item }}"
+      loop: "{{ deployment.site_names.split(',') | map('trim') | list }}"
+      register: location_groups
+
+    - name: Create device type network device groups
+      cisco.ise.network_device_group:
+        ise_hostname: "{{ ise.primary_ip }}"
+        ise_username: "{{ ise.admin_user }}"
+        ise_password: "{{ vault_ise_admin_password }}"
+        ise_verify: "{{ ise.ssl_verify }}"
+        state: present
+        name: "Device Type#All Device Types#{{ item }}"
+        description: "{{ item }} devices"
+      loop:
+        - Switches
+        - Routers
+        - Wireless Controllers
+        - Firewalls
+      register: device_type_groups
+
+    #--------------------------------------------------------------------------
+    # RADIUS/TACACS+ Settings
+    #--------------------------------------------------------------------------
+    - name: Display RADIUS configuration
+      ansible.builtin.debug:
+        msg: |
+          RADIUS Configuration:
+          - Authentication Port: {{ ise.radius_auth_port }}
+          - Accounting Port: {{ ise.radius_acct_port }}
+          - CoA Port: {{ ise.coa_port }}
+
+          TACACS+ Configuration:
+          - TACACS+ Port: {{ ise.tacacs_port }}
+
+    #--------------------------------------------------------------------------
+    # Global Settings
+    #--------------------------------------------------------------------------
+    - name: Configure session timeout
+      ansible.builtin.debug:
+        msg: |
+          Session Settings:
+          - Timeout: {{ ise.session_timeout }} minutes
+
+    #--------------------------------------------------------------------------
+    # Summary
+    #--------------------------------------------------------------------------
+    - name: Foundation setup summary
+      ansible.builtin.debug:
+        msg: |
+          ============================================================
+          Phase 1 - Foundation Setup Complete
+          ============================================================
+          ISE Cluster: Verified
+          Network Device Groups: {{ location_groups.results | length + device_type_groups.results | length }} created
+          RADIUS Ports: {{ ise.radius_auth_port }}/{{ ise.radius_acct_port }}
+          TACACS+ Port: {{ ise.tacacs_port }}
+          ============================================================

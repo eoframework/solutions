@@ -1,0 +1,15 @@
+#------------------------------------------------------------------------------
+# Compliance Configuration
+#------------------------------------------------------------------------------
+# Generated from configuration.csv
+#
+# To regenerate: python generate-ansible-vars.py /path/to/solution
+# DO NOT EDIT - Changes will be overwritten on regeneration
+#------------------------------------------------------------------------------
+
+compliance:
+  audit:
+    retention_days: 1095
+    siem_integration: true
+  cmmc:
+    level: "Level 2"

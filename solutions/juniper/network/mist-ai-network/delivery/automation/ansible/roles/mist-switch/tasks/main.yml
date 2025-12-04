@@ -1,0 +1,72 @@
+---
+# mist-switch/tasks/main.yml - EX switch configuration for Mist
+
+- name: Configure hostname
+  junipernetworks.junos.junos_config:
+    lines:
+      - "set system host-name {{ inventory_hostname }}"
+
+- name: Configure VLANs
+  junipernetworks.junos.junos_vlans:
+    config:
+      - vlan_id: "{{ item.value.id }}"
+        name: "{{ item.value.name }}"
+    state: merged
+  loop: "{{ vlans | dict2items }}"
+  loop_control:
+    label: "VLAN {{ item.value.id }}"
+
+- name: Configure AP trunk ports
+  junipernetworks.junos.junos_config:
+    lines:
+      - "set interfaces interface-range AP-PORTS member-range ge-0/0/0 to ge-0/0/47"
+      - "set interfaces interface-range AP-PORTS unit 0 family ethernet-switching interface-mode trunk"
+      - "set interfaces interface-range AP-PORTS unit 0 family ethernet-switching vlan members {{ vlans.management.name }}"
+      - "set interfaces interface-range AP-PORTS unit 0 family ethernet-switching vlan members {{ vlans.corporate.name }}"
+      - "set interfaces interface-range AP-PORTS unit 0 family ethernet-switching vlan members {{ vlans.guest.name }}"
+      - "set interfaces interface-range AP-PORTS native-vlan-id {{ switch.native_vlan }}"
+
+- name: Configure PoE
+  junipernetworks.junos.junos_config:
+    lines:
+      - "set poe interface all"
+      - "set poe interface all priority high"
+
+- name: Configure LLDP
+  junipernetworks.junos.junos_config:
+    lines:
+      - "set protocols lldp interface all"
+      - "set protocols lldp-med interface all"
+
+- name: Configure RSTP
+  junipernetworks.junos.junos_config:
+    lines:
+      - "set protocols rstp interface all"
+
+- name: Configure management interface
+  junipernetworks.junos.junos_config:
+    lines:
+      - "set interfaces vlan unit {{ vlans.management.id }} family inet address {{ ansible_host }}/24"
+      - "set vlans {{ vlans.management.name }} l3-interface vlan.{{ vlans.management.id }}"
+  when: ansible_host is defined
+
+- name: Configure Mist Cloud adoption
+  junipernetworks.junos.junos_config:
+    lines:
+      - "set system services outbound-ssh client mist device-id {{ inventory_hostname }}"
+      - "set system services outbound-ssh client mist services netconf"
+      - "set system services outbound-ssh client mist oc-term.mistsys.net port 2200"
+      - "set system services outbound-ssh client mist keep-alive retry 12"
+      - "set system services outbound-ssh client mist keep-alive timeout 5"
+
+- name: Configure NTP
+  junipernetworks.junos.junos_config:
+    lines:
+      - "set system ntp server {{ item }}"
+  loop: "{{ system.ntp_servers }}"
+
+- name: Configure DNS
+  junipernetworks.junos.junos_config:
+    lines:
+      - "set system name-server {{ item }}"
+  loop: "{{ system.dns_servers }}"

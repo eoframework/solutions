@@ -1,0 +1,84 @@
+---
+# cluster-setup.yml - Chassis cluster configuration
+# Configures HA cluster for SRX firewall pair
+
+- name: Configure SRX Chassis Cluster
+  hosts: srx_firewalls
+  gather_facts: no
+  connection: netconf
+  serial: 1
+
+  vars_files:
+    - "{{ playbook_dir }}/../vars/common.yml"
+    - "{{ playbook_dir }}/../vars/secrets.yml"
+
+  pre_tasks:
+    - name: Verify cluster mode is enabled
+      when: cluster.enabled | default(false)
+      block:
+        - name: Check current cluster status
+          junipernetworks.junos.junos_command:
+            commands:
+              - show chassis cluster status
+          register: cluster_status
+          ignore_errors: yes
+
+        - name: Display cluster status
+          ansible.builtin.debug:
+            var: cluster_status.stdout_lines
+
+  tasks:
+    - name: Configure chassis cluster
+      when: cluster.enabled | default(false)
+      block:
+        - name: Set cluster ID
+          junipernetworks.junos.junos_config:
+            lines:
+              - "set chassis cluster cluster-id {{ cluster.id }}"
+              - "set chassis cluster node {{ cluster_node_id }}"
+
+        - name: Configure fabric interface
+          junipernetworks.junos.junos_config:
+            lines:
+              - "set interfaces fab0 fabric-options member-interfaces {{ cluster.fabric_interface }}"
+              - "set interfaces fab1 fabric-options member-interfaces {{ cluster.fabric_interface | regex_replace('et-0', 'et-1') }}"
+
+        - name: Configure redundancy groups
+          junipernetworks.junos.junos_config:
+            lines:
+              - "set chassis cluster redundancy-group 0 node 0 priority {{ cluster.node0.priority }}"
+              - "set chassis cluster redundancy-group 0 node 1 priority {{ cluster.node1.priority }}"
+              - "set chassis cluster redundancy-group 1 node 0 priority {{ cluster.node0.priority }}"
+              - "set chassis cluster redundancy-group 1 node 1 priority {{ cluster.node1.priority }}"
+              - "set chassis cluster redundancy-group 1 preempt"
+              - "set chassis cluster redundancy-group 1 interface-monitor {{ network.zones.dmz.interface | split('.') | first }} weight 255"
+              - "set chassis cluster redundancy-group 1 interface-monitor {{ network.zones.internal.interface | split('.') | first }} weight 255"
+
+        - name: Configure redundant ethernet interfaces
+          junipernetworks.junos.junos_config:
+            lines:
+              - "set interfaces {{ network.zones.dmz.interface | split('.') | first }} redundant-ether-options redundancy-group 1"
+              - "set interfaces {{ network.zones.internal.interface | split('.') | first }} redundant-ether-options redundancy-group 1"
+
+        - name: Configure control link monitoring
+          junipernetworks.junos.junos_config:
+            lines:
+              - "set chassis cluster control-link-recovery"
+              - "set chassis cluster heartbeat-interval 1000"
+              - "set chassis cluster heartbeat-threshold 3"
+
+  post_tasks:
+    - name: Commit cluster configuration
+      junipernetworks.junos.junos_config:
+        confirm_commit: yes
+        comment: "Ansible cluster configuration"
+
+    - name: Verify cluster status
+      junipernetworks.junos.junos_command:
+        commands:
+          - show chassis cluster status
+      register: final_cluster_status
+
+    - name: Display final cluster status
+      ansible.builtin.debug:
+        var: final_cluster_status.stdout_lines

@@ -1,0 +1,15 @@
+#------------------------------------------------------------------------------
+# BGP Routing Configuration
+#------------------------------------------------------------------------------
+# Generated from configuration.csv
+#
+# To regenerate: python generate-ansible-vars.py /path/to/solution
+# DO NOT EDIT - Changes will be overwritten on regeneration
+#------------------------------------------------------------------------------
+
+bgp:
+  spine_asn: 65000
+  leaf_asn_start: 65001
+  leaf_asn_end: 65040
+  keepalive: 3
+  holdtime: 9

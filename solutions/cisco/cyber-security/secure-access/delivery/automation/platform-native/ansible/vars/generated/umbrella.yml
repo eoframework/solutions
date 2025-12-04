@@ -1,0 +1,16 @@
+#------------------------------------------------------------------------------
+# Umbrella Configuration
+#------------------------------------------------------------------------------
+# Generated from configuration.csv on 2025-12-02 23:53:45
+#
+# To regenerate: python generate-ansible-vars.py /path/to/solution
+# DO NOT EDIT - Changes will be overwritten on regeneration
+#------------------------------------------------------------------------------
+
+umbrella:
+  api_key: '{{ vault_umbrella_api_key }}'
+  org_id: '[org-id]'
+  policy_default: block-malware
+  roaming_client: true
+  secret: '{{ vault_umbrella_secret }}'
+  swg_enabled: true

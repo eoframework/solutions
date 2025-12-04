@@ -1,0 +1,125 @@
+# Dell PowerSwitch Datacenter - Monitoring Configuration
+# EO Framework - Dell Network Solutions
+# Configures SNMP, syslog, and monitoring integration
+
+---
+- name: Configure Monitoring
+  hosts: powerswitch
+  gather_facts: false
+  tags: [monitoring]
+
+  tasks:
+    #=========================================================================
+    # SNMP CONFIGURATION
+    #=========================================================================
+    - name: Configure SNMPv3 user
+      dellemc.os10.os10_config:
+        lines:
+          - "snmp-server group NETWORK-OPS v3 priv"
+          - "snmp-server user {{ snmp_user | default('monitor') }} NETWORK-OPS v3 auth sha {{ snmp_auth_pass | default('authpass123') }} priv aes {{ snmp_priv_pass | default('privpass123') }}"
+      when: management.snmp.version | default('v3') == 'v3'
+      no_log: true
+      tags: [snmpv3]
+
+    - name: Configure SNMP location and contact
+      dellemc.os10.os10_config:
+        lines:
+          - "snmp-server location {{ management.snmp.location | default('Datacenter') }}"
+          - "snmp-server contact {{ management.snmp.contact | default('netops@company.com') }}"
+      tags: [snmp-info]
+
+    - name: Configure SNMP traps
+      dellemc.os10.os10_config:
+        lines:
+          - "snmp-server enable traps"
+          - "snmp-server enable traps bgp"
+          - "snmp-server enable traps config"
+          - "snmp-server enable traps entity"
+          - "snmp-server enable traps envmon"
+          - "snmp-server enable traps link"
+      tags: [snmp-traps]
+
+    #=========================================================================
+    # SYSLOG CONFIGURATION
+    #=========================================================================
+    - name: Configure syslog servers
+      dellemc.os10.os10_config:
+        lines:
+          - "logging {{ item.server }}"
+          - "logging facility {{ item.facility | default('local0') }}"
+      loop: "{{ management.syslog_servers | default([]) }}"
+      tags: [syslog]
+
+    - name: Configure syslog severity
+      dellemc.os10.os10_config:
+        lines:
+          - "logging severity {{ management.syslog_servers[0].level | default('informational') }}"
+      when: management.syslog_servers | length > 0
+      tags: [syslog]
+
+    - name: Configure logging buffer
+      dellemc.os10.os10_config:
+        lines:
+          - "logging buffered 65536 informational"
+          - "logging console informational"
+      tags: [logging]
+
+    #=========================================================================
+    # INTERFACE COUNTERS
+    #=========================================================================
+    - name: Configure interface counter collection
+      dellemc.os10.os10_config:
+        lines:
+          - "management route-preference 30"
+      tags: [counters]
+
+    #=========================================================================
+    # FLOW MONITORING (sFlow)
+    #=========================================================================
+    - name: Configure sFlow
+      dellemc.os10.os10_config:
+        lines:
+          - "sflow collector {{ management.syslog_servers[0].server | default('10.0.0.1') }} 6343"
+          - "sflow polling-interval 30"
+          - "sflow sample-rate 2048"
+          - "sflow enable"
+      when: management.syslog_servers | length > 0
+      tags: [sflow]
+
+    #=========================================================================
+    # OPENMANAGE ENTERPRISE INTEGRATION
+    #=========================================================================
+    - name: Configure OpenManage Enterprise integration
+      dellemc.os10.os10_config:
+        lines:
+          - "snmp-server host {{ ome_server | default('openmanage.domain.com') }} version 3 priv {{ snmp_user | default('monitor') }}"
+      when: management.openmanage_enabled | default(false)
+      no_log: true
+      tags: [openmanage]
+
+    #=========================================================================
+    # SAVE CONFIGURATION
+    #=========================================================================
+    - name: Save running configuration
+      dellemc.os10.os10_config:
+        save: true
+      tags: [save]
+
+    #=========================================================================
+    # VERIFICATION
+    #=========================================================================
+    - name: Verify monitoring configuration
+      dellemc.os10.os10_command:
+        commands:
+          - show snmp
+          - show logging
+      register: monitoring_verification
+      tags: [verify]
+
+    - name: Display monitoring verification
+      ansible.builtin.debug:
+        msg: |
+          Switch: {{ inventory_hostname }}
+          SNMP: Configured
+          Syslog Servers: {{ management.syslog_servers | length }}
+      tags: [verify]

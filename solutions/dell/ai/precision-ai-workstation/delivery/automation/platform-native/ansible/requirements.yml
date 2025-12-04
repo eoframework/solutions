@@ -1,0 +1,21 @@
+# Ansible Galaxy Requirements
+# Dell Precision AI Workstation Solution
+# EO Framework - Dell AI Solutions
+
+---
+collections:
+  # Dell OpenManage for iDRAC and hardware management
+  - name: dellemc.openmanage
+    version: ">=9.0.0"
+
+  # Community general collection for system utilities
+  - name: community.general
+    version: ">=9.0.0"
+
+  # Ansible POSIX utilities for file/mount operations
+  - name: ansible.posix
+    version: ">=1.5.0"
+
+  # Ansible utilities
+  - name: ansible.utils
+    version: ">=4.0.0"

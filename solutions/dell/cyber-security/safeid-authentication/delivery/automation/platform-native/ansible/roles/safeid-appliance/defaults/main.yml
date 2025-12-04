@@ -1,0 +1,18 @@
+---
+# Dell SafeID Appliance - Default Variables
+
+safeid_version: "4.2"
+safeid_user: safeid
+safeid_group: safeid
+
+safeid_home: /var/lib/safeid
+safeid_config_dir: /etc/safeid
+safeid_log_dir: /var/log/safeid
+
+safeid_api_port: 8443
+safeid_web_port: 443
+
+safeid_database_host: localhost
+safeid_database_port: 5432
+safeid_database_name: safeid
+safeid_database_user: safeid

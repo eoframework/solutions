@@ -1,0 +1,89 @@
+---
+# junos-base/tasks/main.yml - Base system configuration
+
+- name: Configure system hostname
+  junipernetworks.junos.junos_config:
+    lines:
+      - "set system host-name {{ solution.abbr }}-{{ solution.environment }}-{{ cluster_node_id | default('01') }}"
+
+- name: Configure system domain
+  junipernetworks.junos.junos_config:
+    lines:
+      - "set system domain-name {{ system.domain_name }}"
+
+- name: Configure NTP servers
+  junipernetworks.junos.junos_config:
+    lines:
+      - "set system ntp server {{ item }}"
+  loop: "{{ system.ntp_servers }}"
+
+- name: Configure DNS servers
+  junipernetworks.junos.junos_config:
+    lines:
+      - "set system name-server {{ item }}"
+  loop: "{{ system.dns_servers }}"
+
+- name: Configure system services
+  junipernetworks.junos.junos_config:
+    lines:
+      - "set system services ssh protocol-version v2"
+      - "set system services ssh root-login deny"
+      - "set system services netconf ssh"
+      - "set system services web-management https system-generated-certificate"
+
+- name: Configure system logging
+  junipernetworks.junos.junos_config:
+    lines:
+      - "set system syslog archive size 10m"
+      - "set system syslog archive files 10"
+      - "set system syslog user * any emergency"
+      - "set system syslog file messages any notice"
+      - "set system syslog file messages authorization info"
+      - "set system syslog file security-log any any"
+      - "set system syslog file security-log match \"RT_FLOW|RT_IDP\""
+
+- name: Configure external syslog server
+  when: syslog.enabled | default(false)
+  junipernetworks.junos.junos_config:
+    lines:
+      - "set system syslog host {{ syslog_host }} any any"
+      - "set system syslog host {{ syslog_host }} port {{ syslog.port }}"
+      - "set system syslog host {{ syslog_host }} structured-data"
+  vars:
+    syslog_host: "{{ hostvars[inventory_hostname].syslog_destination | default('10.0.0.100') }}"
+
+- name: Configure system timezone
+  junipernetworks.junos.junos_config:
+    lines:
+      - "set system time-zone UTC"
+
+- name: Configure login banner
+  junipernetworks.junos.junos_config:
+    lines:
+      - "set system login message \"\\n========================================\\nAUTHORIZED ACCESS ONLY\\n{{ solution.name | upper }}\\nEnvironment: {{ solution.environment | upper }}\\n========================================\\n\""
+
+- name: Configure root authentication
+  junipernetworks.junos.junos_config:
+    lines:
+      - "set system root-authentication encrypted-password \"{{ junos_root_password_hash }}\""
+  when: junos_root_password_hash is defined
+  no_log: true
+
+- name: Configure admin user
+  junipernetworks.junos.junos_config:
+    lines:
+      - "set system login user {{ junos_admin_user }} class super-user"
+      - "set system login user {{ junos_admin_user }} authentication encrypted-password \"{{ junos_admin_password_hash }}\""
+  when: junos_admin_user is defined and junos_admin_password_hash is defined
+  no_log: true
+
+- name: Configure TACACS+ authentication
+  when: tacacs.enabled | default(false)
+  junipernetworks.junos.junos_config:
+    lines:
+      - "set system tacplus-server {{ tacacs_server }} secret \"{{ tacacs_secret }}\""
+      - "set system tacplus-server {{ tacacs_server }} port {{ tacacs.port }}"
+      - "set system authentication-order [ tacplus password ]"
+  vars:
+    tacacs_server: "{{ hostvars[inventory_hostname].tacacs_server | default('10.0.0.50') }}"
+  no_log: true

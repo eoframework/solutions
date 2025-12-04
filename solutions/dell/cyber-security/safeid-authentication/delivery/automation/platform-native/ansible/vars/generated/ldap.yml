@@ -1,0 +1,17 @@
+#------------------------------------------------------------------------------
+# LDAP/Directory Configuration
+#------------------------------------------------------------------------------
+# Generated from configuration.csv
+#
+# To regenerate: python generate-ansible-vars.py /path/to/solution
+# DO NOT EDIT - Changes will be overwritten on regeneration
+#------------------------------------------------------------------------------
+
+ldap:
+  integration: "LDAPS"
+  base_dn: "DC=company DC=com"
+  user_container: "OU=Users DC=company DC=com"
+  group_container: "OU=Groups DC=company DC=com"
+  sync:
+    interval: 15
+  bind_dn: "CN=SafeID Service OU=Service Accounts DC=company DC=com"

@@ -1,0 +1,91 @@
+---
+#------------------------------------------------------------------------------
+# Role: vmware-integration
+# Purpose: Configure vSphere integration with HyperFlex cluster
+#------------------------------------------------------------------------------
+
+- name: Wait for vCenter connectivity
+  ansible.builtin.uri:
+    url: "https://{{ vmware.vcenter_fqdn }}/rest/com/vmware/cis/session"
+    method: POST
+    user: "{{ vmware.vcenter_admin_user }}"
+    password: "{{ vault_vcenter_admin_password }}"
+    force_basic_auth: yes
+    validate_certs: "{{ vmware.ssl_verify | default(false) }}"
+    status_code: [200, 201]
+  register: vcenter_session
+  retries: 10
+  delay: 30
+  until: vcenter_session is succeeded
+
+- name: Set vCenter session token
+  ansible.builtin.set_fact:
+    vcenter_session_token: "{{ vcenter_session.json.value }}"
+  when: vcenter_session is succeeded
+
+- name: Get datacenter info
+  community.vmware.vmware_datacenter_info:
+    hostname: "{{ vmware.vcenter_fqdn }}"
+    username: "{{ vmware.vcenter_admin_user }}"
+    password: "{{ vault_vcenter_admin_password }}"
+    validate_certs: "{{ vmware.ssl_verify | default(false) }}"
+  register: datacenter_info
+
+- name: Create datacenter if not exists
+  community.vmware.vmware_datacenter:
+    hostname: "{{ vmware.vcenter_fqdn }}"
+    username: "{{ vmware.vcenter_admin_user }}"
+    password: "{{ vault_vcenter_admin_password }}"
+    validate_certs: "{{ vmware.ssl_verify | default(false) }}"
+    datacenter_name: "{{ vmware.datacenter_name | default('Datacenter') }}"
+    state: present
+  register: datacenter_create
+  when: datacenter_info.datacenters | length == 0
+
+- name: Get HyperFlex cluster info from vSphere
+  community.vmware.vmware_cluster_info:
+    hostname: "{{ vmware.vcenter_fqdn }}"
+    username: "{{ vmware.vcenter_admin_user }}"
+    password: "{{ vault_vcenter_admin_password }}"
+    validate_certs: "{{ vmware.ssl_verify | default(false) }}"
+    datacenter: "{{ vmware.datacenter_name | default('Datacenter') }}"
+  register: cluster_info
+
+- name: Configure vSphere HA
+  community.vmware.vmware_cluster_ha:
+    hostname: "{{ vmware.vcenter_fqdn }}"
+    username: "{{ vmware.vcenter_admin_user }}"
+    password: "{{ vault_vcenter_admin_password }}"
+    validate_certs: "{{ vmware.ssl_verify | default(false) }}"
+    datacenter: "{{ vmware.datacenter_name | default('Datacenter') }}"
+    cluster_name: "{{ hyperflex.cluster_name }}"
+    enable: "{{ vmware.ha_enabled | default(true) }}"
+    ha_host_monitoring: enabled
+    ha_vm_monitoring: vmMonitoringOnly
+    advanced_settings:
+      das.isolationaddress0: "{{ infrastructure.gateway | default(infrastructure.dns_primary) }}"
+  when: vmware.ha_enabled | default(true)
+
+- name: Configure vSphere DRS
+  community.vmware.vmware_cluster_drs:
+    hostname: "{{ vmware.vcenter_fqdn }}"
+    username: "{{ vmware.vcenter_admin_user }}"
+    password: "{{ vault_vcenter_admin_password }}"
+    validate_certs: "{{ vmware.ssl_verify | default(false) }}"
+    datacenter: "{{ vmware.datacenter_name | default('Datacenter') }}"
+    cluster_name: "{{ hyperflex.cluster_name }}"
+    enable: "{{ vmware.drs_enabled | default(true) }}"
+    drs_default_vm_behavior: "{{ vmware.drs_level | default('fullyAutomated') }}"
+    drs_enable_vm_behavior_overrides: true
+  when: vmware.drs_enabled | default(true)
+
+- name: Display vSphere integration status
+  ansible.builtin.debug:
+    msg: |
+      vSphere Integration Status:
+      - vCenter: {{ vmware.vcenter_fqdn }}
+      - Datacenter: {{ vmware.datacenter_name | default('Datacenter') }}
+      - Cluster: {{ hyperflex.cluster_name }}
+      - HA Enabled: {{ vmware.ha_enabled | default(true) }}
+      - DRS Enabled: {{ vmware.drs_enabled | default(true) }}
+      - DRS Level: {{ vmware.drs_level | default('fullyAutomated') }}

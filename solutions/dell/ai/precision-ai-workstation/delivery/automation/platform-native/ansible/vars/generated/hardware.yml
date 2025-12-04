@@ -1,0 +1,19 @@
+#------------------------------------------------------------------------------
+# Hardware Configuration
+#------------------------------------------------------------------------------
+# Generated from configuration.csv
+#
+# To regenerate: python generate-ansible-vars.py /path/to/solution
+# DO NOT EDIT - Changes will be overwritten on regeneration
+#------------------------------------------------------------------------------
+
+hardware:
+  workstation_count: 10
+  workstation_model: "Precision 7960"
+  gpu_model: "RTX A6000"
+  gpu_memory_gb: 48
+  cpu_model: "Xeon Gold 6430"
+  cpu_cores: 64
+  ram_gb: 512
+  nvme_size_tb: 4
+  nvme_speed_mbps: 7000

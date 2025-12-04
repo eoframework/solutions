@@ -1,0 +1,10 @@
+---
+#------------------------------------------------------------------------------
+# Role: vault-integration - Default Variables
+#------------------------------------------------------------------------------
+
+# Vault token TTL for automation
+vault_token_ttl: "1h"
+
+# Secret engine type
+vault_secret_engine: "kv-v2"

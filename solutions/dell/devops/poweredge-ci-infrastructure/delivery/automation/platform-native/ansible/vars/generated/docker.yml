@@ -1,0 +1,12 @@
+#------------------------------------------------------------------------------
+# Docker Configuration
+#------------------------------------------------------------------------------
+# Generated from configuration.csv
+#
+# To regenerate: python generate-ansible-vars.py /path/to/solution
+# DO NOT EDIT - Changes will be overwritten on regeneration
+#------------------------------------------------------------------------------
+
+docker:
+  version: "Docker Enterprise 24.0"
+  registry_enabled: true

@@ -1,0 +1,172 @@
+---
+# mist-site-setup.yml - Configure Mist AI Network sites and WLANs
+# Uses Mist Cloud REST API for configuration
+
+- name: Configure Mist AI Network
+  hosts: localhost
+  gather_facts: no
+  connection: local
+
+  vars_files:
+    - "{{ playbook_dir }}/../vars/common.yml"
+    - "{{ playbook_dir }}/../vars/secrets.yml"
+
+  tasks:
+    #==========================================================================
+    # AUTHENTICATION
+    #==========================================================================
+    - name: Authenticate to Mist Cloud
+      ansible.builtin.uri:
+        url: "{{ mist.api_url }}/self"
+        method: GET
+        headers:
+          Authorization: "Token {{ mist_api_token }}"
+        validate_certs: yes
+        status_code: 200
+      register: mist_auth
+      tags: [always]
+
+    - name: Set organization ID
+      ansible.builtin.set_fact:
+        org_id: "{{ mist_org_id }}"
+      tags: [always]
+
+    #==========================================================================
+    # SITE CREATION
+    #==========================================================================
+    - name: Check if site exists
+      ansible.builtin.uri:
+        url: "{{ mist.api_url }}/orgs/{{ org_id }}/sites"
+        method: GET
+        headers:
+          Authorization: "Token {{ mist_api_token }}"
+        validate_certs: yes
+      register: existing_sites
+      tags: [site]
+
+    - name: Find existing site
+      ansible.builtin.set_fact:
+        existing_site: "{{ existing_sites.json | selectattr('name', 'equalto', site.name) | list | first | default(none) }}"
+      tags: [site]
+
+    - name: Create site
+      ansible.builtin.uri:
+        url: "{{ mist.api_url }}/orgs/{{ org_id }}/sites"
+        method: POST
+        headers:
+          Authorization: "Token {{ mist_api_token }}"
+          Content-Type: application/json
+        body_format: json
+        body:
+          name: "{{ site.name }}"
+          timezone: "{{ mist.timezone }}"
+          country_code: "{{ mist.country_code }}"
+          address: "{{ site.address | default('') }}"
+          latlng:
+            lat: "{{ site.latitude | default(0) }}"
+            lng: "{{ site.longitude | default(0) }}"
+        status_code: [200, 201]
+      register: site_result
+      when: existing_site is none
+      tags: [site]
+
+    - name: Set site ID
+      ansible.builtin.set_fact:
+        site_id: "{{ existing_site.id if existing_site else site_result.json.id }}"
+      tags: [site, wlans]
+
+    - name: Display site info
+      ansible.builtin.debug:
+        msg: "Site '{{ site.name }}' ID: {{ site_id }}"
+      tags: [site]
+
+    #==========================================================================
+    # WLAN CONFIGURATION
+    #==========================================================================
+    - name: Configure WLANs
+      ansible.builtin.uri:
+        url: "{{ mist.api_url }}/sites/{{ site_id }}/wlans"
+        method: POST
+        headers:
+          Authorization: "Token {{ mist_api_token }}"
+          Content-Type: application/json
+        body_format: json
+        body:
+          ssid: "{{ item.value.ssid }}"
+          enabled: "{{ item.value.enabled | default(true) }}"
+          auth:
+            type: "{{ item.value.auth_type }}"
+            psk: "{{ item.value.psk | default(omit) }}"
+          vlan_id: "{{ item.value.vlan_id }}"
+          band: "{{ item.value.band | default('both') }}"
+          hide_ssid: "{{ item.value.hidden | default(false) }}"
+        status_code: [200, 201, 400]
+      loop: "{{ wlans | dict2items }}"
+      loop_control:
+        label: "{{ item.key }} - {{ item.value.ssid }}"
+      when: item.value.enabled | default(true)
+      register: wlan_results
+      tags: [wlans]
+
+    #==========================================================================
+    # RF PROFILE
+    #==========================================================================
+    - name: Configure RF Profile
+      ansible.builtin.uri:
+        url: "{{ mist.api_url }}/sites/{{ site_id }}/rftemplate"
+        method: PUT
+        headers:
+          Authorization: "Token {{ mist_api_token }}"
+          Content-Type: application/json
+        body_format: json
+        body:
+          name: "{{ solution.environment }}-rf-template"
+          band_24:
+            enabled: true
+            allow_rrm_disable: false
+            ant_gain: 0
+            power_min: "{{ rf.band_24.power_min }}"
+            power_max: "{{ rf.band_24.power_max }}"
+          band_5:
+            enabled: true
+            allow_rrm_disable: false
+            ant_gain: 0
+            power_min: "{{ rf.band_5.power_min }}"
+            power_max: "{{ rf.band_5.power_max }}"
+        status_code: [200, 201]
+      tags: [rf]
+
+    #==========================================================================
+    # SITE SETTINGS
+    #==========================================================================
+    - name: Configure site settings
+      ansible.builtin.uri:
+        url: "{{ mist.api_url }}/sites/{{ site_id }}/setting"
+        method: PUT
+        headers:
+          Authorization: "Token {{ mist_api_token }}"
+          Content-Type: application/json
+        body_format: json
+        body:
+          auto_upgrade:
+            enabled: true
+            version: "{{ operations.firmware_version | default('default') }}"
+            time_of_day: "{{ operations.upgrade_window | split('-') | first }}"
+          engagement:
+            enabled: "{{ location.enabled | default(false) }}"
+        status_code: [200, 201]
+      tags: [settings]
+
+  post_tasks:
+    - name: Display configuration summary
+      ansible.builtin.debug:
+        msg: |
+          ========================================
+          MIST CONFIGURATION SUMMARY
+          ========================================
+          Site: {{ site.name }}
+          Site ID: {{ site_id }}
+          Environment: {{ solution.environment }}
+          WLANs configured: {{ wlans | length }}
+          ========================================
+      tags: [always]

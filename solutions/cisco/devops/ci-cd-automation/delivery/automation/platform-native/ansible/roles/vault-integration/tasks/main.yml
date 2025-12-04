@@ -1,0 +1,50 @@
+---
+#------------------------------------------------------------------------------
+# Role: vault-integration
+# Purpose: Configure HashiCorp Vault for secrets management
+#------------------------------------------------------------------------------
+
+- name: Verify Vault connectivity
+  ansible.builtin.uri:
+    url: "{{ vault.address }}/v1/sys/health"
+    method: GET
+    validate_certs: true
+    status_code: [200, 429, 472, 473, 501, 503]
+    timeout: 30
+  register: vault_health
+
+- name: Display Vault status
+  ansible.builtin.debug:
+    msg: "Vault status: {{ 'HEALTHY' if vault_health.status == 200 else 'CHECK REQUIRED' }}"
+
+- name: Authenticate to Vault using AppRole
+  ansible.builtin.uri:
+    url: "{{ vault.address }}/v1/auth/approle/login"
+    method: POST
+    body_format: json
+    body:
+      role_id: "{{ vault_role_id }}"
+      secret_id: "{{ vault_secret_id }}"
+    validate_certs: true
+    status_code: 200
+    timeout: 30
+  register: vault_auth
+  no_log: true
+  when: vault.auth_method == 'approle'
+
+- name: Verify secret path access
+  ansible.builtin.uri:
+    url: "{{ vault.address }}/v1/{{ vault.secret_path }}"
+    method: GET
+    headers:
+      X-Vault-Token: "{{ vault_auth.json.auth.client_token }}"
+    validate_certs: true
+    status_code: [200, 404]
+    timeout: 30
+  register: vault_path_check
+  no_log: true
+  when: vault_auth is succeeded
+
+- name: Vault integration complete
+  ansible.builtin.debug:
+    msg: "Vault integration configured for path: {{ vault.secret_path }}"

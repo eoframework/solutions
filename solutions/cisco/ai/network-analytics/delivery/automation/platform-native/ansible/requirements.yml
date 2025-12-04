@@ -1,0 +1,30 @@
+#------------------------------------------------------------------------------
+# Ansible Galaxy Requirements
+#------------------------------------------------------------------------------
+# Install with: ansible-galaxy install -r requirements.yml
+#------------------------------------------------------------------------------
+
+collections:
+  # Cisco DNA Center Collection
+  - name: cisco.dnac
+    version: ">=6.7.0"
+
+  # Cisco IOS Collection
+  - name: cisco.ios
+    version: ">=5.0.0"
+
+  # Cisco NX-OS Collection
+  - name: cisco.nxos
+    version: ">=5.0.0"
+
+  # Ansible Network Common
+  - name: ansible.netcommon
+    version: ">=5.0.0"
+
+  # Ansible Utils (for data manipulation)
+  - name: ansible.utils
+    version: ">=2.10.0"
+
+  # Community General (for various modules)
+  - name: community.general
+    version: ">=7.0.0"

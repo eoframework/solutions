@@ -1,0 +1,15 @@
+# Ansible Collection Requirements for AAP Automation
+---
+collections:
+  - name: awx.awx
+    version: ">=22.0.0"
+  - name: ansible.controller
+    version: ">=4.5.0"
+  - name: infra.ah_configuration
+    version: ">=2.0.0"
+  - name: redhat.rhel_system_roles
+    version: ">=1.21.0"
+  - name: ansible.posix
+    version: ">=1.5.0"
+  - name: community.general
+    version: ">=7.0.0"

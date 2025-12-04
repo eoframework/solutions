@@ -1,0 +1,61 @@
+---
+#------------------------------------------------------------------------------
+# Role: intersight-setup
+# Purpose: Configure Intersight API connectivity and validate access
+#------------------------------------------------------------------------------
+
+- name: Validate Intersight API key file exists
+  ansible.builtin.stat:
+    path: "{{ intersight.api_key_file }}"
+  register: api_key_stat
+  when: intersight.api_key_file is defined
+
+- name: Authenticate to Intersight
+  cisco.intersight.intersight_info:
+    api_private_key: "{{ vault_intersight_api_key }}"
+    api_key_id: "{{ intersight.api_key_id }}"
+    api_uri: /iam/Sessions
+    query_params:
+      $top: 1
+  register: intersight_auth
+  retries: 3
+  delay: 5
+  until: intersight_auth is succeeded
+
+- name: Set Intersight connection facts
+  ansible.builtin.set_fact:
+    intersight_connected: true
+    intersight_session: "{{ intersight_auth }}"
+    cacheable: yes
+
+- name: Get Intersight organization
+  cisco.intersight.intersight_info:
+    api_private_key: "{{ vault_intersight_api_key }}"
+    api_key_id: "{{ intersight.api_key_id }}"
+    api_uri: /organization/Organizations
+    query_params:
+      $filter: "Name eq '{{ intersight.organization }}'"
+  register: org_info
+
+- name: Set organization MOID
+  ansible.builtin.set_fact:
+    intersight_org_moid: "{{ org_info.api_response[0].Moid }}"
+  when: org_info.api_response | length > 0
+
+- name: Verify HyperFlex device connector status
+  cisco.intersight.intersight_info:
+    api_private_key: "{{ vault_intersight_api_key }}"
+    api_key_id: "{{ intersight.api_key_id }}"
+    api_uri: /asset/DeviceRegistrations
+    query_params:
+      $filter: "ConnectionStatus eq 'Connected'"
+  register: device_connectors
+
+- name: Display Intersight connection status
+  ansible.builtin.debug:
+    msg: |
+      Intersight Connection Status:
+      - Endpoint: {{ intersight.endpoint }}
+      - Organization: {{ intersight.organization }}
+      - Organization MOID: {{ intersight_org_moid | default('Not found') }}
+      - Connected Devices: {{ device_connectors.api_response | length }}

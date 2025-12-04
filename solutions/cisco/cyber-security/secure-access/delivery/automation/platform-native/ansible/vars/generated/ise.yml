@@ -1,0 +1,20 @@
+#------------------------------------------------------------------------------
+# Ise Configuration
+#------------------------------------------------------------------------------
+# Generated from configuration.csv on 2025-12-02 23:53:45
+#
+# To regenerate: python generate-ansible-vars.py /path/to/solution
+# DO NOT EDIT - Changes will be overwritten on regeneration
+#------------------------------------------------------------------------------
+
+ise:
+  ad_join_point: client.local
+  admin_password: '{{ vault_ise_admin_password }}'
+  admin_user: ise-admin
+  guest_portal: true
+  posture_policy: corporate-compliance
+  primary_pan: ise-pan-01.client.local
+  psn_nodes: ise-psn-01.client.local,ise-psn-02.client.local
+  radius_secret: '{{ vault_ise_radius_secret }}'
+  secondary_pan: ise-pan-02.client.local
+  version: '3.3'

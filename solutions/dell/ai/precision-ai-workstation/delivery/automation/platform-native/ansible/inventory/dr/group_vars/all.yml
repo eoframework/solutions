@@ -1,0 +1,29 @@
+# Dell Precision AI Workstation - DR Variables
+# EO Framework - Dell AI Solutions
+# N/A - Workstation infrastructure does not require DR deployment
+
+---
+#=============================================================================
+# PROJECT METADATA
+#=============================================================================
+solution:
+  name: precision-ai-workstation
+  abbr: paw
+  provider: dell
+  category: ai
+
+environment: dr
+datacenter_name: "N/A - Workstation Infrastructure"
+
+#=============================================================================
+# NOTE
+#=============================================================================
+# Dell Precision AI Workstation infrastructure does not have a traditional
+# DR deployment model. Data protection is achieved through:
+# - Dell PowerScale replication between sites
+# - Local workstation backups
+# - Cloud dataset sync (if applicable)
+#
+# This inventory exists to maintain consistency with the EO Framework
+# three-environment pattern but contains no workstation hosts.
+#=============================================================================

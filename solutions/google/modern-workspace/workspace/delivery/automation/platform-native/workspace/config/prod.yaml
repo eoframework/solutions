@@ -1,0 +1,138 @@
+# Google Workspace Production Configuration
+# Generated from configuration.csv Production column
+# EO Framework - Google Workspace Solution
+
+# Credentials
+credentials_path: config/credentials.json
+
+# Solution Identity
+solution:
+  name: google-workspace
+  abbr: gws
+  provider_name: google
+  category_name: modern-workspace
+
+ownership:
+  cost_center: CC-12345
+  owner_email: workspace-admin@example.com
+  project_code: PRJ-GWS-001
+
+# Workspace Configuration
+workspace:
+  domain: example.com
+  customer_id: "[CUSTOMER_ID]"
+  edition: Business Plus
+  user_count: 500
+  storage_per_user: "5 TB"
+  admin_email: admin@example.com
+
+# Migration Settings
+migration:
+  source_system: Exchange 2016
+  mailbox_count: 500
+  mailbox_total_gb: 2500
+  mailbox_avg_gb: 5
+  file_source: Windows File Server
+  file_total_gb: 3000
+  distribution_lists: 150
+  pilot_users: 25
+  waves: 5
+  users_per_wave: 95
+  coexistence_weeks: 4
+  tool: GWMT
+
+# Identity Configuration
+identity:
+  sso_enabled: true
+  idp_type: Azure AD
+  idp_entity_id: "[IDP_ENTITY_ID]"
+  idp_sso_url: "[IDP_SSO_URL]"
+  idp_certificate: "[IDP_CERT]"
+  mfa_enabled: true
+  mfa_enforcement: ENFORCED
+  mfa_methods: Any
+  directory_sync_enabled: true
+  gcds_sync_interval: "4 hours"
+
+# Security Configuration
+security:
+  dlp_enabled: true
+  dlp_rules_count: 15
+  dlp_pii_detection: true
+  dlp_financial_detection: true
+  dlp_action: "Warn and Block"
+  vault_enabled: true
+  vault_retention_years: 7
+  vault_gmail_retention: true
+  vault_drive_retention: true
+  vault_legal_hold_enabled: true
+  mobile_management: Advanced
+  mdm_require_passcode: true
+  mdm_passcode_length: 6
+  mdm_remote_wipe: true
+  mdm_managed_devices: 300
+  context_aware_access: true
+
+# Applications
+applications:
+  gmail_enabled: true
+  gmail_storage_gb: 30
+  drive_enabled: true
+  drive_shared_drives: 15
+  meet_enabled: true
+  meet_recording: true
+  meet_max_participants: 500
+  chat_enabled: true
+
+# Sharing Policies
+sharing:
+  external_sharing: Whitelist
+  allow_domains:
+    - partner.com
+    - vendor.com
+  link_sharing_default: Domain
+  file_access_checker: true
+
+# Organizational Units
+org_units:
+  root: /
+  sales: /Sales
+  marketing: /Marketing
+  operations: /Operations
+  finance: /Finance
+  executive: /Executive
+
+# Groups
+groups:
+  create_default_groups: true
+  default_groups:
+    - all-users
+    - workspace-admins
+    - drive-managers
+    - vault-users
+  external_members_allowed: false
+
+# Training
+training:
+  admin_training_hours: 8
+  end_user_sessions: 10
+  materials_included: true
+  change_champions: 10
+
+# Hypercare
+hypercare:
+  duration_days: 30
+  support_hours: "8AM-6PM"
+  response_time_hours: 4
+
+# Budget
+budget:
+  license_cost_monthly: 9000
+  professional_services: 38400
+  training_budget: 5000
+
+# Automation
+automation:
+  deployment_method: Platform-Native
+  gam_enabled: true
+  admin_sdk_enabled: true

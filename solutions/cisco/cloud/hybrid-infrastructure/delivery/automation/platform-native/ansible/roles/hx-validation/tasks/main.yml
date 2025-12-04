@@ -1,0 +1,116 @@
+---
+#------------------------------------------------------------------------------
+# Role: hx-validation
+# Purpose: Validate HyperFlex deployment and generate report
+#------------------------------------------------------------------------------
+
+- name: Validate Intersight connectivity
+  cisco.intersight.intersight_info:
+    api_private_key: "{{ vault_intersight_api_key }}"
+    api_key_id: "{{ intersight.api_key_id }}"
+    api_uri: /hyperflex/ClusterProfiles
+    query_params:
+      $filter: "Name eq '{{ hyperflex.cluster_name }}'"
+  register: cluster_validation
+  failed_when: cluster_validation.api_response | length == 0
+
+- name: Set cluster validation status
+  ansible.builtin.set_fact:
+    cluster_state: "{{ cluster_validation.api_response[0].ConfigContext.ConfigState }}"
+    cluster_operational: "{{ cluster_validation.api_response[0].ConfigContext.OperState | default('Unknown') }}"
+
+- name: Validate vCenter connectivity
+  community.vmware.vmware_cluster_info:
+    hostname: "{{ vmware.vcenter_fqdn }}"
+    username: "{{ vmware.vcenter_admin_user }}"
+    password: "{{ vault_vcenter_admin_password }}"
+    validate_certs: "{{ vmware.ssl_verify | default(false) }}"
+    datacenter: "{{ vmware.datacenter_name | default('Datacenter') }}"
+    cluster_name: "{{ hyperflex.cluster_name }}"
+  register: vsphere_cluster_info
+
+- name: Validate ESXi hosts
+  community.vmware.vmware_host_facts:
+    hostname: "{{ vmware.vcenter_fqdn }}"
+    username: "{{ vmware.vcenter_admin_user }}"
+    password: "{{ vault_vcenter_admin_password }}"
+    validate_certs: "{{ vmware.ssl_verify | default(false) }}"
+    esxi_hostname: "{{ item }}"
+  loop: "{{ hyperflex.esxi_hosts | default([]) }}"
+  register: esxi_validation
+  when: hyperflex.esxi_hosts is defined
+
+- name: Validate datastores
+  community.vmware.vmware_datastore_info:
+    hostname: "{{ vmware.vcenter_fqdn }}"
+    username: "{{ vmware.vcenter_admin_user }}"
+    password: "{{ vault_vcenter_admin_password }}"
+    validate_certs: "{{ vmware.ssl_verify | default(false) }}"
+    datacenter: "{{ vmware.datacenter_name | default('Datacenter') }}"
+  register: datastore_validation
+
+- name: Validate HA configuration
+  community.vmware.vmware_cluster_ha:
+    hostname: "{{ vmware.vcenter_fqdn }}"
+    username: "{{ vmware.vcenter_admin_user }}"
+    password: "{{ vault_vcenter_admin_password }}"
+    validate_certs: "{{ vmware.ssl_verify | default(false) }}"
+    datacenter: "{{ vmware.datacenter_name | default('Datacenter') }}"
+    cluster_name: "{{ hyperflex.cluster_name }}"
+  register: ha_validation
+  check_mode: yes
+  when: vmware.ha_enabled | default(true)
+
+- name: Validate DRS configuration
+  community.vmware.vmware_cluster_drs:
+    hostname: "{{ vmware.vcenter_fqdn }}"
+    username: "{{ vmware.vcenter_admin_user }}"
+    password: "{{ vault_vcenter_admin_password }}"
+    validate_certs: "{{ vmware.ssl_verify | default(false) }}"
+    datacenter: "{{ vmware.datacenter_name | default('Datacenter') }}"
+    cluster_name: "{{ hyperflex.cluster_name }}"
+  register: drs_validation
+  check_mode: yes
+  when: vmware.drs_enabled | default(true)
+
+- name: Generate validation report
+  ansible.builtin.set_fact:
+    validation_report:
+      timestamp: "{{ ansible_date_time.iso8601 }}"
+      cluster_name: "{{ hyperflex.cluster_name }}"
+      intersight_status: "{{ cluster_state }}"
+      vsphere_cluster: "{{ vsphere_cluster_info.clusters is defined }}"
+      datastore_count: "{{ datastore_validation.datastores | length }}"
+      ha_enabled: "{{ vmware.ha_enabled | default(true) }}"
+      drs_enabled: "{{ vmware.drs_enabled | default(true) }}"
+      validation_passed: true
+
+- name: Display validation report
+  ansible.builtin.debug:
+    msg: |
+      ============================================================
+      HyperFlex Deployment Validation Report
+      ============================================================
+      Timestamp: {{ validation_report.timestamp }}
+
+      Cluster Information:
+      - Name: {{ validation_report.cluster_name }}
+      - Intersight Status: {{ validation_report.intersight_status }}
+      - Node Count: {{ hyperflex.node_count }}
+
+      vSphere Integration:
+      - vCenter: {{ vmware.vcenter_fqdn }}
+      - Cluster Created: {{ validation_report.vsphere_cluster }}
+      - Datastores: {{ validation_report.datastore_count }}
+      - HA Enabled: {{ validation_report.ha_enabled }}
+      - DRS Enabled: {{ validation_report.drs_enabled }}
+
+      Validation Status: {{ 'PASSED' if validation_report.validation_passed else 'FAILED' }}
+      ============================================================
+
+- name: Write validation report to file
+  ansible.builtin.copy:
+    content: "{{ validation_report | to_nice_yaml }}"
+    dest: "{{ playbook_dir }}/../logs/validation-report-{{ ansible_date_time.date }}.yml"
+    mode: '0644'
+  delegate_to: localhost

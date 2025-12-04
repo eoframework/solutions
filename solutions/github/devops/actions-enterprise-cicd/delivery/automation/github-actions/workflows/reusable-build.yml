@@ -1,0 +1,78 @@
+name: Reusable Build Workflow
+
+on:
+  workflow_call:
+    inputs:
+      node-version:
+        description: 'Node.js version'
+        required: false
+        type: string
+        default: '20'
+      upload-artifacts:
+        description: 'Upload build artifacts'
+        required: false
+        type: boolean
+        default: true
+      artifact-retention-days:
+        description: 'Artifact retention days'
+        required: false
+        type: number
+        default: 7
+    outputs:
+      artifact-name:
+        description: 'Build artifact name'
+        value: ${{ jobs.build.outputs.artifact-name }}
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    name: Build Application
+    runs-on: self-hosted
+    outputs:
+      artifact-name: build-${{ github.sha }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ inputs.node-version }}
+          cache: 'npm'
+
+      - name: Cache dependencies
+        uses: actions/cache@v3
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run lint
+        run: npm run lint
+
+      - name: Run tests
+        run: npm test
+
+      - name: Build application
+        run: npm run build
+
+      - name: Upload build artifacts
+        if: inputs.upload-artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: build-${{ github.sha }}
+          path: dist/
+          retention-days: ${{ inputs.artifact-retention-days }}
+
+      - name: Build summary
+        run: |
+          echo "### Build Summary" >> $GITHUB_STEP_SUMMARY
+          echo "- Node version: ${{ inputs.node-version }}" >> $GITHUB_STEP_SUMMARY
+          echo "- Build status: Success" >> $GITHUB_STEP_SUMMARY
+          echo "- Artifact: build-${{ github.sha }}" >> $GITHUB_STEP_SUMMARY

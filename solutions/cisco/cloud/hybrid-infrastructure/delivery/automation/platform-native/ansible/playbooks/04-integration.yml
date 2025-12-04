@@ -1,0 +1,124 @@
+---
+#------------------------------------------------------------------------------
+# Phase 2: Integration - External System Integrations
+#------------------------------------------------------------------------------
+# This playbook handles integrations including:
+#   - Cisco Intersight
+#   - vSphere/vCenter
+#   - Backup solutions
+#   - Monitoring
+#------------------------------------------------------------------------------
+
+- name: Phase 2 - External Integrations
+  hosts: localhost
+  gather_facts: no
+  tags: [integration]
+
+  vars_files:
+    - "{{ playbook_dir }}/../vars/generated/project.yml"
+    - "{{ playbook_dir }}/../vars/generated/hyperflex.yml"
+    - "{{ playbook_dir }}/../vars/generated/intersight.yml"
+    - "{{ playbook_dir }}/../vars/generated/vmware.yml"
+    - "{{ playbook_dir }}/../vars/generated/backup.yml"
+    - "{{ playbook_dir }}/../vars/generated/monitoring.yml"
+    - "{{ playbook_dir }}/../vars/generated/notifications.yml"
+    - "{{ playbook_dir }}/../vars/secrets.yml"
+
+  tasks:
+    #--------------------------------------------------------------------------
+    # Cisco Intersight Integration
+    #--------------------------------------------------------------------------
+    - name: Display Intersight configuration
+      ansible.builtin.debug:
+        msg: |
+          Cisco Intersight Integration:
+          - Enabled: {{ intersight.enabled }}
+          - Region: {{ intersight.region }}
+          - License Tier: {{ intersight.license_tier }}
+
+          Intersight Features:
+          - Cloud-based management
+          - Firmware recommendations
+          - HyperFlex health monitoring
+          - Proactive support
+      when: intersight.enabled | bool
+
+    - name: Configure Intersight device connector
+      ansible.builtin.debug:
+        msg: |
+          Intersight Device Connector Setup:
+          1. Access HyperFlex Connect UI: https://{{ hyperflex.cluster_ip }}
+          2. Navigate to: Settings > Device Connector
+          3. Claim device in Intersight: https://intersight.com
+
+          Note: Device connector requires outbound HTTPS connectivity.
+      when: intersight.enabled | bool
+
+    #--------------------------------------------------------------------------
+    # vSphere Integration
+    #--------------------------------------------------------------------------
+    - name: Display vSphere integration
+      ansible.builtin.debug:
+        msg: |
+          vSphere Integration:
+          - vCenter: {{ vmware.vcenter_ip }}
+          - Datacenter: {{ vmware.datacenter }}
+          - Cluster: {{ vmware.cluster_name }}
+          - DVS: {{ vmware.dvs_name }}
+
+          HyperFlex Plugin:
+          - Plugin registered in vCenter
+          - Access via: vCenter > HyperFlex tab
+
+    #--------------------------------------------------------------------------
+    # Backup Integration
+    #--------------------------------------------------------------------------
+    - name: Display backup configuration
+      ansible.builtin.debug:
+        msg: |
+          Backup Configuration:
+          - Type: {{ backup.type }}
+          - Target: {{ backup.target }}
+          - Retention: {{ backup.retention_days }} days
+          - Schedule: {{ backup.schedule }}
+
+          Native HyperFlex Snapshots:
+          - Local snapshots for rapid recovery
+          - Replication for DR (if configured)
+
+    #--------------------------------------------------------------------------
+    # Monitoring Integration
+    #--------------------------------------------------------------------------
+    - name: Display monitoring configuration
+      ansible.builtin.debug:
+        msg: |
+          Monitoring Configuration:
+          - Syslog Server: {{ monitoring.syslog_server }}:{{ monitoring.syslog_port }}
+          - SNMP Community: Configured
+          - SNMP Trap Destination: {{ monitoring.snmp_trap_server }}
+
+    #--------------------------------------------------------------------------
+    # Email Notifications
+    #--------------------------------------------------------------------------
+    - name: Display notification configuration
+      ansible.builtin.debug:
+        msg: |
+          Email Notification Configuration:
+          - SMTP Server: {{ notifications.smtp_server }}
+          - From: {{ notifications.smtp_from }}
+          - Alert Recipients: {{ notifications.alert_recipients }}
+
+    #--------------------------------------------------------------------------
+    # Summary
+    #--------------------------------------------------------------------------
+    - name: Integration summary
+      ansible.builtin.debug:
+        msg: |
+          ============================================================
+          Phase 2 - External Integrations Complete
+          ============================================================
+          Intersight: {{ 'Enabled' if intersight.enabled else 'Disabled' }}
+          vSphere: {{ vmware.vcenter_ip }}
+          Backup: {{ backup.type }}
+          Syslog: {{ monitoring.syslog_server }}:{{ monitoring.syslog_port }}
+          ============================================================

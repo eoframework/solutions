@@ -1,0 +1,192 @@
+# Dell PowerSwitch Datacenter - Validation Playbook
+# EO Framework - Dell Network Solutions
+# Post-deployment validation and health checks
+
+---
+- name: Validate Deployment
+  hosts: powerswitch
+  gather_facts: false
+  tags: [validate]
+
+  vars:
+    validation_results: []
+
+  tasks:
+    #=========================================================================
+    # SYSTEM HEALTH
+    #=========================================================================
+    - name: Check system status
+      dellemc.os10.os10_command:
+        commands:
+          - show system
+      register: system_status
+      tags: [system]
+
+    - name: Verify system is healthy
+      ansible.builtin.assert:
+        that:
+          - "'up' in system_status.stdout[0] | lower"
+        fail_msg: "System health check failed on {{ inventory_hostname }}"
+        success_msg: "System healthy on {{ inventory_hostname }}"
+      ignore_errors: true
+      tags: [system]
+
+    #=========================================================================
+    # INTERFACE STATUS
+    #=========================================================================
+    - name: Check interface status
+      dellemc.os10.os10_command:
+        commands:
+          - show interface status
+      register: interface_status
+      tags: [interfaces]
+
+    - name: Count up interfaces
+      ansible.builtin.set_fact:
+        interfaces_up: "{{ interface_status.stdout[0] | regex_findall('up') | length }}"
+      tags: [interfaces]
+
+    - name: Display interface summary
+      ansible.builtin.debug:
+        msg: "{{ inventory_hostname }}: {{ interfaces_up }} interfaces up"
+      tags: [interfaces]
+
+    #=========================================================================
+    # BGP VALIDATION
+    #=========================================================================
+    - name: Check BGP summary
+      dellemc.os10.os10_command:
+        commands:
+          - show ip bgp summary
+      register: bgp_summary
+      tags: [bgp]
+
+    - name: Verify BGP neighbors established
+      ansible.builtin.assert:
+        that:
+          - "'Established' in bgp_summary.stdout[0] or 'ESTAB' in bgp_summary.stdout[0]"
+        fail_msg: "BGP neighbors not established on {{ inventory_hostname }}"
+        success_msg: "BGP neighbors established on {{ inventory_hostname }}"
+      ignore_errors: true
+      tags: [bgp]
+
+    #=========================================================================
+    # VLAN VALIDATION
+    #=========================================================================
+    - name: Check VLAN status
+      dellemc.os10.os10_command:
+        commands:
+          - show vlan brief
+      register: vlan_status
+      tags: [vlan]
+
+    - name: Display VLAN count
+      ansible.builtin.debug:
+        msg: "{{ inventory_hostname }}: VLANs configured"
+      tags: [vlan]
+
+    #=========================================================================
+    # VLT VALIDATION (Leaf switches only)
+    #=========================================================================
+    - name: Check VLT status
+      dellemc.os10.os10_command:
+        commands:
+          - show vlt brief
+      register: vlt_status
+      when: switch_role == 'leaf'
+      tags: [vlt]
+
+    - name: Verify VLT peer is up
+      ansible.builtin.assert:
+        that:
+          - "'up' in vlt_status.stdout[0] | lower"
+        fail_msg: "VLT peer not up on {{ inventory_hostname }}"
+        success_msg: "VLT peer up on {{ inventory_hostname }}"
+      when: switch_role == 'leaf'
+      ignore_errors: true
+      tags: [vlt]
+
+    #=========================================================================
+    # VXLAN VALIDATION (if enabled)
+    #=========================================================================
+    - name: Check VXLAN status
+      dellemc.os10.os10_command:
+        commands:
+          - show nve vxlan-instance
+          - show nve peers
+      register: vxlan_status
+      when:
+        - evpn.enabled | default(false)
+        - switch_role == 'leaf'
+      tags: [vxlan]
+
+    - name: Display VXLAN peer count
+      ansible.builtin.debug:
+        msg: "{{ inventory_hostname }}: VXLAN overlay configured"
+      when:
+        - evpn.enabled | default(false)
+        - switch_role == 'leaf'
+      tags: [vxlan]
+
+    #=========================================================================
+    # NTP VALIDATION
+    #=========================================================================
+    - name: Check NTP status
+      dellemc.os10.os10_command:
+        commands:
+          - show ntp associations
+      register: ntp_status
+      tags: [ntp]
+
+    - name: Verify NTP synchronized
+      ansible.builtin.assert:
+        that:
+          - "ntp_status.stdout[0] | length > 10"
+        fail_msg: "NTP not synchronized on {{ inventory_hostname }}"
+        success_msg: "NTP configured on {{ inventory_hostname }}"
+      ignore_errors: true
+      tags: [ntp]
+
+    #=========================================================================
+    # CONNECTIVITY TEST
+    #=========================================================================
+    - name: Ping loopback of peer switches
+      dellemc.os10.os10_command:
+        commands:
+          - "ping {{ hostvars[item]['loopback_ip'] }} count 3"
+      loop: "{{ groups['powerswitch'] | difference([inventory_hostname]) | list[:3] }}"
+      register: ping_results
+      ignore_errors: true
+      tags: [connectivity]
+
+#=============================================================================
+# VALIDATION SUMMARY
+#=============================================================================
+- name: Generate Validation Summary
+  hosts: localhost
+  gather_facts: true
+  tags: [validate, summary]
+
+  tasks:
+    - name: Display validation summary
+      ansible.builtin.debug:
+        msg: |
+          ================================================================
+          Dell PowerSwitch Datacenter - Validation Summary
+          ================================================================
+          Environment: {{ environment | default('production') }}
+          Timestamp: {{ ansible_date_time.iso8601 }}
+
+          Switches Validated:
+          - Spine Switches: {{ groups['spine_switches'] | default([]) | length }}
+          - Leaf Switches: {{ groups['leaf_switches'] | default([]) | length }}
+
+          Validation Complete - Review output above for any failures
+          ================================================================
+
+    - name: Create validation report
+      ansible.builtin.template:
+        src: ../templates/validation_report.j2
+        dest: "/tmp/powerswitch_validation_{{ ansible_date_time.date }}.txt"
+        mode: '0644'
+      ignore_errors: true

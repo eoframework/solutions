@@ -1,0 +1,61 @@
+---
+# common.yml - Shared variables across all environments
+# Environment-specific values should be in inventory/*/group_vars/all.yml
+
+#==============================================================================
+# VERIFICATION TARGETS
+#==============================================================================
+verification_targets:
+  - "8.8.8.8"       # Google DNS
+  - "1.1.1.1"       # Cloudflare DNS
+
+#==============================================================================
+# VPN CONFIGURATION
+#==============================================================================
+vpn:
+  enabled: true
+  ike:
+    dh_group: group20
+    encryption: aes-256-gcm
+    authentication: sha384
+    lifetime: 28800
+  ipsec:
+    encryption: aes-256-gcm
+    authentication: sha384
+    lifetime: 3600
+    pfs_group: group20
+
+#==============================================================================
+# DEFAULT ADDRESS BOOK ENTRIES
+#==============================================================================
+address_book_entries:
+  - name: rfc1918-10
+    type: ip-prefix
+    value: "10.0.0.0/8"
+  - name: rfc1918-172
+    type: ip-prefix
+    value: "172.16.0.0/12"
+  - name: rfc1918-192
+    type: ip-prefix
+    value: "192.168.0.0/16"
+
+#==============================================================================
+# ADDRESS SETS
+#==============================================================================
+address_sets:
+  - name: rfc1918-networks
+    member: rfc1918-10
+  - name: rfc1918-networks
+    member: rfc1918-172
+  - name: rfc1918-networks
+    member: rfc1918-192
+
+#==============================================================================
+# DEFAULT SOURCE NAT
+#==============================================================================
+source_nat_rules:
+  - rule_set: nat-internal-to-untrust
+    from_zone: internal
+    to_zone: untrust
+    rule_name: nat-all
+    source: "0.0.0.0/0"

@@ -1,0 +1,13 @@
+email,name,description,members
+# Sample group import template
+# Replace with actual group data before running
+#
+# Columns:
+#   email - Group email address
+#   name - Display name
+#   description - Group description
+#   members - Comma-separated member emails (optional)
+#
+# Example entries:
+# sales-team@example.com,Sales Team,Sales department team,john.doe@example.com|jane.smith@example.com
+# marketing-team@example.com,Marketing Team,Marketing department team,

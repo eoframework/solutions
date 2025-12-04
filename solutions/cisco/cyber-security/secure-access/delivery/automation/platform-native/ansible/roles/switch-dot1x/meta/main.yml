@@ -1,0 +1,18 @@
+---
+galaxy_info:
+  author: EO Framework
+  description: Configure 802.1X on Cisco switches
+  company: Client Organization
+  license: Proprietary
+  min_ansible_version: "2.14"
+  platforms:
+    - name: GenericLinux
+      versions:
+        - all
+  galaxy_tags:
+    - cisco
+    - ios
+    - dot1x
+    - nac
+
+dependencies: []

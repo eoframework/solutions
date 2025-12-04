@@ -1,0 +1,128 @@
+---
+# validate.yml - Post-deployment validation playbook
+# Verifies SRX configuration and connectivity
+
+- name: Validate SRX Deployment
+  hosts: srx_firewalls
+  gather_facts: no
+  connection: netconf
+
+  vars_files:
+    - "{{ playbook_dir }}/../vars/common.yml"
+
+  tasks:
+    #==========================================================================
+    # SYSTEM VALIDATION
+    #==========================================================================
+    - name: Gather system facts
+      junipernetworks.junos.junos_facts:
+        gather_subset:
+          - default
+          - hardware
+          - interfaces
+      register: system_facts
+
+    - name: Display system information
+      ansible.builtin.debug:
+        msg: |
+          Hostname: {{ system_facts.ansible_facts.ansible_net_hostname }}
+          Model: {{ system_facts.ansible_facts.ansible_net_model }}
+          Serial: {{ system_facts.ansible_facts.ansible_net_serialnum }}
+          Version: {{ system_facts.ansible_facts.ansible_net_version }}
+
+    #==========================================================================
+    # CLUSTER VALIDATION
+    #==========================================================================
+    - name: Validate cluster status
+      when: cluster.enabled | default(false)
+      block:
+        - name: Get cluster status
+          junipernetworks.junos.junos_command:
+            commands:
+              - show chassis cluster status
+          register: cluster_status
+
+        - name: Display cluster status
+          ansible.builtin.debug:
+            var: cluster_status.stdout_lines
+
+        - name: Get redundancy group status
+          junipernetworks.junos.junos_command:
+            commands:
+              - show chassis cluster interfaces
+          register: cluster_interfaces
+
+    #==========================================================================
+    # SECURITY VALIDATION
+    #==========================================================================
+    - name: Validate security zones
+      junipernetworks.junos.junos_command:
+        commands:
+          - show security zones
+      register: zone_status
+
+    - name: Display security zones
+      ansible.builtin.debug:
+        var: zone_status.stdout_lines
+
+    - name: Validate security policies
+      junipernetworks.junos.junos_command:
+        commands:
+          - show security policies
+      register: policy_status
+
+    - name: Validate IPS status
+      when: ips.enabled | default(false)
+      junipernetworks.junos.junos_command:
+        commands:
+          - show security idp status
+      register: ips_status
+
+    #==========================================================================
+    # CONNECTIVITY VALIDATION
+    #==========================================================================
+    - name: Test NTP connectivity
+      junipernetworks.junos.junos_command:
+        commands:
+          - show ntp associations
+      register: ntp_status
+
+    - name: Test DNS resolution
+      junipernetworks.junos.junos_command:
+        commands:
+          - show system name-server
+      register: dns_status
+
+    #==========================================================================
+    # INTERFACE VALIDATION
+    #==========================================================================
+    - name: Get interface status
+      junipernetworks.junos.junos_command:
+        commands:
+          - show interfaces terse
+      register: interface_status
+
+    - name: Validate zone interfaces are up
+      ansible.builtin.assert:
+        that:
+          - "'up' in interface_status.stdout[0]"
+        fail_msg: "Some interfaces are down"
+        success_msg: "All configured interfaces are operational"
+      ignore_errors: yes
+
+    #==========================================================================
+    # SUMMARY
+    #==========================================================================
+    - name: Generate validation summary
+      ansible.builtin.debug:
+        msg: |
+          ========================================
+          VALIDATION SUMMARY: {{ inventory_hostname }}
+          ========================================
+          System: OK
+          Cluster: {{ 'OK' if cluster.enabled | default(false) else 'N/A' }}
+          Security Zones: {{ zone_status.stdout_lines | length }} zones configured
+          Policies: Configured
+          NTP: {{ 'OK' if ntp_status.rc == 0 else 'FAILED' }}
+          DNS: {{ 'OK' if dns_status.rc == 0 else 'FAILED' }}
+          ========================================

@@ -1,0 +1,14 @@
+#------------------------------------------------------------------------------
+# Management Configuration
+#------------------------------------------------------------------------------
+# Generated from configuration.csv
+#
+# To regenerate: python generate-ansible-vars.py /path/to/solution
+# DO NOT EDIT - Changes will be overwritten on regeneration
+#------------------------------------------------------------------------------
+
+management:
+  snmp_version: "v3"
+  syslog_server: "[syslog.domain.com]"
+  ntp_server: "[ntp.domain.com]"
+  openmanage_enabled: true

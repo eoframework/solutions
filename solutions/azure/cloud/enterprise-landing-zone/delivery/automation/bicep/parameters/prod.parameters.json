@@ -1,0 +1,137 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "environment": {
+      "value": "prod"
+    },
+    "subscriptionIdConnectivity": {
+      "value": "REPLACE_WITH_CONNECTIVITY_SUBSCRIPTION_ID"
+    },
+    "subscriptionIdIdentity": {
+      "value": "REPLACE_WITH_IDENTITY_SUBSCRIPTION_ID"
+    },
+    "subscriptionIdManagement": {
+      "value": "REPLACE_WITH_MANAGEMENT_SUBSCRIPTION_ID"
+    },
+    "solutionPrefix": {
+      "value": "alz"
+    },
+    "primaryRegion": {
+      "value": "eastus"
+    },
+    "secondaryRegion": {
+      "value": "westus2"
+    },
+    "managementGroupRoot": {
+      "value": "REPLACE_WITH_TENANT_ROOT_GROUP"
+    },
+    "managementGroupPlatform": {
+      "value": "mg-platform"
+    },
+    "managementGroupLandingZones": {
+      "value": "mg-landingzones"
+    },
+    "managementGroupCorp": {
+      "value": "mg-corp"
+    },
+    "managementGroupOnline": {
+      "value": "mg-online"
+    },
+    "vnetHubPrimaryCidr": {
+      "value": "10.0.0.0/16"
+    },
+    "vnetHubSecondaryCidr": {
+      "value": "10.1.0.0/16"
+    },
+    "subnetFirewall": {
+      "value": "10.0.0.0/26"
+    },
+    "subnetGateway": {
+      "value": "10.0.1.0/27"
+    },
+    "subnetBastion": {
+      "value": "10.0.2.0/27"
+    },
+    "subnetManagement": {
+      "value": "10.0.3.0/24"
+    },
+    "firewallSku": {
+      "value": "Premium"
+    },
+    "expressRouteSku": {
+      "value": "Standard"
+    },
+    "expressRouteBandwidth": {
+      "value": 1000
+    },
+    "ddosProtectionEnabled": {
+      "value": true
+    },
+    "keyVaultSku": {
+      "value": "Standard"
+    },
+    "keyVaultSoftDelete": {
+      "value": true
+    },
+    "keyVaultPurgeProtection": {
+      "value": true
+    },
+    "azureAdAdminGroup": {
+      "value": "REPLACE_WITH_ADMIN_GROUP_ID"
+    },
+    "azureAdReaderGroup": {
+      "value": "REPLACE_WITH_READER_GROUP_ID"
+    },
+    "conditionalAccessEnabled": {
+      "value": true
+    },
+    "mfaEnforcement": {
+      "value": true
+    },
+    "pimEnabled": {
+      "value": true
+    },
+    "logAnalyticsRetention": {
+      "value": 90
+    },
+    "logAnalyticsCapacity": {
+      "value": 500
+    },
+    "defenderCloudTier": {
+      "value": "Standard"
+    },
+    "bastionSku": {
+      "value": "Standard"
+    },
+    "bastionScaleUnits": {
+      "value": 2
+    },
+    "tagEnforcement": {
+      "value": true
+    },
+    "requiredTags": {
+      "value": [
+        "CostCenter",
+        "Owner",
+        "Environment",
+        "Application"
+      ]
+    },
+    "alertEmail": {
+      "value": "security-alerts@company.com"
+    },
+    "geoRedundantBackup": {
+      "value": true
+    },
+    "tags": {
+      "value": {
+        "Solution": "Azure Enterprise Landing Zone",
+        "Environment": "Production",
+        "ManagedBy": "Bicep",
+        "CostCenter": "IT-Infrastructure",
+        "Owner": "Platform Team"
+      }
+    }
+  }
+}

@@ -1,0 +1,45 @@
+---
+# Dell SafeID Authentication - RADIUS Configuration Role
+# EO Framework - Dell Cyber Security Solutions
+
+- name: Install RADIUS packages
+  ansible.builtin.package:
+    name:
+      - freeradius
+      - freeradius-utils
+    state: present
+
+- name: Configure RADIUS server settings
+  ansible.builtin.template:
+    src: radius.conf.j2
+    dest: /etc/safeid/radius.conf
+    owner: safeid
+    group: safeid
+    mode: '0600'
+  notify: restart safeid-radius
+
+- name: Configure RADIUS clients
+  ansible.builtin.template:
+    src: radius-clients.conf.j2
+    dest: /etc/safeid/radius-clients.conf
+    owner: safeid
+    group: safeid
+    mode: '0600'
+  notify: restart safeid-radius
+
+- name: Configure firewall for RADIUS ports
+  ansible.posix.firewalld:
+    port: "{{ item }}/udp"
+    permanent: true
+    state: enabled
+    immediate: true
+  loop:
+    - "{{ radius.port }}"
+    - "{{ radius.accounting_port }}"
+  when: ansible_os_family == "RedHat"
+
+- name: Start RADIUS service
+  ansible.builtin.service:
+    name: safeid-radius
+    state: started
+    enabled: true

@@ -1,0 +1,127 @@
+---
+# Global variables for Cisco SD-WAN Enterprise - Test
+
+# Deployment Configuration
+deployment:
+  organization: "{{ sdwan_organization }}"
+  domain_id: "{{ sdwan_domain_id }}"
+  timeout: 300
+  retry_count: 3
+  backup_enabled: false
+  pilot_site_count: 3
+  production_site_count: 10
+
+# Network Configuration (inherits from prod, simplified for test)
+network:
+  control_plane_vrf: 0
+  transport_gateway: true
+  nat_transparent: false
+  port_hopping: true
+  control_plane_dscp: 48
+
+# Security Configuration (reduced for test)
+security:
+  ipsec_integrity: "ip-esp"
+  ipsec_encryption: "aes-256-cbc"
+  ipsec_authentication: "sha256-hmac"
+  certificate_lifetime: 365
+  rekey_timer: 86400
+  fw_inspection_mode: stateful
+  ips_enabled: false
+  url_filtering: false
+  amp_enabled: false
+
+# Quality of Service (reduced for test)
+qos:
+  classes:
+    - name: "voice"
+      bandwidth_percent: 20
+      priority: "strict-priority"
+      dscp: 46
+    - name: "business-data"
+      bandwidth_percent: 60
+      priority: "guaranteed"
+      dscp: 26
+    - name: "best-effort"
+      bandwidth_percent: 20
+      priority: "best-effort"
+      dscp: 0
+
+# Application Awareness (simplified)
+applications:
+  saas_optimization_enabled: false
+  custom_apps: []
+  saas_apps:
+    office365:
+      priority: "medium"
+      dscp: 26
+    webex:
+      priority: "high"
+      dscp: 34
+
+# Monitoring (reduced)
+monitoring:
+  netflow_enabled: false
+  cflowd_template_timeout: 60
+  flow_export_interval: 60
+  sla_classes:
+    - name: "VOICE"
+      loss_threshold: 1
+      latency_threshold: 150
+      jitter_threshold: 30
+
+# High Availability (basic)
+high_availability:
+  bfd_enabled: true
+  bfd_hello_interval: 60000
+  bfd_detect_multiplier: 3
+  graceful_restart: false
+  graceful_restart_timer: 120
+
+# Routing (simplified)
+routing:
+  ospf:
+    enabled: false
+  bgp:
+    enabled: false
+
+# Cloud OnRamp (disabled)
+cloud_onramp:
+  aws_enabled: false
+  azure_enabled: false
+  gcp_enabled: false
+
+# Site Lists
+site_lists:
+  - name: "Lab_Sites"
+    description: "Lab test sites"
+    sites:
+      - "200-202"
+
+# Application Lists
+application_lists:
+  - name: "Test_Apps"
+    description: "Test applications"
+    applications:
+      - "webex"
+      - "microsoft-office365"
+
+# Firewall Zones (basic)
+firewall:
+  zones:
+    - name: "LAN_ZONE"
+      interfaces: ["GigabitEthernet0/0/2"]
+    - name: "WAN_ZONE"
+      interfaces: ["GigabitEthernet0/0/0"]
+  policies:
+    - name: "LAN_TO_WAN"
+      from_zone: "LAN_ZONE"
+      to_zone: "WAN_ZONE"
+      action: "accept"
+      logging: true
+
+# Backup Configuration
+backup:
+  enabled: false
+  retention_days: 7
+  schedule: weekly

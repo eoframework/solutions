@@ -1,0 +1,21 @@
+#------------------------------------------------------------------------------
+# Project Configuration
+#------------------------------------------------------------------------------
+# Generated from configuration.csv
+#
+# To regenerate: python generate-ansible-vars.py /path/to/solution
+# DO NOT EDIT - Changes will be overwritten on regeneration
+#------------------------------------------------------------------------------
+
+solution:
+  name: vxrail-hyperconverged
+  abbr: vxe
+  provider_name: dell
+  category_name: cloud
+
+datacenter:
+  name: "Primary Datacenter"
+
+ownership:
+  cost_center: CC-VXRAIL-002
+  owner_email: vxrail-enterprise@company.com

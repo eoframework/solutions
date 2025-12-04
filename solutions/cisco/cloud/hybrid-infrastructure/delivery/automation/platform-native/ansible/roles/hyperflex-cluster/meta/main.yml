@@ -1,0 +1,19 @@
+---
+galaxy_info:
+  author: EO Framework
+  description: Deploy HyperFlex cluster via Intersight
+  company: Client Organization
+  license: Proprietary
+  min_ansible_version: "2.14"
+  platforms:
+    - name: GenericLinux
+      versions:
+        - all
+  galaxy_tags:
+    - cisco
+    - hyperflex
+    - intersight
+    - hci
+
+dependencies:
+  - role: intersight-setup

@@ -1,0 +1,120 @@
+---
+#------------------------------------------------------------------------------
+# Dell PowerEdge CI Infrastructure - Master Playbook
+#------------------------------------------------------------------------------
+# This is the main orchestration playbook for CI/CD infrastructure deployment.
+#
+# Usage:
+#   Full deployment:   ansible-playbook playbooks/site.yml --ask-vault-pass
+#   Specific phase:    ansible-playbook playbooks/gitlab-deploy.yml
+#
+# Tags:
+#   foundation    - PowerEdge server provisioning
+#   core          - GitLab and runner deployment
+#   platform      - Docker configuration
+#   artifacts     - Artifactory setup
+#   operations    - Monitoring setup
+#   validation    - Post-deployment verification
+#------------------------------------------------------------------------------
+
+- name: Dell PowerEdge CI Infrastructure - Master Deployment
+  hosts: localhost
+  gather_facts: true
+  tags: [always]
+
+  vars_files:
+    - "{{ playbook_dir }}/../vars/generated/project.yml"
+    - "{{ playbook_dir }}/../vars/generated/gitlab.yml"
+    - "{{ playbook_dir }}/../vars/generated/build.yml"
+    - "{{ playbook_dir }}/../vars/generated/runner.yml"
+    - "{{ playbook_dir }}/../vars/generated/docker.yml"
+    - "{{ playbook_dir }}/../vars/generated/artifactory.yml"
+    - "{{ playbook_dir }}/../vars/generated/performance.yml"
+    - "{{ playbook_dir }}/../vars/secrets.yml"
+
+  tasks:
+    - name: Display deployment banner
+      ansible.builtin.debug:
+        msg: |
+          ================================================================
+          Dell PowerEdge CI Infrastructure Deployment
+          ================================================================
+          Solution: {{ solution.name }} ({{ solution.abbr }})
+          Environment: {{ environment | default('production') }}
+          GitLab: {{ gitlab.version }} ({{ gitlab.server_count }} servers)
+          Build Agents: {{ build.agent_count }} x {{ build.agent_model }}
+          Concurrent Builds: {{ performance.concurrent_builds }}
+          Timestamp: {{ ansible_date_time.iso8601 }}
+          ================================================================
+
+#=============================================================================
+# FOUNDATION - Hardware Provisioning
+#=============================================================================
+- name: "FOUNDATION: PowerEdge Server Provisioning"
+  hosts: poweredge_servers
+  gather_facts: true
+  tags: [foundation, provision]
+  roles:
+    - role: poweredge-provision
+      when: dell.openmanage.enabled | default(false)
+
+#=============================================================================
+# CORE - GitLab Infrastructure
+#=============================================================================
+- name: "CORE: GitLab Server Deployment"
+  import_playbook: gitlab-deploy.yml
+  tags: [core, gitlab]
+
+- name: "CORE: GitLab Runner Provisioning"
+  import_playbook: runners-provision.yml
+  tags: [core, runners]
+
+#=============================================================================
+# PLATFORM - Docker Configuration
+#=============================================================================
+- name: "PLATFORM: Docker Host Configuration"
+  import_playbook: docker-config.yml
+  tags: [platform, docker]
+
+#=============================================================================
+# ARTIFACT MANAGEMENT
+#=============================================================================
+- name: "ARTIFACTS: Artifactory Setup"
+  import_playbook: artifactory-setup.yml
+  tags: [artifacts, artifactory]
+
+#=============================================================================
+# OPERATIONS - Monitoring
+#=============================================================================
+- name: "OPERATIONS: Monitoring Setup"
+  import_playbook: monitoring-setup.yml
+  tags: [operations, monitoring]
+
+#=============================================================================
+# VALIDATION - Post-Deployment Checks
+#=============================================================================
+- name: "VALIDATION: Post-Deployment Verification"
+  import_playbook: validate.yml
+  tags: [validation, validate]
+
+#=============================================================================
+# SUMMARY
+#=============================================================================
+- name: Deployment Summary
+  hosts: localhost
+  gather_facts: true
+  tags: [always]
+
+  tasks:
+    - name: Display completion summary
+      ansible.builtin.debug:
+        msg: |
+          ================================================================
+          Dell PowerEdge CI Infrastructure Deployment Complete
+          ================================================================
+          Environment: {{ environment | default('production') }}
+          Completed: {{ ansible_date_time.iso8601 }}
+          GitLab Servers: {{ groups['gitlab_servers'] | default([]) | length }}
+          Build Agents: {{ groups['build_agents'] | default([]) | length }}
+          Total Runners: {{ (groups['build_agents'] | default([]) | length) * (build.runners.per_agent | default(3)) }}
+          ================================================================

@@ -1,0 +1,12 @@
+#------------------------------------------------------------------------------
+# Disaster Recovery Configuration
+#------------------------------------------------------------------------------
+# Generated from configuration.csv
+#
+# To regenerate: python generate-ansible-vars.py /path/to/solution
+# DO NOT EDIT - Changes will be overwritten on regeneration
+#------------------------------------------------------------------------------
+
+dr:
+  enabled: false
+  purpose: "primary"

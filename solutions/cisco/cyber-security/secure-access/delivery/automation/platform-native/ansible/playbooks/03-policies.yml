@@ -1,0 +1,105 @@
+---
+#------------------------------------------------------------------------------
+# Phase 2: Policies - Authentication and Authorization Policies
+#------------------------------------------------------------------------------
+# This playbook handles policy configuration including:
+#   - Authentication policies
+#   - Authorization policies
+#   - RADIUS/TACACS+ policy sets
+#   - AnyConnect configuration
+#------------------------------------------------------------------------------
+
+- name: Phase 2 - Policy Deployment
+  hosts: localhost
+  gather_facts: no
+  tags: [policies]
+
+  vars_files:
+    - "{{ playbook_dir }}/../vars/generated/project.yml"
+    - "{{ playbook_dir }}/../vars/generated/ise.yml"
+    - "{{ playbook_dir }}/../vars/generated/anyconnect.yml"
+    - "{{ playbook_dir }}/../vars/generated/deployment.yml"
+    - "{{ playbook_dir }}/../vars/secrets.yml"
+
+  tasks:
+    #--------------------------------------------------------------------------
+    # Policy Set Configuration
+    #--------------------------------------------------------------------------
+    - name: Display wired dot1x policy requirements
+      ansible.builtin.debug:
+        msg: |
+          Wired Dot1x Policy Set:
+          - Condition: Wired_802.1X
+          - Authentication Policy: AD Identity Source
+          - Authorization Policy: Based on AD group membership
+
+          Required Configurations:
+          1. Policy Set: Wired_Access
+          2. Authentication Rule: Dot1x_Auth
+          3. Authorization Rules by user type
+
+    - name: Display wireless policy requirements
+      ansible.builtin.debug:
+        msg: |
+          Wireless Policy Set:
+          - Condition: Wireless_802.1X
+          - Authentication Policy: AD Identity Source
+          - Authorization Policy: Based on AD group membership and device posture
+
+    #--------------------------------------------------------------------------
+    # VPN/AnyConnect Configuration
+    #--------------------------------------------------------------------------
+    - name: Display AnyConnect configuration
+      ansible.builtin.debug:
+        msg: |
+          AnyConnect VPN Configuration:
+          - Posture Module: {{ 'Enabled' if anyconnect.posture_enabled else 'Disabled' }}
+          - Compliance Module: {{ 'Enabled' if anyconnect.compliance_enabled else 'Disabled' }}
+          - Split Tunneling: {{ anyconnect.split_tunnel }}
+          - Idle Timeout: {{ anyconnect.idle_timeout }} minutes
+          - Session Timeout: {{ anyconnect.session_timeout }} minutes
+      when: anyconnect is defined
+
+    #--------------------------------------------------------------------------
+    # Posture Policies
+    #--------------------------------------------------------------------------
+    - name: Display posture policy requirements
+      ansible.builtin.debug:
+        msg: |
+          Posture Policy Configuration:
+          - Antivirus Check: Required
+          - Firewall Check: Required
+          - Disk Encryption: Required for high-security users
+          - Remediation Timer: 10 minutes
+
+          Note: Posture policies must be configured via ISE GUI:
+          Work Centers > Posture > Posture Policy
+
+    #--------------------------------------------------------------------------
+    # Authorization Profiles
+    #--------------------------------------------------------------------------
+    - name: Create authorization profiles
+      ansible.builtin.debug:
+        msg: |
+          Authorization Profiles to Create:
+          1. Permit_Access - Full network access
+          2. Limited_Access - Restricted VLAN access
+          3. Guest_Access - Internet-only access
+          4. Quarantine - Remediation network
+
+          Note: Authorization profiles with VLAN assignments
+          must be configured via ISE GUI.
+
+    #--------------------------------------------------------------------------
+    # Summary
+    #--------------------------------------------------------------------------
+    - name: Policy deployment summary
+      ansible.builtin.debug:
+        msg: |
+          ============================================================
+          Phase 2 - Policy Deployment Complete
+          ============================================================
+          Policy Sets: Wired, Wireless, VPN configurations documented
+          AnyConnect: {{ 'Posture Enabled' if (anyconnect.posture_enabled | default(false)) else 'Basic Configuration' }}
+          Authorization Profiles: 4 profiles to create
+          ============================================================

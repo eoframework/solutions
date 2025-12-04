@@ -1,0 +1,59 @@
+---
+#------------------------------------------------------------------------------
+# Phase 1: Foundation - GitOps and Pipeline Infrastructure
+#------------------------------------------------------------------------------
+
+- name: Phase 1 - GitOps Foundation Setup
+  hosts: localhost
+  gather_facts: yes
+  vars_files:
+    - ../vars/generated/project.yml
+    - ../vars/generated/gitlab.yml
+    - ../vars/generated/jenkins.yml
+    - ../vars/generated/vault.yml
+    - ../vars/secrets.yml
+
+  pre_tasks:
+    - name: Display phase information
+      ansible.builtin.debug:
+        msg:
+          - "=============================================="
+          - "Phase 1: Foundation Setup"
+          - "=============================================="
+          - "- GitLab repository configuration"
+          - "- Jenkins pipeline setup"
+          - "- HashiCorp Vault integration"
+          - "- Secret management initialization"
+          - "=============================================="
+
+  roles:
+    - role: gitlab-setup
+      tags: [gitlab, scm]
+    - role: jenkins-setup
+      tags: [jenkins, ci]
+    - role: vault-integration
+      tags: [vault, secrets]
+
+  post_tasks:
+    - name: Validate foundation components
+      ansible.builtin.uri:
+        url: "{{ item.url }}"
+        method: GET
+        validate_certs: "{{ item.ssl_verify | default(true) }}"
+        status_code: [200, 302]
+        timeout: 30
+      loop:
+        - { name: "GitLab", url: "{{ gitlab.url }}/api/v4/version", ssl_verify: true }
+        - { name: "Jenkins", url: "{{ jenkins.url }}/api/json", ssl_verify: true }
+        - { name: "Vault", url: "{{ vault.address }}/v1/sys/health", ssl_verify: true }
+      loop_control:
+        label: "{{ item.name }}"
+      register: foundation_health
+      ignore_errors: yes
+
+    - name: Foundation health summary
+      ansible.builtin.debug:
+        msg: "{{ item.item.name }}: {{ 'HEALTHY' if item.status == 200 else 'CHECK REQUIRED' }}"
+      loop: "{{ foundation_health.results }}"
+      loop_control:
+        label: "{{ item.item.name }}"

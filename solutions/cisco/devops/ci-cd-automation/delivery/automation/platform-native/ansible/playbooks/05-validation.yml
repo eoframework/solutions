@@ -1,0 +1,154 @@
+---
+#------------------------------------------------------------------------------
+# Phase 5: Validation - Testing and Verification
+#------------------------------------------------------------------------------
+
+- name: Phase 5 - Validation and Testing
+  hosts: localhost
+  gather_facts: yes
+  vars_files:
+    - ../vars/generated/project.yml
+    - ../vars/generated/gitlab.yml
+    - ../vars/generated/jenkins.yml
+    - ../vars/generated/cisco_dna_center.yml
+    - ../vars/generated/pipeline.yml
+    - ../vars/secrets.yml
+
+  pre_tasks:
+    - name: Display phase information
+      ansible.builtin.debug:
+        msg:
+          - "=============================================="
+          - "Phase 5: Validation and Testing"
+          - "=============================================="
+          - "- Pipeline connectivity tests"
+          - "- Network device reachability"
+          - "- Integration health checks"
+          - "- End-to-end workflow validation"
+          - "=============================================="
+
+  tasks:
+    #--------------------------------------------------------------------------
+    # GitLab Validation
+    #--------------------------------------------------------------------------
+    - name: Validate GitLab API access
+      ansible.builtin.uri:
+        url: "{{ gitlab.url }}/api/{{ gitlab.api_version }}/projects?per_page=1"
+        method: GET
+        headers:
+          PRIVATE-TOKEN: "{{ vault_gitlab_api_token }}"
+        validate_certs: true
+        status_code: 200
+        timeout: 30
+      register: gitlab_api_test
+      tags: [gitlab]
+
+    - name: Validate GitLab runner availability
+      ansible.builtin.uri:
+        url: "{{ gitlab.url }}/api/{{ gitlab.api_version }}/runners?tag_list={{ gitlab.runner_tag }}"
+        method: GET
+        headers:
+          PRIVATE-TOKEN: "{{ vault_gitlab_api_token }}"
+        validate_certs: true
+        status_code: 200
+        timeout: 30
+      register: gitlab_runner_test
+      tags: [gitlab]
+
+    #--------------------------------------------------------------------------
+    # Jenkins Validation
+    #--------------------------------------------------------------------------
+    - name: Validate Jenkins API access
+      ansible.builtin.uri:
+        url: "{{ jenkins.url }}/api/json"
+        method: GET
+        user: "{{ jenkins.admin_user }}"
+        password: "{{ vault_jenkins_admin_password }}"
+        force_basic_auth: yes
+        validate_certs: true
+        status_code: 200
+        timeout: 30
+      register: jenkins_api_test
+      tags: [jenkins]
+
+    - name: Validate Jenkins shared library
+      ansible.builtin.uri:
+        url: "{{ jenkins.url }}/job/{{ jenkins.shared_lib }}/api/json"
+        method: GET
+        user: "{{ jenkins.admin_user }}"
+        password: "{{ vault_jenkins_admin_password }}"
+        force_basic_auth: yes
+        validate_certs: true
+        status_code: [200, 404]
+        timeout: 30
+      register: jenkins_lib_test
+      tags: [jenkins]
+
+    #--------------------------------------------------------------------------
+    # DNA Center Validation
+    #--------------------------------------------------------------------------
+    - name: Validate DNA Center API access
+      ansible.builtin.uri:
+        url: "https://{{ dnac.hostname }}/dna/system/api/v1/auth/token"
+        method: POST
+        user: "{{ dnac.admin_user }}"
+        password: "{{ vault_dnac_admin_password }}"
+        force_basic_auth: yes
+        validate_certs: "{{ dnac.ssl_verify }}"
+        status_code: 200
+        timeout: "{{ dnac.timeout }}"
+      register: dnac_api_test
+      tags: [dnac]
+
+    - name: Get DNA Center managed devices count
+      when: dnac_api_test is succeeded
+      ansible.builtin.uri:
+        url: "https://{{ dnac.hostname }}/dna/intent/api/{{ dnac.api_version }}/network-device/count"
+        method: GET
+        headers:
+          x-auth-token: "{{ dnac_api_test.json.Token }}"
+        validate_certs: "{{ dnac.ssl_verify }}"
+        status_code: 200
+        timeout: "{{ dnac.timeout }}"
+      register: dnac_device_count
+      tags: [dnac]
+
+    #--------------------------------------------------------------------------
+    # Pipeline Execution Test
+    #--------------------------------------------------------------------------
+    - name: Create test pipeline validation marker
+      ansible.builtin.set_fact:
+        validation_timestamp: "{{ ansible_date_time.iso8601 }}"
+        validation_tests_passed: >-
+          {{
+            (gitlab_api_test is succeeded) and
+            (jenkins_api_test is succeeded) and
+            (dnac_api_test is succeeded)
+          }}
+      tags: [validation]
+
+    #--------------------------------------------------------------------------
+    # Validation Summary
+    #--------------------------------------------------------------------------
+    - name: Display validation results
+      ansible.builtin.debug:
+        msg:
+          - "=============================================="
+          - "Validation Results"
+          - "=============================================="
+          - "GitLab API: {{ 'PASS' if gitlab_api_test is succeeded else 'FAIL' }}"
+          - "GitLab Runners: {{ 'PASS' if gitlab_runner_test is succeeded else 'FAIL' }}"
+          - "Jenkins API: {{ 'PASS' if jenkins_api_test is succeeded else 'FAIL' }}"
+          - "Jenkins Library: {{ 'PASS' if jenkins_lib_test.status == 200 else 'CHECK' }}"
+          - "DNA Center: {{ 'PASS' if dnac_api_test is succeeded else 'FAIL' }}"
+          - "Managed Devices: {{ dnac_device_count.json.response | default('N/A') }}"
+          - "=============================================="
+          - "Overall Status: {{ 'PASS' if validation_tests_passed else 'REVIEW REQUIRED' }}"
+          - "=============================================="
+      tags: [validation]
+
+    - name: Fail if critical validations failed
+      ansible.builtin.fail:
+        msg: "Critical validation tests failed. Review the output above."
+      when: not validation_tests_passed
+      tags: [validation]

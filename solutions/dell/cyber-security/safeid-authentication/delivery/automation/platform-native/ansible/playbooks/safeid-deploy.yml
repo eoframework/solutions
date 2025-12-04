@@ -1,0 +1,69 @@
+# Dell SafeID Authentication - SafeID Appliance Deployment
+# EO Framework - Dell Cyber Security Solutions
+
+---
+- name: Deploy Dell SafeID Appliance
+  hosts: safeid_servers
+  gather_facts: true
+  become: true
+  tags: [safeid, deploy]
+
+  pre_tasks:
+    - name: Display deployment information
+      ansible.builtin.debug:
+        msg: |
+          Deploying SafeID {{ safeid.version }} on {{ inventory_hostname }}
+          Environment: {{ environment }}
+          Server Role: {{ server_role | default('unknown') }}
+
+  roles:
+    - role: safeid-appliance
+      tags: [appliance]
+
+  post_tasks:
+    - name: Verify SafeID service is running
+      ansible.builtin.service:
+        name: safeid
+        state: started
+        enabled: true
+      check_mode: false
+
+    - name: Wait for SafeID API to be available
+      ansible.builtin.uri:
+        url: "https://{{ ansible_host }}:8443/api/health"
+        validate_certs: false
+        status_code: 200
+        timeout: 10
+      retries: 30
+      delay: 10
+      until: result is success
+      register: result
+
+- name: Configure SafeID High Availability
+  hosts: safeid_servers
+  gather_facts: true
+  become: true
+  tags: [safeid, ha]
+  when: safeid.ha.enabled | default(false)
+
+  tasks:
+    - name: Configure HA primary server
+      ansible.builtin.include_role:
+        name: safeid-appliance
+        tasks_from: configure-ha-primary
+      when: server_role == "primary"
+
+    - name: Configure HA secondary server
+      ansible.builtin.include_role:
+        name: safeid-appliance
+        tasks_from: configure-ha-secondary
+      when: server_role == "secondary"
+
+    - name: Verify HA synchronization
+      ansible.builtin.command: safeid-cli ha status
+      register: ha_status
+      changed_when: false
+
+    - name: Display HA status
+      ansible.builtin.debug:
+        var: ha_status.stdout_lines

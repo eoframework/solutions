@@ -1,0 +1,20 @@
+# GAM Commands - Configure Sharing Policies
+# EO Framework - Google Workspace Solution
+#
+# Usage: Run commands individually or as batch
+# Note: Some settings require Admin Console configuration
+
+# Set default link sharing to domain only
+gam update domain primaryDomain sharing_options "INTERNAL_ONLY"
+
+# Configure external sharing whitelist
+# Note: Must be configured in Admin Console > Apps > Google Workspace > Drive and Docs > Sharing settings
+
+# Print current sharing settings
+gam print domains
+
+# Configure Shared Drive defaults
+# Note: Shared Drive settings controlled via Admin Console
+
+# Verify Drive settings
+gam print drive settings

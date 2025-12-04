@@ -1,0 +1,13 @@
+#------------------------------------------------------------------------------
+# Application Configuration
+#------------------------------------------------------------------------------
+# Generated from configuration.csv
+#
+# To regenerate: python generate-ansible-vars.py /path/to/solution
+# DO NOT EDIT - Changes will be overwritten on regeneration
+#------------------------------------------------------------------------------
+
+application:
+  jupyter_port: 8888
+  jupyter_base_url: "/jupyter"
+  tensorboard_port: 6006

@@ -1,0 +1,18 @@
+---
+galaxy_info:
+  role_name: gitlab-setup
+  author: EO Framework
+  description: Configure GitLab for Cisco network automation CI/CD
+  company: Enterprise Orchestration
+  license: proprietary
+  min_ansible_version: "2.12"
+  platforms:
+    - name: Generic
+      versions: [all]
+  galaxy_tags:
+    - gitlab
+    - cicd
+    - cisco
+    - automation
+
+dependencies: []

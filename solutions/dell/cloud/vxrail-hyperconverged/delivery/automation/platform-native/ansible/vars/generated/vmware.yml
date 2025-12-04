@@ -1,0 +1,20 @@
+#------------------------------------------------------------------------------
+# VMware Configuration
+#------------------------------------------------------------------------------
+# Generated from configuration.csv
+#
+# To regenerate: python generate-ansible-vars.py /path/to/solution
+# DO NOT EDIT - Changes will be overwritten on regeneration
+#------------------------------------------------------------------------------
+
+vmware:
+  vcenter_version: "8.0 U2"
+  esxi_version: "8.0 U2"
+  vsan_version: "8.0 U2"
+  srm_enabled: true
+  srm_version: "8.7"
+
+database:
+  oracle_rac_nodes: 4
+  sql_always_on_nodes: 3
+  sap_hana_memory_gb: 1024

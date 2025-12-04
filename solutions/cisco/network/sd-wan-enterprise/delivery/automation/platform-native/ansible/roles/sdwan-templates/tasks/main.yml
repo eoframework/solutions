@@ -1,0 +1,45 @@
+---
+# SD-WAN Templates Role
+# Manages device templates and feature templates
+
+- name: Display template deployment info
+  debug:
+    msg: "Deploying SD-WAN templates for {{ sdwan_organization }}"
+
+- name: Define default feature templates
+  set_fact:
+    default_feature_templates:
+      - name: "System_Template"
+        description: "System settings template"
+        type: "cisco_system"
+        definition:
+          systemIP: "variable"
+          siteId: "variable"
+          hostname: "variable"
+      - name: "BFD_Template"
+        description: "BFD configuration template"
+        type: "cisco_bfd"
+        definition:
+          multiplier: "{{ bfd_multiplier }}"
+          pollInterval: "{{ bfd_poll_interval }}"
+          helloInterval: "{{ bfd_hello_interval }}"
+      - name: "OMP_Template"
+        description: "OMP configuration template"
+        type: "cisco_omp"
+        definition:
+          shutdown: false
+          gracefulRestart: true
+          advertiseConnected: true
+          advertiseStatic: true
+
+- name: Merge custom templates with defaults
+  set_fact:
+    feature_templates: "{{ default_feature_templates + (custom_feature_templates | default([])) }}"
+
+- name: Display template count
+  debug:
+    msg: "Deploying {{ feature_templates | length }} feature templates"
+
+- name: Template deployment placeholder
+  debug:
+    msg: "Template deployment logic executed via playbook"

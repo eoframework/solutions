@@ -1,0 +1,21 @@
+---
+# Default variables for NetDevOps Git role
+
+# Git repository configuration
+git_repo_path: /opt/network-automation
+git_remote_url: ""
+
+# Git user configuration
+git_user_name: "Network Automation"
+git_user_email: "netops@client.local"
+
+# Branch configuration
+git_default_branch: main
+git_protected_branches:
+  - main
+  - production
+  - staging
+
+# Merge request settings
+git_require_approval: true
+git_min_approvals: 1

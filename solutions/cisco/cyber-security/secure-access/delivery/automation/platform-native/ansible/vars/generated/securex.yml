@@ -1,0 +1,14 @@
+#------------------------------------------------------------------------------
+# Securex Configuration
+#------------------------------------------------------------------------------
+# Generated from configuration.csv on 2025-12-02 23:53:45
+#
+# To regenerate: python generate-ansible-vars.py /path/to/solution
+# DO NOT EDIT - Changes will be overwritten on regeneration
+#------------------------------------------------------------------------------
+
+securex:
+  api_client: '{{ vault_securex_api_client }}'
+  api_secret: '{{ vault_securex_api_secret }}'
+  dashboard_url: securex.cisco.com
+  tenant: '[tenant-id]'

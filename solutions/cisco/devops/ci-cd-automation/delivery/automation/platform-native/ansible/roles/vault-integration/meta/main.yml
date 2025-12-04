@@ -1,0 +1,17 @@
+---
+galaxy_info:
+  role_name: vault-integration
+  author: EO Framework
+  description: HashiCorp Vault integration for secrets management
+  company: Enterprise Orchestration
+  license: proprietary
+  min_ansible_version: "2.12"
+  platforms:
+    - name: Generic
+      versions: [all]
+  galaxy_tags:
+    - vault
+    - secrets
+    - security
+
+dependencies: []

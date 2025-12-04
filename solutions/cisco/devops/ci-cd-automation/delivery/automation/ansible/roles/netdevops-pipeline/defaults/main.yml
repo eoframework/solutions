@@ -1,0 +1,11 @@
+---
+# Default variables for NetDevOps Pipeline role
+
+pipeline_config_dir: /opt/pipeline-config
+jenkins_enabled: true
+gitlab_enabled: true
+
+# Pipeline settings
+pipeline_timeout: 3600
+pipeline_retry_count: 3
+pipeline_approval_required: true

@@ -1,0 +1,154 @@
+---
+#------------------------------------------------------------------------------
+# Phase 3: Validation - Go-Live Validation and Testing
+#------------------------------------------------------------------------------
+# This playbook handles validation including:
+#   - Controller health
+#   - Edge device status
+#   - Tunnel verification
+#   - Policy validation
+#------------------------------------------------------------------------------
+
+- name: Phase 3 - Go-Live Validation
+  hosts: localhost
+  gather_facts: no
+  tags: [validation]
+
+  vars_files:
+    - "{{ playbook_dir }}/../vars/generated/project.yml"
+    - "{{ playbook_dir }}/../vars/generated/vmanage.yml"
+    - "{{ playbook_dir }}/../vars/generated/vsmart.yml"
+    - "{{ playbook_dir }}/../vars/generated/vbond.yml"
+    - "{{ playbook_dir }}/../vars/generated/deployment.yml"
+    - "{{ playbook_dir }}/../vars/secrets.yml"
+
+  tasks:
+    #--------------------------------------------------------------------------
+    # Controller Health
+    #--------------------------------------------------------------------------
+    - name: Get controller status
+      ansible.builtin.uri:
+        url: "https://{{ vmanage.primary_ip }}/dataservice/system/device/controllers"
+        method: GET
+        user: "{{ vmanage.admin_user }}"
+        password: "{{ vault_vmanage_admin_password }}"
+        force_basic_auth: yes
+        validate_certs: "{{ vmanage.ssl_verify }}"
+      register: controller_status
+      ignore_errors: yes
+
+    - name: Display controller status
+      ansible.builtin.debug:
+        msg: "Controllers: {{ controller_status.json | default('Check response') }}"
+        verbosity: 1
+
+    #--------------------------------------------------------------------------
+    # Edge Device Status
+    #--------------------------------------------------------------------------
+    - name: Get edge device status
+      ansible.builtin.uri:
+        url: "https://{{ vmanage.primary_ip }}/dataservice/device"
+        method: GET
+        user: "{{ vmanage.admin_user }}"
+        password: "{{ vault_vmanage_admin_password }}"
+        force_basic_auth: yes
+        validate_certs: "{{ vmanage.ssl_verify }}"
+      register: edge_devices
+      ignore_errors: yes
+
+    - name: Display edge device count
+      ansible.builtin.debug:
+        msg: "Edge Devices: {{ edge_devices.json.data | length | default(0) }}"
+
+    #--------------------------------------------------------------------------
+    # Control Connections
+    #--------------------------------------------------------------------------
+    - name: Get control connections
+      ansible.builtin.uri:
+        url: "https://{{ vmanage.primary_ip }}/dataservice/device/control/summary"
+        method: GET
+        user: "{{ vmanage.admin_user }}"
+        password: "{{ vault_vmanage_admin_password }}"
+        force_basic_auth: yes
+        validate_certs: "{{ vmanage.ssl_verify }}"
+      register: control_summary
+      ignore_errors: yes
+
+    - name: Display control summary
+      ansible.builtin.debug:
+        msg: "Control Connections: {{ control_summary.json | default('Check response') }}"
+        verbosity: 1
+
+    #--------------------------------------------------------------------------
+    # BFD Session Status
+    #--------------------------------------------------------------------------
+    - name: Display BFD verification steps
+      ansible.builtin.debug:
+        msg: |
+          BFD Session Verification:
+          1. vManage: Monitor > Network > BFD
+          2. Verify all expected tunnels are UP
+          3. Check for any flapping sessions
+
+          CLI Verification (per device):
+          show bfd sessions
+          show sdwan bfd summary
+
+    #--------------------------------------------------------------------------
+    # OMP Status
+    #--------------------------------------------------------------------------
+    - name: Display OMP verification steps
+      ansible.builtin.debug:
+        msg: |
+          OMP Verification:
+          1. vManage: Monitor > Network > OMP Peers
+          2. Verify all vEdges have OMP sessions to vSmart
+          3. Check route advertisement
+
+          CLI Verification (per device):
+          show omp peers
+          show omp routes
+
+    #--------------------------------------------------------------------------
+    # Validation Report
+    #--------------------------------------------------------------------------
+    - name: Generate validation report
+      ansible.builtin.set_fact:
+        validation_report: |
+          ============================================================
+          CISCO SD-WAN ENTERPRISE - VALIDATION REPORT
+          ============================================================
+          Date: {{ lookup('pipe', 'date -Iseconds') }}
+          Solution: {{ solution.name }}
+          vManage: {{ vmanage.fqdn }} ({{ vmanage.primary_ip }})
+
+          CONTROLLER SUMMARY
+          ------------------
+          vManage: {{ vmanage.primary_ip }}
+          vSmart: {{ vsmart.primary_ip }}
+          vBond: {{ vbond.primary_ip }}
+
+          EDGE DEVICE SUMMARY
+          -------------------
+          Total Devices: {{ edge_devices.json.data | length | default('N/A') }}
+          Target (Pilot): {{ deployment.pilot_device_count }}
+          Target (Production): {{ deployment.production_device_count }}
+
+          DEPLOYMENT STATUS
+          -----------------
+          Site Count: {{ deployment.site_count }}
+          Hub Sites: {{ deployment.hub_count }}
+          Branch Sites: {{ deployment.branch_count }}
+
+          VALIDATION STATUS: REVIEW REQUIRED
+          ============================================================
+
+    - name: Display validation report
+      ansible.builtin.debug:
+        msg: "{{ validation_report }}"
+
+    - name: Save validation report to file
+      ansible.builtin.copy:
+        content: "{{ validation_report }}"
+        dest: "{{ playbook_dir }}/../logs/validation_report_{{ lookup('pipe', 'date +%Y%m%d_%H%M%S') }}.txt"
+      delegate_to: localhost

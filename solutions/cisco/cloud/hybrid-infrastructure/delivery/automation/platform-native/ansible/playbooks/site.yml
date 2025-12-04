@@ -1,0 +1,73 @@
+---
+#------------------------------------------------------------------------------
+# Cisco HyperFlex Hybrid Infrastructure - Master Playbook
+#------------------------------------------------------------------------------
+# This is the main orchestration playbook that imports all phase playbooks.
+#
+# Usage:
+#   Full deployment:   ansible-playbook playbooks/site.yml
+#   Specific phase:    ansible-playbook playbooks/01-foundation.yml
+#   With vault:        ansible-playbook playbooks/site.yml --ask-vault-pass
+#
+# Tags:
+#   foundation     - Phase 1: Fabric Interconnects and UCS config
+#   cluster        - Phase 1: HyperFlex cluster deployment
+#   storage        - Phase 2: Datastores and storage policies
+#   integration    - Phase 2: Intersight, vSphere, backup
+#   validation     - Phase 3: Go-live validation and testing
+#------------------------------------------------------------------------------
+
+- name: HyperFlex Hybrid Infrastructure - Full Deployment
+  hosts: localhost
+  gather_facts: no
+
+  vars_files:
+    - "{{ playbook_dir }}/../vars/generated/project.yml"
+    - "{{ playbook_dir }}/../vars/generated/hyperflex.yml"
+    - "{{ playbook_dir }}/../vars/generated/fabric_interconnect.yml"
+    - "{{ playbook_dir }}/../vars/secrets.yml"
+
+  pre_tasks:
+    - name: Display deployment information
+      ansible.builtin.debug:
+        msg: |
+          ============================================================
+          Cisco HyperFlex Hybrid Infrastructure Deployment
+          ============================================================
+          Solution: {{ solution.name }}
+          HyperFlex Cluster: {{ hyperflex.cluster_name }} ({{ hyperflex.cluster_ip }})
+          Node Count: {{ hyperflex.node_count }}
+          Intersight Managed: {{ intersight.enabled }}
+          ============================================================
+
+    - name: Verify HyperFlex connectivity
+      ansible.builtin.uri:
+        url: "https://{{ hyperflex.cluster_ip }}/api/v1/cluster"
+        method: GET
+        user: "{{ hyperflex.admin_user }}"
+        password: "{{ vault_hx_admin_password }}"
+        force_basic_auth: yes
+        validate_certs: "{{ hyperflex.ssl_verify }}"
+        status_code: [200, 401]
+      register: hx_connectivity
+      tags: [always]
+
+- name: Phase 1 - Foundation
+  ansible.builtin.import_playbook: 01-foundation.yml
+  tags: [foundation]
+
+- name: Phase 1 - Cluster
+  ansible.builtin.import_playbook: 02-cluster.yml
+  tags: [cluster]
+
+- name: Phase 2 - Storage
+  ansible.builtin.import_playbook: 03-storage.yml
+  tags: [storage]
+
+- name: Phase 2 - Integration
+  ansible.builtin.import_playbook: 04-integration.yml
+  tags: [integration]
+
+- name: Phase 3 - Validation
+  ansible.builtin.import_playbook: 05-validation.yml
+  tags: [validation]

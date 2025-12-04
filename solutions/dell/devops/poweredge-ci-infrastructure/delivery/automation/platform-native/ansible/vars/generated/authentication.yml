@@ -1,0 +1,12 @@
+#------------------------------------------------------------------------------
+# Authentication Configuration
+#------------------------------------------------------------------------------
+# Generated from configuration.csv
+#
+# To regenerate: python generate-ansible-vars.py /path/to/solution
+# DO NOT EDIT - Changes will be overwritten on regeneration
+#------------------------------------------------------------------------------
+
+authentication:
+  sso_provider: "SAML 2.0"
+  sso_idp_url: "[idp.domain.com]"

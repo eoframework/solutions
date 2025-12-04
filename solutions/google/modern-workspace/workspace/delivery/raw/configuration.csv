@@ -1,53 +1,88 @@
-#WIDTH: 28,18,12,30,48,10,12,33,16,18,24,42,12
-#ALIGN: left,left,center,left,left,center,left,left,center,left,left,left,center
-Parameter Name,Category,Environment,Default Value,Description,Required,Data Type,Validation Rules,Security Level,Owner Team,Dependencies,Notes,Last Updated
-WORKSPACE_DOMAIN,Google Workspace,All,[domain.com],Primary domain for Google Workspace tenant,Yes,String,Valid domain name,Public,IT Admin,Domain verification,Must be verified in Google Admin,[DATE]
-WORKSPACE_EDITION,Google Workspace,All,Business Plus,Google Workspace subscription edition,Yes,String,Business Starter|Business Standard|Business Plus|Enterprise,Public,IT Admin,Licensing,500 user deployment,[DATE]
-USER_COUNT,Google Workspace,All,500,Total number of Google Workspace users,Yes,Integer,1-unlimited,Public,IT Admin,Licensing,Per SOW scope,[DATE]
-STORAGE_PER_USER,Google Workspace,All,5 TB,Storage allocation per user,Yes,String,Based on edition,Public,IT Admin,Edition selection,Business Plus allocation,[DATE]
-ADMIN_CONSOLE_URL,Google Workspace,All,admin.google.com,Google Admin Console URL,Yes,String,Valid URL,Public,IT Admin,Internet access,Primary admin interface,[DATE]
-ORGANIZATION_UNIT_ROOT,Identity,All,/,Root organizational unit path,Yes,String,Valid OU path,Public,IT Admin,Tenant setup,Top-level OU,[DATE]
-OU_SALES,Identity,All,/Sales,Sales department organizational unit,Yes,String,Valid OU path,Public,IT Admin,Root OU,95 users,[DATE]
-OU_MARKETING,Identity,All,/Marketing,Marketing department organizational unit,Yes,String,Valid OU path,Public,IT Admin,Root OU,95 users,[DATE]
-OU_OPERATIONS,Identity,All,/Operations,Operations department organizational unit,Yes,String,Valid OU path,Public,IT Admin,Root OU,95 users,[DATE]
-OU_FINANCE,Identity,All,/Finance,Finance department organizational unit,Yes,String,Valid OU path,Public,IT Admin,Root OU,95 users,[DATE]
-OU_EXECUTIVE,Identity,All,/Executive,Executive department organizational unit,Yes,String,Valid OU path,Public,IT Admin,Root OU,95 users,[DATE]
-SSO_ENABLED,Identity,All,true,Enable SAML SSO authentication,Yes,Boolean,true or false,Public,Security,IdP configuration,Azure AD integration,[DATE]
-SSO_IDP_TYPE,Identity,All,Azure AD,Identity provider for SAML SSO,Yes,String,Azure AD|Okta|ADFS|Google,Public,Security,IdP setup,Corporate IdP,[DATE]
-SSO_ENTITY_ID,Identity,All,[entity-id],SAML entity ID for SSO configuration,Yes,String,Valid URI,Confidential,Security,IdP metadata,From Azure AD,[DATE]
-SSO_LOGIN_URL,Identity,All,[login-url],SAML login URL from identity provider,Yes,String,Valid URL,Public,Security,IdP metadata,From Azure AD,[DATE]
-SSO_CERTIFICATE,Identity,All,[certificate],SAML signing certificate from IdP,Yes,String,Valid X.509 certificate,Confidential,Security,IdP metadata,Base64 encoded,[DATE]
-GCDS_ENABLED,Identity,All,true,Enable Google Cloud Directory Sync,Yes,Boolean,true or false,Public,IT Admin,Azure AD,Automated provisioning,[DATE]
-GCDS_SYNC_INTERVAL,Identity,All,4 hours,Directory sync interval,Yes,String,1-24 hours,Public,IT Admin,GCDS setup,Balance freshness and load,[DATE]
-GCDS_USER_FILTER,Identity,All,[LDAP filter],LDAP filter for user sync,Yes,String,Valid LDAP filter,Public,IT Admin,GCDS setup,Scope users to sync,[DATE]
-TWO_STEP_VERIFICATION,Security,All,Enforced,2-Step Verification enforcement policy,Yes,String,Off|Optional|Enforced,Public,Security,User accounts,Required for all users,[DATE]
-TWO_STEP_METHODS,Security,All,Any,Allowed 2SV methods,Yes,String,Any|Security Key Only|Phone Only,Public,Security,2SV policy,Flexible methods,[DATE]
-DLP_ENABLED,Security,All,true,Enable Data Loss Prevention policies,Yes,Boolean,true or false,Public,Security,Workspace setup,Sensitive data protection,[DATE]
-DLP_PII_DETECTION,Security,All,true,Enable PII detection in DLP,Yes,Boolean,true or false,Public,Security,DLP setup,SSN credit card etc,[DATE]
-DLP_FINANCIAL_DETECTION,Security,All,true,Enable financial data detection,Yes,Boolean,true or false,Public,Security,DLP setup,Bank account numbers,[DATE]
-DLP_ACTION,Security,All,Warn and Block,Default DLP action for violations,Yes,String,Warn|Block|Warn and Block,Public,Security,DLP setup,Balance security and usability,[DATE]
-VAULT_ENABLED,Security,All,true,Enable Google Vault for retention,Yes,Boolean,true or false,Public,Security,Workspace setup,Compliance requirement,[DATE]
-VAULT_RETENTION_PERIOD,Security,All,7 years,Default retention period for Vault,Yes,String,1-10 years or custom,Public,Legal,Vault setup,Per SOW requirement,[DATE]
-VAULT_GMAIL_RETENTION,Security,All,true,Enable Gmail retention in Vault,Yes,Boolean,true or false,Public,Legal,Vault setup,Email archival,[DATE]
-VAULT_DRIVE_RETENTION,Security,All,true,Enable Drive retention in Vault,Yes,Boolean,true or false,Public,Legal,Vault setup,File archival,[DATE]
-MDM_ENABLED,Security,All,true,Enable Mobile Device Management,Yes,Boolean,true or false,Public,Security,Workspace setup,Device security,[DATE]
-MDM_POLICY_TYPE,Security,All,Advanced,MDM policy type,Yes,String,Basic|Advanced,Public,Security,MDM setup,Full device management,[DATE]
-MDM_REQUIRE_PASSCODE,Security,All,true,Require device passcode,Yes,Boolean,true or false,Public,Security,MDM policy,6+ digit PIN,[DATE]
-MDM_REMOTE_WIPE,Security,All,true,Enable remote wipe capability,Yes,Boolean,true or false,Public,Security,MDM policy,Lost device protection,[DATE]
-MDM_MANAGED_DEVICES,Security,All,300,Expected managed device count,Yes,Integer,1-unlimited,Public,IT Admin,MDM setup,60% of users,[DATE]
-GMAIL_ENABLED,Applications,All,true,Enable Gmail for users,Yes,Boolean,true or false,Public,IT Admin,Workspace setup,Primary email,[DATE]
-GMAIL_STORAGE,Applications,All,30 GB,Gmail storage per user,Yes,String,Based on edition,Public,IT Admin,Edition,Business Plus allocation,[DATE]
-DRIVE_ENABLED,Applications,All,true,Enable Google Drive for users,Yes,Boolean,true or false,Public,IT Admin,Workspace setup,File storage,[DATE]
-DRIVE_SHARED_DRIVES,Applications,All,15,Number of Shared Drives to create,Yes,Integer,1-unlimited,Public,IT Admin,Drive setup,Team collaboration,[DATE]
-EXTERNAL_SHARING,Applications,All,Allowlisted domains,External sharing policy for Drive,Yes,String,Off|Anyone|Allowlisted domains,Public,Security,Drive setup,Controlled sharing,[DATE]
-MEET_ENABLED,Applications,All,true,Enable Google Meet for users,Yes,Boolean,true or false,Public,IT Admin,Workspace setup,Video conferencing,[DATE]
-MEET_RECORDING,Applications,All,true,Enable Meet recording capability,Yes,Boolean,true or false,Public,IT Admin,Meet setup,Meeting recordings,[DATE]
-CHAT_ENABLED,Applications,All,true,Enable Google Chat for users,Yes,Boolean,true or false,Public,IT Admin,Workspace setup,Team messaging,[DATE]
-MIGRATION_TOOL,Migration,All,GWMT,Primary email migration tool,Yes,String,GWMT|Third-party,Public,Migration,Tool selection,Google native tool,[DATE]
-MIGRATION_SOURCE,Migration,All,Exchange 2016,Source email system,Yes,String,Exchange|Office 365|Other,Public,Migration,Assessment,On-premises Exchange,[DATE]
-MAILBOX_COUNT,Migration,All,500,Total mailboxes to migrate,Yes,Integer,1-unlimited,Public,Migration,Assessment,Per SOW scope,[DATE]
-EMAIL_DATA_VOLUME,Migration,All,2.5 TB,Total email data volume,Yes,String,Size in TB,Public,Migration,Assessment,Average 5 GB per mailbox,[DATE]
-FILE_DATA_VOLUME,Migration,All,3 TB,Total file data volume to migrate,Yes,String,Size in TB,Public,Migration,Assessment,From file servers,[DATE]
-DISTRIBUTION_LISTS,Migration,All,150,Distribution lists to migrate,Yes,Integer,1-unlimited,Public,Migration,Assessment,Convert to Google Groups,[DATE]
-COEXISTENCE_PERIOD,Migration,All,4 weeks,Exchange coexistence duration,Yes,String,Weeks,Public,Migration,Planning,Parallel operation,[DATE]
-MIGRATION_WAVES,Migration,All,5,Number of migration waves,Yes,Integer,1-10,Public,Migration,Planning,95 users per wave,[DATE]
+#WIDTH: 45,14,50,50,50,45,8,12,27,14,14,12,30,12
+#ALIGN: left,left,left,left,left,left,center,left,left,center,left,left,left,center
+Parameter Name,Category,Production,Test,DR,Description,Required,Data Type,Validation Rules,Security Level,Owner Team,Dependencies,Notes,Last Updated
+solution.name,Project,google-workspace,google-workspace,google-workspace,Solution name for resource naming,Yes,String,Valid string value,Public,Infrastructure,,From solution object,2025-12-03
+solution.abbr,Project,gws,gws,gws,Solution abbreviation (3-4 chars),Yes,String,3-4 alphanumeric chars,Public,Infrastructure,,From solution object,2025-12-03
+solution.provider_name,Project,google,google,google,Provider organization name,Yes,String,Valid string value,Public,Infrastructure,,From solution object,2025-12-03
+solution.category_name,Project,modern-workspace,modern-workspace,modern-workspace,Solution category,Yes,String,Valid string value,Public,Infrastructure,,From solution object,2025-12-03
+ownership.cost_center,Project,CC-12345,CC-12345,CC-12345,Cost center for billing,Yes,String,Valid string value,Public,Finance,,From ownership object,2025-12-03
+ownership.owner_email,Project,workspace-admin@example.com,workspace-admin@example.com,workspace-admin@example.com,Owner email for notifications,Yes,String,Valid email address,Confidential,Infrastructure,,From ownership object,2025-12-03
+ownership.project_code,Project,PRJ-GWS-001,PRJ-GWS-001,PRJ-GWS-001,Project tracking code,Yes,String,Valid string value,Public,Infrastructure,,From ownership object,2025-12-03
+workspace.domain,Workspace,example.com,test.example.com,example.com,Primary Workspace domain,Yes,String,Valid domain name,Public,Infrastructure,,Verified in Google Admin,2025-12-03
+workspace.customer_id,Workspace,[CUSTOMER_ID],[CUSTOMER_ID],[CUSTOMER_ID],Workspace customer ID,Yes,String,Format Cxxxxxxxx,Confidential,Infrastructure,,From Admin Console,2025-12-03
+workspace.edition,Workspace,Business Plus,Business Starter,Business Plus,Workspace edition/SKU,Yes,String,Valid Workspace edition,Public,Infrastructure,,Determines features,2025-12-03
+workspace.user_count,Workspace,500,25,500,Total licensed users,Yes,Integer,1 to 300000,Public,Infrastructure,,SOW scope,2025-12-03
+workspace.storage_per_user,Workspace,5 TB,30 GB,5 TB,Storage allocation per user,Yes,String,Based on edition,Public,Infrastructure,,Edition dependent,2025-12-03
+workspace.admin_email,Workspace,admin@example.com,admin@test.example.com,admin@example.com,Super admin email,Yes,String,Valid email,Confidential,Security,,Must be super admin,2025-12-03
+migration.source_system,Migration,Exchange 2016,Exchange Online,Exchange 2016,Source email system,Yes,String,Valid source system,Public,Infrastructure,,Current email platform,2025-12-03
+migration.mailbox_count,Migration,500,25,500,Mailboxes to migrate,Yes,Integer,Positive integer,Public,Infrastructure,,SOW scope,2025-12-03
+migration.mailbox_total_gb,Migration,2500,50,2500,Total mailbox data (GB),Yes,Integer,Valid integer,Public,Infrastructure,,Capacity planning,2025-12-03
+migration.mailbox_avg_gb,Migration,5,2,5,Average mailbox size (GB),Yes,Integer,Valid integer,Public,Infrastructure,,Planning metric,2025-12-03
+migration.file_source,Migration,Windows File Server,SharePoint,Windows File Server,Source file storage,Yes,String,Valid source,Public,Infrastructure,,Current file platform,2025-12-03
+migration.file_total_gb,Migration,3000,100,3000,Total file data (GB),Yes,Integer,Valid integer,Public,Infrastructure,,Drive migration scope,2025-12-03
+migration.distribution_lists,Migration,150,10,150,Distribution lists to migrate,Yes,Integer,Valid integer,Public,Infrastructure,,Google Groups scope,2025-12-03
+migration.pilot_users,Migration,25,5,25,Pilot migration users,Yes,Integer,Valid integer,Public,Infrastructure,,First wave,2025-12-03
+migration.waves,Migration,5,2,5,Number of migration waves,Yes,Integer,1 to 10,Public,Infrastructure,,Phased rollout,2025-12-03
+migration.users_per_wave,Migration,95,10,95,Users per migration wave,Yes,Integer,Valid integer,Public,Infrastructure,,Wave sizing,2025-12-03
+migration.coexistence_weeks,Migration,4,2,4,Coexistence period (weeks),Yes,Integer,Valid integer,Public,Infrastructure,,Parallel operation,2025-12-03
+migration.tool,Migration,GWMT,GWMT,GWMT,Primary migration tool,Yes,String,GWMT or Third-party,Public,Infrastructure,,Google native,2025-12-03
+identity.sso_enabled,Identity,true,false,true,Enable SAML SSO,Yes,Boolean,true|false,Public,Security,,Enterprise auth,2025-12-03
+identity.idp_type,Identity,Azure AD,None,Azure AD,Identity provider type,Yes,String,ADFS or Azure AD or Okta or None,Public,Security,,Client IdP platform,2025-12-03
+identity.idp_entity_id,Identity,[IDP_ENTITY_ID],,[IDP_ENTITY_ID],IdP Entity ID for SAML,No,String,Valid URI,Confidential,Security,,From IdP metadata,2025-12-03
+identity.idp_sso_url,Identity,[IDP_SSO_URL],,[IDP_SSO_URL],IdP SSO URL,No,String,Valid HTTPS URL,Confidential,Security,,From IdP metadata,2025-12-03
+identity.idp_certificate,Identity,[IDP_CERT],,[IDP_CERT],IdP signing certificate,No,String,Base64 X.509 cert,Secret,Security,,From IdP metadata,2025-12-03
+identity.mfa_enabled,Identity,true,false,true,Enforce 2-Step Verification,Yes,Boolean,true|false,Public,Security,,Security baseline,2025-12-03
+identity.mfa_enforcement,Identity,ENFORCED,OPTIONAL,ENFORCED,2SV enforcement level,Yes,String,OFF or OPTIONAL or ENFORCED,Public,Security,,Required for admins,2025-12-03
+identity.mfa_methods,Identity,Any,Any,Any,Allowed 2SV methods,Yes,String,Any or Security Key Only or Phone Only,Public,Security,,Method restriction,2025-12-03
+identity.directory_sync_enabled,Identity,true,false,true,Enable GCDS directory sync,Yes,Boolean,true|false,Public,Security,,Automated provisioning,2025-12-03
+identity.gcds_sync_interval,Identity,4 hours,24 hours,4 hours,Directory sync interval,Yes,String,Valid interval,Public,Security,,Sync frequency,2025-12-03
+security.dlp_enabled,Security,true,false,true,Enable Data Loss Prevention,Yes,Boolean,true|false,Public,Security,,Data protection,2025-12-03
+security.dlp_rules_count,Security,15,0,15,Number of DLP rules,Yes,Integer,0 to 100,Public,Security,,Policy count,2025-12-03
+security.dlp_pii_detection,Security,true,false,true,Enable PII detection,Yes,Boolean,true|false,Public,Security,,SSN credit card,2025-12-03
+security.dlp_financial_detection,Security,true,false,true,Enable financial data detection,Yes,Boolean,true|false,Public,Security,,Bank accounts,2025-12-03
+security.dlp_action,Security,Warn and Block,Warn,Warn and Block,Default DLP action,Yes,String,Warn or Block or Warn and Block,Public,Security,,Violation response,2025-12-03
+security.vault_enabled,Security,true,false,true,Enable Google Vault,Yes,Boolean,true|false,Public,Security,,eDiscovery and retention,2025-12-03
+security.vault_retention_years,Security,7,1,7,Vault retention period (years),Yes,Integer,1 to 25,Public,Security,,Compliance requirement,2025-12-03
+security.vault_gmail_retention,Security,true,false,true,Enable Gmail retention in Vault,Yes,Boolean,true|false,Public,Security,,Email archival,2025-12-03
+security.vault_drive_retention,Security,true,false,true,Enable Drive retention in Vault,Yes,Boolean,true|false,Public,Security,,File archival,2025-12-03
+security.vault_legal_hold_enabled,Security,true,false,true,Enable legal hold capability,Yes,Boolean,true|false,Public,Security,,Legal compliance,2025-12-03
+security.mobile_management,Security,Advanced,Basic,Advanced,Mobile device management level,Yes,String,Basic or Advanced,Public,Security,,MDM tier,2025-12-03
+security.mdm_require_passcode,Security,true,true,true,Require device passcode,Yes,Boolean,true|false,Public,Security,,Mobile security,2025-12-03
+security.mdm_passcode_length,Security,6,4,6,Minimum passcode length,Yes,Integer,4 to 16,Public,Security,,PIN requirement,2025-12-03
+security.mdm_remote_wipe,Security,true,true,true,Enable remote wipe capability,Yes,Boolean,true|false,Public,Security,,Device security,2025-12-03
+security.mdm_managed_devices,Security,300,15,300,Expected managed device count,Yes,Integer,Valid integer,Public,Security,,60% of users,2025-12-03
+security.context_aware_access,Security,true,false,true,Enable context-aware access,Yes,Boolean,true|false,Public,Security,,Zero trust,2025-12-03
+applications.gmail_enabled,Applications,true,true,true,Enable Gmail for users,Yes,Boolean,true|false,Public,Infrastructure,,Primary email,2025-12-03
+applications.gmail_storage_gb,Applications,30,15,30,Gmail storage per user (GB),Yes,Integer,Based on edition,Public,Infrastructure,,Edition dependent,2025-12-03
+applications.drive_enabled,Applications,true,true,true,Enable Google Drive for users,Yes,Boolean,true|false,Public,Infrastructure,,File storage,2025-12-03
+applications.drive_shared_drives,Applications,15,3,15,Number of Shared Drives,Yes,Integer,Valid integer,Public,Infrastructure,,Team collaboration,2025-12-03
+applications.meet_enabled,Applications,true,true,true,Enable Google Meet for users,Yes,Boolean,true|false,Public,Infrastructure,,Video conferencing,2025-12-03
+applications.meet_recording,Applications,true,false,true,Enable Meet recording,Yes,Boolean,true|false,Public,Infrastructure,,Meeting recordings,2025-12-03
+applications.meet_max_participants,Applications,500,100,500,Max Meet participants,Yes,Integer,Based on edition,Public,Infrastructure,,Edition dependent,2025-12-03
+applications.chat_enabled,Applications,true,true,true,Enable Google Chat for users,Yes,Boolean,true|false,Public,Infrastructure,,Team messaging,2025-12-03
+sharing.external_sharing,Sharing,Whitelist,Disabled,Whitelist,External sharing policy,Yes,String,Disabled or Whitelist or Anyone,Public,Security,,Drive sharing,2025-12-03
+sharing.allow_domains,Sharing,"[""partner.com"", ""vendor.com""]",[],"[""partner.com"", ""vendor.com""]",Allowed external domains,No,List(String),Valid domain names,Confidential,Security,,Trusted domains,2025-12-03
+sharing.link_sharing_default,Sharing,Domain,Private,Domain,Default link sharing,Yes,String,Private or Domain or Anyone,Public,Security,,New file default,2025-12-03
+sharing.file_access_checker,Sharing,true,false,true,Enable file access checker,Yes,Boolean,true|false,Public,Security,,Access monitoring,2025-12-03
+org_units.root,Org Units,/,/,/,Root organizational unit,Yes,String,Valid OU path,Public,Infrastructure,,Top-level OU,2025-12-03
+org_units.sales,Org Units,/Sales,/Sales,/Sales,Sales department OU,Yes,String,Valid OU path,Public,Infrastructure,,95 users,2025-12-03
+org_units.marketing,Org Units,/Marketing,/Marketing,/Marketing,Marketing department OU,Yes,String,Valid OU path,Public,Infrastructure,,95 users,2025-12-03
+org_units.operations,Org Units,/Operations,/Operations,/Operations,Operations department OU,Yes,String,Valid OU path,Public,Infrastructure,,95 users,2025-12-03
+org_units.finance,Org Units,/Finance,/Finance,/Finance,Finance department OU,Yes,String,Valid OU path,Public,Infrastructure,,95 users,2025-12-03
+org_units.executive,Org Units,/Executive,/Executive,/Executive,Executive department OU,Yes,String,Valid OU path,Public,Infrastructure,,95 users,2025-12-03
+groups.create_default_groups,Groups,true,false,true,Create default security groups,Yes,Boolean,true|false,Public,Infrastructure,,Security groups,2025-12-03
+groups.default_groups,Groups,"[""all-users"", ""workspace-admins"", ""drive-managers"", ""vault-users""]","[""all-users""]","[""all-users"", ""workspace-admins"", ""drive-managers"", ""vault-users""]",Default groups to create,Yes,List(String),Valid group names,Public,Infrastructure,,Initial groups,2025-12-03
+groups.external_members_allowed,Groups,false,false,false,Allow external group members,Yes,Boolean,true|false,Public,Security,,Security setting,2025-12-03
+training.admin_training_hours,Training,8,4,8,Admin training hours,Yes,Integer,Valid integer,Public,Operations,,SOW commitment,2025-12-03
+training.end_user_sessions,Training,10,2,10,End-user training sessions,Yes,Integer,Valid integer,Public,Operations,,SOW commitment,2025-12-03
+training.materials_included,Training,true,true,true,Include training materials,Yes,Boolean,true|false,Public,Operations,,Deliverable,2025-12-03
+training.change_champions,Training,10,2,10,Number of change champions,Yes,Integer,Valid integer,Public,Operations,,Super users,2025-12-03
+hypercare.duration_days,Hypercare,30,14,30,Hypercare support duration (days),Yes,Integer,Valid integer,Public,Operations,,SOW commitment,2025-12-03
+hypercare.support_hours,Hypercare,8AM-6PM,8AM-5PM,8AM-6PM,Support hours during hypercare,Yes,String,Valid time range,Public,Operations,,Business hours,2025-12-03
+hypercare.response_time_hours,Hypercare,4,8,4,Response time SLA (hours),Yes,Integer,Valid integer,Public,Operations,,Support SLA,2025-12-03
+budget.license_cost_monthly,Budget,9000,450,9000,Monthly license cost (USD),Yes,Integer,Valid integer,Public,Finance,,500 users x $18,2025-12-03
+budget.professional_services,Budget,38400,9600,38400,Professional services cost (USD),Yes,Integer,Valid integer,Public,Finance,,Migration services,2025-12-03
+budget.training_budget,Budget,5000,1000,5000,Training budget (USD),Yes,Integer,Valid integer,Public,Finance,,Training allocation,2025-12-03
+automation.deployment_method,Automation,Platform-Native,Platform-Native,Platform-Native,Deployment automation type,Yes,String,Platform-Native or Manual,Public,Development,,Script-based,2025-12-03
+automation.gam_enabled,Automation,true,false,true,Enable GAM for bulk operations,Yes,Boolean,true|false,Public,Development,,Admin scripting,2025-12-03
+automation.admin_sdk_enabled,Automation,true,false,true,Enable Admin SDK Python scripts,Yes,Boolean,true|false,Public,Development,,API automation,2025-12-03

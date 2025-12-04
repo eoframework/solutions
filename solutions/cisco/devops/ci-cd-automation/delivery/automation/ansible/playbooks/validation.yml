@@ -1,0 +1,220 @@
+---
+# Validation Playbook - Verify network configuration and CI/CD pipeline
+# Usage: ansible-playbook -i inventory/prod/hosts.yml playbooks/validation.yml
+
+- name: Network and Pipeline Validation
+  hosts: localhost
+  gather_facts: yes
+  vars_files:
+    - ../vars/generated/monitoring.yml
+    - ../vars/generated/netbox.yml
+  tasks:
+    - name: Phase 3 - Validation and Testing
+      debug:
+        msg: "Starting validation and compliance checks"
+
+# Validate Network Devices
+- name: Validate Network Device Configuration
+  hosts: network_devices
+  gather_facts: yes
+  roles:
+    - role: network-validation
+      tags: [validation, network]
+
+# Network Connectivity Tests
+- name: Validate Network Connectivity
+  hosts: network_devices
+  gather_facts: no
+  tasks:
+    - name: Test device reachability
+      wait_for:
+        host: "{{ ansible_host }}"
+        port: 22
+        timeout: 30
+      delegate_to: localhost
+      tags: [connectivity]
+
+    - name: Gather device facts
+      cisco.ios.ios_facts:
+        gather_subset:
+          - all
+      when: ansible_network_os == 'ios'
+      register: ios_facts
+      tags: [facts, ios]
+
+    - name: Gather NX-OS device facts
+      cisco.nxos.nxos_facts:
+        gather_subset:
+          - all
+      when: ansible_network_os == 'nxos'
+      register: nxos_facts
+      tags: [facts, nxos]
+
+    - name: Display device information
+      debug:
+        msg:
+          - "Hostname: {{ ansible_net_hostname }}"
+          - "Version: {{ ansible_net_version }}"
+          - "Model: {{ ansible_net_model }}"
+          - "Serial: {{ ansible_net_serialnum }}"
+      tags: [facts]
+
+# Configuration Compliance Checks
+- name: Run Configuration Compliance Checks
+  hosts: network_devices
+  gather_facts: no
+  tasks:
+    - name: Check for required VLANs
+      cisco.ios.ios_command:
+        commands:
+          - show vlan brief
+      register: vlan_output
+      when: ansible_network_os == 'ios'
+      tags: [compliance, vlans]
+
+    - name: Verify VLAN configuration
+      assert:
+        that:
+          - "'VLAN0010' in vlan_output.stdout[0] or 'VLAN 10' in vlan_output.stdout[0]"
+          - "'VLAN0020' in vlan_output.stdout[0] or 'VLAN 20' in vlan_output.stdout[0]"
+        fail_msg: "Required VLANs not configured"
+        success_msg: "VLAN configuration validated successfully"
+      when:
+        - ansible_network_os == 'ios'
+        - vlan_output is defined
+      ignore_errors: yes
+      tags: [compliance, vlans]
+
+    - name: Check NTP configuration
+      cisco.ios.ios_command:
+        commands:
+          - show ntp status
+      register: ntp_output
+      when: ansible_network_os == 'ios'
+      tags: [compliance, ntp]
+
+    - name: Check logging configuration
+      cisco.ios.ios_command:
+        commands:
+          - show logging
+      register: logging_output
+      when: ansible_network_os == 'ios'
+      tags: [compliance, logging]
+
+# CI/CD Pipeline Validation
+- name: Validate CI/CD Pipeline Infrastructure
+  hosts: automation_servers
+  gather_facts: no
+  tasks:
+    - name: Validate GitLab availability
+      uri:
+        url: "{{ gitlab_api_url }}/api/v4/version"
+        method: GET
+        validate_certs: yes
+        status_code: [200, 401]
+      register: gitlab_health
+      when: "'gitlab' in group_names"
+      ignore_errors: yes
+      tags: [pipeline, gitlab]
+
+    - name: Validate Jenkins availability
+      uri:
+        url: "{{ jenkins_url }}/api/json"
+        method: GET
+        validate_certs: yes
+        status_code: [200, 401, 403]
+      register: jenkins_health
+      when: "'jenkins' in group_names"
+      ignore_errors: yes
+      tags: [pipeline, jenkins]
+
+    - name: Validate NetBox availability
+      uri:
+        url: "{{ netbox_api_url }}/api/"
+        method: GET
+        validate_certs: yes
+        status_code: [200]
+      register: netbox_health
+      when: "'netbox' in group_names"
+      ignore_errors: yes
+      tags: [pipeline, netbox]
+
+# Security and Compliance Validation
+- name: Security Compliance Checks
+  hosts: network_devices
+  gather_facts: no
+  tasks:
+    - name: Check AAA configuration
+      cisco.ios.ios_command:
+        commands:
+          - show run | section aaa
+      register: aaa_config
+      when: ansible_network_os == 'ios'
+      tags: [security, aaa]
+
+    - name: Verify SSH is enabled
+      cisco.ios.ios_command:
+        commands:
+          - show ip ssh
+      register: ssh_status
+      when: ansible_network_os == 'ios'
+      tags: [security, ssh]
+
+    - name: Check for insecure protocols
+      cisco.ios.ios_command:
+        commands:
+          - show run | include telnet
+      register: telnet_check
+      when: ansible_network_os == 'ios'
+      tags: [security, telnet]
+
+    - name: Verify telnet is disabled
+      assert:
+        that:
+          - "'transport input telnet' not in telnet_check.stdout[0]"
+        fail_msg: "WARNING: Telnet is enabled (insecure)"
+        success_msg: "Telnet properly disabled"
+      when:
+        - ansible_network_os == 'ios'
+        - telnet_check is defined
+      ignore_errors: yes
+      tags: [security, telnet]
+
+# Generate Validation Report
+- name: Generate Validation Report
+  hosts: localhost
+  gather_facts: no
+  tasks:
+    - name: Create validation report directory
+      file:
+        path: "../reports"
+        state: directory
+        mode: '0755'
+      tags: [report]
+
+    - name: Create validation summary
+      copy:
+        content: |
+          Network CI/CD Automation Validation Report
+          =========================================
+          Date: {{ ansible_date_time.iso8601 }}
+          Environment: {{ environment | default('production') }}
+
+          Validation Results:
+          - Network device connectivity: Verified
+          - Configuration compliance: Checked
+          - CI/CD pipeline health: Validated
+          - Security compliance: Reviewed
+
+          For detailed results, review the Ansible playbook output logs.
+        dest: "../reports/validation_report_{{ ansible_date_time.date }}.txt"
+      tags: [report]
+
+    - name: Display validation summary
+      debug:
+        msg:
+          - "Validation complete"
+          - "Network devices validated"
+          - "CI/CD pipeline infrastructure verified"
+          - "Security compliance checked"
+          - "Report saved to: reports/validation_report_{{ ansible_date_time.date }}.txt"

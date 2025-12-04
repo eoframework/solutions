@@ -1,0 +1,54 @@
+# Dell Precision AI Workstation - PowerScale Mount Playbook
+# EO Framework - Dell AI Solutions
+# NFS mount configuration for shared storage
+
+---
+- name: Configure PowerScale NFS Mounts
+  hosts: ai_workstations
+  gather_facts: true
+  become: true
+  tags: [storage, nfs]
+
+  pre_tasks:
+    - name: Display storage configuration
+      ansible.builtin.debug:
+        msg: |
+          Configuring PowerScale NFS mounts on {{ inventory_hostname }}
+          PowerScale: {{ storage.powerscale_hostname }}
+          NFS Version: {{ storage.nfs_version }}
+          Mount Point: {{ storage.nfs_mount_point }}
+
+  roles:
+    #=========================================================================
+    # POWERSCALE NFS MOUNTS
+    #=========================================================================
+    - role: powerscale-mount
+      tags: [mount, fstab]
+
+  post_tasks:
+    - name: Verify NFS mounts are active
+      ansible.builtin.command: df -h {{ storage.nfs_mount_point }}
+      register: mount_check
+      changed_when: false
+
+    - name: Display mount status
+      ansible.builtin.debug:
+        var: mount_check.stdout_lines
+
+    - name: Test write access to shared storage
+      ansible.builtin.file:
+        path: "{{ storage.nfs_mount_point }}/shared/.ansible_test"
+        state: touch
+        mode: '0644'
+      register: write_test
+      ignore_errors: true
+
+    - name: Verify write access
+      ansible.builtin.debug:
+        msg: "Write access to PowerScale: {{ 'SUCCESS' if write_test is succeeded else 'FAILED' }}"
+
+    - name: Clean up test file
+      ansible.builtin.file:
+        path: "{{ storage.nfs_mount_point }}/shared/.ansible_test"
+        state: absent
+      when: write_test is succeeded

@@ -1,0 +1,74 @@
+---
+# site.yml - Master playbook for Mist AI Network deployment
+# Orchestrates Mist Cloud and switch configuration
+
+- name: Deploy Mist AI Network
+  hosts: localhost
+  gather_facts: no
+  connection: local
+
+  vars_files:
+    - "{{ playbook_dir }}/../vars/common.yml"
+    - "{{ playbook_dir }}/../vars/secrets.yml"
+
+  pre_tasks:
+    - name: Display deployment information
+      ansible.builtin.debug:
+        msg: >
+          Deploying {{ solution.name }} ({{ solution.abbr }})
+          to {{ solution.environment }} environment
+
+    - name: Verify Mist API connectivity
+      ansible.builtin.uri:
+        url: "{{ mist.api_url }}/self"
+        method: GET
+        headers:
+          Authorization: "Token {{ mist_api_token }}"
+        validate_certs: yes
+        status_code: 200
+      register: mist_auth
+
+    - name: Display organization info
+      ansible.builtin.debug:
+        msg: "Connected to Mist Cloud as: {{ mist_auth.json.email }}"
+
+  #============================================================================
+  # MIST CLOUD CONFIGURATION
+  #============================================================================
+  roles:
+    - role: mist-org
+      tags: [org, foundation]
+    - role: mist-site
+      tags: [site, foundation]
+    - role: mist-wlan
+      tags: [wlan, core]
+
+  post_tasks:
+    - name: Display site summary
+      ansible.builtin.debug:
+        msg: |
+          Mist configuration complete for {{ solution.environment }}
+          Site: {{ site.name }}
+          WLANs configured: {{ wlans | length }}
+
+#==============================================================================
+# SWITCH CONFIGURATION
+#==============================================================================
+- name: Configure EX Switches
+  hosts: juniper_switches
+  gather_facts: no
+  connection: netconf
+
+  vars_files:
+    - "{{ playbook_dir }}/../vars/common.yml"
+    - "{{ playbook_dir }}/../vars/secrets.yml"
+
+  roles:
+    - role: mist-switch
+      tags: [switch]
+
+  post_tasks:
+    - name: Save switch configuration
+      junipernetworks.junos.junos_config:
+        confirm_commit: yes
+        comment: "Mist AI Network deployment"

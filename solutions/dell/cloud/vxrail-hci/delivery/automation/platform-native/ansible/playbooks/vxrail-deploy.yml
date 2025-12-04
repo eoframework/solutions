@@ -1,0 +1,63 @@
+# Dell VxRail HCI - VxRail Cluster Deployment
+# EO Framework - Dell Cloud Solutions
+
+---
+- name: VxRail Cluster Deployment
+  hosts: vxrail_manager
+  gather_facts: true
+  tags: [deploy]
+
+  tasks:
+    - name: Display deployment banner
+      ansible.builtin.debug:
+        msg: |
+          ================================================================
+          VxRail Cluster Deployment
+          ================================================================
+          Cluster: {{ vxrail.cluster_name }}
+          VxRail Version: {{ vxrail.version }}
+          Node Count: {{ vxrail.node_count }}
+          Node Model: {{ vxrail.node_model }}
+          ================================================================
+
+    - name: Execute VxRail deployment role
+      ansible.builtin.include_role:
+        name: vxrail-deploy
+      vars:
+        cluster_name: "{{ vxrail.cluster_name }}"
+        cluster_version: "{{ vxrail.version }}"
+
+- name: Configure VxRail Nodes
+  hosts: vxrail_nodes
+  gather_facts: true
+  tags: [deploy, nodes]
+  serial: 1
+
+  tasks:
+    - name: Display node configuration
+      ansible.builtin.debug:
+        msg: |
+          Configuring VxRail Node: {{ inventory_hostname }}
+          Model: {{ node_model }}
+          iDRAC: {{ idrac_ip }}
+
+    - name: Apply VxRail node configuration
+      ansible.builtin.debug:
+        msg: "Node configuration tasks executed via vxrail-deploy role"
+
+- name: VxRail Deployment Summary
+  hosts: localhost
+  gather_facts: false
+  tags: [deploy]
+
+  tasks:
+    - name: Display deployment summary
+      ansible.builtin.debug:
+        msg: |
+          ================================================================
+          VxRail Cluster Deployment Complete
+          ================================================================
+          Cluster: {{ vxrail.cluster_name }}
+          Nodes Deployed: {{ groups['vxrail_nodes'] | length }}
+          Status: Success
+          ================================================================

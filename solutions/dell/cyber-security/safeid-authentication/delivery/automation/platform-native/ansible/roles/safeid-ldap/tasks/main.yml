@@ -1,0 +1,52 @@
+---
+# Dell SafeID Authentication - LDAP Integration Role
+# EO Framework - Dell Cyber Security Solutions
+
+- name: Install LDAP client packages
+  ansible.builtin.package:
+    name:
+      - openldap-clients
+      - python3-ldap
+    state: present
+
+- name: Configure LDAP connection settings
+  ansible.builtin.template:
+    src: ldap.conf.j2
+    dest: /etc/safeid/ldap.conf
+    owner: safeid
+    group: safeid
+    mode: '0600'
+  notify: restart safeid-ldap
+
+- name: Configure LDAP SSL certificates
+  ansible.builtin.copy:
+    src: "{{ item }}"
+    dest: /etc/safeid/ssl/ldap-ca.crt
+    owner: safeid
+    group: safeid
+    mode: '0644'
+  loop: "{{ ldap_ca_certificates | default([]) }}"
+  when: ldap.integration == "LDAPS"
+
+- name: Configure LDAP synchronization
+  ansible.builtin.template:
+    src: ldap-sync.conf.j2
+    dest: /etc/safeid/ldap-sync.conf
+    owner: safeid
+    group: safeid
+    mode: '0600'
+  notify: restart safeid-ldap
+
+- name: Configure LDAP sync schedule
+  ansible.builtin.cron:
+    name: "SafeID LDAP synchronization"
+    minute: "*/{{ ldap.sync.interval }}"
+    job: "/usr/bin/safeid-cli ldap sync"
+    user: safeid
+  when: ldap.sync.enabled | default(false)
+
+- name: Start LDAP sync service
+  ansible.builtin.service:
+    name: safeid-ldap
+    state: started
+    enabled: true

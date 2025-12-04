@@ -1,49 +1,111 @@
-#WIDTH: 28,18,12,30,48,10,12,33,16,18,24,42,12
-#ALIGN: left,left,center,left,left,center,left,left,center,left,left,left,center
-Parameter Name,Category,Environment,Default Value,Description,Required,Data Type,Validation Rules,Security Level,Owner Team,Dependencies,Notes,Last Updated
-VMANAGE_CLUSTER_IP,Cisco vManage,All,10.100.1.10,vManage cluster VIP address,Yes,String,Valid IPv4 address,Confidential,Network Team,Network connectivity,Management interface,[DATE]
-VMANAGE_NODE_COUNT,Cisco vManage,All,3,Number of vManage cluster nodes,Yes,Integer,1|3|6,Public,Network Team,Server capacity,HA deployment,[DATE]
-VMANAGE_ADMIN_USER,Cisco vManage,All,vmanage-admin,vManage administrative username,Yes,String,Valid username,Confidential,Network Team,vManage deployed,Initial admin,[DATE]
-VMANAGE_TENANT_MODE,Cisco vManage,All,single-tenant,vManage tenant configuration,Yes,String,single-tenant|multi-tenant,Public,Network Team,None,Enterprise mode,[DATE]
-VSMART_PRIMARY_IP,Cisco vSmart,All,10.100.1.20,Primary vSmart controller IP,Yes,String,Valid IPv4 address,Confidential,Network Team,Network connectivity,Control plane,[DATE]
-VSMART_SECONDARY_IP,Cisco vSmart,All,10.100.1.21,Secondary vSmart controller IP,Yes,String,Valid IPv4 address,Confidential,Network Team,VSMART_PRIMARY_IP,High availability,[DATE]
-VSMART_OMP_KEY,Cisco vSmart,All,[omp-key],OMP authentication key,Yes,String,Min 16 characters,Secret,Network Team,vSmart deployment,Rotate annually,[DATE]
-VBOND_PRIMARY_IP,Cisco vBond,All,10.100.1.30,Primary vBond orchestrator IP,Yes,String,Valid IPv4 address,Confidential,Network Team,Network connectivity,NAT traversal,[DATE]
-VBOND_PUBLIC_IP,Cisco vBond,All,[public-ip],vBond public IP for edge devices,Yes,String,Valid public IPv4,Confidential,Network Team,Internet connectivity,DNS registered,[DATE]
-VBOND_PORT,Cisco vBond,All,12346,vBond listening port,Yes,Integer,Valid port number,Public,Network Team,Firewall rules,DTLS port,[DATE]
-SDWAN_ORG_NAME,SD-WAN Fabric,All,[org-name],SD-WAN organization name,Yes,String,Valid org identifier,Public,Network Team,Smart account,Unique identifier,[DATE]
-SDWAN_DOMAIN_ID,SD-WAN Fabric,All,1,SD-WAN domain identifier,Yes,Integer,1-4294967295,Public,Network Team,None,Single domain,[DATE]
-SDWAN_SITE_ID_START,SD-WAN Fabric,All,100,Starting site ID for deployment,Yes,Integer,1-4294967295,Public,Network Team,Site planning,Auto-increment,[DATE]
-VEDGE_SOFTWARE_VERSION,Cisco vEdge,All,20.9.1,vEdge software version,Yes,String,Valid version format,Public,Network Team,Compatibility matrix,Latest stable,[DATE]
-VEDGE_SYSTEM_IP_RANGE,Cisco vEdge,All,172.16.0.0/16,vEdge system IP address range,Yes,String,Valid CIDR,Confidential,Network Team,IP planning,Non-routable,[DATE]
-TRANSPORT_INTERNET,Transport,All,enabled,Enable Internet transport,Yes,Boolean,true|false,Public,Network Team,ISP circuits,Primary transport,[DATE]
-TRANSPORT_MPLS,Transport,All,enabled,Enable MPLS transport,Yes,Boolean,true|false,Public,Network Team,MPLS circuits,Legacy backup,[DATE]
-TRANSPORT_LTE,Transport,All,disabled,Enable LTE backup transport,No,Boolean,true|false,Public,Network Team,LTE contracts,Emergency backup,[DATE]
-TLOC_COLOR_INTERNET,Transport,All,biz-internet,TLOC color for Internet,Yes,String,Valid color name,Public,Network Team,None,Business Internet,[DATE]
-TLOC_COLOR_MPLS,Transport,All,mpls,TLOC color for MPLS,Yes,String,Valid color name,Public,Network Team,None,Private MPLS,[DATE]
-BFD_MULTIPLIER,BFD,All,3,BFD detection multiplier,Yes,Integer,3-6,Public,Network Team,None,Failover speed,[DATE]
-BFD_POLL_INTERVAL,BFD,All,1000,BFD poll interval in ms,Yes,Integer,100-5000,Public,Network Team,None,Default 1 second,[DATE]
-APP_ROUTE_POLICY_COUNT,Application,All,25,Number of application policies,Yes,Integer,1-100,Public,Network Team,Policy design,Per business unit,[DATE]
-QOS_PROFILE_COUNT,QoS,All,8,QoS profiles per site,Yes,Integer,4-16,Public,Network Team,Traffic analysis,Standard set,[DATE]
-QOS_VOICE_DSCP,QoS,All,46,DSCP marking for voice traffic,Yes,Integer,0-63,Public,Network Team,QoS design,EF class,[DATE]
-QOS_VIDEO_DSCP,QoS,All,34,DSCP marking for video traffic,Yes,Integer,0-63,Public,Network Team,QoS design,AF41 class,[DATE]
-QOS_CRITICAL_DSCP,QoS,All,26,DSCP marking for critical data,Yes,Integer,0-63,Public,Network Team,QoS design,AF31 class,[DATE]
-SECURITY_ZONE_COUNT,Security,All,12,Number of security zones,Yes,Integer,1-32,Public,Security Team,Policy design,Network segmentation,[DATE]
-FW_INSPECTION_MODE,Security,All,stateful,Firewall inspection mode,Yes,String,stateless|stateful,Public,Security Team,vEdge capability,Stateful preferred,[DATE]
-IPS_ENABLED,Security,All,true,Enable IPS on vEdge,Yes,Boolean,true|false,Public,Security Team,Security license,Threat protection,[DATE]
-URL_FILTERING,Security,All,enabled,Enable URL filtering,Yes,Boolean,true|false,Public,Security Team,Security license,Web security,[DATE]
-AMP_ENABLED,Security,All,true,Enable Advanced Malware Protection,Yes,Boolean,true|false,Public,Security Team,AMP license,Malware detection,[DATE]
-CLOUD_ONRAMP_AWS,Cloud OnRamp,All,enabled,Enable AWS Cloud OnRamp,Yes,Boolean,true|false,Public,Network Team,AWS account,Direct connect,[DATE]
-CLOUD_ONRAMP_AZURE,Cloud OnRamp,All,enabled,Enable Azure Cloud OnRamp,Yes,Boolean,true|false,Public,Network Team,Azure subscription,ExpressRoute,[DATE]
-CLOUD_ONRAMP_GCP,Cloud OnRamp,All,disabled,Enable GCP Cloud OnRamp,No,Boolean,true|false,Public,Network Team,GCP project,Future phase,[DATE]
-SAAS_OPTIMIZATION,SaaS,All,enabled,Enable SaaS application optimization,Yes,Boolean,true|false,Public,Network Team,Cloud onramp,Direct access,[DATE]
-SAAS_O365_PRIORITY,SaaS,All,high,Microsoft 365 traffic priority,Yes,String,low|medium|high|critical,Public,Network Team,M365 tenant,Business critical,[DATE]
-SAAS_WEBEX_PRIORITY,SaaS,All,critical,Webex traffic priority,Yes,String,low|medium|high|critical,Public,Network Team,Webex license,Real-time comm,[DATE]
-NTP_SERVER_PRIMARY,Infrastructure,All,10.100.4.10,Primary NTP server,Yes,String,Valid IPv4 address,Confidential,Infrastructure Team,Network connectivity,Time sync,[DATE]
-DNS_SERVER_PRIMARY,Infrastructure,All,10.100.5.10,Primary DNS server,Yes,String,Valid IPv4 address,Confidential,Infrastructure Team,Network connectivity,Name resolution,[DATE]
-SYSLOG_SERVER,Monitoring,All,10.100.6.10,Syslog server for SD-WAN logs,Yes,String,Valid IPv4 address,Confidential,Operations Team,Network connectivity,Log aggregation,[DATE]
-NETFLOW_COLLECTOR,Monitoring,All,10.100.6.20,NetFlow collector for traffic analytics,Yes,String,Valid IPv4 address,Confidential,Operations Team,Network connectivity,Traffic analysis,[DATE]
-SNMP_COMMUNITY,Monitoring,All,[snmp-string],SNMP community string,Yes,String,Min 8 characters,Secret,Operations Team,Monitoring setup,Read-only,[DATE]
-ALERT_EMAIL,Notifications,All,noc-alerts@client.local,Email for network alerts,Yes,String,Valid email address,Confidential,Operations Team,SMTP relay,NOC distribution,[DATE]
-CISCO_SMARTNET_CONTRACT,Support,All,[contract-number],Cisco SmartNet contract number,Yes,String,Valid contract ID,Confidential,Support Team,Vendor relationship,24x7 TAC support,[DATE]
-
+#WIDTH:  45,14,30,30,30,45,8,12,27,14,14,12,30,12
+#ALIGN:  left,left,left,left,left,left,center,left,left,center,left,left,left,center
+Parameter Name,Category,Production,Test,DR,Description,Required,Data Type,Validation Rules,Security Level,Owner Team,Dependencies,Notes,Last Updated
+solution.name,Project,cisco-sdwan-enterprise,cisco-sdwan-enterprise,cisco-sdwan-enterprise,Solution name for resource naming,Yes,String,Valid string value,Public,Development,,SD-WAN Enterprise solution,2025-12-03
+solution.abbr,Project,sdwan,sdwan,sdwan,Solution abbreviation (3-8 chars),Yes,String,3-8 lowercase,Public,Development,,Used in resource naming prefix,2025-12-03
+solution.provider_name,Project,cisco,cisco,cisco,Provider organization name,Yes,String,Valid provider,Public,Development,,Cisco provider,2025-12-03
+solution.category_name,Project,network,network,network,Solution category,Yes,String,Valid category,Public,Development,,Network category,2025-12-03
+project.cost_center,Project,CC-NET-001,CC-NET-TEST,CC-NET-DR,Cost center for billing,Yes,String,CC format,Public,Finance Team,,Billing code,2025-12-03
+project.owner_email,Project,network-team@company.com,dev-team@company.com,network-team@company.com,Team email for ownership,Yes,String,Valid email,Public,Operations Team,,Primary contact,2025-12-03
+project.code,Project,PRJ-SDWAN-2025,PRJ-SDWAN-TEST,PRJ-SDWAN-DR,Project tracking code,Yes,String,PRJ format,Public,PMO,,Project tracking,2025-12-03
+vmanage.cluster_ip,Cisco vManage,10.100.1.10,10.101.1.10,10.102.1.10,vManage cluster VIP address,Yes,String,Valid IPv4 address,Confidential,Network Team,Network connectivity,Cluster management,2025-12-03
+vmanage.fqdn,Cisco vManage,vmanage.enterprise.local,vmanage-test.enterprise.local,vmanage-dr.enterprise.local,vManage fully qualified domain name,Yes,String,Valid FQDN,Public,Network Team,DNS configuration,HTTPS access,2025-12-03
+vmanage.primary_ip,Cisco vManage,10.100.1.10,10.101.1.10,10.102.1.10,vManage primary node IP,Yes,String,Valid IPv4 address,Confidential,Network Team,Network connectivity,Primary node,2025-12-03
+vmanage.node_count,Cisco vManage,3,1,3,Number of vManage cluster nodes,Yes,Integer,1|3|6,Public,Network Team,License count,HA cluster,2025-12-03
+vmanage.admin_user,Cisco vManage,vmanage-admin,vmanage-admin,vmanage-admin,vManage administrative username,Yes,String,Valid username,Confidential,Security Team,Initial config,Admin access,2025-12-03
+vmanage.admin_password,Cisco vManage,[vault:vmanage_admin_password_prod],[vault:vmanage_admin_password_test],[vault:vmanage_admin_password_dr],vManage admin password,Yes,String,Min 12 characters,Secret,Security Team,,Stored in Ansible Vault,2025-12-03
+vmanage.tenant_mode,Cisco vManage,single-tenant,single-tenant,single-tenant,vManage tenant configuration,Yes,String,single-tenant|multi-tenant,Public,Network Team,,Tenant mode,2025-12-03
+vmanage.version,Cisco vManage,20.12,20.12,20.12,vManage software version,Yes,String,Semantic versioning,Public,Network Team,Cisco support,Controller version,2025-12-03
+vmanage.public_ip,Cisco vManage,[public-ip-prod],[public-ip-test],[public-ip-dr],vManage public IP for internet access,Yes,String,Valid public IPv4,Confidential,Network Team,NAT config,Edge onboarding,2025-12-03
+vmanage.ssl_verify,Cisco vManage,true,false,true,Verify SSL certificates for API calls,Yes,Boolean,true|false,Public,Security Team,Valid certificates,API security,2025-12-03
+vsmart.primary_ip,Cisco vSmart,10.100.1.20,10.101.1.20,10.102.1.20,Primary vSmart controller IP,Yes,String,Valid IPv4 address,Confidential,Network Team,Network connectivity,Primary controller,2025-12-03
+vsmart.secondary_ip,Cisco vSmart,10.100.1.21,10.101.1.21,10.102.1.21,Secondary vSmart controller IP,Yes,String,Valid IPv4 address,Confidential,Network Team,Network connectivity,HA controller,2025-12-03
+vsmart.omp_key,Cisco vSmart,[vault:vsmart_omp_key_prod],[vault:vsmart_omp_key_test],[vault:vsmart_omp_key_dr],OMP authentication key,Yes,String,Min 16 characters,Secret,Security Team,OMP config,Control plane auth,2025-12-03
+vsmart.site_id,Cisco vSmart,100,100,100,vSmart site identifier,Yes,Integer,1-4294967295,Public,Network Team,,Site ID,2025-12-03
+vbond.primary_ip,Cisco vBond,10.100.1.30,10.101.1.30,10.102.1.30,Primary vBond orchestrator IP,Yes,String,Valid IPv4 address,Confidential,Network Team,Network connectivity,Orchestrator IP,2025-12-03
+vbond.public_ip,Cisco vBond,[public-ip-vbond-prod],[public-ip-vbond-test],[public-ip-vbond-dr],vBond public IP for edge devices,Yes,String,Valid public IPv4,Confidential,Network Team,NAT config,Edge registration,2025-12-03
+vbond.port,Cisco vBond,12346,12346,12346,vBond listening port,Yes,Integer,Valid port number,Public,Network Team,Firewall rules,Control port,2025-12-03
+vbond.site_id,Cisco vBond,1,1,1,vBond site identifier,Yes,Integer,1-4294967295,Public,Network Team,,Site ID,2025-12-03
+sdwan_fabric.org_name,SD-WAN Fabric,[org-name-prod],[org-name-test],[org-name-dr],SD-WAN organization name,Yes,String,Valid org identifier,Public,Network Team,vManage config,Organization ID,2025-12-03
+sdwan_fabric.domain_id,SD-WAN Fabric,1,1,2,SD-WAN domain identifier,Yes,Integer,1-4294967295,Public,Network Team,,Domain separation,2025-12-03
+sdwan_fabric.site_id_start,SD-WAN Fabric,100,100,100,Starting site ID for deployment,Yes,Integer,1-4294967295,Public,Network Team,,Site numbering,2025-12-03
+sdwan_fabric.control_plane_vrf,SD-WAN Fabric,0,0,0,VRF for SD-WAN control plane,Yes,Integer,0-65530,Public,Network Team,,Control VRF,2025-12-03
+vedge.software_version,Cisco vEdge,20.9.1,20.9.1,20.9.1,vEdge software version,Yes,String,Valid version format,Public,Network Team,Cisco support,Edge version,2025-12-03
+vedge.system_ip_range,Cisco vEdge,172.16.0.0/16,172.17.0.0/16,172.18.0.0/16,vEdge system IP address range,Yes,String,Valid CIDR,Confidential,Network Team,IP planning,System IPs,2025-12-03
+vedge.model_branch,Cisco vEdge,ISR-4331,ISR-4331,ISR-4331,Branch vEdge router model,Yes,String,Valid model,Public,Network Team,Hardware order,Branch hardware,2025-12-03
+vedge.model_hub,Cisco vEdge,ISR-4451,ISR-4451,ISR-4451,Hub vEdge router model,Yes,String,Valid model,Public,Network Team,Hardware order,Hub hardware,2025-12-03
+vedge.count_branch,Cisco vEdge,25,3,5,Number of branch routers,Yes,Integer,1-1000,Public,Network Team,Licensing,Branch count,2025-12-03
+vedge.count_hub,Cisco vEdge,2,1,2,Number of hub routers,Yes,Integer,1-10,Public,Network Team,Licensing,Hub count,2025-12-03
+transport.internet_enabled,Transport,true,true,true,Enable Internet transport,Yes,Boolean,true|false,Public,Network Team,ISP circuits,Primary transport,2025-12-03
+transport.mpls_enabled,Transport,true,false,true,Enable MPLS transport,Yes,Boolean,true|false,Public,Network Team,MPLS circuits,Backup transport,2025-12-03
+transport.lte_enabled,Transport,true,false,true,Enable LTE backup transport,Yes,Boolean,true|false,Public,Network Team,LTE SIMs,Tertiary transport,2025-12-03
+transport.tloc_color_internet,Transport,biz-internet,biz-internet,biz-internet,TLOC color for Internet,Yes,String,Valid color name,Public,Network Team,Template config,Internet color,2025-12-03
+transport.tloc_color_mpls,Transport,mpls,mpls,mpls,TLOC color for MPLS,Yes,String,Valid color name,Public,Network Team,Template config,MPLS color,2025-12-03
+transport.tloc_color_lte,Transport,lte,lte,lte,TLOC color for LTE,Yes,String,Valid color name,Public,Network Team,Template config,LTE color,2025-12-03
+transport.bandwidth_internet_branch,Transport,100000,100000,100000,Branch Internet bandwidth in Kbps,Yes,Integer,1000-10000000,Public,Network Team,ISP contract,Internet BW,2025-12-03
+transport.bandwidth_mpls_branch,Transport,50000,50000,50000,Branch MPLS bandwidth in Kbps,Yes,Integer,1000-10000000,Public,Network Team,MPLS contract,MPLS BW,2025-12-03
+transport.bandwidth_lte,Transport,25000,25000,25000,LTE backup bandwidth in Kbps,Yes,Integer,1000-100000,Public,Network Team,LTE plan,LTE BW,2025-12-03
+bfd.multiplier,BFD,3,3,3,BFD detection multiplier,Yes,Integer,3-6,Public,Network Team,Control config,Detection mult,2025-12-03
+bfd.poll_interval,BFD,1000,1000,1000,BFD poll interval in ms,Yes,Integer,100-5000,Public,Network Team,Control config,Poll rate,2025-12-03
+bfd.hello_interval,BFD,60000,60000,60000,BFD hello interval in ms,Yes,Integer,10000-600000,Public,Network Team,Control config,Hello rate,2025-12-03
+qos.profile_count,QoS,8,4,8,QoS profiles per site,Yes,Integer,4-16,Public,Network Team,Template config,Profile count,2025-12-03
+qos.voice_dscp,QoS,46,46,46,DSCP marking for voice traffic (EF),Yes,Integer,0-63,Public,Network Team,QoS policy,Voice marking,2025-12-03
+qos.video_dscp,QoS,34,34,34,DSCP marking for video traffic (AF41),Yes,Integer,0-63,Public,Network Team,QoS policy,Video marking,2025-12-03
+qos.critical_dscp,QoS,26,26,26,DSCP marking for critical data (AF31),Yes,Integer,0-63,Public,Network Team,QoS policy,Critical marking,2025-12-03
+qos.best_effort_dscp,QoS,0,0,0,DSCP marking for best effort,Yes,Integer,0-63,Public,Network Team,QoS policy,BE marking,2025-12-03
+qos.voice_bandwidth_percent,QoS,20,20,20,Bandwidth percentage for voice,Yes,Integer,1-100,Public,Network Team,QoS policy,Voice allocation,2025-12-03
+qos.video_bandwidth_percent,QoS,25,25,25,Bandwidth percentage for video,Yes,Integer,1-100,Public,Network Team,QoS policy,Video allocation,2025-12-03
+qos.critical_bandwidth_percent,QoS,35,35,35,Bandwidth percentage for critical data,Yes,Integer,1-100,Public,Network Team,QoS policy,Critical allocation,2025-12-03
+security.zone_count,Security,12,4,12,Number of security zones,Yes,Integer,1-32,Public,Security Team,Firewall design,Zone count,2025-12-03
+security.fw_inspection_mode,Security,stateful,stateful,stateful,Firewall inspection mode,Yes,String,stateless|stateful,Public,Security Team,Security policy,Inspection mode,2025-12-03
+security.ips_enabled,Security,true,false,true,Enable IPS on vEdge,Yes,Boolean,true|false,Public,Security Team,IPS licensing,IPS feature,2025-12-03
+security.url_filtering,Security,true,false,true,Enable URL filtering,Yes,Boolean,true|false,Public,Security Team,URL licensing,URL feature,2025-12-03
+security.amp_enabled,Security,true,false,true,Enable Advanced Malware Protection,Yes,Boolean,true|false,Public,Security Team,AMP licensing,AMP feature,2025-12-03
+security.ipsec_integrity,Security,ip-esp,ip-esp,ip-esp,IPSec integrity protocol,Yes,String,Valid protocol,Public,Security Team,Crypto policy,Integrity,2025-12-03
+security.ipsec_encryption,Security,aes-256-cbc,aes-256-cbc,aes-256-cbc,IPSec encryption algorithm,Yes,String,Valid algorithm,Public,Security Team,Crypto policy,Encryption,2025-12-03
+security.ipsec_authentication,Security,sha256-hmac,sha256-hmac,sha256-hmac,IPSec authentication method,Yes,String,Valid auth method,Public,Security Team,Crypto policy,Authentication,2025-12-03
+security.certificate_lifetime,Security,365,365,365,Certificate lifetime in days,Yes,Integer,1-3650,Public,Security Team,PKI policy,Cert validity,2025-12-03
+cloud_onramp.aws_enabled,Cloud OnRamp,true,false,true,Enable AWS Cloud OnRamp,Yes,Boolean,true|false,Public,Cloud Team,AWS account,AWS integration,2025-12-03
+cloud_onramp.azure_enabled,Cloud OnRamp,true,false,true,Enable Azure Cloud OnRamp,Yes,Boolean,true|false,Public,Cloud Team,Azure subscription,Azure integration,2025-12-03
+cloud_onramp.gcp_enabled,Cloud OnRamp,false,false,false,Enable GCP Cloud OnRamp,No,Boolean,true|false,Public,Cloud Team,GCP project,GCP integration,2025-12-03
+cloud_onramp.aws_region,Cloud OnRamp,us-east-1,us-east-1,us-west-2,AWS primary region,Yes,String,Valid AWS region,Public,Cloud Team,AWS config,AWS region,2025-12-03
+cloud_onramp.azure_region,Cloud OnRamp,eastus,eastus,westus2,Azure primary region,Yes,String,Valid Azure region,Public,Cloud Team,Azure config,Azure region,2025-12-03
+saas.optimization_enabled,SaaS,true,false,true,Enable SaaS application optimization,Yes,Boolean,true|false,Public,Network Team,SaaS license,SaaS feature,2025-12-03
+saas.o365_priority,SaaS,high,medium,high,Microsoft 365 traffic priority,Yes,String,low|medium|high|critical,Public,Network Team,App policy,O365 priority,2025-12-03
+saas.webex_priority,SaaS,critical,high,critical,Webex traffic priority,Yes,String,low|medium|high|critical,Public,Network Team,App policy,Webex priority,2025-12-03
+saas.salesforce_priority,SaaS,high,medium,high,Salesforce traffic priority,Yes,String,low|medium|high|critical,Public,Network Team,App policy,SF priority,2025-12-03
+saas.zoom_priority,SaaS,high,medium,high,Zoom traffic priority,Yes,String,low|medium|high|critical,Public,Network Team,App policy,Zoom priority,2025-12-03
+infrastructure.ntp_primary,Infrastructure,10.100.4.10,10.101.4.10,10.102.4.10,Primary NTP server,Yes,String,Valid IPv4 address,Confidential,Infrastructure Team,Network connectivity,Time sync,2025-12-03
+infrastructure.ntp_secondary,Infrastructure,10.100.4.11,10.101.4.11,10.102.4.11,Secondary NTP server,No,String,Valid IPv4 address,Confidential,Infrastructure Team,Network connectivity,NTP failover,2025-12-03
+infrastructure.dns_primary,Infrastructure,10.100.5.10,10.101.5.10,10.102.5.10,Primary DNS server,Yes,String,Valid IPv4 address,Confidential,Infrastructure Team,Network connectivity,Name resolution,2025-12-03
+infrastructure.dns_secondary,Infrastructure,10.100.5.11,10.101.5.11,10.102.5.11,Secondary DNS server,No,String,Valid IPv4 address,Confidential,Infrastructure Team,Network connectivity,DNS failover,2025-12-03
+infrastructure.domain_name,Infrastructure,enterprise.local,test.local,dr.enterprise.local,DNS domain name,Yes,String,Valid domain,Public,Infrastructure Team,DNS config,Domain name,2025-12-03
+infrastructure.timezone,Infrastructure,UTC,UTC,UTC,System timezone,Yes,String,Valid timezone,Public,Infrastructure Team,,System time,2025-12-03
+monitoring.syslog_server,Monitoring,10.100.6.10,10.101.6.10,10.102.6.10,Syslog server for SD-WAN logs,Yes,String,Valid IPv4 address,Confidential,Operations Team,Network connectivity,Log aggregation,2025-12-03
+monitoring.syslog_port,Monitoring,514,514,514,Syslog server port,Yes,Integer,1-65535,Public,Operations Team,Firewall rules,Syslog port,2025-12-03
+monitoring.netflow_collector,Monitoring,10.100.6.20,10.101.6.20,10.102.6.20,NetFlow collector for traffic analytics,Yes,String,Valid IPv4 address,Confidential,Operations Team,Network connectivity,Flow analytics,2025-12-03
+monitoring.snmp_community,Monitoring,[vault:snmp_community_prod],[vault:snmp_community_test],[vault:snmp_community_dr],SNMP community string,Yes,String,Min 8 characters,Secret,Security Team,,Stored in Vault,2025-12-03
+monitoring.snmp_version,Monitoring,v3,v3,v3,SNMP version,Yes,String,v2c|v3,Public,Operations Team,,SNMP protocol,2025-12-03
+monitoring.netflow_enabled,Monitoring,true,false,true,Enable NetFlow export,Yes,Boolean,true|false,Public,Operations Team,Collector access,Flow export,2025-12-03
+monitoring.cflowd_interval,Monitoring,60,60,60,Flow export interval in seconds,Yes,Integer,10-3600,Public,Operations Team,,Export rate,2025-12-03
+notifications.alert_email,Notifications,noc-alerts@company.com,dev-alerts@company.com,noc-alerts@company.com,Email for network alerts,Yes,String,Valid email address,Confidential,Operations Team,,Alert recipient,2025-12-03
+notifications.smtp_server,Notifications,smtp.company.com,smtp.company.com,smtp.company.com,SMTP server for notifications,Yes,String,Valid hostname or IP,Confidential,Infrastructure Team,SMTP relay,Mail server,2025-12-03
+notifications.smtp_port,Notifications,587,587,587,SMTP server port,Yes,Integer,25|587|465,Public,Infrastructure Team,,SMTP port,2025-12-03
+notifications.slack_webhook,Notifications,[vault:slack_webhook_prod],[vault:slack_webhook_test],[vault:slack_webhook_dr],Slack webhook URL for notifications,No,String,Valid webhook URL,Secret,Operations Team,Slack integration,Stored in Vault,2025-12-03
+deployment.pilot_site_count,Deployment,5,3,3,Number of sites in pilot phase,Yes,Integer,3-20,Public,Network Team,Phase 1,Pilot scope,2025-12-03
+deployment.production_site_count,Deployment,50,10,10,Total sites for production deployment,Yes,Integer,10-500,Public,Network Team,Full scope,Total sites,2025-12-03
+deployment.pilot_sites,Deployment,"HQ,Branch-1,Branch-2,Branch-3,Branch-4","Lab-1,Lab-2,Lab-3","DR-Site-1,DR-Site-2,DR-Site-3",Sites included in pilot deployment,Yes,String,Comma-separated names,Public,Network Team,Site planning,Pilot sites,2025-12-03
+deployment.wave_1_sites,Deployment,10,5,5,Number of sites in first deployment wave,Yes,Integer,5-50,Public,Network Team,Rollout plan,Wave 1 count,2025-12-03
+deployment.wave_2_sites,Deployment,10,0,0,Number of sites in second deployment wave,Yes,Integer,0-50,Public,Network Team,Rollout plan,Wave 2 count,2025-12-03
+ha.graceful_restart_enabled,High Availability,true,false,true,Enable graceful restart,Yes,Boolean,true|false,Public,Network Team,HA config,GR feature,2025-12-03
+ha.graceful_restart_timer,High Availability,120,120,120,Graceful restart timer in seconds,Yes,Integer,60-600,Public,Network Team,HA config,GR timer,2025-12-03
+backup.enabled,Operations,true,false,true,Enable configuration backups,Yes,Boolean,true|false,Public,Operations Team,Storage access,Backup feature,2025-12-03
+backup.retention_days,Operations,30,7,30,Backup retention in days,Yes,Integer,7-365,Public,Operations Team,Storage capacity,Retention period,2025-12-03
+backup.schedule,Operations,daily,weekly,daily,Backup schedule frequency,Yes,String,daily|weekly|monthly,Public,Operations Team,,Backup frequency,2025-12-03
+support.smartnet_contract,Support,[contract-number-prod],[contract-number-test],[contract-number-dr],Cisco SmartNet contract number,Yes,String,Valid contract ID,Confidential,Support Team,Vendor relationship,24x7 support,2025-12-03
+support.tac_severity,Support,2,3,2,Default TAC case severity,Yes,Integer,1-4,Public,Support Team,SmartNet contract,1=Critical 4=Low,2025-12-03
+support.escalation_contact,Support,network-escalation@company.com,dev-escalation@company.com,network-escalation@company.com,Escalation contact email,Yes,String,Valid email,Confidential,Operations Team,,After-hours escalation,2025-12-03
+dr.enabled,DR,true,false,false,Enable disaster recovery,Yes,Boolean,true|false,Public,Network Team,DR site,DR feature,2025-12-03
+dr.failover_priority,DR,1,0,0,Failover priority (0=disabled),Yes,Integer,0-2,Public,Network Team,HA config,Priority value,2025-12-03
+dr.rpo_hours,DR,4,0,0,Recovery Point Objective in hours,Yes,Integer,1-24,Public,Network Team,DR SLA,RPO target,2025-12-03
+dr.rto_hours,DR,2,0,0,Recovery Time Objective in hours,Yes,Integer,1-12,Public,Network Team,DR SLA,RTO target,2025-12-03

@@ -1,0 +1,100 @@
+---
+#------------------------------------------------------------------------------
+# Role: dnac-site
+# Purpose: Create and manage DNA Center site hierarchy
+#------------------------------------------------------------------------------
+
+- name: Create Global site area
+  cisco.dnac.site_create:
+    dnac_host: "{{ dnac.vip }}"
+    dnac_auth: "{{ dnac_auth_token }}"
+    site:
+      area:
+        name: "Global"
+        parentName: ""
+  register: global_site
+  ignore_errors: yes
+
+- name: Create site hierarchy from deployment configuration
+  cisco.dnac.site_create:
+    dnac_host: "{{ dnac.vip }}"
+    dnac_auth: "{{ dnac_auth_token }}"
+    site:
+      area:
+        name: "{{ item }}"
+        parentName: "Global"
+  loop: "{{ deployment.pilot_site_names.split(',') | map('trim') | list }}"
+  register: site_results
+  ignore_errors: yes
+
+- name: Configure device credentials for sites
+  cisco.dnac.device_credential_create:
+    dnac_host: "{{ dnac.vip }}"
+    dnac_auth: "{{ dnac_auth_token }}"
+    globalCredentialType: "CLI"
+    cliCredential:
+      - username: "{{ devices.cli_username }}"
+        password: "{{ vault_device_cli_password }}"
+        enablePassword: "{{ vault_device_enable_secret }}"
+        description: "Network Device CLI Credentials"
+  register: cli_credential
+
+- name: Create SNMPv3 credentials
+  cisco.dnac.device_credential_create:
+    dnac_host: "{{ dnac.vip }}"
+    dnac_auth: "{{ dnac_auth_token }}"
+    globalCredentialType: "SNMPV3"
+    snmpV3:
+      - username: "snmpv3user"
+        authType: "SHA"
+        authPassword: "{{ vault_snmp_ro_community }}"
+        privacyType: "AES128"
+        privacyPassword: "{{ vault_snmp_rw_community }}"
+        snmpMode: "AUTHPRIV"
+        description: "SNMPv3 Credentials"
+  when: devices.snmp_version == "v3"
+  register: snmp_credential
+
+- name: Configure LDAP authentication
+  ansible.builtin.uri:
+    url: "https://{{ dnac.vip }}/dna/system/api/v1/auth/ldap"
+    method: POST
+    headers:
+      x-auth-token: "{{ dnac_auth_token }}"
+    body_format: json
+    body:
+      ldapServer: "{{ integrations.ad.server_primary }}"
+      domain: "{{ integrations.ad.domain }}"
+      bindDN: "{{ integrations.ad.bind_user }}"
+      bindPassword: "{{ vault_ad_bind_password }}"
+      baseDN: "{{ integrations.ad.base_dn }}"
+      adminGroup: "{{ integrations.ad.group_admin }}"
+    validate_certs: "{{ dnac.ssl_verify }}"
+    status_code: [200, 201, 202]
+  register: ldap_config
+
+- name: Configure NTP servers
+  ansible.builtin.uri:
+    url: "https://{{ dnac.vip }}/dna/intent/api/v1/time-settings"
+    method: PUT
+    headers:
+      x-auth-token: "{{ dnac_auth_token }}"
+    body_format: json
+    body:
+      ntpServer:
+        - "{{ infrastructure.ntp_primary }}"
+        - "{{ infrastructure.ntp_secondary | default(infrastructure.ntp_primary) }}"
+    validate_certs: "{{ dnac.ssl_verify }}"
+    status_code: [200, 202]
+
+- name: Site setup summary
+  ansible.builtin.debug:
+    msg: |
+      ============================================================
+      DNA Center Site Setup Complete
+      ============================================================
+      Sites Created: {{ site_results.results | length }}
+      CLI Credentials: Configured
+      SNMPv3: {{ 'Configured' if devices.snmp_version == 'v3' else 'Skipped' }}
+      LDAP Integration: {{ 'Configured' if ldap_config.status in [200, 201, 202] else 'Check Settings' }}
+      ============================================================

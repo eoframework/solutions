@@ -1,0 +1,132 @@
+---
+# switch-config.yml - Configure EX switches for Mist AI Network
+# Configures VLANs, interfaces, and Mist Cloud adoption
+
+- name: Configure EX Switches for Mist
+  hosts: juniper_switches
+  gather_facts: no
+  connection: netconf
+
+  vars_files:
+    - "{{ playbook_dir }}/../vars/common.yml"
+    - "{{ playbook_dir }}/../vars/secrets.yml"
+
+  pre_tasks:
+    - name: Get device facts
+      junipernetworks.junos.junos_facts:
+        gather_subset:
+          - default
+          - hardware
+      register: switch_facts
+
+    - name: Display switch info
+      ansible.builtin.debug:
+        msg: >
+          Switch: {{ switch_facts.ansible_facts.ansible_net_hostname }}
+          Model: {{ switch_facts.ansible_facts.ansible_net_model }}
+
+    - name: Backup configuration
+      junipernetworks.junos.junos_config:
+        backup: yes
+        backup_options:
+          filename: "{{ inventory_hostname }}_{{ lookup('pipe', 'date +%Y%m%d_%H%M%S') }}.conf"
+          dir_path: "{{ playbook_dir }}/../backups"
+
+  tasks:
+    #==========================================================================
+    # VLAN CONFIGURATION
+    #==========================================================================
+    - name: Configure VLANs
+      junipernetworks.junos.junos_vlans:
+        config:
+          - vlan_id: "{{ item.value.id }}"
+            name: "{{ item.value.name }}"
+        state: merged
+      loop: "{{ vlans | dict2items }}"
+      loop_control:
+        label: "VLAN {{ item.value.id }} - {{ item.value.name }}"
+
+    #==========================================================================
+    # INTERFACE CONFIGURATION
+    #==========================================================================
+    - name: Configure trunk interfaces (uplinks)
+      junipernetworks.junos.junos_config:
+        lines:
+          - "set interfaces {{ item }} unit 0 family ethernet-switching interface-mode trunk"
+          - "set interfaces {{ item }} unit 0 family ethernet-switching vlan members all"
+        parents: []
+      loop: "{{ uplink_interfaces | default(['xe-0/1/0', 'xe-0/1/1']) }}"
+      when: switch_role == 'access'
+
+    - name: Configure access port template for APs
+      junipernetworks.junos.junos_config:
+        lines:
+          - "set interfaces interface-range AP-PORTS member-range ge-0/0/0 to ge-0/0/47"
+          - "set interfaces interface-range AP-PORTS unit 0 family ethernet-switching interface-mode trunk"
+          - "set interfaces interface-range AP-PORTS unit 0 family ethernet-switching vlan members {{ vlans.management.name }}"
+          - "set interfaces interface-range AP-PORTS unit 0 family ethernet-switching vlan members {{ vlans.corporate.name }}"
+          - "set interfaces interface-range AP-PORTS unit 0 family ethernet-switching vlan members {{ vlans.guest.name }}"
+          - "set interfaces interface-range AP-PORTS unit 0 family ethernet-switching vlan members {{ vlans.iot.name }}"
+          - "set interfaces interface-range AP-PORTS native-vlan-id {{ switch.native_vlan }}"
+
+    - name: Configure PoE
+      junipernetworks.junos.junos_config:
+        lines:
+          - "set poe interface all"
+          - "set poe interface all priority high"
+
+    #==========================================================================
+    # MANAGEMENT CONFIGURATION
+    #==========================================================================
+    - name: Configure management VLAN interface
+      junipernetworks.junos.junos_config:
+        lines:
+          - "set interfaces vlan unit {{ vlans.management.id }} family inet address {{ ansible_host }}/24"
+          - "set vlans {{ vlans.management.name }} l3-interface vlan.{{ vlans.management.id }}"
+
+    - name: Configure default route
+      junipernetworks.junos.junos_config:
+        lines:
+          - "set routing-options static route 0.0.0.0/0 next-hop {{ gateway | default('10.10.100.1') }}"
+
+    #==========================================================================
+    # MIST CLOUD ADOPTION
+    #==========================================================================
+    - name: Configure Mist Cloud connectivity
+      junipernetworks.junos.junos_config:
+        lines:
+          - "set system services outbound-ssh client mist device-id {{ inventory_hostname }}"
+          - "set system services outbound-ssh client mist services netconf"
+          - "set system services outbound-ssh client mist oc-term.mistsys.net port 2200"
+
+    - name: Enable LLDP for Mist discovery
+      junipernetworks.junos.junos_config:
+        lines:
+          - "set protocols lldp interface all"
+          - "set protocols lldp-med interface all"
+
+    #==========================================================================
+    # SPANNING TREE
+    #==========================================================================
+    - name: Configure RSTP
+      junipernetworks.junos.junos_config:
+        lines:
+          - "set protocols rstp interface all"
+          - "set protocols rstp interface {{ item }} edge"
+      loop: "{{ ['ge-0/0/0', 'ge-0/0/1', 'ge-0/0/2'] }}"
+
+  post_tasks:
+    - name: Commit configuration
+      junipernetworks.junos.junos_config:
+        confirm_commit: yes
+        comment: "Mist AI Network switch configuration"
+
+    - name: Verify VLAN configuration
+      junipernetworks.junos.junos_command:
+        commands:
+          - show vlans brief
+      register: vlan_status
+
+    - name: Display VLAN summary
+      ansible.builtin.debug:
+        var: vlan_status.stdout_lines

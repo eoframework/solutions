@@ -1,0 +1,73 @@
+---
+# Test Environment Variables - Mist AI Network
+
+solution:
+  name: mist-ai-network
+  abbr: mist
+  environment: test
+
+mist:
+  api_url: "https://api.mist.com/api/v1"
+  country_code: US
+  timezone: "America/New_York"
+
+site:
+  name: "Test Lab"
+
+wlans:
+  corporate:
+    ssid: "Test-Corp"
+    auth_type: eap
+    vlan_id: 200
+    band: both
+    enabled: true
+  guest:
+    ssid: "Test-Guest"
+    auth_type: psk
+    vlan_id: 300
+    band: both
+    enabled: true
+
+vlans:
+  management:
+    id: 100
+    name: "MGMT"
+  corporate:
+    id: 200
+    name: "Corporate"
+  guest:
+    id: 300
+    name: "Guest"
+
+radius:
+  enabled: false
+
+rf:
+  band_24:
+    channels: [1, 6, 11]
+    power_min: 8
+    power_max: 15
+  band_5:
+    channels: [36, 40, 44, 48]
+    power_min: 10
+    power_max: 20
+
+sle:
+  connect_target: 95
+  coverage_target: 90
+  capacity_target: 90
+  roaming_target: 90
+
+location:
+  enabled: false
+
+system:
+  ntp_servers:
+    - "10.100.100.20"
+  dns_servers:
+    - "10.100.100.10"
+
+switch:
+  mgmt_vlan: 100
+  native_vlan: 100
+  poe_budget: 720

@@ -1,0 +1,123 @@
+---
+#------------------------------------------------------------------------------
+# Role: hyperflex-cluster
+# Purpose: Deploy and configure HyperFlex cluster via Intersight
+#------------------------------------------------------------------------------
+
+- name: Create HyperFlex Cluster Profile
+  cisco.intersight.intersight_rest_api:
+    api_private_key: "{{ vault_intersight_api_key }}"
+    api_key_id: "{{ intersight.api_key_id }}"
+    api_uri: /hyperflex/ClusterProfiles
+    api_body:
+      Name: "{{ hyperflex.cluster_name }}"
+      Description: "{{ hyperflex.cluster_description | default('HyperFlex Cluster deployed via EO Framework') }}"
+      MgmtPlatform: "{{ hyperflex.mgmt_platform | default('FI') }}"
+      MgmtIpAddress: "{{ hyperflex.mgmt_ip }}"
+      StorageDataVlan:
+        Name: "{{ network.storage_vlan_name | default('hx-storage-data') }}"
+        VlanId: "{{ network.storage_vlan_id }}"
+      ClusterInternalSubnet:
+        Gateway: "{{ hyperflex.data_gateway }}"
+        Netmask: "{{ hyperflex.data_netmask }}"
+        IpAddress: "{{ hyperflex.data_ip_range }}"
+      Organization:
+        ObjectType: organization.Organization
+        Moid: "{{ intersight_org_moid }}"
+    state: present
+  register: cluster_profile
+  when: cluster_action == 'create'
+
+- name: Configure Local Credential Policy
+  cisco.intersight.intersight_rest_api:
+    api_private_key: "{{ vault_intersight_api_key }}"
+    api_key_id: "{{ intersight.api_key_id }}"
+    api_uri: /hyperflex/LocalCredentialPolicies
+    api_body:
+      Name: "{{ hyperflex.cluster_name }}-local-cred"
+      Description: "Local credentials for {{ hyperflex.cluster_name }}"
+      HypervisorAdmin: "{{ vmware.esxi_admin_user | default('root') }}"
+      HypervisorAdminPwd: "{{ vault_esxi_root_password }}"
+      HxdpRootPwd: "{{ vault_hx_admin_password }}"
+      FactoryHypervisorPassword: true
+      Organization:
+        ObjectType: organization.Organization
+        Moid: "{{ intersight_org_moid }}"
+    state: present
+  register: local_cred_policy
+  when: cluster_action == 'create'
+
+- name: Configure System Configuration Policy
+  cisco.intersight.intersight_rest_api:
+    api_private_key: "{{ vault_intersight_api_key }}"
+    api_key_id: "{{ intersight.api_key_id }}"
+    api_uri: /hyperflex/SysConfigPolicies
+    api_body:
+      Name: "{{ hyperflex.cluster_name }}-sys-config"
+      Description: "System configuration for {{ hyperflex.cluster_name }}"
+      DnsDomainName: "{{ infrastructure.dns_domain }}"
+      DnsServers:
+        - "{{ infrastructure.dns_primary }}"
+        - "{{ infrastructure.dns_secondary | default('') }}"
+      NtpServers:
+        - "{{ infrastructure.ntp_primary }}"
+        - "{{ infrastructure.ntp_secondary | default('') }}"
+      Timezone: "{{ infrastructure.timezone | default('UTC') }}"
+      Organization:
+        ObjectType: organization.Organization
+        Moid: "{{ intersight_org_moid }}"
+    state: present
+  register: sys_config_policy
+  when: cluster_action == 'create'
+
+- name: Configure vCenter Policy
+  cisco.intersight.intersight_rest_api:
+    api_private_key: "{{ vault_intersight_api_key }}"
+    api_key_id: "{{ intersight.api_key_id }}"
+    api_uri: /hyperflex/VcenterConfigPolicies
+    api_body:
+      Name: "{{ hyperflex.cluster_name }}-vcenter"
+      Description: "vCenter integration for {{ hyperflex.cluster_name }}"
+      Hostname: "{{ vmware.vcenter_fqdn }}"
+      Username: "{{ vmware.vcenter_admin_user }}"
+      Password: "{{ vault_vcenter_admin_password }}"
+      DataCenter: "{{ vmware.datacenter_name | default('Datacenter') }}"
+      SsoUrl: "https://{{ vmware.vcenter_fqdn }}/lookupservice/sdk"
+      Organization:
+        ObjectType: organization.Organization
+        Moid: "{{ intersight_org_moid }}"
+    state: present
+  register: vcenter_policy
+  when: cluster_action == 'create'
+
+- name: Get cluster profile status
+  cisco.intersight.intersight_info:
+    api_private_key: "{{ vault_intersight_api_key }}"
+    api_key_id: "{{ intersight.api_key_id }}"
+    api_uri: /hyperflex/ClusterProfiles
+    query_params:
+      $filter: "Name eq '{{ hyperflex.cluster_name }}'"
+  register: cluster_status
+
+- name: Display cluster profile status
+  ansible.builtin.debug:
+    msg: |
+      HyperFlex Cluster Profile Status:
+      - Name: {{ hyperflex.cluster_name }}
+      - Status: {{ cluster_status.api_response[0].ConfigContext.ConfigState | default('Unknown') }}
+      - Node Count: {{ hyperflex.node_count }}
+      - Replication Factor: {{ hyperflex.replication_factor }}
+  when: cluster_status.api_response | length > 0
+
+- name: Deploy cluster (validate and deploy)
+  cisco.intersight.intersight_rest_api:
+    api_private_key: "{{ vault_intersight_api_key }}"
+    api_key_id: "{{ intersight.api_key_id }}"
+    api_uri: "/hyperflex/ClusterProfiles/{{ cluster_status.api_response[0].Moid }}"
+    api_body:
+      Action: "{{ cluster_action | default('Validate') }}"
+    update_method: post
+  register: cluster_deploy
+  when:
+    - cluster_status.api_response | length > 0
+    - cluster_action in ['Validate', 'Deploy']

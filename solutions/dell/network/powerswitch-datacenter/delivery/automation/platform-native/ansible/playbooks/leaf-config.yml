@@ -1,0 +1,184 @@
+# Dell PowerSwitch Datacenter - Leaf Configuration
+# EO Framework - Dell Network Solutions
+# Configures leaf switches in the fabric
+
+---
+- name: Configure Leaf Switches
+  hosts: leaf_switches
+  gather_facts: false
+  tags: [leaf]
+
+  vars:
+    backup_dir: "/tmp/powerswitch_backups/{{ ansible_date_time.epoch | default('backup') }}"
+
+  tasks:
+    #=========================================================================
+    # BACKUP CURRENT CONFIGURATION
+    #=========================================================================
+    - name: Backup leaf switch configuration
+      dellemc.os10.os10_command:
+        commands:
+          - show running-config
+      register: leaf_backup
+      tags: [backup]
+
+    - name: Save leaf switch backup
+      ansible.builtin.copy:
+        content: "{{ leaf_backup.stdout[0] }}"
+        dest: "{{ backup_dir }}/leaf_{{ inventory_hostname }}_backup.cfg"
+        mode: '0644'
+      delegate_to: localhost
+      tags: [backup]
+
+    #=========================================================================
+    # LOOPBACK INTERFACE
+    #=========================================================================
+    - name: Configure loopback interface
+      dellemc.os10.os10_config:
+        lines:
+          - "interface loopback0"
+          - " description Router-ID Loopback"
+          - " ip address {{ loopback_ip }}/32"
+          - " no shutdown"
+      tags: [loopback]
+
+    #=========================================================================
+    # VLT CONFIGURATION
+    #=========================================================================
+    - name: Configure VLT domain
+      dellemc.os10.os10_config:
+        lines:
+          - "vlt-domain {{ vlt_domain }}"
+          - " backup destination {{ vlt_peer }}"
+          - " discovery-interface ethernet1/1/49"
+          - " peer-routing"
+          - " primary-priority {{ 1 if vlt_unit_id == 0 else 2 }}"
+          - " unit-id {{ vlt_unit_id }}"
+          - " vlt-mac {{ '00:00:00:00:00:%02x' | format(vlt_domain | int) }}"
+      tags: [vlt]
+
+    - name: Configure VLT peer link
+      dellemc.os10.os10_config:
+        lines:
+          - "interface port-channel 127"
+          - " description VLT Peer Link"
+          - " switchport mode trunk"
+          - " vlt-port-channel 127"
+          - " no shutdown"
+          - "interface ethernet1/1/49"
+          - " description VLT Discovery Link"
+          - " channel-group 127 mode active"
+          - " no shutdown"
+          - "interface ethernet1/1/50"
+          - " description VLT Peer Link Member"
+          - " channel-group 127 mode active"
+          - " no shutdown"
+      tags: [vlt]
+
+    #=========================================================================
+    # UPLINK INTERFACES TO SPINES
+    #=========================================================================
+    - name: Configure uplink interfaces to spines
+      dellemc.os10.os10_config:
+        lines:
+          - "interface ethernet1/1/{{ 51 + item }}"
+          - " description Uplink-to-Spine-{{ '%02d' | format(item + 1) }}"
+          - " no switchport"
+          - " mtu 9216"
+          - " ip address 10.{{ bgp.spine_asn | int - 65000 }}.{{ rack_id }}.{{ item * 2 }}/31"
+          - " no shutdown"
+      loop: "{{ range(0, fabric.leaf.uplink_count | int) | list }}"
+      tags: [uplinks]
+
+    #=========================================================================
+    # SERVER-FACING PORTS
+    #=========================================================================
+    - name: Configure server-facing access ports
+      dellemc.os10.os10_config:
+        lines:
+          - "interface ethernet1/1/{{ item }}"
+          - " description Server-Port-{{ '%02d' | format(item) }}"
+          - " switchport mode trunk"
+          - " switchport trunk allowed vlan all"
+          - " spanning-tree port type edge"
+          - " storm-control broadcast level {{ security.storm_control.broadcast_level | default(10) }}"
+          - " no shutdown"
+      loop: "{{ range(1, 49) | list }}"
+      when: security.storm_control.enabled | default(true)
+      tags: [server-ports]
+
+    #=========================================================================
+    # BGP CONFIGURATION
+    #=========================================================================
+    - name: Configure BGP router
+      dellemc.os10.os10_config:
+        lines:
+          - "router bgp {{ bgp_asn }}"
+          - " router-id {{ loopback_ip }}"
+          - " bestpath as-path multipath-relax"
+          - " address-family ipv4 unicast"
+          - "  redistribute connected"
+      tags: [bgp]
+
+    - name: Configure BGP neighbors to spines
+      dellemc.os10.os10_config:
+        lines:
+          - "router bgp {{ bgp_asn }}"
+          - " neighbor 10.{{ bgp.spine_asn | int - 65000 }}.{{ rack_id }}.{{ item * 2 + 1 }}"
+          - "  remote-as {{ bgp.spine_asn }}"
+          - "  description Spine-{{ '%02d' | format(item + 1) }}"
+          - "  timers {{ bgp.keepalive | default(3) }} {{ bgp.holdtime | default(9) }}"
+          - "  address-family ipv4 unicast"
+          - "   send-community both"
+      loop: "{{ range(0, fabric.leaf.uplink_count | int) | list }}"
+      tags: [bgp]
+
+    #=========================================================================
+    # EVPN CONFIGURATION (if enabled)
+    #=========================================================================
+    - name: Configure EVPN for VXLAN
+      dellemc.os10.os10_config:
+        lines:
+          - "router bgp {{ bgp_asn }}"
+          - " address-family l2vpn evpn"
+          - "  advertise-all-vni"
+      when: evpn.enabled | default(false)
+      tags: [evpn]
+
+    - name: Configure VTEP interface
+      dellemc.os10.os10_config:
+        lines:
+          - "interface nve1"
+          - " description VXLAN VTEP"
+          - " source-interface loopback0"
+          - " no shutdown"
+      when: evpn.enabled | default(false)
+      tags: [vxlan]
+
+    #=========================================================================
+    # SAVE CONFIGURATION
+    #=========================================================================
+    - name: Save running configuration
+      dellemc.os10.os10_config:
+        save: true
+      tags: [save]
+
+    #=========================================================================
+    # VERIFICATION
+    #=========================================================================
+    - name: Verify leaf configuration
+      dellemc.os10.os10_command:
+        commands:
+          - show ip interface brief
+          - show ip bgp summary
+          - show vlt brief
+      register: leaf_verification
+      tags: [verify]
+
+    - name: Display leaf verification
+      ansible.builtin.debug:
+        msg: |
+          Leaf: {{ inventory_hostname }}
+          Interfaces: {{ leaf_verification.stdout[0] | regex_findall('up') | length }} up
+          VLT Domain: {{ vlt_domain }}
+      tags: [verify]

@@ -1,0 +1,238 @@
+# Dell PowerEdge CI Infrastructure - DR Variables
+# Generated from configuration.csv - DR column
+# EO Framework - Dell DevOps Solutions
+
+---
+#=============================================================================
+# PROJECT METADATA
+#=============================================================================
+solution:
+  name: poweredge-ci-infrastructure
+  abbr: pci
+  provider: dell
+  category: devops
+
+environment: dr
+datacenter_name: "{{ datacenter_name | default('DR Datacenter') }}"
+
+#=============================================================================
+# GITLAB CONFIGURATION (DR Site - Full capacity)
+#=============================================================================
+gitlab:
+  version: "16.8-ee"
+  edition: premium
+  server_count: 2
+  ha_enabled: true
+
+  database:
+    type: postgresql
+    version: "15"
+    ha_enabled: true
+    patroni_enabled: true
+
+  external_url: "{{ gitlab_external_url | default('https://gitlab-dr.company.com') }}"
+
+  storage:
+    repositories_path: /var/opt/gitlab/git-data
+    artifacts_path: /var/opt/gitlab/gitlab-rails/shared/artifacts
+
+  # DR specific settings
+  replication:
+    enabled: true
+    source_url: "{{ primary_gitlab_url | default('https://gitlab.company.com') }}"
+    sync_interval: 3600
+
+#=============================================================================
+# BUILD INFRASTRUCTURE (DR Site - Full capacity)
+#=============================================================================
+build:
+  agent_count: 8
+  agent_model: PowerEdge-R650
+
+  hardware:
+    cpu_model: Intel-Xeon-Gold-6338
+    cpu_cores: 32
+    memory_gb: 256
+    storage_tb: 2
+    storage_type: NVMe
+
+  runners:
+    total_count: 24
+    per_agent: 3
+    executor: docker
+    docker_version: "24.0"
+    concurrent_builds: 24
+
+  performance:
+    daily_build_volume: 5000
+    concurrent_builds: 24
+    queue_target_min: 5
+
+#=============================================================================
+# USER BASE
+#=============================================================================
+users:
+  developer_count: 50
+  team_count: 12
+  teams:
+    - Platform
+    - Backend
+    - Frontend
+    - Mobile
+    - QA
+
+#=============================================================================
+# ARTIFACT MANAGEMENT (DR Site)
+#=============================================================================
+artifactory:
+  version: "7.x-pro"
+  storage_tb: 20
+
+  repositories:
+    maven:
+      enabled: true
+      type: remote
+      remote_url: https://repo.maven.apache.org/maven2
+    npm:
+      enabled: true
+      type: remote
+      remote_url: https://registry.npmjs.org
+    docker:
+      enabled: true
+      type: local
+      registry_port: 5000
+
+  gitlab_integration: true
+
+  # DR replication
+  replication:
+    enabled: true
+    source: "{{ primary_artifactory_url | default('https://artifactory.company.com') }}"
+
+#=============================================================================
+# CONTAINER PLATFORM
+#=============================================================================
+docker:
+  version: "24.0"
+  edition: enterprise
+
+  daemon:
+    storage_driver: overlay2
+    log_driver: json-file
+    log_max_size: 100m
+    log_max_file: 3
+
+  buildkit_enabled: true
+
+  registry:
+    mirror: "{{ docker_registry_mirror | default('') }}"
+
+#=============================================================================
+# AUTHENTICATION & SECURITY
+#=============================================================================
+authentication:
+  sso:
+    enabled: true
+    provider: SAML
+    idp_url: "{{ sso_idp_url | default('https://idp.company.com') }}"
+
+  ssh:
+    enabled: true
+    key_type: ed25519
+
+security:
+  vulnerability_scanning:
+    enabled: true
+    scan_on_push: true
+
+  secret_backend: gitlab-ci-variables
+
+  audit_log_retention_days: 365
+
+  firewall_enabled: true
+
+#=============================================================================
+# MONITORING
+#=============================================================================
+monitoring:
+  solution: prometheus-grafana
+
+  prometheus:
+    retention_days: 30
+    scrape_interval: 30s
+
+  grafana:
+    enabled: true
+    port: 3000
+
+  gitlab_metrics:
+    enabled: true
+    endpoint: "/-/metrics"
+
+  node_exporter:
+    enabled: true
+    port: 9100
+
+  docker_metrics:
+    enabled: true
+
+#=============================================================================
+# OPERATIONS (DR Specific)
+#=============================================================================
+operations:
+  backup:
+    enabled: true
+    schedule: "Daily 02:00"
+    retention_days: 30
+
+  dr:
+    enabled: true
+    rto_hours: 4
+    rpo_hours: 1
+    site_role: standby
+
+  maintenance:
+    window: "Sunday 02:00-06:00 UTC"
+
+  # Failover settings
+  failover:
+    automated: false
+    dns_update_required: true
+    load_balancer_update_required: true
+
+#=============================================================================
+# SUPPORT
+#=============================================================================
+support:
+  dell_prosupport_level: ProSupport-Plus
+  support_response: "4-hour"
+  support_hours: "24x7"
+
+#=============================================================================
+# NETWORK CONFIGURATION (DR Site)
+#=============================================================================
+network:
+  management_subnet: "10.22.0.0/24"
+  build_subnet: "10.22.1.0/24"
+
+  dns_servers:
+    - "{{ dns_server_1 | default('8.8.8.8') }}"
+    - "{{ dns_server_2 | default('8.8.4.4') }}"
+
+  ntp_servers:
+    - "{{ ntp_server | default('ntp.company.com') }}"
+
+#=============================================================================
+# DELL OPENMANAGE INTEGRATION
+#=============================================================================
+dell:
+  openmanage:
+    enabled: true
+    ome_server: "{{ ome_server | default('ome-dr.company.com') }}"
+
+  idrac:
+    enabled: true
+    version: 9
+
+  supportassist:
+    enabled: true

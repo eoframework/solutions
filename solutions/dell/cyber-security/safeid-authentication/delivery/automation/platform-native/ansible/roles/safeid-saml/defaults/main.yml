@@ -1,0 +1,7 @@
+---
+# Dell SafeID SAML Configuration - Default Variables
+
+saml_default_key_size: 4096
+saml_default_validity_days: 730
+saml_default_algorithm: SHA256
+saml_metadata_validity: 86400

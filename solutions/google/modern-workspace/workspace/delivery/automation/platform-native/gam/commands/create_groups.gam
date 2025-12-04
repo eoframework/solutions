@@ -1,0 +1,20 @@
+# GAM Commands - Create Groups
+# EO Framework - Google Workspace Solution
+#
+# Usage: gam batch create_groups.gam
+
+# Create default security groups
+gam create group all-users@example.com name "All Users" description "All Workspace users"
+gam create group workspace-admins@example.com name "Workspace Admins" description "Workspace administrators"
+gam create group drive-managers@example.com name "Drive Managers" description "Google Drive managers"
+gam create group vault-users@example.com name "Vault Users" description "Google Vault users"
+
+# Create department groups
+gam create group sales@example.com name "Sales Team" description "Sales department"
+gam create group marketing@example.com name "Marketing Team" description "Marketing department"
+gam create group operations@example.com name "Operations Team" description "Operations department"
+gam create group finance@example.com name "Finance Team" description "Finance department"
+gam create group executive@example.com name "Executive Team" description "Executive department"
+
+# Verify group creation
+gam print groups

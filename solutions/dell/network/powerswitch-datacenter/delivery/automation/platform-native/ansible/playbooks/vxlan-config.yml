@@ -1,0 +1,102 @@
+# Dell PowerSwitch Datacenter - VXLAN Configuration
+# EO Framework - Dell Network Solutions
+# Configures VXLAN overlay with EVPN control plane
+
+---
+- name: Configure VXLAN Overlay
+  hosts: leaf_switches
+  gather_facts: false
+  tags: [vxlan]
+
+  tasks:
+    #=========================================================================
+    # CHECK EVPN ENABLED
+    #=========================================================================
+    - name: Skip if EVPN not enabled
+      ansible.builtin.meta: end_play
+      when: not (evpn.enabled | default(false))
+
+    #=========================================================================
+    # VTEP CONFIGURATION
+    #=========================================================================
+    - name: Configure NVE interface (VTEP)
+      dellemc.os10.os10_config:
+        lines:
+          - "interface nve1"
+          - " description VXLAN VTEP"
+          - " source-interface loopback0"
+          - " no shutdown"
+      tags: [vtep]
+
+    #=========================================================================
+    # VNI CONFIGURATION
+    #=========================================================================
+    - name: Configure VNI for each VLAN
+      dellemc.os10.os10_config:
+        lines:
+          - "interface nve1"
+          - " member vni {{ evpn.vni_range_start | int + item.id | int }}"
+          - "  vlan {{ item.id }}"
+          - "  ingress-replication"
+      loop: "{{ vlans | default([]) }}"
+      tags: [vni]
+
+    #=========================================================================
+    # L3 VNI FOR ROUTING
+    #=========================================================================
+    - name: Configure L3 VNI for inter-VLAN routing
+      dellemc.os10.os10_config:
+        lines:
+          - "interface nve1"
+          - " member vni {{ evpn.vni_range_start | int + 999 }} vrf default"
+      tags: [l3-vni]
+
+    #=========================================================================
+    # EVPN TYPE-5 ROUTES
+    #=========================================================================
+    - name: Configure EVPN Type-5 route advertisement
+      dellemc.os10.os10_config:
+        lines:
+          - "router bgp {{ bgp_asn }}"
+          - " address-family l2vpn evpn"
+          - "  advertise ipv4 unicast"
+      tags: [evpn-type5]
+
+    #=========================================================================
+    # ANYCAST GATEWAY MAC
+    #=========================================================================
+    - name: Configure anycast gateway MAC
+      dellemc.os10.os10_config:
+        lines:
+          - "ip virtual-router mac-address 00:00:5e:00:01:01"
+      tags: [anycast-mac]
+
+    #=========================================================================
+    # SAVE CONFIGURATION
+    #=========================================================================
+    - name: Save running configuration
+      dellemc.os10.os10_config:
+        save: true
+      tags: [save]
+
+    #=========================================================================
+    # VERIFICATION
+    #=========================================================================
+    - name: Verify VXLAN configuration
+      dellemc.os10.os10_command:
+        commands:
+          - show nve vxlan-instance
+          - show nve peers
+          - show bgp l2vpn evpn summary
+      register: vxlan_verification
+      tags: [verify]
+
+    - name: Display VXLAN verification
+      ansible.builtin.debug:
+        msg: |
+          Switch: {{ inventory_hostname }}
+          VXLAN Status:
+          {{ vxlan_verification.stdout[0] }}
+          NVE Peers:
+          {{ vxlan_verification.stdout[1] }}
+      tags: [verify]

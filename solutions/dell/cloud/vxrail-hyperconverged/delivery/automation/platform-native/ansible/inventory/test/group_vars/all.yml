@@ -1,0 +1,121 @@
+# Dell VxRail Enterprise - Test Variables
+# Generated from configuration.csv - Test column
+# EO Framework - Dell Cloud Solutions
+
+---
+#=============================================================================
+# PROJECT METADATA
+#=============================================================================
+solution:
+  name: vxrail-hyperconverged
+  abbr: vxe
+  provider: dell
+  category: cloud
+
+environment: test
+datacenter_name: "Lab Environment"
+
+#=============================================================================
+# VXRAIL CONFIGURATION
+#=============================================================================
+vxrail:
+  version: "8.0.200"
+  cluster_name: "{{ vxrail_cluster_name | default('vxrail-enterprise-test') }}"
+  node_count: 4
+  node_model: P570
+  manager_ip: "{{ vxrail_manager_ip | default('10.20.3.100') }}"
+
+#=============================================================================
+# HARDWARE CONFIGURATION
+#=============================================================================
+hardware:
+  poweredge_chassis: R760
+  cpu_model: "Intel Xeon Platinum 8380"
+  cpu_count_per_node: 2
+  memory_per_node_gb: 1024
+  memory_type: DDR5-4800
+
+#=============================================================================
+# VSAN STORAGE CONFIGURATION
+#=============================================================================
+vsan:
+  storage_type: All-NVMe
+  capacity_per_node_tb: 15.36
+  total_usable_tb: 50
+  storage_policy: "FTT=1 Mirroring"
+  compression_enabled: true
+  deduplication_enabled: false
+  encryption_enabled: false
+  kms_server: ""
+
+#=============================================================================
+# NETWORK CONFIGURATION
+#=============================================================================
+network:
+  spine_100gbe_count: 2
+  leaf_25gbe_count: 2
+  vsan_bandwidth: "25GbE"
+  vlans:
+    management: 110
+    vmotion: 210
+    vsan: 310
+    vm_network: 410
+    nsx_overlay: 510
+
+#=============================================================================
+# NSX-T CONFIGURATION
+#=============================================================================
+nsx:
+  enabled: true
+  version: "4.1"
+  manager_count: 1
+  edge_count: 2
+  vip: "{{ nsx_vip | default('10.20.3.20') }}"
+
+#=============================================================================
+# VMWARE CONFIGURATION
+#=============================================================================
+vmware:
+  vcenter_version: "8.0 U2"
+  esxi_version: "8.0 U2"
+  vsan_version: "8.0 U2"
+  srm_enabled: false
+  srm_version: ""
+  vcenter_hostname: "{{ vcenter_hostname | default('vcenter-test.domain.com') }}"
+
+#=============================================================================
+# DATABASE CONFIGURATION (OPTIONAL)
+#=============================================================================
+database:
+  oracle_rac_nodes: 2
+  sql_always_on_nodes: 2
+  sap_hana_memory_gb: 512
+
+#=============================================================================
+# SECURITY CONFIGURATION
+#=============================================================================
+security:
+  tpm_version: "TPM 2.0"
+  secure_boot_enabled: true
+  encryption_at_rest: disabled
+  encryption_in_transit: enabled
+
+#=============================================================================
+# SUPPORT CONFIGURATION
+#=============================================================================
+support:
+  prosupport_level: "ProSupport"
+
+#=============================================================================
+# DR CONFIGURATION
+#=============================================================================
+dr:
+  enabled: false
+  purpose: lab
+
+#=============================================================================
+# OPERATIONS CONFIGURATION
+#=============================================================================
+operations:
+  lifecycle_management: manual
+  maintenance_window: "Saturday 02:00-06:00 UTC"

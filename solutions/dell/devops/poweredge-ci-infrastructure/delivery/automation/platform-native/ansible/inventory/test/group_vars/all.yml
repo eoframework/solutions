@@ -1,0 +1,214 @@
+# Dell PowerEdge CI Infrastructure - Test Variables
+# Generated from configuration.csv - Test column
+# EO Framework - Dell DevOps Solutions
+
+---
+#=============================================================================
+# PROJECT METADATA
+#=============================================================================
+solution:
+  name: poweredge-ci-infrastructure
+  abbr: pci
+  provider: dell
+  category: devops
+
+environment: test
+datacenter_name: "{{ datacenter_name | default('Test Lab') }}"
+
+#=============================================================================
+# GITLAB CONFIGURATION (Reduced scale)
+#=============================================================================
+gitlab:
+  version: "16.8-ee"
+  edition: premium
+  server_count: 1
+  ha_enabled: false
+
+  database:
+    type: postgresql
+    version: "15"
+    ha_enabled: false
+    patroni_enabled: false
+
+  external_url: "{{ gitlab_external_url | default('https://gitlab-test.company.com') }}"
+
+  storage:
+    repositories_path: /var/opt/gitlab/git-data
+    artifacts_path: /var/opt/gitlab/gitlab-rails/shared/artifacts
+
+#=============================================================================
+# BUILD INFRASTRUCTURE (Reduced scale)
+#=============================================================================
+build:
+  agent_count: 2
+  agent_model: PowerEdge-R650
+
+  hardware:
+    cpu_model: Intel-Xeon-Gold-6338
+    cpu_cores: 32
+    memory_gb: 128
+    storage_tb: 1
+    storage_type: NVMe
+
+  runners:
+    total_count: 4
+    per_agent: 2
+    executor: docker
+    docker_version: "24.0"
+    concurrent_builds: 4
+
+  performance:
+    daily_build_volume: 500
+    concurrent_builds: 4
+    queue_target_min: 10
+
+#=============================================================================
+# USER BASE (Test users)
+#=============================================================================
+users:
+  developer_count: 10
+  team_count: 3
+  teams:
+    - Platform
+    - Backend
+    - QA
+
+#=============================================================================
+# ARTIFACT MANAGEMENT
+#=============================================================================
+artifactory:
+  version: "7.x-pro"
+  storage_tb: 5
+
+  repositories:
+    maven:
+      enabled: true
+      type: remote
+      remote_url: https://repo.maven.apache.org/maven2
+    npm:
+      enabled: true
+      type: remote
+      remote_url: https://registry.npmjs.org
+    docker:
+      enabled: true
+      type: local
+      registry_port: 5000
+
+  gitlab_integration: true
+
+#=============================================================================
+# CONTAINER PLATFORM
+#=============================================================================
+docker:
+  version: "24.0"
+  edition: enterprise
+
+  daemon:
+    storage_driver: overlay2
+    log_driver: json-file
+    log_max_size: 50m
+    log_max_file: 2
+
+  buildkit_enabled: true
+
+  registry:
+    mirror: "{{ docker_registry_mirror | default('') }}"
+
+#=============================================================================
+# AUTHENTICATION & SECURITY
+#=============================================================================
+authentication:
+  sso:
+    enabled: false
+
+  ssh:
+    enabled: true
+    key_type: ed25519
+
+security:
+  vulnerability_scanning:
+    enabled: true
+    scan_on_push: true
+
+  secret_backend: gitlab-ci-variables
+
+  audit_log_retention_days: 90
+
+  firewall_enabled: true
+
+#=============================================================================
+# MONITORING
+#=============================================================================
+monitoring:
+  solution: prometheus-grafana
+
+  prometheus:
+    retention_days: 14
+    scrape_interval: 60s
+
+  grafana:
+    enabled: true
+    port: 3000
+
+  gitlab_metrics:
+    enabled: true
+    endpoint: "/-/metrics"
+
+  node_exporter:
+    enabled: true
+    port: 9100
+
+  docker_metrics:
+    enabled: true
+
+#=============================================================================
+# OPERATIONS
+#=============================================================================
+operations:
+  backup:
+    enabled: true
+    schedule: "Daily 03:00"
+    retention_days: 14
+
+  dr:
+    enabled: false
+
+  maintenance:
+    window: "Saturday 02:00-06:00 UTC"
+
+#=============================================================================
+# SUPPORT
+#=============================================================================
+support:
+  dell_prosupport_level: ProSupport
+  support_response: "NBD"
+  support_hours: "8x5"
+
+#=============================================================================
+# NETWORK CONFIGURATION
+#=============================================================================
+network:
+  management_subnet: "10.21.0.0/24"
+  build_subnet: "10.21.1.0/24"
+
+  dns_servers:
+    - "{{ dns_server_1 | default('8.8.8.8') }}"
+    - "{{ dns_server_2 | default('8.8.4.4') }}"
+
+  ntp_servers:
+    - "{{ ntp_server | default('ntp.company.com') }}"
+
+#=============================================================================
+# DELL OPENMANAGE INTEGRATION
+#=============================================================================
+dell:
+  openmanage:
+    enabled: true
+    ome_server: "{{ ome_server | default('ome-test.company.com') }}"
+
+  idrac:
+    enabled: true
+    version: 9
+
+  supportassist:
+    enabled: false

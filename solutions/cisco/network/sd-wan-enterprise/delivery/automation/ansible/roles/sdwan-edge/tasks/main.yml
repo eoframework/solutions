@@ -1,0 +1,60 @@
+---
+# SD-WAN Edge Role
+# Handles edge device onboarding and configuration
+
+- name: Display edge device info
+  debug:
+    msg: "Provisioning vEdge {{ inventory_hostname }} - Site {{ site_id }}"
+
+- name: Verify device reachability
+  wait_for:
+    host: "{{ ansible_host }}"
+    port: 22
+    timeout: 60
+  delegate_to: localhost
+
+- name: Backup edge device configuration
+  cisco.ios.ios_command:
+    commands:
+      - show running-config
+  register: edge_backup
+  vars:
+    ansible_network_os: ios
+
+- name: Save edge backup
+  copy:
+    content: "{{ edge_backup.stdout[0] }}"
+    dest: "/tmp/sdwan_backups/{{ ansible_date_time.epoch }}/{{ inventory_hostname }}_backup.cfg"
+  delegate_to: localhost
+  when: edge_backup.stdout is defined
+
+- name: Configure edge device hostname
+  cisco.ios.ios_config:
+    lines:
+      - hostname {{ inventory_hostname }}
+    save_when: modified
+  vars:
+    ansible_network_os: ios
+
+- name: Configure NTP servers
+  cisco.ios.ios_config:
+    lines:
+      - ntp server {{ ntp_primary }}
+      - ntp server {{ ntp_secondary }}
+    save_when: modified
+  vars:
+    ansible_network_os: ios
+
+- name: Configure DNS servers
+  cisco.ios.ios_config:
+    lines:
+      - ip name-server {{ dns_primary }}
+      - ip name-server {{ dns_secondary }}
+      - ip domain-name {{ domain_name }}
+    save_when: modified
+  vars:
+    ansible_network_os: ios
+
+- name: Display edge provisioning status
+  debug:
+    msg: "Edge device {{ inventory_hostname }} provisioned at site {{ site_id }}"

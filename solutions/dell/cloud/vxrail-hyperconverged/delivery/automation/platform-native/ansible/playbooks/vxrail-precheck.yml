@@ -1,0 +1,86 @@
+# Dell VxRail Enterprise - Pre-Deployment Validation
+# EO Framework - Dell Cloud Solutions
+
+---
+- name: VxRail Pre-Deployment Validation
+  hosts: localhost
+  gather_facts: true
+
+  tasks:
+    - name: Display pre-check banner
+      ansible.builtin.debug:
+        msg: |
+          ================================================================
+          VxRail Pre-Deployment Validation
+          ================================================================
+
+    #=========================================================================
+    # NETWORK VALIDATION
+    #=========================================================================
+    - name: Validate VxRail Manager connectivity
+      ansible.builtin.wait_for:
+        host: "{{ vxrail.manager_ip }}"
+        port: 443
+        timeout: 30
+      register: vxrail_manager_check
+      ignore_errors: true
+
+    - name: Validate vCenter connectivity
+      ansible.builtin.wait_for:
+        host: "{{ vmware.vcenter_hostname }}"
+        port: 443
+        timeout: 30
+      register: vcenter_check
+      ignore_errors: true
+
+    #=========================================================================
+    # IDRAC VALIDATION
+    #=========================================================================
+    - name: Validate iDRAC connectivity for all nodes
+      dellemc.openmanage.idrac_lifecycle_controller_status_info:
+        idrac_ip: "{{ item.idrac_ip }}"
+        idrac_user: "{{ idrac_user }}"
+        idrac_password: "{{ idrac_password }}"
+        validate_certs: false
+      loop: "{{ groups['idrac'] | map('extract', hostvars) | list }}"
+      register: idrac_status
+      ignore_errors: true
+      when: idrac_password is defined
+
+    #=========================================================================
+    # HARDWARE VALIDATION
+    #=========================================================================
+    - name: Get server hardware inventory
+      dellemc.openmanage.idrac_system_info:
+        idrac_ip: "{{ item.idrac_ip }}"
+        idrac_user: "{{ idrac_user }}"
+        idrac_password: "{{ idrac_password }}"
+        validate_certs: false
+      loop: "{{ groups['idrac'] | map('extract', hostvars) | list }}"
+      register: hardware_inventory
+      ignore_errors: true
+      when: idrac_password is defined
+
+    #=========================================================================
+    # DNS VALIDATION
+    #=========================================================================
+    - name: Validate DNS resolution for VxRail Manager
+      ansible.builtin.command:
+        cmd: "nslookup {{ vxrail.manager_ip }}"
+      register: dns_check
+      changed_when: false
+      ignore_errors: true
+
+    #=========================================================================
+    # SUMMARY
+    #=========================================================================
+    - name: Pre-check summary
+      ansible.builtin.debug:
+        msg: |
+          ================================================================
+          Pre-Deployment Validation Results
+          ================================================================
+          VxRail Manager: {{ 'PASS' if vxrail_manager_check is succeeded else 'FAIL' }}
+          vCenter: {{ 'PASS' if vcenter_check is succeeded else 'FAIL' }}
+          iDRAC: {{ 'PASS' if idrac_status is succeeded else 'SKIPPED/FAIL' }}
+          ================================================================

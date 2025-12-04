@@ -1,0 +1,136 @@
+---
+# Cisco SD-WAN Controllers Deployment
+# Deploys and configures vManage, vSmart, and vBond controllers
+
+- name: Deploy vManage Orchestrator
+  hosts: vmanage
+  gather_facts: false
+  roles:
+    - role: sdwan-auth
+    - role: sdwan-controllers
+      controller_type: vmanage
+
+  tasks:
+    - name: Verify vManage connectivity
+      wait_for:
+        host: "{{ inventory_hostname }}"
+        port: 443
+        timeout: 60
+      delegate_to: localhost
+
+    - name: Initialize vManage configuration
+      uri:
+        url: "https://{{ inventory_hostname }}:443/dataservice/admin/settings"
+        method: PUT
+        user: "{{ vmanage_admin_user }}"
+        password: "{{ vmanage_admin_password }}"
+        validate_certs: false
+        body_format: json
+        body:
+          organizationName: "{{ sdwan_organization }}"
+          domainIP: "{{ system_ip }}"
+          port: 12346
+          enterpriseRootCA: true
+        status_code: [200, 201]
+      delegate_to: localhost
+      register: vmanage_init
+
+    - name: Display vManage status
+      debug:
+        msg: "vManage {{ inventory_hostname }} initialized successfully"
+
+- name: Deploy vSmart Controllers
+  hosts: vsmart
+  gather_facts: false
+  roles:
+    - role: sdwan-controllers
+      controller_type: vsmart
+
+  tasks:
+    - name: Verify vSmart connectivity
+      wait_for:
+        host: "{{ inventory_hostname }}"
+        port: 830
+        timeout: 60
+      delegate_to: localhost
+
+    - name: Configure vSmart system parameters
+      cisco.ios.ios_config:
+        lines:
+          - system
+          - system-ip {{ system_ip }}
+          - site-id {{ site_id }}
+          - organization-name {{ sdwan_organization }}
+          - vbond {{ groups['vbond'][0] }}
+        save_when: modified
+      vars:
+        ansible_network_os: ios
+
+    - name: Configure vSmart OMP
+      cisco.ios.ios_config:
+        lines:
+          - omp
+          - no shutdown
+          - graceful-restart
+          - advertise connected
+          - advertise static
+        save_when: modified
+
+    - name: Display vSmart status
+      debug:
+        msg: "vSmart {{ inventory_hostname }} configured successfully"
+
+- name: Deploy vBond Orchestrator
+  hosts: vbond
+  gather_facts: false
+  roles:
+    - role: sdwan-controllers
+      controller_type: vbond
+
+  tasks:
+    - name: Verify vBond connectivity
+      wait_for:
+        host: "{{ inventory_hostname }}"
+        port: 12346
+        timeout: 60
+      delegate_to: localhost
+
+    - name: Configure vBond system parameters
+      cisco.ios.ios_config:
+        lines:
+          - system
+          - system-ip {{ system_ip }}
+          - site-id {{ site_id }}
+          - organization-name {{ sdwan_organization }}
+        save_when: modified
+      vars:
+        ansible_network_os: ios
+
+    - name: Display vBond status
+      debug:
+        msg: "vBond {{ inventory_hostname }} configured successfully"
+
+- name: Verify Controller Connectivity
+  hosts: vmanage
+  gather_facts: false
+  tasks:
+    - name: Wait for controller synchronization
+      pause:
+        seconds: 60
+
+    - name: Verify vSmart registration
+      uri:
+        url: "https://{{ inventory_hostname }}:443/dataservice/system/device/controllers"
+        method: GET
+        user: "{{ vmanage_admin_user }}"
+        password: "{{ vmanage_admin_password }}"
+        validate_certs: false
+      delegate_to: localhost
+      register: controller_status
+      until: controller_status.json.data | length >= 2
+      retries: 10
+      delay: 30
+
+    - name: Display controller status
+      debug:
+        msg: "Controllers registered: {{ controller_status.json.data | length }}"

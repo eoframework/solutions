@@ -1,0 +1,17 @@
+#------------------------------------------------------------------------------
+# Duo Configuration
+#------------------------------------------------------------------------------
+# Generated from configuration.csv on 2025-12-02 23:53:45
+#
+# To regenerate: python generate-ansible-vars.py /path/to/solution
+# DO NOT EDIT - Changes will be overwritten on regeneration
+#------------------------------------------------------------------------------
+
+duo:
+  admin_hostname: admin-xxxxxxxx.duosecurity.com
+  api_hostname: api-xxxxxxxx.duosecurity.com
+  device_trust: true
+  enrollment_method: self-service
+  integration_key: '{{ vault_duo_integration_key }}'
+  policy_default: adaptive
+  secret_key: '{{ vault_duo_secret_key }}'

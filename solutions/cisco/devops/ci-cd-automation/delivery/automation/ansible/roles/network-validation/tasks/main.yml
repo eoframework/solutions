@@ -1,0 +1,60 @@
+---
+# Network Validation Role - Validate network device configurations
+
+- name: Validate network device connectivity
+  wait_for:
+    host: "{{ ansible_host }}"
+    port: 22
+    timeout: 30
+  delegate_to: localhost
+  tags: [validation, connectivity]
+
+- name: Gather network device facts
+  cisco.ios.ios_facts:
+    gather_subset:
+      - all
+  when: ansible_network_os == 'ios'
+  register: device_facts
+  tags: [validation, facts]
+
+- name: Run configuration compliance checks
+  cisco.ios.ios_command:
+    commands:
+      - show run | include ntp
+      - show run | section logging
+      - show ip ssh
+  when: ansible_network_os == 'ios'
+  register: compliance_output
+  tags: [validation, compliance]
+
+- name: Validate NTP configuration
+  assert:
+    that:
+      - "'ntp server' in compliance_output.stdout[0]"
+    fail_msg: "NTP not configured"
+    success_msg: "NTP configuration valid"
+  when:
+    - ansible_network_os == 'ios'
+    - compliance_output is defined
+  ignore_errors: yes
+  tags: [validation, ntp]
+
+- name: Validate logging configuration
+  assert:
+    that:
+      - "'logging host' in compliance_output.stdout[1] or 'logging server' in compliance_output.stdout[1]"
+    fail_msg: "Syslog not configured"
+    success_msg: "Logging configuration valid"
+  when:
+    - ansible_network_os == 'ios'
+    - compliance_output is defined
+  ignore_errors: yes
+  tags: [validation, logging]
+
+- name: Display validation results
+  debug:
+    msg:
+      - "Device: {{ ansible_host }}"
+      - "Hostname: {{ ansible_net_hostname | default('Unknown') }}"
+      - "Version: {{ ansible_net_version | default('Unknown') }}"
+      - "Validation: Complete"

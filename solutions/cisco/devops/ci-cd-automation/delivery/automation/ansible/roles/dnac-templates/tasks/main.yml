@@ -1,0 +1,57 @@
+---
+# DNA Center Templates Role - Manage Cisco DNA Center configuration templates
+
+- name: Ensure DNA Center is reachable
+  uri:
+    url: "{{ dnac_api_url }}/dna/system/api/v1/auth/token"
+    method: POST
+    user: "{{ dnac_admin_user }}"
+    password: "{{ dnac_admin_password }}"
+    force_basic_auth: yes
+    validate_certs: "{{ dnac_ssl_verify }}"
+    status_code: [200, 401]
+  register: dnac_auth
+  ignore_errors: yes
+  tags: [dnac, auth]
+
+- name: Display DNA Center connection status
+  debug:
+    msg: "DNA Center Status: {{ 'Connected' if dnac_auth.status == 200 else 'Authentication Failed' }}"
+  tags: [dnac]
+
+- name: Create DNA Center template directory
+  file:
+    path: "{{ dnac_template_dir }}"
+    state: directory
+    mode: '0755'
+  tags: [dnac, templates]
+
+- name: Deploy DNA Center configuration templates
+  copy:
+    dest: "{{ dnac_template_dir }}/{{ item.name }}.j2"
+    content: "{{ item.content }}"
+    mode: '0644'
+  loop:
+    - name: ios-base-config
+      content: |
+        hostname {{ hostname }}
+        !
+        ip domain-name {{ domain_name }}
+        !
+        ntp server {{ ntp_server }}
+        !
+        logging host {{ syslog_server }}
+    - name: vlan-config
+      content: |
+        {% for vlan in vlans %}
+        vlan {{ vlan.id }}
+         name {{ vlan.name }}
+        {% endfor %}
+  tags: [dnac, templates]
+
+- name: Display DNA Center templates summary
+  debug:
+    msg:
+      - "DNA Center templates configured"
+      - "Template directory: {{ dnac_template_dir }}"
+      - "Templates ready for deployment via DNA Center API"

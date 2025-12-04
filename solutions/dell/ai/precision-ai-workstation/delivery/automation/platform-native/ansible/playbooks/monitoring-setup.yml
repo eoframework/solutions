@@ -1,0 +1,45 @@
+# Dell Precision AI Workstation - Monitoring Playbook
+# EO Framework - Dell AI Solutions
+# Datadog agent and GPU monitoring
+
+---
+- name: Setup Monitoring
+  hosts: ai_workstations
+  gather_facts: true
+  become: true
+  tags: [monitoring]
+
+  pre_tasks:
+    - name: Display monitoring configuration
+      ansible.builtin.debug:
+        msg: |
+          Setting up monitoring on {{ inventory_hostname }}
+          Datadog Site: {{ monitoring.datadog_site }}
+          GPU Monitoring: {{ monitoring.collect_gpu_metrics }}
+
+  roles:
+    #=========================================================================
+    # DATADOG AGENT
+    #=========================================================================
+    - role: datadog-agent
+      tags: [datadog, agent]
+      when: monitoring.datadog_enabled | default(false)
+
+  post_tasks:
+    - name: Verify Datadog agent status
+      ansible.builtin.systemd:
+        name: datadog-agent
+        state: started
+        enabled: true
+      when: monitoring.datadog_enabled | default(false)
+
+    - name: Check Datadog agent health
+      ansible.builtin.command: datadog-agent status
+      register: agent_status
+      changed_when: false
+      when: monitoring.datadog_enabled | default(false)
+
+    - name: Display agent status summary
+      ansible.builtin.debug:
+        msg: "Datadog agent is {{ 'running' if agent_status.rc == 0 else 'not running' }}"
+      when: monitoring.datadog_enabled | default(false)

@@ -1,0 +1,115 @@
+---
+#------------------------------------------------------------------------------
+# Phase 2: Policies - QoS, Security, and Routing Policies
+#------------------------------------------------------------------------------
+# This playbook handles policy configuration including:
+#   - QoS policies
+#   - Security policies (ZBFW)
+#   - Routing policies
+#   - Application-aware routing
+#------------------------------------------------------------------------------
+
+- name: Phase 2 - Policy Deployment
+  hosts: localhost
+  gather_facts: no
+  tags: [policies]
+
+  vars_files:
+    - "{{ playbook_dir }}/../vars/generated/project.yml"
+    - "{{ playbook_dir }}/../vars/generated/vmanage.yml"
+    - "{{ playbook_dir }}/../vars/generated/qos.yml"
+    - "{{ playbook_dir }}/../vars/generated/security.yml"
+    - "{{ playbook_dir }}/../vars/generated/saas.yml"
+    - "{{ playbook_dir }}/../vars/secrets.yml"
+
+  tasks:
+    #--------------------------------------------------------------------------
+    # QoS Policies
+    #--------------------------------------------------------------------------
+    - name: Display QoS configuration
+      ansible.builtin.debug:
+        msg: |
+          QoS Policy Configuration:
+          - Queue Classes: {{ qos.queue_classes | default(8) }}
+
+          Class Definitions:
+          - Voice (EF): 10% bandwidth, priority
+          - Video (AF41): 20% bandwidth
+          - Critical Data (AF31): 25% bandwidth
+          - Best Effort: Remaining bandwidth
+
+          DSCP Markings Preserved: {{ qos.dscp_preserve }}
+
+    - name: Display bandwidth allocation
+      ansible.builtin.debug:
+        msg: |
+          Bandwidth Allocation:
+          - Voice: {{ qos.voice_bandwidth_pct }}%
+          - Video: {{ qos.video_bandwidth_pct }}%
+          - Critical: {{ qos.critical_bandwidth_pct }}%
+          - Default: {{ qos.default_bandwidth_pct }}%
+
+    #--------------------------------------------------------------------------
+    # Security Policies
+    #--------------------------------------------------------------------------
+    - name: Display security policy configuration
+      ansible.builtin.debug:
+        msg: |
+          Security Policies:
+          - Zone-Based Firewall: {{ security.zbfw_enabled }}
+          - IPS/IDS: {{ security.ips_enabled }}
+          - URL Filtering: {{ security.url_filtering }}
+          - AMP (Advanced Malware Protection): {{ security.amp_enabled }}
+
+          Zone Configuration:
+          - Trust Zone: Internal networks
+          - Untrust Zone: Internet
+          - Guest Zone: Guest networks
+
+    #--------------------------------------------------------------------------
+    # Application-Aware Routing
+    #--------------------------------------------------------------------------
+    - name: Display AAR configuration
+      ansible.builtin.debug:
+        msg: |
+          Application-Aware Routing:
+          - Enabled: {{ saas.aar_enabled | default(true) }}
+          - Loss Threshold: {{ saas.loss_threshold | default(5) }}%
+          - Latency Threshold: {{ saas.latency_threshold | default(150) }}ms
+          - Jitter Threshold: {{ saas.jitter_threshold | default(30) }}ms
+
+          SLA Classes:
+          - Voice SLA: <150ms latency, <1% loss
+          - Video SLA: <200ms latency, <3% loss
+          - Data SLA: <500ms latency, <5% loss
+
+    #--------------------------------------------------------------------------
+    # Routing Policies
+    #--------------------------------------------------------------------------
+    - name: Display routing policies
+      ansible.builtin.debug:
+        msg: |
+          Routing Policies:
+          - TLOC Lists: For path selection
+          - Site Lists: For topology control
+          - VPN Lists: For service segmentation
+          - Prefix Lists: For route filtering
+
+          Policy Types:
+          - Centralized (vSmart): Applied at control plane
+          - Localized (vEdge): Applied at data plane
+
+    #--------------------------------------------------------------------------
+    # Summary
+    #--------------------------------------------------------------------------
+    - name: Policy deployment summary
+      ansible.builtin.debug:
+        msg: |
+          ============================================================
+          Phase 2 - Policy Deployment Complete
+          ============================================================
+          QoS Classes: {{ qos.queue_classes | default(8) }}
+          Zone-Based FW: {{ security.zbfw_enabled }}
+          IPS/IDS: {{ security.ips_enabled }}
+          AAR: Configured
+          ============================================================

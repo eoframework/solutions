@@ -1,0 +1,60 @@
+---
+# Dell SafeID Authentication - Token Management Role
+# EO Framework - Dell Cyber Security Solutions
+
+- name: Install YubiKey management packages
+  ansible.builtin.package:
+    name:
+      - pcscd
+      - pcsc-tools
+      - yubikey-manager
+    state: present
+
+- name: Configure enrollment portal
+  ansible.builtin.template:
+    src: enrollment-portal.conf.j2
+    dest: /etc/safeid/enrollment-portal.conf
+    owner: safeid
+    group: safeid
+    mode: '0600'
+  notify: restart safeid-enrollment
+
+- name: Configure YubiKey settings
+  ansible.builtin.template:
+    src: yubikey.conf.j2
+    dest: /etc/safeid/yubikey.conf
+    owner: safeid
+    group: safeid
+    mode: '0600'
+  notify: restart safeid-enrollment
+
+- name: Configure FIDO2 settings
+  ansible.builtin.template:
+    src: fido2.conf.j2
+    dest: /etc/safeid/fido2.conf
+    owner: safeid
+    group: safeid
+    mode: '0600'
+  notify: restart safeid-enrollment
+
+- name: Configure PIN policy
+  ansible.builtin.template:
+    src: pin-policy.conf.j2
+    dest: /etc/safeid/pin-policy.conf
+    owner: safeid
+    group: safeid
+    mode: '0600'
+  notify: restart safeid-enrollment
+  when: authentication.pin.enabled | default(false)
+
+- name: Start enrollment service
+  ansible.builtin.service:
+    name: safeid-enrollment
+    state: started
+    enabled: true
+
+- name: Start pcscd service for smartcard support
+  ansible.builtin.service:
+    name: pcscd
+    state: started
+    enabled: true

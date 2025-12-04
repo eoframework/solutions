@@ -1,0 +1,134 @@
+# Dell PowerSwitch Datacenter - BGP Configuration
+# EO Framework - Dell Network Solutions
+# Configures BGP underlay routing
+
+---
+- name: Configure BGP Underlay
+  hosts: powerswitch
+  gather_facts: false
+  tags: [bgp]
+
+  tasks:
+    #=========================================================================
+    # BGP GLOBAL CONFIGURATION
+    #=========================================================================
+    - name: Configure BGP global settings
+      dellemc.os10.os10_config:
+        lines:
+          - "router bgp {{ bgp_asn }}"
+          - " router-id {{ loopback_ip }}"
+          - " bestpath as-path multipath-relax"
+          - " graceful-restart"
+          - " log-neighbor-changes"
+      tags: [bgp-global]
+
+    #=========================================================================
+    # BGP TIMERS
+    #=========================================================================
+    - name: Configure BGP timers
+      dellemc.os10.os10_config:
+        lines:
+          - "router bgp {{ bgp_asn }}"
+          - " timers bgp {{ bgp.keepalive | default(3) }} {{ bgp.holdtime | default(9) }}"
+      tags: [bgp-timers]
+
+    #=========================================================================
+    # BGP ADDRESS FAMILY
+    #=========================================================================
+    - name: Configure IPv4 unicast address family
+      dellemc.os10.os10_config:
+        lines:
+          - "router bgp {{ bgp_asn }}"
+          - " address-family ipv4 unicast"
+          - "  network {{ loopback_ip }}/32"
+          - "  redistribute connected route-map CONNECTED-TO-BGP"
+          - "  maximum-paths 4"
+          - "  maximum-paths ibgp 4"
+      tags: [bgp-af]
+
+    #=========================================================================
+    # ROUTE MAPS
+    #=========================================================================
+    - name: Configure route maps
+      dellemc.os10.os10_config:
+        lines:
+          - "route-map CONNECTED-TO-BGP permit 10"
+          - " match interface loopback0"
+          - "route-map CONNECTED-TO-BGP permit 20"
+          - " match interface vlan 10-100"
+      tags: [route-map]
+
+    #=========================================================================
+    # PREFIX LISTS
+    #=========================================================================
+    - name: Configure prefix lists
+      dellemc.os10.os10_config:
+        lines:
+          - "ip prefix-list LOOPBACKS seq 10 permit 10.255.0.0/16 le 32"
+          - "ip prefix-list SERVER-NETWORKS seq 10 permit 10.10.0.0/16 le 24"
+      tags: [prefix-list]
+
+    #=========================================================================
+    # EVPN ADDRESS FAMILY (if enabled)
+    #=========================================================================
+    - name: Configure L2VPN EVPN address family
+      dellemc.os10.os10_config:
+        lines:
+          - "router bgp {{ bgp_asn }}"
+          - " address-family l2vpn evpn"
+          - "  advertise-all-vni"
+          - "  advertise-default-gw"
+      when:
+        - evpn.enabled | default(false)
+        - switch_role == 'leaf'
+      tags: [bgp-evpn]
+
+    #=========================================================================
+    # SAVE CONFIGURATION
+    #=========================================================================
+    - name: Save running configuration
+      dellemc.os10.os10_config:
+        save: true
+      tags: [save]
+
+    #=========================================================================
+    # VERIFICATION
+    #=========================================================================
+    - name: Verify BGP configuration
+      dellemc.os10.os10_command:
+        commands:
+          - show ip bgp summary
+          - show ip route bgp
+      register: bgp_verification
+      tags: [verify]
+
+    - name: Display BGP verification
+      ansible.builtin.debug:
+        msg: |
+          Switch: {{ inventory_hostname }}
+          BGP ASN: {{ bgp_asn }}
+          {{ bgp_verification.stdout[0] }}
+      tags: [verify]
+
+#=============================================================================
+# BGP NEIGHBOR VERIFICATION
+#=============================================================================
+- name: Verify BGP Neighbor Adjacencies
+  hosts: powerswitch
+  gather_facts: false
+  tags: [bgp-verify]
+
+  tasks:
+    - name: Check BGP neighbor state
+      dellemc.os10.os10_command:
+        commands:
+          - show ip bgp summary
+      register: bgp_neighbors
+
+    - name: Assert BGP neighbors are established
+      ansible.builtin.assert:
+        that:
+          - "'Established' in bgp_neighbors.stdout[0]"
+        fail_msg: "BGP neighbors not established on {{ inventory_hostname }}"
+        success_msg: "BGP neighbors established on {{ inventory_hostname }}"
+      ignore_errors: true

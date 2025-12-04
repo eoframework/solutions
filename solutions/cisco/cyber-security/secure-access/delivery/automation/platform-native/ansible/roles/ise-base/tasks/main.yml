@@ -1,0 +1,79 @@
+---
+#------------------------------------------------------------------------------
+# Role: ise-base
+# Purpose: Configure base Cisco ISE settings and verify connectivity
+#------------------------------------------------------------------------------
+
+- name: Get ISE API authentication token
+  ansible.builtin.uri:
+    url: "https://{{ ise.primary_pan }}/ers/config/node"
+    method: GET
+    user: "{{ ise.admin_user }}"
+    password: "{{ vault_ise_admin_password }}"
+    force_basic_auth: yes
+    validate_certs: "{{ ise.ssl_verify | default(false) }}"
+    headers:
+      Accept: application/json
+    status_code: [200, 401]
+  register: ise_auth_check
+  retries: 3
+  delay: 5
+  until: ise_auth_check.status == 200
+
+- name: Set ISE connection facts
+  ansible.builtin.set_fact:
+    ise_connected: true
+    ise_primary_node: "{{ ise.primary_pan }}"
+    cacheable: yes
+  when: ise_auth_check.status == 200
+
+- name: Get ISE deployment info
+  cisco.ise.node_info:
+    ise_hostname: "{{ ise.primary_pan }}"
+    ise_username: "{{ ise.admin_user }}"
+    ise_password: "{{ vault_ise_admin_password }}"
+    ise_verify: "{{ ise.ssl_verify | default(false) }}"
+  register: ise_nodes
+
+- name: Display ISE deployment status
+  ansible.builtin.debug:
+    msg: |
+      ISE Deployment Status:
+      - Primary PAN: {{ ise.primary_pan }}
+      - Secondary PAN: {{ ise.secondary_pan | default('Not configured') }}
+      - Version: {{ ise.version }}
+      - Nodes: {{ ise_nodes.ise_response | length | default(1) }}
+
+- name: Verify ISE services health
+  ansible.builtin.uri:
+    url: "https://{{ ise.primary_pan }}/admin/API/mnt/Session/ActiveCount"
+    method: GET
+    user: "{{ ise.admin_user }}"
+    password: "{{ vault_ise_admin_password }}"
+    force_basic_auth: yes
+    validate_certs: "{{ ise.ssl_verify | default(false) }}"
+    headers:
+      Accept: application/xml
+    status_code: [200]
+  register: ise_health
+  failed_when: false
+
+- name: Configure ISE system settings
+  cisco.ise.system_config:
+    ise_hostname: "{{ ise.primary_pan }}"
+    ise_username: "{{ ise.admin_user }}"
+    ise_password: "{{ vault_ise_admin_password }}"
+    ise_verify: "{{ ise.ssl_verify | default(false) }}"
+  register: system_config
+  when: configure_system | default(false)
+
+- name: Display ISE base configuration summary
+  ansible.builtin.debug:
+    msg: |
+      ============================================================
+      ISE Base Configuration Complete
+      ============================================================
+      Primary PAN: {{ ise.primary_pan }}
+      Connection: {{ 'Verified' if ise_connected else 'Failed' }}
+      Services: {{ 'Healthy' if ise_health.status == 200 else 'Check Required' }}
+      ============================================================

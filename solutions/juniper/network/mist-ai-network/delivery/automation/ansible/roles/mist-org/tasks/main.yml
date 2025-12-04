@@ -1,0 +1,42 @@
+---
+# mist-org/tasks/main.yml - Organization-level Mist configuration
+
+- name: Get organization info
+  ansible.builtin.uri:
+    url: "{{ mist.api_url }}/orgs/{{ mist_org_id }}"
+    method: GET
+    headers:
+      Authorization: "Token {{ mist_api_token }}"
+    validate_certs: yes
+  register: org_info
+
+- name: Display organization
+  ansible.builtin.debug:
+    msg: "Organization: {{ org_info.json.name }}"
+
+- name: Configure organization settings
+  ansible.builtin.uri:
+    url: "{{ mist.api_url }}/orgs/{{ mist_org_id }}/setting"
+    method: PUT
+    headers:
+      Authorization: "Token {{ mist_api_token }}"
+      Content-Type: application/json
+    body_format: json
+    body:
+      auto_device_naming:
+        enable: true
+        prefix: "{{ solution.abbr }}-"
+      security:
+        disable_local_ssh: false
+        fips_zeroize_password: "{{ mist_fips_password | default(omit) }}"
+    status_code: [200, 201]
+  when: configure_org_settings | default(true)
+
+- name: Configure RADIUS servers
+  ansible.builtin.uri:
+    url: "{{ mist.api_url }}/orgs/{{ mist_org_id }}/ssoroles"
+    method: GET
+    headers:
+      Authorization: "Token {{ mist_api_token }}"
+  register: sso_roles
+  when: radius.enabled | default(false)

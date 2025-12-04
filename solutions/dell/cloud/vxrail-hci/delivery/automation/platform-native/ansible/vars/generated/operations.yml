@@ -1,0 +1,14 @@
+#------------------------------------------------------------------------------
+# Operations Configuration
+#------------------------------------------------------------------------------
+# Generated from configuration.csv
+#
+# To regenerate: python generate-ansible-vars.py /path/to/solution
+# DO NOT EDIT - Changes will be overwritten on regeneration
+#------------------------------------------------------------------------------
+
+operations:
+  lifecycle_management: "automated"
+  patch_schedule: "Monthly maintenance window"
+  capacity_threshold: 80
+  maintenance_window: "Sunday 02:00-06:00 UTC"

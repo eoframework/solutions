@@ -1,0 +1,14 @@
+#------------------------------------------------------------------------------
+# Infrastructure Configuration
+#------------------------------------------------------------------------------
+# Generated from configuration.csv on 2025-12-02 23:53:45
+#
+# To regenerate: python generate-ansible-vars.py /path/to/solution
+# DO NOT EDIT - Changes will be overwritten on regeneration
+#------------------------------------------------------------------------------
+
+infrastructure:
+  dns_primary: 10.100.5.10
+  dns_secondary: 10.100.5.11
+  ntp_primary: 10.100.4.10
+  ntp_secondary: 10.100.4.11

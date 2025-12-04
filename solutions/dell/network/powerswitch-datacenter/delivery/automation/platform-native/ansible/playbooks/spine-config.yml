@@ -1,0 +1,137 @@
+# Dell PowerSwitch Datacenter - Spine Configuration
+# EO Framework - Dell Network Solutions
+# Configures spine switches in the fabric
+
+---
+- name: Configure Spine Switches
+  hosts: spine_switches
+  gather_facts: false
+  tags: [spine]
+
+  vars:
+    backup_dir: "/tmp/powerswitch_backups/{{ ansible_date_time.epoch | default('backup') }}"
+
+  tasks:
+    #=========================================================================
+    # BACKUP CURRENT CONFIGURATION
+    #=========================================================================
+    - name: Create backup directory
+      ansible.builtin.file:
+        path: "{{ backup_dir }}"
+        state: directory
+        mode: '0755'
+      delegate_to: localhost
+      run_once: true
+      tags: [backup]
+
+    - name: Backup spine switch configuration
+      dellemc.os10.os10_command:
+        commands:
+          - show running-config
+      register: spine_backup
+      tags: [backup]
+
+    - name: Save spine switch backup
+      ansible.builtin.copy:
+        content: "{{ spine_backup.stdout[0] }}"
+        dest: "{{ backup_dir }}/spine_{{ inventory_hostname }}_backup.cfg"
+        mode: '0644'
+      delegate_to: localhost
+      tags: [backup]
+
+    #=========================================================================
+    # LOOPBACK INTERFACE
+    #=========================================================================
+    - name: Configure loopback interface
+      dellemc.os10.os10_config:
+        lines:
+          - "interface loopback0"
+          - " description Router-ID Loopback"
+          - " ip address {{ loopback_ip }}/32"
+          - " no shutdown"
+      tags: [loopback]
+
+    #=========================================================================
+    # SPINE UPLINK INTERFACES
+    #=========================================================================
+    - name: Configure spine-to-leaf interfaces
+      dellemc.os10.os10_config:
+        lines:
+          - "interface ethernet1/1/{{ item }}"
+          - " description To-Leaf-{{ '%02d' | format(item) }}"
+          - " no switchport"
+          - " mtu 9216"
+          - " no shutdown"
+      loop: "{{ range(1, (fabric.leaf.switch_count | int) + 1) | list }}"
+      tags: [interfaces]
+
+    - name: Configure spine-to-leaf IP addresses
+      dellemc.os10.os10_config:
+        lines:
+          - "interface ethernet1/1/{{ item }}"
+          - " ip address 10.{{ bgp.spine_asn | int - 65000 }}.{{ item }}.1/31"
+      loop: "{{ range(1, (fabric.leaf.switch_count | int) + 1) | list }}"
+      tags: [interfaces]
+
+    #=========================================================================
+    # BGP CONFIGURATION
+    #=========================================================================
+    - name: Configure BGP router
+      dellemc.os10.os10_config:
+        lines:
+          - "router bgp {{ bgp_asn }}"
+          - " router-id {{ loopback_ip }}"
+          - " bestpath as-path multipath-relax"
+          - " address-family ipv4 unicast"
+          - "  redistribute connected"
+      tags: [bgp]
+
+    - name: Configure BGP peer group for leaves
+      dellemc.os10.os10_config:
+        lines:
+          - "router bgp {{ bgp_asn }}"
+          - " template leaf-peers"
+          - "  remote-as external"
+          - "  timers {{ bgp.keepalive | default(3) }} {{ bgp.holdtime | default(9) }}"
+          - "  advertisement-interval 0"
+          - "  address-family ipv4 unicast"
+          - "   send-community both"
+      tags: [bgp]
+
+    #=========================================================================
+    # EVPN CONFIGURATION (if enabled)
+    #=========================================================================
+    - name: Configure EVPN address family
+      dellemc.os10.os10_config:
+        lines:
+          - "router bgp {{ bgp_asn }}"
+          - " address-family l2vpn evpn"
+      when: evpn.enabled | default(false)
+      tags: [evpn]
+
+    #=========================================================================
+    # SAVE CONFIGURATION
+    #=========================================================================
+    - name: Save running configuration
+      dellemc.os10.os10_config:
+        save: true
+      tags: [save]
+
+    #=========================================================================
+    # VERIFICATION
+    #=========================================================================
+    - name: Verify spine configuration
+      dellemc.os10.os10_command:
+        commands:
+          - show ip interface brief
+          - show ip bgp summary
+      register: spine_verification
+      tags: [verify]
+
+    - name: Display spine verification
+      ansible.builtin.debug:
+        msg: |
+          Spine: {{ inventory_hostname }}
+          Interfaces: {{ spine_verification.stdout[0] | regex_findall('up') | length }} up
+          BGP Neighbors: {{ spine_verification.stdout[1] | default('') }}
+      tags: [verify]

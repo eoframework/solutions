@@ -1,0 +1,38 @@
+# Test environment values for OpenShift applications
+# Minimal resources for test workloads
+
+# Reduced replicas for test
+replicaCount: 1
+
+# Minimal resources
+resources:
+  limits:
+    cpu: 500m
+    memory: 512Mi
+  requests:
+    cpu: 250m
+    memory: 256Mi
+
+# No autoscaling in test
+autoscaling:
+  enabled: false
+
+# Basic route
+route:
+  enabled: true
+  tls:
+    enabled: true
+    termination: edge
+
+# Service mesh disabled in test
+serviceMesh:
+  enabled: false
+
+# Monitoring enabled but less frequent
+monitoring:
+  enabled: true
+  interval: 60s
+
+# No PDB in test
+podDisruptionBudget:
+  enabled: false

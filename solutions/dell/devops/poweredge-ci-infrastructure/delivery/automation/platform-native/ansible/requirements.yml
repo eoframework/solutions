@@ -1,0 +1,29 @@
+# Ansible Galaxy Requirements
+# Dell PowerEdge CI Infrastructure Solution
+# EO Framework - Dell DevOps Solutions
+
+---
+collections:
+  # Dell OpenManage for PowerEdge hardware management
+  - name: dellemc.openmanage
+    version: ">=9.0.0"
+
+  # Docker container management
+  - name: community.docker
+    version: ">=3.0.0"
+
+  # GitLab management
+  - name: community.general
+    version: ">=7.0.0"
+
+  # PostgreSQL database management
+  - name: community.postgresql
+    version: ">=3.0.0"
+
+  # Ansible POSIX utilities
+  - name: ansible.posix
+    version: ">=1.5.0"
+
+  # Ansible utilities
+  - name: ansible.utils
+    version: ">=2.0.0"

@@ -1,0 +1,21 @@
+#------------------------------------------------------------------------------
+# Project Configuration
+#------------------------------------------------------------------------------
+# Generated from configuration.csv
+#
+# To regenerate: python generate-ansible-vars.py /path/to/solution
+# DO NOT EDIT - Changes will be overwritten on regeneration
+#------------------------------------------------------------------------------
+
+solution:
+  name: powerswitch-datacenter
+  abbr: psd
+  provider_name: dell
+  category_name: network
+
+datacenter:
+  name: "Primary Datacenter"
+
+ownership:
+  cost_center: CC-NET-001
+  owner_email: netops@company.com

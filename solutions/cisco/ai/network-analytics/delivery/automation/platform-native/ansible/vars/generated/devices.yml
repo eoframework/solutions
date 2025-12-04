@@ -1,0 +1,17 @@
+#------------------------------------------------------------------------------
+# Devices Configuration
+#------------------------------------------------------------------------------
+# Generated from configuration.csv on 2025-12-02 23:53:43
+#
+# To regenerate: python generate-ansible-vars.py /path/to/solution
+# DO NOT EDIT - Changes will be overwritten on regeneration
+#------------------------------------------------------------------------------
+
+devices:
+  cli_password: '{{ vault_device_cli_password }}'
+  cli_username: network_admin
+  enable_secret: '{{ vault_device_enable_secret }}'
+  netconf_port: 830
+  snmp_ro_community: '{{ vault_snmp_ro_community }}'
+  snmp_rw_community: '{{ vault_snmp_rw_community }}'
+  snmp_version: v3

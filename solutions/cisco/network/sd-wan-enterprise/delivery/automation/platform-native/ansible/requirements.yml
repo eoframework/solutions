@@ -1,0 +1,27 @@
+---
+#------------------------------------------------------------------------------
+# Ansible Galaxy Requirements - Cisco SD-WAN Enterprise
+#------------------------------------------------------------------------------
+# Install with: ansible-galaxy install -r requirements.yml
+#------------------------------------------------------------------------------
+
+collections:
+  # Cisco SD-WAN (Catalyst SD-WAN) Collection
+  - name: cisco.sdwan
+    version: ">=1.0.0"
+    source: https://galaxy.ansible.com
+
+  # Cisco IOS-XE Collection - vEdge/cEdge management
+  - name: cisco.ios
+    version: ">=6.0.0"
+    source: https://galaxy.ansible.com
+
+  # Ansible Network Common
+  - name: ansible.netcommon
+    version: ">=5.0.0"
+    source: https://galaxy.ansible.com
+
+  # Ansible Utils
+  - name: ansible.utils
+    version: ">=2.9.0"
+    source: https://galaxy.ansible.com

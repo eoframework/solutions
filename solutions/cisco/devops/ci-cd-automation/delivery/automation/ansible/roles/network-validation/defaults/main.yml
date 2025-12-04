@@ -1,0 +1,12 @@
+---
+# Default variables for Network Validation role
+
+# Validation settings
+validation_timeout: 30
+validation_retry_count: 3
+
+# Compliance checks
+check_ntp: true
+check_logging: true
+check_ssh: true
+check_aaa: true

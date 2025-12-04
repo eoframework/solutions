@@ -1,0 +1,96 @@
+# Dell SafeID Authentication - Token Enrollment
+# EO Framework - Dell Cyber Security Solutions
+
+---
+- name: Configure Token Enrollment Portal
+  hosts: safeid_servers
+  gather_facts: true
+  become: true
+  tags: [tokens, enrollment]
+
+  pre_tasks:
+    - name: Display enrollment configuration
+      ansible.builtin.debug:
+        msg: |
+          Configuring Token Enrollment
+          Portal URL: {{ users.enrollment.portal_url }}
+          Session Timeout: {{ users.enrollment.session_timeout }}s
+          Total Users: {{ users.count }}
+          YubiKey Model: {{ users.yubikey_model }}
+          YubiKey Quantity: {{ users.yubikey_quantity }}
+
+  roles:
+    - role: safeid-tokens
+      tags: [token-config]
+
+  tasks:
+    - name: Configure enrollment portal settings
+      ansible.builtin.template:
+        src: enrollment-portal.conf.j2
+        dest: /etc/safeid/enrollment-portal.conf
+        owner: safeid
+        group: safeid
+        mode: '0600'
+      notify: restart safeid-enrollment
+
+    - name: Configure YubiKey settings
+      ansible.builtin.template:
+        src: yubikey.conf.j2
+        dest: /etc/safeid/yubikey.conf
+        owner: safeid
+        group: safeid
+        mode: '0600'
+      notify: restart safeid-enrollment
+
+    - name: Enable enrollment portal
+      ansible.builtin.service:
+        name: safeid-enrollment
+        state: started
+        enabled: true
+
+    - name: Configure FIDO2 settings
+      ansible.builtin.command: >
+        safeid-cli fido2 configure
+        --origin {{ authentication.fido2.origin }}
+        --rpid {{ authentication.fido2.rpid }}
+      when: server_role == "primary"
+      register: fido2_config
+
+    - name: Configure PIN policy
+      ansible.builtin.command: >
+        safeid-cli pin-policy configure
+        --min-length {{ authentication.pin.min_length }}
+        --max-length {{ authentication.pin.max_length }}
+        --complexity {{ 'enabled' if authentication.pin.complexity_required else 'disabled' }}
+      when:
+        - server_role == "primary"
+        - authentication.pin.enabled | default(false)
+      register: pin_config
+
+  post_tasks:
+    - name: Verify enrollment portal is accessible
+      ansible.builtin.uri:
+        url: "{{ users.enrollment.portal_url }}/health"
+        validate_certs: false
+        status_code: 200
+      register: portal_health
+      retries: 10
+      delay: 5
+      until: portal_health is success
+
+    - name: Display enrollment portal status
+      ansible.builtin.debug:
+        msg: "Enrollment portal is accessible at {{ users.enrollment.portal_url }}"
+
+    - name: Generate enrollment instructions
+      ansible.builtin.template:
+        src: enrollment-instructions.md.j2
+        dest: "/tmp/safeid-enrollment-instructions-{{ environment }}.md"
+      delegate_to: localhost
+      when: server_role == "primary"
+
+  handlers:
+    - name: restart safeid-enrollment
+      ansible.builtin.service:
+        name: safeid-enrollment
+        state: restarted

@@ -1,0 +1,167 @@
+---
+# OpenShift Post-Installation Configuration
+# Configures OAuth, cluster settings, and base infrastructure
+#
+# Usage:
+#   ansible-playbook -i inventory/prod playbooks/ocp-post-install.yml
+#
+# Prerequisites:
+#   - OpenShift cluster deployed and accessible
+#   - oc CLI configured with cluster-admin credentials
+#   - kubernetes.core collection installed
+
+- name: Configure OpenShift Post-Installation
+  hosts: localhost
+  gather_facts: false
+  connection: local
+
+  vars_files:
+    - "{{ playbook_dir }}/../inventory/{{ env | default('prod') }}/group_vars/all.yml"
+
+  vars:
+    kubeconfig: "{{ lookup('env', 'KUBECONFIG') | default('~/.kube/config') }}"
+
+  tasks:
+    #==========================================================================
+    # VALIDATION
+    #==========================================================================
+    - name: Verify cluster connectivity
+      kubernetes.core.k8s_info:
+        api_version: v1
+        kind: Namespace
+        name: openshift-config
+      register: cluster_check
+      failed_when: cluster_check.resources | length == 0
+
+    - name: Display cluster information
+      ansible.builtin.debug:
+        msg: "Configuring cluster: {{ ocp_cluster_name }}.{{ ocp_base_domain }}"
+
+    #==========================================================================
+    # OAUTH CONFIGURATION
+    #==========================================================================
+    - name: Create LDAP bind password secret
+      kubernetes.core.k8s:
+        state: present
+        definition:
+          apiVersion: v1
+          kind: Secret
+          metadata:
+            name: ldap-bind-password
+            namespace: openshift-config
+          type: Opaque
+          stringData:
+            bindPassword: "{{ ldap_bind_password }}"
+      when: ldap_enabled | default(true)
+      no_log: true
+
+    - name: Configure OAuth with LDAP provider
+      kubernetes.core.k8s:
+        state: present
+        definition:
+          apiVersion: config.openshift.io/v1
+          kind: OAuth
+          metadata:
+            name: cluster
+          spec:
+            tokenConfig:
+              accessTokenMaxAgeSeconds: "{{ oauth_timeout | default(86400) }}"
+            identityProviders:
+              - name: ldap
+                type: LDAP
+                mappingMethod: claim
+                ldap:
+                  url: "{{ ldap_url }}/{{ ldap_user_search_base }}?uid"
+                  insecure: false
+                  bindDN: "{{ ldap_bind_dn }}"
+                  bindPassword:
+                    name: ldap-bind-password
+                  attributes:
+                    id:
+                      - dn
+                    email:
+                      - mail
+                    name:
+                      - cn
+                    preferredUsername:
+                      - uid
+      when: ldap_enabled | default(true)
+
+    #==========================================================================
+    # CLUSTER CONFIGURATION
+    #==========================================================================
+    - name: Configure cluster network MTU
+      kubernetes.core.k8s:
+        state: present
+        definition:
+          apiVersion: operator.openshift.io/v1
+          kind: Network
+          metadata:
+            name: cluster
+          spec:
+            defaultNetwork:
+              ovnKubernetesConfig:
+                mtu: "{{ cluster_network_mtu | default(1400) }}"
+      when: ocp_network_type == 'OVNKubernetes'
+
+    - name: Create htpasswd secret for kubeadmin backup
+      kubernetes.core.k8s:
+        state: present
+        definition:
+          apiVersion: v1
+          kind: Secret
+          metadata:
+            name: htpasswd-secret
+            namespace: openshift-config
+          type: Opaque
+          data:
+            htpasswd: "{{ lookup('pipe', 'htpasswd -Bbn admin ' + admin_password | default('changeme')) | b64encode }}"
+      when: create_htpasswd_backup | default(false)
+
+    #==========================================================================
+    # STORAGE CLASSES
+    #==========================================================================
+    - name: Set default storage class
+      kubernetes.core.k8s:
+        state: present
+        definition:
+          apiVersion: storage.k8s.io/v1
+          kind: StorageClass
+          metadata:
+            name: "{{ storage_class_block }}"
+            annotations:
+              storageclass.kubernetes.io/is-default-class: "true"
+      when: storage_class_block is defined
+
+    #==========================================================================
+    # REGISTRY CONFIGURATION
+    #==========================================================================
+    - name: Configure internal registry storage
+      kubernetes.core.k8s:
+        state: present
+        definition:
+          apiVersion: imageregistry.operator.openshift.io/v1
+          kind: Config
+          metadata:
+            name: cluster
+          spec:
+            managementState: Managed
+            storage:
+              pvc:
+                claim: ""
+            replicas: 2
+      when: not quay_enabled | default(false)
+
+  handlers:
+    - name: Wait for cluster operators
+      kubernetes.core.k8s_info:
+        api_version: config.openshift.io/v1
+        kind: ClusterOperator
+      register: co_status
+      until: >
+        co_status.resources | selectattr('status.conditions', 'defined') |
+        selectattr('status.conditions', 'selectattr', 'type', 'equalto', 'Degraded') |
+        selectattr('status.conditions', 'selectattr', 'status', 'equalto', 'True') |
+        list | length == 0
+      retries: 30
+      delay: 30

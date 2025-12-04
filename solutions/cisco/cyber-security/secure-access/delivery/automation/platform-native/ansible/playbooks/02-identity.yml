@@ -1,0 +1,88 @@
+---
+#------------------------------------------------------------------------------
+# Phase 1: Identity - Identity Sources Configuration
+#------------------------------------------------------------------------------
+# This playbook handles identity source configuration including:
+#   - Active Directory integration
+#   - LDAP configuration
+#   - Internal identity stores
+#   - SAML/SSO configuration
+#------------------------------------------------------------------------------
+
+- name: Phase 1 - Identity Sources
+  hosts: localhost
+  gather_facts: no
+  tags: [identity]
+
+  vars_files:
+    - "{{ playbook_dir }}/../vars/generated/project.yml"
+    - "{{ playbook_dir }}/../vars/generated/ise.yml"
+    - "{{ playbook_dir }}/../vars/generated/integrations.yml"
+    - "{{ playbook_dir }}/../vars/generated/saml.yml"
+    - "{{ playbook_dir }}/../vars/secrets.yml"
+
+  tasks:
+    #--------------------------------------------------------------------------
+    # Active Directory Integration
+    #--------------------------------------------------------------------------
+    - name: Configure Active Directory join point
+      cisco.ise.active_directory:
+        ise_hostname: "{{ ise.primary_ip }}"
+        ise_username: "{{ ise.admin_user }}"
+        ise_password: "{{ vault_ise_admin_password }}"
+        ise_verify: "{{ ise.ssl_verify }}"
+        state: present
+        name: "{{ integrations.ad_domain }}"
+        domain: "{{ integrations.ad_domain }}"
+        adScopesNames: "Default_Scope"
+      register: ad_join_point
+
+    - name: Display AD configuration details
+      ansible.builtin.debug:
+        msg: |
+          Active Directory Configuration:
+          - Domain: {{ integrations.ad_domain }}
+          - Primary DC: {{ integrations.ad_primary_dc }}
+          - User Groups: {{ integrations.ad_user_groups }}
+          - Admin Group: {{ integrations.ad_admin_group }}
+
+    #--------------------------------------------------------------------------
+    # Identity Source Sequences
+    #--------------------------------------------------------------------------
+    - name: Create identity source sequence
+      ansible.builtin.debug:
+        msg: |
+          Identity Source Sequence:
+          1. Active Directory ({{ integrations.ad_domain }})
+          2. Internal Users
+          3. Guest Users
+
+          Note: Configure via ISE GUI: Administration > Identity Management > Identity Source Sequences
+
+    #--------------------------------------------------------------------------
+    # SAML Configuration (if enabled)
+    #--------------------------------------------------------------------------
+    - name: Display SAML configuration
+      ansible.builtin.debug:
+        msg: |
+          SAML/SSO Configuration:
+          - Enabled: {{ saml.enabled }}
+          - IdP Entity ID: {{ saml.idp_entity_id }}
+          - SSO URL: {{ saml.idp_sso_url }}
+
+          Note: SAML certificate must be imported via ISE GUI.
+      when: saml.enabled | bool
+
+    #--------------------------------------------------------------------------
+    # Summary
+    #--------------------------------------------------------------------------
+    - name: Identity sources summary
+      ansible.builtin.debug:
+        msg: |
+          ============================================================
+          Phase 1 - Identity Sources Complete
+          ============================================================
+          Active Directory: {{ integrations.ad_domain }}
+          AD Join Point: {{ 'Created' if ad_join_point is defined else 'Manual Setup Required' }}
+          SAML/SSO: {{ 'Enabled' if saml.enabled else 'Disabled' }}
+          ============================================================

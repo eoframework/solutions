@@ -1,57 +1,97 @@
-#WIDTH: 32,18,12,28,48,10,12,30,16,20,26,40,12
-#ALIGN: left,left,center,left,left,center,left,left,center,left,left,left,center
-Parameter Name,Category,Environment,Default Value,Description,Required,Data Type,Validation Rules,Security Level,Owner Team,Dependencies,Notes,Last Updated
-GHAS_SOLUTION_NAME,Application,All,GitHub Advanced Security,Solution identifier for logging and metrics,Yes,String,Max 50 characters,Public,Security Team,None,Used in dashboards and reports,[DATE]
-GHAS_VERSION,Application,All,1.0.0,Current GHAS deployment version,Yes,String,Semantic versioning format,Public,Security Team,None,Updated with configuration changes,[DATE]
-GHAS_ENVIRONMENT,Application,All,development,Deployment environment identifier,Yes,String,development|staging|production,Public,Security Team,None,Controls policy enforcement levels,[DATE]
-GITHUB_ENTERPRISE_URL,GitHub,All,https://github.com,GitHub Enterprise Cloud base URL,Yes,String,Valid HTTPS URL,Public,GitHub Admin,None,Enterprise Cloud uses github.com,[DATE]
-GITHUB_ORG_NAME,GitHub,All,[organization-name],GitHub organization name,Yes,String,Valid GitHub org name,Confidential,GitHub Admin,Enterprise license,Primary organization for GHAS,[DATE]
-GITHUB_ENTERPRISE_LICENSE,GitHub,All,[license-id],GitHub Enterprise Cloud license identifier,Yes,String,Valid license ID,Secret,GitHub Admin,Billing,100 users licensed per SOW,[DATE]
-GHAS_LICENSE_COMMITTERS,GitHub,All,80,GitHub Advanced Security active committers,Yes,Integer,1-1000,Confidential,GitHub Admin,Billing,90-day rolling count per GitHub,[DATE]
-GITHUB_API_TOKEN,GitHub,All,[github-pat-token],GitHub personal access token for API access,Yes,String,ghp_* format,Secret,Security Team,Org admin scope,Rotate quarterly,[DATE]
-SAML_IDP_ENTITY_ID,Authentication,All,[idp-entity-id],SAML Identity Provider entity ID,Yes,String,Valid entity ID URI,Confidential,Identity Team,IdP configuration,Corporate identity provider,[DATE]
-SAML_SSO_URL,Authentication,All,[sso-login-url],SAML Single Sign-On URL,Yes,String,Valid HTTPS URL,Confidential,Identity Team,IdP configuration,Login endpoint URL,[DATE]
-SAML_CERTIFICATE,Authentication,All,[base64-certificate],SAML signing certificate from IdP,Yes,String,Valid X.509 cert base64,Secret,Identity Team,IdP configuration,Certificate for signature validation,[DATE]
-MFA_ENFORCEMENT,Authentication,All,required,Multi-factor authentication requirement,Yes,String,required|optional,Public,Security Team,SAML configuration,Required for all GitHub users,[DATE]
-CODEQL_LANGUAGES,Code Scanning,All,"javascript,python,java,csharp,go",Languages enabled for CodeQL analysis,Yes,String,Comma-separated language list,Public,Security Team,CodeQL support,5 languages per SOW scope,[DATE]
-CODEQL_QUERY_SUITES,Code Scanning,All,security-extended,CodeQL query suite for scanning,Yes,String,default|security-extended|security-and-quality,Public,Security Team,CodeQL configuration,Extended security coverage,[DATE]
-CODEQL_SCHEDULE,Code Scanning,All,"0 2 * * *",Cron schedule for full repository scans,Yes,String,Valid cron expression,Public,Security Team,GitHub Actions,Daily at 2 AM UTC,[DATE]
-CODEQL_TIMEOUT_MINUTES,Code Scanning,All,60,Maximum CodeQL scan duration in minutes,Yes,Integer,15-120,Public,Security Team,Performance requirements,Extended for large repositories,[DATE]
-CODEQL_RAM_MB,Code Scanning,All,4096,Memory allocation for CodeQL analysis,Yes,Integer,2048-16384,Public,Security Team,Performance requirements,Default GitHub-hosted runner,[DATE]
-CODEQL_THREADS,Code Scanning,All,2,CPU threads for CodeQL analysis,Yes,Integer,1-4,Public,Security Team,Performance requirements,GitHub-hosted runner limit,[DATE]
-CUSTOM_QUERIES_REPO,Code Scanning,All,[org]/codeql-custom-queries,Repository containing custom CodeQL queries,Yes,String,Valid repo path,Confidential,Security Team,Custom queries,15 custom queries per SOW,[DATE]
-CUSTOM_QUERIES_PATH,Code Scanning,All,queries,Path to custom queries in repository,Yes,String,Valid directory path,Public,Security Team,Custom queries repo,Query directory location,[DATE]
-SECRET_SCANNING_ENABLED,Secret Scanning,All,true,Enable secret scanning for repositories,Yes,Boolean,true|false,Public,Security Team,GHAS license,Organization-wide enablement,[DATE]
-PUSH_PROTECTION_ENABLED,Secret Scanning,All,true,Enable push protection to block secrets,Yes,Boolean,true|false,Public,Security Team,Secret scanning,Real-time secret blocking,[DATE]
-SECRET_SCANNING_CUSTOM_PATTERNS,Secret Scanning,All,5,Number of custom secret patterns,Yes,Integer,0-100,Public,Security Team,Secret scanning,Proprietary API patterns,[DATE]
-SECRET_BYPASS_WORKFLOW,Secret Scanning,All,require-approval,Push protection bypass workflow,Yes,String,require-approval|self-approve,Confidential,Security Team,Push protection,Manager approval required,[DATE]
-DEPENDABOT_ENABLED,Dependency Scanning,All,true,Enable Dependabot vulnerability alerts,Yes,Boolean,true|false,Public,Security Team,GitHub configuration,Automated dependency scanning,[DATE]
-DEPENDABOT_SECURITY_UPDATES,Dependency Scanning,All,true,Enable Dependabot security update PRs,Yes,Boolean,true|false,Public,Security Team,Dependabot alerts,Auto-generated fix PRs,[DATE]
-DEPENDABOT_VERSION_UPDATES,Dependency Scanning,All,false,Enable Dependabot version updates,Yes,Boolean,true|false,Public,Security Team,Dependabot alerts,Disabled per SOW scope,[DATE]
-DEPENDABOT_SCHEDULE,Dependency Scanning,All,daily,Dependabot check frequency,Yes,String,daily|weekly|monthly,Public,Security Team,Dependabot config,Daily vulnerability checks,[DATE]
-BRANCH_PROTECTION_ENABLED,Security Policies,All,true,Enable branch protection rules,Yes,Boolean,true|false,Public,Security Team,Repository settings,Required for security gates,[DATE]
-REQUIRE_CODEQL_PASS,Security Policies,All,true,Require CodeQL check to pass before merge,Yes,Boolean,true|false,Public,Security Team,Branch protection,Block merges on critical findings,[DATE]
-REQUIRE_REVIEWS,Security Policies,All,1,Number of required PR approvals,Yes,Integer,0-6,Public,Security Team,Branch protection,Security review requirement,[DATE]
-DISMISS_STALE_REVIEWS,Security Policies,All,true,Dismiss approvals on new commits,Yes,Boolean,true|false,Public,Security Team,Branch protection,Re-review after changes,[DATE]
-VULNERABILITY_SLA_CRITICAL,Security Policies,All,24,Critical vulnerability SLA in hours,Yes,Integer,1-168,Public,Security Team,Vulnerability management,24-hour remediation per SOW,[DATE]
-VULNERABILITY_SLA_HIGH,Security Policies,All,168,High vulnerability SLA in hours,Yes,Integer,24-720,Public,Security Team,Vulnerability management,7-day remediation per SOW,[DATE]
-VULNERABILITY_SLA_MEDIUM,Security Policies,All,720,Medium vulnerability SLA in hours,Yes,Integer,168-2160,Public,Security Team,Vulnerability management,30-day remediation per SOW,[DATE]
-VULNERABILITY_SLA_LOW,Security Policies,All,2160,Low vulnerability SLA in hours,Yes,Integer,720-8760,Public,Security Team,Vulnerability management,90-day remediation per SOW,[DATE]
-CONFIDENCE_THRESHOLD,AI/ML,All,0.85,Minimum confidence for auto-processing,Yes,Float,0.0-1.0,Public,Security Team,Detection accuracy,Below threshold routes to review,[DATE]
-DETECTION_ACCURACY_TARGET,AI/ML,All,0.95,Target detection accuracy rate,Yes,Float,0.80-0.99,Public,Security Team,Quality assurance,95%+ per presales SOW,[DATE]
-FALSE_POSITIVE_THRESHOLD,AI/ML,All,0.10,Maximum acceptable false positive rate,Yes,Float,0.01-0.20,Public,Security Team,Quality assurance,<10% per presales SOW,[DATE]
-SIEM_WEBHOOK_URL,Integration,All,[siem-webhook-endpoint],SIEM webhook URL for alerts,Yes,String,Valid HTTPS URL,Secret,Integration Team,SIEM platform,Splunk or Azure Sentinel,[DATE]
-SIEM_WEBHOOK_SECRET,Integration,All,[webhook-secret],Shared secret for webhook validation,Yes,String,Min 32 characters,Secret,Integration Team,SIEM webhook,HMAC signature validation,[DATE]
-SIEM_EVENT_TYPES,Integration,All,"code-scanning,secret-scanning,dependabot",Event types to forward to SIEM,Yes,String,Comma-separated event list,Confidential,Integration Team,SIEM webhook,Security alert events,[DATE]
-JIRA_BASE_URL,Integration,All,[jira-instance-url],JIRA instance base URL,Yes,String,Valid HTTPS URL,Confidential,Integration Team,JIRA license,Vulnerability ticket creation,[DATE]
-JIRA_PROJECT_KEY,Integration,All,[project-key],JIRA project key for security tickets,Yes,String,Valid project key,Confidential,Integration Team,JIRA project,Security backlog project,[DATE]
-JIRA_API_TOKEN,Integration,All,[jira-api-token],JIRA API token for authentication,Yes,String,Valid API token,Secret,Integration Team,JIRA user,Service account token,[DATE]
-SLACK_WEBHOOK_URL,Notifications,All,[slack-webhook-url],Slack webhook for security notifications,No,String,Valid Slack webhook URL,Secret,Integration Team,Slack workspace,Critical alerts channel,[DATE]
-TEAMS_WEBHOOK_URL,Notifications,All,[teams-webhook-url],Microsoft Teams webhook URL,No,String,Valid Teams webhook URL,Secret,Integration Team,Teams channel,Security team channel,[DATE]
-PAGERDUTY_ROUTING_KEY,Notifications,All,[pagerduty-key],PagerDuty routing key for incidents,No,String,Valid routing key,Secret,Integration Team,PagerDuty service,Critical incident escalation,[DATE]
-AUDIT_LOG_RETENTION_DAYS,Monitoring,All,365,GitHub audit log retention period,Yes,Integer,90-730,Public,Security Team,Compliance requirements,1-year retention for SOC 2,[DATE]
-CLOUDWATCH_LOG_GROUP,Monitoring,All,/ghas/security-alerts,CloudWatch log group for alerts,No,String,Valid log group name,Confidential,Operations Team,AWS integration,Optional AWS logging,[DATE]
-METRICS_ENABLED,Monitoring,All,true,Enable security metrics collection,Yes,Boolean,true|false,Public,Security Team,Monitoring tools,Dashboard metrics,[DATE]
-ALERT_EMAIL_RECIPIENTS,Notifications,All,[security-team-dl],Email distribution for critical alerts,Yes,String,Valid email addresses,Confidential,Security Team,Email service,Security team distribution,[DATE]
-SECURITY_OVERVIEW_ENABLED,Monitoring,All,true,Enable GitHub Security Overview dashboard,Yes,Boolean,true|false,Public,Security Team,GitHub Enterprise,Organization-wide visibility,[DATE]
-
+#WIDTH: 45,14,50,50,50,45,8,12,27,14,14,12,30,12
+#ALIGN: left,left,left,left,left,left,center,left,left,center,left,left,left,center
+Parameter Name,Category,Production,Test,DR,Description,Required,Data Type,Validation Rules,Security Level,Owner Team,Dependencies,Notes,Last Updated
+solution.name,Project,github-advanced-security,github-advanced-security,github-advanced-security,Solution name for resource naming,Yes,String,Valid string value,Public,Security Team,,Solution identifier,2025-12-03
+solution.abbr,Project,ghas,ghas,ghas,Solution abbreviation (3-4 chars),Yes,String,3-8 lowercase,Public,Security Team,,Used in resource naming,2025-12-03
+solution.version,Project,1.0.0,1.0.0,1.0.0,Current GHAS deployment version,Yes,String,Semantic versioning,Public,Security Team,,Release version,2025-12-03
+solution.provider_name,Project,github,github,github,Provider organization name,Yes,String,Valid string value,Public,Security Team,,GitHub provider,2025-12-03
+solution.category_name,Project,cyber-security,cyber-security,cyber-security,Solution category,Yes,String,Valid string value,Public,Security Team,,Security category,2025-12-03
+ownership.cost_center,Project,CC-SEC-001,CC-SEC-001,CC-SEC-001,Cost center for billing,Yes,String,CC format,Public,Security Team,,Billing allocation,2025-12-03
+ownership.owner_email,Project,security-team@company.com,dev-team@company.com,security-team@company.com,Team email for ownership,Yes,String,Valid email,Confidential,Security Team,,Alert notifications,2025-12-03
+ownership.project_code,Project,PRJ-GHAS-2025,PRJ-GHAS-2025,PRJ-GHAS-2025,Project tracking code,Yes,String,PRJ format,Public,Security Team,,Tracking code,2025-12-03
+github.enterprise_url,GitHub,https://github.com,https://github.com,https://github.com,GitHub Enterprise Cloud base URL,Yes,String,Valid HTTPS URL,Public,GitHub Admin,,Enterprise Cloud uses github.com,2025-12-03
+github.organization_name,GitHub,[organization-name],[organization-name-test],[organization-name],GitHub organization name,Yes,String,Valid GitHub org name,Confidential,GitHub Admin,,Primary organization,2025-12-03
+github.enterprise_license,GitHub,[license-id],[license-id-test],[license-id],GitHub Enterprise Cloud license identifier,Yes,String,Valid license ID,Secret,GitHub Admin,,License key,2025-12-03
+github.ghas_committers,GitHub,80,20,80,GHAS active committers (90-day rolling),Yes,Integer,1-1000,Confidential,GitHub Admin,,Licensed seats,2025-12-03
+github.total_repositories,GitHub,200,50,200,Total repositories in organization,Yes,Integer,1-10000,Public,GitHub Admin,,Scope of scanning,2025-12-03
+github.total_developers,GitHub,100,25,100,Total active developers,Yes,Integer,1-10000,Public,GitHub Admin,,User count,2025-12-03
+auth.api_token,Authentication,[github-pat-token],[github-pat-test-token],[github-pat-token],GitHub PAT for API access,Yes,String,ghp_* format,Secret,Security Team,,Rotate quarterly,2025-12-03
+auth.app_id,Authentication,[app-id],[app-id-test],[app-id],GitHub App ID for authentication,No,String,Numeric,Confidential,Security Team,,App authentication,2025-12-03
+auth.app_private_key,Authentication,[app-private-key],[app-private-key-test],[app-private-key],GitHub App private key,No,String,Valid RSA key,Secret,Security Team,,App authentication,2025-12-03
+auth.saml_entity_id,Authentication,[idp-entity-id],[idp-entity-id],[idp-entity-id],SAML Identity Provider entity ID,Yes,String,Valid entity ID URI,Confidential,Security Team,,SSO configuration,2025-12-03
+auth.saml_sso_url,Authentication,[sso-login-url],[sso-login-url],[sso-login-url],SAML Single Sign-On URL,Yes,String,Valid HTTPS URL,Confidential,Security Team,,IdP login URL,2025-12-03
+auth.saml_certificate,Authentication,[base64-certificate],[base64-certificate],[base64-certificate],SAML signing certificate,Yes,String,Valid X.509 base64,Secret,Security Team,,IdP certificate,2025-12-03
+auth.mfa_enforcement,Authentication,required,required,required,Multi-factor authentication requirement,Yes,String,required|optional,Public,Security Team,,Security policy,2025-12-03
+codeql.enabled,CodeScanning,true,true,true,Enable CodeQL analysis,Yes,Boolean,true|false,Public,Security Team,,Core scanning,2025-12-03
+codeql.languages,CodeScanning,"javascript,python,java,csharp,go","javascript,python","javascript,python,java,csharp,go",Languages enabled for CodeQL,Yes,String,Comma-separated,Public,Security Team,,Full coverage for prod,2025-12-03
+codeql.query_suites,CodeScanning,security-extended,security-extended,security-extended,CodeQL query suite,Yes,String,default|security-extended|security-and-quality,Public,Security Team,,Extended rules,2025-12-03
+codeql.schedule,CodeScanning,"0 2 * * *","0 3 * * *","0 2 * * *",Cron schedule for full scans,Yes,String,Valid cron expression,Public,Security Team,,Daily at 2 AM,2025-12-03
+codeql.timeout_minutes,CodeScanning,60,45,60,Maximum scan duration (minutes),Yes,Integer,15-120,Public,Security Team,,Timeout protection,2025-12-03
+codeql.ram_mb,CodeScanning,4096,2048,4096,Memory allocation (MB),Yes,Integer,2048-16384,Public,Security Team,,Analysis resources,2025-12-03
+codeql.threads,CodeScanning,2,2,2,CPU threads for analysis,Yes,Integer,1-4,Public,Security Team,,Parallelism,2025-12-03
+codeql.custom_queries_repo,CodeScanning,[org]/codeql-custom-queries,[org]/codeql-test-queries,[org]/codeql-custom-queries,Custom queries repository,Yes,String,Valid repo path,Confidential,Security Team,,Custom rules,2025-12-03
+codeql.custom_queries_path,CodeScanning,queries,queries,queries,Path to custom queries,Yes,String,Valid directory,Public,Security Team,,Queries location,2025-12-03
+codeql.custom_queries_count,CodeScanning,15,5,15,Number of custom queries,Yes,Integer,0-100,Public,Security Team,,Custom rule count,2025-12-03
+secret_scanning.enabled,SecretScanning,true,true,true,Enable secret scanning,Yes,Boolean,true|false,Public,Security Team,,Secret detection,2025-12-03
+secret_scanning.push_protection_enabled,SecretScanning,true,false,true,Enable push protection,Yes,Boolean,true|false,Public,Security Team,,Block secrets on push,2025-12-03
+secret_scanning.custom_patterns_count,SecretScanning,5,2,5,Number of custom patterns,Yes,Integer,0-100,Public,Security Team,,Custom secret patterns,2025-12-03
+secret_scanning.bypass_workflow,SecretScanning,require-approval,self-approve,require-approval,Push protection bypass workflow,Yes,String,require-approval|self-approve,Confidential,Security Team,,Bypass controls,2025-12-03
+secret_scanning.alert_threshold,SecretScanning,0,5,0,Alert threshold before blocking,Yes,Integer,0-100,Public,Security Team,,Zero tolerance prod,2025-12-03
+dependabot.enabled,Dependabot,true,true,true,Enable Dependabot alerts,Yes,Boolean,true|false,Public,Security Team,,Vulnerability alerts,2025-12-03
+dependabot.security_updates,Dependabot,true,true,true,Enable security update PRs,Yes,Boolean,true|false,Public,Security Team,,Auto-remediation,2025-12-03
+dependabot.version_updates,Dependabot,false,false,false,Enable version updates,Yes,Boolean,true|false,Public,Security Team,,Non-security updates,2025-12-03
+dependabot.schedule,Dependabot,daily,weekly,daily,Check frequency,Yes,String,daily|weekly|monthly,Public,Security Team,,Scan cadence,2025-12-03
+dependabot.package_ecosystems,Dependabot,"npm,pip,maven,nuget,go","npm,pip","npm,pip,maven,nuget,go",Package ecosystems,Yes,String,Comma-separated,Public,Security Team,,Dependency types,2025-12-03
+branch_protection.enabled,SecurityPolicy,true,false,true,Enable branch protection,Yes,Boolean,true|false,Public,Security Team,,Policy enforcement,2025-12-03
+branch_protection.require_codeql_pass,SecurityPolicy,true,false,true,Require CodeQL to pass,Yes,Boolean,true|false,Public,Security Team,,Merge gate,2025-12-03
+branch_protection.required_reviews,SecurityPolicy,2,1,2,Required PR approvals,Yes,Integer,0-6,Public,Security Team,,Review count,2025-12-03
+branch_protection.require_codeowner_review,SecurityPolicy,true,false,true,Require code owner review,Yes,Boolean,true|false,Public,Security Team,,CODEOWNERS,2025-12-03
+branch_protection.dismiss_stale_reviews,SecurityPolicy,true,true,true,Dismiss stale reviews,Yes,Boolean,true|false,Public,Security Team,,Re-review on changes,2025-12-03
+branch_protection.require_linear_history,SecurityPolicy,true,false,true,Require linear history,Yes,Boolean,true|false,Public,Security Team,,Clean history,2025-12-03
+branch_protection.allow_force_pushes,SecurityPolicy,false,false,false,Allow force pushes,Yes,Boolean,true|false,Public,Security Team,,Always disabled,2025-12-03
+branch_protection.allow_deletions,SecurityPolicy,false,false,false,Allow branch deletions,Yes,Boolean,true|false,Public,Security Team,,Protected deletion,2025-12-03
+sla.critical_hours,VulnerabilitySLA,24,48,24,Critical vulnerability SLA (hours),Yes,Integer,1-168,Public,Security Team,,24-hour response,2025-12-03
+sla.high_hours,VulnerabilitySLA,168,336,168,High vulnerability SLA (hours),Yes,Integer,24-720,Public,Security Team,,7-day response,2025-12-03
+sla.medium_hours,VulnerabilitySLA,720,1440,720,Medium vulnerability SLA (hours),Yes,Integer,168-2160,Public,Security Team,,30-day response,2025-12-03
+sla.low_hours,VulnerabilitySLA,2160,4320,2160,Low vulnerability SLA (hours),Yes,Integer,720-8760,Public,Security Team,,90-day response,2025-12-03
+detection.confidence_threshold,Detection,0.85,0.80,0.85,Minimum confidence for auto-processing,Yes,Float,0.0-1.0,Public,Security Team,,Auto-triage threshold,2025-12-03
+detection.accuracy_target,Detection,0.95,0.90,0.95,Target detection accuracy rate,Yes,Float,0.80-0.99,Public,Security Team,,Quality target,2025-12-03
+detection.false_positive_threshold,Detection,0.10,0.15,0.10,Maximum false positive rate,Yes,Float,0.01-0.20,Public,Security Team,,Noise tolerance,2025-12-03
+integration.siem_webhook_url,Integration,[siem-webhook-endpoint],[siem-test-endpoint],[siem-webhook-endpoint],SIEM webhook URL,Yes,String,Valid HTTPS URL,Secret,Security Team,,Alert forwarding,2025-12-03
+integration.siem_webhook_secret,Integration,[webhook-secret],[webhook-test-secret],[webhook-secret],SIEM webhook secret,Yes,String,Min 32 characters,Secret,Security Team,,Webhook validation,2025-12-03
+integration.siem_event_types,Integration,"code-scanning,secret-scanning,dependabot","code-scanning,secret-scanning","code-scanning,secret-scanning,dependabot",Event types to forward,Yes,String,Comma-separated,Confidential,Security Team,,Event filtering,2025-12-03
+integration.siem_platform,Integration,Splunk,Azure Sentinel,Splunk,SIEM platform type,Yes,String,Splunk|Azure Sentinel|both,Public,Security Team,,Integration target,2025-12-03
+integration.splunk_hec_url,Integration,[splunk-hec-url],[splunk-test-url],[splunk-hec-url],Splunk HEC URL,No,String,Valid HTTPS URL,Secret,Security Team,,Splunk integration,2025-12-03
+integration.splunk_hec_token,Integration,[splunk-hec-token],[splunk-test-token],[splunk-hec-token],Splunk HEC token,No,String,Valid token,Secret,Security Team,,HEC authentication,2025-12-03
+integration.sentinel_workspace_id,Integration,[sentinel-workspace-id],[sentinel-test-workspace],[sentinel-workspace-id],Azure Sentinel workspace ID,No,String,GUID format,Confidential,Security Team,,Sentinel integration,2025-12-03
+integration.sentinel_shared_key,Integration,[sentinel-shared-key],[sentinel-test-key],[sentinel-shared-key],Azure Sentinel shared key,No,String,Base64 encoded,Secret,Security Team,,Sentinel authentication,2025-12-03
+integration.jira_base_url,Integration,[jira-instance-url],[jira-test-url],[jira-instance-url],JIRA instance base URL,Yes,String,Valid HTTPS URL,Confidential,Security Team,,Ticket integration,2025-12-03
+integration.jira_project_key,Integration,[project-key],[test-project-key],[project-key],JIRA project key,Yes,String,Valid project key,Confidential,Security Team,,Security project,2025-12-03
+integration.jira_api_token,Integration,[jira-api-token],[jira-test-token],[jira-api-token],JIRA API token,Yes,String,Valid API token,Secret,Security Team,,JIRA authentication,2025-12-03
+integration.servicenow_url,Integration,[servicenow-url],[servicenow-test-url],[servicenow-url],ServiceNow instance URL,No,String,Valid HTTPS URL,Confidential,Security Team,,ITSM integration,2025-12-03
+integration.servicenow_api_key,Integration,[servicenow-key],[servicenow-test-key],[servicenow-key],ServiceNow API key,No,String,Valid API key,Secret,Security Team,,ServiceNow auth,2025-12-03
+notifications.slack_webhook_url,Notifications,[slack-webhook-url],[slack-test-webhook],[slack-webhook-url],Slack webhook URL,No,String,Valid Slack webhook,Secret,Security Team,,Slack alerts,2025-12-03
+notifications.teams_webhook_url,Notifications,[teams-webhook-url],[teams-test-webhook],[teams-webhook-url],Teams webhook URL,No,String,Valid Teams webhook,Secret,Security Team,,Teams alerts,2025-12-03
+notifications.pagerduty_routing_key,Notifications,[pagerduty-key],[pagerduty-test-key],[pagerduty-key],PagerDuty routing key,No,String,Valid routing key,Secret,Security Team,,Incident routing,2025-12-03
+notifications.alert_email_recipients,Notifications,security-team@company.com,dev-team@company.com,security-team@company.com,Alert email distribution,Yes,String,Valid emails,Confidential,Security Team,,Email alerts,2025-12-03
+notifications.email_enabled,Notifications,true,true,true,Enable email notifications,Yes,Boolean,true|false,Public,Security Team,,Email toggle,2025-12-03
+notifications.slack_enabled,Notifications,true,true,true,Enable Slack notifications,Yes,Boolean,true|false,Public,Security Team,,Slack toggle,2025-12-03
+notifications.teams_enabled,Notifications,false,false,false,Enable Teams notifications,Yes,Boolean,true|false,Public,Security Team,,Teams toggle,2025-12-03
+notifications.pagerduty_enabled,Notifications,true,false,true,Enable PagerDuty integration,Yes,Boolean,true|false,Public,Security Team,,PagerDuty toggle,2025-12-03
+monitoring.audit_log_retention_days,Monitoring,365,90,365,Audit log retention (days),Yes,Integer,90-730,Public,Security Team,,Compliance retention,2025-12-03
+monitoring.metrics_enabled,Monitoring,true,true,true,Enable metrics collection,Yes,Boolean,true|false,Public,Security Team,,Security metrics,2025-12-03
+monitoring.security_overview_enabled,Monitoring,true,true,true,Enable Security Overview dashboard,Yes,Boolean,true|false,Public,Security Team,,Dashboard toggle,2025-12-03
+monitoring.alerts_enabled,Monitoring,true,false,true,Enable monitoring alerts,Yes,Boolean,true|false,Public,Security Team,,Alert toggle,2025-12-03
+monitoring.dashboard_enabled,Monitoring,true,false,true,Enable monitoring dashboard,Yes,Boolean,true|false,Public,Security Team,,Dashboard toggle,2025-12-03
+monitoring.log_level,Monitoring,INFO,DEBUG,INFO,Logging verbosity level,Yes,String,DEBUG|INFO|WARN|ERROR,Public,Security Team,,Log detail,2025-12-03
+monitoring.health_check_interval,Monitoring,300,600,300,Health check frequency (seconds),Yes,Integer,60-3600,Public,Security Team,,Health polling,2025-12-03
+compliance.frameworks,Compliance,"SOC2,PCI-DSS","SOC2","SOC2,PCI-DSS",Compliance frameworks,Yes,String,Comma-separated,Public,Security Team,,Applicable standards,2025-12-03
+compliance.soc2_enabled,Compliance,true,false,true,Enable SOC 2 controls,Yes,Boolean,true|false,Public,Security Team,,SOC 2 compliance,2025-12-03
+compliance.pci_dss_enabled,Compliance,true,false,true,Enable PCI-DSS controls,Yes,Boolean,true|false,Public,Security Team,,PCI compliance,2025-12-03
+compliance.hipaa_enabled,Compliance,false,false,false,Enable HIPAA controls,Yes,Boolean,true|false,Public,Security Team,,HIPAA compliance,2025-12-03
+compliance.gdpr_enabled,Compliance,true,false,true,Enable GDPR controls,Yes,Boolean,true|false,Public,Security Team,,GDPR compliance,2025-12-03
+compliance.report_frequency,Compliance,weekly,monthly,weekly,Report generation frequency,Yes,String,daily|weekly|monthly,Public,Security Team,,Reporting cadence,2025-12-03
+dr.enabled,DR,true,false,false,Enable DR configuration,Yes,Boolean,true|false,Public,Security Team,,DR toggle,2025-12-03
+dr.organization_name,DR,[dr-org-name],,[dr-org-name],DR organization name,No,String,Valid GitHub org name,Confidential,Security Team,,DR org,2025-12-03
+dr.replication_enabled,DR,true,false,false,Enable config replication to DR,Yes,Boolean,true|false,Public,Security Team,,Config sync,2025-12-03
+dr.failover_priority,DR,1,0,0,Failover priority (0=disabled),Yes,Integer,0-2,Public,Security Team,,Priority ranking,2025-12-03

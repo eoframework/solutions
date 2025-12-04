@@ -1,0 +1,81 @@
+---
+#------------------------------------------------------------------------------
+# Phase 2: Storage - Datastores and Storage Policies
+#------------------------------------------------------------------------------
+# This playbook handles storage configuration including:
+#   - Datastore creation
+#   - Storage policies
+#   - VM placement rules
+#------------------------------------------------------------------------------
+
+- name: Phase 2 - Storage Configuration
+  hosts: localhost
+  gather_facts: no
+  tags: [storage]
+
+  vars_files:
+    - "{{ playbook_dir }}/../vars/generated/project.yml"
+    - "{{ playbook_dir }}/../vars/generated/hyperflex.yml"
+    - "{{ playbook_dir }}/../vars/generated/vmware.yml"
+    - "{{ playbook_dir }}/../vars/secrets.yml"
+
+  tasks:
+    #--------------------------------------------------------------------------
+    # Datastore Configuration
+    #--------------------------------------------------------------------------
+    - name: Display datastore configuration
+      ansible.builtin.debug:
+        msg: |
+          Datastore Configuration:
+          - Primary Datastore: {{ hyperflex.cluster_name }}-ds1
+          - Cluster Capacity: Based on {{ hyperflex.node_count }} nodes
+
+          Storage Features:
+          - Deduplication: {{ hyperflex.deduplication }}
+          - Compression: {{ hyperflex.compression }}
+          - Replication Factor: {{ hyperflex.replication_factor }}
+
+    #--------------------------------------------------------------------------
+    # Storage Policies
+    #--------------------------------------------------------------------------
+    - name: Display storage policy requirements
+      ansible.builtin.debug:
+        msg: |
+          vSphere Storage Policies to Create:
+
+          1. HX-Production
+             - Replication: {{ hyperflex.replication_factor }}
+             - Description: Production workloads
+
+          2. HX-Development
+             - Replication: {{ hyperflex.replication_factor }}
+             - Description: Development/test workloads
+
+          Note: Storage policies are created via vSphere:
+          Policies and Profiles > VM Storage Policies
+
+    #--------------------------------------------------------------------------
+    # NFS Datastore Access
+    #--------------------------------------------------------------------------
+    - name: Display NFS configuration
+      ansible.builtin.debug:
+        msg: |
+          NFS Datastore Access:
+          - Mount Point: /volumes/{{ hyperflex.cluster_name }}-ds1
+          - Protocol: NFSv3
+          - Access: ESXi hosts only
+
+    #--------------------------------------------------------------------------
+    # Summary
+    #--------------------------------------------------------------------------
+    - name: Storage configuration summary
+      ansible.builtin.debug:
+        msg: |
+          ============================================================
+          Phase 2 - Storage Configuration Complete
+          ============================================================
+          Datastores: Configured via HyperFlex
+          Storage Policies: 2 policies to create
+          Deduplication: {{ hyperflex.deduplication }}
+          Compression: {{ hyperflex.compression }}
+          ============================================================

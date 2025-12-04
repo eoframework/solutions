@@ -1,32 +1,53 @@
-Parameter Name,Category,Environment,Default Value,Description,Required,Data Type,Validation Rules,Security Level,Owner Team,Dependencies,Notes,Last Updated
-CICD_SOLUTION_NAME,Application,All,Dell PowerEdge CI/CD Infrastructure,Dell CI/CD solution identifier,Yes,String,Max 50 characters,Public,DevOps Team,None,Used in GitLab and documentation,[DATE]
-GITLAB_VERSION,Application,All,16.8 Premium,GitLab Enterprise Edition version,Yes,String,Valid GitLab version,Public,DevOps Team,None,Premium tier for advanced CI/CD,[DATE]
-GITLAB_SERVER_COUNT,GitLab Infrastructure,All,2,Number of GitLab application servers,Yes,Integer,1-4,Public,DevOps Team,Load balancer,Active-passive HA configuration,[DATE]
-GITLAB_DATABASE,GitLab Infrastructure,All,PostgreSQL 15,GitLab database platform,Yes,String,Valid database,Public,DevOps Team,Database server,Patroni for HA clustering,[DATE]
-BUILD_AGENT_COUNT,Build Infrastructure,All,8,Number of Dell PowerEdge R650 build agents,Yes,Integer,4-16,Public,DevOps Team,Rack planning,3 runners per agent = 24 concurrent,[DATE]
-BUILD_AGENT_MODEL,Dell Hardware,All,PowerEdge R650,Build server chassis model,Yes,String,Valid PowerEdge model,Public,Hardware Team,Server specifications,1U rack server chassis,[DATE]
-CPU_MODEL_AGENT,Dell Hardware,All,Intel Xeon Gold 6338,Processor model per build agent,Yes,String,Valid CPU model,Public,Hardware Team,Build performance,32-core 2.0GHz processor,[DATE]
-MEMORY_PER_AGENT_GB,Dell Hardware,All,256,System memory per build agent in GB,Yes,Integer,128-512,Public,Hardware Team,Container builds,256GB for parallel builds,[DATE]
-STORAGE_PER_AGENT_TB,Dell Hardware,All,2,NVMe storage per agent in TB,Yes,Float,1-4,Public,Hardware Team,Build caching,Fast local cache storage,[DATE]
-DEVELOPER_COUNT,User Base,All,50,Total number of developers with CI/CD access,Yes,Integer,10-500,Public,DevOps Team,Licensing,All developers with GitLab access,[DATE]
-TEAM_COUNT,User Base,All,12,Number of development teams,Yes,Integer,1-50,Public,DevOps Team,Migration planning,Platform Backend Frontend Mobile QA,[DATE]
-DAILY_BUILD_VOLUME,Performance,All,5000,Target builds per day capacity,Yes,Integer,1000-20000,Public,DevOps Team,Infrastructure sizing,Peak capacity requirement,[DATE]
-CONCURRENT_BUILDS,Performance,All,24,Maximum concurrent build jobs,Yes,Integer,8-48,Public,DevOps Team,Runner count,3 runners per 8 agents,[DATE]
-BUILD_QUEUE_TARGET_MIN,Performance,All,5,Target average queue time in minutes,Yes,Integer,1-15,Public,DevOps Team,Runner capacity,<5 minute queue time SLA,[DATE]
-RUNNER_EXECUTOR,GitLab Runner,All,docker,GitLab Runner executor type,Yes,String,docker|shell|kubernetes,Public,DevOps Team,Docker installation,Docker executor for isolation,[DATE]
-DOCKER_VERSION,Container Platform,All,Docker Enterprise 24.0,Docker platform version,Yes,String,Valid Docker version,Public,DevOps Team,Build agents,Enterprise with BuildKit,[DATE]
-ARTIFACTORY_VERSION,Artifact Management,All,JFrog Artifactory Pro 7.x,Artifact repository version,Yes,String,Valid Artifactory version,Public,DevOps Team,Storage infrastructure,Pro tier for Docker registry,[DATE]
-ARTIFACT_STORAGE_TB,Artifact Management,All,20,Total artifact storage capacity in TB,Yes,Integer,10-100,Public,Storage Team,Capacity planning,Maven npm Docker artifacts,[DATE]
-MAVEN_REPO_ENABLED,Artifact Management,All,true,Enable Maven artifact repository,Yes,Boolean,true|false,Public,DevOps Team,Java builds,Remote proxy to Maven Central,[DATE]
-NPM_REPO_ENABLED,Artifact Management,All,true,Enable npm package repository,Yes,Boolean,true|false,Public,DevOps Team,Node.js builds,Remote proxy to npm registry,[DATE]
-DOCKER_REGISTRY_ENABLED,Artifact Management,All,true,Enable Docker image registry,Yes,Boolean,true|false,Public,DevOps Team,Container builds,Integrated with Artifactory,[DATE]
-SSO_PROVIDER,Authentication,All,SAML 2.0,Single sign-on protocol,Yes,String,SAML|OIDC,Public,Security Team,Corporate IdP,Corporate SSO integration,[DATE]
-SSO_IDP_URL,Authentication,All,[idp.domain.com],Identity provider URL,Yes,String,Valid HTTPS URL,Confidential,Security Team,IdP configuration,SAML metadata endpoint,[DATE]
-VULNERABILITY_SCANNING,Security,All,true,Enable Docker image vulnerability scanning,Yes,Boolean,true|false,Public,Security Team,Registry integration,Scan on push to registry,[DATE]
-SECRET_BACKEND,Security,All,GitLab CI Variables,Secret storage backend,Yes,String,GitLab|HashiCorp Vault,Confidential,Security Team,Secret management,Masked and protected variables,[DATE]
-AUDIT_LOG_RETENTION,Compliance,All,365,Audit log retention in days,Yes,Integer,90-730,Public,Security Team,Compliance requirements,1-year retention policy,[DATE]
-MONITORING_SOLUTION,Monitoring,All,Prometheus Grafana,Primary monitoring platform,Yes,String,Valid monitoring tool,Public,DevOps Team,Alerting,GitLab metrics integration,[DATE]
-BACKUP_SCHEDULE,Operations,All,Daily 02:00,GitLab and Artifactory backup schedule,Yes,String,Valid cron expression,Public,IT Operations,Backup infrastructure,Daily full backups,[DATE]
-DR_RTO_HOURS,Operations,All,4,Recovery time objective in hours,Yes,Integer,1-24,Public,IT Operations,Business continuity,4-hour restore SLA,[DATE]
-DELL_PROSUPPORT_LEVEL,Support,All,ProSupport Plus,Dell ProSupport tier,Yes,String,Basic|ProSupport|ProSupport Plus,Confidential,Support Team,SLA requirements,24x7 with 4-hour response,[DATE]
-
+#WIDTH: 45,14,30,30,30,45,8,12,27,14,14,12,30,12
+#ALIGN: left,left,left,left,left,left,center,left,left,center,left,left,left,center
+Parameter Name,Category,Production,Test,DR,Description,Required,Data Type,Validation Rules,Security Level,Owner Team,Dependencies,Notes,Last Updated
+solution.name,Project,poweredge-ci-infrastructure,poweredge-ci-infrastructure,poweredge-ci-infrastructure,Solution name for resource naming,Yes,String,Valid string value,Public,DevOps Team,,PECI solution identifier,2025-12-03
+solution.abbr,Project,peci,peci,peci,Solution abbreviation (3-4 chars),Yes,String,Valid string value,Public,DevOps Team,,Used in resource naming prefix,2025-12-03
+solution.provider_name,Project,dell,dell,dell,Provider organization name,Yes,String,Valid string value,Public,DevOps Team,,Dell provider,2025-12-03
+solution.category_name,Project,devops,devops,devops,Solution category,Yes,String,Valid string value,Public,DevOps Team,,DevOps category,2025-12-03
+datacenter.name,Project,Primary Datacenter,Lab Environment,DR Datacenter,Datacenter facility name,Yes,String,Valid string,Public,Infrastructure,,Physical location name,2025-12-03
+ownership.cost_center,Project,CC-DEVOPS-001,CC-DEVOPS-001,CC-DEVOPS-001,Cost center,Yes,String,Valid string,Public,Infrastructure,,From SOW cost allocation,2025-12-03
+ownership.owner_email,Project,devops-team@company.com,devops-team@company.com,devops-team@company.com,Owner email,Yes,String,Valid email,Confidential,Infrastructure,,Team notifications,2025-12-03
+gitlab.version,Application,16.8 Premium,16.8 Premium,16.8 Premium,GitLab Enterprise Edition version,Yes,String,Valid GitLab version,Public,DevOps Team,,Premium tier for CI/CD,2025-12-03
+gitlab.server_count,GitLab Infrastructure,2,1,2,Number of GitLab application servers,Yes,Integer,1-4,Public,DevOps Team,,Active-passive HA config,2025-12-03
+gitlab.database,GitLab Infrastructure,PostgreSQL 15,PostgreSQL 15,PostgreSQL 15,GitLab database platform,Yes,String,Valid database,Public,DevOps Team,,Patroni for HA clustering,2025-12-03
+gitlab.hostname,GitLab Infrastructure,[gitlab.domain.com],[gitlab-test.domain.com],[gitlab-dr.domain.com],GitLab server hostname,Yes,String,Valid FQDN,Public,DevOps Team,,User-facing URL,2025-12-03
+build.agent_count,Build Infrastructure,8,2,4,Number of Dell PowerEdge R650 build agents,Yes,Integer,2-16,Public,DevOps Team,,3 runners per agent,2025-12-03
+build.agent_model,Dell Hardware,PowerEdge R650,PowerEdge R650,PowerEdge R650,Build server chassis model,Yes,String,Valid PowerEdge model,Public,Hardware Team,,1U rack server chassis,2025-12-03
+build.cpu_model,Dell Hardware,Intel Xeon Gold 6338,Intel Xeon Gold 6338,Intel Xeon Gold 6338,Processor model per build agent,Yes,String,Valid CPU model,Public,Hardware Team,,32-core 2.0GHz processor,2025-12-03
+build.memory_per_agent_gb,Dell Hardware,256,128,256,System memory per build agent in GB,Yes,Integer,64-512,Public,Hardware Team,,256GB for parallel builds,2025-12-03
+build.storage_per_agent_tb,Dell Hardware,2,1,2,NVMe storage per agent in TB,Yes,Float,1-4,Public,Hardware Team,,Fast local cache storage,2025-12-03
+users.developer_count,User Base,50,10,50,Total number of developers with CI/CD access,Yes,Integer,10-500,Public,DevOps Team,,All developers with access,2025-12-03
+users.team_count,User Base,12,3,12,Number of development teams,Yes,Integer,1-50,Public,DevOps Team,,Migration planning,2025-12-03
+performance.daily_build_volume,Performance,5000,500,5000,Target builds per day capacity,Yes,Integer,500-20000,Public,DevOps Team,,Peak capacity requirement,2025-12-03
+performance.concurrent_builds,Performance,24,6,24,Maximum concurrent build jobs,Yes,Integer,4-48,Public,DevOps Team,,3 runners per agent,2025-12-03
+performance.build_queue_target_min,Performance,5,10,5,Target average queue time in minutes,Yes,Integer,1-15,Public,DevOps Team,,<5 minute queue SLA,2025-12-03
+runner.executor,GitLab Runner,docker,docker,docker,GitLab Runner executor type,Yes,String,docker|shell|kubernetes,Public,DevOps Team,,Docker for isolation,2025-12-03
+runner.concurrent_per_agent,GitLab Runner,3,3,3,Concurrent jobs per build agent,Yes,Integer,1-10,Public,DevOps Team,,Balance load and isolation,2025-12-03
+docker.version,Container Platform,Docker Enterprise 24.0,Docker Enterprise 24.0,Docker Enterprise 24.0,Docker platform version,Yes,String,Valid Docker version,Public,DevOps Team,,Enterprise with BuildKit,2025-12-03
+docker.registry_enabled,Container Platform,true,true,true,Enable Docker image registry,Yes,Boolean,true|false,Public,DevOps Team,,Artifactory integration,2025-12-03
+artifactory.version,Artifact Management,JFrog Artifactory Pro 7.x,JFrog Artifactory Pro 7.x,JFrog Artifactory Pro 7.x,Artifact repository version,Yes,String,Valid Artifactory version,Public,DevOps Team,,Pro tier for Docker,2025-12-03
+artifactory.storage_tb,Artifact Management,20,5,20,Total artifact storage capacity in TB,Yes,Integer,5-100,Public,Storage Team,,Maven npm Docker,2025-12-03
+artifactory.hostname,Artifact Management,[artifactory.domain.com],[artifactory-test.domain.com],[artifactory-dr.domain.com],Artifactory server hostname,Yes,String,Valid FQDN,Public,DevOps Team,,Artifact repository URL,2025-12-03
+repos.maven_enabled,Artifact Management,true,true,true,Enable Maven artifact repository,Yes,Boolean,true|false,Public,DevOps Team,,Java builds,2025-12-03
+repos.npm_enabled,Artifact Management,true,true,true,Enable npm package repository,Yes,Boolean,true|false,Public,DevOps Team,,Node.js builds,2025-12-03
+repos.docker_enabled,Artifact Management,true,true,true,Enable Docker image registry,Yes,Boolean,true|false,Public,DevOps Team,,Container builds,2025-12-03
+authentication.sso_provider,Authentication,SAML 2.0,SAML 2.0,SAML 2.0,Single sign-on protocol,Yes,String,SAML|OIDC,Public,Security Team,,Corporate SSO,2025-12-03
+authentication.sso_idp_url,Authentication,[idp.domain.com],[idp.domain.com],[idp.domain.com],Identity provider URL,Yes,String,Valid HTTPS URL,Confidential,Security Team,,SAML metadata endpoint,2025-12-03
+security.vulnerability_scanning,Security,true,true,true,Enable Docker image vulnerability scanning,Yes,Boolean,true|false,Public,Security Team,,Scan on push,2025-12-03
+security.secret_backend,Security,GitLab CI Variables,GitLab CI Variables,GitLab CI Variables,Secret storage backend,Yes,String,GitLab|HashiCorp Vault,Confidential,Security Team,,Masked variables,2025-12-03
+security.audit_log_retention_days,Compliance,365,90,365,Audit log retention in days,Yes,Integer,90-730,Public,Security Team,,1-year retention,2025-12-03
+monitoring.solution,Monitoring,Prometheus Grafana,Prometheus Grafana,Prometheus Grafana,Primary monitoring platform,Yes,String,Valid monitoring tool,Public,DevOps Team,,GitLab metrics integration,2025-12-03
+monitoring.alertmanager_enabled,Monitoring,true,false,true,Enable Alertmanager for alerts,Yes,Boolean,true|false,Public,DevOps Team,,PagerDuty integration,2025-12-03
+network.gitlab_vlan,Networking,100,110,120,GitLab servers network VLAN,Yes,Integer,1-4094,Confidential,Network Team,,Application tier,2025-12-03
+network.build_agent_vlan,Networking,200,210,220,Build agents network VLAN,Yes,Integer,1-4094,Confidential,Network Team,,Build isolation,2025-12-03
+network.storage_vlan,Networking,300,310,320,Storage network VLAN,Yes,Integer,1-4094,Confidential,Network Team,,NFS and artifact storage,2025-12-03
+idrac.version,Dell Management,iDRAC9,iDRAC9,iDRAC9,iDRAC out-of-band management version,Yes,String,Valid iDRAC version,Public,Infrastructure,,Enterprise license,2025-12-03
+idrac.enterprise_license,Dell Management,true,true,true,iDRAC Enterprise license enabled,Yes,Boolean,true|false,Confidential,Infrastructure,,Full feature set,2025-12-03
+operations.backup_schedule,Operations,Daily 02:00,Weekly,Daily 02:00,GitLab and Artifactory backup schedule,Yes,String,Valid cron expression,Public,IT Operations,,Daily full backups,2025-12-03
+operations.backup_retention_days,Operations,30,7,30,Backup retention period in days,Yes,Integer,7-365,Public,IT Operations,,30-day retention,2025-12-03
+support.dell_prosupport_level,Support,ProSupport Plus,ProSupport,ProSupport Plus,Dell ProSupport tier,Yes,String,Basic|ProSupport|ProSupport Plus,Confidential,Support Team,,24x7 with 4-hour response,2025-12-03
+dr.enabled,DR,true,false,true,Enable DR configuration,Yes,Boolean,true|false,Public,Operations,,Business continuity,2025-12-03
+dr.rto_hours,DR,4,n/a,4,Recovery time objective in hours,No,Integer,1-24,Public,IT Operations,,4-hour restore SLA,2025-12-03
+dr.purpose,DR,primary,lab,standby,Site purpose designation,Yes,String,primary|lab|standby,Public,Operations,,DR role,2025-12-03
+dr.failover_mode,DR,manual,n/a,manual,Failover mode,Yes,String,manual|automatic,Public,Operations,,Manual for safety,2025-12-03

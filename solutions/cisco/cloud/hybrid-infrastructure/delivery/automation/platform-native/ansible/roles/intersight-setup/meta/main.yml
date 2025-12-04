@@ -1,0 +1,18 @@
+---
+galaxy_info:
+  author: EO Framework
+  description: Configure Cisco Intersight API connectivity
+  company: Client Organization
+  license: Proprietary
+  min_ansible_version: "2.14"
+  platforms:
+    - name: GenericLinux
+      versions:
+        - all
+  galaxy_tags:
+    - cisco
+    - intersight
+    - hyperflex
+    - hci
+
+dependencies: []

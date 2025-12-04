@@ -1,0 +1,48 @@
+{# security-policies.j2 - Security policy template #}
+{# Generates Junos configuration for security policies #}
+
+{% for policy_set in security_policies %}
+{# Policy set for zone pair #}
+{% for policy in policy_set.policies %}
+{# Source addresses #}
+{% if policy.match.source_address is string %}
+set security policies from-zone {{ policy_set.from_zone }} to-zone {{ policy_set.to_zone }} policy {{ policy.name }} match source-address {{ policy.match.source_address }}
+{% else %}
+{% for addr in policy.match.source_address %}
+set security policies from-zone {{ policy_set.from_zone }} to-zone {{ policy_set.to_zone }} policy {{ policy.name }} match source-address {{ addr }}
+{% endfor %}
+{% endif %}
+
+{# Destination addresses #}
+{% if policy.match.destination_address is string %}
+set security policies from-zone {{ policy_set.from_zone }} to-zone {{ policy_set.to_zone }} policy {{ policy.name }} match destination-address {{ policy.match.destination_address }}
+{% else %}
+{% for addr in policy.match.destination_address %}
+set security policies from-zone {{ policy_set.from_zone }} to-zone {{ policy_set.to_zone }} policy {{ policy.name }} match destination-address {{ addr }}
+{% endfor %}
+{% endif %}
+
+{# Applications #}
+{% if policy.match.application is string %}
+set security policies from-zone {{ policy_set.from_zone }} to-zone {{ policy_set.to_zone }} policy {{ policy.name }} match application {{ policy.match.application }}
+{% else %}
+{% for app in policy.match.application %}
+set security policies from-zone {{ policy_set.from_zone }} to-zone {{ policy_set.to_zone }} policy {{ policy.name }} match application {{ app }}
+{% endfor %}
+{% endif %}
+
+{# Action #}
+set security policies from-zone {{ policy_set.from_zone }} to-zone {{ policy_set.to_zone }} policy {{ policy.name }} then {{ policy.action }}
+
+{# Logging #}
+{% if policy.logging | default(false) %}
+set security policies from-zone {{ policy_set.from_zone }} to-zone {{ policy_set.to_zone }} policy {{ policy.name }} then log session-init session-close
+{% endif %}
+
+{# Count #}
+{% if policy.count | default(false) %}
+set security policies from-zone {{ policy_set.from_zone }} to-zone {{ policy_set.to_zone }} policy {{ policy.name }} then count
+{% endif %}
+
+{% endfor %}
+{% endfor %}

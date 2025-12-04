@@ -1,0 +1,5 @@
+# Ansible Vault secrets - NEVER commit
+secrets.yml
+
+# Vault password file
+.vault_password

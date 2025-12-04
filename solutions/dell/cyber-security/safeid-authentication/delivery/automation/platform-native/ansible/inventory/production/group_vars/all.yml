@@ -1,0 +1,249 @@
+# Dell SafeID Authentication - Production Variables
+# Generated from configuration.csv - Production column
+# EO Framework - Dell Cyber Security Solutions
+
+---
+#=============================================================================
+# PROJECT METADATA
+#=============================================================================
+solution:
+  name: safeid-authentication
+  abbr: sia
+  provider: dell
+  category: cyber-security
+
+environment: production
+
+#=============================================================================
+# SAFEID APPLICATION
+#=============================================================================
+safeid:
+  solution_name: "Dell SafeID Enterprise Authentication"
+  version: "4.2"
+  server_count: 2
+  database: "PostgreSQL 15"
+
+  # Server configuration
+  servers:
+    primary:
+      hostname: safeid-prod-01
+      ip: 10.20.1.10
+    secondary:
+      hostname: safeid-prod-02
+      ip: 10.20.1.11
+
+  # High availability
+  ha:
+    enabled: true
+    failover_automatic: true
+    sync_interval: 30
+
+#=============================================================================
+# USER BASE
+#=============================================================================
+users:
+  count: 500
+  yubikey_model: "YubiKey 5 NFC"
+  yubikey_quantity: 525
+  admin_yubikey_count: 10
+
+  # Enrollment settings
+  enrollment:
+    portal_url: "https://enroll.company.com"
+    session_timeout: 300
+    self_service_enabled: true
+
+#=============================================================================
+# AUTHENTICATION CONFIGURATION
+#=============================================================================
+authentication:
+  # Primary protocol
+  protocol: "FIDO2 WebAuthn"
+
+  # FIDO2 settings
+  fido2:
+    enabled: true
+    origin: "login.company.com"
+    rpid: "company.com"
+
+  # PIN policy
+  pin:
+    enabled: true
+    min_length: 6
+    max_length: 8
+    complexity_required: true
+
+  # Fallback methods
+  fallback:
+    totp_enabled: true
+    backup_codes_enabled: true
+
+#=============================================================================
+# LDAP/ACTIVE DIRECTORY INTEGRATION
+#=============================================================================
+ldap:
+  integration: "LDAPS"
+  enabled: true
+
+  # AD server configuration
+  servers:
+    - server: "ad01.company.com"
+      port: 636
+      use_ssl: true
+    - server: "ad02.company.com"
+      port: 636
+      use_ssl: true
+
+  # Directory structure
+  base_dn: "DC=company,DC=com"
+  user_container: "OU=Users,DC=company,DC=com"
+  group_container: "OU=Groups,DC=company,DC=com"
+
+  # Sync configuration
+  sync:
+    enabled: true
+    interval: 15
+    sync_users: true
+    sync_groups: true
+
+  # Bind account (credentials in vault)
+  bind_dn: "CN=SafeID Service,OU=Service Accounts,DC=company,DC=com"
+  # bind_password stored in ansible vault
+
+#=============================================================================
+# RADIUS CONFIGURATION
+#=============================================================================
+radius:
+  enabled: true
+  port: 1812
+  accounting_port: 1813
+
+  # RADIUS clients
+  clients:
+    - name: "Cisco AnyConnect VPN"
+      ip: "10.20.5.10"
+      # shared_secret stored in ansible vault
+      protocol: "PAP"
+    - name: "Cisco ASA Firewall"
+      ip: "10.20.5.20"
+      # shared_secret stored in ansible vault
+      protocol: "PAP"
+
+  # VPN integration
+  vpn:
+    platform: "Cisco AnyConnect"
+    mfa_required: true
+    push_notification: true
+
+#=============================================================================
+# SAML IDENTITY PROVIDER
+#=============================================================================
+saml:
+  enabled: true
+  entity_id: "https://safeid.company.com"
+
+  # Certificate configuration
+  certificate:
+    key_size: 4096
+    validity_days: 730
+    algorithm: "SHA256"
+
+  # Service providers
+  service_providers:
+    - name: "Microsoft 365"
+      entity_id: "urn:federation:MicrosoftOnline"
+      acs_url: "https://login.microsoftonline.com/login.srf"
+      tenant_id: "00000000-0000-0000-0000-000000000000"
+    - name: "AWS IAM Identity Center"
+      entity_id: "urn:amazon:webservices"
+      acs_url: "https://signin.aws.amazon.com/saml"
+      account_id: "000000000000"
+
+#=============================================================================
+# CLOUD INTEGRATION
+#=============================================================================
+cloud:
+  # Microsoft 365
+  microsoft365:
+    enabled: true
+    tenant_id: "00000000-0000-0000-0000-000000000000"
+    federation_enabled: true
+
+  # AWS
+  aws:
+    enabled: true
+    account_id: "000000000000"
+    iam_identity_center: true
+
+#=============================================================================
+# COMPLIANCE
+#=============================================================================
+compliance:
+  # Audit logging
+  audit:
+    enabled: true
+    retention_days: 1095
+    siem_integration: true
+    syslog_server: "syslog.company.com"
+
+  # CMMC compliance
+  cmmc:
+    level: "Level 2"
+    controls_enabled: true
+    reporting_enabled: true
+
+#=============================================================================
+# OPERATIONS
+#=============================================================================
+operations:
+  # Backup configuration
+  backup:
+    enabled: true
+    schedule: "Daily 02:00"
+    retention_days: 30
+    destination: "/backup/safeid"
+    include_database: true
+    include_config: true
+
+  # Help desk
+  helpdesk:
+    portal_url: "https://helpdesk.company.com"
+    temp_token_validity: 24
+    self_service_recovery: true
+
+  # Monitoring
+  monitoring:
+    snmp_enabled: true
+    nagios_checks: true
+    health_check_interval: 60
+
+#=============================================================================
+# SECURITY
+#=============================================================================
+security:
+  # TLS/SSL
+  tls:
+    min_version: "1.2"
+    ciphers: "HIGH:!aNULL:!MD5"
+    certificate_path: "/etc/safeid/ssl"
+
+  # Firewall rules
+  firewall:
+    ssh_allowed_ips:
+      - "10.20.0.0/16"
+    https_allowed_ips:
+      - "10.20.0.0/16"
+    radius_allowed_ips:
+      - "10.20.5.0/24"
+
+#=============================================================================
+# PERFORMANCE
+#=============================================================================
+performance:
+  # Token validation
+  validation_timeout: 30
+  max_concurrent_validations: 1000
+
+  # Session management
+  max_sessions: 5000
+  session_timeout: 3600

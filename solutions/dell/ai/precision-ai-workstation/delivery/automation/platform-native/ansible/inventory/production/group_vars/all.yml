@@ -1,0 +1,156 @@
+# Dell Precision AI Workstation - Production Variables
+# Generated from configuration.csv - Production column
+# EO Framework - Dell AI Solutions
+
+---
+#=============================================================================
+# PROJECT METADATA
+#=============================================================================
+solution:
+  name: precision-ai-workstation
+  abbr: paw
+  provider: dell
+  category: ai
+
+environment: production
+datacenter_name: "{{ datacenter_name | default('Primary Datacenter') }}"
+
+#=============================================================================
+# HARDWARE CONFIGURATION
+#=============================================================================
+hardware:
+  workstation_count: 10
+  workstation_model: Precision 7960
+  gpu_model: RTX A6000
+  gpu_memory_gb: 48
+  cpu_model: Xeon Gold 6430
+  cpu_cores: 64
+  ram_gb: 512
+  nvme_size_tb: 4
+  nvme_speed_mbps: 7000
+
+#=============================================================================
+# STORAGE CONFIGURATION
+#=============================================================================
+storage:
+  powerscale_model: F600
+  powerscale_capacity_tb: 100
+  powerscale_hostname: "{{ powerscale_hostname | default('powerscale.domain.com') }}"
+  nfs_version: "4.1"
+  nfs_mount_point: /mnt/powerscale
+  nfs_export_paths:
+    datasets: /ifs/ai/datasets
+    models: /ifs/ai/models
+    shared: /ifs/ai/shared
+
+#=============================================================================
+# NETWORK CONFIGURATION
+#=============================================================================
+network:
+  storage_vlan_id: 200
+  mgmt_vlan_id: 100
+  network_speed_gbps: 10
+  jumbo_frames_mtu: 9000
+  dns_servers:
+    - "{{ dns_server_1 | default('8.8.8.8') }}"
+    - "{{ dns_server_2 | default('8.8.4.4') }}"
+  ntp_servers:
+    - "{{ ntp_server | default('time.google.com') }}"
+
+#=============================================================================
+# SOFTWARE CONFIGURATION
+#=============================================================================
+software:
+  os_version: "Ubuntu 22.04 LTS"
+  os_codename: jammy
+  nvidia_driver_version: "535.86.05"
+  cuda_version: "12.2"
+  cudnn_version: "8.9"
+  pytorch_version: "2.1"
+  tensorflow_version: "2.14"
+  conda_version: "23.10"
+
+  # ML frameworks
+  ml_packages:
+    - pytorch
+    - torchvision
+    - torchaudio
+    - tensorflow
+    - keras
+    - scikit-learn
+    - pandas
+    - numpy
+    - matplotlib
+    - jupyter
+    - jupyterlab
+
+#=============================================================================
+# APPLICATION CONFIGURATION
+#=============================================================================
+application:
+  jupyter_port: 8888
+  jupyter_base_url: "/jupyter"
+  tensorboard_port: 6006
+
+#=============================================================================
+# MONITORING CONFIGURATION
+#=============================================================================
+monitoring:
+  datadog_enabled: true
+  datadog_site: datadoghq.com
+  # API key should be stored in vault: datadog_api_key
+  gpu_temp_alert_c: 80
+  gpu_util_target_pct: 80
+  disk_usage_alert_pct: 85
+
+  # Metrics collection
+  collect_gpu_metrics: true
+  collect_disk_metrics: true
+  collect_network_metrics: true
+
+#=============================================================================
+# SECURITY CONFIGURATION
+#=============================================================================
+security:
+  ssh_port: 22
+  ssh_key_type: ed25519
+  firewall_enabled: true
+
+  # User management
+  admin_group: ai-admins
+  user_group: data-scientists
+  user_quota_tb: 10
+
+  # SSH allowed subnets (adjust per environment)
+  ssh_allowed_subnets:
+    - "10.10.0.0/16"
+    - "172.16.0.0/12"
+
+#=============================================================================
+# OPERATIONS CONFIGURATION
+#=============================================================================
+operations:
+  # Backup configuration
+  backup_enabled: true
+  backup_retention_days: 30
+  snapshot_frequency_hours: 4
+
+  # Update policy
+  auto_updates_enabled: false
+  update_day: Sunday
+  update_time: "02:00"
+
+#=============================================================================
+# SUPPORT CONFIGURATION
+#=============================================================================
+support:
+  dell_prosupport_level: "ProSupport Plus"
+  support_response: "Next Business Day"
+
+#=============================================================================
+# PERFORMANCE TARGETS
+#=============================================================================
+performance:
+  target_gpu_utilization_pct: 80
+  target_nvme_read_mbps: 7000
+  target_powerscale_throughput_mbps: 1000

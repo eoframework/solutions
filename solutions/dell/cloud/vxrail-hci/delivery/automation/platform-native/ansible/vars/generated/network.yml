@@ -1,0 +1,18 @@
+#------------------------------------------------------------------------------
+# Network Configuration
+#------------------------------------------------------------------------------
+# Generated from configuration.csv
+#
+# To regenerate: python generate-ansible-vars.py /path/to/solution
+# DO NOT EDIT - Changes will be overwritten on regeneration
+#------------------------------------------------------------------------------
+
+network:
+  10gbe_ports: 4
+  25gbe_ports: 2
+  switch_model: "S5248F-ON"
+  uplink_speed: "100GbE"
+  mgmt_vlan: 100
+  vmotion_vlan: 200
+  vsan_vlan: 300
+  vm_network_vlan: 400

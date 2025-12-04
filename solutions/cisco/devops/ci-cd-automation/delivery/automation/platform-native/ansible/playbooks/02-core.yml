@@ -1,0 +1,73 @@
+---
+#------------------------------------------------------------------------------
+# Phase 2: Core - Network Orchestration Platform
+#------------------------------------------------------------------------------
+
+- name: Phase 2 - Core Platform Configuration
+  hosts: localhost
+  gather_facts: yes
+  vars_files:
+    - ../vars/generated/project.yml
+    - ../vars/generated/cisco_dna_center.yml
+    - ../vars/generated/nso.yml
+    - ../vars/generated/ansible_config.yml
+    - ../vars/generated/terraform.yml
+    - ../vars/secrets.yml
+
+  pre_tasks:
+    - name: Display phase information
+      ansible.builtin.debug:
+        msg:
+          - "=============================================="
+          - "Phase 2: Core Platform Configuration"
+          - "=============================================="
+          - "- Cisco DNA Center integration"
+          - "- Cisco NSO configuration"
+          - "- Ansible automation setup"
+          - "- Terraform provider configuration"
+          - "=============================================="
+
+  roles:
+    - role: dnac-integration
+      tags: [dnac, cisco]
+    - role: nso-configuration
+      tags: [nso, orchestration]
+    - role: ansible-config
+      tags: [ansible, automation]
+    - role: terraform-setup
+      tags: [terraform, iac]
+
+  post_tasks:
+    - name: Verify DNA Center connectivity
+      ansible.builtin.uri:
+        url: "https://{{ dnac.hostname }}/dna/system/api/v1/auth/token"
+        method: POST
+        user: "{{ dnac.admin_user }}"
+        password: "{{ vault_dnac_admin_password }}"
+        force_basic_auth: yes
+        validate_certs: "{{ dnac.ssl_verify }}"
+        status_code: 200
+        timeout: "{{ dnac.timeout }}"
+      register: dnac_auth
+      ignore_errors: yes
+
+    - name: Verify NSO connectivity
+      ansible.builtin.uri:
+        url: "https://{{ nso.hostname }}:{{ nso.port }}/restconf/data"
+        method: GET
+        user: "{{ nso.admin_user }}"
+        password: "{{ vault_nso_admin_password }}"
+        force_basic_auth: yes
+        validate_certs: true
+        headers:
+          Accept: "application/yang-data+json"
+        status_code: 200
+        timeout: 30
+      register: nso_check
+      ignore_errors: yes
+
+    - name: Core platform health summary
+      ansible.builtin.debug:
+        msg:
+          - "DNA Center: {{ 'CONNECTED' if dnac_auth is succeeded else 'CHECK REQUIRED' }}"
+          - "NSO: {{ 'CONNECTED' if nso_check is succeeded else 'CHECK REQUIRED' }}"

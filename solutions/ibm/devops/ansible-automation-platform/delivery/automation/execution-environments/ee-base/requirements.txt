@@ -1,0 +1,6 @@
+# Python dependencies for Base EE
+jmespath>=1.0.0
+netaddr>=0.8.0
+dnspython>=2.0.0
+passlib>=1.7.4
+bcrypt>=4.0.0

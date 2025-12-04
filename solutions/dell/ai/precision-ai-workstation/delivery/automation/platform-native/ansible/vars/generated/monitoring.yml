@@ -1,0 +1,15 @@
+#------------------------------------------------------------------------------
+# Monitoring Configuration
+#------------------------------------------------------------------------------
+# Generated from configuration.csv
+#
+# To regenerate: python generate-ansible-vars.py /path/to/solution
+# DO NOT EDIT - Changes will be overwritten on regeneration
+#------------------------------------------------------------------------------
+
+monitoring:
+  datadog_enabled: true
+  datadog_site: "datadoghq.com"
+  gpu_temp_alert_c: 80
+  gpu_util_target_pct: 80
+  disk_usage_alert_pct: 85

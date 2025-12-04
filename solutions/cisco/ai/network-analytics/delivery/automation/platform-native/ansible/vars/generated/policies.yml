@@ -1,0 +1,16 @@
+#------------------------------------------------------------------------------
+# Policies Configuration
+#------------------------------------------------------------------------------
+# Generated from configuration.csv on 2025-12-02 23:53:43
+#
+# To regenerate: python generate-ansible-vars.py /path/to/solution
+# DO NOT EDIT - Changes will be overwritten on regeneration
+#------------------------------------------------------------------------------
+
+policies:
+  change_window_end: 06:00
+  change_window_start: '22:00'
+  compliance_check_interval: 60
+  deployment_mode: Staged
+  rollback_enabled: true
+  vlan_range: 100-999

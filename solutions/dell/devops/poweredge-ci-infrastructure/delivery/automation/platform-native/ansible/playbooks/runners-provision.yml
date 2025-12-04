@@ -1,0 +1,115 @@
+# Dell PowerEdge CI Infrastructure - GitLab Runner Provisioning
+# EO Framework - Dell DevOps Solutions
+# Provisions and configures GitLab Runners on build agents
+
+---
+- name: GitLab Runner Provisioning
+  hosts: build_agents
+  become: true
+  gather_facts: true
+  tags: [runners]
+  roles:
+    - role: gitlab-runners
+
+  pre_tasks:
+    - name: Display runner provisioning banner
+      ansible.builtin.debug:
+        msg: |
+          ================================================================
+          GitLab Runner Provisioning
+          ================================================================
+          Build Agent: {{ inventory_hostname }}
+          Agent ID: {{ agent_id }}
+          Runners per Agent: {{ runner_count }}
+          Executor: {{ runner_executor }}
+          ================================================================
+
+    - name: Verify Docker is installed
+      ansible.builtin.command: docker --version
+      register: docker_check
+      changed_when: false
+      failed_when: docker_check.rc != 0
+
+  tasks:
+    - name: Install GitLab Runner
+      ansible.builtin.package:
+        name: gitlab-runner
+        state: present
+
+    - name: Create GitLab Runner configuration directory
+      ansible.builtin.file:
+        path: /etc/gitlab-runner
+        state: directory
+        mode: '0755'
+
+    - name: Configure GitLab Runner
+      ansible.builtin.template:
+        src: templates/gitlab-runner-config.toml.j2
+        dest: /etc/gitlab-runner/config.toml
+        mode: '0600'
+      notify: restart gitlab-runner
+
+    - name: Enable and start GitLab Runner service
+      ansible.builtin.systemd:
+        name: gitlab-runner
+        enabled: yes
+        state: started
+
+    - name: Register runners with GitLab
+      ansible.builtin.command: |
+        gitlab-runner register \
+          --non-interactive \
+          --url "{{ gitlab.external_url }}" \
+          --registration-token "{{ gitlab_runner_token }}" \
+          --executor "{{ runner_executor }}" \
+          --docker-image "docker:24-dind" \
+          --description "{{ inventory_hostname }}-runner-{{ item }}" \
+          --tag-list "docker,{{ environment }},poweredge" \
+          --run-untagged="true" \
+          --locked="false"
+      loop: "{{ range(1, runner_count + 1) | list }}"
+      when: gitlab_runner_token is defined
+      register: runner_registration
+      changed_when: "'Runner registered successfully' in runner_registration.stdout"
+
+  post_tasks:
+    - name: Verify GitLab Runner status
+      ansible.builtin.command: gitlab-runner verify
+      register: verify_result
+      changed_when: false
+
+    - name: Display runner status
+      ansible.builtin.debug:
+        msg: |
+          {{ verify_result.stdout }}
+
+  handlers:
+    - name: restart gitlab-runner
+      ansible.builtin.systemd:
+        name: gitlab-runner
+        state: restarted
+
+#=============================================================================
+# SUMMARY
+#=============================================================================
+- name: Runner Provisioning Summary
+  hosts: localhost
+  gather_facts: false
+  tags: [always]
+
+  tasks:
+    - name: Calculate total runners
+      ansible.builtin.set_fact:
+        total_runners: "{{ groups['build_agents'] | length * (build.runners.per_agent | default(3)) }}"
+
+    - name: Display provisioning summary
+      ansible.builtin.debug:
+        msg: |
+          ================================================================
+          GitLab Runner Provisioning Complete
+          ================================================================
+          Build Agents: {{ groups['build_agents'] | length }}
+          Runners per Agent: {{ build.runners.per_agent | default(3) }}
+          Total Runners: {{ total_runners }}
+          Concurrent Builds: {{ build.runners.concurrent_builds | default(24) }}
+          ================================================================

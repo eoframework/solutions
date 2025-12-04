@@ -1,0 +1,17 @@
+---
+#------------------------------------------------------------------------------
+# Role: gitlab-setup - Default Variables
+#------------------------------------------------------------------------------
+
+# GitLab group ID for variable management (set in inventory)
+gitlab_group_id: ""
+
+# Protected branch configuration
+gitlab_protected_branches:
+  - main
+  - develop
+
+# CI/CD pipeline artifact settings
+gitlab_artifact_paths:
+  - "logs/"
+  - "reports/"

@@ -1,0 +1,101 @@
+---
+# security-policies.yml - Security zone and policy deployment
+# Configures zones, address books, and security policies
+
+- name: Configure SRX Security Policies
+  hosts: srx_firewalls
+  gather_facts: no
+  connection: netconf
+
+  vars_files:
+    - "{{ playbook_dir }}/../vars/common.yml"
+    - "{{ playbook_dir }}/../vars/secrets.yml"
+    - "{{ playbook_dir }}/../vars/security_policies.yml"
+
+  tasks:
+    #==========================================================================
+    # SECURITY ZONES
+    #==========================================================================
+    - name: Configure security zones
+      junipernetworks.junos.junos_config:
+        lines:
+          - "set security zones security-zone {{ item.key }} description \"{{ item.value.description }}\""
+          - "set security zones security-zone {{ item.key }} interfaces {{ item.value.interface }}"
+        parents: []
+      loop: "{{ network.zones | dict2items }}"
+      loop_control:
+        label: "{{ item.key }}"
+
+    - name: Configure zone host-inbound services
+      junipernetworks.junos.junos_config:
+        lines:
+          - "set security zones security-zone {{ item.0.key }} host-inbound-traffic system-services {{ item.1 }}"
+      with_subelements:
+        - "{{ network.zones | dict2items }}"
+        - value.host_inbound_services
+      loop_control:
+        label: "{{ item.0.key }} - {{ item.1 }}"
+
+    #==========================================================================
+    # ADDRESS BOOKS
+    #==========================================================================
+    - name: Configure global address book entries
+      junipernetworks.junos.junos_config:
+        lines:
+          - "set security address-book global address {{ item.name }} {{ item.type }} {{ item.value }}"
+      loop: "{{ address_book_entries | default([]) }}"
+      when: address_book_entries is defined
+
+    - name: Configure address sets
+      junipernetworks.junos.junos_config:
+        lines:
+          - "set security address-book global address-set {{ item.name }} address {{ item.member }}"
+      loop: "{{ address_sets | default([]) }}"
+      when: address_sets is defined
+
+    #==========================================================================
+    # SECURITY POLICIES
+    #==========================================================================
+    - name: Configure security policies
+      junipernetworks.junos.junos_config:
+        src: "{{ playbook_dir }}/../templates/security-policies.j2"
+      when: security_policies is defined
+
+    #==========================================================================
+    # NAT RULES
+    #==========================================================================
+    - name: Configure source NAT
+      junipernetworks.junos.junos_config:
+        lines:
+          - "set security nat source rule-set {{ item.rule_set }} from zone {{ item.from_zone }}"
+          - "set security nat source rule-set {{ item.rule_set }} to zone {{ item.to_zone }}"
+          - "set security nat source rule-set {{ item.rule_set }} rule {{ item.rule_name }} match source-address {{ item.source }}"
+          - "set security nat source rule-set {{ item.rule_set }} rule {{ item.rule_name }} then source-nat interface"
+      loop: "{{ source_nat_rules | default([]) }}"
+      when: source_nat_rules is defined
+
+    - name: Configure destination NAT
+      junipernetworks.junos.junos_config:
+        lines:
+          - "set security nat destination pool {{ item.pool_name }} address {{ item.destination_ip }}"
+          - "set security nat destination rule-set {{ item.rule_set }} from zone {{ item.from_zone }}"
+          - "set security nat destination rule-set {{ item.rule_set }} rule {{ item.rule_name }} match destination-address {{ item.public_ip }}"
+          - "set security nat destination rule-set {{ item.rule_set }} rule {{ item.rule_name }} then destination-nat pool {{ item.pool_name }}"
+      loop: "{{ destination_nat_rules | default([]) }}"
+      when: destination_nat_rules is defined
+
+  post_tasks:
+    - name: Commit security policy configuration
+      junipernetworks.junos.junos_config:
+        confirm_commit: yes
+        comment: "Ansible security policy deployment"
+
+    - name: Verify security policies
+      junipernetworks.junos.junos_command:
+        commands:
+          - show security policies
+      register: policy_status
+
+    - name: Display policy summary
+      ansible.builtin.debug:
+        var: policy_status.stdout_lines

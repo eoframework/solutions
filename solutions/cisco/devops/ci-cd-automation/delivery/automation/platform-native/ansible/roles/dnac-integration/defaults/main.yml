@@ -1,0 +1,8 @@
+---
+#------------------------------------------------------------------------------
+# Role: dnac-integration - Default Variables
+#------------------------------------------------------------------------------
+
+# DNA Center API settings
+dnac_api_retry_count: 3
+dnac_api_retry_delay: 5

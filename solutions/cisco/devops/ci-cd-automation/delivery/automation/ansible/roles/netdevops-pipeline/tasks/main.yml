@@ -1,0 +1,55 @@
+---
+# NetDevOps Pipeline Role - Configure CI/CD pipelines for network automation
+
+- name: Create pipeline directories
+  file:
+    path: "{{ item }}"
+    state: directory
+    mode: '0755'
+  loop:
+    - "{{ pipeline_config_dir }}"
+    - "{{ pipeline_config_dir }}/jenkins"
+    - "{{ pipeline_config_dir }}/gitlab"
+  tags: [pipeline, directories]
+
+- name: Deploy Jenkins pipeline configuration
+  template:
+    src: Jenkinsfile.j2
+    dest: "{{ pipeline_config_dir }}/jenkins/Jenkinsfile"
+    mode: '0644'
+  when: jenkins_enabled | default(true)
+  tags: [pipeline, jenkins]
+
+- name: Deploy GitLab CI pipeline configuration
+  template:
+    src: gitlab-ci-advanced.yml.j2
+    dest: "{{ pipeline_config_dir }}/gitlab/.gitlab-ci.yml"
+    mode: '0644'
+  when: gitlab_enabled | default(true)
+  tags: [pipeline, gitlab]
+
+- name: Create pipeline helper scripts
+  copy:
+    dest: "{{ pipeline_config_dir }}/{{ item.name }}"
+    content: "{{ item.content }}"
+    mode: '0755'
+  loop:
+    - name: validate-config.sh
+      content: |
+        #!/bin/bash
+        # Validate network configurations
+        ansible-playbook --syntax-check playbooks/*.yml
+        ansible-lint playbooks/*.yml
+    - name: test-connectivity.sh
+      content: |
+        #!/bin/bash
+        # Test network device connectivity
+        ansible -i inventory/test/hosts.yml network_devices -m ping
+  tags: [pipeline, scripts]
+
+- name: Display pipeline configuration summary
+  debug:
+    msg:
+      - "CI/CD pipeline configured"
+      - "Jenkins: {{ 'Enabled' if jenkins_enabled | default(true) else 'Disabled' }}"
+      - "GitLab: {{ 'Enabled' if gitlab_enabled | default(true) else 'Disabled' }}"

@@ -1,0 +1,11 @@
+---
+# Ansible Collection Requirements for Mist AI Network
+# Install: ansible-galaxy collection install -r requirements.yml
+
+collections:
+  - name: junipernetworks.junos
+    version: ">=5.0.0"
+  - name: ansible.netcommon
+    version: ">=5.0.0"
+  - name: community.general
+    version: ">=7.0.0"

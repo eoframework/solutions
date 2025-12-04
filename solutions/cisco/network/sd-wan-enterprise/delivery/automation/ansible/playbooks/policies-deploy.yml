@@ -1,0 +1,63 @@
+---
+# Cisco SD-WAN Policy Deployment
+# Deploys centralized and localized policies
+
+- name: Deploy SD-WAN Policies
+  hosts: vmanage
+  gather_facts: false
+  roles:
+    - role: sdwan-policies
+
+  tasks:
+    - name: Create site lists
+      uri:
+        url: "https://{{ inventory_hostname }}:443/dataservice/template/policy/list/site"
+        method: POST
+        user: "{{ vmanage_admin_user }}"
+        password: "{{ vmanage_admin_password }}"
+        validate_certs: false
+        body_format: json
+        body:
+          name: "{{ item.name }}"
+          description: "{{ item.description }}"
+          type: "site"
+          entries: "{{ item.sites }}"
+        status_code: [200, 201]
+      loop: "{{ site_lists | default([]) }}"
+      delegate_to: localhost
+
+    - name: Create application lists
+      uri:
+        url: "https://{{ inventory_hostname }}:443/dataservice/template/policy/list/app"
+        method: POST
+        user: "{{ vmanage_admin_user }}"
+        password: "{{ vmanage_admin_password }}"
+        validate_certs: false
+        body_format: json
+        body:
+          name: "{{ item.name }}"
+          description: "{{ item.description }}"
+          type: "app"
+          entries: "{{ item.applications }}"
+        status_code: [200, 201]
+      loop: "{{ application_lists | default([]) }}"
+      delegate_to: localhost
+
+    - name: Deploy QoS policies
+      uri:
+        url: "https://{{ inventory_hostname }}:443/dataservice/template/policy/vedge"
+        method: POST
+        user: "{{ vmanage_admin_user }}"
+        password: "{{ vmanage_admin_password }}"
+        validate_certs: false
+        body_format: json
+        body:
+          policyName: "QoS_Policy"
+          policyDescription: "Application-aware QoS policy"
+          policyType: "feature"
+        status_code: [200, 201]
+      delegate_to: localhost
+
+    - name: Display policy deployment status
+      debug:
+        msg: "SD-WAN policies deployed successfully"

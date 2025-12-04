@@ -1,0 +1,16 @@
+---
+#------------------------------------------------------------------------------
+# Role: ise-ad-integration
+# Default variables
+#------------------------------------------------------------------------------
+
+integrations:
+  ad:
+    domain: ""
+    server_primary: ""
+    server_secondary: ""
+    service_account: ""
+    user_group: ""
+    bind_dn: ""
+
+join_ad: true

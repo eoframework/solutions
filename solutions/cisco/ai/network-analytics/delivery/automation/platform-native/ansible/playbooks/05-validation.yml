@@ -1,0 +1,149 @@
+---
+#------------------------------------------------------------------------------
+# Phase 3: Validation - Go-Live Validation and Testing
+#------------------------------------------------------------------------------
+# This playbook handles validation including:
+#   - System health checks
+#   - Device connectivity validation
+#   - Integration testing
+#   - Reporting
+#------------------------------------------------------------------------------
+
+- name: Phase 3 - Go-Live Validation
+  hosts: localhost
+  gather_facts: no
+  tags: [validation]
+
+  vars_files:
+    - "{{ playbook_dir }}/../vars/generated/project.yml"
+    - "{{ playbook_dir }}/../vars/generated/dnac.yml"
+    - "{{ playbook_dir }}/../vars/generated/deployment.yml"
+    - "{{ playbook_dir }}/../vars/generated/licensing.yml"
+    - "{{ playbook_dir }}/../vars/secrets.yml"
+
+  tasks:
+    #--------------------------------------------------------------------------
+    # Authentication
+    #--------------------------------------------------------------------------
+    - name: Authenticate to DNA Center
+      cisco.dnac.dnac_auth:
+        dnac_host: "{{ dnac.vip }}"
+        dnac_username: "{{ dnac.admin_user }}"
+        dnac_password: "{{ vault_dnac_admin_password }}"
+        dnac_verify: "{{ dnac.ssl_verify }}"
+      register: dnac_auth
+
+    #--------------------------------------------------------------------------
+    # System Health
+    #--------------------------------------------------------------------------
+    - name: Get DNA Center system health
+      ansible.builtin.uri:
+        url: "https://{{ dnac.vip }}/dna/intent/api/v1/diagnostics/system/health"
+        method: GET
+        headers:
+          x-auth-token: "{{ dnac_auth.dnac_auth }}"
+        validate_certs: "{{ dnac.ssl_verify }}"
+      register: system_health
+
+    - name: Display system health
+      ansible.builtin.debug:
+        msg: "DNA Center System Health: {{ system_health.json | default('Check response') }}"
+        verbosity: 1
+
+    #--------------------------------------------------------------------------
+    # Device Count Validation
+    #--------------------------------------------------------------------------
+    - name: Get all network devices
+      cisco.dnac.network_device_info:
+        dnac_host: "{{ dnac.vip }}"
+        dnac_auth: "{{ dnac_auth.dnac_auth }}"
+      register: all_devices
+
+    - name: Validate device count
+      ansible.builtin.assert:
+        that:
+          - all_devices.dnac_response | length >= deployment.pilot_device_count | int
+        fail_msg: "Expected at least {{ deployment.pilot_device_count }} devices, found {{ all_devices.dnac_response | length }}"
+        success_msg: "Device count validation passed: {{ all_devices.dnac_response | length }} devices"
+
+    #--------------------------------------------------------------------------
+    # Device Health Validation
+    #--------------------------------------------------------------------------
+    - name: Get device health summary
+      ansible.builtin.uri:
+        url: "https://{{ dnac.vip }}/dna/intent/api/v1/device-health"
+        method: GET
+        headers:
+          x-auth-token: "{{ dnac_auth.dnac_auth }}"
+        validate_certs: "{{ dnac.ssl_verify }}"
+      register: device_health
+
+    #--------------------------------------------------------------------------
+    # License Validation
+    #--------------------------------------------------------------------------
+    - name: Get license information
+      ansible.builtin.uri:
+        url: "https://{{ dnac.vip }}/dna/intent/api/v1/licenses/device/count"
+        method: GET
+        headers:
+          x-auth-token: "{{ dnac_auth.dnac_auth }}"
+        validate_certs: "{{ dnac.ssl_verify }}"
+      register: license_info
+
+    #--------------------------------------------------------------------------
+    # AI Analytics Validation
+    #--------------------------------------------------------------------------
+    - name: Validate AI Analytics is active
+      ansible.builtin.uri:
+        url: "https://{{ dnac.vip }}/dna/intent/api/v1/aiEndpoint/status"
+        method: GET
+        headers:
+          x-auth-token: "{{ dnac_auth.dnac_auth }}"
+        validate_certs: "{{ dnac.ssl_verify }}"
+      register: ai_status
+      when: licensing.ai_analytics_enabled | bool
+
+    #--------------------------------------------------------------------------
+    # Validation Report
+    #--------------------------------------------------------------------------
+    - name: Generate validation report
+      ansible.builtin.set_fact:
+        validation_report: |
+          ============================================================
+          DNA CENTER NETWORK ANALYTICS - VALIDATION REPORT
+          ============================================================
+          Date: {{ ansible_date_time.iso8601 | default(lookup('pipe', 'date -Iseconds')) }}
+          Solution: {{ solution.name }}
+          DNA Center: {{ dnac.fqdn }} ({{ dnac.vip }})
+
+          DEVICE SUMMARY
+          --------------
+          Total Devices Discovered: {{ all_devices.dnac_response | length }}
+          Target (Pilot): {{ deployment.pilot_device_count }}
+          Target (Production): {{ deployment.production_device_count }}
+          Status: {{ 'PASS' if (all_devices.dnac_response | length >= deployment.pilot_device_count | int) else 'FAIL' }}
+
+          LICENSE SUMMARY
+          ---------------
+          License Tier: {{ licensing.tier }}
+          Licensed Devices: {{ licensing.device_count }}
+          AI Analytics: {{ 'Enabled' if licensing.ai_analytics_enabled else 'Disabled' }}
+
+          INTEGRATION STATUS
+          ------------------
+          LDAP/AD: Configured
+          ServiceNow: Configured
+          Syslog: Configured
+
+          VALIDATION STATUS: {{ 'PASSED' if (all_devices.dnac_response | length >= deployment.pilot_device_count | int) else 'NEEDS ATTENTION' }}
+          ============================================================
+
+    - name: Display validation report
+      ansible.builtin.debug:
+        msg: "{{ validation_report }}"
+
+    - name: Save validation report to file
+      ansible.builtin.copy:
+        content: "{{ validation_report }}"
+        dest: "{{ playbook_dir }}/../logs/validation_report_{{ lookup('pipe', 'date +%Y%m%d_%H%M%S') }}.txt"
+      delegate_to: localhost

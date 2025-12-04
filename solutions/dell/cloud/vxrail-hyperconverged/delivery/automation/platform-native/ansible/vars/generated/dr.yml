@@ -1,0 +1,15 @@
+#------------------------------------------------------------------------------
+# Disaster Recovery Configuration
+#------------------------------------------------------------------------------
+# Generated from configuration.csv
+#
+# To regenerate: python generate-ansible-vars.py /path/to/solution
+# DO NOT EDIT - Changes will be overwritten on regeneration
+#------------------------------------------------------------------------------
+
+dr:
+  enabled: true
+  rpo_minutes: 5
+  rto_minutes: 15
+  purpose: "primary"
+  failover_mode: "automatic"

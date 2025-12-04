@@ -1,0 +1,10 @@
+---
+#------------------------------------------------------------------------------
+# Default variables for dnac-discovery role
+#------------------------------------------------------------------------------
+
+# Discovery settings
+dnac_discovery_protocol_order: "ssh,telnet"
+dnac_discovery_timeout: 300
+dnac_discovery_retry_count: 3
+dnac_save_inventory: true

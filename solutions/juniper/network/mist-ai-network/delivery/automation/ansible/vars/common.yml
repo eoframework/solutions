@@ -1,0 +1,35 @@
+---
+# common.yml - Shared variables across all environments
+
+#==============================================================================
+# MIST API CONFIGURATION
+#==============================================================================
+mist:
+  api_url: "https://api.mist.com/api/v1"
+  country_code: US
+  timezone: "America/New_York"
+
+#==============================================================================
+# DEFAULT WLAN SETTINGS
+#==============================================================================
+wlan_defaults:
+  band_steer: true
+  client_limit: 0
+  ap_limit: 0
+  dtim: 2
+  min_rssi: -80
+  enable_local_keycaching: true
+
+#==============================================================================
+# DEFAULT RF SETTINGS
+#==============================================================================
+rf_defaults:
+  band_24:
+    bandwidth: 20
+    ant_gain: 0
+  band_5:
+    bandwidth: 40
+    ant_gain: 0
+  band_6:
+    bandwidth: 80
+    ant_gain: 0

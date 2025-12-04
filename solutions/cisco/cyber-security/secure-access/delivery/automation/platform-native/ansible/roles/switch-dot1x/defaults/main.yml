@@ -1,0 +1,10 @@
+---
+#------------------------------------------------------------------------------
+# Role: switch-dot1x
+# Default variables
+#------------------------------------------------------------------------------
+
+dot1x_interfaces: []
+configure_aaa: true
+enable_mab_fallback: true
+enable_coa: true

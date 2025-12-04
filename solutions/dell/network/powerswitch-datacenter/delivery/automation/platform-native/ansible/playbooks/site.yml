@@ -1,0 +1,111 @@
+---
+#------------------------------------------------------------------------------
+# Dell PowerSwitch Datacenter - Master Playbook
+#------------------------------------------------------------------------------
+# This is the main orchestration playbook for datacenter fabric deployment.
+#
+# Usage:
+#   Full deployment:   ansible-playbook playbooks/site.yml --ask-vault-pass
+#   Specific phase:    ansible-playbook playbooks/spine-config.yml
+#
+# Tags:
+#   foundation    - Base switch configuration
+#   core          - Spine, leaf, BGP, VXLAN setup
+#   operations    - Monitoring configuration
+#   validation    - Post-deployment verification
+#------------------------------------------------------------------------------
+
+- name: Dell PowerSwitch Datacenter - Master Deployment
+  hosts: localhost
+  gather_facts: true
+  tags: [always]
+
+  vars_files:
+    - "{{ playbook_dir }}/../vars/generated/project.yml"
+    - "{{ playbook_dir }}/../vars/generated/fabric.yml"
+    - "{{ playbook_dir }}/../vars/generated/bgp.yml"
+    - "{{ playbook_dir }}/../vars/generated/evpn.yml"
+    - "{{ playbook_dir }}/../vars/generated/management.yml"
+    - "{{ playbook_dir }}/../vars/secrets.yml"
+
+  tasks:
+    - name: Display deployment banner
+      ansible.builtin.debug:
+        msg: |
+          ================================================================
+          Dell PowerSwitch Datacenter Deployment
+          ================================================================
+          Solution: {{ solution.name }} ({{ solution.abbr }})
+          Environment: {{ environment | default('production') }}
+          Spine: {{ fabric.spine.switch_count }} x {{ fabric.spine.switch_model }}
+          Leaf: {{ fabric.leaf.switch_count }} x {{ fabric.leaf.switch_model }}
+          Capacity: {{ fabric.capacity.total_server_ports }} ports, {{ fabric.capacity.bandwidth_tbps }}Tbps
+          EVPN: {{ evpn.enabled }}
+          Timestamp: {{ ansible_date_time.iso8601 }}
+          ================================================================
+
+#=============================================================================
+# FOUNDATION - Base Configuration
+#=============================================================================
+- name: "FOUNDATION: Base Switch Configuration"
+  import_playbook: base-config.yml
+  tags: [foundation, base]
+
+#=============================================================================
+# CORE - Network Fabric
+#=============================================================================
+- name: "CORE: Spine Switch Configuration"
+  import_playbook: spine-config.yml
+  tags: [core, spine]
+
+- name: "CORE: Leaf Switch Configuration"
+  import_playbook: leaf-config.yml
+  tags: [core, leaf]
+
+- name: "CORE: VLAN Configuration"
+  import_playbook: vlan-config.yml
+  tags: [core, vlan]
+
+- name: "CORE: BGP Underlay Configuration"
+  import_playbook: bgp-config.yml
+  tags: [core, bgp]
+
+- name: "CORE: VXLAN Overlay Configuration"
+  import_playbook: vxlan-config.yml
+  tags: [core, vxlan]
+  when: evpn.enabled | default(false)
+
+#=============================================================================
+# OPERATIONS - Monitoring and Management
+#=============================================================================
+- name: "OPERATIONS: Monitoring Configuration"
+  import_playbook: monitoring-config.yml
+  tags: [operations, monitoring]
+
+#=============================================================================
+# VALIDATION - Post-Deployment Checks
+#=============================================================================
+- name: "VALIDATION: Post-Deployment Verification"
+  import_playbook: validate.yml
+  tags: [validation, validate]
+
+#=============================================================================
+# SUMMARY
+#=============================================================================
+- name: Deployment Summary
+  hosts: localhost
+  gather_facts: true
+  tags: [always]
+
+  tasks:
+    - name: Display completion summary
+      ansible.builtin.debug:
+        msg: |
+          ================================================================
+          Dell PowerSwitch Datacenter Deployment Complete
+          ================================================================
+          Environment: {{ environment | default('production') }}
+          Completed: {{ ansible_date_time.iso8601 }}
+          Spine Switches: {{ groups['spine_switches'] | default([]) | length }}
+          Leaf Switches: {{ groups['leaf_switches'] | default([]) | length }}
+          ================================================================

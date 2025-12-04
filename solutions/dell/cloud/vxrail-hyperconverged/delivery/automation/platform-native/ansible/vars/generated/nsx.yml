@@ -1,0 +1,14 @@
+#------------------------------------------------------------------------------
+# NSX Configuration
+#------------------------------------------------------------------------------
+# Generated from configuration.csv
+#
+# To regenerate: python generate-ansible-vars.py /path/to/solution
+# DO NOT EDIT - Changes will be overwritten on regeneration
+#------------------------------------------------------------------------------
+
+nsx:
+  enabled: true
+  version: "4.1"
+  manager_count: 3
+  edge_count: 2

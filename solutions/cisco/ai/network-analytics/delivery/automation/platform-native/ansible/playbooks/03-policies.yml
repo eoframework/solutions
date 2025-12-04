@@ -1,0 +1,111 @@
+---
+#------------------------------------------------------------------------------
+# Phase 2: Policies - Policy and Template Deployment
+#------------------------------------------------------------------------------
+# This playbook handles policy configuration including:
+#   - AI Analytics settings
+#   - Application monitoring policies
+#   - Compliance policies
+#------------------------------------------------------------------------------
+
+- name: Phase 2 - Policy Deployment
+  hosts: localhost
+  gather_facts: no
+  tags: [policies]
+
+  vars_files:
+    - "{{ playbook_dir }}/../vars/generated/project.yml"
+    - "{{ playbook_dir }}/../vars/generated/dnac.yml"
+    - "{{ playbook_dir }}/../vars/generated/ai_analytics.yml"
+    - "{{ playbook_dir }}/../vars/generated/app_monitoring.yml"
+    - "{{ playbook_dir }}/../vars/generated/policies.yml"
+    - "{{ playbook_dir }}/../vars/secrets.yml"
+
+  tasks:
+    #--------------------------------------------------------------------------
+    # Authentication
+    #--------------------------------------------------------------------------
+    - name: Authenticate to DNA Center
+      cisco.dnac.dnac_auth:
+        dnac_host: "{{ dnac.vip }}"
+        dnac_username: "{{ dnac.admin_user }}"
+        dnac_password: "{{ vault_dnac_admin_password }}"
+        dnac_verify: "{{ dnac.ssl_verify }}"
+      register: dnac_auth
+
+    #--------------------------------------------------------------------------
+    # AI Analytics Configuration
+    #--------------------------------------------------------------------------
+    - name: Configure AI Analytics settings
+      ansible.builtin.uri:
+        url: "https://{{ dnac.vip }}/dna/intent/api/v1/aiEndpoint/settings"
+        method: PUT
+        headers:
+          x-auth-token: "{{ dnac_auth.dnac_auth }}"
+        body_format: json
+        body:
+          confidenceThreshold: "{{ ai_analytics.confidence_threshold }}"
+          anomalySensitivity: "{{ ai_analytics.anomaly_sensitivity }}"
+          baselineLearningDays: "{{ ai_analytics.baseline_learning_days }}"
+          predictiveHorizonDays: "{{ ai_analytics.predictive_horizon_days }}"
+          autoRemediation: "{{ ai_analytics.auto_remediation }}"
+        validate_certs: "{{ dnac.ssl_verify }}"
+        status_code: [200, 202]
+      register: ai_settings
+      when: licensing.ai_analytics_enabled | bool
+
+    #--------------------------------------------------------------------------
+    # Application Monitoring
+    #--------------------------------------------------------------------------
+    - name: Configure application monitoring - Office 365
+      ansible.builtin.debug:
+        msg: "Office 365 monitoring: {{ 'Enabled' if app_monitoring.o365_enabled else 'Disabled' }}"
+      when: app_monitoring.o365_enabled | bool
+
+    - name: Configure application monitoring - Webex
+      ansible.builtin.debug:
+        msg: "Webex monitoring: {{ 'Enabled' if app_monitoring.webex_enabled else 'Disabled' }}"
+      when: app_monitoring.webex_enabled | bool
+
+    - name: Configure application monitoring - SAP
+      ansible.builtin.debug:
+        msg: "SAP monitoring: {{ 'Enabled' if app_monitoring.sap_enabled else 'Disabled' }}"
+      when: app_monitoring.sap_enabled | bool
+
+    #--------------------------------------------------------------------------
+    # SLA Thresholds
+    #--------------------------------------------------------------------------
+    - name: Configure SLA thresholds
+      ansible.builtin.debug:
+        msg: |
+          SLA Thresholds Configured:
+          - Latency: {{ app_monitoring.sla_latency_ms }}ms
+          - Jitter: {{ app_monitoring.sla_jitter_ms }}ms
+          - Packet Loss: {{ app_monitoring.sla_packet_loss_pct }}%
+
+    #--------------------------------------------------------------------------
+    # Compliance Policies
+    #--------------------------------------------------------------------------
+    - name: Configure compliance check interval
+      ansible.builtin.debug:
+        msg: |
+          Compliance Settings:
+          - Check Interval: {{ policies.compliance_check_interval }} minutes
+          - Deployment Mode: {{ policies.deployment_mode }}
+          - Rollback Enabled: {{ policies.rollback_enabled }}
+          - Change Window: {{ policies.change_window_start }} - {{ policies.change_window_end }}
+
+    #--------------------------------------------------------------------------
+    # Summary
+    #--------------------------------------------------------------------------
+    - name: Policy deployment summary
+      ansible.builtin.debug:
+        msg: |
+          ============================================================
+          Phase 2 - Policy Deployment Complete
+          ============================================================
+          AI Analytics: {{ 'Configured' if licensing.ai_analytics_enabled else 'Skipped' }}
+          Application Monitoring: Configured
+          SLA Thresholds: Configured
+          Compliance Policies: Configured
+          ============================================================

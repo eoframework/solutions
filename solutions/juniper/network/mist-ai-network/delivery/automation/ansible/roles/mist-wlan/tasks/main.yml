@@ -1,0 +1,103 @@
+---
+# mist-wlan/tasks/main.yml - WLAN configuration
+
+- name: Get existing WLANs
+  ansible.builtin.uri:
+    url: "{{ mist.api_url }}/sites/{{ site_id }}/wlans"
+    method: GET
+    headers:
+      Authorization: "Token {{ mist_api_token }}"
+  register: existing_wlans
+
+- name: Create or update WLANs
+  ansible.builtin.uri:
+    url: "{{ mist.api_url }}/sites/{{ site_id }}/wlans"
+    method: POST
+    headers:
+      Authorization: "Token {{ mist_api_token }}"
+      Content-Type: application/json
+    body_format: json
+    body:
+      ssid: "{{ item.value.ssid }}"
+      enabled: "{{ item.value.enabled | default(true) }}"
+      auth:
+        type: "{{ item.value.auth_type }}"
+        psk: "{{ wlan_psks[item.key] | default(omit) }}"
+      vlan_enabled: true
+      vlan_id: "{{ item.value.vlan_id }}"
+      band: "{{ item.value.band | default('both') }}"
+      hide_ssid: "{{ item.value.hidden | default(false) }}"
+      band_steer: true
+      band_steer_force_band5: false
+    status_code: [200, 201, 400]
+  loop: "{{ wlans | dict2items }}"
+  loop_control:
+    label: "{{ item.key }}"
+  when:
+    - item.value.enabled | default(true)
+    - (existing_wlans.json | selectattr('ssid', 'equalto', item.value.ssid) | list | length) == 0
+  register: wlan_create_results
+
+- name: Configure RADIUS for enterprise WLANs
+  ansible.builtin.uri:
+    url: "{{ mist.api_url }}/sites/{{ site_id }}/wlans/{{ item.json.id }}"
+    method: PUT
+    headers:
+      Authorization: "Token {{ mist_api_token }}"
+      Content-Type: application/json
+    body_format: json
+    body:
+      auth:
+        type: eap
+      radsec:
+        enabled: false
+      auth_servers:
+        - host: "{{ radius_primary_ip }}"
+          port: "{{ radius.auth_port }}"
+          secret: "{{ radius_secret }}"
+        - host: "{{ radius_secondary_ip | default(radius_primary_ip) }}"
+          port: "{{ radius.auth_port }}"
+          secret: "{{ radius_secret }}"
+      acct_servers:
+        - host: "{{ radius_primary_ip }}"
+          port: "{{ radius.acct_port }}"
+          secret: "{{ radius_secret }}"
+    status_code: [200, 201]
+  loop: "{{ wlan_create_results.results | selectattr('json', 'defined') | list }}"
+  loop_control:
+    label: "{{ item.json.ssid }}"
+  when:
+    - radius.enabled | default(false)
+    - item.json is defined
+    - "'eap' in (wlans | dict2items | selectattr('value.ssid', 'equalto', item.json.ssid) | map(attribute='value.auth_type') | list)"
+  no_log: true
+
+- name: Configure RF template
+  ansible.builtin.uri:
+    url: "{{ mist.api_url }}/sites/{{ site_id }}/rftemplate"
+    method: PUT
+    headers:
+      Authorization: "Token {{ mist_api_token }}"
+      Content-Type: application/json
+    body_format: json
+    body:
+      name: "{{ solution.environment }}-rf-profile"
+      band_24:
+        enabled: true
+        power_min: "{{ rf.band_24.power_min | default(8) }}"
+        power_max: "{{ rf.band_24.power_max | default(18) }}"
+        bandwidth: 20
+      band_5:
+        enabled: true
+        power_min: "{{ rf.band_5.power_min | default(10) }}"
+        power_max: "{{ rf.band_5.power_max | default(23) }}"
+        bandwidth: 40
+      band_6:
+        enabled: "{{ rf.band_6 is defined }}"
+        power_min: "{{ rf.band_6.power_min | default(12) }}"
+        power_max: "{{ rf.band_6.power_max | default(24) }}"
+    status_code: [200, 201]
+
+- name: Display WLAN summary
+  ansible.builtin.debug:
+    msg: "Configured {{ wlans | length }} WLANs for site {{ site_id }}"

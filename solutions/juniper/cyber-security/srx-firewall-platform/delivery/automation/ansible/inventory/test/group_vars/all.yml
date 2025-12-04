@@ -1,0 +1,102 @@
+---
+# Test Environment Variables - SRX Firewall Platform
+# Derived from configuration.csv - Test column
+# Do not edit manually - regenerate with generate_ansible_vars.py
+
+#==============================================================================
+# SOLUTION IDENTIFICATION
+#==============================================================================
+solution:
+  name: srx-firewall-platform
+  abbr: srx
+  environment: test
+
+#==============================================================================
+# CLUSTER CONFIGURATION
+#==============================================================================
+cluster:
+  enabled: false
+  id: 99
+
+#==============================================================================
+# NETWORK CONFIGURATION
+#==============================================================================
+network:
+  zones:
+    dmz:
+      interface: ge-0/0/1.100
+      description: "DMZ - Test environment"
+      host_inbound_services:
+        - https
+        - ping
+    internal:
+      interface: ge-0/0/2.200
+      description: "Internal - Test network"
+      host_inbound_services:
+        - https
+        - ssh
+        - ping
+
+  subnets:
+    dmz: "192.168.100.0/24"
+    internal: "10.100.0.0/24"
+
+#==============================================================================
+# SECURITY SERVICES
+#==============================================================================
+ips:
+  enabled: true
+  policy_name: Test-IDP
+  action: drop-connection
+  update_interval: 24
+
+atp:
+  enabled: false
+
+secintel:
+  enabled: false
+
+#==============================================================================
+# VPN CONFIGURATION
+#==============================================================================
+vpn:
+  ike:
+    dh_group: group20
+    encryption: aes-256-gcm
+    authentication: sha384
+    lifetime: 28800
+  ipsec:
+    encryption: aes-256-gcm
+    authentication: sha384
+    lifetime: 3600
+    pfs_group: group20
+
+#==============================================================================
+# SYSTEM CONFIGURATION
+#==============================================================================
+system:
+  ntp_servers:
+    - "10.100.0.20"
+    - "10.100.0.21"
+  dns_servers:
+    - "10.100.0.10"
+    - "10.100.0.11"
+  domain_name: "test.corp.example.com"
+
+#==============================================================================
+# INTEGRATION
+#==============================================================================
+syslog:
+  enabled: true
+  format: sd-syslog
+  port: 514
+
+tacacs:
+  enabled: false
+
+#==============================================================================
+# MANAGEMENT
+#==============================================================================
+management:
+  security_director:
+    enabled: false

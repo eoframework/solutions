@@ -1,0 +1,126 @@
+---
+#------------------------------------------------------------------------------
+# Dell VxRail HCI - Master Playbook
+#------------------------------------------------------------------------------
+# This is the main orchestration playbook that imports all phase playbooks.
+#
+# Usage:
+#   Full deployment:   ansible-playbook playbooks/site.yml
+#   Specific phase:    ansible-playbook playbooks/vxrail-deploy.yml
+#   With vault:        ansible-playbook playbooks/site.yml --ask-vault-pass
+#
+# Tags:
+#   precheck      - Pre-deployment validation
+#   foundation    - iDRAC and hardware configuration
+#   deployment    - VxRail cluster deployment
+#   vcenter       - vCenter configuration
+#   vsan          - Storage configuration
+#   network       - Network configuration
+#   validation    - Post-deployment verification
+#------------------------------------------------------------------------------
+
+- name: Dell VxRail HCI - Master Deployment
+  hosts: localhost
+  gather_facts: true
+  tags: [always]
+
+  vars_files:
+    - "{{ playbook_dir }}/../vars/generated/project.yml"
+    - "{{ playbook_dir }}/../vars/generated/vxrail.yml"
+    - "{{ playbook_dir }}/../vars/generated/hardware.yml"
+    - "{{ playbook_dir }}/../vars/generated/vsan.yml"
+    - "{{ playbook_dir }}/../vars/generated/network.yml"
+    - "{{ playbook_dir }}/../vars/generated/vmware.yml"
+    - "{{ playbook_dir }}/../vars/secrets.yml"
+
+  tasks:
+    - name: Display deployment banner
+      ansible.builtin.debug:
+        msg: |
+          ================================================================
+          Dell VxRail Hyperconverged Infrastructure Deployment
+          ================================================================
+          Solution: {{ solution.name }} ({{ solution.abbr }})
+          Environment: {{ environment | default('production') }}
+          VxRail Version: {{ vxrail.version }}
+          Cluster: {{ vxrail.cluster_name }}
+          Nodes: {{ vxrail.node_count }} x {{ vxrail.node_model }}
+          vSAN Policy: {{ vsan.storage_policy }}
+          Timestamp: {{ ansible_date_time.iso8601 }}
+          ================================================================
+
+#=============================================================================
+# PRE-DEPLOYMENT - Validation and Checks
+#=============================================================================
+- name: "PRE-DEPLOYMENT: VxRail Pre-Checks"
+  import_playbook: vxrail-precheck.yml
+  tags: [precheck, validation]
+
+#=============================================================================
+# FOUNDATION - Hardware and iDRAC Configuration
+#=============================================================================
+- name: "FOUNDATION: iDRAC Configuration"
+  hosts: idrac
+  gather_facts: false
+  tags: [foundation, idrac]
+
+  tasks:
+    - name: iDRAC configuration placeholder
+      ansible.builtin.debug:
+        msg: "iDRAC configuration tasks executed via dell-idrac role"
+
+#=============================================================================
+# DEPLOYMENT - VxRail Cluster Build
+#=============================================================================
+- name: "DEPLOYMENT: VxRail Cluster Deployment"
+  import_playbook: vxrail-deploy.yml
+  tags: [deployment, vxrail]
+
+#=============================================================================
+# VCENTER - vCenter Server Configuration
+#=============================================================================
+- name: "VCENTER: vCenter Configuration"
+  import_playbook: vcenter-config.yml
+  tags: [vcenter, vmware]
+
+#=============================================================================
+# VSAN - Storage Configuration
+#=============================================================================
+- name: "VSAN: Storage Configuration"
+  import_playbook: vsan-config.yml
+  tags: [vsan, storage]
+
+#=============================================================================
+# NETWORK - Network Configuration
+#=============================================================================
+- name: "NETWORK: Networking Configuration"
+  import_playbook: networking-config.yml
+  tags: [network, networking]
+
+#=============================================================================
+# VALIDATION - Post-Deployment Verification
+#=============================================================================
+- name: "VALIDATION: Post-Deployment Validation"
+  import_playbook: validate.yml
+  tags: [validation, validate]
+
+#=============================================================================
+# SUMMARY
+#=============================================================================
+- name: Deployment Summary
+  hosts: localhost
+  gather_facts: true
+  tags: [always]
+
+  tasks:
+    - name: Display completion summary
+      ansible.builtin.debug:
+        msg: |
+          ================================================================
+          Dell VxRail HCI Deployment Complete
+          ================================================================
+          Environment: {{ environment | default('production') }}
+          Completed: {{ ansible_date_time.iso8601 }}
+          VxRail Nodes: {{ groups['vxrail_nodes'] | default([]) | length }}
+          vCenter: {{ groups['vcenter'] | default([]) | length }}
+          ================================================================

@@ -1,0 +1,97 @@
+# Dell VxRail Enterprise - Post-Deployment Validation
+# EO Framework - Dell Cloud Solutions
+
+---
+- name: VxRail Post-Deployment Validation
+  hosts: localhost
+  gather_facts: true
+
+  tasks:
+    - name: Display validation banner
+      ansible.builtin.debug:
+        msg: |
+          ================================================================
+          VxRail Post-Deployment Validation
+          ================================================================
+
+    #=========================================================================
+    # VXRAIL CLUSTER VALIDATION
+    #=========================================================================
+    - name: Get VxRail cluster health
+      ansible.builtin.uri:
+        url: "https://{{ vxrail.manager_ip }}/rest/vxm/{{ vxrail_api_version | default('v1') }}/cluster"
+        method: GET
+        user: "{{ vxrail_user | default('admin') }}"
+        password: "{{ vxrail_password }}"
+        validate_certs: false
+        force_basic_auth: true
+      register: cluster_health
+      when: vxrail_password is defined
+
+    - name: Get VxRail node status
+      ansible.builtin.uri:
+        url: "https://{{ vxrail.manager_ip }}/rest/vxm/{{ vxrail_api_version | default('v1') }}/hosts"
+        method: GET
+        user: "{{ vxrail_user | default('admin') }}"
+        password: "{{ vxrail_password }}"
+        validate_certs: false
+        force_basic_auth: true
+      register: node_status
+      when: vxrail_password is defined
+
+    #=========================================================================
+    # VCENTER VALIDATION
+    #=========================================================================
+    - name: Validate vCenter connectivity
+      community.vmware.vmware_about_info:
+        hostname: "{{ vmware.vcenter_hostname }}"
+        username: "{{ vcenter_username | default('administrator@vsphere.local') }}"
+        password: "{{ vcenter_password }}"
+        validate_certs: false
+      register: vcenter_info
+      when: vcenter_password is defined
+
+    #=========================================================================
+    # VSAN VALIDATION
+    #=========================================================================
+    - name: Get vSAN cluster status
+      community.vmware.vmware_vsan_health_info:
+        hostname: "{{ vmware.vcenter_hostname }}"
+        username: "{{ vcenter_username | default('administrator@vsphere.local') }}"
+        password: "{{ vcenter_password }}"
+        cluster_name: "{{ vxrail.cluster_name }}"
+        validate_certs: false
+      register: vsan_health
+      when: vcenter_password is defined
+
+    #=========================================================================
+    # NSX-T VALIDATION
+    #=========================================================================
+    - name: Validate NSX-T Manager connectivity
+      ansible.builtin.uri:
+        url: "https://{{ nsx.vip }}/api/v1/cluster/status"
+        method: GET
+        user: "{{ nsx_username | default('admin') }}"
+        password: "{{ nsx_password }}"
+        validate_certs: false
+        force_basic_auth: true
+      register: nsx_status
+      when:
+        - nsx.enabled | default(false)
+        - nsx_password is defined
+
+    #=========================================================================
+    # SUMMARY
+    #=========================================================================
+    - name: Validation summary
+      ansible.builtin.debug:
+        msg: |
+          ================================================================
+          Post-Deployment Validation Results
+          ================================================================
+          VxRail Cluster: {{ cluster_health.json.health | default('UNKNOWN') }}
+          Node Count: {{ node_status.json | length | default(0) }}
+          vCenter: {{ 'CONNECTED' if vcenter_info is succeeded else 'UNKNOWN' }}
+          vSAN Health: {{ vsan_health.vsan_health_info.overall_health | default('UNKNOWN') }}
+          NSX-T: {{ nsx_status.json.cluster_status | default('N/A') if nsx.enabled else 'DISABLED' }}
+          ================================================================

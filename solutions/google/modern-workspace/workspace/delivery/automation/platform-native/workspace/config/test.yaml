@@ -1,0 +1,133 @@
+# Google Workspace Test Configuration
+# Generated from configuration.csv Test column
+# EO Framework - Google Workspace Solution
+
+# Credentials
+credentials_path: config/credentials.json
+
+# Solution Identity
+solution:
+  name: google-workspace
+  abbr: gws
+  provider_name: google
+  category_name: modern-workspace
+
+ownership:
+  cost_center: CC-12345
+  owner_email: workspace-admin@example.com
+  project_code: PRJ-GWS-001
+
+# Workspace Configuration
+workspace:
+  domain: test.example.com
+  customer_id: "[CUSTOMER_ID]"
+  edition: Business Starter
+  user_count: 25
+  storage_per_user: "30 GB"
+  admin_email: admin@test.example.com
+
+# Migration Settings
+migration:
+  source_system: Exchange Online
+  mailbox_count: 25
+  mailbox_total_gb: 50
+  mailbox_avg_gb: 2
+  file_source: SharePoint
+  file_total_gb: 100
+  distribution_lists: 10
+  pilot_users: 5
+  waves: 2
+  users_per_wave: 10
+  coexistence_weeks: 2
+  tool: GWMT
+
+# Identity Configuration
+identity:
+  sso_enabled: false
+  idp_type: None
+  idp_entity_id: ""
+  idp_sso_url: ""
+  idp_certificate: ""
+  mfa_enabled: false
+  mfa_enforcement: OPTIONAL
+  mfa_methods: Any
+  directory_sync_enabled: false
+  gcds_sync_interval: "24 hours"
+
+# Security Configuration
+security:
+  dlp_enabled: false
+  dlp_rules_count: 0
+  dlp_pii_detection: false
+  dlp_financial_detection: false
+  dlp_action: Warn
+  vault_enabled: false
+  vault_retention_years: 1
+  vault_gmail_retention: false
+  vault_drive_retention: false
+  vault_legal_hold_enabled: false
+  mobile_management: Basic
+  mdm_require_passcode: true
+  mdm_passcode_length: 4
+  mdm_remote_wipe: true
+  mdm_managed_devices: 15
+  context_aware_access: false
+
+# Applications
+applications:
+  gmail_enabled: true
+  gmail_storage_gb: 15
+  drive_enabled: true
+  drive_shared_drives: 3
+  meet_enabled: true
+  meet_recording: false
+  meet_max_participants: 100
+  chat_enabled: true
+
+# Sharing Policies
+sharing:
+  external_sharing: Disabled
+  allow_domains: []
+  link_sharing_default: Private
+  file_access_checker: false
+
+# Organizational Units
+org_units:
+  root: /
+  sales: /Sales
+  marketing: /Marketing
+  operations: /Operations
+  finance: /Finance
+  executive: /Executive
+
+# Groups
+groups:
+  create_default_groups: false
+  default_groups:
+    - all-users
+  external_members_allowed: false
+
+# Training
+training:
+  admin_training_hours: 4
+  end_user_sessions: 2
+  materials_included: true
+  change_champions: 2
+
+# Hypercare
+hypercare:
+  duration_days: 14
+  support_hours: "8AM-5PM"
+  response_time_hours: 8
+
+# Budget
+budget:
+  license_cost_monthly: 450
+  professional_services: 9600
+  training_budget: 1000
+
+# Automation
+automation:
+  deployment_method: Platform-Native
+  gam_enabled: false
+  admin_sdk_enabled: false

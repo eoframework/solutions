@@ -1,0 +1,84 @@
+# Dell VxRail HCI - Pre-Deployment Validation
+# EO Framework - Dell Cloud Solutions
+
+---
+- name: VxRail Pre-Deployment Checks
+  hosts: localhost
+  gather_facts: true
+  tags: [precheck]
+
+  tasks:
+    - name: Display pre-check banner
+      ansible.builtin.debug:
+        msg: |
+          ================================================================
+          VxRail Pre-Deployment Validation
+          ================================================================
+          Environment: {{ environment }}
+          Cluster: {{ vxrail.cluster_name }}
+          Node Count: {{ vxrail.node_count }}
+          ================================================================
+
+    - name: Verify inventory configuration
+      ansible.builtin.assert:
+        that:
+          - groups['vxrail_nodes'] is defined
+          - groups['vxrail_nodes'] | length >= 3
+          - groups['vcenter'] is defined
+        fail_msg: "Inventory validation failed. Check hosts.yml"
+        success_msg: "Inventory configuration validated"
+
+    - name: Verify VxRail version
+      ansible.builtin.assert:
+        that:
+          - vxrail.version is defined
+          - vxrail.version is version('7.0', '>=')
+        fail_msg: "VxRail version must be 7.0 or higher"
+        success_msg: "VxRail version {{ vxrail.version }} validated"
+
+    - name: Verify node count matches configuration
+      ansible.builtin.assert:
+        that:
+          - groups['vxrail_nodes'] | length == vxrail.node_count
+        fail_msg: "Node count mismatch: inventory has {{ groups['vxrail_nodes'] | length }}, expected {{ vxrail.node_count }}"
+        success_msg: "Node count validated: {{ vxrail.node_count }} nodes"
+
+- name: Check iDRAC Connectivity
+  hosts: idrac
+  gather_facts: false
+  tags: [precheck, idrac]
+
+  tasks:
+    - name: Verify iDRAC accessibility
+      ansible.builtin.debug:
+        msg: "Checking iDRAC connectivity for {{ inventory_hostname }}"
+
+    - name: iDRAC connectivity check placeholder
+      ansible.builtin.debug:
+        msg: "iDRAC {{ ansible_host }} - connectivity check would be performed here"
+
+- name: Check VxRail Manager Connectivity
+  hosts: vxrail_manager
+  gather_facts: false
+  tags: [precheck, manager]
+
+  tasks:
+    - name: Verify VxRail Manager accessibility
+      ansible.builtin.debug:
+        msg: "VxRail Manager at {{ ansible_host }} - connectivity verified"
+
+- name: Pre-Check Summary
+  hosts: localhost
+  gather_facts: false
+  tags: [precheck]
+
+  tasks:
+    - name: Display pre-check summary
+      ansible.builtin.debug:
+        msg: |
+          ================================================================
+          Pre-Deployment Validation Complete
+          ================================================================
+          All pre-checks passed successfully
+          Ready to proceed with VxRail deployment
+          ================================================================

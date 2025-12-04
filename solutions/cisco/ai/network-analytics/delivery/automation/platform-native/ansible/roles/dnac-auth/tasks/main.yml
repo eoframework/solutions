@@ -1,0 +1,36 @@
+---
+#------------------------------------------------------------------------------
+# Role: dnac-auth
+# Purpose: Authenticate to DNA Center and establish session
+#------------------------------------------------------------------------------
+
+- name: Authenticate to DNA Center
+  cisco.dnac.dnac_auth:
+    dnac_host: "{{ dnac.vip }}"
+    dnac_username: "{{ dnac.admin_user }}"
+    dnac_password: "{{ vault_dnac_admin_password }}"
+    dnac_verify: "{{ dnac.ssl_verify }}"
+  register: dnac_auth_result
+  retries: 3
+  delay: 5
+  until: dnac_auth_result is succeeded
+
+- name: Set authentication token fact
+  ansible.builtin.set_fact:
+    dnac_auth_token: "{{ dnac_auth_result.dnac_auth }}"
+    cacheable: yes
+
+- name: Verify DNA Center connectivity
+  ansible.builtin.uri:
+    url: "https://{{ dnac.vip }}/dna/system/api/v1/system-health"
+    method: GET
+    headers:
+      x-auth-token: "{{ dnac_auth_token }}"
+    validate_certs: "{{ dnac.ssl_verify }}"
+    status_code: 200
+  register: health_check
+
+- name: Display DNA Center health status
+  ansible.builtin.debug:
+    msg: "DNA Center is healthy and accessible at {{ dnac.fqdn }}"
+  when: health_check.status == 200

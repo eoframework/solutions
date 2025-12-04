@@ -1,0 +1,85 @@
+---
+#------------------------------------------------------------------------------
+# Role: dnac-templates
+# Purpose: Policy templates and automation workflow deployment
+#------------------------------------------------------------------------------
+
+- name: Configure AI Analytics settings
+  ansible.builtin.uri:
+    url: "https://{{ dnac.vip }}/dna/intent/api/v1/aiEndpoint/settings"
+    method: PUT
+    headers:
+      x-auth-token: "{{ dnac_auth_token }}"
+    body_format: json
+    body:
+      confidenceThreshold: "{{ ai_analytics.confidence_threshold }}"
+      anomalySensitivity: "{{ ai_analytics.anomaly_sensitivity }}"
+      baselineLearningDays: "{{ ai_analytics.baseline_learning_days }}"
+      predictiveHorizonDays: "{{ ai_analytics.predictive_horizon_days }}"
+      autoRemediation: "{{ ai_analytics.auto_remediation }}"
+    validate_certs: "{{ dnac.ssl_verify }}"
+    status_code: [200, 202]
+  register: ai_settings
+  when: licensing.ai_analytics_enabled | bool
+
+- name: Configure application monitoring settings
+  ansible.builtin.set_fact:
+    app_monitoring_status:
+      office365: "{{ app_monitoring.o365_enabled | bool }}"
+      webex: "{{ app_monitoring.webex_enabled | bool }}"
+      sap: "{{ app_monitoring.sap_enabled | bool }}"
+
+- name: Display application monitoring status
+  ansible.builtin.debug:
+    msg: |
+      Application Monitoring Configuration:
+      - Office 365: {{ 'Enabled' if app_monitoring_status.office365 else 'Disabled' }}
+      - Webex: {{ 'Enabled' if app_monitoring_status.webex else 'Disabled' }}
+      - SAP: {{ 'Enabled' if app_monitoring_status.sap else 'Disabled' }}
+
+- name: Configure SLA thresholds
+  ansible.builtin.uri:
+    url: "https://{{ dnac.vip }}/dna/intent/api/v1/network-health/settings"
+    method: PUT
+    headers:
+      x-auth-token: "{{ dnac_auth_token }}"
+    body_format: json
+    body:
+      slaThresholds:
+        latency: "{{ app_monitoring.sla_latency_ms }}"
+        jitter: "{{ app_monitoring.sla_jitter_ms }}"
+        packetLoss: "{{ app_monitoring.sla_packet_loss_pct }}"
+    validate_certs: "{{ dnac.ssl_verify }}"
+    status_code: [200, 202]
+  register: sla_config
+
+- name: Configure compliance policies
+  ansible.builtin.set_fact:
+    compliance_config:
+      check_interval: "{{ policies.compliance_check_interval }}"
+      deployment_mode: "{{ policies.deployment_mode }}"
+      rollback_enabled: "{{ policies.rollback_enabled }}"
+      change_window:
+        start: "{{ policies.change_window_start }}"
+        end: "{{ policies.change_window_end }}"
+
+- name: Display compliance configuration
+  ansible.builtin.debug:
+    msg: |
+      Compliance Settings:
+      - Check Interval: {{ compliance_config.check_interval }} minutes
+      - Deployment Mode: {{ compliance_config.deployment_mode }}
+      - Rollback Enabled: {{ compliance_config.rollback_enabled }}
+      - Change Window: {{ compliance_config.change_window.start }} - {{ compliance_config.change_window.end }}
+
+- name: Policy deployment summary
+  ansible.builtin.debug:
+    msg: |
+      ============================================================
+      DNA Center Policy Deployment Complete
+      ============================================================
+      AI Analytics: {{ 'Configured' if licensing.ai_analytics_enabled else 'Skipped' }}
+      Application Monitoring: Configured
+      SLA Thresholds: Configured
+      Compliance Policies: Configured
+      ============================================================

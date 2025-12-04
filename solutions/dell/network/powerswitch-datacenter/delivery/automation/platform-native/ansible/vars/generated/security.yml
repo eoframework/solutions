@@ -1,0 +1,14 @@
+#------------------------------------------------------------------------------
+# Security Configuration
+#------------------------------------------------------------------------------
+# Generated from configuration.csv
+#
+# To regenerate: python generate-ansible-vars.py /path/to/solution
+# DO NOT EDIT - Changes will be overwritten on regeneration
+#------------------------------------------------------------------------------
+
+security:
+  ztp_enabled: true
+  storm_control_enabled: true
+  storm_control_level: 10
+  mac_limit_per_port: 100

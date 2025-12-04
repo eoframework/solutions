@@ -1,0 +1,70 @@
+---
+#------------------------------------------------------------------------------
+# Phase 3: Integrations - External System Connections
+#------------------------------------------------------------------------------
+
+- name: Phase 3 - Integrations Setup
+  hosts: localhost
+  gather_facts: yes
+  vars_files:
+    - ../vars/generated/project.yml
+    - ../vars/generated/netbox.yml
+    - ../vars/generated/itsm.yml
+    - ../vars/generated/container.yml
+    - ../vars/generated/kubernetes.yml
+    - ../vars/secrets.yml
+
+  pre_tasks:
+    - name: Display phase information
+      ansible.builtin.debug:
+        msg:
+          - "=============================================="
+          - "Phase 3: Integrations Setup"
+          - "=============================================="
+          - "- NetBox DCIM/IPAM integration"
+          - "- ServiceNow ITSM integration"
+          - "- Container registry configuration"
+          - "- Kubernetes namespace setup"
+          - "=============================================="
+
+  roles:
+    - role: netbox-integration
+      tags: [netbox, ipam]
+    - role: servicenow-integration
+      tags: [servicenow, itsm]
+    - role: container-registry
+      tags: [container, docker]
+    - role: kubernetes-setup
+      tags: [kubernetes, k8s]
+
+  post_tasks:
+    - name: Verify NetBox connectivity
+      ansible.builtin.uri:
+        url: "{{ netbox.url }}/api/status/"
+        method: GET
+        headers:
+          Authorization: "Token {{ vault_netbox_api_token }}"
+        validate_certs: true
+        status_code: 200
+        timeout: 30
+      register: netbox_check
+      ignore_errors: yes
+
+    - name: Verify ServiceNow connectivity
+      ansible.builtin.uri:
+        url: "{{ itsm.servicenow_url }}/api/now/table/sys_user?sysparm_limit=1"
+        method: GET
+        user: "{{ itsm.servicenow_user }}"
+        password: "{{ vault_servicenow_password }}"
+        force_basic_auth: yes
+        validate_certs: true
+        status_code: 200
+        timeout: 30
+      register: snow_check
+      ignore_errors: yes
+
+    - name: Integration health summary
+      ansible.builtin.debug:
+        msg:
+          - "NetBox: {{ 'CONNECTED' if netbox_check is succeeded else 'CHECK REQUIRED' }}"
+          - "ServiceNow: {{ 'CONNECTED' if snow_check is succeeded else 'CHECK REQUIRED' }}"

@@ -1,0 +1,13 @@
+#------------------------------------------------------------------------------
+# Monitoring Configuration
+#------------------------------------------------------------------------------
+# Generated from configuration.csv on 2025-12-02 23:53:47
+#
+# To regenerate: python generate-ansible-vars.py /path/to/solution
+# DO NOT EDIT - Changes will be overwritten on regeneration
+#------------------------------------------------------------------------------
+
+monitoring:
+  netflow_collector: 10.100.6.20
+  snmp_community: '{{ vault_snmp_community }}'
+  syslog_server: 10.100.6.10

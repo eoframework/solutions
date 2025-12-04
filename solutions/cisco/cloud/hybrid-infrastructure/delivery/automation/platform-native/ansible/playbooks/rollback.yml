@@ -1,0 +1,74 @@
+---
+#------------------------------------------------------------------------------
+# Rollback Playbook - Cisco HyperFlex Hybrid Infrastructure
+#------------------------------------------------------------------------------
+# This playbook handles rollback scenarios including:
+#   - Configuration rollback
+#   - Emergency procedures
+#------------------------------------------------------------------------------
+
+- name: Emergency Rollback
+  hosts: localhost
+  gather_facts: no
+  tags: [rollback]
+
+  vars_files:
+    - "{{ playbook_dir }}/../vars/generated/project.yml"
+    - "{{ playbook_dir }}/../vars/generated/hyperflex.yml"
+    - "{{ playbook_dir }}/../vars/secrets.yml"
+
+  vars:
+    rollback_reason: "{{ rollback_reason | default('Manual rollback requested') }}"
+
+  tasks:
+    - name: Rollback warning
+      ansible.builtin.pause:
+        prompt: |
+          ============================================================
+          WARNING: ROLLBACK PROCEDURE
+          ============================================================
+          This will document rollback steps for HyperFlex configuration.
+
+          Reason: {{ rollback_reason }}
+
+          Press ENTER to continue or Ctrl+C to abort...
+          ============================================================
+
+    - name: Verify HyperFlex connectivity
+      ansible.builtin.uri:
+        url: "https://{{ hyperflex.cluster_ip }}/api/v1/cluster"
+        method: GET
+        user: "{{ hyperflex.admin_user }}"
+        password: "{{ vault_hx_admin_password }}"
+        force_basic_auth: yes
+        validate_certs: "{{ hyperflex.ssl_verify }}"
+      register: hx_auth
+      ignore_errors: yes
+
+    - name: Document rollback initiation
+      ansible.builtin.debug:
+        msg: |
+          Rollback initiated at {{ lookup('pipe', 'date -Iseconds') }}
+          Reason: {{ rollback_reason }}
+
+          HyperFlex Rollback Steps:
+          1. Verify cluster health via HyperFlex Connect
+          2. Review recent configuration changes
+          3. Contact Cisco TAC for cluster-level rollback
+
+          Note: HyperFlex cluster rollback requires careful planning
+          to avoid data loss. Always consult Cisco TAC.
+
+    - name: Rollback complete
+      ansible.builtin.debug:
+        msg: |
+          ============================================================
+          Rollback procedure documented.
+
+          Next steps:
+          1. Verify HyperFlex Connect accessibility
+          2. Check cluster health status
+          3. Verify vSphere integration
+          4. Review storage controller VM status
+          5. Contact Cisco TAC if issues persist
+          ============================================================

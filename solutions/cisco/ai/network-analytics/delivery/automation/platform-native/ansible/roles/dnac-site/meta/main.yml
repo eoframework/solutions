@@ -1,0 +1,23 @@
+---
+#------------------------------------------------------------------------------
+# Role metadata for dnac-site
+#------------------------------------------------------------------------------
+
+galaxy_info:
+  author: EO Framework
+  description: DNA Center site hierarchy and foundation setup
+  company: EO Framework Solutions
+  license: MIT
+  min_ansible_version: "2.14"
+  platforms:
+    - name: GenericLinux
+      versions:
+        - all
+  galaxy_tags:
+    - cisco
+    - dnac
+    - networking
+    - sites
+
+dependencies:
+  - role: dnac-auth

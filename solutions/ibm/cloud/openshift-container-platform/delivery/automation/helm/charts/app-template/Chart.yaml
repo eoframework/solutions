@@ -1,0 +1,14 @@
+apiVersion: v2
+name: app-template
+description: Generic application deployment template for OpenShift
+type: application
+version: 1.0.0
+appVersion: "1.0.0"
+keywords:
+  - openshift
+  - kubernetes
+  - deployment
+  - template
+maintainers:
+  - name: EO Framework
+    email: platform@company.com

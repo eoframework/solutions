@@ -1,0 +1,98 @@
+# OpenShift Test Configuration
+# Generated from configuration.csv - Test column
+# Do not edit manually - regenerate with generate-ansible-vars.py
+---
+#==============================================================================
+# CLUSTER
+#==============================================================================
+ocp_cluster_name: ocp-test
+ocp_base_domain: example.com
+ocp_version: "4.14.10"
+ocp_api_endpoint: https://api.ocp-test.example.com:6443
+ocp_console_url: https://console-openshift-console.apps.ocp-test.example.com
+control_plane_nodes: 3
+worker_nodes: 2
+
+#==============================================================================
+# COMPUTE
+#==============================================================================
+control_plane_cpu: 4
+control_plane_memory: 16
+worker_node_cpu: 8
+worker_node_memory: 32
+
+#==============================================================================
+# NETWORK
+#==============================================================================
+ocp_network_type: OVNKubernetes
+pod_network_cidr: "10.128.0.0/14"
+service_network_cidr: "172.30.0.0/16"
+cluster_network_mtu: 1400
+
+#==============================================================================
+# STORAGE
+#==============================================================================
+odf_storage_size: 5TB
+storage_class_block: ocs-storagecluster-ceph-rbd
+storage_class_file: ocs-storagecluster-cephfs
+
+#==============================================================================
+# AUTHENTICATION
+#==============================================================================
+ldap_enabled: false
+oauth_timeout: 86400
+
+#==============================================================================
+# MONITORING
+#==============================================================================
+prometheus_enabled: true
+prometheus_retention: 7d
+alertmanager_config: email
+grafana_enabled: true
+
+#==============================================================================
+# LOGGING
+#==============================================================================
+efk_enabled: true
+efk_log_retention: 3d
+elasticsearch_storage: 100Gi
+
+#==============================================================================
+# REGISTRY
+#==============================================================================
+quay_enabled: false
+quay_hostname: quay.apps.ocp-test.example.com
+quay_storage_size: 100Gi
+
+#==============================================================================
+# GITOPS
+#==============================================================================
+argocd_enabled: true
+argocd_repo_url: https://github.com/company/gitops-config
+
+#==============================================================================
+# PIPELINES
+#==============================================================================
+tekton_enabled: true
+tekton_default_sa: pipeline
+pipeline_timeout: 1h
+
+#==============================================================================
+# SERVICE MESH
+#==============================================================================
+istio_enabled: false
+istio_mtls_mode: PERMISSIVE
+
+#==============================================================================
+# OPERATIONS
+#==============================================================================
+backup_enabled: false
+backup_schedule: "0 2 * * *"
+backup_retention: 7
+
+#==============================================================================
+# SECURITY
+#==============================================================================
+encrypt_etcd: true
+enforce_pod_security: false
+compliance_operator_enabled: false

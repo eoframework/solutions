@@ -1,0 +1,108 @@
+# Dell PowerSwitch Datacenter - Base Configuration
+# EO Framework - Dell Network Solutions
+# Configures base settings on all switches
+
+---
+- name: Configure Base Switch Settings
+  hosts: powerswitch
+  gather_facts: false
+  tags: [base]
+
+  tasks:
+    #=========================================================================
+    # HOSTNAME AND MANAGEMENT
+    #=========================================================================
+    - name: Configure hostname
+      dellemc.os10.os10_config:
+        lines:
+          - "hostname {{ inventory_hostname }}"
+      tags: [hostname]
+
+    - name: Configure management interface
+      dellemc.os10.os10_config:
+        lines:
+          - "interface mgmt1/1/1"
+          - " description Management Interface"
+          - " no shutdown"
+      tags: [management]
+
+    #=========================================================================
+    # AUTHENTICATION
+    #=========================================================================
+    - name: Configure AAA authentication
+      dellemc.os10.os10_config:
+        lines:
+          - "aaa authentication login default local"
+          - "aaa authentication enable default enable"
+          - "aaa authorization exec default local"
+      tags: [authentication]
+
+    - name: Configure TACACS+ (if enabled)
+      dellemc.os10.os10_config:
+        lines:
+          - "tacacs-server host {{ item }}"
+          - "tacacs-server key {{ tacacs_secret }}"
+      loop: "{{ authentication.tacacs.servers | default([]) }}"
+      when: authentication.tacacs.enabled | default(false)
+      tags: [tacacs]
+      no_log: true
+
+    - name: Configure local admin user
+      dellemc.os10.os10_config:
+        lines:
+          - "username {{ item.username }} role sysadmin priv-lvl {{ item.privilege }}"
+      loop: "{{ authentication.local_users | default([]) }}"
+      tags: [users]
+
+    #=========================================================================
+    # SSH CONFIGURATION
+    #=========================================================================
+    - name: Configure SSH
+      dellemc.os10.os10_config:
+        lines:
+          - "ip ssh server enable"
+          - "ip ssh server version 2"
+      when: authentication.ssh.enabled | default(true)
+      tags: [ssh]
+
+    #=========================================================================
+    # NTP CONFIGURATION
+    #=========================================================================
+    - name: Configure NTP servers
+      dellemc.os10.os10_config:
+        lines:
+          - "ntp server {{ item }}"
+      loop: "{{ management.ntp_servers | default([]) }}"
+      tags: [ntp]
+
+    #=========================================================================
+    # LOGGING
+    #=========================================================================
+    - name: Configure console logging
+      dellemc.os10.os10_config:
+        lines:
+          - "logging console informational"
+      tags: [logging]
+
+    #=========================================================================
+    # BANNER
+    #=========================================================================
+    - name: Configure login banner
+      dellemc.os10.os10_config:
+        lines:
+          - "banner login ^"
+          - "================================================================"
+          - "  Dell PowerSwitch - {{ datacenter_name | default('Datacenter') }}"
+          - "  Environment: {{ environment }}"
+          - "  Authorized Access Only"
+          - "================================================================"
+          - "^"
+      tags: [banner]
+
+    #=========================================================================
+    # SAVE CONFIGURATION
+    #=========================================================================
+    - name: Save running configuration
+      dellemc.os10.os10_config:
+        save: true
+      tags: [save]

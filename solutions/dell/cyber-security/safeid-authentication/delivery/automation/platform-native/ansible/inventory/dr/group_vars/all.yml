@@ -1,0 +1,222 @@
+# Dell SafeID Authentication - DR Variables
+# Generated from configuration.csv - DR column
+# EO Framework - Dell Cyber Security Solutions
+
+---
+#=============================================================================
+# PROJECT METADATA
+#=============================================================================
+solution:
+  name: safeid-authentication
+  abbr: sia
+  provider: dell
+  category: cyber-security
+
+environment: dr
+
+#=============================================================================
+# SAFEID APPLICATION
+#=============================================================================
+safeid:
+  solution_name: "Dell SafeID Enterprise Authentication"
+  version: "4.2"
+  server_count: 2
+  database: "PostgreSQL 15"
+
+  # Server configuration
+  servers:
+    primary:
+      hostname: safeid-dr-01
+      ip: 10.22.1.10
+    secondary:
+      hostname: safeid-dr-02
+      ip: 10.22.1.11
+
+  # High availability
+  ha:
+    enabled: true
+    failover_automatic: true
+    sync_interval: 30
+
+#=============================================================================
+# USER BASE
+#=============================================================================
+users:
+  count: 500
+  yubikey_model: "YubiKey 5 NFC"
+  yubikey_quantity: 525
+  admin_yubikey_count: 10
+
+  # Enrollment settings
+  enrollment:
+    portal_url: "https://enroll-dr.company.com"
+    session_timeout: 300
+    self_service_enabled: true
+
+#=============================================================================
+# AUTHENTICATION CONFIGURATION
+#=============================================================================
+authentication:
+  protocol: "FIDO2 WebAuthn"
+
+  fido2:
+    enabled: true
+    origin: "login-dr.company.com"
+    rpid: "company.com"
+
+  pin:
+    enabled: true
+    min_length: 6
+    max_length: 8
+    complexity_required: true
+
+  fallback:
+    totp_enabled: true
+    backup_codes_enabled: true
+
+#=============================================================================
+# LDAP/ACTIVE DIRECTORY INTEGRATION
+#=============================================================================
+ldap:
+  integration: "LDAPS"
+  enabled: true
+
+  servers:
+    - server: "ad-dr-01.company.com"
+      port: 636
+      use_ssl: true
+    - server: "ad-dr-02.company.com"
+      port: 636
+      use_ssl: true
+
+  base_dn: "DC=company,DC=com"
+  user_container: "OU=Users,DC=company,DC=com"
+  group_container: "OU=Groups,DC=company,DC=com"
+
+  sync:
+    enabled: true
+    interval: 15
+    sync_users: true
+    sync_groups: true
+
+  bind_dn: "CN=SafeID Service,OU=Service Accounts,DC=company,DC=com"
+
+#=============================================================================
+# RADIUS CONFIGURATION
+#=============================================================================
+radius:
+  enabled: true
+  port: 1812
+  accounting_port: 1813
+
+  clients:
+    - name: "DR VPN Gateway"
+      ip: "10.22.5.10"
+      protocol: "PAP"
+    - name: "DR Firewall"
+      ip: "10.22.5.20"
+      protocol: "PAP"
+
+  vpn:
+    platform: "Cisco AnyConnect"
+    mfa_required: true
+    push_notification: true
+
+#=============================================================================
+# SAML IDENTITY PROVIDER
+#=============================================================================
+saml:
+  enabled: true
+  entity_id: "https://safeid-dr.company.com"
+
+  certificate:
+    key_size: 4096
+    validity_days: 730
+    algorithm: "SHA256"
+
+  service_providers:
+    - name: "Microsoft 365"
+      entity_id: "urn:federation:MicrosoftOnline"
+      acs_url: "https://login.microsoftonline.com/login.srf"
+      tenant_id: "00000000-0000-0000-0000-000000000000"
+    - name: "AWS IAM Identity Center"
+      entity_id: "urn:amazon:webservices"
+      acs_url: "https://signin.aws.amazon.com/saml"
+      account_id: "000000000000"
+
+#=============================================================================
+# CLOUD INTEGRATION
+#=============================================================================
+cloud:
+  microsoft365:
+    enabled: true
+    tenant_id: "00000000-0000-0000-0000-000000000000"
+    federation_enabled: true
+
+  aws:
+    enabled: true
+    account_id: "000000000000"
+    iam_identity_center: true
+
+#=============================================================================
+# COMPLIANCE
+#=============================================================================
+compliance:
+  audit:
+    enabled: true
+    retention_days: 1095
+    siem_integration: true
+    syslog_server: "syslog-dr.company.com"
+
+  cmmc:
+    level: "Level 2"
+    controls_enabled: true
+    reporting_enabled: true
+
+#=============================================================================
+# OPERATIONS
+#=============================================================================
+operations:
+  backup:
+    enabled: true
+    schedule: "Daily 02:00"
+    retention_days: 30
+    destination: "/backup/safeid"
+    include_database: true
+    include_config: true
+
+  helpdesk:
+    portal_url: "https://helpdesk-dr.company.com"
+    temp_token_validity: 24
+    self_service_recovery: true
+
+  monitoring:
+    snmp_enabled: true
+    nagios_checks: true
+    health_check_interval: 60
+
+#=============================================================================
+# SECURITY
+#=============================================================================
+security:
+  tls:
+    min_version: "1.2"
+    ciphers: "HIGH:!aNULL:!MD5"
+    certificate_path: "/etc/safeid/ssl"
+
+  firewall:
+    ssh_allowed_ips:
+      - "10.22.0.0/16"
+    https_allowed_ips:
+      - "10.22.0.0/16"
+    radius_allowed_ips:
+      - "10.22.5.0/24"
+
+#=============================================================================
+# PERFORMANCE
+#=============================================================================
+performance:
+  validation_timeout: 30
+  max_concurrent_validations: 1000
+  max_sessions: 5000
+  session_timeout: 3600

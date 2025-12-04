@@ -1,0 +1,16 @@
+#------------------------------------------------------------------------------
+# SAML Configuration
+#------------------------------------------------------------------------------
+# Generated from configuration.csv
+#
+# To regenerate: python generate-ansible-vars.py /path/to/solution
+# DO NOT EDIT - Changes will be overwritten on regeneration
+#------------------------------------------------------------------------------
+
+saml:
+  enabled: true
+  entity_id: "https://safeid.company.com"
+  certificate:
+    key_size: 4096
+    validity_days: 730
+    algorithm: "SHA256"

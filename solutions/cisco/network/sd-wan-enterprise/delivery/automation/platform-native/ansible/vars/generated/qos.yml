@@ -1,0 +1,14 @@
+#------------------------------------------------------------------------------
+# Qos Configuration
+#------------------------------------------------------------------------------
+# Generated from configuration.csv on 2025-12-02 23:53:47
+#
+# To regenerate: python generate-ansible-vars.py /path/to/solution
+# DO NOT EDIT - Changes will be overwritten on regeneration
+#------------------------------------------------------------------------------
+
+qos:
+  critical_dscp: 26
+  profile_count: 8
+  video_dscp: 34
+  voice_dscp: 46

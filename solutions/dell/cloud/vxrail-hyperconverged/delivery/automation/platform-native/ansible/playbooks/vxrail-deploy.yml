@@ -1,0 +1,113 @@
+# Dell VxRail Enterprise - Cluster Deployment
+# EO Framework - Dell Cloud Solutions
+
+---
+- name: Deploy VxRail Cluster
+  hosts: localhost
+  gather_facts: true
+
+  tasks:
+    - name: Display deployment banner
+      ansible.builtin.debug:
+        msg: |
+          ================================================================
+          VxRail Cluster Deployment
+          Cluster: {{ vxrail.cluster_name }}
+          Nodes: {{ vxrail.node_count }}
+          Model: {{ vxrail.node_model }}
+          ================================================================
+
+    #=========================================================================
+    # VXRAIL API AUTHENTICATION
+    #=========================================================================
+    - name: Authenticate with VxRail Manager
+      ansible.builtin.uri:
+        url: "https://{{ vxrail.manager_ip }}/rest/vxm/{{ vxrail_api_version | default('v1') }}/system/initialize/status"
+        method: GET
+        user: "{{ vxrail_user | default('admin') }}"
+        password: "{{ vxrail_password }}"
+        validate_certs: false
+        force_basic_auth: true
+      register: vxrail_auth
+      when: vxrail_password is defined
+
+    #=========================================================================
+    # CHECK EXISTING CLUSTER
+    #=========================================================================
+    - name: Check if cluster already exists
+      ansible.builtin.uri:
+        url: "https://{{ vxrail.manager_ip }}/rest/vxm/{{ vxrail_api_version | default('v1') }}/cluster"
+        method: GET
+        user: "{{ vxrail_user | default('admin') }}"
+        password: "{{ vxrail_password }}"
+        validate_certs: false
+        force_basic_auth: true
+        status_code: [200, 404]
+      register: cluster_status
+      when: vxrail_password is defined
+
+    - name: Display cluster status
+      ansible.builtin.debug:
+        msg: "Cluster exists: {{ cluster_status.status == 200 }}"
+      when: cluster_status is defined
+
+    #=========================================================================
+    # CLUSTER INITIALIZATION
+    #=========================================================================
+    - name: Initialize VxRail cluster (if not exists)
+      ansible.builtin.uri:
+        url: "https://{{ vxrail.manager_ip }}/rest/vxm/{{ vxrail_api_version | default('v1') }}/cluster"
+        method: POST
+        user: "{{ vxrail_user | default('admin') }}"
+        password: "{{ vxrail_password }}"
+        validate_certs: false
+        force_basic_auth: true
+        body_format: json
+        body:
+          cluster_name: "{{ vxrail.cluster_name }}"
+          vcenter:
+            hostname: "{{ vmware.vcenter_hostname }}"
+            username: "{{ vcenter_username | default('administrator@vsphere.local') }}"
+            password: "{{ vcenter_password }}"
+          vsan:
+            storage_policy: "{{ vsan.storage_policy }}"
+            compression: "{{ vsan.compression_enabled }}"
+            deduplication: "{{ vsan.deduplication_enabled }}"
+            encryption: "{{ vsan.encryption_enabled }}"
+        status_code: [200, 202]
+      register: cluster_init
+      when:
+        - vxrail_password is defined
+        - cluster_status.status | default(0) == 404
+
+    #=========================================================================
+    # WAIT FOR DEPLOYMENT
+    #=========================================================================
+    - name: Wait for cluster deployment to complete
+      ansible.builtin.uri:
+        url: "https://{{ vxrail.manager_ip }}/rest/vxm/{{ vxrail_api_version | default('v1') }}/requests/{{ cluster_init.json.request_id }}"
+        method: GET
+        user: "{{ vxrail_user | default('admin') }}"
+        password: "{{ vxrail_password }}"
+        validate_certs: false
+        force_basic_auth: true
+      register: deployment_status
+      until: deployment_status.json.state == "COMPLETED"
+      retries: 120
+      delay: 60
+      when:
+        - cluster_init is defined
+        - cluster_init.json.request_id is defined
+
+    #=========================================================================
+    # COMPLETION
+    #=========================================================================
+    - name: Display deployment completion
+      ansible.builtin.debug:
+        msg: |
+          ================================================================
+          VxRail Cluster Deployment Complete
+          ================================================================
+          Cluster: {{ vxrail.cluster_name }}
+          Status: SUCCESS
+          ================================================================

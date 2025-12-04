@@ -1,0 +1,77 @@
+# Dell VxRail HCI - vSAN Configuration
+# EO Framework - Dell Cloud Solutions
+
+---
+- name: vSAN Storage Configuration
+  hosts: vcenter
+  gather_facts: false
+  tags: [vsan, storage]
+
+  tasks:
+    - name: Display vSAN configuration banner
+      ansible.builtin.debug:
+        msg: |
+          ================================================================
+          vSAN Storage Configuration
+          ================================================================
+          Cluster: {{ cluster_name }}
+          vSAN Version: {{ vsan.version }}
+          Storage Policy: {{ vsan.storage_policy }}
+          Compression: {{ vsan.compression_enabled }}
+          Deduplication: {{ vsan.deduplication_enabled }}
+          Encryption: {{ vsan.encryption_enabled }}
+          ================================================================
+
+    - name: Execute vSAN configuration role
+      ansible.builtin.include_role:
+        name: vmware-vsan
+      vars:
+        vcenter_hostname: "{{ ansible_host }}"
+        cluster: "{{ cluster_name }}"
+
+    - name: Enable vSAN on cluster
+      ansible.builtin.debug:
+        msg: "Enabling vSAN on cluster {{ cluster_name }}"
+
+    - name: Configure vSAN disk groups
+      ansible.builtin.debug:
+        msg: |
+          Configuring vSAN disk groups:
+          Cache disks: {{ vsan.cache.disk_count }} x {{ vsan.cache.disk_model }}
+          Capacity disks: {{ vsan.capacity.disk_count }} x {{ vsan.capacity.disk_model }}
+
+    - name: Apply vSAN storage policies
+      ansible.builtin.debug:
+        msg: "Applying storage policy: {{ vsan.storage_policy }}"
+
+    - name: Configure vSAN compression
+      ansible.builtin.debug:
+        msg: "vSAN compression: {{ vsan.compression_enabled }}"
+      when: vsan.compression_enabled | bool
+
+    - name: Configure vSAN deduplication
+      ansible.builtin.debug:
+        msg: "vSAN deduplication: {{ vsan.deduplication_enabled }}"
+      when: vsan.deduplication_enabled | bool
+
+    - name: Configure vSAN encryption
+      ansible.builtin.debug:
+        msg: "vSAN encryption: {{ vsan.encryption_enabled }}"
+      when: vsan.encryption_enabled | bool
+
+- name: vSAN Configuration Summary
+  hosts: localhost
+  gather_facts: false
+  tags: [vsan]
+
+  tasks:
+    - name: Display vSAN summary
+      ansible.builtin.debug:
+        msg: |
+          ================================================================
+          vSAN Configuration Complete
+          ================================================================
+          vSAN enabled and configured
+          Storage policies applied
+          Space efficiency features configured
+          ================================================================

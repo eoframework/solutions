@@ -1,0 +1,14 @@
+#------------------------------------------------------------------------------
+# Ansible Config Configuration
+#------------------------------------------------------------------------------
+# Generated from configuration.csv on 2025-12-02 23:53:46
+#
+# To regenerate: python generate-ansible-vars.py /path/to/solution
+# DO NOT EDIT - Changes will be overwritten on regeneration
+#------------------------------------------------------------------------------
+
+ansible:
+  callback: json
+  collections: cisco.ios,cisco.nxos,cisco.asa,cisco.dnac
+  inventory_path: /etc/ansible/cisco_inventory
+  vault_id: cisco_vault

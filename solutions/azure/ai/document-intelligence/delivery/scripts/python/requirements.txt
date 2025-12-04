@@ -1,4 +1,0 @@
-# Azure AI Document Intelligence - Python Dependencies
-azure-identity>=1.15.0
-azure-mgmt-cognitiveservices>=13.5.0
-azure-mgmt-resource>=23.1.1

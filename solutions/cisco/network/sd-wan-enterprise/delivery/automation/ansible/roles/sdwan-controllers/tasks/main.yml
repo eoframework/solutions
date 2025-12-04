@@ -1,0 +1,58 @@
+---
+# SD-WAN Controllers Role
+# Configures vManage, vSmart, and vBond controllers
+
+- name: Display controller deployment info
+  debug:
+    msg: "Deploying {{ controller_type | default('controller') }} on {{ inventory_hostname }}"
+
+- name: Create backup directory
+  file:
+    path: "/tmp/sdwan_backups/{{ ansible_date_time.epoch }}"
+    state: directory
+    mode: '0755'
+  delegate_to: localhost
+  run_once: true
+
+- name: Backup controller configuration
+  cisco.ios.ios_command:
+    commands:
+      - show running-config
+  register: controller_backup
+  when: controller_type in ['vsmart', 'vbond']
+  vars:
+    ansible_network_os: ios
+
+- name: Save controller backup
+  copy:
+    content: "{{ controller_backup.stdout[0] }}"
+    dest: "/tmp/sdwan_backups/{{ ansible_date_time.epoch }}/{{ inventory_hostname }}_backup.cfg"
+  delegate_to: localhost
+  when: controller_backup is defined and controller_backup.stdout is defined
+
+- name: Configure controller system settings
+  cisco.ios.ios_config:
+    lines:
+      - system
+      - system-ip {{ system_ip }}
+      - site-id {{ site_id }}
+      - organization-name {{ sdwan_organization }}
+    save_when: modified
+  when: controller_type in ['vsmart', 'vbond']
+  vars:
+    ansible_network_os: ios
+
+- name: Configure vSmart specific settings
+  cisco.ios.ios_config:
+    lines:
+      - omp
+      - no shutdown
+      - graceful-restart
+    save_when: modified
+  when: controller_type == 'vsmart'
+  vars:
+    ansible_network_os: ios
+
+- name: Display controller configuration status
+  debug:
+    msg: "Controller {{ inventory_hostname }} ({{ controller_type }}) configured successfully"

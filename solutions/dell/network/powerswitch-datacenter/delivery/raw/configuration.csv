@@ -1,33 +1,47 @@
-Parameter Name,Category,Environment,Default Value,Description,Required,Data Type,Validation Rules,Security Level,Owner Team,Dependencies,Notes,Last Updated
-NETWORK_SOLUTION_NAME,Application,All,Dell PowerSwitch Datacenter Fabric,Dell network solution identifier,Yes,String,Max 50 characters,Public,Network Team,None,Used in documentation and management,[DATE]
-OS10_VERSION,Application,All,10.5.4,Dell OS10 Enterprise version,Yes,String,Valid OS10 version,Public,Network Team,None,Enterprise edition for BGP/EVPN,[DATE]
-SPINE_SWITCH_MODEL,Spine Layer,All,Dell Z9432F-ON,Spine switch model,Yes,String,Valid PowerSwitch model,Public,Network Team,Fabric design,32x400GbE or 128x100GbE ports,[DATE]
-SPINE_SWITCH_COUNT,Spine Layer,All,4,Number of spine switches,Yes,Integer,2-8,Public,Network Team,Redundancy requirements,4-way spine for full redundancy,[DATE]
-SPINE_PORT_CONFIG,Spine Layer,All,100GbE,Spine port speed configuration,Yes,String,100GbE|400GbE,Public,Network Team,Leaf requirements,Breakout to 100GbE for leaf uplinks,[DATE]
-LEAF_SWITCH_MODEL,Leaf Layer,All,Dell S5248F-ON,ToR leaf switch model,Yes,String,Valid PowerSwitch model,Public,Network Team,Server connectivity,48x25GbE + 8x100GbE ports,[DATE]
-LEAF_SWITCH_COUNT,Leaf Layer,All,40,Number of leaf switches (1 per rack),Yes,Integer,10-100,Public,Network Team,Rack count,40 racks with ToR switches,[DATE]
-LEAF_UPLINK_COUNT,Leaf Layer,All,4,Number of 100GbE uplinks per leaf,Yes,Integer,2-8,Public,Network Team,Spine connectivity,4 uplinks to 4 spines,[DATE]
-SERVER_PORT_COUNT,Leaf Layer,All,48,Server-facing ports per leaf switch,Yes,Integer,24-48,Public,Network Team,Host density,25GbE server connectivity,[DATE]
-TOTAL_SERVER_PORTS,Capacity,All,1920,Total server ports in fabric,Yes,Integer,100-5000,Public,Network Team,Infrastructure sizing,40 leafs × 48 ports,[DATE]
-FABRIC_BANDWIDTH_TBPS,Performance,All,1.6,Aggregate fabric bandwidth in Tbps,Yes,Float,0.4-6.4,Public,Network Team,Throughput requirements,1.6Tbps aggregate capacity,[DATE]
-EAST_WEST_LATENCY_US,Performance,All,2,Target east-west latency in microseconds,Yes,Integer,1-10,Public,Network Team,Application requirements,<2 microsecond SLA,[DATE]
-BGP_UNDERLAY_ASN_SPINE,Routing,All,65000,Spine BGP ASN for underlay,Yes,Integer,64512-65534,Public,Network Team,BGP design,Private ASN range,[DATE]
-BGP_UNDERLAY_ASN_LEAF,Routing,All,65001-65040,Leaf BGP ASN range for underlay,Yes,String,Valid ASN range,Public,Network Team,BGP design,Unique ASN per leaf,[DATE]
-EVPN_OVERLAY_ENABLED,Overlay,All,true,Enable EVPN control plane,Yes,Boolean,true|false,Public,Network Team,VXLAN requirements,Type-2 and Type-5 routes,[DATE]
-VXLAN_VNI_RANGE,Overlay,All,10000-19999,VXLAN VNI range for tenants,Yes,String,Valid VNI range,Public,Network Team,Multi-tenancy,10000 VNI capacity,[DATE]
-VLAN_COUNT,Network Segmentation,All,500,Number of VLANs supported,Yes,Integer,100-4000,Public,Network Team,Segmentation requirements,Extended via VXLAN,[DATE]
-TACACS_SERVER,Authentication,All,[tacacs.domain.com],TACACS+ server address,Yes,String,Valid FQDN,Confidential,Security Team,AAA integration,Centralized authentication,[DATE]
-TACACS_SECRET,Authentication,All,[generated],TACACS+ shared secret,Yes,String,Min 16 characters,Confidential,Security Team,AAA configuration,Securely generated,[DATE]
-SSH_ACCESS_ENABLED,Management,All,true,Enable SSH management access,Yes,Boolean,true|false,Public,Network Team,Remote management,SSHv2 only,[DATE]
-SNMP_VERSION,Monitoring,All,SNMPv3,SNMP version for monitoring,Yes,String,v2c|v3,Public,Network Team,NMS integration,SNMPv3 for security,[DATE]
-SYSLOG_SERVER,Logging,All,[syslog.domain.com],Centralized syslog server,Yes,String,Valid FQDN,Public,Network Team,Log aggregation,All switch logs,[DATE]
-NTP_SERVER,Time Sync,All,[ntp.domain.com],NTP server address,Yes,String,Valid FQDN,Public,Network Team,Time synchronization,Required for logging,[DATE]
-ZTP_ENABLED,Automation,All,true,Enable Zero Touch Provisioning,Yes,Boolean,true|false,Public,Network Team,Deployment automation,DHCP-based provisioning,[DATE]
-ANSIBLE_AUTOMATION,Automation,All,true,Enable Ansible automation,Yes,Boolean,true|false,Public,Network Team,Configuration management,Playbook-driven config,[DATE]
-OPENMANAGE_ENABLED,Management,All,true,Enable OpenManage Enterprise integration,Yes,Boolean,true|false,Public,Network Team,Centralized management,Firmware and monitoring,[DATE]
-CONFIG_BACKUP_SCHEDULE,Operations,All,Daily 02:00,Switch configuration backup schedule,Yes,String,Valid cron expression,Public,IT Operations,Backup infrastructure,Daily config backups,[DATE]
-STORM_CONTROL_ENABLED,Security,All,true,Enable broadcast storm control,Yes,Boolean,true|false,Public,Security Team,Network protection,Prevent broadcast storms,[DATE]
-MAC_LIMIT_PER_PORT,Security,All,100,Maximum MAC addresses per port,Yes,Integer,10-1000,Public,Security Team,Port security,Prevent MAC flooding,[DATE]
-LEGACY_NETWORK,Migration,All,Cisco Nexus 9K,Legacy network platform,Yes,String,Valid platform name,Public,Network Team,Migration planning,Phased migration from Cisco,[DATE]
-DELL_PROSUPPORT_LEVEL,Support,All,Mission Critical,Dell ProSupport tier,Yes,String,Basic|ProSupport|Mission Critical,Confidential,Support Team,SLA requirements,24x7 with 2-hour response,[DATE]
-
+#WIDTH:  45,14,30,30,30,45,8,12,27,14,14,12,30,12
+#ALIGN:  left,left,left,left,left,left,center,left,left,center,left,left,left,center
+Parameter Name,Category,Production,Test,DR,Description,Required,Data Type,Validation Rules,Security Level,Owner Team,Dependencies,Notes,Last Updated
+solution.name,Project,powerswitch-datacenter,powerswitch-datacenter,powerswitch-datacenter,Solution name for resource naming,Yes,String,Valid string value,Public,Network Team,,PSD solution identifier,2025-12-03
+solution.abbr,Project,psd,psd,psd,Solution abbreviation (3-4 chars),Yes,String,Valid string value,Public,Network Team,,Used in resource naming prefix,2025-12-03
+solution.provider_name,Project,dell,dell,dell,Provider organization name,Yes,String,Valid string value,Public,Network Team,,Dell provider,2025-12-03
+solution.category_name,Project,network,network,network,Solution category,Yes,String,Valid string value,Public,Network Team,,Network category,2025-12-03
+datacenter.name,Project,Primary Datacenter,Lab Environment,DR Datacenter,Datacenter facility name,Yes,String,Valid string,Public,Infrastructure,,Physical location name,2025-12-03
+ownership.cost_center,Project,CC-NET-001,CC-NET-001,CC-NET-001,Cost center,Yes,String,Valid string,Public,Infrastructure,,From SOW cost allocation,2025-12-03
+ownership.owner_email,Project,netops@company.com,netops@company.com,netops@company.com,Owner email,Yes,String,Valid email,Confidential,Infrastructure,,Team notifications,2025-12-03
+fabric.spine_switch_model,Spine Layer,Z9432F-ON,S5248F-ON,Z9432F-ON,Spine switch model,Yes,String,Valid PowerSwitch model,Public,Network Team,,32x400GbE or 128x100GbE ports,2025-12-03
+fabric.spine_switch_count,Spine Layer,4,2,2,Number of spine switches,Yes,Integer,2-8,Public,Network Team,,4-way spine for full redundancy,2025-12-03
+fabric.spine_port_config,Spine Layer,100GbE,25GbE,100GbE,Spine port speed configuration,Yes,String,100GbE|400GbE,Public,Network Team,,Breakout to 100GbE for leaf uplinks,2025-12-03
+fabric.leaf_switch_model,Leaf Layer,S5248F-ON,S5248F-ON,S5248F-ON,ToR leaf switch model,Yes,String,Valid PowerSwitch model,Public,Network Team,,48x25GbE + 8x100GbE ports,2025-12-03
+fabric.leaf_switch_count,Leaf Layer,40,4,20,Number of leaf switches (1 per rack),Yes,Integer,2-100,Public,Network Team,,40 racks in production,2025-12-03
+fabric.leaf_uplink_count,Leaf Layer,4,2,4,Number of 100GbE uplinks per leaf,Yes,Integer,2-8,Public,Network Team,,4 uplinks to 4 spines,2025-12-03
+fabric.server_port_count,Leaf Layer,48,48,48,Server-facing ports per leaf switch,Yes,Integer,24-48,Public,Network Team,,25GbE server connectivity,2025-12-03
+fabric.total_server_ports,Capacity,1920,192,960,Total server ports in fabric,Yes,Integer,100-5000,Public,Network Team,,leafs x 48 ports,2025-12-03
+fabric.bandwidth_tbps,Performance,1.6,0.2,0.8,Aggregate fabric bandwidth in Tbps,Yes,Float,0.4-6.4,Public,Network Team,,Aggregate capacity,2025-12-03
+fabric.east_west_latency_us,Performance,2,5,2,Target east-west latency in microseconds,Yes,Integer,1-10,Public,Network Team,,<2 microsecond SLA,2025-12-03
+bgp.spine_asn,Routing,65000,65100,65200,Spine BGP ASN for underlay,Yes,Integer,64512-65534,Public,Network Team,,Private ASN range,2025-12-03
+bgp.leaf_asn_start,Routing,65001,65101,65201,Leaf BGP ASN range start,Yes,Integer,64512-65534,Public,Network Team,,Unique ASN per leaf,2025-12-03
+bgp.leaf_asn_end,Routing,65040,65102,65220,Leaf BGP ASN range end,Yes,Integer,64512-65534,Public,Network Team,,Unique ASN per leaf,2025-12-03
+bgp.keepalive,Routing,3,3,3,BGP keepalive timer seconds,Yes,Integer,1-60,Public,Network Team,,Fast convergence,2025-12-03
+bgp.holdtime,Routing,9,9,9,BGP holdtime timer seconds,Yes,Integer,3-180,Public,Network Team,,3x keepalive,2025-12-03
+evpn.enabled,Overlay,true,false,true,Enable EVPN control plane,Yes,Boolean,true|false,Public,Network Team,,Type-2 and Type-5 routes,2025-12-03
+evpn.vni_range_start,Overlay,10000,10000,10000,VXLAN VNI range start,Yes,Integer,1-16777215,Public,Network Team,,VNI allocation start,2025-12-03
+evpn.vni_range_end,Overlay,19999,19999,19999,VXLAN VNI range end,Yes,Integer,1-16777215,Public,Network Team,,10000 VNI capacity,2025-12-03
+network.vlan_count,Network Segmentation,500,50,500,Number of VLANs supported,Yes,Integer,100-4000,Public,Network Team,,Extended via VXLAN,2025-12-03
+authentication.tacacs_enabled,Authentication,true,false,true,Enable TACACS+ authentication,Yes,Boolean,true|false,Public,Security Team,,Centralized authentication,2025-12-03
+authentication.tacacs_server,Authentication,[tacacs.domain.com],,[tacacs.domain.com],TACACS+ server address,No,String,Valid FQDN,Confidential,Security Team,,Central AAA server,2025-12-03
+authentication.ssh_enabled,Management,true,true,true,Enable SSH management access,Yes,Boolean,true|false,Public,Network Team,,SSHv2 only,2025-12-03
+management.snmp_version,Monitoring,v3,v3,v3,SNMP version for monitoring,Yes,String,v2c|v3,Public,Network Team,,SNMPv3 for security,2025-12-03
+management.syslog_server,Logging,[syslog.domain.com],[syslog.domain.com],[syslog.domain.com],Centralized syslog server,Yes,String,Valid FQDN,Public,Network Team,,All switch logs,2025-12-03
+management.ntp_server,Time Sync,[ntp.domain.com],[ntp.domain.com],[ntp.domain.com],NTP server address,Yes,String,Valid FQDN,Public,Network Team,,Required for logging,2025-12-03
+management.openmanage_enabled,Management,true,false,true,Enable OpenManage Enterprise integration,Yes,Boolean,true|false,Public,Network Team,,Centralized management,2025-12-03
+security.ztp_enabled,Automation,true,true,true,Enable Zero Touch Provisioning,Yes,Boolean,true|false,Public,Network Team,,DHCP-based provisioning,2025-12-03
+security.storm_control_enabled,Security,true,false,true,Enable broadcast storm control,Yes,Boolean,true|false,Public,Security Team,,Prevent broadcast storms,2025-12-03
+security.storm_control_level,Security,10,10,10,Storm control threshold percentage,Yes,Integer,1-100,Public,Security Team,,Broadcast/multicast/unicast,2025-12-03
+security.mac_limit_per_port,Security,100,1000,100,Maximum MAC addresses per port,Yes,Integer,10-1000,Public,Security Team,,Prevent MAC flooding,2025-12-03
+operations.config_backup_schedule,Operations,Daily 02:00,Weekly,Daily 02:00,Switch configuration backup schedule,Yes,String,Valid schedule,Public,IT Operations,,Daily config backups,2025-12-03
+operations.config_backup_retention,Operations,30,7,30,Configuration backup retention days,Yes,Integer,7-365,Public,IT Operations,,30 day retention,2025-12-03
+operations.ansible_automation,Automation,true,true,true,Enable Ansible automation,Yes,Boolean,true|false,Public,Network Team,,Playbook-driven config,2025-12-03
+support.dell_prosupport_level,Support,Mission Critical,ProSupport,Mission Critical,Dell ProSupport tier,Yes,String,Basic|ProSupport|Mission Critical,Confidential,Support Team,,24x7 with 2-hour response,2025-12-03
+dr.enabled,DR,false,false,true,Enable DR configuration,Yes,Boolean,true|false,Public,Operations,,DR site flag,2025-12-03
+dr.purpose,DR,primary,lab,standby,Site purpose designation,Yes,String,primary|lab|standby,Public,Operations,,DR role,2025-12-03
+dr.failover_mode,DR,n/a,n/a,manual,Failover mode,Yes,String,manual|automatic,Public,Operations,,Manual for safety,2025-12-03

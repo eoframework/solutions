@@ -1,0 +1,95 @@
+---
+# DR Environment Variables - Mist AI Network
+
+solution:
+  name: mist-ai-network
+  abbr: mist
+  environment: dr
+
+mist:
+  api_url: "https://api.mist.com/api/v1"
+  country_code: US
+  timezone: "America/New_York"
+
+site:
+  name: "DR Site"
+
+wlans:
+  corporate:
+    ssid: "DR-Corp-WiFi"
+    auth_type: eap
+    vlan_id: 200
+    band: both
+    enabled: true
+  guest:
+    ssid: "DR-Guest-WiFi"
+    auth_type: psk
+    vlan_id: 300
+    band: both
+    enabled: true
+  iot:
+    ssid: "DR-IoT-Network"
+    auth_type: psk
+    vlan_id: 400
+    band: "2.4"
+    enabled: true
+    hidden: true
+
+vlans:
+  management:
+    id: 100
+    name: "MGMT"
+    subnet: "10.200.100.0/24"
+  corporate:
+    id: 200
+    name: "Corporate"
+    subnet: "10.200.200.0/23"
+  guest:
+    id: 300
+    name: "Guest"
+    subnet: "10.200.300.0/24"
+  iot:
+    id: 400
+    name: "IoT"
+    subnet: "10.200.400.0/24"
+
+radius:
+  enabled: true
+  auth_port: 1812
+  acct_port: 1813
+
+rf:
+  band_24:
+    channels: [1, 6, 11]
+    power_min: 8
+    power_max: 18
+  band_5:
+    channels: [36, 40, 44, 48, 149, 153, 157, 161]
+    power_min: 10
+    power_max: 23
+  band_6:
+    power_min: 12
+    power_max: 24
+
+sle:
+  connect_target: 99
+  coverage_target: 95
+  capacity_target: 95
+  roaming_target: 95
+
+location:
+  enabled: true
+  accuracy: "3-5"
+
+system:
+  ntp_servers:
+    - "10.200.100.20"
+    - "10.200.100.21"
+  dns_servers:
+    - "10.200.100.10"
+    - "10.200.100.11"
+
+switch:
+  mgmt_vlan: 100
+  native_vlan: 100
+  poe_budget: 1440

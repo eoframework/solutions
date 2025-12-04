@@ -1,0 +1,202 @@
+# Dell Precision AI Workstation - Validation Playbook
+# EO Framework - Dell AI Solutions
+# Post-deployment validation and health checks
+
+---
+- name: Validate Deployment
+  hosts: ai_workstations
+  gather_facts: true
+  become: true
+  tags: [validate]
+
+  vars:
+    validation_results: []
+
+  tasks:
+    #=========================================================================
+    # SYSTEM HEALTH
+    #=========================================================================
+    - name: Check system uptime
+      ansible.builtin.command: uptime
+      register: system_uptime
+      changed_when: false
+      tags: [system]
+
+    - name: Display system uptime
+      ansible.builtin.debug:
+        msg: "{{ inventory_hostname }}: {{ system_uptime.stdout }}"
+      tags: [system]
+
+    #=========================================================================
+    # GPU VALIDATION
+    #=========================================================================
+    - name: Check GPU status with nvidia-smi
+      ansible.builtin.command: nvidia-smi --query-gpu=name,driver_version,memory.total --format=csv,noheader
+      register: gpu_status
+      changed_when: false
+      tags: [gpu]
+
+    - name: Verify GPU is detected
+      ansible.builtin.assert:
+        that:
+          - gpu_status.rc == 0
+          - "'RTX A6000' in gpu_status.stdout or 'A6000' in gpu_status.stdout"
+        fail_msg: "GPU validation failed on {{ inventory_hostname }}"
+        success_msg: "GPU detected: {{ gpu_status.stdout }}"
+      tags: [gpu]
+
+    - name: Check GPU temperature
+      ansible.builtin.command: nvidia-smi --query-gpu=temperature.gpu --format=csv,noheader
+      register: gpu_temp
+      changed_when: false
+      tags: [gpu]
+
+    - name: Display GPU temperature
+      ansible.builtin.debug:
+        msg: "{{ inventory_hostname }} GPU temperature: {{ gpu_temp.stdout }}°C"
+      tags: [gpu]
+
+    #=========================================================================
+    # CUDA VALIDATION
+    #=========================================================================
+    - name: Verify CUDA installation
+      ansible.builtin.command: nvcc --version
+      register: cuda_version
+      changed_when: false
+      tags: [cuda]
+
+    - name: Verify CUDA version matches expected
+      ansible.builtin.assert:
+        that:
+          - cuda_version.rc == 0
+          - "'12.2' in cuda_version.stdout"
+        fail_msg: "CUDA validation failed on {{ inventory_hostname }}"
+        success_msg: "CUDA {{ software.cuda_version }} verified"
+      tags: [cuda]
+
+    #=========================================================================
+    # ML FRAMEWORK VALIDATION
+    #=========================================================================
+    - name: Test PyTorch GPU access
+      ansible.builtin.shell: |
+        python3 -c "import torch; assert torch.cuda.is_available(), 'CUDA not available'; print(f'PyTorch {torch.__version__} - GPU: {torch.cuda.get_device_name(0)}')"
+      register: pytorch_test
+      changed_when: false
+      become: false
+      tags: [pytorch, ml]
+
+    - name: Display PyTorch validation
+      ansible.builtin.debug:
+        msg: "{{ inventory_hostname }}: {{ pytorch_test.stdout }}"
+      tags: [pytorch, ml]
+
+    - name: Test TensorFlow GPU access
+      ansible.builtin.shell: |
+        python3 -c "import tensorflow as tf; gpus = tf.config.list_physical_devices('GPU'); assert len(gpus) > 0, 'No GPUs detected'; print(f'TensorFlow {tf.__version__} - GPUs: {len(gpus)}')"
+      register: tensorflow_test
+      changed_when: false
+      become: false
+      tags: [tensorflow, ml]
+
+    - name: Display TensorFlow validation
+      ansible.builtin.debug:
+        msg: "{{ inventory_hostname }}: {{ tensorflow_test.stdout }}"
+      tags: [tensorflow, ml]
+
+    #=========================================================================
+    # STORAGE VALIDATION
+    #=========================================================================
+    - name: Check NFS mounts
+      ansible.builtin.command: df -h -t nfs4
+      register: nfs_mounts
+      changed_when: false
+      tags: [storage, nfs]
+
+    - name: Verify PowerScale mount exists
+      ansible.builtin.assert:
+        that:
+          - nfs_mounts.rc == 0
+          - "storage.nfs_mount_point in nfs_mounts.stdout"
+        fail_msg: "PowerScale NFS mount not found on {{ inventory_hostname }}"
+        success_msg: "PowerScale NFS mounted at {{ storage.nfs_mount_point }}"
+      tags: [storage, nfs]
+
+    - name: Display NFS mount status
+      ansible.builtin.debug:
+        var: nfs_mounts.stdout_lines
+      tags: [storage, nfs]
+
+    #=========================================================================
+    # DISK SPACE VALIDATION
+    #=========================================================================
+    - name: Check local NVMe disk space
+      ansible.builtin.command: df -h /
+      register: disk_space
+      changed_when: false
+      tags: [disk]
+
+    - name: Display disk space
+      ansible.builtin.debug:
+        var: disk_space.stdout_lines
+      tags: [disk]
+
+    #=========================================================================
+    # NETWORK VALIDATION
+    #=========================================================================
+    - name: Test network connectivity to PowerScale
+      ansible.builtin.command: ping -c 3 {{ storage.powerscale_hostname }}
+      register: ping_powerscale
+      changed_when: false
+      ignore_errors: true
+      tags: [network]
+
+    - name: Verify PowerScale connectivity
+      ansible.builtin.assert:
+        that:
+          - ping_powerscale.rc == 0
+        fail_msg: "Cannot reach PowerScale on {{ inventory_hostname }}"
+        success_msg: "PowerScale connectivity verified"
+      ignore_errors: true
+      tags: [network]
+
+    #=========================================================================
+    # MONITORING VALIDATION
+    #=========================================================================
+    - name: Check Datadog agent status
+      ansible.builtin.systemd:
+        name: datadog-agent
+        state: started
+      register: datadog_status
+      when: monitoring.datadog_enabled | default(false)
+      tags: [monitoring]
+
+    - name: Display monitoring status
+      ansible.builtin.debug:
+        msg: "Datadog agent is running on {{ inventory_hostname }}"
+      when:
+        - monitoring.datadog_enabled | default(false)
+        - datadog_status.status.ActiveState == 'active'
+      tags: [monitoring]
+
+#=============================================================================
+# VALIDATION SUMMARY
+#=============================================================================
+- name: Generate Validation Summary
+  hosts: localhost
+  gather_facts: true
+  tags: [validate, summary]
+
+  tasks:
+    - name: Display validation summary
+      ansible.builtin.debug:
+        msg: |
+          ================================================================
+          Dell Precision AI Workstation - Validation Summary
+          ================================================================
+          Environment: {{ environment | default('production') }}
+          Timestamp: {{ ansible_date_time.iso8601 }}
+
+          Workstations Validated: {{ groups['ai_workstations'] | default([]) | length }}
+
+          Validation Complete - Review output above for any failures
+          ================================================================

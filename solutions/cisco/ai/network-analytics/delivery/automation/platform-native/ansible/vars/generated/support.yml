@@ -1,0 +1,13 @@
+#------------------------------------------------------------------------------
+# Support Configuration
+#------------------------------------------------------------------------------
+# Generated from configuration.csv on 2025-12-02 23:53:43
+#
+# To regenerate: python generate-ansible-vars.py /path/to/solution
+# DO NOT EDIT - Changes will be overwritten on regeneration
+#------------------------------------------------------------------------------
+
+support:
+  escalation_contact: network-escalation@client.local
+  smartnet_contract: '[contract-number]'
+  tac_severity: 2

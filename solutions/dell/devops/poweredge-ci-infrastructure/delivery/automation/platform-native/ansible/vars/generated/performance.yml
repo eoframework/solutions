@@ -1,0 +1,13 @@
+#------------------------------------------------------------------------------
+# Performance Configuration
+#------------------------------------------------------------------------------
+# Generated from configuration.csv
+#
+# To regenerate: python generate-ansible-vars.py /path/to/solution
+# DO NOT EDIT - Changes will be overwritten on regeneration
+#------------------------------------------------------------------------------
+
+performance:
+  daily_build_volume: 5000
+  concurrent_builds: 24
+  build_queue_target_min: 5
