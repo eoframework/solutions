@@ -1,14 +1,15 @@
 #------------------------------------------------------------------------------
-# Organization Configuration - DR Environment
+# Nat Configuration - DR Environment
 #------------------------------------------------------------------------------
 # Generated from configuration on 2025-12-03 22:21:04
 #
 # To regenerate: python generate-tfvars.py /path/to/solution
 #------------------------------------------------------------------------------
 
-organization = {
-  billing_account_id = "[BILLING_ACCOUNT_ID]"  # Billing account for all projects
-  display_name = "Example Organization DR"  # Organization display name
-  domain = "example.com"  # Primary domain for Cloud Identity
-  org_id = "[ORG_ID]"  # GCP Organization resource identifier
+nat = {
+  cloud_router_asn = 64514  # Cloud Router ASN for BGP
+  enabled = true  # Enable Cloud NAT
+  gateway_count = 3  # Number of NAT gateways per region
+  logging_enabled = true  # Enable NAT logging
+  min_ports_per_vm = 64  # Minimum ports per VM
 }

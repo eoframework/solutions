@@ -1,31 +1,15 @@
 #------------------------------------------------------------------------------
-# Monitoring Configuration - Test
+# Monitoring Configuration - TEST Environment
 #------------------------------------------------------------------------------
-# Generated from configuration.csv Test column
-# Minimal monitoring for test environment
+# Generated from configuration on 2025-12-03 22:21:03
+#
+# To regenerate: python generate-tfvars.py /path/to/solution
 #------------------------------------------------------------------------------
-
-logging = {
-  sink_type                = "BigQuery"
-  retention_days           = 30
-  bigquery_retention_years = 1
-  volume_gb_month          = 100
-  enable_audit_logs        = true
-  enable_data_access_logs  = false
-}
 
 monitoring = {
-  dashboard_count       = 2
-  alert_policy_count    = 3
-  notification_channels = ["email"]
-  uptime_check_enabled  = false
-  log_based_metrics     = false
-}
-
-budget = {
-  enabled            = false
-  monthly_amount     = 5000
-  alert_thresholds   = [80, 100]
-  currency           = "USD"
-  notification_email = "finops@example.com"
+  alert_policy_count = 3  # Number of alert policies
+  dashboard_count = 2  # Number of monitoring dashboards
+  log_based_metrics = false  # Enable log-based metrics
+  notification_channels = ["email"]  # Notification channels
+  uptime_check_enabled = false  # Enable uptime checks
 }

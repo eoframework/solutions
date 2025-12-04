@@ -147,14 +147,21 @@ variable "identity" {
 variable "security" {
   description = "Security configuration"
   type = object({
-    scc_tier                  = string
-    scc_asset_discovery       = bool
-    chronicle_enabled         = bool
-    chronicle_ingestion_volume = string
-    chronicle_retention       = string
-    cloud_armor_enabled       = bool
-    cloud_ids_enabled         = bool
-    cloud_ids_endpoints       = number
+    scc_tier                       = string
+    scc_asset_discovery            = bool
+    scc_public_resource_detection  = bool
+    scc_notifications_enabled      = bool
+    chronicle_enabled              = bool
+    chronicle_ingestion_volume     = string
+    chronicle_retention            = string
+    cloud_armor_enabled            = bool
+    cloud_armor_owasp_rules        = bool
+    cloud_armor_rate_limiting      = bool
+    rate_limit_requests_per_minute = number
+    rate_limit_ban_duration_sec    = number
+    blocked_countries              = list(string)
+    cloud_ids_enabled              = bool
+    cloud_ids_endpoints            = number
   })
 }
 
@@ -228,11 +235,13 @@ variable "monitoring" {
 variable "budget" {
   description = "Budget configuration"
   type = object({
-    enabled            = bool
-    monthly_amount     = number
-    alert_thresholds   = list(number)
-    currency           = string
-    notification_email = string
+    enabled                = bool
+    monthly_amount         = number
+    alert_thresholds       = list(number)
+    currency               = string
+    notification_email     = string
+    enable_forecast_alerts = bool
+    forecast_threshold     = number
   })
 }
 
@@ -255,11 +264,22 @@ variable "automation" {
 variable "dr" {
   description = "Disaster recovery configuration"
   type = object({
-    enabled                  = bool
-    strategy                 = string
-    rto_minutes              = number
-    rpo_minutes              = number
-    failover_mode            = string
-    cross_region_replication = bool
+    enabled                   = bool
+    strategy                  = string
+    rto_minutes               = number
+    rpo_minutes               = number
+    failover_mode             = string
+    cross_region_replication  = bool
+    archive_after_days        = number
+    coldline_after_days       = number
+    enable_health_check       = bool
+    health_check_interval_sec = number
+    health_check_timeout_sec  = number
+    healthy_threshold         = number
+    unhealthy_threshold       = number
+    health_check_port         = number
+    health_check_path         = string
+    enable_dr_kms             = bool
+    key_rotation_days         = number
   })
 }

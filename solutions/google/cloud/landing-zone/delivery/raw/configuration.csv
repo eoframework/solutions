@@ -61,6 +61,13 @@ security.chronicle_enabled,Security,true,false,true,Enable Chronicle SIEM,Yes,Bo
 security.chronicle_ingestion_volume,Security,100 GB/month,0,100 GB/month,Monthly log ingestion volume,Yes,String,GB/month,Public,Security,,Matches SOW allocation,2025-12-03
 security.chronicle_retention,Security,12 months,0,12 months,Log retention period,Yes,String,1 to 12 months,Public,Security,,Compliance requirement,2025-12-03
 security.cloud_armor_enabled,Security,true,false,true,Enable Cloud Armor,Yes,Boolean,true|false,Public,Security,,DDoS and WAF protection,2025-12-03
+security.cloud_armor_owasp_rules,Security,true,false,true,Enable OWASP ModSecurity rules,Yes,Boolean,true|false,Public,Security,,XSS/SQLi/LFI protection,2025-12-03
+security.cloud_armor_rate_limiting,Security,true,false,true,Enable rate limiting rules,Yes,Boolean,true|false,Public,Security,,DDoS mitigation,2025-12-03
+security.rate_limit_requests_per_minute,Security,1000,0,1000,Rate limit threshold (requests/min),Yes,Integer,0 to 10000,Public,Security,,Per-IP rate limit,2025-12-03
+security.rate_limit_ban_duration_sec,Security,600,0,600,Rate limit ban duration (seconds),Yes,Integer,0 to 3600,Public,Security,,Temporary ban period,2025-12-03
+security.blocked_countries,Security,"[]","[]","[]",Blocked country codes,Yes,List(String),ISO 3166-1 alpha-2,Public,Security,,Geo-blocking list,2025-12-03
+security.scc_public_resource_detection,Security,true,false,true,Enable public resource detection,Yes,Boolean,true|false,Public,Security,,Find exposed resources,2025-12-03
+security.scc_notifications_enabled,Security,false,false,false,Enable SCC Pub/Sub notifications,Yes,Boolean,true|false,Public,Security,,Real-time alerts,2025-12-03
 security.cloud_ids_enabled,Security,true,false,true,Enable Cloud IDS,Yes,Boolean,true|false,Public,Security,,Network intrusion detection,2025-12-03
 security.cloud_ids_endpoints,Security,3,0,3,Number of Cloud IDS endpoints,Yes,Integer,0 to 10,Public,Security,,Per region,2025-12-03
 org_policy.allowed_locations,Org Policy,"[""in:us-locations""]","[""in:us-locations""]","[""in:us-locations""]",Allowed resource locations,Yes,List(String),Location policy values,Public,Security,,Data residency,2025-12-03
@@ -91,6 +98,8 @@ budget.monthly_amount,Budget,50000,5000,25000,Monthly budget limit (USD),Yes,Int
 budget.alert_thresholds,Budget,"[50, 80, 100]","[80, 100]","[50, 80, 100]",Budget alert threshold percentages,Yes,List(Integer),0 to 200,Public,Finance,,Alert triggers,2025-12-03
 budget.currency,Budget,USD,USD,USD,Budget currency,Yes,String,Valid currency code,Public,Finance,,USD default,2025-12-03
 budget.notification_email,Budget,finops@example.com,finops@example.com,finops@example.com,Budget notification email,Yes,String,Valid email,Confidential,Finance,,Alert recipient,2025-12-03
+budget.enable_forecast_alerts,Budget,true,false,true,Enable forecast-based alerts,Yes,Boolean,true|false,Public,Finance,,Predictive cost alerts,2025-12-03
+budget.forecast_threshold,Budget,100,100,100,Forecast alert threshold percentage,Yes,Integer,50 to 200,Public,Finance,,Forecast trigger level,2025-12-03
 automation.terraform_version,Automation,>= 1.6.0,>= 1.6.0,>= 1.6.0,Minimum Terraform version,Yes,String,Semantic versioning,Public,Development,,CFT compatibility,2025-12-03
 automation.state_bucket_name,Automation,terraform-state-glz-prod,terraform-state-glz-test,terraform-state-glz-dr,Terraform state bucket name,Yes,String,Valid bucket name,Public,Development,,Globally unique,2025-12-03
 automation.state_bucket_location,Automation,US,US,US,State bucket location,Yes,String,Valid GCS location,Public,Development,,Multi-region for HA,2025-12-03
@@ -101,3 +110,14 @@ dr.rto_minutes,DR,240,480,240,Recovery Time Objective (minutes),Yes,Integer,Posi
 dr.rpo_minutes,DR,60,1440,60,Recovery Point Objective (minutes),Yes,Integer,Positive integer,Public,Operations,,Max data loss window,2025-12-03
 dr.failover_mode,DR,manual,manual,manual,Failover mode,Yes,String,manual|automatic,Public,Operations,,Manual for safety,2025-12-03
 dr.cross_region_replication,DR,true,false,true,Enable cross-region replication,Yes,Boolean,true|false,Public,Operations,,Data redundancy,2025-12-03
+dr.archive_after_days,DR,90,0,90,Move to Archive storage after days,Yes,Integer,0 to 365,Public,Operations,,Cost optimization lifecycle,2025-12-03
+dr.coldline_after_days,DR,365,0,365,Move to Coldline storage after days,Yes,Integer,0 to 730,Public,Operations,,Long-term retention,2025-12-03
+dr.enable_health_check,DR,true,false,true,Enable DR health check,Yes,Boolean,true|false,Public,Operations,,Failover readiness,2025-12-03
+dr.health_check_interval_sec,DR,5,0,5,Health check interval (seconds),Yes,Integer,1 to 300,Public,Operations,,Check frequency,2025-12-03
+dr.health_check_timeout_sec,DR,5,0,5,Health check timeout (seconds),Yes,Integer,1 to 60,Public,Operations,,Response timeout,2025-12-03
+dr.healthy_threshold,DR,2,0,2,Consecutive healthy checks required,Yes,Integer,1 to 10,Public,Operations,,Recovery threshold,2025-12-03
+dr.unhealthy_threshold,DR,3,0,3,Consecutive unhealthy checks for failover,Yes,Integer,1 to 10,Public,Operations,,Failover threshold,2025-12-03
+dr.health_check_port,DR,80,0,80,Health check port,Yes,Integer,1 to 65535,Public,Operations,,Service port,2025-12-03
+dr.health_check_path,DR,/health,,/health,Health check endpoint path,Yes,String,Valid URL path,Public,Operations,,Health endpoint,2025-12-03
+dr.enable_dr_kms,DR,true,false,true,Enable DR KMS key,Yes,Boolean,true|false,Public,Security,,Cross-region encryption,2025-12-03
+dr.key_rotation_days,DR,90,0,90,DR KMS key rotation period (days),Yes,Integer,30 to 365,Public,Security,,Key rotation schedule,2025-12-03

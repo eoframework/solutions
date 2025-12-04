@@ -1,29 +1,14 @@
 #------------------------------------------------------------------------------
-# Organization Configuration - Test
+# Organization Configuration - TEST Environment
 #------------------------------------------------------------------------------
-# Generated from configuration.csv Test column
+# Generated from configuration on 2025-12-03 22:21:03
+#
+# To regenerate: python generate-tfvars.py /path/to/solution
 #------------------------------------------------------------------------------
 
 organization = {
-  org_id             = "[ORG_ID]"
-  domain             = "example.com"
-  billing_account_id = "[BILLING_ACCOUNT_ID]"
-  display_name       = "Example Organization Test"
-}
-
-folders = {
-  dev_display_name     = "Development"
-  staging_display_name = "Staging"
-  prod_display_name    = "Production"
-  shared_display_name  = "Shared Services"
-  sandbox_display_name = "Sandbox"
-}
-
-projects = {
-  host_project_name       = "host-vpc-test"
-  logging_project_name    = "logging-test"
-  security_project_name   = "security-test"
-  monitoring_project_name = "monitoring-test"
-  initial_count           = 5
-  team_count              = 3
+  billing_account_id = "[BILLING_ACCOUNT_ID]"  # Billing account for all projects
+  display_name = "Example Organization Test"  # Organization display name
+  domain = "example.com"  # Primary domain for Cloud Identity
+  org_id = "[ORG_ID]"  # GCP Organization resource identifier
 }

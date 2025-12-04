@@ -218,44 +218,44 @@ module "best_practices" {
 
   notification_channels = module.monitoring.email_notification_channel_id != null ? [module.monitoring.email_notification_channel_id] : []
 
-  # Budget Configuration (Cost Optimization)
+  # Budget Configuration (Cost Optimization) - from tfvars
   budget = {
     enabled                = var.budget.enabled
     monthly_amount         = var.budget.monthly_amount
     currency               = var.budget.currency
     alert_thresholds       = var.budget.alert_thresholds
-    enable_forecast_alerts = true
-    forecast_threshold     = 100
+    enable_forecast_alerts = var.budget.enable_forecast_alerts
+    forecast_threshold     = var.budget.forecast_threshold
   }
 
-  # Security Configuration
+  # Security Configuration - from tfvars
   security = {
     scc_tier                       = var.security.scc_tier
-    scc_public_resource_detection  = true
-    scc_notifications_enabled      = false
+    scc_public_resource_detection  = var.security.scc_public_resource_detection
+    scc_notifications_enabled      = var.security.scc_notifications_enabled
     cloud_armor_enabled            = var.security.cloud_armor_enabled
-    cloud_armor_owasp_rules        = true
-    cloud_armor_rate_limiting      = true
-    rate_limit_requests_per_minute = 1000
-    rate_limit_ban_duration_sec    = 600
-    blocked_countries              = []
+    cloud_armor_owasp_rules        = var.security.cloud_armor_owasp_rules
+    cloud_armor_rate_limiting      = var.security.cloud_armor_rate_limiting
+    rate_limit_requests_per_minute = var.security.rate_limit_requests_per_minute
+    rate_limit_ban_duration_sec    = var.security.rate_limit_ban_duration_sec
+    blocked_countries              = var.security.blocked_countries
   }
 
-  # DR Configuration (Reliability)
+  # DR Configuration (Reliability) - from tfvars
   dr = {
     enabled                   = var.dr.enabled
     cross_region_replication  = var.dr.cross_region_replication
-    archive_after_days        = 90
-    coldline_after_days       = 365
-    enable_health_check       = true
-    health_check_interval_sec = 5
-    health_check_timeout_sec  = 5
-    healthy_threshold         = 2
-    unhealthy_threshold       = 3
-    health_check_port         = 80
-    health_check_path         = "/health"
-    enable_dr_kms             = true
-    key_rotation_days         = 90
+    archive_after_days        = var.dr.archive_after_days
+    coldline_after_days       = var.dr.coldline_after_days
+    enable_health_check       = var.dr.enable_health_check
+    health_check_interval_sec = var.dr.health_check_interval_sec
+    health_check_timeout_sec  = var.dr.health_check_timeout_sec
+    healthy_threshold         = var.dr.healthy_threshold
+    unhealthy_threshold       = var.dr.unhealthy_threshold
+    health_check_port         = var.dr.health_check_port
+    health_check_path         = var.dr.health_check_path
+    enable_dr_kms             = var.dr.enable_dr_kms
+    key_rotation_days         = var.dr.key_rotation_days
   }
 
   depends_on = [module.projects, module.monitoring]

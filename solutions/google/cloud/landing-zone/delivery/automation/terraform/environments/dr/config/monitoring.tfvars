@@ -1,31 +1,15 @@
 #------------------------------------------------------------------------------
-# Monitoring Configuration - DR
+# Monitoring Configuration - DR Environment
 #------------------------------------------------------------------------------
-# Generated from configuration.csv DR column
-# Full monitoring for DR site
+# Generated from configuration on 2025-12-03 22:21:04
+#
+# To regenerate: python generate-tfvars.py /path/to/solution
 #------------------------------------------------------------------------------
-
-logging = {
-  sink_type                = "BigQuery"
-  retention_days           = 365
-  bigquery_retention_years = 7
-  volume_gb_month          = 250
-  enable_audit_logs        = true
-  enable_data_access_logs  = true
-}
 
 monitoring = {
-  dashboard_count       = 4
-  alert_policy_count    = 5
-  notification_channels = ["email", "pagerduty"]
-  uptime_check_enabled  = true
-  log_based_metrics     = true
-}
-
-budget = {
-  enabled            = true
-  monthly_amount     = 25000
-  alert_thresholds   = [50, 80, 100]
-  currency           = "USD"
-  notification_email = "finops@example.com"
+  alert_policy_count = 5  # Number of alert policies
+  dashboard_count = 4  # Number of monitoring dashboards
+  log_based_metrics = true  # Enable log-based metrics
+  notification_channels = ["email", "pagerduty"]  # Notification channels
+  uptime_check_enabled = true  # Enable uptime checks
 }
