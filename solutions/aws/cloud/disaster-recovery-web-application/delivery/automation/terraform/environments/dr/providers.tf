@@ -1,0 +1,41 @@
+#------------------------------------------------------------------------------
+# DR Web Application - DR Environment Providers
+#------------------------------------------------------------------------------
+# Secondary region deployment for failover
+
+terraform {
+  required_version = ">= 1.6.0"
+
+  backend "s3" {
+    # Values loaded from backend.tfvars via -backend-config flag
+    # Run setup/backend/state-backend.sh to create backend resources
+  }
+
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = ">= 5.0"
+    }
+  }
+}
+
+# DR region as primary for this environment
+provider "aws" {
+  region  = var.aws.region  # us-west-2 for DR
+  profile = var.aws.profile != "" ? var.aws.profile : null
+
+  default_tags {
+    tags = local.common_tags
+  }
+}
+
+# Primary region provider for cross-region access
+provider "aws" {
+  alias   = "primary"
+  region  = var.aws.dr_region  # us-east-1 (primary)
+  profile = var.aws.profile != "" ? var.aws.profile : null
+
+  default_tags {
+    tags = local.common_tags
+  }
+}

@@ -1,71 +1,86 @@
-#WIDTH: 28,18,12,30,48,10,12,33,16,18,24,42,12
-#ALIGN: left,left,center,left,left,center,left,left,center,left,left,left,center
-Parameter Name,Category,Environment,Default Value,Description,Required,Data Type,Validation Rules,Security Level,Owner Team,Dependencies,Notes,Last Updated
-DR_SOLUTION_NAME,Application,All,AWS DR Web Application,Disaster recovery solution identifier for logging,Yes,String,Max 50 characters,Public,DR Team,None,Used in CloudWatch metrics and dashboards,[DATE]
-DR_VERSION,Application,All,1.0.0,Current DR solution version,Yes,String,Semantic versioning format,Public,DR Team,None,Updated with configuration changes,[DATE]
-DR_ENVIRONMENT,Application,All,production,Deployment environment identifier,Yes,String,development|staging|production,Public,Operations,None,Controls failover behavior and alerting,[DATE]
-PRIMARY_REGION,AWS,All,us-east-1,Primary AWS region for production workloads,Yes,String,Valid AWS region code,Public,Infrastructure,Service availability,Main operational region,[DATE]
-DR_REGION,AWS,All,us-west-2,Disaster recovery AWS region,Yes,String,Valid AWS region code,Public,Infrastructure,Service availability,Secondary region for failover,[DATE]
-AWS_ACCOUNT_ID,AWS,All,[account-id],AWS account ID for cross-region references,Yes,String,12-digit AWS account ID,Confidential,Infrastructure,IAM policies,Used for ARN construction,[DATE]
-RTO_TARGET_MINUTES,DR Planning,All,15,Recovery Time Objective target in minutes,Yes,Integer,5-60,Public,DR Team,Health check intervals,Business requirement per SOW,[DATE]
-RPO_TARGET_MINUTES,DR Planning,All,60,Recovery Point Objective target in minutes,Yes,Integer,15-240,Public,DR Team,Replication frequency,Maximum acceptable data loss per SOW,[DATE]
-ROUTE53_HOSTED_ZONE_ID,DNS,All,[hosted-zone-id],Route 53 hosted zone for DNS failover,Yes,String,Valid hosted zone ID format,Confidential,Network Team,Domain registration,Must own the domain,[DATE]
-PRIMARY_DOMAIN,DNS,All,[app.example.com],Primary application domain name,Yes,String,Valid FQDN format,Public,Network Team,SSL certificates,Must match ACM certificate,[DATE]
-HEALTH_CHECK_PATH,DNS,All,/health,Application health check endpoint for Route 53,Yes,String,Valid URL path,Public,Development,Application endpoint,Must return 200 when healthy,[DATE]
-HEALTH_CHECK_INTERVAL,DNS,All,30,Route 53 health check interval in seconds,Yes,Integer,10-300,Public,Network Team,RTO_TARGET_MINUTES,30 seconds provides balance of speed and cost,[DATE]
-HEALTH_CHECK_FAILURE_THRESHOLD,DNS,All,3,Consecutive failures before DNS failover,Yes,Integer,1-10,Public,Network Team,Health check interval,3 failures = 90 seconds detection,[DATE]
-FAILOVER_POLICY,DNS,All,PRIMARY,Active Route 53 failover policy,Yes,String,PRIMARY|SECONDARY,Public,Network Team,Health checks,Set to SECONDARY during DR activation,[DATE]
-PRIMARY_VPC_ID,Network,Primary,[vpc-id],Primary region VPC identifier,Yes,String,Valid VPC ID format,Confidential,Network Team,VPC creation,Existing production VPC,[DATE]
-PRIMARY_VPC_CIDR,Network,Primary,10.0.0.0/16,Primary region VPC CIDR block,Yes,String,Valid CIDR notation,Public,Network Team,IP planning,Must not overlap with DR VPC,[DATE]
-DR_VPC_ID,Network,DR,[vpc-id],DR region VPC identifier,Yes,String,Valid VPC ID format,Confidential,Network Team,VPC creation,Created during DR setup,[DATE]
-DR_VPC_CIDR,Network,DR,10.1.0.0/16,DR region VPC CIDR block,Yes,String,Valid CIDR notation,Public,Network Team,IP planning,Non-overlapping with primary,[DATE]
-PRIMARY_PUBLIC_SUBNET_1,Network,Primary,10.0.1.0/24,Primary region public subnet AZ-a,Yes,String,Valid CIDR notation,Public,Network Team,PRIMARY_VPC_CIDR,ALB deployment subnet,[DATE]
-PRIMARY_PUBLIC_SUBNET_2,Network,Primary,10.0.2.0/24,Primary region public subnet AZ-b,Yes,String,Valid CIDR notation,Public,Network Team,PRIMARY_VPC_CIDR,Multi-AZ for high availability,[DATE]
-PRIMARY_PRIVATE_SUBNET_1,Network,Primary,10.0.10.0/24,Primary region private subnet AZ-a,Yes,String,Valid CIDR notation,Public,Network Team,PRIMARY_VPC_CIDR,EC2 application instances,[DATE]
-PRIMARY_PRIVATE_SUBNET_2,Network,Primary,10.0.11.0/24,Primary region private subnet AZ-b,Yes,String,Valid CIDR notation,Public,Network Team,PRIMARY_VPC_CIDR,Multi-AZ for high availability,[DATE]
-DR_PUBLIC_SUBNET_1,Network,DR,10.1.1.0/24,DR region public subnet AZ-a,Yes,String,Valid CIDR notation,Public,Network Team,DR_VPC_CIDR,DR ALB deployment subnet,[DATE]
-DR_PUBLIC_SUBNET_2,Network,DR,10.1.2.0/24,DR region public subnet AZ-b,Yes,String,Valid CIDR notation,Public,Network Team,DR_VPC_CIDR,Multi-AZ for high availability,[DATE]
-DR_PRIVATE_SUBNET_1,Network,DR,10.1.10.0/24,DR region private subnet AZ-a,Yes,String,Valid CIDR notation,Public,Network Team,DR_VPC_CIDR,DR EC2 application instances,[DATE]
-DR_PRIVATE_SUBNET_2,Network,DR,10.1.11.0/24,DR region private subnet AZ-b,Yes,String,Valid CIDR notation,Public,Network Team,DR_VPC_CIDR,Multi-AZ for high availability,[DATE]
-AURORA_CLUSTER_ID,Database,All,[aurora-cluster-id],Aurora Global Database cluster identifier,Yes,String,Valid Aurora cluster ID,Confidential,Database Team,Aurora creation,Global database primary cluster,[DATE]
-AURORA_ENGINE,Database,All,aurora-mysql,Aurora database engine type,Yes,String,aurora-mysql|aurora-postgresql,Public,Database Team,Application compatibility,Aurora MySQL 8.0 compatible,[DATE]
-AURORA_ENGINE_VERSION,Database,All,8.0.mysql_aurora.3.04.0,Aurora database engine version,Yes,String,Valid Aurora version,Public,Database Team,AURORA_ENGINE,Use latest stable LTS version,[DATE]
-AURORA_INSTANCE_CLASS,Database,All,db.r6g.large,Aurora instance class for primary region,Yes,String,Valid DB instance class,Public,Database Team,Performance requirements,Right-sized for 200 concurrent users,[DATE]
-AURORA_DR_INSTANCE_CLASS,Database,DR,db.r6g.large,Aurora instance class for DR replica,Yes,String,Valid DB instance class,Public,Database Team,Failover capacity,Match primary for failover parity,[DATE]
-AURORA_BACKUP_RETENTION,Database,All,7,Aurora backup retention period in days,Yes,Integer,1-35,Public,Database Team,Compliance requirements,7 days per standard policy,[DATE]
-AURORA_GLOBAL_CLUSTER_ID,Database,All,[global-cluster-id],Aurora Global Database global cluster ID,Yes,String,Valid global cluster ID,Confidential,Database Team,Aurora cluster,Cross-region replication parent,[DATE]
-S3_PRIMARY_BUCKET,Storage,Primary,[bucket-name-primary],Primary region S3 bucket for application data,Yes,String,Valid S3 bucket name,Confidential,Storage Team,S3 replication,Must be globally unique,[DATE]
-S3_DR_BUCKET,Storage,DR,[bucket-name-dr],DR region S3 bucket for replicated data,Yes,String,Valid S3 bucket name,Confidential,Storage Team,S3 replication,Must be globally unique,[DATE]
-S3_REPLICATION_ENABLED,Storage,All,true,Enable S3 cross-region replication,Yes,Boolean,true|false,Public,Storage Team,S3_DR_BUCKET,Required for DR data protection,[DATE]
-S3_REPLICATION_TIME_CONTROL,Storage,All,true,Enable S3 Replication Time Control for SLA,Yes,Boolean,true|false,Public,Storage Team,RPO_TARGET_MINUTES,Ensures 15-minute replication SLA,[DATE]
-S3_VERSIONING,Storage,All,Enabled,S3 bucket versioning status,Yes,String,Enabled|Suspended,Public,Storage Team,S3 replication,Required for CRR,[DATE]
-ALB_PRIMARY_ARN,Compute,Primary,[alb-arn],Primary region Application Load Balancer ARN,Yes,String,Valid ALB ARN,Confidential,Infrastructure,VPC configuration,Target for Route 53 health check,[DATE]
-ALB_DR_ARN,Compute,DR,[alb-arn],DR region Application Load Balancer ARN,Yes,String,Valid ALB ARN,Confidential,Infrastructure,DR VPC configuration,Secondary target for failover,[DATE]
-ASG_PRIMARY_NAME,Compute,Primary,[asg-name],Primary region Auto Scaling Group name,Yes,String,Valid ASG name,Public,Infrastructure,Launch template,Production application instances,[DATE]
-ASG_DR_NAME,Compute,DR,[asg-name],DR region Auto Scaling Group name,Yes,String,Valid ASG name,Public,Infrastructure,DR launch template,Failover application instances,[DATE]
-ASG_PRIMARY_MIN,Compute,Primary,2,Minimum instances in primary ASG,Yes,Integer,1-10,Public,Infrastructure,High availability,Ensure redundancy in primary,[DATE]
-ASG_PRIMARY_MAX,Compute,Primary,10,Maximum instances in primary ASG,Yes,Integer,5-100,Public,Infrastructure,Cost management,Scale for peak load,[DATE]
-ASG_PRIMARY_DESIRED,Compute,Primary,3,Desired capacity for primary ASG,Yes,Integer,2-50,Public,Infrastructure,Performance,Baseline capacity,[DATE]
-ASG_DR_MIN,Compute,DR,0,Minimum instances in DR ASG (pilot light),Yes,Integer,0-5,Public,Infrastructure,Cost optimization,Zero when inactive,[DATE]
-ASG_DR_MAX,Compute,DR,10,Maximum instances in DR ASG,Yes,Integer,2-100,Public,Infrastructure,Failover capacity,Match primary max for full capacity,[DATE]
-ASG_DR_DESIRED,Compute,DR,1,Desired capacity for DR ASG standby mode,Yes,Integer,0-10,Public,Infrastructure,Warm standby,Minimal for faster activation,[DATE]
-INSTANCE_TYPE,Compute,All,t3.medium,EC2 instance type for application servers,Yes,String,Valid EC2 instance type,Public,Infrastructure,Performance requirements,Right-sized for application,[DATE]
-KMS_KEY_PRIMARY,Security,Primary,[kms-key-id],KMS key ID for primary region encryption,Yes,String,Valid KMS key ID,Secret,Security Team,Encryption at rest,For S3 and EBS encryption,[DATE]
-KMS_KEY_DR,Security,DR,[kms-key-id],KMS key ID for DR region encryption,Yes,String,Valid KMS key ID,Secret,Security Team,Encryption at rest,Separate key per region,[DATE]
-SSL_CERTIFICATE_ARN,Security,All,[acm-cert-arn],ACM certificate ARN for HTTPS,Yes,String,Valid ACM certificate ARN,Confidential,Security Team,Domain validation,Must cover primary domain and DR,[DATE]
-IAM_ROLE_EC2,Security,All,[iam-role-arn],IAM role for EC2 instances,Yes,String,Valid IAM role ARN,Confidential,Security Team,IAM configuration,Least privilege principle,[DATE]
-IAM_ROLE_REPLICATION,Security,All,[iam-role-arn],IAM role for S3 cross-region replication,Yes,String,Valid IAM role ARN,Confidential,Security Team,S3 CRR configuration,Replication service permissions,[DATE]
-IAM_ROLE_LAMBDA,Security,All,[iam-role-arn],IAM role for failover Lambda functions,Yes,String,Valid IAM role ARN,Confidential,Security Team,Lambda configuration,Orchestration permissions,[DATE]
-CLOUDWATCH_LOG_GROUP,Monitoring,All,/aws/dr-webapp/application,CloudWatch log group for application logs,Yes,String,Valid log group name,Public,Operations,CloudWatch configuration,Centralized logging,[DATE]
-CLOUDWATCH_RETENTION,Monitoring,All,90,CloudWatch log retention in days,Yes,Integer,30-365,Public,Operations,Cost management,Balance cost and troubleshooting,[DATE]
-CLOUDWATCH_DASHBOARD,Monitoring,All,dr-webapp-operations,CloudWatch dashboard for DR monitoring,Yes,String,Valid dashboard name,Public,Operations,Dashboard creation,Operational visibility,[DATE]
-REPLICATION_LAG_ALARM_THRESHOLD,Monitoring,All,5,Aurora replication lag alarm threshold in seconds,Yes,Integer,1-60,Public,Operations,RPO monitoring,Alert if lag exceeds 5 seconds,[DATE]
-SNS_TOPIC_ALERTS,Monitoring,All,[sns-topic-arn],SNS topic ARN for DR operational alerts,Yes,String,Valid SNS topic ARN,Confidential,Operations,SNS configuration,PagerDuty integration,[DATE]
-FAILOVER_AUTOMATION_ENABLED,Automation,All,true,Enable automated failover via Lambda,Yes,Boolean,true|false,Public,DR Team,Monitoring setup,Set false for manual control initially,[DATE]
-LAMBDA_FAILOVER_ARN,Automation,All,[lambda-arn],Lambda function ARN for failover orchestration,Yes,String,Valid Lambda ARN,Confidential,Development,Failover automation,Coordinates DB promotion and scaling,[DATE]
-LAMBDA_FAILOVER_TIMEOUT,Automation,All,300,Failover Lambda timeout in seconds,Yes,Integer,60-900,Public,Development,Failover complexity,Allow time for all operations,[DATE]
-DR_TEST_SCHEDULE,Testing,All,0 2 1 */3 *,Cron schedule for quarterly DR testing,Yes,String,Valid cron expression,Public,DR Team,Business hours,Quarterly on 1st at 2 AM,[DATE]
-TAGS_ENVIRONMENT,Tagging,All,production,Environment tag for all resources,Yes,String,Valid environment name,Public,Operations,Cost tracking,Consistent across resources,[DATE]
-TAGS_PROJECT,Tagging,All,dr-web-application,Project tag for cost allocation,Yes,String,Valid project identifier,Public,Operations,Cost tracking,Unique project identifier,[DATE]
-TAGS_COST_CENTER,Tagging,All,[cost-center],Cost center tag for billing,Yes,String,Valid cost center code,Confidential,Finance,Cost allocation,For chargeback reporting,[DATE]
-
+#WIDTH: 45,14,50,50,50,45,8,12,27,14,14,12,30,12
+#ALIGN: left,left,left,left,left,left,center,left,left,center,left,left,left,center
+Parameter Name,Category,Production,Test,DR,Description,Required,Data Type,Validation Rules,Security Level,Owner Team,Dependencies,Notes,Last Updated
+solution.name,Project,DR Web Application,DR Web Application,DR Web Application,Full solution name for tagging,Yes,String,Max 50 characters,Public,Project Team,None,Display name in dashboards,2025-12-03
+solution.abbr,Project,drwa,drwa,drwa,Solution abbreviation for resource naming,Yes,String,Max 10 characters,Public,Project Team,None,Used in all resource names,2025-12-03
+solution.provider_name,Project,aws,aws,aws,Cloud provider name,Yes,String,aws|azure|gcp,Public,Project Team,None,EO Framework provider,2025-12-03
+solution.category_name,Project,cloud,cloud,cloud,Solution category,Yes,String,Valid category,Public,Project Team,None,EO Framework category,2025-12-03
+aws.region,Project,us-east-1,us-east-1,us-west-2,AWS region for deployment,Yes,String,Valid AWS region,Public,Infrastructure,None,Primary and DR regions,2025-12-03
+aws.dr_region,Project,us-west-2,us-west-2,us-east-1,DR region for cross-region resources,Yes,String,Valid AWS region,Public,Infrastructure,None,Secondary region,2025-12-03
+aws.profile,Project,,,,AWS CLI profile (optional),No,String,Valid profile name,Confidential,Infrastructure,None,Leave empty for default credentials,2025-12-03
+ownership.cost_center,Project,CC-12345,CC-12345,CC-12345,Cost center for billing,Yes,String,Valid cost center,Confidential,Finance,None,Chargeback reporting,2025-12-03
+ownership.owner_email,Project,dr-team@company.com,dr-team@company.com,dr-team@company.com,Technical owner email,Yes,String,Valid email,Public,Project Team,None,Alert notifications,2025-12-03
+ownership.project_code,Project,PRJ-DRWA-001,PRJ-DRWA-001,PRJ-DRWA-001,Project code for tracking,Yes,String,Valid project code,Public,Project Team,None,Financial tracking,2025-12-03
+network.vpc_cidr,Networking,10.0.0.0/16,10.100.0.0/16,10.1.0.0/16,VPC CIDR block,Yes,String,Valid CIDR,Public,Network Team,IP planning,Non-overlapping ranges,2025-12-03
+network.enable_nat_gateway,Networking,true,true,true,Enable NAT Gateway for private subnets,Yes,Boolean,true|false,Public,Network Team,Cost,Required for outbound internet,2025-12-03
+network.enable_flow_logs,Networking,true,false,true,Enable VPC Flow Logs,Yes,Boolean,true|false,Public,Network Team,CloudWatch,Security monitoring,2025-12-03
+network.public_subnet_cidrs,Networking,"[""10.0.1.0/24"",""10.0.2.0/24""]","[""10.100.1.0/24"",""10.100.2.0/24""]","[""10.1.1.0/24"",""10.1.2.0/24""]",Public subnet CIDRs,Yes,List(String),Valid CIDRs,Public,Network Team,vpc_cidr,ALB deployment,2025-12-03
+network.private_subnet_cidrs,Networking,"[""10.0.10.0/24"",""10.0.11.0/24""]","[""10.100.10.0/24"",""10.100.11.0/24""]","[""10.1.10.0/24"",""10.1.11.0/24""]",Private subnet CIDRs,Yes,List(String),Valid CIDRs,Public,Network Team,vpc_cidr,Application tier,2025-12-03
+network.database_subnet_cidrs,Networking,"[""10.0.20.0/24"",""10.0.21.0/24""]","[""10.100.20.0/24"",""10.100.21.0/24""]","[""10.1.20.0/24"",""10.1.21.0/24""]",Database subnet CIDRs,Yes,List(String),Valid CIDRs,Public,Network Team,vpc_cidr,Aurora deployment,2025-12-03
+compute.instance_type,Compute,t3.medium,t3.small,t3.medium,EC2 instance type,Yes,String,Valid EC2 type,Public,Infrastructure,Workload sizing,Right-sized for 200 users,2025-12-03
+compute.ami_id,Compute,,,,Custom AMI ID (empty uses latest AL2023),No,String,Valid AMI ID,Public,Infrastructure,None,Leave empty for default,2025-12-03
+compute.asg_min_size,Compute,2,1,0,Minimum ASG capacity,Yes,Integer,0-10,Public,Infrastructure,High availability,Zero for pilot light DR,2025-12-03
+compute.asg_max_size,Compute,10,4,10,Maximum ASG capacity,Yes,Integer,2-100,Public,Infrastructure,Cost management,Scale cap,2025-12-03
+compute.asg_desired_capacity,Compute,3,1,1,Desired ASG capacity,Yes,Integer,0-50,Public,Infrastructure,Performance,Baseline capacity,2025-12-03
+compute.root_volume_size,Compute,30,20,30,Root EBS volume size in GB,Yes,Integer,20-500,Public,Infrastructure,Storage,Minimum for OS + app,2025-12-03
+compute.app_port,Compute,80,80,80,Application port,Yes,Integer,1-65535,Public,Development,Application,HTTP port,2025-12-03
+compute.health_check_path,Compute,/health,/health,/health,Health check endpoint,Yes,String,Valid path,Public,Development,Application,Must return 200,2025-12-03
+compute.ssl_certificate_arn,Compute,arn:aws:acm:us-east-1:ACCOUNT:certificate/CERT-ID,,,ACM certificate ARN for HTTPS,No,String,Valid ARN,Confidential,Security Team,ACM,HTTPS termination,2025-12-03
+compute.enable_deletion_protection,Compute,true,false,true,Enable ALB deletion protection,Yes,Boolean,true|false,Public,Infrastructure,Safety,Prevent accidental deletion,2025-12-03
+database.engine_version,Database,8.0.mysql_aurora.3.04.0,8.0.mysql_aurora.3.04.0,8.0.mysql_aurora.3.04.0,Aurora MySQL engine version,Yes,String,Valid version,Public,Database Team,Compatibility,LTS version,2025-12-03
+database.database_name,Database,webapp,webapp,webapp,Database name,Yes,String,Valid DB name,Public,Database Team,Application,Application database,2025-12-03
+database.master_username,Database,admin,admin,admin,Master database username,Yes,String,Valid username,Confidential,Database Team,Security,Admin access,2025-12-03
+database.master_password,Database,CHANGE_ME_PROD,CHANGE_ME_TEST,CHANGE_ME_DR,Master database password,Yes,String,Strong password,Confidential,Database Team,Security,Use AWS Secrets Manager,2025-12-03
+database.instance_class,Database,db.r6g.large,db.t3.medium,db.r6g.large,Aurora instance class,Yes,String,Valid DB class,Public,Database Team,Performance,Right-sized for workload,2025-12-03
+database.instance_count,Database,2,1,2,Number of Aurora instances,Yes,Integer,1-15,Public,Database Team,High availability,Writer + readers,2025-12-03
+database.backup_retention_days,Database,7,1,7,Backup retention in days,Yes,Integer,1-35,Public,Database Team,Compliance,Recovery window,2025-12-03
+database.backup_window,Database,03:00-04:00,03:00-04:00,03:00-04:00,Preferred backup window (UTC),Yes,String,Valid time window,Public,Database Team,Maintenance,Non-peak hours,2025-12-03
+database.maintenance_window,Database,sun:04:00-sun:05:00,sun:04:00-sun:05:00,sun:04:00-sun:05:00,Preferred maintenance window (UTC),Yes,String,Valid time window,Public,Database Team,Maintenance,Non-peak hours,2025-12-03
+database.enable_deletion_protection,Database,true,false,true,Enable DB deletion protection,Yes,Boolean,true|false,Public,Database Team,Safety,Prevent accidental deletion,2025-12-03
+database.skip_final_snapshot,Database,false,true,false,Skip final snapshot on delete,Yes,Boolean,true|false,Public,Database Team,Recovery,Test can skip,2025-12-03
+database.monitoring_interval,Database,60,0,60,Enhanced monitoring interval (seconds),Yes,Integer,0|1|5|10|15|30|60,Public,Database Team,Observability,0 disables,2025-12-03
+database.enable_performance_insights,Database,true,false,true,Enable Performance Insights,Yes,Boolean,true|false,Public,Database Team,Observability,Query analysis,2025-12-03
+database.is_primary_region,Database,true,true,false,Is this the primary region for Aurora Global,Yes,Boolean,true|false,Public,Database Team,DR,Primary creates global cluster,2025-12-03
+storage.enable_versioning,Storage,true,true,true,Enable S3 versioning,Yes,Boolean,true|false,Public,Storage Team,DR,Required for replication,2025-12-03
+storage.transition_to_ia_days,Storage,30,90,30,Days before IA transition,Yes,Integer,30-365,Public,Storage Team,Cost,Cost optimization,2025-12-03
+storage.transition_to_glacier_days,Storage,90,180,90,Days before Glacier transition,Yes,Integer,90-730,Public,Storage Team,Cost,Archive tier,2025-12-03
+storage.noncurrent_version_expiration_days,Storage,30,7,30,Days to keep old versions,Yes,Integer,1-365,Public,Storage Team,Cost,Version cleanup,2025-12-03
+storage.enable_replication_time_control,Storage,true,false,true,Enable S3 RTC (15-min SLA),Yes,Boolean,true|false,Public,Storage Team,SLA,Predictable replication,2025-12-03
+storage.replication_latency_threshold,Storage,900,0,900,S3 replication latency alarm threshold (seconds),Yes,Integer,0-3600,Public,Storage Team,Monitoring,15 min default,2025-12-03
+security.kms_deletion_window_days,Security,30,7,30,KMS key deletion window,Yes,Integer,7-30,Public,Security Team,Safety,Recovery period,2025-12-03
+security.enable_kms_key_rotation,Security,true,true,true,Enable KMS key rotation,Yes,Boolean,true|false,Public,Security Team,Compliance,Annual rotation,2025-12-03
+security.enable_waf,Security,true,false,false,Enable WAF,Yes,Boolean,true|false,Public,Security Team,Security,Application firewall,2025-12-03
+security.waf_rate_limit,Security,2000,1000,2000,WAF rate limit per IP,Yes,Integer,100-20000,Public,Security Team,DDoS,Requests per 5 min,2025-12-03
+dns.hosted_zone_id,DNS,Z0123456789ABCDEFGHIJ,,,Route 53 hosted zone ID,No,String,Valid zone ID,Confidential,Network Team,Domain,DNS failover,2025-12-03
+dns.domain_name,DNS,app.example.com,,,Application domain,No,String,Valid FQDN,Public,Network Team,SSL cert,Public endpoint,2025-12-03
+dns.health_check_interval,DNS,30,30,30,Health check interval seconds,Yes,Integer,10-300,Public,Network Team,RTO,Detection speed,2025-12-03
+dns.health_check_failure_threshold,DNS,3,3,3,Failures before failover,Yes,Integer,1-10,Public,Network Team,RTO,Failover trigger,2025-12-03
+dr.enabled,DR,true,false,true,Enable DR features,Yes,Boolean,true|false,Public,DR Team,DR,DR infrastructure,2025-12-03
+dr.vault_enabled,DR,true,false,true,Enable DR vault,Yes,Boolean,true|false,Public,DR Team,DR,DR region resources,2025-12-03
+dr.replication_enabled,DR,true,false,false,Enable replication from primary,Yes,Boolean,true|false,Public,DR Team,DR,Cross-region copy,2025-12-03
+dr.rto_target_minutes,DR,240,0,240,Recovery Time Objective (minutes),Yes,Integer,0-1440,Public,DR Team,Business,4 hours per SOW,2025-12-03
+dr.rpo_target_minutes,DR,60,0,60,Recovery Point Objective (minutes),Yes,Integer,0-1440,Public,DR Team,Business,1 hour per SOW,2025-12-03
+dr.backup_retention_days,DR,30,7,30,Local backup retention,Yes,Integer,1-365,Public,DR Team,Compliance,Source region backups,2025-12-03
+dr.dr_backup_retention_days,DR,90,0,90,DR backup retention,Yes,Integer,0-365,Public,DR Team,Compliance,DR region backups,2025-12-03
+dr.enable_weekly_backup,DR,true,false,true,Enable weekly backups,Yes,Boolean,true|false,Public,DR Team,Compliance,Long-term retention,2025-12-03
+dr.weekly_backup_retention_days,DR,90,0,90,Weekly backup retention,Yes,Integer,0-365,Public,DR Team,Compliance,Extended retention,2025-12-03
+dr.enable_continuous_backup,DR,false,false,false,Enable PITR continuous backup,Yes,Boolean,true|false,Public,DR Team,RPO,Point-in-time recovery,2025-12-03
+dr.vault_kms_deletion_window_days,DR,30,7,30,DR vault KMS deletion window,Yes,Integer,7-30,Public,Security Team,Safety,DR key recovery,2025-12-03
+dr.vault_transition_to_ia_days,DR,30,30,30,DR bucket IA transition days,Yes,Integer,30-365,Public,Storage Team,Cost,DR cost optimization,2025-12-03
+dr.vault_noncurrent_version_expiration_days,DR,30,7,30,DR bucket version expiration,Yes,Integer,1-365,Public,Storage Team,Cost,DR version cleanup,2025-12-03
+monitoring.alert_email,Monitoring,dr-alerts@company.com,,,Alert notification email,No,String,Valid email,Public,Operations,Notifications,SNS subscription,2025-12-03
+monitoring.alb_5xx_threshold,Monitoring,10,20,10,ALB 5xx error alarm threshold,Yes,Integer,1-1000,Public,Operations,Alerting,Error detection,2025-12-03
+monitoring.alb_latency_threshold,Monitoring,2.0,5.0,2.0,ALB p99 latency alarm threshold (seconds),Yes,Number,0.1-60,Public,Operations,Alerting,Performance monitoring,2025-12-03
+monitoring.aurora_cpu_threshold,Monitoring,80,90,80,Aurora CPU alarm threshold %,Yes,Integer,50-100,Public,Operations,Alerting,Database monitoring,2025-12-03
+monitoring.aurora_connections_threshold,Monitoring,100,50,100,Aurora connections alarm threshold,Yes,Integer,10-1000,Public,Operations,Alerting,Connection monitoring,2025-12-03
+budget.enabled,Best Practices,true,true,false,Enable AWS Budget,Yes,Boolean,true|false,Public,Finance,Cost,Cost alerts,2025-12-03
+budget.monthly_amount,Best Practices,5000,500,2500,Monthly budget USD,Yes,Integer,0-100000,Public,Finance,Cost,Budget threshold,2025-12-03
+budget.alert_thresholds,Best Practices,"[50,80,100]","[80,100]","[80,100]",Alert thresholds %,Yes,List(Number),Valid percentages,Public,Finance,Cost,Alert triggers,2025-12-03
+budget.notification_email,Best Practices,finance@company.com,finance@company.com,finance@company.com,Budget alert email,Yes,String,Valid email,Public,Finance,Cost,Cost notifications,2025-12-03
+config_rules.enabled,Best Practices,true,false,false,Enable AWS Config Rules,Yes,Boolean,true|false,Public,Operations,Compliance,Governance,2025-12-03
+guardduty.enabled,Best Practices,true,false,false,Enable GuardDuty,Yes,Boolean,true|false,Public,Security Team,Threat detection,Security monitoring,2025-12-03
+backup.enabled,Best Practices,true,false,true,Enable AWS Backup,Yes,Boolean,true|false,Public,Operations,DR,Backup automation,2025-12-03
+backup.daily_retention,Best Practices,30,7,30,Daily backup retention days,Yes,Integer,1-365,Public,Operations,Compliance,Standard retention,2025-12-03
+backup.weekly_retention,Best Practices,90,0,90,Weekly backup retention days,Yes,Integer,0-365,Public,Operations,Compliance,Extended retention,2025-12-03
+backup.monthly_retention,Best Practices,365,0,365,Monthly backup retention days,Yes,Integer,0-730,Public,Operations,Compliance,Annual retention,2025-12-03
+backup.enable_vault_lock,Best Practices,false,false,false,Enable backup vault lock,Yes,Boolean,true|false,Public,Security Team,Compliance,Immutable backups,2025-12-03

@@ -1,47 +1,99 @@
-#WIDTH: 28,18,12,30,48,10,12,33,16,18,24,42,12
-#ALIGN: left,left,center,left,left,center,left,left,center,left,left,left,center
-Parameter Name,Category,Environment,Default Value,Description,Required,Data Type,Validation Rules,Security Level,Owner Team,Dependencies,Notes,Last Updated
-SOLUTION_NAME,Application,All,AWS Cloud Migration,Cloud migration project identifier,Yes,String,Max 50 characters,Public,Project Team,None,Used in resource naming and tagging,[DATE]
-SOLUTION_VERSION,Application,All,1.0.0,Current solution version,Yes,String,Semantic versioning format,Public,Project Team,None,Updated with major changes,[DATE]
-ENVIRONMENT,Application,All,production,Deployment environment identifier,Yes,String,development|staging|production,Public,Operations,None,Controls resource sizing and features,[DATE]
-AWS_ACCOUNT_ID,AWS,All,[account-id],AWS account ID for production workloads,Yes,String,12-digit AWS account ID,Confidential,Infrastructure,IAM policies,Production account number,[DATE]
-AWS_REGION,AWS,All,us-east-1,Primary AWS region for deployment,Yes,String,Valid AWS region code,Public,Infrastructure,Service availability,Main deployment region,[DATE]
-CONTROL_TOWER_ENABLED,AWS,All,true,AWS Control Tower for governance,Yes,Boolean,true|false,Public,Security,AWS Organizations,Landing zone foundation,[DATE]
-VPC_CIDR,Network,All,10.0.0.0/16,Production VPC CIDR block,Yes,String,Valid CIDR notation,Public,Network Team,IP planning,Non-overlapping with on-premise,[DATE]
-PUBLIC_SUBNET_1_CIDR,Network,All,10.0.1.0/24,Public subnet AZ-a,Yes,String,Valid CIDR notation,Public,Network Team,VPC_CIDR,ALB and NAT Gateway,[DATE]
-PUBLIC_SUBNET_2_CIDR,Network,All,10.0.2.0/24,Public subnet AZ-b,Yes,String,Valid CIDR notation,Public,Network Team,VPC_CIDR,Multi-AZ for high availability,[DATE]
-PRIVATE_SUBNET_1_CIDR,Network,All,10.0.10.0/24,Private subnet AZ-a,Yes,String,Valid CIDR notation,Public,Network Team,VPC_CIDR,Application tier,[DATE]
-PRIVATE_SUBNET_2_CIDR,Network,All,10.0.11.0/24,Private subnet AZ-b,Yes,String,Valid CIDR notation,Public,Network Team,VPC_CIDR,Multi-AZ for high availability,[DATE]
-DATABASE_SUBNET_1_CIDR,Network,All,10.0.20.0/24,Database subnet AZ-a,Yes,String,Valid CIDR notation,Public,Network Team,VPC_CIDR,RDS deployment,[DATE]
-DATABASE_SUBNET_2_CIDR,Network,All,10.0.21.0/24,Database subnet AZ-b,Yes,String,Valid CIDR notation,Public,Network Team,VPC_CIDR,Multi-AZ for RDS,[DATE]
-DIRECT_CONNECT_BANDWIDTH,Network,All,1Gbps,Direct Connect connection bandwidth,Yes,String,1Gbps|10Gbps,Public,Network Team,Datacenter connectivity,Hybrid connectivity,[DATE]
-EC2_INSTANCE_TYPE_WEB,Compute,Production,t3.medium,Instance type for web servers,Yes,String,Valid EC2 instance type,Public,Infrastructure,Workload sizing,Right-sized per assessment,[DATE]
-EC2_INSTANCE_TYPE_APP,Compute,Production,m5.large,Instance type for application servers,Yes,String,Valid EC2 instance type,Public,Infrastructure,Workload sizing,Memory-optimized workloads,[DATE]
-ASG_MIN_SIZE,Compute,Production,2,Minimum Auto Scaling Group size,Yes,Integer,1-10,Public,Infrastructure,High availability,Ensures redundancy,[DATE]
-ASG_MAX_SIZE,Compute,Production,10,Maximum Auto Scaling Group size,Yes,Integer,5-100,Public,Infrastructure,Cost management,Cap for runaway scaling,[DATE]
-ASG_DESIRED_CAPACITY,Compute,Production,3,Desired capacity for Auto Scaling,Yes,Integer,2-50,Public,Infrastructure,Performance,Baseline capacity,[DATE]
-RDS_ENGINE,Database,All,mysql,RDS database engine type,Yes,String,mysql|postgresql|sqlserver-se,Public,Database Team,Application compatibility,Match source databases,[DATE]
-RDS_ENGINE_VERSION,Database,All,8.0.35,RDS database engine version,Yes,String,Valid RDS version,Public,Database Team,RDS_ENGINE,Latest stable version,[DATE]
-RDS_INSTANCE_CLASS,Database,Production,db.r5.large,RDS instance class,Yes,String,Valid DB instance class,Public,Database Team,Performance requirements,Right-sized for workload,[DATE]
-RDS_MULTI_AZ,Database,Production,true,Enable Multi-AZ deployment,Yes,Boolean,true|false,Public,Database Team,High availability,Required for production,[DATE]
-RDS_STORAGE_TYPE,Database,All,gp3,RDS storage type,Yes,String,gp2|gp3|io1,Public,Database Team,Performance requirements,Cost-effective performance,[DATE]
-RDS_STORAGE_SIZE_GB,Database,Production,100,RDS storage size in GB,Yes,Integer,20-16384,Public,Database Team,Data volume,Initial size with auto-growth,[DATE]
-RDS_BACKUP_RETENTION,Database,Production,7,Backup retention in days,Yes,Integer,1-35,Public,Database Team,Recovery requirements,7 days for compliance,[DATE]
-S3_BUCKET_DATA,Storage,All,[bucket-name]-data,S3 bucket for application data,Yes,String,Valid S3 bucket name,Confidential,Storage Team,Application access,Must be globally unique,[DATE]
-S3_VERSIONING,Storage,All,Enabled,S3 bucket versioning status,Yes,String,Enabled|Suspended,Public,Storage Team,Data protection,Required for compliance,[DATE]
-S3_LIFECYCLE_DAYS_GLACIER,Storage,All,90,Days before transition to Glacier,Yes,Integer,30-365,Public,Storage Team,Cost optimization,Archive after 90 days,[DATE]
-KMS_KEY_ALIAS,Security,All,alias/migration-cmk,KMS key alias for encryption,Yes,String,Valid KMS alias format,Confidential,Security Team,Encryption requirements,Central encryption key,[DATE]
-KMS_KEY_ROTATION,Security,All,true,Enable automatic KMS key rotation,Yes,Boolean,true|false,Public,Security Team,Compliance,Annual rotation,[DATE]
-IAM_ROLE_EC2,Security,All,[role-name]-ec2-role,IAM role for EC2 instances,Yes,String,Valid IAM role name,Confidential,Security Team,EC2 instances,Instance profile,[DATE]
-IAM_POLICY_BOUNDARY,Security,All,arn:aws:iam::aws:policy/PowerUserAccess,IAM permissions boundary,Yes,String,Valid IAM policy ARN,Public,Security Team,IAM governance,Prevent privilege escalation,[DATE]
-CLOUDWATCH_LOG_GROUP,Monitoring,All,/aws/migration/application,CloudWatch log group for app logs,Yes,String,Valid log group name,Public,Operations,CloudWatch setup,Centralized logging,[DATE]
-CLOUDWATCH_RETENTION_DAYS,Monitoring,All,90,CloudWatch log retention in days,Yes,Integer,30-365,Public,Operations,Cost management,Balance cost and compliance,[DATE]
-CLOUDWATCH_DASHBOARD,Monitoring,All,migration-operations,CloudWatch dashboard name,Yes,String,Valid dashboard name,Public,Operations,Dashboard creation,Operational visibility,[DATE]
-SNS_TOPIC_ALERTS,Monitoring,All,[topic-arn],SNS topic for operational alerts,Yes,String,Valid SNS topic ARN,Confidential,Operations,SNS configuration,PagerDuty integration,[DATE]
-DMS_INSTANCE_CLASS,Migration,All,dms.t3.medium,DMS replication instance class,Yes,String,Valid DMS instance class,Public,Migration Team,Database size,Sized for migration workload,[DATE]
-MGN_REPLICATION_SERVER_TYPE,Migration,All,t3.small,AWS MGN replication server type,Yes,String,Valid EC2 instance type,Public,Migration Team,Replication capacity,Cost-optimized,[DATE]
-TAGS_ENVIRONMENT,Tagging,All,production,Environment tag for all resources,Yes,String,Valid environment name,Public,Operations,Cost tracking,Consistent tagging,[DATE]
-TAGS_PROJECT,Tagging,All,cloud-migration,Project tag for cost allocation,Yes,String,Valid project identifier,Public,Operations,Cost tracking,Migration project ID,[DATE]
-TAGS_COST_CENTER,Tagging,All,[cost-center],Cost center tag for billing,Yes,String,Valid cost center code,Confidential,Finance,Cost allocation,Chargeback reporting,[DATE]
-TAGS_MIGRATION_WAVE,Tagging,All,wave-0,Migration wave identifier,Yes,String,wave-0|wave-1|wave-2|wave-3,Public,Migration Team,Wave tracking,Track migration progress,[DATE]
-
+#WIDTH: 45,14,50,50,50,45,8,12,27,14,14,12,30,12
+#ALIGN: left,left,left,left,left,left,center,left,left,center,left,left,left,center
+Parameter Name,Category,Production,Test,DR,Description,Required,Data Type,Validation Rules,Security Level,Owner Team,Dependencies,Notes,Last Updated
+solution.name,Project,Cloud Migration,Cloud Migration,Cloud Migration,Full solution name for tagging,Yes,String,Max 50 characters,Public,Project Team,None,On-Premise to Cloud Migration,2025-12-03
+solution.abbr,Project,cmig,cmig,cmig,Solution abbreviation for resource naming,Yes,String,Max 10 characters,Public,Project Team,None,Used in all resource names,2025-12-03
+solution.provider_name,Project,aws,aws,aws,Cloud provider name,Yes,String,aws|azure|gcp,Public,Project Team,None,EO Framework provider,2025-12-03
+solution.category_name,Project,cloud,cloud,cloud,Solution category,Yes,String,Valid category,Public,Project Team,None,EO Framework category,2025-12-03
+aws.region,Project,us-east-1,us-east-1,us-west-2,AWS region for deployment,Yes,String,Valid AWS region,Public,Infrastructure,None,Primary region per SOW,2025-12-03
+aws.dr_region,Project,us-west-2,us-west-2,us-east-1,DR region for cross-region resources,Yes,String,Valid AWS region,Public,Infrastructure,None,Secondary region,2025-12-03
+aws.profile,Project,,,,AWS CLI profile (optional),No,String,Valid profile name,Confidential,Infrastructure,None,Leave empty for default credentials,2025-12-03
+ownership.cost_center,Project,CC-MIG-001,CC-MIG-001,CC-MIG-001,Cost center for billing,Yes,String,Valid cost center,Confidential,Finance,None,Migration project code,2025-12-03
+ownership.owner_email,Project,migration-team@company.com,migration-team@company.com,migration-team@company.com,Technical owner email,Yes,String,Valid email,Public,Project Team,None,Alert notifications,2025-12-03
+ownership.project_code,Project,PRJ-CMIG-2025,PRJ-CMIG-2025,PRJ-CMIG-2025,Project code for tracking,Yes,String,Valid project code,Public,Project Team,None,Financial tracking,2025-12-03
+network.vpc_cidr,Networking,10.0.0.0/16,10.100.0.0/16,10.1.0.0/16,VPC CIDR block,Yes,String,Valid CIDR,Public,Network Team,IP planning,Non-overlapping with on-premise,2025-12-03
+network.enable_nat_gateway,Networking,true,true,true,Enable NAT Gateway for private subnets,Yes,Boolean,true|false,Public,Network Team,Cost,Required for outbound internet,2025-12-03
+network.enable_flow_logs,Networking,true,false,true,Enable VPC Flow Logs,Yes,Boolean,true|false,Public,Network Team,CloudWatch,Security monitoring,2025-12-03
+network.public_subnet_cidrs,Networking,"[""10.0.1.0/24"",""10.0.2.0/24"",""10.0.3.0/24""]","[""10.100.1.0/24"",""10.100.2.0/24""]","[""10.1.1.0/24"",""10.1.2.0/24""]",Public subnet CIDRs,Yes,List(String),Valid CIDRs,Public,Network Team,vpc_cidr,3 AZs for prod,2025-12-03
+network.private_subnet_cidrs,Networking,"[""10.0.10.0/24"",""10.0.11.0/24"",""10.0.12.0/24""]","[""10.100.10.0/24"",""10.100.11.0/24""]","[""10.1.10.0/24"",""10.1.11.0/24""]",Private subnet CIDRs,Yes,List(String),Valid CIDRs,Public,Network Team,vpc_cidr,Application tier,2025-12-03
+network.database_subnet_cidrs,Networking,"[""10.0.20.0/24"",""10.0.21.0/24"",""10.0.22.0/24""]","[""10.100.20.0/24"",""10.100.21.0/24""]","[""10.1.20.0/24"",""10.1.21.0/24""]",Database subnet CIDRs,Yes,List(String),Valid CIDRs,Public,Network Team,vpc_cidr,RDS deployment,2025-12-03
+network.transit_gateway_enabled,Networking,true,false,true,Enable Transit Gateway,Yes,Boolean,true|false,Public,Network Team,Direct Connect,Multi-VPC connectivity,2025-12-03
+network.enable_direct_connect,Networking,true,false,false,Enable Direct Connect,Yes,Boolean,true|false,Public,Network Team,Hybrid,1Gbps dedicated connection,2025-12-03
+network.direct_connect_bandwidth,Networking,1Gbps,,,Direct Connect bandwidth,No,String,Valid bandwidth,Public,Network Team,Direct Connect,Per SOW specification,2025-12-03
+network.on_prem_cidr,Networking,192.168.0.0/16,192.168.0.0/16,,On-premises CIDR block,No,String,Valid CIDR,Public,Network Team,Hybrid,VPN routing,2025-12-03
+network.enable_site_to_site_vpn,Networking,true,true,true,Enable Site-to-Site VPN (backup),Yes,Boolean,true|false,Public,Network Team,Hybrid,Backup connectivity,2025-12-03
+compute.instance_type,Compute,m5.large,t3.medium,m5.large,Default EC2 instance type,Yes,String,Valid EC2 type,Public,Infrastructure,Workload,Right-sized from on-premise,2025-12-03
+compute.ami_id,Compute,,,,Custom AMI ID (empty uses latest AL2023),No,String,Valid AMI ID,Public,Infrastructure,None,Leave empty for default,2025-12-03
+compute.asg_min_size,Compute,2,1,0,Minimum ASG capacity,Yes,Integer,0-10,Public,Infrastructure,HA,Zero for pilot light DR,2025-12-03
+compute.asg_max_size,Compute,20,10,20,Maximum ASG capacity,Yes,Integer,2-100,Public,Infrastructure,Cost,30-60 instances per SOW,2025-12-03
+compute.asg_desired_capacity,Compute,4,2,1,Desired ASG capacity,Yes,Integer,0-50,Public,Infrastructure,Performance,Baseline capacity,2025-12-03
+compute.root_volume_size,Compute,50,30,50,Root EBS volume size in GB,Yes,Integer,20-500,Public,Infrastructure,Storage,OS and application,2025-12-03
+compute.data_volume_size,Compute,100,50,100,Data EBS volume size in GB,Yes,Integer,0-1000,Public,Infrastructure,Storage,Application data,2025-12-03
+compute.app_port,Compute,443,80,443,Application port,Yes,Integer,1-65535,Public,Development,Application,HTTPS for prod,2025-12-03
+compute.health_check_path,Compute,/health,/health,/health,Health check endpoint,Yes,String,Valid path,Public,Development,Application,Must return 200,2025-12-03
+compute.ssl_certificate_arn,Compute,arn:aws:acm:us-east-1:ACCOUNT:certificate/CERT-ID,,,ACM certificate ARN for HTTPS,No,String,Valid ARN,Confidential,Security Team,ACM,HTTPS termination,2025-12-03
+compute.enable_deletion_protection,Compute,true,false,true,Enable ALB deletion protection,Yes,Boolean,true|false,Public,Infrastructure,Safety,Prevent accidental deletion,2025-12-03
+database.engine,Database,mysql,mysql,mysql,Database engine type,Yes,String,mysql|postgresql|sqlserver,Public,Database Team,Application,Per application requirements,2025-12-03
+database.engine_version,Database,8.0.35,8.0.35,8.0.35,RDS engine version,Yes,String,Valid version,Public,Database Team,Compatibility,LTS version,2025-12-03
+database.database_name,Database,appdb,appdb,appdb,Database name,Yes,String,Valid DB name,Public,Database Team,Application,Application database,2025-12-03
+database.master_username,Database,admin,admin,admin,Master database username,Yes,String,Valid username,Confidential,Database Team,Security,Admin access,2025-12-03
+database.master_password,Database,CHANGE_ME_PROD,CHANGE_ME_TEST,CHANGE_ME_DR,Master database password,Yes,String,Strong password,Confidential,Database Team,Security,Use AWS Secrets Manager,2025-12-03
+database.instance_class,Database,db.m5.large,db.t3.medium,db.m5.large,RDS instance class,Yes,String,Valid DB class,Public,Database Team,Performance,Right-sized for workload,2025-12-03
+database.multi_az,Database,true,false,true,Enable Multi-AZ deployment,Yes,Boolean,true|false,Public,Database Team,HA,Production HA,2025-12-03
+database.allocated_storage,Database,100,50,100,Storage in GB,Yes,Integer,20-65536,Public,Database Team,Storage,Initial allocation,2025-12-03
+database.max_allocated_storage,Database,500,100,500,Max storage for auto-scaling,Yes,Integer,20-65536,Public,Database Team,Storage,Storage auto-scaling cap,2025-12-03
+database.backup_retention_days,Database,7,1,7,Backup retention in days,Yes,Integer,1-35,Public,Database Team,Compliance,Per SOW DR requirements,2025-12-03
+database.backup_window,Database,03:00-04:00,03:00-04:00,03:00-04:00,Preferred backup window (UTC),Yes,String,Valid time window,Public,Database Team,Maintenance,Non-peak hours,2025-12-03
+database.maintenance_window,Database,sun:04:00-sun:05:00,sun:04:00-sun:05:00,sun:04:00-sun:05:00,Preferred maintenance window (UTC),Yes,String,Valid time window,Public,Database Team,Maintenance,Non-peak hours,2025-12-03
+database.enable_deletion_protection,Database,true,false,true,Enable DB deletion protection,Yes,Boolean,true|false,Public,Database Team,Safety,Prevent accidental deletion,2025-12-03
+database.skip_final_snapshot,Database,false,true,false,Skip final snapshot on delete,Yes,Boolean,true|false,Public,Database Team,Recovery,Test can skip,2025-12-03
+database.enable_performance_insights,Database,true,false,true,Enable Performance Insights,Yes,Boolean,true|false,Public,Database Team,Observability,Query analysis,2025-12-03
+database.enable_read_replica,Database,true,false,false,Create read replica,Yes,Boolean,true|false,Public,Database Team,Performance,Read scaling,2025-12-03
+storage.enable_versioning,Storage,true,true,true,Enable S3 versioning,Yes,Boolean,true|false,Public,Storage Team,DR,Required for replication,2025-12-03
+storage.transition_to_ia_days,Storage,30,90,30,Days before IA transition,Yes,Integer,30-365,Public,Storage Team,Cost,Cost optimization,2025-12-03
+storage.transition_to_glacier_days,Storage,90,180,90,Days before Glacier transition,Yes,Integer,90-730,Public,Storage Team,Cost,Archive tier,2025-12-03
+storage.noncurrent_version_expiration_days,Storage,30,7,30,Days to keep old versions,Yes,Integer,1-365,Public,Storage Team,Cost,Version cleanup,2025-12-03
+storage.enable_replication,Storage,true,false,false,Enable cross-region replication,Yes,Boolean,true|false,Public,Storage Team,DR,S3 CRR,2025-12-03
+storage.replication_latency_threshold,Storage,900,0,900,Replication latency alarm threshold (seconds),Yes,Integer,0-3600,Public,Storage Team,Monitoring,15 min default,2025-12-03
+security.kms_deletion_window_days,Security,30,7,30,KMS key deletion window,Yes,Integer,7-30,Public,Security Team,Safety,Recovery period,2025-12-03
+security.enable_kms_key_rotation,Security,true,true,true,Enable KMS key rotation,Yes,Boolean,true|false,Public,Security Team,Compliance,Annual rotation,2025-12-03
+security.enable_waf,Security,true,false,false,Enable WAF for ALB,Yes,Boolean,true|false,Public,Security Team,Security,Application firewall,2025-12-03
+security.waf_rate_limit,Security,5000,2000,5000,WAF rate limit per IP,Yes,Integer,100-20000,Public,Security Team,DDoS,Requests per 5 min,2025-12-03
+security.enable_guard_duty,Security,true,false,false,Enable GuardDuty,Yes,Boolean,true|false,Public,Security Team,Threat detection,Per SOW requirements,2025-12-03
+security.enable_security_hub,Security,true,false,false,Enable Security Hub,Yes,Boolean,true|false,Public,Security Team,Compliance,SOC 2 compliance,2025-12-03
+security.enable_config,Security,true,false,false,Enable AWS Config,Yes,Boolean,true|false,Public,Security Team,Compliance,Configuration tracking,2025-12-03
+migration.dms_instance_class,Migration,dms.r5.large,dms.t3.medium,,DMS replication instance class,No,String,Valid DMS class,Public,Migration Team,Database,AWS DMS instance,2025-12-03
+migration.dms_storage_gb,Migration,100,50,,DMS replication storage GB,No,Integer,50-1000,Public,Migration Team,Database,Replication storage,2025-12-03
+migration.mgn_replication_server_type,Migration,t3.small,t3.small,,MGN replication server type,No,String,Valid EC2 type,Public,Migration Team,Servers,AWS MGN instance,2025-12-03
+migration.mgn_staging_disk_type,Migration,gp3,gp3,,MGN staging disk type,No,String,gp2|gp3|io1,Public,Migration Team,Servers,Cost-optimized,2025-12-03
+dr.enabled,DR,true,false,true,Enable DR features,Yes,Boolean,true|false,Public,DR Team,DR,DR infrastructure,2025-12-03
+dr.vault_enabled,DR,true,false,true,Enable DR vault,Yes,Boolean,true|false,Public,DR Team,DR,DR region resources,2025-12-03
+dr.replication_enabled,DR,true,false,false,Enable replication from primary,Yes,Boolean,true|false,Public,DR Team,DR,Cross-region copy,2025-12-03
+dr.rto_target_minutes,DR,240,0,240,Recovery Time Objective (minutes),Yes,Integer,0-1440,Public,DR Team,Business,4 hours per SOW,2025-12-03
+dr.rpo_target_minutes,DR,60,0,60,Recovery Point Objective (minutes),Yes,Integer,0-1440,Public,DR Team,Business,1 hour per SOW,2025-12-03
+dr.backup_retention_days,DR,30,7,30,Local backup retention,Yes,Integer,1-365,Public,DR Team,Compliance,Source region backups,2025-12-03
+dr.dr_backup_retention_days,DR,90,0,90,DR backup retention,Yes,Integer,0-365,Public,DR Team,Compliance,DR region backups,2025-12-03
+dr.enable_weekly_backup,DR,true,false,true,Enable weekly backups,Yes,Boolean,true|false,Public,DR Team,Compliance,Long-term retention,2025-12-03
+dr.weekly_backup_retention_days,DR,90,0,90,Weekly backup retention,Yes,Integer,0-365,Public,DR Team,Compliance,Extended retention,2025-12-03
+dr.vault_kms_deletion_window_days,DR,30,7,30,DR vault KMS deletion window,Yes,Integer,7-30,Public,Security Team,Safety,DR key recovery,2025-12-03
+monitoring.alert_email,Monitoring,ops-team@company.com,,,Alert notification email,No,String,Valid email,Public,Operations,Notifications,SNS subscription,2025-12-03
+monitoring.enable_cloudwatch_agent,Monitoring,true,true,true,Enable CloudWatch agent,Yes,Boolean,true|false,Public,Operations,Observability,Memory and disk metrics,2025-12-03
+monitoring.log_retention_days,Monitoring,90,30,90,CloudWatch log retention,Yes,Integer,1-3653,Public,Operations,Compliance,Per SOW requirements,2025-12-03
+monitoring.ec2_cpu_threshold,Monitoring,80,90,80,EC2 CPU alarm threshold %,Yes,Integer,50-100,Public,Operations,Alerting,Auto-scaling trigger,2025-12-03
+monitoring.rds_cpu_threshold,Monitoring,80,90,80,RDS CPU alarm threshold %,Yes,Integer,50-100,Public,Operations,Alerting,Database monitoring,2025-12-03
+monitoring.rds_connections_threshold,Monitoring,200,100,200,RDS connections alarm threshold,Yes,Integer,10-1000,Public,Operations,Alerting,Connection monitoring,2025-12-03
+monitoring.alb_5xx_threshold,Monitoring,10,20,10,ALB 5xx error threshold,Yes,Integer,1-1000,Public,Operations,Alerting,Error detection,2025-12-03
+budget.enabled,Best Practices,true,true,false,Enable AWS Budget,Yes,Boolean,true|false,Public,Finance,Cost,Cost alerts,2025-12-03
+budget.monthly_amount,Best Practices,15000,2000,7500,Monthly budget USD,Yes,Integer,0-100000,Public,Finance,Cost,Based on SOW estimates,2025-12-03
+budget.alert_thresholds,Best Practices,"[50,80,100]","[80,100]","[80,100]",Alert thresholds %,Yes,List(Number),Valid percentages,Public,Finance,Cost,Alert triggers,2025-12-03
+budget.notification_email,Best Practices,finance@company.com,finance@company.com,finance@company.com,Budget alert email,Yes,String,Valid email,Public,Finance,Cost,Cost notifications,2025-12-03
+config_rules.enabled,Best Practices,true,false,false,Enable AWS Config Rules,Yes,Boolean,true|false,Public,Operations,Compliance,SOC 2 compliance,2025-12-03
+config_rules.s3_encryption_check,Best Practices,true,true,true,S3 encryption check,Yes,Boolean,true|false,Public,Security Team,Compliance,Data protection,2025-12-03
+config_rules.ebs_encryption_check,Best Practices,true,true,true,EBS encryption check,Yes,Boolean,true|false,Public,Security Team,Compliance,Data protection,2025-12-03
+config_rules.rds_encryption_check,Best Practices,true,true,true,RDS encryption check,Yes,Boolean,true|false,Public,Security Team,Compliance,Data protection,2025-12-03
+guardduty.enabled,Best Practices,true,false,false,Enable GuardDuty,Yes,Boolean,true|false,Public,Security Team,Threat detection,Security monitoring,2025-12-03
+backup.enabled,Best Practices,true,false,true,Enable AWS Backup,Yes,Boolean,true|false,Public,Operations,DR,Backup automation,2025-12-03
+backup.daily_retention,Best Practices,30,7,30,Daily backup retention days,Yes,Integer,1-365,Public,Operations,Compliance,Standard retention,2025-12-03
+backup.weekly_retention,Best Practices,90,0,90,Weekly backup retention days,Yes,Integer,0-365,Public,Operations,Compliance,Extended retention,2025-12-03
+backup.monthly_retention,Best Practices,365,0,365,Monthly backup retention days,Yes,Integer,0-730,Public,Operations,Compliance,Annual retention,2025-12-03
+backup.enable_vault_lock,Best Practices,false,false,false,Enable backup vault lock,Yes,Boolean,true|false,Public,Security Team,Compliance,Immutable backups,2025-12-03

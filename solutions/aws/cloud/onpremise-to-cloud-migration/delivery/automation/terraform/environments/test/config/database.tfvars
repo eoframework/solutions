@@ -1,0 +1,26 @@
+#------------------------------------------------------------------------------
+# Database Configuration - TEST Environment
+#------------------------------------------------------------------------------
+# Generated from configuration on 2025-12-03 17:52:48
+#
+# To regenerate: python generate-tfvars.py /path/to/solution
+#------------------------------------------------------------------------------
+
+database = {
+  allocated_storage = 50  # Storage in GB
+  backup_retention_days = 1  # Backup retention in days
+  backup_window = "03:00-04:00"  # Preferred backup window (UTC)
+  database_name = "appdb"  # Database name
+  enable_deletion_protection = false  # Enable DB deletion protection
+  enable_performance_insights = false  # Enable Performance Insights
+  enable_read_replica = false  # Create read replica
+  engine = "mysql"  # Database engine type
+  engine_version = "8.0.35"  # RDS engine version
+  instance_class = "db.t3.medium"  # RDS instance class
+  maintenance_window = "sun:04:00-sun:05:00"  # Preferred maintenance window (UTC)
+  master_password = "CHANGE_ME_TEST"  # Master database password
+  master_username = "admin"  # Master database username
+  max_allocated_storage = 100  # Max storage for auto-scaling
+  multi_az = false  # Enable Multi-AZ deployment
+  skip_final_snapshot = true  # Skip final snapshot on delete
+}
