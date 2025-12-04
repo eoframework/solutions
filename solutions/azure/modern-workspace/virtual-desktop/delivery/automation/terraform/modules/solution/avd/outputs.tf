@@ -4,42 +4,42 @@
 
 output "host_pool_id" {
   description = "ID of the AVD host pool"
-  value       = azurerm_virtual_desktop_host_pool.main.id
+  value       = module.host_pool.id
 }
 
 output "host_pool_name" {
   description = "Name of the AVD host pool"
-  value       = azurerm_virtual_desktop_host_pool.main.name
+  value       = module.host_pool.name
 }
 
 output "workspace_id" {
   description = "ID of the AVD workspace"
-  value       = azurerm_virtual_desktop_workspace.main.id
+  value       = module.workspace.id
 }
 
 output "workspace_name" {
   description = "Name of the AVD workspace"
-  value       = azurerm_virtual_desktop_workspace.main.name
+  value       = module.workspace.name
 }
 
 output "desktop_app_group_id" {
   description = "ID of the desktop application group"
-  value       = var.app_groups.desktop_enabled ? azurerm_virtual_desktop_application_group.desktop[0].id : null
+  value       = var.app_groups.desktop_enabled ? module.desktop_app_group[0].id : null
 }
 
 output "desktop_app_group_name" {
   description = "Name of the desktop application group"
-  value       = var.app_groups.desktop_enabled ? azurerm_virtual_desktop_application_group.desktop[0].name : null
+  value       = var.app_groups.desktop_enabled ? module.desktop_app_group[0].name : null
 }
 
 output "remoteapp_app_group_id" {
   description = "ID of the RemoteApp application group"
-  value       = var.app_groups.remoteapp_enabled ? azurerm_virtual_desktop_application_group.remoteapp[0].id : null
+  value       = var.app_groups.remoteapp_enabled ? module.remoteapp_app_group[0].id : null
 }
 
 output "remoteapp_app_group_name" {
   description = "Name of the RemoteApp application group"
-  value       = var.app_groups.remoteapp_enabled ? azurerm_virtual_desktop_application_group.remoteapp[0].name : null
+  value       = var.app_groups.remoteapp_enabled ? module.remoteapp_app_group[0].name : null
 }
 
 output "session_host_names" {

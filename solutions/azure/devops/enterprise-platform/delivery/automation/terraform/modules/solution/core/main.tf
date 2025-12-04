@@ -1,10 +1,11 @@
 #------------------------------------------------------------------------------
 # Core Infrastructure Module
 # Creates: Resource Group, VNet, Subnets, Key Vault
+# Uses: modules/azure/vnet, modules/azure/key-vault
 #------------------------------------------------------------------------------
 
 #------------------------------------------------------------------------------
-# Resource Group
+# Resource Group (kept as direct resource - foundation for all)
 #------------------------------------------------------------------------------
 resource "azurerm_resource_group" "main" {
   name     = "${var.name_prefix}-rg"
@@ -13,67 +14,62 @@ resource "azurerm_resource_group" "main" {
 }
 
 #------------------------------------------------------------------------------
-# Virtual Network
+# Virtual Network (via Azure module)
 #------------------------------------------------------------------------------
-resource "azurerm_virtual_network" "main" {
+module "vnet" {
+  source = "../../azure/vnet"
+
   name                = "${var.name_prefix}-vnet"
-  location            = azurerm_resource_group.main.location
   resource_group_name = azurerm_resource_group.main.name
+  location            = azurerm_resource_group.main.location
   address_space       = [var.network.vnet_cidr]
-  tags                = var.common_tags
-}
 
-#------------------------------------------------------------------------------
-# Subnets
-#------------------------------------------------------------------------------
-resource "azurerm_subnet" "appservice" {
-  name                 = "${var.name_prefix}-appservice-subnet"
-  resource_group_name  = azurerm_resource_group.main.name
-  virtual_network_name = azurerm_virtual_network.main.name
-  address_prefixes     = [var.network.appservice_subnet_cidr]
-
-  delegation {
-    name = "appservice-delegation"
-    service_delegation {
-      name    = "Microsoft.Web/serverFarms"
-      actions = ["Microsoft.Network/virtualNetworks/subnets/action"]
+  subnets = {
+    "${var.name_prefix}-appservice-subnet" = {
+      address_prefixes  = [var.network.appservice_subnet_cidr]
+      service_endpoints = ["Microsoft.Storage", "Microsoft.KeyVault"]
+      delegation = {
+        name                    = "appservice-delegation"
+        service_delegation_name = "Microsoft.Web/serverFarms"
+        actions                 = ["Microsoft.Network/virtualNetworks/subnets/action"]
+      }
+    }
+    "${var.name_prefix}-pe-subnet" = {
+      address_prefixes                  = [var.network.private_endpoint_cidr]
+      private_endpoint_network_policies = "Enabled"
     }
   }
-}
 
-resource "azurerm_subnet" "private_endpoints" {
-  name                 = "${var.name_prefix}-pe-subnet"
-  resource_group_name  = azurerm_resource_group.main.name
-  virtual_network_name = azurerm_virtual_network.main.name
-  address_prefixes     = [var.network.private_endpoint_cidr]
-
-  private_endpoint_network_policies_enabled = true
+  common_tags = var.common_tags
 }
 
 #------------------------------------------------------------------------------
-# Key Vault
+# Key Vault (via Azure module)
 #------------------------------------------------------------------------------
-resource "azurerm_key_vault" "main" {
-  name                        = "${replace(var.name_prefix, "-", "")}kv"
-  location                    = azurerm_resource_group.main.location
-  resource_group_name         = azurerm_resource_group.main.name
-  tenant_id                   = var.tenant_id
-  sku_name                    = "standard"
-  soft_delete_retention_days  = 90
-  purge_protection_enabled    = true
-  enable_rbac_authorization   = true
+module "key_vault" {
+  source = "../../azure/key-vault"
 
-  network_acls {
-    bypass         = "AzureServices"
-    default_action = var.network.private_endpoint_enabled ? "Deny" : "Allow"
+  name                      = "${replace(var.name_prefix, "-", "")}kv"
+  resource_group_name       = azurerm_resource_group.main.name
+  location                  = azurerm_resource_group.main.location
+  tenant_id                 = var.tenant_id
+  enable_rbac_authorization = true
+  purge_protection_enabled  = true
+  soft_delete_retention_days = 90
+
+  enable_network_acls    = var.network.private_endpoint_enabled
+  network_default_action = var.network.private_endpoint_enabled ? "Deny" : "Allow"
+  network_bypass         = "AzureServices"
+
+  # Grant deployer access
+  role_assignments = {
+    deployer = {
+      role_definition_name = "Key Vault Administrator"
+      principal_id         = var.object_id
+    }
   }
 
-  tags = var.common_tags
-}
+  common_tags = var.common_tags
 
-# Grant deployer access to Key Vault
-resource "azurerm_role_assignment" "deployer_kv_admin" {
-  scope                = azurerm_key_vault.main.id
-  role_definition_name = "Key Vault Administrator"
-  principal_id         = var.object_id
+  depends_on = [azurerm_resource_group.main]
 }

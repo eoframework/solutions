@@ -1,109 +1,51 @@
 #------------------------------------------------------------------------------
 # Monitoring Module
 # Creates: Log Analytics, Application Insights, Alerts, Action Groups
+# Uses: modules/azure/monitor
 #------------------------------------------------------------------------------
 
 #------------------------------------------------------------------------------
-# Log Analytics Workspace
+# Log Analytics Workspace & Application Insights (via Azure module)
 #------------------------------------------------------------------------------
-resource "azurerm_log_analytics_workspace" "main" {
-  name                = "${var.name_prefix}-law"
-  location            = var.location
-  resource_group_name = var.resource_group_name
-  sku                 = "PerGB2018"
-  retention_in_days   = var.monitoring.log_retention_days
-  tags                = var.common_tags
-}
+module "monitor" {
+  source = "../../azure/monitor"
 
-#------------------------------------------------------------------------------
-# Application Insights
-#------------------------------------------------------------------------------
-resource "azurerm_application_insights" "main" {
-  name                = "${var.name_prefix}-appinsights"
-  location            = var.location
-  resource_group_name = var.resource_group_name
-  workspace_id        = azurerm_log_analytics_workspace.main.id
-  application_type    = "other"
-  tags                = var.common_tags
-}
+  name                        = "${var.name_prefix}-law"
+  resource_group_name         = var.resource_group_name
+  location                    = var.location
+  sku                         = "PerGB2018"
+  retention_in_days           = var.monitoring.log_retention_days
+  create_application_insights = true
+  application_type            = "other"
 
-#------------------------------------------------------------------------------
-# Diagnostic Settings for Host Pool
-#------------------------------------------------------------------------------
-resource "azurerm_monitor_diagnostic_setting" "host_pool" {
-  name                       = "${var.name_prefix}-hostpool-diag"
-  target_resource_id         = var.host_pool_id
-  log_analytics_workspace_id = azurerm_log_analytics_workspace.main.id
-
-  enabled_log {
-    category = "Checkpoint"
+  # Diagnostic settings for AVD resources
+  diagnostic_settings = {
+    hostpool = {
+      target_resource_id = var.host_pool_id
+      log_categories     = ["Checkpoint", "Error", "Management", "Connection", "HostRegistration"]
+      metric_categories  = ["AllMetrics"]
+    }
+    workspace = {
+      target_resource_id = var.workspace_id
+      log_categories     = ["Checkpoint", "Error", "Management", "Feed"]
+      metric_categories  = ["AllMetrics"]
+    }
   }
 
-  enabled_log {
-    category = "Error"
-  }
+  # Action groups for alerts
+  action_groups = var.monitoring.enable_alerts ? {
+    main = {
+      short_name = "avdalerts"
+      email_receivers = [
+        {
+          name          = "sendtoadmin"
+          email_address = var.monitoring.alert_email
+        }
+      ]
+    }
+  } : {}
 
-  enabled_log {
-    category = "Management"
-  }
-
-  enabled_log {
-    category = "Connection"
-  }
-
-  enabled_log {
-    category = "HostRegistration"
-  }
-
-  metric {
-    category = "AllMetrics"
-  }
-}
-
-#------------------------------------------------------------------------------
-# Diagnostic Settings for Workspace
-#------------------------------------------------------------------------------
-resource "azurerm_monitor_diagnostic_setting" "workspace" {
-  name                       = "${var.name_prefix}-workspace-diag"
-  target_resource_id         = var.workspace_id
-  log_analytics_workspace_id = azurerm_log_analytics_workspace.main.id
-
-  enabled_log {
-    category = "Checkpoint"
-  }
-
-  enabled_log {
-    category = "Error"
-  }
-
-  enabled_log {
-    category = "Management"
-  }
-
-  enabled_log {
-    category = "Feed"
-  }
-
-  metric {
-    category = "AllMetrics"
-  }
-}
-
-#------------------------------------------------------------------------------
-# Action Group for Alerts
-#------------------------------------------------------------------------------
-resource "azurerm_monitor_action_group" "main" {
-  count               = var.monitoring.enable_alerts ? 1 : 0
-  name                = "${var.name_prefix}-action-group"
-  resource_group_name = var.resource_group_name
-  short_name          = "avdalerts"
-
-  email_receiver {
-    name          = "sendtoadmin"
-    email_address = var.monitoring.alert_email
-  }
-
-  tags = var.common_tags
+  common_tags = var.common_tags
 }
 
 #------------------------------------------------------------------------------

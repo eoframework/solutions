@@ -4,32 +4,32 @@
 
 output "log_analytics_workspace_id" {
   description = "ID of the Log Analytics workspace"
-  value       = azurerm_log_analytics_workspace.main.id
+  value       = module.monitor.id
 }
 
 output "log_analytics_workspace_name" {
   description = "Name of the Log Analytics workspace"
-  value       = azurerm_log_analytics_workspace.main.name
+  value       = module.monitor.name
 }
 
 output "application_insights_id" {
   description = "ID of Application Insights"
-  value       = azurerm_application_insights.main.id
+  value       = module.monitor.application_insights_id
 }
 
 output "application_insights_connection_string" {
   description = "Connection string for Application Insights"
-  value       = azurerm_application_insights.main.connection_string
+  value       = module.monitor.application_insights_instrumentation_key
   sensitive   = true
 }
 
 output "application_insights_instrumentation_key" {
   description = "Instrumentation key for Application Insights"
-  value       = azurerm_application_insights.main.instrumentation_key
+  value       = module.monitor.application_insights_instrumentation_key
   sensitive   = true
 }
 
 output "action_group_id" {
   description = "ID of the monitor action group"
-  value       = var.monitoring.enable_alerts ? azurerm_monitor_action_group.main[0].id : null
+  value       = var.monitoring.enable_alerts ? module.monitor.action_group_ids["main"] : null
 }

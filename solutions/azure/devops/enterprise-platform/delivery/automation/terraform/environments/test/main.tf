@@ -49,11 +49,13 @@ locals {
 
   # Grouped App Service configuration (DRY)
   app_service_config = {
-    name_prefix     = local.name_prefix
-    sku             = var.compute.app_service_plan_sku
-    tier            = var.compute.app_service_plan_tier
-    min_instances   = var.compute.autoscale_min_instances
-    max_instances   = var.compute.autoscale_max_instances
+    name_prefix              = local.name_prefix
+    sku                      = var.compute.app_service_plan_sku
+    tier                     = var.compute.app_service_plan_tier
+    min_instances            = var.compute.autoscale_min_instances
+    max_instances            = var.compute.autoscale_max_instances
+    autoscale_enabled        = var.compute.autoscale_enabled
+    deployment_slots_enabled = var.compute.deployment_slots_enabled
   }
 }
 
@@ -112,7 +114,7 @@ module "devops" {
   service_connections = var.service_connections
   subscription_id     = var.azure.subscription_id
   tenant_id           = var.azure.tenant_id
-  key_vault_uri       = module.core.key_vault_uri
+  key_vault_id        = module.core.key_vault_id
 
   depends_on = [module.security]
 }

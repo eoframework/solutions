@@ -1,113 +1,93 @@
 #------------------------------------------------------------------------------
 # AVD Module
 # Creates: Host Pool, Application Groups, Workspace, Session Hosts, Scaling Plan
+# Uses: modules/azure/avd-host-pool, modules/azure/avd-workspace, modules/azure/avd-application-group
 #------------------------------------------------------------------------------
 
 #------------------------------------------------------------------------------
-# AVD Host Pool
+# AVD Host Pool (via Azure module)
 #------------------------------------------------------------------------------
-resource "azurerm_virtual_desktop_host_pool" "main" {
+module "host_pool" {
+  source = "../../azure/avd-host-pool"
+
   name                             = "${var.name_prefix}-hostpool"
   location                         = var.location
   resource_group_name              = var.resource_group_name
-  type                             = var.avd.host_pool_type
+  host_pool_type                   = var.avd.host_pool_type
   load_balancer_type               = var.avd.host_pool_load_balancer
   maximum_sessions_allowed         = var.avd.max_session_limit
   start_vm_on_connect              = var.avd.start_vm_on_connect
-  personal_desktop_assignment_type = var.avd.host_pool_type == "Personal" ? var.avd.personal_desktop_assignment : null
+  personal_desktop_assignment_type = var.avd.personal_desktop_assignment
   validate_environment             = var.avd.validate_environment
   friendly_name                    = "${var.name_prefix} Host Pool"
   description                      = "Managed by Terraform"
+  registration_token_rotation_days = 27
 
-  tags = var.common_tags
+  common_tags = var.common_tags
 }
 
 #------------------------------------------------------------------------------
-# Desktop Application Group
+# AVD Workspace (via Azure module)
 #------------------------------------------------------------------------------
-resource "azurerm_virtual_desktop_application_group" "desktop" {
-  count               = var.app_groups.desktop_enabled ? 1 : 0
-  name                = "${var.name_prefix}-desktop-appgroup"
-  location            = var.location
-  resource_group_name = var.resource_group_name
-  type                = "Desktop"
-  host_pool_id        = azurerm_virtual_desktop_host_pool.main.id
-  friendly_name       = var.app_groups.desktop_friendly_name
-  description         = "Desktop Application Group"
+module "workspace" {
+  source = "../../azure/avd-workspace"
 
-  tags = var.common_tags
-}
-
-#------------------------------------------------------------------------------
-# RemoteApp Application Group
-#------------------------------------------------------------------------------
-resource "azurerm_virtual_desktop_application_group" "remoteapp" {
-  count               = var.app_groups.remoteapp_enabled ? 1 : 0
-  name                = "${var.name_prefix}-remoteapp-appgroup"
-  location            = var.location
-  resource_group_name = var.resource_group_name
-  type                = "RemoteApp"
-  host_pool_id        = azurerm_virtual_desktop_host_pool.main.id
-  friendly_name       = "RemoteApp Applications"
-  description         = "RemoteApp Application Group"
-
-  tags = var.common_tags
-}
-
-#------------------------------------------------------------------------------
-# AVD Workspace
-#------------------------------------------------------------------------------
-resource "azurerm_virtual_desktop_workspace" "main" {
   name                = "${var.name_prefix}-workspace"
   location            = var.location
   resource_group_name = var.resource_group_name
   friendly_name       = "${var.name_prefix} Workspace"
   description         = "Managed by Terraform"
 
-  tags = var.common_tags
+  common_tags = var.common_tags
 }
 
 #------------------------------------------------------------------------------
-# Workspace - Application Group Associations
+# Desktop Application Group (via Azure module)
 #------------------------------------------------------------------------------
-resource "azurerm_virtual_desktop_workspace_application_group_association" "desktop" {
-  count                = var.app_groups.desktop_enabled ? 1 : 0
-  workspace_id         = azurerm_virtual_desktop_workspace.main.id
-  application_group_id = azurerm_virtual_desktop_application_group.desktop[0].id
-}
+module "desktop_app_group" {
+  count  = var.app_groups.desktop_enabled ? 1 : 0
+  source = "../../azure/avd-application-group"
 
-resource "azurerm_virtual_desktop_workspace_application_group_association" "remoteapp" {
-  count                = var.app_groups.remoteapp_enabled ? 1 : 0
-  workspace_id         = azurerm_virtual_desktop_workspace.main.id
-  application_group_id = azurerm_virtual_desktop_application_group.remoteapp[0].id
+  name                = "${var.name_prefix}-desktop-appgroup"
+  location            = var.location
+  resource_group_name = var.resource_group_name
+  type                = "Desktop"
+  host_pool_id        = module.host_pool.id
+  workspace_id        = module.workspace.id
+  friendly_name       = var.app_groups.desktop_friendly_name
+  description         = "Desktop Application Group"
+
+  common_tags = var.common_tags
 }
 
 #------------------------------------------------------------------------------
-# Host Pool Registration Token (stored in Key Vault)
+# RemoteApp Application Group (via Azure module)
 #------------------------------------------------------------------------------
-resource "time_rotating" "registration_token" {
-  rotation_days = 27
+module "remoteapp_app_group" {
+  count  = var.app_groups.remoteapp_enabled ? 1 : 0
+  source = "../../azure/avd-application-group"
+
+  name                = "${var.name_prefix}-remoteapp-appgroup"
+  location            = var.location
+  resource_group_name = var.resource_group_name
+  type                = "RemoteApp"
+  host_pool_id        = module.host_pool.id
+  workspace_id        = module.workspace.id
+  friendly_name       = "RemoteApp Applications"
+  description         = "RemoteApp Application Group"
+
+  common_tags = var.common_tags
 }
 
-resource "azurerm_virtual_desktop_host_pool_registration_info" "main" {
-  hostpool_id     = azurerm_virtual_desktop_host_pool.main.id
-  expiration_date = time_rotating.registration_token.rotation_rfc3339
-
-  lifecycle {
-    replace_triggered_by = [time_rotating.registration_token]
-  }
-}
-
+#------------------------------------------------------------------------------
+# Store Registration Token in Key Vault
+#------------------------------------------------------------------------------
 resource "azurerm_key_vault_secret" "registration_token" {
   name         = "avd-hostpool-registration-token"
-  value        = azurerm_virtual_desktop_host_pool_registration_info.main.token
+  value        = module.host_pool.registration_token
   key_vault_id = var.key_vault_id
 
-  expiration_date = time_rotating.registration_token.rotation_rfc3339
-
-  lifecycle {
-    replace_triggered_by = [time_rotating.registration_token]
-  }
+  expiration_date = module.host_pool.registration_expiration
 }
 
 #------------------------------------------------------------------------------
@@ -208,7 +188,7 @@ resource "azurerm_virtual_machine_extension" "avd_agent" {
   auto_upgrade_minor_version = true
 
   settings = jsonencode({
-    commandToExecute = "powershell.exe -ExecutionPolicy Unrestricted -Command \"New-Item -Path HKLM:\\SOFTWARE\\Microsoft\\RDInfraAgent\\Parameters -Force; New-ItemProperty -Path HKLM:\\SOFTWARE\\Microsoft\\RDInfraAgent\\Parameters -Name RegistrationToken -Value '${azurerm_virtual_desktop_host_pool_registration_info.main.token}' -PropertyType String -Force; New-ItemProperty -Path HKLM:\\SOFTWARE\\Microsoft\\RDInfraAgent\\Parameters -Name HostPoolName -Value '${azurerm_virtual_desktop_host_pool.main.name}' -PropertyType String -Force; Invoke-WebRequest -Uri 'https://query.prod.cms.rt.microsoft.com/cms/api/am/binary/RWrmXv' -OutFile 'C:\\AVDAgent.msi'; Start-Process -FilePath 'msiexec.exe' -ArgumentList '/i C:\\AVDAgent.msi /quiet /qn /norestart REGISTRATIONTOKEN=${azurerm_virtual_desktop_host_pool_registration_info.main.token}' -Wait\""
+    commandToExecute = "powershell.exe -ExecutionPolicy Unrestricted -Command \"New-Item -Path HKLM:\\SOFTWARE\\Microsoft\\RDInfraAgent\\Parameters -Force; New-ItemProperty -Path HKLM:\\SOFTWARE\\Microsoft\\RDInfraAgent\\Parameters -Name RegistrationToken -Value '${module.host_pool.registration_token}' -PropertyType String -Force; New-ItemProperty -Path HKLM:\\SOFTWARE\\Microsoft\\RDInfraAgent\\Parameters -Name HostPoolName -Value '${module.host_pool.name}' -PropertyType String -Force; Invoke-WebRequest -Uri 'https://query.prod.cms.rt.microsoft.com/cms/api/am/binary/RWrmXv' -OutFile 'C:\\AVDAgent.msi'; Start-Process -FilePath 'msiexec.exe' -ArgumentList '/i C:\\AVDAgent.msi /quiet /qn /norestart REGISTRATIONTOKEN=${module.host_pool.registration_token}' -Wait\""
   })
 
   depends_on = [
@@ -271,7 +251,7 @@ resource "azurerm_virtual_desktop_scaling_plan" "main" {
   }
 
   host_pool {
-    hostpool_id          = azurerm_virtual_desktop_host_pool.main.id
+    hostpool_id          = module.host_pool.id
     scaling_plan_enabled = true
   }
 

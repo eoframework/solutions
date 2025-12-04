@@ -14,35 +14,35 @@ output "resource_group_id" {
 
 output "vnet_id" {
   description = "ID of the virtual network"
-  value       = azurerm_virtual_network.main.id
+  value       = module.vnet.id
 }
 
 output "vnet_name" {
   description = "Name of the virtual network"
-  value       = azurerm_virtual_network.main.name
+  value       = module.vnet.name
 }
 
 output "appservice_subnet_id" {
   description = "ID of the App Service subnet"
-  value       = azurerm_subnet.appservice.id
+  value       = module.vnet.subnet_ids["${var.name_prefix}-appservice-subnet"]
 }
 
 output "private_endpoint_subnet_id" {
   description = "ID of the private endpoint subnet"
-  value       = azurerm_subnet.private_endpoints.id
+  value       = module.vnet.subnet_ids["${var.name_prefix}-pe-subnet"]
 }
 
 output "key_vault_id" {
   description = "ID of the Key Vault"
-  value       = azurerm_key_vault.main.id
+  value       = module.key_vault.id
 }
 
 output "key_vault_name" {
   description = "Name of the Key Vault"
-  value       = azurerm_key_vault.main.name
+  value       = module.key_vault.name
 }
 
 output "key_vault_uri" {
   description = "URI of the Key Vault"
-  value       = azurerm_key_vault.main.vault_uri
+  value       = module.key_vault.vault_uri
 }
