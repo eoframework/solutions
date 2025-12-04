@@ -1,0 +1,48 @@
+{
+  "displayName": "CA004-Require-CACPIV",
+  "description": "NIST 800-171 IA-2(12): Require CAC/PIV smart card certificate for CUI access. Maps to CMMC IA.L2-3.5.3 (phishing-resistant MFA).",
+  "state": "enabled",
+  "conditions": {
+    "users": {
+      "includeGroups": ["cui-users"],
+      "excludeUsers": [],
+      "excludeGroups": ["emergency-access-accounts"]
+    },
+    "applications": {
+      "includeApplications": ["All"],
+      "excludeApplications": []
+    },
+    "clientAppTypes": [
+      "browser",
+      "mobileAppsAndDesktopClients"
+    ]
+  },
+  "grantControls": {
+    "operator": "OR",
+    "builtInControls": [],
+    "authenticationStrength": {
+      "id": "00000000-0000-0000-0000-000000000004",
+      "displayName": "Phishing-resistant MFA"
+    },
+    "customAuthenticationFactors": [],
+    "termsOfUse": []
+  },
+  "sessionControls": {
+    "signInFrequency": {
+      "value": 8,
+      "type": "hours",
+      "isEnabled": true
+    },
+    "persistentBrowser": {
+      "mode": "never",
+      "isEnabled": true
+    }
+  },
+  "metadata": {
+    "nistControls": ["IA-2(12)", "IA-5(2)", "IA-8(2)"],
+    "cmmcPractices": ["IA.L2-3.5.3", "IA.L2-3.5.10"],
+    "priority": "Critical",
+    "notes": "Requires DoD PKI certificate authorities to be configured in Azure AD",
+    "lastUpdated": "2025-12-04"
+  }
+}

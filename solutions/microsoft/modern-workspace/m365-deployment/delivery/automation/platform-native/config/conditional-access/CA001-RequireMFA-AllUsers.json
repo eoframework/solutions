@@ -1,0 +1,40 @@
+{
+    "displayName": "M365-CA001-Require-MFA-AllUsers",
+    "state": "enabledForReportingButNotEnforced",
+    "conditions": {
+        "users": {
+            "includeUsers": ["All"],
+            "excludeUsers": [],
+            "includeGroups": [],
+            "excludeGroups": ["BreakGlass-EmergencyAccess"]
+        },
+        "applications": {
+            "includeApplications": ["All"],
+            "excludeApplications": []
+        },
+        "platforms": {
+            "includePlatforms": ["all"],
+            "excludePlatforms": []
+        },
+        "locations": {
+            "includeLocations": ["All"],
+            "excludeLocations": ["AllTrusted"]
+        }
+    },
+    "grantControls": {
+        "operator": "OR",
+        "builtInControls": ["mfa"]
+    },
+    "sessionControls": {
+        "signInFrequency": {
+            "value": 8,
+            "type": "hours",
+            "isEnabled": true
+        }
+    },
+    "metadata": {
+        "complianceMapping": ["SOC2-CC6.1", "GDPR-Art32", "HIPAA-164.312(d)"],
+        "description": "Requires MFA for all users accessing any application",
+        "lastReviewed": "2025-12-04"
+    }
+}

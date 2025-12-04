@@ -1,0 +1,39 @@
+{
+  "displayName": "CA003-Require-CompliantDevice",
+  "description": "NIST 800-171 AC-19: Require device to be marked as compliant in Intune before accessing resources. Maps to CMMC AC.L2-3.1.18.",
+  "state": "enabled",
+  "conditions": {
+    "users": {
+      "includeUsers": ["All"],
+      "excludeUsers": [],
+      "excludeGroups": ["emergency-access-accounts"]
+    },
+    "applications": {
+      "includeApplications": ["All"],
+      "excludeApplications": []
+    },
+    "platforms": {
+      "includePlatforms": ["all"],
+      "excludePlatforms": []
+    },
+    "clientAppTypes": [
+      "browser",
+      "mobileAppsAndDesktopClients"
+    ]
+  },
+  "grantControls": {
+    "operator": "AND",
+    "builtInControls": [
+      "compliantDevice",
+      "mfa"
+    ],
+    "customAuthenticationFactors": [],
+    "termsOfUse": []
+  },
+  "metadata": {
+    "nistControls": ["AC-19", "AC-19(5)", "SC-7(8)"],
+    "cmmcPractices": ["AC.L2-3.1.18", "AC.L2-3.1.19"],
+    "priority": "High",
+    "lastUpdated": "2025-12-04"
+  }
+}

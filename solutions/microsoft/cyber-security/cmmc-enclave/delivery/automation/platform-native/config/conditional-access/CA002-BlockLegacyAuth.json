@@ -1,0 +1,32 @@
+{
+  "displayName": "CA002-Block-LegacyAuth",
+  "description": "NIST 800-171 IA-2(6): Block legacy authentication protocols (POP, IMAP, SMTP, ActiveSync basic auth). Maps to CMMC IA.L2-3.5.3.",
+  "state": "enabled",
+  "conditions": {
+    "users": {
+      "includeUsers": ["All"],
+      "excludeUsers": [],
+      "excludeGroups": []
+    },
+    "applications": {
+      "includeApplications": ["All"],
+      "excludeApplications": []
+    },
+    "clientAppTypes": [
+      "exchangeActiveSync",
+      "other"
+    ]
+  },
+  "grantControls": {
+    "operator": "OR",
+    "builtInControls": ["block"],
+    "customAuthenticationFactors": [],
+    "termsOfUse": []
+  },
+  "metadata": {
+    "nistControls": ["IA-2(6)", "AC-17(2)"],
+    "cmmcPractices": ["IA.L2-3.5.3", "AC.L2-3.1.12"],
+    "priority": "Critical",
+    "lastUpdated": "2025-12-04"
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "displayName": "CA005-Block-HighRiskSignIn",
+  "description": "NIST 800-171 SI-4: Block sign-ins flagged as high risk by Azure AD Identity Protection. Maps to CMMC SI.L2-3.14.6.",
+  "state": "enabled",
+  "conditions": {
+    "users": {
+      "includeUsers": ["All"],
+      "excludeUsers": [],
+      "excludeGroups": ["emergency-access-accounts"]
+    },
+    "applications": {
+      "includeApplications": ["All"],
+      "excludeApplications": []
+    },
+    "signInRiskLevels": ["high"],
+    "userRiskLevels": ["high"],
+    "clientAppTypes": [
+      "browser",
+      "mobileAppsAndDesktopClients"
+    ]
+  },
+  "grantControls": {
+    "operator": "OR",
+    "builtInControls": ["block"],
+    "customAuthenticationFactors": [],
+    "termsOfUse": []
+  },
+  "metadata": {
+    "nistControls": ["SI-4", "AC-2(12)", "AU-6"],
+    "cmmcPractices": ["SI.L2-3.14.6", "SI.L2-3.14.7"],
+    "priority": "Critical",
+    "notes": "Requires Azure AD Identity Protection P2 license",
+    "lastUpdated": "2025-12-04"
+  }
+}

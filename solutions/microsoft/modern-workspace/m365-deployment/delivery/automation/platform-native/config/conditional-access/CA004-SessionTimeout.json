@@ -1,0 +1,36 @@
+{
+    "displayName": "M365-CA004-Session-Timeout",
+    "state": "enabled",
+    "conditions": {
+        "users": {
+            "includeUsers": ["All"],
+            "excludeUsers": [],
+            "includeGroups": [],
+            "excludeGroups": []
+        },
+        "applications": {
+            "includeApplications": ["All"],
+            "excludeApplications": []
+        }
+    },
+    "grantControls": {
+        "operator": "OR",
+        "builtInControls": []
+    },
+    "sessionControls": {
+        "signInFrequency": {
+            "value": 8,
+            "type": "hours",
+            "isEnabled": true
+        },
+        "persistentBrowser": {
+            "mode": "never",
+            "isEnabled": true
+        }
+    },
+    "metadata": {
+        "complianceMapping": ["SOC2-CC6.1", "HIPAA-164.312(a)(2)(iii)"],
+        "description": "Enforces 8-hour session timeout and prevents persistent browser sessions",
+        "lastReviewed": "2025-12-04"
+    }
+}

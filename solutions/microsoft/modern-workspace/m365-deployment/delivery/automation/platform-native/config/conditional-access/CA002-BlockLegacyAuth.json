@@ -1,0 +1,29 @@
+{
+    "displayName": "M365-CA002-Block-LegacyAuth",
+    "state": "enabled",
+    "conditions": {
+        "users": {
+            "includeUsers": ["All"],
+            "excludeUsers": [],
+            "includeGroups": [],
+            "excludeGroups": []
+        },
+        "applications": {
+            "includeApplications": ["All"],
+            "excludeApplications": []
+        },
+        "clientAppTypes": [
+            "exchangeActiveSync",
+            "other"
+        ]
+    },
+    "grantControls": {
+        "operator": "OR",
+        "builtInControls": ["block"]
+    },
+    "metadata": {
+        "complianceMapping": ["SOC2-CC6.6", "NIST-IA-2"],
+        "description": "Blocks legacy authentication protocols that don't support MFA",
+        "lastReviewed": "2025-12-04"
+    }
+}

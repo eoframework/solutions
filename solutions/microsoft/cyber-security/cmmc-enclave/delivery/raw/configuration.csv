@@ -1,33 +1,77 @@
-#WIDTH: 25,15,12,30,45,10,12,33,16,20,26,39,12
-#ALIGN: left,left,center,left,left,center,left,left,center,left,left,left,center
-Parameter Name,Category,Environment,Default Value,Description,Required,Data Type,Validation Rules,Security Level,Owner Team,Dependencies,Notes,Last Updated
-AZURE_GOV_TENANT_ID,Azure Government,All,[gov-tenant-id],Azure Government tenant identifier,Yes,String,GUID format,Secret,Platform Team,Azure Gov subscription,Obtain from Microsoft GCC High onboarding,[DATE]
-AZURE_GOV_SUBSCRIPTION_ID,Azure Government,All,[gov-subscription-id],Azure Government subscription identifier,Yes,String,GUID format,Secret,Platform Team,Tenant provisioning,Must be Azure Government subscription,[DATE]
-AZURE_GOV_REGION,Azure Government,All,usgovvirginia,Azure Government deployment region,Yes,String,usgovvirginia|usgovtexas|usgovarizona,Public,Platform Team,None,FedRAMP High region,[DATE]
-M365_GCC_HIGH_TENANT,M365 GCC High,All,[tenant].onmicrosoft.us,M365 GCC High tenant domain,Yes,String,Valid GCC High domain,Confidential,M365 Team,Azure Gov tenant,DoD IL4 authorized tenant,[DATE]
-M365_LICENSE_SKU,M365 GCC High,All,SPE_E5_GCC_HIGH,M365 GCC High E5 license SKU,Yes,String,Valid license SKU,Confidential,M365 Team,License procurement,50 users x $146/user/month,[DATE]
-CAC_PIV_REQUIRED,Authentication,All,true,Require CAC/PIV smart card authentication,Yes,Boolean,true|false,Secret,Security Team,DoD PKI integration,NIST IA-2 requirement,[DATE]
-CONDITIONAL_ACCESS_ENABLED,Authentication,All,true,Enable Azure AD Conditional Access,Yes,Boolean,true|false,Confidential,Security Team,Azure AD P2 license,Zero Trust enforcement,[DATE]
-MFA_ENFORCEMENT,Authentication,All,required,Multi-factor authentication requirement,Yes,String,required|optional|disabled,Confidential,Security Team,CAC/PIV,Phishing-resistant MFA via CAC,[DATE]
-SENTINEL_WORKSPACE_NAME,Security Monitoring,All,cmmc-sentinel-workspace,Microsoft Sentinel workspace name,Yes,String,Max 63 characters,Confidential,SOC Team,Azure Gov subscription,100GB/month ingestion,[DATE]
-SENTINEL_RETENTION_DAYS,Security Monitoring,All,90,Sentinel log retention in days,Yes,Integer,30-730,Public,SOC Team,Sentinel workspace,NIST AU-11 compliance,[DATE]
-SENTINEL_INGESTION_GB,Security Monitoring,All,100,Expected monthly log ingestion in GB,Yes,Integer,1-1000,Public,SOC Team,Cost planning,Billable ingestion volume,[DATE]
-DEFENDER_FOR_CLOUD,Security Monitoring,All,enabled,Enable Defender for Cloud,Yes,String,enabled|disabled,Confidential,Security Team,Azure Gov subscription,CMMC posture management,[DATE]
-ENCRYPTION_ALGORITHM,Cryptography,All,AES-256,Data encryption algorithm,Yes,String,AES-256,Secret,Cryptography Team,FIPS 140-2,NIST SC-13 requirement,[DATE]
-FIPS_140_2_LEVEL,Cryptography,All,2,FIPS 140-2 validation level,Yes,Integer,1|2|3|4,Secret,Cryptography Team,Azure Key Vault,HSM-backed keys,[DATE]
-TLS_VERSION,Cryptography,All,1.2,Minimum TLS version,Yes,String,1.2|1.3,Public,Security Team,None,NIST SC-8(1) requirement,[DATE]
-VNET_CIDR,Network,All,10.100.0.0/16,Azure VNet CIDR block,Yes,String,Valid CIDR notation,Public,Network Team,None,Azure Government VNet,[DATE]
-MANAGEMENT_SUBNET,Network,All,10.100.1.0/24,Management subnet CIDR,Yes,String,Valid CIDR notation,Public,Network Team,VNET_CIDR,Bastion and jump servers,[DATE]
-CUI_WORKLOAD_SUBNET,Network,All,10.100.10.0/24,CUI workload subnet CIDR,Yes,String,Valid CIDR notation,Public,Network Team,VNET_CIDR,CUI processing VMs,[DATE]
-EXPRESSROUTE_ENABLED,Network,All,true,Enable ExpressRoute connectivity,Yes,Boolean,true|false,Confidential,Network Team,Circuit provisioning,Private connectivity required,[DATE]
-CUI_USER_COUNT,Compliance,All,50,Number of CUI-handling users,Yes,Integer,1-1000,Public,Compliance Team,License count,Billable user count,[DATE]
-CMMC_LEVEL,Compliance,All,Level2,Target CMMC certification level,Yes,String,Level1|Level2|Level3,Confidential,Compliance Team,DoD contract,110 NIST 800-171 controls,[DATE]
-NIST_800_171_CONTROLS,Compliance,All,110,Number of NIST 800-171 controls,Yes,Integer,110,Confidential,Compliance Team,CMMC Level 2,All 14 control families,[DATE]
-SPRS_SCORE_TARGET,Compliance,All,110,Target SPRS score,Yes,Integer,-203 to 110,Confidential,Compliance Team,Control implementation,Maximum achievable score,[DATE]
-LOG_RETENTION_YEARS,Compliance,All,7,Long-term log retention in years,Yes,Integer,3-10,Confidential,Compliance Team,Azure Storage,DFARS requirement,[DATE]
-BACKUP_RETENTION_DAYS,Operations,All,30,Backup retention period in days,Yes,Integer,7-365,Public,Operations Team,Azure Backup,Point-in-time recovery,[DATE]
-RTO_HOURS,Operations,All,4,Recovery Time Objective in hours,Yes,Integer,1-24,Confidential,Operations Team,DR planning,SOW commitment,[DATE]
-RPO_HOURS,Operations,All,1,Recovery Point Objective in hours,Yes,Integer,0-24,Confidential,Operations Team,DR planning,SOW commitment,[DATE]
-ALERT_RESPONSE_MINUTES,Operations,All,15,Target alert response time in minutes,Yes,Integer,1-60,Confidential,SOC Team,Sentinel playbooks,SOW SLA requirement,[DATE]
-VULNERABILITY_SCAN_FREQUENCY,Security Assessment,All,monthly,Vulnerability scanning frequency,Yes,String,daily|weekly|monthly,Confidential,Security Team,Defender for Cloud,NIST RA-5 requirement,[DATE]
-
+#WIDTH: 45,18,50,50,50,45,8,12,27,14,14,12,30,12
+#ALIGN: left,left,left,left,left,left,center,left,left,center,left,left,left,center
+Parameter Name,Category,Production,Test,DR,Description,Required,Data Type,Validation Rules,Security Level,Owner Team,Dependencies,Notes,Last Updated
+solution.name,Project,CMMC GCC High Enclave,CMMC GCC High Enclave,CMMC GCC High Enclave,Full solution name for tagging,Yes,String,Max 50 characters,Public,Project Team,None,Display name in dashboards,2025-12-04
+solution.abbr,Project,cmmc,cmmc,cmmc,Solution abbreviation for resource naming,Yes,String,Max 10 characters,Public,Project Team,None,Used in all resource names,2025-12-04
+solution.provider_name,Project,microsoft,microsoft,microsoft,Technology provider name,Yes,String,microsoft,Public,Project Team,None,EO Framework provider,2025-12-04
+solution.category_name,Project,cyber-security,cyber-security,cyber-security,Solution category,Yes,String,Valid category,Public,Project Team,None,EO Framework category,2025-12-04
+azure_gov.tenant_id,Project,[GOV_TENANT_ID],[GOV_TENANT_ID],[GOV_TENANT_ID],Azure Government tenant identifier,Yes,String,GUID format,Secret,Platform Team,Azure Gov subscription,Obtain from Microsoft GCC High onboarding,2025-12-04
+azure_gov.subscription_id,Project,[GOV_SUBSCRIPTION_ID],[GOV_SUBSCRIPTION_ID],[GOV_SUBSCRIPTION_ID],Azure Government subscription identifier,Yes,String,GUID format,Secret,Platform Team,Tenant provisioning,Must be Azure Government subscription,2025-12-04
+azure_gov.region,Project,usgovvirginia,usgovvirginia,usgovtexas,Azure Government deployment region,Yes,String,usgovvirginia|usgovtexas|usgovarizona,Public,Platform Team,None,FedRAMP High region,2025-12-04
+azure_gov.dr_region,Project,usgovtexas,usgovtexas,usgovvirginia,Azure Government DR region,Yes,String,Valid Azure Gov region,Public,Platform Team,None,Secondary region,2025-12-04
+ownership.cost_center,Project,CC-CMMC-001,CC-CMMC-001,CC-CMMC-001,Cost center for billing,Yes,String,Valid cost center,Public,Finance,None,Chargeback reporting,2025-12-04
+ownership.owner_email,Project,cmmc-team@company.com,dev-team@company.com,cmmc-team@company.com,Technical owner email,Yes,String,Valid email,Public,Project Team,None,Alert notifications,2025-12-04
+ownership.project_code,Project,PRJ-CMMC-2025,PRJ-CMMC-2025,PRJ-CMMC-2025,Project code for tracking,Yes,String,Valid project code,Public,Project Team,None,Financial tracking,2025-12-04
+m365_gcc_high.tenant_domain,M365 GCC High,[tenant].onmicrosoft.us,[tenant].onmicrosoft.us,[tenant].onmicrosoft.us,M365 GCC High tenant domain,Yes,String,Valid GCC High domain,Confidential,M365 Team,Azure Gov tenant,DoD IL4 authorized tenant,2025-12-04
+m365_gcc_high.license_sku,M365 GCC High,SPE_E5_GCC_HIGH,SPE_E5_GCC_HIGH,SPE_E5_GCC_HIGH,M365 GCC High E5 license SKU,Yes,String,Valid license SKU,Confidential,M365 Team,License procurement,50 users x $146/user/month,2025-12-04
+m365_gcc_high.user_count,M365 GCC High,50,10,50,Number of licensed users,Yes,Integer,1-1000,Public,M365 Team,License count,CUI-handling users,2025-12-04
+m365_gcc_high.mailbox_archiving_enabled,M365 GCC High,true,true,true,Enable mailbox archiving,Yes,Boolean,true|false,Public,M365 Team,None,10-year archiving,2025-12-04
+m365_gcc_high.ediscovery_enabled,M365 GCC High,true,false,true,Enable eDiscovery capabilities,Yes,Boolean,true|false,Public,Compliance Team,None,Legal hold support,2025-12-04
+authentication.cac_piv_required,Authentication,true,true,true,Require CAC/PIV smart card authentication,Yes,Boolean,true|false,Secret,Security Team,DoD PKI integration,NIST IA-2 requirement,2025-12-04
+authentication.conditional_access_enabled,Authentication,true,true,true,Enable Azure AD Conditional Access,Yes,Boolean,true|false,Confidential,Security Team,Azure AD P2 license,Zero Trust enforcement,2025-12-04
+authentication.mfa_enforcement,Authentication,required,required,required,Multi-factor authentication requirement,Yes,String,required|optional|disabled,Confidential,Security Team,CAC/PIV,Phishing-resistant MFA via CAC,2025-12-04
+authentication.session_timeout_minutes,Authentication,480,480,480,Session timeout in minutes,Yes,Integer,60-720,Public,Security Team,None,8-hour session limit,2025-12-04
+authentication.device_compliance_required,Authentication,true,false,true,Require compliant devices,Yes,Boolean,true|false,Confidential,Security Team,Intune MDM,Device trust,2025-12-04
+security.sentinel_workspace_name,Security Monitoring,cmmc-sentinel-prod,cmmc-sentinel-test,cmmc-sentinel-dr,Microsoft Sentinel workspace name,Yes,String,Max 63 characters,Confidential,SOC Team,Azure Gov subscription,100GB/month ingestion,2025-12-04
+security.sentinel_retention_days,Security Monitoring,90,30,90,Sentinel log retention in days,Yes,Integer,30-730,Public,SOC Team,Sentinel workspace,NIST AU-11 compliance,2025-12-04
+security.sentinel_ingestion_gb,Security Monitoring,100,25,100,Expected monthly log ingestion in GB,Yes,Integer,1-1000,Public,SOC Team,Cost planning,Billable ingestion volume,2025-12-04
+security.defender_for_cloud_enabled,Security Monitoring,true,true,true,Enable Defender for Cloud,Yes,Boolean,true|false,Confidential,Security Team,Azure Gov subscription,CMMC posture management,2025-12-04
+security.defender_for_office_enabled,Security Monitoring,true,true,true,Enable Defender for Office 365,Yes,Boolean,true|false,Confidential,Security Team,M365 GCC High,Anti-phishing protection,2025-12-04
+security.enable_threat_intelligence,Security Monitoring,true,false,true,Enable threat intelligence feeds,Yes,Boolean,true|false,Public,SOC Team,Sentinel,DoD threat feeds,2025-12-04
+encryption.algorithm,Cryptography,AES-256,AES-256,AES-256,Data encryption algorithm,Yes,String,AES-256,Secret,Cryptography Team,FIPS 140-2,NIST SC-13 requirement,2025-12-04
+encryption.fips_140_level,Cryptography,2,2,2,FIPS 140-2 validation level,Yes,Integer,1|2|3|4,Secret,Cryptography Team,Azure Key Vault,HSM-backed keys,2025-12-04
+encryption.tls_version,Cryptography,1.2,1.2,1.2,Minimum TLS version,Yes,String,1.2|1.3,Public,Security Team,None,NIST SC-8(1) requirement,2025-12-04
+encryption.enable_customer_managed_keys,Cryptography,true,false,true,Use customer-managed encryption keys,Yes,Boolean,true|false,Public,Security Team,Key Vault,CMK for production,2025-12-04
+network.vnet_cidr,Networking,10.100.0.0/16,10.101.0.0/16,10.102.0.0/16,Azure VNet CIDR block,Yes,String,Valid CIDR notation,Public,Network Team,None,Azure Government VNet,2025-12-04
+network.management_subnet,Networking,10.100.1.0/24,10.101.1.0/24,10.102.1.0/24,Management subnet CIDR,Yes,String,Valid CIDR notation,Public,Network Team,vnet_cidr,Bastion and jump servers,2025-12-04
+network.cui_workload_subnet,Networking,10.100.10.0/24,10.101.10.0/24,10.102.10.0/24,CUI workload subnet CIDR,Yes,String,Valid CIDR notation,Public,Network Team,vnet_cidr,CUI processing VMs,2025-12-04
+network.private_endpoint_subnet,Networking,10.100.20.0/24,10.101.20.0/24,10.102.20.0/24,Private endpoint subnet CIDR,Yes,String,Valid CIDR notation,Public,Network Team,vnet_cidr,PaaS private access,2025-12-04
+network.expressroute_enabled,Networking,true,false,true,Enable ExpressRoute connectivity,Yes,Boolean,true|false,Confidential,Network Team,Circuit provisioning,Private connectivity required,2025-12-04
+network.expressroute_bandwidth_mbps,Networking,1000,0,1000,ExpressRoute bandwidth in Mbps,Yes,Integer,50-10000,Public,Network Team,ExpressRoute,1 Gbps circuit,2025-12-04
+network.enable_azure_firewall,Networking,true,false,true,Enable Azure Firewall,Yes,Boolean,true|false,Public,Network Team,None,Egress filtering,2025-12-04
+compute.vm_count,Compute,5,2,5,Number of CUI workload VMs,Yes,Integer,1-50,Public,Infrastructure,None,CUI processing,2025-12-04
+compute.vm_size,Compute,Standard_D4s_v3,Standard_D2s_v3,Standard_D4s_v3,Azure VM SKU,Yes,String,Valid Azure VM SKU,Public,Infrastructure,Cost,Right-sized for workload,2025-12-04
+compute.os_version,Compute,2022-datacenter-azure-edition,2022-datacenter-azure-edition,2022-datacenter-azure-edition,Windows Server version,Yes,String,Valid Windows version,Public,Infrastructure,None,STIG-hardened,2025-12-04
+compute.enable_azure_bastion,Compute,true,true,true,Enable Azure Bastion for management,Yes,Boolean,true|false,Public,Infrastructure,None,Secure RDP access,2025-12-04
+storage.account_tier,Storage,Premium,Standard,Premium,Storage account tier,Yes,String,Standard|Premium,Public,Storage Team,Performance,FIPS 140-2 encrypted,2025-12-04
+storage.replication_type,Storage,GRS,LRS,GRS,Storage replication type,Yes,String,LRS|GRS|ZRS,Public,Storage Team,DR,Geo-redundant for prod,2025-12-04
+storage.total_capacity_tb,Storage,2,0.5,2,Total storage capacity in TB,Yes,Number,0.5-100,Public,Storage Team,Cost,CUI document storage,2025-12-04
+storage.enable_soft_delete,Storage,true,true,true,Enable soft delete for recovery,Yes,Boolean,true|false,Public,Storage Team,None,14-day retention,2025-12-04
+compliance.cmmc_level,Compliance,Level2,Level2,Level2,Target CMMC certification level,Yes,String,Level1|Level2|Level3,Confidential,Compliance Team,DoD contract,110 NIST 800-171 controls,2025-12-04
+compliance.nist_800_171_controls,Compliance,110,110,110,Number of NIST 800-171 controls,Yes,Integer,110,Confidential,Compliance Team,CMMC Level 2,All 14 control families,2025-12-04
+compliance.sprs_score_target,Compliance,110,110,110,Target SPRS score,Yes,Integer,-203 to 110,Confidential,Compliance Team,Control implementation,Maximum achievable score,2025-12-04
+compliance.audit_log_retention_years,Compliance,7,1,7,Long-term log retention in years,Yes,Integer,1-10,Confidential,Compliance Team,Azure Storage,DFARS requirement,2025-12-04
+compliance.enable_compliance_manager,Compliance,true,false,true,Enable Microsoft Compliance Manager,Yes,Boolean,true|false,Public,Compliance Team,M365,Automated compliance scoring,2025-12-04
+purview.dlp_enabled,Data Protection,true,true,true,Enable DLP policies,Yes,Boolean,true|false,Confidential,Compliance Team,M365 E5,CUI data protection,2025-12-04
+purview.sensitivity_labels_enabled,Data Protection,true,true,true,Enable sensitivity labels,Yes,Boolean,true|false,Confidential,Compliance Team,M365 E5,CUI classification,2025-12-04
+purview.retention_policy_years,Data Protection,7,1,7,Retention policy in years,Yes,Integer,1-10,Public,Compliance Team,Purview,DFARS compliance,2025-12-04
+intune.device_enrollment_required,Device Management,true,false,true,Require Intune device enrollment,Yes,Boolean,true|false,Confidential,MDM Team,M365 E5,Device compliance,2025-12-04
+intune.compliance_policy_enabled,Device Management,true,false,true,Enable device compliance policies,Yes,Boolean,true|false,Confidential,MDM Team,Intune,Conditional Access,2025-12-04
+intune.bitlocker_required,Device Management,true,true,true,Require BitLocker encryption,Yes,Boolean,true|false,Confidential,MDM Team,Intune,NIST SC-28,2025-12-04
+monitoring.enable_alerts,Monitoring,true,false,true,Enable monitoring alerts,Yes,Boolean,true|false,Public,Operations,None,Alert configuration,2025-12-04
+monitoring.alert_email,Monitoring,soc-team@company.com,dev-team@company.com,soc-team@company.com,Email for critical alerts,Yes,String,Valid email,Confidential,Operations,None,Alert notifications,2025-12-04
+monitoring.alert_response_minutes,Monitoring,15,60,15,Target alert response time in minutes,Yes,Integer,1-60,Confidential,SOC Team,Sentinel playbooks,SOW SLA requirement,2025-12-04
+monitoring.enable_workbooks,Monitoring,true,false,true,Enable Sentinel workbooks,Yes,Boolean,true|false,Public,SOC Team,Sentinel,CMMC compliance dashboards,2025-12-04
+operations.backup_retention_days,Operations,30,7,30,Backup retention period in days,Yes,Integer,7-365,Public,Operations Team,Azure Backup,Point-in-time recovery,2025-12-04
+operations.rto_hours,Operations,4,24,4,Recovery Time Objective in hours,Yes,Integer,1-24,Confidential,Operations Team,DR planning,SOW commitment,2025-12-04
+operations.rpo_hours,Operations,1,4,1,Recovery Point Objective in hours,Yes,Integer,0-24,Confidential,Operations Team,DR planning,SOW commitment,2025-12-04
+operations.patch_schedule,Operations,monthly,monthly,monthly,OS patching frequency,Yes,String,weekly|monthly,Public,Operations Team,None,STIG updates,2025-12-04
+vulnerability.scan_frequency,Security Assessment,monthly,monthly,monthly,Vulnerability scanning frequency,Yes,String,daily|weekly|monthly,Confidential,Security Team,Defender for Cloud,NIST RA-5 requirement,2025-12-04
+vulnerability.remediation_sla_days,Security Assessment,30,30,30,Days to remediate high/critical findings,Yes,Integer,7-90,Confidential,Security Team,None,SLA requirement,2025-12-04
+dr.enabled,DR,true,false,true,Enable disaster recovery,Yes,Boolean,true|false,Public,DR Team,DR,DR infrastructure,2025-12-04
+dr.replication_enabled,DR,true,false,false,Enable storage replication,Yes,Boolean,true|false,Public,DR Team,DR,Cross-region replication,2025-12-04
+dr.failover_priority,DR,1,0,0,Failover priority (0=disabled),Yes,Integer,0-2,Public,DR Team,DR,Azure Traffic Manager,2025-12-04
+budget.enabled,Best Practices,true,true,true,Enable cost budgets,Yes,Boolean,true|false,Public,Finance,None,Cost management,2025-12-04
+budget.monthly_amount,Best Practices,20000,3000,15000,Monthly budget in USD,Yes,Integer,100-100000,Public,Finance,None,Budget threshold,2025-12-04
+budget.alert_thresholds,Best Practices,"[50,80,100]","[80,100]","[50,80,100]",Alert thresholds as percentages,Yes,List(Number),Valid percentages,Public,Finance,None,Alert triggers,2025-12-04
+budget.notification_email,Best Practices,finance@company.com,dev-team@company.com,finance@company.com,Email for budget alerts,Yes,String,Valid email,Confidential,Finance,None,Cost notifications,2025-12-04

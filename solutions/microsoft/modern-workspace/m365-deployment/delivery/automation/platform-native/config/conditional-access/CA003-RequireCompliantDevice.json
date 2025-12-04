@@ -1,0 +1,29 @@
+{
+    "displayName": "M365-CA003-Require-CompliantDevice",
+    "state": "enabledForReportingButNotEnforced",
+    "conditions": {
+        "users": {
+            "includeUsers": ["All"],
+            "excludeUsers": [],
+            "includeGroups": [],
+            "excludeGroups": ["BreakGlass-EmergencyAccess", "BYOD-Users"]
+        },
+        "applications": {
+            "includeApplications": ["All"],
+            "excludeApplications": []
+        },
+        "platforms": {
+            "includePlatforms": ["windows", "macOS", "iOS", "android"],
+            "excludePlatforms": []
+        }
+    },
+    "grantControls": {
+        "operator": "AND",
+        "builtInControls": ["compliantDevice", "mfa"]
+    },
+    "metadata": {
+        "complianceMapping": ["SOC2-CC6.7", "HIPAA-164.310(d)(1)"],
+        "description": "Requires device compliance via Intune for corporate-managed devices",
+        "lastReviewed": "2025-12-04"
+    }
+}

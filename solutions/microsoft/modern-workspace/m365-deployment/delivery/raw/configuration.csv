@@ -1,33 +1,72 @@
-#WIDTH: 25,15,12,30,45,10,12,33,16,20,26,39,12
-#ALIGN: left,left,center,left,left,center,left,left,center,left,left,left,center
-Parameter Name,Category,Environment,Default Value,Description,Required,Data Type,Validation Rules,Security Level,Owner Team,Dependencies,Notes,Last Updated
-M365_TENANT_NAME,M365 Tenant,All,[tenant].onmicrosoft.com,M365 tenant primary domain,Yes,String,Valid M365 domain,Confidential,M365 Team,None,Created during tenant provisioning,[DATE]
-M365_LICENSE_SKU,M365 Tenant,All,SPE_E5,M365 E5 license SKU,Yes,String,Valid license SKU,Confidential,M365 Team,License procurement,500 users x $66.50/user/month,[DATE]
-CUSTOM_DOMAIN,M365 Tenant,All,[domain.com],Client custom domain,Yes,String,Valid domain format,Public,M365 Team,DNS access,Verify via TXT record,[DATE]
-USER_COUNT,M365 Tenant,All,500,Total user count,Yes,Integer,1-10000,Public,M365 Team,License count,500 users per SOW,[DATE]
-AZURE_AD_CONNECT_SERVER,Identity,All,[server.domain.local],Azure AD Connect server FQDN,Yes,String,Valid server name,Confidential,Identity Team,Windows Server,Windows Server 2019 required,[DATE]
-PASSWORD_HASH_SYNC,Identity,All,true,Enable password hash synchronization,Yes,Boolean,true|false,Secret,Identity Team,Azure AD Connect,Enables SSO,[DATE]
-SEAMLESS_SSO,Identity,All,true,Enable seamless single sign-on,Yes,Boolean,true|false,Confidential,Identity Team,Azure AD Connect,Domain-joined devices,[DATE]
-MFA_REQUIRED,Security,All,true,Require MFA for all users,Yes,Boolean,true|false,Confidential,Security Team,Azure AD Premium,Zero-trust requirement,[DATE]
-CONDITIONAL_ACCESS_ENABLED,Security,All,true,Enable Conditional Access policies,Yes,Boolean,true|false,Confidential,Security Team,Azure AD P2,15 policies configured,[DATE]
-DEVICE_COMPLIANCE_REQUIRED,Security,All,true,Require compliant devices,Yes,Boolean,true|false,Confidential,Security Team,Intune MDM,500 devices enrolled,[DATE]
-DEFENDER_O365_ENABLED,Security,All,true,Enable Defender for Office 365,Yes,Boolean,true|false,Confidential,Security Team,M365 E5,Safe Links and Attachments,[DATE]
-DLP_ENABLED,Compliance,All,true,Enable DLP policies,Yes,Boolean,true|false,Confidential,Compliance Team,M365 E5,Protect PII,[DATE]
-RETENTION_YEARS_EMAIL,Compliance,All,7,Email retention period in years,Yes,Integer,1-10,Confidential,Compliance Team,Purview,SOC 2/HIPAA requirement,[DATE]
-RETENTION_YEARS_FILES,Compliance,All,5,Document retention period in years,Yes,Integer,1-10,Confidential,Compliance Team,Purview,SOC 2/HIPAA requirement,[DATE]
-TEAMS_PHONE_USERS,Telephony,All,150,Users with Teams Phone System,Yes,Integer,1-500,Public,Teams Team,Direct Routing,PSTN calling enabled,[DATE]
-AUDIO_CONFERENCING_USERS,Telephony,All,200,Users with audio conferencing,Yes,Integer,1-500,Public,Teams Team,M365 E5,Dial-in access,[DATE]
-DIRECT_ROUTING_SBC,Telephony,All,sbc.domain.com,Session Border Controller FQDN,Yes,String,Valid FQDN,Confidential,Teams Team,PSTN provider,SIP signaling port 5067,[DATE]
-INTUNE_DEVICES,Device Management,All,500,Devices enrolled in Intune,Yes,Integer,1-1000,Public,MDM Team,Intune,Windows/iOS/Android,[DATE]
-EXPRESSROUTE_ENABLED,Network,All,false,ExpressRoute for M365,No,Boolean,true|false,Confidential,Network Team,ISP circuit,Optional optimization,[DATE]
-EMAIL_MIGRATION_GB,Migration,All,250,Total email data to migrate (GB),Yes,Integer,1-10000,Public,Migration Team,Hybrid Exchange,500 mailboxes,[DATE]
-FILE_MIGRATION_TB,Migration,All,5,Total file data to migrate (TB),Yes,Integer,1-100,Public,Migration Team,ShareGate,Department file shares,[DATE]
-PILOT_USERS,Migration,All,50,Pilot migration user count,Yes,Integer,10-100,Public,Migration Team,Hybrid Exchange,10 users per department,[DATE]
-MIGRATION_WAVE_SIZE,Migration,All,90,Users per production wave,Yes,Integer,50-150,Public,Migration Team,Hybrid Exchange,5 waves total,[DATE]
-SHAREPOINT_SITES,SharePoint,All,5,Number of department sites,Yes,Integer,1-50,Public,SharePoint Team,SharePoint Online,One per department,[DATE]
-SHAREPOINT_STORAGE_TB,SharePoint,All,5,Total SharePoint storage (TB),Yes,Integer,1-25,Public,SharePoint Team,SharePoint Online,Scalable to 25TB+,[DATE]
-ONEDRIVE_STORAGE_TB_USER,SharePoint,All,1,OneDrive storage per user (TB),Yes,Integer,1-5,Public,SharePoint Team,OneDrive,Expandable to 5TB,[DATE]
-TEAMS_GOVERNANCE_ENABLED,Teams,All,true,Enable Teams governance policies,Yes,Boolean,true|false,Confidential,Teams Team,Teams Admin,Channel creation restricted,[DATE]
-EXTERNAL_SHARING,Collaboration,All,restricted,External sharing policy,Yes,String,disabled|restricted|open,Confidential,M365 Team,SharePoint Admin,Controlled guest access,[DATE]
-AUDIT_LOG_RETENTION_DAYS,Operations,All,90,Audit log retention in days,Yes,Integer,90-365,Confidential,Operations Team,M365 E5,Compliance requirement,[DATE]
-
+#WIDTH: 45,18,50,50,50,45,8,12,27,14,14,12,30,12
+#ALIGN: left,left,left,left,left,left,center,left,left,center,left,left,left,center
+Parameter Name,Category,Production,Test,DR,Description,Required,Data Type,Validation Rules,Security Level,Owner Team,Dependencies,Notes,Last Updated
+solution.name,Project,M365 Enterprise Deployment,M365 Enterprise Deployment,M365 Enterprise Deployment,Full solution name for tagging,Yes,String,Max 50 characters,Public,Project Team,None,Display name in dashboards,2025-12-04
+solution.abbr,Project,m365,m365,m365,Solution abbreviation for resource naming,Yes,String,Max 10 characters,Public,Project Team,None,Used in all resource names,2025-12-04
+solution.provider_name,Project,microsoft,microsoft,microsoft,Technology provider name,Yes,String,microsoft,Public,Project Team,None,EO Framework provider,2025-12-04
+solution.category_name,Project,modern-workspace,modern-workspace,modern-workspace,Solution category,Yes,String,Valid category,Public,Project Team,None,EO Framework category,2025-12-04
+azure_ad.tenant_id,Project,[TENANT_ID],[TENANT_ID],[TENANT_ID],Azure AD tenant identifier,Yes,String,GUID format,Secret,Platform Team,Azure subscription,Commercial tenant,2025-12-04
+azure_ad.tenant_domain,Project,[company].onmicrosoft.com,[company].onmicrosoft.com,[company].onmicrosoft.com,Azure AD tenant primary domain,Yes,String,Valid domain,Confidential,Platform Team,Tenant provisioning,Primary .onmicrosoft.com domain,2025-12-04
+azure_ad.custom_domain,Project,company.com,company.com,company.com,Custom domain for users,Yes,String,Valid domain,Public,Platform Team,DNS verification,User UPN suffix,2025-12-04
+ownership.cost_center,Project,CC-M365-001,CC-M365-001,CC-M365-001,Cost center for billing,Yes,String,Valid cost center,Public,Finance,None,Chargeback reporting,2025-12-04
+ownership.owner_email,Project,it-team@company.com,dev-team@company.com,it-team@company.com,Technical owner email,Yes,String,Valid email,Public,Project Team,None,Alert notifications,2025-12-04
+ownership.project_code,Project,PRJ-M365-2025,PRJ-M365-2025,PRJ-M365-2025,Project code for tracking,Yes,String,Valid project code,Public,Project Team,None,Financial tracking,2025-12-04
+m365.license_type,M365 Services,E5,E3,E5,Microsoft 365 license tier,Yes,String,E3|E5|F3,Confidential,M365 Team,License procurement,$66.50/user/month for E5,2025-12-04
+m365.user_count,M365 Services,500,50,500,Total licensed users,Yes,Integer,1-10000,Public,M365 Team,License count,All employees,2025-12-04
+m365.exchange_enabled,M365 Services,true,true,true,Enable Exchange Online,Yes,Boolean,true|false,Public,M365 Team,None,100GB mailboxes,2025-12-04
+m365.sharepoint_enabled,M365 Services,true,true,true,Enable SharePoint Online,Yes,Boolean,true|false,Public,M365 Team,None,Document collaboration,2025-12-04
+m365.teams_enabled,M365 Services,true,true,true,Enable Microsoft Teams,Yes,Boolean,true|false,Public,M365 Team,None,Chat and meetings,2025-12-04
+m365.onedrive_enabled,M365 Services,true,true,true,Enable OneDrive for Business,Yes,Boolean,true|false,Public,M365 Team,None,1TB per user,2025-12-04
+identity.azure_ad_connect_enabled,Identity,true,false,true,Enable Azure AD Connect sync,Yes,Boolean,true|false,Confidential,Identity Team,On-premises AD,Password hash sync,2025-12-04
+identity.sso_enabled,Identity,true,true,true,Enable Single Sign-On,Yes,Boolean,true|false,Public,Identity Team,Azure AD Connect,Seamless SSO,2025-12-04
+identity.mfa_enabled,Identity,true,true,true,Enable Multi-Factor Authentication,Yes,Boolean,true|false,Confidential,Security Team,Azure AD P2,All users,2025-12-04
+identity.mfa_method,Identity,authenticator,authenticator,authenticator,Primary MFA method,Yes,String,authenticator|phone|sms,Public,Security Team,MFA,Microsoft Authenticator app,2025-12-04
+identity.conditional_access_enabled,Identity,true,false,true,Enable Conditional Access policies,Yes,Boolean,true|false,Confidential,Security Team,Azure AD P2,Zero Trust,2025-12-04
+identity.pim_enabled,Identity,true,false,true,Enable Privileged Identity Management,Yes,Boolean,true|false,Confidential,Security Team,Azure AD P2,JIT admin access,2025-12-04
+migration.email_volume_gb,Migration,250,25,250,Total email data to migrate (GB),Yes,Integer,1-10000,Public,Migration Team,Source system,500MB per user average,2025-12-04
+migration.file_volume_tb,Migration,5,0.5,5,Total files to migrate (TB),Yes,Number,0.1-100,Public,Migration Team,Source file servers,SharePoint/OneDrive,2025-12-04
+migration.source_system,Migration,exchange_onprem,exchange_onprem,exchange_onprem,Source email system,Yes,String,exchange_onprem|exchange_online|gmail,Public,Migration Team,Access to source,Exchange 2013/2016/2019,2025-12-04
+migration.hybrid_exchange_enabled,Migration,true,false,true,Enable hybrid Exchange coexistence,Yes,Boolean,true|false,Confidential,Migration Team,Exchange on-prem,Zero-downtime migration,2025-12-04
+migration.pilot_user_count,Migration,50,10,50,Pilot migration user count,Yes,Integer,10-100,Public,Migration Team,User selection,Initial validation,2025-12-04
+migration.wave_size,Migration,90,20,90,Users per migration wave,Yes,Integer,20-200,Public,Migration Team,Weekend windows,5 waves total,2025-12-04
+security.defender_for_office_enabled,Security,true,true,true,Enable Defender for Office 365,Yes,Boolean,true|false,Confidential,Security Team,M365 E5,Anti-phishing and malware,2025-12-04
+security.safe_links_enabled,Security,true,true,true,Enable Safe Links,Yes,Boolean,true|false,Confidential,Security Team,Defender,URL protection,2025-12-04
+security.safe_attachments_enabled,Security,true,true,true,Enable Safe Attachments,Yes,Boolean,true|false,Confidential,Security Team,Defender,Attachment scanning,2025-12-04
+security.attack_simulation_enabled,Security,true,false,true,Enable attack simulation training,Yes,Boolean,true|false,Public,Security Team,Defender,Phishing awareness,2025-12-04
+security.air_enabled,Security,true,false,true,Enable Automated Investigation & Response,Yes,Boolean,true|false,Confidential,Security Team,Defender,Automated remediation,2025-12-04
+compliance.dlp_enabled,Compliance,true,false,true,Enable Data Loss Prevention,Yes,Boolean,true|false,Confidential,Compliance Team,M365 E5,Sensitive data protection,2025-12-04
+compliance.retention_policy_enabled,Compliance,true,false,true,Enable retention policies,Yes,Boolean,true|false,Public,Compliance Team,Purview,7 year email retention,2025-12-04
+compliance.email_retention_years,Compliance,7,1,7,Email retention period in years,Yes,Integer,1-10,Public,Compliance Team,Retention policy,Legal/compliance requirement,2025-12-04
+compliance.ediscovery_enabled,Compliance,true,false,true,Enable eDiscovery capabilities,Yes,Boolean,true|false,Public,Compliance Team,Purview,Legal hold support,2025-12-04
+compliance.sensitivity_labels_enabled,Compliance,true,false,true,Enable sensitivity labels,Yes,Boolean,true|false,Confidential,Compliance Team,Purview,Data classification,2025-12-04
+compliance.audit_log_retention_days,Compliance,365,90,365,Audit log retention in days,Yes,Integer,90-365,Public,Compliance Team,Purview,SOC 2 requirement,2025-12-04
+compliance.frameworks,Compliance,"[SOC2,GDPR,HIPAA]","[SOC2]","[SOC2,GDPR,HIPAA]",Compliance frameworks to enable,Yes,List(String),Valid frameworks,Confidential,Compliance Team,Purview,Compliance Manager,2025-12-04
+teams_voice.enabled,Teams Voice,true,false,true,Enable Teams Phone System,Yes,Boolean,true|false,Confidential,Voice Team,M365 E5,Enterprise telephony,2025-12-04
+teams_voice.pstn_users,Teams Voice,150,0,150,Users with PSTN calling,Yes,Integer,0-1000,Public,Voice Team,Calling plans,Direct Routing or Calling Plan,2025-12-04
+teams_voice.audio_conferencing_users,Teams Voice,200,0,200,Users with audio conferencing,Yes,Integer,0-1000,Public,Voice Team,M365 E5,Dial-in meetings,2025-12-04
+teams_voice.calling_plan_type,Teams Voice,domestic,none,domestic,PSTN calling plan type,Yes,String,none|domestic|international,Public,Voice Team,Microsoft pricing,$15-$24/user/month,2025-12-04
+teams_voice.voicemail_enabled,Teams Voice,true,false,true,Enable cloud voicemail,Yes,Boolean,true|false,Public,Voice Team,Teams Phone,Voicemail transcription,2025-12-04
+intune.enabled,Device Management,true,false,true,Enable Intune MDM,Yes,Boolean,true|false,Confidential,MDM Team,M365 E5,500 endpoints,2025-12-04
+intune.enrollment_type,Device Management,automatic,manual,automatic,Device enrollment type,Yes,String,automatic|manual,Public,MDM Team,Intune,Windows Autopilot,2025-12-04
+intune.compliance_policy_enabled,Device Management,true,false,true,Enable device compliance policies,Yes,Boolean,true|false,Confidential,MDM Team,Intune,Conditional Access,2025-12-04
+intune.bitlocker_enabled,Device Management,true,false,true,Require BitLocker encryption,Yes,Boolean,true|false,Confidential,MDM Team,Intune,Data protection,2025-12-04
+intune.app_protection_enabled,Device Management,true,false,true,Enable app protection policies,Yes,Boolean,true|false,Confidential,MDM Team,Intune,BYOD support,2025-12-04
+sharepoint.storage_quota_tb,SharePoint,5,1,5,Total SharePoint storage quota (TB),Yes,Number,1-25,Public,SharePoint Team,M365,Additional storage available,2025-12-04
+sharepoint.external_sharing,SharePoint,controlled,disabled,controlled,External sharing settings,Yes,String,disabled|controlled|open,Confidential,SharePoint Team,SharePoint,Guest access policy,2025-12-04
+sharepoint.hub_sites_count,SharePoint,5,1,5,Number of hub sites,Yes,Integer,1-20,Public,SharePoint Team,SharePoint,Intranet structure,2025-12-04
+sharepoint.versioning_enabled,SharePoint,true,true,true,Enable document versioning,Yes,Boolean,true|false,Public,SharePoint Team,SharePoint,500 versions default,2025-12-04
+monitoring.enable_alerts,Monitoring,true,false,true,Enable monitoring alerts,Yes,Boolean,true|false,Public,Operations,None,Alert configuration,2025-12-04
+monitoring.alert_email,Monitoring,it-ops@company.com,dev-team@company.com,it-ops@company.com,Email for critical alerts,Yes,String,Valid email,Confidential,Operations,None,Alert notifications,2025-12-04
+monitoring.service_health_alerts,Monitoring,true,false,true,Enable service health alerts,Yes,Boolean,true|false,Public,Operations,M365,Outage notifications,2025-12-04
+monitoring.usage_analytics_enabled,Monitoring,true,false,true,Enable usage analytics,Yes,Boolean,true|false,Public,Operations,Power BI,Adoption tracking,2025-12-04
+operations.support_tier,Operations,premier,standard,premier,Microsoft support tier,Yes,String,standard|premier,Public,Operations Team,Microsoft contract,24x7 support,2025-12-04
+operations.backup_retention_days,Operations,93,30,93,Backup/recycle bin retention (days),Yes,Integer,30-93,Public,Operations Team,SharePoint native,Native M365 retention,2025-12-04
+operations.change_window,Operations,weekends,any,weekends,Preferred change window,Yes,String,weekends|evenings|any,Public,Operations Team,Change management,Migration and updates,2025-12-04
+dr.enabled,DR,true,false,true,Enable disaster recovery,Yes,Boolean,true|false,Public,DR Team,DR,DR infrastructure,2025-12-04
+dr.geo_redundancy,DR,true,false,true,Enable geo-redundant storage,Yes,Boolean,true|false,Public,DR Team,M365,Microsoft managed,2025-12-04
+dr.rto_hours,DR,1,24,1,Recovery Time Objective (hours),Yes,Integer,0-24,Confidential,DR Team,Microsoft SLA,Microsoft managed,2025-12-04
+dr.rpo_minutes,DR,0,60,0,Recovery Point Objective (minutes),Yes,Integer,0-60,Confidential,DR Team,Microsoft SLA,Near-zero RPO,2025-12-04
+budget.enabled,Best Practices,true,true,true,Enable cost tracking,Yes,Boolean,true|false,Public,Finance,None,Cost management,2025-12-04
+budget.monthly_amount,Best Practices,45000,5000,45000,Monthly budget in USD,Yes,Integer,100-1000000,Public,Finance,None,E5 licenses + Azure,2025-12-04
+budget.alert_thresholds,Best Practices,"[50,80,100]","[80,100]","[50,80,100]",Alert thresholds as percentages,Yes,List(Number),Valid percentages,Public,Finance,None,Alert triggers,2025-12-04
+budget.notification_email,Best Practices,finance@company.com,dev-team@company.com,finance@company.com,Email for budget alerts,Yes,String,Valid email,Confidential,Finance,None,Cost notifications,2025-12-04
