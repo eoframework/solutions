@@ -235,67 +235,32 @@ module "dr" {
 }
 
 #===============================================================================
-# INTEGRATIONS - Cross-module connections
+# INTEGRATIONS - Cross-module connections (via integrations module)
 #===============================================================================
-#------------------------------------------------------------------------------
-# WAF to ALB Association
-#------------------------------------------------------------------------------
-resource "aws_wafv2_web_acl_association" "alb" {
-  count = var.security.enable_waf ? 1 : 0
+module "integrations" {
+  source = "../../modules/solution/integrations"
 
-  resource_arn = module.eks.alb_arn
-  web_acl_arn  = module.security.waf_web_acl_arn
-}
+  name_prefix = local.name_prefix
+  common_tags = local.common_tags
 
-#------------------------------------------------------------------------------
-# Vault AWS Secrets Engine
-#------------------------------------------------------------------------------
-resource "vault_aws_secret_backend" "aws" {
-  count = var.vault.enabled && var.vault.aws_secrets_enabled ? 1 : 0
+  # WAF to ALB association
+  enable_waf      = var.security.enable_waf
+  waf_web_acl_arn = module.security.waf_web_acl_arn
+  alb_arn         = module.eks.alb_arn
 
-  access_key = var.vault_aws_access_key
-  secret_key = var.vault_aws_secret_key
-  region     = var.aws.region
+  # Vault AWS secrets engine
+  vault_enabled             = var.vault.enabled
+  vault_aws_secrets_enabled = var.vault.aws_secrets_enabled
+  vault_aws_access_key      = var.vault_aws_access_key
+  vault_aws_secret_key      = var.vault_aws_secret_key
+  aws_region                = var.aws.region
+  vault_credential_ttl_seconds = var.vault.credential_ttl_seconds
 
-  default_lease_ttl_seconds = var.vault.credential_ttl_seconds
-  max_lease_ttl_seconds     = var.vault.credential_ttl_seconds * 2
-}
+  # CloudWatch alarms
+  enable_alarms    = var.monitoring.enable_dashboard
+  sns_topic_arn    = module.monitoring.sns_topic_arn
+  eks_cluster_name = module.eks.cluster_name
+  rds_identifier   = module.database.rds_identifier
 
-#------------------------------------------------------------------------------
-# CloudWatch Alarms for Platform Health
-#------------------------------------------------------------------------------
-resource "aws_cloudwatch_metric_alarm" "eks_cpu" {
-  count               = var.monitoring.enable_dashboard ? 1 : 0
-  alarm_name          = "${local.name_prefix}-eks-cpu-high"
-  comparison_operator = "GreaterThanOrEqualToThreshold"
-  evaluation_periods  = 2
-  metric_name         = "node_cpu_utilization"
-  namespace           = "ContainerInsights"
-  period              = 300
-  statistic           = "Average"
-  threshold           = 80
-  alarm_description   = "EKS cluster CPU utilization is high"
-  dimensions = {
-    ClusterName = module.eks.cluster_name
-  }
-  alarm_actions = [module.monitoring.sns_topic_arn]
-  tags          = local.common_tags
-}
-
-resource "aws_cloudwatch_metric_alarm" "rds_cpu" {
-  count               = var.monitoring.enable_dashboard ? 1 : 0
-  alarm_name          = "${local.name_prefix}-rds-cpu-high"
-  comparison_operator = "GreaterThanOrEqualToThreshold"
-  evaluation_periods  = 2
-  metric_name         = "CPUUtilization"
-  namespace           = "AWS/RDS"
-  period              = 300
-  statistic           = "Average"
-  threshold           = 80
-  alarm_description   = "RDS CPU utilization is high"
-  dimensions = {
-    DBInstanceIdentifier = module.database.rds_identifier
-  }
-  alarm_actions = [module.monitoring.sns_topic_arn]
-  tags          = local.common_tags
+  depends_on = [module.security, module.eks, module.database, module.monitoring, module.vault]
 }

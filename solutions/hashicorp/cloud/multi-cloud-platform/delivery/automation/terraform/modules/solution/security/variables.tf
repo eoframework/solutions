@@ -1,5 +1,5 @@
 #------------------------------------------------------------------------------
-# Security Module - Variables
+# Security Module Variables (Solution-Level)
 #------------------------------------------------------------------------------
 
 variable "name_prefix" {
@@ -8,12 +8,12 @@ variable "name_prefix" {
 }
 
 variable "common_tags" {
-  description = "Common tags applied to all resources"
+  description = "Common tags for all resources"
   type        = map(string)
 }
 
 variable "security" {
-  description = "Security configuration object"
+  description = "Security configuration"
   type = object({
     enable_kms_encryption     = bool
     kms_deletion_window       = number
