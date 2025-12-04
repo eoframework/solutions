@@ -60,6 +60,35 @@ output "folder_ids" {
 }
 
 # =============================================================================
+# Project Module Outputs
+# =============================================================================
+
+output "host_project_id" {
+  description = "Shared VPC host project ID"
+  value       = module.projects.host_project_id
+}
+
+output "logging_project_id" {
+  description = "Centralized logging project ID"
+  value       = module.projects.logging_project_id
+}
+
+output "security_project_id" {
+  description = "Security services project ID"
+  value       = module.projects.security_project_id
+}
+
+output "monitoring_project_id" {
+  description = "Cloud Monitoring project ID"
+  value       = module.projects.monitoring_project_id
+}
+
+output "all_project_ids" {
+  description = "All project IDs created"
+  value       = module.projects.all_project_ids
+}
+
+# =============================================================================
 # Network Module Outputs
 # =============================================================================
 
@@ -103,6 +132,73 @@ output "kms_key_ids" {
 }
 
 # =============================================================================
+# Logging Module Outputs
+# =============================================================================
+
+output "log_sink_destination" {
+  description = "Log sink destination (BigQuery dataset or GCS bucket)"
+  value       = module.logging.sink_destination
+}
+
+output "log_sink_writer_identity" {
+  description = "Log sink writer identity for IAM"
+  value       = module.logging.sink_writer_identity
+}
+
+# =============================================================================
+# Monitoring Module Outputs
+# =============================================================================
+
+output "monitoring_notification_channel_id" {
+  description = "Primary monitoring notification channel ID"
+  value       = module.monitoring.email_notification_channel_id
+}
+
+output "monitoring_alert_policy_ids" {
+  description = "Alert policy IDs"
+  value       = module.monitoring.alert_policy_ids
+}
+
+output "monitoring_dashboard_ids" {
+  description = "Dashboard IDs"
+  value       = module.monitoring.dashboard_ids
+}
+
+# =============================================================================
+# Best Practices Module Outputs
+# =============================================================================
+
+output "budget_id" {
+  description = "Billing budget ID"
+  value       = module.best_practices.budget_id
+}
+
+output "cloud_armor_policy_id" {
+  description = "Cloud Armor security policy ID"
+  value       = module.best_practices.cloud_armor_policy_id
+}
+
+output "cloud_armor_policy_self_link" {
+  description = "Cloud Armor security policy self link"
+  value       = module.best_practices.cloud_armor_policy_self_link
+}
+
+output "scc_critical_findings_module_id" {
+  description = "SCC critical findings custom module ID"
+  value       = module.best_practices.scc_critical_findings_module_id
+}
+
+output "dr_replication_bucket_name" {
+  description = "DR replication bucket name"
+  value       = module.best_practices.dr_replication_bucket_name
+}
+
+output "dr_health_check_id" {
+  description = "DR failover health check ID"
+  value       = module.best_practices.dr_health_check_id
+}
+
+# =============================================================================
 # DR Status
 # =============================================================================
 
@@ -115,8 +211,10 @@ output "dr_status" {
     rpo_minutes              = var.dr.rpo_minutes
     failover_mode            = var.dr.failover_mode
     cross_region_replication = var.dr.cross_region_replication
-    primary_region           = var.gcp.dr_region  # DR uses dr_region as primary
+    primary_region           = var.gcp.dr_region
     standby_region           = var.gcp.region
+    replication_bucket       = module.best_practices.dr_replication_bucket_name
+    health_check_id          = module.best_practices.dr_health_check_id
   }
 }
 
@@ -133,7 +231,7 @@ output "failover_runbook" {
 }
 
 # =============================================================================
-# Configuration Summary
+# Deployment Summary
 # =============================================================================
 
 output "deployment_summary" {
@@ -160,16 +258,35 @@ output "deployment_summary" {
     owner        = var.ownership.owner_email
     project_code = var.ownership.project_code
 
-    # Resources
-    network_id = module.vpc.network_id
-    folder_ids = module.folders.folder_ids
+    # Resources Created
+    host_project_id       = module.projects.host_project_id
+    logging_project_id    = module.projects.logging_project_id
+    security_project_id   = module.projects.security_project_id
+    monitoring_project_id = module.projects.monitoring_project_id
+    network_id            = module.vpc.network_id
+    folder_ids            = module.folders.folder_ids
 
     # DR Configuration
-    dr_enabled  = var.dr.enabled
-    dr_strategy = var.dr.strategy
+    dr_enabled           = var.dr.enabled
+    dr_strategy          = var.dr.strategy
+    cross_region_rep     = var.dr.cross_region_replication
+    replication_bucket   = module.best_practices.dr_replication_bucket_name
+
+    # Well-Architected Framework Summary
+    best_practices = module.best_practices.best_practices_summary
 
     # Modules deployed
-    deployed_modules = ["organization", "folders", "vpc", "kms"]
+    deployed_modules = [
+      "organization",
+      "folders",
+      "projects",
+      "vpc",
+      "kms",
+      "iam",
+      "logging",
+      "monitoring",
+      "best_practices"
+    ]
 
     # Timestamp
     deployment_time = timestamp()

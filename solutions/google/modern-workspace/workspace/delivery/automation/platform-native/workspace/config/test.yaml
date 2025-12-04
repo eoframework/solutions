@@ -1,11 +1,40 @@
+#------------------------------------------------------------------------------
 # Google Workspace Test Configuration
+#------------------------------------------------------------------------------
 # Generated from configuration.csv Test column
 # EO Framework - Google Workspace Solution
+#
+# Implements Google Workspace Well-Architected Framework (Minimal):
+#
+# OPERATIONAL EXCELLENCE
+# - Basic organizational unit hierarchy
+# - Minimal group structure
+# - Reduced automation scope
+#
+# SECURITY
+# - SSO disabled for testing
+# - MFA optional
+# - DLP disabled
+# - Basic MDM
+#
+# RELIABILITY
+# - Minimal Vault retention
+# - Reduced hypercare
+#
+# COST OPTIMIZATION
+# - Business Starter edition
+# - Minimal user count
+# - Reduced features
+#------------------------------------------------------------------------------
 
+# =============================================================================
 # Credentials
+# =============================================================================
 credentials_path: config/credentials.json
 
+# =============================================================================
 # Solution Identity
+# =============================================================================
 solution:
   name: google-workspace
   abbr: gws
@@ -17,7 +46,9 @@ ownership:
   owner_email: workspace-admin@example.com
   project_code: PRJ-GWS-001
 
-# Workspace Configuration
+# =============================================================================
+# FOUNDATION - Workspace Configuration
+# =============================================================================
 workspace:
   domain: test.example.com
   customer_id: "[CUSTOMER_ID]"
@@ -26,7 +57,9 @@ workspace:
   storage_per_user: "30 GB"
   admin_email: admin@test.example.com
 
-# Migration Settings
+# =============================================================================
+# OPERATIONAL EXCELLENCE - Migration Settings (Minimal)
+# =============================================================================
 migration:
   source_system: Exchange Online
   mailbox_count: 25
@@ -41,39 +74,57 @@ migration:
   coexistence_weeks: 2
   tool: GWMT
 
-# Identity Configuration
+# =============================================================================
+# SECURITY - Identity Configuration (Disabled for test)
+# =============================================================================
 identity:
+  # SSO Configuration - Disabled
   sso_enabled: false
   idp_type: None
   idp_entity_id: ""
   idp_sso_url: ""
   idp_certificate: ""
+
+  # MFA Configuration - Optional
   mfa_enabled: false
   mfa_enforcement: OPTIONAL
   mfa_methods: Any
+
+  # Directory Sync - Disabled
   directory_sync_enabled: false
   gcds_sync_interval: "24 hours"
 
-# Security Configuration
+# =============================================================================
+# SECURITY - Data Protection & Compliance (Minimal)
+# =============================================================================
 security:
+  # Data Loss Prevention - Disabled
   dlp_enabled: false
   dlp_rules_count: 0
   dlp_pii_detection: false
   dlp_financial_detection: false
   dlp_action: Warn
+
+  # Google Vault (Minimal)
   vault_enabled: false
   vault_retention_years: 1
   vault_gmail_retention: false
   vault_drive_retention: false
   vault_legal_hold_enabled: false
+
+  # Mobile Device Management - Basic
   mobile_management: Basic
   mdm_require_passcode: true
   mdm_passcode_length: 4
   mdm_remote_wipe: true
   mdm_managed_devices: 15
+
+  # Context-Aware Access - Disabled
   context_aware_access: false
 
-# Applications
+# =============================================================================
+# PERFORMANCE - Applications Configuration
+# =============================================================================
 applications:
   gmail_enabled: true
   gmail_storage_gb: 15
@@ -84,14 +135,18 @@ applications:
   meet_max_participants: 100
   chat_enabled: true
 
-# Sharing Policies
+# =============================================================================
+# SECURITY - Sharing Policies (Restricted)
+# =============================================================================
 sharing:
   external_sharing: Disabled
   allow_domains: []
   link_sharing_default: Private
   file_access_checker: false
 
-# Organizational Units
+# =============================================================================
+# OPERATIONAL EXCELLENCE - Organizational Units
+# =============================================================================
 org_units:
   root: /
   sales: /Sales
@@ -100,34 +155,77 @@ org_units:
   finance: /Finance
   executive: /Executive
 
-# Groups
+# =============================================================================
+# OPERATIONAL EXCELLENCE - Groups (Minimal)
+# =============================================================================
 groups:
   create_default_groups: false
   default_groups:
     - all-users
   external_members_allowed: false
 
-# Training
+# =============================================================================
+# OPERATIONAL EXCELLENCE - Training (Minimal)
+# =============================================================================
 training:
   admin_training_hours: 4
   end_user_sessions: 2
   materials_included: true
   change_champions: 2
 
-# Hypercare
+# =============================================================================
+# RELIABILITY - Hypercare Support (Minimal)
+# =============================================================================
 hypercare:
   duration_days: 14
   support_hours: "8AM-5PM"
   response_time_hours: 8
 
-# Budget
+# =============================================================================
+# COST OPTIMIZATION - Budget (Minimal)
+# =============================================================================
 budget:
   license_cost_monthly: 450
   professional_services: 9600
   training_budget: 1000
 
-# Automation
+# =============================================================================
+# OPERATIONAL EXCELLENCE - Automation (Disabled)
+# =============================================================================
 automation:
   deployment_method: Platform-Native
   gam_enabled: false
   admin_sdk_enabled: false
+
+# =============================================================================
+# Well-Architected Framework Summary
+# =============================================================================
+well_architected:
+  operational_excellence:
+    org_units_configured: true
+    groups_configured: false
+    automation_enabled: false
+    gam_enabled: false
+    admin_sdk_enabled: false
+    training_hours: 4
+    change_champions: 2
+  security:
+    sso_enabled: false
+    mfa_enforced: false
+    dlp_enabled: false
+    dlp_rules: 0
+    vault_enabled: false
+    vault_retention_years: 1
+    mdm_level: Basic
+    context_aware_access: false
+  reliability:
+    directory_sync: false
+    vault_backup: false
+    hypercare_days: 14
+  performance:
+    edition: Business Starter
+    shared_drives: 3
+    meet_recording: false
+  cost_optimization:
+    license_cost_monthly: 450
+    usage_monitoring: false

@@ -1,15 +1,48 @@
+#------------------------------------------------------------------------------
 # Google Workspace DR Configuration
+#------------------------------------------------------------------------------
 # Generated from configuration.csv DR column
 # EO Framework - Google Workspace Solution
 #
 # Note: Google Workspace is a SaaS platform with built-in redundancy.
 # This DR configuration documents settings that would be applied
 # in a DR scenario or for configuring backup/recovery procedures.
+#
+# Implements Google Workspace Well-Architected Framework (DR Focus):
+#
+# OPERATIONAL EXCELLENCE
+# - Mirrors production OU hierarchy
+# - Full group structure
+# - Full automation enabled
+# - DR runbooks and procedures
+#
+# SECURITY
+# - SSO with Azure AD (mirrors prod)
+# - MFA enforcement (mirrors prod)
+# - Full DLP policies
+# - Full MDM
+# - Context-Aware Access
+#
+# RELIABILITY (Primary Focus for DR)
+# - Google Vault for data retention
+# - Third-party backup options
+# - Recovery procedures documented
+# - RTO/RPO targets defined
+# - DR testing schedule
+#
+# COST OPTIMIZATION
+# - Mirrors production licensing
+# - Standby until activation
+#------------------------------------------------------------------------------
 
+# =============================================================================
 # Credentials
+# =============================================================================
 credentials_path: config/credentials.json
 
+# =============================================================================
 # Solution Identity
+# =============================================================================
 solution:
   name: google-workspace
   abbr: gws
@@ -21,7 +54,9 @@ ownership:
   owner_email: workspace-admin@example.com
   project_code: PRJ-GWS-001
 
-# Workspace Configuration
+# =============================================================================
+# FOUNDATION - Workspace Configuration (Mirrors Production)
+# =============================================================================
 workspace:
   domain: example.com
   customer_id: "[CUSTOMER_ID]"
@@ -30,7 +65,9 @@ workspace:
   storage_per_user: "5 TB"
   admin_email: admin@example.com
 
-# Migration Settings (DR scenario - restore from backup)
+# =============================================================================
+# OPERATIONAL EXCELLENCE - Migration Settings (DR Restore)
+# =============================================================================
 migration:
   source_system: Exchange 2016
   mailbox_count: 500
@@ -45,39 +82,57 @@ migration:
   coexistence_weeks: 4
   tool: GWMT
 
-# Identity Configuration (mirror production)
+# =============================================================================
+# SECURITY - Identity Configuration (Mirrors Production)
+# =============================================================================
 identity:
+  # SSO Configuration
   sso_enabled: true
   idp_type: Azure AD
   idp_entity_id: "[IDP_ENTITY_ID]"
   idp_sso_url: "[IDP_SSO_URL]"
   idp_certificate: "[IDP_CERT]"
+
+  # MFA Configuration
   mfa_enabled: true
   mfa_enforcement: ENFORCED
   mfa_methods: Any
+
+  # Directory Sync
   directory_sync_enabled: true
   gcds_sync_interval: "4 hours"
 
-# Security Configuration (mirror production)
+# =============================================================================
+# SECURITY - Data Protection & Compliance (Mirrors Production)
+# =============================================================================
 security:
+  # Data Loss Prevention
   dlp_enabled: true
   dlp_rules_count: 15
   dlp_pii_detection: true
   dlp_financial_detection: true
   dlp_action: "Warn and Block"
+
+  # Google Vault (Compliance)
   vault_enabled: true
   vault_retention_years: 7
   vault_gmail_retention: true
   vault_drive_retention: true
   vault_legal_hold_enabled: true
+
+  # Mobile Device Management
   mobile_management: Advanced
   mdm_require_passcode: true
   mdm_passcode_length: 6
   mdm_remote_wipe: true
   mdm_managed_devices: 300
+
+  # Context-Aware Access
   context_aware_access: true
 
-# Applications (mirror production)
+# =============================================================================
+# PERFORMANCE - Applications Configuration (Mirrors Production)
+# =============================================================================
 applications:
   gmail_enabled: true
   gmail_storage_gb: 30
@@ -88,7 +143,9 @@ applications:
   meet_max_participants: 500
   chat_enabled: true
 
-# Sharing Policies (mirror production)
+# =============================================================================
+# SECURITY - Sharing Policies (Mirrors Production)
+# =============================================================================
 sharing:
   external_sharing: Whitelist
   allow_domains:
@@ -97,7 +154,9 @@ sharing:
   link_sharing_default: Domain
   file_access_checker: true
 
-# Organizational Units (mirror production)
+# =============================================================================
+# OPERATIONAL EXCELLENCE - Organizational Units (Mirrors Production)
+# =============================================================================
 org_units:
   root: /
   sales: /Sales
@@ -106,7 +165,9 @@ org_units:
   finance: /Finance
   executive: /Executive
 
-# Groups (mirror production)
+# =============================================================================
+# OPERATIONAL EXCELLENCE - Groups (Mirrors Production)
+# =============================================================================
 groups:
   create_default_groups: true
   default_groups:
@@ -116,35 +177,49 @@ groups:
     - vault-users
   external_members_allowed: false
 
-# Training (DR - minimal)
+# =============================================================================
+# OPERATIONAL EXCELLENCE - Training
+# =============================================================================
 training:
   admin_training_hours: 8
   end_user_sessions: 10
   materials_included: true
   change_champions: 10
 
-# Hypercare (mirror production)
+# =============================================================================
+# RELIABILITY - Hypercare Support (Mirrors Production)
+# =============================================================================
 hypercare:
   duration_days: 30
   support_hours: "8AM-6PM"
   response_time_hours: 4
 
-# Budget (mirror production)
+# =============================================================================
+# COST OPTIMIZATION - Budget (Mirrors Production)
+# =============================================================================
 budget:
   license_cost_monthly: 9000
   professional_services: 38400
   training_budget: 5000
 
-# Automation
+# =============================================================================
+# OPERATIONAL EXCELLENCE - Automation
+# =============================================================================
 automation:
   deployment_method: Platform-Native
   gam_enabled: true
   admin_sdk_enabled: true
 
-# DR-Specific Configuration
+# =============================================================================
+# RELIABILITY - DR-Specific Configuration
+# =============================================================================
 dr:
   # Google Workspace provides built-in redundancy
   # This section documents DR procedures rather than infrastructure
+
+  # RTO/RPO Targets
+  rto_hours: 4    # Target recovery time
+  rpo_hours: 1    # Maximum data loss (Google provides ~real-time sync)
 
   # Backup Strategy
   backup:
@@ -175,12 +250,47 @@ dr:
     data_restore: "https://wiki.example.com/workspace/dr/data-restore"
     security_incident: "https://wiki.example.com/workspace/dr/security-incident"
     complete_restoration: "https://wiki.example.com/workspace/dr/full-restore"
-
-  # RTO/RPO Targets
-  rto_hours: 4  # Target recovery time
-  rpo_hours: 1  # Maximum data loss (Google provides ~real-time sync)
+    failover_procedure: "https://wiki.example.com/workspace/dr/failover"
 
   # Testing Schedule
   test_schedule: "Quarterly"
   last_test_date: ""
   next_test_date: ""
+
+# =============================================================================
+# Well-Architected Framework Summary
+# =============================================================================
+well_architected:
+  operational_excellence:
+    org_units_configured: true
+    groups_configured: true
+    automation_enabled: true
+    gam_enabled: true
+    admin_sdk_enabled: true
+    training_hours: 8
+    change_champions: 10
+    dr_runbooks_documented: true
+  security:
+    sso_enabled: true
+    mfa_enforced: true
+    dlp_enabled: true
+    dlp_rules: 15
+    vault_enabled: true
+    vault_retention_years: 7
+    mdm_level: Advanced
+    context_aware_access: true
+  reliability:
+    directory_sync: true
+    vault_backup: true
+    hypercare_days: 30
+    rto_hours: 4
+    rpo_hours: 1
+    dr_testing: Quarterly
+  performance:
+    edition: Business Plus
+    shared_drives: 15
+    meet_recording: true
+  cost_optimization:
+    license_cost_monthly: 9000
+    usage_monitoring: true
+    standby_mode: true

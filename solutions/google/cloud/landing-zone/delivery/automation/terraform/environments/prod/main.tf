@@ -1,14 +1,31 @@
 #------------------------------------------------------------------------------
 # GCP Landing Zone Production Environment
 #------------------------------------------------------------------------------
-# Full production deployment with:
+# Full production deployment implementing GCP Well-Architected Framework:
+#
+# OPERATIONAL EXCELLENCE
 # - Organization policies and folder hierarchy
-# - Shared VPC with full subnets
+# - Centralized logging and monitoring
+# - Budget alerts and cost management
+#
+# SECURITY
 # - Cloud KMS encryption
 # - Security Command Center Premium
-# - Chronicle SIEM integration
-# - Cloud Armor and Cloud IDS
-# - Full monitoring and logging
+# - Cloud Armor WAF protection
+# - IAM best practices
+#
+# RELIABILITY
+# - Shared VPC with redundant subnets
+# - Cloud NAT for egress
+# - Cross-region DR configuration
+#
+# PERFORMANCE EFFICIENCY
+# - Global VPC routing
+# - Private Google Access
+#
+# COST OPTIMIZATION
+# - Budget alerts at multiple thresholds
+# - Resource labeling for cost allocation
 #------------------------------------------------------------------------------
 
 #------------------------------------------------------------------------------
@@ -47,7 +64,7 @@ locals {
 # FOUNDATION - Organization and folder structure
 #===============================================================================
 #------------------------------------------------------------------------------
-# Organization Policies
+# Organization Policies (Operational Excellence + Security)
 #------------------------------------------------------------------------------
 module "organization" {
   source = "../../modules/gcp/organization"
@@ -56,7 +73,7 @@ module "organization" {
   domain             = var.organization.domain
   billing_account_id = var.organization.billing_account_id
 
-  # Organization policies
+  # Organization policies - Security baseline
   require_shielded_vm        = var.org_policy.require_shielded_vm
   disable_serial_port_access = var.org_policy.disable_serial_port_access
   disable_sa_key_creation    = var.org_policy.sa_key_creation == "Disabled"
@@ -71,7 +88,7 @@ module "organization" {
 }
 
 #------------------------------------------------------------------------------
-# Folder Hierarchy
+# Folder Hierarchy (Operational Excellence)
 #------------------------------------------------------------------------------
 module "folders" {
   source = "../../modules/gcp/folders"
@@ -84,103 +101,162 @@ module "folders" {
   depends_on = [module.organization]
 }
 
+#------------------------------------------------------------------------------
+# Project Factory (Operational Excellence)
+#------------------------------------------------------------------------------
+module "projects" {
+  source = "../../modules/gcp/projects"
+
+  org_id             = var.organization.org_id
+  billing_account_id = var.organization.billing_account_id
+  folder_ids         = module.folders.folder_ids
+  projects           = var.projects
+  common_labels      = local.common_labels
+
+  depends_on = [module.folders]
+}
+
 #===============================================================================
 # CORE SOLUTION - Network and security infrastructure
 #===============================================================================
 #------------------------------------------------------------------------------
-# Shared VPC Network
+# Shared VPC Network (Reliability + Performance)
 #------------------------------------------------------------------------------
 module "vpc" {
   source = "../../modules/gcp/vpc"
 
-  host_project_id = var.projects.host_project_name
+  host_project_id = module.projects.host_project_id
   region          = var.gcp.region
   network         = var.network
   nat             = var.nat
   common_tags     = local.common_labels
 
-  depends_on = [module.folders]
+  depends_on = [module.projects]
 }
 
 #------------------------------------------------------------------------------
-# Cloud KMS Encryption
+# Cloud KMS Encryption (Security)
 #------------------------------------------------------------------------------
 module "kms" {
   source = "../../modules/gcp/kms"
 
-  project_id  = var.projects.security_project_name
+  project_id  = module.projects.security_project_id
   name_prefix = local.name_prefix
   kms         = var.kms
 
-  depends_on = [module.vpc]
+  depends_on = [module.projects]
+}
+
+#------------------------------------------------------------------------------
+# IAM Baseline (Security)
+#------------------------------------------------------------------------------
+module "iam" {
+  source = "../../modules/gcp/iam"
+
+  org_id        = var.organization.org_id
+  project_ids   = module.projects.all_project_ids
+  identity      = var.identity
+  common_labels = local.common_labels
+
+  depends_on = [module.projects]
 }
 
 #===============================================================================
-# OPERATIONS - Monitoring, logging, and budget alerts
+# OPERATIONS - Logging, monitoring, and alerting (Operational Excellence)
 #===============================================================================
 #------------------------------------------------------------------------------
-# Budget Alerts
+# Centralized Logging
 #------------------------------------------------------------------------------
-resource "google_billing_budget" "main" {
-  count = var.budget.enabled ? 1 : 0
+module "logging" {
+  source = "../../modules/gcp/logging"
 
-  billing_account = var.organization.billing_account_id
-  display_name    = "${local.name_prefix}-budget"
+  org_id        = var.organization.org_id
+  project_id    = module.projects.logging_project_id
+  name_prefix   = local.name_prefix
+  location      = var.gcp.region
+  logging       = var.logging
+  common_labels = local.common_labels
 
-  budget_filter {
-    projects = ["projects/${var.gcp.project_id}"]
-  }
+  enable_metrics = var.monitoring.log_based_metrics
 
-  amount {
-    specified_amount {
-      currency_code = var.budget.currency
-      units         = tostring(var.budget.monthly_amount)
-    }
-  }
+  depends_on = [module.projects]
+}
 
-  dynamic "threshold_rules" {
-    for_each = var.budget.alert_thresholds
-    content {
-      threshold_percent = threshold_rules.value / 100
-      spend_basis       = "CURRENT_SPEND"
-    }
-  }
+#------------------------------------------------------------------------------
+# Cloud Monitoring
+#------------------------------------------------------------------------------
+module "monitoring" {
+  source = "../../modules/gcp/monitoring"
 
-  all_updates_rule {
-    monitoring_notification_channels = []
-    disable_default_iam_recipients   = false
-  }
+  project_id    = module.projects.monitoring_project_id
+  name_prefix   = local.name_prefix
+  monitoring    = var.monitoring
+  common_labels = local.common_labels
+
+  # Notification channels
+  notification_email = var.ownership.owner_email
+
+  depends_on = [module.projects]
 }
 
 #===============================================================================
-# OUTPUTS
+# BEST PRACTICES - Security, Cost, and Reliability
 #===============================================================================
-output "environment" {
-  description = "Environment name"
-  value       = local.environment
-}
+#------------------------------------------------------------------------------
+# Best Practices (SCC + Cloud Armor + Budget + DR)
+#------------------------------------------------------------------------------
+module "best_practices" {
+  source = "../../modules/solution/best-practices"
 
-output "name_prefix" {
-  description = "Resource naming prefix"
-  value       = local.name_prefix
-}
+  org_id              = var.organization.org_id
+  billing_account_id  = var.organization.billing_account_id
+  security_project_id = module.projects.security_project_id
+  name_prefix         = local.name_prefix
+  project_ids         = [for id in module.projects.all_project_ids : "projects/${id}"]
+  dr_region           = var.gcp.dr_region
+  common_labels       = local.common_labels
 
-output "folder_ids" {
-  description = "Folder IDs"
-  value       = module.folders.folder_ids
-}
+  notification_channels = module.monitoring.email_notification_channel_id != null ? [module.monitoring.email_notification_channel_id] : []
 
-output "network_id" {
-  description = "Shared VPC network ID"
-  value       = module.vpc.network_id
-}
+  # Budget Configuration (Cost Optimization)
+  budget = {
+    enabled                = var.budget.enabled
+    monthly_amount         = var.budget.monthly_amount
+    currency               = var.budget.currency
+    alert_thresholds       = var.budget.alert_thresholds
+    enable_forecast_alerts = true
+    forecast_threshold     = 100
+  }
 
-output "subnet_ids" {
-  description = "Subnet IDs"
-  value       = module.vpc.subnet_ids
-}
+  # Security Configuration
+  security = {
+    scc_tier                       = var.security.scc_tier
+    scc_public_resource_detection  = true
+    scc_notifications_enabled      = false
+    cloud_armor_enabled            = var.security.cloud_armor_enabled
+    cloud_armor_owasp_rules        = true
+    cloud_armor_rate_limiting      = true
+    rate_limit_requests_per_minute = 1000
+    rate_limit_ban_duration_sec    = 600
+    blocked_countries              = []
+  }
 
-output "kms_key_ids" {
-  description = "KMS crypto key IDs"
-  value       = module.kms.key_ids
+  # DR Configuration (Reliability)
+  dr = {
+    enabled                   = var.dr.enabled
+    cross_region_replication  = var.dr.cross_region_replication
+    archive_after_days        = 90
+    coldline_after_days       = 365
+    enable_health_check       = true
+    health_check_interval_sec = 5
+    health_check_timeout_sec  = 5
+    healthy_threshold         = 2
+    unhealthy_threshold       = 3
+    health_check_port         = 80
+    health_check_path         = "/health"
+    enable_dr_kms             = true
+    key_rotation_days         = 90
+  }
+
+  depends_on = [module.projects, module.monitoring]
 }

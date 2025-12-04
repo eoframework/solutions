@@ -60,6 +60,35 @@ output "folder_ids" {
 }
 
 # =============================================================================
+# Project Module Outputs
+# =============================================================================
+
+output "host_project_id" {
+  description = "Shared VPC host project ID"
+  value       = module.projects.host_project_id
+}
+
+output "logging_project_id" {
+  description = "Centralized logging project ID"
+  value       = module.projects.logging_project_id
+}
+
+output "security_project_id" {
+  description = "Security services project ID"
+  value       = module.projects.security_project_id
+}
+
+output "monitoring_project_id" {
+  description = "Cloud Monitoring project ID"
+  value       = module.projects.monitoring_project_id
+}
+
+output "all_project_ids" {
+  description = "All project IDs created"
+  value       = module.projects.all_project_ids
+}
+
+# =============================================================================
 # Network Module Outputs
 # =============================================================================
 
@@ -103,7 +132,34 @@ output "kms_key_ids" {
 }
 
 # =============================================================================
-# Configuration Summary
+# Logging Module Outputs
+# =============================================================================
+
+output "log_sink_destination" {
+  description = "Log sink destination (BigQuery dataset or GCS bucket)"
+  value       = module.logging.sink_destination
+}
+
+# =============================================================================
+# Monitoring Module Outputs
+# =============================================================================
+
+output "monitoring_notification_channel_id" {
+  description = "Primary monitoring notification channel ID"
+  value       = module.monitoring.email_notification_channel_id
+}
+
+# =============================================================================
+# Best Practices Module Outputs
+# =============================================================================
+
+output "budget_id" {
+  description = "Billing budget ID"
+  value       = module.best_practices.budget_id
+}
+
+# =============================================================================
+# Deployment Summary
 # =============================================================================
 
 output "deployment_summary" {
@@ -130,12 +186,29 @@ output "deployment_summary" {
     owner        = var.ownership.owner_email
     project_code = var.ownership.project_code
 
-    # Resources
-    network_id = module.vpc.network_id
-    folder_ids = module.folders.folder_ids
+    # Resources Created
+    host_project_id       = module.projects.host_project_id
+    logging_project_id    = module.projects.logging_project_id
+    security_project_id   = module.projects.security_project_id
+    monitoring_project_id = module.projects.monitoring_project_id
+    network_id            = module.vpc.network_id
+    folder_ids            = module.folders.folder_ids
+
+    # Well-Architected Framework Summary
+    best_practices = module.best_practices.best_practices_summary
 
     # Modules deployed
-    deployed_modules = ["organization", "folders", "vpc", "kms"]
+    deployed_modules = [
+      "organization",
+      "folders",
+      "projects",
+      "vpc",
+      "kms",
+      "iam",
+      "logging",
+      "monitoring",
+      "best_practices"
+    ]
 
     # Timestamp
     deployment_time = timestamp()

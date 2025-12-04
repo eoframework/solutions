@@ -12,6 +12,57 @@ automation/
     └── gam/             # GAM command scripts for admin tasks
 ```
 
+## Well-Architected Framework
+
+This solution implements the Google Workspace Well-Architected Framework across all five pillars:
+
+### Operational Excellence
+| Feature | Production | Test | DR |
+|---------|------------|------|-----|
+| Org Units | Full hierarchy | Full hierarchy | Full hierarchy |
+| Groups | 4 default groups | 1 group | 4 default groups |
+| GAM Automation | Enabled | Disabled | Enabled |
+| Admin SDK | Enabled | Disabled | Enabled |
+| Training Hours | 8 | 4 | 8 |
+| Change Champions | 10 | 2 | 10 |
+
+### Security
+| Feature | Production | Test | DR |
+|---------|------------|------|-----|
+| SSO | Azure AD | Disabled | Azure AD |
+| MFA | Enforced | Optional | Enforced |
+| DLP Rules | 15 | 0 | 15 |
+| Google Vault | 7 years | 1 year | 7 years |
+| MDM Level | Advanced | Basic | Advanced |
+| Context-Aware Access | Enabled | Disabled | Enabled |
+| External Sharing | Whitelist | Disabled | Whitelist |
+
+### Reliability
+| Feature | Production | Test | DR |
+|---------|------------|------|-----|
+| Directory Sync | 4 hours | Disabled | 4 hours |
+| Vault Backup | Enabled | Disabled | Enabled |
+| Hypercare | 30 days | 14 days | 30 days |
+| RTO | - | - | 4 hours |
+| RPO | - | - | 1 hour |
+| DR Testing | - | - | Quarterly |
+
+### Performance Efficiency
+| Feature | Production | Test | DR |
+|---------|------------|------|-----|
+| Edition | Business Plus | Business Starter | Business Plus |
+| Users | 500 | 25 | 500 |
+| Shared Drives | 15 | 3 | 15 |
+| Meet Recording | Enabled | Disabled | Enabled |
+| Meet Participants | 500 | 100 | 500 |
+
+### Cost Optimization
+| Feature | Production | Test | DR |
+|---------|------------|------|-----|
+| License Cost/mo | $9,000 | $450 | $9,000 |
+| Prof Services | $38,400 | $9,600 | $38,400 |
+| Training Budget | $5,000 | $1,000 | $5,000 |
+
 ## Recommended Approach: Platform-Native
 
 Google Workspace is best deployed using **platform-native tooling** due to:
@@ -26,25 +77,22 @@ Google Workspace is best deployed using **platform-native tooling** due to:
 platform-native/
 ├── workspace/
 │   ├── scripts/
-│   │   ├── python/
-│   │   │   ├── requirements.txt
-│   │   │   ├── setup_workspace.py      # Main deployment script
-│   │   │   ├── create_users.py         # User provisioning
-│   │   │   ├── create_groups.py        # Group creation
-│   │   │   ├── create_org_units.py     # OU structure
-│   │   │   ├── configure_sso.py        # SSO configuration
-│   │   │   ├── configure_security.py   # Security policies
-│   │   │   └── configure_dlp.py        # DLP rules
-│   │   └── powershell/
-│   │       └── migration_prep.ps1      # Exchange preparation
+│   │   └── python/
+│   │       ├── requirements.txt
+│   │       ├── setup_workspace.py      # Main deployment orchestrator
+│   │       ├── create_org_units.py     # OU structure
+│   │       ├── create_groups.py        # Group creation
+│   │       ├── configure_sso.py        # SSO configuration
+│   │       ├── configure_security.py   # Security policies
+│   │       └── configure_dlp.py        # DLP rules
 │   ├── config/
 │   │   ├── prod.yaml                   # Production config
 │   │   ├── test.yaml                   # Test config
-│   │   └── credentials.json.example    # Service account template
-│   └── templates/
-│       ├── users.csv                   # User import template
-│       ├── groups.csv                  # Group import template
-│       └── distribution_lists.csv      # DL migration template
+│   │   └── dr.yaml                     # DR config
+│   ├── templates/
+│   │   ├── users.csv                   # User import template
+│   │   └── groups.csv                  # Group import template
+│   └── eo-deploy.sh                    # Deployment wrapper script
 └── gam/
     └── commands/
         ├── create_users.gam            # GAM user creation
@@ -76,65 +124,62 @@ bash <(curl -s -S -L https://gam-shortn.appspot.com/gam-install)
 gam oauth create
 ```
 
-## Deployment Steps
+## Deployment
 
-### 1. Prepare Environment
+### Using eo-deploy.sh (Recommended)
+
 ```bash
 cd platform-native/workspace
 
-# Copy and configure credentials
-cp config/credentials.json.example config/credentials.json
-# Edit with your service account key
+# Set environment (default: prod)
+export EO_ENVIRONMENT=prod
 
-# Configure environment
-cp config/prod.yaml config/env.yaml
-# Edit with deployment parameters
+# Preview all changes (dry-run)
+./eo-deploy.sh plan
+
+# Full deployment
+./eo-deploy.sh deploy
+
+# Individual steps
+./eo-deploy.sh org-units      # Create organizational units
+./eo-deploy.sh groups         # Create groups
+./eo-deploy.sh sso            # Configure SSO
+./eo-deploy.sh security       # Configure security policies
+./eo-deploy.sh dlp            # Configure DLP
+
+# Validate configuration
+./eo-deploy.sh validate
 ```
 
-### 2. Create Organizational Structure
-```bash
-# Create OUs
-python scripts/python/create_org_units.py --config config/env.yaml
+### Using Python Directly
 
-# Create groups
-python scripts/python/create_groups.py --config config/env.yaml
+```bash
+cd platform-native/workspace
+
+# Full deployment
+python scripts/python/setup_workspace.py --config config/prod.yaml
+
+# With dry-run preview
+python scripts/python/setup_workspace.py --config config/prod.yaml --dry-run
+
+# Individual step
+python scripts/python/setup_workspace.py --config config/prod.yaml --step org-units
 ```
 
-### 3. Configure Security Policies
+### Using GAM
+
 ```bash
-# Configure SSO (if enabled)
-python scripts/python/configure_sso.py --config config/env.yaml
+cd platform-native/gam
 
-# Configure security policies
-python scripts/python/configure_security.py --config config/env.yaml
-
-# Configure DLP (if enabled)
-python scripts/python/configure_dlp.py --config config/env.yaml
-```
-
-### 4. Provision Users
-```bash
-# Bulk create users from CSV using GAM
-cd ../gam
+# Bulk create users from CSV
 gam batch commands/create_users.gam
 
-# Or using Python
-cd ../workspace
-python scripts/python/create_users.py --file templates/users.csv
+# Create groups
+gam batch commands/create_groups.gam
+
+# Configure sharing policies
+gam batch commands/configure_sharing.gam
 ```
-
-## Environment Comparison
-
-| Feature | Production | Test | DR |
-|---------|------------|------|-----|
-| User Count | 500 | 25 | 500 |
-| SSO | Azure AD | Disabled | Azure AD |
-| MFA | Enforced | Optional | Enforced |
-| DLP | 15 rules | Disabled | 15 rules |
-| Vault | 7 years | 1 year | 7 years |
-| MDM | Advanced | Basic | Advanced |
-| External Sharing | Whitelist | Disabled | Whitelist |
-| GAM Automation | Enabled | Disabled | Enabled |
 
 ## DR Considerations
 
@@ -146,18 +191,14 @@ Google Workspace is a SaaS platform with built-in redundancy. The DR configurati
 - **Runbook References**: Links to DR documentation
 - **RTO/RPO Targets**: 4-hour RTO, 1-hour RPO
 
-### Running All Steps
+### DR Testing
 
-```bash
-# Full deployment
-python scripts/python/setup_workspace.py --config config/prod.yaml
-
-# With dry-run preview
-python scripts/python/setup_workspace.py --config config/prod.yaml --dry-run
-
-# Individual step
-python scripts/python/setup_workspace.py --config config/prod.yaml --step org-units
-```
+DR testing should be conducted quarterly:
+1. Verify Vault search and export functionality
+2. Test account recovery procedures
+3. Validate data restoration from trash/Vault
+4. Review security incident response procedures
+5. Update runbook documentation
 
 ## Configuration Reference
 
@@ -168,3 +209,11 @@ Configuration is loaded from `delivery/raw/configuration.csv` and converted to Y
 | Production | `config/prod.yaml` | Full production deployment |
 | Test | `config/test.yaml` | Minimal test environment |
 | DR | `config/dr.yaml` | DR documentation and settings |
+
+## Security Best Practices
+
+1. **Store credentials securely** - Never commit `credentials.json` to git
+2. **Use service accounts** - Avoid using personal admin accounts
+3. **Enable audit logging** - Monitor Admin Console activity
+4. **Review DLP rules** - Regularly audit data protection policies
+5. **Test MFA recovery** - Ensure backup codes are documented

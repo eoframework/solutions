@@ -7,6 +7,11 @@ output "sink_name" {
   value       = google_logging_organization_sink.aggregated.name
 }
 
+output "sink_destination" {
+  description = "Log sink destination URI"
+  value       = google_logging_organization_sink.aggregated.destination
+}
+
 output "sink_writer_identity" {
   description = "Writer identity of the log sink"
   value       = google_logging_organization_sink.aggregated.writer_identity
