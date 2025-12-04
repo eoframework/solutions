@@ -1,0 +1,29 @@
+---
+# Receptor configuration for AAP execution node
+# Managed by Ansible
+
+- node:
+    id: {{ inventory_hostname }}
+    data-dir: {{ aap_receptor_data_dir }}
+
+- log-level:
+    level: {{ aap_receptor_log_level }}
+
+- control-service:
+    service: control
+    filename: {{ aap_receptor_control_socket }}
+
+- tcp-listener:
+    port: 27199
+    tls: receptor
+
+- work-command:
+    work-type: ansible-runner
+    command: ansible-runner
+    params: worker
+    allow-runtime-params: true
+
+{% if monitoring.log_aggregator_enabled | default(false) %}
+- log-file:
+    filename: /var/log/receptor/receptor.log
+{% endif %}

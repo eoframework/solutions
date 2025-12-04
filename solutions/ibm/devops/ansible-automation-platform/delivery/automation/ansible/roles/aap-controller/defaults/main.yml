@@ -1,0 +1,28 @@
+---
+#==============================================================================
+# AAP Controller Defaults
+#==============================================================================
+
+aap_validate_certs: true
+aap_admin_username: admin
+
+# Notification templates (optional)
+aap_notification_templates: []
+# - name: "Slack Notifications"
+#   type: slack
+#   config:
+#     channels:
+#       - "#automation"
+#     token: "{{ vault_slack_token }}"
+
+# - name: "Email Notifications"
+#   type: email
+#   config:
+#     host: smtp.example.com
+#     port: 587
+#     username: "{{ vault_smtp_username }}"
+#     password: "{{ vault_smtp_password }}"
+#     use_tls: true
+#     sender: "aap@example.com"
+#     recipients:
+#       - "ops-team@example.com"

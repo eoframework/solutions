@@ -1,0 +1,74 @@
+---
+#==============================================================================
+# AAP Backup Configuration
+#==============================================================================
+
+- name: Create backup directory
+  ansible.builtin.file:
+    path: "{{ aap_backup_dir }}"
+    state: directory
+    owner: awx
+    group: awx
+    mode: '0750'
+
+- name: Configure AWS CLI for S3 backup
+  ansible.builtin.template:
+    src: aws_credentials.j2
+    dest: /root/.aws/credentials
+    owner: root
+    group: root
+    mode: '0600'
+  when: backup.s3_bucket is defined
+  no_log: true
+
+- name: Create backup script
+  ansible.builtin.template:
+    src: backup.sh.j2
+    dest: /usr/local/bin/aap-backup.sh
+    owner: root
+    group: root
+    mode: '0750'
+
+- name: Create backup cron job
+  ansible.builtin.cron:
+    name: "AAP Backup"
+    cron_file: aap_backup
+    user: root
+    job: "/usr/local/bin/aap-backup.sh >> /var/log/aap-backup.log 2>&1"
+    special_time: "{{ aap_backup_schedule | default('daily') }}"
+    state: present
+  when: backup.enabled | default(false)
+
+- name: Create custom schedule backup cron job
+  ansible.builtin.cron:
+    name: "AAP Backup"
+    cron_file: aap_backup
+    user: root
+    job: "/usr/local/bin/aap-backup.sh >> /var/log/aap-backup.log 2>&1"
+    minute: "{{ backup.schedule_cron.split()[0] }}"
+    hour: "{{ backup.schedule_cron.split()[1] }}"
+    day: "{{ backup.schedule_cron.split()[2] }}"
+    month: "{{ backup.schedule_cron.split()[3] }}"
+    weekday: "{{ backup.schedule_cron.split()[4] }}"
+    state: present
+  when:
+    - backup.enabled | default(false)
+    - backup.schedule_cron is defined
+
+- name: Create backup retention cleanup script
+  ansible.builtin.template:
+    src: backup_cleanup.sh.j2
+    dest: /usr/local/bin/aap-backup-cleanup.sh
+    owner: root
+    group: root
+    mode: '0750'
+
+- name: Create backup cleanup cron job
+  ansible.builtin.cron:
+    name: "AAP Backup Cleanup"
+    cron_file: aap_backup_cleanup
+    user: root
+    job: "/usr/local/bin/aap-backup-cleanup.sh >> /var/log/aap-backup-cleanup.log 2>&1"
+    special_time: daily
+    state: present
+  when: backup.enabled | default(false)

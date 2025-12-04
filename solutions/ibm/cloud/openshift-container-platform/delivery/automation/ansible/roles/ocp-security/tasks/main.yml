@@ -1,0 +1,82 @@
+---
+#==============================================================================
+# OCP Security Role - Main Tasks
+#==============================================================================
+# Configures Pod Security, Network Policies, and security controls
+#==============================================================================
+
+- name: Apply default network policy for namespace isolation
+  kubernetes.core.k8s:
+    state: present
+    definition:
+      apiVersion: networking.k8s.io/v1
+      kind: NetworkPolicy
+      metadata:
+        name: default-deny-all
+        namespace: "{{ item }}"
+      spec:
+        podSelector: {}
+        policyTypes:
+          - Ingress
+          - Egress
+  loop: "{{ security_namespaces | default([]) }}"
+  when: security.network_policies_enabled | default(true)
+
+- name: Configure Pod Security Admission
+  kubernetes.core.k8s:
+    state: present
+    definition:
+      apiVersion: v1
+      kind: Namespace
+      metadata:
+        name: "{{ item }}"
+        labels:
+          pod-security.kubernetes.io/enforce: "{{ security.pod_security_admission | default('baseline') }}"
+          pod-security.kubernetes.io/audit: "restricted"
+          pod-security.kubernetes.io/warn: "restricted"
+  loop: "{{ security_namespaces | default([]) }}"
+
+- name: Create security scanning namespace
+  kubernetes.core.k8s:
+    state: present
+    definition:
+      apiVersion: v1
+      kind: Namespace
+      metadata:
+        name: stackrox
+        labels:
+          openshift.io/cluster-monitoring: "true"
+  when: security.acs_enabled | default(false)
+
+- name: Apply image pull secret policy
+  kubernetes.core.k8s:
+    state: present
+    definition:
+      apiVersion: config.openshift.io/v1
+      kind: Image
+      metadata:
+        name: cluster
+      spec:
+        registrySources:
+          allowedRegistries:
+            - quay.io
+            - registry.redhat.io
+            - registry.access.redhat.com
+            - ghcr.io
+            - docker.io
+          containerRuntimeSearchRegistries:
+            - registry.redhat.io
+            - registry.access.redhat.com
+  when: security.image_scanning_enabled | default(true)
+
+- name: Configure audit log policy
+  kubernetes.core.k8s:
+    state: present
+    definition:
+      apiVersion: config.openshift.io/v1
+      kind: APIServer
+      metadata:
+        name: cluster
+      spec:
+        audit:
+          profile: Default

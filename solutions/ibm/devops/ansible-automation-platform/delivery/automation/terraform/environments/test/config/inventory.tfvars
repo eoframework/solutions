@@ -1,0 +1,14 @@
+#------------------------------------------------------------------------------
+# Inventory Configuration - TEST Environment
+#------------------------------------------------------------------------------
+# Generated from configuration on 2025-12-04 00:34:19
+#
+# To regenerate: python generate-tfvars.py /path/to/solution
+#------------------------------------------------------------------------------
+
+inventory = {
+  dynamic_inventory_enabled = true  # Enable dynamic inventory sources
+  managed_network_count = 20  # Number of managed network devices
+  managed_server_count = 100  # Number of managed servers
+  smart_inventory_enabled = true  # Enable smart inventories
+}

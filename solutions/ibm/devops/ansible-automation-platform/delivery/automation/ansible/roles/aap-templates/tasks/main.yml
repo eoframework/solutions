@@ -1,0 +1,51 @@
+---
+#==============================================================================
+# AAP Job Templates Configuration
+#==============================================================================
+
+- name: Create job templates
+  ansible.controller.job_template:
+    controller_host: "{{ platform.controller_url }}"
+    controller_username: "{{ aap_admin_username }}"
+    controller_password: "{{ aap_admin_password }}"
+    validate_certs: "{{ aap_validate_certs | default(true) }}"
+    name: "{{ item.name }}"
+    organization: "{{ item.organization | default(rbac.default_organization) }}"
+    description: "{{ item.description | default(omit) }}"
+    job_type: "{{ item.job_type | default('run') }}"
+    inventory: "{{ item.inventory }}"
+    project: "{{ item.project }}"
+    playbook: "{{ item.playbook }}"
+    credentials: "{{ item.credentials | default(omit) }}"
+    execution_environment: "{{ item.execution_environment | default(content.execution_environments[0]) }}"
+    forks: "{{ item.forks | default(performance.forks_default) }}"
+    limit: "{{ item.limit | default(omit) }}"
+    verbosity: "{{ item.verbosity | default(0) }}"
+    extra_vars: "{{ item.extra_vars | default(omit) }}"
+    job_tags: "{{ item.job_tags | default(omit) }}"
+    skip_tags: "{{ item.skip_tags | default(omit) }}"
+    ask_inventory_on_launch: "{{ item.ask_inventory_on_launch | default(false) }}"
+    ask_limit_on_launch: "{{ item.ask_limit_on_launch | default(false) }}"
+    ask_credential_on_launch: "{{ item.ask_credential_on_launch | default(false) }}"
+    ask_variables_on_launch: "{{ item.ask_variables_on_launch | default(false) }}"
+    ask_tags_on_launch: "{{ item.ask_tags_on_launch | default(false) }}"
+    survey_enabled: "{{ item.survey_enabled | default(false) }}"
+    survey_spec: "{{ item.survey_spec | default(omit) }}"
+    become_enabled: "{{ item.become_enabled | default(true) }}"
+    allow_simultaneous: "{{ item.allow_simultaneous | default(false) }}"
+    timeout: "{{ item.timeout | default(performance.job_timeout_seconds) }}"
+    state: present
+  loop: "{{ aap_job_templates }}"
+
+- name: Create job template schedules
+  ansible.controller.schedule:
+    controller_host: "{{ platform.controller_url }}"
+    controller_username: "{{ aap_admin_username }}"
+    controller_password: "{{ aap_admin_password }}"
+    validate_certs: "{{ aap_validate_certs | default(true) }}"
+    name: "{{ item.name }}"
+    unified_job_template: "{{ item.job_template }}"
+    rrule: "{{ item.rrule }}"
+    enabled: "{{ item.enabled | default(true) }}"
+    state: present
+  loop: "{{ aap_job_schedules | default([]) }}"

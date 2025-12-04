@@ -1,0 +1,37 @@
+---
+#==============================================================================
+# AAP Projects Configuration
+#==============================================================================
+
+- name: Create projects
+  ansible.controller.project:
+    controller_host: "{{ platform.controller_url }}"
+    controller_username: "{{ aap_admin_username }}"
+    controller_password: "{{ aap_admin_password }}"
+    validate_certs: "{{ aap_validate_certs | default(true) }}"
+    name: "{{ item.name }}"
+    organization: "{{ item.organization | default(rbac.default_organization) }}"
+    description: "{{ item.description | default(omit) }}"
+    scm_type: "{{ item.scm_type | default('git') }}"
+    scm_url: "{{ item.scm_url }}"
+    scm_branch: "{{ item.scm_branch | default(content.git_branch_prod) }}"
+    scm_credential: "{{ item.scm_credential | default(omit) }}"
+    scm_update_on_launch: "{{ item.scm_update_on_launch | default(true) }}"
+    scm_update_cache_timeout: "{{ item.scm_update_cache_timeout | default(content.sync_interval_minutes * 60) }}"
+    scm_clean: "{{ item.scm_clean | default(true) }}"
+    scm_delete_on_update: "{{ item.scm_delete_on_update | default(false) }}"
+    default_environment: "{{ item.default_environment | default(content.execution_environments[0]) }}"
+    state: present
+  loop: "{{ aap_projects }}"
+
+- name: Update projects
+  ansible.controller.project_update:
+    controller_host: "{{ platform.controller_url }}"
+    controller_username: "{{ aap_admin_username }}"
+    controller_password: "{{ aap_admin_password }}"
+    validate_certs: "{{ aap_validate_certs | default(true) }}"
+    project: "{{ item.name }}"
+    wait: true
+    timeout: 300
+  loop: "{{ aap_projects }}"
+  when: aap_update_projects | default(true)

@@ -1,0 +1,68 @@
+---
+#==============================================================================
+# AAP Credentials Configuration
+#==============================================================================
+
+- name: Create machine credential
+  ansible.controller.credential:
+    controller_host: "{{ platform.controller_url }}"
+    controller_username: "{{ aap_admin_username }}"
+    controller_password: "{{ aap_admin_password }}"
+    validate_certs: "{{ aap_validate_certs | default(true) }}"
+    name: "{{ item.name }}"
+    organization: "{{ rbac.default_organization }}"
+    credential_type: Machine
+    inputs:
+      username: "{{ item.username }}"
+      ssh_key_data: "{{ item.ssh_key_data | default(omit) }}"
+      password: "{{ item.password | default(omit) }}"
+      become_method: "{{ item.become_method | default('sudo') }}"
+      become_username: "{{ item.become_username | default(omit) }}"
+      become_password: "{{ item.become_password | default(omit) }}"
+    state: present
+  loop: "{{ aap_machine_credentials | default([]) }}"
+  no_log: true
+
+- name: Create SCM credential
+  ansible.controller.credential:
+    controller_host: "{{ platform.controller_url }}"
+    controller_username: "{{ aap_admin_username }}"
+    controller_password: "{{ aap_admin_password }}"
+    validate_certs: "{{ aap_validate_certs | default(true) }}"
+    name: "{{ item.name }}"
+    organization: "{{ rbac.default_organization }}"
+    credential_type: "Source Control"
+    inputs:
+      username: "{{ item.username | default(omit) }}"
+      password: "{{ item.password | default(omit) }}"
+      ssh_key_data: "{{ item.ssh_key_data | default(omit) }}"
+    state: present
+  loop: "{{ aap_scm_credentials | default([]) }}"
+  no_log: true
+
+- name: Create cloud credentials
+  ansible.controller.credential:
+    controller_host: "{{ platform.controller_url }}"
+    controller_username: "{{ aap_admin_username }}"
+    controller_password: "{{ aap_admin_password }}"
+    validate_certs: "{{ aap_validate_certs | default(true) }}"
+    name: "{{ item.name }}"
+    organization: "{{ rbac.default_organization }}"
+    credential_type: "{{ item.credential_type }}"
+    inputs: "{{ item.inputs }}"
+    state: present
+  loop: "{{ aap_cloud_credentials | default([]) }}"
+  no_log: true
+
+- name: Create custom credential types
+  ansible.controller.credential_type:
+    controller_host: "{{ platform.controller_url }}"
+    controller_username: "{{ aap_admin_username }}"
+    controller_password: "{{ aap_admin_password }}"
+    validate_certs: "{{ aap_validate_certs | default(true) }}"
+    name: "{{ item.name }}"
+    kind: cloud
+    inputs: "{{ item.inputs }}"
+    injectors: "{{ item.injectors }}"
+    state: present
+  loop: "{{ aap_custom_credential_types | default([]) }}"

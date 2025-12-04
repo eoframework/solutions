@@ -1,37 +1,82 @@
-#WIDTH: 25,15,35,25,25,25,45,10,12,16,20
-#ALIGN: left,left,left,left,left,left,left,center,left,center,left
-Parameter Name,Category,Description,Production,Test,DR,Validation Rules,Required,Data Type,Security Level,Notes
-aap_controller_url,Platform,Automation Controller web UI and API URL,https://aap.example.com,https://aap-test.example.com,https://aap-dr.example.com,Valid HTTPS URL,Yes,String,Public,HA endpoint via load balancer
-aap_controller_nodes,Platform,Number of controller nodes in HA cluster,2,1,2,1|2|3,Yes,Integer,Public,2 nodes minimum for HA
-aap_execution_nodes,Platform,Number of execution nodes for job processing,4,2,4,Minimum 2,Yes,Integer,Public,Scale based on concurrent jobs
-controller_cpu,Compute,vCPU cores per controller node,8,4,8,Minimum 4,Yes,Integer,Public,8 cores for production
-controller_memory,Compute,Memory (GB) per controller node,16,8,16,Minimum 8,Yes,Integer,Public,16GB for production
-execution_node_cpu,Compute,vCPU cores per execution node,8,4,8,Minimum 4,Yes,Integer,Public,8 cores per execution node
-execution_node_memory,Compute,Memory (GB) per execution node,16,8,16,Minimum 8,Yes,Integer,Public,16GB for job processing
-postgres_host,Database,PostgreSQL database hostname,aap-db.example.com,aap-test-db.example.com,aap-dr-db.example.com,Valid hostname,Yes,String,Confidential,Managed HA database
-postgres_port,Database,PostgreSQL database port,5432,5432,5432,1024-65535,Yes,Integer,Public,Standard PostgreSQL port
-postgres_database,Database,PostgreSQL database name,awx,awx_test,awx,Valid DB name,Yes,String,Public,AAP database
-postgres_username,Database,PostgreSQL service account,awx,awx,awx,Valid username,Yes,String,Confidential,Read/write access
-ldap_enabled,Authentication,Enable LDAP/AD integration,true,false,true,true|false,Yes,Boolean,Public,SSO with enterprise directory
-ldap_url,Authentication,Corporate LDAP/AD server URL,ldaps://ldap.example.com:636,ldaps://ldap.example.com:636,ldaps://ldap.example.com:636,Valid LDAPS URL,Yes,String,Confidential,Use LDAPS for encryption
-ldap_bind_dn,Authentication,LDAP service account DN,CN=aap-svc;OU=ServiceAccounts;DC=example;DC=com,CN=aap-svc;OU=ServiceAccounts;DC=example;DC=com,CN=aap-svc;OU=ServiceAccounts;DC=example;DC=com,Valid LDAP DN,Yes,String,Confidential,Read-only service account
-ldap_user_search,Authentication,LDAP user search base DN,OU=Users;DC=example;DC=com,OU=Users;DC=example;DC=com,OU=Users;DC=example;DC=com,Valid LDAP DN,Yes,String,Confidential,Scope to user OU
-ldap_group_search,Authentication,LDAP group search base DN,OU=Groups;DC=example;DC=com,OU=Groups;DC=example;DC=com,OU=Groups;DC=example;DC=com,Valid LDAP DN,Yes,String,Confidential,Map to AAP teams
-vault_enabled,Credentials,Enable HashiCorp Vault integration,true,false,true,true|false,Yes,Boolean,Public,Credential vault integration
-vault_url,Credentials,HashiCorp Vault server URL,https://vault.example.com:8200,https://vault.example.com:8200,https://vault.example.com:8200,Valid HTTPS URL,Yes,String,Confidential,Vault server endpoint
-servicenow_enabled,Integration,Enable ServiceNow integration,true,false,true,true|false,Yes,Boolean,Public,ITSM integration
-servicenow_instance,Integration,ServiceNow instance hostname,company.service-now.com,company.service-now.com,company.service-now.com,Valid hostname,Yes,String,Public,ITSM instance
-servicenow_username,Integration,ServiceNow integration user,aap_integration,aap_integration,aap_integration,Valid username,Yes,String,Confidential,API access only
-git_repo_url,Content,Playbook Git repository URL,https://github.com/company/ansible-playbooks,https://github.com/company/ansible-playbooks,https://github.com/company/ansible-playbooks,Valid Git URL,Yes,String,Public,Automation content
-automation_hub_url,Content,Private Automation Hub URL,https://hub.example.com,https://hub-test.example.com,https://hub.example.com,Valid HTTPS URL,Yes,String,Public,Organization content
-log_aggregator_enabled,Monitoring,Enable log aggregation,true,true,true,true|false,Yes,Boolean,Public,Centralized logging
-log_aggregator_host,Monitoring,Log aggregator hostname,splunk.example.com,splunk.example.com,splunk.example.com,Valid hostname,Yes,String,Public,Splunk/ELK endpoint
-log_aggregator_port,Monitoring,Log aggregator port,9997,9997,9997,1024-65535,Yes,Integer,Public,Splunk forwarder port
-pagerduty_enabled,Monitoring,Enable PagerDuty integration,true,false,true,true|false,Yes,Boolean,Public,Job failure alerts
-max_concurrent_jobs,Performance,Maximum concurrent job executions,100,25,100,10-500,Yes,Integer,Public,Scale with nodes
-job_timeout,Performance,Default job timeout in seconds,3600,3600,3600,60-86400,Yes,Integer,Public,1 hour default
-managed_server_count,Inventory,Number of managed servers,500,100,500,Positive integer,Yes,Integer,Public,Linux and Windows
-managed_network_count,Inventory,Number of managed network devices,100,20,100,Positive integer,Yes,Integer,Public,Cisco Juniper Arista
-backup_enabled,Operations,Enable automated backups,true,false,true,true|false,Yes,Boolean,Public,Platform data protection
-backup_schedule,Operations,Backup schedule in cron format,0 2 * * *,0 2 * * *,0 2 * * *,Valid cron expression,Yes,String,Public,Daily at 2 AM
-backup_retention,Operations,Backup retention in days,30,7,30,7-365,Yes,Integer,Public,30 days for compliance
+#WIDTH:  45,14,50,50,50,45,8,12,27,14,14,12,30,12
+#ALIGN:  left,left,left,left,left,left,center,left,left,center,left,left,left,center
+Parameter Name,Category,Production,Test,DR,Description,Required,Data Type,Validation Rules,Security Level,Owner Team,Dependencies,Notes,Last Updated
+solution.name,Project,ansible-automation-platform,ansible-automation-platform,ansible-automation-platform,Solution name for resource naming,Yes,String,Valid string value,Public,Automation,,AAP solution identifier,2025-12-03
+solution.abbr,Project,aap,aap,aap,Solution abbreviation (3-4 chars),Yes,String,Valid string value,Public,Automation,,Used in resource naming prefix,2025-12-03
+solution.provider_name,Project,ibm,ibm,ibm,Provider organization name,Yes,String,Valid string value,Public,Automation,,IBM Red Hat provider,2025-12-03
+solution.category_name,Project,devops,devops,devops,Solution category,Yes,String,Valid string value,Public,Automation,,DevOps category,2025-12-03
+platform.controller_url,Platform,https://aap.example.com,https://aap-test.example.com,https://aap-dr.example.com,Automation Controller web UI and API URL,Yes,String,Valid HTTPS URL,Public,Automation,,HA endpoint via load balancer,2025-12-03
+platform.hub_url,Platform,https://hub.example.com,https://hub-test.example.com,https://hub.example.com,Private Automation Hub URL,Yes,String,Valid HTTPS URL,Public,Automation,,Organization content,2025-12-03
+platform.eda_enabled,Platform,true,false,true,Enable Event-Driven Ansible,Yes,Boolean,true|false,Public,Automation,,Event-driven automation,2025-12-03
+platform.version,Platform,2.4,2.4,2.4,Ansible Automation Platform version,Yes,String,2.x format,Public,Automation,,AAP 2.4 LTS recommended,2025-12-03
+compute.controller_count,Compute,2,1,2,Number of controller nodes in HA cluster,Yes,Integer,1|2|3,Public,Infrastructure,,2 nodes minimum for HA,2025-12-03
+compute.controller_cpu,Compute,8,4,8,vCPU cores per controller node,Yes,Integer,Minimum 4,Public,Infrastructure,,8 cores for production,2025-12-03
+compute.controller_memory_gb,Compute,16,8,16,Memory (GB) per controller node,Yes,Integer,Minimum 8,Public,Infrastructure,,16GB for production,2025-12-03
+compute.controller_instance_type,Compute,m5.2xlarge,m5.xlarge,m5.2xlarge,AWS instance type for controller nodes,Yes,String,Valid AWS instance type,Public,Infrastructure,,AWS-specific sizing,2025-12-03
+compute.execution_count,Compute,4,2,4,Number of execution nodes for job processing,Yes,Integer,Minimum 2,Public,Infrastructure,,Scale based on concurrent jobs,2025-12-03
+compute.execution_cpu,Compute,8,4,8,vCPU cores per execution node,Yes,Integer,Minimum 4,Public,Infrastructure,,8 cores per execution node,2025-12-03
+compute.execution_memory_gb,Compute,16,8,16,Memory (GB) per execution node,Yes,Integer,Minimum 8,Public,Infrastructure,,16GB for job processing,2025-12-03
+compute.execution_instance_type,Compute,m5.2xlarge,m5.xlarge,m5.2xlarge,AWS instance type for execution nodes,Yes,String,Valid AWS instance type,Public,Infrastructure,,AWS-specific sizing,2025-12-03
+compute.hub_instance_type,Compute,m5.xlarge,m5.large,m5.xlarge,AWS instance type for hub node,Yes,String,Valid AWS instance type,Public,Infrastructure,,Hub sizing,2025-12-03
+database.host,Database,aap-db.example.com,aap-test-db.example.com,aap-dr-db.example.com,PostgreSQL database hostname,Yes,String,Valid hostname,Confidential,Infrastructure,,Managed HA database,2025-12-03
+database.port,Database,5432,5432,5432,PostgreSQL database port,Yes,Integer,1024-65535,Public,Infrastructure,,Standard PostgreSQL port,2025-12-03
+database.name,Database,awx,awx_test,awx,PostgreSQL database name,Yes,String,Valid DB name,Public,Infrastructure,,AAP database,2025-12-03
+database.username,Database,awx,awx,awx,PostgreSQL service account,Yes,String,Valid username,Confidential,Infrastructure,,Read/write access,2025-12-03
+database.instance_class,Database,db.r6g.large,db.r6g.medium,db.r6g.large,RDS instance class,Yes,String,Valid RDS instance class,Public,Infrastructure,,Managed PostgreSQL,2025-12-03
+database.storage_gb,Database,100,50,100,Database storage in GB,Yes,Integer,Positive integer,Public,Infrastructure,,Grow with job history,2025-12-03
+database.multi_az,Database,true,false,true,Enable Multi-AZ deployment,Yes,Boolean,true|false,Public,Infrastructure,,HA for production,2025-12-03
+network.vpc_cidr,Network,10.0.0.0/16,10.1.0.0/16,10.2.0.0/16,VPC CIDR block,Yes,String,Valid CIDR notation,Public,Network,,AWS VPC network,2025-12-03
+network.public_subnets,Network,"[""10.0.1.0/24"", ""10.0.2.0/24""]","[""10.1.1.0/24""]","[""10.2.1.0/24"", ""10.2.2.0/24""]",Public subnet CIDRs,Yes,List(String),Valid CIDR list,Public,Network,,Load balancer subnets,2025-12-03
+network.private_subnets,Network,"[""10.0.11.0/24"", ""10.0.12.0/24""]","[""10.1.11.0/24""]","[""10.2.11.0/24"", ""10.2.12.0/24""]",Private subnet CIDRs,Yes,List(String),Valid CIDR list,Public,Network,,Controller and execution nodes,2025-12-03
+network.availability_zones,Network,"[""us-east-1a"", ""us-east-1b""]","[""us-east-1a""]","[""us-west-2a"", ""us-west-2b""]",Availability zones,Yes,List(String),Valid AZ list,Public,Network,,Multi-AZ deployment,2025-12-03
+auth.ldap_enabled,Authentication,true,false,true,Enable LDAP/AD integration,Yes,Boolean,true|false,Public,Security,,SSO with enterprise directory,2025-12-03
+auth.ldap_url,Authentication,ldaps://ldap.example.com:636,ldaps://ldap.example.com:636,ldaps://ldap.example.com:636,Corporate LDAP/AD server URL,Yes,String,Valid LDAPS URL,Confidential,Security,,Use LDAPS for encryption,2025-12-03
+auth.ldap_bind_dn,Authentication,CN=aap-svc;OU=ServiceAccounts;DC=example;DC=com,CN=aap-svc;OU=ServiceAccounts;DC=example;DC=com,CN=aap-svc;OU=ServiceAccounts;DC=example;DC=com,LDAP service account DN,Yes,String,Valid LDAP DN,Confidential,Security,,Read-only service account,2025-12-03
+auth.ldap_user_search_base,Authentication,OU=Users;DC=example;DC=com,OU=Users;DC=example;DC=com,OU=Users;DC=example;DC=com,LDAP user search base DN,Yes,String,Valid LDAP DN,Confidential,Security,,Scope to user OU,2025-12-03
+auth.ldap_group_search_base,Authentication,OU=Groups;DC=example;DC=com,OU=Groups;DC=example;DC=com,OU=Groups;DC=example;DC=com,LDAP group search base DN,Yes,String,Valid LDAP DN,Confidential,Security,,Map to AAP teams,2025-12-03
+auth.session_timeout_seconds,Authentication,1800,1800,1800,Session timeout in seconds,Yes,Integer,300-86400,Public,Security,,30 minutes default,2025-12-03
+credentials.vault_enabled,Credentials,true,false,true,Enable HashiCorp Vault integration,Yes,Boolean,true|false,Public,Security,,Credential vault integration,2025-12-03
+credentials.vault_url,Credentials,https://vault.example.com:8200,https://vault.example.com:8200,https://vault.example.com:8200,HashiCorp Vault server URL,Yes,String,Valid HTTPS URL,Confidential,Security,,Vault server endpoint,2025-12-03
+credentials.vault_namespace,Credentials,aap-prod,aap-test,aap-dr,Vault namespace for secrets,Yes,String,Valid namespace,Confidential,Security,,Environment isolation,2025-12-03
+credentials.cyberark_enabled,Credentials,false,false,false,Enable CyberArk integration,Yes,Boolean,true|false,Public,Security,,Alternative to Vault,2025-12-03
+integration.servicenow_enabled,Integration,true,false,true,Enable ServiceNow integration,Yes,Boolean,true|false,Public,Operations,,ITSM integration,2025-12-03
+integration.servicenow_instance,Integration,company.service-now.com,company.service-now.com,company.service-now.com,ServiceNow instance hostname,Yes,String,Valid hostname,Public,Operations,,ITSM instance,2025-12-03
+integration.servicenow_username,Integration,aap_integration,aap_integration,aap_integration,ServiceNow integration user,Yes,String,Valid username,Confidential,Operations,,API access only,2025-12-03
+integration.monitoring_webhook_url,Integration,https://monitoring.example.com/webhook,https://monitoring.example.com/webhook,https://monitoring.example.com/webhook,Monitoring webhook endpoint,Yes,String,Valid HTTPS URL,Confidential,Operations,,Event-driven triggers,2025-12-03
+content.git_repo_url,Content,https://github.com/company/ansible-playbooks,https://github.com/company/ansible-playbooks,https://github.com/company/ansible-playbooks,Playbook Git repository URL,Yes,String,Valid Git URL,Public,DevOps,,Automation content,2025-12-03
+content.git_branch_prod,Content,main,develop,main,Production Git branch,Yes,String,Valid branch name,Public,DevOps,,Production content,2025-12-03
+content.sync_interval_minutes,Content,5,5,5,Project sync interval in minutes,Yes,Integer,1-60,Public,DevOps,,Auto-sync from Git,2025-12-03
+content.execution_environments,Content,"[""ee-base"", ""ee-network"", ""ee-cloud""]","[""ee-base"", ""ee-network""]","[""ee-base"", ""ee-network"", ""ee-cloud""]",Execution environment images,Yes,List(String),Valid EE names,Public,DevOps,,Container images for jobs,2025-12-03
+monitoring.log_aggregator_enabled,Monitoring,true,true,true,Enable log aggregation,Yes,Boolean,true|false,Public,Operations,,Centralized logging,2025-12-03
+monitoring.log_aggregator_host,Monitoring,splunk.example.com,splunk.example.com,splunk.example.com,Log aggregator hostname,Yes,String,Valid hostname,Public,Operations,,Splunk/ELK endpoint,2025-12-03
+monitoring.log_aggregator_port,Monitoring,9997,9997,9997,Log aggregator port,Yes,Integer,1024-65535,Public,Operations,,Splunk forwarder port,2025-12-03
+monitoring.log_aggregator_type,Monitoring,splunk,splunk,splunk,Log aggregator type,Yes,String,splunk|logstash|other,Public,Operations,,Logging backend,2025-12-03
+monitoring.pagerduty_enabled,Monitoring,true,false,true,Enable PagerDuty integration,Yes,Boolean,true|false,Public,Operations,,Job failure alerts,2025-12-03
+monitoring.insights_enabled,Monitoring,true,true,true,Enable Red Hat Insights,Yes,Boolean,true|false,Public,Operations,,Platform health reporting,2025-12-03
+performance.max_concurrent_jobs,Performance,100,25,100,Maximum concurrent job executions,Yes,Integer,10-500,Public,Operations,,Scale with nodes,2025-12-03
+performance.job_timeout_seconds,Performance,3600,3600,3600,Default job timeout in seconds,Yes,Integer,60-86400,Public,Operations,,1 hour default,2025-12-03
+performance.forks_default,Performance,5,5,5,Default Ansible forks,Yes,Integer,1-50,Public,Operations,,Parallel task execution,2025-12-03
+performance.job_event_buffer_seconds,Performance,5,5,5,Job event buffer interval,Yes,Integer,1-60,Public,Operations,,Event batching,2025-12-03
+inventory.managed_server_count,Inventory,500,100,500,Number of managed servers,Yes,Integer,Positive integer,Public,Operations,,Linux and Windows,2025-12-03
+inventory.managed_network_count,Inventory,100,20,100,Number of managed network devices,Yes,Integer,Positive integer,Public,Operations,,Cisco Juniper Arista,2025-12-03
+inventory.dynamic_inventory_enabled,Inventory,true,true,true,Enable dynamic inventory sources,Yes,Boolean,true|false,Public,Operations,,AWS Azure VMware inventory,2025-12-03
+inventory.smart_inventory_enabled,Inventory,true,true,true,Enable smart inventories,Yes,Boolean,true|false,Public,Operations,,Dynamic host grouping,2025-12-03
+rbac.default_organization,RBAC,Default,Default,Default,Default organization name,Yes,String,Valid org name,Public,Security,,Primary organization,2025-12-03
+rbac.admin_team,RBAC,Platform-Admins,Platform-Admins,Platform-Admins,Admin team name,Yes,String,Valid team name,Public,Security,,Full platform access,2025-12-03
+rbac.operator_team,RBAC,Operators,Operators,Operators,Operator team name,Yes,String,Valid team name,Public,Security,,Job execution access,2025-12-03
+rbac.auditor_team,RBAC,Auditors,Auditors,Auditors,Auditor team name,Yes,String,Valid team name,Public,Security,,Read-only access,2025-12-03
+backup.enabled,Operations,true,false,true,Enable automated backups,Yes,Boolean,true|false,Public,Operations,,Platform data protection,2025-12-03
+backup.schedule_cron,Operations,"0 2 * * *","0 2 * * *","0 2 * * *",Backup schedule in cron format,Yes,String,Valid cron expression,Public,Operations,,Daily at 2 AM,2025-12-03
+backup.retention_days,Operations,30,7,30,Backup retention in days,Yes,Integer,7-365,Public,Operations,,30 days for compliance,2025-12-03
+backup.s3_bucket,Operations,aap-prod-backups,aap-test-backups,aap-dr-backups,S3 bucket for backup storage,Yes,String,Valid S3 bucket name,Public,Operations,,Offsite backup storage,2025-12-03
+dr.enabled,DR,true,false,true,Enable DR infrastructure,Yes,Boolean,true|false,Public,Operations,,Master DR toggle,2025-12-03
+dr.strategy,DR,ACTIVE_PASSIVE,BACKUP_ONLY,ACTIVE_PASSIVE,DR strategy,Yes,String,ACTIVE_PASSIVE|ACTIVE_ACTIVE|BACKUP_ONLY,Public,Operations,,Recovery approach,2025-12-03
+dr.rto_hours,DR,4,8,4,Recovery Time Objective in hours,Yes,Integer,Positive integer,Public,Operations,,Target recovery time,2025-12-03
+dr.rpo_hours,DR,1,24,1,Recovery Point Objective in hours,Yes,Integer,Positive integer,Public,Operations,,Max data loss window,2025-12-03
+dr.db_replication_enabled,DR,true,false,false,Enable database replication,Yes,Boolean,true|false,Public,Operations,,Cross-region DB sync,2025-12-03
+ownership.cost_center,Project,CC-AAP-001,CC-AAP-001,CC-AAP-001,Cost center for billing,Yes,String,Valid cost center,Public,Finance,,Budget tracking,2025-12-03
+ownership.owner_email,Project,automation-team@example.com,automation-team@example.com,automation-team@example.com,Owner email for notifications,Yes,String,Valid email,Confidential,Operations,,Team notifications,2025-12-03
+ownership.project_code,Project,PRJ-AAP-2025,PRJ-AAP-2025,PRJ-AAP-2025,Project code for tracking,Yes,String,Valid string,Public,Finance,,Project tracking,2025-12-03
+budget.enabled,Best Practices,true,false,true,[Cost Optimization] Enable budget tracking,Yes,Boolean,true|false,Public,Operations,,Proactive cost monitoring,2025-12-03
+budget.monthly_amount_usd,Best Practices,15000,5000,15000,[Cost Optimization] Monthly budget limit in USD,Yes,Integer,Valid integer,Public,Operations,,Based on SOW estimates,2025-12-03
+budget.alert_thresholds,Best Practices,"[50, 80, 100]","[80, 100]","[50, 80, 100]",[Cost Optimization] Budget alert thresholds (%),Yes,List(Number),0-100,Public,Operations,,Multi-tier alerts,2025-12-03

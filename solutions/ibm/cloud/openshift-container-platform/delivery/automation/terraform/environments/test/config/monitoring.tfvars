@@ -1,0 +1,14 @@
+#------------------------------------------------------------------------------
+# Monitoring Configuration - TEST Environment
+#------------------------------------------------------------------------------
+# Generated from configuration on 2025-12-04 00:34:05
+#
+# To regenerate: python generate-tfvars.py /path/to/solution
+#------------------------------------------------------------------------------
+
+monitoring = {
+  alertmanager_target = "email"  # Alertmanager notification target
+  grafana_enabled = true  # Enable Grafana dashboards
+  prometheus_enabled = true  # Enable Prometheus monitoring
+  prometheus_retention_days = 7  # Prometheus metrics retention in days
+}

@@ -1,0 +1,24 @@
+#!/bin/bash
+#==============================================================================
+# AAP Backup Cleanup Script
+# Managed by Ansible
+#==============================================================================
+
+set -euo pipefail
+
+BACKUP_DIR="{{ aap_backup_dir }}"
+RETENTION_DAYS="{{ backup.retention_days }}"
+S3_BUCKET="{{ backup.s3_bucket }}"
+
+echo "Starting backup cleanup at $(date)"
+
+# Clean up local backups older than retention period
+find "${BACKUP_DIR}" -name "aap_backup_*.tar.gz" -mtime +${RETENTION_DAYS} -delete
+echo "Cleaned local backups older than ${RETENTION_DAYS} days"
+
+# Clean up S3 backups (using lifecycle policy is preferred, but this provides fallback)
+{% if backup.s3_bucket is defined and backup.s3_bucket | length > 0 %}
+echo "S3 bucket ${S3_BUCKET} should have lifecycle policy for cleanup"
+{% endif %}
+
+echo "Backup cleanup completed at $(date)"

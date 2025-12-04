@@ -1,0 +1,33 @@
+---
+#==============================================================================
+# Ansible Automation Platform - Collection Requirements
+#==============================================================================
+
+collections:
+  # AAP/AWX Controller collection
+  - name: ansible.controller
+    version: ">=4.4.0"
+
+  # General purpose
+  - name: ansible.posix
+    version: ">=1.5.0"
+
+  # Container management
+  - name: containers.podman
+    version: ">=1.10.0"
+
+  # Cloud providers
+  - name: amazon.aws
+    version: ">=6.0.0"
+
+  # HashiCorp Vault
+  - name: community.hashi_vault
+    version: ">=5.0.0"
+
+  # CyberArk
+  - name: cyberark.conjur
+    version: ">=1.2.0"
+
+  # ServiceNow
+  - name: servicenow.itsm
+    version: ">=2.0.0"

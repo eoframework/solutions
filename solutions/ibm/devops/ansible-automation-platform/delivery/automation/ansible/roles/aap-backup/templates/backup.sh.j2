@@ -1,0 +1,32 @@
+#!/bin/bash
+#==============================================================================
+# AAP Backup Script
+# Managed by Ansible
+#==============================================================================
+
+set -euo pipefail
+
+BACKUP_DIR="{{ aap_backup_dir }}"
+TIMESTAMP=$(date +%Y%m%d_%H%M%S)
+BACKUP_FILE="aap_backup_${TIMESTAMP}.tar.gz"
+S3_BUCKET="{{ backup.s3_bucket }}"
+
+echo "Starting AAP backup at $(date)"
+
+# Create backup using setup.sh (standard AAP backup method)
+cd /opt/ansible-automation-platform/installer
+./setup.sh -b
+
+# Move backup to backup directory
+mv /tmp/tower* "${BACKUP_DIR}/${BACKUP_FILE}" 2>/dev/null || true
+
+# Upload to S3 if bucket is configured
+{% if backup.s3_bucket is defined and backup.s3_bucket | length > 0 %}
+if [ -f "${BACKUP_DIR}/${BACKUP_FILE}" ]; then
+    echo "Uploading backup to S3..."
+    aws s3 cp "${BACKUP_DIR}/${BACKUP_FILE}" "s3://${S3_BUCKET}/backups/${BACKUP_FILE}"
+    echo "Backup uploaded to s3://${S3_BUCKET}/backups/${BACKUP_FILE}"
+fi
+{% endif %}
+
+echo "Backup completed at $(date)"

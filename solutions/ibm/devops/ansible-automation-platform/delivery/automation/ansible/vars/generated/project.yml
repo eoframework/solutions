@@ -1,0 +1,18 @@
+---
+#==============================================================================
+# AAP Project Configuration
+#==============================================================================
+# Generated from configuration.xlsx - DO NOT EDIT DIRECTLY
+#==============================================================================
+
+solution:
+  name: "Ansible Automation Platform"
+  abbr: "aap"
+  provider_name: "IBM"
+  category_name: "DevOps"
+  description: "Enterprise automation platform for IT orchestration"
+
+ownership:
+  cost_center: "CC-DevOps-001"
+  owner_email: "platform-team@example.com"
+  project_code: "PRJ-AAP-001"

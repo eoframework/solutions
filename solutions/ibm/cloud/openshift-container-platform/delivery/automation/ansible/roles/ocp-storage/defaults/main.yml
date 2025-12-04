@@ -1,0 +1,11 @@
+---
+#==============================================================================
+# OCP Storage Role - Defaults
+#==============================================================================
+
+storage:
+  odf_enabled: false
+  odf_capacity_tb: 2
+  class_block: "ocs-storagecluster-ceph-rbd"
+  class_file: "ocs-storagecluster-cephfs"
+  default_class: "ocs-storagecluster-ceph-rbd"

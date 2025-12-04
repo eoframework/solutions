@@ -1,0 +1,96 @@
+---
+#==============================================================================
+# AAP Production Environment Variables
+#==============================================================================
+# Generated from configuration.csv - DO NOT EDIT DIRECTLY
+#==============================================================================
+
+env: prod
+env_display: Production
+
+#------------------------------------------------------------------------------
+# Platform Configuration
+#------------------------------------------------------------------------------
+platform:
+  controller_url: "https://controller.aap.example.com"
+  hub_url: "https://hub.aap.example.com"
+  eda_enabled: false
+  version: "2.4"
+
+#------------------------------------------------------------------------------
+# Authentication
+#------------------------------------------------------------------------------
+auth:
+  ldap_enabled: true
+  ldap_url: "ldaps://ldap.example.com:636"
+  ldap_bind_dn: "cn=aap-svc,ou=services,dc=example,dc=com"
+  ldap_user_search_base: "ou=users,dc=example,dc=com"
+  ldap_group_search_base: "ou=groups,dc=example,dc=com"
+  session_timeout_seconds: 28800
+
+#------------------------------------------------------------------------------
+# Credentials
+#------------------------------------------------------------------------------
+credentials:
+  vault_enabled: true
+  vault_url: "https://vault.example.com"
+  vault_namespace: "aap"
+  cyberark_enabled: false
+
+#------------------------------------------------------------------------------
+# Integration
+#------------------------------------------------------------------------------
+integration:
+  servicenow_enabled: true
+  servicenow_instance: "example.service-now.com"
+  servicenow_username: "aap_integration"
+  monitoring_webhook_url: "https://monitoring.example.com/webhook"
+
+#------------------------------------------------------------------------------
+# Content Management
+#------------------------------------------------------------------------------
+content:
+  git_repo_url: "https://github.com/example/ansible-content"
+  git_branch: "main"
+  sync_interval_minutes: 15
+  execution_environments:
+    - "ee-base"
+    - "ee-network"
+
+#------------------------------------------------------------------------------
+# Monitoring
+#------------------------------------------------------------------------------
+monitoring:
+  log_aggregator_enabled: true
+  log_aggregator_host: "splunk.example.com"
+  log_aggregator_port: 9997
+  log_aggregator_type: "splunk"
+  pagerduty_enabled: true
+  insights_enabled: true
+
+#------------------------------------------------------------------------------
+# Performance
+#------------------------------------------------------------------------------
+performance:
+  max_concurrent_jobs: 30
+  job_timeout_seconds: 3600
+  forks_default: 10
+  job_event_buffer_seconds: 5
+
+#------------------------------------------------------------------------------
+# RBAC
+#------------------------------------------------------------------------------
+rbac:
+  default_organization: "Default"
+  admin_team: "AAP-Admins"
+  operator_team: "AAP-Operators"
+  auditor_team: "AAP-Auditors"
+
+#------------------------------------------------------------------------------
+# Backup
+#------------------------------------------------------------------------------
+backup:
+  enabled: true
+  schedule_cron: "0 2 * * *"
+  retention_days: 30
+  s3_bucket: "aap-prod-backups"

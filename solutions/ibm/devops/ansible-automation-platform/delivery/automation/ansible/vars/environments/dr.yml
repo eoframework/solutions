@@ -1,0 +1,80 @@
+---
+#==============================================================================
+# AAP DR Environment Variables
+#==============================================================================
+
+env: dr
+env_display: Disaster Recovery
+
+#------------------------------------------------------------------------------
+# Platform Configuration
+#------------------------------------------------------------------------------
+platform:
+  controller_url: "https://controller-dr.aap.example.com"
+  hub_url: "https://hub-dr.aap.example.com"
+  eda_enabled: false
+  version: "2.4"
+
+#------------------------------------------------------------------------------
+# Authentication (mirrors prod)
+#------------------------------------------------------------------------------
+auth:
+  ldap_enabled: true
+  ldap_url: "ldaps://ldap.example.com:636"
+  ldap_bind_dn: "cn=aap-svc,ou=services,dc=example,dc=com"
+  ldap_user_search_base: "ou=users,dc=example,dc=com"
+  ldap_group_search_base: "ou=groups,dc=example,dc=com"
+  session_timeout_seconds: 28800
+
+#------------------------------------------------------------------------------
+# Credentials (mirrors prod)
+#------------------------------------------------------------------------------
+credentials:
+  vault_enabled: true
+  vault_url: "https://vault.example.com"
+  vault_namespace: "aap"
+  cyberark_enabled: false
+
+#------------------------------------------------------------------------------
+# Integration (mirrors prod)
+#------------------------------------------------------------------------------
+integration:
+  servicenow_enabled: true
+  servicenow_instance: "example.service-now.com"
+  servicenow_username: "aap_integration"
+
+#------------------------------------------------------------------------------
+# Monitoring
+#------------------------------------------------------------------------------
+monitoring:
+  log_aggregator_enabled: true
+  log_aggregator_host: "splunk.example.com"
+  log_aggregator_port: 9997
+  log_aggregator_type: "splunk"
+  pagerduty_enabled: true
+  insights_enabled: true
+
+#------------------------------------------------------------------------------
+# Performance
+#------------------------------------------------------------------------------
+performance:
+  max_concurrent_jobs: 30
+  job_timeout_seconds: 3600
+  forks_default: 10
+  job_event_buffer_seconds: 5
+
+#------------------------------------------------------------------------------
+# Backup
+#------------------------------------------------------------------------------
+backup:
+  enabled: true
+  schedule_cron: "0 2 * * *"
+  retention_days: 30
+  s3_bucket: "aap-dr-backups"
+
+#------------------------------------------------------------------------------
+# DR Specific
+#------------------------------------------------------------------------------
+dr:
+  status: "STANDBY"
+  failover_runbook: "https://runbooks.example.com/aap-dr-failover"

@@ -1,0 +1,22 @@
+---
+#==============================================================================
+# OCP Operators Role - Defaults
+#==============================================================================
+
+pipelines:
+  tekton_enabled: false
+
+gitops:
+  argocd_enabled: false
+
+servicemesh:
+  istio_enabled: false
+
+logging:
+  efk_enabled: false
+
+storage:
+  odf_enabled: false
+
+security:
+  acs_enabled: false

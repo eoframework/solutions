@@ -1,0 +1,49 @@
+---
+#==============================================================================
+# AAP Private Automation Hub Defaults
+#==============================================================================
+
+aap_hub_require_approval: true
+aap_hub_auto_sign: false
+aap_hub_public_collections: false
+aap_hub_public_download: false
+
+# Hub API token (required for configuration)
+# aap_hub_token: "{{ vault_hub_token }}"
+
+# Remote collection sources
+aap_hub_remotes: []
+# - url: "https://galaxy.ansible.com/api/"
+#   requirements: |
+#     collections:
+#       - name: amazon.aws
+#       - name: community.general
+#       - name: ansible.posix
+
+# - url: "https://console.redhat.com/api/automation-hub/"
+#   auth_url: "https://sso.redhat.com/auth/realms/redhat-external/protocol/openid-connect/token"
+#   token: "{{ vault_redhat_token }}"
+#   requirements: |
+#     collections:
+#       - name: redhat.insights
+#       - name: redhat.rhel_system_roles
+
+# Collection namespaces
+aap_hub_namespaces: []
+# - name: "internal"
+#   description: "Internal automation collections"
+#   company: "ACME Corp"
+#   groups:
+#     - "administrators"
+
+# Container registries for execution environments
+aap_hub_container_registries: []
+# - name: "Red Hat Registry"
+#   url: "registry.redhat.io"
+#   username: "{{ vault_redhat_username }}"
+#   password: "{{ vault_redhat_password }}"
+
+# - name: "Quay.io"
+#   url: "quay.io"
+#   username: "{{ vault_quay_username }}"
+#   password: "{{ vault_quay_password }}"

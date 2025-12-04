@@ -1,0 +1,12 @@
+---
+#==============================================================================
+# OCP Service Mesh Role - Defaults
+#==============================================================================
+
+servicemesh:
+  istio_enabled: false
+  mtls_mode: "STRICT"
+  tracing_enabled: true
+  tracing_sampling_rate: 1
+
+mesh_member_namespaces: []

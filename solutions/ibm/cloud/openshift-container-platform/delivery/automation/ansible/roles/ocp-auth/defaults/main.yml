@@ -1,0 +1,17 @@
+---
+#==============================================================================
+# OCP Authentication Role - Defaults
+#==============================================================================
+
+auth:
+  ldap_enabled: false
+  ldap_url: "ldaps://ldap.example.com:636"
+  ldap_bind_dn: "cn=admin,dc=example,dc=com"
+  ldap_user_search_base: "ou=users,dc=example,dc=com"
+  ldap_group_search_base: "ou=groups,dc=example,dc=com"
+  oauth_timeout_seconds: 86400
+  htpasswd_backup_enabled: true
+
+# Secrets (override via vault or extra-vars)
+ldap_bind_password: "changeme"
+admin_password: "changeme"

@@ -1,0 +1,96 @@
+---
+#==============================================================================
+# AAP ServiceNow Integration
+#==============================================================================
+
+- name: Create ServiceNow credential type
+  ansible.controller.credential_type:
+    controller_host: "{{ platform.controller_url }}"
+    controller_username: "{{ aap_admin_username }}"
+    controller_password: "{{ aap_admin_password }}"
+    validate_certs: "{{ aap_validate_certs | default(true) }}"
+    name: "ServiceNow"
+    kind: cloud
+    inputs:
+      fields:
+        - id: instance
+          type: string
+          label: ServiceNow Instance
+        - id: username
+          type: string
+          label: Username
+        - id: password
+          type: string
+          label: Password
+          secret: true
+        - id: client_id
+          type: string
+          label: OAuth Client ID
+        - id: client_secret
+          type: string
+          label: OAuth Client Secret
+          secret: true
+      required:
+        - instance
+    injectors:
+      env:
+        SN_HOST: "https://{{ '{{' }} instance {{ '}}' }}.service-now.com"
+        SN_USERNAME: "{{ '{{' }} username {{ '}}' }}"
+        SN_PASSWORD: "{{ '{{' }} password {{ '}}' }}"
+        SN_CLIENT_ID: "{{ '{{' }} client_id {{ '}}' }}"
+        SN_CLIENT_SECRET: "{{ '{{' }} client_secret {{ '}}' }}"
+    state: present
+
+- name: Create ServiceNow credential
+  ansible.controller.credential:
+    controller_host: "{{ platform.controller_url }}"
+    controller_username: "{{ aap_admin_username }}"
+    controller_password: "{{ aap_admin_password }}"
+    validate_certs: "{{ aap_validate_certs | default(true) }}"
+    name: "ServiceNow"
+    organization: "{{ rbac.default_organization }}"
+    credential_type: "ServiceNow"
+    inputs:
+      instance: "{{ integration.servicenow_instance }}"
+      username: "{{ integration.servicenow_username }}"
+      password: "{{ aap_servicenow_password }}"
+    state: present
+  no_log: true
+
+- name: Create ServiceNow inventory source
+  ansible.controller.inventory_source:
+    controller_host: "{{ platform.controller_url }}"
+    controller_username: "{{ aap_admin_username }}"
+    controller_password: "{{ aap_admin_password }}"
+    validate_certs: "{{ aap_validate_certs | default(true) }}"
+    name: "ServiceNow CMDB"
+    inventory: "{{ aap_servicenow_inventory }}"
+    source: scm
+    source_project: "{{ aap_servicenow_project }}"
+    source_path: "{{ aap_servicenow_inventory_path | default('inventory/servicenow.yml') }}"
+    credential: "ServiceNow"
+    update_on_launch: true
+    overwrite: true
+    state: present
+  when:
+    - aap_servicenow_inventory is defined
+    - aap_servicenow_project is defined
+
+- name: Create ServiceNow notification template
+  ansible.controller.notification_template:
+    controller_host: "{{ platform.controller_url }}"
+    controller_username: "{{ aap_admin_username }}"
+    controller_password: "{{ aap_admin_password }}"
+    validate_certs: "{{ aap_validate_certs | default(true) }}"
+    name: "ServiceNow Incident"
+    organization: "{{ rbac.default_organization }}"
+    notification_type: webhook
+    notification_configuration:
+      url: "https://{{ integration.servicenow_instance }}.service-now.com/api/now/table/incident"
+      headers:
+        Content-Type: application/json
+        Authorization: "Basic {{ (integration.servicenow_username + ':' + aap_servicenow_password) | b64encode }}"
+      http_method: POST
+    state: present
+  when: aap_servicenow_create_notification | default(false)
+  no_log: true

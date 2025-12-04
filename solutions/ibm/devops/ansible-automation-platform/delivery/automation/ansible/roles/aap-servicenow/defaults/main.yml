@@ -1,0 +1,14 @@
+---
+#==============================================================================
+# AAP ServiceNow Integration Defaults
+#==============================================================================
+
+aap_servicenow_create_notification: false
+
+# ServiceNow password (should be vaulted)
+# aap_servicenow_password: "{{ vault_servicenow_password }}"
+
+# ServiceNow CMDB inventory integration
+# aap_servicenow_inventory: "ServiceNow Servers"
+# aap_servicenow_project: "Infrastructure Automation"
+# aap_servicenow_inventory_path: "inventory/servicenow.yml"

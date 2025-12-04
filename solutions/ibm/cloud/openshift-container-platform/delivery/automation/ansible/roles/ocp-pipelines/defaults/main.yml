@@ -1,0 +1,11 @@
+---
+#==============================================================================
+# OCP Pipelines Role - Defaults
+#==============================================================================
+
+pipelines:
+  tekton_enabled: false
+  default_service_account: "pipeline"
+  timeout_hours: 1
+
+pipeline_namespaces: []

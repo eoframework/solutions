@@ -1,46 +1,41 @@
 # Ansible Automation Platform Automation
 
-This automation deploys and configures Red Hat Ansible Automation Platform using Ansible itself (self-referential automation):
+This automation deploys and configures Red Hat Ansible Automation Platform:
 
-- **Ansible**: Platform installation, Controller configuration, Hub setup
+- **Terraform**: AWS infrastructure provisioning (VPC, EC2, RDS, ALB)
+- **Ansible**: Platform configuration (Controller, Hub, credentials, projects)
 
 ## Prerequisites
 
 - Red Hat Ansible Automation Platform subscription
-- Target infrastructure access (AWS/Azure/on-premises)
+- AWS account with appropriate permissions
+- Terraform 1.5+
 - Ansible 2.14+ with awx.awx collection
 - Python 3.9+
-- SSH/WinRM access to managed nodes
 
 ## Quick Start
 
-### 1. Install Collections
+### 1. Provision Infrastructure (Terraform)
+
+```bash
+cd terraform/environments/prod
+terraform init
+terraform plan -var-file=config/solution.tfvars
+terraform apply -var-file=config/solution.tfvars
+```
+
+### 2. Install Collections (Ansible)
 
 ```bash
 cd ansible
-ansible-galaxy collection install -r collections/requirements.yml
+ansible-galaxy collection install -r requirements.yml
 ```
 
-### 2. Generate Configuration
-
-```bash
-# Generate Ansible group_vars from configuration.csv
-python /mnt/c/projects/wsl/eof-tools/automation/scripts/generate-ansible-vars.py \
-    /mnt/c/projects/wsl/solutions/solutions/ibm/devops/ansible-automation-platform prod
-```
-
-### 3. Install Platform
+### 3. Configure Platform (Ansible)
 
 ```bash
 cd ansible
-ansible-playbook -i inventory/prod playbooks/aap-install.yml
-```
-
-### 4. Configure Controller
-
-```bash
-ansible-playbook -i inventory/prod playbooks/controller-config.yml
-ansible-playbook -i inventory/prod playbooks/hub-config.yml
+ansible-playbook -i inventory/prod/hosts.yml site.yml -e env=prod
 ```
 
 ## Folder Structure
@@ -48,29 +43,56 @@ ansible-playbook -i inventory/prod playbooks/hub-config.yml
 ```
 automation/
 ├── README.md                     # This file
-├── ansible/
-│   ├── ansible.cfg               # Ansible configuration
-│   ├── collections/
-│   │   └── requirements.yml      # Collection dependencies
-│   ├── inventory/
-│   │   ├── prod/                 # Production inventory
-│   │   ├── test/                 # Test inventory
-│   │   └── dr/                   # DR inventory
-│   ├── playbooks/
-│   │   ├── aap-install.yml       # Platform installation
-│   │   ├── controller-config.yml # Controller configuration
-│   │   ├── hub-config.yml        # Automation Hub setup
-│   │   └── ee-build.yml          # Execution environment build
-│   └── roles/
-│       ├── aap-controller/       # Controller configuration role
-│       ├── aap-hub/              # Hub configuration role
-│       ├── aap-eda/              # Event-Driven Ansible role
-│       └── execution-environments/ # EE build role
-└── execution-environments/
-    ├── ee-base/                  # Base execution environment
-    │   └── execution-environment.yml
-    └── ee-network/               # Network automation EE
-        └── execution-environment.yml
+├── terraform/
+│   ├── environments/
+│   │   ├── prod/                 # Production environment
+│   │   ├── test/                 # Test environment
+│   │   └── dr/                   # DR environment
+│   └── modules/
+│       ├── solution/             # Solution-level modules
+│       │   ├── core/             # VPC, EC2, RDS, ALB
+│       │   └── operations/       # Monitoring, backup
+│       └── aws/                  # AWS provider modules
+│           ├── vpc/
+│           ├── rds-postgres/
+│           └── ec2-aap/
+└── ansible/
+    ├── ansible.cfg               # Ansible configuration
+    ├── requirements.yml          # Collection dependencies
+    ├── site.yml                  # Main playbook
+    ├── inventory/
+    │   ├── prod/                 # Production inventory
+    │   ├── test/                 # Test inventory
+    │   └── dr/                   # DR inventory
+    ├── roles/
+    │   ├── aap-controller/       # Controller configuration
+    │   ├── aap-hub/              # Hub configuration
+    │   ├── aap-credentials/      # Credential management
+    │   ├── aap-projects/         # Project setup
+    │   ├── aap-templates/        # Job templates
+    │   ├── aap-workflows/        # Workflow templates
+    │   ├── aap-inventories/      # Inventory sources
+    │   ├── aap-rbac/             # RBAC configuration
+    │   ├── aap-ldap/             # LDAP integration
+    │   ├── aap-vault/            # HashiCorp Vault integration
+    │   ├── aap-servicenow/       # ServiceNow integration
+    │   ├── aap-monitoring/       # Monitoring setup
+    │   ├── aap-logging/          # Log aggregation
+    │   ├── aap-backup/           # Backup configuration
+    │   ├── aap-ee/               # Execution environments
+    │   ├── aap-execution/        # Execution nodes
+    │   ├── aap-collections/      # Collection sync
+    │   └── aap-cyberark/         # CyberArk integration
+    ├── vars/
+    │   ├── environments/         # Environment-specific vars
+    │   │   ├── prod.yml
+    │   │   ├── test.yml
+    │   │   └── dr.yml
+    │   └── generated/            # Generated from configuration.csv
+    │       └── project.yml
+    └── execution-environments/
+        ├── ee-base/              # Base execution environment
+        └── ee-network/           # Network automation EE
 ```
 
 ## Environment Differences
@@ -79,25 +101,43 @@ automation/
 |---------|------------|------|-----|
 | Controller Nodes | 2 (HA) | 1 | 2 (HA) |
 | Execution Nodes | 4 | 2 | 4 |
+| Database | Multi-AZ RDS | Single RDS | Multi-AZ RDS |
 | LDAP Integration | Enabled | Disabled | Enabled |
 | Vault Integration | Enabled | Disabled | Enabled |
-| ServiceNow Integration | Enabled | Disabled | Enabled |
-| Backup | Daily, 30-day retention | Daily, 7-day | Daily, 30-day |
+| ServiceNow | Enabled | Disabled | Enabled |
+| Backup | Daily, 30-day | Disabled | Daily, 30-day |
 
-## Playbook Descriptions
+## Ansible Roles
 
-| Playbook | Purpose |
-|----------|---------|
-| `aap-install.yml` | Install AAP Controller and Hub infrastructure |
-| `controller-config.yml` | Configure organizations, credentials, projects |
-| `hub-config.yml` | Configure Hub with collections and EEs |
-| `ee-build.yml` | Build custom execution environments |
+| Role | Purpose |
+|------|---------|
+| `aap-controller` | Configure Automation Controller settings |
+| `aap-hub` | Configure Private Automation Hub |
+| `aap-credentials` | Create and manage credentials |
+| `aap-projects` | Set up Git-based projects |
+| `aap-templates` | Create job templates |
+| `aap-workflows` | Create workflow templates |
+| `aap-inventories` | Configure inventory sources |
+| `aap-rbac` | Set up organizations, teams, users |
+| `aap-ldap` | Configure LDAP authentication |
+| `aap-vault` | HashiCorp Vault credential lookup |
+| `aap-servicenow` | ServiceNow ITSM integration |
+| `aap-monitoring` | Prometheus/Grafana metrics |
+| `aap-logging` | Splunk/ELK log forwarding |
+| `aap-backup` | Automated backup configuration |
+| `aap-ee` | Execution environment management |
+| `aap-execution` | Execution node configuration |
 
 ## Validation
 
 ```bash
-# Check playbook syntax
-ansible-playbook --syntax-check playbooks/controller-config.yml
+# Terraform validation
+cd terraform/environments/prod
+terraform validate
+
+# Ansible syntax check
+cd ansible
+ansible-playbook --syntax-check site.yml
 
 # Verify Controller accessibility
 curl -k https://aap.example.com/api/v2/ping/
@@ -112,7 +152,8 @@ awx job_templates list
 
 | Issue | Resolution |
 |-------|------------|
-| Controller unreachable | Check firewall rules and load balancer |
+| Terraform init fails | Check AWS credentials and S3 backend access |
+| Controller unreachable | Check security groups and ALB health |
 | LDAP auth fails | Verify bind credentials and search base DN |
-| Jobs timeout | Increase execution node capacity |
-| Hub sync fails | Check network connectivity and authentication |
+| Jobs timeout | Increase execution node count or instance size |
+| Hub sync fails | Check network connectivity and registry auth |

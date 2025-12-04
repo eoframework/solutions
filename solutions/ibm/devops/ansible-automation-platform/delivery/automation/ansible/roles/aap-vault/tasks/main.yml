@@ -1,0 +1,85 @@
+---
+#==============================================================================
+# AAP HashiCorp Vault Integration
+#==============================================================================
+
+- name: Create HashiCorp Vault credential type
+  ansible.controller.credential_type:
+    controller_host: "{{ platform.controller_url }}"
+    controller_username: "{{ aap_admin_username }}"
+    controller_password: "{{ aap_admin_password }}"
+    validate_certs: "{{ aap_validate_certs | default(true) }}"
+    name: "HashiCorp Vault Secret Lookup"
+    kind: external
+    inputs:
+      fields:
+        - id: vault_addr
+          type: string
+          label: Vault Server URL
+        - id: vault_token
+          type: string
+          label: Vault Token
+          secret: true
+        - id: vault_namespace
+          type: string
+          label: Vault Namespace
+        - id: vault_cacert
+          type: string
+          label: CA Certificate
+          multiline: true
+      required:
+        - vault_addr
+        - vault_token
+    injectors:
+      env:
+        VAULT_ADDR: "{{ '{{' }} vault_addr {{ '}}' }}"
+        VAULT_TOKEN: "{{ '{{' }} vault_token {{ '}}' }}"
+        VAULT_NAMESPACE: "{{ '{{' }} vault_namespace {{ '}}' }}"
+        VAULT_CACERT: "{{ '{{' }} tower.filename.vault_cacert {{ '}}' }}"
+      file:
+        template.vault_cacert: "{{ '{{' }} vault_cacert {{ '}}' }}"
+    state: present
+
+- name: Create Vault credential
+  ansible.controller.credential:
+    controller_host: "{{ platform.controller_url }}"
+    controller_username: "{{ aap_admin_username }}"
+    controller_password: "{{ aap_admin_password }}"
+    validate_certs: "{{ aap_validate_certs | default(true) }}"
+    name: "HashiCorp Vault"
+    organization: "{{ rbac.default_organization }}"
+    credential_type: "HashiCorp Vault Secret Lookup"
+    inputs:
+      vault_addr: "{{ credentials.vault_url }}"
+      vault_token: "{{ aap_vault_token }}"
+      vault_namespace: "{{ credentials.vault_namespace }}"
+      vault_cacert: "{{ aap_vault_cacert | default('') }}"
+    state: present
+  no_log: true
+
+- name: Create Vault secret lookup credential type
+  ansible.controller.credential_type:
+    controller_host: "{{ platform.controller_url }}"
+    controller_username: "{{ aap_admin_username }}"
+    controller_password: "{{ aap_admin_password }}"
+    validate_certs: "{{ aap_validate_certs | default(true) }}"
+    name: "HashiCorp Vault KV Lookup"
+    kind: external
+    inputs:
+      fields:
+        - id: secret_path
+          type: string
+          label: Secret Path
+        - id: secret_key
+          type: string
+          label: Secret Key
+        - id: secret_version
+          type: string
+          label: Secret Version
+      required:
+        - secret_path
+    injectors:
+      extra_vars:
+        secret_value: "{{ '{{' }} lookup('hashi_vault', 'secret=' + secret_path + ':' + secret_key) {{ '}}' }}"
+    state: present
+  when: aap_vault_kv_lookup | default(false)

@@ -1,0 +1,17 @@
+---
+#==============================================================================
+# AAP Execution Node Defaults
+#==============================================================================
+
+aap_execution_use_podman: true
+aap_execution_pull_images: true
+aap_execution_configure_firewall: true
+
+# Receptor configuration
+aap_receptor_control_socket: /var/run/receptor/receptor.sock
+aap_receptor_data_dir: /var/lib/receptor
+aap_receptor_log_level: info
+
+# Container resource limits
+aap_execution_memory_limit: "4g"
+aap_execution_cpu_limit: "2"

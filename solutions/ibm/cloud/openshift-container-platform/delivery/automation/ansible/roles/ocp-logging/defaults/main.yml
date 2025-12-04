@@ -1,0 +1,13 @@
+---
+#==============================================================================
+# OCP Logging Role - Defaults
+#==============================================================================
+
+logging:
+  efk_enabled: false
+  retention_days: 7
+  elasticsearch_storage_gb: 100
+  elasticsearch_replicas: 3
+
+storage:
+  default_class: "gp3-csi"

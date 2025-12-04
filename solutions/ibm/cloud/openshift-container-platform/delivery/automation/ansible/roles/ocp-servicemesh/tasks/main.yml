@@ -1,0 +1,93 @@
+---
+#==============================================================================
+# OCP Service Mesh Role - Main Tasks
+#==============================================================================
+# Configures Istio service mesh
+#==============================================================================
+
+- name: Create istio-system namespace
+  kubernetes.core.k8s:
+    state: present
+    definition:
+      apiVersion: v1
+      kind: Namespace
+      metadata:
+        name: istio-system
+
+- name: Wait for Service Mesh operator to be ready
+  kubernetes.core.k8s_info:
+    api_version: operators.coreos.com/v1alpha1
+    kind: ClusterServiceVersion
+    namespace: openshift-operators
+    label_selectors:
+      - operators.coreos.com/servicemeshoperator.openshift-operators
+  register: mesh_csv
+  until: >
+    mesh_csv.resources | length > 0 and
+    mesh_csv.resources[0].status.phase | default('') == 'Succeeded'
+  retries: 30
+  delay: 30
+
+- name: Create ServiceMeshControlPlane
+  kubernetes.core.k8s:
+    state: present
+    definition:
+      apiVersion: maistra.io/v2
+      kind: ServiceMeshControlPlane
+      metadata:
+        name: basic
+        namespace: istio-system
+      spec:
+        version: v2.4
+        security:
+          dataPlane:
+            mtls: true
+          controlPlane:
+            mtls: true
+        tracing:
+          type: Jaeger
+          sampling: "{{ servicemesh.tracing_sampling_rate | default(1) * 100 }}"
+        gateways:
+          ingress:
+            enabled: true
+          egress:
+            enabled: true
+        addons:
+          grafana:
+            enabled: true
+          kiali:
+            enabled: true
+          jaeger:
+            install:
+              storage:
+                type: Memory
+  when: servicemesh.istio_enabled | default(false)
+
+- name: Wait for ServiceMeshControlPlane to be ready
+  kubernetes.core.k8s_info:
+    api_version: maistra.io/v2
+    kind: ServiceMeshControlPlane
+    name: basic
+    namespace: istio-system
+  register: smcp_status
+  until: >
+    smcp_status.resources | length > 0 and
+    smcp_status.resources[0].status.conditions | default([]) |
+    selectattr('type', 'equalto', 'Ready') |
+    selectattr('status', 'equalto', 'True') | list | length > 0
+  retries: 30
+  delay: 30
+  when: servicemesh.istio_enabled | default(false)
+
+- name: Create ServiceMeshMemberRoll
+  kubernetes.core.k8s:
+    state: present
+    definition:
+      apiVersion: maistra.io/v1
+      kind: ServiceMeshMemberRoll
+      metadata:
+        name: default
+        namespace: istio-system
+      spec:
+        members: "{{ mesh_member_namespaces | default([]) }}"
+  when: servicemesh.istio_enabled | default(false) and mesh_member_namespaces | default([]) | length > 0

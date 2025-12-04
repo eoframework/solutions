@@ -1,0 +1,130 @@
+---
+#==============================================================================
+# Ansible Automation Platform - Site Playbook
+#==============================================================================
+# Master playbook for AAP post-deployment configuration
+# Infrastructure provisioned via Terraform, configuration via Ansible
+#==============================================================================
+
+- name: Configure AAP Controller
+  hosts: controller
+  become: true
+  gather_facts: true
+  vars_files:
+    - vars/generated/project.yml
+    - "vars/environments/{{ env }}.yml"
+  roles:
+    - role: aap-controller
+      tags: [controller, always]
+    - role: aap-credentials
+      tags: [credentials]
+    - role: aap-projects
+      tags: [projects]
+    - role: aap-inventories
+      tags: [inventories]
+    - role: aap-templates
+      tags: [templates]
+    - role: aap-workflows
+      tags: [workflows]
+
+- name: Configure Private Automation Hub
+  hosts: hub
+  become: true
+  gather_facts: true
+  vars_files:
+    - vars/generated/project.yml
+    - "vars/environments/{{ env }}.yml"
+  roles:
+    - role: aap-hub
+      tags: [hub]
+    - role: aap-collections
+      tags: [collections]
+    - role: aap-ee
+      tags: [execution_environments, ee]
+
+- name: Configure Execution Nodes
+  hosts: execution
+  become: true
+  gather_facts: true
+  vars_files:
+    - vars/generated/project.yml
+    - "vars/environments/{{ env }}.yml"
+  roles:
+    - role: aap-execution
+      tags: [execution]
+
+- name: Configure LDAP Authentication
+  hosts: controller
+  become: true
+  gather_facts: false
+  vars_files:
+    - vars/generated/project.yml
+    - "vars/environments/{{ env }}.yml"
+  roles:
+    - role: aap-ldap
+      when: auth.ldap_enabled | default(false)
+      tags: [ldap, auth]
+
+- name: Configure External Credential Lookups
+  hosts: controller
+  become: true
+  gather_facts: false
+  vars_files:
+    - vars/generated/project.yml
+    - "vars/environments/{{ env }}.yml"
+  roles:
+    - role: aap-vault
+      when: credentials.vault_enabled | default(false)
+      tags: [vault, credentials]
+    - role: aap-cyberark
+      when: credentials.cyberark_enabled | default(false)
+      tags: [cyberark, credentials]
+
+- name: Configure ServiceNow Integration
+  hosts: controller
+  become: true
+  gather_facts: false
+  vars_files:
+    - vars/generated/project.yml
+    - "vars/environments/{{ env }}.yml"
+  roles:
+    - role: aap-servicenow
+      when: integration.servicenow_enabled | default(false)
+      tags: [servicenow, integration]
+
+- name: Configure Monitoring and Logging
+  hosts: controller
+  become: true
+  gather_facts: false
+  vars_files:
+    - vars/generated/project.yml
+    - "vars/environments/{{ env }}.yml"
+  roles:
+    - role: aap-monitoring
+      tags: [monitoring]
+    - role: aap-logging
+      when: monitoring.log_aggregator_enabled | default(false)
+      tags: [logging]
+
+- name: Configure RBAC
+  hosts: controller
+  become: true
+  gather_facts: false
+  vars_files:
+    - vars/generated/project.yml
+    - "vars/environments/{{ env }}.yml"
+  roles:
+    - role: aap-rbac
+      tags: [rbac]
+
+- name: Configure Backup
+  hosts: controller
+  become: true
+  gather_facts: false
+  vars_files:
+    - vars/generated/project.yml
+    - "vars/environments/{{ env }}.yml"
+  roles:
+    - role: aap-backup
+      when: backup.enabled | default(false)
+      tags: [backup]

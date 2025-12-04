@@ -1,0 +1,17 @@
+---
+#==============================================================================
+# OCP Monitoring Role - Defaults
+#==============================================================================
+
+monitoring:
+  prometheus_enabled: true
+  prometheus_retention_days: 15
+  alertmanager_target: "email"
+  grafana_enabled: true
+
+storage:
+  default_class: "gp3-csi"
+
+# Secrets (override via vault or extra-vars)
+pagerduty_service_key: "changeme"
+slack_webhook_url: ""

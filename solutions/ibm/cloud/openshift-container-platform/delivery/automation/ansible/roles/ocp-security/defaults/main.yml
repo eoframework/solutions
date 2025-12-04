@@ -1,0 +1,12 @@
+---
+#==============================================================================
+# OCP Security Role - Defaults
+#==============================================================================
+
+security:
+  pod_security_admission: "baseline"
+  network_policies_enabled: true
+  image_scanning_enabled: true
+  acs_enabled: false
+
+security_namespaces: []

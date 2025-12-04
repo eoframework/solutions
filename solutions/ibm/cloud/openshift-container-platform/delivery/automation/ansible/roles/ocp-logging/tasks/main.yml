@@ -1,0 +1,85 @@
+---
+#==============================================================================
+# OCP Logging Role - Main Tasks
+#==============================================================================
+# Configures EFK stack for centralized logging
+#==============================================================================
+
+- name: Create openshift-logging namespace
+  kubernetes.core.k8s:
+    state: present
+    definition:
+      apiVersion: v1
+      kind: Namespace
+      metadata:
+        name: openshift-logging
+        labels:
+          openshift.io/cluster-monitoring: "true"
+
+- name: Wait for Logging operator to be ready
+  kubernetes.core.k8s_info:
+    api_version: operators.coreos.com/v1alpha1
+    kind: ClusterServiceVersion
+    namespace: openshift-logging
+    label_selectors:
+      - operators.coreos.com/cluster-logging.openshift-logging
+  register: logging_csv
+  until: >
+    logging_csv.resources | length > 0 and
+    logging_csv.resources[0].status.phase | default('') == 'Succeeded'
+  retries: 30
+  delay: 30
+
+- name: Create ClusterLogging instance
+  kubernetes.core.k8s:
+    state: present
+    definition:
+      apiVersion: logging.openshift.io/v1
+      kind: ClusterLogging
+      metadata:
+        name: instance
+        namespace: openshift-logging
+      spec:
+        managementState: Managed
+        logStore:
+          type: elasticsearch
+          retentionPolicy:
+            application:
+              maxAge: "{{ logging.retention_days | default(7) }}d"
+            infra:
+              maxAge: "{{ logging.retention_days | default(7) }}d"
+            audit:
+              maxAge: "{{ logging.retention_days | default(7) }}d"
+          elasticsearch:
+            nodeCount: "{{ logging.elasticsearch_replicas | default(3) }}"
+            storage:
+              storageClassName: "{{ storage.default_class | default('gp3-csi') }}"
+              size: "{{ logging.elasticsearch_storage_gb | default(100) }}Gi"
+            redundancyPolicy: SingleRedundancy
+        visualization:
+          type: kibana
+          kibana:
+            replicas: 1
+        collection:
+          logs:
+            type: fluentd
+            fluentd: {}
+
+- name: Create ClusterLogForwarder for external forwarding
+  kubernetes.core.k8s:
+    state: present
+    definition:
+      apiVersion: logging.openshift.io/v1
+      kind: ClusterLogForwarder
+      metadata:
+        name: instance
+        namespace: openshift-logging
+      spec:
+        pipelines:
+          - name: all-logs
+            inputRefs:
+              - application
+              - infrastructure
+              - audit
+            outputRefs:
+              - default

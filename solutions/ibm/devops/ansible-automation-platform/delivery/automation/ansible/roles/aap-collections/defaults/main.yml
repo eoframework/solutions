@@ -1,0 +1,28 @@
+---
+#==============================================================================
+# AAP Collections Defaults
+#==============================================================================
+
+aap_sync_collections: true
+
+# Repository names to sync
+aap_collection_repos:
+  - community
+  - rh-certified
+
+# Local collections to upload
+aap_local_collections: []
+# - namespace: internal
+#   file: files/internal-automation-1.0.0.tar.gz
+
+# Collections to approve from staging
+aap_approve_collections: []
+# - namespace: internal
+#   name: automation
+#   version: "1.0.0"
+
+# Collections to sign
+aap_sign_collections: []
+# - namespace: internal
+#   name: automation
+#   version: "1.0.0"

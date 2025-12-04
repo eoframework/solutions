@@ -1,0 +1,135 @@
+---
+#==============================================================================
+# OCP Operators Role - Main Tasks
+#==============================================================================
+# Installs and configures OpenShift operators via OperatorHub
+#==============================================================================
+
+- name: Install OpenShift Pipelines Operator
+  kubernetes.core.k8s:
+    state: present
+    definition:
+      apiVersion: operators.coreos.com/v1alpha1
+      kind: Subscription
+      metadata:
+        name: openshift-pipelines-operator
+        namespace: openshift-operators
+      spec:
+        channel: latest
+        installPlanApproval: Automatic
+        name: openshift-pipelines-operator-rh
+        source: redhat-operators
+        sourceNamespace: openshift-marketplace
+  when: pipelines.tekton_enabled | default(false)
+
+- name: Install OpenShift GitOps Operator
+  kubernetes.core.k8s:
+    state: present
+    definition:
+      apiVersion: operators.coreos.com/v1alpha1
+      kind: Subscription
+      metadata:
+        name: openshift-gitops-operator
+        namespace: openshift-operators
+      spec:
+        channel: latest
+        installPlanApproval: Automatic
+        name: openshift-gitops-operator
+        source: redhat-operators
+        sourceNamespace: openshift-marketplace
+  when: gitops.argocd_enabled | default(false)
+
+- name: Install OpenShift Service Mesh Operator
+  kubernetes.core.k8s:
+    state: present
+    definition:
+      apiVersion: operators.coreos.com/v1alpha1
+      kind: Subscription
+      metadata:
+        name: servicemeshoperator
+        namespace: openshift-operators
+      spec:
+        channel: stable
+        installPlanApproval: Automatic
+        name: servicemeshoperator
+        source: redhat-operators
+        sourceNamespace: openshift-marketplace
+  when: servicemesh.istio_enabled | default(false)
+
+- name: Install OpenShift Logging Operator
+  kubernetes.core.k8s:
+    state: present
+    definition:
+      apiVersion: operators.coreos.com/v1alpha1
+      kind: Subscription
+      metadata:
+        name: cluster-logging
+        namespace: openshift-logging
+      spec:
+        channel: stable
+        installPlanApproval: Automatic
+        name: cluster-logging
+        source: redhat-operators
+        sourceNamespace: openshift-marketplace
+  when: logging.efk_enabled | default(false)
+
+- name: Install OpenShift Data Foundation Operator
+  kubernetes.core.k8s:
+    state: present
+    definition:
+      apiVersion: operators.coreos.com/v1alpha1
+      kind: Subscription
+      metadata:
+        name: odf-operator
+        namespace: openshift-storage
+      spec:
+        channel: stable-4.14
+        installPlanApproval: Automatic
+        name: odf-operator
+        source: redhat-operators
+        sourceNamespace: openshift-marketplace
+  when: storage.odf_enabled | default(false)
+
+- name: Install Advanced Cluster Security Operator
+  kubernetes.core.k8s:
+    state: present
+    definition:
+      apiVersion: operators.coreos.com/v1alpha1
+      kind: Subscription
+      metadata:
+        name: rhacs-operator
+        namespace: rhacs-operator
+      spec:
+        channel: stable
+        installPlanApproval: Automatic
+        name: rhacs-operator
+        source: redhat-operators
+        sourceNamespace: openshift-marketplace
+  when: security.acs_enabled | default(false)
+
+- name: Wait for operators to be ready
+  kubernetes.core.k8s_info:
+    api_version: operators.coreos.com/v1alpha1
+    kind: ClusterServiceVersion
+    namespace: "{{ item.namespace }}"
+    label_selectors:
+      - "operators.coreos.com/{{ item.name }}.{{ item.namespace }}"
+  register: csv_status
+  until: >
+    csv_status.resources | length > 0 and
+    csv_status.resources[0].status.phase | default('') == 'Succeeded'
+  retries: 30
+  delay: 30
+  loop: "{{ enabled_operators }}"
+  when: enabled_operators | length > 0
+
+- name: Set enabled operators list
+  ansible.builtin.set_fact:
+    enabled_operators: >-
+      {{
+        (pipelines.tekton_enabled | default(false) | ternary([{'name': 'openshift-pipelines-operator-rh', 'namespace': 'openshift-operators'}], [])) +
+        (gitops.argocd_enabled | default(false) | ternary([{'name': 'openshift-gitops-operator', 'namespace': 'openshift-operators'}], [])) +
+        (servicemesh.istio_enabled | default(false) | ternary([{'name': 'servicemeshoperator', 'namespace': 'openshift-operators'}], [])) +
+        (logging.efk_enabled | default(false) | ternary([{'name': 'cluster-logging', 'namespace': 'openshift-logging'}], [])) +
+        (storage.odf_enabled | default(false) | ternary([{'name': 'odf-operator', 'namespace': 'openshift-storage'}], []))
+      }}

@@ -1,0 +1,102 @@
+---
+#==============================================================================
+# AAP CyberArk Integration
+#==============================================================================
+
+- name: Create CyberArk Central Credential Provider credential type
+  ansible.controller.credential_type:
+    controller_host: "{{ platform.controller_url }}"
+    controller_username: "{{ aap_admin_username }}"
+    controller_password: "{{ aap_admin_password }}"
+    validate_certs: "{{ aap_validate_certs | default(true) }}"
+    name: "CyberArk Central Credential Provider Lookup"
+    kind: external
+    inputs:
+      fields:
+        - id: cyberark_url
+          type: string
+          label: CyberArk URL
+        - id: app_id
+          type: string
+          label: Application ID
+        - id: client_cert
+          type: string
+          label: Client Certificate
+          multiline: true
+          secret: true
+        - id: client_key
+          type: string
+          label: Client Key
+          multiline: true
+          secret: true
+        - id: verify_ssl
+          type: boolean
+          label: Verify SSL
+      required:
+        - cyberark_url
+        - app_id
+    injectors:
+      env:
+        CYBERARK_URL: "{{ '{{' }} cyberark_url {{ '}}' }}"
+        CYBERARK_APP_ID: "{{ '{{' }} app_id {{ '}}' }}"
+        CYBERARK_VERIFY_SSL: "{{ '{{' }} verify_ssl {{ '}}' }}"
+      file:
+        template.client_cert: "{{ '{{' }} client_cert {{ '}}' }}"
+        template.client_key: "{{ '{{' }} client_key {{ '}}' }}"
+    state: present
+
+- name: Create CyberArk Conjur credential type
+  ansible.controller.credential_type:
+    controller_host: "{{ platform.controller_url }}"
+    controller_username: "{{ aap_admin_username }}"
+    controller_password: "{{ aap_admin_password }}"
+    validate_certs: "{{ aap_validate_certs | default(true) }}"
+    name: "CyberArk Conjur Secret Lookup"
+    kind: external
+    inputs:
+      fields:
+        - id: conjur_url
+          type: string
+          label: Conjur URL
+        - id: conjur_account
+          type: string
+          label: Conjur Account
+        - id: conjur_username
+          type: string
+          label: Conjur Username
+        - id: conjur_api_key
+          type: string
+          label: Conjur API Key
+          secret: true
+        - id: conjur_cacert
+          type: string
+          label: CA Certificate
+          multiline: true
+      required:
+        - conjur_url
+        - conjur_account
+        - conjur_username
+        - conjur_api_key
+    injectors:
+      env:
+        CONJUR_APPLIANCE_URL: "{{ '{{' }} conjur_url {{ '}}' }}"
+        CONJUR_ACCOUNT: "{{ '{{' }} conjur_account {{ '}}' }}"
+        CONJUR_AUTHN_LOGIN: "{{ '{{' }} conjur_username {{ '}}' }}"
+        CONJUR_AUTHN_API_KEY: "{{ '{{' }} conjur_api_key {{ '}}' }}"
+      file:
+        template.conjur_cacert: "{{ '{{' }} conjur_cacert {{ '}}' }}"
+    state: present
+
+- name: Create CyberArk credential
+  ansible.controller.credential:
+    controller_host: "{{ platform.controller_url }}"
+    controller_username: "{{ aap_admin_username }}"
+    controller_password: "{{ aap_admin_password }}"
+    validate_certs: "{{ aap_validate_certs | default(true) }}"
+    name: "CyberArk Secrets"
+    organization: "{{ rbac.default_organization }}"
+    credential_type: "{{ aap_cyberark_credential_type }}"
+    inputs: "{{ aap_cyberark_credential_inputs }}"
+    state: present
+  no_log: true
+  when: aap_cyberark_credential_inputs is defined

@@ -1,0 +1,154 @@
+#==============================================================================
+# OpenShift Container Platform - Test Environment
+#==============================================================================
+# This file contains ONLY module references with no direct resource definitions.
+# All resources are managed through the two-tier module architecture:
+#   main.tf -> solution modules -> provider modules (AWS)
+#==============================================================================
+
+terraform {
+  required_version = ">= 1.5.0"
+
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = "~> 5.0"
+    }
+  }
+
+  backend "s3" {
+    # Configure via backend.tfvars or environment variables
+  }
+}
+
+provider "aws" {
+  region = var.aws_region
+
+  default_tags {
+    tags = local.common_tags
+  }
+}
+
+#------------------------------------------------------------------------------
+# LOCAL VARIABLES
+#------------------------------------------------------------------------------
+locals {
+  environment   = "test"
+  env_display   = "Test"
+  name_prefix   = "${var.cluster.name}-${local.environment}"
+
+  common_tags = {
+    Solution      = var.solution.name
+    Provider      = var.solution.provider_name
+    Category      = var.solution.category_name
+    Environment   = local.env_display
+    CostCenter    = var.ownership.cost_center
+    ProjectCode   = var.ownership.project_code
+    OwnerEmail    = var.ownership.owner_email
+    ManagedBy     = "terraform"
+  }
+}
+
+#==============================================================================
+# FOUNDATION - Core Infrastructure
+#==============================================================================
+module "core" {
+  source = "../../modules/solution/core"
+
+  environment = local.environment
+  aws_region  = var.aws_region
+
+  cluster = {
+    name             = var.cluster.name
+    base_domain      = var.cluster.base_domain
+    version          = var.cluster.version
+    install_type     = var.cluster.install_type
+    platform         = var.cluster.platform
+    api_internal     = false
+    create_bootstrap = false
+  }
+
+  compute = {
+    control_plane_count         = var.compute.control_plane_count
+    control_plane_instance_type = var.compute.control_plane_instance_type
+    control_plane_cpu           = var.compute.control_plane_cpu
+    control_plane_memory_gb     = var.compute.control_plane_memory_gb
+    worker_count                = var.compute.worker_count
+    worker_instance_type        = var.compute.worker_instance_type
+    worker_cpu                  = var.compute.worker_cpu
+    worker_memory_gb            = var.compute.worker_memory_gb
+    rhcos_ami                   = var.compute.rhcos_ami
+    key_name                    = var.compute.key_name
+  }
+
+  network = {
+    type               = var.network.type
+    vpc_cidr           = var.network.vpc_cidr
+    pod_cidr           = var.network.pod_cidr
+    service_cidr       = var.network.service_cidr
+    cluster_mtu        = var.network.cluster_mtu
+    public_subnets     = var.network.public_subnets
+    private_subnets    = var.network.private_subnets
+    availability_zones = var.network.availability_zones
+  }
+
+  security = {
+    allowed_api_cidrs        = var.security.allowed_api_cidrs
+    kms_key_arn              = var.security.kms_key_arn
+    pod_security_admission   = var.security.pod_security_admission
+    network_policies_enabled = var.security.network_policies_enabled
+    image_scanning_enabled   = var.security.image_scanning_enabled
+    acs_enabled              = var.security.acs_enabled
+  }
+
+  dns = {
+    create_hosted_zone = false
+    private_zone       = false
+  }
+
+  common_tags = local.common_tags
+}
+
+#==============================================================================
+# OPERATIONS - Backup, Monitoring
+# Note: Test environment has minimal operations config
+#==============================================================================
+module "operations" {
+  source = "../../modules/solution/operations"
+
+  environment  = local.environment
+  cluster_name = var.cluster.name
+
+  control_plane_instance_ids = module.core.control_plane_instance_ids
+  worker_instance_ids        = module.core.worker_instance_ids
+
+  backup = {
+    enabled        = var.backup.enabled
+    schedule_cron  = var.backup.schedule_cron
+    retention_days = var.backup.retention_days
+    s3_bucket      = var.backup.s3_bucket
+  }
+
+  dr = {
+    enabled             = false
+    strategy            = "BACKUP_ONLY"
+    rto_hours           = 8
+    rpo_hours           = 24
+    replication_enabled = false
+  }
+
+  monitoring = {
+    cloudwatch_alarms_enabled = false  # Reduced monitoring for test
+    create_sns_topic          = false
+    sns_topic_arn             = null
+    alert_email               = null
+  }
+
+  security = {
+    kms_key_arn = null  # No encryption for test
+  }
+
+  common_tags = local.common_tags
+
+  depends_on = [module.core]
+}

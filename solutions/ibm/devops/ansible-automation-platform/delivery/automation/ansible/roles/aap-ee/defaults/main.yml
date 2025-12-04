@@ -1,0 +1,40 @@
+---
+#==============================================================================
+# AAP Execution Environments Defaults
+#==============================================================================
+
+# Remote EE images to sync to Hub
+aap_ee_remotes: []
+# - name: "ansible-automation-platform-24"
+#   registry: "Red Hat Registry"
+#   upstream_name: "ansible-automation-platform-24/ee-supported-rhel8"
+#   include_tags:
+#     - latest
+#     - "2.4"
+
+# - name: "ee-minimal"
+#   registry: "Red Hat Registry"
+#   upstream_name: "ansible-automation-platform-24/ee-minimal-rhel8"
+#   include_tags:
+#     - latest
+
+# Execution environments to register in Controller
+aap_execution_environments: []
+# - name: "Default execution environment"
+#   image: "{{ platform.hub_url }}/ee-supported-rhel8:latest"
+#   description: "Red Hat supported EE with common collections"
+#   pull: missing
+
+# - name: "Minimal execution environment"
+#   image: "{{ platform.hub_url }}/ee-minimal-rhel8:latest"
+#   description: "Minimal EE for lightweight tasks"
+#   pull: missing
+
+# - name: "Custom Cloud EE"
+#   image: "{{ platform.hub_url }}/custom-cloud-ee:1.0"
+#   description: "Custom EE with cloud provider collections"
+#   credential: "Private Registry"
+#   pull: always
+
+# Default EE for new job templates
+# aap_default_ee: "Default execution environment"

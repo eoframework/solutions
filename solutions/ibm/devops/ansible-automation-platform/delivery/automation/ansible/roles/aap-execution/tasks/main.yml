@@ -1,0 +1,56 @@
+---
+#==============================================================================
+# AAP Execution Nodes Configuration
+#==============================================================================
+
+- name: Ensure receptor is configured
+  ansible.builtin.template:
+    src: receptor.conf.j2
+    dest: /etc/receptor/receptor.conf
+    owner: root
+    group: root
+    mode: '0644'
+  notify: restart receptor
+
+- name: Ensure receptor service is running
+  ansible.builtin.service:
+    name: receptor
+    state: started
+    enabled: true
+
+- name: Configure execution node resource limits
+  ansible.builtin.template:
+    src: podman-containers.conf.j2
+    dest: /etc/containers/containers.conf
+    owner: root
+    group: root
+    mode: '0644'
+  when: aap_execution_use_podman | default(true)
+
+- name: Pull execution environment images
+  containers.podman.podman_image:
+    name: "{{ item }}"
+    pull: true
+  loop: "{{ content.execution_environments | default([]) }}"
+  when: aap_execution_pull_images | default(true)
+
+- name: Configure log forwarding
+  ansible.builtin.template:
+    src: rsyslog-aap.conf.j2
+    dest: /etc/rsyslog.d/50-aap.conf
+    owner: root
+    group: root
+    mode: '0644'
+  when: monitoring.log_aggregator_enabled | default(false)
+  notify: restart rsyslog
+
+- name: Configure execution node firewall rules
+  ansible.posix.firewalld:
+    port: "{{ item }}"
+    permanent: true
+    state: enabled
+    immediate: true
+  loop:
+    - "27199/tcp"  # Receptor
+    - "443/tcp"    # HTTPS
+  when: aap_execution_configure_firewall | default(true)

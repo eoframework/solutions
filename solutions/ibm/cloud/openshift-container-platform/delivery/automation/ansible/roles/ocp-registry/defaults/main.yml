@@ -1,0 +1,10 @@
+---
+#==============================================================================
+# OCP Registry Role - Defaults
+#==============================================================================
+
+registry:
+  quay_enabled: false
+  quay_hostname: "quay.apps.ocp.example.com"
+  quay_storage_gb: 100
+  internal_registry_replicas: 2

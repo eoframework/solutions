@@ -1,0 +1,50 @@
+---
+#==============================================================================
+# AAP Inventories Defaults
+#==============================================================================
+
+aap_sync_inventory_sources: true
+
+aap_inventories: []
+# - name: "Production Servers"
+#   description: "Production environment hosts"
+#   variables:
+#     ansible_user: ansible
+#     ansible_become: true
+
+# - name: "Network Devices"
+#   description: "Network infrastructure"
+#   variables:
+#     ansible_network_os: ios
+#     ansible_connection: network_cli
+
+aap_inventory_sources: []
+# - name: "AWS EC2"
+#   inventory: "Production Servers"
+#   source: ec2
+#   credential: "AWS Production"
+#   source_vars:
+#     regions:
+#       - us-east-1
+#     keyed_groups:
+#       - key: tags.Environment
+#         prefix: env
+#       - key: tags.Role
+#         prefix: role
+#     filters:
+#       tag:ManagedBy: ansible
+
+aap_smart_inventories: []
+# - name: "All Web Servers"
+#   host_filter: "groups__name=webservers"
+
+# - name: "Production Linux"
+#   host_filter: "groups__name=linux AND groups__name=production"
+
+aap_inventory_groups: []
+# - name: "webservers"
+#   inventory: "Production Servers"
+#   description: "Web application servers"
+#   variables:
+#     http_port: 80
+#     https_port: 443

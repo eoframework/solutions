@@ -1,47 +1,83 @@
-#WIDTH: 25,15,35,25,25,25,45,10,12,16,20
-#ALIGN: left,left,left,left,left,left,left,center,left,center,left
-Parameter Name,Category,Description,Production,Test,DR,Validation Rules,Required,Data Type,Security Level,Notes
-ocp_cluster_name,Cluster,OpenShift cluster identifier,ocp-prod,ocp-test,ocp-dr,Max 63 chars lowercase alphanumeric,Yes,String,Public,Must be unique within DNS domain
-ocp_base_domain,Cluster,Base domain for cluster DNS and routing,example.com,example.com,example.com,Valid DNS domain format,Yes,String,Public,Wildcard DNS required for routes
-ocp_version,Cluster,Red Hat OpenShift Container Platform version,4.14.10,4.14.10,4.14.10,4.x.x format,Yes,String,Public,LTS version recommended for production
-ocp_api_endpoint,Cluster,OpenShift API server endpoint URL,https://api.ocp-prod.example.com:6443,https://api.ocp-test.example.com:6443,https://api.ocp-dr.example.com:6443,Valid HTTPS URL,Yes,String,Public,Load balanced endpoint
-ocp_console_url,Cluster,OpenShift web console URL,https://console-openshift-console.apps.ocp-prod.example.com,https://console-openshift-console.apps.ocp-test.example.com,https://console-openshift-console.apps.ocp-dr.example.com,Valid HTTPS URL,Yes,String,Public,User-facing dashboard
-control_plane_nodes,Cluster,Number of control plane (master) nodes,3,3,3,1|3|5,Yes,Integer,Public,Odd number for etcd quorum
-worker_nodes,Cluster,Number of worker nodes for workloads,3,2,3,Minimum 2,Yes,Integer,Public,Scale based on workload
-control_plane_cpu,Compute,vCPU cores per control plane node,8,4,8,Minimum 4,Yes,Integer,Public,8 cores for production
-control_plane_memory,Compute,Memory (GB) per control plane node,32,16,32,Minimum 16,Yes,Integer,Public,32GB minimum for production
-worker_node_cpu,Compute,vCPU cores per worker node,16,8,16,Minimum 4,Yes,Integer,Public,Size based on container density
-worker_node_memory,Compute,Memory (GB) per worker node,64,32,64,Minimum 8,Yes,Integer,Public,64GB for high-density workloads
-ocp_network_type,Network,OpenShift network plugin type,OVNKubernetes,OVNKubernetes,OVNKubernetes,OVNKubernetes|OpenShiftSDN,Yes,String,Public,OVN recommended for new clusters
-pod_network_cidr,Network,CIDR block for pod networking,10.128.0.0/14,10.128.0.0/14,10.128.0.0/14,Valid CIDR notation,Yes,String,Public,Default OpenShift pod network
-service_network_cidr,Network,CIDR block for service networking,172.30.0.0/16,172.30.0.0/16,172.30.0.0/16,Valid CIDR notation,Yes,String,Public,Default OpenShift service network
-cluster_network_mtu,Network,Maximum transmission unit for cluster,1400,1400,1400,1200-9000,Yes,Integer,Public,Adjust for overlay overhead
-odf_storage_size,Storage,Total ODF storage capacity,20TB,5TB,20TB,TB format,Yes,String,Public,Persistent volume storage pool
-storage_class_block,Storage,Storage class for block storage PVCs,ocs-storagecluster-ceph-rbd,ocs-storagecluster-ceph-rbd,ocs-storagecluster-ceph-rbd,Valid storage class name,Yes,String,Public,RBD for databases
-storage_class_file,Storage,Storage class for file storage PVCs,ocs-storagecluster-cephfs,ocs-storagecluster-cephfs,ocs-storagecluster-cephfs,Valid storage class name,Yes,String,Public,CephFS for shared file access
-ldap_enabled,Authentication,Enable LDAP/AD integration,true,false,true,true|false,Yes,Boolean,Public,SSO with enterprise directory
-ldap_url,Authentication,Corporate LDAP/AD server URL,ldaps://ldap.example.com:636,ldaps://ldap.example.com:636,ldaps://ldap.example.com:636,Valid LDAPS URL,Yes,String,Confidential,Use LDAPS for encryption
-ldap_bind_dn,Authentication,LDAP service account DN,CN=ocp-svc;OU=ServiceAccounts;DC=example;DC=com,CN=ocp-svc;OU=ServiceAccounts;DC=example;DC=com,CN=ocp-svc;OU=ServiceAccounts;DC=example;DC=com,Valid LDAP DN format,Yes,String,Confidential,Read-only service account
-ldap_user_search_base,Authentication,LDAP base DN for user searches,OU=Users;DC=example;DC=com,OU=Users;DC=example;DC=com,OU=Users;DC=example;DC=com,Valid LDAP DN format,Yes,String,Confidential,Scope users to specific OU
-ldap_group_search_base,Authentication,LDAP base DN for group searches,OU=Groups;DC=example;DC=com,OU=Groups;DC=example;DC=com,OU=Groups;DC=example;DC=com,Valid LDAP DN format,Yes,String,Confidential,Map groups to RBAC roles
-oauth_timeout,Authentication,OAuth token timeout in seconds,86400,86400,86400,3600-604800,Yes,Integer,Public,24 hours default
-prometheus_enabled,Monitoring,Enable Prometheus monitoring,true,true,true,true|false,Yes,Boolean,Public,Required for observability
-prometheus_retention,Monitoring,Prometheus metrics retention period,15d,7d,15d,Valid time duration,Yes,String,Public,Balance retention vs storage
-alertmanager_config,Monitoring,Alertmanager notification target,pagerduty,email,pagerduty,pagerduty|slack|email,Yes,String,Confidential,PagerDuty for production
-grafana_enabled,Monitoring,Enable Grafana dashboards,true,true,true,true|false,Yes,Boolean,Public,Visualization dashboards
-efk_enabled,Logging,Enable EFK logging stack,true,true,true,true|false,Yes,Boolean,Public,Centralized logging
-efk_log_retention,Logging,Elasticsearch log retention period,7d,3d,7d,Valid time duration,Yes,String,Public,7 days hot storage default
-elasticsearch_storage,Logging,Elasticsearch storage per node,500Gi,100Gi,500Gi,Valid storage size,Yes,String,Public,Size based on log volume
-quay_enabled,Registry,Enable Quay container registry,true,false,true,true|false,Yes,Boolean,Public,Internal registry for CI/CD
-quay_hostname,Registry,Quay container registry hostname,quay.apps.ocp-prod.example.com,quay.apps.ocp-test.example.com,quay.apps.ocp-dr.example.com,Valid hostname,Yes,String,Public,Internal registry
-quay_storage_size,Registry,Quay image storage capacity,1TB,100Gi,1TB,Valid storage size,Yes,String,Public,Size based on image count
-argocd_enabled,GitOps,Enable ArgoCD for GitOps,true,true,true,true|false,Yes,Boolean,Public,Declarative deployment
-argocd_repo_url,GitOps,ArgoCD Git repository URL,https://github.com/company/gitops-config,https://github.com/company/gitops-config,https://github.com/company/gitops-config,Valid Git URL,Yes,String,Public,Application manifests
-tekton_enabled,Pipelines,Enable OpenShift Pipelines,true,true,true,true|false,Yes,Boolean,Public,Cloud-native CI/CD
-tekton_default_sa,Pipelines,Default service account for pipelines,pipeline,pipeline,pipeline,Valid SA name,Yes,String,Public,Standard pipeline SA
-pipeline_timeout,Pipelines,Default pipeline execution timeout,1h,1h,1h,Valid time duration,Yes,String,Public,Adjust based on complexity
-istio_enabled,ServiceMesh,Enable Istio service mesh,true,false,true,true|false,Yes,Boolean,Public,Required for distributed tracing
-istio_mtls_mode,ServiceMesh,Istio mutual TLS mode,STRICT,PERMISSIVE,STRICT,STRICT|PERMISSIVE|DISABLE,Yes,String,Confidential,STRICT for production
-backup_enabled,Operations,Enable automated backups,true,false,true,true|false,Yes,Boolean,Public,Platform data protection
-backup_schedule,Operations,ETCD backup schedule in cron format,0 2 * * *,0 2 * * *,0 2 * * *,Valid cron expression,Yes,String,Public,Daily at 2 AM local time
-backup_retention,Operations,Backup retention period in days,30,7,30,7-365,Yes,Integer,Public,30 days for compliance
+#WIDTH:  45,14,50,50,50,45,8,12,27,14,14,12,30,12
+#ALIGN:  left,left,left,left,left,left,center,left,left,center,left,left,left,center
+Parameter Name,Category,Production,Test,DR,Description,Required,Data Type,Validation Rules,Security Level,Owner Team,Dependencies,Notes,Last Updated
+solution.name,Project,openshift-container-platform,openshift-container-platform,openshift-container-platform,Solution name for resource naming,Yes,String,Valid string value,Public,Platform,,OCP solution identifier,2025-12-03
+solution.abbr,Project,ocp,ocp,ocp,Solution abbreviation (3-4 chars),Yes,String,Valid string value,Public,Platform,,Used in resource naming prefix,2025-12-03
+solution.provider_name,Project,ibm,ibm,ibm,Provider organization name,Yes,String,Valid string value,Public,Platform,,IBM Red Hat provider,2025-12-03
+solution.category_name,Project,cloud,cloud,cloud,Solution category,Yes,String,Valid string value,Public,Platform,,Cloud category,2025-12-03
+cluster.name,Cluster,ocp-prod,ocp-test,ocp-dr,OpenShift cluster identifier,Yes,String,Max 63 chars lowercase alphanumeric,Public,Platform,,Must be unique within DNS domain,2025-12-03
+cluster.base_domain,Cluster,example.com,example.com,example.com,Base domain for cluster DNS and routing,Yes,String,Valid DNS domain format,Public,Platform,,Wildcard DNS required for routes,2025-12-03
+cluster.version,Cluster,4.14.10,4.14.10,4.14.10,Red Hat OpenShift Container Platform version,Yes,String,4.x.x format,Public,Platform,,LTS version recommended for production,2025-12-03
+cluster.api_endpoint,Cluster,https://api.ocp-prod.example.com:6443,https://api.ocp-test.example.com:6443,https://api.ocp-dr.example.com:6443,OpenShift API server endpoint URL,Yes,String,Valid HTTPS URL,Public,Platform,,Load balanced endpoint,2025-12-03
+cluster.console_url,Cluster,https://console-openshift-console.apps.ocp-prod.example.com,https://console-openshift-console.apps.ocp-test.example.com,https://console-openshift-console.apps.ocp-dr.example.com,OpenShift web console URL,Yes,String,Valid HTTPS URL,Public,Platform,,User-facing dashboard,2025-12-03
+cluster.install_type,Cluster,ipi,ipi,ipi,Installation type (IPI or UPI),Yes,String,ipi|upi,Public,Platform,,IPI for cloud UPI for on-prem,2025-12-03
+cluster.platform,Cluster,aws,aws,aws,Target platform for cluster deployment,Yes,String,aws|azure|vsphere|baremetal,Public,Platform,,Cloud or on-prem platform,2025-12-03
+compute.control_plane_count,Compute,3,3,3,Number of control plane (master) nodes,Yes,Integer,1|3|5,Public,Platform,,Odd number for etcd quorum,2025-12-03
+compute.worker_count,Compute,3,2,3,Number of worker nodes for workloads,Yes,Integer,Minimum 2,Public,Platform,,Scale based on workload,2025-12-03
+compute.control_plane_cpu,Compute,8,4,8,vCPU cores per control plane node,Yes,Integer,Minimum 4,Public,Platform,,8 cores for production,2025-12-03
+compute.control_plane_memory_gb,Compute,32,16,32,Memory (GB) per control plane node,Yes,Integer,Minimum 16,Public,Platform,,32GB minimum for production,2025-12-03
+compute.control_plane_instance_type,Compute,m5.2xlarge,m5.xlarge,m5.2xlarge,AWS instance type for control plane,Yes,String,Valid AWS instance type,Public,Platform,,AWS-specific sizing,2025-12-03
+compute.worker_cpu,Compute,16,8,16,vCPU cores per worker node,Yes,Integer,Minimum 4,Public,Platform,,Size based on container density,2025-12-03
+compute.worker_memory_gb,Compute,64,32,64,Memory (GB) per worker node,Yes,Integer,Minimum 8,Public,Platform,,64GB for high-density workloads,2025-12-03
+compute.worker_instance_type,Compute,m5.4xlarge,m5.2xlarge,m5.4xlarge,AWS instance type for worker nodes,Yes,String,Valid AWS instance type,Public,Platform,,AWS-specific sizing,2025-12-03
+compute.rhcos_ami,Compute,ami-0123456789abcdef0,ami-0123456789abcdef0,ami-0123456789abcdef0,Red Hat CoreOS AMI ID,Yes,String,Valid AMI ID,Public,Platform,,Region-specific AMI,2025-12-03
+network.type,Network,OVNKubernetes,OVNKubernetes,OVNKubernetes,OpenShift network plugin type,Yes,String,OVNKubernetes|OpenShiftSDN,Public,Network,,OVN recommended for new clusters,2025-12-03
+network.pod_cidr,Network,10.128.0.0/14,10.128.0.0/14,10.128.0.0/14,CIDR block for pod networking,Yes,String,Valid CIDR notation,Public,Network,,Default OpenShift pod network,2025-12-03
+network.service_cidr,Network,172.30.0.0/16,172.30.0.0/16,172.30.0.0/16,CIDR block for service networking,Yes,String,Valid CIDR notation,Public,Network,,Default OpenShift service network,2025-12-03
+network.cluster_mtu,Network,1400,1400,1400,Maximum transmission unit for cluster,Yes,Integer,1200-9000,Public,Network,,Adjust for overlay overhead,2025-12-03
+network.vpc_cidr,Network,10.0.0.0/16,10.1.0.0/16,10.2.0.0/16,VPC CIDR block for cluster,Yes,String,Valid CIDR notation,Public,Network,,AWS VPC network,2025-12-03
+network.public_subnets,Network,"[""10.0.1.0/24"", ""10.0.2.0/24"", ""10.0.3.0/24""]","[""10.1.1.0/24"", ""10.1.2.0/24""]","[""10.2.1.0/24"", ""10.2.2.0/24"", ""10.2.3.0/24""]",Public subnet CIDRs,Yes,List(String),Valid CIDR list,Public,Network,,Multi-AZ subnets,2025-12-03
+network.private_subnets,Network,"[""10.0.11.0/24"", ""10.0.12.0/24"", ""10.0.13.0/24""]","[""10.1.11.0/24"", ""10.1.12.0/24""]","[""10.2.11.0/24"", ""10.2.12.0/24"", ""10.2.13.0/24""]",Private subnet CIDRs,Yes,List(String),Valid CIDR list,Public,Network,,Worker nodes in private subnets,2025-12-03
+storage.odf_enabled,Storage,true,true,true,Enable OpenShift Data Foundation,Yes,Boolean,true|false,Public,Storage,,Software-defined storage,2025-12-03
+storage.odf_capacity_tb,Storage,20,5,20,Total ODF storage capacity in TB,Yes,Integer,Positive integer,Public,Storage,,Persistent volume storage pool,2025-12-03
+storage.class_block,Storage,ocs-storagecluster-ceph-rbd,ocs-storagecluster-ceph-rbd,ocs-storagecluster-ceph-rbd,Storage class for block storage PVCs,Yes,String,Valid storage class name,Public,Storage,,RBD for databases,2025-12-03
+storage.class_file,Storage,ocs-storagecluster-cephfs,ocs-storagecluster-cephfs,ocs-storagecluster-cephfs,Storage class for file storage PVCs,Yes,String,Valid storage class name,Public,Storage,,CephFS for shared file access,2025-12-03
+storage.default_class,Storage,ocs-storagecluster-ceph-rbd,ocs-storagecluster-ceph-rbd,ocs-storagecluster-ceph-rbd,Default storage class,Yes,String,Valid storage class name,Public,Storage,,Set as default SC,2025-12-03
+auth.ldap_enabled,Authentication,true,false,true,Enable LDAP/AD integration,Yes,Boolean,true|false,Public,Security,,SSO with enterprise directory,2025-12-03
+auth.ldap_url,Authentication,ldaps://ldap.example.com:636,ldaps://ldap.example.com:636,ldaps://ldap.example.com:636,Corporate LDAP/AD server URL,Yes,String,Valid LDAPS URL,Confidential,Security,,Use LDAPS for encryption,2025-12-03
+auth.ldap_bind_dn,Authentication,CN=ocp-svc;OU=ServiceAccounts;DC=example;DC=com,CN=ocp-svc;OU=ServiceAccounts;DC=example;DC=com,CN=ocp-svc;OU=ServiceAccounts;DC=example;DC=com,LDAP service account DN,Yes,String,Valid LDAP DN format,Confidential,Security,,Read-only service account,2025-12-03
+auth.ldap_user_search_base,Authentication,OU=Users;DC=example;DC=com,OU=Users;DC=example;DC=com,OU=Users;DC=example;DC=com,LDAP base DN for user searches,Yes,String,Valid LDAP DN format,Confidential,Security,,Scope users to specific OU,2025-12-03
+auth.ldap_group_search_base,Authentication,OU=Groups;DC=example;DC=com,OU=Groups;DC=example;DC=com,OU=Groups;DC=example;DC=com,LDAP base DN for group searches,Yes,String,Valid LDAP DN format,Confidential,Security,,Map groups to RBAC roles,2025-12-03
+auth.oauth_timeout_seconds,Authentication,86400,86400,86400,OAuth token timeout in seconds,Yes,Integer,3600-604800,Public,Security,,24 hours default,2025-12-03
+auth.htpasswd_backup_enabled,Authentication,true,true,true,Create htpasswd backup authentication,Yes,Boolean,true|false,Public,Security,,Emergency access method,2025-12-03
+monitoring.prometheus_enabled,Monitoring,true,true,true,Enable Prometheus monitoring,Yes,Boolean,true|false,Public,Operations,,Required for observability,2025-12-03
+monitoring.prometheus_retention_days,Monitoring,15,7,15,Prometheus metrics retention in days,Yes,Integer,1-90,Public,Operations,,Balance retention vs storage,2025-12-03
+monitoring.alertmanager_target,Monitoring,pagerduty,email,pagerduty,Alertmanager notification target,Yes,String,pagerduty|slack|email,Confidential,Operations,,PagerDuty for production,2025-12-03
+monitoring.grafana_enabled,Monitoring,true,true,true,Enable Grafana dashboards,Yes,Boolean,true|false,Public,Operations,,Visualization dashboards,2025-12-03
+logging.efk_enabled,Logging,true,true,true,Enable EFK logging stack,Yes,Boolean,true|false,Public,Operations,,Centralized logging,2025-12-03
+logging.retention_days,Logging,7,3,7,Elasticsearch log retention in days,Yes,Integer,1-30,Public,Operations,,7 days hot storage default,2025-12-03
+logging.elasticsearch_storage_gb,Logging,500,100,500,Elasticsearch storage per node in GB,Yes,Integer,Positive integer,Public,Operations,,Size based on log volume,2025-12-03
+logging.elasticsearch_replicas,Logging,3,1,3,Elasticsearch replica count,Yes,Integer,1|3|5,Public,Operations,,HA for production,2025-12-03
+registry.quay_enabled,Registry,true,false,true,Enable Quay container registry,Yes,Boolean,true|false,Public,DevOps,,Internal registry for CI/CD,2025-12-03
+registry.quay_hostname,Registry,quay.apps.ocp-prod.example.com,quay.apps.ocp-test.example.com,quay.apps.ocp-dr.example.com,Quay container registry hostname,Yes,String,Valid hostname,Public,DevOps,,Internal registry,2025-12-03
+registry.quay_storage_gb,Registry,1000,100,1000,Quay image storage capacity in GB,Yes,Integer,Positive integer,Public,DevOps,,Size based on image count,2025-12-03
+registry.internal_registry_replicas,Registry,2,1,2,Internal registry replica count,Yes,Integer,1-5,Public,DevOps,,HA for production,2025-12-03
+gitops.argocd_enabled,GitOps,true,true,true,Enable ArgoCD for GitOps,Yes,Boolean,true|false,Public,DevOps,,Declarative deployment,2025-12-03
+gitops.argocd_repo_url,GitOps,https://github.com/company/gitops-config,https://github.com/company/gitops-config,https://github.com/company/gitops-config,ArgoCD Git repository URL,Yes,String,Valid Git URL,Public,DevOps,,Application manifests,2025-12-03
+gitops.argocd_replicas,GitOps,2,1,2,ArgoCD server replica count,Yes,Integer,1-3,Public,DevOps,,HA for production,2025-12-03
+pipelines.tekton_enabled,Pipelines,true,true,true,Enable OpenShift Pipelines,Yes,Boolean,true|false,Public,DevOps,,Cloud-native CI/CD,2025-12-03
+pipelines.default_service_account,Pipelines,pipeline,pipeline,pipeline,Default service account for pipelines,Yes,String,Valid SA name,Public,DevOps,,Standard pipeline SA,2025-12-03
+pipelines.timeout_hours,Pipelines,1,1,1,Default pipeline execution timeout in hours,Yes,Integer,1-24,Public,DevOps,,Adjust based on complexity,2025-12-03
+servicemesh.istio_enabled,ServiceMesh,true,false,true,Enable Istio service mesh,Yes,Boolean,true|false,Public,Network,,Required for distributed tracing,2025-12-03
+servicemesh.mtls_mode,ServiceMesh,STRICT,PERMISSIVE,STRICT,Istio mutual TLS mode,Yes,String,STRICT|PERMISSIVE|DISABLE,Confidential,Security,,STRICT for production,2025-12-03
+servicemesh.tracing_enabled,ServiceMesh,true,true,true,Enable distributed tracing with Jaeger,Yes,Boolean,true|false,Public,Operations,,Microservices debugging,2025-12-03
+servicemesh.tracing_sampling_rate,ServiceMesh,1,100,1,Tracing sampling rate percentage,Yes,Integer,1-100,Public,Operations,,1% for prod 100% for debug,2025-12-03
+security.pod_security_admission,Security,restricted,baseline,restricted,Pod security admission level,Yes,String,privileged|baseline|restricted,Public,Security,,Restricted for production,2025-12-03
+security.network_policies_enabled,Security,true,true,true,Enable network policies,Yes,Boolean,true|false,Public,Security,,Microsegmentation,2025-12-03
+security.image_scanning_enabled,Security,true,true,true,Enable container image scanning,Yes,Boolean,true|false,Public,Security,,Vulnerability detection,2025-12-03
+security.acs_enabled,Security,true,false,true,Enable Advanced Cluster Security,Yes,Boolean,true|false,Public,Security,,Runtime threat detection,2025-12-03
+backup.enabled,Operations,true,false,true,Enable automated backups,Yes,Boolean,true|false,Public,Operations,,Platform data protection,2025-12-03
+backup.schedule_cron,Operations,"0 2 * * *","0 2 * * *","0 2 * * *",ETCD backup schedule in cron format,Yes,String,Valid cron expression,Public,Operations,,Daily at 2 AM local time,2025-12-03
+backup.retention_days,Operations,30,7,30,Backup retention period in days,Yes,Integer,7-365,Public,Operations,,30 days for compliance,2025-12-03
+backup.s3_bucket,Operations,ocp-prod-backups,ocp-test-backups,ocp-dr-backups,S3 bucket for backup storage,Yes,String,Valid S3 bucket name,Public,Operations,,Offsite backup storage,2025-12-03
+dr.enabled,DR,true,false,true,Enable DR infrastructure,Yes,Boolean,true|false,Public,Operations,,Master DR toggle,2025-12-03
+dr.strategy,DR,ACTIVE_PASSIVE,BACKUP_ONLY,ACTIVE_PASSIVE,DR strategy,Yes,String,ACTIVE_PASSIVE|ACTIVE_ACTIVE|BACKUP_ONLY,Public,Operations,,Recovery approach,2025-12-03
+dr.rto_hours,DR,4,8,4,Recovery Time Objective in hours,Yes,Integer,Positive integer,Public,Operations,,Target recovery time,2025-12-03
+dr.rpo_hours,DR,1,24,1,Recovery Point Objective in hours,Yes,Integer,Positive integer,Public,Operations,,Max data loss window,2025-12-03
+dr.replication_enabled,DR,true,false,false,Enable cross-region etcd replication,Yes,Boolean,true|false,Public,Operations,,Cluster state replication,2025-12-03
+ownership.cost_center,Project,CC-OCP-001,CC-OCP-001,CC-OCP-001,Cost center for billing,Yes,String,Valid cost center,Public,Finance,,Budget tracking,2025-12-03
+ownership.owner_email,Project,platform-team@example.com,platform-team@example.com,platform-team@example.com,Owner email for notifications,Yes,String,Valid email,Confidential,Operations,,Team notifications,2025-12-03
+ownership.project_code,Project,PRJ-OCP-2025,PRJ-OCP-2025,PRJ-OCP-2025,Project code for tracking,Yes,String,Valid string,Public,Finance,,Project tracking,2025-12-03
+budget.enabled,Best Practices,true,false,true,[Cost Optimization] Enable budget tracking,Yes,Boolean,true|false,Public,Operations,,Proactive cost monitoring,2025-12-03
+budget.monthly_amount_usd,Best Practices,50000,10000,50000,[Cost Optimization] Monthly budget limit in USD,Yes,Integer,Valid integer,Public,Operations,,Based on SOW estimates,2025-12-03
+budget.alert_thresholds,Best Practices,"[50, 80, 100]","[80, 100]","[50, 80, 100]",[Cost Optimization] Budget alert thresholds (%),Yes,List(Number),0-100,Public,Operations,,Multi-tier alerts,2025-12-03

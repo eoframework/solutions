@@ -1,0 +1,15 @@
+---
+#==============================================================================
+# AAP HashiCorp Vault Integration Defaults
+#==============================================================================
+
+aap_vault_kv_lookup: false
+
+# Vault token (should be vaulted)
+# aap_vault_token: "{{ vault_vault_token }}"
+
+# Vault CA certificate (optional)
+# aap_vault_cacert: |
+#   -----BEGIN CERTIFICATE-----
+#   ...
+#   -----END CERTIFICATE-----

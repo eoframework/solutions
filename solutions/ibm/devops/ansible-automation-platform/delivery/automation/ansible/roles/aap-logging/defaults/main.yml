@@ -1,0 +1,15 @@
+---
+#==============================================================================
+# AAP Logging Defaults
+#==============================================================================
+
+aap_log_aggregator_protocol: https
+aap_log_aggregator_level: INFO
+aap_log_aggregator_queue_size: 131072
+aap_log_aggregator_max_disk_gb: 1
+aap_log_aggregator_rsyslogd: false
+aap_log_individual_facts: false
+
+# Log aggregator credentials (optional, should be vaulted)
+# aap_log_aggregator_username: "{{ vault_log_username }}"
+# aap_log_aggregator_password: "{{ vault_log_password }}"

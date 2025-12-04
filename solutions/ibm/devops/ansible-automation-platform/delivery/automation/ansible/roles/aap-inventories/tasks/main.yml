@@ -1,0 +1,81 @@
+---
+#==============================================================================
+# AAP Inventories Configuration
+#==============================================================================
+
+- name: Create inventories
+  ansible.controller.inventory:
+    controller_host: "{{ platform.controller_url }}"
+    controller_username: "{{ aap_admin_username }}"
+    controller_password: "{{ aap_admin_password }}"
+    validate_certs: "{{ aap_validate_certs | default(true) }}"
+    name: "{{ item.name }}"
+    organization: "{{ item.organization | default(rbac.default_organization) }}"
+    description: "{{ item.description | default(omit) }}"
+    variables: "{{ item.variables | default(omit) }}"
+    state: present
+  loop: "{{ aap_inventories }}"
+
+- name: Create inventory sources
+  ansible.controller.inventory_source:
+    controller_host: "{{ platform.controller_url }}"
+    controller_username: "{{ aap_admin_username }}"
+    controller_password: "{{ aap_admin_password }}"
+    validate_certs: "{{ aap_validate_certs | default(true) }}"
+    name: "{{ item.name }}"
+    inventory: "{{ item.inventory }}"
+    source: "{{ item.source }}"
+    source_project: "{{ item.source_project | default(omit) }}"
+    source_path: "{{ item.source_path | default(omit) }}"
+    credential: "{{ item.credential | default(omit) }}"
+    source_vars: "{{ item.source_vars | default(omit) }}"
+    update_on_launch: "{{ item.update_on_launch | default(true) }}"
+    update_cache_timeout: "{{ item.update_cache_timeout | default(0) }}"
+    overwrite: "{{ item.overwrite | default(true) }}"
+    overwrite_vars: "{{ item.overwrite_vars | default(true) }}"
+    state: present
+  loop: "{{ aap_inventory_sources | default([]) }}"
+  when: inventory.dynamic_inventory_enabled | default(false)
+
+- name: Create smart inventories
+  ansible.controller.inventory:
+    controller_host: "{{ platform.controller_url }}"
+    controller_username: "{{ aap_admin_username }}"
+    controller_password: "{{ aap_admin_password }}"
+    validate_certs: "{{ aap_validate_certs | default(true) }}"
+    name: "{{ item.name }}"
+    organization: "{{ item.organization | default(rbac.default_organization) }}"
+    description: "{{ item.description | default(omit) }}"
+    kind: smart
+    host_filter: "{{ item.host_filter }}"
+    state: present
+  loop: "{{ aap_smart_inventories | default([]) }}"
+  when: inventory.smart_inventory_enabled | default(false)
+
+- name: Create host groups
+  ansible.controller.group:
+    controller_host: "{{ platform.controller_url }}"
+    controller_username: "{{ aap_admin_username }}"
+    controller_password: "{{ aap_admin_password }}"
+    validate_certs: "{{ aap_validate_certs | default(true) }}"
+    name: "{{ item.name }}"
+    inventory: "{{ item.inventory }}"
+    description: "{{ item.description | default(omit) }}"
+    variables: "{{ item.variables | default(omit) }}"
+    state: present
+  loop: "{{ aap_inventory_groups | default([]) }}"
+
+- name: Sync inventory sources
+  ansible.controller.inventory_source_update:
+    controller_host: "{{ platform.controller_url }}"
+    controller_username: "{{ aap_admin_username }}"
+    controller_password: "{{ aap_admin_password }}"
+    validate_certs: "{{ aap_validate_certs | default(true) }}"
+    name: "{{ item.name }}"
+    inventory: "{{ item.inventory }}"
+    wait: true
+    timeout: 300
+  loop: "{{ aap_inventory_sources | default([]) }}"
+  when:
+    - inventory.dynamic_inventory_enabled | default(false)
+    - aap_sync_inventory_sources | default(true)

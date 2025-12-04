@@ -1,0 +1,48 @@
+---
+#==============================================================================
+# AAP Workflow Templates Defaults
+#==============================================================================
+
+aap_workflow_templates: []
+# - name: "Full Application Deployment"
+#   description: "Complete deployment workflow with approval gates"
+#   survey_enabled: true
+#   survey_spec:
+#     name: "Deployment Survey"
+#     spec:
+#       - question_name: "Environment"
+#         variable: "target_env"
+#         type: "multiplechoice"
+#         required: true
+#         choices:
+#           - dev
+#           - staging
+#           - production
+
+aap_workflow_nodes: []
+# - workflow: "Full Application Deployment"
+#   identifier: "node1_backup"
+#   job_template: "Backup Application"
+
+# - workflow: "Full Application Deployment"
+#   identifier: "node2_deploy"
+#   job_template: "Deploy Web Application"
+#   success_nodes:
+#     - "node3_verify"
+#   failure_nodes:
+#     - "node4_rollback"
+
+# - workflow: "Full Application Deployment"
+#   identifier: "node3_verify"
+#   job_template: "Verify Deployment"
+
+# - workflow: "Full Application Deployment"
+#   identifier: "node4_rollback"
+#   job_template: "Rollback Application"
+
+# - workflow: "Full Application Deployment"
+#   identifier: "approval_gate"
+#   approval_node:
+#     name: "Approve Production Deploy"
+#     description: "Requires approval before production"
+#     timeout: 3600

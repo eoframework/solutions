@@ -1,0 +1,53 @@
+---
+#==============================================================================
+# AAP Logging Configuration
+#==============================================================================
+
+- name: Configure external log aggregator
+  ansible.controller.settings:
+    controller_host: "{{ platform.controller_url }}"
+    controller_username: "{{ aap_admin_username }}"
+    controller_password: "{{ aap_admin_password }}"
+    validate_certs: "{{ aap_validate_certs | default(true) }}"
+    settings:
+      LOG_AGGREGATOR_ENABLED: true
+      LOG_AGGREGATOR_HOST: "{{ monitoring.log_aggregator_host }}"
+      LOG_AGGREGATOR_PORT: "{{ monitoring.log_aggregator_port }}"
+      LOG_AGGREGATOR_TYPE: "{{ monitoring.log_aggregator_type }}"
+      LOG_AGGREGATOR_PROTOCOL: "{{ aap_log_aggregator_protocol | default('https') }}"
+      LOG_AGGREGATOR_USERNAME: "{{ aap_log_aggregator_username | default(omit) }}"
+      LOG_AGGREGATOR_PASSWORD: "{{ aap_log_aggregator_password | default(omit) }}"
+      LOG_AGGREGATOR_LOGGERS:
+        - awx
+        - activity_stream
+        - job_events
+        - system_tracking
+        - broadcast_websocket
+      LOG_AGGREGATOR_INDIVIDUAL_FACTS: "{{ aap_log_individual_facts | default(false) }}"
+      LOG_AGGREGATOR_TOWER_UUID: "{{ aap_log_aggregator_uuid | default(ansible_machine_id) }}"
+      LOG_AGGREGATOR_LEVEL: "{{ aap_log_aggregator_level | default('INFO') }}"
+      LOG_AGGREGATOR_ACTION_QUEUE_SIZE: "{{ aap_log_aggregator_queue_size | default(131072) }}"
+      LOG_AGGREGATOR_ACTION_MAX_DISK_USAGE_GB: "{{ aap_log_aggregator_max_disk_gb | default(1) }}"
+      LOG_AGGREGATOR_MAX_DISK_USAGE_PATH: /var/lib/awx
+      LOG_AGGREGATOR_RSYSLOGD: "{{ aap_log_aggregator_rsyslogd | default(false) }}"
+  no_log: true
+
+- name: Configure Splunk-specific settings
+  ansible.controller.settings:
+    controller_host: "{{ platform.controller_url }}"
+    controller_username: "{{ aap_admin_username }}"
+    controller_password: "{{ aap_admin_password }}"
+    validate_certs: "{{ aap_validate_certs | default(true) }}"
+    settings:
+      LOG_AGGREGATOR_TCP_TIMEOUT: 5
+  when: monitoring.log_aggregator_type == 'splunk'
+
+- name: Configure Elasticsearch-specific settings
+  ansible.controller.settings:
+    controller_host: "{{ platform.controller_url }}"
+    controller_username: "{{ aap_admin_username }}"
+    controller_password: "{{ aap_admin_password }}"
+    validate_certs: "{{ aap_validate_certs | default(true) }}"
+    settings:
+      LOG_AGGREGATOR_TCP_TIMEOUT: 30
+  when: monitoring.log_aggregator_type == 'other'

@@ -1,0 +1,73 @@
+---
+#==============================================================================
+# OCP Pipelines Role - Main Tasks
+#==============================================================================
+# Configures OpenShift Pipelines (Tekton)
+#==============================================================================
+
+- name: Wait for Pipelines operator to be ready
+  kubernetes.core.k8s_info:
+    api_version: operators.coreos.com/v1alpha1
+    kind: ClusterServiceVersion
+    namespace: openshift-pipelines
+    label_selectors:
+      - operators.coreos.com/openshift-pipelines-operator-rh.openshift-pipelines
+  register: pipelines_csv
+  until: >
+    pipelines_csv.resources | length > 0 and
+    pipelines_csv.resources[0].status.phase | default('') == 'Succeeded'
+  retries: 30
+  delay: 30
+
+- name: Configure TektonConfig
+  kubernetes.core.k8s:
+    state: present
+    definition:
+      apiVersion: operator.tekton.dev/v1alpha1
+      kind: TektonConfig
+      metadata:
+        name: config
+      spec:
+        profile: all
+        targetNamespace: openshift-pipelines
+        pipeline:
+          enable-tekton-oci-bundles: true
+          enable-api-fields: stable
+          default-timeout-minutes: "{{ pipelines.timeout_hours | default(1) * 60 }}"
+          default-service-account: "{{ pipelines.default_service_account | default('pipeline') }}"
+        pruner:
+          resources:
+            - taskrun
+            - pipelinerun
+          keep: 100
+          schedule: "0 8 * * *"
+
+- name: Create pipeline service account
+  kubernetes.core.k8s:
+    state: present
+    definition:
+      apiVersion: v1
+      kind: ServiceAccount
+      metadata:
+        name: "{{ pipelines.default_service_account | default('pipeline') }}"
+        namespace: "{{ item }}"
+  loop: "{{ pipeline_namespaces | default([]) }}"
+
+- name: Create pipeline RBAC
+  kubernetes.core.k8s:
+    state: present
+    definition:
+      apiVersion: rbac.authorization.k8s.io/v1
+      kind: RoleBinding
+      metadata:
+        name: pipeline-edit
+        namespace: "{{ item }}"
+      roleRef:
+        apiGroup: rbac.authorization.k8s.io
+        kind: ClusterRole
+        name: edit
+      subjects:
+        - kind: ServiceAccount
+          name: "{{ pipelines.default_service_account | default('pipeline') }}"
+          namespace: "{{ item }}"
+  loop: "{{ pipeline_namespaces | default([]) }}"

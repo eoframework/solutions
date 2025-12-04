@@ -1,0 +1,57 @@
+---
+#==============================================================================
+# AAP Execution Environments Configuration
+#==============================================================================
+
+- name: Sync remote execution environments
+  ansible.builtin.uri:
+    url: "{{ platform.hub_url }}/api/galaxy/_ui/v1/execution-environments/remotes/{{ item.name }}/sync/"
+    method: POST
+    headers:
+      Authorization: "Token {{ aap_hub_token }}"
+    validate_certs: "{{ aap_validate_certs | default(true) }}"
+    status_code: [200, 201, 202]
+  loop: "{{ aap_ee_remotes | default([]) }}"
+  when: aap_hub_token is defined
+
+- name: Create execution environment remotes
+  ansible.builtin.uri:
+    url: "{{ platform.hub_url }}/api/galaxy/_ui/v1/execution-environments/remotes/"
+    method: POST
+    headers:
+      Authorization: "Token {{ aap_hub_token }}"
+    body_format: json
+    body:
+      name: "{{ item.name }}"
+      registry: "{{ item.registry }}"
+      upstream_name: "{{ item.upstream_name }}"
+      include_tags: "{{ item.include_tags | default(['latest']) }}"
+      exclude_tags: "{{ item.exclude_tags | default([]) }}"
+    validate_certs: "{{ aap_validate_certs | default(true) }}"
+    status_code: [200, 201, 409]
+  loop: "{{ aap_ee_remotes | default([]) }}"
+  when: aap_hub_token is defined
+
+- name: Register execution environments in Controller
+  ansible.controller.execution_environment:
+    controller_host: "{{ platform.controller_url }}"
+    controller_username: "{{ aap_admin_username }}"
+    controller_password: "{{ aap_admin_password }}"
+    validate_certs: "{{ aap_validate_certs | default(true) }}"
+    name: "{{ item.name }}"
+    image: "{{ item.image }}"
+    pull: "{{ item.pull | default('missing') }}"
+    description: "{{ item.description | default(omit) }}"
+    credential: "{{ item.credential | default(omit) }}"
+    state: present
+  loop: "{{ aap_execution_environments }}"
+
+- name: Set default execution environment
+  ansible.controller.settings:
+    controller_host: "{{ platform.controller_url }}"
+    controller_username: "{{ aap_admin_username }}"
+    controller_password: "{{ aap_admin_password }}"
+    validate_certs: "{{ aap_validate_certs | default(true) }}"
+    settings:
+      DEFAULT_EXECUTION_ENVIRONMENT: "{{ aap_default_ee | default(content.execution_environments[0]) }}"
+  when: aap_default_ee is defined or content.execution_environments is defined

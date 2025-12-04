@@ -1,0 +1,77 @@
+---
+#==============================================================================
+# OpenShift Configuration - Test Environment
+#==============================================================================
+# This file is generated from configuration.csv - do not edit manually
+#==============================================================================
+
+# Cluster Configuration
+cluster:
+  name: ocp-test
+  base_domain: example.com
+  version: "4.14.10"
+
+# Authentication
+auth:
+  ldap_enabled: false
+  ldap_url: "ldaps://ldap.example.com:636"
+  ldap_bind_dn: "CN=ocp-svc,OU=ServiceAccounts,DC=example,DC=com"
+  ldap_user_search_base: "OU=Users,DC=example,DC=com"
+  ldap_group_search_base: "OU=Groups,DC=example,DC=com"
+  oauth_timeout_seconds: 86400
+  htpasswd_backup_enabled: true
+
+# Storage
+storage:
+  odf_enabled: true
+  odf_capacity_tb: 5
+  class_block: "ocs-storagecluster-ceph-rbd"
+  class_file: "ocs-storagecluster-cephfs"
+  default_class: "ocs-storagecluster-ceph-rbd"
+
+# Monitoring
+monitoring:
+  prometheus_enabled: true
+  prometheus_retention_days: 7
+  alertmanager_target: "email"
+  grafana_enabled: true
+
+# Logging
+logging:
+  efk_enabled: true
+  retention_days: 3
+  elasticsearch_storage_gb: 100
+  elasticsearch_replicas: 1
+
+# GitOps
+gitops:
+  argocd_enabled: true
+  argocd_repo_url: "https://github.com/company/gitops-config"
+  argocd_replicas: 1
+
+# Pipelines
+pipelines:
+  tekton_enabled: true
+  default_service_account: "pipeline"
+  timeout_hours: 1
+
+# Service Mesh
+servicemesh:
+  istio_enabled: false
+  mtls_mode: "PERMISSIVE"
+  tracing_enabled: true
+  tracing_sampling_rate: 100
+
+# Registry
+registry:
+  quay_enabled: false
+  quay_hostname: "quay.apps.ocp-test.example.com"
+  quay_storage_gb: 100
+  internal_registry_replicas: 1
+
+# Security
+security:
+  pod_security_admission: "baseline"
+  network_policies_enabled: true
+  image_scanning_enabled: true
+  acs_enabled: false

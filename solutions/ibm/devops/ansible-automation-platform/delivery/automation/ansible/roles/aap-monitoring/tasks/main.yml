@@ -1,0 +1,65 @@
+---
+#==============================================================================
+# AAP Monitoring Configuration
+#==============================================================================
+
+- name: Configure insights data collection
+  ansible.controller.settings:
+    controller_host: "{{ platform.controller_url }}"
+    controller_username: "{{ aap_admin_username }}"
+    controller_password: "{{ aap_admin_password }}"
+    validate_certs: "{{ aap_validate_certs | default(true) }}"
+    settings:
+      INSIGHTS_TRACKING_STATE: "{{ monitoring.insights_enabled | default(false) }}"
+      REDHAT_USERNAME: "{{ aap_redhat_username | default(omit) }}"
+      REDHAT_PASSWORD: "{{ aap_redhat_password | default(omit) }}"
+  when: monitoring.insights_enabled | default(false)
+  no_log: true
+
+- name: Create PagerDuty notification template
+  ansible.controller.notification_template:
+    controller_host: "{{ platform.controller_url }}"
+    controller_username: "{{ aap_admin_username }}"
+    controller_password: "{{ aap_admin_password }}"
+    validate_certs: "{{ aap_validate_certs | default(true) }}"
+    name: "PagerDuty Alerts"
+    organization: "{{ rbac.default_organization }}"
+    notification_type: pagerduty
+    notification_configuration:
+      subdomain: "{{ aap_pagerduty_subdomain }}"
+      token: "{{ aap_pagerduty_token }}"
+      service_key: "{{ aap_pagerduty_service_key }}"
+      client_name: "{{ solution.name }}"
+    state: present
+  when:
+    - monitoring.pagerduty_enabled | default(false)
+    - aap_pagerduty_token is defined
+  no_log: true
+
+- name: Create webhook notification for monitoring
+  ansible.controller.notification_template:
+    controller_host: "{{ platform.controller_url }}"
+    controller_username: "{{ aap_admin_username }}"
+    controller_password: "{{ aap_admin_password }}"
+    validate_certs: "{{ aap_validate_certs | default(true) }}"
+    name: "Monitoring Webhook"
+    organization: "{{ rbac.default_organization }}"
+    notification_type: webhook
+    notification_configuration:
+      url: "{{ integration.monitoring_webhook_url }}"
+      headers:
+        Content-Type: application/json
+      http_method: POST
+    state: present
+  when: integration.monitoring_webhook_url is defined and integration.monitoring_webhook_url | length > 0
+
+- name: Configure job event notifications
+  ansible.controller.settings:
+    controller_host: "{{ platform.controller_url }}"
+    controller_username: "{{ aap_admin_username }}"
+    controller_password: "{{ aap_admin_password }}"
+    validate_certs: "{{ aap_validate_certs | default(true) }}"
+    settings:
+      AWX_TASK_ENV:
+        ANSIBLE_CALLBACK_PLUGINS: "{{ aap_callback_plugins | default('') }}"
+  when: aap_callback_plugins is defined

@@ -1,0 +1,74 @@
+---
+#==============================================================================
+# AAP Controller Configuration
+#==============================================================================
+
+- name: Wait for AAP Controller to be available
+  ansible.builtin.uri:
+    url: "{{ platform.controller_url }}/api/v2/ping/"
+    method: GET
+    validate_certs: "{{ aap_validate_certs | default(true) }}"
+    status_code: 200
+  register: controller_ping
+  until: controller_ping.status == 200
+  retries: 30
+  delay: 10
+
+- name: Configure controller settings
+  ansible.controller.settings:
+    controller_host: "{{ platform.controller_url }}"
+    controller_username: "{{ aap_admin_username }}"
+    controller_password: "{{ aap_admin_password }}"
+    validate_certs: "{{ aap_validate_certs | default(true) }}"
+    settings:
+      SESSION_COOKIE_AGE: "{{ auth.session_timeout_seconds | default(1800) }}"
+      AWX_TASK_ENV:
+        GIT_SSL_NO_VERIFY: "{{ 'True' if not aap_validate_certs else 'False' }}"
+      DEFAULT_EXECUTION_ENVIRONMENT: "{{ content.execution_environments[0] | default('Default execution environment') }}"
+      AWX_ISOLATION_SHOW_PATHS: []
+      AWX_ROLES_ENABLED: true
+      AWX_COLLECTIONS_ENABLED: true
+      ACTIVITY_STREAM_ENABLED: true
+      ACTIVITY_STREAM_ENABLED_FOR_INVENTORY_SYNC: true
+      ORG_ADMINS_CAN_SEE_ALL_USERS: true
+      MANAGE_ORGANIZATION_AUTH: true
+      TOWER_URL_BASE: "{{ platform.controller_url }}"
+
+- name: Configure performance settings
+  ansible.controller.settings:
+    controller_host: "{{ platform.controller_url }}"
+    controller_username: "{{ aap_admin_username }}"
+    controller_password: "{{ aap_admin_password }}"
+    validate_certs: "{{ aap_validate_certs | default(true) }}"
+    settings:
+      AWX_TASK_WORKERS: "{{ (performance.max_concurrent_jobs / 4) | int | default(4) }}"
+      JOB_EVENT_BUFFER_SECONDS: "{{ performance.job_event_buffer_seconds | default(1) }}"
+      DEFAULT_JOB_TIMEOUT: "{{ performance.job_timeout_seconds | default(0) }}"
+      DEFAULT_INVENTORY_UPDATE_TIMEOUT: 0
+      DEFAULT_PROJECT_UPDATE_TIMEOUT: 0
+      MAX_FORKS: "{{ performance.forks_default | default(5) }}"
+
+- name: Create default organization
+  ansible.controller.organization:
+    controller_host: "{{ platform.controller_url }}"
+    controller_username: "{{ aap_admin_username }}"
+    controller_password: "{{ aap_admin_password }}"
+    validate_certs: "{{ aap_validate_certs | default(true) }}"
+    name: "{{ rbac.default_organization }}"
+    description: "Default organization for {{ solution.name }}"
+    state: present
+  register: default_org
+
+- name: Configure notification templates
+  ansible.controller.notification_template:
+    controller_host: "{{ platform.controller_url }}"
+    controller_username: "{{ aap_admin_username }}"
+    controller_password: "{{ aap_admin_password }}"
+    validate_certs: "{{ aap_validate_certs | default(true) }}"
+    name: "{{ item.name }}"
+    organization: "{{ rbac.default_organization }}"
+    notification_type: "{{ item.type }}"
+    notification_configuration: "{{ item.config }}"
+    state: present
+  loop: "{{ aap_notification_templates | default([]) }}"
+  when: aap_notification_templates is defined

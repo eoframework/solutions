@@ -1,0 +1,16 @@
+---
+#==============================================================================
+# AAP Monitoring Defaults
+#==============================================================================
+
+# Red Hat Insights credentials (for insights integration)
+# aap_redhat_username: "{{ vault_redhat_username }}"
+# aap_redhat_password: "{{ vault_redhat_password }}"
+
+# PagerDuty configuration
+# aap_pagerduty_subdomain: "company"
+# aap_pagerduty_token: "{{ vault_pagerduty_token }}"
+# aap_pagerduty_service_key: "{{ vault_pagerduty_service_key }}"
+
+# Custom callback plugins
+# aap_callback_plugins: "/usr/share/ansible/plugins/callback"

@@ -1,0 +1,98 @@
+---
+#==============================================================================
+# OpenShift Container Platform - Main Playbook
+#==============================================================================
+# Master playbook that orchestrates all OCP configuration tasks
+#
+# Usage:
+#   ansible-playbook -i inventory/prod site.yml
+#   ansible-playbook -i inventory/test site.yml --tags=operators
+#   ansible-playbook -i inventory/dr site.yml --tags=security
+#==============================================================================
+
+- name: OpenShift Container Platform Configuration
+  hosts: localhost
+  connection: local
+  gather_facts: false
+
+  vars_files:
+    - "vars/generated/project.yml"
+    - "vars/environments/{{ env | default('prod') }}.yml"
+
+  pre_tasks:
+    - name: Validate cluster connectivity
+      kubernetes.core.k8s_info:
+        api_version: v1
+        kind: Namespace
+        name: openshift-config
+      register: cluster_check
+      failed_when: cluster_check.resources | length == 0
+      tags: [always]
+
+    - name: Display target cluster
+      ansible.builtin.debug:
+        msg: "Configuring cluster: {{ cluster.name }}.{{ cluster.base_domain }} ({{ env | default('prod') }})"
+      tags: [always]
+
+  roles:
+    # Foundation
+    - role: ocp-auth
+      tags: [auth, security]
+      when: auth.ldap_enabled | default(false)
+
+    - role: ocp-storage
+      tags: [storage]
+      when: storage.odf_enabled | default(false)
+
+    # DevOps Platform
+    - role: ocp-operators
+      tags: [operators]
+
+    - role: ocp-gitops
+      tags: [gitops, devops]
+      when: gitops.argocd_enabled | default(false)
+
+    - role: ocp-pipelines
+      tags: [pipelines, devops]
+      when: pipelines.tekton_enabled | default(false)
+
+    # Networking
+    - role: ocp-servicemesh
+      tags: [servicemesh, networking]
+      when: servicemesh.istio_enabled | default(false)
+
+    # Observability
+    - role: ocp-monitoring
+      tags: [monitoring, observability]
+      when: monitoring.prometheus_enabled | default(true)
+
+    - role: ocp-logging
+      tags: [logging, observability]
+      when: logging.efk_enabled | default(false)
+
+    # Security
+    - role: ocp-security
+      tags: [security]
+
+    # Registry
+    - role: ocp-registry
+      tags: [registry]
+      when: registry.quay_enabled | default(false)
+
+  post_tasks:
+    - name: Display configuration summary
+      ansible.builtin.debug:
+        msg: |
+          OpenShift Configuration Complete
+          ================================
+          Cluster: {{ cluster.name }}.{{ cluster.base_domain }}
+          Environment: {{ env | default('prod') }}
+
+          Enabled Features:
+          - LDAP Auth: {{ auth.ldap_enabled | default(false) }}
+          - ODF Storage: {{ storage.odf_enabled | default(false) }}
+          - GitOps (ArgoCD): {{ gitops.argocd_enabled | default(false) }}
+          - Pipelines (Tekton): {{ pipelines.tekton_enabled | default(false) }}
+          - Service Mesh: {{ servicemesh.istio_enabled | default(false) }}
+          - Quay Registry: {{ registry.quay_enabled | default(false) }}
+      tags: [always]

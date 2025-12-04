@@ -1,0 +1,14 @@
+---
+#==============================================================================
+# AAP Execution Node Handlers
+#==============================================================================
+
+- name: restart receptor
+  ansible.builtin.service:
+    name: receptor
+    state: restarted
+
+- name: restart rsyslog
+  ansible.builtin.service:
+    name: rsyslog
+    state: restarted

@@ -1,0 +1,100 @@
+---
+#==============================================================================
+# OCP Authentication Role - Main Tasks
+#==============================================================================
+# Configures OAuth with LDAP provider and htpasswd backup
+#==============================================================================
+
+- name: Create LDAP bind password secret
+  kubernetes.core.k8s:
+    state: present
+    definition:
+      apiVersion: v1
+      kind: Secret
+      metadata:
+        name: ldap-bind-password
+        namespace: openshift-config
+      type: Opaque
+      stringData:
+        bindPassword: "{{ ldap_bind_password }}"
+  when: auth.ldap_enabled | default(false)
+  no_log: true
+
+- name: Configure OAuth with LDAP provider
+  kubernetes.core.k8s:
+    state: present
+    definition:
+      apiVersion: config.openshift.io/v1
+      kind: OAuth
+      metadata:
+        name: cluster
+      spec:
+        tokenConfig:
+          accessTokenMaxAgeSeconds: "{{ auth.oauth_timeout_seconds | default(86400) }}"
+        identityProviders:
+          - name: ldap
+            type: LDAP
+            mappingMethod: claim
+            ldap:
+              url: "{{ auth.ldap_url }}/{{ auth.ldap_user_search_base }}?uid"
+              insecure: false
+              bindDN: "{{ auth.ldap_bind_dn }}"
+              bindPassword:
+                name: ldap-bind-password
+              attributes:
+                id: [dn]
+                email: [mail]
+                name: [cn]
+                preferredUsername: [uid]
+  when: auth.ldap_enabled | default(false)
+
+- name: Create htpasswd secret for backup authentication
+  kubernetes.core.k8s:
+    state: present
+    definition:
+      apiVersion: v1
+      kind: Secret
+      metadata:
+        name: htpasswd-secret
+        namespace: openshift-config
+      type: Opaque
+      data:
+        htpasswd: "{{ lookup('pipe', 'htpasswd -Bbn admin ' + admin_password | default('changeme')) | b64encode }}"
+  when: auth.htpasswd_backup_enabled | default(false)
+  no_log: true
+
+- name: Add htpasswd identity provider
+  kubernetes.core.k8s:
+    state: present
+    definition:
+      apiVersion: config.openshift.io/v1
+      kind: OAuth
+      metadata:
+        name: cluster
+      spec:
+        identityProviders:
+          - name: htpasswd
+            type: HTPasswd
+            mappingMethod: claim
+            htpasswd:
+              fileData:
+                name: htpasswd-secret
+  when: auth.htpasswd_backup_enabled | default(false) and not auth.ldap_enabled | default(false)
+
+- name: Create cluster-admin role binding for admin user
+  kubernetes.core.k8s:
+    state: present
+    definition:
+      apiVersion: rbac.authorization.k8s.io/v1
+      kind: ClusterRoleBinding
+      metadata:
+        name: admin-cluster-admin
+      roleRef:
+        apiGroup: rbac.authorization.k8s.io
+        kind: ClusterRole
+        name: cluster-admin
+      subjects:
+        - apiGroup: rbac.authorization.k8s.io
+          kind: User
+          name: admin
+  when: auth.htpasswd_backup_enabled | default(false)

@@ -1,0 +1,32 @@
+---
+#==============================================================================
+# AAP RBAC Defaults
+#==============================================================================
+
+# Custom roles
+aap_custom_roles: []
+# - name: "Job Runner"
+#   description: "Can only run existing job templates"
+#   content_type: job_template
+#   permissions:
+#     - execute
+
+# Local users (passwords should be vaulted)
+aap_local_users: []
+# - username: svc_automation
+#   first_name: Service
+#   last_name: Account
+#   email: svc_automation@example.com
+#   password: "{{ vault_svc_automation_password }}"
+#   is_superuser: false
+
+# Team memberships
+aap_team_memberships: []
+# - team: Administrators
+#   users:
+#     - admin1
+#     - admin2
+# - team: Operators
+#   users:
+#     - operator1
+#     - operator2

@@ -1,0 +1,19 @@
+---
+#==============================================================================
+# AAP Projects Defaults
+#==============================================================================
+
+aap_update_projects: true
+
+aap_projects: []
+# - name: "Infrastructure Automation"
+#   description: "Core infrastructure playbooks"
+#   scm_url: "https://github.com/org/infra-playbooks.git"
+#   scm_branch: main
+#   scm_credential: "GitHub"
+
+# - name: "Application Deployment"
+#   description: "Application deployment playbooks"
+#   scm_url: "https://github.com/org/app-deploy.git"
+#   scm_branch: main
+#   scm_credential: "GitHub"

@@ -1,0 +1,17 @@
+---
+#==============================================================================
+# OpenShift Project Configuration
+#==============================================================================
+# Generated from configuration.csv - solution metadata
+#==============================================================================
+
+solution:
+  name: openshift-container-platform
+  abbr: ocp
+  provider_name: ibm
+  category_name: cloud
+
+ownership:
+  cost_center: CC-OCP-001
+  owner_email: platform-team@example.com
+  project_code: PRJ-OCP-2025

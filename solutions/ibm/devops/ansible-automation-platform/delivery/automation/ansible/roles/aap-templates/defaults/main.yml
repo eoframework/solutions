@@ -1,0 +1,48 @@
+---
+#==============================================================================
+# AAP Job Templates Defaults
+#==============================================================================
+
+aap_job_templates: []
+# - name: "Deploy Web Application"
+#   description: "Deploy web application to target servers"
+#   inventory: "Production Servers"
+#   project: "Application Deployment"
+#   playbook: "deploy.yml"
+#   credentials:
+#     - "Linux Servers"
+#     - "AWS Production"
+#   ask_limit_on_launch: true
+#   survey_enabled: true
+#   survey_spec:
+#     name: "Deploy Survey"
+#     description: "Deployment parameters"
+#     spec:
+#       - question_name: "Application Version"
+#         question_description: "Version to deploy"
+#         variable: "app_version"
+#         type: "text"
+#         required: true
+#         default: "latest"
+
+# - name: "Patch Linux Servers"
+#   description: "Apply security patches"
+#   inventory: "Production Servers"
+#   project: "Infrastructure Automation"
+#   playbook: "patching.yml"
+#   credentials:
+#     - "Linux Servers"
+#   limit: "linux"
+#   become_enabled: true
+#   timeout: 3600
+
+aap_job_schedules: []
+# - name: "Nightly Patching"
+#   job_template: "Patch Linux Servers"
+#   rrule: "DTSTART:20240101T020000Z RRULE:FREQ=DAILY;INTERVAL=1"
+#   enabled: true
+
+# - name: "Weekly Compliance Check"
+#   job_template: "Run Compliance Scan"
+#   rrule: "DTSTART:20240101T060000Z RRULE:FREQ=WEEKLY;BYDAY=SU"
+#   enabled: true

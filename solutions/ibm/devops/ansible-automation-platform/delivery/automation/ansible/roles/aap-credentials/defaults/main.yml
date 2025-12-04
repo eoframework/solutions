@@ -1,0 +1,42 @@
+---
+#==============================================================================
+# AAP Credentials Defaults
+#==============================================================================
+
+# Machine credentials for managed nodes
+aap_machine_credentials: []
+# - name: "Linux Servers"
+#   username: ansible
+#   ssh_key_data: "{{ vault_ssh_private_key }}"
+#   become_method: sudo
+
+# SCM credentials for Git access
+aap_scm_credentials: []
+# - name: "GitHub"
+#   username: "{{ vault_github_username }}"
+#   password: "{{ vault_github_token }}"
+
+# Cloud credentials
+aap_cloud_credentials: []
+# - name: "AWS Production"
+#   credential_type: "Amazon Web Services"
+#   inputs:
+#     username: "{{ vault_aws_access_key }}"
+#     password: "{{ vault_aws_secret_key }}"
+
+# Custom credential types
+aap_custom_credential_types: []
+# - name: "HashiCorp Vault"
+#   inputs:
+#     fields:
+#       - id: vault_addr
+#         type: string
+#         label: Vault Address
+#       - id: vault_token
+#         type: string
+#         label: Vault Token
+#         secret: true
+#   injectors:
+#     env:
+#       VAULT_ADDR: "{{ vault_addr }}"
+#       VAULT_TOKEN: "{{ vault_token }}"

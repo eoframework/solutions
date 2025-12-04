@@ -1,0 +1,15 @@
+---
+#==============================================================================
+# AAP CyberArk Integration Defaults
+#==============================================================================
+
+# Credential type to use
+aap_cyberark_credential_type: "CyberArk Central Credential Provider Lookup"
+
+# Credential inputs (should be vaulted)
+# aap_cyberark_credential_inputs:
+#   cyberark_url: "https://cyberark.example.com"
+#   app_id: "AAP"
+#   client_cert: "{{ vault_cyberark_cert }}"
+#   client_key: "{{ vault_cyberark_key }}"
+#   verify_ssl: true

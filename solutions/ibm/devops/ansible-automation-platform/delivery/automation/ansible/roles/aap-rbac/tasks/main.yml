@@ -1,0 +1,96 @@
+---
+#==============================================================================
+# AAP RBAC Configuration
+#==============================================================================
+
+- name: Create teams
+  ansible.controller.team:
+    controller_host: "{{ platform.controller_url }}"
+    controller_username: "{{ aap_admin_username }}"
+    controller_password: "{{ aap_admin_password }}"
+    validate_certs: "{{ aap_validate_certs | default(true) }}"
+    name: "{{ item.name }}"
+    organization: "{{ item.organization | default(rbac.default_organization) }}"
+    description: "{{ item.description | default(omit) }}"
+    state: present
+  loop:
+    - name: "{{ rbac.admin_team }}"
+      description: "Platform administrators with full access"
+    - name: "{{ rbac.operator_team }}"
+      description: "Operators who can run and manage jobs"
+    - name: "{{ rbac.auditor_team }}"
+      description: "Auditors with read-only access"
+
+- name: Create custom roles
+  ansible.controller.role_definition:
+    controller_host: "{{ platform.controller_url }}"
+    controller_username: "{{ aap_admin_username }}"
+    controller_password: "{{ aap_admin_password }}"
+    validate_certs: "{{ aap_validate_certs | default(true) }}"
+    name: "{{ item.name }}"
+    description: "{{ item.description }}"
+    permissions: "{{ item.permissions }}"
+    content_type: "{{ item.content_type }}"
+    state: present
+  loop: "{{ aap_custom_roles | default([]) }}"
+
+- name: Assign organization admin role to admin team
+  ansible.controller.role:
+    controller_host: "{{ platform.controller_url }}"
+    controller_username: "{{ aap_admin_username }}"
+    controller_password: "{{ aap_admin_password }}"
+    validate_certs: "{{ aap_validate_certs | default(true) }}"
+    team: "{{ rbac.admin_team }}"
+    organization: "{{ rbac.default_organization }}"
+    role: admin
+    state: present
+
+- name: Assign job template execute to operator team
+  ansible.controller.role:
+    controller_host: "{{ platform.controller_url }}"
+    controller_username: "{{ aap_admin_username }}"
+    controller_password: "{{ aap_admin_password }}"
+    validate_certs: "{{ aap_validate_certs | default(true) }}"
+    team: "{{ rbac.operator_team }}"
+    organization: "{{ rbac.default_organization }}"
+    role: execute
+    state: present
+
+- name: Assign auditor role to auditor team
+  ansible.controller.role:
+    controller_host: "{{ platform.controller_url }}"
+    controller_username: "{{ aap_admin_username }}"
+    controller_password: "{{ aap_admin_password }}"
+    validate_certs: "{{ aap_validate_certs | default(true) }}"
+    team: "{{ rbac.auditor_team }}"
+    organization: "{{ rbac.default_organization }}"
+    role: auditor
+    state: present
+
+- name: Create local users
+  ansible.controller.user:
+    controller_host: "{{ platform.controller_url }}"
+    controller_username: "{{ aap_admin_username }}"
+    controller_password: "{{ aap_admin_password }}"
+    validate_certs: "{{ aap_validate_certs | default(true) }}"
+    username: "{{ item.username }}"
+    first_name: "{{ item.first_name | default(omit) }}"
+    last_name: "{{ item.last_name | default(omit) }}"
+    email: "{{ item.email | default(omit) }}"
+    password: "{{ item.password }}"
+    is_superuser: "{{ item.is_superuser | default(false) }}"
+    state: present
+  loop: "{{ aap_local_users | default([]) }}"
+  no_log: true
+
+- name: Add users to teams
+  ansible.controller.team:
+    controller_host: "{{ platform.controller_url }}"
+    controller_username: "{{ aap_admin_username }}"
+    controller_password: "{{ aap_admin_password }}"
+    validate_certs: "{{ aap_validate_certs | default(true) }}"
+    name: "{{ item.team }}"
+    organization: "{{ rbac.default_organization }}"
+    users: "{{ item.users }}"
+    state: present
+  loop: "{{ aap_team_memberships | default([]) }}"

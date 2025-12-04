@@ -1,0 +1,90 @@
+---
+#==============================================================================
+# OCP GitOps Role - Main Tasks
+#==============================================================================
+# Configures ArgoCD for GitOps-based deployments
+#==============================================================================
+
+- name: Wait for GitOps operator to be ready
+  kubernetes.core.k8s_info:
+    api_version: operators.coreos.com/v1alpha1
+    kind: ClusterServiceVersion
+    namespace: openshift-gitops-operator
+    label_selectors:
+      - operators.coreos.com/openshift-gitops-operator.openshift-gitops-operator
+  register: gitops_csv
+  until: >
+    gitops_csv.resources | length > 0 and
+    gitops_csv.resources[0].status.phase | default('') == 'Succeeded'
+  retries: 30
+  delay: 30
+
+- name: Configure ArgoCD instance
+  kubernetes.core.k8s:
+    state: present
+    definition:
+      apiVersion: argoproj.io/v1beta1
+      kind: ArgoCD
+      metadata:
+        name: openshift-gitops
+        namespace: openshift-gitops
+      spec:
+        server:
+          replicas: "{{ gitops.argocd_replicas | default(2) }}"
+          autoscale:
+            enabled: false
+          grpc:
+            ingress:
+              enabled: false
+          ingress:
+            enabled: false
+          route:
+            enabled: true
+            tls:
+              termination: reencrypt
+        repo:
+          replicas: 2
+        ha:
+          enabled: true
+        resourceExclusions: |
+          - apiGroups:
+              - tekton.dev
+            clusters:
+              - '*'
+            kinds:
+              - TaskRun
+              - PipelineRun
+
+- name: Add application repository
+  kubernetes.core.k8s:
+    state: present
+    definition:
+      apiVersion: v1
+      kind: Secret
+      metadata:
+        name: repo-config
+        namespace: openshift-gitops
+        labels:
+          argocd.argoproj.io/secret-type: repository
+      type: Opaque
+      stringData:
+        type: git
+        url: "{{ gitops.argocd_repo_url }}"
+  when: gitops.argocd_repo_url is defined
+
+- name: Create cluster-admin role binding for ArgoCD
+  kubernetes.core.k8s:
+    state: present
+    definition:
+      apiVersion: rbac.authorization.k8s.io/v1
+      kind: ClusterRoleBinding
+      metadata:
+        name: openshift-gitops-argocd-application-controller-cluster-admin
+      roleRef:
+        apiGroup: rbac.authorization.k8s.io
+        kind: ClusterRole
+        name: cluster-admin
+      subjects:
+        - kind: ServiceAccount
+          name: openshift-gitops-argocd-application-controller
+          namespace: openshift-gitops

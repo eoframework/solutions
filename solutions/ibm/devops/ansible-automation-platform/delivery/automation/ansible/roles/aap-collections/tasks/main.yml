@@ -1,0 +1,77 @@
+---
+#==============================================================================
+# AAP Collections Configuration
+#==============================================================================
+
+- name: Sync collections from remote sources
+  ansible.builtin.uri:
+    url: "{{ platform.hub_url }}/api/galaxy/content/{{ item }}/v3/sync/"
+    method: POST
+    headers:
+      Authorization: "Token {{ aap_hub_token }}"
+    validate_certs: "{{ aap_validate_certs | default(true) }}"
+    status_code: [200, 201, 202]
+  loop: "{{ aap_collection_repos | default(['community', 'rh-certified']) }}"
+  when:
+    - aap_hub_token is defined
+    - aap_sync_collections | default(true)
+
+- name: Wait for collection sync to complete
+  ansible.builtin.uri:
+    url: "{{ platform.hub_url }}/api/galaxy/pulp/api/v3/tasks/?state=running"
+    method: GET
+    headers:
+      Authorization: "Token {{ aap_hub_token }}"
+    validate_certs: "{{ aap_validate_certs | default(true) }}"
+  register: sync_tasks
+  until: sync_tasks.json.count == 0
+  retries: 60
+  delay: 10
+  when:
+    - aap_hub_token is defined
+    - aap_sync_collections | default(true)
+
+- name: Upload local collections
+  ansible.builtin.uri:
+    url: "{{ platform.hub_url }}/api/galaxy/content/inbound-{{ item.namespace }}/v3/artifacts/collections/"
+    method: POST
+    headers:
+      Authorization: "Token {{ aap_hub_token }}"
+      Content-Type: multipart/form-data
+    body_format: form-multipart
+    body:
+      file:
+        filename: "{{ item.file }}"
+        content: "{{ lookup('file', item.file) }}"
+    validate_certs: "{{ aap_validate_certs | default(true) }}"
+    status_code: [200, 201, 202]
+  loop: "{{ aap_local_collections | default([]) }}"
+  when: aap_hub_token is defined
+
+- name: Approve staged collections
+  ansible.builtin.uri:
+    url: "{{ platform.hub_url }}/api/galaxy/v3/collections/{{ item.namespace }}/{{ item.name }}/versions/{{ item.version }}/move/staging/published/"
+    method: POST
+    headers:
+      Authorization: "Token {{ aap_hub_token }}"
+    validate_certs: "{{ aap_validate_certs | default(true) }}"
+    status_code: [200, 201, 202]
+  loop: "{{ aap_approve_collections | default([]) }}"
+  when: aap_hub_token is defined
+  ignore_errors: true
+
+- name: Configure collection signing
+  ansible.builtin.uri:
+    url: "{{ platform.hub_url }}/api/galaxy/v3/collections/{{ item.namespace }}/{{ item.name }}/versions/{{ item.version }}/sign/"
+    method: POST
+    headers:
+      Authorization: "Token {{ aap_hub_token }}"
+    body_format: json
+    body:
+      signing_service: "{{ aap_hub_signing_service }}"
+    validate_certs: "{{ aap_validate_certs | default(true) }}"
+    status_code: [200, 201, 202]
+  loop: "{{ aap_sign_collections | default([]) }}"
+  when:
+    - aap_hub_token is defined
+    - aap_hub_signing_service is defined

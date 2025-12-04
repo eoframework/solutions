@@ -1,0 +1,101 @@
+---
+#==============================================================================
+# OCP Monitoring Role - Main Tasks
+#==============================================================================
+# Configures Prometheus, Grafana, and alerting
+#==============================================================================
+
+- name: Configure cluster monitoring
+  kubernetes.core.k8s:
+    state: present
+    definition:
+      apiVersion: v1
+      kind: ConfigMap
+      metadata:
+        name: cluster-monitoring-config
+        namespace: openshift-monitoring
+      data:
+        config.yaml: |
+          enableUserWorkload: true
+          prometheusK8s:
+            retention: {{ monitoring.prometheus_retention_days | default(15) }}d
+            volumeClaimTemplate:
+              spec:
+                storageClassName: {{ storage.default_class | default('gp3-csi') }}
+                resources:
+                  requests:
+                    storage: 50Gi
+          grafana:
+            enabled: {{ monitoring.grafana_enabled | default(true) | lower }}
+
+- name: Configure user workload monitoring
+  kubernetes.core.k8s:
+    state: present
+    definition:
+      apiVersion: v1
+      kind: ConfigMap
+      metadata:
+        name: user-workload-monitoring-config
+        namespace: openshift-user-workload-monitoring
+      data:
+        config.yaml: |
+          prometheus:
+            retention: {{ monitoring.prometheus_retention_days | default(15) }}d
+            volumeClaimTemplate:
+              spec:
+                storageClassName: {{ storage.default_class | default('gp3-csi') }}
+                resources:
+                  requests:
+                    storage: 20Gi
+
+- name: Create alerting secret for PagerDuty
+  kubernetes.core.k8s:
+    state: present
+    definition:
+      apiVersion: v1
+      kind: Secret
+      metadata:
+        name: alertmanager-pagerduty
+        namespace: openshift-monitoring
+      type: Opaque
+      stringData:
+        service-key: "{{ pagerduty_service_key | default('changeme') }}"
+  when: monitoring.alertmanager_target | default('') == 'pagerduty'
+  no_log: true
+
+- name: Configure Alertmanager
+  kubernetes.core.k8s:
+    state: present
+    definition:
+      apiVersion: v1
+      kind: Secret
+      metadata:
+        name: alertmanager-main
+        namespace: openshift-monitoring
+      type: Opaque
+      stringData:
+        alertmanager.yaml: |
+          global:
+            resolve_timeout: 5m
+          route:
+            receiver: default
+            group_by: [alertname, namespace]
+            group_wait: 30s
+            group_interval: 5m
+            repeat_interval: 12h
+          receivers:
+            - name: default
+              {% if monitoring.alertmanager_target | default('') == 'pagerduty' %}
+              pagerduty_configs:
+                - service_key_file: /etc/alertmanager/secrets/alertmanager-pagerduty/service-key
+                  severity_map:
+                    firing: critical
+                    resolved: info
+              {% elif monitoring.alertmanager_target | default('') == 'slack' %}
+              slack_configs:
+                - api_url: "{{ slack_webhook_url | default('') }}"
+                  channel: '#alerts'
+              {% else %}
+              webhook_configs:
+                - url: 'http://localhost:9093'
+              {% endif %}

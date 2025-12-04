@@ -1,0 +1,86 @@
+---
+#==============================================================================
+# AAP Private Automation Hub Configuration
+#==============================================================================
+
+- name: Wait for Private Automation Hub to be available
+  ansible.builtin.uri:
+    url: "{{ platform.hub_url }}/api/galaxy/pulp/api/v3/status/"
+    method: GET
+    validate_certs: "{{ aap_validate_certs | default(true) }}"
+    status_code: 200
+  register: hub_ping
+  until: hub_ping.status == 200
+  retries: 30
+  delay: 10
+
+- name: Configure hub settings
+  ansible.builtin.uri:
+    url: "{{ platform.hub_url }}/api/galaxy/_ui/v1/settings/"
+    method: PUT
+    body_format: json
+    headers:
+      Authorization: "Token {{ aap_hub_token }}"
+    body:
+      GALAXY_COLLECTION_SIGNING_SERVICE: "{{ aap_hub_signing_service | default(omit) }}"
+      GALAXY_CONTAINER_SIGNING_SERVICE: "{{ aap_hub_container_signing_service | default(omit) }}"
+      GALAXY_AUTO_SIGN_COLLECTIONS: "{{ aap_hub_auto_sign | default(false) }}"
+      GALAXY_REQUIRE_CONTENT_APPROVAL: "{{ aap_hub_require_approval | default(true) }}"
+      GALAXY_ENABLE_UNAUTHENTICATED_COLLECTION_ACCESS: "{{ aap_hub_public_collections | default(false) }}"
+      GALAXY_ENABLE_UNAUTHENTICATED_COLLECTION_DOWNLOAD: "{{ aap_hub_public_download | default(false) }}"
+    validate_certs: "{{ aap_validate_certs | default(true) }}"
+    status_code: [200, 201]
+  when: aap_hub_token is defined
+
+- name: Create remote registries for collections
+  ansible.builtin.uri:
+    url: "{{ platform.hub_url }}/api/galaxy/content/community/v3/sync/config/"
+    method: PUT
+    body_format: json
+    headers:
+      Authorization: "Token {{ aap_hub_token }}"
+    body:
+      url: "{{ item.url }}"
+      auth_url: "{{ item.auth_url | default(omit) }}"
+      token: "{{ item.token | default(omit) }}"
+      requirements_file: "{{ item.requirements | default(omit) }}"
+    validate_certs: "{{ aap_validate_certs | default(true) }}"
+    status_code: [200, 201]
+  loop: "{{ aap_hub_remotes | default([]) }}"
+  when: aap_hub_token is defined
+  no_log: true
+
+- name: Create namespaces
+  ansible.builtin.uri:
+    url: "{{ platform.hub_url }}/api/galaxy/_ui/v1/namespaces/"
+    method: POST
+    body_format: json
+    headers:
+      Authorization: "Token {{ aap_hub_token }}"
+    body:
+      name: "{{ item.name }}"
+      description: "{{ item.description | default('') }}"
+      company: "{{ item.company | default('') }}"
+      groups: "{{ item.groups | default([]) }}"
+    validate_certs: "{{ aap_validate_certs | default(true) }}"
+    status_code: [200, 201, 409]
+  loop: "{{ aap_hub_namespaces | default([]) }}"
+  when: aap_hub_token is defined
+
+- name: Create container registries
+  ansible.builtin.uri:
+    url: "{{ platform.hub_url }}/api/galaxy/_ui/v1/execution-environments/registries/"
+    method: POST
+    body_format: json
+    headers:
+      Authorization: "Token {{ aap_hub_token }}"
+    body:
+      name: "{{ item.name }}"
+      url: "{{ item.url }}"
+      username: "{{ item.username | default(omit) }}"
+      password: "{{ item.password | default(omit) }}"
+    validate_certs: "{{ aap_validate_certs | default(true) }}"
+    status_code: [200, 201, 409]
+  loop: "{{ aap_hub_container_registries | default([]) }}"
+  when: aap_hub_token is defined
+  no_log: true

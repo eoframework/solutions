@@ -1,0 +1,78 @@
+---
+#==============================================================================
+# OCP Storage Role - Main Tasks
+#==============================================================================
+# Configures OpenShift Data Foundation and storage classes
+#==============================================================================
+
+- name: Create openshift-storage namespace
+  kubernetes.core.k8s:
+    state: present
+    definition:
+      apiVersion: v1
+      kind: Namespace
+      metadata:
+        name: openshift-storage
+        labels:
+          openshift.io/cluster-monitoring: "true"
+
+- name: Wait for ODF operator to be ready
+  kubernetes.core.k8s_info:
+    api_version: operators.coreos.com/v1alpha1
+    kind: ClusterServiceVersion
+    namespace: openshift-storage
+    label_selectors:
+      - operators.coreos.com/odf-operator.openshift-storage
+  register: odf_csv
+  until: >
+    odf_csv.resources | length > 0 and
+    odf_csv.resources[0].status.phase | default('') == 'Succeeded'
+  retries: 30
+  delay: 30
+
+- name: Create StorageCluster
+  kubernetes.core.k8s:
+    state: present
+    definition:
+      apiVersion: ocs.openshift.io/v1
+      kind: StorageCluster
+      metadata:
+        name: ocs-storagecluster
+        namespace: openshift-storage
+      spec:
+        manageNodes: false
+        resources:
+          mds:
+            limits:
+              cpu: "3"
+              memory: "8Gi"
+            requests:
+              cpu: "1"
+              memory: "8Gi"
+        storageDeviceSets:
+          - config: {}
+            count: 1
+            dataPVCTemplate:
+              spec:
+                accessModes:
+                  - ReadWriteOnce
+                resources:
+                  requests:
+                    storage: "{{ storage.odf_capacity_tb | default(2) }}Ti"
+                storageClassName: gp3-csi
+            name: ocs-deviceset
+            placement: {}
+            portable: true
+            replica: 3
+
+- name: Set default storage class
+  kubernetes.core.k8s:
+    state: present
+    definition:
+      apiVersion: storage.k8s.io/v1
+      kind: StorageClass
+      metadata:
+        name: "{{ storage.default_class | default('ocs-storagecluster-ceph-rbd') }}"
+        annotations:
+          storageclass.kubernetes.io/is-default-class: "true"
+  when: storage.default_class is defined

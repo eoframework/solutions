@@ -1,0 +1,11 @@
+---
+#==============================================================================
+# AAP Backup Defaults
+#==============================================================================
+
+aap_backup_dir: /var/lib/aap-backup
+aap_backup_schedule: daily
+
+# AWS credentials for S3 backup (should be vaulted)
+# aap_aws_access_key: "{{ vault_aws_access_key }}"
+# aap_aws_secret_key: "{{ vault_aws_secret_key }}"
