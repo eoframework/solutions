@@ -1,0 +1,60 @@
+---
+#------------------------------------------------------------------------------
+# NVIDIA GPU Compute Cluster - Phase 1: Foundation
+#------------------------------------------------------------------------------
+# Base OS configuration, NVIDIA driver installation, CUDA toolkit setup
+#------------------------------------------------------------------------------
+
+- name: Phase 1 - Foundation Setup
+  hosts: gpu_nodes:management
+  become: yes
+  gather_facts: yes
+
+  vars_files:
+    - "{{ playbook_dir }}/../vars/secrets.yml"
+
+  tasks:
+    - name: Display foundation setup info
+      ansible.builtin.debug:
+        msg: "Configuring foundation for {{ inventory_hostname }}"
+
+    #--------------------------------------------------------------------------
+    # Common Configuration
+    #--------------------------------------------------------------------------
+    - name: Configure common settings
+      ansible.builtin.include_role:
+        name: common
+      tags: [common]
+
+    #--------------------------------------------------------------------------
+    # NVIDIA Drivers
+    #--------------------------------------------------------------------------
+    - name: Install NVIDIA drivers
+      ansible.builtin.include_role:
+        name: nvidia-drivers
+      when: "'gpu_nodes' in group_names"
+      tags: [drivers]
+
+    #--------------------------------------------------------------------------
+    # CUDA Toolkit
+    #--------------------------------------------------------------------------
+    - name: Install CUDA toolkit
+      ansible.builtin.include_role:
+        name: cuda-toolkit
+      when: "'gpu_nodes' in group_names"
+      tags: [cuda]
+
+    #--------------------------------------------------------------------------
+    # NCCL Library
+    #--------------------------------------------------------------------------
+    - name: Install NCCL communication library
+      ansible.builtin.include_role:
+        name: nccl
+      when: "'gpu_nodes' in group_names"
+      tags: [nccl]
+
+  handlers:
+    - name: Reboot node
+      ansible.builtin.reboot:
+        reboot_timeout: 600
+        msg: "Rebooting for driver installation"

@@ -1,0 +1,84 @@
+---
+#------------------------------------------------------------------------------
+# NVIDIA GPU Compute Cluster - Master Playbook
+#------------------------------------------------------------------------------
+# This is the main orchestration playbook that imports all phase playbooks.
+#
+# Usage (multi-environment):
+#   Production:  ansible-playbook -i inventory/prod playbooks/site.yml
+#   Test:        ansible-playbook -i inventory/test playbooks/site.yml
+#   DR:          ansible-playbook -i inventory/dr playbooks/site.yml
+#   With vault:  ansible-playbook -i inventory/prod playbooks/site.yml --ask-vault-pass
+#   Limit:       ansible-playbook -i inventory/prod playbooks/site.yml --limit gpu_nodes
+#
+# Tags:
+#   foundation     - Phase 1: Base OS and driver setup
+#   network        - Phase 1: RoCE fabric configuration
+#   slurm          - Phase 2: Slurm workload manager setup
+#   containers     - Phase 2: NGC container configuration
+#   monitoring     - Phase 3: Prometheus/Grafana/DCGM setup
+#   validation     - Phase 3: System validation and benchmarks
+#------------------------------------------------------------------------------
+
+- name: GPU Compute Cluster - Full Deployment
+  hosts: localhost
+  gather_facts: no
+
+  vars_files:
+    - "{{ playbook_dir }}/../vars/secrets.yml"
+
+  pre_tasks:
+    - name: Display deployment information
+      ansible.builtin.debug:
+        msg: |
+          ============================================================
+          NVIDIA GPU Compute Cluster Deployment
+          ============================================================
+          Solution: {{ solution.name }}
+          Cluster: {{ cluster.name }}
+          GPU Nodes: {{ hardware.gpu_node_count }}
+          GPU Model: {{ hardware.gpu_model }}
+          GPUs per Node: {{ hardware.gpu_count_per_node }}
+          Total GPUs: {{ hardware.gpu_node_count | int * hardware.gpu_count_per_node | int }}
+          ============================================================
+
+    - name: Verify Ansible version
+      ansible.builtin.assert:
+        that:
+          - ansible_version.full is version('2.14', '>=')
+        fail_msg: "Ansible version 2.14 or higher is required"
+        success_msg: "Ansible version {{ ansible_version.full }} is compatible"
+      tags: [always]
+
+#=============================================================================
+# PHASE 1 - FOUNDATION
+#=============================================================================
+- name: Phase 1 - Foundation (OS, Drivers, Network)
+  ansible.builtin.import_playbook: 01-foundation.yml
+  tags: [foundation]
+
+- name: Phase 1 - RoCE Network Configuration
+  ansible.builtin.import_playbook: 02-network.yml
+  tags: [network]
+
+#=============================================================================
+# PHASE 2 - CORE SOLUTION
+#=============================================================================
+- name: Phase 2 - Slurm Workload Manager
+  ansible.builtin.import_playbook: 03-slurm.yml
+  tags: [slurm]
+
+- name: Phase 2 - NGC Containers
+  ansible.builtin.import_playbook: 04-containers.yml
+  tags: [containers]
+
+#=============================================================================
+# PHASE 3 - OPERATIONS
+#=============================================================================
+- name: Phase 3 - Monitoring and Observability
+  ansible.builtin.import_playbook: 05-monitoring.yml
+  tags: [monitoring]
+
+- name: Phase 3 - Validation
+  ansible.builtin.import_playbook: 06-validation.yml
+  tags: [validation]

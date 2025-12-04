@@ -1,0 +1,64 @@
+---
+#------------------------------------------------------------------------------
+# NVIDIA GPU Compute Cluster - Phase 1: RoCE Network Configuration
+#------------------------------------------------------------------------------
+# Configure RoCE v2 network for GPU-to-GPU communication
+#------------------------------------------------------------------------------
+
+- name: Phase 1 - RoCE Network Configuration
+  hosts: gpu_nodes
+  become: yes
+  gather_facts: yes
+
+  vars_files:
+    - "{{ playbook_dir }}/../vars/secrets.yml"
+
+  tasks:
+    - name: Display network configuration info
+      ansible.builtin.debug:
+        msg: "Configuring RoCE network for {{ inventory_hostname }}"
+
+    #--------------------------------------------------------------------------
+    # RoCE Network Setup
+    #--------------------------------------------------------------------------
+    - name: Configure RoCE network
+      ansible.builtin.include_role:
+        name: roce-network
+      tags: [roce, network]
+
+    #--------------------------------------------------------------------------
+    # Verify Network Configuration
+    #--------------------------------------------------------------------------
+    - name: Verify RoCE interfaces
+      ansible.builtin.command: ibv_devinfo
+      register: ibv_result
+      changed_when: false
+      failed_when: ibv_result.rc != 0
+      tags: [verify]
+
+    - name: Display RoCE device info
+      ansible.builtin.debug:
+        var: ibv_result.stdout_lines
+      tags: [verify]
+
+    #--------------------------------------------------------------------------
+    # Performance Tuning
+    #--------------------------------------------------------------------------
+    - name: Set MTU for RoCE interfaces
+      ansible.builtin.command: "ip link set {{ item }} mtu {{ network.mtu | default(9000) }}"
+      loop: "{{ roce_interfaces | default(['enp65s0f0', 'enp65s0f1']) }}"
+      changed_when: true
+      tags: [tuning]
+
+    - name: Enable flow control
+      ansible.builtin.command: "ethtool -A {{ item }} rx on tx on"
+      loop: "{{ roce_interfaces | default(['enp65s0f0', 'enp65s0f1']) }}"
+      changed_when: true
+      ignore_errors: yes
+      tags: [tuning]
+
+  handlers:
+    - name: Restart network
+      ansible.builtin.service:
+        name: NetworkManager
+        state: restarted

@@ -1,0 +1,179 @@
+---
+#------------------------------------------------------------------------------
+# Phase 2 - Slurm Workload Manager Configuration
+#------------------------------------------------------------------------------
+# Configures Slurm cluster:
+# - Slurm controller (slurmctld)
+# - Slurm compute nodes (slurmd)
+# - GPU GRES configuration
+# - Accounting database
+# - Fair-share scheduling
+#------------------------------------------------------------------------------
+
+#------------------------------------------------------------------------------
+# Slurm Controller Setup
+#------------------------------------------------------------------------------
+- name: Configure Slurm Controller
+  hosts: slurm_controllers
+  become: yes
+  gather_facts: yes
+
+  vars_files:
+    - "{{ playbook_dir }}/../vars/generated/project.yml"
+    - "{{ playbook_dir }}/../vars/generated/cluster.yml"
+    - "{{ playbook_dir }}/../vars/generated/hardware.yml"
+    - "{{ playbook_dir }}/../vars/generated/slurm.yml"
+    - "{{ playbook_dir }}/../vars/secrets.yml"
+
+  roles:
+    - role: slurm-controller
+      vars:
+        slurm_version: "{{ slurm.version }}"
+        slurm_cluster_name: "{{ cluster.name }}"
+        slurm_accounting_db: "{{ slurm.accounting_db }}"
+        slurm_fairshare_enabled: "{{ slurm.fairshare_enabled }}"
+      tags: [slurm-controller]
+
+  tasks:
+    #--------------------------------------------------------------------------
+    # Slurm Configuration File
+    #--------------------------------------------------------------------------
+    - name: Generate slurm.conf
+      ansible.builtin.template:
+        src: templates/slurm.conf.j2
+        dest: /etc/slurm/slurm.conf
+        owner: slurm
+        group: slurm
+        mode: '0644'
+      notify: restart slurmctld
+      tags: [config]
+
+    #--------------------------------------------------------------------------
+    # GPU GRES Configuration
+    #--------------------------------------------------------------------------
+    - name: Generate gres.conf for GPU scheduling
+      ansible.builtin.template:
+        src: templates/gres.conf.j2
+        dest: /etc/slurm/gres.conf
+        owner: slurm
+        group: slurm
+        mode: '0644'
+      notify: restart slurmctld
+      tags: [gres]
+
+    #--------------------------------------------------------------------------
+    # Slurm Accounting Setup
+    #--------------------------------------------------------------------------
+    - name: Ensure slurmdbd is configured
+      ansible.builtin.template:
+        src: templates/slurmdbd.conf.j2
+        dest: /etc/slurm/slurmdbd.conf
+        owner: slurm
+        group: slurm
+        mode: '0600'
+      notify: restart slurmdbd
+      tags: [accounting]
+
+    - name: Start slurmdbd service
+      ansible.builtin.systemd:
+        name: slurmdbd
+        state: started
+        enabled: yes
+      tags: [accounting]
+
+    - name: Start slurmctld service
+      ansible.builtin.systemd:
+        name: slurmctld
+        state: started
+        enabled: yes
+      tags: [service]
+
+  handlers:
+    - name: restart slurmctld
+      ansible.builtin.systemd:
+        name: slurmctld
+        state: restarted
+
+    - name: restart slurmdbd
+      ansible.builtin.systemd:
+        name: slurmdbd
+        state: restarted
+
+#------------------------------------------------------------------------------
+# Slurm Compute Node Setup
+#------------------------------------------------------------------------------
+- name: Configure Slurm Compute Nodes
+  hosts: dgx_nodes
+  become: yes
+  gather_facts: yes
+
+  vars_files:
+    - "{{ playbook_dir }}/../vars/generated/project.yml"
+    - "{{ playbook_dir }}/../vars/generated/cluster.yml"
+    - "{{ playbook_dir }}/../vars/generated/hardware.yml"
+    - "{{ playbook_dir }}/../vars/generated/slurm.yml"
+    - "{{ playbook_dir }}/../vars/secrets.yml"
+
+  roles:
+    - role: slurm-compute
+      vars:
+        slurm_controller: "{{ slurm.controller_ip }}"
+        slurm_controller_backup: "{{ slurm.controller_backup_ip }}"
+        gpu_per_node: "{{ hardware.gpu_count_per_node }}"
+        slurm_gres: "{{ slurm.gres_config }}"
+      tags: [slurm-compute]
+
+  tasks:
+    #--------------------------------------------------------------------------
+    # Copy Slurm Configuration
+    #--------------------------------------------------------------------------
+    - name: Synchronize slurm.conf from controller
+      ansible.builtin.copy:
+        src: /etc/slurm/slurm.conf
+        dest: /etc/slurm/slurm.conf
+        owner: slurm
+        group: slurm
+        mode: '0644'
+      delegate_to: "{{ groups['slurm_controllers'][0] }}"
+      notify: restart slurmd
+      tags: [config]
+
+    #--------------------------------------------------------------------------
+    # Local GPU Configuration
+    #--------------------------------------------------------------------------
+    - name: Generate local gres.conf
+      ansible.builtin.template:
+        src: templates/gres-compute.conf.j2
+        dest: /etc/slurm/gres.conf
+        owner: slurm
+        group: slurm
+        mode: '0644'
+      notify: restart slurmd
+      tags: [gres]
+
+    - name: Start slurmd service
+      ansible.builtin.systemd:
+        name: slurmd
+        state: started
+        enabled: yes
+      tags: [service]
+
+  handlers:
+    - name: restart slurmd
+      ansible.builtin.systemd:
+        name: slurmd
+        state: restarted
+
+  post_tasks:
+    - name: Verify node is registered with Slurm
+      ansible.builtin.shell: sinfo -N -n {{ inventory_hostname }} -o "%N %T %G"
+      register: slurm_node_status
+      changed_when: false
+      ignore_errors: yes
+      delegate_to: "{{ groups['slurm_controllers'][0] }}"
+      tags: [verify]
+
+    - name: Display Slurm node status
+      ansible.builtin.debug:
+        msg: "{{ slurm_node_status.stdout | default('Node not yet registered') }}"
+      tags: [verify]

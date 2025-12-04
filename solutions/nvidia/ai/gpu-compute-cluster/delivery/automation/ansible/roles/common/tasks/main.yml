@@ -1,0 +1,63 @@
+---
+#------------------------------------------------------------------------------
+# Common Role - Base OS Configuration
+#------------------------------------------------------------------------------
+
+- name: Update apt cache
+  ansible.builtin.apt:
+    update_cache: yes
+    cache_valid_time: 3600
+  when: ansible_os_family == "Debian"
+
+- name: Install common packages
+  ansible.builtin.apt:
+    name:
+      - vim
+      - htop
+      - iotop
+      - net-tools
+      - curl
+      - wget
+      - git
+      - build-essential
+      - linux-headers-{{ ansible_kernel }}
+      - dkms
+      - python3-pip
+      - nfs-common
+      - chrony
+    state: present
+  when: ansible_os_family == "Debian"
+
+- name: Configure timezone
+  ansible.builtin.timezone:
+    name: "{{ cluster.timezone | default('UTC') }}"
+
+- name: Configure NTP with chrony
+  ansible.builtin.template:
+    src: chrony.conf.j2
+    dest: /etc/chrony/chrony.conf
+    mode: '0644'
+  notify: Restart chrony
+
+- name: Set hostname
+  ansible.builtin.hostname:
+    name: "{{ inventory_hostname }}"
+
+- name: Configure /etc/hosts
+  ansible.builtin.lineinfile:
+    path: /etc/hosts
+    line: "{{ ansible_host }} {{ inventory_hostname }} {{ inventory_hostname }}.{{ cluster.domain }}"
+    state: present
+
+- name: Configure sysctl for performance
+  ansible.posix.sysctl:
+    name: "{{ item.name }}"
+    value: "{{ item.value }}"
+    state: present
+    reload: yes
+  loop:
+    - { name: 'net.core.rmem_max', value: '134217728' }
+    - { name: 'net.core.wmem_max', value: '134217728' }
+    - { name: 'net.ipv4.tcp_rmem', value: '4096 87380 134217728' }
+    - { name: 'net.ipv4.tcp_wmem', value: '4096 65536 134217728' }
+    - { name: 'vm.swappiness', value: '1' }

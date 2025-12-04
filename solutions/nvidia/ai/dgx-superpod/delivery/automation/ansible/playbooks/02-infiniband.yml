@@ -1,0 +1,117 @@
+---
+#------------------------------------------------------------------------------
+# Phase 1 - InfiniBand Fabric Configuration
+#------------------------------------------------------------------------------
+# Configures InfiniBand networking:
+# - Mellanox OFED drivers
+# - InfiniBand interface configuration
+# - Subnet Manager integration
+# - Performance tuning
+#------------------------------------------------------------------------------
+
+- name: Configure InfiniBand on DGX Nodes
+  hosts: dgx_nodes
+  become: yes
+  gather_facts: yes
+
+  vars_files:
+    - "{{ playbook_dir }}/../vars/generated/project.yml"
+    - "{{ playbook_dir }}/../vars/generated/infiniband.yml"
+    - "{{ playbook_dir }}/../vars/generated/software.yml"
+    - "{{ playbook_dir }}/../vars/secrets.yml"
+
+  roles:
+    #--------------------------------------------------------------------------
+    # Mellanox OFED Installation
+    #--------------------------------------------------------------------------
+    - role: infiniband
+      vars:
+        mlnx_ofed_version: "{{ software.mlnx_ofed_version }}"
+        ib_speed: "{{ infiniband.speed_gbps }}"
+        ib_ports: "{{ infiniband.ports_per_node }}"
+      tags: [mlnx-ofed]
+
+  tasks:
+    #--------------------------------------------------------------------------
+    # Verify InfiniBand Hardware
+    #--------------------------------------------------------------------------
+    - name: Check InfiniBand adapters
+      ansible.builtin.shell: ibstat -l
+      register: ib_adapters
+      changed_when: false
+      tags: [verify]
+
+    - name: Display InfiniBand adapters
+      ansible.builtin.debug:
+        msg: "{{ ib_adapters.stdout_lines }}"
+      tags: [verify]
+
+    #--------------------------------------------------------------------------
+    # Configure InfiniBand Interfaces
+    #--------------------------------------------------------------------------
+    - name: Get InfiniBand port status
+      ansible.builtin.shell: ibstat | grep -E "(CA|Port|State|Rate)"
+      register: ib_status
+      changed_when: false
+      tags: [verify]
+
+    - name: Display InfiniBand port status
+      ansible.builtin.debug:
+        msg: "{{ ib_status.stdout_lines }}"
+      tags: [verify]
+
+    #--------------------------------------------------------------------------
+    # Performance Tuning
+    #--------------------------------------------------------------------------
+    - name: Configure IPoIB MTU for optimal performance
+      ansible.builtin.lineinfile:
+        path: /etc/sysctl.conf
+        regexp: "^net.ipv4.tcp_mtu_probing"
+        line: "net.ipv4.tcp_mtu_probing = 1"
+        state: present
+      notify: reload sysctl
+      tags: [tuning]
+
+    - name: Set IPoIB mode to connected for better performance
+      ansible.builtin.shell: |
+        for iface in $(ls /sys/class/net/ | grep ib); do
+          echo connected > /sys/class/net/${iface}/mode 2>/dev/null || true
+        done
+      changed_when: false
+      tags: [tuning]
+
+    #--------------------------------------------------------------------------
+    # NCCL IB Configuration
+    #--------------------------------------------------------------------------
+    - name: Configure NCCL for InfiniBand
+      ansible.builtin.blockinfile:
+        path: /etc/profile.d/nccl-ib.sh
+        create: yes
+        mode: '0644'
+        block: |
+          # NCCL InfiniBand Configuration
+          export NCCL_IB_DISABLE=0
+          export NCCL_IB_HCA=mlx5
+          export NCCL_IB_GID_INDEX=3
+          export NCCL_NET_GDR_LEVEL=5
+          export NCCL_P2P_LEVEL=NVL
+      tags: [nccl]
+
+  handlers:
+    - name: reload sysctl
+      ansible.builtin.command: sysctl -p
+      listen: reload sysctl
+
+  post_tasks:
+    - name: Run IB diagnostic
+      ansible.builtin.shell: ibdiagnet --ls 2>/dev/null | head -20
+      register: ib_diag
+      changed_when: false
+      ignore_errors: yes
+      tags: [verify]
+
+    - name: Display IB diagnostic summary
+      ansible.builtin.debug:
+        msg: "{{ ib_diag.stdout_lines | default(['IB diagnostics not available']) }}"
+      when: ib_diag.rc == 0
+      tags: [verify]

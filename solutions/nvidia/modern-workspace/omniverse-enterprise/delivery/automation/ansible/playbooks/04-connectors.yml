@@ -1,0 +1,142 @@
+---
+#------------------------------------------------------------------------------
+# NVIDIA Omniverse Enterprise - Phase 4: Application Connectors
+#------------------------------------------------------------------------------
+# Installs Omniverse connectors for design applications.
+#
+# Supported Applications:
+#   - Autodesk Revit, Maya, 3ds Max
+#   - Dassault SolidWorks
+#   - McNeel Rhino
+#   - Blender
+#------------------------------------------------------------------------------
+
+- name: Phase 4 - Application Connectors
+  hosts: workstations
+  gather_facts: yes
+
+  vars_files:
+    - "{{ playbook_dir }}/../vars/generated/project.yml"
+    - "{{ playbook_dir }}/../vars/generated/connectors.yml"
+    - "{{ playbook_dir }}/../vars/secrets.yml"
+
+  tasks:
+    #--------------------------------------------------------------------------
+    # Autodesk Revit Connector
+    #--------------------------------------------------------------------------
+    - name: Check if Revit is installed
+      ansible.windows.win_reg_stat:
+        path: HKLM:\SOFTWARE\Autodesk\Revit\{{ connectors.revit_version }}
+      register: revit_installed
+      when: connectors.revit_enabled | bool
+
+    - name: Install Revit Connector
+      ansible.windows.win_shell: |
+        & "C:\Users\{{ ansible_user }}\AppData\Local\Programs\omniverse-launcher\omniverse-launcher.exe" --install omniverse-revit-connector --version {{ connectors.revit_version }}
+      when:
+        - connectors.revit_enabled | bool
+        - revit_installed.exists | default(false)
+      async: 600
+      poll: 15
+
+    #--------------------------------------------------------------------------
+    # Autodesk Maya Connector
+    #--------------------------------------------------------------------------
+    - name: Check if Maya is installed
+      ansible.windows.win_reg_stat:
+        path: HKLM:\SOFTWARE\Autodesk\Maya\{{ connectors.maya_version }}
+      register: maya_installed
+      when: connectors.maya_enabled | bool
+
+    - name: Install Maya Connector
+      ansible.windows.win_shell: |
+        & "C:\Users\{{ ansible_user }}\AppData\Local\Programs\omniverse-launcher\omniverse-launcher.exe" --install omniverse-maya-connector --version {{ connectors.maya_version }}
+      when:
+        - connectors.maya_enabled | bool
+        - maya_installed.exists | default(false)
+      async: 600
+      poll: 15
+
+    #--------------------------------------------------------------------------
+    # Autodesk 3ds Max Connector
+    #--------------------------------------------------------------------------
+    - name: Check if 3ds Max is installed
+      ansible.windows.win_reg_stat:
+        path: HKLM:\SOFTWARE\Autodesk\3dsMax\{{ connectors.max_version }}
+      register: max_installed
+      when: connectors.max_enabled | bool
+
+    - name: Install 3ds Max Connector
+      ansible.windows.win_shell: |
+        & "C:\Users\{{ ansible_user }}\AppData\Local\Programs\omniverse-launcher\omniverse-launcher.exe" --install omniverse-3dsmax-connector --version {{ connectors.max_version }}
+      when:
+        - connectors.max_enabled | bool
+        - max_installed.exists | default(false)
+      async: 600
+      poll: 15
+
+    #--------------------------------------------------------------------------
+    # SolidWorks Connector
+    #--------------------------------------------------------------------------
+    - name: Check if SolidWorks is installed
+      ansible.windows.win_reg_stat:
+        path: HKLM:\SOFTWARE\SolidWorks\SOLIDWORKS {{ connectors.solidworks_version }}
+      register: solidworks_installed
+      when: connectors.solidworks_enabled | bool
+
+    - name: Install SolidWorks Connector
+      ansible.windows.win_shell: |
+        & "C:\Users\{{ ansible_user }}\AppData\Local\Programs\omniverse-launcher\omniverse-launcher.exe" --install omniverse-solidworks-connector --version {{ connectors.solidworks_version }}
+      when:
+        - connectors.solidworks_enabled | bool
+        - solidworks_installed.exists | default(false)
+      async: 600
+      poll: 15
+
+    #--------------------------------------------------------------------------
+    # Rhino Connector
+    #--------------------------------------------------------------------------
+    - name: Check if Rhino is installed
+      ansible.windows.win_reg_stat:
+        path: HKLM:\SOFTWARE\McNeel\Rhinoceros\{{ connectors.rhino_version | regex_replace('\.0$', '') }}.0
+      register: rhino_installed
+      when: connectors.rhino_enabled | bool
+
+    - name: Install Rhino Connector
+      ansible.windows.win_shell: |
+        & "C:\Users\{{ ansible_user }}\AppData\Local\Programs\omniverse-launcher\omniverse-launcher.exe" --install omniverse-rhino-connector --version {{ connectors.rhino_version }}
+      when:
+        - connectors.rhino_enabled | bool
+        - rhino_installed.exists | default(false)
+      async: 600
+      poll: 15
+
+    #--------------------------------------------------------------------------
+    # Blender Connector (USD Add-on)
+    #--------------------------------------------------------------------------
+    - name: Check if Blender is installed
+      ansible.windows.win_stat:
+        path: "C:\\Program Files\\Blender Foundation\\Blender {{ connectors.blender_version }}"
+      register: blender_installed
+      when: connectors.blender_enabled | bool
+
+    - name: Install Blender USD Connector
+      ansible.windows.win_shell: |
+        & "C:\Users\{{ ansible_user }}\AppData\Local\Programs\omniverse-launcher\omniverse-launcher.exe" --install omniverse-blender-connector --version {{ connectors.blender_version }}
+      when:
+        - connectors.blender_enabled | bool
+        - blender_installed.stat.exists | default(false)
+      async: 600
+      poll: 15
+
+    #--------------------------------------------------------------------------
+    # Connector Verification
+    #--------------------------------------------------------------------------
+    - name: Verify installed connectors
+      ansible.windows.win_shell: |
+        Get-ChildItem "C:\Users\{{ ansible_user }}\AppData\Local\ov\pkg" -Directory | Select-Object Name
+      register: installed_connectors
+
+    - name: Display installed connectors
+      ansible.builtin.debug:
+        msg: "Installed Omniverse packages: {{ installed_connectors.stdout_lines }}"

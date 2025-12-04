@@ -1,0 +1,195 @@
+---
+#------------------------------------------------------------------------------
+# NVIDIA Omniverse Enterprise - Phase 2: Nucleus Server
+#------------------------------------------------------------------------------
+# Deploys and configures Nucleus collaboration server.
+#
+# Components:
+#   - Nucleus Server (Docker container)
+#   - LDAP/AD integration
+#   - High Availability configuration
+#------------------------------------------------------------------------------
+
+- name: Phase 2 - Nucleus Server Deployment
+  hosts: nucleus_servers
+  gather_facts: yes
+  become: yes
+
+  vars_files:
+    - "{{ playbook_dir }}/../vars/generated/project.yml"
+    - "{{ playbook_dir }}/../vars/generated/nucleus_server.yml"
+    - "{{ playbook_dir }}/../vars/generated/storage.yml"
+    - "{{ playbook_dir }}/../vars/generated/auth.yml"
+    - "{{ playbook_dir }}/../vars/generated/security.yml"
+    - "{{ playbook_dir }}/../vars/secrets.yml"
+
+  tasks:
+    #--------------------------------------------------------------------------
+    # Docker Installation
+    #--------------------------------------------------------------------------
+    - name: Install Docker prerequisites
+      ansible.builtin.apt:
+        name:
+          - apt-transport-https
+          - ca-certificates
+          - curl
+          - gnupg
+          - lsb-release
+        state: present
+      when: ansible_os_family == 'Debian'
+
+    - name: Add Docker GPG key
+      ansible.builtin.apt_key:
+        url: https://download.docker.com/linux/ubuntu/gpg
+        state: present
+      when: ansible_os_family == 'Debian'
+
+    - name: Add Docker repository
+      ansible.builtin.apt_repository:
+        repo: "deb [arch=amd64] https://download.docker.com/linux/ubuntu {{ ansible_distribution_release }} stable"
+        state: present
+      when: ansible_os_family == 'Debian'
+
+    - name: Install Docker Engine
+      ansible.builtin.apt:
+        name:
+          - docker-ce
+          - docker-ce-cli
+          - containerd.io
+          - docker-compose-plugin
+        state: present
+        update_cache: yes
+      when: ansible_os_family == 'Debian'
+
+    - name: Start and enable Docker service
+      ansible.builtin.systemd:
+        name: docker
+        state: started
+        enabled: yes
+
+    #--------------------------------------------------------------------------
+    # Nucleus User Setup
+    #--------------------------------------------------------------------------
+    - name: Create omniverse user
+      ansible.builtin.user:
+        name: omniverse
+        groups: docker
+        shell: /bin/bash
+        create_home: yes
+
+    - name: Create Nucleus directories
+      ansible.builtin.file:
+        path: "{{ item }}"
+        state: directory
+        owner: omniverse
+        group: omniverse
+        mode: '0755'
+      loop:
+        - /opt/omniverse
+        - /opt/omniverse/nucleus
+        - /opt/omniverse/nucleus/config
+        - /opt/omniverse/nucleus/logs
+
+    #--------------------------------------------------------------------------
+    # Nucleus Configuration
+    #--------------------------------------------------------------------------
+    - name: Deploy Nucleus configuration
+      ansible.builtin.template:
+        src: "{{ playbook_dir }}/../templates/nucleus-config.json.j2"
+        dest: /opt/omniverse/nucleus/config/nucleus.json
+        owner: omniverse
+        group: omniverse
+        mode: '0600'
+      notify: Restart Nucleus
+
+    - name: Deploy LDAP configuration
+      ansible.builtin.template:
+        src: "{{ playbook_dir }}/../templates/ldap-config.json.j2"
+        dest: /opt/omniverse/nucleus/config/ldap.json
+        owner: omniverse
+        group: omniverse
+        mode: '0600'
+      notify: Restart Nucleus
+
+    #--------------------------------------------------------------------------
+    # Nucleus Container Deployment
+    #--------------------------------------------------------------------------
+    - name: Deploy Nucleus docker-compose
+      ansible.builtin.template:
+        src: "{{ playbook_dir }}/../templates/docker-compose.yml.j2"
+        dest: /opt/omniverse/nucleus/docker-compose.yml
+        owner: omniverse
+        group: omniverse
+        mode: '0644'
+
+    - name: Pull Nucleus container image
+      community.docker.docker_image:
+        name: "nvcr.io/nvidia/omniverse/nucleus:{{ solution.version }}"
+        source: pull
+      register: nucleus_image
+
+    - name: Start Nucleus container
+      community.docker.docker_compose_v2:
+        project_src: /opt/omniverse/nucleus
+        state: present
+      become_user: omniverse
+
+    #--------------------------------------------------------------------------
+    # HA Configuration (Primary/Replica)
+    #--------------------------------------------------------------------------
+    - name: Configure HA heartbeat (primary)
+      ansible.builtin.template:
+        src: "{{ playbook_dir }}/../templates/ha-config.json.j2"
+        dest: /opt/omniverse/nucleus/config/ha.json
+        owner: omniverse
+        group: omniverse
+        mode: '0600'
+      when:
+        - nucleus.ha_enabled | bool
+        - nucleus_role == 'primary'
+      notify: Restart Nucleus
+
+    - name: Configure HA heartbeat (replica)
+      ansible.builtin.template:
+        src: "{{ playbook_dir }}/../templates/ha-replica-config.json.j2"
+        dest: /opt/omniverse/nucleus/config/ha.json
+        owner: omniverse
+        group: omniverse
+        mode: '0600'
+      when:
+        - nucleus.ha_enabled | bool
+        - nucleus_role == 'replica'
+      notify: Restart Nucleus
+
+    #--------------------------------------------------------------------------
+    # Admin User Setup
+    #--------------------------------------------------------------------------
+    - name: Wait for Nucleus to be ready
+      ansible.builtin.uri:
+        url: "https://localhost:{{ nucleus.port }}/health"
+        validate_certs: no
+      register: nucleus_health
+      until: nucleus_health.status == 200
+      retries: 30
+      delay: 10
+      when: nucleus_role == 'primary'
+
+    - name: Set admin password
+      ansible.builtin.uri:
+        url: "https://localhost:{{ nucleus.port }}/api/admin/setup"
+        method: POST
+        body_format: json
+        body:
+          admin_user: "{{ nucleus.admin_user }}"
+          admin_password: "{{ vault_nucleus_admin_password }}"
+        validate_certs: no
+        status_code: [200, 409]
+      when: nucleus_role == 'primary'
+      no_log: yes
+
+  handlers:
+    - name: Restart Nucleus
+      community.docker.docker_compose_v2:
+        project_src: /opt/omniverse/nucleus
+        state: restarted
+      become_user: omniverse

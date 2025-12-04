@@ -1,0 +1,134 @@
+---
+#------------------------------------------------------------------------------
+# NVIDIA Omniverse Enterprise - Phase 1: Foundation
+#------------------------------------------------------------------------------
+# Prepares storage infrastructure and network configuration.
+#
+# Targets:
+#   - NFS storage mounts
+#   - Network configuration (VLAN, QoS)
+#   - SSL/TLS certificates
+#------------------------------------------------------------------------------
+
+- name: Phase 1 - Foundation and Storage Setup
+  hosts: nucleus_servers
+  gather_facts: yes
+  become: yes
+
+  vars_files:
+    - "{{ playbook_dir }}/../vars/generated/project.yml"
+    - "{{ playbook_dir }}/../vars/generated/storage.yml"
+    - "{{ playbook_dir }}/../vars/generated/network.yml"
+    - "{{ playbook_dir }}/../vars/generated/security.yml"
+    - "{{ playbook_dir }}/../vars/secrets.yml"
+
+  tasks:
+    #--------------------------------------------------------------------------
+    # OS Prerequisites
+    #--------------------------------------------------------------------------
+    - name: Update package cache
+      ansible.builtin.apt:
+        update_cache: yes
+        cache_valid_time: 3600
+      when: ansible_os_family == 'Debian'
+
+    - name: Install required packages
+      ansible.builtin.package:
+        name:
+          - nfs-common
+          - curl
+          - wget
+          - jq
+          - htop
+          - net-tools
+          - dnsutils
+        state: present
+
+    #--------------------------------------------------------------------------
+    # Network Configuration
+    #--------------------------------------------------------------------------
+    - name: Configure MTU for jumbo frames
+      ansible.builtin.lineinfile:
+        path: /etc/netplan/01-netcfg.yaml
+        regexp: 'mtu:'
+        line: "      mtu: {{ network.mtu }}"
+        backup: yes
+      notify: Apply netplan
+      when: network.mtu | int > 1500
+
+    - name: Configure DNS resolver
+      ansible.builtin.template:
+        src: "{{ playbook_dir }}/../templates/resolv.conf.j2"
+        dest: /etc/resolv.conf
+        mode: '0644'
+        backup: yes
+
+    #--------------------------------------------------------------------------
+    # Storage Mount
+    #--------------------------------------------------------------------------
+    - name: Create Omniverse data directory
+      ansible.builtin.file:
+        path: "{{ storage.primary_path }}"
+        state: directory
+        owner: root
+        group: root
+        mode: '0755'
+
+    - name: Mount NFS storage
+      ansible.posix.mount:
+        src: "{{ storage.nfs_server | default('netapp.client.local') }}:/omniverse"
+        path: "{{ storage.primary_path }}"
+        fstype: nfs
+        opts: "rw,hard,intr,rsize=1048576,wsize=1048576,timeo=600"
+        state: mounted
+      when: storage.nfs_server is defined
+
+    - name: Create Nucleus data directories
+      ansible.builtin.file:
+        path: "{{ item }}"
+        state: directory
+        owner: omniverse
+        group: omniverse
+        mode: '0755'
+      loop:
+        - "{{ storage.primary_path }}/nucleus"
+        - "{{ storage.primary_path }}/checkpoints"
+        - "{{ storage.primary_path }}/logs"
+        - "{{ storage.primary_path }}/backups"
+
+    #--------------------------------------------------------------------------
+    # SSL/TLS Certificates
+    #--------------------------------------------------------------------------
+    - name: Create SSL directory
+      ansible.builtin.file:
+        path: /etc/omniverse/ssl
+        state: directory
+        owner: root
+        group: root
+        mode: '0700'
+
+    - name: Generate self-signed SSL certificate (if not using enterprise CA)
+      community.crypto.x509_certificate:
+        path: /etc/omniverse/ssl/nucleus.crt
+        privatekey_path: /etc/omniverse/ssl/nucleus.key
+        provider: selfsigned
+        selfsigned_not_after: "+365d"
+      when: ssl_cert_path is not defined
+
+    #--------------------------------------------------------------------------
+    # Firewall Rules
+    #--------------------------------------------------------------------------
+    - name: Allow Nucleus ports through firewall
+      community.general.ufw:
+        rule: allow
+        port: "{{ item }}"
+        proto: tcp
+      loop:
+        - "{{ nucleus.port }}"
+        - "{{ nucleus.websocket_port }}"
+        - "{{ nucleus.discovery_port }}"
+      when: ansible_os_family == 'Debian'
+
+  handlers:
+    - name: Apply netplan
+      ansible.builtin.command: netplan apply

@@ -1,0 +1,78 @@
+---
+#------------------------------------------------------------------------------
+# NVIDIA GPU Compute Cluster - Phase 2: NGC Containers
+#------------------------------------------------------------------------------
+# Configure NVIDIA Container Toolkit and pull NGC containers
+#------------------------------------------------------------------------------
+
+- name: Phase 2 - Container Configuration
+  hosts: gpu_nodes
+  become: yes
+  gather_facts: yes
+
+  vars_files:
+    - "{{ playbook_dir }}/../vars/secrets.yml"
+
+  tasks:
+    - name: Display container setup info
+      ansible.builtin.debug:
+        msg: "Configuring containers on {{ inventory_hostname }}"
+
+    #--------------------------------------------------------------------------
+    # NVIDIA Container Toolkit
+    #--------------------------------------------------------------------------
+    - name: Install NVIDIA Container Toolkit
+      ansible.builtin.include_role:
+        name: nvidia-docker
+      tags: [nvidia-docker, containers]
+
+    #--------------------------------------------------------------------------
+    # Verify Container Runtime
+    #--------------------------------------------------------------------------
+    - name: Verify NVIDIA container runtime
+      ansible.builtin.command: docker run --rm --gpus all nvidia/cuda:12.4.0-base-ubuntu22.04 nvidia-smi
+      register: container_test
+      changed_when: false
+      tags: [verify]
+
+    - name: Display GPU info from container
+      ansible.builtin.debug:
+        var: container_test.stdout_lines
+      tags: [verify]
+
+    #--------------------------------------------------------------------------
+    # Pull NGC Containers
+    #--------------------------------------------------------------------------
+    - name: Pull PyTorch NGC container
+      community.docker.docker_image:
+        name: "{{ containers.ngc_registry }}/nvidia/pytorch:{{ containers.pytorch_tag }}"
+        source: pull
+      when: containers.pytorch_tag is defined
+      tags: [pull-images]
+
+    - name: Pull TensorFlow NGC container
+      community.docker.docker_image:
+        name: "{{ containers.ngc_registry }}/nvidia/tensorflow:{{ containers.tensorflow_tag }}"
+        source: pull
+      when: containers.tensorflow_tag is defined
+      tags: [pull-images]
+
+    - name: Pull RAPIDS NGC container
+      community.docker.docker_image:
+        name: "{{ containers.ngc_registry }}/nvidia/rapidsai/base:{{ containers.rapids_tag }}"
+        source: pull
+      when: containers.rapids_tag is defined
+      tags: [pull-images]
+
+    - name: Pull Triton Inference Server
+      community.docker.docker_image:
+        name: "{{ containers.ngc_registry }}/nvidia/tritonserver:{{ containers.triton_tag }}"
+        source: pull
+      when: containers.triton_tag is defined
+      tags: [pull-images]
+
+  handlers:
+    - name: Restart docker
+      ansible.builtin.service:
+        name: docker
+        state: restarted

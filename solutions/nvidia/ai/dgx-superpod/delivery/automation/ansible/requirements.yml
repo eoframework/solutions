@@ -1,0 +1,39 @@
+---
+#------------------------------------------------------------------------------
+# Ansible Requirements for DGX SuperPOD Deployment
+#------------------------------------------------------------------------------
+# Install with: ansible-galaxy install -r requirements.yml
+#------------------------------------------------------------------------------
+
+collections:
+  # General purpose collection for various modules
+  - name: community.general
+    version: ">=8.0.0"
+
+  # POSIX operations (authorized_key, mount, etc.)
+  - name: ansible.posix
+    version: ">=1.5.0"
+
+  # Crypto operations for certificate management
+  - name: community.crypto
+    version: ">=2.0.0"
+
+  # Docker container management (for NGC containers)
+  - name: community.docker
+    version: ">=3.0.0"
+
+  # MySQL/MariaDB for Slurm accounting database
+  - name: community.mysql
+    version: ">=3.0.0"
+
+roles:
+  # NVIDIA-specific roles (if available from Galaxy)
+  # Note: Most NVIDIA configuration is custom in local roles
+
+  # Prometheus monitoring
+  - name: prometheus.prometheus.prometheus
+    version: ">=0.5.0"
+
+  # Grafana dashboards
+  - name: grafana.grafana.grafana
+    version: ">=3.0.0"

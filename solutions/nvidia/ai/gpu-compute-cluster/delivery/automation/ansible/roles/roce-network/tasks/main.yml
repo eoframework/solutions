@@ -1,0 +1,56 @@
+---
+#------------------------------------------------------------------------------
+# RoCE Network Role - RDMA over Converged Ethernet Configuration
+#------------------------------------------------------------------------------
+
+- name: Install RoCE packages
+  ansible.builtin.apt:
+    name:
+      - rdma-core
+      - ibverbs-utils
+      - perftest
+      - infiniband-diags
+    state: present
+
+- name: Load RoCE kernel modules
+  community.general.modprobe:
+    name: "{{ item }}"
+    state: present
+  loop:
+    - rdma_cm
+    - rdma_ucm
+    - ib_uverbs
+    - mlx5_core
+    - mlx5_ib
+
+- name: Configure modules to load at boot
+  ansible.builtin.lineinfile:
+    path: /etc/modules-load.d/roce.conf
+    line: "{{ item }}"
+    create: yes
+    mode: '0644'
+  loop:
+    - rdma_cm
+    - rdma_ucm
+    - ib_uverbs
+    - mlx5_core
+    - mlx5_ib
+
+- name: Configure RoCE sysctl settings
+  ansible.posix.sysctl:
+    name: "{{ item.name }}"
+    value: "{{ item.value }}"
+    state: present
+    reload: yes
+  loop:
+    - { name: 'net.core.netdev_max_backlog', value: '250000' }
+    - { name: 'net.core.optmem_max', value: '4194304' }
+
+- name: Verify RoCE interfaces
+  ansible.builtin.command: ibv_devinfo
+  register: ibv_info
+  changed_when: false
+
+- name: Display RoCE device info
+  ansible.builtin.debug:
+    var: ibv_info.stdout_lines

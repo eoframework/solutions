@@ -1,0 +1,152 @@
+---
+#------------------------------------------------------------------------------
+# NVIDIA GPU Compute Cluster - Phase 3: Monitoring
+#------------------------------------------------------------------------------
+# Configure Prometheus, Grafana, and DCGM for GPU monitoring
+#------------------------------------------------------------------------------
+
+- name: Phase 3 - Monitoring Server Setup
+  hosts: monitoring
+  become: yes
+  gather_facts: yes
+
+  vars_files:
+    - "{{ playbook_dir }}/../vars/secrets.yml"
+
+  tasks:
+    - name: Display monitoring server setup info
+      ansible.builtin.debug:
+        msg: "Configuring monitoring server on {{ inventory_hostname }}"
+
+    #--------------------------------------------------------------------------
+    # Prometheus Server
+    #--------------------------------------------------------------------------
+    - name: Install Prometheus server
+      when: "'prometheus-server' in inventory_hostname"
+      block:
+        - name: Create Prometheus user
+          ansible.builtin.user:
+            name: prometheus
+            system: yes
+            shell: /sbin/nologin
+
+        - name: Create Prometheus directories
+          ansible.builtin.file:
+            path: "{{ item }}"
+            state: directory
+            owner: prometheus
+            group: prometheus
+            mode: '0755'
+          loop:
+            - /etc/prometheus
+            - /var/lib/prometheus
+
+        - name: Download Prometheus
+          ansible.builtin.get_url:
+            url: "https://github.com/prometheus/prometheus/releases/download/v2.47.0/prometheus-2.47.0.linux-amd64.tar.gz"
+            dest: /tmp/prometheus.tar.gz
+            mode: '0644'
+
+        - name: Extract Prometheus
+          ansible.builtin.unarchive:
+            src: /tmp/prometheus.tar.gz
+            dest: /opt
+            remote_src: yes
+      tags: [prometheus]
+
+    #--------------------------------------------------------------------------
+    # Grafana Server
+    #--------------------------------------------------------------------------
+    - name: Install Grafana server
+      when: "'grafana-server' in inventory_hostname"
+      block:
+        - name: Add Grafana APT key
+          ansible.builtin.apt_key:
+            url: https://apt.grafana.com/gpg.key
+            state: present
+
+        - name: Add Grafana repository
+          ansible.builtin.apt_repository:
+            repo: "deb https://apt.grafana.com stable main"
+            state: present
+
+        - name: Install Grafana
+          ansible.builtin.apt:
+            name: grafana
+            state: present
+            update_cache: yes
+
+        - name: Start Grafana service
+          ansible.builtin.service:
+            name: grafana-server
+            state: started
+            enabled: yes
+      tags: [grafana]
+
+- name: Phase 3 - GPU Node Monitoring Agents
+  hosts: gpu_nodes
+  become: yes
+  gather_facts: yes
+
+  vars_files:
+    - "{{ playbook_dir }}/../vars/secrets.yml"
+
+  tasks:
+    - name: Display monitoring agent setup info
+      ansible.builtin.debug:
+        msg: "Configuring monitoring agents on {{ inventory_hostname }}"
+
+    #--------------------------------------------------------------------------
+    # DCGM Exporter
+    #--------------------------------------------------------------------------
+    - name: Install DCGM Exporter
+      when: monitoring.dcgm_exporter_enabled | default(true)
+      block:
+        - name: Pull DCGM exporter container
+          community.docker.docker_image:
+            name: nvcr.io/nvidia/k8s/dcgm-exporter:3.3.0-3.2.0-ubuntu22.04
+            source: pull
+
+        - name: Run DCGM exporter container
+          community.docker.docker_container:
+            name: dcgm-exporter
+            image: nvcr.io/nvidia/k8s/dcgm-exporter:3.3.0-3.2.0-ubuntu22.04
+            state: started
+            restart_policy: always
+            published_ports:
+              - "9400:9400"
+            runtime: nvidia
+            env:
+              NVIDIA_VISIBLE_DEVICES: all
+      tags: [dcgm]
+
+    #--------------------------------------------------------------------------
+    # Node Exporter
+    #--------------------------------------------------------------------------
+    - name: Install Node Exporter
+      block:
+        - name: Download Node Exporter
+          ansible.builtin.get_url:
+            url: "https://github.com/prometheus/node_exporter/releases/download/v1.6.1/node_exporter-1.6.1.linux-amd64.tar.gz"
+            dest: /tmp/node_exporter.tar.gz
+            mode: '0644'
+
+        - name: Extract Node Exporter
+          ansible.builtin.unarchive:
+            src: /tmp/node_exporter.tar.gz
+            dest: /opt
+            remote_src: yes
+
+        - name: Create Node Exporter service
+          ansible.builtin.template:
+            src: node_exporter.service.j2
+            dest: /etc/systemd/system/node_exporter.service
+            mode: '0644'
+
+        - name: Start Node Exporter
+          ansible.builtin.service:
+            name: node_exporter
+            state: started
+            enabled: yes
+            daemon_reload: yes
+      tags: [node-exporter]

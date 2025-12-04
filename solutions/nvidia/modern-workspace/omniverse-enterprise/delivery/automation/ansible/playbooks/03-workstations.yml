@@ -1,0 +1,160 @@
+---
+#------------------------------------------------------------------------------
+# NVIDIA Omniverse Enterprise - Phase 3: Workstations
+#------------------------------------------------------------------------------
+# Configures Windows workstations with RTX GPUs for Omniverse.
+#
+# Components:
+#   - NVIDIA drivers
+#   - Omniverse Launcher and applications
+#   - Network configuration
+#------------------------------------------------------------------------------
+
+- name: Phase 3 - Workstation Configuration
+  hosts: workstations
+  gather_facts: yes
+
+  vars_files:
+    - "{{ playbook_dir }}/../vars/generated/project.yml"
+    - "{{ playbook_dir }}/../vars/generated/nucleus_server.yml"
+    - "{{ playbook_dir }}/../vars/generated/workstation.yml"
+    - "{{ playbook_dir }}/../vars/generated/software.yml"
+    - "{{ playbook_dir }}/../vars/generated/network.yml"
+    - "{{ playbook_dir }}/../vars/secrets.yml"
+
+  tasks:
+    #--------------------------------------------------------------------------
+    # Prerequisites
+    #--------------------------------------------------------------------------
+    - name: Verify GPU presence
+      ansible.windows.win_shell: |
+        Get-WmiObject Win32_VideoController | Where-Object { $_.Name -like '*NVIDIA*' } | Select-Object -First 1
+      register: gpu_check
+      failed_when: gpu_check.stdout == ""
+
+    - name: Display GPU information
+      ansible.builtin.debug:
+        msg: "Detected GPU: {{ gpu_check.stdout | trim }}"
+
+    #--------------------------------------------------------------------------
+    # NVIDIA Driver Installation
+    #--------------------------------------------------------------------------
+    - name: Check current NVIDIA driver version
+      ansible.windows.win_shell: |
+        (Get-WmiObject Win32_VideoController | Where-Object { $_.Name -like '*NVIDIA*' }).DriverVersion
+      register: current_driver
+
+    - name: Download NVIDIA driver
+      ansible.windows.win_get_url:
+        url: "https://us.download.nvidia.com/Windows/{{ workstation.driver_version }}/{{ workstation.driver_version }}-desktop-win10-win11-64bit-international-dch-whql.exe"
+        dest: "C:\\Temp\\nvidia_driver.exe"
+      when: workstation.driver_version not in (current_driver.stdout | default(''))
+
+    - name: Install NVIDIA driver (silent)
+      ansible.windows.win_package:
+        path: "C:\\Temp\\nvidia_driver.exe"
+        arguments: "/s /noreboot"
+        state: present
+      when: workstation.driver_version not in (current_driver.stdout | default(''))
+      register: driver_install
+
+    #--------------------------------------------------------------------------
+    # Network Configuration
+    #--------------------------------------------------------------------------
+    - name: Configure jumbo frames
+      ansible.windows.win_shell: |
+        $adapter = Get-NetAdapter | Where-Object { $_.Status -eq 'Up' } | Select-Object -First 1
+        Set-NetAdapterAdvancedProperty -Name $adapter.Name -RegistryKeyword "*JumboPacket" -RegistryValue {{ network.mtu }}
+      when: network.mtu | int > 1500
+
+    - name: Add Nucleus server to hosts file
+      community.windows.win_hosts:
+        state: present
+        canonical_name: "{{ nucleus.primary_host }}"
+        ip_address: "{{ hostvars['nucleus-primary']['ansible_host'] | default(nucleus.primary_host) }}"
+
+    #--------------------------------------------------------------------------
+    # Omniverse Launcher Installation
+    #--------------------------------------------------------------------------
+    - name: Create Omniverse directories
+      ansible.windows.win_file:
+        path: "{{ item }}"
+        state: directory
+      loop:
+        - "C:\\NVIDIA\\Omniverse"
+        - "C:\\NVIDIA\\Omniverse\\Cache"
+        - "C:\\NVIDIA\\Omniverse\\Data"
+
+    - name: Download Omniverse Launcher
+      ansible.windows.win_get_url:
+        url: "https://install.launcher.omniverse.nvidia.com/installers/omniverse-launcher-win.exe"
+        dest: "C:\\Temp\\omniverse-launcher.exe"
+
+    - name: Install Omniverse Launcher (silent)
+      ansible.windows.win_package:
+        path: "C:\\Temp\\omniverse-launcher.exe"
+        arguments: "/S"
+        state: present
+      register: launcher_install
+
+    #--------------------------------------------------------------------------
+    # Omniverse Configuration
+    #--------------------------------------------------------------------------
+    - name: Configure Omniverse Nucleus connection
+      ansible.windows.win_template:
+        src: "{{ playbook_dir }}/../templates/omniverse-config.json.j2"
+        dest: "C:\\Users\\{{ ansible_user }}\\AppData\\Local\\ov\\data\\Kit\\launcher\\config.json"
+      vars:
+        nucleus_server: "{{ nucleus.primary_host }}"
+        nucleus_port: "{{ nucleus.port }}"
+
+    - name: Configure Omniverse cache settings
+      ansible.windows.win_template:
+        src: "{{ playbook_dir }}/../templates/cache-config.json.j2"
+        dest: "C:\\NVIDIA\\Omniverse\\Cache\\config.json"
+
+    #--------------------------------------------------------------------------
+    # Omniverse Applications Installation
+    #--------------------------------------------------------------------------
+    - name: Install Omniverse Create
+      ansible.windows.win_shell: |
+        & "C:\Users\{{ ansible_user }}\AppData\Local\Programs\omniverse-launcher\omniverse-launcher.exe" --install omniverse-create --version {{ software.client_version }}
+      when: software.create_enabled | bool
+      async: 1800
+      poll: 30
+
+    - name: Install Omniverse View
+      ansible.windows.win_shell: |
+        & "C:\Users\{{ ansible_user }}\AppData\Local\Programs\omniverse-launcher\omniverse-launcher.exe" --install omniverse-view --version {{ software.client_version }}
+      when: software.view_enabled | bool
+      async: 1800
+      poll: 30
+
+    - name: Install Omniverse Code
+      ansible.windows.win_shell: |
+        & "C:\Users\{{ ansible_user }}\AppData\Local\Programs\omniverse-launcher\omniverse-launcher.exe" --install omniverse-code --version {{ software.client_version }}
+      when: software.code_enabled | bool
+      async: 1800
+      poll: 30
+
+    #--------------------------------------------------------------------------
+    # Firewall Configuration
+    #--------------------------------------------------------------------------
+    - name: Allow Omniverse through Windows Firewall
+      community.windows.win_firewall_rule:
+        name: "NVIDIA Omniverse"
+        localport: "{{ nucleus.port }},{{ nucleus.websocket_port }}"
+        action: allow
+        direction: out
+        protocol: tcp
+        state: present
+        enabled: yes
+
+    #--------------------------------------------------------------------------
+    # Reboot if Required
+    #--------------------------------------------------------------------------
+    - name: Reboot if driver was installed
+      ansible.windows.win_reboot:
+        msg: "Rebooting to complete NVIDIA driver installation"
+        reboot_timeout: 600
+      when: driver_install is changed

@@ -1,0 +1,69 @@
+---
+#------------------------------------------------------------------------------
+# Slurm Controller Role - Workload Manager Controller
+#------------------------------------------------------------------------------
+
+- name: Install Slurm controller packages
+  ansible.builtin.apt:
+    name:
+      - slurm-wlm
+      - slurmctld
+      - slurmdbd
+      - munge
+      - mariadb-server
+    state: present
+
+- name: Create Slurm directories
+  ansible.builtin.file:
+    path: "{{ item }}"
+    state: directory
+    owner: slurm
+    group: slurm
+    mode: '0755'
+  loop:
+    - /var/spool/slurmctld
+    - /var/log/slurm
+    - /etc/slurm
+
+- name: Generate munge key
+  ansible.builtin.command: dd if=/dev/urandom bs=1 count=1024 of=/etc/munge/munge.key
+  args:
+    creates: /etc/munge/munge.key
+
+- name: Set munge key permissions
+  ansible.builtin.file:
+    path: /etc/munge/munge.key
+    owner: munge
+    group: munge
+    mode: '0400'
+
+- name: Configure slurm.conf
+  ansible.builtin.template:
+    src: slurm.conf.j2
+    dest: /etc/slurm/slurm.conf
+    owner: slurm
+    group: slurm
+    mode: '0644'
+  notify: Restart slurmctld
+
+- name: Configure gres.conf for GPUs
+  ansible.builtin.template:
+    src: gres.conf.j2
+    dest: /etc/slurm/gres.conf
+    owner: slurm
+    group: slurm
+    mode: '0644'
+  notify: Restart slurmctld
+
+- name: Start munge service
+  ansible.builtin.service:
+    name: munge
+    state: started
+    enabled: yes
+
+- name: Start slurmctld service
+  ansible.builtin.service:
+    name: slurmctld
+    state: started
+    enabled: yes
+  when: slurm_role == 'primary'

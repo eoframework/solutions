@@ -1,0 +1,161 @@
+#------------------------------------------------------------------------------
+# NVIDIA GPU Compute Cluster - Test Environment Variables
+#------------------------------------------------------------------------------
+# Generated from configuration.csv - Test column
+# To regenerate: python generate-ansible-vars.py --env test
+# DO NOT EDIT - Changes will be overwritten on regeneration
+#------------------------------------------------------------------------------
+
+#------------------------------------------------------------------------------
+# Project Configuration
+#------------------------------------------------------------------------------
+solution:
+  name: nvidia-gpu-compute-cluster
+  abbr: gpucc
+  provider_name: nvidia
+  category_name: ai
+
+#------------------------------------------------------------------------------
+# Cluster Configuration
+#------------------------------------------------------------------------------
+cluster:
+  name: gpu-cluster-test
+  domain: gpu-test.client.local
+  timezone: UTC
+
+#------------------------------------------------------------------------------
+# Hardware Configuration
+#------------------------------------------------------------------------------
+hardware:
+  gpu_node_count: 8
+  gpu_model: A100 40GB PCIe
+  gpu_count_per_node: 4
+  gpu_memory_gb: 40
+  cpu_model: AMD EPYC 7763
+  cpu_cores_per_node: 128
+  system_ram_gb: 512
+  nvme_storage_tb: 3.84
+  server_model: Custom OEM
+
+#------------------------------------------------------------------------------
+# Network Configuration
+#------------------------------------------------------------------------------
+network:
+  fabric_type: RoCE v2
+  fabric_speed_gbps: 100
+  fabric_switch_model: NVIDIA SN4600
+  fabric_switch_count: 1
+  management_vlan: 110
+  management_cidr: 10.110.0.0/24
+  management_gateway: 10.110.0.1
+  gpu_fabric_vlan: 210
+  gpu_fabric_cidr: 10.210.0.0/24
+  bmc_vlan: 111
+  bmc_cidr: 10.111.0.0/24
+
+#------------------------------------------------------------------------------
+# Storage Configuration
+#------------------------------------------------------------------------------
+storage:
+  shared_type: NFS
+  shared_server: storage-test.client.local
+  shared_export: /export/gpu-test
+  shared_mount: /shared
+  shared_capacity_tb: 50
+  dataset_path: /shared/datasets
+  model_path: /shared/models
+  scratch_path: /scratch
+
+#------------------------------------------------------------------------------
+# Slurm Workload Management
+#------------------------------------------------------------------------------
+slurm:
+  version: "23.11"
+  controller_ip: 10.110.0.10
+  controller_backup_ip: 10.110.0.11
+  partition_gpu: gpu-a100
+  partition_cpu: cpu-only
+  max_job_time_hours: 24
+  default_cpus_per_gpu: 32
+  gres_config: "gpu:a100:4"
+  accounting_db: slurm_acct_db
+  fairshare_enabled: true
+
+#------------------------------------------------------------------------------
+# Software Stack
+#------------------------------------------------------------------------------
+software:
+  nvidia_driver_version: "550.54.14"
+  cuda_version: "12.4"
+  cudnn_version: "9.0.0"
+  nccl_version: "2.21.5"
+  os_version: Ubuntu 22.04
+  python_version: "3.11"
+
+#------------------------------------------------------------------------------
+# Containers
+#------------------------------------------------------------------------------
+containers:
+  ngc_registry: nvcr.io
+  pytorch_tag: "24.08-py3"
+  tensorflow_tag: "24.08-tf2-py3"
+  rapids_tag: "24.08-cuda12.4-py3.11"
+  triton_tag: "24.08-py3"
+
+#------------------------------------------------------------------------------
+# Monitoring Configuration
+#------------------------------------------------------------------------------
+monitoring:
+  prometheus_enabled: true
+  prometheus_server_ip: 10.110.0.40
+  grafana_enabled: true
+  grafana_server_ip: 10.110.0.41
+  dcgm_exporter_enabled: true
+  gpu_util_alert_threshold: 90
+  gpu_temp_alert_threshold: 80
+  gpu_memory_alert_threshold: 90
+  syslog_server: 10.110.0.42
+  syslog_port: 514
+
+#------------------------------------------------------------------------------
+# Security Configuration
+#------------------------------------------------------------------------------
+security:
+  ldap_enabled: true
+  ldap_server_primary: 10.110.2.10
+  ldap_server_secondary: 10.110.2.11
+  ldap_base_dn: "DC=test,DC=local"
+  ldap_bind_user: svc_gpu_ldap_test
+  ssh_key_auth_only: true
+  firewall_enabled: false
+  root_ssh_enabled: true
+
+#------------------------------------------------------------------------------
+# Operations Configuration
+#------------------------------------------------------------------------------
+operations:
+  backup_enabled: true
+  backup_retention_days: 14
+  backup_schedule: "0 3 * * *"
+  maintenance_window: "Sunday 02:00-06:00 UTC"
+  ntp_server_primary: 10.110.4.10
+  ntp_server_secondary: 10.110.4.11
+  dns_server_primary: 10.110.5.10
+  dns_server_secondary: 10.110.5.11
+
+#------------------------------------------------------------------------------
+# Support Configuration
+#------------------------------------------------------------------------------
+support:
+  nvidia_support_level: Enterprise
+  support_response_sla_hr: 8
+  support_email: gpu-support@client.local
+
+#------------------------------------------------------------------------------
+# DR Configuration
+#------------------------------------------------------------------------------
+dr:
+  enabled: false
+  replication_enabled: false
+  rpo_hours: 48
+  rto_hours: 8

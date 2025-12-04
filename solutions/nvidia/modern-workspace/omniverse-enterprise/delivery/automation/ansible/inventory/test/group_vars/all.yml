@@ -1,0 +1,158 @@
+#------------------------------------------------------------------------------
+# NVIDIA Omniverse Enterprise - Test Environment Variables
+#------------------------------------------------------------------------------
+# Generated from configuration.csv - Test column
+# To regenerate: python generate-ansible-vars.py --env test
+# DO NOT EDIT - Changes will be overwritten on regeneration
+#------------------------------------------------------------------------------
+
+#------------------------------------------------------------------------------
+# Project Configuration
+#------------------------------------------------------------------------------
+solution:
+  name: nvidia-omniverse-enterprise
+  abbr: omni
+  provider_name: nvidia
+  category_name: modern-workspace
+  version: "2024.1"
+
+#------------------------------------------------------------------------------
+# Nucleus Server Configuration
+#------------------------------------------------------------------------------
+nucleus:
+  primary_host: nucleus-test.client.local
+  replica_host: nucleus-ha-test.client.local
+  port: 3009
+  websocket_port: 3019
+  discovery_port: 3030
+  ha_enabled: false
+  ha_heartbeat_interval: 5
+  data_path: /omniverse/data
+  checkpoints_enabled: true
+  checkpoint_interval: 600
+  admin_user: omniverse_admin
+
+#------------------------------------------------------------------------------
+# Storage Configuration
+#------------------------------------------------------------------------------
+storage:
+  primary_path: /mnt/storage/omniverse
+  capacity_tb: 50
+  throughput_gbps: 5
+  snapshot_enabled: true
+  snapshot_retention_days: 14
+  replication_enabled: false
+
+#------------------------------------------------------------------------------
+# Workstation Configuration
+#------------------------------------------------------------------------------
+workstation:
+  count: 10
+  model: Dell Precision 7960
+  gpu_model: NVIDIA RTX A6000 48GB
+  gpu_memory_gb: 48
+  ram_gb: 128
+  nvme_tb: 2
+  network_speed: 10GbE
+  os: Windows 11 Pro for Workstations
+  driver_version: "550.xx"
+
+#------------------------------------------------------------------------------
+# Software Configuration
+#------------------------------------------------------------------------------
+software:
+  client_version: "2024.1.0"
+  create_enabled: true
+  view_enabled: true
+  code_enabled: true
+  audio2face_enabled: false
+
+#------------------------------------------------------------------------------
+# Connectors Configuration
+#------------------------------------------------------------------------------
+connectors:
+  revit_enabled: true
+  revit_version: "2024"
+  solidworks_enabled: true
+  solidworks_version: "2024"
+  rhino_enabled: true
+  rhino_version: "8.0"
+  blender_enabled: true
+  blender_version: "4.0"
+  maya_enabled: true
+  maya_version: "2024"
+  max_enabled: true
+  max_version: "2024"
+
+#------------------------------------------------------------------------------
+# Authentication Configuration
+#------------------------------------------------------------------------------
+auth:
+  ad_domain: test.local
+  ldap_server: "ldaps://dc.test.local"
+  user_base_dn: "OU=Users,DC=test,DC=local"
+  group_base_dn: "OU=Groups,DC=test,DC=local"
+  designers_group: Omniverse-Designers-Test
+  admins_group: Omniverse-Admins-Test
+  mfa_enabled: false
+  ldap_bind_user: svc_omni_ldap_test
+
+#------------------------------------------------------------------------------
+# Network Configuration
+#------------------------------------------------------------------------------
+network:
+  vlan_id: 110
+  backbone_speed: 25GbE
+  mtu: 9000
+  qos_enabled: false
+  qos_priority: 4
+  cidr: 10.110.0.0/24
+  gateway: 10.110.0.1
+
+#------------------------------------------------------------------------------
+# Security Configuration
+#------------------------------------------------------------------------------
+security:
+  encryption_at_rest: true
+  encryption_in_transit: true
+  tls_version: "TLS 1.3"
+  audit_logging_enabled: true
+  audit_log_retention_days: 30
+
+#------------------------------------------------------------------------------
+# Monitoring Configuration
+#------------------------------------------------------------------------------
+monitoring:
+  prometheus_enabled: true
+  prometheus_server: 10.110.0.40
+  grafana_enabled: true
+  grafana_server: 10.110.0.41
+  alerting_enabled: false
+  alert_email: omniverse-ops@client.local
+
+#------------------------------------------------------------------------------
+# SLA Configuration
+#------------------------------------------------------------------------------
+sla:
+  nucleus_uptime: 99.0
+  rendering_time_minutes: 120
+  concurrent_users: 5
+
+#------------------------------------------------------------------------------
+# Operations Configuration
+#------------------------------------------------------------------------------
+operations:
+  backup_enabled: true
+  backup_schedule: "0 3 * * *"
+  backup_retention_days: 14
+  ntp_server_primary: 10.110.4.10
+  dns_server_primary: 10.110.5.10
+
+#------------------------------------------------------------------------------
+# DR Configuration
+#------------------------------------------------------------------------------
+dr:
+  enabled: false
+  rto_hours: 8
+  rpo_hours: 4
+  replication_enabled: false

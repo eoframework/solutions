@@ -1,0 +1,190 @@
+---
+#------------------------------------------------------------------------------
+# Phase 3 - Monitoring and Observability
+#------------------------------------------------------------------------------
+# Configures monitoring stack:
+# - NVIDIA DCGM Exporter on DGX nodes
+# - Prometheus server
+# - Grafana dashboards
+# - Alerting configuration
+#------------------------------------------------------------------------------
+
+#------------------------------------------------------------------------------
+# DCGM Exporter on DGX Nodes
+#------------------------------------------------------------------------------
+- name: Configure DCGM Exporter on DGX Nodes
+  hosts: dgx_nodes
+  become: yes
+  gather_facts: yes
+
+  vars_files:
+    - "{{ playbook_dir }}/../vars/generated/project.yml"
+    - "{{ playbook_dir }}/../vars/generated/monitoring.yml"
+    - "{{ playbook_dir }}/../vars/secrets.yml"
+
+  tasks:
+    - name: Deploy DCGM Exporter container
+      community.docker.docker_container:
+        name: dcgm-exporter
+        image: nvcr.io/nvidia/k8s/dcgm-exporter:latest
+        state: started
+        restart_policy: always
+        ports:
+          - "9400:9400"
+        runtime: nvidia
+        capabilities:
+          - SYS_ADMIN
+        env:
+          NVIDIA_VISIBLE_DEVICES: all
+      when: monitoring.dcgm_exporter_enabled | default(true)
+      tags: [dcgm]
+
+    - name: Deploy Node Exporter
+      community.docker.docker_container:
+        name: node-exporter
+        image: prom/node-exporter:latest
+        state: started
+        restart_policy: always
+        ports:
+          - "9100:9100"
+        volumes:
+          - /proc:/host/proc:ro
+          - /sys:/host/sys:ro
+          - /:/rootfs:ro
+        command:
+          - '--path.procfs=/host/proc'
+          - '--path.sysfs=/host/sys'
+          - '--path.rootfs=/rootfs'
+          - '--collector.filesystem.mount-points-exclude=^/(sys|proc|dev|host|etc)($$|/)'
+      tags: [node-exporter]
+
+#------------------------------------------------------------------------------
+# Prometheus Server
+#------------------------------------------------------------------------------
+- name: Configure Prometheus Server
+  hosts: monitoring
+  become: yes
+  gather_facts: yes
+
+  vars_files:
+    - "{{ playbook_dir }}/../vars/generated/project.yml"
+    - "{{ playbook_dir }}/../vars/generated/monitoring.yml"
+    - "{{ playbook_dir }}/../vars/generated/cluster.yml"
+    - "{{ playbook_dir }}/../vars/secrets.yml"
+
+  tasks:
+    - name: Create Prometheus directories
+      ansible.builtin.file:
+        path: "{{ item }}"
+        state: directory
+        mode: '0755'
+      loop:
+        - /etc/prometheus
+        - /var/lib/prometheus
+      tags: [prometheus]
+
+    - name: Generate Prometheus configuration
+      ansible.builtin.template:
+        src: templates/prometheus.yml.j2
+        dest: /etc/prometheus/prometheus.yml
+        mode: '0644'
+      notify: restart prometheus
+      tags: [prometheus]
+
+    - name: Generate Prometheus alerting rules
+      ansible.builtin.template:
+        src: templates/prometheus-alerts.yml.j2
+        dest: /etc/prometheus/alerts.yml
+        mode: '0644'
+      notify: restart prometheus
+      tags: [prometheus]
+
+    - name: Deploy Prometheus container
+      community.docker.docker_container:
+        name: prometheus
+        image: prom/prometheus:latest
+        state: started
+        restart_policy: always
+        ports:
+          - "9090:9090"
+        volumes:
+          - /etc/prometheus:/etc/prometheus:ro
+          - /var/lib/prometheus:/prometheus
+        command:
+          - '--config.file=/etc/prometheus/prometheus.yml'
+          - '--storage.tsdb.path=/prometheus'
+          - '--storage.tsdb.retention.time=30d'
+          - '--web.enable-lifecycle'
+      when: monitoring.prometheus_enabled | default(true)
+      tags: [prometheus]
+
+  handlers:
+    - name: restart prometheus
+      community.docker.docker_container:
+        name: prometheus
+        state: started
+        restart: yes
+
+#------------------------------------------------------------------------------
+# Grafana Dashboards
+#------------------------------------------------------------------------------
+- name: Configure Grafana
+  hosts: monitoring
+  become: yes
+  gather_facts: yes
+
+  vars_files:
+    - "{{ playbook_dir }}/../vars/generated/project.yml"
+    - "{{ playbook_dir }}/../vars/generated/monitoring.yml"
+    - "{{ playbook_dir }}/../vars/secrets.yml"
+
+  tasks:
+    - name: Create Grafana directories
+      ansible.builtin.file:
+        path: "{{ item }}"
+        state: directory
+        mode: '0755'
+      loop:
+        - /etc/grafana/provisioning/datasources
+        - /etc/grafana/provisioning/dashboards
+        - /var/lib/grafana/dashboards
+      tags: [grafana]
+
+    - name: Configure Grafana datasource
+      ansible.builtin.template:
+        src: templates/grafana-datasource.yml.j2
+        dest: /etc/grafana/provisioning/datasources/prometheus.yml
+        mode: '0644'
+      tags: [grafana]
+
+    - name: Copy NVIDIA DCGM dashboard
+      ansible.builtin.copy:
+        src: files/dashboards/nvidia-dcgm.json
+        dest: /var/lib/grafana/dashboards/nvidia-dcgm.json
+        mode: '0644'
+      tags: [grafana]
+
+    - name: Deploy Grafana container
+      community.docker.docker_container:
+        name: grafana
+        image: grafana/grafana:latest
+        state: started
+        restart_policy: always
+        ports:
+          - "3000:3000"
+        volumes:
+          - /etc/grafana/provisioning:/etc/grafana/provisioning:ro
+          - /var/lib/grafana:/var/lib/grafana
+        env:
+          GF_SECURITY_ADMIN_PASSWORD: "{{ vault_grafana_admin_password | default('admin') }}"
+          GF_USERS_ALLOW_SIGN_UP: "false"
+      when: monitoring.grafana_enabled | default(true)
+      tags: [grafana]
+
+    - name: Display Grafana access information
+      ansible.builtin.debug:
+        msg: |
+          Grafana is available at:
+          http://{{ ansible_host }}:3000
+          Default credentials: admin / (vault password)
+      tags: [grafana]

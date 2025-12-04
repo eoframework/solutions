@@ -1,60 +1,108 @@
-#WIDTH: 28,16,14,24,40,10,12,30,16,18,24,35,12
-#ALIGN: left,left,center,left,left,center,left,left,center,left,left,left,center
-Parameter Name,Category,Environment,Default Value,Description,Required,Data Type,Validation Rules,Security Level,Owner Team,Dependencies,Notes,Last Updated
-DGX_CLUSTER_NAME,Application,All,dgx-superpod-prod,DGX SuperPOD cluster identifier,Yes,String,Max 30 alphanumeric chars,Public,AI Infrastructure,None,Used in Slurm and monitoring,[DATE]
-DGX_NODE_COUNT,Hardware,All,8,Number of DGX H100 nodes in SuperPOD,Yes,Integer,8-256,Public,Hardware Team,Power and cooling,Phase 1 deployment,[DATE]
-DGX_NODE_MODEL,Hardware,All,DGX H100,DGX system model specification,Yes,String,Valid DGX model identifier,Public,Hardware Team,Performance requirements,Latest H100 generation,[DATE]
-GPU_COUNT_PER_NODE,Hardware,All,8,Number of H100 GPUs per DGX node,Yes,Integer,8,Public,Hardware Team,DGX_NODE_MODEL,Fixed for H100 platform,[DATE]
-GPU_MODEL,Hardware,All,H100 80GB SXM,GPU model and memory specification,Yes,String,Valid NVIDIA GPU model,Public,AI Team,Workload requirements,80GB HBM3 memory,[DATE]
-GPU_MEMORY_GB,Hardware,All,80,GPU HBM3 memory in GB per GPU,Yes,Integer,80,Public,AI Team,Model size requirements,640 GB per node total,[DATE]
-TOTAL_GPU_COUNT,Hardware,All,64,Total GPUs across all DGX nodes,Yes,Integer,Calculated,Public,AI Team,GPU_COUNT_PER_NODE,8 nodes x 8 GPUs,[DATE]
-SYSTEM_RAM_GB,Hardware,All,2048,System RAM per DGX node in GB,Yes,Integer,2048,Public,Hardware Team,Data preprocessing,DDR5 memory,[DATE]
-NVME_STORAGE_TB,Storage,All,30,Local NVMe storage per node in TB,Yes,Integer,30,Public,Storage Team,Checkpoint storage,High-speed scratch,[DATE]
-INFINIBAND_SPEED,Network,All,400,InfiniBand port speed in Gbps,Yes,Integer,400,Public,Network Team,NDR InfiniBand,Quantum-2 fabric,[DATE]
-INFINIBAND_PORTS_PER_NODE,Network,All,8,InfiniBand ports per DGX node,Yes,Integer,8,Public,Network Team,Fabric topology,Full mesh capable,[DATE]
-INFINIBAND_SWITCH_MODEL,Network,All,QM9700,InfiniBand switch model,Yes,String,Valid NVIDIA IB switch,Public,Network Team,Port density,40-port NDR switches,[DATE]
-INFINIBAND_SWITCH_COUNT,Network,All,4,Number of InfiniBand switches,Yes,Integer,4-8,Public,Network Team,Network topology,Leaf-spine architecture,[DATE]
-AGGREGATE_IB_BANDWIDTH_TBPS,Network,All,3.2,Aggregate InfiniBand bandwidth in Tbps,Yes,Float,Calculated,Public,Network Team,IB port count,Bisection bandwidth,[DATE]
-STORAGE_SYSTEM,Storage,All,Base Command 1PB,Shared storage platform,Yes,String,Valid storage platform,Public,Storage Team,Dataset storage,NVMe all-flash,[DATE]
-SHARED_STORAGE_PB,Storage,All,1.0,Shared storage capacity in PB,Yes,Float,0.5-10.0,Public,Storage Team,Dataset requirements,Expandable,[DATE]
-STORAGE_THROUGHPUT_GBS,Storage,All,14,Target storage throughput in GB/s,Yes,Integer,14-50,Public,Storage Team,Training I/O,Sustained read/write,[DATE]
-PARALLEL_FILESYSTEM,Storage,All,Lustre,Parallel filesystem for AI workloads,Yes,String,Lustre|GPFS|WekaFS,Public,Storage Team,Performance optimization,High-performance I/O,[DATE]
-SLURM_VERSION,Workload Mgmt,All,23.02.6,Slurm workload manager version,Yes,String,Valid Slurm version,Public,AI Operations,Job scheduling,Latest stable,[DATE]
-SLURM_PARTITION_GPU,Workload Mgmt,All,gpu-h100,Primary GPU partition name,Yes,String,Valid partition name,Public,AI Operations,Resource allocation,Default partition,[DATE]
-SLURM_MAX_JOB_TIME,Workload Mgmt,All,168:00:00,Maximum job runtime (7 days),Yes,String,Valid time format,Public,AI Operations,Resource planning,Long training support,[DATE]
-SLURM_DEFAULT_CPUS_PER_GPU,Workload Mgmt,All,16,Default CPU cores per GPU allocation,Yes,Integer,8-32,Public,AI Operations,Resource allocation,Balanced ratio,[DATE]
-SLURM_GRES_CONFIG,Workload Mgmt,All,gpu:h100:8,GRES configuration per node,Yes,String,Valid GRES format,Public,AI Operations,GPU scheduling,8 GPUs per node,[DATE]
-CUDA_VERSION,Software Stack,All,12.2,CUDA toolkit version,Yes,String,Valid CUDA version,Public,Software Team,GPU compatibility,Latest stable,[DATE]
-CUDNN_VERSION,Software Stack,All,8.9.7,cuDNN library version,Yes,String,Valid cuDNN version,Public,Software Team,CUDA_VERSION,Deep learning ops,[DATE]
-NCCL_VERSION,Software Stack,All,2.19.3,NCCL communication library version,Yes,String,Valid NCCL version,Public,Software Team,Multi-GPU comm,Latest performance,[DATE]
-NVIDIA_DRIVER_VERSION,Software Stack,All,535.154.05,NVIDIA GPU driver version,Yes,String,Valid driver version,Public,Software Team,CUDA_VERSION,Production driver,[DATE]
-DGX_OS_VERSION,Software Stack,All,6.0.0,DGX OS version,Yes,String,Valid DGX OS version,Public,Software Team,Driver support,Ubuntu-based,[DATE]
-NGC_CONTAINER_REGISTRY,AI Frameworks,All,nvcr.io,NVIDIA NGC container registry URL,Yes,String,Valid registry URL,Public,AI Team,Container deployment,Official containers,[DATE]
-PYTORCH_NGC_TAG,AI Frameworks,All,24.01-py3,PyTorch NGC container tag,Yes,String,Valid container tag,Public,AI Team,Model development,Latest optimized,[DATE]
-TENSORFLOW_NGC_TAG,AI Frameworks,All,24.01-tf2-py3,TensorFlow NGC container tag,Yes,String,Valid container tag,Public,AI Team,Model development,TF 2.x optimized,[DATE]
-JAX_NGC_TAG,AI Frameworks,All,24.01-py3,JAX NGC container tag,Yes,String,Valid container tag,Public,AI Team,Model development,XLA backend,[DATE]
-TRITON_NGC_TAG,AI Frameworks,All,24.01-py3,Triton Inference Server tag,Yes,String,Valid container tag,Public,AI Team,Model serving,Inference optimization,[DATE]
-JUPYTER_ENABLED,Development,All,true,Enable JupyterHub for interactive dev,Yes,Boolean,true|false,Public,AI Team,Data science workflow,GPU-enabled notebooks,[DATE]
-TENSORBOARD_ENABLED,Development,All,true,Enable TensorBoard visualization,Yes,Boolean,true|false,Public,AI Team,Training monitoring,Metrics visualization,[DATE]
-MLFLOW_TRACKING_ENABLED,MLOps,All,true,Enable MLflow experiment tracking,Yes,Boolean,true|false,Public,MLOps Team,Model lifecycle,Experiment management,[DATE]
-MODEL_STORAGE_PATH,Storage,All,/shared/models,Shared path for trained models,Yes,String,Valid Unix path,Public,AI Team,Model deployment,Cross-node access,[DATE]
-DATASET_STORAGE_PATH,Storage,All,/shared/datasets,Shared path for training datasets,Yes,String,Valid Unix path,Public,AI Team,Data access,High-performance,[DATE]
-CHECKPOINT_STORAGE_PATH,Storage,All,/shared/checkpoints,Shared path for training checkpoints,Yes,String,Valid Unix path,Public,AI Team,Training recovery,Fault tolerance,[DATE]
-MONITORING_STACK,Monitoring,All,Prometheus + Grafana,Primary monitoring platform,Yes,String,Valid monitoring stack,Public,Operations,GPU monitoring,DCGM integration,[DATE]
-DCGM_EXPORTER_ENABLED,Monitoring,All,true,Enable NVIDIA DCGM metrics export,Yes,Boolean,true|false,Public,Operations,GPU monitoring,Real-time metrics,[DATE]
-GPU_UTIL_ALERT_THRESHOLD,Monitoring,All,95,GPU utilization alert threshold %,Yes,Integer,80-99,Public,Operations,Resource optimization,High util alert,[DATE]
-GPU_TEMP_ALERT_THRESHOLD,Monitoring,All,83,GPU temperature alert threshold C,Yes,Integer,80-85,Public,Operations,Thermal management,Throttle prevention,[DATE]
-GPU_MEMORY_ALERT_THRESHOLD,Monitoring,All,90,GPU memory usage alert threshold %,Yes,Integer,80-95,Public,Operations,Memory management,OOM prevention,[DATE]
-LDAP_ENABLED,Security,All,true,Enable LDAP user authentication,Yes,Boolean,true|false,Confidential,Security Team,User management,Central auth,[DATE]
-LDAP_SERVER_URL,Security,All,[ldap-server-url],LDAP server endpoint,Yes,String,Valid LDAP URL,Secret,Security Team,Directory service,AD integration,[DATE]
-LDAP_BASE_DN,Security,All,[ldap-base-dn],LDAP base distinguished name,Yes,String,Valid DN format,Confidential,Security Team,User search,Organization unit,[DATE]
-SSH_KEY_AUTH_ONLY,Security,All,true,Enforce SSH key authentication only,Yes,Boolean,true|false,Public,Security Team,Secure access,Disable passwords,[DATE]
-FIREWALL_POLICY,Security,All,restrictive,Network firewall configuration,Yes,String,restrictive|standard,Confidential,Security Team,Network security,Minimal surface,[DATE]
-BACKUP_RETENTION_DAYS,Operations,All,90,Backup retention period in days,Yes,Integer,30-365,Public,Operations,Data protection,Compliance req,[DATE]
-BACKUP_SCHEDULE,Operations,All,0 2 * * *,Daily backup schedule (cron),Yes,String,Valid cron expression,Public,Operations,Backup strategy,2 AM UTC,[DATE]
-MAINTENANCE_WINDOW,Operations,All,Sunday 02:00-06:00 UTC,Weekly maintenance window,Yes,String,Valid time range,Public,Operations,Minimal disruption,Low-usage period,[DATE]
-NVIDIA_SUPPORT_LEVEL,Support,All,Enterprise,NVIDIA support contract level,Yes,String,Enterprise|Priority,Confidential,Support Team,Critical workloads,24x7 support,[DATE]
-SUPPORT_RESPONSE_SLA_HR,Support,All,4,Critical issue response SLA in hours,Yes,Integer,4-24,Public,Support Team,Incident response,Hardware issues,[DATE]
-DR_ENABLED,Operations,Production,false,Disaster recovery enabled,Yes,Boolean,true|false,Public,DR Team,Business continuity,Phase 2 option,[DATE]
-POWER_CAPACITY_KW,Facilities,All,500,Total power capacity in kW,Yes,Integer,400-1000,Public,Facilities Team,Infrastructure,Per 8 DGX nodes,[DATE]
-COOLING_CAPACITY_KW,Facilities,All,500,Cooling capacity in kW,Yes,Integer,400-1000,Public,Facilities Team,Thermal management,Match power load,[DATE]
+#WIDTH:  45,14,30,30,30,45,8,12,27,14,14,12,30,12
+#ALIGN:  left,left,left,left,left,left,center,left,left,center,left,left,left,center
+Parameter Name,Category,Production,Test,DR,Description,Required,Data Type,Validation Rules,Security Level,Owner Team,Dependencies,Notes,Last Updated
+solution.name,Project,nvidia-dgx-superpod,nvidia-dgx-superpod,nvidia-dgx-superpod,Solution name for resource naming,Yes,String,Valid string value,Public,Development,,DGX SuperPOD AI infrastructure,2025-12-04
+solution.abbr,Project,dgxsp,dgxsp,dgxsp,Solution abbreviation (3-4 chars),Yes,String,3-5 alphanumeric,Public,Development,,Used in resource naming prefix,2025-12-04
+solution.provider_name,Project,nvidia,nvidia,nvidia,Provider organization name,Yes,String,Valid string value,Public,Development,,NVIDIA provider,2025-12-04
+solution.category_name,Project,ai,ai,ai,Solution category,Yes,String,Valid string value,Public,Development,,AI category,2025-12-04
+cluster.name,Cluster,dgx-superpod-prod,dgx-superpod-test,dgx-superpod-dr,DGX SuperPOD cluster identifier,Yes,String,Max 30 alphanumeric chars,Public,AI Infrastructure,None,Used in Slurm and monitoring,2025-12-04
+cluster.domain,Cluster,dgx.client.local,dgx-test.client.local,dgx-dr.client.local,Cluster DNS domain,Yes,String,Valid FQDN,Public,Network Team,DNS configuration,Internal cluster domain,2025-12-04
+cluster.timezone,Cluster,UTC,UTC,UTC,Cluster timezone,Yes,String,Valid timezone,Public,Operations,,Consistent time across nodes,2025-12-04
+hardware.dgx_node_count,Hardware,8,4,8,Number of DGX H100 nodes in SuperPOD,Yes,Integer,4-256,Public,Hardware Team,Power and cooling,Phase 1 deployment,2025-12-04
+hardware.dgx_node_model,Hardware,DGX H100,DGX H100,DGX H100,DGX system model specification,Yes,String,DGX H100|DGX A100,Public,Hardware Team,Performance requirements,Latest H100 generation,2025-12-04
+hardware.gpu_count_per_node,Hardware,8,8,8,Number of H100 GPUs per DGX node,Yes,Integer,8,Public,Hardware Team,hardware.dgx_node_model,Fixed for H100 platform,2025-12-04
+hardware.gpu_model,Hardware,H100 80GB SXM,H100 80GB SXM,H100 80GB SXM,GPU model and memory specification,Yes,String,Valid NVIDIA GPU model,Public,AI Team,Workload requirements,80GB HBM3 memory,2025-12-04
+hardware.gpu_memory_gb,Hardware,80,80,80,GPU HBM3 memory in GB per GPU,Yes,Integer,40|80,Public,AI Team,Model size requirements,640 GB per node total,2025-12-04
+hardware.system_ram_gb,Hardware,2048,2048,2048,System RAM per DGX node in GB,Yes,Integer,1024-2048,Public,Hardware Team,Data preprocessing,DDR5 memory,2025-12-04
+hardware.nvme_storage_tb,Hardware,30,30,30,Local NVMe storage per node in TB,Yes,Integer,15-60,Public,Storage Team,Checkpoint storage,High-speed scratch,2025-12-04
+infiniband.speed_gbps,Network,400,400,400,InfiniBand port speed in Gbps,Yes,Integer,200|400,Public,Network Team,NDR InfiniBand,Quantum-2 fabric,2025-12-04
+infiniband.ports_per_node,Network,8,8,8,InfiniBand ports per DGX node,Yes,Integer,4-8,Public,Network Team,Fabric topology,Full mesh capable,2025-12-04
+infiniband.switch_model,Network,QM9700,QM9700,QM9700,InfiniBand switch model,Yes,String,QM9700|QM8700,Public,Network Team,Port density,40-port NDR switches,2025-12-04
+infiniband.switch_count,Network,4,2,4,Number of InfiniBand switches,Yes,Integer,2-8,Public,Network Team,Network topology,Leaf-spine architecture,2025-12-04
+infiniband.subnet_manager_ip,Network,10.10.1.1,10.11.1.1,10.12.1.1,InfiniBand Subnet Manager IP,Yes,String,Valid IPv4,Confidential,Network Team,SM configuration,Primary SM node,2025-12-04
+infiniband.partition_key,Network,0x7fff,0x7fff,0x7fff,InfiniBand partition key,Yes,String,Valid hex value,Confidential,Network Team,Security isolation,Default full membership,2025-12-04
+ethernet.management_vlan,Network,100,110,120,Management network VLAN ID,Yes,Integer,1-4094,Public,Network Team,Switch configuration,Out-of-band management,2025-12-04
+ethernet.management_cidr,Network,10.100.0.0/24,10.110.0.0/24,10.120.0.0/24,Management network CIDR,Yes,String,Valid CIDR,Confidential,Network Team,,Management subnet,2025-12-04
+ethernet.management_gateway,Network,10.100.0.1,10.110.0.1,10.120.0.1,Management network gateway,Yes,String,Valid IPv4,Confidential,Network Team,,Default gateway,2025-12-04
+ethernet.bmc_vlan,Network,101,111,121,BMC/IPMI network VLAN ID,Yes,Integer,1-4094,Public,Network Team,Switch configuration,Out-of-band BMC access,2025-12-04
+ethernet.bmc_cidr,Network,10.101.0.0/24,10.111.0.0/24,10.121.0.0/24,BMC network CIDR,Yes,String,Valid CIDR,Confidential,Network Team,,BMC subnet,2025-12-04
+storage.system,Storage,Base Command,Base Command,Base Command,Shared storage platform,Yes,String,Base Command|VAST|DDN|Weka,Public,Storage Team,Dataset storage,NVMe all-flash,2025-12-04
+storage.shared_capacity_pb,Storage,1.0,0.5,1.0,Shared storage capacity in PB,Yes,Float,0.5-10.0,Public,Storage Team,Dataset requirements,Expandable,2025-12-04
+storage.throughput_gbs,Storage,14,10,14,Target storage throughput in GB/s,Yes,Integer,10-50,Public,Storage Team,Training I/O,Sustained read/write,2025-12-04
+storage.parallel_filesystem,Storage,Lustre,Lustre,Lustre,Parallel filesystem for AI workloads,Yes,String,Lustre|GPFS|WekaFS,Public,Storage Team,Performance optimization,High-performance I/O,2025-12-04
+storage.mount_path,Storage,/shared,/shared,/shared,Shared storage mount point,Yes,String,Valid Unix path,Public,Storage Team,All nodes,NFS mount,2025-12-04
+storage.model_path,Storage,/shared/models,/shared/models,/shared/models,Shared path for trained models,Yes,String,Valid Unix path,Public,AI Team,Model deployment,Cross-node access,2025-12-04
+storage.dataset_path,Storage,/shared/datasets,/shared/datasets,/shared/datasets,Shared path for training datasets,Yes,String,Valid Unix path,Public,AI Team,Data access,High-performance,2025-12-04
+storage.checkpoint_path,Storage,/shared/checkpoints,/shared/checkpoints,/shared/checkpoints,Shared path for training checkpoints,Yes,String,Valid Unix path,Public,AI Team,Training recovery,Fault tolerance,2025-12-04
+slurm.version,Workload Management,23.11,23.11,23.11,Slurm workload manager version,Yes,String,Valid Slurm version,Public,AI Operations,Job scheduling,Latest stable,2025-12-04
+slurm.controller_ip,Workload Management,10.100.0.10,10.110.0.10,10.120.0.10,Slurm controller node IP,Yes,String,Valid IPv4,Confidential,AI Operations,Network connectivity,Primary scheduler,2025-12-04
+slurm.controller_backup_ip,Workload Management,10.100.0.11,10.110.0.11,10.120.0.11,Slurm backup controller IP,No,String,Valid IPv4,Confidential,AI Operations,HA configuration,Failover scheduler,2025-12-04
+slurm.partition_gpu,Workload Management,gpu-h100,gpu-h100,gpu-h100,Primary GPU partition name,Yes,String,Valid partition name,Public,AI Operations,Resource allocation,Default partition,2025-12-04
+slurm.max_job_time_hours,Workload Management,168,72,168,Maximum job runtime in hours,Yes,Integer,24-336,Public,AI Operations,Resource planning,Long training support,2025-12-04
+slurm.default_cpus_per_gpu,Workload Management,16,16,16,Default CPU cores per GPU allocation,Yes,Integer,8-32,Public,AI Operations,Resource allocation,Balanced ratio,2025-12-04
+slurm.gres_config,Workload Management,gpu:h100:8,gpu:h100:8,gpu:h100:8,GRES configuration per node,Yes,String,Valid GRES format,Public,AI Operations,GPU scheduling,8 GPUs per node,2025-12-04
+slurm.accounting_db,Workload Management,slurm_acct_db,slurm_acct_db,slurm_acct_db,Slurm accounting database name,Yes,String,Valid database name,Public,AI Operations,Job accounting,MySQL/MariaDB,2025-12-04
+slurm.fairshare_enabled,Workload Management,true,true,true,Enable Slurm fair-share scheduling,Yes,Boolean,true|false,Public,AI Operations,Multi-user fairness,Priority scheduling,2025-12-04
+bcm.enabled,Base Command Manager,true,false,true,Enable Base Command Manager,Yes,Boolean,true|false,Public,AI Operations,Cluster management,Enterprise management,2025-12-04
+bcm.server_ip,Base Command Manager,10.100.0.20,10.110.0.20,10.120.0.20,BCM server management IP,Yes,String,Valid IPv4,Confidential,AI Operations,Network connectivity,Management node,2025-12-04
+bcm.version,Base Command Manager,2.4,2.4,2.4,Base Command Manager version,Yes,String,Valid BCM version,Public,AI Operations,API compatibility,Latest stable,2025-12-04
+bcm.admin_user,Base Command Manager,bcm_admin,bcm_admin,bcm_admin,BCM administrative username,Yes,String,Valid username,Confidential,Security Team,BCM setup,Initial admin account,2025-12-04
+bcm.admin_password,Base Command Manager,[vault:bcm_admin_password_prod],[vault:bcm_admin_password_test],[vault:bcm_admin_password_dr],BCM admin password,Yes,String,Min 12 characters,Secret,Security Team,bcm.admin_user,Stored in Ansible Vault,2025-12-04
+software.nvidia_driver_version,Software Stack,550.54.14,550.54.14,550.54.14,NVIDIA GPU driver version,Yes,String,Valid driver version,Public,Software Team,CUDA compatibility,Production driver,2025-12-04
+software.cuda_version,Software Stack,12.4,12.4,12.4,CUDA toolkit version,Yes,String,Valid CUDA version,Public,Software Team,GPU compatibility,Latest stable,2025-12-04
+software.cudnn_version,Software Stack,9.0.0,9.0.0,9.0.0,cuDNN library version,Yes,String,Valid cuDNN version,Public,Software Team,software.cuda_version,Deep learning ops,2025-12-04
+software.nccl_version,Software Stack,2.21.5,2.21.5,2.21.5,NCCL communication library version,Yes,String,Valid NCCL version,Public,Software Team,Multi-GPU comm,Latest performance,2025-12-04
+software.dgx_os_version,Software Stack,6.2.0,6.2.0,6.2.0,DGX OS version,Yes,String,Valid DGX OS version,Public,Software Team,Driver support,Ubuntu-based,2025-12-04
+software.mlnx_ofed_version,Software Stack,23.10-3.2.2.0,23.10-3.2.2.0,23.10-3.2.2.0,Mellanox OFED driver version,Yes,String,Valid MLNX OFED,Public,Software Team,InfiniBand support,Latest stable,2025-12-04
+containers.ngc_registry,Containers,nvcr.io,nvcr.io,nvcr.io,NVIDIA NGC container registry URL,Yes,String,Valid registry URL,Public,AI Team,Container deployment,Official containers,2025-12-04
+containers.pytorch_tag,Containers,24.08-py3,24.08-py3,24.08-py3,PyTorch NGC container tag,Yes,String,Valid container tag,Public,AI Team,Model development,Latest optimized,2025-12-04
+containers.tensorflow_tag,Containers,24.08-tf2-py3,24.08-tf2-py3,24.08-tf2-py3,TensorFlow NGC container tag,Yes,String,Valid container tag,Public,AI Team,Model development,TF 2.x optimized,2025-12-04
+containers.jax_tag,Containers,24.08-py3,24.08-py3,24.08-py3,JAX NGC container tag,Yes,String,Valid container tag,Public,AI Team,Model development,XLA backend,2025-12-04
+containers.triton_tag,Containers,24.08-py3,24.08-py3,24.08-py3,Triton Inference Server tag,Yes,String,Valid container tag,Public,AI Team,Model serving,Inference optimization,2025-12-04
+containers.nemo_tag,Containers,24.08,24.08,24.08,NeMo framework container tag,Yes,String,Valid container tag,Public,AI Team,LLM training,Foundation models,2025-12-04
+development.jupyter_enabled,Development,true,true,true,Enable JupyterHub for interactive dev,Yes,Boolean,true|false,Public,AI Team,Data science workflow,GPU-enabled notebooks,2025-12-04
+development.jupyter_port,Development,8888,8888,8888,JupyterHub port,Yes,Integer,1024-65535,Public,AI Team,Network access,Standard Jupyter port,2025-12-04
+development.tensorboard_enabled,Development,true,true,true,Enable TensorBoard visualization,Yes,Boolean,true|false,Public,AI Team,Training monitoring,Metrics visualization,2025-12-04
+development.tensorboard_port,Development,6006,6006,6006,TensorBoard port,Yes,Integer,1024-65535,Public,AI Team,Network access,Standard TB port,2025-12-04
+mlops.mlflow_enabled,MLOps,true,true,true,Enable MLflow experiment tracking,Yes,Boolean,true|false,Public,MLOps Team,Model lifecycle,Experiment management,2025-12-04
+mlops.mlflow_server_ip,MLOps,10.100.0.30,10.110.0.30,10.120.0.30,MLflow tracking server IP,Yes,String,Valid IPv4,Confidential,MLOps Team,Network connectivity,Central tracking,2025-12-04
+mlops.mlflow_port,MLOps,5000,5000,5000,MLflow server port,Yes,Integer,1024-65535,Public,MLOps Team,,Standard MLflow port,2025-12-04
+mlops.mlflow_artifact_path,MLOps,/shared/mlflow/artifacts,/shared/mlflow/artifacts,/shared/mlflow/artifacts,MLflow artifact storage path,Yes,String,Valid path,Public,MLOps Team,storage.mount_path,Model storage,2025-12-04
+monitoring.prometheus_enabled,Monitoring,true,true,true,Enable Prometheus monitoring,Yes,Boolean,true|false,Public,Operations,Metrics collection,GPU metrics,2025-12-04
+monitoring.prometheus_server_ip,Monitoring,10.100.0.40,10.110.0.40,10.120.0.40,Prometheus server IP,Yes,String,Valid IPv4,Confidential,Operations,Network connectivity,Metrics aggregation,2025-12-04
+monitoring.grafana_enabled,Monitoring,true,true,true,Enable Grafana dashboards,Yes,Boolean,true|false,Public,Operations,Visualization,Pre-built dashboards,2025-12-04
+monitoring.grafana_server_ip,Monitoring,10.100.0.41,10.110.0.41,10.120.0.41,Grafana server IP,Yes,String,Valid IPv4,Confidential,Operations,Network connectivity,Dashboard server,2025-12-04
+monitoring.dcgm_exporter_enabled,Monitoring,true,true,true,Enable NVIDIA DCGM metrics export,Yes,Boolean,true|false,Public,Operations,GPU monitoring,Real-time metrics,2025-12-04
+monitoring.gpu_util_alert_threshold,Monitoring,95,90,95,GPU utilization alert threshold %,Yes,Integer,80-99,Public,Operations,Resource optimization,High util alert,2025-12-04
+monitoring.gpu_temp_alert_threshold,Monitoring,83,80,83,GPU temperature alert threshold C,Yes,Integer,75-85,Public,Operations,Thermal management,Throttle prevention,2025-12-04
+monitoring.gpu_memory_alert_threshold,Monitoring,95,90,95,GPU memory usage alert threshold %,Yes,Integer,80-99,Public,Operations,Memory management,OOM prevention,2025-12-04
+monitoring.syslog_server,Monitoring,10.100.0.42,10.110.0.42,10.120.0.42,Centralized syslog server IP,Yes,String,Valid IPv4,Confidential,Operations,Log aggregation,Central logging,2025-12-04
+monitoring.syslog_port,Monitoring,514,514,514,Syslog UDP port,Yes,Integer,1-65535,Public,Operations,Firewall rules,Standard syslog port,2025-12-04
+security.ldap_enabled,Security,true,true,true,Enable LDAP user authentication,Yes,Boolean,true|false,Confidential,Security Team,User management,Central auth,2025-12-04
+security.ldap_server_primary,Security,10.100.2.10,10.110.2.10,10.120.2.10,Primary LDAP server IP,Yes,String,Valid IPv4,Confidential,Security Team,Network connectivity,AD integration,2025-12-04
+security.ldap_server_secondary,Security,10.100.2.11,10.110.2.11,10.120.2.11,Secondary LDAP server IP,No,String,Valid IPv4,Confidential,Security Team,Network connectivity,LDAP failover,2025-12-04
+security.ldap_base_dn,Security,"DC=client,DC=local","DC=test,DC=local","DC=client,DC=local",LDAP base distinguished name,Yes,String,Valid DN format,Confidential,Security Team,integrations.ldap,Organization unit,2025-12-04
+security.ldap_bind_user,Security,svc_dgx_ldap,svc_dgx_ldap_test,svc_dgx_ldap_dr,LDAP bind username,Yes,String,Valid username,Confidential,Security Team,AD account,Service account,2025-12-04
+security.ldap_bind_password,Security,[vault:ldap_bind_password_prod],[vault:ldap_bind_password_test],[vault:ldap_bind_password_dr],LDAP bind password,Yes,String,Min 12 characters,Secret,Security Team,,Stored in Ansible Vault,2025-12-04
+security.ssh_key_auth_only,Security,true,true,true,Enforce SSH key authentication only,Yes,Boolean,true|false,Public,Security Team,Secure access,Disable passwords,2025-12-04
+security.firewall_policy,Security,restrictive,standard,restrictive,Network firewall configuration,Yes,String,restrictive|standard,Confidential,Security Team,Network security,Minimal surface,2025-12-04
+security.root_ssh_enabled,Security,false,true,false,Allow root SSH login,Yes,Boolean,true|false,Public,Security Team,Security hardening,Disable for production,2025-12-04
+operations.backup_enabled,Operations,true,true,true,Enable automated backups,Yes,Boolean,true|false,Public,Operations,Data protection,Config and data backup,2025-12-04
+operations.backup_retention_days,Operations,90,30,90,Backup retention period in days,Yes,Integer,30-365,Public,Operations,Storage capacity,Compliance req,2025-12-04
+operations.backup_schedule,Operations,0 2 * * *,0 3 * * *,0 2 * * *,Daily backup schedule (cron),Yes,String,Valid cron expression,Public,Operations,Backup strategy,2 AM UTC,2025-12-04
+operations.maintenance_window,Operations,Sunday 02:00-06:00 UTC,Sunday 02:00-06:00 UTC,Sunday 02:00-06:00 UTC,Weekly maintenance window,Yes,String,Valid time range,Public,Operations,Minimal disruption,Low-usage period,2025-12-04
+operations.ntp_server_primary,Operations,10.100.4.10,10.110.4.10,10.120.4.10,Primary NTP server IP,Yes,String,Valid IPv4,Confidential,Operations,Time sync,Critical for distributed,2025-12-04
+operations.ntp_server_secondary,Operations,10.100.4.11,10.110.4.11,10.120.4.11,Secondary NTP server IP,No,String,Valid IPv4,Confidential,Operations,Time sync,NTP failover,2025-12-04
+operations.dns_server_primary,Operations,10.100.5.10,10.110.5.10,10.120.5.10,Primary DNS server IP,Yes,String,Valid IPv4,Confidential,Operations,Name resolution,Internal DNS,2025-12-04
+operations.dns_server_secondary,Operations,10.100.5.11,10.110.5.11,10.120.5.11,Secondary DNS server IP,No,String,Valid IPv4,Confidential,Operations,Name resolution,DNS failover,2025-12-04
+support.nvidia_support_level,Support,Enterprise,Enterprise,Enterprise,NVIDIA support contract level,Yes,String,Enterprise|Priority,Confidential,Support Team,Critical workloads,24x7 support,2025-12-04
+support.support_response_sla_hr,Support,4,8,4,Critical issue response SLA in hours,Yes,Integer,4-24,Public,Support Team,Incident response,Hardware issues,2025-12-04
+support.support_email,Support,dgx-support@client.local,dgx-support@client.local,dgx-support@client.local,Support notification email,Yes,String,Valid email,Confidential,Support Team,Alert notifications,NOC distribution,2025-12-04
+dr.enabled,DR,true,false,true,Disaster recovery enabled,Yes,Boolean,true|false,Public,DR Team,Business continuity,Phase 2 option,2025-12-04
+dr.replication_enabled,DR,true,false,true,Enable cross-site replication,Yes,Boolean,true|false,Public,DR Team,Data protection,Storage replication,2025-12-04
+dr.rpo_hours,DR,24,48,24,Recovery Point Objective in hours,Yes,Integer,1-48,Public,DR Team,Data loss tolerance,Target RPO,2025-12-04
+dr.rto_hours,DR,4,8,4,Recovery Time Objective in hours,Yes,Integer,1-24,Public,DR Team,Recovery time,Target RTO,2025-12-04
+facilities.power_capacity_kw,Facilities,500,250,500,Total power capacity in kW,Yes,Integer,200-1000,Public,Facilities Team,Infrastructure,Per 8 DGX nodes,2025-12-04
+facilities.cooling_capacity_kw,Facilities,500,250,500,Cooling capacity in kW,Yes,Integer,200-1000,Public,Facilities Team,Thermal management,Match power load,2025-12-04
+facilities.rack_count,Facilities,4,2,4,Number of racks,Yes,Integer,2-16,Public,Facilities Team,Physical space,DGX rack density,2025-12-04
+facilities.datacenter_tier,Facilities,Tier 3,Tier 2,Tier 3,Datacenter tier level,Yes,String,Tier 2|Tier 3|Tier 4,Public,Facilities Team,Availability,99.98% uptime,2025-12-04

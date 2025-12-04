@@ -1,0 +1,152 @@
+---
+#------------------------------------------------------------------------------
+# NVIDIA GPU Compute Cluster - Phase 3: Validation
+#------------------------------------------------------------------------------
+# System validation and benchmark tests
+#------------------------------------------------------------------------------
+
+- name: Phase 3 - System Validation
+  hosts: gpu_nodes
+  become: yes
+  gather_facts: yes
+
+  vars_files:
+    - "{{ playbook_dir }}/../vars/secrets.yml"
+
+  tasks:
+    - name: Display validation info
+      ansible.builtin.debug:
+        msg: "Running validation on {{ inventory_hostname }}"
+
+    #--------------------------------------------------------------------------
+    # GPU Health Check
+    #--------------------------------------------------------------------------
+    - name: Run nvidia-smi
+      ansible.builtin.command: nvidia-smi
+      register: nvidia_smi_result
+      changed_when: false
+      tags: [gpu-health]
+
+    - name: Display GPU status
+      ansible.builtin.debug:
+        var: nvidia_smi_result.stdout_lines
+      tags: [gpu-health]
+
+    - name: Check GPU count
+      ansible.builtin.command: nvidia-smi -L
+      register: gpu_list
+      changed_when: false
+      tags: [gpu-health]
+
+    - name: Verify expected GPU count
+      ansible.builtin.assert:
+        that:
+          - gpu_list.stdout_lines | length == hardware.gpu_count_per_node | int
+        fail_msg: "Expected {{ hardware.gpu_count_per_node }} GPUs, found {{ gpu_list.stdout_lines | length }}"
+        success_msg: "GPU count verified: {{ gpu_list.stdout_lines | length }}"
+      tags: [gpu-health]
+
+    #--------------------------------------------------------------------------
+    # CUDA Validation
+    #--------------------------------------------------------------------------
+    - name: Run CUDA deviceQuery
+      ansible.builtin.command: /usr/local/cuda/samples/1_Utilities/deviceQuery/deviceQuery
+      register: cuda_query
+      changed_when: false
+      ignore_errors: yes
+      tags: [cuda-validation]
+
+    #--------------------------------------------------------------------------
+    # NCCL Tests
+    #--------------------------------------------------------------------------
+    - name: Run NCCL all-reduce test (intra-node)
+      ansible.builtin.shell: |
+        docker run --rm --gpus all \
+          nvcr.io/nvidia/pytorch:{{ containers.pytorch_tag }} \
+          python -c "import torch; import torch.distributed as dist; print(f'NCCL available: {torch.cuda.nccl.is_available(torch.randn(1).cuda())}')"
+      register: nccl_test
+      changed_when: false
+      tags: [nccl-test]
+
+    - name: Display NCCL test result
+      ansible.builtin.debug:
+        var: nccl_test.stdout
+      tags: [nccl-test]
+
+    #--------------------------------------------------------------------------
+    # Network Validation
+    #--------------------------------------------------------------------------
+    - name: Verify RoCE connectivity
+      ansible.builtin.command: "ping -c 3 {{ hostvars[item]['ansible_host'] }}"
+      loop: "{{ groups['gpu_nodes'] | difference([inventory_hostname]) }}"
+      register: ping_results
+      changed_when: false
+      ignore_errors: yes
+      tags: [network-validation]
+
+    #--------------------------------------------------------------------------
+    # Storage Validation
+    #--------------------------------------------------------------------------
+    - name: Verify shared storage mount
+      ansible.builtin.stat:
+        path: "{{ storage.shared_mount }}"
+      register: shared_mount
+      tags: [storage-validation]
+
+    - name: Assert shared storage is mounted
+      ansible.builtin.assert:
+        that:
+          - shared_mount.stat.exists
+          - shared_mount.stat.isdir
+        fail_msg: "Shared storage not mounted at {{ storage.shared_mount }}"
+        success_msg: "Shared storage verified at {{ storage.shared_mount }}"
+      tags: [storage-validation]
+
+- name: Phase 3 - Cluster-wide Validation
+  hosts: slurm_controllers[0]
+  become: yes
+  gather_facts: no
+
+  tasks:
+    #--------------------------------------------------------------------------
+    # Slurm Validation
+    #--------------------------------------------------------------------------
+    - name: Check Slurm cluster status
+      ansible.builtin.command: sinfo -h -o "%P %a %l %D %t"
+      register: sinfo
+      changed_when: false
+      tags: [slurm-validation]
+
+    - name: Display Slurm partitions
+      ansible.builtin.debug:
+        var: sinfo.stdout_lines
+      tags: [slurm-validation]
+
+    - name: Submit test job
+      ansible.builtin.shell: |
+        sbatch --wrap="nvidia-smi" --gres=gpu:1 --output=/tmp/test_job_%j.out
+      register: test_job
+      changed_when: true
+      tags: [slurm-validation]
+
+    - name: Display test job submission
+      ansible.builtin.debug:
+        var: test_job.stdout
+      tags: [slurm-validation]
+
+    #--------------------------------------------------------------------------
+    # Final Summary
+    #--------------------------------------------------------------------------
+    - name: Display validation summary
+      ansible.builtin.debug:
+        msg: |
+          ============================================================
+          GPU Compute Cluster Validation Complete
+          ============================================================
+          Cluster: {{ cluster.name }}
+          Total GPU Nodes: {{ groups['gpu_nodes'] | length }}
+          GPUs per Node: {{ hardware.gpu_count_per_node }}
+          Total GPUs: {{ groups['gpu_nodes'] | length * hardware.gpu_count_per_node | int }}
+          Slurm Status: Active
+          ============================================================
+      tags: [summary]

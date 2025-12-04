@@ -1,0 +1,172 @@
+---
+#------------------------------------------------------------------------------
+# InfiniBand Role - Mellanox OFED and InfiniBand Configuration
+#------------------------------------------------------------------------------
+
+#------------------------------------------------------------------------------
+# Prerequisites
+#------------------------------------------------------------------------------
+- name: Check current InfiniBand status
+  ansible.builtin.shell: ibstat 2>/dev/null | head -10
+  register: ib_current_status
+  changed_when: false
+  ignore_errors: yes
+  tags: [check]
+
+- name: Display current IB status
+  ansible.builtin.debug:
+    msg: "{{ ib_current_status.stdout_lines | default(['InfiniBand not detected']) }}"
+  tags: [check]
+
+#------------------------------------------------------------------------------
+# Mellanox OFED Installation
+#------------------------------------------------------------------------------
+- name: Install InfiniBand dependencies
+  ansible.builtin.apt:
+    name:
+      - rdma-core
+      - infiniband-diags
+      - ibutils
+      - ibverbs-utils
+      - perftest
+      - opensm
+      - libibverbs-dev
+      - libibumad-dev
+      - librdmacm-dev
+    state: present
+  when: ansible_os_family == "Debian"
+  tags: [packages]
+
+- name: Install IPoIB support
+  ansible.builtin.apt:
+    name:
+      - iproute2
+    state: present
+  tags: [ipoib]
+
+#------------------------------------------------------------------------------
+# InfiniBand Module Configuration
+#------------------------------------------------------------------------------
+- name: Load InfiniBand kernel modules
+  ansible.builtin.modprobe:
+    name: "{{ item }}"
+    state: present
+  loop:
+    - ib_core
+    - ib_umad
+    - ib_uverbs
+    - mlx5_core
+    - mlx5_ib
+    - ib_ipoib
+  tags: [modules]
+
+- name: Persist InfiniBand modules on boot
+  ansible.builtin.lineinfile:
+    path: /etc/modules-load.d/infiniband.conf
+    line: "{{ item }}"
+    create: yes
+    mode: '0644'
+  loop:
+    - ib_core
+    - ib_umad
+    - ib_uverbs
+    - mlx5_core
+    - mlx5_ib
+    - ib_ipoib
+  tags: [modules]
+
+#------------------------------------------------------------------------------
+# IPoIB Configuration
+#------------------------------------------------------------------------------
+- name: Configure IPoIB interfaces
+  ansible.builtin.template:
+    src: ipoib.netplan.j2
+    dest: /etc/netplan/60-infiniband.yaml
+    mode: '0644'
+  when: ansible_distribution == "Ubuntu"
+  notify: apply netplan
+  tags: [ipoib]
+
+#------------------------------------------------------------------------------
+# Performance Tuning
+#------------------------------------------------------------------------------
+- name: Configure IB performance settings
+  ansible.builtin.sysctl:
+    name: "{{ item.name }}"
+    value: "{{ item.value }}"
+    state: present
+    sysctl_file: /etc/sysctl.d/99-infiniband.conf
+    reload: yes
+  loop:
+    - { name: "net.core.rmem_max", value: "134217728" }
+    - { name: "net.core.wmem_max", value: "134217728" }
+    - { name: "net.ipv4.tcp_rmem", value: "4096 87380 134217728" }
+    - { name: "net.ipv4.tcp_wmem", value: "4096 65536 134217728" }
+  tags: [tuning]
+
+#------------------------------------------------------------------------------
+# GPUDirect RDMA Configuration
+#------------------------------------------------------------------------------
+- name: Install nvidia-peermem for GPUDirect RDMA
+  ansible.builtin.apt:
+    name: nvidia-peer-memory
+    state: present
+  when: ansible_os_family == "Debian"
+  ignore_errors: yes
+  tags: [gpudirect]
+
+- name: Load nvidia-peermem module
+  ansible.builtin.modprobe:
+    name: nvidia_peermem
+    state: present
+  ignore_errors: yes
+  tags: [gpudirect]
+
+- name: Persist nvidia-peermem on boot
+  ansible.builtin.lineinfile:
+    path: /etc/modules-load.d/gpudirect.conf
+    line: nvidia_peermem
+    create: yes
+    mode: '0644'
+  ignore_errors: yes
+  tags: [gpudirect]
+
+#------------------------------------------------------------------------------
+# Verification
+#------------------------------------------------------------------------------
+- name: Get InfiniBand adapter list
+  ansible.builtin.shell: ibstat -l
+  register: ib_adapters
+  changed_when: false
+  tags: [verify]
+
+- name: Display InfiniBand adapters
+  ansible.builtin.debug:
+    msg: "{{ ib_adapters.stdout_lines }}"
+  tags: [verify]
+
+- name: Get InfiniBand port status
+  ansible.builtin.shell: ibstat
+  register: ib_full_status
+  changed_when: false
+  tags: [verify]
+
+- name: Display InfiniBand port status
+  ansible.builtin.debug:
+    msg: "{{ ib_full_status.stdout_lines }}"
+  tags: [verify]
+
+- name: Run IB bandwidth test (loopback)
+  ansible.builtin.shell: |
+    ib_write_bw --duration 5 2>&1 | tail -5
+  register: ib_bw_test
+  changed_when: false
+  ignore_errors: yes
+  tags: [verify]
+
+#------------------------------------------------------------------------------
+# Handlers
+#------------------------------------------------------------------------------
+handlers:
+  - name: apply netplan
+    ansible.builtin.command: netplan apply

@@ -1,0 +1,32 @@
+---
+#------------------------------------------------------------------------------
+# NCCL Role - NVIDIA Collective Communications Library
+#------------------------------------------------------------------------------
+
+- name: Install NCCL library
+  ansible.builtin.apt:
+    name:
+      - libnccl2
+      - libnccl-dev
+    state: present
+
+- name: Configure NCCL environment
+  ansible.builtin.copy:
+    dest: /etc/profile.d/nccl.sh
+    content: |
+      export NCCL_DEBUG=WARN
+      export NCCL_IB_DISABLE=0
+      export NCCL_NET_GDR_LEVEL=5
+      export NCCL_P2P_LEVEL=NVL
+    mode: '0644'
+
+- name: Verify NCCL installation
+  ansible.builtin.shell: |
+    python3 -c "import ctypes; ctypes.CDLL('libnccl.so.2'); print('NCCL library loaded successfully')"
+  register: nccl_check
+  changed_when: false
+  ignore_errors: yes
+
+- name: Display NCCL status
+  ansible.builtin.debug:
+    var: nccl_check.stdout

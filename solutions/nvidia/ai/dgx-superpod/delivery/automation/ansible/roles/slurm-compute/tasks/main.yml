@@ -1,0 +1,209 @@
+---
+#------------------------------------------------------------------------------
+# Slurm Compute Role - slurmd on DGX Nodes
+#------------------------------------------------------------------------------
+
+#------------------------------------------------------------------------------
+# Slurm User and Group
+#------------------------------------------------------------------------------
+- name: Create Slurm group
+  ansible.builtin.group:
+    name: slurm
+    gid: 64030
+    state: present
+  tags: [user]
+
+- name: Create Slurm user
+  ansible.builtin.user:
+    name: slurm
+    uid: 64030
+    group: slurm
+    system: yes
+    home: /var/lib/slurm
+    shell: /bin/false
+  tags: [user]
+
+#------------------------------------------------------------------------------
+# Slurm Installation
+#------------------------------------------------------------------------------
+- name: Install Slurm compute packages
+  ansible.builtin.apt:
+    name:
+      - slurm-wlm
+      - slurmd
+      - slurm-client
+      - munge
+    state: present
+  when: ansible_os_family == "Debian"
+  tags: [packages]
+
+#------------------------------------------------------------------------------
+# Munge Authentication
+#------------------------------------------------------------------------------
+- name: Copy Munge key from controller
+  ansible.builtin.copy:
+    src: /etc/munge/munge.key
+    dest: /etc/munge/munge.key
+    owner: munge
+    group: munge
+    mode: '0400'
+  delegate_to: "{{ slurm_controller }}"
+  tags: [munge]
+
+- name: Start Munge service
+  ansible.builtin.systemd:
+    name: munge
+    state: started
+    enabled: yes
+  tags: [munge]
+
+#------------------------------------------------------------------------------
+# Slurm Directories
+#------------------------------------------------------------------------------
+- name: Create Slurm directories
+  ansible.builtin.file:
+    path: "{{ item }}"
+    state: directory
+    owner: slurm
+    group: slurm
+    mode: '0755'
+  loop:
+    - /etc/slurm
+    - /var/log/slurm
+    - /var/spool/slurm/d
+    - /var/lib/slurm
+  tags: [directories]
+
+#------------------------------------------------------------------------------
+# Cgroups Configuration for GPU Isolation
+#------------------------------------------------------------------------------
+- name: Configure cgroups for GPU isolation
+  ansible.builtin.copy:
+    dest: /etc/slurm/cgroup.conf
+    content: |
+      CgroupAutomount=yes
+      CgroupMountpoint=/sys/fs/cgroup
+      ConstrainCores=yes
+      ConstrainDevices=yes
+      ConstrainRAMSpace=yes
+      ConstrainSwapSpace=yes
+    owner: slurm
+    group: slurm
+    mode: '0644'
+  tags: [cgroups]
+
+- name: Configure allowed devices for GPU access
+  ansible.builtin.copy:
+    dest: /etc/slurm/cgroup_allowed_devices_file.conf
+    content: |
+      /dev/null
+      /dev/urandom
+      /dev/zero
+      /dev/sda*
+      /dev/cpu/*
+      /dev/pts/*
+      /dev/nvidia*
+      /dev/infiniband/*
+      /dev/dri/*
+    owner: slurm
+    group: slurm
+    mode: '0644'
+  tags: [cgroups]
+
+#------------------------------------------------------------------------------
+# Enroot Configuration
+#------------------------------------------------------------------------------
+- name: Install Enroot for container support
+  ansible.builtin.apt:
+    name:
+      - squashfuse
+      - fuse-overlayfs
+    state: present
+  when: ansible_os_family == "Debian"
+  tags: [enroot]
+
+- name: Install Enroot package
+  ansible.builtin.shell: |
+    if ! command -v enroot &> /dev/null; then
+      curl -fSsL -O https://github.com/NVIDIA/enroot/releases/download/v3.4.1/enroot_3.4.1-1_amd64.deb
+      curl -fSsL -O https://github.com/NVIDIA/enroot/releases/download/v3.4.1/enroot+caps_3.4.1-1_amd64.deb
+      apt install -y ./enroot_3.4.1-1_amd64.deb ./enroot+caps_3.4.1-1_amd64.deb
+      rm -f enroot_*.deb
+    fi
+  args:
+    creates: /usr/bin/enroot
+  tags: [enroot]
+
+#------------------------------------------------------------------------------
+# Prolog/Epilog Scripts
+#------------------------------------------------------------------------------
+- name: Create Slurm prolog script
+  ansible.builtin.copy:
+    dest: /etc/slurm/prolog.sh
+    content: |
+      #!/bin/bash
+      # Slurm Prolog Script for DGX Nodes
+
+      # Reset GPU state
+      nvidia-smi -rac 2>/dev/null || true
+
+      # Clear GPU memory
+      nvidia-smi --gpu-reset 2>/dev/null || true
+
+      exit 0
+    mode: '0755'
+  tags: [scripts]
+
+- name: Create Slurm epilog script
+  ansible.builtin.copy:
+    dest: /etc/slurm/epilog.sh
+    content: |
+      #!/bin/bash
+      # Slurm Epilog Script for DGX Nodes
+
+      # Kill any remaining GPU processes from the job
+      nvidia-smi --gpu-reset 2>/dev/null || true
+
+      # Clean up temporary files
+      rm -rf /tmp/slurm_${SLURM_JOB_ID}* 2>/dev/null || true
+
+      exit 0
+    mode: '0755'
+  tags: [scripts]
+
+#------------------------------------------------------------------------------
+# Health Check Script
+#------------------------------------------------------------------------------
+- name: Create GPU health check script
+  ansible.builtin.copy:
+    dest: /etc/slurm/healthcheck.sh
+    content: |
+      #!/bin/bash
+      # DGX Node Health Check for Slurm
+
+      # Check all GPUs are accessible
+      gpu_count=$(nvidia-smi -L | wc -l)
+      expected_gpus={{ gpu_per_node | default(8) }}
+
+      if [ "$gpu_count" -ne "$expected_gpus" ]; then
+        echo "GPU count mismatch: $gpu_count vs $expected_gpus expected"
+        exit 1
+      fi
+
+      # Check GPU temperatures
+      max_temp=$(nvidia-smi --query-gpu=temperature.gpu --format=csv,noheader | sort -rn | head -1)
+      if [ "$max_temp" -gt 85 ]; then
+        echo "GPU temperature too high: ${max_temp}C"
+        exit 1
+      fi
+
+      # Check InfiniBand is up
+      ib_ports=$(ibstat -l 2>/dev/null | wc -l)
+      if [ "$ib_ports" -eq 0 ]; then
+        echo "No InfiniBand ports detected"
+        exit 1
+      fi
+
+      exit 0
+    mode: '0755'
+  tags: [scripts]

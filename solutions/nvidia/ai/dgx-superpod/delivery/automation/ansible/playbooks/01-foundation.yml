@@ -1,0 +1,125 @@
+---
+#------------------------------------------------------------------------------
+# Phase 1 - Foundation: Base OS, Drivers, and Network Configuration
+#------------------------------------------------------------------------------
+# Configures DGX nodes with:
+# - Base OS settings (NTP, DNS, LDAP)
+# - NVIDIA GPU drivers
+# - CUDA toolkit
+# - NCCL libraries
+# - Network configuration
+#------------------------------------------------------------------------------
+
+- name: Configure DGX Node Foundation
+  hosts: dgx_nodes
+  become: yes
+  gather_facts: yes
+
+  vars_files:
+    - "{{ playbook_dir }}/../vars/generated/project.yml"
+    - "{{ playbook_dir }}/../vars/generated/cluster.yml"
+    - "{{ playbook_dir }}/../vars/generated/hardware.yml"
+    - "{{ playbook_dir }}/../vars/generated/software.yml"
+    - "{{ playbook_dir }}/../vars/generated/operations.yml"
+    - "{{ playbook_dir }}/../vars/generated/security.yml"
+    - "{{ playbook_dir }}/../vars/secrets.yml"
+
+  pre_tasks:
+    - name: Verify DGX hardware
+      ansible.builtin.shell: nvidia-smi -L
+      register: gpu_list
+      changed_when: false
+      failed_when: "'NVIDIA' not in gpu_list.stdout"
+      tags: [verify]
+
+    - name: Display detected GPUs
+      ansible.builtin.debug:
+        msg: "{{ gpu_list.stdout_lines }}"
+      tags: [verify]
+
+  roles:
+    #--------------------------------------------------------------------------
+    # Common OS Configuration
+    #--------------------------------------------------------------------------
+    - role: common
+      tags: [common]
+
+    #--------------------------------------------------------------------------
+    # NVIDIA Driver Installation
+    #--------------------------------------------------------------------------
+    - role: nvidia-drivers
+      vars:
+        nvidia_driver_version: "{{ software.nvidia_driver_version }}"
+        cuda_version: "{{ software.cuda_version }}"
+      tags: [drivers]
+
+    #--------------------------------------------------------------------------
+    # CUDA Toolkit
+    #--------------------------------------------------------------------------
+    - role: cuda-toolkit
+      vars:
+        cuda_version: "{{ software.cuda_version }}"
+        cudnn_version: "{{ software.cudnn_version }}"
+      tags: [cuda]
+
+    #--------------------------------------------------------------------------
+    # NVIDIA Container Toolkit
+    #--------------------------------------------------------------------------
+    - role: nvidia-docker
+      tags: [docker]
+
+    #--------------------------------------------------------------------------
+    # NCCL Communication Library
+    #--------------------------------------------------------------------------
+    - role: nccl
+      vars:
+        nccl_version: "{{ software.nccl_version }}"
+      tags: [nccl]
+
+  post_tasks:
+    - name: Verify NVIDIA driver version
+      ansible.builtin.shell: nvidia-smi --query-gpu=driver_version --format=csv,noheader | head -1
+      register: driver_version
+      changed_when: false
+      tags: [verify]
+
+    - name: Display driver information
+      ansible.builtin.debug:
+        msg: "NVIDIA Driver Version: {{ driver_version.stdout }}"
+      tags: [verify]
+
+    - name: Verify CUDA version
+      ansible.builtin.shell: nvcc --version | grep "release" | awk '{print $6}'
+      register: cuda_installed
+      changed_when: false
+      ignore_errors: yes
+      tags: [verify]
+
+    - name: Display CUDA version
+      ansible.builtin.debug:
+        msg: "CUDA Version: {{ cuda_installed.stdout | default('Not installed') }}"
+      tags: [verify]
+
+#------------------------------------------------------------------------------
+# Management Node Foundation
+#------------------------------------------------------------------------------
+- name: Configure Management Node Foundation
+  hosts: management
+  become: yes
+  gather_facts: yes
+
+  vars_files:
+    - "{{ playbook_dir }}/../vars/generated/project.yml"
+    - "{{ playbook_dir }}/../vars/generated/cluster.yml"
+    - "{{ playbook_dir }}/../vars/generated/operations.yml"
+    - "{{ playbook_dir }}/../vars/generated/security.yml"
+    - "{{ playbook_dir }}/../vars/secrets.yml"
+
+  roles:
+    - role: common
+      tags: [common]
+
+  post_tasks:
+    - name: Foundation phase complete
+      ansible.builtin.debug:
+        msg: "Foundation configuration complete for {{ inventory_hostname }}"

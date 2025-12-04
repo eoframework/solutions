@@ -1,0 +1,47 @@
+---
+#------------------------------------------------------------------------------
+# CUDA Toolkit Role - CUDA Installation
+#------------------------------------------------------------------------------
+
+- name: Check CUDA installation
+  ansible.builtin.stat:
+    path: "/usr/local/cuda-{{ software.cuda_version }}"
+  register: cuda_dir
+
+- name: Install CUDA toolkit
+  when: not cuda_dir.stat.exists
+  block:
+    - name: Install CUDA toolkit package
+      ansible.builtin.apt:
+        name: "cuda-toolkit-{{ software.cuda_version | replace('.', '-') }}"
+        state: present
+
+    - name: Create CUDA symlink
+      ansible.builtin.file:
+        src: "/usr/local/cuda-{{ software.cuda_version }}"
+        dest: /usr/local/cuda
+        state: link
+
+- name: Configure CUDA environment
+  ansible.builtin.copy:
+    dest: /etc/profile.d/cuda.sh
+    content: |
+      export PATH=/usr/local/cuda/bin:$PATH
+      export LD_LIBRARY_PATH=/usr/local/cuda/lib64:$LD_LIBRARY_PATH
+    mode: '0644'
+
+- name: Install cuDNN
+  ansible.builtin.apt:
+    name:
+      - libcudnn9-cuda-12
+      - libcudnn9-dev-cuda-12
+    state: present
+
+- name: Verify CUDA installation
+  ansible.builtin.command: /usr/local/cuda/bin/nvcc --version
+  register: nvcc_version
+  changed_when: false
+
+- name: Display CUDA version
+  ansible.builtin.debug:
+    var: nvcc_version.stdout_lines

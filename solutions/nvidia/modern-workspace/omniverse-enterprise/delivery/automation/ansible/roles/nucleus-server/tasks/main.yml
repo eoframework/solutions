@@ -1,0 +1,68 @@
+---
+#------------------------------------------------------------------------------
+# Nucleus Server Role - Omniverse Nucleus Installation
+#------------------------------------------------------------------------------
+
+- name: Create Omniverse directories
+  ansible.builtin.file:
+    path: "{{ item }}"
+    state: directory
+    owner: root
+    group: root
+    mode: '0755'
+  loop:
+    - /opt/ove
+    - "{{ nucleus.data_path }}"
+    - /var/log/omniverse
+
+- name: Install Docker for Nucleus containers
+  ansible.builtin.apt:
+    name:
+      - docker.io
+      - docker-compose
+    state: present
+
+- name: Start Docker service
+  ansible.builtin.service:
+    name: docker
+    state: started
+    enabled: yes
+
+- name: Download Nucleus installer
+  ansible.builtin.get_url:
+    url: "https://install.launcher.omniverse.nvidia.com/installers/omniverse-launcher-linux.AppImage"
+    dest: /tmp/omniverse-launcher.AppImage
+    mode: '0755'
+
+- name: Create Nucleus configuration
+  ansible.builtin.template:
+    src: nucleus-config.json.j2
+    dest: /opt/ove/nucleus-config.json
+    mode: '0644'
+
+- name: Configure Nucleus service
+  ansible.builtin.template:
+    src: nucleus.service.j2
+    dest: /etc/systemd/system/nucleus.service
+    mode: '0644'
+  notify: Restart nucleus
+
+- name: Start Nucleus service
+  ansible.builtin.service:
+    name: nucleus
+    state: started
+    enabled: yes
+
+- name: Verify Nucleus is running
+  ansible.builtin.uri:
+    url: "http://localhost:{{ nucleus.port }}/health"
+    method: GET
+    status_code: 200
+  register: nucleus_health
+  retries: 30
+  delay: 10
+  until: nucleus_health.status == 200
+
+- name: Display Nucleus status
+  ansible.builtin.debug:
+    msg: "Nucleus server is running on port {{ nucleus.port }}"

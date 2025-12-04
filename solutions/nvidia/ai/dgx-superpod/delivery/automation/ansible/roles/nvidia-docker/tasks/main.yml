@@ -1,0 +1,164 @@
+---
+#------------------------------------------------------------------------------
+# NVIDIA Docker Role - Container Toolkit Installation
+#------------------------------------------------------------------------------
+
+#------------------------------------------------------------------------------
+# Docker Installation
+#------------------------------------------------------------------------------
+- name: Install Docker prerequisites
+  ansible.builtin.apt:
+    name:
+      - apt-transport-https
+      - ca-certificates
+      - curl
+      - gnupg
+      - lsb-release
+    state: present
+  when: ansible_os_family == "Debian"
+  tags: [docker]
+
+- name: Add Docker GPG key
+  ansible.builtin.apt_key:
+    url: https://download.docker.com/linux/ubuntu/gpg
+    state: present
+  when: ansible_distribution == "Ubuntu"
+  tags: [docker]
+
+- name: Add Docker repository
+  ansible.builtin.apt_repository:
+    repo: "deb [arch=amd64] https://download.docker.com/linux/ubuntu {{ ansible_distribution_release }} stable"
+    state: present
+    filename: docker
+  when: ansible_distribution == "Ubuntu"
+  tags: [docker]
+
+- name: Install Docker
+  ansible.builtin.apt:
+    name:
+      - docker-ce
+      - docker-ce-cli
+      - containerd.io
+      - docker-buildx-plugin
+      - docker-compose-plugin
+    state: present
+    update_cache: yes
+  when: ansible_os_family == "Debian"
+  tags: [docker]
+
+#------------------------------------------------------------------------------
+# NVIDIA Container Toolkit Installation
+#------------------------------------------------------------------------------
+- name: Add NVIDIA Container Toolkit GPG key
+  ansible.builtin.apt_key:
+    url: https://nvidia.github.io/libnvidia-container/gpgkey
+    state: present
+  when: ansible_distribution == "Ubuntu"
+  tags: [nvidia-docker]
+
+- name: Add NVIDIA Container Toolkit repository
+  ansible.builtin.apt_repository:
+    repo: "deb https://nvidia.github.io/libnvidia-container/stable/deb/$(ARCH) /"
+    state: present
+    filename: nvidia-container-toolkit
+  when: ansible_distribution == "Ubuntu"
+  tags: [nvidia-docker]
+
+- name: Install NVIDIA Container Toolkit
+  ansible.builtin.apt:
+    name:
+      - nvidia-container-toolkit
+    state: present
+    update_cache: yes
+  when: ansible_os_family == "Debian"
+  tags: [nvidia-docker]
+
+#------------------------------------------------------------------------------
+# Docker Configuration
+#------------------------------------------------------------------------------
+- name: Configure Docker daemon for NVIDIA runtime
+  ansible.builtin.copy:
+    dest: /etc/docker/daemon.json
+    content: |
+      {
+        "default-runtime": "nvidia",
+        "runtimes": {
+          "nvidia": {
+            "path": "nvidia-container-runtime",
+            "runtimeArgs": []
+          }
+        },
+        "storage-driver": "overlay2",
+        "log-driver": "json-file",
+        "log-opts": {
+          "max-size": "100m",
+          "max-file": "5"
+        },
+        "default-ulimits": {
+          "memlock": {
+            "Name": "memlock",
+            "Hard": -1,
+            "Soft": -1
+          },
+          "stack": {
+            "Name": "stack",
+            "Hard": 67108864,
+            "Soft": 67108864
+          }
+        }
+      }
+    mode: '0644'
+  notify: restart docker
+  tags: [config]
+
+- name: Configure NVIDIA Container Toolkit
+  ansible.builtin.shell: nvidia-ctk runtime configure --runtime=docker
+  changed_when: false
+  notify: restart docker
+  tags: [config]
+
+#------------------------------------------------------------------------------
+# Service Management
+#------------------------------------------------------------------------------
+- name: Ensure Docker is running
+  ansible.builtin.systemd:
+    name: docker
+    state: started
+    enabled: yes
+  tags: [service]
+
+#------------------------------------------------------------------------------
+# User Configuration
+#------------------------------------------------------------------------------
+- name: Add users to docker group
+  ansible.builtin.user:
+    name: "{{ item }}"
+    groups: docker
+    append: yes
+  loop: "{{ docker_users | default(['dgxadmin']) }}"
+  ignore_errors: yes
+  tags: [users]
+
+#------------------------------------------------------------------------------
+# Verification
+#------------------------------------------------------------------------------
+- name: Verify Docker with NVIDIA runtime
+  ansible.builtin.shell: docker run --rm --gpus all nvidia/cuda:12.0-base nvidia-smi
+  register: docker_nvidia_test
+  changed_when: false
+  ignore_errors: yes
+  tags: [verify]
+
+- name: Display Docker NVIDIA test result
+  ansible.builtin.debug:
+    msg: "{{ docker_nvidia_test.stdout_lines | default(['Docker NVIDIA test failed']) }}"
+  tags: [verify]
+
+#------------------------------------------------------------------------------
+# Handlers
+#------------------------------------------------------------------------------
+handlers:
+  - name: restart docker
+    ansible.builtin.systemd:
+      name: docker
+      state: restarted

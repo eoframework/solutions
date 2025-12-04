@@ -1,0 +1,158 @@
+---
+#------------------------------------------------------------------------------
+# NVIDIA Omniverse Enterprise - Phase 3: Monitoring
+#------------------------------------------------------------------------------
+# Configure monitoring for Nucleus servers and workstations
+#------------------------------------------------------------------------------
+
+- name: Phase 3 - Monitoring Setup
+  hosts: monitoring
+  become: yes
+  gather_facts: yes
+
+  vars_files:
+    - "{{ playbook_dir }}/../vars/secrets.yml"
+
+  tasks:
+    - name: Display monitoring setup info
+      ansible.builtin.debug:
+        msg: "Configuring monitoring on {{ inventory_hostname }}"
+
+    #--------------------------------------------------------------------------
+    # Prometheus Server
+    #--------------------------------------------------------------------------
+    - name: Install Prometheus
+      when: "'prometheus-server' in inventory_hostname"
+      block:
+        - name: Create Prometheus user
+          ansible.builtin.user:
+            name: prometheus
+            system: yes
+            shell: /sbin/nologin
+
+        - name: Create Prometheus directories
+          ansible.builtin.file:
+            path: "{{ item }}"
+            state: directory
+            owner: prometheus
+            group: prometheus
+            mode: '0755'
+          loop:
+            - /etc/prometheus
+            - /var/lib/prometheus
+
+        - name: Download Prometheus
+          ansible.builtin.get_url:
+            url: "https://github.com/prometheus/prometheus/releases/download/v2.47.0/prometheus-2.47.0.linux-amd64.tar.gz"
+            dest: /tmp/prometheus.tar.gz
+            mode: '0644'
+
+        - name: Extract Prometheus
+          ansible.builtin.unarchive:
+            src: /tmp/prometheus.tar.gz
+            dest: /opt
+            remote_src: yes
+
+        - name: Configure Prometheus for Omniverse
+          ansible.builtin.template:
+            src: prometheus-omniverse.yml.j2
+            dest: /etc/prometheus/prometheus.yml
+            mode: '0644'
+          notify: Restart prometheus
+      tags: [prometheus]
+
+    #--------------------------------------------------------------------------
+    # Grafana Server
+    #--------------------------------------------------------------------------
+    - name: Install Grafana
+      when: "'grafana-server' in inventory_hostname"
+      block:
+        - name: Add Grafana APT key
+          ansible.builtin.apt_key:
+            url: https://apt.grafana.com/gpg.key
+            state: present
+
+        - name: Add Grafana repository
+          ansible.builtin.apt_repository:
+            repo: "deb https://apt.grafana.com stable main"
+            state: present
+
+        - name: Install Grafana
+          ansible.builtin.apt:
+            name: grafana
+            state: present
+            update_cache: yes
+
+        - name: Start Grafana service
+          ansible.builtin.service:
+            name: grafana-server
+            state: started
+            enabled: yes
+
+        - name: Import Omniverse dashboard
+          ansible.builtin.uri:
+            url: "http://localhost:3000/api/dashboards/db"
+            method: POST
+            body_format: json
+            body:
+              dashboard:
+                title: "Omniverse Enterprise"
+                panels: []
+            headers:
+              Authorization: "Bearer {{ grafana_api_key | default('') }}"
+          when: grafana_api_key is defined
+          ignore_errors: yes
+      tags: [grafana]
+
+  handlers:
+    - name: Restart prometheus
+      ansible.builtin.service:
+        name: prometheus
+        state: restarted
+
+- name: Phase 3 - Nucleus Monitoring Agents
+  hosts: nucleus_servers
+  become: yes
+  gather_facts: yes
+
+  vars_files:
+    - "{{ playbook_dir }}/../vars/secrets.yml"
+
+  tasks:
+    - name: Install Node Exporter on Nucleus servers
+      block:
+        - name: Download Node Exporter
+          ansible.builtin.get_url:
+            url: "https://github.com/prometheus/node_exporter/releases/download/v1.6.1/node_exporter-1.6.1.linux-amd64.tar.gz"
+            dest: /tmp/node_exporter.tar.gz
+            mode: '0644'
+
+        - name: Extract Node Exporter
+          ansible.builtin.unarchive:
+            src: /tmp/node_exporter.tar.gz
+            dest: /opt
+            remote_src: yes
+
+        - name: Create Node Exporter service
+          ansible.builtin.copy:
+            dest: /etc/systemd/system/node_exporter.service
+            content: |
+              [Unit]
+              Description=Node Exporter
+              After=network.target
+
+              [Service]
+              User=node_exporter
+              ExecStart=/opt/node_exporter-1.6.1.linux-amd64/node_exporter
+
+              [Install]
+              WantedBy=multi-user.target
+            mode: '0644'
+
+        - name: Start Node Exporter
+          ansible.builtin.service:
+            name: node_exporter
+            state: started
+            enabled: yes
+            daemon_reload: yes
+      tags: [node-exporter]

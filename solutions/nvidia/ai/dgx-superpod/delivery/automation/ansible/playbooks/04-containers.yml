@@ -1,0 +1,185 @@
+---
+#------------------------------------------------------------------------------
+# Phase 2 - NGC Containers and Development Tools
+#------------------------------------------------------------------------------
+# Configures container environment:
+# - NGC container registry access
+# - Pull optimized AI framework containers
+# - JupyterHub setup
+# - TensorBoard configuration
+# - MLflow tracking server
+#------------------------------------------------------------------------------
+
+- name: Configure NGC Containers and Development Tools
+  hosts: dgx_nodes
+  become: yes
+  gather_facts: yes
+
+  vars_files:
+    - "{{ playbook_dir }}/../vars/generated/project.yml"
+    - "{{ playbook_dir }}/../vars/generated/containers.yml"
+    - "{{ playbook_dir }}/../vars/generated/development.yml"
+    - "{{ playbook_dir }}/../vars/generated/storage.yml"
+    - "{{ playbook_dir }}/../vars/secrets.yml"
+
+  tasks:
+    #--------------------------------------------------------------------------
+    # NGC Container Registry Setup
+    #--------------------------------------------------------------------------
+    - name: Configure NGC container registry
+      ansible.builtin.shell: |
+        docker login nvcr.io -u '$oauthtoken' -p '{{ vault_ngc_api_key }}'
+      when: vault_ngc_api_key is defined
+      no_log: yes
+      tags: [ngc]
+
+    #--------------------------------------------------------------------------
+    # Pull NGC Containers
+    #--------------------------------------------------------------------------
+    - name: Pull PyTorch NGC container
+      community.docker.docker_image:
+        name: "{{ containers.ngc_registry }}/nvidia/pytorch:{{ containers.pytorch_tag }}"
+        source: pull
+      tags: [containers]
+
+    - name: Pull TensorFlow NGC container
+      community.docker.docker_image:
+        name: "{{ containers.ngc_registry }}/nvidia/tensorflow:{{ containers.tensorflow_tag }}"
+        source: pull
+      tags: [containers]
+
+    - name: Pull JAX NGC container
+      community.docker.docker_image:
+        name: "{{ containers.ngc_registry }}/nvidia/jax:{{ containers.jax_tag }}"
+        source: pull
+      tags: [containers]
+
+    - name: Pull NeMo NGC container
+      community.docker.docker_image:
+        name: "{{ containers.ngc_registry }}/nvidia/nemo:{{ containers.nemo_tag }}"
+        source: pull
+      tags: [containers]
+
+    - name: Pull Triton Inference Server
+      community.docker.docker_image:
+        name: "{{ containers.ngc_registry }}/nvidia/tritonserver:{{ containers.triton_tag }}"
+        source: pull
+      tags: [containers]
+
+    #--------------------------------------------------------------------------
+    # Enroot/Pyxis Configuration for Slurm
+    #--------------------------------------------------------------------------
+    - name: Configure Enroot for Slurm container support
+      ansible.builtin.blockinfile:
+        path: /etc/enroot/enroot.conf
+        create: yes
+        mode: '0644'
+        block: |
+          ENROOT_RUNTIME_PATH=/run/enroot/user-$(id -u)
+          ENROOT_CACHE_PATH={{ storage.checkpoint_path }}/enroot/cache
+          ENROOT_DATA_PATH={{ storage.checkpoint_path }}/enroot/data
+          ENROOT_TEMP_PATH=/tmp/enroot
+          ENROOT_SQUASH_OPTIONS="-noD -comp lzo"
+      tags: [enroot]
+
+    - name: Create Enroot directories
+      ansible.builtin.file:
+        path: "{{ item }}"
+        state: directory
+        mode: '0755'
+      loop:
+        - "{{ storage.checkpoint_path }}/enroot/cache"
+        - "{{ storage.checkpoint_path }}/enroot/data"
+      tags: [enroot]
+
+#------------------------------------------------------------------------------
+# JupyterHub Configuration
+#------------------------------------------------------------------------------
+- name: Configure JupyterHub
+  hosts: management[0]
+  become: yes
+  gather_facts: yes
+  when: development.jupyter_enabled | default(true)
+
+  vars_files:
+    - "{{ playbook_dir }}/../vars/generated/project.yml"
+    - "{{ playbook_dir }}/../vars/generated/development.yml"
+    - "{{ playbook_dir }}/../vars/generated/security.yml"
+    - "{{ playbook_dir }}/../vars/secrets.yml"
+
+  tasks:
+    - name: Deploy JupyterHub container
+      community.docker.docker_container:
+        name: jupyterhub
+        image: jupyterhub/jupyterhub:latest
+        state: started
+        restart_policy: always
+        ports:
+          - "{{ development.jupyter_port }}:8000"
+        volumes:
+          - /etc/jupyterhub:/etc/jupyterhub:ro
+          - /home:/home
+          - /shared:/shared
+        env:
+          NVIDIA_VISIBLE_DEVICES: all
+        runtime: nvidia
+      tags: [jupyter]
+
+    - name: Display JupyterHub access information
+      ansible.builtin.debug:
+        msg: |
+          JupyterHub is available at:
+          http://{{ ansible_host }}:{{ development.jupyter_port }}
+      tags: [jupyter]
+
+#------------------------------------------------------------------------------
+# MLflow Tracking Server
+#------------------------------------------------------------------------------
+- name: Configure MLflow Tracking Server
+  hosts: mlops
+  become: yes
+  gather_facts: yes
+  when: mlops.mlflow_enabled | default(true)
+
+  vars_files:
+    - "{{ playbook_dir }}/../vars/generated/project.yml"
+    - "{{ playbook_dir }}/../vars/generated/mlops.yml"
+    - "{{ playbook_dir }}/../vars/generated/storage.yml"
+    - "{{ playbook_dir }}/../vars/secrets.yml"
+
+  tasks:
+    - name: Create MLflow directories
+      ansible.builtin.file:
+        path: "{{ item }}"
+        state: directory
+        mode: '0755'
+      loop:
+        - "{{ mlops.mlflow_artifact_path }}"
+        - /var/lib/mlflow
+      tags: [mlflow]
+
+    - name: Deploy MLflow tracking server
+      community.docker.docker_container:
+        name: mlflow
+        image: ghcr.io/mlflow/mlflow:latest
+        state: started
+        restart_policy: always
+        ports:
+          - "{{ mlops.mlflow_port }}:5000"
+        volumes:
+          - "{{ mlops.mlflow_artifact_path }}:/mlflow/artifacts"
+          - /var/lib/mlflow:/mlflow/backend
+        command: >
+          mlflow server
+          --host 0.0.0.0
+          --port 5000
+          --backend-store-uri sqlite:///mlflow/backend/mlflow.db
+          --default-artifact-root /mlflow/artifacts
+      tags: [mlflow]
+
+    - name: Display MLflow access information
+      ansible.builtin.debug:
+        msg: |
+          MLflow Tracking Server is available at:
+          http://{{ ansible_host }}:{{ mlops.mlflow_port }}
+      tags: [mlflow]

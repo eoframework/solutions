@@ -1,0 +1,111 @@
+---
+#------------------------------------------------------------------------------
+# CUDA Toolkit Role - CUDA and cuDNN Installation
+#------------------------------------------------------------------------------
+
+#------------------------------------------------------------------------------
+# Check Current Installation
+#------------------------------------------------------------------------------
+- name: Check if CUDA is installed
+  ansible.builtin.shell: nvcc --version 2>/dev/null | grep "release" | awk '{print $6}' | tr -d ','
+  register: current_cuda
+  changed_when: false
+  ignore_errors: yes
+  tags: [check]
+
+- name: Display current CUDA version
+  ansible.builtin.debug:
+    msg: "Current CUDA version: {{ current_cuda.stdout | default('Not installed') }}"
+  tags: [check]
+
+#------------------------------------------------------------------------------
+# CUDA Toolkit Installation
+#------------------------------------------------------------------------------
+- name: Install CUDA toolkit
+  ansible.builtin.apt:
+    name: "cuda-toolkit-{{ cuda_version | replace('.', '-') }}"
+    state: present
+  when: ansible_os_family == "Debian"
+  tags: [cuda]
+
+#------------------------------------------------------------------------------
+# Environment Configuration
+#------------------------------------------------------------------------------
+- name: Configure CUDA environment variables
+  ansible.builtin.blockinfile:
+    path: /etc/profile.d/cuda.sh
+    create: yes
+    mode: '0644'
+    block: |
+      # CUDA Environment Configuration
+      export CUDA_HOME=/usr/local/cuda
+      export PATH=$CUDA_HOME/bin:$PATH
+      export LD_LIBRARY_PATH=$CUDA_HOME/lib64:$LD_LIBRARY_PATH
+  tags: [environment]
+
+- name: Add CUDA libraries to ldconfig
+  ansible.builtin.copy:
+    dest: /etc/ld.so.conf.d/cuda.conf
+    content: |
+      /usr/local/cuda/lib64
+      /usr/local/cuda/extras/CUPTI/lib64
+    mode: '0644'
+  notify: ldconfig
+  tags: [libraries]
+
+#------------------------------------------------------------------------------
+# cuDNN Installation
+#------------------------------------------------------------------------------
+- name: Install cuDNN library
+  ansible.builtin.apt:
+    name:
+      - libcudnn9-cuda-12
+      - libcudnn9-dev-cuda-12
+    state: present
+  when: ansible_os_family == "Debian"
+  tags: [cudnn]
+
+#------------------------------------------------------------------------------
+# CUDA Samples (Optional)
+#------------------------------------------------------------------------------
+- name: Install CUDA samples
+  ansible.builtin.apt:
+    name: "cuda-samples-{{ cuda_version | replace('.', '-') }}"
+    state: present
+  when: ansible_os_family == "Debian"
+  ignore_errors: yes
+  tags: [samples]
+
+#------------------------------------------------------------------------------
+# Verification
+#------------------------------------------------------------------------------
+- name: Verify CUDA installation
+  ansible.builtin.shell: nvcc --version
+  register: nvcc_version
+  changed_when: false
+  tags: [verify]
+
+- name: Display CUDA version
+  ansible.builtin.debug:
+    msg: "{{ nvcc_version.stdout_lines }}"
+  tags: [verify]
+
+- name: Verify cuDNN installation
+  ansible.builtin.shell: |
+    cat /usr/include/cudnn_version.h 2>/dev/null | grep CUDNN_MAJOR -A 2 | head -3
+  register: cudnn_version
+  changed_when: false
+  ignore_errors: yes
+  tags: [verify]
+
+- name: Display cuDNN version
+  ansible.builtin.debug:
+    msg: "{{ cudnn_version.stdout_lines | default(['cuDNN version info not available']) }}"
+  tags: [verify]
+
+#------------------------------------------------------------------------------
+# Handlers
+#------------------------------------------------------------------------------
+handlers:
+  - name: ldconfig
+    ansible.builtin.command: ldconfig

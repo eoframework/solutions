@@ -1,0 +1,68 @@
+---
+#------------------------------------------------------------------------------
+# NVIDIA GPU Compute Cluster - Phase 2: Slurm Workload Manager
+#------------------------------------------------------------------------------
+# Install and configure Slurm for GPU job scheduling
+#------------------------------------------------------------------------------
+
+- name: Phase 2 - Slurm Controller Setup
+  hosts: slurm_controllers
+  become: yes
+  gather_facts: yes
+
+  vars_files:
+    - "{{ playbook_dir }}/../vars/secrets.yml"
+
+  tasks:
+    - name: Display Slurm controller setup info
+      ansible.builtin.debug:
+        msg: "Configuring Slurm controller on {{ inventory_hostname }}"
+
+    - name: Install Slurm controller
+      ansible.builtin.include_role:
+        name: slurm-controller
+      tags: [slurm-controller]
+
+- name: Phase 2 - Slurm Compute Node Setup
+  hosts: gpu_nodes
+  become: yes
+  gather_facts: yes
+
+  vars_files:
+    - "{{ playbook_dir }}/../vars/secrets.yml"
+
+  tasks:
+    - name: Display Slurm compute setup info
+      ansible.builtin.debug:
+        msg: "Configuring Slurm compute on {{ inventory_hostname }}"
+
+    - name: Install Slurm compute daemon
+      ansible.builtin.include_role:
+        name: slurm-compute
+      tags: [slurm-compute]
+
+- name: Phase 2 - Verify Slurm Cluster
+  hosts: slurm_controllers[0]
+  become: yes
+  gather_facts: no
+
+  tasks:
+    - name: Wait for all nodes to register
+      ansible.builtin.command: sinfo -h -o "%n %t"
+      register: sinfo_result
+      until: sinfo_result.stdout_lines | length >= groups['gpu_nodes'] | length
+      retries: 30
+      delay: 10
+      changed_when: false
+      tags: [verify]
+
+    - name: Display cluster status
+      ansible.builtin.command: sinfo
+      register: cluster_status
+      changed_when: false
+      tags: [verify]
+
+    - name: Show Slurm cluster status
+      ansible.builtin.debug:
+        var: cluster_status.stdout_lines
+      tags: [verify]

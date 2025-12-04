@@ -1,0 +1,179 @@
+---
+#------------------------------------------------------------------------------
+# Common Role - Base OS Configuration for DGX Nodes
+#------------------------------------------------------------------------------
+
+#------------------------------------------------------------------------------
+# System Updates and Prerequisites
+#------------------------------------------------------------------------------
+- name: Update apt cache
+  ansible.builtin.apt:
+    update_cache: yes
+    cache_valid_time: 3600
+  when: ansible_os_family == "Debian"
+  tags: [packages]
+
+- name: Install common packages
+  ansible.builtin.apt:
+    name:
+      - curl
+      - wget
+      - vim
+      - htop
+      - iotop
+      - net-tools
+      - iputils-ping
+      - dnsutils
+      - nfs-common
+      - ca-certificates
+      - gnupg
+      - lsb-release
+      - python3-pip
+      - build-essential
+      - linux-headers-{{ ansible_kernel }}
+    state: present
+  when: ansible_os_family == "Debian"
+  tags: [packages]
+
+#------------------------------------------------------------------------------
+# Time Synchronization (NTP)
+#------------------------------------------------------------------------------
+- name: Install chrony for NTP
+  ansible.builtin.apt:
+    name: chrony
+    state: present
+  tags: [ntp]
+
+- name: Configure chrony with NTP servers
+  ansible.builtin.template:
+    src: chrony.conf.j2
+    dest: /etc/chrony/chrony.conf
+    mode: '0644'
+  notify: restart chrony
+  tags: [ntp]
+
+- name: Ensure chrony is running
+  ansible.builtin.systemd:
+    name: chrony
+    state: started
+    enabled: yes
+  tags: [ntp]
+
+#------------------------------------------------------------------------------
+# DNS Configuration
+#------------------------------------------------------------------------------
+- name: Configure DNS resolvers
+  ansible.builtin.template:
+    src: resolv.conf.j2
+    dest: /etc/resolv.conf
+    mode: '0644'
+  tags: [dns]
+
+#------------------------------------------------------------------------------
+# Hostname and Hosts Configuration
+#------------------------------------------------------------------------------
+- name: Set hostname
+  ansible.builtin.hostname:
+    name: "{{ inventory_hostname }}"
+  tags: [hostname]
+
+- name: Configure /etc/hosts
+  ansible.builtin.lineinfile:
+    path: /etc/hosts
+    regexp: "^{{ ansible_default_ipv4.address }}"
+    line: "{{ ansible_default_ipv4.address }} {{ inventory_hostname }} {{ inventory_hostname_short | default(inventory_hostname.split('.')[0]) }}"
+    state: present
+  tags: [hostname]
+
+#------------------------------------------------------------------------------
+# SSH Configuration
+#------------------------------------------------------------------------------
+- name: Configure SSH for security
+  ansible.builtin.lineinfile:
+    path: /etc/ssh/sshd_config
+    regexp: "{{ item.regexp }}"
+    line: "{{ item.line }}"
+    state: present
+  loop:
+    - { regexp: '^#?PermitRootLogin', line: "PermitRootLogin {{ 'yes' if security.root_ssh_enabled | default(false) else 'no' }}" }
+    - { regexp: '^#?PasswordAuthentication', line: "PasswordAuthentication {{ 'no' if security.ssh_key_auth_only | default(true) else 'yes' }}" }
+    - { regexp: '^#?PubkeyAuthentication', line: "PubkeyAuthentication yes" }
+    - { regexp: '^#?ClientAliveInterval', line: "ClientAliveInterval 60" }
+    - { regexp: '^#?ClientAliveCountMax', line: "ClientAliveCountMax 3" }
+  notify: restart sshd
+  tags: [ssh]
+
+#------------------------------------------------------------------------------
+# System Limits for GPU Workloads
+#------------------------------------------------------------------------------
+- name: Configure system limits for GPU workloads
+  ansible.builtin.copy:
+    dest: /etc/security/limits.d/99-gpu-workloads.conf
+    content: |
+      # GPU workload limits
+      *    soft    memlock     unlimited
+      *    hard    memlock     unlimited
+      *    soft    nofile      1048576
+      *    hard    nofile      1048576
+      *    soft    stack       unlimited
+      *    hard    stack       unlimited
+      *    soft    nproc       unlimited
+      *    hard    nproc       unlimited
+    mode: '0644'
+  tags: [limits]
+
+#------------------------------------------------------------------------------
+# Kernel Parameters for GPU Performance
+#------------------------------------------------------------------------------
+- name: Configure kernel parameters
+  ansible.builtin.sysctl:
+    name: "{{ item.name }}"
+    value: "{{ item.value }}"
+    state: present
+    sysctl_file: /etc/sysctl.d/99-gpu-performance.conf
+    reload: yes
+  loop:
+    - { name: "vm.swappiness", value: "10" }
+    - { name: "vm.dirty_ratio", value: "40" }
+    - { name: "vm.dirty_background_ratio", value: "10" }
+    - { name: "net.core.rmem_max", value: "134217728" }
+    - { name: "net.core.wmem_max", value: "134217728" }
+    - { name: "net.ipv4.tcp_rmem", value: "4096 87380 134217728" }
+    - { name: "net.ipv4.tcp_wmem", value: "4096 65536 134217728" }
+    - { name: "net.core.netdev_max_backlog", value: "250000" }
+  tags: [kernel]
+
+#------------------------------------------------------------------------------
+# Disable Transparent Huge Pages (for GPU workloads)
+#------------------------------------------------------------------------------
+- name: Disable transparent huge pages
+  ansible.builtin.shell: |
+    echo never > /sys/kernel/mm/transparent_hugepage/enabled
+    echo never > /sys/kernel/mm/transparent_hugepage/defrag
+  changed_when: false
+  tags: [kernel]
+
+- name: Persist THP disable on boot
+  ansible.builtin.lineinfile:
+    path: /etc/rc.local
+    line: "{{ item }}"
+    create: yes
+    mode: '0755'
+  loop:
+    - "echo never > /sys/kernel/mm/transparent_hugepage/enabled"
+    - "echo never > /sys/kernel/mm/transparent_hugepage/defrag"
+  tags: [kernel]
+
+#------------------------------------------------------------------------------
+# Handlers
+#------------------------------------------------------------------------------
+handlers:
+  - name: restart chrony
+    ansible.builtin.systemd:
+      name: chrony
+      state: restarted
+
+  - name: restart sshd
+    ansible.builtin.systemd:
+      name: sshd
+      state: restarted

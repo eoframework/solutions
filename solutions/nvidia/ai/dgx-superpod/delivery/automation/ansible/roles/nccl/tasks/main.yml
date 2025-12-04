@@ -1,0 +1,104 @@
+---
+#------------------------------------------------------------------------------
+# NCCL Role - NVIDIA Collective Communications Library
+#------------------------------------------------------------------------------
+
+#------------------------------------------------------------------------------
+# NCCL Installation
+#------------------------------------------------------------------------------
+- name: Install NCCL library
+  ansible.builtin.apt:
+    name:
+      - libnccl2
+      - libnccl-dev
+    state: present
+  when: ansible_os_family == "Debian"
+  tags: [nccl]
+
+#------------------------------------------------------------------------------
+# NCCL Configuration
+#------------------------------------------------------------------------------
+- name: Configure NCCL environment
+  ansible.builtin.blockinfile:
+    path: /etc/profile.d/nccl.sh
+    create: yes
+    mode: '0644'
+    block: |
+      # NCCL Configuration for DGX SuperPOD
+      # Optimized for InfiniBand + NVLink topology
+
+      # Enable InfiniBand
+      export NCCL_IB_DISABLE=0
+
+      # Use mlx5 HCA
+      export NCCL_IB_HCA=mlx5
+
+      # Use RoCE v2 GID index
+      export NCCL_IB_GID_INDEX=3
+
+      # Enable GPUDirect RDMA
+      export NCCL_NET_GDR_LEVEL=5
+
+      # Use NVLink for intra-node communication
+      export NCCL_P2P_LEVEL=NVL
+
+      # NCCL debug level (uncomment for troubleshooting)
+      # export NCCL_DEBUG=INFO
+      # export NCCL_DEBUG_SUBSYS=ALL
+
+      # Network interface for IB
+      export NCCL_SOCKET_IFNAME=ib0
+
+      # Number of channels (adjust based on topology)
+      export NCCL_MIN_NCHANNELS=32
+
+      # Tree reduction algorithm (optimized for large messages)
+      export NCCL_ALGO=Tree
+  tags: [config]
+
+#------------------------------------------------------------------------------
+# NCCL Tests Installation
+#------------------------------------------------------------------------------
+- name: Clone NCCL tests repository
+  ansible.builtin.git:
+    repo: https://github.com/NVIDIA/nccl-tests.git
+    dest: /opt/nccl-tests
+    version: master
+    force: yes
+  tags: [tests]
+
+- name: Build NCCL tests
+  ansible.builtin.shell: |
+    cd /opt/nccl-tests
+    make MPI=1 MPI_HOME=/usr/lib/x86_64-linux-gnu/openmpi CUDA_HOME=/usr/local/cuda NCCL_HOME=/usr
+  args:
+    creates: /opt/nccl-tests/build/all_reduce_perf
+  tags: [tests]
+
+#------------------------------------------------------------------------------
+# Verification
+#------------------------------------------------------------------------------
+- name: Check NCCL version
+  ansible.builtin.shell: |
+    dpkg -l libnccl2 | grep libnccl2 | awk '{print $3}'
+  register: nccl_installed_version
+  changed_when: false
+  tags: [verify]
+
+- name: Display NCCL version
+  ansible.builtin.debug:
+    msg: "NCCL version: {{ nccl_installed_version.stdout }}"
+  tags: [verify]
+
+- name: Run quick NCCL test (single node)
+  ansible.builtin.shell: |
+    /opt/nccl-tests/build/all_reduce_perf -b 8 -e 128M -f 2 -g {{ gpu_count | default(8) }} 2>&1 | tail -20
+  register: nccl_test
+  changed_when: false
+  ignore_errors: yes
+  tags: [verify]
+
+- name: Display NCCL test results
+  ansible.builtin.debug:
+    msg: "{{ nccl_test.stdout_lines | default(['NCCL test not run']) }}"
+  tags: [verify]

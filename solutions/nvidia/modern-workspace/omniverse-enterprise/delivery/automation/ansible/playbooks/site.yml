@@ -1,0 +1,83 @@
+---
+#------------------------------------------------------------------------------
+# NVIDIA Omniverse Enterprise - Master Playbook
+#------------------------------------------------------------------------------
+# This is the main orchestration playbook for Omniverse deployment.
+#
+# Usage (multi-environment):
+#   Production:  ansible-playbook -i inventory/prod playbooks/site.yml
+#   Test:        ansible-playbook -i inventory/test playbooks/site.yml
+#   DR:          ansible-playbook -i inventory/dr playbooks/site.yml
+#   With vault:  ansible-playbook -i inventory/prod playbooks/site.yml --ask-vault-pass
+#   Nucleus:     ansible-playbook -i inventory/prod playbooks/site.yml --tags nucleus
+#
+# Tags:
+#   foundation    - Phase 1: Storage and network preparation
+#   nucleus       - Phase 1: Nucleus server deployment
+#   workstations  - Phase 2: Workstation configuration
+#   connectors    - Phase 2: Application connectors
+#   monitoring    - Phase 3: Monitoring and alerting
+#   validation    - Phase 3: System validation
+#------------------------------------------------------------------------------
+
+- name: Omniverse Enterprise - Full Deployment
+  hosts: localhost
+  gather_facts: no
+
+  vars_files:
+    - "{{ playbook_dir }}/../vars/secrets.yml"
+
+  pre_tasks:
+    - name: Display deployment information
+      ansible.builtin.debug:
+        msg: |
+          ============================================================
+          NVIDIA Omniverse Enterprise Deployment
+          ============================================================
+          Solution: {{ solution.name }}
+          Version: {{ solution.version }}
+          Nucleus Primary: {{ nucleus.primary_host }}
+          Workstation Count: {{ workstation.count }}
+          Storage: {{ storage.capacity_tb }} TB
+          ============================================================
+
+    - name: Verify Ansible version
+      ansible.builtin.assert:
+        that:
+          - ansible_version.full is version('2.14', '>=')
+        fail_msg: "Ansible version 2.14 or higher is required"
+        success_msg: "Ansible version {{ ansible_version.full }} is compatible"
+      tags: [always]
+
+#=============================================================================
+# PHASE 1 - FOUNDATION
+#=============================================================================
+- name: Phase 1 - Foundation and Storage
+  ansible.builtin.import_playbook: 01-foundation.yml
+  tags: [foundation]
+
+- name: Phase 1 - Nucleus Server Deployment
+  ansible.builtin.import_playbook: 02-nucleus.yml
+  tags: [nucleus]
+
+#=============================================================================
+# PHASE 2 - WORKSTATIONS
+#=============================================================================
+- name: Phase 2 - Workstation Configuration
+  ansible.builtin.import_playbook: 03-workstations.yml
+  tags: [workstations]
+
+- name: Phase 2 - Application Connectors
+  ansible.builtin.import_playbook: 04-connectors.yml
+  tags: [connectors]
+
+#=============================================================================
+# PHASE 3 - OPERATIONS
+#=============================================================================
+- name: Phase 3 - Monitoring and Alerting
+  ansible.builtin.import_playbook: 05-monitoring.yml
+  tags: [monitoring]
+
+- name: Phase 3 - Validation
+  ansible.builtin.import_playbook: 06-validation.yml
+  tags: [validation]

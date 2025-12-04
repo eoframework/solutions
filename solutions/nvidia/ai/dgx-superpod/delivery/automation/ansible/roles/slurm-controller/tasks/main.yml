@@ -1,0 +1,156 @@
+---
+#------------------------------------------------------------------------------
+# Slurm Controller Role - slurmctld and slurmdbd
+#------------------------------------------------------------------------------
+
+#------------------------------------------------------------------------------
+# Slurm User and Group
+#------------------------------------------------------------------------------
+- name: Create Slurm group
+  ansible.builtin.group:
+    name: slurm
+    gid: 64030
+    state: present
+  tags: [user]
+
+- name: Create Slurm user
+  ansible.builtin.user:
+    name: slurm
+    uid: 64030
+    group: slurm
+    system: yes
+    home: /var/lib/slurm
+    shell: /bin/false
+  tags: [user]
+
+#------------------------------------------------------------------------------
+# Slurm Installation
+#------------------------------------------------------------------------------
+- name: Install Slurm controller packages
+  ansible.builtin.apt:
+    name:
+      - slurm-wlm
+      - slurmctld
+      - slurmdbd
+      - slurm-client
+      - munge
+    state: present
+  when: ansible_os_family == "Debian"
+  tags: [packages]
+
+#------------------------------------------------------------------------------
+# Munge Authentication
+#------------------------------------------------------------------------------
+- name: Generate Munge key
+  ansible.builtin.shell: |
+    if [ ! -f /etc/munge/munge.key ]; then
+      create-munge-key -f
+    fi
+  args:
+    creates: /etc/munge/munge.key
+  tags: [munge]
+
+- name: Set Munge key permissions
+  ansible.builtin.file:
+    path: /etc/munge/munge.key
+    owner: munge
+    group: munge
+    mode: '0400'
+  tags: [munge]
+
+- name: Start Munge service
+  ansible.builtin.systemd:
+    name: munge
+    state: started
+    enabled: yes
+  tags: [munge]
+
+#------------------------------------------------------------------------------
+# Slurm Directories
+#------------------------------------------------------------------------------
+- name: Create Slurm directories
+  ansible.builtin.file:
+    path: "{{ item }}"
+    state: directory
+    owner: slurm
+    group: slurm
+    mode: '0755'
+  loop:
+    - /etc/slurm
+    - /var/log/slurm
+    - /var/spool/slurm/ctld
+    - /var/spool/slurm/d
+    - /var/lib/slurm
+  tags: [directories]
+
+#------------------------------------------------------------------------------
+# Slurm Database Configuration
+#------------------------------------------------------------------------------
+- name: Install MariaDB for Slurm accounting
+  ansible.builtin.apt:
+    name:
+      - mariadb-server
+      - python3-mysqldb
+    state: present
+  when: ansible_os_family == "Debian"
+  tags: [database]
+
+- name: Start MariaDB service
+  ansible.builtin.systemd:
+    name: mariadb
+    state: started
+    enabled: yes
+  tags: [database]
+
+- name: Create Slurm accounting database
+  community.mysql.mysql_db:
+    name: "{{ slurm_accounting_db }}"
+    state: present
+  tags: [database]
+
+- name: Create Slurm database user
+  community.mysql.mysql_user:
+    name: slurm
+    password: "{{ vault_slurm_db_password | default('slurm_password') }}"
+    priv: "{{ slurm_accounting_db }}.*:ALL"
+    state: present
+  no_log: yes
+  tags: [database]
+
+#------------------------------------------------------------------------------
+# Pyxis/Enroot Plugin for Container Support
+#------------------------------------------------------------------------------
+- name: Install Pyxis Slurm plugin dependencies
+  ansible.builtin.apt:
+    name:
+      - libslurm-dev
+      - squashfuse
+      - fuse-overlayfs
+    state: present
+  when: ansible_os_family == "Debian"
+  tags: [pyxis]
+
+- name: Clone and build Pyxis
+  ansible.builtin.shell: |
+    if [ ! -f /usr/lib/slurm/spank_pyxis.so ]; then
+      git clone https://github.com/NVIDIA/pyxis.git /tmp/pyxis
+      cd /tmp/pyxis
+      make install
+    fi
+  args:
+    creates: /usr/lib/slurm/spank_pyxis.so
+  ignore_errors: yes
+  tags: [pyxis]
+
+#------------------------------------------------------------------------------
+# GPU GRES Plugin
+#------------------------------------------------------------------------------
+- name: Configure GPU GRES plugin
+  ansible.builtin.copy:
+    dest: /etc/slurm/plugstack.conf
+    content: |
+      # Slurm SPANK Plugins
+      required /usr/lib/slurm/spank_pyxis.so
+    mode: '0644'
+  ignore_errors: yes
+  tags: [gres]

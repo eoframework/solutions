@@ -1,0 +1,67 @@
+---
+#------------------------------------------------------------------------------
+# Workstation Setup Role - Windows RTX Workstation Configuration
+#------------------------------------------------------------------------------
+
+- name: Install NVIDIA drivers (Windows)
+  ansible.windows.win_package:
+    path: "\\\\software-share\\nvidia\\{{ workstation.driver_version }}\\setup.exe"
+    arguments: /s /noreboot
+    state: present
+  register: driver_install
+
+- name: Download Omniverse Launcher
+  ansible.windows.win_get_url:
+    url: "https://install.launcher.omniverse.nvidia.com/installers/omniverse-launcher-win.exe"
+    dest: C:\temp\omniverse-launcher.exe
+
+- name: Install Omniverse Launcher
+  ansible.windows.win_package:
+    path: C:\temp\omniverse-launcher.exe
+    arguments: /S
+    state: present
+
+- name: Configure Omniverse settings
+  ansible.windows.win_copy:
+    content: |
+      {
+        "nucleus_server": "{{ nucleus.primary_host }}",
+        "nucleus_port": {{ nucleus.port }},
+        "auto_update": true
+      }
+    dest: C:\Users\Public\Documents\Omniverse\config.json
+
+- name: Install Omniverse applications
+  when: software.create_enabled or software.view_enabled or software.code_enabled
+  block:
+    - name: Install Omniverse Create
+      ansible.windows.win_shell: |
+        & "C:\Users\Public\AppData\Local\ov\pkg\omniverse-launcher\omniverse-launcher.exe" --install create --version {{ software.client_version }}
+      when: software.create_enabled
+      ignore_errors: yes
+
+    - name: Install Omniverse View
+      ansible.windows.win_shell: |
+        & "C:\Users\Public\AppData\Local\ov\pkg\omniverse-launcher\omniverse-launcher.exe" --install view --version {{ software.client_version }}
+      when: software.view_enabled
+      ignore_errors: yes
+
+    - name: Install Omniverse Code
+      ansible.windows.win_shell: |
+        & "C:\Users\Public\AppData\Local\ov\pkg\omniverse-launcher\omniverse-launcher.exe" --install code --version {{ software.client_version }}
+      when: software.code_enabled
+      ignore_errors: yes
+
+- name: Reboot if driver was installed
+  ansible.windows.win_reboot:
+    reboot_timeout: 600
+  when: driver_install.changed
+
+- name: Verify GPU detection
+  ansible.windows.win_shell: nvidia-smi
+  register: gpu_info
+  changed_when: false
+
+- name: Display GPU info
+  ansible.builtin.debug:
+    var: gpu_info.stdout_lines

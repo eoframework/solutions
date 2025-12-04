@@ -1,0 +1,31 @@
+---
+#------------------------------------------------------------------------------
+# Common Role - Base Configuration for Omniverse
+#------------------------------------------------------------------------------
+
+- name: Install common packages (Linux)
+  ansible.builtin.apt:
+    name:
+      - curl
+      - wget
+      - nfs-common
+      - chrony
+      - python3-pip
+    state: present
+  when: ansible_os_family == "Debian"
+
+- name: Configure timezone
+  ansible.builtin.timezone:
+    name: UTC
+
+- name: Configure NTP
+  ansible.builtin.template:
+    src: chrony.conf.j2
+    dest: /etc/chrony/chrony.conf
+    mode: '0644'
+  notify: Restart chrony
+  when: ansible_os_family == "Debian"
+
+- name: Set hostname
+  ansible.builtin.hostname:
+    name: "{{ inventory_hostname }}"

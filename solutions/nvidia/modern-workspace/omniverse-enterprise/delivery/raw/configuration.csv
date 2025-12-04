@@ -1,76 +1,91 @@
-#WIDTH: 28,18,12,30,48,10,12,33,16,18,24,42,12
-#ALIGN: left,left,center,left,left,center,left,left,center,left,left,left,center
-Parameter Name,Category,Environment,Default Value,Description,Required,Data Type,Validation Rules,Security Level,Owner Team,Dependencies,Notes,Last Updated
-OMNIVERSE_SOLUTION_NAME,Application,All,Omniverse Enterprise Collaboration Platform,Solution identifier for logging and monitoring,Yes,String,Max 50 characters,Public,Development,None,Used in monitoring dashboards and logs,[DATE]
-OMNIVERSE_VERSION,Application,All,2024.1,Current Omniverse Enterprise version,Yes,String,Semantic versioning format,Public,Development,None,Updated with releases,[DATE]
-OMNIVERSE_ENVIRONMENT,Application,All,production,Deployment environment identifier,Yes,String,development|staging|production,Public,Operations,None,Controls feature flags and logging levels,[DATE]
-NUCLEUS_PRIMARY_HOST,Nucleus Server,All,nucleus-primary.corp.local,Primary Nucleus server hostname,Yes,String,Valid FQDN,Confidential,Infrastructure,DNS,Primary collaboration server,[DATE]
-NUCLEUS_REPLICA_HOST,Nucleus Server,All,nucleus-replica.corp.local,Replica Nucleus server hostname for HA,Yes,String,Valid FQDN,Confidential,Infrastructure,DNS,Failover server for high availability,[DATE]
-NUCLEUS_PORT,Nucleus Server,All,3009,Nucleus server port for client connections,Yes,Integer,1024-65535,Public,Infrastructure,Firewall,Standard Nucleus port,[DATE]
-NUCLEUS_WEBSOCKET_PORT,Nucleus Server,All,3019,Nucleus WebSocket port for real-time sync,Yes,Integer,1024-65535,Public,Infrastructure,Firewall,Required for live collaboration,[DATE]
-NUCLEUS_HA_ENABLED,Nucleus Server,All,true,Enable high availability failover,Yes,Boolean,true|false,Public,Infrastructure,Nucleus replica,Required for 99.5% uptime SLA,[DATE]
-NUCLEUS_HA_HEARTBEAT_INTERVAL,Nucleus Server,All,5,HA heartbeat interval in seconds,Yes,Integer,1-60,Public,Infrastructure,HA enabled,Failover detection timing,[DATE]
-NUCLEUS_DATA_PATH,Nucleus Server,All,/omniverse/data,Path for USD scene storage on Nucleus,Yes,String,Valid Unix path,Confidential,Infrastructure,Storage mount,Mounted from NetApp storage,[DATE]
-NUCLEUS_CHECKPOINTS_ENABLED,Nucleus Server,All,true,Enable automatic checkpoints for USD scenes,Yes,Boolean,true|false,Public,Infrastructure,Storage capacity,Version history for scene recovery,[DATE]
-NUCLEUS_CHECKPOINT_INTERVAL,Nucleus Server,All,300,Checkpoint interval in seconds,Yes,Integer,60-3600,Public,Infrastructure,Checkpoints enabled,5-minute default interval,[DATE]
-STORAGE_PRIMARY_PATH,Storage,All,/mnt/netapp/omniverse,Primary NFS mount path for USD storage,Yes,String,Valid Unix path,Confidential,Infrastructure,NetApp export,100 TB NetApp AFF A400,[DATE]
-STORAGE_CAPACITY_TB,Storage,All,100,Total storage capacity in terabytes,Yes,Integer,1-1000,Public,Infrastructure,NetApp sizing,100 TB per presales scope,[DATE]
-STORAGE_THROUGHPUT_GBPS,Storage,All,10,Target storage throughput in GB/s,Yes,Integer,1-100,Public,Infrastructure,Network fabric,10 GB/s sustained per SOW,[DATE]
-STORAGE_SNAPSHOT_ENABLED,Storage,All,true,Enable automated NetApp snapshots,Yes,Boolean,true|false,Public,Infrastructure,NetApp configuration,Hourly snapshots for recovery,[DATE]
-STORAGE_SNAPSHOT_RETENTION_DAYS,Storage,All,30,Snapshot retention period in days,Yes,Integer,7-365,Public,Infrastructure,Snapshot enabled,Balance retention vs storage,[DATE]
-STORAGE_REPLICATION_ENABLED,Storage,Production,true,Enable storage replication for DR,No,Boolean,true|false,Public,Infrastructure,DR strategy,Cross-site replication optional,[DATE]
-WORKSTATION_COUNT,Workstation,All,50,Number of RTX workstations deployed,Yes,Integer,1-500,Public,Infrastructure,None,50 workstations per presales scope,[DATE]
-WORKSTATION_MODEL,Workstation,All,Dell Precision 7960,Workstation hardware model,Yes,String,Valid model name,Public,Infrastructure,Procurement,Dell Precision 7960 Tower,[DATE]
-WORKSTATION_GPU,Workstation,All,NVIDIA RTX A6000 48GB,GPU model installed in workstations,Yes,String,Valid GPU model,Public,Infrastructure,Workstation model,RTX A6000 per presales scope,[DATE]
-WORKSTATION_GPU_MEMORY_GB,Workstation,All,48,GPU memory per workstation in GB,Yes,Integer,8-80,Public,Infrastructure,GPU model,48 GB GDDR6 per A6000,[DATE]
-WORKSTATION_RAM_GB,Workstation,All,128,System RAM per workstation in GB,Yes,Integer,32-512,Public,Infrastructure,Workstation model,128 GB DDR5 per workstation,[DATE]
-WORKSTATION_NVME_TB,Workstation,All,2,Local NVMe storage per workstation in TB,Yes,Integer,1-8,Public,Infrastructure,Workstation model,2 TB NVMe for local cache,[DATE]
-WORKSTATION_NETWORK_SPEED,Workstation,All,10 GbE,Network interface speed per workstation,Yes,String,1GbE|10GbE|25GbE,Public,Network Team,Network infrastructure,10 GbE per presales scope,[DATE]
-WORKSTATION_OS,Workstation,All,Windows 11 Pro for Workstations,Operating system installed,Yes,String,Valid Windows version,Public,Infrastructure,Licensing,Windows 11 Pro per SOW,[DATE]
-WORKSTATION_DRIVER_VERSION,Workstation,All,545.xx,NVIDIA driver version installed,Yes,String,Valid driver version,Public,Infrastructure,GPU compatibility,Latest stable NVIDIA driver,[DATE]
-OMNIVERSE_CLIENT_VERSION,Software,All,2024.1.0,Omniverse Enterprise client version,Yes,String,Semantic versioning,Public,Development,Nucleus compatibility,Match Nucleus server version,[DATE]
-OMNIVERSE_CREATE_ENABLED,Software,All,true,Enable Omniverse Create for scene composition,Yes,Boolean,true|false,Public,Development,License,3D scene editing application,[DATE]
-OMNIVERSE_VIEW_ENABLED,Software,All,true,Enable Omniverse View for visualization,Yes,Boolean,true|false,Public,Development,License,Real-time visualization tool,[DATE]
-CONNECTOR_REVIT_ENABLED,Connectors,All,true,Enable Autodesk Revit connector,Yes,Boolean,true|false,Public,Development,Revit installation,Architecture workflows,[DATE]
-CONNECTOR_REVIT_VERSION,Connectors,All,2024,Revit connector version,Yes,String,Valid connector version,Public,Development,Revit version,Match Revit installation,[DATE]
-CONNECTOR_SOLIDWORKS_ENABLED,Connectors,All,true,Enable Dassault SolidWorks connector,Yes,Boolean,true|false,Public,Development,SolidWorks installation,Engineering workflows,[DATE]
-CONNECTOR_SOLIDWORKS_VERSION,Connectors,All,2024,SolidWorks connector version,Yes,String,Valid connector version,Public,Development,SolidWorks version,Match SolidWorks installation,[DATE]
-CONNECTOR_RHINO_ENABLED,Connectors,All,true,Enable McNeel Rhino connector,Yes,Boolean,true|false,Public,Development,Rhino installation,Industrial design workflows,[DATE]
-CONNECTOR_RHINO_VERSION,Connectors,All,8.0,Rhino connector version,Yes,String,Valid connector version,Public,Development,Rhino version,Match Rhino installation,[DATE]
-CONNECTOR_BLENDER_ENABLED,Connectors,All,true,Enable Blender USD connector,Yes,Boolean,true|false,Public,Development,Blender installation,Visualization workflows,[DATE]
-CONNECTOR_BLENDER_VERSION,Connectors,All,4.0,Blender connector version,Yes,String,Valid connector version,Public,Development,Blender version,Match Blender installation,[DATE]
-CONNECTOR_MAYA_ENABLED,Connectors,All,true,Enable Autodesk Maya connector,Yes,Boolean,true|false,Public,Development,Maya installation,Animation workflows,[DATE]
-CONNECTOR_MAYA_VERSION,Connectors,All,2024,Maya connector version,Yes,String,Valid connector version,Public,Development,Maya version,Match Maya installation,[DATE]
-AD_DOMAIN,Authentication,All,corp.local,Active Directory domain for authentication,Yes,String,Valid AD domain,Confidential,Security Team,AD infrastructure,Enterprise SSO integration,[DATE]
-AD_LDAP_SERVER,Authentication,All,ldap://dc.corp.local,LDAP server for directory lookups,Yes,String,Valid LDAP URI,Confidential,Security Team,AD domain,Primary domain controller,[DATE]
-AD_USER_BASE_DN,Authentication,All,"OU=Users,DC=corp,DC=local",Base DN for user searches,Yes,String,Valid LDAP DN,Confidential,Security Team,AD structure,User organizational unit,[DATE]
-AD_GROUP_BASE_DN,Authentication,All,"OU=Groups,DC=corp,DC=local",Base DN for group searches,Yes,String,Valid LDAP DN,Confidential,Security Team,AD structure,Group organizational unit,[DATE]
-AD_DESIGNERS_GROUP,Authentication,All,Omniverse-Designers,AD group for designer access,Yes,String,Valid AD group name,Confidential,Security Team,AD groups,50 designers per scope,[DATE]
-AD_ADMINS_GROUP,Authentication,All,Omniverse-Admins,AD group for administrator access,Yes,String,Valid AD group name,Confidential,Security Team,AD groups,IT administrators,[DATE]
-MFA_ENABLED,Authentication,Production,true,Enable multi-factor authentication,No,Boolean,true|false,Public,Security Team,MFA provider,Required for Nucleus admin,[DATE]
-NETWORK_VLAN_ID,Network,All,100,VLAN ID for Omniverse traffic,Yes,Integer,1-4094,Public,Network Team,Switch configuration,Dedicated Omniverse VLAN,[DATE]
-NETWORK_BACKBONE_SPEED,Network,All,100 GbE,Backbone network speed,Yes,String,10GbE|25GbE|100GbE,Public,Network Team,Core switches,100 GbE for Nucleus-to-storage,[DATE]
-NETWORK_MTU,Network,All,9000,Network MTU for jumbo frames,Yes,Integer,1500-9000,Public,Network Team,Switch support,Jumbo frames for performance,[DATE]
-NETWORK_QOS_ENABLED,Network,All,true,Enable QoS for Omniverse traffic,Yes,Boolean,true|false,Public,Network Team,Switch configuration,Priority for collaboration traffic,[DATE]
-NETWORK_QOS_PRIORITY,Network,All,4,QoS priority class for Omniverse,Yes,Integer,0-7,Public,Network Team,QoS enabled,High priority traffic class,[DATE]
-FIREWALL_NUCLEUS_PORTS,Network,All,"3009,3019,3030",Nucleus ports to allow through firewall,Yes,String,Comma-separated ports,Public,Security Team,Firewall rules,Required for collaboration,[DATE]
-FIREWALL_WORKSTATION_PORTS,Network,All,"3009,3019",Workstation to Nucleus ports,Yes,String,Comma-separated ports,Public,Security Team,Firewall rules,Client connection ports,[DATE]
-ENCRYPTION_AT_REST,Security,All,true,Enable encryption at rest for storage,Yes,Boolean,true|false,Public,Security Team,Storage configuration,NetApp encryption enabled,[DATE]
-ENCRYPTION_IN_TRANSIT,Security,All,true,Enable TLS encryption for all traffic,Yes,Boolean,true|false,Public,Security Team,Certificate infrastructure,TLS 1.3 required,[DATE]
-TLS_VERSION,Security,All,TLS 1.3,Minimum TLS version required,Yes,String,TLS 1.2|TLS 1.3,Public,Security Team,Certificate compatibility,TLS 1.3 preferred,[DATE]
-AUDIT_LOGGING_ENABLED,Security,All,true,Enable audit logging for compliance,Yes,Boolean,true|false,Public,Security Team,Log storage,Track all scene access,[DATE]
-AUDIT_LOG_RETENTION_DAYS,Security,All,90,Audit log retention period in days,Yes,Integer,30-365,Public,Security Team,Compliance requirements,90 days per policy,[DATE]
-MONITORING_ENABLED,Monitoring,All,true,Enable comprehensive monitoring,Yes,Boolean,true|false,Public,Operations,Monitoring infrastructure,Prometheus and Grafana,[DATE]
-PROMETHEUS_ENDPOINT,Monitoring,All,prometheus.corp.local:9090,Prometheus server endpoint,Yes,String,Valid host:port,Confidential,Operations,Prometheus deployment,Metrics collection,[DATE]
-GRAFANA_ENDPOINT,Monitoring,All,grafana.corp.local:3000,Grafana server endpoint,Yes,String,Valid host:port,Confidential,Operations,Grafana deployment,Dashboard visualization,[DATE]
-ALERTING_ENABLED,Monitoring,All,true,Enable alerting for system events,Yes,Boolean,true|false,Public,Operations,Monitoring enabled,Email and PagerDuty alerts,[DATE]
-ALERT_EMAIL_RECIPIENTS,Monitoring,All,omniverse-ops@corp.local,Email recipients for alerts,Yes,String,Valid email addresses,Confidential,Operations,Email server,Operations team distribution list,[DATE]
-NUCLEUS_UPTIME_SLA,SLA,All,99.5,Target Nucleus uptime percentage,Yes,Float,95.0-99.99,Public,Operations,HA configuration,99.5% per presales SOW,[DATE]
-RENDERING_TIME_SLA_MINUTES,SLA,All,60,Target rendering time in minutes,Yes,Integer,30-120,Public,Operations,RTX A6000,<60 minutes per SOW,[DATE]
-CONCURRENT_USERS_TARGET,SLA,All,10,Target concurrent users per scene,Yes,Integer,5-50,Public,Operations,Nucleus capacity,10+ users per SOW,[DATE]
-BACKUP_ENABLED,Operations,All,true,Enable automated backups,Yes,Boolean,true|false,Public,Operations,Backup infrastructure,Daily Nucleus backups,[DATE]
-BACKUP_SCHEDULE,Operations,All,0 2 * * *,Backup cron schedule,Yes,String,Valid cron expression,Public,Operations,Backup enabled,Daily at 2 AM,[DATE]
-BACKUP_RETENTION_DAYS,Operations,All,30,Backup retention period in days,Yes,Integer,7-365,Public,Operations,Compliance requirements,30 days per policy,[DATE]
-DR_RTO_HOURS,Operations,All,4,Recovery Time Objective in hours,Yes,Integer,1-24,Public,Operations,DR strategy,4 hours per SOW,[DATE]
-DR_RPO_HOURS,Operations,All,1,Recovery Point Objective in hours,Yes,Integer,1-24,Public,Operations,Snapshot frequency,1 hour per SOW,[DATE]
-
+#WIDTH:  45,14,30,30,30,45,8,12,27,14,14,12,30,12
+#ALIGN:  left,left,left,left,left,left,center,left,left,center,left,left,left,center
+Parameter Name,Category,Production,Test,DR,Description,Required,Data Type,Validation Rules,Security Level,Owner Team,Dependencies,Notes,Last Updated
+solution.name,Project,nvidia-omniverse-enterprise,nvidia-omniverse-enterprise,nvidia-omniverse-enterprise,Solution name for resource naming,Yes,String,Valid string value,Public,Development,,Omniverse Enterprise Collaboration Platform,2025-12-04
+solution.abbr,Project,omni,omni,omni,Solution abbreviation (3-4 chars),Yes,String,3-5 alphanumeric,Public,Development,,Used in resource naming prefix,2025-12-04
+solution.provider_name,Project,nvidia,nvidia,nvidia,Provider organization name,Yes,String,Valid string value,Public,Development,,NVIDIA provider,2025-12-04
+solution.category_name,Project,modern-workspace,modern-workspace,modern-workspace,Solution category,Yes,String,Valid string value,Public,Development,,Modern Workspace category,2025-12-04
+solution.version,Project,2024.1,2024.1,2024.1,Omniverse Enterprise version,Yes,String,Semantic versioning,Public,Development,,Current release version,2025-12-04
+nucleus.primary_host,Nucleus Server,nucleus.client.local,nucleus-test.client.local,nucleus-dr.client.local,Primary Nucleus server hostname,Yes,String,Valid FQDN,Confidential,Infrastructure,DNS,Primary collaboration server,2025-12-04
+nucleus.replica_host,Nucleus Server,nucleus-ha.client.local,nucleus-ha-test.client.local,nucleus-ha-dr.client.local,Replica Nucleus server for HA,No,String,Valid FQDN,Confidential,Infrastructure,DNS,Failover server for HA,2025-12-04
+nucleus.port,Nucleus Server,3009,3009,3009,Nucleus server connection port,Yes,Integer,1024-65535,Public,Infrastructure,Firewall,Standard Nucleus port,2025-12-04
+nucleus.websocket_port,Nucleus Server,3019,3019,3019,Nucleus WebSocket port for real-time sync,Yes,Integer,1024-65535,Public,Infrastructure,Firewall,Live collaboration,2025-12-04
+nucleus.discovery_port,Nucleus Server,3030,3030,3030,Nucleus discovery service port,Yes,Integer,1024-65535,Public,Infrastructure,Firewall,Service discovery,2025-12-04
+nucleus.ha_enabled,Nucleus Server,true,false,true,Enable high availability failover,Yes,Boolean,true|false,Public,Infrastructure,Nucleus replica,99.5% uptime SLA,2025-12-04
+nucleus.ha_heartbeat_interval,Nucleus Server,5,5,5,HA heartbeat interval in seconds,Yes,Integer,1-60,Public,Infrastructure,HA enabled,Failover detection,2025-12-04
+nucleus.data_path,Nucleus Server,/omniverse/data,/omniverse/data,/omniverse/data,Path for USD scene storage,Yes,String,Valid Unix path,Confidential,Infrastructure,Storage mount,NetApp mounted,2025-12-04
+nucleus.checkpoints_enabled,Nucleus Server,true,true,true,Enable automatic USD checkpoints,Yes,Boolean,true|false,Public,Infrastructure,Storage capacity,Version history,2025-12-04
+nucleus.checkpoint_interval,Nucleus Server,300,600,300,Checkpoint interval in seconds,Yes,Integer,60-3600,Public,Infrastructure,Checkpoints enabled,5-minute default,2025-12-04
+nucleus.admin_user,Nucleus Server,omniverse_admin,omniverse_admin,omniverse_admin,Nucleus administrator username,Yes,String,Valid username,Confidential,Security Team,Initial setup,Local admin account,2025-12-04
+nucleus.admin_password,Nucleus Server,[vault:nucleus_admin_password_prod],[vault:nucleus_admin_password_test],[vault:nucleus_admin_password_dr],Nucleus admin password,Yes,String,Min 12 characters,Secret,Security Team,,Stored in Ansible Vault,2025-12-04
+storage.primary_path,Storage,/mnt/netapp/omniverse,/mnt/storage/omniverse,/mnt/netapp/omniverse,Primary NFS mount path for USD storage,Yes,String,Valid Unix path,Confidential,Infrastructure,NetApp export,100 TB storage,2025-12-04
+storage.capacity_tb,Storage,100,50,100,Total storage capacity in terabytes,Yes,Integer,1-1000,Public,Infrastructure,NetApp sizing,Per SOW scope,2025-12-04
+storage.throughput_gbps,Storage,10,5,10,Target storage throughput in GB/s,Yes,Integer,1-100,Public,Infrastructure,Network fabric,Sustained I/O,2025-12-04
+storage.snapshot_enabled,Storage,true,true,true,Enable automated storage snapshots,Yes,Boolean,true|false,Public,Infrastructure,Storage config,Hourly snapshots,2025-12-04
+storage.snapshot_retention_days,Storage,30,14,30,Snapshot retention period in days,Yes,Integer,7-365,Public,Infrastructure,Snapshot enabled,Balance vs storage,2025-12-04
+storage.replication_enabled,Storage,true,false,true,Enable storage replication for DR,Yes,Boolean,true|false,Public,Infrastructure,DR strategy,Cross-site replication,2025-12-04
+workstation.count,Workstation,50,10,25,Number of RTX workstations deployed,Yes,Integer,1-500,Public,Infrastructure,None,Per SOW scope,2025-12-04
+workstation.model,Workstation,Dell Precision 7960,Dell Precision 7960,Dell Precision 7960,Workstation hardware model,Yes,String,Valid model name,Public,Infrastructure,Procurement,Dell Precision Tower,2025-12-04
+workstation.gpu_model,Workstation,NVIDIA RTX A6000 48GB,NVIDIA RTX A6000 48GB,NVIDIA RTX A6000 48GB,GPU model installed,Yes,String,Valid GPU model,Public,Infrastructure,Workstation model,RTX A6000 professional,2025-12-04
+workstation.gpu_memory_gb,Workstation,48,48,48,GPU memory per workstation in GB,Yes,Integer,8-80,Public,Infrastructure,GPU model,48 GB GDDR6,2025-12-04
+workstation.ram_gb,Workstation,128,128,128,System RAM per workstation in GB,Yes,Integer,32-512,Public,Infrastructure,Workstation model,128 GB DDR5,2025-12-04
+workstation.nvme_tb,Workstation,2,2,2,Local NVMe storage per workstation in TB,Yes,Float,1.0-8.0,Public,Infrastructure,Workstation model,Local cache,2025-12-04
+workstation.network_speed,Workstation,10GbE,10GbE,10GbE,Network interface speed,Yes,String,1GbE|10GbE|25GbE,Public,Network Team,Network infrastructure,Per SOW scope,2025-12-04
+workstation.os,Workstation,Windows 11 Pro for Workstations,Windows 11 Pro for Workstations,Windows 11 Pro for Workstations,Operating system,Yes,String,Valid Windows version,Public,Infrastructure,Licensing,Windows 11 Pro,2025-12-04
+workstation.driver_version,Workstation,550.xx,550.xx,550.xx,NVIDIA driver version,Yes,String,Valid driver version,Public,Infrastructure,GPU compatibility,Latest stable,2025-12-04
+software.client_version,Software,2024.1.0,2024.1.0,2024.1.0,Omniverse client version,Yes,String,Semantic versioning,Public,Development,Nucleus compatibility,Match Nucleus,2025-12-04
+software.create_enabled,Software,true,true,true,Enable Omniverse Create,Yes,Boolean,true|false,Public,Development,License,Scene editing,2025-12-04
+software.view_enabled,Software,true,true,true,Enable Omniverse View,Yes,Boolean,true|false,Public,Development,License,Visualization,2025-12-04
+software.code_enabled,Software,true,true,true,Enable Omniverse Code,Yes,Boolean,true|false,Public,Development,License,Scripting IDE,2025-12-04
+software.audio2face_enabled,Software,false,false,false,Enable Audio2Face,Yes,Boolean,true|false,Public,Development,License,AI face animation,2025-12-04
+connectors.revit_enabled,Connectors,true,true,true,Enable Revit connector,Yes,Boolean,true|false,Public,Development,Revit install,Architecture,2025-12-04
+connectors.revit_version,Connectors,2024,2024,2024,Revit connector version,Yes,String,Valid version,Public,Development,Revit version,Match install,2025-12-04
+connectors.solidworks_enabled,Connectors,true,true,true,Enable SolidWorks connector,Yes,Boolean,true|false,Public,Development,SolidWorks install,Engineering,2025-12-04
+connectors.solidworks_version,Connectors,2024,2024,2024,SolidWorks connector version,Yes,String,Valid version,Public,Development,SolidWorks version,Match install,2025-12-04
+connectors.rhino_enabled,Connectors,true,true,true,Enable Rhino connector,Yes,Boolean,true|false,Public,Development,Rhino install,Industrial design,2025-12-04
+connectors.rhino_version,Connectors,8.0,8.0,8.0,Rhino connector version,Yes,String,Valid version,Public,Development,Rhino version,Match install,2025-12-04
+connectors.blender_enabled,Connectors,true,true,true,Enable Blender USD connector,Yes,Boolean,true|false,Public,Development,Blender install,Visualization,2025-12-04
+connectors.blender_version,Connectors,4.0,4.0,4.0,Blender connector version,Yes,String,Valid version,Public,Development,Blender version,Match install,2025-12-04
+connectors.maya_enabled,Connectors,true,true,true,Enable Maya connector,Yes,Boolean,true|false,Public,Development,Maya install,Animation,2025-12-04
+connectors.maya_version,Connectors,2024,2024,2024,Maya connector version,Yes,String,Valid version,Public,Development,Maya version,Match install,2025-12-04
+connectors.max_enabled,Connectors,true,true,true,Enable 3ds Max connector,Yes,Boolean,true|false,Public,Development,3ds Max install,Visualization,2025-12-04
+connectors.max_version,Connectors,2024,2024,2024,3ds Max connector version,Yes,String,Valid version,Public,Development,3ds Max version,Match install,2025-12-04
+auth.ad_domain,Authentication,client.local,test.local,client.local,Active Directory domain,Yes,String,Valid AD domain,Confidential,Security Team,AD infrastructure,Enterprise SSO,2025-12-04
+auth.ldap_server,Authentication,ldaps://dc.client.local,ldaps://dc.test.local,ldaps://dc.client.local,LDAP server URI,Yes,String,Valid LDAP URI,Confidential,Security Team,AD domain,Domain controller,2025-12-04
+auth.user_base_dn,Authentication,"OU=Users,DC=client,DC=local","OU=Users,DC=test,DC=local","OU=Users,DC=client,DC=local",Base DN for user searches,Yes,String,Valid LDAP DN,Confidential,Security Team,AD structure,User OU,2025-12-04
+auth.group_base_dn,Authentication,"OU=Groups,DC=client,DC=local","OU=Groups,DC=test,DC=local","OU=Groups,DC=client,DC=local",Base DN for group searches,Yes,String,Valid LDAP DN,Confidential,Security Team,AD structure,Group OU,2025-12-04
+auth.designers_group,Authentication,Omniverse-Designers,Omniverse-Designers-Test,Omniverse-Designers,AD group for designer access,Yes,String,Valid AD group,Confidential,Security Team,AD groups,Designer users,2025-12-04
+auth.admins_group,Authentication,Omniverse-Admins,Omniverse-Admins-Test,Omniverse-Admins,AD group for admin access,Yes,String,Valid AD group,Confidential,Security Team,AD groups,IT administrators,2025-12-04
+auth.mfa_enabled,Authentication,true,false,true,Enable multi-factor authentication,Yes,Boolean,true|false,Public,Security Team,MFA provider,Required for admin,2025-12-04
+auth.ldap_bind_user,Authentication,svc_omni_ldap,svc_omni_ldap_test,svc_omni_ldap_dr,LDAP bind username,Yes,String,Valid username,Confidential,Security Team,AD account,Service account,2025-12-04
+auth.ldap_bind_password,Authentication,[vault:ldap_bind_password_prod],[vault:ldap_bind_password_test],[vault:ldap_bind_password_dr],LDAP bind password,Yes,String,Min 12 characters,Secret,Security Team,,Stored in Ansible Vault,2025-12-04
+network.vlan_id,Network,100,110,120,VLAN ID for Omniverse traffic,Yes,Integer,1-4094,Public,Network Team,Switch config,Dedicated VLAN,2025-12-04
+network.backbone_speed,Network,100GbE,25GbE,100GbE,Backbone network speed,Yes,String,10GbE|25GbE|100GbE,Public,Network Team,Core switches,Nucleus-to-storage,2025-12-04
+network.mtu,Network,9000,9000,9000,Network MTU for jumbo frames,Yes,Integer,1500-9000,Public,Network Team,Switch support,Performance optimization,2025-12-04
+network.qos_enabled,Network,true,false,true,Enable QoS for traffic,Yes,Boolean,true|false,Public,Network Team,Switch config,Priority traffic,2025-12-04
+network.qos_priority,Network,4,4,4,QoS priority class,Yes,Integer,0-7,Public,Network Team,QoS enabled,High priority,2025-12-04
+network.cidr,Network,10.100.0.0/24,10.110.0.0/24,10.120.0.0/24,Omniverse network CIDR,Yes,String,Valid CIDR,Confidential,Network Team,,Dedicated subnet,2025-12-04
+network.gateway,Network,10.100.0.1,10.110.0.1,10.120.0.1,Network gateway,Yes,String,Valid IPv4,Confidential,Network Team,,Default gateway,2025-12-04
+security.encryption_at_rest,Security,true,true,true,Enable encryption at rest,Yes,Boolean,true|false,Public,Security Team,Storage config,NetApp encryption,2025-12-04
+security.encryption_in_transit,Security,true,true,true,Enable TLS for all traffic,Yes,Boolean,true|false,Public,Security Team,Certificates,TLS 1.3 required,2025-12-04
+security.tls_version,Security,TLS 1.3,TLS 1.3,TLS 1.3,Minimum TLS version,Yes,String,TLS 1.2|TLS 1.3,Public,Security Team,Compatibility,TLS 1.3 preferred,2025-12-04
+security.audit_logging_enabled,Security,true,true,true,Enable audit logging,Yes,Boolean,true|false,Public,Security Team,Log storage,Compliance tracking,2025-12-04
+security.audit_log_retention_days,Security,90,30,90,Audit log retention in days,Yes,Integer,30-365,Public,Security Team,Compliance,90 days policy,2025-12-04
+monitoring.prometheus_enabled,Monitoring,true,true,true,Enable Prometheus monitoring,Yes,Boolean,true|false,Public,Operations,Monitoring infra,Metrics collection,2025-12-04
+monitoring.prometheus_server,Monitoring,10.100.0.40,10.110.0.40,10.120.0.40,Prometheus server IP,Yes,String,Valid IPv4,Confidential,Operations,Network,Metrics aggregation,2025-12-04
+monitoring.grafana_enabled,Monitoring,true,true,true,Enable Grafana dashboards,Yes,Boolean,true|false,Public,Operations,Monitoring infra,Visualization,2025-12-04
+monitoring.grafana_server,Monitoring,10.100.0.41,10.110.0.41,10.120.0.41,Grafana server IP,Yes,String,Valid IPv4,Confidential,Operations,Network,Dashboards,2025-12-04
+monitoring.alerting_enabled,Monitoring,true,false,true,Enable alerting,Yes,Boolean,true|false,Public,Operations,Monitoring,Email/PagerDuty,2025-12-04
+monitoring.alert_email,Monitoring,omniverse-ops@client.local,omniverse-ops@client.local,omniverse-ops@client.local,Alert email recipients,Yes,String,Valid email,Confidential,Operations,Email server,Operations team,2025-12-04
+sla.nucleus_uptime,SLA,99.5,99.0,99.5,Target Nucleus uptime percentage,Yes,Float,95.0-99.99,Public,Operations,HA config,Per SOW,2025-12-04
+sla.rendering_time_minutes,SLA,60,120,60,Target rendering time in minutes,Yes,Integer,30-120,Public,Operations,RTX A6000,Per SOW,2025-12-04
+sla.concurrent_users,SLA,10,5,10,Target concurrent users per scene,Yes,Integer,5-50,Public,Operations,Nucleus capacity,Per SOW,2025-12-04
+operations.backup_enabled,Operations,true,true,true,Enable automated backups,Yes,Boolean,true|false,Public,Operations,Backup infra,Daily backups,2025-12-04
+operations.backup_schedule,Operations,0 2 * * *,0 3 * * *,0 2 * * *,Backup cron schedule,Yes,String,Valid cron,Public,Operations,Backup enabled,Daily at 2 AM,2025-12-04
+operations.backup_retention_days,Operations,30,14,30,Backup retention in days,Yes,Integer,7-365,Public,Operations,Compliance,Per policy,2025-12-04
+operations.ntp_server_primary,Operations,10.100.4.10,10.110.4.10,10.120.4.10,Primary NTP server IP,Yes,String,Valid IPv4,Confidential,Operations,Time sync,Critical,2025-12-04
+operations.dns_server_primary,Operations,10.100.5.10,10.110.5.10,10.120.5.10,Primary DNS server IP,Yes,String,Valid IPv4,Confidential,Operations,Name resolution,Internal DNS,2025-12-04
+dr.enabled,DR,true,false,true,Enable DR infrastructure,Yes,Boolean,true|false,Public,Operations,Business continuity,Phase 2,2025-12-04
+dr.rto_hours,DR,4,8,4,Recovery Time Objective in hours,Yes,Integer,1-24,Public,Operations,DR strategy,Per SOW,2025-12-04
+dr.rpo_hours,DR,1,4,1,Recovery Point Objective in hours,Yes,Integer,1-24,Public,Operations,Snapshot frequency,Per SOW,2025-12-04
+dr.replication_enabled,DR,true,false,true,Enable cross-site replication,Yes,Boolean,true|false,Public,Operations,DR strategy,Storage replication,2025-12-04

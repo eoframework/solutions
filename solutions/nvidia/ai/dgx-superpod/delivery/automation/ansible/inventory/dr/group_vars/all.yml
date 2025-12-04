@@ -1,0 +1,202 @@
+#------------------------------------------------------------------------------
+# NVIDIA DGX SuperPOD - DR Environment Variables
+#------------------------------------------------------------------------------
+# Generated from configuration.csv - DR column
+# To regenerate: python generate-ansible-vars.py --env dr
+# DO NOT EDIT - Changes will be overwritten on regeneration
+#------------------------------------------------------------------------------
+
+#------------------------------------------------------------------------------
+# Project Configuration
+#------------------------------------------------------------------------------
+solution:
+  name: nvidia-dgx-superpod
+  abbr: dgxsp
+  provider_name: nvidia
+  category_name: ai
+
+#------------------------------------------------------------------------------
+# Cluster Configuration
+#------------------------------------------------------------------------------
+cluster:
+  name: dgx-superpod-dr
+  domain: dgx-dr.client.local
+  timezone: UTC
+
+#------------------------------------------------------------------------------
+# Hardware Configuration
+#------------------------------------------------------------------------------
+hardware:
+  dgx_node_count: 8
+  dgx_node_model: DGX H100
+  gpu_count_per_node: 8
+  gpu_model: H100 80GB SXM
+  gpu_memory_gb: 80
+  system_ram_gb: 2048
+  nvme_storage_tb: 30
+
+#------------------------------------------------------------------------------
+# InfiniBand Configuration
+#------------------------------------------------------------------------------
+infiniband:
+  speed_gbps: 400
+  ports_per_node: 8
+  switch_model: QM9700
+  switch_count: 4
+  subnet_manager_ip: 10.12.1.1
+  partition_key: "0x7fff"
+
+#------------------------------------------------------------------------------
+# Ethernet Configuration
+#------------------------------------------------------------------------------
+ethernet:
+  management_vlan: 120
+  management_cidr: 10.120.0.0/24
+  management_gateway: 10.120.0.1
+  bmc_vlan: 121
+  bmc_cidr: 10.121.0.0/24
+
+#------------------------------------------------------------------------------
+# Storage Configuration
+#------------------------------------------------------------------------------
+storage:
+  system: Base Command
+  shared_capacity_pb: 1.0
+  throughput_gbs: 14
+  parallel_filesystem: Lustre
+  mount_path: /shared
+  model_path: /shared/models
+  dataset_path: /shared/datasets
+  checkpoint_path: /shared/checkpoints
+
+#------------------------------------------------------------------------------
+# Slurm Workload Management
+#------------------------------------------------------------------------------
+slurm:
+  version: "23.11"
+  controller_ip: 10.120.0.10
+  controller_backup_ip: 10.120.0.11
+  partition_gpu: gpu-h100
+  max_job_time_hours: 168
+  default_cpus_per_gpu: 16
+  gres_config: "gpu:h100:8"
+  accounting_db: slurm_acct_db
+  fairshare_enabled: true
+
+#------------------------------------------------------------------------------
+# Base Command Manager
+#------------------------------------------------------------------------------
+bcm:
+  enabled: true
+  server_ip: 10.120.0.20
+  version: "2.4"
+  admin_user: bcm_admin
+  # admin_password stored in vault
+
+#------------------------------------------------------------------------------
+# Software Stack
+#------------------------------------------------------------------------------
+software:
+  nvidia_driver_version: "550.54.14"
+  cuda_version: "12.4"
+  cudnn_version: "9.0.0"
+  nccl_version: "2.21.5"
+  dgx_os_version: "6.2.0"
+  mlnx_ofed_version: "23.10-3.2.2.0"
+
+#------------------------------------------------------------------------------
+# Containers
+#------------------------------------------------------------------------------
+containers:
+  ngc_registry: nvcr.io
+  pytorch_tag: "24.08-py3"
+  tensorflow_tag: "24.08-tf2-py3"
+  jax_tag: "24.08-py3"
+  triton_tag: "24.08-py3"
+  nemo_tag: "24.08"
+
+#------------------------------------------------------------------------------
+# Development Tools
+#------------------------------------------------------------------------------
+development:
+  jupyter_enabled: true
+  jupyter_port: 8888
+  tensorboard_enabled: true
+  tensorboard_port: 6006
+
+#------------------------------------------------------------------------------
+# MLOps Configuration
+#------------------------------------------------------------------------------
+mlops:
+  mlflow_enabled: true
+  mlflow_server_ip: 10.120.0.30
+  mlflow_port: 5000
+  mlflow_artifact_path: /shared/mlflow/artifacts
+
+#------------------------------------------------------------------------------
+# Monitoring Configuration
+#------------------------------------------------------------------------------
+monitoring:
+  prometheus_enabled: true
+  prometheus_server_ip: 10.120.0.40
+  grafana_enabled: true
+  grafana_server_ip: 10.120.0.41
+  dcgm_exporter_enabled: true
+  gpu_util_alert_threshold: 95
+  gpu_temp_alert_threshold: 83
+  gpu_memory_alert_threshold: 95
+  syslog_server: 10.120.0.42
+  syslog_port: 514
+
+#------------------------------------------------------------------------------
+# Security Configuration
+#------------------------------------------------------------------------------
+security:
+  ldap_enabled: true
+  ldap_server_primary: 10.120.2.10
+  ldap_server_secondary: 10.120.2.11
+  ldap_base_dn: "DC=client,DC=local"
+  ldap_bind_user: svc_dgx_ldap_dr
+  # ldap_bind_password stored in vault
+  ssh_key_auth_only: true
+  firewall_policy: restrictive
+  root_ssh_enabled: false
+
+#------------------------------------------------------------------------------
+# Operations Configuration
+#------------------------------------------------------------------------------
+operations:
+  backup_enabled: true
+  backup_retention_days: 90
+  backup_schedule: "0 2 * * *"
+  maintenance_window: "Sunday 02:00-06:00 UTC"
+  ntp_server_primary: 10.120.4.10
+  ntp_server_secondary: 10.120.4.11
+  dns_server_primary: 10.120.5.10
+  dns_server_secondary: 10.120.5.11
+
+#------------------------------------------------------------------------------
+# Support Configuration
+#------------------------------------------------------------------------------
+support:
+  nvidia_support_level: Enterprise
+  support_response_sla_hr: 4
+  support_email: dgx-support@client.local
+
+#------------------------------------------------------------------------------
+# DR Configuration
+#------------------------------------------------------------------------------
+dr:
+  enabled: true
+  replication_enabled: true
+  rpo_hours: 24
+  rto_hours: 4
+
+#------------------------------------------------------------------------------
+# Facilities Configuration
+#------------------------------------------------------------------------------
+facilities:
+  power_capacity_kw: 500
+  cooling_capacity_kw: 500
+  rack_count: 4
+  datacenter_tier: "Tier 3"

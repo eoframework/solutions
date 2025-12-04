@@ -1,0 +1,43 @@
+---
+#------------------------------------------------------------------------------
+# NVIDIA Drivers Role - GPU Driver Installation
+#------------------------------------------------------------------------------
+
+- name: Check if NVIDIA driver is installed
+  ansible.builtin.command: nvidia-smi
+  register: nvidia_check
+  ignore_errors: yes
+  changed_when: false
+
+- name: Install NVIDIA driver
+  when: nvidia_check.rc != 0
+  block:
+    - name: Add NVIDIA CUDA repository key
+      ansible.builtin.apt_key:
+        url: https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/x86_64/3bf863cc.pub
+        state: present
+
+    - name: Add NVIDIA CUDA repository
+      ansible.builtin.apt_repository:
+        repo: "deb https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/x86_64/ /"
+        state: present
+        filename: cuda
+
+    - name: Update apt cache
+      ansible.builtin.apt:
+        update_cache: yes
+
+    - name: Install NVIDIA driver
+      ansible.builtin.apt:
+        name: "nvidia-driver-{{ software.nvidia_driver_version | regex_replace('\\..*', '') | default('550') }}"
+        state: present
+      notify: Reboot for driver
+
+- name: Verify NVIDIA driver installation
+  ansible.builtin.command: nvidia-smi
+  register: nvidia_verify
+  changed_when: false
+
+- name: Display driver info
+  ansible.builtin.debug:
+    var: nvidia_verify.stdout_lines

@@ -1,0 +1,99 @@
+---
+#------------------------------------------------------------------------------
+# Omniverse Connectors Role - Application Connector Installation
+#------------------------------------------------------------------------------
+
+- name: Install Revit Connector
+  when: connectors.revit_enabled
+  block:
+    - name: Download Revit Connector
+      ansible.windows.win_get_url:
+        url: "https://install.launcher.omniverse.nvidia.com/connectors/revit/{{ connectors.revit_version }}/omniverse-revit-connector.exe"
+        dest: C:\temp\revit-connector.exe
+
+    - name: Install Revit Connector
+      ansible.windows.win_package:
+        path: C:\temp\revit-connector.exe
+        arguments: /S
+        state: present
+
+- name: Install SolidWorks Connector
+  when: connectors.solidworks_enabled
+  block:
+    - name: Download SolidWorks Connector
+      ansible.windows.win_get_url:
+        url: "https://install.launcher.omniverse.nvidia.com/connectors/solidworks/{{ connectors.solidworks_version }}/omniverse-solidworks-connector.exe"
+        dest: C:\temp\solidworks-connector.exe
+
+    - name: Install SolidWorks Connector
+      ansible.windows.win_package:
+        path: C:\temp\solidworks-connector.exe
+        arguments: /S
+        state: present
+
+- name: Install Rhino Connector
+  when: connectors.rhino_enabled
+  block:
+    - name: Download Rhino Connector
+      ansible.windows.win_get_url:
+        url: "https://install.launcher.omniverse.nvidia.com/connectors/rhino/{{ connectors.rhino_version }}/omniverse-rhino-connector.exe"
+        dest: C:\temp\rhino-connector.exe
+
+    - name: Install Rhino Connector
+      ansible.windows.win_package:
+        path: C:\temp\rhino-connector.exe
+        arguments: /S
+        state: present
+
+- name: Install Blender USD Connector
+  when: connectors.blender_enabled
+  block:
+    - name: Download Blender Connector
+      ansible.windows.win_get_url:
+        url: "https://install.launcher.omniverse.nvidia.com/connectors/blender/{{ connectors.blender_version }}/omniverse-blender-connector.exe"
+        dest: C:\temp\blender-connector.exe
+
+    - name: Install Blender Connector
+      ansible.windows.win_package:
+        path: C:\temp\blender-connector.exe
+        arguments: /S
+        state: present
+
+- name: Install Maya Connector
+  when: connectors.maya_enabled
+  block:
+    - name: Download Maya Connector
+      ansible.windows.win_get_url:
+        url: "https://install.launcher.omniverse.nvidia.com/connectors/maya/{{ connectors.maya_version }}/omniverse-maya-connector.exe"
+        dest: C:\temp\maya-connector.exe
+
+    - name: Install Maya Connector
+      ansible.windows.win_package:
+        path: C:\temp\maya-connector.exe
+        arguments: /S
+        state: present
+
+- name: Install 3ds Max Connector
+  when: connectors.max_enabled
+  block:
+    - name: Download 3ds Max Connector
+      ansible.windows.win_get_url:
+        url: "https://install.launcher.omniverse.nvidia.com/connectors/3dsmax/{{ connectors.max_version }}/omniverse-3dsmax-connector.exe"
+        dest: C:\temp\3dsmax-connector.exe
+
+    - name: Install 3ds Max Connector
+      ansible.windows.win_package:
+        path: C:\temp\3dsmax-connector.exe
+        arguments: /S
+        state: present
+
+- name: Display installed connectors
+  ansible.builtin.debug:
+    msg: |
+      Installed Omniverse Connectors:
+      - Revit: {{ connectors.revit_enabled }}
+      - SolidWorks: {{ connectors.solidworks_enabled }}
+      - Rhino: {{ connectors.rhino_enabled }}
+      - Blender: {{ connectors.blender_enabled }}
+      - Maya: {{ connectors.maya_enabled }}
+      - 3ds Max: {{ connectors.max_enabled }}

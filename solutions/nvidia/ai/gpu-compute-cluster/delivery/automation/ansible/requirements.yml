@@ -1,0 +1,27 @@
+---
+#------------------------------------------------------------------------------
+# Ansible Requirements for GPU Compute Cluster Deployment
+#------------------------------------------------------------------------------
+# Install with: ansible-galaxy install -r requirements.yml
+#------------------------------------------------------------------------------
+
+collections:
+  # General purpose collection
+  - name: community.general
+    version: ">=8.0.0"
+
+  # POSIX operations
+  - name: ansible.posix
+    version: ">=1.5.0"
+
+  # Crypto operations
+  - name: community.crypto
+    version: ">=2.0.0"
+
+  # Docker container management
+  - name: community.docker
+    version: ">=3.0.0"
+
+  # MySQL/MariaDB for Slurm accounting
+  - name: community.mysql
+    version: ">=3.0.0"

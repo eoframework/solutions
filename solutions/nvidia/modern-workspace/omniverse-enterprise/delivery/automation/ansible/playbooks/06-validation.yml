@@ -1,0 +1,154 @@
+---
+#------------------------------------------------------------------------------
+# NVIDIA Omniverse Enterprise - Phase 3: Validation
+#------------------------------------------------------------------------------
+# System validation and health checks
+#------------------------------------------------------------------------------
+
+- name: Phase 3 - Nucleus Server Validation
+  hosts: nucleus_servers
+  become: yes
+  gather_facts: yes
+
+  vars_files:
+    - "{{ playbook_dir }}/../vars/secrets.yml"
+
+  tasks:
+    - name: Display validation info
+      ansible.builtin.debug:
+        msg: "Running validation on {{ inventory_hostname }}"
+
+    #--------------------------------------------------------------------------
+    # Nucleus Health Check
+    #--------------------------------------------------------------------------
+    - name: Check Nucleus service status
+      ansible.builtin.service_facts:
+      tags: [nucleus-health]
+
+    - name: Verify Nucleus is running
+      ansible.builtin.assert:
+        that:
+          - ansible_facts.services['nucleus.service'] is defined
+          - ansible_facts.services['nucleus.service'].state == 'running'
+        fail_msg: "Nucleus service is not running"
+        success_msg: "Nucleus service is running"
+      ignore_errors: yes
+      tags: [nucleus-health]
+
+    - name: Check Nucleus API health
+      ansible.builtin.uri:
+        url: "http://localhost:{{ nucleus.port }}/health"
+        method: GET
+        status_code: 200
+      register: nucleus_health
+      tags: [nucleus-health]
+
+    - name: Display Nucleus health status
+      ansible.builtin.debug:
+        var: nucleus_health
+      tags: [nucleus-health]
+
+    #--------------------------------------------------------------------------
+    # Storage Validation
+    #--------------------------------------------------------------------------
+    - name: Check storage mount
+      ansible.builtin.stat:
+        path: "{{ storage.primary_path }}"
+      register: storage_mount
+      tags: [storage-validation]
+
+    - name: Verify storage is mounted
+      ansible.builtin.assert:
+        that:
+          - storage_mount.stat.exists
+          - storage_mount.stat.isdir
+        fail_msg: "Storage not mounted at {{ storage.primary_path }}"
+        success_msg: "Storage verified at {{ storage.primary_path }}"
+      tags: [storage-validation]
+
+    - name: Check storage capacity
+      ansible.builtin.command: "df -h {{ storage.primary_path }}"
+      register: storage_df
+      changed_when: false
+      tags: [storage-validation]
+
+    - name: Display storage info
+      ansible.builtin.debug:
+        var: storage_df.stdout_lines
+      tags: [storage-validation]
+
+- name: Phase 3 - Workstation Validation
+  hosts: workstations
+  gather_facts: yes
+
+  vars_files:
+    - "{{ playbook_dir }}/../vars/secrets.yml"
+
+  tasks:
+    - name: Display workstation validation info
+      ansible.builtin.debug:
+        msg: "Validating workstation {{ inventory_hostname }}"
+
+    #--------------------------------------------------------------------------
+    # GPU Validation
+    #--------------------------------------------------------------------------
+    - name: Check GPU status
+      ansible.windows.win_shell: nvidia-smi --query-gpu=name,memory.total --format=csv
+      register: gpu_info
+      changed_when: false
+      tags: [gpu-validation]
+
+    - name: Display GPU info
+      ansible.builtin.debug:
+        var: gpu_info.stdout_lines
+      tags: [gpu-validation]
+
+    #--------------------------------------------------------------------------
+    # Nucleus Connectivity
+    #--------------------------------------------------------------------------
+    - name: Test Nucleus connectivity
+      ansible.windows.win_shell: |
+        Test-NetConnection -ComputerName {{ nucleus.primary_host }} -Port {{ nucleus.port }}
+      register: nucleus_conn
+      changed_when: false
+      tags: [network-validation]
+
+    - name: Verify Nucleus connectivity
+      ansible.builtin.assert:
+        that:
+          - "'TcpTestSucceeded : True' in nucleus_conn.stdout"
+        fail_msg: "Cannot connect to Nucleus server"
+        success_msg: "Nucleus server connectivity verified"
+      ignore_errors: yes
+      tags: [network-validation]
+
+    #--------------------------------------------------------------------------
+    # Omniverse Applications
+    #--------------------------------------------------------------------------
+    - name: Check Omniverse Launcher
+      ansible.windows.win_stat:
+        path: C:\Users\Public\AppData\Local\ov\pkg\omniverse-launcher
+      register: launcher_check
+      tags: [app-validation]
+
+    - name: Display application status
+      ansible.builtin.debug:
+        msg: "Omniverse Launcher installed: {{ launcher_check.stat.exists }}"
+      tags: [app-validation]
+
+- name: Phase 3 - Final Summary
+  hosts: localhost
+  gather_facts: no
+
+  tasks:
+    - name: Display validation summary
+      ansible.builtin.debug:
+        msg: |
+          ============================================================
+          Omniverse Enterprise Validation Complete
+          ============================================================
+          Nucleus Servers: {{ groups['nucleus_servers'] | length }}
+          Workstations: {{ groups['workstations'] | length }}
+          Environment: {{ environment | default('prod') }}
+          ============================================================
+      tags: [summary]

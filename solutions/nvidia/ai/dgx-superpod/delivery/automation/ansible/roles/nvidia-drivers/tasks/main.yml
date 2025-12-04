@@ -1,0 +1,128 @@
+---
+#------------------------------------------------------------------------------
+# NVIDIA Driver Role - GPU Driver Installation
+#------------------------------------------------------------------------------
+
+#------------------------------------------------------------------------------
+# Prerequisites
+#------------------------------------------------------------------------------
+- name: Check if NVIDIA driver is already installed
+  ansible.builtin.shell: nvidia-smi --query-gpu=driver_version --format=csv,noheader | head -1
+  register: current_driver
+  changed_when: false
+  ignore_errors: yes
+  tags: [check]
+
+- name: Display current driver status
+  ansible.builtin.debug:
+    msg: "Current NVIDIA driver: {{ current_driver.stdout | default('Not installed') }}"
+  tags: [check]
+
+#------------------------------------------------------------------------------
+# NVIDIA Repository Setup
+#------------------------------------------------------------------------------
+- name: Add NVIDIA package signing key
+  ansible.builtin.apt_key:
+    url: https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/x86_64/3bf863cc.pub
+    state: present
+  when: ansible_distribution == "Ubuntu"
+  tags: [repo]
+
+- name: Add NVIDIA CUDA repository
+  ansible.builtin.apt_repository:
+    repo: "deb https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/x86_64 /"
+    state: present
+    filename: cuda
+  when: ansible_distribution == "Ubuntu"
+  tags: [repo]
+
+- name: Update apt cache after adding NVIDIA repo
+  ansible.builtin.apt:
+    update_cache: yes
+  tags: [repo]
+
+#------------------------------------------------------------------------------
+# Driver Installation
+#------------------------------------------------------------------------------
+- name: Install NVIDIA driver
+  ansible.builtin.apt:
+    name: "nvidia-driver-{{ nvidia_driver_version | regex_replace('\\..*', '') }}"
+    state: present
+  when:
+    - ansible_os_family == "Debian"
+    - current_driver.stdout | default('') != nvidia_driver_version
+  notify: reboot required
+  tags: [driver]
+
+- name: Install NVIDIA Fabric Manager (for NVSwitch)
+  ansible.builtin.apt:
+    name: nvidia-fabricmanager
+    state: present
+  when: ansible_os_family == "Debian"
+  tags: [fabricmanager]
+
+- name: Enable and start Fabric Manager
+  ansible.builtin.systemd:
+    name: nvidia-fabricmanager
+    state: started
+    enabled: yes
+  tags: [fabricmanager]
+
+#------------------------------------------------------------------------------
+# Persistence Mode
+#------------------------------------------------------------------------------
+- name: Enable NVIDIA persistence daemon
+  ansible.builtin.systemd:
+    name: nvidia-persistenced
+    state: started
+    enabled: yes
+  tags: [persistence]
+
+- name: Set persistence mode on all GPUs
+  ansible.builtin.shell: nvidia-smi -pm 1
+  changed_when: false
+  tags: [persistence]
+
+#------------------------------------------------------------------------------
+# Power Management
+#------------------------------------------------------------------------------
+- name: Set power limit to maximum for optimal performance
+  ansible.builtin.shell: |
+    for gpu in $(nvidia-smi -L | cut -d: -f1 | grep -oP '\d+'); do
+      max_power=$(nvidia-smi -i $gpu --query-gpu=power.max_limit --format=csv,noheader,nounits)
+      nvidia-smi -i $gpu -pl $max_power
+    done
+  changed_when: false
+  ignore_errors: yes
+  tags: [power]
+
+#------------------------------------------------------------------------------
+# Compute Mode
+#------------------------------------------------------------------------------
+- name: Set compute mode to Default (allows multiple processes)
+  ansible.builtin.shell: nvidia-smi -c 0
+  changed_when: false
+  tags: [compute]
+
+#------------------------------------------------------------------------------
+# Verification
+#------------------------------------------------------------------------------
+- name: Verify driver installation
+  ansible.builtin.shell: nvidia-smi
+  register: nvidia_smi_output
+  changed_when: false
+  tags: [verify]
+
+- name: Display nvidia-smi output
+  ansible.builtin.debug:
+    msg: "{{ nvidia_smi_output.stdout_lines }}"
+  tags: [verify]
+
+#------------------------------------------------------------------------------
+# Handlers
+#------------------------------------------------------------------------------
+handlers:
+  - name: reboot required
+    ansible.builtin.debug:
+      msg: "System reboot required to complete driver installation"
+    changed_when: true
